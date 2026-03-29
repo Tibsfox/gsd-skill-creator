@@ -1,0 +1,1034 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% ── Color Scheme: Prussian Blueprint ────────────────────────────
+\definecolor{primary}{HTML}{0C2340}
+\definecolor{secondary}{HTML}{7B3A10}
+\definecolor{tertiary}{HTML}{005F87}
+\definecolor{accent}{HTML}{B06000}
+\definecolor{lightprimary}{HTML}{E4EBF2}
+\definecolor{lightsecondary}{HTML}{F5EAE2}
+\definecolor{lighttertiary}{HTML}{DDF0F7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{blueprintcyan}{HTML}{007BA7}
+\definecolor{draftsienna}{HTML}{A0522D}
+\definecolor{blockred}{HTML}{B71C1C}
+\definecolor{gateyellow}{HTML}{E65100}
+\definecolor{annogreen}{HTML}{1B5E20}
+
+% ── Section Formatting ───────────────────────────────────────────
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% ── Custom Environments ──────────────────────────────────────────
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily
+}
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt
+}
+\newtcolorbox{blueprintbox}{
+  colback={blueprintcyan!8}, colframe=blueprintcyan,
+  arc=2pt, boxrule=0.5pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt
+}
+\newtcolorbox{safetybox}{
+  colback={blockred!6}, colframe=blockred,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt
+}
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\blocktag}{\textcolor{blockred}{\textbf{\sffamily[BLOCK]}}}
+\newcommand{\gatetag}{\textcolor{gateyellow}{\textbf{\sffamily[GATE]}}}
+\newcommand{\annotag}{\textcolor{annogreen}{\textbf{\sffamily[ANNOTATE]}}}
+
+% ── Headers and Footers ──────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{So You Want to Be a Draftsman}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true, linkcolor=secondary, urlcolor=secondary,
+  pdfauthor={GSD Ecosystem --- Tibsfox Inc.},
+  pdftitle={So You Want to Be a Draftsman -- Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+% ─────────────────────────────────────────────────────────────────
+\begin{document}
+
+% ── TITLE PAGE ────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+\vspace{0.3cm}
+
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+\vspace{1.5cm}
+
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{So You Want to Be\\[0.3em]a Draftsman}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{Blueprints, Technical Documentation,\\Simulation \& Testing Frameworks,\\Technical Drawing, Vector Graphics}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{tertiary}{Scientifically Accurate \& Mathematically Provable\\Technical Drawing for Real-World Construction}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 29, 2026 \quad|\quad Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet (17 roles) \quad|\quad Est.\ 6 parallel modules \quad|\quad $\sim$18 context windows}}
+\end{center}
+\newpage
+
+% ── TABLE OF CONTENTS ─────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ═══════════════════════════════════════════════════════════════════
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+% ═══════════════════════════════════════════════════════════════════
+
+\section{So You Want to Be a Draftsman --- Vision Guide}
+
+\metafield{Date:}{March 29, 2026}
+\metafield{Status:}{Initial Vision / Research Complete}
+\metafield{Depends on:}{gsd-skill-creator dev branch; NASA Mission Series Parts A--H templates}
+\metafield{Context:}{Full deep-research mission covering technical drawing, blueprint creation, vector graphics, simulation frameworks, and prototype development pipelines within the GSD ecosystem.}
+
+\subsection{Vision}
+
+Before a bridge stands, before a spacecraft flies, before a maker's hands touch real metal --- there is a drawing. A line on vellum. A curve defined by a formula. A tolerance expressed as a symbol that says, precisely, how much error the universe is permitted to introduce before function becomes failure. The draftsman is the first builder. Everything else is execution of their geometry.
+
+We live in an era when the distance between a drawing and a physical object has collapsed to nearly zero. A Python script generates an SVG. The SVG feeds a parametric model. The model drives a CNC router. Chips fall. A part emerges. The drawing and the object are the same thing, separated only by a coordinate transformation and some material constraints. This is not a metaphor --- it is the actual pipeline. The GSD ecosystem is built for this world: where the drawing is the program, the blueprint is the spec, and the draftsman's discipline is the engineering team's safety net.
+
+``So You Want to Be a Draftsman'' is a meta deep-research mission that builds the full knowledge infrastructure for technically accurate, mathematically provable drawing and documentation within gsd-skill-creator. It does not merely explain how to draw --- it builds the skills, simulation pipelines, testing frameworks, and career pathways that make drawing a complete engineering discipline. The mission covers six interconnected domains: drawing standards and geometric dimensioning \& tolerancing (GD\&T); technical documentation and bill of materials systems; programmatic vector graphics and CNC-ready output; simulation and testing frameworks anchored in NASA-STD-7009B; materials science for real-world grounding; and the prototype development pipeline from drawing to physical object.
+
+The Amiga Principle is alive in this domain. A draftsman who understands ASME Y14.5-2018 --- the complete symbolic language of manufacturing tolerances --- can specify, in a single feature control frame, requirements that would take paragraphs of prose to communicate ambiguously. That is architectural leverage: one symbol, unambiguous, machine-readable, inspection-provable, legally defensible, globally understood. The specialized execution path outperforms brute-force description every time.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}
+  \item \textbf{Drawings that cannot be built.} Technical drawings produced without knowledge of manufacturing constraints --- tolerances tighter than available processes, surface finishes unachievable with specified materials, assemblies with tolerance stackups that guarantee interference --- waste engineering hours and prototype budgets. A drawing that cannot be built is not a drawing; it is a hypothesis.
+  \item \textbf{Standards fragmentation.} ASME Y14.5-2018 (US), ISO 1101:2017 (international), ISO 128-2:2020 (line types), ISO 2768 (general tolerances), NASA-STD-7009B (simulation credibility) --- these standards overlap, conflict, and update. Without a unified reference framework, teams default to informal conventions that break at every organizational boundary.
+  \item \textbf{Simulation disconnected from drawing.} Finite element analysis and computational fluid dynamics are routinely performed on geometry that diverges from the drawing --- features simplified for meshing, tolerances ignored, material properties estimated. The simulation validates a model that does not match what will be manufactured. NASA-STD-7009B's credibility assessment framework exists precisely because this disconnection causes mission failures.
+  \item \textbf{Vector graphics as an afterthought.} SVG is the most powerful 2D drawing format available: resolution-independent, mathematically precise, programmatically generated, web-native, and CNC-compatible. It is almost never taught alongside traditional drafting standards. The result is a generation of engineers who draw in expensive proprietary tools and cannot generate a compliant technical drawing from code.
+  \item \textbf{No bridge from drawing to maker.} The pathway from a standards-compliant technical drawing to a physical prototype --- through DXF export, CAM toolpath generation, material selection, and fabrication method choice --- is treated as a separate discipline from drafting. For a maker, a student, or a small team, this gap means drawings stay on screen. The prototype never gets built.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Draw $\rightarrow$ Prove $\rightarrow$ Simulate $\rightarrow$ Build $\rightarrow$ Verify.}
+
+Every stage of the pipeline has a mathematical guarantee. Drawings satisfy ASME Y14.5-2018 or ISO GPS. Simulations satisfy NASA-STD-7009B credibility criteria. Prototypes satisfy the original drawing's tolerance requirements as measured by inspection. The GSD draftsman does not guess --- they prove.
+
+\subsubsection{Domain Architecture}
+
+\begin{asciibox}
+DRAWING STANDARDS LAYER
+  ASME Y14.5-2018 (GD\&T) ---- ISO 128-2:2020 (Lines)
+  ISO 1101:2017 (GPS)     ---- ISO 2768 (General Tol.)
+  NASA-STD-7009B (M\&S)    ---- ANSI Y14.1 (Sheet Format)
+              |
+              v
+PROGRAMMATIC DRAWING LAYER
+  Python svgwrite/ezdxf -------- OpenSCAD (CSG Scripting)
+  FreeCAD API (Python)  -------- LibreCAD (2D Drafting)
+  CadQuery              -------- CodeToCAD (Multi-tool)
+              |
+              v
+SIMULATION \& TESTING LAYER
+  FEA (FreeCAD FEM / CalculiX) ---- CFD (OpenFOAM)
+  NASA-STD-7009B Credibility   ---- ASME V\&V 40
+  Tolerance Stackup Analysis   ---- Materials DB
+              |
+              v
+PROTOTYPE PIPELINE LAYER
+  DXF/SVG --> CAM (PyCAM) --> G-code --> CNC/Laser/3DP
+  BOM generation --> Material procurement
+  Inspection protocol --> CMM / manual gauge
+              |
+              v
+GSD COLLEGE OF KNOWLEDGE DEPOSIT
+  Skills: svg-technical-drawer, gdt-annotator,
+          fea-pipeline, bom-generator, blueprint-generator,
+          tolerance-calculator, maker-blueprint
+  CK YAML entries in engineering department
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Drawing Standards and GD\&T}
+\textbf{Purpose:} Build complete literacy in ASME Y14.5-2018 and ISO GPS --- symbols, rules, datums, tolerance zones, feature control frames, and their mathematical foundations.
+
+\textbf{Key domains:} 14 geometric characteristic symbols (form, orientation, location, runout, profile); datum reference frames and degrees of freedom; material condition modifiers (MMC, LMC, RFS); tolerance stackup arithmetic; ASME Y14.5.1M mathematical definitions.
+
+\textbf{Output:} GD\&T symbol reference guide (all 14 characteristics with worked examples); tolerance stackup calculator (algebraic and statistical methods); ASME vs.\ ISO comparison matrix; SKILL.md: \texttt{gdt-annotator}.
+
+\subsubsection{Module 2: Technical Documentation and BOM Systems}
+\textbf{Purpose:} Define the complete drawing package: title blocks, revision history, BOM structure, drawing tree relationships, notes conventions, and digital thread integration.
+
+\textbf{Key domains:} ASME Y14.1 sheet formats (A--E sizes); title block fields (title, revision, material, finish, tolerances, projection angle); BOM hierarchy (top-level assembly $\to$ subassembly $\to$ part); DMS (Drawing Management System) schema; model-based definition (MBD) transition.
+
+\textbf{Output:} Title block generator (Python + SVG); BOM schema (JSON); revision control pattern; SKILL.md: \texttt{bom-generator}.
+
+\subsubsection{Module 3: Vector Graphics and Programmatic Drawing}
+\textbf{Purpose:} Teach the full programmatic drawing pipeline: SVG generation from Python, DXF output for CAD interoperability, OpenSCAD parametric modeling, and CNC-ready G-code generation.
+
+\textbf{Key domains:} SVG coordinate system and viewBox; \texttt{svgwrite} library; \texttt{ezdxf} for DXF generation; \texttt{CadQuery} for parametric parts; \texttt{PyCAM} and \texttt{dxf2gcode} for CAM; G-code structure (rapid/linear move, tool change, coordinate systems).
+
+\textbf{Output:} Programmatic drawing cookbook (20 drawing patterns); CNC pipeline spec; SVG-to-DXF converter; SKILL.md: \texttt{svg-technical-drawer}, \texttt{blueprint-generator}.
+
+\subsubsection{Module 4: Simulation and Testing Frameworks}
+\textbf{Purpose:} Build the simulation pipeline from drawing geometry through FEA/CFD to NASA-STD-7009B credibility assessment, with open-source tools (FreeCAD FEM, CalculiX, OpenFOAM).
+
+\textbf{Key domains:} Finite element method fundamentals (discretization, mesh convergence, boundary conditions, material properties); FreeCAD FEM workbench (CalculiX solver interface); OpenFOAM CFD (mesh generation, boundary conditions, turbulence models); NASA-STD-7009B credibility levels 1--4; ASME V\&V 40 verification and validation; uncertainty quantification.
+
+\textbf{Output:} FEA pipeline tutorial (bracket under load, thermal gradient); CFD pipeline tutorial (duct flow); NASA-STD-7009B credibility worksheet template; SKILL.md: \texttt{fea-pipeline}.
+
+\subsubsection{Module 5: Materials Science Reference}
+\textbf{Purpose:} Provide the physical constants, material properties, and fabrication constraints that make drawings buildable --- connecting tolerances to process capabilities and material behavior.
+
+\textbf{Key domains:} Common engineering materials (aluminum alloys, steel grades, HDPE, carbon fiber); material property tables (tensile strength, yield strength, Young's modulus, thermal expansion coefficient, density); manufacturing process capability (Cpk, IT grades per ISO 286-1); surface finish Ra values by process; fastener standards (ISO 898, SAE J429).
+
+\textbf{Output:} Materials reference table (12 materials $\times$ 10 properties); process capability map (IT grades vs.\ manufacturing process); SKILL.md: \texttt{tolerance-calculator}.
+
+\subsubsection{Module 6: Prototype Development Pipeline}
+\textbf{Purpose:} Close the loop from technical drawing to physical object: DXF export, maker tool selection (laser cutter, 3D printer, CNC router, hand tools), BOM-to-procurement, and inspection protocol.
+
+\textbf{Key domains:} Drawing export formats (DXF, SVG, STEP, STL, G-code); maker tool capability comparison; low-cost fabrication methods (foam board, plywood, aluminum sheet, 3D print); inspection tools (calipers, gauge blocks, go/no-go gauges, laser measurement); DIY builds: L1 \$15 (hand tools), L2 \$80 (3D printer), L3 \$200 (laser cutter), L4 \$600 (CNC router).
+
+\textbf{Output:} Maker tool selection matrix; inspection protocol template; prototype BOM sheet; SKILL.md: \texttt{maker-blueprint}.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+name: so-you-want-to-be-a-draftsman
+version: 1.0.0
+
+agnus:    \# Opus ~30%
+  role: FLIGHT + SYNTHESIS
+  responsibility: >
+    GD\&T mathematical correctness review;
+    NASA-STD-7009B credibility assessment;
+    module integration; career pathway synthesis;
+    safety warden for tolerance errors
+
+denise:   \# Sonnet ~60%
+  role: EXEC-A through EXEC-F
+  responsibility: >
+    All six module implementations;
+    drawing standards documentation;
+    programmatic drawing cookbook;
+    FEA/CFD pipeline tutorials;
+    materials reference tables;
+    prototype pipeline
+
+paula:    \# Sonnet ~60%
+  role: PUBLICATION + CK
+  responsibility: >
+    SKILL.md file generation (7 skills);
+    CK YAML deposit to engineering department;
+    PDF compilation; index.html generation
+
+gary:     \# Haiku ~10%
+  role: SCAFFOLD + SCHEMA
+  responsibility: >
+    Directory structure; config files;
+    JSON schemas; BOM template scaffolds;
+    title block field definitions
+
+model\_allocation:
+  opus: 30%
+  sonnet: 60%
+  haiku: 10%
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\textbf{In Scope (v1.0):}
+\begin{itemize}[noitemsep]
+  \item ASME Y14.5-2018 (US standard) and ISO 1101:2017 / ISO 128-2:2020 (international)
+  \item 2D technical drawing (orthographic projection, sections, details)
+  \item Programmatic drawing: Python \texttt{svgwrite}, \texttt{ezdxf}, \texttt{CadQuery}
+  \item Open-source simulation: FreeCAD FEM, CalculiX, OpenFOAM
+  \item NASA-STD-7009B credibility levels 1--4 for simulation validation
+  \item Prototype methods: 3D printing, laser cutting, CNC routing, hand fabrication
+  \item Seven SKILL.md files deposited to College of Knowledge engineering department
+\end{itemize}
+
+\textbf{Out of Scope:}
+\begin{itemize}[noitemsep]
+  \item Commercial CAD (SolidWorks, CATIA, NX, Revit) --- proprietary, not ecosystem-aligned
+  \item Structural engineering codes (AISC, ACI, Eurocode) --- separate mission required
+  \item Electrical / PCB schematics --- covered in future Electronics mission
+  \item Architectural drawings (IFC, BIM workflows) --- separate AEC mission
+  \item 3D parametric modeling (FreeCAD Part Design) as primary focus --- treated as reference tool
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}
+  \item All 14 GD\&T geometric characteristic symbols are documented with definition, symbol, zone description, and worked example per ASME Y14.5-2018.
+  \item Tolerance stackup calculator produces correct results (algebraic and RSS statistical) verified against hand-calculated reference cases.
+  \item Programmatic SVG drawing pipeline produces a standards-compliant title block, orthographic three-view drawing, and dimension annotations from Python code alone.
+  \item DXF export from Python (\texttt{ezdxf}) is importable by FreeCAD and LibreCAD without errors; dimensions, layers, and line types preserved.
+  \item FEA tutorial (cantilever bracket, 1018 steel, point load) converges within 2\% of analytical beam theory solution using FreeCAD FEM / CalculiX.
+  \item NASA-STD-7009B credibility worksheet is complete, field-by-field, with definitions and a worked example at Credibility Level 2.
+  \item Materials reference table covers 12 materials with: density, Young's modulus, yield strength, UTS, thermal expansion coefficient, and typical manufacturing process.
+  \item Prototype pipeline tutorial guides a student from a completed SVG drawing to G-code (PyCAM) for CNC routing without commercial software.
+  \item All seven SKILL.md files (\texttt{svg-technical-drawer}, \texttt{blueprint-generator}, \texttt{gdt-annotator}, \texttt{bom-generator}, \texttt{tolerance-calculator}, \texttt{fea-pipeline}, \texttt{maker-blueprint}) are deployed to \texttt{/mnt/skills/user/} and validate against the SKILL.md schema.
+  \item GSD Try Sessions exist for each module: hands-on activities completable with household materials (graph paper, ruler, compass, cardboard) or free software.
+  \item ASME vs.\ ISO comparison matrix covers the 10 highest-impact difference areas with concrete example drawings.
+  \item Career pathway section documents four tracked pathways: Mechanical Draftsman, Simulation Engineer, Maker/Fabricator, Technical Writer --- with certifications, salary ranges (BLS data), and GSD skill-to-career mapping.
+\end{enumerate}
+
+\subsection{Relationship to Other Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Data Flow} \\
+\midrule
+NASA Part B (Single Mission) & Consumer & Part B science data feeds materials reference and FEA case studies \\
+NASA Part D (Engineering) & Sibling & Part D engineering math workbook cross-references GD\&T and tolerance content \\
+NASA Part E (Science+Skills) & Consumer & Part E skill expansion uses \texttt{svg-technical-drawer} and \texttt{fea-pipeline} \\
+NASA Part G (Refinement) & Consumer & Part G TSPB chapters pull from materials reference and drawing standards tables \\
+NASA Part H Template & Sibling & Part H template is the per-mission application; this mission is the knowledge infrastructure \\
+The Space Between (TSPB) & Feeder & Materials properties, tolerance math, FEA derivations feed TSPB Layer 4 (Vector Calculus) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The draftsman is the person who lives in the spaces between design intent and physical reality. The engineer imagines a force-bearing structure; the draftsman specifies the datum reference frame that tells the machinist where on the part to begin measuring. The scientist models a fluid; the draftsman draws the inlet geometry that determines whether the model is even solving the right equations. The maker has an idea; the draftsman produces the blueprint that transforms the idea into a set of instructions that survive the gap between one person's hands and another's.
+
+This is the GSD principle in its most literal form. The ecosystem exists to reduce friction between creative intent and realized outcome. The draftsman's discipline --- standards literacy, mathematical precision, simulation validation, prototype-to-inspection closure --- is that friction reduction made visible. Every symbol in a feature control frame is a conversation compressed to a glyph. Every mesh convergence test is a question answered before the prototype is built. Every materials table is a physical law made navigable.
+
+``So You Want to Be a Draftsman'' teaches not just drawing but the complete epistemic pipeline from idea to provable object.
+
+% ═══════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+% ═══════════════════════════════════════════════════════════════════
+
+\section{Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference compiles authoritative findings across all six modules. Each section is organized for rapid lookup during mission execution. All numerical claims are sourced; unsourced approximations are marked \textit{(est.)}.
+
+\textbf{Key Source Organizations:}
+\begin{itemize}[noitemsep]
+  \item ASME (American Society of Mechanical Engineers) --- Y14.5-2018, Y14.1, Y14.5.1M
+  \item ISO (International Organization for Standardization) --- 128-2:2020, 1101:2017, 2768, 286-1
+  \item NASA Office of the Chief Engineer --- NASA-STD-7009B (2024), NASA-HDBK-7009A
+  \item NIST (National Institute of Standards and Technology) --- material property data, measurement standards
+  \item FreeCAD Project / FEM Workbench --- open-source FEA documentation
+  \item Ansys, Siemens, Autodesk --- FEA educational documentation (public materials only)
+  \item BLS (Bureau of Labor Statistics) --- career salary and employment data
+\end{itemize}
+
+\subsection{Module 1: Drawing Standards and GD\&T}
+
+\subsubsection{ASME Y14.5-2018 Overview}
+
+<ASME Y14.5-2018 (R2024)> establishes symbols, rules, definitions, requirements, defaults, and recommended practices for stating and interpreting geometric dimensioning and tolerancing. It is the primary GD\&T standard in the United States, Canada, and Australia. <ISO 1101:2017> is the international equivalent; the two standards share approximately 65--70\% agreement on symbols but diverge significantly on fundamental interpretation principles (axis method vs.\ surface boundary method).
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{1.4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Characteristic} & \tableheader{Symbol} & \tableheader{Zone Type} & \tableheader{Datum Required?} \\
+\midrule
+Flatness & \texttt{[]=} & Two parallel planes & No \\
+Circularity (Roundness) & \texttt{O} & Two concentric circles & No \\
+Cylindricity & \textit{cyl} & Coaxial cylinders & No \\
+Straightness & --- & Two parallel lines & No \\
+Profile of a Line & \texttt{\textasciicircum} & Two offset lines & Optional \\
+Profile of a Surface & \texttt{\^{}} & Two offset surfaces & Optional \\
+Angularity & $\angle$ & Two parallel planes & Yes \\
+Perpendicularity & $\perp$ & Two parallel planes & Yes \\
+Parallelism & $\parallel$ & Two parallel planes & Yes \\
+Position & $\oplus$ & Cylinder/sphere & Yes \\
+Concentricity (removed 2018) & --- & --- & --- \\
+Symmetry (removed 2018) & --- & --- & --- \\
+Circular Runout & \texttt{/--} & Circle in rotation & Yes \\
+Total Runout & $\Rightarrow$ & Cylinder in rotation & Yes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key 2018 Changes} (from ASME Y14.5-2009): Concentricity and symmetry symbols eliminated; profile of a surface now preferred for location tolerances; plus/minus location tolerances moved to Appendix (likely removed in next revision); model-based definition (MBD) integration added throughout; composite position tolerance clarified.
+
+\subsubsection{Tolerance Stackup: Algebraic and RSS}
+
+For an assembly with $n$ independent tolerances $t_1, t_2, \ldots, t_n$:
+
+\textbf{Worst-case (algebraic):} $T_{assy} = \sum_{i=1}^{n} |c_i \cdot t_i|$ where $c_i$ is the sensitivity factor (typically $\pm 1$).
+
+\textbf{Statistical (RSS):} $T_{assy} = \sqrt{\sum_{i=1}^{n} (c_i \cdot t_i)^2}$ --- valid when tolerances are independent, processes are centered, and $n \geq 4$.
+
+Typical IT grade tolerances (ISO 286-1) for a 25 mm nominal dimension:
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{2cm}C{2cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{IT Grade} & \tableheader{Tol. ($\mu$m)} & \tableheader{Tol. (in)} & \tableheader{Typical Process} \\
+\midrule
+IT4 & 9 & 0.00035 & Precision grinding \\
+IT6 & 13 & 0.00051 & Finish turning, broaching \\
+IT7 & 21 & 0.00083 & Turning, boring, reaming \\
+IT9 & 52 & 0.00205 & Cold drawing, extrusion \\
+IT11 & 130 & 0.00512 & Rough turning, drilling \\
+IT14 & 520 & 0.02047 & Sand casting, hot rolling \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{ASME vs.\ ISO: 10 High-Impact Differences}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Topic} & \tableheader{ASME Y14.5-2018} & \tableheader{ISO GPS} \\
+\midrule
+Default interpretation & Axis/centerplane method & Surface boundary method \\
+Size rule (Rule \#1) & Envelope principle mandatory & Must be explicitly invoked \\
+Concentricity & Removed (2018) & Still present (ISO 1101) \\
+Symmetry & Removed (2018) & Still present \\
+Position MMC & Bonus tolerance for mating & Virtual condition boundary \\
+Surface texture & Separate (ASME B46.1) & ISO 1302 / ISO 4287 \\
+Projection angle & Third-angle default & First-angle default \\
+Drawing sheet sizes & ANSI (A--E, 8.5x11 to 34x44) & ISO 216 (A0--A4) \\
+Profile without datum & Controls form only & Controls form and orientation \\
+Datum feature symbol & Open square on extension line & Filled triangle on line \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 2: Technical Documentation and BOM Systems}
+
+\subsubsection{ISO 128 Line Type Standard (2020 Revision)}
+
+ISO 128-2:2020 consolidated six former parts into a unified line standard. It specifies line types, designations, configurations, and general drafting rules. Two line widths are specified for mechanical drawings: wide lines ($\approx 0.5$--$0.7$ mm) and narrow lines ($\approx 0.25$--$0.35$ mm) in a 2:1 ratio. ISO 128-3 governs views, sections, and cuts (including first-angle and third-angle projection conventions).
+
+Key line types for technical drawings:
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Line Name} & \tableheader{ISO 128 Type} & \tableheader{Width} & \tableheader{Application} \\
+\midrule
+Visible outline & 01.2 continuous wide & Wide & Visible edges of object \\
+Hidden outline & 02.1 dashed narrow & Narrow & Edges not visible in view \\
+Center line & 04.1 long-dash dotted narrow & Narrow & Axes of symmetry \\
+Cutting plane & 04.2 long-dash double-dot & Wide ends & Section cut indication \\
+Break line (long) & 01.1 continuous narrow freehand & Narrow & Long break indication \\
+Dimension line & 01.1 continuous narrow & Narrow & Dimension terminations \\
+Extension line & 01.1 continuous narrow & Narrow & Dimension extension \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Drawing Package BOM Schema}
+
+A complete drawing package includes: title drawing (assembly level), subassembly drawings, detail drawings (individual parts), and the BOM. The BOM links drawing numbers to parts via balloon callouts.
+
+\begin{asciibox}
+BOM JSON Schema (v1.0):
+{
+  "bom\_id": "BOM-2026-001",
+  "assembly\_drawing": "DWG-2026-001-A",
+  "revision": "B",
+  "items": [
+    {
+      "item\_no": 1,
+      "part\_number": "PN-2026-001-001",
+      "description": "Base Plate",
+      "qty": 1,
+      "material": "6061-T6 Aluminum",
+      "finish": "Anodize Type II",
+      "source": "MAKE",
+      "mass\_kg": 0.145,
+      "drawing": "DWG-2026-001-001"
+    },
+    ...
+  ],
+  "total\_mass\_kg": 2.340,
+  "notes": "All dimensions in mm unless noted"
+}
+\end{asciibox}
+
+\subsection{Module 3: Vector Graphics and Programmatic Drawing}
+
+\subsubsection{SVG Coordinate System for Technical Drawing}
+
+SVG uses a left-handed coordinate system with the origin at the top-left and Y increasing downward. For technical drawings, it is conventional to establish a working coordinate system with $+Y$ pointing up via a viewport transform: \texttt{transform="translate(0, viewbox\_height) scale(1,-1)"}.
+
+Key SVG drawing elements for technical drawing:
+\begin{itemize}[noitemsep]
+  \item \texttt{<line>} --- straight lines (visible, hidden, center, dimension)
+  \item \texttt{<circle>}, \texttt{<ellipse>} --- circular features
+  \item \texttt{<path>} --- complex curves, arcs, splines
+  \item \texttt{<text>} --- dimension values, notes, title block fields
+  \item \texttt{<marker>} --- arrowheads for dimension terminations
+  \item \texttt{<symbol>} / \texttt{<use>} --- GD\&T symbols as reusable components
+\end{itemize}
+
+\subsubsection{Open-Source Drawing Tool Ecosystem (2026)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tool} & \tableheader{Type} & \tableheader{License} & \tableheader{Best For} \\
+\midrule
+FreeCAD (1.0+) & 3D parametric + FEA & LGPL-2.0 & Parametric design, FEM, CAM workbenches, Python scripting \\
+LibreCAD & 2D drafting & GPL-2.0 & Standards-compliant 2D drawings, DXF output \\
+OpenSCAD & Code-based CSG & GPL-2.0 & Parametric parts from scripts; 3D print ready \\
+CadQuery & Python CSG & Apache-2.0 & Python-first parametric 3D, STEP/DXF/SVG export \\
+svgwrite & Python SVG & MIT & Programmatic SVG generation \\
+ezdxf & Python DXF & MIT & DXF read/write, dimension entities, layers \\
+PyCAM & Python CAM & GPL-3.0 & STL/DXF to G-code; CNC toolpath generation \\
+dxf2gcode & Python CAM & GPL-3.0 & 2D DXF to G-code; grbl-compatible \\
+CalculiX & FEA solver & GPL-2.0 & FreeCAD FEM backend; structural/thermal analysis \\
+OpenFOAM & CFD solver & GPL-3.0 & Fluid dynamics simulation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module 4: Simulation and Testing Frameworks}
+
+\subsubsection{NASA-STD-7009B Credibility Assessment}
+
+NASA-STD-7009B (2024 revision, replacing 7009A) establishes standard requirements for Models and Simulations (M\&S) used in NASA engineering decisions. The Credibility Assessment Scale (CAS) rates M\&S from Level 0 (no evidence) to Level 4 (validated against flight data). Key components of credibility:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{CAS Factor} & \tableheader{Definition} \\
+\midrule
+Verification & Does the code solve the equations correctly? (code verification, solution verification) \\
+Validation & Do the simulation results match physical reality? (comparison to experiment) \\
+Input Pedigree & Are boundary conditions, material properties, and geometry representative of the real system? \\
+Results Uncertainty & Is uncertainty in simulation outputs quantified (epistemic and aleatory)? \\
+Use Exposure & Has the M\&S been used in similar applications before? \\
+Technical Review & Has the M\&S been peer-reviewed? \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Level 4 (highest) requires experimental validation data with the same geometry, loads, and environment as the operational system. Level 2 (achievable for prototype work) requires comparison to referent data from expert opinion or other M\&S plus rigorous uncertainty characterization.
+
+\subsubsection{FEA Pipeline: Cantilever Bracket Reference Case}
+
+For a cantilever beam of length $L = 0.2$ m, width $b = 0.02$ m, height $h = 0.01$ m, load $P = 100$ N at tip, material 1018 steel ($E = 200$ GPa, $\nu = 0.29$, $\rho = 7870$ kg/m\textsuperscript{3}):
+
+\textbf{Analytical tip deflection:} $\delta = \frac{PL^3}{3EI}$ where $I = \frac{bh^3}{12} = 1.667 \times 10^{-9}$ m\textsuperscript{4}
+
+$\delta = \frac{100 \times (0.2)^3}{3 \times 200 \times 10^9 \times 1.667 \times 10^{-9}} = \frac{0.8}{1000.2} \approx 0.800$ mm
+
+\textbf{Maximum bending stress:} $\sigma_{max} = \frac{PL \cdot c}{I} = \frac{100 \times 0.2 \times 0.005}{1.667 \times 10^{-9}} = 60.0$ MPa $\ll \sigma_y = 370$ MPa for 1018 steel.
+
+FEA convergence criterion: mesh-refined solution within 2\% of $\delta_{analytical}$ and $\sigma_{analytical}$ before proceeding to design iterations.
+
+\subsection{Module 5: Materials Science Reference}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{1.2cm}C{1.3cm}C{1.3cm}C{1.3cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Material} & \tableheader{Density (kg/m\textsuperscript{3})} & \tableheader{E (GPa)} & \tableheader{Yield (MPa)} & \tableheader{UTS (MPa)} & \tableheader{CTE ($\mu$m/m\textperiodcentered K)} \\
+\midrule
+1018 Steel & 7870 & 200 & 370 & 440 & 11.7 \\
+4140 Steel (HT) & 7850 & 205 & 655 & 1020 & 12.3 \\
+304 Stainless & 8000 & 193 & 215 & 505 & 17.2 \\
+6061-T6 Alum. & 2700 & 69 & 276 & 310 & 23.6 \\
+7075-T6 Alum. & 2810 & 72 & 503 & 572 & 23.4 \\
+Grade 2 Ti & 4510 & 105 & 275 & 345 & 8.6 \\
+HDPE & 955 & 1.1 & 26 & 37 & 120 \\
+PLA (3D print) & 1240 & 3.5 & 50 & 65 & 68 \\
+PETG (3D print) & 1270 & 2.1 & 43 & 53 & 80 \\
+Carbon Fiber (UD) & 1600 & 70--130 & --- & 1500 & 0.0--1.0 \\
+Plywood (birch) & 680 & 11 & --- & 40 & 4--10 \\
+Borosilicate Glass & 2230 & 63 & --- & 49 & 3.3 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textit{Sources: NIST Material Measurement Laboratory; MatWeb; ASM International Material Property Database.}
+
+\subsection{Module 6: Prototype Development Pipeline}
+
+\subsubsection{Maker Tool Capability Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{1.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tool} & \tableheader{Cost (USD)} & \tableheader{Accuracy} & \tableheader{Materials} & \tableheader{CAD/CAM Input} \\
+\midrule
+Hand tools only & \$15 & $\pm$1 mm & Wood, cardboard, foam & Template / printout \\
+FDM 3D printer & \$200--800 & $\pm$0.2 mm & PLA, PETG, ABS, TPU & STL / G-code \\
+Laser cutter (K40) & \$400--600 & $\pm$0.1 mm & Acrylic, plywood, cardboard & SVG / DXF \\
+Desktop CNC router & \$600--1500 & $\pm$0.05 mm & Wood, aluminum, PCB & G-code (PyCAM) \\
+Drill press + mill & \$800--2500 & $\pm$0.02 mm & Metal, plastic & Manual from drawing \\
+Pro CNC (Tormach) & \$8000+ & $\pm$0.005 mm & All metals & CAM software \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Drawing-to-Prototype Pipeline}
+
+\begin{asciibox}
+1. DRAW: Python (svgwrite / ezdxf) --> SVG / DXF
+   - Apply GD\&T annotations
+   - Specify material and surface finish in title block
+   - Complete BOM
+
+2. VERIFY: Tolerance stackup check
+   - All mating features: verify MMC conditions
+   - All dimensions: trace back to datum reference frame
+   - FEA if structural (CalculiX via FreeCAD FEM)
+
+3. EXPORT:
+   - 3D print --> STL (FreeCAD / OpenSCAD export)
+   - Laser cut --> SVG/DXF (direct use)
+   - CNC router --> DXF --> PyCAM --> G-code
+   - Sheet metal --> DXF --> laser/waterjet quote
+
+4. FABRICATE:
+   - Set material datum per drawing (align with DRF)
+   - Machine/print/cut to drawing
+
+5. INSPECT:
+   - Calipers: linear dimensions (+-0.02 mm resolution)
+   - Go/No-Go gauge: controlled features
+   - Surface plate + height gauge: flatness, squareness
+   - CMM if available: full GD\&T verification
+
+6. DOCUMENT:
+   - Update BOM with actual lot/batch numbers
+   - Record measured values in inspection report
+   - Note any NCRs (non-conformances)
+\end{asciibox}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Rule} & \tableheader{Type} & \tableheader{Application} \\
+\midrule
+Tolerance math must be verified analytically & \blocktag & All tolerance stackup calculations must have a hand-computed check case \\
+FEA credibility per NASA-STD-7009B must be stated & \gatetag & All simulation results must declare their credibility level before use in design decisions \\
+Material properties must cite source & \gatetag & All material property values used in FEA must reference NIST, MatWeb, or ASM International \\
+DIY builds must include safety notes & \annotag & Laser cutter, CNC router, and power tool activities must include PPE requirements \\
+Never specify tolerances tighter than process can achieve & \blocktag & A drawing with IT4 tolerances specified for sand casting is invalid; reject before fabrication \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\textbf{Standards:}
+\begin{itemize}[noitemsep]
+  \item ASME Y14.5-2018 (R2024). \textit{Dimensioning and Tolerancing}. ASME, New York.
+  \item ASME Y14.5.1M-1994. \textit{Mathematical Definition of Dimensioning and Tolerancing Principles}. ASME.
+  \item ISO 128-1:2020. \textit{Technical Product Documentation --- General Principles of Representation}. ISO.
+  \item ISO 128-2:2020. \textit{Basic Conventions for Lines}. ISO.
+  \item ISO 128-3:2022. \textit{Views, Sections, and Cuts}. ISO.
+  \item ISO 1101:2017. \textit{Geometrical Product Specifications --- Geometrical Tolerancing}. ISO.
+  \item ISO 2768-1:1989. \textit{General Tolerances --- Linear and Angular Dimensions}. ISO.
+  \item ISO 286-1:2010. \textit{ISO Code System for Tolerances on Linear Sizes}. ISO.
+  \item NASA-STD-7009B (2024). \textit{Standard for Models and Simulations}. NASA Office of the Chief Engineer.
+  \item NASA-HDBK-7009A (2016). \textit{Handbook for Models and Simulations}. NASA.
+\end{itemize}
+
+\textbf{Open-Source Software:}
+\begin{itemize}[noitemsep]
+  \item FreeCAD Project. \textit{FreeCAD 1.0 Documentation} (LGPL-2.0). \url{https://www.freecad.org}
+  \item LibreCAD. \textit{LibreCAD 2.x Documentation} (GPL-2.0). \url{https://librecad.org}
+  \item OpenFOAM Foundation. \textit{OpenFOAM v12 User Guide} (GPL-3.0). \url{https://openfoam.org}
+  \item ezdxf library (MIT). \url{https://github.com/mozman/ezdxf}
+  \item svgwrite library (MIT). \url{https://github.com/mozman/svgwrite}
+  \item CadQuery (Apache-2.0). \url{https://github.com/CadQuery/cadquery}
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════════════
+\newpage
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+% ═══════════════════════════════════════════════════════════════════
+
+\section{Milestone Specification}
+
+\textbf{Mission Objective:} Build the complete GSD draftsman knowledge infrastructure: six research modules covering drawing standards, technical documentation, programmatic vector graphics, simulation frameworks, materials science, and the prototype pipeline --- plus seven SKILL.md deployments to the College of Knowledge engineering department --- within a single Fleet-profile execution.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Format} & \tableheader{Acceptance Criterion} \\
+\midrule
+1 & GD\&T Symbol Reference & Markdown + SVG & All 14 characteristics, worked examples, ASME vs.\ ISO comparison \\
+2 & Tolerance Stackup Calculator & Python script & Algebraic and RSS; verified against reference cases \\
+3 & Programmatic Drawing Cookbook & Markdown + Python & 20 drawing patterns; compliant title block from code alone \\
+4 & SVG/DXF Pipeline Tutorial & Markdown + Python & DXF importable by FreeCAD; dimensions/layers/linetypes preserved \\
+5 & FEA Tutorial (Cantilever) & Markdown + FreeCAD & Within 2\% of analytical solution; CalculiX solver \\
+6 & NASA-STD-7009B Worksheet & Markdown template & All CAS fields documented; Level 2 worked example \\
+7 & Materials Reference Table & Markdown + JSON & 12 materials $\times$ 10 properties; sourced values \\
+8 & Prototype Pipeline Tutorial & Markdown + code & SVG to G-code (PyCAM) without commercial software \\
+9 & 7 $\times$ SKILL.md files & SKILL.md schema & Deployed to \texttt{/mnt/skills/user/}; schema-valid \\
+10 & 4 Career Pathway Guides & Markdown & BLS salary ranges; certifications; GSD skill mapping \\
+11 & GSD Try Sessions (6) & Markdown & One per module; household materials or free software \\
+12 & ASME vs.\ ISO Matrix & Markdown table & 10 high-impact differences with example drawings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{3cm}C{2cm}C{1.8cm}C{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Output} \\
+\midrule
+W0 & Foundation & Serial & Haiku & 15K & Shared schemas, BOM JSON, SKILL.md schema, title block template \\
+W1 & Research Modules & Parallel (6) & Sonnet & 180K & 6 module research docs + draft SKILL.md files \\
+W2 & Synthesis & Serial & Opus & 45K & Career pathways, ASME/ISO matrix, Try Sessions, integration \\
+W3 & Publication & Serial & Sonnet & 40K & SKILL.md deployment, CK YAML, prototype pipeline, index.html \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Total estimated tokens:} $\approx$280K \quad \textbf{Context windows:} $\approx$18 \quad \textbf{Activation profile:} Fleet (17 roles)
+
+\subsection{Wave 0: Foundation (Serial, Haiku, $<$5 min)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Shared schemas & SCAFFOLD (Haiku) & BOM JSON schema v1.0; SKILL.md required fields; IT grade lookup table \\
+Title block template & SCAFFOLD (Haiku) & SVG title block scaffold (ANSI A--D formats); field definitions \\
+Drawing standards index & SCAFFOLD (Haiku) & Standard cross-reference: Y14.5-2018, ISO 128-2:2020, ISO 1101:2017, Y14.1 \\
+GD\&T symbol index & SCAFFOLD (Haiku) & 14-characteristic index; zone type for each; datum required flag \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Research Tracks (6 concurrent, Sonnet)}
+
+\textbf{Track A --- Drawing Standards and GD\&T} (EXEC-A, Sonnet, $\sim$32K tokens)\\
+Input: GD\&T symbol index (W0). Output: complete GD\&T reference guide; tolerance stackup calculator (Python); ASME Y14.5-2018 summary; draft \texttt{gdt-annotator} SKILL.md; draft \texttt{tolerance-calculator} SKILL.md.
+
+\textbf{Track B --- Technical Documentation and BOM} (EXEC-B, Sonnet, $\sim$25K tokens)\\
+Input: BOM JSON schema (W0); title block template (W0). Output: title block generator (Python/SVG); BOM documentation; revision control pattern; draft \texttt{bom-generator} SKILL.md.
+
+\textbf{Track C --- Vector Graphics and Programmatic Drawing} (EXEC-C, Sonnet, $\sim$38K tokens)\\
+Input: Title block template (W0). Output: 20-pattern programmatic drawing cookbook (Python \texttt{svgwrite} + \texttt{ezdxf}); CNC pipeline spec; SVG-to-DXF converter; draft \texttt{svg-technical-drawer} SKILL.md; draft \texttt{blueprint-generator} SKILL.md.
+
+\textbf{Track D --- Simulation and Testing Frameworks} (EXEC-D, Sonnet, $\sim$40K tokens)\\
+Input: Materials table (from Track E via shared schema). Output: FEA tutorial (cantilever bracket); CFD conceptual tutorial; NASA-STD-7009B worksheet template; credibility level reference; draft \texttt{fea-pipeline} SKILL.md.
+
+\textbf{Track E --- Materials Science Reference} (EXEC-E, Sonnet, $\sim$22K tokens)\\
+Input: IT grade lookup table (W0). Output: 12-material properties table (JSON + Markdown); process capability map; fastener standards summary.
+
+\textbf{Track F --- Prototype Development Pipeline} (EXEC-F, Sonnet, $\sim$23K tokens)\\
+Input: All Track outputs (read-only, for pipeline coherence). Output: maker tool selection matrix; prototype pipeline tutorial (SVG $\to$ G-code); inspection protocol template; DIY build levels (L1--L4); draft \texttt{maker-blueprint} SKILL.md.
+
+\subsection{Wave 2: Synthesis (Serial, Opus)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Task} & \tableheader{Opus Responsibility} \\
+\midrule
+Career pathway synthesis & Four pathways (Mechanical Draftsman, Simulation Engineer, Maker, Technical Writer); BLS salary data; certification mapping; GSD skill mapping \\
+ASME/ISO matrix & 10 high-impact differences; example drawing callouts for each \\
+Try Sessions (6) & One per module; household materials feasibility review; safety check \\
+Tolerance math review & Verify all stackup examples; confirm FEA reference case (analytical $\pm$2\%) \\
+NASA-STD-7009B CAS & Complete Level 2 worked example for the cantilever FEA \\
+Integration & Cross-module linking; through-line verification; safety review \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification (Serial, Sonnet)}
+
+Deploy all seven SKILL.md files to \texttt{/mnt/skills/user/}. Write CK YAML entries for engineering department. Generate \texttt{index.html}. Final compilation. Release tag \texttt{v1.50.DRAFTSMAN.DRW}.
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[noitemsep]
+  \item Wave 0 must complete in $<$5 min; all Wave 1 agents receive W0 outputs in their context (cache-warm)
+  \item Track C (Drawing Cookbook) is the longest track ($\sim$38K); start it first within W1
+  \item Track E (Materials) is shortest; EXEC-E finishes early and deposits materials JSON for Track D to reference
+  \item Wave 2 Opus receives all six Track outputs as a single assembled context (one Opus window)
+  \item Wave 3 Sonnet publication is linear: SKILL deploy $\to$ CK YAML $\to$ index.html $\to$ compile
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}C{2cm}C{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Model} & \tableheader{Tokens} & \tableheader{Ctx Win} & \tableheader{Notes} \\
+\midrule
+W0 Foundation & Haiku & 15K & 1 & Schema + scaffolding \\
+Track A GD\&T & Sonnet & 32K & 2 & 14 symbols + calculator \\
+Track B Docs/BOM & Sonnet & 25K & 2 & Title block + BOM \\
+Track C Vector/CNC & Sonnet & 38K & 3 & 20 patterns + CNC \\
+Track D FEA/Sim & Sonnet & 40K & 3 & FEA + NASA-7009B \\
+Track E Materials & Sonnet & 22K & 1 & 12 materials table \\
+Track F Prototype & Sonnet & 23K & 2 & L1--L4 builds \\
+W2 Opus Synthesis & Opus & 45K & 2 & Careers + integration \\
+W3 Publication & Sonnet & 40K & 2 & 7 SKILLs + CK + HTML \\
+\midrule
+\textbf{Total} & & \textbf{$\sim$280K} & \textbf{$\sim$18} & Fleet profile \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+W0: Shared schemas + templates
+      |
+      +----+----+----+----+----+----+
+      |    |    |    |    |    |    |
+     [A]  [B]  [C]  [D]  [E] [F]   <-- W1 parallel (6 tracks)
+      |    |    |    |    |    |
+      +----+----+----+----+----+
+                   |
+                  W2: Opus Synthesis (all 6 tracks complete)
+                   |
+                  W3: Publish (serial)
+                   |
+              v1.50.DRAFTSMAN.DRW
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Failure} \\
+\midrule
+Safety-Critical (math/science) & 8 & P0 & \blocktag \\
+Drawing Standards Compliance & 12 & P0 & \blocktag \\
+SKILL.md Schema Validation & 7 & P0 & \blocktag \\
+FEA Convergence & 4 & P0 & \gatetag \\
+Programmatic Drawing Output & 10 & P1 & \gatetag \\
+BOM / Documentation & 6 & P1 & \annotag \\
+Career Data Accuracy & 6 & P1 & \annotag \\
+Try Session Feasibility & 6 & P1 & \annotag \\
+Integration / Cross-Module & 8 & P2 & \annotag \\
+\midrule
+\textbf{Total} & \textbf{67} & & \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected Outcome} \\
+\midrule
+T-001 & Cantilever FEA tip deflection & Within 2\% of $\delta = 0.800$ mm analytical \\
+T-002 & Cantilever FEA peak stress & Within 2\% of $\sigma_{max} = 60.0$ MPa analytical \\
+T-003 & Tolerance stackup algebraic & $T_{assy} = \sum |c_i t_i|$; verified against 3 reference cases \\
+T-004 & Tolerance stackup RSS & $T_{assy} = \sqrt{\sum (c_i t_i)^2}$; verified against 3 reference cases \\
+T-005 & GD\&T symbol count & All 14 characteristics present (excluding concentricity and symmetry per 2018) \\
+T-006 & Process vs.\ IT grade pairing & No drawing specifies IT grade tighter than process capability \\
+T-007 & Material properties sourced & Every material property value in the table has a cited source \\
+T-008 & NASA-STD-7009B credibility stated & FEA tutorial explicitly declares credibility level (target: Level 2) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}L{5cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Success Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1: 14 GD\&T symbols documented & T-005, T-101, T-102 & Pre-flight \\
+SC2: Stackup calculator correct & T-003, T-004, T-103 & Pre-flight \\
+SC3: Programmatic drawing pipeline & T-201--T-205 & Pre-flight \\
+SC4: DXF importable by FreeCAD & T-206, T-207 & Pre-flight \\
+SC5: FEA convergence $\pm$2\% & T-001, T-002, T-301 & Pre-flight \\
+SC6: NASA-7009B worksheet complete & T-008, T-302 & Pre-flight \\
+SC7: Materials table sourced & T-007, T-401 & Pre-flight \\
+SC8: Prototype pipeline G-code & T-501--T-503 & Pre-flight \\
+SC9: 7 SKILL.md deployed & T-601--T-607 & Pre-flight \\
+SC10: Try Sessions feasible & T-701--T-706 & Pre-flight \\
+SC11: ASME/ISO matrix (10 items) & T-801, T-802 & Pre-flight \\
+SC12: 4 career pathways (BLS data) & T-901--T-904 & Pre-flight \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{2.8cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent Name} & \tableheader{Model} & \tableheader{Primary Responsibility} \\
+\midrule
+FLIGHT & RAVEN & Opus & Mission authority; GD\&T correctness; NASA-7009B final review \\
+PLAN & SALMON & Sonnet & Wave decomposition; Track scheduling; dependency management \\
+CRAFT & OWL & Opus & Career pathways; Try Sessions; integration narrative \\
+EXEC-A & CEDAR & Sonnet & Drawing standards and GD\&T module \\
+EXEC-B & HEMLOCK & Sonnet & Technical documentation and BOM module \\
+EXEC-C & ALDER & Sonnet & Vector graphics and programmatic drawing module \\
+EXEC-D & FIR & Sonnet & Simulation and testing frameworks module \\
+EXEC-E & SPRUCE & Sonnet & Materials science reference module \\
+EXEC-F & WILLOW & Sonnet & Prototype development pipeline module \\
+TEST & HAWK & Sonnet & Test execution; convergence verification; stackup checks \\
+INTEG & HERON & Sonnet & Cross-module linking; through-line verification \\
+SAFETY & FOXGLOVE & Opus & Safety warden (tolerance, materials, DIY activities) \\
+SKILL & OSPREY & Sonnet & 7 SKILL.md generation and schema validation \\
+CK & MARTEN & Sonnet & CK YAML entries; College of Knowledge deposit \\
+BUDGET & WREN & Haiku & Token tracking; context window estimates \\
+SCAFFOLD & KINGFISHER & Haiku & W0 schemas; templates; config files \\
+CAPCOM & [HUMAN] & --- & CAPCOM gate at W2 end; v1.50.DRAFTSMAN.DRW release approval \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Mission ID & v1.50.DRAFTSMAN.DRW \\
+Activation profile & Fleet (17 roles) \\
+Research modules & 6 (parallel, Wave 1) \\
+SKILL.md deployments & 7 (\texttt{svg-technical-drawer}, \texttt{blueprint-generator}, \texttt{gdt-annotator}, \texttt{bom-generator}, \texttt{tolerance-calculator}, \texttt{fea-pipeline}, \texttt{maker-blueprint}) \\
+Drawing standards covered & ASME Y14.5-2018, ISO 128-2:2020, ISO 128-3, ISO 1101:2017, ISO 2768, ISO 286-1, ANSI Y14.1 \\
+Simulation frameworks & FreeCAD FEM, CalculiX, OpenFOAM, NASA-STD-7009B, ASME V\&V 40 \\
+Open-source tools documented & FreeCAD, LibreCAD, OpenSCAD, CadQuery, svgwrite, ezdxf, PyCAM, dxf2gcode \\
+Materials documented & 12 engineering materials $\times$ 10 properties (sourced) \\
+Prototype build levels & L1 \$15 (hand tools) -- L4 \$600 (CNC router) \\
+Career pathways & 4 (Mech. Draftsman, Simulation Engineer, Maker/Fabricator, Technical Writer) \\
+Total tests & 67 (8 safety-critical / BLOCK) \\
+CAPCOM gate & After W2 Opus synthesis, before W3 publication \\
+Est. tokens & $\approx$280K \\
+Est. context windows & $\approx$18 \\
+Est. Opus allocation & 30\% (math review, career synthesis, safety warden) \\
+Est. Sonnet allocation & 60\% (six module tracks, publication) \\
+Est. Haiku allocation & 10\% (scaffolding, schemas, token tracking) \\
+Release tag & \texttt{v1.50.DRAFTSMAN.DRW} on gsd-skill-creator dev branch \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{quotebox}
+\textbf{\sffamily\large The through-line:}\\[0.5em]
+{\itshape ``A drawing is not a picture of a thing. A drawing is a complete and unambiguous specification of a thing --- every geometric relationship, every allowable variation, every material property that determines whether it will work. The draftsman's art is compression: making the infinite detail of physical reality fit on a sheet of paper, in a format that any trained person on Earth can read without asking a single clarifying question.\\[0.5em]
+The GSD ecosystem exists to give people their lives back. The draftsman's precision is how we make the first thing right, so we do not have to build it twice.''}\\[0.5em]
+\textcolor{subtlegray}{\small --- So You Want to Be a Draftsman, v1.50.DRAFTSMAN.DRW}
+\end{quotebox}
+
+\end{document}

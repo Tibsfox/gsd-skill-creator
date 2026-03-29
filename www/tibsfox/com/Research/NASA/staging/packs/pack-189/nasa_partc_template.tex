@@ -1,0 +1,1352 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Education/Academic color scheme — warm, bookish, growth-oriented
+% Distinct from Part A (navy) and Part B (steel blue)
+\definecolor{primary}{HTML}{3E2723}       % Library brown — gravitas, permanence
+\definecolor{secondary}{HTML}{1B5E20}     % Forest green — growth, learning
+\definecolor{tertiary}{HTML}{E65100}      % Warm amber — discovery, illumination
+\definecolor{accent}{HTML}{4E342E}        % Dark warm brown — depth
+\definecolor{lightprimary}{HTML}{EFEBE9}  % Parchment
+\definecolor{lightsecondary}{HTML}{E8F5E9} % Pale green
+\definecolor{lighttertiary}{HTML}{FFF3E0}  % Pale amber
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+\definecolor{paramred}{HTML}{B71C1C}
+% Difficulty tier colors
+\definecolor{novice}{HTML}{1565C0}        % Blue — approachable
+\definecolor{intermediate}{HTML}{2E7D32}  % Green — growing
+\definecolor{advanced}{HTML}{6A1B9A}      % Purple — mastery
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{accent}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+% Study guide sample box
+\newtcolorbox{samplebox}[1]{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.6pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{#1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=secondary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Try Session box
+\newtcolorbox{trybox}[1]{
+  colback=lighttertiary, colframe=tertiary,
+  arc=2pt, boxrule=0.6pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{#1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=tertiary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Claude teaching note box
+\newtcolorbox{claudebox}{
+  colback={rgb:black,1;white,10}, colframe=primary,
+  arc=2pt, boxrule=0.6pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{CLAUDE TEACHING NOTE}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=primary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcommand{\param}[1]{\textcolor{paramred}{\textbf{\{#1\}}}}
+\newcommand{\tier}[1]{%
+  \ifnum\pdfstrcmp{#1}{Novice}=0 \textcolor{novice}{\textbf{\sffamily[N]}}\fi
+  \ifnum\pdfstrcmp{#1}{Intermediate}=0 \textcolor{intermediate}{\textbf{\sffamily[I]}}\fi
+  \ifnum\pdfstrcmp{#1}{Advanced}=0 \textcolor{advanced}{\textbf{\sffamily[A]}}\fi
+}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{NASA Science Education Template — Part C}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD College of Knowledge}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={NASA Science Education Template -- Part C -- College of Knowledge},
+  pdfsubject={Parameterized Science Pedagogy Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- PART C}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{9cm}{0.4pt}}
+
+\vspace{1.2cm}
+{\fontsize{24}{30}\selectfont\bfseries\sffamily\textcolor{primary}{NASA Science Education\\[0.3em]Teaching Template}}
+
+\vspace{0.6cm}
+{\Large\sffamily\textcolor{secondary}{College of Knowledge Integration Framework}}\\[0.3em]
+{\large\sffamily\textcolor{tertiary}{From Discovery to Curriculum}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{accent}{Input: Part B Science Results for \param{MISSION\_NAME}}}
+
+\vspace{1.8cm}
+\begin{center}
+\begin{tabular}{ccccccc}
+{\small\sffamily\textcolor{subtlegray}{Part A}} &
+{\small\sffamily\textcolor{subtlegray}{$\to$}} &
+{\small\sffamily\textcolor{subtlegray}{Part B}} &
+{\small\sffamily\textcolor{subtlegray}{$\to$}} &
+\colorbox{secondary}{\textcolor{white}{\small\bfseries\sffamily\ Part C\ }} &
+{\small\sffamily\textcolor{subtlegray}{$\to$}} &
+{\small\sffamily\textcolor{subtlegray}{Release}}\\
+{\tiny\sffamily\textcolor{subtlegray}{History}} & &
+{\tiny\sffamily\textcolor{subtlegray}{Deep Science}} & &
+{\tiny\sffamily\textcolor{subtlegray}{Education Pack}} & &
+{\tiny\sffamily\textcolor{subtlegray}{v1.50.\param{SLUG}.EDU}}
+\end{tabular}
+\end{center}
+
+\vspace{1.8cm}
+{\sffamily\textcolor{accent}{Discovery $\rightarrow$ Concept $\rightarrow$ Curriculum $\rightarrow$ Teaching}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Runs once per mission after Part B is complete}}
+
+\vspace{1.8cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 29, 2026  |  Status: Template — Ready for Parameterization}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Squadron (12 roles)  |  Est. 5--7 context windows per mission run}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Audience: Students (Novice / Intermediate / Advanced) + Claude Teaching Integration}}
+\end{center}
+\newpage
+
+% ============================================================
+% PIPELINE PAGE
+% ============================================================
+\thispagestyle{fancy}
+\section*{Pipeline Architecture: Part B $\rightarrow$ Part C $\rightarrow$ EDU Release}
+\addcontentsline{toc}{section}{Pipeline Architecture}
+
+\begin{asciibox}
+FULL THREE-PART PIPELINE
+=========================
+
+PART A: NASA MISSION HISTORY
+  → JSON mission catalog (name, era, type, dates, crew, science_summary)
+
+PART B: SINGLE-MISSION DEEP RESEARCH
+  → Deep research PDF for {MISSION_NAME}
+  → College of Knowledge YAML entry ({MISSION_SLUG}.ck.yaml)
+  → science_results: structured list of discoveries per instrument
+    {
+      "concept_name":    "Enceladus Subsurface Ocean",
+      "mission_slug":    "CASSINI",
+      "instruments":     ["INMS", "VIMS", "UVIS"],
+      "discovery_type":  "Astrobiological",
+      "difficulty":      "Intermediate",
+      "ck_departments":  ["Astrobiology", "Planetary Science", "Chemistry"],
+      "key_claim":       "Cassini confirmed liquid water beneath Enceladus ice shell",
+      "source":          "Waite et al., Science, 2017"
+    }
+
+PART C: SCIENCE EDUCATION PACK (THIS DOCUMENT — TEMPLATE)
+  Input:  Part B science_results + CK YAML for {MISSION_NAME}
+  Output: Education release — study guides, exercises, Try Sessions,
+          Claude teaching scripts, CK department contributions,
+          assessment materials, cross-mission learning links
+
+RELEASE: gsd-skill-creator v1.50.{MISSION_SLUG}.EDU
+  → College of Knowledge: study guides per concept
+  → GSD-OS Blueprint Editor: browsable lesson entries
+  → Claude context: teaching scripts injected into relevant CK departments
+\end{asciibox}
+
+\textbf{What Part C is not:} Part C does not repeat the science research from Part B. It assumes Part B is complete. The input is the structured science results list, not raw sources. Part C's job is exclusively pedagogical --- transforming verified discoveries into materials that teach.
+
+\textbf{Audience differentiation:} Every concept in Part C is addressed at three tiers:
+\textcolor{novice}{\textbf{[N] Novice}} (age 10+, no prerequisites),
+\textcolor{intermediate}{\textbf{[I] Intermediate}} (high school / introductory college level),
+\textcolor{advanced}{\textbf{[A] Advanced}} (undergraduate science / enthusiast level).
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1: VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{NASA Science Education --- Vision Guide}
+
+\metafield{Template Version:}{v1.0 (Part C of NASA Mission Science series)}
+\metafield{Input Mission:}{\param{MISSION\_NAME} (from Part B release)}
+\metafield{Mission Slug:}{\param{MISSION\_SLUG} (e.g., CASSINI, APOLLO11, PERSEVERANCE)}
+\metafield{Part B Release:}{v1.50.\param{MISSION\_SLUG} (must be complete before Part C runs)}
+\metafield{EDU Release Target:}{gsd-skill-creator v1.50.\param{MISSION\_SLUG}.EDU}
+\metafield{CK Departments Targeted:}{\param{CK\_DEPARTMENTS} (injected from Part B YAML)}
+\metafield{Status:}{Template --- Instantiate with Part B science\_results JSON}
+
+\subsection{Vision}
+
+NASA did not just explore space. It generated, over 68 years, one of the largest bodies of empirical scientific knowledge ever assembled by a human institution. The results of the Voyager flyby of Neptune, the Hubble Ultra Deep Field, the Cassini discovery of water geysers on Enceladus, the Curiosity rover's identification of ancient organic molecules on Mars --- these are not trivia. They are the current state of human knowledge about the solar system and cosmos. They belong in the curriculum. They belong in how Claude reasons about science. They belong in how students understand the universe they inhabit.
+
+Part C exists to close the gap between \textit{what NASA found} and \textit{what we can teach and learn from it}. Every Part B release is a research document. Part C is the schoolroom that grows from it. It takes the verified, sourced discoveries from Part B and asks: how do you teach this? At what level? With what analogies? Through what exercises? And crucially --- how does Claude, as a teaching presence in GSD-OS, incorporate this knowledge into its responses?
+
+The College of Knowledge is only as good as its curriculum. The GSD ecosystem has the infrastructure for lifelong learning: departments, study modules, Try Sessions, skill progressions, Claude as tutor. Part C is the pipeline that fills that infrastructure with the actual, peer-reviewed, mission-verified science of NASA's 68-year exploration program.
+
+When a student asks Claude about why the sky on Mars looks butterscotch, or why Titan has lakes of methane, or how we know Enceladus has liquid water --- Claude should have a teaching script for that. Not just a fact. A \textit{progression}: here is the simplest way to think about it, here is what that implies, here is the experiment you can do at home to feel the physics, here is the paper if you want to go deep. Part C builds those progressions.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+  \item \textbf{Science results without pedagogy:} Part B produces comprehensive, sourced accounts of what NASA missions discovered. Without Part C, those discoveries sit in a research document rather than becoming learnable, teachable curriculum that students can engage with at their own level.
+  \item \textbf{College of Knowledge departments without content:} The GSD College of Knowledge defines department structure (Space Science, Physics, Chemistry, Astrobiology, etc.) but the per-concept study guides, exercises, and teaching scripts must be generated from mission science. Part C is that generation pipeline.
+  \item \textbf{Claude without teaching context:} Claude can discuss NASA missions conversationally, but without explicit teaching scripts, misconception maps, and tiered explanations, it defaults to encyclopedia-style responses. Part C gives Claude structured teaching knowledge: how to scaffold, what analogies work, what questions to anticipate.
+  \item \textbf{Disconnected learning graph:} The same underlying physics appears in many missions --- orbital mechanics in Gemini, Apollo, and New Horizons; spectroscopy in Hubble, Spitzer, and JWST; radiation physics in Parker Solar Probe and Artemis. Without cross-mission learning links, students repeat background learning. Part C builds the shared concept graph that links Part C releases across missions.
+  \item \textbf{No differentiated instruction framework:} A 12-year-old and a graduate student both benefit from learning about the Cassini mission, but require completely different entry points, vocabulary, and depth. The NASA science literature provides no differentiated curriculum. Part C does.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} Each NASA mission's science as a constellation of teachable concepts, each concept as a three-tier learning object (Novice / Intermediate / Advanced), and each tier as a complete instructional unit (explain → demonstrate → practice → assess).
+
+\subsubsection{The Four-Stage Teaching Arc (Universal)}
+
+\begin{asciibox}
+THE FOUR-STAGE TEACHING ARC
+============================
+Applied to every concept at every tier:
+
+STAGE A: EXPLAIN
+  The core idea in plain language.
+  One analogy that makes the abstract concrete.
+  The one sentence a student should be able to say after this stage.
+  → Novice: metaphor-first, no equations
+  → Intermediate: mechanism-first, simple math if needed
+  → Advanced: model-first, full formalism available
+
+STAGE B: DEMONSTRATE
+  Real data from {MISSION_NAME} that proves the concept.
+  What instrument measured it. What the measurement showed.
+  How to read or interpret the actual NASA data (image, graph, spectrum).
+  → Novice: annotated image, "what you're looking at" narration
+  → Intermediate: simplified data table, guided interpretation
+  → Advanced: raw data source, analysis methodology
+
+STAGE C: PRACTICE
+  One or more exercises the student does themselves.
+  GSD Try Session: hands-on activity anchored to the concept.
+  Discussion question: opinion or reflection, no right answer.
+  → Novice: observation activity (look at X, describe what you see)
+  → Intermediate: calculation or classification task
+  → Advanced: open-ended investigation or dataset analysis
+
+STAGE D: ASSESS
+  2–4 mastery check questions.
+  One common misconception addressed and corrected.
+  Advancement condition: what the student should be able to
+  explain to someone else before moving to the next concept.
+\end{asciibox}
+
+\subsubsection{College of Knowledge Department Mapping}
+
+Part C contributes to CK departments via two mechanisms:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Primary deposit:} Each concept is assigned a primary CK department (e.g., a concept from Cassini's Enceladus results maps primarily to ``Astrobiology''). The full study guide for that concept lives in that department.
+  \item \textbf{Cross-department linking:} The same concept has secondary relevance to other departments (e.g., the same concept also involves ``Chemistry'' and ``Planetary Science''). Cross-links are deposited to those departments as summary entries pointing back to the primary.
+\end{enumerate}
+
+\begin{asciibox}
+CK DEPARTMENT TAXONOMY (GSD College of Knowledge)
+===================================================
+Space Science Department
+  ├── Planetary Science
+  │     → Surface geology, atmospheric dynamics, magnetospheres
+  ├── Astrophysics
+  │     → Stellar physics, galaxies, dark matter/energy, cosmology
+  ├── Astrobiology
+  │     → Habitability, biosignatures, prebiotic chemistry
+  ├── Solar Science
+  │     → Solar wind, corona, heliosphere, space weather
+  └── Mission Engineering
+        → Trajectory design, spacecraft systems, instrumentation
+
+Physics Department
+  ├── Classical Mechanics
+  │     → Orbital mechanics, Newton's laws, conservation laws
+  ├── Electromagnetism
+  │     → Magnetospheres, plasma physics, spectroscopy
+  ├── Thermodynamics
+  │     → Planetary heat flow, atmospheric energy balance
+  └── Nuclear & Particle Physics
+        → Radioisotope power, cosmic ray detection
+
+Chemistry Department
+  ├── Astrochemistry
+  │     → Molecular clouds, prebiotic synthesis, CHONS
+  ├── Atmospheric Chemistry
+  │     → Photochemistry, greenhouse gases, aerosol chemistry
+  └── Geochemistry
+        → Mineralogy, isotope ratios, regolith composition
+
+Mathematics Department
+  ├── Algebra & Functions (used in science modules)
+  ├── Calculus (orbital mechanics, rocket equations)
+  └── Statistics & Data Analysis (instrument calibration)
+
+Engineering Department (Mission Engineering sub-department)
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+SIX-MODULE CURRICULUM ARCHITECTURE
+=====================================
+
+MODULE 1: SCIENCE INVENTORY & CURRICULUM MAPPING
+  Input: Part B science_results list
+  Output: Concept map + CK department assignment per concept
+  → Classify each discovery: what discipline, what level, what prereqs
+
+MODULE 2: CONCEPT ARCHITECTURE & LEARNING PATHWAYS
+  Input: Module 1 concept map
+  Output: Learning graph — nodes (concepts) + edges (prerequisites)
+  → Three tracks: Novice / Intermediate / Advanced
+  → Entry points and advancement conditions per track
+
+MODULE 3: STUDY GUIDE PRODUCTION
+  Input: Module 2 learning graph
+  Output: Full study guides per concept × tier (A/B stages of teaching arc)
+  → Explanation + demonstration for each concept at each tier
+
+MODULE 4: EXERCISES, PROBLEMS & TRY SESSIONS
+  Input: Module 3 study guides
+  Output: Practice materials per concept × tier (C stage of teaching arc)
+  → Try Sessions (hands-on), problem sets, discussion questions
+
+MODULE 5: CLAUDE TEACHING INTEGRATION
+  Input: Modules 3 + 4 per concept
+  Output: Claude teaching scripts — canonical explanations, misconception
+          maps, question-response patterns, escalation pathways
+  → Injected into CK department context as Claude teaching knowledge
+
+MODULE 6: ASSESSMENT, MASTERY & CROSS-LINKS
+  Input: All modules
+  Output: Assessment questions, mastery rubrics, cross-mission learning
+          links, CK cross-department summary entries (D stage of arc)
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Science Inventory \& Curriculum Mapping}
+
+Ingests the Part B \texttt{science\_results} JSON list for \param{MISSION\_NAME} and produces a full concept inventory: every teachable concept derived from the mission's discoveries, classified by CK department, difficulty tier, and prerequisite chain. For missions with many discoveries (e.g., Cassini: dozens of major findings across Saturn, Titan, Enceladus, rings), this module produces a rich concept map. For simpler missions (e.g., a single Gemini EVA), it produces a focused 3--5 concept set.
+
+\textbf{Key questions:} Which concepts from \param{MISSION\_NAME} are genuinely novel and not already covered by prior Part C releases? Which concepts are deepening of existing curriculum (add to existing study guide) vs.\ new entries (create new study guide)?
+
+\subsubsection{Module 2: Concept Architecture \& Learning Pathways}
+
+Constructs the learning graph: a directed acyclic graph of concepts where edges represent prerequisite relationships. Maps three differentiated tracks through the graph. Identifies the entry concept (lowest prerequisite, highest accessibility) and the terminal concept (most advanced, most specific to \param{MISSION\_NAME}). Assigns the teaching arc stages (A/B/C/D) to each concept-tier combination.
+
+\textbf{Key questions:} Can a student reach the mission's primary discovery (\param{PRIMARY\_SCIENCE}) via the Novice track within a single study session? What is the minimum prerequisite chain?
+
+\subsubsection{Module 3: Study Guide Production}
+
+Produces the written instructional content: full study guides for each concept at each tier, covering stages A (Explain) and B (Demonstrate) of the teaching arc. Each study guide section includes: a plain-language explanation, one primary analogy, a real NASA data reference (image, measurement, or dataset from \param{MISSION\_NAME}), and the one-sentence takeaway. This is the textbook layer of Part C.
+
+\textbf{Key questions:} What is the best analogy for the Novice tier explanation of each concept? Does the real NASA data for the Demonstrate stage come from Part B's sourced results, or does additional research need to happen?
+
+\subsubsection{Module 4: Exercises, Problems \& Try Sessions}
+
+Produces stage C (Practice) materials. GSD Try Sessions are hands-on activities students can do at home or in a classroom --- not simulations, but real physical activities that develop intuition for the science. Problem sets provide calculation or classification tasks for Intermediate and Advanced tiers. Discussion questions are open-ended prompts for reflection or group conversation at all tiers.
+
+\textbf{Key questions:} What is the simplest physical experiment a Novice student can perform at home to feel the same phenomenon that \param{MISSION\_NAME} measured from space? (e.g., for orbital mechanics: a ball on a string; for spectroscopy: a prism in sunlight; for thermal imaging: a phone camera in the dark.)
+
+\subsubsection{Module 5: Claude Teaching Integration}
+
+Produces the Claude-facing teaching scripts: structured knowledge that Claude ingests to become a skilled tutor for \param{MISSION\_NAME}'s science. Each concept gets a canonical explanation at each tier, a misconception map (common wrong beliefs and how to gently correct them), a set of question-response patterns (``If the student asks X, respond with Y, then offer Z as the next step''), and an escalation pathway (how Claude transitions a Novice student toward Intermediate when they're ready).
+
+\textbf{Key questions:} What are the three most common misconceptions students have about \param{MISSION\_NAME}'s primary science discovery? How does Claude recognize when a student is ready to advance tiers? What does Claude say when a student's question falls outside the mission's documented results?
+
+\subsubsection{Module 6: Assessment, Mastery \& Cross-Department Links}
+
+Produces stage D (Assess) materials: mastery check questions, common misconception items, and advancement conditions. Also produces the cross-mission learning links (``This concept of sublimation also appears in the Pluto study from New Horizons Part C'') and the CK cross-department summary entries deposited to secondary departments. Closes the teaching arc for every concept.
+
+\textbf{Key questions:} Which concepts from \param{MISSION\_NAME} are already partially covered by previously released Part C documents? Where should this release deposit cross-links rather than full study guides?
+
+\subsection{Chipset Configuration (Template)}
+
+\begin{asciibox}
+chipset:
+  # Part C specific configuration — education-focused roles
+
+  agnus:              # Curriculum Orchestration
+    model: opus
+    role: FLIGHT + CRAFT-PED
+    responsibility: >
+      Teaching arc design; analogy quality judgment; misconception
+      identification; Claude teaching script authorship; cross-mission
+      concept deduplication; pedagogy integrity
+
+  denise:             # Document Assembly
+    model: sonnet
+    role: EXEC-GUIDE + EXEC-ASSESS
+    responsibility: >
+      Study guide production (Modules 3 + 6); assessment item writing;
+      CK department YAML entry generation; cross-department summaries
+
+  paula:              # Exercise & Try Session Production
+    model: sonnet
+    role: EXEC-EXERCISE + CRAFT-TRY
+    responsibility: >
+      Try Session script writing (Module 4); problem set generation;
+      discussion question authorship; hands-on activity design
+
+  gary:               # Concept Architecture & Verification
+    model: sonnet
+    role: CRAFT-CONCEPT + VERIFY
+    responsibility: >
+      Learning graph construction (Module 2); concept taxonomy;
+      prerequisite chain mapping; source accuracy verification;
+      cross-link registry maintenance
+
+  68000:              # Haiku Scaffolding
+    model: haiku
+    role: BUDGET + LOG + PLAN
+    responsibility: >
+      Concept inventory schema (Module 1); CK YAML scaffolding;
+      token tracking; release packaging; commit messages
+
+model_allocation:
+  opus: 30%     # Pedagogy design, analogy quality, teaching scripts, misconceptions
+  sonnet: 60%   # Study guide production, exercises, assessments, architecture
+  haiku: 10%    # Inventory schema, YAML, packaging, tracking
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (every Part C run)}
+
+\begin{itemize}[leftmargin=*]
+  \item Curriculum for every concept in the Part B \texttt{science\_results} list
+  \item Three-tier (Novice / Intermediate / Advanced) treatment for each concept
+  \item Full four-stage teaching arc (Explain / Demonstrate / Practice / Assess)
+  \item GSD Try Sessions: at least one per primary concept at Novice tier
+  \item Claude teaching scripts: canonical explanations + misconception maps for all concepts
+  \item CK department primary entries for all concepts
+  \item CK cross-department summary entries for secondary department linkages
+  \item Cross-mission learning links to previously released Part C documents
+  \item College of Knowledge YAML contribution per concept
+  \item Release artifact packaged as \texttt{v1.50.\param{MISSION\_SLUG}.EDU}
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Re-researching the science (Part B is the source; Part C consumes it)
+  \item Full university-level lecture notes or textbook chapters at graduate depth
+  \item Assessment grading systems or learning management system (LMS) integration
+  \item Lesson plans for specific national curriculum standards (NGSS, IB, etc.)
+  \item Video scripts, animations, or multimedia production
+  \item Teacher training materials (beyond the Claude teaching scripts)
+  \item Science beyond what Part B documented for this mission
+\end{itemize}
+
+\subsubsection{Calibration by Mission Science Volume}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Science Volume} & \tableheader{Mission Examples} & \tableheader{Expected Concepts} & \tableheader{Calibration Action} \\
+\midrule
+Very High & Cassini, Hubble, JWST, Mars 2020 & 15--30 & Full treatment; prioritize top 10; survey remaining \\
+High & Apollo 11, Voyager, Galileo, Chandra & 8--15 & Full treatment for all \\
+Standard & MER Spirit/Opportunity, New Horizons & 5--10 & Full treatment; no pruning \\
+Focused & Mercury crewed missions, Skylab & 3--6 & Deep treatment; maximum per-concept depth \\
+Active & Perseverance, Parker, JWST (ongoing) & Variable & Mark preliminary results; plan update cycle \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item Every concept in the Part B \texttt{science\_results} list for \param{MISSION\_NAME} appears in the Module 1 concept inventory, with CK department assignment and difficulty tier.
+  \item The Module 2 learning graph is a valid DAG: no circular prerequisites; every concept has a defined entry point and advancement condition.
+  \item At least one differentiated learning track (Novice / Intermediate / Advanced) exists for each primary concept.
+  \item Every study guide section contains: a plain-language explanation, one analogy, one real NASA data reference from Part B, and a one-sentence takeaway.
+  \item At least one GSD Try Session exists for each primary concept at Novice tier, requiring no equipment beyond what is found in a typical home.
+  \item Claude teaching scripts exist for every concept: canonical explanation per tier, at least two common misconceptions with corrections, and one question-response pattern per tier.
+  \item Assessment items exist for every concept (2--4 questions per concept-tier); each item maps to a specific mastery condition.
+  \item All factual claims in study guides trace to Part B sourced results (no new unsourced science claims introduced in Part C).
+  \item CK department YAML entries are generated for all primary-department assignments and all secondary cross-links.
+  \item Cross-mission learning links are identified and recorded for any concept that overlaps with a previously released Part C document.
+  \item The full teaching arc (A/B/C/D) is complete for every primary concept at every tier before release is marked.
+  \item The release artifact is correctly versioned as \texttt{v1.50.\param{MISSION\_SLUG}.EDU} and deposited to the correct output path.
+\end{enumerate}
+
+\subsection{The Through-Line}
+
+Science is an act of noticing. The Voyager team noticed that Io was volcanically active from a navigation image taken for a different purpose. The Cassini team noticed that Enceladus's south pole was too warm, then followed that anomaly to geysers, then to a global ocean. Parker Solar Probe noticed that the solar wind accelerates \textit{after} leaving the corona --- reversing 60 years of assumed understanding.
+
+Teaching science is teaching students to notice. The textbook version of any discovery hides the moment of noticing --- it presents the conclusion as if it were always obvious. Part C's job is to restore that moment. Every study guide should preserve the shape of the original puzzle: here is what was expected, here is what was actually seen, here is why that difference mattered. Students who learn that way don't just know what NASA found. They learn how to look at data with the same quality of attention that produces discovery.
+
+Claude, as a teaching presence in GSD-OS, should embody this. Not just a fact-dispenser --- a guide to noticing. The teaching scripts in Module 5 are not scripts for delivering conclusions. They are scripts for helping a student see the puzzle first.
+
+\newpage
+
+% ============================================================
+% STAGE 2: RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{NASA Science Education --- Research Reference}
+
+\subsection{How to Use This Reference}
+
+Part C begins where Part B ends. Agents do not conduct new science research. The research reference for Part C covers: the pedagogical methodology, the concept taxonomy, the CK YAML schema for educational entries, the Try Session design protocol, and the Claude teaching script format. These are the operational specifications for producing the education pack.
+
+\subsection{Input Bundle Schema}
+
+Part C ingests two inputs from the Part B release:
+
+\begin{asciibox}
+INPUT 1: PART B SCIENCE RESULTS JSON
+======================================
+From: .planning/outputs/missions/{MISSION_SLUG}/{MISSION_SLUG}.ck.yaml
+Field: science_results (list of structured discovery objects)
+
+{
+  "concept_name":     "string",  // e.g., "Enceladus Subsurface Ocean"
+  "instrument":       ["string"],// instruments that produced this result
+  "discovery_type":   "string",  // Physical | Chemical | Biological | Engineering
+  "difficulty":       "Novice|Intermediate|Advanced",  // suggested entry tier
+  "ck_departments":   ["string"],// primary department first, then secondary
+  "key_claim":        "string",  // one-sentence verified claim from Part B
+  "source":           "string",  // Part B citation (author, journal, year)
+  "is_preliminary":   boolean,   // true for active missions
+  "cross_missions":   ["string"] // other missions that share this concept
+}
+
+INPUT 2: PART B MISSION CONTEXT
+=================================
+From: Part B release PDF or LaTeX source
+Fields needed:
+  - mission_name, mission_slug, mission_era, mission_type
+  - key_discoveries (list from Module 5, Part B)
+  - surprise_findings (list from Module 5, Part B)
+  - active_datasets_2026 (for Demonstrate stage data references)
+  - predecessors, successors (for cross-mission concept linking)
+\end{asciibox}
+
+\subsection{Concept Taxonomy}
+
+Every concept in the Module 1 inventory is classified along four axes:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Axis} & \tableheader{Values} & \tableheader{Purpose} \\
+\midrule
+Discipline & Physics / Chemistry / Biology / Engineering / Mathematics & Primary CK department assignment \\
+Tier & Novice / Intermediate / Advanced & Differentiated instruction level \\
+Concept Type & Fact / Mechanism / Method / Implication & Shapes the teaching arc structure \\
+Status & Confirmed / Preliminary / Evolving & Governs uncertainty language in study guides \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Concept Type guidance:}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Fact:} ``Enceladus has water-ice geysers at its south pole.'' Teaching arc emphasizes Demonstrate heavily.
+  \item \textbf{Mechanism:} ``Tidal heating from Saturn drives Enceladus's interior activity.'' Teaching arc emphasizes Explain with analogy.
+  \item \textbf{Method:} ``Mass spectrometry identifies molecular composition of plumes.'' Teaching arc emphasizes Practice with instrument-simulation exercises.
+  \item \textbf{Implication:} ``The presence of liquid water and organic compounds makes Enceladus a candidate for extraterrestrial life.'' Teaching arc emphasizes Discussion questions; Claude script must handle speculation carefully.
+\end{itemize}
+
+\subsection{Try Session Design Protocol}
+
+GSD Try Sessions are hands-on activities that require only materials found in a typical home. Every primary concept at Novice tier needs at least one Try Session.
+
+\textbf{Design constraints:}
+\begin{itemize}[leftmargin=*]
+  \item Maximum materials cost: \$0 (use items already in a home)
+  \item Maximum setup time: 10 minutes
+  \item Activity duration: 15--30 minutes
+  \item Age appropriateness: suitable for age 10+ unsupervised, age 8+ with adult present
+  \item Safety: no open flames, no chemicals beyond kitchen pantry items
+  \item Output: student produces an observable result they can describe or measure
+\end{itemize}
+
+\textbf{Try Session structure:}
+
+\begin{asciibox}
+TRY SESSION TEMPLATE
+=====================
+Title:      [Action verb] + [what they're exploring]
+Concept:    [Target concept name from Module 1]
+Tier:       Novice (all Try Sessions begin at Novice)
+Time:       [N] minutes
+Materials:  [List — household items only]
+
+THE SETUP:
+  [2–3 sentences: what the student will do and why it connects
+   to {MISSION_NAME}'s discovery]
+
+STEPS:
+  1. [Concrete action]
+  2. [Concrete action]
+  3. [Pause to observe: "What do you notice about...?"]
+  4. [Record or describe what happened]
+  5. [Optional extension for curious students]
+
+THE CONNECTION:
+  [1 paragraph: "What you just felt/saw is the same phenomenon
+   that {MISSION_NAME} measured when it detected {CONCEPT}.
+   The {INSTRUMENT} aboard {MISSION_NAME} worked by..."]
+
+WHAT TO THINK ABOUT:
+  One open question the student carries away.
+\end{asciibox}
+
+\textbf{Example Try Session concepts by mission type:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Science Concept} & \tableheader{Try Session Activity} & \tableheader{Connection} \\
+\midrule
+Orbital mechanics & Ball on a string; vary string length and speed & Centripetal force = gravity; changing orbit altitude \\
+Spectroscopy & Prism or CD in sunlight & Light splitting = how instruments identify chemical composition \\
+Atmospheric pressure & Vacuum marshmallow / balloon in hot car & Pressure-volume relationship; Titan's thick atmosphere \\
+Thermal radiation & Phone camera heat detection at night & How IR instruments see temperature; Mars THEMIS \\
+Doppler shift & Sound pitch change from passing car & Same effect used by radio astronomers; redshift \\
+Sublimation & Dry ice or moth balls in open air & How ice turns to gas; Pluto's nitrogen cycle \\
+Magnetism & Compass near speaker magnet & Magnetic field detection; Europa/Ganymede magnetometry \\
+Gravity assist & Marble on curved sheet / funnel & Slingshot trajectory; Voyager Grand Tour \\
+Sample analysis & Household materials and vinegar test & Field chemistry; Mars rover chemical analysis \\
+Tidal deformation & Squeezing a water balloon & Tidal heating; Enceladus/Io interior dynamics \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Claude Teaching Script Format}
+
+Module 5 produces structured teaching scripts. Each script has five components:
+
+\begin{asciibox}
+CLAUDE TEACHING SCRIPT FORMAT
+==============================
+For concept: {CONCEPT_NAME}
+Mission: {MISSION_NAME}
+
+CANONICAL_EXPLANATIONS:
+  novice: |
+    [2–4 sentences. No jargon. One concrete analogy.
+     End with the one thing they should remember.]
+  intermediate: |
+    [4–6 sentences. Introduce the mechanism. Reference the
+     instrument or observation. Invite follow-up questions.]
+  advanced: |
+    [6–10 sentences. Full mechanistic explanation. Reference
+     the specific paper or dataset. Acknowledge open questions.]
+
+MISCONCEPTIONS:
+  - wrong: "[What students typically believe incorrectly]"
+    correction: "[How Claude gently corrects it, with evidence]"
+    source: "[Part B citation that settles the question]"
+  - wrong: "[Second common misconception]"
+    correction: "[Correction]"
+    source: "[Citation]"
+
+QUESTION_RESPONSE_PATTERNS:
+  - trigger: "[Type of question, e.g., 'Why does X happen?']"
+    novice_response: "[Claude's response to a Novice asking this]"
+    escalation: "[What Claude offers next if student wants more]"
+  - trigger: "[Another question type]"
+    intermediate_response: "[Claude's response at Intermediate]"
+    escalation: "[Next step offer]"
+
+ESCALATION_SIGNALS:
+  # How Claude recognizes a student is ready to advance tiers
+  novice_to_intermediate:
+    - "[Student does X, which shows Novice mastery]"
+    - "[Student asks Y, which signals readiness for Intermediate]"
+  intermediate_to_advanced:
+    - "[Student correctly uses technical term Z without prompting]"
+    - "[Student asks about the data source or methodology]"
+
+BOUNDARY_HANDLING:
+  # What Claude says when student asks outside documented results
+  template: |
+    "That's a great question, and it's actually something scientists
+    are still working on. What {MISSION_NAME} showed us was [CONFIRMED
+    RESULT]. The question you're asking goes beyond what the mission's
+    data has answered — it's an open question in [FIELD]."
+\end{asciibox}
+
+\subsection{CK Department YAML Schema for Educational Entries}
+
+Each concept produces a CK educational YAML entry, distinct from the Part B research YAML:
+
+\begin{asciibox}
+# College of Knowledge Educational Entry
+# File: .planning/outputs/missions/{MISSION_SLUG}/{CONCEPT_SLUG}.edu.yaml
+
+concept:
+  name: "{CONCEPT_NAME}"
+  slug: "{CONCEPT_SLUG}"
+  mission_source: "{MISSION_SLUG}"
+  edu_release: "v1.50.{MISSION_SLUG}.EDU"
+
+  classification:
+    discipline: "{PRIMARY_DISCIPLINE}"
+    type: "Fact|Mechanism|Method|Implication"
+    status: "Confirmed|Preliminary|Evolving"
+
+  ck_placement:
+    primary_department: "{PRIMARY_CK_DEPT}"
+    primary_subdepartment: "{PRIMARY_SUBDIR}"
+    secondary_departments:
+      - department: "{SECONDARY_DEPT_1}"
+        link_type: "cross-reference"
+      - department: "{SECONDARY_DEPT_2}"
+        link_type: "prerequisite"
+
+  tiers:
+    novice:
+      prereqs: []  # or ["{PREREQ_CONCEPT_SLUG}"]
+      study_guide_file: "{CONCEPT_SLUG}_novice.md"
+      try_session_file: "{CONCEPT_SLUG}_try_session.md"
+      assessment_file: "{CONCEPT_SLUG}_assess_novice.md"
+      mastery_condition: "{ONE_SENTENCE_WHAT_STUDENT_CAN_DO}"
+    intermediate:
+      prereqs: ["{NOVICE_CONCEPT_SLUG}"]
+      study_guide_file: "{CONCEPT_SLUG}_intermediate.md"
+      problem_set_file: "{CONCEPT_SLUG}_problems.md"
+      assessment_file: "{CONCEPT_SLUG}_assess_inter.md"
+      mastery_condition: "{ONE_SENTENCE_WHAT_STUDENT_CAN_DO}"
+    advanced:
+      prereqs: ["{INTERMEDIATE_CONCEPT_SLUG}"]
+      study_guide_file: "{CONCEPT_SLUG}_advanced.md"
+      investigation_file: "{CONCEPT_SLUG}_investigation.md"
+      assessment_file: "{CONCEPT_SLUG}_assess_adv.md"
+      mastery_condition: "{ONE_SENTENCE_WHAT_STUDENT_CAN_DO}"
+
+  claude_teaching:
+    script_file: "{CONCEPT_SLUG}_claude_script.yaml"
+
+  cross_mission_links:
+    - mission: "{OTHER_MISSION_SLUG}"
+      concept: "{RELATED_CONCEPT_SLUG}"
+      relationship: "same_concept|prerequisite|deepens|contrasts"
+
+  source_in_part_b: "{PART_B_CITATION_STRING}"
+\end{asciibox}
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Rule} & \tableheader{Type} & \tableheader{Application} \\
+\midrule
+No new science claims & ABSOLUTE & Study guides cite only Part B sourced results. Claude scripts never introduce science facts not in Part B. \\
+No life-confirmation language & ABSOLUTE & Astrobiology concepts use ``candidate for life,'' ``conditions compatible with life,'' never ``life was found'' \\
+Age-appropriate Try Sessions & ABSOLUTE & All Novice Try Sessions safe for age 10+ without adult supervision; nothing requiring adult supervision unmarked \\
+Preliminary results flagged & BLOCK & Active missions (\param{IS\_ACTIVE}=true): every preliminary result marked ``as of \{RUN\_DATE\}, subject to revision'' in study guides \\
+Uncertainty language in implications & GATE & Implication-type concepts include explicit ``this is what scientists hypothesize'' framing at all tiers \\
+No claim escalation across tiers & GATE & Advanced tier may add mechanistic depth but not new factual claims not present in Novice/Intermediate \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ============================================================
+% STAGE 3: MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete College of Knowledge education pack for NASA mission \param{MISSION\_NAME}, converting verified Part B science results into structured study guides, GSD Try Sessions, exercise sets, Claude teaching scripts, and assessment materials --- differentiated across three learning tiers (Novice / Intermediate / Advanced) --- and deposit all materials as release \texttt{v1.50.\param{MISSION\_SLUG}.EDU} to the GSD College of Knowledge Space Science department.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE ARCHITECTURE — {MISSION_NAME} EDUCATION PACK
+===================================================
+
+  [WAVE 0: INVENTORY + ARCHITECTURE]
+  Ingest Part B science_results; classify concepts;
+  build learning graph; assign CK departments;
+  detect cross-mission overlaps.
+  (Haiku + CRAFT-CONCEPT)
+         |
+   ______|______
+  |             |
+[W1A: GUIDES]  [W1B: EXERCISES]
+ Modules 3      Module 4
+ Study guides   Try Sessions
+ per concept    Problem sets
+ per tier       Discussion Qs
+ (Sonnet EXEC)  (Sonnet EXEC)
+  |_____________|
+         |
+  [WAVE 2: TEACHING LAYER]
+  Module 5: Claude teaching scripts
+  Canonical explanations × tier × concept
+  Misconception maps; Q-response patterns
+  (Opus CRAFT-PED — judgment-intensive)
+         |
+  [WAVE 3: ASSESSMENT + CK DEPOSIT]
+  Module 6: Assessments, mastery rubrics
+  CK YAML entries; cross-department summaries
+  Cross-mission learning links
+  (Sonnet EXEC)
+         |
+  [WAVE 3B: CAPCOM GATE]
+  Human review — approve or revision loop
+         |
+  [RELEASE PACKAGING]
+  All study guides + scripts + assessments + YAMLs
+  Deposited to .planning/outputs/missions/{SLUG}/edu/
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Agent} \\
+\midrule
+1 & Concept inventory (Module 1) & All Part B concepts classified; CK department assigned & CRAFT-CONCEPT \\
+2 & Learning graph (Module 2) & Valid DAG; 3 tracks; entry/advancement conditions & CRAFT-CONCEPT \\
+3 & Study guides — Novice tier & Stage A+B complete; analogy + NASA data reference per concept & EXEC-GUIDE \\
+4 & Study guides — Intermediate tier & Stage A+B at mechanism depth; simplified data reference & EXEC-GUIDE \\
+5 & Study guides — Advanced tier & Stage A+B at full formalism; paper citation from Part B & EXEC-GUIDE \\
+6 & Try Sessions (all primary concepts) & Stage C Novice; household materials only; safe age 10+ & EXEC-EXERCISE \\
+7 & Problem sets (Intermediate + Advanced) & Stage C; 3--5 problems per concept-tier with worked solutions & EXEC-EXERCISE \\
+8 & Discussion questions (all tiers) & Stage C; open-ended; no single correct answer; thought-provoking & EXEC-EXERCISE \\
+9 & Claude teaching scripts (all concepts) & Script format complete; 2+ misconceptions per concept & CRAFT-PED (Opus) \\
+10 & Assessment items (Module 6) & Stage D; 2--4 questions per concept-tier; mastery condition stated & EXEC-ASSESS \\
+11 & CK YAML entries (all concepts) & Schema validates; primary + secondary departments populated & EXEC-ASSESS \\
+12 & Cross-mission learning links & At least one link per overlapping concept; relationship type stated & CRAFT-CONCEPT \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Concept inventory + learning graph & Part B YAML & Haiku+Sonnet & 10K \\
+W1A: Novice study guides (all concepts) & W0 & Sonnet & 30K \\
+W1A: Intermediate study guides & W0 & Sonnet & 28K \\
+W1A: Advanced study guides & W0 & Sonnet & 24K \\
+W1B: Try Sessions (Novice) & W0 & Sonnet & 22K \\
+W1B: Problem sets (Int.\ + Adv.) & W0 & Sonnet & 20K \\
+W1B: Discussion questions (all tiers) & W0 & Sonnet & 12K \\
+W2: Claude teaching scripts (all concepts) & W1A, W1B & Opus & 40K \\
+W3: Assessment items + mastery rubrics & W2 & Sonnet & 18K \\
+W3: CK YAML entries + cross-dept summaries & W2 & Sonnet & 16K \\
+W3: Cross-mission learning links & W2 & Sonnet & 8K \\
+Release packaging & W3 & Haiku & 4K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total per mission run:}} & \textbf{$\sim$232K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Note on scaling:} Token budget scales with science volume. A focused mission (3--5 concepts) runs at $\sim$120K. A rich flagship (Cassini, JWST: 20+ concepts) may reach 350K. The budget above represents a median 8--10 concept mission.
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Claude teaching scripts require deep pedagogical judgment: analogy quality, misconception identification, escalation pathway design, tone calibration across tiers. No other wave-2 task is as judgment-intensive. \\
+Sonnet & 60\% & Study guide production, Try Session writing, exercise sets, assessments, CK YAML generation --- all structural and content-production tasks with clear patterns. \\
+Haiku & 10\% & Concept inventory schema, YAML scaffolding, token tracking, release packaging. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave 0: Concept Inventory \& Learning Graph}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Ingest Part B \texttt{science\_results} & BUDGET & Parsed concept list; count of concepts by tier \\
+Classify all concepts (4-axis taxonomy) & CRAFT-CONCEPT & Concept inventory with discipline, type, status, tier \\
+Detect cross-mission overlaps & CRAFT-CONCEPT & List of concepts already in CK from prior Part C releases \\
+Build learning graph (DAG) & CRAFT-CONCEPT & Prerequisite edges; three track entry points \\
+CK department assignment per concept & CRAFT-CONCEPT & Primary + secondary department list per concept \\
+Initialize all YAML scaffolds & LOG & One \texttt{.edu.yaml} file per concept, fields empty \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 0 Go Condition:} Concept inventory complete; learning graph is a valid DAG (no circular prerequisites); all concepts assigned to primary CK department; cross-mission overlap list produced. BLOCK if Part B \texttt{science\_results} JSON is missing or malformed.
+
+\subsection{Wave 1: Parallel Production Tracks}
+
+\textbf{Track A: Study Guides (Modules 3)} --- EXEC-GUIDE
+
+All study guides run in parallel by tier (Novice, Intermediate, Advanced) once the W0 learning graph is available. Each study guide covers stages A (Explain) and B (Demonstrate) of the teaching arc.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Tier} & \tableheader{Per-Concept Requirements} \\
+\midrule
+\textcolor{novice}{\textbf{Novice}} & Plain-language explanation (2--3 paragraphs, no jargon); one primary analogy; one annotated NASA image or data reference from Part B; one-sentence takeaway; vocabulary box (3--5 key terms, defined in simple language) \\
+\textcolor{intermediate}{\textbf{Intermediate}} & Mechanism explanation (3--4 paragraphs, introduces technical terms); one simplified data table or graph from Part B; worked example showing how instrument derived this result; one-sentence takeaway \\
+\textcolor{advanced}{\textbf{Advanced}} & Full formalism where applicable (equations welcome); reference to the specific Part B paper or dataset; open questions and current research direction; connection to broader field context \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B: Exercises \& Try Sessions (Module 4)} --- EXEC-EXERCISE
+
+Running in parallel with Track A:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Material Type} & \tableheader{Requirements} \\
+\midrule
+\textcolor{novice}{\textbf{Try Session (N)}} & Full Try Session format; household materials; age 10+; 15--30 minutes; THE CONNECTION paragraph links to \param{MISSION\_NAME} \\
+\textcolor{intermediate}{\textbf{Problem Set (I)}} & 3--5 problems; calculation or classification; worked solutions included; real numbers from Part B where possible \\
+\textcolor{advanced}{\textbf{Investigation (A)}} & Open-ended data investigation; references an active dataset from Part B Module 6; no single correct answer; student formulates a hypothesis and tests it \\
+\textcolor{novice}{\textcolor{intermediate}{\textcolor{advanced}{\textbf{Discussion Questions}}}} & 2 discussion questions per concept-tier; open-ended; suitable for solo reflection or group discussion; no right answer \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Claude Teaching Scripts (Opus)}
+
+Wave 2 is entirely Opus. The CRAFT-PED (Opus-powered FLIGHT role) reads all W1 study guides and exercises for all concepts and produces:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{accent}
+\tableheader{Teaching Script Component} & \tableheader{Description} \\
+\midrule
+Canonical explanations $\times$ 3 tiers & One explanation per tier per concept; matches study guide but optimized for conversational delivery (not reading-from-page) \\
+Misconception map & At minimum 2 misconceptions per concept; each corrected with evidence sourced to Part B; phrased non-judgmentally \\
+Question-response patterns & At minimum 1 pattern per tier; maps trigger question type to Claude's response structure \\
+Escalation signals & Observable student behaviors that indicate readiness to advance tier; Claude uses these to offer ``if you want to go deeper...'' \\
+Boundary handling script & Standard template for when student asks beyond documented results; mission-specific fill \\
+Analogy quality review & Opus reviews Track A analogies; replaces any that are inaccurate, culturally narrow, or condescending \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Wave 2 Go Condition:} Teaching scripts complete for all concepts; all misconceptions confirmed against Part B sourced results (no invented corrections); analogy review complete; CAPCOM notified.
+
+\subsection{Wave 3: Assessment, CK Deposit \& Release}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Gate} \\
+\midrule
+Assessment items (2--4 per concept-tier) & EXEC-ASSESS & Items map to mastery condition; no trick questions \\
+Mastery rubrics (one per concept-tier) & EXEC-ASSESS & One-sentence; observable; student-centric language \\
+CK YAML entries (all concepts) & EXEC-ASSESS & Schema validates; primary + secondary dept fields \\
+Cross-department summary entries & EXEC-ASSESS & One-paragraph summary per secondary department link \\
+Cross-mission learning links (Module 6) & CRAFT-CONCEPT & At least one per overlapping concept; verified against cross-mission list from W0 \\
+Release packaging & LOG & All files at correct output path; versioned correctly \\
+VERIFY spot-check & VERIFY & 10 random factual claims in study guides traced to Part B \\
+CAPCOM review & CAPCOM & Human approval before release tag \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Concept batching:} Wave 1A processes all concepts for one tier before switching to the next. The study guide format and CK department context are cached across all concepts in that tier.
+  \item \textbf{Mission context prefix:} All Wave 1 contexts begin with the Part B mission summary (name, era, primary science, key discoveries). Cache hit on this prefix reduces cost across all parallel concept runs.
+  \item \textbf{Try Session analogy library:} The W0 agent pre-generates a list of 10--15 household Try Session candidates matched to the concept inventory. EXEC-EXERCISE selects from this list rather than generating from scratch per concept.
+  \item \textbf{Wave 2 Opus batching:} All concept teaching scripts are produced in a single Opus context window, enabling cross-concept consistency (the same analogy or phrasing doesn't appear in two different scripts).
+  \item \textbf{Cross-mission deduplication:} Concepts flagged as overlapping with prior Part C releases skip full study guide production and produce cross-links only --- saving $\sim$15--20K tokens per shared concept.
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (K)} & \tableheader{Sonnet (K)} & \tableheader{Haiku (K)} \\
+\midrule
+Wave 0 & --- & 8 & 2 \\
+Wave 1A (study guides) & --- & 82 & --- \\
+Wave 1B (exercises) & --- & 54 & --- \\
+Wave 2 (teaching scripts) & 40 & --- & --- \\
+Wave 3 (assessment + CK) & --- & 42 & 4 \\
+Contingency (10\%) & 4 & 18 & 1 \\
+\midrule
+\textbf{Total} & \textbf{44K} & \textbf{204K} & \textbf{7K} \\
+\multicolumn{3}{r}{\textbf{Grand Total:}} & \textbf{$\sim$255K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH — {MISSION_NAME} EDUCATION PACK
+==================================================
+
+PART B RELEASE ({MISSION_SLUG} complete)
+  ↓
+W0: CONCEPT INVENTORY + LEARNING GRAPH
+    (CRAFT-CONCEPT + BUDGET/LOG)
+  ↓
+  +──────────────────┬─────────────────────+
+  |                  |                     |
+W1A: NOVICE       W1A: INTER          W1A: ADVANCED
+ STUDY GUIDES      STUDY GUIDES         STUDY GUIDES
+ (EXEC-GUIDE)      (EXEC-GUIDE)         (EXEC-GUIDE)
+  |                  |                     |
+  +──────────────────┼─────────────────────+
+  |                  |
+W1B: TRY SESSIONS  W1B: PROBLEM SETS
+     (EXEC-EXER)        (EXEC-EXER)
+  |                  |
+  +──────────────────+
+         |
+  [SYNC: All W1 complete]
+         |
+  W2: CLAUDE TEACHING SCRIPTS (Opus — CRAFT-PED)
+      Canonical explanations × tier × concept
+      Misconception maps + Q-response patterns
+         |
+  W3: ASSESSMENT + CK YAML + CROSS-LINKS
+      (EXEC-ASSESS + CRAFT-CONCEPT)
+         |
+  W3B: CAPCOM GATE (Human review)
+         |
+  RELEASE: v1.50.{MISSION_SLUG}.EDU
+  → .planning/outputs/missions/{MISSION_SLUG}/edu/
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Description} \\
+\midrule
+Safety-Critical & 6 & P0 & BLOCK & Science accuracy, age safety, no life claims \\
+Core Completeness & 12 & P1 & BLOCK & One per success criterion \\
+Pedagogical Quality & 8 & P2 & REVISION & Teaching arc integrity; analogy quality \\
+Integration & 6 & P2 & REVISION & Cross-module and cross-mission consistency \\
+Edge Case & 4 & P3 & ANNOTATE & Sparse missions, active missions, disputes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK on Failure)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & No new science claims & Every factual claim in every study guide traces to Part B sourced results; zero novel science introduced in Part C \\
+SC-02 & No life-confirmation language & All astrobiology concepts use candidate/compatible/possible framing; ``life was found'' never appears \\
+SC-03 & Try Session age safety & Every Try Session verified: no open flame, no caustic chemicals, no sharp tools, no electrical hazard; explicit age rating present \\
+SC-04 & Preliminary results flagged & All concepts from active missions marked ``preliminary as of \{RUN\_DATE\}''; no preliminary result stated as confirmed \\
+SC-05 & No claim escalation across tiers & Advanced tier study guide contains no factual claims not present (in simpler form) in the Novice guide \\
+SC-06 & Misconception corrections sourced & Every misconception correction cites a specific Part B source; no invented corrections \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Pedagogical Quality Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Quality Check} & \tableheader{Acceptance Standard} \\
+\midrule
+PQ-01 & Novice analogy accuracy & Each Novice analogy is physically accurate (not just memorable); Opus spot-checks 3 analogies per run \\
+PQ-02 & Teaching arc completeness & Every concept has all four stages (A/B/C/D) at every tier before release \\
+PQ-03 & Try Session connectedness & THE CONNECTION paragraph in each Try Session explicitly names the instrument from \param{MISSION\_NAME} \\
+PQ-04 & Discussion question openness & No discussion question has a factually correct single answer; Opus reviews all questions \\
+PQ-05 & Mastery condition specificity & Each mastery condition uses action language (``student can explain...'', ``student can calculate...'') not passive (``student knows...'') \\
+PQ-06 & Escalation signal observability & Every escalation signal describes an observable student behavior, not an internal state \\
+PQ-07 & Claude script conversational tone & Teaching scripts read naturally when read aloud; no encyclopedia-style opening sentences \\
+PQ-08 & Vocabulary box accessibility & Every Novice vocabulary box word is defined without using the defined word or another jargon term \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Integration Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Cross-Module Check} & \tableheader{Expected Result} \\
+\midrule
+IN-01 & Study guide $\to$ Claude script consistency & The one-sentence takeaway in each study guide matches the Novice canonical explanation in the Claude script \\
+IN-02 & Learning graph $\to$ prerequisite honoring & No Intermediate study guide uses a concept not introduced in a prerequisite Novice guide \\
+IN-03 & Try Session $\to$ concept alignment & Each Try Session maps to exactly one concept in the Module 2 learning graph; no orphan activities \\
+IN-04 & Assessment $\to$ mastery condition alignment & Every assessment item can be answered by a student who has met the stated mastery condition \\
+IN-05 & CK YAML $\to$ learning graph consistency & YAML \texttt{prereqs} fields match Module 2 prerequisite edges; no discrepancies \\
+IN-06 & Cross-mission link validity & Every cross-mission link references a real concept slug from a real released Part C document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{5cm}L{3cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1 & All Part B concepts in inventory + CK assigned & CF-01, IN-05 & TBD \\
+SC2 & Learning graph valid; 3 tracks; entry/adv conditions & CF-02, IN-02 & TBD \\
+SC3 & 3-tier differentiation per primary concept & CF-03, IN-02 & TBD \\
+SC4 & Study guide: analogy + data + takeaway & CF-04, PQ-01, PQ-07 & TBD \\
+SC5 & Try Session per primary concept at Novice & CF-05, SC-03, PQ-03 & TBD \\
+SC6 & Claude scripts: 2+ misconceptions sourced & CF-06, SC-06, PQ-07 & TBD \\
+SC7 & 2--4 assessment items; mastery condition & CF-07, IN-04, PQ-05 & TBD \\
+SC8 & All claims trace to Part B & SC-01, SC-05 & TBD \\
+SC9 & CK YAML entries validate; dept fields populated & CF-09, IN-05 & TBD \\
+SC10 & Cross-mission links per overlapping concept & CF-10, IN-06 & TBD \\
+SC11 & Full teaching arc (A/B/C/D) complete per concept & PQ-02, CF-11 & TBD \\
+SC12 & Release versioned correctly; path correct & CF-12 & TBD \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent (PNW Naming)} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & RAVEN & Mission direction; Wave 2 pedagogy oversight; analogy quality judgment; go/no-go gates \\
+PLAN & SALMON & Wave decomposition; parallel track optimization; dependency management \\
+CRAFT-PED & OWL & Pedagogical design; Claude teaching script authorship; misconception identification; escalation pathways \\
+CRAFT-CONCEPT & EAGLE & Concept taxonomy; learning graph construction; CK department mapping; cross-mission linking \\
+EXEC-GUIDE & CEDAR & Study guide production — all tiers (Novice, Intermediate, Advanced) \\
+EXEC-EXERCISE & HEMLOCK & Try Session writing; problem set generation; discussion question authorship \\
+EXEC-ASSESS & ALDER & Assessment item writing; mastery rubrics; CK YAML entries; cross-department summaries \\
+VERIFY & HAWK & Factual claim tracing to Part B; safety test execution; pedagogical quality spot-check \\
+INTEG & HERON & Cross-module consistency; learning graph $\to$ YAML alignment; Try Session $\to$ concept mapping \\
+CAPCOM & FOXGLOVE & Human-in-the-loop gate; revision loop management; release approval \\
+BUDGET & WREN & Token tracking; science-volume calibration; concept-batching optimization \\
+LOG & MARTIN & Release packaging; YAML scaffolding; commit messages; output path management \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Example Output: Worked Concept (Illustrative)}
+
+The following shows what the Part C deliverables look like for one concept at Novice tier. This is not a real deliverable --- it illustrates the expected output format for an executing agent.
+
+\begin{samplebox}{STUDY GUIDE SAMPLE: Novice Tier — Enceladus Subsurface Ocean [Cassini Part C]}
+\textbf{The Discovery.} NASA's Cassini spacecraft discovered something remarkable about Saturn's small moon Enceladus: beneath its icy shell, there is a global ocean of liquid water. Scientists know this because Cassini flew through enormous plumes of water vapor shooting out from cracks in Enceladus's south pole --- and found that the water contained salt, silica particles, and organic molecules.
+
+\textbf{Analogy.} Imagine cracking the shell of a hard-boiled egg and finding that the egg white inside is still liquid. The shell is Enceladus's ice crust. The liquid inside is the ocean. The ``crack'' at the south pole is where the pressure from below pushes water out into space.
+
+\textbf{What Cassini Measured.} The Ion and Neutral Mass Spectrometer (INMS) aboard Cassini analyzed the plume material in 2005. It found water vapor, carbon dioxide, and methane --- the ingredients associated with life as we know it.
+
+\textbf{One Thing to Remember:} \textit{Enceladus has a liquid ocean beneath its ice --- and that ocean contains the chemical ingredients that life uses on Earth.}
+
+\textbf{Vocabulary:} \textbf{plume} (a jet of material shooting out from a surface); \textbf{subsurface} (beneath the surface); \textbf{organic molecule} (a carbon-containing chemical compound, the building blocks of life).
+\end{samplebox}
+
+\begin{trybox}{TRY SESSION: Feel the Pressure — Understanding Enceladus's Geysers}
+\textbf{Concept:} Enceladus Subsurface Ocean | \textbf{Tier:} Novice | \textbf{Time:} 20 min | \textbf{Materials:} A plastic bag with a zip seal, water, and your hands.
+
+\textbf{The Setup:} Enceladus shoots geysers of water into space because liquid water deep inside the moon is under pressure --- squeezing it upward through cracks in the ice. You're going to feel that same kind of pressure right now.
+
+\textbf{Steps:} 1. Fill the plastic bag halfway with water and seal it. 2. Hold it in both hands. 3. Squeeze gently from the sides. Watch what happens at the corners. 4. Squeeze harder. Where does the water try to go? 5. Use your thumb to press a small dimple into the bag surface. What do you feel pushing back?
+
+\textbf{The Connection:} The water inside the bag is pushing on every surface equally --- that's pressure. Inside Enceladus, the same thing happens. Warm liquid water, heated by tidal forces from Saturn's gravity, pushes against the ice shell from below. Where the ice is thinnest (the south pole cracks), the water escapes as vapor --- creating the geysers that Cassini flew through.
+
+\textbf{What to Think About:} If you were designing a spacecraft to detect an ocean under ice on another world, what would you look for? (Hint: Cassini wasn't even designed to find the ocean --- it discovered the geysers by accident.)
+\end{trybox}
+
+\begin{claudebox}
+\textbf{Misconception:} ``If Enceladus has water, it must have life.''\\[0.4em]
+\textbf{Claude's correction:} ``Water is necessary for life as we know it, but not sufficient. What Cassini found is that Enceladus has liquid water, organic chemicals, and a heat source --- all the \textit{ingredients} that life uses on Earth. But having ingredients doesn't mean the recipe is finished. Scientists call Enceladus a \textit{candidate for habitability} --- a place where life might be possible. Whether life actually exists there is something we don't know yet, and answering it would require a future mission to collect and analyze samples directly from the plumes.''\\[0.4em]
+\textbf{Source:} Waite et al., Science, 2017 (confirmed in Part B Cassini release).
+\end{claudebox}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Squadron (12 roles) \\
+Est. Token Budget (median mission) & $\sim$255K \\
+Est. Token Budget (flagship, 20+ concepts) & $\sim$400K \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Context Windows per Run & 5--7 \\
+Wave Structure & 0, 1A/1B (parallel), 2 (Opus), 3, 3B (CAPCOM) \\
+Safety-Critical Gates & 6 BLOCK tests \\
+Pedagogical Quality Tests & 8 REVISION gates \\
+Output per Run & Study guides (3 tiers $\times$ N concepts) + Try Sessions + Problem sets + Discussion questions + Claude teaching scripts + Assessments + CK YAML entries \\
+Release Version & \texttt{v1.50.\param{MISSION\_SLUG}.EDU} \\
+Output Path & \texttt{.planning/outputs/missions/\param{MISSION\_SLUG}/edu/} \\
+CK Department Target & Space Science and cross-department links \\
+Parallelism & Independent per mission; run after Part B completes \\
+Resumability & Tracked in \texttt{part-c-progress.json} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``The best moment in any science is the moment a student looks at data and says: that's strange. That's not what I expected. What's going on?''}\\[0.5em]
+The same thing happened aboard Cassini when the INMS instrument smelled water vapor where models predicted vacuum. The same thing happened to Voyager's navigation team when they saw a volcanic eruption on Io in a photograph taken for an unrelated purpose. The same thing happens in every classroom where a student gets an unexpected result from a Try Session and starts asking the right question.\\[0.5em]
+Part C exists to manufacture that moment --- deliberately, at scale, for every mission in NASA's 68-year archive. Not to deliver the answer, but to hand the student the data and ask: \textit{what do you notice?} Claude is there to hear the answer, and help them go further.\\[0.5em]
+\textbf{Teach the noticing. The science follows.}
+\end{quotebox}
+
+\end{document}

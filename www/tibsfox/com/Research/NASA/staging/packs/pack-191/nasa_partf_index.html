@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So You Want to Be an Astronaut — NASA Mission Operations — GSD Part F</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1A237E;
+    --secondary: #BF360C;
+    --tertiary: #004D40;
+    --accent: #263238;
+    --telemetry: #00C853;
+    --nominal: #1B5E20;
+    --alert: #D32F2F;
+    --console-bg: #0D1B2A;
+    --console-fg: #A8D5A2;
+    --light-primary: #E8EAF6;
+    --light-tertiary: #E0F2F1;
+    --light-secondary: #FBE9E7;
+    --border: #BDBDBD;
+    --row-gray: #F5F5F5;
+    --subtle: #757575;
+    --text: #212121;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: #EEF2FF;
+    min-height: 100vh;
+  }
+
+  /* Header — mission control aesthetic */
+  header {
+    background: linear-gradient(160deg, #050A1A 0%, var(--primary) 55%, #1C2C7A 100%);
+    border-bottom: 4px solid var(--secondary);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Scan-line effect */
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,200,100,0.03) 3px,
+      rgba(0,200,100,0.03) 4px
+    );
+    pointer-events: none;
+  }
+
+  .header-inner {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pipeline-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .step {
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+
+  .step-done { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.35); }
+  .step-active { background: var(--secondary); color: white; }
+  .step-next { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.25); }
+  .arrow { color: rgba(255,255,255,0.18); font-size: 0.75rem; }
+
+  .eyebrow {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--telemetry);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    color: white;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  header h1 em {
+    color: rgba(180, 200, 255, 0.82);
+    font-style: italic;
+    font-size: 0.95rem;
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+
+  .discipline-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0.8rem 0;
+  }
+
+  .dtag {
+    font-size: 0.62rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .dtag-ops { background: rgba(26,35,126,0.5); border: 1px solid rgba(100,130,255,0.4); color: rgba(180,200,255,0.9); }
+  .dtag-hot { background: rgba(191,54,12,0.4); border: 1px solid var(--secondary); color: rgba(255,180,130,0.9); }
+  .dtag-teal { background: rgba(0,77,64,0.4); border: 1px solid var(--tertiary); color: rgba(130,255,200,0.9); }
+  .dtag-sim { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.55); }
+
+  .param-line {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(0,200,100,0.8);
+    background: rgba(0,0,0,0.5);
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 3px;
+    margin-top: 0.4rem;
+    border-left: 2px solid var(--telemetry);
+  }
+
+  /* Main */
+  main { max-width: 940px; margin: 0 auto; padding: 2rem; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; margin-bottom: 2rem; }
+  @media(max-width:700px) { .stats { grid-template-columns: repeat(3,1fr); } }
+
+  .stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--primary);
+    border-radius: 4px;
+    padding: 0.7rem 0.5rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(26,35,126,0.08);
+  }
+
+  .stat.orange { border-top-color: var(--secondary); }
+  .stat.teal { border-top-color: var(--tertiary); }
+  .stat.green { border-top-color: var(--nominal); }
+
+  .stat .val {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Libre Baskerville', serif;
+    display: block;
+  }
+
+  .stat.orange .val { color: var(--secondary); }
+  .stat.teal .val { color: var(--tertiary); }
+  .stat.green .val { color: var(--nominal); }
+
+  .stat .lbl {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--subtle);
+    margin-top: 0.2rem;
+  }
+
+  /* Section headings */
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--light-primary);
+  }
+
+  /* Three simulation platform cards */
+  .sim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; }
+  @media(max-width:600px) { .sim-grid { grid-template-columns: 1fr; } }
+
+  .sim-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border-top: 3px solid var(--primary);
+  }
+
+  .sim-card .sc-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+  .sim-card .sc-name { font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 0.3rem; }
+  .sim-card .sc-sub { font-size: 0.68rem; color: var(--subtle); margin-bottom: 0.4rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  .sim-card .sc-desc { font-size: 0.73rem; color: #444; line-height: 1.45; }
+  .sim-card .sc-tech { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--tertiary); margin-top: 0.4rem; background: var(--light-tertiary); padding: 0.2rem 0.5rem; border-radius: 2px; display: inline-block; }
+
+  /* CAPCOM console preview */
+  .console-preview {
+    background: var(--console-bg);
+    border: 1px solid var(--telemetry);
+    border-radius: 5px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--console-fg);
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  .console-preview .c-header {
+    color: rgba(0,200,100,0.5);
+    font-size: 0.58rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+  }
+
+  .console-preview .go { color: #00E676; font-weight: 700; }
+  .console-preview .nogo { color: #FF5252; font-weight: 700; }
+  .console-preview .hold { color: #FFD740; font-weight: 700; }
+
+  /* Hardware build cards */
+  .hw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; }
+  @media(max-width:600px) { .hw-grid { grid-template-columns: 1fr; } }
+
+  .hw-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  .hw-card .hw-level { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--subtle); font-weight: 700; margin-bottom: 0.3rem; }
+  .hw-card .hw-name { font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 0.2rem; }
+  .hw-card .hw-price { font-size: 1.1rem; font-weight: 700; color: var(--nominal); font-family: 'Libre Baskerville', serif; margin-bottom: 0.4rem; }
+  .hw-card .hw-desc { font-size: 0.72rem; color: #444; line-height: 1.4; }
+
+  /* File cards */
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  @media(max-width:580px) { .files { grid-template-columns: 1fr; } }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: 5px;
+    padding: 1.2rem;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    box-shadow: 0 2px 5px rgba(26,35,126,0.07);
+    transition: all 0.2s;
+  }
+
+  .card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(26,35,126,0.15); border-left-color: var(--secondary); }
+
+  .card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+  .card .type { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--subtle); font-weight: 700; margin-bottom: 0.2rem; }
+  .card .name { font-size: 0.9rem; font-weight: 700; color: var(--primary); font-family: 'Libre Baskerville', serif; margin-bottom: 0.3rem; }
+  .card .desc { font-size: 0.75rem; color: var(--subtle); line-height: 1.45; }
+
+  /* Stage cards */
+  .stage { background: white; border: 1px solid var(--border); border-radius: 5px; margin-bottom: 0.8rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .sh { padding: 0.55rem 1rem; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: white; }
+  .sh-1 { background: var(--primary); }
+  .sh-2 { background: var(--secondary); }
+  .sh-3 { background: var(--accent); }
+  .sb { padding: 0.7rem 1rem; }
+  .items { list-style: none; padding: 0; }
+  .items li { font-size: 0.77rem; padding: 0.19rem 0; color: #444; border-bottom: 1px solid #F0F0F0; display: flex; gap: 0.5rem; align-items: flex-start; }
+  .items li:last-child { border-bottom: none; }
+  .items li::before { content: '📡'; font-size: 0.58rem; flex-shrink: 0; margin-top: 0.18em; }
+
+  /* Instructions */
+  .instructions { background: var(--light-primary); border: 1px solid rgba(26,35,126,0.2); border-radius: 5px; padding: 1.2rem 1.5rem; margin-bottom: 1rem; }
+  .instructions ol { padding-left: 1.2rem; margin-top: 0.5rem; }
+  .instructions li { font-size: 0.78rem; padding: 0.22rem 0; color: #333; line-height: 1.5; }
+
+  pre { background: var(--console-bg); color: var(--console-fg); border-radius: 4px; padding: 0.8rem 1rem; font-size: 0.68rem; overflow-x: auto; font-family: 'DM Mono', monospace; margin-top: 0.6rem; }
+  code { background: var(--light-primary); color: var(--primary); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.77em; font-family: 'DM Mono', monospace; border: 1px solid rgba(26,35,126,0.2); }
+
+  /* Closing */
+  .closing {
+    background: linear-gradient(135deg, #050A1A 0%, var(--primary) 100%);
+    color: white;
+    border-radius: 6px;
+    padding: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+    border-top: 3px solid var(--secondary);
+  }
+
+  .closing::after {
+    content: 'GO';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    font-weight: 700;
+    font-family: 'DM Mono', monospace;
+    color: rgba(0,200,100,0.06);
+    pointer-events: none;
+  }
+
+  .closing blockquote { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.86rem; line-height: 1.75; margin-bottom: 0.8rem; opacity: 0.9; max-width: 660px; }
+  .closing .callout { font-size: 0.82rem; font-weight: 700; color: rgba(0,220,100,0.85); }
+  .closing .attr { font-size: 0.63rem; opacity: 0.4; margin-top: 0.5rem; }
+
+  footer { background: #050A1A; color: rgba(255,255,255,0.28); text-align: center; padding: 1.2rem; font-size: 0.64rem; letter-spacing: 0.08em; margin-top: 2rem; }
+  .green-t { color: rgba(0,200,100,0.7); }
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+  <div class="pipeline-bar">
+    <span class="step step-done">A ✓</span><span class="arrow">→</span>
+    <span class="step step-done">B ✓</span><span class="arrow">→</span>
+    <span class="step step-done">C ✓</span><span class="arrow">→</span>
+    <span class="step step-done">D ✓</span><span class="arrow">→</span>
+    <span class="step step-done">E ✓</span><span class="arrow">→</span>
+    <span class="step step-active">F: Mission Ops ◀</span>
+    <span class="arrow">→</span>
+    <span class="step step-next">v1.50.{SLUG}.OPS</span>
+  </div>
+  <p class="eyebrow">T-00:00:00 — GSD Part F — Mission Control</p>
+  <h1>
+    <em>So you want to be an astronaut.</em>
+    NASA Mission Operations Deep Dive
+  </h1>
+  <div class="discipline-row">
+    <span class="dtag dtag-hot">Astronaut Requirements</span>
+    <span class="dtag dtag-ops">CAPCOM Operations</span>
+    <span class="dtag dtag-teal">Real-Time Telemetry</span>
+    <span class="dtag dtag-sim">Minecraft Logistics</span>
+    <span class="dtag dtag-sim">Blender 3D</span>
+    <span class="dtag dtag-sim">Unreal Engine</span>
+    <span class="dtag dtag-teal">DIY Hardware</span>
+    <span class="dtag dtag-hot">AI CAPCOM</span>
+  </div>
+  <div class="param-line">Input: {MISSION_NAME} → Crew reqs · Timeline · CAPCOM scripts · Simulations → v1.50.{SLUG}.OPS</div>
+</div>
+</header>
+
+<main>
+
+  <div class="stats">
+    <div class="stat"><span class="val">8</span><div class="lbl">Modules</div></div>
+    <div class="stat orange"><span class="val">30</span><div class="lbl">Pages</div></div>
+    <div class="stat teal"><span class="val">5+3</span><div class="lbl">W1+W2 Tracks</div></div>
+    <div class="stat"><span class="val">~361K</span><div class="lbl">Tokens/Run</div></div>
+    <div class="stat green"><span class="val">22</span><div class="lbl">Roles</div></div>
+    <div class="stat orange"><span class="val">7</span><div class="lbl">New Skills</div></div>
+  </div>
+
+  <h2>Download Files</h2>
+
+  <div class="files">
+    <a class="card" href="nasa_partf_template.pdf" download>
+      <span class="icon">🚀</span>
+      <div class="type">PDF Template</div>
+      <div class="name">nasa_partf_template.pdf</div>
+      <div class="desc">30-page mission operations template. 8 modules, 5-track Wave 1, three simulation platforms, CAPCOM protocol reference, AI CAPCOM spec, DIY hardware guides, 22-role Mission Control crew manifest.</div>
+    </a>
+    <a class="card" href="nasa_partf_template.tex" download>
+      <span class="icon">📐</span>
+      <div class="type">LaTeX Source</div>
+      <div class="name">nasa_partf_template.tex</div>
+      <div class="desc">Full XeLaTeX source. Mission Control color scheme: deep indigo + ignition orange + telemetry teal. Six custom environments: capcombox (console green), telebox, simplatbox, hwbox, missionbox, quotebox.</div>
+    </a>
+  </div>
+
+  <h2>🖥 CAPCOM Protocol Preview</h2>
+
+  <div class="console-preview">
+    <div class="c-header">Go/No-Go Poll — Apollo 11 Lunar Descent (representative)</div>
+    FLIGHT: "All stations, GO/NO-GO for powered descent. GUIDO?"<br>
+    GUIDO:  "<span class="go">GO.</span>"<br>
+    FIDO:   "<span class="go">GO.</span>"<br>
+    PROPULSION: "<span class="go">GO.</span>"<br>
+    SURGEON: "<span class="go">GO.</span>" &nbsp;&nbsp;&nbsp;// Crew biomed nominal<br>
+    CAPCOM: "Eagle, Houston. You are GO for PDI."<br>
+    ARMSTRONG: "Roger, Houston. GO for PDI."<br><br>
+    <span style="color:rgba(255,100,100,0.7);">--- ALARM: 1202 program alarm ---</span><br>
+    FLIGHT: "GUIDO, what's that alarm?"<br>
+    GUIDO:  "It's executive overflow. We can continue."<br>
+    FLIGHT: "We're GO on that alarm. CAPCOM, advise crew."<br>
+    CAPCOM: "Eagle, we're GO on that alarm. <span class="go">GO.</span>"
+  </div>
+
+  <h2>🌐 Three Simulation Platforms</h2>
+
+  <div class="sim-grid">
+    <div class="sim-card">
+      <span class="sc-icon">🟩</span>
+      <div class="sc-name">Minecraft</div>
+      <div class="sc-sub">Logistics &amp; Resource Flow</div>
+      <div class="sc-desc">Block-based resource model maps directly to spacecraft budgets. Mass = cobblestone, power = redstone, propellant = water. Students feel scarcity trade-offs viscerally.</div>
+      <div class="sc-tech">mcpi / mcrcon Python bridge</div>
+    </div>
+    <div class="sim-card">
+      <span class="sc-icon">🔵</span>
+      <div class="sc-name">Blender</div>
+      <div class="sc-sub">Scientific 3D Visualization</div>
+      <div class="sc-desc">Python bpy scripts fetch real JPL Horizons ephemeris, animate spacecraft trajectory, simulate instrument pointing. Produces publication-quality mission arc video.</div>
+      <div class="sc-tech">bpy + JPL Horizons REST API</div>
+    </div>
+    <div class="sim-card">
+      <span class="sc-icon">🟣</span>
+      <div class="sc-name">Unreal Engine 5</div>
+      <div class="sc-sub">Real-Time Operations Sim</div>
+      <div class="sc-desc">Blueprint telemetry dashboard with WebSocket/serial ingestion. VR CAPCOM console prototype. Hardware-in-the-loop: Arduino buttons drive simulation state in real time.</div>
+      <div class="sc-tech">UE5 Blueprints + Python + OpenXR</div>
+    </div>
+  </div>
+
+  <h2>🔧 DIY Hardware Build Guides</h2>
+
+  <div class="hw-grid">
+    <div class="hw-card">
+      <div class="hw-level">Level 1 — Beginner</div>
+      <div class="hw-name">Telemetry Display</div>
+      <div class="hw-price">~$25</div>
+      <div class="hw-desc">Arduino Uno + 16×2 LCD + 3 LEDs. Displays 4 spacecraft parameters from a Python simulation script over USB serial. When a parameter "goes red," the LED fires and student must respond.</div>
+    </div>
+    <div class="hw-card">
+      <div class="hw-level">Level 2 — Intermediate</div>
+      <div class="hw-name">Mission Console</div>
+      <div class="hw-price">~$80</div>
+      <div class="hw-desc">Raspberry Pi 4 + 7" touchscreen + 6 physical buttons + 12 LEDs. Full Python/Pygame dashboard. Buttons emit MQTT messages into simulation. Bidirectional telemetry loop.</div>
+    </div>
+    <div class="hw-card">
+      <div class="hw-level">Level 3 — Advanced</div>
+      <div class="hw-name">Hardware-in-the-Loop</div>
+      <div class="hw-price">~$200</div>
+      <div class="hw-desc">RPi 5 + custom PCB with encoders, analog gauges, toggle panel. Serial telemetry bridge to Unreal Engine. Modular I²C sub-panels for each Mission Control station.</div>
+    </div>
+  </div>
+
+  <h2>📦 Contents Breakdown</h2>
+
+  <div class="stage">
+    <div class="sh sh-1">Stage 1 — Vision Document</div>
+    <div class="sb">
+      <ul class="items">
+        <li>Dual-track architecture table: Crewed (astronaut roles, crew autonomy) vs. Autonomous (fault protection, command authority) — same 8 modules, different content per track</li>
+        <li>Three-layer operational stack: Hardware Layer → Operations Layer → Human Layer, with content mapping for each</li>
+        <li>8-module architecture: Crew/Autonomy, Mission Architecture, CAPCOM+Telemetry, Long-Duration, Minecraft, Blender+Unreal, DIY Hardware, Career Paths+Skills</li>
+        <li>Full chipset YAML for Part F operations-specific roles</li>
+        <li>22-role Mission Control crew manifest with PNW naming (Raven, Salmon, Owl, Eagle, Cedar, Hemlock, Alder, Fir, Spruce, Aspen, Hawk, Heron, Otter, Foxglove, Wren, Martin, Bear, Wolf, Crane, Marten, Osprey, Kingfisher)</li>
+        <li>12 success criteria; through-line: "Tough and Competent" — the Gene Kranz standard</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="sh sh-2">Stage 2 — Research Reference</div>
+    <div class="sb">
+      <ul class="items">
+        <li>Input bundle schema: crew_roles array, mission_phases, fault_scenarios, telemetry_archive_url, nasa_3d_model_url, minecraft_analogy field</li>
+        <li>CAPCOM standard call format: [Call Sign], [Station], [Message Type], [Content], [Over/Standing By] — with emergency escalation sequence and Go/No-Go poll template</li>
+        <li>Telemetry channel taxonomy: housekeeping (1–10 Hz), engineering (event-driven), science (scheduled downlink) + DIY simulation JSON/CSV format specification</li>
+        <li>Three simulation platform technical specs: Minecraft (mcpi/mcrcon resource mapping YAML), Blender (bpy + Horizons workflow), Unreal Engine (WebSocket + serial telemetry, VR console spec)</li>
+        <li>Three DIY hardware build guides with full component lists and cost targets</li>
+        <li>AI CAPCOM design specification: Tier 1 (fully autonomous), Tier 2 (human-supervised), Tier 3 (human-required) + escalation protocol + gsd-skill-creator implementation pattern</li>
+        <li>Long-duration mission management framework: 4 phases (Primary, Extended, Deep Extended, End-of-Mission) + team continuity protocol</li>
+        <li>New skills reference table: 7 skills (capcom-protocol-generator, telemetry-dashboard-builder, mission-timeline-planner, spacecraft-fault-analyzer, minecraft-mission-modeler, blender-orbit-animator, ai-capcom-monitor)</li>
+        <li>6 safety/accuracy rules including hardware safety (BLOCK on mains voltage), medical standards, classified procedure boundary</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="sh sh-3">Stage 3 — Mission Package</div>
+    <div class="sb">
+      <ul class="items">
+        <li>17 deliverables from crew requirements through CK YAML and release artifact</li>
+        <li>Token budget: ~361K median; ~480K crewed flagships; ~250K short robotic missions</li>
+        <li>Wave 1: 5 parallel tracks (Crew/Autonomy, CAPCOM+Telemetry, Long-Duration, Timeline, Skills) — most simultaneous tracks in the series</li>
+        <li>Wave 2: 3 parallel sub-tracks (Minecraft, Blender, Unreal/Hardware) — all Python scripts validated by EXEC-SIM before Wave 3</li>
+        <li>Wave 3 (Opus): AI CAPCOM architecture, career profiles, cross-module integration, long-duration strategy deepening</li>
+        <li>6 BLOCK safety tests; 8 Operational Accuracy REVISION tests including CAPCOM format check, telemetry correctness, timeline sourcing, cost target verification</li>
+        <li>7 Integration tests: CAPCOM scripts vs. timeline alignment, hardware guides vs. telemetry format, skill files vs. simulation outputs</li>
+        <li>Career profiles: Flight Director, Flight Controller (GUIDO/FIDO/PROPULSION), CAPCOM, Mission Planner</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How to Run Part F</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Confirm Part B complete: <code>v1.50.{MISSION_SLUG}</code> with populated <code>crew_roles</code>, <code>mission_phases</code>, and <code>fault_scenarios</code>.</li>
+      <li>Part F runs in parallel with Parts C, D, and E — all three consume Part B independently.</li>
+      <li>Run with gsd-skill-creator:<br>
+        <code>gsd run skill-creator --template nasa_partf_template.pdf --input {MISSION_SLUG}.ck.yaml --mode operations</code></li>
+      <li>Wave 0 classifies the mission type (Crewed/Autonomous/Both) and verifies the NASA 3D model URL is live.</li>
+      <li>Wave 1: five parallel tracks begin simultaneously. TOPO (Bear) monitors for overruns and reallocates if any track exceeds budget.</li>
+      <li>Wave 2: three simulation sub-tracks (Minecraft, Blender, Unreal/Hardware) run after Wave 1 skill outputs are available. All Python scripts are executed before Wave 3 proceeds.</li>
+      <li>Wave 3 (Opus): AI CAPCOM architecture, career profiles, cross-module integration, long-duration strategy review.</li>
+      <li>Wave 4 deposits 7 new skills to <code>/mnt/skills/user/</code> and <code>mission-control-chipset.yaml</code> to <code>.college/chipsets/</code>.</li>
+      <li>Approve CAPCOM Wave 4B gate. Release tagged <code>v1.50.{MISSION_SLUG}.OPS</code>.</li>
+    </ol>
+  </div>
+
+  <h2>Recompile the Template</h2>
+
+  <div class="instructions">
+    <p style="font-size:0.78rem;color:#333;margin-bottom:0.5rem;">Requires <code>amsmath</code>, <code>amssymb</code>, <code>tcolorbox</code> with <code>breakable,skins</code> library. Three XeLaTeX passes:</p>
+    <pre>xelatex -interaction=nonstopmode nasa_partf_template.tex
+xelatex -interaction=nonstopmode nasa_partf_template.tex
+xelatex -interaction=nonstopmode nasa_partf_template.tex</pre>
+    <p style="font-size:0.7rem;color:var(--subtle);margin-top:0.5rem;">Custom environments: <code>capcombox</code> (console green on dark), <code>telebox</code> (teal), <code>simplatbox</code> (blue), <code>hwbox</code> (orange), <code>missionbox</code> (graphite). Status commands: <code>\go</code>, <code>\nogo</code>, <code>\hold</code>, <code>\nominal</code>.</p>
+  </div>
+
+  <div class="closing">
+    <blockquote>"Tough and Competent." Two words Gene Kranz wrote on the whiteboard after Apollo 1. Not a slogan — a mission statement for how to operate complex systems that human lives depend on. Tough: never compromise on anything that matters. Competent: know your systems so well that when something goes wrong, you already know where to look.</blockquote>
+    <p class="callout">From launch to landing — and beyond.</p>
+    <p style="font-size:0.76rem;color:rgba(255,255,255,0.58);margin-top:0.8rem;">The Minecraft model teaches scarcity. Blender teaches orbits. Unreal Engine teaches real-time awareness.<br>The Arduino teaches what a live data stream feels like. The CAPCOM script teaches precision under pressure.</p>
+    <p class="attr">GSD Part F · NASA Mission Operations Deep Dive · March 29, 2026</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>GSD Research Mission Package — Part F · So You Want to Be an Astronaut · March 29, 2026</p>
+  <p style="margin-top:0.3rem;">Launch to Landing · CAPCOM Operations · Minecraft + Blender + Unreal Engine · DIY Hardware · <span class="green-t">Mission Control (22 roles)</span> · ~361K tokens/run</p>
+</footer>
+
+</body>
+</html>

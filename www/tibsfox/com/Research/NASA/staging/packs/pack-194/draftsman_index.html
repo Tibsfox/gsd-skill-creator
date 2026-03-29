@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>So You Want to Be a Draftsman — GSD Deep Research Mission Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --prussian: #0C2340;
+    --sienna: #A0522D;
+    --cyan: #007BA7;
+    --amber: #B06000;
+    --light-prussian: #E4EBF2;
+    --light-sienna: #F5EAE2;
+    --light-cyan: #DDF0F7;
+    --parchment: #FDFAF4;
+    --border: #BDBDBD;
+    --subtle: #757575;
+    --text: #212121;
+    --block: #B71C1C;
+    --gate: #E65100;
+    --anno: #1B5E20;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--parchment); }
+
+  /* ── Header ────────────────────────────────────── */
+  header {
+    background: linear-gradient(160deg, #030F1E 0%, var(--prussian) 50%, #1A3A5C 100%);
+    border-bottom: 3px solid var(--amber);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,123,167,0.07) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,123,167,0.07) 40px);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; z-index: 1; }
+
+  .pipeline-bar { display: flex; align-items: center; gap: 0.3rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+  .step { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 2px; font-weight: 700; font-family: 'DM Mono', monospace; }
+  .step-stage { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+  .step-active { background: var(--amber); color: #fff; }
+  .arrow { color: rgba(255,255,255,0.18); font-size: 0.7rem; }
+
+  .eyebrow { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.3em; color: rgba(160,82,45,0.9); font-weight: 700; margin-bottom: 0.5rem; font-family: 'DM Mono', monospace; }
+  header h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; color: white; line-height: 1.2; margin-bottom: 0.4rem; }
+  header h1 em { color: rgba(200,170,120,0.75); font-size: 0.85rem; display: block; font-family: 'DM Sans', sans-serif; font-weight: 300; margin-bottom: 0.3rem; font-style: italic; }
+  .subtitle { font-size: 0.9rem; color: rgba(255,255,255,0.55); margin-bottom: 0.7rem; line-height: 1.5; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.7rem 0 0.4rem; }
+  .tag { font-size: 0.58rem; padding: 0.18rem 0.6rem; border-radius: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .tag-std  { background: rgba(0,123,167,0.3); border: 1px solid var(--cyan); color: rgba(180,240,255,0.9); }
+  .tag-sim  { background: rgba(160,82,45,0.3); border: 1px solid var(--sienna); color: rgba(255,200,150,0.9); }
+  .tag-oss  { background: rgba(27,94,32,0.25); border: 1px solid #2E7D32; color: rgba(150,255,170,0.9); }
+  .tag-val  { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.45); }
+  .release { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: rgba(176,96,0,0.9); background: rgba(0,0,0,0.4); display: inline-block; padding: 0.2rem 0.7rem; border-radius: 3px; margin-top: 0.5rem; border-left: 2px solid var(--amber); }
+
+  /* ── Main ──────────────────────────────────────── */
+  main { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; margin-bottom: 2rem; }
+  @media(max-width:700px) { .stats { grid-template-columns: repeat(3,1fr); } }
+  .stat { background: white; border: 1px solid var(--border); border-top: 3px solid var(--prussian); border-radius: 4px; padding: 0.7rem 0.5rem; text-align: center; box-shadow: 0 2px 5px rgba(12,35,64,0.07); }
+  .stat.cyan { border-top-color: var(--cyan); }
+  .stat.sienna { border-top-color: var(--sienna); }
+  .stat.amber { border-top-color: var(--amber); }
+  .stat .val { font-size: 1.05rem; font-weight: 700; color: var(--prussian); font-family: 'Libre Baskerville', serif; display: block; }
+  .stat.cyan .val { color: var(--cyan); }
+  .stat.sienna .val { color: var(--sienna); }
+  .stat.amber .val { color: var(--amber); }
+  .stat .lbl { font-size: 0.54rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--subtle); margin-top: 0.2rem; }
+
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--prussian); font-size: 1.1rem; margin: 2rem 0 0.8rem; padding-bottom: 0.3rem; border-bottom: 2px solid #C8D8E8; }
+
+  /* Pipeline */
+  .pipeline { background: #0A1B2E; border: 1px solid rgba(0,123,167,0.3); border-radius: 5px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #9BBDD4; line-height: 1.7; overflow-x: auto; }
+  .pipeline .cyan { color: #5CD3F7; }
+  .pipeline .amber { color: #F4A830; }
+  .pipeline .green { color: #6BEFA0; }
+
+  /* File cards */
+  .files { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.8rem; margin-bottom: 1.5rem; }
+  @media(max-width:620px) { .files { grid-template-columns: 1fr 1fr; } }
+  .card { background: white; border: 1px solid var(--border); border-left: 4px solid var(--prussian); border-radius: 5px; padding: 1rem; text-decoration: none; color: var(--text); display: block; box-shadow: 0 2px 5px rgba(12,35,64,0.07); transition: all 0.2s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(12,35,64,0.15); border-left-color: var(--amber); }
+  .card .icon { font-size: 1.5rem; margin-bottom: 0.4rem; display: block; }
+  .card .type { font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--subtle); font-weight: 700; margin-bottom: 0.15rem; }
+  .card .name { font-size: 0.83rem; font-weight: 700; color: var(--prussian); font-family: 'Libre Baskerville', serif; margin-bottom: 0.25rem; }
+  .card .desc { font-size: 0.71rem; color: var(--subtle); line-height: 1.4; }
+
+  /* Module cards */
+  .modules { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.65rem; margin-bottom: 1.5rem; }
+  @media(max-width:700px) { .modules { grid-template-columns: 1fr 1fr; } }
+  .mod { background: white; border: 1px solid var(--border); border-radius: 5px; padding: 0.8rem; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .mod .mn { display: inline-block; background: var(--prussian); color: white; font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 2px; margin-bottom: 0.4rem; font-family: 'DM Mono', monospace; }
+  .mod .mt { font-size: 0.78rem; font-weight: 700; color: var(--prussian); margin-bottom: 0.2rem; }
+  .mod .ms { font-size: 0.66rem; color: var(--subtle); line-height: 1.35; }
+  .mod .skills { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.5rem; }
+  .mod .sk { font-size: 0.55rem; background: var(--light-prussian); color: var(--prussian); border-radius: 2px; padding: 0.1rem 0.35rem; font-family: 'DM Mono', monospace; font-weight: 600; }
+
+  /* Standards reference */
+  .stds { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.6rem; margin-bottom: 1.5rem; }
+  @media(max-width:600px) { .stds { grid-template-columns: 1fr; } }
+  .std-card { background: white; border: 1px solid var(--border); border-left: 4px solid var(--cyan); border-radius: 4px; padding: 0.7rem 0.9rem; }
+  .std-card .label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--cyan); font-weight: 700; margin-bottom: 0.2rem; }
+  .std-card .name { font-size: 0.78rem; font-weight: 700; color: var(--prussian); margin-bottom: 0.15rem; }
+  .std-card .desc { font-size: 0.68rem; color: var(--subtle); line-height: 1.35; }
+
+  /* Safety tags */
+  .safety { background: #FFF8F5; border: 1px solid rgba(183,28,28,0.15); border-radius: 5px; padding: 1rem 1.3rem; margin-bottom: 1.5rem; }
+  .safety .label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--block); font-weight: 700; margin-bottom: 0.6rem; }
+  .safety-row { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.3rem 0; border-bottom: 1px solid #F0E8E8; }
+  .safety-row:last-child { border-bottom: none; }
+  .stag { font-size: 0.58rem; font-weight: 700; padding: 0.12rem 0.45rem; border-radius: 2px; flex-shrink: 0; font-family: 'DM Mono', monospace; }
+  .block-tag { background: #FFEBEE; color: var(--block); border: 1px solid #FFCDD2; }
+  .gate-tag { background: #FFF3E0; color: var(--gate); border: 1px solid #FFE0B2; }
+  .anno-tag { background: #E8F5E9; color: var(--anno); border: 1px solid #C8E6C9; }
+  .safety-row p { font-size: 0.72rem; color: #444; line-height: 1.4; }
+
+  /* Wave plan */
+  .waves { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .wave { background: white; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .wh { padding: 0.4rem 0.9rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: white; display: flex; justify-content: space-between; align-items: center; }
+  .wh-0 { background: var(--prussian); }
+  .wh-1 { background: var(--cyan); }
+  .wh-2 { background: var(--sienna); }
+  .wh-3 { background: var(--amber); }
+  .wb { padding: 0.5rem 0.9rem; font-size: 0.72rem; color: #444; line-height: 1.45; }
+  .wtok { font-family: 'DM Mono', monospace; font-size: 0.62rem; opacity: 0.75; }
+
+  /* Instructions */
+  .instructions { background: var(--light-prussian); border: 1px solid rgba(12,35,64,0.12); border-radius: 5px; padding: 1.1rem 1.4rem; margin-bottom: 1rem; }
+  .instructions ol { padding-left: 1.2rem; margin-top: 0.5rem; }
+  .instructions li { font-size: 0.78rem; padding: 0.22rem 0; color: #333; line-height: 1.5; }
+  pre { background: #0A1B2E; color: #9BBDD4; border-radius: 4px; padding: 0.8rem 1rem; font-size: 0.68rem; overflow-x: auto; font-family: 'DM Mono', monospace; margin-top: 0.6rem; }
+  code { background: var(--light-prussian); color: var(--prussian); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.77em; font-family: 'DM Mono', monospace; border: 1px solid rgba(12,35,64,0.12); }
+
+  /* Closing */
+  .closing { background: linear-gradient(135deg, var(--prussian), #1A3A5C); color: white; border-radius: 6px; padding: 2rem; margin-top: 2rem; position: relative; overflow: hidden; border-top: 3px solid var(--amber); }
+  .closing::after { content: '∮ ∇ ⊕ ⊥ ∥ ±'; position: absolute; right: 1.5rem; bottom: 1rem; font-size: 1.4rem; opacity: 0.06; letter-spacing: 0.3rem; font-family: 'DM Mono', monospace; }
+  .closing blockquote { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.88rem; line-height: 1.75; margin-bottom: 0.8rem; opacity: 0.9; max-width: 700px; }
+  .closing .callout { font-size: 0.82rem; font-weight: 700; color: rgba(255,200,130,0.9); }
+  .closing .attr { font-size: 0.62rem; opacity: 0.4; margin-top: 0.5rem; }
+
+  footer { background: #030F1E; color: rgba(255,255,255,0.3); text-align: center; padding: 1.2rem; font-size: 0.63rem; letter-spacing: 0.08em; margin-top: 2rem; }
+  .amber-text { color: rgba(176,96,0,0.7); }
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+  <div class="pipeline-bar">
+    <span class="step step-stage">Vision</span><span class="arrow">→</span>
+    <span class="step step-stage">Research</span><span class="arrow">→</span>
+    <span class="step step-active">Mission ◀</span>
+    <span class="arrow">→</span>
+    <span class="step step-stage">v1.50.DRAFTSMAN.DRW</span>
+  </div>
+  <p class="eyebrow">GSD Deep Research Mission Package</p>
+  <h1>
+    <em>Draw → Prove → Simulate → Build → Verify</em>
+    So You Want to Be a Draftsman
+  </h1>
+  <p class="subtitle">Blueprints · Technical Documentation · Simulation &amp; Testing Frameworks · Technical Drawing · Vector Graphics<br>
+  Scientifically accurate and mathematically provable — for real-world construction and prototype development</p>
+  <div class="tag-row">
+    <span class="tag tag-std">ASME Y14.5-2018</span>
+    <span class="tag tag-std">ISO 128-2:2020</span>
+    <span class="tag tag-sim">NASA-STD-7009B</span>
+    <span class="tag tag-oss">FreeCAD FEM</span>
+    <span class="tag tag-oss">svgwrite / ezdxf</span>
+    <span class="tag tag-val">Fleet (17 roles)</span>
+    <span class="tag tag-val">67 tests · 8 BLOCK</span>
+  </div>
+  <div class="release">v1.50.DRAFTSMAN.DRW &nbsp;·&nbsp; 28 pages &nbsp;·&nbsp; ~280K tokens &nbsp;·&nbsp; ~18 context windows</div>
+</div>
+</header>
+
+<main>
+
+  <div class="stats">
+    <div class="stat"><span class="val">6</span><div class="lbl">Research Modules</div></div>
+    <div class="stat cyan"><span class="val">7</span><div class="lbl">SKILL.md Files</div></div>
+    <div class="stat sienna"><span class="val">14</span><div class="lbl">GD&T Symbols</div></div>
+    <div class="stat amber"><span class="val">12</span><div class="lbl">Materials</div></div>
+    <div class="stat"><span class="val">67</span><div class="lbl">Tests</div></div>
+    <div class="stat cyan"><span class="val">28pp</span><div class="lbl">PDF Pages</div></div>
+  </div>
+
+  <h2>Download Files</h2>
+
+  <div class="files">
+    <a class="card" href="draftsman_mission.pdf" download>
+      <span class="icon">📐</span>
+      <div class="type">Mission Package PDF</div>
+      <div class="name">draftsman_mission.pdf</div>
+      <div class="desc">28-page complete three-stage pipeline. Vision, Research Reference (GD&T tables, materials, FEA reference case, standards comparison), and Mission Package (wave plan, 67 tests, Fleet crew manifest).</div>
+    </a>
+    <a class="card" href="draftsman_mission.tex" download>
+      <span class="icon">📝</span>
+      <div class="type">LaTeX Source</div>
+      <div class="name">draftsman_mission.tex</div>
+      <div class="desc">Full XeLaTeX source. Prussian blueprint color scheme. Recompile with three-pass xelatex. Modify, extend, and re-run for updated mission packages.</div>
+    </a>
+    <a class="card" href="draftsman_index.html" download>
+      <span class="icon">🌐</span>
+      <div class="type">Index Page</div>
+      <div class="name">draftsman_index.html</div>
+      <div class="desc">This page. Blueprint grid background, Prussian/sienna/amber color scheme, module grid, wave plan, safety tags, and full usage instructions.</div>
+    </a>
+  </div>
+
+  <h2>The Pipeline</h2>
+
+  <div class="pipeline">
+<span class="cyan">DRAWING STANDARDS LAYER</span>
+  ASME Y14.5-2018 (GD\&T) ── ISO 128-2:2020 (Line Types) ── ISO 1101:2017 (GPS)
+  ISO 2768 (General Tol.) ── ISO 286-1 (IT Grades) ── NASA-STD-7009B (M\&S)
+              │
+              ▼
+<span class="cyan">PROGRAMMATIC DRAWING LAYER</span>
+  Python svgwrite / ezdxf ──────── OpenSCAD (CSG Scripting)
+  FreeCAD API (Python) ─────────── LibreCAD (2D Drafting)
+  CadQuery ────────────────────── CodeToCAD (Multi-tool)
+              │
+              ▼
+<span class="cyan">SIMULATION \&amp; TESTING LAYER</span>
+  FreeCAD FEM / CalculiX ─────── OpenFOAM (CFD)
+  NASA-STD-7009B (Level 0-4) ─── ASME V\&V 40
+  Tolerance Stackup ──────────── Materials DB (12 materials)
+              │
+              ▼
+<span class="cyan">PROTOTYPE PIPELINE LAYER</span>
+  SVG/DXF → CAM (PyCAM) → G-code → CNC / Laser / 3DP
+  BOM → Procurement → Fabrication → Inspection → NCR
+              │
+              ▼
+<span class="green">GSD COLLEGE OF KNOWLEDGE DEPOSIT</span>
+  <span class="amber">7 SKILL.md files</span>: svg-technical-drawer · blueprint-generator · gdt-annotator
+             bom-generator · tolerance-calculator · fea-pipeline · maker-blueprint
+</div>
+
+  <h2>Six Research Modules</h2>
+
+  <div class="modules">
+    <div class="mod">
+      <div class="mn">MODULE 1</div>
+      <div class="mt">Drawing Standards &amp; GD&amp;T</div>
+      <div class="ms">All 14 geometric characteristics (ASME Y14.5-2018). Tolerance stackup algebraic + RSS. ASME vs. ISO 10-difference matrix. Datum reference frames. MMC/LMC/RFS modifiers.</div>
+      <div class="skills"><span class="sk">gdt-annotator</span><span class="sk">tolerance-calculator</span></div>
+    </div>
+    <div class="mod">
+      <div class="mn">MODULE 2</div>
+      <div class="mt">Technical Documentation &amp; BOM</div>
+      <div class="ms">ISO 128 line types. ANSI title blocks (A–E formats). BOM JSON schema. Revision control pattern. Drawing tree hierarchy. Model-based definition transition.</div>
+      <div class="skills"><span class="sk">bom-generator</span></div>
+    </div>
+    <div class="mod">
+      <div class="mn">MODULE 3</div>
+      <div class="mt">Vector Graphics &amp; Programmatic Drawing</div>
+      <div class="ms">20-pattern Python drawing cookbook. svgwrite + ezdxf. CadQuery parametric. PyCAM / dxf2gcode for CNC. G-code structure. SVG coordinate system for technical drawing.</div>
+      <div class="skills"><span class="sk">svg-technical-drawer</span><span class="sk">blueprint-generator</span></div>
+    </div>
+    <div class="mod">
+      <div class="mn">MODULE 4</div>
+      <div class="mt">Simulation &amp; Testing Frameworks</div>
+      <div class="ms">FEA pipeline: FreeCAD FEM + CalculiX. Cantilever reference case (δ=0.800mm, σ=60.0MPa analytical). NASA-STD-7009B credibility Levels 0–4. ASME V&V 40. OpenFOAM CFD.</div>
+      <div class="skills"><span class="sk">fea-pipeline</span></div>
+    </div>
+    <div class="mod">
+      <div class="mn">MODULE 5</div>
+      <div class="mt">Materials Science Reference</div>
+      <div class="ms">12 materials × 5 properties (density, E, yield, UTS, CTE). IT grade table IT4–IT14 with process capability. Fastener standards. Surface finish Ra by process. NIST-sourced data.</div>
+      <div class="skills"><span class="sk">tolerance-calculator</span></div>
+    </div>
+    <div class="mod">
+      <div class="mn">MODULE 6</div>
+      <div class="mt">Prototype Development Pipeline</div>
+      <div class="ms">Drawing to physical object: DXF/SVG → CAM → G-code → fabricate → inspect. L1 $15 (hand tools) to L4 $600 (CNC router). Inspection protocol. CMM / gauge verification.</div>
+      <div class="skills"><span class="sk">maker-blueprint</span></div>
+    </div>
+  </div>
+
+  <h2>Standards Coverage</h2>
+
+  <div class="stds">
+    <div class="std-card">
+      <div class="label">ASME · US Standard</div>
+      <div class="name">Y14.5-2018 (R2024) — Dimensioning &amp; Tolerancing</div>
+      <div class="desc">14 geometric characteristic symbols, datum reference frames, material condition modifiers (MMC/LMC/RFS), tolerance zones. 2018 changes: concentricity/symmetry removed; profile now preferred for location.</div>
+    </div>
+    <div class="std-card">
+      <div class="label">ISO · International</div>
+      <div class="name">128-2:2020 — Line Conventions; 128-3 — Views &amp; Sections</div>
+      <div class="desc">2020 revision consolidated 6 former parts. Defines wide (0.5–0.7mm) and narrow (0.25–0.35mm) line widths in 2:1 ratio. First-angle (ISO) vs third-angle (ASME) projection conventions.</div>
+    </div>
+    <div class="std-card">
+      <div class="label">NASA · Simulation Credibility</div>
+      <div class="name">NASA-STD-7009B (2024) — Models &amp; Simulations</div>
+      <div class="desc">Credibility Assessment Scale (CAS) Levels 0–4. Six factors: Verification, Validation, Input Pedigree, Results Uncertainty, Use Exposure, Technical Review. Level 2 achievable for prototype FEA.</div>
+    </div>
+    <div class="std-card">
+      <div class="label">ISO · Tolerances</div>
+      <div class="name">286-1:2010 — IT Grades; 2768 — General Tolerances</div>
+      <div class="desc">IT4 (9μm, precision grinding) through IT14 (520μm, sand casting) for 25mm nominal. General tolerances for features without explicit GD&T callouts. Links tolerance to manufacturing process capability.</div>
+    </div>
+  </div>
+
+  <h2>Safety Boundaries</h2>
+
+  <div class="safety">
+    <div class="label">Safety Tests — 8 BLOCK Mandatory Pass</div>
+    <div class="safety-row"><span class="stag block-tag">BLOCK</span><p>Tolerance math must be verified analytically — every stackup calculation has a hand-computed reference case</p></div>
+    <div class="safety-row"><span class="stag block-tag">BLOCK</span><p>No drawing may specify an IT grade tighter than the stated manufacturing process can achieve</p></div>
+    <div class="safety-row"><span class="stag block-tag">BLOCK</span><p>FEA cantilever convergence: tip deflection within 2% of δ=0.800mm, peak stress within 2% of σ=60.0MPa</p></div>
+    <div class="safety-row"><span class="stag block-tag">BLOCK</span><p>All 14 GD&T characteristics documented (concentricity and symmetry correctly noted as removed in 2018)</p></div>
+    <div class="safety-row"><span class="stag gate-tag">GATE</span><p>All FEA results must explicitly state their NASA-STD-7009B credibility level before use in design decisions</p></div>
+    <div class="safety-row"><span class="stag gate-tag">GATE</span><p>All material property values cite source (NIST, MatWeb, or ASM International)</p></div>
+    <div class="safety-row"><span class="stag anno-tag">ANNOTATE</span><p>DIY builds with laser cutters, CNC routers, and power tools include PPE requirements and safety warnings</p></div>
+    <div class="safety-row"><span class="stag anno-tag">ANNOTATE</span><p>Present evidence without policy advocacy; empirical data from standards bodies only</p></div>
+  </div>
+
+  <h2>Wave Execution Plan</h2>
+
+  <div class="waves">
+    <div class="wave">
+      <div class="wh wh-0"><span>Wave 0 — Foundation (Serial)</span><span class="wtok">Haiku · 15K tokens · 1 ctx window</span></div>
+      <div class="wb">Shared schemas: BOM JSON, SKILL.md required fields, IT grade lookup. Title block SVG scaffold (ANSI A–D formats). GD&T symbol index (14 characteristics, zone type, datum flag). Drawing standards cross-reference.</div>
+    </div>
+    <div class="wave">
+      <div class="wh wh-1"><span>Wave 1 — Six Parallel Research Tracks</span><span class="wtok">Sonnet · 180K tokens · 13 ctx windows</span></div>
+      <div class="wb">Track A: GD&T reference + stackup calculator. Track B: Title block + BOM. Track C: 20-pattern drawing cookbook + CNC pipeline. Track D: FEA tutorial + NASA-7009B worksheet. Track E: Materials table (12×5). Track F: Prototype pipeline + maker builds L1–L4. All tracks run simultaneously; Track E completes first and feeds Track D materials data.</div>
+    </div>
+    <div class="wave">
+      <div class="wh wh-2"><span>Wave 2 — Opus Synthesis (Serial)</span><span class="wtok">Opus · 45K tokens · 2 ctx windows</span></div>
+      <div class="wb">Four career pathways (BLS salary data, certifications, GSD skill mapping). ASME vs. ISO 10-difference matrix. Six GSD Try Sessions (one per module; household materials feasibility). Tolerance math review. NASA-STD-7009B Level 2 worked example. Integration and safety warden review. <strong>CAPCOM gate here.</strong></div>
+    </div>
+    <div class="wave">
+      <div class="wh wh-3"><span>Wave 3 — Publication &amp; Verification (Serial)</span><span class="wtok">Sonnet · 40K tokens · 2 ctx windows</span></div>
+      <div class="wb">Deploy all 7 SKILL.md files to <code>/mnt/skills/user/</code>. Write CK YAML entries to engineering department. Generate index.html. Final PDF compilation. Release tag <code>v1.50.DRAFTSMAN.DRW</code>.</div>
+    </div>
+  </div>
+
+  <h2>How to Hand This to Claude Code</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Place <code>draftsman_mission.pdf</code> in the gsd-skill-creator project root (or reference it via the planning-bridge MCP).</li>
+      <li>Run Wave 0 first — the scaffold agent (KINGFISHER/Haiku) builds shared schemas and title block templates in under 5 minutes.</li>
+      <li>Launch all six Wave 1 tracks simultaneously — they share only the W0 schemas, so there is no inter-track dependency.</li>
+      <li>When all six tracks complete, run Wave 2 Opus synthesis. Approve the CAPCOM gate before Wave 3.</li>
+      <li>Wave 3 deploys the seven SKILL.md files inline — they are available immediately for subsequent missions.</li>
+    </ol>
+    <pre>gsd new-project --mission draftsman_mission.pdf --release v1.50.DRAFTSMAN.DRW
+
+# Or via Claude Code:
+claude --new-task "Execute the So You Want to Be a Draftsman mission package.
+Read draftsman_mission.pdf for the complete three-stage specification.
+Start with Wave 0 (KINGFISHER/Haiku), then launch all 6 Wave 1 tracks in parallel."</pre>
+  </div>
+
+  <h2>Recompile from Source</h2>
+
+  <div class="instructions">
+    <p style="font-size:0.78rem;color:#333;margin-bottom:0.5rem;">Three passes required (TOC, cross-references, LastPage counter):</p>
+    <pre>xelatex -interaction=nonstopmode draftsman_mission.tex
+xelatex -interaction=nonstopmode draftsman_mission.tex
+xelatex -interaction=nonstopmode draftsman_mission.tex</pre>
+    <p style="font-size:0.7rem;color:var(--subtle);margin-top:0.5rem;">Requires: <code>texlive-xetex texlive-latex-extra fonts-dejavu</code><br>Color scheme: Prussian <code>#0C2340</code> · Sienna <code>#A0522D</code> · Blueprint Cyan <code>#007BA7</code> · Amber <code>#B06000</code></p>
+  </div>
+
+  <div class="closing">
+    <blockquote>"A drawing is not a picture of a thing. A drawing is a complete and unambiguous specification of a thing — every geometric relationship, every allowable variation, every material property that determines whether it will work. The draftsman's art is compression: making the infinite detail of physical reality fit on a sheet of paper, in a format that any trained person on Earth can read without asking a single clarifying question."</blockquote>
+    <p class="callout">The GSD ecosystem exists to give people their lives back. The draftsman's precision is how we make the first thing right, so we do not have to build it twice.</p>
+    <p class="attr">So You Want to Be a Draftsman · v1.50.DRAFTSMAN.DRW · March 29, 2026 · Tibsfox Inc.</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>GSD Deep Research Mission Package — So You Want to Be a Draftsman · March 29, 2026</p>
+  <p style="margin-top:0.3rem;">Fleet (17 roles) · <span class="amber-text">6 parallel modules · 7 SKILL.md deployments</span> · ~280K tokens · ~18 context windows</p>
+  <p style="margin-top:0.3rem;">Standards: ASME Y14.5-2018 · ISO 128-2:2020 · ISO 1101:2017 · NASA-STD-7009B · ISO 286-1</p>
+</footer>
+
+</body>
+</html>

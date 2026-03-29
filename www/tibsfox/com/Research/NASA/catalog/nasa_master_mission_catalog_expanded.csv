@@ -1,0 +1,553 @@
+version,mission_code,mission_name,start_date,end_date,mission_type,program,epoch,status,notes
+1.0,NASA-FOUNDING,NASA Agency Founding,1958-10-01,,organization,NASA,1,complete,"National Aeronautics and Space Act signed Jul 29 1958; NASA begins operations Oct 1 1958; absorbed NACA 8000 employees 3 labs JPL"
+1.1,PIONEER-0,Pioneer 0 (Thor-Able 1),1958-08-17,1958-08-17,lunar-probe,Pioneer,1,failed,"First NASA spacecraft attempt; launch failure; intended lunar orbiter"
+1.2,PIONEER-1,Pioneer 1,1958-10-11,1958-10-13,lunar-probe,Pioneer,1,partial,"First NASA spacecraft launched; failed to reach Moon; returned useful radiation data"
+1.3,EXPLORER-1,Explorer 1,1958-01-31,1958-05-23,earth-orbiter,Explorer,1,complete,"First US satellite; discovered Van Allen radiation belts; JPL/ABMA built"
+1.4,VANGUARD-1,Vanguard 1,1958-03-17,,earth-orbiter,Vanguard,1,complete,"First solar-powered satellite; oldest object still in orbit; proved Earth is pear-shaped"
+1.5,EXPLORER-2,Explorer 2,1958-03-05,1958-03-05,earth-orbiter,Explorer,1,failed,"Launch failure; Juno I upper stage did not ignite"
+1.6,EXPLORER-3,Explorer 3,1958-03-26,1958-06-27,earth-orbiter,Explorer,1,complete,"Confirmed Van Allen belt discovery from Explorer 1"
+1.7,EXPLORER-4,Explorer 4,1958-07-26,1958-10-06,earth-orbiter,Explorer,1,complete,"Studied radiation from Project Argus nuclear tests"
+1.8,PIONEER-2,Pioneer 2,1958-11-08,1958-11-08,lunar-probe,Pioneer,1,failed,"Third stage failure; did not reach Moon"
+1.9,PIONEER-3,Pioneer 3,1958-12-06,1958-12-07,lunar-probe,Pioneer,1,partial,"Did not reach Moon but discovered second Van Allen belt"
+1.10,PIONEER-4,Pioneer 4,1959-03-03,1959-03-04,lunar-probe,Pioneer,1,complete,"First US spacecraft to escape Earth gravity; lunar flyby at 60000 km"
+1.11,EXPLORER-5,Explorer 5,1958-08-24,1958-08-24,earth-orbiter,Explorer,1,failed,"Launch failure; booster collision"
+1.12,EXPLORER-6,Explorer 6,1959-08-07,1959-10-06,earth-orbiter,Explorer,1,complete,"First photos of Earth from orbit; studied trapped radiation"
+1.13,EXPLORER-7,Explorer 7,1959-10-13,1961-08-24,earth-orbiter,Explorer,1,complete,"First Earth energy balance measurements; Vanguard data"
+1.14,PIONEER-5,Pioneer 5,1960-03-11,1960-06-26,interplanetary,Pioneer,1,complete,"Deep space probe between Earth and Venus; set communications distance record"
+1.15,ECHO-1,Echo 1,1960-08-12,1968-05-24,communications,Echo,1,complete,"First passive communications satellite; 30m reflective balloon"
+1.16,TIROS-1,TIROS-1,1960-04-01,1960-06-29,earth-science,TIROS,1,complete,"First successful weather satellite; Television Infrared Observation Satellite"
+1.17,MERCURY-REDSTONE-1,Mercury-Redstone 1 (MR-1),1960-11-21,1960-11-21,test-flight,Mercury,1,failed,"Booster test; launched 4 inches then shut down"
+1.18,MERCURY-REDSTONE-2,Mercury-Redstone 2 (MR-2),1961-01-31,1961-01-31,test-flight,Mercury,1,complete,"Suborbital test with chimpanzee Ham; qualified capsule for human flight"
+1.19,MERCURY-ATLAS-5,Mercury-Atlas 5 (MA-5),1961-11-29,1961-11-29,test-flight,Mercury,1,complete,"Orbital test flight with chimpanzee Enos; 2 orbits; qualified for crewed orbital"
+1.20,MR-3,Mercury-Redstone 3 / Freedom 7,1961-05-05,1961-05-05,crewed-suborbital,Mercury,1,complete,"Alan Shepard; first American in space; 15 min suborbital flight"
+1.21,MR-4,Mercury-Redstone 4 / Liberty Bell 7,1961-07-21,1961-07-21,crewed-suborbital,Mercury,1,complete,"Gus Grissom; second American in space; capsule sank after splashdown"
+1.22,MA-6,Mercury-Atlas 6 / Friendship 7,1962-02-20,1962-02-20,crewed-orbital,Mercury,1,complete,"John Glenn; first American to orbit Earth; 3 orbits; heat shield alarm"
+1.23,MA-7,Mercury-Atlas 7 / Aurora 7,1962-05-24,1962-05-24,crewed-orbital,Mercury,1,complete,"Scott Carpenter; 3 orbits; science experiments; 400km off-target landing"
+1.24,MA-8,Mercury-Atlas 8 / Sigma 7,1962-10-03,1962-10-03,crewed-orbital,Mercury,1,complete,"Wally Schirra; 6 orbits; precision engineering flight; 9.25 hours"
+1.25,MA-9,Mercury-Atlas 9 / Faith 7,1963-05-15,1963-05-16,crewed-orbital,Mercury,1,complete,"Gordon Cooper; final Mercury mission; 22 orbits; 34 hours; longest US flight"
+1.26,RANGER-1,Ranger 1,1961-08-23,1961-08-30,lunar-probe,Ranger,1,failed,"Test flight; failed to leave Earth orbit"
+1.27,RANGER-2,Ranger 2,1961-11-18,1961-11-20,lunar-probe,Ranger,1,failed,"Test flight; failed to leave Earth orbit"
+1.28,RANGER-3,Ranger 3,1962-01-26,1962-01-28,lunar-probe,Ranger,1,failed,"Missed Moon by 36793 km; guidance error"
+1.29,RANGER-4,Ranger 4,1962-04-23,1962-04-26,lunar-probe,Ranger,1,partial,"First US spacecraft to hit Moon; but systems failed no data returned"
+1.30,RANGER-5,Ranger 5,1962-10-18,1962-10-20,lunar-probe,Ranger,1,failed,"Solar panel failure; missed Moon by 725 km"
+1.31,MARINER-1,Mariner 1,1962-07-22,1962-07-22,planetary-flyby,Mariner,1,failed,"Venus flyby attempt; launch vehicle destroyed by range safety; software error"
+1.32,MARINER-2,Mariner 2,1962-08-27,1963-01-03,planetary-flyby,Mariner,1,complete,"First successful interplanetary spacecraft; Venus flyby Dec 14 1962; no magnetic field"
+1.33,RANGER-6,Ranger 6,1964-01-30,1964-02-02,lunar-impact,Ranger,1,failed,"Hit Moon but cameras failed to activate"
+1.34,RANGER-7,Ranger 7,1964-07-28,1964-07-31,lunar-impact,Ranger,1,complete,"First US close-up photos of Moon; 4308 images before impact; Sea of Clouds"
+1.35,MARINER-3,Mariner 3,1964-11-05,1964-11-05,planetary-flyby,Mariner,1,failed,"Mars flyby attempt; nose fairing did not separate"
+1.36,MARINER-4,Mariner 4,1964-11-28,1967-12-21,planetary-flyby,Mariner,1,complete,"First close-up images of Mars Jul 15 1965; showed cratered terrain; no canals"
+1.37,RANGER-8,Ranger 8,1965-02-17,1965-02-20,lunar-impact,Ranger,1,complete,"7137 images of Sea of Tranquility before impact; Apollo landing site survey"
+1.38,RANGER-9,Ranger 9,1965-03-21,1965-03-24,lunar-impact,Ranger,1,complete,"5814 images of crater Alphonsus; live TV broadcast of impact"
+1.39,GEMINI-3,Gemini 3 / Molly Brown,1965-03-23,1965-03-23,crewed-orbital,Gemini,1,complete,"Grissom Young; first crewed Gemini; first orbital maneuver by crewed spacecraft"
+1.40,GEMINI-4,Gemini 4,1965-06-03,1965-06-07,crewed-orbital,Gemini,1,complete,"McDivitt White; Ed White first American EVA 23 min; 4-day mission"
+1.41,GEMINI-5,Gemini 5,1965-08-21,1965-08-29,crewed-orbital,Gemini,1,complete,"Cooper Conrad; 8-day endurance mission; tested fuel cells; rendezvous evaluation pod"
+1.42,GEMINI-7,Gemini 7,1965-12-04,1965-12-18,crewed-orbital,Gemini,1,complete,"Borman Lovell; 14-day endurance record; medical baseline for Apollo"
+1.43,GEMINI-6A,Gemini 6A,1965-12-15,1965-12-16,crewed-orbital,Gemini,1,complete,"Schirra Stafford; first space rendezvous with Gemini 7; approached within 30cm"
+1.44,PIONEER-6,Pioneer 6,1965-12-16,2000-12-08,heliophysics,Pioneer,1,complete,"Solar wind monitor; operated 35 years; longest-lived NASA spacecraft at the time"
+1.45,GEMINI-8,Gemini 8,1966-03-16,1966-03-17,crewed-orbital,Gemini,1,complete,"Armstrong Scott; first space docking with Agena; thruster malfunction emergency return"
+1.46,SURVEYOR-1,Surveyor 1,1966-05-30,1967-01-07,lunar-lander,Surveyor,1,complete,"First US soft lunar landing Jun 2 1966; 11237 photos from Ocean of Storms"
+1.47,GEMINI-9A,Gemini 9A,1966-06-03,1966-06-06,crewed-orbital,Gemini,1,complete,"Stafford Cernan; EVA; rendezvous with ATDA; angry alligator docking failure"
+1.48,LUNAR-ORBITER-1,Lunar Orbiter 1,1966-08-10,1966-10-29,lunar-orbiter,Lunar Orbiter,1,complete,"First US spacecraft to orbit Moon; photographed potential Apollo landing sites"
+1.49,GEMINI-10,Gemini 10,1966-07-18,1966-07-21,crewed-orbital,Gemini,1,complete,"Young Collins; double rendezvous with two Agena vehicles; EVA"
+1.50,GEMINI-11,Gemini 11,1966-09-12,1966-09-15,crewed-orbital,Gemini,1,complete,"Conrad Gordon; record 1369 km altitude; first-orbit docking; tethered flight"
+1.51,SURVEYOR-2,Surveyor 2,1966-09-20,1966-09-23,lunar-lander,Surveyor,1,failed,"Vernier engine failure; crashed on Moon"
+1.52,LUNAR-ORBITER-2,Lunar Orbiter 2,1966-11-06,1967-10-11,lunar-orbiter,Lunar Orbiter,1,complete,"Apollo site photography; famous oblique photo of Copernicus crater"
+1.53,GEMINI-12,Gemini 12,1966-11-11,1966-11-15,crewed-orbital,Gemini,1,complete,"Lovell Aldrin; final Gemini; Aldrin EVA 5.5 hours; proved EVA workable"
+1.54,LUNAR-ORBITER-3,Lunar Orbiter 3,1967-02-05,1967-10-09,lunar-orbiter,Lunar Orbiter,1,complete,"Completed Apollo landing site confirmation photography"
+1.55,SURVEYOR-3,Surveyor 3,1967-04-17,1967-05-03,lunar-lander,Surveyor,1,complete,"Landed Ocean of Storms; soil mechanics scoop; later visited by Apollo 12"
+1.56,MARINER-5,Mariner 5,1967-06-14,1967-11-21,planetary-flyby,Mariner,1,complete,"Venus flyby Oct 19 1967; measured atmosphere density temperature magnetic field"
+1.57,LUNAR-ORBITER-4,Lunar Orbiter 4,1967-05-04,1967-10-06,lunar-orbiter,Lunar Orbiter,1,complete,"Near-polar orbit; first photos of lunar south pole"
+1.58,SURVEYOR-4,Surveyor 4,1967-07-14,1967-07-17,lunar-lander,Surveyor,1,failed,"Contact lost 2.5 min before touchdown; likely crashed"
+1.59,EXPLORER-35,Explorer 35 (IMP-E),1967-07-19,1973-06-24,magnetosphere,Explorer,1,complete,"Lunar anchored interplanetary monitoring platform; 6 year mission at Moon"
+1.60,LUNAR-ORBITER-5,Lunar Orbiter 5,1967-08-01,1968-01-31,lunar-orbiter,Lunar Orbiter,1,complete,"Final Lunar Orbiter; completed 99% of lunar surface mapping"
+1.61,SURVEYOR-5,Surveyor 5,1967-09-08,1967-12-17,lunar-lander,Surveyor,1,complete,"First chemical analysis of lunar soil; alpha scattering instrument"
+1.62,SURVEYOR-6,Surveyor 6,1967-11-07,1967-12-14,lunar-lander,Surveyor,1,complete,"First spacecraft to lift off from Moon (2.5m hop); Sinus Medii"
+1.63,PIONEER-8,Pioneer 8,1967-12-13,1996-08-22,heliophysics,Pioneer,1,complete,"Solar wind and cosmic ray monitoring in heliocentric orbit"
+1.64,SURVEYOR-7,Surveyor 7,1968-01-07,1968-02-21,lunar-lander,Surveyor,1,complete,"Final Surveyor; landed near Tycho crater; science-focused mission"
+1.65,PIONEER-9,Pioneer 9,1968-11-08,1983-05-19,heliophysics,Pioneer,1,complete,"Solar wind monitoring; complemented Pioneer 6-8 network"
+1.66,APOLLO-1,Apollo 1 (AS-204),1967-01-27,1967-01-27,tragedy,Apollo,2,failed,"Cabin fire during pad test killed Grissom White Chaffee; pure O2 atmosphere; 18-month redesign"
+1.67,APOLLO-4,Apollo 4 (AS-501),1967-11-09,1967-11-09,test-flight,Apollo,2,complete,"First flight of Saturn V; all-up unmanned test; perfect flight"
+1.68,APOLLO-5,Apollo 5 (AS-204R),1968-01-22,1968-02-12,test-flight,Apollo,2,complete,"First flight test of Lunar Module in Earth orbit"
+1.69,APOLLO-6,Apollo 6 (AS-502),1968-04-04,1968-04-04,test-flight,Apollo,2,partial,"Second Saturn V test; pogo oscillation and engine failures; objectives partially met"
+1.70,APOLLO-7,Apollo 7,1968-10-11,1968-10-22,crewed-orbital,Apollo,2,complete,"Schirra Eisele Cunningham; first crewed Apollo; 11-day Earth orbit; first live US TV from space"
+1.71,APOLLO-8,Apollo 8,1968-12-21,1968-12-27,crewed-lunar-orbit,Apollo,2,complete,"Borman Lovell Anders; first humans to orbit Moon; 10 lunar orbits; Earthrise photograph"
+1.72,APOLLO-9,Apollo 9,1969-03-03,1969-03-13,crewed-orbital,Apollo,2,complete,"McDivitt Scott Schweickart; first crewed LM test in Earth orbit; Spider and Gumdrop"
+1.73,APOLLO-10,Apollo 10,1969-05-18,1969-05-26,crewed-lunar-orbit,Apollo,2,complete,"Stafford Young Cernan; full dress rehearsal; LM descended to 14.4 km of lunar surface"
+1.74,APOLLO-11,Apollo 11,1969-07-16,1969-07-24,crewed-lunar-landing,Apollo,2,complete,"Armstrong Aldrin Collins; first humans on Moon Jul 20 1969; Sea of Tranquility; 650M viewers"
+1.75,APOLLO-12,Apollo 12,1969-11-14,1969-11-24,crewed-lunar-landing,Apollo,2,complete,"Conrad Bean Gordon; precision landing 163m from Surveyor 3; Ocean of Storms; struck by lightning at launch"
+1.76,APOLLO-13,Apollo 13,1970-04-11,1970-04-17,crewed-lunar-abort,Apollo,2,complete,"Lovell Haise Swigert; O2 tank explosion; lifeboat mission using LM; successful failure"
+1.77,APOLLO-14,Apollo 14,1971-01-31,1971-02-09,crewed-lunar-landing,Apollo,2,complete,"Shepard Mitchell Roosa; Fra Mauro highlands; Shepard hit golf balls; first MET cart"
+1.78,MARINER-8,Mariner 8,1971-05-09,1971-05-09,planetary-orbiter,Mariner,2,failed,"Mars orbiter attempt; Centaur stage failure; crashed in Atlantic"
+1.79,MARINER-9,Mariner 9,1971-05-30,1972-10-27,planetary-orbiter,Mariner,2,complete,"First spacecraft to orbit another planet (Mars); mapped 85% of surface; Olympus Mons discovery"
+1.80,APOLLO-15,Apollo 15,1971-07-26,1971-08-07,crewed-lunar-landing,Apollo,2,complete,"Scott Irwin Worden; first Lunar Roving Vehicle; Hadley Rille; extended J-mission; 77kg samples"
+1.81,PIONEER-10,Pioneer 10,1972-03-03,2003-01-23,outer-planet-flyby,Pioneer,3,complete,"First through asteroid belt; first Jupiter flyby Dec 1973; first spacecraft beyond known planets"
+1.82,APOLLO-16,Apollo 16,1972-04-16,1972-04-27,crewed-lunar-landing,Apollo,2,complete,"Young Duke Mattingly; Descartes highlands geology; UV telescope; 95kg samples"
+1.83,APOLLO-17,Apollo 17,1972-12-07,1972-12-19,crewed-lunar-landing,Apollo,2,complete,"Cernan Schmitt Evans; last Moon landing; geologist on surface; 110kg samples; 75 hours EVA total"
+1.84,PIONEER-11,Pioneer 11,1973-04-06,1995-09-30,outer-planet-flyby,Pioneer,3,complete,"Jupiter flyby 1974; first Saturn flyby Sep 1979; discovered F ring"
+1.85,SKYLAB-LAUNCH,Skylab (Station Launch),1973-05-14,1979-07-11,space-station,Skylab,3,complete,"First US space station; last Saturn V launch; micrometeoroid shield damage on launch"
+1.86,SKYLAB-2,Skylab 2 (SL-2),1973-05-25,1973-06-22,crewed-station,Skylab,3,complete,"Conrad Kerwin Weitz; 28 days; repaired damaged station; deployed parasol sunshield"
+1.87,SKYLAB-3,Skylab 3 (SL-3),1973-07-28,1973-09-25,crewed-station,Skylab,3,complete,"Bean Garriott Lousma; 59 days; EVA record; solar observations; Earth resources"
+1.88,SKYLAB-4,Skylab 4 (SL-4),1973-11-16,1974-02-08,crewed-station,Skylab,3,complete,"Carr Gibson Pogue; 84 days US endurance record; observed Comet Kohoutek"
+1.89,MARINER-10,Mariner 10,1973-11-03,1975-03-24,planetary-flyby,Mariner,3,complete,"First spacecraft to Mercury; Venus gravity assist; three Mercury flybys; discovered Mercury magnetic field"
+1.90,APOLLO-SOYUZ,Apollo-Soyuz Test Project (ASTP),1975-07-15,1975-07-24,crewed-international,Apollo-Soyuz,3,complete,"Stafford Brand Slayton; first US-Soviet joint mission; orbital docking; last Apollo flight"
+1.91,VIKING-1,Viking 1,1975-08-20,1982-11-13,mars-lander-orbiter,Viking,3,complete,"First successful Mars landing Jul 20 1976; Chryse Planitia; biology experiments; orbiter mapped surface"
+1.92,VIKING-2,Viking 2,1975-09-09,1980-04-11,mars-lander-orbiter,Viking,3,complete,"Second Mars landing Sep 3 1976; Utopia Planitia; biology experiments; searched for life"
+1.93,VOYAGER-2,Voyager 2,1977-08-20,,outer-planet-grand-tour,Voyager,3,operational,"Grand Tour: Jupiter 1979 Saturn 1981 Uranus 1986 Neptune 1989; interstellar medium; still transmitting"
+1.94,VOYAGER-1,Voyager 1,1977-09-05,,outer-planet-flyby,Voyager,3,operational,"Jupiter 1979 Saturn 1980; crossed heliopause Aug 25 2012; most distant human object; still transmitting"
+1.95,PIONEER-VENUS-1,Pioneer Venus Orbiter,1978-05-20,1992-10-08,venus-orbiter,Pioneer Venus,3,complete,"Venus orbiter; radar mapping; atmospheric studies; 14 years of operation"
+1.96,PIONEER-VENUS-2,Pioneer Venus Multiprobe,1978-08-08,1978-12-09,venus-probe,Pioneer Venus,3,complete,"Released 4 atmospheric probes into Venus atmosphere; measured composition"
+1.97,ISEE-3,ISEE-3/ICE,1978-08-12,1997-05-05,heliophysics-comet,Explorer,3,complete,"International Sun-Earth Explorer; redirected to flyby Comet Giacobini-Zinner 1985"
+1.98,HEAO-1,HEAO-1,1977-08-12,1979-01-09,observatory,HEAO,3,complete,"First High Energy Astronomy Observatory; X-ray all-sky survey"
+1.99,HEAO-2,HEAO-2 / Einstein Observatory,1978-11-13,1981-04-26,observatory,HEAO,3,complete,"First fully imaging X-ray telescope in space"
+1.100,HEAO-3,HEAO-3,1979-09-20,1981-05-29,observatory,HEAO,3,complete,"Gamma-ray spectroscopy and cosmic ray studies"
+1.101,SOLAR-MAX,Solar Maximum Mission (SolarMax),1980-02-14,1989-12-02,heliophysics,SMM,3,complete,"Solar flare studies; repaired in orbit by STS-41-C in 1984"
+1.102,STS-1,STS-1 Columbia,1981-04-12,1981-04-14,crewed-orbital,Space Shuttle,4,complete,"Young Crippen; first Space Shuttle flight; first winged reentry from orbit"
+1.103,STS-2,STS-2 Columbia,1981-11-12,1981-11-14,crewed-orbital,Space Shuttle,4,complete,"Engle Truly; first reuse of crewed orbital spacecraft; tested RMS arm"
+1.104,STS-3,STS-3 Columbia,1982-03-22,1982-03-30,crewed-orbital,Space Shuttle,4,complete,"Lousma Fullerton; thermal tests; landed at White Sands"
+1.105,STS-4,STS-4 Columbia,1982-06-27,1982-07-04,crewed-orbital,Space Shuttle,4,complete,"Mattingly Hartsfield; final orbital test flight; first DoD payload"
+1.106,STS-5,STS-5 Columbia,1982-11-11,1982-11-16,crewed-orbital,Space Shuttle,4,complete,"First operational Shuttle mission; deployed two commercial satellites"
+1.107,IRAS,Infrared Astronomical Satellite (IRAS),1983-01-25,1983-11-21,observatory,IRAS,4,complete,"First infrared space telescope; mapped 96% of sky; discovered 350000 sources"
+1.108,STS-6,STS-6 Challenger,1983-04-04,1983-04-09,crewed-orbital,Space Shuttle,4,complete,"First Challenger flight; deployed TDRS-1; first Shuttle EVA"
+1.109,STS-7,STS-7 Challenger,1983-06-18,1983-06-24,crewed-orbital,Space Shuttle,4,complete,"Sally Ride first American woman in space; deployed two satellites"
+1.110,STS-8,STS-8 Challenger,1983-08-30,1983-09-05,crewed-orbital,Space Shuttle,4,complete,"Guy Bluford first African American in space; first night launch and landing"
+1.111,STS-41-B,STS-41-B Challenger,1984-02-03,1984-02-11,crewed-orbital,Space Shuttle,4,complete,"Bruce McCandless first untethered EVA (MMU); failed satellite deployments"
+1.112,STS-41-C,STS-41-C Challenger,1984-04-06,1984-04-13,crewed-orbital,Space Shuttle,4,complete,"First on-orbit satellite repair (Solar Max); LDEF deployed"
+1.113,STS-41-D,STS-41-D Discovery,1984-08-30,1984-09-05,crewed-orbital,Space Shuttle,4,complete,"First Discovery flight; deployed 3 satellites; first commercial payload"
+1.114,STS-51-A,STS-51-A Discovery,1984-11-08,1984-11-16,crewed-orbital,Space Shuttle,4,complete,"First satellite retrieval from orbit; recovered Palapa B2 and Westar 6"
+1.115,STS-51-L,STS-51-L Challenger,1986-01-28,1986-01-28,tragedy,Space Shuttle,4,failed,"O-ring failure SRB joint in cold; 7 killed: Scobee Smith Resnik Onizuka McNair McAuliffe Jarvis; 32-month stand-down"
+1.116,MAGELLAN,Magellan,1989-05-04,1994-10-13,venus-radar-mapper,Magellan,4,complete,"Launched STS-30; radar mapped 98% of Venus surface at high resolution"
+1.117,GALILEO,Galileo,1989-10-18,2003-09-21,outer-planet-orbiter,Galileo,4,complete,"Launched STS-34; Jupiter orbiter 1995-2003; Europa subsurface ocean evidence; atmospheric probe"
+1.118,COBE,Cosmic Background Explorer (COBE),1989-11-18,1993-12-23,observatory,COBE,4,complete,"Measured cosmic microwave background; confirmed Big Bang prediction; Nobel Prize 2006"
+1.119,HST,Hubble Space Telescope,1990-04-24,,observatory,Great Observatories,4,operational,"Launched STS-31; 35+ years operation; mirror fix STS-61 1993; 5 servicing missions through STS-125 2009"
+1.120,ULYSSES,Ulysses,1990-10-06,2009-06-30,heliophysics,Ulysses,4,complete,"Launched STS-41; joint ESA/NASA; first polar solar orbiter; studied solar wind at all latitudes"
+1.121,CGRO,Compton Gamma Ray Observatory,1991-04-05,2000-06-04,observatory,Great Observatories,4,complete,"Launched STS-37; gamma-ray observations; discovered gamma-ray bursts are extragalactic"
+1.122,UARS,Upper Atmosphere Research Satellite,1991-09-12,2011-09-24,earth-science,UARS,4,complete,"Launched STS-48; studied ozone depletion; atmospheric chemistry"
+1.123,MARS-OBSERVER,Mars Observer,1992-09-25,1993-08-21,mars-orbiter,Mars Observer,4,failed,"Contact lost 3 days before Mars orbit insertion; likely propulsion failure"
+1.124,CLEMENTINE,Clementine,1994-01-25,1994-05-07,lunar-orbiter,Clementine,4,complete,"DoD/NASA; mapped entire lunar surface; evidence of water ice at south pole"
+1.125,STS-63,STS-63 Discovery,1995-02-03,1995-02-11,crewed-orbital,Shuttle-Mir,4,complete,"First Shuttle-Mir rendezvous (no dock); Eileen Collins first female Shuttle pilot"
+1.126,STS-71,STS-71 Atlantis,1995-06-27,1995-07-07,crewed-orbital,Shuttle-Mir,4,complete,"First Shuttle-Mir docking; exchanged crew; 100th US human spaceflight"
+1.127,SOHO,Solar and Heliospheric Observatory,1995-12-02,,heliophysics,SOHO,4,operational,"ESA/NASA joint; Sun observations from L1; discovered 4000+ comets"
+1.128,NEAR-SHOEMAKER,NEAR Shoemaker,1996-02-17,2001-02-28,asteroid-orbiter,Discovery,5,complete,"First asteroid orbiter; orbited 433 Eros for 1 year; first asteroid landing"
+1.129,MGS,Mars Global Surveyor,1996-11-07,2006-11-02,mars-orbiter,Mars Surveyor,5,complete,"Mars orbiter 1997-2006; mapped entire surface; found evidence of recent water flow"
+1.130,PATHFINDER,Mars Pathfinder / Sojourner,1996-12-04,1997-09-27,mars-lander-rover,Discovery,5,complete,"First Mars rover Jul 4 1997; Sojourner 83 sols; airbag landing; faster better cheaper"
+1.131,ACE,Advanced Composition Explorer,1997-08-25,,heliophysics,ACE,5,operational,"Solar wind and cosmic ray monitor at L1; space weather forecasting"
+1.132,CASSINI-HUYGENS,Cassini-Huygens,1997-10-15,2017-09-15,outer-planet-orbiter,Cassini,5,complete,"NASA/ESA/ASI; Saturn orbiter 2004-2017; 294 orbits; Enceladus geysers; Huygens landed Titan Jan 2005; Grand Finale"
+1.133,LUNAR-PROSPECTOR,Lunar Prospector,1998-01-07,1999-07-31,lunar-orbiter,Discovery,5,complete,"Mapped lunar surface composition; confirmed hydrogen at poles suggesting water ice"
+1.134,DEEP-SPACE-1,Deep Space 1 (DS1),1998-10-24,2001-12-18,asteroid-comet-flyby,New Millennium,5,complete,"First ion thruster propelled spacecraft; flyby asteroid 9969 Braille and Comet Borrelly"
+1.135,ISS-ZARYA,International Space Station (Zarya module),1998-11-20,,space-station,ISS,6,operational,"First ISS module launched; joint US/Russia/ESA/JAXA/CSA; continuous habitation since Nov 2000"
+1.136,MCO,Mars Climate Orbiter,1998-12-11,1999-09-23,mars-orbiter,Mars Surveyor,5,failed,"Lost in Mars atmosphere; metric/imperial unit conversion error; $125M loss"
+1.137,MPL,Mars Polar Lander / Deep Space 2,1999-01-03,1999-12-03,mars-lander,Mars Surveyor,5,failed,"Contact lost during descent; likely premature engine cutoff; carried two penetrator probes also lost"
+1.138,STARDUST,Stardust,1999-02-07,2011-03-24,comet-sample-return,Discovery,5,complete,"Collected comet Wild 2 dust; returned samples Jan 2006; also flew by Tempel 1 (NExT)"
+1.139,CHANDRA,Chandra X-ray Observatory,1999-07-23,,observatory,Great Observatories,5,operational,"Launched STS-93; X-ray observatory; studies black holes supernovae galaxy clusters; 25+ years"
+1.140,TERRA,Terra (EOS AM-1),1999-12-18,,earth-science,EOS,5,operational,"Earth Observing System flagship; 5 instruments; climate land ocean monitoring"
+1.141,IMAGE,IMAGE (Imager for Magnetopause-to-Aurora Global Exploration),2000-03-25,2018-08-18,magnetosphere,IMAGE,5,complete,"First global magnetosphere imaging; lost contact 2005; recontacted 2018"
+1.142,ISS-EXPEDITION-1,ISS Expedition 1,2000-10-31,2001-03-21,crewed-station,ISS,6,complete,"Shepherd Krikalev Gidzenko; first ISS resident crew; began continuous habitation"
+1.143,ODYSSEY,2001 Mars Odyssey,2001-04-07,,mars-orbiter,Mars Odyssey,5,operational,"Longest-serving Mars spacecraft; mapped subsurface hydrogen/water; communications relay"
+1.144,GENESIS,Genesis,2001-08-08,2004-09-08,solar-wind-sample,Genesis,5,partial,"Collected solar wind samples; return capsule parachute failed but samples partially recovered"
+1.145,AQUA,Aqua (EOS PM-1),2002-05-04,,earth-science,EOS,5,operational,"Earth observation; water cycle; precipitation clouds sea surface temperature"
+1.146,CONTOUR,CONTOUR,2002-07-03,2002-08-15,comet-flyby,Discovery,5,failed,"Contact lost during solid rocket firing; spacecraft broke apart"
+1.147,MER-A,Spirit (MER-A),2003-06-10,2010-03-22,mars-rover,Mars Exploration Rover,5,complete,"Landed Gusev Crater Jan 3 2004; found evidence of past water; operated 6 years"
+1.148,MER-B,Opportunity (MER-B),2003-07-07,2019-02-13,mars-rover,Mars Exploration Rover,5,complete,"Landed Meridiani Planum Jan 24 2004; 45.16 km driving record; 15 years; dust storm ended mission"
+1.149,SPITZER,Spitzer Space Telescope,2003-08-25,2020-01-30,observatory,Great Observatories,5,complete,"Final Great Observatory; infrared; exoplanet atmospheres; galaxy formation; 16.5 years"
+1.150,STS-107,STS-107 Columbia,2003-02-01,2003-02-01,tragedy,Space Shuttle,4,failed,"Foam strike to left wing leading edge; broke apart on reentry; 7 killed: Husband McCool Anderson Brown Chawla Clark Ramon; CAIB; 29-month stand-down"
+1.151,MESSENGER,MESSENGER,2004-08-03,2015-04-30,mercury-orbiter,MESSENGER,5,complete,"First Mercury orbiter 2011-2015; mapped entire surface; discovered water ice at poles"
+1.152,DEEP-IMPACT,Deep Impact / EPOXI,2005-01-12,2013-08-08,comet-impactor,Discovery,5,complete,"Impacted Comet Tempel 1 Jul 4 2005; studied interior composition; extended as EPOXI"
+1.153,MRO,Mars Reconnaissance Orbiter,2005-08-12,,mars-orbiter,MRO,5,operational,"Highest resolution Mars camera (HiRISE); communications relay; found seasonal water flows"
+1.154,NEW-HORIZONS,New Horizons,2006-01-19,,outer-planet-flyby,New Frontiers,5,operational,"Pluto flyby Jul 14 2015; first close-up images; Arrokoth flyby 2019; Kuiper Belt mission"
+1.155,STS-121,STS-121 Discovery,2006-07-04,2006-07-17,crewed-orbital,Space Shuttle,4,complete,"Second return-to-flight after Columbia; tested safety improvements"
+1.156,STEREO,STEREO (A and B),2006-10-26,,heliophysics,STEREO,5,operational,"Twin solar observatories; first 3D images of solar storms; contact lost with B 2014"
+1.157,PHOENIX,Phoenix Mars Lander,2007-08-04,2008-11-02,mars-lander,Mars Scout,5,complete,"Landed Mars arctic May 25 2008; confirmed water ice; soil chemistry"
+1.158,DAWN,Dawn,2007-09-27,2018-11-01,asteroid-orbiter,Discovery,5,complete,"First spacecraft to orbit two extraterrestrial bodies; Vesta 2011-2012; Ceres 2015-2018"
+1.159,THEMIS,THEMIS,2007-02-17,,magnetosphere,THEMIS,5,operational,"Five probes studying substorms; two redesignated ARTEMIS for lunar orbits"
+1.160,KEPLER,Kepler Space Telescope,2009-03-07,2018-10-30,observatory,Kepler,5,complete,"Discovered 2600+ confirmed exoplanets; transit photometry; K2 extended mission"
+1.161,LRO,Lunar Reconnaissance Orbiter,2009-06-18,,lunar-orbiter,LPRP,5,operational,"High-resolution lunar mapping; supports Artemis landing site selection; found water molecules"
+1.162,LCROSS,LCROSS,2009-06-18,2009-10-09,lunar-impactor,LPRP,5,complete,"Impacted Cabeus crater at south pole; confirmed water ice in permanently shadowed crater"
+1.163,WISE,WISE / NEOWISE,2009-12-14,,observatory,WISE,5,operational,"Wide-field Infrared Survey Explorer; all-sky infrared survey; reactivated as NEOWISE for asteroid hunting"
+1.164,SDO,Solar Dynamics Observatory,2010-02-11,,heliophysics,LWS,5,operational,"Continuous high-resolution Sun observations; studies solar variability"
+1.165,MSL,Curiosity / Mars Science Laboratory,2011-11-26,,mars-rover,MSL,5,operational,"Sky crane landing Gale Crater Aug 5 2012; found ancient habitable environment; 36+ km driven"
+1.166,GRAIL,GRAIL (Ebb and Flow),2011-09-10,2012-12-17,lunar-orbiter,Discovery,5,complete,"Twin spacecraft mapped lunar gravity field in unprecedented detail"
+1.167,NUSTAR,NuSTAR,2012-06-13,,observatory,SMEX,5,operational,"Nuclear Spectroscopic Telescope Array; first focusing high-energy X-ray telescope"
+1.168,VAN-ALLEN-PROBES,Van Allen Probes (RBSP),2012-08-30,2019-10-18,magnetosphere,LWS,5,complete,"Twin probes studied Van Allen radiation belts; discovered third belt"
+1.169,LADEE,LADEE,2013-09-06,2014-04-18,lunar-orbiter,LADEE,5,complete,"Studied thin lunar atmosphere and dust environment; laser communications demo"
+1.170,MAVEN,MAVEN,2013-11-18,,mars-orbiter,Mars Scout,5,operational,"Mars atmospheric loss study; how Mars lost its atmosphere over time; communications relay"
+1.171,OCO-2,Orbiting Carbon Observatory 2,2014-07-02,,earth-science,OCO,5,operational,"Measures atmospheric CO2 with high precision; climate monitoring"
+1.172,OSIRIS-REX,OSIRIS-REx / OSIRIS-APEX,2016-09-08,,asteroid-sample-return,New Frontiers,5,operational,"Asteroid Bennu sample collected; returned to Earth Sep 24 2023; now en route to Apophis as OSIRIS-APEX"
+1.173,TESS,TESS (Transiting Exoplanet Survey Satellite),2018-04-18,,observatory,TESS,5,operational,"All-sky exoplanet survey; discovered 7000+ planet candidates; successor to Kepler"
+1.174,INSIGHT,InSight,2018-05-05,2022-12-21,mars-lander,Discovery,5,complete,"Mars interior structure; first seismometer on Mars; detected marsquakes; ended when solar panels dusty"
+1.175,PARKER-SOLAR-PROBE,Parker Solar Probe,2018-08-12,,heliophysics,LWS,5,operational,"Closest spacecraft to Sun; 27+ perihelion passes; 430000 mph Dec 2024; corona observations"
+1.176,ICESAT-2,ICESat-2,2018-09-15,,earth-science,ICESat,5,operational,"Laser altimeter measuring ice sheet elevation change; sea ice thickness; vegetation height"
+1.177,DART,DART (Double Asteroid Redirection Test),2021-11-24,2022-09-26,asteroid-impactor,DART,5,complete,"First planetary defense test; impacted Dimorphos Sep 26 2022; changed orbit; proof of concept"
+1.178,JWST,James Webb Space Telescope,2021-12-25,,observatory,JWST,5,operational,"L2 orbit; near/mid infrared; earliest galaxies; exoplanet atmospheres; protoplanetary disks; successor to Hubble"
+1.179,MARS-2020,Perseverance / Ingenuity (Mars 2020),2020-07-30,,mars-rover-helicopter,Mars 2020,5,operational,"Landed Jezero Crater Feb 18 2021; sample cache for MSR; Ingenuity first powered Mars flight Apr 19 2021; 72 flights"
+1.180,LUCY,Lucy,2021-10-16,,asteroid-flyby,Discovery,5,operational,"Will visit 1 main-belt and 7 Jupiter Trojan asteroids; Dinkinesh flyby Nov 2023; Donaldjohanson Apr 2025"
+1.181,IXPE,IXPE (Imaging X-ray Polarimetry Explorer),2021-12-09,,observatory,SMEX,5,operational,"First X-ray polarimetry satellite; studies black holes neutron stars magnetars"
+1.182,CAPSTONE,CAPSTONE,2022-06-28,,lunar-orbiter,CAPSTONE,6,operational,"CubeSat testing near-rectilinear halo orbit for Lunar Gateway"
+1.183,ARTEMIS-1,Artemis I,2022-11-16,2022-12-11,uncrewed-lunar,Artemis,6,complete,"First SLS/Orion flight; 25.5-day uncrewed lunar flyby and distant retrograde orbit; 1.4M miles"
+1.184,PSYCHE,Psyche,2023-10-13,,asteroid-orbiter,Discovery,5,enroute,"En route to metallic asteroid 16 Psyche; arrive Aug 2029; study exposed planetary core"
+1.185,EUROPA-CLIPPER,Europa Clipper,2024-10-14,,outer-planet-orbiter,Europa Clipper,5,enroute,"En route to Jupiter; arrive 2030; 49 planned Europa flybys; study subsurface ocean habitability"
+1.186,SPHEREX,SPHEREx,2025-03-12,,observatory,SPHEREx,5,operational,"All-sky spectral survey in near-infrared; map 450M galaxies; study inflation cosmic origins"
+1.187,ESCAPADE,EscaPADE,2025-11-01,,mars-orbiter,EscaPADE,5,enroute,"Twin Mars orbiters studying solar wind interaction with Mars magnetosphere; arrive 2026"
+1.188,IMAP,IMAP (Interstellar Mapping and Acceleration Probe),2025-09-24,,heliophysics,IMAP,5,operational,"L1 orbit; mapping heliosphere boundary; studying cosmic ray acceleration"
+1.189,PUNCH,PUNCH (Polarimeter to Unify the Corona and Heliosphere),2025-03-12,,heliophysics,PUNCH,5,operational,"Four small satellites imaging solar wind as it leaves the corona"
+1.190,ARTEMIS-2,Artemis II,2026-04-01,,crewed-lunar-flyby,Artemis,6,planned,"First crewed beyond-LEO since 1972; Wiseman Glover Koch Hansen; 10-day Moon flyby"
+1.191,ARTEMIS-3,Artemis III,2027-01-01,,crewed-lunar-orbit,Artemis,6,planned,"LEO rendezvous tests with Starship HLS and Blue Moon; per Feb 2026 restructure no landing"
+1.192,ARTEMIS-4,Artemis IV,2028-01-01,,crewed-lunar-landing,Artemis,6,planned,"First crewed lunar landing since Apollo 17 1972; lunar south pole region; per Feb 2026 restructure"
+1.193,NANCY-GRACE-ROMAN,Nancy Grace Roman Space Telescope,2027-05-01,,observatory,Roman,5,future,"Wide-field infrared survey; dark energy; exoplanet direct imaging; coronagraph"
+1.194,DRAGONFLY,Dragonfly,2028-07-01,,outer-planet-lander,New Frontiers,5,future,"Nuclear-powered rotorcraft on Titan; study prebiotic chemistry; arrive 2034"
+1.195,NEO-SURVEYOR,NEO Surveyor,2028-01-01,,observatory,NEO Surveyor,5,future,"Space-based infrared telescope to catalog potentially hazardous near-Earth objects"
+1.196,HWO,Habitable Worlds Observatory,2035-01-01,,observatory,HWO,5,future,"Next-gen flagship; directly image Earth-like exoplanets; study biosignatures; Astro2020 priority"
+1.197,MARS-SAMPLE-RETURN,Mars Sample Return,2035-01-01,,mars-sample-return,MSR,5,future,"Retrieve Perseverance cached samples from Jezero Crater; return to Earth; architecture under review"
+1.198,URANUS-ORBITER,Uranus Orbiter and Probe,2032-01-01,,outer-planet-orbiter,Uranus Flagship,5,future,"Astro2020 highest priority flagship; orbit Uranus study moons rings atmosphere; first dedicated Uranus mission"
+1.199,ENCELADUS-ORBILANDER,Enceladus Orbilander,2038-01-01,,outer-planet-lander,Enceladus,5,future,"Orbit then land on Enceladus; sample plume material; search for biosignatures in subsurface ocean"
+1.200,LUNAR-GATEWAY,Lunar Gateway,2028-01-01,,space-station,Artemis,6,future,"Small lunar orbital station; PPE and HALO modules; international crew habitat for Artemis surface missions"
+1.201,X-15,X-15 Research Program,1959-06-08,1968-10-24,experimental-aircraft,X-15,1,complete,199 flights; Mach 6.7; 354200 ft altitude; 12 pilots; edge of space research; joint NASA/USAF/USN
+1.202,LJ-1,Little Joe 1,1959-08-21,1959-08-21,abort-test,Mercury,1,partial,Mercury launch escape system test; premature ignition before liftoff
+1.203,BJ-1,Big Joe 1,1959-09-09,1959-09-09,abort-test,Mercury,1,complete,First Atlas-capsule test; validated heat shield for Mercury reentry
+1.204,LJ-1A,Little Joe 1A,1959-11-04,1959-11-04,abort-test,Mercury,1,complete,Max-Q abort test with rhesus monkey Sam; successful escape
+1.205,LJ-2,Little Joe 2,1959-12-04,1959-12-04,abort-test,Mercury,1,complete,High-altitude abort test with rhesus monkey Miss Sam
+1.206,MA-1,Mercury-Atlas 1,1960-07-29,1960-07-29,test-flight,Mercury,1,failed,Atlas-capsule test; Atlas destroyed 58 seconds after launch
+1.207,LJ-5,Little Joe 5,1960-11-08,1960-11-08,abort-test,Mercury,1,complete,Mercury escape system qualification flight
+1.208,MR-1A,Mercury-Redstone 1A,1960-12-19,1960-12-19,test-flight,Mercury,1,complete,Successful repeat of MR-1 after four-inch flight failure
+1.209,MA-2,Mercury-Atlas 2,1961-02-21,1961-02-21,test-flight,Mercury,1,complete,Successful suborbital test of Mercury capsule heat shield on Atlas
+1.210,LJ-5A,Little Joe 5A,1961-03-18,1961-03-18,abort-test,Mercury,1,complete,Final Little Joe qualification flight for Mercury escape system
+1.211,MR-BD,Mercury-Redstone BD,1961-03-24,1961-03-24,test-flight,Mercury,1,complete,Booster Development flight; extra Redstone qualification before crewed flights
+1.212,MA-3,Mercury-Atlas 3,1961-04-25,1961-04-25,test-flight,Mercury,1,failed,Atlas guidance failure; abort system saved capsule; robot astronaut aboard
+1.213,EXPLORER-11,Explorer 11,1961-04-27,1961-11-17,observatory,Explorer,1,complete,First gamma-ray astronomy satellite; detected 22 cosmic gamma rays
+1.214,LJ-5B,Little Joe 5B,1961-04-28,1961-04-28,abort-test,Mercury,1,complete,Final Little Joe flight; completed Mercury abort system qualification
+1.215,TIROS-3,TIROS-3,1961-07-12,1962-02-28,earth-science,TIROS,1,complete,First satellite to detect a hurricane from space (Hurricane Esther)
+1.216,MA-4,Mercury-Atlas 4,1961-09-13,1961-09-13,test-flight,Mercury,1,complete,First uncrewed Mercury orbital flight; 1 orbit with crewman simulator
+1.217,OSO-1,OSO-1,1962-03-07,1964-08-06,solar-observatory,OSO,1,complete,First Orbiting Solar Observatory; studied solar flares and UV/X-ray emissions
+1.218,EXPLORER-17,Explorer 17 (AE-A),1963-04-03,1963-07-10,earth-science,Explorer,1,complete,First Atmosphere Explorer; measured density composition and temperature of upper atmosphere
+1.219,TIROS-7,TIROS-7,1963-06-19,1968-06-03,earth-science,TIROS,1,complete,Longest-operating TIROS; 1809 days of weather data
+1.220,EXPLORER-18,Explorer 18 (IMP-1),1963-11-27,1965-05-10,interplanetary,Explorer/IMP,1,complete,First Interplanetary Monitoring Platform; measured solar wind magnetic fields and radiation
+1.221,GEMINI-1,Gemini 1,1964-04-08,1964-04-12,test-flight,Gemini,1,complete,First Gemini-Titan II launch; uncrewed structural test; spacecraft left attached to second stage; no recovery
+1.222,NIMBUS-1,Nimbus 1,1964-08-28,1964-09-22,earth-science,Nimbus,1,complete,First advanced weather R&D satellite; AVCS and HRIR instruments; operated 26 days
+1.223,GEMINI-2,Gemini 2,1965-01-19,1965-01-19,test-flight,Gemini,1,complete,Uncrewed suborbital test; heat shield and systems validation; last uncrewed Gemini
+1.224,TIROS-9,TIROS-9,1965-01-22,1967-02-15,earth-science,TIROS,1,complete,First global weather coverage from Sun-synchronous orbit
+1.225,OSO-2,OSO-2,1965-02-03,1965-11-08,solar-observatory,OSO,1,complete,Solar UV and X-ray observations during solar minimum
+1.226,PEGASUS-1,Pegasus 1,1965-02-16,1968-09-01,technology,Pegasus,1,complete,96-ft wing panels measuring micrometeorite flux; launched by Saturn I; confirmed Apollo hull safe
+1.227,PEGASUS-2,Pegasus 2,1965-05-25,1968-08-01,technology,Pegasus,1,complete,Second micrometeorite survey satellite; Saturn I launch
+1.228,TIROS-10,TIROS-10,1965-07-02,1967-07-31,earth-science,TIROS,1,complete,Final original TIROS series satellite; completed pioneering weather observation program
+1.229,PEGASUS-3,Pegasus 3,1965-07-30,1968-08-01,technology,Pegasus,1,complete,Third and final Pegasus; confirmed Apollo hull design adequate against micrometeorites
+1.230,OAO-1,OAO-1,1966-04-08,1966-04-10,observatory,OAO,1,failed,First Orbiting Astronomical Observatory; power failure after 2 days ended mission
+1.231,ATS-1,ATS-1,1966-12-07,1985-01-01,technology-comms,ATS,1,complete,First geostationary weather imaging; first Pacific communications relay; 18 years operation
+1.232,OSO-3,OSO-3,1967-03-08,1969-11-10,solar-observatory,OSO,1,complete,First satellite gamma-ray detection of the Sun
+1.233,OSO-4,OSO-4,1967-10-18,1969-11-10,solar-observatory,OSO,2,complete,EUV and X-ray spectroheliograph; Harvard College Observatory instruments
+1.234,ATS-3,ATS-3,1967-11-05,2001-01-01,technology-comms,ATS,2,complete,First color photograph of full Earth disc from geostationary orbit
+1.235,EXPLORER-38,Explorer 38 (RAE-1),1968-07-04,1977-06-01,observatory,Explorer,2,complete,Radio Astronomy Explorer; first low-frequency radio sky survey from Earth orbit
+1.236,OAO-2,OAO-2 Stargazer,1968-12-07,1973-02-13,observatory,OAO,2,complete,First successful UV space observatory; 4+ years of stellar observations
+1.237,OSO-5,OSO-5,1969-01-22,1975-07-01,solar-observatory,OSO,2,complete,Hard X-ray burst observations during active Sun period
+1.238,NIMBUS-3,Nimbus 3,1969-04-14,1972-01-22,earth-science,Nimbus,2,complete,First satellite infrared temperature profiles of atmosphere; IRIS spectrometer
+1.239,OSO-6,OSO-6,1969-08-09,1972-01-01,solar-observatory,OSO,2,complete,UV spectrometer and X-ray telescope; observed solar flares
+1.240,PIONEER-E,Pioneer E,1969-08-27,1969-08-27,heliophysics,Pioneer,2,failed,Solar monitoring probe; Delta launch failure destroyed spacecraft
+1.241,OAO-B,OAO-B,1970-11-30,1970-11-30,observatory,OAO,2,failed,Payload fairing failed to separate; spacecraft never reached orbit
+1.242,EXPLORER-42,Explorer 42 (Uhuru/SAS-1),1970-12-12,1973-03-01,observatory,Explorer,2,complete,First dedicated X-ray astronomy satellite; cataloged 339 X-ray sources; enabled Nobel Prize discoveries
+1.243,OSO-7,OSO-7,1971-09-29,1974-07-09,solar-observatory,OSO,3,complete,First space-based white-light coronagraph; first observation of a CME from space
+1.244,LANDSAT-1,Landsat 1 (ERTS-1),1972-07-23,1978-01-06,earth-observation,Landsat,3,complete,First civilian Earth observation satellite; MSS revolutionized land use monitoring and agriculture
+1.245,OAO-3,OAO-3 Copernicus,1972-08-21,1981-02-01,observatory,OAO,3,complete,High-resolution UV spectroscopy; studied interstellar medium; operated 9 years; Princeton telescope
+1.246,EXPLORER-48,Explorer 48 (SAS-2),1972-11-15,1973-06-08,observatory,Explorer,3,complete,Second Small Astronomy Satellite; first gamma-ray sky survey; mapped galactic plane emission
+1.247,EXPLORER-49,Explorer 49 (RAE-2),1973-06-10,1977-06-01,observatory,Explorer,3,complete,Lunar-orbiting Radio Astronomy Explorer; low-frequency radio observations shielded from Earth
+1.248,EXPLORER-50,Explorer 50 (IMP-8),1973-10-26,2006-10-28,interplanetary,Explorer/IMP,3,complete,Longest-operating IMP; 33 years of solar wind magnetic field and cosmic ray data
+1.249,SMS-1,SMS-1,1974-05-17,1981-01-01,earth-science,GOES,3,complete,First Synchronous Meteorological Satellite; proved geostationary weather imaging concept
+1.250,ATS-6,ATS-6,1974-05-30,1979-08-01,technology-comms,ATS,3,complete,Most powerful communications satellite of its era; pioneered direct broadcast TV from space
+1.251,LANDSAT-2,Landsat 2,1975-01-22,1982-07-27,earth-observation,Landsat,3,complete,Continued global land imaging with MSS; 7 years of data
+1.252,EXPLORER-53,Explorer 53 (SAS-3),1975-05-07,1979-04-09,observatory,Explorer,3,complete,Third Small Astronomy Satellite; precise X-ray source positions and spectra
+1.253,OSO-8,OSO-8,1975-06-21,1978-10-01,solar-observatory,OSO,3,complete,Final Orbiting Solar Observatory; high-resolution UV and X-ray solar studies
+1.254,GOES-1,GOES-1,1975-10-16,1985-03-01,earth-science,GOES,3,complete,First operational GOES; geostationary weather imaging of Western Hemisphere
+1.255,LANDSAT-3,Landsat 3,1978-03-05,1983-09-07,earth-observation,Landsat,3,complete,Added thermal infrared band; first Return Beam Vidicon on Landsat
+1.256,NIMBUS-7,Nimbus 7,1978-10-24,1994-01-01,earth-science,Nimbus,3,complete,TOMS instrument discovered Antarctic ozone hole; CZCS pioneered ocean color remote sensing; 16 years
+1.257,LANDSAT-4,Landsat 4,1982-07-16,1993-12-14,earth-observation,Landsat,4,complete,First Thematic Mapper instrument; 7-band multispectral imaging at 30m resolution
+1.258,TDRS-1,TDRS-1,1983-04-04,2010-06-27,data-relay,TDRS,4,complete,First Tracking and Data Relay Satellite; deployed by STS-6; IUS failure required creative orbit raising; 27 years of service
+1.259,STS-9,STS-9 Columbia,1983-11-28,1983-12-08,crewed-science,Space Shuttle/ISS,4,complete,First Spacelab mission; first 6-person crew; first non-US astronaut on Shuttle (Ulf Merbold ESA); Young's 6th and final spaceflight
+1.260,SPACELAB-1,Spacelab 1,1983-11-28,1983-12-08,crewed-science,Spacelab,4,complete,First Spacelab module flight on STS-9; 73 experiments; first ESA astronaut on Shuttle (Ulf Merbold); joint NASA/ESA
+1.261,LANDSAT-5,Landsat 5,1984-03-01,2013-06-05,earth-observation,Landsat,4,complete,Guinness World Record: 29 years of operation; longest-operating Earth observation satellite
+1.262,LDEF,LDEF (Long Duration Exposure Facility),1984-04-06,1990-01-12,technology,LDEF,4,complete,Deployed by STS-41-C; retrieved by STS-32 after 5.7 years; 57 experiments exposed to space environment
+1.263,STS-41-G,STS-41-G Challenger,1984-10-05,1984-10-13,crewed-satellite-deploy,Space Shuttle/ISS,4,complete,First 7-person crew; first mission with two women (Ride & Sullivan); first American woman EVA (Kathryn Sullivan); first Canadian in space (Marc Garneau)
+1.264,ERBS,ERBS (Earth Radiation Budget Satellite),1984-10-05,2005-10-01,earth-science,ERBS,4,complete,Deployed from STS-41-G by Sally Ride; measured Earth radiation budget and stratospheric aerosols for 21 years
+1.265,STS-51-C,STS-51-C Discovery,1985-01-24,1985-01-27,crewed-classified,Space Shuttle/ISS,4,complete,First dedicated DoD mission; classified payload; shortest Discovery mission
+1.266,STS-51-D,STS-51-D Discovery,1985-04-12,1985-04-19,crewed-satellite-deploy,Space Shuttle,4,complete,Syncom IV-3 (Leasat) failed to activate after deploy; unscheduled EVA to attempt repair (unsuccessful); first sitting US Senator in space (Jake Garn)
+1.267,STS-51-B,STS-51-B Challenger,1985-04-29,1985-05-06,crewed-science,Space Shuttle/ISS,4,complete,Second dedicated Spacelab mission; materials science and fluid physics experiments; carried two squirrel monkeys and 24 rats
+1.268,STS-51-G,STS-51-G Discovery,1985-06-17,1985-06-24,crewed-satellite-deploy,Space Shuttle,4,complete,First Arab astronaut (Sultan bin Salman); first French astronaut on Shuttle (Patrick Baudry); deployed 3 commsats; SDI High Precision Tracking Experiment
+1.269,STS-51-F,STS-51-F Challenger,1985-07-29,1985-08-06,crewed-science,Space Shuttle,4,complete,Abort to Orbit (ATO) — first in-flight engine shutdown and only ATO in Shuttle history; Spacelab 2 solar/stellar astronomy
+1.270,STS-51-I,STS-51-I Discovery,1985-08-27,1985-09-03,crewed-satellite-deploy,Space Shuttle,4,complete,Deployed 3 communications satellites; repaired Syncom IV-3 (Leasat) during EVA that STS-51-D could not fix
+1.271,STS-51-J,STS-51-J Atlantis,1985-10-03,1985-10-07,crewed-classified,Space Shuttle/ISS,4,complete,Atlantis maiden flight; second dedicated DoD mission; deployed two DSCS-III satellites
+1.272,STS-61-A,STS-61-A Challenger,1985-10-30,1985-11-06,crewed-science,Space Shuttle/ISS,4,complete,Largest crew ever launched (8 people); first ESA-managed Spacelab mission; German D-1 Spacelab; Challenger's final successful mission
+1.273,STS-61-B,STS-61-B Atlantis,1985-11-26,1985-12-03,crewed-satellite-deploy,Space Shuttle,4,complete,First Mexican-American in space (Rodolfo Neri Vela); deployed 3 commsats; EASE/ACCESS construction experiments
+1.274,STS-61-C,STS-61-C Columbia,1986-01-12,1986-01-18,crewed-satellite-deploy,Space Shuttle/ISS,4,complete,Last successful mission before Challenger disaster; first sitting US Congressman in space (Bill Nelson); future NASA Administrator Charles Bolden was pilot
+1.275,STS-26,STS-26 Discovery,1988-09-29,1988-10-03,crewed-satellite-deploy,Space Shuttle,4,complete,Return to Flight after Challenger disaster (32-month stand-down); deployed TDRS-C successfully
+1.276,STS-27,STS-27 Atlantis,1988-12-02,1988-12-06,crewed-classified,Space Shuttle/ISS,4,complete,Classified DoD mission; severe TPS tile damage discovered post-flight (over 700 tiles damaged); nearly catastrophic reentry
+1.277,STS-29,STS-29 Discovery,1989-03-13,1989-03-18,crewed-satellite-deploy,Space Shuttle,4,complete,Deployed TDRS-D; IMAX camera experiments
+1.278,STS-28,STS-28 Columbia,1989-08-08,1989-08-13,crewed-classified,Space Shuttle/ISS,4,complete,Classified DoD mission; deployed SDS-2 intelligence relay satellite
+1.279,STS-33,STS-33 Discovery,1989-11-22,1989-11-27,crewed-classified,Space Shuttle/ISS,4,complete,Classified DoD mission; fifth night launch
+1.280,STS-32,STS-32 Columbia,1990-01-09,1990-01-20,crewed-satellite-deploy,Space Shuttle/ISS,4,complete,Retrieved LDEF (deployed on STS-41-C in 1984 after 5.7 years in orbit); longest mission to date at time
+1.281,STS-36,STS-36 Atlantis,1990-02-28,1990-03-04,crewed-classified,Space Shuttle/ISS,4,complete,Classified DoD mission; highest inclination (62 deg) Shuttle mission from KSC
+1.282,STS-38,STS-38 Atlantis,1990-11-15,1990-11-20,crewed-classified,Space Shuttle/ISS,4,complete,Classified DoD mission
+1.283,STS-35,STS-35 Columbia,1990-12-02,1990-12-10,crewed-science,Space Shuttle,4,complete,ASTRO-1 ultraviolet astronomy telescopes; multiple delays before launch; Broad Band X-Ray Telescope and Hopkins Ultraviolet Telescope
+1.284,STS-39,STS-39 Discovery,1991-04-28,1991-05-06,crewed-science,Space Shuttle/ISS,4,complete,Unclassified DoD mission; infrared and ultraviolet background measurements for SDI; largest unclassified DoD payload
+1.285,STS-40,STS-40 Columbia,1991-06-05,1991-06-14,crewed-science,Space Shuttle/ISS,4,complete,First dedicated Spacelab Life Sciences mission; extensive human physiology research; last Columbia flight to land at Edwards AFB
+1.286,STS-43,STS-43 Atlantis,1991-08-02,1991-08-11,crewed-satellite-deploy,Space Shuttle,4,complete,Deployed TDRS-E; 5th TDRS satellite
+1.287,STS-44,STS-44 Atlantis,1991-11-24,1991-12-01,crewed-science,Space Shuttle/ISS,4,complete,Deployed DSP early-warning satellite; mission shortened by 3 days due to IMU failure; carried military Terra Scout experiment
+1.288,STS-42,STS-42 Discovery,1992-01-22,1992-01-30,crewed-science,Space Shuttle,4,complete,First International Microgravity Laboratory; first Canadian woman in space (Roberta Bondar); 55 experiments from 16 countries
+1.289,STS-45,STS-45 Atlantis,1992-03-24,1992-04-02,crewed-science,Space Shuttle/ISS,4,complete,First ATLAS mission; 12 instruments studying atmospheric science and solar observations; first Belgian astronaut (Dirk Frimout)
+1.290,STS-49,STS-49 Endeavour,1992-05-07,1992-05-16,crewed-satellite-servicing,Space Shuttle/ISS,4,complete,Endeavour's maiden flight; first 3-person EVA; captured and repaired Intelsat 603; longest EVA to date (8h 29m); first 4 EVAs on single mission
+1.291,EUVE,Extreme Ultraviolet Explorer (EUVE),1992-06-07,2001-01-31,observatory,Explorer,4,complete,First all-sky extreme UV survey; discovered EUV emission from 801 celestial sources
+1.292,STS-50,STS-50 Columbia,1992-06-25,1992-07-09,crewed-science,Space Shuttle/ISS,4,complete,First US Microgravity Laboratory; first Extended Duration Orbiter (EDO) pallet; longest Columbia mission at time
+1.293,SAMPEX,SAMPEX,1992-07-03,2004-06-30,magnetosphere,Explorer/SMEX,4,complete,First Small Explorer; Solar Anomalous and Magnetospheric Particle Explorer; studied cosmic rays
+1.294,STS-46,STS-46 Atlantis,1992-07-31,1992-08-08,crewed-satellite-deploy,Space Shuttle/ISS,4,complete,First Tethered Satellite System test (tether jammed at 840 ft of planned 12.5 mi); deployed ESA EURECA retrievable carrier; first Italian/Swiss crew
+1.295,TOPEX-POSEIDON,TOPEX/Poseidon,1992-08-10,2006-01-18,earth-science,TOPEX,4,complete,Revolutionary ocean topography mission; joint NASA/CNES; defined modern ocean altimetry; 13 years
+1.296,STS-47,STS-47 Endeavour,1992-09-12,1992-09-20,crewed-science,Space Shuttle/ISS,4,complete,First Japanese Spacelab mission; first African-American woman in space (Mae Jemison); first married couple in space (Lee and Davis)
+1.297,STS-52,STS-52 Columbia,1992-10-22,1992-11-01,crewed-satellite-deploy,Space Shuttle,4,complete,Deployed LAGEOS II geodetic satellite (NASA/ASI); USMP-1 microgravity experiments
+1.298,STS-53,STS-53 Discovery,1992-12-02,1992-12-09,crewed-classified,Space Shuttle/ISS,4,complete,Last dedicated DoD Shuttle mission; last classified Shuttle payload
+1.299,STS-54,STS-54 Endeavour,1993-01-13,1993-01-19,crewed-satellite-deploy,Space Shuttle,4,complete,Deployed TDRS-F; DXS (Diffuse X-ray Spectrometer) experiment; EVA test of assembly techniques
+1.300,STS-56,STS-56 Discovery,1993-04-08,1993-04-17,crewed-science,Space Shuttle/ISS,4,complete,Second ATLAS atmospheric science mission; free-flying SPARTAN-201 solar observatory
+1.301,STS-55,STS-55 Columbia,1993-04-26,1993-05-06,crewed-science,Space Shuttle/ISS,4,complete,Second German Spacelab mission; nearly 90 experiments in materials/life science; longest Columbia mission to that point
+1.302,STS-57,STS-57 Endeavour,1993-06-21,1993-06-30,crewed-satellite-retrieval,Space Shuttle,4,complete,First SPACEHAB commercial module flight; retrieved ESA EURECA (deployed on STS-46)
+1.303,STS-51,STS-51 Discovery,1993-09-12,1993-09-22,crewed-satellite-deploy,Space Shuttle,4,complete,Deployed ACTS advanced comms satellite; first EVA to test HST repair tools (for STS-61); ORFEUS-SPAS astronomy
+1.304,LANDSAT-6,Landsat 6,1993-10-05,1993-10-05,earth-observation,Landsat,4,failed,Failed to achieve orbit; did not separate from Titan II launch vehicle
+1.305,STS-58,STS-58 Columbia,1993-10-18,1993-11-01,crewed-science,Space Shuttle/ISS,4,complete,Second dedicated life sciences Spacelab; longest Shuttle mission at that time; 14 experiments on human adaptation to microgravity
+1.306,STS-60,STS-60 Discovery,1994-02-03,1994-02-11,crewed-science,Space Shuttle,4,complete,First Russian cosmonaut on Shuttle (Sergei Krikalev); beginning of US-Russian cooperation
+1.307,STS-62,STS-62 Columbia,1994-03-04,1994-03-18,crewed-science,Space Shuttle/ISS,4,complete,Microgravity and technology experiments; longest Columbia mission to date
+1.308,STS-59,STS-59 Endeavour,1994-04-09,1994-04-20,crewed-science,Space Shuttle/ISS,4,complete,First Space Radar Laboratory mission; three imaging radars mapped Earth's surface and environment
+1.309,GOES-8,GOES-8,1994-04-13,2004-05-05,earth-science,GOES,4,complete,First second-generation GOES with separate imager and sounder instruments
+1.310,STS-65,STS-65 Columbia,1994-07-08,1994-07-23,crewed-science,Space Shuttle/ISS,4,complete,Second International Microgravity Laboratory; first Japanese woman in space (Chiaki Mukai); longest Shuttle mission at time; 82 experiments
+1.311,STS-64,STS-64 Discovery,1994-09-09,1994-09-20,crewed-science,Space Shuttle,4,complete,First test of SAFER (jet backpack for EVA rescue); LITE first space-based lidar system; SPARTAN solar wind studies
+1.312,STS-68,STS-68 Endeavour,1994-09-30,1994-10-11,crewed-science,Space Shuttle/ISS,4,complete,Second Space Radar Lab mission; mapped Earth again for comparison with SRL-1 seasonal changes
+1.313,STS-66,STS-66 Atlantis,1994-11-03,1994-11-14,crewed-science,Space Shuttle/ISS,4,complete,Third ATLAS atmospheric science mission; studied middle atmosphere chemistry; CRISTA infrared observations
+1.314,STS-67,STS-67 Endeavour,1995-03-02,1995-03-18,crewed-science,Space Shuttle/ISS,4,complete,ASTRO-2 ultraviolet astronomy; longest Shuttle mission at time (16 days); 3 UV telescopes observed 300+ celestial objects
+1.315,STS-70,STS-70 Discovery,1995-07-13,1995-07-22,crewed-satellite-deploy,Space Shuttle,4,complete,Deployed TDRS-G (7th and final first-generation TDRS); woodpecker delayed launch by damaging ET foam
+1.316,TDRS-7,TDRS-7,1995-07-13,,data-relay,TDRS,4,complete,Final first-generation TDRS; deployed by STS-70; completed initial TDRS constellation
+1.317,STS-69,STS-69 Endeavour,1995-09-07,1995-09-18,crewed-science,Space Shuttle,4,complete,Second free-flight of SPARTAN-201; Wake Shield Facility grew thin film semiconductors in ultra-vacuum of wake
+1.318,STS-73,STS-73 Columbia,1995-10-20,1995-11-05,crewed-science,Space Shuttle/ISS,4,complete,Second US Microgravity Laboratory; fluid physics crystal growth and combustion experiments; 16-day mission
+1.319,STS-74,STS-74 Atlantis,1995-11-12,1995-11-20,crewed-shuttle-mir,Shuttle-Mir,4,complete,Second Shuttle-Mir docking; attached Russian-built Docking Module to Mir's Kristall; module used for all subsequent Shuttle-Mir dockings
+1.320,RXTE,RXTE (Rossi X-ray Timing Explorer),1995-12-30,2012-01-05,observatory,Explorer,5,complete,X-ray timing of black holes neutron stars and pulsars; millisecond variability measurements
+1.321,STS-72,STS-72 Endeavour,1996-01-11,1996-01-20,crewed-satellite-retrieval,Space Shuttle/ISS,4,complete,Retrieved Japanese Space Flyer Unit (SFU); tested EVA tools planned for ISS assembly; deployed and retrieved OAST-Flyer
+1.322,STS-75,STS-75 Columbia,1996-02-22,1996-03-09,crewed-science,Space Shuttle,4,complete,Tethered Satellite System reflight — tether deployed to 12.2 mi but snapped; satellite lost; demonstrated tether electrodynamics before failure
+1.323,STS-76,STS-76 Atlantis,1996-03-22,1996-03-31,crewed-shuttle-mir,Space Shuttle/ISS,4,complete,Third Shuttle-Mir docking; transferred Shannon Lucid to Mir for 188-day stay; first EVA during docked Shuttle-Mir mission
+1.324,STS-77,STS-77 Endeavour,1996-05-19,1996-05-29,crewed-science,Space Shuttle,4,complete,Inflatable Antenna Experiment (IAE) — first large inflatable structure in orbit; SPACEHAB commercial experiments
+1.325,STS-78,STS-78 Columbia,1996-06-20,1996-07-07,crewed-science,Space Shuttle/ISS,4,complete,Life and Microgravity Spacelab; longest Shuttle mission at time; 40+ experiments from 10 countries
+1.326,FAST-EXP,FAST (Fast Auroral Snapshot Explorer),1996-08-21,2009-05-04,magnetosphere,Explorer/SMEX,5,complete,Studied auroral particle acceleration and electric fields at unprecedented time resolution
+1.327,STS-79,STS-79 Atlantis,1996-09-16,1996-09-26,crewed-shuttle-mir,Shuttle-Mir,4,complete,Fourth Shuttle-Mir docking; exchanged crew (Blaha for Lucid); first SPACEHAB Double Module
+1.328,STS-80,STS-80 Columbia,1996-11-19,1996-12-07,crewed-science,Space Shuttle/ISS,4,complete,Longest Shuttle mission ever (17d 15h); deployed and retrieved ORFEUS-SPAS II and WSF-3; planned EVAs cancelled (jammed airlock hatch)
+1.329,STS-81,STS-81 Atlantis,1997-01-12,1997-01-22,crewed-shuttle-mir,Shuttle-Mir,4,complete,Fifth Shuttle-Mir docking; exchanged crew (Linenger for Blaha); transferred 6 tons of supplies and experiments
+1.330,STS-82,STS-82 Discovery,1997-02-11,1997-02-21,crewed-hubble-servicing,Space Shuttle/HST,4,complete,Second HST servicing; installed STIS and NICMOS instruments; 5 EVAs totaling 33+ hours; greatly expanded Hubble's capabilities
+1.331,STS-83,STS-83 Columbia,1997-04-04,1997-04-08,crewed-science,Space Shuttle/ISS,4,complete,Mission cut short from 16 to 4 days due to fuel cell problem; reflown as STS-94; shortest mission since return-to-flight
+1.332,STS-84,STS-84 Atlantis,1997-05-15,1997-05-24,crewed-shuttle-mir,Shuttle-Mir,4,complete,Sixth Shuttle-Mir docking; exchanged crew (Foale for Linenger); transferred supplies to Mir
+1.333,STS-94,STS-94 Columbia,1997-07-01,1997-07-17,crewed-science,Space Shuttle,4,complete,Reflight of STS-83 payload; successfully completed full-duration microgravity research; same crew as STS-83
+1.334,SEAWIFS,SeaWiFS,1997-08-01,2010-12-11,earth-science,SeaWiFS,5,complete,Sea-viewing Wide Field-of-view Sensor on OrbView-2; ocean color and marine productivity; 13 years
+1.335,STS-85,STS-85 Discovery,1997-08-07,1997-08-19,crewed-science,Space Shuttle/ISS,4,complete,CRISTA-SPAS-2 atmospheric measurements; tested Japanese robotic arm technology (precursor to ISS JEM RMS)
+1.336,STS-86,STS-86 Atlantis,1997-09-25,1997-10-06,crewed-shuttle-mir,Shuttle-Mir,4,complete,Seventh Shuttle-Mir docking; exchanged crew (Wolf for Foale); first EVA by a Russian from the Shuttle (Vladimir Titov)
+1.337,STS-87,STS-87 Columbia,1997-11-19,1997-12-05,crewed-science,Space Shuttle,4,complete,Fourth flight of SPARTAN-201; USMP-4 materials science; first EVA by a woman outside the Shuttle (Kalpana Chawla controlled RMS inside); Leonid Kadenyuk (Ukraine)
+1.338,TRMM,TRMM (Tropical Rainfall Measuring Mission),1997-11-27,2015-04-15,earth-science,TRMM,5,complete,Joint NASA/JAXA; first space-based precipitation radar; 17 years of tropical rainfall data
+1.339,STS-89,STS-89 Endeavour,1998-01-22,1998-01-31,crewed-shuttle-mir,Shuttle-Mir,4,complete,Eighth Shuttle-Mir docking; exchanged crew (Thomas for Wolf); SPACEHAB experiments
+1.340,TRACE,TRACE,1998-04-02,2010-06-21,solar-observatory,Explorer/SMEX,5,complete,Transition Region and Coronal Explorer; high-resolution imaging of solar magnetic structures
+1.341,STS-90,STS-90 Columbia,1998-04-17,1998-05-03,crewed-science,Space Shuttle/ISS,4,complete,Neurolab — last dedicated Spacelab mission; 26 neuroscience experiments studying the nervous system in microgravity; last science-dedicated Columbia mission
+1.342,STS-91,STS-91 Discovery,1998-06-02,1998-06-12,crewed-shuttle-mir,Shuttle-Mir,4,complete,Ninth and final Shuttle-Mir docking; last US astronaut returned from Mir (Andrew Thomas); AMS-01 prototype (alpha magnetic spectrometer); end of Shuttle-Mir program
+1.343,STS-95,STS-95 Discovery,1998-10-29,1998-11-07,crewed-science,Space Shuttle,4,complete,John Glenn returned to space at age 77 (oldest person in space); first Spanish astronaut (Pedro Duque); Hubble Orbiting Systems Test
+1.344,STS-88,STS-88 Endeavour,1998-12-04,1998-12-15,crewed-iss-assembly,Space Shuttle/ISS,4,complete,First ISS assembly mission; connected Unity (Node 1) to Russian Zarya module; first Shuttle crew to enter ISS; start of ISS construction
+1.345,LANDSAT-7,Landsat 7,1999-04-15,,earth-observation,Landsat,5,operational,Enhanced Thematic Mapper Plus; SLC failure 2003 but continued operations; 25+ years
+1.346,STS-96,STS-96 Discovery,1999-05-27,1999-06-06,crewed-iss-logistics,Space Shuttle/ISS,4,complete,First Shuttle docking with ISS; delivered supplies and equipment; installed crane and portable foot restraints; Canadarm used for ISS work
+1.347,QUIKSCAT,QuikSCAT,1999-06-19,2009-11-23,earth-science,QuikSCAT,5,complete,SeaWinds scatterometer; global ocean surface wind measurements for weather and climate
+1.348,FUSE,FUSE (Far Ultraviolet Spectroscopic Explorer),1999-06-24,2007-10-18,observatory,Explorer,5,complete,Far UV spectroscopy; studied deuterium abundance and interstellar medium; 8 years of observations
+1.349,STS-103,STS-103 Discovery,1999-12-19,1999-12-27,crewed-hubble-servicing,Space Shuttle/HST,4,complete,Third HST servicing; replaced all 6 gyroscopes; new computer; new Fine Guidance Sensor; 3 EVAs; urgent mission due to gyro failures threatening HST
+1.350,STS-99,STS-99 Endeavour,2000-02-11,2000-02-22,crewed-science,Space Shuttle/ISS,4,complete,Shuttle Radar Topography Mission mapped 80% of Earth's land surface in 3D; 200-ft radar mast deployed from payload bay; most topographic data ever collected
+1.351,STS-101,STS-101 Atlantis,2000-05-19,2000-05-29,crewed-iss-logistics,Space Shuttle/ISS,4,complete,ISS repair and logistics mission; replaced and repaired equipment on ISS; one EVA; Atlantis became 2nd orbiter to visit ISS
+1.352,TDRS-8,TDRS-8 (H),2000-06-30,,data-relay,TDRS,5,operational,First second-generation TDRS; Ka-band added; launched on Atlas IIA
+1.353,STS-106,STS-106 Atlantis,2000-09-08,2000-09-20,crewed-iss-logistics,Space Shuttle/ISS,4,complete,Prepared ISS Zvezda Service Module for first crew (Expedition 1); installed batteries converters and supplies; one EVA to connect cables between Zarya and Zvezda
+1.354,STS-92,STS-92 Discovery,2000-10-11,2000-10-24,crewed-iss-assembly,Space Shuttle/ISS,4,complete,100th Shuttle mission; attached Z1 truss (first ISS truss element) and PMA-3; 4 EVAs; prepared ISS for first permanent crew
+1.355,EO-1,EO-1 (Earth Observing-1),2000-11-21,2017-03-30,earth-observation,New Millennium,5,complete,Hyperion first spaceborne hyperspectral imager; Advanced Land Imager; 16 years of operation
+1.356,STS-97,STS-97 Endeavour,2000-11-30,2000-12-11,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed P6 ITS solar arrays — first ISS solar power module; provided electrical power for ISS; 3 EVAs; visited Expedition 1 crew
+1.357,STS-98,STS-98 Atlantis,2001-02-07,2001-02-20,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Delivered and installed US Destiny Lab — ISS primary research facility; 3 EVAs; key milestone in ISS construction
+1.358,STS-102,STS-102 Discovery,2001-03-08,2001-03-21,crewed-iss-assembly,Space Shuttle/ISS,4,complete,First MPLM (Leonardo) flight to ISS; Expedition 1/2 crew exchange; transferred 5 tons of supplies via MPLM; 2 EVAs
+1.359,STS-100,STS-100 Endeavour,2001-04-19,2001-05-01,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Canadarm2 (ISS robotic arm); first MPLM Raffaello flight; Chris Hadfield first Canadian to walk in space; 2 EVAs
+1.360,WMAP,WMAP (Wilkinson Microwave Anisotropy Probe),2001-06-30,2010-10-01,observatory,Explorer/MIDEX,5,complete,Mapped cosmic microwave background; determined age of universe 13.77 Gy; Nobel Prize 2006 for Mather/Smoot
+1.361,STS-104,STS-104 Atlantis,2001-07-12,2001-07-24,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Quest Joint Airlock — enabled EVAs directly from ISS with both US and Russian suits; 3 EVAs during installation
+1.362,STS-105,STS-105 Discovery,2001-08-10,2001-08-22,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Third Leonardo MPLM flight; Expedition 2/3 crew exchange; 2 EVAs; delivered science experiments and supplies
+1.363,STS-108,STS-108 Endeavour,2001-12-05,2001-12-17,crewed-iss-logistics,Space Shuttle/ISS,4,complete,Expedition 3/4 crew exchange; Raffaello MPLM delivered supplies; one EVA for ISS thermal blanket installation; last flight of 2001
+1.364,JASON-1,Jason-1,2001-12-07,2013-07-01,earth-science,Jason,5,complete,Successor to TOPEX/Poseidon; joint NASA/CNES; precise ocean surface height measurements
+1.365,RHESSI,RHESSI,2002-02-05,2018-08-16,solar-observatory,SMEX,5,complete,Reuven Ramaty High Energy Solar Spectroscopic Imager; X-ray and gamma-ray imaging of solar flares
+1.366,STS-109,STS-109 Columbia,2002-03-01,2002-03-12,crewed-hubble-servicing,Space Shuttle/HST,4,complete,Fourth HST servicing; installed Advanced Camera for Surveys (ACS); replaced solar arrays and Power Control Unit; 5 EVAs; significantly upgraded Hubble
+1.367,GRACE,GRACE (Gravity Recovery and Climate Experiment),2002-03-17,2017-10-27,earth-science,GRACE,5,complete,Twin satellites measured changes in Earths gravity field; tracked ice loss water storage and sea level
+1.368,STS-110,STS-110 Atlantis,2002-04-08,2002-04-19,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed S0 (S-Zero) Truss — center backbone segment of ISS truss structure; first use of ISS Canadarm2 to install Shuttle payload; 4 EVAs
+1.369,STS-111,STS-111 Endeavour,2002-06-05,2002-06-19,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Mobile Base System on Canadarm2 rail; Leonardo MPLM; Expedition 4/5 crew exchange; 3 EVAs
+1.370,STS-112,STS-112 Atlantis,2002-10-07,2002-10-18,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed S1 truss segment (starboard side); first use of CETA cart on ISS truss; 3 EVAs
+1.371,STS-113,STS-113 Endeavour,2002-11-23,2002-12-07,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed P1 truss segment (port side); Expedition 5/6 crew exchange; 3 EVAs; last Shuttle mission before Columbia disaster
+1.372,ICESAT-1,ICESat,2003-01-13,2010-08-14,earth-science,ICESat,5,complete,Ice Cloud and land Elevation Satellite; GLAS laser altimeter; first spaceborne lidar for ice sheet measurements
+1.373,SORCE,SORCE,2003-01-25,2020-02-25,solar-observatory,EOS,5,complete,Solar Radiation and Climate Experiment; measured total solar irradiance and spectral irradiance
+1.374,GALEX,GALEX (Galaxy Evolution Explorer),2003-04-28,2013-06-28,observatory,Explorer/SMEX,5,complete,UV galaxy survey; mapped UV universe; discovered massive star formation in old galaxies
+1.375,AURA,Aura (EOS Chem-1),2004-07-15,,earth-science,EOS,5,operational,A-Train member; atmospheric chemistry; monitors ozone air quality and climate gases; 4 instruments
+1.376,SWIFT,Swift Gamma-Ray Burst Observatory,2004-11-20,,observatory,Explorer/MIDEX,5,operational,Rapid-response GRB observatory with BAT gamma-ray X-ray and UV/optical telescopes; 1500+ GRBs detected
+1.377,STS-114,STS-114 Discovery,2005-07-26,2005-08-09,crewed-iss-logistics,Space Shuttle/ISS,4,complete,Return to Flight after Columbia disaster (29-month stand-down); tested new safety procedures; Raffaello MPLM; first spacewalk repair of Shuttle TPS tiles; foam still shed from ET
+1.378,CLOUDSAT,CloudSat,2006-04-28,,earth-science,CloudSat,5,operational,Cloud Profiling Radar; first 3D cloud structure from space; A-Train constellation member
+1.379,CALIPSO,CALIPSO,2006-04-28,,earth-science,CALIPSO,5,operational,Cloud-Aerosol Lidar; joint NASA/CNES; vertical profiles of aerosols and clouds; A-Train member
+1.380,STS-115,STS-115 Atlantis,2006-09-09,2006-09-21,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Resumed ISS assembly after Columbia; installed P3/P4 truss and second set of solar arrays; 3 EVAs; restored ISS to full power growth configuration
+1.381,STS-116,STS-116 Discovery,2006-12-09,2006-12-22,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed P5 truss spacer; rewired ISS from temporary to permanent power system; Expedition crew exchange (Reiter returned/S. Williams stayed); 4 EVAs
+1.382,AIM,AIM (Aeronomy of Ice in the Mesosphere),2007-04-25,,earth-science,Explorer/SMEX,5,operational,Studies noctilucent clouds in the mesosphere; link between climate change and polar mesospheric clouds
+1.383,STS-117,STS-117 Atlantis,2007-06-08,2007-06-22,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed S3/S4 truss segment and third set of solar arrays; retracted P6 solar array; Expedition crew exchange; 4 EVAs
+1.384,STS-118,STS-118 Endeavour,2007-08-08,2007-08-21,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed S5 truss spacer; first educator-astronaut in space (Barbara Morgan — selected after Christa McAuliffe); 4 EVAs; tile damage from debris
+1.385,STS-120,STS-120 Discovery,2007-10-23,2007-11-07,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Harmony (Node 2) — enabled attachment of European and Japanese labs; second female commander; P6 solar array torn during retraction (repaired by EVA)
+1.386,STS-122,STS-122 Atlantis,2008-02-07,2008-02-20,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed ESA Columbus laboratory — Europe's first permanent orbital research facility; Expedition crew exchange; 3 EVAs
+1.387,STS-123,STS-123 Endeavour,2008-03-11,2008-03-26,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Japanese Kibo Experiment Logistics Module (pressurized section) and Canadian Dextre robot; longest Shuttle-ISS docked mission; 5 EVAs
+1.388,STS-124,STS-124 Discovery,2008-05-31,2008-06-14,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Kibo Japanese Pressurized Module — largest ISS module; completed main Kibo laboratory assembly; 3 EVAs
+1.389,FERMI,Fermi Gamma-ray Space Telescope,2008-06-11,,observatory,Fermi,5,operational,Large Area Telescope plus Gamma-ray Burst Monitor; maps entire gamma-ray sky; discovered gamma-ray pulsars
+1.390,JASON-2,Jason-2 (OSTM),2008-06-20,2019-10-01,earth-science,Jason,5,complete,Ocean Surface Topography Mission; continued sea level record; joint NASA/CNES/EUMETSAT/NOAA
+1.391,IBEX,IBEX (Interstellar Boundary Explorer),2008-10-19,,heliophysics,Explorer/SMEX,5,operational,Mapped heliosphere boundary using energetic neutral atoms; discovered ribbon structure at heliosphere edge
+1.392,STS-126,STS-126 Endeavour,2008-11-14,2008-11-30,crewed-iss-logistics,Space Shuttle/ISS,4,complete,Delivered equipment for expanding ISS to 6-person crew; new crew quarters water recycling galley exercise equipment; 4 EVAs; prepared ISS for Expedition expansion
+1.393,OCO-1,OCO (Orbiting Carbon Observatory),2009-02-24,2009-02-24,earth-science,OCO,5,failed,Launch failure; Taurus XL fairing failed to separate; precursor to successful OCO-2
+1.394,STS-119,STS-119 Discovery,2009-03-15,2009-03-28,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed S6 truss and fourth (final) set of solar arrays — completed ISS primary power grid; station reached full power capability; 3 EVAs
+1.395,STS-127,STS-127 Endeavour,2009-07-15,2009-07-31,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Japanese Exposed Facility and Experiment Logistics Module (exposed section) on Kibo; completed Kibo assembly; 5 EVAs; 13-person ISS crew (largest ever)
+1.396,STS-128,STS-128 Discovery,2009-08-28,2009-09-11,crewed-iss-logistics,Space Shuttle/ISS,4,complete,Delivered science racks and supplies via Leonardo MPLM; COLBERT treadmill; MARES muscle research facility; Expedition crew exchange; 3 EVAs
+1.397,STS-129,STS-129 Atlantis,2009-11-16,2009-11-27,crewed-iss-logistics,Space Shuttle/ISS,4,complete,Delivered two ExPRESS Logistics Carriers with spare parts for ISS (pumps gyros tanks); 3 EVAs pre-positioning spares for post-Shuttle era
+1.398,STS-130,STS-130 Endeavour,2010-02-08,2010-02-21,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Tranquility (Node 3) and Cupola observation dome — iconic 7-window Earth-viewing module; 3 EVAs
+1.399,STS-131,STS-131 Discovery,2010-04-05,2010-04-20,crewed-iss-logistics,Space Shuttle/ISS,4,complete,Multi-Purpose Logistics Module Leonardo resupply with 8 racks of science and provisions; 3 EVAs; replaced ammonia tank assembly
+1.400,STS-132,STS-132 Atlantis,2010-05-14,2010-05-26,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Delivered and installed Russian Mini-Research Module Rassvet (MRM-1); also carried Integrated Cargo Carrier; 3 EVAs; last planned Atlantis mission (later extended by STS-135)
+1.401,SOFIA,SOFIA (Stratospheric Observatory for Infrared Astronomy),2010-05-26,2022-09-29,airborne-observatory,SOFIA,5,complete,Boeing 747SP with 2.7m telescope; joint NASA/DLR; infrared astronomy above 99% of water vapor; retired 2022
+1.402,STS-133,STS-133 Discovery,2011-02-24,2011-03-09,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Delivered Leonardo Permanent Multipurpose Module (permanently attached to ISS) and ExPRESS Logistics Carrier 4; Robonaut 2 humanoid robot; Discovery's 39th and final flight; 2 EVAs
+1.403,GLORY,Glory,2011-03-04,2011-03-04,earth-science,Glory,5,failed,Taurus XL fairing failure; same failure mode as OCO-1; APS and TIM instruments lost
+1.404,STS-134,STS-134 Endeavour,2011-05-16,2011-06-01,crewed-iss-assembly,Space Shuttle/ISS,4,complete,Installed Alpha Magnetic Spectrometer (AMS-02) — $2B cosmic ray particle physics experiment; ELC-3; 4 EVAs; Endeavour's 25th and final flight; commander Mark Kelly (husband of Gabby Giffords)
+1.405,AQUARIUS,Aquarius/SAC-D,2011-06-10,2015-06-08,earth-science,Aquarius,5,complete,First global sea surface salinity measurements; joint NASA/CONAE Argentina; 4 years of data
+1.406,STS-135,STS-135 Atlantis,2011-07-08,2011-07-21,crewed-iss-logistics,Space Shuttle/ISS,4,complete,Final Space Shuttle mission; smallest crew since STS-6 (4 people); Raffaello MPLM delivered year's worth of supplies; Atlantis' 33rd and final flight; end of 30-year Space Shuttle program
+1.407,JUNO,Juno,2011-08-05,,outer-planet-orbiter,New Frontiers,5,operational,Jupiter polar orbiter since Jul 4 2016; studying interior structure atmosphere and magnetic field; extended through 2025
+1.408,SUOMI-NPP,Suomi NPP,2011-10-28,,earth-science,JPSS,5,operational,Bridge mission to Joint Polar Satellite System; VIIRS instrument; global weather and climate data
+1.409,TDRS-11,TDRS-11 (K),2013-01-31,,data-relay,TDRS,5,operational,First third-generation TDRS; S-band single access return replaced with Ka-band
+1.410,LANDSAT-8,Landsat 8,2013-02-11,,earth-observation,Landsat,5,operational,Operational Land Imager and Thermal Infrared Sensor; improved radiometric resolution
+1.411,IRIS,IRIS (Interface Region Imaging Spectrograph),2013-06-28,,solar-observatory,Explorer/SMEX,5,operational,High-resolution UV imaging of solar chromosphere and transition region
+1.412,GPM,GPM (Global Precipitation Measurement),2014-02-27,,earth-science,GPM,5,operational,Successor to TRMM; joint NASA/JAXA; dual-frequency precipitation radar; core observatory for global constellation
+1.413,SMAP,SMAP (Soil Moisture Active Passive),2015-01-31,,earth-science,SMAP,5,operational,Measures global soil moisture and freeze/thaw state; radar failed Jul 2015 but radiometer operational
+1.414,DSCOVR,DSCOVR (Deep Space Climate Observatory),2015-02-11,,earth-science,DSCOVR,5,operational,L1 space weather monitor and Earth observation; EPIC camera full-disc Earth images; originally Triana/GoreSat
+1.415,JASON-3,Jason-3,2016-01-17,,earth-science,Jason,5,operational,Continued global ocean altimetry record; joint NOAA/NASA/CNES/EUMETSAT
+1.416,GOES-16,GOES-16 (GOES-R),2016-11-19,,earth-science,GOES,5,operational,Advanced Baseline Imager with 16 channels; 4x resolution; lightning mapper; current GOES-East
+1.417,CYGNSS,CYGNSS,2016-12-15,,earth-science,CYGNSS,5,operational,Cyclone Global Navigation Satellite System; 8 microsatellites; ocean wind speed in hurricanes using GPS reflections
+1.418,NICER,NICER (Neutron star Interior Composition Explorer),2017-06-03,,observatory,NICER,5,operational,X-ray telescope on ISS; studies neutron star interiors; demonstrated X-ray pulsar navigation (SEXTANT)
+1.419,TDRS-13,TDRS-13 (M),2017-08-18,,data-relay,TDRS,5,operational,Final TDRS launched to date; third-generation; launched on Atlas V
+1.420,NOAA-20,NOAA-20 (JPSS-1),2017-11-18,,earth-science,JPSS,5,operational,First operational Joint Polar Satellite System; 5 instruments; primary afternoon orbit weather satellite
+1.421,GOLD,GOLD (Global-scale Observations of Limb and Disk),2018-01-25,,earth-science,GOLD,5,operational,UV imaging spectrograph hosted on SES-14 commercial satellite; studies thermosphere-ionosphere from geostationary orbit
+1.422,MARCO,MarCO (Mars Cube One A and B),2018-05-05,2019-02-05,mars-relay,MarCO,5,complete,First interplanetary CubeSats; relayed InSight landing data in real-time; Wall-E and Eve
+1.423,GRACE-FO,GRACE-FO (Follow-On),2018-05-22,,earth-science,GRACE,5,operational,Continuation of GRACE gravity measurements; includes laser ranging interferometer demo; tracks ice and water mass changes
+1.424,DM-1,SpaceX DM-1 (Demo-1),2019-03-02,2019-03-08,demo-uncrewed,Commercial Crew,6,complete,First uncrewed Crew Dragon flight to ISS; validated spacecraft systems for crewed operations
+1.425,OCO-3,OCO-3 (Orbiting Carbon Observatory 3),2019-05-04,,earth-science,OCO,5,operational,CO2 measurement instrument on ISS; repurposed OCO-2 spare; measures urban CO2 hotspots
+1.426,ICON,ICON (Ionospheric Connection Explorer),2019-10-10,2022-11-25,earth-science,Explorer,5,complete,Studied ionosphere-thermosphere coupling; air-launched from Pegasus XL; lost contact Nov 2022
+1.427,DM-2,SpaceX DM-2 (Demo-2),2020-05-30,2020-08-02,crewed-orbital,Commercial Crew,6,complete,First crewed Crew Dragon; Behnken and Hurley; first crewed US orbital launch since STS-135; 64 days
+1.428,CREW-1,SpaceX Crew-1,2020-11-16,2021-05-02,crewed-station,Commercial Crew,6,complete,First operational Crew Dragon rotation mission; Hopkins Glover Walker Noguchi; 167 days on ISS
+1.429,SENTINEL-6,Sentinel-6 Michael Freilich,2020-11-21,,earth-science,Jason/Copernicus,5,operational,Reference ocean altimetry; joint NASA/ESA/EUMETSAT; named for late NASA Earth science director
+1.430,CREW-2,SpaceX Crew-2,2021-04-23,2021-11-09,crewed-station,Commercial Crew,6,complete,Second operational rotation; Kimbrough McArthur Pesquet Hoshide; first reused Crew Dragon and Falcon 9
+1.431,LANDSAT-9,Landsat 9,2021-09-27,,earth-observation,Landsat,5,operational,Continues 50-year Landsat record; 14-bit imaging; highest radiometric quality in Landsat history
+1.432,CREW-3,SpaceX Crew-3,2021-11-11,2022-05-06,crewed-station,Commercial Crew,6,complete,Third operational rotation; Marshburn Barron Chari Maurer; 177 days on ISS
+1.433,GOES-18,GOES-18 (GOES-T),2022-03-01,,earth-science,GOES,5,operational,Current operational GOES-West; third-generation geostationary weather satellite
+1.434,CREW-4,SpaceX Crew-4,2022-04-27,2022-10-14,crewed-station,Commercial Crew,6,complete,Fourth operational rotation; Lindgren Hines Watkins Cristoforetti; 170 days on ISS
+1.435,BOEING-OFT2,Boeing OFT-2 (Starliner),2022-05-19,2022-05-25,demo-uncrewed,Commercial Crew,6,complete,Second uncrewed Starliner orbital flight test to ISS; successful docking and return after OFT-1 anomaly
+1.436,EMIT,EMIT,2022-07-14,,earth-science,EMIT,5,operational,Earth Surface Mineral Dust Source Investigation on ISS; maps mineral composition of arid dust source regions
+1.437,CREW-5,SpaceX Crew-5,2022-10-05,2023-03-11,crewed-station,Commercial Crew,6,complete,Fifth operational rotation; Mann Cassada Wakata Kikina; first Roscosmos cosmonaut on Crew Dragon
+1.438,NOAA-21,NOAA-21 (JPSS-2),2022-11-10,,earth-science,JPSS,5,operational,Second operational JPSS satellite; VIIRS ATMS CrIS OMPS and CERES instruments
+1.439,SWOT,SWOT (Surface Water and Ocean Topography),2022-12-16,,earth-science,SWOT,5,operational,Joint NASA/CNES; first Ka-band radar interferometer; measures ocean and freshwater surface heights
+1.440,CREW-6,SpaceX Crew-6,2023-03-02,2023-09-04,crewed-station,Commercial Crew,6,complete,Sixth operational rotation; Hoburg Moghbeli Bowen Al Neyadi; 186 days on ISS
+1.441,CREW-7,SpaceX Crew-7,2023-08-26,2024-03-12,crewed-station,Commercial Crew,6,complete,Seventh rotation; Mogensen Furukawa Borisov Moghbeli; 199 days on ISS
+1.442,PACE,PACE (Plankton Aerosol Cloud ocean Ecosystem),2024-02-08,,earth-science,PACE,5,operational,OCI hyperspectral ocean color instrument; studies ocean ecosystems aerosols and clouds; first UV-to-SWIR
+1.443,CREW-8,SpaceX Crew-8,2024-03-04,2024-10-25,crewed-station,Commercial Crew,6,complete,Eighth rotation; Dominick Barratt Grebenkin Epps; 235 days on ISS (extended by Starliner issue)
+1.444,PREFIRE,PREFIRE,2024-05-25,,earth-science,PREFIRE,5,operational,Polar Radiant Energy in the Far-InfraRed Experiment; twin CubeSats measuring Arctic/Antarctic energy budget
+1.445,BOEING-CFT,Boeing CFT (Crew Flight Test),2024-06-05,2024-09-07,crewed-orbital,Commercial Crew,6,partial,First crewed Starliner; Wilmore Williams; thruster and helium leak issues; crew returned on Crew-9 instead
+1.446,GOES-19,GOES-19 (GOES-U),2024-06-25,,earth-science,GOES,5,operational,Latest GOES satellite; fourth generation; replacement for GOES-16 as GOES-East
+1.447,CREW-9,SpaceX Crew-9,2024-09-28,2025-03-18,crewed-station,Commercial Crew,6,complete,Ninth rotation; Hague Gorbunov; launched with 2 crew to allow Starliner crew return; Wilmore Williams returned
+1.448,CREW-10,SpaceX Crew-10,2025-03-14,,crewed-station,Commercial Crew,6,operational,Tenth operational rotation; Petelin Epps Patel Alneyadi; currently on ISS
+1.100,VANGUARD-2,Vanguard 2,1959-02-17,1959-02-17,earth-orbiter,Vanguard,1,partial,First attempt at cloud-cover mapping from orbit; wobble prevented useful data; still in orbit
+1.101,VANGUARD-3,Vanguard 3,1959-09-18,1959-12-11,earth-orbiter,Vanguard,1,complete,Measured Earths magnetic field and micrometeorite environment; final successful Vanguard launch
+1.102,EXPLORER-8,Explorer 8,1960-11-03,1960-12-27,earth-science,Explorer,1,complete,Measured ionospheric electron density and temperature using Langmuir probes
+1.103,TIROS-2,TIROS-2,1960-11-23,1961-10-04,earth-science,TIROS,1,complete,Added infrared radiometer to camera system; cloud cover and Earth heat balance measurements
+1.104,EXPLORER-9,Explorer 9,1961-02-16,1964-04-09,earth-science,Explorer,1,complete,First inflatable balloon satellite for atmospheric density measurements; tracked visually
+1.105,EXPLORER-10,Explorer 10,1961-03-25,1961-03-25,magnetosphere,Explorer,1,complete,Measured magnetic fields between Earth and Moon; 52-hour mission
+1.106,EXPLORER-12,Explorer 12 (EPE-A),1961-08-15,1961-12-06,magnetosphere,Explorer,1,complete,First Energetic Particles Explorer; studied Van Allen belt dynamics and solar wind boundary
+1.107,TIROS-4,TIROS-4,1962-02-08,1962-06-30,earth-science,TIROS,1,complete,Tested Automatic Picture Transmission system for direct weather data downlink
+1.108,ARIEL-1,Ariel 1,1962-04-26,1964-07-12,observatory,International,1,complete,First international satellite; UK-built NASA-launched; studied ionosphere and solar UV; damaged by Starfish Prime nuclear test
+1.109,TIROS-5,TIROS-5,1962-06-19,1963-05-14,earth-science,TIROS,1,complete,Spin-stabilized; global cloud photography for operational weather forecasting
+1.110,TELSTAR-1,Telstar 1,1962-07-10,1963-02-21,communications,Telstar,1,complete,First active communications satellite to relay TV telephone and data; NASA launched for AT&T/Bell Labs
+1.111,TIROS-6,TIROS-6,1962-09-18,1963-10-21,earth-science,TIROS,1,complete,Weather photography with improved tape recorder for global coverage
+1.112,ALOUETTE-1,Alouette 1,1962-09-29,1972-09-30,earth-science,International,1,complete,First Canadian satellite; NASA-launched; topside ionospheric sounder; 10 years of operation
+1.113,EXPLORER-14,Explorer 14 (EPE-B),1962-10-02,1963-08-11,magnetosphere,Explorer,1,complete,Energetic particle and magnetic field measurements in the magnetosphere
+1.114,RELAY-1,Relay 1,1962-12-13,1965-02-10,communications,Relay,1,complete,Active communications satellite; first TV relay across the Pacific; demonstrated satellite communications
+1.115,SYNCOM-2,Syncom 2,1963-07-26,1969-01-01,communications,Syncom,1,complete,First geosynchronous communications satellite; demonstrated voice and teletype from geostationary orbit
+1.116,TIROS-8,TIROS-8,1963-12-21,1967-07-01,earth-science,TIROS,1,complete,First operational Automatic Picture Transmission; enabled worldwide real-time weather images
+1.117,ECHO-2,Echo 2,1964-01-25,1969-06-07,communications,Echo,1,complete,Second passive balloon communications satellite; 41m diameter; first US-Soviet cooperative space project
+1.118,SA-5,Saturn I SA-5,1964-01-29,1964-01-29,test-flight,Saturn,1,complete,First Saturn I with live second stage (S-IV); first orbital launch of Saturn rocket; carried ballast
+1.119,SYNCOM-3,Syncom 3,1964-08-19,1969-04-01,communications,Syncom,1,complete,First truly geostationary satellite; broadcast 1964 Tokyo Olympics live across the Pacific
+1.120,OGO-1,OGO-1,1964-09-05,1971-11-01,magnetosphere,OGO,1,complete,First Orbiting Geophysical Observatory; 20 experiments studying space physics; 7 years of data
+1.121,EXPLORER-21,Explorer 21 (IMP-2),1964-10-04,1966-10-13,interplanetary,Explorer/IMP,1,complete,Second Interplanetary Monitoring Platform; solar wind and magnetic field measurements
+1.122,SAN-MARCO-1,San Marco 1,1964-12-15,1965-09-14,earth-science,International,1,complete,First Italian satellite; NASA Scout rocket; studied atmospheric density; launched from Wallops Island
+1.123,SA-9,Saturn I SA-9 (Pegasus 1),1965-02-16,1965-02-16,test-flight,Saturn,1,complete,Saturn I operational mission; deployed Pegasus 1 micrometeorite satellite; last Saturn I with ballast nosecone
+1.124,EXPLORER-28,Explorer 28 (IMP-3),1965-05-29,1967-05-12,interplanetary,Explorer/IMP,1,complete,Third IMP; studied interplanetary magnetic field and solar plasma
+1.125,EXPLORER-29,Explorer 29 (GEOS-1),1965-11-06,1978-03-23,geodesy,Explorer,1,complete,First Geodetic Explorer; precise Earth shape measurements using laser ranging and radio tracking
+1.126,AS-201,AS-201 (Saturn IB),1966-02-26,1966-02-26,test-flight,Apollo,1,complete,First Saturn IB flight; first test of Apollo command module heat shield at orbital velocity; suborbital
+1.127,NIMBUS-2,Nimbus 2,1966-05-15,1969-01-17,earth-science,Nimbus,1,complete,Medium Resolution Infrared Radiometer; first night-time cloud imaging from orbit
+1.128,EXPLORER-32,Explorer 32 (AE-B),1966-05-25,1967-02-22,earth-science,Explorer,1,complete,Second Atmosphere Explorer; measured neutral gas temperatures and densities in upper atmosphere
+1.129,EXPLORER-33,Explorer 33 (IMP-D),1966-07-01,1971-09-21,interplanetary,Explorer/IMP,1,complete,Anchored IMP intended for lunar orbit; studied interplanetary space and solar wind
+1.130,AS-203,AS-203 (Saturn IB),1966-07-05,1966-07-05,test-flight,Apollo,1,complete,Saturn IB S-IVB stage restart test in orbit; no spacecraft; validated Saturn V upper stage behavior in space
+1.131,AS-202,AS-202 (Saturn IB),1966-08-25,1966-08-25,test-flight,Apollo,1,complete,Second Saturn IB Apollo test; suborbital CM reentry at high speed; validated fuel cells and guidance
+1.132,ATS-2,ATS-2,1967-04-06,1967-04-06,technology-comms,ATS,2,failed,Applications Technology Satellite; failed to reach planned medium-altitude orbit
+1.133,EXPLORER-34,Explorer 34 (IMP-4),1967-05-24,1969-05-03,interplanetary,Explorer/IMP,2,complete,Fourth IMP; measured energetic solar particles and cosmic rays
+1.134,EXPLORER-36,Explorer 36 (GEOS-2),1968-01-11,1983-01-01,geodesy,Explorer,2,complete,Geodetic Explorer; improved measurements of Earths gravity field and shape
+1.135,OGO-5,OGO-5,1968-03-04,1972-07-14,magnetosphere,OGO,2,complete,Fifth OGO; discovered the plasma pause; studied solar wind interaction with magnetosphere
+1.136,OGO-6,OGO-6,1969-06-05,1979-01-01,earth-science,OGO,2,complete,Final OGO; studied neutral atmosphere and ionosphere; 10 years of upper atmosphere data
+1.137,EXPLORER-41,Explorer 41 (IMP-5),1969-06-21,1972-12-23,interplanetary,Explorer/IMP,2,complete,Fifth IMP; studied solar wind cosmic rays and magnetic fields in near-Earth space
+1.138,ATS-5,ATS-5,1969-08-12,1984-01-01,technology-comms,ATS,2,partial,Despun antenna test; did not achieve stable spin mode but returned useful communications data
+1.139,NIMBUS-4,Nimbus 4,1970-04-08,1980-09-30,earth-science,Nimbus,2,complete,Backscatter UV ozone experiment; first satellite ozone measurements; 10 years of data
+1.140,EXPLORER-43,Explorer 43 (IMP-6),1971-03-13,1974-10-02,interplanetary,Explorer/IMP,3,complete,Sixth IMP; interplanetary plasma measurements during active solar period
+1.141,EXPLORER-45,Explorer 45 (SSS-A),1971-11-15,1974-09-30,magnetosphere,Explorer,3,complete,Small Scientific Satellite; studied inner magnetosphere dynamics near geosynchronous orbit
+1.142,EXPLORER-47,Explorer 47 (IMP-7),1972-09-23,1978-10-31,interplanetary,Explorer/IMP,3,complete,Seventh IMP; solar wind and cosmic ray monitoring in interplanetary space
+1.143,NIMBUS-5,Nimbus 5,1972-12-11,1983-03-29,earth-science,Nimbus,3,complete,First satellite microwave spectrometer for atmospheric temperature profiling
+1.144,EXPLORER-51,Explorer 51 (AE-C),1973-12-16,1978-12-12,earth-science,Explorer,3,complete,Atmosphere Explorer with propulsion for dipping orbits into lower thermosphere
+1.145,SMS-2,SMS-2,1975-02-06,1981-08-05,earth-science,GOES,3,complete,Second prototype geostationary meteorological satellite; proved operational concept
+1.146,NIMBUS-6,Nimbus 6,1975-06-12,1983-09-01,earth-science,Nimbus,3,complete,Earth Radiation Budget experiment; Coastal Zone Color Scanner precursor tests
+1.147,EXPLORER-54,Explorer 54 (AE-D),1975-10-06,1976-01-29,earth-science,Explorer,3,complete,Atmosphere Explorer; in situ neutral and ion composition measurements
+1.148,EXPLORER-55,Explorer 55 (AE-E),1975-11-20,1981-06-10,earth-science,Explorer,3,complete,Longest Atmosphere Explorer mission; low-altitude atmospheric chemistry and dynamics for 6 years
+1.149,LAGEOS-1,LAGEOS-1,1976-05-04,,geodesy,LAGEOS,3,operational,Laser Geodynamics Satellite; 426 retroreflectors; measures continental drift plate tectonics and Earths gravitational field
+1.150,EXPLORER-56,Explorer 56 (ISEE-1),1977-10-22,1987-09-26,magnetosphere,Explorer/ISEE,3,complete,First International Sun-Earth Explorer; two-point measurements of magnetosphere boundary with ISEE-2
+1.151,EXPLORER-57,Explorer 57 (ISEE-2),1977-10-22,1987-09-26,magnetosphere,Explorer/ISEE,3,complete,Companion to ISEE-1; first dual-spacecraft magnetosphere measurements
+1.152,EXPLORER-60,Explorer 60 (SAGE),1979-02-18,1981-11-19,earth-science,Explorer,3,complete,Stratospheric Aerosol and Gas Experiment; first satellite measurements of stratospheric ozone profiles
+1.153,EXPLORER-61,Explorer 61 (Magsat),1979-10-30,1980-06-11,earth-science,Explorer,3,complete,Magnetic field survey satellite; mapped Earths crustal magnetic field for the first time from orbit
+1.154,GOES-4,GOES-4,1980-09-09,1988-11-25,earth-science,GOES,4,complete,First GOES with VISSR Atmospheric Sounder for vertical temperature profiles
+1.155,EXPLORER-62,Explorer 62 (DE-1),1981-08-03,1991-02-28,magnetosphere,Explorer,4,complete,Dynamics Explorer 1; first global images of aurora from space; magnetosphere-ionosphere coupling
+1.156,EXPLORER-64,Explorer 64 (SME),1981-10-06,1989-04-04,earth-science,Explorer,4,complete,Solar Mesosphere Explorer; studied ozone response to solar UV variability
+1.157,EXPLORER-65,Explorer 65 (AMPTE-CCE),1984-08-16,1989-01-11,magnetosphere,Explorer/AMPTE,4,complete,Active Magnetospheric Particle Tracer Explorers; first artificial comet in space; barium ion releases
+1.158,TDRS-3,TDRS-3,1988-09-29,2012-06-01,data-relay,TDRS,4,complete,First TDRS after Challenger return to flight; deployed by STS-26; served 24 years
+1.159,TDRS-4,TDRS-4,1989-03-13,2011-12-01,data-relay,TDRS,4,complete,Completed TDRS initial constellation coverage; deployed by STS-29
+1.160,TDRS-5,TDRS-5,1991-08-02,2014-03-01,data-relay,TDRS,4,complete,Replenishment TDRS; deployed by STS-43; 23 years of service
+1.161,TDRS-6,TDRS-6,1993-01-13,2015-05-01,data-relay,TDRS,4,complete,Deployed by STS-54; continued expansion of TDRS relay network
+1.162,SNOE,SNOE (Student Nitric Oxide Explorer),1998-02-26,2003-12-13,earth-science,Explorer/STEDI,5,complete,Student-built satellite; first STEDI mission; measured nitric oxide density in lower thermosphere
+1.163,NOAA-15,NOAA-15,1998-05-13,,earth-science,POES,5,operational,First in Advanced TIROS-N series with AMSU microwave sounder; 27+ years of polar weather data
+1.164,SWAS,SWAS (Submillimeter Wave Astronomy Satellite),1998-12-06,2005-07-21,observatory,Explorer/SMEX,5,complete,First submillimeter-wave space observatory; studied water and oxygen in molecular clouds
+1.165,DS2,Deep Space 2 (Mars Microprobes),1999-01-03,1999-12-03,mars-probe,New Millennium,5,failed,Two microprobes carried by Mars Polar Lander; designed to penetrate Martian surface; no signal received after separation
+1.166,WIRE,WIRE (Wide-field Infrared Explorer),1999-03-05,1999-03-05,observatory,Explorer/SMEX,5,failed,Solid hydrogen cryogen lost immediately after launch; primary mission failed but star tracker used for asteroseismology
+1.167,ACRIMSAT,ACRIMSAT,1999-12-20,2014-12-14,solar-observatory,ACRIMSAT,5,complete,Active Cavity Radiometer Irradiance Monitor; measured total solar irradiance for 15 years
+1.168,SRTM,SRTM (Shuttle Radar Topography Mission),2000-02-11,2000-02-22,earth-science,SRTM,5,complete,STS-99 payload; mapped 80% of Earths land surface in 3D; 200-ft radar mast; most topographic data ever collected
+1.169,TDRS-9,TDRS-9 (I),2002-03-08,,data-relay,TDRS,5,operational,Second-generation TDRS; launched on Atlas IIA; enhanced bandwidth capabilities
+1.170,TDRS-10,TDRS-10 (J),2002-12-05,,data-relay,TDRS,5,operational,Third second-generation TDRS; completed second-generation constellation
+1.171,CHIPSAT,CHIPSat,2003-01-13,2008-04-11,observatory,Explorer/UNEX,5,complete,Cosmic Hot Interstellar Plasma Spectrometer; University Explorer studying EUV from hot interstellar gas
+1.172,ISS-EXP-10,ISS Expedition 10,2004-10-14,2005-04-25,crewed-station,ISS,6,complete,10th ISS expedition; Salizhan Sharipov and Leroy Chiao; two-person crew during post-Columbia Shuttle stand-down
+1.173,GOES-13,GOES-13 (N),2006-05-24,2020-01-08,earth-science,GOES,5,complete,GOES-N series; served as GOES-East 2010-2017; improved SXI solar X-ray imager
+1.174,HINODE,Hinode (Solar-B),2006-09-23,,solar-observatory,Hinode,5,operational,Joint JAXA/NASA/UK/ESA; three-instrument solar observatory studying magnetic field dynamics
+1.175,NOAA-19,NOAA-19,2009-02-06,,earth-science,POES,5,operational,Last NOAA POES satellite; bridge to JPSS era; fell off cart during manufacturing yet still launched successfully
+1.176,PLANCK,Planck,2009-05-14,2013-10-23,observatory,ESA/NASA,5,complete,ESA-led with NASA detectors; CMB mapping at higher resolution than WMAP; refined cosmological parameters
+1.177,HERSCHEL,Herschel Space Observatory,2009-05-14,2013-04-29,observatory,ESA/NASA,5,complete,ESA-led with NASA participation; largest space telescope mirror at time (3.5m); far-infrared and submillimeter
+1.178,ISS-EXP-20,ISS Expedition 20,2009-05-29,2009-10-11,crewed-station,ISS,6,complete,First 6-person ISS crew; expanded station capability; Padalka De Winne Romanenko Barratt Thirsk Kopra Stott
+1.179,AMS-02,AMS-02 (Alpha Magnetic Spectrometer),2011-05-19,,observatory,ISS,6,operational,$2B particle physics detector on ISS; studies cosmic rays antimatter and dark matter; delivered by STS-134; 200B+ events
+1.180,SPACEX-CRS-1,SpaceX CRS-1,2012-10-08,2012-10-28,cargo-resupply,CRS,6,complete,First operational commercial cargo resupply to ISS; Dragon capsule; 400+ kg of supplies
+1.181,SWARM,Swarm,2013-11-22,,earth-science,ESA/NASA,5,operational,ESA magnetic field mission; NASA contributes data analysis; three satellites mapping Earths magnetic field changes
+1.182,CYGNUS-ORB1,Cygnus Orb-1,2014-01-09,2014-02-19,cargo-resupply,CRS,6,complete,First operational Orbital Sciences (now Northrop Grumman) Cygnus cargo mission to ISS
+1.183,TDRS-12,TDRS-12 (L),2014-01-24,,data-relay,TDRS,5,operational,Second third-generation TDRS; S-band multiple access upgraded
+1.184,CALET,CALET (CALorimetric Electron Telescope),2015-08-19,,observatory,ISS/JAXA,6,operational,High-energy cosmic ray observatory on ISS JEM-EF; JAXA-led with NASA participation; electron/gamma-ray spectra
+1.185,ISS-EXPEDITION-50,ISS Expedition 50,2016-10-19,2017-04-10,crewed-station,ISS,6,complete,50th ISS expedition; crew of 6; Whitson most experienced US astronaut at the time
+1.186,SAGE-III,SAGE III/ISS,2017-02-19,,earth-science,SAGE,5,operational,Stratospheric Aerosol and Gas Experiment III on ISS; monitors ozone and aerosol recovery
+1.187,GOES-17,GOES-17 (GOES-S),2018-03-01,,earth-science,GOES,5,operational,GOES-S; served as GOES-West 2018-2022; ABI cooling system anomaly; replaced by GOES-18
+1.188,BOEING-OFT1,Boeing OFT-1 (Starliner),2019-12-20,2019-12-22,demo-uncrewed,Commercial Crew,6,partial,First uncrewed Starliner orbital flight test; mission timer anomaly prevented ISS docking; landed safely at White Sands
+1.189,INSPIRATION4,Inspiration4,2021-09-16,2021-09-18,crewed-orbital,Commercial Spaceflight,6,complete,First all-civilian orbital mission; Crew Dragon; 3 days in orbit; charitable mission for St Jude
+1.190,AXIOM-1,Axiom Mission 1 (Ax-1),2022-04-08,2022-04-25,crewed-station,Axiom,6,complete,First fully private crew to ISS; crew of 4; 17 days; Crew Dragon
+1.191,BIOSENTINEL,BioSentinel,2022-11-16,2023-12-01,biology,Artemis,6,complete,Artemis I CubeSat; first biological experiment in deep space since Apollo; yeast radiation study beyond LEO
+1.192,LUNAR-FLASHLIGHT,Lunar Flashlight,2022-12-11,2023-05-17,lunar-orbiter,SIMPLEx,5,failed,CubeSat to map water ice in permanently shadowed craters; propulsion system failure prevented lunar orbit
+1.193,TEMPO,TEMPO,2023-04-07,,earth-science,TEMPO,5,operational,Tropospheric Emissions Monitoring of Pollution; first geostationary air quality monitor over North America; hourly observations
+1.194,TROPICS,TROPICS,2023-05-08,,earth-science,TROPICS,5,operational,Time-Resolved Observations of Precipitation structure and storm Intensity; 4 CubeSats; rapid-revisit tropical cyclone monitoring
+1.195,AXIOM-2,Axiom Mission 2 (Ax-2),2023-05-21,2023-05-30,crewed-station,Axiom,6,complete,Second Axiom private mission to ISS; Saudi Arabian crew members; 10 days
+1.196,EUCLID,Euclid,2023-07-01,,observatory,ESA/NASA,5,operational,ESA dark energy/matter survey; NASA provided near-infrared detectors; mapping cosmic web structure
+1.197,XRISM,XRISM,2023-09-07,,observatory,JAXA/NASA,5,operational,X-Ray Imaging and Spectroscopy Mission; JAXA-led with NASA instruments; successor to Hitomi; micro-calorimeter
+1.198,CLARREO,CLARREO Pathfinder,2023-12-06,,earth-science,CLARREO,5,operational,Climate Absolute Radiance and Refractivity Observatory on ISS; high-accuracy reflected solar reference measurements
+1.199,IM-1,IM-1 Odysseus (Intuitive Machines),2024-02-15,2024-02-29,lunar-lander,CLPS,6,partial,First US lunar landing since Apollo 17; CLPS program; tipped over on landing; returned science data for 7 days
+1.200,POLARIS-DAWN,Polaris Dawn,2024-09-10,2024-09-15,crewed-orbital,Commercial Spaceflight,6,complete,First commercial EVA; highest Earth orbit since Gemini; 1400 km apogee; SpaceX EVA suit test
+1.201,ISS-EXP-72,ISS Expedition 72,2024-09-23,2025-03-01,crewed-station,ISS,6,complete,72nd ISS expedition; crew included Wilmore and Williams (Starliner-stranded); continued ISS research operations
+1.202,NISAR,NISAR,2025-03-28,,earth-science,NISAR,5,operational,NASA-ISRO Synthetic Aperture Radar; dual-frequency L-band and S-band; monitors earthquakes ice sheets ecosystems

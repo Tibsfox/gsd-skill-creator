@@ -1,0 +1,1135 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+% Space/Physics color scheme
+\definecolor{primary}{HTML}{311B92}       % Cosmic purple
+\definecolor{secondary}{HTML}{0277BD}     % Nebula blue
+\definecolor{tertiary}{HTML}{F9A825}      % Star gold
+\definecolor{accent}{HTML}{4527A0}        % Deep violet
+\definecolor{lightprimary}{HTML}{EDE7F6}  % Lavender tint
+\definecolor{lightsecondary}{HTML}{E1F5FE}
+\definecolor{lighttertiary}{HTML}{FFF8E1}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{darktext}{HTML}{212121}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{accent}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+% Custom environments
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily,
+  breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt,
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{NASA Mission History}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Mission Package}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=secondary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={NASA Mission History -- GSD Research Mission Package},
+  pdfsubject={Vision to Mission Pipeline},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{1.5cm}
+{\fontsize{26}{32}\selectfont\bfseries\sffamily\textcolor{primary}{A Complete History of\\[0.3em]NASA Missions}}
+
+\vspace{0.8cm}
+{\Large\sffamily\textcolor{secondary}{From Founding to the Present Day — 1958--2026}}
+
+\vspace{0.5cm}
+{\large\sffamily\itshape\textcolor{accent}{A Deep Research Study}}
+
+\vspace{2.5cm}
+{\sffamily\textcolor{accent}{Vision $\rightarrow$ Research $\rightarrow$ Mission}}\\[0.3em]
+{\small\sffamily\textcolor{accent}{Full Pipeline Execution}}
+
+\vspace{2.5cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 29, 2026  |  Status: Ready for GSD Orchestrator}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Fleet  |  Estimated: 8--12 context windows across 3 sessions}}
+\end{center}
+\newpage
+
+% TOC
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1: VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{NASA Mission History --- Vision Guide}
+
+\metafield{Date:}{March 29, 2026}
+\metafield{Status:}{Research Complete / Ready for Mission Execution}
+\metafield{Domain:}{Space History, Human Spaceflight, Robotic Exploration, Ongoing Programs}
+\metafield{Activation Profile:}{Fleet (6 modules, broad scope)}
+\metafield{Depends On:}{NASA.gov official mission archive, Wikipedia mission records, JPL mission catalog}
+
+\subsection{Vision}
+
+The history of NASA is the history of humanity learning, in real time, that we are not merely terrestrial creatures. From the first Mercury capsule perched on a converted ballistic missile to the Parker Solar Probe skimming the Sun's corona at 430,000 miles per hour, every NASA mission represents a node in a vast knowledge graph --- one whose edges are the discoveries, failures, near-misses, and moments of transcendence that define the agency's 68 years.
+
+Understanding the full arc of NASA's mission history is not an exercise in nostalgia. It is an act of pattern recognition. The same architectural choices that nearly killed Apollo 13 taught engineers how to build lifeboat contingencies into every subsequent mission. The same institutional pressure that led to the Challenger disaster resurfaced before Columbia. The same ``faster, better, cheaper'' philosophy that lost Mars Observer eventually produced the Mars Exploration Rover twins. Every era is a conversation with every other era.
+
+This research mission traces that full arc: from the chaos of Sputnik and the creation of NACA's successor, through the white-knuckle years of Mercury and Gemini, through Apollo's extraordinary gamble and the long post-Apollo interlude, through the Space Shuttle's paradoxical record of magnificence and tragedy, through the golden age of robotic planetary science, and into the present moment where Artemis II sits on Pad 39B awaiting its April 2026 launch window and the James Webb Space Telescope peers at galaxies older than the solar system.
+
+The Amiga Principle applies here as much as anywhere: remarkable outcomes emerge not from brute enumeration but from the spaces between the missions --- the institutional memory, the transferred knowledge, the lessons written in fire and vacuum. This document is a guide to those spaces.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+  \item \textbf{Historical fragmentation:} NASA's 68-year mission record is scattered across agency archives, Wikipedia, academic papers, and JPL mission catalogs. No single synthesized, structured reference covers the full arc from NACA's absorption in 1958 through the active missions of 2026 with consistent depth across all eras.
+  \item \textbf{Era-siloed understanding:} Most reference works cover individual programs (Apollo, Shuttle, Mars rovers) without connecting them to each other. The institutional knowledge flows between programs --- what Mercury learned that Gemini built on, what Apollo's post-program industrial base enabled for Skylab --- are rarely articulated.
+  \item \textbf{Robotic/human split:} Histories of NASA human spaceflight and histories of NASA robotic science missions are typically published separately, obscuring the fact that both programs are deeply interdependent (Surveyor prepared for Apollo; Mars Pathfinder enabled Spirit and Opportunity; Ingenuity's success on Mars is relevant to Dragonfly at Titan).
+  \item \textbf{Current missions underrepresented:} The rapid pace of active missions (Perseverance, JWST, Parker, Artemis, OSIRIS-REx/OSIRIS-APEX, Dragonfly in development) makes ``current state'' descriptions obsolete within months. A structured mission package provides a replicable framework for staying current.
+  \item \textbf{Institutional failure patterns obscured:} The Challenger and Columbia disasters, the Apollo 1 fire, and the Mars Climate Orbiter metric confusion are frequently cited in isolation. A full history enables pattern analysis of when and why NASA's institutional structures succeed or fail.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} NASA's mission history as a directed graph of technological inheritance --- each program inheriting capabilities, culture, and lessons from predecessors, and depositing them forward.
+
+This graph has six major epochs (modules), each with strong forward edges to the next: the early human spaceflight programs established the fundamental techniques (orbit, rendezvous, EVA); Apollo demonstrated peak capability but consumed the institutional budget; the post-Apollo interlude diversified into robotic science while the human program contracted; the Shuttle era normalized orbital operations while building ISS; the robotic science golden age produced the flagship missions; and the current era integrates commercial partners and returns humans to deep space.
+
+\subsubsection{Domain Map}
+
+\begin{asciibox}
+NASA MISSION HISTORY -- EPOCH TOPOLOGY
+=======================================
+
+[1958] NACA -> NASA
+   |
+   v
+[1958-1966] EARLY HUMAN SPACEFLIGHT
+   Mercury (1958-1963): 6 crewed flights, suborbital + orbital
+   Gemini  (1961-1966): 10 crewed flights, EVA, rendezvous, docking
+   |
+   v
+[1961-1972] APOLLO ERA
+   Unmanned precursors: Ranger, Surveyor, Lunar Orbiter
+   Crewed program: Apollo 1 (tragedy) -> Apollo 8 (lunar orbit)
+                -> Apollo 11 (first landing, 1969-07-20)
+                -> Apollo 17 (final landing, 1972-12-14)
+   |
+   v
+[1973-1980] POST-APOLLO INTERLUDE
+   Human:  Skylab (1973-1974), Apollo-Soyuz (1975)
+   Robotic: Pioneer 10/11, Mariner 9, Viking 1/2, Voyager 1/2
+   |
+   v
+[1981-2011] SPACE SHUTTLE ERA
+   135 missions, 5 orbiters, 355 astronauts
+   Hubble deployment (1990), Mir docking (1994-1998)
+   ISS construction (1998-2011)
+   Challenger (1986), Columbia (2003)
+   |
+   v
+[1990-PRESENT] ROBOTIC SCIENCE GOLDEN AGE
+   Hubble, Chandra, Spitzer, Kepler/K2
+   Mars: Pathfinder, Spirit/Opportunity, Curiosity, Perseverance
+   Outer Solar System: Galileo, Cassini-Huygens
+   Deep Space: Voyager interstellar (2012), New Horizons (Pluto 2015)
+   Solar: Parker Solar Probe (2018-present, 27+ perihelions)
+   Cosmic: James Webb Space Telescope (2021-present)
+   |
+   v
+[2000-PRESENT] NEW HUMAN SPACEFLIGHT ERA
+   ISS: continuous habitation 2000-present
+   Commercial Crew: SpaceX Crew Dragon (2020), Boeing Starliner
+   Artemis I (2022, uncrewed), Artemis II (2026, lunar flyby planned)
+   Artemis IV: first lunar landing targeted early 2028
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+MODULE ARCHITECTURE
+===================
+
+MODULE 1: Origins and Early Human Spaceflight (1958-1966)
+  - NACA->NASA transition, Cold War context
+  - Project Mercury: 6 crewed flights 1961-1963
+  - Project Gemini: 10 crewed flights 1965-1966
+  - Lunar precursor programs: Ranger, Surveyor, Lunar Orbiter
+
+MODULE 2: The Apollo Era (1961-1972)
+  - Political mandate: Kennedy 1961
+  - Apollo 1 fire and redesign
+  - Apollo 7-10: buildup missions
+  - Apollo 11-17: lunar landings (6 successful)
+  - Apollo 13: successful failure
+  - Science return: 382 kg of lunar samples
+
+MODULE 3: Post-Apollo Interlude (1973-1980)
+  - Skylab space station 1973-1974
+  - Apollo-Soyuz 1975 (detente in orbit)
+  - Planetary: Pioneer, Viking, Voyager programs
+  - Institutional contraction and budget wars
+
+MODULE 4: Space Shuttle Era (1981-2011)
+  - Design, development, test philosophy
+  - 135 missions across 5 orbiters
+  - Challenger (1986) and Columbia (2003) disasters
+  - Hubble, Chandra, Spitzer, ISS construction
+
+MODULE 5: Robotic and Deep Space Science (1990-2026)
+  - Great Observatories program
+  - Mars program: Pathfinder -> MER -> MSL -> Mars 2020
+  - Outer system flagships: Galileo, Cassini-Huygens
+  - New Horizons, Voyager interstellar
+  - Parker Solar Probe, JWST, SPHEREx, IMAP
+
+MODULE 6: New Human Spaceflight and Commercial Era (2000-2026)
+  - ISS assembly and continuous habitation
+  - Commercial Resupply, Commercial Crew
+  - Artemis program: I, II (2026), III-IV (2027-2028)
+  - Mars horizon goal
+\end{asciibox}
+
+\subsection{Research Modules}
+
+\subsubsection{Module 1: Origins and Early Human Spaceflight}
+
+Covers the creation of NASA from NACA in 1958, driven by the Sputnik crisis, through the complete Mercury and Gemini programs. Sources: NASA official mission histories, National Air and Space Museum records, EBSCO Research Starters. Key deliverables: mission-by-mission table for Mercury (6 crewed) and Gemini (10 crewed), astronaut roster, key firsts timeline, hardware genealogy (Redstone, Atlas, Titan II).
+
+\subsubsection{Module 2: The Apollo Era}
+
+Traces Apollo from Kennedy's 1961 mandate through Apollo 17 in December 1972. Includes the Apollo 1 fire and its institutional aftermath, the incremental buildup (Apollo 7-10), the six successful lunar landings (Apollo 11, 12, 14, 15, 16, 17), the Apollo 13 crisis, and the science return (382 kg of samples, seismic experiments, solar wind collectors). Sources: NASA Apollo program archive, Britannica, NSSDC planetary data system.
+
+\subsubsection{Module 3: Post-Apollo Interlude}
+
+Examines the institutional contraction after Apollo, including Skylab (1973-1974, three crews, 171 days of human spaceflight), the Apollo-Soyuz Test Project (1975, first US-Soviet joint mission), and the surge of robotic planetary exploration: Pioneer 10/11 (first outer planet flybys), Mariner 9 (first Mars orbiter, 1971), Viking 1/2 (first successful Mars landers, 1976), and Voyager 1/2 (Grand Tour, launched 1977). Sources: NASA Science Mission Directorate, JPL mission histories.
+
+\subsubsection{Module 4: Space Shuttle Era}
+
+Covers the full 135-mission Space Transportation System program from STS-1 (April 12, 1981) to STS-135 (July 21, 2011). Key sub-topics: orbiter fleet (Columbia, Challenger, Discovery, Atlantis, Endeavour), the two disasters and their aftermath, the Hubble deployment and servicing missions, Shuttle-Mir, and ISS construction. Sources: NASA Space Shuttle program archive, Wikipedia mission list, Britannica, ESA mission records.
+
+\subsubsection{Module 5: Robotic and Deep Space Science}
+
+Surveys the Great Observatories (Hubble 1990, Compton 1991, Chandra 1999, Spitzer 2003), the Mars exploration sequence (Pathfinder 1997, Spirit/Opportunity 2004, Curiosity 2012, Perseverance 2021), outer solar system flagships (Galileo 1995-2003, Cassini 1997-2017), the New Horizons Pluto flyby (2015), Voyager 1's interstellar crossing (2012), Parker Solar Probe (2018-present), and JWST (2021-present). Sources: NASA Science, JPL, Space Science Institute.
+
+\subsubsection{Module 6: New Human Spaceflight and Commercial Era}
+
+Covers ISS continuous habitation (November 2000 to present), the gap years after Shuttle retirement (2011-2020) when the US relied on Russian Soyuz, the emergence of Commercial Crew (SpaceX Crew Dragon first crewed flight May 2020, Boeing Starliner development), and the Artemis program: Artemis I uncrewed (November 2022), Artemis II crewed lunar flyby (targeted April 2026), Artemis III LEO demonstration (2027), Artemis IV first lunar landing (early 2028 target). Sources: NASA Artemis pages, Wikipedia Artemis program (updated February 2026), EarthSky, GAO reports.
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+chipset:
+  agnus:          # Orchestration / Mission Control
+    model: opus
+    role: FLIGHT
+    responsibility: >
+      Cross-module synthesis, institutional failure pattern analysis,
+      cultural sensitivity, go/no-go gating
+
+  denise:         # Display / Document Assembly
+    model: sonnet
+    role: EXEC (x2)
+    responsibility: >
+      Document production for modules 1-3 (EXEC-A) and 4-6 (EXEC-B),
+      table formatting, bibliography assembly
+
+  paula:          # Research / Data Acquisition
+    model: sonnet
+    role: SCOUT + CRAFT
+    responsibility: >
+      Source gathering, CRAFT-HISTORY (era context),
+      CRAFT-SCIENCE (technical mission details)
+
+  gary:           # Verification / Safety
+    model: sonnet
+    role: VERIFY + SURGEON
+    responsibility: >
+      Source validation, accuracy checking, date/fact verification,
+      research quality monitoring
+
+  68000:          # CPU / Haiku scaffolding
+    model: haiku
+    role: BUDGET + LOG + PLAN
+    responsibility: >
+      Schema generation, token budget tracking, wave templates,
+      commit messages, dependency management
+
+model_allocation:
+  opus: 30%        # FLIGHT synthesis, cross-module integration
+  sonnet: 60%      # EXEC, SCOUT, CRAFT, VERIFY modules
+  haiku: 10%       # Scaffolding, templates, budget tracking
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (v1.0)}
+
+\begin{itemize}[leftmargin=*]
+  \item All crewed NASA programs: Mercury, Gemini, Apollo, Skylab, Apollo-Soyuz, Space Shuttle, ISS, Artemis
+  \item All flagship-class robotic missions: Mariner, Pioneer, Viking, Voyager, Hubble, Magellan, Galileo, Cassini, Mars Exploration Rovers, Curiosity, Perseverance, New Horizons, Parker Solar Probe, JWST
+  \item Discovery and New Frontiers class missions at survey depth
+  \item Key mission failures and their institutional consequences (Apollo 1 fire, Challenger, Columbia, Mars Observer, Mars Climate Orbiter)
+  \item Active missions as of March 2026
+  \item Planned missions with confirmed launch schedules through 2028
+  \item NASA institutional history: creation, key administrators, budget history, organizational structure
+  \item International partnerships: Apollo-Soyuz, Shuttle-Mir, ISS partners, Artemis Accords
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*]
+  \item Non-NASA space agencies (ESA, JAXA, ISRO, CNSA) except where joint missions are explicitly covered
+  \item Commercial spaceflight (SpaceX, Blue Origin, Virgin Galactic) except as NASA commercial partners
+  \item Military/classified NRO or USAF missions
+  \item Earth observation and meteorological satellites at mission-detail depth
+  \item NASA aeronautics research programs (separate discipline)
+  \item Cancelled programs beyond key notes (Constellation, Ares, SLS cancellation debate)
+  \item Future missions beyond confirmed 2028 schedule
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item All 16 crewed Mercury and Gemini missions are enumerated with crew, date, duration, and key achievement.
+  \item All Apollo missions (crewed and uncrewed) are listed with mission type, outcome, and key scientific/technical result.
+  \item Apollo 13 narrative includes the failure sequence, improvised solutions, and institutional lessons.
+  \item Space Shuttle era covers all five orbiters, the 135-mission record, Challenger and Columbia disaster analyses, and Hubble servicing missions.
+  \item Robotic Mars exploration is covered as a continuous lineage from Mariner 4 (1965) to Perseverance (2021-present).
+  \item Cassini-Huygens mission coverage includes the Enceladus water plume discovery and the Grand Finale.
+  \item Voyager 1 and 2 coverage includes the Grand Tour, Voyager 1's interstellar crossing (2012), and current status.
+  \item JWST coverage includes launch (December 2021), first images (July 2022), and ongoing science through early 2026.
+  \item Artemis program coverage reflects the February 2026 program restructure: Artemis II (lunar flyby, April 2026), Artemis III (LEO demonstration, 2027), Artemis IV (first lunar landing, early 2028).
+  \item Parker Solar Probe coverage includes the December 2024 record perihelion and the 27th solar encounter (March 2026).
+  \item All institutional failure events (Apollo 1, Challenger, Columbia) are covered with contributing factors and corrective actions.
+  \item A complete source bibliography is provided with government and peer-reviewed sources only.
+\end{enumerate}
+
+\subsection{Relationship to Other GSD Documents}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Document} & \tableheader{Relationship} & \tableheader{Integration Point} \\
+\midrule
+The Space Between & Philosophical spine & Mathematical foundations informing trajectory, orbital mechanics modules \\
+The Quark and the Compiler & Computing history & NASA computing heritage: IBM, Apollo Guidance Computer, JPL software \\
+Gsd-silicon-layer-spec & Infrastructure & Compute requirements for simulation and data processing \\
+College of Knowledge & Curriculum & NASA history as core STEM curriculum module in GSD-OS \\
+Deep Research Mission & Methodology & Three-stage pipeline; this document is a peer document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The Through-Line}
+
+The Space Between describes the unit circle as a frame for all motion, all cycles, all return. NASA's history is, in one reading, a vast unit circle: the agency began in fear (Sputnik), spiraled outward through Mercury, Gemini, and Apollo to its furthest point --- the Moon --- and then contracted inward through the Shuttle years before spiraling outward again with Artemis, aimed once more at the lunar surface and beyond.
+
+But the more honest metaphor is the Amiga Principle itself: remarkable outcomes through architectural elegance and specialized execution. Every era of NASA's success has been an era of elegant specialization --- small teams solving specific problems with tools designed for exactly that purpose. Every era of failure has been an era of institutional pressure overriding engineering judgment, of generic process trampling specialized knowledge. The Apollo Guidance Computer was 4 kilobytes of core rope memory. It navigated humans to the Moon. The lesson is not about hardware. It is about the clarity of purpose that makes specialized tools possible --- and the organizational clarity that protects them.
+
+\newpage
+
+% ============================================================
+% STAGE 2: RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{NASA Mission History --- Research Reference}
+
+\subsection{How to Use This Document}
+
+This reference consolidates findings from cold-start web research conducted March 29, 2026. All claims are sourced from the organizations listed below. Each module section provides the data an executing agent needs to produce its deliverable without additional research.
+
+\textbf{Key source organizations:}
+\begin{itemize}[leftmargin=*]
+  \item NASA.gov --- official mission histories, news releases, program pages
+  \item NASA Jet Propulsion Laboratory (jpl.nasa.gov) --- robotic mission archives
+  \item NASA NSSDC (nssdc.gsfc.nasa.gov) --- National Space Science Data Center
+  \item Smithsonian National Air and Space Museum (airandspace.si.edu)
+  \item Encyclopaedia Britannica --- peer-reviewed encyclopedia entries
+  \item Wikipedia (as secondary corroborative source, not primary)
+  \item GAO (gao.gov) --- government accountability office Artemis audits
+  \item EBSCO Research Starters --- academic overview entries
+\end{itemize}
+
+\subsection{Module 1 Reference: Origins and Early Human Spaceflight (1958--1966)}
+
+\subsubsection{NASA Creation and NACA Heritage}
+
+The National Advisory Committee for Aeronautics (NACA), founded in 1915, served as the institutional core of the new agency. President Eisenhower signed the National Aeronautics and Space Act on July 29, 1958; NASA began operations on October 1, 1958. The immediate trigger was Sputnik 1 (October 4, 1957), which created, in NASA's own words, a ``Pearl Harbor effect on American public opinion.'' NASA absorbed 8,000 NACA employees, three major research laboratories (Langley, Ames, Lewis), JPL from Caltech/Army, and the Army Ballistic Missile Agency under Wernher von Braun.
+
+\subsubsection{Project Mercury (1958--1963)}
+
+Project Mercury was approved October 7, 1958 --- six days after NASA began operations. The program ran 20 uncrewed developmental flights and six crewed missions.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}L{2.2cm}L{1.8cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mission} & \tableheader{Astronaut} & \tableheader{Date} & \tableheader{Type} & \tableheader{Key Achievement} \\
+\midrule
+Freedom 7 & Alan Shepard & May 5, 1961 & Suborbital & First American in space (15 min) \\
+Liberty Bell 7 & Gus Grissom & Jul 21, 1961 & Suborbital & Second American in space \\
+Friendship 7 & John Glenn & Feb 20, 1962 & Orbital & First American to orbit Earth (3 orbits) \\
+Aurora 7 & Scott Carpenter & May 24, 1962 & Orbital & Second American orbital flight (3 orbits) \\
+Sigma 7 & Wally Schirra & Oct 3, 1962 & Orbital & Six-orbit precision flight (9.25 hours) \\
+Faith 7 & Gordon Cooper & May 15, 1963 & Orbital & Final Mercury; 22 orbits, 34 hours \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The program validated that humans could function in weightlessness, that spacecraft could be safely recovered from orbit, and that Mercury's blunt-body heat shield design was viable. Total program cost: \$2.83 billion adjusted. Yuri Gagarin (USSR) had orbited Earth on April 12, 1961 --- three weeks before Shepard's suborbital flight.
+
+\subsubsection{Project Gemini (1961--1966)}
+
+Gemini was announced January 3, 1962, to bridge Mercury and Apollo. Using a modified Air Force Titan II launch vehicle, the two-person Gemini capsule served as the testbed for EVA, rendezvous, docking, fuel cells, and long-duration flight.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}L{1.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mission} & \tableheader{Crew} & \tableheader{Launch} & \tableheader{Key Achievement} \\
+\midrule
+Gemini 3 & Grissom, Young & Mar 23, 1965 & First crewed Gemini; orbital maneuver \\
+Gemini 4 & McDivitt, White & Jun 3, 1965 & Ed White: first US spacewalk (EVA 23 min) \\
+Gemini 5 & Cooper, Conrad & Aug 21, 1965 & Eight-day endurance mission \\
+Gemini 6 & Schirra, Stafford & Dec 15, 1965 & First space rendezvous (with Gemini 7) \\
+Gemini 7 & Borman, Lovell & Dec 4, 1965 & 14-day mission; medical baseline \\
+Gemini 8 & Armstrong, Scott & Mar 16, 1966 & First docking; emergency return \\
+Gemini 9A & Stafford, Cernan & Jun 3, 1966 & Spacewalk; rendezvous \\
+Gemini 10 & Young, Collins & Jul 18, 1966 & Double rendezvous; EVA \\
+Gemini 11 & Conrad, Gordon & Sep 12, 1966 & Record altitude (850 miles) \\
+Gemini 12 & Lovell, Aldrin & Nov 11, 1966 & Final Gemini; Aldrin EVA 5.5 hrs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+By the end of Gemini, the US had definitively surpassed the Soviet Union in crewed spaceflight capability.
+
+\subsection{Module 2 Reference: The Apollo Era (1961--1972)}
+
+\subsubsection{Political Mandate}
+
+On May 25, 1961, President Kennedy challenged Congress to commit to ``landing a man on the moon and returning him safely to the Earth'' before the decade's end. This was declared with only 15 minutes of US human spaceflight experience. At its peak Apollo employed 400,000 people and 20,000 firms. Total program cost: \$25 billion (\$187 billion in 2024 dollars).
+
+\subsubsection{Apollo 1 and the Redesign (1967)}
+
+On January 27, 1967, a cabin fire during a launch pad test killed Gus Grissom, Ed White, and Roger Chaffee. The pure oxygen, high-pressure atmosphere combined with flammable materials created a catastrophic fire that could not be escaped. The program was halted for 18 months. The redesign eliminated the pure oxygen pre-launch atmosphere, replaced flammable materials, and redesigned the hatch for outward opening.
+
+\subsubsection{The Buildup Missions (1968--1969)}
+
+Apollo 7 (October 1968): first crewed test of the command module; 11-day Earth orbit mission; first live TV from a US spacecraft. Apollo 8 (December 1968): first humans to orbit the Moon; Frank Borman, Jim Lovell, and William Anders completed 10 lunar orbits; Anders' ``Earthrise'' photograph became iconic. Apollo 9 (March 1969): first crewed lunar module test in Earth orbit. Apollo 10 (May 1969): full dress rehearsal; Stafford and Cernan descended to within 14.4 km of the lunar surface.
+
+\subsubsection{Lunar Landing Missions}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{3.5cm}L{2.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mission} & \tableheader{Crew (Surface)} & \tableheader{Landing Site} & \tableheader{Key Achievement / Dates} \\
+\midrule
+Apollo 11 & Armstrong, Aldrin & Sea of Tranquility & First lunar landing; Jul 20, 1969; 650M TV viewers \\
+Apollo 12 & Conrad, Bean & Ocean of Storms & Precision landing near Surveyor 3; Nov 1969 \\
+Apollo 13 & Lovell, Haise, Swigert & No landing & O\textsubscript{2} tank explosion; lifeboat mission; Apr 1970 \\
+Apollo 14 & Shepard, Mitchell & Fra Mauro & Lunar highlands; first portable tool cart; Feb 1971 \\
+Apollo 15 & Scott, Irwin & Hadley Rille & First Lunar Roving Vehicle; Jul 1971 \\
+Apollo 16 & Young, Duke & Descartes & Lunar highlands geology; Apr 1972 \\
+Apollo 17 & Cernan, Schmitt & Taurus-Littrow & Last lunar landing; geologist on Moon; Dec 1972 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Six missions landed 12 humans on the Moon. Total lunar samples returned: 382 kg. Apollo 18, 19, and 20 were cancelled due to budget cuts; a Saturn V was repurposed to launch Skylab.
+
+\subsubsection{Apollo 13: Successful Failure}
+
+On April 13, 1970, an oxygen tank in the service module exploded, disabling the command module's electrical power and life support. Astronauts Lovell, Haise, and Swigert used the lunar module as a lifeboat, executing a free-return trajectory around the Moon. Mission Control improvised CO\textsubscript{2} scrubber procedures using only materials aboard the spacecraft. The crew returned safely April 17, 1970. The mission became a defining example of NASA problem-solving under pressure.
+
+\subsection{Module 3 Reference: Post-Apollo Interlude (1973--1980)}
+
+\subsubsection{Skylab (1973--1974)}
+
+NASA's first space station, Skylab was launched May 14, 1973 aboard the final Saturn V. Three crews occupied it:
+\begin{itemize}[leftmargin=*]
+  \item Skylab 2: Conrad, Kerwin, Weitz (28 days; repaired damaged station after launch)
+  \item Skylab 3: Bean, Garriott, Lousma (59 days)
+  \item Skylab 4: Carr, Gibson, Pogue (84 days --- US endurance record at the time)
+\end{itemize}
+Skylab re-entered Earth's atmosphere in July 1979.
+
+\subsubsection{Apollo-Soyuz (1975)}
+
+The Apollo-Soyuz Test Project (July 1975) was the first joint US-Soviet space mission. US crew: Stafford, Brand, Slayton. Soviet crew: Leonov, Kubasov. The spacecraft docked in orbit for two days, representing a moment of detente in the Space Race. It was the last Apollo spacecraft flight and the last US human spaceflight until STS-1 in 1981 --- a six-year gap.
+
+\subsubsection{Pioneer and Voyager Programs}
+
+Pioneer 10 (1972) was the first spacecraft to traverse the asteroid belt and fly by Jupiter (1973). Pioneer 11 (1973) flew by Jupiter (1974) and became the first spacecraft to visit Saturn (1979). Voyager 1 and 2 were launched in 1977 to exploit a rare planetary alignment enabling a ``Grand Tour.'' Voyager 1 flew by Jupiter (1979) and Saturn (1980); Voyager 2 completed the tour, reaching Uranus (1986) and Neptune (1989), discovering 11 moons and 2 rings at Uranus, and 5 moons and 4 rings at Neptune. On August 25, 2012, Voyager 1 crossed the heliopause, becoming the first human-made object to reach interstellar space. As of 2026, both Voyagers continue transmitting from beyond the heliosphere.
+
+\subsubsection{Viking Mars Program (1975--1982)}
+
+Viking 1 and Viking 2 were the first successful Mars landers. Viking 1 landed July 20, 1976 (seventh anniversary of Apollo 11) in Chryse Planitia. Viking 2 landed September 3, 1976 in Utopia Planitia. Both landers conducted biology experiments searching for signs of life --- results were ambiguous and remain debated. The orbiters mapped the Martian surface and operated for years.
+
+\subsection{Module 4 Reference: Space Shuttle Era (1981--2011)}
+
+\subsubsection{Program Overview}
+
+The Space Transportation System flew 135 missions from April 12, 1981 to July 21, 2011. Five orbiters flew in space: Columbia (OV-102), Challenger (OV-099), Discovery (OV-103), Atlantis (OV-104), and Endeavour (OV-105, built 1991 to replace Challenger). The program carried 355 astronauts from 16 countries; including repeat flights, 852 individual trips to orbit were made. Total program cost: \$221 billion (2012 dollars). The fleet logged 1,323 days in orbit across 135 missions.
+
+\subsubsection{Challenger Disaster (1986)}
+
+On January 28, 1986, STS-51L Challenger broke apart 73 seconds after launch due to an O-ring failure in a solid rocket booster joint. All seven crew members were killed, including Christa McAuliffe, the first teacher in space. The Rogers Commission investigation identified both the technical cause (O-ring failure in cold temperatures) and the organizational cause (management override of engineer warnings). Flights were suspended for 32 months.
+
+\subsubsection{Columbia Disaster (2003)}
+
+On February 1, 2003, STS-107 Columbia disintegrated during re-entry due to damage sustained during launch, when a piece of foam insulation struck and breached the leading edge of the left wing. All seven crew members were killed. The Columbia Accident Investigation Board found both technical and organizational causes, explicitly comparing the institutional failures to those preceding Challenger. Flights were suspended for 29 months.
+
+\subsubsection{Key Shuttle Achievements}
+
+\begin{itemize}[leftmargin=*]
+  \item Hubble Space Telescope: deployed April 24, 1990 (STS-31); five servicing missions through STS-125 (2009)
+  \item First untethered spacewalk: STS-41B, Bruce McCandless, February 7, 1984
+  \item Chandra X-Ray Observatory: deployed STS-93 (1999)
+  \item Shuttle-Mir Program: nine dockings with Russian Mir station (1994--1998)
+  \item ISS Construction: the Shuttle performed the majority of ISS assembly across 37 dedicated flights
+  \item Galileo probe to Jupiter: launched STS-34 (1989)
+  \item Magellan Venus radar mapper: launched STS-30 (1989)
+  \item Ulysses solar polar probe: launched STS-41 (1990)
+\end{itemize}
+
+\subsection{Module 5 Reference: Robotic and Deep Space Science (1990--2026)}
+
+\subsubsection{Great Observatories}
+
+NASA's Great Observatories program launched four complementary space telescopes covering different wavelengths:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Hubble Space Telescope (1990--present):} Visible/UV/near-IR; 35 years of operation; corrective optics installed 1993; produced the Hubble Deep Field; 2025 milestone: 2.5-gigapixel Andromeda galaxy mosaic
+  \item \textbf{Compton Gamma Ray Observatory (1991--2000):} Gamma ray; de-orbited after gyroscope failure
+  \item \textbf{Chandra X-Ray Observatory (1999--present):} X-ray; studies black holes, supernovae, galaxy clusters
+  \item \textbf{Spitzer Space Telescope (2003--2020):} Infrared; studied exoplanet atmospheres, galaxy formation; retired January 2020
+\end{itemize}
+
+The James Webb Space Telescope (JWST), launched December 25, 2021, is the successor to Hubble --- observing in near- and mid-infrared. Webb released its first science images in July 2022. By 2026, JWST is in its fourth operational year, having studied exoplanet atmospheres, the earliest galaxies, and protoplanetary disks.
+
+\subsubsection{Mars Exploration Program}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{1.8cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mission} & \tableheader{Launch} & \tableheader{Type} & \tableheader{Key Result} \\
+\midrule
+Mariner 4 & 1964 & Flyby & First close-up images of Mars; no canals \\
+Mariner 9 & 1971 & Orbiter & First Mars orbiter; mapped 85\% of surface \\
+Viking 1, 2 & 1975 & Lander & First successful landers; biology experiments \\
+Mars Pathfinder & 1996 & Lander+Rover & Sojourner: first rover; airbag landing demo \\
+Spirit (MER-A) & 2003 & Rover & Operated 2004--2010; evidence of past water \\
+Opportunity (MER-B) & 2003 & Rover & Operated 2004--2018; 45.16 km driving record \\
+Mars Reconnaissance Orbiter & 2005 & Orbiter & High-res imaging; supports surface missions \\
+Curiosity (MSL) & 2011 & Rover & 2012--present; sky crane landing; 36+ km driven \\
+MAVEN & 2013 & Orbiter & Atmospheric loss; climate history \\
+InSight & 2018 & Lander & Interior structure; seismometer; ended 2022 \\
+Perseverance (Mars 2020) & 2020 & Rover & 2021--present; sample cache; Ingenuity helicopter \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+As of March 2026, Perseverance has driven 39.96 km on the Martian surface and caches samples for a future Mars Sample Return mission. A 2025 study concluded microbial life is the most likely explanation for the ``leopard spots'' on the Cheyava Falls rock.
+
+\subsubsection{Outer Solar System Flagships}
+
+\textbf{Galileo (1989--2003):} First spacecraft to orbit Jupiter; discovered evidence of a subsurface ocean on Europa; deployed the Huygens probe to Jupiter's atmosphere (1995); ended with deliberate de-orbit.
+
+\textbf{Cassini-Huygens (1997--2017):} Joint NASA/ESA/ASI mission launched October 15, 1997; arrived Saturn 2004; 13 years in Saturn orbit; 294 orbital revolutions; discovered water-ice geysers on Enceladus indicating a subsurface ocean; Huygens probe landed on Titan (January 2005); 7 new moons discovered; ended September 15, 2017 via controlled atmospheric entry (``Grand Finale'') to protect potentially habitable moons.
+
+\textbf{New Horizons (2006--present):} Pluto flyby July 14, 2015 --- first close-up images of Pluto and Charon; subsequently flew by Kuiper Belt Object Arrokoth (2019); now in extended Kuiper Belt mission.
+
+\subsubsection{Solar and Heliospheric}
+
+\textbf{Parker Solar Probe (2018--present):} Launched August 12, 2018; made 27 solar encounters through March 2026, reaching record perihelion of 3.8 million miles from the Sun's surface on December 24, 2024 at 430,000 mph. Parker is observing the Sun through solar maximum and is investigating the mechanisms of solar wind acceleration and coronal heating. Mission continuation under NASA review for 2026 and beyond.
+
+\textbf{IMAP (Interstellar Mapping and Acceleration Probe, 2025--present):} Launched September 24, 2025; stationed at Sun-Earth L1; studying the heliosphere boundary.
+
+\subsection{Module 6 Reference: New Human Spaceflight and Commercial Era (2000--2026)}
+
+\subsubsection{International Space Station}
+
+The ISS first module (Zarya) launched November 20, 1998. The first resident crew (Expedition 1: Shepherd, Krikalev, Gidzenko) arrived November 2, 2000, beginning continuous human habitation that has not been interrupted through March 2026. The station involves 15 nations; the Shuttle performed the majority of assembly; as of 2026, commercial cargo (SpaceX Dragon, Northrop Grumman Cygnus) and crew (SpaceX Crew Dragon, Soyuz) service the station.
+
+\subsubsection{Commercial Crew Program}
+
+After Shuttle retirement in July 2011, the US relied exclusively on Russian Soyuz for crew transport at \$80+ million per seat, creating a nine-year gap in domestic crewed launch capability. SpaceX Crew Dragon Demo-2 (the first crewed commercial flight) launched May 30, 2020 with astronauts Behnken and Hurley, ending the gap. Boeing Starliner completed its first crewed test flight (Butch Wilmore and Suni Williams) in June 2024, though an extended stay resulted from thruster anomalies.
+
+\subsubsection{Artemis Program (2017--present)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mission} & \tableheader{Status} & \tableheader{Target Date} & \tableheader{Objective} \\
+\midrule
+Artemis I & Complete & Nov 2022 & Uncrewed Orion lunar flyby; 25.5-day mission \\
+Artemis II & Ready/Launch & Apr 2026 & First crewed lunar flyby in 50+ years; 4 crew, 10 days \\
+Artemis III & Planned & Mid-2027 & LEO tests; Orion-Starship HLS rendezvous; AxEMU suit test \\
+Artemis IV & Planned & Early 2028 & First lunar landing since Apollo 17 (1972) \\
+Artemis V+ & Future & Annual & Lunar surface ops; eventual base; Mars preparation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+As of February 27, 2026, NASA restructured the Artemis program: Artemis III will no longer land on the Moon but will conduct LEO rendezvous tests with SpaceX Starship HLS and Blue Origin Blue Moon; the first lunar landing was moved to Artemis IV. Artemis II crew: Commander Reid Wiseman, Pilot Victor Glover (first person of color beyond LEO), Mission Specialist Christina Koch (first woman to travel to the Moon's vicinity), Mission Specialist Jeremy Hansen (CSA, first non-US citizen beyond LEO).
+
+\subsection{Safety and Sensitivity Considerations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Consideration} & \tableheader{Type} & \tableheader{Guidance} \\
+\midrule
+Challenger/Columbia disasters & Sensitive & Present factual CAIB/Rogers findings; do not editorialize about management blame \\
+Apollo 1 fire & Sensitive & Factual reporting; honor crew names \\
+Mars life-detection claims & Scientific boundary & Present only as potential biosignatures; do not claim confirmed life \\
+Budget/political arguments & Policy & Report from GAO and NASA sources; do not advocate \\
+Artemis program changes & Current/fluid & Use February 2026 restructure as current state; note flux \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Source Bibliography}
+
+\subsubsection{Government and Agency Sources}
+
+\begin{itemize}[leftmargin=*]
+  \item NASA.gov --- Project Mercury History: \url{https://www.nasa.gov/missions/project-mercury/}
+  \item NASA.gov --- The Apollo Program: \url{https://www.nasa.gov/the-apollo-program/}
+  \item NASA.gov --- Space Shuttle: \url{https://www.nasa.gov/space-shuttle/}
+  \item NASA.gov --- Artemis Program: \url{https://www.nasa.gov/humans-in-space/artemis/}
+  \item NASA.gov --- NASA Strengthens Artemis (Feb 27, 2026): \url{https://www.nasa.gov/directorates/esdmd/nasa-strengthens-artemis-adds-mission-refines-overall-architecture/}
+  \item NASA Science --- Mars Exploration Program: \url{https://science.nasa.gov/planetary-science/programs/mars-exploration/}
+  \item NASA Science --- Parker Solar Probe: \url{https://science.nasa.gov/mission/parker-solar-probe/}
+  \item NASA Science --- Science Missions: \url{https://science.nasa.gov/science-missions/}
+  \item NASA JPL --- History: \url{https://www.nasa.gov/jpl/jet-propulsion-laboratory-history/}
+  \item NASA NSSDC --- Apollo Program: \url{https://nssdc.gsfc.nasa.gov/planetary/lunar/apollo.html}
+  \item GAO-25-106943 --- NASA Artemis Missions Ground Systems (Oct 2024)
+\end{itemize}
+
+\subsubsection{Peer-Reviewed and Institutional Research}
+
+\begin{itemize}[leftmargin=*]
+  \item National Air and Space Museum --- What was the Mercury Program: \url{https://airandspace.si.edu/stories/editorial/what-was-mercury-program}
+  \item Encyclopaedia Britannica --- Apollo program: \url{https://www.britannica.com/science/Apollo-space-program}
+  \item Encyclopaedia Britannica --- Space Exploration / Space Shuttle: \url{https://www.britannica.com/science/space-exploration/The-space-shuttle}
+  \item EBSCO Research Starters --- Mercury Space Program (1950s, 1960s)
+  \item Wikipedia --- NASA (agency article, updated March 2026)
+  \item Wikipedia --- List of Apollo Missions (updated March 2026)
+  \item Wikipedia --- Space Shuttle Program (updated March 2026)
+  \item Wikipedia --- Artemis Program (updated February 2026)
+  \item Wikipedia --- Cassini-Huygens (updated 2026)
+  \item NASASpaceFlight.com --- Space Science in 2026 Preview (Jan 2026)
+\end{itemize}
+
+\newpage
+
+% ============================================================
+% STAGE 3: MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{accent}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a comprehensive, publication-quality reference document covering the complete history of NASA missions from the agency's founding in 1958 through active missions as of March 2026, organized across six chronological-thematic modules. The deliverable integrates human spaceflight, robotic science, and institutional history into a single coherent narrative suitable for use as a GSD College of Knowledge reference document and as a standalone educational resource.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+============================
+
+        [WAVE 0: FOUNDATION]
+        Schema + Source Index (Haiku)
+              |
+    __________|__________
+   |                     |
+[WAVE 1A: MODULES 1-3] [WAVE 1B: MODULES 4-6]
+  Early + Apollo +        Shuttle + Robotic +
+  Post-Apollo (Sonnet)    New Era (Sonnet)
+   |___________|__________|
+              |
+        [WAVE 2: SYNTHESIS]
+        Cross-module integration
+        Pattern analysis (Opus)
+              |
+        [WAVE 3: PUBLICATION]
+        LaTeX assembly + Verification
+        Bibliography (Sonnet)
+              |
+        [WAVE 3B: CAPCOM REVIEW]
+        Human-in-the-loop gate
+\end{asciibox}
+
+\subsection{System Layers}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Foundation Layer:} Shared schemas, mission tables, source index --- produced in Wave 0
+  \item \textbf{Survey Layer:} Module-by-module research surveys --- produced in Wave 1 (parallel)
+  \item \textbf{Synthesis Layer:} Cross-module connections, failure pattern analysis, institutional through-lines --- Wave 2
+  \item \textbf{Publication Layer:} LaTeX document assembly, bibliography, index, verification --- Wave 3
+  \item \textbf{Review Layer:} CAPCOM human review and final approval
+\end{enumerate}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.5cm}L{3.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Acceptance Criteria} & \tableheader{Spec} \\
+\midrule
+1 & Module 1 Survey & All 16 Mercury/Gemini missions enumerated with full table & CRAFT-HISTORY output \\
+2 & Module 2 Survey & All Apollo missions including uncrewed; Apollo 13 narrative & CRAFT-HISTORY output \\
+3 & Module 3 Survey & Skylab, Apollo-Soyuz, Viking, Voyager, Pioneer & CRAFT-HISTORY output \\
+4 & Module 4 Survey & All 135 Shuttle missions at summary depth; Challenger/Columbia & CRAFT-SCIENCE output \\
+5 & Module 5 Survey & All flagship robotic missions; current status as of 2026 & CRAFT-SCIENCE output \\
+6 & Module 6 Survey & ISS, Commercial Crew, Artemis I-IV & CRAFT-SCIENCE output \\
+7 & Cross-Module Synthesis & Failure pattern analysis; technological inheritance graph & Opus synthesis \\
+8 & Complete Reference Document & LaTeX PDF; all 12 success criteria met; bibliography verified & Publication output \\
+9 & Verification Report & All dates, mission counts, and key facts confirmed against sources & VERIFY output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Dependencies} & \tableheader{Model} & \tableheader{Est.\ Tokens} \\
+\midrule
+W0: Schema + Index & None & Haiku & 8K \\
+W1A: Mod 1 Survey & W0 & Sonnet & 24K \\
+W1A: Mod 2 Survey & W0 & Sonnet & 28K \\
+W1A: Mod 3 Survey & W0 & Sonnet & 20K \\
+W1B: Mod 4 Survey & W0 & Sonnet & 28K \\
+W1B: Mod 5 Survey & W0 & Sonnet & 32K \\
+W1B: Mod 6 Survey & W0 & Sonnet & 24K \\
+W2: Synthesis & W1A, W1B & Opus & 30K \\
+W3: LaTeX Assembly & W2 & Sonnet & 40K \\
+W3: Verification & W3 & Sonnet & 16K \\
+W3: Bibliography & W3 & Sonnet & 12K \\
+CAPCOM Review & W3 & Human & --- \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total estimated tokens:}} & \textbf{$\sim$262K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Model Assignment Rationale}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Model} & \tableheader{Share} & \tableheader{Rationale} \\
+\midrule
+Opus & 30\% & Cross-module synthesis, failure pattern analysis, institutional judgment calls, sensitivity evaluation \\
+Sonnet & 60\% & Module surveys, document assembly, table formatting, source validation, bibliography \\
+Haiku & 10\% & Schema generation, templates, token budget tracking, commit messages \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Wave Execution Plan}
+
+\subsection{Wave Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.5cm}L{3cm}C{2cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Name} & \tableheader{Mode} & \tableheader{Model} & \tableheader{Output} \\
+\midrule
+0 & Foundation & Sequential & Haiku & Shared schemas, module templates, source index \\
+1A & Early Eras Survey & Parallel & Sonnet & Modules 1, 2, 3 surveys \\
+1B & Modern Eras Survey & Parallel & Sonnet & Modules 4, 5, 6 surveys \\
+2 & Synthesis & Sequential & Opus & Cross-module analysis, failure patterns \\
+3 & Publication & Sequential & Sonnet & Final document assembly + verification \\
+3B & CAPCOM Review & Gate & Human & Approval or revision loop \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 0: Foundation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Output} \\
+\midrule
+Mission table schema & BUDGET/LOG & JSON schema for mission records (name, date, crew, type, result) \\
+Source index & SCOUT & Verified URL list for all 20+ primary sources \\
+Module templates & EXEC & LaTeX section templates for each of the 6 modules \\
+Shared glossary & LOG & Key terms: LM, CSM, SRB, ECLSS, rendezvous, Lagrange point \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 1: Parallel Survey Tracks}
+
+\textbf{Track A (Modules 1--3) --- Agent: EXEC-A + CRAFT-HISTORY}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Module} & \tableheader{Key Tasks} \\
+\midrule
+Module 1 & NACA transition narrative; Mercury 6-mission table (crew, date, duration, achievement); Gemini 10-mission table; astronaut firsts timeline \\
+Module 2 & Apollo political mandate; Apollo 1 fire narrative; Apollo 7-10 buildup table; Apollo 11-17 landing table (site, crew, samples); Apollo 13 lifeboat narrative \\
+Module 3 & Skylab 3-crew summary; Apollo-Soyuz table; Pioneer 10/11 timeline; Viking 1/2 landing data; Voyager Grand Tour; Voyager 1 interstellar crossing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Track B (Modules 4--6) --- Agent: EXEC-B + CRAFT-SCIENCE}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Module} & \tableheader{Key Tasks} \\
+\midrule
+Module 4 & Shuttle design overview; orbiter fleet table; 135-mission summary statistics; Challenger CAIB findings; Columbia CAIB findings; Hubble servicing summary; ISS assembly role \\
+Module 5 & Great Observatories summary table; Mars exploration lineage table (Mariner 4 to Perseverance 2026); Galileo and Cassini flagship summaries; New Horizons Pluto flyby; Parker Solar Probe current status; JWST first three years \\
+Module 6 & ISS assembly and continuous habitation; Soyuz gap years (2011-2020); Commercial Crew (Dragon Demo-2, Starliner); Artemis I-IV table with February 2026 restructure reflected \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{accent}
+\tableheader{Synthesis Task} & \tableheader{Description} \\
+\midrule
+Technological inheritance graph & Map capability hand-offs: Mercury $\to$ Gemini $\to$ Apollo; Viking $\to$ Pathfinder $\to$ MER $\to$ MSL $\to$ Mars 2020; Shuttle $\to$ ISS $\to$ Artemis \\
+Failure pattern analysis & Identify structural similarities between Apollo 1, Challenger, Columbia; extract institutional failure signatures \\
+Budget-to-ambition timeline & Correlate NASA budget inflections with program scope changes (post-Apollo contraction, Reagan-era Shuttle expansion, post-Columbia retrenchment, commercial era) \\
+Robotic/human interdependence & Document how robotic precursor programs enabled crewed missions (Surveyor $\to$ Apollo; Mars Pathfinder $\to$ Spirit/Opportunity) \\
+Through-line integration & Connect all six modules to the philosophical through-line (Amiga Principle, specialized tools, humane flow) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 3: Publication and Verification}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Task} & \tableheader{Agent} & \tableheader{Gate} \\
+\midrule
+LaTeX document assembly & EXEC & All 6 module surveys + synthesis integrated \\
+All mission tables formatted & EXEC & tabularx + rowcolors; no vertical rules \\
+Bibliography verification & VERIFY & All URLs confirmed accessible; all government/peer sources \\
+Date/fact spot-check & VERIFY & 20 random claims verified against source material \\
+Three-pass XeLaTeX compile & EXEC & Zero errors; TOC resolves; lastpage correct \\
+CAPCOM review package & CAPCOM & PDF + .tex + this mission package \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Cache Optimization Strategy}
+
+\begin{itemize}[leftmargin=*]
+  \item Prefix all Wave 1 contexts with the complete shared schema from Wave 0 to exploit prompt caching
+  \item Module surveys written to a common JSON schema so Wave 2 synthesis can ingest them programmatically
+  \item Wave 2 Opus context includes only the synthesis-critical sections of each module survey, not full prose
+  \item LaTeX assembly uses modular \texttt{\textbackslash input\{\}} files per module to enable targeted re-runs without full recompile
+\end{itemize}
+
+\subsection{Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{2cm}C{2cm}C{2cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Wave} & \tableheader{Opus (K)} & \tableheader{Sonnet (K)} & \tableheader{Haiku (K)} \\
+\midrule
+Wave 0 & --- & --- & 8 \\
+Wave 1A (3 modules) & --- & 72 & --- \\
+Wave 1B (3 modules) & --- & 84 & --- \\
+Wave 2 (Synthesis) & 30 & --- & --- \\
+Wave 3 (Publication) & --- & 68 & 4 \\
+Contingency (10\%) & 3 & 22 & 1 \\
+\midrule
+\textbf{Total} & \textbf{33K} & \textbf{246K} & \textbf{13K} \\
+\multicolumn{3}{r}{\textbf{Grand Total:}} & \textbf{$\sim$292K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Dependency Graph}
+
+\begin{asciibox}
+DEPENDENCY GRAPH
+================
+
+W0: SCHEMA+INDEX (Haiku)
+  |
+  +---> W1A: MOD1 SURVEY (Sonnet, EXEC-A)
+  |        |
+  +---> W1A: MOD2 SURVEY (Sonnet, EXEC-A)
+  |        |
+  +---> W1A: MOD3 SURVEY (Sonnet, EXEC-A)
+  |
+  +---> W1B: MOD4 SURVEY (Sonnet, EXEC-B)
+  |        |
+  +---> W1B: MOD5 SURVEY (Sonnet, EXEC-B)
+  |        |
+  +---> W1B: MOD6 SURVEY (Sonnet, EXEC-B)
+  |
+  [SYNC GATE: All 6 surveys complete]
+  |
+  v
+W2: SYNTHESIS (Opus, FLIGHT + INTEG)
+  |
+  v
+W3: LATEX ASSEMBLY + VERIFY (Sonnet, EXEC + VERIFY)
+  |
+  v
+W3B: CAPCOM REVIEW (Human gate)
+  |
+  v
+MISSION COMPLETE: Reference document delivered
+\end{asciibox}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{Action on Fail} & \tableheader{Description} \\
+\midrule
+Safety-Critical & 4 & P0 & BLOCK & Factual accuracy gates for disaster narratives \\
+Core Completeness & 12 & P1 & REVISION & One per success criterion \\
+Integration & 6 & P2 & REVISION & Cross-module connection validity \\
+Edge Cases & 4 & P3 & ANNOTATE & Ambiguous claims; disputed findings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK on Failure)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & Challenger disaster facts & O-ring failure in SRB joint; cold temperature; January 28, 1986; 7 crew killed; 32-month suspension \\
+SC-02 & Columbia disaster facts & Foam strike to left wing leading edge; February 1, 2003; 7 crew killed; 29-month suspension \\
+SC-03 & Apollo 1 fire facts & Pure O\textsubscript{2} atmosphere; January 27, 1967; 3 crew killed (Grissom, White, Chaffee); program halted 18 months \\
+SC-04 & Mars life-detection boundary & Perseverance findings described only as ``potential biosignatures''; no confirmed life claims present in document \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1cm}L{4.5cm}L{2.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1 & Mercury/Gemini mission tables & CORE-01, INT-01 & TBD \\
+SC2 & All Apollo missions listed & CORE-02, CORE-03 & TBD \\
+SC3 & Apollo 13 narrative & CORE-03, SC-03 & TBD \\
+SC4 & Shuttle era complete & CORE-04, SC-01, SC-02 & TBD \\
+SC5 & Mars exploration lineage & CORE-05, INT-04 & TBD \\
+SC6 & Cassini/Enceladus coverage & CORE-06, INT-05 & TBD \\
+SC7 & Voyager interstellar coverage & CORE-07 & TBD \\
+SC8 & JWST 2022-2026 coverage & CORE-08, INT-06 & TBD \\
+SC9 & Artemis Feb 2026 restructure & CORE-09 & TBD \\
+SC10 & Parker Solar Probe 27th encounter & CORE-10 & TBD \\
+SC11 & Three disaster analyses present & SC-01, SC-02, SC-03 & TBD \\
+SC12 & Bibliography gov/peer sources only & CORE-12 & TBD \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent (PNW Naming)} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & RAVEN & Overall mission direction; synthesis; go/no-go gates \\
+PLAN & SALMON & Wave decomposition; dependency optimization; parallel track management \\
+SCOUT & OSPREY & Source gathering; URL verification; gap research \\
+EXEC-A & CEDAR & Modules 1-3 document production; historical era writing \\
+EXEC-B & HEMLOCK & Modules 4-6 document production; modern era writing \\
+CRAFT-HISTORY & ELK & Early spaceflight context; institutional history; political narrative \\
+CRAFT-SCIENCE & ORCA & Technical mission details; hardware specs; scientific results \\
+VERIFY & HAWK & Source validation; date/fact checking; safety test execution \\
+INTEG & HERON & Cross-module relationships; technological inheritance graph \\
+CAPCOM & FOXGLOVE & Human-in-the-loop interface; CAPCOM gate approvals \\
+BUDGET & WREN & Token budget tracking; session planning \\
+SURGEON & MARTEN & Research quality degradation detection; telemetry monitoring \\
+LOG & RAVEN-II & Commit messages; milestone summaries; audit trail \\
+TOPO & BEAR & Agent team topology; mid-mission restructuring \\
+ARCH & WOLF & Cross-cutting structural decisions; LaTeX architecture \\
+SECURE & OWL & Safety boundary enforcement; disaster narrative integrity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Fleet (16 roles, 6 modules) \\
+Estimated Token Budget & $\sim$292K total \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Sessions Estimated & 3 sessions \\
+Context Windows & 8--12 \\
+Wave Structure & 0, 1A/1B (parallel), 2, 3, 3B (CAPCOM) \\
+Safety-Critical Gates & 4 BLOCK tests \\
+CAPCOM Gate & Wave 3B (before final delivery) \\
+Primary Sources & 20+ government/peer sources \\
+Deliverables & Reference document (PDF + .tex), verification report \\
+College of Knowledge Category & STEM / Space Science / History \\
+GSD Target & gsd-skill-creator execution via Claude Code \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``We choose to go to the Moon in this decade and do the other things, not because they are easy, but because they are hard --- because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one which we intend to win.''}\\[0.5em]
+--- President John F. Kennedy, Rice University, September 12, 1962\\[1em]
+\textbf{Sixty-eight years on, the arc continues.} From a 15-minute suborbital hop in a converted missile nose cone to a telescope peering at galaxies formed 300 million years after the Big Bang, from Yuri Gagarin's single orbit to continuous human habitation of low Earth orbit for over 25 years, from six flags planted in lunar dust to the Artemis II crew awaiting their window to fly around the Moon again --- the history of NASA is proof that specialized tools, architectural clarity, and institutional courage can, together, reach beyond what any of them could manage alone. The spaces between the missions are where the meaning lives.
+\end{quotebox}
+
+
+\end{document}

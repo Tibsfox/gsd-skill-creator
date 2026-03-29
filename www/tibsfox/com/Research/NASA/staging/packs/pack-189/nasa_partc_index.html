@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NASA Science Education Template — GSD Part C</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #3E2723;
+    --secondary: #1B5E20;
+    --tertiary: #E65100;
+    --accent: #4E342E;
+    --parchment: #EFEBE9;
+    --green-light: #E8F5E9;
+    --amber-light: #FFF3E0;
+    --novice: #1565C0;
+    --intermediate: #2E7D32;
+    --advanced: #6A1B9A;
+    --border: #BDBDBD;
+    --row-gray: #F5F5F5;
+    --subtle: #757575;
+    --text: #212121;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--parchment);
+    min-height: 100vh;
+  }
+
+  /* Header — warm, library-like */
+  header {
+    background: linear-gradient(160deg, var(--primary) 0%, var(--accent) 70%, #6D4C41 100%);
+    border-bottom: 3px solid var(--tertiary);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '📚';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    opacity: 0.08;
+    pointer-events: none;
+  }
+
+  .header-inner { max-width: 880px; margin: 0 auto; }
+
+  .pipeline-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .step {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .step-done { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.45); }
+  .step-active { background: var(--secondary); color: white; }
+  .step-next { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.35); }
+  .arrow { color: rgba(255,255,255,0.22); font-size: 0.8rem; }
+
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2rem;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  header .subtitle {
+    font-size: 0.95rem;
+    color: rgba(240, 220, 200, 0.85);
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+
+  header .param-line {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(230, 145, 0, 0.95);
+    background: rgba(0,0,0,0.3);
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 3px;
+    margin-top: 0.4rem;
+    border-left: 2px solid var(--tertiary);
+  }
+
+  /* Main */
+  main { max-width: 880px; margin: 0 auto; padding: 2rem; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 2rem; }
+  @media(max-width:600px) { .stats { grid-template-columns: repeat(2,1fr); } }
+
+  .stat {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(62,39,35,0.08);
+  }
+
+  .stat .val {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Libre Baskerville', serif;
+    display: block;
+  }
+
+  .stat .lbl {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--subtle);
+    margin-top: 0.2rem;
+  }
+
+  /* Section headings */
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--parchment);
+    border-bottom-color: #D7CCC8;
+  }
+
+  /* File cards */
+  .files { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  @media(max-width:580px) { .files { grid-template-columns: 1fr; } }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: 6px;
+    padding: 1.2rem;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    box-shadow: 0 2px 6px rgba(62,39,35,0.07);
+    transition: all 0.2s;
+  }
+
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(62,39,35,0.15); border-left-color: var(--tertiary); }
+
+  .card .icon { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+  .card .type { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--subtle); font-weight: 700; margin-bottom: 0.2rem; }
+  .card .name { font-size: 0.95rem; font-weight: 700; color: var(--primary); font-family: 'Libre Baskerville', serif; margin-bottom: 0.3rem; }
+  .card .desc { font-size: 0.78rem; color: var(--subtle); line-height: 1.45; }
+
+  /* Tier legend */
+  .tier-legend {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tier-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .tier-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .tier-n .tier-dot { background: var(--novice); }
+  .tier-i .tier-dot { background: var(--intermediate); }
+  .tier-a .tier-dot { background: var(--advanced); }
+  .tier-n { color: var(--novice); }
+  .tier-i { color: var(--intermediate); }
+  .tier-a { color: var(--advanced); }
+
+  /* Teaching arc diagram */
+  .arc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media(max-width:600px) { .arc-grid { grid-template-columns: repeat(2,1fr); } }
+
+  .arc-step {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.9rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: relative;
+  }
+
+  .arc-step .arc-letter {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: white;
+    margin: 0 auto 0.5rem;
+  }
+
+  .arc-a .arc-letter { background: var(--primary); }
+  .arc-b .arc-letter { background: var(--secondary); }
+  .arc-c .arc-letter { background: var(--tertiary); }
+  .arc-d .arc-letter { background: var(--advanced); }
+
+  .arc-step .arc-name { font-weight: 700; font-size: 0.8rem; color: var(--text); margin-bottom: 0.3rem; }
+  .arc-step .arc-desc { font-size: 0.7rem; color: var(--subtle); line-height: 1.35; }
+
+  /* Stage cards */
+  .stage { background: white; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 0.8rem; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .sh { padding: 0.55rem 1rem; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: white; }
+  .sh-1 { background: var(--primary); }
+  .sh-2 { background: var(--secondary); }
+  .sh-3 { background: var(--accent); }
+  .sb { padding: 0.7rem 1rem; }
+  .items { list-style: none; padding: 0; }
+  .items li { font-size: 0.8rem; padding: 0.18rem 0; color: #444; border-bottom: 1px solid #F0F0F0; display: flex; gap: 0.5rem; align-items: flex-start; }
+  .items li:last-child { border-bottom: none; }
+  .items li::before { content: '›'; color: var(--tertiary); font-weight: 700; flex-shrink: 0; margin-top: 0.05em; }
+
+  /* Example box */
+  .example-box {
+    background: var(--green-light);
+    border: 1px solid rgba(27, 94, 32, 0.25);
+    border-left: 4px solid var(--secondary);
+    border-radius: 6px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .example-box .ex-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .example-box p {
+    font-size: 0.8rem;
+    color: #333;
+    line-height: 1.55;
+  }
+
+  /* Try session preview */
+  .try-box {
+    background: var(--amber-light);
+    border: 1px solid rgba(230, 81, 0, 0.25);
+    border-left: 4px solid var(--tertiary);
+    border-radius: 6px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .try-box .try-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--tertiary);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .try-box p { font-size: 0.8rem; color: #333; line-height: 1.55; }
+
+  /* Instructions */
+  .instructions { background: #E8F5E9; border: 1px solid rgba(27,94,32,0.2); border-radius: 6px; padding: 1.2rem 1.5rem; margin-bottom: 1rem; }
+  .instructions ol { padding-left: 1.2rem; margin-top: 0.5rem; }
+  .instructions li { font-size: 0.8rem; padding: 0.22rem 0; color: #333; line-height: 1.5; }
+
+  pre { background: #1A1209; color: #D4C4A0; border-radius: 4px; padding: 0.8rem 1rem; font-size: 0.72rem; overflow-x: auto; font-family: 'DM Mono', monospace; margin-top: 0.6rem; }
+  code { background: var(--parchment); color: var(--primary); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.78em; font-family: 'DM Mono', monospace; border: 1px solid #D7CCC8; }
+
+  /* Closing */
+  .closing {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    border-radius: 8px;
+    padding: 1.8rem 2rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .closing blockquote { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.8rem; opacity: 0.92; }
+  .closing .callout { font-size: 0.85rem; font-weight: 700; color: rgba(255, 180, 80, 0.9); margin-top: 0.8rem; }
+  .closing .attr { font-size: 0.68rem; opacity: 0.5; letter-spacing: 0.1em; margin-top: 0.5rem; }
+
+  footer { background: var(--primary); color: rgba(255,255,255,0.35); text-align: center; padding: 1.2rem; font-size: 0.68rem; letter-spacing: 0.08em; margin-top: 2rem; }
+  .amber { color: rgba(255, 180, 80, 0.8); }
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+  <div class="pipeline-bar">
+    <span class="step step-done">Part A: History ✓</span>
+    <span class="arrow">→</span>
+    <span class="step step-done">Part B: Deep Science ✓</span>
+    <span class="arrow">→</span>
+    <span class="step step-active">Part C: Education ◀</span>
+    <span class="arrow">→</span>
+    <span class="step step-next">Release: v1.50.{SLUG}.EDU</span>
+  </div>
+  <h1>NASA Science Education<br>Teaching Template</h1>
+  <p class="subtitle">College of Knowledge integration — from verified discovery to learnable curriculum</p>
+  <div class="param-line">Input: Part B science results for {MISSION_NAME} → Study guides · Try Sessions · Claude scripts</div>
+</div>
+</header>
+
+<main>
+
+  <div class="stats">
+    <div class="stat"><span class="val">6</span><div class="lbl">Curriculum Modules</div></div>
+    <div class="stat"><span class="val">31</span><div class="lbl">Template Pages</div></div>
+    <div class="stat"><span class="val">~255K</span><div class="lbl">Tokens / Mission</div></div>
+    <div class="stat"><span class="val">3 Tiers</span><div class="lbl">N · I · A</div></div>
+  </div>
+
+  <h2>Download Files</h2>
+
+  <div class="files">
+    <a class="card" href="nasa_partc_template.pdf" download>
+      <span class="icon">🎓</span>
+      <div class="type">PDF Template</div>
+      <div class="name">nasa_partc_template.pdf</div>
+      <div class="desc">31-page three-stage education mission template. Concept taxonomy, Try Session protocol, Claude teaching script format, CK YAML schema, full test plan including 6 BLOCK safety gates and 8 pedagogical quality tests.</div>
+    </a>
+    <a class="card" href="nasa_partc_template.tex" download>
+      <span class="icon">📝</span>
+      <div class="type">LaTeX Source</div>
+      <div class="name">nasa_partc_template.tex</div>
+      <div class="desc">Full XeLaTeX source with warm academic color scheme. Includes three custom tcolorbox environments: Study Guide box, Try Session box, and Claude Teaching Note box.</div>
+    </a>
+  </div>
+
+  <h2>Learning Tiers</h2>
+
+  <div class="tier-legend">
+    <div class="tier-chip tier-n"><div class="tier-dot"></div>Novice — age 10+, no prerequisites, metaphor-first</div>
+    <div class="tier-chip tier-i"><div class="tier-dot"></div>Intermediate — high school / intro college, mechanism-first</div>
+    <div class="tier-chip tier-a"><div class="tier-dot"></div>Advanced — undergraduate / enthusiast, formalism available</div>
+  </div>
+
+  <h2>The Four-Stage Teaching Arc</h2>
+
+  <div class="arc-grid">
+    <div class="arc-step arc-a">
+      <div class="arc-letter">A</div>
+      <div class="arc-name">Explain</div>
+      <div class="arc-desc">Plain language + one analogy per tier. The thing a student can say after this stage.</div>
+    </div>
+    <div class="arc-step arc-b">
+      <div class="arc-letter">B</div>
+      <div class="arc-name">Demonstrate</div>
+      <div class="arc-desc">Real NASA data from the mission. What the instrument measured. How to read it.</div>
+    </div>
+    <div class="arc-step arc-c">
+      <div class="arc-letter">C</div>
+      <div class="arc-name">Practice</div>
+      <div class="arc-desc">Try Session (Novice) or problem set (I/A). Student produces an observable result.</div>
+    </div>
+    <div class="arc-step arc-d">
+      <div class="arc-letter">D</div>
+      <div class="arc-name">Assess</div>
+      <div class="arc-desc">2–4 mastery questions. One misconception corrected. Advancement condition stated.</div>
+    </div>
+  </div>
+
+  <h2>Sample Deliverables</h2>
+
+  <div class="example-box">
+    <div class="ex-label">Study Guide Sample — Novice Tier — Enceladus Subsurface Ocean (Cassini Part C)</div>
+    <p><strong>Analogy:</strong> Imagine cracking the shell of a hard-boiled egg and finding the white inside still liquid. The shell is Enceladus's ice crust. The liquid inside is the ocean. The crack at the south pole is where pressure from below pushes water out into space.<br><br>
+    <strong>One thing to remember:</strong> <em>Enceladus has a liquid ocean beneath its ice — and that ocean contains the chemical ingredients that life uses on Earth.</em></p>
+  </div>
+
+  <div class="try-box">
+    <div class="try-label">Try Session — Feel the Pressure — Enceladus Geysers · Novice · 20 min · Materials: plastic bag + water</div>
+    <p>Fill a zip-seal bag halfway with water. Squeeze from the sides and watch where the water tries to go. Press a dimple into the surface and feel the pressure push back. <strong>The Connection:</strong> Warm liquid water inside Enceladus, heated by Saturn's tidal forces, pushes against the ice from below. Where the ice is thinnest, the water escapes as vapor — the geysers Cassini flew through. <em>What to think about: If you were designing a spacecraft to find an ocean under ice, what would you look for?</em></p>
+  </div>
+
+  <h2>Contents Breakdown</h2>
+
+  <div class="stage">
+    <div class="sh sh-1">Stage 1 — Vision Document</div>
+    <div class="sb">
+      <ul class="items">
+        <li>Full pipeline architecture: Part B science results → Part C curriculum → EDU release</li>
+        <li>The four-stage teaching arc (Explain / Demonstrate / Practice / Assess) — universal across all concepts and tiers</li>
+        <li>College of Knowledge department taxonomy (Space Science, Physics, Chemistry, Mathematics, Engineering sub-departments)</li>
+        <li>CK department mapping mechanism: primary deposit + cross-department linking</li>
+        <li>Six-module curriculum architecture (Inventory → Architecture → Guides → Exercises → Claude → Assessment)</li>
+        <li>Module descriptions with key research questions per module</li>
+        <li>Calibration by science volume: Very High (JWST, Cassini) through Active (Perseverance, Parker)</li>
+        <li>Chipset YAML with education-specific roles (CRAFT-PED, EXEC-GUIDE, EXEC-EXERCISE, EXEC-ASSESS)</li>
+        <li>12 success criteria; through-line: "Teach the noticing. The science follows."</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="sh sh-2">Stage 2 — Research Reference</div>
+    <div class="sb">
+      <ul class="items">
+        <li>Input bundle schema: Part B science_results JSON format + Part B mission context fields</li>
+        <li>Concept taxonomy — four classification axes: Discipline, Tier, Concept Type (Fact/Mechanism/Method/Implication), Status</li>
+        <li>Try Session design protocol: household materials only, age 10+, &lt;30 min, THE CONNECTION paragraph required</li>
+        <li>Try Session analogy library: 10 concept-to-activity mappings (orbital mechanics, spectroscopy, atmospheric pressure, Doppler, sublimation, tidal forces, and more)</li>
+        <li>Claude teaching script format: canonical explanations × 3 tiers, misconception map, question-response patterns, escalation signals, boundary handling</li>
+        <li>CK educational YAML schema — full field specification with examples (distinct from Part B research YAML)</li>
+        <li>6 safety and sensitivity rules including: no new science claims, no life-confirmation language, age safety verification, preliminary result flagging</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="sh sh-3">Stage 3 — Mission Package</div>
+    <div class="sb">
+      <ul class="items">
+        <li>12 deliverables from concept inventory through cross-mission links, with acceptance criteria and agent assignments</li>
+        <li>Token budget: ~255K median; scales to ~400K for flagship missions (Cassini, JWST 20+ concepts)</li>
+        <li>Wave 0: concept inventory + learning graph (DAG validation; cross-mission overlap detection)</li>
+        <li>Wave 1A (parallel): Novice / Intermediate / Advanced study guides — Stages A+B per concept</li>
+        <li>Wave 1B (parallel): Try Sessions, problem sets, discussion questions — Stage C</li>
+        <li>Wave 2 (Opus — CRAFT-PED): Claude teaching scripts for all concepts; analogy quality review; misconception verification</li>
+        <li>Wave 3: Assessment items, mastery rubrics, CK YAML entries, cross-department summaries, cross-mission links — Stage D</li>
+        <li>6 BLOCK safety tests + 8 pedagogical quality REVISION tests + 6 integration tests + 4 edge case tests</li>
+        <li>12-role Squadron crew (PNW naming): Raven, Salmon, Owl, Eagle, Cedar, Hemlock, Alder, Hawk, Heron, Foxglove, Wren, Martin</li>
+        <li>Release: v1.50.{MISSION_SLUG}.EDU → <code>.planning/outputs/missions/{SLUG}/edu/</code></li>
+        <li>Worked example: full Novice study guide + Try Session + Claude teaching note for Enceladus subsurface ocean concept</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How to Run Part C After Part B</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Confirm Part B is complete: <code>v1.50.{MISSION_SLUG}</code> release exists in <code>.planning/outputs/missions/{MISSION_SLUG}/</code>.</li>
+      <li>Verify <code>{MISSION_SLUG}.ck.yaml</code> contains a populated <code>science_results</code> list (produced by Part B Wave 3).</li>
+      <li>Hand the template and Part B output to gsd-skill-creator:<br>
+        <code>gsd run skill-creator --template nasa_partc_template.pdf --input {MISSION_SLUG}.ck.yaml</code></li>
+      <li>Wave 0 runs immediately: concept inventory built, learning graph constructed, cross-mission overlaps detected.</li>
+      <li>Waves 1A and 1B run in parallel: study guides and exercises produced for all concepts at all tiers.</li>
+      <li>Wave 2 (Opus): Claude teaching scripts produced and analogy quality reviewed across all concepts.</li>
+      <li>Wave 3: Assessments, CK YAML entries, and cross-mission links finalized.</li>
+      <li>Approve CAPCOM Wave 3B gate. Release tagged as <code>v1.50.{MISSION_SLUG}.EDU</code>.</li>
+    </ol>
+  </div>
+
+  <h2>Recompile the Template</h2>
+
+  <div class="instructions">
+    <p style="font-size:0.8rem;color:#333;margin-bottom:0.5rem;">The LaTeX source uses three custom tcolorbox environments. Recompile with XeLaTeX (three passes):</p>
+    <pre>xelatex -interaction=nonstopmode nasa_partc_template.tex
+xelatex -interaction=nonstopmode nasa_partc_template.tex
+xelatex -interaction=nonstopmode nasa_partc_template.tex</pre>
+    <p style="font-size:0.72rem;color:var(--subtle);margin-top:0.5rem;">Custom boxes: <code>samplebox</code> (study guide, green), <code>trybox</code> (Try Session, amber), <code>claudebox</code> (teaching note, brown). Modify colors via <code>\definecolor</code> in preamble.</p>
+  </div>
+
+  <div class="closing">
+    <blockquote>"The best moment in any science is the moment a student looks at data and says:<br>that's strange. That's not what I expected. What's going on?"</blockquote>
+    <p class="callout">Teach the noticing. The science follows.</p>
+    <p style="font-size:0.78rem;color:rgba(255,255,255,0.6);margin-top:0.8rem;">Part C runs once per mission after Part B completes. Across ~80 missions, it fills the College of Knowledge<br>with peer-reviewed, mission-verified science — taught at three levels, with Claude as the guide.</p>
+    <p class="attr">GSD Part C · NASA Science Education Template · March 29, 2026</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>GSD Research Mission Package — Part C · NASA Science Education Teaching Template · March 29, 2026</p>
+  <p style="margin-top:0.3rem;">Discovery → Concept → Curriculum → Teaching · <span class="amber">Squadron Profile (12 roles)</span> · ~255K tokens per mission run</p>
+</footer>
+
+</body>
+</html>

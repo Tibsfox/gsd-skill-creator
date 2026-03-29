@@ -1,0 +1,261 @@
+\documentclass[11pt,letterpaper]{book}
+
+\usepackage[top=1in, bottom=1in, left=1.2in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+% ============================================================
+% THE SPACE BETWEEN — COLOR SCHEME
+% Deep space navy + manuscript gold + clarity white
+% ============================================================
+\definecolor{primary}{HTML}{0A1628}      % Deep space — the void from which meaning emerges
+\definecolor{secondary}{HTML}{C77B00}    % Manuscript gold — the color of aged knowledge
+\definecolor{tertiary}{HTML}{1A5276}     % Depth blue — mathematical rigor
+\definecolor{accent}{HTML}{1B5E20}       % Growth green — living mathematics
+\definecolor{lightprimary}{HTML}{EEF2F7}
+\definecolor{lightsecondary}{HTML}{FFF8E7}
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+
+% Chapter formatting
+\titleformat{\chapter}[display]
+  {\huge\bfseries\sffamily\color{primary}}
+  {\large\sffamily\textcolor{secondary}{LAYER \thechapter}}{0.5em}{}
+  [\vspace{0.3em}\textcolor{bordergray}{\rule{\textwidth}{0.6pt}}]
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{tertiary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.4em}\textcolor{bordergray}{\rule{\textwidth}{0.3pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{accent}}
+  {\thesubsubsection}{1em}{}
+
+\tcbuselibrary{breakable,skins}
+
+% Table box (McNeese-Hoag style)
+\newtcolorbox{tspbtable}[1]{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.6pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{TABLE: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=secondary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Formula box
+\newtcolorbox{tspbformula}[1]{
+  colback=lightprimary, colframe=tertiary,
+  arc=2pt, boxrule=0.6pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{FORMULA: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=tertiary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Example box
+\newtcolorbox{tspbexample}[1]{
+  colback=rowgray, colframe=accent,
+  arc=2pt, boxrule=0.6pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{EXAMPLE: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=accent, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% NASA mission context note
+\newtcolorbox{nasanote}[1]{
+  colback={rgb:white,10;blue,1}, colframe=primary,
+  arc=1pt, boxrule=0.5pt,
+  left=8pt, right=8pt, top=4pt, bottom=4pt,
+  title={\small\bfseries\sffamily\textcolor{white}{NASA: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=primary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% McNeese-Hoag update note
+\newtcolorbox{mhupdate}{
+  colback={rgb:white,9;purple,1}, colframe={rgb:red,3;blue,3},
+  arc=1pt, boxrule=0.4pt,
+  left=8pt, right=8pt, top=4pt, bottom=4pt,
+  fontupper=\small\sffamily,
+  breakable
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+\newcommand{\mhref}{\textbf{\textit{McNeese-Hoag (1959)}}}
+\newcommand{\tspb}{\textbf{\textit{The Space Between}}}
+
+% Headers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\sffamily\textcolor{subtlegray}{The Space Between}}
+\fancyhead[RO]{\small\sffamily\textcolor{subtlegray}{\leftmark}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{\thepage}}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=tertiary,
+  urlcolor=accent,
+  pdfauthor={Miles Tiberius Foxglove / GSD Ecosystem},
+  pdftitle={The Space Between},
+  pdfsubject={A Mathematical Autodidact's Guide},
+}
+
+\title{The Space Between}
+\author{Miles Tiberius Foxglove}
+\date{GSD Ecosystem --- Initiated March 2026}
+
+\begin{document}
+
+% ============================================================
+% FRONT MATTER
+% ============================================================
+\frontmatter
+\thispagestyle{empty}
+\begin{center}
+\vspace*{3cm}
+
+{\Large\sffamily\textcolor{subtlegray}{GSD COLLEGE OF KNOWLEDGE}}
+
+\vspace{0.5cm}
+\textcolor{bordergray}{\rule{8cm}{0.4pt}}
+
+\vspace{2cm}
+{\fontsize{36}{44}\selectfont\bfseries\sffamily\textcolor{primary}{The Space\\[0.3em]Between}}
+
+\vspace{1cm}
+{\Large\sffamily\textcolor{secondary}{A Mathematical Autodidact's Guide}}\\[0.5em]
+{\large\sffamily\itshape\textcolor{subtlegray}{From the Unit Circle to L-Systems}}
+
+\vspace{3cm}
+{\normalsize\sffamily\textcolor{primary}{Miles Tiberius Foxglove}}\\[0.3em]
+{\small\sffamily\textcolor{subtlegray}{GSD Ecosystem $\cdot$ Tibsfox, Inc.\ $\cdot$ Mukilteo, WA}}
+
+\vspace{2cm}
+{\small\sffamily\textcolor{subtlegray}{Initiated: March 2026}}\\
+{\small\sffamily\textcolor{subtlegray}{Template: McNeese \& Hoag, \textit{Engineering and Technical Handbook}, 1959}}\\
+{\small\sffamily\textcolor{subtlegray}{Mathematical content expanded by the NASA Mission Series, Parts A--G}}
+
+\vspace{3cm}
+\begin{center}
+\colorbox{lightprimary}{\parbox{12cm}{\centering\small\sffamily\textcolor{primary}{%
+\textit{``Start with shapes. Start with circles and triangles.\\
+Start with the unit circle, because it contains within its elegant simplicity\\
+the seeds of all of trigonometry, which contains the seeds of harmonic analysis,\\
+which describes how waves behave, which describes how everything behaves\\
+because at a fundamental level the universe is made of waves.''}\\[0.3em]
+--- The Space Between, February 2026
+}}}
+\end{center}
+\end{center}
+\newpage
+
+\chapter*{How to Read This Book}
+\addcontentsline{toc}{chapter}{How to Read This Book}
+
+This book is organized as an eight-layer mathematical progression. Each layer builds on the one before. You do not need to read it cover to cover, though you may. You may enter at any layer where your current knowledge allows. You may leave at any layer and return when you are ready.
+
+The format follows the three-element discipline of \mhref: every section has \textbf{Tables} (organized reference data), \textbf{Formulas} (precisely stated equations with derivations), and \textbf{Examples} (worked problems at three levels: Conceptual, Working, and Advanced). Every example is drawn from real NASA mission parameters wherever possible, grounding the mathematics in the physical universe that produced the mathematics in the first place.
+
+\textbf{The eight layers:}
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Unit Circle} --- The circle that generates all periodic mathematics
+  \item \textbf{Pythagorean Theorem} --- The equation that measures space
+  \item \textbf{Trigonometry} --- The language of angles and waves
+  \item \textbf{Vector Calculus} --- The mathematics of motion and change
+  \item \textbf{Set Theory} --- The foundations of mathematical structure
+  \item \textbf{Category Theory} --- The algebra of relationship and transformation
+  \item \textbf{Information Systems Theory} --- The mathematics of meaning and measurement
+  \item \textbf{L-Systems} --- The grammar of growth and recursive form
+\end{enumerate}
+
+A child who completes Layer 1 understands, in embryonic form, the mathematics of starlight, sound, ocean tides, and quantum mechanics. They just do not know it yet. This book's job is to build that understanding, one layer at a time.
+
+\tableofcontents
+
+\mainmatter
+
+% ============================================================
+% LAYER 1: UNIT CIRCLE
+% ============================================================
+\input{parts/01-unit-circle/chapter-01.tex}
+
+% ============================================================
+% LAYER 2: PYTHAGOREAN THEOREM
+% ============================================================
+\input{parts/02-pythagorean/chapter-02.tex}
+
+% ============================================================
+% LAYER 3: TRIGONOMETRY
+% ============================================================
+\input{parts/03-trigonometry/chapter-03.tex}
+
+% ============================================================
+% LAYERS 4-8: SCAFFOLDED (to be filled by Part G runs)
+% ============================================================
+\input{parts/04-vector-calculus/chapter-04.tex}
+\input{parts/05-set-theory/chapter-05.tex}
+\input{parts/06-category-theory/chapter-06.tex}
+\input{parts/07-information-systems/chapter-07.tex}
+\input{parts/08-l-systems/chapter-08.tex}
+
+% ============================================================
+% APPENDICES
+% ============================================================
+\appendix
+\input{appendices/physical-constants.tex}
+\input{appendices/conversion-factors.tex}
+\input{appendices/mcneese-hoag-index.tex}
+
+\backmatter
+\chapter*{About This Work}
+\addcontentsline{toc}{chapter}{About This Work}
+
+\textit{The Space Between} began as an eight-page philosophical essay written on February 15, 2026, about consciousness, computation, and the relationship between human minds and artificial intelligence. The essay argued that the most important thing an educational framework could do was give every child access to tools commensurate with the staggering improbability of their existence.
+
+This textbook is the mathematical realization of that argument. It is being expanded by the GSD NASA Mission Series (Parts A--G), which exercises the mathematics of real missions and deposits those exercises here in the form that has proven most durable: the three-element format of Donald G.\ McNeese and Albert L.\ Hoag, whose \textit{Engineering and Technical Handbook} (Prentice-Hall, 1959) organized engineering knowledge with enough care that it lasted 68 years and is still in print.
+
+The goal is to last longer.
+
+\vspace{2em}
+\begin{center}
+\textcolor{subtlegray}{\small\sffamily Miles Tiberius Foxglove $\cdot$ Tibsfox, Inc.\ $\cdot$ Mukilteo, Washington}
+\end{center}
+
+\end{document}

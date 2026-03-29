@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Part G — 8-Pass Refinement & The Space Between — GSD Integration Layer</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #3B1F00;
+    --secondary: #7B1FA2;
+    --tertiary: #B71C1C;
+    --accent: #1A3650;
+    --tspb: #1B5E20;
+    --mh: #4A148C;
+    --gold: #C77B00;
+    --parchment: #FFF8E1;
+    --purple-light: #F3E5F5;
+    --crimson-light: #FFEBEE;
+    --ink-light: #E8EEF4;
+    --border: #BDBDBD;
+    --row-gray: #F5F5F5;
+    --subtle: #757575;
+    --text: #212121;
+    --pass-gold: #F57F17;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--parchment); min-height: 100vh; }
+
+  /* Header — aged manuscript aesthetic */
+  header {
+    background: linear-gradient(160deg, #1A0A00 0%, var(--primary) 55%, #5C3000 100%);
+    border-bottom: 3px solid var(--gold);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(199,123,0,0.06) 0%, transparent 60%),
+                      radial-gradient(circle at 80% 30%, rgba(123,31,162,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .header-inner { max-width: 940px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; z-index: 1; }
+
+  .pipeline-bar { display: flex; align-items: center; gap: 0.3rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+  .step { font-size: 0.57rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 2px; font-weight: 700; }
+  .step-done { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.35); }
+  .step-active { background: var(--gold); color: #1A0800; }
+  .step-next { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.25); }
+  .arrow { color: rgba(255,255,255,0.18); font-size: 0.7rem; }
+
+  .eyebrow { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3em; color: rgba(199,123,0,0.9); font-weight: 700; margin-bottom: 0.5rem; font-family: 'DM Mono', monospace; }
+
+  header h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; color: white; line-height: 1.25; margin-bottom: 0.5rem; }
+  header h1 em { color: rgba(255,220,140,0.8); font-style: italic; font-size: 0.95rem; display: block; font-family: 'DM Sans', sans-serif; font-weight: 300; margin-bottom: 0.3rem; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.7rem 0; }
+  .tag { font-size: 0.6rem; padding: 0.18rem 0.6rem; border-radius: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .tag-pass { background: rgba(245,127,23,0.3); border: 1px solid var(--pass-gold); color: rgba(255,210,100,0.9); }
+  .tag-tspb { background: rgba(27,94,32,0.3); border: 1px solid var(--tspb); color: rgba(120,255,150,0.9); }
+  .tag-mh { background: rgba(74,20,140,0.3); border: 1px solid var(--mh); color: rgba(200,150,255,0.9); }
+  .tag-val { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.55); }
+  .param-line { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: rgba(199,123,0,0.85); background: rgba(0,0,0,0.4); display: inline-block; padding: 0.2rem 0.7rem; border-radius: 3px; margin-top: 0.4rem; border-left: 2px solid var(--gold); }
+
+  main { max-width: 940px; margin: 0 auto; padding: 2rem; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.6rem; margin-bottom: 2rem; }
+  @media(max-width:700px) { .stats { grid-template-columns: repeat(3,1fr); } }
+  .stat { background: white; border: 1px solid var(--border); border-top: 3px solid var(--primary); border-radius: 4px; padding: 0.7rem 0.5rem; text-align: center; box-shadow: 0 2px 5px rgba(59,31,0,0.07); }
+  .stat.purple { border-top-color: var(--secondary); }
+  .stat.tspb { border-top-color: var(--tspb); }
+  .stat.gold { border-top-color: var(--gold); }
+  .stat .val { font-size: 1.05rem; font-weight: 700; color: var(--primary); font-family: 'Libre Baskerville', serif; display: block; }
+  .stat.purple .val { color: var(--secondary); }
+  .stat.tspb .val { color: var(--tspb); }
+  .stat.gold .val { color: var(--gold); }
+  .stat .lbl { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--subtle); margin-top: 0.2rem; }
+
+  h2 { font-family: 'Libre Baskerville', serif; color: var(--primary); font-size: 1.1rem; margin: 2rem 0 0.8rem; padding-bottom: 0.3rem; border-bottom: 2px solid #EED8A0; }
+
+  /* 8-pass grid */
+  .passes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 1.5rem; }
+  @media(max-width:700px) { .passes { grid-template-columns: repeat(2,1fr); } }
+  .pass-card { background: white; border: 1px solid var(--border); border-radius: 5px; padding: 0.8rem; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+  .pass-card .pn { display: inline-block; background: var(--pass-gold); color: white; font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 2px; margin-bottom: 0.4rem; font-family: 'DM Mono', monospace; }
+  .pass-card .pt { font-size: 0.78rem; font-weight: 700; color: var(--primary); margin-bottom: 0.25rem; }
+  .pass-card .pd { font-size: 0.67rem; color: var(--subtle); line-height: 1.35; }
+
+  /* File cards */
+  .files { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; }
+  @media(max-width:600px) { .files { grid-template-columns: 1fr 1fr; } }
+  .card { background: white; border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: 5px; padding: 1rem; text-decoration: none; color: var(--text); display: block; box-shadow: 0 2px 5px rgba(59,31,0,0.07); transition: all 0.2s; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,31,0,0.15); border-left-color: var(--gold); }
+  .card.tspb { border-left-color: var(--tspb); }
+  .card.tspb:hover { border-left-color: var(--secondary); }
+  .card .icon { font-size: 1.6rem; margin-bottom: 0.4rem; display: block; }
+  .card .type { font-size: 0.57rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--subtle); font-weight: 700; margin-bottom: 0.15rem; }
+  .card .name { font-size: 0.85rem; font-weight: 700; color: var(--primary); font-family: 'Libre Baskerville', serif; margin-bottom: 0.25rem; }
+  .card .desc { font-size: 0.72rem; color: var(--subtle); line-height: 1.4; }
+
+  /* Validation badge */
+  .validation-badge {
+    background: var(--tspb);
+    color: white;
+    border-radius: 5px;
+    padding: 1rem 1.4rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .validation-badge .vb-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .validation-badge .vb-text h3 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; }
+  .validation-badge .vb-text p { font-size: 0.73rem; opacity: 0.8; }
+  .validation-badge code { background: rgba(255,255,255,0.2); padding: 0.1em 0.4em; border-radius: 2px; font-family: 'DM Mono', monospace; font-size: 0.75em; }
+
+  /* TSPB layer grid */
+  .layers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 1.5rem; }
+  @media(max-width:600px) { .layers { grid-template-columns: repeat(2,1fr); } }
+  .layer-card { background: white; border: 1px solid var(--border); border-radius: 5px; padding: 0.8rem 0.7rem; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .layer-card .ln { width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: white; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.4rem; font-family: 'Libre Baskerville', serif; }
+  .layer-card.done .ln { background: var(--tspb); }
+  .layer-card.scaffold .ln { background: var(--gold); }
+  .layer-card .lname { font-size: 0.7rem; font-weight: 700; color: var(--primary); margin-bottom: 0.2rem; }
+  .layer-card .lstatus { font-size: 0.58rem; color: var(--subtle); }
+  .layer-card.done .lstatus { color: var(--tspb); font-weight: 600; }
+  .layer-card.scaffold .lstatus { color: var(--gold); }
+
+  /* MH reference */
+  .mh-ref {
+    background: var(--purple-light);
+    border: 1px solid rgba(74,20,140,0.2);
+    border-left: 4px solid var(--mh);
+    border-radius: 5px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  .mh-ref .mh-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--mh); font-weight: 700; margin-bottom: 0.5rem; }
+  .mh-ref p { font-size: 0.78rem; color: #333; line-height: 1.55; }
+  .mh-ref em { color: var(--mh); font-style: italic; }
+
+  /* Stage cards */
+  .stage { background: white; border: 1px solid var(--border); border-radius: 5px; margin-bottom: 0.8rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .sh { padding: 0.55rem 1rem; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: white; }
+  .sh-1 { background: var(--primary); }
+  .sh-2 { background: var(--secondary); }
+  .sh-3 { background: var(--accent); }
+  .sb { padding: 0.7rem 1rem; }
+  .items { list-style: none; padding: 0; }
+  .items li { font-size: 0.77rem; padding: 0.2rem 0; color: #444; border-bottom: 1px solid #F0F0F0; display: flex; gap: 0.5rem; align-items: flex-start; }
+  .items li:last-child { border-bottom: none; }
+  .items li::before { content: '📜'; font-size: 0.58rem; flex-shrink: 0; margin-top: 0.18em; }
+
+  /* Instructions */
+  .instructions { background: var(--parchment); border: 1px solid rgba(59,31,0,0.15); border-radius: 5px; padding: 1.2rem 1.5rem; margin-bottom: 1rem; }
+  .instructions ol { padding-left: 1.2rem; margin-top: 0.5rem; }
+  .instructions li { font-size: 0.78rem; padding: 0.22rem 0; color: #333; line-height: 1.5; }
+
+  pre { background: #1A0A00; color: #D4C4A0; border-radius: 4px; padding: 0.8rem 1rem; font-size: 0.68rem; overflow-x: auto; font-family: 'DM Mono', monospace; margin-top: 0.6rem; }
+  code { background: var(--parchment); color: var(--primary); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.77em; font-family: 'DM Mono', monospace; border: 1px solid rgba(59,31,0,0.15); }
+
+  /* Closing */
+  .closing { background: linear-gradient(135deg, var(--primary), #6D3B00); color: white; border-radius: 6px; padding: 2rem; margin-top: 2rem; position: relative; overflow: hidden; border-top: 3px solid var(--gold); }
+  .closing::after { content: '∮ ∇ ∂ ∫ Σ π e'; position: absolute; right: 1.5rem; bottom: 1rem; font-size: 1.4rem; opacity: 0.06; letter-spacing: 0.3rem; font-family: 'DM Mono', monospace; }
+  .closing blockquote { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.88rem; line-height: 1.75; margin-bottom: 0.8rem; opacity: 0.9; max-width: 680px; }
+  .closing .callout { font-size: 0.82rem; font-weight: 700; color: rgba(255,220,100,0.9); }
+  .closing .attr { font-size: 0.65rem; opacity: 0.45; margin-top: 0.5rem; }
+
+  footer { background: #1A0A00; color: rgba(255,255,255,0.3); text-align: center; padding: 1.2rem; font-size: 0.64rem; letter-spacing: 0.08em; margin-top: 2rem; }
+  .amber { color: rgba(199,123,0,0.7); }
+</style>
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+  <div class="pipeline-bar">
+    <span class="step step-done">A ✓</span><span class="arrow">→</span>
+    <span class="step step-done">B ✓</span><span class="arrow">→</span>
+    <span class="step step-done">C ✓</span><span class="arrow">→</span>
+    <span class="step step-done">D ✓</span><span class="arrow">→</span>
+    <span class="step step-done">E ✓</span><span class="arrow">→</span>
+    <span class="step step-done">F ✓</span><span class="arrow">→</span>
+    <span class="step step-active">G: Integration ◀</span>
+    <span class="arrow">→</span>
+    <span class="step step-next">v1.50.{BATCH}.INT</span>
+  </div>
+  <p class="eyebrow">GSD Part G — The Integration Layer</p>
+  <h1>
+    <em>Eight passes. Systematic. Patient. Built to last.</em>
+    8-Pass Refinement &amp; The Space Between
+  </h1>
+  <div class="tag-row">
+    <span class="tag tag-pass">8 Refinement Passes</span>
+    <span class="tag tag-tspb">docs/TSPB/ Initiated</span>
+    <span class="tag tag-mh">McNeese-Hoag Format</span>
+    <span class="tag tag-val">28/28 Formulas Validated</span>
+    <span class="tag tag-val">35-page TSPB.pdf</span>
+  </div>
+  <div class="param-line">Input: All Parts A–F RETRO files for {BATCH_ID} → Updated templates + docs/TSPB/ expansion</div>
+</div>
+</header>
+
+<main>
+
+  <div class="stats">
+    <div class="stat"><span class="val">8</span><div class="lbl">Passes</div></div>
+    <div class="stat gold"><span class="val">25</span><div class="lbl">Template Pages</div></div>
+    <div class="stat tspb"><span class="val">35</span><div class="lbl">TSPB.pdf Pages</div></div>
+    <div class="stat purple"><span class="val">28/28</span><div class="lbl">Tests Pass</div></div>
+    <div class="stat"><span class="val">~465K</span><div class="lbl">Tokens/Run</div></div>
+    <div class="stat gold"><span class="val">24</span><div class="lbl">Grand Fleet Roles</div></div>
+  </div>
+
+  <div class="validation-badge">
+    <div class="vb-icon">✅</div>
+    <div class="vb-text">
+      <h3>28/28 Formula Validation Tests Passing</h3>
+      <p>All Layer 1 (Unit Circle) formulas verified: Pythagorean identity, Euler's formula across 9 angles, Euler's identity, 3D distance metric, NIST CODATA 2022 physical constants including <code>G</code>, <code>h</code>, <code>k_B</code>, <code>σ</code>, and solar constant at 1 AU.</p>
+    </div>
+  </div>
+
+  <h2>Download Files</h2>
+
+  <div class="files">
+    <a class="card" href="nasa_partg_template.pdf" download>
+      <span class="icon">📜</span>
+      <div class="type">Part G Template</div>
+      <div class="name">nasa_partg_template.pdf</div>
+      <div class="desc">25-page 8-pass refinement template. Findings registry schema, pass-by-pass protocols, TSPB chapter template, McNeese-Hoag cross-reference architecture, 24-role Grand Fleet crew.</div>
+    </a>
+    <a class="card tspb" href="docs/TSPB/TSPB.pdf" download>
+      <span class="icon">📚</span>
+      <div class="type">The Space Between</div>
+      <div class="name">TSPB.pdf</div>
+      <div class="desc">35-page initial build. Layer 1 (Unit Circle) fully written — tables, formulas, worked examples. Layers 2–8 scaffolded. Appendices: physical constants (NIST 2022), conversion factors, McNeese-Hoag index.</div>
+    </a>
+    <a class="card tspb" href="docs/TSPB/TSPB-main.tex" download>
+      <span class="icon">📝</span>
+      <div class="type">TSPB LaTeX Source</div>
+      <div class="name">TSPB-main.tex</div>
+      <div class="desc">Master LaTeX file. Book class, eight-chapter structure, McNeese-Hoag three-element format (tspbtable / tspbformula / tspbexample environments), NASA mission context boxes.</div>
+    </a>
+  </div>
+
+  <div class="mh-ref">
+    <div class="mh-label">Template Reference — McNeese &amp; Hoag (1959)</div>
+    <p>Donald G. McNeese and Albert L. Hoag's <em>Engineering and Technical Handbook</em> (Prentice-Hall, 1959. 376 pages. Library of Congress Card No. 57-6690. Third printing September 1959.) organized engineering knowledge with enough care that it was reprinted seven times. Its three-element discipline — <strong>Tables / Formulas / Examples</strong>, every page earning its weight — is adopted as the structural template for TSPB. The McNeese-Hoag Cross-Reference Index (Appendix C of TSPB) maps every significant table and formula in the 1959 handbook to its TSPB equivalent, noting what has been updated with modern values and what has been extended with mathematics not available in 1959 (Euler's formula, orbital mechanics, information theory, L-systems).</p>
+  </div>
+
+  <h2>The 8 Passes</h2>
+
+  <div class="passes">
+    <div class="pass-card"><div class="pn">PASS 1</div><div class="pt">Retrospective Harvest</div><div class="pd">Read all RETRO outputs from Parts A–F. Produce findings-registry.json with priority classification (P0–P3).</div></div>
+    <div class="pass-card"><div class="pn">PASS 2</div><div class="pt">Fix and Test</div><div class="pd">Implement P0 findings. Add regression tests. All P1 items queued. Updated templates validated.</div></div>
+    <div class="pass-card"><div class="pn">PASS 3</div><div class="pt">Hi-Fidelity Enrichment</div><div class="pd">Deep CK linking (2-level depth). TRY Session "what you should see" paragraphs. Code visualization output. DIY safety audit.</div></div>
+    <div class="pass-card"><div class="pn">PASS 4</div><div class="pt">Integration Retro</div><div class="pd">Cross-part consistency. Same concept appearing at two fidelity levels across parts resolved.</div></div>
+    <div class="pass-card"><div class="pn">PASS 5</div><div class="pt">QA / UI-UX</div><div class="pd">Reading-level calibration: Novice → Grade 6–8, Advanced → Grade 14–16. Length targets. Format polish.</div></div>
+    <div class="pass-card"><div class="pn">PASS 6</div><div class="pt">Refinement</div><div class="pd">"More useful, not longer." Prune, tighten, improve flow. Average guide 10–15% shorter without info loss.</div></div>
+    <div class="pass-card"><div class="pn">PASS 7</div><div class="pt">Final Documentation</div><div class="pd">Verbose release notes. Changelog. Migration guide for any template that changed significantly.</div></div>
+    <div class="pass-card"><div class="pn">PASS 8</div><div class="pt">TSPB Expansion</div><div class="pd">Harvest math from all missions. Author new chapters in McNeese-Hoag format. Compile TSPB.pdf.</div></div>
+  </div>
+
+  <h2>📚 The Space Between — Layer Status</h2>
+
+  <div class="layers">
+    <div class="layer-card done"><div class="ln">1</div><div class="lname">Unit Circle</div><div class="lstatus">Full content ✓</div></div>
+    <div class="layer-card scaffold"><div class="ln">2</div><div class="lname">Pythagorean</div><div class="lstatus">Scaffolded</div></div>
+    <div class="layer-card scaffold"><div class="ln">3</div><div class="lname">Trigonometry</div><div class="lstatus">Scaffolded</div></div>
+    <div class="layer-card scaffold"><div class="ln">4</div><div class="lname">Vector Calculus</div><div class="lstatus">Scaffolded</div></div>
+    <div class="layer-card scaffold"><div class="ln">5</div><div class="lname">Set Theory</div><div class="lstatus">Scaffolded</div></div>
+    <div class="layer-card scaffold"><div class="ln">6</div><div class="lname">Category Theory</div><div class="lstatus">Scaffolded</div></div>
+    <div class="layer-card scaffold"><div class="ln">7</div><div class="lname">Info Systems</div><div class="lstatus">Scaffolded</div></div>
+    <div class="layer-card scaffold"><div class="ln">8</div><div class="lname">L-Systems</div><div class="lstatus">Scaffolded</div></div>
+  </div>
+
+  <h2>📦 Contents Breakdown</h2>
+
+  <div class="stage">
+    <div class="sh sh-1">Stage 1 — Vision Document</div>
+    <div class="sb">
+      <ul class="items">
+        <li>When Part G runs: not per-mission, but per batch (e.g., Apollo-era, full catalog) — the integration layer between Part A–F cycles</li>
+        <li>8-pass architecture table: Retrospective → Fix → Enrich → Integrate → QA → Refine → Document → TSPB</li>
+        <li>The McNeese-Hoag reference standard: three-element format (Tables / Formulas / Examples) adopted from the 1959 handbook</li>
+        <li>Eight-layer TSPB spine mapped to NASA mission series: which Part exercises which layer, with McNeese-Hoag parallel for each</li>
+        <li>New mathematical content table: 11 topics exercised in the series not present in the 1959 handbook (Euler's formula, Tsiolkovsky, tidal heating, Shannon, quaternions, L-systems, etc.)</li>
+        <li>Pass 1 findings registry JSON schema with priority levels P0–P3 and category codes [F-CONTENT], [F-FORMAT], [F-LINK], [F-CODE], [F-TRY], [F-CAREER], [F-SCOPE], [F-PERF], [F-TEMPLATE]</li>
+        <li>Pass 3 enrichment protocol: TRY Session "what you should see", code visualization requirement, 2-level CK depth</li>
+        <li>Pass 5 QA metrics: reading level, step count, code length, section word count, table density</li>
+        <li>Pass 8 TSPB chapter template (McNeese-Hoag format applied) + McNeese-Hoag update note box</li>
+        <li>docs/TSPB/ directory structure specification; compile.sh; validate-formulas.py</li>
+        <li>24-role Grand Fleet crew: adds HISTORIAN (McNeese-Hoag cross-reference) and ARCHIVIST (TSPB file management)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="sh sh-2">Stage 2 — Research Reference</div>
+    <div class="sb">
+      <ul class="items">
+        <li>Pass 1 protocol: 6-source RETRO harvest table (Part A–F with specific extraction targets per part)</li>
+        <li>Pass 3 enrichment checklist by part: Part C (TRY observability), Part D (real-world grounding), Part E (simulation narrative), Part F (Go/No-Go completeness)</li>
+        <li>Pass 5 QA metrics table: Flesch-Kincaid targets, step counts, code lengths, cross-link density</li>
+        <li>TSPB chapter template (full LaTeX structure): chapterintro, Tables section, Formulas section, Examples section, NASA Applications, Connections</li>
+        <li>Physical constants appendix (NIST CODATA 2022): speed of light (exact), Planck constant (exact), Boltzmann (exact), gravitational constant (with uncertainty), Stefan-Boltzmann, astronomical constants</li>
+        <li>Conversion factors: length (including AU, ly, pc), mass and force, energy, temperature (all four scales)</li>
+        <li>McNeese-Hoag cross-reference index: 1959 page ranges mapped to TSPB chapters with update status</li>
+        <li>Safety and quality rules: formula correctness BLOCK, TSPB compilation GATE, physical constants accuracy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="sh sh-3">Stage 3 — Mission Package</div>
+    <div class="sb">
+      <ul class="items">
+        <li>6-wave architecture: W0 (RETRO harvest), W1 (P1+2 fixes), W2 (P3 enrich), W3 (P4+5 integration/QA), W4 (P6+7 refine/doc), W5 (P8 TSPB), W6 (validate/release)</li>
+        <li>12 deliverables: findings registry, updated templates, enriched guides/TRY/code, consistency fixes, calibrated content, refined docs, release docs, ≥3 TSPB chapters, updated appendices, TSPB.pdf, release artifact</li>
+        <li>Token budget: ~280K Apollo-era batch, ~465K full catalog; scales with batch size</li>
+        <li>5 BLOCK safety tests: TSPB formula correctness, TSPB compilation, TRY Session safety, physical constants updated, no unsourced science</li>
+        <li>8 quality gates: reading level, step counts, code length, CK depth, SKILL.md format, TSPB McNeese-Hoag format, unit verification, worked example grounding</li>
+        <li>TSPB sample chapter: Layer 1 Unit Circle — full Table (16 angles × 6 columns with NASA context), 4 Formulas (Pythagorean identity, Euler's formula, angle addition, rotation operator), 3 Examples (conceptual to advanced), NASA applications note, connections to adjacent layers</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>How to Run Part G</h2>
+
+  <div class="instructions">
+    <ol>
+      <li>Wait until a complete batch of missions has run Parts A–F (e.g., all Apollo-era missions, or a version milestone boundary).</li>
+      <li>Collect all <code>RETRO</code> output files from the batch into <code>.planning/retros/{BATCH_ID}/</code>.</li>
+      <li>Run Part G: <code>gsd run skill-creator --template nasa_partg_template.pdf --input {BATCH_ID}</code></li>
+      <li>Wave 0 produces <code>findings-registry.json</code> — review the P0 items before Wave 1 proceeds (CAPCOM gate).</li>
+      <li>Waves 1–4 run sequentially, each pass improving the previous. Approve CAPCOM gate after Pass 5 QA metrics are met.</li>
+      <li>Wave 5 (Pass 8) authors new TSPB chapters and runs <code>tools/validate-formulas.py</code> — all tests must pass before compilation.</li>
+      <li>Wave 6 compiles <code>TSPB.pdf</code> with <code>bash tools/compile.sh</code> (three-pass XeLaTeX).</li>
+      <li>Approve final CAPCOM gate. Release tagged <code>v1.50.{BATCH_ID}.INT</code>.</li>
+    </ol>
+  </div>
+
+  <h2>Recompile TSPB</h2>
+
+  <div class="instructions">
+    <p style="font-size:0.78rem;color:#333;margin-bottom:0.5rem;">From the <code>docs/TSPB/</code> directory:</p>
+    <pre>cd docs/TSPB
+bash tools/compile.sh
+# or manually (3 passes required):
+xelatex -interaction=nonstopmode TSPB-main.tex
+xelatex -interaction=nonstopmode TSPB-main.tex
+xelatex -interaction=nonstopmode TSPB-main.tex</pre>
+    <p style="font-size:0.7rem;color:var(--subtle);margin-top:0.5rem;">Requires: <code>texlive-xetex texlive-latex-extra texlive-science fonts-dejavu</code><br>
+    Formula validation: <code>python3 tools/validate-formulas.py</code> (must pass before release)</p>
+  </div>
+
+  <div class="closing">
+    <blockquote>"A child who understands a circle understands, in embryonic form, the mathematics that describes starlight, sound, ocean tides, and quantum mechanics. They just don't know it yet. The framework's job — the educational job — is to build the bridge from that circle to those stars, one step at a time, at the pace that feels natural to the specific, unique, impossible child who is walking across it."</blockquote>
+    <p class="callout">The spaces between the missions are where the mathematics lives.</p>
+    <p style="font-size:0.76rem;color:rgba(255,255,255,0.6);margin-top:0.8rem;">McNeese and Hoag organized 376 pages with enough care that it lasted 68 years. The Space Between is organized to last longer: same discipline, expanded mathematics, grounded in the universe that 80 NASA missions explored.</p>
+    <p class="attr">GSD Part G · 8-Pass Refinement + The Space Between · March 29, 2026</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>GSD Research Mission Package — Part G · Integration Layer · March 29, 2026</p>
+  <p style="margin-top:0.3rem;">8 Passes · <span class="amber">Grand Fleet (24 roles)</span> · ~465K tokens/batch · docs/TSPB/ initiated · McNeese &amp; Hoag (1959) honored</p>
+</footer>
+
+</body>
+</html>

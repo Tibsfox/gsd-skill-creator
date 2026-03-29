@@ -1,0 +1,1180 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ============================================================
+% SCHOLARLY MANUSCRIPT COLOR SCHEME
+% Manuscript gold + deep ink + library crimson
+% The color of old mathematical textbooks and permanent knowledge
+% ============================================================
+\definecolor{primary}{HTML}{3B1F00}      % Deep manuscript brown -- age, permanence
+\definecolor{secondary}{HTML}{7B1FA2}    % Scholar purple -- mathematics, insight
+\definecolor{tertiary}{HTML}{B71C1C}     % Library crimson -- precision, importance
+\definecolor{accent}{HTML}{1A3650}       % Deep ink blue -- technical authority
+\definecolor{lightprimary}{HTML}{FFF8E1} % Aged parchment
+\definecolor{lightsecondary}{HTML}{F3E5F5}% Pale purple
+\definecolor{lighttertiary}{HTML}{FFEBEE} % Pale crimson
+\definecolor{lightaccent}{HTML}{E8EEF4}  % Pale ink
+\definecolor{mathgold}{HTML}{E65100}     % Formula amber
+\definecolor{passgold}{HTML}{F57F17}     % Pass annotation gold
+\definecolor{tspbgreen}{HTML}{1B5E20}    % TSPB section green
+\definecolor{mcnhoag}{HTML}{4A148C}      % McNeese-Hoag reference purple
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{paramred}{HTML}{B71C1C}
+
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{accent}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily, breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt, breakable
+}
+
+% Pass annotation box
+\newtcolorbox{passbox}[1]{
+  colback=lightprimary, colframe=passgold,
+  arc=2pt, boxrule=0.8pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{PASS #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=passgold, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% TSPB chapter box
+\newtcolorbox{tspbbox}[1]{
+  colback=lightprimary, colframe=tspbgreen,
+  arc=2pt, boxrule=0.8pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{TSPB: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=tspbgreen, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% McNeese-Hoag reference box
+\newtcolorbox{mhbox}[1]{
+  colback=lightsecondary, colframe=mcnhoag,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{McNeese-Hoag (1959): #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=mcnhoag, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Math formula box
+\newtcolorbox{formulabox}[1]{
+  colback=lightaccent, colframe=accent,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{FORMULA: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=accent, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Retrospective finding box
+\newtcolorbox{retrobox}[1]{
+  colback=lighttertiary, colframe=tertiary,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=6pt, bottom=6pt,
+  title={\small\bfseries\sffamily\textcolor{white}{RETRO: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=tertiary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcommand{\param}[1]{\textcolor{paramred}{\textbf{\{#1\}}}}
+\newcommand{\pass}[1]{\textcolor{passgold}{\textbf{\sffamily PASS #1:}}}
+\newcommand{\tspb}{\textbf{\textit{The Space Between}}}
+\newcommand{\mh}{\textbf{\textit{McNeese-Hoag}}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{GSD Part G --- 8-Pass Refinement + The Space Between}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{Knowledge Integration Mission}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=secondary,
+  urlcolor=accent,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={Part G -- 8-Pass Refinement and The Space Between Expansion},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- PART G}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{10cm}{0.4pt}}
+
+\vspace{1cm}
+{\fontsize{10}{13}\selectfont\sffamily\textcolor{passgold}{\textbf{THE INTEGRATION LAYER}}}
+
+\vspace{0.4cm}
+{\fontsize{20}{26}\selectfont\bfseries\sffamily\textcolor{primary}{8-Pass Refinement\\[0.3em]\& The Space Between\\[0.3em]Expansion}}
+
+\vspace{0.5cm}
+{\large\sffamily\textcolor{secondary}{Parts A--F Retrospective Integration}}\\[0.3em]
+{\normalsize\sffamily\textcolor{accent}{The Mathematical Foundations Textbook}}\\[0.2em]
+{\normalsize\sffamily\textcolor{tspbgreen}{\textit{``Start with shapes. Start with circles.'' --- The Space Between}}}
+
+\vspace{0.5cm}
+{\normalsize\sffamily\textcolor{mcnhoag}{Updated after McNeese \& Hoag, \textit{Engineering and Technical Handbook}, 1959}}
+
+\vspace{1.2cm}
+\begin{center}
+\scriptsize\sffamily
+\begin{tabular}{ccccccccccccccc}
+\textcolor{subtlegray}{A} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{B} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{C} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{D} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{E} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{F} & \textcolor{subtlegray}{$\to$} &
+\colorbox{primary}{\textcolor{white}{\bfseries\ G\ }} &
+\textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{Release}\\[2pt]
+{\tiny\textcolor{subtlegray}{Hist}} & &
+{\tiny\textcolor{subtlegray}{Sci}} & &
+{\tiny\textcolor{subtlegray}{Edu}} & &
+{\tiny\textcolor{subtlegray}{Eng}} & &
+{\tiny\textcolor{subtlegray}{Sci+}} & &
+{\tiny\textcolor{subtlegray}{Ops}} & &
+{\tiny\textcolor{subtlegray}{Refine}} & &
+{\tiny\textcolor{subtlegray}{v1.50.G.INT}}
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+\colorbox{lightprimary}{\parbox{14cm}{\centering\small\sffamily\textcolor{primary}{%
+8 PASSES: Retrospective $\to$ Fix $\to$ Hi-Fidelity $\to$ Integrate $\to$ QA $\to$ Refine $\to$ Document $\to$ TSPB Expand\\[0.2em]
+\textbf{New Capability:} \texttt{docs/TSPB/} --- The Space Between textbook in LaTeX + PDF\\[0.2em]
+\textbf{Template Reference:} McNeese \& Hoag (1959) --- tables, formulas, worked examples structure
+}}}
+
+\vspace{1cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 29, 2026 $\cdot$ Status: Template --- Parameterization Ready}}\\[0.2em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Grand Fleet (24 roles) $\cdot$ Est. 20--30 context windows}}\\[0.2em]
+{\small\sffamily\textcolor{subtlegray}{Runs once per complete Parts A--F cycle over the full mission catalog}}
+\end{center}
+\newpage
+
+% ============================================================
+% ORIENTATION PAGE
+% ============================================================
+\thispagestyle{fancy}
+\section*{Orientation: What Part G Is and When It Runs}
+\addcontentsline{toc}{section}{Orientation}
+
+\begin{asciibox}
+WHEN PART G RUNS
+=================
+Parts A through F are per-mission templates -- they run once per
+NASA mission in the catalog (approximately 80 missions total).
+
+Part G is different. It runs:
+  1. After a complete batch of per-mission runs (e.g., after all
+     Apollo-era missions have run Parts A-F), performing the 8-pass
+     retrospective refinement across that batch.
+  2. As a continuous improvement loop -- each Part G run improves
+     the templates that future missions will use.
+  3. Once per significant gsd-skill-creator version (e.g., at the
+     v1.50 milestone boundary) to integrate all RETRO outputs.
+
+Part G's two major outputs:
+  OUTPUT 1: Refined, improved versions of the Part A-F templates
+            (replacing the originals with quality-upgraded versions)
+  OUTPUT 2: The Space Between textbook expansion -- new LaTeX chapters
+            deposited to docs/TSPB/ based on mathematics encountered
+            across all mission runs
+
+Part G is a meta-mission: its subject IS the mission system itself.
+\end{asciibox}
+
+\textbf{The 8 passes in summary:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pass} & \tableheader{Name} & \tableheader{Primary Action} \\
+\midrule
+1 & Retrospective Harvest & Read all RETRO outputs from Parts A--F; classify findings \\
+2 & Fix and Test & Implement Pass 1 findings; add tests; validate \\
+3 & Hi-Fidelity Enrichment & Deep links, college dept mapping, TRY examples, DIY, code \\
+4 & Integration Retrospective & Lessons learned from Pass 3; cross-part consistency \\
+5 & QA and UI/UX & Quality assurance; student-facing polish; accessibility \\
+6 & Refinement & Prune, tighten, improve; remove redundancy \\
+7 & Final Documentation & Verbose docs update; release notes; migration guide \\
+8 & TSPB Expansion & The Space Between textbook additions from mission mathematics \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1: VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{8-Pass Refinement \& TSPB Expansion --- Vision Guide}
+
+\metafield{Template Version:}{v1.0 (Part G --- Integration Layer)}
+\metafield{Scope:}{All Parts A--F for the batch being integrated}
+\metafield{Batch Identifier:}{\param{BATCH\_ID} (e.g., APOLLO\_ERA, SHUTTLE\_ERA, FULL\_CATALOG)}
+\metafield{OPS Release Target:}{gsd-skill-creator v1.50.\param{BATCH\_ID}.INT}
+\metafield{TSPB Output:}{\texttt{docs/TSPB/} --- new and updated chapters}
+\metafield{McNeese-Hoag Reference:}{\textit{Engineering and Technical Handbook}, McNeese and Hoag, Prentice-Hall, 1959. 376 pages. Library of Congress Card No.\ 57-6690. Third printing Sept.\ 1959.}
+
+\subsection{Vision}
+
+The smell of an old book is the smell of knowledge that has survived. Vanillin released from degrading paper, the faint must of decades of library shelves, the tactile permanence of ink on acid-free stock. Miles Tiberius Foxglove has \textit{McNeese and Hoag} open on his desk, and in that gesture is the entire philosophy of Part G: the knowledge that was carefully organized, tables by tables, formula by formula, by two engineers in 1957, is still useful. Not despite being 68 years old. Because it was built right.
+
+Part G honors that philosophy. After the entire gsd-skill-creator NASA series has run --- 80 missions across 6 parts each, producing hundreds of study guides, simulations, skills, chipsets, CAPCOM scripts, career profiles, and mathematical workbooks --- Part G asks: what did we learn? What was inconsistent? What analogy appeared in Part C for Voyager that would have been better in Part D for Apollo? What mathematical concept showed up in three different simulations and should now have a permanent chapter in \tspb? What TRY Session didn't work as described because a step was missing? What career profile cited a salary range that was out of date?
+
+Eight passes. Systematic improvement. The same discipline that produced the McNeese-Hoag handbook: not the flashiest reference, not the most complete, but organized with obsessive care so that an engineer at a workbench in 1959 could find what they needed in under thirty seconds. That is the standard Part G holds the entire NASA series to.
+
+The TSPB expansion is the deepest deliverable. \tspb{} began as a philosophical essay about consciousness, computation, and the space between --- the 8-page PDF that lives on Miles's computer, dated February 15, 2026. But the full vision is a 923-page mathematical autodidact's guide, 33 chapters, 10 parts, built on an eight-layer progression: Unit Circle, Pythagorean Theorem, Trigonometry, Vector Calculus, Set Theory, Category Theory, Information Systems Theory, L-Systems. Each of those layers has been exercised by the NASA mission series. Every Part D orbital mechanics problem used trigonometry. Every Part E simulation used vector calculus. Every Part F telemetry architecture used information systems theory. Part G harvests those exercises and deposits new chapters in \texttt{docs/TSPB/} --- mathematical knowledge that was implicit in the mission series, now made explicit, organized in the format Miles designed, ready for future generations of students.
+
+\subsection{The McNeese-Hoag Reference Standard}
+
+\begin{mhbox}{Structure of the Engineering and Technical Handbook (1959)}
+The McNeese and Hoag handbook (376 pages, Prentice-Hall, LC 57-6690) is organized as a
+dense reference: every page earns its weight. Its structure:
+
+PART I: MATHEMATICS
+  Chapter 1: Arithmetic and Algebra
+    Tables: Powers of numbers, logarithm tables, natural trigonometric functions
+    Formulas: Laws of exponents, quadratic formula, binomial theorem
+    Examples: Representative worked problems with labeled steps
+
+  Chapter 2: Geometry and Mensuration
+    Tables: Areas, volumes, surface areas for standard solids
+    Formulas: Circle, ellipse, sphere, cone, cylinder, frustum
+    Examples: Area of irregular polygon, volume of frustum
+
+  Chapter 3: Trigonometry
+    Tables: Trig functions, inverse trig, hyperbolic functions
+    Formulas: Law of sines/cosines, half-angle, double-angle
+    Examples: Triangle solutions, vectors, complex number conversion
+
+  Chapter 4: Analytic Geometry and Calculus
+    Tables: Derivatives, integrals (standard forms)
+    Formulas: Differentiation rules, integration by parts, series
+    Examples: Rate of change, area under curve, differential equations
+
+PART II: MECHANICS
+  Statics, Dynamics, Strength of Materials
+  Tables: Properties of sections (I, W, C, L shapes)
+  Formulas: Stress, strain, beam deflection, buckling
+  Examples: Beam loading, stress concentration, torque analysis
+
+PART III: THERMODYNAMICS AND FLUID MECHANICS
+  Tables: Steam tables, air properties, flow coefficients
+  Formulas: First and second law, Bernoulli, continuity
+  Examples: Nozzle design, heat exchanger, pump selection
+
+PART IV: ELECTRICITY
+  Tables: Resistivity, AWG wire tables, motor characteristics
+  Formulas: Ohm's Law, Kirchhoff's laws, AC circuit analysis
+  Examples: Series-parallel circuits, transformer sizing
+
+PART V: PHYSICAL DATA
+  Tables: Physical constants, conversion factors, material properties
+  Formulas: Standard equations of state, thermophysical properties
+\end{mhbox}
+
+\textbf{What TSPB inherits from this structure:} The three-element format --- \textit{Tables, Formulas, Examples} --- in every section. Dense but navigable. Every page earns its presence. Updated for 2026 mathematics and science while preserving the 1959 discipline of not wasting a single line.
+
+\subsection{The Eight-Layer Mathematical Progression (TSPB Spine)}
+
+\tspb{} is organized on an eight-layer progression. Each layer was exercised throughout the NASA mission series. Part G identifies those exercises and deposits the mathematical content in the correct TSPB chapter.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.8cm}L{3.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Layer} & \tableheader{TSPB Chapter} & \tableheader{Exercised in Series} & \tableheader{McNeese-Hoag Parallel} \\
+\midrule
+1 & Unit Circle & Part C (Try Sessions), Part D (orbital geometry) & Ch.\ 3 Trigonometry \\
+2 & Pythagorean Theorem & Part D (structural analysis), Part E (simulations) & Ch.\ 2 Geometry \\
+3 & Trigonometry & Part D (stress tensors, Mohr's circle), Part E (waves) & Ch.\ 3 Trigonometry \\
+4 & Vector Calculus & Part E (tidal heating, orbital mechanics), Part F (telemetry) & Ch.\ 4 Calculus \\
+5 & Set Theory & Part E (knowledge graphs), Part G (RETRO classification) & Ch.\ 1 Algebra \\
+6 & Category Theory & Part E (skill composition), Part G (cross-module mapping) & Ch.\ 4 Analytic Geometry \\
+7 & Information Systems & Part F (telemetry, CAPCOM), Part E (simulations) & Ch.\ 4 (Differential Eq.) \\
+8 & L-Systems & Part E (bioacoustics, fractals), Part G (ecosystem growth) & (Modern addition) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Module Architecture: The 8-Pass System}
+
+\begin{asciibox}
+8-PASS REFINEMENT ARCHITECTURE
+=================================
+
+PASS 1: RETROSPECTIVE HARVEST
+  Input: All RETRO files from Parts A-F for {BATCH\_ID}
+  Action: Read, classify, prioritize all retrospective findings
+  Output: Classified findings registry (JSON + Markdown)
+
+PASS 2: FIX AND TEST
+  Input: Pass 1 findings registry; original Part A-F templates
+  Action: Implement identified fixes; add regression tests
+  Output: Updated templates; expanded test suite
+
+PASS 3: HI-FIDELITY ENRICHMENT
+  Input: Updated templates from Pass 2
+  Action: Deep linking (CK dept maps); TRY example review;
+          code example verification; DIY project completeness
+  Output: Enriched templates with verified interactive content
+
+PASS 4: INTEGRATION RETROSPECTIVE
+  Input: Enriched templates from Pass 3
+  Action: Cross-part consistency analysis; lesson extraction
+  Output: Consistency fixes; cross-mission learning links updated
+
+PASS 5: QA AND UI/UX
+  Input: Consistent templates from Pass 4
+  Action: Student-facing polish; reading-level calibration;
+          accessibility review; format consistency
+  Output: Student-ready templates
+
+PASS 6: REFINEMENT
+  Input: Student-ready templates from Pass 5
+  Action: Prune redundancy; tighten prose; improve flow;
+          ensure "more useful, not longer" principle applied
+  Output: Lean, precise, high-density knowledge documents
+
+PASS 7: FINAL DOCUMENTATION
+  Input: Refined templates from Pass 6
+  Action: Verbose documentation update; release notes;
+          migration guide; changelog; cross-reference index
+  Output: Release-ready package with complete documentation
+
+PASS 8: TSPB EXPANSION
+  Input: All mathematical content encountered in Passes 1-7
+  Action: Extract, formalize, and deposit new TSPB chapters
+          following the McNeese-Hoag three-element format
+          (Tables / Formulas / Examples)
+  Output: New/updated LaTeX files in docs/TSPB/
+\end{asciibox}
+
+\subsection{The TSPB Directory Structure}
+
+\begin{asciibox}
+docs/TSPB/
+  README.md                      -- Navigation guide + philosophy
+  TSPB.pdf                       -- Compiled full book (auto-generated)
+  TSPB-main.tex                  -- Master LaTeX file (inputs all parts)
+
+  parts/
+    00-introduction/
+      philosophy.tex             -- The Space Between essay (current PDF)
+      howto.tex                  -- How to read this book
+    01-unit-circle/
+      chapter-01.tex             -- Unit circle foundations
+      tables-01.tex              -- Trig tables, unit circle values
+      formulas-01.tex            -- Core equations
+      examples-01.tex            -- Worked examples
+    02-pythagorean/
+      chapter-02.tex             -- Pythagorean theorem + extensions
+      tables-02.tex              -- Right triangle tables, Pythagorean triples
+      formulas-02.tex            -- Generalized forms, distance formula
+      examples-02.tex            -- Structural applications, vector distance
+    03-trigonometry/
+      chapter-03.tex             -- Full trig treatment
+      tables-03.tex              -- McNeese-Hoag style trig tables
+      formulas-03.tex            -- Laws of sines, cosines, identities
+      examples-03.tex            -- NASA mission applications
+    04-vector-calculus/
+      chapter-04.tex
+      tables-04.tex
+      formulas-04.tex
+      examples-04.tex
+    05-set-theory/
+      ...
+    06-category-theory/
+      ...
+    07-information-systems/
+      ...
+    08-l-systems/
+      ...
+
+  appendices/
+    physical-constants.tex       -- Updated 2026 NIST/CODATA values
+    conversion-factors.tex       -- SI + Imperial + Astronomical units
+    material-properties.tex      -- NASA-relevant materials (Part D data)
+    nasa-mathematics.tex         -- Mathematics discovered via mission series
+    mcneese-hoag-index.tex       -- Cross-reference to original 1959 tables
+
+  tools/
+    compile.sh                   -- Three-pass XeLaTeX compilation
+    validate-formulas.py         -- Python formula validation script
+    update-tables.py             -- Generate table updates from modern data
+\end{asciibox}
+
+\subsection{Pass 1 Protocol in Detail: Retrospective Harvest}
+
+\begin{retrobox}{What RETRO Files Contain}
+Every Part A-F template produced a RETRO agent (Kingfisher, Crane, Osprey) whose
+responsibility was post-wave retrospective analysis. RETRO files contain:
+
+FINDING CATEGORIES:
+  [F-CONTENT]  -- Factual content gaps or errors found during production
+  [F-FORMAT]   -- Formatting inconsistencies (tables, headers, tcolorbox usage)
+  [F-LINK]     -- Broken or missing cross-links to CK departments
+  [F-CODE]     -- Code quality issues (simulation accuracy, untested paths)
+  [F-TRY]      -- Try Session or experiment that was unclear or unsafe
+  [F-CAREER]   -- Career profile information that was outdated or incomplete
+  [F-SCOPE]    -- Scope creep or scope gap (should have been in but wasn't)
+  [F-PERF]     -- Performance issue (token overrun, slow simulation)
+  [F-TEMPLATE] -- Template itself needs improvement for future runs
+
+PRIORITY LEVELS:
+  P0: Mission-blocking (would produce incorrect output if run again)
+  P1: High-value improvement (significantly better with fix)
+  P2: Medium-value enhancement (noticeably better)
+  P3: Low-value polish (slightly better, worth doing in Pass 6)
+\end{retrobox}
+
+\textbf{Pass 1 output format:} A structured JSON findings registry that all subsequent passes consume:
+
+\begin{asciibox}
+FINDINGS REGISTRY SCHEMA (findings-registry.json)
+===================================================
+{
+  "batch\_id": "{BATCH\_ID}",
+  "generated\_date": "YYYY-MM-DD",
+  "total\_findings": N,
+  "findings": [
+    {
+      "id": "F001",
+      "category": "F-CONTENT | F-FORMAT | ...",
+      "priority": "P0 | P1 | P2 | P3",
+      "source\_part": "A | B | C | D | E | F",
+      "source\_mission": "string",
+      "description": "string",
+      "recommended\_fix": "string",
+      "tspb\_relevant": boolean,
+      "pass\_assigned": 2 | 3 | 4 | 5 | 6 | 7 | 8,
+      "status": "open | in-progress | resolved"
+    }
+  ],
+  "tspb\_harvests": [
+    {
+      "mathematical\_topic": "string",
+      "appeared\_in": ["string"],
+      "tspb\_chapter": 1-8,
+      "content\_type": "formula | table | example | concept",
+      "maturity": "draft | reviewed | production"
+    }
+  ]
+}
+\end{asciibox}
+
+\subsection{Pass 3 Protocol: Hi-Fidelity Enrichment}
+
+Pass 3 is the creative pass --- where the material goes from accurate to excellent. Three specific enrichments:
+
+\subsubsection{Deep Linking to College Departments}
+
+Every study guide section, simulation, and career profile is linked to its precise College of Knowledge department and subdepartment. Not just ``Space Science'' but ``Space Science $\to$ Planetary Science $\to$ Titan Surface Chemistry.'' Pass 3 verifies all CK links are two levels deep and updates any that point to renamed or restructured departments.
+
+\subsubsection{TRY Example Verification and Enrichment}
+
+Every TRY Session from Part C and every DIY experiment from Part E is tested against three criteria:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Material availability:} Are all materials actually available at a typical home? Pass 3 flags any item that requires a specialized store and suggests a standard alternative.
+  \item \textbf{Result observability:} Does the experiment produce a result the student can actually observe and describe? Pass 3 adds a ``what you should see'' paragraph to any experiment missing one.
+  \item \textbf{Connection strength:} Does the THE CONNECTION paragraph (linking the physical activity to the NASA instrument) make the analogy clear? Pass 3 rewrites any connection that is abstract or tenuous.
+\end{itemize}
+
+\subsubsection{Code Example Quality}
+
+Every simulation from Part E and every Python script from Part F is reviewed against this checklist:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item Runs in the standard Python 3.10+ environment
+  \item Produces output that a student can understand without prior context
+  \item Has inline comments at every non-obvious physics step
+  \item Has a CLI example in the docstring (``\texttt{python script.py --param value}'')
+  \item Produces a visualization (matplotlib) not just printed numbers
+\end{itemize}
+
+\subsection{Pass 8 Protocol: TSPB Expansion}
+
+Pass 8 is the most creative pass and the one most directly connected to Miles's life work. It harvests the mathematical content that appeared across all mission runs and formalizes it into new TSPB chapters.
+
+\subsubsection{The McNeese-Hoag Format Applied to TSPB}
+
+Each new TSPB section follows the three-element McNeese-Hoag format, updated for 2026:
+
+\begin{mhbox}{Three-Element Format for TSPB Sections}
+ELEMENT 1: TABLES
+  Original McNeese-Hoag: Hand-computed tables (4-6 decimal places)
+  TSPB 2026 update: Computer-verified tables (15 significant figures)
+                   + Python script that regenerates the table
+                   + "How this table was used in the NASA series" note
+
+ELEMENT 2: FORMULAS
+  Original McNeese-Hoag: Equations in standard notation
+  TSPB 2026 update: Full LaTeX typesetting + derivation sketch
+                   + dimensional analysis (units)
+                   + boundary conditions and assumptions
+                   + "Modern extensions since 1959" sidebar
+
+ELEMENT 3: WORKED EXAMPLES
+  Original McNeese-Hoag: 2-4 step examples with labeled work
+  TSPB 2026 update: NASA mission example (real parameters from Part D/E)
+                   + three complexity levels (following Part D pattern)
+                   + Python verification code
+                   + "What this calculated in [MISSION NAME]" context box
+\end{mhbox}
+
+\subsubsection{New Mathematical Content from the Mission Series}
+
+The following topics were exercised across Parts A--F and warrant TSPB chapters or subsections that do not exist in the current essay:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mathematical Topic} & \tableheader{TSPB Layer} & \tableheader{Mission Source} & \tableheader{McNeese-Hoag Parallel} \\
+\midrule
+Tsiolkovsky Rocket Equation & Layer 4 (Vector Calc) & All missions, Part D & Not present (1959 predates Moon race) \\
+Orbital Mechanics (Kepler) & Layer 3 (Trig) & All missions, Part D/E & Partial (Ch.\ 3 conic sections) \\
+Tidal Heating Model & Layer 4 (Vector Calc) & Cassini Part E & Not present \\
+Fourier Heat Equation & Layer 4 (Vector Calc) & All Parts D/E & Partial (Ch.\ 3 harmonic) \\
+Shannon Information Theory & Layer 7 (Info Systems) & Part F (telemetry) & Not present \\
+Quaternion Rotation & Layer 4 (Vector Calc) & Part D (spacecraft ADCS) & Not present \\
+Graph Theory (Knowledge Graphs) & Layer 5 (Set Theory) & Part E (knowledge maps) & Not present \\
+L-System Grammar & Layer 8 (L-Systems) & Part E (bioacoustics) & Not present \\
+Fractal Dimension & Layer 8 (L-Systems) & Part E (terrain simulation) & Not present \\
+Phase Diagrams & Layer 3 (Trig/Thermo) & Part D (materials science) & Partial (Ch.\ 3) \\
+Euler's Formula & Layer 3 (Trig) & Part E (signal processing) & Ch.\ 3 complex numbers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Chipset Configuration}
+
+\begin{asciibox}
+CHIPSET CONFIGURATION --- PART G INTEGRATION
+==============================================
+
+agnus:              \# Grand Integration Orchestration
+  model: opus
+  role: FLIGHT + CRAFT-INT
+  responsibility: >
+    Cross-part synthesis; TSPB mathematical judgment; McNeese-Hoag
+    format quality review; Pass 3 enrichment creativity; Pass 8
+    chapter authorship for new TSPB mathematical content
+
+denise:             \# Template Production and Polish
+  model: sonnet
+  role: EXEC-TEMPLATE + EXEC-TSPB
+  responsibility: >
+    Updated Part A-F template production (Passes 2-6);
+    TSPB LaTeX chapter authorship; formula formatting;
+    table generation from Python scripts
+
+paula:              \# Retrospective Analysis and Code
+  model: sonnet
+  role: EXEC-RETRO + EXEC-CODE
+  responsibility: >
+    Pass 1 findings harvest and classification;
+    Python formula validation scripts;
+    code example review and enrichment;
+    simulation regression testing
+
+gary:               \# Verification and Documentation
+  model: sonnet
+  role: VERIFY + EXEC-DOC
+  responsibility: >
+    Pass 7 verbose documentation; release notes;
+    migration guide; cross-reference index;
+    CK link validation (two-level depth check)
+
+68000:              \# Haiku Scaffolding
+  model: haiku
+  role: BUDGET + LOG + PLAN
+  responsibility: >
+    Findings registry JSON; TSPB file manifest;
+    chapter numbering schema; token tracking;
+    release packaging; compile script
+
+model\_allocation:
+  opus: 30%     \# TSPB authorship, mathematical quality, creative enrichment
+  sonnet: 60%   \# Template updates, LaTeX chapters, code review, docs
+  haiku: 10%    \# Schema, manifests, packaging, tracking
+\end{asciibox}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item Pass 1 produces a complete findings registry; all P0 findings are classified and assigned to Pass 2.
+  \item Pass 2 resolves all P0 findings; updated templates pass their expanded test suites.
+  \item Pass 3 verifies all TRY Sessions have a ``what you should see'' paragraph; all code examples produce a visualization; all CK links are two levels deep.
+  \item Pass 4 identifies at least one cross-part consistency issue per batch (concept appearing in two parts at different fidelity levels) and resolves it.
+  \item Pass 5 applies reading-level calibration: Novice tier content reads at grade 6--8 level; Advanced tier at undergraduate level.
+  \item Pass 6 reduces average study guide length by 10--15\% through pruning without information loss.
+  \item Pass 7 produces a complete release changelog and migration guide for any template that changed significantly.
+  \item Pass 8 deposits at least three new or substantially updated TSPB chapter files in \texttt{docs/TSPB/parts/}, formatted to McNeese-Hoag three-element standard.
+  \item All new TSPB tables are accompanied by a Python script that regenerates them.
+  \item All new TSPB worked examples use real parameters from the mission series (sourced to Part B or Part D).
+  \item The \texttt{docs/TSPB/TSPB-main.tex} compiles without errors (three XeLaTeX passes); \texttt{TSPB.pdf} is produced.
+  \item Release artifact versioned correctly as v1.50.\param{BATCH\_ID}.INT; all deposits logged.
+\end{enumerate}
+
+\subsection{The Through-Line}
+
+Miles has McNeese and Hoag open on his desk. He can smell the history. 
+
+That smell is not nostalgia. It is the smell of work that was done right and lasted. Two engineers, Donald G.\ McNeese and Albert L.\ Hoag, sat down in 1957 and organized 376 pages of engineering knowledge with enough care that the result was reprinted seven times and is still findable and purchasable 68 years later. They did not write the most complete engineering reference. They wrote the most \textit{usable} one. Every page earned its weight. Every table had a worked example. Every formula had a units check. The discipline was: no information without context; no context without application.
+
+\tspb{} is built to that same standard. The eight-layer mathematical progression from unit circle to L-systems is not arbitrary. It follows the actual developmental arc of how mathematical understanding grows: from the concrete (a circle) to the abstract (a category), from the geometric (Pythagoras) to the formal (information theory), from the simple (sine) to the recursive (L-system). A child who follows this progression does not just learn mathematics. They learn how the universe is structured, because the mathematics is the structure.
+
+Part G is what makes that book real. The mission series exercised the mathematics. Part G harvests the exercises, formalizes them, and deposits them in \texttt{docs/TSPB/} in the McNeese-Hoag format --- with the tables, the formulas, and the worked examples that make knowledge \textit{usable}, not just known. And it does this while also making the entire mission series better, through eight passes of increasingly careful refinement, so that the 80 missions still to run will benefit from everything learned on the missions already complete.
+
+The spaces between are not gaps. They are the structure. That is true of consciousness. It is true of mathematics. It is true of the ecosystem being built here.
+
+\newpage
+
+% ============================================================
+% STAGE 2: RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{8-Pass Refinement --- Research Reference}
+
+\subsection{How to Use This Reference}
+
+Part G agents do not conduct new external research. They work exclusively from:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item RETRO files produced by Parts A--F across the batch
+  \item The existing Part A--F template files (for updating)
+  \item The mathematical content encountered across the mission series
+  \item McNeese-Hoag structure as a formatting template (not a content source)
+  \item The current \texttt{docs/TSPB/} directory contents
+  \item NIST CODATA 2022 constants for updating physical tables
+\end{itemize}
+
+\subsection{Pass-by-Pass Reference Protocols}
+
+\subsubsection{Pass 1: Retrospective Harvest Protocol}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Input Source} & \tableheader{What to Extract} \\
+\midrule
+RETRO files (Part D, Kingfisher) & Engineering inaccuracies; math problem errors; career information staleness \\
+RETRO files (Part E, Crane) & Failed simulations; SKILL.md trigger phrase conflicts; chipset role gaps \\
+RETRO files (Part F, Kingfisher) & CAPCOM script inconsistencies; Minecraft bridge failures; hardware cost drift \\
+RETRO files (Part C, Osprey) & TRY Sessions with missing steps; analogy quality issues; assessment gaps \\
+RETRO files (Part B, Osprey) & Source link rot; preliminary results now confirmed; surprise findings now explained \\
+RETRO files (Part A, Osprey) & Timeline updates; mission status changes; new releases in the catalog \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Pass 3: Enrichment Checklist by Part}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{5cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Part} & \tableheader{Enrichment Focus} & \tableheader{Acceptance Standard} \\
+\midrule
+Part C & TRY Session observability + connection strength & Every TRY has ``what you should see''; connection names instrument \\
+Part D & Math problem real-world grounding & Every worked example cites a specific mission component by name \\
+Part E & Simulation validation output quality & Every Research-Grade sim output has a human-interpretable narrative \\
+Part F & CAPCOM script completeness & Every Go/No-Go poll includes the ``action on NO-GO'' for each controller \\
+All parts & CK department depth & All links two levels: department $\to$ subdepartment (not just department) \\
+All parts & DIY project safety rating & Every DIY activity has an explicit age rating and safety note \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Pass 5: QA Metrics}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Quality Dimension} & \tableheader{Measurement} & \tableheader{Target} \\
+\midrule
+Reading level (Novice) & Flesch-Kincaid Grade Level & Grade 6--8 \\
+Reading level (Advanced) & Flesch-Kincaid Grade Level & Grade 14--16 (undergrad) \\
+TRY Session step count & Steps per session & 4--8 steps (not more) \\
+Code example length & Lines per script & $<$100 lines for Conceptual level \\
+Study guide section length & Words per section & 200--500 words (Novice), 400--900 (Advanced) \\
+Table density & Rows per table & $\geq$5 rows (if fewer, merge with adjacent table) \\
+Cross-link count & Links per page & $\geq$2 outbound CK links per major section \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{TSPB Chapter Template (McNeese-Hoag Format)}
+
+Each new TSPB chapter follows this exact LaTeX structure:
+
+\begin{asciibox}
+TSPB CHAPTER TEMPLATE: chapter-0N.tex
+=======================================
+
+\subsection*{[LAYER N]: [MATHEMATICAL SUBJECT]}
+
+\textit{[Chapter Introduction: One paragraph describing what this layer of mathematics is,
+why it matters, and how it connects to the layer below and above.
+Voice: direct, warm, mathematically honest. The Space Between tone.]}
+
+\section{Foundations}
+  [Core concept in plain language. One key analogy. The one
+   thing the student must know before the formulas.]
+
+\section{Tables}
+  [McNeese-Hoag format: labeled tables with values, units, sources.
+   Each table preceded by: "What this table is for" sentence.
+   Each table followed by: Python script path that regenerates it.]
+
+\section{Formulas}
+  [LaTeX-formatted equations. Each formula has:
+   - Name (e.g., "Euler's Identity")
+   - Form (the equation)
+   - Variables defined (with units)
+   - Derivation sketch (2-4 steps for key formulas)
+   - "Modern extensions since McNeese-Hoag (1959)" if applicable]
+
+\section{Worked Examples}
+  [Three examples per key concept:
+   Example 1 [Conceptual]: algebra only, real numbers, build intuition
+   Example 2 [Working]: full solution with labeled steps, mission params
+   Example 3 [Advanced]: open-ended, numerical method, Python code ref]
+
+\section{NASA Mission Applications}
+  [Cross-reference to the mission series. Which missions exercised
+   this mathematics? Which Part (B/D/E) treated it most deeply?
+   "For the full treatment of [TOPIC] in the context of [MISSION],
+    see [Part D: mission\_slug\_template.pdf, Module 4, Problem N]."]
+
+\section{Connections to Adjacent Layers}
+  [Explicit map: what from Layer N-1 is used here?
+   What from this layer does Layer N+1 build upon?
+   One concrete example of the connection each way.]
+\end{asciibox}
+
+\subsection{Appendix Templates for TSPB}
+
+\subsubsection{Physical Constants Appendix (Updated 2026)}
+
+\begin{tspbbox}{Physical Constants --- McNeese-Hoag Style, NIST CODATA 2022}
+The original McNeese-Hoag handbook included physical constants on page 352
+with 4-5 significant figures. TSPB updates to NIST CODATA 2022 values with
+uncertainty where relevant.
+
+FORMAT (each constant):
+  Name | Symbol | Value | Unit | Uncertainty | Source
+  ----------------------------------------
+  Speed of light | c | 299,792,458 | m/s | exact | CODATA 2022
+  Planck constant | h | 6.62607015e-34 | J*Hz\^{}-1 | exact | SI 2019
+  Gravitational constant | G | 6.67430e-11 | m\^{}3 kg\^{}-1 s\^{}-2 | 2.2e-5 | CODATA 2022
+  Boltzmann constant | k\_B | 1.380649e-23 | J/K | exact | SI 2019
+  Elementary charge | e | 1.602176634e-19 | C | exact | SI 2019
+
+NASA MISSION CONTEXT NOTE (added to TSPB, not in McNeese-Hoag):
+  Each constant includes a "Used in the NASA Mission Series" note:
+  e.g., G appears in Part D (orbital mechanics problems),
+  Part E (tidal heating simulation), Part F (trajectory animation)
+\end{tspbbox}
+
+\subsubsection{Conversion Factors Appendix}
+
+McNeese-Hoag Chapter 5 had a comprehensive unit conversion table. TSPB expands this with astronomical units:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Quantity} & \tableheader{SI Unit} & \tableheader{Imperial Unit} & \tableheader{Astronomical Unit} \\
+\midrule
+Length & meter (m) & foot (ft) & AU, pc, ly \\
+Mass & kilogram (kg) & pound-mass (lbm) & solar mass ($M_\odot$) \\
+Force & newton (N) & pound-force (lbf) & --- \\
+Energy & joule (J) & BTU, ft$\cdot$lbf & erg \\
+Pressure & pascal (Pa) & psi, atm & bar \\
+Temperature & kelvin (K) & Rankine ($^\circ$R) & --- \\
+Time & second (s) & --- & Julian year \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Quality Rules}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Rule} & \tableheader{Type} & \tableheader{Application} \\
+\midrule
+No new science claims & ABSOLUTE & All TSPB science statements sourced from Parts B or peer-reviewed; no unsourced additions \\
+Formula correctness & BLOCK & All TSPB formulas validated by Opus review AND Python verification script \\
+McNeese-Hoag attribution & GATE & When TSPB expands a McNeese-Hoag topic: explicit note ``updated from McNeese-Hoag (1959) Ch.\ N'' \\
+Physical constant accuracy & GATE & All constants from NIST CODATA 2022; no 1959-era values retained without update note \\
+Pass ordering & GATE & Passes must run in sequence (1$\to$2$\to$...$\to$8); no pass skipped \\
+TSPB compilation & GATE & TSPB.pdf must compile clean before Part G release is marked \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ============================================================
+% STAGE 3: MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+For batch \param{BATCH\_ID}: execute all 8 refinement passes over the accumulated RETRO outputs from Parts A--F; produce updated, quality-improved templates; and deposit new LaTeX chapters to \texttt{docs/TSPB/} in McNeese-Hoag three-element format, expanding \tspb{} with the mathematical knowledge exercised in the mission series. Release as v1.50.\param{BATCH\_ID}.INT.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE --- PART G
+========================================
+
+  [WAVE 0: RETRO HARVEST + FINDINGS REGISTRY]
+  Read all RETRO files for {BATCH\_ID};
+  produce findings-registry.json;
+  identify P0 issues; triage all findings to passes.
+  (Sonnet EXEC-RETRO + Haiku LOG)
+         |
+  [WAVE 1: PASSES 1 + 2 --- FIX AND TEST]
+  Pass 1: Findings classification (complete W0)
+  Pass 2: P0 fixes implemented; P1 fixes queued;
+          regression tests added and run.
+  (Sonnet EXEC-TEMPLATE + VERIFY)
+         |
+  [WAVE 2: PASS 3 --- HI-FIDELITY ENRICHMENT]
+  TRY Session review; code example QA;
+  CK deep linking (2-level depth);
+  DIY safety audit; connection paragraph rewrite.
+  (Opus CRAFT-INT + Sonnet EXEC-TEMPLATE)
+         |
+  [WAVE 3: PASSES 4 + 5 --- INTEGRATION + QA]
+  Pass 4: Cross-part consistency fixes.
+  Pass 5: Reading-level calibration;
+          length targets; format polish.
+  (Sonnet EXEC-TEMPLATE + VERIFY)
+         |
+  [WAVE 4: PASSES 6 + 7 --- REFINE + DOCUMENT]
+  Pass 6: Prune; tighten; apply "more useful not longer."
+  Pass 7: Release notes; changelog; migration guide.
+  (Sonnet EXEC-DOC + Opus quality review)
+         |
+  [WAVE 5: PASS 8 --- TSPB EXPANSION]
+  Harvest math from all missions; author new chapters;
+  update appendices; compile TSPB.pdf.
+  (Opus CRAFT-INT authoring + Sonnet EXEC-TSPB)
+         |
+  [WAVE 6: FINAL VALIDATION + RELEASE]
+  All templates re-test; TSPB compiles; registry complete.
+  CAPCOM gate.
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.4cm}L{5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Pass} & \tableheader{Acceptance Criteria} \\
+\midrule
+1 & Findings registry (JSON + MD) & 1 & All RETRO files harvested; all findings classified; P0 items flagged \\
+2 & Updated Part A--F templates & 2 & All P0 findings resolved; regression tests pass \\
+3 & Enriched study guides + TRY Sessions & 3 & All TRY Sessions have ``what you should see''; CK links 2-level \\
+4 & Enriched code examples & 3 & All scripts produce matplotlib output; CLI example in docstring \\
+5 & Cross-part consistency fixes & 4 & Zero contradictions between same concept in two parts \\
+6 & Reading-level calibrated materials & 5 & Novice at grade 6-8; Advanced at grade 14-16 \\
+7 & Pruned and refined templates & 6 & Average guide 10-15\% shorter without info loss \\
+8 & Release documentation & 7 & Changelog; migration guide; verbose docs for all changed templates \\
+9 & New TSPB chapter files ($\geq$3) & 8 & McNeese-Hoag format; formula validation passes; compile clean \\
+10 & Updated TSPB appendices & 8 & Constants from NIST CODATA 2022; conversion factors updated \\
+11 & TSPB.pdf (compiled) & 8 & Three-pass XeLaTeX; zero errors; TOC resolves \\
+12 & Release artifact INT & all & Correct version; all deposits logged \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown and Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{2cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Wave} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0: RETRO harvest + findings registry & W0 & Sonnet & 30K \\
+W1: Pass 2 template fixes (A-F x batch) & W1 & Sonnet & 60K \\
+W1: Regression test addition and run & W1 & Sonnet & 20K \\
+W2: Pass 3 TRY Session enrichment & W2 & Opus+Son & 40K \\
+W2: Pass 3 code example review + fix & W2 & Sonnet & 35K \\
+W2: Pass 3 CK deep linking & W2 & Sonnet & 20K \\
+W3: Pass 4 cross-part consistency & W3 & Opus & 30K \\
+W3: Pass 5 reading-level calibration & W3 & Sonnet & 30K \\
+W4: Pass 6 pruning and tightening & W4 & Sonnet & 25K \\
+W4: Pass 7 release documentation & W4 & Sonnet & 30K \\
+W5: Pass 8 TSPB chapter authorship & W5 & Opus & 60K \\
+W5: TSPB appendix updates & W5 & Sonnet & 20K \\
+W5: TSPB compilation and validation & W5 & Sonnet & 15K \\
+W6: Final validation + release & W6 & Haiku & 8K \\
+Contingency (10\%) & --- & Mixed & 42K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total per Part G run:}} & \textbf{$\sim$465K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Scaling note:} Token budget scales with batch size. Apollo-era only (12 missions $\times$ 6 parts): $\sim$280K. Full catalog (80 missions $\times$ 6 parts): $\sim$465K+. Part G runs less frequently than Parts A--F.
+
+\subsection{Test Plan}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Description} \\
+\midrule
+Safety-Critical & 5 & P0 & BLOCK & Formula correctness, TRY safety, TSPB compile \\
+Core Completeness & 12 & P1 & BLOCK & One per success criterion \\
+Quality Gates & 8 & P2 & REVISION & Reading level, length, code output, CK depth \\
+TSPB Integrity & 6 & P2 & REVISION & McNeese-Hoag format, units, derivations \\
+Process Gates & 4 & P3 & ANNOTATE & Pass ordering, RETRO file coverage \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK on Failure)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{ID} & \tableheader{Verifies} & \tableheader{Expected} \\
+\midrule
+SC-01 & TSPB formula correctness & All formulas verified by Opus review AND Python script; no dimensional errors \\
+SC-02 & TSPB compilation & TSPB.pdf compiles in three XeLaTeX passes without errors \\
+SC-03 & TRY Session safety & All enriched TRY Sessions: no open flame, no caustic chemicals, age rating present \\
+SC-04 & Physical constants updated & No 1959-era value used in TSPB without explicit ``updated from McNeese-Hoag'' note \\
+SC-05 & No new unsourced science & All scientific claims in TSPB chapter additions trace to Part B or peer-reviewed source \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest --- Grand Fleet (24 Roles)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent (PNW Naming)} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT & RAVEN & Grand integration authority; TSPB mathematical quality; final Go/No-Go \\
+PLAN & SALMON & 8-pass wave decomposition; batch size scaling; dependency sequencing \\
+CRAFT-INT & OWL & Mathematical content synthesis; TSPB authorship; McNeese-Hoag format quality \\
+CRAFT-RETRO & EAGLE & Retrospective analysis; findings classification; pattern detection across parts \\
+EXEC-TEMPLATE & CEDAR & Template updates for Parts A--F (all passes) \\
+EXEC-TSPB & HEMLOCK & TSPB chapter LaTeX production; appendix updates; compilation management \\
+EXEC-RETRO & ALDER & Pass 1 RETRO file reading and registry production \\
+EXEC-CODE & FIR & Pass 3 code example review; Python formula validation scripts \\
+EXEC-DOC & SPRUCE & Pass 7 release documentation; changelog; migration guide \\
+EXEC-TRY & ASPEN & Pass 3 TRY Session and experiment enrichment \\
+VERIFY & HAWK & Formula validation; source accuracy; TSPB fact-check \\
+INTEG & HERON & Cross-part consistency (Pass 4); CK link depth validation \\
+QA & OTTER & Pass 5 reading level; length metrics; format consistency \\
+CAPCOM & FOXGLOVE & Human-in-the-loop gate; Wave 6 final release approval \\
+BUDGET & WREN & Token tracking; batch-size calibration; per-pass budget allocation \\
+LOG & MARTIN & Findings registry; TSPB file manifest; deposit logging; commit messages \\
+TOPO & BEAR & 6-wave topology management; reallocates if Pass 3 overruns \\
+ARCH & WOLF & Cross-cutting structural decisions; TSPB chapter numbering; appendix architecture \\
+SECURE & CRANE & Formula safety (no classified tech parameters in TSPB); attribution accuracy \\
+SURGEON & MARTEN & Template quality degradation monitoring; prose quality health check \\
+ANALYST & OSPREY & Pattern analysis across batches; identifies recurring improvement themes \\
+RETRO & KINGFISHER & Post-wave retrospective; documents what Part G itself should do differently \\
+HISTORIAN & HUMMINGBIRD & McNeese-Hoag cross-reference accuracy; 1959-to-2026 update tracking \\
+ARCHIVIST & SANDPIPER & \texttt{docs/TSPB/} file management; version control; chapter inventory \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{The Space Between --- Pass 8 Sample Chapter}
+
+\begin{tspbbox}{Chapter 1: The Unit Circle --- Tables, Formulas, Examples}
+
+\textbf{Introduction (The Space Between voice):}
+A circle is the simplest continuous curve that closes on itself. It has one parameter: its radius. Everything else about it follows from that single fact, through the laws of geometry, with a logical inevitability that is almost physical in its clarity. Start here. \textit{Everything} starts here.
+
+The unit circle ($r = 1$, centered at the origin) is the circle that generates all trigonometry. Every sine, every cosine, every harmonic wave in physics --- from the vibration of a guitar string to the electromagnetic spectrum to the quantum wavefunction of an electron --- traces back to this one circle and its one parameter.
+
+\textbf{Selected Table (McNeese-Hoag format, updated):}
+\end{tspbbox}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.8cm}C{1.8cm}C{1.8cm}C{1.8cm}C{1.8cm}X}
+\toprule
+\rowcolor{tspbgreen}
+\tableheader{$\theta$ (deg)} & \tableheader{$\theta$ (rad)} & \tableheader{$\sin\theta$} & \tableheader{$\cos\theta$} & \tableheader{$\tan\theta$} & \tableheader{NASA Mission Context} \\
+\midrule
+0 & 0 & 0 & 1 & 0 & Zero inclination orbit; equatorial plane \\
+30 & $\pi/6$ & 0.5000 & 0.8660 & 0.5774 & ISS orbit inclination ($51.6^\circ \approx 52^\circ$) \\
+45 & $\pi/4$ & 0.7071 & 0.7071 & 1.0000 & 45-deg solar angle; thermal design \\
+60 & $\pi/3$ & 0.8660 & 0.5000 & 1.7321 & Launch azimuth planning \\
+90 & $\pi/2$ & 1.0000 & 0 & $\infty$ & Zenith; antenna pointing \\
+180 & $\pi$ & 0 & $-1$ & 0 & Opposition; opposition surge \\
+270 & $3\pi/2$ & $-1$ & 0 & $\infty$ & Solar array orientation \\
+360 & $2\pi$ & 0 & 1 & 0 & Full orbital period \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{formulabox}{Euler's Formula (new to TSPB; not in McNeese-Hoag 1959)}
+\[
+e\^{}{i\theta} = \cos\theta + i\sin\theta
+\]
+\textbf{Variables:} $e$ = Euler's number ($\approx 2.71828...$); $i$ = imaginary unit ($\sqrt{-1}$); $\theta$ = angle in radians.
+
+\textbf{Significance:} This single formula contains the entire unit circle. Setting $\theta = \pi$: $e\^{}{i\pi} + 1 = 0$ (Euler's identity --- five fundamental constants in one equation). Setting $\theta = 2\pi$: $e\^{}{2\pi i} = 1$ (one complete revolution). Every periodic wave in physics is an instance of this formula.
+
+\textbf{Modern extension (not in McNeese-Hoag):} Signal processing, quantum mechanics, and spacecraft attitude control all use $e\^{}{i\theta}$ representations. Quaternion rotation (used in spacecraft ADCS, Part D of the mission series) generalizes this formula to four dimensions.
+
+\textbf{NASA Series reference:} Part E simulation \texttt{signal\_analysis.py} uses Euler's formula for Fourier decomposition of instrument data.
+\end{formulabox}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Grand Fleet (24 roles) \\
+Est. Token Budget (Apollo-era batch) & $\sim$280K \\
+Est. Token Budget (Full catalog) & $\sim$465K \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Context Windows per Run & 20--30 \\
+Wave Structure & W0 (harvest), W1 (P1+2), W2 (P3), W3 (P4+5), W4 (P6+7), W5 (P8/TSPB), W6 (release) \\
+8 Passes & Retrospective $\to$ Fix $\to$ Enrich $\to$ Integrate $\to$ QA $\to$ Refine $\to$ Document $\to$ TSPB \\
+TSPB New Chapters & $\geq$3 per run; accumulates toward 33-chapter, 10-part textbook \\
+McNeese-Hoag Format & Tables / Formulas / Examples per section \\
+New Skills & None (Part G improves existing; does not add new skills) \\
+Permanent Deposits & \texttt{docs/TSPB/parts/} (chapters) + updated Part A--F templates \\
+Release Version & v1.50.\param{BATCH\_ID}.INT \\
+Run Frequency & Once per batch; not per-mission \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{A child who understands a circle understands, in embryonic form, the mathematics that describes starlight, sound, ocean tides, and quantum mechanics. They just don't know it yet. The framework's job --- the educational job --- is to build the bridge from that circle to those stars, one step at a time, at the pace that feels natural to the specific, unique, impossible child who is walking across it.}\\[0.5em]
+--- \textit{The Space Between}, February 2026\\[1em]
+McNeese and Hoag organized 376 pages of engineering knowledge with enough care that it lasted 68 years. \tspb{} is organized to last longer: built on the same three-element discipline (Tables, Formulas, Examples), extended with the mathematics that the NASA mission series exercised, and grounded in the philosophical spine that gives the whole project its meaning. Part G is the integration layer that connects the mission series to the textbook and makes both better. Eight passes. Systematic. Patient. Built to last.\\[0.5em]
+\textbf{The spaces between the missions are where the mathematics lives.}
+\end{quotebox}
+
+\end{document}

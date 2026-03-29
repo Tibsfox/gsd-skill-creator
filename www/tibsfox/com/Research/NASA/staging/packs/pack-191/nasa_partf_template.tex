@@ -1,0 +1,1340 @@
+\documentclass[11pt,letterpaper]{article}
+
+\usepackage[top=1in, bottom=1in, left=1in, right=1in, headheight=14pt]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}
+\setsansfont{DejaVu Sans}
+\setmonofont{DejaVu Sans Mono}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{parskip}
+\usepackage{tcolorbox}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ============================================================
+% MISSION CONTROL COLOR SCHEME
+% Deep indigo + ignition orange + telemetry teal
+% Distinct from all prior parts
+% ============================================================
+\definecolor{primary}{HTML}{1A237E}      % Deep mission indigo — authority, space, control
+\definecolor{secondary}{HTML}{BF360C}    % Ignition orange — launch, action, courage
+\definecolor{tertiary}{HTML}{004D40}     % Telemetry teal — signal, data, comms
+\definecolor{accent}{HTML}{263238}       % Instrument graphite — consoles, readouts
+\definecolor{lightprimary}{HTML}{E8EAF6} % Pale indigo
+\definecolor{lightsecondary}{HTML}{FBE9E7}% Pale orange
+\definecolor{lighttertiary}{HTML}{E0F2F1} % Pale teal
+\definecolor{lightaccent}{HTML}{ECEFF1}  % Pale graphite
+\definecolor{telemetry}{HTML}{00C853}    % Live telemetry green
+\definecolor{alert}{HTML}{D32F2F}        % Alert/anomaly red
+\definecolor{nominal}{HTML}{1B5E20}      % Nominal/GO green
+\definecolor{console}{HTML}{0D1B2A}      % Console dark background
+\definecolor{consolefg}{HTML}{A8D5A2}    % Console green text
+\definecolor{simblue}{HTML}{0277BD}      % Simulation platform blue
+\definecolor{rowgray}{HTML}{F5F5F5}
+\definecolor{bordergray}{HTML}{BDBDBD}
+\definecolor{subtlegray}{HTML}{757575}
+\definecolor{paramred}{HTML}{B71C1C}
+
+% Section formatting
+\titleformat{\section}
+  {\Large\bfseries\sffamily\color{primary}}
+  {\thesection}{1em}{}
+  [\vspace{-0.5em}\textcolor{bordergray}{\rule{\textwidth}{0.4pt}}]
+
+\titleformat{\subsection}
+  {\large\bfseries\sffamily\color{secondary}}
+  {\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\sffamily\color{tertiary}}
+  {\thesubsubsection}{1em}{}
+
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.5em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.3em}
+
+\newcommand{\stageheader}[2]{%
+  \noindent\colorbox{#2}{\makebox[\textwidth][l]{%
+    \textcolor{white}{\bfseries\sffamily\hspace{6pt}#1\hspace{6pt}}}}%
+  \vspace{0.5em}\par%
+}
+
+\tcbuselibrary{breakable,skins}
+
+\newtcolorbox{asciibox}{
+  colback=rowgray, colframe=bordergray,
+  arc=1pt, boxrule=0.5pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fontupper=\small\ttfamily, breakable
+}
+
+\newtcolorbox{quotebox}{
+  colback=lightprimary, colframe=primary,
+  arc=2pt, boxrule=0.5pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt, breakable
+}
+
+% CAPCOM operations console box
+\newtcolorbox{capcombox}[1]{
+  colback=console, colframe=telemetry,
+  arc=2pt, boxrule=0.8pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  fontupper=\small\ttfamily\color{consolefg},
+  title={\small\bfseries\sffamily\textcolor{white}{CAPCOM: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=tertiary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Telemetry/mission data box
+\newtcolorbox{telebox}[1]{
+  colback=lighttertiary, colframe=tertiary,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\small\bfseries\sffamily\textcolor{white}{TELEMETRY: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=tertiary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Simulation platform integration box
+\newtcolorbox{simplatbox}[1]{
+  colback=lightprimary, colframe=simblue,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\small\bfseries\sffamily\textcolor{white}{SIM PLATFORM: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=simblue, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Hardware / DIY integration box
+\newtcolorbox{hwbox}[1]{
+  colback=lightsecondary, colframe=secondary,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\small\bfseries\sffamily\textcolor{white}{HARDWARE: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=secondary, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Mission profile box
+\newtcolorbox{missionbox}[1]{
+  colback=lightaccent, colframe=accent,
+  arc=2pt, boxrule=0.7pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  title={\small\bfseries\sffamily\textcolor{white}{MISSION PROFILE: #1}},
+  attach boxed title to top left={yshift=-2mm, xshift=4mm},
+  boxed title style={colback=accent, arc=1pt, boxrule=0pt},
+  breakable
+}
+
+% Go/No-Go status indicator
+\newcommand{\go}{\textcolor{nominal}{\textbf{\sffamily[GO]}}}
+\newcommand{\nogo}{\textcolor{alert}{\textbf{\sffamily[NO-GO]}}}
+\newcommand{\hold}{\textcolor{secondary}{\textbf{\sffamily[HOLD]}}}
+\newcommand{\nominal}{\textcolor{nominal}{\textbf{\sffamily[NOMINAL]}}}
+
+\newcommand{\metafield}[2]{\textbf{\sffamily #1} #2\par}
+\newcommand{\param}[1]{\textcolor{paramred}{\textbf{\{#1\}}}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcommand{\tableheader}[1]{\textbf{\sffamily\textcolor{white}{#1}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\textcolor{subtlegray}{So You Want to Be an Astronaut --- NASA Mission Operations}}
+\fancyhead[R]{\small\sffamily\textcolor{subtlegray}{GSD Part F --- Mission Control}}
+\fancyfoot[C]{\small\sffamily\textcolor{subtlegray}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=primary,
+  urlcolor=tertiary,
+  pdfauthor={GSD Ecosystem},
+  pdftitle={NASA Mission Operations Template -- Part F},
+  pdfsubject={Astronaut Training, CAPCOM Operations, Simulation Platforms},
+}
+
+\begin{document}
+
+% ============================================================
+% TITLE PAGE
+% ============================================================
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.5cm}
+
+{\small\sffamily\textcolor{primary}{\textbf{GSD RESEARCH MISSION PACKAGE --- PART F}}}
+
+\vspace{0.3cm}
+\textcolor{bordergray}{\rule{10cm}{0.4pt}}
+
+\vspace{0.8cm}
+{\fontsize{12}{15}\selectfont\sffamily\textcolor{secondary}{\textbf{SO YOU WANT TO BE AN ASTRONAUT}}}
+
+\vspace{0.4cm}
+{\fontsize{20}{26}\selectfont\bfseries\sffamily\textcolor{primary}{NASA Mission Operations\\[0.3em]Deep Dive Template}}
+
+\vspace{0.5cm}
+{\large\sffamily\textcolor{tertiary}{From Launch to Landing --- and Beyond}}\\[0.3em]
+{\normalsize\sffamily\textcolor{secondary}{Crewed Missions $\cdot$ Autonomous Spacecraft $\cdot$ CAPCOM Operations}}\\[0.2em]
+{\normalsize\sffamily\textcolor{accent}{Telemetry $\cdot$ Simulations $\cdot$ Minecraft $\cdot$ Blender $\cdot$ Unreal Engine}}
+
+\vspace{0.4cm}
+{\large\sffamily\itshape\textcolor{accent}{Input: \param{MISSION\_NAME} from Parts A \& B}}
+
+\vspace{1.2cm}
+\begin{center}
+\footnotesize\sffamily
+\begin{tabular}{ccccccccccccc}
+\textcolor{subtlegray}{A} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{B} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{C} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{D} & \textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{E} & \textcolor{subtlegray}{$\to$} &
+\colorbox{primary}{\textcolor{white}{\bfseries\ F\ }} &
+\textcolor{subtlegray}{$\to$} &
+\textcolor{subtlegray}{Release}\\[2pt]
+{\tiny\textcolor{subtlegray}{Hist.}} & &
+{\tiny\textcolor{subtlegray}{Science}} & &
+{\tiny\textcolor{subtlegray}{Teach}} & &
+{\tiny\textcolor{subtlegray}{Eng.}} & &
+{\tiny\textcolor{subtlegray}{Sci.}} & &
+{\tiny\textcolor{subtlegray}{Ops}} & &
+{\tiny\textcolor{subtlegray}{v1.50.\param{SLUG}.OPS}}
+\end{tabular}
+\end{center}
+
+\vspace{1cm}
+\begin{center}
+\colorbox{lightprimary}{\parbox{14cm}{\centering\small\sffamily\textcolor{primary}{%
+\textbf{8 MODULES:} Crew Requirements $\cdot$ Mission Architecture $\cdot$ CAPCOM Operations\\[0.2em]
+Long-Duration Management $\cdot$ Simulation Platforms $\cdot$ Hardware Integration\\[0.2em]
+Educational Pathways $\cdot$ New Skills, Chipsets \& Real-Time Code Pathways
+}}}
+\end{center}
+
+\vspace{1.2cm}
+{\small\sffamily\textcolor{subtlegray}{Date: March 29, 2026 $\cdot$ Status: Template --- Ready for Parameterization}}\\[0.2em]
+{\small\sffamily\textcolor{subtlegray}{Activation Profile: Mission Control (22 roles) $\cdot$ Est. 12--16 context windows per run}}\\[0.2em]
+{\small\sffamily\textcolor{subtlegray}{Unique: Real-time telemetry wiring $\cdot$ Three simulation platforms $\cdot$ DIY hardware specs}}
+\end{center}
+\newpage
+
+% ============================================================
+% WHAT MAKES PART F DIFFERENT
+% ============================================================
+\thispagestyle{fancy}
+\section*{What Part F Is and Why It Is the Culmination}
+\addcontentsline{toc}{section}{What Part F Is}
+
+\begin{asciibox}
+THE FIVE-PART PROGRESSION
+===========================
+Part A: What missions happened (history)
+Part B: What the missions discovered (science)
+Part C: How to teach the discoveries (curriculum)
+Part D: How to build the spacecraft (engineering)
+Part E: How to do the science yourself (simulation + skills)
+
+Part F: How to RUN the mission
+  - Who sits in which seat (astronaut roles / spacecraft autonomy)
+  - What every console does in Mission Control
+  - How CAPCOM reads, commands, and manages a live mission
+  - How to keep a mission alive for decades (Voyager pattern)
+  - How to simulate ALL of the above in Minecraft, Blender,
+    and Unreal Engine with gsd-skill-creator
+  - How to wire up real telemetry hardware at home
+  - How to build the professional career path into operations
+
+Part F is the only template in the series that puts the human
+operator at the center. Not as a student. As a mission commander.
+\end{asciibox}
+
+\textbf{Dual track architecture:} Every Part F run handles both mission types in parallel tracks, weighted by the input mission:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}L{5.5cm}L{5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Dimension} & \tableheader{Track A: Crewed Mission} & \tableheader{Track B: Autonomous Mission} \\
+\midrule
+Central question & Who must the crew be, and what must they be able to do? & What must the spacecraft decide, and how? \\
+Physical requirements & Astronaut fitness, medical, psychological profile & Fault protection, autonomy, radiation tolerance \\
+Operations focus & Crew autonomy vs.\ ground support balance & Command uplink latency management \\
+CAPCOM role & Human-crew interface; safety of life; EVA oversight & Telemetry health monitoring; anomaly response \\
+Long duration & Psychological resilience, crew dynamics, resource management & Mission re-planning, aging hardware, science evolution \\
+Simulation target & EVA simulation, launch/re-entry sequence, docking & Autonomous fault scenario, trajectory correction \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================================
+% STAGE 1: VISION DOCUMENT
+% ============================================================
+\stageheader{STAGE 1 --- VISION DOCUMENT}{primary}
+
+\section{Mission Operations Deep Dive --- Vision Guide}
+
+\metafield{Template Version:}{v1.0 (Part F of NASA Mission Operations series)}
+\metafield{Input Mission:}{\param{MISSION\_NAME} (from Parts A + B)}
+\metafield{Mission Slug:}{\param{MISSION\_SLUG}}
+\metafield{Mission Type:}{\param{MISSION\_TYPE} (Crewed/Autonomous/Both)}
+\metafield{OPS Release Target:}{gsd-skill-creator v1.50.\param{MISSION\_SLUG}.OPS}
+\metafield{Simulation Platforms:}{Minecraft (logistics) $\cdot$ Blender (3D/scientific) $\cdot$ Unreal Engine (real-time)}
+\metafield{Telemetry Target:}{Live NASA streams (active) / Archived telemetry replay / Hardware simulation}
+
+\subsection{Vision}
+
+Every NASA mission that has ever flown required two kinds of courage: the courage of the people inside the spacecraft, and the courage of the people behind the consoles. Both are learnable. Both have definable skill sets, documented training pathways, and specific technical knowledge requirements that can be studied, practiced, and simulated.
+
+Part F exists to map both in complete detail for \param{MISSION\_NAME}. For crewed missions: what physical condition, psychological profile, and technical training does each crew role require? For unmanned missions: what autonomous decision architecture, fault protection hierarchy, and ground operations capability does the spacecraft need? And for both: who is in Mission Control, what does each console do, what does the CAPCOM say at every critical event, and how does the team keep the mission alive through nominal operations, contingencies, and the years-long adaptation that deep-space missions require?
+
+The most ambitious element of Part F is its simulation infrastructure. The same mission that Part E simulated scientifically, Part F simulates operationally --- through three distinct platforms: Minecraft for logistics and resource flow simulations (supply chains, crew scheduling, power budgeting), Blender for scientifically accurate 3D orbital and spacecraft visualizations that can be exported as standalone educational tools, and Unreal Engine for real-time physics-based simulation environments that can serve as hardware-in-the-loop test beds and eventually, with the right peripherals, as genuine CAPCOM training simulators.
+
+None of this requires a space agency's budget. An Arduino and a Raspberry Pi can receive, process, and display simulated spacecraft telemetry in a format that teaches the same mental models as a real console. A Minecraft server can model the mass budget, power budget, and resource consumption of an Apollo lunar module more viscerally than any spreadsheet. A Blender Python script can animate the exact trajectory of Voyager 1's 1979 Jupiter flyby accurate to the published ephemeris. Part F builds all of this, mission by mission, as a permanent and expanding capability of the GSD ecosystem.
+
+\subsection{Problem Statement}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{P\arabic*.}]
+  \item \textbf{The operations layer is invisible in all prior parts:} Parts A--E cover what missions were, what they discovered, how to teach and engineer and simulate the science. None of them model what it was like to \textit{run} the mission --- the console operators, the flight directors, the CAPCOM voice, the 24-hour shifts, the anomaly response. Part F makes operations a first-class discipline.
+
+  \item \textbf{Astronaut requirements are known but not synthesized:} NASA publishes astronaut selection criteria publicly. But no single document connects a specific mission's crew roles to the physical standards, psychological assessments, technical training sequence, and operational duties required for that role on that mission. Part F produces that document for \param{MISSION\_NAME}.
+
+  \item \textbf{Autonomous spacecraft design is underrepresented in education:} Unmanned mission operations --- fault protection, command sequences, uplink windows, downlink scheduling, onboard autonomy decisions --- are covered in JPL technical documents but not in curriculum accessible to students. Part F translates this knowledge into teachable form.
+
+  \item \textbf{CAPCOM as a skill set is undocumented outside NASA:} The CAPCOM operator is the single human voice connecting Mission Control to crew or spacecraft. The protocols, vocabulary, decision trees, and psychological requirements of this role are implicitly known inside NASA but rarely written down for external learners. Part F treats CAPCOM as a full curriculum subject --- including how an AI CAPCOM would be architected.
+
+  \item \textbf{Simulation infrastructure for operations is fragmented:} Existing simulators are either proprietary (NASA's HESTIA, high-fidelity ISS simulators) or too simplified (web-based mission games). No open pathway exists for a motivated student to build a progressively more accurate operations simulator using accessible tools. Part F creates that pathway from Minecraft through Blender to Unreal Engine to eventual hardware integration.
+\end{enumerate}
+
+\subsection{Core Concept}
+
+\textbf{Model:} The NASA mission as a three-layer operational stack: the hardware layer (spacecraft systems), the operations layer (Mission Control consoles, telemetry, commanding), and the human layer (crew, CAPCOM, flight director). Part F documents all three layers for \param{MISSION\_NAME} and provides the simulation scaffolding to reproduce each layer at accessible fidelity.
+
+\subsubsection{The Three Operational Layers}
+
+\begin{asciibox}
+THREE-LAYER OPERATIONAL STACK
+================================
+
+LAYER 3: HUMAN LAYER
+  Crew (if crewed): Commander, Pilot, Mission Specialists, Payload Specialists
+  Ground: Flight Director, CAPCOM, Flight Controllers (FLIGHT, GUIDO, FIDO,
+          PROPULSION, SURGEON, NETWORK, GNC, CATO, EVA, FAO ...)
+  Decision authority: who can call HOLD, who authorizes ABORT, who manages
+  anomaly resolution sequences
+
+LAYER 2: OPERATIONS LAYER
+  Real-time telemetry streams: health/status of all spacecraft subsystems
+  Command uplink: how orders travel from console to spacecraft
+  Communication windows: antenna coverage, Deep Space Network scheduling
+  Mission timeline: master activity list with GO/NO-GO decision points
+  Anomaly response trees: what each controller does when a value goes red
+  Data products: what science data flows where, at what cadence
+
+LAYER 1: HARDWARE LAYER
+  Spacecraft subsystems: ADCS, power, thermal, propulsion, comms, data
+  Launch vehicle: vehicle health, range safety, abort modes
+  Ground systems: tracking stations, DSN, mission operations facilities
+  Interface definitions: telemetry channels, command codes, data formats
+\end{asciibox}
+
+\subsubsection{Module Architecture}
+
+\begin{asciibox}
+EIGHT-MODULE OPERATIONS ARCHITECTURE
+=======================================
+
+MODULE 1: CREW AND SPACECRAFT REQUIREMENTS
+  Crewed: Astronaut selection criteria; role-by-role physical + psych + tech
+          requirements specific to {MISSION\_NAME}; training sequence timeline
+  Unmanned: Spacecraft autonomy requirements; fault protection hierarchy;
+            onboard decision authority vs. ground command authority balance
+  Both: Risk tolerance framework; abort modes and safe havens
+
+MODULE 2: MISSION ARCHITECTURE: LAUNCH TO ENDPOINT
+  Complete mission timeline from T-48 hours to mission end (or current status)
+  Launch window analysis; vehicle readiness criteria; hold and scrub protocols
+  For crewed: ascent abort modes; orbital insertion; mission phases
+  For unmanned: injection accuracy; trajectory correction maneuvers
+  Deep-space: cruise phase management; encounter operations; extended mission
+
+MODULE 3: CAPCOM OPERATIONS + TELEMETRY SYSTEMS
+  Mission Control console layout and responsibilities
+  Telemetry channel architecture: what data flows at what rate
+  Command uplink: format, verification, uplink windows
+  CAPCOM protocols: call signs, brevity codes, emergency language
+  AI CAPCOM architecture: how an autonomous CAPCOM would be structured
+  Go/No-Go polling: who votes, in what order, what each vote means
+  Contingency response trees for {MISSION\_NAME}-specific scenarios
+
+MODULE 4: LONG-DURATION MISSION MANAGEMENT
+  Extended operations philosophy (Voyager pattern: 48+ years)
+  Science replanning as mission matures and new capabilities emerge
+  Hardware aging management: decreasing power, failing instruments
+  Team continuity: how knowledge transfers when original team retires
+  Recontact and recovery: how to regain control after anomalies
+  End-of-mission planning: graceful shutdown vs. controlled impact vs. orbit
+
+MODULE 5: SIMULATION PLATFORMS --- MINECRAFT
+  Logistics and resource flow simulation in Minecraft
+  Mass budget simulation: spacecraft subsystem allocation as block resource
+  Mission timeline as in-game schedule (day/night cycles, resource production)
+  Crew scheduling visualization
+  Technical implementation: Python-Minecraft bridge (mcpi or mcrcon protocol)
+  Educational modules: what students learn from each Minecraft mission model
+
+MODULE 6: SIMULATION PLATFORMS --- BLENDER + UNREAL ENGINE
+  Blender: scientifically accurate 3D orbital and mission visualizations
+    - Python bpy scripting for trajectory animation
+    - Spacecraft model import and instrument pointing simulation
+    - Time-lapse rendering of full mission arc from launch to endpoint
+  Unreal Engine: real-time mission operations simulation
+    - Blueprint + Python for telemetry data visualization
+    - Hardware-in-the-loop: serial port / websocket telemetry ingestion
+    - VR CAPCOM console prototype specification
+    - Physics-accurate EVA and proximity operations simulation
+
+MODULE 7: DIY HARDWARE INTEGRATION + HOME TESTING
+  Arduino / Raspberry Pi telemetry display station
+  MQTT or serial telemetry stream protocols for DIY integration
+  Physical console mockup: buttons, switches, displays from components
+  Home EVA simulator: pressure suit analogue using wearable sensors
+  Downloadable telemetry replay files for {MISSION\_NAME}
+  Step-by-step build guides: three levels (beginner/intermediate/advanced)
+
+MODULE 8: CAREER PATHWAYS + EDUCATIONAL INTEGRATION
+  Career profiles: Flight Director, Flight Controller, CAPCOM, Mission Planner
+  Astronaut selection timeline and training syllabus for {MISSION\_NAME} era
+  Academic pathways: what degrees feed into operations roles
+  New gsd-skill-creator skills and chipsets for operations domain
+  CK Integration: Operations department in College of Knowledge
+  Cross-part integration: how Parts C/D/E feed into Part F curriculum
+\end{asciibox}
+
+\subsection{Research Modules (Summaries)}
+
+\subsubsection{Module 1: Crew and Spacecraft Requirements}
+
+For crewed missions: documents the role-by-role physical and psychological requirements specific to \param{MISSION\_NAME}. Not generic astronaut requirements --- the specific demands of this mission. A 14-day Shuttle mission requires different fitness profiles than a 12-month ISS expedition; a trans-lunar Apollo mission requires different psychological preparation than LEO operations. Documents the training sequence as a timeline: when does each crew member learn what, in what order, with what evaluation criteria?
+
+For unmanned missions: documents the spacecraft's fault protection hierarchy --- the decision tree an autonomous spacecraft follows when sensors indicate anomalous readings. What can the spacecraft fix itself? What requires a command from ground? What triggers a safe mode? Documents the concept of operations for the deep space network coverage schedule.
+
+\subsubsection{Module 2: Mission Architecture}
+
+The full timeline. Not a summary --- a complete walkthrough of every major phase from pre-launch through the mission endpoint. For Voyager, this means 48+ years and counting; for Apollo 11 it means 8 days, 3 hours, 18 minutes and 35 seconds. Every Go/No-Go decision point. Every major burn. Every communication blackout. The master activity list.
+
+Documents launch window analysis (why \textit{that} date?), the abort mode tree for the first minutes of flight, and the phase transition criteria (what telemetry must read nominal before transitioning from ascent to orbital operations?).
+
+\subsubsection{Module 3: CAPCOM Operations and Telemetry}
+
+The signature module of Part F. Treats CAPCOM as a profession with documented skills, vocabulary, protocols, and career development. Produces the CAPCOM call script for the most critical events in \param{MISSION\_NAME}: launch, first contact after critical burns, anomaly calls, contingency declarations, and end-of-mission.
+
+Documents the Mission Control console layout for this mission era: which controller owns which systems, what their primary telemetry streams are, and what action each controller takes when a value exceeds its yellow or red limits. Produces the Go/No-Go poll sequence for \param{MISSION\_NAME}'s critical events.
+
+Also addresses the AI CAPCOM question directly: what would it take to build an autonomous CAPCOM for an unmanned mission? What decisions would it make autonomously? What would require human escalation? This is a design specification, not science fiction.
+
+\subsubsection{Module 4: Long-Duration Mission Management}
+
+Voyager 1 has been flying for nearly 49 years as of this writing. The engineers who designed it are mostly retired or passed away. The team that manages it today was in school when it launched. This is a solved problem: NASA has been doing long-duration mission management continuously. Part F documents how.
+
+Covers: the transition from ``mission operations'' to ``extended mission operations,'' science replanning as new discoveries raise new questions, hardware aging management (decreasing RTG power, instrument failures, memory degradation), team knowledge transfer protocols, anomaly recovery from deep hibernation, and the philosophy of graceful end-of-mission planning.
+
+\subsubsection{Module 5: Minecraft Simulation Platform}
+
+Minecraft is not a joke. Its block-based resource model, production chains, and logistics network are a powerful analogy for spacecraft resource management. Mass budget: blocks have weight. Power budget: solar panels produce energy, systems consume it. Crew time budget: each player-hour represents crew time. Mission timeline: the day/night cycle and event calendar drive scheduled activities.
+
+Part F produces a Minecraft world template for \param{MISSION\_NAME} that students can run as a logistics simulation: managing the resources needed to run the mission, experiencing the trade-offs the mission planners made, and feeling the scarcity constraints that drove key design decisions. Includes the Python bridge implementation using the Minecraft Pi Edition API or Spigot plugin RCON interface for programmatic world interaction.
+
+\subsubsection{Module 6: Blender and Unreal Engine Simulation Platforms}
+
+\textbf{Blender:} Python's \texttt{bpy} module makes Blender fully scriptable. Part F produces Blender scripts that: import the spacecraft model (from public NASA 3D model archives), animate the trajectory using JPL Horizons ephemeris data, simulate instrument pointing (pointing a camera or antenna toward a target object as the trajectory evolves), and render a time-lapse video of the full mission arc. These renders are scientifically accurate and usable as standalone educational tools.
+
+\textbf{Unreal Engine:} The highest-fidelity simulation target. Part F produces Unreal Engine project specifications (Blueprints + Python) for: a real-time telemetry dashboard that ingests live or replayed telemetry via websocket, a physics-accurate spacecraft proximity operations simulation (useful for docking training), and a VR CAPCOM console prototype that a student with a headset can sit inside. The hardware-in-the-loop specification defines how real Arduino/Raspberry Pi telemetry feeds into the Unreal simulation.
+
+\subsubsection{Module 7: DIY Hardware Integration}
+
+The most tactile module in the series. Produces three build guides at three levels: a beginner telemetry display (Arduino + display shield showing four simulated spacecraft parameters), an intermediate mission console mockup (Raspberry Pi + touchscreen + physical switches wired to a telemetry relay script), and an advanced hardware-in-the-loop station (full serial/MQTT telemetry bridge to Unreal Engine or a Python CAPCOM simulation).
+
+All three builds use components available from consumer electronics suppliers. Total cost targets: Beginner \$25, Intermediate \$80, Advanced \$200. Build guides are step-by-step with wiring diagrams in ASCII and photos described in text.
+
+\subsubsection{Module 8: Career Pathways and Educational Integration}
+
+Profiles four operations careers: Flight Director, Flight Controller (specialization: GUIDO/FIDO/PROPULSION), CAPCOM, and Mission Planner. For each: the education pathway (what degree feeds into this role), the certification sequence at NASA (what skills are formally certified), the tools used, the professional communities, and the day-in-the-life narrative.
+
+Also produces the new gsd-skill-creator skills specific to operations: \texttt{capcom-protocol-generator}, \texttt{telemetry-dashboard-builder}, \texttt{mission-timeline-planner}, \texttt{spacecraft-fault-tree-analyzer}, and the new \texttt{mission-control-chipset.yaml} with roles for every Mission Control station.
+
+\subsection{Chipset Configuration (Template)}
+
+\begin{asciibox}
+CHIPSET CONFIGURATION --- PART F OPERATIONS
+=============================================
+
+agnus:                    \# Flight Director / Mission Orchestration
+  model: opus
+  role: FLIGHT + CRAFT-OPS
+  responsibility: >
+    Mission architecture judgment; CAPCOM protocol design;
+    anomaly response logic; long-duration strategy; AI CAPCOM
+    architecture; cross-module synthesis; Go/No-Go authority
+
+denise:                   \# Simulation Platform Production
+  model: sonnet
+  role: EXEC-SIM + EXEC-BLENDER
+  responsibility: >
+    Blender Python scripts; Unreal Engine Blueprint specs;
+    Minecraft world templates; simulation platform integration;
+    3D model animation; telemetry visualization code
+
+paula:                    \# Telemetry and Hardware
+  model: sonnet
+  role: EXEC-TELEM + CRAFT-HW
+  responsibility: >
+    Telemetry architecture specs; command uplink formats;
+    MQTT/serial protocol specs; Arduino/RPi build guides;
+    hardware-in-the-loop integration specs
+
+gary:                     \# Mission Documentation and Verification
+  model: sonnet
+  role: EXEC-MISSION + VERIFY
+  responsibility: >
+    Mission timeline production; CAPCOM call scripts;
+    Go/No-Go poll sequences; console layout documentation;
+    accuracy verification against NASA sources
+
+68000:                    \# Haiku Scaffolding
+  model: haiku
+  role: BUDGET + LOG + PLAN
+  responsibility: >
+    Mission parameter schemas; CK YAML; file manifests;
+    skill/chipset scaffolding; release packaging
+
+model\_allocation:
+  opus: 30%     \# Mission architecture, CAPCOM design, anomaly logic, AI CAPCOM
+  sonnet: 60%   \# Simulations, hardware guides, mission docs, telemetry specs
+  haiku: 10%    \# Schemas, manifests, YAML, packaging
+\end{asciibox}
+
+\subsection{Scope Boundaries}
+
+\subsubsection{In Scope (every Part F run)}
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item Crew role requirements for \param{MISSION\_NAME} (crewed missions): physical, psychological, technical, training timeline
+  \item Autonomous spacecraft requirements (unmanned): fault protection, command authority, concept of operations
+  \item Mission timeline from pre-launch to endpoint (or current status for active missions)
+  \item CAPCOM protocol documentation: call scripts for critical events, Go/No-Go poll sequences, emergency vocabulary
+  \item AI CAPCOM architecture specification for unmanned missions
+  \item Long-duration mission management strategy (relevant for all missions; deep treatment for extended missions)
+  \item Minecraft logistics simulation world template with Python bridge
+  \item Blender trajectory and spacecraft visualization script
+  \item Unreal Engine real-time simulation project specification
+  \item DIY hardware integration guides (three build levels)
+  \item Career profiles for four operations roles
+  \item New gsd-skill-creator skills and the \texttt{mission-control-chipset.yaml}
+  \item CK Operations Department contributions
+  \item Release: v1.50.\param{MISSION\_SLUG}.OPS
+\end{itemize}
+
+\subsubsection{Out of Scope}
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item Classified mission control procedures or reserved command codes
+  \item Full Unreal Engine game development (specification only; not a complete shipped game)
+  \item Minecraft modding (uses standard APIs: mcpi, Spigot RCON, or DataPack commands)
+  \item Live telemetry from active classified missions
+  \item Medical prescriptions or clinical health evaluations for astronaut candidates
+  \item Science results and discoveries (Part B)
+  \item Engineering specifications at component level (Part D)
+\end{itemize}
+
+\subsection{Success Criteria}
+
+\begin{enumerate}[leftmargin=*, label=\textbf{SC\arabic*.}]
+  \item Module 1 documents role-specific requirements for every crew position in \param{MISSION\_NAME} (crewed) or the complete fault protection hierarchy (unmanned).
+  \item Module 2 produces a complete mission timeline with all major phases, Go/No-Go decision points, and critical event sequences, sourced to NASA documentation.
+  \item Module 3 produces a CAPCOM call script for at least three critical mission events (launch, primary science/landing event, nominal close-out or anomaly response).
+  \item Module 3 produces a Go/No-Go poll sequence listing all controllers in order with their vote domain and the action triggered by \nogo{} votes.
+  \item Module 3 produces an AI CAPCOM architecture specification: decision tree, autonomy boundary, escalation triggers.
+  \item Module 4 documents a long-duration mission management strategy appropriate to \param{MISSION\_NAME}'s duration and type, with specific protocols for team handover and science replanning.
+  \item Module 5 produces a working Minecraft world template spec and Python bridge implementation for the logistics simulation of \param{MISSION\_NAME}.
+  \item Module 6 produces a Blender Python script that animates the \param{MISSION\_NAME} trajectory and a full Unreal Engine project specification with telemetry ingestion.
+  \item Module 7 produces three DIY hardware build guides (Beginner/Intermediate/Advanced) with cost targets and component lists.
+  \item Module 8 profiles four operations career roles with education pathways, tools, and certification sequences.
+  \item At least three new gsd-skill-creator SKILL.md files are produced; the \texttt{mission-control-chipset.yaml} is complete and deployable.
+  \item Release artifact is correctly versioned as v1.50.\param{MISSION\_SLUG}.OPS and deposited to the correct output path.
+\end{enumerate}
+
+\subsection{The Through-Line}
+
+Gene Kranz, Flight Director for Apollo 13, wrote the words ``Tough and Competent'' on a whiteboard the day after the Apollo 1 fire killed three astronauts. Not as a slogan. As a mission statement for how the operations team would operate from that day forward. Tough: they would never again accept compromises on things that mattered. Competent: they would know everything about their systems, deeply, without exception.
+
+The skills required to run a NASA mission --- from the Commander's situational awareness during ascent to the FIDO's trajectory burn design to the CAPCOM's calm voice during an anomaly --- are not mysteries. They are learnable, documentable, trainable. The difference between a Mission Control console operator and a student watching a simulation is not talent. It is practice, structured knowledge, and the habit of maintaining awareness of everything simultaneously while acting decisively on what matters most.
+
+Part F builds the pathway from student to operator. Not to NASA specifically --- to the mental and physical disciplines that produce competent operators of complex systems under pressure. Minecraft teaches resource constraints. Blender teaches spatial reasoning about orbits. Unreal Engine teaches real-time telemetry monitoring. Arduino teaches the feel of a live data stream. CAPCOM practice teaches the discipline of precise, calm communication under stress. All of these are transferable skills. All of them are here.
+
+\newpage
+
+% ============================================================
+% STAGE 2: RESEARCH REFERENCE
+% ============================================================
+\stageheader{STAGE 2 --- RESEARCH REFERENCE}{secondary}
+
+\section{Mission Operations Deep Dive --- Research Reference}
+
+\subsection{Input Bundle Schema}
+
+\begin{asciibox}
+INPUT BUNDLE SCHEMA --- PART F
+================================
+From Part B release + Part A catalog:
+
+{
+  "mission\_name":         "string",
+  "mission\_slug":         "string",
+  "mission\_type":         "Crewed | Autonomous | Both",
+  "mission\_duration":     "string",   // e.g., "8 days" or "48+ years"
+  "is\_active":            boolean,
+  "crew\_roles": [                      // empty if unmanned
+    { "role": "string", "count": number, "primary\_duties": "string" }
+  ],
+  "mission\_phases": [
+    { "name": "string", "start": "string", "duration": "string",
+      "critical\_events": ["string"] }
+  ],
+  "fault\_scenarios": ["string"],       // known anomalies from Part B
+  "telemetry\_archive\_url": "string | null",
+  "nasa\_3d\_model\_url":    "string | null",
+  "minecraft\_analogy":    "string",    // what in-game resource = mission resource
+  "operations\_era":       "string",    // Mercury era | Apollo | Shuttle | Modern
+  "dsp\_coverage":         "string",    // DSN or other comm architecture
+  "predecessors":         ["string"],
+  "successors":           ["string"],
+  "release\_version":      "v1.50.\{SLUG\}.OPS",
+  "output\_path":          ".planning/outputs/missions/\{SLUG\}/ops/"
+}
+\end{asciibox}
+
+\subsection{Source Hierarchy for Operations Content}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{1.2cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tier} & \tableheader{Source} & \tableheader{Content Coverage} \\
+\midrule
+T1 & NASA Mission Operations Reports & Flight rules, mission evaluations, anomaly reports \\
+T2 & NASA NTRS mission design documents & Systems concepts, CONOPS, requirements \\
+T3 & NASA astronaut training documents & NASA SP publications, astronaut memoirs \\
+T4 & Flight Director memoirs and oral histories & Kranz, Griffin, Lunney, Glover interviews \\
+T5 & AIAA / AAS astrodynamics papers & Technical operations methodology \\
+T6 & NASA public press kits and fact sheets & Mission overview, timeline, crew biographies \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{CAPCOM Protocol Reference}
+
+\begin{capcombox}{STANDARD CAPCOM CALL FORMAT}
+[CALL SIGN], [YOUR STATION], [MESSAGE TYPE], [CONTENT], [OVER/STANDING BY]
+
+Examples from NASA mission vocabulary:
+  "Columbia, Houston, GO for deorbit burn, over."
+  "Voyager Flight, CATO, signal acquisition nominal, no anomalies."
+  "Commander, SURGEON, recommend crew rest, all biomed nominal."
+
+EMERGENCY ESCALATION SEQUENCE:
+  1. State problem in 10 words or fewer: "We have a problem."
+  2. State immediate safety status: "Crew is nominal / not nominal."
+  3. State recommended immediate action: "Halt EVA / close hatch / activate backup."
+  4. Await Flight Director acknowledgment before next call.
+
+GO/NO-GO POLL FORMAT:
+  FLIGHT: "All stations, GO/NO-GO for [EVENT]. GUIDO?"
+  GUIDO:  "GO."
+  FIDO:   "GO."
+  PROPULSION: "GO."
+  SURGEON:    "GO." [or "HOLD, crew not nominal"]
+  CAPCOM: "Crew is GO." [after polling crew separately]
+  FLIGHT: "GO for [EVENT]. CAPCOM, advise crew."
+  CAPCOM: "[CREW CALL SIGN], Houston, GO for [EVENT]."
+\end{capcombox}
+
+\subsection{Telemetry Architecture Reference}
+
+\begin{telebox}{SPACECRAFT TELEMETRY CHANNEL TAXONOMY}
+HOUSEKEEPING TELEMETRY (continuous, low cadence):
+  Subsystem temperatures, power bus voltages, battery state of charge,
+  propellant mass, attitude control status, memory health, watchdog timers.
+  Cadence: 1--10 Hz depending on mission phase
+
+ENGINEERING TELEMETRY (event-driven):
+  Mode transitions, command echoes, fault flags, safing events,
+  software patch confirmations, instrument mode changes.
+  Triggered by: onboard events or ground commands
+
+SCIENCE TELEMETRY (high cadence, scheduled):
+  Instrument data, image data, particle detector counts, spectra.
+  Cadence: instrument-dependent; transmitted in scheduled downlink windows
+
+REALTIME TELEMETRY STREAM FORMAT (CCSDS standard):
+  Packet Primary Header (6 bytes): Version, Type, APID, Sequence, Length
+  Secondary Header (variable): Timestamp, subsystem ID
+  Data Field: parameter values in defined engineering units
+  Trailer (optional): CRC error detection
+
+DIY TELEMETRY SIMULATION FORMAT (simplified):
+  CSV: timestamp\_ms, subsystem\_id, parameter\_name, value, units, limit\_flag
+  Example: 1711660800000, POWER, solar\_input\_w, 847.2, W, NOMINAL
+  JSON alternative for web visualization:
+    {"ts": 1711660800, "sys": "POWER", "param": "solar\_w", "val": 847.2}
+\end{telebox}
+
+\subsection{Simulation Platform Technical Reference}
+
+\subsubsection{Minecraft Integration Protocol}
+
+\begin{simplatbox}{MINECRAFT --- MISSION LOGISTICS SIMULATION}
+PYTHON BRIDGE: mcpi (Minecraft Pi Edition API) or mcrcon (RCON protocol)
+Installation:
+  pip install mcpi    \# for Pi Edition / compatible servers
+  pip install mcrcon  \# for Spigot / Paper servers with RCON enabled
+
+RESOURCE MAPPING SCHEMA (mission-configurable):
+  Block type      -> Spacecraft resource
+  Cobblestone     -> Structural mass (kg)
+  Redstone dust   -> Electrical power (W)
+  Water buckets   -> Propellant (kg)
+  Gold ingots     -> Science data capacity (GB)
+  Iron doors      -> Hatches / airlocks
+  Redstone lamps  -> System status indicators (ON=nominal, OFF=fault)
+
+MISSION TIMELINE IN MINECRAFT:
+  One in-game day (20 min real time) = one mission phase
+  Day/night cycle triggers phase transitions
+  Hopper/chest networks model resource consumption per phase
+  Villager schedules model crew time allocation
+
+PYTHON CONTROL SCRIPT PATTERN:
+  import mcpi.minecraft as minecraft
+  mc = minecraft.Minecraft.create()
+  \# Read resource inventory (chest contents) -> map to spacecraft state
+  \# Write status displays (sign blocks) -> mission parameter readouts
+  \# Trigger events (TNT / pistons) -> simulate burns or deployments
+
+EDUCATIONAL OBJECTIVE:
+  Students experience scarcity trade-offs viscerally:
+  running out of "propellant" (water) means the mission ends.
+  This is more memorable than any spreadsheet.
+\end{simplatbox}
+
+\subsubsection{Blender Integration Protocol}
+
+\begin{simplatbox}{BLENDER --- SCIENTIFIC 3D VISUALIZATION}
+API: Python bpy module (built into Blender 3.x+)
+Execution: Run scripts inside Blender Python console or via CLI
+
+TRAJECTORY ANIMATION WORKFLOW:
+  1. Fetch ephemeris from JPL Horizons API (public REST endpoint)
+     URL: https://ssd.jpl.nasa.gov/api/horizons.api
+     Parameters: COMMAND=spacecraft\_id, START\_TIME, STOP\_TIME, STEP\_SIZE
+  2. Parse XYZ position vectors (in AU) for each timestep
+  3. Create Blender curve object from position array
+  4. Animate spacecraft empty object following curve path
+  5. Add Sun, planets as spheres at correct scale and position
+  6. Set camera on ecliptic pole looking down; render animation
+
+SPACECRAFT MODEL IMPORT:
+  Source: NASA 3D Resources (nasa3d.arc.nasa.gov) -- public domain models
+  Format: .obj or .glb files
+  Python import: bpy.ops.import\_scene.obj(filepath=model\_path)
+  Instrument pointing: add constraint "Track To" targeting planet object
+
+RENDERING:
+  For educational video: Cycles renderer, 720p, 60fps, 30-second clip
+  For real-time preview: EEVEE renderer, fast preview mode
+  Output: ffmpeg video from rendered frames (bpy.context.scene.render)
+
+EDUCATIONAL OUTPUT:
+  A student can run one Blender script and produce a scientifically
+  accurate animation of the entire {MISSION\_NAME} trajectory.
+\end{simplatbox}
+
+\subsubsection{Unreal Engine Integration Protocol}
+
+\begin{simplatbox}{UNREAL ENGINE --- REAL-TIME OPERATIONS SIMULATION}
+VERSION: Unreal Engine 5.x (free for educational use)
+SCRIPTING: Blueprints (visual) + Python Editor Scripting Plugin
+
+TELEMETRY INGESTION ARCHITECTURE:
+  Option A: WebSocket (for network-connected telemetry sources)
+    UE Blueprint node: "Create Web Socket" -> "Receive Message"
+    Format: JSON telemetry packets from Python relay server
+  Option B: Serial port (for Arduino/RPi hardware)
+    Use UE plugin: "Serial Communication Plugin" (open source)
+    or relay via Python subprocess writing to UE stdin pipe
+
+TELEMETRY DASHBOARD BLUEPRINT PATTERN:
+  1. UMG Widget Blueprint: define display panels (gauges, graphs, text)
+  2. Bind each widget element to a Blueprint variable
+  3. Timer node fires every 100ms -> parse incoming telemetry JSON
+  4. Update variables -> widgets reflect current spacecraft state
+  5. Color change on limit breach: green=nominal, yellow=caution, red=alarm
+
+PHYSICS SIMULATION:
+  Use UE Chaos Physics for EVA body dynamics
+  Use custom Actor with Newtonian force application for orbital mechanics
+  (UE is not intrinsically a space physics engine; custom logic required)
+
+VR CAPCOM CONSOLE:
+  OpenXR plugin (built-in UE5) for HMD support
+  Spatial UI widgets anchored to 3D console geometry
+  Hand tracking or motion controller input for button interactions
+  Target hardware: Meta Quest 3 or PCVR headset
+
+HARDWARE-IN-THE-LOOP:
+  Arduino sends serial telemetry -> Python relay -> WebSocket -> UE
+  Physical switches on console mockup -> Arduino -> UE button state
+  This creates a complete DIY mission control simulation loop.
+\end{simplatbox}
+
+\subsubsection{DIY Hardware Build Specifications}
+
+\begin{hwbox}{BUILD LEVEL 1: BEGINNER TELEMETRY DISPLAY (\$25)}
+COMPONENTS:
+  Arduino Uno R3 (or clone): \$5-10
+  16x2 LCD display (I2C): \$4
+  3x LEDs (green/yellow/red): \$1
+  3x 220-ohm resistors: \$0.50
+  Breadboard + jumper wires: \$5
+  USB cable: already owned
+
+WHAT IT DOES:
+  Displays 4 simulated spacecraft parameters on LCD:
+  Line 1: Power: 847W  NOMINAL
+  Line 2: Temp: 22.3C  Prop: 847kg
+  Three LEDs blink with simulated status: green=nominal,
+  yellow=caution, red=alarm.
+
+TELEMETRY SOURCE:
+  Python script on connected laptop generates CSV telemetry stream
+  over USB serial at 9600 baud. Arduino parses and displays.
+
+EDUCATIONAL VALUE:
+  Student feels the live data flow. When a parameter "goes red"
+  (simulated fault injected by Python script), the LED lights
+  and student must "respond" -- introducing the CAPCOM mental model.
+\end{hwbox}
+
+\begin{hwbox}{BUILD LEVEL 2: INTERMEDIATE MISSION CONSOLE (\$80)}
+COMPONENTS:
+  Raspberry Pi 4 (2GB): \$35
+  7-inch touchscreen: \$25
+  6x tactile buttons (momentary): \$3
+  2x toggle switches: \$3
+  12x indicator LEDs: \$2
+  Prototype PCB: \$5
+  Case (3D printable or cardboard): \$0-10
+
+WHAT IT DOES:
+  Full Python/Pygame telemetry dashboard on touchscreen.
+  Six buttons: GO, NO-GO, ACK ALARM, UPLINK CMD, HOLD, ABORT
+  Twelve LEDs: one per major spacecraft subsystem
+  Toggle switches: SIMULATED / LIVE telemetry source selection
+
+INTEGRATION:
+  WebSocket connection to Unreal Engine OR Blender realtime mode
+  Buttons emit MQTT messages that feed back into simulation
+  Full bidirectional telemetry loop: display -> decision -> command
+\end{hwbox}
+
+\begin{hwbox}{BUILD LEVEL 3: ADVANCED HARDWARE-IN-THE-LOOP STATION (\$200)}
+COMPONENTS:
+  Raspberry Pi 5 (8GB): \$80
+  24-inch monitor: \$60 (or use existing)
+  Custom PCB with rotary encoders, analog gauges, toggle panel: \$40
+  Optional: Meta Quest 3 (for VR CAPCOM mode): \$500 (separate)
+
+WHAT IT DOES:
+  Full CAPCOM station: telemetry ingestion from simulated or replayed
+  NASA mission data, command uplink simulation with realistic timing,
+  Unreal Engine VR or desktop visualization on monitor,
+  Analog gauges display spacecraft power/attitude/propellant via PWM,
+  Complete hardware-in-the-loop: physical inputs affect simulation state.
+
+EXPANSION:
+  Designed to accept additional Arduino sub-panels for specific
+  subsystems (POWER console, GNC console, COMM console).
+  Modular architecture: each sub-panel is a separate Arduino on I2C bus.
+  Central Raspberry Pi aggregates all sub-panel data and drives display.
+\end{hwbox}
+
+\subsection{AI CAPCOM Architecture Reference}
+
+\begin{capcombox}{AI CAPCOM DESIGN SPECIFICATION}
+PURPOSE: For unmanned missions where continuous human monitoring is
+         impractical, an AI CAPCOM manages routine operations and
+         escalates anomalies to human operators.
+
+AUTONOMY TIERS:
+  TIER 1 (fully autonomous): Normal housekeeping telemetry monitoring;
+    alarm detection; standard response execution from playbook;
+    routine command uplink (pre-approved sequences).
+  TIER 2 (human-supervised): Non-standard telemetry patterns;
+    anomaly root cause assessment; candidate response selection;
+    presents options to human operator within defined timeout.
+  TIER 3 (human-required): Safety-critical decisions; mission replanning;
+    hardware failure recovery outside playbook; resource depletion response.
+
+DECISION TREE STRUCTURE:
+  Input: telemetry packet -> parameter health check
+  Branch 1: ALL NOMINAL -> log, continue, no action
+  Branch 2: YELLOW LIMIT -> flag, increase monitoring cadence, log
+  Branch 3: RED LIMIT -> execute contingency response from playbook
+  Branch 4: UNKNOWN STATE -> escalate to human CAPCOM within T+60s
+  Branch 5: SAFETY CRITICAL -> immediate safe mode command, page human
+
+ESCALATION PROTOCOL:
+  AI CAPCOM generates alert with: timestamp, parameter, value, limit,
+  duration, candidate responses ranked by probability of success,
+  recommended action, time available before decision required.
+  Human operator reviews and approves or overrides within timeout.
+  If no human response: AI executes safest candidate action.
+
+gsd-skill-creator IMPLEMENTATION:
+  New skill: ai-capcom-monitor
+  Chipset: mission-control-chipset.yaml with AI-CAPCOM role (Sonnet)
+  CAPCOM acts as continuous loop: ingest -> assess -> act/escalate
+\end{capcombox}
+
+\subsection{Long-Duration Mission Management Reference}
+
+\begin{asciibox}
+EXTENDED MISSION MANAGEMENT FRAMEWORK (Voyager Pattern)
+=========================================================
+
+PHASE 1: PRIMARY MISSION (years 1-N, as designed)
+  Full operations team; all instruments nominal; original science plan
+  Telemetry: full bandwidth; daily contact; rapid response to anomalies
+
+PHASE 2: EXTENDED MISSION (post-primary, reduced team)
+  Some instruments failed or powered down to save power
+  Operations team reduced; contact windows less frequent
+  Science program replanned around remaining capable instruments
+  New science questions posed by original mission findings
+
+PHASE 3: DEEP EXTENDED MISSION (decades out)
+  Skeleton crew; quarterly contact in some cases
+  Heliophysics/interstellar science replaces original planetary focus
+  RTG power declining; annual instrument shutdowns to balance budget
+  Knowledge transfer: formal documentation of all institutional memory
+
+PHASE 4: END-OF-MISSION PLANNING
+  Criteria for mission termination defined in advance
+  Options: controlled impact, orbit insertion, drift to solar escape
+  Data archiving: full telemetry history transferred to PDS archive
+  Legacy documentation: lessons learned for future mission designers
+
+TEAM CONTINUITY PROTOCOL:
+  Minimum documentation: system diagram, anomaly log, command dictionary,
+  contact schedule, known hardware quirks, team contacts
+  Knowledge transfer mechanism: structured overlap period (6+ months)
+  between retiring engineers and incoming team members
+  Training material: simulator rebuilt from documentation when possible
+\end{asciibox}
+
+\subsection{New Skills Reference (Module 8)}
+
+The following new gsd-skill-creator skills are produced by Part F:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Skill Name} & \tableheader{Description and Key Triggers} \\
+\midrule
+\texttt{capcom-protocol-generator} & Generates CAPCOM call scripts, Go/No-Go poll sequences, and emergency vocabulary for any described mission event. Triggered by: ``write CAPCOM script for...'', ``draft the Go/No-Go poll for...'', ``what does CAPCOM say when...'' \\
+\texttt{telemetry-dashboard-builder} & Produces Python telemetry display scripts (terminal, Pygame, web) and hardware wiring guides. Triggered by: ``build a telemetry display'', ``wire up a mission console'', ``create spacecraft status dashboard'' \\
+\texttt{mission-timeline-planner} & Generates complete mission timelines with Go/No-Go criteria and critical event sequences from a mission description. Triggered by: ``create a mission timeline'', ``what are the critical events for...'' \\
+\texttt{spacecraft-fault-analyzer} & Builds fault protection trees and anomaly response sequences. Triggered by: ``what happens if X fails'', ``build fault tree for...'', ``design safe mode sequence'' \\
+\texttt{minecraft-mission-modeler} & Generates Minecraft world templates and Python bridge scripts for mission logistics simulation. Triggered by: ``build a Minecraft mission sim'', ``model the mass budget in Minecraft'' \\
+\texttt{blender-orbit-animator} & Produces Blender Python scripts for trajectory animation using JPL Horizons data. Triggered by: ``animate the trajectory of...'', ``create Blender visualization for...'' \\
+\texttt{ai-capcom-monitor} & Implements an AI CAPCOM monitoring loop for unmanned mission telemetry. Triggered by: ``monitor mission telemetry'', ``build autonomous CAPCOM'', ``watch for anomalies in...'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety and Accuracy Rules}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Rule} & \tableheader{Type} & \tableheader{Application} \\
+\midrule
+No classified procedures & ABSOLUTE & Published emergency procedures only; no restricted command codes \\
+Hardware safety & BLOCK & DIY guides include explicit warnings for any component over 5V; no mains electricity; no RF transmission \\
+Medical accuracy & BLOCK & Astronaut physical/psychological criteria cite NASA HRP published standards only \\
+Telemetry correctness & GATE & Simulated telemetry formats match published CCSDS standards; no invented packet formats \\
+Active missions & GATE & Current telemetry values described as ``as of run date''; flag rapidly-changing parameters \\
+Simulation clarity & ANNOTATE & All simulations labeled as educational approximations; not suitable for actual mission planning \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\newpage
+
+% ============================================================
+% STAGE 3: MISSION PACKAGE
+% ============================================================
+\stageheader{STAGE 3 --- MISSION PACKAGE}{tertiary}
+
+\section{Milestone Specification}
+
+\subsection{Mission Objective}
+
+Produce a complete mission operations curriculum package for NASA mission \param{MISSION\_NAME}: crew requirements, mission timeline, CAPCOM protocols, telemetry architecture, long-duration management strategy, three simulation platform implementations (Minecraft, Blender, Unreal Engine), DIY hardware build guides, four career profiles, and seven new gsd-skill-creator SKILL.md files with the \texttt{mission-control-chipset.yaml}. Release as v1.50.\param{MISSION\_SLUG}.OPS to the GSD College of Knowledge Operations Department.
+
+\subsection{Architecture Overview}
+
+\begin{asciibox}
+WAVE EXECUTION ARCHITECTURE
+=============================
+
+  [WAVE 0: MISSION PARAMETER INJECTION + OPERATIONS INVENTORY]
+  Parse input bundle; classify mission type (Crewed/Autonomous/Both);
+  identify telemetry sources; verify NASA 3D model availability;
+  determine Minecraft resource mapping schema.
+  (Haiku + CRAFT-OPS)
+           |
+   --------|-----------------------------------
+  |         |          |          |           |
+[W1A:      [W1B:      [W1C:      [W1D:      [W1E:
+ CREW/      CAPCOM     LONG-DUR   TIMELINE   SKILLS]
+ AUTONOMY]  + TELEM]   MGMT]      + ARCH]
+ Module 1   Module 3   Module 4   Module 2   Module 8
+ (Sonnet)   (Sonnet)   (Sonnet)   (Sonnet)   (Sonnet)
+  |---------|----------|----------|-----------|
+           |
+  [WAVE 2: SIMULATION PLATFORMS]
+  Module 5: Minecraft world template + Python bridge
+  Module 6: Blender script + Unreal Engine spec
+  Module 7: DIY hardware build guides x3
+  (Sonnet EXEC-SIM, EXEC-BLENDER, CRAFT-HW -- parallel sub-tracks)
+           |
+  [WAVE 3: OPUS SYNTHESIS]
+  Cross-module integration; AI CAPCOM architecture;
+  career profiles; Claude operations tutor scripts;
+  skill interconnection review; science accuracy check
+           |
+  [WAVE 4: CK DEPOSIT + SKILL LIBRARY + RELEASE]
+           |
+  [WAVE 4B: CAPCOM GATE -- Human approval]
+           |
+  RELEASE: v1.50.{MISSION\_SLUG}.OPS
+\end{asciibox}
+
+\subsection{Deliverables}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{0.4cm}L{4.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{\#} & \tableheader{Deliverable} & \tableheader{Format} & \tableheader{Agent} & \tableheader{Acceptance Criteria} \\
+\midrule
+1 & Crew/autonomy requirements (Mod 1) & .md & EXEC-MISSION & All crew roles OR full fault tree with sources \\
+2 & Mission timeline (Mod 2) & .md + .yaml & EXEC-MISSION & All phases; Go/No-Go points; critical events dated \\
+3 & CAPCOM call scripts (Mod 3) & .md & EXEC-MISSION & 3+ events; correct call format; Go/No-Go poll \\
+4 & Telemetry architecture (Mod 3) & .md & EXEC-TELEM & Channel taxonomy; DIY simulation format \\
+5 & AI CAPCOM specification (Mod 3) & .md & CRAFT-OPS & Autonomy tiers; decision tree; escalation protocol \\
+6 & Long-duration strategy (Mod 4) & .md & EXEC-MISSION & Phase framework; team handover protocol \\
+7 & Minecraft simulation (Mod 5) & .py + .md & EXEC-SIM & Resource schema; Python bridge; runs without error \\
+8 & Blender trajectory script (Mod 6) & .py & EXEC-BLENDER & Fetches ephemeris; animates trajectory; renders \\
+9 & Unreal Engine project spec (Mod 6) & .md & EXEC-BLENDER & Telemetry ingestion; Blueprint pattern; VR spec \\
+10 & DIY Build Guide L1 (Mod 7) & .md & CRAFT-HW & Components; wiring; cost target met \\
+11 & DIY Build Guide L2 (Mod 7) & .md & CRAFT-HW & RPi dashboard; MQTT bridge; cost target met \\
+12 & DIY Build Guide L3 (Mod 7) & .md & CRAFT-HW & Full HIL station; Arduino bus; cost target met \\
+13 & Career profiles x4 (Mod 8) & .md & CRAFT-OPS & Education, tools, certification, progression \\
+14 & New SKILL.md files x7 (Mod 8) & .md x7 & EXEC-SKILL & All deployable; non-duplicate; correct format \\
+15 & mission-control-chipset.yaml & .yaml & EXEC-SKILL & All console roles defined; model assignments \\
+16 & CK Operations Dept YAML & .yaml & LOG & Schema validates; all modules linked \\
+17 & Release artifact & All files & LOG & Correct path; correct version string \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Component Breakdown \& Token Budget}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}L{2cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Wave} & \tableheader{Model} & \tableheader{Tokens} \\
+\midrule
+W0: Mission inventory + schema & W0 & Haiku & 8K \\
+W1A: Crew/autonomy requirements & W1 & Sonnet & 28K \\
+W1B: CAPCOM protocols + telemetry & W1 & Sonnet & 32K \\
+W1C: Long-duration management & W1 & Sonnet & 20K \\
+W1D: Mission timeline + architecture & W1 & Sonnet & 28K \\
+W1E: Skill files (7 SKILL.md) & W1 & Sonnet & 40K \\
+W2: Minecraft sim + Python bridge & W2 & Sonnet & 28K \\
+W2: Blender script + UE spec & W2 & Sonnet & 32K \\
+W2: DIY Hardware guides (L1+L2+L3) & W2 & Sonnet & 30K \\
+W3: Opus synthesis + AI CAPCOM & W3 & Opus & 50K \\
+W3: Career profiles + tutor scripts & W3 & Sonnet & 24K \\
+W4: CK YAML + chipset + release & W4 & Haiku & 8K \\
+Contingency (10\%) & --- & Mixed & 33K \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total per mission run:}} & \textbf{$\sim$361K} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Token scaling:} Crewed flagship missions (Apollo, Shuttle, ISS) reach $\sim$480K due to crew depth. Active missions (ISS, Artemis, JWST) add $\sim$30K for current-status research. Short-duration robotic missions may run at $\sim$250K.
+
+\subsection{Wave 1: Five Parallel Tracks}
+
+Wave 1 has the broadest parallelism in the five-part series --- five simultaneous production tracks. TOPO (BEAR) manages track health and reallocates tokens if any track overruns:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{secondary}
+\tableheader{Track} & \tableheader{Modules} & \tableheader{Key Deliverables and Requirements} \\
+\midrule
+W1A & Crew / Autonomy (1) & For crewed: role-by-role physical (NASA HRP standards), psychological (MBTI/NEO-PI sourced), and technical training timeline. For unmanned: fault protection hierarchy as decision tree; command authority matrix \\
+W1B & CAPCOM (3) & CAPCOM call scripts for 3+ critical events; Go/No-Go poll sequence; telemetry channel taxonomy; DIY simulation format; AI CAPCOM design \\
+W1C & Long Duration (4) & Four-phase management framework; team handover protocol; science replanning examples from actual extended missions \\
+W1D & Timeline (2) & Complete mission timeline in structured Markdown + YAML; all critical events with Go/No-Go criteria; sources per event \\
+W1E & Skills (8) & All 7 SKILL.md files + \texttt{mission-control-chipset.yaml}; non-duplication check; trigger phrase uniqueness \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Wave 2: Simulation Platform Production (Three Sub-Tracks)}
+
+Wave 2 runs three sub-tracks simultaneously after Wave 1's skill and architecture outputs are available:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{tertiary}
+\tableheader{Sub-Track} & \tableheader{Requirements} \\
+\midrule
+Minecraft (W2A) & Python bridge using mcpi or mcrcon; resource mapping YAML schema for this mission; world template spec with phase transitions; educational module documentation \\
+Blender (W2B) & Python bpy script that (1) fetches JPL Horizons ephemeris, (2) creates trajectory curve, (3) imports spacecraft model, (4) sets up render camera, (5) outputs animation. Validated against published mission parameters \\
+Unreal (W2C) & Blueprint telemetry ingestion specification with WebSocket + serial options; VR console layout spec; hardware-in-the-loop wiring diagram; DIY build guides (all three levels) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Validation gate for Wave 2:} All Python scripts (Minecraft bridge, Blender script) execute without errors in a standard Python 3.10+ environment with \texttt{mcpi}, \texttt{bpy}-compatible CLI (\texttt{blender -{}-python}), and \texttt{requests} for the Horizons API. EXEC-SIM runs each script. BLOCK on any unhandled exception.
+
+\subsection{Wave 3: Opus Synthesis}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{accent}
+\tableheader{Synthesis Task} & \tableheader{Description} \\
+\midrule
+AI CAPCOM architecture & Full design spec: autonomy tiers, decision tree, escalation protocol; reviewed for plausibility against published autonomous mission management literature \\
+Career profiles x4 & Flight Director, Flight Controller, CAPCOM, Mission Planner: education, certification sequence, tools, day-in-the-life, progression path \\
+Cross-module integration & Ensure CAPCOM scripts reference the timeline correctly; hardware build guides reference the telemetry format from Module 3; skill files reference correct simulation outputs \\
+Claude operations tutor scripts & How Claude responds to CAPCOM training questions: scenario-based Q\&A patterns, emergency escalation drills, historical case studies from real missions \\
+Long-duration strategy deepening & For missions active $>$10 years: Opus reviews strategy against actual extended mission examples (Voyager, Hubble, Chandra); identifies gaps in Phase 2/3 protocols \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Test Plan}
+
+\subsection{Test Categories}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{1.5cm}C{1.5cm}L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Count} & \tableheader{Priority} & \tableheader{On Fail} & \tableheader{Description} \\
+\midrule
+Safety-Critical & 6 & P0 & BLOCK & Code execution, hardware safety, medical accuracy \\
+Core Completeness & 12 & P1 & BLOCK & One per success criterion \\
+Operational Accuracy & 8 & P2 & REVISION & CAPCOM format, telemetry correctness, timeline accuracy \\
+Integration & 7 & P2 & REVISION & Cross-module consistency; sim-to-career linkage \\
+Edge Case & 4 & P3 & ANNOTATE & Active missions, deep-space only, classified risk \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Safety-Critical Tests (BLOCK on Failure)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Verifies} & \tableheader{Expected Result} \\
+\midrule
+SC-01 & All Python scripts execute clean & Minecraft bridge and Blender scripts run without exception; output matches expected format \\
+SC-02 & Hardware safety in build guides & No build guide specifies mains voltage (\textgreater{}12V DC); all RF transmission components flagged with regulatory note \\
+SC-03 & Medical standards sourced & All astronaut physical/psychological criteria cite NASA Human Research Program published standards; no invented criteria \\
+SC-04 & No classified procedures & No emergency procedure or command code references a classified source; all from T1--T6 open literature \\
+SC-05 & Simulations labeled & Every simulation output labeled: ``Educational approximation. Not suitable for actual mission planning.'' \\
+SC-06 & Active mission boundary & For IS-ACTIVE=true missions: current crew, current mission status, current telemetry described as ``as of [run date]'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Operational Accuracy Tests}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Test ID} & \tableheader{Quality Check} & \tableheader{Acceptance} \\
+\midrule
+OA-01 & CAPCOM call format & All CAPCOM calls follow: [Call Sign], [Station], [Message], [Over/Standing By] format \\
+OA-02 & Go/No-Go poll completeness & Poll includes all primary consoles; action on \nogo{} is defined; poll terminates if Flight Director is \nogo{} \\
+OA-03 & Telemetry format validity & DIY simulation format matches CCSDS packet structure at header level; parameter units stated \\
+OA-04 & Mission timeline sourced & Every critical event date/duration sourced to T1--T6; no undated claims \\
+OA-05 & Minecraft resource mapping non-trivial & Resource-to-spacecraft mapping has at least 5 distinct resources; production/consumption rates grounded in mission data \\
+OA-06 & Blender script uses Horizons API & Script fetches real ephemeris data, not hardcoded positions \\
+OA-07 & UE telemetry spec bidirectional & Spec covers both display (spacecraft to console) AND command (console to spacecraft) data flows \\
+OA-08 & Cost targets met & L1 $\leq$\$25, L2 $\leq$\$80, L3 $\leq$\$200; component prices are current market estimates \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Verification Matrix}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{0.8cm}L{5.5cm}L{2.8cm}C{1.3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{SC\#} & \tableheader{Criterion} & \tableheader{Test IDs} & \tableheader{Status} \\
+\midrule
+SC1 & Crew roles OR fault tree with sources & CF-01, OA-04 & TBD \\
+SC2 & Mission timeline: phases, Go/No-Go, events & CF-02, OA-04 & TBD \\
+SC3 & CAPCOM scripts for 3+ events & CF-03, OA-01 & TBD \\
+SC4 & Go/No-Go poll with all controllers & CF-04, OA-02 & TBD \\
+SC5 & AI CAPCOM spec: tiers, tree, escalation & CF-05 & TBD \\
+SC6 & Long-duration strategy: 4 phases + handover & CF-06 & TBD \\
+SC7 & Minecraft template + bridge runs clean & CF-07, SC-01, OA-05 & TBD \\
+SC8 & Blender script + UE spec complete & CF-08, SC-01, OA-06, OA-07 & TBD \\
+SC9 & Three DIY guides, cost targets met & CF-09, SC-02, OA-08 & TBD \\
+SC10 & Four career profiles complete & CF-10 & TBD \\
+SC11 & Seven skills + chipset deployable & CF-11 & TBD \\
+SC12 & Release versioned, path correct & CF-12 & TBD \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Mission Crew Manifest --- Mission Control Profile (22 Roles)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Role} & \tableheader{Agent (PNW Naming)} & \tableheader{Responsibility} \\
+\midrule
+FLIGHT (Flight Director) & RAVEN & Mission authority; Go/No-Go final call; anomaly response direction; AI CAPCOM architecture \\
+PLAN & SALMON & Wave decomposition; five-track W1 coordination; W2 simulation sub-track sequencing \\
+CRAFT-OPS & OWL & Operations synthesis; CAPCOM protocol design; long-duration strategy; career narratives \\
+CRAFT-HW & EAGLE & Hardware integration; DIY build guide design; telemetry architecture; MQTT/serial specs \\
+EXEC-MISSION & CEDAR & Modules 1, 2, 4: crew requirements, mission timeline, long-duration management \\
+EXEC-TELEM & HEMLOCK & Telemetry architecture; command format specs; AI CAPCOM decision tree \\
+EXEC-SIM & ALDER & Module 5: Minecraft world template + Python bridge; W2 script validation \\
+EXEC-BLENDER & FIR & Module 6A: Blender trajectory script; JPL Horizons integration; render setup \\
+EXEC-UE & SPRUCE & Module 6B: Unreal Engine Blueprint spec; VR console layout; HIL integration spec \\
+EXEC-SKILL & ASPEN & Module 8: seven SKILL.md files + \texttt{mission-control-chipset.yaml} \\
+VERIFY & HAWK & Source accuracy; CAPCOM format check; safety gate execution; cost target validation \\
+INTEG & HERON & Cross-module consistency; CAPCOM scripts vs.\ timeline alignment; skill-sim linkage \\
+REPLICATOR & OTTER & Independent validation of Python scripts; hardware cost estimates; Horizons data check \\
+CAPCOM & FOXGLOVE & Human-in-the-loop gate; Wave 4B approval; escalation management \\
+BUDGET & WREN & Token tracking; five-track W1 resource allocation; simulation runtime monitoring \\
+LOG & MARTIN & File manifests; skill library deposit; CK YAML; commit messages; progress tracker \\
+TOPO & BEAR & Multi-track W1 + W2 topology; rebalances tracks if overruns detected \\
+ARCH & WOLF & Cross-cutting structural decisions; telemetry format consistency across modules \\
+SECURE & CRANE & Classified procedure boundary; hardware safety; medical standards gatekeeping \\
+SURGEON & MARTEN & Code quality and guide safety monitoring; flags accumulating errors \\
+ANALYST & OSPREY & Cross-mission operations pattern analysis; identifies reusable CAPCOM scripts \\
+RETRO & KINGFISHER & Post-wave retrospective; documents template improvements for next run \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Execution Summary}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{6cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Metric} & \tableheader{Value} \\
+\midrule
+Activation Profile & Mission Control (22 roles --- largest in series) \\
+Est. Token Budget (median mission) & $\sim$361K \\
+Est. Token Budget (crewed flagship) & $\sim$480K \\
+Model Allocation & Opus 30\% / Sonnet 60\% / Haiku 10\% \\
+Context Windows per Run & 12--16 \\
+Wave Structure & W0, W1A/B/C/D/E (5 parallel), W2A/B/C (3 parallel), W3 (Opus), W4, W4B \\
+Simulation Platforms & Minecraft + Blender + Unreal Engine \\
+New Skills Generated & 7 SKILL.md files + \texttt{mission-control-chipset.yaml} \\
+Hardware Build Guides & 3 levels: \$25 / \$80 / \$200 \\
+Career Profiles & 4 operations roles \\
+Safety Gates & 6 BLOCK tests; hardware safety mandatory \\
+Code Validation & All Python scripts executed before Wave 3 \\
+Parallel to & Parts C, D, E (all consume Part B independently) \\
+Resumability & \texttt{part-f-progress.json} tracks state; safe to interrupt \\
+Release Version & v1.50.\param{MISSION\_SLUG}.OPS \\
+Output Path & \texttt{.planning/outputs/missions/\param{MISSION\_SLUG}/ops/} \\
+Permanent Deposits & \texttt{/mnt/skills/user/} (7 skills) + \texttt{.college/chipsets/} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\vspace{2em}
+
+\begin{quotebox}
+\textit{``Tough and Competent.'' The two words Gene Kranz wrote on the whiteboard after Apollo 1. Not a slogan. A mission statement for how to operate complex systems that human lives depend on.}\\[0.5em]
+Tough: never compromise on anything that matters. Competent: know your systems so well that when something goes wrong --- and something will always go wrong --- you already know where to look and what to do. These are not superhuman qualities. They are the result of disciplined practice, structured knowledge, and the commitment to rehearse every contingency before you need to execute it.\\[0.5em]
+Part F builds the foundation for that practice. A student who builds the Level 1 telemetry display and watches a simulated parameter go red --- who feels the moment of uncertainty, then looks up the response in the protocol and executes it --- has begun the journey that, with time and study and more complex simulations, leads to a console in a real Mission Control.\\[0.5em]
+The Minecraft model teaches scarcity. Blender teaches orbits. Unreal Engine teaches real-time awareness. The Arduino teaches what a live data stream feels like. The CAPCOM scripts teach precision under pressure. All of it together teaches the thing that Gene Kranz understood: that the hardest part of running a mission is not the physics. It is the discipline to be ready when the moment comes.\\[0.5em]
+\textbf{From launch to landing, and beyond.}
+\end{quotebox}
+
+\end{document}

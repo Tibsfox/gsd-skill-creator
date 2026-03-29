@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.0 — NASA Agency Founding + Armillaria ostoyae | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --forest-dark: #0A1F0A;
+    --forest-mid: #1A3A1A;
+    --mycelium: #C4A35A;
+    --mycelium-light: #E8D9A8;
+    --honey: #DAA520;
+    --bark: #5C4033;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2A4A2A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--forest-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Mycelial network background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(196,163,90,0.15) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(196,163,90,0.1) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(196,163,90,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(196,163,90,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(196,163,90,0.14) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(196,163,90,0.1) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.12) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(11,61,145,0.1) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.12) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--forest-dark) 0%, var(--forest-mid) 40%, #0D2847 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mycelium);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(196,163,90,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(196,163,90,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(196,163,90,0.15);
+    border: 1px solid var(--mycelium);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--mycelium);
+    margin-bottom: 1rem;
+  }
+
+  .version-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--mycelium-light);
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mycelium); font-weight: 500; }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(26,58,26,0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--mycelium-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card p, .card li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card {
+    border-color: var(--mycelium);
+    background: rgba(196,163,90,0.08);
+  }
+
+  .resonance-axis {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(196,163,90,0.15);
+  }
+
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num {
+    background: var(--mycelium);
+    color: var(--forest-dark);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--mycelium-light); }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(92,64,51,0.3);
+    border: 1px solid var(--bark);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .organism-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--honey);
+    margin-bottom: 0.75rem;
+  }
+
+  .organism-card .sci-name {
+    font-style: italic;
+    color: var(--mycelium);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: rgba(10,31,10,0.5);
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--honey);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .data-links {
+    background: rgba(11,61,145,0.15);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .data-links h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .data-links a {
+    display: block;
+    color: #7EB8DA;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.2);
+    transition: color 0.2s;
+  }
+
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(26,58,26,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-card a {
+    color: var(--mycelium);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-card a:hover { color: var(--mycelium-light); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--mycelium); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.0</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+    </div>
+    <h1>NASA Agency Founding</h1>
+    <p class="subtitle">The Invisible Foundation Becomes Visible &mdash; paired with Armillaria ostoyae</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> October 1, 1958</span>
+      <span><span class="label">Type:</span> Organization</span>
+      <span><span class="label">Predecessor:</span> NACA (1915&ndash;1958)</span>
+      <span><span class="label">Employees:</span> 8,000 absorbed</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On October 1, 1958, the National Aeronautics and Space Administration began operations, absorbing the 43-year-old National Advisory Committee for Aeronautics (NACA) &mdash; its 8,000 employees, three research laboratories, and decades of institutional knowledge. The Space Act, signed by President Eisenhower on July 29, 1958, transformed an invisible research agency into the visible face of American spaceflight.</p>
+      <p>This is Mission 1.0: not a launch, but a founding. The hidden network that had solved the problems of flight for four decades was made visible by crisis &mdash; Sputnik's orbit on October 4, 1957 &mdash; and reorganized into something the public could see.</p>
+    </div>
+
+    <div class="card">
+      <h2>NACA: The Root System (1915&ndash;1958)</h2>
+      <ul>
+        <li><strong>Langley Memorial Aeronautical Laboratory</strong> (Hampton, VA, 1920) &mdash; wind tunnels, airfoil research, transonic breakthroughs</li>
+        <li><strong>Ames Aeronautical Laboratory</strong> (Moffett Field, CA, 1940) &mdash; high-speed aerodynamics, computational methods</li>
+        <li><strong>Lewis Flight Propulsion Laboratory</strong> (Cleveland, OH, 1942) &mdash; jet engines, rocket propulsion, materials</li>
+      </ul>
+      <p>NACA's research-authorize methodology &mdash; systematic, empirical, pragmatic &mdash; became NASA's institutional DNA.</p>
+    </div>
+
+    <div class="card">
+      <h2>Key Transfers</h2>
+      <ul>
+        <li><strong>JPL</strong> (Caltech/Army) transferred to NASA December 3, 1958</li>
+        <li><strong>Army Ballistic Missile Agency</strong> (von Braun team) became Marshall Space Flight Center, 1960</li>
+        <li><strong>First Administrator:</strong> T. Keith Glennan; Deputy: Hugh L. Dryden</li>
+        <li><strong>First budget:</strong> $89 million (FY1959), ~9,000 employees</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">The Hidden Network</div>
+          NACA's 43 years of invisible foundational work = Armillaria's underground mycelial network. Both were doing their most important work out of sight.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Scale from Patience</div>
+          2,400 years of slow fungal growth = decades of methodical NACA research. Neither hurried. Both became the largest of their kind.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Institutional Absorption</div>
+          NACA absorbed into NASA = Armillaria absorbing nutrients from host trees. Both transform what they consume into something larger.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Creative Destruction</div>
+          Armillaria kills trees but creates forest clearings for new growth. NASA's creation killed NACA but launched the space age. The old form must end for the new to begin.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Documents</h2>
+      <ul>
+        <li><a href="research.md" style="color: var(--mycelium);">research.md</a> &mdash; Full mission research (NASA founding, NACA history, institutional DNA)</li>
+        <li><a href="organism.md" style="color: var(--honey);">organism.md</a> &mdash; Armillaria ostoyae deep research (ecology, discovery, PNW context)</li>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; 10 theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: #7EB8DA;">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">&larr; NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.1/index.html">v1.1 Pioneer 0 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Armillaria ostoyae (Honey Mushroom)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">3.5 mi&sup2;</div>
+          <div class="stat-label">Area</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">~35,000 t</div>
+          <div class="stat-label">Mass</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">~2,400 yr</div>
+          <div class="stat-label">Age</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Oregon</div>
+          <div class="stat-label">Location</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        Malheur National Forest, Blue Mountains, eastern Oregon. Discovered 1998 by Catherine Parks via DNA fingerprinting of 112 tree root samples. World's largest known organism.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://www.nasa.gov/history/">NASA History Office</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/">NSSDC Master Catalog</a>
+      <a href="https://www.nasa.gov/history/history-publications-and-resources/nasa-history-series/">NASA SP Series</a>
+      <a href="https://www.fs.usda.gov/pnw/">USFS PNW Research Station</a>
+      <a href="https://www.fs.usda.gov/detail/malheur/">Malheur National Forest</a>
+    </div>
+
+    <div class="card" style="background: rgba(11,61,145,0.1); border-color: rgba(11,61,145,0.3);">
+      <h3 style="font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        Organizational Theory &middot; Ecology &middot; Biology &middot; History &middot; Engineering &middot; Forestry &middot; Mathematics &middot; Economics &middot; Mycology &middot; Political Science
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(26,58,26,0.3);">
+      <h3 style="font-size: 0.9rem; color: var(--mycelium); margin-bottom: 0.5rem;">Catalog Position</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim);">
+        Mission 1 of 552 &middot; Epoch 1 (Early Space Age) &middot; October 1, 1958
+      </p>
+      <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">
+        <strong style="color: var(--mycelium-light);">Thesis:</strong> The hidden network. Every great endeavor begins with decades of invisible foundational work.
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &middot; <a href="https://tibsfox.com/Research/">tibsfox.com/Research</a> &middot; v1.0</p>
+  <p style="margin-top: 0.5rem;"><em>"The spaces between the missions are where the meaning lives."</em></p>
+</footer>
+
+</body>
+</html>
