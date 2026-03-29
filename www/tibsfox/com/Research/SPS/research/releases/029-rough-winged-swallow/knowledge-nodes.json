@@ -1,0 +1,262 @@
+{
+  "degree": 29,
+  "species": "Northern Rough-winged Swallow",
+  "scientific_name": "Stelgidopteryx serripennis",
+  "slug": "029-rough-winged-swallow",
+  "sound_type": "rough buzzy brrit",
+  "energy": 4,
+  "ecosystem": "river bank",
+  "season": "summer (arrives PNW mid-April to early May, departs by September, breeds along rivers and streams with exposed earth banks)",
+  "family": "Hirundinidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; sandy and gravelly river banks, road cuts, bridges, culverts, and eroding bluffs along rivers and streams throughout the Puget Sound lowlands -- wherever exposed earth faces create burrowing or crevice-nesting opportunities near flowing water."
+  },
+  "taxonomy_note": {
+    "description": "The Northern Rough-winged Swallow is the fourth Hirundinidae in the engine, the first non-liquid swallow, and the third swallow genus. Genus Stelgidopteryx from Greek stelgis (scraper) + pteryx (wing) = 'scraper-wing.' Species epithet serripennis from Latin serra (saw) + penna (feather) = 'saw-feathered.' Full binomial: 'the saw-feathered scraper-wing.' Both names refer to tiny hook-like serrations on the outermost primary feather -- a feature unique to this genus whose function remains unknown after nearly 200 years of study.",
+    "current_family": "Hirundinidae",
+    "new_family": false,
+    "family_count_in_engine": 16,
+    "hirundinidae_count_in_engine": 4,
+    "name_etymology": "Stelgidopteryx = Greek stelgis (a scraper, a tool for scraping) + pteryx (wing). The genus name means 'scraper-wing' -- the wing that scrapes. Serripennis = Latin serra (saw) + penna (feather), meaning 'saw-feathered.' Full translation: 'the saw-feathered scraper-wing.' Both genus and species names describe the same anatomical feature: serrated outer primary feather. The common name 'Rough-winged' completes the triple naming of one feature.",
+    "genus_note": "Stelgidopteryx contains 2 species: S. serripennis (Northern Rough-winged Swallow, North America) and S. ruficollis (Southern Rough-winged Swallow, Mexico to South America). Both bear the diagnostic serrated primary feather. This is the engine's third Hirundinidae genus after Progne (degree 26) and Tachycineta (degrees 27-28).",
+    "swallow_quartet": {
+      "degree_26": "Progne subis (Purple Martin) -- patriarch, large, colonial, liquid gurgle, stream",
+      "degree_27": "Tachycineta thalassina (Violet-green Swallow) -- cliff dweller, small, solitary, liquid twitter, rain",
+      "degree_28": "Tachycineta bicolor (Tree Swallow) -- centrist, medium, loosely colonial, liquid twittering gurgle, brook",
+      "degree_29": "Stelgidopteryx serripennis (Rough-winged Swallow) -- DISSENTER, small, solitary, rough buzzy brrit, sandpaper",
+      "status": "OPEN (degree 30 = Barn Swallow extends to quintet)",
+      "structure": "Three liquid voices + one dissenting voice. The trio was thesis-antithesis-synthesis. The quartet adds dissonance. The first three agree on timbre (liquid). The fourth disagrees (rough/buzzy). Internal family conflict."
+    },
+    "genus_naming_progression": {
+      "degree_26": "Progne -- named for myth (Procne), says nothing about the wing",
+      "degree_27_28": "Tachycineta -- named for behavior (swift-mover), describes how the wing moves",
+      "degree_29": "Stelgidopteryx -- named for structure (scraper-wing), describes the wing itself",
+      "principle": "Naming evolved from classical allusion to behavioral description to anatomical precision across the four swallow degrees"
+    }
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-6,000",
+    "peak_energy_band_hz": "3,000-5,000",
+    "call_duration_s": "0.2-0.5 per brrit",
+    "note_rate_per_second": "N/A (single compound note or 2-5 elements fully fused into one perceived event)",
+    "note_structure": "Broadband buzz -- rapidly modulated element with simultaneous fundamental and harmonic excitation. No clear pitch center. More noise than tone. Where liquid swallows produced frequency-modulated tones (clear pitch sweeps), the Rough-winged produces amplitude-modulated noise (energy fluctuations without clear pitch).",
+    "note_types": "Three primary: (1) Brrit -- the primary vocalization, a short rough buzzy note, often in loose series (brrit... brrit... brrit...) with variable spacing. The defining sound. (2) Seet -- thin, high-pitched contact note in flight. (3) Chatter -- rapid harsh series during aggressive encounters near burrow.",
+    "phrase_structure": "Simple. Among the most limited vocal repertoires of PNW swallows. No elaborate song. No dawn chorus. No sustained vocalizing. Brief buzzy bursts separated by silence. The opposite of the martin's rich, complex, continuous song.",
+    "timbre": "Rough, buzzy, harsh, dry. The opposite of liquid. The sound has the quality of something scraped or vibrated against a rough surface. Low spectral purity -- energy spread across many non-harmonic frequencies, creating noise rather than tone.",
+    "amplitude": "Moderate to low. Quieter than martin and Tree Swallow. Energy 4 reflects persistent repeated delivery rather than raw volume -- many brrits over a foraging bout maintaining steady acoustic presence despite low individual amplitude.",
+    "context": "Primarily in flight, near nesting bank, and during social interactions at roost sites. Less vocal than other swallows overall. The brrit is a contact call and mild alarm, not a territorial song. The least musical swallow in the engine.",
+    "key_property": "THE ROUGH BUZZY BRRIT -- the 30th acoustic element. FIRST non-liquid swallow sound. Breaks the liquid trilogy pattern. Noise-dominated rather than tone-dominated. Broadband buzz rather than frequency-modulated tone. The sound of sandpaper, not water. The family's timbral dissenter."
+  },
+  "liquid_pattern_break": {
+    "degrees_26_27_28": {
+      "common_quality": "liquid",
+      "sounds": ["liquid gurgle (stream)", "liquid twitter (rain)", "liquid twittering gurgle (brook)"],
+      "articulations": ["legato", "staccato", "mixed"],
+      "status": "COMPLETE -- full timbral exploration of liquid quality"
+    },
+    "degree_29": {
+      "quality": "rough/buzzy",
+      "sound": "rough buzzy brrit (sandpaper)",
+      "relationship_to_liquid": "ANTI-LIQUID. No shared timbral properties with the liquid trilogy. Introduces a second timbral axis within Hirundinidae.",
+      "structural_significance": "Proves the swallow family contains more timbral diversity than the liquid trilogy suggested. The family's acoustic space is two-dimensional (liquid/rough x articulation), not one-dimensional (liquid articulation only)."
+    }
+  },
+  "roughened_primary_mystery": {
+    "feature": "Tiny hook-like serrations on the outer edge of the outermost (first) primary feather",
+    "present_in": "Both species of Stelgidopteryx, both sexes, year-round, more pronounced in adults",
+    "function": "UNKNOWN",
+    "hypotheses": [
+      "Aerodynamic: modify airflow, reduce turbulence, improve lift at low speeds",
+      "Sound production: vibrations during flight producing the buzzy call quality",
+      "Mate assessment: age-dependent development as quality indicator",
+      "Parasite reduction: physical damage to feather mites",
+      "Vestigial: remnant of ancestral function no longer active",
+      "Multifunctional: multiple minor benefits maintaining the trait"
+    ],
+    "significance": "The entire nomenclature (genus, species, common name) is built on a feature whose purpose remains unexplained after nearly 200 years. The engine's first species named for an unsolved mystery. Naming is not understanding. Description is not explanation."
+  },
+  "burrowing_ecology": {
+    "nest_type": "Burrow in earth bank or crevice in structure",
+    "primary_sites": ["river cutbanks", "road cuts", "gravel pits", "bridge drainage holes", "culvert crevices"],
+    "appropriated_burrows": ["Belted Kingfisher", "Bank Swallow", "ground squirrel"],
+    "burrow_depth_cm": "30-60",
+    "burrow_diameter_cm": "4-5",
+    "colonial": false,
+    "significance": "FIRST below-surface nester in the engine. First species that depends on erosion (fluvial geomorphic disturbance) for habitat. The river bank exists because the river carved it. The swallow nests where the river excavated."
+  },
+  "plumage": {
+    "males": "Plain brown above, dingy whitish below with faintly dusky throat. No iridescence. No diagnostic marks. The most visually understated swallow in the PNW.",
+    "females": "Nearly identical to males. Minimal sexual dimorphism.",
+    "comparison": {
+      "purple_martin_26": "Iridescent purple-black (male). Dramatic.",
+      "violet_green_27": "Iridescent green + violet. White face + rump. Brilliant.",
+      "tree_swallow_28": "Iridescent blue-green above, white below. Elegant.",
+      "rough_winged_29": "Plain brown above, dingy whitish below. Drab. No iridescence. Identified by absence of marks."
+    },
+    "diagnostic_principle": "Identified by negation -- the swallow that is none of the others. No breast band (unlike Bank Swallow), no iridescence (unlike Tree/Violet-green), no large size (unlike martin)."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The rough buzzy brrit -- noise-dominated broadband buzz, the FIRST non-liquid swallow sound, breaking the liquid trilogy pattern (the sound of sandpaper, not water, the 30th acoustic element, the family's timbral dissenter)",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/rough-buzzy-brrit/",
+      "examples": [
+        "Rough-winged Swallow: broadband buzz at 2-6 kHz, no clear pitch center, amplitude-modulated noise. The brrit. Sandpaper.",
+        "Purple Martin (degree 26): continuous liquid gurgle, frequency-modulated tones. The stream.",
+        "Violet-green Swallow (degree 27): discrete liquid chips, clean tonal elements. The rain.",
+        "Tree Swallow (degree 28): semi-fused liquid notes at perceptual fusion threshold. The brook.",
+        "Degrees 26-28 = liquid (tonal, musical, flowing). Degree 29 = rough (noisy, non-musical, harsh). The liquid pattern shatters."
+      ],
+      "music_theory_parallel": "The rough buzzy brrit is to the liquid trilogy what a snare drum hit is to a string quartet: it introduces a timbral class (noise/percussion) that the existing ensemble (tonal/sustained) could not produce. In orchestration, the entry of unpitched percussion after a sustained melodic passage is one of the most disruptive timbral events possible. The Rough-winged Swallow IS the percussion entry after three movements of strings. The disruption is not random -- it reveals that the ensemble's timbral palette was incomplete. The strings thought they were the whole orchestra. The snare drum proves otherwise."
+    },
+    {
+      "concept": "The swallow quartet -- four consecutive Hirundinidae extending the trio to a quartet, three liquid voices plus one dissenting buzzy voice, introducing internal family timbral conflict (three agree on timbre, one objects)",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/swallow-quartet/",
+      "examples": [
+        "Degree 26 (Purple Martin): heavy, low, colonial, liquid. The patriarch.",
+        "Degree 27 (Violet-green Swallow): light, high, solitary, liquid. The cliff dweller.",
+        "Degree 28 (Tree Swallow): medium, moderate, flexible, liquid. The centrist.",
+        "Degree 29 (Rough-winged Swallow): small, quiet, solitary, ROUGH/BUZZY. The dissenter.",
+        "Trio structure was thesis-antithesis-synthesis (Hegelian). Quartet structure is consensus + dissent (democratic). Three liquid voices outvoted by one rough voice."
+      ],
+      "music_theory_parallel": "In a vocal quartet where three voices sing in consonance and one sings a dissonant note, the dissonance dominates perception. The human ear attends to deviation. The Rough-winged Swallow's buzzy brrit is the dissonant fourth voice in the swallow quartet -- it draws attention precisely because it breaks the pattern the first three established. In jazz harmony, the added dissonance of a seventh or ninth chord creates tension that a triad lacks. The trio was a triad. The quartet is a seventh chord. The Rough-winged Swallow is the seventh."
+    },
+    {
+      "concept": "The roughened primary mystery -- a feature that names the species at three taxonomic levels (genus, species, common name) whose function remains unknown after nearly 200 years (naming is not understanding, description is not explanation)",
+      "level": "intermediate",
+      "department": "ecology/morphology",
+      "college_path": ".college/ecology/morphology/roughened-primary/",
+      "examples": [
+        "Stelgidopteryx = scraper-wing (genus names the feature). Serripennis = saw-feathered (species names the feature). Rough-winged = common name names the feature. Triple naming, zero explanation.",
+        "Hypotheses: aerodynamic function, sound production, mate assessment, parasite reduction, vestigial, multifunctional. None confirmed.",
+        "Audubon described the serrations in 1838. Nearly 200 years later, the function is unknown. The longest-standing open question attached to any species in the engine.",
+        "Comparison: every other species name in the engine corresponds to something understood (bicolor = plumage, takhys-kineo = flight behavior). Serripennis = observed but unexplained."
+      ],
+      "music_theory_parallel": "The roughened primary is the unexplained ornament -- like a recurring grace note in a historical score whose performance practice has been lost. We can see it on the page. We can describe its shape. We cannot explain why the composer wrote it or how it was originally performed. The notation preserves the observation; the meaning has been lost. The Rough-winged Swallow carries a notation on its wing that ornithology has been reading for two centuries without comprehending. In music, some ornaments survive in transcription but their expressive intent is debated: were they emphatic? decorative? structural? The serrations survive on the feather. Their purpose is debated. The wing is an unresolved manuscript."
+    },
+    {
+      "concept": "Burrowing ecology -- the first below-surface nester in the engine, the first species dependent on erosion (fluvial geomorphic disturbance) for habitat, river bank excavation or appropriation of existing burrows",
+      "level": "intermediate",
+      "department": "ecology/nesting",
+      "college_path": ".college/ecology/nesting/burrowing/",
+      "examples": [
+        "Rough-winged Swallow: excavates burrows 30-60 cm deep in exposed sandy/gravelly river banks. Also uses road cuts, gravel pits, bridge drainage holes, culvert crevices, and appropriated kingfisher/Bank Swallow burrows.",
+        "Cavity nesting hierarchy in engine: wood excavation (flicker, 21-22) -> wood reuse (Tree Swallow, 28) -> earth excavation (Rough-winged, 29). Three substrates, three strategies.",
+        "The river bank exists because the river carved it. The swallow depends on erosion. Stable, vegetated banks are useless. The bird needs active geomorphic disturbance -- the ongoing destruction of land by water.",
+        "First below-grade ecosystem in the engine. Habitat defined by subtraction (erosion) not addition (growth)."
+      ],
+      "music_theory_parallel": "Burrowing into an earth bank is subtractive -- the bird removes material to create space, like a sculptor carving a form from stone. All previous cavity nesters in the engine worked with existing voids or created them in standing structures (trees, boxes). The Rough-winged Swallow creates its space by digging into the earth. In music, subtractive synthesis starts with a complex sound and removes frequencies to shape the desired timbre -- the opposite of additive synthesis, which builds up from simple components. The Rough-winged Swallow practices subtractive nesting: starting with a solid bank and removing earth to create the nest chamber. The habitat is the negative space. The burrow is the sound after filtering."
+    },
+    {
+      "concept": "Energy nonet -- ninth consecutive E=4 degrees (21-29) demonstrating sustained high energy across nine different acoustic textures (the plateau extends, the longest in engine history, still must break)",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-nonet/",
+      "examples": [
+        "Degrees 21-29: hammer, drum, groove reset, hoarse warble, caroling, liquid gurgle, liquid twitter, liquid twittering gurgle, rough buzzy brrit. Nine textures at sustained E=4.",
+        "The E=4 nonet: the longest energy plateau in engine history. Nine degrees. One-quarter of all degrees emitted. The plateau now spans both the liquid trilogy and the first non-liquid swallow sound.",
+        "In a symphony: a sustained fortissimo that has gone on for an entire movement. The audience has forgotten what piano sounds like. The dynamic range has collapsed to a single level.",
+        "MUST BREAK. Nine consecutive E=4 is unsustainable. The engine needs contrast. Up (E=5, never used) or down (E=2/E=3) -- either direction restores dynamic range."
+      ],
+      "music_theory_parallel": "Nine consecutive E=4 degrees is the engine's energy nonet. The plateau survived the liquid-to-rough timbral shift at degree 29 -- proving that the E=4 level is independent of timbral content. You can change everything about the sound (from liquid to buzzy, from musical to non-musical, from tonal to noisy) and the energy stays constant. This is the definition of a dynamic plateau: the loudness is fixed while everything else varies. In dynamics notation, nine consecutive measures at forte is not just a sustained dynamic -- it is a statement that this dynamic level is the default, the norm, the base state. Breaking it requires an explicit instruction (subito piano, sforzando, diminuendo). The engine has been at forte since degree 21. It has not received the instruction to change."
+    },
+    {
+      "concept": "The drab dissenter -- the first non-iridescent swallow in the engine, plain brown plumage in a family of iridescent species, identified by absence of marks (the un-swallow, the wallflower, the forgotten one)",
+      "level": "foundational",
+      "department": "ecology/plumage",
+      "college_path": ".college/ecology/plumage/drab-dissenter/",
+      "examples": [
+        "Three iridescent swallows (26-28): purple-black, green-violet, blue-green. Then brown (29). The iridescence streak breaks with the liquid streak.",
+        "Field identification by negation: no breast band (not Bank Swallow), no iridescence (not Tree/Violet-green), no large size (not martin). The bird is none of the others.",
+        "Least-studied, least-known, most inconspicuous PNW swallow. Common but cryptic. Present but unnoticed. The Tree Swallow's opposite on the research axis.",
+        "The quartet's visual outlier matches its acoustic outlier status. Non-liquid sound + non-iridescent plumage = the family's complete outsider."
+      ],
+      "music_theory_parallel": "In an ensemble of brass instruments, the muted trumpet is the one that sounds different -- softer, more nasal, less brilliant. The Rough-winged Swallow is the muted swallow: same family, reduced brilliance, altered timbre. The mute changes everything about how the instrument sounds while keeping the fundamental mechanism (lips buzzing in a tube / syrinx vibrating in a throat) the same. The Rough-winged Swallow's drab plumage and buzzy call are the mute: same swallow body plan, reduced visual and acoustic brilliance. The muted member of the quartet."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-026",
+      "title": "Purple Martin (Degree 26)",
+      "connection": "SWALLOW QUARTET MEMBER 1. Maximum timbral contrast: liquid gurgle (26) vs. rough buzzy brrit (29). The first and fourth swallows share nothing acoustically. The family's internal variation is wider than the trio suggested."
+    },
+    {
+      "project": "SPS-027",
+      "title": "Violet-green Swallow (Degree 27)",
+      "connection": "SWALLOW QUARTET MEMBER 2. Closest in mass (14 g vs. 14-18 g) and sociality (solitary/paired). But acoustically opposite: crystalline liquid twitter vs. harsh buzzy brrit. The family's two smallest members sound the most different."
+    },
+    {
+      "project": "SPS-028",
+      "title": "Tree Swallow (Degree 28)",
+      "connection": "SWALLOW QUARTET MEMBER 3. Most-studied swallow (28) followed by least-studied (29). Liquid trilogy resolution (28) followed by liquid pattern destruction (29). Berry generalist (28) followed by obligate insectivore (29). Maximum research axis contrast."
+    },
+    {
+      "project": "SPS-012",
+      "title": "Pine Siskin (Degree 12)",
+      "connection": "NOISE CLASS COMPARISON. Pine Siskin's rising zhreee (degree 12) was the engine's first noise-dominated sound. Rough-winged's brrit is the second. Both use broadband energy rather than clear pitch. Seventeen degrees apart, noise returns."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker -- Voice (Degree 21)",
+      "connection": "CAVITY ECONOMY EXTENDED FURTHER. Flicker excavates wood cavities (21-22). Tree Swallow reuses them (28). Rough-winged excavates earth burrows (29). Three substrates (wood, wood reuse, earth), three nesting strategies, spanning 9 degrees."
+    },
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "FAMILY RUN COMPARISON. Parulidae: 5 species across 7 degrees with 1 gap. Hirundinidae at 4 species: 4 degrees, 0 gaps. The swallow run is denser. Degree 30 may match the warbler count in fewer degrees."
+    },
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "RECOGNIZABILITY CONTRAST. The robin is universally known (25). The Rough-winged Swallow is nearly unknown to the public (29). Four degrees apart, recognition swings from maximum to minimum."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Northern Rough-winged Swallow documented as common breeder along rivers and streams. Burrowing nesting ecology, river bank habitat requirements."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Riparian zone ecosystems. Fluvial geomorphology creating nesting habitat through erosion. River corridor ecology."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Ivan 'Boogaloo Joe' Jones (Jazz/Funk, E=4, Prestige Records, Seattle). The rough groove. Funk guitar -- texture over melody, grain over polish. Ninth consecutive E=4."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 28,
+    "total_entries": 30,
+    "families_represented": 16,
+    "largest_families": {
+      "Turdidae": 5,
+      "Parulidae": 5,
+      "Hirundinidae": 4,
+      "Paridae": 2,
+      "Cardinalidae": 2
+    },
+    "energy_plateau": "E=4 for 9 consecutive degrees (21-29) -- MUST BREAK",
+    "passeriformes_streak": "7 consecutive (23-29) -- MUST BREAK",
+    "hirundinidae_streak": "4 consecutive (26-29) -- degree 30 extends to 5",
+    "liquid_pattern": "BROKEN at degree 29 (rough buzzy brrit is non-liquid)",
+    "swallow_quartet": "OPEN (degrees 26-29, 4 species, 3 genera, degree 30 = Barn Swallow makes quintet)",
+    "same_genus_pairs": ["Catharus (18-19)", "Tachycineta (27-28)"],
+    "critical_gaps": [
+      "No marine/shoreline species in 29 degrees of 'The Sound of Puget Sound'",
+      "No corvid (Steller's Jay, crow, raven)",
+      "No raptor (Accipitridae, Falconidae)",
+      "No nocturnal species since degree 4 (25 degrees ago)",
+      "E=5 never used",
+      "Seven consecutive Passeriformes",
+      "Four consecutive Hirundinidae (five at degree 30)"
+    ]
+  }
+}
