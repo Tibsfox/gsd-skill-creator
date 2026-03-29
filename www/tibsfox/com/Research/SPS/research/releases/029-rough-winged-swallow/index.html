@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 29&deg; &mdash; Northern Rough-winged Swallow &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.brrit { background: #795548; }
+    .theory-icon.quartet { background: #7B1FA2; }
+    .theory-icon.mystery { background: #FF6F00; }
+    .theory-icon.burrow { background: #2E7D32; }
+    .theory-icon.energy { background: #00695C; }
+    .theory-icon.drab { background: #9E9E9E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Dissenter card -- the liquid pattern break */
+    .dissenter-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #795548;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dissenter-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Quartet card */
+    .quartet-card {
+      background: linear-gradient(135deg, #EDE7F6 0%, #B39DDB 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .quartet-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Mystery card */
+    .mystery-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFE082 100%);
+      border: 1px solid #FFA000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .mystery-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Burrow card */
+    .burrow-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #43A047;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .burrow-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">29&deg;</div>
+      <div class="release-title-block">
+        <h2>Northern Rough-winged Swallow</h2>
+        <div class="scientific">Stelgidopteryx serripennis &middot; Family Hirundinidae (Swallows) &middot; Fourth Swallow &mdash; The Dissenter</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Rough Buzzy Brrit &middot; River Bank &middot; Summer &middot; Energy 4</div>
+
+    <blockquote>
+      Along the river, where the cutbank drops to the water and a round hole
+      opens into darkness, a small brown bird emerges. Not iridescent. Not
+      musical. Not liquid. It lifts into the air and from it comes a short,
+      rough, buzzy exhalation &mdash; <em>brrit</em>. Like a playing card
+      dragged across a comb. The saw-feathered scraper-wing. The fourth
+      Hirundinidae. The dissenter who refused to sound like water. The liquid
+      trilogy was complete. The Rough-winged Swallow said: no. Not liquid.
+      Rough. Buzzy. Sandpaper, not water.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Dissenter Card: Liquid Pattern Break -->
+        <div class="dissenter-card">
+          <h3>The Liquid Pattern Shatters (Degree 29)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degrees 26&ndash;28 established a <strong>liquid trilogy</strong>:
+            stream (legato) &rarr; rain (staccato) &rarr; brook (mixed). Three
+            liquid sounds in three degrees. Degree 29 breaks the pattern.
+            The Rough-winged Swallow produces a <strong>rough buzzy brrit</strong>
+            &mdash; harsh, dry, noisy. Not liquid. The family contains a
+            <strong>second timbral axis</strong> (rough/buzzy) that the trio
+            did not explore. The swallow acoustic space is two-dimensional, not one.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Sound</th><th>Quality</th><th>Metaphor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>26</td><td>Purple Martin</td><td>Liquid gurgle</td><td>Tonal, musical</td><td>Stream</td></tr>
+              <tr><td>27</td><td>Violet-green Swallow</td><td>Liquid twitter</td><td>Tonal, musical</td><td>Rain</td></tr>
+              <tr><td>28</td><td>Tree Swallow</td><td>Liquid twittering gurgle</td><td>Tonal, musical</td><td>Brook</td></tr>
+              <tr style="background: rgba(121,85,72,0.15); font-weight: 600;"><td>29</td><td>Rough-winged Swallow</td><td><strong>Rough buzzy brrit</strong></td><td><strong>Noisy, non-musical</strong></td><td><strong>Sandpaper</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Quartet Card -->
+        <div class="quartet-card">
+          <h3>Swallow Quartet (Degrees 26&ndash;29)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The swallow trio (26&ndash;28) was thesis-antithesis-synthesis.
+            Degree 29 adds a <strong>dissenting fourth voice</strong>. Three
+            liquid voices + one buzzy voice = consensus + dissent. The quartet
+            is a seventh chord where the trio was a triad. The Rough-winged
+            Swallow adds dissonance, friction, and a second timbral dimension.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Dimension</th><th>Martin (26)</th><th>Violet-green (27)</th><th>Tree (28)</th><th style="background: rgba(121,85,72,0.15);">Rough-winged (29)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mass</td><td>45&ndash;60 g</td><td>14 g</td><td>17&ndash;25 g</td><td style="background: rgba(121,85,72,0.08);"><strong>14&ndash;18 g</strong></td></tr>
+              <tr><td>Sound</td><td>Liquid gurgle</td><td>Liquid twitter</td><td>Liquid twittering gurgle</td><td style="background: rgba(121,85,72,0.08);"><strong>Rough buzzy brrit</strong></td></tr>
+              <tr><td>Nest type</td><td>Nest box</td><td>Natural cavity</td><td>Box + cavity</td><td style="background: rgba(121,85,72,0.08);"><strong>Burrow / crevice</strong></td></tr>
+              <tr><td>Plumage</td><td>Iridescent purple</td><td>Iridescent green</td><td>Iridescent blue-green</td><td style="background: rgba(121,85,72,0.08);"><strong>Drab brown</strong></td></tr>
+              <tr><td>Coloniality</td><td>Obligate colonial</td><td>Solitary/paired</td><td>Loosely colonial</td><td style="background: rgba(121,85,72,0.08);"><strong>Solitary/loose</strong></td></tr>
+              <tr style="background: rgba(121,85,72,0.15); font-weight: 600;"><td>Role</td><td>PATRIARCH</td><td>CLIFF DWELLER</td><td>CENTRIST</td><td><strong>DISSENTER</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: Rough Buzzy Brrit</h2>
+        <p>
+          The Rough-winged Swallow&rsquo;s vocalization is a <strong>rough buzzy
+          brrit</strong> &mdash; a short, harsh, broadband buzz with no clear pitch
+          center. Noise-dominated rather than tone-dominated. The opposite of the
+          liquid sounds at degrees 26&ndash;28. Where the liquid swallows produced
+          frequency-modulated tones, the Rough-winged produces amplitude-modulated
+          noise. Tone vs. noise. Water vs. sandpaper.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>2.0&ndash;6.0 kHz (narrower, lower than other swallows)</td></tr>
+            <tr><td>Peak energy</td><td>3.0&ndash;5.0 kHz (narrow, dense, focused)</td></tr>
+            <tr><td>Call duration</td><td>0.2&ndash;0.5 seconds per brrit (very short)</td></tr>
+            <tr><td>Note structure</td><td>Broadband buzz &mdash; rapidly modulated, no clear pitch</td></tr>
+            <tr><td>Phrase types</td><td>Brrit (primary) + seet (contact) + chatter (aggression)</td></tr>
+            <tr><td>Timbre</td><td>Rough, buzzy, harsh, dry &mdash; the opposite of liquid</td></tr>
+            <tr><td>Amplitude</td><td>Moderate to low &mdash; persistent delivery, not loud</td></tr>
+            <tr><td>Context</td><td>In flight, near nesting bank &mdash; contact call and mild alarm</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>The 30th acoustic element.</strong> After three consecutive liquid
+          elements (stream, rain, brook), the engine adds its first noise-dominated
+          element since degree 12 (Pine Siskin). The engine reintroduces broadband
+          noise after thirteen degrees in the tonal-to-liquid zone.
+        </p>
+
+        <!-- Mystery Card -->
+        <div class="mystery-card">
+          <h3>The Roughened Primary: An Unsolved Mystery</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The species is named <strong>three times</strong> for one feature:
+            <em>Stelgidopteryx</em> (scraper-wing), <em>serripennis</em>
+            (saw-feathered), Rough-winged (common name). All describe tiny
+            hook-like <strong>serrations on the outermost primary feather</strong>.
+            The feature is unique to this genus. Present in both sexes, year-round,
+            more pronounced with age. <strong>Function: UNKNOWN</strong> after
+            nearly 200 years. Hypotheses include aerodynamic benefit, sound
+            production, mate assessment, parasite reduction, vestigial trait.
+            None confirmed. The engine&rsquo;s first species named for an
+            unexplained feature. Naming is not understanding.
+          </p>
+        </div>
+
+        <!-- Burrow Card -->
+        <div class="burrow-card">
+          <h3>Burrowing Ecology: The First Below-Surface Nester</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Every previous cavity nester used above-ground structures (trees,
+            nest boxes, cliffs). The Rough-winged Swallow nests in <strong>burrows
+            excavated into earth banks</strong> &mdash; river cutbanks, road cuts,
+            gravel pits, bridge drainage holes, culvert crevices. The first
+            below-surface nester in the engine. The bird depends on
+            <strong>erosion</strong> for habitat: actively eroding river banks
+            expose the soft earth it needs. The ecosystem is created by destruction,
+            not growth. The cavity economy now spans three substrates:
+            wood excavation (flicker) &rarr; wood reuse (Tree Swallow) &rarr;
+            <strong>earth excavation (Rough-winged Swallow)</strong>.
+          </p>
+        </div>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy: Stelgidopteryx serripennis</h2>
+        <p>
+          <em>Stelgidopteryx</em>: Greek <em>stelgis</em> (scraper) + <em>pteryx</em>
+          (wing) &mdash; &ldquo;scraper-wing.&rdquo; <em>Serripennis</em>: Latin
+          <em>serra</em> (saw) + <em>penna</em> (feather) &mdash; &ldquo;saw-feathered.&rdquo;
+          The full binomial: <strong>&ldquo;the saw-feathered scraper-wing.&rdquo;</strong>
+          The <strong>third Hirundinidae genus</strong> in the engine, after
+          <em>Progne</em> (mythology) and <em>Tachycineta</em> (behavior).
+          Genus names trace an evolution: classical allusion &rarr; kinematics &rarr;
+          morphology. Each genus is more literally about the wing than the last.
+        </p>
+        <p>
+          <strong>Fourth Hirundinidae.</strong> The swallow family now holds four species
+          in four consecutive degrees &mdash; closing in on Turdidae and Parulidae (5 each).
+          Degree 30 (Barn Swallow) makes five: the densest family representation
+          in the engine.
+        </p>
+
+        <!-- Ecosystem -->
+        <h2>Ecosystem: River Bank</h2>
+        <p>
+          Sandy and gravelly river cutbanks, road cuts, bridges, culverts, gravel
+          pits &mdash; wherever exposed earth faces exist near flowing water. The
+          first <strong>below-grade ecosystem</strong> in the engine, created by
+          fluvial erosion rather than biological growth. The swallow quartet&rsquo;s
+          ecosystems descend: sky (martin, 15&ndash;150+ m) &rarr; cliff/water
+          (Violet-green, 5&ndash;100 m) &rarr; field/water (Tree Swallow, 1&ndash;30 m)
+          &rarr; <strong>bank face (Rough-winged, 0&ndash;5 m)</strong>. Four elevations,
+          four foraging zones, four vertical niches.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon brrit">R</div>
+            <div class="theory-content">
+              <h4>The Rough Buzzy Brrit &mdash; Sandpaper</h4>
+              <p>Noise-dominated broadband buzz. FIRST non-liquid swallow sound. Breaks the liquid trilogy pattern. Tone vs. noise. Water vs. sandpaper. The 30th acoustic element. The family&rsquo;s timbral dissenter.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon quartet">Q</div>
+            <div class="theory-content">
+              <h4>Swallow Quartet &mdash; Consensus Plus Dissent</h4>
+              <p>Four consecutive Hirundinidae. Three liquid voices + one buzzy voice. The trio was a triad. The quartet is a seventh chord. The dissenter adds friction, dissonance, and a second timbral dimension to the family group.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mystery">?</div>
+            <div class="theory-content">
+              <h4>The Roughened Primary Mystery</h4>
+              <p>Named three times (genus, species, common name) for serrated outer primary feather whose function is unknown after ~200 years. The engine&rsquo;s first epistemological lesson: naming is not understanding.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon burrow">B</div>
+            <div class="theory-content">
+              <h4>Burrowing Ecology &mdash; Below-Surface Nesting</h4>
+              <p>First below-surface nester. Earth bank excavation. Depends on erosion for habitat. Cavity economy: wood excavation (flicker) &rarr; wood reuse (Tree Swallow) &rarr; earth excavation (Rough-winged).</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>Energy Nonet: Ninth Consecutive E=4</h4>
+              <p>Degrees 21&ndash;29: nine textures at E=4. The plateau survived the liquid-to-rough shift. Quarter of all degrees at one dynamic level. The longest plateau in engine history. MUST break.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon drab">D</div>
+            <div class="theory-content">
+              <h4>The Drab Dissenter &mdash; The Un-Swallow</h4>
+              <p>First non-iridescent swallow. Plain brown. Identified by absence of marks. Non-liquid, non-musical, non-iridescent, understudied, unknown. The family&rsquo;s wallflower. The overlooked member honored with a full degree.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-026: Purple Martin</strong>
+            <p>QUARTET MEMBER 1. Maximum timbral contrast: liquid gurgle vs. rough buzzy brrit. First and fourth swallows share nothing acoustically. The family is wider than the trio suggested.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-027: Violet-green Swallow</strong>
+            <p>QUARTET MEMBER 2. Closest in mass (14 g vs. 14&ndash;18 g). Acoustically opposite: crystalline liquid twitter vs. harsh buzzy brrit. Smallest members, biggest timbral gap.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-028: Tree Swallow</strong>
+            <p>QUARTET MEMBER 3. Most-studied (28) to least-studied (29). Liquid resolution (28) to liquid destruction (29). Berry generalist (28) to obligate insectivore (29).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>NOISE CLASS. The engine&rsquo;s first noise-dominated sound (12: rising zhreee). The brrit is the second. Both broadband, both harsh. Seventeen degrees apart, noise returns.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021/022: Northern Flicker</strong>
+            <p>CAVITY ECONOMY. Wood excavation (21&ndash;22) &rarr; wood reuse (28) &rarr; earth excavation (29). Three substrates, three strategies across 9 degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014&ndash;020: Warbler Quintet</strong>
+            <p>FAMILY RUN COMPARISON. Parulidae: 5 species, 7 degrees, 1 gap. Hirundinidae at 4: 4 degrees, 0 gaps. Degree 30 matches count in fewer degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>RECOGNIZABILITY. Robin universally known (25). Rough-winged nearly unknown to public (29). Recognition swings from maximum to minimum in 4 degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Rough-winged Swallow: common breeder along rivers and streams. Burrowing nesting ecology, bank habitat requirements.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Riparian zone ecosystems. Fluvial geomorphology and bank erosion creating nesting habitat. River corridor ecology.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A: Ivan &ldquo;Boogaloo Joe&rdquo; Jones (Jazz/Funk, E=4, Prestige, Seattle). Rough groove. Texture over melody. Ninth consecutive E=4.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>De Jong, M.J. (1996). Northern Rough-winged Swallow (<em>Stelgidopteryx serripennis</em>). <em>Birds of North America</em> No. 234. Cornell Lab.</li>
+          <li>Turner, A. and Rose, C. (1989). <em>A Handbook to the Swallows and Martins of the World</em>. Christopher Helm.</li>
+          <li>Lunk, W.A. (1962). The Rough-winged Swallow: Breeding Biology in Michigan. <em>Nuttall Ornithological Club</em> No. 4.</li>
+          <li>Garrison, B.A. (1999). Bank Swallow (<em>Riparia riparia</em>). <em>Birds of North America</em> No. 414. Cornell Lab.</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song</em>. 2nd ed. Cambridge University Press.</li>
+          <li>Macaulay Library. Northern Rough-winged Swallow recordings. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon). Northern Rough-winged Swallow. birdweb.org</li>
+          <li>Partners in Flight (2020). Population estimates. partnersinflight.org</li>
+          <li>Pyle, P. (1997). <em>Identification Guide to North American Birds, Part 1</em>. Slate Creek Press.</li>
+          <li>Winkler, D.W., Billerman, S.M., and Lovette, I.J. (2020). Swallows and Martins (Hirundinidae). <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>. 2nd ed. Knopf.</li>
+          <li>Ridgway, R. (1904). <em>Birds of North and Middle America</em>. U.S. National Museum Bulletin 50, Part 3.</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">29&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Hirundinidae</div>
+          <div class="stat-detail">Fourth swallow &mdash; quartet open</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Stelgidopteryx</div>
+          <div class="stat-detail">Third swallow genus (scraper-wing)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Rough Buzzy Brrit</div>
+          <div class="stat-detail">NON-LIQUID &mdash; breaks liquid trilogy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Ninth consecutive E=4 (degrees 21&ndash;29)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">River Bank</div>
+          <div class="stat-detail">First below-grade ecosystem</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Arrives mid-April, departs September</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">2.0&ndash;6.0 kHz</div>
+          <div class="stat-detail">Peak 3.0&ndash;5.0 kHz &mdash; narrow, dense</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">14&ndash;18 g</div>
+          <div class="stat-detail">Small &mdash; close to Violet-green</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Drab Brown</div>
+          <div class="stat-detail">No iridescence &mdash; first plain swallow</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Burrow / Crevice</div>
+          <div class="stat-detail">Earth bank, bridge, culvert</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Primary Mystery</div>
+          <div class="stat-value">Serrated Feather</div>
+          <div class="stat-detail">Function unknown after ~200 years</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Swallow Run</div>
+          <div class="stat-value">4 of 5</div>
+          <div class="stat-detail">Degrees 26&ndash;29 &mdash; deg 30 = Barn Swallow</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 29 &mdash; S36</div>
+          <div class="parallel-name">Ivan &ldquo;Boogaloo Joe&rdquo; Jones</div>
+          <div class="parallel-detail">Jazz/Funk &middot; E=4 &middot; Prestige &middot; Seattle</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            The rough groove. Texture over melody. Grain over
+            polish. Ninth consecutive E=4. The swallow quartet&rsquo;s dissenter.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 29&deg; of 360&deg; &mdash; v1.49.165</p>
+  </footer>
+</body>
+</html>
