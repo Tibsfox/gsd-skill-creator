@@ -1,0 +1,431 @@
+{
+  "degree": 19,
+  "species": "Veery",
+  "scientific_name": "Catharus fuscescens",
+  "sound_type": "downward spiraling veer-veer",
+  "energy": 3,
+  "ecosystem": "lowland riparian",
+  "season": "summer (neotropical migrant -- arrives late May, departs August)",
+  "family": "Turdidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds across the northern US and southern Canada. The PNW represents the western edge of the breeding range -- uncommon in Washington, primarily in eastern-slope river valleys and sporadically in moist lowland corridors west of the Cascades."
+  },
+  "physical": {
+    "length_in": "6.5-7.5",
+    "wingspan_in": "11-12",
+    "weight_g": "26-54"
+  },
+  "plumage": {
+    "overall": "Uniform warm cinnamon-brown to tawny upperparts -- the warmest-toned of the three Catharus in the engine. Pale underparts with faint, blurred breast spots concentrated on upper breast and fading quickly. Minimal markings overall.",
+    "head": "Relatively plain face -- no bold eyering (unlike Swainson's 'spectacles'), no strong facial markings. Faint, indistinct eyering. The plainest-faced Catharus in the engine.",
+    "body": "Warm cinnamon-brown upperparts, uniform without contrast. Breast spots faint and blurred, far less conspicuous than the bold spots of the Hermit Thrush or the smudged chevrons of the Swainson's Thrush.",
+    "tail": "Same warm cinnamon-brown as back -- no rufous contrast (unlike the Hermit Thrush's diagnostic rufous tail)",
+    "bill": "Thin, slightly decurved -- typical Catharus thrush bill. Similar to the other two Catharus species.",
+    "legs": "Pink to flesh-colored",
+    "diagnostic_visual": "Warm cinnamon-brown overall with minimal breast spotting. No bold eyering (distinguishes from Swainson's), no rufous tail contrast (distinguishes from Hermit). The least marked, warmest-toned of the three Catharus."
+  },
+  "frequency_range": {
+    "full_range_hz": "1500-4500 (across descending phrase sequence)",
+    "starting_pitch_hz": "3000-4500 (first phrase, highest in sequence)",
+    "terminal_pitch_hz": "1500-2500 (final phrase, lowest in sequence)",
+    "register": "Upper-mid to mid (1.5-4.5 kHz -- the descending range sweeps from upper register down into mid-range)"
+  },
+  "vocalization_metrics": {
+    "primary_song": {
+      "name": "Descending spiral -- downward-spiraling reedy veer-veer-veer",
+      "phrase_duration_s": "0.5-1.5",
+      "inter_phrase_interval_s": "0.2-0.8 (tighter than Swainson's Thrush)",
+      "phrases_per_song": "3-6 descending phrases per bout",
+      "song_duration_s": "2-5 (full descending sequence -- shorter and more compact than Swainson's)",
+      "phrase_contour": "Each phrase contains rapid internal modulation creating reedy, shimmering quality; successive phrases descend in pitch",
+      "timbre": "Reedy, ethereal, shimmering -- the 'underwater' or 'dreamy' quality. Created by bilateral syrinx polyphony producing beat frequencies (chorus effect). Most ethereal voice in North American birdsong.",
+      "calling_period": "Dusk and dawn, with strong dusk bias similar to Swainson's Thrush",
+      "key_property": "DESCENDING PITCH TRAJECTORY -- each successive phrase lower than the last, creating a descending spiral staircase in sound. Mirror image of the Swainson's Thrush ascending spiral.",
+      "key_property_2": "BILATERAL SYRINX CHORUS EFFECT -- two simultaneous tones from left and right syrinx halves create beat frequencies that produce the characteristic ethereal shimmer. Same mechanism as Pacific Wren (degree 1) but used for atmospheric texture rather than melodic complexity."
+    },
+    "call": {
+      "name": "Veer call",
+      "description": "Descending 'veer' -- the call that gives the bird its name. Onomatopoeic. Also a sharp, descending 'phew' contact call.",
+      "frequency_hz": "2500-5000"
+    },
+    "night_flight_call": {
+      "name": "Descending buzz/veer",
+      "description": "Short, buzzy, descending call given during nocturnal migration. Less commonly detected than Swainson's Thrush night flight calls in the PNW due to lower population.",
+      "frequency_hz": "2000-4000"
+    }
+  },
+  "bilateral_syrinx": {
+    "mechanism": "Two independent sound-producing units (left and right bronchial halves) produce simultaneous tones at slightly different frequencies. The small frequency difference creates beat frequencies -- periodic amplitude fluctuations perceived as shimmering or wavering.",
+    "comparison_with_pacific_wren": {
+      "species": "Pacific Wren",
+      "degree": 1,
+      "wren_use": "Two independent MELODIC LINES -- bilateral polyphony for information density. Two interleaved voices create a cascade of 100 notes in 10 seconds. Musical analogy: two-part counterpoint (Bach fugue).",
+      "veery_use": "Two CLOSELY-SPACED TONES -- bilateral polyphony for atmospheric shimmer. Beat frequencies from the small interval between left and right tones create ethereal, 'underwater' quality. Musical analogy: chorus pedal (Roland CE-1, 1976).",
+      "principle": "Same bilateral syrinx organ, opposite applications. The Pacific Wren maximizes information density (complexity). The Veery maximizes atmospheric texture (shimmer). One is a virtuoso soloist playing two lines at once. The other is a single voice wrapped in reverb."
+    },
+    "chorus_effect_physics": {
+      "mechanism": "When two tones of slightly different frequency are sounded together, they produce periodic amplitude fluctuations at the difference frequency (beat frequency). 2 Hz difference = 2 beats/second (slow pulsation). 10 Hz = rapid shimmer.",
+      "technological_parallel": "Identical to the chorus effect in audio engineering. A chorus pedal duplicates a signal, detunes the copy by a few cents, and mixes the original and copy. The slight frequency difference creates interference patterns -- beat frequencies -- producing a shimmering, thickened, spacious sound.",
+      "dynamic_control": "The Veery modulates the frequency difference between its two syrinx halves dynamically within and between phrases, controlling the rate of shimmer as a musical parameter. The bird is mixing its own chorus effect in real time."
+    }
+  },
+  "catharus_triptych": {
+    "principle": "Three Catharus thrushes map the three fundamental pitch directions in music: static (harmonic/vertical), ascending (melodic/upward), descending (melodic/downward). These three directions exhaust the possibilities -- there are no other directions pitch can go. The genus named 'pure' maps the complete pitch space of music.",
+    "hermit_thrush": {
+      "degree": 7,
+      "strategy": "Harmonic series navigation -- notes within phrases follow overtone ratios (Doolittle & Brumm 2014). VERTICAL pitch organization.",
+      "pitch_direction": "STATIC -- the phrase ascends then descends (arch form), returning to its starting point. Net directional motion: zero.",
+      "musical_function": "Harmony -- the chord. Establishing a harmonic center.",
+      "analogy": "The NOUN -- the thing itself"
+    },
+    "swainsons_thrush": {
+      "degree": 18,
+      "strategy": "Ascending sequential phrases -- each phrase higher than the last. HORIZONTAL pitch organization (upward).",
+      "pitch_direction": "ASCENDING -- the trajectory goes up, phrase by phrase. Unresolved.",
+      "musical_function": "Tension -- the question. Departure, aspiration, reaching.",
+      "analogy": "The VERB of departure -- ascending, going out"
+    },
+    "veery": {
+      "degree": 19,
+      "strategy": "Descending sequential phrases -- each phrase lower than the last. HORIZONTAL pitch organization (downward). Plus bilateral syrinx chorus effect.",
+      "pitch_direction": "DESCENDING -- the trajectory goes down, phrase by phrase. Resolved.",
+      "musical_function": "Resolution -- the answer. Arrival, homecoming, release.",
+      "analogy": "The VERB of return -- descending, coming home"
+    },
+    "completeness": "Static + ascending + descending = all possible pitch directions. The triptych is not merely complete -- it is CLOSED. Every melody in every tradition can be decomposed into these three motions: staying, rising, falling."
+  },
+  "matched_pair": {
+    "ascending": {
+      "species": "Swainson's Thrush",
+      "degree": 18,
+      "direction": "UPWARD -- each phrase higher than the last",
+      "emotional_content": "Aspiration, hope, tension, reaching, departure",
+      "musical_function": "Question, half cadence, unresolved tension"
+    },
+    "descending": {
+      "species": "Veery",
+      "degree": 19,
+      "direction": "DOWNWARD -- each phrase lower than the last",
+      "emotional_content": "Resolution, settling, homecoming, release, arrival",
+      "musical_function": "Answer, authentic cadence, resolved tension"
+    },
+    "principle": "Adjacent degrees (18 and 19), both Catharus, opposite spirals. The most fundamental pairing in tonal music: tension and resolution, question and answer. Degrees 18-19 enact the oldest story in music: you go out, and then you come home."
+  },
+  "theory_nodes": [
+    {
+      "concept": "Descending sequence (each phrase transposed downward -- the spiral staircase descending, resolution as compositional device)",
+      "level": "foundational",
+      "department": "music-theory/melody",
+      "college_path": ".college/music/theory/melody/descending-sequence/",
+      "examples": [
+        "The Veery's song: each phrase pitched lower than the last, creating a directional trajectory that descends through pitch space",
+        "The lamento bass / descending ground bass: chromatic descent as grief, loss, settling -- baroque passacaglia tradition",
+        "The blues turnaround: V chord descending back to I in the final two bars -- coming home",
+        "Debussy's descending whole-tone passages: cascading descents creating the same dreamy, underwater quality as the Veery's song"
+      ],
+      "music_theory_parallel": "The descending sequence is the mirror of the ascending sequence. Where ascending motion builds tension (degree 18), descending motion resolves it. Descending pitch in vocal communication implies closure, completion, arrival. A falling inflection is a statement. A falling melody is resolved tension. The Veery's descending song IS resolution -- the same compositional device, evolved independently in a biological system."
+    },
+    {
+      "concept": "Bilateral syrinx as chorus effect (two closely-spaced tones creating beat frequencies -- the biological chorus pedal)",
+      "level": "intermediate",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/chorus-effect/",
+      "examples": [
+        "The Veery's ethereal shimmer: two syrinx halves produce slightly different frequencies, creating beat frequencies perceived as shimmering",
+        "Guitar chorus pedal (Roland CE-1, 1976): duplicates signal, detunes copy, mixes -- identical physics to the Veery's syrinx",
+        "Pacific Wren (degree 1): same bilateral syrinx, different purpose -- complexity (two independent melodies) vs. atmosphere (two closely-spaced tones)",
+        "Synthesizer chorus/ensemble effects: multiple detuned oscillators creating richness through beat frequencies"
+      ],
+      "music_theory_parallel": "The chorus effect is created when two voices of slightly different frequency are combined. The frequency difference produces beat frequencies -- periodic amplitude fluctuations perceived as shimmer. The Veery's bilateral syrinx does this naturally: left and right halves produce tones separated by a few hertz, creating the ethereal quality that makes the Veery's song sound 'underwater' or 'dreamy.' This is identical to the chorus pedal in audio engineering. The Veery IS a biological chorus processor."
+    },
+    {
+      "concept": "The Catharus triptych (three species, three pitch directions: static, ascending, descending -- the complete pitch space of music)",
+      "level": "advanced",
+      "department": "music-theory/analysis",
+      "college_path": ".college/music/theory/analysis/catharus-triptych/",
+      "examples": [
+        "Hermit Thrush (degree 7): STATIC -- harmonic series navigation, arch form, net motion zero. The chord.",
+        "Swainson's Thrush (degree 18): ASCENDING -- sequential phrase ascent, each higher. Tension, the question.",
+        "Veery (degree 19): DESCENDING -- sequential phrase descent, each lower. Resolution, the answer.",
+        "These three directions exhaust the possibilities. Every melody = combinations of staying, rising, falling."
+      ],
+      "music_theory_parallel": "The three fundamental pitch directions in music are: static (holding), ascending (rising), and descending (falling). These are the complete set -- there are no other directions pitch can go. The Catharus genus contains one representative of each: Hermit Thrush (static/harmonic), Swainson's Thrush (ascending/tension), Veery (descending/resolution). The genus named 'pure' maps the complete pitch space of music through three biological voices. The triptych is closed."
+    },
+    {
+      "concept": "Tension-resolution pair (ascending + descending spirals at adjacent degrees -- the question and the answer)",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/tension-resolution/",
+      "examples": [
+        "Degrees 18-19: Swainson's ascends (question, half cadence) then Veery descends (answer, authentic cadence)",
+        "Call and response: the oldest musical dialogue structure -- one phrase poses, the other resolves",
+        "Sonata form: exposition (departure) leads to recapitulation (homecoming) -- the same going-out-and-coming-home arc",
+        "The blues: I-IV-V-I progression rises in tension then resolves to the tonic -- ascending to descending"
+      ],
+      "music_theory_parallel": "The tension-resolution pair is the most fundamental structure in tonal music. Tension (rising, departing, questioning) followed by resolution (falling, arriving, answering). The half cadence hangs unresolved; the authentic cadence resolves. Degrees 18 and 19, placed at adjacent positions in the circle, enact this pairing: the Swainson's asks the question (ascending spiral), the Veery answers it (descending spiral). Same genus, opposite directions, consecutive degrees."
+    },
+    {
+      "concept": "Beat frequency physics (two close frequencies produce periodic amplitude fluctuation -- the shimmer parameter)",
+      "level": "intermediate",
+      "department": "physics/acoustics",
+      "college_path": ".college/physics/acoustics/beat-frequencies/",
+      "examples": [
+        "2 Hz frequency difference = 2 beats per second (slow, gentle pulsation)",
+        "10 Hz frequency difference = 10 beats per second (rapid shimmer)",
+        "The Veery modulates beat frequency dynamically by adjusting the difference between its two syrinx halves",
+        "Piano tuners use beat frequencies to detect out-of-tune strings -- when beats disappear, the strings are in tune"
+      ],
+      "music_theory_parallel": "Beat frequencies are a fundamental acoustic phenomenon. When two tones of slightly different frequency are sounded together, they produce constructive and destructive interference at a rate equal to the frequency difference. This creates the characteristic shimmering quality. The Veery controls this parameter in real time by adjusting the frequency difference between its left and right syrinx halves -- effectively mixing its own chorus effect on the fly."
+    },
+    {
+      "concept": "Turdidae acoustic diversity extended (four thrushes, four strategies: AM drone, harmonic series, ascending sequence, descending sequence with chorus shimmer)",
+      "level": "advanced",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/turdidae-strategies/",
+      "examples": [
+        "Varied Thrush (degree 2): AM drone -- rich timbre, simple melody, one sustained pitch per phrase",
+        "Hermit Thrush (degree 7): Harmonic series -- pure timbre, arch form, overtone ratios within phrases (vertical)",
+        "Swainson's Thrush (degree 18): Ascending sequence -- fluty timbre, ascending phrases, directional trajectory upward (horizontal)",
+        "Veery (degree 19): Descending sequence with bilateral syrinx chorus -- reedy/ethereal timbre, descending phrases, directional trajectory downward + shimmer"
+      ],
+      "music_theory_parallel": "The family Turdidae now spans four acoustic strategies in the engine: (1) AM drone (Varied Thrush, degree 2) -- timbre complexity. (2) Harmonic series navigation (Hermit Thrush, degree 7) -- vertical pitch complexity. (3) Ascending melodic sequence (Swainson's Thrush, degree 18) -- horizontal pitch trajectory upward. (4) Descending melodic sequence with chorus shimmer (Veery, degree 19) -- horizontal pitch trajectory downward + bilateral syrinx beat frequencies. Four thrushes, four strategies. The Turdidae extend their lead as the most acoustically diverse family in the circle."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-018",
+      "title": "Swainson's Thrush (Degree 18)",
+      "connection": "THE MATCHED PAIR -- DESCENDING answers ASCENDING. The Swainson's Thrush (degree 18) spirals UPWARD: aspiration, tension, the question. The Veery (degree 19) spirals DOWNWARD: resolution, release, the answer. Adjacent degrees, both Catharus, opposite trajectories. The most fundamental pairing in tonal music -- tension and resolution -- mapped by two species from the same genus at consecutive positions in the circle."
+    },
+    {
+      "project": "SPS-007",
+      "title": "Hermit Thrush (Degree 7)",
+      "connection": "THE CATHARUS TRIPTYCH COMPLETE. Three species, three strategies, three pitch directions: harmonic series / static (7), ascending spiral / tension (18), descending spiral / resolution (19). The genus Catharus ('pure') now maps the complete pitch space of music. No other genus in the engine approaches this depth of acoustic comparison. The triptych is closed -- there are no other directions pitch can go."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "BILATERAL SYRINX -- DIFFERENT PURPOSE. Both use bilateral syrinx polyphony: two independent fundamental frequencies from left and right syrinx halves. The Pacific Wren (degree 1) uses it for MELODIC COMPLEXITY (two interleaved voices creating a 100-note cascade). The Veery (degree 19) uses it for ATMOSPHERIC SHIMMER (two closely-spaced tones creating beat frequencies -- the chorus effect). Same organ, opposite applications: information density vs. atmospheric texture."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Third Catharus thrush, completing the genus in the AVI thrush section. AVI documents the Veery as an uncommon breeder at the western edge of its range in the PNW -- far less frequently encountered than the Hermit Thrush or Swainson's Thrush. The rarest Catharus in the PNW avifauna."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Lowland riparian ecology: willow-alder-cottonwood thicket communities, range-edge population dynamics. The Veery's lowland riparian thicket is structurally distinct from the Swainson's riparian forest -- lower canopy, denser shrub layer, more deciduous. ECO documents the understory communities that define the Veery's breeding habitat at the western range edge."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Fly Moon Royale at degree 19. Both operate at the resolution/groove end of their respective arcs. Fly Moon Royale's music settles into pocket grooves -- resolving tension through feel rather than escalation. The Veery's descending spiral resolves into repose rather than climbing through aspiration. Where Maktub (degree 18) builds upward through ensemble layers, Fly Moon Royale and the Veery settle downward into resolution."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "Fourth Turdidae in the engine (degrees 2, 7, 18, 19). The thrush family now spans four acoustic strategies: AM drone (Varied Thrush, degree 2 -- timbre complexity), harmonic series navigation (Hermit Thrush, degree 7 -- vertical pitch complexity), ascending melodic sequence (Swainson's Thrush, degree 18 -- horizontal upward), descending melodic sequence with chorus shimmer (Veery, degree 19 -- horizontal downward + bilateral syrinx). The Turdidae extend their lead as the most acoustically diverse family in the circle."
+    }
+  ],
+  "interspecies_network": {
+    "status": "EXTENDED -- the Veery introduces an ELEVENTH communication modality: the descending-spiral song with bilateral syrinx chorus shimmer. A series of reedy phrases, each lower than the last, wrapped in ethereal beat-frequency shimmer from bilateral syrinx polyphony. Functions as territory declaration and mate attraction. Distinct from all ten previous modalities.",
+    "nodes": [
+      { "species": "Black-capped Chickadee", "degree": 3, "role": "broadcaster", "habitat": "mixed woodland" },
+      { "species": "Red-breasted Nuthatch", "degree": 5, "role": "receiver", "habitat": "conifer canopy" },
+      { "species": "Golden-crowned Kinglet", "degree": 8, "role": "receiver", "habitat": "spruce-fir canopy apex" },
+      { "species": "Chestnut-backed Chickadee", "degree": 9, "role": "broadcaster", "habitat": "coastal conifer" }
+    ],
+    "thrush_role": "The Veery produces a reedy, descending-spiral song from concealed perches in lowland riparian thickets. Its communication is primarily INTRASPECIFIC: the descending song establishes territory and attracts mates. The bilateral syrinx polyphony creates an ethereal quality (chorus effect) that makes the song difficult to localize -- possibly advantageous for a bird singing from dense thicket cover at the edge of its range.",
+    "note": "Alarm network remains at 4 nodes. Eleven parallel communication channels now documented: alarm broadcast, swarm cohesion, territorial trill, flock sweep, persistent ostinato, structured ternary song, tempo-varying burst, dynamic-crescendo song, hook-repetition song, ascending-spiral song, and descending-spiral song with chorus shimmer."
+  },
+  "part_a_parallel": {
+    "artist": "Fly Moon Royale",
+    "degree": 19,
+    "genre": "S36",
+    "shared_principle": "Both operate at the resolution/groove end of their respective arcs. Fly Moon Royale's music settles into pocket grooves -- the music resolves into feel rather than escalating through ascent. The Veery's descending spiral resolves into repose rather than climbing through aspiration. Where Maktub (degree 18) and the Swainson's Thrush build upward through layers, Fly Moon Royale and the Veery settle downward into resolution. Both are about arrival, not departure.",
+    "resonance_points": [
+      "Resolution over escalation: Both resolve tension rather than building it. Fly Moon Royale settles into pocket grooves; the Veery's descending phrases settle into lower registers. Both are about finding the landing, not the launch.",
+      "Groove as homecoming: Fly Moon Royale's groove resolves harmonic tension into rhythmic feel -- the music finds its pocket and stays there. The Veery's descending spiral resolves melodic tension into repose -- the melody finds its lowest register and arrives.",
+      "The answer to the question: At degree 18, Maktub builds upward. At degree 19, Fly Moon Royale brings it back down. At degree 18, the Swainson's ascends. At degree 19, the Veery descends. Both pairs map the same tension-resolution arc.",
+      "Ethereal quality: Fly Moon Royale's sonic palette includes atmospheric textures and spacious production. The Veery's bilateral syrinx produces ethereal shimmer. Both create music that floats rather than drives."
+    ]
+  },
+  "degree_arc": {
+    "position": "The descending spiral -- resolution in sound, the staircase that comes home. The third Catharus thrush. The Catharus triptych is complete: harmonic (7), ascending (18), descending (19). The matched pair is complete: tension (18) and resolution (19). Bilateral syrinx chorus effect introduced (same organ as Pacific Wren, different purpose).",
+    "progression": "Silence (0) -> cascade complexity (1) -> sustained tone (2) -> referential syntax (3) -> rhythmic motif (4) -> steady beat (5) -> upslurred question (6) -> harmonic series melody (7) -> ultrasonic threshold (8) -> variation on a theme (9) -> minimum viable signal / swarm (10) -> metallic trill / discrete-to-continuous (11) -> ascending buzzy sweep / irruptive stochastic (12) -> repeated two-note ostinato / persistence without variation (13) -> ternary churry-sweet / repetition with resolution (14) -> accelerating chattering / tempo change within vocalization (15) -> ascending sweet crescendo / dynamic intensification within vocalization (16) -> witchety hook / memorability through rhythmic repetition (17) -> ascending spiral / each phrase higher than the last (18) -> descending spiral with chorus shimmer / each phrase lower, bilateral syrinx beat frequencies (19)",
+    "key_insight": "Degree 19 introduces three new dimensions: (1) THE DESCENDING SPIRAL -- each phrase pitched lower than the last, the mirror of degree 18's ascending spiral. Resolution, homecoming, the answer to the question. (2) BILATERAL SYRINX AS CHORUS EFFECT -- two closely-spaced tones creating beat frequencies, producing the ethereal shimmering quality. Same organ as the Pacific Wren (degree 1) but used for atmospheric texture rather than melodic complexity. (3) THE CATHARUS TRIPTYCH COMPLETE -- three Catharus thrushes (degrees 7, 18, 19) map the three fundamental pitch directions (static, ascending, descending), exhausting the possibilities of pitch motion.",
+    "synthesis_types": {
+      "degree_0": "None (silence)",
+      "degree_1": "FM (frequency modulation)",
+      "degree_2": "AM (amplitude modulation)",
+      "degree_3": "Combinatorial (discrete elements + ordering rules)",
+      "degree_4": "Rhythmic cell (motif -- 4 notes with internal temporal structure)",
+      "degree_5": "Metronomic pulse (single note, steady rate -- pure temporal reference)",
+      "degree_6": "Pitch sweep (continuous ascending frequency glide -- directional change)",
+      "degree_7": "Harmonic series navigation (pitch selection from overtone ratios -- mathematical melody)",
+      "degree_8": "Ultra-high ascending series (discrete ascending notes at the audiometric boundary -- threshold crossing)",
+      "degree_9": "Variation on combinatorial syntax (same A-B-C-D structure, modified tempo/pitch/timbre -- the cover version)",
+      "degree_10": "Minimum viable signal (single-type contact call at noise floor -- swarm cohesion from 1-bit presence)",
+      "degree_11": "Tremolo / trill (single-note rapid repetition above fusion threshold -- discrete pulses perceived as continuous tone)",
+      "degree_12": "Ascending sawtooth sweep (harmonically rich buzzy waveform with ascending frequency -- the electronic sound in biological form)",
+      "degree_13": "Ostinato (two-note phrase repeated without variation below the fusion threshold -- each repetition a discrete event, persistence as identity)",
+      "degree_14": "Ternary / AAB (repeated identical syllables followed by contrasting resolution syllable -- the minimal narrative arc, repetition with destination)",
+      "degree_15": "Accelerando (tempo-varying chattering series -- the first species defined by rate of change rather than pitch, timbre, or pattern)",
+      "degree_16": "Crescendo (dynamic-varying sweet series -- volume and pitch increase within a single vocalization)",
+      "degree_17": "Hook (rhythmic two-note cell repeated at constant tempo and volume -- memorability as primary acoustic strategy)",
+      "degree_18": "Ascending spiral (sequential phrases each pitched higher than the last -- horizontal melodic thinking upward, aspiration in sound)",
+      "degree_19": "Descending spiral with chorus shimmer (sequential phrases each pitched lower than the last + bilateral syrinx beat frequencies -- horizontal melodic thinking downward, resolution in sound, ethereal atmosphere from biological chorus effect)"
+    },
+    "register_progression": {
+      "degree_0": "Bass (200-800 Hz)",
+      "degree_1": "Soprano (3-8 kHz peak)",
+      "degree_2": "Alto (2.5-5 kHz)",
+      "degree_3": "Alto-soprano (2-5+ kHz)",
+      "degree_4": "Bass-baritone (300-700 Hz)",
+      "degree_5": "Mid-range (1.5-3.5 kHz fundamental, harmonics to 4+ kHz)",
+      "degree_6": "Alto (2.5-4.5 kHz ascending sweep)",
+      "degree_7": "Mid-range to treble (1.5-4.0 kHz fundamental, overtones higher)",
+      "degree_8": "Ultra-high (6-10 kHz -- above audiometric ceiling for many adults)",
+      "degree_9": "Alto-soprano (2.5-5.5+ kHz -- shifted higher than degree 3)",
+      "degree_10": "Ultra-high / noise floor (6-9 kHz)",
+      "degree_11": "Mid-range (3-6 kHz)",
+      "degree_12": "Wide-band (2-10 kHz)",
+      "degree_13": "Mid-range (2.5-5 kHz)",
+      "degree_14": "Mid-range to upper-mid (2-6 kHz)",
+      "degree_15": "Mid-range to upper (3.5-7 kHz)",
+      "degree_16": "Upper-mid to high (3.5-6.5 kHz)",
+      "degree_17": "Mid-range (2.5-5.5 kHz -- earworm frequency, sweet spot of human hearing)",
+      "degree_18": "Mid-range to upper-mid (1.5-5.0 kHz -- ascending range sweeps from mid-range into upper register)",
+      "degree_19": "Upper-mid to mid (1.5-4.5 kHz -- descending range sweeps from upper register down into mid-range)"
+    },
+    "content_progression": {
+      "degree_0": "Absence (no semantic content)",
+      "degree_1": "Identity + fitness (who is singing, how well)",
+      "degree_2": "Territorial presence (I am here)",
+      "degree_3": "Referential threat information (what is there, how dangerous)",
+      "degree_4": "Territorial identity through rhythm (I am here, this is my pattern)",
+      "degree_5": "Temporal grid (the steady beat that locates all other rhythms in time)",
+      "degree_6": "Identity through voice alone (the call IS the species)",
+      "degree_7": "Mathematical consonance (pitch selection follows the harmonic series)",
+      "degree_8": "Conspecific high-canopy signal (private channel at top of frequency band)",
+      "degree_9": "Referential threat information (SAME as degree 3 -- the content is conserved; the delivery varies)",
+      "degree_10": "Pure presence / flock cohesion (I am here -- 1 bit)",
+      "degree_11": "Territory + mate attraction through trill",
+      "degree_12": "Flock cohesion + identity through buzzy sweep (nomadic coordination)",
+      "degree_13": "Territory + pair bond maintenance through persistent repetition (temporal continuity as content)",
+      "degree_14": "Territory + mate attraction through structured song with resolution (narrative as content)",
+      "degree_15": "Territory + mate attraction through accelerating burst (urgency as content)",
+      "degree_16": "Territory + mate attraction through ascending crescendo (brightness as content)",
+      "degree_17": "Territory + mate attraction through the hook (memorability as content)",
+      "degree_18": "Territory + mate attraction through ascending spiral (aspiration as content)",
+      "degree_19": "Territory + mate attraction through descending spiral with chorus shimmer (resolution as content -- the song that descends and shimmers, fitness signaled through ethereal quality and sustained directional descent)"
+    },
+    "ecosystem_progression": {
+      "degree_0": "Estuary / tidal flats",
+      "degree_1": "Old-growth understory (conifer)",
+      "degree_2": "Mature conifer canopy",
+      "degree_3": "Mixed woodland",
+      "degree_4": "Old-growth Douglas fir",
+      "degree_5": "Conifer canopy (generalist)",
+      "degree_6": "Riparian alder corridor",
+      "degree_7": "Mountain forest",
+      "degree_8": "Spruce-fir canopy apex",
+      "degree_9": "Coastal conifer (wet maritime)",
+      "degree_10": "Shrubby woodland edge (ecotone)",
+      "degree_11": "Forest edge (ecotone)",
+      "degree_12": "Conifer seed crop (resource-following)",
+      "degree_13": "Oak woodland (Garry oak)",
+      "degree_14": "Dense shrub (salal, salmonberry)",
+      "degree_15": "Willow riparian (montane/subalpine)",
+      "degree_16": "Riparian willow (lowland valley bottoms)",
+      "degree_17": "Marsh edge (cattails, sedges, wet meadows)",
+      "degree_18": "Riparian forest (closed canopy alder-willow-cottonwood with developed vertical structure)",
+      "degree_19": "Lowland riparian (deciduous thicket -- willow-alder-cottonwood, lower canopy than degree 18, range edge)"
+    }
+  },
+  "ecology": {
+    "habitat_requirement": "Lowland riparian thickets -- dense, deciduous undergrowth along streams and rivers at lower elevations. Willow-alder thickets, cottonwood bottomlands, dense deciduous understory with red-osier dogwood, snowberry. Tolerates younger, more disturbed riparian habitat than the Swainson's Thrush. In the PNW, this habitat occurs primarily in eastern-slope river valleys.",
+    "niche": "Understory and ground-level insectivore/frugivore in dense deciduous thicket. Forages by hopping on the ground and along low branches, flipping leaf litter. Sings from concealed perches within the thicket interior, typically below 10 feet.",
+    "foraging_strategy": "Ground and low-shrub forager. Hops on the forest floor, flipping leaf litter to uncover insects. Less aerial than the Swainson's Thrush. Takes berries during migration.",
+    "diet": "Insects (caterpillars, beetles, ants, spiders) during breeding season. Berries and fruit during migration (elderberry, dogwood, spicebush, wild grape).",
+    "nesting": "Ground or near-ground nest -- typically on or very near the ground in dense vegetation. Cup nest of leaves, bark strips, and weed stems, lined with rootlets. Lower nesting height than either Hermit or Swainson's Thrush.",
+    "resident_status": "NEOTROPICAL MIGRANT -- breeds across the northern US and southern Canada (late May-August in PNW). Winters in South America (eastern Brazil). Long-distance migrant with primarily eastern migration route. In the PNW, breeds primarily in northeastern Washington and sporadically in lowland corridors west of the Cascades.",
+    "range_edge_note": "The PNW represents the WESTERN EDGE of the Veery's breeding range. The species is genuinely uncommon here -- far less frequently encountered than the Hermit Thrush (common at mountain elevations) or the Swainson's Thrush (abundant in riparian corridors). The western range limit may be contracting under climate change.",
+    "flock_size": "Solitary or in pairs during breeding season. Males territorial. During migration, may associate loosely with mixed-species flocks in fruiting areas."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "north_american_population": "~12 million (Partners in Flight 2020) -- approximately one-eighth the Swainson's Thrush population",
+    "trend": "Significant decline -- approximately 1.5% per year since 1966 (Breeding Bird Survey). Steeper than the Swainson's Thrush decline (0.7%/year). Cumulative ~55-60% decline over 6 decades.",
+    "threats": "Riparian habitat loss; building collision mortality during nocturnal migration; artificial light at night (ALAN); wintering ground habitat degradation in South America; potential range contraction at western edge under climate change.",
+    "vulnerability": "The steeper decline rate compared to the Swainson's Thrush suggests greater vulnerability -- possibly related to more restricted habitat requirements (dense lowland deciduous thicket), smaller population base, and dependence on eastern Brazilian wintering grounds.",
+    "range_edge_vulnerability": "The PNW western range edge may be contracting. Climate models predict northward and upslope range shifts that could further reduce breeding populations in the southern and western portions of the range."
+  },
+  "key_sites": [
+    {
+      "name": "Okanogan River riparian corridors",
+      "type": "breeding (summer)",
+      "description": "Lowland riparian thickets along the Okanogan River and tributaries in northeastern Washington. One of the most reliable breeding areas for Veery in the PNW.",
+      "region": "Okanogan County, WA"
+    },
+    {
+      "name": "Pend Oreille River valley",
+      "type": "breeding (summer)",
+      "description": "Dense deciduous riparian thickets along the Pend Oreille River in northeastern Washington. Eastern-slope lowland habitat within the core of the PNW breeding range.",
+      "region": "Pend Oreille County, WA"
+    },
+    {
+      "name": "Walla Walla River riparian areas",
+      "type": "breeding (summer)",
+      "description": "Lowland riparian corridors in southeastern Washington. Mixed deciduous thicket habitat along the Walla Walla River system.",
+      "region": "Walla Walla County, WA"
+    },
+    {
+      "name": "Spokane area riparian corridors",
+      "type": "breeding (summer)",
+      "description": "Riparian thickets along the Spokane River and tributaries. Scattered breeding records in suitable lowland deciduous habitat.",
+      "region": "Spokane County, WA"
+    }
+  ],
+  "spectrogram_reference": {
+    "status": "MAINTAINED -- Macaulay Library provides recordings showing the descending-spiral pattern: successive phrases at progressively lower pitches, each phrase a complex reedy unit with internal rapid modulation creating bilateral syrinx shimmer",
+    "macaulay_url": "https://www.macaulaylibrary.org",
+    "note": "Spectrographic analysis of the Veery song shows DESCENDING SEQUENTIAL PHRASES: each phrase appears as a cluster of rapidly modulated notes in the 1.5-4.5 kHz range, with each successive phrase cluster positioned LOWER on the frequency axis than the previous. The visual pattern is a descending staircase: discrete clusters stepping downward through frequency space. Key distinction from Swainson's Thrush (ascending staircase): the Veery's staircase goes DOWN. Additional feature: spectrographic evidence of bilateral syrinx polyphony shows TWO CLOSELY-SPACED FREQUENCY TRACES within each phrase -- the two syrinx halves producing slightly different frequencies, creating the characteristic beat-frequency shimmer visible as slight frequency separation on the spectrogram."
+  },
+  "sources": [
+    "Bevier, L.R., Poole, A.F., and Moskoff, W. (2020). Veery (Catharus fuscescens). Birds of the World. Cornell Lab of Ornithology.",
+    "Cornell Lab of Ornithology. All About Birds: Veery. allaboutbirds.org",
+    "National Audubon Society. Guide to North American Birds: Veery. audubon.org",
+    "BirdWeb (Seattle Audubon Society). Veery species account. birdweb.org",
+    "Sibley, D.A. (2014). The Sibley Guide to Birds, 2nd ed. Alfred A. Knopf. [Catharus thrush identification.]",
+    "Doolittle, E.L. and Brumm, H. (2014). Quantifying the harmonic series in Hermit Thrush song. PNAS 111(46): 16616-16621. [Comparative Catharus reference.]",
+    "Weir, J.T. and Schluter, D. (2004). Ice sheets promote speciation in boreal birds. Proc R Soc B 271: 1881-1887.",
+    "Suthers, R.A. (1990). Contributions to birdsong from the left and right sides of the intact syrinx. Nature 347: 473-477.",
+    "Suthers, R.A., Goller, F., and Pytte, C. (1999). Neuromuscular control of birdsong. Phil Trans R Soc B 354: 927-939.",
+    "Zollinger, S.A. and Suthers, R.A. (2004). Motor mechanisms of a vocal mimic. Proc R Soc B 271: 483-491.",
+    "Catchpole, C.K. and Slater, P.J.B. (2008). Bird Song: Biological Themes and Variations. 2nd ed. Cambridge University Press.",
+    "Kroodsma, D.E. (2005). The Singing Life of Birds. Houghton Mifflin.",
+    "Rossing, T.D., Moore, F.R., and Wheeler, P.A. (2002). The Science of Sound. 3rd ed. Addison Wesley. [Beat frequency physics.]",
+    "Roads, C. (1996). The Computer Music Tutorial. MIT Press. [Chorus effect synthesis.]",
+    "Sauer, J.R. et al. (2020). North American Breeding Bird Survey, Results and Analysis 1966-2019. USGS Patuxent.",
+    "Partners in Flight (2020). Population estimates. partnersinflight.org",
+    "IUCN Red List. Veery (Catharus fuscescens). iucnredlist.org",
+    "Washington Department of Fish and Wildlife. Veery. wdfw.wa.gov",
+    "eBird. Veery observation data, Pacific Northwest. ebird.org/species/veery",
+    "Macaulay Library. Veery recordings and spectrograms. Cornell Lab of Ornithology. macaulaylibrary.org",
+    "Lerdahl, F. and Jackendoff, R. (1983). A Generative Theory of Tonal Music. MIT Press.",
+    "Huron, D. (2006). Sweet Anticipation: Music and the Psychology of Expectation. MIT Press."
+  ],
+  "release_metadata": {
+    "release_number": "019",
+    "total_releases": 360,
+    "part": "B",
+    "engine": "PNW 360 Species",
+    "parent_project": "The Sound of Puget Sound",
+    "date": "2026-03-28"
+  }
+}

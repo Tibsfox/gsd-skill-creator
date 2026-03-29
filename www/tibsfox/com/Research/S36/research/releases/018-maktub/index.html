@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 18&deg; &mdash; Maktub &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #B71C1C, #E53935);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFCDD2;
+      color: #B71C1C;
+      border: 1px solid #E57373;
+    }
+
+    .genre-shift-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E1BEE7;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .first-band-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #C8E6C9;
+      color: #2E7D32;
+      border: 1px solid #81C784;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .genre-shift-box {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .genre-shift-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+    }
+    .genre-shift-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .watts-dual-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .watts-dual-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .watts-dual-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .watts-dual-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .watts-dual-box td, .watts-dual-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .watts-dual-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .band-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .band-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .band-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .band-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .band-box td, .band-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C8E6C9;
+    }
+    .band-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #2E7D32;
+    }
+
+    .energy-box {
+      background: #FCE4EC;
+      border: 1px solid #F48FB1;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #AD1457;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #F8BBD0;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #AD1457;
+    }
+
+    .capitol-hill-box {
+      background: #E0F2F1;
+      border: 1px solid #80CBC4;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .capitol-hill-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #00695C;
+      font-family: system-ui, sans-serif;
+    }
+    .capitol-hill-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">18&deg;</div>
+      <div>
+        <h1>Maktub</h1>
+        <div class="subtitle">Soul/Jazz &middot; Neo-Soul / Funk / Rock Fusion &mdash; Seattle 1998&ndash;2007 &mdash; Velour/Livewire
+          <span class="energy-badge">Energy 3</span>
+          <span class="genre-shift-badge">Third Genre Shift</span>
+          <span class="first-band-badge">First Band</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../017-reggie-watts/index.html">Degree 17&deg; (Watts)</a>
+      <a href="../002-wayne-horvitz/index.html">Degree 2&deg; (Horvitz)</a>
+      <a href="../016-jeff-lorber/index.html">Degree 16&deg; (Lorber)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Maktub &mdash; Arabic for &ldquo;it is written.&rdquo; Fate, destiny,
+          the inevitability of what must unfold. Four musicians on Capitol Hill,
+          1998. Neo-soul, funk, jazz improvisation, rock energy &mdash; all at
+          once, all live, different every night. <em>The first band in the engine.</em>
+          Where Reggie Watts learned to be Reggie Watts.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; &ldquo;It Is Written&rdquo;</h2>
+
+        <p>Maktub formed in <strong>Seattle in 1998</strong> on <strong>Capitol
+        Hill</strong> &mdash; the neighborhood that had been Seattle&rsquo;s
+        bohemian center since the grunge era waned and the arts community
+        redistributed itself across the city&rsquo;s hills. The name is Arabic
+        for &ldquo;it is written&rdquo; &mdash; fate, destiny. What the band
+        created over nine years was, in retrospect, something that had to exist:
+        a fusion of neo-soul, funk, jazz improvisation, and rock energy that was
+        simultaneously all of those things and none of them exclusively.</p>
+
+        <p>The lineup: <strong>Reggie Watts</strong> (vocals, keyboards),
+        <strong>Kevin Goldman</strong> (guitar), <strong>Alex Veley</strong>
+        (bass, keyboards), and <strong>Davis Martin</strong> (drums). Watts is
+        the same Reggie Watts documented at degree 17&deg; &mdash; this is the
+        <strong>first time an artist appears at multiple degrees</strong> in the
+        engine. But the Watts who fronted Maktub was a <strong>soul singer</strong>
+        &mdash; raw, powerful, channeling the neo-soul movement that D&rsquo;Angelo,
+        Erykah Badu, and Maxwell were defining nationally, filtered through a band
+        that could also play straight-ahead rock, jazz improvisation, and deep funk.</p>
+
+        <p>The band thrived in Capitol Hill&rsquo;s <strong>post-grunge incubation
+        space</strong> &mdash; venues like the Crocodile Cafe, the Showbox, Neumo&rsquo;s,
+        and the Capitol Hill block party circuit. Rock clubs, hip-hop shows, DJ nights,
+        and jazz jams shared the same venues and audiences. Maktub flourished because
+        the neighborhood did not require genre purity.</p>
+
+        <p>Released three albums: <strong><em>Khronos</em></strong> (2002, Velour),
+        <strong><em>Say What You Mean</em></strong> (2003, Velour), and
+        <strong><em>Subtle Ways</em></strong> (2006, Livewire). Disbanded in
+        <strong>2007</strong> when Watts moved to New York City to pursue a solo
+        comedy and music career. The band was the incubator; the solo career was
+        the deployment.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Seattle Weekly;
+        The Stranger; KEXP session archives; AllMusic; Velour/Livewire Records; local
+        press archives</p>
+
+        <!-- ========================================
+             FIRST BAND
+             ======================================== -->
+
+        <div class="band-box">
+          <h4>First Band: Creative Unit Shifts from Individual to Group</h4>
+          <table>
+            <tr>
+              <th>Member</th>
+              <th>Role</th>
+              <th>Contribution</th>
+            </tr>
+            <tr>
+              <td>Reggie Watts</td>
+              <td>Vocals, keyboards</td>
+              <td>Soul singing, vocal power, improvisational frontman (also degree 17&deg;)</td>
+            </tr>
+            <tr>
+              <td>Kevin Goldman</td>
+              <td>Guitar</td>
+              <td>Rock edge, wah-pedal funk, clean jazz voicings</td>
+            </tr>
+            <tr>
+              <td>Alex Veley</td>
+              <td>Bass, keyboards</td>
+              <td>Neo-soul harmonic bed, jazz-informed bass lines</td>
+            </tr>
+            <tr>
+              <td>Davis Martin</td>
+              <td>Drums</td>
+              <td>Hard-hitting funk, pocket grooves, explosive fills</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Every prior degree featured
+          a <strong>solo artist or bandleader</strong>. Maktub is the first
+          <strong>band as collaborative entity</strong> &mdash; the creative unit
+          shifts from individual to group. The improvisation was collective. The
+          arrangements emerged from four people listening and responding in
+          real-time. <strong>Composition is emergent, not directed.</strong></p>
+        </div>
+
+        <!-- ========================================
+             GENRE SHIFT
+             ======================================== -->
+
+        <div class="genre-shift-box">
+          <h4>Third Genre Shift: Soul/Jazz &mdash; Jazz Becomes Method</h4>
+          <p>Third genre shift in three degrees. The engine diversifies rapidly:
+          (1)&nbsp;single genre (degrees 0&ndash;15, &ldquo;Jazz&rdquo;),
+          (2)&nbsp;compound genre (degree 16, &ldquo;Jazz Fusion&rdquo;),
+          (3)&nbsp;superposition (degree 17, &ldquo;Jazz/Comedy&rdquo;),
+          (4)&nbsp;<strong>Jazz as modifier</strong> (degree 18, &ldquo;Soul/Jazz&rdquo;).
+          For the first time, <strong>Jazz is not the primary genre label but the
+          secondary element</strong>. Soul is the what; jazz is the how. The center
+          of gravity shifts from jazz-as-genre to <strong>jazz-as-method</strong>.</p>
+          <p style="margin-top:0.6rem">Neo-soul artists like D&rsquo;Angelo and Erykah
+          Badu demonstrated nationally that soul music could absorb jazz harmony without
+          becoming jazz. Maktub demonstrated the same locally, in Seattle, with the added
+          dimension of rock energy and live improvisation.</p>
+        </div>
+
+        <!-- ========================================
+             WATTS DUAL-DEGREE
+             ======================================== -->
+
+        <div class="watts-dual-box">
+          <h4>The Watts Dual-Degree: Same Person, Different Projects</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Degree 17&deg; (Solo)</th>
+              <th>Degree 18&deg; (Maktub)</th>
+            </tr>
+            <tr>
+              <td>Creative unit</td>
+              <td>Solo artist</td>
+              <td>Band member (one of four)</td>
+            </tr>
+            <tr>
+              <td>Genre</td>
+              <td>Jazz/Comedy</td>
+              <td>Soul/Jazz</td>
+            </tr>
+            <tr>
+              <td>Instrument</td>
+              <td>Voice / beatbox / loop</td>
+              <td>Voice (singing)</td>
+            </tr>
+            <tr>
+              <td>Composition</td>
+              <td>Solo looping</td>
+              <td>Collective improvisation</td>
+            </tr>
+            <tr>
+              <td>Era</td>
+              <td>2000s&ndash;present</td>
+              <td>1998&ndash;2007</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem"><strong>First multi-degree artist.</strong>
+          Maktub <em>preceded</em> the solo career. The band was the workshop where Watts
+          developed the vocal and improvisational skills deployed solo. The engine tracks
+          <strong>projects, not biographies</strong> &mdash; the same person in different
+          creative configurations produces different entries.</p>
+        </div>
+
+        <!-- ========================================
+             CAPITOL HILL
+             ======================================== -->
+
+        <div class="capitol-hill-box">
+          <h4>Capitol Hill: Second Neighborhood Thread</h4>
+          <p><strong>Second Capitol Hill artist</strong> after Wayne Horvitz (degree
+          2&deg;). Capitol Hill in the late 1990s through mid-2000s was arguably the
+          center of Seattle&rsquo;s live music scene. Rock clubs, hip-hop shows, DJ
+          nights, and jazz jams shared venues and audiences &mdash; the neighborhood&rsquo;s
+          cultural metabolism was omnivorous, genre-agnostic, live-performance-centered.</p>
+          <p style="margin-top:0.6rem">Two entries, two decades apart, two completely
+          different genre orientations: <strong>Horvitz</strong> (composed improvisation,
+          experimental music, artist-as-institution) and <strong>Maktub</strong> (neo-soul/funk/jazz/rock,
+          band-as-collective). Capitol Hill produces diversity the same way Cornish College
+          does &mdash; the environment is permissive enough that artists do not need to conform.</p>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Fourth Consecutive Energy-3: Longest Streak Extends</h4>
+          <table>
+            <tr>
+              <th>Energy</th>
+              <th>Character</th>
+              <th>Count</th>
+              <th>Artists</th>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Meditative, introspective</td>
+              <td>2</td>
+              <td>Peacock (8&deg;), Lanphere (12&deg;)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Sustaining, atmospheric</td>
+              <td>13</td>
+              <td>All others (0&deg;&ndash;7&deg;, 9&deg;&ndash;11&deg;, 13&deg;&ndash;14&deg;)</td>
+            </tr>
+            <tr>
+              <td><strong>3</strong></td>
+              <td><strong>Assertive, projective</strong></td>
+              <td><strong>4</strong></td>
+              <td><strong>Marriott (15&deg;), Lorber (16&deg;), Watts (17&deg;), Maktub (18&deg;)</strong></td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Distribution shifts to
+          <strong>2:13:4</strong>. Four consecutive energy-3 artists &mdash; the
+          <strong>longest streak extends</strong>. Four subtypes: acoustic-assertive
+          (Marriott), electronic-propulsive (Lorber), performative-explosive (Watts),
+          and <strong>groove-collective</strong> (Maktub &mdash; four-piece band
+          groove, collective rhythmic energy, neo-soul power).</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory: The Groove as Harmonic Vehicle</h2>
+
+        <ul>
+          <li><strong>Neo-soul harmony (extended jazz chords in groove context):</strong>
+          Major 9ths, minor 11ths, altered dominants, suspended structures &mdash; placed
+          over a groove where rhythm provides the structural framework and chords provide
+          color. Harmonic movement through voice-leading within chords rather than
+          chord-to-chord functional progression. The groove IS the composition.</li>
+          <li><strong>Band arrangement (emergent composition):</strong> Four musicians
+          listening and responding in real-time. No single composer directing. The groove
+          as shared contract enabling collective exploration. Composed arrangement (top-down)
+          vs. band arrangement (bottom-up) &mdash; the democratic alternative.</li>
+          <li><strong>Live improvisation as collective composition:</strong> Shows heavily
+          improvised &mdash; four-minute studio tracks becoming fifteen-minute live jams.
+          Band improvisation is a conversation: four streams of consciousness negotiating
+          coherence. The groove is the contract.</li>
+          <li><strong>The groove as composition:</strong> The rhythm section IS the music.
+          Bass line, drum pattern, and rhythmic feel ARE the composition. Vocals, guitar
+          solos, keyboard pads decorate the groove. Extends Berry (5&deg;) groove-as-composition
+          principle from solo piano to full band.</li>
+        </ul>
+
+        <hr class="section-divider">
+        <h2>Music Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Neo-Soul Groove Harmony</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Extended jazz chords in groove context &mdash; major 9ths, minor 11ths,
+            altered dominants floating over rhythm section. Harmonic movement through
+            voice-leading within chords rather than chord-to-chord progression.</p>
+            <div class="examples">Maktub &mdash; Goldman&rsquo;s jazz guitar voicings
+            in funk/rock context; D&rsquo;Angelo &mdash; national neo-soul template;
+            Berry (5&deg;) &mdash; groove-based piano (comparison);
+            Lorber (16&deg;) &mdash; fusion harmony (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Descends from jazz harmony
+            tradition (all prior degrees) but inverts hierarchy: rhythm is structural,
+            harmony is atmospheric. First node deploying extended jazz harmony primarily
+            in a soul/groove context. Extends Berry (5&deg;) groove-as-composition
+            to full band.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Band Arrangement (Emergent Composition)</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>First BAND in the engine. Four musicians creating unified voice through
+            real-time negotiation. The groove as contract enabling collective exploration.
+            Composition is emergent, not directed.</p>
+            <div class="examples">Maktub &mdash; collective improvisation (four streams
+            negotiating coherence); Watts solo (17&deg;) &mdash; solo improvisation
+            (comparison); Horvitz (2&deg;) &mdash; composed improvisation (comparison);
+            Jones (0&deg;) &mdash; orchestral arrangement (comparison)</div>
+            <div class="genealogy"><strong>Lineage:</strong> Inverts prior composition
+            models: Jones fully composed for orchestra, Horvitz composed with improvised
+            sections, Watts solo fully improvised alone. Maktub: fully improvised
+            collectively. New quadrant: collective-improvised.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Multi-Degree Artist (Project Identity)</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Watts at degree 17&deg; (solo) and 18&deg; (Maktub). Same person,
+            different project. The engine tracks projects not biographies. Maktub
+            preceded solo career &mdash; the workshop and the product.</p>
+            <div class="examples">Watts solo (17&deg;) &mdash; Jazz/Comedy, loop
+            station, one-man show; Watts/Maktub (18&deg;) &mdash; Soul/Jazz,
+            band frontman, collective improvisation; project succession:
+            band skills deployed solo</div>
+            <div class="genealogy"><strong>Lineage:</strong> First instance of
+            multi-degree artist. The engine must now handle the same person
+            in different creative configurations as separate projects. Project
+            succession: Maktub was the workshop (18&deg;), solo career was the
+            product (17&deg;).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Soul-Vocal</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Eighteenth deployment. Neo-soul vocal bending between minor and major
+            thirds with emotional directness of soul singing. The blue note as
+            emotional weapon in groove context at energy-3.</p>
+            <div class="examples">Maktub (18&deg;) &mdash; soul-vocal bending, groove
+            context; Watts solo (17&deg;) &mdash; vocal glide, performance-art context
+            (comparison); Anderson (3&deg;) &mdash; vocal blue note, jazz ballad
+            (comparison); D&rsquo;Angelo &mdash; national neo-soul template</div>
+            <div class="genealogy"><strong>Lineage:</strong> Eighteen deployments across
+            nineteen degrees. Third vocal deployment (Anderson 3, Watts solo 17, Maktub
+            18). Second by same performer &mdash; demonstrates context-dependence:
+            same voice, different project, different blue note character.</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             CAREER TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1998 &mdash; Formation, Capitol Hill, Seattle</div>
+          <p>Four-piece band formed on Capitol Hill: Watts (vocals, keys), Goldman
+          (guitar), Veley (bass, keys), Martin (drums). The name &ldquo;Maktub&rdquo;
+          &mdash; Arabic for &ldquo;it is written&rdquo; &mdash; chosen for its
+          fatalistic resonance. Capitol Hill scene: Crocodile, Showbox, Neumo&rsquo;s.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2002 &mdash; Khronos (Velour Recordings)</div>
+          <p>Debut album establishing the Maktub sound: neo-soul vocals over funk
+          grooves with jazz harmony and rock energy. The title (from Greek <em>chronos</em>,
+          time) reflects the band&rsquo;s temporal relationship with live improvisation.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2003 &mdash; Say What You Mean (Velour Recordings)</div>
+          <p>Second album pushing further into soul territory. More confident
+          songwriting, tighter arrangements, still built on live-performance energy.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">KEXP Sessions</div>
+          <p>Multiple in-studio performances at KEXP (90.3 FM) capturing the band&rsquo;s
+          live energy in a controlled setting. Among the most vivid recordings of
+          Maktub&rsquo;s improvisational approach.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2006 &mdash; Subtle Ways (Livewire Records)</div>
+          <p>Third and final album &mdash; the most polished Maktub. Studio craft
+          meeting live energy: delicate ballads alongside explosive funk workouts,
+          intimate vocals alongside full-band improvisation.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2007 &mdash; Disbandment</div>
+          <p>Disbanded when Watts moved to <strong>New York City</strong> to pursue
+          solo comedy and music. Everything developed in Maktub &mdash; vocal power,
+          improvisational instinct, genre-crossing &mdash; transferred to the solo
+          context documented at degree 17&deg;. <strong>The band was the incubator;
+          the solo career was the deployment.</strong></p>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Cross-References</h2>
+
+        <table style="width:100%;font-size:0.92rem;border-collapse:collapse">
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;width:30%;font-weight:600">S36-017 (Reggie Watts)</td>
+            <td style="padding:0.6rem">Same vocalist. Watts at degree 17&deg; (solo:
+            Jazz/Comedy, loop station) and 18&deg; (Maktub: Soul/Jazz, band). First
+            multi-degree artist. Maktub preceded solo career chronologically &mdash;
+            the band was the workshop, the solo career the product.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-002 (Wayne Horvitz)</td>
+            <td style="padding:0.6rem">Capitol Hill geography. Both Horvitz and Maktub
+            based on Capitol Hill &mdash; second neighborhood thread. Horvitz built
+            infrastructure (Royal Room, curatorial programming); Maktub used it. Two
+            decades apart, completely different genres, same permissive neighborhood.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-016 (Jeff Lorber)</td>
+            <td style="padding:0.6rem">Fusion lineage. Lorber&rsquo;s Jazz Fusion via
+            electronic production; Maktub&rsquo;s Soul/Jazz via live band performance.
+            Both multi-genre; different mechanisms (studio vs. live). Genre shift sequence:
+            single &rarr; compound &rarr; superposition &rarr; Jazz-as-modifier.</td>
+          </tr>
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <td style="padding:0.6rem;font-weight:600">S36-003 (Ernestine Anderson)</td>
+            <td style="padding:0.6rem">Vocal tradition. Anderson&rsquo;s vocal jazz
+            (degree 3&deg;) is the engine&rsquo;s first vocal-primary artist. Watts in
+            Maktub is vocal-primary in a band context. Both blue-note-intensive: Anderson
+            in jazz ballad (energy-2), Watts in neo-soul groove (energy-3).</td>
+          </tr>
+          <tr>
+            <td style="padding:0.6rem;font-weight:600">S36-005 (Overton Berry)</td>
+            <td style="padding:0.6rem">Groove tradition. Berry&rsquo;s groove-based piano
+            (degree 5&deg;) established the groove-as-composition principle. Maktub extends
+            it to full band: four instruments dedicated to groove-first composition. Solo
+            groove to collective groove.</td>
+          </tr>
+        </table>
+
+        <!-- ========================================
+             GARFIELD THREAD
+             ======================================== -->
+
+        <div class="garfield-thread">
+          <h4>Garfield High School Thread</h4>
+          <table>
+            <tr><td>Degree 0&deg;</td><td>Quincy Jones &mdash; Garfield class of 1950</td></tr>
+            <tr><td>Degree 3&deg;</td><td>Ernestine Anderson &mdash; Garfield, late 1940s</td></tr>
+            <tr><td>Degrees 4&deg;&ndash;17&deg;</td><td>No confirmed Garfield products (fourteen consecutive)</td></tr>
+            <tr><td>Degree 18&deg;</td><td>Maktub &mdash; NOT a Garfield product. Band formed on Capitol Hill. Watts (member) attended Cornish, not Garfield. Goldman, Veley, Martin educational backgrounds not documented. Twelfth consecutive non-Garfield degree. First band in the engine.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Key Carry-Forward Items for Degree 19</h4>
+          <ul>
+            <li><strong>Genre rotation:</strong> Third genre shift. Soul/Jazz puts Jazz as modifier. Four-stage evolution: single, compound, superposition, Jazz-as-modifier. Jazz evolves from genre to method.</li>
+            <li><strong>First BAND (NEW at 18):</strong> Maktub is the first collective creative unit. Creative unit shifts from individual to group. Track subsequent band entries.</li>
+            <li><strong>First multi-degree artist (NEW at 18):</strong> Watts at degrees 17&deg; and 18&deg;. Engine tracks projects not biographies. Track subsequent multi-degree appearances.</li>
+            <li><strong>Energy spectrum:</strong> 2:13:4. FOUR consecutive energy-3 (15&ndash;18). Longest streak extends. Four subtypes. Track whether streak continues.</li>
+            <li><strong>Capitol Hill geography (EXTENDED at 18):</strong> TWO entries (Horvitz 2&deg;, Maktub 18&deg;). Second neighborhood thread.</li>
+            <li><strong>Groove-as-composition (EXTENDED at 18):</strong> Berry (5&deg;) solo piano, Maktub (18&deg;) full band. Principle scales.</li>
+            <li><strong>The Workshop archetype (NEW at 18):</strong> Nineteenth pattern. Project that develops artists for subsequent projects.</li>
+            <li><strong>Vocal theory branch:</strong> EXTENDED to eight nodes &mdash; now exceeds saxophone/reed (seven).</li>
+            <li><strong>Gender dimension:</strong> Thirteen consecutive male or male-led (7&ndash;18). Two women in nineteen degrees. CRITICAL.</li>
+            <li><strong>Central District:</strong> Absent at degrees 12&ndash;18. SEVEN consecutive absences. Longest streak.</li>
+            <li><strong>Duwamish territorial acknowledgment:</strong> BLOCKING. NINETEEN releases overdue.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">18&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value" style="color:#B71C1C">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Soul/Jazz</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Band (first)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1998&ndash;2007</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Velour / Livewire</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City Pattern</span>
+            <span class="stat-value">The Workshop</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jazz arc</span>
+            <span class="stat-value">Jazz as modifier</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre label</span>
+            <span class="stat-value">THIRD SHIFT</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Creative unit</span>
+            <span class="stat-value">FIRST BAND</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Multi-degree</span>
+            <span class="stat-value">FIRST (Watts)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy spectrum</span>
+            <span class="stat-value">2:13:4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Capitol Hill</span>
+            <span class="stat-value">2nd entry</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Vocal branch</span>
+            <span class="stat-value">8 nodes</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">18th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue note</span>
+            <span class="stat-value">18th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City taxonomy</span>
+            <span class="stat-value">19 patterns</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row">
+            <span class="stat-label">Reggie Watts</span>
+            <span class="stat-value">vocals, keys</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kevin Goldman</span>
+            <span class="stat-value">guitar</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Alex Veley</span>
+            <span class="stat-value">bass, keys</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Davis Martin</span>
+            <span class="stat-value">drums</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row">
+            <span class="stat-label"><em>Khronos</em></span>
+            <span class="stat-value">2002</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Say What You Mean</em></span>
+            <span class="stat-value">2003</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label"><em>Subtle Ways</em></span>
+            <span class="stat-value">2006</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cross-References</h4>
+          <div class="stat-row">
+            <span class="stat-label">Watts</span>
+            <span class="stat-value">17&deg; same person</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Horvitz</span>
+            <span class="stat-value">2&deg; Capitol Hill</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lorber</span>
+            <span class="stat-value">16&deg; fusion</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Anderson</span>
+            <span class="stat-value">3&deg; vocal</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Berry</span>
+            <span class="stat-value">5&deg; groove</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Degree 18&deg; of 360 &mdash; Seattle 360 Continuous Artist Release Engine
+    &mdash; <a href="../../index.html">Back to S36</a></p>
+  </footer>
+</body>
+</html>
