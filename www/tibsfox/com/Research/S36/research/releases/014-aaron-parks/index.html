@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 14&deg; &mdash; Aaron Parks &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #1565C0);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #9FA8DA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--seattle-navy);
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: var(--seattle-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .garfield-thread {
+      background: #FFF8E1;
+      border: 1px solid #FFD54F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-thread h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #F57F17;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-thread table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .garfield-thread td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFF3C4;
+    }
+    .garfield-thread td:first-child { font-weight: 600; width: 30%; }
+
+    .export-pipeline-box {
+      background: #E0F2F1;
+      border: 1px solid #80CBC4;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .export-pipeline-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #00695C;
+      font-family: system-ui, sans-serif;
+    }
+    .export-pipeline-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .export-pipeline-box td, .export-pipeline-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #B2DFDB;
+    }
+    .export-pipeline-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #00695C;
+    }
+
+    .piano-lineage-box {
+      background: #FFF3E0;
+      border: 1px solid #FFB74D;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .piano-lineage-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .piano-lineage-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .piano-lineage-box td, .piano-lineage-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .piano-lineage-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .prodigy-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .prodigy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #2E7D32;
+      font-family: system-ui, sans-serif;
+    }
+    .prodigy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">14&deg;</div>
+      <div>
+        <h1>Aaron Parks</h1>
+        <div class="subtitle">Jazz &middot; Piano &middot; Contemporary / Post-Bop &mdash; Born Seattle 1983 &mdash; Blue Note / ECM / Ropeadope</div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../013-marc-seales/index.html">Degree 13&deg; (Seales)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Jones)</a>
+      <a href="../008-gary-peacock/index.html">Degree 8&deg; (Peacock)</a>
+      <a href="../001-bill-frisell/index.html">Degree 1&deg; (Frisell)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Berry)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Seattle born, 1983. Child prodigy. UW pre-college at 14.
+          Manhattan School of Music at 16. Monk Competition winner at 18.
+          Terence Blanchard&rsquo;s band at 19. <em>Invisible Cinema</em> on Blue Note at 25.
+          The youngest artist in the engine. Fourth pianist after Berry, Bown, Seales.
+          Post-genre &mdash; jazz, indie rock, electronic, ambient.
+          The Quincy Jones export pipeline in modern form: institutional identification
+          &rarr; conservatory &rarr; competition &rarr; global career.
+          He left at 16 and never came back.
+        </blockquote>
+
+        <!-- ========================================
+             BIOGRAPHY
+             ======================================== -->
+
+        <h2>Biography &amp; The Prodigy-Export</h2>
+
+        <p>Aaron Parks was born in <strong>Seattle, Washington in 1983</strong> &mdash; the
+        youngest artist in the S36 engine and the first millennial-generation musician
+        documented. He is the fourth pianist (after Berry at degree 5&deg;, Bown at
+        degree 6&deg;, and Seales at degree 13&deg;), the fifteenth consecutive jazz artist,
+        and the first whose biography follows the classical <strong>prodigy-export pipeline</strong>
+        in its purest modern form.</p>
+
+        <p>Parks attended the <strong>University of Washington pre-college music program</strong>
+        at age 14 &mdash; the same institution where Marc Seales (degree 13&deg;) directs the
+        jazz studies program. By 16, he had left Seattle for the <strong>Manhattan School of
+        Music</strong> in New York City. In 2001, at age 18, he won the <strong>Thelonious Monk
+        International Jazz Piano Competition</strong> &mdash; the most prestigious jazz
+        competition in the world. Winning at 18 placed Parks among the youngest winners in the
+        competition&rsquo;s history.</p>
+
+        <p>At 19, Parks joined <strong>Terence Blanchard&rsquo;s band</strong> &mdash; one of
+        the premier working groups in modern jazz. Blanchard served as Parks&rsquo;s professional
+        apprenticeship in the post-Blakey lineage of <strong>bandleader-as-mentor</strong>:
+        the young pianist learns the profession by working in the leader&rsquo;s band, touring
+        internationally, and absorbing the discipline of a professional ensemble.</p>
+
+        <p>Parks&rsquo;s debut album <strong><em>Invisible Cinema</em></strong> was released on
+        <strong>Blue Note Records</strong> in 2008. Acclaimed as one of the most promising jazz
+        piano debuts of the decade, it demonstrated Parks&rsquo;s synthesis of post-bop jazz
+        harmony, indie rock textures, and a compositional sensibility drawn from Radiohead and
+        Bj&ouml;rk alongside Herbie Hancock and Keith Jarrett.</p>
+
+        <p>He subsequently recorded <strong><em>Arborescence</em></strong> for <strong>ECM
+        Records</strong> (2013), a solo piano album connecting him to the label&rsquo;s tradition
+        of spacious, reverberant recordings. He formed <strong>Little Big</strong> (guitarist
+        Greg Tuohey, bassist Thomas Morgan, drummer Marcus Gilmore) &mdash; a band whose sound
+        explicitly bridges jazz and indie rock, recording for <strong>Ropeadope Records</strong>.</p>
+
+        <p>Parks is currently based in <strong>New York City</strong>. He has not returned to
+        Seattle as a professional base. He represents the contemporary generation &mdash; jazz
+        musicians who grew up with indie rock, electronic music, and hip-hop alongside the
+        jazz tradition.</p>
+
+        <p class="meta" style="font-size:0.82rem;color:#757575">Sources: Blue Note Records;
+        ECM Records; Ropeadope Records; Thelonious Monk Institute; Manhattan School of Music;
+        DownBeat; JazzTimes; AllMusic; The New York Times; NPR Music</p>
+
+        <!-- ========================================
+             EXPORT PIPELINE
+             ======================================== -->
+
+        <div class="export-pipeline-box">
+          <h4>The Export Pipeline: Jones (0&deg;) vs. Parks (14&deg;)</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Jones (0&deg;, 1950s)</th>
+              <th>Parks (14&deg;, 2000s)</th>
+            </tr>
+            <tr>
+              <td><strong>Age at departure</strong></td>
+              <td>~18 (after high school)</td>
+              <td>16 (pre-college to MSM)</td>
+            </tr>
+            <tr>
+              <td><strong>Pipeline trigger</strong></td>
+              <td>Bandstand apprenticeship</td>
+              <td>Institutional identification</td>
+            </tr>
+            <tr>
+              <td><strong>Career launcher</strong></td>
+              <td>Hired by Lionel Hampton</td>
+              <td>Monk Competition + Blanchard band</td>
+            </tr>
+            <tr>
+              <td><strong>Destination</strong></td>
+              <td>National touring, then LA/NYC</td>
+              <td>MSM, then NYC</td>
+            </tr>
+            <tr>
+              <td><strong>Return to Seattle</strong></td>
+              <td>Never (professional base elsewhere)</td>
+              <td>Never (professional base NYC)</td>
+            </tr>
+            <tr>
+              <td><strong>Label trajectory</strong></td>
+              <td>Mercury &rarr; A&amp;M &rarr; Qwest &rarr; global</td>
+              <td>Blue Note &rarr; ECM &rarr; Ropeadope</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">The export pipeline has been
+          <strong>institutionalized</strong>. In Jones&rsquo;s era, talent was identified on the
+          bandstand. In Parks&rsquo;s era, talent is identified through pre-college programs,
+          conservatories, and international competitions. The Monk Competition is the institutional
+          trigger that the bandstand gig used to be.</p>
+        </div>
+
+        <!-- ========================================
+             PIANO LINEAGE
+             ======================================== -->
+
+        <div class="piano-lineage-box">
+          <h4>Piano Lineage: Four Eras of Seattle Jazz Piano</h4>
+          <table>
+            <tr>
+              <th>Dimension</th>
+              <th>Berry (5&deg;)</th>
+              <th>Bown (6&deg;)</th>
+              <th>Seales (13&deg;)</th>
+              <th>Parks (14&deg;)</th>
+            </tr>
+            <tr>
+              <td><strong>Era</strong></td>
+              <td>1940s&ndash;2020s</td>
+              <td>1950s&ndash;1970s</td>
+              <td>1990s&ndash;present</td>
+              <td>2000s&ndash;present</td>
+            </tr>
+            <tr>
+              <td><strong>Style</strong></td>
+              <td>Stride, cocktail</td>
+              <td>Hard bop, orchestral</td>
+              <td>Modal, post-bop</td>
+              <td>Post-genre (jazz/indie/electronic)</td>
+            </tr>
+            <tr>
+              <td><strong>Training</strong></td>
+              <td>Self-taught</td>
+              <td>Seattle Univ. (undergrad)</td>
+              <td>UW DMA (doctoral)</td>
+              <td>UW pre-college &rarr; MSM</td>
+            </tr>
+            <tr>
+              <td><strong>Technique</strong></td>
+              <td>Left-hand stride bass</td>
+              <td>Orchestral density</td>
+              <td>Quartal voicings</td>
+              <td>Quartal + ambient textures</td>
+            </tr>
+            <tr>
+              <td><strong>Pattern</strong></td>
+              <td>The Persistence</td>
+              <td>The Erasure</td>
+              <td>Institutional Anchor</td>
+              <td>Prodigy-Export</td>
+            </tr>
+            <tr>
+              <td><strong>Label</strong></td>
+              <td>Local</td>
+              <td>Columbia</td>
+              <td>Naim</td>
+              <td>Blue Note / ECM / Ropeadope</td>
+            </tr>
+          </table>
+          <p style="font-size:0.85rem;margin-top:0.8rem">Four pianists, four eras, four
+          educational paths: <strong>autodidact &rarr; undergraduate &rarr; doctorate &rarr;
+          conservatory-prodigy</strong>. The piano theory branch extends to <strong>nine
+          nodes</strong> &mdash; the richest branch in the engine by a wider margin.</p>
+        </div>
+
+        <!-- ========================================
+             POST-GENRE THEORY
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Post-Genre Jazz Harmony</h2>
+
+        <p>Parks&rsquo;s piano vocabulary inherits the entire <strong>modal jazz revolution</strong>
+        documented at degree 13&deg; and extends it into territory no previous artist in the engine
+        has explored: the systematic integration of <strong>non-jazz textures</strong> into a jazz
+        harmonic vocabulary.</p>
+
+        <ul>
+          <li><strong>Quartal voicings as inherited vocabulary:</strong> Parks deploys quartal
+          harmony not as innovation but as received language. Where Tyner invented it and Seales
+          deployed it as standard vocabulary, Parks inherited it as baseline &mdash; his starting
+          point, not his destination. Three-generation harmonic cycle: innovation &rarr; vocabulary
+          &rarr; inheritance.</li>
+          <li><strong>Slash chords and ambiguous tonality:</strong> Chords whose bass note is not
+          the root of the upper structure (Bb/C, D/F#). Two tonal centers simultaneously, creating
+          floating quality that resists resolution. Neither fully jazz nor fully indie rock &mdash;
+          the space between.</li>
+          <li><strong>Metric modulation and floating time:</strong> Shifting perceived pulse by
+          superimposing new tempi derived from subdivisions. Time feels elastic rather than complex,
+          stretching and compressing without the mathematical rigor of odd-meter playing.</li>
+          <li><strong>Indie rock textures as compositional resource:</strong> Guitar textures
+          (sustained chords, delay pedal, tremolo, shoegaze washes) inform piano voicings and
+          production. On <em>Invisible Cinema</em> and Little Big recordings, guitar provides
+          Radiohead/My Bloody Valentine textures while piano serves as color, not driving
+          harmonic instrument.</li>
+          <li><strong>Electronic ambient spaces:</strong> Reverb as instrument, delay as structural
+          element. <em>Arborescence</em> (ECM) deploys the ECM aesthetic at its most spacious:
+          piano in a reverberant room, each note decaying fully, silence as composition. Connects
+          Parks to the ECM lineage (Peacock 8&deg;, Frisell 1&deg;).</li>
+          <li><strong>Tritone substitution as unconscious inheritance:</strong> The tritone sub
+          thread (from degree 0&deg;) reaches its endpoint: from innovative device (bebop) to
+          standard vocabulary (modal) to unconscious inheritance (post-genre). Parks does not
+          deploy tritone subs consciously &mdash; they appear as naturally as major chords.</li>
+        </ul>
+
+        <p><strong>Fourteenth chromaticism deployment:</strong> Post-genre chromaticism &mdash;
+        chromatic movement between distantly related key centers for <strong>atmospheric
+        effect</strong>. A phrase may begin in one tonal area and end in another without
+        traditional harmonic connection. Chromaticism after theory: deployed by a musician whose
+        training is extensive but whose aesthetic priority is feel over function.</p>
+
+        <!-- ========================================
+             PRODIGY-EXPORT PATTERN
+             ======================================== -->
+
+        <div class="prodigy-box">
+          <h4>The Prodigy-Export Pattern (NEW at Degree 14&deg;)</h4>
+          <p>Fifteenth named pattern in the artist-city taxonomy. Structurally distinct from
+          The Export (Jones, degree 0&deg;):</p>
+          <p><strong>The Export (Jones):</strong> leaves as a young adult after completing local
+          education and apprenticeship. Departure is a career decision made by the musician.</p>
+          <p><strong>The Prodigy-Export (Parks):</strong> leaves as a minor, shipped out by the
+          institutional pipeline before completing high school. Departure is driven by the
+          institution&rsquo;s identification of talent.</p>
+          <p>Four conditions: (1) native-born, (2) identified as exceptional before age 16,
+          (3) exported to a major training center before completing secondary education,
+          (4) career based elsewhere &mdash; no return. Parks meets all four. The most
+          <strong>institutionally mediated</strong> export pattern in the engine.</p>
+        </div>
+
+        <!-- ========================================
+             CAREER ARC -- TIMELINE
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Career Arc</h2>
+
+        <div class="timeline-entry">
+          <div class="era">Born in Seattle, 1983</div>
+          <p>Native-born. Youngest artist in the engine. First millennial-generation musician.
+          Sixteenth educational pipeline: UW pre-college &rarr; Manhattan School of Music &rarr;
+          professional career.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">UW Pre-College Music Program, Age 14</div>
+          <p>Attended the <strong>University of Washington pre-college program</strong> at 14.
+          The institutional identification mechanism that catches prodigies before high school
+          graduation. Connects directly to Seales (degree 13&deg;) through the UW pipeline.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Manhattan School of Music, Age 16</div>
+          <p>Left Seattle for <strong>MSM</strong> at 16. Elite jazz conservatory alongside
+          Juilliard, Berklee, and NEC. Youngest export in the engine (Jones left at ~18).
+          The institutional pipeline exports talent younger because it identifies talent earlier.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Monk Competition Win, 2001 (Age 18)</div>
+          <p>Won the <strong>Thelonious Monk International Jazz Piano Competition</strong> at 18.
+          The most prestigious jazz competition in the world. Previous winners include Marcus Roberts,
+          Jacky Terrasson. The institutional trigger that replaced the bandstand gig.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Terence Blanchard Band, Age 19</div>
+          <p>Joined <strong>Blanchard&rsquo;s band</strong> at 19. Blanchard &mdash; trumpeter,
+          Blue Note artist, Spike Lee composer &mdash; as professional mentor in the post-Blakey
+          lineage. The Art Blakey model updated for the 21st century.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Invisible Cinema (Blue Note, 2008)</div>
+          <p>Debut on <strong>Blue Note Records</strong>. Post-bop + indie rock textures +
+          non-jazz compositional sensibility. Most storied label in jazz history. Third Blue Note
+          connection in the engine. First Blue Note debut album.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Arborescence (ECM, 2013)</div>
+          <p>Solo piano on <strong>ECM Records</strong>. Spacious, reverberant, contemplative.
+          ECM thread extends to four artists (Frisell 1&deg;, Priester 7&deg;, Peacock 8&deg;,
+          Parks 14&deg;). Manfred Eicher&rsquo;s production philosophy of space and silence.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Little Big (Ropeadope)</div>
+          <p>Formed <strong>Little Big</strong> with Tuohey, Morgan, Gilmore. Jazz/indie rock
+          integration: guitar-driven textures, layered production, song-form structures alongside
+          improvisation. <strong>Ropeadope Records</strong> &mdash; Philadelphia-based independent,
+          genre-crossing jazz. First Ropeadope appearance in the engine.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Currently Based in NYC</div>
+          <p>Permanently based in New York City. Has not returned to Seattle as a professional
+          base. The export is permanent, as with Jones (degree 0&deg;). NYC provides the
+          institutional infrastructure of jazz performance: clubs, labels, studios, collaborators.</p>
+        </div>
+
+        <!-- ========================================
+             MUSIC THEORY MAPPING
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Music Theory Mapping</h2>
+
+        <p>Four theory nodes &mdash; post-genre jazz piano vocabulary (the contemporary
+        synthesis of jazz, indie rock, and electronic textures), the prodigy-export pipeline
+        (institutional identification and export), piano lineage (four eras), and the fourteenth
+        blue note deployment (post-genre floating between jazz and rock semantics).</p>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>Post-Genre Jazz Piano Vocabulary</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p>Quartal voicings as inherited vocabulary (three-generation cycle). Slash chords
+            and ambiguous tonality (floating between key centers). Metric modulation and floating
+            time. Indie rock textures as compositional resource. Electronic ambient spaces.
+            Tritone substitution as unconscious inheritance.
+            <strong>Ninth node on the piano branch</strong> &mdash; extends lead as richest
+            branch. Inherits from modal jazz (degree 13&deg;) and extends into post-genre
+            territory.</p>
+            <div class="examples">Parks, <em>Invisible Cinema</em> (Blue Note, 2008); Parks, <em>Arborescence</em> (ECM, 2013); Little Big (Ropeadope); Brad Mehldau, <em>Largo</em>; Radiohead, <em>Kid A</em>; Vijay Iyer</div>
+            <div class="genealogy"><strong>Lineage:</strong> Bebop (Lanphere 12&deg;) &rarr; modal revolution (Davis/Tyner) &rarr; contemporary modal (Seales 13&deg;) &rarr; post-genre synthesis (Parks 14&deg;). Fourteenth chromaticism deployment: post-genre chromaticism as atmospheric movement between distantly related key centers.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Prodigy-Export Pipeline</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Institutional identification at UW pre-college &rarr; conservatory export (MSM
+            at 16) &rarr; competition launch (Monk at 18) &rarr; professional apprenticeship
+            (Blanchard at 19) &rarr; label debut (Blue Note at 25) &rarr; global career.
+            The <strong>Quincy Jones pipeline modernized</strong>: bandstand identification
+            replaced by institutional identification. Export age drops from ~18 to 16. The
+            Monk Competition is the institutional trigger that the Hampton hiring used to be.</p>
+            <div class="examples">Parks (UW &rarr; MSM &rarr; Monk &rarr; Blanchard &rarr; Blue Note); Jones (Garfield &rarr; Hampton &rarr; Mercury/global); comparison with Berklee, Juilliard, NEC pipelines</div>
+            <div class="genealogy"><strong>Pattern:</strong> Two exports in fifteen degrees. Jones (0&deg;, bandstand pipeline, 1950s) and Parks (14&deg;, institutional pipeline, 2000s). Same fundamental pattern &mdash; Seattle talent leaves for career center &mdash; but the mechanism has been formalized.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Piano Lineage: Four Eras</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Berry (5&deg;, stride/cocktail, self-taught) &rarr; Bown (6&deg;, hard bop/orchestral,
+            Seattle University) &rarr; Seales (13&deg;, modal/contemporary, UW DMA) &rarr;
+            Parks (14&deg;, post-genre, UW pre-college/MSM). Four eras, four educational paths:
+            <strong>autodidact &rarr; undergraduate &rarr; doctorate &rarr; conservatory-prodigy</strong>.
+            The piano group extends from a trio to a <strong>quartet</strong>. Nine nodes on
+            the piano branch.</p>
+            <div class="examples">Berry (stride bass); Bown (orchestral density); Seales (quartal voicings); Parks (quartal + ambient + indie textures)</div>
+            <div class="genealogy"><strong>Branch:</strong> Piano extends its lead over saxophone/reed (7 nodes). Four pianists define a space: generational stylistic evolution PLUS educational pipeline evolution PLUS city-relationship evolution (persistence/erasure/anchor/export).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: Post-Genre Floating</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p>Fourteenth deployment. In post-genre jazz, the blue note (b3, b7) floats between
+            jazz and rock semantics. Is the minor third a blues inflection, a Dorian modal
+            pitch, or an indie-rock minor chord? Parks leaves the question <strong>deliberately
+            unresolved</strong>. The blue note belongs to neither tradition fully &mdash; it
+            occupies the post-genre space between. Extension of modal integration (degree
+            13&deg;) into genre-ambiguous territory.</p>
+            <div class="examples">Parks (minor-over-major ambiguity); Radiohead (rock blue notes); Mehldau (jazz/rock blue-note synthesis); Seales (modal integration, 13&deg;)</div>
+            <div class="genealogy"><strong>Fourteen deployments:</strong> bass-line (0&deg;), guitar (1&deg;), vocal (3&deg;), trumpet (4&deg;), piano crush (5&deg;), altered voicings (6&deg;), trombone slide (7&deg;), bass fundamental (8&deg;), sax voice (9&deg;), alto cool bend (10&deg;), flute bent note (11&deg;), bebop chromatic approach (12&deg;), modal integration (13&deg;), post-genre floating (14&deg;).</div>
+          </div>
+        </div>
+
+        <!-- ========================================
+             ENERGY SPECTRUM
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Energy Spectrum: 2:9:4</h2>
+
+        <p>Parks is the <strong>ninth energy-2 artist</strong> in the engine.
+        Energy-2 gains its ambient-warmth variant: the energy of a musician who treats
+        space, silence, and atmospheric texture as compositional elements equal to notes.
+        The distribution shifts from 2:8:4 to <strong>2:9:4</strong>.</p>
+
+        <table>
+          <thead>
+            <tr><th>Energy</th><th>Artists</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Peacock (8&deg;), Lanphere (12&deg;)</td><td>Meditative / Redemptive &mdash; intensity redirected inward</td></tr>
+            <tr><td><strong>2</strong></td><td><strong>Frisell (1&deg;), Standifer (4&deg;), Berry (5&deg;), Priester (7&deg;), Caliman (9&deg;), Shank (10&deg;), Brazil (11&deg;), Seales (13&deg;), Parks (14&deg;)</strong></td><td><strong>Atmospheric, warm, sustaining, community-embedded, ambient-warmth</strong></td></tr>
+            <tr><td>3</td><td>Jones (0&deg;), Horvitz (2&deg;), Anderson (3&deg;), Bown (6&deg;)</td><td>Commanding, intense, projective</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ========================================
+             CITY PATTERNS
+             ======================================== -->
+
+        <hr class="section-divider">
+        <h2>Artist-City Patterns: Fifteen Named</h2>
+
+        <table>
+          <thead>
+            <tr><th>Pattern</th><th>Artist</th><th>Mode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>The Export</td><td>Jones (0&deg;)</td><td>Local cultivation &rarr; global departure &rarr; global success</td></tr>
+            <tr><td>The Draw</td><td>Frisell (1&deg;), Horvitz (2&deg;)</td><td>Global cultivation &rarr; local settlement &rarr; scene-building</td></tr>
+            <tr><td>The Exile</td><td>Anderson (3&deg;)</td><td>American decline &rarr; European audience</td></tr>
+            <tr><td>The Stay</td><td>Anderson (3&deg;)</td><td>Return to Seattle &rarr; decades as anchor</td></tr>
+            <tr><td>The Teacher</td><td>Standifer (4&deg;)</td><td>Permanent residency &rarr; pedagogical transmission</td></tr>
+            <tr><td>The Persistence</td><td>Berry (5&deg;)</td><td>Native-born &rarr; never left &rarr; still playing</td></tr>
+            <tr><td>The Erasure</td><td>Bown (6&deg;)</td><td>Exported &rarr; succeeded &rarr; forgotten</td></tr>
+            <tr><td>The Pedagogue-Draw</td><td>Priester (7&deg;)</td><td>Global cultivation &rarr; local settlement as educator</td></tr>
+            <tr><td>The Quiet Draw</td><td>Peacock (8&deg;)</td><td>Global cultivation &rarr; PNW settlement &rarr; gravitational presence</td></tr>
+            <tr><td>The Working Pedagogue-Draw</td><td>Caliman (9&deg;)</td><td>Global cultivation &rarr; educator AND performer</td></tr>
+            <tr><td>The Late Homestead</td><td>Shank (10&deg;)</td><td>Prolific career elsewhere &rarr; PNW as later-career base</td></tr>
+            <tr><td>The Salon Keeper</td><td>Brazil (11&deg;)</td><td>Settled in CD &rarr; community building through home-based pedagogy</td></tr>
+            <tr><td>The Prodigal</td><td>Lanphere (12&deg;)</td><td>PNW-born &rarr; left for center &rarr; destroyed &rarr; returned &rarr; rebuilt</td></tr>
+            <tr><td>The Institutional Anchor</td><td>Seales (13&deg;)</td><td>Native-born &rarr; terminal degree &rarr; permanent institutional appointment</td></tr>
+            <tr><td><strong>The Prodigy-Export</strong></td><td><strong>Parks (14&deg;)</strong></td><td><strong>Native-born &rarr; identified as prodigy &rarr; exported at 16 &rarr; global career &rarr; never returned</strong></td></tr>
+          </tbody>
+        </table>
+
+        <p>The Prodigy-Export is the most <strong>institutionally mediated</strong> export pattern.
+        Where Jones left because the bandstand led to a touring opportunity, Parks left because
+        the institutional pipeline &mdash; pre-college program, conservatory admission,
+        competition circuit &mdash; was designed to export talent from regional cities to
+        national centers. Distinct from The Export (career decision by the musician) and
+        The Erasure (exported and forgotten &mdash; Parks is remembered and celebrated).</p>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward from Degrees 0&deg;&ndash;13&deg;</h4>
+          <ul>
+            <li><strong>Piano branch richest (wider margin):</strong> Nine nodes at degree 14&deg;.
+            Berry (stride) &rarr; Bown (hard bop) &rarr; Seales (modal) &rarr; Parks (post-genre).
+            Quartet, not trio. Saxophone/reed stable at seven.</li>
+            <li><strong>The Prodigy-Export:</strong> NEW. Fifteenth artist-city pattern.
+            Institutional identification &rarr; conservatory export &rarr; competition launch
+            &rarr; global career. Quincy Jones pipeline modernized.</li>
+            <li><strong>ECM thread extended:</strong> Four artists &mdash; Frisell (1&deg;),
+            Priester (7&deg;), Peacock (8&deg;), Parks (14&deg;). Shared aesthetic of space,
+            silence, acoustic clarity.</li>
+            <li><strong>Blue Note thread:</strong> Third connection (after Lanphere 12&deg; sideman).
+            First Blue Note debut album in the engine. Most storied label in jazz history.</li>
+            <li><strong>Monk Competition thread:</strong> NEW. First competition-launched artist.
+            Institutional trigger replacing bandstand identification.</li>
+            <li><strong>Chromaticism thread:</strong> Fourteen deployments. Post-genre chromaticism
+            &mdash; atmospheric movement between key centers.</li>
+            <li><strong>Blue note thread:</strong> Fourteen deployments. Post-genre floating
+            between jazz and rock semantics.</li>
+            <li><strong>Genre rotation:</strong> STILL CRITICAL for degree 15. Fifteen
+            consecutive jazz artists. Intentional CSV architecture.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <div class="cross-links">
+          <h4>Cross-References &mdash; Related Research Projects</h4>
+          <ul>
+            <li><a href="../013-marc-seales/index.html">S36-013 &mdash; Marc Seales (Degree 13&deg;)</a> &mdash; Piano lineage (third chair) and UW connection. Seales directs UW jazz studies; Parks attended UW pre-college. The Institutional Anchor and the Prodigy-Export are structurally complementary &mdash; one anchors, the other launches.</li>
+            <li><a href="../000-quincy-jones/index.html">S36-000 &mdash; Quincy Jones (Degree 0&deg;)</a> &mdash; The export pipeline. Jones is the first export (1950s, bandstand pipeline); Parks is the second (2000s, institutional pipeline). Both Seattle-born, both left as teenagers, both achieved global careers, neither returned.</li>
+            <li><a href="../008-gary-peacock/index.html">S36-008 &mdash; Gary Peacock (Degree 8&deg;)</a> &mdash; ECM connection. Parks recorded <em>Arborescence</em> for ECM; Peacock is the engine&rsquo;s primary ECM artist. Shared production philosophy of space, silence, acoustic clarity. ECM thread extends to four artists.</li>
+            <li><a href="../001-bill-frisell/index.html">S36-001 &mdash; Bill Frisell (Degree 1&deg;)</a> &mdash; Post-genre connection. Frisell pioneered non-jazz texture integration; Parks extends this into the next generation (indie rock, electronic, ambient). Both are atmospheric energy-2 artists.</li>
+            <li><a href="../005-overton-berry/index.html">S36-005 &mdash; Overton Berry (Degree 5&deg;)</a> &mdash; Piano lineage (first chair). Berry&rsquo;s stride vocabulary is three generations removed from Parks&rsquo;s post-genre language. Four-pianist arc: autodidact &rarr; undergraduate &rarr; doctorate &rarr; conservatory-prodigy.</li>
+          </ul>
+        </div>
+
+        <!-- ========================================
+             SOURCES
+             ======================================== -->
+
+        <h2>Sources</h2>
+
+        <h3>Primary</h3>
+        <ol>
+          <li>Blue Note Records. Aaron Parks artist catalog, <em>Invisible Cinema</em> documentation.</li>
+          <li>ECM Records. Aaron Parks <em>Arborescence</em> catalog and documentation.</li>
+          <li>Ropeadope Records. Little Big discography and artist documentation.</li>
+          <li>Thelonious Monk Institute. 2001 piano competition archives.</li>
+          <li>Manhattan School of Music. Alumni documentation.</li>
+        </ol>
+
+        <h3>Secondary</h3>
+        <ol start="6">
+          <li>de Barros, Paul. <em>Jackson Street After Hours</em>. Sasquatch Books, 1993.</li>
+          <li>Gioia, Ted. <em>The History of Jazz</em>. Oxford University Press, 2nd ed., 2011.</li>
+          <li>Ratliff, Ben. Jazz reviews and profiles. <em>The New York Times</em>.</li>
+        </ol>
+
+        <h3>Institutional &amp; Comparative</h3>
+        <ol start="9">
+          <li>AllMusic. Aaron Parks artist biography and discography.</li>
+          <li>DownBeat. Aaron Parks profiles, Monk Competition coverage, Blue Note debut coverage.</li>
+          <li>JazzTimes. Aaron Parks profiles and album reviews.</li>
+          <li>NPR Music. Jazz profiles and live performance documentation.</li>
+          <li>Earshot Jazz. Seattle jazz community coverage, UW pre-college program.</li>
+          <li>KNKX/KPLU Jazz Northwest. Pacific Northwest jazz community coverage.</li>
+          <li>The Seattle Times. Seattle jazz coverage and pipeline documentation.</li>
+          <li>University of Washington School of Music. Pre-college program, jazz studies (Seales connection).</li>
+          <li>Juilliard School / Berklee. National conservatory comparison.</li>
+        </ol>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR -- STATS
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Artist Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Seattle, WA (1983)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Seattle (native)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Piano</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Based</span>
+            <span class="stat-value">New York City</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Unit Circle</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">14&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Jazz (contemporary)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2000s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Blue Note / ECM / Ropeadope</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Legacy</h4>
+          <div class="stat-row">
+            <span class="stat-label">Monk Competition</span>
+            <span class="stat-value">Winner, 2001 (age 18)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blanchard Band</span>
+            <span class="stat-value">Joined at 19</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note Debut</span>
+            <span class="stat-value"><em>Invisible Cinema</em> (2008)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Piano Chair</span>
+            <span class="stat-value">4th (Berry, Bown, Seales)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Nodes</h4>
+          <div class="stat-row">
+            <span class="stat-label">Concepts</span>
+            <span class="stat-value">4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advanced</span>
+            <span class="stat-value">1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Intermediate</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Piano Branch</span>
+            <span class="stat-value">9 nodes (richest)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cross-Refs</span>
+            <span class="stat-value">5 projects</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Firsts at Degree 14&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Generation</span>
+            <span class="stat-value">1st millennial</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Archetype</span>
+            <span class="stat-value">Prodigy-Export</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Competition</span>
+            <span class="stat-value">1st Monk winner</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">1st debut album</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Ropeadope (1st)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>City Pattern</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Prodigy-Export</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Type</span>
+            <span class="stat-value">Prodigy + institutional</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Native-born</span>
+            <span class="stat-value">Yes (Seattle)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Exported</span>
+            <span class="stat-value">Age 16 to NYC</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Spectrum</h4>
+          <div class="stat-row">
+            <span class="stat-label">Energy 1</span>
+            <span class="stat-value">Peacock (8&deg;), Lanphere (12&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 2</span>
+            <span class="stat-value">9 artists (incl. Parks)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy 3</span>
+            <span class="stat-value">4 artists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">2:9:4</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Degree 0&deg;&ndash;13&deg; &rarr; 14&deg;</h4>
+          <div class="stat-row">
+            <span class="stat-label">Piano Branch</span>
+            <span class="stat-value">9 nodes (RICHEST)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chromaticism</span>
+            <span class="stat-value">14th (post-genre)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">14th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">15 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pipelines</span>
+            <span class="stat-value">16 total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="../../index.html">Seattle 360</a> &middot;
+      Degree 14&deg; / 360 &middot;
+      <a href="../013-marc-seales/index.html">Prev: 13&deg; Seales</a> &middot;
+      <a href="../000-quincy-jones/index.html">0&deg; Jones</a> &middot;
+      <a href="../008-gary-peacock/index.html">8&deg; Peacock</a> &middot;
+      <a href="../001-bill-frisell/index.html">1&deg; Frisell</a> &middot;
+      <a href="../005-overton-berry/index.html">5&deg; Berry</a> &middot;
+      <a href="../../../index.html">PNW Research Series</a> &middot;
+      gsd-skill-creator
+    </p>
+  </footer>
+</body>
+</html>
