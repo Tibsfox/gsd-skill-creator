@@ -8,7 +8,7 @@ description: >
 tools:
   - Read
   - Write
-model: claude-opus-4-5
+model: opus
 ---
 
 # Architect Agent — Physical Infrastructure Engineering Pack
