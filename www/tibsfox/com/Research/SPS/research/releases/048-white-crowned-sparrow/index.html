@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 48&deg; &mdash; White-crowned Sparrow &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Dialect element card */
+    .dialect-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dialect-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Pugetensis card */
+    .pugetensis-card {
+      background: linear-gradient(135deg, #E0F7FA 0%, #4DD0E1 100%);
+      border: 2px solid #00838F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pugetensis-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #006064;
+    }
+
+    /* Family streak card */
+    .streak-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Marler card */
+    .marler-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F9A825;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .marler-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* COVID card */
+    .covid-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #AD1457;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .covid-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #880E4F;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.dialect { background: #2E7D32; }
+    .theory-icon.pugetensis { background: #00838F; }
+    .theory-icon.streak { background: #1565C0; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-icon.marler { background: #F9A825; color: #333; }
+    .theory-icon.covid { background: #AD1457; }
+    .theory-icon.habitat { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">48&deg;</div>
+      <div class="release-title-block">
+        <h2>White-crowned Sparrow</h2>
+        <div class="scientific">Zonotrichia leucophrys</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      clear whistled song with buzzy trills &mdash; the dialect, 4th consecutive Passerellidae (45&ndash;46&ndash;47&ndash;48), TIES longest same-family streak outside Parulidae quintet, Peter Marler&rsquo;s bird, the species that taught science how songs are learned, subspecies <em>pugetensis</em> is LITERALLY named for Puget Sound, 12 song dialects along the PNW coast, COVID song shift (Derryberry 2020), E=2 returns
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Tailed Frog</strong> (<em>Ascaphus truei</em>) at degree 48. Because the SPS Part B engine is birds-and-mammals only, White-crowned Sparrow replaces it. The substitution preserves the original&rsquo;s <strong>E=2 energy level</strong> and <strong>mountain/shrub habitat</strong>. This is the <strong>fourth consecutive amphibian replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48) &mdash; the engine continues through the amphibian belt of the original CSV.</p>
+        </div>
+
+        <!-- Pugetensis Card -->
+        <div class="pugetensis-card">
+          <h3>Named for Puget Sound: <em>Z. l. pugetensis</em></h3>
+          <p>The PNW form of the White-crowned Sparrow is <strong><em>Zonotrichia leucophrys pugetensis</em></strong> &mdash; literally &ldquo;the White-crowned Sparrow of Puget Sound.&rdquo; Described by Ridgway in 1898 from a Puget Sound type specimen. The <strong>only bird in the engine whose subspecific epithet IS the name of the project&rsquo;s subject.</strong> The Sound names the bird and the bird names the Sound. <em>Pugetensis</em> breeds from coastal SE Alaska south through the PNW to NW California and winters in Pacific lowlands south to northern Los Angeles County. It forms approximately <strong>12 distinct song dialects</strong> along the PNW coast.</p>
+        </div>
+
+        <!-- Dialect Element Card -->
+        <div class="dialect-card">
+          <h3>The 49th Acoustic Element: The Dialect</h3>
+          <p>The White-crowned Sparrow&rsquo;s song is a <strong>clear introductory whistle followed by complex notes, buzzy trills, and a terminal trill</strong> &mdash; 2&ndash;3 seconds, 2&ndash;7 kHz. Named &ldquo;the dialect&rdquo; because this is THE species that established the study of geographic song dialects in birds. Marler &amp; Tamura (1964) described how males learn a shared local song pattern during the first 10&ndash;100 days of life &mdash; <strong>the first acoustic element defined by cultural transmission</strong>.</p>
+          <p>After the preamble&rsquo;s structural complexity (45), the rasp&rsquo;s textural intensity (46), the snowbird&rsquo;s elemental reduction (47), and the dialect&rsquo;s cultural transmission (48) &mdash; the Passerellidae quartet has traversed <strong>four fundamentally different organizing principles for birdsong</strong>.</p>
+        </div>
+
+        <!-- Family Streak Card -->
+        <div class="streak-card">
+          <h3>Four Consecutive Passerellidae &mdash; Degrees 45&ndash;48</h3>
+          <p><strong>Song Sparrow (45) + Spotted Towhee (46) + Dark-eyed Junco (47) + White-crowned Sparrow (48)</strong> &mdash; four consecutive entries from the same family. Four genera (<em>Melospiza</em>, <em>Pipilo</em>, <em>Junco</em>, <em>Zonotrichia</em>). Four song strategies (complex, textural, simple, dialectal). Four habitats (wetland edge, dense understory, forest floor, mountain meadow edge). <strong>TIES the longest same-family streak outside the Parulidae quintet</strong> (38&ndash;42). Only the Hirundinidae quintet (26&ndash;30) went longer.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=2 Returns &mdash; Lower Registers Now Exceed E=4</h3>
+          <p>E=2 at degree 48 continues the lower-register restoration. E=2 + E=3 together now hold <strong>22 degrees (44.9%)</strong>, surpassing E=4&rsquo;s 21 degrees (42.9%) for the first time. The equilibrium achieved at degree 47 (21 = 21) has tipped &mdash; the Passerellidae quartet&rsquo;s four entries at E=2&ndash;3 have reversed the upper-register dominance. The energy pattern within the quartet is symmetrical: <strong>2, 3, 3, 2</strong> &mdash; an arch.</p>
+        </div>
+
+        <!-- Marler Card -->
+        <div class="marler-card">
+          <h3>Marler&rsquo;s Bird &mdash; How Birdsong Is Learned</h3>
+          <p>Peter Marler and Miwako Tamura published their landmark 1964 paper &ldquo;Culturally Transmitted Patterns of Vocal Behavior in Sparrows&rdquo; in <em>Science</em>, establishing the White-crowned Sparrow as <strong>THE model species for vocal learning</strong>. Key discoveries: the sensitive period (10&ndash;100 days), the auditory template (innate bias toward conspecific song), and cultural transmission (song learned from adult tutors, not inherited genetically). Marler also studied <strong>Song Sparrow</strong> (degree 45) &mdash; bridging two Passerellidae through one researcher. The quartet&rsquo;s three great researchers: Margaret Morse Nice (Song Sparrow, degree 45), Ellen Ketterson (Dark-eyed Junco, degree 47), Peter Marler (White-crowned Sparrow, degree 48).</p>
+        </div>
+
+        <!-- COVID Card -->
+        <div class="covid-card">
+          <h3>The COVID Experiment &mdash; When the City Went Quiet (2020)</h3>
+          <p>When COVID lockdowns silenced San Francisco, Elizabeth Derryberry (U. of Tennessee) documented White-crowned Sparrows singing <strong>35% more quietly</strong>, lowering their minimum frequency, and widening their bandwidth &mdash; reverting to song patterns resembling 1970s recordings. Published in <em>Science</em> (2020). The birds demonstrated <strong>immediate vocal plasticity</strong> &mdash; a third timescale of vocal change alongside dialect learning (cultural, decades) and subspecies divergence (evolutionary, millennia).</p>
+        </div>
+
+        <h2>The White-Browed Banded-Hair Bird</h2>
+        <p><em>Zonotrichia leucophrys</em> &mdash; from Ancient Greek <em>zone</em> (&ldquo;band&rdquo;) + <em>thrix</em> (&ldquo;hair&rdquo;) + <em>leukos</em> (&ldquo;white&rdquo;) + <em>ophrys</em> (&ldquo;eyebrow&rdquo;). &ldquo;The white-browed banded-hair bird&rdquo; &mdash; named entirely for its visual appearance. The bold black-and-white head stripes are one of the most recognizable field marks of any North American sparrow. Unlike the Song Sparrow&rsquo;s pure-acoustic naming (&ldquo;melody song-finch&rdquo;), the White-crowned Sparrow&rsquo;s name contains NO sound reference. Two consecutive Passerellidae (47&ndash;48) with non-acoustic names.</p>
+
+        <h3>Recent Naming Comparison</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Binomial</th><th>Translation</th><th>Philosophy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>44</td><td>Lesser Goldfinch</td><td><em>Spinus psaltria</em></td><td>&ldquo;Female lute player of the thorn bush&rdquo;</td><td>Ecological + Musical</td></tr>
+            <tr><td>45</td><td>Song Sparrow</td><td><em>Melospiza melodia</em></td><td>&ldquo;Melody song-finch&rdquo;</td><td>Musical + Musical</td></tr>
+            <tr><td>46</td><td>Spotted Towhee</td><td><em>Pipilo maculatus</em></td><td>&ldquo;The spotted chirper&rdquo;</td><td>Acoustic + Visual</td></tr>
+            <tr><td>47</td><td>Dark-eyed Junco</td><td><em>Junco hyemalis</em></td><td>&ldquo;The winter rush-bird&rdquo;</td><td>Ecological + Temporal</td></tr>
+            <tr><td><strong>48</strong></td><td><strong>White-crowned Sparrow</strong></td><td><strong><em>Zonotrichia leucophrys</em></strong></td><td><strong>&ldquo;The white-browed banded-hair bird&rdquo;</strong></td><td><strong>Visual + Visual</strong></td></tr>
+          </tbody>
+        </table>
+        <p>The naming arc across the quartet: musical (45), acoustic-visual (46), ecological-temporal (47), visual-visual (48). The family&rsquo;s names progressively abandon sound.</p>
+
+        <h2>The Sound: Whistles, Buzzes, and Dialects</h2>
+        <p><strong>Song:</strong> 2&ndash;3 seconds, 2&ndash;7 kHz. Clear introductory whistle (species ID) + complex notes (individual ID) + buzzy trills (broadband energy) + terminal trill (dialect ID). A four-part structured song &mdash; the most functionally differentiated song in the Passerellidae quartet.</p>
+        <p><strong>Call note:</strong> A sharp &ldquo;pink&rdquo; or &ldquo;tseet&rdquo; &mdash; 0.05&ndash;0.1 seconds, 4&ndash;8 kHz. Contact and alarm call.</p>
+        <p><strong>Puget Sound dialects:</strong> Approximately 12 distinct dialects along the PNW coast (Nelson et al. 2004). Terminal trills stable across decades; complex notes variable. Dialect boundaries do not act as barriers to gene flow &mdash; genetically one large population (Soha et al. 2004, Poesel et al. 2017).</p>
+
+        <h3>The Passerellidae Song Quartet</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Feature</th><th>Song Sparrow (45)</th><th>Spotted Towhee (46)</th><th>Dark-eyed Junco (47)</th><th>White-crowned Sparrow (48)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acoustic element</td><td>The Preamble</td><td>The Rasp</td><td>The Snowbird</td><td><strong>The Dialect</strong></td></tr>
+            <tr><td>Song structure</td><td>Multi-part (complex)</td><td>1&ndash;2 part (textured)</td><td>1 part (simple trill)</td><td><strong>4&ndash;5 part (structured)</strong></td></tr>
+            <tr><td>Duration</td><td>2&ndash;4 seconds</td><td>~1.5 seconds</td><td>1&ndash;2 seconds</td><td><strong>2&ndash;3 seconds</strong></td></tr>
+            <tr><td>Organizing principle</td><td>Individual improvisation</td><td>Textural concentration</td><td>Elemental reduction</td><td><strong>Cultural transmission</strong></td></tr>
+            <tr><td>Energy</td><td>E=2</td><td>E=3</td><td>E=3</td><td><strong>E=2</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Four organizing principles in four degrees: improvisation, concentration, reduction, transmission. The Passerellidae quartet is a tutorial in the different ways birdsong can be organized.</p>
+
+        <h2>Five Subspecies</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Subspecies</th><th>Range</th><th>Migration</th><th>Bill Color</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong><em>pugetensis</em></strong></td><td><strong>Coastal SE AK to NW CA</strong></td><td><strong>Short-distance</strong></td><td><strong>Yellow-orange</strong></td></tr>
+            <tr><td><em>nuttalli</em></td><td>California coast (resident)</td><td>Non-migratory</td><td>Yellow</td></tr>
+            <tr><td><em>gambelii</em></td><td>W Alaska to Hudson Bay</td><td>Long-distance</td><td>Pinkish</td></tr>
+            <tr><td><em>oriantha</em></td><td>Mountain West (interior)</td><td>Medium-distance</td><td>Pinkish</td></tr>
+            <tr><td><em>leucophrys</em></td><td>Eastern boreal Canada</td><td>Long-distance</td><td>Pinkish</td></tr>
+          </tbody>
+        </table>
+        <p>The PNW form, <em>pugetensis</em>, is distinguished from <em>gambelii</em> (the other common WA subspecies) by dark lores and a yellowish-orange bill. In western Washington, <em>pugetensis</em> is the breeding bird; <em>gambelii</em> passes through on migration.</p>
+
+        <h2>Family Tracker After Degree 48</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td><strong>Passerellidae</strong></td><td><strong>45, 46, 47, 48</strong></td><td><strong>4 (FOUR-DEGREE STREAK)</strong></td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Paridae</td><td>3, 9</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+          </tbody>
+        </table>
+        <p>Passerellidae rises to 4 members, surpassing Trochilidae (3). Four-degree streak with four different genera &mdash; the most genus-diverse family streak in the engine. Eleven consecutive Passeriformes (38&ndash;48). Non-passerine needed urgently.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon dialect">D</div>
+            <div class="theory-content">
+              <h4>The Dialect <span class="theory-level foundational">foundational</span></h4>
+              <p>The 49th acoustic element. A culturally transmitted geographic song variant. The first element defined by cultural transmission &mdash; song learned from adult tutors during a sensitive period, creating geographically stable dialect regions. The Passerellidae quartet completes: preamble (improvisation) to rasp (concentration) to snowbird (reduction) to dialect (transmission).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pugetensis">P</div>
+            <div class="theory-content">
+              <h4><em>Pugetensis</em> &mdash; Named for Puget Sound <span class="theory-level foundational">foundational</span></h4>
+              <p>The only bird in the engine whose subspecific epithet matches the project&rsquo;s name. <em>Z. l. pugetensis</em> breeds in the PNW and forms 12 song dialects along the Pacific coast. The Sound names the bird and the bird names the Sound.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon streak">4</div>
+            <div class="theory-content">
+              <h4>Passerellidae Four-Degree Streak <span class="theory-level foundational">foundational</span></h4>
+              <p>Four consecutive Passerellidae (45&ndash;48). Four genera, four habitats, four song strategies. TIES the Parulidae quintet for longest same-family streak outside Hirundinidae. The quartet creates a complete ecological and acoustic survey of the New World Sparrow family.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon marler">M</div>
+            <div class="theory-content">
+              <h4>Marler&rsquo;s Legacy &mdash; Vocal Learning <span class="theory-level foundational">foundational</span></h4>
+              <p>Peter Marler (1964) established the White-crowned Sparrow as the model for vocal learning: sensitive period, auditory template, cultural transmission. Marler also studied Song Sparrow (degree 45). Ketterson studied junco (degree 47). Three great researchers span three of the quartet&rsquo;s four species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>E=2 Returns &mdash; Lower Registers Exceed E=4 <span class="theory-level foundational">foundational</span></h4>
+              <p>E=2 at degree 48. E=2 + E=3 = 22 degrees (44.9%) now surpasses E=4&rsquo;s 21 degrees (42.9%). The equilibrium at degree 47 tips in favor of lower registers. Quartet energy pattern: 2, 3, 3, 2 &mdash; a symmetrical arch.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon covid">C</div>
+            <div class="theory-content">
+              <h4>COVID Song Shift &mdash; Vocal Plasticity <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Derryberry (2020, <em>Science</em>): White-crowned Sparrows in San Francisco sang 35% more quietly during COVID lockdowns, lowered minimum frequency, widened bandwidth. Three timescales of vocal change in one species: evolutionary (subspecies), cultural (dialects), behavioral (real-time adjustment).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon habitat">H</div>
+            <div class="theory-content">
+              <h4>Mountain Meadow Edge <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Fourth Passerellidae habitat band: mountain meadow edge / alpine shrub. The quartet&rsquo;s habitat transect now extends from water (45) through forest interior (46&ndash;47) to the upper forest edge and alpine zone (48). From pond to summit.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-047: Dark-eyed Junco</strong>
+            <p>PASSERELLIDAE CONSECUTIVE (47&ndash;48). The snowbird meets the dialect. Elemental reduction followed by cultural transmission. Both are vocal learners, but the junco&rsquo;s song is simpler and less dialectally structured. Ketterson&rsquo;s bird (47) meets Marler&rsquo;s bird (48).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-045: Song Sparrow</strong>
+            <p>PASSERELLIDAE QUARTET ANCHOR + MARLER CONNECTION. Marler studied BOTH Song Sparrow and White-crowned Sparrow. The Song Sparrow is the more flexible learner; the White-crowned Sparrow has the stricter sensitive period. Margaret Morse Nice&rsquo;s bird (45) meets Marler&rsquo;s bird (48). Two masterclass species, one family.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-046: Spotted Towhee</strong>
+            <p>PASSERELLIDAE QUARTET MEMBER. The rasp (textural intensity) is two degrees from the dialect (cultural transmission). The Spotted Towhee concentrates; the White-crowned Sparrow transmits. Four consecutive Passerellidae, four organizing principles.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011: Oregon Junco</strong>
+            <p>PASSERELLIDAE DEEP CONNECTION. Degree 11 is a subspecies group within degree 47 (Dark-eyed Junco), which is the third member of the quartet that degree 48 completes. The Oregon Junco&rsquo;s metallic trill (degree 11) contrasts with the White-crowned Sparrow&rsquo;s structured dialect song (degree 48).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>VOCAL TYPES AS INCIPIENT SPECIES. Red Crossbill has 10+ call types that may be separate species. White-crowned Sparrow has 12 Puget Sound dialects that do NOT create genetic boundaries. Two models of vocal variation: crossbill types may split; sparrow dialects demonstrably do not.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002: Varied Thrush</strong>
+            <p>SUSTAINED TONE CONTRAST. The Varied Thrush holds a pure, sustained, single-frequency tone. The White-crowned Sparrow begins with a pure whistle (similar) then transitions to complex buzzy trills (opposite). Clean-to-complex within one song vs. clean throughout.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>White-crowned Sparrow documented across Washington. <em>Pugetensis</em> breeds in western WA; <em>gambelii</em> migrates through and winters. Common at feeders and in brushy habitats. Song dialects mapped along PNW coast.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Mountain meadow edge ecology. Alpine/subalpine shrub habitat. Altitudinal migration. Brushy edge as key habitat requirement. Climate-driven range shifts in mountain-breeding populations.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; White-crowned Sparrow (<em>Zonotrichia leucophrys</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; White-crowned Sparrow. Cornell Lab of Ornithology.</li>
+          <li>Audubon &mdash; White-crowned Sparrow Field Guide.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; White-crowned Sparrow.</li>
+          <li>Wikipedia &mdash; &ldquo;White-crowned sparrow.&rdquo;</li>
+          <li>Animalia.bio &mdash; White-crowned Sparrow.</li>
+          <li>Marler, P. and Tamura, M. (1964). &ldquo;Culturally Transmitted Patterns of Vocal Behavior in Sparrows.&rdquo; <em>Science</em> 146(3650): 1483&ndash;1486.</li>
+          <li>Sibley, D. A. &mdash; White-crowned Sparrow subspecies. sibleyguides.com.</li>
+          <li>Marler, P. (1970). &ldquo;A comparative approach to vocal learning.&rdquo; <em>J. Comparative and Physiological Psychology</em>.</li>
+          <li>Konishi, M. (1965). &ldquo;The role of auditory feedback in the control of vocalization in the White-crowned Sparrow.&rdquo; <em>Z. Tierpsychologie</em>.</li>
+          <li>Derryberry, E. P. et al. (2020). &ldquo;Singing in a silent spring.&rdquo; <em>Science</em> 370(6516): 575&ndash;579.</li>
+          <li>iNaturalist &mdash; White-crowned Sparrow subspecies identification guide.</li>
+          <li>Smithsonian Magazine &mdash; &ldquo;The Pandemic Shutdown in San Francisco Had Sparrows Singing Sexier Tunes.&rdquo; (2020).</li>
+          <li>Marler, P. and Peters, S. (1988). Song learning in Song Sparrow. <em>Ethology</em>.</li>
+          <li>Nelson, D. A. (2000). &ldquo;Song overproduction, selective attrition and song dialects in the white-crowned sparrow.&rdquo; <em>Animal Behaviour</em>.</li>
+          <li>Cornell Lab / All About Birds (2020). &ldquo;A City Gets Quieter in 2020.&rdquo; <em>Living Bird</em>.</li>
+          <li>Nelson, D. A. and Hallberg, K. I. (2004). &ldquo;Cultural Evolution of Puget Sound White-Crowned Sparrow Song Dialects.&rdquo; <em>Ethology</em>.</li>
+          <li>Nelson, D. A. (1996). &ldquo;Long-Term Changes in Songs and Song Dialect Boundaries of Puget Sound White-Crowned Sparrows.&rdquo; <em>The Condor</em>.</li>
+          <li>Soha, J. A. et al. (2004). &ldquo;Genetic analysis of song dialect populations in Puget Sound white-crowned sparrows.&rdquo; <em>Behavioral Ecology</em>.</li>
+          <li>National Geographic &mdash; Pandemic bird song article (2020).</li>
+          <li>Animal Diversity Web &mdash; Zonotrichia leucophrys.</li>
+          <li>Poesel, A. et al. (2017). &ldquo;High levels of gene flow among song dialect populations of the Puget Sound white-crowned sparrow.&rdquo; <em>Ethology</em>.</li>
+          <li>Partners in Flight &mdash; White-crowned Sparrow population estimates.</li>
+          <li>BirdLife International &mdash; Zonotrichia leucophrys factsheet.</li>
+          <li>NatureServe &mdash; Zonotrichia leucophrys species record.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">48&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Dialect</div>
+          <div class="stat-detail">#49 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 2</div>
+          <div class="stat-detail">E=2 returns; lower regs exceed E=4</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Passerellidae</div>
+          <div class="stat-detail">4th member &mdash; four-degree streak</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Zonotrichia</em></div>
+          <div class="stat-detail">New genus &mdash; 4th in quartet</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mountain Meadow</div>
+          <div class="stat-detail">Alpine shrub / edge habitat</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Breeds at elevation, winters in lowlands</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">46 unique</div>
+          <div class="stat-detail">49 entries (0&ndash;48)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">19</div>
+          <div class="stat-detail">Passerellidae at 4 members (4th place)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">11 consecutive Passeriformes (38&ndash;48)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~79 Million</div>
+          <div class="stat-detail">Stable (PIF); BBS ~stable overall</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">25&ndash;28 g</div>
+          <div class="stat-detail">Medium Passerellidae</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail"><em>pugetensis</em> = the PNW form</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">PNW Dialects</div>
+          <div class="stat-value">~12</div>
+          <div class="stat-detail">Along Pacific NW coast</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Key Research</div>
+          <div class="stat-value">Marler 1964</div>
+          <div class="stat-detail">Founded vocal learning field</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 048</p>
+  </footer>
+</body>
+</html>
