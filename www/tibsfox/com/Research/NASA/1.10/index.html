@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.10 — Explorer 4 + Cladonia stellaris | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --nuclear-deep: #050205;
+    --nuclear-mid: #100510;
+    --aurora-green: #40FF80;
+    --aurora-dim: #1A6634;
+    --radiation-amber: #D4A830;
+    --radiation-bright: #E8D060;
+    --lichen-pale: #C8D8A0;
+    --lichen-dim: #6A7A50;
+    --flash-white: #F0F0FF;
+    --space: #050510;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #1A3A2A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--space);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Aurora particle background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(64,255,128,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(64,255,128,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(232,208,96,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(64,255,128,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(200,216,160,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(64,255,128,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(5,2,5,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(26,102,52,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--nuclear-deep) 20%, var(--nuclear-mid) 40%, var(--aurora-dim) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--aurora-green);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(64,255,128,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(64,255,128,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(64,255,128,0.1);
+    border: 1px solid var(--aurora-green);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--aurora-green);
+    margin-bottom: 1rem;
+  }
+
+  .version-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--flash-white);
+  }
+
+  .status-success {
+    background: rgba(64,255,128,0.2);
+    border: 1px solid var(--aurora-green);
+    color: var(--aurora-green);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--aurora-green); font-weight: 500; }
+
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(5,5,16,0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--radiation-bright);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card p, .card li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .card strong { color: var(--radiation-bright); }
+  .card em { color: var(--lichen-pale); }
+
+  .resonance-card {
+    border-color: var(--aurora-green);
+    background: rgba(64,255,128,0.04);
+  }
+
+  .resonance-axis {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(64,255,128,0.1);
+  }
+
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num {
+    background: var(--aurora-green);
+    color: var(--space);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--aurora-green); }
+
+  /* Research track cards */
+  .track-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(5,5,16,0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover {
+    border-color: var(--aurora-green);
+    background: rgba(64,255,128,0.04);
+  }
+  .track-card a {
+    text-decoration: none;
+    display: block;
+  }
+  .track-card .track-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+  }
+  .track-card .track-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--aurora-green);
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+  .track-card .track-desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .track-card.t1 .track-title { color: var(--radiation-bright); }
+  .track-card.t2 .track-title { color: var(--lichen-pale); }
+  .track-card.t3 .track-title { color: var(--aurora-green); }
+  .track-card.t4 .track-title { color: var(--radiation-bright); }
+  .track-card.t5 .track-title { color: #7EB8DA; }
+  .track-card.t6 .track-title { color: var(--lichen-pale); }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(106,122,80,0.15);
+    border: 1px solid var(--lichen-dim);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .organism-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--aurora-green);
+    margin-bottom: 0.75rem;
+  }
+
+  .organism-card .sci-name {
+    font-style: italic;
+    color: var(--lichen-pale);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: rgba(5,5,16,0.5);
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--aurora-green);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .data-links {
+    background: rgba(11,61,145,0.12);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .data-links h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .data-links a {
+    display: block;
+    color: #7EB8DA;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.2);
+    transition: color 0.2s;
+  }
+
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(5,5,16,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-card a {
+    color: var(--aurora-green);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-card a:hover { color: var(--flash-white); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--aurora-green); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.10</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>v1.10 &mdash; Explorer 4 + <em>Cladonia stellaris</em></h1>
+    <p class="subtitle">The Artificial Aurora &mdash; Project Argus Nuclear Detonations in Space</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> July 26, 1958</span>
+      <span><span class="label">Type:</span> Earth Orbiter</span>
+      <span><span class="label">Program:</span> Explorer (ABMA / JPL)</span>
+      <span><span class="label">Orbit:</span> 263 &times; 2,210 km, 50.3&deg; inclination</span>
+      <span><span class="label">Dedication:</span> Carl Jung (July 26, 1875)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On July 26, 1958, Explorer 4 launched from Cape Canaveral carrying a suite of scintillation detectors designed to characterize the energy spectrum and particle composition of trapped radiation. Three days later, the National Aeronautics and Space Act was signed into law. Explorer 4 was the last significant pre-NASA satellite &mdash; and the first satellite purpose-built for a specific classified experiment: Project Argus.</p>
+      <p>Project Argus detonated three nuclear weapons in the South Atlantic magnetosphere (August 27, August 30, and September 6, 1958) to test the Christofilos prediction that fission electrons would become trapped by the geomagnetic field, forming artificial radiation belts. Explorer 4&rsquo;s four detectors &mdash; shielded and unshielded GM counters, a plastic scintillator, and a CsI(Tl) crystal scintillator &mdash; confirmed every quantitative prediction. The artificial belts appeared at the predicted L-shells, with the predicted energy spectrum, and decayed over 2&ndash;4 weeks as wave-particle interactions scattered the trapped electrons into the atmospheric loss cone.</p>
+      <p>The experiment also produced artificial aurora at the magnetically conjugate point over the Azores &mdash; visible light created by loss-cone electrons depositing their energy in the upper atmosphere. Explorer 4 measured what Christofilos predicted: the magnetosphere is a bottle, and you can fill it.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The Artificial Aurora</div>
+            <div class="track-desc">Christofilos, the secret fleet, Project Argus measurements, ethics of nuclear testing in space, the institutional moment</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">Christofilos (1959), chorus wave precipitation, CTBT verification, <em>C. stellaris</em> cesium-137 retention</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Cladonia stellaris</em></div>
+            <div class="track-desc">Star-tipped reindeer lichen &mdash; radiation accumulator, dual organism, slow time, the white surface and the hidden burden</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Trapping</div>
+            <div class="track-desc">Lorentz force, adiabatic invariants, dipole field geometry, scintillation statistics, loss cone calculation</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Nuclear Physics, Magnetism, Ethics deposits. Scintillation counter TRY. Cloud chamber TRY. Radiation belt in a bottle DIY.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Train, Visualize, Create</div>
+            <div class="track-desc">Particle trapping sim, belt decay model, interactive web trapper, Argus timeline, PINN training, Monte Carlo, game theory, creative arts</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Radiation Accumulator</div>
+          <em>C. stellaris</em> absorbs and concentrates radioactive fallout from nuclear testing. Explorer 4 measured and recorded artificial radiation injected into the magnetosphere by the Argus detonations. Both are radiation accumulators &mdash; one biological, one instrumental.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Starburst Morphology</div>
+          The lichen&rsquo;s repeatedly branching tips radiate outward in a stellate pattern that resembles an explosion frozen in biological time. Explorer 4 measured actual nuclear explosions in space &mdash; expanding electron shells propagating outward along magnetic field lines.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">The Shadow Surface</div>
+          <em>Cladonia stellaris</em> looks pale, clean, and pristine while potentially carrying significant radioactive contamination invisible to the eye. The classified Argus operation was hidden behind the public face of a scientific satellite program. Jung&rsquo;s shadow made material.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">The Dual Organism</div>
+          A lichen is a partnership &mdash; fungus, alga, and potentially a third basidiomycete partner &mdash; presenting as a single organism. Explorer 4 was a partnership &mdash; military and scientific, ARPA and the University of Iowa &mdash; presenting as a single satellite.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Slow Accumulation in Exposed Habitats</div>
+          <em>C. stellaris</em> grows 3&ndash;5 mm/year in the most exposed alpine habitats. Explorer 4 orbited through the most exposed regions of the radiation belts at 50.3&deg; inclination, accumulating data over 72 days. Both operate in exposed environments and build their records slowly.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <div class="axis-title">Neutral Witness</div>
+          The lichen absorbs without selectivity &mdash; fallout and nutrients alike. Explorer 4 measured without judgment &mdash; natural and artificial radiation with equal fidelity. Both are neutral witnesses to what has been done to the environments they inhabit.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-artificial-aurora.html" style="color: var(--aurora-green);">Story: &ldquo;The Artificial Aurora&rdquo;</a>
+          <a href="artifacts/stories/the-artificial-aurora.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; The night the sky glowed over the Azores, told from the deck of the USS Norton Sound
+        </li>
+        <li><a href="artifacts/audio/explorer4-argus-synth.dsp" style="color: #7EB8DA;">Audio: Explorer 4 Argus Synth</a> &mdash; FAUST synth, electron shell formation sonification (VST/LV2)</li>
+        <li><a href="artifacts/audio/western-tanager.dsp" style="color: #7EB8DA;">Audio: Western Tanager</a> &mdash; FAUST synth, tanager song in conifer canopy (VST/LV2)</li>
+        <li><a href="artifacts/circuits/led-particle-trap.md" style="color: var(--aurora-green);">Circuit: LED Particle Trap</a> &mdash; Magnetic trapping visualization with LEDs</li>
+        <li><a href="artifacts/circuits/radio-s-meter.md" style="color: var(--aurora-green);">Circuit: Radio S-Meter</a> &mdash; Signal strength meter for radio receiver</li>
+        <li><a href="artifacts/screensaver/explorer4-screensaver.frag" style="color: var(--radiation-bright);">Screensaver: Explorer 4</a> &mdash; GLSL fragment shader, aurora particle drift</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><a href="artifacts/simulations/python/particle-trapping.py" style="color: var(--aurora-green);">Python: Charged Particle Trapping</a> &mdash; Dipole field injection, shell formation, loss cone</li>
+        <li><a href="artifacts/simulations/python/belt-decay.py" style="color: var(--aurora-green);">Python: Belt Decay Model</a> &mdash; Pitch-angle diffusion, L-shell dependence, Starfish comparison</li>
+        <li><a href="artifacts/simulations/web/particle-trapper.html" style="color: #7EB8DA;">Web: Interactive Particle Trapper</a> &mdash; Click to inject, watch trapping and loss cone</li>
+        <li><a href="artifacts/simulations/web/argus-timeline.html" style="color: #7EB8DA;">Web: Argus Timeline</a> &mdash; Explorer 4 orbits, three detonations, four detector traces</li>
+        <li><a href="artifacts/simulations/spice/scintillator.cir" style="color: var(--radiation-bright);">SPICE: Scintillator Circuit</a> &mdash; SiPM readout with pulse height analysis (ngspice)</li>
+        <li><a href="artifacts/simulations/spice/s-meter.cir" style="color: var(--radiation-bright);">SPICE: S-Meter Circuit</a> &mdash; Radio signal strength meter (ngspice)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: #7EB8DA;">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(212,168,48,0.04); border-color: var(--radiation-amber);">
+      <h2 style="color: var(--radiation-amber);">Dedication: Carl Gustav Jung</h2>
+      <p><strong>Born July 26, 1875 &mdash; Died June 6, 1961</strong></p>
+      <p>Carl Jung was born exactly 83 years before Explorer 4 launched. His concept of the shadow &mdash; the unconscious, denied aspect of the self that contains both destructive and creative potential &mdash; maps onto Project Argus with unsettling precision. The Argus experiment was the shadow of the space program: secretly conducted, militarily motivated, environmentally destructive, and scientifically productive.</p>
+      <p>The same physics that traps electrons in the Van Allen belts (a beautiful natural phenomenon) traps fission electrons from nuclear weapons (a terrifying artificial one). The shadow is not evil &mdash; it contains the energy that the conscious self refuses to acknowledge. Jung spent his life arguing that psychological health requires integrating the shadow &mdash; not destroying it, not denying it, but acknowledging its existence and incorporating its energy. The space program eventually did this: the classified Argus data was declassified, the weapons knowledge was channeled into treaty verification, and the radiation belt physics became the foundation for spacecraft design and space weather prediction.</p>
+      <p style="font-style: italic; color: var(--text-dim);">&ldquo;The shadow is not evil; it is unconscious. It becomes destructive only when it remains unacknowledged and unintegrated.&rdquo; &mdash; C.G. Jung, Aion (1951)</p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.9/index.html">&larr; v1.9 Explorer 3</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.11/index.html">v1.11 Explorer 5 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Cladonia stellaris (Star-Tipped Reindeer Lichen)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">5&ndash;15 cm</div>
+          <div class="stat-label">Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1&ndash;5 mm/yr</div>
+          <div class="stat-label">Growth</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Boreal</div>
+          <div class="stat-label">Biome</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Cs-137</div>
+          <div class="stat-label">Accumulates</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        Fruticose lichen forming dense pale mats in boreal and alpine habitats. Absorbs all nutrients and contaminants through its surface &mdash; no roots, no excretion. The most effective biological accumulator of atmospheric nuclear fallout. Still recording 68 years after the tests.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(106,122,80,0.08); border-color: var(--lichen-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--lichen-pale); margin-bottom: 0.5rem;">Bird: Western Tanager</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em>Piranga ludoviciana</em> (degree 10). Neotropical migrant foraging in the same conifer forests where <em>C. stellaris</em> grows. The bird passes through; the lichen stays and records. Fast-lived and slow-lived, canopy and ground, migratory and sessile.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-005A">NSSDC: Explorer 4</a>
+      <a href="https://www.nasa.gov/history/">NASA History Office</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://www.ctbto.org/">CTBTO International Monitoring System</a>
+      <a href="https://rbsp-ect.newmexicoconsortium.org/">Van Allen Probes Data</a>
+      <a href="https://omniweb.gsfc.nasa.gov/">OMNIWeb Space Weather Data</a>
+    </div>
+
+    <div class="card" style="background: rgba(11,61,145,0.08); border-color: rgba(11,61,145,0.3);">
+      <h3 style="font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        Nuclear Physics &middot; Magnetism &middot; Ethics &middot; Lichenology &middot; Mathematics &middot; Military History &middot; Political Science &middot; Electronics &middot; Game Theory &middot; Information Theory
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(5,5,16,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--aurora-green); margin-bottom: 0.5rem;">Catalog Position</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim);">
+        Mission 11 of 720 &middot; Epoch 1 (Early Space Age) &middot; July 26, 1958
+      </p>
+      <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">
+        <strong style="color: var(--radiation-bright);">Thesis:</strong> The shadow experiment. Some of the most important physics in the space age was produced by nuclear weapons research, funded by military budgets, and classified by national security agencies. Explorer 4 measured both the light and the dark with equal precision.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(5,2,5,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--radiation-amber); margin-bottom: 0.5rem;">Explorer 4 Specifications</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        <strong style="color: var(--radiation-bright);">Mass:</strong> 11.67 kg &middot;
+        <strong style="color: var(--radiation-bright);">Launch:</strong> Juno I &middot;
+        <strong style="color: var(--radiation-bright);">Period:</strong> 110.2 min &middot;
+        <strong style="color: var(--radiation-bright);">Inclination:</strong> 50.3&deg; &middot;
+        <strong style="color: var(--radiation-bright);">Instruments:</strong> 2 scintillators + 2 GM counters &middot;
+        <strong style="color: var(--radiation-bright);">Data:</strong> 72 days &middot;
+        <strong style="color: var(--radiation-bright);">Reentry:</strong> Oct 23, 1959 (455 days)
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.10 Explorer 4 + <em>Cladonia stellaris</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+  <p style="margin-top: 0.5rem;"><em style="color: var(--lichen-pale);">&ldquo;The magnetosphere was a bottle, and you could fill it. The belt would appear, the satellites would see it, and the world would know.&rdquo;</em></p>
+</footer>
+
+</body>
+</html>

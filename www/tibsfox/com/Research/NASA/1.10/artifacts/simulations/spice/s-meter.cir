@@ -1,0 +1,132 @@
+* Explorer 4 Radio Series: S-Meter (Signal Strength Indicator)
+* =========================================================================
+* Mission 1.10 — Explorer 4 (Juno I / ABMA), July 26, 1958
+* PROJECT ARGUS — Measuring What You Cannot See
+*
+* This is the S-meter circuit for the progressive radio series.
+* It takes the AGC voltage from the receiver and converts it to a
+* DC level proportional to signal strength, driving a meter or LED
+* bar graph to display S-units (S1 through S9+).
+*
+* Circuit: Precision half-wave rectifier (op-amp based) + smoothing
+*   - Input: AGC voltage (varies with signal strength)
+*   - Output: stable DC proportional to signal level
+*   - The op-amp rectifier eliminates the 0.6V diode drop that
+*     would make a simple rectifier inaccurate at low signal levels
+*
+* The S-meter is to radio what the scintillation counter was to
+* Explorer 4: a quantitative measurement where before there was
+* only qualitative observation.
+*
+* Run: ngspice -b s-meter.cir
+* =========================================================================
+
+* --- Power Supply ---
+Vcc vcc 0 DC 9
+Vee vee 0 DC -9
+
+* --- Op-Amp Model (LM358-like) ---
+* Using behavioral model for simplicity
+.subckt OPAMP inp inn out vp vn
+  Rin inp inn 1MEG
+  Egain mid 0 inp inn 100000
+  Rout mid out 100
+  * Rail limiting
+  Dhi out vp DLIMIT
+  Dlo vn out DLIMIT
+.ends OPAMP
+.model DLIMIT D(Is=1e-14 N=0.01)
+
+* --- Input Signal ---
+* Simulating varying AGC voltage: stronger signal = more negative AGC
+* We sweep the input amplitude to simulate different signal strengths
+* from S1 (-121 dBm, ~50 nV) to S9 (-73 dBm, ~50 uV)
+*
+* For simulation, use a 455 kHz signal at variable amplitude
+* representing the IF/AGC output
+
+* Test with moderate signal (S5 level, ~3.2 uV at antenna,
+* amplified by IF gain to ~10mV at AGC point)
+Vin agc_in 0 SIN(0 0.01 455k 0 0)
+
+* --- Precision Rectifier ---
+* Eliminates the 0.6V diode drop of a simple rectifier
+* Key insight: the op-amp feedback loop forces the diode to conduct
+* at the exact zero crossing, not at 0.6V
+
+* Input scaling resistor
+R_in agc_in rect_in 47k
+
+* Bias to shift AGC range into positive territory
+* (AGC typically goes more negative with stronger signal)
+R_bias vcc rect_in 100k
+
+* Op-amp rectifier
+X1 rect_in rect_fb rect_out vcc vee OPAMP
+
+* Rectifier diode in feedback
+D1 rect_out rect_cathode D1N4148
+.model D1N4148 D(Is=2.52e-9 Rs=0.568 N=1.752 BV=100 IBV=100u
++ Cjo=4p M=0.4 Tt=11.54n)
+
+* Feedback resistor
+R_fb rect_cathode rect_fb 100k
+
+* Clamp diode (prevents op-amp saturation on negative half-cycle)
+D2 rect_fb rect_out D1N4148
+
+* --- Smoothing / Averaging ---
+* RC filter to convert pulsating DC to smooth DC
+* Time constant: R_smooth * C_smooth = 22k * 10u = 220 ms
+* This gives smooth readings without excessive lag
+R_smooth rect_cathode dc_out 22k
+C_smooth dc_out 0 10u
+
+* --- Meter Driver ---
+* The DC output drives a microammeter (0-100 uA full scale)
+* R_cal sets the full-scale deflection
+* For S9 = full scale: adjust R_cal so 100 uA flows at S9 AGC level
+R_cal dc_out meter_pos 100k
+R_meter meter_pos 0 1k
+
+* --- Analysis ---
+* Transient: show rectification and smoothing
+.tran 1u 20m
+
+* DC sweep: show S-meter response vs. input amplitude
+* Sweep input from S1 (very weak) to S9+ (very strong)
+.dc Vin 0.0001 0.1 0.001
+
+* --- Measurements ---
+.control
+  * Run transient analysis
+  run
+
+  * Plot input vs rectified output vs smoothed DC
+  set color0 = white
+  set color1 = green
+  set color2 = yellow
+  set color3 = red
+  set bgcolor = black
+
+  plot v(agc_in) v(rect_cathode) v(dc_out) title 'S-Meter: AGC Rectification'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Show DC output (the meter reading)
+  meas tran v_dc_avg AVG v(dc_out) from=10m to=20m
+  meas tran v_dc_rms RMS v(dc_out) from=10m to=20m
+
+  echo ""
+  echo "S-Meter DC Output:"
+  echo "  Average: $&v_dc_avg V"
+  echo "  RMS:     $&v_dc_rms V"
+  echo ""
+  echo "S-Unit Calibration (approximate):"
+  echo "  S1: 0.01V  S2: 0.02V  S3: 0.04V"
+  echo "  S4: 0.08V  S5: 0.16V  S6: 0.32V"
+  echo "  S7: 0.64V  S8: 1.28V  S9: 2.56V"
+  echo "  Each S-unit = 6 dB = 2x voltage"
+
+.endc
+
+.end

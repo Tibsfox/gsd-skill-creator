@@ -1,0 +1,235 @@
+{
+  "mission": "1.10",
+  "title": "Explorer 4 (Juno I)",
+  "date": "1958-07-26",
+  "organism": "Cladonia stellaris",
+  "organism_common": "Star-tipped reindeer lichen",
+  "organism_location": "Circumpolar Arctic and subarctic regions -- boreal forests and tundra of Alaska, northern Canada, Scandinavia, and Russia. Grows on soil in open, well-drained habitats. Primary winter forage for caribou and reindeer herds. Extremely slow growth rate (1-5 mm/year), individual colonies can exceed 50 years. Accumulates atmospheric deposition including radioactive isotopes from nuclear testing.",
+  "bird": "Piranga ludoviciana",
+  "bird_common": "Western Tanager",
+  "dedication": {
+    "name": "Carl Gustav Jung",
+    "born": "1875-07-26",
+    "died": "1961-06-06",
+    "birthplace": "Kesswil, Thurgau, Switzerland",
+    "field": "Analytical psychology, psychiatry, depth psychology",
+    "resonance": "Carl Jung was born on July 26, 1875 -- exactly 83 years before Explorer 4 launched on July 26, 1958. Jung spent his life studying the invisible structures of the psyche: the shadow (the hidden self), the collective unconscious (shared inherited patterns), and the archetypes (universal symbols that shape behavior from beneath awareness). The radiation belts are Jung's shadow made physical -- an invisible shell of trapped energy surrounding Earth that shapes the space environment for everything that passes through it. Explorer 4 made the artificial shadow visible by measuring the Argus radiation belts with scintillation counters. Jung made the psychological shadow visible through analytical methods. Both demonstrated that what we cannot see still determines what happens to us. The mandala -- Jung's symbol of psychic wholeness -- is structurally identical to the radiation belt viewed from above: concentric rings of energy surrounding a central body, invisible to direct observation but detectible through its effects."
+  },
+  "nodes": [
+    {
+      "id": "lorentz-force",
+      "concept": "Lorentz force -- the electromagnetic force on a charged particle",
+      "department": "electromagnetism",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "The Lorentz force F = q(E + v x B) governs the motion of charged particles in electromagnetic fields. In the absence of electric fields (E = 0), the force is purely magnetic: F = q(v x B). This force is always perpendicular to both the particle velocity and the magnetic field, which means it does no work (doesn't change the particle's kinetic energy) but continuously changes its direction. A charged particle in a uniform magnetic field traces a circle (or helix if there is a velocity component along the field) with the gyration radius r_g = mv_perp / (qB), called the Larmor radius. For Explorer 4's context, electrons injected by the Argus detonations had Larmor radii of approximately 1-10 km in Earth's magnetic field, depending on their energy and the local field strength. The gyration frequency (cyclotron frequency) omega_c = qB/m is approximately 1 MHz for electrons in the inner belt.",
+      "resonance": "Cladonia stellaris grows in all directions from its attachment point, radiating outward in a branching pattern that circles back on itself as branches curve and interweave. The lichen's growth pattern is not helical like a trapped particle, but it shares the property of being governed by an external field -- in the lichen's case, the distribution of moisture, light, and nutrients in the substrate. The lichen cannot choose its growth direction any more than an electron can choose its gyration direction. Both are constrained by the field they exist in. The lichen spirals outward; the electron spirals along the field line. Both trace the shape of their environment.",
+      "worked_example": {
+        "description": "Calculate the Larmor radius and cyclotron frequency for an Argus electron",
+        "parameters": {
+          "electron_mass_kg": 9.109e-31,
+          "electron_charge_C": 1.602e-19,
+          "electron_energy_keV": 500,
+          "B_field_T": 1e-5
+        },
+        "formula": "gamma = 1 + E/(m*c^2); v = c*sqrt(1-1/gamma^2); r_g = gamma*m*v_perp/(q*B); f_c = q*B/(2*pi*gamma*m)",
+        "result": "For 500 keV electron in 10 uT field: Larmor radius ~4.7 km, cyclotron frequency ~240 kHz. The electron traces a helix 9.4 km in diameter while bouncing between mirror points.",
+        "python": "import numpy as np\n\nm_e = 9.109e-31  # electron mass (kg)\nq_e = 1.602e-19  # electron charge (C)\nc = 2.998e8       # speed of light (m/s)\n\n# Argus electron parameters\nE_keV = 500\nE_J = E_keV * 1e3 * q_e\nB = 1e-5  # 10 uT (typical inner belt)\n\n# Relativistic calculations\ngamma = 1 + E_J / (m_e * c**2)\nv = c * np.sqrt(1 - 1/gamma**2)\nv_perp = v * np.sin(np.radians(45))  # 45 degree pitch angle\n\n# Larmor radius\nr_g = gamma * m_e * v_perp / (q_e * B)\nprint(f'Energy:           {E_keV} keV')\nprint(f'Gamma:            {gamma:.4f}')\nprint(f'Speed:            {v/c:.4f} c ({v:.3e} m/s)')\nprint(f'Larmor radius:    {r_g:.0f} m ({r_g/1000:.1f} km)')\n\n# Cyclotron frequency\nf_c = q_e * B / (2 * np.pi * gamma * m_e)\nprint(f'Cyclotron freq:   {f_c:.0f} Hz ({f_c/1e3:.0f} kHz)')\nprint(f'Gyration period:  {1/f_c*1e6:.2f} us')"
+      }
+    },
+    {
+      "id": "particle-trapping",
+      "concept": "Magnetic trapping -- charged particles confined by converging field lines",
+      "department": "space-physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.1",
+      "description": "A charged particle spiraling in a magnetic field that increases in strength along its path experiences an increasing force opposing its parallel motion. This is because the first adiabatic invariant mu = m*v_perp^2 / (2B) is conserved. As B increases, v_perp must increase; since total energy is conserved, v_parallel must decrease. When v_parallel reaches zero, the particle has reached its mirror point and reverses direction. In a dipole field like Earth's, the field increases toward both poles, creating two mirror points that trap the particle indefinitely. The particle bounces between these mirror points, spiraling around field lines, forming a radiation belt. Explorer 4 was designed specifically to fly through these trapped particle regions and measure their intensity after the Argus detonations created artificial belts.",
+      "resonance": "Cladonia stellaris is trapped too -- not by a magnetic field, but by its substrate and climate. The lichen cannot migrate. It grows where it established, absorbing what arrives, unable to reject harmful inputs or seek better conditions. A lichen colony on a tundra ridge will persist for decades in the same spot, accumulating cesium-137 from atmospheric testing, unable to shed the contamination. The trapping is different in mechanism but identical in consequence: the organism is confined to a region and must process whatever that region contains. The trapped electron bounces between mirror points; the trapped lichen grows between seasons.",
+      "worked_example": {
+        "description": "Calculate mirror point latitude for different equatorial pitch angles",
+        "parameters": {
+          "L_shell": 2.0,
+          "pitch_angles_deg": [15, 30, 45, 60, 75]
+        },
+        "formula": "cos^6(lambda_m) / sqrt(1 + 3*sin^2(lambda_m)) = sin^2(alpha_eq)",
+        "result": "15 degrees: mirror at ~67 degrees (near loss cone). 45 degrees: mirror at ~43 degrees. 75 degrees: mirror at ~18 degrees (trapped near equator). Smaller pitch angle = higher mirror latitude = closer to atmosphere = more likely to be lost.",
+        "python": "import numpy as np\n\ndef mirror_latitude(pitch_deg):\n    sin2a = np.sin(np.radians(pitch_deg))**2\n    for lam in np.linspace(0, np.pi/2, 10000):\n        lhs = np.cos(lam)**6 / np.sqrt(1 + 3*np.sin(lam)**2)\n        if lhs <= sin2a:\n            return np.degrees(lam)\n    return 90.0\n\nprint(f'{\"Pitch angle\":>12} {\"Mirror lat\":>12} {\"Mirror alt (L=2)\":>18}')\nprint('-' * 45)\nfor pa in [10, 15, 20, 30, 45, 60, 75, 85]:\n    ml = mirror_latitude(pa)\n    # Mirror altitude: r_mirror = L * cos^2(lambda_m) * R_earth\n    r_mirror = 2.0 * np.cos(np.radians(ml))**2 * 6371  # km\n    alt = r_mirror - 6371  # km above surface\n    print(f'{pa:>10}° {ml:>10.1f}° {alt:>14.0f} km')\n    if alt < 100:\n        print(f'  *** IN LOSS CONE (mirror below atmosphere) ***')"
+      }
+    },
+    {
+      "id": "mirror-points",
+      "concept": "Mirror points -- where trapped particles reverse direction in a magnetic bottle",
+      "department": "space-physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.2",
+      "description": "The mirror point is the latitude along a magnetic field line where a trapped particle's parallel velocity reaches zero and it reverses direction. At the mirror point, all kinetic energy is in the perpendicular (gyration) component -- the pitch angle equals 90 degrees. The mirror point location depends on the particle's equatorial pitch angle through the dipole mirror equation: sin^2(alpha_eq) = B_eq / B_mirror = cos^6(lambda_m) / sqrt(1 + 3*sin^2(lambda_m)). Particles with small equatorial pitch angles (nearly field-aligned) mirror at high latitudes near the poles; particles with large pitch angles mirror near the equator. If the mirror point would be inside the atmosphere (below ~100 km altitude), the particle collides with air molecules and is lost -- this defines the loss cone. The Argus experiments injected electrons at specific altitudes, and the decay rate of the artificial belts depended on how many electrons had mirror points inside the atmosphere.",
+      "resonance": "Every organism has mirror points -- boundaries beyond which it cannot go. Cladonia stellaris cannot grow below the permafrost or above the snow line. It cannot survive fire. It cannot tolerate heavy shade. These are its mirror points, and when it reaches them, it reverses -- growing back toward the conditions it can tolerate. The loss cone for the lichen is the set of environmental conditions (fire, burial, desiccation) where it is destroyed. The parallel with radiation belt physics is structural: both systems have a stable trapping region bounded by loss boundaries.",
+      "worked_example": {
+        "description": "Calculate the loss cone angle for the L=2 shell where Argus III injected electrons",
+        "parameters": {
+          "L_shell": 2.0,
+          "atmosphere_altitude_km": 100,
+          "R_earth_km": 6371
+        },
+        "formula": "cos^2(lambda_atm) = (R_earth + h_atm) / (L * R_earth); sin^2(alpha_LC) = B_eq / B_atm",
+        "result": "At L=2: loss cone half-angle ~6.5 degrees. Only electrons with equatorial pitch angles less than 6.5 degrees are in the loss cone. 93.5% of pitch angle space is trapped.",
+        "python": "import numpy as np\n\nR_E = 6371  # km\nh_atm = 100  # km (effective atmosphere top)\nL = 2.0\n\n# Find latitude where field line intersects atmosphere\nr_atm = R_E + h_atm\ncos2_lam = r_atm / (L * R_E)\nlam_atm = np.degrees(np.arccos(np.sqrt(cos2_lam)))\n\n# Field strength ratio\nsin_lam = np.sin(np.radians(lam_atm))\ncos_lam = np.cos(np.radians(lam_atm))\nB_ratio = np.sqrt(1 + 3*sin_lam**2) / cos_lam**6\n\n# Loss cone angle\nalpha_LC = np.degrees(np.arcsin(np.sqrt(1/B_ratio)))\n\nprint(f'L-shell: {L}')\nprint(f'Atmosphere at: {h_atm} km ({r_atm} km from center)')\nprint(f'Field line hits atmosphere at: {lam_atm:.1f}° latitude')\nprint(f'Field strength ratio B_mirror/B_eq: {B_ratio:.1f}')\nprint(f'Loss cone half-angle: {alpha_LC:.1f}°')\nprint(f'Fraction of pitch angle space trapped: {100*(1-np.sin(np.radians(alpha_LC))**2):.1f}%')\nprint(f'\\nElectrons with pitch angle < {alpha_LC:.1f}° are lost.')\nprint(f'Electrons with pitch angle > {alpha_LC:.1f}° are trapped.')\nprint(f'Argus injected at various pitch angles -- the belt decays')\nprint(f'as wave-particle interactions scatter electrons into the loss cone.')"
+      }
+    },
+    {
+      "id": "christofilos-effect",
+      "concept": "Christofilos effect -- nuclear detonations create artificial radiation belts",
+      "department": "space-physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.3",
+      "description": "In 1957, Greek physicist Nicholas Christofilos (1916-1972) predicted that a nuclear detonation at high altitude would inject beta-decay electrons into Earth's magnetic field, creating an artificial radiation belt. The fission products of a nuclear explosion undergo beta decay, releasing electrons with energies of 0.1-10 MeV. At altitudes above 100 km, these electrons encounter Earth's magnetic field and become trapped, spiraling along field lines just like natural Van Allen belt particles. Christofilos calculated the injection shell geometry, the expected belt lifetime, and the decay mechanisms (atmospheric loss, pitch-angle scattering). Project Argus (August-September 1958) tested his predictions with three 1.7 kt W-25 warheads detonated at 200, 240, and 540 km altitude. Explorer 4 confirmed every prediction. The effect demonstrated that the radiation environment of the entire planet could be modified by nuclear weapons.",
+      "resonance": "Christofilos saw what no one else saw -- an invisible consequence of a visible event. The nuclear explosion is dramatic and obvious. The radiation belt it creates is invisible and persistent. Jung saw the same pattern in the psyche: the visible behavior (the persona) is obvious; the invisible structure driving it (the shadow, the unconscious) is what actually determines outcomes. Christofilos was a self-taught physicist who worked alone on particle accelerator theory before being recruited by Lawrence Livermore. Like Jung, he saw patterns that the established community had missed.",
+      "worked_example": {
+        "description": "Estimate the number of trapped electrons from an Argus detonation",
+        "parameters": {
+          "yield_kt": 1.7,
+          "fission_fraction": 1.0,
+          "electrons_per_fission": 6,
+          "trapping_efficiency": 0.01
+        },
+        "formula": "N_fission = yield_kt * 1.45e23; N_electrons = N_fission * electrons_per_fission * trapping_efficiency",
+        "result": "Approximately 1.5e22 electrons trapped from a 1.7 kt detonation (assuming 1% trapping efficiency). These distribute around the L-shell, creating a belt detectable by scintillation counters.",
+        "python": "import numpy as np\n\nyield_kt = 1.7\nfissions_per_kt = 1.45e23  # fissions per kiloton TNT equivalent\n\nN_fission = yield_kt * fissions_per_kt\nprint(f'Yield: {yield_kt} kt')\nprint(f'Total fissions: {N_fission:.2e}')\n\n# Each fission produces ~6 beta electrons (from fission fragment decay)\nbeta_per_fission = 6\nN_beta = N_fission * beta_per_fission\nprint(f'Total beta electrons: {N_beta:.2e}')\n\n# Only a fraction are injected into the trapping region\n# with pitch angles outside the loss cone\ntrapping_eff = 0.01  # ~1% typical\nN_trapped = N_beta * trapping_eff\nprint(f'Trapping efficiency: {trapping_eff*100:.0f}%')\nprint(f'Trapped electrons: {N_trapped:.2e}')\n\n# Spread over the L-shell (circumference at L=2)\nL = 2.0\nR_E = 6.371e6\ncircum = 2 * np.pi * L * R_E\nprint(f'\\nL-shell circumference: {circum/1e6:.0f} km')\nprint(f'Linear density: {N_trapped/circum:.2e} electrons/m')\nprint(f'\\nExplorer 4 measured flux enhancement consistent with this injection.')"
+      }
+    },
+    {
+      "id": "scintillation-counting",
+      "concept": "Scintillation counting -- detecting radiation by light flashes in crystals",
+      "department": "nuclear-physics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.4",
+      "description": "A scintillation counter detects ionizing radiation by converting particle energy into visible light. When a high-energy particle (electron, proton, gamma ray) strikes a scintillator crystal (commonly NaI(Tl) or CsI(Tl)), it excites atoms in the crystal lattice. These atoms de-excite by emitting photons of visible or near-UV light -- a flash (scintillation) proportional in brightness to the particle's energy. A photomultiplier tube (PMT) converts the light flash into an electrical pulse, amplifying the signal by a factor of 10^5 to 10^7. The pulse height is proportional to particle energy, enabling energy discrimination. Explorer 4 carried two scintillation counters optimized for the Argus experiment: one for electrons (low-Z scintillator, thin window) and one for total dose (thick crystal, full absorption). The scintillation counter is the instrument that made the invisible radiation belts measurable.",
+      "resonance": "The scintillation counter converts invisible radiation into visible light -- making the unseen seen. This is the instrument's fundamental act. Cladonia stellaris performs the same conversion in reverse: it makes visible contamination invisible by absorbing it into its tissue. The counter flashes when a particle arrives; the lichen silently incorporates the isotope. The counter tells you what is happening now; the lichen tells you what happened over the past fifty years. Both are detectors. Both record. One is fast and transient (flash); the other is slow and permanent (accumulation).",
+      "worked_example": {
+        "description": "Calculate the expected count rate for Explorer 4 in the Argus artificial belt",
+        "parameters": {
+          "detector_area_cm2": 2.0,
+          "flux_electrons_per_cm2_s": 1e7,
+          "detection_efficiency": 0.8,
+          "energy_threshold_keV": 100
+        },
+        "formula": "count_rate = flux * area * efficiency * fraction_above_threshold",
+        "result": "Expected ~1.2e7 counts/s in the artificial belt (vs ~10^3 counts/s in natural background). This 10,000x enhancement was unambiguously detectable.",
+        "python": "import numpy as np\n\n# Explorer 4 scintillation counter parameters\narea = 2.0        # cm^2 (approximate)\nefficiency = 0.8  # detection efficiency\n\n# Natural background (cosmic rays + natural belt)\nflux_natural = 1e3  # electrons/cm^2/s\n\n# Argus artificial belt (peak, after detonation)\nflux_argus = 1e7   # electrons/cm^2/s\n\nrate_natural = flux_natural * area * efficiency\nrate_argus = flux_argus * area * efficiency\n\nprint(f'Detector area: {area} cm^2')\nprint(f'Efficiency: {efficiency*100:.0f}%')\nprint(f'')\nprint(f'Natural background:')\nprint(f'  Flux:       {flux_natural:.1e} e/cm^2/s')\nprint(f'  Count rate: {rate_natural:.0f} counts/s')\nprint(f'')\nprint(f'Argus artificial belt (peak):')\nprint(f'  Flux:       {flux_argus:.1e} e/cm^2/s')\nprint(f'  Count rate: {rate_argus:.1e} counts/s')\nprint(f'')\nprint(f'Enhancement: {rate_argus/rate_natural:.0f}x over background')\nprint(f'This is unambiguous detection.')"
+      }
+    },
+    {
+      "id": "artificial-radiation-belt",
+      "concept": "Artificial radiation belt -- human-made trapped particle population",
+      "department": "space-physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.5",
+      "description": "An artificial radiation belt is a population of charged particles trapped in Earth's magnetic field as a result of human activity -- specifically, nuclear detonations at high altitude. Project Argus (1958) created three temporary belts with 1.7 kt weapons. Starfish Prime (1962) created a much more intense belt with a 1.4 Mt weapon at 400 km that persisted for years and damaged several satellites. The artificial belts demonstrate that the magnetospheric particle population is not in equilibrium but is a dynamic system that can be perturbed. The belts decay through multiple mechanisms: atmospheric loss (particles in the loss cone), pitch-angle diffusion (wave-particle interactions scatter particles toward the loss cone), charge exchange (trapped ions capture electrons from neutral hydrogen), and Coulomb scattering (collisions with thermal plasma). The decay timescale ranges from hours (low altitude, large loss cone) to years (high altitude, small loss cone, energetic particles).",
+      "resonance": "Nuclear testing created both artificial radiation belts in space and artificial radioactive contamination on the ground. The lichen absorbed the ground-level contamination the same way the magnetosphere absorbed the space-level injection. Both are accumulation systems: particles arrive, become trapped (in the belt or in the lichen tissue), and decay on their own timescales. The belt decays through physical loss processes; the isotopes in the lichen decay through radioactive half-life. Cesium-137 has a half-life of 30 years. The Argus belts had half-lives of days to weeks. Both are clocks counting down from the moment of injection.",
+      "worked_example": {
+        "description": "Model the decay of the Argus III artificial belt",
+        "parameters": {
+          "initial_flux": 1.5e8,
+          "injection_altitude_km": 540,
+          "L_shell": 2.0,
+          "decay_time_days": 14
+        },
+        "formula": "flux(t) = flux_0 * exp(-t/tau) * (1 - exp(-t/t_rise))",
+        "result": "Argus III belt at L=2.0: peak flux ~1.5e8 e/cm^2/s, e-folding time ~14 days, half-life ~9.7 days. Belt detectable above background for approximately 2 months.",
+        "python": "import numpy as np\n\nflux_0 = 1.5e8   # peak flux (electrons/cm^2/s)\ntau = 14 * 24     # e-folding time (hours)\nt_rise = 1.0       # rise time (hours, electron drift around Earth)\nbg = 1e4           # natural background\n\nprint('Argus III Belt Decay')\nprint('=' * 45)\nprint(f'{\"Day\":>5} {\"Flux (e/cm2/s)\":>16} {\"Above bg?\":>10}')\nprint('-' * 45)\nfor day in [0, 0.5, 1, 2, 3, 5, 7, 10, 14, 21, 28, 42, 56]:\n    t_hr = day * 24\n    rise = 1 - np.exp(-t_hr / t_rise)\n    decay = np.exp(-t_hr / tau)\n    flux = flux_0 * rise * decay\n    above = 'YES' if flux > bg else 'no'\n    print(f'{day:>5.1f} {flux:>16.2e} {above:>10}')\n\nhalf_life = tau * np.log(2) / 24\ntime_to_bg = -tau * np.log(bg / flux_0) / 24\nprint(f'\\nHalf-life: {half_life:.1f} days')\nprint(f'Time to background: {time_to_bg:.0f} days')"
+      }
+    },
+    {
+      "id": "nuclear-emp",
+      "concept": "Nuclear EMP -- electromagnetic pulse from high-altitude nuclear detonation",
+      "department": "electromagnetism",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.6",
+      "description": "A high-altitude nuclear detonation produces an electromagnetic pulse (EMP) through several mechanisms. The initial gamma rays from the explosion travel outward at the speed of light and interact with air molecules in the upper atmosphere through Compton scattering, producing a burst of high-energy electrons. These electrons spiral in Earth's magnetic field, emitting synchrotron radiation that constitutes the E1 component of EMP -- a very fast (nanosecond rise time), very intense electric field pulse that can damage unshielded electronics over continental-scale areas. The Argus tests were too small (1.7 kt) to produce significant EMP, but Starfish Prime (1962, 1.4 Mt, 400 km altitude) caused widespread electrical effects in Hawaii, 1,450 km away -- streetlights failed, burglar alarms triggered, telephone switching equipment was damaged. EMP was a secondary discovery of the high-altitude nuclear test program; the primary purpose (for Argus) was radiation belt research.",
+      "resonance": "EMP is the nuclear shadow that travels at the speed of light -- an invisible pulse that disrupts everything electronic in its path without leaving a crater or a cloud. Jung's shadow operates the same way: an invisible influence that disrupts conscious functioning without being directly observable. The EMP from Starfish Prime reached Hawaii in 5 milliseconds and damaged systems whose operators never saw the explosion. The shadow reaches into behavior and damages functioning whose subjects never see the cause. Both are invisible. Both are destructive. Both travel faster than awareness.",
+      "worked_example": {
+        "description": "Estimate EMP field strength from a high-altitude nuclear detonation",
+        "parameters": {
+          "yield_Mt": 1.4,
+          "altitude_km": 400,
+          "distance_km": 1450
+        },
+        "formula": "E_peak ~ k * Y^(1/2) / R (simplified); actual EMP depends on gamma output, air density profile, and geomagnetic field geometry",
+        "result": "Starfish Prime produced peak fields of ~5.6 kV/m at Hawaii (1,450 km away). Argus at 1.7 kt would produce ~1/30th the field strength at the same distance -- detectable by instruments but not damaging to infrastructure.",
+        "python": "import numpy as np\n\n# Starfish Prime (reference case)\nyield_Mt = 1.4\nalt_km = 400\n\n# Argus (comparison)\nyield_argus_kt = 1.7\nyield_argus_Mt = yield_argus_kt / 1000\n\n# EMP field scales roughly as sqrt(yield) for gamma-driven E1\nratio = np.sqrt(yield_argus_Mt / yield_Mt)\n\nprint('High-Altitude Nuclear EMP Comparison')\nprint('=' * 45)\nprint(f'Starfish Prime: {yield_Mt} Mt at {alt_km} km')\nprint(f'  Peak E-field at Hawaii: ~5.6 kV/m')\nprint(f'  Effects: streetlights out, alarms triggered')\nprint(f'')\nprint(f'Argus tests: {yield_argus_kt} kt at 200-540 km')\nprint(f'  E-field ratio: {ratio:.3f} of Starfish')\nprint(f'  Estimated peak: ~{5.6 * ratio:.2f} kV/m at 1450 km')\nprint(f'  Effects: detectable by instruments, no damage')\nprint(f'')\nprint(f'The Argus tests were 800x smaller than Starfish Prime.')\nprint(f'Their purpose was radiation belt science, not EMP.')\nprint(f'But the physics is the same: gamma rays + magnetic field = EMP.')"
+      }
+    },
+    {
+      "id": "project-argus",
+      "concept": "Project Argus -- three nuclear detonations in space to test radiation belt theory",
+      "department": "space-history",
+      "level": "introductory",
+      "tspb_layer": 2,
+      "tspb_section": "2.1",
+      "description": "Project Argus was a series of three nuclear weapons tests conducted in August-September 1958 over the South Atlantic Ocean. Three 1.7-kiloton W-25 warheads were launched on X-17A rockets from USS Norton Sound and detonated at altitudes of 200, 240, and 540 km. The tests were proposed by Nicholas Christofilos and operated by the Defense Nuclear Agency. The purpose was to validate Christofilos's prediction that nuclear detonations would create artificial radiation belts. Explorer 4 (launched July 26, 1958) carried scintillation counters specifically designed to measure the artificial belts. The tests confirmed every prediction: electrons were trapped, belts formed at the expected L-shells, and decay rates matched theoretical calculations. Project Argus was the largest scientific experiment ever conducted at the time -- involving 9 ships, aircraft, tracking stations on 4 continents, and the Explorer 4 satellite. It was classified until the New York Times broke the story on March 19, 1959. Argus remains the only nuclear test series conducted specifically for basic scientific research.",
+      "resonance": "The name Argus comes from Argus Panoptes, the hundred-eyed giant of Greek mythology who sees everything. The project was designed to see the invisible -- to detect the radiation belts that no human sense can perceive. Cladonia stellaris has no eyes, but it sees everything too, in its own way: every isotope, every pollutant, every trace element that falls on it is recorded in its tissue. The lichen is a hundred-eyed watcher that never blinks. Explorer 4 was the technological Argus; Cladonia is the biological one.",
+      "worked_example": {
+        "description": "Timeline and parameters of the three Argus tests",
+        "parameters": {
+          "test_dates": ["1958-08-27", "1958-08-30", "1958-09-06"],
+          "altitudes_km": [200, 240, 540],
+          "yield_kt": 1.7,
+          "launch_ship": "USS Norton Sound (AVM-1)"
+        },
+        "formula": "N/A (historical event)",
+        "result": "Three tests over 11 days. Each confirmed Christofilos predictions. Explorer 4 detected all three artificial belts. Higher altitude injection = longer belt persistence.",
+        "python": "# Project Argus Timeline\nprint('PROJECT ARGUS — Nuclear Detonations in Space')\nprint('=' * 55)\nprint(f'{\"Test\":>10} {\"Date\":>14} {\"Alt (km)\":>10} {\"Yield\":>8} {\"L-shell\":>8}')\nprint('-' * 55)\ntests = [\n    ('Argus I',   '1958-08-27', 200, 1.7, 1.7),\n    ('Argus II',  '1958-08-30', 240, 1.7, 1.8),\n    ('Argus III', '1958-09-06', 540, 1.7, 2.0),\n]\nfor name, date, alt, yld, L in tests:\n    print(f'{name:>10} {date:>14} {alt:>10} {yld:>6.1f} kt {L:>7.1f}')\n\nprint(f'\\nLaunch platform: USS Norton Sound (AVM-1)')\nprint(f'Rocket: X-17A three-stage')\nprint(f'Warhead: W-25 (1.7 kt)')\nprint(f'Location: South Atlantic (~38S, 12W)')\nprint(f'Detector satellite: Explorer 4 (launched 1958-07-26)')\nprint(f'Classified until: 1959-03-19 (NYT leak)')\nprint(f'\\nThe only nuclear test series conducted for basic science.')"
+      }
+    },
+    {
+      "id": "s-meter",
+      "concept": "S-meter -- standardized signal strength measurement for radio receivers",
+      "department": "radio-engineering",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.5",
+      "description": "The S-meter (Signal strength meter) is a standardized instrument in radio receivers that displays the strength of the received signal on a scale from S1 (barely detectable, -121 dBm) to S9 (very strong, -73 dBm), with additional markings in dB above S9 for very strong signals. Each S-unit represents 6 dB of signal power (a factor of 4 in power or 2 in voltage). The S-meter derives its reading from the AGC (Automatic Gain Control) voltage: as signal strength increases, the AGC reduces the receiver gain to prevent overload, and the AGC voltage change drives the meter. In the progressive radio series, the S-meter (v1.10) adds quantitative measurement capability to the receiver chain built in v1.2-v1.9. It converts the qualitative observation 'I can hear a signal' into the quantitative measurement 'the signal is S7.' This is the same step that Explorer 4's scintillation counters performed for radiation: converting detection into measurement.",
+      "resonance": "The S-meter quantifies reception the way a rain gauge quantifies precipitation. Cladonia stellaris has no S-meter, but researchers who measure isotope concentrations in lichen tissue are performing the same function: converting the lichen's passive accumulation into a quantitative measurement. The lichen is the antenna; the gamma spectrometer is the S-meter. Both convert what is received into a number. The step from detection to measurement is the step from knowing something exists to knowing how much of it there is.",
+      "worked_example": {
+        "description": "S-meter scale and corresponding signal levels",
+        "parameters": {
+          "s_units": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+          "reference_impedance_ohm": 50
+        },
+        "formula": "dBm = -121 + (S - 1) * 6; V_uV = sqrt(P_W * R * 1e12); P_W = 10^(dBm/10) * 1e-3",
+        "result": "S1 = -121 dBm (0.05 uV), S5 = -97 dBm (3.2 uV), S9 = -73 dBm (50 uV). Each step is 6 dB = 4x power.",
+        "python": "import numpy as np\n\nprint('S-Meter Scale (50 ohm reference)')\nprint('=' * 55)\nprint(f'{\"S-unit\":>7} {\"dBm\":>7} {\"uV\":>10} {\"Power (W)\":>14} {\"Description\"}')\nprint('-' * 55)\n\ndescriptions = {\n    1: 'Barely detectable',\n    2: 'Very weak',\n    3: 'Weak',\n    4: 'Fair',\n    5: 'Moderate',\n    6: 'Good',\n    7: 'Strong',\n    8: 'Very strong',\n    9: 'Excellent',\n}\n\nfor s in range(1, 10):\n    dbm = -121 + (s - 1) * 6\n    power_w = 10**(dbm / 10) * 1e-3\n    voltage_uv = np.sqrt(power_w * 50) * 1e6\n    desc = descriptions.get(s, '')\n    print(f'  S{s:>1}    {dbm:>5}  {voltage_uv:>8.2f}  {power_w:>12.2e}  {desc}')\n\nprint(f'\\nEach S-unit = 6 dB = 4x power = 2x voltage')\nprint(f'S9+10 dB = -63 dBm (very strong local signal)')\nprint(f'S9+20 dB = -53 dBm (extremely strong)')"
+      }
+    },
+    {
+      "id": "radioecology",
+      "concept": "Radioecology -- the study of radioactive substances in ecological systems",
+      "department": "ecology",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.6",
+      "description": "Radioecology studies how radioactive materials move through ecosystems: atmospheric deposition, soil absorption, plant uptake, bioaccumulation in food chains, and eventual decay or removal. The lichen-caribou-human food chain in the Arctic is one of the most studied radioecological pathways. Lichens (especially Cladonia stellaris and Cladonia rangiferina) absorb atmospheric fallout directly because they have no root system to filter inputs. Caribou and reindeer consume 2-5 kg of lichen per day in winter, concentrating cesium-137 in their muscle tissue by a factor of approximately 10 relative to the lichen. Humans who eat caribou concentrate it further. Studies following atmospheric nuclear testing in the 1950s-1960s documented cesium-137 body burdens in Inupiat communities that were 2-10x higher than in non-caribou-eating populations at the same latitude. The pathway demonstrates that radioactive contamination is not just a local event at the detonation site -- through atmospheric transport and ecological amplification, it becomes a global biological phenomenon.",
+      "resonance": "The lichen-caribou pathway is a signal chain, directly analogous to the scintillation counter signal chain in Explorer 4. Atmospheric isotope deposition is the input signal. The lichen is the antenna (passive collection). The caribou is the amplifier (biological concentration by ~10x). The human consumer is the discriminator (selective absorption of certain isotopes). The epidemiological study is the readout. Each stage in the ecological chain performs a signal processing function: collection, amplification, discrimination, measurement. The parallel with the radio signal chain (antenna, RF amp, mixer, IF amp, detector, S-meter) is structural and complete.",
+      "worked_example": {
+        "description": "Bioconcentration of cesium-137 through the lichen-caribou-human food chain",
+        "parameters": {
+          "atmospheric_deposition_Bq_m2": 1000,
+          "lichen_concentration_factor": 1,
+          "caribou_concentration_factor": 10,
+          "human_daily_caribou_g": 400,
+          "cesium137_half_life_years": 30.17
+        },
+        "formula": "C_lichen = deposition * absorption_efficiency; C_caribou = C_lichen * BCF_caribou; Dose = C_caribou * intake_rate * dose_coefficient",
+        "result": "1000 Bq/m^2 deposition → ~500 Bq/kg in lichen → ~5000 Bq/kg in caribou muscle → ~15 uSv/day dose from 400g caribou consumption. Peak Arctic body burdens were measured at 500-2000 Bq in the early 1960s.",
+        "python": "import numpy as np\n\n# Atmospheric deposition (peak 1963, post-moratorium decline)\ndeposition = 1000  # Bq/m^2 cumulative\n\n# Lichen absorption (no roots = direct absorption)\nlichen_conc = 500  # Bq/kg dry weight (measured values)\n\n# Caribou bioconcentration\ncaribou_intake_kg_day = 3  # kg lichen/day (winter)\ncaribou_biological_half_life_days = 20  # Cs-137 in muscle\ncaribou_conc = lichen_conc * 10  # ~10x concentration factor\n\n# Human consumption\nhuman_intake_g = 400  # g caribou/day (Inupiat winter diet)\nCs137_dose_coeff = 1.3e-8  # Sv/Bq (ingestion, Cs-137)\n\ndaily_intake_Bq = caribou_conc * human_intake_g / 1000\ndaily_dose_Sv = daily_intake_Bq * Cs137_dose_coeff\n\nprint('Radioecological Pathway: Atmosphere → Lichen → Caribou → Human')\nprint('=' * 55)\nprint(f'Atmospheric deposition:  {deposition} Bq/m^2')\nprint(f'Lichen concentration:    {lichen_conc} Bq/kg')\nprint(f'Caribou concentration:   {caribou_conc} Bq/kg (10x BCF)')\nprint(f'Human daily intake:      {human_intake_g} g caribou')\nprint(f'Daily Cs-137 intake:     {daily_intake_Bq:.0f} Bq')\nprint(f'Daily dose:              {daily_dose_Sv*1e6:.1f} uSv')\nprint(f'Annual dose:             {daily_dose_Sv*365*1e3:.1f} mSv')\nprint(f'\\nFor reference: natural background ~2.4 mSv/year')\nprint(f'Peak Arctic Cs-137 body burdens (1960s): 500-2000 Bq')\nprint(f'\\nThe lichen cannot refuse what falls on it.')\nprint(f'The caribou cannot avoid what grows beneath it.')\nprint(f'The pathway is the message.')"
+      }
+    }
+  ]
+}

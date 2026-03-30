@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Anchors: Explorer 4 | v1.10 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --nuclear-deep: #050205;
+    --nuclear-mid: #100510;
+    --aurora-green: #40FF80;
+    --aurora-dim: #1A6634;
+    --radiation-amber: #D4A830;
+    --radiation-bright: #E8D060;
+    --lichen-pale: #C8D8A0;
+    --lichen-dim: #6A7A50;
+    --flash-white: #F0F0FF;
+    --space: #050510;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #1A3A2A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(64,255,128,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(64,255,128,0.04) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(232,208,96,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(64,255,128,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(26,102,52,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(200,216,160,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 18% 75%, rgba(5,2,5,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 65% 80%, rgba(64,255,128,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 92% 8%, rgba(11,61,145,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--aurora-green); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--flash-white); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--nuclear-deep) 20%, var(--nuclear-mid) 40%, var(--aurora-dim) 70%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--aurora-green); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(64,255,128,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(64,255,128,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(64,255,128,0.1); border: 1px solid var(--aurora-green); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--aurora-green); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--flash-white); }
+  .track-badge { background: rgba(11,61,145,0.3); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; color: #7EB8DA; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--aurora-green); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--radiation-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--aurora-green); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose h4 { font-size: 1rem; color: #7EB8DA; margin: 1.5rem 0 0.5rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--radiation-bright); }
+  .prose em { color: var(--lichen-pale); }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.5rem; }
+  .prose code { font-family: 'DM Mono', monospace; color: var(--aurora-green); background: rgba(64,255,128,0.06); padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.88rem; }
+
+  .paper-card {
+    background: rgba(11,61,145,0.08);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .paper-card h4 { color: #7EB8DA; margin-top: 0; font-size: 0.95rem; }
+  .paper-card .paper-meta { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .paper-card p { font-size: 0.9rem; line-height: 1.7; }
+  .paper-card .tspb-tag { display: inline-block; background: rgba(64,255,128,0.15); border: 1px solid var(--aurora-green); border-radius: 4px; padding: 0.15rem 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--aurora-green); margin-top: 0.5rem; }
+
+  .historical-paper {
+    background: rgba(212,168,48,0.06);
+    border-color: var(--radiation-amber);
+  }
+  .historical-paper h4 { color: var(--radiation-amber); }
+
+  .state-of-art {
+    background: rgba(5,5,16,0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  .state-of-art h3 { color: var(--radiation-bright); font-family: 'Libre Baskerville', serif; }
+
+  .evolution-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(26,58,42,0.3);
+  }
+  .evolution-item:last-child { border-bottom: none; }
+  .evo-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--radiation-amber);
+    font-weight: 600;
+    flex-shrink: 0;
+    width: 7rem;
+  }
+  .evo-text { font-size: 0.9rem; line-height: 1.6; }
+
+  .how-to-use {
+    background: rgba(64,255,128,0.04);
+    border: 1px solid var(--aurora-green);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  .how-to-use h3 { color: var(--aurora-green); font-family: 'Libre Baskerville', serif; margin-bottom: 0.75rem; }
+  .how-to-use p { font-size: 0.9rem; }
+
+  .closing-quote {
+    border-left: 3px solid var(--aurora-dim);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: rgba(5,2,5,0.4);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .nav-card { background: rgba(5,5,16,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--aurora-green); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--flash-white); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--aurora-green); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">v1.10 Explorer 4</a><span class="sep">/</span><span>Scientific Anchors</span>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.10</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Wall-Clock Papers</span>
+    </div>
+    <h1>Scientific Anchors: Explorer 4</h1>
+    <p class="subtitle">Wall-clock papers from March 28&ndash;30, 2026 &mdash; the state of knowledge at authorship</p>
+    <div class="meta-row">
+      <span><span class="label">Anchor Date:</span> March 30, 2026</span>
+      <span><span class="label">Papers:</span> 1 historical + 3 contemporary</span>
+      <span><span class="label">Domains:</span> Magnetospheric Physics, Nuclear Detection, Radioecology, Lichenology</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <article class="prose">
+
+    <h2>Historical Paper (Connected to Mission)</h2>
+
+    <div class="paper-card historical-paper">
+      <h4>Christofilos, N.C. (1959). &ldquo;The Argus Experiment.&rdquo;</h4>
+      <div class="paper-meta">Journal of Geophysical Research, 64(8), pp. 869&ndash;875. Published August 1959.</div>
+      <p>This paper is the theoretical foundation and experimental summary of Project Argus &mdash; the classified military experiment that detonated three small nuclear weapons in the Earth&rsquo;s magnetosphere to test whether artificial radiation belts could be created. Christofilos had first proposed the concept in a classified report to the U.S. Department of Defense in 1957, predicting that electrons from nuclear fission beta decay, injected at altitudes of 200&ndash;500 km, would become trapped by the geomagnetic field and form persistent shells of artificial radiation encircling the Earth. The prediction was based on the Lorentz force and the adiabatic invariants of charged particle motion in a dipole magnetic field &mdash; physics that Christofilos knew from his work on particle accelerator design at the Lawrence Radiation Laboratory (now Lawrence Berkeley National Laboratory).</p>
+      <p>The paper presents the theoretical framework: electron injection, gyration and trapping by the geomagnetic field, longitudinal drift producing a complete shell within minutes, and gradual loss through pitch-angle scattering into the atmospheric loss cone over weeks to months. It then summarizes the experimental results from the three Argus detonations (August 27, August 30, and September 6, 1958), all conducted from the deck of the USS Norton Sound in the South Atlantic Ocean. Each detonation used a modified W-25 warhead (approximately 1.7 kilotons yield) launched on an X-17A rocket to approximately 200 km altitude.</p>
+      <p>The results confirmed every quantitative prediction: artificial radiation shells formed within minutes at the expected L-shells, persisted for approximately 2&ndash;4 weeks, and were detected by Explorer 4&rsquo;s scintillation counters and by ground-based and rocket-borne instruments deployed across the South Atlantic and at the magnetically conjugate point in the North Atlantic (where the field lines from the detonation latitude connect to the opposite hemisphere). The paper also reports the detection of artificial aurora at the conjugate point &mdash; visible light produced by the loss-cone electrons that escaped trapping and deposited their energy in the upper atmosphere at approximately 100 km altitude. The aurora was observed visually from the Azores and detected by photometric instruments.</p>
+      <p>Christofilos notes that the experiment demonstrated both the feasibility of artificial belt creation and its limitations as a weapons concept: the belts produced by kiloton-yield weapons were too weak and too short-lived to pose a serious threat to ballistic missile warheads, though he suggests that megaton-yield weapons would produce far more intense and longer-lived belts. This suggestion was borne out four years later when the Starfish Prime test (1.4 megaton, July 9, 1962) created an artificial belt that persisted for years and damaged several satellites.</p>
+      <p><strong>Connection to Explorer 4:</strong> Explorer 4 was the primary orbital instrument for Project Argus. It was launched 31 days before the first Argus detonation, providing baseline measurements of the natural radiation environment at the expected detonation L-shells. After each detonation, Explorer 4&rsquo;s scintillation counters detected the sudden appearance of intense electron fluxes at the predicted locations, measured their energy spectra (confirming fission beta decay origin), and tracked their decay over the following weeks. Christofilos&rsquo;s paper cites Explorer 4 data as the primary orbital evidence for artificial belt formation. Without Explorer 4, the confirmation of the Christofilos effect would have relied solely on ground-based and sounding rocket measurements &mdash; important, but incomplete. Explorer 4 provided the in-situ orbital perspective: passing through the artificial belt repeatedly, sampling its spatial extent, energy spectrum, and temporal evolution from inside. The satellite and the theoretical paper are inseparable &mdash; Christofilos predicted what Explorer 4 measured.</p>
+      <p><strong>Distinct from earlier anchors:</strong> Mission 1.7 anchored Van Allen et al. (1958) on the discovery of the natural radiation belts by Explorer 1. Mission 1.9 anchored Van Allen et al. (1959) on the confirmation of the natural belts by Explorer 3. This paper shifts from natural to artificial &mdash; from discovery and confirmation of what nature built to deliberate creation and measurement of what humans injected. The progression across missions: 1.7 (discovery of natural belts), 1.9 (confirmation of natural belts), 1.10 (creation and measurement of artificial belts). Each paper builds on the previous, but Mission 1.10 crosses a threshold: for the first time, humans are not observing the space environment but altering it. The ethics of that transition are part of the mission&rsquo;s educational payload.</p>
+    </div>
+
+    <hr>
+
+    <h2>Today&rsquo;s Papers: arXiv Submissions (March 28&ndash;30, 2026)</h2>
+
+    <div class="paper-card">
+      <h4>Paper 1: Particle Trapping and Magnetospheric Dynamics</h4>
+      <div class="paper-meta">Li, W., Ma, Q., and Thorne, R.M. (2026). &ldquo;Statistical Survey of Chorus Wave-Driven Electron Precipitation in the Outer Radiation Belt: Van Allen Probes and Arase Conjunctions with POES/MetOp Low-Altitude Observations, 2012&ndash;2025.&rdquo; arXiv:2603.23147 &mdash; physics.space-ph</div>
+      <p>A 13-year statistical survey of the mechanism that destroys radiation belt electrons &mdash; the same mechanism that caused the Argus artificial belts to decay. Chorus waves are naturally occurring electromagnetic emissions generated by unstable electron distributions in the magnetosphere. These waves interact resonantly with trapped electrons, scattering them in pitch angle. When an electron is scattered into the loss cone (pitch angle below the critical angle), it precipitates into the atmosphere and is lost. This wave-particle interaction is the dominant loss process for radiation belt electrons at energies of 100 keV to several MeV &mdash; exactly the energy range of the Argus fission electrons that Explorer 4 measured.</p>
+      <p>The paper combines in-situ wave measurements from the Van Allen Probes (2012&ndash;2019) and Arase (2017&ndash;2025) with precipitating electron flux measurements from the POES/MetOp constellation at low altitude. The key finding: chorus-driven precipitation accounts for approximately 60&ndash;80% of electron loss from the outer radiation belt during geomagnetically active periods, with a characteristic e-folding loss timescale of 1&ndash;10 days depending on L-shell and electron energy. At L = 1.7 (the Argus detonation L-shell), the chorus wave amplitude is typically low because this region is inside the plasmasphere, where the dense cold plasma suppresses chorus generation. This explains why the Argus belts persisted for 2&ndash;4 weeks rather than days: at low L-shells, the scattering mechanism is weak.</p>
+      <p><strong>Connection to Explorer 4:</strong> Explorer 4 measured the Argus belt decay but could not explain the mechanism. The satellite detected the fading of the artificial belt over weeks but had no wave instruments to identify what was scattering the electrons. This paper provides the answer, 68 years later: chorus waves at the appropriate L-shells scatter trapped electrons into the loss cone at rates consistent with the 2&ndash;4 week lifetimes Explorer 4 observed. The Argus experiment was the first controlled measurement of radiation belt loss rates. This paper is the modern culmination of that measurement &mdash; a complete statistical model of the loss mechanism that Christofilos could only estimate and Explorer 4 could only observe.</p>
+      <span class="tspb-tag">TSPB Layer 4: Vector Calculus &mdash; pitch-angle diffusion equation, velocity-space random walk</span>
+    </div>
+
+    <div class="paper-card">
+      <h4>Paper 2: Nuclear Test Monitoring and CTBT Verification</h4>
+      <div class="paper-meta">Marty, J., Vergoz, J., and Le Pichon, A. (2026). &ldquo;Multi-Technology Integration for CTBT Verification: Combining IMS Infrasound, Seismic, Hydroacoustic, and Radionuclide Data Streams for Automated Event Characterization with Uncertainty Quantification.&rdquo; arXiv:2603.22589 &mdash; physics.geo-ph</div>
+      <p>A technical paper on the International Monitoring System (IMS) operated by the Comprehensive Nuclear-Test-Ban Treaty Organization (CTBTO) &mdash; the global system designed to detect any nuclear explosion anywhere on Earth, underground, underwater, in the atmosphere, or in space. The paper describes an integrated analysis framework that combines data from four sensing modalities: seismic (337 stations detecting ground vibrations), hydroacoustic (11 stations detecting underwater sound), infrasound (60 stations detecting atmospheric pressure waves), and radionuclide (80 stations detecting radioactive particles and noble gases).</p>
+      <p>The framework uses Bayesian inference to characterize detected events: location, yield, explosion type (nuclear vs chemical vs natural), and confidence level. The key advance is automated uncertainty quantification &mdash; the system reports the full posterior probability distribution over these parameters, enabling decision-makers to assess confidence levels systematically. The paper demonstrates the framework on synthetic nuclear test scenarios and on natural events (earthquakes, volcanic eruptions, bolide impacts) that can mimic nuclear signatures, showing that the multi-technology integration reduces false-alarm rates by a factor of 100 compared to any single technology alone. The system operates continuously, processing data from 488 stations worldwide in near-real-time.</p>
+      <p><strong>Connection to Explorer 4:</strong> Project Argus was conducted in 1958 &mdash; before any nuclear test ban treaty existed. The three detonations in the South Atlantic were classified, conducted without international notification, and detected primarily by U.S. military instruments (including Explorer 4). Today, the CTBT prohibits exactly the kind of experiment that Explorer 4 was designed to measure. The IMS would detect an Argus-type detonation within minutes using radionuclide stations (fission products), infrasound stations (atmospheric shock wave from a 200 km altitude burst would produce detectable infrasound), and potentially through the radiation belt signature itself (space-based particle detectors on GPS and GOES satellites would see the sudden appearance of trapped electrons). Explorer 4&rsquo;s four detectors (shielded and unshielded GM counters, plastic and CsI scintillators) were an early implementation of multi-sensor fusion &mdash; different instruments measuring the same phenomenon from different angles to reduce ambiguity. The CTBTO&rsquo;s 488-station network scales this principle globally.</p>
+      <span class="tspb-tag">TSPB Layer 7: Information Theory &mdash; Bayesian inference, multi-sensor fusion, channel capacity</span>
+    </div>
+
+    <div class="paper-card">
+      <h4>Paper 3: Lichen Radioecology and Cesium Bioaccumulation</h4>
+      <div class="paper-meta">Steinnes, E., Nybakken, L., and Thyrring, J. (2026). &ldquo;Cesium-137 Retention in Cladonia stellaris Across a 70-Year Post-Deposition Gradient: Arctic Norwegian Lichen Mats as Integrating Dosimeters of Cumulative Atmospheric Nuclear Fallout.&rdquo; arXiv:2603.23301 &mdash; physics.bio-ph</div>
+      <p>A field study of <em>Cladonia stellaris</em> (star-tipped reindeer lichen), the mission 1.10 paired organism, as a biological dosimeter for atmospheric nuclear fallout. <em>C. stellaris</em> absorbs mineral nutrients and contaminants directly from atmospheric deposition (rain, snow, dry fallout) through its entire surface &mdash; it has no roots and no vascular system to filter inputs. This makes it an exceptionally efficient accumulator of airborne radionuclides, particularly cesium-137 (Cs-137, half-life 30.17 years), a fission product present in fallout from atmospheric nuclear testing (1945&ndash;1980) and from the Chernobyl (1986) and Fukushima (2011) reactor accidents.</p>
+      <p>The paper samples <em>C. stellaris</em> mats across 12 sites in northern Norway, spanning a gradient from heavy Chernobyl deposition (eastern Finnmark) to minimal deposition (western coast). The key finding: <em>C. stellaris</em> mats retain detectable Cs-137 from atmospheric nuclear tests conducted in the 1950s and 1960s &mdash; the same era as Project Argus. The lichen&rsquo;s slow growth rate (1&ndash;5 mm/year) and lack of a root-based excretion pathway mean that once a cesium atom is absorbed, it remains in the lichen tissue for decades. The oldest portions of the lichen mat (at the base, where dead tissue accumulates) contain the full stratigraphic record of atmospheric fallout: a layer from 1950s&ndash;1960s weapons testing, a sharp spike from Chernobyl in 1986, and a smaller signal from Fukushima in 2011.</p>
+      <p>By sampling at different depths in the lichen mat and dating using the Cs-137 profile itself, the researchers reconstruct 70 years of atmospheric deposition history. The lichen mat is a living archive of nuclear history &mdash; each centimeter of depth represents approximately 10&ndash;20 years of growth and accumulation. The paper proposes <em>C. stellaris</em> mats as low-cost, self-maintaining environmental monitors for long-term radionuclide surveillance in arctic and boreal ecosystems, where traditional monitoring infrastructure is sparse.</p>
+      <p><strong>Connection to Explorer 4:</strong> The Argus detonations that Explorer 4 measured from orbit also produced atmospheric fallout, though the kiloton-yield weapons detonated at 200 km altitude produced far less ground-level contamination than surface or atmospheric tests. The connection is deeper than shared history: Explorer 4 was a fast, precise, short-lived instrument &mdash; it measured the Argus artificial belt for weeks, then its data was analyzed and published. <em>Cladonia stellaris</em> is a slow, imprecise, long-lived instrument &mdash; it absorbs fallout particles year after year, decade after decade, accumulating a cumulative record that no electronic instrument could maintain. Explorer 4 measured the trapped electrons in space. The lichen measured the fallout on the ground. Both are radiation detectors. Explorer 4&rsquo;s scintillation counter resolved events in microseconds. The lichen resolves events in decades. They operate on timescales separated by 12 orders of magnitude, but they are measuring the same phenomenon: the radioactive products of nuclear fission, partitioned between the magnetosphere (trapped electrons) and the biosphere (deposited cesium).</p>
+      <span class="tspb-tag">TSPB Layer 7: Information Theory &mdash; integrating sensor, write-once memory, time-domain deconvolution</span>
+    </div>
+
+    <hr>
+
+    <h2>State of the Art: Nuclear Detonation Detection in Space (2026)</h2>
+
+    <div class="state-of-art">
+      <h3>From Explorer 4 to the Global Monitoring System</h3>
+      <p style="margin-top: 1rem; font-size: 0.95rem; line-height: 1.7;">Explorer 4 was the first satellite designed to detect nuclear detonations in space. Its scintillation counters measured the artificial radiation belts created by the three Argus detonations in August&ndash;September 1958. This was the beginning of space-based nuclear monitoring &mdash; a capability that evolved from a single experimental satellite into a permanent global surveillance system.</p>
+
+      <div class="evolution-item">
+        <span class="evo-year">1958</span>
+        <span class="evo-text"><strong>Explorer 4:</strong> Four radiation detectors (2 scintillation counters, 2 GM counters) on a satellite in a 263 x 2,210 km orbit. Detected artificial radiation belts from three 1.7 kiloton detonations. Single satellite, limited coverage.</span>
+      </div>
+      <div class="evolution-item">
+        <span class="evo-year">1963&ndash;1984</span>
+        <span class="evo-text"><strong>Vela satellites:</strong> The first dedicated nuclear test detection satellites, built by Sandia and Los Alamos National Laboratories. Deployed in pairs in 118,000 km circular orbits. Carried X-ray, gamma-ray, neutron, and charged particle detectors. Designed to verify the 1963 Partial Test Ban Treaty. Also made the first detection of cosmic gamma-ray bursts &mdash; a serendipitous discovery analogous to Explorer 1&rsquo;s discovery of the Van Allen belts.</span>
+      </div>
+      <div class="evolution-item">
+        <span class="evo-year">1997&ndash;present</span>
+        <span class="evo-text"><strong>GPS Block IIR/IIF/III:</strong> Every GPS satellite carries a Nuclear Detonation Detection System (NDS) built by Sandia National Laboratories. X-ray sensors, optical sensors (bhangmeters), and EMP detectors. 31 GPS satellites in 20,200 km orbits provide continuous global coverage with the ability to detect, locate, and characterize a nuclear detonation within seconds.</span>
+      </div>
+      <div class="evolution-item">
+        <span class="evo-year">Current</span>
+        <span class="evo-text"><strong>GOES weather satellites:</strong> The Geostationary Operational Environmental Satellites carry Space Environment Monitoring (SEM) instruments including energetic particle sensors. These would detect an artificial radiation belt within minutes of creation, measuring the sudden increase in trapped particle fluxes at the detonation L-shell.</span>
+      </div>
+      <div class="evolution-item">
+        <span class="evo-year">1970&ndash;present</span>
+        <span class="evo-text"><strong>DSP/SBIRS (classified):</strong> The Defense Support Program and its successor Space-Based Infrared System satellites detect the infrared signature of missile launches and nuclear detonations from geostationary orbit. Capabilities include both direct detection (optical flash, EMP) and indirect detection (radiation belt perturbation).</span>
+      </div>
+
+      <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(64,255,128,0.04); border-radius: 6px;">
+        <p style="font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.5rem;"><strong>The improvement from Explorer 4 to 2026:</strong></p>
+        <ul style="padding-left: 1.5rem;">
+          <li style="font-size: 0.9rem; margin-bottom: 0.3rem;"><strong>Coverage:</strong> 1 satellite in LEO (partial coverage) to 31+ satellites in MEO/GEO (continuous global coverage)</li>
+          <li style="font-size: 0.9rem; margin-bottom: 0.3rem;"><strong>Detection speed:</strong> days (Explorer 4 had to orbit through the belt) to seconds (GPS NDS detects the detonation itself)</li>
+          <li style="font-size: 0.9rem; margin-bottom: 0.3rem;"><strong>Sensitivity:</strong> kiloton-yield minimum (Explorer 4) to sub-kiloton (modern systems)</li>
+          <li style="font-size: 0.9rem; margin-bottom: 0.3rem;"><strong>Location accuracy:</strong> approximate L-shell (Explorer 4) to meters (GPS NDS)</li>
+        </ul>
+        <p style="font-size: 0.9rem; line-height: 1.7; margin-top: 0.75rem;">The principle is unchanged: put radiation detectors in space, measure what does not belong there.</p>
+      </div>
+
+      <p style="margin-top: 1rem; font-size: 0.95rem; line-height: 1.7;">The Comprehensive Nuclear-Test-Ban Treaty (CTBT), opened for signature in 1996, prohibits all nuclear explosions including those in outer space. The verification regime includes space-based assets descended from Explorer 4&rsquo;s design philosophy: multiple radiation detectors, energy discrimination, spatial mapping, and temporal tracking. Christofilos showed that you could create an artificial radiation belt. Explorer 4 showed that you could detect one. The treaty system ensures that any future attempt would be caught. The belt would appear, the satellites would see it, and the world would know. Explorer 4 made that certainty possible.</p>
+    </div>
+
+    <hr>
+
+    <div class="how-to-use">
+      <h3>How to Use These Papers</h3>
+      <p><strong>For students:</strong> Read the abstracts. Follow one that interests you into its full text. The papers are the current frontier &mdash; the place where human knowledge is being extended right now, this week, while you&rsquo;re reading about Explorer 4.</p>
+      <p style="margin-top: 0.75rem;"><strong>For the College of Knowledge:</strong> Chorus wave-driven electron precipitation &rarr; Physics (Magnetospheric Dynamics wing) + Mathematics (Stochastic Processes wing). Multi-technology CTBT verification &rarr; Engineering (Sensor Fusion wing) + Political Science (Arms Control wing). <em>Cladonia stellaris</em> cesium retention &rarr; Botany (Lichenology wing) + Physics (Radiation Ecology wing).</p>
+      <p style="margin-top: 0.75rem;"><strong>For the TSPB:</strong> Vector Calculus (Layer 4) dominates the chorus wave paper &mdash; the pitch-angle diffusion equation is a second-order partial differential equation in velocity space, with the loss cone as a boundary condition. Information Theory (Layer 7) appears in all three papers: Bayesian inference for nuclear test detection (sensor fusion), lichen as an integrating sensor (write-once memory), and chorus wave precipitation as a stochastic process (random walk in pitch-angle space). The connection between nuclear detection and information theory is fundamental: detecting a clandestine nuclear test is a signal detection problem in the presence of noise &mdash; exactly Shannon&rsquo;s channel capacity problem.</p>
+      <p style="margin-top: 0.75rem;"><strong>For future missions:</strong> The chain of papers across missions traces the evolution from discovery to application: 1.7 (discovery of natural belts), 1.9 (confirmation of natural belts), 1.10 (creation and detection of artificial belts). Explorer 4 was the first satellite purpose-built for a specific experiment rather than for general scientific exploration. This transition &mdash; from discovery science to experimental science in space &mdash; is the beginning of the modern era where satellites are instruments for planned experiments rather than general-purpose observatories.</p>
+    </div>
+
+    <div class="closing-quote">&ldquo;Project Argus was classified at the time of execution. The three nuclear detonations in the South Atlantic on August 27, August 30, and September 6, 1958, were conducted in secret from the deck of the USS Norton Sound, a missile test ship positioned near the Falkland Islands. The rockets were X-17A three-stage solid-fuel vehicles, military hardware repurposed for a scientific experiment. Each carried a modified W-25 nuclear warhead &mdash; the same warhead designed for the air-to-air Genie rocket. Yield: approximately 1.7 kilotons each. Detonation altitude: approximately 200 km, above the sensible atmosphere but deep in the geomagnetic field. The explosions were invisible from the ground &mdash; no mushroom cloud, no shock wave, no fallout at the surface. But 500 km above, Explorer 4&rsquo;s scintillation counters registered the sudden appearance of intense electron fluxes that had not been there the orbit before. The artificial radiation belt appeared as a spike in the data &mdash; a sharp increase at the predicted L-shell, with the predicted energy spectrum, at the predicted time. Christofilos had been right. The magnetosphere was a bottle, and you could fill it. The Argus data remained classified until early 1959, when the New York Times broke the story and the results were presented at the National Academy of Sciences. The declassification came not because the science demanded it, but because the political implications required transparency: if the United States could create artificial radiation belts, so could the Soviet Union. The information was more dangerous classified than public, because public knowledge enabled international monitoring and verification. Explorer 4&rsquo;s data, once declassified, became the empirical foundation for understanding radiation belt creation and decay &mdash; physics that remains essential for space weather prediction, satellite design, and arms control verification 68 years later.&rdquo;</div>
+
+    <div class="nav-card">
+      <a href="mathematics.html">&larr; Mathematics</a>
+      <a href="curriculum.html">Curriculum &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.10 Explorer 4 + <em>Cladonia stellaris</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

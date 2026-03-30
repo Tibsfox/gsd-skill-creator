@@ -1,0 +1,165 @@
+* Explorer 4 Scintillation Counter Signal Chain
+* =========================================================================
+* Mission 1.10 — Explorer 4 (Juno I / ABMA), July 26, 1958
+* PROJECT ARGUS — Detecting Trapped Radiation
+*
+* Explorer 4 carried scintillation counters to measure the radiation
+* environment created by the three Argus nuclear detonations. This
+* circuit models the complete signal chain from scintillator pulse
+* to discriminated digital output.
+*
+* Signal chain:
+*   1. Scintillator crystal (CsI or NaI) produces light flash
+*      when struck by high-energy particle
+*   2. Photomultiplier tube (PMT) converts light to current pulse
+*      (modeled as current source with exponential decay)
+*   3. Charge-sensitive preamplifier integrates current pulse
+*      to produce voltage step proportional to particle energy
+*   4. Pulse shaper (CR-RC filter) converts step to Gaussian-like
+*      pulse with defined width
+*   5. Discriminator compares pulse height to threshold
+*      (energy discrimination — counts only particles above threshold)
+*
+* The discriminator output is a logic pulse: one pulse per detected
+* particle above the energy threshold. Count rate = radiation intensity.
+*
+* Run: ngspice -b scintillator.cir
+* =========================================================================
+
+* --- Power Supply ---
+Vcc vcc 0 DC 12
+Vee vee 0 DC -12
+
+* --- Op-Amp Model ---
+.subckt OPAMP inp inn out vp vn
+  Rin inp inn 10MEG
+  Egain mid 0 inp inn 200000
+  Rout mid out 75
+  Dhi out vp DLIMIT
+  Dlo vn out DLIMIT
+.ends OPAMP
+.model DLIMIT D(Is=1e-14 N=0.01)
+
+* =========================================================================
+* STAGE 1: Photomultiplier Current Pulse
+* =========================================================================
+* A scintillation event produces a current pulse with:
+*   - Rise time: ~10 ns (scintillator response)
+*   - Decay time: ~250 ns (CsI crystal)
+*   - Peak current: ~100 uA (for ~500 keV electron, PMT gain ~10^6)
+*
+* Modeled as a pulsed current source (exponential pulse)
+* Two particles arrive: one at 1 us (500 keV) and one at 8 us (200 keV)
+
+I_pmt1 0 pmt_out PULSE(0 100u 1u 10n 250n 0 100u)
+I_pmt2 0 pmt_out PULSE(0 40u 8u 10n 250n 0 100u)
+
+* PMT load resistor (anode to ground through high impedance)
+R_pmt pmt_out 0 10k
+
+* =========================================================================
+* STAGE 2: Charge-Sensitive Preamplifier
+* =========================================================================
+* Integrates the PMT current pulse on a feedback capacitor.
+* Output voltage = Q / C_fb, where Q is total charge in the pulse.
+*
+* For a 100 uA pulse lasting ~250 ns:
+*   Q = I * t = 100e-6 * 250e-9 = 25 pC
+*   V_out = Q / C_fb = 25e-12 / 10e-12 = 2.5V (for strong pulse)
+*
+* Feedback capacitor provides charge integration
+* Feedback resistor provides slow discharge (baseline restoration)
+
+* Input coupling capacitor
+C_couple pmt_out preamp_in 100p
+
+* Charge amplifier
+X_preamp preamp_in preamp_fb preamp_out vcc vee OPAMP
+
+* Feedback: C_fb integrates, R_fb slowly discharges
+C_fb preamp_out preamp_fb 10p
+R_fb preamp_out preamp_fb 100MEG
+
+* Input bias (DC operating point)
+R_bias preamp_in 0 10MEG
+
+* =========================================================================
+* STAGE 3: Pulse Shaper (CR-RC)
+* =========================================================================
+* Converts the step-like preamp output to a quasi-Gaussian pulse.
+* CR differentiator (high-pass) followed by RC integrator (low-pass).
+*
+* Time constant: tau = R * C = 1 us (matches ~500 ns shaping)
+* This determines the pulse width and hence the maximum count rate
+* (dead time ~ 3 * tau = 3 us, max rate ~ 300 kcps)
+
+* CR differentiator (AC coupling = differentiation of step)
+C_diff preamp_out shaped_mid 1n
+R_diff shaped_mid 0 1k
+
+* RC integrator (smooths the differentiated pulse)
+R_int shaped_mid shaped_out 1k
+C_int shaped_out 0 1n
+
+* =========================================================================
+* STAGE 4: Discriminator
+* =========================================================================
+* Comparator: outputs HIGH when shaped pulse exceeds threshold.
+* Threshold sets the minimum particle energy for counting.
+*
+* Low threshold: counts more particles (lower energy cutoff)
+* High threshold: counts fewer particles (higher energy cutoff)
+*
+* Explorer 4 had multiple discriminator levels to measure the
+* energy spectrum of trapped electrons.
+
+* Threshold voltage (adjustable — represents energy discrimination)
+* 0.5V threshold ~ counts particles above ~200 keV
+V_thresh 0 thresh DC 0.5
+
+* Comparator (using op-amp in open-loop)
+X_disc shaped_out thresh disc_out vcc vee OPAMP
+
+* Output pull-up (logic level)
+R_pull disc_out vcc 10k
+
+* --- Analysis ---
+.tran 0.01u 15u
+
+* --- Plot and Measure ---
+.control
+  run
+
+  set color0 = white
+  set color1 = cyan
+  set color2 = green
+  set color3 = yellow
+  set color4 = red
+  set bgcolor = black
+
+  * Plot complete signal chain
+  plot v(pmt_out)*100 v(preamp_out) v(shaped_out) v(disc_out)
+  + title 'Scintillation Counter Signal Chain'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  echo ""
+  echo "Explorer 4 Scintillation Counter Signal Chain"
+  echo "============================================="
+  echo ""
+  echo "Two particle events simulated:"
+  echo "  Event 1: t=1us, ~500 keV (strong pulse, 100uA PMT current)"
+  echo "  Event 2: t=8us, ~200 keV (weak pulse, 40uA PMT current)"
+  echo ""
+  echo "Discriminator threshold: 0.5V"
+  echo "  Event 1 (500 keV): should PASS discriminator"
+  echo "  Event 2 (200 keV): should be NEAR threshold"
+  echo ""
+  echo "Traces:"
+  echo "  Cyan:   PMT current pulse (x100 for visibility)"
+  echo "  Green:  Charge amplifier output (integrated charge)"
+  echo "  Yellow: Shaped pulse (CR-RC filter)"
+  echo "  Red:    Discriminator output (logic pulse = counted)"
+
+.endc
+
+.end

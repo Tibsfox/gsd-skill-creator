@@ -1,0 +1,117 @@
+{
+  "mission": "1.10",
+  "title": "Explorer 4 (Juno I)",
+  "description": "Open datasets and source materials relevant to Explorer 4 (1958), Project Argus nuclear detonations in space, Cladonia stellaris (star-tipped reindeer lichen), Western Tanager (Piranga ludoviciana), and the Christofilos effect",
+  "sources": [
+    {
+      "id": "nssdc-explorer-4",
+      "name": "NSSDC Master Catalog -- Explorer 4",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-005A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Explorer 4. Spacecraft description (11.7 kg payload on Juno I launch vehicle), instrument manifest (two scintillation counters designed specifically for the Argus experiment), orbital parameters (263 x 2,210 km, 50.3 degree inclination, 110.4 minute period), launch details from Cape Canaveral on July 26, 1958. NSSDC designation 1958-005A. Records the mission as the first satellite specifically designed to measure artificial radiation environments.",
+      "mission_relevance": "Definitive source for Explorer 4 spacecraft specifications, orbital parameters, and instrument descriptions. The scintillation counter specifications are essential for understanding the measurement capability: energy discrimination, count rate capacity, and the specific design choices that enabled measurement of the Argus artificial belts. Documents the unique relationship between Explorer 4 and Project Argus -- the satellite was built specifically for this experiment."
+    },
+    {
+      "id": "dna-argus-reports",
+      "name": "Defense Nuclear Agency -- Project Argus Technical Reports",
+      "url": "https://www.dtra.mil/",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "declassified (partial)",
+      "description": "Technical reports from the Defense Nuclear Agency (now DTRA) documenting Project Argus planning, execution, and results. Includes Christofilos's original 1957 proposal, the X-17A rocket specifications, the USS Norton Sound launch platform modifications, the three detonation parameters (altitudes, yields, positions), and the measurement results from Explorer 4 and ground-based instruments. Reports were classified SECRET until declassification in the 1980s-1990s. Key report: 'Project Argus, 1958' (DNA 6039F), which contains the comprehensive technical summary.",
+      "mission_relevance": "The definitive technical record of the Argus experiment. Contains the detonation parameters (200, 240, 540 km altitudes), the expected vs. measured radiation belt characteristics, the decay rate measurements, and the confirmation of Christofilos predictions. Essential for the Christofilos effect, artificial radiation belt, and Project Argus knowledge nodes. The declassified reports reveal the full scope of what was the largest coordinated scientific experiment of its era."
+    },
+    {
+      "id": "van-allen-probes",
+      "name": "Van Allen Probes (RBSP) Mission Data",
+      "url": "https://rbsp-ect.newmexicoconsortium.org/",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "CDF/HDF5",
+      "access": "open",
+      "description": "Science data from the Van Allen Probes mission (2012-2019), NASA's dedicated radiation belt mission. Twin spacecraft carrying comprehensive particle and field instruments orbited through the inner and outer radiation belts for seven years, providing the most complete dataset ever collected on radiation belt dynamics. Data includes electron and proton fluxes from 20 keV to 20 MeV, magnetic field measurements, plasma wave spectra, and ring current composition. The mission directly descends from Explorer 4's pioneering measurements.",
+      "mission_relevance": "Modern context for Explorer 4's measurements. The Van Allen Probes confirmed and refined the understanding of particle trapping, loss cone dynamics, and belt decay mechanisms that Explorer 4 first observed. Essential for the particle trapping, mirror points, and artificial radiation belt knowledge nodes. The 60-year arc from Explorer 4 (1958) to Van Allen Probes (2019) represents the maturation of radiation belt science from first detection to comprehensive understanding."
+    },
+    {
+      "id": "ctbto-monitoring",
+      "name": "CTBTO International Monitoring System",
+      "url": "https://www.ctbto.org/",
+      "type": "primary-source",
+      "category": "monitoring-data",
+      "format": "Various",
+      "access": "restricted (summary data public)",
+      "description": "The Comprehensive Nuclear-Test-Ban Treaty Organization operates a global network of 337 monitoring stations detecting nuclear explosions through seismic, hydroacoustic, infrasound, and radionuclide sensors. The radionuclide monitoring network is the direct descendant of the fallout monitoring that documented atmospheric nuclear testing in the 1950s-1960s. The network can detect atmospheric nuclear tests anywhere on Earth within days through xenon isotope ratios and particulate analysis.",
+      "mission_relevance": "Provides the modern context for nuclear test monitoring. The Argus tests were conducted in an era before the Limited Test Ban Treaty (1963) and the CTBT (1996). The fallout that Cladonia stellaris absorbed was precisely what prompted international monitoring efforts. Essential for the radioecology knowledge node: the same atmospheric transport that carries isotopes to Arctic lichens is what the CTBTO monitoring network detects."
+    },
+    {
+      "id": "spenvis-model",
+      "name": "SPENVIS -- Space Environment Information System",
+      "url": "https://www.spenvis.oma.be/",
+      "type": "primary-source",
+      "category": "radiation-models",
+      "format": "Web/API",
+      "access": "open (registration required)",
+      "description": "ESA's Space Environment Information System provides access to radiation belt models (AP-8, AE-8, AP-9, AE-9), trapped particle flux calculations, shielding analysis, and orbital radiation dose predictions. The models are calibrated against decades of in-situ measurements from Explorer 4 through Van Allen Probes. SPENVIS can compute the expected particle environment at any orbit altitude, inclination, and epoch, including the historical period of the Argus tests.",
+      "mission_relevance": "Enables quantitative reconstruction of the radiation environment Explorer 4 encountered. The AE-8 electron model includes data from the era of atmospheric nuclear testing when artificial belts temporarily enhanced the natural environment. Essential for the particle trapping, mirror points, and Lorentz force knowledge nodes: SPENVIS provides the magnetic field models and trapped particle distributions needed for the worked examples."
+    },
+    {
+      "id": "inaturalist-cladonia",
+      "name": "iNaturalist -- Cladonia stellaris Observations",
+      "url": "https://www.inaturalist.org/taxa/164282-Cladonia-stellaris",
+      "type": "community-science",
+      "category": "ecology",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community science observations of Cladonia stellaris (star-tipped reindeer lichen) from iNaturalist's global database. Observations include geolocated photographs, habitat descriptions, and community identifications. The distribution data shows the circumboreal range: abundant across northern Scandinavia, Russia, Canada, and Alaska. Growth habitat is typically well-drained, open ground in boreal forests and tundra. The observations document the lichen's current range and abundance -- information essential for understanding which populations were exposed to nuclear test fallout.",
+      "mission_relevance": "Establishes the geographic context for the organism pairing. Cladonia stellaris observations map the same high-latitude regions where nuclear test fallout was deposited and where the lichen-caribou-human radioecological pathway operates. The iNaturalist data shows that the lichen is abundant in exactly the regions most affected by atmospheric testing: Alaska, northern Canada, Scandinavia. Essential for the radioecology knowledge node."
+    },
+    {
+      "id": "arctic-radioecology",
+      "name": "Arctic Monitoring and Assessment Programme -- Radioactivity Reports",
+      "url": "https://www.amap.no/",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "PDF/HTML",
+      "access": "open",
+      "description": "AMAP is the Arctic Council working group responsible for monitoring and assessing pollution and climate change in the Arctic. Their radioactivity assessment reports document cesium-137 and strontium-90 concentrations in Arctic ecosystems including lichens, caribou, reindeer, and indigenous food chains. Reports cover the period from atmospheric testing through present-day monitoring, including the Chernobyl and Fukushima contributions. Key findings: Cladonia lichens accumulated Cs-137 to concentrations 10-100x higher than other vegetation types due to their lack of root filtration and extremely slow growth.",
+      "mission_relevance": "The definitive source for the lichen-caribou-human radioecological pathway. AMAP data shows measured Cs-137 concentrations in lichen (100-5000 Bq/kg during peak fallout), caribou muscle (500-3000 Bq/kg), and human body burdens (500-2000 Bq whole body) in Arctic indigenous communities. Essential for the radioecology knowledge node and for establishing the biological resonance between Explorer 4's radiation measurements and Cladonia's passive accumulation."
+    },
+    {
+      "id": "jung-archives",
+      "name": "C.G. Jung Foundation / Collected Works",
+      "url": "https://www.cgjungpage.org/",
+      "type": "secondary-source",
+      "category": "biography",
+      "format": "HTML/Books",
+      "access": "mixed (some open, collected works require purchase)",
+      "description": "Resources on Carl Gustav Jung's life, work, and analytical psychology. Jung (1875-1961) developed the concepts of the collective unconscious, archetypes, the shadow, individuation, and the mandala as a symbol of psychic wholeness. His Collected Works (20 volumes) document his theoretical development from early word-association experiments through the Red Book to his final works on synchronicity and alchemy. Born July 26, 1875 -- exactly 83 years before Explorer 4's launch on July 26, 1958.",
+      "mission_relevance": "Establishes the biographical context for the dedication and the thematic resonance between Jungian psychology and radiation belt physics. Jung's concept of the shadow -- the invisible part of the self that shapes behavior -- is the central metaphor for the invisible radiation belts that shape the space environment. The mandala's circular symmetry corresponds to the radiation belt's toroidal geometry. Essential for the screensaver's mandala mode and the story's thematic structure."
+    },
+    {
+      "id": "nuclear-test-database",
+      "name": "Oklahoma Geological Survey Nuclear Explosion Database",
+      "url": "https://ds.iris.edu/ds/products/infrasound/nuclear-test-database/",
+      "type": "primary-source",
+      "category": "nuclear-data",
+      "format": "CSV/Database",
+      "access": "open",
+      "description": "Comprehensive database of nuclear tests conducted worldwide from 1945 to present. Includes detonation dates, yields, coordinates, altitudes, test names, and sponsoring nations. The database documents all three Argus tests (designated Argus I, II, III) with their South Atlantic coordinates and altitudes. Also documents the larger Starfish Prime test (1962, 1.4 Mt, 400 km) and the Soviet high-altitude tests (Test 184, October 22, 1962, 300 kt, 300 km). The database contextualizes the Argus tests within the broader nuclear testing program.",
+      "mission_relevance": "Provides the quantitative context for all high-altitude nuclear tests. The database enables comparison of Argus (1.7 kt, scientific purpose) with Starfish Prime (1.4 Mt, weapons effects test) and other high-altitude detonations. Essential for the nuclear EMP, artificial radiation belt, and Project Argus knowledge nodes. The yield comparison (Argus was 800x smaller than Starfish Prime) demonstrates that the Argus tests were uniquely designed for scientific measurement rather than weapons effects."
+    },
+    {
+      "id": "igrf-field-model",
+      "name": "International Geomagnetic Reference Field (IGRF)",
+      "url": "https://www.ncei.noaa.gov/products/international-geomagnetic-reference-field",
+      "type": "primary-source",
+      "category": "geophysics",
+      "format": "Fortran/Python/Coefficients",
+      "access": "open",
+      "description": "The IGRF is the internationally agreed-upon mathematical model of Earth's main magnetic field and its secular variation. Updated every 5 years (current version: IGRF-13, valid 1900-2025), it provides spherical harmonic coefficients that enable computation of the magnetic field vector at any point on or above Earth's surface. The model is essential for radiation belt calculations: the field geometry determines where particles are trapped, where mirror points occur, and where the loss cone intersects the atmosphere. IGRF-13 includes coefficients for the 1958 epoch, enabling accurate reconstruction of the field geometry during the Argus tests.",
+      "mission_relevance": "Provides the magnetic field model needed for all radiation belt calculations in this mission. The dipole approximation used in the simulations (particle-trapping.py, particle-trapper.html) is a simplification of the IGRF. The full IGRF model at the 1958 epoch enables precise computation of field line geometry, mirror point locations, loss cone boundaries, and the drift shells where Argus particles were trapped. Essential for the Lorentz force, particle trapping, and mirror points knowledge nodes."
+    }
+  ]
+}
