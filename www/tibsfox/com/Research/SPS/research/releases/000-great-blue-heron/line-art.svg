@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Degree 0: Great Blue Heron — Silence as Foundation
+       Line art seed. Ink on parchment aesthetic.
+       Future passes refine and expand this into full illustrations. -->
+  <style>
+    .ink { fill: none; stroke: #2a2a2a; stroke-linecap: round; stroke-linejoin: round; }
+    .ink-thin { stroke-width: 1.2; }
+    .ink-med { stroke-width: 2; }
+    .ink-bold { stroke-width: 3; }
+    .wash { fill: none; stroke: #c75b3a; stroke-width: 1; opacity: 0.3; }
+    .splash { fill: #e89848; opacity: 0.08; }
+  </style>
+
+  <!-- Watercolor splash background -->
+  <ellipse class="splash" cx="200" cy="280" rx="120" ry="40"/>
+  <ellipse class="splash" cx="180" cy="200" rx="60" ry="100" style="fill:#2d5a3a; opacity:0.04;"/>
+
+  <!-- Water line -->
+  <path class="ink ink-thin" d="M 40,310 Q 100,305 160,310 Q 220,315 280,308 Q 340,302 380,310" style="opacity:0.4;"/>
+
+  <!-- Heron — standing in stillness -->
+  <!-- Legs -->
+  <line class="ink ink-med" x1="200" y1="310" x2="195" y2="240"/>
+  <line class="ink ink-thin" x1="200" y1="310" x2="210" y2="260"/>
+
+  <!-- Body -->
+  <path class="ink ink-bold" d="M 175,240 Q 185,210 200,200 Q 220,195 235,205 Q 240,220 230,240 Q 210,250 190,245 Z"/>
+
+  <!-- Neck — the long S-curve -->
+  <path class="ink ink-med" d="M 195,205 Q 185,180 190,160 Q 195,140 205,125 Q 215,115 210,105"/>
+
+  <!-- Head -->
+  <ellipse class="ink ink-med" cx="208" cy="100" rx="12" ry="8"/>
+
+  <!-- Beak — the dagger -->
+  <line class="ink ink-bold" x1="220" y1="100" x2="260" y2="95"/>
+
+  <!-- Eye -->
+  <circle cx="212" cy="98" r="2" fill="#2a2a2a"/>
+
+  <!-- Crest plume -->
+  <path class="ink ink-thin" d="M 200,95 Q 190,85 180,80"/>
+
+  <!-- Wing fold suggestion -->
+  <path class="ink ink-thin" d="M 220,215 Q 235,225 240,235" style="opacity:0.5;"/>
+
+  <!-- Fox-orange wash accent on beak -->
+  <line class="wash" x1="220" y1="100" x2="255" y2="96" style="stroke-width:3;"/>
+
+  <!-- Degree label -->
+  <text x="200" y="370" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#8a8884">0° — Great Blue Heron</text>
+  <text x="200" y="386" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#8a8884" font-style="italic">silence as foundation</text>
+</svg>
