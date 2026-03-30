@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Degree 49: Kimya Dawson — The Lullaby Subversion
+       Folk Punk / Anti-folk. Acoustic guitar. K Records.
+       The Moldy Peaches. Olympia. Gentle form, radical content.
+       Ink on parchment. Simple like the music itself. -->
+  <style>
+    .ink { fill: none; stroke: #2a2a2a; stroke-linecap: round; stroke-linejoin: round; }
+    .ink-thin { stroke-width: 1.2; }
+    .ink-med { stroke-width: 2; }
+    .ink-bold { stroke-width: 3; }
+    .wash { fill: none; stroke: #c75b3a; stroke-width: 2; opacity: 0.25; }
+    .splash { fill: #e89848; opacity: 0.06; }
+    .splash-cosmic { fill: #8e24aa; opacity: 0.04; }
+  </style>
+
+  <!-- Watercolor splashes — warm, DIY, intimate -->
+  <ellipse class="splash" cx="200" cy="200" rx="130" ry="90"/>
+  <ellipse class="splash-cosmic" cx="260" cy="150" rx="60" ry="50"/>
+
+  <!-- Acoustic guitar — the essential instrument -->
+  <!-- Body — dreadnought shape, slightly wonky (anti-folk aesthetic) -->
+  <path class="ink ink-bold" d="M 170,180 Q 145,200 140,230 Q 140,260 155,280 Q 175,300 200,305 Q 225,300 245,280 Q 260,260 260,230 Q 255,200 230,180"/>
+
+  <!-- Waist -->
+  <path class="ink ink-med" d="M 170,180 Q 185,195 200,198 Q 215,195 230,180" style="opacity:0.6;"/>
+
+  <!-- Sound hole -->
+  <circle class="ink ink-med" cx="200" cy="235" r="22"/>
+  <!-- Fox-orange wash in the sound hole — the warm center -->
+  <circle class="wash" cx="200" cy="235" r="20" style="stroke-width:8; opacity:0.15;"/>
+
+  <!-- Rosette suggestion -->
+  <circle class="ink ink-thin" cx="200" cy="235" r="26" style="opacity:0.3;"/>
+
+  <!-- Bridge -->
+  <rect class="ink ink-med" x="183" y="268" width="34" height="4" rx="2"/>
+
+  <!-- Strings -->
+  <line class="ink ink-thin" x1="190" y1="140" x2="190" y2="272" style="opacity:0.4;"/>
+  <line class="ink ink-thin" x1="195" y1="140" x2="195" y2="272" style="opacity:0.4;"/>
+  <line class="ink ink-thin" x1="200" y1="140" x2="200" y2="272" style="opacity:0.4;"/>
+  <line class="ink ink-thin" x1="205" y1="140" x2="205" y2="272" style="opacity:0.4;"/>
+  <line class="ink ink-thin" x1="210" y1="140" x2="210" y2="272" style="opacity:0.4;"/>
+
+  <!-- Neck -->
+  <rect class="ink ink-med" x="186" y="130" width="28" height="50" rx="2"/>
+
+  <!-- Headstock -->
+  <path class="ink ink-med" d="M 186,130 L 183,115 Q 183,105 190,100 L 210,100 Q 217,105 217,115 L 214,130"/>
+
+  <!-- Tuning pegs -->
+  <circle class="ink ink-thin" cx="186" cy="108" r="3"/>
+  <circle class="ink ink-thin" cx="186" cy="118" r="3"/>
+  <circle class="ink ink-thin" cx="186" cy="128" r="3"/>
+  <circle class="ink ink-thin" cx="214" cy="108" r="3"/>
+  <circle class="ink ink-thin" cx="214" cy="118" r="3"/>
+  <circle class="ink ink-thin" cx="214" cy="128" r="3"/>
+
+  <!-- Fret markers -->
+  <line class="ink ink-thin" x1="186" y1="145" x2="214" y2="145" style="opacity:0.3;"/>
+  <line class="ink ink-thin" x1="186" y1="155" x2="214" y2="155" style="opacity:0.3;"/>
+  <line class="ink ink-thin" x1="186" y1="165" x2="214" y2="165" style="opacity:0.3;"/>
+
+  <!-- Stickers on the guitar body — DIY anti-folk aesthetic -->
+  <text x="160" y="250" font-family="system-ui, sans-serif" font-size="7" fill="#8e24aa" opacity="0.3" transform="rotate(-15 160 250)">K</text>
+  <text x="235" y="255" font-family="system-ui, sans-serif" font-size="6" fill="#2d5a3a" opacity="0.25" transform="rotate(10 235 255)">OLY</text>
+
+  <!-- Song words floating — the lullaby subversion -->
+  <text x="100" y="170" font-family="Georgia, serif" font-size="8" fill="#2a2a2a" opacity="0.15" transform="rotate(-8 100 170)">anyone else</text>
+  <text x="270" y="165" font-family="Georgia, serif" font-size="7" fill="#2a2a2a" opacity="0.12" transform="rotate(5 270 165)">but you</text>
+
+  <!-- Degree label -->
+  <text x="200" y="350" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#8a8884">49° — Kimya Dawson</text>
+  <text x="200" y="366" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#8a8884" font-style="italic">the lullaby subversion</text>
+</svg>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 49&deg; &mdash; Kimya Dawson &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3E2723);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>049 &mdash; Kimya Dawson</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>First Punk-Adjacent Genre &mdash; Fifth Consecutive Folk-Adjacent &mdash; Olympia Opens</h3>
+      <p>
+        Kimya Dawson at degree 49&deg; delivers the engine&rsquo;s first punk-adjacent genre
+        (<strong>folk punk</strong>), extends the folk-adjacent run to <strong>five consecutive
+        degrees</strong> (45&ndash;49) tying the swallow quintet record, and opens
+        <strong>Olympia</strong> as the engine&rsquo;s second PNW city. Born November 17, 1972,
+        in Bedford Hills, New York. Co-founder of <strong>The Moldy Peaches</strong> with Adam
+        Green. Six tracks on the <strong>Juno</strong> soundtrack &mdash; the #1 Billboard 200
+        album and Grammy winner. Chose <strong>K Records</strong> and a rented house in Olympia
+        over commercial opportunity. The daycare kid who became the anti-folk voice of a
+        generation. <strong>First openly nonbinary artist</strong> in the engine (she/they/grandpa).
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">49&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Kimya Dawson</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Folk Punk</span>
+          <span class="label-badge">K Records</span>
+          <span class="neighborhood-badge">Olympia</span>
+          <span class="first-badge">1st Punk-Adjacent</span>
+          <span class="first-badge">Olympia Opens</span>
+          <span class="first-badge">1st K Records</span>
+          <span class="first-badge">Ties Swallow Quintet</span>
+          <span class="first-badge">1st Nonbinary</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>A Daycare Kid Who Became the Anti-Folk Voice of a Generation</h2>
+          <p>
+            Kimya Dawson was born <strong>November 17, 1972</strong>, in
+            <strong>Bedford Hills, New York</strong>, a suburban community in Westchester County,
+            approximately forty miles north of New York City. She grew up in a
+            <strong>nineteenth-century farm cottage</strong> where her parents operated a
+            <strong>daycare center</strong> that cared for up to twenty children daily. Her
+            parents were also <strong>camp counselors</strong>. Dawson grew up immersed in
+            children, play, song, and community. Her earliest musical influences came from
+            <strong>Sesame Street</strong>.
+          </p>
+          <p>
+            Dawson grew up playing <strong>flute</strong> and did not begin playing guitar until
+            her <strong>mid-twenties</strong>. She originally attended college to study
+            <strong>elementary education</strong>. She worked at a <strong>summer camp for ten
+            summers</strong>. She worked in schools and art programs. The thread from daycare
+            childhood to camp counselor to education student to children&rsquo;s album
+            (<em>Alphabutt</em>, 2008) is continuous. The anti-folk songwriter never stopped
+            being the daycare kid.
+          </p>
+          <blockquote>
+            &ldquo;Things might have been very different for me growing up if I had known words
+            like &lsquo;gender fluid&rsquo; and &lsquo;nonbinary&rsquo; and that language had
+            been normalized by my peers and role models.&rdquo; &mdash; Kimya Dawson,
+            January 2020
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Moldy Peaches and the Anti-Folk Scene</h2>
+          <p>
+            In the early 1990s, Dawson and <strong>Adam Green</strong> &mdash; who was still a
+            teenager &mdash; crossed paths at an <strong>open mic night in Mount Kisco, New
+            York</strong>. By the mid-1990s, both were performing at the <strong>Sidewalk
+            Cafe</strong> (94 Avenue A, East Village), the restaurant-venue that was the
+            epicenter of <strong>anti-folk</strong> in the United States. The Sidewalk&rsquo;s
+            open mic was founded by <strong>Lach</strong> in 1994. Alumni include
+            <strong>Regina Spektor</strong>, <strong>Lana Del Rey</strong>, and
+            <strong>Nicole Atkins</strong>.
+          </p>
+          <p>
+            Dawson and Green formed <strong>The Moldy Peaches</strong> around <strong>1994</strong>.
+            The band specialized in deliberately lo-fi acoustic music, intentional amateurism,
+            Halloween costumes year-round, and lyrics swinging from childlike innocence to
+            vulgar humor. Their self-titled debut was released <strong>September 11, 2001</strong>,
+            through <strong>Rough Trade Records</strong> &mdash; the same day as the attacks
+            on the World Trade Center. The album, recorded in a basement in
+            <strong>Port Townsend, Washington</strong>, includes
+            &ldquo;<strong>Anyone Else But You</strong>&rdquo; &mdash; the song that would
+            change independent music six years later. The Moldy Peaches went on hiatus in 2004.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Juno Moment</h2>
+          <p>
+            In <strong>2007</strong>, director Jason Reitman selected Kimya Dawson&rsquo;s music
+            for the soundtrack of <strong><em>Juno</em></strong>, starring Elliot Page and
+            Michael Cera. The film grossed <strong>$231 million</strong> worldwide and won the
+            <strong>Academy Award for Best Original Screenplay</strong>. The soundtrack debuted
+            at <strong>#1 on the Billboard 200</strong> (February 9, 2008) &mdash;
+            <strong>Rhino Records&rsquo; first #1 album</strong> &mdash; and won the
+            <strong>Grammy Award for Best Compilation Soundtrack</strong> (2009).
+          </p>
+          <p>
+            <strong>Six of the soundtrack&rsquo;s tracks</strong> feature Dawson: &ldquo;Tire
+            Swing,&rdquo; &ldquo;Loose Lips,&rdquo; &ldquo;My Rollercoaster,&rdquo; &ldquo;So
+            Nice So Smart,&rdquo; &ldquo;Tree Hugger&rdquo; (with Antsy Pants), and
+            &ldquo;Anyone Else But You&rdquo; (The Moldy Peaches). Cera and Page performed
+            &ldquo;Anyone Else But You&rdquo; in the film&rsquo;s closing scene, singing
+            to each other on a porch &mdash; one of the defining images of late-2000s indie
+            culture. The Cera/Page version reached <strong>#91 on the Billboard Hot 100</strong>.
+          </p>
+          <p>
+            <strong>The paradox:</strong> The Juno soundtrack made Dawson&rsquo;s music audible
+            to tens of millions. It did not make her a pop star. She did not sign to a major
+            label. She did not release a commercially strategic follow-up. She released a
+            <strong>children&rsquo;s album</strong> on K Records. She stayed in her rented
+            house in Olympia. She drove a minivan. The engine&rsquo;s most dramatic example
+            of an artist choosing independence over opportunity.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>The Moldy Peaches</h4>
+              <div class="disco-years">2001 &middot; Rough Trade Records</div>
+              <p>
+                Self-titled debut. Released September 11, 2001. 19 tracks.
+                Recorded in a Port Townsend, WA basement. Includes
+                &ldquo;Anyone Else But You.&rdquo; Anti-folk landmark.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>I&rsquo;m Sorry That Sometimes I&rsquo;m Mean</h4>
+              <div class="disco-years">2002 &middot; Rough Trade</div>
+              <p>
+                Solo debut. Spare, acoustic, confessional. Established
+                Dawson&rsquo;s voice independent of Adam Green. Title
+                captures the self-awareness that defines her work.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Hidden Vagenda</h4>
+              <div class="disco-years">2004 &middot; Great Crap Factory</div>
+              <p>
+                Produced by Jason Carmer. Fourth solo album in three years.
+                The prolific period: five solo albums between 2002 and 2006.
+                Lo-fi bedroom recordings, direct lyrics, acoustic guitar.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Remember That I Love You</h4>
+              <div class="disco-years">2006 &middot; Great Crap Factory</div>
+              <p>
+                Fifth solo album. Released May 2006, months before the move
+                to Olympia. Final New York-era recording. Includes solo
+                version of &ldquo;Anyone Else But You.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Alphabutt</h4>
+              <div class="disco-years">2008 &middot; K Records</div>
+              <p>
+                Children&rsquo;s album. Sunbeams, wiggly teeth, monster
+                babies. Released September 2008 &mdash; the follow-up
+                to the #1 Juno soundtrack. Daycare kid makes daycare music.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Thunder Thighs</h4>
+              <div class="disco-years">2011 &middot; Great Crap Factory</div>
+              <p>
+                &ldquo;Kimya Dawson and Friends.&rdquo; Features Aesop Rock,
+                John Darnielle, Murs, Nikolai Fraiture, Olympia Free Choir.
+                16 tracks, 65 min. Recorded partly at Dub Narcotic Studio.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Hokey Fright</h4>
+              <div class="disco-years">2013 &middot; Rhymesayers (The Uncluded)</div>
+              <p>
+                Indie folk-rap collaboration with Aesop Rock. Themes of
+                mortality and therapy through art. NPR: &ldquo;the two
+                cancel each other&rsquo;s weaknesses.&rdquo;
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Olympia: The Radical Transplant</h2>
+          <p>
+            In <strong>2006</strong>, Dawson married musician <strong>Angelo Spencer</strong>.
+            In <strong>July 2006</strong>, their daughter <strong>Panda Dawson</strong> was born.
+            In <strong>November 2006</strong>, the family moved to <strong>Olympia,
+            Washington</strong>. Dawson chose Olympia because it is where <strong>K Records</strong>
+            is, where <strong>Evergreen State College</strong> shaped two decades of feminist
+            punk, where <strong>Riot Grrrl</strong> was born, where DIY is not a trend but a
+            way of life.
+          </p>
+          <p>
+            The move traded New York&rsquo;s cultural visibility for Olympia&rsquo;s ideological
+            infrastructure. It traded the Sidewalk Cafe for <strong>Dub Narcotic Studio</strong>.
+            It traded the Lower East Side for the South Puget Sound. Dawson remained in Olympia
+            through the Juno explosion, through the Grammy, through the Billboard #1. She chose
+            values over visibility. The radical transplant: ideological migration as life
+            architecture.
+          </p>
+          <p>
+            Olympia is the state capital of Washington, population approximately 55,000, located
+            sixty miles south of Seattle at the southern tip of Puget Sound. The city&rsquo;s
+            musical infrastructure: <strong>K Records</strong> (Calvin Johnson, 1982),
+            <strong>Kill Rock Stars</strong> (Slim Moon, 1991 &mdash; Bikini Kill, Sleater-Kinney,
+            Elliott Smith), <strong>Evergreen State College</strong> (KAOS-FM radio,
+            International Pop Underground Convention 1991), and the <strong>Riot Grrrl</strong>
+            movement. Seattle is where independent music scales up. Olympia is where it stays
+            principled. The engine now documents both poles.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Lullaby Subversion</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                50th acoustic element. The songwriting technique that uses
+                the form, melody, and cadence of a lullaby or children&rsquo;s
+                song to deliver emotionally complex, politically charged, or
+                existentially heavy content. The gentle form carrying
+                subversive content. Dawson&rsquo;s entire body of work:
+                &ldquo;Tire Swing&rdquo; sounds like a campfire singalong
+                but describes vulnerability. <em>Alphabutt</em> is a
+                children&rsquo;s album that addresses the real world. The
+                anti-folk genre itself is lullaby subversion: acoustic form,
+                punk content. Completes the five-element folk-acoustic
+                taxonomy: murmur (45), confessional (46), parable tone (47),
+                held rest (48), lullaby subversion (49).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Radical Transplant</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                50th artist-city pattern. The artist who relocates to a
+                city not for career opportunity or scene access but for
+                <strong>ideological alignment</strong>. The relocation
+                as political act. Dawson moved from NYC to Olympia
+                because Olympia is where K Records is, where Riot Grrrl
+                was born, where DIY is a way of life. The radical
+                transplant&rsquo;s motivation is principle, not opportunity.
+                Distinct from the Draw (attracted to scene), the Quiet Draw
+                (attracted without fanfare), and the Slow Bloom (gradual
+                growth in one place). Where you live is a statement about
+                what you believe.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Trojan Lullaby</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                49th blue note deployment. The blue note that lives
+                inside a song that sounds comforting but carries weight
+                exceeding its container. The distance between what the
+                song sounds like and what the song says. Five consecutive
+                folk-adjacent blue notes mapping absence and misdirection:
+                held breath (45), crack (46), suspended resolve (47),
+                drummer&rsquo;s ghost (48), Trojan lullaby (49). Five
+                modes: silence, rupture, irresolution, rhythmic memory,
+                formal deception.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Five Consecutive Folk-Adjacent &mdash; Ties Record</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48), Folk Punk
+                (49). Five consecutive folk-adjacent degrees &mdash; ties
+                the swallow quintet for the longest genre-family run. Five
+                production paradigms: fingerpicking, punk-folk, concept-album,
+                Americana-folk, anti-folk punk. First punk-adjacent genre.
+                Genre Stage 30. Two cities (Seattle, Olympia), three labels
+                (Sub Pop, Barsuk/Jade Tree, K Records). Track whether the
+                record breaks at degree 50.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 Ties E=5</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                10th E=3 deployment. Distribution: 2:15:10:12:10:2. E=3
+                ties E=5 at 10 each. The Juno paradox: #1 Billboard
+                soundtrack, Grammy, six tracks &mdash; but artist chose
+                Olympia, K Records, children&rsquo;s music, rented house.
+                Massive cultural moment, deliberately modest career. E=3
+                captures the tension. Folk zone energy: 2-3-3-2-3.
+                Five consecutive degrees below E=4.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">48&deg;</span> Sera Cahoone &mdash; <strong>Slow Bloom and Radical Transplant.</strong> Consecutive degrees representing two modes of folk-adjacent independence. Cahoone: twenty-five years of gradual growth in Seattle. Dawson: relocation to Olympia for ideological reasons. Both chose independence over commercial opportunity. Fifth consecutive folk-adjacent (49) following Cahoone&rsquo;s fourth (48).</li>
+            <li><span class="ref-degree">45&deg;</span> Damien Jurado &mdash; <strong>Sub Pop to K Records arc.</strong> Jurado (Sub Pop, Seattle) and Dawson (K Records, Olympia) bookend the five-degree folk run on different labels. The geographic spectrum of PNW independent music. The murmur (45) and the lullaby subversion (49) are the two ends of the five-element folk-acoustic taxonomy.</li>
+            <li><span class="ref-degree">46&deg;</span> Rocky Votolato &mdash; <strong>Punk-folk siblings.</strong> Both came from punk backgrounds to acoustic confessional songwriting. Both E=3. Votolato from hardcore (Waxwing) to folk. Dawson from anti-folk (Moldy Peaches) to solo acoustic. Two punk-informed folk artists at the same energy level.</li>
+            <li><span class="ref-degree">47&deg;</span> Pedro the Lion &mdash; <strong>Anti-establishment parallel.</strong> Bazan deconstructed evangelical Christianity. Dawson deconstructed capitalist music industry values. Both E=3. Both confessional songwriters using folk forms to address systemic questions. The parable tone (47) and the lullaby subversion (49) both carry moral weight beneath accessible surfaces.</li>
+            <li><span class="ref-degree">44&deg;</span> Chong the Nomad &mdash; <strong>Six-degree arc.</strong> Electronic (44) to folk whisper (45) to folk confession (46) to indie-folk parable (47) to folk held-rest (48) to folk-punk lullaby (49). Six acoustic elements in six degrees: the grain, the murmur, the confessional, the parable tone, the held rest, the lullaby subversion.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>Infrastructure arc.</strong> Mercury orchestras (0) through Sub Pop (45, 48) through Barsuk/Jade Tree (46, 47) through K Records (49). From major-label Quincy Jones to indie-label bedroom recordings. Infrastructure continues to miniaturize across fifty degrees.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Nov 17, 1972</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Bedford Hills, NY</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Home</span>
+            <span class="stat-value">Daycare center cottage</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">To Olympia</span>
+            <span class="stat-value">November 2006</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">First Instrument</span>
+            <span class="stat-value">Flute</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Guitar</span>
+            <span class="stat-value">Learned in mid-20s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">Elem. education (orig.)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pronouns</span>
+            <span class="stat-value">she/they/grandpa</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">49 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk Punk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">30</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#50 Radical Transplant</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#50 Lullaby Subversion</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#49 Trojan Lullaby</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>The Moldy Peaches</h4>
+          <div class="stat-row">
+            <span class="stat-label">Formed</span>
+            <span class="stat-value">~1994</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Co-founder</span>
+            <span class="stat-value">Adam Green</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Album</span>
+            <span class="stat-value">Sept 11, 2001 (Rough Trade)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Hiatus</span>
+            <span class="stat-value">2004</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Streams</span>
+            <span class="stat-value">160M+ (Spotify)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Juno Soundtrack (2007)</h4>
+          <div class="stat-row">
+            <span class="stat-label">Billboard 200</span>
+            <span class="stat-value">#1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grammy</span>
+            <span class="stat-value">Best Compilation (2009)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Dawson tracks</span>
+            <span class="stat-value">6 of soundtrack</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Hot 100</span>
+            <span class="stat-value">#91 (Cera/Page version)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Film gross</span>
+            <span class="stat-value">$231M worldwide</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Label History</h4>
+          <div class="stat-row">
+            <span class="stat-label">2001&ndash;2002</span>
+            <span class="stat-value">Rough Trade</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2004</span>
+            <span class="stat-value">Important Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2004&ndash;present</span>
+            <span class="stat-value">Great Crap Factory</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2008</span>
+            <span class="stat-value">K Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2013</span>
+            <span class="stat-value">Rhymesayers</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Olympia Infrastructure</h4>
+          <div class="stat-row">
+            <span class="stat-label">K Records</span>
+            <span class="stat-value">Founded 1982</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kill Rock Stars</span>
+            <span class="stat-value">Founded 1991</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Evergreen State</span>
+            <span class="stat-value">KAOS-FM radio</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Dub Narcotic</span>
+            <span class="stat-value">Calvin Johnson&rsquo;s studio</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Riot Grrrl</span>
+            <span class="stat-value">Born 1991, Olympia</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Adam Green</span>
+            <span class="stat-value">Moldy Peaches</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Aesop Rock</span>
+            <span class="stat-value">The Uncluded (2013)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jason Carmer</span>
+            <span class="stat-value">Producer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">John Darnielle</span>
+            <span class="stat-value">Thunder Thighs guest</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 49</span>
+            <span class="stat-value">2:15:10:12:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3 Mode</span>
+            <span class="stat-value">10th (ties E=5)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk-adjacent</span>
+            <span class="stat-value">5 consec. (45&ndash;49)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">12 / 50 (~24%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 49 of 360 &mdash; Kimya Dawson &mdash;
+        Folk Punk &mdash; K Records &mdash;
+        Olympia &mdash;
+        1st Punk-Adjacent Genre &mdash; Olympia Opens &mdash; 1st K Records Artist &mdash;
+        Ties Swallow Quintet &mdash; 1st Nonbinary Artist
+      </p>
+      <p>
+        Territorial Acknowledgment: This research documents music mapped to the Seattle
+        metropolitan area and the broader Pacific Northwest. The Seattle 360 engine operates on
+        the ancestral territory of the Duwamish Tribal Organization (duwamishtribe.org), the
+        Muckleshoot Indian Tribe, and related Coast Salish and Southern Lushootseed-speaking
+        peoples. Degree 49 maps to Olympia, Washington, on the ancestral territory of the
+        Squaxin Island Tribe, the Nisqually Indian Tribe, and related Coast Salish peoples.
+        The Steh-Chass band of the Squaxin Island Tribe historically occupied Budd Inlet, where
+        Olympia now stands. The ancestral lands ceded in the 1854 Treaty of Medicine Creek
+        included approximately 4,000 square miles.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

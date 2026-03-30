@@ -1,0 +1,329 @@
+{
+  "degree": 49,
+  "species": "Fox Sparrow",
+  "scientific_name": "Passerella iliaca",
+  "slug": "049-fox-sparrow",
+  "sound_type": "rich melodious whistled song",
+  "energy": 3,
+  "ecosystem": "dense thicket / forest understory",
+  "season": "winter visitor (PNW lowlands October-March) / summer breeder (mountains and coastal thickets)",
+  "family": "Passerellidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Western Toad",
+    "original_scientific_name": "Anaxyrus boreas",
+    "reason": "SPS Part B engine is birds-and-mammals only. Fox Sparrow replaces Western Toad, preserving the original E=3 energy level and dense thicket habitat. The Western Toad is a forest-floor and wetland-edge specialist; the Fox Sparrow occupies dense forest understory and brushy thickets at similar elevations. Fifth consecutive CSV substitution replacing an amphibian (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49). The engine continues deep into the amphibian belt of the original CSV.",
+    "preserved": ["E=3 energy level", "dense thicket / forest understory habitat"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; the Sooty Fox Sparrow (P. i. unalaschcensis group) is the PNW form. Breeds along the Pacific coast from the Aleutian Islands south to northwestern Washington. Abundant winter resident in western Washington lowlands from October through March, found in brushy urban parks, backyard thickets, and forest edges throughout the Puget Sound region. A small breeding population exists on the outer Olympic Peninsula (Cape Flattery area), Tatoosh Island, and some San Juan Islands."
+  },
+  "taxonomy_note": {
+    "description": "Fox Sparrow is the FIFTH Passerellidae (New World Sparrows) in the engine, extending the unprecedented consecutive streak to five degrees (45-46-47-48-49) with five different genera -- TIES the Hirundinidae quintet (26-30) and the Parulidae quintet (38-42) for the longest same-family streak in the engine. Three families have now achieved five consecutive. Passerella iliaca: 'the little sparrow of the flanks' -- Passerella from Latin passer (sparrow) + diminutive -ella (little), iliaca from Latin ilia (flanks) + -ica. Named by Merrem in 1786. The genus Passerella is MONOTYPIC -- the Fox Sparrow is its only member. Four subspecies groups (Red, Sooty, Slate-colored, Thick-billed) may represent separate species; IOC/BirdLife split them, AOS/eBird lump them.",
+    "current_family": "Passerellidae",
+    "new_family": false,
+    "family_count_in_engine": 19,
+    "passerellidae_count_in_engine": 5,
+    "name_etymology": "Passerella = Latin passer (sparrow) + diminutive -ella. 'Little sparrow' -- the diminutive is ironic given that Fox Sparrow is one of the LARGEST New World sparrows (26-49 g). The genus is monotypic: Fox Sparrow is the only species in Passerella. Iliaca = Latin ilia (flanks, loins) + -ica. 'Of the flanks' -- referring to the rufous-brown streaking on the bird's sides, a feature most visible in the Red subspecies group. Full translation: 'The little sparrow of the flanks.' The common name 'Fox Sparrow' refers to the fox-red coloring of the Red subspecies group -- the same warm foxy tones that ground the Tibsfox brand.",
+    "genus_note": "Passerella is a NEW genus in the engine -- the fifth in the Passerellidae quintet (Melospiza at 45, Pipilo at 46, Junco at 47, Zonotrichia at 48, Passerella at 49). Five consecutive same-family degrees, five different genera -- maximum genus diversity. Passerella is MONOTYPIC: Fox Sparrow is the only species. Every other quintet genus has multiple species (Melospiza 3, Pipilo 4, Junco 5, Zonotrichia 5). The 'little sparrow' stands alone.",
+    "order_note": "Passeriformes continues from degree 48. TWELFTH consecutive Passeriformes (38-49). 42 of 50 entries (84.0%) are Passeriformes.",
+    "family_position": "Passerellidae now has 5 members at degrees 45-46-47-48-49. Five-degree consecutive streak. TIES the Hirundinidae quintet (26-30) AND the Parulidae quintet (38-42) for the longest same-family streak in the engine. THREE families at five-consecutive. The Passerellidae quintet uses five different genera -- matching the Hirundinidae and surpassing the Parulidae (4 genera). The quintet creates a complete ecological and acoustic survey of the New World Sparrow family in the PNW.",
+    "subspecies_groups_note": "Four subspecies groups, 18 total subspecies: Red (iliaca group, eastern/northern, bright rufous, 1-2 song types), Sooty (unalaschcensis group, Pacific coast, dark brown, 3-4 song types), Slate-colored (schistacea group, interior western mountains, gray-headed), Thick-billed (megarhyncha group, California mountains, heavy bill). IOC/BirdLife treat each group as a separate species. AOS/eBird retain all as one species. AOU 2003 split proposal rejected on a split vote. Molecular data (Zink & Weckstein 2003) confirm four genetically distinct lineages.",
+    "fox_tibsfox_note": "The common name 'Fox Sparrow' refers to the rufous, fox-colored plumage of the Red subspecies group -- the same warm foxy coloring that gives the Tibsfox brand its name. The 'fox' in the sparrow is the same fox that appears throughout this project. A structural coincidence surfaced by the CSV substitution process -- the replacement species happens to carry 'fox' in its name. The connection is unplanned but resonant."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-6,000 (across all vocalizations)",
+    "peak_energy_band_hz": "2,500-5,000 (whistled note energy concentration)",
+    "song_frequency_hz": "2,000-6,000 (full range); whistled notes 2,500-5,000, buzzy elements 3,000-6,000",
+    "song_duration_s": "2.0-3.0 (per individual song)",
+    "note_structure": "SEQUENCE OF RICH WHISTLED NOTES: 8-12 clear, full-toned, slowly-paced whistled notes per song. Some notes include brief trills or buzzy quality. Melodic line rises and falls with varied pitch contours. Described by David Sibley as 'the richest and most melodious of all sparrow songs.' The most tonally rich song in the Passerellidae quintet.",
+    "note_types": "THREE vocalization categories: (1) FULL SONG -- the rich, whistled territorial and mate-attraction broadcast, 2-3 seconds. (2) CALL NOTE -- a sharp 'tsik' or smacking 'tchk', 0.05-0.1 seconds, loud and penetrating from dense cover. (3) ALARM -- a sharper version of the call note, given in rapid series.",
+    "phrase_structure": "Less structurally differentiated than the White-crowned Sparrow (degree 48) but MORE tonally rich. The Fox Sparrow's song is organized as a sequence of individually beautiful notes rather than functionally differentiated sections. Where the White-crowned Sparrow encodes species/dialect/individual identity in separate song parts, the Fox Sparrow presents a unified melodious statement. The difference between a structured essay (White-crowned Sparrow) and a poem (Fox Sparrow).",
+    "timbre": "RICH, FULL, WARM throughout. The defining timbral quality of the Fox Sparrow's song is its fullness -- each note is harmonically rich, with substantial fundamental and overtone content. The tonal quality is warmer and richer than any other Passerellidae in the engine. Compare: Song Sparrow (45) is complex but thinner; Spotted Towhee (46) is buzzy; Dark-eyed Junco (47) is clean and thin; White-crowned Sparrow (48) transitions from clean to buzzy. Fox Sparrow (49) is uniformly rich.",
+    "amplitude": "E=3 -- moderate-loud volume. Louder and more projecting than the Song Sparrow (E=2) and the White-crowned Sparrow (E=2). The song carries well through dense vegetation -- a rich voice designed for thickets where visual communication is impossible. Comparable to the Spotted Towhee (E=3) and Dark-eyed Junco (E=3).",
+    "tempo": "Slow, measured, unhurried. Notes are delivered at a deliberate pace that allows each one to resonate. This pacing distinguishes the Fox Sparrow from the rapid-fire delivery of many other sparrows and contributes to the 'ballad' character of the song.",
+    "context": "Song given primarily during breeding season and during winter in PNW lowlands (males occasionally sing on warm winter days, especially February-March as departure approaches). Both sexes give call notes year-round. The double-scratch foraging sound (loud rustling in leaf litter) is often the first audible indication of a Fox Sparrow's presence.",
+    "regional_variation": "Substantial variation across subspecies groups. Red group (eastern): richest, most melodious, 1-2 song types per male. Sooty group (PNW): less rich, more burry, 3-4 song types per male -- more repertoire diversity but less individual tonal quality. Slate-colored and Thick-billed: intermediate. This song variation is one of the lines of evidence supporting the potential four-way species split.",
+    "key_property": "THE BALLAD -- the 50th acoustic element (species side). A rich, melodious, complete whistled statement. Named 'the ballad' for three resonances: (1) the song's character -- widely considered the finest, richest, most melodious sparrow song in North America; a ballad in music is a slow, emotional, melodious song that tells a complete story; (2) the quintet's closing statement -- after the overture (preamble), character piece (rasp), intermezzo (snowbird), and folk song (dialect), the ballad closes the program; (3) the fox connection -- a ballad is a story, and the Fox Sparrow's name tells a story: the fox in the forest, the little sparrow of the foxy flanks. The 50th element and the Passerellidae quintet's final acoustic contribution. Five principles in five degrees: structural complexity (preamble), textural concentration (rasp), elemental reduction (snowbird), cultural transmission (dialect), melodious completeness (ballad)."
+  },
+  "plumage": {
+    "overall": "SOOTY FOX SPARROW (PNW form): Dark sooty brown overall, heavily streaked breast, large size. One of the darkest forms of any New World sparrow. The 'fox' coloring that gives the species its name is barely visible in the Sooty form -- replaced by cold dark brown.",
+    "sooty_form": "Upperparts: uniform dark sooty brown. Head: dark brown, without bold patterning. Breast: heavily streaked with dark brown on grayish-brown ground, streaking often merging into a central breast spot. Tail: dark brown (minimal rufous). Bill: medium-sized, dark upper mandible, yellowish base on lower mandible. Legs: strong, pinkish-gray, adapted for vigorous double-scratch foraging.",
+    "red_form_contrast": "The Red group (eastern/northern) has bright rufous streaking, a fox-red tail, warm tones throughout, and much higher visual contrast. The Red Fox Sparrow looks like a different bird from the Sooty Fox Sparrow -- one of the strongest arguments for the four-way species split.",
+    "field_id": "Large, chunky sparrow with heavy breast streaking (often forming a central spot), dark sooty brown overall (PNW form), and vigorous double-scratch foraging behavior. Distinguished from Song Sparrow (degree 45) by larger size, chunkier build, darker color, heavier streaking. Distinguished from Spotted Towhee (degree 46) by streaked (not spotted) plumage, brown (not black) head, smaller size."
+  },
+  "dense_thicket_ecology": {
+    "definition": "Dense thicket / forest understory -- the darkest, most tangled ground-level vegetation in the PNW landscape. Heavy shrub cover, deep leaf litter, minimal open ground visible. The Fox Sparrow's habitat requirement is dense, low vegetation with abundant leaf litter for double-scratch foraging.",
+    "breeding_habitat": [
+      "Dense coastal thickets and stunted spruce-hemlock forest (Sooty group)",
+      "Subalpine shrub zones near timberline",
+      "Alder and willow tangles along streams at higher elevations",
+      "Dense second-growth with heavy shrub layer",
+      "Island thickets (San Juan Islands, Tatoosh Island, outer Olympic Peninsula)"
+    ],
+    "wintering_habitat": [
+      "Dense brush in urban parks and gardens (October-March in PNW lowlands)",
+      "Blackberry tangles and salal thickets",
+      "Forest edges with heavy understory",
+      "Riparian corridors with willow and red-osier dogwood",
+      "Suburban yards with brush piles and dense hedgerows",
+      "Ground beneath bird feeders (attracted by seed spillage)"
+    ],
+    "vertical_position": "0-1 m (foraging on ground in leaf litter), 2-5 m (singing from concealed perch near top of shrub or low tree). Rarely ventures into the open. One of the most skulking birds in the PNW.",
+    "pnw_distribution": [
+      "Western Washington -- abundant winter resident October-March in lowland brushy habitats",
+      "Puget Sound region -- common in urban parks, backyards, and forest edges during winter",
+      "Outer Olympic Peninsula -- small breeding population near Cape Flattery",
+      "San Juan Islands -- small breeding population on some islands",
+      "Eastern Washington -- passage migrant in spring and fall",
+      "Cascade Range -- may breed in subalpine shrub zones at higher elevations"
+    ],
+    "five_passerellidae_habitats": "Five Passerellidae, five habitat bands. Song Sparrow (45) = wetland edge (where water meets land). Spotted Towhee (46) = dense understory (where shrub meets forest). Dark-eyed Junco (47) = forest floor (where floor meets opening). White-crowned Sparrow (48) = mountain meadow edge (where meadow meets forest/shrub). Fox Sparrow (49) = dense thicket (where understory closes completely). The quintet's habitat transect: from open water to impenetrable brush."
+  },
+  "double_scratch_foraging": {
+    "description": "The Fox Sparrow forages using a characteristic 'double-scratch' -- a vigorous forward hop followed by an immediate backward hop while raking both feet simultaneously through leaf litter. The motion clears a patch of ground in front of the bird, exposing seeds and invertebrates hidden beneath the leaf litter.",
+    "towhee_connection": "The double-scratch behavior directly connects Fox Sparrow (degree 49) to Spotted Towhee (degree 46). Both species use the same backward-hopping, leaf-raking technique. The Fox Sparrow's double-scratch is MORE vigorous than the towhee's -- the larger, heavier bird generates more force, creating audible rustling that can be heard from several meters away.",
+    "behavioral_comparison": [
+      "Song Sparrow (45): ground gleaning, moderate scratching",
+      "Spotted Towhee (46): double-scratch (the original 'towhee-style' technique)",
+      "Dark-eyed Junco (47): hopping, ground gleaning, minimal scratching",
+      "White-crowned Sparrow (48): ground scratching (less vigorous than towhee or fox sparrow)",
+      "Fox Sparrow (49): double-scratch (most vigorous of all, audible from several meters)"
+    ],
+    "acoustic_signature": "The double-scratch produces a loud rustling sound in leaf litter that is often the first audible sign of a Fox Sparrow's presence in winter thickets. In the Puget Sound region, the sequence of detection is typically: (1) loud leaf-litter rustling, (2) sharp 'tsik' call note, (3) brief glimpse of a large, dark, streaked sparrow diving deeper into the brush."
+  },
+  "subspecies_groups": {
+    "count": 4,
+    "total_subspecies": 18,
+    "groups": [
+      {
+        "name": "Red",
+        "representative": "P. i. iliaca",
+        "range": "Eastern boreal Canada, Alaska",
+        "plumage": "Bright rufous streaks, fox-red tail, warm tones, high contrast",
+        "bill": "Small, bicolored (dark upper, pale lower)",
+        "song_types_per_male": "1-2",
+        "song_quality": "Richest, most melodious of all groups"
+      },
+      {
+        "name": "Sooty",
+        "representative": "P. i. unalaschcensis",
+        "range": "Pacific coast, Aleutian Islands to NW Washington",
+        "plumage": "Dark sooty brown overall, minimal contrast, minimal rufous",
+        "bill": "Medium, dark",
+        "song_types_per_male": "3-4",
+        "song_quality": "Less rich, more burry than Red group"
+      },
+      {
+        "name": "Slate-colored",
+        "representative": "P. i. schistacea",
+        "range": "Interior western mountains (Rockies)",
+        "plumage": "Gray head, rusty wings and tail",
+        "bill": "Small, bicolored",
+        "song_types_per_male": "Intermediate",
+        "song_quality": "Intermediate between Red and Sooty"
+      },
+      {
+        "name": "Thick-billed",
+        "representative": "P. i. megarhyncha",
+        "range": "California mountains",
+        "plumage": "Gray head, olive-brown back",
+        "bill": "Large, thick -- the heaviest bill of any group",
+        "song_types_per_male": "Intermediate",
+        "song_quality": "Intermediate, somewhat burry"
+      }
+    ],
+    "split_status": "IOC World Bird List and BirdLife International treat each group as a separate species. AOS (formerly AOU) and eBird/Clements Checklist retain all as a single species. A 2003 AOU proposal to split was rejected on a split vote. Molecular data (Zink & Weckstein 2003, mtDNA and nuclear microsatellites) confirm four genetically distinct lineages. Further study needed on hybridization zones between groups.",
+    "pnw_form": "Sooty group (unalaschcensis and related subspecies). If the split is accepted, the PNW bird would become Passerella unalaschcensis -- the 'little sparrow of Unalaska,' named for a type locality in the Aleutian Islands rather than the PNW."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The ballad -- the 50th acoustic element (species side): a rich, melodious, complete whistled statement. The Fox Sparrow's song is a sequence of 8-12 rich, clear, whistled notes, 2-3 seconds, 2-6 kHz, widely considered the finest sparrow song in North America. The ballad is defined not by complexity (the preamble, degree 45), texture (the rasp, degree 46), simplicity (the snowbird, degree 47), or cultural function (the dialect, degree 48), but by pure melodious completeness -- a song that is beautiful because the voice is rich and every note earns its place. Named 'the ballad' because in music a ballad is a slow, emotional, melodious song that tells a complete story. The Fox Sparrow's song has this quality: unhurried, warm, complete. The quintet's closing statement, the 50th element, the final Passerellidae acoustic contribution.",
+      "level": "foundational",
+      "department": "music-theory/song-form",
+      "college_path": ".college/music/theory/song-form/ballad/",
+      "examples": [
+        "David Sibley describes the Fox Sparrow song as 'the richest and most melodious of all sparrows.' The ballad earns its name from this reputation -- the finest melodious statement in the family.",
+        "Contrast with the preamble (degree 45): the preamble is the BEGINNING of a complex song. The ballad IS the whole song. The preamble promises complexity; the ballad delivers completeness.",
+        "Contrast with the dialect (degree 48): the dialect is defined by cultural function (which population the singer belongs to). The ballad is defined by musical quality (the sheer richness and beauty of the sound). Function vs. beauty.",
+        "Contrast with the cadenza (degree 33): the cadenza is improvised virtuosity -- speed, range, complexity. The ballad is measured, unhurried, warm. The cadenza sprints. The ballad walks.",
+        "The quintet's five organizing principles: structural complexity (preamble), textural concentration (rasp), elemental reduction (snowbird), cultural transmission (dialect), melodious completeness (ballad). A complete curriculum in birdsong."
+      ],
+      "music_theory_parallel": "The ballad as closing form. In a concert program, the ballad is the slow, beautiful piece near the end -- the one that sends the audience home remembering the melody, not the fireworks. After the overture (preamble, degree 45), the character piece (rasp, degree 46), the intermezzo (snowbird, degree 47), and the folk song (dialect, degree 48), the ballad closes the Passerellidae program. The quintet ends not with a bang but with a song -- the most beautiful song in the family."
+    },
+    {
+      "concept": "The fox-Tibsfox name resonance. The common name 'Fox Sparrow' refers to the rufous, fox-colored plumage of the Red subspecies group -- the same warm foxy coloring that gives the Tibsfox brand its name. Passerella iliaca = 'the little sparrow of the foxy flanks.' The connection is a structural coincidence surfaced by the CSV substitution process: the replacement species for Western Toad happens to carry 'fox' in its name, the same word that grounds the project's identity. The fox in the sparrow is the fox of the PNW forest.",
+      "level": "foundational",
+      "department": "ecology/nomenclature",
+      "college_path": ".college/ecology/nomenclature/fox-resonance/",
+      "examples": [
+        "Fox Sparrow: named for the fox-red coloring of the Red subspecies group's plumage.",
+        "Tibsfox: the project's brand identity, grounded in the fox of the Pacific Northwest forests.",
+        "The PNW irony: the Sooty Fox Sparrow that actually lives here has LOST the fox-red coloring. The 'fox' is invisible in the local form. The name is a memory of the eastern bird, carried west.",
+        "Passerella = 'little sparrow.' The diminutive is ironic: Fox Sparrow is one of the LARGEST sparrows. A big bird with a name meaning 'little.'",
+        "The CSV substitution placed Fox Sparrow at degree 49 because it matched Western Toad's energy and habitat -- not because of the name. That the replacement happens to carry 'fox' is unplanned resonance."
+      ],
+      "music_theory_parallel": "The signature motif -- when a recurring theme appears unexpectedly in a new context and reveals connections you did not engineer. The 'fox' motif runs through the project (Tibsfox, the PNW forest identity, the fursona tradition) and now appears in the engine's species list through an unplanned CSV substitution. Like a musical leitmotif that seems to have a will of its own, appearing where it was not called."
+    },
+    {
+      "concept": "Fifth consecutive Passerellidae -- the unprecedented five-degree family streak at degrees 45-46-47-48-49. TIES the Hirundinidae quintet (26-30) and the Parulidae quintet (38-42) for the longest same-family streak in the engine. Three families at five-consecutive. Five genera (Melospiza, Pipilo, Junco, Zonotrichia, Passerella), five habitats (wetland edge, dense understory, forest floor, mountain meadow, dense thicket), five song strategies (improvisation, concentration, reduction, transmission, completeness). The engine's most genus-diverse family streak (tied with Hirundinidae). Three quintets map three strata: air (swallows), canopy (warblers), ground (sparrows).",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/passerellidae-quintet/",
+      "examples": [
+        "Three quintets: Hirundinidae (26-30, air, E=4), Parulidae (38-42, canopy, E=3-4), Passerellidae (45-49, ground, E=2-3). Three ecological strata, three energy bands.",
+        "Five genera in five degrees: Melospiza (45), Pipilo (46), Junco (47), Zonotrichia (48), Passerella (49). Maximum genus diversity -- every member from a different genus.",
+        "Habitat transect: wetland edge -> dense understory -> forest floor -> mountain meadow -> dense thicket. From open water to impenetrable brush.",
+        "Song gradient: improvisation (45) -> concentration (46) -> reduction (47) -> transmission (48) -> completeness (49). Five organizing principles.",
+        "Energy pattern: 2, 3, 3, 2, 3. Center of gravity 2.6 -- the quietest family quintet in the engine."
+      ],
+      "music_theory_parallel": "A five-movement suite. Movement I (Song Sparrow): Allegro con brio -- complex, elaborate, energetic. Movement II (Spotted Towhee): Scherzo -- rhythmic, textural, concentrated. Movement III (Dark-eyed Junco): Adagio -- simple, clean, elemental. Movement IV (White-crowned Sparrow): Theme and Variations -- structured, cultural, dialectal. Movement V (Fox Sparrow): Finale -- the ballad, rich, warm, complete. The suite closes not with bombast but with beauty."
+    },
+    {
+      "concept": "The four-way taxonomic debate -- Fox Sparrow may be one species or four, the most taxonomically volatile species in the engine. Four subspecies groups (Red, Sooty, Slate-colored, Thick-billed) differ in plumage, bill shape, range, song, and genetics. IOC/BirdLife split them into four species; AOS/eBird keep them as one. Zink & Weckstein (2003) confirmed four genetically distinct lineages via mtDNA and nuclear microsatellites. A 2003 AOU proposal to split was rejected on a split vote, with no-voters citing the need for more data on hybridization. The PNW Sooty form would become Passerella unalaschcensis if the split is accepted.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/fox-sparrow-complex/",
+      "examples": [
+        "The four groups: Red (eastern/northern, fox-red, 1-2 song types), Sooty (Pacific coast, dark brown, 3-4 song types), Slate-colored (interior west, gray-headed), Thick-billed (California, heavy-billed).",
+        "IOC and BirdLife treat them as four species: Red Fox Sparrow, Sooty Fox Sparrow, Slate-colored Fox Sparrow, Thick-billed Fox Sparrow.",
+        "AOS and eBird retain all as one species: Fox Sparrow (Passerella iliaca).",
+        "Contrast with White-crowned Sparrow (degree 48): five subspecies that NO authority proposes splitting. Fox Sparrow has four groups that MANY authorities HAVE split. Two consecutive Passerellidae, opposite ends of the taxonomic certainty spectrum.",
+        "Contrast with Red Crossbill (degree 34): 10+ call types that may represent incipient species. Fox Sparrow has 4 subspecies groups at a more advanced stage of divergence."
+      ],
+      "music_theory_parallel": "The contested attribution -- a musical work whose authorship or classification is debated by scholars. Is it one symphony with four movements (the lumpers' view) or four independent pieces that were published together (the splitters' view)? The music is the same either way; the question is how to categorize it. The Fox Sparrow's songs are the same whether you call the birds one species or four -- only the label changes."
+    },
+    {
+      "concept": "E=3 at degree 49, widening the lower-register advantage. E=2 + E=3 together now hold 23 degrees (46.0%), extending the lead over E=4's 21 degrees (42.0%). The gap first opened at degree 48 (22 vs. 21) and now widens to 23 vs. 21. The Passerellidae quintet's five entries at E=2-3 have definitively shifted the engine's dynamic center of gravity downward. Quintet energy pattern: 2, 3, 3, 2, 3 -- center of gravity at 2.6, the lowest of any family quintet.",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/lower-register-widening/",
+      "examples": [
+        "Energy distribution at degree 49: E=1 (3 degrees, 6.0%), E=2 (13 degrees, 26.0%), E=3 (10 degrees, 20.0%), E=4 (21 degrees, 42.0%), E=5 (3 degrees, 6.0%).",
+        "The widening gap: E=2 + E=3 = 23 degrees (46.0%) > E=4 = 21 degrees (42.0%). Gap of 2 degrees, up from gap of 1 at degree 48.",
+        "Quintet energy pattern: 2, 3, 3, 2, 3. Asymmetric -- opens and closes at different levels. Center 2.6.",
+        "Contrast with Hirundinidae quintet (26-30): all E=4. Center 4.0. The Passerellidae is 1.4 energy levels quieter per degree.",
+        "E=1 remains absent for 37 degrees (since degree 12, Pine Siskin). Still the longest-absent energy level."
+      ],
+      "music_theory_parallel": "The sustained diminuendo -- the extended passage in a musical work where the dynamic level drops and stays low, fundamentally altering the listener's expectation of loudness. Five consecutive Passerellidae at E=2-3 is a sustained quiet passage in an engine that ran at E=4 for 24 of the previous 31 degrees (21-44, minus a few). The audience's ears have adjusted to the quiet. When the next E=4 arrives, it will sound louder than before."
+    },
+    {
+      "concept": "The double-scratch connection -- Fox Sparrow (degree 49) and Spotted Towhee (degree 46) both use the double-scratch foraging technique, a vigorous backward hop with both feet simultaneously raking through leaf litter. Two double-scratchers in one quintet, separated by three degrees. The Fox Sparrow's double-scratch is more vigorous than the towhee's -- the larger, heavier bird generates more force, creating audible rustling from several meters. The behavior is a shared Passerellidae trait linking degrees 46 and 49.",
+      "level": "intermediate",
+      "department": "ecology/behavioral-ecology",
+      "college_path": ".college/ecology/behavioral-ecology/double-scratch/",
+      "examples": [
+        "Both species forage by hopping forward then immediately backward while raking both feet through leaf litter.",
+        "Fox Sparrow double-scratch is MORE vigorous: heavier bird (32 g vs. 38 g), stronger legs, louder rustling.",
+        "In PNW winter thickets, the double-scratch sound is often the first sign of a Fox Sparrow's presence -- louder than the bird's call note.",
+        "The quintet's foraging gradient: gleaning (45), double-scratch (46), hopping (47), scratching (48), vigorous double-scratch (49). Bookending the middle with the same technique at different intensities.",
+        "The double-scratch is an adaptation to the leaf-litter layer -- the PNW's deciduous and mixed forests produce deep litter that conceals seeds and invertebrates."
+      ],
+      "music_theory_parallel": "The reprise -- when a musical theme from earlier in a work returns near the end, often in a different key or at a different intensity. The Spotted Towhee introduced the double-scratch at degree 46. The Fox Sparrow reprises it at degree 49, fortissimo. The same gesture, louder, heavier, closing the quintet with a physical echo of its second movement."
+    },
+    {
+      "concept": "Dense thicket / forest understory habitat -- the fifth Passerellidae habitat band. After wetland edge (Song Sparrow, degree 45), dense understory (Spotted Towhee, degree 46), forest floor (Dark-eyed Junco, degree 47), and mountain meadow edge (White-crowned Sparrow, degree 48), the Fox Sparrow occupies the densest, darkest ground-level habitat in the quintet. The key habitat requirement is impenetrable low vegetation with deep leaf litter. The quintet's habitat transect now extends from open water to closed canopy brush.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/dense-thicket/",
+      "examples": [
+        "Five Passerellidae habitats: wetland edge (open, wet), dense understory (closed, dry), forest floor (open to moderate), mountain meadow edge (open with shrub patches), dense thicket (closed, dark).",
+        "The density gradient: open (45) -> dense (46) -> moderate (47) -> open edge (48) -> impenetrable (49). The quintet ends at maximum density.",
+        "PNW winter habitat: salal thickets, blackberry tangles, brush piles, garden hedgerows. The Fox Sparrow's winter territory is defined by dense cover.",
+        "Detection sequence in Puget Sound: (1) loud leaf-litter rustling, (2) sharp 'tsik' call, (3) brief glimpse of large dark sparrow diving deeper into brush.",
+        "The skulking gradient: Song Sparrow (fairly visible), Spotted Towhee (moderately skulking), Dark-eyed Junco (open floor), White-crowned Sparrow (open edge), Fox Sparrow (most skulking of all). The quintet ends with the most hidden bird."
+      ],
+      "music_theory_parallel": "The darkened stage -- the final scene played in the lowest light, where the audience must listen rather than watch. The Fox Sparrow's dense thicket habitat is the acoustic equivalent of a darkened concert hall: you cannot see the performer, only hear the song. The quintet opens at the water's edge in full sunlight (Song Sparrow) and closes in the impenetrable brush in deep shadow (Fox Sparrow). The progression from seeing to hearing."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-048",
+      "title": "White-crowned Sparrow (Degree 48)",
+      "connection": "PASSERELLIDAE CONSECUTIVE (48-49). The dialect (cultural transmission) meets the ballad (melodious completeness). Both are learned singers: the White-crowned Sparrow learns one dialect strictly during a sensitive period; the Fox Sparrow learns 3-4 song types. Marler's bird (48) meets the fox's bird (49). Both are winter visitors in the Puget Sound lowlands."
+    },
+    {
+      "project": "SPS-046",
+      "title": "Spotted Towhee (Degree 46)",
+      "connection": "DOUBLE-SCRATCH FORAGING CONNECTION. Both species use the same backward-hopping, leaf-raking foraging technique. The Fox Sparrow's double-scratch is more vigorous -- the larger bird generates more force, audible from several meters. Two double-scratchers bookend the quintet's middle (degrees 46 and 49). Both are dense-cover specialists."
+    },
+    {
+      "project": "SPS-045",
+      "title": "Song Sparrow (Degree 45)",
+      "connection": "PASSERELLIDAE QUINTET ANCHOR. The preamble (complex improvisation) meets the ballad (melodious completeness). Both sing rich, melodious songs, but the Song Sparrow elaborates freely while the Fox Sparrow delivers a measured, complete statement. Similar population sizes (~34M vs ~35M). Both are common in PNW lowland habitats."
+    },
+    {
+      "project": "SPS-047",
+      "title": "Dark-eyed Junco (Degree 47)",
+      "connection": "PASSERELLIDAE QUINTET SIZE CONTRAST. The smallest member (~19 g) vs. the largest (~32 g). The snowbird's elemental reduction vs. the ballad's melodious richness. Extremes of the quintet's size and complexity gradients. Both are common winter birds in the Puget Sound region."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "TAXONOMIC UNCERTAINTY PARALLEL. Red Crossbill has 10+ call types that may represent separate species. Fox Sparrow has 4 subspecies groups that some authorities already split into separate species. Two species with deep intraspecific variation and unresolved taxonomy. The engine's two most taxonomically debated entries."
+    },
+    {
+      "project": "SPS-007",
+      "title": "Hermit Thrush (Degree 7)",
+      "connection": "RICH MELODIOUS SONG PARALLEL. The Hermit Thrush's harmonic spiral (degree 7, E=2) is the other 'finest singer' in the engine. Both are skulking ground-level birds that produce songs of extraordinary melodic beauty from dense cover. The Hermit Thrush spirals through the harmonic series; the Fox Sparrow delivers a rich ballad. Two candidates for 'most beautiful song in the PNW forest.'"
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Fox Sparrow documented across Washington state. Sooty form breeds in limited coastal/island sites in WA; abundant winter resident in western WA lowlands October-March. Common in backyard thickets and brushy parks throughout the Puget Sound region. Four subspecies groups documented with identification guidance."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Dense forest understory ecology. Salal, blackberry, and sword fern as key cover species. Leaf-litter invertebrate community as Fox Sparrow food web. Successional dynamics -- Fox Sparrow thrives in second-growth and disturbed habitats with heavy shrub regeneration. Climate change and habitat maturation impacts on understory-dependent species."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 47,
+    "total_entries": 50,
+    "families_represented": 19,
+    "largest_families": {
+      "Parulidae": 10,
+      "Passerellidae": 5,
+      "Hirundinidae": 5,
+      "Fringillidae": 5,
+      "Turdidae": 5,
+      "Trochilidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 45, 48],
+      "E3": [14, 15, 16, 17, 18, 19, 20, 46, 47, 49],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=3 at degree 49. E=3 rises to 10 degrees (20.0%). E=2 + E=3 together hold 23 degrees (46.0%), widening the gap over E=4's 21 degrees (42.0%). The lower-register advantage established at degree 48 continues to grow. Passerellidae quintet energy pattern: 2, 3, 3, 2, 3. E=1 remains absent for 37 degrees (since degree 12).",
+    "passerellidae_streak_note": "FIVE CONSECUTIVE PASSERELLIDAE at degrees 45-46-47-48-49. Five different genera (Melospiza, Pipilo, Junco, Zonotrichia, Passerella). TIES the Hirundinidae quintet (26-30) AND the Parulidae quintet (38-42) for the longest same-family streak in the engine. THREE families at five-consecutive. No family has exceeded five. The Passerellidae quintet has maximum genus diversity -- five genera in five degrees.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer", "winter"],
+    "ecosystem_note": "Dense thicket / forest understory -- the fifth Passerellidae habitat band. After wetland edge (45), dense understory (46), forest floor (47), mountain meadow edge (48), the Fox Sparrow occupies the densest, most impenetrable ground-level habitat. The quintet's transect: from open water to closed brush.",
+    "acoustic_element_50": "THE BALLAD -- a rich, melodious, complete whistled statement. The Passerellidae quintet's five elements: preamble (improvisation) -> rasp (concentration) -> snowbird (reduction) -> dialect (transmission) -> ballad (completeness). Five organizing principles in five degrees.",
+    "csv_substitution_note": "Western Toad (Anaxyrus boreas) replaced by Fox Sparrow (Passerella iliaca) because SPS Part B is birds-and-mammals only. E=3 and dense thicket habitat preserved from original CSV. FIFTH consecutive CSV substitution replacing an amphibian (45-46-47-48-49). The engine continues deep into the amphibian belt of the original CSV.",
+    "fox_tibsfox_note": "The common name 'Fox Sparrow' resonates with the Tibsfox brand -- the 'fox' in the sparrow is the same fox that grounds the project's identity. Passerella iliaca = 'the little sparrow of the foxy flanks.' A structural coincidence surfaced by the CSV substitution, not engineered but resonant.",
+    "conservation_note": "LEAST CONCERN (IUCN). Population ~35 million (PIF). Continental Concern Score 10/20. BBS trend stable overall (1966-2019). Smaller population than White-crowned Sparrow (48, ~79M) and Dark-eyed Junco (47, ~220-630M), similar to Song Sparrow (45, ~34M). All five Passerellidae quintet members are Least Concern with stable populations.",
+    "critical_gaps": [
+      "No marine/shoreline species in 49 degrees of 'The Sound of Puget Sound' -- 49 DEGREES OVERDUE -- EXISTENTIAL CRISIS (CRITICAL, ABSOLUTE)",
+      "No corvid (Steller's Jay, crow, raven) -- 49 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 49 degrees -- URGENT",
+      "No nocturnal species since degree 4 (45 degrees ago) -- OVERDUE",
+      "No E=1 since degree 12 (37 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 49 DEGREES OF A PROJECT NAMED FOR PUGET SOUND",
+      "Only 5 orders in 50 entries -- a new order is critically needed",
+      "TWELVE consecutive Passeriformes (38-49) -- non-passerine needed CRITICALLY",
+      "Fifth consecutive CSV substitution replacing an amphibian (45-46-47-48-49) -- deep in the amphibian belt",
+      "Five consecutive Passerellidae (45-49) -- same-family dominance at the engine record. The quintet MUST end. Degree 50 CANNOT be Passerellidae."
+    ]
+  }
+}
