@@ -1,0 +1,157 @@
+* Baxandall Tone Control Circuit
+* =========================================================================
+* Mission 1.8 — Vanguard 1, March 17, 1958
+* Progressive Radio Series v1.8: Volume and Tone Control
+*
+* This circuit models a passive Baxandall tone control placed between
+* the v1.7 audio amplifier output and the speaker. It provides
+* independent bass and treble boost/cut using RC networks and
+* potentiometers.
+*
+* Peter Baxandall published this circuit topology in Wireless World
+* magazine in 1952. It became the standard tone control for virtually
+* every audio device — radios, stereos, guitar amplifiers, PA systems.
+* The elegance is in the symmetry: boost and cut use the same components,
+* controlled by the same potentiometer. Turning the knob shifts the
+* frequency-dependent voltage divider from one direction to the other.
+*
+* Circuit topology:
+*   Input --- R1 (10K) ---+--- R2 (10K) --- Output
+*                          |
+*                  Bass pot wiper
+*                  Bass pot CW --- C1 (100nF) --- Input
+*                  Bass pot CCW --- GND
+*                          |
+*                  Treble pot wiper
+*                  Treble pot CW --- C2 (10nF) --- Output
+*                  Treble pot CCW --- GND
+*
+* Test signals:
+*   1. Single frequency sweep (AC analysis)
+*   2. Three-tone test: 100 Hz + 1 kHz + 5 kHz
+*
+* Run: ngspice -b tone-control.cir
+* =========================================================================
+
+* ===== AC ANALYSIS: FREQUENCY RESPONSE =====
+
+.title Baxandall Tone Control — Mission 1.8
+
+* --- Input Signal ---
+* 1V AC source for frequency response measurement
+Vin input 0 AC 1.0
+
+* --- Volume Control ---
+* 10K log potentiometer — modeled at 50% position
+* Wiper at midpoint = 5K to each end
+Rvol_top input vol_wiper 5K
+Rvol_bot vol_wiper 0 5K
+
+* --- Series Resistors ---
+R1 vol_wiper junction 10K
+R2 junction output 10K
+
+* --- Bass Control ---
+* 100K linear potentiometer with 100nF capacitor
+* Three settings modeled as subcircuits:
+*
+* Setting 1: FLAT (pot at center) — equal split
+* Setting 2: BASS BOOST (pot wiper toward C1) — bass bypasses R1
+* Setting 3: BASS CUT (pot wiper toward GND) — bass shunted to ground
+
+* Bass capacitor: 100nF
+* f_bass = 1/(2*pi*R*C) = 1/(2*pi*10K*100nF) = 159 Hz
+
+* FLAT setting: pot wiper at center (50K each side)
+Rbass_cw junction bass_cap 50K
+Rbass_ccw junction 0 50K
+Cbass bass_cap vol_wiper 100n
+
+* --- Treble Control ---
+* 100K linear potentiometer with 10nF capacitor
+*
+* f_treble = 1/(2*pi*R*C) = 1/(2*pi*10K*10nF) = 1,592 Hz
+
+* FLAT setting: pot wiper at center
+Rtreb_cw junction treb_cap 50K
+Rtreb_ccw junction 0 50K
+Ctreb treb_cap output 10n
+
+* --- Load (speaker) ---
+Rload output 0 8
+
+* --- AC Analysis ---
+* Sweep from 20 Hz to 20 kHz (audio range)
+.ac dec 100 20 20K
+
+* --- Measurements ---
+.meas AC gain_100Hz FIND VDB(output) AT=100
+.meas AC gain_1kHz FIND VDB(output) AT=1K
+.meas AC gain_5kHz FIND VDB(output) AT=5K
+.meas AC gain_10kHz FIND VDB(output) AT=10K
+
+.control
+run
+set hcopydevtype = postscript
+set color0 = white
+set color1 = black
+set color2 = blue
+set color3 = red
+
+* Plot frequency response
+plot vdb(output) title 'Baxandall Tone Control — Flat Setting'
++ ylabel 'Gain (dB)' xlabel 'Frequency (Hz)'
+
+echo "=== Baxandall Tone Control — Flat Setting ==="
+echo "Gain at 100 Hz:  $&gain_100Hz dB"
+echo "Gain at 1 kHz:   $&gain_1kHz dB"
+echo "Gain at 5 kHz:   $&gain_5kHz dB"
+echo "Gain at 10 kHz:  $&gain_10kHz dB"
+echo ""
+echo "At flat setting, the circuit should show approximately"
+echo "uniform response across the audio band with ~6 dB"
+echo "insertion loss from the resistive divider."
+echo ""
+echo "The bass corner frequency:"
+echo "  f_bass = 1/(2*pi*10K*100nF) = 159 Hz"
+echo ""
+echo "The treble corner frequency:"
+echo "  f_treble = 1/(2*pi*10K*10nF) = 1,592 Hz"
+echo ""
+echo "Turning the bass pot shifts the corner between boost and cut."
+echo "Turning the treble pot does the same for high frequencies."
+echo "The volume pot scales everything uniformly."
+echo ""
+echo "This is the same type of control that ground station operators"
+echo "used when listening to Vanguard 1's 108 MHz telemetry signal"
+echo "through their superheterodyne receivers."
+.endc
+
+.end
+
+* ===== TRANSIENT ANALYSIS: THREE-TONE TEST =====
+* (Comment out the AC analysis above and uncomment this section
+*  to run the transient simulation)
+*
+* .title Baxandall Tone Control — Three-Tone Test
+*
+* * Three test tones: bass (100 Hz), mid (1 kHz), treble (5 kHz)
+* V100 n100 0 SIN(0 0.3 100)
+* V1k  n1k  0 SIN(0 0.3 1000)
+* V5k  n5k  0 SIN(0 0.3 5000)
+*
+* * Sum the three tones
+* R100 n100 input 1K
+* R1k  n1k  input 1K
+* R5k  n5k  input 1K
+*
+* * (Same tone control circuit as above)
+*
+* .tran 10u 20m
+*
+* .control
+* run
+* plot v(input) v(output) title 'Three-Tone Input vs Output'
+* .endc
+*
+* .end

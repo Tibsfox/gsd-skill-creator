@@ -1,0 +1,183 @@
+* Vanguard 1 Solar Cell Model — 6 Cells in Series
+* =========================================================================
+* Mission 1.8 — Vanguard 1, March 17, 1958
+* First solar-powered satellite — Bell Labs silicon solar cells
+*
+* This circuit models a single silicon solar cell using the standard
+* single-diode model, then connects 6 cells in series to represent
+* Vanguard 1's configuration. The model shows I-V curves at different
+* illumination levels, demonstrating how power output depends on both
+* current and voltage.
+*
+* Solar cell equivalent circuit (single-diode model):
+*
+*   Photocurrent ──┬── Diode ──┬── Rs ── Output+
+*   source (Iph)   │           │
+*                   Rsh         │
+*                   │           │
+*                  GND ─────── GND ── Output-
+*
+*   Iph = photogenerated current (proportional to illumination)
+*   D   = p-n junction diode (models recombination)
+*   Rsh = shunt resistance (leakage paths, ~1K for 1958 cells)
+*   Rs  = series resistance (contacts, bulk, ~5 ohm for 1958 cells)
+*
+* Bell Labs 1958 silicon cells:
+*   - ~6% efficiency
+*   - Open circuit voltage (Voc): ~0.5V per cell
+*   - Short circuit current (Isc): ~2 mA per cell at full sun
+*   - Maximum power: ~0.7 mW per cell
+*   - 6 cells in series: Voc ~ 3.0V, Isc ~ 2 mA, Pmax ~ 4 mW
+*
+* Run: ngspice -b solar-cell.cir
+* =========================================================================
+
+.title Vanguard 1 Solar Cell Array — 6 Cells in Series
+
+* ===== SINGLE CELL MODEL (SUBCIRCUIT) =====
+* Parameters tuned for 1958 Bell Labs silicon solar cells
+
+.subckt solarcell pos neg iph_val=2m
+  * Photocurrent source (proportional to illumination)
+  Iph neg pos DC {iph_val}
+
+  * Junction diode
+  * Is = 1nA (reverse saturation current, typical for 1958 Si)
+  * N = 1.5 (ideality factor, higher for early cells)
+  D1 pos neg dmodel
+  .model dmodel D(Is=1n N=1.5 Rs=0.1)
+
+  * Shunt resistance (leakage — lower for early cells)
+  Rsh pos neg 1K
+
+  * Series resistance (contacts — higher for early cells)
+  Rs pos pos_int 5
+  .ends solarcell
+
+* ===== TEST CASE 1: SINGLE CELL I-V CURVE =====
+
+* Single cell at full illumination (Iph = 2 mA)
+X1 cell_pos 0 solarcell iph_val=2m
+
+* Sweep voltage to trace I-V curve
+Vsweep cell_pos 0 DC 0
+
+.dc Vsweep 0 0.6 0.002
+
+.control
+run
+
+* Calculate power at each point
+let power = v(cell_pos) * (-i(Vsweep))
+let current_mA = -i(Vsweep) * 1000
+let voltage = v(cell_pos)
+
+echo ""
+echo "=== Single Cell I-V Curve (Full Illumination) ==="
+echo ""
+
+* Find key parameters
+meas DC isc FIND current_mA AT=0
+meas DC voc FIND voltage WHEN current_mA=0 CROSS=1
+
+echo "Short-circuit current (Isc): $&isc mA"
+echo "Open-circuit voltage (Voc):  $&voc V"
+echo ""
+
+* Plot I-V curve
+plot current_mA vs voltage title 'Single Solar Cell I-V Curve (1958 Bell Labs)'
++ ylabel 'Current (mA)' xlabel 'Voltage (V)'
+
+* Plot power curve
+plot power*1000 vs voltage title 'Single Solar Cell Power Curve'
++ ylabel 'Power (mW)' xlabel 'Voltage (V)'
+
+echo "The I-V curve shows the characteristic shape of a solar cell:"
+echo "  - Constant current region (low voltage): Isc"
+echo "  - Knee region: where power is maximum"
+echo "  - Open circuit: voltage at zero current"
+echo ""
+echo "Maximum power occurs at the 'knee' of the curve."
+echo "For a 1958 cell: ~0.7 mW at approximately 0.4V, 1.8 mA"
+echo ""
+echo "These 6 cells powered Vanguard 1 for six years."
+echo "The chemical batteries lasted three months."
+echo ""
+.endc
+
+* ===== TEST CASE 2: 6 CELLS IN SERIES AT DIFFERENT ILLUMINATIONS =====
+* (Comment out Test Case 1 and uncomment this section)
+
+* .title Vanguard 1: 6-Cell Array at Various Illumination Levels
+*
+* * 6 cells in series
+* X1 n1 0  solarcell iph_val=2m
+* X2 n2 n1 solarcell iph_val=2m
+* X3 n3 n2 solarcell iph_val=2m
+* X4 n4 n3 solarcell iph_val=2m
+* X5 n5 n4 solarcell iph_val=2m
+* X6 array_pos n5 solarcell iph_val=2m
+*
+* * Sweep total array voltage
+* Vsweep6 array_pos 0 DC 0
+*
+* .dc Vsweep6 0 3.5 0.01
+*
+* .control
+* run
+*
+* let power6 = v(array_pos) * (-i(Vsweep6)) * 1000
+* let current6 = -i(Vsweep6) * 1000
+*
+* plot current6 vs v(array_pos) title '6-Cell Array I-V Curve'
+* + ylabel 'Current (mA)' xlabel 'Voltage (V)'
+*
+* plot power6 vs v(array_pos) title '6-Cell Array Power Curve'
+* + ylabel 'Power (mW)' xlabel 'Voltage (V)'
+*
+* echo "6 cells in series:"
+* echo "  Voc ~ 3.0V (6 x 0.5V)"
+* echo "  Isc ~ 2 mA (same as single cell — series connection)"
+* echo "  Pmax ~ 4 mW (6 x 0.7 mW, minus losses)"
+* echo ""
+* echo "Vanguard 1's 10 mW transmitter could not run continuously"
+* echo "on 4 mW of solar power. It transmitted in bursts, charging"
+* echo "during sunlit portions of the orbit and transmitting the"
+* echo "stored energy. The chemical batteries provided continuous"
+* echo "10 mW until they died in June 1958."
+* .endc
+*
+* .end
+
+* ===== TEST CASE 3: VARYING ILLUMINATION (TUMBLE SIMULATION) =====
+* (Comment out other test cases and uncomment this section)
+
+* .title Vanguard 1: Solar Cell Under Varying Illumination
+*
+* * Single cell with time-varying photocurrent
+* * Simulates cos(theta) variation as satellite tumbles
+*
+* * Photocurrent varies sinusoidally: Iph = 2mA * |cos(2*pi*f*t)|
+* * where f = spin rate (originally ~2.7 Hz)
+*
+* Iph_vary 0 cell_pos SIN(1m 1m 2.7)
+* D_cell cell_pos 0 dmodel
+* .model dmodel D(Is=1n N=1.5)
+* Rsh_cell cell_pos 0 1K
+* Rload cell_pos 0 200
+*
+* .tran 0.1m 2
+*
+* .control
+* run
+* let power_var = v(cell_pos) * i(Rload) * 1000
+* plot power_var title 'Solar Cell Power During Tumble'
+* + ylabel 'Power (mW)' xlabel 'Time (s)'
+* echo "Power oscillates as the cell rotates into and out of sunlight."
+* echo "The spin rate was ~2.7 Hz initially, slowing over decades."
+* echo "Each rotation cycle produces a power pulse following cos(theta)."
+* .endc
+*
+* .end
+
+.end

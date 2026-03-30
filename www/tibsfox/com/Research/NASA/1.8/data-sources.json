@@ -1,0 +1,117 @@
+{
+  "mission": "1.8",
+  "title": "Vanguard 1",
+  "description": "Open datasets and source materials relevant to Vanguard 1 (1958), the first solar-powered satellite, oldest artificial object in orbit, pear-shaped Earth discovery, Polypodium glycyrrhiza (licorice fern), Rufous Hummingbird (Selasphorus rufus), Bell Labs solar cells, orbital lifetime modeling, and Baxandall tone control",
+  "sources": [
+    {
+      "id": "nssdc-vanguard1",
+      "name": "NSSDC Master Catalog -- Vanguard 1",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-002B",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Vanguard 1. Spacecraft description (1.47 kg aluminum sphere, 16.5 cm diameter), instrument manifest (two transmitters at 108.00 and 108.03 MHz, six Bell Labs silicon solar cells, mercury chemical batteries, temperature sensors), Vanguard SLV-4 launch vehicle details, and mission timeline. NSSDC designation 1958-002B. Documents the satellite's 654 x 3,969 km orbit with 34.25 degree inclination and 134.2-minute period. Records both the solar cell technology demonstration and the geodesy results, including the discovery of Earth's pear-shaped geoid.",
+      "mission_relevance": "Definitive source for Vanguard 1 specifications, orbital parameters, and scientific achievements. Documents the six Bell Labs solar cells that made it the first solar-powered spacecraft, the transmitter frequencies, and the satellite's status as the oldest artificial object still in orbit. Essential reference for all knowledge nodes in this mission."
+    },
+    {
+      "id": "spacetrack-tle",
+      "name": "Space-Track.org -- Two-Line Element Sets",
+      "url": "https://www.space-track.org/",
+      "type": "primary-source",
+      "category": "orbital-data",
+      "format": "TLE/JSON/API",
+      "access": "open (registration required)",
+      "description": "The US Space Force's Space Surveillance Network maintains a catalog of all tracked objects in Earth orbit, including Vanguard 1 (NORAD catalog number 00005). Two-Line Element (TLE) sets provide the current orbital elements: semi-major axis, eccentricity, inclination, right ascension of ascending node, argument of perigee, mean anomaly, and mean motion. Vanguard 1's TLEs have been continuously maintained since 1958, making it one of the longest-tracked objects in the catalog. The TLE history shows the slow orbital decay: perigee has decreased by approximately 5 km over 68 years, confirming the atmospheric drag models used in the orbital lifetime simulation.",
+      "mission_relevance": "Primary source for current and historical orbital elements of Vanguard 1. TLE data validates the orbital-lifetime.py simulation by providing ground truth for perigee and apogee evolution over 68 years. The continuous tracking record from 1958 to present is itself a remarkable dataset — one of the longest continuous satellite tracking campaigns in history."
+    },
+    {
+      "id": "icgem-geoid",
+      "name": "ICGEM -- International Centre for Global Earth Models",
+      "url": "http://icgem.gfz-potsdam.de/",
+      "type": "primary-source",
+      "category": "geoid-data",
+      "format": "ASCII/NetCDF",
+      "access": "open",
+      "description": "The International Centre for Global Earth Models at GFZ Potsdam maintains a comprehensive collection of global gravity field models, from the earliest satellite-derived models (which include Vanguard 1's contributions to J2 and J3) to the latest GOCE/GRACE-FO models with spherical harmonic coefficients to degree and order 2190+. The center provides tools for computing geoid heights, gravity anomalies, and deflections of the vertical at any point on Earth. Historical models show how our knowledge of the geoid has evolved from Vanguard 1's first measurement of J3 (a few coefficients) to modern models with millions of coefficients.",
+      "mission_relevance": "Source for the gravitational harmonic coefficients (J2, J3, etc.) that define Earth's shape. Vanguard 1's tracking data contributed to the earliest models in this collection. The ICGEM visualization tools can display the pear-shaped asymmetry that O'Keefe discovered from Vanguard 1's orbital perturbations. Essential for the geodesy/geoid and spherical harmonics knowledge nodes."
+    },
+    {
+      "id": "nasa-solar-cells",
+      "name": "NASA Technical Reports Server -- Solar Cell Research",
+      "url": "https://ntrs.nasa.gov/search?q=solar+cell+vanguard",
+      "type": "primary-source",
+      "category": "technology-data",
+      "format": "PDF",
+      "access": "open",
+      "description": "NASA's Technical Reports Server contains the original research papers and technical reports on the development and flight performance of Vanguard 1's solar cells. Key documents include the Bell Labs team's reports on the silicon cell design (Chapin, Fuller, Pearson), the NRL reports on flight performance data showing cell degradation rates in the space environment, and comparative analyses of solar cell technology evolution from 1958 through the present. The NTRS also contains the original geodesy papers by O'Keefe reporting the J3 discovery.",
+      "mission_relevance": "Primary source for the technical details of Vanguard 1's Bell Labs solar cells: efficiency, I-V characteristics, degradation rates, temperature coefficients, and comparison with chemical battery performance. The flight data showing solar cells outlasting batteries by 20:1 (six years vs three months) was the proof of concept that made solar power the standard for spacecraft. Essential for the solar cell physics knowledge node."
+    },
+    {
+      "id": "vanguard-tracking-historical",
+      "name": "Smithsonian Astrophysical Observatory -- Historical Satellite Tracking",
+      "url": "https://www.cfa.harvard.edu/sao/",
+      "type": "primary-source",
+      "category": "tracking-data",
+      "format": "HTML/Archives",
+      "access": "open",
+      "description": "The Smithsonian Astrophysical Observatory (SAO) operated the Baker-Nunn camera network that provided optical tracking of Vanguard 1 and other early satellites. The Baker-Nunn cameras were f/1.0 Schmidt telescopes with a 5x30 degree field of view, capable of photographing satellites as faint as 15th magnitude against the star background. The SAO also operated the Moonwatch volunteer network — thousands of amateur astronomers who tracked satellites visually. The Baker-Nunn observations provided the angular positions that, combined with Minitrack radio data, enabled the precise orbit determination that revealed the geoid anomalies. Historical records document the tracking methodology and accuracy.",
+      "mission_relevance": "Source for the tracking methodology used to discover Earth's pear shape. The Baker-Nunn camera data provided the angular positions, while the Minitrack network provided the range-rate measurements. Together, these two data types constrained Vanguard 1's orbit with sufficient accuracy to detect the J3 harmonic. The satellite tracking knowledge node depends on this historical record."
+    },
+    {
+      "id": "inat-polypodium",
+      "name": "iNaturalist -- Polypodium glycyrrhiza Observations",
+      "url": "https://www.inaturalist.org/taxa/53327-Polypodium-glycyrrhiza",
+      "type": "community-source",
+      "category": "organism-data",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community-contributed observations of Polypodium glycyrrhiza (licorice fern) throughout its range, from southern Alaska to northern California. Observations include photographs showing the fern in its characteristic habitats: epiphytic on bigleaf maple branches, on mossy rocks, on rotting logs, and occasionally on soil in humid forests. Seasonal observations document the summer dormancy and autumn green-up that characterize this wintergreen species. The iNaturalist API provides geographic and temporal data for distribution mapping. In the Pacific Northwest, the licorice fern is abundant from sea level to about 600 meters in the western Cascades foothills, Olympic Peninsula, and coastal forests.",
+      "mission_relevance": "Primary data source for the organism component of Mission 1.8. Provides geographic distribution and phenological data for Polypodium glycyrrhiza across the PNW. Seasonal observations confirm the summer dormancy and autumn revival that is the central metaphor of this mission: persistence through apparent death, the way Vanguard 1 persists through apparent obsolescence. The epiphytic habit — living on another organism's surface without parasitizing it — maps to the satellite orbiting Earth without interacting with it."
+    },
+    {
+      "id": "egm2008",
+      "name": "EGM2008 -- Earth Gravitational Model 2008",
+      "url": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84#tab_egm2008",
+      "type": "primary-source",
+      "category": "geoid-data",
+      "format": "ASCII/Binary",
+      "access": "open",
+      "description": "The Earth Gravitational Model 2008 (EGM2008) is the current standard high-resolution model of Earth's gravitational field, developed by the National Geospatial-Intelligence Agency. It provides spherical harmonic coefficients to degree and order 2159, representing gravitational features as small as ~9 km on the surface. The model combines satellite tracking data (including GRACE), surface gravity measurements, and altimetry data. The J2 and J3 coefficients from EGM2008 are the most precise available: J2 = 1.08263e-3, J3 = -2.54e-6. These are the modern, refined values of the same coefficients that Vanguard 1's tracking first measured in 1958-1959.",
+      "mission_relevance": "Provides the definitive values of J2 (oblateness) and J3 (pear shape) that Vanguard 1 first detected. The EGM2008 coefficients are used in the geoid-viewer.html simulation to show the pear-shaped deformation. The continuity from Vanguard 1's first crude measurement of J3 to EGM2008's 2159-degree expansion is the full arc of satellite geodesy — from one grapefruit's perturbations to a precision model of Earth's entire gravitational landscape."
+    },
+    {
+      "id": "celestrak",
+      "name": "CelesTrak -- Satellite Tracking and Orbital Data",
+      "url": "https://celestrak.org/NORAD/elements/",
+      "type": "primary-source",
+      "category": "orbital-data",
+      "format": "TLE/JSON",
+      "access": "open",
+      "description": "CelesTrak, maintained by T.S. Kelso, provides current and historical Two-Line Element sets for all tracked objects, including Vanguard 1 (NORAD 00005). CelesTrak also provides supplemental data: satellite decay predictions, conjunction assessments, and visualization tools. The site's historical TLE archive extends back to the earliest satellite era, providing a continuous record of Vanguard 1's orbital evolution. CelesTrak's decay prediction tools estimate Vanguard 1's re-entry at approximately 2258, consistent with the atmospheric drag modeling in the orbital-lifetime.py simulation.",
+      "mission_relevance": "Accessible source for current Vanguard 1 orbital elements, used by the orbit-clock.html simulation to calculate real-time orbit count and position. CelesTrak's decay prediction validates the orbital lifetime model. The NORAD catalog number 00005 reflects Vanguard 1's status as one of the very first objects tracked — only Sputnik 1, Sputnik 2, Explorer 1, and Vanguard 1's rocket body precede it."
+    },
+    {
+      "id": "bell-labs-solar-history",
+      "name": "Bell Labs -- Solar Cell History and Archives",
+      "url": "https://www.bell-labs.com/about/history-bell-labs/",
+      "type": "primary-source",
+      "category": "historical",
+      "format": "HTML",
+      "access": "open",
+      "description": "Bell Laboratories (now Nokia Bell Labs) maintains archives documenting the invention and development of the practical silicon solar cell. On April 25, 1954, Daryl Chapin, Calvin Fuller, and Gerald Pearson demonstrated the first silicon solar cell with 6% efficiency — the same technology that flew on Vanguard 1 four years later. The Bell Labs team developed the cells specifically for Vanguard 1 after being approached by the Naval Research Laboratory. The historical documentation includes the original technical papers, photographs of the development process, and the subsequent evolution of solar cell technology at Bell Labs through the Telstar communications satellite program (1962) and beyond.",
+      "mission_relevance": "Source for the history of the solar cells that made Vanguard 1 the first solar-powered spacecraft. Chapin, Fuller, and Pearson's 1954 demonstration is the origin point for all space solar power. The Bell Labs archives document the transition from laboratory curiosity (1954) to flight-qualified hardware (1958) in just four years — an extraordinarily rapid technology maturation driven by the urgency of the space race."
+    },
+    {
+      "id": "wgs84-reference",
+      "name": "WGS84 -- World Geodetic System 1984",
+      "url": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
+      "type": "primary-source",
+      "category": "geodetic-reference",
+      "format": "PDF/HTML",
+      "access": "open",
+      "description": "The World Geodetic System 1984 (WGS84) is the reference coordinate system used by GPS and the international standard for geodetic measurements. It defines the reference ellipsoid (semi-major axis a = 6378137.0 m, flattening f = 1/298.257223563) and the associated gravitational model. WGS84 incorporates the J2 and J3 harmonics that Vanguard 1 first measured, refined by decades of subsequent satellite tracking and surface measurements. The reference ellipsoid's parameters encode the equatorial bulge (J2) but not the pear shape (J3) — the pear shape appears only in the geoid model, not in the reference ellipsoid. WGS84 is the geodetic foundation that makes GPS possible, and its lineage traces directly to the satellite geodesy that Vanguard 1 pioneered.",
+      "mission_relevance": "Provides the geodetic reference frame that connects Vanguard 1's discovery to modern positioning systems. The J2 oblateness parameter in WGS84 was first precisely measured from satellite tracking (including Vanguard 1). The J3 pear shape is encoded in the geoid model associated with WGS84. Every GPS position fix uses a coordinate system whose parameters were first constrained by tracking a grapefruit-sized satellite in 1958."
+    }
+  ]
+}
