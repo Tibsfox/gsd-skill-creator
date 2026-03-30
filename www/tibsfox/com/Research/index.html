@@ -3,69 +3,337 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <title>Research — Tibsfox</title>
   <link rel="stylesheet" href="../brand.css">
   <style>
+    /* ═══════════════════════════════════════════
+       DUAL-MODE PALETTE — positive / negative
+       The accent colors are constants.
+       The ground flips. Same painting, different paper.
+    ═══════════════════════════════════════════ */
+
     :root {
-      --page-bg: #0f1219;
-      --page-text: #c8d0e0;
-      --card-bg: rgba(255,255,255,0.04);
-      --card-border: rgba(255,255,255,0.08);
-      --card-hover-border: rgba(255,255,255,0.2);
+      /* --- Brand constants (same in both modes) --- */
+      --fox:          #c75b3a;
+      --fox-warm:     #d4823a;
+      --amber:        #e89848;
+      --amber-light:  #f0c070;
+      --forest:       #2d5a3a;
+      --moss:         #4CAF50;
+      --cosmic:       #8e24aa;
+      --river:        #1e6ca0;
+      --lichen:       #c0392b;
+
+      /* --- Light mode ground (parchment / positive) --- */
+      --ground:       #f5f0e6;
+      --ground-mid:   #e8dcc8;
+      --ground-deep:  #d8ccb0;
+      --surface:      #ffffff;
+      --surface-edge: rgba(42,42,42,0.08);
+      --surface-hover: rgba(42,42,42,0.03);
+      --text:         #2a2a2a;
+      --text-mid:     #5a5a5a;
+      --text-quiet:   #8a8884;
+      --text-faint:   rgba(42,42,42,0.3);
+      --link:         var(--fox);
+      --link-hover:   var(--fox-warm);
+      --accent-glow:  none;
+      --hero-wash:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(142,36,170,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 30% 80%, rgba(30,90,58,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 30% at 75% 60%, rgba(199,91,58,0.05) 0%, transparent 50%),
+        var(--ground);
+      --card-shadow:  0 2px 8px rgba(42,42,42,0.06);
+      --card-shadow-hover: 0 6px 24px rgba(42,42,42,0.1);
+      --bar-opacity:  0.7;
+      --dot-glow:     0 0 4px currentColor;
+      --stat-fill:    var(--fox);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { background:var(--page-bg); color:var(--page-text); font-family:system-ui,-apple-system,sans-serif; line-height:1.6; }
-    a { color:#93c5fd; text-decoration:none; }
-    a:hover { color:#bfdbfe; }
 
-    header { text-align:center; padding:3rem 1.5rem 2rem; }
-    header h1 { color:#fff; font-size:2rem; font-weight:700; margin-bottom:0.3rem; }
-    header .subtitle { color:rgba(255,255,255,0.45); font-size:0.95rem; }
+    /* --- Dark mode ground (forest night / negative) --- */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --ground:       #0a0f0c;
+        --ground-mid:   #121e18;
+        --ground-deep:  #1a2e22;
+        --surface:      rgba(18,30,24,0.6);
+        --surface-edge: rgba(184,196,176,0.06);
+        --surface-hover: rgba(26,46,34,0.5);
+        --text:         #d4dce0;
+        --text-mid:     #a0b0a4;
+        --text-quiet:   rgba(184,196,176,0.45);
+        --text-faint:   rgba(184,196,176,0.25);
+        --link:         var(--amber);
+        --link-hover:   var(--amber-light);
+        --accent-glow:  0 0 6px currentColor;
+        --hero-wash:
+          radial-gradient(ellipse 80% 50% at 50% 0%, rgba(142,36,170,0.12) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 40% at 30% 80%, rgba(30,58,95,0.15) 0%, transparent 50%),
+          radial-gradient(ellipse 40% 30% at 75% 60%, rgba(199,91,58,0.08) 0%, transparent 50%),
+          var(--ground);
+        --card-shadow:  0 2px 8px rgba(0,0,0,0.2);
+        --card-shadow-hover: 0 6px 24px rgba(0,0,0,0.35);
+        --bar-opacity:  0.5;
+        --dot-glow:     0 0 6px currentColor;
+        --stat-fill:    var(--amber);
+      }
+    }
 
-    .stats-bar { display:flex; justify-content:center; gap:2rem; padding:0 1.5rem 2rem; flex-wrap:wrap; }
-    .stat { text-align:center; }
-    .stat-value { display:block; color:#fff; font-size:1.5rem; font-weight:700; }
-    .stat-label { font-size:0.75rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.05em; }
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .nav-row { display:flex; justify-content:center; gap:0.75rem; padding:0 1.5rem 2.5rem; flex-wrap:wrap; }
-    .nav-link { padding:0.4rem 1rem; border-radius:6px; font-size:0.85rem; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6); transition:all 0.2s; }
-    .nav-link:hover { color:#fff; border-color:rgba(255,255,255,0.3); background:rgba(255,255,255,0.05); }
+    body {
+      background: var(--ground);
+      color: var(--text-mid);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      line-height: 1.7;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
 
-    main { max-width:1200px; margin:0 auto; padding:0 1.5rem 3rem; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); }
 
-    .featured { margin-bottom:2.5rem; }
-    .featured a { display:block; padding:1.5rem 2rem; border-radius:12px; border:1px solid rgba(76,175,80,0.25); background:linear-gradient(135deg, rgba(76,175,80,0.08), rgba(42,100,150,0.06)); transition:all 0.2s; }
-    .featured a:hover { border-color:rgba(76,175,80,0.5); background:linear-gradient(135deg, rgba(76,175,80,0.12), rgba(42,100,150,0.1)); transform:translateY(-1px); }
-    .featured h2 { color:#fff; font-size:1.3rem; margin-bottom:0.25rem; }
-    .featured .desc { color:rgba(255,255,255,0.55); font-size:0.9rem; }
-    .featured .meta { color:rgba(255,255,255,0.3); font-size:0.8rem; margin-top:0.5rem; }
+    /* ═══ Hero ═══ */
+    .hero {
+      padding: 4rem 2rem 2.5rem;
+      text-align: center;
+      background: var(--hero-wash);
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--text);
+    }
+    .hero .subtitle {
+      color: var(--text-quiet);
+      font-size: 0.92rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-style: italic;
+      margin-top: 0.3rem;
+    }
 
-    h3.section { color:rgba(255,255,255,0.5); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:1rem; padding-left:0.25rem; }
+    /* ═══ Stats ═══ */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      padding: 1.2rem 2rem 2rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-value {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      color: var(--stat-fill);
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: system-ui, sans-serif;
+    }
 
-    .cluster-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1rem; margin-bottom:2.5rem; }
-    .cluster-card { display:block; padding:1.2rem 1.5rem; border-radius:10px; border:1px solid var(--card-border); background:var(--card-bg); transition:all 0.2s; }
-    .cluster-card:hover { border-color:var(--card-hover-border); background:rgba(255,255,255,0.06); transform:translateY(-1px); }
-    .cluster-name { color:#fff; font-size:1rem; font-weight:600; margin-bottom:0.2rem; }
-    .cluster-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle; }
-    .cluster-count { color:rgba(255,255,255,0.35); font-size:0.8rem; }
-    .cluster-members { color:rgba(255,255,255,0.4); font-size:0.78rem; margin-top:0.5rem; line-height:1.5; }
-    .cluster-members span { display:inline-block; padding:0.1rem 0.4rem; margin:0.1rem; border-radius:3px; background:rgba(255,255,255,0.05); }
+    /* ═══ Nav ═══ */
+    .nav-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0 2rem 2.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      padding: 0.35rem 0.9rem;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-family: system-ui, sans-serif;
+      border: 1px solid var(--surface-edge);
+      color: var(--text-quiet);
+      transition: all 0.2s;
+    }
+    .nav-link:hover {
+      color: var(--link);
+      border-color: var(--link);
+      background: var(--surface-hover);
+    }
 
-    footer { text-align:center; padding:2rem; color:rgba(255,255,255,0.2); font-size:0.8rem; border-top:1px solid rgba(255,255,255,0.05); }
-    footer a { color:rgba(255,255,255,0.35); }
+    /* ═══ Main ═══ */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
 
-    @media(max-width:640px) {
-      header h1 { font-size:1.5rem; }
-      .stats-bar { gap:1rem; }
-      .cluster-grid { grid-template-columns:1fr; }
+    /* ═══ Featured ═══ */
+    .featured { margin-bottom: 2rem; }
+    .featured a {
+      display: block;
+      padding: 1.6rem 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--surface-edge);
+      background: var(--surface);
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured a::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--fox), var(--moss), var(--river));
+      opacity: var(--bar-opacity);
+    }
+    .featured a:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    .featured h2 {
+      color: var(--text);
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+    .featured .desc { color: var(--text-mid); font-size: 0.9rem; }
+    .featured .meta {
+      color: var(--text-faint);
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.5rem;
+    }
+
+    /* ═══ Section Label ═══ */
+    h3.section {
+      color: var(--text-faint);
+      font-size: 0.7rem;
+      font-family: system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+      padding-left: 0.25rem;
+    }
+
+    /* ═══ Cluster Grid ═══ */
+    .cluster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 0.9rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .cluster-card {
+      display: block;
+      padding: 1.2rem 1.4rem;
+      border-radius: 8px;
+      border: 1px solid var(--surface-edge);
+      background: var(--surface);
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cluster-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--card-accent, var(--surface-edge));
+      opacity: var(--bar-opacity);
+      transition: opacity 0.2s;
+    }
+    .cluster-card:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    .cluster-card:hover::before { opacity: 1; }
+
+    .cluster-name {
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.15rem;
+      font-family: system-ui, sans-serif;
+    }
+    .cluster-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 7px;
+      vertical-align: middle;
+      box-shadow: var(--dot-glow);
+    }
+    .cluster-count {
+      color: var(--text-faint);
+      font-size: 0.76rem;
+      font-family: system-ui, sans-serif;
+    }
+    .cluster-members {
+      color: var(--text-quiet);
+      font-size: 0.73rem;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.5rem;
+      line-height: 1.7;
+    }
+    .cluster-members span {
+      display: inline-block;
+      padding: 0.1rem 0.4rem;
+      margin: 0.08rem;
+      border-radius: 3px;
+      background: var(--surface-hover);
+      transition: background 0.15s;
+    }
+    .cluster-members span:hover { background: var(--ground-deep); }
+    .cluster-members a { color: var(--text-quiet); }
+    .cluster-members a:hover { color: var(--link); }
+
+    /* --- Card accent bars (constant across modes) --- */
+    .card-ecology    { --card-accent: linear-gradient(90deg, #2d5a3a, #4CAF50); }
+    .card-music      { --card-accent: linear-gradient(90deg, #c75b3a, #EF5350, #e89848); }
+    .card-infra      { --card-accent: linear-gradient(90deg, #546e7a, #78909C); }
+    .card-broadcast  { --card-accent: linear-gradient(90deg, #00695c, #26A69A); }
+    .card-creative   { --card-accent: linear-gradient(90deg, #8e24aa, #EC407A); }
+    .card-electronics{ --card-accent: linear-gradient(90deg, #e65100, #FFB300); }
+    .card-science    { --card-accent: linear-gradient(90deg, #3949ab, #5C6BC0); }
+    .card-space      { --card-accent: linear-gradient(90deg, #0d47a1, #1E88E5, #8e24aa); }
+    .card-vision     { --card-accent: linear-gradient(90deg, #6a1b9a, #AB47BC); }
+    .card-business   { --card-accent: linear-gradient(90deg, #1565c0, #42A5F5); }
+    .card-ai         { --card-accent: linear-gradient(90deg, #311b92, #7E57C2); }
+    .card-energy     { --card-accent: linear-gradient(90deg, #d84315, #FF7043); }
+    .card-graphics   { --card-accent: linear-gradient(90deg, #4a148c, #8E24AA, #c2185b); }
+
+    /* ═══ Footer ═══ */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-faint);
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      border-top: 1px solid var(--surface-edge);
+    }
+    footer a { color: var(--text-quiet); }
+    footer a:hover { color: var(--link); }
+
+    /* ═══ Responsive ═══ */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.5rem; }
+      .stats-bar { gap: 1.2rem; }
+      .cluster-grid { grid-template-columns: 1fr; }
+      main { padding: 0 1rem 3rem; }
     }
   </style>
 </head>
 <body>
-  <header>
+  <div class="hero">
     <h1>Tibsfox Research</h1>
     <div class="subtitle">172 projects across 13 domain clusters &mdash; from Pacific Northwest ecology to GPU orchestration</div>
-  </header>
+  </div>
 
   <div class="stats-bar">
     <div class="stat"><span class="stat-value">168</span><span class="stat-label">Projects</span></div>
@@ -90,68 +358,68 @@
 
     <h3 class="section">All Clusters</h3>
     <div class="cluster-grid">
-      <a href="PNW/index.html" class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#4CAF50"></span>Ecology</div>
+      <a href="PNW/index.html" class="cluster-card card-ecology">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#4CAF50;background:#4CAF50"></span>Ecology</div>
         <div class="cluster-count">18 projects &middot; hub: ECO</div>
         <div class="cluster-members"><span>COL</span><span>CAS</span><span>ECO</span><span>GDN</span><span>AVI</span><span>MAM</span><span>AWF</span><span>SAL</span><span>CRV</span><span>PLT</span><span>AGR</span><span>LFR</span><span>PPM</span><span>BHM</span><span>SSM</span><span>CDS</span><span>SFC</span><span>MWC</span></div>
       </a>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#EF5350"></span>Music</div>
+      <div class="cluster-card card-music">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#EF5350;background:#EF5350"></span>Music</div>
         <div class="cluster-count">30 projects &middot; hub: WAL</div>
         <div class="cluster-members"><span><a href="WAL/index.html">WAL</a></span><span><a href="DDA/index.html">DDA</a></span><span><a href="GRV/index.html">GRV</a></span><span><a href="PJM/index.html">PJM</a></span><span><a href="SNY/index.html">SNY</a></span><span><a href="COI/index.html">COI</a></span><span><a href="GGT/index.html">GGT</a></span><span><a href="GTP/index.html">GTP</a></span><span><a href="CDP/index.html">CDP</a></span><span><a href="KGX/index.html">KGX</a></span><span><a href="HJX/index.html">HJX</a></span><span><a href="B52/index.html">B52</a></span><span><a href="CAR/index.html">CAR</a></span><span><a href="TKH/index.html">TKH</a></span><span><a href="DPM/index.html">DPM</a></span><span><a href="DRN/index.html">DRN</a></span><span><a href="SMP/index.html">SMP</a></span><span><a href="BMR/index.html">BMR</a></span><span><a href="SOC/index.html">SOC</a></span><span><a href="CRY/index.html">CRY</a></span><span><a href="SRG/index.html">SRG</a></span><span><a href="PRS/index.html">PRS</a></span><span><a href="ABL/index.html">ABL</a></span><span><a href="FLS/index.html">FLS</a></span><span><a href="OCT/index.html">OCT</a></span><span><a href="SFH/index.html">SFH</a></span><span><a href="GRG/index.html">GRG</a></span><span><a href="MDB/index.html">MDB</a></span><span><a href="S36/index.html">S36</a></span><span><a href="SPS/index.html">SPS</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#78909C"></span>Infrastructure</div>
+      <div class="cluster-card card-infra">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#78909C;background:#78909C"></span>Infrastructure</div>
         <div class="cluster-count">27 projects &middot; hub: SYS</div>
         <div class="cluster-members"><span><a href="SYS/index.html">SYS</a></span><span><a href="CMH/index.html">CMH</a></span><span><a href="GSD2/index.html">GSD2</a></span><span><a href="MPC/index.html">MPC</a></span><span><a href="VAV/index.html">VAV</a></span><span><a href="OCN/index.html">OCN</a></span><span><a href="K8S/index.html">K8S</a></span><span><a href="MCM/index.html">MCM</a></span><span><a href="PMG/index.html">PMG</a></span><span><a href="ACE/index.html">ACE</a></span><span><a href="MCF/index.html">MCF</a></span><span><a href="MCS/index.html">MCS</a></span><span><a href="STE/index.html">STE</a></span><span><a href="WPH/index.html">WPH</a></span><span><a href="MRW/index.html">MRW</a></span><span><a href="GPO/index.html">GPO</a></span><span><a href="GPG/index.html">GPG</a></span><span><a href="PIN/index.html">PIN</a></span><span><a href="SRD/index.html">SRD</a></span><span><a href="MDS/index.html">MDS</a></span><span><a href="SCR/index.html">SCR</a></span><span><a href="DHP/index.html">DHP</a></span><span><a href="DNS/index.html">DNS</a></span><span><a href="TCP/index.html">TCP</a></span><span><a href="PNP/index.html">PNP</a></span><span><a href="RFC/index.html">RFC</a></span><span><a href="ENB/index.html">ENB</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#26A69A"></span>Broadcasting</div>
+      <div class="cluster-card card-broadcast">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#26A69A;background:#26A69A"></span>Broadcasting</div>
         <div class="cluster-count">19 projects &middot; hub: RBH</div>
         <div class="cluster-members"><span><a href="RBH/index.html">RBH</a></span><span><a href="KPZ/index.html">KPZ</a></span><span><a href="KSM/index.html">KSM</a></span><span><a href="KUB/index.html">KUB</a></span><span><a href="WLF/index.html">WLF</a></span><span><a href="C89/index.html">C89</a></span><span><a href="MIX/index.html">MIX</a></span><span><a href="SGL/index.html">SGL</a></span><span><a href="CBC/index.html">CBC</a></span><span><a href="IBC/index.html">IBC</a></span><span><a href="SVB/index.html">SVB</a></span><span><a href="DFQ/index.html">DFQ</a></span><span><a href="AMR/index.html">AMR</a></span><span><a href="TVH/index.html">TVH</a></span><span><a href="ALV/index.html">ALV</a></span><span><a href="SNX/index.html">SNX</a></span><span><a href="LNT/index.html">LNT</a></span><span><a href="CCT/index.html">CCT</a></span><span><a href="CNA/index.html">CNA</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#EC407A"></span>Creative</div>
+      <div class="cluster-card card-creative">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#EC407A;background:#EC407A"></span>Creative</div>
         <div class="cluster-count">15 projects &middot; hub: FFA</div>
         <div class="cluster-members"><span><a href="FFA/index.html">FFA</a></span><span><a href="ARC/index.html">ARC</a></span><span><a href="TIBS/index.html">TIBS</a></span><span><a href="STA/index.html">STA</a></span><span><a href="BRC/index.html">BRC</a></span><span><a href="DAA/index.html">DAA</a></span><span><a href="HEN/index.html">HEN</a></span><span><a href="ANM/index.html">ANM</a></span><span><a href="INP/index.html">INP</a></span><span><a href="MTB/index.html">MTB</a></span><span><a href="APR/index.html">APR</a></span><span><a href="EAZ/index.html">EAZ</a></span><span><a href="NWZ/index.html">NWZ</a></span><span><a href="KFU/index.html">KFU</a></span><span><a href="CWC/index.html">CWC</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#FFB300"></span>Electronics</div>
+      <div class="cluster-card card-electronics">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#FFB300;background:#FFB300"></span>Electronics</div>
         <div class="cluster-count">10 projects &middot; hub: LED</div>
         <div class="cluster-members"><span><a href="SHE/index.html">SHE</a></span><span><a href="LED/index.html">LED</a></span><span><a href="T55/index.html">T55</a></span><span><a href="EMG/index.html">EMG</a></span><span><a href="BPS/index.html">BPS</a></span><span><a href="PSS/index.html">PSS</a></span><span><a href="SNL/index.html">SNL</a></span><span><a href="HFR/index.html">HFR</a></span><span><a href="HFE/index.html">HFE</a></span><span><a href="FEC/index.html">FEC</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#5C6BC0"></span>Science</div>
+      <div class="cluster-card card-science">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#5C6BC0;background:#5C6BC0"></span>Science</div>
         <div class="cluster-count">7 projects &middot; hub: BHK</div>
         <div class="cluster-members"><span><a href="BHK/index.html">BHK</a></span><span><a href="LGW/index.html">LGW</a></span><span><a href="SET/index.html">SET</a></span><span><a href="SGM/index.html">SGM</a></span><span><a href="BNY/index.html">BNY</a></span><span><a href="ABM/index.html">ABM</a></span><span><a href="CHS/index.html">CHS</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#1E88E5"></span>Space &amp; Astrophysics</div>
+      <div class="cluster-card card-space">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#1E88E5;background:#1E88E5"></span>Space &amp; Astrophysics</div>
         <div class="cluster-count">7 projects &middot; hub: CYG</div>
         <div class="cluster-members"><span><a href="CYG/index.html">CYG</a></span><span><a href="SMB/index.html">SMB</a></span><span><a href="GRB/index.html">GRB</a></span><span><a href="BHC/index.html">BHC</a></span><span><a href="LTS/index.html">LTS</a></span><span><a href="YNT/index.html">YNT</a></span><span><a href="MST/index.html">MST</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#AB47BC"></span>Vision</div>
+      <div class="cluster-card card-vision">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#AB47BC;background:#AB47BC"></span>Vision</div>
         <div class="cluster-count">6 projects &middot; hub: NND</div>
         <div class="cluster-members"><span><a href="ROF/index.html">ROF</a></span><span><a href="SPA/index.html">SPA</a></span><span><a href="NWC/index.html">NWC</a></span><span><a href="SMF/index.html">SMF</a></span><span><a href="WCN/index.html">WCN</a></span><span><a href="OTM/index.html">OTM</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#42A5F5"></span>Business</div>
+      <div class="cluster-card card-business">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#42A5F5;background:#42A5F5"></span>Business</div>
         <div class="cluster-count">5 projects &middot; hub: BCM</div>
         <div class="cluster-members"><span><a href="ACC/index.html">ACC</a></span><span><a href="WSB/index.html">WSB</a></span><span><a href="BCM/index.html">BCM</a></span><span><a href="BLA/index.html">BLA</a></span><span><a href="FCC/index.html">FCC</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#7E57C2"></span>AI &amp; Computation</div>
+      <div class="cluster-card card-ai">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#7E57C2;background:#7E57C2"></span>AI &amp; Computation</div>
         <div class="cluster-count">5 projects &middot; hub: SST</div>
         <div class="cluster-members"><span><a href="SST/index.html">SST</a></span><span><a href="CFU/index.html">CFU</a></span><span><a href="LLM/index.html">LLM</a></span><span><a href="AIH/index.html">AIH</a></span><span><a href="AAR/index.html">AAR</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#FF7043"></span>Energy</div>
+      <div class="cluster-card card-energy">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#FF7043;background:#FF7043"></span>Energy</div>
         <div class="cluster-count">3 projects &middot; hub: THE</div>
         <div class="cluster-members"><span><a href="THE/index.html">THE</a></span><span><a href="HGE/index.html">HGE</a></span><span><a href="NND/index.html">NND</a></span></div>
       </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#8E24AA"></span>Graphics &amp; Visualization</div>
+      <div class="cluster-card card-graphics">
+        <div class="cluster-name"><span class="cluster-dot" style="color:#8E24AA;background:#8E24AA"></span>Graphics &amp; Visualization</div>
         <div class="cluster-count">3 projects &middot; hub: NEH</div>
         <div class="cluster-members"><span><a href="NEH/index.html">NEH</a></span><span><a href="VKD/index.html">VKD</a></span><span><a href="VKS/index.html">VKS</a></span></div>
       </div>
