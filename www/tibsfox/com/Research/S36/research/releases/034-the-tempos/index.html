@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 34&deg; &mdash; The Tempos &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4A148C, #7B1FA2);
+      color: #CE93D8;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+    }
+
+    .rb-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #F3E5F5;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .local-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #455A64;
+      color: #B0BEC5;
+      border: 1px solid #78909C;
+      margin-left: 0.3rem;
+    }
+
+    .shadow-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #311B92;
+      color: #B39DDB;
+      border: 1px solid #7C4DFF;
+      margin-left: 0.3rem;
+    }
+
+    .cd-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1B5E20;
+      color: #C8E6C9;
+      border: 1px solid #43A047;
+      margin-left: 0.3rem;
+    }
+
+    .group-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #42A5F5;
+      margin-left: 0.3rem;
+    }
+
+    .e5-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+      margin-left: 0.3rem;
+      animation: pulse-e5 2s ease-in-out infinite;
+    }
+    @keyframes pulse-e5 {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(230, 81, 0, 0.4); }
+      50% { box-shadow: 0 0 8px 3px rgba(230, 81, 0, 0.2); }
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #7B1FA2;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #CE93D8;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #7B1FA2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .collision-box {
+      background: linear-gradient(135deg, #311B92, #4527A0);
+      color: #D1C4E9;
+      border: 2px solid #7C4DFF;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .collision-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #B39DDB;
+      font-family: system-ui, sans-serif;
+    }
+    .collision-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .collision-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .collision-box td, .collision-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #4527A0;
+      color: #D1C4E9;
+    }
+    .collision-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #B39DDB;
+    }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: linear-gradient(135deg, #FF6D00, #E65100);
+      color: white;
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFECB3;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #FFECB3;
+    }
+
+    .cd-box {
+      background: linear-gradient(135deg, #1B5E20, #2E7D32);
+      color: #C8E6C9;
+      border: 2px solid #43A047;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cd-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #A5D6A7;
+      font-family: system-ui, sans-serif;
+    }
+    .cd-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .cd-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .cd-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #C8E6C9;
+    }
+    .cd-box td:first-child { font-weight: 600; color: #A5D6A7; width: 30%; }
+
+    .scene-box {
+      background: linear-gradient(135deg, #37474F, #455A64);
+      color: #B0BEC5;
+      border: 2px solid #78909C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .scene-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #80DEEA;
+      font-family: system-ui, sans-serif;
+    }
+    .scene-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">34&deg;</div>
+      <div>
+        <h1>The Tempos</h1>
+        <div class="subtitle">R&amp;B/Soul &middot; The Shadow Name &mdash; Central District&rsquo;s Unnamed Ensemble
+          <span class="e5-badge">Energy 5 &mdash; x3</span>
+          <span class="rb-badge">R&amp;B/Soul</span>
+          <span class="local-badge">Local</span>
+          <span class="shadow-badge">Shadow Name</span>
+          <span class="cd-badge">Central District</span>
+          <span class="group-badge">Group</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../033-larry-english/index.html">Degree 33&deg; (English)</a>
+      <a href="../032-luther-rabb/index.html">Degree 32&deg; (Rabb)</a>
+      <a href="../027-the-dynamics/index.html">Degree 27&deg; (Dynamics)</a>
+      <a href="../028-night-owls/index.html">Degree 28&deg; (Night Owls)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Quincy Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Search for &ldquo;The Tempos Seattle&rdquo; and you find a band.
+          A big band. Swing music. Boeing engineers. Community dances.
+          Sixteen pieces. Active since 1958. That is not the band the
+          engine describes. The engine describes an R&amp;B/Soul group
+          from the Central District, 1960s, E=5. The search found data
+          &mdash; but for the wrong ensemble. The shadow name is the
+          documentation gap&rsquo;s more insidious cousin: instead of
+          absence, a decoy.
+          <em>The wrong answer is worse than no answer.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>This research is mapped to Seattle within the Seattle 360 engine.
+          The Seattle region sits on the ancestral territory of the
+          <strong>Duwamish Tribal Organization</strong>, the
+          <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. The Duwamish Tribe remains federally unrecognized.
+          This acknowledgment was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             NAME COLLISION
+             ======================================== -->
+
+        <div class="collision-box">
+          <h4>The Name Collision &mdash; Primary Research Finding</h4>
+          <p>Searching for &ldquo;The Tempos Seattle&rdquo; returns documentation
+          for a <strong>big band/swing ensemble</strong> founded in 1958 by
+          Boeing engineer Henry Fichtner, co-led by Dr. Vernon J. Harkness.
+          This 16-piece swing band performs dance music at community functions.
+          It does <strong>not</strong> match the CSV&rsquo;s R&amp;B/Soul genre,
+          Central District neighborhood, or E=5 energy designation.</p>
+          <p style="margin-top:0.8rem"><strong>The R&amp;B/Soul Tempos are hidden
+          behind their better-documented namesake.</strong> Two unrelated bands
+          in the same city adopted the same name. The big band&rsquo;s 60+ years
+          of continuous performance created a durable archival footprint. The
+          R&amp;B group&rsquo;s unknown lifespan created none. Band names in the
+          1960s were not registered or centrally catalogued.</p>
+          <table>
+            <tr><th>Attribute</th><th>Documented Tempos</th><th>CSV Tempos</th></tr>
+            <tr><td>Genre</td><td>Big band / swing</td><td>R&amp;B/Soul</td></tr>
+            <tr><td>Founded</td><td>1958</td><td>1960s [unknown]</td></tr>
+            <tr><td>Context</td><td>Boeing social events</td><td>Central District clubs</td></tr>
+            <tr><td>Leader</td><td>Henry Fichtner (engineer)</td><td>Unknown</td></tr>
+            <tr><td>Size</td><td>16 pieces</td><td>Unknown</td></tr>
+            <tr><td>Documentation</td><td>PNW Bands, Facebook, CD</td><td>None found</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             E=5 ENERGY (THIRD CONSECUTIVE)
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>E=5 &mdash; Third Consecutive (Degrees 32&ndash;34)</h4>
+          <p><strong>E=5 continues for a third degree &mdash; the engine&rsquo;s
+          first three-degree maximum-energy streak.</strong>
+          Three modes now established:</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=5 Mode</th></tr>
+            <tr><td>32</td><td>Luther Rabb</td><td>Personal tidal</td></tr>
+            <tr><td>33</td><td>Larry English</td><td>Scene-cumulative tidal</td></tr>
+            <tr><td>34</td><td>The Tempos</td><td>Collective tidal</td></tr>
+          </table>
+          <p style="margin-top:0.6rem">Distribution: 2:13:6:11:<strong>3</strong>.
+          All three E=5 degrees are Central District. The CD&rsquo;s 1960s
+          musical ecosystem was an E=5 phenomenon at every scale &mdash;
+          individual, scene, and collective.</p>
+        </div>
+
+        <!-- ========================================
+             CENTRAL DISTRICT CLUSTER
+             ======================================== -->
+
+        <div class="cd-box">
+          <h4>Central District &mdash; Third Consecutive (32&ndash;34)</h4>
+          <p><strong>Eight Central District degrees in 35 total.</strong>
+          The engine&rsquo;s longest single-neighborhood streak continues.
+          The 4:0:4 concentration-gap-concentration pattern intensifies:</p>
+          <table>
+            <tr><td>Degree 0</td><td>Quincy Jones &mdash; born &amp; raised in CD</td></tr>
+            <tr><td>Degree 3</td><td>Ernestine Anderson &mdash; sang in CD clubs</td></tr>
+            <tr><td>Degree 4</td><td>Floyd Standifer &mdash; CD educator &amp; performer</td></tr>
+            <tr><td>Degree 5</td><td>Overton Berry &mdash; CD pianist</td></tr>
+            <tr><td>Degree 30</td><td>Ray Charles &mdash; incubated in CD</td></tr>
+            <tr><td>Degree 32</td><td>Luther Rabb &mdash; born &amp; raised in CD</td></tr>
+            <tr><td>Degree 33</td><td>Larry English &mdash; Central District (explicit)</td></tr>
+            <tr><td><strong>Degree 34</strong></td><td><strong>The Tempos &mdash; Central District (explicit)</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THE SCENE
+             ======================================== -->
+
+        <h2>The Scene The Tempos Performed In</h2>
+
+        <p>Without individual biographical data or confirmed membership, the
+        research documents the 1960s Central District R&amp;B ecosystem that
+        the CSV data places The Tempos within. The 1960s &mdash; tighter than
+        Larry English&rsquo;s 1960s&ndash;1970s &mdash; spans the pre-Hendrix
+        era through the soul revolution.</p>
+
+        <div class="scene-box">
+          <h4>Central District R&amp;B/Soul Ecosystem (1960s)</h4>
+          <p><strong>Venues:</strong> Birdland (2203 E. Madison, razed 1965),
+          Black and Tan Club, Golden Crown, Trojan Horse, District Tavern,
+          Encore Ballroom (1214 E. Pike, R&amp;B shows booked by Charles Sullivan).</p>
+          <p><strong>Radio:</strong> KYAC 1250 AM (from 1965), Black-owned.
+          Local bands topped KYAC charts over national artists.</p>
+          <p><strong>Recording:</strong> Kearney Barton&rsquo;s Audio Recording studio.
+          Small labels: Nite Owl, Penguin, Seafair, Jerden. Self-released 45s
+          in runs of 200&ndash;1,000 copies.</p>
+          <p><strong>Documented contemporaries:</strong> Dave Lewis Combo,
+          The Dynamics (degree 27), The Gallahads, Kings of Soul,
+          Black on White Affair, Night Owls (degree 28).</p>
+          <p><strong>Talent pipeline:</strong> Gallahads disbanded early 1960s;
+          members dispersed into Dynamics, Viceroys, El Caminos, Statics,
+          Counts, Soul Deacons, Boss Five. The Tempos&rsquo; unknown members
+          may have come from this same pool.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Late 1950s</div>
+          <p>Birdland opens with Dave Lewis Combo as house band. Doo-wop
+          groups (Gallahads, Five Checks) active. The Central District&rsquo;s
+          R&amp;B scene takes shape.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">Early 1960s</div>
+          <p>Gallahads disperse; members seed new groups across the CD.
+          Teen-R&amp;B circuit peaks (Spanish Castle, Parker&rsquo;s).
+          The Dynamics form and record prolifically.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">Mid 1960s</div>
+          <p>Birdland razed (1965). KYAC begins broadcasting. Soul revolution
+          reaches Seattle. R&amp;B/Soul groups proliferate. Black on White Affair,
+          Cold Bold &amp; Together emerge. The Tempos&rsquo; era designation
+          places them here.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">Late 1960s</div>
+          <p>Scene intensity at maximum. Clubs packed seven nights a week.
+          Hendrix achieves fame elsewhere, reshaping how the world sees
+          Seattle&rsquo;s music. The Central District scene continues
+          at full capacity.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2026 (This Degree)</div>
+          <p>Searching &ldquo;The Tempos Seattle&rdquo; returns a big band/swing
+          ensemble. The R&amp;B/Soul group remains undocumented behind its
+          better-documented namesake.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             GROUP FORMAT
+             ======================================== -->
+
+        <h2>The Group Format Returns</h2>
+
+        <p>The Tempos are the first group/band since the Night Owls at degree 28
+        &mdash; six degrees of solo artists (29&ndash;33) separate them. The return
+        to group format introduces the <strong>unnamed ensemble</strong>: a band
+        whose collective identity exists but whose individual membership is unknown.</p>
+
+        <table style="width:100%;font-size:0.9rem;border-collapse:collapse;margin:1rem 0">
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <th style="text-align:left;padding:0.4rem">Degree</th>
+            <th style="text-align:left;padding:0.4rem">Group</th>
+            <th style="text-align:left;padding:0.4rem">Documentation</th>
+            <th style="text-align:left;padding:0.4rem">Members Known</th>
+          </tr>
+          <tr style="border-bottom:1px solid #F3F4F6">
+            <td style="padding:0.4rem">27</td>
+            <td style="padding:0.4rem">The Dynamics</td>
+            <td style="padding:0.4rem">Extensive</td>
+            <td style="padding:0.4rem">12+ named</td>
+          </tr>
+          <tr style="border-bottom:1px solid #F3F4F6">
+            <td style="padding:0.4rem">28</td>
+            <td style="padding:0.4rem">Night Owls</td>
+            <td style="padding:0.4rem">Minimal</td>
+            <td style="padding:0.4rem">Unknown</td>
+          </tr>
+          <tr style="border-bottom:2px solid #7C4DFF;background:#EDE7F6">
+            <td style="padding:0.4rem;font-weight:700">34</td>
+            <td style="padding:0.4rem;font-weight:700">The Tempos</td>
+            <td style="padding:0.4rem;font-weight:700">Name collision</td>
+            <td style="padding:0.4rem;font-weight:700">Unknown</td>
+          </tr>
+        </table>
+
+        <p>The unnamed ensemble raises questions specific to the group format:
+        who played what instrument, who sang lead, how many members were there,
+        when did personnel change. These questions have no answers for The Tempos,
+        making the documentation gap structurally deeper than for a solo artist.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Theory Contributions</h2>
+
+        <div class="theory-grid">
+
+          <div class="theory-card">
+            <h4>The Shadow Name</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p><strong>35th artist-city pattern.</strong> A band whose name returns
+            documentation for a different ensemble in the same city. More insidious
+            than the pure documentation gap &mdash; instead of absence, a decoy.
+            The documented big band casts a shadow over the undocumented R&amp;B group.</p>
+            <div class="examples">Extends The Unrecorded (33): absence is a gap;
+            wrong data is misdirection. Three documentation states: correct (Dynamics, 27),
+            absent (English, 33), misdirected (Tempos, 34).</div>
+            <div class="genealogy"><strong>Lineage:</strong> The Unrecorded (33)
+            &rarr; The Shadow Name (34). From no documentation to wrong documentation.
+            The full archival accuracy spectrum is now mapped.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Ensemble Blend</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p><strong>35th acoustic element.</strong> The composite timbral result
+            of multiple instruments and voices in small-group R&amp;B/Soul &mdash;
+            the sound that exists BETWEEN the individual instruments. Horn section
+            brass + rhythm guitar chop + bass/kick composite + vocal harmonics.</p>
+            <div class="examples">Follows room tone (33): after the room responds,
+            the band creates a unified voice that is more than the sum of its parts.
+            Collective-acoustic phase begins.</div>
+            <div class="genealogy"><strong>Lineage:</strong> Groove lock (32) &rarr;
+            room tone (33) &rarr; ensemble blend (34). Solo &rarr; space &rarr; group.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Unnamed Ensemble</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p><strong>Group-level documentation gap.</strong> A band whose collective
+            identity is documented (they appear in the CSV by name) but whose individual
+            membership is not. The group format makes the gap deeper: roles, interplay,
+            and internal organization are lost along with the names.</p>
+            <div class="examples">Contrast with The Dynamics (27): fully documented
+            ensemble. Same city, same era, opposite documentation outcomes. The unnamed
+            ensemble is the group analogue of The Unrecorded (33).</div>
+            <div class="genealogy"><strong>Lineage:</strong> Proto-fusion laboratory (27)
+            &rarr; unnamed ensemble (34). Documented group &rarr; undocumented group.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: The Unison Bend</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p><strong>34th blue note deployment.</strong> The blue note played
+            simultaneously by multiple musicians &mdash; slight intonation differences
+            create a chorus effect around the target pitch. The collective form of the
+            blue note, richer than any individual bend.</p>
+            <div class="examples">Structural opposite of the ghost bend (33): solo
+            absence vs. collective presence. When a horn section bends a note as a unit,
+            the result is the unison bend.</div>
+            <div class="genealogy"><strong>Lineage:</strong> Ghost bend (33, solo absence)
+            &rarr; unison bend (34, collective presence). The thread oscillates between
+            solitary and collective.</div>
+          </div>
+
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             WHY THIS DEGREE MATTERS
+             ======================================== -->
+
+        <h2>Why This Degree Matters</h2>
+
+        <p>Degree 34 introduces a phenomenon more treacherous than the pure
+        documentation gap: the <strong>name collision</strong>. A researcher
+        who finds the PNW Bands page for &ldquo;The Tempos&rdquo; might conclude
+        the search is complete. The data exists. It describes a real band in
+        Seattle. But it is the <em>wrong</em> band. The big band Tempos played
+        swing at Boeing social events. The R&amp;B Tempos played soul in Central
+        District clubs. Same name, same city, same decade &mdash; different worlds.</p>
+
+        <p>The engine does not accept the decoy. It documents the collision,
+        names the mismatch, and preserves a space for the R&amp;B/Soul group
+        that the archive misidentifies. The Shadow Name is the documentation
+        gap&rsquo;s more insidious cousin: instead of silence, a wrong answer.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 35</h4>
+          <ul>
+            <li><strong>E=5 x3:</strong> Third consecutive. Distribution 2:13:6:11:3.
+            Three modes (personal, scene-cumulative, collective). Track at degree 35.</li>
+            <li><strong>R&amp;B/Soul:</strong> Genre Stage 16. Compound restored
+            after pure R&amp;B x2 (32&ndash;33). Track.</li>
+            <li><strong>The Shadow Name (NEW):</strong> 35th artist-city pattern.
+            Name collision &mdash; wrong data is worse than no data. Track.</li>
+            <li><strong>The ensemble blend (NEW):</strong> 35th acoustic element.
+            Collective-acoustic phase. Track element 36.</li>
+            <li><strong>The unnamed ensemble (NEW):</strong> Group-level documentation
+            gap. Band name known, members unknown. Track.</li>
+            <li><strong>Unison bend (NEW):</strong> 34th blue note deployment.
+            Collective blue note, opposite of ghost bend (33). Track.</li>
+            <li><strong>Local label x2:</strong> Second consecutive local (33&ndash;34). Track.</li>
+            <li><strong>Central District x3:</strong> Third consecutive (32&ndash;34).
+            Eight CD degrees total (0, 3, 4, 5, 30, 32, 33, 34). Track.</li>
+            <li><strong>Group format:</strong> Returns after five solo degrees (29&ndash;33).
+            Six group degrees in 35 total. Track.</li>
+            <li><strong>Gender:</strong> 6:29 (~17.1%). No change in women count. Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+
+        <div class="stat-card">
+          <h4>Degree Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">34 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist</span>
+            <span class="stat-value">The Tempos</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">R&amp;B/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E=5 (x3)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1960s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">local (small)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Format</span>
+            <span class="stat-value">Group / Band</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Coordinates</span>
+            <span class="stat-value">47.608, -122.298</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine State</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern (#35)</span>
+            <span class="stat-value">The Shadow Name</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Element (#35)</span>
+            <span class="stat-value">Ensemble Blend</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note (#34)</span>
+            <span class="stat-value">Unison Bend</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">16 (R&amp;B/Soul)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E Distribution</span>
+            <span class="stat-value">2:13:6:11:3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD Cluster</span>
+            <span class="stat-value">8 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gender Ratio</span>
+            <span class="stat-value">6:29 (17.1%)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Documentation Status</h4>
+          <div class="stat-row">
+            <span class="stat-label">Name Collision</span>
+            <span class="stat-value" style="color:#7C4DFF">Wrong band found</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Documented Entity</span>
+            <span class="stat-value" style="color:#757575">Big band/swing</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CSV Entity</span>
+            <span class="stat-value" style="color:#B71C1C">R&amp;B/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">R&amp;B Sources</span>
+            <span class="stat-value" style="color:#B71C1C">0 results</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Finding</span>
+            <span class="stat-value" style="color:#311B92">Shadow Name</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Version</h4>
+          <div class="stat-row">
+            <span class="stat-label">Release</span>
+            <span class="stat-value">v1.49.170</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Prev Degree</span>
+            <span class="stat-value">33 (English)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 Engine &middot; Degree 34 of 360 &middot; The Tempos &middot;
+    Central District R&amp;B/Soul &middot; The Shadow Name</p>
+    <p>The wrong answer is worse than no answer.</p>
+  </footer>
+</body>
+</html>
