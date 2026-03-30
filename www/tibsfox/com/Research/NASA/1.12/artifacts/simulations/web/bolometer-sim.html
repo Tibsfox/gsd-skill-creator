@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 7 — Suomi Bolometer Simulator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #sim-canvas { flex: 1; }
+  #panel {
+    width: 310px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 12px; color: #E8D060; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #E8D060; font-weight: bold; }
+  .box .warm { color: #CC4020; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  .control-group input[type="range"] { width: 100%; accent-color: #E8D060; }
+  .marker { font-size: 8px; display: flex; justify-content: space-between; color: #666; }
+  .instructions { font-size: 9px; color: #666; text-align: center; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>SUOMI BOLOMETER SIMULATOR</h1>
+    <h2>Explorer 7 — Black & White Hemispheres</h2>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">Black bolometer:</span> <span id="t-black" class="warm">--- K</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">White bolometer:</span> <span id="t-white" class="value">--- K</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Difference:</span> <span id="t-diff" class="value">--- K</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Solar component:</span> <span id="solar-comp" class="value">--- W/m²</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Thermal component:</span> <span id="thermal-comp" class="warm">--- W/m²</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Solar radiation: <span id="solar-val">1361 W/m²</span></label>
+      <input type="range" id="solar" min="0" max="2000" value="1361" step="1">
+      <div class="marker"><span>0 (eclipse)</span><span>1361</span><span>2000</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Earth thermal IR: <span id="thermal-val">240 W/m²</span></label>
+      <input type="range" id="thermal" min="100" max="400" value="240" step="1">
+      <div class="marker"><span>100</span><span>240 Earth</span><span>400</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Earth albedo (reflected): <span id="albedo-val">0.30</span></label>
+      <input type="range" id="albedo" min="0" max="80" value="30" step="1">
+      <div class="marker"><span>0</span><span>0.30</span><span>0.80</span></div>
+    </div>
+
+    <div class="box" style="font-size:9px;color:#888">
+      <strong style="color:#E8D060">How it works:</strong><br>
+      <span style="color:#CC4020">Black hemisphere</span>: absorbs ALL radiation (solar + reflected + thermal).<br>
+      <span style="color:#E8D060">White hemisphere</span>: reflects visible light (~90%), absorbs only thermal IR.<br><br>
+      <strong>Difference = solar + reflected component.</strong><br>
+      This separation is Suomi's key insight for measuring the radiation budget from orbit.
+    </div>
+
+    <div class="box" style="font-size:9px;color:#888">
+      <strong style="color:#E8D060">Try this:</strong><br>
+      1. Set solar to 0 (eclipse). Both sensors see only thermal — temperatures equalize.<br>
+      2. Increase solar. Black heats up fast, white barely changes — the difference IS the solar measurement.<br>
+      3. Increase albedo. More reflected light → black gets even more input.
+    </div>
+
+    <div class="instructions">
+      Left: black hemisphere (absorbs all)<br>
+      Right: white hemisphere (reflects visible)<br>
+      The temperature difference separates<br>
+      solar from thermal radiation.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+
+const SIGMA = 5.670374e-8;
+
+let solarIn = 1361;
+let thermalIn = 240;
+let albedoVal = 0.30;
+
+// Bolometer state (thermal inertia)
+let T_black = 250;
+let T_white = 240;
+
+function resize() {
+  const container = canvas.parentElement;
+  const panel = document.getElementById('panel');
+  canvas.width = container.clientWidth - panel.clientWidth;
+  canvas.height = container.clientHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+document.getElementById('solar').addEventListener('input', e => {
+  solarIn = parseFloat(e.target.value);
+  document.getElementById('solar-val').textContent = solarIn + ' W/m²';
+});
+document.getElementById('thermal').addEventListener('input', e => {
+  thermalIn = parseFloat(e.target.value);
+  document.getElementById('thermal-val').textContent = thermalIn + ' W/m²';
+});
+document.getElementById('albedo').addEventListener('input', e => {
+  albedoVal = e.target.value / 100;
+  document.getElementById('albedo-val').textContent = albedoVal.toFixed(2);
+});
+
+let time = 0;
+let history_black = [];
+let history_white = [];
+const HISTORY_LEN = 300;
+
+function draw() {
+  time += 0.016;
+  const W = canvas.width;
+  const H = canvas.height;
+
+  // Physics: compute equilibrium temperatures
+  const solarHemisphere = solarIn * 0.25; // hemisphere average
+  const reflectedInput = solarIn * albedoVal * 0.15; // Earth albedo contribution
+
+  // Black bolometer: absorbs 97% of everything
+  const flux_black_eq = 0.97 * (solarHemisphere + reflectedInput + thermalIn);
+  const T_black_eq = Math.pow(flux_black_eq / (0.97 * SIGMA), 0.25);
+
+  // White bolometer: absorbs 10% visible, 90% thermal
+  const flux_white_eq = 0.10 * (solarHemisphere + reflectedInput) + 0.90 * thermalIn;
+  const T_white_eq = Math.pow(flux_white_eq / (0.90 * SIGMA), 0.25);
+
+  // Thermal inertia (exponential approach to equilibrium)
+  const tau = 0.02; // time constant
+  T_black += (T_black_eq - T_black) * tau;
+  T_white += (T_white_eq - T_white) * tau;
+
+  // Record history
+  history_black.push(T_black);
+  history_white.push(T_white);
+  if (history_black.length > HISTORY_LEN) history_black.shift();
+  if (history_white.length > HISTORY_LEN) history_white.shift();
+
+  // Update display
+  document.getElementById('t-black').textContent = T_black.toFixed(1) + ' K';
+  document.getElementById('t-white').textContent = T_white.toFixed(1) + ' K';
+  document.getElementById('t-diff').textContent = (T_black - T_white).toFixed(1) + ' K';
+  document.getElementById('solar-comp').textContent = (flux_black_eq - flux_white_eq).toFixed(0) + ' W/m²';
+  document.getElementById('thermal-comp').textContent = (0.90 * thermalIn).toFixed(0) + ' W/m²';
+
+  // --- Draw ---
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, W, H);
+
+  const midX = W * 0.5;
+  const boloY = H * 0.35;
+  const boloR = Math.min(W * 0.15, H * 0.18);
+
+  // --- Black hemisphere (left) ---
+  const blackX = midX - boloR * 1.5;
+  const blackHeat = Math.min((T_black - 150) / 250, 1);
+
+  // Glow
+  const blackGlowR = boloR * (1.1 + blackHeat * 0.2);
+  const blackGlow = ctx.createRadialGradient(blackX, boloY, boloR * 0.5, blackX, boloY, blackGlowR);
+  blackGlow.addColorStop(0, `rgba(204,64,32,${blackHeat * 0.15})`);
+  blackGlow.addColorStop(1, 'rgba(204,64,32,0)');
+  ctx.beginPath();
+  ctx.arc(blackX, boloY, blackGlowR, 0, Math.PI * 2);
+  ctx.fillStyle = blackGlow;
+  ctx.fill();
+
+  // Hemisphere body
+  const r = Math.floor(10 + blackHeat * 190);
+  const g = Math.floor(10 + blackHeat * 30);
+  const b = Math.floor(30 - blackHeat * 20);
+  const blackGrad = ctx.createRadialGradient(blackX - boloR * 0.2, boloY - boloR * 0.2, boloR * 0.1, blackX, boloY, boloR);
+  blackGrad.addColorStop(0, `rgb(${r+20},${g+10},${b+10})`);
+  blackGrad.addColorStop(1, `rgb(${Math.floor(r*0.5)},${Math.floor(g*0.4)},${Math.floor(b*0.3)})`);
+  ctx.beginPath();
+  ctx.arc(blackX, boloY, boloR, 0, Math.PI * 2);
+  ctx.fillStyle = blackGrad;
+  ctx.fill();
+
+  // Label
+  ctx.fillStyle = '#CC4020';
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('BLACK', blackX, boloY + boloR + 20);
+  ctx.fillText(T_black.toFixed(1) + ' K', blackX, boloY + boloR + 34);
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.fillText('absorbs all', blackX, boloY + boloR + 48);
+
+  // --- White hemisphere (right) ---
+  const whiteX = midX + boloR * 1.5;
+  const whiteHeat = Math.min((T_white - 150) / 250, 1);
+
+  // Glow (subtle)
+  const whiteGlowR = boloR * (1.05 + whiteHeat * 0.1);
+  const whiteGlow = ctx.createRadialGradient(whiteX, boloY, boloR * 0.5, whiteX, boloY, whiteGlowR);
+  whiteGlow.addColorStop(0, `rgba(232,208,96,${whiteHeat * 0.08})`);
+  whiteGlow.addColorStop(1, 'rgba(232,208,96,0)');
+  ctx.beginPath();
+  ctx.arc(whiteX, boloY, whiteGlowR, 0, Math.PI * 2);
+  ctx.fillStyle = whiteGlow;
+  ctx.fill();
+
+  // Hemisphere body
+  const wr = Math.floor(160 + whiteHeat * 50);
+  const wg = Math.floor(170 + whiteHeat * 30);
+  const wb = Math.floor(190 - whiteHeat * 40);
+  const whiteGrad = ctx.createRadialGradient(whiteX - boloR * 0.2, boloY - boloR * 0.2, boloR * 0.1, whiteX, boloY, boloR);
+  whiteGrad.addColorStop(0, `rgb(${wr+20},${wg+10},${wb})`);
+  whiteGrad.addColorStop(1, `rgb(${Math.floor(wr*0.7)},${Math.floor(wg*0.65)},${Math.floor(wb*0.6)})`);
+  ctx.beginPath();
+  ctx.arc(whiteX, boloY, boloR, 0, Math.PI * 2);
+  ctx.fillStyle = whiteGrad;
+  ctx.fill();
+
+  // Reflection effect on white hemisphere (when solar active)
+  if (solarIn > 100) {
+    const refGrad = ctx.createRadialGradient(whiteX - boloR * 0.3, boloY - boloR * 0.3, 0, whiteX, boloY, boloR);
+    refGrad.addColorStop(0, `rgba(255,255,240,${Math.min(solarIn / 3000, 0.3)})`);
+    refGrad.addColorStop(0.5, 'rgba(255,255,240,0)');
+    refGrad.addColorStop(1, 'rgba(255,255,240,0)');
+    ctx.beginPath();
+    ctx.arc(whiteX, boloY, boloR, 0, Math.PI * 2);
+    ctx.fillStyle = refGrad;
+    ctx.fill();
+  }
+
+  // Label
+  ctx.fillStyle = '#E8D060';
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('WHITE', whiteX, boloY + boloR + 20);
+  ctx.fillText(T_white.toFixed(1) + ' K', whiteX, boloY + boloR + 34);
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.fillText('reflects visible', whiteX, boloY + boloR + 48);
+
+  // --- Incoming radiation arrows ---
+  // Solar arrows (from top-left)
+  if (solarIn > 50) {
+    for (let i = 0; i < 5; i++) {
+      const startX = 20 + i * 40;
+      const startY = 10 + i * 8;
+      const progress = ((time * 100 + i * 30) % 200) / 200;
+      const ax = startX + (midX - startX) * progress;
+      const ay = startY + (boloY - boloR - startY) * progress;
+
+      ctx.beginPath();
+      ctx.arc(ax, ay, 3, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(232,208,96,${0.4 + 0.3 * Math.sin(time * 2 + i)})`;
+      ctx.fill();
+    }
+  }
+
+  // Thermal arrows (from bottom)
+  for (let i = 0; i < 4; i++) {
+    const startX = midX - 80 + i * 50;
+    const startY = H - 20;
+    const progress = ((time * 60 + i * 40) % 180) / 180;
+    const ax = startX;
+    const ay = startY - (startY - boloY - boloR) * progress;
+
+    ctx.beginPath();
+    ctx.arc(ax, ay, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(204,64,32,${0.3 + 0.2 * Math.sin(time * 1.5 + i)})`;
+    ctx.fill();
+  }
+
+  // --- Difference indicator ---
+  const diffBarY = boloY - boloR - 30;
+  ctx.fillStyle = '#555';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('DIFFERENCE = SOLAR COMPONENT', midX, diffBarY - 10);
+
+  const diffW = Math.min(Math.abs(T_black - T_white) * 3, boloR * 2);
+  ctx.fillStyle = 'rgba(232,208,96,0.3)';
+  ctx.fillRect(midX - diffW / 2, diffBarY, diffW, 8);
+  ctx.fillStyle = '#E8D060';
+  ctx.font = '10px monospace';
+  ctx.fillText(`ΔT = ${(T_black - T_white).toFixed(1)} K`, midX, diffBarY + 22);
+
+  // --- Temperature history graph ---
+  const graphY = H * 0.65;
+  const graphH = H * 0.28;
+  const graphW = W - 40;
+  const graphX = 20;
+
+  // Graph background
+  ctx.fillStyle = '#0a0a15';
+  ctx.fillRect(graphX, graphY, graphW, graphH);
+  ctx.strokeStyle = '#222';
+  ctx.strokeRect(graphX, graphY, graphW, graphH);
+
+  // Find scale
+  const allTemps = [...history_black, ...history_white];
+  const tMin = Math.min(...allTemps) - 10;
+  const tMax = Math.max(...allTemps) + 10;
+
+  // Grid lines
+  ctx.strokeStyle = '#1a1a2a';
+  ctx.lineWidth = 0.5;
+  for (let t = Math.ceil(tMin / 25) * 25; t <= tMax; t += 25) {
+    const gy = graphY + graphH - (t - tMin) / (tMax - tMin) * graphH;
+    ctx.beginPath();
+    ctx.moveTo(graphX, gy);
+    ctx.lineTo(graphX + graphW, gy);
+    ctx.stroke();
+    ctx.fillStyle = '#555';
+    ctx.font = '8px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(t.toFixed(0) + 'K', graphX - 3, gy + 3);
+  }
+
+  // Black bolometer trace
+  ctx.beginPath();
+  ctx.strokeStyle = '#CC4020';
+  ctx.lineWidth = 2;
+  for (let i = 0; i < history_black.length; i++) {
+    const x = graphX + (i / HISTORY_LEN) * graphW;
+    const y = graphY + graphH - (history_black[i] - tMin) / (tMax - tMin) * graphH;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // White bolometer trace
+  ctx.beginPath();
+  ctx.strokeStyle = '#E8D060';
+  ctx.lineWidth = 2;
+  for (let i = 0; i < history_white.length; i++) {
+    const x = graphX + (i / HISTORY_LEN) * graphW;
+    const y = graphY + graphH - (history_white[i] - tMin) / (tMax - tMin) * graphH;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Difference shading
+  ctx.fillStyle = 'rgba(232,208,96,0.08)';
+  ctx.beginPath();
+  for (let i = 0; i < Math.min(history_black.length, history_white.length); i++) {
+    const x = graphX + (i / HISTORY_LEN) * graphW;
+    const yb = graphY + graphH - (history_black[i] - tMin) / (tMax - tMin) * graphH;
+    if (i === 0) ctx.moveTo(x, yb);
+    else ctx.lineTo(x, yb);
+  }
+  for (let i = history_white.length - 1; i >= 0; i--) {
+    const x = graphX + (i / HISTORY_LEN) * graphW;
+    const yw = graphY + graphH - (history_white[i] - tMin) / (tMax - tMin) * graphH;
+    ctx.lineTo(x, yw);
+  }
+  ctx.closePath();
+  ctx.fill();
+
+  // Legend
+  ctx.fillStyle = '#CC4020';
+  ctx.fillRect(graphX + 10, graphY + 8, 12, 3);
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('Black', graphX + 26, graphY + 12);
+
+  ctx.fillStyle = '#E8D060';
+  ctx.fillRect(graphX + 80, graphY + 8, 12, 3);
+  ctx.fillStyle = '#888';
+  ctx.fillText('White', graphX + 96, graphY + 12);
+
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Temperature History', graphX + graphW / 2, graphY + graphH + 14);
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>

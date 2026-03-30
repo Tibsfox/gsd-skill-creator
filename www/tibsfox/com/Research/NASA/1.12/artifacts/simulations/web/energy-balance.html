@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 7 — Earth's Energy Budget</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #sim-canvas { flex: 1; }
+  #panel {
+    width: 320px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 13px; color: #E8D060; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #E8D060; font-weight: bold; }
+  .box .warm { color: #CC4020; font-weight: bold; }
+  .box .cool { color: #2040AA; font-weight: bold; }
+  .box .balanced { color: #8AAA70; font-weight: bold; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  .control-group input[type="range"] { width: 100%; accent-color: #E8D060; }
+  .marker { font-size: 8px; display: flex; justify-content: space-between; color: #666; }
+  .instructions { font-size: 9px; color: #666; text-align: center; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>EARTH'S ENERGY BUDGET</h1>
+    <h2>Explorer 7 — Suomi Radiation Balance</h2>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">Incoming:</span> <span id="incoming" class="value">239 W/m²</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Outgoing:</span> <span id="outgoing" class="warm">239 W/m²</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Imbalance:</span> <span id="imbalance" class="balanced">0.0 W/m²</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">T equilibrium:</span> <span id="temp-eq" class="value">255 K</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">T surface:</span> <span id="temp-surf" class="value">288 K</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Albedo (reflectivity): <span id="albedo-val">0.30</span></label>
+      <input type="range" id="albedo" min="0" max="80" value="30" step="1">
+      <div class="marker"><span>0 (black)</span><span>0.30 Earth</span><span>0.80</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Greenhouse Strength: <span id="greenhouse-val">33%</span></label>
+      <input type="range" id="greenhouse" min="0" max="60" value="33" step="1">
+      <div class="marker"><span>0% (none)</span><span>33% Earth</span><span>60%</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Solar Intensity (S₀): <span id="solar-val">1361 W/m²</span></label>
+      <input type="range" id="solar" min="800" max="2000" value="1361" step="1">
+      <div class="marker"><span>800 (dim)</span><span>1361</span><span>2000</span></div>
+    </div>
+
+    <div class="box">
+      <div style="font-size:9px;color:#888;margin-bottom:4px">Presets:</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">
+        <button onclick="setPreset(0.30,33,1361)" style="font-size:9px;padding:2px 6px;background:#151530;color:#E8D060;border:1px solid #333;border-radius:3px;cursor:pointer">Earth</button>
+        <button onclick="setPreset(0.77,95,2614)" style="font-size:9px;padding:2px 6px;background:#151530;color:#CC4020;border:1px solid #333;border-radius:3px;cursor:pointer">Venus</button>
+        <button onclick="setPreset(0.25,1,589)" style="font-size:9px;padding:2px 6px;background:#151530;color:#CC8040;border:1px solid #333;border-radius:3px;cursor:pointer">Mars</button>
+        <button onclick="setPreset(0.05,0,1361)" style="font-size:9px;padding:2px 6px;background:#151530;color:#2040AA;border:1px solid #333;border-radius:3px;cursor:pointer">Black body</button>
+        <button onclick="setPreset(0.70,0,1361)" style="font-size:9px;padding:2px 6px;background:#151530;color:#AAC0E0;border:1px solid #333;border-radius:3px;cursor:pointer">Snowball</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <div style="font-size:9px;color:#888;margin-bottom:4px">Equations:</div>
+      <div style="font-size:9px;color:#aaa;font-family:monospace">
+        Absorbed = S₀(1-α)/4<br>
+        Emitted = εσT⁴<br>
+        T_eq = [S₀(1-α)/(4εσ)]^¼<br>
+        ΔT_greenhouse = T_surf − T_eq
+      </div>
+    </div>
+
+    <div class="instructions">
+      Adjust sliders to explore Earth's energy budget.<br>
+      The Sankey diagram updates in real time.<br>
+      Arrows show energy flow: yellow = solar in,<br>
+      red = thermal out, white = reflected.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+
+const SIGMA = 5.670374e-8;
+
+let albedo = 0.30;
+let greenhouse = 0.33;
+let solarConst = 1361;
+
+function setPreset(a, g, s) {
+  albedo = a;
+  greenhouse = g / 100;
+  solarConst = s;
+  document.getElementById('albedo').value = a * 100;
+  document.getElementById('greenhouse').value = g;
+  document.getElementById('solar').value = s;
+  updateDisplay();
+}
+
+function resize() {
+  const container = canvas.parentElement;
+  const panel = document.getElementById('panel');
+  canvas.width = container.clientWidth - panel.clientWidth;
+  canvas.height = container.clientHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+document.getElementById('albedo').addEventListener('input', e => { albedo = e.target.value / 100; updateDisplay(); });
+document.getElementById('greenhouse').addEventListener('input', e => { greenhouse = e.target.value / 100; updateDisplay(); });
+document.getElementById('solar').addEventListener('input', e => { solarConst = parseFloat(e.target.value); updateDisplay(); });
+
+function updateDisplay() {
+  document.getElementById('albedo-val').textContent = albedo.toFixed(2);
+  document.getElementById('greenhouse-val').textContent = (greenhouse * 100).toFixed(0) + '%';
+  document.getElementById('solar-val').textContent = solarConst + ' W/m²';
+
+  const absorbed = solarConst * (1 - albedo) / 4;
+  const emissivity = 1 - greenhouse;
+  const T_eq = Math.pow(absorbed / (emissivity * SIGMA), 0.25);
+  const T_surf = Math.pow(absorbed / (SIGMA), 0.25) * (1 + greenhouse * 0.5);
+  const outgoing = emissivity * SIGMA * Math.pow(T_eq, 4);
+  const imbalance = absorbed - outgoing;
+
+  document.getElementById('incoming').textContent = absorbed.toFixed(1) + ' W/m²';
+  document.getElementById('outgoing').textContent = outgoing.toFixed(1) + ' W/m²';
+
+  const imbEl = document.getElementById('imbalance');
+  imbEl.textContent = (imbalance >= 0 ? '+' : '') + imbalance.toFixed(1) + ' W/m²';
+  imbEl.className = Math.abs(imbalance) < 2 ? 'balanced' : (imbalance > 0 ? 'warm' : 'cool');
+
+  document.getElementById('temp-eq').textContent = T_eq.toFixed(0) + ' K (' + (T_eq - 273.15).toFixed(1) + '°C)';
+  document.getElementById('temp-surf').textContent = T_surf.toFixed(0) + ' K (' + (T_surf - 273.15).toFixed(1) + '°C)';
+}
+
+let time = 0;
+let particles = [];
+
+function initParticles() {
+  particles = [];
+  for (let i = 0; i < 40; i++) {
+    particles.push({
+      type: i < 15 ? 'solar' : (i < 25 ? 'reflected' : 'thermal'),
+      x: Math.random(),
+      y: Math.random(),
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.3 + Math.random() * 0.4
+    });
+  }
+}
+initParticles();
+
+function draw() {
+  time += 0.016;
+  const W = canvas.width;
+  const H = canvas.height;
+  const cx = W * 0.45;
+  const cy = H * 0.5;
+  const earthR = Math.min(W, H) * 0.18;
+
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, W, H);
+
+  // Stars
+  for (let i = 0; i < 80; i++) {
+    const sx = ((i * 137.5) % W);
+    const sy = ((i * 97.3 + 42) % H);
+    const bright = 0.2 + 0.1 * Math.sin(time * 0.5 + i);
+    ctx.fillStyle = `rgba(200,210,230,${bright})`;
+    ctx.fillRect(sx, sy, 1, 1);
+  }
+
+  const absorbed = solarConst * (1 - albedo) / 4;
+  const reflected = solarConst * albedo / 4;
+  const emissivity = 1 - greenhouse;
+  const T_eq = Math.pow(absorbed / (Math.max(emissivity, 0.01) * SIGMA), 0.25);
+  const outgoing = emissivity * SIGMA * Math.pow(T_eq, 4);
+
+  // --- Earth ---
+  const earthGrad = ctx.createRadialGradient(cx - earthR * 0.3, cy - earthR * 0.2, earthR * 0.1, cx, cy, earthR);
+  earthGrad.addColorStop(0, '#2060CC');
+  earthGrad.addColorStop(0.5, '#1840AA');
+  earthGrad.addColorStop(1, '#0A2060');
+  ctx.beginPath();
+  ctx.arc(cx, cy, earthR, 0, Math.PI * 2);
+  ctx.fillStyle = earthGrad;
+  ctx.fill();
+
+  // Atmosphere glow
+  const atmoGrad = ctx.createRadialGradient(cx, cy, earthR, cx, cy, earthR * 1.15);
+  atmoGrad.addColorStop(0, 'rgba(32,64,170,0.3)');
+  atmoGrad.addColorStop(1, 'rgba(32,64,170,0)');
+  ctx.beginPath();
+  ctx.arc(cx, cy, earthR * 1.15, 0, Math.PI * 2);
+  ctx.fillStyle = atmoGrad;
+  ctx.fill();
+
+  // Greenhouse layer (thicker with more greenhouse)
+  if (greenhouse > 0.05) {
+    const ghGrad = ctx.createRadialGradient(cx, cy, earthR, cx, cy, earthR * (1 + greenhouse * 0.2));
+    ghGrad.addColorStop(0, `rgba(204,64,32,${greenhouse * 0.15})`);
+    ghGrad.addColorStop(1, 'rgba(204,64,32,0)');
+    ctx.beginPath();
+    ctx.arc(cx, cy, earthR * (1 + greenhouse * 0.2), 0, Math.PI * 2);
+    ctx.fillStyle = ghGrad;
+    ctx.fill();
+  }
+
+  // --- Sankey arrows ---
+  const arrowW = 3;
+
+  // Solar input arrows (from left)
+  const solarWidth = Math.max(2, (absorbed / 400) * 30);
+  for (let i = 0; i < 8; i++) {
+    const py = cy - solarWidth * 2 + i * solarWidth * 0.5;
+    const px = 20 + ((time * 80 + i * 30) % (cx - earthR * 1.2 - 20));
+    const alpha = 0.4 + 0.3 * Math.sin(time * 2 + i);
+
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(px + 15, py);
+    ctx.lineTo(px + 20, py + 2);
+    ctx.lineTo(px + 15, py + 4);
+    ctx.lineTo(px, py + 4);
+    ctx.closePath();
+    ctx.fillStyle = `rgba(232,208,96,${alpha})`;
+    ctx.fill();
+  }
+
+  // Reflected arrows (bouncing back from day side, upper left)
+  const refCount = Math.max(1, Math.floor(albedo * 8));
+  for (let i = 0; i < refCount; i++) {
+    const angle = -2.5 + i * 0.4;
+    const dist = earthR * 1.2 + ((time * 60 + i * 25) % (earthR * 2));
+    const px = cx + Math.cos(angle) * dist;
+    const py = cy + Math.sin(angle) * dist;
+    if (px < 0 || py < 0 || px > W || py > H) continue;
+
+    ctx.beginPath();
+    ctx.arc(px, py, 3, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,210,230,${0.3 + 0.2 * Math.sin(time + i)})`;
+    ctx.fill();
+  }
+
+  // Thermal output arrows (radiating outward, red)
+  const thermCount = Math.max(2, Math.floor((1 - greenhouse) * 12));
+  for (let i = 0; i < thermCount; i++) {
+    const angle = i * (Math.PI * 2 / thermCount) + time * 0.1;
+    const dist = earthR * 1.2 + ((time * 40 + i * 20) % (earthR * 2.5));
+    const px = cx + Math.cos(angle) * dist;
+    const py = cy + Math.sin(angle) * dist;
+    if (px < 0 || py < 0 || px > W || py > H) continue;
+
+    ctx.beginPath();
+    ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(204,64,32,${0.3 + 0.2 * Math.sin(time * 1.5 + i)})`;
+    ctx.fill();
+  }
+
+  // Trapped thermal (greenhouse, circling near surface)
+  if (greenhouse > 0.05) {
+    const trapCount = Math.floor(greenhouse * 10);
+    for (let i = 0; i < trapCount; i++) {
+      const angle = i * 0.7 + time * 0.3;
+      const dist = earthR * (1.02 + 0.08 * Math.sin(time * 0.5 + i));
+      const px = cx + Math.cos(angle) * dist;
+      const py = cy + Math.sin(angle) * dist;
+
+      ctx.beginPath();
+      ctx.arc(px, py, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(204,64,32,${0.15 + 0.1 * Math.sin(time + i)})`;
+      ctx.fill();
+    }
+  }
+
+  // --- Sankey flow bars ---
+  const barY = H - 60;
+  const barH = 20;
+  const barMaxW = W * 0.35;
+
+  // Solar input bar
+  const solarBarW = (solarConst / 2000) * barMaxW;
+  ctx.fillStyle = '#E8D060';
+  ctx.fillRect(20, barY, solarBarW, barH);
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.fillText(`Solar: ${solarConst} W/m²`, 22, barY - 4);
+
+  // Absorbed portion
+  const absBarW = solarBarW * (1 - albedo);
+  ctx.fillStyle = '#CC8040';
+  ctx.fillRect(20, barY + barH + 5, absBarW, barH * 0.6);
+  ctx.fillStyle = '#888';
+  ctx.fillText(`Absorbed: ${absorbed.toFixed(0)} W/m²`, 22, barY + barH + 5 + barH * 0.6 + 10);
+
+  // Reflected portion
+  const refBarW = solarBarW * albedo;
+  ctx.fillStyle = '#8090A0';
+  ctx.fillRect(20 + absBarW + 2, barY + barH + 5, refBarW, barH * 0.6);
+
+  // Outgoing bar
+  const outBarW = (outgoing / (solarConst / 4)) * barMaxW;
+  ctx.fillStyle = '#CC4020';
+  ctx.fillRect(W * 0.55, barY, outBarW, barH);
+  ctx.fillStyle = '#888';
+  ctx.fillText(`Outgoing: ${outgoing.toFixed(0)} W/m²`, W * 0.55, barY - 4);
+
+  // Temperature display
+  ctx.fillStyle = '#E8D060';
+  ctx.font = '12px monospace';
+  ctx.fillText(`T_eq = ${T_eq.toFixed(0)} K (${(T_eq - 273.15).toFixed(1)}°C)`, cx - 80, cy + earthR + 40);
+
+  requestAnimationFrame(draw);
+}
+
+updateDisplay();
+draw();
+</script>
+</body>
+</html>

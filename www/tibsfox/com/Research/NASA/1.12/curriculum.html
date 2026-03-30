@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.12 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --thermal-deep: #080305; --thermal-mid: #150810;
+    --solar-yellow: #E8D060; --solar-dim: #8A7830;
+    --thermal-red: #CC4020; --thermal-warm: #AA3018;
+    --earth-blue: #2040AA; --earth-dim: #152870;
+    --lichen-sage: #8AAA70; --lichen-dim: #4A6A30;
+    --space: #050510; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(232,208,96,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(138,170,112,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(204,64,32,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(232,208,96,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(170,48,24,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(138,170,112,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--solar-yellow); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--thermal-deep) 25%, var(--thermal-mid) 50%, var(--thermal-warm) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--solar-yellow); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(232,208,96,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(232,208,96,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(232,208,96,0.12); border: 1px solid var(--solar-yellow); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--solar-yellow); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(232,208,96,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--solar-yellow); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--solar-yellow); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--thermal-red); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose h4 { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--solar-yellow); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+  .prose strong { color: var(--solar-yellow); }
+  .prose em { color: var(--lichen-sage); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--lichen-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(138,170,112,0.06); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose pre { background: rgba(8,3,5,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--solar-yellow); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(232,208,96,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--solar-yellow); }
+  .prose pre code { background: none; padding: 0; }
+  .prose a { color: var(--solar-yellow); text-decoration: none; }
+  .prose a:hover { color: #fff; }
+  .nav-card { background: rgba(8,3,5,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--solar-yellow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--solar-yellow); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.12 Explorer 7</a>
+  <span class="sep">/</span>
+  Track 4: Curriculum
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.12</span>
+      <span>Explorer 7</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Climate Science, Thermal Physics, Instrumentation</span>
+      <span><span class="label">Secondary:</span> Lichenology, Mathematics, Public Health</span>
+      <span><span class="label">Dedication:</span> Rudolf Virchow</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>Department Deposits</h2>
+
+    <h3>Climate Science (Primary)</h3>
+
+    <h4>Wing: Earth Energy Budget and Radiative Forcing</h4>
+    <p><strong>Concept:</strong> The planetary energy balance that determines Earth&rsquo;s temperature &mdash; how incoming solar radiation, albedo, greenhouse gases, and thermal emission interact to set the climate state</p>
+
+    <p><strong>Deposit:</strong> Explorer 7 carried the first instrument designed to measure both sides of Earth&rsquo;s energy budget from orbit. Before Suomi&rsquo;s bolometers, the energy balance was a theoretical construct: physicists knew the equation (S*(1-alpha)/4 = sigma*T^4) but had no space-based data to verify it. Ground-based measurements could estimate incoming solar radiation at the surface, but they could not measure the outgoing radiation at the top of the atmosphere &mdash; the number that closes the budget. Explorer 7 demonstrated that the budget could be measured, and the data confirmed the theoretical picture to within the instrument&rsquo;s accuracy:</p>
+
+    <ul>
+      <li>Incoming solar radiation intercepted by Earth: approximately 1361 W/m^2 at 1 AU, distributed over the cross-sectional area pi*R^2 and averaged over the sphere to give approximately 340 W/m^2 as the global mean insolation at the top of the atmosphere</li>
+      <li>Reflected solar radiation (shortwave albedo): approximately 30% of the incoming, or about 100 W/m^2 reflected back to space. This fraction is dominated by clouds (which reflect 60-70% of incident sunlight), ice and snow (80-90% reflectivity), and bright deserts (35-45%). The ocean and vegetated land reflect only 5-15%</li>
+      <li>Absorbed solar radiation: approximately 240 W/m^2, which must be balanced by outgoing thermal radiation in equilibrium</li>
+      <li>Outgoing longwave radiation: approximately 240 W/m^2, emitted by the surface, atmosphere, and cloud tops at thermal infrared wavelengths peaked near 10 microns. The effective emitting temperature is approximately 255 K &mdash; the temperature at which the Stefan-Boltzmann law gives 240 W/m^2</li>
+      <li>The energy imbalance: the difference between absorbed solar and emitted thermal. In 1959, the imbalance was close to zero &mdash; within the measurement uncertainty of Suomi&rsquo;s instruments. In 2025, the imbalance is approximately 1.0-1.4 W/m^2, measured by CERES (the direct descendant of Suomi&rsquo;s bolometers). This imbalance drives global warming</li>
+    </ul>
+
+    <p>The climate science deposit from Explorer 7 is not a discovery of a new phenomenon. It is the establishment of a measurement method &mdash; a way to quantify a known equation using orbital data. The equation was known. The data were not. Explorer 7 provided the first data. Every climate model, every IPCC assessment, every discussion of global warming ultimately depends on the measurement concept Suomi proved on a 41.5 kg satellite.</p>
+
+    <h3>Thermal Physics (Primary)</h3>
+
+    <h4>Wing: Stefan-Boltzmann Law and Blackbody Radiation</h4>
+    <p><strong>Concept:</strong> The physics of thermal emission &mdash; how every object radiates electromagnetic energy proportional to the fourth power of its absolute temperature, and how this law governs energy exchange between the Sun, Earth, and space</p>
+
+    <p><strong>Deposit:</strong> The Stefan-Boltzmann law (P = epsilon * sigma * T^4 * A) is the foundation of Explorer 7&rsquo;s science. Every surface with a temperature above absolute zero emits thermal radiation. The power emitted per unit area increases as the fourth power of the temperature. This means:</p>
+
+    <ul>
+      <li>The Sun (T ~ 5778 K) emits approximately 63 million W/m^2 from its surface</li>
+      <li>Earth&rsquo;s surface (T ~ 288 K) emits approximately 390 W/m^2</li>
+      <li>Earth&rsquo;s effective radiating temperature (T ~ 255 K) corresponds to approximately 240 W/m^2 of outgoing radiation at the top of the atmosphere</li>
+      <li>The difference between 390 W/m^2 (surface emission) and 240 W/m^2 (top-of-atmosphere emission) is the greenhouse effect: 150 W/m^2 of surface radiation is absorbed by the atmosphere and re-emitted, with about 150 W/m^2 radiated back downward toward the surface (the &ldquo;back-radiation&rdquo; that warms the surface above the radiative equilibrium temperature)</li>
+    </ul>
+
+    <p>Suomi&rsquo;s bolometers operated on this law directly. The black bolometer plate absorbed radiation and warmed up. Its equilibrium temperature was set by the balance between absorbed radiation (from the Sun and Earth) and emitted radiation (from the plate itself, governed by T^4). The thermistor measured the plate temperature. The Stefan-Boltzmann law converted that temperature into a radiation flux. The physics is elegant in its directness: temperature is radiation, radiation is temperature, and the fourth-power law connects them.</p>
+
+    <p>The American Dipper (<em>Cinclus mexicanus</em>, degree 12) experiences the Stefan-Boltzmann law at a visceral scale. The dipper is the only aquatic songbird in North America &mdash; it walks underwater along the beds of fast, cold mountain streams, feeding on aquatic insects and fish eggs. It maintains a body temperature of approximately 40 C (313 K) while immersed in water at 2-8 C (275-281 K). The thermal radiation from the bird&rsquo;s body to the surrounding water follows the same T^4 law: the bird radiates at 313^4 and absorbs at approximately 278^4, losing heat at a rate proportional to (313^4 - 278^4). The dipper compensates with dense plumage, a low surface-area-to-volume ratio, high metabolic rate, and a preen gland ten times larger than other songbirds of its size (producing the oil that waterproofs the feathers). The energy balance of the dipper &mdash; metabolic heat generation versus thermal loss to cold water &mdash; is governed by the same physics that governs Earth&rsquo;s energy balance. Scale differs. The equation does not.</p>
+
+    <h3>Instrumentation (Primary)</h3>
+
+    <h4>Wing: Bolometers, Thermistors, and Radiation Measurement</h4>
+    <p><strong>Concept:</strong> The design and calibration of instruments that measure electromagnetic radiation by detecting the heat it deposits &mdash; the engineering that converts photons into numbers</p>
+
+    <p><strong>Deposit:</strong> A bolometer is the simplest possible radiation detector: a material that absorbs radiation, warms up, and has its temperature measured. The Suomi-Parent bolometers on Explorer 7 were flat aluminum plates (approximately 10 cm^2) with thermistors bonded to their backs. The thermistors were semiconductor devices whose electrical resistance changed with temperature &mdash; approximately 4% per degree Kelvin at room temperature. The resistance was measured by the spacecraft&rsquo;s telemetry system and transmitted to ground stations.</p>
+
+    <p>The elegance of the design was in its simplicity and in the deliberate choice of surface coatings:</p>
+    <ul>
+      <li>The black bolometer was coated with lampblack (carbon black), giving it an absorptivity of approximately 0.95 across all wavelengths from ultraviolet through far infrared. It absorbed essentially everything that hit it &mdash; solar photons, reflected Earthshine, thermal emission from clouds, spacecraft radiation. It was a nearly perfect absorber</li>
+      <li>The white bolometer was coated with magnesium oxide (MgO), which reflects approximately 85% of visible and near-infrared radiation (wavelengths below approximately 3 microns) but absorbs approximately 90% of thermal infrared radiation (wavelengths above approximately 5 microns). It was spectrally selective: transparent to sunlight, opaque to heat</li>
+      <li>The two plates, mounted side by side, saw the same radiation field but absorbed different fractions of it. The temperature difference between them encoded the ratio of shortwave to longwave radiation. The absolute temperatures encoded the total flux</li>
+    </ul>
+
+    <p>Calibration was performed before launch in the University of Wisconsin laboratory using a calibrated blackbody cavity (a heated enclosure with a small aperture that approximates a perfect emitter) and a solar simulator (a xenon arc lamp filtered to match the solar spectrum). The calibration coefficients &mdash; the mapping from thermistor resistance to radiation flux &mdash; were stored in the ground processing software. In flight, the calibration was checked during orbital eclipse: with no solar input, the bolometer temperatures should match the predicted values for thermal-only illumination. Any drift in the calibration was tracked over the mission lifetime.</p>
+
+    <p>The instrumentation lesson: the measurement is only as good as the calibration. Suomi spent more time calibrating his bolometers than building them. The calibration determined the accuracy. The instrument determined the precision. Explorer 7 had adequate precision (the thermistors could resolve 0.1 K temperature differences) but limited accuracy (the absolute calibration was uncertain to approximately 5-10 W/m^2 because the paint properties changed in the space environment). Modern CERES instruments maintain calibration to approximately 1% by carrying internal calibration sources and by using redundant instruments that can be cross-compared. The principle is the same: measure, calibrate, verify. The rigor has increased by orders of magnitude.</p>
+
+    <h3>Lichenology (Secondary)</h3>
+
+    <h4>Wing: <em>Usnea longissima</em> &mdash; Methuselah&rsquo;s Beard Lichen</h4>
+    <p><strong>Concept:</strong> The longest lichen in the Pacific Northwest as a living sensor of atmospheric quality and forest health</p>
+
+    <p><strong>Deposit:</strong> <em>Usnea longissima</em> (old man&rsquo;s beard, Methuselah&rsquo;s beard lichen) is a fruticose lichen &mdash; a branching, filamentous organism that hangs from tree branches in long, pendulous strands. Individual thalli can exceed 3 meters in the PNW old-growth forests where it reaches its greatest abundance: coastal Sitka spruce forests, the western hemlock zone of the Cascades, and the Douglas-fir/western red cedar forests of the Olympic Peninsula. It is not a plant. It is a symbiosis: a fungal partner (the mycobiont, an ascomycete in the family Parmeliaceae) and an algal partner (the photobiont, a green alga in the genus Trebouxia). The fungus provides structure, mineral absorption, and protection from desiccation. The alga provides photosynthetic sugars. The balance between them determines the lichen&rsquo;s health.</p>
+
+    <p><em>U. longissima</em> is an indicator species for three conditions:</p>
+    <ul>
+      <li><strong>Air quality:</strong> It is extremely sensitive to sulfur dioxide and nitrogen compounds. Where atmospheric nitrogen deposition exceeds approximately 3-5 kg/ha/yr, <em>U. longissima</em> declines. It has disappeared from forests near major urban areas throughout the PNW, including the Puget Sound lowlands and the Willamette Valley floor. Its presence at a site indicates clean air; its absence may indicate chronic pollution</li>
+      <li><strong>Forest age:</strong> It grows slowly (2-5 cm/yr) and disperses poorly (it reproduces primarily by fragmentation &mdash; pieces break off and are carried by wind to new branches). Establishing on a new tree requires decades. A forest with abundant <em>U. longissima</em> is typically old-growth or late-successional &mdash; at least 150-200 years since major disturbance</li>
+      <li><strong>Moisture regime:</strong> It requires frequent fog or light rain for hydration. It thrives in the fog belt of the Oregon and Washington coasts and in the cloud forests of the western Cascades. Interior forests east of the Cascade crest are too dry for it</li>
+    </ul>
+
+    <p>The connection to Explorer 7 is structural: both the lichen and the bolometer are passive sensors that integrate atmospheric conditions over time. The bolometer integrates photon flux; the lichen integrates nitrogen deposition, moisture, and air quality. Both respond to imbalance. Both record the state of the atmosphere. The bolometer records it as temperature. The lichen records it as growth rate, biomass, and presence or absence.</p>
+
+    <h3>Mathematics (Secondary)</h3>
+
+    <h4>Wing: Linear Algebra and the Two-Equation System</h4>
+    <p><strong>Concept:</strong> How Suomi&rsquo;s paired bolometers create a system of two linear equations in two unknowns &mdash; the fundamental technique of separating mixed signals</p>
+
+    <p><strong>Deposit:</strong> The two-bolometer measurement is a 2x2 linear system: Ax = b, where A is the absorptivity matrix, x is the flux vector [F_solar, F_thermal], and b is the measured power vector [P_black, P_white]. The system is solvable because det(A) is non-zero &mdash; the rows of A are linearly independent, meaning the two bolometers respond differently to the two radiation components. Suomi&rsquo;s paint selection maximized this independence. The condition number of A (the ratio of its largest to smallest singular value) determines the sensitivity of the solution to measurement errors. A well-conditioned system (low condition number) is robust; an ill-conditioned system (high condition number) amplifies errors. For Suomi&rsquo;s bolometer pair, the condition number was approximately 2.5 &mdash; well-conditioned, meaning a 1% error in measured temperature produced approximately 2.5% error in derived flux. This is the mathematical reason the measurement worked.</p>
+
+    <h3>Public Health (Secondary)</h3>
+
+    <h4>Wing: Rudolf Virchow and Medicine as Applied Physics</h4>
+    <p><strong>Concept:</strong> The father of cellular pathology and social medicine, whose understanding of systemic balance anticipates the planetary energy balance</p>
+
+    <p><strong>Deposit:</strong> Rudolf Virchow was born on October 13, 1821 &mdash; exactly 138 years before Explorer 7&rsquo;s launch. He is one of the most consequential physicians in history. Virchow established cellular pathology &mdash; the principle that disease originates in cells, not in humors or miasmas. He demonstrated that every cell arises from a pre-existing cell (<em>omnis cellula e cellula</em>), overturning the spontaneous generation hypothesis for cellular life. He investigated the typhus epidemic in Upper Silesia in 1848 and concluded that the cause was not biological but social: poverty, malnutrition, overcrowding, and political neglect. His prescription was not medicine but democracy, education, and public health infrastructure. &ldquo;Medicine is a social science,&rdquo; Virchow wrote, &ldquo;and politics is nothing but medicine on a large scale.&rdquo;</p>
+
+    <p>The connection to Explorer 7 is through the concept of systemic balance. Virchow understood the human body as a system in dynamic equilibrium &mdash; health is balance, disease is imbalance. Cells divide and die in balance. Nutrients are consumed and replenished in balance. The immune system attacks pathogens and tolerates self-tissue in balance. When any of these balances is perturbed &mdash; by infection, by malnutrition, by environmental stress &mdash; disease results. The physician&rsquo;s task is to diagnose the imbalance and restore it.</p>
+
+    <p>Suomi understood Earth as a system in dynamic equilibrium &mdash; climate is balance, warming is imbalance. Energy arrives from the Sun and departs as thermal radiation in balance. When that balance is perturbed &mdash; by greenhouse gases, by changes in albedo, by volcanic aerosols &mdash; the temperature changes. The climate scientist&rsquo;s task is to measure the imbalance and understand its causes.</p>
+
+    <p>Virchow would have recognized the structure immediately. The scale is different. The method is the same: measure the inputs and outputs, identify the imbalance, trace it to its source, intervene. Virchow intervened with public health policy. Suomi intervened with measurement &mdash; because you cannot fix what you have not measured, and you cannot convince policymakers of an imbalance they cannot see. Explorer 7 made the imbalance visible.</p>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Build a Radiation Balance Sensor</h3>
+
+    <p><strong>Duration:</strong> 3-4 hours &middot; <strong>Difficulty:</strong> Beginner-Intermediate &middot; <strong>Department:</strong> Thermal Physics / Instrumentation</p>
+    <p><strong>What You Need:</strong> Two small metal plates (aluminum flashing or tin can lids, ~5x5 cm, ~$2), flat black spray paint (~$5), white spray paint (~$5), two thermistors or digital temperature sensors (DHT22 or DS18B20, ~$3-8 each), Arduino or Raspberry Pi Pico (~$5-15), breadboard and jumper wires (~$5-10), a desk lamp (100W incandescent or equivalent halogen &mdash; the &ldquo;Sun&rdquo;), a warm object (a bowl of hot water, a heated surface &mdash; &ldquo;Earth&rsquo;s thermal emission&rdquo;). Total: ~$25-50.</p>
+    <p><strong>What You&rsquo;ll Learn:</strong> How Suomi&rsquo;s paired-bolometer technique separates mixed radiation fields. You will build two bolometers (black and white painted plates with temperature sensors), expose them to the same mixed radiation field (visible light from the lamp + thermal radiation from the warm object), and use the two temperature readings to separate the two sources &mdash; exactly as Explorer 7 did.</p>
+
+    <p><strong>Entry Conditions:</strong></p>
+    <ul>
+      <li>Materials assembled (two metal plates, paints, temperature sensors)</li>
+      <li>Arduino/Pico programmed to read two temperature sensors</li>
+      <li>Serial output or display showing both temperatures</li>
+    </ul>
+
+    <p><strong>The Exercise:</strong></p>
+
+<pre><code>RADIATION BALANCE SENSOR:
+
+1. PREPARE THE BOLOMETERS:
+   Paint one metal plate flat black (matte, not glossy).
+   Paint the other plate flat white.
+   Let both dry completely (24 hours for best results).
+
+   Attach a temperature sensor to the BACK of each plate
+   with thermal paste or a dab of epoxy. The sensor must
+   be in good thermal contact with the plate. Insulate the
+   back of each sensor with a small piece of foam to prevent
+   air currents from affecting the reading.
+
+2. CALIBRATE:
+   Place both plates in a dark, enclosed box (no light, no
+   heat sources). Wait 5 minutes for thermal equilibrium.
+   Record the temperature of each plate. They should be
+   equal (room temperature). Any offset is your zero-point
+   calibration.
+
+3. TEST 1 -- Visible light only (the "Sun"):
+   Place the desk lamp 30 cm above both plates.
+   Turn on the lamp. Wait 2-3 minutes for equilibrium.
+
+   Record T_black and T_white.
+
+   The black plate absorbs most of the lamp's radiation
+   (visible + infrared from the hot filament).
+   The white plate reflects most of the visible light
+   but absorbs some infrared.
+
+   Expected: T_black > T_white by several degrees.
+
+4. TEST 2 -- Thermal radiation only ("Earth's emission"):
+   Turn OFF the lamp. Place a bowl of hot water (~60 C)
+   10 cm below both plates (plates face downward toward
+   the water).
+
+   The hot water emits thermal infrared radiation (peaked
+   around 10 microns at 60 C). Both plates absorb thermal
+   infrared with similar efficiency (both paints are opaque
+   in the thermal IR).
+
+   Expected: T_black ~ T_white (both absorb thermal IR
+   similarly). The white plate's advantage (reflecting
+   visible) does not help here -- there is no visible light.
+
+5. TEST 3 -- Mixed field (the real measurement):
+   Turn ON the lamp (from above) AND place the hot water
+   (from below). Both plates now receive visible light
+   (from above) and thermal radiation (from below).
+
+   Record T_black and T_white.
+
+   Now solve the two-equation system:
+     P_black = alpha_b * F_lamp + alpha_b * F_thermal
+     P_white = alpha_w * F_lamp + alpha_w_IR * F_thermal
+
+   Where:
+     alpha_b ~ 0.95 (black absorbs everything)
+     alpha_w ~ 0.15 (white reflects visible)
+     alpha_w_IR ~ 0.85 (white absorbs thermal IR)
+
+   The temperature difference between the plates is
+   proportional to (alpha_b - alpha_w) * F_lamp.
+   The temperature average is proportional to
+   (alpha_b + alpha_w_IR)/2 * F_thermal + ...
+
+   You are doing what Explorer 7 did:
+   separating two radiation sources with two different
+   sensors.
+
+6. VARY THE MIX:
+   Move the lamp farther away (reduces F_lamp).
+   The T_black - T_white difference should decrease.
+
+   Add more hot water or increase water temperature
+   (increases F_thermal).
+   Both plates should warm up approximately equally.
+
+   Plot: T_black and T_white vs lamp distance.
+   The curves diverge more when the lamp is close
+   (more visible light to separate) and converge
+   when the lamp is far (thermal dominates).
+
+ANALYSIS:
+   Suomi saw the same pattern from orbit:
+   Over sunlit ocean (low albedo), the black bolometer
+   was much warmer than the white (lots of absorbed sunlight).
+   Over clouds (high albedo), the difference was smaller
+   (more light reflected before reaching the bolometer).
+   During eclipse (no sun), the temperatures converged
+   (thermal-only, both plates respond similarly).
+
+   Your desk lamp is the Sun. Your hot water is Earth.
+   Your painted plates are Suomi's bolometers.
+   The physics is identical.</code></pre>
+
+    <h3>TRY 2: Lichen Survey Walk</h3>
+
+    <p><strong>Duration:</strong> 2-3 hours (outdoor) &middot; <strong>Difficulty:</strong> Beginner &middot; <strong>Department:</strong> Lichenology / Ecology</p>
+    <p><strong>What You Need:</strong> A camera (phone), a magnifying glass or hand lens (~$5, optional), access to a forested area with mature conifers (public park, national forest trail, campus). A lichen field guide (free online: Oregon State University&rsquo;s &ldquo;Macrolichens of the Pacific Northwest&rdquo; or equivalent). No cost beyond transportation.</p>
+    <p><strong>What You&rsquo;ll Learn:</strong> How to identify common lichen growth forms (crustose, foliose, fruticose) and look for Usnea species on tree branches. You will conduct a simplified biomonitoring survey: counting lichen species richness and Usnea abundance at a site and comparing your results to expected values for different air quality zones.</p>
+
+    <p><strong>The Exercise:</strong></p>
+
+<pre><code>LICHEN SURVEY PROTOCOL:
+
+1. SELECT YOUR SITE:
+   Choose a trail or forested area with trees at least
+   30 cm diameter (older trees have more lichen).
+   Conifers (fir, spruce, hemlock, pine) are best.
+   Deciduous trees (maple, oak, alder) also host lichen.
+
+2. SURVEY 10 TREES:
+   For each tree:
+   a. Identify the tree species (or note "unknown conifer")
+   b. Estimate diameter at breast height (DBH, arm-span method)
+   c. Examine the trunk and lower branches (below 3 m)
+   d. Count the number of visually distinct lichen types:
+      - CRUSTOSE: flat, paint-like, adhered to bark
+      - FOLIOSE: leafy, lobed, can be peeled from bark
+      - FRUTICOSE: branching, bushy, hanging
+   e. Look specifically for USNEA (hanging strands, pale green,
+      round cross-section, pull gently -- if the outer sheath
+      peels and reveals a white inner cord, it is Usnea)
+   f. Estimate Usnea abundance:
+      0 = absent
+      1 = rare (1-5 small thalli)
+      2 = common (many thalli on multiple branches)
+      3 = abundant (draping, thalli > 30 cm)
+
+3. RECORD:
+   Tree#  |  Species  |  DBH  |  Crustose  |  Foliose  |  Fruticose  |  Usnea (0-3)
+   -------+-----------+-------+------------+-----------+-------------+-------------
+     1    |           |       |            |           |             |
+     ...  |           |       |            |           |             |
+
+4. INTERPRET:
+   Total lichen types across all 10 trees = species richness
+   Average Usnea score = Usnea abundance index
+
+   Guidelines (PNW):
+     Richness > 15, Usnea > 2.0: Excellent air quality,
+       likely old-growth or mature forest far from cities
+     Richness 8-15, Usnea 1.0-2.0: Good air quality,
+       second-growth forest or moderate distance from sources
+     Richness &lt; 8, Usnea &lt; 1.0: Impaired air quality,
+       urban-proximate or heavily managed forest
+     Usnea = 0 on all trees: Possible nitrogen deposition
+       impact or young forest without dispersal sources
+
+   Compare your results to Explorer 7's mission:
+   Your lichen survey is measuring the atmospheric balance
+   at your site -- the balance between clean air and
+   nitrogen deposition. Explorer 7 measured the radiation
+   balance from orbit. Both are measurements of imbalance.
+   Both use passive sensors (lichen / bolometers) that
+   integrate environmental conditions over time.</code></pre>
+
+    <hr>
+
+    <h2>DIY Project: Earth Energy Budget Poster</h2>
+
+    <p><strong>Duration:</strong> 3-5 hours &middot; <strong>Difficulty:</strong> Beginner-Intermediate &middot; <strong>Department:</strong> Climate Science / Mathematics</p>
+    <p><strong>What You Need:</strong> Poster board (22x28 inches, ~$3), colored markers or pencils (~$5-10), ruler, calculator (phone), access to the internet for current data. Total: ~$8-15.</p>
+    <p><strong>What You&rsquo;ll Build:</strong> A visual representation of Earth&rsquo;s global energy budget &mdash; a Sankey-style flow diagram showing the incoming solar radiation, reflected solar, absorbed solar, atmospheric absorption, surface emission, back-radiation, and outgoing thermal radiation. Every number on the poster comes from the balance equation that Explorer 7 first measured. The poster makes the invisible flows visible.</p>
+
+<pre><code>EARTH ENERGY BUDGET POSTER:
+
+Layout: landscape orientation, flows from left to right
+
+LEFT SIDE: THE SUN
+  Draw the Sun. Label: "Solar radiation: 1361 W/m^2"
+  Arrow flowing right, labeled "Intercepted by Earth disk"
+  Wide arrow: "341 W/m^2 (averaged over sphere)"
+  (This is 1361/4, the factor of 4 from disk vs sphere)
+
+CENTER: THE ATMOSPHERE AND SURFACE
+  The wide arrow splits into three:
+
+  Arrow 1 (upward, light blue): "Reflected by atmosphere: 79 W/m^2"
+    (clouds, aerosols, Rayleigh scattering)
+
+  Arrow 2 (upward, white): "Reflected by surface: 23 W/m^2"
+    (ice, snow, deserts, ocean glint)
+
+  Arrow 3 (downward, yellow): "Absorbed by atmosphere: 79 W/m^2"
+    (ozone UV absorption, water vapor near-IR, clouds)
+
+  Arrow 4 (downward, orange): "Absorbed by surface: 160 W/m^2"
+    (land, ocean, vegetation)
+
+  TOTAL REFLECTED: 79 + 23 = 102 W/m^2 (albedo ~ 0.30)
+  TOTAL ABSORBED: 79 + 160 = 239 W/m^2
+
+  THE SURFACE:
+  The surface emits upward:
+  Arrow (red): "Surface emission: 398 W/m^2"
+    (Stefan-Boltzmann at 288 K)
+
+  But most is absorbed by the atmosphere:
+  Arrow (dark red): "Absorbed by atmosphere: 358 W/m^2"
+  Arrow (red, escaping): "Through atmospheric window: 40 W/m^2"
+    (wavelengths 8-12 microns pass through clear atmosphere)
+
+  THE ATMOSPHERE:
+  The atmosphere emits in both directions:
+  Arrow (downward, orange-red): "Back-radiation: 340 W/m^2"
+    (greenhouse effect -- atmosphere radiates toward surface)
+  Arrow (upward, dark red): "Outgoing longwave: 199 W/m^2"
+    (atmosphere radiates to space)
+
+RIGHT SIDE: SPACE
+  Total outgoing:
+    Reflected solar: 102 W/m^2
+    Surface through window: 40 W/m^2
+    Atmospheric emission: 199 W/m^2
+    TOTAL OUT: 341 W/m^2
+
+  BALANCE CHECK: IN (341) = OUT (341) in equilibrium
+  CURRENT IMBALANCE: ~1.0-1.4 W/m^2 (P_in > P_out)
+  This is what Explorer 7 first measured.
+
+BOTTOM ANNOTATION:
+  "First measured from space: Explorer 7, October 13, 1959
+   Suomi-Parent flat-plate bolometers
+   Accuracy then: ~5-10 W/m^2
+   Accuracy now (CERES): ~0.3 W/m^2
+   The equation has not changed. The precision has."</code></pre>
+
+    <hr>
+
+    <h2>Ethics Module: The Responsibility of Measurement</h2>
+
+    <p><strong>Duration:</strong> 1-2 hours (discussion/essay) &middot; <strong>Department:</strong> Public Health / Climate Science &middot; <strong>Format:</strong> Structured discussion or written analysis</p>
+
+    <p><strong>The Scenario:</strong></p>
+
+    <p>It is 1959. Verner Suomi has published his first results from Explorer 7&rsquo;s bolometers. The data show that Earth absorbs approximately 240 W/m^2 of solar radiation and emits approximately 240 W/m^2 of thermal radiation. The balance is close. But Suomi suspects &mdash; and subsequent decades will confirm &mdash; that increasing CO2 concentrations from fossil fuel combustion will shift the balance by trapping more outgoing radiation. The imbalance is currently undetectable with 1959 instruments. But the physics is clear: more CO2 means less outgoing radiation, means more heat retained, means warming.</p>
+
+    <p><strong>Questions for Discussion:</strong></p>
+
+    <ol>
+      <li><strong>The measurement imperative:</strong> Suomi demonstrated that the radiation balance could be measured from orbit. He could not yet detect the imbalance. Should he advocate for more precise instruments and follow-on missions, even though the policy implications (reducing fossil fuel use) are politically explosive? Or should he limit his advocacy to the science and let others draw the policy conclusions? Virchow faced the same dilemma in 1848: his typhus investigation showed that poverty caused disease, but the remedy was political reform. He chose to advocate. What is the scientist&rsquo;s responsibility when measurement reveals an uncomfortable truth?</li>
+      <li><strong>The time lag:</strong> The energy imbalance that causes warming is small (approximately 1 W/m^2 today) relative to the total flux (341 W/m^2). The warming it causes unfolds over decades to centuries. The measurement precision needed to detect it was not achieved until the 1990s (ERBE) and not confirmed until the 2000s (CERES). By the time the measurement was precise enough to be convincing, the imbalance had been growing for decades. How do you make policy based on a signal you can predict but not yet measure precisely? This is the Virchow problem again: the physician can see that conditions will produce disease before the disease manifests. Should intervention begin before the diagnosis is confirmed?</li>
+      <li><strong>The lichen parallel:</strong> <em>Usnea longissima</em> is declining in PNW forests near urban areas. The decline has been documented over 30 years. The cause (nitrogen deposition) is understood. The remedy (reduce nitrogen emissions) is known. Yet the decline continues because the political and economic costs of emission reduction are borne by current stakeholders while the benefits accrue to future forests. Explorer 7&rsquo;s radiation balance data told the same story at planetary scale: the imbalance was growing, the cause was known, the remedy was clear, but the costs of action were immediate while the costs of inaction were deferred. How does the time horizon of consequences affect the political willingness to act on scientific measurement?</li>
+      <li><strong>Virchow&rsquo;s dictum:</strong> &ldquo;Medicine is a social science, and politics is nothing but medicine on a large scale.&rdquo; Replace &ldquo;medicine&rdquo; with &ldquo;climate science.&rdquo; Is climate science a social science? Does the radiation balance measurement &mdash; a number in watts per square meter &mdash; have social content? Virchow argued that measuring disease without addressing its social causes was incomplete medicine. Is measuring the energy imbalance without addressing its social causes incomplete science?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <p><strong>SolarFox:</strong> Explorer 7 measured the solar irradiance that every solar energy system depends on. The solar constant (approximately 1361 W/m^2) sets the upper bound on solar energy collection at Earth&rsquo;s surface. After atmospheric absorption and scattering, approximately 1000 W/m^2 reaches the surface under clear skies at noon. SolarFox solar panel design must account for the same factors Suomi measured: atmospheric absorption, cloud cover (albedo), and time-averaged insolation. The CERES data products &mdash; gridded maps of incoming solar radiation at the surface &mdash; are the direct descendants of Explorer 7&rsquo;s measurements and are used by the solar energy industry for site assessment. SolarFox benefits from the measurement pipeline Suomi started.</p>
+
+    <p><strong>FoxFiber:</strong> The bolometer-to-ground telemetry link on Explorer 7 transmitted data via radio during ground station passes. Data accumulated onboard between passes was stored in a limited buffer. Modern Earth observation satellites generate terabytes of data per day and downlink via laser communication (free-space optical links). FoxFiber&rsquo;s fiber optic infrastructure connects ground stations, data centers, and distribution networks that process and distribute the data stream that began with Explorer 7&rsquo;s thermistor readings telemetered to a single ground station at a few hundred bits per second. The data rate has increased by a factor of approximately 10 billion. The principle is the same: measure, transmit, process, distribute.</p>
+
+    <p><strong>Fox CapComm:</strong> The coordination between Suomi at the University of Wisconsin and the Explorer 7 operations team at NASA Goddard required clear communication of what the instrument was measuring, what the calibration state was, and what the data meant. This is the classic principal investigator-to-mission operations communication pattern. Fox CapComm coordination protocols must handle exactly this interface: the instrument builder (who understands the physics) communicating with the operations team (who controls the satellite) and the data users (who interpret the results). Explorer 7 was one of the first satellites where the principal investigator was at a university remote from the operations center &mdash; a distributed team architecture that Fox CapComm is designed to support.</p>
+
+    <hr>
+
+    <blockquote>
+      <p>&ldquo;The American Dipper walks into a mountain stream in January. The water is 3 degrees above freezing. The air is below it. The bird&rsquo;s body is 40 C &mdash; a furnace wrapped in oiled feathers, submerged in a thermal sink. The energy budget of the dipper is Explorer 7&rsquo;s energy budget in miniature: energy in (metabolic heat from burning fat and insects), energy out (thermal radiation and conduction to cold water), balance (maintained by feather insulation, oil waterproofing, and a metabolic rate that can double in cold water). If the balance shifts &mdash; if the stream warms and the aquatic insects decline, or if the bird&rsquo;s feather condition degrades, or if food availability drops &mdash; the dipper cannot compensate. It leaves, or it dies. The planet has the same constraint, scaled up. If the energy balance shifts &mdash; if more heat comes in than goes out &mdash; the planet warms. It cannot leave. Suomi measured the planetary energy budget because the equation told him the balance mattered. Virchow measured the social determinants of disease because observation told him the balance mattered. The dipper does not measure anything. It lives the balance. When Usnea longissima disappears from a forest, it is because the atmospheric balance shifted beyond what the lichen could tolerate. When the dipper disappears from a stream, it is because the thermal and ecological balance shifted beyond what the bird could compensate. When the planet&rsquo;s temperature rises beyond what the ice sheets can absorb, it is because the energy balance shifted beyond what the climate system can buffer. Suomi gave us the instrument to measure the shift. Virchow gave us the framework to understand that measurement without action is incomplete. The dipper and the lichen cannot act. They can only respond. The action belongs to the species that built the instrument and read the data.&rdquo;</p>
+    </blockquote>
+
+    <div class="nav-card">
+      <a href="papers.html">&larr; Papers</a>
+      <a href="simulation.html">Simulation &rarr;</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.12 Explorer 7 + Usnea longissima &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

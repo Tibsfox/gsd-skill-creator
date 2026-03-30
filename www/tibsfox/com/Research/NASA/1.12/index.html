@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.12 — Explorer 7 + Usnea longissima | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --thermal-deep: #080305; --thermal-mid: #150810;
+    --solar-yellow: #E8D060; --solar-dim: #8A7830;
+    --thermal-red: #CC4020; --thermal-warm: #AA3018;
+    --earth-blue: #2040AA; --earth-dim: #152870;
+    --lichen-sage: #8AAA70; --lichen-dim: #4A6A30;
+    --space: #050510; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(232,208,96,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(138,170,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(204,64,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(232,208,96,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(138,170,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(170,48,24,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(8,3,5,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(74,106,48,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--thermal-deep) 20%, var(--thermal-mid) 40%, var(--thermal-warm) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--solar-yellow);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(232,208,96,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(232,208,96,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(232,208,96,0.12); border: 1px solid var(--solar-yellow); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--solar-yellow); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-success {
+    background: rgba(138,170,112,0.3); border: 1px solid var(--lichen-sage);
+    color: var(--lichen-sage); padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--solar-yellow); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(8,3,5,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--solar-yellow);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--solar-yellow); }
+  .card em { color: var(--lichen-sage); }
+
+  .resonance-card { border-color: var(--thermal-red); background: rgba(204,64,32,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(204,64,32,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--thermal-red); color: #fff; font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--thermal-red); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(8,3,5,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--solar-yellow); background: rgba(232,208,96,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--solar-yellow); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--solar-yellow); }
+  .track-card.t2 .track-title { color: var(--lichen-sage); }
+  .track-card.t3 .track-title { color: var(--thermal-red); }
+  .track-card.t4 .track-title { color: var(--solar-yellow); }
+  .track-card.t5 .track-title { color: var(--earth-blue); }
+  .track-card.t6 .track-title { color: var(--lichen-sage); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(138,170,112,0.08); border: 1px solid var(--lichen-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--thermal-red); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--lichen-sage); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(8,3,5,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--solar-yellow); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(11,61,145,0.12); border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--earth-blue); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--earth-blue); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(11,61,145,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(8,3,5,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--solar-yellow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--solar-yellow); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.12</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>v1.12 &mdash; Explorer 7 + <em>Usnea longissima</em></h1>
+    <p class="subtitle">The Thermometer &mdash; First Measurement of Earth&rsquo;s Radiation Budget</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> Oct 13, 1959</span>
+      <span><span class="label">Program:</span> Explorer (NASA/Goddard)</span>
+      <span><span class="label">Mass:</span> 41.5 kg</span>
+      <span><span class="label">Organism:</span> Methuselah&rsquo;s beard lichen</span>
+      <span><span class="label">Bird:</span> American Dipper</span>
+      <span><span class="label">Dedication:</span> Rudolf Virchow</span>
+      <span><span class="label">Status:</span> SUCCESS &mdash; 2-year operation</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On October 13, 1959, a Juno II rocket lifted off from Launch Complex 5 at Cape Canaveral carrying Explorer 7 &mdash; the first satellite designed and built at NASA&rsquo;s Goddard Space Flight Center. At 41.5 kg, it was nearly four times the mass of Explorer 1. But the difference that mattered was not the mass. It was the direction the instruments pointed.</p>
+      <p>The earlier Explorers had looked outward &mdash; into the Van Allen radiation belts, into the magnetosphere, into the space environment surrounding Earth. Explorer 7 turned around and looked down. <strong>It asked: how much energy does Earth receive from the Sun, and how much does it radiate back into space? What is the balance?</strong></p>
+      <p>Verner Suomi&rsquo;s paired bolometers &mdash; one painted black, one painted white &mdash; measured the radiation budget from orbit for the first time in history. The black plate absorbed all wavelengths. The white plate reflected sunlight but absorbed thermal infrared. The temperature difference between them decomposed the radiation field into its shortwave and longwave components: two equations, two unknowns, solvable by linear algebra. The data confirmed what physics predicted: approximately 240 W/m^2 in, approximately 240 W/m^2 out, the balance close. Every subsequent Earth radiation budget mission &mdash; Nimbus, ERBE, CERES &mdash; descends from this satellite.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The Thermometer</div>
+            <div class="track-desc">Goddard&rsquo;s first satellite, Suomi-Parent bolometers, the radiation budget concept, Virchow and systemic balance, the lineage to CERES</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">Suomi (1958), CERES energy imbalance update, climate sensitivity from energy budget, <em>Usnea longissima</em> 30-year resurvey</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Usnea longissima</em></div>
+            <div class="track-desc">Methuselah&rsquo;s beard lichen &mdash; the passive sensor that integrates atmospheric nitrogen over decades, a biological bolometer for air quality</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Balance</div>
+            <div class="track-desc">Stefan-Boltzmann law, 2x2 linear system, condition number, energy balance equation, T^4 radiation</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Climate Science, Thermal Physics, Instrumentation. Bolometer TRY. Lichen survey. Energy budget poster DIY. Virchow ethics.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Train, Visualize, Create</div>
+            <div class="track-desc">Radiation budget calculator, orbit bolometer sim, interactive Sankey diagram, bolometer web sim, ML cloud prediction, climate negotiation game</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Passive Sensing / Integration Over Time</div>
+          The bolometer absorbs photons and records temperature. <em>Usnea longissima</em> absorbs nitrogen and records growth rate. Both are passive integrators &mdash; they measure the world by letting it act on them, accumulating signal over time. The bolometer integrates watts. The lichen integrates decades of atmospheric chemistry.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Balance as the Fundamental Quantity</div>
+          Explorer 7 measured energy balance. The lichen embodies symbiotic balance (fungus + alga). Virchow diagnosed physiological balance (health = equilibrium). The American Dipper maintains thermal balance in freezing streams. All four systems are governed by the same principle: inputs must equal outputs, or the system changes state.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Perturbation and Response</div>
+          Greenhouse gases perturb the radiation balance. Nitrogen deposition perturbs the lichen&rsquo;s symbiosis. Poverty perturbs public health (Virchow). Cold water perturbs the dipper&rsquo;s thermal budget. Each perturbation has a characteristic response time: the planet warms over decades, the lichen declines over years, the patient sickens over weeks, the dipper compensates in seconds.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Measurement as the Prerequisite for Action</div>
+          Suomi could not fix the energy imbalance. He could measure it. Virchow could not cure poverty. He could diagnose its health effects. The lichenologist cannot reduce nitrogen emissions. They can document the lichen&rsquo;s decline. In each case, measurement is the first step: you cannot address what you have not quantified.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">The View from Above vs. The View from Within</div>
+          Explorer 7 measures the radiation budget from 700 km altitude &mdash; the global view. <em>Usnea longissima</em> measures the same atmospheric change from a tree branch &mdash; the local view. The satellite sees the planet. The lichen sees the forest. Both measurements converge on the same conclusion: the balance is shifting. The convergence of the orbital and the terrestrial is the proof.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <div class="axis-title">The Lineage of Precision</div>
+          Explorer 7&rsquo;s accuracy: 5-10 W/m^2. CERES accuracy: 0.3 W/m^2. Sixty years, factor of 30. The question did not change. The precision did. Suomi proved the concept. His successors refined the measurement. The lineage is unbroken: every Earth radiation budget instrument traces directly to Explorer 7.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-thermometer.html" style="color: var(--solar-yellow);">Story: &ldquo;The Thermometer&rdquo;</a>
+          <a href="artifacts/stories/the-thermometer.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; Earth&rsquo;s energy balance, told from the bolometer&rsquo;s perspective
+        </li>
+        <li><a href="artifacts/audio/explorer7-balance-synth.dsp" style="color: var(--earth-blue);">Audio: Explorer 7 Balance Synth</a> &mdash; FAUST synth, radiation balance sonification (VST/LV2)</li>
+        <li><a href="artifacts/audio/american-dipper.dsp" style="color: var(--earth-blue);">Audio: American Dipper</a> &mdash; FAUST synth, dipper song in mountain stream (VST/LV2)</li>
+        <li><a href="artifacts/circuits/led-radiation-balance.md" style="color: var(--solar-yellow);">Circuit: LED Radiation Balance</a> &mdash; Visual radiation budget indicator with LEDs</li>
+        <li><a href="artifacts/circuits/radio-antenna-tuner.md" style="color: var(--solar-yellow);">Circuit: Radio Antenna Tuner</a> &mdash; L-network antenna tuner for shortwave reception</li>
+        <li><a href="artifacts/screensaver/explorer7-screensaver.frag" style="color: var(--thermal-red);">Screensaver: Explorer 7</a> &mdash; GLSL fragment shader, orbital energy balance visualization</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><a href="artifacts/simulations/python/radiation-budget.py" style="color: var(--solar-yellow);">Python: Radiation Budget Calculator</a> &mdash; Energy balance from first principles, parameter sweeps</li>
+        <li><a href="artifacts/simulations/python/bolometer-orbit.py" style="color: var(--solar-yellow);">Python: Bolometer Orbit Simulation</a> &mdash; Orbital mechanics + bolometer physics, eclipse transitions</li>
+        <li><a href="artifacts/simulations/web/energy-balance.html" style="color: var(--earth-blue);">Web: Interactive Energy Balance Diagram</a> &mdash; Sankey-style flows, Mars/Venus presets</li>
+        <li><a href="artifacts/simulations/web/bolometer-sim.html" style="color: var(--earth-blue);">Web: Bolometer Simulator</a> &mdash; Stefan-Boltzmann in real time, black vs white plates</li>
+        <li><a href="artifacts/simulations/spice/bolometer.cir" style="color: var(--thermal-red);">SPICE: Bolometer Thermal Model</a> &mdash; Thermal-electrical analog circuit (ngspice)</li>
+        <li><a href="artifacts/simulations/spice/antenna-tuner.cir" style="color: var(--thermal-red);">SPICE: Antenna Tuner</a> &mdash; L-network impedance matching circuit (ngspice)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: var(--earth-blue);">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(232,208,96,0.04); border-color: var(--solar-dim);">
+      <h2 style="color: var(--solar-yellow);">Dedication: Rudolf Virchow</h2>
+      <p><strong>Born October 13, 1821 &mdash; Died September 5, 1902</strong></p>
+      <p>Virchow was born exactly 138 years before Explorer 7 launched. He established cellular pathology &mdash; <em>omnis cellula e cellula</em>, every cell from a cell &mdash; and pushed medical understanding from the organ level to the cellular level. He investigated the typhus epidemic in Upper Silesia in 1848 and concluded the cause was social: poverty, malnutrition, political neglect. His prescription was not medicine but democracy. &ldquo;Medicine is a social science, and politics is nothing but medicine on a large scale.&rdquo;</p>
+      <p>Suomi pushed climate understanding from the weather level to the energy level &mdash; from symptoms to forcing function. Virchow pushed pathology from the organ level to the cell level &mdash; from symptoms to mechanism. Both men needed a new instrument to see at the scale where the system was actually determined. Virchow used the microscope. Suomi used the satellite. Both discovered that the visible manifestation was not the cause &mdash; it was the consequence of something happening at a scale the unaided eye could not reach.</p>
+      <p style="font-style: italic; color: var(--text-dim);">&ldquo;Between animal and human medicine there is no dividing line &mdash; nor should there be. The object is different but the experience obtained constitutes the basis of all medicine.&rdquo; &mdash; Rudolf Virchow</p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.11/index.html">&larr; v1.11 Explorer 5</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.13/index.html">v1.13 Explorer 6 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Usnea longissima (Methuselah&rsquo;s Beard Lichen)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">3&ndash;4 m</div>
+          <div class="stat-label">Max Length</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2&ndash;5 cm</div>
+          <div class="stat-label">Growth/Year</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Fruticose</div>
+          <div class="stat-label">Growth Form</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Old-growth</div>
+          <div class="stat-label">Indicator</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        The longest lichen in the Pacific Northwest. Hangs from old-growth Sitka spruce, western hemlock, and Douglas-fir in pendulous strands. A fungus-alga symbiosis exquisitely sensitive to nitrogen deposition &mdash; disappearing from forests near urban corridors. A passive sensor that integrates atmospheric chemistry over decades, recording in its length the air quality of the centuries through which it grew.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(138,170,112,0.06); border-color: var(--lichen-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--thermal-red); margin-bottom: 0.5rem;">Bird: American Dipper</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em>Cinclus mexicanus</em> (degree 12). The only aquatic songbird in North America. Walks underwater in freezing mountain streams, maintaining 40 C body temperature against 2-8 C water. Dense plumage, oversized preen gland, metabolic furnace. The energy balance of the dipper &mdash; metabolic heat vs thermal loss &mdash; is Explorer 7&rsquo;s energy balance in miniature.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: Explorer 7 (1959-009A)</a>
+      <a href="https://ceres.larc.nasa.gov/">CERES Data Products</a>
+      <a href="https://www.nasa.gov/goddard">NASA Goddard Space Flight Center</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://lichenportal.org/">Consortium of North American Lichen Herbaria</a>
+    </div>
+
+    <div class="card" style="background: rgba(11,61,145,0.08); border-color: rgba(11,61,145,0.3);">
+      <h3 style="font-size: 0.9rem; color: var(--earth-blue); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        Climate Science &middot; Thermal Physics &middot; Instrumentation &middot; Lichenology &middot; Mathematics &middot; Public Health &middot; Ecology &middot; Computer Science &middot; Game Theory
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(8,3,5,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--thermal-red); margin-bottom: 0.5rem;">Catalog Position</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim);">
+        Mission 13 of 720 &middot; Epoch 1 (Early Space Age) &middot; October 13, 1959
+      </p>
+      <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">
+        <strong style="color: var(--solar-yellow);">Thesis:</strong> The radiation budget is the forcing function of climate. Everything else &mdash; temperature, weather, ice sheets, sea level &mdash; is the response. Explorer 7 measured the forcing function for the first time. The measurement concept has not changed in 66 years. The precision has improved by a factor of 30. The equation remains: energy in minus energy out equals the imbalance that drives the future.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(8,3,5,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--solar-dim); margin-bottom: 0.5rem;">Explorer 7 Specifications</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        <strong style="color: var(--solar-yellow);">Mass:</strong> 41.5 kg &middot;
+        <strong style="color: var(--solar-yellow);">Launch:</strong> Juno II &middot;
+        <strong style="color: var(--solar-yellow);">Orbit:</strong> 573 x 1,073 km &middot;
+        <strong style="color: var(--solar-yellow);">Inclination:</strong> 50.3&deg; &middot;
+        <strong style="color: var(--solar-yellow);">Period:</strong> 101.4 min &middot;
+        <strong style="color: var(--solar-yellow);">Instruments:</strong> Suomi-Parent bolometers + cosmic ray + Lyman-alpha + micrometeorite &middot;
+        <strong style="color: var(--solar-yellow);">Data:</strong> ~2 years &middot;
+        <strong style="color: var(--solar-yellow);">Achievement:</strong> First orbital radiation budget measurement
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.12 Explorer 7 + Usnea longissima &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+  <p style="margin-top: 0.5rem;"><em style="color: var(--lichen-sage);">&ldquo;The equation has not changed. The precision has.&rdquo;</em></p>
+</footer>
+
+</body>
+</html>

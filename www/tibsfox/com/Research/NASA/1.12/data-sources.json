@@ -1,0 +1,117 @@
+{
+  "mission": "1.12",
+  "title": "Explorer 7 (Juno II)",
+  "description": "Open datasets and source materials relevant to Explorer 7 (1959), the first Earth radiation budget measurement from space, Suomi-Parent bolometers, Usnea longissima (Methuselah's beard lichen), the American Dipper (Cinclus mexicanus), and the physics of planetary energy balance",
+  "sources": [
+    {
+      "id": "nssdc-explorer-7",
+      "name": "NSSDC Master Catalog — Explorer 7",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1959-009A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Explorer 7. Documents the spacecraft launched October 13, 1959, on a Juno II launch vehicle from Cape Canaveral. COSPAR ID 1959-009A. Spacecraft mass 41.5 kg. Orbit 573 × 1,073 km, inclination 50.3 degrees, period 101.2 minutes. Carried Suomi-Parent thermal radiation balance experiment, cosmic ray and heavy primary cosmic ray detectors, a micrometeorite detector, and Lyman-alpha and X-ray ionization chamber. Operated for approximately 2 years. The radiation balance experiment was the first satellite instrument to measure Earth's energy budget from orbit, separating reflected shortwave (solar) from emitted longwave (thermal) radiation using black and white hemispheric bolometers.",
+      "mission_relevance": "Definitive source for Explorer 7 mission parameters, orbit characteristics, and instrument descriptions. Confirms the spacecraft configuration, launch date, orbital elements, and operational lifetime. Essential for establishing the mission narrative and the orbital mechanics used in the bolometer simulation."
+    },
+    {
+      "id": "ceres-radiation-budget",
+      "name": "CERES — Clouds and the Earth's Radiant Energy System",
+      "url": "https://ceres.larc.nasa.gov/",
+      "type": "primary-source",
+      "category": "radiation-data",
+      "format": "HDF/NetCDF",
+      "access": "open",
+      "description": "NASA's Clouds and the Earth's Radiant Energy System provides the most accurate and longest-running satellite measurements of Earth's radiation budget, continuing the legacy that began with Explorer 7's bolometers. CERES instruments on Terra (2000), Aqua (2002), Suomi-NPP (2011), and NOAA-20 (2018) measure reflected shortwave and emitted longwave radiation with unprecedented accuracy. The Energy Balanced and Filled (EBAF) product provides monthly global mean TOA fluxes: absorbed shortwave ~240 W/m², outgoing longwave ~240 W/m², net imbalance ~0.87 W/m². CERES is the direct descendant of Suomi's bolometer concept — the same measurement, 60 years of technological refinement.",
+      "mission_relevance": "Provides the modern context for Explorer 7's pioneering measurement. CERES data validates the radiation budget physics modeled in the Python simulations and HTML interactive. The continuity from Explorer 7 → ERBE → CERES represents the longest-running space-based climate observation, all traceable to Suomi's 1959 bolometer concept. Essential for the radiation budget, energy balance, and climate sensitivity knowledge nodes."
+    },
+    {
+      "id": "erbe-historical",
+      "name": "ERBE — Earth Radiation Budget Experiment",
+      "url": "https://eosweb.larc.nasa.gov/project/erbe/erbe_table",
+      "type": "primary-source",
+      "category": "radiation-data",
+      "format": "HDF/ASCII",
+      "access": "open",
+      "description": "The Earth Radiation Budget Experiment flew on ERBS (1984), NOAA-9 (1984), and NOAA-10 (1986), providing the first comprehensive multi-satellite radiation budget measurements. ERBE improved on Explorer 7's bolometers with scanning radiometers that mapped the spatial distribution of reflected and emitted radiation across the entire Earth surface. ERBE data revealed the strong spatial variation in Earth's radiation budget: tropical regions absorb far more solar energy than they emit as thermal radiation (energy surplus), while polar regions emit more than they absorb (energy deficit). The difference drives the global atmospheric and oceanic circulation — weather is the heat engine that redistributes this energy.",
+      "mission_relevance": "Provides the intermediate step between Explorer 7 and CERES, showing how Suomi's concept evolved into a global mapping system. ERBE data is used in the radiation budget Python simulation to provide context for Explorer 7's measurements. The spatial patterns ERBE revealed (tropical surplus, polar deficit) contextualize the orbital variations in the bolometer simulation."
+    },
+    {
+      "id": "nasa-giss",
+      "name": "NASA GISS — Goddard Institute for Space Studies Temperature Record",
+      "url": "https://data.giss.nasa.gov/gistemp/",
+      "type": "primary-source",
+      "category": "climate-data",
+      "format": "CSV/NetCDF",
+      "access": "open",
+      "description": "NASA GISS maintains the global surface temperature record (GISTEMP), one of the primary datasets used to track global warming. The record shows ~1.1°C warming since the pre-industrial period, with acceleration after 1970. The warming is a direct consequence of the energy imbalance that Explorer 7 first measured: more energy coming in than going out, integrated over decades. The GISTEMP dataset combines land-surface air temperatures from ~6,300 meteorological stations with sea-surface temperatures from ships and buoys. The product provides global mean temperature anomalies relative to the 1951-1980 base period.",
+      "mission_relevance": "Provides the ground-truth temperature record that corresponds to the energy imbalance Explorer 7 measured from space. The CO₂ sensitivity plot in the Python simulation uses GISTEMP-consistent temperature changes. The connection between radiation budget (measured from orbit) and surface temperature (measured from ground) is the central story of Explorer 7's legacy."
+    },
+    {
+      "id": "ipcc-climate-data",
+      "name": "IPCC Data Distribution Centre",
+      "url": "https://www.ipcc-data.org/",
+      "type": "secondary-source",
+      "category": "climate-data",
+      "format": "Various",
+      "access": "open",
+      "description": "The Intergovernmental Panel on Climate Change Data Distribution Centre provides climate data, scenarios, and projections used in IPCC Assessment Reports. Key parameters relevant to Explorer 7: Earth's energy imbalance (0.87 ± 0.12 W/m², AR6), equilibrium climate sensitivity (2.5–4.0°C per CO₂ doubling, AR6), CO₂ forcing (5.35 × ln(C/C₀) W/m²), and feedback parameters (water vapor, ice-albedo, cloud, Planck). These numbers descend directly from the measurement type that Suomi pioneered: satellite-based radiation budget observations constraining climate models.",
+      "mission_relevance": "Provides the climate science parameters used in the knowledge nodes (climate sensitivity, greenhouse effect, energy balance). The IPCC's assessment of Earth's energy imbalance — the number that determines the rate of warming — is measured by the direct descendants of Explorer 7's bolometers. The CO₂ sensitivity simulation uses IPCC forcing equations."
+    },
+    {
+      "id": "inaturalist-usnea",
+      "name": "iNaturalist — Usnea longissima Observations",
+      "url": "https://www.inaturalist.org/taxa/127400-Usnea-longissima",
+      "type": "community-science",
+      "category": "ecology",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community science observations of Usnea longissima (Methuselah's beard lichen) from iNaturalist's global database. Observations include geolocated photographs showing the characteristic pendant growth form: extremely long strands (up to 3+ meters) hanging from old-growth conifer branches. Distribution data shows concentration in Pacific Northwest coastal forests (British Columbia through northern California), with disjunct populations in Appalachian cloud forests, European montane forests, and Asian temperate forests. The decline of Usnea longissima in lowland forests is documented through the absence of recent observations in historically occupied areas — the lichen's disappearance is as diagnostic as its presence.",
+      "mission_relevance": "Establishes the geographic and morphological context for the organism pairing. iNaturalist photographs document the pendant growth form — long, grey-green curtains draped from branches — that makes Usnea longissima visually striking and vulnerable to environmental change. The distribution data shows the correlation between clean-air, old-growth conditions and lichen presence. Essential for the radiation budget resonance sections (lichen as biological bolometer) and the GLSL screensaver lichen mode."
+    },
+    {
+      "id": "wisconsin-climate",
+      "name": "Wisconsin State Climatology Office / UW-Madison Climate Data",
+      "url": "https://www.aos.wisc.edu/~sco/",
+      "type": "secondary-source",
+      "category": "climate-history",
+      "format": "HTML/Data",
+      "access": "open",
+      "description": "Climate data and history from the University of Wisconsin-Madison, where Verner Suomi spent his career (1948-1995). The department Suomi founded — the Space Science and Engineering Center (SSEC) — continues to develop satellite instruments for weather and climate observation. The Wisconsin climate data provides context for Suomi's work: the same institution that housed his lab has tracked regional climate change that his instruments helped predict. The SSEC archives include historical documents, instrument specifications, and data from Suomi's pioneering experiments including the Explorer 7 bolometers.",
+      "mission_relevance": "Provides institutional and biographical context for Verner Suomi's career and the development of the bolometer concept. The connection between Suomi's Wisconsin base and the global implications of his measurements adds personal narrative to the mission. The SSEC's continuing satellite instrument development represents the direct lineage from Explorer 7. Essential for the story 'The Thermometer' and the dedication to Virchow."
+    },
+    {
+      "id": "wrmc-radiation",
+      "name": "World Radiation Monitoring Center (WRMC/BSRN)",
+      "url": "https://bsrn.awi.de/",
+      "type": "primary-source",
+      "category": "radiation-data",
+      "format": "NetCDF/ASCII",
+      "access": "open (registration required)",
+      "description": "The Baseline Surface Radiation Network (BSRN) operated by the World Radiation Monitoring Center provides the highest-quality ground-based measurements of surface radiation fluxes: downwelling shortwave (solar), downwelling longwave (atmospheric thermal), upwelling shortwave (reflected), and upwelling longwave (surface thermal). ~60 stations worldwide measure all four components with 1 W/m² accuracy. These ground-truth measurements validate the satellite-based radiation budget observations that began with Explorer 7. The surface radiation budget is related to but distinct from the top-of-atmosphere budget measured by satellites — the difference between them is precisely the greenhouse effect.",
+      "mission_relevance": "Provides ground-truth validation for the radiation budget physics in the simulations and knowledge nodes. The BSRN's four-component radiation measurement at the surface complements the satellite's two-component measurement at the top of atmosphere. Together they constrain the atmospheric absorption and emission — the greenhouse effect that Explorer 7's measurements first quantified from orbit."
+    },
+    {
+      "id": "solar-irradiance",
+      "name": "SORCE / TSIS — Total Solar Irradiance Measurements",
+      "url": "https://lasp.colorado.edu/home/tsis/",
+      "type": "primary-source",
+      "category": "solar-data",
+      "format": "ASCII/NetCDF",
+      "access": "open",
+      "description": "The Total and Spectral Solar Irradiance Sensor (TSIS) on the International Space Station provides the most accurate measurement of the solar constant: S₀ = 1360.8 ± 0.5 W/m². This value — the total solar energy flux at 1 AU — is the fundamental input to Earth's radiation budget. The solar constant varies by ~0.1% over the 11-year solar cycle, corresponding to a forcing variation of ~0.34 W/m² — smaller than but not negligible compared to the anthropogenic greenhouse forcing of 0.87 W/m². The historical record of total solar irradiance extends back to 1978 (Nimbus 7 ERB) and shows no long-term trend, confirming that the observed warming is due to greenhouse gases, not solar variability.",
+      "mission_relevance": "Provides the solar constant value used in all radiation budget calculations throughout the mission: S₀ = 1361 W/m². The precision of modern solar measurements (±0.5 W/m²) compared to the uncertainty in Explorer 7's era (~±10 W/m²) illustrates the evolution of measurement capability since 1959. Essential for the radiation budget knowledge node and Python simulation."
+    },
+    {
+      "id": "noaa-climate",
+      "name": "NOAA National Centers for Environmental Information (NCEI)",
+      "url": "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/",
+      "type": "primary-source",
+      "category": "climate-data",
+      "format": "CSV/JSON",
+      "access": "open",
+      "description": "NOAA NCEI provides the complementary global temperature record (NOAAGlobalTemp) and ocean heat content measurements. The ocean absorbs ~93% of the energy imbalance measured at the top of atmosphere (by CERES and its predecessors going back to Explorer 7). Ocean heat content has increased by approximately 0.87 W/m² × 5.1e14 m² × 3.15e7 s/yr ≈ 1.4 × 10²² J/year since 2005. This ocean heating is the single largest consequence of the energy imbalance that Explorer 7 first detected: the excess energy does not primarily warm the air — it warms the water. The ocean is the planet's thermal capacitor, and its temperature is the integral of the radiation budget imbalance over time.",
+      "mission_relevance": "Provides the consequence-side data that complements Explorer 7's cause-side measurement (radiation imbalance). The ocean heat content trend is the integral of the energy imbalance over time — the cumulative effect of the radiation budget surplus that Suomi's bolometers first detected. Essential for the energy balance knowledge node and the story's discussion of long-term consequences."
+    }
+  ]
+}
