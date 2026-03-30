@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.3 — Pioneer 2 + Salal | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --berry-dark: #1A0F2E;
+    --berry-mid: #2D1B4E;
+    --berry-purple: #6B3FA0;
+    --berry-light: #9B6FD0;
+    --salal-dark: #2A4A2A;
+    --salal-mid: #3D6B3D;
+    --salal-leaf: #4A8A4A;
+    --plum: #4A1942;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #3D2A5E;
+    --amber: #D4A017;
+    --amber-light: #F0D060;
+    --amber-dark: #8B6914;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--berry-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Berry cluster background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(107,63,160,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(107,63,160,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(155,111,208,0.05) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(42,74,42,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(107,63,160,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(155,111,208,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(74,25,66,0.10) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(42,74,42,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.08) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--berry-dark) 0%, var(--berry-mid) 30%, var(--plum) 60%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--berry-purple);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(107,63,160,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(107,63,160,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(107,63,160,0.15);
+    border: 1px solid var(--berry-purple);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--berry-purple);
+    margin-bottom: 1rem;
+  }
+
+  .version-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--berry-light);
+  }
+
+  .status-failed {
+    background: rgba(252,61,33,0.2);
+    border: 1px solid var(--nasa-red);
+    color: var(--nasa-red);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--berry-purple); font-weight: 500; }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(45,27,78,0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--berry-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card p, .card li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card {
+    border-color: var(--berry-purple);
+    background: rgba(107,63,160,0.06);
+  }
+
+  .resonance-axis {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(107,63,160,0.15);
+  }
+
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num {
+    background: var(--berry-purple);
+    color: var(--berry-dark);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--berry-light); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(42,74,42,0.3);
+    border: 1px solid var(--salal-mid);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .organism-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--salal-leaf);
+    margin-bottom: 0.75rem;
+  }
+
+  .organism-card .sci-name {
+    font-style: italic;
+    color: var(--salal-leaf);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: rgba(26,15,46,0.5);
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--berry-light);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dedication-card {
+    background: rgba(212,160,23,0.08);
+    border: 1px solid var(--amber);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .dedication-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+  }
+
+  .data-links {
+    background: rgba(11,61,145,0.15);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .data-links h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .data-links a {
+    display: block;
+    color: #7EB8DA;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.2);
+    transition: color 0.2s;
+  }
+
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card {
+    background: rgba(26,26,58,0.4);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .tracks-card h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .track-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.15);
+    font-size: 0.85rem;
+  }
+
+  .track-item:last-child { border-bottom: none; }
+
+  .track-num {
+    background: rgba(11,61,145,0.3);
+    color: #7EB8DA;
+    font-weight: 700;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-card {
+    background: rgba(45,27,78,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .nav-card a {
+    color: var(--berry-purple);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-card a:hover { color: var(--berry-light); }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--berry-purple); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.3</span>
+      <span>NASA Mission Series</span>
+      <span class="status-failed">FAILED</span>
+    </div>
+    <h1>Pioneer 2 &mdash; Forty-Five Minutes</h1>
+    <p class="subtitle">The last Air Force Pioneer, and the salal that feeds what others overlook</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> November 8, 1958</span>
+      <span><span class="label">Program:</span> Pioneer (NASA/AFBMD)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Thor-Able I</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>Pioneer 2 was the third US attempt to reach the Moon and the last managed by the Air Force Ballistic Missile Division before NASA assumed full control of the Pioneer program. Launched from Cape Canaveral on November 8, 1958, its Thor DM-18 first stage and AJ10-40 second stage both performed correctly &mdash; a measurable advance from Pioneer 0 (first stage failure at 77 seconds) and Pioneer 1 (second stage velocity shortfall). But the ABL X-248 third stage solid rocket motor failed to ignite. Without the third stage&rsquo;s final kick, Pioneer 2 could not reach escape velocity.</p>
+      <p>Pioneer 2 coasted to a maximum altitude of approximately 1,550 km on its ballistic arc, returned 45 minutes of near-Earth radiation and magnetic field data, and captured the first television camera images ever transmitted from a Pioneer spacecraft. It reentered the atmosphere over northwest Africa and burned up. The mission lasted less than an hour. But the 45 minutes of data from below 1,550 km filled in the low-altitude radiation profile that Pioneer 1&rsquo;s higher trajectory had passed through too quickly to resolve &mdash; a detailed map of the inner Van Allen belt&rsquo;s lower boundary. And the TV camera, though brief, proved that imaging from space was feasible with the Pioneer bus design.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> ~39.2 kg (truncated cone, gold-plated)</li>
+        <li><strong>Instruments:</strong> Ionization chamber, proportional counter telescope, TV camera (first on a Pioneer), magnetometer, micrometeorite detector, temperature sensors</li>
+        <li><strong>Power:</strong> Mercury batteries (nickel-cadmium backup)</li>
+        <li><strong>Transmitter:</strong> 108.06 MHz, ~300 milliwatts</li>
+        <li><strong>Stabilization:</strong> Spin-stabilized (~5.8 rev/sec)</li>
+        <li><strong>Builder:</strong> Space Technology Laboratories (later TRW)</li>
+        <li><strong>Launch vehicle:</strong> Thor-Able I (3-stage: Thor DM-18 + AJ10-40 + ABL X-248)</li>
+        <li><strong>New instrument:</strong> Onboard TV camera &mdash; returned the first Pioneer images during ascent</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Failure</h2>
+      <p><strong>T+0 (07:30 UTC):</strong> Thor main engine ignition from LC-17A, Cape Canaveral.</p>
+      <p><strong>T+0 to T+166:</strong> First stage nominal. Thor DM-18 burns for 2 min 46 sec, 667 kN thrust. Perfect performance &mdash; the first stage issues that destroyed Pioneer 0 are fully resolved.</p>
+      <p><strong>T+166 to T+286:</strong> Second stage ignition. AJ10-40 engine burns for full duration &mdash; correcting the premature cutoff that limited Pioneer 1. Both liquid stages now validated.</p>
+      <p><strong>T+286:</strong> Third stage commanded to ignite. The ABL X-248 solid rocket motor does not fire. No ignition signal reaches the motor. The cause: a failure in the third stage ignition system, likely an electrical fault in the squib firing circuit.</p>
+      <p><strong>T+286 onward:</strong> Without the third stage&rsquo;s 3,100 m/s delta-v, Pioneer 2 follows a ballistic trajectory. It reaches 1,550 km altitude, arcs over, and begins falling back. Instruments continue operating.</p>
+      <p><strong>T+45 min:</strong> Pioneer 2 reenters the atmosphere over northwest Africa and is destroyed. Total flight time: approximately 45 minutes.</p>
+      <p><strong>Cause:</strong> Third stage solid motor ignition failure. The X-248 motor itself was later found to be sound in design; the ignition sequencer failed to deliver the firing pulse. An electrical failure in the staging circuit prevented the squib from receiving current.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> 45-minute ballistic trajectory simulation &mdash; compare the 1,550 km arc against Pioneer 1&rsquo;s 113,854 km path, overlay both profiles</li>
+        <li><strong>Minecraft:</strong> Pioneer 2 at scale + three-stage rocket tower where the third stage is visibly disconnected (broken redstone circuit = failed ignition)</li>
+        <li><strong>Blender:</strong> 45-minute arc animation &mdash; Thor separation, second stage burn, third stage silence, coast and return (Cycles render, 45 sec)</li>
+        <li><strong>GLSL:</strong> Solid rocket grain cross-section shader &mdash; combustion front propagation in a star-perforated grain, but this one never lights</li>
+        <li><strong>Arduino:</strong> Three-stage ignition sequencer with deliberate third-stage failure ($18) &mdash; press launch button, watch stages 1 and 2 light, stage 3 stays dark</li>
+        <li><strong>Godot 4:</strong> Interactive staging simulator &mdash; trace the fault through the ignition circuit, find the broken connection, fix it, and see Pioneer 2 reach the Moon</li>
+        <li><strong>GMAT:</strong> With vs. without third stage &mdash; overlay Pioneer 2&rsquo;s actual 1,550 km ballistic arc against the intended lunar trajectory</li>
+        <li><strong>Radio:</strong> Superheterodyne AM receiver &mdash; the companion to v1.2&rsquo;s VHF transmitter. Pioneer&rsquo;s ground stations used the same superheterodyne principle to receive 108 MHz ($25)</li>
+        <li><strong>Screensaver:</strong> Salal berry cluster &rarr; solid rocket grain &rarr; spectral emission lines &rarr; chickadee hop (XScreenSaver / GSD-OS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Calculate the missing delta-v &mdash; the X-248 provides ~3,100 m/s. What trajectory would Pioneer 2 have followed with all three stages? (30 min, Python or pencil)</li>
+        <li><strong>TRY 2:</strong> Map the inner belt floor &mdash; plot Pioneer 2&rsquo;s radiation data from 0 to 1,550 km and compare against Pioneer 1&rsquo;s data for the same altitude range (45 min, Python + matplotlib)</li>
+        <li><strong>TRY 3:</strong> Solid motor ignition failure modes &mdash; research what can go wrong when a squib circuit fails to fire (30 min, reading + notes)</li>
+        <li><strong>DIY 1:</strong> Build the LED staging sequence circuit ($15, three 555 timers cascading through 3 LED groups &mdash; stage 3 deliberately disconnected)</li>
+        <li><strong>DIY 2:</strong> Build the analog spectroscope ($18, diffraction grating + phototransistor + LED light source)</li>
+        <li><strong>DIY 3:</strong> Grow salal from a cutting ($8, 6-month project &mdash; take a semi-hardwood cutting in late summer, rooting hormone, shade and acidic soil)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-thicket.html" style="color: var(--berry-light);">Story: &ldquo;The Thicket&rdquo;</a>
+          <a href="artifacts/stories/the-thicket.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; The salal tells its own story
+        </li>
+        <li><a href="artifacts/audio/forty-five-minutes-synth.dsp" style="color: #7EB8DA;">Audio: Forty-Five Minutes Synth</a> &mdash; FAUST VST/LV2 (45 minutes compressed to 60 seconds: rumble, whine, silence, descent)</li>
+        <li><a href="artifacts/audio/chickadee-song.dsp" style="color: #7EB8DA;">Audio: Black-capped Chickadee Song</a> &mdash; FAUST ambient (fee-bee whistle + chick-a-dee-dee alarm call synthesis)</li>
+        <li><a href="artifacts/circuits/led-staging-sequence.md" style="color: var(--berry-light);">Circuit: LED Staging Sequence</a> &mdash; Three-stage ignition with deliberate third-stage failure ($15)</li>
+        <li><a href="artifacts/circuits/analog-spectroscope.md" style="color: var(--berry-light);">Circuit: Analog Spectroscope</a> &mdash; Diffraction grating + phototransistor, connects to Bunsen&rsquo;s spectroscopy ($18)</li>
+        <li><a href="artifacts/circuits/radio-superheterodyne-receiver.md" style="color: var(--berry-light);">Circuit: Superheterodyne AM Receiver</a> &mdash; The receiver side of the radio series. Companion to v1.2&rsquo;s transmitter ($25)</li>
+        <li><a href="artifacts/screensaver/pioneer2-screensaver.frag" style="color: #7EB8DA;">Screensaver: 4-Mode GLSL</a> &mdash; Salal berry cluster, solid rocket grain, spectral lines, chickadee hop</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Height:</span> Salal grows 0.3 to 5 meters &mdash; knee-high to head-high, never taller. Pioneer 2 reached 1,550 km &mdash; barely above the atmosphere, never beyond low Earth orbit. Both live in the understory of their respective domains.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Persistence:</span> Salal is evergreen through PNW winters, producing berries year after year even in deep shade. Pioneer 2&rsquo;s instruments kept transmitting for every one of its 45 minutes. Both work until the work is done, regardless of conditions.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">Quiet contribution:</span> Salal berries feed birds, bears, and people, but the plant is so common it goes unnoticed. Pioneer 2&rsquo;s low-altitude radiation data filled a gap that Pioneer 1&rsquo;s higher trajectory could not resolve. Invisible contributions to the larger system.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Adaptability:</span> Salal grows in full sun, full shade, and everything between &mdash; sand, clay, rocky slopes, nurse logs. Pioneer 2&rsquo;s instruments were designed to gather data wherever the spacecraft ended up, and they did, even on the wrong trajectory.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">Cultural foundation:</span> Coast Salish people harvested salal berries for thousands of years &mdash; dried into cakes, mixed with grease, a staple food. Bunsen&rsquo;s burner became the invisible tool of every chemistry lab on Earth. Foundational tools, used so widely they become invisible.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">Understory network:</span> Salal forms dense thickets that shelter seedlings, retain moisture, and create habitat for ground-nesting birds like the varied thrush. Pioneer 2&rsquo;s confirmation that two liquid stages worked reliably gave engineers confidence for all subsequent multi-stage vehicles. The thicket protects what grows inside it.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Third Stage Problem</h2>
+      <p>Three Pioneer missions. Three different failures at three different stages. Pioneer 0: first stage exploded at 77 seconds (turbopump bearing). Pioneer 1: second stage cut off 10 seconds early (accelerometer error). Pioneer 2: third stage never ignited (squib circuit fault). The program was climbing the stack, solving one stage at a time. By Pioneer 2, the first two liquid stages were fully validated &mdash; a genuine engineering achievement that would underpin every subsequent Thor-Able launch.</p>
+      <p>The ABL X-248 solid motor was a new technology in 1958 &mdash; a spin-stabilized solid rocket designed by the Allegheny Ballistics Laboratory. Solid motors have no turbopumps, no plumbing, no injectors. Once lit, they burn to completion. The challenge is lighting them. The igniter squib &mdash; a small pyrotechnic charge triggered by an electrical signal &mdash; must fire reliably in vacuum, at altitude, after surviving the vibration and acceleration of the first two stages. Pioneer 2&rsquo;s squib circuit failed, probably due to a broken wire or connector loosened during powered flight. The motor itself was sound. The lesson: reliability is a chain, and the weakest link determines the outcome.</p>
+    </div>
+
+    <div class="card">
+      <h2>The TV Camera</h2>
+      <p>Pioneer 2 carried something its predecessors did not: a television camera. It was a simple device by later standards &mdash; low resolution, slow scan &mdash; but it represented the first attempt to return visual imagery from a Pioneer spacecraft. During the 45-minute flight, the camera captured images of the Earth from altitudes up to 1,550 km. The images were crude, but they proved the concept. Visual remote sensing from space was possible on the Pioneer platform. This capability would evolve through subsequent missions until cameras became as essential to spacecraft as transmitters.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.2/index.html">&larr; v1.2 Pioneer 1</a>
+      <a href="../1.4/index.html">v1.4 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Gaultheria shallon (Salal)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">0.3-5m</div>
+          <div class="stat-label">Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">100-500</div>
+          <div class="stat-label">Berries/plant</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">6-10mm</div>
+          <div class="stat-label">Berry diameter</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Region</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The ubiquitous evergreen shrub of the PNW understory. Grows in sun, shade, sand, clay, and nurse logs. Produces dark purple berries eaten by birds, bears, and humans for millennia. Harvested commercially for the floral industry. So common it becomes invisible &mdash; like salal, like a Bunsen burner, like the ground beneath your feet.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Robert Bunsen</h3>
+      <p style="font-size:0.85rem;">March 31, 1811 &mdash; August 16, 1899</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Invented the Bunsen burner &mdash; the most ubiquitous tool in chemistry, so fundamental it is invisible. Co-invented spectroscopy with Gustav Kirchhoff, proving that every element emits a unique set of light frequencies when heated. Bunsen and Kirchhoff discovered cesium and rubidium by their spectral lines alone &mdash; elements no one had ever seen. Unassuming tools, foundational science. The Bunsen burner is to chemistry what salal is to the forest: everywhere, essential, overlooked.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (knowledge-nodes.json)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=PION2">NSSDC &mdash; Pioneer 2</a>
+      <a href="https://history.nasa.gov/SP-4524/sp4524.htm">Deep Space Chronicle (SP-4524)</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://images.nasa.gov/search?q=pioneer+2&media=image">NASA Image Library</a>
+      <a href="https://physics.nist.gov/PhysRefData/ASD/lines_form.html">NIST Atomic Spectra Database</a>
+      <a href="https://plants.usda.gov/home/plantProfile?symbol=GASH">USDA Plants &mdash; Salal</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--berry-purple);">"The thicket feeds what the canopy does not see."</p>
+</footer>
+
+</body>
+</html>

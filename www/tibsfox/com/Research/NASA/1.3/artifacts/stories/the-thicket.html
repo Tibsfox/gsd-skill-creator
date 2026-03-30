@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Thicket | Mission 1.3 — Pioneer 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0E0A16;
+    --text: #C8C0D0;
+    --accent: #6B3FA0;
+    --accent-dim: rgba(107,63,160,0.3);
+    --berry: #4A1942;
+    --salal: #3D6B3D;
+    --separator: rgba(107,63,160,0.2);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.9;
+    min-height: 100vh;
+  }
+  .story-container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .story-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--separator);
+  }
+  .story-header h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: #D8C8E8;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .story-header .subtitle {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.95rem;
+  }
+  .story-header .mission-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent-dim);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+  }
+  .story-header .mission-link:hover { background: var(--accent-dim); }
+  .story-body p {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    text-indent: 2em;
+  }
+  .story-body p:first-of-type { text-indent: 0; }
+  .story-body p em { color: #9B6FD0; }
+  .story-body .section-break {
+    text-align: center;
+    margin: 2.5rem 0;
+    color: var(--accent);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+  }
+  .dedication {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--separator);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #9B6FD0;
+  }
+  .story-footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--separator);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(200,192,208,0.4);
+  }
+  .story-footer a { color: var(--accent); text-decoration: none; }
+  @media print {
+    body { background: #fff; color: #000; }
+    .story-header .mission-link { display: none; }
+    .story-footer { display: none; }
+    .story-body p em { color: #333; }
+    .section-break { color: #666; }
+    .dedication { color: #333; }
+  }
+</style>
+</head>
+<body>
+
+<div class="story-container">
+  <div class="story-header">
+    <h1>The Thicket</h1>
+    <p class="subtitle">A short story from Mission 1.3 &mdash; Pioneer 2</p>
+    <a href="../../index.html" class="mission-link">v1.3 &mdash; NASA Mission Series</a>
+  </div>
+
+  <div class="story-body">
+    <p>I grow where nothing else will bother. I want you to understand that first. Not because I am heroic, not because I am tough in some way that deserves admiration, but because this is simply the fact of what I am. I am salal. <em>Gaultheria shallon.</em> I grow in the deep shade under the hemlocks where the light comes down in fractions of fractions, and I grow on the exposed coastal bluffs where the salt wind strips the needles from Sitka spruce, and I grow in the logged clearcuts where the soil has been scraped to mineral earth and the sun beats down without mercy. I grow on nurse logs, on roadcuts, on sand, on clay, on the north-facing slopes of the Olympics and the south-facing slopes of the Cascades and the flat boggy ground between. I grow where I am. I do not require an invitation.</p>
+
+    <p>My leaves are thick, leathery, oval, dark green on top and paler beneath, with fine teeth along the margins that you would not notice unless you held one up to the light. Each leaf persists for two to three years before it drops. I do not waste leaves. My stems are woody, branching, capable of growing upright to five meters in open sun or creeping along the ground at thirty centimeters in deep shade. The form does not matter. I fill whatever space is available. This is not ambition. It is geometry. Light is a resource and I take whatever angle on it the forest offers.</p>
+
+    <p>I am the most common shrub in the Pacific Northwest understory. I say this plainly because it is not a boast. Commonness is not a virtue or a failing. It is a measure of how well an organism fits its environment. I fit everywhere. I am background.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>On November 8, 1958 &mdash; I was past counting my own years by then, spreading rhizomes through the duff of a second-growth forest above the Snoqualmie River, replacing stems that deer had browsed, replacing leaves that winter had battered, doing the quiet work of being salal in November &mdash; a rocket launched from Cape Canaveral, Florida. It was the third attempt to send something to the Moon. They called it Pioneer 2.</p>
+
+    <p>The first two stages of the rocket worked. This was not a small thing. Two months earlier, the first Pioneer rocket had exploded at seventy-seven seconds when a turbopump bearing failed. The rocket after that, Pioneer 1, had reached 113,854 kilometers but fell short because the second stage engine cut off ten seconds early. Now, with Pioneer 2, both the Thor first stage and the Aerojet second stage burned for their full durations. Two stages, validated. Two links in the chain, proven strong.</p>
+
+    <p>The third stage was supposed to push Pioneer 2 the rest of the way. The ABL X-248 was a solid rocket &mdash; a cylinder packed with fuel grain, designed to ignite once and burn to completion. No turbopumps, no valves, no throttle. Just chemistry: a pyrotechnic squib fires an electrical pulse into the igniter charge, the igniter charge lights the main grain, and the grain burns outward from a star-shaped perforation in the center, producing thrust until the fuel is consumed. Simple. Reliable. Except the squib never fired.</p>
+
+    <p>The electrical circuit that was supposed to deliver current to the squib failed somewhere between the command and the charge. A wire shaken loose, a connector vibrated open, a solder joint cracked during the violent acceleration of the first two stages. No one knows exactly where the break was. The motor was sound. The fuel was ready. The chemistry was waiting. But the signal never arrived, and chemistry without a spark is just material sitting in the dark.</p>
+
+    <p>Pioneer 2 coasted to 1,550 kilometers on its own momentum, then fell back and burned up over northwest Africa. Forty-five minutes from launch to destruction.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>I know about the gap between the signal and the spark. I know it in the way a plant knows anything, which is through the physics of growth and the chemistry of survival.</p>
+
+    <p>Every autumn, I produce berries. They hang in clusters from the undersides of my stems, each one six to ten millimeters across, dark purple-blue when ripe, covered in a thin waxy bloom that makes them look frosted. Inside each berry are dozens of tiny seeds embedded in mealy flesh that tastes faintly sweet and faintly astringent and entirely unlike anything you would call a dessert fruit. People who eat salal berries for the first time usually say something like <em>huh</em> and then reach for another one, because the flavor is not spectacular but it is persistent. It lingers. You find yourself wanting another.</p>
+
+    <p>The Coast Salish people of this region gathered my berries for thousands of years. They mashed them into cakes, dried the cakes over low fires, and stored them for winter. Mixed with eulachon grease, salal berry cakes were a calorie-dense staple that lasted for months. The berries were not prestigious food. They were not the salmon, not the venison, not the root vegetables prepared for ceremony. They were the steady, reliable, always-available food that got people through the weeks when nothing else was producing. They were background nutrition. Infrastructure food.</p>
+
+    <p>A Bunsen burner is like this. Robert Bunsen, born March 31, 1811, did not set out to build the most important tool in chemistry. He set out to build a better gas burner for his laboratory &mdash; one that produced a clean, hot, adjustable flame without the soot and flicker of the existing designs. He succeeded. The Bunsen burner works so well that every chemistry laboratory on Earth has one, and no chemist thinks about it. It is infrastructure. It is background. It is the tool you reach for without noticing you are reaching for it.</p>
+
+    <p>What Bunsen did notice, with his clean flame, was that different substances burned in different colors. And when he and Gustav Kirchhoff built a spectroscope &mdash; a prism mounted on a goniometer, aimed at the flame &mdash; they discovered that each element produced a unique set of bright lines at specific wavelengths. Sodium: yellow doublet at 589 nanometers. Potassium: red and violet. Lithium: crimson. And two sets of lines that matched no known element: cesium (sky-blue lines) and rubidium (dark red lines). They had discovered two new elements without ever seeing them in solid form. The spectral lines were the signal. The elements were there all along, invisible, waiting for someone with a clean enough flame and a precise enough eye to read the code.</p>
+
+    <p>The signal has to reach the spark. The light has to reach the prism. The berries have to reach the bird. And sometimes the circuit fails, and the signal does not arrive, and forty-five minutes is all you get.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>Here is what Pioneer 2 did in forty-five minutes.</p>
+
+    <p>It carried a television camera. This was new. Pioneers 0 and 1 had instruments &mdash; ionization chambers, proportional counters, magnetometers &mdash; but no camera. Pioneer 2 added a TV camera to the payload, and during its brief ascent, the camera captured images. Low resolution, slow scan, grainy and ghosted by the spacecraft&rsquo;s spin, but images. Pictures of Earth from above. The first time a Pioneer spacecraft had looked back with something resembling eyes.</p>
+
+    <p>The images were not beautiful. They were not the blue marble photograph of Apollo 17 or the pale blue dot of Voyager 1. They were engineering data: proof that a spinning spacecraft could stabilize a camera signal well enough to return recognizable imagery through a 300-milliwatt link. Proof of concept. The concept being: we can see from up there.</p>
+
+    <p>I think about this the way I think about the chickadees.</p>
+
+    <p>Black-capped chickadees live in my thicket. <em>Poecile atricapillus.</em> They are small &mdash; ten to twelve centimeters, eleven grams, less than half an ounce. They move through my branches in loose flocks, hanging upside down from my stems, prying open my leaf buds to find overwintering aphids, occasionally eating my berries though they prefer insects. They have two songs that everyone in the Pacific Northwest knows without knowing they know them. The first is the <em>fee-bee</em> &mdash; two pure tones, the first higher, descending roughly a minor third, around 3,800 hertz down to 3,200 hertz. The second is their name: <em>chick-a-dee-dee-dee</em>, a complex call that serves as both alarm and social coordination, with the number of <em>dee</em> syllables encoding the threat level of a detected predator.</p>
+
+    <p>The chickadee has been here, in my thicket, for all the years I have been growing. It does not see me the way hikers see me. It does not walk past me and look up at the canopy. The chickadee sees me as architecture &mdash; a lattice of stems and leaves that provides cover from sharp-shinned hawks, a surface studded with insects, a producer of berries in autumn and shelter in winter. The chickadee sees what I actually am, which is habitat. Not scenery. Not background. Not the green stuff between the things that matter. The chickadee sees me as the thing that matters.</p>
+
+    <p>Pioneer 2&rsquo;s camera saw the Earth the way the chickadee sees me. Not as scenery, not as the pale blue backdrop to a more important mission. The camera saw what was actually there: cloud patterns, ocean surfaces, the limb of the planet curving away to black. Forty-five minutes of looking. Not enough time to reach the Moon. Enough time to see home from above for the first time through Pioneer eyes.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>The radiation instruments worked too. For forty-five minutes, the ionization chamber and proportional counter measured the radiation environment from the surface to 1,550 kilometers. This was a different dataset from Pioneer 1&rsquo;s. Pioneer 1 had climbed to 113,854 kilometers &mdash; it passed through the inner Van Allen belt quickly, spent most of its data time in the outer belt and cislunar space. Pioneer 2, stuck in its low ballistic arc, spent all of its time below 1,550 kilometers &mdash; deep inside the inner belt&rsquo;s lower boundary.</p>
+
+    <p>The inner belt begins at roughly 1,000 kilometers altitude. Pioneer 2 reached 1,550 kilometers. This means it measured the onset of the belt &mdash; the transition zone where trapped proton flux rises from near-background levels to the intense environment that had saturated Pioneer 1&rsquo;s instruments at higher altitudes. Pioneer 2&rsquo;s data resolved the lower edge of the inner belt with detail that Pioneer 1 could not provide, because Pioneer 1 had been moving too fast through that altitude range, climbing toward higher things.</p>
+
+    <p>I know about being the one who maps the lower edge. I am the lower edge. My canopy is the forest&rsquo;s floor. Above me, the sword ferns reach to waist height. Above them, the vine maples and red huckleberry. Above those, the understory conifers &mdash; young hemlocks, shade-tolerant redcedars. And above all of those, the canopy: Douglas-fir, Sitka spruce, western redcedar, the tall ones. I am at the bottom of this stack. I am where the light is dimmest and the resources are thinnest and the competition is most desperate. I map the floor because the floor is where I live.</p>
+
+    <p>But the floor is information. The radiation profile at 1,000 to 1,550 kilometers tells you where the belt begins, how steeply the flux rises, what altitude you can safely orbit below. This matters for every satellite that flies in low Earth orbit &mdash; and that is most of them. The International Space Station orbits at 400 kilometers, well below the belt. GPS satellites orbit at 20,200 kilometers, above the inner belt and in the slot between inner and outer. Communication satellites orbit at 35,786 kilometers, in or above the outer belt. Every one of those orbits was chosen with knowledge of the radiation profile. And the low-altitude end of that profile &mdash; the part that tells you where &ldquo;safe&rdquo; ends and &ldquo;radiation hazard&rdquo; begins &mdash; was mapped, in part, by a spacecraft that flew for forty-five minutes because its third stage never ignited.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>People harvest my leaves. I should tell you this because it is the strangest part of my existence. Not the berries &mdash; the leaves. Every year, commercial harvesters come into the forests of Washington and Oregon and cut my stems by the thousands. They bundle them, box them, truck them to warehouses, and ship them to florists around the world. My leaves end up in flower arrangements. The thick, dark, glossy foliage that I grew to survive deep shade becomes the backdrop for roses and lilies in vases on tables in restaurants and hotel lobbies and wedding receptions in cities where no salal has ever grown.</p>
+
+    <p>The floral industry calls it &ldquo;lemon leaf&rdquo; or &ldquo;salal tips.&rdquo; The harvesters call it &ldquo;brush.&rdquo; I call it nothing, because I am a plant and I do not call things, but if I could, I would observe that being harvested for my foliage is the most accurate possible description of what I am: background. Literally. The florist uses my leaves as the green background against which the featured flowers are displayed. I am the dark canvas. The roses are the painting.</p>
+
+    <p>I grow back. This is the other thing. They harvest my stems in autumn and winter, cutting them back to the ground or close to it, and by the following summer I have sent up new shoots from my rhizomes and the thicket is full again. I have been harvested from the same patches for decades. The same rootstock, producing new stems, new leaves, new material for the florists. I am a perennial production system. I am infrastructure that renews itself.</p>
+
+    <p>Pioneer 2&rsquo;s Air Force heritage was like that. The Air Force Ballistic Missile Division had managed all three Pioneer attempts. Pioneer 2 was the last. After this, NASA took full control. The AFBMD engineers moved on to other projects &mdash; ICBMs, military satellites, the programs that the Cold War demanded. But the engineering they had developed &mdash; the Thor booster, the Able upper stage, the integration procedures, the tracking network coordination &mdash; all of that persisted. NASA used Thor-Able for subsequent missions. The Air Force&rsquo;s investment in launch vehicle technology fed the civilian space program the way my rhizomes feed new stems. The institution that built Pioneer 2 stopped building Pioneers, but the root system kept producing.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>A black-capped chickadee is calling from my upper branches. <em>Fee-bee. Fee-bee.</em> Two pure tones, descending. The call carries through the thicket, bouncing off my leaves, absorbed by the duff, arriving at the ears of other chickadees muted and directional enough that each bird knows approximately where the caller is. My thicket is their acoustic architecture. The density of my stems and the arrangement of my leaves shape the sound field the way a concert hall shapes music. I am the venue. The chickadee is the performer.</p>
+
+    <p>Now the alarm call: <em>chick-a-dee-dee-dee-dee.</em> Four <em>dee</em> syllables. That means the threat is moderate &mdash; probably a sharp-shinned hawk perched nearby, not a direct attack but a presence that requires vigilance. If the threat were small &mdash; a large hawk at a distance, dangerous but not immediate &mdash; there would be two <em>dee</em> syllables. If the threat were extreme &mdash; a pygmy owl, the most dangerous predator relative to a chickadee&rsquo;s size &mdash; there would be ten or twelve <em>dee</em> syllables, a frantic concatenation that brings every bird in the area to mob the predator.</p>
+
+    <p>The chickadee has encoded threat level into syllable count. This is data. This is telemetry. A ground station listening to Pioneer 2&rsquo;s 108.06 MHz signal received pulse-code-modulated data at 64.8 bits per second. A chickadee listening to an alarm call receives threat data at roughly two to twelve syllables per call, each syllable a discrete unit of information modulating the baseline call. Different encoding. Same principle: information transmitted across distance, structured so the receiver knows what to do.</p>
+
+    <p>Pioneer 2 transmitted for forty-five minutes. The chickadee transmits for a season, then falls silent for the winter &mdash; though chickadees are among the few songbirds that remain in the PNW year-round, their calling rate drops in the cold months. I produce berries for six weeks in late summer, and then the fruit is gone, and the stems hold only leaves and next year&rsquo;s buds. Everything transmits for its duration and then is quiet. The question is not how long the transmission lasts. The question is whether anyone is listening.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>Someone was listening to Pioneer 2. The data was received, recorded, analyzed. The radiation profile, the magnetic field measurements, the TV images. Forty-five minutes of telemetry, carefully captured by the tracking stations, written to tape, filed, studied. And then, largely, forgotten. Pioneer 2 is the least remembered of the Pioneer series. It did not have Pioneer 1&rsquo;s dramatic 43-hour arc through the Van Allen belts. It did not have the explosive violence of Pioneer 0&rsquo;s 77-second failure. It simply went up, fell down, and stopped. A brief parenthesis in a larger sentence.</p>
+
+    <p>I understand brief parentheses. Each of my berries persists on the stem for perhaps three weeks before it is eaten by a bird or falls to the ground. Three weeks of being a berry. The plant has been growing for decades, will continue growing for decades more. The berry is a three-week parenthesis. But inside that berry are seeds, and inside those seeds is the genetic information for the next generation of salal, and if the berry is eaten by a varied thrush or a Swainson&rsquo;s thrush or a cedar waxwing, the seeds pass through the bird&rsquo;s gut and land somewhere else in the forest, scarified by stomach acid, ready to germinate. The three-week parenthesis is the entire point.</p>
+
+    <p>Forty-five minutes was the entire point. Not because Pioneer 2 accomplished its mission &mdash; it did not. But because those forty-five minutes proved that a three-stage rocket could get its first two stages right, proved that a TV camera could return images from altitude, and proved that the inner belt&rsquo;s lower boundary could be mapped from a low trajectory. Three data points, gathered in the parenthesis between launch and destruction, carried forward into every subsequent design.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>The Bunsen burner is the simplest thing in the laboratory. A metal tube, a gas inlet, an air vent, a flame. It has not changed in any fundamental way since Bunsen designed it in 1855. It does not need to change. Its job is to produce a clean, hot flame on demand, and it does this job with the absolute minimum of mechanism. No electronics. No moving parts except the air vent collar. Gas goes in, flame comes out. That is all.</p>
+
+    <p>Spectroscopy came from that flame. The understanding that every element speaks in its own language of light came from putting substances into Bunsen&rsquo;s clean flame and looking at them through Kirchhoff&rsquo;s prism. The foundation of astrophysics &mdash; the ability to determine what stars are made of by analyzing their spectra &mdash; came from a tool so ordinary that chemistry students forget it exists. They use it to heat beakers. They barely glance at the flame. They do not think about the fact that the color of the flame is data, is language, is the signature of elements crying out their identities in wavelengths of light.</p>
+
+    <p>I am the Bunsen burner of the forest. I am the salal of the understory. I produce my berries and my leaves and my stems in the same quiet way I have produced them for as long as this forest has existed in its current form, which is about eight thousand years since the last glacial retreat. I do not change because I do not need to change. My job is to grow, to hold soil, to feed birds and bears and people, to shelter seedlings and insects and the small ground-nesting birds that depend on dense shrub cover. Gas goes in, flame comes out. Light goes in, berries come out. That is all.</p>
+
+    <p>But if you look at me through the right prism &mdash; if you know what to look for &mdash; you see that I am speaking. My berries encode sugar content that maps to the soil chemistry beneath me. My leaf thickness encodes the light environment I grew in. My stem diameter encodes the competition pressure from neighboring plants. My root depth encodes the water table. Every part of me is data, structured by the physics of growth, available to anyone who looks carefully enough.</p>
+
+    <p>Pioneer 2 spoke for forty-five minutes in the language of radiation counts and magnetic field vectors and television scan lines. Bunsen&rsquo;s flame speaks perpetually in the language of spectral lines. I speak in the language of growth form and fruit set and leaf morphology. The transmissions are different. The principle is the same: matter and energy, shaped by physics, readable by those who learn the code.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>The third stage never fired. I come back to this because it is the center of the story, the thing that makes Pioneer 2 what it is instead of what it was supposed to be.</p>
+
+    <p>A solid rocket motor is the simplest propulsion system. Fuel and oxidizer combined in a solid grain, shaped with internal perforations that control the burn rate. Once ignited, it burns until the fuel is gone. There is no throttle, no shutdown command, no restart. The only decision point is the ignition: fire or not. The squib either delivers its spark or it does not. The circuit either conducts or it does not. A single binary choice, and Pioneer 2&rsquo;s circuit chose not.</p>
+
+    <p>I have seen trees that failed to germinate because their seed landed on bare rock instead of soil. I have seen seedlings that failed to establish because a slug ate their first true leaves. I have seen my own stems fail to produce berries in years when a late frost killed the flowers. Failure is not unusual. Failure is the background rate of biological processes. Most spores do not germinate. Most seeds do not grow. Most berries do not produce new plants. The system works because the numbers are large enough that the small percentage of successes keeps the population going.</p>
+
+    <p>Pioneer 0, Pioneer 1, Pioneer 2: three attempts, zero lunar orbits. But each failure was different, and each failure fixed a different problem. Pioneer 0 proved the first-stage turbopump needed redesign. Pioneer 1 proved the guidance accelerometer calibration was wrong. Pioneer 2 proved the third-stage ignition circuit needed better vibration protection. Three failures, three lessons, three links in a chain of understanding that led to the first successful deep space missions.</p>
+
+    <p>The thicket grows by sending up stems and losing stems. Some stems thrive, some are browsed, some are broken by falling branches, some die back in hard winters. The thicket does not depend on any single stem. It depends on the rhizome network underground, the root system that sends up stem after stem after stem until enough of them survive to maintain the canopy cover. Three Pioneers failed. The rhizome kept producing.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>It is November in the Snoqualmie valley. The rain is steady, the light is failing, the berries are gone. My leaves are dark and wet and glistening in the dim afternoon. A chickadee is foraging through my stems, probing for dormant insects in the crevices of my bark. The bird weighs eleven grams. My entire above-ground biomass weighs perhaps fifteen kilograms. The bird uses me as a grocery store. I do not mind. The bird will eat my berries next September and deposit the seeds elsewhere in the forest. The transaction is ancient and fair.</p>
+
+    <p>Somewhere above the clouds, above the rain, above the atmosphere, 1,550 kilometers up, is the altitude where Pioneer 2 reached its peak and began falling back. There is nothing there now except the radiation environment that Pioneer 2 briefly measured. The inner Van Allen belt, its lower boundary, the zone where trapped protons begin to accumulate in the magnetic field lines. Invisible, dangerous to electronics and astronauts, mapped in part by a spacecraft that existed for forty-five minutes and a plant that has existed for longer than the forest it lives in.</p>
+
+    <p>I do not reach the canopy. I do not reach the Moon. I grow in the thicket, in the shade, in the gap between the soil and the understory, and I produce my berries and shed my leaves and send up new stems from roots that have been in the ground since before the oldest Douglas-fir in this stand germinated. I am not the rocket. I am not the mission. I am the thicket that the rocket launched from and the thicket that the data landed in. I am the ground. I am the background. I am the dark purple berry that nobody photographs but everybody eats.</p>
+
+    <p>Forty-five minutes. Three weeks of berries. A hundred and fifty years of growth. The duration does not matter. What matters is whether the signal reaches the receiver, whether the berry reaches the bird, whether the data reaches the tape. What matters is whether the work gets done in the time available, however brief, however overlooked, however far short of the intended destination.</p>
+
+    <p>The thicket feeds what the canopy does not see.</p>
+
+    <p>I feed.</p>
+  </div>
+
+  <p class="dedication">For Robert Bunsen (March 31, 1811 &mdash; August 16, 1899), who built the simplest tool in the laboratory and from its flame read the language of the elements.</p>
+
+  <div class="story-footer">
+    <p>NASA Mission Series v1.3 &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a></p>
+    <p>Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  </div>
+</div>
+
+</body>
+</html>
