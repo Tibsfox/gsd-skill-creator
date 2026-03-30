@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.8 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --solar-deep: #1A1005;
+    --solar-mid: #2A1A08;
+    --solar-gold: #D4A830;
+    --solar-bright: #E8C860;
+    --grapefruit: #E8A020;
+    --grapefruit-dim: #8A6018;
+    --fern-green: #5A8A5A;
+    --fern-dark: #2A4A2A;
+    --bark-brown: #4A3420;
+    --space-deep: #050508;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #3A2A10;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space-deep); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(212,168,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(138,96,24,0.06) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(232,192,96,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(90,138,90,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(74,52,32,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(212,168,48,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--solar-gold); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--solar-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space-deep) 0%, var(--solar-deep) 25%, var(--solar-mid) 50%, var(--grapefruit-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--solar-gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,48,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,48,0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(212,168,48,0.12); border: 1px solid var(--solar-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--solar-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(212,168,48,0.15); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--solar-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--solar-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--solar-gold); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--solar-bright); }
+  .prose em { color: var(--fern-green); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--grapefruit-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,8,0.5); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(212,168,48,0.1); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--solar-gold); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; }
+  .prose pre { background: rgba(5,5,8,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--solar-gold); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(212,168,48,0.08); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--solar-gold); }
+  .prose pre code { background: none; padding: 0; }
+  .sources-section { background: rgba(5,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources-section h2 { border-bottom-color: var(--grapefruit-dim); }
+  .sources-section h3 { color: var(--solar-gold); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+  .nav-card { background: rgba(5,5,8,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--solar-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--solar-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--solar-gold); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.8 Vanguard 1</a> <span class="sep">/</span> Curriculum
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.8</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department deposits, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Energy/Solar, Geodesy, Engineering</span>
+      <span><span class="label">Secondary:</span> Botany/Ferns, Mathematics, Space Science</span>
+      <span><span class="label">Mission:</span> Vanguard 1</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>Department Deposits</h2>
+
+    <h3>Energy / Solar (Primary)</h3>
+
+    <p><strong>Wing:</strong> Photovoltaic Power Systems for Spacecraft</p>
+    <p><strong>Concept:</strong> The first use of solar cells to power a satellite &mdash; how six small silicon cells demonstrated that spacecraft could operate indefinitely without batteries</p>
+
+    <p><strong>Deposit:</strong> Vanguard 1 carried two independent power and transmitter systems: a mercury battery powering a 10 mW transmitter on 108.00 MHz, and six silicon solar cells powering a 5 mW transmitter on 108.03 MHz. The batteries were expected to last approximately 3 months, and they did &mdash; the battery transmitter fell silent in June 1958. The solar cells were an experiment within an experiment, included at the suggestion of Dr. Hans Ziegler of the Army Signal Corps, who had argued since 1954 that solar cells could provide reliable spacecraft power:</p>
+
+    <ul>
+      <li>The solar cells were fabricated by Bell Telephone Laboratories, the same laboratory where Chapin, Fuller, and Pearson had demonstrated the first practical silicon solar cell in 1954 (6% efficiency, reported in the Journal of Applied Physics). Vanguard 1&rsquo;s cells were 2 cm x 1 cm, single-crystal silicon, p-n junction type, with efficiency of approximately 5&ndash;6%</li>
+      <li>The cells were mounted directly on the spherical aluminum shell of the spacecraft, distributed to ensure that at least 2&ndash;3 cells were illuminated at any spacecraft orientation. Because Vanguard 1 was spherical and spinning, the illumination averaged over all orientations, providing roughly constant (though low) power</li>
+      <li>Total solar power output: approximately 1&ndash;2 mW in sunlight (varying with sun angle and cell temperature). This was enough to power the 5 mW transmitter at reduced duty cycle &mdash; the transmitter operated in bursts rather than continuously, storing solar energy in a small capacitor between transmissions</li>
+      <li>The solar cells had no radiation shielding. They were exposed directly to the space radiation environment (trapped protons in the inner Van Allen belt, solar protons, cosmic rays). Proton irradiation causes displacement damage in the silicon crystal lattice, creating recombination centers that reduce minority carrier lifetime and thus cell efficiency</li>
+      <li>Despite the radiation damage, the solar-powered transmitter continued to function until May 1964 &mdash; six years after launch, outlasting the battery transmitter by a factor of 20. The signal strength decreased gradually over this period, consistent with progressive radiation damage to the cells</li>
+      <li>The demonstration was conclusive: solar power works in space. Every major communications satellite, weather satellite, Earth observation satellite, space station, and interplanetary probe launched since has used solar cells. The ISS generates 120 kW from solar arrays covering 2,500 m<sup>2</sup>. Vanguard 1 generated 1 mW from 30 cm<sup>2</sup>. The technology scales by a factor of 120 million. The principle &mdash; photovoltaic conversion of sunlight in vacuum &mdash; is identical</li>
+    </ul>
+
+    <p>The energy department lesson: Vanguard 1 proved that the sun is a viable power source for spacecraft. This was not obvious in 1958. Solar cells were expensive ($286 per watt in 1956 dollars), fragile, and unproven in the space environment. Many engineers favored nuclear power (RTGs) for long-duration missions. Ziegler&rsquo;s advocacy for solar cells was controversial. Vanguard 1 settled the debate by demonstration: the solar transmitter outlived the battery transmitter by a factor of 20. The cost argument became irrelevant when the alternative was silence.</p>
+
+    <hr>
+
+    <h3>Geodesy / Earth Science (Primary)</h3>
+
+    <p><strong>Wing:</strong> Satellite Geodesy and the Shape of the Earth</p>
+    <p><strong>Concept:</strong> How tracking a satellite&rsquo;s orbit reveals the gravitational field of the planet it orbits &mdash; Vanguard 1 as the first gravitational test mass</p>
+
+    <p><strong>Deposit:</strong> Vanguard 1 carried no geodesy instruments. It had no altimeter, no gravimeter, no GPS receiver (GPS did not exist). Its contribution to geodesy was entirely passive: it existed as a trackable object in a known orbit, and deviations of that orbit from a perfect Keplerian ellipse contained information about Earth&rsquo;s gravitational field:</p>
+
+    <ul>
+      <li>Ground stations (Minitrack network) tracked Vanguard 1&rsquo;s radio transmissions to determine its position along its orbit with an accuracy of approximately 1 km. Over hundreds of orbits spanning months, the accumulated tracking data built a dense map of the satellite&rsquo;s actual trajectory</li>
+      <li>A purely elliptical orbit (Keplerian) would result if Earth were a perfect sphere with uniform density. Real Earth is not: it is oblate (wider at the equator), has mountains and ocean trenches, and has a non-uniform internal density distribution. Each departure from perfect spherical symmetry causes a specific perturbation to the orbit</li>
+      <li>The dominant perturbation is from J<sub>2</sub> (oblateness): the equatorial bulge causes the orbital plane to precess around Earth&rsquo;s axis (nodal regression) and the orbit&rsquo;s long axis to rotate within the orbital plane (apsidal precession). These effects were well known before Vanguard 1</li>
+      <li>The J<sub>3</sub> discovery: after accounting for J<sub>2</sub>, O&rsquo;Keefe, Eckels, and Squires found systematic residuals that were antisymmetric about the equator &mdash; the satellite arrived at predicted positions consistently early in one hemisphere and late in the other. This pattern matched the signature of a third-degree zonal harmonic (J<sub>3</sub>), which describes a pear-shaped departure from oblate symmetry. They determined J<sub>3</sub> = -2.54 x 10<sup>-6</sup>, indicating that the southern hemisphere&rsquo;s geoid extends approximately 15 meters farther from Earth&rsquo;s center than the northern hemisphere&rsquo;s geoid</li>
+      <li>This discovery &mdash; that Earth is pear-shaped &mdash; was Vanguard 1&rsquo;s primary scientific legacy. It could not have been made from the ground because ground-based geodesy cannot cover the oceans (70% of Earth&rsquo;s surface). Only a satellite, flying over the entire planet, could sense the global gravitational field with enough coverage to detect a 15-meter asymmetry</li>
+    </ul>
+
+    <hr>
+
+    <h3>Engineering (Primary)</h3>
+
+    <p><strong>Wing:</strong> Vanguard Launch Vehicle and Miniaturization Engineering</p>
+    <p><strong>Concept:</strong> The engineering of the smallest, lightest satellite &mdash; and the launch vehicle that finally worked after two public failures</p>
+
+    <p><strong>Deposit:</strong> The Vanguard program was the Naval Research Laboratory&rsquo;s (NRL) satellite project, selected in 1955 as the official US contribution to the International Geophysical Year. Unlike Explorer 1 (which used a modified military missile), Vanguard was designed from the start as a civilian scientific launch vehicle:</p>
+
+    <ul>
+      <li>Stage 1: GE X-405 liquid-fueled engine, burning kerosene and liquid oxygen, 27,000 pounds of thrust. This was a new engine, not a military missile derivative</li>
+      <li>Stage 2: Aerojet AJ10-37 liquid-fueled engine, burning UDMH and WFNA (white fuming nitric acid), 7,500 pounds of thrust</li>
+      <li>Stage 3: Grand Central Rocket Company solid motor, 2,350 pounds of thrust</li>
+      <li>Total height: 21.9 meters. Total mass at launch: 10,250 kg. Payload to orbit: 9.8 kg (of which the satellite was 1.47 kg)</li>
+      <li>Vanguard TV-3 exploded on the launch pad on December 6, 1957, two months after Sputnik 1, in front of live television cameras. The US press called it &ldquo;Flopnik,&rdquo; &ldquo;Kaputnik,&rdquo; and &ldquo;Stayputnik.&rdquo; It was a national humiliation</li>
+      <li>Vanguard TV-3BU (backup) failed on February 5, 1958, five days after Explorer 1 succeeded, when the vehicle broke up at 57 seconds after launch</li>
+      <li>Vanguard TV-4 (redesignated SLV-4) succeeded on March 17, 1958, placing the 1.47 kg Vanguard 1 into a 654 x 3,969 km orbit. Of the 11 Vanguard launch attempts, only 3 succeeded (27% success rate)</li>
+      <li>The satellite itself was an engineering marvel of miniaturization: 1.47 kg total mass in a 16.5 cm diameter aluminum sphere containing two transmitters, two power systems (battery + solar), six temperature sensors, and the antenna system. The mass budget was ruthless &mdash; the entire satellite weighed less than a bag of sugar</li>
+      <li>The high perigee (654 km vs Explorer 1&rsquo;s 358 km) was a consequence of the Vanguard rocket&rsquo;s trajectory design and proved to be scientifically fortuitous: the high perigee minimized atmospheric drag, giving Vanguard 1 a predicted orbital lifetime of 240+ years. Explorer 1 re-entered in 12 years. Vanguard 1 will outlast it by a factor of 20</li>
+    </ul>
+
+    <hr>
+
+    <h3>Botany / Ferns (Secondary)</h3>
+
+    <p><strong>Wing:</strong> <em>Polypodium glycyrrhiza</em> &mdash; The Epiphyte</p>
+    <p><strong>Concept:</strong> Licorice fern as a persistent epiphyte that draws energy from its host surface, mirroring Vanguard 1 as a persistent satellite drawing energy from sunlight on its surface &mdash; both are small organisms clinging to something vastly larger</p>
+
+    <p><strong>Deposit:</strong> <em>Polypodium glycyrrhiza</em> (licorice fern) is an epiphytic fern native to the Pacific Northwest, growing on the bark and moss mats of trees &mdash; primarily bigleaf maple (<em>Acer macrophyllum</em>), red alder (<em>Alnus rubra</em>), and occasionally on rocks and rotting logs. It is the mission 1.8 paired organism because it shares a fundamental pattern with Vanguard 1: persistent survival through resource efficiency on the surface of a much larger body.</p>
+
+    <ul>
+      <li><em>P. glycyrrhiza</em> is a true epiphyte in the Pacific Northwest &mdash; it grows on tree bark without parasitizing the tree, obtaining water from rain and fog and nutrients from decomposing organic matter trapped in bark crevices. It has no soil, no deep roots, no mineral substrate. It survives on what arrives at its surface</li>
+      <li>The fern is deciduous in summer &mdash; an unusual reversal of the typical plant calendar. It produces new fronds in autumn when Pacific Northwest rains begin, grows actively through the wet winter months, and allows its fronds to desiccate and die back in the dry summer. This phenology is exactly opposite to most ferns and perfectly adapted to the PNW maritime climate where winter is wet and summer is dry</li>
+      <li>The rhizome (underground stem) persists for decades on the same branch, surviving repeated cycles of growth and desiccation. The rhizome has a distinctive licorice-like flavor (hence the common name) due to the presence of the triterpenoid osladin, which is approximately 3,000 times sweeter than sucrose. Indigenous peoples of the Pacific Northwest, including the Coast Salish, chewed the rhizomes and used them medicinally</li>
+      <li>The fern tolerates complete desiccation of its fronds &mdash; they curl tightly against the rhizome during dry periods and rehydrate within hours when moisture returns. This desiccation tolerance is the biological analog of Vanguard 1&rsquo;s operational cycle: the solar transmitter powered up in sunlight and fell silent in shadow, cycling between active and dormant states every orbit</li>
+      <li>Distribution: abundant in the fog belt of coastal British Columbia, Washington, and Oregon, extending into northern California. Common at low elevations (sea level to 600 m) in forests with adequate moisture. Often found growing in thick mats on the north-facing branches of large bigleaf maples, where bark accumulates moss that retains moisture and provides a substrate for the fern&rsquo;s rhizome</li>
+    </ul>
+
+    <p>The connection to Vanguard 1 is in the survival strategy: both the fern and the satellite are small, persistent, surface-dwelling organisms that outlast expectations by minimizing resource requirements. Vanguard 1 needs only 1 mW of solar power to transmit. <em>P. glycyrrhiza</em> needs only fog moisture and bark decomposition products to grow. Both can tolerate resource interruption (shadow, dry spells) by entering dormancy. Both persist for decades on the surface of something much larger. The fern on the maple branch, the satellite in orbit &mdash; neither is going anywhere.</p>
+
+    <hr>
+
+    <h3>Mathematics (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Spherical Harmonics and Legendre Polynomials</p>
+    <p><strong>Concept:</strong> The mathematical language for describing the shape of any nearly spherical body &mdash; how Legendre polynomials decompose Earth&rsquo;s gravitational field into components of increasing spatial frequency</p>
+
+    <p><strong>Deposit:</strong> Vanguard 1&rsquo;s geodesy contribution is expressed in the language of spherical harmonics &mdash; a mathematical framework for describing functions on the surface of a sphere, analogous to Fourier series for functions on a line:</p>
+
+    <ul>
+      <li>Fourier series decomposes a periodic function into sine and cosine components of increasing frequency. Spherical harmonics decompose a function on a sphere into components of increasing angular resolution</li>
+      <li>The zonal harmonics (J<sub>n</sub> terms) depend only on latitude (colatitude theta), not longitude. They are described by Legendre polynomials P<sub>n</sub>(cos theta). The first few: P<sub>0</sub> = 1 (constant, the sphere), P<sub>1</sub> = cos theta (center-of-mass offset, zero by convention), P<sub>2</sub> = (3 cos<sup>2</sup> theta - 1)/2 (oblateness), P<sub>3</sub> = (5 cos<sup>3</sup> theta - 3 cos theta)/2 (pear shape)</li>
+      <li>Each successive term adds finer spatial detail to the shape description. J<sub>2</sub> tells you the equatorial bulge (scale ~6,400 km). J<sub>3</sub> tells you the north-south asymmetry (scale ~4,300 km). J<sub>4</sub> tells you whether the poles and equator are pointed or flat (scale ~3,200 km). Modern gravity models include terms up to degree 2160, resolving features as small as 10 km</li>
+      <li>The Legendre polynomials are orthogonal: the integral of P<sub>m</sub> * P<sub>n</sub> over the sphere is zero for m != n. This means each harmonic coefficient can be determined independently &mdash; J<sub>3</sub> does not contaminate the determination of J<sub>2</sub>, and vice versa. The orthogonality is why O&rsquo;Keefe could extract J<sub>3</sub> from the tracking residuals after removing the J<sub>2</sub> effect</li>
+      <li>Rosetta connection: spherical harmonics appear in quantum mechanics (electron orbitals are spherical harmonics), acoustics (vibration modes of a spherical shell), electrostatics (multipole expansion of charge distributions), and computer graphics (spherical harmonic lighting). The mathematics is identical in each domain. Vanguard 1&rsquo;s geodesy is quantum mechanics without the quantum &mdash; the same Legendre polynomials, the same orthogonality, the same decomposition into angular modes</li>
+    </ul>
+
+    <hr>
+
+    <h3>Space Science (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Orbital Mechanics and Long-Duration Spaceflight</p>
+    <p><strong>Concept:</strong> How orbital altitude determines mission lifetime &mdash; the exponential relationship between perigee height and atmospheric drag that makes Vanguard 1 effectively permanent</p>
+
+    <p><strong>Deposit:</strong> Vanguard 1 will orbit for 240+ years because its perigee altitude (654 km) places it above the significant atmosphere. The space science lesson is in the exponential:</p>
+
+    <ul>
+      <li>Atmospheric density decreases exponentially with altitude: rho(h) = rho<sub>0</sub> * exp(-(h - h<sub>0</sub>)/H), where H is the scale height (~8 km at sea level, ~60 km at 650 km altitude)</li>
+      <li>At 358 km (Explorer 1&rsquo;s perigee): rho ~ 5 x 10<sup>-12</sup> kg/m<sup>3</sup>. Enough drag to cause re-entry in 12 years</li>
+      <li>At 654 km (Vanguard 1&rsquo;s perigee): rho ~ 1.2 x 10<sup>-14</sup> kg/m<sup>3</sup>. Approximately 400 times less dense. Drag is negligible on human timescales</li>
+      <li>The exponential sensitivity means that small changes in perigee altitude produce enormous changes in lifetime. Raising Explorer 1&rsquo;s perigee by 296 km (from 358 to 654) would have extended its lifetime from 12 years to 240+ years &mdash; a factor of 20</li>
+      <li>Solar cycle effects: atmospheric density at 654 km varies by a factor of 5&ndash;10 between solar minimum and solar maximum. During solar maximum, increased UV and EUV heating expands the upper atmosphere, raising the density at Vanguard 1&rsquo;s perigee and increasing drag. The satellite&rsquo;s long-term decay rate is modulated by the 11-year solar cycle. Over 240 years, it will experience approximately 22 solar cycles, and the cumulative effect of drag during solar maxima will eventually lower the perigee into denser air, initiating a terminal spiral</li>
+      <li>Vanguard 1 has been tracked continuously since 1958 &mdash; longer than any other satellite. Its orbital elements are known to extraordinary precision. It has been used as a reference object for testing orbital mechanics models, atmospheric density models, and solar radiation pressure models. The satellite that does nothing is the most useful satellite for orbit determination research</li>
+    </ul>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Build a Solar-Powered Sensor</h3>
+
+    <p><strong>Duration:</strong> 2&ndash;3 hours<br>
+    <strong>Difficulty:</strong> Beginner-Intermediate<br>
+    <strong>Department:</strong> Energy / Electronics<br>
+    <strong>What You Need:</strong> Arduino Uno ($15&ndash;25), small solar cell 5V/200mA ($3&ndash;5), 1000 uF electrolytic capacitor ($0.50), LDR (light-dependent resistor, $0.50), 10K resistor ($0.10), LED ($0.25), breadboard + wires ($5). Total: ~$25&ndash;35.</p>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> How solar cells convert light to electricity, how illumination angle affects power output, and how to build a sensor system that operates from solar power alone &mdash; no batteries, exactly like Vanguard 1&rsquo;s solar transmitter operated after the batteries died.</p>
+
+    <p><strong>Entry Conditions:</strong></p>
+    <ul>
+      <li>Arduino IDE installed</li>
+      <li>All components on hand</li>
+      <li>A sunny window or desk lamp</li>
+      <li>Python 3.8+ installed (for analysis)</li>
+    </ul>
+
+    <p><strong>The Exercise:</strong></p>
+
+    <p><strong>Step 1: Build the solar power supply</strong></p>
+
+<pre><code>CIRCUIT:
+
+Solar cell (+) &rarr; 1000 uF capacitor (+)
+Solar cell (-) &rarr; capacitor (-) &rarr; GND
+Capacitor (+) &rarr; Arduino VIN (or 5V rail if cell is 5V regulated)
+Capacitor (-) &rarr; Arduino GND
+
+The capacitor acts as an energy buffer &mdash; it charges during
+sunlight and provides burst power for Arduino operations.
+This is exactly how Vanguard 1 worked: solar cells charged
+a capacitor, transmitter fired in bursts from stored energy.
+
+LDR + 10K voltage divider &rarr; Arduino A0 (measures light level)
+LED &rarr; Arduino pin D13 through 220-ohm resistor (indicates activity)</code></pre>
+
+    <p><strong>Step 2: Upload the solar sensor sketch</strong></p>
+
+<pre><code>// solar_sensor_vanguard1.ino
+// Solar-powered light sensor -- Vanguard 1 tribute
+// Measures illumination angle effect on solar power
+
+const int LDR_PIN = A0;
+const int LED_PIN = 13;
+const int SUPPLY_PIN = A1;  // measure VIN through voltage divider
+
+unsigned long lastReport = 0;
+unsigned long sampleCount = 0;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT);
+  Serial.println("VANGUARD 1 SOLAR SENSOR");
+  Serial.println("=======================");
+  Serial.println("time_s,light_raw,voltage_mV,power_est_mW");
+}
+
+void loop() {
+  if (millis() - lastReport &gt;= 1000) {
+    int light = analogRead(LDR_PIN);
+    int supply = analogRead(SUPPLY_PIN);
+
+    // Estimate supply voltage (with voltage divider)
+    float voltage_mV = supply * (5000.0 / 1023.0) * 2;  // adjust for divider
+
+    // Estimate solar power (rough: V * I_typical for panel size)
+    float power_est = voltage_mV * 0.04;  // ~40mA typical at this voltage
+
+    // Blink LED to show activity (like Vanguard 1's transmitter bursts)
+    digitalWrite(LED_PIN, HIGH);
+    delay(50);
+    digitalWrite(LED_PIN, LOW);
+
+    Serial.print(millis() / 1000);
+    Serial.print(",");
+    Serial.print(light);
+    Serial.print(",");
+    Serial.print(voltage_mV, 0);
+    Serial.print(",");
+    Serial.println(power_est, 2);
+
+    lastReport = millis();
+    sampleCount++;
+  }
+}</code></pre>
+
+    <p><strong>Step 3: Measure the cosine law</strong></p>
+
+    <p>Place the solar cell flat on a table. Hold a desk lamp directly above it (theta = 0 degrees). Record the voltage reading. Then tilt the cell (or move the lamp) in 15-degree increments from 0 to 90 degrees. Record the voltage at each angle.</p>
+
+<pre><code># analyze_cosine_law.py
+import numpy as np
+
+# Paste your angle vs voltage data here
+angles_deg = [0, 15, 30, 45, 60, 75, 90]
+voltages_mV = []  # fill with your measurements
+
+angles_rad = np.radians(angles_deg)
+cos_values = np.cos(angles_rad)
+
+# Normalize to the 0-degree reading
+V_0 = voltages_mV[0]
+V_normalized = [v / V_0 for v in voltages_mV]
+
+print("SOLAR CELL COSINE LAW")
+print("=====================")
+print(f"{'Angle':&gt;8} | {'cos(theta)':&gt;10} | {'V/V_0':&gt;8} | {'Match?':&gt;8}")
+print(f"{'-'*42}")
+for i, angle in enumerate(angles_deg):
+    match = "YES" if abs(V_normalized[i] - cos_values[i]) &lt; 0.1 else "NO"
+    print(f"{angle:&gt;6} deg | {cos_values[i]:&gt;10.3f} | "
+          f"{V_normalized[i]:&gt;8.3f} | {match:&gt;8}")
+
+print(f"\nVANGUARD 1 CONNECTION:")
+print(f"Your solar cell follows the cosine law.")
+print(f"Vanguard 1's 6 cells, mounted on a spinning sphere,")
+print(f"averaged this cosine over all orientations.")
+print(f"Average cos(theta) over a hemisphere = 0.637")
+print(f"So average power = 63.7% of maximum.")
+print(f"That slim margin kept the transmitter alive for 6 years.")</code></pre>
+
+    <p><strong>Step 4: Observe intermittent operation</strong></p>
+
+    <p>Cover the solar cell with your hand (simulating shadow/eclipse). Watch the Arduino lose power as the capacitor drains. Uncover it &mdash; the Arduino restarts and begins transmitting again. This is the Vanguard 1 experience: solar transmitter powers up in sunlight, goes silent in shadow, powers up again. The persistence is in the cycle, not the continuity.</p>
+
+    <p><strong>What Just Happened:</strong> You built a solar-powered sensor that operates without batteries, demonstrating the same principle Vanguard 1 used to outlast its battery-powered system by a factor of 20. Your solar cell converts light to electricity using the same photovoltaic effect discovered by Becquerel in 1839 and developed into practical silicon cells by Bell Labs in 1954. Vanguard 1 was the first spacecraft to prove this technology works in orbit. Sixty-eight years later, every space station, satellite, and Mars rover uses the same principle.</p>
+
+    <hr>
+
+    <h3>TRY 2: Find <em>Polypodium glycyrrhiza</em> in Your Local Forest</h3>
+
+    <p><strong>Duration:</strong> 1&ndash;2 hours (hiking time varies)<br>
+    <strong>Difficulty:</strong> Beginner<br>
+    <strong>Department:</strong> Botany / Ecology<br>
+    <strong>What You Need:</strong> Your eyes, a phone camera. Cost: $0.</p>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> How to identify <em>Polypodium glycyrrhiza</em> (licorice fern) in the wild &mdash; one of the most common and distinctive epiphytic ferns in the Pacific Northwest. If you live in western Washington, Oregon, or British Columbia, licorice fern is almost certainly within walking distance.</p>
+
+    <p><strong>Entry Conditions:</strong></p>
+    <ul>
+      <li>Willingness to go outside</li>
+      <li>Phone for photos</li>
+      <li>Access to any forest, park, or tree-lined street with mature bigleaf maples in western WA/OR/BC</li>
+    </ul>
+
+    <p><strong>The Exercise:</strong></p>
+
+    <p><strong>Step 1: Know what you&rsquo;re looking for</strong></p>
+
+<pre><code>Polypodium glycyrrhiza identification features:
+
+FRONDS:
+  - Pinnate (feather-shaped), 15-40 cm long
+  - Pinnae (leaflets) alternate along the rachis (stem)
+  - Pinnae are oblong, slightly pointed, with smooth to
+    slightly toothed margins
+  - Bright green when fresh, yellowing and curling when dry
+  - Appear in autumn (October-November in PNW)
+  - Die back in summer (June-August) &mdash; the "backwards" fern
+
+SORI (spore clusters):
+  - Round, orange to brown, in two rows on the underside
+    of each pinna
+  - No indusium (no covering flap) &mdash; sori are "naked"
+  - This distinguishes it from Polypodium hesperium (which
+    also has round sori but occurs at higher elevations)
+
+RHIZOME:
+  - Creeping, branching, covered with brown scales
+  - Grows along tree bark or rock surfaces
+  - Has a distinctive licorice or sweet flavor when chewed
+    (hence "glycyrrhiza" &mdash; from Greek for sweet root)
+  - NOTE: Taste only if you are confident in identification.
+    Do not eat unfamiliar plants.
+
+HABITAT:
+  - On bark of bigleaf maple (Acer macrophyllum) &mdash; primary host
+  - Also on moss-covered rocks, rotting logs, vine maple
+  - Prefers moist, shaded locations at low elevation
+  - Extremely common in Pacific Northwest &mdash; often covering
+    entire branches of large maples in dense green mats
+  - Found from southern Alaska to northern California
+
+LOOK-ALIKES:
+  - Polypodium hesperium (western polypody): similar but at
+    higher elevations, slightly different spore morphology
+  - Polystichum munitum (sword fern): much larger (60-150 cm),
+    terrestrial (grows in soil), pinnae have pointed bases
+  - Asplenium trichomanes (maidenhair spleenwort): much smaller,
+    grows on rock, has dark wiry stem</code></pre>
+
+    <p><strong>Step 2: Go find it</strong></p>
+
+    <p>If you are in the Pacific Northwest west of the Cascades, walk to the nearest bigleaf maple tree. In winter and spring, look for green fern fronds growing directly from the bark or from thick moss mats on the branches. The ferns are often at arm&rsquo;s reach on the trunk or on low-hanging branches. In summer, look for the dried, curled remnants of last season&rsquo;s fronds &mdash; the rhizome persists year-round even when the fronds are gone.</p>
+
+    <p>Particularly productive sites:</p>
+    <ol>
+      <li>Bigleaf maples along streams and in ravines (high moisture)</li>
+      <li>Park trees in Seattle, Portland, Victoria &mdash; urban maples often have good populations</li>
+      <li>Old second-growth forest with large maples (canopy gaps let in enough light)</li>
+      <li>Fallen logs and mossy boulders in wet forests</li>
+    </ol>
+
+    <p><strong>Step 3: The epiphyte lesson</strong></p>
+
+<pre><code>If you found Polypodium glycyrrhiza, note:
+
+WHAT IT TELLS YOU ABOUT VANGUARD 1:
+  - The fern grows ON a tree without connecting to the
+    ground. It gets water from rain and fog. It gets
+    nutrients from decomposing bark and moss.
+  - Vanguard 1 orbits Earth without connecting to any
+    power grid. It gets energy from sunlight. It gets
+    nothing else.
+  - Both are epiphytes: organisms that live on the surface
+    of something larger, using only what arrives at their
+    surface.
+  - The fern persists for decades on the same branch.
+    Vanguard 1 has persisted for 68 years in the same orbit.
+  - The fern goes dormant in dry summer and revives in wet
+    autumn. Vanguard 1's solar transmitter went silent in
+    shadow and revived in sunlight.
+  - Small, persistent, surface-dwelling, resource-efficient.
+    The fern and the satellite share a survival strategy.
+
+THE BACKWARDS CALENDAR:
+  P. glycyrrhiza grows in winter and dies back in summer.
+  This is the opposite of most plants. Why?
+  In the PNW, winter is WET (rain, fog, drizzle daily).
+  Summer is DRY (months without significant rain).
+  For an epiphyte with no roots in soil, the only water
+  source is atmospheric moisture. The fern grows when
+  moisture is available and goes dormant when it is not.
+  It adapted its calendar to its resource availability.
+  Vanguard 1 did the same: transmit when solar energy is
+  available, go silent when it is not.</code></pre>
+
+    <hr>
+
+    <h2>DIY Project: Grapefruit Satellite Model</h2>
+
+    <p><strong>Duration:</strong> 4&ndash;6 hours<br>
+    <strong>Difficulty:</strong> Beginner<br>
+    <strong>Cost:</strong> $15&ndash;30</p>
+
+    <p><strong>What You&rsquo;ll Build:</strong> A physical model of Vanguard 1 at approximately 3:1 scale (a grapefruit-sized sphere, 15&ndash;16 cm diameter, representing the 16.5 cm satellite) with a working LED powered by a miniature solar cell. When you hold the model in sunlight, the LED lights up &mdash; solar-powered, just like the original.</p>
+
+    <p><strong>Materials:</strong></p>
+    <ul>
+      <li>Grapefruit-sized foam sphere or papier-mache ball (15&ndash;16 cm diameter)</li>
+      <li>Aluminum foil or metallic silver spray paint</li>
+      <li>6 small solar cells (1V, 50mA hobby cells, ~$1 each on eBay)</li>
+      <li>1 white or amber LED</li>
+      <li>Thin wire for antenna stubs (4 pieces, 15 cm each)</li>
+      <li>Hot glue gun</li>
+      <li>Optional: 3D printer for a more precise sphere</li>
+    </ul>
+
+    <p><strong>Build Instructions:</strong></p>
+
+<pre><code>STEP 1: PREPARE THE SPHERE
+  - If using foam ball: coat with two layers of papier-mache
+    (newspaper strips + white glue), let dry 24 hours
+  - Paint or cover with aluminum foil to simulate the
+    polished aluminum shell
+  - If 3D printing: print a hollow sphere in two halves,
+    16.5 cm diameter, 2mm wall thickness. Print in silver
+    PLA or paint after assembly.
+
+STEP 2: MOUNT THE SOLAR CELLS
+  - Attach 6 solar cells equally spaced around the sphere
+  - Vanguard 1's cells were distributed to ensure at least
+    2-3 cells face any direction
+  - Arrange: one cell at each "pole" and four around the
+    "equator" at 90-degree spacing
+  - Wire 3 cells in series (to get ~3V) and connect to LED
+    through a small hole in the sphere. The other 3 cells
+    can be wired similarly for redundancy or left as visual
+    decorations.
+
+STEP 3: INSTALL THE LED
+  - Mount LED inside the sphere, visible through a small
+    window or translucent section
+  - Connect to the series-wired solar cells
+  - No resistor needed at these voltages/currents
+  - The LED should light when cells face a bright light
+
+STEP 4: ADD ANTENNA STUBS
+  - Insert 4 thin wires (piano wire or straightened paper clips)
+    at the "equator," evenly spaced, angled at ~45 degrees
+    from the surface
+  - Vanguard 1 had 6 antenna elements. 4 is sufficient for
+    the model.
+
+STEP 5: TEST
+  - Hold the model in sunlight or under a bright desk lamp
+  - Rotate it to different orientations
+  - Observe the LED brightness change as different cells
+    face the light &mdash; this is the cosine law in action
+  - In some orientations the LED is dim or off &mdash; this is
+    the shadow/eclipse behavior</code></pre>
+
+    <p><strong>The Lesson:</strong> You are holding a 1.47 kg satellite at roughly true scale. Khrushchev called it the grapefruit satellite. It measured the shape of the Earth, proved solar power works in space, and has been orbiting for 68 years. Your model has a working solar-powered LED &mdash; the same technology, the same principle, the same cosine dependence on illumination angle. The original is still up there, silent since 1964, circling Earth every 134 minutes.</p>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <h3>SolarFox Alignment</h3>
+
+    <p><strong>Company:</strong> SolarFox &mdash; Solar Power Services<br>
+    <strong>Connection:</strong> Vanguard 1 was the first demonstration that solar photovoltaic power could sustain a device in an environment where battery replacement is impossible. The lesson for SolarFox:</p>
+
+<pre><code>VANGUARD 1 PRINCIPLE: Solar power outlasts batteries by 20x.
+
+In 1958, batteries lasted 3 months. Solar lasted 6 years.
+The cost per watt was $286/W for solar cells &mdash; absurdly expensive.
+But the cost per watt-YEAR was:
+  Battery: $0.33/Wh * (2160 hours / 0.01W) = effectively free but temporary
+  Solar: $286/W * 0.001W = $0.29 for 6 years of operation
+
+When you cannot replace the battery, solar wins.
+
+MODERN SolarFox APPLICATION:
+  - Remote sensors (wildfire, weather, water quality) in forests
+    where battery replacement is expensive or dangerous
+  - Mesh network nodes on ridgelines &mdash; solar + supercapacitor
+    for continuous operation without maintenance visits
+  - The BPS (Biometric Perimeter System) sensors: solar-powered
+    environmental monitors that report temperature, humidity,
+    soil moisture, and wildlife presence
+  - Vanguard 1 proved the model: small panel, tiny power budget,
+    indefinite operation. SolarFox scales this to terrestrial
+    infrastructure.
+
+KEY METRIC: Total Cost of Ownership (TCO) over 10 years
+  - Battery-powered sensor (AA lithium, replaced annually):
+    sensor $50 + 10 battery trips * $50/trip = $550
+  - Solar-powered sensor (panel + supercap, no maintenance):
+    sensor $80 + panel $15 + supercap $5 = $100
+  - Ratio: 5.5x cheaper over 10 years
+  - Vanguard 1 ratio: 20x longer operation at 0.2x cost
+  - The economics of solar win when replacement is expensive.
+    In orbit, replacement is impossible. In a remote forest,
+    replacement is nearly so.</code></pre>
+
+    <h3>FoxFiber Alignment</h3>
+
+    <p><strong>Connection:</strong> Vanguard 1&rsquo;s Minitrack network &mdash; the chain of ground stations that tracked the satellite &mdash; is an early example of the distributed sensing infrastructure that FoxFiber would provide. Each ground station measured the satellite&rsquo;s position as it passed overhead, and the combined measurements from multiple stations determined the orbit. FoxFiber&rsquo;s mesh network enables similar distributed sensing: many nodes, each measuring locally, combined centrally for global understanding.</p>
+
+    <h3>FoxCompute Alignment</h3>
+
+    <p><strong>Connection:</strong> The computational challenge of satellite geodesy &mdash; fitting spherical harmonic models to orbital tracking data &mdash; was one of the first applications of electronic computers to scientific research. O&rsquo;Keefe&rsquo;s J<sub>3</sub> determination required computing hundreds of orbital perturbation corrections and fitting them against tracking observations. This was done on IBM mainframes at the Army Map Service. FoxCompute&rsquo;s containerized computation model enables the same type of intensive parameter fitting on commodity hardware.</p>
+
+    <hr>
+
+    <blockquote>
+      <p>&ldquo;Gottlieb Daimler was born on March 17, 1834 &mdash; 124 years to the day before Vanguard 1 launched. Daimler developed the high-speed petroleum engine that made automobiles practical. His engine was small, light, and powerful enough to be mounted on a vehicle &mdash; a departure from the massive, stationary engines of his time. Vanguard 1 was the smallest, lightest satellite of its era &mdash; 1.47 kg versus Sputnik&rsquo;s 83 kg. Both Daimler and Vanguard demonstrated that smaller can be better: Daimler&rsquo;s compact engine outperformed larger steam engines because it could go where they could not. Vanguard 1 outlasted larger satellites because its high orbit placed it beyond atmospheric drag. The internal combustion engine and the solar-powered satellite share a design principle: minimize size, maximize endurance, go where the big machines cannot. Daimler built the engine that moved the world. Vanguard 1 proved that the world itself has a shape worth measuring &mdash; and that a grapefruit could do the measuring.&rdquo;</p>
+    </blockquote>
+
+  </div>
+
+  <div class="nav-card">
+    <a href="papers.html">&larr; Papers</a>
+    <a href="simulation.html">Simulation &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.8 Vanguard 1 + Polypodium glycyrrhiza &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

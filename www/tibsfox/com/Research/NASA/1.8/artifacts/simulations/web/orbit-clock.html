@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vanguard 1 Orbit Clock</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #c0c8d0;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #container {
+    max-width: 1400px;
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  #mission-tag {
+    font-size: 11px;
+    color: #D4A830;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  #title {
+    font-size: 28px;
+    color: #E8A020;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  #subtitle {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 40px;
+  }
+  .counter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+  .counter-box {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 12px;
+    padding: 30px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .counter-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #D4A830, transparent);
+    opacity: 0.3;
+  }
+  .counter-label {
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .counter-value {
+    font-size: 42px;
+    color: #D4A830;
+    font-weight: bold;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .counter-unit {
+    font-size: 11px;
+    color: #555;
+  }
+  #big-counter {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 12px;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    position: relative;
+  }
+  #big-counter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #E8A020, transparent);
+    opacity: 0.5;
+  }
+  #orbit-number {
+    font-size: 72px;
+    color: #E8A020;
+    font-weight: bold;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  #orbit-label {
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  #progress-bar {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  #progress-bar .bar-label {
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .bar-outer {
+    width: 100%;
+    height: 8px;
+    background: #111122;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .bar-inner {
+    height: 100%;
+    background: linear-gradient(90deg, #D4A830, #E8A020);
+    border-radius: 4px;
+    transition: width 1s linear;
+  }
+  .bar-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #555;
+  }
+  #info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 900px;
+    margin: 0 auto 30px;
+  }
+  .info-box {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: left;
+  }
+  .info-box .il { font-size: 9px; color: #555; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .info-box .iv { font-size: 14px; color: #D4A830; }
+  #footer {
+    font-size: 9px;
+    color: #444;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  #footer strong {
+    color: #666;
+  }
+
+  @media (max-width: 700px) {
+    .counter-grid { grid-template-columns: 1fr; }
+    #info-grid { grid-template-columns: repeat(2, 1fr); }
+    #orbit-number { font-size: 48px; }
+    .counter-value { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="mission-tag">NASA Mission Series v1.8</div>
+  <div id="title">VANGUARD 1 ORBIT CLOCK</div>
+  <div id="subtitle">The oldest artificial object still in orbit &mdash; launched March 17, 1958</div>
+
+  <div id="big-counter">
+    <div id="orbit-number">000,000</div>
+    <div id="orbit-label">Total Orbits Completed</div>
+  </div>
+
+  <div class="counter-grid">
+    <div class="counter-box">
+      <div class="counter-label">Years in Orbit</div>
+      <div class="counter-value" id="years">0</div>
+      <div class="counter-unit">since March 17, 1958</div>
+    </div>
+    <div class="counter-box">
+      <div class="counter-label">Days in Orbit</div>
+      <div class="counter-value" id="days">0</div>
+      <div class="counter-unit">and counting</div>
+    </div>
+    <div class="counter-box">
+      <div class="counter-label">Distance Traveled</div>
+      <div class="counter-value" id="distance">0</div>
+      <div class="counter-unit">billion km</div>
+    </div>
+  </div>
+
+  <div id="progress-bar">
+    <div class="bar-label">Current Orbit Progress</div>
+    <div class="bar-outer">
+      <div class="bar-inner" id="orbit-progress" style="width: 0%"></div>
+    </div>
+    <div class="bar-info">
+      <span id="orbit-elapsed">0 min elapsed</span>
+      <span>Period: 134.2 min</span>
+      <span id="orbit-remaining">134.2 min remaining</span>
+    </div>
+  </div>
+
+  <div id="info-grid">
+    <div class="info-box">
+      <div class="il">Mass</div>
+      <div class="iv">1.47 kg</div>
+    </div>
+    <div class="info-box">
+      <div class="il">Diameter</div>
+      <div class="iv">16.5 cm</div>
+    </div>
+    <div class="info-box">
+      <div class="il">Perigee</div>
+      <div class="iv" id="perigee">654 km</div>
+    </div>
+    <div class="info-box">
+      <div class="il">Apogee</div>
+      <div class="iv" id="apogee">3,969 km</div>
+    </div>
+    <div class="info-box">
+      <div class="il">Inclination</div>
+      <div class="iv">34.25&deg;</div>
+    </div>
+    <div class="info-box">
+      <div class="il">Solar Cells</div>
+      <div class="iv">6 (Bell Labs)</div>
+    </div>
+    <div class="info-box">
+      <div class="il">Transmitter Off</div>
+      <div class="iv">May 1964</div>
+    </div>
+    <div class="info-box">
+      <div class="il">Est. Re-entry</div>
+      <div class="iv">~2258</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <strong>Vanguard 1</strong> was launched by the Naval Research Laboratory as part of the
+    International Geophysical Year. It was the first satellite to use solar power and the first
+    whose tracking data revealed that Earth is slightly pear-shaped. Nikita Khrushchev called it
+    "the grapefruit satellite." It has outlasted every spacecraft of its era and will remain in
+    orbit for approximately 240 more years. It does nothing now. It carries no functioning
+    instruments. It simply endures &mdash; a 1.47 kg aluminum sphere, smaller than a basketball,
+    tumbling silently through the thermosphere at 8 km/s, catching sunlight on six small silicon
+    rectangles that once powered a transmitter and now power nothing at all.
+    <br><br>
+    <strong>Organism:</strong> <em>Polypodium glycyrrhiza</em> (licorice fern) &mdash;
+    an epiphyte that outlasts the branch it grows on.
+    <br>
+    <strong>Dedication:</strong> Gottlieb Daimler &mdash; who proved that small engines
+    change the world.
+  </div>
+</div>
+
+<script>
+// Vanguard 1 orbital parameters
+const LAUNCH = new Date(1958, 2, 17, 12, 15, 0); // March 17, 1958, 12:15 UTC
+const PERIOD_MIN = 134.2;
+const PERIOD_MS = PERIOD_MIN * 60 * 1000;
+
+// Mean orbital velocity (approximate)
+// v = 2*pi*a/T where a = (654+3969)/2 + 6371 = 8682.5 km
+const SEMI_MAJOR = 8682.5; // km
+const MEAN_VELOCITY = 2 * Math.PI * SEMI_MAJOR / (PERIOD_MIN * 60); // km/s
+
+function update() {
+  const now = new Date();
+  const elapsed_ms = now - LAUNCH;
+
+  // Total orbits
+  const totalOrbits = Math.floor(elapsed_ms / PERIOD_MS);
+  document.getElementById('orbit-number').textContent = totalOrbits.toLocaleString();
+
+  // Years
+  const years = elapsed_ms / (365.25 * 24 * 3600 * 1000);
+  document.getElementById('years').textContent = years.toFixed(2);
+
+  // Days
+  const days = Math.floor(elapsed_ms / (24 * 3600 * 1000));
+  document.getElementById('days').textContent = days.toLocaleString();
+
+  // Distance traveled (billions of km)
+  const distance_km = (elapsed_ms / 1000) * MEAN_VELOCITY;
+  const distance_billion = distance_km / 1e9;
+  document.getElementById('distance').textContent = distance_billion.toFixed(2);
+
+  // Current orbit progress
+  const currentOrbitElapsed = elapsed_ms % PERIOD_MS;
+  const progressPercent = (currentOrbitElapsed / PERIOD_MS) * 100;
+  document.getElementById('orbit-progress').style.width = progressPercent + '%';
+
+  const elapsedMin = (currentOrbitElapsed / 60000).toFixed(1);
+  const remainingMin = ((PERIOD_MS - currentOrbitElapsed) / 60000).toFixed(1);
+  document.getElementById('orbit-elapsed').textContent = elapsedMin + ' min elapsed';
+  document.getElementById('orbit-remaining').textContent = remainingMin + ' min remaining';
+
+  requestAnimationFrame(update);
+}
+
+update();
+</script>
+</body>
+</html>

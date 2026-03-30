@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.8 — Vanguard 1 + Polypodium glycyrrhiza | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --solar-deep: #1A1005;
+    --solar-mid: #2A1A08;
+    --solar-gold: #D4A830;
+    --solar-bright: #E8C860;
+    --grapefruit: #E8A020;
+    --grapefruit-dim: #8A6018;
+    --fern-green: #5A8A5A;
+    --fern-dark: #2A4A2A;
+    --bark-brown: #4A3420;
+    --space-deep: #050508;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #3A2A10;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space-deep); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(212,168,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(138,96,24,0.06) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(232,192,96,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(90,138,90,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(74,52,32,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(212,168,48,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--solar-gold); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--solar-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space-deep) 0%, var(--solar-deep) 25%, var(--solar-mid) 50%, var(--grapefruit-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--solar-gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,48,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,48,0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(212,168,48,0.12); border: 1px solid var(--solar-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--solar-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(212,168,48,0.15); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--solar-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--solar-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--solar-gold); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--solar-bright); }
+  .prose em { color: var(--fern-green); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--grapefruit-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,8,0.5); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(212,168,48,0.1); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--solar-gold); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; }
+  .prose pre { background: rgba(5,5,8,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--solar-gold); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(212,168,48,0.08); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--solar-gold); }
+  .prose pre code { background: none; padding: 0; }
+  .nav-card { background: rgba(5,5,8,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--solar-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--solar-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--solar-gold); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+
+  /* Card grid for landing page */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .card { background: rgba(5,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--solar-gold); }
+  .card h3 { font-size: 1rem; color: var(--solar-gold); margin-bottom: 0.5rem; }
+  .card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .card a { color: var(--solar-gold); text-decoration: none; }
+  .card a:hover { color: var(--solar-bright); }
+
+  .section-title { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--solar-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .section-title:first-of-type { margin-top: 0; }
+
+  .artifact-list { list-style: none; padding: 0; margin: 1rem 0; }
+  .artifact-list li { font-size: 0.9rem; line-height: 1.7; padding: 0.4rem 0; border-bottom: 1px solid rgba(58,42,16,0.3); color: var(--text); }
+  .artifact-list li:last-child { border-bottom: none; }
+  .artifact-label { color: var(--solar-gold); font-weight: 500; font-family: 'DM Mono', monospace; font-size: 0.85rem; }
+
+  .dedication-section { background: rgba(74,52,32,0.1); border: 1px solid var(--bark-brown); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .dedication-section h2 { color: var(--grapefruit); border-bottom-color: var(--bark-brown); }
+  .dedication-section p { font-size: 0.95rem; line-height: 1.8; color: var(--text); }
+
+  .summary-text { font-size: 0.95rem; line-height: 1.8; color: var(--text); max-width: 900px; margin-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a> <span class="sep">/</span> v1.8 Vanguard 1
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.8</span>
+      <span class="track-badge">Mission Hub</span>
+    </div>
+    <h1>v1.8 &mdash; Vanguard 1 + <em>Polypodium glycyrrhiza</em></h1>
+    <p class="subtitle">The Grapefruit That Outlived Everything &mdash; First Solar-Powered Satellite</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> Mar 17, 1958</span>
+      <span><span class="label">Program:</span> Vanguard (NRL)</span>
+      <span><span class="label">Mass:</span> 1.47 kg</span>
+      <span><span class="label">Organism:</span> Licorice fern</span>
+      <span><span class="label">Bird:</span> Rufous Hummingbird</span>
+      <span><span class="label">Dedication:</span> Gottlieb Daimler</span>
+      <span><span class="label">Status:</span> SUCCESS &mdash; oldest in orbit</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">Mission Summary</h2>
+
+  <p class="summary-text">Vanguard 1 was launched on March 17, 1958, aboard a Vanguard SLV-4 rocket from Cape Canaveral &mdash; the third successful satellite launch by the United States and the fourth by any nation. Built by the Naval Research Laboratory (NRL) as part of the American contribution to the International Geophysical Year, it was a polished aluminum sphere 16.5 cm in diameter, weighing 1.47 kg &mdash; less than a bag of sugar. Nikita Khrushchev dismissed it as &ldquo;the grapefruit satellite.&rdquo; It carried two transmitters, six silicon solar cells (the first ever flown in space), and six temperature sensors. The battery-powered transmitter fell silent in June 1958. The solar-powered transmitter continued for six years, finally going silent in May 1964. The satellite itself has never stopped. Vanguard 1 orbits Earth every 134 minutes in a 654 x 3,969 km orbit, and will continue to do so for another 170+ years. It is the oldest human-made object in orbit. Its scientific legacy came not from any instrument it carried but from the orbit itself. By tracking Vanguard 1&rsquo;s position over months, John O&rsquo;Keefe, Ann Eckels, and R.K. Squires at the Army Map Service discovered that Earth&rsquo;s gravitational field contains a third-degree zonal harmonic (J<sub>3</sub> = -2.54 x 10<sup>-6</sup>), making the planet slightly pear-shaped &mdash; the southern hemisphere&rsquo;s geoid extends approximately 15 meters farther from Earth&rsquo;s center than the northern hemisphere&rsquo;s. This discovery founded the field of satellite geodesy. The paired organism, <em>Polypodium glycyrrhiza</em> (licorice fern), is an epiphytic fern native to the Pacific Northwest that grows on the bark of bigleaf maples, clinging to the surface of a much larger body, drawing energy from whatever rain and fog arrives at its surface. Both the fern and the satellite are small, persistent, surface-dwelling organisms that outlast expectations by minimizing resource requirements and tolerating intermittency. The fern curls dormant in summer drought and revives when autumn rains return. The satellite&rsquo;s solar transmitter went silent in shadow and powered up in sunlight. Both persist for decades. The grapefruit measured the shape of the world. The fern maps the moisture of the forest.</p>
+
+  <h2 class="section-title">Research Pages</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <a href="research.html">
+        <h3>Deep Research</h3>
+        <p>Track 1a &mdash; The full story of Vanguard 1: the NRL satellite program, the Vanguard launch vehicle failures and success, the first solar cells in space, the geodesy discovery (J<sub>3</sub> pear shape), and the satellite&rsquo;s 240-year orbital lifetime.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="organism.html">
+        <h3>Organism Pairing</h3>
+        <p>Track 2 &mdash; <em>Polypodium glycyrrhiza</em> (licorice fern): the epiphytic fern that grows on bigleaf maple bark, tolerates complete desiccation, and mirrors Vanguard 1&rsquo;s survival strategy of persistence through resource efficiency.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="mathematics.html">
+        <h3>Mathematics</h3>
+        <p>Track 3 &mdash; TSPB mathematics in McNeese-Hoag format. Spherical harmonics, Legendre polynomials, the cosine law of solar power, exponential atmospheric decay, and the orbital mechanics of the oldest satellite.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="papers.html">
+        <h3>Scientific Anchors</h3>
+        <p>Track 1b &mdash; O&rsquo;Keefe et al. (1959) pear-shaped Earth discovery + 3 wall-clock arXiv papers: geoid modeling, solar cell degradation, licorice fern hydraulic architecture.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="curriculum.html">
+        <h3>College of Knowledge</h3>
+        <p>Track 4 &mdash; Department deposits across Energy/Solar, Geodesy, Engineering, Botany, Mathematics, and Space Science. TRY sessions: build a solar-powered sensor, find licorice fern in the wild, build a grapefruit satellite model.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="simulation.html">
+        <h3>Simulation &amp; Creative Arts</h3>
+        <p>Track 5 &mdash; What to build: solar cell power curve, orbital lifetime predictor, interactive geoid viewer, space objects timeline, ML decay prediction, game theory (Navy vs Army), &ldquo;Grapefruit in Space&rdquo; art series.</p>
+      </a>
+    </div>
+  </div>
+
+  <h2 class="section-title">Artifacts</h2>
+
+  <ul class="artifact-list">
+    <li><span class="artifact-label">Audio:</span> 2 FAUST synths &mdash; <code>vanguard1-solar-synth.dsp</code> (solar cell power hum synthesis) and <code>rufous-hummingbird.dsp</code> (Rufous Hummingbird call)</li>
+    <li><span class="artifact-label">Circuits:</span> 2 build guides &mdash; <code>led-solar-tracker.md</code> (LED solar angle tracker) and <code>radio-tone-control.md</code> (tone control for radio receiver)</li>
+    <li><span class="artifact-label">Screensaver:</span> GLSL shader &mdash; <code>vanguard1-screensaver.frag</code> (geoid visualization, pear-shaped Earth deformation, solar cell illumination cycle)</li>
+    <li><span class="artifact-label">Simulations:</span> Python (2): <code>solar-cell-angle.py</code>, <code>orbital-lifetime.py</code> | SPICE (2): <code>solar-cell.cir</code>, <code>tone-control.cir</code> | Web (2): <code>geoid-viewer.html</code>, <code>orbit-clock.html</code></li>
+    <li><span class="artifact-label">Stories:</span> &ldquo;The Grapefruit&rdquo; &mdash; <code>the-grapefruit.html</code> + <code>the-grapefruit.tex</code></li>
+  </ul>
+
+  <h2 class="section-title">Data</h2>
+
+  <ul class="artifact-list">
+    <li><span class="artifact-label">knowledge-nodes.json</span> &mdash; Knowledge graph nodes for Vanguard 1 mission concepts, geodesy, solar power, orbital mechanics, and cross-references</li>
+    <li><span class="artifact-label">data-sources.json</span> &mdash; Authoritative data sources used in research (NASA NSSDCA, NRL Vanguard Project, Army Map Service archives, GRACE/GOCE geodesy data)</li>
+  </ul>
+
+  <div class="dedication-section">
+    <h2 class="section-title">Dedication: Gottlieb Daimler</h2>
+    <p>This mission is dedicated to <strong>Gottlieb Wilhelm Daimler</strong>, born March 17, 1834, in Schorndorf, Kingdom of W&uuml;rttemberg &mdash; 124 years to the day before Vanguard 1 launched. Daimler developed the high-speed petroleum engine that made automobiles practical. His engine was small, light, and powerful enough to be mounted on a vehicle &mdash; a departure from the massive, stationary engines of his time. He patented the &ldquo;Grandfather Clock&rdquo; engine in 1885, installed it in a two-wheeled vehicle to create the first motorcycle, and in 1886 mounted it in a four-wheeled carriage to produce one of the first automobiles. His company merged with Karl Benz&rsquo;s in 1926 to form Daimler-Benz, maker of the Mercedes-Benz. Daimler&rsquo;s design principle was miniaturization with purpose: make the engine small enough to go anywhere, powerful enough to be useful. Vanguard 1 embodied the same principle &mdash; 1.47 kg versus Sputnik&rsquo;s 83 kg, but it measured the shape of the Earth and proved solar power works in space. Daimler&rsquo;s compact engine outperformed larger steam engines because it could go where they could not. Vanguard 1 outlasted larger satellites because its high orbit placed it beyond atmospheric drag. The internal combustion engine and the solar-powered satellite share a design philosophy: minimize size, maximize endurance, go where the big machines cannot. Daimler built the engine that moved the world. Vanguard 1 proved that the world itself has a shape worth measuring &mdash; and that a grapefruit could do the measuring.</p>
+  </div>
+
+  <div class="nav-card">
+    <a href="../index.html">&larr; Mission Catalog</a>
+    <a href="research.html">Begin Reading &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.8 Vanguard 1 + Polypodium glycyrrhiza &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

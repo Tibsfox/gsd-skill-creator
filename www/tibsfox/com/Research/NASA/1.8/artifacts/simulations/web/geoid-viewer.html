@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earth's Pear Shape — Vanguard 1 Geoid Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #c0c8d0;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #container {
+    max-width: 1400px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+  }
+  #view-frame {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #view-housing {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 30px rgba(212, 168, 48, 0.03);
+    width: 100%;
+  }
+  #view-header {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a1a3a;
+  }
+  #view-header h2 {
+    font-size: 13px;
+    color: #D4A830;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  #view-header p {
+    font-size: 10px;
+    color: #666;
+    margin-top: 4px;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    background: #050510;
+    border-radius: 4px;
+  }
+  #controls {
+    flex: 1;
+    min-width: 280px;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .control-group {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .control-group h3 {
+    font-size: 11px;
+    color: #D4A830;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .slider-row label {
+    font-size: 10px;
+    color: #888;
+    min-width: 80px;
+  }
+  .slider-row input[type="range"] {
+    flex: 1;
+    accent-color: #D4A830;
+  }
+  .slider-row .value {
+    font-size: 10px;
+    color: #D4A830;
+    min-width: 50px;
+    text-align: right;
+  }
+  .info-text {
+    font-size: 10px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+  .info-text strong {
+    color: #D4A830;
+  }
+  #readout {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  #readout h3 {
+    font-size: 11px;
+    color: #D4A830;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .readout-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    margin-bottom: 3px;
+  }
+  .readout-row .label { color: #888; }
+  .readout-row .val { color: #D4A830; }
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .checkbox-row label {
+    font-size: 10px;
+    color: #888;
+  }
+  input[type="checkbox"] {
+    accent-color: #D4A830;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="view-frame">
+    <div id="view-housing">
+      <div id="view-header">
+        <h2>Earth's Pear Shape</h2>
+        <p>Vanguard 1 tracking data revealed the geoid | Mission 1.8</p>
+      </div>
+      <canvas id="canvas" width="800" height="700"></canvas>
+    </div>
+  </div>
+  <div id="controls">
+    <div class="control-group">
+      <h3>Geoid Parameters</h3>
+      <div class="slider-row">
+        <label>J2 (Oblate)</label>
+        <input type="range" id="j2" min="0" max="500" value="100">
+        <span class="value" id="j2-val">1.00x</span>
+      </div>
+      <div class="slider-row">
+        <label>J3 (Pear)</label>
+        <input type="range" id="j3" min="0" max="500" value="100">
+        <span class="value" id="j3-val">1.00x</span>
+      </div>
+      <div class="slider-row">
+        <label>Exaggeration</label>
+        <input type="range" id="exag" min="1" max="200" value="50">
+        <span class="value" id="exag-val">50x</span>
+      </div>
+      <p class="info-text">
+        <strong>J2 = 1.08263e-3</strong> makes Earth oblate (wider at equator).
+        <strong>J3 = -2.54e-6</strong> makes it pear-shaped (south pole slightly larger).
+        Both effects are tiny — exaggeration makes them visible.
+      </p>
+    </div>
+    <div class="control-group">
+      <h3>Display Options</h3>
+      <div class="checkbox-row">
+        <input type="checkbox" id="showOrbit" checked>
+        <label>Show Vanguard 1 orbit</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="showGrid" checked>
+        <label>Show latitude/longitude grid</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="showPerfect">
+        <label>Show perfect sphere (reference)</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="animate" checked>
+        <label>Animate satellite</label>
+      </div>
+    </div>
+    <div id="readout">
+      <h3>Measurements</h3>
+      <div class="readout-row">
+        <span class="label">Equatorial radius</span>
+        <span class="val" id="r-eq">6378.1 km</span>
+      </div>
+      <div class="readout-row">
+        <span class="label">Polar radius</span>
+        <span class="val" id="r-pol">6356.8 km</span>
+      </div>
+      <div class="readout-row">
+        <span class="label">Flattening</span>
+        <span class="val" id="flat">1/298.3</span>
+      </div>
+      <div class="readout-row">
+        <span class="label">Pear offset</span>
+        <span class="val" id="pear">~15 m</span>
+      </div>
+      <div class="readout-row">
+        <span class="label">Orbit count</span>
+        <span class="val" id="orbits">~330,000</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <h3>Discovery Context</h3>
+      <p class="info-text">
+        Before Vanguard 1, Earth was modeled as an oblate spheroid
+        (wider at equator due to rotation). Precise tracking of
+        Vanguard 1's orbit by John O'Keefe at NRL revealed a tiny
+        asymmetry: the South Pole region is slightly larger than the
+        North Pole. The geoid is <strong>pear-shaped</strong> — not
+        perfectly symmetric about the equator. This was the first
+        geophysical discovery made from satellite tracking data.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+// Controls
+const j2Slider = document.getElementById('j2');
+const j3Slider = document.getElementById('j3');
+const exagSlider = document.getElementById('exag');
+const showOrbit = document.getElementById('showOrbit');
+const showGrid = document.getElementById('showGrid');
+const showPerfect = document.getElementById('showPerfect');
+const animate = document.getElementById('animate');
+
+// Real values
+const R_EARTH = 6371.0; // mean radius km
+const J2_REAL = 1.08263e-3;
+const J3_REAL = -2.54e-6;
+
+// Vanguard 1 orbit
+const PERIGEE = 654;  // km
+const APOGEE = 3969;  // km
+const INCLINATION = 34.25 * Math.PI / 180;
+const PERIOD = 134.2; // minutes
+
+let satAngle = 0;
+let time = 0;
+
+function geoidRadius(theta, j2_mult, j3_mult, exag) {
+  // theta = colatitude (0 = north pole, PI = south pole)
+  const cosT = Math.cos(theta);
+  const sinT = Math.sin(theta);
+
+  // Legendre polynomials
+  const P2 = (3 * cosT * cosT - 1) / 2;  // J2 term (oblate)
+  const P3 = (5 * cosT * cosT * cosT - 3 * cosT) / 2;  // J3 term (pear)
+
+  const r = 1.0
+    - J2_REAL * j2_mult * P2 * exag
+    - J3_REAL * j3_mult * P3 * exag * 100; // J3 is much smaller, scale up
+
+  return r;
+}
+
+function draw() {
+  const W = canvas.width;
+  const H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Background
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, W, H);
+
+  // Stars
+  for (let i = 0; i < 100; i++) {
+    const x = ((i * 7919 + 1013) % W);
+    const y = ((i * 6271 + 3037) % H);
+    const brightness = ((i * 2347) % 100) / 100;
+    ctx.fillStyle = `rgba(200, 210, 220, ${brightness * 0.4})`;
+    ctx.fillRect(x, y, 1, 1);
+  }
+
+  const cx = W * 0.5;
+  const cy = H * 0.5;
+  const baseR = Math.min(W, H) * 0.28;
+
+  const j2_mult = j2Slider.value / 100;
+  const j3_mult = j3Slider.value / 100;
+  const exag = exagSlider.value;
+
+  // Update display values
+  document.getElementById('j2-val').textContent = j2_mult.toFixed(2) + 'x';
+  document.getElementById('j3-val').textContent = j3_mult.toFixed(2) + 'x';
+  document.getElementById('exag-val').textContent = exag + 'x';
+
+  // Draw perfect sphere reference
+  if (showPerfect.checked) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, baseR, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(100, 100, 140, 0.3)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Draw geoid
+  ctx.beginPath();
+  const points = 360;
+  for (let i = 0; i <= points; i++) {
+    const theta = (i / points) * Math.PI * 2;
+    // Map canvas angle to colatitude
+    // In this 2D cross-section, theta=0 is right (equator),
+    // theta=PI/2 is top (north pole), etc.
+    const colat = Math.PI / 2 - theta; // colatitude from north pole
+    const r = geoidRadius(colat, j2_mult, j3_mult, exag) * baseR;
+    const x = cx + Math.cos(theta) * r;
+    const y = cy - Math.sin(theta) * r;
+
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+
+  // Earth fill — gradient from ocean blue to land green
+  const earthGrad = ctx.createRadialGradient(cx - baseR * 0.2, cy - baseR * 0.2, 0,
+                                              cx, cy, baseR);
+  earthGrad.addColorStop(0, '#1a3a6a');
+  earthGrad.addColorStop(0.5, '#0c2444');
+  earthGrad.addColorStop(1, '#081830');
+  ctx.fillStyle = earthGrad;
+  ctx.fill();
+
+  // Earth outline
+  ctx.strokeStyle = '#3366aa';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Latitude/longitude grid
+  if (showGrid.checked) {
+    ctx.strokeStyle = 'rgba(80, 120, 180, 0.15)';
+    ctx.lineWidth = 0.5;
+
+    // Latitude lines
+    for (let lat = -60; lat <= 60; lat += 30) {
+      const latRad = lat * Math.PI / 180;
+      ctx.beginPath();
+      for (let i = 0; i <= 180; i++) {
+        const theta = (i / 180) * Math.PI * 2;
+        const colat = Math.PI / 2 - theta;
+        const r = geoidRadius(colat, j2_mult, j3_mult, exag) * baseR;
+        const rAtLat = r * Math.cos(latRad);
+        const yAtLat = cy - r * Math.sin(latRad);
+        const x = cx + Math.cos(theta) * rAtLat;
+        if (i === 0) ctx.moveTo(x, yAtLat);
+        else ctx.lineTo(x, yAtLat);
+      }
+      ctx.stroke();
+    }
+
+    // Equator (highlighted)
+    ctx.strokeStyle = 'rgba(212, 168, 48, 0.2)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let i = 0; i <= points; i++) {
+      const theta = (i / points) * Math.PI * 2;
+      const colat = Math.PI / 2; // equator
+      const r = geoidRadius(colat, j2_mult, j3_mult, exag) * baseR;
+      const x = cx + Math.cos(theta) * r;
+      const y = cy - Math.sin(theta) * r * 0; // equator is at y=0
+      if (i === 0) ctx.moveTo(cx + r, cy);
+    }
+    // Just draw horizontal line through center
+    const rEq = geoidRadius(Math.PI / 2, j2_mult, j3_mult, exag) * baseR;
+    ctx.moveTo(cx - rEq, cy);
+    ctx.lineTo(cx + rEq, cy);
+    ctx.stroke();
+
+    // Polar axis
+    ctx.strokeStyle = 'rgba(212, 168, 48, 0.15)';
+    ctx.setLineDash([2, 4]);
+    ctx.beginPath();
+    const rN = geoidRadius(0, j2_mult, j3_mult, exag) * baseR;
+    const rS = geoidRadius(Math.PI, j2_mult, j3_mult, exag) * baseR;
+    ctx.moveTo(cx, cy - rN);
+    ctx.lineTo(cx, cy + rS);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Labels
+    ctx.fillStyle = '#666';
+    ctx.font = '10px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('N', cx, cy - rN - 8);
+    ctx.fillText('S', cx, cy + rS + 14);
+    ctx.fillText('Equator', cx + rEq + 30, cy - 4);
+  }
+
+  // Atmospheric glow
+  ctx.beginPath();
+  for (let i = 0; i <= points; i++) {
+    const theta = (i / points) * Math.PI * 2;
+    const colat = Math.PI / 2 - theta;
+    const r = geoidRadius(colat, j2_mult, j3_mult, exag) * baseR;
+    const x = cx + Math.cos(theta) * (r + 5);
+    const y = cy - Math.sin(theta) * (r + 5);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.strokeStyle = 'rgba(100, 150, 255, 0.2)';
+  ctx.lineWidth = 8;
+  ctx.stroke();
+
+  // Vanguard 1 orbit
+  if (showOrbit.checked) {
+    const orbitPeriR = baseR * (1 + PERIGEE / R_EARTH);
+    const orbitApoR = baseR * (1 + APOGEE / R_EARTH);
+    const orbitA = (orbitPeriR + orbitApoR) / 2;
+    const orbitE = (orbitApoR - orbitPeriR) / (orbitApoR + orbitPeriR);
+
+    // Draw orbit ellipse
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(232, 160, 32, 0.3)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 360; i++) {
+      const a = (i / 360) * Math.PI * 2;
+      const r = orbitA * (1 - orbitE * orbitE) / (1 + orbitE * Math.cos(a));
+      const x = cx + Math.cos(a + INCLINATION) * r;
+      const y = cy - Math.sin(a + INCLINATION) * r;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+
+    // Satellite position
+    if (animate.checked) {
+      satAngle += 0.02;
+    }
+    const satR = orbitA * (1 - orbitE * orbitE) / (1 + orbitE * Math.cos(satAngle));
+    const satX = cx + Math.cos(satAngle + INCLINATION) * satR;
+    const satY = cy - Math.sin(satAngle + INCLINATION) * satR;
+
+    // Satellite dot
+    ctx.beginPath();
+    ctx.arc(satX, satY, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#E8A020';
+    ctx.fill();
+
+    // Satellite glow
+    ctx.beginPath();
+    ctx.arc(satX, satY, 8, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(232, 160, 32, 0.15)';
+    ctx.fill();
+
+    // Label
+    ctx.fillStyle = '#E8A020';
+    ctx.font = '9px Courier New';
+    ctx.textAlign = 'left';
+    ctx.fillText('Vanguard 1', satX + 12, satY - 6);
+
+    // Altitude
+    const altKm = ((satR / baseR) - 1) * R_EARTH;
+    ctx.fillStyle = '#888';
+    ctx.fillText(`alt: ${altKm.toFixed(0)} km`, satX + 12, satY + 6);
+  }
+
+  // Pear shape annotation
+  if (j3_mult > 0.1 && exag > 10) {
+    ctx.fillStyle = 'rgba(212, 168, 48, 0.4)';
+    ctx.font = '9px Courier New';
+    ctx.textAlign = 'right';
+
+    const rNorth = geoidRadius(0, j2_mult, j3_mult, exag) * baseR;
+    const rSouth = geoidRadius(Math.PI, j2_mult, j3_mult, exag) * baseR;
+    const diff = (rSouth - rNorth).toFixed(1);
+
+    if (rSouth > rNorth) {
+      ctx.fillText(`South ${diff}px larger`, cx - 20, cy + rSouth + 25);
+      ctx.fillText('("pear-shaped")', cx - 20, cy + rSouth + 37);
+    }
+  }
+
+  // Update readouts
+  const rEqKm = R_EARTH * geoidRadius(Math.PI / 2, j2_mult, j3_mult, 1);
+  const rPolKm = R_EARTH * geoidRadius(0, j2_mult, j3_mult, 1);
+  document.getElementById('r-eq').textContent = rEqKm.toFixed(1) + ' km';
+  document.getElementById('r-pol').textContent = rPolKm.toFixed(1) + ' km';
+  document.getElementById('flat').textContent = '1/' + (rEqKm / (rEqKm - rPolKm)).toFixed(1);
+
+  const pearN = geoidRadius(0, j2_mult, j3_mult, 1) * R_EARTH;
+  const pearS = geoidRadius(Math.PI, j2_mult, j3_mult, 1) * R_EARTH;
+  document.getElementById('pear').textContent = ((pearS - pearN) * 1000).toFixed(0) + ' m';
+
+  // Orbit count
+  const now = new Date();
+  const launch = new Date(1958, 2, 17);
+  const minutesSinceLaunch = (now - launch) / (1000 * 60);
+  const orbitCount = Math.floor(minutesSinceLaunch / PERIOD);
+  document.getElementById('orbits').textContent = orbitCount.toLocaleString();
+
+  time += 1;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
