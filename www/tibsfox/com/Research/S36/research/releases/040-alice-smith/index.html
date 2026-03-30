@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 40&deg; &mdash; Alice Smith &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: white;
+      border: 1px solid #BF360C;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .milestone-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #F57F17;
+      color: white;
+      border: 1px solid #F9A825;
+      margin-left: 0.3rem;
+    }
+
+    .woman-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .milestone-banner {
+      background: linear-gradient(135deg, #F57F17, #F9A825);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .milestone-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .milestone-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .label-arc {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+    .label-arc .arc-step {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 4px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.82rem;
+      font-family: system-ui, sans-serif;
+      position: relative;
+    }
+    .label-arc .arc-step .arc-year {
+      display: block;
+      font-size: 0.7rem;
+      color: #757575;
+    }
+    .label-arc .arc-step .arc-label {
+      font-weight: 600;
+      color: var(--seattle-navy);
+    }
+    .label-arc .arc-arrow {
+      display: flex;
+      align-items: center;
+      color: #9FA8DA;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>040 &mdash; Alice Smith</span>
+    </nav>
+
+    <!-- Milestone Banner -->
+    <div class="milestone-banner">
+      <h3>Degree 40 &mdash; The First Ninth of the Circle</h3>
+      <p>
+        40 of 360 degrees complete (1/9 of the full rotation). Neo-soul returns after a 15-degree
+        absence. Epic Records enters as the engine&rsquo;s first Sony-family major label. The seventh
+        woman in the engine. Nine consecutive E=5+ degrees. Four octaves. One artist who refused to be contained.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">40&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Alice Smith</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Neo-Soul</span>
+          <span class="label-badge">Epic Records</span>
+          <span class="woman-badge">7th Woman</span>
+          <span class="milestone-badge">40&deg; Milestone</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Genre-Fluid Powerhouse</h2>
+          <p>
+            Alice Smith is a singer-songwriter with a <strong>four-octave vocal range</strong> whose
+            music defies single-genre classification. Born November 30, 1977, raised between
+            <strong>Washington, D.C.</strong> and <strong>Augusta, Georgia</strong>, educated at
+            <strong>Fordham University</strong> in New York, now based in <strong>Los Angeles</strong>
+            &mdash; Smith&rsquo;s geography traces the full American map. Her sound blends neo-soul,
+            rock, blues, jazz, gospel, cabaret, and art-pop into something Rolling Stone recognized
+            in 2006 as &ldquo;a broader palette&rdquo; than contemporaries Norah Jones and Alicia Keys.
+          </p>
+          <p>
+            The engine classifies her as Neo-Soul &mdash; the genre she orbits closest to &mdash;
+            but acknowledges this is a compression. Alice Smith is neo-soul the way Jimi Hendrix
+            was blues rock: the genre is a starting point, not a boundary.
+          </p>
+          <blockquote>
+            &ldquo;Smith could easily be lumped in with expressive chanteuses like Norah Jones and
+            Alicia Keys, but she has a broader palette than either.&rdquo;
+            &mdash; Rolling Stone, 2006
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Label Arc: A Complete Industry Narrative</h2>
+          <p>
+            Alice Smith&rsquo;s career tells the most complete label-industry story in the engine.
+            The arc runs from independent freedom through major-label capture through institutional
+            suppression through crowdfunded liberation through mature re-engagement &mdash; all with
+            the same Sony corporate family.
+          </p>
+          <div class="label-arc">
+            <div class="arc-step">
+              <span class="arc-year">2006</span>
+              <span class="arc-label">BBE Records</span>
+              Independent debut
+            </div>
+            <div class="arc-arrow">&rarr;</div>
+            <div class="arc-step">
+              <span class="arc-year">2007&ndash;2012</span>
+              <span class="arc-label">Epic Records</span>
+              Signed, shelved
+            </div>
+            <div class="arc-arrow">&rarr;</div>
+            <div class="arc-step">
+              <span class="arc-year">2013</span>
+              <span class="arc-label">Kickstarter</span>
+              Fan-funded <em>She</em>
+            </div>
+            <div class="arc-arrow">&rarr;</div>
+            <div class="arc-step">
+              <span class="arc-year">2019</span>
+              <span class="arc-label">Self-Released</span>
+              <em>Mystery</em> EP
+            </div>
+            <div class="arc-arrow">&rarr;</div>
+            <div class="arc-step">
+              <span class="arc-year">2025&ndash;26</span>
+              <span class="arc-label">Sony Masterworks</span>
+              <em>Sinners</em> + Oscars
+            </div>
+          </div>
+          <p>
+            Epic Records is the engine&rsquo;s first Sony-family major label. The label that
+            released Michael Jackson&rsquo;s <em>Thriller</em> (produced by Quincy Jones, degree
+            0&deg;) shelved Alice Smith&rsquo;s sophomore album for six years. The same corporate
+            family later distributed her <em>Sinners</em> soundtrack work and her 2026 Oscar
+            performance. Full circle &mdash; on her terms.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The D.C. Foundation: Gospel, Go-Go, and Genre Freedom</h2>
+          <p>
+            Washington, D.C.&rsquo;s contribution to American music is <strong>go-go</strong>
+            &mdash; the polyrhythmic, percussion-heavy funk descendant created by Chuck Brown
+            in the 1970s. Smith grew up on &ldquo;a steady diet of gospel, pop, soul, and a
+            little go-go thrown in for good measure.&rdquo; The go-go influence is the rhythmic
+            foundation beneath her genre-fluid surface &mdash; a D.C.-specific pulse that
+            distinguishes her from New York neo-soul (D&rsquo;Angelo), Philadelphia neo-soul
+            (The Roots/Jill Scott), or Dallas neo-soul (Erykah Badu).
+          </p>
+          <p>
+            At Fordham University, Smith joined the <strong>Black Rock Coalition</strong>
+            &mdash; the organization founded by Vernon Reid (Living Colour) to promote Black
+            artists in rock and experimental music. The BRC&rsquo;s thesis of genre freedom
+            for Black musicians connects directly to Jimi Hendrix (degree 36&deg;) and to
+            Alice Smith&rsquo;s refusal to fit any single genre box.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Shelved Frequency</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                41st acoustic element. The sound of music that was recorded, completed, and
+                suppressed by institutional power before reaching an audience. The engine&rsquo;s
+                first <strong>negative acoustic element</strong> &mdash; defined by absence rather
+                than presence. Six years of Alice Smith recordings locked in Epic&rsquo;s vault.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Cultural Satellite</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                41st artist-city pattern. An artist who orbits a city&rsquo;s musical tradition
+                without physically residing in it, connected through genre lineage and ideological
+                alignment. The engine&rsquo;s first <strong>non-geographic</strong> artist-city
+                pattern.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Suppressed Vibration</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                40th blue note deployment. The blue note of an artist whose expression was
+                institutionally blocked. Present in the recording, absent from the public ear.
+                When <em>She</em> finally released in 2013, six years of suppressed energy
+                found transmission.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Label-Defiant Tidal</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                9th E=5 mode. Energy from pushing against the system that promised amplification.
+                The adversarial tidal force: major-label suppression generates artistic defiance
+                that becomes its own energy source. Nine consecutive E=5+ degrees (32&ndash;40).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Prince Connection</h2>
+          <p>
+            In 2014, <strong>Prince</strong> recorded his interpretation of Alice Smith&rsquo;s
+            <strong>&ldquo;Another Love&rdquo;</strong> on the album <em>Plectrumelectrum</em>
+            with 3rdeyegirl. When Prince covers your song, the genre-fluid lineage is confirmed.
+            Prince&rsquo;s own practice &mdash; funk, rock, pop, soul, jazz, psychedelia &mdash;
+            mirrors Smith&rsquo;s, and his selection of her material is peer recognition from
+            one of the most genre-fluid artists in recorded music history.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Sinners Moment (2025&ndash;2026)</h2>
+          <p>
+            Alice Smith co-wrote and performed <strong>&ldquo;Last Time (I Seen the Sun)&rdquo;</strong>
+            with Miles Caton for Ryan Coogler&rsquo;s film <em>Sinners</em> (2025), set in 1932
+            Mississippi Delta. She then performed <strong>&ldquo;I Lied to You&rdquo;</strong>
+            at the <strong>98th Academy Awards</strong> (March 15, 2026) alongside Raphael Saadiq,
+            Brittany Howard, Buddy Guy, Christone &ldquo;Kingfish&rdquo; Ingram, Misty Copeland,
+            and Bobby Rush.
+          </p>
+          <p>
+            The Oscar performance is the full-circle moment: an artist shelved by Sony subsidiary
+            Epic Records returned to the Sony ecosystem (Sony Masterworks) two decades later,
+            performing on the biggest stage in entertainment. Not waiting for permission. Arriving
+            on her own terms.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">25&deg;</span> Black Stax &mdash; <strong>Prior Neo-Soul degree.</strong> 15-degree gap. Hip-hop-inflected (25&deg;) vs rock-inflected (40&deg;). Central District vs D.C./NYC/LA. Both connected to Black arts tradition.</li>
+            <li><span class="ref-degree">26&deg;</span> Shaina Shepherd &mdash; Neo-Soul/R&B. Seattle-resident vs Seattle-connected. Both exceptional women vocalists in the neo-soul tradition.</li>
+            <li><span class="ref-degree">36&deg;</span> Jimi Hendrix &mdash; Black Rock Coalition connection. BRC was founded to institutionalize the genre freedom Hendrix embodied. Smith performed with the BRC.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; Epic Records / <em>Thriller</em> connection. Jones produced Jackson&rsquo;s <em>Thriller</em> on Epic. Smith was signed to Epic and shelved. Same label, opposite outcomes.</li>
+            <li><span class="ref-degree">3&deg;</span> Ernestine Anderson &mdash; Engine&rsquo;s first woman. Smith is the seventh. Both Black women vocalists with exceptional range across genre traditions.</li>
+            <li><span class="ref-degree">31&deg;</span> Brenda Lee Eager &mdash; Most recent woman before degree 40. Both share the gospel foundation and label-dynamics narratives.</li>
+            <li><span class="ref-degree">39&deg;</span> Ron Artis Jr &mdash; Immediate predecessor. Both genre-fluid. Both navigated label independence through different paths.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Nov 30, 1977</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Washington, D.C.</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Vocal Range</span>
+            <span class="stat-value">4 octaves</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">Fordham University</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Residence</span>
+            <span class="stat-value">Los Angeles, CA</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">40 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Neo-Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">21</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#41 Cultural Satellite</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#41 Shelved Frequency</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#40 Suppressed Vibration</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row">
+            <span class="stat-label">2006</span>
+            <span class="stat-value">For Lovers, Dreamers</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2013</span>
+            <span class="stat-value">She</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2019</span>
+            <span class="stat-value">Mystery (EP)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2025</span>
+            <span class="stat-value">Sinners (sdtrk)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Recognition</h4>
+          <div class="stat-row">
+            <span class="stat-label">Grammy Nom.</span>
+            <span class="stat-value">2008</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Prince Cover</span>
+            <span class="stat-value">2014</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Oscar Perf.</span>
+            <span class="stat-value">2026</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Rolling Stone</span>
+            <span class="stat-value">10 to Watch, 2006</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Influences</h4>
+          <div class="stat-row">
+            <span class="stat-label">Soul</span>
+            <span class="stat-value">Patti LaBelle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jazz</span>
+            <span class="stat-value">Billie Holiday</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Alt Rock</span>
+            <span class="stat-value">Fiona Apple</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">R&amp;B</span>
+            <span class="stat-value">Anita Baker</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Gender Milestone</h4>
+          <div class="stat-row">
+            <span class="stat-label">Women Total</span>
+            <span class="stat-value">7 of 41</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ratio</span>
+            <span class="stat-value">~17.1%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Prev. Woman</span>
+            <span class="stat-value">Eager (31&deg;)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 40 of 360 &mdash; Alice Smith &mdash;
+        v1.49.176 &mdash; Neo-Soul &mdash; Epic Records &mdash; 7th Woman &mdash; 40&deg; Milestone
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to Seattle, on the ancestral
+        territory of the Duwamish Tribal Organization (duwamishtribe.org), the Muckleshoot Indian Tribe, and
+        related Coast Salish and Southern Lushootseed-speaking peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
