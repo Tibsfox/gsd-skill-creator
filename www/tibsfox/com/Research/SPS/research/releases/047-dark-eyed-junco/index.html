@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 47&deg; &mdash; Dark-eyed Junco &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Snowbird element card */
+    .snowbird-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #7986CB 100%);
+      border: 2px solid #283593;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .snowbird-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Recursion card */
+    .recursion-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #AD1457;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .recursion-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #880E4F;
+    }
+
+    /* Family streak card */
+    .streak-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Ketterson card */
+    .ketterson-card {
+      background: linear-gradient(135deg, #E0F7FA 0%, #4DD0E1 100%);
+      border: 2px solid #00838F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .ketterson-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #006064;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.snowbird { background: #283593; }
+    .theory-icon.recursion { background: #AD1457; }
+    .theory-icon.streak { background: #1565C0; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-icon.ketterson { background: #00838F; }
+    .theory-icon.habitat { background: #00695C; }
+    .theory-icon.lump { background: #E65100; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">47&deg;</div>
+      <div class="release-title-block">
+        <h2>Dark-eyed Junco</h2>
+        <div class="scientific">Junco hyemalis</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      simple musical trill + sharp tik call &mdash; the snowbird, 3rd consecutive Passerellidae (45&ndash;46&ndash;47), the species that CONTAINS degree 11 (Oregon Junco), one of the most abundant birds in North America (~630 million), &ldquo;the winter rush-bird,&rdquo; Ellen Ketterson&rsquo;s bird, E=3 continues, year-round PNW resident (Oregon form)
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Red-legged Frog</strong> (<em>Rana aurora</em>) at degree 47. Because the SPS Part B engine is birds-and-mammals only, Dark-eyed Junco replaces it. The substitution preserves the original&rsquo;s <strong>E=3 energy level</strong> and <strong>forest floor habitat</strong>. This is the <strong>third consecutive amphibian replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47) &mdash; the engine is passing through the amphibian belt of the original CSV.</p>
+        </div>
+
+        <!-- Recursion Card -->
+        <div class="recursion-card">
+          <h3>Taxonomic Recursion: Degree 47 Contains Degree 11</h3>
+          <p>The Oregon Junco entered the engine at <strong>degree 11</strong> as a subspecies group (<em>J. h. oreganus</em>). Now at degree 47, the <strong>Dark-eyed Junco</strong> enters as the umbrella species &mdash; the parent taxon that INCLUDES the Oregon Junco as one of its five subspecies groups. Degree 47 <em>contains</em> degree 11. The first time the engine encounters a species that encloses a previous entry taxonomically. Container and contents at different positions in the sequence.</p>
+        </div>
+
+        <!-- Snowbird Element Card -->
+        <div class="snowbird-card">
+          <h3>The 48th Acoustic Element: The Snowbird</h3>
+          <p>The Dark-eyed Junco&rsquo;s song is a <strong>simple, even, musical trill on a single pitch</strong> &mdash; 7&ndash;23 notes repeated over 1&ndash;2 seconds. Named &ldquo;the snowbird&rdquo; for the bird&rsquo;s cultural identity as the harbinger of winter, the simplicity of its song (one note repeated like one crystal multiplied into a snowfall), and the ubiquity of its signal (~630 million individuals across North America).</p>
+          <p><strong>The first acoustic element defined by elemental reduction</strong> &mdash; radical simplicity as strategy. After the preamble&rsquo;s complexity (45) and the rasp&rsquo;s intensity (46), the snowbird strips song to one note, one pitch, repeated.</p>
+        </div>
+
+        <!-- Family Streak Card -->
+        <div class="streak-card">
+          <h3>Three Consecutive Passerellidae &mdash; Degrees 45&ndash;46&ndash;47</h3>
+          <p><strong>Song Sparrow (45) + Spotted Towhee (46) + Dark-eyed Junco (47)</strong> &mdash; three consecutive entries from the same family. Three genera (<em>Melospiza</em>, <em>Pipilo</em>, <em>Junco</em>). Three song strategies (complex, textural, simple). Three habitats (wetland edge, dense understory, forest floor). The only family besides Trochilidae (35&ndash;36&ndash;37) to achieve a three-degree consecutive streak.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=3 Continues &mdash; Dynamic Range Equilibrium Achieved</h3>
+          <p>Second consecutive E=3 (after Spotted Towhee at degree 46). E=2 + E=3 together now hold <strong>21 degrees (43.8%)</strong>, exactly matching E=4&rsquo;s 21 degrees (43.8%). The lower registers have caught up. Dynamic range equilibrium reached for the first time in the engine&rsquo;s history.</p>
+        </div>
+
+        <!-- Ketterson Card -->
+        <div class="ketterson-card">
+          <h3>Ketterson&rsquo;s Bird &mdash; The Premier Model Organism</h3>
+          <p>Ellen D. Ketterson (Indiana University) has spent decades studying Dark-eyed Juncos at the Mountain Lake Biological Station, pioneering <strong>&ldquo;phenotypic engineering&rdquo;</strong> &mdash; experimentally manipulating testosterone to reveal life-history trade-offs. The junco is the subject of <strong>1,000+ scientific papers</strong>, covering behavioral ecology, neuroendocrinology, speciation, and urban evolution. The Margaret Morse Nice Medal &mdash; named for the researcher who studied Song Sparrow (degree 45) &mdash; was awarded to Ketterson for junco research (degree 47). Two Passerellidae, one medal.</p>
+        </div>
+
+        <h2>The Winter Rush-Bird</h2>
+        <p><em>Junco hyemalis</em> &mdash; from Spanish <em>junco</em> (rush plant, from Latin <em>juncus</em>) + Latin <em>hiemalis</em> (of winter). &ldquo;The winter rush-bird&rdquo; &mdash; named for the season it appears and the ground cover it haunts. Unlike the Song Sparrow&rsquo;s pure-acoustic naming (&ldquo;melody song-finch&rdquo;) or the Spotted Towhee&rsquo;s acoustic-visual split (&ldquo;the spotted chirper&rdquo;), the Dark-eyed Junco&rsquo;s name contains NO sound reference. The junco is named for its presence, not its voice.</p>
+
+        <h3>Recent Naming Comparison</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Binomial</th><th>Translation</th><th>Philosophy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>43</td><td>American Goldfinch</td><td><em>Spinus tristis</em></td><td>&ldquo;Sad thorn-bird&rdquo;</td><td>Ecological + Emotional</td></tr>
+            <tr><td>44</td><td>Lesser Goldfinch</td><td><em>Spinus psaltria</em></td><td>&ldquo;Female lute player of the thorn bush&rdquo;</td><td>Ecological + Musical</td></tr>
+            <tr><td>45</td><td>Song Sparrow</td><td><em>Melospiza melodia</em></td><td>&ldquo;Melody song-finch&rdquo;</td><td>Musical + Musical</td></tr>
+            <tr><td>46</td><td>Spotted Towhee</td><td><em>Pipilo maculatus</em></td><td>&ldquo;The spotted chirper&rdquo;</td><td>Acoustic + Visual</td></tr>
+            <tr><td><strong>47</strong></td><td><strong>Dark-eyed Junco</strong></td><td><strong><em>Junco hyemalis</em></strong></td><td><strong>&ldquo;The winter rush-bird&rdquo;</strong></td><td><strong>Ecological + Temporal</strong></td></tr>
+          </tbody>
+        </table>
+        <p>The naming oscillation continues. After the Spotted Towhee&rsquo;s acoustic-visual split, the Dark-eyed Junco&rsquo;s name drops sound entirely &mdash; the first Passerellidae in the engine whose name is non-acoustic.</p>
+
+        <h2>The Sound: Trill and Tik</h2>
+        <p><strong>Song:</strong> 1&ndash;2 seconds. A simple, even, musical trill &mdash; one syllable type repeated 7&ndash;23 times at constant pitch. Frequency 2.4&ndash;8.2 kHz, peak energy 3&ndash;6 kHz. The simplest song in the Passerellidae run.</p>
+        <p><strong>Tik call:</strong> A sharp, hard, metallic &ldquo;tik&rdquo; or &ldquo;tsick&rdquo; lasting 0.02&ndash;0.05 seconds. Year-round contact and alarm call. The most common woodland sound in many PNW forests &mdash; so ubiquitous it fades into the background. Shared identically across all five subspecies groups.</p>
+        <p><strong>Soft song:</strong> Low-amplitude song used in close-range aggressive encounters and mate-guarding. Documented by Reichard et al. (2013) &mdash; a quiet, aggressive vocal channel beneath the familiar broadcast trill.</p>
+
+        <h3>The Passerellidae Song Gradient</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Feature</th><th>Song Sparrow (45)</th><th>Spotted Towhee (46)</th><th>Dark-eyed Junco (47)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acoustic element</td><td>The Preamble</td><td>The Rasp</td><td><strong>The Snowbird</strong></td></tr>
+            <tr><td>Song structure</td><td>Multi-part (complex)</td><td>1&ndash;2 part (textured)</td><td><strong>1 part (simple trill)</strong></td></tr>
+            <tr><td>Duration</td><td>2&ndash;4 seconds</td><td>~1.5 seconds</td><td><strong>1&ndash;2 seconds</strong></td></tr>
+            <tr><td>Complexity</td><td>HIGH</td><td>MODERATE</td><td><strong>SIMPLE</strong></td></tr>
+            <tr><td>Energy</td><td>E=2</td><td>E=3</td><td><strong>E=3</strong></td></tr>
+            <tr><td>Strategy</td><td>Elaboration</td><td>Concentration</td><td><strong>Reduction</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Complex to textural to simple. The Passerellidae arc completes a simplification gradient across three degrees.</p>
+
+        <h2>The 1973 Lump</h2>
+        <p>Before 1973, North America had at least five separate junco species: Oregon, Slate-colored, White-winged, Pink-sided, and Gray-headed. The AOU lumped all five into the Dark-eyed Junco based on hybridization in overlap zones. <strong>The lump remains contested.</strong> Molecular studies (Mil&aacute; et al. 2007; Friis et al. 2016) show significant genetic divergence between forms. The hybrid zones are narrow and stable. Under the Phylogenetic Species Concept, the Oregon Junco is a species.</p>
+        <p><strong>Taxonomic counterpoint:</strong> Degree 46 documented the 1995 Spotted Towhee/Eastern Towhee <em>split</em>. Degree 47 documents the 1973 junco <em>lump</em>. The Passerellidae run at 45&ndash;47 contains both splitting and lumping &mdash; a tutorial in taxonomic decision-making within a single family.</p>
+
+        <h2>The UCSD Campus Juncos: Evolution in Real Time</h2>
+        <p>In the early 1980s, Dark-eyed Juncos colonized the UC San Diego campus. In <strong>less than 20 years</strong>, the population diverged measurably from its mountain source: shorter wings and tails, reduced white tail flash, higher-pitched songs, reduced aggression, increased comfort around humans, extended breeding season (up to 4 clutches), and changed nest sites (buildings instead of ground). Genetic analysis confirmed heritable changes &mdash; <strong>genuine evolution</strong>, not just behavioral plasticity. One of the fastest documented cases of evolution in a wild vertebrate.</p>
+
+        <h2>15 Subspecies in 5 Groups</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Group</th><th>Range</th><th>Appearance</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Oregon</strong></td><td>Pacific coast, AK to Baja</td><td>Dark hood, rusty back, pink flanks</td></tr>
+            <tr><td>Slate-colored</td><td>Eastern NA, boreal Canada</td><td>Uniform dark slate, white below</td></tr>
+            <tr><td>Pink-sided</td><td>Northern Rockies</td><td>Gray hood, broad pink flanks</td></tr>
+            <tr><td>Gray-headed</td><td>Southern Rockies, Great Basin</td><td>Gray head, rusty back patch</td></tr>
+            <tr><td>Red-backed</td><td>Mountains of AZ/NM</td><td>Gray head, bright rufous back</td></tr>
+          </tbody>
+        </table>
+        <p>The PNW form, <em>J. h. oreganus</em>, is the nominate subspecies of the Oregon group &mdash; the darkest form with the most contrasting hood. This is the bird that entered the engine at degree 11 and is now enclosed within degree 47.</p>
+
+        <h2>Family Tracker After Degree 47</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td><strong>Passerellidae</strong></td><td><strong>45, 46, 47</strong></td><td><strong>3 (THREE-DEGREE STREAK)</strong></td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Paridae</td><td>3, 9</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+          </tbody>
+        </table>
+        <p>Passerellidae rises to 3 members, tying Trochilidae. Both families achieved three-degree consecutive streaks. Ten consecutive Passeriformes (38&ndash;47). Non-passerine needed urgently.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon snowbird">S</div>
+            <div class="theory-content">
+              <h4>The Snowbird <span class="theory-level foundational">foundational</span></h4>
+              <p>The 48th acoustic element. A simple, musical, single-pitch trill defined by elemental reduction. One note repeated at one pitch for 1&ndash;2 seconds. The Passerellidae arc completes: complex (preamble) to textural (rasp) to elemental (snowbird).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon recursion">R</div>
+            <div class="theory-content">
+              <h4>Taxonomic Recursion <span class="theory-level foundational">foundational</span></h4>
+              <p>Degree 47 contains degree 11. The Dark-eyed Junco species complex includes the Oregon Junco subspecies group. The first time the engine encounters a species that encloses a previous entry. Container and contents at different positions in the sequence.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon streak">3</div>
+            <div class="theory-content">
+              <h4>Passerellidae Three-Degree Streak <span class="theory-level foundational">foundational</span></h4>
+              <p>Three consecutive Passerellidae (45&ndash;46&ndash;47). Three genera, three habitats, three song strategies. Only the second three-degree family streak (after Trochilidae 35&ndash;36&ndash;37). The Passerellidae run is a ground-level transect from water to undergrowth to forest floor.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>Energy Equilibrium <span class="theory-level foundational">foundational</span></h4>
+              <p>Second consecutive E=3. E=2 + E=3 = 21 degrees (43.8%), exactly matching E=4&rsquo;s 21 degrees. Dynamic range equilibrium achieved for the first time in the engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon ketterson">K</div>
+            <div class="theory-content">
+              <h4>Model Organism <span class="theory-level intermediate">intermediate</span></h4>
+              <p>1,000+ scientific papers. Ketterson&rsquo;s phenotypic engineering. UCSD rapid evolution. The most intensively studied wild songbird in the world. The engine&rsquo;s most researched species entry.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon habitat">H</div>
+            <div class="theory-content">
+              <h4>Forest Floor Habitat <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Third Passerellidae habitat band: forest floor and woodland edge. After wetland edge (45) and dense understory (46), the junco occupies the open ground layer beneath the canopy. Three species, three habitat textures, same vertical zone.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon lump">L</div>
+            <div class="theory-content">
+              <h4>The 1973 Lump <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Five formerly separate species lumped into one. Counterpoint to the 1995 Spotted Towhee split at degree 46. The Passerellidae run contains both splitting and lumping &mdash; both directions of taxonomic revision within one family.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-011: Oregon Junco</strong>
+            <p>TAXONOMIC RECURSION. The Oregon Junco at degree 11 is a subspecies group WITHIN the Dark-eyed Junco at degree 47. Degree 47 contains degree 11. The engine&rsquo;s first nested taxonomic relationship &mdash; container and contents at different positions in the sequence.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-046: Spotted Towhee</strong>
+            <p>PASSERELLIDAE CONSECUTIVE (46&ndash;47). The rasp meets the snowbird. Textural intensity followed by elemental simplicity. Also: the 1995 towhee SPLIT vs. the 1973 junco LUMP. Two taxonomic operations within one family in two degrees.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-045: Song Sparrow</strong>
+            <p>PASSERELLIDAE RUN ANCHOR. Song Sparrow began the three-degree streak. Complex preamble (45) to buzzy rasp (46) to simple snowbird (47). Three genera, three strategies, one family. Margaret Morse Nice studied the Song Sparrow; Ketterson&rsquo;s Margaret Morse Nice Medal was earned studying the junco.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>POPULATION RIVALS. Dark-eyed Junco (~630 million) may be the second most abundant bird in North America after the American Robin (degree 25). The two most common birds in the engine. Both year-round PNW residents. Both ground-foragers.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>SPECIATION MODELS. Red Crossbill has 10+ call types that may represent incipient species. The junco complex has 5 former species now lumped as one. Both are ongoing speciation cases. The crossbill diverges; the junco was compressed.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-002: Varied Thrush</strong>
+            <p>TRILL CONTRAST (via degree 11). The Varied Thrush holds a genuinely sustained tone &mdash; continuous from start to finish. The junco&rsquo;s trill is structurally discrete notes perceived as continuous. Same perceptual result, opposite architectures.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Dark-eyed Junco documented as common year-round resident throughout Washington. Oregon form dominant in western WA. Multiple subspecies present. One of the most frequently encountered birds in PNW field surveys.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Forest floor ecology. Altitudinal migration patterns. Ground-nesting adaptation. Dietary shift from insects to seeds. Geographic variation following Gloger&rsquo;s rule in the PNW.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Dark-eyed Junco (<em>Junco hyemalis</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Dark-eyed Junco. Cornell Lab of Ornithology.</li>
+          <li>Audubon &mdash; Dark-eyed Junco Field Guide.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Dark-eyed Junco.</li>
+          <li>Wikipedia &mdash; &ldquo;Dark-eyed junco.&rdquo;</li>
+          <li>Pajarito Environmental Education Center &mdash; Dark-eyed Junco species guide.</li>
+          <li>Cardoso, G. C. and Hu, Y. (2011). &ldquo;Inferring performance in the songs of dark-eyed juncos.&rdquo; <em>Behavioral Ecology</em>.</li>
+          <li>Mil&aacute;, B. et al. (2007). Molecular phylogenetics of Dark-eyed Junco complex. <em>Molecular Ecology</em>.</li>
+          <li>Ketterson, E. D. &mdash; Faculty page, Indiana University Bloomington.</li>
+          <li>Reichard, D. G. et al. (2013). &ldquo;Low-amplitude songs produced by male dark-eyed juncos.&rdquo; <em>Journal of Ornithology</em>.</li>
+          <li>Ketterson Lab &mdash; Indiana University Bloomington.</li>
+          <li>Yeh, P. J. and Price, T. D. (2004). &ldquo;Adaptive Phenotypic Plasticity.&rdquo; <em>The American Naturalist</em>.</li>
+          <li>FeederWatch &mdash; &ldquo;When is a Junco a Junco?&rdquo;</li>
+          <li>Partners in Flight / BBS trend data.</li>
+          <li>Cornell Lab (2021). &ldquo;How Juncos Changed Their Migration, Behavior, and Plumage.&rdquo; <em>Living Bird</em>.</li>
+          <li>Ketterson, E. D. and Nolan, V. Jr. &mdash; Research Group, IU ScholarWorks.</li>
+          <li>Friis, G. et al. (2016). Dark-eyed Junco hybrid zone analysis. <em>Molecular Ecology</em>.</li>
+          <li>Oregon Encyclopedia &mdash; &ldquo;Oregon Junco.&rdquo;</li>
+          <li>BirdLife International &mdash; Junco hyemalis factsheet.</li>
+          <li>Nature Mapping Foundation &mdash; WA distribution map.</li>
+          <li>Royal Society Open Science (2022). Song divergence in urban juncos.</li>
+          <li>Animal Diversity Web &mdash; Junco hyemalis.</li>
+          <li>Bird Alliance of Oregon &mdash; Dark-eyed Junco.</li>
+          <li>Animalia.bio &mdash; Dark-eyed Junco.</li>
+          <li>Celebrate Urban Birds / Cornell &mdash; Dark-eyed Junco.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">47&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Snowbird</div>
+          <div class="stat-detail">#48 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">2nd consecutive E=3 (46&ndash;47)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Passerellidae</div>
+          <div class="stat-detail">3rd member &mdash; three-degree streak</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Junco</em></div>
+          <div class="stat-detail">2nd appearance (degree 11 = Oregon)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Forest Floor</div>
+          <div class="stat-detail">Mixed woodland edge, all elevations</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Oregon form year-round in PNW</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">45 unique</div>
+          <div class="stat-detail">48 entries (0&ndash;47)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">19</div>
+          <div class="stat-detail">Passerellidae at 3 members (tied 5th)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">10 consecutive Passeriformes (38&ndash;47)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~630 Million</div>
+          <div class="stat-detail">One of the most abundant NA birds</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">18&ndash;30 g</div>
+          <div class="stat-detail">Smallest Passerellidae in the engine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value">~15 in 5 groups</div>
+          <div class="stat-detail">Formerly 5 separate species (lumped 1973)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Contains</div>
+          <div class="stat-value">Degree 11</div>
+          <div class="stat-detail">Oregon Junco is a subspecies group</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">BBS Trend</div>
+          <div class="stat-value">&minus;0.7%/yr</div>
+          <div class="stat-detail">31% decline since 1966</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 047</p>
+  </footer>
+</body>
+</html>

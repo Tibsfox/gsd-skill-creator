@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 47&deg; &mdash; Pedro the Lion &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3E2723);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>047 &mdash; Pedro the Lion</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>The Triangle Completes &mdash; Three Folk Degrees, One Gravitational Center</h3>
+      <p>
+        Pedro the Lion at degree 47&deg; completes the folk triangle that degrees 45&deg;
+        and 46&deg; orbited. Damien Jurado (45) met David Bazan at Shorewood High School
+        &mdash; they recognized each other by the same Crucified cassette tape and formed a
+        band that day. Casey Foubert of Pedro the Lion produced four Rocky Votolato (46) albums.
+        Now the hub itself arrives. Three consecutive folk-adjacent degrees &mdash; the murmur,
+        the confessional, the parable &mdash; all orbiting <strong>David Bazan</strong>. Born
+        January 22, 1976, Phoenix, Arizona. Assemblies of God preacher&rsquo;s kid. Faith
+        deconstructed. Concept albums as moral investigations. Living room shows for 40 people.
+        <em>Control</em> (2002) as the defining Seattle indie album of the early 2000s.
+        Reunion. Autobiographical five-album cycle. The gravitational center.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">47&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Pedro the Lion</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Indie Folk</span>
+          <span class="label-badge">Jade Tree</span>
+          <span class="neighborhood-badge">Greenwood</span>
+          <span class="first-badge">Triangle Complete (45&ndash;46&ndash;47)</span>
+          <span class="first-badge">First Jade Tree</span>
+          <span class="first-badge">Greenwood Enters</span>
+          <span class="first-badge">First East Coast Indie Label</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>A Preacher&rsquo;s Kid Who Lost His Faith and Found His Voice</h2>
+          <p>
+            David Shannon Bazan was born <strong>January 22, 1976</strong>, in <strong>Phoenix,
+            Arizona</strong>. He was raised in a deeply <strong>Assemblies of God</strong>
+            (Pentecostal) household. His father was a <strong>music pastor</strong>. His
+            great-grandparents on both sides were pastors in the Assemblies of God. His parents
+            met at <strong>Bible college</strong> in the early 1970s. Church music was, as Bazan
+            has described it, &ldquo;the air that we breathed.&rdquo; His father began giving
+            David piano lessons when he was three years old.
+          </p>
+          <p>
+            The family lived in Phoenix until David was twelve. They moved around northern
+            California, then settled in the <strong>Seattle area</strong> when David was a
+            sophomore in high school. He attended <strong>Shorewood High School</strong> in
+            <strong>Shoreline, Washington</strong>. There, he met <strong>Damien Jurado</strong>
+            &mdash; recognizing him in a hallway because they were both carrying cassettes by
+            the Crucified. They formed a band the same day they met. Bazan drummed for Jurado
+            in <strong>the Guilty</strong>, <strong>Linus</strong>, and <strong>Coolidge</strong>.
+            That friendship is the foundational link in the folk triangle.
+          </p>
+          <blockquote>
+            &ldquo;In my particular line of descendants, I&rsquo;m the first person who
+            defected from the faith.&rdquo; &mdash; David Bazan
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Whole (EP)</h4>
+              <div class="disco-years">1997 &middot; Tooth &amp; Nail</div>
+              <p>
+                Debut release. Six tracks. Bazan played nearly every instrument.
+                Entered the music industry through the Christian indie ecosystem.
+                Themes of isolation, doubt, and faith.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>It&rsquo;s Hard to Find a Friend</h4>
+              <div class="disco-years">1998 &middot; Made in Mexico</div>
+              <p>
+                Debut full-length. Lo-fi instrumentation, first-person narrative
+                lyrics, conversational vocal delivery. Pitchfork 7.8/10.
+                Reissued on Jade Tree (2001).
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Winners Never Quit</h4>
+              <div class="disco-years">2000 &middot; Jade Tree</div>
+              <p>
+                First Jade Tree album. First concept album &mdash; political
+                themes through character-driven narratives. Brought Pedro the
+                Lion to the national indie audience.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Control</h4>
+              <div class="disco-years">2002 &middot; Jade Tree</div>
+              <p>
+                <strong>The defining album.</strong> Concept album: a businessman&rsquo;s
+                affair, his wife&rsquo;s revenge. Capitalism, infidelity, fear of death.
+                Inspired by Seattle&rsquo;s 1999 WTO protests. Casey Foubert on bass.
+                Pedro the Lion&rsquo;s commercial and critical peak.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Achilles Heel</h4>
+              <div class="disco-years">2004 &middot; Jade Tree</div>
+              <p>
+                T.W. Walsh arrives as co-writer. More personal, less narrative.
+                Final Pedro the Lion album before fifteen-year hiatus.
+                The faith is already eroding.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Curse Your Branches</h4>
+              <div class="disco-years">2009 &middot; Barsuk (solo)</div>
+              <p>
+                <strong>The faith-loss album.</strong> Released under Bazan&rsquo;s
+                own name. A raw examination of lost belief. Title references Genesis.
+                Reviewed by Christianity Today and the Freedom From Religion Foundation
+                &mdash; from opposite directions.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Phoenix</h4>
+              <div class="disco-years">2019 &middot; Polyvinyl</div>
+              <p>
+                <strong>Reunion album.</strong> First in a five-album autobiographical
+                cycle. Named for Phoenix, AZ. Childhood memories interrogated from
+                adult distance. Pedro the Lion returns after 15 years.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Havasu</h4>
+              <div class="disco-years">2022 &middot; Polyvinyl</div>
+              <p>
+                Second autobiographical album. Lake Havasu, Arizona &mdash;
+                seventh grade. The transition from childhood to adolescence.
+                Certainties beginning to wobble.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Santa Cruz</h4>
+              <div class="disco-years">2024 &middot; Polyvinyl</div>
+              <p>
+                Third autobiographical album. Santa Cruz, California &mdash;
+                teenage years and early adulthood. Coming of age.
+                Seattle-themed album forthcoming.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Faith Deconstruction Arc</h2>
+          <p>
+            David Bazan&rsquo;s spiritual journey is the central narrative of his career and
+            one of the most publicly documented faith deconstructions in American independent
+            music. Multi-generational <strong>Assemblies of God</strong> family. Great-grandparents
+            were AG pastors. Father a music pastor. Church music from birth. He didn&rsquo;t
+            question his faith until he was <strong>24</strong>.
+          </p>
+          <p>
+            By his late twenties, the doctrinal foundations cracked. The breaking point was the
+            doctrine of <strong>eternal punishment</strong> &mdash; the idea that a loving God
+            would condemn people to hell forever. He oscillated between &ldquo;atheism, skepticism,
+            and uncertainty&rdquo; beginning around 2004. Pedro the Lion dissolved in 2006.
+            <em>Curse Your Branches</em> (2009) addressed God directly with the grief of someone
+            who had lost a primary relationship. He now identifies as <strong>agnostic</strong>.
+          </p>
+          <p>
+            The <strong><em>Strange Negotiations</em></strong> documentary (2019, directed by
+            <strong>Brandon Vedder</strong>, premiered at SXSW, IMDb 8.1) followed Bazan
+            through 2015&ndash;2016: solo touring, spiritual struggle, the American political
+            landscape. The autobiographical album cycle (<em>Phoenix</em>, <em>Havasu</em>,
+            <em>Santa Cruz</em>) revisits the childhood that produced the faith, examining it
+            with the distance of decades.
+          </p>
+          <p>
+            <strong>Erica Campbell</strong> (degree 42, Gospel/R&amp;B) proclaims faith from
+            within the tradition. <strong>David Bazan</strong> (degree 47, Indie Folk) interrogates
+            faith from outside it. Five degrees apart. Both making music about God &mdash;
+            Campbell says &ldquo;yes,&rdquo; Bazan says &ldquo;I don&rsquo;t know.&rdquo;
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Living Room Show Legacy</h2>
+          <p>
+            In 2009, Bazan pioneered the <strong>living room show</strong> model: private
+            performances for <strong>40&ndash;50 people</strong> in fans&rsquo; actual living
+            rooms, lofts, yoga studios, bike shops, coffee shops, and churches. No venue, no
+            promoter, no sound engineer, no ticket platform. Just the artist, the guitar, and
+            the room. Bazan alternated between these intimate shows and 300&ndash;500 capacity
+            rock clubs with a full band.
+          </p>
+          <p>
+            The format influenced a generation of independent touring musicians, including
+            <strong>Rocky Votolato</strong> (degree 46). It represents the most extreme reduction
+            of the music industry&rsquo;s institutional infrastructure &mdash; the endpoint of
+            the engine&rsquo;s progressive miniaturization from Mercury Records orchestras
+            (degree 0) to a person in someone&rsquo;s living room (degree 47).
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Parable Tone</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                48th acoustic element. The vocal quality produced when a singer
+                delivers narrative lyrics in a conversational register &mdash;
+                neither whispering (the murmur) nor declaring (the confessional)
+                but telling a story with measured cadence. Bazan&rsquo;s baritone
+                sits at the front of the mix, unadorned. Words articulated clearly,
+                melodies simple and repeated. The voice becomes a narrator rather
+                than a singer. Completes a three-degree folk-vocal taxonomy:
+                murmur (45), confessional (46), parable tone (47).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Gravitational Center</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                48th artist-city pattern. The artist or project around which
+                other artists orbit without the center necessarily being the
+                most famous or prolific. Defined by connections: Pedro the Lion
+                links Jurado (45, high school friendship), Votolato (46, Foubert
+                production), and now itself (47). The center does not seek
+                influence &mdash; it radiates it.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Suspended Resolve</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                47th blue note deployment. The moment when a chord progression
+                or lyrical narrative reaches its expected resolution and does not
+                resolve. <em>Control</em>&rsquo;s narrative ends with murder but
+                the moral question hangs. <em>Curse Your Branches</em> addresses
+                God without arriving at belief or disbelief. Three consecutive
+                blue notes mapping incompleteness: silence (45), rupture (46),
+                irresolution (47).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Three Consecutive Folk-Adjacent</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47). Longest folk-family run
+                in engine history. Genre Stage 28. Three production paradigms:
+                fingerpicking (Jurado), punk-folk (Votolato), concept-album
+                indie (Bazan). The &ldquo;indie&rdquo; prefix marks the
+                production difference; the &ldquo;folk&rdquo; root marks the
+                songwriting lineage.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 Rises</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                9th E=3 deployment. Distribution: 2:14:9:12:10:2. Cult band with
+                outsized cultural influence. <em>Control</em> on indie-rock canon
+                lists. Living room shows. <em>Strange Negotiations</em> documentary.
+                Autobiographical cycle with sustained critical attention. Known in
+                every independent record store; absent from general public awareness.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">45&deg;</span> Damien Jurado &mdash; <strong>The Triangle: high school friend.</strong> Met at Shorewood High School over a shared Crucified cassette. Formed a band the same day. Bazan drummed for Jurado in the Guilty, Linus, Coolidge. Bazan produced <em>I Break Chairs</em> (2002). Both raised in conservative Christian households (Jurado in Houston, Bazan in Phoenix), both publicly deconstructed faith. The murmur and the parable tone. E=2 and E=3.</li>
+            <li><span class="ref-degree">46&deg;</span> Rocky Votolato &mdash; <strong>The Triangle: Foubert connection.</strong> Casey Foubert (Pedro the Lion) produced four Votolato albums (2006&ndash;2012), defining Votolato&rsquo;s Barsuk-era commercial peak. Both E=3. The confessional and the parable tone. Votolato adopted Bazan&rsquo;s living room show format.</li>
+            <li><span class="ref-degree">42&deg;</span> Erica Campbell &mdash; <strong>Faith at both ends.</strong> Campbell (Gospel/R&amp;B, E=5) proclaims from within the tradition. Bazan (Indie Folk, E=3) interrogates from outside it. Five degrees apart. Same subject, opposite positions. Both honest.</li>
+            <li><span class="ref-degree">44&deg;</span> Chong the Nomad &mdash; <strong>Four-degree arc.</strong> Electronic/R&amp;B (44) to folk whisper (45) to folk confession (46) to indie-folk parable (47). Four consecutive independently produced, voice-forward degrees. The grain, the murmur, the confessional, the parable tone.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>Infrastructure arc.</strong> Mercury Records orchestras (0) through Sub Pop (45) through Barsuk (46) through Jade Tree (47) through living rooms (47). The progressive miniaturization of production infrastructure across 48 degrees. The narrative ambition persists; the institutional scale miniaturizes.</li>
+            <li><span class="ref-degree">1&deg;</span> Bill Frisell &mdash; <strong>Quiet register.</strong> Both operate at the deliberate, spacious end of their genre spectrums. Frisell&rsquo;s ambient jazz and Bazan&rsquo;s lo-fi indie share a commitment to space, silence, and pacing. Both are Seattle musicians who resist loudness.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Frontman</span>
+            <span class="stat-value">David Shannon Bazan</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Jan 22, 1976</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Phoenix, AZ</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Raised</span>
+            <span class="stat-value">Assemblies of God</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">HS</span>
+            <span class="stat-value">Shorewood (Shoreline)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Resides</span>
+            <span class="stat-value">Edmonds, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Faith</span>
+            <span class="stat-value">Agnostic (ex-evangelical)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">47 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">28</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#48 Gravitational Center</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#48 Parable Tone</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#47 Suspended Resolve</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Label History</h4>
+          <div class="stat-row">
+            <span class="stat-label">1997</span>
+            <span class="stat-value">Tooth &amp; Nail</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1998</span>
+            <span class="stat-value">Made in Mexico</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2000&ndash;2004</span>
+            <span class="stat-value">Jade Tree</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2006&ndash;2011</span>
+            <span class="stat-value">Barsuk (solo)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2019&ndash;present</span>
+            <span class="stat-value">Polyvinyl</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Casey Foubert</span>
+            <span class="stat-value">Bass/keys (Control era)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">T.W. Walsh</span>
+            <span class="stat-value">Co-writer (Achilles Heel)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Damien Jurado</span>
+            <span class="stat-value">HS friend / collaborator</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>The Triangle</h4>
+          <div class="stat-row">
+            <span class="stat-label">45&deg; Jurado</span>
+            <span class="stat-value">Shorewood HS friend</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">46&deg; Votolato</span>
+            <span class="stat-value">Foubert produced 4 LPs</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">47&deg; PtL</span>
+            <span class="stat-value">The hub itself</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Autobiographical Cycle</h4>
+          <div class="stat-row">
+            <span class="stat-label">1 &middot; Phoenix</span>
+            <span class="stat-value">2019</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2 &middot; Havasu</span>
+            <span class="stat-value">2022</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">3 &middot; Santa Cruz</span>
+            <span class="stat-value">2024</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">4 &middot; Seattle?</span>
+            <span class="stat-value">Forthcoming</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">5 &middot; TBD</span>
+            <span class="stat-value">Forthcoming</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">PtL Albums</span>
+            <span class="stat-value">8 (+ EPs)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Solo Albums</span>
+            <span class="stat-value">6+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Band Active</span>
+            <span class="stat-value">1995&ndash;2006, 2017&ndash;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Documentary</span>
+            <span class="stat-value">Strange Negotiations (2019)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Living Room</span>
+            <span class="stat-value">Pioneered 2009</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 47</span>
+            <span class="stat-value">2:14:9:12:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3 Mode</span>
+            <span class="stat-value">9th (rises from 8)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk-adjacent</span>
+            <span class="stat-value">3 consec. (45&ndash;47)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Women</span>
+            <span class="stat-value">10 / 48 (~20.8%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 47 of 360 &mdash; Pedro the Lion &mdash;
+        Indie Folk &mdash; Jade Tree &mdash;
+        Greenwood &mdash;
+        Triangle Complete &mdash; First Jade Tree &mdash; First East Coast Indie Label &mdash; Greenwood Enters
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to the
+        Seattle metropolitan area, on the ancestral territory of the Duwamish Tribal Organization
+        (duwamishtribe.org), the Muckleshoot Indian Tribe, and related Coast Salish and
+        Southern Lushootseed-speaking peoples. Greenwood, like all Seattle neighborhoods,
+        sits on Duwamish land.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
