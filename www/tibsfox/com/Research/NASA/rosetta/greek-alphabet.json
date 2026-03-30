@@ -1,0 +1,29 @@
+{
+  "title": "Greek Alphabet — Engineering and Physics Usage",
+  "letters": [
+    {"upper":"Α","lower":"α","name":"Alpha","usage":"Angle of attack, thermal diffusivity, fine-structure constant α≈1/137, angular acceleration"},
+    {"upper":"Β","lower":"β","name":"Beta","usage":"Sideslip angle, thermodynamic beta (1/kT), phase constant, velocity ratio v/c"},
+    {"upper":"Γ","lower":"γ","name":"Gamma","usage":"Specific heat ratio (Cp/Cv), Lorentz factor, shear strain, Euler-Mascheroni constant"},
+    {"upper":"Δ","lower":"δ","name":"Delta","usage":"Change/difference (Δv), small deflection, boundary layer thickness, Kronecker delta"},
+    {"upper":"Ε","lower":"ε","name":"Epsilon","usage":"Strain, permittivity, small quantity, emissivity (thermal radiation)"},
+    {"upper":"Ζ","lower":"ζ","name":"Zeta","usage":"Damping ratio, Riemann zeta function, electrokinetic potential"},
+    {"upper":"Η","lower":"η","name":"Eta","usage":"Efficiency, dynamic viscosity, metric tensor component"},
+    {"upper":"Θ","lower":"θ","name":"Theta","usage":"Angle (polar coordinates, joint angles), temperature ratio, Heaviside step function"},
+    {"upper":"Ι","lower":"ι","name":"Iota","usage":"Rarely used in engineering (inclusion map in mathematics)"},
+    {"upper":"Κ","lower":"κ","name":"Kappa","usage":"Curvature, thermal conductivity (some conventions), bulk modulus ratio"},
+    {"upper":"Λ","lower":"λ","name":"Lambda","usage":"Wavelength, eigenvalue, thermal conductivity, Lagrange multiplier, decay constant"},
+    {"upper":"Μ","lower":"μ","name":"Mu","usage":"Coefficient of friction, dynamic viscosity, micro- prefix (10⁻⁶), gravitational parameter (GM), mean"},
+    {"upper":"Ν","lower":"ν","name":"Nu","usage":"Frequency, kinematic viscosity, Poisson's ratio, neutrino"},
+    {"upper":"Ξ","lower":"ξ","name":"Xi","usage":"Dimensionless distance, random variable, damping factor"},
+    {"upper":"Ο","lower":"ο","name":"Omicron","usage":"Rarely used (conflicts with zero/O). Big-O notation uses Latin O."},
+    {"upper":"Π","lower":"π","name":"Pi","usage":"π = 3.14159... (circle ratio). Product notation (Π). Pion. Osmotic pressure."},
+    {"upper":"Ρ","lower":"ρ","name":"Rho","usage":"Density (mass/volume), resistivity, autocorrelation, radius in spherical coords"},
+    {"upper":"Σ","lower":"σ","name":"Sigma","usage":"Summation (Σ), stress (σ), standard deviation, Stefan-Boltzmann constant, conductivity"},
+    {"upper":"Τ","lower":"τ","name":"Tau","usage":"Shear stress, torque, time constant (RC circuit: τ=RC), optical depth, proper time"},
+    {"upper":"Υ","lower":"υ","name":"Upsilon","usage":"Rarely used in engineering (upsilon meson in particle physics)"},
+    {"upper":"Φ","lower":"φ","name":"Phi","usage":"Angle (azimuthal), electric potential, magnetic flux, golden ratio φ=(1+√5)/2, phase angle"},
+    {"upper":"Χ","lower":"χ","name":"Chi","usage":"Chi-squared statistic, electric susceptibility, mole fraction"},
+    {"upper":"Ψ","lower":"ψ","name":"Psi","usage":"Wave function (quantum mechanics), stream function (fluid mechanics), angle"},
+    {"upper":"Ω","lower":"ω","name":"Omega","usage":"Ohm (Ω, resistance unit), angular velocity (ω=2πf), solid angle, argument of periapsis"}
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "title": "Fundamental Physical Constants",
+  "source": "NIST CODATA 2018 (current recommended values)",
+  "url": "https://physics.nist.gov/cuu/Constants/",
+  "last_updated": "2026-03-29",
+  "constants": [
+    {
+      "name": "Speed of light in vacuum",
+      "symbol": "c",
+      "value": 299792458,
+      "unit": "m/s",
+      "uncertainty": "exact (defined)",
+      "category": "universal",
+      "usage": "Relativity, electromagnetism, all of optics. E = mc². Pioneer 0's radio signal traveled at c."
+    },
+    {
+      "name": "Planck constant",
+      "symbol": "h",
+      "value": 6.62607015e-34,
+      "unit": "J·s",
+      "uncertainty": "exact (defined)",
+      "category": "quantum",
+      "usage": "Quantum mechanics, photon energy E = hf. Every photon detected by a NASA instrument carries energy quantized by h."
+    },
+    {
+      "name": "Reduced Planck constant",
+      "symbol": "ℏ",
+      "value": 1.054571817e-34,
+      "unit": "J·s",
+      "uncertainty": "exact (derived from h)",
+      "category": "quantum",
+      "usage": "ℏ = h/(2π). Appears in angular momentum quantization, Schrödinger equation, Heisenberg uncertainty."
+    },
+    {
+      "name": "Gravitational constant",
+      "symbol": "G",
+      "value": 6.67430e-11,
+      "unit": "m³/(kg·s²)",
+      "uncertainty": "2.2e-5 relative",
+      "category": "gravitation",
+      "usage": "Newton's law of gravitation: F = GMm/r². Every orbital mechanics calculation in the NASA series. The least precisely known fundamental constant."
+    },
+    {
+      "name": "Boltzmann constant",
+      "symbol": "k_B",
+      "value": 1.380649e-23,
+      "unit": "J/K",
+      "uncertainty": "exact (defined)",
+      "category": "thermodynamics",
+      "usage": "Connects temperature to energy. Thermal noise in electronics, atmospheric modeling, blackbody radiation."
+    },
+    {
+      "name": "Elementary charge",
+      "symbol": "e",
+      "value": 1.602176634e-19,
+      "unit": "C",
+      "uncertainty": "exact (defined)",
+      "category": "electromagnetic",
+      "usage": "Charge of proton (+e) and electron (-e). Every circuit, every LED, every Van Allen belt measurement."
+    },
+    {
+      "name": "Avogadro constant",
+      "symbol": "N_A",
+      "value": 6.02214076e23,
+      "unit": "1/mol",
+      "uncertainty": "exact (defined)",
+      "category": "chemistry",
+      "usage": "Number of particles per mole. Connects atomic mass to macroscopic mass. Propellant chemistry, life support."
+    },
+    {
+      "name": "Electron mass",
+      "symbol": "m_e",
+      "value": 9.1093837015e-31,
+      "unit": "kg",
+      "uncertainty": "3.0e-10 relative",
+      "category": "atomic",
+      "usage": "Electron behavior in detectors, plasma physics, Van Allen belt charged particle dynamics."
+    },
+    {
+      "name": "Proton mass",
+      "symbol": "m_p",
+      "value": 1.67262192369e-27,
+      "unit": "kg",
+      "uncertainty": "3.1e-10 relative",
+      "category": "atomic",
+      "usage": "Nuclear physics, cosmic ray interactions, radiation shielding calculations."
+    },
+    {
+      "name": "Neutron mass",
+      "symbol": "m_n",
+      "value": 1.67492749804e-27,
+      "unit": "kg",
+      "uncertainty": "5.7e-10 relative",
+      "category": "atomic",
+      "usage": "Nuclear physics, neutron activation analysis (Apollo lunar samples)."
+    },
+    {
+      "name": "Fine-structure constant",
+      "symbol": "α",
+      "value": 7.2973525693e-3,
+      "unit": "dimensionless",
+      "uncertainty": "1.5e-10 relative",
+      "category": "quantum",
+      "usage": "α ≈ 1/137. Strength of electromagnetic interaction. Governs atomic spectra — every spectroscopy mission."
+    },
+    {
+      "name": "Rydberg constant",
+      "symbol": "R_∞",
+      "value": 10973731.568160,
+      "unit": "1/m",
+      "uncertainty": "1.9e-12 relative",
+      "category": "atomic",
+      "usage": "Hydrogen spectral lines. Most precisely measured physical constant. Spectroscopy calibration."
+    },
+    {
+      "name": "Stefan-Boltzmann constant",
+      "symbol": "σ",
+      "value": 5.670374419e-8,
+      "unit": "W/(m²·K⁴)",
+      "uncertainty": "exact (derived)",
+      "category": "thermodynamics",
+      "usage": "Total power radiated by a blackbody: P = σAT⁴. Spacecraft thermal design, star luminosity."
+    },
+    {
+      "name": "Wien displacement constant",
+      "symbol": "b",
+      "value": 2.897771955e-3,
+      "unit": "m·K",
+      "uncertainty": "exact (derived)",
+      "category": "thermodynamics",
+      "usage": "Peak wavelength of blackbody: λ_max = b/T. Determines what color a hot object glows."
+    },
+    {
+      "name": "Vacuum permittivity",
+      "symbol": "ε₀",
+      "value": 8.8541878128e-12,
+      "unit": "F/m",
+      "uncertainty": "1.5e-10 relative",
+      "category": "electromagnetic",
+      "usage": "Coulomb's law, capacitance, electromagnetic wave propagation. Every radio link in spaceflight."
+    },
+    {
+      "name": "Vacuum permeability",
+      "symbol": "μ₀",
+      "value": 1.25663706212e-6,
+      "unit": "N/A²",
+      "uncertainty": "1.5e-10 relative",
+      "category": "electromagnetic",
+      "usage": "Magnetic field calculations, inductance, electromagnetic wave propagation. c² = 1/(ε₀μ₀)."
+    },
+    {
+      "name": "Standard acceleration of gravity",
+      "symbol": "g₀",
+      "value": 9.80665,
+      "unit": "m/s²",
+      "uncertainty": "exact (defined)",
+      "category": "gravitation",
+      "usage": "Specific impulse definition: Isp = F/(ṁg₀). Every rocket equation calculation in the series."
+    },
+    {
+      "name": "Standard atmosphere",
+      "symbol": "atm",
+      "value": 101325,
+      "unit": "Pa",
+      "uncertainty": "exact (defined)",
+      "category": "thermodynamics",
+      "usage": "Cabin pressure reference. Life support systems. Atmospheric reentry calculations."
+    },
+    {
+      "name": "Gas constant",
+      "symbol": "R",
+      "value": 8.314462618,
+      "unit": "J/(mol·K)",
+      "uncertainty": "exact (derived)",
+      "category": "thermodynamics",
+      "usage": "Ideal gas law PV = nRT. Propellant thermodynamics, atmospheric modeling, combustion chemistry."
+    },
+    {
+      "name": "Astronomical unit",
+      "symbol": "AU",
+      "value": 149597870700,
+      "unit": "m",
+      "uncertainty": "exact (defined)",
+      "category": "astronomical",
+      "usage": "Earth-Sun distance. Standard distance unit for solar system navigation."
+    },
+    {
+      "name": "Light-year",
+      "symbol": "ly",
+      "value": 9.4607304725808e15,
+      "unit": "m",
+      "uncertainty": "exact (derived from c)",
+      "category": "astronomical",
+      "usage": "Distance light travels in one Julian year. Interstellar distance reference."
+    },
+    {
+      "name": "Parsec",
+      "symbol": "pc",
+      "value": 3.0856775814913673e16,
+      "unit": "m",
+      "uncertainty": "exact (defined geometrically)",
+      "category": "astronomical",
+      "usage": "1 AU at 1 arcsecond parallax. Professional astronomy distance unit. 1 pc ≈ 3.26 ly."
+    },
+    {
+      "name": "Solar mass",
+      "symbol": "M☉",
+      "value": 1.98892e30,
+      "unit": "kg",
+      "uncertainty": "~5e-5 relative",
+      "category": "astronomical",
+      "usage": "Standard mass unit for stars, galaxies. GM☉ is known far more precisely than either G or M☉ alone."
+    },
+    {
+      "name": "Solar luminosity",
+      "symbol": "L☉",
+      "value": 3.828e26,
+      "unit": "W",
+      "uncertainty": "~0.4%",
+      "category": "astronomical",
+      "usage": "Standard luminosity unit. Solar panel design, spacecraft thermal environment at distance r: flux = L☉/(4πr²)."
+    },
+    {
+      "name": "Earth mass",
+      "symbol": "M⊕",
+      "value": 5.97217e24,
+      "unit": "kg",
+      "uncertainty": "~1e-5 relative",
+      "category": "astronomical",
+      "usage": "Orbital mechanics. GM⊕ = 3.986004418e14 m³/s² (standard gravitational parameter, known very precisely)."
+    },
+    {
+      "name": "Earth equatorial radius",
+      "symbol": "R⊕",
+      "value": 6378137,
+      "unit": "m",
+      "uncertainty": "exact (WGS-84 defined)",
+      "category": "astronomical",
+      "usage": "Orbital altitude reference. Atmospheric reentry corridor calculations."
+    },
+    {
+      "name": "Moon mass",
+      "symbol": "M☽",
+      "value": 7.342e22,
+      "unit": "kg",
+      "uncertainty": "~1e-4 relative",
+      "category": "astronomical",
+      "usage": "Lunar orbital mechanics. Pioneer 0's target. GM☽ = 4.9048695e12 m³/s²."
+    },
+    {
+      "name": "Moon mean radius",
+      "symbol": "R☽",
+      "value": 1737400,
+      "unit": "m",
+      "uncertainty": "~1 m",
+      "category": "astronomical",
+      "usage": "Lunar landing trajectory calculations, horizon distance, surface gravity (1.625 m/s²)."
+    }
+  ]
+}
