@@ -1,0 +1,266 @@
+{
+  "degree": 45,
+  "species": "Song Sparrow",
+  "scientific_name": "Melospiza melodia",
+  "slug": "045-song-sparrow",
+  "sound_type": "complex melodious song",
+  "energy": 2,
+  "ecosystem": "wetland edge / pond margin",
+  "season": "resident",
+  "family": "Passerellidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Pacific Chorus Frog",
+    "original_scientific_name": "Pseudacris regilla",
+    "reason": "SPS Part B engine is birds-and-mammals only. Song Sparrow replaces Pacific Chorus Frog, preserving the original E=2 energy level and wetland/pond margin habitat. The Song Sparrow occupies exactly the pond-edge habitat where the chorus frog calls.",
+    "preserved": ["E=2 energy level", "wetland/pond margin habitat"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; common year-round resident throughout the Puget Sound lowlands, western Washington, and most of Washington state. Four subspecies occur in Washington, three breeding. Subspecies morphna is the dominant western Washington form -- dark, heavily streaked, adapted to wet Pacific lowlands. Abundant in virtually every shrubby habitat below 1,200 m including wetland edges, pond margins, riparian thickets, suburban gardens, and clearcuts. One of the most frequently encountered birds in the state."
+  },
+  "taxonomy_note": {
+    "description": "Song Sparrow is the FIRST Passerellidae (New World Sparrows) in the engine -- a new family, the 19th. Melospiza melodia: 'melody song-finch' -- the bird whose name means 'song song.' The most studied songbird in North America (Margaret Morse Nice's landmark 1937-1943 studies, Peter Marler's vocal learning research). 24-25 recognized subspecies -- one of the most polytypic birds in North America. 8-12 song types per male, learned from local tutors during a 40-day sensitive period, crystallized by first spring, maintained unchanged for life. E=2 restored after 31 degrees of absence.",
+    "current_family": "Passerellidae",
+    "new_family": true,
+    "family_count_in_engine": 19,
+    "passerellidae_count_in_engine": 1,
+    "name_etymology": "Melospiza = Greek melos (song, melody) + spiza (finch). 'Song finch.' Melodia = Latin melodia (melody), from Greek melodia (singing, a tune). Full translation: 'Melody song-finch' -- or colloquially 'song song.' The genus names the singing. The species names the song. Both halves of the binomial say the same thing. No other species in the engine has a scientific name so completely devoted to sound. Named by Alexander Wilson in 1810.",
+    "genus_note": "Melospiza has ONE member in the engine (degree 45). The genus contains three North American species: Song Sparrow (M. melodia), Lincoln's Sparrow (M. lincolnii), and Swamp Sparrow (M. georgiana). All three are associated with wet habitats -- marsh edges, bogs, riparian zones. The Song Sparrow is the most generalist of the three.",
+    "order_note": "Passeriformes continues from degree 44. Eighth consecutive Passeriformes (38-45). 38 of 46 entries (82.6%) are Passeriformes.",
+    "family_position": "Passerellidae enters the engine with 1 member at degree 45. The 19th family. New World sparrows split from Emberizidae by the AOS in 2017. Approximately 140 species in 30 genera.",
+    "subspecies_note": "24-25 currently recognized subspecies (52 named historically). Five major geographic clusters: Eastern, Northwestern, Cismontane California, Southwestern, Mexican Plateau. PNW birds are subspecies morphna -- dark brown, heavily streaked, year-round resident. Aleutian maxima is the largest at ~53 g (twice eastern birds). Desert saltonis is smallest at ~18 g. Extraordinary geographic variation in size, color, and song follows Bergmann's and Gloger's rules.",
+    "nice_note": "Margaret Morse Nice (1883-1974) studied Song Sparrows in Columbus, Ohio from 1928-1936. Her two-volume Studies in the Life History of the Song Sparrow (1937, 1943) invented modern population ecology methodology. Konrad Lorenz: 'a major breakthrough in the methods of studying animal behavior.' Ernst Mayr: 'the finest piece of life history work ever done.' Nice worked as a scientific outsider without a university position.",
+    "vocal_learning_note": "Age-limited learner. Sensitive period begins at ~22 days, concentrated in a 40-day window. Young males memorize songs from neighboring adult tutors. Song crystallizes by first spring (~8-10 months). Repertoire maintained unchanged for life. 8-12 distinct song types per male. Males sing in eventual variety -- repeating one type 5-15 times before switching. More than 1,000 songs per day during breeding season. Peter Marler's research on Song Sparrow vocal learning (1987, 1988) established foundational principles of avian song learning."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-8,000 (across all vocalizations)",
+    "peak_energy_band_hz": "2,000-6,000 (broadcast song energy concentration)",
+    "song_frequency_hz": "2,000-8,000 (full range); most energy 2,000-6,000",
+    "song_duration_s": "2-4 (per individual song)",
+    "note_structure": "TWO-PART ARCHITECTURE: (1) THE PREAMBLE -- 2-4 clear, deliberate, evenly spaced introductory notes on a single pitch or simple pitch pattern. Opens every song type. Different preamble patterns distinguish different song types. (2) THE BODY -- complex, rapid succession of trills, buzzy notes, and varied phrases following the preamble. Classic mnemonic: 'Maids! Maids! Maids! Put on your tea-kettle-ettle-ettle.'",
+    "note_types": "FOUR vocalization categories: (1) BROADCAST SONG -- the full preamble-plus-body song, 2-4 seconds, delivered from exposed perch. 8-12 distinct song types per male. (2) CHIP CALL (chip/tchip) -- sharp, loud, single-note alarm and contact call. Year-round. (3) TRILL CALL -- rapid buzzy trill in alarm or territorial interactions. (4) SOFT SONG -- quiet, low-amplitude version of full song, given at close range during aggressive encounters. More variable than broadcast song, contains unique note types.",
+    "phrase_structure": "Each song type has a unique preamble (2-4 clear notes) followed by a unique body (trills and complex phrases). Males sing in eventual variety: 5-15 repetitions of one type before switching to another. Repertoire of 8-12 types cycled systematically. Neighbors share several song types -- repertoire matching used in territorial negotiation.",
+    "timbre": "CLEAR, BRIGHT WHISTLES in the preamble transitioning to BUZZY, TRILLED, COMPLEX timbre in the body. The preamble is the cleanest, purest tonal moment in the song. The body introduces rapid frequency modulation, trill elements, and buzzy qualities. Moderate bandwidth. The 'default' sparrow timbre -- the reference point for other species.",
+    "amplitude": "E=2 -- moderate volume from low perches in wetland-edge habitat. Broadcast song clearly audible at 50-100 m. Soft song audible only within a few meters. Delivered from 1-4 m perch height, directed laterally across wetland-edge territory. Conversational, not declamatory.",
+    "tempo": "Preamble: deliberate, evenly spaced notes. Body: rapid, variable tempo with trills and note-type switching. Overall song pace moderate -- neither the rapid-fire of a wren nor the slow, measured delivery of a thrush. Males sing 6-9 songs per minute during peak periods. More than 1,000 songs per day.",
+    "context": "Broadcast song given year-round but most intensely March-August (breeding season). Males sing from exposed perches at territory boundaries. Chip call given year-round as alarm and contact. Soft song given in aggressive close-range encounters. Type-switching frequency increases in aggressive contexts.",
+    "key_property": "THE PREAMBLE -- the 46th acoustic element (species side). A formal introductory statement: 2-4 clear, deliberate notes that open every Song Sparrow song before the complex body follows. Named 'the preamble' for three resonances: (1) the song's structure (clear opening notes announce complexity), (2) Nice's studies as the preamble to modern behavioral ecology, (3) the engine's position at degree 45 (12.5%, the preamble to the next phase). The first acoustic element defined by formal positional structure -- meaningful because of where it occurs in the sequence."
+  },
+  "plumage": {
+    "overall": "MINIMAL SEXUAL DIMORPHISM. MINIMAL SEASONAL DIMORPHISM. Extreme GEOGRAPHIC VARIATION across 24-25 subspecies (Bergmann's and Gloger's rules). Brown streaked plumage optimized for concealment in dense low vegetation. Identified by ear more than by eye.",
+    "adult": "Brown upperparts with dark streaks on back. White to buff underparts with bold brown streaking converging into a central breast spot -- the Song Sparrow's most diagnostic field mark. Brown cap with gray central stripe. Gray face with brown malar stripe and postocular line. Long, rounded, brown tail -- often pumped in flight. Dark conical bill, paler below.",
+    "pnw_form": "Subspecies morphna -- notably dark (sooty brown to dark rusty-brown) with heavy, bold breast streaking. Darker and more heavily streaked than eastern melodia. Dark coloration correlates with wet, shaded, dense-vegetation habitats of the Pacific Northwest. Follows Gloger's rule: coastal/northern birds darker, southern/desert birds paler.",
+    "geographic_extremes": "Aleutian maxima: huge (~53 g, twice eastern weight), very dark, heavy-billed. Desert saltonis: tiny (~18 g), very pale, fine-billed. The species spans a 3x weight range and a full brown-to-gray color spectrum across its 24+ subspecies.",
+    "juvenile": "Similar to adult but with finer, less distinct streaking. Buff wing bars. Less defined central breast spot.",
+    "molt_cycle": "Single annual prebasic molt. No dramatic seasonal plumage change. The Song Sparrow looks essentially the same year-round.",
+    "field_id": "Medium-sized sparrow with bold breast streaking converging to a central spot, long rounded tail often pumped in flight, brown cap with gray central stripe, gray face with brown stripes. Distinguished from Lincoln's Sparrow by bolder streaking and less buffy breast. Distinguished from Fox Sparrow by smaller size and finer streaking. Distinguished from Savannah Sparrow by rounder tail and lack of yellow supercilium."
+  },
+  "wetland_edge_ecology": {
+    "definition": "Wetland edge / pond margin -- the transitional zone where water meets land, where cattails give way to shrubs, where the mud is damp and the willows hang low. This is exactly the habitat that the Pacific Chorus Frog (the original CSV species at this degree) occupies.",
+    "habitat_types": [
+      "Freshwater marsh edges with cattails, bulrush, and sedge",
+      "Pond and lake margins with overhanging willows and alders",
+      "Riparian thickets along streams and rivers",
+      "Estuarine marsh edges (salt marsh / freshwater transition)",
+      "Suburban gardens and parks near water features",
+      "Roadside ditches and wet swales with shrubby borders",
+      "Beaver pond margins",
+      "Farm pond edges with brushy borders"
+    ],
+    "vertical_position": "0-3 m above ground. Forages on the ground or in low vegetation. Sings from perches at 1-4 m (tops of shrubs, low branches, fence posts, cattail stalks). Nests on the ground or in low shrubs up to 1-2 m. Rarely flies above the canopy of its wetland-edge habitat.",
+    "pnw_distribution": [
+      "Puget Sound lowlands -- common year-round resident",
+      "Western Washington -- abundant in virtually every shrubby habitat below 1,200 m",
+      "Eastern Washington -- common breeder, some winter migration",
+      "Coastal Washington -- present in salt marsh edges",
+      "Urban/suburban areas -- gardens, parks, and green spaces with shrubby borders"
+    ],
+    "habitat_generalism": "While the Song Sparrow is found in nearly any open habitat in North America (tidal marshes, arctic grasslands, desert scrub, suburban gardens), its ecological center is the wet margin. The genus Melospiza is a wetland lineage. In the PNW, where Swamp Sparrows are absent, Song Sparrows fill the marsh-edge niche.",
+    "significance": "The engine's first true wetland-edge species. Degrees 0-44 covered deep forest, mid-canopy, open lawn, aerial, conifer canopy, and weedy open ground. Degree 45 reaches the water's edge for the first time since the Great Blue Heron at degree 0 (and the heron was IN the water, not beside it). The Song Sparrow is the first species at the margin."
+  },
+  "vocal_learning": {
+    "learning_type": "Age-limited learner (age-limited, not age-independent)",
+    "sensitive_period": "Begins at approximately 22 days of age; concentrated in a 40-day window (22-62 days)",
+    "memorization": "Young males memorize song models from neighboring adult males (tutors) during the sensitive period. Songs from multiple tutors are recorded, with the final repertoire typically weighted toward the tutor who remained an immediate neighbor into the bird's first spring.",
+    "subsong": "Practice phase -- soft, variable, unstructured vocalizations as the young bird practices memorized templates",
+    "crystallization": "By the first breeding season (~8-10 months), the song repertoire crystallizes into its final form. 8-12 distinct song types are now fixed.",
+    "stability": "Once crystallized, the repertoire does not change. A Song Sparrow recorded at age 1 and age 5 sings the same song types (Nordby et al. 2002).",
+    "contrast_with_degree_44": "Lesser Goldfinch (44) = lifelong learner, interspecific mimicry, repertoire grows throughout life, ~50% borrowed from other species. Song Sparrow (45) = age-limited learner, conspecific song only, repertoire fixed by first spring, all original composition from conspecific tutors. The mosaic grows; the preamble is set once.",
+    "innate_preferences": "Strong preference for conspecific songs. Innate learning biases based on note and syllabic structure (phonology), temporal phrase organization (syntax). The young bird does not learn randomly -- it preferentially memorizes sounds that match an innate template of what Song Sparrow song should sound like (Marler & Peters 1988).",
+    "significance": "The Song Sparrow's vocal learning system, studied by Peter Marler and colleagues at Rockefeller University and UC Davis, established the foundational principles of avian song learning: sensitive periods, crystallization, innate templates, and the gene-environment interaction. The Song Sparrow is to vocal learning research what the Song Sparrow is to population ecology (Nice) -- the model organism."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The preamble -- the 46th acoustic element (species side): a formal introductory statement that opens a complex passage. The Song Sparrow's song always begins with 2-4 clear, deliberate, evenly spaced introductory notes before launching into a complex body of trills, buzzy notes, and varied phrases. The preamble establishes the tonal center, announces the performer's identity, and creates an expectation that the body fulfills. Different song types have different preamble patterns, making the preamble the primary cue for song type identification. Named 'the preamble' for three resonances: (1) the song's structure (clear opening notes announce complexity that follows), (2) Nice's studies as the preamble to modern behavioral ecology and Marler's research as the preamble to neuroethology, (3) the engine at degree 45 (12.5%, the preamble to the next phase). The first acoustic element defined by formal positional structure -- meaningful because of where it occurs in the sequence, not what it sounds like in isolation.",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/preamble/",
+      "examples": [
+        "Song structure: preamble (2-4 clear notes) + body (complex trills and buzzy phrases). Classic mnemonic: 'Maids! Maids! Maids! Put on your tea-kettle-ettle-ettle.' The preamble is the address; the body is the message.",
+        "Each of 8-12 song types has a unique preamble pattern. The preamble is how you identify which song type is being sung. Change the preamble and you change the song's identity.",
+        "Contrast with the mosaic (degree 44): the mosaic is defined by WHAT the song contains (borrowed fragments). The preamble is defined by WHERE the song begins (a formal opening position). Content vs. structure.",
+        "Positional uniqueness: the preamble differs from a motif (degree 5) because it is specifically positional -- it occurs at the beginning and only at the beginning. It differs from the hook (degree 18) because it is not the memorable part; the body is. It differs from the ostinato (degree 14) because it is not the repeated pattern; it is the announcement that complexity is about to begin.",
+        "The reference structure: birding guides describe other species' songs relative to Song Sparrow. 'Like a Song Sparrow but more buzzy' (Lincoln's Sparrow). 'Like a Song Sparrow but simpler.' The preamble-plus-body architecture is the template against which other sparrow songs are compared."
+      ],
+      "music_theory_parallel": "The introduction to a sonata -- the slow, deliberate opening bars that establish key and mood before the exposition begins. Beethoven's Pathetique Sonata opens with a grave introduction that states the thematic material clearly before the allegro erupts. The Song Sparrow's preamble functions identically: clear statement, then complexity. The preamble is also the musical term for the opening section of a fugue subject -- the notes that establish the theme before the countersubject enters. In jazz, the 'head' -- the statement of the melody before improvisation begins. In rhetoric, the preamble to a constitution: the foundational statement that frames everything that follows."
+    },
+    {
+      "concept": "First Passerellidae -- the 19th family enters the engine. Passerellidae (New World Sparrows) was split from Emberizidae (Old World Buntings) by the American Ornithological Society in 2017, based on molecular phylogenetic evidence. The family contains approximately 140 species in 30 genera, including towhees, juncos, and the true New World sparrows. The Song Sparrow is the family's type example -- the most common, most studied, and most vocal Passerellidae. The engine's first true sparrow.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/passerellidae/",
+      "examples": [
+        "Family history: originally proposed as subfamily Passerellinae by Jean Cabanis in 1851. Elevated to full family Passerellidae in 2017 by AOS. 166 years between proposal and recognition.",
+        "Relationship to engine species: the Oregon Junco (degree 11) is now classified as Passerellidae in modern taxonomy, but was entered under Emberizidae. The Song Sparrow at degree 45 formally brings Passerellidae into the engine.",
+        "Family character: seed-eating birds with conical bills, brown or gray plumage, many with distinctive head patterns. Omnivore-generalists (broader diet than Fringillidae seed specialists). Associated with open and semi-open habitats -- shrubs, grasslands, marsh edges, forest edges.",
+        "Contrast with Fringillidae (degrees 12, 33, 34, 43, 44): Fringillidae are true finches -- conical-billed seed specialists with powerful jaw muscles. Passerellidae are omnivore-generalists with broader dietary and habitat flexibility. The transition from goldfinches (44) to sparrow (45) shifts from specialist to generalist.",
+        "The 19th family: Passerellidae joins Parulidae (10), Fringillidae (5), Hirundinidae (5), Turdidae (5), Trochilidae (3), Bombycillidae (2), Paridae (2), Picidae (2), and 10 single-member families."
+      ],
+      "music_theory_parallel": "A new instrument family enters the orchestra. After five finches (brass), a sparrow (woodwind). Same general sonic range (small passerine), different timbral family. The Passerellidae voice is less bright, less specialized, more conversational than the Fringillidae voice -- like moving from trumpet to oboe. Both play in the same register but the quality shifts from brilliant to warm."
+    },
+    {
+      "concept": "E=2 restored after 31 degrees of absence -- the last E=2 was degree 14 (MacGillivray's Warbler). The Song Sparrow breaks seven consecutive E=4 degrees (38-44) and restores the engine's lower dynamic register. E=2 now at 12 degrees (26.1%), the second most common energy level. The dynamic range decompression begins. The engine has a lower register again.",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e2-restored/",
+      "examples": [
+        "E=2 timeline: degrees 0-7, 9, 11, 13, then ABSENT for 31 degrees, then degree 45 (Song Sparrow). The gap is the longest absence of any energy level in the engine's history.",
+        "Dynamic drop: E=4 (degree 44) to E=2 (degree 45). A two-level drop. The most dramatic single-degree energy change since E=5 to E=4 at degrees 36-37.",
+        "Seven consecutive E=4 broken: degrees 38-44 (Parulidae 38-42, Fringillidae 43-44). The longest same-energy streak in the engine. Song Sparrow ends it.",
+        "Why E=2: the Song Sparrow sings from low perches (1-4 m), directed laterally across wetland-edge territories. Audible at 50-100 m, not 200-400 m. Conversational, not declamatory. The energy is appropriate for a bird that speaks to its neighbors, not to the valley.",
+        "Restoration significance: E=2 was the engine's original 'home' energy level (degrees 0-7 were all E=2). Returning to E=2 at degree 45 is a homecoming -- the engine returns to its founding dynamic after 31 degrees of progressively higher energy."
+      ],
+      "music_theory_parallel": "Subito piano -- a sudden drop to a quiet dynamic after an extended loud passage. Seven bars of mezzo-forte (E=4) across degrees 38-44, then a sudden drop to pianissimo (E=2) at degree 45. The instruments changed multiple times during the loud passage (warblers, goldfinches), but the volume stayed constant. Now the volume drops and the ear recalibrates. The contrast makes the quiet audible. The Song Sparrow's moderate song sounds intimate after seven degrees of E=4."
+    },
+    {
+      "concept": "Margaret Morse Nice's model organism -- the Song Sparrow is the most studied songbird in North America because of Nice's landmark 1937-1943 studies and the subsequent vocal learning research by Peter Marler and colleagues. Nice's two-volume Studies in the Life History of the Song Sparrow invented modern population ecology methodology. Marler's sensitive-period and crystallization research on Song Sparrows established the foundational principles of avian vocal learning. The Song Sparrow is to ornithology what Drosophila is to genetics -- the model organism.",
+      "level": "foundational",
+      "department": "ecology/behavioral-ecology",
+      "college_path": ".college/ecology/behavioral-ecology/nice-model-organism/",
+      "examples": [
+        "Nice's innovations: individual color-banding, longitudinal tracking across years, territory mapping, breeding success analysis, survival estimation. These are still standard protocols 90 years later.",
+        "Scientific reception: Lorenz (Nobel Prize 1973) called it 'a major breakthrough.' Mayr (Harvard) called it 'the finest piece of life history work ever done' and credited Nice with 'almost single-handedly initiating a new era in American ornithology.'",
+        "Nice as scientific outsider: a woman without a university position, working from her own backyard, publishing foundational science in an era of systematic exclusion of women from academic institutions. The work spoke for itself.",
+        "Marler's contributions (1960s-1990s): sensitive periods for song acquisition, age-limited vs. age-independent learning, innate song templates, the interaction between genetic predisposition and environmental experience. Song Sparrow was one of Marler's primary study species alongside White-crowned Sparrow and Swamp Sparrow.",
+        "The preamble metaphor: Nice's studies were the preamble to modern behavioral ecology. Marler's studies were the preamble to modern neuroethology. The Song Sparrow is the introductory species -- the one you learn first, the preamble to ornithology."
+      ],
+      "music_theory_parallel": "The etude -- a study piece designed to teach fundamental technique. Chopin's etudes are both pedagogical exercises and concert works. Nice's Song Sparrow study is both a teaching manual (methodology) and a masterwork (content). The Song Sparrow is the etude of ornithology -- the piece you study to learn the fundamentals, and also one of the great works in the field."
+    },
+    {
+      "concept": "The reference species -- the 'default' bird whose song is the baseline against which other species are compared. Birding guides routinely describe unfamiliar songs as 'like a Song Sparrow but...' The Song Sparrow's preamble-plus-body structure is the template for sparrow song description. The engine acquires its reference pitch.",
+      "level": "intermediate",
+      "department": "music-theory/pedagogy",
+      "college_path": ".college/music/theory/pedagogy/reference-species/",
+      "examples": [
+        "Comparative descriptions: 'Like a Song Sparrow but more buzzy' (Lincoln's Sparrow). 'Like a Song Sparrow but simpler' (some Fox Sparrow populations). 'Like a Song Sparrow but without the opening notes' (various warbler species). The Song Sparrow IS the comparison.",
+        "Why it works as reference: (1) widely known (common and vocal), (2) structurally clear (preamble-plus-body is easy to describe), (3) moderately complex (interesting but memorable), (4) geographically ubiquitous (same basic structure continent-wide).",
+        "Accessibility: every university campus in temperate North America likely has breeding Song Sparrows within earshot. The bird is there. The song is happening. No special equipment or travel required.",
+        "The engine's reference: at degree 45, the engine has its baseline species. Future sparrow and warbler entries can be described in relation to the Song Sparrow's song. The preamble becomes the reference structure.",
+        "Population foundation: ~130 million individuals. One of the most abundant landbirds in North America. 8.7x more numerous than the Lesser Goldfinch (~15 million). The reference species is the common species."
+      ],
+      "music_theory_parallel": "Concert pitch -- A=440 Hz, the reference frequency against which all other notes are tuned. Every orchestra tunes to this standard. The Song Sparrow is concert pitch for North American birdsong. Not the most spectacular, not the loudest, not the rarest -- but the one everyone knows, the one against which deviation is measured. When a Lincoln's Sparrow sings 'like a Song Sparrow but buzzier,' the Song Sparrow IS the A=440."
+    },
+    {
+      "concept": "Wetland edge as habitat type -- the engine's first true wetland-edge species. The transitional zone where water meets land, where cattails give way to shrubs, where mud is damp and willows hang low. Degrees 0-44 covered deep forest, mid-canopy, open lawn, aerial, conifer canopy, and weedy open ground. Degree 45 brings the engine to the water margin. The Song Sparrow stands beside the water, in the edge zone, at the boundary between aquatic and terrestrial.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/wetland-edge/",
+      "examples": [
+        "Habitat connection to degree 0: the Great Blue Heron at degree 0 stood IN the water (silence). The Song Sparrow at degree 45 stands BESIDE the water (the preamble). 45 degrees between the engine's two water-associated species.",
+        "The Melospiza wetland lineage: all three Melospiza species (Song Sparrow, Lincoln's Sparrow, Swamp Sparrow) are associated with wet habitats. In the PNW where Swamp Sparrows are absent, Song Sparrows fill the marsh-edge niche.",
+        "Habitat match with CSV original: Pacific Chorus Frog (the replaced species) occupies the exact same pond-margin, marsh-edge habitat. The substitution preserves the habitat assignment perfectly.",
+        "Acoustic environment: dense low vegetation absorbs high frequencies (favoring Song Sparrow's 2-6 kHz range). Open water provides acoustic reflection. Standing water supports insect prey. Shrubby margins provide singing perches and nesting sites.",
+        "Habitat progression: deep forest (0-13) -> mid-canopy (14-20) -> woodpecker (21-22) -> open lawn (23-25) -> aerial (26-30) -> open canopy (31-34) -> hummingbird (35-37) -> conifer canopy (38-42) -> weedy open (43-44) -> WETLAND EDGE (45). The engine descends from canopy to water."
+      ],
+      "music_theory_parallel": "The bridge passage in a sonata -- the transitional section that connects two contrasting themes, belonging fully to neither. Wetland edge is the ecological bridge: not water, not land, but the margin between them. The Song Sparrow lives in the transition zone. Acoustically, the wetland edge creates a unique performance space -- partially enclosed by vegetation, partially open over water, with complex reflective properties that shape how sound propagates. The Song Sparrow has evolved to sing in this specific acoustic architecture."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-044",
+      "title": "Lesser Goldfinch (Degree 44)",
+      "connection": "FAMILY TRANSITION + ENERGY DROP. Fringillidae (44) to Passerellidae (45). E=4 to E=2 -- drops two levels. Mimicry mosaic (50% borrowed from other species) to preamble (all conspecific, learned from local tutors). Lifelong interspecific learner to age-limited conspecific learner. Summer visitor to year-round resident. Weedy shrub to wetland edge. The engine pivots at every structural level."
+    },
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "LAST E=2. MacGillivray's Warbler at degree 14 was the last E=2 entry -- 31 degrees of absence before the Song Sparrow restores it. Both are low-perching, dense-vegetation birds with moderate-amplitude songs. Both sing from concealment. The E=2 register returns."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "WETLAND RETURN. The Great Blue Heron at degree 0 stood in the water. The Song Sparrow at degree 45 stands beside the water. 45 degrees between the engine's two water-associated species. The heron was silence; the sparrow is the preamble. Water bookends the engine's first eighth."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "PASSERELLIDAE LINK. The Oregon Junco was entered under Emberizidae but is now classified as Passerellidae in modern taxonomy. The Song Sparrow at degree 45 is the first species explicitly entered as Passerellidae. Two sparrow-family members bookending the family's reclassification, 34 degrees apart."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "VOCAL LEARNING CONTRAST. Red Crossbill = population-specific dialects (10+ call types, species-internal vocal learning). Song Sparrow = individually learned repertoires from local tutors (8-12 song types, neighbor-specific). Both involve vocal learning but at different spatial scales: population vs. individual territory."
+    },
+    {
+      "project": "SPS-017",
+      "title": "Common Yellowthroat (Degree 17)",
+      "connection": "WETLAND NEIGHBOR. The Common Yellowthroat sings witchety-witchety from cattail stalks in the same marshes where Song Sparrows nest. E=3 vs. E=2. Both are low-perching wetland-edge birds. They share the marsh margin -- the yellowthroat deeper in the cattails, the sparrow in the brushy edge."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Song Sparrow documented as common year-round resident in western Washington. Four subspecies in WA, three breeding. Dark morphna form dominant in Puget Sound lowlands. One of the most frequently encountered birds in Washington state."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Wetland-edge ecology. Pond margin and marsh-edge habitats. Riparian thicket communities. Geographic adaptation across 24+ subspecies (Bergmann's and Gloger's rules). Omnivore-generalist diet ecology. The Melospiza wetland lineage."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 44,
+    "total_entries": 46,
+    "families_represented": 19,
+    "largest_families": {
+      "Parulidae": 10,
+      "Fringillidae": 5,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Trochilidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Passerellidae": 1,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 45],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=2 RESTORED after 31 degrees of absence (last E=2 was degree 14). Breaks seven consecutive E=4 (38-44). E=2 now at 12 degrees (26.1%). E=4 still dominant at 21 degrees (45.7%). Dynamic range decompression begins.",
+    "new_family_note": "PASSERELLIDAE enters the engine at degree 45. The 19th family. First New World sparrow. Split from Emberizidae in 2017.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer"],
+    "ecosystem_note": "Wetland edge / pond margin -- the engine's first true wetland-edge habitat. Transitional zone where water meets land. Matches the original CSV species (Pacific Chorus Frog) in habitat.",
+    "acoustic_element_46": "THE PREAMBLE -- a formal introductory statement. 2-4 clear opening notes before complex body. The first element defined by positional structure. After the mosaic (interspecific mimicry), the preamble (structural opening).",
+    "csv_substitution_note": "Pacific Chorus Frog (Pseudacris regilla) replaced by Song Sparrow (Melospiza melodia) because SPS Part B is birds-and-mammals only. E=2 and wetland/pond margin habitat preserved from original CSV.",
+    "conservation_note": "LEAST CONCERN (IUCN). Population approximately 130 million (Partners in Flight). Continental Concern Score 8/20. BBS trend: -27% continent-wide 1966-2019 (slow decline, 0.76%/year). Washington trend stable to slightly increasing. Common year-round resident in western Washington. Not a conservation priority at any level.",
+    "critical_gaps": [
+      "No marine/shoreline species in 45 degrees of 'The Sound of Puget Sound' -- 45 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 45 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 45 degrees -- URGENT",
+      "No nocturnal species since degree 4 (41 degrees ago) -- OVERDUE",
+      "No E=1 since degree 12 (33 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 45 DEGREES OF A PROJECT NAMED FOR PUGET SOUND",
+      "Only 5 orders in 46 entries -- a new order is strongly needed",
+      "Eight consecutive Passeriformes (38-45) -- non-passerine needed urgently",
+      "E=3 still absent for 25 degrees (since degree 20)"
+    ]
+  }
+}
