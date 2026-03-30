@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Lobaria pulmonaria — Lungwort Lichen | v1.7 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --geiger-deep: #050510;
+    --geiger-mid: #0A1520;
+    --geiger-glow: #00FF41;
+    --geiger-dim: #006B1A;
+    --cosmic-black: #050510;
+    --belt-gold: #D4A830;
+    --belt-bright: #E8D060;
+    --lichen-sage: #8FA880;
+    --lichen-brown: #6B5A42;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #1A3A1A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--cosmic-black);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(0,255,65,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(0,107,26,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(0,255,65,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(107,90,66,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(0,107,26,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(212,168,48,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+  .breadcrumb a { color: var(--geiger-glow); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--belt-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--cosmic-black) 0%, var(--geiger-deep) 25%, var(--geiger-mid) 50%, var(--geiger-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--geiger-glow);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,65,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,65,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(0,255,65,0.15);
+    border: 1px solid var(--geiger-glow);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--geiger-glow);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(0,255,65,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--geiger-glow); font-weight: 500; }
+
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .prose { max-width: 900px; }
+
+  .prose h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.5rem;
+    color: var(--belt-bright);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose h2:first-child { margin-top: 0; }
+
+  .prose h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    color: var(--geiger-glow);
+    margin: 2rem 0 0.75rem;
+    font-weight: 600;
+  }
+
+  .prose p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .prose strong { color: var(--belt-bright); }
+  .prose em { color: var(--lichen-sage); }
+
+  .prose ul, .prose ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .prose blockquote {
+    border-left: 3px solid var(--geiger-dim);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(5,5,16,0.3);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  .prose th {
+    background: rgba(0,255,65,0.1);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    text-align: left;
+    color: var(--geiger-glow);
+    font-weight: 600;
+  }
+  .prose td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    color: var(--text);
+  }
+
+  .prose pre {
+    background: rgba(5,5,16,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--geiger-glow);
+    margin: 1rem 0;
+  }
+
+  .prose code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    background: rgba(0,255,65,0.1);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    color: var(--geiger-glow);
+  }
+
+  .prose pre code {
+    background: none;
+    padding: 0;
+  }
+
+  .sources-section {
+    background: rgba(5,5,16,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .sources-section h2 { border-bottom-color: var(--geiger-dim); }
+  .sources-section h3 { color: var(--geiger-glow); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card {
+    background: rgba(5,5,16,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5rem;
+  }
+  .nav-card a { color: var(--geiger-glow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--belt-bright); }
+
+  footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+  footer a { color: var(--geiger-glow); text-decoration: none; }
+
+  @media (max-width: 800px) {
+    h1 { font-size: 1.6rem; }
+    main { padding: 1rem; }
+    .header-content { padding: 1.5rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.7 Explorer 1</a>
+  <span class="sep">/</span>
+  Track 2: Organism
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.7</span>
+      <span>Explorer 1</span>
+      <span class="track-badge">Track 2</span>
+    </div>
+    <h1>Lobaria pulmonaria (Lungwort Lichen)</h1>
+    <p class="subtitle">The indicator</p>
+    <div class="meta-row">
+      <span><span class="label">Family:</span> Lobariaceae</span>
+      <span><span class="label">Habitat:</span> Old-growth conifer bark, PNW</span>
+      <span><span class="label">Paired with:</span> Explorer 1</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>What Grows Where the Air Is Clean</h2>
+
+    <p>Walk deep enough into an old-growth stand on the western slope of the Cascades &mdash; past the trailhead, past the second-growth buffer, past the point where the logging roads end and the stumps disappear and the trees stop being eighty years old and start being four hundred &mdash; and look at the trunks. Not at the base, where the sword fern and salal crowd against the bark. Not at the crown, where the Douglas-fir and western hemlock canopy closes into a ceiling you cannot see through. Look at the middle. Look at the trunk from chest height to about ten meters up, the zone where the bark is exposed, where the rain runs down in channels and the fog condenses and the light is green and filtered and the air has not moved quickly in a century.</p>
+
+    <p>You will find it there. A large, lobed, lettuce-like growth pressed against the bark, following the contours of the ridges and furrows the way a map follows terrain. The thallus &mdash; the body of the lichen, the whole organism, not a leaf and not a root and not a stem but something that has no precise analogy in the vocabulary developed for plants &mdash; spreads across the bark surface in irregular lobes, each lobe 3 to 8 centimeters wide, the entire thallus sometimes reaching 20 to 60 centimeters across on an old, undisturbed tree. The upper surface is ridged and pitted, with a texture that looks, unmistakably and unsettlingly, like the surface of a lung. The ridges swell when the lichen is wet, the pits deepen, and the resemblance becomes so precise that you understand immediately why this organism has been called lungwort for centuries, why the Doctrine of Signatures claimed it could treat pulmonary diseases, why herbalists from the sixteenth century onward prescribed it for complaints of the chest. The resemblance is not superficial. It is structural: the ridges and pits increase the surface area of the thallus the same way the alveoli of a lung increase the surface area of the respiratory membrane. Both structures are solving the same problem &mdash; maximizing the exchange surface between the organism and the medium it depends on. The lung exchanges oxygen and carbon dioxide with air. The lichen exchanges water, nutrients, and gases with the atmosphere and the bark substrate. The convergence in form is a convergence in function.</p>
+
+    <p>This is Lobaria pulmonaria. Lungwort lichen. And the most important thing about it is not what it looks like. The most important thing is where you find it &mdash; and where you do not.</p>
+
+    <p>You find it in old-growth forest. You find it on trees that have stood for centuries in air that has not been contaminated by industrial emissions, automobile exhaust, agricultural ammonia, or the diffuse chemical signature of a human settlement within a few kilometers. You find it in the Olympic Peninsula, on the Cascade west slope, in the coast ranges of Oregon, in the old-growth remnants of British Columbia where the timber industry did not reach because the terrain was too steep or the access too difficult or someone made the decision to leave the trees standing. You find it where the air is clean.</p>
+
+    <p>You do not find it in second-growth forest near cities. You do not find it along highways. You do not find it downwind of power plants, feedlots, or paper mills. You do not find it in the industrial forests of the Puget Sound lowlands, where the trees are eighty years old and the air carries the accumulated emissions of Seattle, Tacoma, Everett, and the Interstate 5 corridor. Lobaria pulmonaria is absent from these forests &mdash; not because the trees are too young (though they often are) and not because the substrate is wrong (bigleaf maple, a preferred host, is abundant in lowland forests) but because the air is wrong. The lichen cannot tolerate the chemical environment that industrial civilization produces. It is gone from most of Europe, where it was once common. It is declining across eastern North America. It persists in the Pacific Northwest because the PNW still has the combination of old trees and clean air that the lichen requires, and it persists only in the places where that combination is intact.</p>
+
+    <p>Lobaria pulmonaria is a biological indicator. Its presence indicates a specific set of environmental conditions: old forest, clean air, stable humidity, low disturbance. Its absence indicates that one or more of those conditions has been violated. The lichen does not measure the violation. It does not quantify the parts per billion of sulfur dioxide or the micrograms per cubic meter of particulate matter. It simply disappears. Present or absent. There or not there. A binary signal that integrates everything &mdash; air quality, forest age, microclimate stability, substrate availability &mdash; into a single output: the organism exists, or the organism does not.</p>
+
+    <p>Explorer 1&rsquo;s Geiger counter was a detector. It measured the intensity of energetic charged particles in the space around Earth. At low altitude, it counted normally &mdash; a few dozen counts per second, consistent with the cosmic ray background. At high altitude, in the heart of the inner Van Allen belt, the count rate went to zero. Not because there were no particles. Because there were too many. The detector saturated. The signal overwhelmed the instrument. The Geiger counter, like Lobaria pulmonaria, was a binary indicator at its extremes. It either counted or it did not. Counting meant the radiation was within the instrument&rsquo;s dynamic range. Not counting &mdash; zero &mdash; meant the radiation had exceeded it. Both instruments fail at their limits, and in both cases the failure mode is the message. The lichen&rsquo;s absence is the message: the environment is degraded. The Geiger counter&rsquo;s silence is the message: the environment is too intense. Both organisms reach a threshold beyond which they cannot function, and the threshold crossing is the most important data they produce.</p>
+
+    <hr>
+
+    <h2>Three Organisms in One</h2>
+
+    <p>Lobaria pulmonaria is not a single organism. It is three, and the three cannot be separated without destroying all of them.</p>
+
+    <p>The first partner is the mycobiont &mdash; the fungal partner, an ascomycete that provides the physical structure of the lichen. The mycobiont builds the thallus: the upper cortex (a protective layer of tightly interwoven fungal hyphae on the lichen&rsquo;s surface), the medulla (a looser network of hyphae in the interior that provides air spaces and structural support), and the lower cortex (the attachment surface where rhizines &mdash; root-like bundles of hyphae &mdash; anchor the lichen to the bark). The fungus is the architect. It creates the physical form &mdash; the lobes, the ridges, the pits, the lung-like surface &mdash; that the other two partners inhabit. Without the mycobiont, there is no structure. The algal and cyanobacterial cells would be free-living, exposed, and unable to form the organized tissue that makes the lichen a visible organism on the bark.</p>
+
+    <p>The second partner is the photobiont &mdash; a green alga, Dictyochloropsis reticulata, that occupies a thin layer just below the upper cortex. The algal cells are embedded in the fungal tissue, surrounded by hyphae, positioned where the light that penetrates the upper cortex can reach them. The alga photosynthesizes. It captures sunlight and converts carbon dioxide and water into sugars &mdash; glucose and sugar alcohols &mdash; that feed both itself and the fungal partner. The fungus cannot photosynthesize. It has no chlorophyll, no photosynthetic machinery, no way to fix carbon. It depends entirely on the alga for carbon nutrition. In return, the fungus provides the alga with a protected environment: the upper cortex shields the algal cells from desiccation and UV radiation, the medulla provides gas exchange channels, and the rhizines maintain the lichen&rsquo;s position on a suitable substrate. The partnership is not optional. The fungus starves without the alga. The alga desiccates without the fungus.</p>
+
+    <p>The third partner is the cyanobiont &mdash; a cyanobacterium of the genus Nostoc that occupies specialized structures called cephalodia, small wart-like outgrowths on the upper or lower surface of the thallus. The Nostoc cells fix atmospheric nitrogen. Nitrogen gas &mdash; N<sub>2</sub>, which constitutes 78 percent of the atmosphere &mdash; is chemically inert. Most organisms cannot use it. The triple bond between the two nitrogen atoms requires enormous energy to break, and only organisms with the nitrogenase enzyme can do it. Nostoc has nitrogenase. It takes N<sub>2</sub> from the atmosphere and converts it to ammonium (NH<sub>4</sub><sup>+</sup>), a biologically usable form of nitrogen that can be incorporated into amino acids, proteins, nucleic acids &mdash; the molecules of life. The fixed nitrogen is shared with the fungal and algal partners, and it leaks from the lichen into the surrounding environment, enriching the bark, the stemflow, the soil below, and the organisms that live nearby.</p>
+
+    <p>This is the three-way partnership. The fungus builds the house. The alga pays the energy bill. The cyanobacterium fertilizes the garden. Remove any one of the three and the system collapses. The fungus without photosynthetic partners is a shapeless mass of hyphae that cannot feed itself. The alga without the fungus is a population of naked cells vulnerable to desiccation. The cyanobacterium without the structure is a smear of green on wet bark, fixing nitrogen for nobody in particular. Together, they are Lobaria pulmonaria &mdash; an organism that photosynthesizes, fixes nitrogen, produces secondary metabolites, colonizes bark, and persists for decades in environments where none of its three components could survive alone.</p>
+
+    <p>Explorer 1 was a three-way collaboration. The Army Ballistic Missile Agency built the launch vehicle &mdash; the structure, the thing that got everything off the ground and into orbit. ABMA was the mycobiont, the architect, the partner that provided the physical form without which the other two partners would have had no platform. The Jet Propulsion Laboratory built the satellite &mdash; the payload, the electronics, the telemetry system, the thermal control, the body that housed the instruments and transmitted their data. JPL was the photobiont, the partner that converted raw capability (a rocket that could reach orbital velocity) into productive output (a functioning satellite returning data). The University of Iowa, Van Allen&rsquo;s group, provided the instrument &mdash; the Geiger counter, the detector, the thing that actually measured something nobody knew was there. Iowa was the cyanobiont, the partner that fixed the invisible into the visible, that took radiation nobody could see and converted it into knowledge everybody could use.</p>
+
+    <p>Remove any partner and the mission does not happen. The Army without JPL has a rocket with nothing useful on top. JPL without the Army has a satellite with no way to orbit. Both without Iowa have a satellite in orbit measuring nothing of historical consequence. The three partners were as interdependent as the three components of a lichen, and the partnership produced something none of them could have produced alone: the discovery of the Van Allen radiation belts.</p>
+
+    <hr>
+
+    <h2>Morphology and Life History</h2>
+
+    <p>The thallus of Lobaria pulmonaria is foliose &mdash; leafy, lobed, and loosely attached to the substrate. It is one of the largest lichens in the Pacific Northwest, with individual thalli reaching 20 to 60 centimeters across and occasionally larger on old, undisturbed trees. The lobes are broad, 1 to 5 centimeters wide, with rounded tips and shallow sinuses between them. The thallus is irregularly shaped, spreading across the bark in a pattern dictated by the microhabitat: following ridges, pooling in furrows, avoiding surfaces that are too dry or too exposed.</p>
+
+    <p>The upper surface is the diagnostic feature. It is reticulately ridged &mdash; a network of raised ridges surrounding shallow depressions, creating the lung-like texture that gives the organism its common name. The ridges correspond to areas where the algal layer is thicker and the medulla below is more expanded; the depressions correspond to areas where the thallus is thinner. When wet, the thallus swells noticeably &mdash; Lobaria pulmonaria can absorb water to approximately 300 percent of its dry weight, expanding like a sponge as the medullary hyphae take up moisture and the air spaces fill with water. The wet thallus is bright green, because the water makes the upper cortex more transparent and the green algal layer below shows through. When dry, the thallus contracts, stiffens, turns olive-brown or grayish-green, and the ridged texture becomes more pronounced as the depressions deepen. The color shift from bright green (wet) to olive-brown (dry) is immediate and dramatic &mdash; a lichen on a tree trunk after a rain looks like a different organism than the same lichen during a summer dry spell.</p>
+
+    <p>The lower surface is covered with a pale, tomentose fuzz (short hyphae projecting from the lower cortex) and bears scattered rhizines &mdash; bundles of hyphae that anchor the thallus to the bark. The attachment is not tight. Lobaria pulmonaria can be peeled from the bark without much force, and pieces that detach naturally &mdash; broken by wind, animal activity, or the simple weight of a water-saturated thallus &mdash; can potentially establish new colonies if they land on a suitable substrate. This is one of the primary modes of reproduction: vegetative fragmentation. A piece of thallus, containing all three symbiotic partners, breaks off, lands on another tree, and begins to grow. No sexual reproduction required. No need to reassemble the partnership from free-living components.</p>
+
+    <p>The lichen also reproduces via soredia &mdash; small granular propagules, each containing a few algal cells wrapped in fungal hyphae, produced in soralia on the upper surface. Soredia are tiny enough to be dispersed by wind and rain. They land on bark, germinate (the fungal hyphae extend, the algal cells divide), and if a Nostoc partner is acquired from the environment, the three-way symbiosis reconstitutes and a new thallus begins to grow. Sexual reproduction &mdash; the production of fungal spores in cup-shaped structures called apothecia on the thallus surface &mdash; occurs but is rare in Lobaria pulmonaria. The apothecia, when present, are disk-shaped, reddish-brown, and up to 5 millimeters in diameter. The spores produced are fungal only &mdash; they contain no algal or cyanobacterial cells. A spore that germinates must find and capture appropriate photobiont and cyanobiont partners from the environment to reconstitute the lichen. This is a risky proposition, and it explains why sexual reproduction is rare and vegetative reproduction (fragmentation, soredia) is the primary means of spread.</p>
+
+    <p>Growth is slow. Radial growth rates of 1 to 3 millimeters per year have been measured for Lobaria pulmonaria in temperate forests. A thallus 30 centimeters in diameter may be a century old. The largest specimens on old-growth trees may have been growing for several centuries. This slow growth is one of the reasons the lichen is an old-growth indicator: it takes decades to centuries for a colony to reach conspicuous size, and the conditions for establishment (clean air, appropriate substrate, presence of all three symbiotic partners, adequate humidity) must persist for that entire period. A forest that has been cut, regrown, and matured to 80 years of age may have the right trees but not enough time. The lichen needs both the habitat and the history.</p>
+
+    <hr>
+
+    <h2>Ecological Role: The Nitrogen Fixer in the Canopy</h2>
+
+    <p>Old-growth forests are nitrogen-limited systems. The soil nitrogen pool is finite. The trees, the understory plants, the decomposers &mdash; all of them compete for available nitrogen, and in the absence of external inputs, the supply is gradually depleted by leaching, denitrification, and biomass export. The forest needs nitrogen, and most of the nitrogen in the system was fixed long ago by organisms that are no longer the dominant nitrogen fixers in the ecosystem.</p>
+
+    <p>Lobaria pulmonaria is one of the dominant nitrogen fixers in the old-growth canopy. The Nostoc cyanobacterium in its cephalodia fixes atmospheric N<sub>2</sub> at rates that, while modest per unit area of thallus (roughly 1 to 5 kilograms of nitrogen per hectare per year in stands with high Lobaria biomass), are significant in the context of a nitrogen-limited forest. The fixed nitrogen enters the ecosystem through multiple pathways: it leaches from the lichen surface during rain events, flowing down the trunk in stemflow and dripping from the canopy in throughfall; it is released during decomposition of fallen lichen fragments on the forest floor; and it is consumed by invertebrates that graze on the lichen, passing through their digestive systems and being deposited as nitrogen-enriched frass.</p>
+
+    <p>The effect is that old-growth trees hosting large populations of Lobaria pulmonaria are fertilized by their own epiphytes. The nitrogen that the lichen fixes from the atmosphere enters the soil around the base of the tree, becomes available to the tree&rsquo;s roots, and supports the continued growth of the tree that supports the lichen. The cycle is mutualistic at the ecosystem scale, even though the lichen-tree relationship at the individual level is technically commensalistic (the lichen benefits from the substrate; the tree is not directly harmed or helped by the lichen&rsquo;s attachment). The nitrogen fixation makes the relationship net-positive for both parties when viewed over decades and hectares rather than centimeters and days.</p>
+
+    <p>This is the nitrogen-fixing resonance with Explorer 1. Van Allen took radiation that was invisible, undetectable by any human sense, and present in a region of space that no instrument had previously sampled &mdash; and fixed it into knowledge. The radiation belts were there before Explorer 1 launched. The energetic protons trapped by Earth&rsquo;s magnetic field had been spiraling and bouncing and drifting for as long as the magnetosphere had existed &mdash; billions of years. But the belts were not knowledge until Van Allen&rsquo;s Geiger counter measured them and Van Allen&rsquo;s mind interpreted the measurement. The conversion of radiation into data into understanding is analogous to the conversion of atmospheric nitrogen into ammonium into biological utility. Both processes take something that is abundant but inaccessible &mdash; nitrogen in the air, radiation in space &mdash; and fix it into a form that the surrounding system can use. The atmosphere is full of nitrogen that most organisms cannot access. Near-Earth space is full of radiation that no prior instrument had measured. Both remain invisible and useless until a fixer converts them.</p>
+
+    <p>Lobaria pulmonaria enriches the forest. The nitrogen it fixes does not stay in the lichen. It flows outward &mdash; into the bark, down the trunk, into the soil, into the roots of the host tree and the surrounding understory plants, into the mycorrhizal networks that connect the trees, into the broader ecosystem. A single lichen colony on a single trunk contributes a tiny fraction of the forest&rsquo;s nitrogen budget, but the aggregate effect of thousands of thalli on hundreds of trees across a watershed is measurable and meaningful. The fixed nitrogen becomes infrastructure.</p>
+
+    <p>Van Allen&rsquo;s discovery enriched every subsequent space mission. The knowledge of the radiation belts &mdash; their location, their intensity, their structure, their variability &mdash; became infrastructure for spacecraft design, mission planning, astronaut safety, and radiation-hardened electronics. Every satellite launched since 1958 carries the legacy of Explorer 1&rsquo;s Geiger counter in its shielding, its orbit selection, its component specifications. The discovery did not stay with Van Allen any more than the fixed nitrogen stays with Lobaria. It flowed outward into the system and became part of the foundation.</p>
+
+    <hr>
+
+    <h2>The Sensitivity Threshold</h2>
+
+    <p>Lobaria pulmonaria begins to decline when atmospheric sulfur dioxide concentrations exceed approximately 10 to 30 micrograms per cubic meter &mdash; a level well below the thresholds that cause visible damage to vascular plants and well below the levels that trigger human health advisories. The lichen is more sensitive than the trees it lives on, more sensitive than the mosses that share its substrate, more sensitive than the human observers who walk through the forest and notice, eventually, that something is missing. By the time a human recognizes that Lobaria pulmonaria is gone from a forest, the air quality has been degraded for years or decades. The lichen was the early warning system, and it was gone before the alarm was heard.</p>
+
+    <p>This extreme sensitivity is not a weakness. It is the lichen&rsquo;s value as an indicator. An indicator species must be more sensitive than the system it monitors. If the indicator tolerates the same conditions as everything else, it provides no early warning &mdash; it declines at the same rate as the rest of the ecosystem, and its loss is noticed only when the damage is already advanced. Lobaria pulmonaria&rsquo;s sensitivity means it disappears first. Its absence is the first symptom. By the time the trees show stress, the lichen has been gone for a generation.</p>
+
+    <p>The Geiger counter aboard Explorer 1 was similarly sensitive &mdash; and similarly prone to failure at the extreme. The Anton 314 tube had a dynamic range from zero counts per second to a few thousand counts per second. Within that range, it measured the radiation environment faithfully. But the inner Van Allen belt, at its most intense, produced particle fluxes that exceeded the tube&rsquo;s counting capacity by orders of magnitude. The tube saturated. The count rate went to zero. The instrument had reached its sensitivity threshold &mdash; not the lower threshold (too few particles to detect) but the upper threshold (too many particles to count). The Geiger counter, like Lobaria pulmonaria, was an instrument that failed at its extreme, and the failure was the discovery.</p>
+
+    <p>Both organisms occupy a middle range and are destroyed at the boundary. Lobaria pulmonaria thrives in clean air and disappears in polluted air. The Geiger counter counts in moderate radiation and goes silent in intense radiation. Both have been pushed past their limits by the environments they were placed in. And in both cases, the scientist reading the data understood that the failure of the instrument was not a malfunction but a measurement. Van Allen understood that zero counts meant maximum radiation. Ecologists understand that absent Lobaria means degraded air. The instrument&rsquo;s limit IS the data. The organism&rsquo;s absence IS the diagnosis.</p>
+
+    <hr>
+
+    <h2>The Doctrine and the Counter</h2>
+
+    <p>The Doctrine of Signatures, articulated in its most influential form by the Swiss physician Paracelsus in the sixteenth century and elaborated by the Italian naturalist Giambattista della Porta in his Phytognomonica of 1588, held that God had marked plants with signs indicating their medicinal uses. A plant whose leaves resembled a liver would treat liver diseases. A plant whose roots resembled a human figure would treat the whole body. A plant whose surface resembled lung tissue would treat pulmonary complaints.</p>
+
+    <p>Lobaria pulmonaria, with its ridged, pitted, alveolar surface, was the textbook case. Lungwort. Lung lichen. Prescribed for coughs, bronchitis, asthma, tuberculosis, and other afflictions of the chest. The Doctrine of Signatures was not science. It was analogical reasoning elevated to medical practice &mdash; a system that confused resemblance with function, correlation with causation, appearance with mechanism. Most of its prescriptions were useless. Some were harmful. The doctrine has been thoroughly discredited by four centuries of empirical medicine.</p>
+
+    <p>But Lobaria pulmonaria does contain biologically active compounds. The lichen produces a suite of secondary metabolites &mdash; stictic acid, norstictic acid, constictic acid, and other depsidones &mdash; that have demonstrated antimicrobial, antioxidant, and anti-inflammatory activity in laboratory studies. Whether these compounds are effective against pulmonary diseases in humans is not established by rigorous clinical evidence. But the Doctrine of Signatures was not entirely wrong about this particular organism &mdash; it was wrong about the mechanism (resemblance does not indicate function) while being possibly, accidentally, partially right about the outcome (the organism does produce anti-inflammatory compounds). The doctrine reached the right answer for the wrong reason.</p>
+
+    <p>Van Allen reached the right answer &mdash; the radiation belts exist &mdash; from data that appeared, on first reading, to indicate the wrong answer. Zero counts suggested no radiation. The obvious interpretation was wrong. The correct interpretation required inverting the obvious reading: zero means maximum, silence means saturation, absence means overwhelming presence. Van Allen did not reach the right answer by accident. He reached it by understanding his instrument well enough to know what its failure mode meant. But the superficial data &mdash; the numbers on the telemetry printout &mdash; said one thing, and the truth was the opposite. The Doctrine of Signatures and the Geiger counter&rsquo;s saturation are both cases where the surface reading misleads and the deeper understanding corrects. The difference is that the Doctrine of Signatures never developed the deeper understanding (it stayed at the level of &ldquo;looks like lungs, therefore treats lungs&rdquo;), while Van Allen developed the deeper understanding within weeks (zero means saturated, saturated means intense radiation, intense radiation means a trapped particle population of global significance).</p>
+
+    <p>Lobaria pulmonaria&rsquo;s lung-like surface is not a sign from God about its medicinal purpose. It is a surface-area optimization for gas exchange and water absorption, arrived at through millions of years of evolution in a partnership between three kingdoms of life. The resemblance to lung tissue is a convergence of form driven by a convergence of function: both structures need to maximize exchange area within a limited volume. The Doctrine of Signatures noticed the resemblance and drew the wrong conclusion. Modern lichenology notices the resemblance and draws the right one: the lichen and the lung solve the same engineering problem with the same geometric solution because the problem admits only a few efficient answers, and evolution and anatomy both converge on them.</p>
+
+    <hr>
+
+    <h2>Distribution and Conservation</h2>
+
+    <p>Lobaria pulmonaria has a wide distribution across the Northern Hemisphere: North America, Europe, Asia, and parts of North Africa. Historically, it was common wherever temperate forests with adequate moisture and clean air existed. Today, its distribution is contracting. Across Europe, Lobaria pulmonaria has declined dramatically since the Industrial Revolution. In the British Isles, where it was once widespread on oaks and beeches in ancient woodlands, it is now restricted to the western coast of Scotland, the Lake District, and a few sites in Wales and western Ireland &mdash; the places farthest from industrial centers and prevailing pollution plumes. In continental Europe, it has disappeared from the lowland forests of France, Germany, the Netherlands, and Belgium, persisting only in montane forests of Scandinavia, the Alps, and the Pyrenees where altitude and isolation provide some buffer against air pollution.</p>
+
+    <p>In the Pacific Northwest, the situation is more favorable but not without concern. Lobaria pulmonaria remains relatively common in old-growth and late-successional forests of the Olympic Peninsula, the western Cascades, the coast ranges of Oregon and Washington, and the coastal forests of British Columbia. The PNW&rsquo;s combination of wet maritime climate, extensive remaining old growth (though much reduced from pre-logging extent), and relatively low industrial emissions compared to eastern North America and Europe has preserved conditions suitable for the lichen. But the area of old-growth forest in the PNW has declined by an estimated 85 to 95 percent since European settlement. The lichen&rsquo;s habitat has contracted with the old growth. Where the old trees were cut, the lichen was eliminated &mdash; not by the chainsaw directly, but by the destruction of the microhabitat (the stable, shaded, humid bark surface) and the exposure to drying winds and increased light that follow canopy removal. Even where forests have regrown, the lichen&rsquo;s return is not assured. The decades required for the canopy to close, the humidity to stabilize, the bark to develop sufficient roughness, and the lichen propagules to arrive and establish &mdash; all of this takes longer than the typical rotation age of a managed forest. Industrial forestry operates on 40 to 80 year rotations. Lobaria pulmonaria operates on century-plus timescales. The two systems are incompatible.</p>
+
+    <p>The conservation message is the same message the lichen delivers as an indicator: presence requires specific conditions maintained over long periods. If the conditions are disrupted &mdash; even temporarily, even partially &mdash; the lichen may not return within human planning horizons. A forest that looks like old growth, that has tall trees and a closed canopy and a rich understory, may still lack Lobaria pulmonaria if the air has been compromised or the continuity of old-growth conditions has been broken. The lichen is the strictest auditor of the forest&rsquo;s environmental history. It does not accept approximations.</p>
+
+    <hr>
+
+    <h2>Resonance Axes</h2>
+
+    <h3>1. Detector / Indicator</h3>
+    <p>Lobaria pulmonaria is a biological detector of environmental quality. Its presence indicates clean air, old-growth forest, and climatic stability. Its absence indicates disruption. Explorer 1&rsquo;s Geiger counter was a physical detector of radiation intensity. Its counts indicated the particle flux. Its silence &mdash; the zero reading at high altitude &mdash; indicated flux beyond the instrument&rsquo;s capacity. Both are measuring instruments. Both produce binary signals at their extremes: present or absent, counting or silent. Both fail at their limits, and in both cases the failure is the most important data point. The lichen&rsquo;s disappearance from polluted forests is the equivalent of the Geiger counter&rsquo;s saturation in the radiation belt. Both instruments have been overwhelmed by their environment, and the overwhelming IS the measurement.</p>
+
+    <h3>2. Three-Way Partnership</h3>
+    <p>Lobaria pulmonaria is a three-way symbiosis: mycobiont (fungus), photobiont (green alga), cyanobiont (Nostoc cyanobacterium). Explorer 1 was a three-way collaboration: ABMA (launch vehicle), JPL (satellite), University of Iowa (instruments). In both systems, each partner contributes something the others cannot provide. The fungus builds structure; the alga provides energy; the cyanobacterium fixes nitrogen. The Army provides the rocket; JPL provides the satellite; Iowa provides the science. Remove any partner and the organism &mdash; whether lichen or mission &mdash; does not function. The three-way partnership is not a convenience. It is a structural requirement.</p>
+
+    <h3>3. Old-Growth / Foundation</h3>
+    <p>Lobaria pulmonaria requires old-growth forest. It indicates something foundational and enduring &mdash; a forest that has not been disrupted for centuries, an environment that has maintained its essential character through decades of incremental change. Explorer 1 is the foundation of American space science. The discovery of the Van Allen radiation belts was the first major scientific result from space, and every subsequent characterization of Earth&rsquo;s magnetosphere, every radiation-hardened spacecraft component, every astronaut radiation dose calculation builds on what Explorer 1 measured. The lichen requires a foundation of centuries of forest continuity. The space program was built on the foundation of Explorer 1&rsquo;s discovery.</p>
+
+    <h3>4. Nitrogen-Fixing / Knowledge-Fixing</h3>
+    <p>Lobaria pulmonaria takes atmospheric nitrogen &mdash; abundant, invisible, inaccessible to most organisms &mdash; and converts it to biologically usable ammonium. Van Allen took invisible radiation &mdash; present, intense, undetected by any prior instrument &mdash; and converted it to scientific knowledge. Both processes fix the inaccessible into the useful. Both enrich their surrounding systems: the lichen enriches the forest with fixed nitrogen that flows into the soil, the trees, and the broader ecosystem; Van Allen&rsquo;s discovery enriched the space program with knowledge that flowed into every subsequent mission&rsquo;s design, shielding, and trajectory planning. The fixer takes what is invisible and makes it available.</p>
+
+    <h3>5. Sensitivity / Saturation</h3>
+    <p>Lobaria pulmonaria is so sensitive to atmospheric pollution that it disappears entirely from degraded environments. Its response is binary: present in clean air, absent in polluted air. The threshold is sharp. The Geiger counter aboard Explorer 1 was so sensitive to radiation that it saturated entirely in the inner Van Allen belt. Its response was binary: counting in moderate flux, silent in intense flux. The threshold was sharp. Both instruments have a characteristic failure mode that is itself the most valuable measurement: the lichen&rsquo;s absence diagnoses pollution; the counter&rsquo;s silence diagnoses extreme radiation. Both are pushed past their limits by the environments they were designed to measure, and the limit crossing is the signal that matters most.</p>
+
+    <hr>
+
+    <h2>Taxonomy Note</h2>
+
+    <p>The species was first described by Linnaeus in 1753 as Lichen pulmonarius in Species Plantarum, the foundational work of modern botanical nomenclature. The genus Lobaria was established by J.G.C. Lehmann in 1814, though the transfer of pulmonarius to Lobaria is attributed to Georg Franz Hoffmann in 1796. The authority is therefore cited as Lobaria pulmonaria (L.) Hoffm. &mdash; Linnaeus described it first; Hoffmann placed it in the correct genus. The family Lobariaceae, to which Lobaria belongs, is a family of large foliose lichens predominantly found in humid, old-growth forests worldwide.</p>
+
+    <p>The name pulmonaria comes from the Latin pulmo, meaning lung. The name has been applied to this lichen since at least the medieval herbals, long before Linnaeus formalized it. The continuity of the common name across centuries and languages &mdash; lungwort in English, Lungenflechte in German, pulmonaire in French, pulmonaria in Latin &mdash; reflects the universality of the visual resemblance between the lichen&rsquo;s ridged thallus and mammalian lung tissue. The name is older than the science that would eventually explain why the resemblance exists (convergent surface-area optimization) rather than what the Doctrine of Signatures claimed it meant (divine indication of medicinal purpose).</p>
+
+    <p>The genus Lobaria contains approximately 70 to 80 species worldwide, predominantly in tropical and temperate forests with high humidity. In the Pacific Northwest, several Lobaria species occur, but L. pulmonaria is the most widespread and the most commonly encountered. Its large size, distinctive surface texture, and ecological significance as an old-growth indicator make it one of the most studied and best-known lichens in North American lichenology.</p>
+
+  </div>
+
+  <div class="sources-section">
+    <h2>Sources</h2>
+
+    <h3>Primary Sources</h3>
+    <ul>
+      <li><strong>Brodo, Irwin M., Sharnoff, Sylvia Duran, and Sharnoff, Stephen. &ldquo;Lichens of North America&rdquo; (Yale University Press, 2001).</strong> Comprehensive treatment of Lobaria pulmonaria, including morphology, ecology, distribution, and conservation status in North American forests.</li>
+      <li><strong>Richardson, D.H.S. and Cameron, R.P. &ldquo;Cyanolichens: Their Response to Pollution and Possible Management Strategies for Their Conservation in Northeastern North America.&rdquo; Northeastern Naturalist, Vol. 11, No. 1, 2004.</strong> Nitrogen fixation rates, pollution sensitivity, and conservation ecology of cyanolichens including Lobaria pulmonaria.</li>
+      <li><strong>Gauslaa, Yngvar. &ldquo;Lobaria pulmonaria, an Indicator of Species-Rich Forests of Long Ecological Continuity.&rdquo; Blyttia, Vol. 52, 1994.</strong> Quantitative analysis of Lobaria pulmonaria as an old-growth indicator in Scandinavian forests.</li>
+    </ul>
+
+    <h3>Secondary Sources</h3>
+    <ul>
+      <li><strong>McCune, Bruce and Geiser, Linda. &ldquo;Macrolichens of the Pacific Northwest&rdquo; (Oregon State University Press, 2nd edition, 2009).</strong> Field identification, ecological notes, and distributional data for Lobaria pulmonaria in PNW forests.</li>
+      <li><strong>Sillett, Stephen C., McCune, Bruce, Peck, J.E., and Rambo, T.R. &ldquo;Four Years of Epiphyte Colonization in Douglas-Fir Forest Canopies.&rdquo; Bryologist, Vol. 103, No. 4, 2000.</strong> Growth rates and establishment patterns of canopy lichens including Lobaria pulmonaria in old-growth Douglas-fir forests.</li>
+      <li><strong>Rose, Francis. &ldquo;Temperate Forest Management: Its Effects on Bryophyte and Lichen Floras and Habitats.&rdquo; In Bates, J.W. and Farmer, A.M. (eds.), Bryophytes and Lichens in a Changing Environment (Clarendon Press, 1992).</strong> Historical decline of Lobaria pulmonaria in European forests and its use as a continuity indicator.</li>
+      <li><strong>Scheidegger, Christoph and Goward, Trevor. &ldquo;Monitoring Lichens for Conservation: Red Lists and Conservation Action Plans.&rdquo; In Nimis, P.L., Scheidegger, C., and Wolseley, P.A. (eds.), Monitoring with Lichens &mdash; Monitoring Lichens (Kluwer, 2002).</strong> Conservation frameworks for Lobaria pulmonaria and related indicator species.</li>
+    </ul>
+
+    <h3>Datasets</h3>
+    <ul>
+      <li><strong>Consortium of North American Lichen Herbaria (lichenportal.org).</strong> Herbarium specimen records and distribution maps for Lobaria pulmonaria across North America.</li>
+      <li><strong>USDA Forest Service Forest Inventory and Analysis Program.</strong> Old-growth forest extent and distribution in Pacific Northwest national forests.</li>
+      <li><strong>European Environment Agency Air Quality Database.</strong> Atmospheric SO<sub>2</sub> and NO<sub>x</sub> concentrations correlated with Lobaria pulmonaria decline across European monitoring stations.</li>
+      <li><strong>Flora of North America Online &mdash; Lobaria pulmonaria.</strong> Taxonomic description, nomenclatural history, and distributional summary.</li>
+    </ul>
+  </div>
+
+  <div class="nav-card">
+    <a href="research.html">&larr; Research</a>
+    <a href="mathematics.html">Mathematics &rarr;</a>
+  </div>
+</main>
+
+<footer><p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.7 Explorer 1 + Lobaria pulmonaria &mdash; tibsfox.com/Research/NASA/</p></footer>
+
+</body>
+</html>

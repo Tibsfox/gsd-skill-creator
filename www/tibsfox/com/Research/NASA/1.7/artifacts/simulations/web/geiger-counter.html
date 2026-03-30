@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 1 Geiger Counter Simulator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #00FF41;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #container {
+    max-width: 1400px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+  }
+  #display-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #counter-housing {
+    background: #0a0a0a;
+    border: 2px solid #1a3a1a;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.05),
+                inset 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 100%;
+  }
+  #counter-header {
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #1a3a1a;
+    padding-bottom: 10px;
+  }
+  #counter-header h2 {
+    font-size: 14px;
+    color: #3a6a3a;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  #counter-header .model {
+    font-size: 11px;
+    color: #2a4a2a;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    border: 1px solid #1a3a1a;
+    border-radius: 4px;
+  }
+  #readout {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #1a3a1a;
+    border-radius: 4px;
+    background: #080808;
+  }
+  .readout-item {
+    text-align: center;
+  }
+  .readout-label {
+    font-size: 9px;
+    color: #2a5a2a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .readout-value {
+    font-size: 22px;
+    color: #00FF41;
+    text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+    margin-top: 4px;
+  }
+  .readout-value.saturated {
+    color: #ff3333;
+    text-shadow: 0 0 8px rgba(255, 51, 51, 0.4);
+  }
+  #panel {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .panel-section {
+    background: #0a0a0a;
+    border: 1px solid #1a3a1a;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .panel-section h3 {
+    font-size: 11px;
+    color: #3a6a3a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #1a3a1a;
+  }
+  .control-row {
+    margin-bottom: 12px;
+  }
+  .control-label {
+    font-size: 10px;
+    color: #4a7a4a;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: #1a3a1a;
+    border-radius: 2px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #00FF41;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(0, 255, 65, 0.4);
+  }
+  .info-text {
+    font-size: 10px;
+    color: #3a5a3a;
+    line-height: 1.6;
+  }
+  .status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .status-counting { background: #00FF41; box-shadow: 0 0 4px #00FF41; }
+  .status-saturated { background: #ff3333; box-shadow: 0 0 4px #ff3333; }
+  .status-text {
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+  #dead-time-bar {
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  #dead-time-fill {
+    height: 100%;
+    background: #00FF41;
+    border-radius: 3px;
+    transition: width 0.1s;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="display-frame">
+    <div id="counter-housing">
+      <div id="counter-header">
+        <h2>Geiger-Mueller Counter</h2>
+        <div class="model">Type 314 &mdash; University of Iowa &mdash; Explorer 1</div>
+      </div>
+      <canvas id="display" width="800" height="500"></canvas>
+      <div id="readout">
+        <div class="readout-item">
+          <div class="readout-label">Measured Rate</div>
+          <div class="readout-value" id="measured-rate">0</div>
+        </div>
+        <div class="readout-item">
+          <div class="readout-label">True Rate</div>
+          <div class="readout-value" id="true-rate">0</div>
+        </div>
+        <div class="readout-item">
+          <div class="readout-label">Dead Time</div>
+          <div class="readout-value" id="dead-time-display">100 &micro;s</div>
+        </div>
+        <div class="readout-item">
+          <div class="readout-label">Status</div>
+          <div class="readout-value" id="status-display">IDLE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel">
+    <div class="panel-section">
+      <h3>Radiation Source</h3>
+      <div class="control-row">
+        <div class="control-label">
+          <span>Intensity</span>
+          <span id="intensity-value">0%</span>
+        </div>
+        <input type="range" id="intensity" min="0" max="100" value="0">
+      </div>
+      <div class="control-row">
+        <div class="control-label">
+          <span>Dead Time (&micro;s)</span>
+          <span id="deadtime-value">100</span>
+        </div>
+        <input type="range" id="deadtime" min="10" max="500" value="100">
+      </div>
+      <div class="status-text" id="counter-status">
+        <span class="status-indicator status-counting"></span>
+        <span>Counter ready</span>
+      </div>
+      <div id="dead-time-bar"><div id="dead-time-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="panel-section">
+      <h3>Mission Context</h3>
+      <div class="info-text">
+        <p>Explorer 1 carried a Type 314 Geiger-Mueller tube built by
+        James Van Allen at the University of Iowa.</p>
+        <p style="margin-top:8px">As the satellite passed through the radiation belt
+        at ~1,500 km altitude, the counter registered increasing hits&hellip;
+        then suddenly read <strong style="color:#ff3333">ZERO</strong>.</p>
+        <p style="margin-top:8px">The tube&rsquo;s dead time (100 &micro;s) was longer
+        than the interval between particles. Every particle arrived while the
+        tube was still recovering. <em>Saturation.</em></p>
+        <p style="margin-top:8px">Slide the intensity to maximum and watch the
+        count rate peak, then drop to zero. The silence IS the signal.</p>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h3>The Paradox</h3>
+      <div class="info-text">
+        <p style="color:#D4A830">N<sub>measured</sub> = N<sub>true</sub> &times;
+        e<sup>&minus;N<sub>true</sub>&times;&tau;</sup></p>
+        <p style="margin-top:8px">At high true rates, measured rate
+        approaches zero. Zero counts = maximum radiation.</p>
+        <p style="margin-top:8px;color:#8FA880"><em>Lobaria pulmonaria</em>
+        disappears from polluted forests. Its absence indicates presence
+        of pollution. Same logic.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('display');
+const ctx = canvas.getContext('2d');
+const intensitySlider = document.getElementById('intensity');
+const deadtimeSlider = document.getElementById('deadtime');
+
+// Audio context
+let audioCtx = null;
+let clickBuffer = null;
+
+function initAudio() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Create click sound buffer
+  const sampleRate = audioCtx.sampleRate;
+  const duration = 0.008; // 8ms click
+  const length = Math.floor(sampleRate * duration);
+  clickBuffer = audioCtx.createBuffer(1, length, sampleRate);
+  const data = clickBuffer.getChannelData(0);
+  for (let i = 0; i < length; i++) {
+    const t = i / sampleRate;
+    // Sharp attack, fast decay — G-M tube discharge sound
+    const env = Math.exp(-t * 800);
+    data[i] = env * (Math.random() * 2 - 1) * 0.3;
+  }
+}
+
+function playClick() {
+  if (!audioCtx || !clickBuffer) return;
+  const source = audioCtx.createBufferSource();
+  source.buffer = clickBuffer;
+  const gain = audioCtx.createGain();
+  gain.gain.value = 0.15;
+  source.connect(gain);
+  gain.connect(audioCtx.destination);
+  source.start();
+}
+
+// Particle hit state
+const hits = [];
+const MAX_HITS = 200;
+let lastClickTime = 0;
+const minClickInterval = 30; // ms between audio clicks
+
+// Geiger counter state
+let measuredRate = 0;
+let trueRate = 0;
+let isSaturated = false;
+let deadTimeFraction = 0;
+
+function getIntensity() { return parseInt(intensitySlider.value) / 100; }
+function getDeadTime() { return parseInt(deadtimeSlider.value) * 1e-6; } // seconds
+
+function paralyzableModel(nTrue, tau) {
+  return nTrue * Math.exp(-nTrue * tau);
+}
+
+function update(timestamp) {
+  const intensity = getIntensity();
+  const tau = getDeadTime();
+
+  // Map intensity 0-1 to true rate 0-10^6
+  // Exponential mapping for better control feel
+  trueRate = Math.pow(intensity, 3) * 1e6;
+
+  // Apply dead time model
+  measuredRate = paralyzableModel(trueRate, tau);
+
+  // Saturation detection
+  isSaturated = trueRate > 0 && measuredRate < trueRate * 0.01 && trueRate > 1000;
+
+  // Dead time fraction (how much time the tube is "dead")
+  deadTimeFraction = Math.min(1, trueRate * tau);
+
+  // Generate random particle hits
+  const hitsPerFrame = measuredRate / 60; // assuming ~60fps
+  const numNewHits = Math.random() < (hitsPerFrame % 1) ?
+    Math.ceil(hitsPerFrame) : Math.floor(hitsPerFrame);
+
+  for (let i = 0; i < Math.min(numNewHits, 10); i++) {
+    hits.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      age: 0,
+      maxAge: 15 + Math.random() * 15,
+      size: 2 + Math.random() * 3
+    });
+
+    // Play click sound (throttled)
+    if (timestamp - lastClickTime > minClickInterval && measuredRate < 5000) {
+      playClick();
+      lastClickTime = timestamp;
+    }
+  }
+
+  // Age and remove old hits
+  for (let i = hits.length - 1; i >= 0; i--) {
+    hits[i].age++;
+    if (hits[i].age > hits[i].maxAge) {
+      hits.splice(i, 1);
+    }
+  }
+
+  // Cap hit array
+  while (hits.length > MAX_HITS) hits.shift();
+}
+
+function draw() {
+  // Clear with dark background
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Subtle grid
+  ctx.strokeStyle = 'rgba(0, 255, 65, 0.03)';
+  ctx.lineWidth = 0.5;
+  for (let x = 0; x < canvas.width; x += 40) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, canvas.height);
+    ctx.stroke();
+  }
+  for (let y = 0; y < canvas.height; y += 40) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(canvas.width, y);
+    ctx.stroke();
+  }
+
+  // Draw particle hits
+  for (const hit of hits) {
+    const alpha = 1 - hit.age / hit.maxAge;
+    const glow = Math.max(0, 1 - hit.age / 5);
+
+    // Bright green flash
+    ctx.fillStyle = `rgba(0, 255, 65, ${alpha * 0.8})`;
+    ctx.beginPath();
+    ctx.arc(hit.x, hit.y, hit.size * (1 + glow), 0, Math.PI * 2);
+    ctx.fill();
+
+    // Glow halo
+    if (glow > 0) {
+      ctx.fillStyle = `rgba(0, 255, 65, ${glow * 0.2})`;
+      ctx.beginPath();
+      ctx.arc(hit.x, hit.y, hit.size * 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Saturation flash effect
+  if (isSaturated) {
+    // Red warning overlay
+    const flash = Math.sin(Date.now() * 0.005) * 0.5 + 0.5;
+    ctx.fillStyle = `rgba(255, 0, 0, ${flash * 0.05})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // SATURATED text
+    ctx.font = 'bold 36px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = `rgba(255, 51, 51, ${0.5 + flash * 0.5})`;
+    ctx.fillText('COUNTER SATURATED', canvas.width / 2, canvas.height / 2 - 15);
+    ctx.font = '18px Courier New';
+    ctx.fillStyle = `rgba(255, 51, 51, ${0.3 + flash * 0.3})`;
+    ctx.fillText('ZERO COUNTS — MAXIMUM RADIATION', canvas.width / 2, canvas.height / 2 + 20);
+  }
+
+  // Scanline effect
+  for (let y = 0; y < canvas.height; y += 3) {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+    ctx.fillRect(0, y, canvas.width, 1);
+  }
+
+  // Update readouts
+  const measuredEl = document.getElementById('measured-rate');
+  const trueEl = document.getElementById('true-rate');
+  const statusEl = document.getElementById('status-display');
+
+  measuredEl.textContent = measuredRate < 1 ? '0' : formatRate(measuredRate);
+  measuredEl.className = isSaturated ? 'readout-value saturated' : 'readout-value';
+
+  trueEl.textContent = trueRate < 1 ? '0' : formatRate(trueRate);
+
+  if (isSaturated) {
+    statusEl.textContent = 'SATURATED';
+    statusEl.className = 'readout-value saturated';
+  } else if (trueRate > 100) {
+    statusEl.textContent = 'COUNTING';
+    statusEl.className = 'readout-value';
+  } else {
+    statusEl.textContent = 'IDLE';
+    statusEl.className = 'readout-value';
+  }
+
+  // Update panel displays
+  document.getElementById('intensity-value').textContent =
+    Math.round(getIntensity() * 100) + '%';
+  document.getElementById('deadtime-value').textContent =
+    deadtimeSlider.value;
+  document.getElementById('dead-time-display').innerHTML =
+    deadtimeSlider.value + ' &micro;s';
+
+  // Dead time bar
+  document.getElementById('dead-time-fill').style.width =
+    (deadTimeFraction * 100) + '%';
+  document.getElementById('dead-time-fill').style.background =
+    deadTimeFraction > 0.9 ? '#ff3333' : '#00FF41';
+
+  // Status indicator
+  const statusDiv = document.getElementById('counter-status');
+  if (isSaturated) {
+    statusDiv.innerHTML = '<span class="status-indicator status-saturated"></span>' +
+      '<span>SATURATED — dead time > arrival interval</span>';
+  } else if (deadTimeFraction > 0.5) {
+    statusDiv.innerHTML = '<span class="status-indicator status-counting"></span>' +
+      '<span>Counting — losing ' + Math.round(deadTimeFraction * 100) + '% of events</span>';
+  } else if (trueRate > 10) {
+    statusDiv.innerHTML = '<span class="status-indicator status-counting"></span>' +
+      '<span>Counting — ' + Math.round((1 - deadTimeFraction) * 100) + '% efficiency</span>';
+  } else {
+    statusDiv.innerHTML = '<span class="status-indicator status-counting"></span>' +
+      '<span>Counter ready</span>';
+  }
+}
+
+function formatRate(rate) {
+  if (rate >= 1e6) return (rate / 1e6).toFixed(1) + 'M';
+  if (rate >= 1e3) return (rate / 1e3).toFixed(1) + 'K';
+  return Math.round(rate).toString();
+}
+
+// Animation loop
+function animate(timestamp) {
+  update(timestamp);
+  draw();
+  requestAnimationFrame(animate);
+}
+
+// Initialize audio on first interaction
+document.addEventListener('click', initAudio, { once: true });
+document.addEventListener('touchstart', initAudio, { once: true });
+intensitySlider.addEventListener('input', () => {
+  initAudio();
+});
+
+// Start
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

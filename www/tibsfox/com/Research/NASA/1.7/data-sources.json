@@ -1,0 +1,117 @@
+{
+  "mission": "1.7",
+  "title": "Explorer 1",
+  "description": "Open datasets and source materials relevant to Explorer 1 (1958), the first US satellite, discovery of the Van Allen radiation belts via Geiger counter saturation, Lobaria pulmonaria (lungwort lichen), Varied Thrush (Ixoreus naevius), spin stabilization, Juno I launch vehicle, and LM386 audio amplification",
+  "sources": [
+    {
+      "id": "nssdc-explorer-1",
+      "name": "NSSDC Master Catalog -- Explorer 1",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-001A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Explorer 1. Spacecraft description (13.97 kg cylindrical satellite, 203.2 cm long, 15.2 cm diameter), instrument manifest (Type 314 Geiger-Mueller tube, micrometeorite impact detector, temperature sensors), Juno I launch vehicle details, and mission timeline. NSSDC designation 1958-001A. Records the discovery of the inner Van Allen radiation belt, the satellite's 358 x 2,550 km orbit with 33.24 degree inclination and 114.8-minute period. Documents the three-way collaboration between Army ABMA (launch vehicle), JPL (spacecraft), and University of Iowa (instruments).",
+      "mission_relevance": "Definitive source for Explorer 1 specifications, orbital parameters, and scientific achievements. Documents the Geiger counter instrument that discovered the radiation belts, the Juno I launch vehicle with its spinning upper stages, and the satellite's spin stabilization at 750 rpm. Essential reference for all knowledge nodes in this mission."
+    },
+    {
+      "id": "van-allen-probes-data",
+      "name": "Van Allen Probes Science Gateway",
+      "url": "https://rbspgway.jhuapl.edu/",
+      "type": "primary-source",
+      "category": "radiation-belt-data",
+      "format": "CDF/ASCII",
+      "access": "open",
+      "description": "Data from the Van Allen Probes mission (2012-2019, formerly Radiation Belt Storm Probes, RBSP), which carried modern instruments through both Van Allen belts on orbits designed to map the radiation environment in unprecedented detail. The probes discovered a transient third radiation belt, mapped the slot region dynamics, and characterized wave-particle interactions that control belt particle lifetimes. Data includes energetic particle spectra from 20 keV to 20 MeV, electric and magnetic field measurements, and plasma wave spectra. The mission was named for James Van Allen, who discovered the belts with Explorer 1.",
+      "mission_relevance": "Modern validation data for the radiation belt structure that Explorer 1 first detected in 1958. The Van Allen Probes confirmed the inner belt stability (some protons have been trapped for centuries), the outer belt variability, and the slot region maintenance by VLF waves. Provides ground truth for the simplified belt model used in the orbit-belt-crossing.py simulation. The 54-year continuity from Explorer 1 (1958) to Van Allen Probes (2012) is the full arc of radiation belt science."
+    },
+    {
+      "id": "omni-magnetosphere",
+      "name": "OMNIWeb -- Magnetospheric and Solar Wind Data",
+      "url": "https://omniweb.gsfc.nasa.gov/",
+      "type": "primary-source",
+      "category": "magnetosphere-data",
+      "format": "ASCII/CDF",
+      "access": "open",
+      "description": "NASA's OMNIWeb service provides near-Earth solar wind and magnetospheric data, including the Dst (Disturbance Storm Time) index, Kp planetary geomagnetic activity index, and energetic particle fluxes from multiple spacecraft. Historical data extends back to 1957, covering the period of Explorer 1's mission. The database includes the January-February 1958 geomagnetic conditions during Explorer 1's radiation belt measurements. Solar wind parameters (velocity, density, magnetic field) determine the state of the outer radiation belt and the ring current.",
+      "mission_relevance": "Provides space weather context for Explorer 1's radiation belt discovery. The Dst and Kp indices for January-February 1958 show the geomagnetic conditions during the satellite's initial orbits. The ring current node from Mission 1.6 connects to the outer belt dynamics measured here. Essential for understanding why the belt particle flux varies and how solar activity modulates the radiation environment that saturated Explorer 1's Geiger counter."
+    },
+    {
+      "id": "cosmic-ray-data",
+      "name": "Cosmic Ray Station Network Data -- NMDB",
+      "url": "https://www.nmdb.eu/",
+      "type": "primary-source",
+      "category": "cosmic-ray-data",
+      "format": "ASCII/API",
+      "access": "open",
+      "description": "The Neutron Monitor Database (NMDB) provides real-time and historical cosmic ray intensity data from a global network of ground-based neutron monitors. Cosmic ray neutron monitors measure the same particle population that produces the inner Van Allen belt through CRAND (Cosmic Ray Albedo Neutron Decay): cosmic rays hit atmospheric nuclei, producing neutrons, some of which escape upward, decay into protons, and are trapped by the magnetic field. NMDB data extends back to the 1950s, including the period of Explorer 1's mission. The network includes stations at various latitudes and altitudes, providing the geomagnetic rigidity dependence of the cosmic ray flux.",
+      "mission_relevance": "Primary source for understanding the cosmic ray background that Explorer 1 was designed to measure. Van Allen's Geiger counter was calibrated for cosmic ray count rates of 10-100 per second. The cosmic ray flux determines the CRAND source rate that populates the inner belt. Ground-based neutron monitor data from 1958 provides the cosmic ray context for Explorer 1's measurements."
+    },
+    {
+      "id": "nasa-image-explorer1",
+      "name": "NASA Image and Video Library -- Explorer 1",
+      "url": "https://images.nasa.gov/search?q=explorer%201",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "NASA's public image library containing the iconic photograph of Van Allen, Pickering, and von Braun holding the Explorer 1 model above their heads at the National Academy of Sciences press conference. Also includes spacecraft assembly photographs at JPL, Juno I launch vehicle on the pad at LC-26A, launch photographs, and diagrams of the satellite's instrument layout. The image archive documents the three-way collaboration: von Braun's rocket team in Huntsville, Pickering's satellite team in Pasadena, and Van Allen's instrument package from Iowa.",
+      "mission_relevance": "Source for the definitive visual record of Explorer 1 and its team. The Van Allen-Pickering-von Braun photograph is directly referenced in the short story 'The Belt.' Spacecraft diagrams show the Type 314 Geiger counter placement and the four whip antennas that caused the spin stability problem. Launch photographs document the Juno I vehicle configuration."
+    },
+    {
+      "id": "spdf-explorer1",
+      "name": "Space Physics Data Facility -- Explorer 1 Data",
+      "url": "https://spdf.gsfc.nasa.gov/",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "CDF/ASCII",
+      "access": "open",
+      "description": "The Space Physics Data Facility (SPDF) at NASA Goddard maintains archived data from Explorer 1's Geiger counter and other instruments. The original telemetry data, recorded at tracking stations and forwarded to the University of Iowa, includes the count rate versus time profiles that show the characteristic zero readings at high altitude. SPDF also provides modern radiation belt models (AE-8, AP-8) calibrated against data from Explorer 1 through Van Allen Probes, giving trapped particle fluxes as a function of L-shell, energy, and magnetic activity level.",
+      "mission_relevance": "Archives the original Explorer 1 telemetry data that Van Allen analyzed to discover the radiation belts. The count rate profiles show the dead time saturation effect directly: count rate rises with altitude, peaks, then drops to zero. The AP-8 and AE-8 radiation belt models provide the particle flux values used in the geiger-saturation.py and orbit-belt-crossing.py simulations."
+    },
+    {
+      "id": "rbsp-data",
+      "name": "RBSP-ECT Data Archive",
+      "url": "https://rbsp-ect.newmexicoconsortium.org/",
+      "type": "primary-source",
+      "category": "radiation-belt-data",
+      "format": "CDF",
+      "access": "open",
+      "description": "Energetic particle data from the Energetic particle, Composition, and Thermal plasma (ECT) instrument suite on the Van Allen Probes. ECT measured electrons from 15 eV to 20 MeV and ions from 20 keV to 1 GeV, providing the most complete energy spectra of radiation belt particles ever obtained. The dataset includes pitch angle distributions (showing the mirror point structure), energy spectra (showing the CRAND signature in the inner belt), and time-resolved measurements during geomagnetic storms (showing dynamic injection and loss processes).",
+      "mission_relevance": "Modern high-resolution measurements of the radiation belt particles that Explorer 1 detected via Geiger counter saturation. ECT data validates the inner belt proton spectrum and spatial distribution used in the radiation belt model. The pitch angle measurements confirm the bounce motion described in the radiation belt geometry knowledge node. The energy spectra show that the inner belt peak occurs exactly where Explorer 1's orbit intersected at L ~ 1.4."
+    },
+    {
+      "id": "inat-lobaria",
+      "name": "iNaturalist -- Lobaria pulmonaria Observations",
+      "url": "https://www.inaturalist.org/taxa/125067-Lobaria-pulmonaria",
+      "type": "community-source",
+      "category": "organism-data",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community-contributed observations of Lobaria pulmonaria (lungwort lichen) worldwide, with photographs, geographic coordinates, dates, and identification confirmations. In the Pacific Northwest, Lobaria is found primarily in old-growth and mature second-growth forests with clean air, on bigleaf maple, red alder, and Douglas-fir. Its presence is used as a bioindicator for air quality and forest continuity. The iNaturalist API provides programmatic access to observation data, enabling distribution mapping that correlates with air quality monitoring data. PNW observations are concentrated in the Olympic Peninsula, Cascade foothills, and coastal forests.",
+      "mission_relevance": "Primary data source for the organism component of Mission 1.7. Provides geographic distribution data for Lobaria pulmonaria across the PNW, confirming its use as an air quality bioindicator. The presence/absence pattern of Lobaria is the central metaphor of this mission: absence indicates presence (of pollution), just as the Geiger counter's zero indicates presence (of radiation). Distribution gaps near urban areas demonstrate the bioindicator effect."
+    },
+    {
+      "id": "smithsonian-explorer1",
+      "name": "Smithsonian National Air and Space Museum -- Explorer 1",
+      "url": "https://airandspace.si.edu/collection-objects/satellite-explorer-1/nasm_A19830850000",
+      "type": "primary-source",
+      "category": "historical",
+      "format": "HTML",
+      "access": "open",
+      "description": "The Smithsonian Institution's collection record for the Explorer 1 backup satellite (the flight unit re-entered the atmosphere in 1970). The museum holds the engineering model with full instrumentation, including the Type 314 Geiger-Mueller tube, temperature sensors, and micrometeorite impact detector. The collection record includes dimensions, materials, construction details, and provenance from JPL. The museum also holds related artifacts: Juno I components, ground station equipment, and Van Allen's original data recordings.",
+      "mission_relevance": "Physical artifact record of Explorer 1's hardware. The engineering model shows the exact placement of the Geiger counter tube within the satellite body, the four whip antenna configuration that caused the spin instability, and the overall construction quality of a satellite built in 84 days (from authorization on November 8, 1957, to launch on January 31, 1958). The provenance from JPL documents the three-way collaboration."
+    },
+    {
+      "id": "igy-archive",
+      "name": "International Geophysical Year Digital Archive",
+      "url": "https://www.nas.edu/history/igy/",
+      "type": "primary-source",
+      "category": "historical",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "The National Academy of Sciences maintains a digital archive of International Geophysical Year (July 1957 - December 1958) documents, including the planning records, national committee reports, and scientific results publications. The IGY archive documents the political and scientific context that enabled Explorer 1: the satellite proposals from both US and Soviet panels, the competition between Vanguard and Jupiter-C (Juno I) programs, and the scientific results publications where Van Allen announced the radiation belt discovery. The archive includes Van Allen's original IGY cosmic ray experiment proposal, which specified the Type 314 Geiger counter that would inadvertently discover the belts.",
+      "mission_relevance": "Provides the historical and scientific context for Explorer 1's launch and discovery. The IGY cosmic ray program was the scientific framework within which Van Allen designed his Geiger counter experiment. The archive documents the transition from pure cosmic ray research (the original objective) to radiation belt discovery (the actual result). The IGY context is essential for the knowledge node on International Geophysical Year and the three-way collaboration pattern."
+    }
+  ]
+}

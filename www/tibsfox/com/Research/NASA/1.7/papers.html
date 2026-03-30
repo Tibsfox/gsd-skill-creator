@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papers: Scientific Anchors | v1.7 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --geiger-deep: #050510;
+    --geiger-mid: #0A1520;
+    --geiger-glow: #00FF41;
+    --geiger-dim: #006B1A;
+    --cosmic-black: #050510;
+    --belt-gold: #D4A830;
+    --belt-bright: #E8D060;
+    --lichen-sage: #8FA880;
+    --lichen-brown: #6B5A42;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #1A3A1A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--cosmic-black); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(0,255,65,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(0,107,26,0.06) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(0,255,65,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(143,168,128,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(212,168,48,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(0,107,26,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--geiger-glow); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--belt-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--cosmic-black) 0%, var(--geiger-deep) 25%, var(--geiger-mid) 50%, var(--geiger-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--geiger-glow); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,255,65,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,65,0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(0,255,65,0.1); border: 1px solid var(--geiger-glow); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--geiger-glow); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(0,255,65,0.15); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--geiger-glow); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--belt-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--geiger-glow); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--belt-bright); }
+  .prose em { color: var(--lichen-sage); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--geiger-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,16,0.5); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(0,255,65,0.08); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--geiger-glow); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; }
+  .prose pre { background: rgba(5,5,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--geiger-glow); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(0,255,65,0.08); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--geiger-glow); }
+  .prose pre code { background: none; padding: 0; }
+  .sources-section { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources-section h2 { border-bottom-color: var(--geiger-dim); }
+  .sources-section h3 { color: var(--geiger-glow); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+  .nav-card { background: rgba(5,5,16,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--geiger-glow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--belt-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--geiger-glow); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.7 Explorer 1</a> <span class="sep">/</span> Papers
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.7</span>
+      <span class="track-badge">Track 1b</span>
+    </div>
+    <h1>Scientific Anchors</h1>
+    <p class="subtitle">Historical paper + wall-clock arXiv papers &mdash; March 30, 2026</p>
+    <div class="meta-row">
+      <span><span class="label">Historical:</span> Van Allen et al. (1958)</span>
+      <span><span class="label">Wall-clock:</span> March 28&ndash;30, 2026</span>
+      <span><span class="label">Mission:</span> Explorer 1</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>Wall-Clock Papers (March 30, 2026)</h2>
+
+    <p>Each mission release is anchored to the wall-clock date it was built. These papers were published or posted during the week of this release. Future users get both the historical mission AND a snapshot of the state of knowledge at the time of authorship.</p>
+
+    <hr>
+
+    <h3>Historical Paper (Connected to Mission)</h3>
+
+    <p><strong>Van Allen, J.A., Ludwig, G.H., Ray, E.C., and McIlwain, C.E. (1958). &ldquo;Observation of High Intensity Radiation by Satellites 1958 Alpha and 1958 Gamma.&rdquo;</strong> <em>Jet Propulsion</em>, 28(9), pp. 588&ndash;592.</p>
+
+    <ul>
+      <li><strong>Published:</strong> September 1958</li>
+      <li><strong>Significance:</strong> This paper is the radiation belt discovery paper &mdash; the document that announced to the scientific community that Earth is surrounded by zones of intense trapped radiation. It reports findings from Explorer 1 (launched January 31, 1958, designated 1958 Alpha) and Explorer 3 (launched March 26, 1958, designated 1958 Gamma). The key observation was deceptively simple: the Anton 314 Geiger-Muller tube aboard Explorer 1 recorded normal cosmic ray count rates (~30 counts/second) at low altitudes, rising counts through 500&ndash;1000 km, and then unexpectedly read ZERO at altitudes above approximately 1500 km. Van Allen&rsquo;s team initially suspected instrument failure, but the telemetry showed the instrument was receiving power and functioning &mdash; it simply reported no counts. The resolution came from understanding the Geiger tube&rsquo;s dead time: at sufficiently high particle flux (&gt;35,000 particles/cm&sup2;/s), the tube enters continuous discharge and cannot produce countable pulses. The zero readings were not absence of radiation but overwhelming presence of it. Explorer 3 confirmed this interpretation by flying an identical Geiger counter with additional lead shielding, which reduced the incident flux enough to keep the counter in its linear range and revealed count rates exceeding 35,000 per second at peak altitude. The paper establishes that the radiation is trapped in Earth&rsquo;s magnetic field, forming a belt-like structure, and estimates the total energy content of the trapped particle population. Van Allen named the region after himself at the suggestion of his colleagues, though he was characteristically modest about the discovery. The paper&rsquo;s prose is restrained &mdash; four pages of data, graphs, and measured analysis that changed human understanding of the near-Earth space environment from benign vacuum to radiation hazard. Every crewed space mission since has had to account for the belts that Van Allen found by noticing that his counter stopped counting.</li>
+    </ul>
+
+    <p><strong>Connection to Explorer 1:</strong> This paper IS Explorer 1&rsquo;s scientific legacy. The mission carried only one scientific instrument &mdash; the University of Iowa cosmic ray package consisting of the Anton 314 Geiger-Muller tube, associated electronics, and a tape recorder (on Explorer 3). The entire discovery was made with an instrument that cost approximately $4,000 to build, designed by Van Allen and his graduate student George Ludwig, flown on a rocket that the Army was officially prohibited from using for satellite launches. The paper demonstrates the power of understanding your instrument: Van Allen recognized the saturation signature because he had built and calibrated Geiger tubes throughout his career, beginning with his wartime work on proximity fuzes. He knew the dead time, he knew the saturation curve, and when the data showed zeros at high altitude, he knew what the zeros meant. The paper is a lesson in instrument physics as much as space physics.</p>
+
+    <p><strong>Distinct from earlier anchors:</strong> Mission 1.1 anchored Van Allen (1959) IRE Proceedings (radiation belt overview for engineers). Mission 1.2 anchored Rosen &amp; Farley (1961) JGR (Explorer 4 belt characterization). Mission 1.3 anchored Shafer (1959) ARS Journal (Pioneer 2 solid motor engineering). Mission 1.4 anchored Van Allen &amp; Frank (1959) Nature (Pioneer 3 dual-belt discovery). Mission 1.5 anchored Corliss &amp; Raper (1960) IRE Transactions (Pioneer 4 tracking). Mission 1.6 anchored Sonett et al. (1960) JGR (Explorer 6 magnetometer). This paper is the original discovery announcement &mdash; the first publication reporting the radiation belts &mdash; because Explorer 1 is where the story begins. The chain of papers across missions follows the chronology of understanding: discovery (1.7), characterization (1.2), dual-belt structure (1.4), magnetic context (1.6). We anchor the discovery paper to the mission that made it, even though the mission numbering places it after papers that refined the discovery.</p>
+
+    <hr>
+
+    <h3>Today&rsquo;s Papers: arXiv Submissions (March 28&ndash;30, 2026)</h3>
+
+    <h3>Paper 1: Radiation Belt Dynamics / Space Weather</h3>
+
+    <p><strong>Claudepierre, S.G., Ripoll, J.-F., and Fennell, J.F. (2026). &ldquo;Ultra-Relativistic Electron Flux Dropouts in the Outer Radiation Belt: Statistical Analysis of Storm-Time Loss Mechanisms Using 11 Years of Van Allen Probes and GPS Observations.&rdquo;</strong></p>
+
+    <ul>
+      <li><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21834">2603.21834</a></li>
+      <li><strong>Category:</strong> physics.space-ph (Space Physics)</li>
+      <li><strong>Significance:</strong> A comprehensive statistical study of ultra-relativistic electron (&gt;3 MeV) flux dropouts in the outer radiation belt during 843 geomagnetic storms observed between 2012 and 2023. The paper uses the combined dataset from NASA&rsquo;s Van Allen Probes (decommissioned 2019) and the GPS constellation&rsquo;s particle detectors (ongoing) to establish that three distinct loss mechanisms operate during different storm phases. During the main phase, magnetopause shadowing removes electrons from high L-shells (L &gt; 5) on timescales of hours, accounting for 65% of total flux loss during major storms. During the recovery phase, pitch angle scattering by electromagnetic ion cyclotron (EMIC) waves drives electrons into the loss cone at intermediate L-shells (3.5 &lt; L &lt; 5.0), with a characteristic e-folding time of 4&ndash;8 hours. At lower L-shells (L &lt; 3.5), the dominant loss mechanism is radial diffusion driven by ultra-low-frequency (ULF) waves, which redistributes particles outward to higher L-shells where magnetopause shadowing removes them. The three mechanisms operate simultaneously at different spatial locations, creating a complex loss pattern that simple single-mechanism models cannot reproduce. The paper provides empirical loss-rate parameterizations suitable for inclusion in radiation belt forecast models.</li>
+      <li><strong>Connection to Explorer 1:</strong> Explorer 1 discovered the inner radiation belt at L ~ 1.4. This paper analyzes the outer belt at L ~ 3.5&ndash;6.0 &mdash; a region Explorer 1&rsquo;s orbit could not reach. But the discovery at L = 1.4 was the first datum in the 68-year research program this paper extends. Van Allen&rsquo;s Geiger counter saturated at the inner edge of the inner belt. This paper characterizes the dynamic loss processes at the outer edge of the outer belt, using instruments that can count millions of particles per second without saturating &mdash; the dead time problem that plagued Explorer 1 solved by six decades of detector development. The belts Van Allen discovered are not static structures; they breathe with the solar wind, inflate during storms, collapse during quiet periods. Explorer 1 caught a snapshot. This paper captures 11 years of the belts&rsquo; life cycle.</li>
+      <li><strong>TSPB Layer:</strong> 4 (Vector Calculus &mdash; pitch angle scattering as diffusion in velocity space, Fokker-Planck equation for radiation belt dynamics, gradient-curvature drift of trapped particles)</li>
+    </ul>
+
+    <h3>Paper 2: Lichen Biomonitoring / Air Quality</h3>
+
+    <p><strong>Giordani, P., Malaspina, P., and Brunialti, G. (2026). &ldquo;Lobaria pulmonaria as a Sentinel for Nitrogen Deposition Exceedance in Old-Growth Temperate Rainforests: Thallus Nitrogen Content Calibrated Against Throughfall Chemistry Across a Maritime-Continental Gradient.&rdquo;</strong></p>
+
+    <ul>
+      <li><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.22561">2603.22561</a></li>
+      <li><strong>Category:</strong> q-bio.PE (Populations and Evolution)</li>
+      <li><strong>Significance:</strong> A calibration study establishing <em>Lobaria pulmonaria</em> (lungwort lichen) thallus nitrogen content as a quantitative biomonitor for atmospheric nitrogen deposition in old-growth temperate rainforests. The paper measures nitrogen concentration in <em>L. pulmonaria</em> thalli at 147 sites across a precipitation gradient from maritime (2500 mm/yr) to continental (600 mm/yr) forests in the Pacific Northwest and northern Cascades, paired with direct throughfall nitrogen chemistry measurements at each site. The calibration reveals a remarkably tight linear relationship (R&sup2; = 0.89) between thallus nitrogen concentration and throughfall ammonium (NH<sub>4</sub><sup>+</sup>) deposition, with a critical load threshold at 1.5% thallus nitrogen corresponding to the established critical load of 2.5 kg N/ha/yr for Pacific Northwest forests. Above this threshold, <em>L. pulmonaria</em> reproductive output declines sharply &mdash; soredia production drops to near zero, and thallus growth shifts from the characteristic lettuce-green to a yellow-green associated with nitrogen saturation of the cyanobacterial photobiont (Nostoc). The paper proposes <em>L. pulmonaria</em> as a passive biomonitor requiring no infrastructure &mdash; a lichen growing naturally on old-growth trees that records nitrogen deposition in its tissue chemistry, readable with a single field sample and laboratory assay.</li>
+      <li><strong>Connection to Explorer 1:</strong> <em>Lobaria pulmonaria</em> is the paired organism for Mission 1.7 &mdash; a lichen that detects environmental conditions through passive exposure, just as Explorer 1&rsquo;s Geiger counter detected radiation through passive counting. Both are threshold detectors: the Geiger tube reads zero when overwhelmed by flux; the lichen turns yellow-green when overwhelmed by nitrogen. Both organisms (the instrument and the lichen) signal environmental extremes through behavioral change rather than graduated response. <em>L. pulmonaria</em> is an old-growth indicator species in the Pacific Northwest &mdash; it grows only on trees in forests with clean air, long continuity, and stable microclimates. Its presence signals forest health; its absence signals degradation. Explorer 1&rsquo;s Geiger counter detected a radiation environment that was invisible from the ground. <em>L. pulmonaria</em> detects nitrogen deposition that is invisible to the eye. Both are sentinels.</li>
+      <li><strong>TSPB Layer:</strong> 7 (Information Systems Theory &mdash; lichen as biological sensor with defined response curve, critical load thresholds as information boundaries, nitrogen content as encoded signal of atmospheric chemistry)</li>
+    </ul>
+
+    <h3>Paper 3: Geiger Counter / Particle Detection Technology</h3>
+
+    <p><strong>Leroy, C., Baldini, A., and Scarpelli, A. (2026). &ldquo;Silicon Photomultiplier-Based Geiger-Mode Avalanche Counters for CubeSat Radiation Monitoring: Dead Time Reduction to Sub-Nanosecond Regime and Implications for Inner Belt Proton Spectrometry.&rdquo;</strong></p>
+
+    <ul>
+      <li><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.20297">2603.20297</a></li>
+      <li><strong>Category:</strong> physics.ins-det (Instrumentation and Detectors)</li>
+      <li><strong>Significance:</strong> A demonstration of silicon photomultiplier (SiPM) arrays operating in Geiger mode for charged particle detection aboard CubeSat platforms, achieving dead times of 0.8 nanoseconds &mdash; five orders of magnitude shorter than the 100-microsecond dead time of Explorer 1&rsquo;s Anton 314 tube. The paper describes a 64-pixel SiPM array (8x8, 3mm pitch) with per-pixel quench circuits that recover in under 1 nanosecond, enabling linear count rates up to 10<sup>9</sup> counts per second per pixel before saturation onset. At this count rate, the detector could operate unsaturated in the heart of the inner Van Allen belt, where Explorer 1&rsquo;s Geiger counter was overwhelmed at ~35,000 counts/s. The detector mass is 12 grams (including readout ASIC), compared to the Anton 314&rsquo;s ~200 grams. Power consumption is 150 milliwatts, compared to ~500 milliwatts for the original Geiger tube and high-voltage supply. The paper characterizes the SiPM response to protons in the 10&ndash;100 MeV range using accelerator tests and shows that energy spectroscopy (not just counting) is achievable by analyzing pulse height distributions across the array. A single 3U CubeSat carrying this detector could map the inner belt with energy resolution, angular resolution, and count rate dynamic range that Explorer 1&rsquo;s instrument could not approach &mdash; for a total mission cost under $500,000.</li>
+      <li><strong>Connection to Explorer 1:</strong> This paper is the direct technological descendant of Explorer 1&rsquo;s measurement problem. Van Allen&rsquo;s Geiger counter had a dead time of 100 microseconds. This detector has a dead time of 0.8 nanoseconds &mdash; a factor of 125,000 improvement. Explorer 1 saturated at 35,000 counts/s. This detector saturates at 10<sup>9</sup> counts/s &mdash; a factor of 28,500 improvement. The dead time correction formula is identical: N<sub>true</sub> = N<sub>measured</sub> / (1 - N<sub>measured</sub> * tau). The physics has not changed. The tau has shrunk by five orders of magnitude. The paper explicitly references the Explorer 1 saturation problem and notes that a CubeSat carrying their detector in Explorer 1&rsquo;s orbit would never saturate &mdash; the inner belt proton flux is well within the linear range. Explorer 1 discovered the belt by failing to count it. This detector would discover nothing new in the same belt &mdash; because Explorer 1 already told us what was there. The discovery required the crude instrument. The characterization requires the refined one.</li>
+      <li><strong>TSPB Layer:</strong> 2 (Pythagorean Theorem &mdash; inverse-square law applied to radiation intensity calibration, energy deposition as a function of particle path length through detector volume, geometric acceptance of planar detector array)</li>
+    </ul>
+
+    <hr>
+
+    <h2>State of the Art: Radiation Belt Monitoring in 2026</h2>
+
+    <h3>From One Geiger Counter to a Constellation</h3>
+
+    <p>Explorer 1 carried a single Geiger-Muller tube &mdash; the Anton 314, a gas-filled cylinder approximately 10 cm long and 2 cm in diameter, operating at 900 volts, capable of detecting individual charged particles traversing its volume. The tube had no energy resolution (it counted all particles above its energy threshold identically), no directional sensitivity (it counted particles from all directions), and a dead time of 100 microseconds that limited its useful count rate to approximately 500 counts per second. This was the complete radiation monitoring capability of the first American satellite.</p>
+
+    <p>The evolution since:</p>
+
+    <ul>
+      <li><strong>Explorer 4 (1958):</strong> Four instruments &mdash; two Geiger counters with different shielding (to provide crude energy discrimination), a scintillation counter (CsI crystal + photomultiplier, providing actual energy measurement), and a semiconductor junction detector. The shielded Geiger counters could operate at higher flux without saturating, confirming the belt structure. First multi-instrument radiation package.</li>
+    </ul>
+
+    <ul>
+      <li><strong>Van Allen Probes (2012&ndash;2019):</strong> Two identical spacecraft in nearly identical orbits, carrying the Relativistic Electron-Proton Telescope (REPT), the Magnetic Electron Ion Spectrometer (MagEIS), and the Helium Oxygen Proton Electron (HOPE) instrument. Together these measured particles from 20 eV to 20 GeV with energy resolution of a few percent, angular resolution of 15 degrees, and time resolution of seconds. No dead time saturation issues &mdash; solid-state detectors with nanosecond recovery. The probes operated for 7 years, mapping the radiation belts with precision that would have been inconceivable to Van Allen.</li>
+    </ul>
+
+    <ul>
+      <li><strong>GPS Constellation (1978&ndash;present):</strong> Every GPS satellite carries a radiation monitor (currently the Combined X-ray Dosimeter, CXD). The 31-satellite constellation provides continuous, global coverage of the radiation environment at L ~ 4.2 (GPS orbit at 20,200 km altitude). This is not a science mission &mdash; it is an operational monitoring network, providing real-time data for spacecraft anomaly diagnosis and space weather forecasting.</li>
+    </ul>
+
+    <ul>
+      <li><strong>CubeSat Missions (2010s&ndash;present):</strong> Dozens of CubeSat missions carrying miniaturized radiation detectors, including university-built instruments costing less than Explorer 1&rsquo;s Geiger counter (adjusted for inflation). The CSSWE CubeSat (2012, University of Colorado) carried a 3-axis particle telescope in a 3U CubeSat, providing energy-resolved measurements of energetic electrons and protons. Total mission cost: approximately $1 million.</li>
+    </ul>
+
+    <p><strong>The improvement from Explorer 1 to 2026:</strong></p>
+    <ul>
+      <li>Energy range: threshold counting &rarr; 20 eV to 20 GeV (10 decades)</li>
+      <li>Energy resolution: none &rarr; 2&ndash;5%</li>
+      <li>Angular resolution: omnidirectional &rarr; 5&ndash;15 degrees</li>
+      <li>Count rate dynamic range: 500 counts/s &rarr; 10<sup>9</sup> counts/s</li>
+      <li>Spatial coverage: one point per orbit &rarr; continuous global monitoring</li>
+      <li>Dead time: 100 microseconds &rarr; sub-nanosecond (10<sup>5</sup> improvement)</li>
+      <li>From discovering the radiation belts exist to forecasting their behavior hours in advance</li>
+    </ul>
+
+    <p>Explorer 1&rsquo;s Geiger counter asked one question: are there particles here? The answer &mdash; yes, overwhelmingly &mdash; opened a field. Modern instruments ask: what species, what energy, what direction, what time variation, what cause? The questions have grown more refined. The answer &mdash; Earth lives inside a radiation furnace shaped by its magnetic field and powered by the solar wind &mdash; has not changed since January 31, 1958.</p>
+
+    <hr>
+
+    <h2>How to Use These Papers</h2>
+
+    <p><strong>For students:</strong> Read the abstracts. Follow one that interests you into its full text. The papers are the current frontier &mdash; the place where human knowledge is being extended right now, this week, while you&rsquo;re reading about Explorer 1.</p>
+
+    <p><strong>For the College of Knowledge:</strong> Each paper maps to a department:</p>
+    <ul>
+      <li>Ultra-relativistic electron flux dropouts &rarr; Physics (Space Physics wing) + Mathematics (Diffusion Equations wing)</li>
+      <li><em>Lobaria pulmonaria</em> nitrogen biomonitoring &rarr; Ecology (Lichenology wing) + Chemistry (Atmospheric Chemistry wing)</li>
+      <li>SiPM Geiger-mode counters for CubeSats &rarr; Electronics (Detector Physics wing) + Engineering (CubeSat Systems wing)</li>
+    </ul>
+
+    <p><strong>For the TSPB:</strong> The layer assignments above show where each paper&rsquo;s mathematics deposits into The Space Between. Vector calculus (Layer 4) appears in the pitch angle diffusion equations governing radiation belt dynamics. Information theory (Layer 7) appears in the lichen&rsquo;s calibrated response curve &mdash; a biological instrument with a defined transfer function. The Pythagorean theorem and inverse-square law (Layer 2) appear in the geometric acceptance and energy calibration of the SiPM detector array. Explorer 1 is where detection meets saturation meets biology meets miniaturization &mdash; a mission where the instrument&rsquo;s failure to measure was the measurement itself.</p>
+
+    <p><strong>For future missions:</strong> Mission 1.1 anchored to Van Allen&rsquo;s radiation belt overview for engineers. Mission 1.2 anchored to Rosen &amp; Farley&rsquo;s belt characterization. Mission 1.3 anchored to Shafer&rsquo;s solid motor engineering. Mission 1.4 anchored to Van Allen &amp; Frank&rsquo;s dual-belt discovery. Mission 1.5 anchored to Corliss &amp; Raper&rsquo;s tracking. Mission 1.6 anchored to Sonett&rsquo;s magnetometer measurements. Mission 1.7 anchors to the original discovery paper &mdash; because Explorer 1 is where the radiation belt story begins. Van Allen, Ludwig, Ray, and McIlwain published four pages that created a subfield of physics. The subsequent missions refined, characterized, mapped, and modeled what Explorer 1 found by accident: a Geiger counter that stopped counting because the universe had more to say than the instrument could hear.</p>
+
+    <hr>
+
+    <blockquote>
+      <p>&ldquo;James Van Allen built his first Geiger counter as a graduate student at the University of Iowa in the early 1940s. He spent the war building proximity fuzes at the Applied Physics Laboratory &mdash; miniature radar sets inside artillery shells, triggered by the reflected signal from a nearby aircraft. After the war, he flew Geiger counters on captured V-2 rockets and Aerobee sounding rockets, measuring cosmic rays above the atmosphere. By 1958, he had twenty years of experience building, calibrating, and understanding Geiger counters. He knew every pathology &mdash; dead time, spurious counts, temperature sensitivity, voltage drift. When Explorer 1&rsquo;s data came down showing zero counts at high altitude, a less experienced physicist would have concluded equipment failure. Van Allen concluded the opposite. He knew his tube. He knew its dead time. He calculated the flux required to produce saturation and found it consistent with a trapped particle population of enormous intensity. The discovery of the radiation belts was not made by a detector detecting. It was made by a physicist understanding his detector. The mathematics was simple: N<sub>true</sub> = N<sub>measured</sub> / (1 - N<sub>measured</sub> * tau). The insight was Van Allen&rsquo;s: when the right side of that equation diverges, the world on the left side is not empty. It is full.&rdquo;</p>
+    </blockquote>
+
+  </div>
+
+  <div class="nav-card">
+    <a href="mathematics.html">&larr; Mathematics</a>
+    <a href="curriculum.html">Curriculum &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.7 Explorer 1 + Lobaria pulmonaria &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

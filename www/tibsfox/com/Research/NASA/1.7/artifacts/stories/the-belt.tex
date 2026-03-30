@@ -1,0 +1,143 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{ebgaramond}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{parskip}
+\usepackage{titling}
+\usepackage{fancyhdr}
+
+\setlength{\parindent}{2em}
+\onehalfspacing
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{The Belt}}
+\fancyhead[R]{\small\textit{NASA Mission Series v1.7}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{\Huge\textbf{The Belt}\\[0.5em]\large\textit{A short story from Mission 1.7 --- Explorer 1}}
+\author{NASA Mission Series\\[0.3em]\small Miles Tiberius Foxglove --- Mukilteo, WA}
+\date{March 30, 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\vspace{1em}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{1em}
+
+\noindent The telemetry strip came off the recorder in a continuous scroll, the way a heartbeat comes off an EKG. James Van Allen held the paper in both hands and let it drape over his forearms, reading the trace the way a doctor reads a cardiogram --- not word by word but by shape, by rhythm, by the pattern of what was there and what was not.
+
+He was in his office at the University of Iowa, a second-floor room in the Physics Building that looked out over the Iowa River through windows that needed washing. It was February 1958, four days after Explorer 1 had launched from Cape Canaveral on a modified Redstone rocket that the Army called Juno I. The satellite was up there now, thirteen pounds and fourteen ounces of instrument package spinning at 750 revolutions per minute in an orbit that carried it from 358 kilometers above the surface to 2,550 kilometers out, once every 114.8 minutes. Among its instruments was a Geiger-Mueller tube --- a Type 314, designed in this building, tested in this building, calibrated in this building, shipped to the Jet Propulsion Laboratory in Pasadena in a padded box with handwritten handling instructions. Van Allen's tube. Van Allen's experiment. Van Allen's data, now coming back down from orbit in a stream of telemetry pulses recorded at tracking stations around the equator and forwarded to Iowa City by Teletype.
+
+The data was wrong.
+
+\bigskip
+\centerline{$\bullet$\quad$\bullet$\quad$\bullet$}
+\bigskip
+
+Not wrong in the way that instruments usually go wrong --- noisy signal, intermittent connection, temperature drift, the mundane failures of electronics operating beyond their design envelope. The Geiger counter was producing data. It was producing good, clean, properly formatted data. The problem was what the data said.
+
+At low altitude --- perigee, 358 kilometers above the surface --- the counter registered a steady background rate. Cosmic rays, the constant drizzle of high-energy particles from deep space that penetrate everything, everywhere, all the time. Thirty counts per second, give or take. Normal. Expected. The counter was working. The telemetry was working. The tracking stations were receiving and recording and forwarding and everything was fine.
+
+Then the satellite climbed.
+
+As Explorer 1 ascended from perigee toward apogee, the count rate increased. At 500 kilometers: 50 counts per second. At 800 kilometers: 200 counts per second. At 1,000 kilometers: the rate was climbing fast, hundreds of counts per second, the strip chart pen deflecting farther and farther from the baseline with each orbit. Something was up there. Something was producing particle counts far above the cosmic ray background, something concentrated at specific altitudes, something the satellite flew through twice on every orbit --- once going up, once coming down.
+
+Then, at around 1,200 kilometers, the count rate stopped climbing. It did not plateau. It did not fluctuate. It dropped. It dropped precipitously, as though someone had thrown a switch, and within a few hundred kilometers of altitude the Geiger counter --- the instrument Van Allen had spent three years designing, building, testing, and calibrating --- read zero.
+
+Zero counts. Zero. Nothing. Silence.
+
+\bigskip
+\centerline{$\bullet$\quad$\bullet$\quad$\bullet$}
+\bigskip
+
+Van Allen sat at his desk and looked at the strip chart and did what any careful experimentalist would do: he assumed the instrument had failed. A wire had broken. A solder joint had cracked in the thermal cycling between sunlight and shadow. The high-voltage supply had drifted below the Geiger plateau and the tube had stopped counting. There were a dozen plausible failure modes, all of them mundane, all of them consistent with an instrument reading zero at altitude and recovering at perigee.
+
+Except the recovery was too clean.
+
+On every orbit --- every single orbit, hour after hour, day after day --- the counter came back. It read zero at high altitude, then started counting again as the satellite descended. The transition was sharp, reproducible, and altitude-dependent. A broken wire does not heal itself twice per orbit. A cracked solder joint does not reform at 1,000 kilometers and fail again at 1,200. The precision of the failure was wrong for a failure. It was right for something else.
+
+Van Allen picked up a pencil and began to calculate.
+
+\bigskip
+\centerline{$\bullet$\quad$\bullet$\quad$\bullet$}
+\bigskip
+
+The Geiger-Mueller tube works by avalanche ionization. A single incoming particle --- a cosmic ray proton, a trapped electron, a gamma photon --- enters the tube through its thin mica window and ionizes a gas molecule. The free electron accelerates in the high electric field (400 volts across a gap of a few centimeters), colliding with other gas molecules, liberating more electrons, which accelerate and collide and liberate still more, creating an avalanche of ion pairs that produces a detectable current pulse. One particle in, one electrical pulse out. That pulse is counted. The counter counts.
+
+But after each avalanche, the tube needs time to recover. The positive ions, heavy and slow compared to the electrons, linger in the gas, forming a sheath around the central wire that reduces the electric field below the threshold for further avalanches. Until these ions drift to the cathode and are neutralized --- a process that takes approximately 100 microseconds --- the tube is dead. Blind. Unable to detect new particles. This is the dead time, and it is an intrinsic property of every Geiger counter ever built.
+
+At low count rates, dead time does not matter. If particles arrive every 10 milliseconds and the dead time is 100 microseconds, the tube misses one particle in a hundred. Negligible. But what happens when the true count rate is so high that particles arrive faster than the tube can recover?
+
+Van Allen wrote the equation on the back of the strip chart:
+
+\begin{center}
+$N_{\text{measured}} = N_{\text{true}} \times e^{-N_{\text{true}} \times \tau}$
+\end{center}
+
+The paralyzable dead time model. Each new particle that arrives during dead time resets the recovery clock, extending the dead time further. At moderate rates, you lose some counts but still see most of them. At high rates, the dead time never expires. The tube fires once, begins to recover, gets hit again before it can finish recovering, starts over, gets hit again, starts over, gets hit again. It is permanently dead. The most intense radiation produces the least signal. Zero counts means not zero particles but an overwhelming flood of particles, arriving so fast that the tube can never complete a single recovery cycle.
+
+Zero means maximum.
+
+\bigskip
+\centerline{$\bullet$\quad$\bullet$\quad$\bullet$}
+\bigskip
+
+Van Allen looked up from his calculation and stared at the window. Outside, it was February in Iowa. Snow on the ground. Bare trees along the river. The sky the color of old zinc. He was fifty-three years old and had spent most of his career building instruments and lofting them on balloons and rockets and now, for the first time, on a satellite. He had designed the Type 314 tube to count cosmic rays. He had calibrated it up to a few thousand counts per second, because that was the range he expected to encounter. He had not built it for the radiation levels it was actually experiencing, because no one had imagined those radiation levels existed.
+
+The data was not wrong. The data was right. The instrument was telling him, in the only way it could, that there was a region above the Earth where the radiation was so intense that his carefully calibrated counter could not measure it. The zero was not silence. It was a scream so loud it overwhelmed the microphone.
+
+He thought of Robert Bunsen.
+
+\bigskip
+\centerline{$\bullet$\quad$\bullet$\quad$\bullet$}
+\bigskip
+
+Bunsen had designed his burner to produce a clean, non-luminous flame --- a flame that did not contaminate the spectral lines of whatever substance was heated in it. The burner's genius was in what it did not produce: no yellow sodium glow from the gas, no broadband emission from incomplete combustion, no interference of any kind. The absence of the burner's own light was what made the elemental spectra visible. You had to remove one signal to reveal another. Bunsen read invisible light --- the characteristic emission lines of barium, calcium, cesium, rubidium --- by first removing the visible light that would have masked them.
+
+Van Allen was reading invisible radiation by first understanding why his visible signal had disappeared. The Geiger counter's silence was not a failure of detection. It was the detection, expressed as its own negative. The tube was saying: \textit{I am in a place where there are too many particles for me to count. I cannot tell you how many. I can only tell you that I am overwhelmed.}
+
+The lichen on the trees outside the Physics Building window --- he noticed it every morning, the pale green-gray crusts on the north-facing bark of the elms along the river walk --- worked the same way, though he did not think of it in those terms. \textit{Lobaria pulmonaria}, the lungwort lichen, a partnership of fungus and alga that grows on bark in clean air and disappears when the air becomes polluted. Its absence from a forest indicates the presence of sulfur dioxide or nitrogen oxides or particulate matter too fine to see but too corrosive for the lichen to tolerate. Forestry students are taught to read the absence: no Lobaria means bad air. The lichen does not measure pollution. It responds to pollution by dying, and the empty bark is the measurement.
+
+Explorer 1's Geiger counter did not measure the radiation belt. It responded to the radiation belt by saturating, and the zero reading was the measurement.
+
+\bigskip
+\centerline{$\bullet$\quad$\bullet$\quad$\bullet$}
+\bigskip
+
+On March 15, 1958, six weeks after the launch, Van Allen and his graduate students George Ludwig and Carl McIlwain presented their findings at a joint meeting of the National Academy of Sciences and the American Physical Society. The room was in the Great Hall of the Academy building in Washington. Van Allen stood at the front with a blackboard and chalk and explained the dead time model, showed the telemetry traces, drew the radiation intensity profile as a function of altitude, and described a region of trapped charged particles encircling the Earth in a toroidal belt, confined by the dipole magnetic field, concentrated at equatorial latitudes between 1,000 and 5,000 kilometers altitude. He had discovered it by understanding an absence.
+
+The audience included Wernher von Braun, who had built the rocket, and William Pickering, who had built the satellite. The three of them --- Van Allen from Iowa, Pickering from JPL in Pasadena, von Braun from the Army Ballistic Missile Agency in Huntsville --- posed afterward for a photograph that became one of the iconic images of the space age: three men in suits holding a full-scale model of Explorer 1 above their heads, grinning. The satellite looked like a silver pencil with four whip antennas. It weighed less than a house cat. It had found something that would shape every future mission to orbit: a lethal zone of trapped radiation that astronauts would have to fly through or around, that satellites would have to be shielded against, that would damage solar panels and corrupt electronics and define the boundaries of the habitable near-Earth environment.
+
+They called it the Van Allen radiation belt. There turned out to be two --- an inner belt of trapped protons, stable and persistent, and an outer belt of trapped electrons, dynamic and responsive to solar storms. Explorer 1 had only flown through the inner belt. Pioneer 3, launched later that year, found the outer one. But the discovery was Van Allen's, and it began with a strip chart that read zero.
+
+\bigskip
+\centerline{$\bullet$\quad$\bullet$\quad$\bullet$}
+\bigskip
+
+Years later, when people asked Van Allen how he had known that the zero readings were not a malfunction, he said it was the pattern. A broken instrument stays broken. It does not break at the same altitude on every orbit and fix itself at the same altitude on every descent. The reproducibility was the clue. The zero was not random. It was precise, altitude-dependent, and repeatable. It had the structure of a measurement, not the chaos of a failure.
+
+He had learned to read what was not there. The blank spaces on the strip chart were not empty. They were full --- so full that the instrument could not render them. The way a photograph overexposed to pure white is not showing nothing but showing too much light for the film to register. The way the silence after a thunderclap is not the absence of sound but the ear's temporary deafness to ordinary noise. The way the bare bark of a tree in a polluted forest is not showing an absence of lichen but the presence of something the lichen cannot survive.
+
+The belt is still there. It has been mapped in exquisite detail by dozens of satellites over six decades --- most recently by the Van Allen Probes, two spacecraft launched in 2012 and named for the man who found the belt by reading its shadow. The protons in the inner belt are the same protons that were there in 1958, many of them, trapped on closed magnetic field lines, bouncing between mirror points in the northern and southern hemispheres, drifting westward around the planet at velocities determined by their energy and the magnetic field gradient. Some have been there for centuries. They will be there for centuries more.
+
+Explorer 1 flew through them on January 31, 1958, and the Geiger counter fell silent, and a physicist in Iowa City read the silence and understood.
+
+\vfill
+
+\begin{center}
+\small
+\rule{0.3\textwidth}{0.4pt}\\[0.5em]
+Mission 1.7 --- Explorer 1 --- January 31, 1958\\
+Organism: \textit{Lobaria pulmonaria} (lungwort lichen)\\
+Bird: Varied Thrush (\textit{Ixoreus naevius})\\
+Dedication: Robert Bunsen (1811--1899)\\[0.3em]
+NASA Mission Series --- tibsfox.com
+\end{center}
+
+\end{document}
