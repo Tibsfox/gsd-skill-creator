@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.1 — Pioneer 0 + Fireweed | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --fire-dark: #1A0A0A;
+    --fire-mid: #3A1A1A;
+    --magenta: #C850C0;
+    --magenta-light: #E8A0E0;
+    --fireweed: #D63384;
+    --ash: #6B6B6B;
+    --ember: #FF6B35;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #4A2A2A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--fire-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Seed dispersal background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(200,80,192,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(200,80,192,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(200,80,192,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(255,107,53,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(200,80,192,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(200,80,192,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(255,107,53,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--fire-dark) 0%, var(--fire-mid) 30%, #2D0D47 60%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--magenta);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,80,192,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,80,192,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(200,80,192,0.15);
+    border: 1px solid var(--magenta);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--magenta);
+    margin-bottom: 1rem;
+  }
+
+  .version-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--magenta-light);
+  }
+
+  .status-failed {
+    background: rgba(252,61,33,0.2);
+    border: 1px solid var(--nasa-red);
+    color: var(--nasa-red);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--magenta); font-weight: 500; }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(58,26,26,0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--magenta-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card p, .card li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card {
+    border-color: var(--magenta);
+    background: rgba(200,80,192,0.06);
+  }
+
+  .resonance-axis {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(200,80,192,0.15);
+  }
+
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num {
+    background: var(--magenta);
+    color: var(--fire-dark);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--magenta-light); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(45,13,71,0.4);
+    border: 1px solid var(--magenta);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .organism-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--fireweed);
+    margin-bottom: 0.75rem;
+  }
+
+  .organism-card .sci-name {
+    font-style: italic;
+    color: var(--magenta);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: rgba(26,10,10,0.5);
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--fireweed);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dedication-card {
+    background: rgba(255,107,53,0.08);
+    border: 1px solid var(--ember);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .dedication-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--ember);
+    margin-bottom: 0.75rem;
+  }
+
+  .data-links {
+    background: rgba(11,61,145,0.15);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .data-links h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .data-links a {
+    display: block;
+    color: #7EB8DA;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.2);
+    transition: color 0.2s;
+  }
+
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card {
+    background: rgba(26,26,58,0.4);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .tracks-card h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .track-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.15);
+    font-size: 0.85rem;
+  }
+
+  .track-item:last-child { border-bottom: none; }
+
+  .track-num {
+    background: rgba(11,61,145,0.3);
+    color: #7EB8DA;
+    font-weight: 700;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-card {
+    background: rgba(58,26,26,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .nav-card a {
+    color: var(--magenta);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-card a:hover { color: var(--magenta-light); }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--magenta); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.1</span>
+      <span>NASA Mission Series</span>
+      <span class="status-failed">FAILED</span>
+    </div>
+    <h1>Pioneer 0 &mdash; Seventy-Seven Seconds</h1>
+    <p class="subtitle">The first spacecraft to reach for the Moon, and the fireweed that grew from its fire</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> August 17, 1958</span>
+      <span><span class="label">Program:</span> Pioneer (USAF/ARPA)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Thor-Able</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>Pioneer 0 was the first attempt by the United States to send a spacecraft beyond Earth orbit. Launched six weeks before NASA officially opened its doors, the 38-kilogram probe was intended to orbit the Moon, measuring radiation, micrometeorites, and magnetic fields along the way. The Thor DM-18 first stage exploded 77 seconds after launch when a turbopump bearing failed, destroying the vehicle at an altitude of approximately 16 kilometers.</p>
+      <p>The mission returned no scientific data. But the failure analysis improved the Thor's turbopump bearing specification, directly contributing to the reliability improvements that would make the Thor-Delta family one of the most successful launch vehicle lineages in history &mdash; culminating in the Delta II's 98.7% success rate across 155 launches.</p>
+      <p>Pioneer 0 was the fireweed: the first thing into the burned ground, brief and spectacular, preparing the soil for everything that followed.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> ~38 kg (truncated cone, gold-plated)</li>
+        <li><strong>Instruments:</strong> Proportional counter telescope (radiation), photoelectric cell (aspect), micrometeorite detector, temperature sensors, magnetic field sensor</li>
+        <li><strong>Power:</strong> Mercury batteries</li>
+        <li><strong>Transmitter:</strong> 108.06 MHz, ~300 milliwatts</li>
+        <li><strong>Stabilization:</strong> Spin-stabilized (~5 rev/sec)</li>
+        <li><strong>Builder:</strong> Space Technology Laboratories (later TRW)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Failure</h2>
+      <p><strong>T+0 (12:18 UTC):</strong> Thor main engine ignition. Rocketdyne LR-79 produces 667 kN of thrust.</p>
+      <p><strong>T+0 to T+60:</strong> Nominal flight through Max-Q.</p>
+      <p><strong>T+73.6:</strong> Turbopump bearing failure. Propellant flow stops. Engine shuts down.</p>
+      <p><strong>T+77:</strong> Vehicle tumbles, aerodynamic breakup at ~16 km altitude. Range Safety Officer transmits destruct command.</p>
+      <p><strong>Cause:</strong> Bearing failure in the LR-79 turbopump, likely due to insufficient specification for combined thermal gradient and mechanical load conditions.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> 77-second trajectory simulation + turbopump bearing stress model</li>
+        <li><strong>Minecraft:</strong> Cape Canaveral LC-17A with redstone launch sequence</li>
+        <li><strong>Blender:</strong> Launch-to-explosion animation (30 sec, Cycles render)</li>
+        <li><strong>GLSL:</strong> Rocket exhaust-to-explosion shader (screensaver-ready)</li>
+        <li><strong>Arduino:</strong> OLED telemetry display replaying the 77-second flight ($44)</li>
+        <li><strong>Godot 4:</strong> Interactive launch simulation with camera control</li>
+        <li><strong>GMAT:</strong> The trajectory Pioneer 0 would have flown if it worked</li>
+        <li><strong>Screensaver:</strong> Fireweed bloom cycle (XScreenSaver / GSD-OS)</li>
+        <li><strong>Generative art:</strong> "80,000 Seeds" &mdash; Perlin wind field + magenta particle trails</li>
+        <li><strong>Sound design:</strong> "T+77" &mdash; 90-second reconstructed launch audio</li>
+        <li><strong>Technical drawing:</strong> Thor-Able cutaway SVG with turbopump callout</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Calculate your own rocket's delta-v budget (30 min, Python or pencil)</li>
+        <li><strong>TRY 2:</strong> Build a vibration monitor with Arduino ($30, ADXL345 accelerometer)</li>
+        <li><strong>TRY 3:</strong> Draw a fault tree for Pioneer 0 (45 min, paper or draw.io)</li>
+        <li><strong>DIY 1:</strong> Build a two-stage model rocket ($60-80, Estes kit)</li>
+        <li><strong>DIY 2:</strong> Grow fireweed from seed ($15, 6-month project)</li>
+        <li><strong>DIY 3:</strong> Build the Pioneer 0 telemetry display (Arduino, $44)</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Pioneer:</span> Fireweed IS the pioneer species &mdash; first to colonize disturbed ground. Pioneer 0 was the first spacecraft beyond Earth orbit. Both carry "pioneer" as a job description, not a title.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Fire:</span> Named for appearing after fire. Pioneer 0 ended in fire. The explosion at T+77 created the disturbance from which the program grew.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">Brevity:</span> Fireweed's bloom is spectacular but brief &mdash; weeks of vivid magenta, then seed pods. Pioneer 0's flight was 77 seconds. Both are brief, necessary, beautiful.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Succession:</span> Fireweed's purpose is to prepare ground for what follows &mdash; stabilize soil, fix nitrogen, provide shade. Pioneer 0's failure prepared ground for Pioneers 1-4 and the entire Delta rocket family.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">Resilience:</span> After Mt. St. Helens obliterated everything, fireweed returned first. After Pioneer 0 exploded, Pioneer 1 launched 55 days later. Neither disaster was terminal.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">Scale:</span> 80,000 seeds weighing 0.1 mg each. A 38 kg spacecraft. Both tiny by the standards of what they produce. The Delta II family launched from seeds Pioneer 0 planted.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Thor-Delta Legacy</h2>
+      <p>The Thor missile that exploded on August 17, 1958, was the ancestor of the Delta rocket family. The lineage: Thor-Able (1958) &rarr; Thor-Delta (1960) &rarr; Delta (1962) &rarr; Delta II (1989, 155 launches, 98.7% success) &rarr; Delta IV (2002, including Delta IV Heavy for Parker Solar Probe). From a bearing failure at T+77 to touching the Sun's corona &mdash; sixty years, one continuous engineering lineage.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.0/index.html">&larr; v1.0 NASA Founding</a>
+      <a href="../1.2/index.html">v1.2 Pioneer 1 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Chamerion angustifolium (Fireweed)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">0.5-3m</div>
+          <div class="stat-label">Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">80,000</div>
+          <div class="stat-label">Seeds/plant</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">0.1 mg</div>
+          <div class="stat-label">Seed mass</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Region</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The pioneer species of the Pacific Northwest. First to colonize after fire, eruption, logging, or any disturbance that exposes mineral soil. Among the first plants to return after the 1980 Mt. St. Helens eruption.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Pearl Bailey</h3>
+      <p style="font-size:0.85rem;">March 29, 1918 &mdash; August 17, 1990</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Born today. Died on Pioneer 0's launch date. Born near Langley, Virginia &mdash; where NACA's first lab was. First Black woman to headline a long-running Broadway production (<em>Hello, Dolly!</em>, 1967). Presidential Medal of Freedom. UN delegate. Georgetown B.A. at age 67. A pioneer who prepared the ground.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (knowledge-nodes.json)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=PION0">NSSDC &mdash; Pioneer 0</a>
+      <a href="https://history.nasa.gov/SP-4524/sp4524.htm">Deep Space Chronicle (SP-4524)</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://images.nasa.gov/search?q=pioneer&media=image">NASA Image Library</a>
+      <a href="https://www.fs.usda.gov/database/feis/plants/forb/chaang/all.html">USGS FEIS &mdash; Fireweed</a>
+      <a href="https://www.fs.usda.gov/pnw/topics/mount-st-helens">MSH Succession Studies</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--magenta);">"The fireweed blooms, and the forest grows in its wake."</p>
+</footer>
+
+</body>
+</html>
