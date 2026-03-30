@@ -1,0 +1,191 @@
+* Magnetic Tape Head Model — Record and Playback
+* =========================================================================
+* Mission 1.9 — Explorer 3, March 26, 1958
+* Simplified model of a magnetic tape record/playback head
+*
+* Explorer 3 carried a miniature magnetic tape recorder designed by
+* George Ludwig at the University of Iowa. The recorder used a small
+* loop of magnetic tape to continuously record Geiger counter data.
+* During recording, the tape moved at a slow speed, writing data
+* patterns onto the oxide coating. During playback (over a ground
+* station), the tape moved at 4x speed, compressing the data.
+*
+* This SPICE model shows the fundamental electromagnetic behavior:
+*
+* RECORD HEAD:
+*   A current-driven coil generates a magnetic field in a gap.
+*   The tape moves through the gap, and the oxide particles are
+*   magnetized according to the signal. The head is modeled as
+*   an inductor with a resistive load representing the tape's
+*   magnetic resistance. At recording speed, the signal bandwidth
+*   is limited by the head gap width and tape speed.
+*
+* PLAYBACK HEAD:
+*   The magnetized tape moves past a pickup head (may be same head).
+*   The changing flux induces a voltage: V = -N * dPhi/dt.
+*   At 4x playback speed, dPhi/dt is 4x larger, so the output
+*   voltage is 4x larger AND the frequency response shifts up
+*   by a factor of 4. What was recorded at 500 Hz plays back at
+*   2000 Hz. This is the "chipmunk effect."
+*
+* Key insight: the playback voltage is proportional to tape speed
+* (V ∝ v_tape * dM/dx), so faster playback = stronger signal.
+* This is why high-speed playback works: you trade time for
+* signal strength.
+*
+* Run: ngspice -b tape-head.cir
+* =========================================================================
+
+.title Magnetic Tape Head — Record and Playback at Variable Speed
+
+* ===== RECORD HEAD MODEL =====
+* The record head is driven by the signal source through a
+* coupling network. The head inductance (L) and resistance (R)
+* form a low-pass filter that limits the recording bandwidth.
+
+* Signal source: Geiger counter output modeled as a series of pulses
+* at varying rates. Simplified here as a 500 Hz signal at record speed.
+Vsig_rec sig_in 0 SIN(0 50m 500)
+
+* Record head coupling
+R_rec_coupling sig_in rec_head_in 100
+
+* Record head: inductance + resistance
+* Explorer 3's head was very small — estimated parameters:
+* L ~ 5 mH (miniature head), R ~ 50 ohm (copper windings)
+L_rec_head rec_head_in rec_head_out 5m
+R_rec_head rec_head_out 0 50
+
+* Head gap model: the magnetic circuit through the tape
+* The gap reluctance limits high-frequency response.
+* At recording speed, gap = 10 um, tape speed = 1 cm/s:
+* Max frequency ~ v_tape / (2 * gap) ~ 0.01 / (2 * 10e-6) = 500 Hz
+* This matches the Geiger counter's maximum expected rate.
+
+* ===== PLAYBACK HEAD MODEL =====
+* The playback head picks up changing flux from the moving tape.
+* Output voltage V = N * dPhi/dt = N * (dPhi/dx) * v_tape
+*
+* At 1x speed (recording speed): V ∝ 1x
+* At 4x speed (playback speed): V ∝ 4x, and frequencies shift up 4x
+
+* Case 1: Playback at 1x speed (500 Hz signal)
+* The head induces a voltage from the changing tape magnetization.
+* Modeled as a voltage source proportional to the stored signal.
+Vsig_play1x play1x_in 0 SIN(0 50m 500)
+
+* Head inductance and output impedance at 1x
+L_play_1x play1x_in play1x_tap 5m
+R_play_1x play1x_tap 0 50
+
+* Pre-amplifier load
+R_preamp_1x play1x_tap play1x_out 10K
+C_coupling_1x play1x_out play1x_ac 1u
+R_load_1x play1x_ac 0 100K
+
+* Case 2: Playback at 4x speed
+* Frequency shifts to 2000 Hz (500 Hz * 4)
+* Amplitude is 4x larger (200 mV vs 50 mV)
+Vsig_play4x play4x_in 0 SIN(0 200m 2000)
+
+* Head inductance and output impedance at 4x
+* Inductance impedance at 2000 Hz: Z_L = 2*pi*2000*5m = 62.8 ohm
+* vs at 500 Hz: Z_L = 2*pi*500*5m = 15.7 ohm
+* The inductive impedance increase partially compensates the
+* voltage increase — the net output increase is ~3x, not 4x.
+L_play_4x play4x_in play4x_tap 5m
+R_play_4x play4x_tap 0 50
+
+* Pre-amplifier load
+R_preamp_4x play4x_tap play4x_out 10K
+C_coupling_4x play4x_out play4x_ac 1u
+R_load_4x play4x_ac 0 100K
+
+* ===== EQUALIZATION CIRCUIT =====
+* Tape playback requires equalization to compensate for the
+* 6 dB/octave rise in output voltage with frequency.
+* A simple RC low-pass filter provides first-order EQ.
+* At 4x speed, the EQ cutoff shifts — the same physical filter
+* now attenuates differently because the signal frequencies changed.
+
+* EQ for 1x playback
+R_eq_1x play1x_ac eq1x_out 10K
+C_eq_1x eq1x_out 0 33n
+* Cutoff: 1/(2*pi*10K*33n) ≈ 480 Hz — matches record speed bandwidth
+
+* EQ for 4x playback
+R_eq_4x play4x_ac eq4x_out 10K
+C_eq_4x eq4x_out 0 8.2n
+* Cutoff: 1/(2*pi*10K*8.2n) ≈ 1940 Hz — matches 4x playback bandwidth
+
+* ===== SIMULATION =====
+
+* Transient analysis: show two complete cycles at each speed
+.tran 0.01m 10m
+
+.control
+run
+
+echo ""
+echo "=== Magnetic Tape Head Model — Mission 1.9 ==="
+echo ""
+
+* Plot record head current
+plot i(L_rec_head) title 'Record Head Current (500 Hz Signal)'
++ ylabel 'Current (A)' xlabel 'Time (s)'
+
+* Compare playback at 1x and 4x
+plot V(play1x_ac) V(play4x_ac)
++ title 'Playback: 1x Speed (500 Hz) vs 4x Speed (2000 Hz)'
++ ylabel 'Voltage (V)' xlabel 'Time (s)'
+
+* Compare equalized outputs
+plot V(eq1x_out) V(eq4x_out)
++ title 'Equalized Playback: 1x vs 4x (after compensation)'
++ ylabel 'Voltage (V)' xlabel 'Time (s)'
+
+echo ""
+echo "Key observations:"
+echo ""
+echo "1. At 4x playback speed, the signal frequency shifts from"
+echo "   500 Hz to 2000 Hz (factor of 4)."
+echo ""
+echo "2. The raw playback voltage increases by ~4x because"
+echo "   V = N * dPhi/dt, and dt is 4x shorter."
+echo ""
+echo "3. However, the head inductance impedance also increases"
+echo "   at higher frequencies, partially reducing the voltage gain."
+echo ""
+echo "4. Equalization compensates for the frequency-dependent"
+echo "   playback characteristic, flattening the response."
+echo ""
+echo "5. The net effect: 4x playback compresses 2 minutes of data"
+echo "   into 30 seconds, with adequate signal quality."
+echo ""
+echo "Explorer 3's tape recorder used this principle to compress"
+echo "an entire orbit's worth of Geiger counter data into a brief"
+echo "telemetry burst over the ground station."
+echo ""
+
+.endc
+
+* ===== AC ANALYSIS =====
+* Frequency response comparison at 1x vs 4x playback speed
+* (Comment out transient and uncomment this section)
+
+* .ac dec 50 10 50K
+*
+* .control
+* run
+*
+* plot db(V(play1x_ac)) db(V(play4x_ac))
+* + title 'Frequency Response: 1x vs 4x Playback'
+* + ylabel 'Output (dB)' xlabel 'Frequency (Hz)'
+*
+* echo "The 4x playback curve is shifted right by a factor of 4"
+* echo "and up by ~12 dB (= 20*log10(4))."
+* echo "The equalization network must compensate for both shifts."
+*
+* .endc
+
+.end

@@ -1,0 +1,194 @@
+* Squelch Circuit — Noise-Activated Audio Gate
+* =========================================================================
+* Mission 1.9 — Explorer 3, March 26, 1958
+* Progressive radio series v1.9: Squelch circuit
+*
+* A squelch circuit mutes the audio output when no carrier signal is
+* present (receiver tuned between stations). The circuit detects the
+* noise level in the audio path and, when noise exceeds a threshold,
+* activates a transistor switch that shorts the audio output to ground.
+*
+* This is the ninth stage in the progressive radio series, following
+* the volume and tone control (v1.8). Without squelch, tuning between
+* stations produces loud broadband static. With squelch, the receiver
+* stays silent until a carrier is detected.
+*
+* Circuit topology:
+*
+*   Audio in ──┬── High-pass filter ── Peak detector ── Comparator
+*              │                                            │
+*              │                                       Gate control
+*              │                                            │
+*              └── Audio path ── Muting transistor ── Audio out
+*
+* The high-pass filter isolates the high-frequency noise component.
+* Between stations, this noise voltage is high. When a carrier is
+* present, the noise floor drops because the carrier captures the
+* receiver's AGC. The peak detector converts the AC noise to a DC
+* voltage, which is compared against a threshold set by the squelch
+* potentiometer. When noise exceeds the threshold, Q1 conducts,
+* pulling Q2's base low, which shorts the audio output to ground.
+*
+* Run: ngspice -b squelch-circuit.cir
+* =========================================================================
+
+.title Squelch Circuit — Noise-Activated Audio Gate
+
+* ===== SIGNAL SOURCES =====
+
+* Audio signal: 1 kHz tone (represents a radio station's audio)
+* Amplitude 100 mV peak
+Vaudio audio_in 0 SIN(0 100m 1k)
+
+* Noise source: broadband noise simulated as high-frequency sine
+* In a real receiver, this would be thermal/atmospheric noise.
+* We model it as a 15 kHz signal that is large when no carrier
+* is present and small when carrier is present.
+Vnoise noise_src 0 SIN(0 200m 15k)
+
+* Carrier control: simulates station tuning
+* 0V = no carrier (between stations, noise is dominant)
+* 5V = carrier present (on station, noise suppressed)
+* Pulse: carrier off for 20ms, on for 20ms, demonstrating squelch
+Vcarrier carrier_ctrl 0 PULSE(0 5 10m 1m 1m 20m 40m)
+
+* ===== SIGNAL MIXING =====
+* Audio + noise, weighted by carrier presence
+* When carrier present: audio dominates, noise low
+* When carrier absent: noise dominates
+
+* Simple mixer using controlled sources
+* Audio level: proportional to carrier control
+E_audio_mix audio_mix 0 VALUE={V(audio_in) * V(carrier_ctrl)/5}
+
+* Noise level: inversely proportional to carrier control
+E_noise_mix noise_mix 0 VALUE={V(noise_src) * (1 - V(carrier_ctrl)/5)}
+
+* Combined signal at mixer output
+R_mix1 audio_mix mixer_out 1K
+R_mix2 noise_mix mixer_out 1K
+
+* ===== HIGH-PASS NOISE DETECTOR =====
+* Isolates the high-frequency noise component from the mixed signal.
+* Cutoff: ~5 kHz (passes noise, blocks audio below 5 kHz)
+
+C_hp mixer_out hp_out 10n
+R_hp hp_out 0 3.3K
+
+* ===== PEAK DETECTOR =====
+* Converts AC noise to DC voltage for comparison.
+* Diode rectifies the noise signal; RC holds the peak.
+
+D_peak hp_out peak_out dmodel
+.model dmodel D(Is=1n Rs=10 N=1.5)
+R_peak peak_out 0 100K
+C_peak peak_out 0 100n
+
+* ===== SQUELCH THRESHOLD =====
+* Potentiometer sets the comparison threshold.
+* Modeled as a voltage divider from 5V supply.
+* Adjust R_thresh to change squelch sensitivity.
+
+Vcc vcc 0 DC 9
+
+* Threshold voltage (adjustable — represents squelch pot position)
+* ~0.15V for medium squelch setting
+R_thresh_hi vcc thresh_point 56K
+R_thresh_lo thresh_point 0 1K
+
+* ===== COMPARATOR (NPN TRANSISTOR) =====
+* Q1 compares the noise peak voltage against the threshold.
+* When noise > threshold: Q1 conducts → collector goes low
+* When noise < threshold: Q1 off → collector pulled high
+
+R_base1 peak_out q1_base 10K
+R_base2 thresh_point q1_base 4.7K
+
+Q1 q1_coll q1_base 0 npn_model
+.model npn_model NPN(Bf=200 Is=1e-14 Vaf=100)
+
+R_coll vcc q1_coll 4.7K
+
+* ===== AUDIO GATE (NPN SHUNT SWITCH) =====
+* Q2 acts as a shunt switch across the audio output.
+* When Q1 ON (noise high): Q1 collector LOW → Q2 base LOW → Q2 OFF
+*   → audio passes through (gate open)
+* When Q1 OFF (noise low): Q1 collector HIGH → Q2 base HIGH → Q2 ON
+*   → audio shunted to ground (gate closed)
+*
+* Wait — that's inverted. Let's fix the logic:
+* We want: high noise → mute, low noise → pass
+* Q1 ON (high noise) → collector LOW → need to MUTE
+* Solution: use Q1's collector LOW to drive Q2 OFF (gate blocks)
+*
+* Actually, simpler: use Q1 collector directly to control the gate.
+* Q1 collector LOW = noise present = mute audio
+* Q1 collector HIGH = no noise = pass audio
+
+* Coupling from audio input to output through resistor
+R_audio_path audio_in audio_out 1K
+
+* Q2 as shunt: when ON, shorts audio_out to ground
+R_q2_base q1_coll q2_base 10K
+* Invert the signal with another transistor stage:
+Q2_inv q2_inv_coll q2_base 0 npn_model
+R_q2_inv_coll vcc q2_inv_coll 4.7K
+
+* Final muting transistor
+Q3 audio_out q3_base 0 npn_model
+R_q3_base q2_inv_coll q3_base 10K
+
+* When noise is high: Q1 ON → coll LOW → Q2_inv OFF → Q2_inv coll HIGH
+*   → Q3 ON → audio shunted to ground (MUTED)
+* When noise is low: Q1 OFF → coll HIGH → Q2_inv ON → Q2_inv coll LOW
+*   → Q3 OFF → audio passes (UNMUTED)
+
+* Output load
+R_load audio_out 0 10K
+
+* ===== SIMULATION =====
+
+.tran 0.01m 80m
+
+.control
+run
+
+echo ""
+echo "=== Squelch Circuit — Mission 1.9 ==="
+echo ""
+echo "Carrier control: 0V = between stations (noise), 5V = on station (audio)"
+echo "Squelch mutes output when carrier is absent."
+echo ""
+
+* Plot carrier control and audio output
+plot V(carrier_ctrl) V(audio_out) V(audio_in)
++ title 'Squelch Circuit: Audio Output vs Carrier Presence'
++ ylabel 'Voltage (V)' xlabel 'Time (s)'
+
+* Plot noise detection chain
+plot V(mixer_out) V(hp_out) V(peak_out) V(thresh_point)
++ title 'Noise Detection: Mixer → HP Filter → Peak Detector → Threshold'
++ ylabel 'Voltage (V)' xlabel 'Time (s)'
+
+* Plot gate control
+plot V(q1_coll) V(q2_inv_coll) V(audio_out)
++ title 'Gate Control: Q1 Collector → Inverter → Mute Transistor → Output'
++ ylabel 'Voltage (V)' xlabel 'Time (s)'
+
+echo ""
+echo "When carrier is present (V(carrier_ctrl) = 5V):"
+echo "  → Noise level drops → Q1 OFF → gate OPEN → audio passes"
+echo "When carrier is absent (V(carrier_ctrl) = 0V):"
+echo "  → Noise level rises → Q1 ON → gate CLOSED → output muted"
+echo ""
+echo "The squelch pot (R_thresh) sets the noise threshold."
+echo "Higher threshold = only strong signals open the squelch."
+echo "Lower threshold = weaker signals can get through."
+echo ""
+echo "This is the ninth stage in the progressive radio series."
+echo "The receiver now stays silent between stations."
+echo ""
+
+.endc
+
+.end

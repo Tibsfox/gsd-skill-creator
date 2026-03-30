@@ -1,0 +1,979 @@
+# Mission 1.9 -- Explorer 3: Simulation & Creative Arts Specifications
+
+## Track 5: What to Build, Train, Visualize, and Create
+
+**Mission:** Explorer 3 (March 26, 1958)
+**Hardware Target:** RTX 4060 Ti (8GB VRAM), 60GB RAM, i7-6700K
+**Organism:** Marchantia polymorpha (common liverwort)
+**Bird:** Megaceryle alcyon (Belted Kingfisher, degree 9)
+**Dedication:** Joseph Campbell (March 26, 1904)
+
+---
+
+## A. Simulations -- What to Build Locally
+
+### A1. Python: Data Recording vs Real-Time Comparison
+
+**What it is:** A Python simulation that generates a synthetic radiation belt profile along Explorer 3's orbit and compares what Explorer 1 (real-time only) would have seen versus what Explorer 3 (tape recorder) captured. The student sees the complete profile alongside the sparse, gapped real-time samples and understands viscerally why the tape recorder was necessary for confirmation.
+
+**Why it matters:** Explorer 1 saw the radiation belt through a 7% window -- only the minutes when a ground station was in range. Explorer 3 recorded the entire orbit and played it back. The simulation shows the difference between a hypothesis built from fragments and a confirmation built from completeness.
+
+**Specification:**
+
+```python
+# explorer3_realtime_vs_recorded.py
+# Compare real-time telemetry (Explorer 1) vs tape-recorded data (Explorer 3)
+#
+# Process:
+#   1. Generate a synthetic radiation belt profile along the orbit:
+#      - Low counts at perigee (below the belt, ~30 counts/sec)
+#      - Rising counts through inner belt (~500-5000 counts/sec)
+#      - Saturation zone (detector reads 0 above ~25000 true counts/sec)
+#      - Decreasing counts exiting the belt
+#      - Low counts at apogee (above inner belt, ~100 counts/sec)
+#   2. Simulate ground station passes: 5-8 minute windows
+#      at random orbital positions, ~1 pass per orbit
+#   3. Explorer 1 mode: only show data during ground passes
+#      (the rest is blank — unknown)
+#   4. Explorer 3 mode: show the complete recorded profile
+#   5. Overlay both on the same plot
+#
+# Parameters (user-adjustable):
+#   orbit_period: 115.7 minutes
+#   perigee_alt: 186 km
+#   apogee_alt: 2799 km
+#   belt_inner_edge: 800 km altitude
+#   belt_outer_edge: 2400 km altitude
+#   saturation_threshold: 25000 counts/sec
+#   detector_max: 300 counts/sec (readout maximum)
+#   ground_pass_duration: 7 minutes
+#   num_orbits: 5
+#
+# Visualization:
+#   - Plot 1: Complete radiation profile (what Explorer 3 recorded)
+#     X-axis: time (minutes). Y-axis: Geiger counts/sec
+#     Blue curve: true radiation intensity
+#     Red curve: detector reading (saturates at threshold)
+#     Shows the "bathtub" profile — high counts, then zero, then high
+#
+#   - Plot 2: Explorer 1 view (real-time only)
+#     Same axes. Green dots: readings during ground passes
+#     Grey regions: no data (ground station out of range)
+#     The student sees the gaps — most of the belt is invisible
+#
+#   - Plot 3: Side-by-side comparison
+#     Left: Explorer 1 (fragments). Right: Explorer 3 (complete)
+#     Caption: "Discovery vs Confirmation"
+#
+#   - Plot 4: Altitude profile
+#     X-axis: altitude (km). Y-axis: counts/sec
+#     Shows the belt structure in altitude space
+#     Explorer 1 data: scattered points, hard to interpret
+#     Explorer 3 data: continuous curve, unmistakable structure
+#
+# Libraries: numpy, matplotlib
+# Difficulty: Beginner
+# Duration: 2-3 hours
+```
+
+**Key learning moments:**
+1. The "bathtub" profile. The detector reading rises, peaks, drops to zero (saturation), stays at zero through the most intense zone, then rises and falls symmetrically on exit. Without the tape recorder, you see random fragments of this profile and cannot reconstruct the shape. With the tape, the complete shape is unmistakable.
+2. The saturation ambiguity. Looking at Explorer 1's real-time data, a zero reading could mean "no radiation" or "too much radiation." The only way to distinguish these is to see the transition: counts climbing to a maximum, then dropping to zero. If you see the climb, you know the zero is saturation. If you only see the zero (because the climb happened during a ground station gap), you cannot know.
+3. The coverage paradox. More ground stations would have helped Explorer 1. But building 50 ground stations around the world would have cost millions. A 130-gram tape recorder achieved the same result for hundreds of dollars. Information systems engineering versus infrastructure engineering.
+
+**Extension:** Add noise to the simulated Geiger counter (Poisson counting statistics). Show that even with noise, the tape-recorded profile is unambiguously a saturation curve. Compute the signal-to-noise ratio needed to distinguish "zero from saturation" versus "zero from absence" in a single measurement versus a time series.
+
+---
+
+### A2. Python: Orbital Decay Comparison (Explorer 1 vs Explorer 3)
+
+**What it is:** An orbital propagation simulation that compares the decay trajectories of Explorer 1 (perigee 358 km, re-entered 1970) and Explorer 3 (perigee 186 km, re-entered June 1958). Both satellites had nearly identical mass and shape but dramatically different perigees, producing a 47-fold difference in orbital lifetime.
+
+**Why it matters:** Explorer 3's 186 km perigee was not a design choice -- it was a launch performance limitation. The Juno I rocket did not achieve the optimal injection angle, resulting in a lower perigee than Explorer 1. This "failure" had no impact on the scientific mission (the radiation belt data was captured in 93 days) but provides a dramatic illustration of the exponential relationship between altitude and orbital lifetime.
+
+**Specification:**
+
+```python
+# explorer3_orbital_decay.py
+# Orbital decay comparison: Explorer 1 vs Explorer 3
+#
+# Process:
+#   1. Initialize both orbits with historical orbital elements
+#   2. Atmospheric density model: exponential with altitude,
+#      solar cycle modulation (F10.7 index)
+#   3. Compute drag force at perigee each orbit
+#   4. Propagate semi-major axis decay forward
+#   5. Track perigee altitude evolution
+#   6. Explorer 3: propagate for 93 days (to re-entry)
+#      Explorer 1: propagate for 12 years (to re-entry)
+#
+# Parameters:
+#   Explorer 3:
+#     mass: 14.1 kg, area: 0.018 m^2, Cd: 2.2
+#     h_p: 186 km, h_a: 2799 km, i: 33.46 deg
+#     Actual re-entry: June 27, 1958
+#
+#   Explorer 1:
+#     mass: 13.97 kg, area: 0.030 m^2, Cd: 2.2
+#     h_p: 358 km, h_a: 2550 km, i: 33.24 deg
+#     Actual re-entry: March 31, 1970
+#
+# Visualization:
+#   - Plot 1: Perigee altitude vs time (both satellites)
+#     Explorer 3: rapid decay over days, re-entry at day 93
+#     Explorer 1: slow decay over years, re-entry at year 12
+#     Log scale on time axis to show both on same plot
+#
+#   - Plot 2: Atmospheric density at perigee vs time
+#     Explorer 3: starts in dense air, gets denser fast
+#     Explorer 1: starts in thin air, slowly descends
+#     Shows the exponential cliff
+#
+#   - Plot 3: Decay rate (km/day) vs time
+#     Explorer 3: accelerating decay, faster and faster
+#     Explorer 1: near-constant slow decay for years, then acceleration
+#
+#   - Plot 4: Energy loss per orbit vs time
+#     Shows the positive feedback: more drag → lower orbit →
+#     more density → more drag → terminal spiral
+#
+# Libraries: numpy, matplotlib, scipy
+# Difficulty: Intermediate
+# Duration: 3-4 hours
+```
+
+**Key learning moments:**
+1. The same satellite design at two altitudes. Explorer 1 and Explorer 3 were nearly identical in mass (13.97 vs 14.1 kg) and shape (cylinders). The difference was 172 km of perigee altitude. That difference produced a 47x difference in lifetime. The exponential atmosphere is unforgiving.
+2. The positive feedback loop. Drag lowers the orbit. Lower orbit means more drag. More drag lowers the orbit faster. The feedback is exponential: once the decay starts accelerating, it runs away. Explorer 3 was in runaway from day one. Explorer 1 spent 11 years in the slow zone before the feedback became noticeable.
+3. The launch vehicle lesson. The Juno I gave Explorer 3 a lower perigee than Explorer 1 because of a slightly suboptimal injection angle. The rocket engineers knew this would shorten the mission. They launched anyway because 93 days was more than enough to capture the radiation belt data. Mission success does not require orbital longevity. It requires data completeness. Explorer 3 achieved data completeness in 93 days. Explorer 1 did not achieve it in 12 years -- because it had no tape recorder.
+
+---
+
+### A3. Web: Tape Recorder Playback Simulator
+
+**What it is:** An interactive web application that simulates Explorer 3's tape recorder. The user "records" a radiation belt passage in real time, then "plays back" the recording at 30x speed, hearing/seeing the compressed data burst that ground stations received. The application demonstrates the store-and-forward principle that made the radiation belt confirmation possible.
+
+**Specification:**
+
+```
+WEB APPLICATION: Explorer 3 Tape Recorder Simulator
+=====================================================
+
+Technology: HTML5 Canvas + Web Audio API + JavaScript (no frameworks)
+Target: Modern browser, 1920x1080
+
+Main view (60% of viewport):
+  LEFT PANEL: "ORBIT VIEW"
+    - Side view of Earth with Explorer 3's elliptical orbit
+    - Satellite icon moving along the orbit (real-time during record)
+    - Color-coded radiation belt: green (low) → yellow (medium) →
+      red (high) → black (saturation zone)
+    - Ground station icon on Earth's surface
+    - Dotted line showing when ground station can "see" the satellite
+    - Current altitude readout
+    - Current Geiger count rate readout
+
+  RIGHT PANEL: "TAPE RECORDER"
+    - Visual representation of the tape: a horizontal strip
+      filling left to right as data records
+    - Color-coded: blue (low counts) → orange (high counts) →
+      black (saturated)
+    - Recording head indicator (moving right during record)
+    - Playback head indicator (moving right during playback, 30x faster)
+    - Tape status: RECORDING / REWINDING / PLAYING BACK / IDLE
+    - Audio output: a tone whose frequency maps to the count rate
+      (low frequency = low counts, high frequency = high counts,
+       silence = saturation). During playback, the tone plays at 30x
+       speed — compressing the 2-hour recording into 4 minutes of
+       chipmunk-speed audio
+
+  BOTTOM STRIP: "STRIP CHART"
+    - Scrolling chart of Geiger count rate vs time
+    - During recording: fills slowly (one sample per second)
+    - During playback: fills 30x faster (compressed burst)
+    - Two traces: "TRUE radiation" (blue) and "DETECTOR reading" (red)
+    - Where the detector saturates, the red trace drops to zero
+      while the blue trace peaks — showing the gap between reality
+      and measurement
+
+Control panel (bottom):
+  - "START ORBIT" button: begins the satellite moving along the orbit,
+    recording data to the tape
+  - "GROUND PASS" button: triggers playback mode (tape rewinds, plays
+    back at 30x speed). Only enabled when satellite is in ground
+    station view cone
+  - "SPEED" slider: adjust orbit speed (1x to 10x real time)
+  - "EXPLORER 1 MODE" toggle: turns off tape recorder. Now the strip
+    chart only shows data during ground passes. The rest is blank.
+    The student sees the difference immediately.
+  - "SHOW TRUE RADIATION" toggle: reveals the actual radiation level
+    behind the detector saturation zone. Shows that zero counts =
+    maximum radiation.
+
+Animation sequence:
+  - t=0: satellite at perigee (186 km). Low counts. Tape recording.
+  - t=20 min: ascending through inner belt. Counts climbing.
+  - t=35 min: entering saturation zone. Counts dropping to zero.
+    Tape dutifully records zero.
+  - t=50 min: peak altitude, exiting saturation. Counts recovering.
+  - t=65 min: descending through belt. Counts high, then decreasing.
+  - t=85 min: approaching perigee. Counts at background level.
+  - t=90 min: ground station comes in view. "GROUND PASS" button activates.
+  - User presses "GROUND PASS": tape rewinds (2 seconds), then plays
+    back at 30x speed. The strip chart fills rapidly. The audio tone
+    compresses 90 minutes into 3 minutes. The complete profile appears.
+  - After playback: text overlay: "Van Allen saw this profile.
+    Counts rising, saturating, rising again. The belt was confirmed."
+
+Performance:
+  - 60 fps on modern browsers
+  - Canvas 2D for orbit view and tape visualization
+  - Web Audio API for tone generation
+  - Total JS: < 800 lines
+  - Single self-contained HTML file
+
+Deliverables:
+  - Single HTML file, no dependencies
+  - Hostable at tibsfox.com/Research/NASA/1.9/
+```
+
+**Key learning moment:** The "EXPLORER 1 MODE" toggle. When the student switches from Explorer 3 mode (tape recorder on) to Explorer 1 mode (tape recorder off), the strip chart goes from a complete, continuous profile to a sparse scattering of dots with enormous gaps. The profile that was clearly a saturation curve in Explorer 3 mode becomes uninterpretable in Explorer 1 mode. The student sees why real-time-only telemetry could not confirm the radiation belts -- the gaps were too large to reconstruct the curve. The tape recorder was the difference between seeing and guessing.
+
+---
+
+### A4. Web: Ground Station Coverage Visualizer
+
+**What it is:** An interactive web application that visualizes the ground station coverage problem for low Earth orbit satellites. The user places ground stations on a map, sees the coverage circles, and watches a satellite trace its ground track through the coverage zones. The application computes the percentage of each orbit that falls within ground station range and shows how much data is captured with and without an onboard recorder.
+
+**Specification:**
+
+```
+WEB APPLICATION: Ground Station Coverage Visualizer
+=====================================================
+
+Technology: HTML5 Canvas + JavaScript (no frameworks)
+Target: Modern browser, 1920x1080
+
+Main view (70% of viewport):
+  - Cylindrical projection of Earth (Mercator-like)
+  - Background: simplified continent outlines (land = grey, ocean = blue)
+  - Ground stations: clickable markers on the map. User can place up to 20.
+    Default: 10 stations approximating the 1958 Minitrack network
+    (Antigua, Quito, Lima, Santiago, San Diego, Fort Stewart,
+     Havana, Blossom Point, Cape Canaveral, Woomera)
+  - Coverage circles: for each station, a translucent circle showing
+    the ground coverage area at minimum elevation angle (5 degrees)
+    for the satellite's current altitude
+  - Coverage circles change size as satellite altitude changes:
+    small at perigee (186 km), large at apogee (2799 km)
+  - Satellite ground track: sinusoidal path across the map, advancing
+    westward with each orbit (Earth rotation)
+  - Track coloring: green when satellite is in a coverage circle,
+    red when outside all circles
+  - Trail: show the last 3 orbits of ground track with fading opacity
+
+Side panel (30%):
+  - Coverage statistics (updating in real time):
+    - Current altitude (km)
+    - Current coverage radius (km)
+    - In range of station: [station name] or "NONE"
+    - Orbit coverage: X% of current orbit in range
+    - Cumulative coverage: X% of total mission in range
+  - Data comparison:
+    - "Real-time data captured: X minutes per orbit"
+    - "Tape-recorded data: 115.7 minutes per orbit (100%)"
+    - "Coverage improvement: Nx"
+  - Controls:
+    - Satellite speed slider (1x to 100x real time)
+    - "Add station" mode: click on map to place new station
+    - "Remove all" button: clear all stations (show 0% coverage)
+    - "1958 Minitrack" button: restore default station placement
+    - "Modern DSN" button: show Deep Space Network (3 stations,
+      120-degree spacing — Goldstone, Canberra, Madrid)
+    - "Ideal coverage" button: place minimum stations for 100%
+      real-time coverage (shows how many stations needed to
+      match what the tape recorder achieved for free)
+
+Key computation:
+  The "Ideal coverage" calculation is revealing. For Explorer 3's
+  orbit, achieving 100% real-time coverage requires approximately
+  40-60 ground stations evenly distributed across latitudes
+  between -34 and +34 degrees (the inclination limits). Each
+  station provides ~7% coverage at perigee geometry. The tape
+  recorder — one device weighing 130 grams — replaced all of them.
+
+  Display this result prominently:
+  "COST COMPARISON:
+   60 ground stations @ $5M each = $300M (1958 dollars)
+   1 tape recorder @ ~$500 = $500
+   Same result: 100% orbit coverage.
+   Explorer 3 chose the tape recorder."
+
+Deliverables:
+  - Single HTML file, self-contained
+  - Continent outlines embedded as simplified polygon data
+  - Station data embedded as JSON array
+```
+
+**Key learning moment:** The "Ideal coverage" button. The student clicks it and sees 40-60 stations appear on the map, covering every part of the satellite's ground track. Then they compare: this enormous ground infrastructure achieves the same data completeness as a 130-gram tape recorder on the satellite. The lesson is economic: onboard storage is almost always cheaper than ground infrastructure for the problem of data completeness. This remains true in 2026 -- solid-state recorders on spacecraft cost thousands of dollars, while enough ground stations for continuous LEO coverage would cost billions.
+
+---
+
+## B. Machine Learning -- What to Train
+
+### B1. Gap Interpolation and Data Reconstruction
+
+**What it is:** Train a machine learning model to reconstruct missing data from incomplete satellite telemetry -- simulating the problem Explorer 1 faced (gaps in coverage) and evaluating how well modern ML techniques could have filled the gaps without a tape recorder.
+
+```
+Model: LSTM (Long Short-Term Memory) or Transformer (small)
+
+Input: Partial radiation belt profile with gaps
+  - Complete profile: 6942 samples (one per second, full orbit)
+  - Training: randomly mask 85-95% of samples (simulating
+    Explorer 1's ground station coverage)
+  - Model sees: ~350-700 samples out of 6942
+
+Output: Reconstructed complete profile
+
+Training data: 10,000 synthetic radiation belt profiles
+  - Varied belt intensity (solar activity variation)
+  - Varied satellite altitude profile (orbital precession)
+  - Varied detector noise (Poisson counting statistics)
+  - Labels: complete profiles before masking
+
+The student learns:
+  - With 7% coverage (1 ground pass), the LSTM cannot reliably
+    reconstruct the saturation zone. It may predict "zero counts =
+    no radiation" because it has never seen the transition to zero.
+  - With 15% coverage (2 ground passes), reconstruction improves
+    but the saturation zone remains ambiguous.
+  - With 30% coverage (multiple stations), the LSTM can sometimes
+    reconstruct the profile -- but confidence intervals are wide.
+  - With 100% coverage (tape recorder), no ML is needed. The data
+    is complete. ML is a tool for incomplete data. Complete data
+    does not need inference.
+
+  The lesson: machine learning can partially compensate for
+  missing data, but it cannot replace measurement. Explorer 3's
+  tape recorder was superior to any ML reconstruction because
+  it captured the actual data rather than inferring it from
+  fragments. In 2026, we use ML to fill gaps in satellite data
+  (cloud cover in Earth observation, transmission dropouts in
+  deep space). But the best ML model is worse than a complete
+  recording. Measure everything; infer only what you must.
+
+Libraries: PyTorch, numpy, matplotlib
+GPU: Optional (small model)
+Training time: ~10 minutes
+Difficulty: Intermediate
+```
+
+### B2. Detector Saturation Classification
+
+**What it is:** Train a classifier to distinguish "zero counts from detector saturation" versus "zero counts from absence of radiation" using only the temporal context around the zero reading. This is the exact problem Van Allen faced with Explorer 1's data.
+
+```
+Model: 1D Convolutional Neural Network
+
+Input: A window of 60 consecutive Geiger counter readings centered
+on a zero-count reading (30 before, 30 after)
+
+Output: Binary classification:
+  - Class 0: "True zero" (no significant radiation)
+  - Class 1: "Saturation" (detector overwhelmed)
+
+Features the model should learn:
+  - Saturation zeros are preceded by rising counts (approach to belt)
+  - True zeros are preceded by low counts (background level)
+  - Saturation zeros show characteristic ramp-up before the zero
+  - True zeros show no ramp-up
+  - The transition slope is diagnostic
+
+Training data: 50,000 windows from synthetic profiles
+  - 25,000 true zeros (background radiation regions)
+  - 25,000 saturation zeros (belt crossing regions)
+  - Add Poisson noise, vary belt intensity, vary detector sensitivity
+
+Expected performance:
+  - With full 60-sample window: >95% accuracy
+  - With 10-sample window (sparse data): ~70% accuracy
+  - With 3-sample window (very sparse data): ~55% (near chance)
+
+The lesson: context determines meaning. A zero count means nothing
+by itself. With enough context (the samples before and after), the
+zero is unambiguous. Explorer 1 often lacked context because
+ground passes captured only fragments. Explorer 3's tape provided
+full context for every zero reading. The classifier demonstrates
+that information content is not in individual measurements but in
+sequences — the pattern around the measurement. Shannon understood
+this: entropy is a property of sequences, not symbols.
+
+Libraries: PyTorch, scikit-learn, matplotlib
+GPU: Not needed
+Training time: ~5 minutes
+Difficulty: Beginner-Intermediate
+```
+
+---
+
+## C. Computer Science -- Ring Buffers, Circular Recording, and Compression
+
+### C1. The Circular Buffer: Explorer 3's Tape Loop
+
+Explorer 3's tape recorder used a continuous loop of tape that overwritten old data with new data as it recorded. If a ground station pass was missed, the most recent data overwrote the oldest. This is a circular buffer -- the most common data structure in real-time systems.
+
+```
+DATA STRUCTURE: Circular Buffer (Ring Buffer)
+
+Explorer 3's tape was a physical ring buffer:
+  - Fixed-length tape loop (~20 meters)
+  - Write head advances continuously at 0.3 cm/s
+  - After reaching the end of the tape, recording wraps
+    to the beginning, overwriting the oldest data
+  - The buffer always contains the most recent ~2 hours
+    of data (one complete orbit plus margin)
+  - During playback, the read head starts at the oldest
+    valid data and reads forward at 30x speed
+
+IMPLEMENTATION (C):
+
+  #define BUFFER_SIZE 7200  // 2 hours at 1 sample/sec
+  int buffer[BUFFER_SIZE];
+  int write_pos = 0;
+  int count = 0;
+
+  void record(int sample) {
+      buffer[write_pos] = sample;
+      write_pos = (write_pos + 1) % BUFFER_SIZE;
+      if (count < BUFFER_SIZE) count++;
+  }
+
+  void playback() {
+      // Start from oldest valid sample
+      int read_pos = (count < BUFFER_SIZE)
+                     ? 0
+                     : write_pos;
+      for (int i = 0; i < count; i++) {
+          transmit(buffer[read_pos]);
+          read_pos = (read_pos + 1) % BUFFER_SIZE;
+      }
+  }
+
+MODERN APPLICATIONS:
+  - Audio recording: DAW software uses ring buffers for live input
+  - Network packets: router buffers are ring buffers
+  - Operating systems: kernel log (dmesg) is a ring buffer
+  - Video surveillance: loop recording overwrites oldest footage
+  - Flight data recorders (black boxes): 2-hour loop of cockpit
+    audio and instrument data — exactly Explorer 3's design
+
+EXERCISE:
+  1. Implement the circular buffer in your preferred language
+  2. Record 10,000 samples into a 7,200-element buffer
+  3. Show that samples 1-2800 are overwritten and lost
+  4. Show that samples 2801-10000 are preserved
+  5. Implement the 30x playback: read buffer at 30x the
+     recording rate and verify data integrity
+  6. Add a "missed ground pass" scenario: skip one playback
+     cycle. Show that the buffer now contains data from the
+     NEXT orbit, not the missed one. The missed data is gone.
+     This is the trade-off of a ring buffer: constant memory,
+     but data has a time-to-live.
+
+  Explorer 3's ground controllers had to catch every pass
+  or lose data forever. There was no cloud storage. There
+  was no retry. The tape recorded once and overwrote.
+  Every modern ring buffer makes the same bargain:
+  fresh data over old data, always.
+```
+
+### C2. Time-Division Compression
+
+```
+CONCEPT: Speed-Change Compression
+
+Explorer 3's tape recorder achieved compression by playing back
+at a higher speed than recording. This is not data compression
+in the Shannon/Huffman sense — no bits are removed. It is time
+compression: the same data is transmitted in less time by
+increasing the signal bandwidth.
+
+MATH:
+  Record speed: v_r = 0.3 cm/s
+  Playback speed: v_p = 9.0 cm/s
+  Compression ratio: C = v_p / v_r = 30
+
+  Recording duration: T_r = 7200 seconds (2 hours)
+  Playback duration: T_p = T_r / C = 240 seconds (4 minutes)
+
+  Signal bandwidth during recording: B_r = 0.5 Hz (Nyquist for 1 Hz sample)
+  Signal bandwidth during playback: B_p = B_r * C = 15 Hz
+
+  The telemetry link bandwidth: B_link = ~100 Hz
+  Utilization during playback: B_p / B_link = 15%
+
+  The compression works because the telemetry link has
+  excess bandwidth: it can handle 100 Hz but the recording
+  only needs 15 Hz at 30x speed. If the link were narrower,
+  the compression ratio would need to be lower.
+
+MODERN PARALLEL: Voicemail
+  Record a 60-second voicemail.
+  The system stores it.
+  Play it back at 1.5x speed: 40 seconds.
+  Play it back at 2x speed: 30 seconds.
+  The data is the same. The time is compressed.
+  Explorer 3 did this at 30x, in 1958.
+
+EXERCISE:
+  1. Record audio on your phone for 2 minutes
+  2. Use ffmpeg to speed it up by 30x:
+     ffmpeg -i input.wav -filter:a "atempo=30" output.wav
+     (Note: atempo max is 2x, so chain 5 filters:
+      "atempo=2,atempo=2,atempo=2,atempo=2,atempo=1.875")
+  3. The output is ~4 seconds long and sounds like chirping
+  4. This is what Explorer 3's ground station heard:
+     a 4-minute chirp containing 2 hours of data
+  5. Reverse the process: slow the output by 30x
+  6. Verify the original audio is recovered (lossy from
+     resampling, but recognizable)
+```
+
+---
+
+## D. Game Theory -- Information Completeness Tradeoffs
+
+### D1. The Confirmation Game
+
+The decision to add a tape recorder to Explorer 3 was a design trade-off: additional mass (130 grams), additional power (50 mW), additional complexity (mechanical tape transport), and additional risk (the recorder could fail). Against these costs was a single benefit: data completeness. The game theory question is whether the additional risk was worth the additional information.
+
+```
+GAME: INSTRUMENT INVESTMENT vs DATA COMPLETENESS
+
+                    | Tape works      | Tape fails
+--------------------|-----------------|------------------
+High-count belt     | CONFIRMATION    | Same as Explorer 1
+(radiation intense) | (complete data) | (ambiguous zeros)
+                    |                 |
+Low-count belt      | REFUTATION      | Same as Explorer 1
+(radiation weak)    | (zeros are real) | (ambiguous zeros)
+
+STRATEGIC ANALYSIS:
+
+Without tape recorder (Explorer 1 outcome):
+  P(confirmation) = low (can't distinguish saturation from absence)
+  P(ambiguity remains) = high
+
+With tape recorder (Explorer 3 outcome):
+  If tape works (P_work ~ 0.85 for 1958 technology):
+    If belt is intense: CONFIRMATION (saturation profile visible)
+    If belt is weak: REFUTATION (zeros are real, no ramp-up)
+    Either way: the question is answered definitively
+  If tape fails (P_fail ~ 0.15):
+    Same outcome as Explorer 1 — no worse, no better
+
+EXPECTED VALUE:
+  EV(no tape) = 0 * V_confirmation = 0 (ambiguity continues)
+  EV(tape) = 0.85 * V_confirmation + 0.15 * 0 = 0.85 * V_confirmation
+
+  The tape recorder cannot make things worse. It can only help.
+  This is a dominant strategy: add the tape recorder.
+
+  The 130 grams and 50 mW are the insurance premium.
+  The payout is scientific certainty.
+
+  Van Allen and Ludwig understood this. They added the recorder
+  to Explorer 3 specifically because Explorer 1's data was
+  ambiguous without continuous coverage. The decision was
+  not a gamble — it was a hedge with no downside.
+
+EXERCISE:
+  Model the decision to add a tape recorder as a real options
+  problem. The option cost is 130 grams of mass budget.
+  The option payoff is V_confirmation (the value of proving
+  the radiation belt exists). Under what conditions is the
+  option NOT worth exercising?
+
+  Answer: only if V_confirmation is very low (nobody cares
+  whether the belt is real) or if P_work is very low (the
+  recorder will almost certainly fail). In 1958, V_confirmation
+  was enormous (national prestige, scientific priority, military
+  implications of radiation for spacecraft and missiles) and
+  P_work was reasonable (Ludwig had tested the recorder
+  extensively). The option was deeply in-the-money.
+```
+
+### D2. The Replication Game
+
+```
+SIGNALING GAME: Independent Confirmation
+
+In science, a single observation is a data point.
+Two independent observations are evidence.
+Three are near-certainty.
+
+Explorer 1: first observation of anomalous zero counts
+Explorer 3: second observation with complete context
+Explorer 4: (Mission 1.2 historical anchor) — third observation
+  with a shielded detector that could count at higher rates
+
+REPLICATION VALUE:
+  After Explorer 1: P(belt is real) ~ 0.6
+    (plausible hypothesis, alternative explanations exist)
+  After Explorer 3: P(belt is real) ~ 0.95
+    (tape shows complete saturation profile, alternatives eliminated)
+  After Explorer 4: P(belt is real) ~ 0.999
+    (shielded detector confirms at higher intensities)
+
+  Each replication pushes the probability toward certainty.
+  The cost per replication: one mission (~$3-5M in 1958 dollars)
+  The value per replication: diminishing returns in probability
+    but each increment matters for scientific consensus
+
+EXERCISE:
+  Plot P(belt is real) as a function of number of confirming
+  missions. Use Bayesian updating with:
+    Prior: P_0 = 0.5 (before Explorer 1)
+    Likelihood ratio: L = 10 (each confirming observation is
+      10x more likely under "belt exists" than "belt doesn't exist")
+    Update: P_n = P_{n-1} * L / (P_{n-1} * L + (1 - P_{n-1}))
+
+  How many missions are needed to reach P > 0.999?
+  How many are needed to reach P > 0.99999?
+  At what point do additional missions add negligible certainty?
+```
+
+---
+
+## E. Creative Arts -- What to Create
+
+### E1. Campbell's Hero Cycle as Orbital Diagram
+
+**What it is:** A visual art piece that maps Joseph Campbell's hero's journey (monomyth) onto Explorer 3's orbital diagram. The stages of the hero's journey are positioned at corresponding points along the elliptical orbit, showing that the narrative arc and the orbital arc share the same shape: departure from the known, descent into the ordeal, and return with the boon.
+
+```
+ART PIECE: "The Hero's Orbit"
+===============================
+
+Composition (11x14 inch or digital equivalent):
+
+  Central image: Explorer 3's elliptical orbit around Earth
+  Earth at one focus of the ellipse (center-left)
+  Orbit drawn as a golden ellipse on dark background
+
+  At each stage of the orbit, a label from Campbell's monomyth:
+
+  PERIGEE (bottom of orbit, closest to Earth):
+    "The Known World" — low altitude, below the belt,
+    background radiation, safe, familiar
+
+  ASCENDING (right side, climbing away from Earth):
+    "Crossing the Threshold" — altitude increasing,
+    radiation increasing, entering the unknown
+
+  INNER BELT (upper right, ~1000 km):
+    "The Road of Trials" — counts climbing rapidly,
+    the hero faces increasing challenge
+
+  SATURATION ZONE (top of orbit, highest altitude):
+    "The Belly of the Whale" — detector saturated,
+    zero counts, the deepest point of the ordeal,
+    where the hero is swallowed by the unknown
+
+  DESCENDING (left side, falling back toward Earth):
+    "The Return" — counts recovering, exiting the belt,
+    the hero emerges with new knowledge
+
+  GROUND PASS (near perigee, ground station in view):
+    "The Boon" — tape plays back the complete recording,
+    the hero delivers the knowledge to the community
+
+  Annotations:
+    - The saturation zone labeled: "What Explorer 1 could
+      not see. What Explorer 3's tape recorded."
+    - The ground pass labeled: "30x playback. The hero
+      tells the story in compressed time."
+    - The tape recorder illustrated as a small icon near
+      the satellite, labeled: "The Recording Device.
+      Without it, the hero returns with fragments."
+
+  Color scheme:
+    - Earth: blue-green
+    - Orbit: gold
+    - Radiation belt: gradient from green (safe) through
+      yellow and orange to red (intense) to black (saturation)
+    - Text: white on dark background
+    - Campbell stage labels: cream/parchment color
+
+  Style: clean, diagrammatic, with hand-lettered labels
+  in the style of medieval manuscripts or alchemical diagrams.
+  The orbit is simultaneously a scientific trajectory and a
+  mythological circle.
+
+Tools: Digital illustration (Procreate, Inkscape, or Illustrator)
+Build time: 4-6 hours
+Difficulty: Beginner-Intermediate
+```
+
+### E2. Marchantia polymorpha Botanical Illustration
+
+**What it is:** A detailed botanical illustration of Marchantia polymorpha showing the thallus, gemma cups, gemmae, and reproductive structures, with special emphasis on the gemma cups as the plant's "data recorders" -- complete copies of the genome prepared for dispersal and confirmation.
+
+```
+SCIENTIFIC ILLUSTRATION: Marchantia polymorpha
+=================================================
+
+Composition (11x14 inch plate):
+  - Main figure (60% of plate):
+    Several thalli growing on moist soil, showing the
+    characteristic forking, flat, lobed growth form.
+    Show 2-3 thalli at different sizes/stages.
+    Include gemma cups prominently — the signature feature.
+    Draw from above (plan view) to show the lobing pattern
+    and the diamond-shaped air chamber pattern on the surface.
+
+  - Detail A (upper right, 10%):
+    Single gemma cup in cross-section at 20x magnification
+    Show the cup walls, the splash-cup shape, and 3-5
+    gemmae sitting inside like coins in a purse.
+    Label: gemma cup wall, gemma (with notch where growth
+    initiates), attachment point, splash rim
+
+  - Detail B (middle right, 10%):
+    Individual gemma at 50x magnification
+    Disc-shaped, ~1 mm diameter, with a notch on each side
+    where the apical meristems will form. Show the cellular
+    structure: small cells at the margins (growing points),
+    larger cells in the center (storage tissue).
+    Label: biconvex disc, marginal cells, oil bodies, notch
+
+  - Detail C (lower right, 10%):
+    Archegoniophore (female reproductive structure):
+    the distinctive palm-tree-shaped stalked organ with
+    finger-like rays. Show at 2x magnification.
+    Label: stalk, receptacle, rays, archegonia (on underside)
+
+  - Detail D (bottom, 10%):
+    Rain splash dispersal diagram:
+    1. Raindrop approaching gemma cup
+    2. Impact — water and gemmae splash outward
+    3. Gemma landing on soil, 30 cm from parent
+    4. Gemma germinating into new thallus
+    Caption: "Dispersal by splash — gemmae carry the complete
+    genome to new territory, confirming viability by growing."
+
+  - Title block (bottom):
+    "Marchantia polymorpha L."
+    "Common liverwort — Gemma cups and asexual propagation"
+    "Explorer 3 paired organism — Mission 1.9"
+    Scale bars for each figure
+
+Color palette:
+  - Thallus green: #3B6B2A, #4C8B3A, #5DA04A
+  - Gemma cups: #4A7A3A inner, #3A5A2A rim
+  - Gemmae: #5A9A4A (bright green, fresh)
+  - Rhizoids: #6B4A2A, #7B5A3A
+  - Archegoniophore: #4A7A3A stalk, #3A6A2A rays
+  - Soil: #5A4A3A, #6A5A4A
+  - Air chambers: faint lines in #3A5A2A on surface
+
+Medium: Digital (Procreate or Clip Studio) imitating ink + watercolor
+Build time: 6-10 hours
+Difficulty: Intermediate
+```
+
+---
+
+## F. Problem Solving -- What You Miss Without Recording
+
+### F1. The Aliasing Problem
+
+You are Van Allen in February 1958. Explorer 1 has been transmitting for three weeks. You have real-time telemetry data from approximately 100 ground passes. Each pass captures 5-8 minutes of data from a 115-minute orbit. Your data looks like this:
+
+```
+SCENARIO: AMBIGUOUS OBSERVATIONS
+
+From 100 ground passes, you observe:
+  - 70 passes: normal cosmic ray counts (30-200 counts/sec)
+    These occur at low and medium altitudes
+  - 20 passes: elevated counts (500-5000 counts/sec)
+    These occur at intermediate altitudes (800-1500 km)
+  - 10 passes: ZERO counts
+    These occur at high altitudes (1500-2500 km)
+
+HYPOTHESIS A: "Zero counts = no radiation above 1500 km"
+  - Earth's radiation environment decreases with altitude
+  - Above 1500 km, the magnetosphere provides shielding
+  - The Geiger counter correctly reads zero
+
+HYPOTHESIS B: "Zero counts = too much radiation above 1500 km"
+  - A belt of trapped radiation exists at 1500-2500 km
+  - The radiation intensity is so high that the Geiger counter
+    saturates (dead time prevents any counts from registering)
+  - The Geiger counter incorrectly reads zero
+
+Both hypotheses are consistent with the data. You cannot
+distinguish them from the 10 zero-count readings alone.
+
+THE KEY QUESTION: What information would distinguish them?
+
+ANSWER: The transition. If hypothesis B is correct, the counts
+should INCREASE as the satellite approaches the zero-count zone,
+reaching a maximum at the boundary before dropping to zero.
+The count rate profile should look like:
+
+  30 → 100 → 500 → 2000 → 5000 → MAX → 0 (saturation)
+
+If hypothesis A is correct, the counts should simply decrease:
+
+  30 → 100 → 500 → 200 → 50 → 10 → 0 (genuine zero)
+
+But you never see the transition because:
+  - Ground passes capture fragments, not continuous profiles
+  - A single pass sees 5-8 minutes of a 115-minute orbit
+  - The transition from high counts to zero spans ~10 minutes
+  - You would need a ground pass to coincide exactly with
+    the transition — and in 100 passes, it never did clearly
+
+EXPLORER 3'S TAPE RECORDER SOLVES THIS:
+  The tape records continuously. The transition from high
+  counts to zero is captured every orbit. The profile shows:
+
+  30 → 100 → 500 → 2000 → 10000 → 25000 → 0 → 25000 → 10000 → ...
+
+  The symmetry is unmistakable. The zero is surrounded by
+  the highest readings, not the lowest. Saturation confirmed.
+  The belt is real.
+
+EXERCISE:
+  Given only the 100 ground passes described above, compute
+  the Bayesian probability that hypothesis B is correct.
+  How many more passes would you need to see the transition
+  clearly enough to reach P(B) > 0.95?
+  Now compare: the tape recorder gives you P(B) > 0.99 after
+  a single orbit. Data completeness defeats statistical inference.
+```
+
+---
+
+## G. GSD -- The Confirmation Pattern: Validation Before Declaration
+
+### G1. Skills: The Confirmation Pattern
+
+Explorer 3 teaches a GSD skill pattern: **validation before declaration** -- the discipline of confirming a result before announcing it as established.
+
+```
+GSD PATTERN: Confirmation Required
+
+Explorer 1 discovered the Van Allen radiation belts.
+Explorer 3 confirmed them.
+
+Van Allen could have published based on Explorer 1 alone.
+He had the data: anomalous zero counts at high altitude,
+consistent with a radiation belt. It was a plausible
+hypothesis supported by fragmentary evidence.
+
+Instead, he waited for Explorer 3. He wanted the tape
+recordings. He wanted the complete profiles. He wanted
+to show the transition from high counts to zero and back.
+He wanted the evidence to be irrefutable.
+
+He published in 1958 with the Explorer 1 data (preliminary
+announcement) and in 1959 with the combined Explorer 1 +
+Explorer 3 data (full confirmation). The two-stage publication
+is the scientific version of the confirmation pattern:
+
+  1. ANNOUNCE: "We observed something unexpected" (Explorer 1)
+  2. CONFIRM: "We verified it with better data" (Explorer 3)
+  3. DECLARE: "It is an established physical structure" (1959 paper)
+
+GSD APPLICATION:
+  When you think you have found a result:
+  1. Do NOT declare it immediately
+  2. Design a confirming test (the "tape recorder")
+  3. Run the confirming test
+  4. Only if confirmation succeeds: declare
+
+  This adds time. It adds effort. It prevents premature
+  declarations that must later be retracted. In software:
+  - Feature works in development → do not ship
+  - Feature passes integration tests → confirmation
+  - Feature passes staging deployment → confirmation
+  - Feature works in production for 24 hours → declare shipped
+
+  Each stage is an Explorer 3: same instrument (code),
+  additional recording (monitoring, logs, metrics) that
+  captures what development-only testing could not see.
+
+ANTI-PATTERN: Declaration Without Confirmation
+  - "It works on my machine" → no confirmation (Explorer 1 mode)
+  - "The tests pass" → partial confirmation (ground station passes)
+  - "It works in production with monitoring" → full confirmation
+    (Explorer 3 mode: tape recorder captures everything)
+
+  Van Allen waited. The belts were confirmed. His reputation
+  was unassailable. The scientist who rushes to publish
+  fragmentary data risks being wrong. The scientist who
+  confirms first is right once and forever.
+```
+
+### G2. The Recording Discipline
+
+Explorer 3's tape recorder teaches a complementary GSD pattern: **record everything, review later** -- the discipline of capturing complete operational data even when you cannot process it in real time.
+
+```
+GSD PATTERN: Record Everything
+
+Explorer 1 transmitted data in real time.
+Ground stations heard ~7% of each orbit.
+93% of the data was lost to gaps between passes.
+
+Explorer 3 recorded everything and played back later.
+Ground stations received 100% of each orbit.
+0% of the data was lost.
+
+The difference in hardware: 130 grams of tape recorder.
+The difference in outcome: discovery vs confirmation.
+
+SOFTWARE EQUIVALENT:
+  - Verbose logging: record every event, every state change,
+    every error, even when you think it is not important.
+    Review the logs when something goes wrong. The log
+    entry you did not think you needed is the one that
+    explains the outage.
+  - Application tracing: OpenTelemetry, distributed tracing,
+    span collection. Record the complete request lifecycle
+    even though most requests are boring. The one that is
+    not boring is the one where you need the complete trace.
+  - Flight recorders: cockpit voice recorders and flight
+    data recorders are Explorer 3's tape recorder at scale.
+    They record everything, continuously, overwriting old
+    data on a 2-hour loop. When something goes wrong, the
+    complete context is available for investigation.
+
+  The cost of recording everything: storage space, write IOPS,
+  log rotation. These are engineering costs.
+  The cost of NOT recording: when something goes wrong, you
+  see it through a 7% window. You cannot reconstruct the
+  sequence. You cannot confirm the root cause. You are
+  Explorer 1: you see the zero counts, but you cannot tell
+  whether the system failed (no radiation) or was overwhelmed
+  (too much radiation).
+
+  Explorer 3's lesson: the recording device is not optional.
+  It is the difference between hypothesis and proof.
+  Record everything. Review when needed. Discard when not.
+  But never fail to record.
+
+EXERCISE:
+  Audit your current project's logging and monitoring:
+  1. What percentage of system state changes are logged?
+  2. If a critical failure occurred at 3 AM, would the logs
+     contain enough context to diagnose it without live debugging?
+  3. If the answer is "no" — you are Explorer 1. Add a tape recorder.
+```
+
+---
+
+*"Explorer 3 launched on March 26, 1958, and re-entered the atmosphere on June 27, 1958. Ninety-three days. In that brief mission, it confirmed the most significant discovery of the early Space Age: a permanent belt of intense radiation trapped by Earth's magnetic field, surrounding the planet at altitudes of 1,000 to 25,000 kilometers. The confirmation came from a tape recorder that weighed 130 grams, cost a few hundred dollars, and was built by a graduate student in Iowa. The recorder captured what the real-time telemetry could not: the complete radiation profile through the belt, from approach through saturation through exit. The symmetry of the profile -- counts rising, peaking, dropping to zero, then recovering on the other side -- was irrefutable evidence that the zero was caused by an excess of radiation, not its absence. Without the tape recorder, the radiation belts would have remained a hypothesis until a better detector flew. With it, they became established fact. The hero departed, faced the ordeal, and returned with proof. Joseph Campbell, born on the same day 54 years earlier, spent his life cataloging this pattern: the hero's journey requires a return, and the return requires evidence. Explorer 3 was the return. The tape recorder was the evidence. The 93 days were enough. On a stream bank in Mukilteo, a liverwort sends its gemmae splashing into the rain -- tiny complete copies of itself, confirming the genome in new territory. The gemmae do not need to last long. They need to land, root, and grow. Ninety-three days of confirmation. Ninety-three days of complete data. Ninety-three days was everything."*

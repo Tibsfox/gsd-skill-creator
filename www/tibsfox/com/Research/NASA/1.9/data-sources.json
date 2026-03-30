@@ -1,0 +1,117 @@
+{
+  "mission": "1.9",
+  "title": "Explorer 3",
+  "description": "Open datasets and source materials relevant to Explorer 3 (1958), the confirmation of the Van Allen radiation belts via onboard tape recorder, Marchantia polymorpha (common liverwort), Belted Kingfisher (Megaceryle alcyon), magnetic tape recording technology, orbital decay modeling, ground station coverage, store-and-forward communication, Joseph Campbell's hero's journey, and squelch circuit design",
+  "sources": [
+    {
+      "id": "nssdc-explorer3",
+      "name": "NSSDC Master Catalog -- Explorer 3",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-003A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Explorer 3 (NSSDC designation 1958-003A). Spacecraft description (14.1 kg, same instrument package as Explorer 1 plus miniature tape recorder), Juno I launch vehicle details, and mission timeline. Documents the 186 x 2,799 km orbit with 33.15 degree inclination and 115.7-minute period. Records the tape recorder as the key instrument addition that enabled confirmation of the Van Allen radiation belts. The satellite was launched March 26, 1958 and re-entered June 27, 1958 (93-day lifetime).",
+      "mission_relevance": "Definitive source for Explorer 3 specifications, orbital parameters, and scientific achievements. Documents the tape recorder that made this mission the confirmation mission for the Van Allen belts. The 93-day lifetime and 186 km perigee altitude are essential parameters for the orbital decay simulation. Explorer 3 is the bridge between Explorer 1's inference and the established discovery."
+    },
+    {
+      "id": "maihak-tape-history",
+      "name": "Magnetic Recording History -- AES Historical Committee",
+      "url": "https://www.aes.org/aeshc/docs/recording.technology.history/",
+      "type": "primary-source",
+      "category": "technology-history",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "The Audio Engineering Society's Historical Committee maintains comprehensive documentation of magnetic recording technology from its origins. The Maihak company (Hamburg, Germany) produced some of the earliest commercial tape recorders in the 1930s, building on the work of Fritz Pfleumer (who patented magnetic tape in 1928) and AEG/Telefunken (which developed the Magnetophon). The technology lineage runs from Oberlin Smith's 1888 proposal through Valdemar Poulsen's Telegraphone (1898, wire recording), through BASF/IG Farben's development of coated plastic tape (1935), to the miniature recorders adapted for spacecraft in the late 1950s. George Ludwig's tape recorder for Explorer 3 drew on this European lineage of magnetic recording, miniaturized to survive launch vibration, vacuum, thermal cycling, and the radiation environment of space.",
+      "mission_relevance": "Historical context for the tape recorder technology that made Explorer 3's mission possible. Understanding the lineage from Maihak commercial recorders to George Ludwig's spacecraft recorder illuminates how rapidly the technology was adapted from broadcast/music recording to spaceflight. The fundamental physics — inductive recording and playback of ferromagnetic oxide patterns — was the same; the engineering challenge was miniaturization and environmental hardening."
+    },
+    {
+      "id": "van-allen-probes-archive",
+      "name": "Van Allen Probes Science Gateway",
+      "url": "https://rbspgway.jhuapl.edu/",
+      "type": "primary-source",
+      "category": "radiation-belt-data",
+      "format": "CDF/ASCII",
+      "access": "open",
+      "description": "Data archive from the Van Allen Probes mission (2012-2019, formerly RBSP), which carried modern instruments through both Van Allen belts. The probes provided the most detailed measurements of the radiation belt environment since the belts were discovered by Explorer 1 and confirmed by Explorer 3. Data products include energetic particle spectra, electric and magnetic field measurements, plasma wave spectra, and derived parameters. The mission confirmed the long-term stability of the inner belt and the dynamic variability of the outer belt, validating the fundamental picture that Van Allen constructed from Explorer 3's tape-recorded data. The probes were named in honor of James Van Allen, who died in 2006.",
+      "mission_relevance": "Modern validation data for the radiation belt structure first confirmed by Explorer 3's tape recorder. The Van Allen Probes' complete radiation profiles can be compared to the reconstructed profiles from Explorer 3 to show how accurately the primitive tape recorder captured the belt's essential structure. The 54-year continuity from Explorer 3 (1958) to Van Allen Probes (2012) represents the full arc of radiation belt science."
+    },
+    {
+      "id": "magnetic-recording-physics",
+      "name": "IEEE Magnetics Society -- Magnetic Recording Resources",
+      "url": "https://ieeemagnetics.org/",
+      "type": "primary-source",
+      "category": "technology-data",
+      "format": "PDF/HTML",
+      "access": "open (some papers require IEEE access)",
+      "description": "The IEEE Magnetics Society publishes the Transactions on Magnetics, which contains the foundational papers on magnetic recording physics. Key concepts include the Karlqvist head field model (analytical expression for the magnetic field in the recording gap), the reciprocity principle (the playback response equals the convolution of the head sensitivity function with the recorded magnetization pattern), the Wallace spacing loss (signal attenuation due to head-to-tape separation), and the Williams-Comstock model for the transition parameter. These models explain why playback voltage scales linearly with tape speed (V ∝ v * dM/dx = v * spatial_frequency * M_amplitude), which is the physics behind Explorer 3's 4:1 compression ratio.",
+      "mission_relevance": "Technical foundation for understanding how Explorer 3's tape recorder worked at the physical level. The head field model and reciprocity principle explain the record/playback process. The velocity sensitivity (V ∝ tape speed) explains why 4x playback produces both higher frequency and higher amplitude — the fundamental physics of compressed playback. Essential for the tape-head SPICE model and the magnetic recording knowledge node."
+    },
+    {
+      "id": "orbital-decay-models",
+      "name": "NRLMSISE-00 Atmospheric Model",
+      "url": "https://ccmc.gsfc.nasa.gov/modelweb/models/nrlmsise00.php",
+      "type": "primary-source",
+      "category": "atmospheric-data",
+      "format": "API/Fortran",
+      "access": "open",
+      "description": "The Naval Research Laboratory Mass Spectrometer and Incoherent Scatter Radar model (NRLMSISE-00) provides atmospheric density, temperature, and composition from the ground to 1,000 km altitude. The model accounts for latitude, longitude, time of day, day of year, solar activity (F10.7 index), and geomagnetic activity (Ap index). NRLMSISE-00 is the standard model for satellite lifetime predictions and orbital debris evolution studies. At Explorer 3's perigee altitude of 186 km, the model predicts atmospheric density of approximately 2e-10 kg/m^3 during moderate solar activity, with variations up to 5x during geomagnetic storms. The model is used by the orbital decay simulation to predict Explorer 3's 93-day lifetime and compare it with Explorer 1's 12-year lifetime.",
+      "mission_relevance": "Source for the atmospheric density model used in the orbital-decay.py simulation. NRLMSISE-00 density values at 186 km (Explorer 3 perigee) and 358 km (Explorer 1 perigee) quantify the ~30-50x density difference that explains the dramatic lifetime difference between the two satellites. The model's solar activity dependence is particularly relevant for 1958, when Solar Cycle 19 (the strongest on record) was near its peak."
+    },
+    {
+      "id": "inat-marchantia",
+      "name": "iNaturalist -- Marchantia polymorpha Observations",
+      "url": "https://www.inaturalist.org/taxa/55838-Marchantia-polymorpha",
+      "type": "community-source",
+      "category": "organism-data",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community-contributed observations of Marchantia polymorpha (common liverwort) throughout its cosmopolitan range. In the Pacific Northwest, observations show the liverwort on creek banks, rotting logs, damp soil, greenhouse floors, and disturbed ground from sea level to alpine elevations. Photographs document the characteristic features: flat forking thallus, diamond-shaped areolae with central pores, gemma cups with gemmae visible inside, and (in sexual reproduction) the stalked archegoniophore and antheridiophore structures. Seasonal observations confirm year-round growth in moist PNW habitats, with peak gemma production in spring and fall. The iNaturalist API provides geographic and temporal distribution data for mapping.",
+      "mission_relevance": "Primary data source for the organism component of Mission 1.9. Provides geographic distribution and phenological data for Marchantia polymorpha across the PNW. Observations of gemma cups with gemmae confirm the store-and-forward reproduction mechanism that is the central biological metaphor of this mission. The cosmopolitan distribution of M. polymorpha — found on every continent except Antarctica — mirrors the universal applicability of the store-and-forward principle."
+    },
+    {
+      "id": "marchantia-genome",
+      "name": "Marchantia polymorpha Genome Project",
+      "url": "https://marchantia.info/",
+      "type": "primary-source",
+      "category": "genome-data",
+      "format": "FASTA/GFF",
+      "access": "open",
+      "description": "The Marchantia polymorpha genome was sequenced in 2017 (Bowman et al., Cell 171:287-304), producing one of the most complete plant genome assemblies available. The genome is relatively compact (225.8 Mb, ~19,000 protein-coding genes) compared to flowering plants, making M. polymorpha a model organism for plant biology. The genome project provides assembled sequences, gene annotations, expression data, and tools for genetic manipulation (including CRISPR protocols). The genome represents the 'data' that each gemma carries — a complete copy of the instructions needed to grow a new thallus. The 225.8 Mb genome is the biological equivalent of the data on Explorer 3's tape: a complete record, stored in a physical medium (DNA / magnetic oxide), carried by a small autonomous unit (gemma / satellite), and capable of reconstructing the full system at the destination.",
+      "mission_relevance": "Source for the genomic data that grounds the gemma-as-data-packet metaphor. The 225.8 Mb genome, encoded in DNA, is the liverwort's version of Explorer 3's tape: a complete dataset stored on a molecular substrate. Understanding the genome's content makes the metaphor precise — each gemma really does carry the complete information needed to reconstruct the organism, just as each tape playback carried the complete orbital radiation profile. The genome's 19,000 genes are the 'data points' recorded by 400 million years of evolution."
+    },
+    {
+      "id": "campbell-foundation",
+      "name": "Joseph Campbell Foundation",
+      "url": "https://www.jcf.org/",
+      "type": "primary-source",
+      "category": "humanities",
+      "format": "HTML/Books",
+      "access": "open (library resources)",
+      "description": "The Joseph Campbell Foundation preserves and disseminates the work of Joseph Campbell (1904-1987), whose comparative mythology identified the monomyth — the hero's journey — as a universal narrative structure across cultures. Key works include 'The Hero with a Thousand Faces' (1949), which describes the three-phase cycle of Departure-Initiation-Return, and 'The Power of Myth' (1988, with Bill Moyers), which brought the monomyth to a wider audience. The foundation's online resources include essays, lectures, and the Campbell Archives. Campbell's methodology — reading widely across cultures, recording patterns, synthesizing them into a structural model — is itself a store-and-forward process: he recorded data from myths the way Explorer 3 recorded data from the radiation belt, then compressed and transmitted his findings through published works.",
+      "mission_relevance": "Source for the hero's journey narrative framework mapped onto Explorer 3's mission. Campbell's monomyth provides the structural template: departure (launch), threshold crossing (orbit insertion), ordeal (belt traverse with Geiger saturation), boon (complete radiation profile on tape), and return (playback over ground station). Campbell was born on March 26, 1904 — the same calendar date as Explorer 3's launch. The foundation's educational resources illuminate how the monomyth operates as a meta-level store-and-forward system for cultural knowledge."
+    },
+    {
+      "id": "jpl-historical",
+      "name": "JPL Historical Archives -- Explorer Program",
+      "url": "https://www.jpl.nasa.gov/missions/?search=explorer",
+      "type": "primary-source",
+      "category": "mission-history",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "The Jet Propulsion Laboratory's historical archives document the Explorer program from its inception through the 90+ Explorer missions that followed. JPL built the Explorer 1 and Explorer 3 spacecraft in collaboration with the Army Ballistic Missile Agency (ABMA) and the University of Iowa. The archives include technical documents, mission reports, photographs, and oral histories from engineers and scientists involved in the program. Key documents describe the decision to add a tape recorder to Explorer 3, the testing and qualification of the recorder in vacuum chambers and vibration tables, and the analysis of the first tape playback data that confirmed the Van Allen belts. William Pickering (JPL Director), James Van Allen (University of Iowa), and Wernher von Braun (ABMA) jointly announced Explorer 1's discovery; Explorer 3's confirmation came through Van Allen's presentation to the National Academy of Sciences.",
+      "mission_relevance": "Primary historical source for the Explorer program context and the decision-making that led to Explorer 3's tape recorder. JPL's archives document the rapid iteration from Explorer 1 (no tape) to Explorer 3 (with tape) — only 54 days between launches — and the engineering trade-offs involved in adding the recorder. The archives also document Explorer 2's failure (launched March 5, 1958, fourth stage failed to ignite), which makes Explorer 3's success even more significant as the confirmation mission."
+    },
+    {
+      "id": "nrlmsise-density",
+      "name": "NRLMSISE-00 / JB2008 Atmospheric Density Models",
+      "url": "https://www.brodo.de/space/nrlmsise/",
+      "type": "primary-source",
+      "category": "atmospheric-data",
+      "format": "Interactive/API",
+      "access": "open",
+      "description": "Interactive implementations of the NRLMSISE-00 and JB2008 (Jacchia-Bowman) atmospheric density models, providing density, temperature, and composition profiles from ground level to 1,000+ km altitude. These models quantify the exponential decrease in atmospheric density with altitude and the significant modulation by solar activity. For the Explorer 1 vs Explorer 3 comparison: at 186 km (Explorer 3 perigee), NRLMSISE-00 predicts density of ~2e-10 kg/m^3 during Solar Cycle 19 maximum conditions (F10.7 ~ 200). At 358 km (Explorer 1 perigee), the density drops to ~7e-12 kg/m^3. The 30x density difference, compounded over thousands of orbits, explains the 50:1 lifetime ratio (12 years vs 93 days). The interactive tools allow users to explore how solar activity and geomagnetic conditions affect density at any altitude.",
+      "mission_relevance": "Quantitative foundation for the orbital-decay.py simulation. The density models provide the atmospheric drag parameters that determine satellite lifetime. The interactive tools allow verification of the simulation's atmospheric model against the standard reference models. The strong solar activity of 1958 (Solar Cycle 19 peak) is a critical factor — the expanded thermosphere at solar maximum increased drag on both Explorer 1 and Explorer 3, but the effect was far more pronounced on Explorer 3's lower orbit."
+    }
+  ]
+}
