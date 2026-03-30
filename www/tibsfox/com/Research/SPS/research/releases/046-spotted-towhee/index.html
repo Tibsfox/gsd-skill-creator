@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 46&deg; &mdash; Spotted Towhee &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Rasp element card */
+    .rasp-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FF8A65 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .rasp-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Pair card */
+    .pair-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Energy restoration card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Scratch card */
+    .scratch-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #5D4037;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .scratch-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.rasp { background: #BF360C; }
+    .theory-icon.pair { background: #1565C0; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-icon.scratch { background: #5D4037; }
+    .theory-icon.habitat { background: #00695C; }
+    .theory-icon.speciation { background: #E65100; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">46&deg;</div>
+      <div class="release-title-block">
+        <h2>Spotted Towhee</h2>
+        <div class="scientific">Pipilo maculatus</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      buzzy drink-your-tea trill + sharp mew call &mdash; the rasp, 2nd Passerellidae (pair with Song Sparrow), E=3 restored after 25 degrees, &ldquo;the spotted chirper&rdquo; &mdash; ground-scratching specialist, formerly &ldquo;Rufous-sided Towhee&rdquo; until 1995 split, 4&ndash;9 song types per male, year-round PNW resident of dense forest-shrub edge and understory
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Columbia Spotted Frog</strong> (<em>Rana luteiventris</em>) at degree 46. Because the SPS Part B engine is birds-and-mammals only, Spotted Towhee replaces it. The substitution preserves the original&rsquo;s <strong>E=3 energy level</strong> and <strong>forest/shrub edge habitat</strong>. The word &ldquo;spotted&rdquo; threads between the original and the replacement: Columbia <em>Spotted</em> Frog replaced by <em>Spotted</em> Towhee.</p>
+        </div>
+
+        <!-- Rasp Element Card -->
+        <div class="rasp-card">
+          <h3>The 47th Acoustic Element: The Rasp</h3>
+          <p>The Spotted Towhee&rsquo;s song is a <strong>concentrated, buzzy, vibrating trill</strong> &mdash; approximately 1.5 seconds of rapid frequency modulation so dense that individual notes fuse into a continuous rough texture. The classic mnemonic is &ldquo;drink-your-tea!&rdquo; where the &ldquo;teeeea!&rdquo; is the rasp. Named &ldquo;the rasp&rdquo; for the sound&rsquo;s file-like quality, the tool metaphor (coarse abrasion shaping material through friction), and the foraging behavior (the double-footed backward scratch rasps the ground before the syrinx rasps the air).</p>
+          <p><strong>The first acoustic element defined by textural concentration</strong> &mdash; an event that achieves its character not through melodic elaboration but through the sheer density of repetition within a narrow frequency band. Repetition becomes texture.</p>
+        </div>
+
+        <!-- Pair Card -->
+        <div class="pair-card">
+          <h3>Passerellidae Pair Complete &mdash; Degrees 45&ndash;46</h3>
+          <p><strong>Song Sparrow (45) + Spotted Towhee (46)</strong> form the engine&rsquo;s Passerellidae pair, following the pairing pattern established by the waxwings (31&ndash;32) and goldfinches (43&ndash;44). The Song Sparrow is the <strong>melodic generalist</strong> &mdash; complex preamble-plus-body songs from wetland edge. The Spotted Towhee is the <strong>textural specialist</strong> &mdash; concentrated buzzy rasp from dense understory. Same family, complementary habitats, complementary acoustics.</p>
+        </div>
+
+        <!-- Energy Restoration Card -->
+        <div class="energy-card">
+          <h3>E=3 Restored &mdash; After 25 Degrees of Absence</h3>
+          <p>The last E=3 was degree 20 (Orange-crowned Warbler) &mdash; <strong>25 degrees ago</strong>. E=2 was restored at degree 45 (Song Sparrow). Now E=3 returns at degree 46. Two consecutive energy restorations break the E=4 monopoly. E=2 + E=3 together now hold 20 degrees (42.5%), nearly matching E=4&rsquo;s 21 degrees (44.7%). The dynamic range decompression continues.</p>
+        </div>
+
+        <!-- Scratch Card -->
+        <div class="scratch-card">
+          <h3>The Double-Footed Backward Scratch</h3>
+          <p>The Spotted Towhee&rsquo;s most distinctive behavior: a rapid forward-backward hop in which <strong>both feet kick backward simultaneously through the leaf litter</strong>, displacing it to expose food beneath. The scratching is <strong>loud</strong> &mdash; often more audible than the bird&rsquo;s song. In the dense understory, three sounds together identify the species: the <strong>scratch</strong> (foraging), the <strong>mew</strong> (cat-like call), and the <strong>rasp</strong> (buzzy song). The feet rasp the ground; the syrinx rasps the air.</p>
+        </div>
+
+        <h2>The Spotted Chirper</h2>
+        <p><em>Pipilo maculatus</em> &mdash; from Latin <em>pipilo</em> (to chirp, to twitter) + <em>maculatus</em> (spotted, stained). &ldquo;The spotted chirper&rdquo; &mdash; a bird named for its voice and its plumage. Unlike the Song Sparrow, whose binomial is pure acoustics (&ldquo;melody song-finch&rdquo;), the Spotted Towhee&rsquo;s name splits between sound and sight: one half says what the bird sounds like, the other says what the bird looks like.</p>
+
+        <h3>Recent Naming Comparison</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Binomial</th><th>Translation</th><th>Philosophy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>43</td><td>American Goldfinch</td><td><em>Spinus tristis</em></td><td>&ldquo;Sad thorn-bird&rdquo;</td><td>Ecological + Emotional</td></tr>
+            <tr><td>44</td><td>Lesser Goldfinch</td><td><em>Spinus psaltria</em></td><td>&ldquo;Female lute player of the thorn bush&rdquo;</td><td>Ecological + Musical</td></tr>
+            <tr><td>45</td><td>Song Sparrow</td><td><em>Melospiza melodia</em></td><td>&ldquo;Melody song-finch&rdquo;</td><td>Musical + Musical</td></tr>
+            <tr><td><strong>46</strong></td><td><strong>Spotted Towhee</strong></td><td><strong><em>Pipilo maculatus</em></strong></td><td><strong>&ldquo;The spotted chirper&rdquo;</strong></td><td><strong>Acoustic + Visual</strong></td></tr>
+          </tbody>
+        </table>
+        <p>The naming rebalances after the Song Sparrow&rsquo;s pure-acoustic double. After three degrees of increasingly acoustic naming, the eye returns to the naming equation.</p>
+
+        <h2>The Sound: Rasp and Mew</h2>
+        <p><strong>Song:</strong> ~1.5 seconds. One to two short introductory notes followed by a fast, buzzy trill. Pacific Coast populations (including PNW <em>oregonus</em>) often drop the introductory notes entirely, delivering the trill alone. Frequency 1.5&ndash;8.0 kHz, most energy 2&ndash;6 kHz. Classic mnemonic: &ldquo;drink-your-tea!&rdquo;</p>
+        <p><strong>Mew call:</strong> A sharp, descending, cat-like &ldquo;meewww?&rdquo; lasting about half a second. Year-round contact and alarm call. One of the most recognizable call notes in PNW birding.</p>
+        <p><strong>Repertoire:</strong> Each male sings <strong>4&ndash;9 distinct song types</strong>, including both fast and slow trill types. High degree of song-sharing among neighboring males in PNW <em>oregonus</em> populations.</p>
+        <p><strong>Vocal learning:</strong> Songs learned through imitation of neighboring adults. Song differences between Spotted and Eastern Towhee accumulated through cultural transmission over ~1 million years, eventually leading to the 1995 species split.</p>
+
+        <h3>Contrast: Preamble vs. Rasp</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Feature</th><th>Song Sparrow (45)</th><th>Spotted Towhee (46)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acoustic element</td><td>The Preamble</td><td><strong>The Rasp</strong></td></tr>
+            <tr><td>Song structure</td><td>Preamble + complex body</td><td>(Intro notes) + buzzy trill</td></tr>
+            <tr><td>Duration</td><td>2&ndash;4 seconds</td><td>~1.5 seconds</td></tr>
+            <tr><td>Complexity</td><td>High (elaborate body)</td><td>Lower (concentrated trill)</td></tr>
+            <tr><td>Energy</td><td>E=2</td><td><strong>E=3</strong></td></tr>
+            <tr><td>Defining quality</td><td>Positional structure</td><td>Textural concentration</td></tr>
+          </tbody>
+        </table>
+        <p>The Song Sparrow opens a garden of elaboration. The Spotted Towhee&rsquo;s rasp <em>is</em> the statement &mdash; concentrated, vibrating, complete in a single buzzy gesture.</p>
+
+        <h2>The 1995 Split</h2>
+        <p>Until 1995, the Spotted Towhee and Eastern Towhee were one species: the &ldquo;Rufous-sided Towhee&rdquo; (<em>Pipilo erythrophthalmus</em>). The AOU split them based on differences in plumage, song, call notes, and mitochondrial DNA. The two forms had diverged approximately <strong>one million years ago</strong> as populations expanded west and east from Mexico. A narrow hybrid zone persists in the Great Plains (Nebraska, Dakotas). The split demonstrates that <strong>learned vocalizations can drive speciation</strong> &mdash; song divergence creates reproductive isolation.</p>
+
+        <h2>21 Subspecies</h2>
+        <p>The Spotted Towhee has <strong>21 recognized subspecies</strong> across western North America (Peter Pyle&rsquo;s 2023 revision proposes reducing to 7). Three subspecies occur in Washington: <em>oregonus</em> (western WA, the darkest form), <em>curtatus</em> (eastern WA, intermediate), and <em>arcticus</em> (NE WA, most boldly spotted). The coast-interior gradient mirrors Song Sparrow&rsquo;s <em>morphna</em>-to-<em>merrilli</em> variation &mdash; Gloger&rsquo;s rule in both species.</p>
+
+        <h2>Family Tracker After Degree 46</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Paridae</td><td>3, 9</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+            <tr><td><strong>Passerellidae</strong></td><td><strong>45, 46</strong></td><td><strong>2 (PAIR COMPLETE)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Passerellidae pair complete. Melodic generalist + textural specialist.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon rasp">R</div>
+            <div class="theory-content">
+              <h4>The Rasp <span class="theory-level foundational">foundational</span></h4>
+              <p>The 47th acoustic element. A concentrated, buzzy, vibrating trill defined by textural intensity. Individual notes fuse into continuous rough texture &mdash; repetition becomes texture. The first element defined by textural concentration.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">P</div>
+            <div class="theory-content">
+              <h4>Passerellidae Pair Complete <span class="theory-level foundational">foundational</span></h4>
+              <p>Song Sparrow (45) + Spotted Towhee (46). Melodic generalist paired with textural specialist. Same family, complementary habitats (wetland edge vs. dense understory), complementary acoustics (preamble vs. rasp).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">3</div>
+            <div class="theory-content">
+              <h4>E=3 Restored <span class="theory-level foundational">foundational</span></h4>
+              <p>First E=3 since degree 20 &mdash; 25 degrees of absence. Continues the energy restoration begun at degree 45 (E=2). E=2 + E=3 = 20 degrees, nearly matching E=4&rsquo;s 21 degrees. Dynamic range decompression continues.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon scratch">S</div>
+            <div class="theory-content">
+              <h4>The Double-Footed Scratch <span class="theory-level foundational">foundational</span></h4>
+              <p>Behavioral acoustic signature. Both feet kick backward simultaneously through leaf litter. The scratching is often more audible than the song. The feet rasp the ground; the syrinx rasps the air.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon habitat">H</div>
+            <div class="theory-content">
+              <h4>Dense Understory Habitat <span class="theory-level intermediate">intermediate</span></h4>
+              <p>The engine&rsquo;s first dense-understory species. The closed, tangled shrub layer where forest meets clearing. After wetland edge (45), the engine moves to the forest floor. A species that benefited from logging &mdash; counterpoint to Spotted Owl (4).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon speciation">V</div>
+            <div class="theory-content">
+              <h4>Vocal Speciation <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Split from Eastern Towhee in 1995 based partly on vocal differences. Song divergence drove reproductive isolation over ~1 million years. The engine&rsquo;s second case study in vocal speciation after Red Crossbill (34) &mdash; but here, the split is complete.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-045: Song Sparrow</strong>
+            <p>PASSERELLIDAE PAIR. Consecutive same-family entries (45&ndash;46). Melodic complexity (preamble + body, E=2, wetland edge) paired with textural intensity (buzzy rasp, E=3, forest shrub edge). Both year-round PNW residents at 0&ndash;3 m vertical range.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-044: Lesser Goldfinch</strong>
+            <p>MOSAIC TO RASP. The mosaic (44) = borrowed content, maximum compositional complexity. The rasp (46) = concentrated texture, minimum compositional complexity. Maximum to minimum in two degrees. Fringillidae (44) to Passerellidae (45&ndash;46) family transition.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-020: Orange-crowned Warbler</strong>
+            <p>LAST E=3. Orange-crowned Warbler at degree 20 was the last E=3 entry &mdash; 25 degrees of absence before the Spotted Towhee restores it. Both sing from within dense vegetation. The E=3 register returns.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>VOCAL SPECIATION. Red Crossbill = vocal divergence in progress (10+ call types, potential incipient species). Spotted Towhee = vocal divergence completed (1995 split from Eastern Towhee). Learned vocalizations can drive speciation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011: Oregon Junco</strong>
+            <p>PASSERELLIDAE GROUND-FORAGING. Both Passerellidae, both forage on the ground by scratching in leaf litter. Both are dark PNW subspecies following Gloger&rsquo;s rule. Three Passerellidae total in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>LOGGING COUNTERPOINT. Spotted Owl declined from old-growth loss. Spotted Towhee INCREASED &mdash; clear-cutting created shrubby habitat. Two PNW species, opposite responses to the same disturbance.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Spotted Towhee documented as common year-round resident in western WA. Three subspecies (oregonus, curtatus, arcticus). Dark oregonus form dominant in Puget Sound lowlands. Population increased following historical clear-cutting.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Dense understory ecology. Ecological succession species. Shrub-edge habitat created by disturbance. Double-footed scratch adaptation. Geographic variation across 21 subspecies following Gloger&rsquo;s rule.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Spotted Towhee (<em>Pipilo maculatus</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Spotted Towhee. Cornell Lab of Ornithology.</li>
+          <li>Audubon &mdash; Spotted Towhee Field Guide.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Spotted Towhee.</li>
+          <li>Wikipedia &mdash; &ldquo;Spotted towhee.&rdquo;</li>
+          <li>Pajarito Environmental Education Center &mdash; Spotted Towhee species guide.</li>
+          <li>Birds of North America &mdash; Spotted Towhee Songs and Calls.</li>
+          <li>IERE &mdash; &ldquo;What&rsquo;s the difference between a Spotted Towhee and a Rufous-sided Towhee?&rdquo;</li>
+          <li>The Cottonwood Post (2024) &mdash; &ldquo;Spotted Towhee subspecies in the Pacific Northwest.&rdquo;</li>
+          <li>Pyle, P. (2023). <em>Identification Guide to North American Birds.</em></li>
+          <li>National Geographic &mdash; Spotted Towhee.</li>
+          <li>BirdNote &mdash; Spotted Towhee (<em>Pipilo maculatus</em>).</li>
+          <li>Washington Dept. of Fish &amp; Wildlife &mdash; Spotted Towhee.</li>
+          <li>The Daily World &mdash; &ldquo;Grays Harbor Birds: Spotted Towhee.&rdquo;</li>
+          <li>Eastside Audubon Society &mdash; Spotted Towhee.</li>
+          <li>Wahl, T. R. et al. <em>Birds of Washington: Status and Distribution.</em></li>
+          <li>Leon, G. et al. (2025). &ldquo;The role of learned song in the evolution and speciation of Eastern and Spotted towhees.&rdquo; <em>PLOS Computational Biology</em>.</li>
+          <li>Santa Clara Valley Bird Alliance &mdash; Spotted Towhee.</li>
+          <li>Swarth, H. S. (1913). Geographic variation in Pacific Coast towhees.</li>
+          <li>Animalia.bio &mdash; Spotted Towhee.</li>
+          <li>South Dakota Birds and Birding &mdash; Spotted Towhee.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">46&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Rasp</div>
+          <div class="stat-detail">#47 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">First E=3 since degree 20 (25&deg; gap)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Passerellidae</div>
+          <div class="stat-detail">2nd member &mdash; pair with Song Sparrow</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Pipilo</em></div>
+          <div class="stat-detail">1st appearance &mdash; &ldquo;chirper&rdquo;</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Dense Understory</div>
+          <div class="stat-detail">Forest shrub edge, thickets</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round in western Washington</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">45 unique</div>
+          <div class="stat-detail">47 entries (0&ndash;46)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">19</div>
+          <div class="stat-detail">Passerellidae pair complete at 45&ndash;46</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Passeriformes continues (9th consecutive)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~40 Million</div>
+          <div class="stat-detail">IUCN Least Concern</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">33&ndash;49 g</div>
+          <div class="stat-detail">Largest Passerellidae in the engine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Song Types</div>
+          <div class="stat-value">4&ndash;9</div>
+          <div class="stat-detail">Per male, with fast and slow trills</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value">21</div>
+          <div class="stat-detail">3 in PNW (oregonus, curtatus, arcticus)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Former Name</div>
+          <div class="stat-value">Rufous-sided</div>
+          <div class="stat-detail">Split from Eastern Towhee in 1995</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 046</p>
+  </footer>
+</body>
+</html>
