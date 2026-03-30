@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Amanita muscaria — Fly Agaric | v1.11 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --failure-deep: #0A0505; --failure-mid: #1A0A0A;
+    --failure-red: #CC2020; --failure-dim: #661010;
+    --warning-amber: #D4A830; --warning-bright: #E8D060;
+    --mushroom-red: #CC3030; --mushroom-white: #F0F0E8;
+    --success-green: #40CC40; --labyrinth: #8A7A6A;
+    --space: #050505; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #3A1A1A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--space);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(204,32,32,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(102,16,16,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(212,168,48,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(204,48,48,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(204,32,32,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(138,122,106,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--failure-red); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--warning-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--failure-deep) 25%, var(--failure-mid) 50%, var(--failure-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--failure-red);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(204,32,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,32,32,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(204,32,32,0.1); border: 1px solid var(--failure-red); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--failure-red); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(204,32,32,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--failure-red); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--warning-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--failure-red); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+  .prose strong { color: var(--warning-bright); }
+  .prose em { color: var(--mushroom-white); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--failure-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(10,5,5,0.3); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(204,32,32,0.08); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--failure-red); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; color: var(--text); }
+  .prose pre { background: rgba(10,5,5,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--failure-red); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(204,32,32,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--failure-red); }
+  .prose pre code { background: none; padding: 0; }
+
+  .sources-section { background: rgba(10,5,5,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources-section h2 { border-bottom-color: var(--failure-dim); }
+  .sources-section h3 { color: var(--failure-red); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card { background: rgba(10,5,5,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--failure-red); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--warning-bright); }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--failure-red); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.11 Explorer 5</a>
+  <span class="sep">/</span>
+  Track 2: Organism Pairing
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.11</span>
+      <span>Explorer 5</span>
+      <span class="track-badge">Track 2</span>
+    </div>
+    <h1><em>Amanita muscaria</em> (Fly Agaric)</h1>
+    <p class="subtitle">The beautiful failure</p>
+    <div class="meta-row">
+      <span><span class="label">Family:</span> Amanitaceae</span>
+      <span><span class="label">Habitat:</span> Under conifers, PNW forests</span>
+      <span><span class="label">Paired with:</span> Explorer 5</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>The Most Recognized Thing in the Forest</h2>
+
+    <p>Walk a trail through the mid-elevation Douglas-fir forests of the western Cascades in October, when the rains have returned after the summer drought and the duff layer is saturated and the mycorrhizal networks below the surface have received the moisture signal that triggers fruiting. Walk slowly. Look at the ground, not the canopy. You will see the ordinary fungi first: the LBMs (little brown mushrooms) that mycologists use as a catch-all for the hundreds of indistinguishable brown-capped species that populate every forest floor; the white oyster mushrooms fanning out from dead alder trunks; the coral fungi branching upward from decaying wood like pale, branching fingers. Then, somewhere along the trail &mdash; at the base of a Douglas-fir, or under a Sitka spruce, or beside a paper birch at the edge of a wetland &mdash; you will see a color that stops you. A red so saturated, so vivid, so unequivocally present against the browns and greens and grays of the autumn forest floor that it looks artificial. It looks like something someone placed there: a Christmas ornament, a painted wooden toy, a prop from a children&rsquo;s book illustration. It does not look like something that grew out of the ground in a forest in Washington State.</p>
+
+    <p><em>Amanita muscaria</em> is the most recognizable mushroom on Earth. Not the most eaten, not the most commercially important, not the most ecologically significant &mdash; but the most recognized. The red cap with white spots is a visual archetype that transcends mycology, transcends biology, transcends the forest entirely. It appears in Super Mario Bros., where it makes the player larger and more powerful. It appears in Lewis Carroll&rsquo;s Alice in Wonderland, where Alice sits on one side and a caterpillar smokes on the other and the mushroom changes the size of whoever eats it. It appears on Christmas cards and holiday decorations throughout northern Europe, a tradition whose origins are debated but whose persistence is not. It appears in emoji sets, in children&rsquo;s book illustrations, in animated films, in video game inventories, on the covers of field guides that use it as shorthand for &ldquo;mushrooms&rdquo; the way a red barn is shorthand for &ldquo;farm.&rdquo; The image of <em>Amanita muscaria</em> is more widely distributed than the organism itself, which is saying something, because the organism itself is distributed across every temperate and boreal forest on the planet.</p>
+
+    <p>The mushroom&rsquo;s fame rests on a paradox. It is famous because it looks dangerous. The bright red cap, the white warts (remnants of the universal veil that enclosed the mushroom in its egg stage), the robust stature, the fairy-tale coloring &mdash; everything about <em>Amanita muscaria</em> says warning. Aposematic coloration: the biological signal that says &ldquo;I am toxic, do not eat me,&rdquo; the same signal used by poison dart frogs, coral snakes, and monarch butterflies. The visual vocabulary of danger, written in primary colors, legible across species boundaries.</p>
+
+    <p>And the warning is honest. <em>Amanita muscaria</em> is toxic. But it is not what most people think it is. It is not the deadly mushroom. It is not the one that kills you.</p>
+
+    <hr>
+
+    <h2>The Toxin That Isn&rsquo;t What You Think</h2>
+
+    <p>The lethal Amanita is not the red one. The lethal Amanita is the drab one &mdash; <em>Amanita phalloides</em>, the death cap, which is greenish-yellow to olive-brown to nearly white, which looks like a dozen other unremarkable mushrooms, which has no bright colors, no warning signals, no fairy-tale associations. <em>Amanita phalloides</em> contains amatoxins: cyclic peptides that inhibit RNA polymerase II, shutting down protein synthesis in the liver and kidneys over a period of days, producing a delayed-onset poisoning that often presents as a false recovery before the final, irreversible organ failure. A single death cap can kill an adult human. Amatoxin poisoning accounts for the vast majority of fatal mushroom poisonings worldwide. The mushroom that actually kills people is quiet, modest in appearance, and easy to mistake for something edible.</p>
+
+    <p><em>Amanita muscaria</em> contains no amatoxins. Its principal bioactive compounds are ibotenic acid and its decarboxylation product, muscimol. Ibotenic acid is a structural analogue of the excitatory neurotransmitter glutamate and acts as an agonist at NMDA glutamate receptors. Muscimol is a structural analogue of the inhibitory neurotransmitter GABA and acts as a potent agonist at GABA-A receptors. The pharmacological profile is complex and dose-dependent: ibotenic acid produces excitation, agitation, and neurotoxicity at high doses (it is used in neuroscience research to create selective lesions in brain tissue), while muscimol produces sedation, altered perception, and a dissociative state that has been described variously as dreamlike, delirious, and deeply disorienting.</p>
+
+    <p>Poisoning by <em>Amanita muscaria</em> is unpleasant. Symptoms typically begin 30 to 90 minutes after ingestion and include nausea, vomiting, drowsiness, confusion, visual disturbances, ataxia (loss of motor coordination), and in some cases a period of agitated delirium followed by deep sleep. The syndrome is called pantherine-muscarine syndrome (named partly for the closely related <em>Amanita pantherina</em>, which contains the same compounds at higher concentrations). Recovery is typical within 12 to 24 hours. Deaths from <em>Amanita muscaria</em> ingestion are rare &mdash; so rare that some mycologists argue the mushroom should not be classified as &ldquo;deadly poisonous&rdquo; but rather as &ldquo;poisonous&rdquo; or &ldquo;toxic,&rdquo; categories that acknowledge the real risk of significant illness without overstating the risk of death.</p>
+
+    <p>The mismatch between the mushroom&rsquo;s terrifying reputation and its actual lethality is the central fact of <em>Amanita muscaria</em>&rsquo;s cultural position. The most dangerous-looking mushroom in the forest is not the most dangerous. The most dangerous mushroom in the forest &mdash; the death cap &mdash; looks like nothing in particular. Appearance and danger are inversely correlated. The organism that screams warning is survivable. The organism that whispers nothing is lethal.</p>
+
+    <p>Explorer 5 was the inverse: a mission that looked like every other successful Explorer launch. Same vehicle, same payload class, same team, same pad. Nothing about the pre-flight or launch sequence signaled failure. The mission that looked like it would work did not work. The design that had succeeded three times &mdash; a proven configuration, a reliable vehicle, a tested procedure &mdash; failed on the fourth attempt because of a hidden flaw that no external assessment could have detected. The Juno I separation mechanism was the <em>Amanita phalloides</em> of the Explorer program: it looked fine, it had performed fine, and it contained a failure mode that was invisible until it killed the mission. Explorer 5 was <em>Amanita muscaria</em> in reverse &mdash; the one that looked safe and failed, where the mushroom looks dangerous and survives.</p>
+
+    <hr>
+
+    <h2>The Breaking of the Universal Veil</h2>
+
+    <p><em>Amanita muscaria</em> begins its life as an egg. Not a biological egg in the avian sense, but a structure called the universal veil: a membrane of tissue that completely encloses the immature mushroom as it develops underground. The universal veil is white, leathery, and opaque. From the outside, the developing mushroom is invisible &mdash; a white sphere in the soil that could be mistaken for a puffball, a rock, a clod of clay. The color, the form, the identity of the organism are all concealed within the veil. Everything that will make <em>Amanita muscaria</em> recognizable &mdash; the red cap, the white stipe, the skirt-like annulus where the partial veil tore away from the cap margin &mdash; is developing inside, unseen.</p>
+
+    <p>As the mushroom matures, the cap expands. The internal pressure of the growing fruiting body pushes outward against the universal veil. The veil stretches, thins, and eventually ruptures. The cap breaks through, carrying fragments of the white veil tissue on its red surface. These fragments are the white warts &mdash; the spots that make <em>Amanita muscaria</em> the mushroom of fairy tales and video games. They are not part of the cap. They are remnants of the structure that concealed the cap. The decoration that makes the mushroom famous is the debris of the barrier it destroyed in order to be born.</p>
+
+    <p>The breaking of the universal veil is a necessary rupture. If the veil does not break, the mushroom cannot expand, cannot release its spores, cannot fulfill its reproductive function. The veil must be torn for the organism to emerge. The rupture is violent in a slow, biological sense &mdash; the tissue separates, fragments are displaced, the smooth white surface of the egg is disrupted and scattered across the cap in the irregular patches that dry into the familiar warts. The breaking is not clean. It is not designed to be clean. It is the price of emergence.</p>
+
+    <p>Explorer 5&rsquo;s failure was an unwanted rupture at a separation boundary. The spinning tub separated from the booster &mdash; the veil tore &mdash; but the separation was not clean. A Sergeant motor contacted the booster body, and the contact disrupted the geometry of the emerging upper stage. Where <em>Amanita muscaria</em>&rsquo;s veil break is a necessary event that enables emergence, Explorer 5&rsquo;s separation failure was a destructive event that prevented it. Both involve a critical break at a transition point. Both involve the passage from one state (enclosed, connected, pre-emergence) to another (free, separated, autonomous). In the mushroom, the break succeeds and the organism emerges into the world with the debris of its former enclosure scattered decoratively across its surface. In the rocket, the break fails and the vehicle re-enters the atmosphere carrying the evidence of its failed emergence encoded in the deviation of its trajectory.</p>
+
+    <p>The parallel runs deeper. The universal veil exists because the developing mushroom is fragile. The immature tissues &mdash; the gills, the spore-bearing surfaces, the cap cuticle with its pigments &mdash; are vulnerable to desiccation, predation, and mechanical damage during the early phase of development. The veil protects them until they are mature enough to withstand exposure. The Juno I&rsquo;s coupling between the spinning tub and the booster served an analogous function: it held the upper stages in the correct orientation, protected from aerodynamic forces, supported by the booster&rsquo;s structure, until the powered phase was complete and the stages were ready to fly on their own. The veil and the coupling both protect a developing system until the moment of release. Both must be shed for the system to function autonomously. Both fail when the shedding goes wrong.</p>
+
+    <hr>
+
+    <h2>The Mycorrhizal Web: The Work That Happens Underground</h2>
+
+    <p>The red cap with white spots is what people see. It is not what the organism does. The fruiting body &mdash; the mushroom, the visible structure above the ground &mdash; is a reproductive organ, a temporary structure produced for the purpose of generating and dispersing spores. It appears for days or weeks, releases its spores to the wind, and decays. The organism itself is underground: a vast, diffuse network of hyphae &mdash; threadlike filaments of fungal tissue &mdash; extending through the soil in a web that can span meters or tens of meters from the base of the mushroom.</p>
+
+    <p><em>Amanita muscaria</em> is ectomycorrhizal. Its hyphae form a sheath around the fine roots of its host trees &mdash; in the Pacific Northwest, primarily Douglas-fir, Sitka spruce, western hemlock, shore pine, and paper birch &mdash; and extend outward from this sheath into the surrounding soil. The interface between fungal hyphae and tree root is a zone of nutrient exchange: the tree provides the fungus with photosynthetically fixed carbon (sugars), and the fungus provides the tree with mineral nutrients &mdash; particularly phosphorus and nitrogen &mdash; that the fungal hyphae can extract from soil particles more efficiently than the tree&rsquo;s roots can alone. The hyphae have a much smaller diameter than root hairs, which allows them to penetrate into soil pore spaces that roots cannot reach, accessing mineral nutrients that would otherwise be unavailable to the tree.</p>
+
+    <p>This exchange is not charity. It is not cooperation in the human sense. It is a metabolic interdependence that has been maintained by selection for approximately 400 million years, since the earliest land plants colonized terrestrial habitats and encountered soil fungi that could extend their effective root systems by orders of magnitude. The mycorrhizal relationship is ancient, ubiquitous, and foundational. Roughly 90 percent of all vascular plant species form mycorrhizal associations of one type or another. The forests of the Pacific Northwest &mdash; the Douglas-fir forests, the hemlock forests, the spruce forests that define the region &mdash; are mycorrhizal forests. The trees that look like independent organisms standing in rows are connected below ground by fungal networks that link root system to root system, tree to tree, species to species, in a web of nutrient transfer that Suzanne Simard and her colleagues have documented extensively and that the popular press has named the &ldquo;wood wide web.&rdquo;</p>
+
+    <p>Explorer 5&rsquo;s real contribution was also invisible. The satellite produced no data. It returned no measurements. It never operated in orbit. But the failure data &mdash; the telemetry that recorded the separation anomaly, the trajectory analysis that identified the spin axis disturbance, the post-flight investigation that traced the cause to mechanical contact during separation &mdash; fed directly into the engineering knowledge base that improved every subsequent mission. The information flowed underground, through technical reports and engineering change orders and design review meetings, from the failed mission to every mission that followed. The flow was invisible to anyone who looked only at the missions that succeeded. The successful missions stood like trees in a forest, their achievements visible above ground. The failure connected them below ground, feeding nutrients into the root systems of vehicles and programs that never knew what they owed to the mission that did not work.</p>
+
+    <p>The mycorrhizal web does not discriminate by species. <em>Amanita muscaria</em> forms ectomycorrhizal associations with Douglas-fir and with birch and with spruce and with pine, and the hyphae of a single Amanita individual can connect trees of different species, creating a cross-species nutrient bridge. Carbon fixed by a Douglas-fir in full sun can, through the mycorrhizal network, reach a hemlock seedling growing in the shade. The network transfers resources from areas of surplus to areas of deficit, not by intention but by the physics of diffusion across concentration gradients. Explorer 5&rsquo;s failure lessons similarly crossed program boundaries. The separation engineering improvements did not stay within the Explorer program. They informed the Juno II separation design, which launched the Pioneer missions. They informed the separation analysis for the Atlas-Agena and Thor-Agena vehicles that launched later Explorer satellites. They entered the body of general staging and separation engineering knowledge that every American launch vehicle program drew upon. The nutrients from the failure fed trees that the failed mission never knew existed.</p>
+
+    <hr>
+
+    <h2>The Insecticide and the Name</h2>
+
+    <p>The common name &ldquo;fly agaric&rdquo; derives from the mushroom&rsquo;s traditional use as an insecticide. The practice, documented across Europe since at least the thirteenth century, involved breaking the cap into pieces and placing them in a saucer of milk. The milk, infused with the mushroom&rsquo;s ibotenic acid and muscimol, attracted flies, which landed on the surface, ingested the liquid, and were stupefied or killed. Albertus Magnus described the practice in his <em>De vegetabilibus</em> (c. 1256), and it persists in folk tradition in parts of Eastern Europe and Scandinavia. The Latin species epithet <em>muscaria</em> is derived from <em>musca</em>, fly, and the common name in virtually every European language reflects the same association: <em>Fliegenpilz</em> (German), <em>tue-mouche</em> (French), <em>mukhamor</em> (Russian, from <em>mukha</em>, fly).</p>
+
+    <p>The fly-killing use is a reminder that human relationships with organisms are rarely simple. <em>Amanita muscaria</em> is simultaneously a cultural icon (fairy tales, video games, Christmas decorations), a pharmacological agent (ibotenic acid and muscimol, studied in neuroscience for their receptor specificity), a folk medicine component (used in small doses as an analgesic and anti-inflammatory in some Siberian traditions), a religious sacrament (the Soma hypothesis, proposed by R. Gordon Wasson in 1968, suggests that <em>Amanita muscaria</em> may have been the Soma of the Rigveda &mdash; a proposal that remains controversial but has never been definitively refuted), an ecological keystone (ectomycorrhizal partner to the dominant conifers of boreal and temperate forests), and a household insecticide. The mushroom occupies all of these roles simultaneously. It does not choose between them. The observer&rsquo;s context determines which role is visible.</p>
+
+    <p>Explorer 5 occupies a similarly multiple position: a failure that was also a lesson, a loss that was also a contribution, a mission that produced no data but generated essential information, a satellite that reached space but did not achieve orbit, a pre-NASA launch that produced post-NASA engineering improvements. The mission cannot be reduced to a single category. It was a failure in the mission success sense and a success in the engineering knowledge sense and a transition point in the institutional sense and a data point in the reliability sense. Like the mushroom, it occupies multiple roles simultaneously, and the observer&rsquo;s frame determines which role is visible.</p>
+
+    <hr>
+
+    <h2>Taxonomy Note</h2>
+
+    <p><em>Amanita muscaria</em> was first described by Carl Linnaeus in 1753 in <em>Species Plantarum</em> as <em>Agaricus muscarius</em>. The French mycologist Jean-Baptiste Lamarck transferred it to the genus <em>Amanita</em> in 1783, establishing the current binomial <em>Amanita muscaria</em> (L.) Lam. The genus name <em>Amanita</em> derives from the Greek <em>amanitai</em>, a term used by the physician Galen for a type of edible fungus, likely referring to the edible species <em>Amanita caesarea</em> (Caesar&rsquo;s mushroom), which was prized as a delicacy in ancient Rome. The species epithet <em>muscaria</em> is from the Latin <em>musca</em>, fly, referring to the mushroom&rsquo;s traditional use as a fly killer.</p>
+
+    <p><em>Amanita muscaria</em> exhibits significant morphological variation across its range, and several varieties or subspecies are recognized. The nominate variety, <em>A. muscaria</em> var. <em>muscaria</em>, is the classic red-capped form with white warts, found across Europe, Asia, and introduced populations worldwide. In the Pacific Northwest, the most common form is <em>A. muscaria</em> var. <em>flavivolvata</em>, which has a red to orange-red cap and yellowish to cream-colored warts (remnants of a yellowish universal veil). Some taxonomists also recognize <em>A. muscaria</em> var. <em>formosa</em> (syn. var. <em>guessowii</em>), found primarily in eastern North America, which has a yellow to orange cap rather than red, and <em>A. muscaria</em> var. <em>alba</em>, a rare white-capped form. The infraspecific taxonomy is unsettled, with ongoing molecular phylogenetic work suggesting that what is currently called <em>Amanita muscaria</em> may represent a species complex rather than a single species.</p>
+
+    <p>The family Amanitaceae is one of the most important families in basidiomycete taxonomy, containing approximately 600 described species in the genus <em>Amanita</em> alone. The family includes the most deadly mushrooms known (<em>A. phalloides</em>, <em>A. virosa</em>, <em>A. ocreata</em> &mdash; the death caps and destroying angels), some of the most prized edible species (<em>A. caesarea</em>, <em>A. jacksonii</em>, <em>A. rubescens</em> when properly prepared), and the most culturally prominent wild mushroom on Earth (<em>A. muscaria</em>). The range of human relationships with <em>Amanita</em> species &mdash; from delicacy to deadly poison to hallucinogen to insecticide &mdash; is wider than for any other fungal genus, a reflection of the genus&rsquo;s chemical diversity, ecological ubiquity, and deep entanglement with human cultures across every continent where temperate forests grow.</p>
+
+    <p>In the Pacific Northwest, <em>Amanita muscaria</em> fruits from late August through November, with peak fruiting in September and October coinciding with the autumn rains. It is found from sea level to the subalpine zone, wherever suitable ectomycorrhizal host trees are present. It is most commonly encountered in Douglas-fir forests, in mixed conifer-birch stands at forest edges and wetland margins, and in young plantation forests where the open canopy provides the light conditions that seem to favor prolific fruiting. The mushroom is unmistakable in the field: no other PNW species has the combination of a large red cap (8 to 20 centimeters in diameter), white warts, a white stipe with a basal bulb enclosed in a volva (the remnant of the universal veil base), and a pendant annulus (the remnant of the partial veil). Misidentification is essentially impossible for anyone who has ever seen a photograph of the species, which, given its ubiquity in popular culture, is approximately everyone.</p>
+
+    <hr>
+
+    <h2>Resonance Axes</h2>
+
+    <h3>1. Beautiful Failure</h3>
+    <p><em>Amanita muscaria</em> is gorgeous but toxic &mdash; it promises something it cannot deliver safely. The red cap, the white spots, the robust stature all signal vitality and presence, but ingestion produces illness and disorientation rather than nourishment. Explorer 5 looked perfect: a proven design, a successful vehicle lineage, a capable instrument suite. It launched cleanly, reached space, and appeared to be working. But a hidden flaw &mdash; the separation contact &mdash; destroyed the mission. Both are failures that look like successes from the outside. Both are beautiful from a distance and broken up close.</p>
+
+    <h3>2. Appearance vs. Reality</h3>
+    <p>The most dangerous-looking mushroom in the forest (<em>Amanita muscaria</em>, with its aposematic red coloring) is not the most lethal. The most lethal (<em>Amanita phalloides</em>, the death cap) looks unremarkable. The most-tested rocket design in the Explorer program (Juno I, with three orbital successes) still failed on the fourth attempt. The configuration that looked safe &mdash; that had earned the right to be considered reliable through repeated success &mdash; harbored a failure mode that surface assessment could not detect. In both cases, surface appearance misleads. The real danger is not where the warning colors are.</p>
+
+    <h3>3. Breaking the Veil</h3>
+    <p><em>Amanita muscaria</em> breaks its universal veil as it emerges from the soil &mdash; a necessary rupture that enables the organism to expand, mature, and release its spores. The white warts on the red cap are debris from this break, carried into the world as evidence of the transition from enclosed to free. Explorer 5&rsquo;s separation failure was an unwanted rupture at the same kind of transition: the moment when the upper stages were supposed to break free of the booster and fly independently. Both involve a critical break at a boundary between states. In the mushroom, the break succeeds and the debris becomes decoration. In the rocket, the break fails and the debris becomes damage.</p>
+
+    <h3>4. Cultural Icon</h3>
+    <p><em>Amanita muscaria</em> is the most famous mushroom in the world despite &mdash; or because of &mdash; its toxicity. It is recognized by people who have never set foot in a forest, have never seen a wild mushroom, and could not identify a single other fungal species. Its fame derives from its visual distinctiveness and its association with altered states, danger, and the liminal. Explorer 5 is remembered precisely because it failed in a specific, instructive way. The successful Explorer missions blur together in historical memory &mdash; Explorer 1 stands out for being first, but Explorers 3 and 4 are specialists&rsquo; knowledge. Explorer 5 is remembered as the failure, the one that didn&rsquo;t make it, the mission whose absence contributed more than its presence would have. Failure, like toxicity, makes an organism memorable.</p>
+
+    <h3>5. The Mycorrhizal Web</h3>
+    <p><em>Amanita muscaria</em>&rsquo;s real work is underground. The visible fruiting body is a temporary reproductive structure; the organism itself is a vast hyphal network in the soil, forming ectomycorrhizal connections with tree roots, exchanging nutrients, linking trees of different species in a subterranean web that sustains the forest above. Explorer 5&rsquo;s real contribution was equally invisible: the failure data that improved separation design for all subsequent missions, the engineering changes that propagated through technical reports and design reviews into vehicles and programs that the public never connected to the failed satellite. The visible work (the launch, the failure, the re-entry) lasted hours. The invisible work (the engineering knowledge) has persisted for decades.</p>
+
+    <h3>6. The Insecticide Paradox</h3>
+    <p><em>Amanita muscaria</em> was used for centuries as a household insecticide &mdash; a practical, mundane application of a pharmacologically complex organism that was simultaneously a cultural icon, a religious sacrament candidate, and a neurological research subject. The organism&rsquo;s multiple roles coexist without contradiction. Explorer 5 similarly defies single categorization: it was a failure, a lesson, a transition point, a data source, and an institutional marker, all simultaneously. Neither organism nor mission can be reduced to one role.</p>
+
+    <div class="sources-section">
+      <h2>Sources</h2>
+
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Michelot, Didier, and Melendez-Howell, Leda Maria. &ldquo;Amanita muscaria: chemistry, biology, toxicology, and ethnomycology.&rdquo; Mycological Research, Vol. 107, No. 2, 2003.</strong> Comprehensive review of Amanita muscaria pharmacology, toxicology, and cultural history.</li>
+        <li><strong>Geml, Jozsef, et al. &ldquo;An environmental DNA barcode for the molecular identification of members of the Amanita muscaria species complex.&rdquo; Molecular Ecology Resources, Vol. 6, No. 4, 2006.</strong> Molecular evidence for the species complex structure of A. muscaria across its global range.</li>
+        <li><strong>Wasson, R. Gordon. &ldquo;Soma: Divine Mushroom of Immortality&rdquo; (Harcourt Brace Jovanovich, 1968).</strong> The Soma hypothesis linking Amanita muscaria to Vedic ritual, controversial but foundational in ethnomycological literature.</li>
+        <li><strong>Tulloss, Rodham E. &ldquo;Amanita muscaria.&rdquo; In: Amanita Studies (online monograph, amanitaceae.org).</strong> Comprehensive taxonomic treatment of A. muscaria varieties and forms, including Pacific Northwest populations.</li>
+      </ul>
+
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Arora, David. &ldquo;Mushrooms Demystified&rdquo; (2nd ed., Ten Speed Press, 1986).</strong> Field identification, toxicology summary, and regional distribution of Amanita muscaria in western North America.</li>
+        <li><strong>Trudell, Steve, and Ammirati, Joe. &ldquo;Mushrooms of the Pacific Northwest&rdquo; (Timber Press, 2009).</strong> Pacific Northwest-specific distribution, habitat, and identification notes for A. muscaria var. flavivolvata.</li>
+        <li><strong>Simard, Suzanne W., et al. &ldquo;Net transfer of carbon between ectomycorrhizal tree species in the field.&rdquo; Nature, Vol. 388, 1997.</strong> Foundational paper documenting inter-tree carbon transfer via mycorrhizal networks, including networks formed by Amanita species.</li>
+        <li><strong>Benjamin, Denis R. &ldquo;Mushrooms: Poisons and Panaceas&rdquo; (W. H. Freeman, 1995).</strong> Clinical toxicology of Amanita muscaria compared with A. phalloides, including case reports and pharmacological analysis.</li>
+        <li><strong>Rubel, William, and Arora, David. &ldquo;A Study of Cultural Bias in Field Guide Determinations of Mushroom Edibility Using the Iconic Mushroom, Amanita muscaria, as an Example.&rdquo; Economic Botany, Vol. 62, No. 3, 2008.</strong> Analysis of how Amanita muscaria&rsquo;s toxicity has been overstated in Western field guides relative to its actual clinical risk.</li>
+        <li><strong>Fericgla, Josep Maria. &ldquo;Fly Agaric in Siberia and the Circumpolar Cultures.&rdquo; Integration: Journal for Mind-Moving Plants and Culture, Vol. 2/3, 1992.</strong> Ethnographic documentation of Amanita muscaria use in Siberian and circumpolar indigenous traditions.</li>
+      </ul>
+
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>GBIF (Global Biodiversity Information Facility) &mdash; Amanita muscaria occurrence records.</strong> Distribution data for Amanita muscaria across its global range, including Pacific Northwest records separated by variety where determined.</li>
+        <li><strong>MycoPortal (mycoportal.org) &mdash; Amanita muscaria herbarium specimens.</strong> North American herbarium records including Pacific Northwest collections with habitat, host tree, and elevation data.</li>
+        <li><strong>iNaturalist &mdash; Amanita muscaria observations, Pacific Northwest region.</strong> Community science occurrence records with photographs, dates, habitats, and geographic coordinates.</li>
+        <li><strong>University of Washington Burke Museum Herbarium &mdash; Amanita muscaria voucher specimens.</strong> Regional collections documenting Pacific Northwest A. muscaria var. flavivolvata distribution and phenology.</li>
+        <li><strong>USDA Forest Inventory and Analysis Database &mdash; Ectomycorrhizal host tree distribution.</strong> Distribution data for Douglas-fir, Sitka spruce, western hemlock, shore pine, and paper birch &mdash; the primary PNW host trees for Amanita muscaria.</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <a href="research.html">&larr; Research</a>
+      <a href="mathematics.html">Mathematics &rarr;</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.11 Explorer 5 + Amanita muscaria &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

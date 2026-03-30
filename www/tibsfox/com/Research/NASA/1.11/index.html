@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.11 — Explorer 5 + Fly Agaric | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --failure-deep: #0A0505; --failure-mid: #1A0A0A;
+    --failure-red: #CC2020; --failure-dim: #661010;
+    --warning-amber: #D4A830; --warning-bright: #E8D060;
+    --mushroom-red: #CC3030; --mushroom-white: #F0F0E8;
+    --success-green: #40CC40; --labyrinth: #8A7A6A;
+    --space: #050505; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #3A1A1A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(204,32,32,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(204,32,32,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(212,168,48,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(204,48,48,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(138,122,106,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(204,32,32,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(10,5,5,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(102,16,16,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--failure-deep) 20%, var(--failure-mid) 40%, var(--failure-dim) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--failure-red);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(204,32,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,32,32,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(204,32,32,0.1); border: 1px solid var(--failure-red); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--failure-red); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--mushroom-white); }
+  .status-failure {
+    background: var(--failure-red); border: 1px solid var(--mushroom-red);
+    color: #fff; padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--failure-red); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(10,5,5,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--warning-bright);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--warning-bright); }
+  .card em { color: var(--mushroom-white); }
+
+  .resonance-card { border-color: var(--failure-red); background: rgba(204,32,32,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(204,32,32,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--failure-red); color: #fff; font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--failure-red); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(10,5,5,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--failure-red); background: rgba(204,32,32,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--failure-red); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--warning-bright); }
+  .track-card.t2 .track-title { color: var(--mushroom-white); }
+  .track-card.t3 .track-title { color: var(--failure-red); }
+  .track-card.t4 .track-title { color: var(--warning-bright); }
+  .track-card.t5 .track-title { color: #7EB8DA; }
+  .track-card.t6 .track-title { color: var(--mushroom-white); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(204,48,48,0.08); border: 1px solid var(--failure-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--failure-red); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--mushroom-white); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(10,5,5,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--failure-red); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(11,61,145,0.12); border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: #7EB8DA; text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(11,61,145,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(10,5,5,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--failure-red); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--warning-bright); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--failure-red); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.11</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-failure">MISSION FAILED</span>
+    </div>
+    <h1>v1.11 &mdash; Explorer 5 + <em>Amanita muscaria</em></h1>
+    <p class="subtitle">The One That Didn&rsquo;t &mdash; A Study in Beautiful Failure</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> Aug 24, 1958</span>
+      <span><span class="label">Program:</span> Explorer (ABMA / JPL)</span>
+      <span><span class="label">Status:</span> FAILURE</span>
+      <span><span class="label">Organism:</span> Fly agaric</span>
+      <span><span class="label">Bird:</span> Townsend&rsquo;s Warbler</span>
+      <span><span class="label">Dedication:</span> Jorge Luis Borges (Aug 24, 1899)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On August 24, 1958, Explorer 5 launched from Cape Canaveral on a Juno I vehicle carrying improved radiation instruments designed by James Van Allen&rsquo;s team. The mission was the fifth in the Explorer series and aimed to continue the mapping of the Van Allen radiation belts. The first stage performed nominally. Then the upper stages separated from the booster, and the mission ended.</p>
+      <p>One of the spinning upper stage Sergeant rockets contacted the booster body during separation. The contact applied an off-axis torque to the spinning cluster, tilting its spin axis. Every subsequent motor firing drove the satellite in the wrong direction. Explorer 5 reached space but followed a ballistic arc rather than an orbit. The satellite, the instruments, the improved tape recorder &mdash; all burned up on re-entry. <strong>No data was returned. No orbit was achieved.</strong></p>
+      <p>But the failure taught more than success could have. The separation clearance margins were redesigned. The tolerance analysis was expanded. The engineering changes improved every vehicle that came after it. Explorer 5 is the thinnest book in the library of Explorer program technical reports &mdash; and among the most cited. In information theory, the surprise is the information. Explorer 5 was highly informative.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The One That Didn&rsquo;t</div>
+            <div class="track-desc">The spinning separation, the recurring flaw, five weeks before NASA, the Library of All Possible Failures, Borges and the labyrinth</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">Medaris (1960), Monte Carlo separation dynamics, Bayesian reliability, <em>A. muscaria</em> phylogenomics</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Amanita muscaria</em></div>
+            <div class="track-desc">The beautiful failure &mdash; the most recognized mushroom on Earth, appearance vs reality, breaking the veil, the mycorrhizal web</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Failure</div>
+            <div class="track-desc">Spin axis perturbation, separation clearance geometry, Bayesian failure mode analysis, information gain</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Mechanical Engineering, Reliability, Philosophy of Failure. Separation test TRY. Failure analysis board. Failure timeline DIY.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Train, Visualize, Create</div>
+            <div class="track-desc">Spin-separation dynamics, Monte Carlo reliability, interactive web sim, fault tree, ML failure prediction, Borges labyrinth art</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Beautiful Failure</div>
+          <em>Amanita muscaria</em> is gorgeous but toxic &mdash; it promises something it cannot deliver safely. Explorer 5 looked perfect: proven design, successful lineage, capable instruments. Both are failures that look like successes from the outside.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Appearance vs. Reality</div>
+          The most dangerous-looking mushroom (red + white spots) is not the most lethal. The most-tested rocket design still failed. Surface appearance misleads. The real danger is not where the warning colors are.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Breaking the Veil</div>
+          <em>A. muscaria</em> breaks its universal veil as it emerges &mdash; a necessary rupture. The white warts are debris from this break. Explorer 5&rsquo;s separation was an unwanted rupture at the same kind of transition. In the mushroom, debris becomes decoration. In the rocket, debris becomes damage.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Cultural Icon</div>
+          <em>A. muscaria</em> is the most famous mushroom despite &mdash; or because of &mdash; its toxicity. Explorer 5 is remembered precisely because it failed. Failure, like toxicity, makes an organism memorable.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">The Mycorrhizal Web</div>
+          The mushroom&rsquo;s real work is underground: a vast hyphal network exchanging nutrients, linking trees. Explorer 5&rsquo;s real contribution was equally invisible: failure data that improved separation design for all subsequent missions.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <div class="axis-title">The Insecticide Paradox</div>
+          <em>A. muscaria</em> was used for centuries as a household insecticide &mdash; a mundane application of a complex organism. Explorer 5 similarly defies single categorization: failure, lesson, transition point, data source, institutional marker &mdash; all simultaneously.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-one-that-didnt.html" style="color: var(--failure-red);">Story: &ldquo;The One That Didn&rsquo;t&rdquo;</a>
+          <a href="artifacts/stories/the-one-that-didnt.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; The separation failure, told from the telemetry console
+        </li>
+        <li><a href="artifacts/audio/explorer5-failure-synth.dsp" style="color: #7EB8DA;">Audio: Explorer 5 Failure Synth</a> &mdash; FAUST synth, nutation wobble sonification (VST/LV2)</li>
+        <li><a href="artifacts/audio/townsends-warbler.dsp" style="color: #7EB8DA;">Audio: Townsend&rsquo;s Warbler</a> &mdash; FAUST synth, warbler song in conifer canopy (VST/LV2)</li>
+        <li><a href="artifacts/circuits/led-fault-indicator.md" style="color: var(--failure-red);">Circuit: LED Fault Indicator</a> &mdash; Visual fault tree indicator with LEDs</li>
+        <li><a href="artifacts/circuits/radio-bfo.md" style="color: var(--failure-red);">Circuit: Radio BFO</a> &mdash; Beat frequency oscillator for CW reception</li>
+        <li><a href="artifacts/screensaver/explorer5-screensaver.frag" style="color: var(--warning-bright);">Screensaver: Explorer 5</a> &mdash; GLSL fragment shader, spinning separation and nutation</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><a href="artifacts/simulations/python/separation-dynamics.py" style="color: var(--failure-red);">Python: Separation Dynamics</a> &mdash; Spin-separation contact, nutation, trajectory deviation</li>
+        <li><a href="artifacts/simulations/python/reliability-analysis.py" style="color: var(--failure-red);">Python: Reliability Analysis</a> &mdash; Monte Carlo failure probability, sensitivity tornado</li>
+        <li><a href="artifacts/simulations/web/separation-sim.html" style="color: #7EB8DA;">Web: Interactive Separation Simulator</a> &mdash; Adjust parameters, watch contact events</li>
+        <li><a href="artifacts/simulations/web/fault-tree.html" style="color: #7EB8DA;">Web: Fault Tree Analysis</a> &mdash; Expand/collapse nodes, minimal cut sets</li>
+        <li><a href="artifacts/simulations/spice/separation-impulse.cir" style="color: var(--warning-bright);">SPICE: Separation Impulse</a> &mdash; Mechanical impulse model (ngspice)</li>
+        <li><a href="artifacts/simulations/spice/bfo-oscillator.cir" style="color: var(--warning-bright);">SPICE: BFO Oscillator</a> &mdash; Beat frequency oscillator circuit (ngspice)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: #7EB8DA;">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(212,168,48,0.04); border-color: var(--warning-amber);">
+      <h2 style="color: var(--warning-amber);">Dedication: Jorge Luis Borges</h2>
+      <p><strong>Born August 24, 1899 &mdash; Died June 14, 1986</strong></p>
+      <p>Borges was born exactly 59 years before Explorer 5 failed to reach orbit. He spent his literary career constructing labyrinths &mdash; not physical mazes, but conceptual ones: spaces containing all possibilities, all paths, all outcomes. The Library of Babel, the Garden of Forking Paths, the infinite mirrors. Explorer 5 entered the Borgesian labyrinth at the moment of separation. Every possible trajectory was available. The contact collapsed the superposition into a single outcome: failure.</p>
+      <p>Borges went blind gradually, until as director of the National Library of Argentina he could no longer read the books in his charge. God granted him, simultaneously, the books and the night. Explorer 5 was granted, simultaneously, the instruments and the trajectory in which to not use them. The scintillation counters and the ballistic arc. The tape recorder and the re-entry. The library and the blindness.</p>
+      <p style="font-style: italic; color: var(--text-dim);">&ldquo;In all fictions, when a man is confronted with alternatives, he chooses one at the expense of the others.&rdquo; &mdash; Jorge Luis Borges, &ldquo;The Garden of Forking Paths&rdquo;</p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.10/index.html">&larr; v1.10 Explorer 4</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.12/index.html">v1.12 Explorer 7 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Amanita muscaria (Fly Agaric)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">8&ndash;20 cm</div>
+          <div class="stat-label">Cap Diameter</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Toxic</div>
+          <div class="stat-label">Not Lethal</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Boreal</div>
+          <div class="stat-label">+ Temperate</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Ecto-</div>
+          <div class="stat-label">Mycorrhizal</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        The most recognizable mushroom on Earth. Red cap with white warts &mdash; remnants of the universal veil. Ectomycorrhizal with conifers and birch throughout the PNW. Toxic but rarely lethal. The beautiful failure: looks dangerous, survives. The death cap (<em>A. phalloides</em>) looks harmless and kills.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(204,48,48,0.06); border-color: var(--failure-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mushroom-white); margin-bottom: 0.5rem;">Bird: Townsend&rsquo;s Warbler</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em>Setophaga townsendi</em> (degree 11). Forages in the canopy of PNW conifer forests where <em>A. muscaria</em> fruits on the forest floor. Canopy and root darkness, the same forest column. Both essential to the forest&rsquo;s function.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: Explorer 5</a>
+      <a href="https://www.nasa.gov/history/">NASA History Office</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://www.gbif.org/">GBIF: A. muscaria Records</a>
+      <a href="https://mycoportal.org/">MycoPortal Herbarium Data</a>
+    </div>
+
+    <div class="card" style="background: rgba(11,61,145,0.08); border-color: rgba(11,61,145,0.3);">
+      <h3 style="font-size: 0.9rem; color: #7EB8DA; margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        Mechanical Engineering &middot; Reliability Engineering &middot; Philosophy of Failure &middot; Mycology &middot; Mathematics &middot; Literature &middot; Game Theory &middot; Information Theory &middot; Computer Science
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(10,5,5,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--failure-red); margin-bottom: 0.5rem;">Catalog Position</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim);">
+        Mission 12 of 720 &middot; Epoch 1 (Early Space Age) &middot; August 24, 1958
+      </p>
+      <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">
+        <strong style="color: var(--warning-bright);">Thesis:</strong> Failure is the most efficient teacher available. Explorer 5 returned no data, reached no orbit, and contributed more to American launch vehicle engineering than any of the three successful Explorers before it. The separation mechanism that killed the mission was redesigned, and the lessons propagated through every subsequent staging interface.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(10,5,5,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--warning-amber); margin-bottom: 0.5rem;">Explorer 5 Specifications</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        <strong style="color: var(--warning-bright);">Mass:</strong> ~8.4 kg (payload) &middot;
+        <strong style="color: var(--warning-bright);">Launch:</strong> Juno I &middot;
+        <strong style="color: var(--warning-bright);">Orbit:</strong> NONE &middot;
+        <strong style="color: var(--warning-bright);">Spin Rate:</strong> ~750 rpm &middot;
+        <strong style="color: var(--warning-bright);">Instruments:</strong> GM counter + micrometeorite detector &middot;
+        <strong style="color: var(--warning-bright);">Data:</strong> 0 days &middot;
+        <strong style="color: var(--warning-bright);">Failure:</strong> Separation contact, suborbital re-entry
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.11 Explorer 5 + Amanita muscaria &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+  <p style="margin-top: 0.5rem;"><em style="color: var(--mushroom-white);">&ldquo;The volume in the library is thin. But it is among the most cited.&rdquo;</em></p>
+</footer>
+
+</body>
+</html>

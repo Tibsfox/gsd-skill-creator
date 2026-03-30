@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 5 — Stage Separation Simulator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050505;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #sim-canvas { flex: 1; }
+  #panel {
+    width: 300px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 13px; color: #D4A830; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #40CC40; font-weight: bold; }
+  .box .fail { color: #CC2020; font-weight: bold; }
+  .box .warn { color: #D4A830; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  .control-group input[type="range"] { width: 100%; accent-color: #D4A830; }
+  .marker { font-size: 8px; display: flex; justify-content: space-between; color: #666; }
+  button {
+    background: #151530;
+    color: #D4A830;
+    border: 1px solid #D4A830;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+  }
+  button:hover { background: #252540; }
+  button.launch { border-color: #40CC40; color: #40CC40; font-weight: bold; }
+  button.launch:hover { background: #153015; }
+  .stats-row { display: flex; justify-content: space-between; font-size: 10px; }
+  .instructions { font-size: 9px; color: #666; text-align: center; line-height: 1.4; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>EXPLORER 5 SEPARATION</h1>
+    <h2>Juno I Stage Separation Simulator</h2>
+
+    <div class="box">
+      <div class="stats-row"><span class="label">Status:</span> <span id="status" class="value">READY</span></div>
+      <div class="stats-row"><span class="label">Phase:</span> <span id="phase" class="warn">Pre-launch</span></div>
+      <div class="stats-row"><span class="label">Time:</span> <span id="time" class="value">T-0:00</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Clearance (cm): <span id="clearance-val">5.0</span></label>
+      <input type="range" id="clearance" min="0.5" max="10" step="0.1" value="5.0">
+      <div class="marker"><span>0.5 cm</span><span>10 cm</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Spin Rate (RPM): <span id="spin-val">450</span></label>
+      <input type="range" id="spin" min="200" max="600" step="10" value="450">
+      <div class="marker"><span>200</span><span>600</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Spring Force (N): <span id="spring-val">500</span></label>
+      <input type="range" id="spring" min="200" max="800" step="10" value="500">
+      <div class="marker"><span>200</span><span>800</span></div>
+    </div>
+
+    <button class="launch" id="btn-launch">LAUNCH</button>
+    <button id="btn-reset">RESET</button>
+
+    <div class="box">
+      <div class="stats-row"><span class="label">Launches:</span> <span id="launches" class="value">0</span></div>
+      <div class="stats-row"><span class="label">Successes:</span> <span id="successes" class="value">0</span></div>
+      <div class="stats-row"><span class="label">Failures:</span> <span id="failures" class="fail">0</span></div>
+      <div class="stats-row"><span class="label">Failure Rate:</span> <span id="rate" class="warn">--%</span></div>
+    </div>
+
+    <div class="box">
+      <div style="font-size:9px; color:#888;">
+        <strong style="color:#D4A830;">Nutation:</strong> <span id="nutation">0.0 deg</span><br>
+        <strong style="color:#D4A830;">Eff. Clearance:</strong> <span id="eff-clear">-- cm</span><br>
+        <strong style="color:#D4A830;">Sep. Velocity:</strong> <span id="sep-vel">-- m/s</span>
+      </div>
+    </div>
+
+    <div class="instructions">
+      Adjust clearance, spin rate, and spring force.<br>
+      Press LAUNCH to simulate separation.<br>
+      Watch the spinning tub separate from the booster.<br>
+      Low clearance → higher contact probability.<br><br>
+      Explorer 5 failed at ~1 cm clearance.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+
+// Controls
+const clearanceSlider = document.getElementById('clearance');
+const spinSlider = document.getElementById('spin');
+const springSlider = document.getElementById('spring');
+const btnLaunch = document.getElementById('btn-launch');
+const btnReset = document.getElementById('btn-reset');
+
+// Display elements
+const elStatus = document.getElementById('status');
+const elPhase = document.getElementById('phase');
+const elTime = document.getElementById('time');
+const elLaunches = document.getElementById('launches');
+const elSuccesses = document.getElementById('successes');
+const elFailures = document.getElementById('failures');
+const elRate = document.getElementById('rate');
+const elNutation = document.getElementById('nutation');
+const elEffClear = document.getElementById('eff-clear');
+const elSepVel = document.getElementById('sep-vel');
+
+// Slider value displays
+clearanceSlider.oninput = () => document.getElementById('clearance-val').textContent = clearanceSlider.value;
+spinSlider.oninput = () => document.getElementById('spin-val').textContent = spinSlider.value;
+springSlider.oninput = () => document.getElementById('spring-val').textContent = springSlider.value;
+
+// State
+let state = 'idle';
+let simTime = 0;
+let stats = { launches: 0, successes: 0, failures: 0 };
+
+// Simulation objects
+let booster = { x: 0, y: 0, w: 60, h: 200 };
+let tub = { x: 0, y: 0, w: 50, h: 60, vy: 0, angle: 0, spin: 0, nutation: 0, nutPhase: 0 };
+let contact = false;
+let contactFlash = 0;
+let trail = [];
+let nominalTrail = [];
+
+function resize() {
+  canvas.width = canvas.parentElement.clientWidth - 300;
+  canvas.height = canvas.parentElement.clientHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function reset() {
+  state = 'idle';
+  simTime = 0;
+  contact = false;
+  contactFlash = 0;
+  trail = [];
+  nominalTrail = [];
+
+  const cx = canvas.width / 2;
+  const cy = canvas.height * 0.6;
+  booster.x = cx;
+  booster.y = cy;
+  tub.x = cx;
+  tub.y = cy - booster.h / 2 - tub.h / 2 - 2;
+  tub.vy = 0;
+  tub.angle = 0;
+  tub.spin = 0;
+  tub.nutation = 0;
+  tub.nutPhase = 0;
+
+  elStatus.textContent = 'READY';
+  elStatus.className = 'value';
+  elPhase.textContent = 'Pre-launch';
+  elTime.textContent = 'T-0:00';
+  elNutation.textContent = '0.0 deg';
+  elEffClear.textContent = '-- cm';
+  elSepVel.textContent = '-- m/s';
+}
+
+function launch() {
+  if (state !== 'idle') return;
+
+  const clearance_cm = parseFloat(clearanceSlider.value);
+  const spinRate = parseFloat(spinSlider.value);
+  const springForce = parseFloat(springSlider.value);
+
+  // Randomize within tolerances
+  const clearanceActual = clearance_cm + (Math.random() - 0.5) * 2.0; // ±1 cm
+  const flex = Math.abs((Math.random() - 0.3) * 1.0); // 0-0.7 cm flex
+  const eccentricity = Math.abs(Math.random() * 0.5); // 0-0.5 cm
+
+  const effectiveClearance = clearanceActual - flex - eccentricity * (spinRate / 450);
+
+  contact = effectiveClearance < 0.5; // contact if < 0.5 cm effective
+
+  const sepVelocity = springForce * 0.05 / 80; // simplified
+  tub.vy = -sepVelocity * 60; // pixels per frame
+
+  tub.spin = spinRate;
+  tub.nutation = 0;
+
+  state = 'separating';
+  simTime = 0;
+  trail = [];
+  nominalTrail = [];
+
+  stats.launches++;
+
+  elEffClear.textContent = effectiveClearance.toFixed(1) + ' cm';
+  elSepVel.textContent = sepVelocity.toFixed(2) + ' m/s';
+  elLaunches.textContent = stats.launches;
+
+  elStatus.textContent = 'ACTIVE';
+  elStatus.className = 'warn';
+  elPhase.textContent = 'Separation';
+}
+
+btnLaunch.addEventListener('click', launch);
+btnReset.addEventListener('click', () => {
+  stats = { launches: 0, successes: 0, failures: 0 };
+  elLaunches.textContent = '0';
+  elSuccesses.textContent = '0';
+  elFailures.textContent = '0';
+  elRate.textContent = '--%';
+  reset();
+});
+
+function update() {
+  if (state === 'idle') return;
+
+  simTime += 1/60;
+  elTime.textContent = 'T+' + simTime.toFixed(1) + 's';
+
+  if (state === 'separating') {
+    tub.y += tub.vy;
+    tub.vy *= 0.998; // slight decel
+
+    // Record nominal trail
+    nominalTrail.push({ x: canvas.width / 2, y: tub.y });
+
+    if (contact && simTime > 0.3 && simTime < 0.5) {
+      // Contact event
+      contactFlash = 1.0;
+      tub.nutation = 5 + Math.random() * 15; // 5-20 degrees
+      state = 'tumbling';
+      elPhase.textContent = 'CONTACT — NUTATION';
+      elStatus.textContent = 'FAILURE';
+      elStatus.className = 'fail';
+    }
+
+    if (!contact && simTime > 2.0) {
+      state = 'nominal';
+      elPhase.textContent = 'Clean Separation';
+      elStatus.textContent = 'NOMINAL';
+      elStatus.className = 'value';
+    }
+
+    // Check if off screen
+    if (tub.y < -100) {
+      if (!contact) {
+        stats.successes++;
+        elSuccesses.textContent = stats.successes;
+      }
+      finishSim();
+    }
+  }
+
+  if (state === 'tumbling') {
+    tub.nutPhase += 0.08;
+    tub.nutation = Math.min(tub.nutation * 1.003, 45); // growing nutation
+    tub.angle = Math.sin(tub.nutPhase) * tub.nutation * Math.PI / 180;
+
+    // Deviated trajectory
+    tub.x += Math.sin(tub.angle) * 1.5;
+    tub.y += tub.vy * Math.cos(tub.angle);
+    tub.vy *= 0.997;
+
+    trail.push({ x: tub.x, y: tub.y });
+
+    elNutation.textContent = tub.nutation.toFixed(1) + ' deg';
+
+    // Tumble for a few seconds then end
+    if (simTime > 5.0) {
+      stats.failures++;
+      elFailures.textContent = stats.failures;
+      finishSim();
+    }
+  }
+
+  if (state === 'nominal') {
+    tub.y += tub.vy;
+    tub.vy *= 0.998;
+    nominalTrail.push({ x: tub.x, y: tub.y });
+
+    if (simTime > 4.0) {
+      stats.successes++;
+      elSuccesses.textContent = stats.successes;
+      finishSim();
+    }
+  }
+
+  if (contactFlash > 0) contactFlash *= 0.95;
+}
+
+function finishSim() {
+  state = 'done';
+  const rate = stats.launches > 0 ?
+    (stats.failures / stats.launches * 100).toFixed(1) : '--';
+  elRate.textContent = rate + '%';
+  elPhase.textContent = 'Complete';
+
+  // Auto-reset after 2 seconds
+  setTimeout(reset, 2000);
+}
+
+function draw() {
+  ctx.fillStyle = '#050505';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Stars
+  for (let i = 0; i < 80; i++) {
+    const sx = ((i * 137.5) % canvas.width);
+    const sy = ((i * 251.3) % canvas.height);
+    const sb = 0.2 + Math.sin(simTime * 0.5 + i) * 0.1;
+    ctx.fillStyle = `rgba(200,200,220,${sb})`;
+    ctx.fillRect(sx, sy, 1, 1);
+  }
+
+  // Contact flash
+  if (contactFlash > 0.01) {
+    ctx.fillStyle = `rgba(255,200,100,${contactFlash * 0.3})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  // Nominal trajectory trail (green dashed)
+  if (nominalTrail.length > 1) {
+    ctx.strokeStyle = 'rgba(64,204,64,0.3)';
+    ctx.setLineDash([4, 4]);
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(nominalTrail[0].x, nominalTrail[0].y);
+    for (let i = 1; i < nominalTrail.length; i++) {
+      ctx.lineTo(nominalTrail[i].x, nominalTrail[i].y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Failure trajectory trail (red)
+  if (trail.length > 1) {
+    ctx.strokeStyle = 'rgba(204,32,32,0.5)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(trail[0].x, trail[0].y);
+    for (let i = 1; i < trail.length; i++) {
+      ctx.lineTo(trail[i].x, trail[i].y);
+    }
+    ctx.stroke();
+  }
+
+  // Booster body
+  ctx.save();
+  ctx.fillStyle = '#333344';
+  ctx.strokeStyle = '#555';
+  ctx.lineWidth = 2;
+  ctx.fillRect(booster.x - booster.w/2, booster.y - booster.h/2,
+               booster.w, booster.h);
+  ctx.strokeRect(booster.x - booster.w/2, booster.y - booster.h/2,
+                 booster.w, booster.h);
+  // Engine nozzle
+  ctx.fillStyle = '#222';
+  ctx.fillRect(booster.x - 15, booster.y + booster.h/2, 30, 20);
+  // Label
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('BOOSTER', booster.x, booster.y + 10);
+  ctx.restore();
+
+  // Spinning tub
+  ctx.save();
+  ctx.translate(tub.x, tub.y);
+  ctx.rotate(tub.angle);
+
+  // Tub body
+  let tubColor = '#445544';
+  if (state === 'tumbling') tubColor = '#664444';
+  ctx.fillStyle = tubColor;
+  ctx.strokeStyle = contact && state === 'tumbling' ? '#CC2020' : '#40CC40';
+  ctx.lineWidth = 2;
+  ctx.fillRect(-tub.w/2, -tub.h/2, tub.w, tub.h);
+  ctx.strokeRect(-tub.w/2, -tub.h/2, tub.w, tub.h);
+
+  // Spin indication — rotating marks
+  const spinAngle = simTime * (tub.spin / 60) * Math.PI * 2;
+  for (let i = 0; i < 4; i++) {
+    const a = spinAngle + i * Math.PI / 2;
+    const mx = Math.cos(a) * tub.w * 0.35;
+    const my = Math.sin(a) * 5;
+    ctx.fillStyle = '#D4A830';
+    ctx.beginPath();
+    ctx.arc(mx, my, 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Label
+  ctx.fillStyle = '#aaa';
+  ctx.font = '8px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('TUB', 0, 4);
+  ctx.restore();
+
+  // Clearance indicator
+  if (state !== 'idle') {
+    const gap = (booster.y - booster.h/2) - (tub.y + tub.h/2);
+    if (gap > 0 && gap < 200) {
+      ctx.strokeStyle = '#D4A830';
+      ctx.setLineDash([2, 2]);
+      ctx.lineWidth = 1;
+      const indicX = booster.x + booster.w/2 + 15;
+      ctx.beginPath();
+      ctx.moveTo(indicX, booster.y - booster.h/2);
+      ctx.lineTo(indicX, tub.y + tub.h/2);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#D4A830';
+      ctx.font = '9px monospace';
+      ctx.textAlign = 'left';
+      ctx.fillText((gap/10).toFixed(1) + ' cm', indicX + 5,
+                   (booster.y - booster.h/2 + tub.y + tub.h/2) / 2);
+    }
+  }
+
+  // Contact flash spark
+  if (contactFlash > 0.1) {
+    const sparkX = booster.x + booster.w/2;
+    const sparkY = booster.y - booster.h/2;
+    ctx.fillStyle = `rgba(255,200,50,${contactFlash})`;
+    ctx.beginPath();
+    ctx.arc(sparkX, sparkY, 15 * contactFlash, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // HUD text
+  ctx.fillStyle = '#888';
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('Explorer 5 — Juno I Separation Simulator', 10, 20);
+  ctx.fillText('August 24, 1958', 10, 35);
+  if (state === 'tumbling') {
+    ctx.fillStyle = '#CC2020';
+    ctx.font = '14px monospace';
+    ctx.fillText('SEPARATION FAILURE — NUTATION DETECTED', 10, 55);
+  } else if (state === 'nominal') {
+    ctx.fillStyle = '#40CC40';
+    ctx.font = '14px monospace';
+    ctx.fillText('NOMINAL SEPARATION — ORBIT INSERTION', 10, 55);
+  }
+}
+
+function loop() {
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+
+reset();
+loop();
+</script>
+</body>
+</html>

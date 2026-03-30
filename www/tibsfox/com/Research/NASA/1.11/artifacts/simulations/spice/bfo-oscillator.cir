@@ -1,0 +1,152 @@
+* Beat Frequency Oscillator — Colpitts BFO at 454 kHz
+* =========================================================================
+* Mission 1.11 — Explorer 5 (Juno I / ABMA), August 24, 1958
+* Progressive Radio Series v1.11: BFO for CW/SSB Reception
+*
+* A Colpitts oscillator at approximately 454 kHz generates the BFO
+* signal. When mixed with a 455 kHz IF signal, the difference
+* frequency produces a 1 kHz audible beat note — the classic sound
+* of CW (Morse code) reception.
+*
+* Circuit:
+*   Q1 = 2N3904 NPN transistor (Colpitts active device)
+*   L1 = 520 uH inductor (BFO tank coil, slug-tuned)
+*   C1 = 470 pF (Colpitts divider upper)
+*   C2 = 470 pF (Colpitts divider lower)
+*   C3 = 100 pF (output coupling)
+*   C_tune = 22 pF (fine tuning — shifts BFO ~1 kHz below IF)
+*   R1 = 10K (collector load)
+*   R2 = 47K (base bias upper)
+*   R3 = 10K (base bias lower)
+*   R4 = 1K (emitter stabilization)
+*   C4 = 10nF (emitter bypass)
+*
+* The BFO output is mixed with a 455 kHz IF reference signal
+* to demonstrate the heterodyne principle. The mixer output
+* contains the 1 kHz difference tone.
+*
+* Run: ngspice -b bfo-oscillator.cir
+* =========================================================================
+
+.title Explorer 5 — BFO Colpitts Oscillator at 454 kHz
+
+* --- Power Supply ---
+Vcc vcc 0 DC 9
+
+* --- Transistor Model ---
+.model Q2N3904 NPN(Is=6.734f Bf=416.4 Nf=1.0 Vaf=74.03
++ Ikf=66.78m Ise=6.734f Ne=1.259 Br=0.7389 Nr=1
++ Var=28 Ikr=0 Isc=0 Nc=2 Rb=10 Rc=1 Cje=3.638p
++ Vje=0.65 Mje=0.33 Cjc=4.493p Vjc=0.4 Mjc=0.3
++ Tf=301.2p Tr=239.5n)
+
+* =========================================================================
+* STAGE 1: Colpitts BFO Oscillator (~454 kHz)
+* =========================================================================
+* The Colpitts topology uses the capacitive voltage divider (C1, C2)
+* as the feedback network. The resonant frequency is approximately:
+*   f = 1 / (2*pi*sqrt(L1 * Cs))
+*   where Cs = C1*C2/(C1+C2) + C_tune = 235 pF + 22 pF = 257 pF
+*   f = 1 / (2*pi*sqrt(520e-6 * 257e-12))
+*     = 1 / (2*pi*sqrt(1.336e-16))
+*     = 1 / (2*pi * 3.656e-7)
+*     ≈ 435 kHz (approximate — coil slug adjusts to 454 kHz)
+
+* Bias network
+R_bias_upper vcc base_bias 47k
+R_bias_lower base_bias 0 10k
+* Collector load
+R_coll vcc collector 10k
+
+* Transistor
+Q1 collector base_bias emitter Q2N3904
+
+* Emitter stabilization
+R_emit emitter 0 1k
+C_bypass emitter 0 10n
+
+* Tank circuit (Colpitts: L between collector and tap, C divider)
+* L1 connected from collector to the C1/C2 junction
+L1 collector tank_tap 520u IC=0.001
+* Colpitts capacitor divider
+C1 tank_tap emitter 470p
+C2 tank_tap 0 470p
+* Fine tuning capacitor (shifts frequency down by ~1 kHz)
+C_tune tank_tap 0 22p
+
+* Output coupling
+C_out collector bfo_out 100p
+R_load bfo_out 0 10k
+
+* =========================================================================
+* STAGE 2: IF Reference Signal (455 kHz)
+* =========================================================================
+* This represents the IF signal from the receiver's IF amplifier.
+* In a real receiver, this would come from the IF amp output.
+* Here we model it as a simple sine source at 455 kHz.
+
+V_IF if_signal 0 SIN(0 0.5 455k 0 0)
+
+* =========================================================================
+* STAGE 3: Simple Mixer (Product Detector)
+* =========================================================================
+* The BFO signal and IF signal are combined in a product detector.
+* We model this with a behavioral source that multiplies them.
+* The output contains f_sum (909 kHz) and f_diff (1 kHz).
+
+* Behavioral mixer: Vmix = V(bfo_out) * V(if_signal)
+B_mixer mix_out 0 V = V(bfo_out) * V(if_signal)
+
+* Low-pass filter to extract the audio beat note (~1 kHz)
+* Simple RC: R=10k, C=10nF → f_c = 1/(2*pi*10k*10n) ≈ 1.6 kHz
+R_lpf mix_out audio_out 10k
+C_lpf audio_out 0 10n
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* Transient analysis: 5 ms to see several oscillation cycles
+* and the 1 kHz beat note (need at least 1 ms to see one beat cycle)
+.tran 0.1u 5m 0 0.1u
+
+* Print key waveforms
+.control
+  run
+
+  * Plot 1: BFO oscillator output
+  set color0 = white
+  set color1 = rgb:40:cc:40
+  set color2 = rgb:cc:20:20
+  set color3 = rgb:d4:a8:30
+
+  plot v(bfo_out) title 'BFO Output (~454 kHz)'
+
+  * Plot 2: IF reference
+  plot v(if_signal) title 'IF Signal (455 kHz)'
+
+  * Plot 3: Mixer output (raw)
+  plot v(mix_out) title 'Mixer Output (sum + difference)'
+
+  * Plot 4: Audio output (filtered — 1 kHz beat note)
+  plot v(audio_out) title 'Audio Beat Note (~1 kHz)'
+
+  * Plot 5: BFO and IF overlaid to show the beat
+  plot v(bfo_out) v(if_signal) title 'BFO vs IF — Frequency Difference'
+
+  * Spectrum analysis of the audio output
+  * Use the last 2ms of data for cleaner FFT
+  linearize
+  let audio_spec = mag(fft(v(audio_out)))
+  plot audio_spec xlimit 0 10k title 'Audio Spectrum — Beat Note'
+
+  * Print oscillator frequency measurement
+  meas tran bfo_period trig v(bfo_out) val=0 rise=10 targ v(bfo_out) val=0 rise=11
+  echo "BFO period: $&bfo_period seconds"
+  let bfo_freq = 1/bfo_period
+  echo "BFO frequency: $&bfo_freq Hz"
+  echo "Expected beat note: approximately |455000 - $&bfo_freq| Hz"
+
+.endc
+
+.end

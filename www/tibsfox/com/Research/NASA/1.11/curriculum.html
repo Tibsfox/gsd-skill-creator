@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.11 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --failure-deep: #0A0505; --failure-mid: #1A0A0A;
+    --failure-red: #CC2020; --failure-dim: #661010;
+    --warning-amber: #D4A830; --warning-bright: #E8D060;
+    --mushroom-red: #CC3030; --mushroom-white: #F0F0E8;
+    --success-green: #40CC40; --labyrinth: #8A7A6A;
+    --space: #050505; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #3A1A1A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(204,32,32,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(102,16,16,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(212,168,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(204,48,48,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(204,32,32,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(138,122,106,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--failure-red); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--warning-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--failure-deep) 25%, var(--failure-mid) 50%, var(--failure-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--failure-red); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(204,32,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,32,32,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(204,32,32,0.1); border: 1px solid var(--failure-red); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--failure-red); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(204,32,32,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--failure-red); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--warning-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--failure-red); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+  .prose strong { color: var(--warning-bright); }
+  .prose em { color: var(--mushroom-white); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--failure-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(10,5,5,0.3); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose pre { background: rgba(10,5,5,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--failure-red); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(204,32,32,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--failure-red); }
+  .prose pre code { background: none; padding: 0; }
+  .nav-card { background: rgba(10,5,5,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--failure-red); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--warning-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--failure-red); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.11 Explorer 5</a>
+  <span class="sep">/</span>
+  Track 4: Curriculum
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.11</span>
+      <span>Explorer 5</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Mech Eng, Reliability, Philosophy of Failure</span>
+      <span><span class="label">Organism:</span> Fly agaric</span>
+      <span><span class="label">Bird:</span> Townsend&rsquo;s Warbler</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>Department Deposits</h2>
+
+    <h3>Mechanical Engineering (Primary)</h3>
+
+    <p><strong>Wing:</strong> Stage Separation and Spin Stabilization<br>
+    <strong>Concept:</strong> The mechanical engineering of multi-stage rocket separation &mdash; the precise choreography of springs, explosive bolts, spin motors, and structural clearances that must work flawlessly in a few hundred milliseconds under conditions that cannot be fully tested on the ground</p>
+
+    <p><strong>Deposit:</strong> Explorer 5 failed because a mechanical event &mdash; physical contact between the spinning upper stage cluster and the booster during separation &mdash; destroyed the trajectory. The mechanical engineering of stage separation is deceptively simple in concept and brutally unforgiving in execution:</p>
+
+    <ul>
+      <li>The Juno I launch vehicle used the same upper stage design as Explorers 1, 3, and 4: a cylindrical tub containing 15 solid-fuel Sergeant rockets arranged in three tiers (11 + 3 + 1), spun up to approximately 750 rpm before launch. The spin provided gyroscopic stabilization &mdash; the angular momentum of the spinning cluster held the thrust vector steady during each tier&rsquo;s burn, without active guidance. This was elegant, cheap, and effective. It was also mechanically precarious, because the spinning assembly had to separate cleanly from the non-spinning booster</li>
+      <li>Separation was initiated after first-stage burnout by firing explosive bolts that released the clamp ring holding the tub to the booster, followed by compression springs that pushed the tub forward (away from the booster). The springs provided a separation velocity of approximately 0.5-1.0 m/s. At 750 rpm, the cluster completed 12.5 rotations per second. In the ~0.5 seconds it took to clear the booster fairing, the cluster rotated approximately 6 times. If the cluster was displaced laterally by even a few centimeters during any of those rotations, the spinning edge would contact the booster wall</li>
+      <li>The clearance between the cluster tub (diameter ~0.90 m) and the booster fairing (inner diameter ~1.78 m) was approximately 44 cm on each side. This sounds generous. But the effective clearance was reduced by: (a) structural flexure of the booster at burnout (the vehicle was hot, vibrating, and decelerating); (b) mass imbalance of the spinning cluster (any asymmetry caused wobble); (c) spring asymmetry (if the springs did not all fire at exactly the same force, the tub was pushed off-axis); (d) lateral velocity imparted by the separation event itself</li>
+      <li>On Explorers 1, 3, and 4, the combination of these factors left the cluster inside the safe zone. On Explorer 5, the combination pushed the cluster outside the safe zone. The design was not deterministically safe &mdash; it was probabilistically safe, with a failure probability that the 1958 engineers could not quantify because they lacked the Monte Carlo tools to model the combined uncertainties. They flew with positive nominal margin and accepted the residual risk</li>
+    </ul>
+
+    <p>The mechanical engineering lesson: a system that works several times is not proven reliable. It is proven functional at the parameter values that happened to occur on those flights. Explorer 5 encountered a parameter combination &mdash; some specific mixture of wobble, drift, flex, and spring asymmetry &mdash; that the previous flights had avoided by luck, not by design. The distinction between &ldquo;this has worked before&rdquo; and &ldquo;this will work next time&rdquo; is the core problem of reliability engineering, and Explorer 5 taught it the hard way.</p>
+
+    <h3>Reliability Engineering (Primary)</h3>
+
+    <p><strong>Wing:</strong> Small-Sample Reliability Estimation and the Problem of Rare Events<br>
+    <strong>Concept:</strong> How to estimate the reliability of a system when you have very few data points, most of them successes, and the failure modes are rare but catastrophic</p>
+
+    <p><strong>Deposit:</strong> The Explorer program before Explorer 5 had a sample of three orbital successes (Explorers 1, 3, 4) and one failure (Explorer 2, fourth-stage ignition failure &mdash; a different failure mode). The naive reliability estimate was 75% (3/4 successes). After Explorer 5, it was 60% (3/5). But these numbers are nearly meaningless for predicting the next flight, because the sample size is far too small for classical statistical inference.</p>
+
+    <p>Reliability engineering in the small-sample regime requires Bayesian methods:</p>
+    <ul>
+      <li><strong>Prior distribution:</strong> Before any flights, what did the engineers believe about the success probability? Based on component testing, similar rocket programs, and engineering judgment, they might have estimated 70-85% success probability. This is the prior distribution &mdash; an encoding of pre-flight knowledge</li>
+      <li><strong>Updating with data:</strong> Each flight updates the prior. A success shifts the distribution upward. A failure shifts it downward. After three successes and two failures, the posterior distribution depends heavily on the prior &mdash; with 5 data points, the prior has not been overwhelmed by the data</li>
+      <li><strong>The beta-binomial model:</strong> With a Beta(&alpha;, &beta;) prior and k successes in n trials, the posterior is Beta(&alpha; + k, &beta; + n - k). For a uniform prior (&alpha; = &beta; = 1) and k = 3, n = 5: posterior mean = (1 + 3) / (2 + 5) = 0.571. For an optimistic prior (&alpha; = 3, &beta; = 1) and the same data: posterior mean = (3 + 3) / (4 + 5) = 0.667. The prior shifts the answer by 10 percentage points, which is the difference between &ldquo;probably works&rdquo; and &ldquo;coin flip&rdquo;</li>
+      <li><strong>The decision problem:</strong> Is 57-67% reliable enough to launch Explorer 6? The answer depends not just on the number but on the consequences of failure (loss of a satellite, not loss of life in the uncrewed Explorer program) and the cost of alternatives (waiting for a new vehicle, or flying the same design). The ABMA team chose to move to a new vehicle (Thor-Able) for Explorer 6. This was a reliability decision: the posterior probability of separation contact was high enough to justify the cost of a new design</li>
+    </ul>
+
+    <p>The reliability engineering lesson: every system has an unknown true failure probability. Testing and flight experience provide information that narrows the uncertainty around this probability, but they can never reduce it to zero. The question is never &ldquo;will this work?&rdquo; The question is &ldquo;how confident are we that the failure probability is below our acceptable threshold?&rdquo; Explorer 5&rsquo;s failure shifted the posterior distribution for Juno I separation reliability into a region where confidence was insufficient to continue. That shift &mdash; from &ldquo;probably works&rdquo; to &ldquo;might not work&rdquo; &mdash; is the mathematical content of a single failure in a small sample.</p>
+
+    <h3>Philosophy of Failure (Primary)</h3>
+
+    <p><strong>Wing:</strong> Epistemic Humility and the Value of Negative Results<br>
+    <strong>Concept:</strong> What failure teaches that success cannot &mdash; the asymmetry of information between things that work and things that break</p>
+
+    <p><strong>Deposit:</strong> Success is uninformative. When Explorers 1, 3, and 4 reached orbit, the success confirmed that the design worked under the specific conditions of those flights. It did not confirm that the design worked in general, because the conditions of future flights were unknown. Success hides the failure modes that were narrowly avoided. The margins that were almost exceeded remain invisible.</p>
+
+    <p>Failure is informative. When Explorer 5 failed, it revealed:</p>
+    <ul>
+      <li>The separation clearance margin was insufficient for the full range of flight conditions</li>
+      <li>The spinning upper stage design had a single-point failure mode: contact during separation</li>
+      <li>The hand-assembly process introduced vehicle-to-vehicle variation that no amount of nominal analysis could predict</li>
+      <li>The test program (ground testing of separation with a non-spinning cluster, or at reduced spin rate, or in controlled conditions) did not replicate the actual flight environment</li>
+    </ul>
+
+    <p>Each of these lessons was invisible before the failure. They were features of the system that only manifested when the parameter combination was wrong. This is the fundamental asymmetry: success is consistent with a correct design AND a lucky parameter draw. Failure is consistent only with a parameter draw that exceeds the design margin. Failure discriminates. Success does not.</p>
+
+    <p>The philosophical lesson extends beyond rocketry:</p>
+    <ul>
+      <li>In science, a failed experiment that produces no data still produces knowledge: knowledge about the limits of the experimental method, the reliability of the instruments, the adequacy of the assumptions</li>
+      <li>In medicine, a treatment that fails in a clinical trial teaches more about the disease than a treatment that succeeds, because the failure reveals a pathway the treatment did not address</li>
+      <li>In software engineering, a bug report is more informative than a test that passes, because the bug identifies a specific condition the design did not handle</li>
+    </ul>
+
+    <p>Karl Popper formalized this asymmetry in the philosophy of science: theories can be falsified (proven wrong by a single counterexample) but never verified (no number of confirmations proves a theory universally true). Explorer 5 falsified the implicit theory that &ldquo;the Juno I separation design is reliable.&rdquo; Three successes had not verified this theory &mdash; they had merely failed to falsify it. The distinction matters. Explorer 5 matters not because it failed, but because its failure carried information that three successes could not provide.</p>
+
+    <p>The dedication to Borges is particularly apt: Borges wrote about libraries containing every possible book, labyrinths containing every possible path, and gardens where time branches into every possible future. Explorer 5 is the branch where the cluster contacts the booster &mdash; one of the many possible outcomes encoded in the design&rsquo;s parameter space. Borges understood that every successful path implies the existence of the failed paths it avoided. Explorer 5 made the failed path visible.</p>
+
+    <h3>Mycology (Secondary)</h3>
+
+    <p><strong>Wing:</strong> <em>Amanita muscaria</em> &mdash; The Fly Agaric<br>
+    <strong>Concept:</strong> The most iconic mushroom on Earth as a lesson in appearance, toxicology, ecological partnership, and the distinction between what something looks like and what it is</p>
+
+    <p><strong>Deposit:</strong> <em>Amanita muscaria</em> (fly agaric) is the most visually recognizable fungus in the world: a bright red or orange cap spotted with white warts, standing on a white stipe with a ring (annulus) and a bulbous base (volva). It appears in fairy tales, video games (the mushroom in Super Mario Bros.), Christmas cards (especially in northern European traditions where it grows beneath decorative conifers), and religious speculation (the soma of the Rigveda, the berserker mushroom of Norse warriors). It is also poisonous &mdash; though rarely lethal to humans.</p>
+
+    <ul>
+      <li><em>A. muscaria</em> produces ibotenic acid and muscimol, psychoactive compounds that act on GABA receptors in the mammalian nervous system. Ibotenic acid is a potent excitotoxin (it can damage neurons). Muscimol is a sedative-hallucinogen. The mushroom&rsquo;s common name &ldquo;fly agaric&rdquo; comes from the old European practice of placing pieces of the cap in milk to attract and stupefy flies &mdash; the muscimol acts as an insecticide at the doses ingested by insects</li>
+      <li>As an ectomycorrhizal fungus, <em>A. muscaria</em> forms symbiotic partnerships with tree roots &mdash; primarily birch, pine, spruce, and fir. The fungal mycelium (underground thread network) wraps around the tree&rsquo;s fine root tips, forming a sheath (the Hartig net) through which the partners exchange nutrients. The tree provides photosynthetic sugars to the fungus. The fungus provides soil minerals (phosphorus, nitrogen, micronutrients) to the tree, extending the tree&rsquo;s effective root system by orders of magnitude. Neither organism achieves its full potential alone. The partnership is not optional: many tree species cannot establish in poor soils without their mycorrhizal partners, and the fungi cannot reproduce (form mushrooms) without a living host tree</li>
+      <li>In the Pacific Northwest, <em>A. muscaria</em> var. <em>flavivolvata</em> is the common form, associated with pine, spruce, and Douglas-fir forests. It is one of the first mushrooms to fruit after disturbance &mdash; appearing at the edges of logging roads, in recently burned areas, and in young plantations. The mushroom is a pioneer: it colonizes disturbed ground where other fungi have not yet established. The Townsend&rsquo;s Warbler (<em>Setophaga townsendi</em>, degree 11) forages in the canopy of the same conifer forests where <em>A. muscaria</em> fruits on the forest floor. The warbler and the mushroom occupy opposite ends of the same forest column &mdash; one in the canopy light, one in the root darkness &mdash; both essential to the forest&rsquo;s function</li>
+      <li>The connection to Explorer 5 is through failure and persistence. <em>A. muscaria</em> cannot fruit without a living tree host. If the host tree is killed (fire, disease, logging), the fungal mycelium in the soil does not immediately die. It persists in a reduced state &mdash; a dormant network of hyphae waiting for a compatible host to reappear. When a new seedling establishes, the old mycelial network connects to it, providing the seedling with an instant underground support system far larger than the seedling could build on its own. The mushroom&rsquo;s strategy is: fail to fruit, persist underground, wait, reconnect, try again. Explorer 5&rsquo;s strategy was: fail to orbit, persist as engineering knowledge, wait for a better vehicle, try again (Explorer 6). The parallel is structural, not metaphorical. Both systems encode information from failure in their persistent substrate (mycelium for the fungus, institutional knowledge for the program) and deploy it when conditions improve</li>
+    </ul>
+
+    <h3>Mathematics (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Torque, Angular Momentum, and Nutation<br>
+    <strong>Concept:</strong> The vector mathematics of spinning bodies &mdash; how angular momentum determines stability, torque determines perturbation, and nutation determines the wobble that results from an impulsive disturbance to a spinning system</p>
+
+    <p><strong>Deposit:</strong> The mathematics of Explorer 5&rsquo;s failure is the mathematics of angular momentum and torque &mdash; vector quantities that determine the behavior of spinning bodies. The spinning upper stage cluster was stabilized by its angular momentum vector <code>L = I * omega</code>, pointed along the spin axis. The contact event applied a torque <code>tau = r x F</code> perpendicular to the spin axis for a duration dt, producing an angular impulse <code>delta_L = tau * dt</code>. The new angular momentum vector <code>L_new = L + delta_L</code> was tilted from the original spin axis by an angle <code>theta_n = arctan(|delta_L| / |L|)</code>.</p>
+
+    <p>This is the mathematics of gyroscopes, tops, and every rotating body from a bicycle wheel to a neutron star. The formulas are simple. The consequences are profound:</p>
+    <ul>
+      <li>A larger angular momentum (higher spin rate or higher moment of inertia) resists perturbation more strongly &mdash; &theta;<sub>n</sub> decreases as |L| increases. This is why the cluster was spun to 750 rpm: more spin = more stability</li>
+      <li>A larger angular impulse (stronger contact, longer duration, larger lever arm) produces more tilt. The contact event produced enough impulse to tilt the axis beyond the tolerance for orbit insertion</li>
+      <li>Nutation is the wobble that results: the spin axis traces a cone around the angular momentum vector, with half-angle &theta;<sub>n</sub>. Each subsequent stage fires along the instantaneous spin axis, which is sweeping through this cone. The effective thrust direction averaged over the burn is the axis of the cone (the angular momentum vector), but the instantaneous direction fluctuates by &plusmn; &theta;<sub>n</sub>. For short burns (6 seconds per tier), the thrust direction at any moment can be far from the intended direction</li>
+    </ul>
+
+    <h3>Literature (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Borges and the Labyrinth of Branching Outcomes<br>
+    <strong>Concept:</strong> The literary framework of Explorer 5&rsquo;s failure as a realization of one path in a garden of forking paths</p>
+
+    <p><strong>Deposit:</strong> Jorge Luis Borges was born on August 24, 1899, in Buenos Aires &mdash; exactly 59 years before Explorer 5&rsquo;s failed launch from Cape Canaveral. Borges wrote stories that are mathematical structures disguised as narratives: &ldquo;The Library of Babel&rdquo; (a combinatorial space containing every possible book), &ldquo;The Garden of Forking Paths&rdquo; (a novel that branches at every decision point, realizing all possible outcomes simultaneously), &ldquo;Tl&ouml;n, Uqbar, Orbis Tertius&rdquo; (a fictional world that gradually overwrites the real one through the accumulation of documentation).</p>
+
+    <p>The connection to Explorer 5 is not biographical but structural:</p>
+    <ul>
+      <li>&ldquo;The Garden of Forking Paths&rdquo; describes a novel in which &ldquo;all possible outcomes occur; each one is the starting point for other forkings.&rdquo; Explorer 5&rsquo;s launch was a forking point: the path where separation succeeds (orbit, data, extended Van Allen mapping) and the path where separation fails (suborbital arc, no data, engineering lesson). Both paths existed simultaneously in the design parameter space. The actual flight sampled one path. The mathematics of separation clearance defines the boundary between the paths. The boundary is sharp &mdash; contact or no contact, orbit or no orbit. There is no partial orbit. The fork is binary</li>
+      <li>&ldquo;The Library of Babel&rdquo; describes a library containing every possible 410-page book. Most of the books are meaningless &mdash; random strings of characters. A few, scattered among the chaos, are true and important. The parameter space of a Juno I launch is analogous: most parameter combinations produce successful separations. A few produce contact. The useful (successful) outcomes are common. The catastrophic (failed) outcomes are rare but real. The library contains them all. Each launch samples one book from the library. Usually, the book is readable (success). Occasionally, it is gibberish (failure). The 1958 engineers did not have a catalog of the library &mdash; they did not know the probability of drawing a gibberish book. They knew only that the four previous draws had been readable. Explorer 5 was the first gibberish book, and it revealed that the library contained more of them than assumed</li>
+      <li>Borges&rsquo;s literary method &mdash; constructing stories from mathematical premises and following them to their logical conclusions &mdash; mirrors the engineering method that failed Explorer 5. The premises (spinning cluster, compression springs, 44 cm clearance) were stated. The logical conclusion (orbit, with some probability of failure) was derived. The failure was one of the valid logical conclusions. Borges would not have been surprised. He spent his career demonstrating that every system of premises, followed rigorously, eventually produces results that shock the person who stated the premises. The design of the Juno I separation system was a premise. Explorer 5&rsquo;s failure was one of its valid conclusions</li>
+    </ul>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Build and Drop &mdash; Separation Test</h3>
+
+    <p><strong>Duration:</strong> 2-3 hours | <strong>Difficulty:</strong> Beginner-Intermediate | <strong>Department:</strong> Mechanical Engineering / Physics</p>
+
+    <p><strong>What You Need:</strong> PVC pipe (~5 cm diameter, 30 cm long, ~$3), wooden dowels or PVC caps for end plugs, rubber bands or small compression springs ($2-5), a small weighted cylinder that fits loosely inside the pipe (a film canister filled with coins works well, or a short section of smaller PVC pipe with end caps and ballast, ~$2), a turntable or lazy Susan ($5-15, or improvise with a record player, or skip the spin component), tape measure, slow-motion camera (most smartphones). Total: ~$10-25.</p>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> How separation works (or fails to work) when a smaller object must slide out of a larger tube under spring force. You will build a physical model of the Juno I separation problem: a tube (the booster fairing) containing a smaller cylinder (the upper stage cluster) pushed out by a spring. You will measure the clearance, add perturbations (tilt, wobble, offset), and discover the conditions under which the inner cylinder contacts the outer tube during ejection. If you add spin (using a turntable), you will see how rotation changes the contact dynamics.</p>
+
+    <p><strong>Entry Conditions:</strong></p>
+    <ul>
+      <li>Materials assembled (pipe, inner cylinder, spring or rubber band)</li>
+      <li>Slow-motion video recording available (smartphone)</li>
+      <li>Tape measure for clearance measurements</li>
+    </ul>
+
+<pre><code>SEPARATION TEST RIG:
+
+1. Build the "booster":
+   Take the PVC pipe (this represents the booster fairing).
+   Stand it upright on a table.
+
+2. Build the "upper stage":
+   Take the smaller cylinder (film canister, smaller pipe section,
+   or rolled cardboard tube weighted with coins). This must fit
+   LOOSELY inside the larger pipe -- at least 5mm clearance on
+   each side, preferably 10mm.
+
+3. Build the "separation spring":
+   Attach a compressed rubber band or small spring to the bottom
+   of the outer pipe (or inside the bottom end cap). The spring
+   pushes the inner cylinder upward and out.
+
+4. TEST 1 -- Nominal separation:
+   Place the inner cylinder in the pipe, resting on the spring.
+   Release the bottom cap or trigger the spring.
+   The inner cylinder should pop up and out of the pipe cleanly.
+   Repeat 10 times. Record: how many times does the inner
+   cylinder exit without touching the pipe walls?
+
+5. TEST 2 -- Add perturbation:
+   Tilt the outer pipe 5 degrees from vertical.
+   Now the inner cylinder must exit at an angle.
+   Repeat 10 times. Record contact events.
+
+   Tilt to 10 degrees. Repeat.
+   Tilt to 15 degrees. Repeat.
+
+   At what tilt angle does contact become consistent?
+
+6. TEST 3 -- Add asymmetry:
+   Tape a small weight (a coin) to one side of the inner
+   cylinder, creating a center-of-mass offset.
+   Repeat the vertical separation test 10 times.
+   The offset causes the cylinder to drift sideways as
+   it exits -- increasing the probability of contact.
+
+7. TEST 4 -- Add spin (optional, if you have a turntable):
+   Place the outer pipe on a lazy Susan or turntable.
+   Spin it to ~1 revolution per second (60 rpm --
+   much less than Juno I's 750 rpm, but enough to see
+   the effect).
+   Trigger the spring while spinning.
+   The inner cylinder now has angular momentum.
+   Does it exit cleanly, or does the gyroscopic effect
+   change the separation dynamics?
+
+RECORD AND ANALYZE:
+
+For each test condition (tilt, asymmetry, spin),
+record the contact rate (contacts / trials).
+
+Plot: contact rate vs perturbation magnitude
+  - X axis: tilt angle (degrees) or mass offset (grams)
+  - Y axis: contact rate (0 to 100%)
+
+You should see a curve that rises from near 0% at
+nominal conditions to near 100% at large perturbations.
+The curve passes through 50% at some critical perturbation
+value -- this is the design margin.
+
+Explorer 5 was on the wrong side of this curve.
+Explorers 1, 3, and 4 were on the right side.
+The curve was the same for all five flights.
+Only the perturbation value varied.</code></pre>
+
+    <h3>TRY 2: Failure Analysis Board</h3>
+
+    <p><strong>Duration:</strong> 1-2 hours | <strong>Difficulty:</strong> Beginner | <strong>Department:</strong> Reliability Engineering / Critical Thinking</p>
+
+    <p><strong>What You Need:</strong> A household item that has broken (appliance, tool, toy, furniture &mdash; anything mechanical that failed). Paper, pen, camera (phone). No cost beyond what you already have.</p>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> How to investigate a mechanical failure systematically, the same way NASA investigates mission failures. You will apply the Bayesian failure analysis framework from the mathematics module to a real (if mundane) broken object.</p>
+
+<pre><code>FAILURE ANALYSIS PROCEDURE:
+
+1. DOCUMENT THE FAILURE:
+   - What is the object?
+   - What was it supposed to do?
+   - What happened? (Describe the failure as precisely
+     as you can. "It broke" is not sufficient.
+     "The plastic hinge on the battery door cracked
+     along the parting line and the door fell off"
+     is sufficient.)
+   - When did it fail? (Age, usage history, conditions)
+   - Take photos of the failure site
+
+2. LIST POSSIBLE CAUSES:
+   Write down at least 5 possible reasons the object
+   failed. Be creative. Include:
+   - Material defect (was the material flawed?)
+   - Design defect (was the geometry wrong?)
+   - Manufacturing defect (was it made incorrectly?)
+   - Overload (was it used beyond its design limits?)
+   - Fatigue (did it fail after many cycles of loading?)
+   - Environmental (heat, cold, UV, moisture, chemicals?)
+   - Assembly error (was it put together wrong?)
+   - Wear (did moving parts wear out?)
+
+3. ASSIGN LIKELIHOODS:
+   For each possible cause, estimate:
+   - How likely is this cause, given what you observe?
+   - What evidence supports this cause?
+   - What evidence contradicts this cause?
+
+4. APPLY BAYES:
+   Assign each cause a prior probability (your best
+   guess before examining the evidence).
+   Then update with the evidence:
+   P(cause | evidence) ~ P(evidence | cause) * P(cause)
+
+   Which cause has the highest posterior probability?
+
+5. PROPOSE CORRECTIVE ACTION:
+   - If you were redesigning this object, what would
+     you change to prevent this failure?
+   - Is the fix a material change? A geometry change?
+     A usage restriction? A quality check?
+
+6. THE EXPLORER 5 CONNECTION:
+   The Juno I engineers followed this same process
+   (informally) after Explorer 5. The object: the
+   separation mechanism. The failure: contact during
+   separation. The corrective action: redesign the
+   entire upper stage (Explorer 6 used a different
+   vehicle). Sometimes the fix is not to repair the
+   broken part but to replace the entire system.</code></pre>
+
+    <hr>
+
+    <h2>DIY Project: Failure Timeline</h2>
+
+    <p><strong>Duration:</strong> 2-4 hours | <strong>Difficulty:</strong> Beginner-Intermediate | <strong>Department:</strong> Philosophy of Failure / History of Technology</p>
+
+    <p><strong>What You Need:</strong> Paper or poster board ($2-5), markers or colored pens ($5-10), access to the internet for research. Total: ~$5-15.</p>
+
+    <p><strong>What You&rsquo;ll Build:</strong> A visual timeline of famous engineering failures and what each one taught, from the Tacoma Narrows Bridge (1940) through Explorer 5 (1958) through the Challenger disaster (1986) through the Boeing 737 MAX (2019). The timeline shows that engineering progress is driven as much by failure as by success &mdash; and that the failures that teach the most are the ones that reveal previously hidden assumptions.</p>
+
+<pre><code>FAILURE TIMELINE:
+
+Organize your timeline horizontally (left = oldest, right = newest).
+For each failure, document:
+  - Date
+  - What failed
+  - What it was supposed to do
+  - The root cause (one sentence)
+  - What was learned (one sentence)
+  - What changed as a result (design standard, regulation,
+    practice, or policy that was created because of this failure)
+
+SUGGESTED FAILURES (choose 8-12):
+
+  1940: Tacoma Narrows Bridge (aeroelastic flutter, not resonance)
+  1958: Explorer 5 (separation contact, clearance margin)
+  1967: Apollo 1 (fire, pure oxygen atmosphere + flammable materials)
+  1970: Apollo 13 (oxygen tank explosion, design and test error)
+  1979: Three Mile Island (partial meltdown, operator confusion)
+  1986: Challenger (O-ring failure in cold weather, management pressure)
+  1996: Ariane 5 Flight 501 (integer overflow, software reuse error)
+  1999: Mars Climate Orbiter (metric/imperial unit confusion)
+  2003: Columbia (foam insulation impact, normalization of deviance)
+  2011: Fukushima Daiichi (tsunami exceeding design basis)
+  2018: Lion Air 737 MAX (MCAS software, single sensor, inadequate training)
+
+THE PATTERN:
+  Every failure on this list was preceded by a period of success
+  that bred confidence in the design. Every failure revealed a
+  condition that was possible but not tested, known but dismissed,
+  or unforeseen because the mental model of the system was
+  incomplete.
+
+  Explorer 5 fits the pattern exactly: four successful flights
+  preceded by the same separation design, followed by a failure
+  that revealed the design's hidden vulnerability.
+
+BORGES CONNECTION:
+  Each failure is a fork in the garden of paths. Before each
+  failure, the forking paths existed (the system contained
+  the failure mode) but the failing path was invisible because
+  no flight/operation/test had sampled it. After each failure,
+  the failing path became visible and the system was modified
+  to avoid it in the future.
+
+  Borges's insight is that ALL the paths exist simultaneously.
+  The engineer's job is to find and block the failing paths
+  BEFORE they are sampled. This is what testing, analysis, and
+  simulation try to do. When they fail to find a path, the
+  path finds them.</code></pre>
+
+    <hr>
+
+    <h2>Ethics Module: The Decision to Launch Under Uncertainty</h2>
+
+    <p><strong>Duration:</strong> 1-2 hours (discussion/essay) | <strong>Department:</strong> Philosophy of Failure / Reliability Engineering</p>
+
+    <p><strong>The Scenario:</strong></p>
+
+    <p>It is August 1958. You are an engineer at the Army Ballistic Missile Agency. Explorer 5 is on the pad at Cape Canaveral, ready for launch. You have launched four Explorer satellites &mdash; three reached orbit, one failed (Explorer 2, different failure mode). The separation mechanism is the same design as all previous flights. Your analysis shows adequate clearance margins. But you know that the hand-assembled vehicles vary from unit to unit, and you have never tested the separation mechanism at full spin rate under realistic flight conditions (the ground test rig cannot replicate the vibration and thermal environment of an actual launch).</p>
+
+    <p><strong>Questions for Discussion:</strong></p>
+
+    <ol>
+      <li><strong>Launch decision under uncertainty:</strong> You believe the success probability is somewhere between 65% and 85%, but you cannot narrow it further with available data. The mission cost is approximately $5 million (1958 dollars). Is this probability sufficient to launch? What threshold would you require? How does the cost of the mission compare to the cost of delay (political pressure, Soviet competition, institutional survival)?</li>
+      <li><strong>The observer&rsquo;s paradox:</strong> Three successes have built confidence in the design. But confidence built from small samples is fragile &mdash; the next flight could easily be the one that samples the failure mode. How do you distinguish between &ldquo;this design works&rdquo; and &ldquo;this design has been lucky&rdquo;? What additional testing would reduce the uncertainty, and can you afford it in the 1958 schedule?</li>
+      <li><strong>Risk communication:</strong> How do you communicate the uncertainty to decision-makers who want a simple answer: &ldquo;Will it work?&rdquo; The honest answer is &ldquo;probably, but maybe not.&rdquo; In 1958, this kind of probabilistic communication was not standard practice in engineering. Managers expected deterministic answers. How does the format of the answer affect the decision?</li>
+      <li><strong>Post-failure judgment:</strong> After Explorer 5 fails, critics will say the risk was obvious. This is hindsight bias. Before the failure, the risk was one possibility among several, assigned a probability that seemed acceptably low. How do you prevent hindsight bias from distorting the lessons learned? How do you ensure that the corrective action addresses the actual failure mode rather than the retrospective narrative?</li>
+      <li><strong>The Borges connection:</strong> In &ldquo;The Lottery in Babylon,&rdquo; Borges describes a society that gradually cedes all decisions to a lottery &mdash; a random process that determines rewards and punishments without regard to merit or intention. The engineers who launched Explorer 5 were, in a sense, participating in a lottery: the outcome was determined by parameter values they could not control and could not fully predict. The difference between success and failure was not a decision but a draw. Was launching Explorer 5 a rational decision or a lottery ticket?</li>
+    </ol>
+
+    <p><strong>Assessment:</strong> The quality of the analysis is measured by the ability to hold uncertainty without resolving it prematurely. The engineer who says &ldquo;I would not have launched&rdquo; is making a decision with information that was not available in August 1958. The engineer who says &ldquo;the launch was justified given the available data&rdquo; must then grapple with the fact that the launch failed. Neither position is comfortable. Both are defensible. The discomfort is the point.</p>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <p><strong>FoxFiber:</strong> The separation clearance problem &mdash; ensuring that two structures separate without contact &mdash; maps directly to fiber-optic cable routing. In dense cable trays, fiber bundles must be routed with sufficient clearance to avoid contact with other bundles, sharp edges, and moving components. The clearance margins are small (millimeters in dense installations), the consequences of contact are significant (signal degradation, cable damage), and the actual clearance depends on installation quality, thermal expansion, vibration, and mechanical load &mdash; the same categories of perturbation that caused Explorer 5&rsquo;s failure. FoxFiber cable management protocols would benefit from the same Monte Carlo clearance analysis used in modern launch vehicle separation: model the cable positions under all expected perturbations, compute the probability of contact, and design the routing to achieve an acceptably low contact probability.</p>
+
+    <p><strong>Fox CapComm:</strong> Explorer 5&rsquo;s failure analysis is a communication challenge: how to transmit the correct failure diagnosis from the engineering team to the management team with sufficient confidence to justify corrective action. The Bayesian framework from the mathematics module formalizes this communication: the prior (management&rsquo;s pre-failure belief about the design), the likelihood (the engineering evidence), and the posterior (the updated belief that drives the decision). Fox CapComm&rsquo;s coordination protocols must handle exactly this kind of communication: translating technical uncertainty into actionable decisions, and ensuring that the recipient understands not just the conclusion but the confidence level behind it.</p>
+
+    <p><strong>FoxCompute:</strong> Monte Carlo separation analysis requires computational resources proportional to the number of simulations and the fidelity of each simulation. A single high-fidelity separation simulation (multi-body dynamics with contact detection, friction, and structural flexibility) takes minutes to hours on a modern workstation. Running 10,000 such simulations for probabilistic clearance assessment requires a compute cluster. FoxCompute containers could host this workload: spin up N containers, run N separation simulations in parallel, aggregate the results into a clearance probability distribution. The workload is embarrassingly parallel &mdash; each simulation is independent &mdash; making it an ideal fit for containerized batch computation.</p>
+
+    <hr>
+
+    <blockquote>
+      <p>&ldquo;Amanita muscaria fruits in autumn, after the first rains soak the forest floor. The mushrooms emerge from the duff layer as white balls, then expand into the iconic red-and-white caps over two to three days. Each mushroom produces millions of spores. The overwhelming majority of those spores land on unsuitable ground and die &mdash; on rock, on water, on soil without a compatible tree host. A few spores land near a tree root, germinate, and establish a new mycorrhizal connection. The success rate is vanishingly small. The strategy is volume: produce so many spores that even a tiny success fraction is sufficient. The Juno I program followed a similar strategy: build vehicles as fast as possible, launch them, accept that some will fail, and learn from the failures fast enough to improve the next vehicle. Explorer 5 was a spore that landed on rock. The program did not mourn the spore. It produced more spores. Explorer 6, on a Thor-Able booster, was a different organism entirely &mdash; a new spore from a different mushroom, landing on different ground. Borges would have appreciated the combinatorics: millions of spores, millions of parameter combinations, millions of potential outcomes. The garden of forking paths is also the forest floor where Amanita scatters its chances against improbable odds, and the launchpad at Cape Canaveral where rockets climb toward orbits they may or may not reach. The math is the same. The stakes are different. The strategy &mdash; try, fail, persist, try again &mdash; is identical.&rdquo;</p>
+    </blockquote>
+
+    <div class="nav-card">
+      <a href="papers.html">&larr; Papers</a>
+      <a href="simulation.html">Simulation &rarr;</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.11 Explorer 5 + Amanita muscaria &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>
