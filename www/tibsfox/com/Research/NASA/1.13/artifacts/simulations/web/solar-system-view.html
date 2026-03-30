@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 5 — Solar System View</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #sim-canvas { flex: 1; cursor: crosshair; }
+  #panel {
+    width: 310px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 12px; color: #E8D060; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #E8D060; font-weight: bold; }
+  .box .signal { color: #2060CC; font-weight: bold; }
+  .box .warn { color: #CC4020; }
+  .box .venus { color: #E8D8B0; font-weight: bold; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  .control-group input[type="range"] { width: 100%; accent-color: #E8D060; }
+  .marker { font-size: 8px; display: flex; justify-content: space-between; color: #666; }
+  .instructions { font-size: 9px; color: #666; text-align: center; line-height: 1.5; }
+  .bar-container {
+    height: 10px; background: #111; border-radius: 2px; overflow: hidden; margin: 2px 0;
+  }
+  .bar { height: 100%; border-radius: 2px; transition: width 0.3s; }
+  button {
+    font-size: 9px; padding: 4px 8px; background: #1a1a30; border: 1px solid #444;
+    color: #aaa; border-radius: 3px; cursor: pointer;
+  }
+  button:hover { border-color: #E8D060; color: #E8D060; }
+  .btn-row { display: flex; gap: 4px; justify-content: center; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>SOLAR SYSTEM VIEW</h1>
+    <h2>Pioneer 5 — Heliocentric Orbit (0.806 x 0.995 AU)</h2>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">Mission Day:</span> <span id="day-val" class="value">0</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Date:</span> <span id="date-val" class="value">Mar 11, 1960</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Distance (Earth):</span> <span id="dist-earth" class="signal">0 km</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Distance (Sun):</span> <span id="dist-sun" class="value">1.0 AU</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Light time:</span> <span id="light-time" class="value">0 sec</span></div>
+    </div>
+
+    <div class="box">
+      <div class="label">Signal Strength:</div>
+      <div class="bar-container"><div id="signal-bar" class="bar" style="width:100%;background:#2060CC;"></div></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Rx Power:</span> <span id="prx" class="signal">-80 dBm</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">SNR:</span> <span id="snr-val" class="value">74 dB</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Status:</span> <span id="status" class="value">TRANSMITTING</span></div>
+    </div>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">Pioneer 5 r:</span> <span id="p5-r" class="value">0.995 AU</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Earth r:</span> <span id="earth-r" class="signal">1.000 AU</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Venus r:</span> <span id="venus-r" class="venus">0.723 AU</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Time Speed: <span id="speed-val">1 day/sec</span></label>
+      <input type="range" id="speed" min="0" max="100" value="30" step="1">
+      <div class="marker"><span>Paused</span><span>1 d/s</span><span>10 d/s</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Mission Day: <span id="day-slider-val">0</span></label>
+      <input type="range" id="day-slider" min="0" max="300" value="0" step="1">
+      <div class="marker"><span>Launch</span><span>LOS (106)</span><span>300</span></div>
+    </div>
+
+    <div class="btn-row">
+      <button onclick="setDay(0)">Launch</button>
+      <button onclick="setDay(50)">Day 50</button>
+      <button onclick="setDay(106)">LOS</button>
+      <button onclick="setDay(200)">Day 200</button>
+      <button onclick="togglePlay()">Play/Pause</button>
+    </div>
+
+    <div class="box" style="font-size:9px;">
+      <div class="label">Mission Timeline:</div>
+      <div>Mar 11 — Launch from Cape Canaveral</div>
+      <div>Mar 11-Jun 26 — Telemetry: IMF, solar wind</div>
+      <div>Jun 26 — Loss of signal at 36.2M km</div>
+      <div>Probe continues in heliocentric orbit forever</div>
+    </div>
+
+    <div class="instructions">
+      Watch Pioneer 5 drift away from Earth.<br>
+      The signal line fades as distance grows.<br>
+      After day 106, the signal is lost.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+const PI = Math.PI;
+const TWO_PI = 2 * PI;
+const AU = 1.496e11;
+const C = 2.998e8;
+const K = 1.381e-23;
+const DAY = 86400;
+const MU_SUN = 1.327e20;
+
+// Orbital elements
+const orbits = {
+  earth: { a: 1.0 * AU, e: 0.0167, period: 365.25 * DAY, phase0: 70 * PI / 180 },
+  venus: { a: 0.723 * AU, e: 0.0068, period: 224.7 * DAY, phase0: 115 * PI / 180 },
+  p5:    { a: 0.9005 * AU, e: 0.105, period: 311.6 * DAY, phase0: 70 * PI / 180 }
+};
+
+const LOS_DAY = 106;
+let missionDay = 0;
+let playing = true;
+let lastTime = 0;
+
+function keplerSolve(M, e) {
+  let E = M;
+  for (let i = 0; i < 30; i++) {
+    const dE = (M - E + e * Math.sin(E)) / (1 - e * Math.cos(E));
+    E += dE;
+    if (Math.abs(dE) < 1e-10) break;
+  }
+  return E;
+}
+
+function orbitPos(t_sec, orb) {
+  const M = TWO_PI * t_sec / orb.period + orb.phase0;
+  const E = keplerSolve(M, orb.e);
+  const nu = 2 * Math.atan2(Math.sqrt(1 + orb.e) * Math.sin(E / 2),
+                             Math.sqrt(1 - orb.e) * Math.cos(E / 2));
+  const r = orb.a * (1 - orb.e * Math.cos(E));
+  return { x: r * Math.cos(nu), y: r * Math.sin(nu), r: r };
+}
+
+function linkBudget(dist_m) {
+  const ptx_dbm = 10 * Math.log10(5000); // 5W
+  const g_tx = 3;
+  const g_rx = 43;
+  const lambda = C / 378.2e6;
+  const fspl = 20 * Math.log10(4 * PI * dist_m / lambda);
+  const prx = ptx_dbm + g_tx - fspl + g_rx;
+  const noise = 10 * Math.log10(K * 150 * 100 * 1000);
+  return { prx, snr: prx - noise };
+}
+
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function dayToDate(d) {
+  // March 11, 1960 = day 0
+  const date = new Date(1960, 2, 11); // month is 0-indexed
+  date.setDate(date.getDate() + Math.floor(d));
+  return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
+
+function setDay(d) { missionDay = d; document.getElementById('day-slider').value = d; }
+function togglePlay() { playing = !playing; }
+
+function resize() {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * devicePixelRatio;
+  canvas.height = rect.height * devicePixelRatio;
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+}
+
+function draw(timestamp) {
+  const dt = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+
+  const speedVal = parseFloat(document.getElementById('speed').value);
+  const speed = speedVal === 0 ? 0 : Math.pow(10, (speedVal - 30) / 30);
+  if (playing && speedVal > 0) {
+    missionDay += speed * dt;
+    if (missionDay > 300) missionDay = 0;
+    document.getElementById('day-slider').value = Math.floor(missionDay);
+  }
+
+  // Allow manual slider override
+  const sliderDay = parseFloat(document.getElementById('day-slider').value);
+  if (!playing || speedVal === 0) missionDay = sliderDay;
+
+  document.getElementById('speed-val').textContent =
+    speed < 0.1 ? 'Paused' : speed.toFixed(1) + ' d/s';
+  document.getElementById('day-slider-val').textContent = Math.floor(missionDay);
+
+  const t_sec = missionDay * DAY;
+  const w = canvas.width / devicePixelRatio;
+  const h = canvas.height / devicePixelRatio;
+  const cx = w / 2;
+  const cy = h / 2;
+
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, w, h);
+
+  // Stars
+  for (let i = 0; i < 60; i++) {
+    const sx = ((i * 197.3 + 50) % w);
+    const sy = ((i * 311.7 + 30) % h);
+    const b = 0.2 + 0.3 * ((Math.sin(i * 5.1 + timestamp * 0.0005) + 1) / 2);
+    ctx.fillStyle = `rgba(180,190,210,${b})`;
+    ctx.fillRect(sx, sy, 1, 1);
+  }
+
+  // Scale: pixels per AU
+  const scale = Math.min(w, h) * 0.4;
+
+  // Draw orbits
+  function drawOrbit(orb, color, alpha) {
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    for (let a = 0; a <= TWO_PI; a += 0.02) {
+      const r = orb.a * (1 - orb.e * orb.e) / (1 + orb.e * Math.cos(a));
+      const x = cx + (r / AU) * scale * Math.cos(a);
+      const y = cy + (r / AU) * scale * Math.sin(a);
+      if (a === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  drawOrbit(orbits.venus, '#E8D8B0', 0.3);
+  drawOrbit(orbits.earth, '#2060CC', 0.3);
+  drawOrbit(orbits.p5, '#CC8830', 0.5);
+
+  // Sun
+  const sunGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 20);
+  sunGrad.addColorStop(0, '#FFEE88');
+  sunGrad.addColorStop(0.5, '#E8D060');
+  sunGrad.addColorStop(1, 'rgba(232,208,96,0)');
+  ctx.fillStyle = sunGrad;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 20, 0, TWO_PI);
+  ctx.fill();
+  ctx.fillStyle = '#FFEE88';
+  ctx.beginPath();
+  ctx.arc(cx, cy, 6, 0, TWO_PI);
+  ctx.fill();
+
+  // Positions
+  const earth = orbitPos(t_sec, orbits.earth);
+  const venus = orbitPos(t_sec, orbits.venus);
+  const p5 = orbitPos(t_sec, orbits.p5);
+
+  const ex = cx + (earth.x / AU) * scale;
+  const ey = cy + (earth.y / AU) * scale;
+  const vx = cx + (venus.x / AU) * scale;
+  const vy = cy + (venus.y / AU) * scale;
+  const px = cx + (p5.x / AU) * scale;
+  const py = cy + (p5.y / AU) * scale;
+
+  // Pioneer 5 trail (last 30 days)
+  ctx.strokeStyle = '#E8D060';
+  ctx.lineWidth = 1.5;
+  ctx.globalAlpha = 0.4;
+  ctx.beginPath();
+  for (let d = Math.max(0, missionDay - 30); d <= missionDay; d += 0.5) {
+    const tp = orbitPos(d * DAY, orbits.p5);
+    const tpx = cx + (tp.x / AU) * scale;
+    const tpy = cy + (tp.y / AU) * scale;
+    if (d === Math.max(0, missionDay - 30)) ctx.moveTo(tpx, tpy);
+    else ctx.lineTo(tpx, tpy);
+  }
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  // Signal line from P5 to Earth
+  const dist_m = Math.sqrt((p5.x - earth.x) ** 2 + (p5.y - earth.y) ** 2);
+  const dist_km = dist_m / 1000;
+  const link = linkBudget(dist_m);
+  const signalAlpha = missionDay <= LOS_DAY ? Math.max(0.05, Math.min(0.6, (link.snr + 10) / 40)) : 0;
+
+  if (signalAlpha > 0) {
+    ctx.strokeStyle = link.snr > 3 ? `rgba(32,96,204,${signalAlpha})` : `rgba(204,64,32,${signalAlpha})`;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(ex, ey);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Venus
+  ctx.fillStyle = '#E8D8B0';
+  ctx.beginPath();
+  ctx.arc(vx, vy, 5, 0, TWO_PI);
+  ctx.fill();
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Venus', vx, vy + 14);
+
+  // Earth
+  ctx.fillStyle = '#2060CC';
+  ctx.beginPath();
+  ctx.arc(ex, ey, 6, 0, TWO_PI);
+  ctx.fill();
+  ctx.fillStyle = '#aaa';
+  ctx.fillText('Earth', ex, ey + 16);
+
+  // Pioneer 5
+  ctx.fillStyle = missionDay <= LOS_DAY ? '#E8D060' : '#666';
+  ctx.beginPath();
+  ctx.arc(px, py, 4, 0, TWO_PI);
+  ctx.fill();
+  // Antenna line pointing toward Earth
+  if (missionDay <= LOS_DAY) {
+    const angle = Math.atan2(ey - py, ex - px);
+    ctx.strokeStyle = '#E8D060';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(px + 12 * Math.cos(angle), py + 12 * Math.sin(angle));
+    ctx.stroke();
+  }
+  ctx.fillStyle = '#ccc';
+  ctx.fillText('Pioneer 5', px, py - 10);
+
+  // Update panel
+  document.getElementById('day-val').textContent = Math.floor(missionDay);
+  document.getElementById('date-val').textContent = dayToDate(missionDay);
+  const distFmt = dist_km >= 1e6 ? (dist_km / 1e6).toFixed(1) + 'M km' :
+                  dist_km >= 1e3 ? (dist_km / 1e3).toFixed(0) + 'K km' :
+                  dist_km.toFixed(0) + ' km';
+  document.getElementById('dist-earth').textContent = distFmt;
+  document.getElementById('dist-sun').textContent = (p5.r / AU).toFixed(3) + ' AU';
+  document.getElementById('light-time').textContent = (dist_m / C).toFixed(0) + ' sec';
+  document.getElementById('p5-r').textContent = (p5.r / AU).toFixed(3) + ' AU';
+  document.getElementById('earth-r').textContent = (earth.r / AU).toFixed(3) + ' AU';
+  document.getElementById('venus-r').textContent = (venus.r / AU).toFixed(3) + ' AU';
+  document.getElementById('prx').textContent = link.prx.toFixed(1) + ' dBm';
+  document.getElementById('snr-val').textContent = link.snr.toFixed(1) + ' dB';
+
+  const sigPct = Math.max(0, Math.min(100, (link.prx + 200) / 1.5));
+  document.getElementById('signal-bar').style.width = sigPct + '%';
+  document.getElementById('signal-bar').style.background = link.snr > 3 ? '#2060CC' : '#CC4020';
+
+  const statusEl = document.getElementById('status');
+  if (missionDay > LOS_DAY) { statusEl.textContent = 'SIGNAL LOST'; statusEl.className = 'warn'; }
+  else if (link.snr > 10) { statusEl.textContent = 'STRONG SIGNAL'; statusEl.className = 'value'; }
+  else if (link.snr > 3) { statusEl.textContent = 'WEAK SIGNAL'; statusEl.className = 'signal'; }
+  else { statusEl.textContent = 'MARGINAL'; statusEl.className = 'warn'; }
+
+  // Title overlay
+  ctx.fillStyle = '#E8D060';
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('PIONEER 5 — HELIOCENTRIC ORBIT', w / 2, 18);
+  ctx.fillStyle = '#666';
+  ctx.font = '9px monospace';
+  ctx.fillText('First interplanetary probe — March 11, 1960', w / 2, 30);
+
+  // Scale indicator
+  ctx.strokeStyle = '#444';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(20, h - 20);
+  ctx.lineTo(20 + scale, h - 20);
+  ctx.stroke();
+  ctx.fillStyle = '#666';
+  ctx.font = '8px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('1 AU', 20 + scale / 2, h - 8);
+
+  requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', resize);
+resize();
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

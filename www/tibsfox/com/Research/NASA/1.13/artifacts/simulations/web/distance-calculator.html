@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 5 — How Far Can You Hear?</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #sim-canvas { flex: 1; }
+  #panel {
+    width: 340px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 13px; color: #E8D060; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #E8D060; font-weight: bold; }
+  .box .signal { color: #2060CC; font-weight: bold; }
+  .box .warn { color: #CC4020; font-weight: bold; }
+  .box .good { color: #8AAA70; font-weight: bold; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  .control-group input[type="range"] { width: 100%; accent-color: #E8D060; }
+  .marker { font-size: 8px; display: flex; justify-content: space-between; color: #666; }
+  .instructions { font-size: 9px; color: #666; text-align: center; line-height: 1.5; }
+  .presets { display: flex; flex-wrap: wrap; gap: 4px; }
+  .presets button {
+    font-size: 8px; padding: 3px 6px; background: #1a1a30; border: 1px solid #444;
+    color: #aaa; border-radius: 3px; cursor: pointer;
+  }
+  .presets button:hover { border-color: #E8D060; color: #E8D060; }
+  .bar-container {
+    height: 12px; background: #111; border-radius: 2px; overflow: hidden; margin: 3px 0;
+  }
+  .bar { height: 100%; border-radius: 2px; transition: width 0.2s; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>HOW FAR CAN YOU HEAR?</h1>
+    <h2>Pioneer 5 — Deep Space Link Budget Calculator</h2>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">Distance:</span> <span id="dist-val" class="value">36.2M km</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">In AU:</span> <span id="dist-au" class="value">0.242 AU</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Light time:</span> <span id="light-time" class="value">121 sec</span></div>
+    </div>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">FSPL:</span> <span id="fspl" class="warn">-234 dB</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Rx Power:</span> <span id="prx" class="signal">-151 dBm</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Noise floor:</span> <span id="noise" class="warn">-154 dBm</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">SNR:</span> <span id="snr" class="value">3 dB</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Data rate:</span> <span id="rate" class="value">142 bps</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Status:</span> <span id="status" class="good">DETECTED</span></div>
+    </div>
+
+    <div class="box">
+      <div class="label">Signal Strength:</div>
+      <div class="bar-container"><div id="signal-bar" class="bar" style="width:50%;background:#2060CC;"></div></div>
+      <div class="label">SNR Margin:</div>
+      <div class="bar-container"><div id="snr-bar" class="bar" style="width:50%;background:#8AAA70;"></div></div>
+    </div>
+
+    <div class="control-group">
+      <label>Transmitter Power: <span id="ptx-val">5.0 W</span></label>
+      <input type="range" id="ptx" min="0" max="40" value="7" step="1">
+      <div class="marker"><span>0.1W</span><span>5W Pioneer 5</span><span>23W Voyager</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Antenna Diameter: <span id="ant-val">26 m</span></label>
+      <input type="range" id="antenna" min="1" max="70" value="26" step="1">
+      <div class="marker"><span>1m</span><span>26m DSN</span><span>70m DSN</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Frequency: <span id="freq-val">378 MHz</span></label>
+      <input type="range" id="freq" min="100" max="10000" value="378" step="10">
+      <div class="marker"><span>100 MHz</span><span>378 Pioneer 5</span><span>10 GHz</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Distance: <span id="dist-slider-val">36.2M km</span></label>
+      <input type="range" id="distance" min="0" max="1000" value="755" step="1">
+      <div class="marker"><span>1K km</span><span>Moon</span><span>100M km</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>System Noise Temp: <span id="tsys-val">150 K</span></label>
+      <input type="range" id="tsys" min="10" max="500" value="150" step="5">
+      <div class="marker"><span>10K cryo</span><span>150K 1960s</span><span>500K</span></div>
+    </div>
+
+    <div class="presets">
+      <button onclick="setPreset('pioneer5')">Pioneer 5</button>
+      <button onclick="setPreset('voyager')">Voyager 1</button>
+      <button onclick="setPreset('moon')">Moon</button>
+      <button onclick="setPreset('mars')">Mars (close)</button>
+      <button onclick="setPreset('diy')">DIY 1W</button>
+    </div>
+
+    <div class="box" style="font-size:9px;color:#666;">
+      Pioneer 5 achieved contact at 36.2 million km with just 5 watts.
+      Adjust the sliders to explore how transmitter power, antenna size,
+      frequency, and distance affect the link budget. The canvas shows
+      the signal propagating from the spacecraft to Earth.
+    </div>
+
+    <div class="instructions">
+      Compare to Pioneer 5's actual achievement.<br>
+      Can you do better? Can you reach further?
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+
+// Physical constants
+const C = 2.998e8;
+const K = 1.381e-23;
+const AU = 1.496e11;
+const PI = Math.PI;
+
+// Slider elements
+const elPtx = document.getElementById('ptx');
+const elAnt = document.getElementById('antenna');
+const elFreq = document.getElementById('freq');
+const elDist = document.getElementById('distance');
+const elTsys = document.getElementById('tsys');
+
+function powerFromSlider(v) {
+  // Logarithmic: 0→0.1W, 20→5W, 40→100W
+  return Math.pow(10, (v - 20) / 10) * 5;
+}
+
+function distanceFromSlider(v) {
+  // Logarithmic: 0→1000km, 500→384400km, 1000→100M km
+  return Math.pow(10, 3 + v * 5 / 1000) * 1000; // meters
+}
+
+function antennaGain(diameter, freq) {
+  const lambda = C / freq;
+  const efficiency = 0.55;
+  const area = PI * (diameter / 2) ** 2;
+  return 10 * Math.log10(4 * PI * area * efficiency / (lambda * lambda));
+}
+
+function compute() {
+  const ptx_w = powerFromSlider(parseFloat(elPtx.value));
+  const ant_d = parseFloat(elAnt.value);
+  const freq = parseFloat(elFreq.value) * 1e6;
+  const dist_m = distanceFromSlider(parseFloat(elDist.value));
+  const tsys = parseFloat(elTsys.value);
+
+  const lambda = C / freq;
+  const ptx_dbm = 10 * Math.log10(ptx_w * 1000);
+  const g_tx = 3.0; // spacecraft omnidirectional
+  const g_rx = antennaGain(ant_d, freq);
+  const fspl = 20 * Math.log10(4 * PI * dist_m / lambda);
+  const bw = 100; // Hz
+  const noise_dbm = 10 * Math.log10(K * tsys * bw * 1000);
+  const prx_dbm = ptx_dbm + g_tx - fspl + g_rx;
+  const snr = prx_dbm - noise_dbm;
+  const snr_lin = Math.pow(10, snr / 10);
+  const rate = bw * Math.log2(1 + Math.max(0, snr_lin));
+  const light_s = dist_m / C;
+  const dist_km = dist_m / 1000;
+  const dist_au = dist_m / AU;
+
+  // Update display
+  const fmtDist = dist_km >= 1e6 ? (dist_km / 1e6).toFixed(1) + 'M km' :
+                  dist_km >= 1e3 ? (dist_km / 1e3).toFixed(0) + 'K km' :
+                  dist_km.toFixed(0) + ' km';
+
+  document.getElementById('dist-val').textContent = fmtDist;
+  document.getElementById('dist-slider-val').textContent = fmtDist;
+  document.getElementById('dist-au').textContent = dist_au.toFixed(4) + ' AU';
+  document.getElementById('light-time').textContent =
+    light_s > 60 ? (light_s / 60).toFixed(1) + ' min' : light_s.toFixed(1) + ' sec';
+  document.getElementById('ptx-val').textContent = ptx_w.toFixed(1) + ' W';
+  document.getElementById('ant-val').textContent = ant_d + ' m';
+  document.getElementById('freq-val').textContent = (freq / 1e6).toFixed(0) + ' MHz';
+  document.getElementById('tsys-val').textContent = tsys + ' K';
+  document.getElementById('fspl').textContent = '-' + fspl.toFixed(0) + ' dB';
+  document.getElementById('prx').textContent = prx_dbm.toFixed(1) + ' dBm';
+  document.getElementById('noise').textContent = noise_dbm.toFixed(1) + ' dBm';
+  document.getElementById('snr').textContent = snr.toFixed(1) + ' dB';
+  document.getElementById('rate').textContent = rate > 1000 ? (rate / 1000).toFixed(1) + ' kbps' :
+                                                 rate.toFixed(1) + ' bps';
+
+  const statusEl = document.getElementById('status');
+  if (snr > 10) { statusEl.textContent = 'STRONG'; statusEl.className = 'good'; }
+  else if (snr > 3) { statusEl.textContent = 'DETECTED'; statusEl.className = 'good'; }
+  else if (snr > 0) { statusEl.textContent = 'MARGINAL'; statusEl.className = 'value'; }
+  else { statusEl.textContent = 'LOST IN NOISE'; statusEl.className = 'warn'; }
+
+  // Bars
+  const sigPct = Math.max(0, Math.min(100, (prx_dbm + 200) / 2));
+  const snrPct = Math.max(0, Math.min(100, (snr + 30) * 100 / 60));
+  document.getElementById('signal-bar').style.width = sigPct + '%';
+  document.getElementById('signal-bar').style.background = snr > 3 ? '#2060CC' : '#CC4020';
+  document.getElementById('snr-bar').style.width = snrPct + '%';
+  document.getElementById('snr-bar').style.background = snr > 3 ? '#8AAA70' : snr > 0 ? '#CC8830' : '#CC4020';
+
+  return { dist_m, dist_km, ptx_w, snr, prx_dbm, g_rx, light_s };
+}
+
+function setPreset(name) {
+  const presets = {
+    pioneer5: { ptx: 7, ant: 26, freq: 378, dist: 755, tsys: 150 },
+    voyager:  { ptx: 28, ant: 70, freq: 8400, dist: 990, tsys: 20 },
+    moon:     { ptx: 7, ant: 26, freq: 378, dist: 458, tsys: 150 },
+    mars:     { ptx: 20, ant: 34, freq: 2300, dist: 870, tsys: 30 },
+    diy:      { ptx: 0, ant: 3, freq: 400, dist: 300, tsys: 300 },
+  };
+  const p = presets[name];
+  elPtx.value = p.ptx; elAnt.value = p.ant; elFreq.value = p.freq;
+  elDist.value = p.dist; elTsys.value = p.tsys;
+}
+
+// Canvas rendering
+let time = 0;
+
+function resize() {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * devicePixelRatio;
+  canvas.height = rect.height * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+}
+
+function drawFrame() {
+  const w = canvas.width / devicePixelRatio;
+  const h = canvas.height / devicePixelRatio;
+  const data = compute();
+
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, w, h);
+
+  // Stars
+  for (let i = 0; i < 80; i++) {
+    const x = ((i * 137.3) % w);
+    const y = ((i * 251.7) % h);
+    const b = 0.3 + 0.7 * ((Math.sin(i * 3.7 + time * 0.5) + 1) / 2);
+    ctx.fillStyle = `rgba(200,210,230,${b * 0.4})`;
+    ctx.fillRect(x, y, 1, 1);
+  }
+
+  const cx = w * 0.5;
+  const cy = h * 0.5;
+
+  // Earth (left side)
+  const earthX = w * 0.12;
+  const earthY = cy;
+  const earthR = 20;
+
+  ctx.beginPath();
+  ctx.arc(earthX, earthY, earthR, 0, 2 * PI);
+  ctx.fillStyle = '#1040AA';
+  ctx.fill();
+  ctx.strokeStyle = '#3060CC';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.fillStyle = '#aaa';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Earth', earthX, earthY + earthR + 12);
+
+  // Ground antenna
+  ctx.strokeStyle = '#E8D060';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(earthX + earthR + 3, earthY - 5);
+  ctx.lineTo(earthX + earthR + 15, earthY - 15);
+  ctx.lineTo(earthX + earthR + 15, earthY + 5);
+  ctx.closePath();
+  ctx.stroke();
+
+  // Pioneer 5 (right side, position based on distance)
+  const maxScreenDist = w * 0.7;
+  const logDist = Math.log10(data.dist_km);
+  const logMin = 3; const logMax = 8;
+  const screenDist = Math.min(maxScreenDist, ((logDist - logMin) / (logMax - logMin)) * maxScreenDist);
+  const p5x = earthX + 40 + screenDist;
+  const p5y = cy;
+
+  // Pioneer 5 spacecraft
+  ctx.fillStyle = '#E8D060';
+  ctx.beginPath();
+  ctx.arc(p5x, p5y, 5, 0, 2 * PI);
+  ctx.fill();
+  // Solar panels
+  ctx.strokeStyle = '#CC8830';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(p5x - 12, p5y - 3);
+  ctx.lineTo(p5x - 4, p5y - 3);
+  ctx.moveTo(p5x + 4, p5y - 3);
+  ctx.lineTo(p5x + 12, p5y - 3);
+  ctx.stroke();
+
+  ctx.fillStyle = '#ccc';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Pioneer 5', p5x, p5y + 18);
+  ctx.fillStyle = '#888';
+  ctx.font = '8px monospace';
+  const fmtDist = data.dist_km >= 1e6 ? (data.dist_km / 1e6).toFixed(1) + 'M km' :
+                  data.dist_km >= 1e3 ? (data.dist_km / 1e3).toFixed(0) + 'K km' :
+                  data.dist_km.toFixed(0) + ' km';
+  ctx.fillText(fmtDist, p5x, p5y + 28);
+
+  // Signal waves propagating from Pioneer 5 to Earth
+  const numWaves = 8;
+  for (let i = 0; i < numWaves; i++) {
+    const phase = (time * 0.5 + i / numWaves) % 1;
+    const waveX = p5x - phase * (p5x - earthX - earthR - 10);
+    const waveR = 5 + phase * 30;
+    const alpha = (1 - phase) * 0.3;
+    // Color depends on SNR
+    const r = data.snr > 3 ? 32 : 204;
+    const g = data.snr > 3 ? 96 : 64;
+    const b = data.snr > 3 ? 204 : 32;
+    ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(waveX, p5y, waveR, -0.5, 0.5);
+    ctx.stroke();
+  }
+
+  // Signal strength meter at bottom
+  const meterX = w * 0.1;
+  const meterW = w * 0.8;
+  const meterY = h - 40;
+  const meterH = 15;
+
+  ctx.fillStyle = '#111';
+  ctx.fillRect(meterX, meterY, meterW, meterH);
+  ctx.strokeStyle = '#333';
+  ctx.strokeRect(meterX, meterY, meterW, meterH);
+
+  const sigPct = Math.max(0, Math.min(1, (data.prx_dbm + 200) / 150));
+  const barColor = data.snr > 10 ? '#2060CC' : data.snr > 3 ? '#CC8830' : '#CC4020';
+  ctx.fillStyle = barColor;
+  ctx.fillRect(meterX, meterY, meterW * sigPct, meterH);
+
+  // Noise floor marker
+  const noisePct = Math.max(0, Math.min(1, (-154 + 200) / 150));
+  ctx.strokeStyle = '#CC4020';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(meterX + meterW * noisePct, meterY - 3);
+  ctx.lineTo(meterX + meterW * noisePct, meterY + meterH + 3);
+  ctx.stroke();
+  ctx.fillStyle = '#CC4020';
+  ctx.font = '8px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('noise floor', meterX + meterW * noisePct, meterY - 5);
+
+  ctx.fillStyle = '#888';
+  ctx.textAlign = 'left';
+  ctx.fillText('SIGNAL STRENGTH', meterX, meterY - 5);
+
+  // Title
+  ctx.fillStyle = '#E8D060';
+  ctx.font = '12px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('PIONEER 5 LINK BUDGET', cx, 20);
+  ctx.fillStyle = '#666';
+  ctx.font = '9px monospace';
+  ctx.fillText('5W transmitter — first interplanetary probe — March 11, 1960', cx, 34);
+
+  time += 0.016;
+  requestAnimationFrame(drawFrame);
+}
+
+window.addEventListener('resize', resize);
+resize();
+drawFrame();
+</script>
+</body>
+</html>

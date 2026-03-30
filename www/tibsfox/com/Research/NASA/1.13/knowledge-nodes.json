@@ -1,0 +1,235 @@
+{
+  "mission": "1.13",
+  "title": "Pioneer 5 (Thor-Able IV)",
+  "date": "1960-03-11",
+  "status": "SUCCESS",
+  "primary_achievement": "First interplanetary probe. Achieved heliocentric orbit between Earth and Venus. 5W transmitter maintained contact to record distance of 36.2 million km, measuring interplanetary magnetic field and solar wind.",
+  "organism": "Halichondria panicea",
+  "organism_common": "breadcrumb sponge",
+  "organism_location": "Rocky intertidal and subtidal zones of temperate coastlines worldwide, including the Pacific Northwest. An encrusting sponge that forms irregular, lumpy patches on rocks, shells, and pilings. Color varies from yellow-orange to green (when hosting symbiotic algae). Named for its crumbly, bread-like texture when broken. Found from the low intertidal zone to depths of 50+ meters. Common on rocky shores from Alaska to California, also Atlantic coasts and European waters. Feeds by filtering seawater through thousands of ostia (incurrent pores), extracting bacteria, dissolved organic matter, and detritus. Pumps up to 20,000 liters of water per kilogram of body weight per day. The original signal processor — extracting micrograms of nutrition from an ocean of noise, the biological equivalent of pulling Pioneer 5's 5W signal from the cosmic background at 36.2 million kilometers.",
+  "bird": "Cepphus columba",
+  "bird_common": "Pigeon Guillemot",
+  "dedication": {
+    "name": "Douglas Adams",
+    "born": "1952-03-11",
+    "died": "2001-05-11",
+    "birthplace": "Cambridge, England",
+    "field": "Science fiction, comedy, technology, conservation",
+    "resonance": "Douglas Adams was born on March 11, 1952 — exactly eight years to the day before Pioneer 5's launch on March 11, 1960. Adams understood the comedy and tragedy of scale: the absurdity of a tiny civilization on a tiny planet trying to make itself heard across distances that reduce every signal to statistical noise. 'Space is big. Really big.' Pioneer 5's five watts crossing 36.2 million kilometers is the punchline to a joke the universe has been telling since the Big Bang: everything you transmit gets quieter with the square of the distance, and the distance is always bigger than you think. Adams also understood the answer: forty-two, which is not the point — the point is the question, which nobody knows. Pioneer 5's engineers knew the answer (5W at 378.2 MHz) but the question was whether the universe would let them hear it. For 106 days, it did. Then it didn't. The spacecraft is still transmitting in Adams's cosmology — it just can't be heard. Don't Panic."
+  },
+  "nodes": [
+    {
+      "id": "free-space-path-loss",
+      "concept": "Free-space path loss — signal attenuation due to geometric spreading",
+      "department": "telecommunications",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.1",
+      "description": "Free-space path loss (FSPL) is the attenuation of electromagnetic radiation as it propagates through free space. It is not absorption — the energy is not converted to heat or other forms. It is purely geometric: the signal power spreads over an expanding sphere whose surface area grows as 4πr². The power density (watts per square meter) at distance d from an isotropic radiator of power P is P/(4πd²). FSPL in decibels: FSPL = 20×log₁₀(4πd/λ), where λ is the wavelength. At Pioneer 5's frequency (378.2 MHz, λ = 0.793 m) and record distance (36.2 million km), FSPL = 234 dB — a factor of 2.5 × 10²³ in power. The signal is not lost; it is spread so thin that detecting it requires extraordinary receiver sensitivity.",
+      "resonance": "The breadcrumb sponge faces the same geometric problem in reverse. Nutrients in seawater are distributed through a three-dimensional volume. The sponge cannot increase the nutrient concentration — it can only increase the volume of water it processes. Its pumping rate (up to 20,000 liters per kg per day) is the biological equivalent of a large antenna: it intercepts more of the dilute signal by sampling a larger portion of the medium. Both systems fight the same geometry: signal diluted by volume, recovered by large collecting area.",
+      "worked_example": {
+        "description": "Calculate free-space path loss for Pioneer 5 at various distances",
+        "parameters": {
+          "frequency_hz": 378200000,
+          "c_m_s": 299800000,
+          "lambda_m": 0.793
+        },
+        "formula": "FSPL(dB) = 20 × log₁₀(4πd/λ)",
+        "result": "At 1000 km: FSPL = 20×log₁₀(4π×10⁶/0.793) = 104 dB. At 36.2M km: FSPL = 20×log₁₀(4π×3.62×10¹⁰/0.793) = 234 dB. Each factor of 10 in distance adds 20 dB of loss.",
+        "python": "import numpy as np\n\nc = 2.998e8\nf = 378.2e6\nlam = c / f\n\ndistances_km = [1e3, 1e4, 1e5, 384400, 1e6, 1e7, 36.2e6]\nprint(f'Pioneer 5 FSPL at {f/1e6:.1f} MHz (lambda = {lam:.3f} m)')\nprint(f'{\"Distance\":>15s} {\"FSPL (dB)\":>12s}')\nprint('-' * 30)\nfor d_km in distances_km:\n    d_m = d_km * 1000\n    fspl = 20 * np.log10(4 * np.pi * d_m / lam)\n    label = ''\n    if d_km == 384400: label = ' (Moon)'\n    elif d_km == 36.2e6: label = ' (Pioneer 5 record)'\n    print(f'{d_km:>12,.0f} km {fspl:>10.1f} dB{label}')"
+      }
+    },
+    {
+      "id": "link-budget",
+      "concept": "Link budget — accounting for all gains and losses in a communication link",
+      "department": "telecommunications",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "A link budget is the complete accounting of all gains and losses between a transmitter and a receiver. It is expressed in decibels: P_rx(dBm) = P_tx(dBm) + G_tx(dBi) - FSPL(dB) + G_rx(dBi) - L_misc(dB). For Pioneer 5: P_tx = +37 dBm (5W), G_tx = +3 dBi (omnidirectional), FSPL = -234 dB (at 36.2M km), G_rx = +43 dBi (26m dish). Result: P_rx = 37 + 3 - 234 + 43 = -151 dBm ≈ 8 × 10⁻¹⁹ W. The noise floor in 100 Hz bandwidth at 150K system temperature is kTB = 1.381×10⁻²³ × 150 × 100 = 2.07 × 10⁻¹⁹ W = -157 dBm. SNR = -151 - (-157) = 6 dB — enough for low-rate telemetry. The link budget reveals that every component matters: 3 dB more antenna gain doubles the maximum distance.",
+      "resonance": "The sponge has its own link budget. Inputs: water flow rate (pump power), particle concentration (signal strength), choanocyte efficiency (receiver sensitivity). Losses: particles too small to capture (below the collar mesh size), clogging (equivalent to receiver saturation), metabolic cost of pumping (equivalent to receiver power consumption). The sponge's 'link margin' is the difference between calories captured and calories spent. When the margin goes negative — nutrient concentration too low, water too turbid, temperature too high — the sponge cannot sustain itself. Same as Pioneer 5: when the link margin goes negative, communication ceases.",
+      "worked_example": {
+        "description": "Complete link budget for Pioneer 5 at record distance",
+        "parameters": {
+          "P_tx_W": 5.0,
+          "G_tx_dBi": 3.0,
+          "G_rx_dBi": 43.0,
+          "freq_MHz": 378.2,
+          "distance_km": 36200000,
+          "T_sys_K": 150,
+          "bandwidth_Hz": 100
+        },
+        "formula": "P_rx = P_tx + G_tx - FSPL + G_rx; SNR = P_rx - N; N = 10×log₁₀(kTB×1000)",
+        "result": "P_tx = 37.0 dBm, G_tx = 3.0 dBi, FSPL = 233.7 dB, G_rx = 43.0 dBi. P_rx = 37 + 3 - 233.7 + 43 = -150.7 dBm. Noise = -156.8 dBm. SNR = 6.1 dB.",
+        "python": "import numpy as np\n\nk = 1.381e-23\nc = 2.998e8\nf = 378.2e6\nlam = c / f\n\nP_tx = 5.0\nP_tx_dbm = 10 * np.log10(P_tx * 1000)\nG_tx = 3.0\nG_rx = 43.0\nd = 36.2e9  # 36.2 million km in meters\nT_sys = 150\nBW = 100\n\nFSPL = 20 * np.log10(4 * np.pi * d / lam)\nP_rx = P_tx_dbm + G_tx - FSPL + G_rx\nN = 10 * np.log10(k * T_sys * BW * 1000)\nSNR = P_rx - N\n\nprint('Pioneer 5 Link Budget')\nprint(f'  Tx power:    {P_tx_dbm:.1f} dBm ({P_tx} W)')\nprint(f'  Tx gain:     +{G_tx:.1f} dBi')\nprint(f'  FSPL:        -{FSPL:.1f} dB')\nprint(f'  Rx gain:     +{G_rx:.1f} dBi')\nprint(f'  ─────────────────────')\nprint(f'  Rx power:    {P_rx:.1f} dBm ({10**(P_rx/10)/1000:.2e} W)')\nprint(f'  Noise:       {N:.1f} dBm')\nprint(f'  SNR:         {SNR:.1f} dB')"
+      }
+    },
+    {
+      "id": "heliocentric-orbit",
+      "concept": "Heliocentric orbit — an orbit around the Sun rather than a planet",
+      "department": "orbital-mechanics",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.2",
+      "description": "A heliocentric orbit is an orbit with the Sun at one focus of the ellipse. Earth, all planets, asteroids, comets, and interplanetary spacecraft travel in heliocentric orbits (unless they are in orbit around another body). Pioneer 5 was the first spacecraft to achieve a deliberately planned heliocentric orbit distinct from Earth's. Its orbit had semi-major axis 0.9005 AU, eccentricity 0.105, and period 311.6 days. Because Pioneer 5's orbit was slightly smaller than Earth's, it orbited the Sun faster and gradually moved ahead of Earth. The distance between the two grew with time, eventually exceeding the communication range.",
+      "resonance": "The breadcrumb sponge lives in the intertidal zone, where its environment is governed by orbital mechanics — the tides. Tides are caused by the gravitational interaction between Earth, Moon, and Sun, all in their respective orbits. The sponge's exposure cycle (submerged at high tide, exposed at low tide) is a direct consequence of the same gravitational physics that determines Pioneer 5's orbit. Both the spacecraft and the sponge have their lives shaped by Kepler's laws.",
+      "worked_example": {
+        "description": "Calculate Pioneer 5's orbital period from Kepler's third law",
+        "parameters": {
+          "a_AU": 0.9005,
+          "G": 6.674e-11,
+          "M_sun_kg": 1.989e30
+        },
+        "formula": "T = 2π√(a³/μ), where μ = GM_sun",
+        "result": "a = 0.9005 AU = 1.347 × 10¹¹ m. μ = 1.327 × 10²⁰ m³/s². T = 2π√((1.347e11)³ / 1.327e20) = 2.692 × 10⁷ s = 311.6 days.",
+        "python": "import numpy as np\n\nAU = 1.496e11\nmu = 1.327e20  # GM_sun\na = 0.9005 * AU\ne = 0.105\n\nT = 2 * np.pi * np.sqrt(a**3 / mu)\nT_days = T / 86400\n\nprint(f'Pioneer 5 orbital elements:')\nprint(f'  Semi-major axis: {a/AU:.4f} AU = {a/1e9:.1f} million km')\nprint(f'  Eccentricity: {e}')\nprint(f'  Perihelion: {a*(1-e)/AU:.3f} AU = {a*(1-e)/1e9:.1f} million km')\nprint(f'  Aphelion: {a*(1+e)/AU:.3f} AU = {a*(1+e)/1e9:.1f} million km')\nprint(f'  Period: {T_days:.1f} days')"
+      }
+    },
+    {
+      "id": "interplanetary-magnetic-field",
+      "concept": "Interplanetary magnetic field — the Sun's magnetic field carried by the solar wind",
+      "department": "space-physics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.2",
+      "description": "The interplanetary magnetic field (IMF) is the component of the Sun's magnetic field that is carried into interplanetary space by the solar wind. The field lines are 'frozen in' to the solar wind plasma (ideal MHD), so as the Sun rotates and the wind flows radially outward, the field lines are wound into an Archimedean spiral — the Parker spiral, named after Eugene Parker who predicted it in 1958. Pioneer 5 provided the first in-situ measurements of the IMF, confirming Parker's prediction. The measured field strength was 2-5 nanotesla (nT) at distances near 1 AU. The IMF varies with the 11-year solar cycle, solar flares, and coronal mass ejections. It is the medium through which solar storms propagate to Earth, causing geomagnetic storms and aurorae.",
+      "resonance": "The sponge has its own field sensing — not magnetic, but chemical. Dissolved chemical gradients in seawater carry information about food sources, predators, and water quality, much as the IMF carries information about solar activity. The sponge's chemosensory system detects these gradients and modulates pumping behavior accordingly. Both Pioneer 5 and the sponge are passive sensors immersed in a field, reading the medium to understand distant processes.",
+      "worked_example": {
+        "description": "Parker spiral geometry at 1 AU",
+        "parameters": {
+          "v_sw_km_s": 400,
+          "omega_sun_rad_s": 2.87e-6,
+          "r_AU": 1.0
+        },
+        "formula": "tan(ψ) = ω×r/v_sw, where ψ is the spiral angle",
+        "result": "At 1 AU: r = 1.496e11 m, ω = 2.87e-6 rad/s, v_sw = 4e5 m/s. tan(ψ) = 2.87e-6 × 1.496e11 / 4e5 = 1.073. ψ = 47°. The field makes a 47° angle with the radial direction at Earth's orbit.",
+        "python": "import numpy as np\n\nAU = 1.496e11\nomega = 2 * np.pi / (25.4 * 86400)  # Solar rotation period\nv_sw = 400e3  # Solar wind speed (m/s)\n\nr_values = np.array([0.3, 0.5, 0.723, 0.9, 1.0, 1.5]) * AU\nprint(f'{\"r (AU)\":>8s} {\"Spiral angle\":>14s}')\nfor r in r_values:\n    psi = np.degrees(np.arctan(omega * r / v_sw))\n    print(f'{r/AU:>8.3f} {psi:>12.1f} deg')\nprint(f'\\nPioneer 5 measured IMF: 2-5 nT near 0.9 AU')\nprint(f'Confirmed Parker\\'s 1958 spiral prediction')"
+      }
+    },
+    {
+      "id": "solar-wind",
+      "concept": "Solar wind — supersonic plasma flow from the Sun's corona",
+      "department": "space-physics",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.3",
+      "description": "The solar wind is a continuous stream of charged particles (primarily protons and electrons) flowing outward from the Sun's corona at speeds of 300-800 km/s. It was predicted by Eugene Parker in 1958 and first confirmed by measurements from Mariner 2 in 1962, but Pioneer 5's data (March-June 1960) provided early evidence of its existence. The solar wind carries the Sun's magnetic field into interplanetary space, creates the heliosphere (the bubble of solar influence extending to ~120 AU), and interacts with planetary magnetospheres to produce aurorae. At 1 AU, the solar wind has a density of ~5 particles/cm³ and a temperature of ~10⁵ K. It is the medium through which Pioneer 5 traveled — the 'atmosphere' of interplanetary space.",
+      "resonance": "The sponge lives in a flow field too — ocean currents and tidal flows carry water past its body, and the sponge augments this with its own pumping. The solar wind is the Sun's 'current,' carrying particles and energy outward through the solar system. Pioneer 5 was a passive sensor in this flow, just as the sponge is a passive sensor in the ocean current, both extracting information (and in the sponge's case, nutrition) from the stream that carries it.",
+      "worked_example": {
+        "description": "Solar wind properties at Pioneer 5's orbital distances",
+        "parameters": {
+          "n_1AU_cm3": 5.0,
+          "v_sw_km_s": 400,
+          "T_K": 100000
+        },
+        "formula": "Density falls as 1/r²: n(r) = n₀ × (r₀/r)²",
+        "result": "At 0.806 AU (Pioneer 5 perihelion): n = 5 × (1/0.806)² = 7.7 /cm³. At 0.995 AU (aphelion): n = 5.1 /cm³. Dynamic pressure: P = ½ × n × m_p × v² = ½ × 5e6 × 1.67e-27 × (4e5)² = 6.7e-10 Pa = 0.67 nPa.",
+        "python": "import numpy as np\n\nn_1AU = 5.0  # particles/cm³\nv_sw = 400  # km/s\nm_p = 1.67e-27  # proton mass (kg)\n\nprint('Solar wind at Pioneer 5 orbital distances:')\nfor r_AU in [0.806, 0.9, 0.995, 1.0]:\n    n = n_1AU * (1/r_AU)**2\n    P = 0.5 * (n * 1e6) * m_p * (v_sw * 1e3)**2\n    print(f'  r = {r_AU:.3f} AU: n = {n:.1f} /cm³, P = {P*1e9:.2f} nPa')"
+      }
+    },
+    {
+      "id": "deep-space-communication",
+      "concept": "Deep-space communication — maintaining radio contact across interplanetary distances",
+      "department": "telecommunications",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.3",
+      "description": "Deep-space communication is the engineering challenge of maintaining a radio link between Earth and spacecraft at interplanetary distances. The challenges are: (1) extreme path loss from the inverse-square law, (2) very low signal-to-noise ratios requiring narrow bandwidth and long integration times, (3) significant light-speed delay (minutes to hours), (4) precise antenna pointing, and (5) Doppler shift from relative motion. Pioneer 5 demonstrated the first interplanetary communication link, using a 5W transmitter at 378.2 MHz received by the 26m Goldstone dish and the 76m Jodrell Bank telescope. The Deep Space Network (DSN) was formalized partly in response to the lessons learned from Pioneer 5's communication challenges. Today the DSN uses 34m and 70m dishes with cryogenic receivers and coded modulation schemes that were unavailable in 1960.",
+      "resonance": "The sponge's channel system is its own communication network — water flows from incurrent pores through the body to excurrent pores (oscula), carrying chemical signals and nutrients. The distance from ostium to osculum is centimeters, but at the cellular scale, this is the sponge's deep-space link: flagella must pump against viscosity, particles must be captured in transit, and waste must be expelled without contaminating the intake. Scale is relative — the sponge's internal communication challenge, at its Reynolds number, is as demanding as Pioneer 5's interplanetary link at its distance.",
+      "worked_example": {
+        "description": "Signal round-trip time at various distances",
+        "parameters": {
+          "c_km_s": 299800
+        },
+        "formula": "t_round_trip = 2d/c",
+        "result": "Moon (384,400 km): 2.56 s. Pioneer 5 max (36.2M km): 241 s = 4.0 min. Mars min (55M km): 367 s = 6.1 min. Jupiter (600M km): 4,003 s = 66.7 min. Voyager 1 (24.4B km): 162,775 s = 45.2 hours.",
+        "python": "import numpy as np\n\nc = 2.998e5  # km/s\n\nbodies = [\n    ('Moon', 384400),\n    ('Pioneer 5 max', 36.2e6),\n    ('Mars (min)', 55e6),\n    ('Mars (max)', 401e6),\n    ('Jupiter', 600e6),\n    ('Saturn', 1.2e9),\n    ('Voyager 1', 24.4e9)\n]\n\nprint(f'{\"Target\":>18s} {\"Distance (km)\":>15s} {\"One-way\":>10s} {\"Round-trip\":>12s}')\nfor name, d in bodies:\n    owt = d / c\n    rtt = 2 * owt\n    if rtt > 3600:\n        rtt_str = f'{rtt/3600:.1f} hours'\n    elif rtt > 60:\n        rtt_str = f'{rtt/60:.1f} min'\n    else:\n        rtt_str = f'{rtt:.1f} sec'\n    print(f'{name:>18s} {d:>15,.0f} {owt:>9.0f} s {rtt_str:>12s}')"
+      }
+    },
+    {
+      "id": "inverse-square-law",
+      "concept": "Inverse-square law — how signal intensity decreases with distance",
+      "department": "physics",
+      "level": "beginner",
+      "tspb_layer": 1,
+      "tspb_section": "1.1",
+      "description": "The inverse-square law states that the intensity (power per unit area) of a point source decreases as the square of the distance from the source: I = P/(4πr²). This is purely geometric — the total power P is spread over the surface of a sphere of radius r, and that sphere's area grows as r². Double the distance, quarter the intensity. This law applies to gravity, light, sound (approximately), electric fields, and any radiation from a point source in three dimensions. For Pioneer 5, the inverse-square law was the fundamental limit: at 36.2 million km, the 5W signal's intensity was (36.2×10⁶/1)² = 1.31 × 10¹⁵ times weaker than at 1 km. No engineering can defeat the inverse-square law — it can only be compensated with antenna gain, receiver sensitivity, and coding techniques.",
+      "resonance": "The sponge experiences the inverse-square law in reverse: nutrient concentration near a point source of food (a decaying organism, a productive patch of seafloor) decreases as particles diffuse outward. The further the sponge is from the nutrient source, the lower the concentration it receives. Sponges located near productive zones thrive; those in nutrient-poor waters grow slowly or starve. Distance determines signal strength for both the spacecraft and the sponge.",
+      "worked_example": {
+        "description": "Inverse-square attenuation of Pioneer 5's signal",
+        "parameters": {
+          "P_tx_W": 5.0
+        },
+        "formula": "I = P / (4πr²)",
+        "result": "At 1 km: I = 5/(4π×10⁶) = 3.98×10⁻⁷ W/m². At 36.2M km: I = 5/(4π×(3.62×10¹⁰)²) = 3.04×10⁻²² W/m². Ratio: 1.31 × 10¹⁵. That's a quadrillion-fold reduction.",
+        "python": "import numpy as np\n\nP = 5.0  # watts\nprint('Pioneer 5 — Inverse-Square Law')\nprint(f'Transmitter power: {P} W')\nprint(f'{\"Distance\":>15s} {\"Intensity (W/m²)\":>20s} {\"Ratio vs 1km\":>15s}')\nprint('-' * 55)\nI_ref = P / (4 * np.pi * (1e3)**2)\nfor d_km in [1, 10, 100, 1000, 1e4, 1e5, 1e6, 1e7, 36.2e6]:\n    d_m = d_km * 1000\n    I = P / (4 * np.pi * d_m**2)\n    ratio = I_ref / I\n    print(f'{d_km:>12,.0f} km {I:>20.2e} {ratio:>15.2e}')"
+      }
+    },
+    {
+      "id": "antenna-gain",
+      "concept": "Antenna gain — focusing electromagnetic energy to compensate for path loss",
+      "department": "telecommunications",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.4",
+      "description": "Antenna gain measures how effectively an antenna concentrates radiated power in a particular direction compared to an isotropic (omnidirectional) radiator. Gain is expressed in dBi (decibels relative to isotropic). A parabolic dish antenna has gain G = η × (πD/λ)², where D is diameter, λ is wavelength, and η is efficiency (~0.55). For Goldstone's 26m dish at 378.2 MHz (λ = 0.793 m): G = 0.55 × (π × 26/0.793)² = 0.55 × 10,580 = 5,819 = 37.6 dBi. The dish acts as a funnel, collecting energy over its 531 m² aperture and concentrating it at the feed. Pioneer 5's spacecraft antenna was nearly omnidirectional (G ≈ 3 dBi), broadcasting in all directions — most of the 5W was wasted into empty space. Only the tiny fraction intercepted by the ground antenna mattered.",
+      "resonance": "The sponge's body is its antenna — shaped to maximize the interception of nutrient-bearing water. An encrusting sponge like Halichondria panicea maximizes its surface-area-to-volume ratio by spreading thin across rocks, maximizing the 'aperture' presented to passing water currents. The sponge's gain is in its channel architecture: the internal plumbing directs all intercepted water past the choanocytes, just as a parabolic dish directs all intercepted radiation to the feed horn. No energy is wasted.",
+      "worked_example": {
+        "description": "Antenna gain vs dish diameter at Pioneer 5's frequency",
+        "parameters": {
+          "freq_MHz": 378.2,
+          "lambda_m": 0.793,
+          "efficiency": 0.55
+        },
+        "formula": "G = η × (πD/λ)²; G(dBi) = 10 × log₁₀(G)",
+        "result": "At D=26m: G = 0.55 × (π×26/0.793)² = 5,819 = 37.6 dBi. At D=70m: G = 0.55 × (π×70/0.793)² = 42,270 = 46.3 dBi. The 70m dish provides 8.7 dB more gain — it extends the range by a factor of 2.7.",
+        "python": "import numpy as np\n\nf = 378.2e6\nc = 2.998e8\nlam = c / f\neta = 0.55\n\nprint(f'Antenna gain at {f/1e6:.1f} MHz (lambda = {lam:.3f} m)')\nprint(f'{\"Diameter (m)\":>14s} {\"Gain (linear)\":>15s} {\"Gain (dBi)\":>12s}')\nfor D in [1, 3, 5, 10, 18, 26, 34, 64, 70]:\n    G = eta * (np.pi * D / lam)**2\n    G_dbi = 10 * np.log10(G)\n    print(f'{D:>14d} {G:>15.0f} {G_dbi:>12.1f}')"
+      }
+    },
+    {
+      "id": "search-coil-magnetometer",
+      "concept": "Search-coil magnetometer — measuring magnetic fields via electromagnetic induction",
+      "department": "instrumentation",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.5",
+      "description": "A search-coil magnetometer detects changes in magnetic field by measuring the voltage induced in a coil of wire, following Faraday's law: V = -N × dΦ/dt, where N is the number of turns and Φ is the magnetic flux through the coil. Pioneer 5 carried a search-coil magnetometer to measure the interplanetary magnetic field. The instrument was sensitive to field variations (AC component) rather than the static (DC) field. It detected fluctuations in the 2-5 nT range, confirming the existence of the interplanetary magnetic field and its variability. The search-coil design was chosen because it requires no power for the sensing element itself — the changing field generates the signal. This was important for Pioneer 5's limited 5W power budget, where every milliwatt allocated to science came at the expense of communication.",
+      "resonance": "The sponge has mechanosensory cells that respond to water flow — not through electromagnetic induction, but through mechanical deformation. The principle is analogous: a change in the environment (magnetic field / water current) produces a response in the sensor (voltage / cellular signal) that is proportional to the rate of change. Both are AC sensors: they detect variations, not steady states. A search coil in a constant field produces no voltage; a sponge cell in still water produces no signal.",
+      "worked_example": {
+        "description": "EMF induced in Pioneer 5's search coil by the interplanetary magnetic field",
+        "parameters": {
+          "N_turns": 10000,
+          "A_m2": 0.01,
+          "dB_dt_T_s": 1e-11
+        },
+        "formula": "V = N × A × dB/dt",
+        "result": "For a coil with N=10,000 turns, area A=0.01 m², and dB/dt = 10⁻¹¹ T/s (typical IMF fluctuation rate): V = 10,000 × 0.01 × 10⁻¹¹ = 10⁻⁹ V = 1 nV. Extremely small — requires very low-noise amplification.",
+        "python": "import numpy as np\n\nN = 10000\nA = 0.01  # m²\n\n# IMF fluctuation rates\nrates = [1e-12, 1e-11, 1e-10, 1e-9]  # T/s\nprint(f'Search-coil magnetometer EMF (N={N}, A={A} m²)')\nprint(f'{\"dB/dt (T/s)\":>15s} {\"EMF\":>15s}')\nfor dbdt in rates:\n    V = N * A * dbdt\n    if V >= 1e-6:\n        print(f'{dbdt:>15.0e} {V*1e6:>12.1f} uV')\n    else:\n        print(f'{dbdt:>15.0e} {V*1e9:>12.1f} nV')"
+      }
+    },
+    {
+      "id": "rf-preamplification",
+      "concept": "RF preamplification — low-noise amplification at the receiver front end",
+      "department": "electronics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.6",
+      "description": "RF preamplification is the process of amplifying a weak radio signal immediately after the antenna, before it reaches the mixer or other processing stages. The preamplifier's critical specifications are gain (typically 15-25 dB) and noise figure (how much noise the amplifier adds to the signal). Friis's formula shows why the first stage dominates: NF_total = NF₁ + (NF₂-1)/G₁ + (NF₃-1)/(G₁×G₂). A preamplifier with 2 dB NF and 20 dB gain reduces the system noise figure from 13 dB (mixer-first) to ~2.3 dB — a 10 dB improvement in sensitivity, equivalent to a 10× larger antenna. Pioneer 5's ground receivers used parametric amplifiers (the 1960 state-of-the-art low-noise technology) with noise temperatures below 100K. Modern deep-space receivers use HEMT amplifiers cooled to 15K, achieving noise temperatures of 18-25K.",
+      "resonance": "The sponge's choanocytes are its preamplifiers — the first stage of nutrient processing. Each choanocyte has a collar of microvilli that acts as a filter, capturing particles from the water stream. The efficiency of this first-stage capture determines the overall nutrient extraction rate, just as the preamplifier's noise figure determines the overall receiver sensitivity. A choanocyte that misses particles at the first pass cannot recover them — they are swept past by the water current. First stage sets the floor.",
+      "worked_example": {
+        "description": "System noise figure with and without preamplifier",
+        "parameters": {
+          "preamp_NF_dB": 2.0,
+          "preamp_gain_dB": 20,
+          "mixer_NF_dB": 10,
+          "mixer_gain_dB": -6,
+          "IF_NF_dB": 6,
+          "IF_gain_dB": 30
+        },
+        "formula": "NF_total = NF₁ + (NF₂-1)/G₁ + (NF₃-1)/(G₁×G₂) [all linear]",
+        "result": "Without preamp: NF = 10 + (4-1)/0.25 = 22 = 13.4 dB. With preamp: NF = 1.58 + (10-1)/100 + (4-1)/(100×0.25) = 1.58 + 0.09 + 0.12 = 1.79 = 2.5 dB. Improvement: 10.9 dB.",
+        "python": "import numpy as np\n\ndef friis(*stages):\n    \"\"\"Compute cascaded noise figure. Each stage: (NF_dB, Gain_dB).\"\"\"\n    nf_total = 1.0\n    gain_product = 1.0\n    for i, (nf_db, g_db) in enumerate(stages):\n        nf = 10**(nf_db/10)\n        g = 10**(g_db/10)\n        if i == 0:\n            nf_total = nf\n        else:\n            nf_total += (nf - 1) / gain_product\n        gain_product *= g\n    return 10 * np.log10(nf_total)\n\nprint('System noise figure comparison:')\nnf_no_preamp = friis((10, -6), (6, 30))\nnf_with_preamp = friis((2, 20), (10, -6), (6, 30))\nprint(f'  Without preamp: {nf_no_preamp:.1f} dB')\nprint(f'  With preamp:    {nf_with_preamp:.1f} dB')\nprint(f'  Improvement:    {nf_no_preamp - nf_with_preamp:.1f} dB')\nprint(f'  = {10**((nf_no_preamp - nf_with_preamp)/10):.1f}x better sensitivity')"
+      }
+    }
+  ]
+}

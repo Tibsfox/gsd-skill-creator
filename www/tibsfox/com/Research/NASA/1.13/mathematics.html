@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: The Mathematics of Distance | v1.13 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --deep-space: #020210; --deep-mid: #081028;
+    --signal-blue: #2060CC; --signal-dim: #103068;
+    --solar-gold: #E8D060; --solar-dim: #8A7830;
+    --sponge-orange: #CC8830; --sponge-dim: #6A4418;
+    --venus-cream: #E8D8B0; --venus-dim: #8A8060;
+    --space: #020210; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2A4A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(32,96,204,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(232,208,96,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(16,48,104,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(204,136,48,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(32,96,204,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(232,208,96,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--signal-blue); text-decoration: none; } .breadcrumb a:hover { filter: brightness(1.3); } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--deep-space) 25%, var(--deep-mid) 50%, var(--signal-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--signal-blue); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(32,96,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(32,96,204,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(32,96,204,0.12); border: 1px solid var(--signal-blue); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--signal-blue); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(32,96,204,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--solar-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--solar-gold); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); } .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--signal-blue); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } .prose strong { color: var(--solar-gold); } .prose em { color: var(--sponge-orange); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; } .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--signal-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(2,2,16,0.3); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; } .prose th { background: rgba(32,96,204,0.08); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--solar-gold); font-weight: 600; } .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; }
+  .prose pre { background: rgba(2,2,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--signal-blue); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(32,96,204,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--signal-blue); } .prose pre code { background: none; padding: 0; }
+  .prose a { color: var(--signal-blue); text-decoration: none; } .prose a:hover { filter: brightness(1.3); }
+  .nav-card { background: rgba(2,2,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--signal-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { filter: brightness(1.3); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--signal-blue); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.13 Pioneer 5</a>
+  <span class="sep">/</span>
+  Track 3: Mathematics
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.13</span>
+      <span>Pioneer 5</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of Distance</h1>
+    <p class="subtitle">Deep space link budget, heliocentric orbits, and Shannon capacity</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 2 (Inverse-Square)</span>
+      <span><span class="label">Secondary:</span> 4, 7, 1</span>
+      <span><span class="label">Format:</span> McNeese-Hoag</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>Deposit 1: Deep Space Link Budget (Layer 2, Section 2.10)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 5 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>March 11, 1960, 13:00 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Thor-Able IV (three-stage)</td></tr>
+      <tr><td>Operating agency</td><td>&mdash;</td><td>&mdash;</td><td>NASA / Space Technology Laboratories (STL)</td></tr>
+      <tr><td>Spacecraft mass</td><td>m_sc</td><td>kg</td><td>43.0</td></tr>
+      <tr><td>Spacecraft shape</td><td>&mdash;</td><td>&mdash;</td><td>Sphere (66 cm diameter, solar-cell covered)</td></tr>
+      <tr><td>Primary instruments</td><td>&mdash;</td><td>&mdash;</td><td>Search coil magnetometer, proportional counter, ion chamber, GM tube, micrometeorite detector</td></tr>
+      <tr><td>Transmitter power (high)</td><td>P_t</td><td>W</td><td>5.0</td></tr>
+      <tr><td>Transmitter power (low)</td><td>P_t_low</td><td>W</td><td>0.5</td></tr>
+      <tr><td>Transmitter frequency</td><td>f</td><td>MHz</td><td>378.2</td></tr>
+      <tr><td>Antenna</td><td>&mdash;</td><td>&mdash;</td><td>Turnstile dipole (omnidirectional, ~2 dBi gain)</td></tr>
+      <tr><td>Ground station</td><td>&mdash;</td><td>&mdash;</td><td>Jodrell Bank (76.2 m dish) and Cape Canaveral</td></tr>
+      <tr><td>Maximum communication distance</td><td>d_max</td><td>km</td><td>36.2 &times; 10<sup>6</sup> (0.242 AU)</td></tr>
+      <tr><td>Last contact</td><td>&mdash;</td><td>&mdash;</td><td>June 26, 1960 (107 days after launch)</td></tr>
+      <tr><td>Heliocentric perihelion</td><td>r_p</td><td>AU</td><td>0.806</td></tr>
+      <tr><td>Heliocentric aphelion</td><td>r_a</td><td>AU</td><td>0.995</td></tr>
+      <tr><td>Orbital period</td><td>T</td><td>days</td><td>~311.6</td></tr>
+      <tr><td>Orbital inclination (ecliptic)</td><td>i</td><td>deg</td><td>~3.35</td></tr>
+      <tr><td>Data rate (close range)</td><td>R_close</td><td>bps</td><td>64</td></tr>
+      <tr><td>Data rate (maximum range)</td><td>R_far</td><td>bps</td><td>1</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>The Link Budget Equation &mdash; Why You Can Hear a 5-Watt Whisper from 36 Million Kilometers:</strong></p>
+
+    <p>Pioneer 5 was the first true interplanetary probe. Not a lunar flyby like Pioneers 1-4, but a spacecraft placed into a heliocentric orbit between Earth and Venus, communicating back to Earth as the distance grew from thousands to tens of millions of kilometers. The fundamental question: how is it possible to detect a 5-watt signal at a distance of 36.2 million km? A 5-watt lightbulb is barely visible across a football field. Yet Pioneer 5&rsquo;s 5-watt transmitter was heard across a distance equivalent to the Earth-Sun separation divided by four.</p>
+
+    <p>The answer is the link budget &mdash; an accounting of every gain and loss between the transmitter and receiver. It is a bookkeeping exercise, but the numbers it keeps track of span 200 orders of magnitude.</p>
+
+    <pre><code>THE LINK BUDGET (in decibels):
+
+The link budget tallies power from transmitter to receiver:
+
+  P_received = P_transmit + G_transmit - L_space - L_other + G_receive
+
+All quantities in decibels (dB):
+  P_transmit = transmitter output power (dBW)
+  G_transmit = transmit antenna gain (dBi)
+  L_space = free space path loss (dB)
+  L_other = other losses (atmospheric, pointing, polarization)
+  G_receive = receive antenna gain (dBi)
+
+STEP 1: Transmitter Power
+  P_t = 5 W = 10 * log10(5) = 6.99 dBW ~ 7.0 dBW
+
+  Five watts. A nightlight. A single LED bulb. This is all
+  Pioneer 5 had -- the spacecraft was 43 kg total, with solar
+  cells generating approximately 30 watts total. The transmitter
+  used 5 of those 30 watts.
+
+STEP 2: Transmit Antenna Gain
+  Pioneer 5 used a turnstile dipole antenna -- essentially
+  two crossed dipoles. It radiates nearly omnidirectionally.
+
+  G_t ~ 2 dBi (factor of 1.6 above isotropic)
+
+STEP 3: Free Space Path Loss
+  A signal radiating from an isotropic source spreads over a
+  sphere of area 4 * pi * d^2. The free space path loss is:
+
+  L_space = 20 * log10(d) + 20 * log10(f) + 20 * log10(4*pi/c)
+
+  For Pioneer 5 at maximum range:
+    d = 36.2 x 10^9 m, f = 378.2 x 10^6 Hz
+
+  L_space = 211.2 + 171.6 - 147.6 = 235.2 dB
+
+  235 dB of loss. A factor of 10^23.5. The inverse-square
+  law is merciless at interplanetary distances.
+
+STEP 4: Other Losses
+  Atmospheric absorption at 378 MHz: ~0.1 dB
+  Polarization mismatch: ~1 dB
+  Pointing loss: ~1 dB
+  Total L_other ~ 2 dB
+
+STEP 5: Receive Antenna Gain
+  Jodrell Bank's 76.2-meter dish:
+  G_r = 10 * log10(eta * (pi * D / lambda)^2)
+      = 10 * log10(0.55 * (pi * 76.2 / 0.793)^2)
+      = 10 * log10(50,096)
+      = 47.0 dBi
+
+ASSEMBLING THE LINK BUDGET:
+  P_received = 7.0 + 2.0 - 235.2 - 2.0 + 47.0
+             = -181.2 dBW
+
+  In watts: P_received = 10^(-181.2/10) = 7.6 x 10^-19 W
+
+  Less than a femtowatt. 19 orders of magnitude below a watt.
+
+CAN WE DETECT IT?
+
+  P_noise = k * T_sys * B
+          = 1.381e-23 * 200 * 1 = 2.76 x 10^-21 W
+          = -205.6 dBW
+
+  SNR = -181.2 - (-205.6) = 24.4 dB
+
+  The signal is 250 times stronger than the noise floor.
+  Pioneer 5 was heard because of: a large dish (47 dBi),
+  a narrow bandwidth (1 Hz), and a low noise temperature (200 K).</code></pre>
+
+    <h3>Worked Example</h3>
+
+    <p><strong>Problem:</strong> Compute the received signal power and SNR for Pioneer 5 at several distances, and determine the maximum data rate at each distance for a minimum SNR of 10 dB.</p>
+
+    <pre><code>import numpy as np
+
+# Pioneer 5 parameters
+P_t_W = 5.0          # transmitter power (W)
+f_Hz = 378.2e6       # frequency (Hz)
+lam = 3e8 / f_Hz     # wavelength (0.793 m)
+G_t_dBi = 2.0        # transmit antenna gain
+D_dish = 76.2        # Jodrell Bank dish diameter (m)
+eta_dish = 0.55      # aperture efficiency
+G_r_dBi = 47.0       # receive antenna gain
+T_sys = 200.0        # system noise temperature (K)
+L_other_dB = 2.0     # miscellaneous losses
+
+# Results:
+# Distance     | FSPL (dB) | P_rx (dBW)  | P_rx (W)     | Max Rate
+# 1,000 km     |    144.0  |     -90.0   | 1.0e-09      | &gt;&gt;64 kbps
+# 5 million km |    218.2  |    -164.2   | 3.8e-17      | 14,400 bps
+# 36.2 Mkm     |    235.2  |    -181.2   | 7.6e-19      |    275 bps
+# 1 AU         |    247.8  |    -193.8   | 4.2e-20      |     15 bps
+
+# At 36.2 million km (Pioneer 5 max range):
+#   SNR at 1 bps bandwidth: 24.4 dB
+#   Signal is 250x above noise floor
+#   Pioneer 5 was heard because the data rate was slowed to 1 bps
+#   and Jodrell Bank's 76-m dish collected 50,000x more power
+#   than a simple dipole antenna.</code></pre>
+
+    <p><strong>Debate Question 1:</strong> The link budget shows that the received power at maximum range was approximately 10<sup>-18</sup> watts. Yet the signal was detected reliably enough to extract scientific data at 1 bit per second. The detection works because the receiver bandwidth was narrowed to 1 Hz, integrating the signal over an entire second. This is the fundamental trade in communications: bandwidth for distance. The inverse-square law does not destroy information. It taxes the rate at which information can be transmitted. As long as you are willing to wait long enough, the signal is there.</p>
+
+    <hr>
+
+    <h2>Deposit 2: Heliocentric Orbit Mechanics (Layer 4, Section 4.11)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Value</th></tr>
+      <tr><td>Pioneer 5 perihelion</td><td>r_p</td><td>AU</td><td>0.806</td></tr>
+      <tr><td>Pioneer 5 aphelion</td><td>r_a</td><td>AU</td><td>0.995</td></tr>
+      <tr><td>Semi-major axis</td><td>a</td><td>AU</td><td>0.9005</td></tr>
+      <tr><td>Orbital eccentricity</td><td>e</td><td>&mdash;</td><td>0.105</td></tr>
+      <tr><td>Orbital period</td><td>T</td><td>days</td><td>~311.6</td></tr>
+      <tr><td>Venus semi-major axis</td><td>a_V</td><td>AU</td><td>0.723</td></tr>
+      <tr><td>Earth semi-major axis</td><td>a_E</td><td>AU</td><td>1.000</td></tr>
+      <tr><td>Pioneer 5 velocity at perihelion</td><td>v_p</td><td>km/s</td><td>~33.3</td></tr>
+      <tr><td>Pioneer 5 velocity at aphelion</td><td>v_a</td><td>km/s</td><td>~27.0</td></tr>
+      <tr><td>Earth&rsquo;s orbital velocity</td><td>v_E</td><td>km/s</td><td>~29.8</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>The Vis-Viva Equation &mdash; Energy Determines Orbit:</strong></p>
+
+    <p>Pioneer 5 was launched into a heliocentric orbit between Earth and Venus. The orbit is entirely characterized by two numbers: the semi-major axis (<code>a</code>) and the eccentricity (<code>e</code>). From these, every other orbital parameter follows through the vis-viva equation.</p>
+
+    <pre><code>THE VIS-VIVA EQUATION:
+
+  v^2 = GM_sun * (2/r - 1/a)
+
+  where:
+    v = orbital velocity at distance r from the Sun (m/s)
+    GM_sun = 1.327 x 10^20 m^3/s^2
+    r = current heliocentric distance (m)
+    a = semi-major axis (m)
+
+  Total orbital energy: E = -GM/(2a) -- constant everywhere.
+
+PIONEER 5's ORBIT:
+
+  Semi-major axis: a = (0.806 + 0.995)/2 = 0.9005 AU
+  Eccentricity:    e = (0.995 - 0.806)/(0.995 + 0.806) = 0.105
+  Orbital period:  T = 2*pi*sqrt(a^3/GM_sun) = 311.7 days
+
+  This is less than Earth's year (365.25 days) because
+  Pioneer 5's orbit is smaller. Shorter period means
+  Pioneer 5 pulls ahead of Earth in orbital angle.
+
+VELOCITY AT PERIHELION AND APHELION:
+
+  At perihelion (r = 0.806 AU): v_p = 34.9 km/s
+  At aphelion  (r = 0.995 AU): v_a = 28.2 km/s
+
+  Earth moves at 29.8 km/s. At aphelion, Pioneer 5 is
+  1.6 km/s slower -- it slowly falls behind Earth.
+
+HOW DID PIONEER 5 GET INTO THIS ORBIT?
+
+  The spacecraft needed a velocity deficit of ~1.6 km/s
+  relative to Earth. The Thor-Able IV's third stage
+  provided this. The challenge was not reaching the orbit
+  but COMMUNICATING from it.</code></pre>
+
+    <pre><code># COMMUNICATION DISTANCE vs TIME
+# Pioneer 5 and Earth both orbit the Sun at different speeds.
+# Day |  P5 angle | Earth angle | Sep (AU) | Sep (Mkm)
+#   0 |       0.0 |         0.0 |   0.0995 |      14.9
+#  20 |      23.1 |        19.7 |   0.0412 |       6.2
+#  50 |      57.7 |        49.3 |   0.1110 |      16.6
+#  70 |      80.8 |        69.0 |   0.1570 |      23.5
+# 107 |     123.5 |       105.5 |   0.2420 |      36.2
+
+# Last contact: day 107 at ~36.2 million km (0.242 AU)
+# Communication lost because the signal became too weak
+# to decode even at 1 bps. Distance won.</code></pre>
+
+    <p><strong>Debate Question 2:</strong> Pioneer 5&rsquo;s orbit is sometimes called a &ldquo;Venus-class&rdquo; orbit because its perihelion is near Venus&rsquo;s orbital distance. But Pioneer 5 was not aimed at Venus &mdash; it was aimed at interplanetary space itself. The mission&rsquo;s purpose was to measure the interplanetary medium between Earth and Venus. This represents a philosophical shift: from &ldquo;go there&rdquo; (the Moon, Venus, Mars) to &ldquo;be there&rdquo; (exist in interplanetary space and report what you find). The vis-viva equation determines where the spacecraft goes. The link budget determines what it can say about where it is. Together, they define the envelope of interplanetary exploration.</p>
+
+    <hr>
+
+    <h2>Deposit 3: Shannon Capacity at Extreme Distance (Layer 7, Section 7.6)</h2>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Shannon&rsquo;s Channel Capacity Theorem Applied to Deep Space:</strong></p>
+
+    <p>Claude Shannon proved in 1948 that every communication channel has a maximum data rate &mdash; the channel capacity <code>C</code> &mdash; that depends on the bandwidth <code>B</code> and the signal-to-noise ratio <code>SNR</code>:</p>
+
+    <pre><code>SHANNON'S CHANNEL CAPACITY:
+
+  C = B * log2(1 + SNR)
+
+PIONEER 5 at MAXIMUM RANGE:
+
+  P_rx ~ -181.2 dBW
+  C/N0 = P_rx - 10*log10(k*T_sys)
+       = -181.2 - (-205.6) = 24.4 dB-Hz
+       = 10^2.44 = 275 Hz
+
+  Shannon limit capacity: ~275 bps
+  Pioneer 5 actual: 1 bps
+  Efficiency: 0.4% of Shannon limit
+
+  Why so far below? Pioneer 5 used simple amplitude-keyed
+  modulation with no error correction coding. Modern deep
+  space missions use turbo/LDPC codes approaching within
+  0.5 dB of the Shannon limit.
+
+  If Pioneer 5 had modern coding: ~200 bps at max range.
+
+THE DISTANCE-CAPACITY CURVE:
+
+  Since P_rx ~ 1/d^2, and C ~ P_rx (at low SNR):
+  C ~ 1/d^2
+
+  Doubling the distance quarters the capacity.
+
+TOTAL MISSION DATA:
+
+  ~5-10 Mbits over 107 days.
+  Less than one smartphone photograph.
+  But those kilobytes contained the FIRST measurements
+  of the interplanetary magnetic field, the FIRST detection
+  of a solar flare shock in deep space, and the proof that
+  interplanetary communication works.
+
+  Shannon measures rate. History measures consequence.</code></pre>
+
+    <pre><code># EFFICIENCY: PIONEER 5 vs SHANNON LIMIT
+#
+# Distance         | P_rx (W)     | C/N0 (Hz) | C_shannon    | Actual
+# 10,000 km        | 6.1e-10      | 2.2e+11   | 153 Gbps     | 64 bps
+# 1 million km      | 6.1e-14      | 2.2e+07   | 15 Mbps      | 64 bps
+# 5 million km      | 2.4e-16      | 8.8e+04   | 61 kbps      | 16 bps
+# 10 million km     | 6.1e-17      | 2.2e+04   | 15 kbps      |  8 bps
+# 36.2 million km   | 7.6e-19      | 2.75e+02  | 275 bps      |  1 bps
+#
+# Pioneer 5 operated at 0.4% of the Shannon limit.
+# Modern missions (Voyager, New Horizons): 80-90%.
+# The coding gain from 1960 to 2025: ~25 dB
+# -- equivalent to 300x more transmitter power.</code></pre>
+
+    <p><strong>Debate Question 3:</strong> Shannon&rsquo;s theorem gives the maximum data rate for a channel with a given signal-to-noise ratio. It is a theorem of mathematics, not physics. In 1960, Pioneer 5&rsquo;s modulation scheme operated at less than 1% of the Shannon limit. By 2025, deep space links using turbo codes and LDPC codes operate at 80-90% of the Shannon limit. The improvement came entirely from mathematics &mdash; from coding theory. The transmitter power did not change. The antenna sizes did not change. What changed was the algorithm. The coding gain was approximately 25 dB &mdash; equivalent to increasing the transmitter power by a factor of 300. Mathematics, not hardware, closed the gap. Shannon drew the line. Six decades of coding theory approached it. Pioneer 5 showed where the line was.</p>
+
+    <hr>
+
+    <blockquote>Douglas Adams was born on March 11, 1952, eight years to the day before Pioneer 5 launched. In <em>The Hitchhiker&rsquo;s Guide to the Galaxy</em>, Adams wrote that space is big &mdash; &ldquo;really big &mdash; you just won&rsquo;t believe how vastly, hugely, mind-bogglingly big it is.&rdquo; Pioneer 5 was the first spacecraft to provide a quantitative measure of that bigness from inside it. At 36.2 million km, the signal arrived at Jodrell Bank at 7.6 &times; 10<sup>-19</sup> watts. The improbability of detecting that signal is not fiction. It is the link budget, worked through with the precision of a tax return. The inverse-square law reduces the signal by a factor of 10<sup>23</sup>. The antenna gain recovers a factor of 50,000. The narrow bandwidth recovers another factor of 64. Each factor is documented, each loss accounted for, each gain earned by engineering. Adams understood that the universe is absurdly large and human technology is absurdly small, and that the comedy is in the mismatch. Pioneer 5 turned the comedy into arithmetic and found that the numbers, improbably, worked.</blockquote>
+
+    <div class="nav-card">
+      <a href="organism.html">&larr; Organism</a>
+      <a href="papers.html">Papers &rarr;</a>
+    </div>
+
+  </div>
+</main>
+
+<footer><p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.13 Pioneer 5 + Halichondria panicea &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p></footer>
+
+</body>
+</html>
