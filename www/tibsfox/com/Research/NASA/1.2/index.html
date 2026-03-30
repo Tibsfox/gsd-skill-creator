@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.2 — Pioneer 1 + Sword Fern | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --forest-dark: #0A1F14;
+    --forest-mid: #152E20;
+    --fern: #4A7C59;
+    --fern-light: #A8D5BA;
+    --fern-deep: #1B3D2F;
+    --moss: #2E5E3F;
+    --bark: #3A2E1A;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2A4A35;
+    --amber: #D4A017;
+    --amber-light: #F0D060;
+    --amber-dark: #8B6914;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--forest-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Spore dispersal background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(74,124,89,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(168,213,186,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(46,94,63,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(168,213,186,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(46,94,63,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--forest-dark) 0%, var(--forest-mid) 30%, var(--fern-deep) 60%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--fern);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,124,89,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,124,89,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(74,124,89,0.15);
+    border: 1px solid var(--fern);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--fern);
+    margin-bottom: 1rem;
+  }
+
+  .version-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--fern-light);
+  }
+
+  .status-partial {
+    background: rgba(212,160,23,0.2);
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--fern); font-weight: 500; }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(21,46,32,0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--fern-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card p, .card li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card {
+    border-color: var(--fern);
+    background: rgba(74,124,89,0.06);
+  }
+
+  .resonance-axis {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(74,124,89,0.15);
+  }
+
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num {
+    background: var(--fern);
+    color: var(--forest-dark);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--fern-light); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(27,61,47,0.4);
+    border: 1px solid var(--fern);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .organism-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--fern);
+    margin-bottom: 0.75rem;
+  }
+
+  .organism-card .sci-name {
+    font-style: italic;
+    color: var(--fern);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: rgba(10,31,20,0.5);
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--fern-light);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dedication-card {
+    background: rgba(212,160,23,0.08);
+    border: 1px solid var(--amber);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .dedication-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+  }
+
+  .data-links {
+    background: rgba(11,61,145,0.15);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .data-links h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .data-links a {
+    display: block;
+    color: #7EB8DA;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.2);
+    transition: color 0.2s;
+  }
+
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card {
+    background: rgba(26,26,58,0.4);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .tracks-card h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .track-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.15);
+    font-size: 0.85rem;
+  }
+
+  .track-item:last-child { border-bottom: none; }
+
+  .track-num {
+    background: rgba(11,61,145,0.3);
+    color: #7EB8DA;
+    font-weight: 700;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-card {
+    background: rgba(21,46,32,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .nav-card a {
+    color: var(--fern);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-card a:hover { color: var(--fern-light); }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--fern); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.2</span>
+      <span>NASA Mission Series</span>
+      <span class="status-partial">PARTIAL SUCCESS</span>
+    </div>
+    <h1>Pioneer 1 &mdash; Forty-Three Hours</h1>
+    <p class="subtitle">The first spacecraft NASA ever launched, and the sword fern that holds the forest floor</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> October 11, 1958</span>
+      <span><span class="label">Program:</span> Pioneer (NASA&rsquo;s first)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Thor-Able I</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>Pioneer 1 was the first spacecraft launched under NASA&rsquo;s authority &mdash; just 11 days after the agency opened its doors on October 1, 1958. Its mission was to orbit the Moon. The AJ10-40 second stage engine cut off approximately 10 seconds early due to an accelerometer signal error, resulting in a velocity shortfall of ~234 m/s. Pioneer 1 reached a maximum altitude of 113,854 km &mdash; about one-third of the way to the Moon &mdash; then fell back to Earth and burned up over the South Pacific after 43 hours and 17 minutes of flight.</p>
+      <p>Those 43 hours changed everything. Pioneer 1 returned the first continuous radiation measurements from the surface to deep space, discovering that the Van Allen belts extended far beyond what Explorer 1&rsquo;s orbit could measure. It found the &ldquo;slot region&rdquo; between inner and outer belts. It measured the magnetic field to unprecedented altitude. Its data directly informed the radiation shielding design for Mercury, Gemini, and Apollo. Without Pioneer 1&rsquo;s 43 hours, we couldn&rsquo;t have safely sent humans through the Van Allen belts.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> ~38.3 kg (truncated cone, gold-plated)</li>
+        <li><strong>Instruments:</strong> Ionization chamber, proportional counter telescope, magnetic field sensor, micrometeorite detector, temperature sensors</li>
+        <li><strong>Power:</strong> Mercury batteries (nickel-cadmium backup)</li>
+        <li><strong>Transmitter:</strong> 108.06 MHz, ~300 milliwatts</li>
+        <li><strong>Stabilization:</strong> Spin-stabilized (~5.8 rev/sec)</li>
+        <li><strong>Builder:</strong> Space Technology Laboratories (later TRW)</li>
+        <li><strong>Launch vehicle:</strong> Thor-Able I (3-stage: Thor DM-18 + AJ10-40 + ABL X248)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Partial Success</h2>
+      <p><strong>T+0 (08:42 UTC):</strong> Thor main engine ignition from LC-17A, Cape Canaveral.</p>
+      <p><strong>T+0 to T+166:</strong> First stage nominal. Thor DM-18 produces 667 kN, burns for 2 min 46 sec.</p>
+      <p><strong>T+166 to T+286:</strong> Second stage ignition. AJ10-40 engine fires for intended 120 seconds.</p>
+      <p><strong>T+276:</strong> Accelerometer programming error causes premature engine cutoff &mdash; 10 seconds early. Velocity shortfall of ~234 m/s.</p>
+      <p><strong>T+286 to orbit:</strong> Third stage ABL X248 solid motor fires nominally, but cannot compensate for second-stage shortfall.</p>
+      <p><strong>H+43:17:</strong> After reaching 113,854 km altitude, Pioneer 1 reenters over the South Pacific and burns up. 43 hours and 17 minutes of continuous telemetry.</p>
+      <p><strong>Cause:</strong> Signal-conditioning error in the guidance accelerometer. The programmer converted a sign convention incorrectly, causing the second-stage guidance to command cutoff before reaching target velocity.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> 43-hour trajectory simulation + radiation profile from surface to 113,854 km</li>
+        <li><strong>Minecraft:</strong> Pioneer 1 at scale + Van Allen belt colored glass sky (inner belt red, slot region clear, outer belt blue)</li>
+        <li><strong>Blender:</strong> 43-hour arc animation &mdash; Earth to apogee and back (Cycles render, 60 sec)</li>
+        <li><strong>GLSL:</strong> Radiation belt shader with slot region &mdash; intensity mapped to color at altitude</li>
+        <li><strong>Arduino:</strong> Geiger counter with OLED display showing real-time count rate ($35)</li>
+        <li><strong>Godot 4:</strong> Interactive velocity slider &mdash; adjust second-stage delta-v and see escape vs. ballistic vs. lunar orbit outcomes</li>
+        <li><strong>GMAT:</strong> Actual vs. intended trajectory comparison &mdash; overlay the 113,854 km arc against the planned lunar orbit insertion</li>
+        <li><strong>Radio:</strong> VHF beacon at 108.06 MHz &mdash; Pioneer 1&rsquo;s exact frequency, crystal oscillator + &times;4 multiplier, verify with RTL-SDR ($19)</li>
+        <li><strong>Screensaver:</strong> Sword fern &rarr; spores &rarr; Van Allen belts &rarr; varied thrush (XScreenSaver / GSD-OS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Calculate the missing 234 m/s &mdash; how much further would Pioneer 1 have gone? (30 min, Python or pencil)</li>
+        <li><strong>TRY 2:</strong> Map the Van Allen belts &mdash; plot radiation intensity vs. altitude from Pioneer 1 data (45 min, Python + matplotlib)</li>
+        <li><strong>TRY 3:</strong> Build a radiation shielding calculator &mdash; how much aluminum stops how many rads? (30 min, spreadsheet)</li>
+        <li><strong>DIY 1:</strong> Build the LED Van Allen belt display ($15, 555 + CD4017 + green LEDs)</li>
+        <li><strong>DIY 2:</strong> Build the VHF beacon transmitter ($19, verify with RTL-SDR)</li>
+        <li><strong>DIY 3:</strong> Grow a sword fern from spore ($12, 8-month project, shade and moisture)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-understory.html" style="color: var(--fern-light);">Story: &ldquo;The Understory&rdquo;</a>
+          <a href="artifacts/stories/the-understory.pdf" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">PDF</a>
+          &mdash; The sword fern tells its own story
+        </li>
+        <li><a href="artifacts/audio/forty-three-hours-synth.dsp" style="color: #7EB8DA;">Audio: Forty-Three Hours Synth</a> &mdash; FAUST VST/LV2 (radiation intensity mapped to frequency over 43 hours compressed to 90 seconds)</li>
+        <li><a href="artifacts/audio/varied-thrush-whistle.dsp" style="color: #7EB8DA;">Audio: Varied Thrush Whistle</a> &mdash; FAUST ambient (the haunting minor whistle of degree 2&rsquo;s bird)</li>
+        <li><a href="artifacts/circuits/led-van-allen-belt.md" style="color: var(--fern-light);">Circuit: LED Van Allen Belt Display</a> &mdash; 555 + CD4017 + green LEDs showing belt intensity profile ($15)</li>
+        <li><a href="artifacts/circuits/analog-radiation-counter.md" style="color: var(--fern-light);">Circuit: Analog Radiation Counter</a> &mdash; Geiger tube simulator with audio output ($22)</li>
+        <li><a href="artifacts/circuits/radio-transmitter-108mhz.md" style="color: var(--fern-light);">Circuit: VHF Beacon Simulator</a> &mdash; 108.06 MHz crystal oscillator + &times;4 multiplier, verify with RTL-SDR ($19)</li>
+        <li><a href="artifacts/screensaver/pioneer1-screensaver.frag" style="color: #7EB8DA;">Screensaver: 4-Mode GLSL</a> &mdash; Sword fern frond unfurling, spore dispersal, Van Allen belt cross-section, varied thrush flight</li>
+        <li><a href="mathematics.md" style="color: var(--fern-light);">Mathematics: TSPB Deposits</a> &mdash; Orbital mechanics, radiation transport, fern geometry</li>
+        <li><a href="papers.md" style="color: var(--fern-light);">Papers: Scientific Anchors</a> &mdash; Van Allen &amp; Frank 1959 + radiation belt modeling papers</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Reach:</span> Sword fern never reaches the canopy. Pioneer 1 never reached the Moon. Both are fundamental to their ecosystems from below.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Persistence:</span> Evergreen through PNW winters. 43 hours of continuous telemetry. Both operate when others cannot.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">Foundation:</span> Sword fern prevents erosion, holds moisture, stabilizes forest floors. Pioneer 1&rsquo;s radiation data was the foundation for human spaceflight radiation shielding.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Data density:</span> Each frond carries 35&ndash;100 pinnae, each with thousands of spores. Pioneer 1 returned 43 hours of continuous data &mdash; the densest US space dataset to that point.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">Ubiquity:</span> The most common PNW fern, in every forest. Pioneer 1&rsquo;s data was used by every subsequent mission. Both are so essential they become invisible.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">Quiet excellence:</span> No flowers, no fruit, no seasonal spectacle. Just green, reliable, year after year. Pioneer 1 isn&rsquo;t famous. But its science was essential.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Van Allen Discovery</h2>
+      <p>Explorer 1 (January 1958) discovered the Van Allen belts, but its orbit only reached ~2,500 km altitude &mdash; enough to detect the inner belt but not to map its structure. Pioneer 1&rsquo;s 113,854 km trajectory provided the first complete radiation profile from the surface to deep space. The data revealed the &ldquo;slot region&rdquo; &mdash; a gap between inner and outer belts where radiation drops dramatically &mdash; and showed the outer belt extending to nearly 60,000 km. This was the first map of the radiation environment human spacecraft would have to traverse. Mercury, Gemini, and Apollo all used Pioneer 1&rsquo;s data to design their radiation shielding. The 43 hours that &ldquo;failed&rdquo; to reach the Moon may have saved more astronaut lives than any mission that succeeded.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.1/index.html">&larr; v1.1 Pioneer 0</a>
+      <a href="../1.3/index.html">v1.3 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Polystichum munitum (Western Sword Fern)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">0.5-1.8m</div>
+          <div class="stat-label">Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">75-100</div>
+          <div class="stat-label">Fronds/plant</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">~millions</div>
+          <div class="stat-label">Spores/frond</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Region</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The evergreen foundation of the PNW forest floor. Never reaches the canopy, but without it the forest erodes. Found from Alaska to California in every conifer forest understory.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Vincent van Gogh</h3>
+      <p style="font-size:0.85rem;">March 30, 1853 &mdash; July 29, 1890</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Born one day from today&rsquo;s date. &ldquo;Failed&rdquo; in his lifetime &mdash; sold one painting, suffered mental illness, died at 37. Yet his work &mdash; <em>The Starry Night</em>, <em>Sunflowers</em>, <em>Wheatfield with Crows</em> &mdash; became foundational to modern art. Pioneer 1 &ldquo;failed&rdquo; its primary objective but its data was foundational to all human spaceflight. Both reached for something beyond them. Both left something the world built upon.</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (knowledge-nodes.json)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-007A">NSSDC &mdash; Pioneer 1</a>
+      <a href="https://history.nasa.gov/SP-4524/sp4524.htm">Deep Space Chronicle (SP-4524)</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://images.nasa.gov/search?q=pioneer+1&media=image">NASA Image Library</a>
+      <a href="https://rbspgway.jhuapl.edu/">Van Allen Probes Data</a>
+      <a href="https://www.fs.usda.gov/database/feis/plants/fern/polmun/all.html">USDA FEIS &mdash; Sword Fern</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--fern);">"The understory holds what the canopy cannot see."</p>
+</footer>
+
+</body>
+</html>

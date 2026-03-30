@@ -1,0 +1,908 @@
+{
+  "table_name": "Trigonometric Identities",
+  "source": "McNeese & Hoag, Engineering and Technical Handbook, Tables 46-48",
+  "mission": "1.2",
+  "description": "Complete trigonometric identity reference for engineering applications",
+  "last_updated": "2026-03-29",
+  "tspb_layers": [1, 3],
+  "college_departments": ["mathematics", "physics", "engineering", "electronics"],
+  "note": "These identities are the vocabulary of the unit circle — every identity is a statement about circular symmetry.",
+
+  "categories": [
+    "fundamental",
+    "cofunction",
+    "even_odd",
+    "sum_difference",
+    "double_angle",
+    "half_angle",
+    "product_to_sum",
+    "sum_to_product",
+    "power_reducing",
+    "triple_angle",
+    "law_of_sines_cosines",
+    "euler_complex",
+    "inverse_trig",
+    "hyperbolic_connections"
+  ],
+
+  "identities": [
+
+    {
+      "id": "fund-pythag-1",
+      "category": "fundamental",
+      "name": "Pythagorean identity (sine-cosine)",
+      "formula": "sin²θ + cos²θ = 1",
+      "formula_latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+      "proof_hint": "From the unit circle: point (cosθ, sinθ) lies on x² + y² = 1.",
+      "nasa_application": "Normalization of direction cosines in attitude determination. Any rotation matrix row/column must satisfy this.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "fund-pythag-2",
+      "category": "fundamental",
+      "name": "Pythagorean identity (tangent-secant)",
+      "formula": "1 + tan²θ = sec²θ",
+      "formula_latex": "1 + \\tan^2\\theta = \\sec^2\\theta",
+      "proof_hint": "Divide sin²θ + cos²θ = 1 by cos²θ.",
+      "nasa_application": "Simplification of radar range equations and antenna gain calculations.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "fund-pythag-3",
+      "category": "fundamental",
+      "name": "Pythagorean identity (cotangent-cosecant)",
+      "formula": "1 + cot²θ = csc²θ",
+      "formula_latex": "1 + \\cot^2\\theta = \\csc^2\\theta",
+      "proof_hint": "Divide sin²θ + cos²θ = 1 by sin²θ.",
+      "nasa_application": "Appears in gravitational potential expansions using Legendre functions.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "fund-recip-1",
+      "category": "fundamental",
+      "name": "Reciprocal identity (cosecant)",
+      "formula": "cscθ = 1/sinθ",
+      "formula_latex": "\\csc\\theta = \\frac{1}{\\sin\\theta}",
+      "proof_hint": "Definition of cosecant as the reciprocal of sine.",
+      "nasa_application": "Signal amplitude normalization in radio telemetry when sine envelope is known.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "fund-recip-2",
+      "category": "fundamental",
+      "name": "Reciprocal identity (secant)",
+      "formula": "secθ = 1/cosθ",
+      "formula_latex": "\\sec\\theta = \\frac{1}{\\cos\\theta}",
+      "proof_hint": "Definition of secant as the reciprocal of cosine.",
+      "nasa_application": "Appears in lens and mirror equations for telescope optics (Hubble, JWST).",
+      "tspb_layer": 1
+    },
+    {
+      "id": "fund-recip-3",
+      "category": "fundamental",
+      "name": "Reciprocal identity (cotangent)",
+      "formula": "cotθ = 1/tanθ",
+      "formula_latex": "\\cot\\theta = \\frac{1}{\\tan\\theta}",
+      "proof_hint": "Definition of cotangent as the reciprocal of tangent.",
+      "nasa_application": "Trajectory deflection angle calculations in gravity assist maneuvers.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "fund-quot-1",
+      "category": "fundamental",
+      "name": "Quotient identity (tangent)",
+      "formula": "tanθ = sinθ/cosθ",
+      "formula_latex": "\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}",
+      "proof_hint": "From unit circle: tanθ = y/x = sinθ/cosθ.",
+      "nasa_application": "Flight path angle computation: γ = arctan(v_r / v_t) in orbital mechanics.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "fund-quot-2",
+      "category": "fundamental",
+      "name": "Quotient identity (cotangent)",
+      "formula": "cotθ = cosθ/sinθ",
+      "formula_latex": "\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}",
+      "proof_hint": "From unit circle: cotθ = x/y = cosθ/sinθ.",
+      "nasa_application": "Reciprocal of flight path angle tangent; appears in orbit equation rearrangements.",
+      "tspb_layer": 1
+    },
+
+    {
+      "id": "cofunc-sin",
+      "category": "cofunction",
+      "name": "Cofunction (sine-cosine)",
+      "formula": "sin(π/2 - θ) = cosθ",
+      "formula_latex": "\\sin\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos\\theta",
+      "proof_hint": "In a right triangle, the complement of one acute angle is the other. The side opposite one is adjacent to the other.",
+      "nasa_application": "Converting between elevation and zenith angles in antenna pointing and star tracker measurements.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "cofunc-cos",
+      "category": "cofunction",
+      "name": "Cofunction (cosine-sine)",
+      "formula": "cos(π/2 - θ) = sinθ",
+      "formula_latex": "\\cos\\left(\\frac{\\pi}{2} - \\theta\\right) = \\sin\\theta",
+      "proof_hint": "Complement of the sine cofunction identity.",
+      "nasa_application": "Coordinate frame rotations between body-fixed and inertial frames.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "cofunc-tan",
+      "category": "cofunction",
+      "name": "Cofunction (tangent-cotangent)",
+      "formula": "tan(π/2 - θ) = cotθ",
+      "formula_latex": "\\tan\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cot\\theta",
+      "proof_hint": "Follows from sin/cos cofunction identities applied to the quotient.",
+      "nasa_application": "Switching between slope and reciprocal slope in terrain mapping (Mars rover path planning).",
+      "tspb_layer": 3
+    },
+    {
+      "id": "cofunc-cot",
+      "category": "cofunction",
+      "name": "Cofunction (cotangent-tangent)",
+      "formula": "cot(π/2 - θ) = tanθ",
+      "formula_latex": "\\cot\\left(\\frac{\\pi}{2} - \\theta\\right) = \\tan\\theta",
+      "proof_hint": "Reciprocal of the tangent cofunction identity.",
+      "nasa_application": "Complementary angle relationships in structural load analysis.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "cofunc-sec",
+      "category": "cofunction",
+      "name": "Cofunction (secant-cosecant)",
+      "formula": "sec(π/2 - θ) = cscθ",
+      "formula_latex": "\\sec\\left(\\frac{\\pi}{2} - \\theta\\right) = \\csc\\theta",
+      "proof_hint": "sec = 1/cos, and cos(π/2 - θ) = sinθ, so sec(π/2 - θ) = 1/sinθ = cscθ.",
+      "nasa_application": "Reciprocal relationships in waveguide mode calculations.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "cofunc-csc",
+      "category": "cofunction",
+      "name": "Cofunction (cosecant-secant)",
+      "formula": "csc(π/2 - θ) = secθ",
+      "formula_latex": "\\csc\\left(\\frac{\\pi}{2} - \\theta\\right) = \\sec\\theta",
+      "proof_hint": "csc = 1/sin, and sin(π/2 - θ) = cosθ, so csc(π/2 - θ) = 1/cosθ = secθ.",
+      "nasa_application": "Complementary angle substitution in spherical trigonometry for celestial navigation.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "evenodd-sin",
+      "category": "even_odd",
+      "name": "Odd function (sine)",
+      "formula": "sin(-θ) = -sinθ",
+      "formula_latex": "\\sin(-\\theta) = -\\sin\\theta",
+      "proof_hint": "Reflecting (cosθ, sinθ) across the x-axis gives (cosθ, -sinθ). The angle -θ maps to this reflection.",
+      "nasa_application": "Symmetry exploitation in Fourier analysis of vibration data — odd harmonics in structural resonance.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "evenodd-cos",
+      "category": "even_odd",
+      "name": "Even function (cosine)",
+      "formula": "cos(-θ) = cosθ",
+      "formula_latex": "\\cos(-\\theta) = \\cos\\theta",
+      "proof_hint": "Reflecting across the x-axis preserves the x-coordinate (cosine).",
+      "nasa_application": "Antenna pattern symmetry — cosine patterns are symmetric about boresight, simplifying gain calculations.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "evenodd-tan",
+      "category": "even_odd",
+      "name": "Odd function (tangent)",
+      "formula": "tan(-θ) = -tanθ",
+      "formula_latex": "\\tan(-\\theta) = -\\tan\\theta",
+      "proof_hint": "tan(-θ) = sin(-θ)/cos(-θ) = -sinθ/cosθ = -tanθ.",
+      "nasa_application": "Sign conventions in control system feedback — negative angle produces negative torque command.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "evenodd-cot",
+      "category": "even_odd",
+      "name": "Odd function (cotangent)",
+      "formula": "cot(-θ) = -cotθ",
+      "formula_latex": "\\cot(-\\theta) = -\\cot\\theta",
+      "proof_hint": "cot(-θ) = cos(-θ)/sin(-θ) = cosθ/(-sinθ) = -cotθ.",
+      "nasa_application": "Antisymmetric terms in spherical harmonic gravity field expansions.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "evenodd-sec",
+      "category": "even_odd",
+      "name": "Even function (secant)",
+      "formula": "sec(-θ) = secθ",
+      "formula_latex": "\\sec(-\\theta) = \\sec\\theta",
+      "proof_hint": "sec(-θ) = 1/cos(-θ) = 1/cosθ = secθ.",
+      "nasa_application": "Even symmetry in optical path length calculations for interferometry.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "evenodd-csc",
+      "category": "even_odd",
+      "name": "Odd function (cosecant)",
+      "formula": "csc(-θ) = -cscθ",
+      "formula_latex": "\\csc(-\\theta) = -\\csc\\theta",
+      "proof_hint": "csc(-θ) = 1/sin(-θ) = 1/(-sinθ) = -cscθ.",
+      "nasa_application": "Sign handling in numerical integration of orbital elements near singularities.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "sumdiff-sin-add",
+      "category": "sum_difference",
+      "name": "Sine of sum",
+      "formula": "sin(α + β) = sinα·cosβ + cosα·sinβ",
+      "formula_latex": "\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta",
+      "proof_hint": "Rotate point (1,0) by α then by β on the unit circle. Project onto y-axis.",
+      "nasa_application": "Combining rotation angles in sequential attitude maneuvers. Doppler shift calculations for moving sources.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "sumdiff-sin-sub",
+      "category": "sum_difference",
+      "name": "Sine of difference",
+      "formula": "sin(α - β) = sinα·cosβ - cosα·sinβ",
+      "formula_latex": "\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta",
+      "proof_hint": "Replace β with -β in the sum formula and apply even/odd identities.",
+      "nasa_application": "Phase difference extraction in interferometric measurements (VLBI, gravity wave detection).",
+      "tspb_layer": 3
+    },
+    {
+      "id": "sumdiff-cos-add",
+      "category": "sum_difference",
+      "name": "Cosine of sum",
+      "formula": "cos(α + β) = cosα·cosβ - sinα·sinβ",
+      "formula_latex": "\\cos(\\alpha + \\beta) = \\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta",
+      "proof_hint": "Rotate point (1,0) by α then by β on the unit circle. Project onto x-axis.",
+      "nasa_application": "Rotation matrix composition — the (1,1) element of R(α)R(β) is exactly this formula.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "sumdiff-cos-sub",
+      "category": "sum_difference",
+      "name": "Cosine of difference",
+      "formula": "cos(α - β) = cosα·cosβ + sinα·sinβ",
+      "formula_latex": "\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta",
+      "proof_hint": "Replace β with -β in the sum formula and apply even/odd identities.",
+      "nasa_application": "Dot product of unit vectors: cos(angle between) = u·v. Central to orbital plane intersection calculations.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "sumdiff-tan-add",
+      "category": "sum_difference",
+      "name": "Tangent of sum",
+      "formula": "tan(α + β) = (tanα + tanβ) / (1 - tanα·tanβ)",
+      "formula_latex": "\\tan(\\alpha + \\beta) = \\frac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta}",
+      "proof_hint": "Divide sin(α+β) by cos(α+β), then divide numerator and denominator by cosα·cosβ.",
+      "nasa_application": "Adding small perturbation angles in guidance corrections. Feedback loop gain margin analysis.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "sumdiff-tan-sub",
+      "category": "sum_difference",
+      "name": "Tangent of difference",
+      "formula": "tan(α - β) = (tanα - tanβ) / (1 + tanα·tanβ)",
+      "formula_latex": "\\tan(\\alpha - \\beta) = \\frac{\\tan\\alpha - \\tan\\beta}{1 + \\tan\\alpha\\tan\\beta}",
+      "proof_hint": "Replace β with -β in the tangent sum formula and apply tan(-β) = -tanβ.",
+      "nasa_application": "Relative bearing calculations between two spacecraft or ground stations.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "dbl-sin",
+      "category": "double_angle",
+      "name": "Double angle (sine)",
+      "formula": "sin(2θ) = 2·sinθ·cosθ",
+      "formula_latex": "\\sin(2\\theta) = 2\\sin\\theta\\cos\\theta",
+      "proof_hint": "Set α = β = θ in sin(α + β).",
+      "nasa_application": "Appears in the vis-viva equation derivatives and in computing orbital period from semi-major axis.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "dbl-cos-1",
+      "category": "double_angle",
+      "name": "Double angle (cosine, form 1)",
+      "formula": "cos(2θ) = cos²θ - sin²θ",
+      "formula_latex": "\\cos(2\\theta) = \\cos^2\\theta - \\sin^2\\theta",
+      "proof_hint": "Set α = β = θ in cos(α + β).",
+      "nasa_application": "Spacecraft spin dynamics — nutation angle relates to moments of inertia through double-angle terms.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "dbl-cos-2",
+      "category": "double_angle",
+      "name": "Double angle (cosine, form 2)",
+      "formula": "cos(2θ) = 2cos²θ - 1",
+      "formula_latex": "\\cos(2\\theta) = 2\\cos^2\\theta - 1",
+      "proof_hint": "Replace sin²θ with 1 - cos²θ in form 1.",
+      "nasa_application": "Chebyshev polynomial recurrence: T_n(cosθ) = cos(nθ). Used in orbit propagation numerical methods.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "dbl-cos-3",
+      "category": "double_angle",
+      "name": "Double angle (cosine, form 3)",
+      "formula": "cos(2θ) = 1 - 2sin²θ",
+      "formula_latex": "\\cos(2\\theta) = 1 - 2\\sin^2\\theta",
+      "proof_hint": "Replace cos²θ with 1 - sin²θ in form 1.",
+      "nasa_application": "Haversine formula for great-circle distance: hav(θ) = sin²(θ/2) = (1 - cosθ)/2. GPS and ground track computation.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "dbl-tan",
+      "category": "double_angle",
+      "name": "Double angle (tangent)",
+      "formula": "tan(2θ) = 2tanθ / (1 - tan²θ)",
+      "formula_latex": "\\tan(2\\theta) = \\frac{2\\tan\\theta}{1 - \\tan^2\\theta}",
+      "proof_hint": "Set α = β = θ in tan(α + β).",
+      "nasa_application": "Control system analysis — doubling frequency response phase angles in Bode plots.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "half-sin",
+      "category": "half_angle",
+      "name": "Half angle (sine)",
+      "formula": "sin(θ/2) = ±√((1 - cosθ)/2)",
+      "formula_latex": "\\sin\\frac{\\theta}{2} = \\pm\\sqrt{\\frac{1 - \\cos\\theta}{2}}",
+      "proof_hint": "Solve cos(2φ) = 1 - 2sin²φ for sinφ, then let φ = θ/2.",
+      "nasa_application": "Haversine navigation formula: hav(d/R) = hav(φ₂-φ₁) + cosφ₁·cosφ₂·hav(λ₂-λ₁). Ground station visibility.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "half-cos",
+      "category": "half_angle",
+      "name": "Half angle (cosine)",
+      "formula": "cos(θ/2) = ±√((1 + cosθ)/2)",
+      "formula_latex": "\\cos\\frac{\\theta}{2} = \\pm\\sqrt{\\frac{1 + \\cos\\theta}{2}}",
+      "proof_hint": "Solve cos(2φ) = 2cos²φ - 1 for cosφ, then let φ = θ/2.",
+      "nasa_application": "Quaternion construction from rotation matrices — q_w = √(1 + trace(R))/2 involves this identity.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "half-tan",
+      "category": "half_angle",
+      "name": "Half angle (tangent)",
+      "formula": "tan(θ/2) = sinθ/(1 + cosθ) = (1 - cosθ)/sinθ",
+      "formula_latex": "\\tan\\frac{\\theta}{2} = \\frac{\\sin\\theta}{1 + \\cos\\theta} = \\frac{1 - \\cos\\theta}{\\sin\\theta}",
+      "proof_hint": "Divide sin(θ/2) by cos(θ/2), rationalize, and use double angle formulas.",
+      "nasa_application": "Universal variable formulation: the half-angle substitution t = tan(E/2) converts Kepler's equation to polynomial form (Battin's method).",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "prodsum-sincos",
+      "category": "product_to_sum",
+      "name": "Product to sum (sinα·cosβ)",
+      "formula": "sinα·cosβ = (1/2)[sin(α + β) + sin(α - β)]",
+      "formula_latex": "\\sin\\alpha\\cos\\beta = \\frac{1}{2}[\\sin(\\alpha+\\beta) + \\sin(\\alpha-\\beta)]",
+      "proof_hint": "Add the sum and difference formulas for sine.",
+      "nasa_application": "AM modulation analysis in deep space communication — carrier × signal produces sum and difference frequencies.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "prodsum-coscos",
+      "category": "product_to_sum",
+      "name": "Product to sum (cosα·cosβ)",
+      "formula": "cosα·cosβ = (1/2)[cos(α - β) + cos(α + β)]",
+      "formula_latex": "\\cos\\alpha\\cos\\beta = \\frac{1}{2}[\\cos(\\alpha-\\beta) + \\cos(\\alpha+\\beta)]",
+      "proof_hint": "Add the sum and difference formulas for cosine.",
+      "nasa_application": "Lock-in amplifier signal extraction — multiplying signal by reference cosine and low-pass filtering.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "prodsum-sinsin",
+      "category": "product_to_sum",
+      "name": "Product to sum (sinα·sinβ)",
+      "formula": "sinα·sinβ = (1/2)[cos(α - β) - cos(α + β)]",
+      "formula_latex": "\\sin\\alpha\\sin\\beta = \\frac{1}{2}[\\cos(\\alpha-\\beta) - \\cos(\\alpha+\\beta)]",
+      "proof_hint": "Subtract the cosine sum formula from the cosine difference formula.",
+      "nasa_application": "Cross-spectral density computation in vibration analysis — identifying shared frequency content between sensors.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "sumprod-sin-add",
+      "category": "sum_to_product",
+      "name": "Sum to product (sinα + sinβ)",
+      "formula": "sinα + sinβ = 2·sin((α + β)/2)·cos((α - β)/2)",
+      "formula_latex": "\\sin\\alpha + \\sin\\beta = 2\\sin\\frac{\\alpha+\\beta}{2}\\cos\\frac{\\alpha-\\beta}{2}",
+      "proof_hint": "Let α = u + v and β = u - v, then apply the sine sum formula.",
+      "nasa_application": "Beat frequency detection in dual-frequency radar systems — sum of close frequencies produces amplitude modulation.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "sumprod-sin-sub",
+      "category": "sum_to_product",
+      "name": "Sum to product (sinα - sinβ)",
+      "formula": "sinα - sinβ = 2·cos((α + β)/2)·sin((α - β)/2)",
+      "formula_latex": "\\sin\\alpha - \\sin\\beta = 2\\cos\\frac{\\alpha+\\beta}{2}\\sin\\frac{\\alpha-\\beta}{2}",
+      "proof_hint": "Let α = u + v and β = u - v, then subtract the sine difference formula.",
+      "nasa_application": "Differential Doppler measurement between two spacecraft for relative velocity determination.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "sumprod-cos-add",
+      "category": "sum_to_product",
+      "name": "Sum to product (cosα + cosβ)",
+      "formula": "cosα + cosβ = 2·cos((α + β)/2)·cos((α - β)/2)",
+      "formula_latex": "\\cos\\alpha + \\cos\\beta = 2\\cos\\frac{\\alpha+\\beta}{2}\\cos\\frac{\\alpha-\\beta}{2}",
+      "proof_hint": "Let α = u + v and β = u - v, then add the cosine sum and difference formulas.",
+      "nasa_application": "Superposition of electromagnetic waves in phased array antennas — constructive interference pattern.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "sumprod-cos-sub",
+      "category": "sum_to_product",
+      "name": "Sum to product (cosα - cosβ)",
+      "formula": "cosα - cosβ = -2·sin((α + β)/2)·sin((α - β)/2)",
+      "formula_latex": "\\cos\\alpha - \\cos\\beta = -2\\sin\\frac{\\alpha+\\beta}{2}\\sin\\frac{\\alpha-\\beta}{2}",
+      "proof_hint": "Let α = u + v and β = u - v, then subtract the cosine sum from cosine difference formulas.",
+      "nasa_application": "Destructive interference nulls in antenna patterns — used to steer nulls away from interference sources.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "powred-sin2",
+      "category": "power_reducing",
+      "name": "Power-reducing (sin²θ)",
+      "formula": "sin²θ = (1 - cos(2θ))/2",
+      "formula_latex": "\\sin^2\\theta = \\frac{1 - \\cos 2\\theta}{2}",
+      "proof_hint": "Rearrange cos(2θ) = 1 - 2sin²θ.",
+      "nasa_application": "RMS power computation in AC circuits and signal processing — average of sin² over a full period equals 1/2.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "powred-cos2",
+      "category": "power_reducing",
+      "name": "Power-reducing (cos²θ)",
+      "formula": "cos²θ = (1 + cos(2θ))/2",
+      "formula_latex": "\\cos^2\\theta = \\frac{1 + \\cos 2\\theta}{2}",
+      "proof_hint": "Rearrange cos(2θ) = 2cos²θ - 1.",
+      "nasa_application": "Radiation pressure force calculations — intensity proportional to cos² of incidence angle on solar panels.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "powred-sin3",
+      "category": "power_reducing",
+      "name": "Power-reducing (sin³θ)",
+      "formula": "sin³θ = (3sinθ - sin(3θ))/4",
+      "formula_latex": "\\sin^3\\theta = \\frac{3\\sin\\theta - \\sin 3\\theta}{4}",
+      "proof_hint": "Write sin³θ = sinθ·sin²θ, apply power-reducing to sin²θ, then use product-to-sum.",
+      "nasa_application": "Third-harmonic distortion analysis in power amplifiers for deep space transmitters.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "powred-cos3",
+      "category": "power_reducing",
+      "name": "Power-reducing (cos³θ)",
+      "formula": "cos³θ = (3cosθ + cos(3θ))/4",
+      "formula_latex": "\\cos^3\\theta = \\frac{3\\cos\\theta + \\cos 3\\theta}{4}",
+      "proof_hint": "Write cos³θ = cosθ·cos²θ, apply power-reducing to cos²θ, then use product-to-sum.",
+      "nasa_application": "Nonlinear optics — third-order susceptibility terms in laser ranging systems (LAGEOS, LRO).",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "triple-sin",
+      "category": "triple_angle",
+      "name": "Triple angle (sine)",
+      "formula": "sin(3θ) = 3sinθ - 4sin³θ",
+      "formula_latex": "\\sin(3\\theta) = 3\\sin\\theta - 4\\sin^3\\theta",
+      "proof_hint": "sin(3θ) = sin(2θ + θ). Expand using sum formula, then apply double angle formulas.",
+      "nasa_application": "Third-harmonic analysis in orbital perturbation theory — J₃ zonal harmonic of Earth's gravity field.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "triple-cos",
+      "category": "triple_angle",
+      "name": "Triple angle (cosine)",
+      "formula": "cos(3θ) = 4cos³θ - 3cosθ",
+      "formula_latex": "\\cos(3\\theta) = 4\\cos^3\\theta - 3\\cos\\theta",
+      "proof_hint": "cos(3θ) = cos(2θ + θ). Expand using sum formula, then apply double angle formulas.",
+      "nasa_application": "Chebyshev polynomial T₃(x) = 4x³ - 3x. Used in numerical orbit propagation and spectral methods.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "triple-tan",
+      "category": "triple_angle",
+      "name": "Triple angle (tangent)",
+      "formula": "tan(3θ) = (3tanθ - tan³θ) / (1 - 3tan²θ)",
+      "formula_latex": "\\tan(3\\theta) = \\frac{3\\tan\\theta - \\tan^3\\theta}{1 - 3\\tan^2\\theta}",
+      "proof_hint": "tan(3θ) = tan(2θ + θ). Apply tangent sum formula, then substitute tan(2θ).",
+      "nasa_application": "Higher-order phase margin analysis in multi-loop control systems.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "law-sines",
+      "category": "law_of_sines_cosines",
+      "name": "Law of Sines",
+      "formula": "a/sinA = b/sinB = c/sinC = 2R",
+      "formula_latex": "\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C} = 2R",
+      "proof_hint": "Drop altitude from vertex to opposite side. Express altitude two ways using sine of the angles. R is circumradius.",
+      "nasa_application": "Triangulation in deep space navigation — determining spacecraft position from angular measurements to known celestial objects.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "law-cosines",
+      "category": "law_of_sines_cosines",
+      "name": "Law of Cosines",
+      "formula": "c² = a² + b² - 2ab·cosC",
+      "formula_latex": "c^2 = a^2 + b^2 - 2ab\\cos C",
+      "proof_hint": "Place triangle in coordinate system. Compute distance between two vertices using the distance formula.",
+      "nasa_application": "Range computation in orbit determination — given two position vectors and the angle between them, find the chord distance.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "law-area",
+      "category": "law_of_sines_cosines",
+      "name": "Triangle area (sine form)",
+      "formula": "Area = (1/2)ab·sinC",
+      "formula_latex": "\\text{Area} = \\frac{1}{2}ab\\sin C",
+      "proof_hint": "Area = (1/2)·base·height. Height = a·sinC when base = b.",
+      "nasa_application": "Swept area in Kepler's second law: dA/dt = h/2 where h is specific angular momentum. Equal areas in equal times.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "euler-formula",
+      "category": "euler_complex",
+      "name": "Euler's formula",
+      "formula": "e^(iθ) = cosθ + i·sinθ",
+      "formula_latex": "e^{i\\theta} = \\cos\\theta + i\\sin\\theta",
+      "proof_hint": "Taylor series of e^(iθ) separates into real (cosine series) and imaginary (sine series) parts.",
+      "nasa_application": "Foundation of phasor analysis in all RF engineering. Signal processing, filter design, modulation theory for deep space communications.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "euler-identity",
+      "category": "euler_complex",
+      "name": "Euler's identity",
+      "formula": "e^(iπ) + 1 = 0",
+      "formula_latex": "e^{i\\pi} + 1 = 0",
+      "proof_hint": "Set θ = π in Euler's formula: cos(π) = -1, sin(π) = 0.",
+      "nasa_application": "The most beautiful equation in mathematics. Connects the five fundamental constants: e, i, π, 1, 0. The unit circle at θ = π.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "euler-cos",
+      "category": "euler_complex",
+      "name": "Cosine from exponentials",
+      "formula": "cosθ = (e^(iθ) + e^(-iθ))/2",
+      "formula_latex": "\\cos\\theta = \\frac{e^{i\\theta} + e^{-i\\theta}}{2}",
+      "proof_hint": "Add Euler's formula for θ and -θ, divide by 2.",
+      "nasa_application": "Digital filter design — cosine terms expressed as complex exponentials for Z-transform analysis in flight software.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "euler-sin",
+      "category": "euler_complex",
+      "name": "Sine from exponentials",
+      "formula": "sinθ = (e^(iθ) - e^(-iθ))/(2i)",
+      "formula_latex": "\\sin\\theta = \\frac{e^{i\\theta} - e^{-i\\theta}}{2i}",
+      "proof_hint": "Subtract Euler's formula for -θ from θ, divide by 2i.",
+      "nasa_application": "Fourier transform kernel — every spectral analysis of telemetry data decomposes signals into these complex exponentials.",
+      "tspb_layer": 1
+    },
+    {
+      "id": "demoivre",
+      "category": "euler_complex",
+      "name": "De Moivre's theorem",
+      "formula": "(cosθ + i·sinθ)^n = cos(nθ) + i·sin(nθ)",
+      "formula_latex": "(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)",
+      "proof_hint": "From Euler's formula: (e^(iθ))^n = e^(inθ). Expand both sides.",
+      "nasa_application": "Deriving multiple-angle formulas for harmonic analysis. Root-finding for orbital transfer polynomial equations.",
+      "tspb_layer": 1
+    },
+
+    {
+      "id": "inv-arcsin-neg",
+      "category": "inverse_trig",
+      "name": "Arcsine negation",
+      "formula": "arcsin(-x) = -arcsin(x)",
+      "formula_latex": "\\arcsin(-x) = -\\arcsin(x)",
+      "proof_hint": "Since sine is odd, if sinθ = x then sin(-θ) = -x.",
+      "nasa_application": "Symmetric declination calculations in celestial coordinate systems.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "inv-arccos-neg",
+      "category": "inverse_trig",
+      "name": "Arccosine negation",
+      "formula": "arccos(-x) = π - arccos(x)",
+      "formula_latex": "\\arccos(-x) = \\pi - \\arccos(x)",
+      "proof_hint": "cos(π - θ) = -cosθ. If cosθ = x, then cos(π - θ) = -x.",
+      "nasa_application": "Supplementary angle relationships in orbit geometry — true anomaly measured from periapsis vs. apoapsis.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "inv-arctan-neg",
+      "category": "inverse_trig",
+      "name": "Arctangent negation",
+      "formula": "arctan(-x) = -arctan(x)",
+      "formula_latex": "\\arctan(-x) = -\\arctan(x)",
+      "proof_hint": "Since tangent is odd, if tanθ = x then tan(-θ) = -x.",
+      "nasa_application": "Symmetric phase response in control system Bode plots.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "inv-complement",
+      "category": "inverse_trig",
+      "name": "Arcsine-arccosine complement",
+      "formula": "arcsin(x) + arccos(x) = π/2",
+      "formula_latex": "\\arcsin(x) + \\arccos(x) = \\frac{\\pi}{2}",
+      "proof_hint": "If sinθ = x, then cos(π/2 - θ) = x, so arccos(x) = π/2 - θ.",
+      "nasa_application": "Converting between elevation angle and zenith distance in telescope pointing and star tracker software.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "inv-arctan-arctan",
+      "category": "inverse_trig",
+      "name": "Arctangent addition",
+      "formula": "arctan(a) + arctan(b) = arctan((a + b)/(1 - ab)) + kπ",
+      "formula_latex": "\\arctan a + \\arctan b = \\arctan\\frac{a+b}{1-ab} + k\\pi",
+      "proof_hint": "Apply tangent to both sides and use the tangent sum formula. k adjusts for quadrant.",
+      "nasa_application": "Combining bearing angles from multiple ground stations in spacecraft tracking.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "inv-atan2",
+      "category": "inverse_trig",
+      "name": "Two-argument arctangent (atan2)",
+      "formula": "atan2(y, x) = arctan(y/x) adjusted to [-π, π] by quadrant",
+      "formula_latex": "\\text{atan2}(y, x) = \\begin{cases} \\arctan(y/x) & x > 0 \\\\ \\arctan(y/x) + \\pi & x < 0, y \\geq 0 \\\\ \\arctan(y/x) - \\pi & x < 0, y < 0 \\end{cases}",
+      "proof_hint": "The standard arctan loses quadrant information. atan2 preserves it using the signs of both x and y.",
+      "nasa_application": "THE critical function in aerospace software. Every attitude determination, every coordinate transformation, every guidance calculation. Avoids division by zero and quadrant ambiguity that arctan alone cannot resolve.",
+      "tspb_layer": 3
+    },
+
+    {
+      "id": "hyp-sinh",
+      "category": "hyperbolic_connections",
+      "name": "Hyperbolic sine from circular sine",
+      "formula": "sinh(x) = -i·sin(ix)",
+      "formula_latex": "\\sinh(x) = -i\\sin(ix)",
+      "proof_hint": "sin(ix) = (e^(i·ix) - e^(-i·ix))/(2i) = (e^(-x) - e^x)/(2i) = i·(e^x - e^(-x))/2 = i·sinh(x).",
+      "nasa_application": "Hyperbolic trajectories (escape orbits) — the hyperbolic anomaly H replaces eccentric anomaly E, and sinh(H) replaces sin(E) in Kepler's equation for e > 1.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "hyp-cosh",
+      "category": "hyperbolic_connections",
+      "name": "Hyperbolic cosine from circular cosine",
+      "formula": "cosh(x) = cos(ix)",
+      "formula_latex": "\\cosh(x) = \\cos(ix)",
+      "proof_hint": "cos(ix) = (e^(i·ix) + e^(-i·ix))/2 = (e^(-x) + e^x)/2 = cosh(x).",
+      "nasa_application": "Catenary curves in tether dynamics (space elevator, tethered satellite systems). Gravity gradient stabilization analysis.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "hyp-identity",
+      "category": "hyperbolic_connections",
+      "name": "Hyperbolic Pythagorean identity",
+      "formula": "cosh²(x) - sinh²(x) = 1",
+      "formula_latex": "\\cosh^2(x) - \\sinh^2(x) = 1",
+      "proof_hint": "Direct computation: ((e^x + e^(-x))/2)² - ((e^x - e^(-x))/2)² = 1. Or: substitute ix into sin² + cos² = 1.",
+      "nasa_application": "Hyperbolic orbit geometry — the hyperbola x²/a² - y²/b² = 1 parameterized as x = a·cosh(t), y = b·sinh(t). Flyby trajectory shape.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "hyp-euler",
+      "category": "hyperbolic_connections",
+      "name": "Hyperbolic exponential definitions",
+      "formula": "sinh(x) = (e^x - e^(-x))/2, cosh(x) = (e^x + e^(-x))/2",
+      "formula_latex": "\\sinh(x) = \\frac{e^x - e^{-x}}{2}, \\quad \\cosh(x) = \\frac{e^x + e^{-x}}{2}",
+      "proof_hint": "These are the definitions. Compare with the Euler formula representations of sin and cos — the factor of i is what separates circular from hyperbolic.",
+      "nasa_application": "Thermal analysis — heat equation solutions in cylindrical spacecraft components use hyperbolic functions for radial temperature profiles.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "hyp-tanh",
+      "category": "hyperbolic_connections",
+      "name": "Hyperbolic tangent",
+      "formula": "tanh(x) = sinh(x)/cosh(x) = (e^x - e^(-x))/(e^x + e^(-x))",
+      "formula_latex": "\\tanh(x) = \\frac{\\sinh x}{\\cosh x} = \\frac{e^x - e^{-x}}{e^x + e^{-x}}",
+      "proof_hint": "Direct from definitions of sinh and cosh.",
+      "nasa_application": "Relativistic velocity addition: v_combined = c·tanh(arctanh(v₁/c) + arctanh(v₂/c)). Also appears in neural network activation functions for onboard AI.",
+      "tspb_layer": 3
+    },
+    {
+      "id": "hyp-gudermannian",
+      "category": "hyperbolic_connections",
+      "name": "Gudermannian function",
+      "formula": "gd(x) = arctan(sinh(x)) = 2·arctan(tanh(x/2)) = arcsin(tanh(x))",
+      "formula_latex": "\\text{gd}(x) = \\arctan(\\sinh x) = 2\\arctan(\\tanh \\tfrac{x}{2}) = \\arcsin(\\tanh x)",
+      "proof_hint": "The Gudermannian connects circular and hyperbolic functions without complex numbers. It is the integral of sech(t).",
+      "nasa_application": "Mercator projection: latitude φ = gd(y/R). Every flat map of Earth used in mission planning connects circular (latitude) to hyperbolic (Mercator y-coordinate) through this function.",
+      "tspb_layer": 3
+    }
+  ],
+
+  "special_values": {
+    "title": "Exact Trigonometric Values at Standard Angles",
+    "note": "These are the landmarks of the unit circle. Every engineer should know these cold.",
+    "angles": [
+      {
+        "degrees": 0,
+        "radians": "0",
+        "sin": "0",
+        "cos": "1",
+        "tan": "0"
+      },
+      {
+        "degrees": 30,
+        "radians": "π/6",
+        "sin": "1/2",
+        "cos": "√3/2",
+        "tan": "1/√3 = √3/3"
+      },
+      {
+        "degrees": 45,
+        "radians": "π/4",
+        "sin": "√2/2",
+        "cos": "√2/2",
+        "tan": "1"
+      },
+      {
+        "degrees": 60,
+        "radians": "π/3",
+        "sin": "√3/2",
+        "cos": "1/2",
+        "tan": "√3"
+      },
+      {
+        "degrees": 90,
+        "radians": "π/2",
+        "sin": "1",
+        "cos": "0",
+        "tan": "undefined"
+      },
+      {
+        "degrees": 120,
+        "radians": "2π/3",
+        "sin": "√3/2",
+        "cos": "-1/2",
+        "tan": "-√3"
+      },
+      {
+        "degrees": 135,
+        "radians": "3π/4",
+        "sin": "√2/2",
+        "cos": "-√2/2",
+        "tan": "-1"
+      },
+      {
+        "degrees": 150,
+        "radians": "5π/6",
+        "sin": "1/2",
+        "cos": "-√3/2",
+        "tan": "-1/√3 = -√3/3"
+      },
+      {
+        "degrees": 180,
+        "radians": "π",
+        "sin": "0",
+        "cos": "-1",
+        "tan": "0"
+      },
+      {
+        "degrees": 210,
+        "radians": "7π/6",
+        "sin": "-1/2",
+        "cos": "-√3/2",
+        "tan": "1/√3 = √3/3"
+      },
+      {
+        "degrees": 225,
+        "radians": "5π/4",
+        "sin": "-√2/2",
+        "cos": "-√2/2",
+        "tan": "1"
+      },
+      {
+        "degrees": 240,
+        "radians": "4π/3",
+        "sin": "-√3/2",
+        "cos": "-1/2",
+        "tan": "√3"
+      },
+      {
+        "degrees": 270,
+        "radians": "3π/2",
+        "sin": "-1",
+        "cos": "0",
+        "tan": "undefined"
+      },
+      {
+        "degrees": 300,
+        "radians": "5π/3",
+        "sin": "-√3/2",
+        "cos": "1/2",
+        "tan": "-√3"
+      },
+      {
+        "degrees": 315,
+        "radians": "7π/4",
+        "sin": "-√2/2",
+        "cos": "√2/2",
+        "tan": "-1"
+      },
+      {
+        "degrees": 330,
+        "radians": "11π/6",
+        "sin": "-1/2",
+        "cos": "√3/2",
+        "tan": "-1/√3 = -√3/3"
+      },
+      {
+        "degrees": 360,
+        "radians": "2π",
+        "sin": "0",
+        "cos": "1",
+        "tan": "0"
+      }
+    ]
+  },
+
+  "domain_ranges": {
+    "title": "Domains and Ranges of Trigonometric and Inverse Trigonometric Functions",
+    "note": "The restricted domains for inverse functions are chosen to make them single-valued (one-to-one).",
+    "functions": [
+      {
+        "function": "sin(x)",
+        "domain": "(-∞, ∞)",
+        "range": "[-1, 1]",
+        "period": "2π"
+      },
+      {
+        "function": "cos(x)",
+        "domain": "(-∞, ∞)",
+        "range": "[-1, 1]",
+        "period": "2π"
+      },
+      {
+        "function": "tan(x)",
+        "domain": "x ≠ π/2 + nπ",
+        "range": "(-∞, ∞)",
+        "period": "π"
+      },
+      {
+        "function": "csc(x)",
+        "domain": "x ≠ nπ",
+        "range": "(-∞, -1] ∪ [1, ∞)",
+        "period": "2π"
+      },
+      {
+        "function": "sec(x)",
+        "domain": "x ≠ π/2 + nπ",
+        "range": "(-∞, -1] ∪ [1, ∞)",
+        "period": "2π"
+      },
+      {
+        "function": "cot(x)",
+        "domain": "x ≠ nπ",
+        "range": "(-∞, ∞)",
+        "period": "π"
+      },
+      {
+        "function": "arcsin(x)",
+        "domain": "[-1, 1]",
+        "range": "[-π/2, π/2]"
+      },
+      {
+        "function": "arccos(x)",
+        "domain": "[-1, 1]",
+        "range": "[0, π]"
+      },
+      {
+        "function": "arctan(x)",
+        "domain": "(-∞, ∞)",
+        "range": "(-π/2, π/2)"
+      }
+    ]
+  }
+}
