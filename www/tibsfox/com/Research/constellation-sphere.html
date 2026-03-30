@@ -178,8 +178,8 @@ var fsrc = `
   void main() {
     float d = length(gl_PointCoord - 0.5) * 2.0;
     if (d > 1.0) discard;
-    float glow = exp(-d * d * 3.0);
-    gl_FragColor = vec4(vColor * (0.6 + glow * 0.4), vAlpha * glow);
+    float glow = exp(-d * d * 8.0);
+    gl_FragColor = vec4(vColor * (0.7 + glow * 0.3), vAlpha * glow);
   }
 `;
 
@@ -220,7 +220,7 @@ gl.bindBuffer(gl.ARRAY_BUFFER, colBuf);
 gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
 
 var sizes = new Float32Array(N);
-for (var i = 0; i < N; i++) sizes[i] = 8 + degree[i] * 2;
+for (var i = 0; i < N; i++) sizes[i] = 3 + degree[i] * 0.7;
 var sizeBuf = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, sizeBuf);
 gl.bufferData(gl.ARRAY_BUFFER, sizes, gl.STATIC_DRAW);
@@ -319,7 +319,8 @@ function mat4Mul(a, b) {
 }
 
 // Camera
-var rotX = 0.3, rotY = 0, camDist = 3.5;
+var isMobile = window.innerWidth < 768;
+var rotX = 0.3, rotY = 0, camDist = isMobile ? 5.5 : 4.5;
 var autoRotate = true;
 var dragging = false, lastMX, lastMY;
 var activeCluster = null, searchTerm = '';
@@ -352,7 +353,7 @@ canvas.addEventListener('pointerup', function(e) {
 canvas.addEventListener('wheel', function(e) {
   e.preventDefault();
   camDist *= e.deltaY > 0 ? 1.08 : 0.92;
-  camDist = Math.max(1.5, Math.min(8, camDist));
+  camDist = Math.max(2.0, Math.min(12, camDist));
 }, { passive: false });
 
 // Raycast (approximate: check screen-space distance)
@@ -496,7 +497,7 @@ function frame(t) {
   // Draw points
   gl.useProgram(prog);
   gl.uniformMatrix4fv(uMVP, false, mvp);
-  gl.uniform1f(uScale, canvas.height * 0.4);
+  gl.uniform1f(uScale, canvas.height * 0.15);
 
   gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
   gl.enableVertexAttribArray(aPos);
