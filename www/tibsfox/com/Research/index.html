@@ -6,85 +6,139 @@
   <title>Research — Tibsfox</title>
   <link rel="stylesheet" href="../brand.css">
   <style>
-    :root {
-      --page-bg: #0f1219;
-      --page-text: #c8d0e0;
-      --card-bg: rgba(255,255,255,0.04);
-      --card-border: rgba(255,255,255,0.08);
-      --card-hover-border: rgba(255,255,255,0.2);
+    body { background: var(--parchment-pale); }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); text-decoration: underline; }
+
+    .site-header {
+      background: linear-gradient(135deg, var(--ink) 0%, var(--cool-dark) 40%, var(--canopy) 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem 2.5rem;
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { background:var(--page-bg); color:var(--page-text); font-family:system-ui,-apple-system,sans-serif; line-height:1.6; }
-    a { color:#93c5fd; text-decoration:none; }
-    a:hover { color:#bfdbfe; }
+    .site-header h1 { font-size: 2.2rem; font-weight: 400; letter-spacing: 0.03em; margin-bottom: 0.3rem; }
+    .site-header .subtitle { color: var(--fox-light); font-size: 0.95rem; font-style: italic; margin-bottom: 1.5rem; }
+    .stats-bar { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+    .stats-bar .stat { text-align: center; }
+    .stats-bar .stat-value { display: block; color: #fff; font-size: 1.6rem; font-weight: 700; font-family: system-ui, sans-serif; }
+    .stats-bar .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.06em; font-family: system-ui, sans-serif; }
 
-    header { text-align:center; padding:3rem 1.5rem 2rem; }
-    header h1 { color:#fff; font-size:2rem; font-weight:700; margin-bottom:0.3rem; }
-    header .subtitle { color:rgba(255,255,255,0.45); font-size:0.95rem; }
-
-    .stats-bar { display:flex; justify-content:center; gap:2rem; padding:0 1.5rem 2rem; flex-wrap:wrap; }
-    .stat { text-align:center; }
-    .stat-value { display:block; color:#fff; font-size:1.5rem; font-weight:700; }
-    .stat-label { font-size:0.75rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.05em; }
-
-    .nav-row { display:flex; justify-content:center; gap:0.75rem; padding:0 1.5rem 2.5rem; flex-wrap:wrap; }
-    .nav-link { padding:0.4rem 1rem; border-radius:6px; font-size:0.85rem; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.6); transition:all 0.2s; }
-    .nav-link:hover { color:#fff; border-color:rgba(255,255,255,0.3); background:rgba(255,255,255,0.05); }
-
-    main { max-width:1200px; margin:0 auto; padding:0 1.5rem 3rem; }
-
-    .featured { margin-bottom:2.5rem; }
-    .featured a { display:block; padding:1.5rem 2rem; border-radius:12px; border:1px solid rgba(76,175,80,0.25); background:linear-gradient(135deg, rgba(76,175,80,0.08), rgba(42,100,150,0.06)); transition:all 0.2s; }
-    .featured a:hover { border-color:rgba(76,175,80,0.5); background:linear-gradient(135deg, rgba(76,175,80,0.12), rgba(42,100,150,0.1)); transform:translateY(-1px); }
-    .featured h2 { color:#fff; font-size:1.3rem; margin-bottom:0.25rem; }
-    .featured .desc { color:rgba(255,255,255,0.55); font-size:0.9rem; }
-    .featured .meta { color:rgba(255,255,255,0.3); font-size:0.8rem; margin-top:0.5rem; }
-
-    h3.section { color:rgba(255,255,255,0.5); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:1rem; padding-left:0.25rem; }
-
-    .cluster-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1rem; margin-bottom:2.5rem; }
-    .cluster-card { display:block; padding:1.2rem 1.5rem; border-radius:10px; border:1px solid var(--card-border); background:var(--card-bg); transition:all 0.2s; }
-    .cluster-card:hover { border-color:var(--card-hover-border); background:rgba(255,255,255,0.06); transform:translateY(-1px); }
-    .cluster-name { color:#fff; font-size:1rem; font-weight:600; margin-bottom:0.2rem; }
-    .cluster-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle; }
-    .cluster-count { color:rgba(255,255,255,0.35); font-size:0.8rem; }
-    .cluster-members { color:rgba(255,255,255,0.4); font-size:0.78rem; margin-top:0.5rem; line-height:1.5; }
-    .cluster-members span { display:inline-block; padding:0.1rem 0.4rem; margin:0.1rem; border-radius:3px; background:rgba(255,255,255,0.05); }
-
-    footer { text-align:center; padding:2rem; color:rgba(255,255,255,0.2); font-size:0.8rem; border-top:1px solid rgba(255,255,255,0.05); }
-    footer a { color:rgba(255,255,255,0.35); }
-
-    @media(max-width:640px) {
-      header h1 { font-size:1.5rem; }
-      .stats-bar { gap:1rem; }
-      .cluster-grid { grid-template-columns:1fr; }
+    .nav-row {
+      display: flex; justify-content: center; gap: 0.6rem; padding: 1.5rem 2rem; flex-wrap: wrap;
+      background: var(--parchment); border-bottom: 1px solid var(--parchment-deep);
     }
+    .nav-link {
+      padding: 0.4rem 1rem; border-radius: 5px; font-size: 0.85rem; font-family: system-ui, sans-serif;
+      border: 1px solid var(--parchment-deep); color: var(--ink-soft); background: var(--parchment-light); transition: all 0.2s;
+    }
+    .nav-link:hover { color: var(--ink); border-color: var(--fox-warm); background: var(--fox-pale); text-decoration: none; }
+
+    main { max-width: 1200px; margin: 0 auto; padding: 2rem 2rem 3rem; }
+
+    .featured-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 2.5rem; }
+    @media (max-width: 800px) { .featured-grid { grid-template-columns: 1fr; } }
+
+    .featured-card {
+      display: block; padding: 1.5rem 2rem; border-radius: 10px;
+      border: 1px solid var(--card-border); background: var(--card-bg);
+      transition: all 0.2s; text-decoration: none; color: inherit;
+    }
+    .featured-card:hover { border-color: var(--fox-warm); box-shadow: 0 4px 16px var(--card-shadow); transform: translateY(-2px); text-decoration: none; }
+    .featured-card h2 { font-size: 1.2rem; color: var(--ink); margin: 0 0 0.3rem; padding: 0; border: none; }
+    .featured-card .desc { font-size: 0.88rem; color: var(--charcoal); margin-bottom: 0.4rem; }
+    .featured-card .meta { font-size: 0.78rem; color: var(--stone); font-family: system-ui, sans-serif; }
+    .featured-card .accent-stripe { height: 3px; border-radius: 2px; margin-bottom: 1rem; }
+
+    .nasa-card { border-color: rgba(11,61,145,0.2); background: linear-gradient(135deg, rgba(11,61,145,0.04), rgba(252,61,33,0.02)); }
+    .nasa-card:hover { border-color: #0B3D91; }
+
+    h3.section { color: var(--charcoal); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; margin: 2rem 0 1rem; padding-left: 0.25rem; font-family: system-ui, sans-serif; }
+
+    .cluster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .cluster-card {
+      display: block; padding: 1.2rem 1.5rem; border-radius: 8px;
+      border: 1px solid var(--card-border); background: var(--card-bg);
+      transition: all 0.2s; text-decoration: none; color: inherit;
+    }
+    .cluster-card:hover { border-color: var(--parchment-deep); box-shadow: 0 2px 8px var(--card-shadow); transform: translateY(-1px); text-decoration: none; }
+    .cluster-name { color: var(--ink); font-size: 1rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .cluster-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+    .cluster-count { color: var(--stone); font-size: 0.78rem; font-family: system-ui, sans-serif; }
+    .cluster-members { color: var(--charcoal); font-size: 0.76rem; margin-top: 0.5rem; line-height: 1.6; font-family: system-ui, sans-serif; }
+    .cluster-members span { display: inline-block; padding: 0.1rem 0.4rem; margin: 0.1rem; border-radius: 3px; background: var(--parchment-light); }
+    .cluster-members a { color: var(--ink-soft); text-decoration: none; }
+    .cluster-members a:hover { color: var(--fox); text-decoration: none; }
+
+    footer { text-align: center; padding: 1.5rem 2rem; border-top: 2px solid var(--parchment); font-size: 0.82rem; color: var(--stone); font-family: system-ui, sans-serif; }
+    footer a { color: var(--fox); margin: 0 0.4rem; }
+
+    @media (max-width: 640px) { .site-header h1 { font-size: 1.5rem; } .stats-bar { gap: 1rem; } .cluster-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
-  <header>
+  <div class="site-header">
     <h1>Tibsfox Research</h1>
-    <div class="subtitle">172 projects across 13 domain clusters &mdash; from Pacific Northwest ecology to GPU orchestration</div>
-  </header>
-
-  <div class="stats-bar">
-    <div class="stat"><span class="stat-value">168</span><span class="stat-label">Projects</span></div>
-    <div class="stat"><span class="stat-value">13</span><span class="stat-label">Clusters</span></div>
-    <div class="stat"><span class="stat-value">2,439</span><span class="stat-label">Files</span></div>
-    <div class="stat"><span class="stat-value">739</span><span class="stat-label">Cross-references</span></div>
+    <div class="subtitle">From Pacific Northwest ecology to the edge of the solar system</div>
+    <div class="stats-bar">
+      <div class="stat"><span class="stat-value">168</span><span class="stat-label">Projects</span></div>
+      <div class="stat"><span class="stat-value">13</span><span class="stat-label">Clusters</span></div>
+      <div class="stat"><span class="stat-value">552</span><span class="stat-label">NASA Missions</span></div>
+      <div class="stat"><span class="stat-value">739</span><span class="stat-label">Cross-refs</span></div>
+    </div>
   </div>
 
   <div class="nav-row">
     <a href="constellation.html" class="nav-link">Constellation Map</a>
+    <a href="constellation-sphere.html" class="nav-link">3D Sphere</a>
+    <a href="NASA/index.html" class="nav-link">NASA Missions</a>
+    <a href="PNW/index.html" class="nav-link">PNW Series</a>
     <a href="../index.html" class="nav-link">Home</a>
   </div>
 
   <main>
-    <div class="featured">
-      <a href="PNW/index.html">
+    <div class="featured-grid">
+      <a href="PNW/index.html" class="featured-card">
+        <div class="accent-stripe" style="background:linear-gradient(90deg, #1b5e20, #4CAF50, #2a6496);"></div>
         <h2>Pacific Northwest Research Series</h2>
         <div class="desc">Rainforest to garden &mdash; mapping the living systems of the PNW bioregion. The foundational research that anchors everything else.</div>
-        <div class="meta">18 ecology projects &middot; 8 elevation bands &middot; 1,000+ species documented</div>
+        <div class="meta">18 ecology projects &middot; 8 elevation bands &middot; 1,000+ species</div>
+      </a>
+
+      <a href="NASA/index.html" class="featured-card nasa-card">
+        <div class="accent-stripe" style="background:linear-gradient(90deg, #0B3D91, #FC3D21, #C4A35A);"></div>
+        <h2>NASA Mission Series</h2>
+        <div class="desc">Complete traversal of NASA&rsquo;s history. Each mission paired with a living organism, mathematics, simulations, creative arts, and community business pathways.</div>
+        <div class="meta">552 missions &middot; 6 epochs &middot; 2 complete &middot; 1958&ndash;2040s</div>
+      </a>
+
+      <a href="S36/index.html" class="featured-card">
+        <div class="accent-stripe" style="background:linear-gradient(90deg, #1a237e, #c62828, #f9a825);"></div>
+        <h2>Seattle 360 Engine</h2>
+        <div class="desc">360 degrees of Seattle jazz, R&amp;B, and soul &mdash; one artist per degree, paired with deep research on the music that shaped the city.</div>
+        <div class="meta">30 degrees complete &middot; 360 total &middot; paired with SPS bird series</div>
+      </a>
+
+      <a href="SPS/index.html" class="featured-card">
+        <div class="accent-stripe" style="background:linear-gradient(90deg, #2c5282, #4CAF50, #8d6e63);"></div>
+        <h2>Sound of Puget Sound</h2>
+        <div class="desc">The birds that sing along the waterways &mdash; each degree pairs a Seattle musician with a PNW bird through ecological and musical resonance.</div>
+        <div class="meta">30 species &middot; mirrors S36 &middot; avian ecology + music theory</div>
+      </a>
+    </div>
+
+    <h3 class="section">Explore the Knowledge Graph</h3>
+    <div class="featured-grid">
+      <a href="constellation.html" class="featured-card">
+        <div class="accent-stripe" style="background:linear-gradient(90deg, #1a1a3a, #4a5a8a, #93c5fd);"></div>
+        <h2>Constellation Map (2D)</h2>
+        <div class="desc">Force-directed graph of all projects. Drag, zoom, filter by cluster, search by name.</div>
+        <div class="meta">168 nodes &middot; 600+ edges &middot; 13 clusters</div>
+      </a>
+      <a href="constellation-sphere.html" class="featured-card">
+        <div class="accent-stripe" style="background:linear-gradient(90deg, #0B3D91, #AB47BC, #EC407A);"></div>
+        <h2>Constellation Sphere (3D)</h2>
+        <div class="desc">The complex plane of experience on a Riemann sphere. Real axis = engineering. Imaginary axis = culture. Stereographic projection.</div>
+        <div class="meta">WebGL &middot; rotatable &middot; C &rarr; S&sup2;</div>
       </a>
     </div>
 
@@ -92,53 +146,53 @@
     <div class="cluster-grid">
       <a href="PNW/index.html" class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#4CAF50"></span>Ecology</div>
-        <div class="cluster-count">18 projects &middot; hub: ECO</div>
-        <div class="cluster-members"><span>COL</span><span>CAS</span><span>ECO</span><span>GDN</span><span>AVI</span><span>MAM</span><span>AWF</span><span>SAL</span><span>CRV</span><span>PLT</span><span>AGR</span><span>LFR</span><span>PPM</span><span>BHM</span><span>SSM</span><span>CDS</span><span>SFC</span><span>MWC</span></div>
+        <div class="cluster-count">19 projects &middot; hub: ECO</div>
+        <div class="cluster-members"><span>COL</span><span>CAS</span><span>ECO</span><span>GDN</span><span>AVI</span><span>MAM</span><span>AWF</span><span>SAL</span><span>CRV</span><span>PLT</span><span>AGR</span><span>LFR</span><span>BCM</span><span>BPS</span><span>FFA</span><span>PGP</span><span>ROF</span><span>TIBS</span><span>WYR</span></div>
       </a>
       <div class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#EF5350"></span>Music</div>
-        <div class="cluster-count">30 projects &middot; hub: WAL</div>
-        <div class="cluster-members"><span><a href="WAL/index.html">WAL</a></span><span><a href="DDA/index.html">DDA</a></span><span><a href="GRV/index.html">GRV</a></span><span><a href="PJM/index.html">PJM</a></span><span><a href="SNY/index.html">SNY</a></span><span><a href="COI/index.html">COI</a></span><span><a href="GGT/index.html">GGT</a></span><span><a href="GTP/index.html">GTP</a></span><span><a href="CDP/index.html">CDP</a></span><span><a href="KGX/index.html">KGX</a></span><span><a href="HJX/index.html">HJX</a></span><span><a href="B52/index.html">B52</a></span><span><a href="CAR/index.html">CAR</a></span><span><a href="TKH/index.html">TKH</a></span><span><a href="DPM/index.html">DPM</a></span><span><a href="DRN/index.html">DRN</a></span><span><a href="SMP/index.html">SMP</a></span><span><a href="BMR/index.html">BMR</a></span><span><a href="SOC/index.html">SOC</a></span><span><a href="CRY/index.html">CRY</a></span><span><a href="SRG/index.html">SRG</a></span><span><a href="PRS/index.html">PRS</a></span><span><a href="ABL/index.html">ABL</a></span><span><a href="FLS/index.html">FLS</a></span><span><a href="OCT/index.html">OCT</a></span><span><a href="SFH/index.html">SFH</a></span><span><a href="GRG/index.html">GRG</a></span><span><a href="MDB/index.html">MDB</a></span><span><a href="S36/index.html">S36</a></span><span><a href="SPS/index.html">SPS</a></span></div>
+        <div class="cluster-count">44 projects &middot; hub: WAL</div>
+        <div class="cluster-members"><span><a href="WAL/index.html">WAL</a></span><span><a href="S36/index.html">S36</a></span><span><a href="SPS/index.html">SPS</a></span><span><a href="DAA/index.html">DAA</a></span><span><a href="HFE/index.html">HFE</a></span><span><a href="HFR/index.html">HFR</a></span><span><a href="PRS/index.html">PRS</a></span><span><a href="GRV/index.html">GRV</a></span><span><a href="PJM/index.html">PJM</a></span><span><a href="SNY/index.html">SNY</a></span><span><a href="DPM/index.html">DPM</a></span><span><a href="B52/index.html">B52</a></span><span><a href="TKH/index.html">TKH</a></span><span><a href="BMR/index.html">BMR</a></span><span>+30 more</span></div>
       </div>
       <div class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#78909C"></span>Infrastructure</div>
-        <div class="cluster-count">27 projects &middot; hub: SYS</div>
-        <div class="cluster-members"><span><a href="SYS/index.html">SYS</a></span><span><a href="CMH/index.html">CMH</a></span><span><a href="GSD2/index.html">GSD2</a></span><span><a href="MPC/index.html">MPC</a></span><span><a href="VAV/index.html">VAV</a></span><span><a href="OCN/index.html">OCN</a></span><span><a href="K8S/index.html">K8S</a></span><span><a href="MCM/index.html">MCM</a></span><span><a href="PMG/index.html">PMG</a></span><span><a href="ACE/index.html">ACE</a></span><span><a href="MCF/index.html">MCF</a></span><span><a href="MCS/index.html">MCS</a></span><span><a href="STE/index.html">STE</a></span><span><a href="WPH/index.html">WPH</a></span><span><a href="MRW/index.html">MRW</a></span><span><a href="GPO/index.html">GPO</a></span><span><a href="GPG/index.html">GPG</a></span><span><a href="PIN/index.html">PIN</a></span><span><a href="SRD/index.html">SRD</a></span><span><a href="MDS/index.html">MDS</a></span><span><a href="SCR/index.html">SCR</a></span><span><a href="DHP/index.html">DHP</a></span><span><a href="DNS/index.html">DNS</a></span><span><a href="TCP/index.html">TCP</a></span><span><a href="PNP/index.html">PNP</a></span><span><a href="RFC/index.html">RFC</a></span><span><a href="ENB/index.html">ENB</a></span></div>
+        <div class="cluster-count">19 projects &middot; hub: SYS</div>
+        <div class="cluster-members"><span><a href="SYS/index.html">SYS</a></span><span><a href="CMH/index.html">CMH</a></span><span><a href="K8S/index.html">K8S</a></span><span><a href="RFC/index.html">RFC</a></span><span><a href="DNS/index.html">DNS</a></span><span><a href="TCP/index.html">TCP</a></span><span><a href="SRD/index.html">SRD</a></span><span><a href="MCF/index.html">MCF</a></span><span><a href="OPS/index.html">OPS</a></span><span>+10 more</span></div>
       </div>
       <div class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#26A69A"></span>Broadcasting</div>
-        <div class="cluster-count">19 projects &middot; hub: RBH</div>
-        <div class="cluster-members"><span><a href="RBH/index.html">RBH</a></span><span><a href="KPZ/index.html">KPZ</a></span><span><a href="KSM/index.html">KSM</a></span><span><a href="KUB/index.html">KUB</a></span><span><a href="WLF/index.html">WLF</a></span><span><a href="C89/index.html">C89</a></span><span><a href="MIX/index.html">MIX</a></span><span><a href="SGL/index.html">SGL</a></span><span><a href="CBC/index.html">CBC</a></span><span><a href="IBC/index.html">IBC</a></span><span><a href="SVB/index.html">SVB</a></span><span><a href="DFQ/index.html">DFQ</a></span><span><a href="AMR/index.html">AMR</a></span><span><a href="TVH/index.html">TVH</a></span><span><a href="ALV/index.html">ALV</a></span><span><a href="SNX/index.html">SNX</a></span><span><a href="LNT/index.html">LNT</a></span><span><a href="CCT/index.html">CCT</a></span><span><a href="CNA/index.html">CNA</a></span></div>
+        <div class="cluster-count">17 projects &middot; hub: RBH</div>
+        <div class="cluster-members"><span><a href="RBH/index.html">RBH</a></span><span><a href="FCC/index.html">FCC</a></span><span><a href="CBC/index.html">CBC</a></span><span><a href="IBC/index.html">IBC</a></span><span><a href="C89/index.html">C89</a></span><span><a href="AMR/index.html">AMR</a></span><span><a href="TVH/index.html">TVH</a></span><span>+10 more</span></div>
       </div>
       <div class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#EC407A"></span>Creative</div>
-        <div class="cluster-count">15 projects &middot; hub: FFA</div>
-        <div class="cluster-members"><span><a href="FFA/index.html">FFA</a></span><span><a href="ARC/index.html">ARC</a></span><span><a href="TIBS/index.html">TIBS</a></span><span><a href="STA/index.html">STA</a></span><span><a href="BRC/index.html">BRC</a></span><span><a href="DAA/index.html">DAA</a></span><span><a href="HEN/index.html">HEN</a></span><span><a href="ANM/index.html">ANM</a></span><span><a href="INP/index.html">INP</a></span><span><a href="MTB/index.html">MTB</a></span><span><a href="APR/index.html">APR</a></span><span><a href="EAZ/index.html">EAZ</a></span><span><a href="NWZ/index.html">NWZ</a></span><span><a href="KFU/index.html">KFU</a></span><span><a href="CWC/index.html">CWC</a></span></div>
+        <div class="cluster-count">17 projects &middot; hub: GRD</div>
+        <div class="cluster-members"><span><a href="ANM/index.html">ANM</a></span><span><a href="ARC/index.html">ARC</a></span><span><a href="HEN/index.html">HEN</a></span><span><a href="INP/index.html">INP</a></span><span><a href="BRC/index.html">BRC</a></span><span><a href="GRD/index.html">GRD</a></span><span><a href="SGM/index.html">SGM</a></span><span>+10 more</span></div>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-name"><span class="cluster-dot" style="background:#AB47BC"></span>Vision</div>
+        <div class="cluster-count">20 projects &middot; hub: COK</div>
+        <div class="cluster-members"><span><a href="COK/index.html">COK</a></span><span><a href="GSD2/index.html">GSD2</a></span><span><a href="MPC/index.html">MPC</a></span><span><a href="ACE/index.html">ACE</a></span><span><a href="CGI/index.html">CGI</a></span><span><a href="LLM/index.html">LLM</a></span><span><a href="SST/index.html">SST</a></span><span>+13 more</span></div>
+      </div>
+      <div class="cluster-card">
+        <div class="cluster-name"><span class="cluster-dot" style="background:#42A5F5"></span>Business</div>
+        <div class="cluster-count">11 projects &middot; hub: PPM</div>
+        <div class="cluster-members"><span><a href="ACC/index.html">ACC</a></span><span><a href="WSB/index.html">WSB</a></span><span><a href="PPM/index.html">PPM</a></span><span><a href="BHM/index.html">BHM</a></span><span><a href="SFC/index.html">SFC</a></span><span><a href="MWC/index.html">MWC</a></span><span>+5 more</span></div>
       </div>
       <div class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#FFB300"></span>Electronics</div>
-        <div class="cluster-count">10 projects &middot; hub: LED</div>
-        <div class="cluster-members"><span><a href="SHE/index.html">SHE</a></span><span><a href="LED/index.html">LED</a></span><span><a href="T55/index.html">T55</a></span><span><a href="EMG/index.html">EMG</a></span><span><a href="BPS/index.html">BPS</a></span><span><a href="PSS/index.html">PSS</a></span><span><a href="SNL/index.html">SNL</a></span><span><a href="HFR/index.html">HFR</a></span><span><a href="HFE/index.html">HFE</a></span><span><a href="FEC/index.html">FEC</a></span></div>
+        <div class="cluster-count">8 projects &middot; hub: SGL</div>
+        <div class="cluster-members"><span><a href="SGL/index.html">SGL</a></span><span><a href="LED/index.html">LED</a></span><span><a href="T55/index.html">T55</a></span><span><a href="EMG/index.html">EMG</a></span><span><a href="SHE/index.html">SHE</a></span><span><a href="SNL/index.html">SNL</a></span><span><a href="FQC/index.html">FQC</a></span><span><a href="BRC/index.html">BRC</a></span></div>
       </div>
       <div class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#5C6BC0"></span>Science</div>
-        <div class="cluster-count">7 projects &middot; hub: BHK</div>
-        <div class="cluster-members"><span><a href="BHK/index.html">BHK</a></span><span><a href="LGW/index.html">LGW</a></span><span><a href="SET/index.html">SET</a></span><span><a href="SGM/index.html">SGM</a></span><span><a href="BNY/index.html">BNY</a></span><span><a href="ABM/index.html">ABM</a></span><span><a href="CHS/index.html">CHS</a></span></div>
+        <div class="cluster-count">22 projects &middot; hub: BHK</div>
+        <div class="cluster-members"><span><a href="BHK/index.html">BHK</a></span><span><a href="LGW/index.html">LGW</a></span><span><a href="SET/index.html">SET</a></span><span><a href="BNY/index.html">BNY</a></span><span><a href="FDR/index.html">FDR</a></span><span><a href="ATC/index.html">ATC</a></span><span>+16 more</span></div>
       </div>
       <div class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#1E88E5"></span>Space &amp; Astrophysics</div>
         <div class="cluster-count">7 projects &middot; hub: CYG</div>
         <div class="cluster-members"><span><a href="CYG/index.html">CYG</a></span><span><a href="SMB/index.html">SMB</a></span><span><a href="GRB/index.html">GRB</a></span><span><a href="BHC/index.html">BHC</a></span><span><a href="LTS/index.html">LTS</a></span><span><a href="YNT/index.html">YNT</a></span><span><a href="MST/index.html">MST</a></span></div>
-      </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#AB47BC"></span>Vision</div>
-        <div class="cluster-count">6 projects &middot; hub: NND</div>
-        <div class="cluster-members"><span><a href="ROF/index.html">ROF</a></span><span><a href="SPA/index.html">SPA</a></span><span><a href="NWC/index.html">NWC</a></span><span><a href="SMF/index.html">SMF</a></span><span><a href="WCN/index.html">WCN</a></span><span><a href="OTM/index.html">OTM</a></span></div>
-      </div>
-      <div class="cluster-card">
-        <div class="cluster-name"><span class="cluster-dot" style="background:#42A5F5"></span>Business</div>
-        <div class="cluster-count">5 projects &middot; hub: BCM</div>
-        <div class="cluster-members"><span><a href="ACC/index.html">ACC</a></span><span><a href="WSB/index.html">WSB</a></span><span><a href="BCM/index.html">BCM</a></span><span><a href="BLA/index.html">BLA</a></span><span><a href="FCC/index.html">FCC</a></span></div>
       </div>
       <div class="cluster-card">
         <div class="cluster-name"><span class="cluster-dot" style="background:#7E57C2"></span>AI &amp; Computation</div>
@@ -159,7 +213,12 @@
   </main>
 
   <footer>
-    <a href="../index.html">tibsfox.com</a> &middot; <a href="constellation.html">Constellation Map</a> &middot; <a href="PNW/index.html">PNW Series</a>
+    <a href="../index.html">tibsfox.com</a> &middot;
+    <a href="constellation.html">Constellation</a> &middot;
+    <a href="constellation-sphere.html">3D Sphere</a> &middot;
+    <a href="NASA/index.html">NASA</a> &middot;
+    <a href="PNW/index.html">PNW</a> &middot;
+    <a href="https://github.com/Tibsfox/gsd-skill-creator">GitHub</a>
   </footer>
 </body>
 </html>
