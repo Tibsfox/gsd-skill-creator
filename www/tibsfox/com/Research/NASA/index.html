@@ -460,8 +460,18 @@ fetch('catalog/nasa_master_mission_catalog_expanded.csv')
     });
   })
   .catch(err => {
-    document.getElementById('catalog').innerHTML =
-      '<p style="color:var(--failed);">Error loading mission catalog. Check that catalog/nasa_master_mission_catalog.csv exists.</p>';
+    // Try absolute URL as fallback
+    fetch('https://tibsfox.com/Research/NASA/catalog/nasa_master_mission_catalog_expanded.csv')
+      .then(r => r.text())
+      .then(csv => {
+        // Re-run the same parsing logic
+        location.reload();
+      })
+      .catch(err2 => {
+        document.getElementById('catalog').innerHTML =
+          '<p style="color:var(--failed);">Error loading mission catalog: ' + err.message + '</p>' +
+          '<p style="color:var(--text-dim);font-size:0.8rem;margin-top:0.5rem;">Tried: catalog/nasa_master_mission_catalog_expanded.csv</p>';
+      });
   });
 </script>
 
