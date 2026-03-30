@@ -1,0 +1,265 @@
+{
+  "degree": 43,
+  "species": "American Goldfinch",
+  "scientific_name": "Spinus tristis",
+  "slug": "043-american-goldfinch",
+  "sound_type": "per-chick-o-ree flight call + canary song",
+  "energy": 4,
+  "ecosystem": "weedy field",
+  "season": "summer",
+  "family": "Fringillidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; breeds in weedy fields, roadsides, orchards, and open brushy areas throughout western Washington lowlands. Year-round resident west of the Cascades, with many eastern Washington breeders departing in winter. Found in every county in the state. The official state bird of Washington since 1951 (RCW 1.20.086). Formerly rare in western Washington before European settlement cleared the dense coniferous forests; now common in human-modified open habitats."
+  },
+  "taxonomy_note": {
+    "description": "American Goldfinch is the FOURTH Fringillidae in the engine, breaking the unprecedented five-consecutive Parulidae run (degrees 38-42). It is the Washington State Bird -- the FIRST state symbol to appear in the engine. It reunites the Spinus genus with the Pine Siskin (degree 12) after 31 degrees -- the widest genus gap in the engine. Spinus tristis: 'sad thorn-bird' -- one of ornithology's most ironic names, the brightest bird named for sorrow. The only cardueline finch to molt twice yearly, transforming from drab olive-brown to brilliant lemon-yellow each spring.",
+    "current_family": "Fringillidae",
+    "new_family": false,
+    "family_count_in_engine": 18,
+    "fringillidae_count_in_engine": 4,
+    "name_etymology": "Spinus = Latin spinus (thorn bush, blackthorn). Tristis = Latin tristis (sad, sorrowful). Full translation: 'Sad thorn-bird.' Named by Linnaeus in 1758 in the tenth edition of Systema Naturae. The genus names the habitat (thorny, weedy plants). The species names the emotional register (the plaintive quality of the dear-me contact call). The first species epithet in the engine that names an emotion rather than a physical feature, place, or person.",
+    "genus_note": "Spinus now has TWO members in the engine (12, 43) -- the first genus reunion after a gap of more than 30 degrees. Pine Siskin (Spinus pinus, degree 12, E=1, irruptive, electronic zhreee) and American Goldfinch (Spinus tristis, degree 43, E=4, summer, per-chick-o-ree + canary song). Same genus, opposite in every measurable dimension. The Spinus pair spans the engine's full energy range within a single genus.",
+    "order_note": "Passeriformes continues from degree 42. Sixth consecutive Passeriformes (38-43). 36 of 44 entries (81.8%) are Passeriformes.",
+    "state_bird_note": "Washington State Bird since 1951. RCW 1.20.086. Schoolchildren voted for it in 1928; the legislature adopted it on March 14, 1951, unanimously. The 'Willow Goldfinch' in the statute. Also state bird of Iowa and New Jersey. The first official state symbol in the engine -- 43 degrees into a 360-degree survey of Washington's soundscape.",
+    "parulidae_streak_broken": "The five-consecutive Parulidae run (degrees 38-42) ENDS at degree 43. Fringillidae returns. The warbler streak told a complete story: specialist to generalist, drawl to shimmer. The finches bookend the warbler era: Fringillidae at 34, then hummingbirds (35-37), then five warblers (38-42), then Fringillidae at 43.",
+    "family_position": "Fringillidae now has 4 members (12, 33, 34, 43) -- tied with Trochilidae (35, 36, 37) for fourth-largest family. Fringillidae has greater diversity: 4 genera (Spinus recurring), energy range E=1 to E=4, two irruptive and two summer species.",
+    "late_nesting_note": "One of the latest-nesting songbirds in North America: June-September, peaking July-August. Delays breeding until thistles and composites produce mature seeds. Feeds nestlings regurgitated seeds rather than insects -- an exception among passerines. Nest lined with thistle down so dense it can hold water.",
+    "molt_note": "The ONLY cardueline finch in North America to molt twice per year. Complete prebasic molt (fall: brilliant to drab) and partial prealternate molt (spring: drab to brilliant). The visual undulation between states: olive-brown to lemon-yellow and back, every year. The twice-yearly molt is energetically expensive and contributes to the late nesting schedule.",
+    "cowbird_defense_note": "Brown-headed Cowbird chicks that hatch in goldfinch nests starve within 3-5 days on the all-seed diet. The goldfinch does not recognize or reject cowbird eggs. Its diet IS the defense. An accidental immune system made of thistle seeds."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-7,000 (across all vocalizations)",
+    "peak_energy_band_hz": "3,000-5,000 (primary vocalization energy)",
+    "flight_call_frequency_hz": "~4,000 (per-chick-o-ree, downslurred notes)",
+    "flight_call_duration_s": "0.3-0.6 (3-4 notes per phrase)",
+    "song_duration_s": "2-30+ (complex song, continuous stream of phrases)",
+    "note_structure": "TWO VOCALIZATION MODES: (1) FLIGHT CALL (per-chick-o-ree) -- 3-4 downslurred notes at ~4 kHz, delivered at the trough of each undulation in bounding flight. Synchronized to flight dynamics. Year-round. The most commonly heard vocalization. (2) CANARY SONG -- extended warbling, 2-6 kHz, multiple phrase types (rising whistles, buzzy trills, clear warbles, chattering runs) assembled in seemingly random order without obvious repetition. Breeding season from perch or flight.",
+    "note_types": "FIVE vocalization categories: (1) FLIGHT CALL (per-chick-o-ree / po-ta-to-chip) -- bounding flight contact call, 3-4 downslurred notes, ~4 kHz. (2) COMPLEX SONG -- extended canary-like warbling, successive phrases 0.3-0.5 s each, continuous stream. (3) DISJUNCT SONG -- individual phrases every 1-2 s with pauses, close interactions. (4) CONTACT CALL (tee-yee / dear-me) -- soft descending two-note, plaintive quality, the 'tristis' call Linnaeus heard. (5) AGGRESSIVE CALL (bee-ee) -- harsh buzzy call for territory and nest defense.",
+    "phrase_structure": "Flight call: simple 3-4 note phrase locked to flight undulation. Song: complex multi-phrase stream with no fixed repetition pattern. Phrase types recombined in seemingly random order. Adults retain call learning throughout life; paired birds converge on pair-specific flight call patterns.",
+    "timbre": "BRIGHT, CLEAR, MUSICAL -- sharper than a warbler's chip, rounder than a sparrow's tsik. The canary song is high-pitched and sweet with multiple timbral textures (whistles, trills, warbles, chattering). Distinctly different from the Pine Siskin's buzzy electronic timbre. The Spinus genus spans from electronic buzz (siskin) to musical brightness (goldfinch).",
+    "amplitude": "E=4 -- moderate volume from exposed perches in open habitat. Flight call carries well across fields. Song delivered from tops of thistles, fence wires, small trees at field edges. Open habitat allows good propagation.",
+    "tempo": "Flight call: moderate, synchronized to wingbeat rhythm (approximately one per-chick-o-ree per undulation cycle). Song: variable tempo, phrase rate approximately 2-3 per second in complex song. Not as fast as a trill, not as slow as a disjunct sequence.",
+    "context": "Flight call given year-round during undulating flight. Complex song given during breeding season from exposed perches (thistle tops, fence wires, small trees) and during display flight. Disjunct song in close interactions. Contact call (tee-yee) during foraging and pair maintenance.",
+    "key_property": "THE UNDULATION -- the 44th acoustic element (species side). The coupling of vocalization to locomotion: per-chick-o-ree synchronized to bounding flight, delivered at the trough of each sine-wave arc. The flight path IS the rhythmic structure. Named 'the undulation' for four resonances: (1) the flight call's rhythm locked to bounding arcs, (2) the canary song's rising and falling melodic contour, (3) the sine-wave flight path itself, (4) the annual plumage cycle between drab and brilliant. The first acoustic element defined by locomotion-vocalization coupling."
+  },
+  "plumage": {
+    "overall": "DRAMATIC SEXUAL DIMORPHISM AND SEASONAL DIMORPHISM. Breeding male: brilliant lemon-yellow body, jet-black forehead cap, black wings with white wing bars, white rump, pale pinkish-orange bill. Non-breeding male: drab olive-brown body, dark brown-black wings, no black cap. Female: olive-yellow overall, paler yellow below, dark brown wings with buff wing bars. The annual transformation is the most dramatic plumage change of any PNW passerine.",
+    "breeding_male": "Brilliant lemon-yellow body plumage. Jet-black forehead cap extending to the crown. Black wings with bold white wing bars (greater and median coverts). White rump and undertail coverts. Pale pinkish-orange conical bill. Black tail with white inner webs. The 'wild canary' appearance -- unmistakable.",
+    "non_breeding_male": "Drab olive-brown body, brownish-yellow below. No black cap. Dark brown-black wings with buff wing bars. The same bird, barely recognizable from its breeding plumage. The visual undulation between states.",
+    "female": "Olive-yellow above, pale yellow below. Dark brown wings with buff wing bars. Duller overall than breeding male but brighter than non-breeding male. No black cap. Year-round appearance relatively stable compared to the male's dramatic seasonal shift.",
+    "juvenile": "Similar to non-breeding female but with cinnamon-buff wing bars and a brownish wash overall. Molts into first basic plumage in fall.",
+    "molt_cycle": "The ONLY cardueline finch with TWO molts per year. (1) Complete prebasic molt (Aug-Nov): all feathers replaced. Brilliant becomes drab. (2) Partial prealternate molt (Feb-Apr): body feathers replaced, wing and tail retained. Drab becomes brilliant. The spring molt requires substantial nutritional resources (protein for feather growth, carotenoid pigments for yellow coloration), contributing to the late nesting schedule.",
+    "field_id": "Breeding male unmistakable: bright yellow, black cap, black wings with white bars. Non-breeding birds identified by conical bill, undulating flight pattern, and per-chick-o-ree flight call. Wing bars visible in all plumages. Undulating flight is diagnostic even at distance.",
+    "spinus_contrast": "Pine Siskin (Spinus pinus, degree 12): small, heavily streaked, brown-beige, faint yellow at wing base (visible only in flight). American Goldfinch (Spinus tristis, degree 43): brilliant lemon-yellow (breeding) or olive-brown (non-breeding), conical bill, bold wing bars. Same genus. Opposite visual strategies: the siskin hides, the goldfinch displays."
+  },
+  "thistle_ecology": {
+    "food_dependence": "Obligate granivore during breeding season. Feeds on seeds of composite plants: thistles (Cirsium spp.), teasels (Dipsacus), milkweed (Asclepias), sunflowers (Helianthus), dandelions (Taraxacum), coneflowers (Echinacea/Rudbeckia), and many other Asteraceae. Also birch, alder, and other small seeds. Nyjer (thistle) seed at bird feeders.",
+    "nest_material": "Female lines nest cup with thistle down -- the soft silky fibers from mature thistle seed heads. The interior is so dense and tightly woven it can hold water. If unattended nest fills with rain, nestlings can drown. A construction so perfect it becomes a vulnerability.",
+    "nest_construction": "Compact cup of plant fibers, spider silk, and caterpillar webbing. Built by female alone over approximately 6 days. Placed in upright fork of shrub or small tree, 1-10 m height. Interior lined with thistle down, cattail fluff, or other plant down.",
+    "breeding_timing": "Late June through September. One of the latest-nesting songbirds in North America. Waits for thistle seed maturation and completion of spring molt. Peak nesting July-August in PNW.",
+    "nestling_diet": "Regurgitated seeds -- almost exclusively. Unlike most passerines, goldfinches do NOT switch to insect protein for nestlings. This strict seed diet provides accidental defense against Brown-headed Cowbird brood parasitism: cowbird chicks starve within 3-5 days on the all-seed diet.",
+    "ecological_significance": "The American Goldfinch is a key seed disperser for composite plants in disturbed and semi-natural habitats. Its late nesting synchronizes with peak seed production, creating a tight mutualistic relationship with thistles and other composites. The bird waits for the plant; the plant feeds the bird and its young."
+  },
+  "weedy_field_ecology": {
+    "definition": "Weedy field -- an open, disturbed, or semi-natural area dominated by composite plants (Asteraceae) and other seed-producing forbs. Not forest, not marsh, not montane. The lowland open landscape. Thistles, teasels, sunflowers, milkweed, dandelions, and other weedy composites.",
+    "habitat_types": [
+      "Roadside margins and ditches with thistle growth",
+      "Agricultural field edges and fallow fields",
+      "Suburban gardens with native or ornamental composites",
+      "Riparian openings and streamside brush",
+      "Orchards and vineyard margins",
+      "Reclaimed land and post-logging successional areas",
+      "Parks and cemeteries with weedy areas"
+    ],
+    "human_creation_note": "In western Washington, the goldfinch's habitat was CREATED by European settlement. Dense old-growth coniferous forest (ideal for Spotted Owl, Hermit Warbler, Townsend's Warbler) was cleared for agriculture and settlement, producing the open, weedy fields where goldfinches thrive. The goldfinch benefited from the same land-use changes that imperil other engine species. The state bird prospers from the state's own transformation.",
+    "vertical_position": "Low-level bird: 0-5 m above ground. Feeds on thistle heads, nests in shrubs and small trees. Singing perch is the tallest available point in a weedy field -- fence post, dead stem, top of a small tree. Dramatic descent from the warbler quintet's canopy heights (10-50 m).",
+    "pnw_distribution": [
+      "Western Washington lowlands -- common, year-round, in open habitats with composite plants",
+      "Eastern Washington -- common breeder in agricultural areas, riparian corridors; many migrate south in winter",
+      "Willamette Valley, Oregon -- year-round resident, abundant in riparian and agricultural habitats",
+      "Puget Sound region -- common backyard bird, frequent at nyjer seed feeders"
+    ],
+    "significance": "The weedy field is the engine's first explicitly human-created habitat. Previous ecosystems were natural (old-growth forest, conifer canopy, mountain conifer) or semi-natural (conifer edge, brush). The weedy field exists because humans cleared the forest. The goldfinch exists in western Washington because humans created its habitat. This is not restoration ecology. It is creation ecology -- a new ecosystem made by disturbance, colonized by a bird that evolved for it."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The undulation -- the 44th acoustic element (species side): the coupling of vocalization to locomotion. Per-chick-o-ree synchronized to bounding flight, delivered at the trough of each sine-wave arc. The bird rises with wingbeats, dips on folded wings, and calls at the bottom of each undulation. The flight path IS the rhythmic structure. After the shimmer (degree 42, variability as defining trait), the undulation introduces LOCOMOTION-VOCALIZATION COUPLING -- a sound whose rhythm is set not by an internal clock or musical structure but by the physics of flight. Named 'the undulation' for four resonances: (1) the flight call's rhythm locked to bounding arcs, (2) the canary song's rising and falling melodic contour, (3) the deepest sine-wave flight path in the engine, (4) the annual plumage cycle undulating between drab olive and brilliant gold. The first acoustic element defined by the coupling of voice to movement through space.",
+      "level": "foundational",
+      "department": "music-theory/rhythm",
+      "college_path": ".college/music/theory/rhythm/undulation/",
+      "examples": [
+        "Per-chick-o-ree flight call: 3-4 downslurred notes at ~4 kHz, delivered at the trough of each bounding arc in undulating flight. The call is synchronized to the wingbeat cycle: rise-call-dip, rise-call-dip. The flight path provides the tempo. The physics of bounding flight provides the meter.",
+        "Previous locomotion-sound connections: the hummingbird thrum (35, wing sound) and sonic boom (36, dive sound) were mechanical, not vocal. The swallows (26-30) vocalized in flight but not synchronized to flight pattern. The goldfinch is the FIRST species where vocal output is rhythmically locked to flight dynamics.",
+        "The canary song as melodic undulation: the long warbling song rises and falls in pitch, tumbling through phrases without settling on a fixed pattern. The melodic contour undulates like the flight path. Voice and flight share the same waveform.",
+        "The plumage undulation: olive-brown (winter) to lemon-yellow (spring) to olive-brown (fall). A visual sine wave with a 12-month period. The bird's appearance undulates between states just as its flight path undulates through space.",
+        "Coupled sound as a new category: previous elements were purely vocal or purely mechanical. The undulation is both -- a vocal call whose rhythm is set by the physics of bounding flight. The body is the metronome. The air is the medium. The call is the melody. The flight path is the score."
+      ],
+      "music_theory_parallel": "The vamp -- a repeating musical figure whose rhythm is derived from the physical gesture of the performer. A drummer's kick pattern is set by the foot pedal's physical arc. A guitarist's strum rhythm is set by the arm's pendular motion. The vamp is where the body's movement becomes the music's rhythm. The goldfinch's per-chick-o-ree is a natural vamp: the undulating flight path is the physical gesture, and the call is the melodic figure placed at each downbeat of that gesture. The bird vamps through the sky."
+    },
+    {
+      "concept": "The Parulidae streak broken -- the five-consecutive warbler run (degrees 38-42) ends at degree 43 with Fringillidae. The unprecedented five-degree same-family run that matched the swallow quintet is over. The engine diversifies away from Parulidae after 10 members (23.3% of all entries). Fringillidae returns to bookend the warbler era: Fringillidae at degree 34, then hummingbirds (35-37), then five consecutive Parulidae (38-42), then Fringillidae at degree 43. The finches frame the warblers.",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/parulidae-streak-broken/",
+      "examples": [
+        "Streak statistics: 5 consecutive Parulidae (38-42), 3 genera (Setophaga, Leiothlypis, Setophaga return), 4 ecosystems (oak-pine, conifer canopy/mountain conifer, brush, conifer edge), 3 stories (displacement, disturbance, generalist triumph). Broke by Fringillidae at degree 43.",
+        "The bookend pattern: Fringillidae (34, Red Crossbill) -> Trochilidae (35-37, hummingbirds) -> Parulidae (38-42, warbler quintet) -> Fringillidae (43, American Goldfinch). The finches bracket the warbler era with a hummingbird buffer zone between.",
+        "Warbler fatigue resolved: 10 Parulidae in 44 entries (22.7%). The recommendation to break the streak (made at every degree 38-42) is finally achieved. The engine can now explore other families without the gravitational pull of warbler dominance.",
+        "Parulidae vs. Fringillidae count: Parulidae 10, Fringillidae 4. Parulidae still leads by 6. But Fringillidae is now tied for 4th largest family in the engine.",
+        "The warbler quintet as a completed unit: 38 (drawl) -> 39 (canopy buzz) -> 40 (thinning) -> 41 (partition) -> 42 (shimmer). Five acoustic elements. Five ecological stories. A complete suite. The goldfinch at degree 43 is the first movement of a new suite."
+      ],
+      "music_theory_parallel": "The coda and the attacca. The warbler quintet was a five-movement suite that ended with the shimmer (degree 42). The American Goldfinch at degree 43 is the beginning of the next work -- but it follows attacca (without pause), immediately after the warbler suite's final chord. In concert programming, what comes after a five-movement work must provide contrast. The undulation after the shimmer is exactly that: a new timbre, a new habitat, a new family, a new rhythm."
+    },
+    {
+      "concept": "Washington State Bird -- the first official state symbol in the engine. The American Goldfinch was designated Washington's state bird in 1951 (RCW 1.20.086), chosen by schoolchildren in 1928 for its beauty, ubiquity, and cheer. In a project named 'The Sound of Puget Sound,' centered on Washington state, the state's own officially designated bird arrives at degree 43. The people's bird -- visible, bright, present in every county, known to every backyard birder. The children chose well: this is the bird that represents the human experience of Washington's avifauna.",
+      "level": "foundational",
+      "department": "ecology/cultural",
+      "college_path": ".college/ecology/cultural/state-bird/",
+      "examples": [
+        "Legislative history: Schoolchildren voted in 1928. Passed one house of legislature in 1941 but stalled. Adopted unanimously March 14, 1951, as 'Willow Goldfinch' under RCW 1.20.086.",
+        "Three states share the American Goldfinch: Washington, Iowa, and New Jersey. Different landscapes, same bright bird.",
+        "The naming contrast: the statute uses 'Willow Goldfinch' (habitat name). The scientific name is Spinus tristis (sad thorn-bird). The children chose it for beauty and cheer. Three lenses: legislative, scientific, popular. Each sees something different in the same bird.",
+        "The visibility factor: unlike many engine species known primarily to experienced birders (MacGillivray's in salmonberry, Hermit Warbler at extreme crown), the goldfinch is OBVIOUS -- bright yellow, active, at backyard feeders. The children chose the bird they could see.",
+        "State bird arrives at 12% of the 360-degree circle. The state's official avian representative enters relatively early -- appropriate for a common, widespread species that is part of daily life."
+      ],
+      "music_theory_parallel": "The anthem -- a piece of music that becomes the official musical representative of a group, chosen for its accessibility, emotional resonance, and universal recognition. The national anthem is the song everyone knows. The state bird is the bird everyone knows. The goldfinch is Washington's avian anthem: chosen not for rarity or ecological complexity but for the simple fact that it delights the most people."
+    },
+    {
+      "concept": "The Spinus genus reunion -- Pine Siskin (degree 12, Spinus pinus) and American Goldfinch (degree 43, Spinus tristis), sister species in the same genus, separated by 31 degrees -- the widest genus gap in the engine. Same genus, opposite in every measurable dimension: E=1 vs. E=4, irruptive vs. summer resident, electronic vs. melodic, cryptic vs. brilliant, ascending zhreee vs. per-chick-o-ree undulation. The Spinus pair spans the engine's most extreme within-genus contrast.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/spinus-reunion/",
+      "examples": [
+        "Energy contrast: Pine Siskin E=1 (engine minimum for passerines), American Goldfinch E=4. The Spinus genus brackets E=1 to E=4 -- the widest energy range within any single genus in the engine.",
+        "Acoustic contrast: zhreee (ascending electronic sawtooth) vs. per-chick-o-ree (bright undulating bounce). The siskin sounds like a synthesizer. The goldfinch sounds like a canary. Same genus, opposite timbres.",
+        "Behavioral contrast: irruptive nomad (siskin follows seed crops) vs. summer resident (goldfinch follows thistle calendar). Stochastic presence vs. predictable seasonal presence.",
+        "Visual contrast: cryptic streaked brown (siskin, camouflaged as generic sparrow) vs. brilliant lemon-yellow (goldfinch, unmistakable). The siskin hides. The goldfinch displays.",
+        "31-degree gap context: the next-widest genus gap is Leiothlypis at 21 degrees (20 to 41). Spinus exceeds it by 10. Between degrees 12 and 43: the entire E=3 era, the flicker pair, the grosbeak, the tanager, the robin, all five swallows, both waxwings, both other finches, all three hummingbirds, and five consecutive warblers. The engine transformed between Spinus entries."
+      ],
+      "music_theory_parallel": "Theme and inversion -- a compositional technique where a melody is played, then later played upside down (all intervals reversed). The Pine Siskin's ascending zhreee is the original theme: a rising frequency sweep, electronic timbre, minimum energy. The American Goldfinch's per-chick-o-ree is the inversion: an undulating (rising-falling) pattern, musical timbre, moderate-high energy. Same genus. Inverted expression. The two Spinus species are melodic inversions of each other."
+    },
+    {
+      "concept": "Thistle dependence, twice-yearly molt, and late nesting as interconnected biology -- the American Goldfinch's three distinctive biological traits form a single integrated system. The bird waits for thistles (food and nest material), molts twice yearly (requiring energy that delays nesting), and feeds nestlings seeds (not insects, providing accidental cowbird defense). Each trait constrains and enables the others. The system is elegant: thistle timing controls breeding timing, molt timing controls breeding timing, and the strict seed diet controls brood parasite success. Three traits, one integrated strategy.",
+      "level": "intermediate",
+      "department": "ecology/physiology",
+      "college_path": ".college/ecology/physiology/thistle-molt-nesting/",
+      "examples": [
+        "Thistle timing: thistles produce mature seeds in July-August. Goldfinch cannot breed until seeds are available. Late nesting is a consequence of food plant phenology.",
+        "Molt timing: the prealternate molt (spring) requires significant energy and nutrients. The bird cannot molt and breed simultaneously. Molt finishes April-May. Breeding begins June-July. The molt adds a second delay on top of the thistle delay.",
+        "Seed diet defense: cowbird chicks require insect protein. Goldfinch parents feed only regurgitated seeds. Cowbird nestlings starve within 3-5 days. The diet is the defense. No recognition or rejection behavior needed.",
+        "The waterproof nest: thistle-down lining is so dense it holds water. A perfect construction that becomes a vulnerability in heavy rain. Unattended nests can drown nestlings.",
+        "Comparison with degree 42 (Yellow-rumped Warbler): the wax adaptation (42) was a dietary innovation that opened a winter niche. The thistle dependence (43) is a dietary constraint that shapes the entire annual cycle. Both species are defined by what they eat -- but one is empowered by its diet and the other is constrained by it."
+      ],
+      "music_theory_parallel": "Counterpoint -- the simultaneous combination of multiple independent melodic lines that are harmonically interdependent. The thistle cycle, the molt cycle, and the breeding cycle are three independent melodic lines that must align at specific harmonic intervals. The thistle line sets the key (food availability). The molt line provides the harmonic rhythm (energy budget). The breeding line carries the melody (reproduction). When all three align in July-August, the harmony resolves and nesting begins. Counterpoint in feathers."
+    },
+    {
+      "concept": "E=4 continues at 20 degrees (45.5%) -- the energy compression deepens. E=3 absent for 23 consecutive degrees, E=2 for 30, E=1 for 31. SIX consecutive E=4 across two families (38-43, Parulidae then Fringillidae). The Spinus genus brackets: E=1 at degree 12, E=4 at degree 43. The lower three-fifths of the energy spectrum absent for the entire second quarter of the engine.",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e4-twenty-three-degrees/",
+      "examples": [
+        "E=4 dominance: 20 of 44 entries (45.5%). Has appeared in 20 of the last 23 degrees. The modal energy level by a wide margin.",
+        "E=3 absence: 23 consecutive degrees without E=3. Deepening past the 22-degree milestone set at degree 42.",
+        "E=2 absence: 30 degrees since the last E=2 (degree 13, Hutton's Vireo). Over 68% of the engine without the quiet register.",
+        "E=1 absence: 31 degrees since the last E=1 (degree 12, Pine Siskin -- Spinus pinus). The minimum energy level is the Spinus genus's other member.",
+        "Six consecutive E=4: degrees 38-43, spanning Parulidae (38-42) and Fringillidae (43). The energy level did not change when the family changed. Different family, same dynamic level."
+      ],
+      "music_theory_parallel": "A piece that has been playing mezzo-forte for twenty-three bars. The family change (from warblers to finches) brought a new timbre but not a new dynamic level. The audience can tell the instruments changed, but the volume remains identical. A dynamic contrast is not just overdue -- it is structurally necessary for the piece to retain perceptual distinction between sections."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-042",
+      "title": "Yellow-rumped Warbler (Degree 42)",
+      "connection": "PREDECESSOR -- STREAK BREAKER. The Yellow-rumped Warbler was the fifth consecutive Parulidae and the shimmer. The American Goldfinch at degree 43 is Fringillidae, breaking the warbler streak. Warbler to finch. Conifer edge to weedy field. Shimmer to undulation. Generalist warbler to state bird finch. The transition from forest edge to open field."
+    },
+    {
+      "project": "SPS-012",
+      "title": "Pine Siskin (Degree 12)",
+      "connection": "SPINUS REUNION -- SISTER SPECIES. Same genus (Spinus), 31 degrees apart -- the widest genus gap in the engine. Pine Siskin (E=1, irruptive, electronic zhreee, cryptic) and American Goldfinch (E=4, summer, per-chick-o-ree, brilliant). The Spinus pair spans the engine's most extreme within-genus contrast in every dimension: energy, season, sound, appearance."
+    },
+    {
+      "project": "SPS-033",
+      "title": "Cassin's Finch (Degree 33)",
+      "connection": "FRINGILLIDAE COUSIN -- ALTITUDE CONTRAST. Both summer breeders, both E=4, both with complex warbling songs. Cassin's Finch = mountain conifer at 3,000-10,000 ft, rich mimetic cadenza. American Goldfinch = lowland weedy field, canary warble + undulating flight call. Same family, opposite altitudes, different song strategies."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "FRINGILLIDAE COUSIN -- WARBLER-ERA BOOKEND. Crossbill at degree 34 was the last Fringillidae before the warbler streak. Goldfinch at degree 43 is the first Fringillidae after. The finches bracket five consecutive Parulidae. Crossbill = cone specialist, crossed mandibles, dialect. Goldfinch = composite seed specialist, standard bill, undulation."
+    },
+    {
+      "project": "SPS-038",
+      "title": "Black-throated Gray Warbler (Degree 38)",
+      "connection": "STREAK BOOKEND. BTG Warbler started the five-consecutive Parulidae run at degree 38. The American Goldfinch at degree 43 is the first non-warbler after the streak ends. Five warbler degrees (38-42) separate the last pre-streak finch (34) from the first post-streak finch (43)."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Spotted Owl (Degree 4)",
+      "connection": "HABITAT PARADOX. The logging that threatened the Spotted Owl (old-growth forest specialist, degree 4) and the Hermit Warbler (degree 40) created the weedy fields where the American Goldfinch thrives. The state bird prospers from the same land-use changes that imperil other engine species. Conservation is not zero-sum, but habitat transformation creates winners and losers."
+    },
+    {
+      "project": "SPS-040",
+      "title": "Hermit Warbler (Degree 40)",
+      "connection": "HABITAT PARADOX (continued). The Hermit Warbler needs intact mountain conifer forest. The goldfinch needs open, weedy, disturbed ground. Forest removal destroys one habitat and creates the other. Two engine species linked by the same landscape transformation, on opposite sides."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "American Goldfinch documented as common breeder in open habitats throughout PNW lowlands. Washington state bird since 1951. Year-round resident west of Cascades. Found in every county."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Weedy field ecology. Composite plant communities (Asteraceae). Thistle-dependent food web. Human-created habitat in former forested landscapes. Disturbance ecology and its beneficiaries. The ecological paradox of the state bird thriving in human-modified habitat."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 42,
+    "total_entries": 44,
+    "families_represented": 18,
+    "largest_families": {
+      "Parulidae": 10,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Fringillidae": 4,
+      "Trochilidae": 4,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42, 43],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=4 continues. Now at 20 degrees (45.5%). E=3 absent for 23 DEGREES (since degree 20). E=5 at 3 degrees (6.8%). Six consecutive E=4 across two families (38-43, Parulidae then Fringillidae). Dynamic range compression continues unabated despite the family change. The Spinus energy bracket: E=1 at degree 12, E=4 at degree 43.",
+    "parulidae_streak_note": "The five-consecutive Parulidae run (degrees 38-42) BROKEN at degree 43 by Fringillidae. The warbler quintet is a completed unit: displacement cascade (38-40), disturbance ecology (41), generalist triumph (42). The goldfinch begins a new chapter.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer"],
+    "ecosystem_note": "Weedy field -- open, disturbed, composite-plant-dominated habitat. The engine's first explicitly human-created ecosystem in the PNW context. Previous habitats were natural or semi-natural. The weedy field exists because humans cleared the forest. The goldfinch colonized the result.",
+    "acoustic_element_44": "THE UNDULATION -- locomotion-vocalization coupling. Per-chick-o-ree synchronized to bounding flight, delivered at each trough. The flight path IS the rhythmic structure. First acoustic element defined by the coupling of voice to movement through space. After the shimmer (variability), the undulation (physical rhythm).",
+    "state_bird_note": "FIRST STATE SYMBOL in the engine. Washington State Bird since 1951. RCW 1.20.086. The officially designated avian representative of the state that gives this project its name.",
+    "spinus_reunion_note": "Spinus genus reunites after 31 degrees -- Pine Siskin (12) and American Goldfinch (43). Widest genus gap in the engine. Sister species, opposite in every dimension.",
+    "fringillidae_note": "FOURTH Fringillidae. Breaks the Parulidae streak. Ties with Trochilidae at 4 members. Greater genus diversity (4 genera, Spinus recurring) and wider energy range (E=1 to E=4) than Trochilidae.",
+    "conservation_note": "LEAST CONCERN (IUCN). Population approximately 42-47 million (Partners in Flight estimates 44 million). Continental Concern Score 6/20 (low concern). BBS trend mixed: approximately -0.6%/yr 1966-2019, but some regional populations stable or increasing. Protected under Migratory Bird Treaty Act of 1918.",
+    "critical_gaps": [
+      "No marine/shoreline species in 43 degrees of 'The Sound of Puget Sound' -- 43 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 43 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 43 degrees -- URGENT",
+      "No nocturnal species since degree 4 (39 degrees ago) -- OVERDUE",
+      "E=3 not used since degree 20 (23 degrees ago) -- CRITICAL",
+      "No E=2 since degree 13 (30 degrees ago) -- LOW ENERGY ABSENT",
+      "No E=1 since degree 12 (31 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 43 DEGREES OF A PROJECT NAMED FOR PUGET SOUND",
+      "Only 5 orders in 44 entries -- a new order is strongly needed"
+    ]
+  }
+}

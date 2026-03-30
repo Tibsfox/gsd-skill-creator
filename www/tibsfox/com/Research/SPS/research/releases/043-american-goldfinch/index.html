@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 43&deg; &mdash; American Goldfinch &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Undulation highlight card */
+    .undulation-card {
+      background: linear-gradient(135deg, #FFFDE7 0%, #FDD835 100%);
+      border: 2px solid #F9A825;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .undulation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* State bird card */
+    .state-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #7986CB 100%);
+      border: 2px solid #283593;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .state-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Spinus reunion card */
+    .genus-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Parulidae streak broken card */
+    .streak-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FF8A65 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Thistle biology card */
+    .thistle-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .thistle-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Weedy field card */
+    .field-card {
+      background: linear-gradient(135deg, #F1F8E9 0%, #AED581 100%);
+      border: 2px solid #558B2F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .field-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #33691E;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #5D4037;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.undulation { background: #F9A825; }
+    .theory-icon.streak { background: #BF360C; }
+    .theory-icon.state { background: #283593; }
+    .theory-icon.genus { background: #1565C0; }
+    .theory-icon.thistle { background: #7B1FA2; }
+    .theory-icon.energy { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">43&deg;</div>
+      <div class="release-title-block">
+        <h2>American Goldfinch</h2>
+        <div class="scientific">Spinus tristis</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      per-chick-o-ree flight call + canary song &mdash; the undulation, 4th Fringillidae, Washington State Bird (first state symbol in engine), <em>Spinus</em> genus reunion with Pine Siskin (degree 12) after 31 degrees &mdash; breaks the five-consecutive Parulidae streak, the sad thorn-bird that is the brightest bird in the field
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Undulation Element Card -->
+        <div class="undulation-card">
+          <h3>The 44th Acoustic Element: The Undulation</h3>
+          <p>The coupling of vocalization to locomotion. <em>Per-chick-o-ree</em> &mdash; a bright, bouncing flight call synchronized to the <strong>sine-wave rhythm of bounding flight</strong>, delivered at the trough of each undulation. The bird rises with wingbeats, dips on folded wings, and calls at the bottom of each arc. Sound locked to flight path. Named &ldquo;the undulation&rdquo; for four resonances: (1)&nbsp;the flight call&rsquo;s rhythm locked to the bounding arc, (2)&nbsp;the canary song&rsquo;s rising and falling melodic contour, (3)&nbsp;the deepest sine-wave flight path in the engine, (4)&nbsp;the annual plumage cycle undulating between drab olive and brilliant gold.</p>
+          <p><strong>The first acoustic element defined by locomotion-vocalization coupling</strong> &mdash; the flight path IS the rhythmic structure.</p>
+        </div>
+
+        <!-- Parulidae Streak Broken Card -->
+        <div class="streak-card">
+          <h3>The Warbler Streak Ends &mdash; A Finch Enters</h3>
+          <p><strong>Five consecutive Parulidae (38&ndash;42) &mdash; broken.</strong> The unprecedented warbler run is over. Degree 43 is <strong>Fringillidae</strong> &mdash; the true finches. The American Goldfinch is the fourth Fringillidae in the engine (after Pine Siskin at 12, Cassin&rsquo;s Finch at 33, Red Crossbill at 34). The finches bookend the warbler era: Fringillidae at 34, then hummingbirds (35&ndash;37), then five consecutive warblers (38&ndash;42), then Fringillidae returns at 43.</p>
+        </div>
+
+        <!-- State Bird Card -->
+        <div class="state-card">
+          <h3>Washington State Bird &mdash; First State Symbol</h3>
+          <p>The American Goldfinch has been <strong>Washington&rsquo;s official state bird since 1951</strong> (RCW 1.20.086). Schoolchildren voted for it in 1928; the legislature took 23 years to make it law. Chosen for its <strong>beauty, ubiquity, and cheer</strong>. Found in every county. The first species in the engine that holds an official state symbol designation &mdash; in a project named for Puget Sound, centered on Washington state.</p>
+          <p>Washington shares the American Goldfinch as state bird with <strong>Iowa and New Jersey</strong>.</p>
+        </div>
+
+        <!-- Spinus Reunion Card -->
+        <div class="genus-card">
+          <h3><em>Spinus</em> Genus Reunion &mdash; 31 Degrees Apart</h3>
+          <p>The American Goldfinch (<em>Spinus tristis</em>) and the Pine Siskin (<em>Spinus pinus</em>, degree 12) are <strong>sister species</strong> in the same genus. Degrees 12 and 43 &mdash; the widest genus gap in the engine (31 degrees). Same genus, opposite in every dimension: E=1 vs. E=4, electronic vs. melodic, irruptive vs. resident, cryptic vs. brilliant, noise vs. music.</p>
+        </div>
+
+        <h2>The Sad Thorn-Bird</h2>
+        <p><em>Spinus tristis</em> &mdash; &ldquo;Sad thorn-bird.&rdquo; <em>Spinus</em> = Latin for &ldquo;thorn bush&rdquo; (the weedy plants where goldfinches feed). <em>Tristis</em> = Latin for &ldquo;sad&rdquo; (the plaintive quality of the <em>dear-me</em> contact call). Named by Linnaeus in 1758. One of ornithology&rsquo;s most ironic names: the brightest, most cheerful bird in the field, named for sorrow. The children who voted it state bird heard the joy. Linnaeus heard the sadness. Both are there.</p>
+
+        <h2>The Sound: Undulating Call + Canary Song</h2>
+        <p><strong>Flight call:</strong> <em>Per-chick-o-ree</em> (also rendered <em>po-ta-to-chip</em>) &mdash; 3&ndash;4 downslurred notes at ~4 kHz, delivered at the trough of each undulation in bounding flight. The most frequently heard vocalization. Year-round.</p>
+        <p><strong>Song:</strong> A long, complex, canary-like warble &mdash; a continuous stream of bright, high-pitched phrases (2&ndash;6 kHz) lasting 2&ndash;30+ seconds. Multiple phrase types in seemingly random order. No fixed repetition pattern. The &ldquo;wild canary&rdquo; song that earned the species its nickname. Paired birds develop <strong>pair-specific flight calls</strong> &mdash; mates converge on identical <em>per-chick-o-ree</em> patterns.</p>
+
+        <h3>All Four Fringillidae Songs</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Sound Type</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>12</td><td>Pine Siskin</td><td><em>Spinus</em></td><td>Rising zhreee / buzzy warble</td><td>Electronic</td></tr>
+            <tr><td>33</td><td>Cassin&rsquo;s Finch</td><td><em>Haemorhous</em></td><td>Rich warbling display</td><td>Cadenza</td></tr>
+            <tr><td>34</td><td>Red Crossbill</td><td><em>Loxia</em></td><td>kip-kip-kip + warble</td><td>Dialect</td></tr>
+            <tr><td><strong>43</strong></td><td><strong>American Goldfinch</strong></td><td><strong><em>Spinus</em></strong></td><td><strong>per-chick-o-ree + canary song</strong></td><td><strong>Undulation</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Four finches, four radically different acoustic strategies. The <em>Spinus</em> pair &mdash; Pine Siskin (electronic) and American Goldfinch (melodic) &mdash; spans the widest acoustic range within any single genus in the engine.</p>
+
+        <!-- Thistle Biology Card -->
+        <div class="thistle-card">
+          <h3>The Bird That Waits for Thistles</h3>
+          <p>One of the <strong>latest-nesting songbirds in North America</strong> &mdash; breeds June through September, peaking in July&ndash;August. Delays nesting until thistles and composites produce mature seeds. Feeds nestlings <strong>regurgitated seeds</strong> (not insects). Nest lined with <strong>thistle down</strong> so dense it can hold water. The only cardueline finch to <strong>molt twice yearly</strong>: a complete fall molt to drab olive-brown, then a partial spring molt to brilliant lemon-yellow with black cap. The twice-yearly molt is energetically expensive &mdash; another reason for late nesting.</p>
+          <p><strong>Accidental cowbird defense:</strong> Brown-headed Cowbird chicks starve on the goldfinch&rsquo;s all-seed diet within 3&ndash;5 days.</p>
+        </div>
+
+        <!-- Weedy Field Card -->
+        <div class="field-card">
+          <h3>Weedy Field &mdash; The Human-Created Habitat</h3>
+          <p><strong>Open, disturbed, weedy areas</strong> dominated by composite plants &mdash; thistles, teasels, sunflowers, milkweed. The goldfinch&rsquo;s primary habitat in western Washington was <strong>created by European settlement</strong>: the clearing of dense coniferous forest produced the open, weedy fields where goldfinches thrive. The same land-use changes that threatened the Spotted Owl (degree 4) and the Hermit Warbler (degree 40) <strong>created</strong> the goldfinch&rsquo;s habitat. The state bird prospers from the state&rsquo;s own transformation of the landscape.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=4 Continues &mdash; 20th Degree, 23 Without E&le;3</h3>
+          <p>E=4 now at <strong>20 degrees</strong> (45.5%). E=3 absent for <strong>23 consecutive degrees</strong> (since degree 20). E=2 absent for 30 degrees. E=1 absent for 31 degrees &mdash; since degree 12, the Pine Siskin (<em>Spinus pinus</em>), same genus as the American Goldfinch. <strong>Six consecutive E=4 across two families</strong> (38&ndash;43). Dynamic range compression deepens.</p>
+        </div>
+
+        <h2>The Twice-Yearly Molt</h2>
+        <p>The American Goldfinch is the <strong>only cardueline finch in North America that molts twice per year</strong>. The <strong>prebasic molt</strong> (fall) is complete &mdash; every feather replaced. Brilliant yellow becomes drab olive-brown. The <strong>prealternate molt</strong> (spring) is partial &mdash; body feathers replaced, wing and tail retained. Olive becomes gold. A visual undulation between states, repeated every year. No other PNW finch does this.</p>
+
+        <h2>Family Tracker After Degree 43</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td><strong>Fringillidae</strong></td><td>12, 33, 34, <strong>43</strong></td><td><strong>4</strong></td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>4</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Paridae</td><td>3, 9</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+          </tbody>
+        </table>
+        <p>Fringillidae ties Trochilidae at 4 members &mdash; but spans a wider energy range (E=1 to E=4) and more genera (4, with <em>Spinus</em> recurring).</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon undulation">U</div>
+            <div class="theory-content">
+              <h4>The Undulation <span class="theory-level foundational">foundational</span></h4>
+              <p>The 44th acoustic element. Locomotion-vocalization coupling: <em>per-chick-o-ree</em> synchronized to bounding flight, delivered at the trough of each sine-wave arc. The flight path IS the rhythmic structure. First element defined by the coupling of voice to movement through space.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon streak">P</div>
+            <div class="theory-content">
+              <h4>Parulidae Streak Broken <span class="theory-level foundational">foundational</span></h4>
+              <p>Five consecutive Parulidae (38&ndash;42) ended. Fringillidae returns at degree 43. The warbler era closes. The finches bookend it: Fringillidae at 34, then hummingbirds, then five warblers, then Fringillidae again. After 10 Parulidae (23.3%), the engine diversifies.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon state">W</div>
+            <div class="theory-content">
+              <h4>Washington State Bird <span class="theory-level foundational">foundational</span></h4>
+              <p>First state symbol in the engine. Official since 1951 (RCW 1.20.086). Schoolchildren voted in 1928. The bird that Washington chose to represent itself arrives at degree 43 of a 360-degree survey of Washington&rsquo;s soundscape.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon genus">S</div>
+            <div class="theory-content">
+              <h4><em>Spinus</em> Genus Reunion <span class="theory-level foundational">foundational</span></h4>
+              <p>Pine Siskin (degree 12) and American Goldfinch (degree 43) &mdash; sister species, 31 degrees apart. The widest genus gap in the engine. Same genus, opposite everything: E=1 vs. E=4, electronic vs. melodic, irruptive vs. resident, noise vs. music.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon thistle">T</div>
+            <div class="theory-content">
+              <h4>Thistle Dependence &amp; Twice-Yearly Molt <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Latest-nesting songbird in the PNW. Waits for thistle seeds. Feeds nestlings seeds only. Lines nest with thistle down. Molts twice yearly &mdash; unique among cardueline finches. The annual visual undulation: olive to gold to olive.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">4</div>
+            <div class="theory-content">
+              <h4>E=4 &mdash; 23 Degrees Without E&le;3 <span class="theory-level intermediate">intermediate</span></h4>
+              <p>20th degree at E=4 (45.5%). Six consecutive E=4 across two families (38&ndash;43). E=3 absent 23 degrees. Dynamic range compression at its most severe. The <em>Spinus</em> energy bracket: E=1 at degree 12, E=4 at degree 43.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-042: Yellow-rumped Warbler</strong>
+            <p>PREDECESSOR &mdash; STREAK BREAKER. Fifth consecutive Parulidae at degree 42. American Goldfinch at degree 43 breaks the streak. Warbler to finch. Conifer edge to weedy field. The shimmer gives way to the undulation.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>SPINUS REUNION &mdash; SISTER SPECIES. Same genus, 31 degrees apart. E=1 vs. E=4. Rising zhreee vs. per-chick-o-ree. Irruptive vs. resident. Electronic vs. melodic. The widest genus gap in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-033: Cassin&rsquo;s Finch</strong>
+            <p>FRINGILLIDAE COUSIN. Both summer breeders, both E=4, both with complex warbling songs. Cassin&rsquo;s = mountain mimic (cadenza). Goldfinch = lowland canary (undulation). Altitude contrast: 3,000&ndash;10,000 ft vs. lowland fields.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>FRINGILLIDAE COUSIN. Both conifer-seed specialists in different ways. Crossbill = closed cones, crossed mandibles, dialect. Goldfinch = composite seeds, standard bill, undulation. The Crossbill preceded the warbler streak; the Goldfinch follows it.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-038: Black-throated Gray Warbler</strong>
+            <p>STREAK BOOKEND. BTG started the five-consecutive Parulidae at degree 38. Goldfinch at degree 43 is the first non-warbler after the streak ends. Five warbler degrees separate them.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Spotted Owl</strong>
+            <p>HABITAT PARADOX. The logging that threatened the Spotted Owl created the weedy fields where the goldfinch thrives. The state bird prospers from the same land-use changes that imperil the engine&rsquo;s first nocturnal species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>American Goldfinch documented as common breeder in open habitats throughout PNW lowlands. Washington state bird. Year-round resident west of Cascades.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Weedy field ecology. Composite plant communities. Thistle-dependent food web. Human-created habitat in former forested landscapes. Disturbance ecology benefits.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; American Goldfinch (<em>Spinus tristis</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; American Goldfinch. Cornell Lab of Ornithology.</li>
+          <li>Explore Washington State &mdash; &ldquo;Washington State Bird: The Willow Goldfinch.&rdquo;</li>
+          <li>State Symbols USA &mdash; &ldquo;Washington State Bird: Willow Goldfinch.&rdquo;</li>
+          <li>Wikipedia &mdash; &ldquo;American goldfinch.&rdquo;</li>
+          <li>Perky-Pet &mdash; &ldquo;The Late-Blooming Summer Breeder: The American Goldfinch.&rdquo;</li>
+          <li>BirdWeb (Seattle Audubon) &mdash; American Goldfinch.</li>
+          <li>Schoodic Notes &mdash; &ldquo;Bird Sound Recordings: American Goldfinch.&rdquo;</li>
+          <li>Audubon &mdash; American Goldfinch Field Guide.</li>
+          <li>Oregon Dept. of Fish &amp; Wildlife &mdash; &ldquo;American Goldfinch.&rdquo;</li>
+          <li>Xeno-canto &mdash; American Goldfinch recordings.</li>
+          <li>eBird &mdash; American Goldfinch occurrence data.</li>
+          <li>Sibley, D. A. <em>The Sibley Guide to Birds</em>, 2nd edition.</li>
+          <li>Wahl, T. R., et al. <em>Birds of Washington: Status and Distribution</em>.</li>
+          <li>Partners in Flight &mdash; Population estimates. BBS data. USGS.</li>
+          <li>Sibley Guides &mdash; &ldquo;The Annual Plumage Cycle of a Male American Goldfinch.&rdquo;</li>
+          <li>Primarily Washington &mdash; &ldquo;State Bird: Willow Goldfinch.&rdquo;</li>
+          <li>Linnaeus, C. (1758). <em>Systema Naturae</em>, 10th edition.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">43&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Undulation</div>
+          <div class="stat-detail">#44 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">20th degree at E=4 (45.5%)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Fringillidae</div>
+          <div class="stat-detail">4th member &mdash; breaks Parulidae streak</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Spinus</em></div>
+          <div class="stat-detail">2nd appearance (12, 43) &mdash; reunites with Pine Siskin</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Weedy Field</div>
+          <div class="stat-detail">Open disturbed habitat, thistle-dominated</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Late nester: June&ndash;September</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">42 unique</div>
+          <div class="stat-detail">44 entries (0&ndash;43)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Parulidae leads with 10</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">No new order at degree 43</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">State Symbol</div>
+          <div class="stat-value">WA State Bird</div>
+          <div class="stat-detail">Official since 1951 (RCW 1.20.086)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~44 Million</div>
+          <div class="stat-detail">IUCN Least Concern</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Molt Frequency</div>
+          <div class="stat-value">Twice Yearly</div>
+          <div class="stat-detail">Only cardueline finch with 2 molts/yr</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nesting Period</div>
+          <div class="stat-value">June&ndash;September</div>
+          <div class="stat-detail">Latest-nesting songbird in PNW</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 043</p>
+  </footer>
+</body>
+</html>
