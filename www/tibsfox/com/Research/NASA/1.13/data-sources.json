@@ -1,0 +1,117 @@
+{
+  "mission": "1.13",
+  "title": "Pioneer 5 (Thor-Able IV)",
+  "description": "Open datasets and source materials relevant to Pioneer 5 (1960), the first interplanetary probe, heliocentric orbit between Earth and Venus, 5W signal at 36.2 million km, interplanetary magnetic field measurement, Halichondria panicea (breadcrumb sponge), the Pigeon Guillemot (Cepphus columba), and the physics of deep-space communication",
+  "sources": [
+    {
+      "id": "nssdc-pioneer-5",
+      "name": "NSSDC Master Catalog — Pioneer 5",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1960-001A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Pioneer 5. Documents the spacecraft launched March 11, 1960, on a Thor-Able IV launch vehicle from Cape Canaveral. COSPAR ID 1960-001A. Spacecraft mass 43 kg. Heliocentric orbit with perihelion 0.806 AU and aphelion 0.995 AU. Carried a search-coil magnetometer, ionization chamber and Geiger-Mueller tube for cosmic ray detection, and a micrometeorite detector. The 5-watt transmitter at 378.2 MHz maintained contact to a record distance of 36.2 million kilometers (0.242 AU) on June 26, 1960, 106 days after launch. Pioneer 5 provided the first in-situ measurements of the interplanetary magnetic field, confirming the existence of magnetic fields in the space between planets and providing early evidence for the solar wind.",
+      "mission_relevance": "Definitive source for Pioneer 5 mission parameters, orbital elements, instruments, and achievements. Confirms the record communication distance, transmitter specifications, and scientific payload. Essential for establishing the mission narrative and all link budget calculations."
+    },
+    {
+      "id": "dsn-history",
+      "name": "Deep Space Network — History and Technical Documentation",
+      "url": "https://deepspace.jpl.nasa.gov/about/",
+      "type": "primary-source",
+      "category": "telecommunications",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "JPL's Deep Space Network (DSN) documentation covering the history, technical capabilities, and evolution of NASA's interplanetary communication infrastructure. The DSN grew directly from the experience of tracking Pioneer missions and other early deep-space probes. The original Pioneer stations at Goldstone (California), Johannesburg (South Africa), and Woomera (Australia) provided the initial three-site configuration that ensures continuous coverage of spacecraft anywhere in the solar system. Documentation covers antenna design (26m, 34m, 70m dishes), receiver technology evolution (from parametric amplifiers to cryogenic HEMTs), and the transition from Pioneer 5's single-frequency CW tracking to modern coded, multi-frequency communication schemes.",
+      "mission_relevance": "Provides the technical context for Pioneer 5's communication achievement. The DSN documentation details the ground-side equipment that received Pioneer 5's 5W signal — antenna gain, receiver noise temperature, tracking techniques. Essential for the link budget analysis, the RF preamplifier circuit context, and the story of how 5 watts was heard across 36.2 million kilometers."
+    },
+    {
+      "id": "omni-solar-wind",
+      "name": "OMNI — Near-Earth Solar Wind Data",
+      "url": "https://omniweb.gsfc.nasa.gov/",
+      "type": "primary-source",
+      "category": "space-physics",
+      "format": "ASCII/CDF",
+      "access": "open",
+      "description": "NASA's OMNI database provides comprehensive near-Earth solar wind measurements compiled from multiple spacecraft since 1963. Parameters include solar wind speed (300-800 km/s), density (1-20 cm⁻³), temperature (10⁴-10⁶ K), interplanetary magnetic field magnitude (1-30 nT) and direction, and derived quantities such as dynamic pressure, electric field, and plasma beta. While OMNI data begins after Pioneer 5's mission, it provides the baseline context for understanding what Pioneer 5 measured: the interplanetary environment that its instruments characterized for the first time. The IMF values in OMNI (typically 3-8 nT at 1 AU, with a Parker spiral angle of ~45°) are consistent with Pioneer 5's pioneering measurements of 2-5 nT.",
+      "mission_relevance": "Provides modern validation and context for Pioneer 5's magnetic field measurements. The OMNI data confirms the IMF values and solar wind properties that Pioneer 5 first detected in 1960. Essential for the interplanetary magnetic field and solar wind knowledge nodes, the heliocentric orbit simulation, and the Parker spiral calculation."
+    },
+    {
+      "id": "imf-data",
+      "name": "Interplanetary Magnetic Field — Historical Spacecraft Data",
+      "url": "https://spdf.gsfc.nasa.gov/",
+      "type": "primary-source",
+      "category": "space-physics",
+      "format": "CDF/ASCII",
+      "access": "open",
+      "description": "NASA's Space Physics Data Facility (SPDF) archives magnetometer data from spacecraft throughout the heliosphere, from Mercury orbit (MESSENGER) to the heliopause (Voyager). The archive includes processed data from Pioneer missions showing the radial dependence of the IMF: field strength drops approximately as 1/r and the Parker spiral angle increases with distance. At Pioneer 5's orbital range (0.8-1.0 AU), the IMF is typically 3-7 nT with a spiral angle of 40-50°. SPDF also provides magnetic field data during solar storms and coronal mass ejections, when the IMF can spike to 50+ nT — events that Pioneer 5's search-coil magnetometer would have detected as strong signals above its noise floor.",
+      "mission_relevance": "Provides the scientific context and validation for Pioneer 5's magnetometer measurements. The SPDF data shows what Pioneer 5 was measuring (interplanetary magnetic field strength and variability) and how those measurements compare to the 60+ years of subsequent data. Essential for the magnetometer knowledge node and the search-coil magnetometer worked example."
+    },
+    {
+      "id": "inaturalist-sponges",
+      "name": "iNaturalist — Halichondria panicea Observations",
+      "url": "https://www.inaturalist.org/taxa/117759-Halichondria-panicea",
+      "type": "community-science",
+      "category": "ecology",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community science observations of Halichondria panicea (breadcrumb sponge) from iNaturalist's global database. Observations include geolocated photographs showing the characteristic encrusting growth form: irregular, lumpy patches on rocks, shells, and pilings in the intertidal and shallow subtidal zones. Color varies from yellow-orange (the typical breadcrumb color) to green (when hosting symbiotic algae Halichondria viridis). Distribution data shows the species is cosmopolitan in temperate waters: North Atlantic (both coasts), North Pacific (Alaska to California), European coasts, and Mediterranean. In the Pacific Northwest, found on rocky shores from the low intertidal to subtidal depths, often on the undersides of boulders and in tide pools.",
+      "mission_relevance": "Establishes the geographic and morphological context for the organism pairing. iNaturalist photographs document the breadcrumb texture, the yellow-orange color, and the encrusting habit that make Halichondria panicea identifiable in the field. The distribution data confirms its presence in PNW rocky intertidal zones. Essential for the organism resonance sections and the GLSL screensaver sponge mode."
+    },
+    {
+      "id": "nasa-comms-history",
+      "name": "NASA Communications History — Uplink-Downlink",
+      "url": "https://history.nasa.gov/",
+      "type": "secondary-source",
+      "category": "history",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "NASA History Division publications documenting the evolution of deep-space communication technology from the first Pioneer missions through the Voyager era and beyond. Key publications include 'Uplink-Downlink: A History of the Deep Space Network' by Douglas Mudgway, which details the technical challenges and innovations of tracking Pioneer 5 and subsequent probes. Topics include the development of parametric amplifiers and masers for low-noise reception, the design of the 26m and 64m (later 70m) dish antennas, the evolution from single-station to three-station continuous coverage, and the transition from open-loop (frequency-scanning) to closed-loop (phase-locked) receivers. Pioneer 5's communication record demonstrated the fundamental feasibility of interplanetary communication and directly motivated the expansion of the Deep Space Network.",
+      "mission_relevance": "Provides historical narrative for the communication achievement. The NASA history documents how Pioneer 5's 5W signal was received and how the experience shaped the development of deep-space communication infrastructure. Essential for the story 'The Long Call,' the radio preamplifier circuit context, and the dedication to Douglas Adams."
+    },
+    {
+      "id": "jpl-pioneer-records",
+      "name": "JPL Technical Reports — Pioneer Program",
+      "url": "https://ntrs.nasa.gov/",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "PDF",
+      "access": "open",
+      "description": "NASA Technical Reports Server (NTRS) archives of JPL and Ames Research Center technical reports on the Pioneer program. Documents include pre-launch planning, instrument specifications, orbit determination, telemetry data analysis, and post-mission reports. Pioneer 5 reports detail the spacecraft configuration (spin-stabilized, solar-powered, 43 kg), the instrument complement (magnetometer, cosmic ray detectors, micrometeorite counter), the communication system (5W transmitter, 378.2 MHz, omnidirectional antenna), and the scientific results (first detection of interplanetary magnetic field, confirmation of solar wind properties). The reports also document the spacecraft's spin rate (1 revolution per 1.85 seconds) and the thermal design that kept instruments within operating temperature range despite varying distance from the Sun.",
+      "mission_relevance": "Provides the definitive engineering details for Pioneer 5's design and performance. The technical reports contain the exact specifications used in the link budget calculations, orbital mechanics simulations, and circuit designs. Essential for accuracy in all artifact files."
+    },
+    {
+      "id": "solar-physics-database",
+      "name": "Solar Dynamics Observatory / Solar Physics Database",
+      "url": "https://sdo.gsfc.nasa.gov/",
+      "type": "primary-source",
+      "category": "solar-physics",
+      "format": "FITS/JPEG",
+      "access": "open",
+      "description": "NASA's Solar Dynamics Observatory provides high-resolution solar imaging and magnetic field data. While SDO launched in 2010, it provides the modern understanding of solar processes that Pioneer 5 first characterized from the interplanetary perspective. SDO data shows the solar magnetic field structure that generates the solar wind and interplanetary magnetic field: active regions, coronal holes (fast wind sources), and coronal mass ejections (CME). The connection between solar surface activity (observed by SDO) and interplanetary conditions (measured by Pioneer 5 and subsequent probes) is the fundamental relationship in heliophysics. During Pioneer 5's mission (March-June 1960), the Sun was near solar maximum in Cycle 19 — the strongest solar cycle in recorded history — meaning Pioneer 5 flew through an active interplanetary medium.",
+      "mission_relevance": "Provides the solar context for Pioneer 5's measurements. SDO data shows the source of what Pioneer 5 detected: the Sun's magnetic field being carried outward by the solar wind to form the interplanetary magnetic field. Essential for the solar wind knowledge node and understanding why Pioneer 5's measurements during Solar Cycle 19 showed relatively strong IMF values."
+    },
+    {
+      "id": "marine-biology-sponges",
+      "name": "World Porifera Database",
+      "url": "https://www.marinespecies.org/porifera/",
+      "type": "secondary-source",
+      "category": "ecology",
+      "format": "HTML/API",
+      "access": "open",
+      "description": "The World Porifera Database, part of the World Register of Marine Species (WoRMS), provides the authoritative taxonomic classification and distributional data for all known sponge species. Halichondria panicea (Pallas, 1766) is classified in Phylum Porifera, Class Demospongiae, Order Suberitida, Family Halichondriidae. The database documents the species' key characteristics: encrusting growth form, oscula (excurrent openings) elevated on small chimneys, spicule composition (megascleres: oxeas 200-600 μm; microscleres absent), and tissue texture (soft, crumbly, 'breadcrumb'-like when broken). The species is significant in marine ecology as a dominant space competitor on rocky substrates and an important filterer of the water column — a single kilogram of sponge can filter 20,000+ liters per day.",
+      "mission_relevance": "Provides taxonomic and biological details for the organism pairing. The sponge's pumping rate (20,000 L/kg/day) and filtration efficiency are the biological equivalents of an antenna's collecting area and receiver sensitivity. The breadcrumb texture gives the sponge its common name and inspires the GLSL screensaver mode. Essential for organism resonance sections in all knowledge nodes."
+    },
+    {
+      "id": "iers-earth-rotation",
+      "name": "IERS — International Earth Rotation and Reference Systems Service",
+      "url": "https://www.iers.org/",
+      "type": "primary-source",
+      "category": "reference",
+      "format": "ASCII/SINEX",
+      "access": "open",
+      "description": "The International Earth Rotation and Reference Systems Service provides the reference frames and Earth orientation parameters essential for deep-space navigation. IERS maintains the International Celestial Reference Frame (ICRF) and the International Terrestrial Reference Frame (ITRF), which define the coordinate systems used to specify spacecraft positions and ground station locations. For Pioneer 5, accurate knowledge of Earth's rotation, polar motion, and UT1-UTC was necessary to point the tracking antennas and to convert between Earth-fixed and inertial coordinates for orbit determination. The IERS Conventions define the astronomical constants (GM_Sun, AU, speed of light) used in all orbital calculations. IERS data products include Earth orientation parameters (EOP) going back to 1962, with reconstructions extending to earlier epochs.",
+      "mission_relevance": "Provides the reference frame and fundamental constants used in the heliocentric orbit simulation and link budget calculations. The accuracy of Pioneer 5's orbit determination depended on knowing Earth's orientation precisely enough to calculate the spacecraft's position relative to the tracking stations. Essential for the heliocentric orbit knowledge node and the orbit simulation Python code."
+    }
+  ]
+}

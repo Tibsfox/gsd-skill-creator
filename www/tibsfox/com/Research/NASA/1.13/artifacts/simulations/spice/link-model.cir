@@ -1,0 +1,164 @@
+* Pioneer 5 — Deep-Space Communication Link Model
+* =========================================================================
+* Mission 1.13 — Pioneer 5 (NASA / Thor-Able IV), March 11, 1960
+* Free-Space Path Loss as Cascaded Attenuator Network
+*
+* Models Pioneer 5's communication link as a chain of L-pad attenuators.
+* The 5W transmitter feeds through cascaded attenuation stages, each
+* representing a factor of 10 in distance. The output voltage at each
+* stage shows the received signal level at that distance.
+*
+* The link budget:
+*   P_tx = 5W (+37 dBm) at 378.2 MHz
+*   G_tx = 3 dBi (spacecraft omnidirectional)
+*   G_rx = 43 dBi (26m dish at Goldstone)
+*   Free-space path loss = 20*log10(4*pi*d/lambda)
+*
+* At each decade of distance:
+*   10 km:    FSPL = 103 dB, P_rx = -20 dBm
+*   100 km:   FSPL = 123 dB, P_rx = -40 dBm
+*   1,000 km: FSPL = 143 dB, P_rx = -60 dBm
+*   10,000 km: FSPL = 163 dB, P_rx = -80 dBm
+*   100,000 km: FSPL = 183 dB, P_rx = -100 dBm
+*   1,000,000 km: FSPL = 203 dB, P_rx = -120 dBm
+*   10,000,000 km: FSPL = 223 dB, P_rx = -140 dBm
+*   36,200,000 km: FSPL = 234 dB, P_rx = -151 dBm
+*
+* Each L-pad represents 20 dB of attenuation (10× distance = 20 dB
+* increase in FSPL). We start at 10 km and cascade through to Pioneer 5's
+* record distance.
+*
+* Run: ngspice -b link-model.cir
+* =========================================================================
+
+.title Pioneer 5 — Communication Link as Cascaded Attenuator
+
+* =========================================================================
+* SOURCE: Pioneer 5 Transmitter (5W into 50 ohms)
+* =========================================================================
+* P = V²/R → V = sqrt(P×R) = sqrt(5 × 50) = 15.81V peak (for 5W)
+* We use AC analysis with 1V normalized, then scale results.
+
+Vtx tx_out 0 AC 15.81
+
+* Transmitter output impedance
+Rtx tx_out stage0 50
+
+* =========================================================================
+* STAGE 0: Initial free-space loss at 10 km (FSPL = 103 dB)
+* =========================================================================
+* 103 dB = voltage ratio of ~141,000
+* Modeled as initial 60 dB pad + remaining stages
+* 60 dB L-pad: series R = 49.95K, shunt R = 50.05
+R0s stage0 stage1_in 49950
+R0p stage1_in 0 50
+
+* =========================================================================
+* STAGES 1-7: Each stage adds 20 dB (factor of 10 in distance)
+* =========================================================================
+* 20 dB L-pad with 50-ohm input/output:
+*   Series R = 40.91 × 50 = 2045.5 ohm (approx)
+*   Shunt R = 1.22 × 50 = 61.1 ohm (approx)
+*
+* For simplicity, use T-pad configuration:
+*   20 dB T-pad (50 ohm): R1 = R3 = 40.91Ω, R2 = 10.1Ω
+
+* Stage 1: 100 km (FSPL = 123 dB → cumulative 80 dB from stage 0)
+R1a stage1_in stage1_mid 40.91
+R1b stage1_mid 0 10.1
+R1c stage1_mid stage2_in 40.91
+
+* Stage 2: 1,000 km (FSPL = 143 dB)
+R2a stage2_in stage2_mid 40.91
+R2b stage2_mid 0 10.1
+R2c stage2_mid stage3_in 40.91
+
+* Stage 3: 10,000 km (FSPL = 163 dB)
+R3a stage3_in stage3_mid 40.91
+R3b stage3_mid 0 10.1
+R3c stage3_mid stage4_in 40.91
+
+* Stage 4: 100,000 km (FSPL = 183 dB)
+R4a stage4_in stage4_mid 40.91
+R4b stage4_mid 0 10.1
+R4c stage4_mid stage5_in 40.91
+
+* Stage 5: 1,000,000 km (FSPL = 203 dB)
+R5a stage5_in stage5_mid 40.91
+R5b stage5_mid 0 10.1
+R5c stage5_mid stage6_in 40.91
+
+* Stage 6: 10,000,000 km (FSPL = 223 dB)
+R6a stage6_in stage6_mid 40.91
+R6b stage6_mid 0 10.1
+R6c stage6_mid stage7_in 40.91
+
+* Stage 7: 36,200,000 km (FSPL = 234 dB) — Pioneer 5 record
+* Additional 11 dB for the final factor of 3.62
+* 11 dB T-pad: R1 = R3 = 17.8Ω, R2 = 17.4Ω
+R7a stage7_in stage7_mid 17.8
+R7b stage7_mid 0 17.4
+R7c stage7_mid receiver 17.8
+
+* Receiver input impedance
+Rrx receiver 0 50
+
+* =========================================================================
+* ANALYSIS: Frequency sweep showing received voltage at each stage
+* =========================================================================
+
+.control
+  ac dec 100 100meg 1g
+
+  echo "================================================================"
+  echo "Pioneer 5 — Communication Link Model"
+  echo "5W transmitter at 378.2 MHz, cascaded L-pad attenuators"
+  echo "================================================================"
+  echo ""
+  echo "Each stage represents a decade of distance from the spacecraft."
+  echo "The voltage at each tap shows the received signal strength."
+  echo ""
+
+  * Measure voltages at 378.2 MHz (Pioneer 5 downlink)
+  let f_design = 378.2e6
+
+  meas ac v_tx find vm(stage0) at=378.2meg
+  meas ac v_10km find vm(stage1_in) at=378.2meg
+  meas ac v_100km find vm(stage2_in) at=378.2meg
+  meas ac v_1Mkm find vm(stage3_in) at=378.2meg
+  meas ac v_10Mkm find vm(stage4_in) at=378.2meg
+  meas ac v_100Mkm find vm(stage5_in) at=378.2meg
+  meas ac v_1MMkm find vm(stage6_in) at=378.2meg
+  meas ac v_10MMkm find vm(stage7_in) at=378.2meg
+  meas ac v_pioneer find vm(receiver) at=378.2meg
+
+  echo ""
+  echo "Signal Voltage at 378.2 MHz:"
+  echo "  Transmitter:      $&v_tx V"
+  echo "  At 10 km:         $&v_10km V"
+  echo "  At 100 km:        $&v_100km V"
+  echo "  At 1,000 km:      $&v_1Mkm V"
+  echo "  At 10,000 km:     $&v_10Mkm V"
+  echo "  At 100,000 km:    $&v_100Mkm V"
+  echo "  At 1,000,000 km:  $&v_1MMkm V"
+  echo "  At 10,000,000 km: $&v_10MMkm V"
+  echo "  At 36,200,000 km: $&v_pioneer V (Pioneer 5 record)"
+  echo ""
+  echo "Each 20 dB stage represents a 10x increase in distance."
+  echo "The inverse-square law reduces voltage by 10x per decade."
+  echo ""
+  echo "Pioneer 5 link budget:"
+  echo "  Tx power:           5 W (+37 dBm)"
+  echo "  Tx antenna gain:    +3 dBi"
+  echo "  Free-space loss:    -234 dB (at 36.2M km, 378 MHz)"
+  echo "  Rx antenna gain:    +43 dBi (26m dish)"
+  echo "  Received power:     ~-151 dBm"
+  echo "  Noise floor (100Hz): -154 dBm"
+  echo "  SNR:                ~3 dB (barely detectable)"
+
+  * Plot all stages
+  plot vm(stage1_in) vm(stage2_in) vm(stage3_in) vm(stage4_in) vm(stage5_in) vm(stage6_in) vm(stage7_in) vm(receiver) title 'Pioneer 5 Link — Signal Voltage vs Distance Stage' ylabel 'Voltage (V)' xlabel 'Frequency (Hz)'
+
+.endc
+
+.end

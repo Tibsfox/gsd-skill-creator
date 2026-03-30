@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.13 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --deep-space: #020210; --deep-mid: #081028; --signal-blue: #2060CC; --signal-dim: #103068; --solar-gold: #E8D060; --solar-dim: #8A7830; --sponge-orange: #CC8830; --sponge-dim: #6A4418; --venus-cream: #E8D8B0; --venus-dim: #8A8060; --space: #020210; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2A4A; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(32,96,204,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(232,208,96,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(16,48,104,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(204,136,48,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(32,96,204,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(232,208,96,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; } .breadcrumb a { color: var(--signal-blue); text-decoration: none; } .breadcrumb a:hover { filter: brightness(1.3); } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--deep-space) 25%, var(--deep-mid) 50%, var(--signal-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--signal-blue); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(32,96,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(32,96,204,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(32,96,204,0.12); border: 1px solid var(--signal-blue); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--signal-blue); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(32,96,204,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--solar-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--solar-gold); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); } .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--signal-blue); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } .prose strong { color: var(--solar-gold); } .prose em { color: var(--sponge-orange); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; } .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--signal-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(2,2,16,0.3); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose pre { background: rgba(2,2,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--signal-blue); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(32,96,204,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--signal-blue); } .prose pre code { background: none; padding: 0; }
+  .prose a { color: var(--signal-blue); text-decoration: none; } .prose a:hover { filter: brightness(1.3); }
+  .nav-card { background: rgba(2,2,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--signal-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { filter: brightness(1.3); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--signal-blue); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.13 Pioneer 5</a>
+  <span class="sep">/</span>
+  Track 4: Curriculum
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.13</span>
+      <span>Pioneer 5</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Communications Eng, Astrophysics, Marine Bio</span>
+      <span><span class="label">Organism:</span> Breadcrumb sponge</span>
+      <span><span class="label">Bird:</span> Pigeon Guillemot</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>Department Deposits</h2>
+
+    <h3>Communications Engineering (Primary)</h3>
+
+    <p><strong>Wing:</strong> Deep Space Link Budget and Signal Propagation</p>
+
+    <p>Pioneer 5 established the first interplanetary communication link. Every term in the link budget tells a story about engineering constraints and clever solutions:</p>
+
+    <ul>
+      <li><strong>Transmitter:</strong> 5 watts at 378.2 MHz. The spacecraft&rsquo;s total solar panel output was approximately 30 watts. The transmitter consumed one-sixth of the total power budget. The choice of 378 MHz (UHF band) was a compromise: higher frequencies would have provided more antenna gain, but UHF transmitter and receiver technology was more mature in 1960. The DSN would later standardize on S-band (2.3 GHz) and X-band (8.4 GHz) for exactly this reason.</li>
+      <li><strong>Spacecraft antenna:</strong> A turnstile dipole providing approximately 2 dBi of gain &mdash; essentially omnidirectional. Pioneer 5 was spin-stabilized and could not point a directional antenna at Earth. Only the fraction of power falling within the solid angle subtended by the receiving dish contributed to the link &mdash; approximately 10<sup>-23</sup> of the total radiated power.</li>
+      <li><strong>Ground receiver:</strong> Jodrell Bank&rsquo;s 76.2-meter dish. This was the largest fully steerable radio telescope in the world in 1960. NASA borrowed it because no comparably large antenna existed in the NASA network. Its 47 dBi of gain was the single most important factor in the link budget.</li>
+      <li><strong>Data rate adaptation:</strong> As Pioneer 5 receded, the data rate was stepped down from 64 bps to 16, 8, and finally 1 bps. Each reduction halved the receiver bandwidth, maintaining the SNR. At 1 bps, each bit was integrated over a full second. This is the fundamental trade of deep space communications: distance costs speed.</li>
+      <li><strong>No error correction:</strong> Pioneer 5 transmitted raw, uncoded bits. Bit error rate at maximum range: ~1-5%. Modern missions use turbo/LDPC codes achieving error rates below 10<sup>-6</sup> while operating within 1 dB of the Shannon limit &mdash; a coding gain of approximately 25 dB.</li>
+    </ul>
+
+    <p>The Pigeon Guillemot (<em>Cepphus columba</em>, degree 13) dives to depths of 10-45 meters in pursuit of small fish along rocky PNW coastlines. At depth, visibility drops exponentially &mdash; much as signal power decreases with the square of distance. The guillemot trades speed for reliability as the signal degrades: at shallow depths it pursues fast-moving fish; at greater depths it switches to slow, methodical crevice searches. The same trade Pioneer 5 made as the data rate dropped from 64 to 1 bps.</p>
+
+    <h3>Astrophysics (Primary)</h3>
+
+    <p><strong>Wing:</strong> Interplanetary Medium and Solar Wind</p>
+
+    <p>Before Pioneer 5, the space between planets was assumed to be a vacuum. Eugene Parker predicted the solar wind in 1958, but his theory was controversial. Pioneer 5 provided the first direct evidence:</p>
+
+    <ul>
+      <li><strong>Interplanetary magnetic field:</strong> ~2-5 nanotesla, steady, in the ecliptic plane &mdash; consistent with the Parker spiral.</li>
+      <li><strong>Magnetic storm detection:</strong> On March 31, 1960, at ~5 million km, a sudden increase in field intensity from a solar flare. Detected by Earth ~12 hours later. First observation of a solar disturbance propagating through interplanetary space.</li>
+      <li><strong>Cosmic ray flux:</strong> Approximately constant between Earth and 0.8 AU. During the storm, a Forbush decrease &mdash; first observed from interplanetary space.</li>
+      <li><strong>Micrometeorite impacts:</strong> ~1 per hour, consistent with zodiacal light estimates.</li>
+    </ul>
+
+    <h3>Marine Biology (Primary)</h3>
+
+    <p><strong>Wing:</strong> Porifera &mdash; Filter Feeding and Benthic Ecology</p>
+
+    <p><em>Halichondria panicea</em> is a demosponge found throughout PNW rocky intertidal and shallow subtidal zones. It feeds by pumping seawater through its body:</p>
+
+    <ul>
+      <li><strong>Pumping:</strong> 2-8 mL/min per cm<sup>3</sup>, processing ~1000 body volumes per day.</li>
+      <li><strong>Capture:</strong> Particles captured by sticky choanocyte collars via direct interception and diffusional deposition. Efficient at capturing particles much smaller than pore size.</li>
+      <li><strong>Efficiency:</strong> 75-95% for bacterioplankton (0.5-2 &mu;m), 40-60% for larger phytoplankton.</li>
+      <li><strong>Ecological role:</strong> Primary consumer of the microbial loop &mdash; converts bacterial biomass to sponge tissue, linking microbial and macrofaunal food webs.</li>
+    </ul>
+
+    <p>The connection to Pioneer 5: both extract signal from a dilute medium. The sponge&rsquo;s 75-95% capture efficiency is its coding gain. The receiver&rsquo;s 24 dB SNR is its filtration efficiency. Evolution and engineering, converging on the same solution.</p>
+
+    <h3>Mathematics (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Inverse-Square Law and Logarithmic Scales</p>
+
+    <p>The inverse-square law is the single most important equation in deep space communications. A receiver of area A at distance r captures a fraction A/(4&pi;r<sup>2</sup>) of the transmitted power. At Pioneer 5&rsquo;s maximum range, this fraction was approximately 10<sup>-23</sup>. The decibel scale compresses these enormous ranges into manageable numbers because the physics is multiplicative and the logarithm converts multiplication into addition.</p>
+
+    <h3>Literature (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Douglas Adams and the Mathematics of Improbability</p>
+
+    <p>Adams was born on March 11, 1952 &mdash; eight years before Pioneer 5 launched. Pioneer 5&rsquo;s link budget is Adams&rsquo;s comedy rendered in arithmetic. The probability of a single photon arriving at Jodrell Bank is negligible. But the transmitter emits trillions per second, the receiver integrates for a full second per bit, and the dish collects over 4,500 m<sup>2</sup> &mdash; the improbable sum produces a reliable link. Adams&rsquo;s answer to Life, the Universe, and Everything was 42. Pioneer 5&rsquo;s answer to deep space communication was 24.4 dB &mdash; both numbers that mean nothing without the question.</p>
+
+    <h3>Antenna Design (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Dish Antennas, Dipoles, and the Physics of Gain</p>
+
+    <p>An antenna does not amplify a signal &mdash; it concentrates it. Gain = &eta; &middot; (&pi;D/&lambda;)<sup>2</sup>. Jodrell Bank at 378 MHz: 47.0 dBi = factor of 50,000. If Pioneer 5 had used S-band (2.3 GHz), gain would have been 15.7 dB higher, extending range by 6.1&times;. But UHF technology was more mature in 1960.</p>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Deep Space Link Budget Calculator</h3>
+
+    <p><strong>Duration:</strong> 2-3 hours &middot; <strong>Difficulty:</strong> Beginner-Intermediate &middot; <strong>Cost:</strong> $0</p>
+
+    <p>Compute the received signal power and SNR for Pioneer 5 at several distances, discover the point at which the signal drops below the noise floor, and see how changing the data rate trades speed for range.</p>
+
+    <pre><code>DEEP SPACE LINK BUDGET CALCULATOR:
+
+1. DEFINE THE LINK:
+   P_t = 5 W, G_t = 2 dBi, f = 378.2 MHz
+   Jodrell Bank D = 76.2 m, G_r = 47 dBi
+   T_sys = 200 K, L = 2 dB
+
+2. COMPUTE FSPL vs DISTANCE for:
+   1,000 km / 384,000 km / 5,000,000 km / 36,200,000 km / 1 AU
+
+3. COMPUTE RECEIVED POWER:
+   P_rx (dBW) = P_t + G_t - FSPL - L + G_r
+
+4. COMPUTE SNR vs DATA RATE at 36.2 Mkm:
+   B (bps) | P_noise (dBW) | SNR (dB) | Detectable?
+     1     |   -205.6      |  24.4    |   YES
+    64     |   -187.5      |   6.3    |   NO (need &gt;10 dB)
+
+5. EXPLORE: What if we double the dish (152 m)?
+   G_r +6 dB -> range x2. Ground antenna is the cheapest
+   way to extend range: build once, every mission benefits.</code></pre>
+
+    <h3>TRY 2: Sponge Filtration Observation</h3>
+
+    <p><strong>Duration:</strong> 2-3 hours (field + lab) &middot; <strong>Difficulty:</strong> Beginner &middot; <strong>Cost:</strong> $0-10</p>
+
+    <p>Find <em>Halichondria panicea</em> at low tide. Identify by: thin encrusting form, pale yellow-green to orange, breadcrumb texture, visible oscula (1-3 mm). Optional food coloring test: drop diluted dye near the sponge surface, watch it drawn in through ostia and expelled from oscula 10-30 seconds later. Compare pumping rate to Pioneer 5&rsquo;s integration time &mdash; both are signal extraction from a dilute medium.</p>
+
+    <hr>
+
+    <h2>DIY Project: Build a Directional Antenna</h2>
+
+    <p><strong>Duration:</strong> 4-6 hours &middot; <strong>Difficulty:</strong> Intermediate &middot; <strong>Cost:</strong> $15-50</p>
+
+    <p>Build a 3-element Yagi-Uda antenna tuned for the FM broadcast band (88-108 MHz). The Yagi provides ~6-7 dBi of gain compared to 2 dBi for a simple dipole.</p>
+
+    <pre><code>3-ELEMENT YAGI at 98 MHz:
+
+  Wavelength: lambda = 3.06 m
+  Reflector:  1.515 m (0.495 * lambda)
+  Driven:     1.447 m (0.473 * lambda, gap at center)
+  Director:   1.346 m (0.440 * lambda)
+  Spacing:    Reflector-Driven: 0.612 m
+              Driven-Director: 0.459 m
+
+Your Yagi: ~7 dBi (factor of 5 in power)
+Jodrell Bank: ~47 dBi (factor of 50,000)
+Difference: 40 dB = 10,000x more effective.
+Both work on the same principle: constructive
+interference in the desired direction.</code></pre>
+
+    <hr>
+
+    <h2>Ethics Module: The Improbability of Detection</h2>
+
+    <p><strong>Duration:</strong> 1-2 hours (discussion/essay)</p>
+
+    <ol>
+      <li><strong>The legitimacy of degraded data:</strong> Pioneer 5&rsquo;s measurements have a 1-5% bit error rate. Some reported field values are wrong. Is data with a known error rate still &ldquo;scientific&rdquo;?</li>
+      <li><strong>The bandwidth-distance trade:</strong> A 50-watt transmitter would have given 10 bps at max range instead of 1 bps. But 50 watts was not feasible with 1960 solar cells. How do you decide between a cheaper mission with degraded data and an expensive one with better data?</li>
+      <li><strong>Adams and the improbability of contact:</strong> Is there a meaningful difference between literary improbability (which violates the rules) and engineered improbability (which exploits the rules)?</li>
+      <li><strong>The sponge&rsquo;s lesson:</strong> The sponge evolved its 75-95% efficiency over 600 million years. Pioneer 5&rsquo;s engineers designed theirs in three. Which approach is more robust? What happens when the signal degrades further?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <ul>
+      <li><strong>FoxFiber:</strong> Pioneer 5&rsquo;s communication link was the first fiber in the interplanetary web. FoxFiber infrastructure is the ground segment that completes the deep space communication chain.</li>
+      <li><strong>Fox CapComm:</strong> Pioneer 5 required coordination between ground stations on different continents &mdash; the prototype for the DSN&rsquo;s three-continent coverage model.</li>
+      <li><strong>FoxCompute:</strong> Extracting scientific measurements from 1 bps with 1-5% errors required signal processing. FoxCompute provides the computational infrastructure for archival reprocessing.</li>
+      <li><strong>SolarFox:</strong> Pioneer 5 was powered by 4,800 silicon solar cells producing ~30 watts at 1 AU. At perihelion (0.806 AU), solar flux was 54% higher. First interplanetary validation that solar power works throughout the inner solar system.</li>
+    </ul>
+
+    <hr>
+
+    <blockquote>The Pigeon Guillemot, <em>Cepphus columba</em>, nests in rocky crevices along the Pacific Northwest coast. It is a close-range specialist: it hunts in waters less than 50 meters deep, usually within a few hundred meters of its nest site. Pioneer 5 was the opposite: a long-range specialist that transmitted across 36 million km. But both operate by the same principle. The guillemot&rsquo;s success depends on the contrast between its prey and its background. Pioneer 5&rsquo;s success depends on the contrast between its signal and the thermal noise. The breadcrumb sponge on the rock below filters at 1000 body volumes per day, extracting bacteria at 75-95% efficiency. The guillemot extracts fish at perhaps 30-40% per dive. Pioneer 5&rsquo;s receiver extracts bits at 95-99% from the noise floor. The sponge is the most efficient filter. The receiver is the most efficient detector. The guillemot is the least efficient hunter. But the guillemot is the one that flies &mdash; the one that bridges the gap between the sponge&rsquo;s rock and the probe&rsquo;s vacuum. Douglas Adams would have appreciated the guillemot: a small bird doing something improbable at the edge of its capabilities, succeeding not by being the best at any one thing but by combining flight, diving, vision, and persistence into a strategy that works just well enough, most of the time, to extract dinner from a noisy, turbid, cold, and indifferent ocean.</blockquote>
+
+    <div class="nav-card">
+      <a href="papers.html">&larr; Papers</a>
+      <a href="simulation.html">Simulation &rarr;</a>
+    </div>
+
+  </div>
+</main>
+
+<footer><p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.13 Pioneer 5 + Halichondria panicea &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p></footer>
+
+</body>
+</html>

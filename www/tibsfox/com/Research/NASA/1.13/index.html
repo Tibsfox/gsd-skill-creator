@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.13 — Pioneer 5 + Halichondria panicea | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --deep-space: #020210; --deep-mid: #081028;
+    --signal-blue: #2060CC; --signal-dim: #103068;
+    --solar-gold: #E8D060; --solar-dim: #8A7830;
+    --sponge-orange: #CC8830; --sponge-dim: #6A4418;
+    --venus-cream: #E8D8B0; --venus-dim: #8A8060;
+    --space: #020210; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2A4A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(32,96,204,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(232,208,96,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(204,136,48,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(32,96,204,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(232,208,96,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(16,48,104,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(2,2,16,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(32,96,204,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--deep-space) 20%, var(--deep-mid) 40%, var(--signal-dim) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--signal-blue);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(32,96,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(32,96,204,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(32,96,204,0.12); border: 1px solid var(--signal-blue); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--signal-blue); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-success {
+    background: rgba(32,96,204,0.3); border: 1px solid var(--signal-blue);
+    color: var(--signal-blue); padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--solar-gold); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(2,2,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--solar-gold);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--solar-gold); }
+  .card em { color: var(--sponge-orange); }
+
+  .resonance-card { border-color: var(--signal-blue); background: rgba(32,96,204,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(32,96,204,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--signal-blue); color: #fff; font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--signal-blue); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(2,2,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--signal-blue); background: rgba(32,96,204,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--signal-blue); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--solar-gold); }
+  .track-card.t2 .track-title { color: var(--sponge-orange); }
+  .track-card.t3 .track-title { color: var(--signal-blue); }
+  .track-card.t4 .track-title { color: var(--solar-gold); }
+  .track-card.t5 .track-title { color: var(--signal-blue); }
+  .track-card.t6 .track-title { color: var(--sponge-orange); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(204,136,48,0.08); border: 1px solid var(--sponge-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--signal-blue); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--sponge-orange); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(2,2,16,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--solar-gold); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(32,96,204,0.12); border: 1px solid rgba(32,96,204,0.3);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--signal-blue); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--signal-blue); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(32,96,204,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(2,2,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--signal-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--signal-blue); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.13</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>v1.13 &mdash; Pioneer 5 + <em>Halichondria panicea</em></h1>
+    <p class="subtitle">The Long Call &mdash; First Deep Space Probe Between Planets</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> March 11, 1960</span>
+      <span><span class="label">Program:</span> Pioneer (NASA/STL)</span>
+      <span><span class="label">Mass:</span> 43 kg</span>
+      <span><span class="label">Organism:</span> Breadcrumb sponge</span>
+      <span><span class="label">Bird:</span> Pigeon Guillemot</span>
+      <span><span class="label">Dedication:</span> Douglas Adams</span>
+      <span><span class="label">Status:</span> SUCCESS &mdash; 107-day operation, 36.2 Mkm record</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On March 11, 1960, a Thor-Able IV launched Pioneer 5 &mdash; a 43-kilogram sphere &mdash; into a heliocentric orbit between Earth and Venus. It carried no camera, no tape recorder, no attitude control. It simply spun and transmitted. <strong>The question: can a 5-watt transmitter be heard across interplanetary distances?</strong></p>
+      <p>The answer came on June 26, 1960, when Jodrell Bank&rsquo;s 76-meter dish received Pioneer 5&rsquo;s signal from 36.2 million kilometers. The received power was 7.6 &times; 10<sup>-19</sup> watts &mdash; less than a femtowatt. The data rate had dropped from 64 bps to 1 bps. But the link held. The answer changed everything. Every subsequent deep space mission &mdash; Mariner, Voyager, New Horizons &mdash; builds on this proof.</p>
+      <p>Pioneer 5 also carried the first magnetometer into interplanetary space, confirming Eugene Parker&rsquo;s prediction of the solar wind and the spiral interplanetary magnetic field. On March 31, it detected a solar flare&rsquo;s shock wave propagating through the interplanetary medium &mdash; the first in-situ observation of space weather. The probe orbits the Sun forever, silent since day 107, a 43-kg aluminum sphere between two planets.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The Long Call</div>
+            <div class="track-desc">5 watts across 36.2 million km, the interplanetary magnetic field, the March 31 solar storm, Douglas Adams and the comedy of scale</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">Coleman et al. (1960) steady IMF, DSOC laser link on Psyche, Parker Solar Probe turbulence, <em>H. panicea</em> filtration study</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Halichondria panicea</em></div>
+            <div class="track-desc">Breadcrumb sponge &mdash; the filter that processes 1000 body volumes per day, extracting signal from noise since the Ediacaran</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Distance</div>
+            <div class="track-desc">Link budget equation, vis-viva, Shannon capacity, inverse-square law, 235 dB of path loss</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Communications Eng, Astrophysics, Marine Bio. Link budget TRY. Sponge observation. Yagi antenna DIY. Adams ethics.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Train, Visualize, Create</div>
+            <div class="track-desc">Link budget calculator, orbit propagator, &ldquo;How Far Can You Hear?&rdquo; web app, signal detection ML, antenna allocation game</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Filter/Receiver: Signal Extraction from Noise</div>
+          The sponge filters bacteria from seawater at 75-95% efficiency. Jodrell Bank filtered Pioneer 5&rsquo;s 5-watt signal from the cosmic background at 36.2 million km. Both are extreme signal extraction systems operating at the limits of their architectures &mdash; biological collar cells and steel dish antennas, extracting vanishingly faint signals through surface area, sensitivity, and patience.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Simple Architecture, Immense Range</div>
+          No organs, no brain &mdash; yet 1000 body volumes filtered per day. No attitude control, no directional antenna &mdash; yet 36.2 million km of communication. Both achieve extraordinary results through fundamental simplicity. The range of the achievement is inversely proportional to the complexity of the system.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Interstitial Zones</div>
+          The sponge lives in the intertidal &mdash; between sea and land. Pioneer 5 orbited between Earth and Venus &mdash; between two planetary domains. Both inhabit transitional zones where neither adjacent regime fully applies. Both derive their value from position at the boundary.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Flow-Through Conduits</div>
+          Water flows through the sponge. Radio signals flowed through Pioneer 5. Both are open systems, permeable to their environment, functioning not as containers but as conduits &mdash; deriving function from what passes through them.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Primitive but Persistent</div>
+          Sponges: 600 million years, five mass extinctions, same architecture. Pioneer 5: 107 days on the simplest possible design, succeeded because there was nothing to go wrong. Persistence is the product of simplicity. Simplicity is the deepest engineering wisdom.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-long-call.html" style="color: var(--solar-gold);">Story: &ldquo;The Long Call&rdquo;</a>
+          <a href="artifacts/stories/the-long-call.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; Pioneer 5&rsquo;s 107 days, told from across 36 million km
+        </li>
+        <li><a href="artifacts/audio/pioneer5-distance-synth.dsp" style="color: var(--signal-blue);">Audio: Pioneer 5 Distance Synth</a> &mdash; FAUST synth, signal attenuation sonification (VST/LV2)</li>
+        <li><a href="artifacts/audio/pigeon-guillemot.dsp" style="color: var(--signal-blue);">Audio: Pigeon Guillemot</a> &mdash; FAUST synth, guillemot calls and underwater hunting (VST/LV2)</li>
+        <li><a href="artifacts/circuits/led-link-budget.md" style="color: var(--solar-gold);">Circuit: LED Link Budget Indicator</a> &mdash; Visual signal strength display with LEDs</li>
+        <li><a href="artifacts/circuits/radio-preamp.md" style="color: var(--solar-gold);">Circuit: Radio Preamplifier</a> &mdash; Low-noise RF preamplifier for shortwave reception</li>
+        <li><a href="artifacts/screensaver/pioneer5-screensaver.frag" style="color: var(--signal-blue);">Screensaver: Pioneer 5</a> &mdash; GLSL fragment shader, deep space signal propagation</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><a href="artifacts/simulations/python/link-budget.py" style="color: var(--solar-gold);">Python: Link Budget Calculator</a> &mdash; Deep space link budget from first principles</li>
+        <li><a href="artifacts/simulations/python/heliocentric-orbit.py" style="color: var(--solar-gold);">Python: Heliocentric Orbit</a> &mdash; Pioneer 5 vs Earth orbital propagation, distance timeline</li>
+        <li><a href="artifacts/simulations/web/distance-calculator.html" style="color: var(--signal-blue);">Web: How Far Can You Hear?</a> &mdash; Interactive link budget with communication sphere</li>
+        <li><a href="artifacts/simulations/web/solar-system-view.html" style="color: var(--signal-blue);">Web: Solar System View</a> &mdash; Pioneer 5 orbit with communication cone animation</li>
+        <li><a href="artifacts/simulations/spice/link-model.cir" style="color: var(--signal-blue);">SPICE: Link Model</a> &mdash; Signal path analog circuit (ngspice)</li>
+        <li><a href="artifacts/simulations/spice/rf-preamp.cir" style="color: var(--signal-blue);">SPICE: RF Preamplifier</a> &mdash; Low-noise amplifier design (ngspice)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: var(--signal-blue);">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(32,96,204,0.04); border-color: var(--signal-dim);">
+      <h2 style="color: var(--solar-gold);">Dedication: Douglas Adams</h2>
+      <p><strong>Born March 11, 1952 &mdash; Died May 11, 2001</strong></p>
+      <p>Adams was born exactly eight years before Pioneer 5 launched. He understood the comedy of scale: the universe is incomprehensibly large, human technology is absurdly small, and the comedy arises from the mismatch. Pioneer 5&rsquo;s link budget is Adams&rsquo;s comedy rendered in arithmetic &mdash; a 5-watt signal crossing 36 million km of vacuum, arriving at 10<sup>-18</sup> watts, and being heard. The improbability is not fiction. It is the link budget, worked through with the precision of a tax return.</p>
+      <p>Adams also wrote <em>Last Chance to See</em> &mdash; documenting species on the edge of extinction. The aye-aye that could not find a tree. The kakapo that could not find a mate. He saw the same absurdity in extinction as in interplanetary space: a gap between what is real and what humans are willing to comprehend.</p>
+      <p style="font-style: italic; color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; text-align: center;"><strong style="color: var(--solar-gold); font-size: 1.3rem;">DON&rsquo;T PANIC</strong></p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.12/index.html">&larr; v1.12 Explorer 7</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.14/index.html">v1.14 Echo 1 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Halichondria panicea (Breadcrumb Sponge)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">1000&times;</div>
+          <div class="stat-label">Vol/Day</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">75&ndash;95%</div>
+          <div class="stat-label">Capture Eff.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">600 My</div>
+          <div class="stat-label">Lineage Age</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Encrusting</div>
+          <div class="stat-label">Growth Form</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        The oldest animal phylum. An animal with no brain, no organs, no nervous system, that filters thousands of liters of seawater per day through its body &mdash; extracting bacteria from the noise with an efficiency that borders on the miraculous. Supported by silica spicules that function as biological optical fibers. Found on PNW rocky shores from Alaska to California.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(204,136,48,0.06); border-color: var(--sponge-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--signal-blue); margin-bottom: 0.5rem;">Bird: Pigeon Guillemot</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em>Cepphus columba</em> (degree 13). A small alcid &mdash; black plumage with white wing patches, bright red feet. Dives to 10-45 meters along rocky PNW coastlines. Trades speed for reliability as light fades with depth &mdash; the same trade Pioneer 5 made as data rate dropped from 64 to 1 bps with distance.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: Pioneer 5 (1960-001A)</a>
+      <a href="https://deepspace.jpl.nasa.gov/">Deep Space Network</a>
+      <a href="https://omniweb.gsfc.nasa.gov/">OMNI Solar Wind Data</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://www.marinespecies.org/porifera/">World Porifera Database</a>
+      <a href="https://www.inaturalist.org/taxa/117759-Halichondria-panicea">iNaturalist: H. panicea</a>
+    </div>
+
+    <div class="card" style="background: rgba(32,96,204,0.08); border-color: rgba(32,96,204,0.3);">
+      <h3 style="font-size: 0.9rem; color: var(--signal-blue); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        Communications Engineering &middot; Astrophysics &middot; Marine Biology &middot; Mathematics &middot; Literature &middot; Antenna Design &middot; Computer Science &middot; Game Theory
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(2,2,16,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--signal-blue); margin-bottom: 0.5rem;">Catalog Position</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim);">
+        Mission 14 of 720 &middot; Epoch 1 (Early Space Age) &middot; March 11, 1960
+      </p>
+      <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">
+        <strong style="color: var(--solar-gold);">Thesis:</strong> A nightlight can be seen between planets if you build a big enough dish and listen slowly enough. The inverse-square law is merciless at interplanetary distances &mdash; 235 dB of path loss &mdash; but Jodrell Bank&rsquo;s 76-meter dish, a 1-Hz bandwidth, and the patience to receive at one bit per second closed the link. Pioneer 5 proved the equation. The Deep Space Network was born.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(2,2,16,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--solar-dim); margin-bottom: 0.5rem;">Pioneer 5 Specifications</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        <strong style="color: var(--solar-gold);">Mass:</strong> 43 kg &middot;
+        <strong style="color: var(--solar-gold);">Launch:</strong> Thor-Able IV &middot;
+        <strong style="color: var(--solar-gold);">Orbit:</strong> 0.806 &times; 0.995 AU (heliocentric) &middot;
+        <strong style="color: var(--solar-gold);">Period:</strong> 312 days &middot;
+        <strong style="color: var(--solar-gold);">Transmitter:</strong> 5 W at 378.2 MHz &middot;
+        <strong style="color: var(--solar-gold);">Antenna:</strong> Turnstile dipole (2 dBi) &middot;
+        <strong style="color: var(--solar-gold);">Data rates:</strong> 64/16/8/1 bps &middot;
+        <strong style="color: var(--solar-gold);">Max range:</strong> 36.2 Mkm (0.242 AU) &middot;
+        <strong style="color: var(--solar-gold);">Duration:</strong> 107 days &middot;
+        <strong style="color: var(--solar-gold);">Achievement:</strong> First interplanetary communication link, first IMF measurement
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.13 Pioneer 5 + Halichondria panicea &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+  <p style="margin-top: 0.5rem;"><em style="color: var(--sponge-orange);">&ldquo;Space is big. Really big. You just won&rsquo;t believe how vastly, hugely, mind-bogglingly big it is.&rdquo; &mdash; Douglas Adams</em></p>
+</footer>
+
+</body>
+</html>

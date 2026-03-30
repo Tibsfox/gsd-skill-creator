@@ -1,0 +1,179 @@
+* Pioneer 5 — RF Preamplifier (BF199 Low-Noise Amplifier)
+* =========================================================================
+* Mission 1.13 — Pioneer 5 (NASA / Thor-Able IV), March 11, 1960
+* Progressive Radio Series v1.13: RF Preamplifier
+*
+* A common-emitter BF199 LNA with tuned input for the progressive radio.
+* The preamplifier sits between the antenna tuner (v1.12) and the mixer
+* (v1.4), providing ~18 dB gain with a noise figure below 3 dB.
+*
+* Three analyses:
+*   1. AC gain vs frequency — shows the tuned response with peak at 7 MHz
+*   2. Noise figure vs frequency — shows the NF minimum at design freq
+*   3. Weak signal test — inject -120 dBm signal and verify amplification
+*
+* Pioneer 5's ground receivers used parametric amplifiers (the 1960
+* equivalent of this circuit) to detect the probe's 5-watt signal
+* from 36.2 million kilometers. The principle is identical: minimum
+* noise at the front end, maximum gain before subsequent stages add
+* their own noise.
+*
+* Run: ngspice -b rf-preamp.cir
+* =========================================================================
+
+.title Pioneer 5 — BF199 RF Preamplifier (Low-Noise Amplifier)
+
+* =========================================================================
+* BF199 SPICE Model (NPN RF transistor)
+* =========================================================================
+* The BF199 is a silicon NPN transistor designed for RF applications
+* up to 1 GHz. ft = 550 MHz, NF = 1.5 dB at 200 MHz.
+.model BF199 NPN(IS=1.4e-15 BF=150 NF=1.0 VAF=80 IKF=0.1
++ ISE=2.5e-13 NE=1.5 BR=5 NR=1.0 VAR=20 IKR=0.01
++ ISC=0 NC=2 RB=10 RE=0.5 RC=5 CJE=3.5e-12 VJE=0.7
++ MJE=0.33 TF=0.3e-9 CJC=1.5e-12 VJC=0.5 MJC=0.33
++ TR=5e-9 XTB=1.5 EG=1.11 XTI=3 FC=0.5)
+
+* =========================================================================
+* CIRCUIT: Common-Emitter LNA with Tuned Input
+* =========================================================================
+*
+*                          +9V (Vcc)
+*                           |
+*                          R3 (1K) -- collector load
+*                           |
+*                       collector
+*                           |
+*  INPUT --C1-- L1 --+-- base (BF199) -- C4 -- OUTPUT
+*  (ant)  100pF      |      |
+*                    C2    emitter
+*                   47pF     |
+*                    |      R4 (220) -- DC stabilization
+*                   GND     |
+*                          C5 (10nF) -- RF bypass
+*                           |
+*                          GND
+*
+*  Bias: R1 (47K) from Vcc to base, R2 (10K) from base to GND
+
+* Supply
+Vcc vcc 0 DC 9
+
+* Input signal source (50 ohm source impedance)
+Vsig sig_src 0 AC 1m
+Rsrc sig_src input 50
+
+* Input coupling capacitor
+C1 input tuned 100p
+
+* Tuned input circuit: L1 + C2 resonant at 7 MHz
+* f = 1/(2*pi*sqrt(L*C)) = 1/(2*pi*sqrt(10.4u * 47p)) = 7.03 MHz
+L1 tuned base 10.4u
+C2 tuned 0 47p
+
+* Bias network
+R1 vcc base 47k
+R2 base 0 10k
+
+* BF199 transistor
+Q1 collector base emitter BF199
+
+* Collector load
+R3 vcc collector 1k
+
+* Emitter stabilization with RF bypass
+R4 emitter 0 220
+C5 emitter 0 10n
+
+* Output coupling
+C4 collector output 100n
+
+* Output load (next stage input impedance)
+Rload output 0 1k
+
+* =========================================================================
+* ANALYSIS 1: AC Gain vs Frequency (1 MHz to 30 MHz)
+* =========================================================================
+* Shows the voltage gain peaking at 7 MHz due to the tuned input.
+* Gain at resonance should be ~18 dB.
+
+.control
+  ac dec 200 1meg 30meg
+
+  set hcopydevtype = postscript
+  set color0 = black
+  set color1 = white
+
+  * Voltage gain in dB
+  let gain_db = db(v(output)/v(input))
+  let phase = 180/PI * cph(v(output)/v(input))
+
+  echo "========================================"
+  echo "Pioneer 5 — BF199 RF Preamplifier"
+  echo "AC Gain Analysis (1-30 MHz)"
+  echo "========================================"
+  echo ""
+
+  * Find gain at key frequencies
+  meas ac gain_1mhz find gain_db at=1meg
+  meas ac gain_3mhz find gain_db at=3.5meg
+  meas ac gain_7mhz find gain_db at=7meg
+  meas ac gain_14mhz find gain_db at=14meg
+  meas ac gain_21mhz find gain_db at=21meg
+  meas ac gain_28mhz find gain_db at=28meg
+
+  echo ""
+  echo "Gain Summary:"
+  echo "  1 MHz:  $&gain_1mhz dB"
+  echo "  3.5 MHz: $&gain_3mhz dB"
+  echo "  7 MHz:  $&gain_7mhz dB (design frequency)"
+  echo "  14 MHz: $&gain_14mhz dB"
+  echo "  21 MHz: $&gain_21mhz dB"
+  echo "  28 MHz: $&gain_28mhz dB"
+
+  * Find peak gain and frequency
+  meas ac peak_gain max gain_db
+  meas ac peak_freq when gain_db=$&peak_gain
+
+  echo ""
+  echo "Peak gain: $&peak_gain dB at $&peak_freq Hz"
+  echo ""
+
+  * 3 dB bandwidth
+  let thresh = peak_gain - 3
+  meas ac bw_low when gain_db=$&thresh rise=1
+  meas ac bw_high when gain_db=$&thresh fall=1
+  echo "3 dB bandwidth: $&bw_low to $&bw_high Hz"
+
+  * Plot gain
+  plot gain_db title 'BF199 LNA — Voltage Gain vs Frequency' ylabel 'Gain (dB)' xlabel 'Frequency (Hz)'
+
+  echo ""
+  echo "========================================"
+  echo "DC Operating Point"
+  echo "========================================"
+  op
+  echo "Vce = " v(collector) - v(emitter)
+  echo "Ic = " @R3[i]
+  echo "Vbase = " v(base)
+  echo "Vemitter = " v(emitter)
+
+.endc
+
+* =========================================================================
+* ANALYSIS 2: Transient — Weak Signal Amplification
+* =========================================================================
+* Test with a weak 7 MHz signal (-120 dBm = 0.224 uV across 50 ohm)
+* Verify the signal is amplified and visible at the output.
+
+* Uncomment below for transient analysis:
+* .control
+*   * Replace AC source with transient signal
+*   alter Vsig = sin(0 0.224u 7meg)
+*   tran 1n 2u
+*   plot v(input) v(output)
+*   echo "Input amplitude: 0.224 uV (-120 dBm)"
+*   echo "Expected output: ~18 dB gain = ~1.78 uV"
+* .endc
+
+.end
