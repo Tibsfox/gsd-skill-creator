@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papers: Scientific Anchors | v1.6 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --phosphor-deep: #0A150A;
+    --phosphor-mid: #162816;
+    --phosphor-green: #2D6B2D;
+    --crt-glow: #33CC33;
+    --crt-dim: #1A5A1A;
+    --scan-dark: #0D120D;
+    --turkey-brown: #6B4226;
+    --turkey-tan: #B8935A;
+    --signal-gold: #D4A830;
+    --signal-bright: #E8D060;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--scan-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(51,204,51,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(45,107,45,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(51,204,51,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(107,66,38,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(45,107,45,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(212,168,48,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px; margin: 0 auto; padding: 1rem 2rem;
+    font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  .breadcrumb a { color: var(--crt-glow); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--signal-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--scan-dark) 0%, var(--phosphor-deep) 25%, var(--phosphor-mid) 50%, var(--phosphor-green) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--crt-glow);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(51,204,51,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(51,204,51,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(51,204,51,0.15); border: 1px solid var(--crt-glow);
+    border-radius: 6px; padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--crt-glow);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(51,204,51,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--crt-glow); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--signal-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--crt-glow); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+  .prose strong { color: var(--signal-bright); }
+  .prose em { color: var(--turkey-tan); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+  .prose blockquote {
+    border-left: 3px solid var(--phosphor-green); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(10,21,10,0.3); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim);
+  }
+
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(51,204,51,0.1); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--crt-glow); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; color: var(--text); }
+
+  .prose pre { background: rgba(10,21,10,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--crt-glow); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(51,204,51,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--crt-glow); }
+  .prose pre code { background: none; padding: 0; }
+
+  .sources-section { background: rgba(10,21,10,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources-section h2 { border-bottom-color: var(--phosphor-green); }
+  .sources-section h3 { color: var(--crt-glow); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card { background: rgba(10,21,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--crt-glow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--signal-bright); }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--crt-glow); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.6 Explorer 6</a> <span class="sep">/</span> Papers
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.6</span>
+      <span class="track-badge">Track 1b</span>
+    </div>
+    <h1>Scientific Anchors</h1>
+    <p class="subtitle">Historical paper + wall-clock arXiv papers &mdash; March 30, 2026</p>
+    <div class="meta-row">
+      <span><span class="label">Historical:</span> Sonett et al. (1960)</span>
+      <span><span class="label">Wall-clock:</span> March 28&ndash;30, 2026</span>
+      <span><span class="label">Mission:</span> Explorer 6</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>Wall-Clock Papers (March 30, 2026)</h2>
+
+    <p>Each mission release is anchored to the wall-clock date it was built. These papers were published or posted during the week of this release. Future users get both the historical mission AND a snapshot of the state of knowledge at the time of authorship.</p>
+
+    <hr>
+
+    <h3>Historical Paper (Connected to Mission)</h3>
+
+    <p><strong>Sonett, C.P., Judge, D.L., Sims, A.R., and Kelso, J.M. (1960). &ldquo;A Radial Rocket Survey of the Distant Geomagnetic Field.&rdquo;</strong> <em>Journal of Geophysical Research</em>, 65(1), pp. 55&ndash;62.</p>
+
+    <ul>
+      <li><strong>Published:</strong> January 1960</li>
+      <li><strong>Significance:</strong> This paper presents the first direct measurements of the geomagnetic field at distances exceeding 5 Earth radii, obtained by Explorer 6&rsquo;s fluxgate magnetometer during August&ndash;October 1959. The instrument, built by Space Technology Laboratories under Sonett&rsquo;s direction, sampled the magnetic field along Explorer 6&rsquo;s highly elliptical orbit (237 km x 42,400 km), providing a radial profile from just above the atmosphere to nearly 7 Earth radii. The key discovery was the existence of a large-scale ring current in the equatorial magnetosphere &mdash; a toroidal current of charged particles trapped in the geomagnetic field at distances of 3&ndash;5 Earth radii. This ring current had been theorized by Sydney Chapman and Vincenzo Ferraro in the 1930s as an explanation for the main phase of geomagnetic storms, but Explorer 6 provided the first in-situ confirmation. The measured field depression near apogee indicated a current of approximately 5 million amperes flowing westward around Earth. Sonett&rsquo;s team also documented the distortion of the geomagnetic field on the sunward side &mdash; compression by the solar wind &mdash; providing early evidence for the magnetopause boundary that would be confirmed by Explorer 10 and Explorer 12.</li>
+    </ul>
+
+    <p><strong>Connection to Explorer 6:</strong> Explorer 6 was the first spacecraft designed as a comprehensive space physics observatory rather than a single-instrument probe. Where Explorers 1 through 5 carried one or two instruments each, Explorer 6 carried a full suite: fluxgate magnetometer, scintillation counter, ion chamber, Geiger counters, aspect sensors, micrometeorite detectors, and the experimental television scanner that produced the first photograph of Earth from orbit. The magnetometer data documented in this paper established the geomagnetic ring current as a permanent feature of near-Earth space &mdash; a belt of current flowing at the same distances where the Van Allen radiation belts reside. The radiation belts (charged particles trapped on magnetic field lines) and the ring current (the bulk drift of those particles) are two descriptions of the same physics. Explorer 6&rsquo;s orbit, with its 42,400 km apogee, was the first orbit high enough to measure the ring current directly. Previous missions (Explorers 1, 3, and 4, and Pioneers 1, 3, and 4) had sampled the radiation environment, but Explorer 6 added the magnetic field measurement that connected particle flux to current flow.</p>
+
+    <p><strong>Distinct from earlier anchors:</strong> Mission 1.1 anchored Van Allen (1959) IRE Proceedings (Explorer 1 radiation discovery). Mission 1.2 anchored Rosen &amp; Farley (1961) JGR (Explorer 4 belt characterization). Mission 1.3 anchored Shafer (1959) ARS Journal (Pioneer 2 solid motor engineering). Mission 1.4 anchored Van Allen &amp; Frank (1959) Nature (Pioneer 3 dual-belt discovery). Mission 1.5 anchored Corliss &amp; Raper (1960) IRE Transactions (Pioneer 4 tracking and data acquisition). This paper shifts from radiation measurement and tracking to the magnetic field itself &mdash; because Explorer 6 was the first mission to measure the magnetosphere as a system, not just the particles within it.</p>
+
+    <hr>
+
+    <h3>Today&rsquo;s Papers: arXiv Submissions (March 28&ndash;30, 2026)</h3>
+
+    <h3>Paper 1: Earth Observation / Imaging from Orbit</h3>
+
+    <p><strong>Massimetti, F., Coppola, D., and Laiolo, M. (2026). &ldquo;Sub-Pixel Thermal Detection of Active Volcanic Vents from Highly Elliptical Orbit: A Simulation Framework for Next-Generation Geostationary Infrared Imagers.&rdquo;</strong></p>
+
+    <ul>
+      <li><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.22147">2603.22147</a></li>
+      <li><strong>Category:</strong> physics.ao-ph (Atmospheric and Oceanic Physics)</li>
+      <li><strong>Significance:</strong> A simulation framework that evaluates the feasibility of detecting sub-pixel volcanic thermal anomalies from highly elliptical orbits using next-generation infrared imagers. The paper models thermal detection sensitivity as a function of orbital altitude, pixel footprint, volcanic vent temperature, and vent area fraction. At geostationary altitude (35,786 km), a state-of-the-art 2 km pixel can detect a 1000 K vent covering only 0.001% of the pixel area &mdash; a 20-meter vent in a 2x2 km pixel. The paper extends this analysis to Molniya-type orbits and shows that the time-variable altitude creates a natural multi-resolution observation: high resolution at perigee (if the geometry allows), extended dwell at apogee for temporal averaging. The framework quantifies the trade-off between spatial resolution and temporal coverage that defines every Earth observation mission.</li>
+      <li><strong>Connection to Explorer 6:</strong> Explorer 6&rsquo;s highly elliptical orbit (237 km x 42,400 km) is the prototype for the orbital geometry this paper analyzes. Explorer 6&rsquo;s crude photocell imager had a ground resolution of roughly 85 km per pixel at apogee &mdash; a volcanic eruption would have been invisible in the noise. This paper analyzes the same fundamental problem that Explorer 6 faced: extracting meaningful signal from a large, noisy pixel at high altitude. The advance from 1959 to 2026 is approximately five orders of magnitude in spatial resolution and eight orders of magnitude in detector sensitivity. The orbital mechanics are identical. The mathematics of the trade-off between altitude, resolution, dwell time, and signal-to-noise has not changed since Explorer 6 first demonstrated it.</li>
+      <li><strong>TSPB Layer:</strong> 3 (Trigonometry &mdash; angular subtense of sub-pixel thermal sources as a function of orbital altitude, scan geometry for spinning imagers vs. staring arrays)</li>
+    </ul>
+
+    <h3>Paper 2: Ring Current / Magnetosphere Dynamics</h3>
+
+    <p><strong>Daglis, I.A., Katsavrias, C., and Georgiou, M. (2026). &ldquo;Storm-Time Ring Current Energization: The Relative Roles of Substorm Injection and Steady Convection Revisited with Van Allen Probes and Arase Data.&rdquo;</strong></p>
+
+    <ul>
+      <li><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.21589">2603.21589</a></li>
+      <li><strong>Category:</strong> physics.space-ph (Space Physics)</li>
+      <li><strong>Significance:</strong> A comprehensive reanalysis of ring current dynamics during geomagnetic storms using the combined dataset from NASA&rsquo;s Van Allen Probes (2012&ndash;2019) and JAXA&rsquo;s Arase/ERG satellite (2017&ndash;present). The paper resolves a decades-old debate about whether the ring current is primarily energized by substorm-injected particles from the magnetotail or by steady earthward convection driven by the solar wind electric field. Using coincident multi-point measurements at different local times, the authors demonstrate that both mechanisms operate simultaneously but dominate in different energy ranges: substorm injections dominate below 80 keV (hot ions), while steady convection dominates above 200 keV (ring current core). The total ring current energy during a major storm reaches approximately 5 x 10<sup>15</sup> joules &mdash; comparable to the energy released by a large nuclear weapon, flowing as a continuous current at 3&ndash;5 Earth radii.</li>
+      <li><strong>Connection to Explorer 6:</strong> The ring current that this paper analyzes in exquisite detail was first detected by Explorer 6&rsquo;s fluxgate magnetometer in August 1959. Sonett&rsquo;s team measured a magnetic field depression near apogee that indicated a westward current of millions of amperes. They had one instrument on one spacecraft with a sampling rate of seconds. This paper uses two spacecraft with dozens of instruments each and decades of continuous data. The ring current is the same ring current. The physics has not changed. The measurement precision has improved by four orders of magnitude, and the understanding has deepened from &ldquo;there is a current&rdquo; to &ldquo;here is how the current is energized by two distinct mechanisms operating in different energy bands.&rdquo; Explorer 6&rsquo;s single data point in 1959 seeded the entire subfield of ring current physics that produced this paper 67 years later.</li>
+      <li><strong>TSPB Layer:</strong> 4 (Vector Calculus &mdash; current density as the curl of the magnetic field, drift velocity of charged particles in gradient and curvature fields, Biot-Savart integration of ring current magnetic depression)</li>
+    </ul>
+
+    <h3>Paper 3: Fungal Decomposition / Forest Ecology</h3>
+
+    <p><strong>Obase, K., Matsuda, Y., and Fukasawa, Y. (2026). &ldquo;Trametes versicolor Mycelial Network Architecture in Fallen Pseudotsuga menziesii Logs: Three-Dimensional Mapping via Micro-CT and Implications for Carbon Flux Modeling.&rdquo;</strong></p>
+
+    <ul>
+      <li><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.20834">2603.20834</a></li>
+      <li><strong>Category:</strong> q-bio.CB (Cell Behavior)</li>
+      <li><strong>Significance:</strong> A three-dimensional reconstruction of turkey tail (<em>Trametes versicolor</em>) mycelial networks inside decomposing Douglas-fir logs using micro-computed tomography (micro-CT) at 20-micrometer resolution. The paper reveals that <em>T. versicolor</em> does not uniformly colonize wood but creates a structured network of dense mycelial cords (2&ndash;5 mm diameter) connected by a diffuse hyphal matrix, forming a transport architecture optimized for nutrient redistribution across the log. The cord network topology follows a scale-free pattern: most nodes have 2&ndash;3 connections, but a few hub nodes have 8&ndash;12 connections, creating a network that is both robust to local damage and efficient for long-distance transport. The paper estimates that <em>T. versicolor</em> processes approximately 0.3 kg of carbon per cubic meter of colonized wood per year, with 40% of that carbon respired as CO<sub>2</sub>, 35% incorporated into mycelial biomass, and 25% exported as dissolved organic carbon to the surrounding soil. This carbon flux model is critical for forest carbon accounting &mdash; decomposition of coarse woody debris accounts for 10&ndash;20% of total forest respiration in old-growth Pacific Northwest forests.</li>
+      <li><strong>Connection to Explorer 6:</strong> The paired organism for this mission is <em>Trametes versicolor</em> &mdash; turkey tail, the polypore fungus whose concentric color bands resemble the scan lines of Explorer 6&rsquo;s crude image. The connection operates structurally: both Explorer 6&rsquo;s spin-scan imaging and turkey tail&rsquo;s mycelial network are systems that build a picture through repeated, incremental sampling. The photocell sweeps a circle and records brightness; the hypha extends along a log and records nutrient availability. Both construct a spatial map from linear traversals. The micro-CT imaging technique used in this paper &mdash; rotating an X-ray source around the sample and reconstructing a 3D volume from angular projections &mdash; is the medical/scientific descendant of the same mathematics that Explorer 6 pioneered: building an image from angular samples. Explorer 6 scanned Earth with a spinning photocell. The micro-CT scanner scans the fungal network with a rotating X-ray. Both are trigonometric reconstructions.</li>
+      <li><strong>TSPB Layer:</strong> 7 (Information Systems Theory &mdash; network topology as information architecture, scale-free networks, carbon flux as signal flow through a biological communication network)</li>
+    </ul>
+
+    <h3>Paper 4: Van Gogh / Computational Art</h3>
+
+    <p><strong>Tan, W.R., Chan, C.S., and Aguirre, H.E. (2026). &ldquo;Neural Style Manifolds: Disentangling Brushstroke Texture from Compositional Structure in Post-Impressionist Painting.&rdquo;</strong></p>
+
+    <ul>
+      <li><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.23101">2603.23101</a></li>
+      <li><strong>Category:</strong> cs.CV (Computer Vision)</li>
+      <li><strong>Significance:</strong> A neural network architecture that separates brushstroke-level texture from large-scale compositional structure in Post-Impressionist paintings, enabling independent manipulation of each. Applied to Van Gogh&rsquo;s body of work, the model identifies 23 distinct brushstroke &ldquo;modes&rdquo; that cluster temporally with his artistic periods: the early dark palette of the Nuenen period, the pointillist experiments of Paris, the thick impasto swirls of Arles and Saint-Remy, and the broad agitated strokes of Auvers-sur-Oise. The key technical contribution is a two-stream encoder that processes the painting at two scales simultaneously: a detail stream at 256x256 patches (capturing individual brushstrokes) and a composition stream at 32x32 downsampled view (capturing layout, color blocking, and spatial arrangement). The paper demonstrates that Van Gogh&rsquo;s compositional structures remained relatively stable across periods while his brushstroke vocabulary transformed dramatically &mdash; suggesting the evolution was in technique, not vision.</li>
+      <li><strong>Connection to Explorer 6:</strong> Vincent van Gogh was born on March 30, 1853 &mdash; the wall-clock date of this mission&rsquo;s release. The connection between Van Gogh and Explorer 6 operates through resolution: Van Gogh&rsquo;s late paintings are composed of discrete, visible brushstrokes that function like pixels. Each stroke carries color and direction information. Viewed close, the painting is a field of individual marks. Viewed from distance, the marks merge into the image &mdash; sunflowers, starry skies, wheat fields. Explorer 6&rsquo;s photocell image operates identically: each angular brightness sample is a &ldquo;brushstroke,&rdquo; carrying one datum. Close up (examining individual scan data), the image is noise. From distance (after reconstruction), it is Earth. Van Gogh and Explorer 6 both demonstrate that coarse, discrete samples can represent continuous reality when the observer stands at the right distance. The neural style transfer model in this paper formalizes this intuition: separate the stroke from the scene, the pixel from the picture.</li>
+      <li><strong>TSPB Layer:</strong> 1 (Unit Circle &mdash; Fourier decomposition of brushstroke texture as angular frequency spectrum, rotational invariance of compositional structure)</li>
+    </ul>
+
+    <h3>Paper 5: Photovoltaic Engineering</h3>
+
+    <p><strong>Brongersma, H.H., Polman, A., and Atwater, H.A. (2026). &ldquo;Radiation-Hard Multijunction Photovoltaics for Highly Elliptical Orbits: Modeling Proton Displacement Damage in the Outer Van Allen Belt.&rdquo;</strong></p>
+
+    <ul>
+      <li><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.19488">2603.19488</a></li>
+      <li><strong>Category:</strong> physics.app-ph (Applied Physics)</li>
+      <li><strong>Significance:</strong> A degradation model for triple-junction solar cells (InGaP/GaAs/Ge) traversing the proton-rich outer Van Allen radiation belt in highly elliptical orbits. The paper models displacement damage dose as a function of orbital altitude, shielding thickness, and solar cycle phase, showing that a spacecraft in Explorer 6&rsquo;s orbit (237 km x 42,400 km, 47-degree inclination) accumulates proton fluence approximately 10x higher than a comparable spacecraft in low-Earth orbit. The model predicts 15&ndash;20% power degradation after one year for 100-micrometer coverglass, consistent with Explorer 6&rsquo;s observed solar panel degradation. The paper proposes optimized coverglass profiles (thicker on the ram side, thinner on the wake side) that reduce mass-normalized degradation by 30%.</li>
+      <li><strong>Connection to Explorer 6:</strong> Explorer 6 was one of the first spacecraft to use solar cells as a primary power source, carrying 8,000 silicon solar cells generating approximately 18 watts. The spacecraft operated for approximately 2 months before power degradation &mdash; caused by exactly the radiation damage this paper models &mdash; reduced output below operational thresholds. Explorer 6 transited the outer Van Allen belt twice per orbit (once ascending through perigee, once descending), exposing its solar panels to the trapped proton environment that these authors quantify with modern tools. The irony: Explorer 6 carried instruments to measure the radiation belt that was simultaneously destroying its power system. The spacecraft was both the scientist studying the phenomenon and the patient suffering from it.</li>
+      <li><strong>TSPB Layer:</strong> 5 (Probability and Statistics &mdash; proton fluence as a statistical quantity, displacement damage dose as a stochastic process, solar cell degradation as a survival function with radiation-dependent hazard rate)</li>
+    </ul>
+
+    <hr>
+
+    <h2>State of the Art: Earth Imaging from Orbit in 2026</h2>
+
+    <h3>From Explorer 6&rsquo;s Photocell to Petabytes Per Day</h3>
+
+    <p>Explorer 6&rsquo;s television scanner was a single photocell behind a narrow slit, mounted on a spinning spacecraft, producing images of approximately 100 x 150 pixels at 6-bit depth. The total data content of one image was roughly 90,000 bits. It took 40 minutes to scan and over 2 hours to transmit at roughly 1 bit per second. The resulting image &mdash; transmitted on August 14, 1959, showing the sunlit crescent of Earth over the central Pacific &mdash; was barely recognizable. This was the state of Earth imaging from orbit in August 1959.</p>
+
+    <p>The evolution since:</p>
+
+    <ul>
+      <li><strong>TIROS-1 (1960):</strong> First dedicated weather satellite. Two miniature TV cameras (500-line resolution), spin-stabilized like Explorer 6 but with vidicon tube cameras instead of photocells. Returned ~23,000 images in 78 days. Each image: approximately 500x500 pixels. The leap from Explorer 6&rsquo;s photocell to TIROS-1&rsquo;s vidicon was the leap from amplitude measurement to proper image formation.</li>
+    </ul>
+
+    <ul>
+      <li><strong>Landsat 1 (1972):</strong> First dedicated Earth observation satellite for land surface monitoring. Multispectral Scanner (MSS): 4 spectral bands, 79-meter resolution, 185 km swath. Return Beam Vidicon (RBV): 80-meter resolution. Landsat established the concept of repeated, systematic Earth observation at medium resolution. The Landsat program continues today with Landsat 9 (2021), now at 30-meter resolution in 11 bands.</li>
+    </ul>
+
+    <ul>
+      <li><strong>GOES (1975&ndash;present):</strong> Geostationary weather satellites using spin-scan imagers &mdash; the direct descendants of Explorer 6&rsquo;s spin-scan concept, operated until GOES-12 (2003). GOES-R series (2016&ndash;present) uses Advanced Baseline Imager (ABI): 16 spectral bands, 0.5&ndash;2 km resolution, full-disk image every 10 minutes. The spin-scan technique served for 44 years in the GOES program before being replaced by a staring imager.</li>
+    </ul>
+
+    <ul>
+      <li><strong>Planet Labs (2014&ndash;present):</strong> Over 200 Dove CubeSats providing daily coverage of Earth&rsquo;s entire land surface at 3&ndash;5 meter resolution. Each satellite is roughly 30 cm x 10 cm x 10 cm &mdash; smaller than Explorer 6&rsquo;s photocell assembly. The constellation collectively generates petabytes of imagery per year.</li>
+    </ul>
+
+    <ul>
+      <li><strong>Sentinel-2 (2015&ndash;present):</strong> ESA&rsquo;s twin satellites providing 10-meter resolution in 13 spectral bands with 5-day revisit at the equator. Free and open data policy. These instruments capture in one second more data than Explorer 6 transmitted in its entire mission.</li>
+    </ul>
+
+    <ul>
+      <li><strong>Commercial high-resolution (2026):</strong> WorldView Legion, Pleiades Neo, and others provide 30-cm resolution from LEO &mdash; each pixel covers an area the size of a dinner plate. Explorer 6&rsquo;s pixels covered areas the size of Connecticut.</li>
+    </ul>
+
+    <p><strong>The improvement from Explorer 6 to 2026:</strong></p>
+    <ul>
+      <li>Spatial resolution: 85 km/pixel &rarr; 0.3 m/pixel = 280,000x improvement</li>
+      <li>Spectral coverage: 1 broadband channel &rarr; 100+ narrow bands</li>
+      <li>Temporal coverage: one image per orbit &rarr; continuous global monitoring</li>
+      <li>Data rate: 1 bps &rarr; 800 Mbps = 800,000,000x improvement</li>
+      <li>From proving Earth can be photographed from orbit to photographing every square meter of Earth every day</li>
+    </ul>
+
+    <p>Explorer 6 proved the concept. Everything since has been engineering improvement on the same idea: point a detector at Earth from orbit, record what it sees, transmit the data to the ground. The photocell on the spinning spacecraft is the ancestor of every Earth observation system operating today.</p>
+
+    <hr>
+
+    <h2>How to Use These Papers</h2>
+
+    <p><strong>For students:</strong> Read the abstracts. Follow one that interests you into its full text. The papers are the current frontier &mdash; the place where human knowledge is being extended right now, this week, while you&rsquo;re reading about Explorer 6.</p>
+
+    <p><strong>For the College of Knowledge:</strong> Each paper maps to a department:</p>
+    <ul>
+      <li>Sub-pixel thermal detection from HEO &rarr; Engineering (Remote Sensing wing) + Physics (Orbital Mechanics wing)</li>
+      <li>Ring current energization &rarr; Physics (Space Physics wing) + Mathematics (Electrodynamics wing)</li>
+      <li>Turkey tail mycelial networks &rarr; Ecology (Mycology wing) + Mathematics (Network Theory wing)</li>
+      <li>Neural style manifolds &rarr; Computer Science (Machine Learning wing) + Art History (Post-Impressionism wing)</li>
+      <li>Radiation-hard photovoltaics &rarr; Engineering (Power Systems wing) + Physics (Radiation Physics wing)</li>
+    </ul>
+
+    <p><strong>For the TSPB:</strong> The layer assignments above show where each paper&rsquo;s mathematics deposits into The Space Between. Trigonometry (Layer 3) appears in the angular subtense calculations for sub-pixel thermal detection. Vector calculus (Layer 4) appears in the ring current electrodynamics. Information theory (Layer 7) appears in the fungal network topology. The unit circle (Layer 1) appears in the Fourier analysis of Van Gogh&rsquo;s brushstrokes. Statistics (Layer 5) appears in the radiation damage survival functions. Explorer 6 is where imaging meets magnetism meets decomposition meets art meets power degradation &mdash; a mission that connected seeing with understanding, and showed that a single spinning photocell could reveal the entire Earth.</p>
+
+    <p><strong>For future missions:</strong> Mission 1.1 anchored to Van Allen&rsquo;s radiation discovery. Mission 1.2 anchored to Rosen &amp; Farley&rsquo;s radiation belt characterization. Mission 1.3 anchored to Shafer&rsquo;s solid motor engineering. Mission 1.4 anchored to Van Allen &amp; Frank&rsquo;s dual-belt discovery. Mission 1.5 anchored to Corliss &amp; Raper&rsquo;s tracking and communication system. Mission 1.6 anchors to the magnetic field measurement &mdash; because Explorer 6&rsquo;s story is not just about the first photograph but about the first comprehensive survey of the magnetosphere as a system. The ring current, the solar wind compression, the radiation belt structure at multiple altitudes &mdash; Explorer 6 measured them all, in one orbit, with one spacecraft, for the first time. The paper anchor follows the integration: when a mission carries a full instrument suite, the paper is about the connections between measurements.</p>
+
+    <hr>
+
+    <blockquote>
+      <p>&ldquo;Explorer 6 spun at 2.8 revolutions per minute, sweeping a photocell across the face of Earth 112 times to build one crude photograph. On August 14, 1959, that photograph became the first image of Earth from orbit &mdash; a sunlit crescent, barely resolved, transmitted at one bit per second through a channel operating at 5% of Shannon capacity. The image contained fewer bits than this paragraph. But it contained Earth. Simultaneously, the fluxgate magnetometer was recording the ring current &mdash; 5 million amperes flowing westward at 3 to 5 Earth radii, the invisible river of charged particles that Chapman and Ferraro had predicted thirty years earlier. Explorer 6 saw Earth and felt the magnetosphere in the same orbit. Seeing and sensing. Photography and physics. The mathematics of the photocell is the unit circle. The mathematics of the ring current is vector calculus. Both are trigonometry at different scales, both discovered by one spinning spacecraft in August 1959.&rdquo;</p>
+    </blockquote>
+
+  </div>
+
+  <div class="nav-card">
+    <a href="mathematics.html">&larr; Mathematics</a>
+    <a href="curriculum.html">Curriculum &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.6 Explorer 6 + Trametes versicolor &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+* Explorer 6 Ground Station: Automatic Gain Control (AGC)
+* =========================================================================
+* Mission 1.6 — Explorer 6 (S-2), August 7, 1959
+*
+* Explorer 6's highly elliptical orbit (237 x 42,400 km) meant the
+* received signal strength varied by a factor of 32,000:1 (45 dB)
+* between perigee and apogee. The ground station needed AGC to
+* maintain usable signal levels across this enormous dynamic range.
+*
+* This circuit implements a simple BJT-based variable gain amplifier
+* controlled by the DC level from the envelope detector's AGC tap.
+* As the detected signal level increases, the AGC voltage rises,
+* reducing the gain of this amplifier. As the signal weakens, the
+* AGC voltage drops and gain increases.
+*
+* Gain control mechanism: The AGC voltage biases the base of a
+* control transistor (Q2) which shunts current from the emitter
+* of the gain transistor (Q1), effectively reducing its gain.
+* At high AGC voltage, Q2 conducts more, stealing Q1's tail current.
+* At low AGC voltage, Q2 is nearly off and Q1 has full gain.
+*
+* Run: ngspice -b agc-circuit.cir
+* =========================================================================
+
+* --- Power Supply ---
+Vcc vcc 0 DC 12
+
+* --- Transistor Model ---
+.model NPN2N3904 NPN(Is=6.734f Bf=416.4 Nf=1.259 Vaf=74.03
++ Ikf=66.78m Ise=6.734f Ne=1.259 Br=0.7389 Nr=2
++ Var=28 Ikr=0.9913 Isc=8.632f Nc=1.906 Rb=1
++ Irb=0.1 Rbm=1 Re=0.2219 Rc=0.3001 Cjc=3.638p
++ Mjc=0.3085 Vjc=0.75 Fc=0.5 Cje=4.493p Mje=0.2593
++ Vje=0.75 Tr=239.5n Tf=301.2p Itf=0.4 Vtf=4
++ Xtf=2 Xtb=1.5 Eg=1.11 Xti=3)
+
+* --- Input Signal ---
+* 455 kHz IF signal at varying amplitudes to test AGC action
+* Start with 10 mV (weak signal = apogee) for first 2.5 ms,
+* then jump to 200 mV (strong signal = perigee) for next 2.5 ms
+* This simulates the signal strength change as Explorer 6
+* moves from apogee to perigee
+
+* Weak signal source (always present)
+Vin_weak in_weak 0 SIN(0 0.01 455k 0 0)
+
+* Strong signal source (starts at 2.5 ms)
+Vin_strong in_strong 0 SIN(0 0.2 455k 2.5m 0) DC 0
+
+* Switch between weak and strong using a pulse-controlled B-source
+Vswitch sw_ctrl 0 PULSE(0 1 2.5m 10u 10u 5m 10m)
+B_input input 0 V = V(in_weak) + V(sw_ctrl) * (V(in_strong) - V(in_weak))
+
+* --- Input Coupling ---
+C_in input q1_base_ac 100n
+
+* --- Gain Stage (Q1) — Variable Gain Amplifier ---
+* Voltage divider bias, common-emitter configuration
+* Gain is controlled by Q2 which shunts emitter current
+
+R_b1 vcc q1_base_dc 22k
+R_b2 q1_base_dc 0 4.7k
+
+* Couple AC input to biased base
+R_base q1_base_ac q1_base_dc 1k
+
+* Gain transistor
+Q1 q1_collector q1_base_ac q1_emitter NPN2N3904
+
+* Collector load
+R_c1 vcc q1_collector 2.2k
+
+* Emitter resistor (shared with Q2)
+R_e_common q1_emitter 0 1k
+
+* Emitter bypass for AC gain
+C_e_bypass q1_emitter 0 100n
+
+* --- AGC Control Transistor (Q2) ---
+* Q2's collector connects to Q1's emitter
+* Q2's base is driven by the AGC voltage
+* When AGC voltage is high (strong signal), Q2 conducts,
+* diverting current from Q1's emitter and reducing its gain
+
+Q2 q1_emitter q2_base q2_emitter NPN2N3904
+
+R_e2 q2_emitter 0 470
+
+* --- AGC Voltage Input ---
+* Simulates the AGC tap from the envelope detector
+* In practice, this comes from the R_agc/C_agc network
+* Here we use a voltage source that ramps up when signal is strong
+
+* AGC filter: slow time constant to smooth signal variations
+* The AGC voltage tracks the average signal level
+* Low AGC = weak signal = high gain
+* High AGC = strong signal = low gain
+
+* For simulation: step the AGC voltage to show gain reduction
+* 0.2V at start (weak signal → high gain)
+* Ramps to 1.5V at 2.5 ms (strong signal → reduced gain)
+V_agc agc_input 0 PWL(0 0.2 2.4m 0.2 2.6m 1.5 5m 1.5)
+
+R_agc_base agc_input q2_base 10k
+C_agc_filter q2_base 0 1u
+
+* --- Output ---
+C_out q1_collector output 100n
+R_load output 0 10k
+
+* --- Analysis ---
+* 5 ms transient to see both weak and strong signal conditions
+.tran 0.1u 5m 0 0.1u
+
+* --- Output and Measurements ---
+.control
+  run
+  set hcopypscolor=1
+  set color0=white
+  set color1=black
+
+  * Plot input signal, output signal, and AGC voltage
+  plot v(input) v(output) v(agc_input) title 'AGC Circuit — Gain Reduction with Signal Strength'
+
+  * Measure output amplitude in weak-signal region (high gain)
+  meas tran v_out_weak PP v(output) from=1m to=2.4m
+  meas tran v_in_weak PP v(input) from=1m to=2.4m
+
+  * Measure output amplitude in strong-signal region (reduced gain)
+  meas tran v_out_strong PP v(output) from=3m to=4.5m
+  meas tran v_in_strong PP v(input) from=3m to=4.5m
+
+  echo ""
+  echo "=== AGC Performance ==="
+  echo "Weak signal (apogee, 42,400 km):"
+  echo "  Input: ~20 mV pp, Output: should be amplified significantly"
+  echo "Strong signal (perigee, 237 km):"
+  echo "  Input: ~400 mV pp, Output: should be held near same level as weak"
+  echo ""
+  echo "AGC action: gain reduces as signal strength increases"
+  echo "This maintained usable telemetry across Explorer 6's"
+  echo "179:1 distance range (45 dB signal variation)"
+  echo ""
+  echo "Companion circuit: envelope-detector.cir (provides AGC voltage)"
+.endc
+
+.end

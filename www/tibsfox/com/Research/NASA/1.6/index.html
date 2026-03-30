@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.6 — Explorer 6 + Turkey Tail | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --phosphor-deep: #0A150A;
+    --phosphor-mid: #162816;
+    --phosphor-green: #2D6B2D;
+    --crt-glow: #33CC33;
+    --crt-dim: #1A5A1A;
+    --scan-dark: #0D120D;
+    --turkey-brown: #6B4226;
+    --turkey-tan: #B8935A;
+    --signal-gold: #D4A830;
+    --signal-bright: #E8D060;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--scan-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(51,204,51,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(45,107,45,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(51,204,51,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(107,66,38,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(45,107,45,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(212,168,48,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px; margin: 0 auto; padding: 1rem 2rem;
+    font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  .breadcrumb a { color: var(--crt-glow); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--signal-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--scan-dark) 0%, var(--phosphor-deep) 25%, var(--phosphor-mid) 50%, var(--phosphor-green) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--crt-glow);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(51,204,51,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(51,204,51,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(51,204,51,0.15); border: 1px solid var(--crt-glow);
+    border-radius: 6px; padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--crt-glow);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(51,204,51,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--crt-glow); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--signal-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--crt-glow); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+  .prose strong { color: var(--signal-bright); }
+  .prose em { color: var(--turkey-tan); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+  .prose blockquote {
+    border-left: 3px solid var(--phosphor-green); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(10,21,10,0.3); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim);
+  }
+
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(51,204,51,0.1); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--crt-glow); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; color: var(--text); }
+
+  .prose pre { background: rgba(10,21,10,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--crt-glow); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(51,204,51,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--crt-glow); }
+  .prose pre code { background: none; padding: 0; }
+
+  .sources-section { background: rgba(10,21,10,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources-section h2 { border-bottom-color: var(--phosphor-green); }
+  .sources-section h3 { color: var(--crt-glow); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card { background: rgba(10,21,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--crt-glow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--signal-bright); }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--crt-glow); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+
+  /* Card grid for landing page */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .card { background: rgba(10,21,10,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--crt-glow); }
+  .card h3 { font-size: 1rem; color: var(--crt-glow); margin-bottom: 0.5rem; }
+  .card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .card a { color: var(--crt-glow); text-decoration: none; }
+  .card a:hover { color: var(--signal-bright); }
+
+  .section-title { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--signal-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .section-title:first-of-type { margin-top: 0; }
+
+  .artifact-list { list-style: none; padding: 0; margin: 1rem 0; }
+  .artifact-list li { font-size: 0.9rem; line-height: 1.7; padding: 0.4rem 0; border-bottom: 1px solid rgba(45,90,45,0.3); color: var(--text); }
+  .artifact-list li:last-child { border-bottom: none; }
+  .artifact-label { color: var(--crt-glow); font-weight: 500; font-family: 'DM Mono', monospace; font-size: 0.85rem; }
+
+  .dedication-section { background: rgba(107,66,38,0.1); border: 1px solid var(--turkey-brown); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .dedication-section h2 { color: var(--signal-gold); border-bottom-color: var(--turkey-brown); }
+  .dedication-section p { font-size: 0.95rem; line-height: 1.8; color: var(--text); }
+
+  .summary-text { font-size: 0.95rem; line-height: 1.8; color: var(--text); max-width: 900px; margin-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a> <span class="sep">/</span> v1.6 Explorer 6
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.6</span>
+      <span class="track-badge">Mission Hub</span>
+    </div>
+    <h1>v1.6 &mdash; Explorer 6 + <em>Trametes versicolor</em></h1>
+    <p class="subtitle">The First Photograph of Earth from Orbit</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> August 7, 1959</span>
+      <span><span class="label">Program:</span> Explorer</span>
+      <span><span class="label">Organism:</span> Turkey tail fungus</span>
+      <span><span class="label">Bird:</span> Pacific Slope Flycatcher</span>
+      <span><span class="label">Dedication:</span> Vincent van Gogh</span>
+      <span><span class="label">Status:</span> Complete</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">Mission Summary</h2>
+
+  <p class="summary-text">Explorer 6 was launched on August 7, 1959, into a highly elliptical orbit (237 km x 42,400 km) carrying the first comprehensive suite of space physics instruments. On August 14, 1959, its single photocell &mdash; spinning at 2.8 rpm behind a narrow slit &mdash; produced the first photograph of Earth from orbit: a crude, 100-line image of a sunlit crescent over the central Pacific, transmitted at one bit per second. Simultaneously, its fluxgate magnetometer recorded the ring current &mdash; 5 million amperes flowing westward at 3&ndash;5 Earth radii &mdash; confirming Chapman and Ferraro&rsquo;s 1930s prediction. Explorer 6 was both camera and magnetometer, both photographer and physicist, the first spacecraft to see Earth and feel the magnetosphere in the same orbit. The paired organism, <em>Trametes versicolor</em> (turkey tail), decomposes dead wood through the same incremental sampling that Explorer 6 used to decompose Earth&rsquo;s image into angular brightness data.</p>
+
+  <h2 class="section-title">Research Pages</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <a href="research.html">
+        <h3>Deep Research</h3>
+        <p>Track 1a &mdash; The full story of Explorer 6: mission design, instrument suite, the first photograph, magnetometer discoveries, and the spacecraft&rsquo;s legacy in Earth observation.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="organism.html">
+        <h3>Organism Pairing</h3>
+        <p>Track 2 &mdash; <em>Trametes versicolor</em> (turkey tail): the decomposer that closes the carbon cycle. Mycelial networks as spatial mapping systems, concentric bands as scan lines.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="mathematics.html">
+        <h3>Mathematics</h3>
+        <p>Track 3 &mdash; TSPB mathematics in McNeese-Hoag format. Spin-scan trigonometry, polar-to-Cartesian reconstruction, Radon transforms, Kepler&rsquo;s second law.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="papers.html">
+        <h3>Scientific Anchors</h3>
+        <p>Track 1b &mdash; Sonett et al. (1960) ring current paper + 5 wall-clock arXiv papers: volcanic imaging, magnetosphere dynamics, fungal networks, Van Gogh neural style, radiation-hard photovoltaics.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="curriculum.html">
+        <h3>College of Knowledge</h3>
+        <p>Track 4 &mdash; Department deposits across Electronics, Photography, Earth Science, Mycology, Mathematics, and Communications. TRY sessions, DIY projects, Fox Companies pathways.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="simulation.html">
+        <h3>Simulation &amp; Creative Arts</h3>
+        <p>Track 5 &mdash; What to build: Python simulators, web-based CRT display, orbit viewer, GMAT recreation, ML image reconstruction, game theory, generative art.</p>
+      </a>
+    </div>
+  </div>
+
+  <h2 class="section-title">Artifacts</h2>
+
+  <ul class="artifact-list">
+    <li><span class="artifact-label">Audio:</span> 2 FAUST synths &mdash; <code>explorer6-scanline-synth.dsp</code> (scan-line frequency sweep) and <code>flycatcher-pewee.dsp</code> (Pacific Slope Flycatcher call)</li>
+    <li><span class="artifact-label">Circuits:</span> 2 build guides &mdash; <code>led-earth-image.md</code> (LED scan-line display) and <code>radio-detector.md</code> (AM envelope detector)</li>
+    <li><span class="artifact-label">Screensaver:</span> GLSL shader &mdash; <code>explorer6-screensaver.frag</code> (4 modes: scan-line reconstruction, orbit trace, turkey tail growth, Van Gogh swirl)</li>
+    <li><span class="artifact-label">Simulations:</span> Python (2): <code>scanline-camera.py</code>, <code>orbit-radiation.py</code> | SPICE (2): <code>agc-circuit.cir</code>, <code>envelope-detector.cir</code> | Web (2): <code>earth-tv.html</code>, <code>orbit-viewer.html</code></li>
+    <li><span class="artifact-label">Stories:</span> &ldquo;The First Picture&rdquo; &mdash; <code>the-first-picture.html</code> + <code>the-first-picture.tex</code></li>
+  </ul>
+
+  <h2 class="section-title">Data</h2>
+
+  <ul class="artifact-list">
+    <li><span class="artifact-label">knowledge-nodes.json</span> &mdash; Knowledge graph nodes for Explorer 6 mission concepts, instruments, and cross-references</li>
+    <li><span class="artifact-label">data-sources.json</span> &mdash; Authoritative data sources used in research (NASA NSSDCA, NSSDC, JPL Horizons, NGDC)</li>
+  </ul>
+
+  <div class="dedication-section">
+    <h2 class="section-title">Dedication: Vincent van Gogh</h2>
+    <p>This mission is dedicated to <strong>Vincent Willem van Gogh</strong>, born March 30, 1853, in Groot-Zundert, Netherlands. Van Gogh built images from discrete brushstrokes &mdash; each carrying color, direction, and intensity &mdash; the same way Explorer 6 built an image from discrete brightness samples swept by a spinning photocell. His late paintings survive extreme downsampling because their composition is low-frequency: large swirling forms, bold contrast, broad color blocks. Explorer 6&rsquo;s photograph survived extreme downsampling for the same reason: Earth&rsquo;s disk against space is a fundamentally low-frequency image. Both demonstrate that coarse, discrete samples can represent continuous reality when the observer stands at the right distance. <em>The Starry Night</em> (1889) and the first photograph of Earth from orbit (1959) are the same act: making the invisible visible through patient, incremental observation.</p>
+  </div>
+
+  <div class="nav-card">
+    <a href="../index.html">&larr; Mission Catalog</a>
+    <a href="research.html">Begin Reading &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.6 Explorer 6 + Trametes versicolor &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

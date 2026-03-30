@@ -1,0 +1,155 @@
+{
+  "mission": "1.6",
+  "title": "Explorer 6 (S-2)",
+  "date": "1959-08-07",
+  "organism": "Trametes versicolor",
+  "organism_common": "Turkey tail fungus",
+  "organism_location": "One of the most common bracket fungi in the world -- found on dead hardwood and conifer logs throughout the Pacific Northwest, from sea level to subalpine zones. Grows in overlapping tiers of thin, semicircular brackets on stumps, fallen logs, and standing deadwood. Cosmopolitan distribution across temperate forests worldwide. A white-rot fungus that decomposes lignin, playing a critical role in nutrient cycling and forest decomposition. The concentric color bands -- brown, tan, cream, gray, and occasionally blue-green -- are the diagnostic feature: 'versicolor' means 'of many colors.'",
+  "bird": "Empidonax difficilis",
+  "bird_common": "Pacific Slope Flycatcher",
+  "dedication": {
+    "name": "Vincent van Gogh",
+    "born": "1853-03-30",
+    "died": "1890-07-29",
+    "birthplace": "Zundert, Netherlands",
+    "field": "Post-Impressionist painting, drawing, printmaking",
+    "resonance": "Vincent van Gogh saw beauty in imperfection. His thick impasto brushwork in Starry Night, his visible paint ridges, his color choices that were felt rather than matched to reality -- all celebrated the process of seeing rather than hiding it behind polished technique. Explorer 6's first photograph of Earth from orbit was the visual equivalent: crude, noisy, barely legible, with scan lines visible and signal degradation embedded in every pixel. The image did not hide the process of its own creation. Like Van Gogh's paintings, the limitations of the medium were not failures but features -- honest marks made by a tool reaching for something just beyond its grasp. Van Gogh died at 37 having sold one painting. Explorer 6's photograph was dismissed as 'crude' in the newspapers. Both were ahead of their reception. The Starry Night swirls are now recognized as turbulent flow patterns that match Kolmogorov's statistical theory of turbulence -- the painter's eye captured physics that would not be formalized for decades. Explorer 6's crude crescent birthed the entire tradition of Earth observation from space: TIROS, Landsat, GOES, the Blue Marble. Every weather satellite image, every climate dataset, every picture of Earth from orbit descends from twelve noisy scan lines recorded on a strip of paper in Hawaii."
+  },
+  "nodes": [
+    {
+      "id": "1.6-spin-scan-imaging",
+      "concept": "Spin-scan imaging -- using spacecraft rotation to build an image one line at a time",
+      "department": "electronics",
+      "level": "advanced",
+      "tspb_layer": 3,
+      "tspb_section": "3.4",
+      "description": "Spin-scan imaging exploits a spinning spacecraft's rotation to sweep a single photocell across a scene, measuring brightness at each angular position during one revolution. One spin = one scan line. The brightness values are telemetered to the ground and assembled into a 2D image by stacking successive scan lines. Explorer 6 spun at 2.8 rpm, giving a 21.4-second scan period. The photocell measured brightness as a continuously varying analog voltage, which was frequency-modulated onto the telemetry carrier at 108 MHz. The ground station at South Point, Hawaii, demodulated the signal and fed it to a strip-chart recorder. The result was the first photograph of Earth from orbit: a crude, noisy crescent built from approximately 12 usable scan lines. This technique became the standard for weather satellites (TIROS, ATS, GOES) for two decades. The principle is identical to a fax machine: one dimension is spatial (angular position within a scan), the other is temporal (successive scans at different orientations). Resolution is limited by the photocell's angular aperture, the spin rate, and the bandwidth of the telemetry link.",
+      "resonance": "Trametes versicolor builds its bracket in concentric rings, each ring a period of growth from the attachment point outward. The outermost ring is the newest, the growing edge. The inner rings are older, their pigments weathered. The whole bracket is an image of its own growth history, assembled ring by ring the way Explorer 6's photograph was assembled scan line by scan line. Both are sequential, accretive processes: you cannot see the final shape until enough rings or lines have accumulated. Both show their process honestly -- the rings of the fungus, the scan lines of the camera.",
+      "worked_example": {
+        "description": "Calculate the angular resolution of Explorer 6's spin-scan camera",
+        "parameters": {
+          "spin_rate_rpm": 2.8,
+          "telemetry_bandwidth_hz": 300,
+          "fov_degrees": 360
+        },
+        "formula": "angular_resolution = spin_rate * 360 / (60 * bandwidth) degrees per sample",
+        "result": "At 2.8 rpm and 300 Hz bandwidth: 360 * 2.8 / (60 * 300) = 0.056 degrees per sample. But the photocell slit width was much larger (~5 degrees), limiting practical resolution to roughly 5 degrees -- about 72 resolvable points per scan line.",
+        "python": "import numpy as np\n\nspin_rpm = 2.8\nspin_hz = spin_rpm / 60  # 0.04667 Hz\nperiod = 1 / spin_hz     # 21.43 seconds\nbandwidth = 300           # Hz telemetry bandwidth\n\nsamples_per_rev = bandwidth * period  # ~6429 samples\nangular_res_sampling = 360 / samples_per_rev  # 0.056 deg\n\nslit_width_deg = 5.0  # practical photocell aperture\neffective_res = slit_width_deg\npoints_per_line = 360 / effective_res\n\nprint(f'Spin period: {period:.2f} s')\nprint(f'Sampling resolution: {angular_res_sampling:.4f} deg')\nprint(f'Photocell slit width: {slit_width_deg} deg')\nprint(f'Effective resolution: {effective_res} deg')\nprint(f'Points per scan line: {points_per_line:.0f}')\nprint(f'\\nThe slit width is the bottleneck, not the sampling rate.')\nprint(f'Like a turkey tail bracket: each ring has finite width.')"
+      }
+    },
+    {
+      "id": "1.6-ring-current",
+      "concept": "Ring current -- the toroidal electric current flowing around Earth in the magnetosphere",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.5",
+      "description": "The ring current is a westward-flowing toroidal electric current in the Earth's magnetosphere, carried by trapped ions (primarily protons and oxygen ions) drifting around Earth at altitudes of 3 to 8 Earth radii (approximately 19,000 to 51,000 km). Explorer 6 was the first spacecraft to directly detect and characterize this current by measuring the magnetic field depression it causes. The ring current is a major component of space weather: during geomagnetic storms, the current intensifies dramatically, causing the Dst (Disturbance Storm Time) index to go strongly negative. The magnetic field depression at Earth's surface can reach 100-500 nT during major storms. The ring current was theorized by Carl Stormer and Sydney Chapman in the early 20th century, but Explorer 6's magnetometer provided the first in-situ measurements confirming its existence and mapping its spatial extent. The ring current is sustained by the injection of energetic particles from the magnetotail during substorms, and decays through charge exchange with cold neutral hydrogen in the geocorona.",
+      "resonance": "A turkey tail bracket fungus grows in a ring pattern around its attachment point on a log, expanding outward in concentric bands. The ring current flows in a ring pattern around Earth's magnetic axis, carried by ions trapped on closed drift paths. Both are toroidal structures maintained by energy input: the fungus feeds on the lignin in the wood; the ring current feeds on energetic particles injected from the magnetotail. Both decay when the energy source diminishes: the fungus stops growing when the wood is fully decomposed; the ring current fades when particle injection ceases.",
+      "worked_example": {
+        "description": "Estimate the magnetic field depression caused by the ring current",
+        "parameters": {
+          "ring_current_amperes": 3e6,
+          "ring_radius_m": 2.87e7,
+          "mu_0": 1.2566e-6
+        },
+        "formula": "B_depression = mu_0 * I / (2 * R) at the center of the ring",
+        "result": "B = (1.257e-6 * 3e6) / (2 * 2.87e7) = 65.7 nT. This matches observed Dst values during moderate storms (-50 to -100 nT). During major storms, ring current can reach 10+ million amperes.",
+        "python": "import numpy as np\n\nmu_0 = 4 * np.pi * 1e-7\nR_earth = 6.371e6\n\n# Ring current parameters\nI_quiet = 1e6      # ~1 MA during quiet times\nI_moderate = 3e6   # ~3 MA during moderate storms\nI_major = 10e6     # ~10 MA during major storms\nR_ring = 4.5 * R_earth  # ~4.5 Earth radii\n\nfor label, I in [('Quiet', I_quiet), ('Moderate storm', I_moderate), ('Major storm', I_major)]:\n    B = mu_0 * I / (2 * R_ring) * 1e9  # convert to nT\n    print(f'{label}: I = {I/1e6:.0f} MA, B_depression = {B:.1f} nT (Dst ~ -{B:.0f} nT)')\n\nprint(f'\\nExplorer 6 measured this depression in situ at {R_ring/R_earth:.1f} Re')\nprint(f'First direct confirmation of Chapman-Stormer theory.')"
+      }
+    },
+    {
+      "id": "1.6-highly-elliptical-orbit",
+      "concept": "Highly elliptical orbit -- extreme perigee-to-apogee ratio creating varied observing conditions",
+      "department": "orbital-mechanics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.2",
+      "description": "Explorer 6 orbited Earth in a highly elliptical orbit with perigee at 237 km and apogee at 42,400 km -- a ratio of 179:1. The orbital period was approximately 12.5 hours. This extreme eccentricity (e = 0.76) meant the spacecraft experienced radically different conditions at different points in its orbit: at perigee, it skimmed the upper atmosphere at 10.3 km/s; at apogee, it crawled at 1.3 km/s beyond geosynchronous altitude. By Kepler's second law, the spacecraft spent far more time near apogee than perigee (equal areas swept in equal times -- the area is large at apogee, so the spacecraft moves slowly there). This made it an excellent platform for studying the radiation belts and ring current, as it spent hours at high altitude where these phenomena are strongest. However, the extreme distance at apogee also meant the telemetry signal was 32,000 times weaker (1/r^2) than at perigee, requiring the ground station to use AGC with 45 dB of dynamic range.",
+      "resonance": "A turkey tail fungus on a log faces its own version of a highly elliptical orbit: growth conditions vary dramatically with position on the bracket. The attachment point (periapsis of nutrient supply) has direct access to the wood substrate -- the fungal hyphae are shortest and nutrient flow is strongest. The growing edge (apoapsis) is farthest from the nutrient source, growth is slowest, and the tissue is thinnest. The bracket spends most of its biomass near the edge (like a spacecraft spending most of its time near apogee) because the circumference grows linearly with radius while the radial thickness stays roughly constant."
+    },
+    {
+      "id": "1.6-am-envelope-detection",
+      "concept": "AM envelope detection -- extracting audio from an amplitude-modulated carrier using a diode rectifier",
+      "department": "electronics",
+      "level": "intermediate",
+      "tspb_layer": 2,
+      "tspb_section": "2.6",
+      "description": "An AM envelope detector recovers the modulating signal (audio, telemetry data) from an amplitude-modulated carrier by rectifying the AM signal with a diode and smoothing the result with an RC filter. The diode passes only positive half-cycles of the carrier. The RC filter has a time constant fast enough to follow the audio-frequency envelope but slow enough to reject the carrier frequency: 1/f_carrier << RC << 1/f_audio_max. For a 455 kHz IF with 3 kHz audio bandwidth, RC values of 10K and 10nF give tau = 100 us and f_c = 1,592 Hz. Germanium diodes (1N34A, V_f ~ 0.2V) are preferred over silicon (V_f ~ 0.6V) because they can detect weaker signals. This is the fifth stage in the progressive ground station build: transmitter (v1.2), receiver (v1.3), mixer (v1.4), IF amplifier (v1.5), envelope detector (v1.6). The detected output feeds the audio amplifier (future v1.7) and provides an AGC voltage for gain control.",
+      "resonance": "A turkey tail fungus detects its substrate the way an envelope detector detects the carrier: it extracts the useful information (nutrients, lignin) and discards the structural carrier (cellulose fibers that pass through undigested). The fungal enzymes are selective, like the diode's one-way conduction -- they break down lignin (the 'signal') while leaving cellulose intact (the 'carrier'). White-rot decomposition is envelope detection performed by chemistry instead of electronics."
+    },
+    {
+      "id": "1.6-white-rot-decomposition",
+      "concept": "White-rot decomposition -- fungi that break down lignin, the toughest biopolymer in wood",
+      "department": "biology",
+      "level": "intermediate",
+      "tspb_layer": 2,
+      "tspb_section": "2.3",
+      "description": "Trametes versicolor is a white-rot fungus, meaning it produces enzymes (laccase, manganese peroxidase, lignin peroxidase) that can break down lignin -- the complex, irregular polymer that gives wood its structural rigidity. Lignin is one of the most recalcitrant organic molecules on Earth; for most of the Carboniferous period (359-299 million years ago), no organism could decompose it, and dead trees piled up for millions of years, eventually becoming coal. White-rot fungi evolved the enzymatic machinery to crack lignin's aromatic rings, closing the carbon cycle for the first time. The 'white rot' name comes from the bleached appearance of wood after lignin removal -- the white cellulose fibers remain. Turkey tail is among the most efficient and widespread white-rot decomposers, found on every continent except Antarctica, growing on dead hardwoods and conifers in overlapping shelves of thin, leathery brackets. Each bracket displays concentric bands of color (the 'versicolor' feature) representing successive growth periods. The fungus also has significant medicinal interest: polysaccharide-K (PSK) extracted from T. versicolor is used as an immunotherapy adjuvant in Japan.",
+      "resonance": "Explorer 6's spin-scan camera broke down the continuous brightness field of Earth into discrete scan lines, the way white-rot fungi break down the continuous lignin matrix of wood into smaller fragments. Both are decomposition processes that reveal hidden structure: the fungus reveals the cellulose skeleton beneath the lignin; the camera reveals the crescent shape of Earth beneath the noise. Both operate incrementally -- one enzymatic reaction at a time, one scan line at a time -- and both leave evidence of their process: the bleached wood, the visible scan lines."
+    },
+    {
+      "id": "1.6-image-reconstruction",
+      "concept": "Image reconstruction -- assembling a 2D image from sequential 1D measurements",
+      "department": "signal-processing",
+      "level": "advanced",
+      "tspb_layer": 3,
+      "tspb_section": "3.5",
+      "description": "Explorer 6's spin-scan camera measured brightness as a 1D time series (brightness vs. angular position within each spin). To reconstruct a 2D image, multiple 1D scan lines must be stacked. The vertical dimension comes from the changing orientation of the spin axis relative to Earth as the spacecraft orbits. Each scan line samples a different great-circle cross-section of the scene. If the spin axis precesses slowly (due to gravitational torque), successive scan lines are closely spaced and the image has good vertical resolution. If it precesses quickly, lines are sparse and the image is vertically stretched. Explorer 6's image had approximately 12 usable scan lines before signal loss, covering perhaps 30-40 degrees of Earth's disk. Image reconstruction required knowing the precise timing and orientation of each scan line, which in turn required accurate orbit determination and attitude knowledge. This same principle -- reconstructing a 2D or 3D structure from 1D projections -- is the mathematical basis of computed tomography (CT scanning), radio interferometry, and synthetic aperture radar.",
+      "resonance": "A turkey tail bracket is a physical record of image reconstruction: each concentric ring is a 'scan line' in time, and the full bracket is the reconstructed 'image' of the fungus's growth history. The color of each ring encodes the conditions at the time of growth (temperature, moisture, nutrient availability), just as the brightness of each scan line encoded the reflectivity of Earth at that angular position. Reading the bracket's rings is reading a reconstructed image of forest conditions across growing seasons."
+    },
+    {
+      "id": "1.6-van-allen-mapping",
+      "concept": "Van Allen belt mapping -- characterizing the radiation environment trapped by Earth's magnetic field",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.4",
+      "description": "Explorer 6 traversed both Van Allen radiation belts on every orbit, passing through the inner belt (protons, peak at ~3,000 km), the slot region (relative minimum at ~6,000-10,000 km), and the outer belt (electrons, peak at ~16,000-20,000 km). Its Geiger counter and scintillation counter measured radiation flux as a function of altitude, building up a detailed map of the radiation environment over many orbits. This mapping was critical for planning future human spaceflight -- the Apollo missions needed to know where the belts were and how to traverse them quickly. Explorer 6's data confirmed and extended the belt structure discovered by Explorer 1 (inner belt, 1958) and Pioneer 3 (outer belt, 1958), providing the first continuous radial profile from 237 km to 42,400 km. The spacecraft's highly elliptical orbit was ideal for this mapping because it sampled every altitude twice per orbit (once ascending, once descending), and Kepler's second law ensured it spent more time at high altitudes where the outer belt and ring current reside.",
+      "resonance": "The Van Allen belts are nested toroidal shells of trapped radiation, layered around Earth like the concentric color bands of a turkey tail bracket. The inner belt (brown, dense, old -- protons trapped for years) is like the dark inner rings of the fungus near the attachment point. The outer belt (diffuse, dynamic, responsive to solar wind -- electrons with lifetimes of days to weeks) is like the lighter, more variable outer rings at the growing edge. The slot region between them is like the gap between growth spurts where the fungus paused."
+    },
+    {
+      "id": "1.6-agc-circuits",
+      "concept": "Automatic gain control -- maintaining constant output level despite varying input signal strength",
+      "department": "electronics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.3",
+      "description": "Automatic Gain Control (AGC) is a feedback system that adjusts amplifier gain to maintain a roughly constant output level despite large variations in input signal strength. Explorer 6's ground station needed AGC with 45 dB of dynamic range because the received signal varied by a factor of 32,000:1 as the spacecraft moved between perigee (237 km, strong signal) and apogee (42,400 km, weak signal). The AGC works by detecting the average output level, comparing it to a reference, and using the error signal to control the gain of a variable-gain amplifier stage. When the signal is strong, the AGC voltage increases and reduces the gain. When the signal is weak, the AGC voltage drops and the gain increases. The time constant of the AGC loop must be slow enough to avoid tracking the audio modulation (which would distort it) but fast enough to follow the signal level changes as the spacecraft orbits.",
+      "resonance": "Trametes versicolor regulates its enzyme production in response to substrate availability -- a biological AGC system. When the fungus encounters lignin-rich wood, it upregulates laccase and peroxidase production (high gain for abundant substrate). When the wood is depleted, enzyme production drops (low gain for scarce substrate). This prevents the fungus from wasting metabolic energy producing enzymes when there is nothing to decompose, just as electronic AGC prevents the receiver from amplifying noise when there is no signal."
+    },
+    {
+      "id": "1.6-telemetry-bandwidth",
+      "concept": "Telemetry bandwidth -- the information capacity of a spacecraft's radio link",
+      "department": "communications",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "Explorer 6 transmitted telemetry on two frequencies: 108.00 MHz (high power, 300 mW) and 108.03 MHz (low power). The telemetry bandwidth -- the rate at which data could be sent -- was severely limited by the transmitter power, antenna gain, and distance. At perigee (237 km), the link budget allowed several hundred bits per second. At apogee (42,400 km), the usable bandwidth dropped dramatically because received power falls as 1/r^2. The spin-scan camera data had to share this limited bandwidth with housekeeping telemetry (temperature, voltage, spin rate), radiation measurements, and magnetometer data. The image data was bandwidth-limited to approximately 300 Hz, meaning the photocell brightness could only vary 300 times per second in the telemetered signal. At 2.8 rpm (0.047 Hz spin), this gave roughly 6,400 brightness samples per revolution -- but the photocell slit width was the actual resolution limiter, not the bandwidth. Shannon's channel capacity theorem (C = B * log2(1 + SNR)) set the ultimate information rate. As the spacecraft climbed and SNR dropped, the channel capacity dropped with it, degrading the image.",
+      "resonance": "A turkey tail fungus communicates through the mycorrhizal network -- chemical signals (nutrients, hormones, allelopathic compounds) transmitted through hyphal connections in the soil. This biological 'telemetry' is also bandwidth-limited: the diffusion rate of molecules through fungal hyphae sets a maximum signaling rate, just as the radio link's power and bandwidth set Explorer 6's maximum data rate. Both systems must prioritize what information to send: the fungus signals stress, nutrient availability, and pathogen presence; the spacecraft sends image data, radiation counts, and magnetic field vectors."
+    },
+    {
+      "id": "1.6-signal-to-noise",
+      "concept": "Signal-to-noise ratio -- the fundamental limit on extracting information from a noisy measurement",
+      "department": "signal-processing",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.5",
+      "description": "Signal-to-noise ratio (SNR) is the ratio of desired signal power to unwanted noise power, and it determines the quality of any measurement or communication. Explorer 6's first Earth image is a textbook study in SNR degradation with distance. At perigee (237 km), the received signal was strong and the scan lines were clean -- the brightness peaks of the Earth crescent were clearly distinguishable from the noise floor. As the spacecraft climbed toward apogee (42,400 km), the signal power dropped as 1/r^2 (inverse square law), reducing SNR by 45 dB over the course of the orbit. By the 10th scan line, the noise was comparable to the signal, and by the 12th, the crescent was undetectable. The image itself IS a visual representation of SNR degradation: the early, clean lines are high-SNR data; the later, noisy lines are low-SNR data; and the point where the crescent vanishes is the SNR = 1 boundary below which no information can be reliably extracted. This is Shannon's fundamental lesson: noise sets the limit on communication.",
+      "resonance": "In forest ecology, signal-to-noise ratio has a direct analog: the signal is the pattern you are trying to detect (species distribution, growth rate, nutrient flow), and the noise is the natural variability that obscures it. A turkey tail bracket growing on a log in a dense PNW forest must compete with dozens of other decomposer species for access to the substrate. Its growth 'signal' (ring width, color intensity) is modulated by 'noise' (temperature fluctuations, moisture variability, competition from other fungi, invertebrate grazing). Reading the growth rings of a bracket fungus requires the same signal extraction skills as reading Explorer 6's scan lines: recognizing the pattern within the noise, knowing when the signal is reliable and when it has been overwhelmed.",
+      "worked_example": {
+        "description": "Calculate SNR at perigee vs. apogee for Explorer 6's telemetry link",
+        "parameters": {
+          "P_transmit_watts": 0.3,
+          "perigee_km": 237,
+          "apogee_km": 42400,
+          "noise_temp_K": 500,
+          "bandwidth_hz": 300
+        },
+        "formula": "SNR = P_received / P_noise, where P_received ∝ 1/r^2",
+        "result": "Distance ratio: 42400/237 = 179. Power ratio: 179^2 = 32,041 (45.1 dB). If SNR at perigee is 40 dB, SNR at apogee is -5 dB (signal below noise floor).",
+        "python": "import numpy as np\n\nperigee_km = 237\napogee_km = 42400\ndist_ratio = apogee_km / perigee_km\npower_ratio = dist_ratio ** 2\npower_ratio_dB = 10 * np.log10(power_ratio)\n\nSNR_perigee_dB = 40  # assumed, based on clean early scan lines\nSNR_apogee_dB = SNR_perigee_dB - power_ratio_dB\n\nprint(f'Distance ratio: {dist_ratio:.0f}:1')\nprint(f'Power ratio: {power_ratio:.0f}:1 ({power_ratio_dB:.1f} dB)')\nprint(f'SNR at perigee: {SNR_perigee_dB:.0f} dB (clean signal)')\nprint(f'SNR at apogee: {SNR_apogee_dB:.1f} dB (signal below noise)')\nprint(f'\\nThis is why the image degrades line by line:')\nprint(f'each scan line is recorded at a greater distance,')\nprint(f'and the noise gets worse as 1/r^2.')\nprint(f'\\nThe crescent vanishes into static. The turkey tail\\'s')\nprint(f'outermost ring blurs into the weathered wood.')"
+      }
+    }
+  ]
+}

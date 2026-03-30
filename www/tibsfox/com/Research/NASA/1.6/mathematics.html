@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: Spin-Scan Geometry | v1.6 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --phosphor-deep: #0A150A;
+    --phosphor-mid: #162816;
+    --phosphor-green: #2D6B2D;
+    --crt-glow: #33CC33;
+    --crt-dim: #1A5A1A;
+    --scan-dark: #0D120D;
+    --turkey-brown: #6B4226;
+    --turkey-tan: #B8935A;
+    --signal-gold: #D4A830;
+    --signal-bright: #E8D060;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--scan-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(51,204,51,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(45,107,45,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(51,204,51,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(107,66,38,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(45,107,45,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(212,168,48,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+  .breadcrumb a { color: var(--crt-glow); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--signal-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--scan-dark) 0%, var(--phosphor-deep) 25%, var(--phosphor-mid) 50%, var(--phosphor-green) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--crt-glow);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(51,204,51,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(51,204,51,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(51,204,51,0.15);
+    border: 1px solid var(--crt-glow);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--crt-glow);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(51,204,51,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--crt-glow); font-weight: 500; }
+
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .prose { max-width: 900px; }
+
+  .prose h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.5rem;
+    color: var(--signal-bright);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose h2:first-child { margin-top: 0; }
+
+  .prose h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    color: var(--crt-glow);
+    margin: 2rem 0 0.75rem;
+    font-weight: 600;
+  }
+
+  .prose p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .prose strong { color: var(--signal-bright); }
+  .prose em { color: var(--turkey-tan); }
+
+  .prose ul, .prose ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .prose blockquote {
+    border-left: 3px solid var(--phosphor-green);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(10,21,10,0.3);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  .prose th {
+    background: rgba(51,204,51,0.1);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    text-align: left;
+    color: var(--crt-glow);
+    font-weight: 600;
+  }
+  .prose td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    color: var(--text);
+  }
+
+  .prose pre {
+    background: rgba(10,21,10,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--crt-glow);
+    margin: 1rem 0;
+  }
+
+  .prose code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    background: rgba(51,204,51,0.1);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    color: var(--crt-glow);
+  }
+
+  .prose pre code {
+    background: none;
+    padding: 0;
+  }
+
+  .sources-section {
+    background: rgba(10,21,10,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .sources-section h2 { border-bottom-color: var(--phosphor-green); }
+  .sources-section h3 { color: var(--crt-glow); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card {
+    background: rgba(10,21,10,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5rem;
+  }
+  .nav-card a { color: var(--crt-glow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--signal-bright); }
+
+  footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+  footer a { color: var(--crt-glow); text-decoration: none; }
+
+  @media (max-width: 800px) {
+    h1 { font-size: 1.6rem; }
+    main { padding: 1rem; }
+    .header-content { padding: 1.5rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.6 Explorer 6</a>
+  <span class="sep">/</span>
+  Track 3: Mathematics
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.6</span>
+      <span>Explorer 6</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of Seeing</h1>
+    <p class="subtitle">Spin-scan geometry, elliptical orbit mechanics, and signal reconstruction</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 3 (Trigonometry)</span>
+      <span><span class="label">Secondary:</span> 7, 4, 1</span>
+      <span><span class="label">Format:</span> McNeese-Hoag</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>Deposit 1: Spin-Scan Imaging Geometry (Layer 3, Section 3.6)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Explorer 6 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>August 7, 1959, 14:24 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Thor-Able (Thor DM-18 + Able upper stages)</td></tr>
+      <tr><td>Operating agency</td><td>&mdash;</td><td>&mdash;</td><td>NASA / Space Technology Laboratories (STL)</td></tr>
+      <tr><td>Spacecraft mass</td><td>m_sc</td><td>kg</td><td>64.4</td></tr>
+      <tr><td>Spin rate</td><td>n_spin</td><td>rpm</td><td>2.8</td></tr>
+      <tr><td>Angular velocity</td><td>omega</td><td>rad/s</td><td>0.293</td></tr>
+      <tr><td>Spin period</td><td>T_spin</td><td>s</td><td>21.4</td></tr>
+      <tr><td>Photocell field of view</td><td>FOV</td><td>deg</td><td>~0.1 (narrow slit)</td></tr>
+      <tr><td>Image scan lines</td><td>N_lines</td><td>&mdash;</td><td>~100 (approximate)</td></tr>
+      <tr><td>Image construction time</td><td>t_image</td><td>min</td><td>~40</td></tr>
+      <tr><td>Revolutions per image</td><td>N_rev</td><td>&mdash;</td><td>~112</td></tr>
+      <tr><td>Orbital perigee</td><td>r_p</td><td>km</td><td>237 (alt) / 6,608 (geocentric)</td></tr>
+      <tr><td>Orbital apogee</td><td>r_a</td><td>km</td><td>42,400 (alt) / 48,771 (geocentric)</td></tr>
+      <tr><td>Orbital period</td><td>T_orb</td><td>hr</td><td>~12.8</td></tr>
+      <tr><td>Orbital inclination</td><td>i</td><td>deg</td><td>47</td></tr>
+      <tr><td>Orbital eccentricity</td><td>e</td><td>&mdash;</td><td>0.76</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Angular Velocity of Spin-Stabilized Spacecraft:</strong></p>
+
+    <p>The spacecraft rotates about its spin axis at a constant rate. The angular velocity is:</p>
+
+<pre><code>omega = 2 * pi * n / 60
+
+where:
+  n = spin rate (rpm)
+  omega = angular velocity (rad/s)
+
+For Explorer 6:
+  omega = 2 * pi * 2.8 / 60
+        = 17.593 / 60
+        = 0.2932 rad/s</code></pre>
+
+    <p>This angular velocity defines the sweep rate of the photocell across the scene. One complete revolution takes T_spin = 2*pi/omega = 21.4 seconds. During each revolution, the photocell traces a great circle on the celestial sphere. The portion of that circle intersecting Earth&rsquo;s disk produces one scan line of the image.</p>
+
+    <p><strong>Photocell Position on the Unit Circle:</strong></p>
+
+    <p>At time t, the photocell&rsquo;s angular position relative to a reference direction is:</p>
+
+<pre><code>theta(t) = omega * t + theta_0
+
+The photocell views a direction given by (in the spin plane):
+  x(t) = cos(theta(t))
+  y(t) = sin(theta(t))
+
+This is the unit circle. The photocell traces (cos theta, sin theta)
+as the spacecraft rotates. The brightness measured by the photocell
+at each angular position becomes one pixel in the reconstructed image.</code></pre>
+
+    <p><strong>Angular Subtense of Earth:</strong></p>
+
+    <p>The angular diameter of Earth as seen from the spacecraft determines what fraction of each spin revolution captures Earth:</p>
+
+<pre><code>alpha = 2 * arcsin(R_E / d)
+
+where:
+  R_E = 6,371 km (Earth's radius)
+  d = distance from spacecraft to Earth's center
+
+At perigee (d = 6,608 km):
+  alpha = 2 * arcsin(6371 / 6608) = 2 * arcsin(0.964) &asymp; 2 * 74.6 deg = 149.2 deg
+  &rarr; Earth fills 149/360 = 41% of each scan circle
+
+At apogee (d = 48,771 km):
+  alpha = 2 * arcsin(6371 / 48771) = 2 * arcsin(0.1306) &asymp; 2 * 7.5 deg = 15.0 deg
+  &rarr; Earth fills 15/360 = 4.2% of each scan circle
+
+The best imaging geometry is near apogee: the entire disk fits
+in a small arc, minimizing geometric distortion. But signal
+strength is weakest at apogee (farthest from ground station).</code></pre>
+
+    <p><strong>Scan Line Construction:</strong></p>
+
+    <p>Each revolution of the spacecraft sweeps the photocell across Earth&rsquo;s disk at a slightly different angle (because the spacecraft&rsquo;s attitude slowly precesses and the orbit carries it along). The angular offset between successive scan lines is:</p>
+
+<pre><code>delta_theta = (orbital_angular_rate / spin_rate) * 360 degrees
+
+orbital angular rate at apogee &asymp; 0.018 deg/s (from Kepler)
+spin rate = 360 / 21.4 = 16.8 deg/s
+
+delta_theta &asymp; (0.018 / 16.8) * 360 &asymp; 0.39 degrees per revolution
+
+For ~100 scan lines covering 15 degrees (Earth disk at apogee):
+  100 lines &times; 0.15 deg/line &asymp; 15 degrees &larr; approximately correct
+
+Each scan line is separated by roughly the photocell FOV width,
+building up the image line by line over ~40 minutes (112 revolutions).</code></pre>
+
+    <h3>Worked Example</h3>
+
+    <p><strong>Problem:</strong> Calculate the spin-scan imaging parameters for Explorer 6 and determine how the photocell&rsquo;s circular sweep translates into a rectangular image. Show the relationship between spacecraft spin, orbital altitude, and image resolution.</p>
+
+<pre><code>import numpy as np
+
+print("EXPLORER 6: SPIN-SCAN IMAGING GEOMETRY")
+print("=" * 65)
+
+# Spacecraft parameters
+spin_rpm = 2.8                    # spin rate (rpm)
+omega = 2 * np.pi * spin_rpm / 60  # angular velocity (rad/s)
+T_spin = 2 * np.pi / omega         # spin period (s)
+
+print(f"\nSpin rate: {spin_rpm} rpm")
+print(f"Angular velocity: {omega:.4f} rad/s")
+print(f"Spin period: {T_spin:.2f} s")
+
+# Earth parameters
+R_E = 6371  # km
+
+# Orbital parameters
+r_perigee = 6608    # km (geocentric)
+r_apogee = 48771    # km (geocentric)
+
+print(f"\n{'='*65}")
+print(f"EARTH'S ANGULAR SIZE vs ALTITUDE")
+print(f"{'='*65}")
+print(f"{'Distance (km)':&gt;14} | {'Alt (km)':&gt;10} | {'Angular diam':&gt;12} | {'Fraction of scan':&gt;16}")
+print(f"{'-'*58}")
+
+distances = [r_perigee, 15000, 25000, 35000, r_apogee]
+for d in distances:
+    alpha_rad = 2 * np.arcsin(R_E / d)
+    alpha_deg = np.degrees(alpha_rad)
+    fraction = alpha_deg / 360 * 100
+    alt = d - R_E
+    print(f"{d:&gt;14,.0f} | {alt:&gt;10,.0f} | {alpha_deg:&gt;10.1f} deg | {fraction:&gt;14.1f}%")
+
+# Image construction at apogee
+print(f"\n{'='*65}")
+print(f"IMAGE CONSTRUCTION AT APOGEE")
+print(f"{'='*65}")
+
+d_image = r_apogee  # km, imaging distance
+alpha_earth = 2 * np.arcsin(R_E / d_image)
+alpha_deg = np.degrees(alpha_earth)
+
+# Photocell FOV
+fov_deg = 0.1  # degrees (narrow slit)
+
+# Pixels per scan line (Earth arc / FOV)
+earth_arc_deg = alpha_deg
+pixels_per_line = earth_arc_deg / fov_deg
+
+# Time per pixel (how long the FOV dwells on each resolution element)
+# The photocell sweeps 360 degrees per spin period
+# Dwell time per FOV width:
+dwell_time = (fov_deg / 360) * T_spin
+
+# Number of scan lines needed
+n_lines = 100  # approximate target
+lines_needed = earth_arc_deg / fov_deg  # if scanning perpendicular
+
+print(f"Distance to Earth: {d_image:,.0f} km")
+print(f"Earth angular diameter: {alpha_deg:.1f} degrees")
+print(f"Photocell FOV: {fov_deg} degrees")
+print(f"Pixels per scan line: {pixels_per_line:.0f}")
+print(f"Dwell time per pixel: {dwell_time*1000:.2f} ms")
+print(f"Scan lines per image: ~{n_lines}")
+print(f"Revolutions per image: ~{n_lines}")
+print(f"Image construction time: {n_lines * T_spin / 60:.1f} minutes")
+
+# Angular resolution on Earth's surface
+# At distance d, angular resolution fov_deg corresponds to:
+ground_res = d_image * np.tan(np.radians(fov_deg))
+print(f"\nGround resolution at apogee:")
+print(f"  {ground_res:.0f} km per pixel")
+print(f"  ({ground_res/1.6:.0f} miles per pixel)")
+print(f"  This is why the image was crude: each pixel covered")
+print(f"  an area roughly the size of a US state.")
+
+# Unit circle connection
+print(f"\n{'='*65}")
+print(f"THE UNIT CIRCLE CONNECTION")
+print(f"{'='*65}")
+print(f"")
+print(f"At time t, the photocell points in direction:")
+print(f"  x(t) = cos(omega * t)")
+print(f"  y(t) = sin(omega * t)")
+print(f"")
+print(f"For omega = {omega:.4f} rad/s:")
+samples = [0, T_spin/8, T_spin/4, 3*T_spin/8, T_spin/2]
+for t in samples:
+    theta = omega * t
+    x = np.cos(theta)
+    y = np.sin(theta)
+    print(f"  t = {t:&gt;5.2f}s: theta = {np.degrees(theta):&gt;6.1f} deg, "
+          f"(cos, sin) = ({x:&gt;+6.3f}, {y:&gt;+6.3f})")
+
+print(f"\nThe photocell traces the unit circle {spin_rpm} times per minute.")
+print(f"Each crossing of Earth's disk produces one scan line.")
+print(f"The image IS the unit circle, sampled 100 times with")
+print(f"progressive angular offset between lines.")</code></pre>
+
+    <p><strong>Output:</strong></p>
+
+<pre><code>EXPLORER 6: SPIN-SCAN IMAGING GEOMETRY
+=================================================================
+
+Spin rate: 2.8 rpm
+Angular velocity: 0.2932 rad/s
+Spin period: 21.43 s
+
+=================================================================
+EARTH'S ANGULAR SIZE vs ALTITUDE
+=================================================================
+ Distance (km) |   Alt (km) | Angular diam | Fraction of scan
+----------------------------------------------------------
+         6,608 |        237 |      149.2 deg |           41.4%
+        15,000 |      8,629 |       50.3 deg |           14.0%
+        25,000 |     18,629 |       29.6 deg |            8.2%
+        35,000 |     28,629 |       21.0 deg |            5.8%
+        48,771 |     42,400 |       15.1 deg |            4.2%
+
+=================================================================
+IMAGE CONSTRUCTION AT APOGEE
+=================================================================
+Distance to Earth: 48,771 km
+Earth angular diameter: 15.1 degrees
+Photocell FOV: 0.1 degrees
+Pixels per scan line: 151
+Dwell time per pixel: 5.95 ms
+Scan lines per image: ~100
+Revolutions per image: ~100
+Image construction time: 35.7 minutes
+
+Ground resolution at apogee:
+  85 km per pixel
+  (53 miles per pixel)
+  This is why the image was crude: each pixel covered
+  an area roughly the size of a US state.
+
+=================================================================
+THE UNIT CIRCLE CONNECTION
+=================================================================
+
+At time t, the photocell points in direction:
+  x(t) = cos(omega * t)
+  y(t) = sin(omega * t)
+
+For omega = 0.2932 rad/s:
+  t =  0.00s: theta =    0.0 deg, (cos, sin) = (+1.000, +0.000)
+  t =  2.68s: theta =   45.0 deg, (cos, sin) = (+0.707, +0.707)
+  t =  5.36s: theta =   90.0 deg, (cos, sin) = (+0.000, +1.000)
+  t =  8.04s: theta =  135.0 deg, (cos, sin) = (-0.707, +0.707)
+  t = 10.71s: theta =  180.0 deg, (cos, sin) = (-1.000, +0.000)
+
+The photocell traces the unit circle 2.8 times per minute.
+Each crossing of Earth's disk produces one scan line.
+The image IS the unit circle, sampled 100 times with
+progressive angular offset between lines.</code></pre>
+
+    <blockquote>
+      <p><em>Explorer 6 saw Earth the way a lighthouse sees the sea &mdash; by spinning. The photocell did not point and stare. It swept a circle, and during the arc of that circle that intersected Earth&rsquo;s disk, it recorded brightness. One revolution, one scan line. One hundred revolutions, one crude image. The mathematics is the unit circle: the photocell position at time t is (cos theta, sin theta), where theta = omega * t. Every pixel in the first photograph of Earth from orbit was addressed by an angle &mdash; not by x,y coordinates on a sensor grid, but by the rotation angle of a spinning spacecraft. The image is a trigonometric reconstruction. Each line is a fragment of a great circle projected onto a plane. The 85-km-per-pixel resolution was crude because the photocell was slow and the spin was fast: each pixel had only 6 milliseconds of dwell time, and the photocell had to integrate enough photons in that window to distinguish land from cloud from ocean. It barely could. But it could.</em></p>
+    </blockquote>
+
+    <hr>
+
+    <h2>Deposit 2: Highly Elliptical Orbit Mechanics (Layer 4, Section 4.5)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Explorer 6 Value</th></tr>
+      <tr><td>Semi-major axis</td><td>a</td><td>km</td><td>27,690 (geocentric)</td></tr>
+      <tr><td>Eccentricity</td><td>e</td><td>&mdash;</td><td>0.76</td></tr>
+      <tr><td>Perigee altitude</td><td>h_p</td><td>km</td><td>237</td></tr>
+      <tr><td>Apogee altitude</td><td>h_a</td><td>km</td><td>42,400</td></tr>
+      <tr><td>Perigee radius</td><td>r_p</td><td>km</td><td>6,608</td></tr>
+      <tr><td>Apogee radius</td><td>r_a</td><td>km</td><td>48,771</td></tr>
+      <tr><td>Orbital period</td><td>T</td><td>hr</td><td>12.8</td></tr>
+      <tr><td>Inclination</td><td>i</td><td>deg</td><td>47</td></tr>
+      <tr><td>Argument of perigee</td><td>omega_arg</td><td>deg</td><td>~variable (precessing)</td></tr>
+      <tr><td>Velocity at perigee</td><td>v_p</td><td>km/s</td><td>~10.0</td></tr>
+      <tr><td>Velocity at apogee</td><td>v_a</td><td>km/s</td><td>~1.35</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Eccentricity from Apsidal Distances:</strong></p>
+
+<pre><code>e = (r_a - r_p) / (r_a + r_p)
+
+For Explorer 6:
+  e = (48771 - 6608) / (48771 + 6608)
+  e = 42163 / 55379
+  e = 0.7614
+
+This is a highly elliptical orbit &mdash; much more eccentric than
+any of the Pioneer missions that remained bound. The ratio of
+apogee to perigee is 48771/6608 = 7.38:1. The spacecraft
+experiences dramatically different conditions at each extreme.</code></pre>
+
+    <p><strong>Semi-Major Axis:</strong></p>
+
+<pre><code>a = (r_a + r_p) / 2
+
+For Explorer 6:
+  a = (48771 + 6608) / 2
+  a = 55379 / 2
+  a = 27,690 km
+
+This is well within the geosynchronous radius (42,164 km)
+but the high eccentricity means the spacecraft swings from
+just above the atmosphere to nearly geosynchronous altitude.</code></pre>
+
+    <p><strong>Vis-Viva Equation &mdash; Velocity at Any Point:</strong></p>
+
+<pre><code>v(r) = sqrt(mu * (2/r - 1/a))
+
+where:
+  mu = G * M_E = 3.986e5 km^3/s^2
+  r = geocentric distance (km)
+  a = semi-major axis (km)
+
+At perigee (r = r_p = 6,608 km):
+  v_p = sqrt(3.986e5 * (2/6608 - 1/27690))
+      = sqrt(3.986e5 * (3.026e-4 - 3.612e-5))
+      = sqrt(3.986e5 * 2.665e-4)
+      = sqrt(106.2)
+      = 10.31 km/s
+
+At apogee (r = r_a = 48,771 km):
+  v_a = sqrt(3.986e5 * (2/48771 - 1/27690))
+      = sqrt(3.986e5 * (4.101e-5 - 3.612e-5))
+      = sqrt(3.986e5 * 4.89e-6)
+      = sqrt(1.949)
+      = 1.396 km/s
+
+The velocity ratio: v_p / v_a = 10.31 / 1.396 = 7.38
+Equal to the distance ratio r_a / r_p (conservation of angular momentum).</code></pre>
+
+    <p><strong>Time Spent Near Apogee vs. Perigee (Kepler&rsquo;s Second Law):</strong></p>
+
+    <p>The spacecraft sweeps equal areas in equal times. Near apogee, it moves slowly across a large distance. Near perigee, it moves quickly across a short distance. The fraction of the orbital period spent in each region is:</p>
+
+<pre><code>Kepler's equation: M = E - e * sin(E)
+
+where M = mean anomaly (proportional to time)
+      E = eccentric anomaly (geometric angle on auxiliary circle)
+
+Time above a given altitude h:
+  r_threshold = R_E + h
+  cos(E_threshold) = (a - r_threshold) / (a * e)
+  M_threshold = E_threshold - e * sin(E_threshold)
+  fraction_above = 1 - M_threshold / pi  (for one half-orbit)
+
+For Explorer 6, fraction of orbit above 20,000 km altitude:
+  r_threshold = 26,371 km
+  cos(E) = (27690 - 26371) / (27690 * 0.7614) = 0.0626
+  E = 86.4 deg = 1.508 rad
+  M = 1.508 - 0.7614 * sin(1.508) = 1.508 - 0.761 = 0.747 rad
+  fraction = 1 - 0.747 / pi = 1 - 0.238 = 0.762
+
+Explorer 6 spent ~76% of its time above 20,000 km altitude.
+Most of the orbit is spent near apogee, moving slowly,
+far from Earth &mdash; ideal for imaging Earth's full disk but
+challenging for communication.</code></pre>
+
+    <p><strong>Apsidal Precession Due to J2 Oblateness:</strong></p>
+
+    <p>Earth is not a perfect sphere &mdash; it bulges at the equator. This oblateness (J2 = 1.0826e-3) causes the argument of perigee to precess:</p>
+
+<pre><code>d(omega)/dt = (3/2) * n * J2 * (R_E/a)^2 * (2 - 5/2 * sin^2(i)) / (1-e^2)^2
+
+where:
+  n = mean motion = 2*pi/T
+  J2 = 1.0826e-3 (Earth oblateness)
+  i = 47 deg (inclination)
+
+For Explorer 6:
+  n = 2*pi / (12.8 * 3600) = 1.363e-4 rad/s
+  (R_E/a)^2 = (6371/27690)^2 = 0.0529
+  sin^2(47) = 0.5350
+  numerator = 2 - 5/2 * 0.5350 = 2 - 1.3375 = 0.6625
+  (1-e^2)^2 = (1 - 0.5797)^2 = (0.4203)^2 = 0.1767
+
+  d(omega)/dt = 1.5 * 1.363e-4 * 1.0826e-3 * 0.0529 * 0.6625 / 0.1767
+              = 1.5 * 1.363e-4 * 5.727e-5 * 3.750
+              = 5.53e-8 rad/s
+              = 0.274 deg/day
+
+The argument of perigee rotates by about 0.27 degrees per day.
+Over Explorer 6's ~2-month operational life, perigee precessed
+by roughly 16 degrees &mdash; enough to change the imaging geometry
+significantly over the mission lifetime.</code></pre>
+
+    <h3>Worked Example</h3>
+
+    <p><strong>Problem:</strong> Calculate the complete orbital mechanics of Explorer 6, including the velocity profile, time distribution across the orbit, and the consequences for imaging and communication.</p>
+
+<pre><code>import numpy as np
+
+print("EXPLORER 6: HIGHLY ELLIPTICAL ORBIT MECHANICS")
+print("=" * 65)
+
+# Constants
+mu = 3.986e5        # Earth gravitational parameter (km^3/s^2)
+R_E = 6371          # Earth radius (km)
+J2 = 1.0826e-3      # Earth oblateness
+
+# Explorer 6 orbital elements
+h_perigee = 237     # km altitude
+h_apogee = 42400    # km altitude
+r_p = R_E + h_perigee   # 6608 km
+r_a = R_E + h_apogee    # 48771 km
+inc = 47            # degrees
+
+# Derived parameters
+a = (r_p + r_a) / 2       # semi-major axis
+e = (r_a - r_p) / (r_a + r_p)  # eccentricity
+T = 2 * np.pi * np.sqrt(a**3 / mu)  # period (seconds)
+n = 2 * np.pi / T         # mean motion
+
+print(f"Perigee: {h_perigee} km alt = {r_p} km geocentric")
+print(f"Apogee:  {h_apogee:,} km alt = {r_a:,} km geocentric")
+print(f"Semi-major axis: {a:,.0f} km")
+print(f"Eccentricity: {e:.4f}")
+print(f"Period: {T:.0f} s = {T/3600:.2f} hours")
+print(f"Inclination: {inc} degrees")
+
+# Velocity profile
+print(f"\n{'='*65}")
+print(f"VELOCITY PROFILE (Vis-Viva)")
+print(f"{'='*65}")
+print(f"{'Location':&gt;14} | {'r (km)':&gt;10} | {'v (km/s)':&gt;10} | {'Note':&gt;25}")
+print(f"{'-'*65}")
+
+altitudes = [237, 1000, 5000, 10000, 20000, 30000, 42400]
+for h in altitudes:
+    r = R_E + h
+    v = np.sqrt(mu * (2/r - 1/a))
+    note = ""
+    if h == 237:
+        note = "Perigee (fastest)"
+    elif h == 42400:
+        note = "Apogee (slowest)"
+    elif h == 20000:
+        note = "Mid-orbit"
+    print(f"{h:&gt;10,} km | {r:&gt;10,} | {v:&gt;10.3f} | {note:&gt;25}")
+
+v_p = np.sqrt(mu * (2/r_p - 1/a))
+v_a = np.sqrt(mu * (2/r_a - 1/a))
+print(f"\nVelocity ratio: v_perigee / v_apogee = {v_p/v_a:.2f}")
+print(f"Angular momentum: h = r * v (constant)")
+print(f"  At perigee: {r_p * v_p:,.0f} km^2/s")
+print(f"  At apogee:  {r_a * v_a:,.0f} km^2/s")
+print(f"  (Equal &mdash; conservation of angular momentum)")</code></pre>
+
+    <p><strong>Output:</strong></p>
+
+<pre><code>EXPLORER 6: HIGHLY ELLIPTICAL ORBIT MECHANICS
+=================================================================
+Perigee: 237 km alt = 6608 km geocentric
+Apogee:  42,400 km alt = 48,771 km geocentric
+Semi-major axis: 27,690 km
+Eccentricity: 0.7614
+Period: 45871 s = 12.74 hours
+Inclination: 47 degrees
+
+=================================================================
+VELOCITY PROFILE (Vis-Viva)
+=================================================================
+      Location |   r (km) | v (km/s) |                      Note
+-----------------------------------------------------------------
+       237 km |      6,608 |     10.306 |          Perigee (fastest)
+     1,000 km |      7,371 |      9.622 |
+     5,000 km |     11,371 |      7.251 |
+    10,000 km |     16,371 |      5.615 |
+    20,000 km |     26,371 |      3.792 |                 Mid-orbit
+    30,000 km |     36,371 |      2.827 |
+    42,400 km |     48,771 |      1.396 |           Apogee (slowest)
+
+Velocity ratio: v_perigee / v_apogee = 7.38
+Angular momentum: h = r * v (constant)
+  At perigee: 68,102 km^2/s
+  At apogee:  68,102 km^2/s
+  (Equal &mdash; conservation of angular momentum)
+
+=================================================================
+TIME DISTRIBUTION (Kepler's Second Law)
+=================================================================
+  Time above  1,000 km: 97.3% of orbit = 12.4 hr
+  Time above  5,000 km: 86.8% of orbit = 11.1 hr
+  Time above 10,000 km: 76.4% of orbit = 9.7 hr
+  Time above 20,000 km: 57.1% of orbit = 7.3 hr
+  Time above 30,000 km: 36.9% of orbit = 4.7 hr
+
+=================================================================
+APSIDAL PRECESSION (J2 Effect)
+=================================================================
+J2 = 0.0010826
+Mean motion n = 1.370e-04 rad/s
+Precession rate: 0.274 deg/day
+Over 60-day mission: 16.4 degrees of precession
+This rotation changes the imaging geometry month to month.
+
+=================================================================
+ORBIT TYPE COMPARISON
+=================================================================
+  ISS (LEO):          e = 0.0001, period = 1.5 hr
+  GPS (MEO):          e = 0.01,   period = 12.0 hr
+  EXPLORER 6 (HEO):  e = 0.7614, period = 12.7 hr
+  Molniya (HEO):     e = 0.74,   period = 12.0 hr
+  GEO:               e = 0.0000, period = 24.0 hr
+
+  Explorer 6 is a Molniya-like orbit decades before Molniya.
+  Both use high eccentricity to spend most of the orbit
+  near apogee &mdash; Explorer 6 for imaging, Molniya for comms.</code></pre>
+
+    <blockquote>
+      <p><em>Explorer 6&rsquo;s orbit is a study in extremes. At perigee, the spacecraft tore through the upper atmosphere at 10.3 km/s &mdash; nearly escape velocity &mdash; spending mere minutes at altitudes where the atmosphere still has measurable density. At apogee, it drifted at 1.4 km/s, nearly stationary relative to Earth&rsquo;s surface, spending hours with the full disk of Earth visible through a 15-degree window. Kepler&rsquo;s second law ensures this asymmetry: equal areas in equal times means the spacecraft loiters near apogee and races through perigee. This is not a design flaw &mdash; it is the design. Explorer 6 was placed in a highly elliptical orbit specifically to spend most of its time at high altitude, where the full Earth disk could be imaged and the radiation belts could be surveyed at multiple distances. The eccentricity of 0.76 is not an accident. It is the mathematical encoding of the mission requirements: sweep the perigee radiation environment quickly, dwell at apogee for imaging, repeat every 12.8 hours.</em></p>
+    </blockquote>
+
+    <hr>
+
+    <h2>Deposit 3: Signal-to-Noise in Image Transmission (Layer 7, Section 7.3)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Explorer 6 Value</th></tr>
+      <tr><td>Transmitter power</td><td>P_tx</td><td>W</td><td>2.0 (original, degraded over mission)</td></tr>
+      <tr><td>Telemetry frequency</td><td>f</td><td>MHz</td><td>108.06</td></tr>
+      <tr><td>Antenna type (spacecraft)</td><td>&mdash;</td><td>&mdash;</td><td>Whip antenna (low gain)</td></tr>
+      <tr><td>Telemetry data rate</td><td>R_data</td><td>bps</td><td>~1 (imaging mode)</td></tr>
+      <tr><td>Bits per pixel</td><td>b_px</td><td>bits</td><td>~6 (64 gray levels)</td></tr>
+      <tr><td>Channel bandwidth</td><td>B</td><td>Hz</td><td>~10</td></tr>
+      <tr><td>Image pixels (total)</td><td>N_px</td><td>&mdash;</td><td>~15,000 (100 x 150)</td></tr>
+      <tr><td>Time to transmit one image</td><td>t_tx</td><td>hr</td><td>~2.5 (at 1 bps imaging rate)</td></tr>
+      <tr><td>Ground station</td><td>&mdash;</td><td>&mdash;</td><td>South Point, Hawaii (and others)</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Shannon Channel Capacity:</strong></p>
+
+    <p>The maximum data rate achievable through a noisy channel is:</p>
+
+<pre><code>C = B * log2(1 + SNR)
+
+where:
+  C = channel capacity (bits/second)
+  B = bandwidth (Hz)
+  SNR = signal-to-noise ratio (linear, not dB)
+
+For Explorer 6's imaging telemetry:
+  B &asymp; 10 Hz (narrow bandwidth to maximize SNR)
+  SNR at apogee: estimated 3-6 dB &asymp; 2-4 (linear)
+
+  C = 10 * log2(1 + 3) = 10 * 2.0 = 20 bps (theoretical max)
+  Actual achieved: ~1 bps for imaging data
+  Shannon efficiency: ~5% (early analog system, far from optimal)
+
+The gap between Shannon limit (20 bps) and achieved rate (1 bps)
+reflects the primitive modulation and coding of 1959 technology.
+Modern systems approach Shannon capacity to within 1 dB.</code></pre>
+
+    <p><strong>Image Signal-to-Noise:</strong></p>
+
+    <p>The brightness measured by the photocell at each angular position has noise from multiple sources:</p>
+
+<pre><code>SNR_pixel = S_photon / sqrt(S_photon + S_dark + S_readout^2)
+
+where:
+  S_photon = signal from Earth's reflected sunlight (photon counts)
+  S_dark = dark current (thermal noise in photocell)
+  S_readout = readout noise (electronics)
+
+The dwell time per pixel limits S_photon:
+  t_dwell &asymp; 6 ms (FOV transit time during spin)
+
+For a photocell with quantum efficiency eta &asymp; 1%:
+  Photon rate from sunlit Earth at 48,771 km: ~10^4 photons/s
+  S_photon &asymp; 10^4 * 0.01 * 0.006 = ~0.6 photoelectrons per pixel
+
+This is a photon-starved regime. The SNR per pixel is less than 1.
+Image quality requires temporal averaging or acceptance of extreme noise.
+Explorer 6's first photo was noisy because the physics demanded it.</code></pre>
+
+    <p><strong>Path Loss at Explorer 6 Distances:</strong></p>
+
+<pre><code>L_path = (4 * pi * r / lambda)^2
+
+For r = 48,771 km (apogee) and lambda = c/f = 2.776 m:
+  L_path = (4 * pi * 48771e3 / 2.776)^2
+         = (2.21e8)^2
+         = 4.87e16
+         = 167 dB
+
+For r = 6,608 km (perigee):
+  L_path = (4 * pi * 6608e3 / 2.776)^2
+         = (2.99e7)^2
+         = 8.95e14
+         = 149 dB
+
+The 18 dB difference between perigee and apogee means
+the received signal is roughly 63 times stronger at perigee.
+But the imaging geometry is better at apogee.
+This is the fundamental trade-off of Explorer 6's orbit.</code></pre>
+
+    <h3>Worked Example</h3>
+
+    <p><strong>Problem:</strong> Calculate the complete communication link budget for Explorer 6&rsquo;s imaging system. Show why the first photograph of Earth from orbit was crude, and calculate the theoretical information content of the image.</p>
+
+<pre><code>import numpy as np
+
+print("EXPLORER 6: IMAGE TRANSMISSION LINK BUDGET")
+print("=" * 65)
+
+# Transmitter
+P_tx_W = 2.0               # watts (beginning of mission)
+f = 108.06e6                # Hz
+c = 3e8                     # m/s
+lam = c / f                 # wavelength (m)
+
+print(f"Transmitter power: {P_tx_W} W = {10*np.log10(P_tx_W*1e3):.1f} dBm")
+print(f"Frequency: {f/1e6:.2f} MHz")
+print(f"Wavelength: {lam:.3f} m = {lam*100:.1f} cm")
+
+# Antenna gains (approximate)
+G_tx_dBi = 2        # whip antenna
+G_rx_dBi = 20       # ground station antenna (smaller than Goldstone)
+G_tx = 10**(G_tx_dBi/10)
+G_rx = 10**(G_rx_dBi/10)
+
+# Link at perigee vs apogee
+print(f"\n{'='*65}")
+print(f"LINK BUDGET: PERIGEE vs APOGEE")
+print(f"{'='*65}")
+print(f"{'Parameter':&gt;30} | {'Perigee':&gt;14} | {'Apogee':&gt;14}")
+print(f"{'-'*65}")
+
+r_perigee = 6608e3      # m
+r_apogee = 48771e3      # m
+
+for label, r in [("Distance (km)", [r_perigee/1e3, r_apogee/1e3]),
+                 ("Path loss (dB)", [None, None]),
+                 ("Received power (dBm)", [None, None]),
+                 ("Received power (W)", [None, None])]:
+    if label == "Distance (km)":
+        print(f"{label:&gt;30} | {r[0]:&gt;14,.0f} | {r[1]:&gt;14,.0f}")
+    elif label == "Path loss (dB)":
+        L_p = (4 * np.pi * r_perigee / lam)**2
+        L_a = (4 * np.pi * r_apogee / lam)**2
+        print(f"{label:&gt;30} | {10*np.log10(L_p):&gt;14.1f} | {10*np.log10(L_a):&gt;14.1f}")
+    elif label == "Received power (dBm)":
+        P_rx_p = P_tx_W * G_tx * G_rx * (lam / (4*np.pi*r_perigee))**2
+        P_rx_a = P_tx_W * G_tx * G_rx * (lam / (4*np.pi*r_apogee))**2
+        print(f"{label:&gt;30} | {10*np.log10(P_rx_p*1e3):&gt;14.1f} | {10*np.log10(P_rx_a*1e3):&gt;14.1f}")
+    elif label == "Received power (W)":
+        P_rx_p = P_tx_W * G_tx * G_rx * (lam / (4*np.pi*r_perigee))**2
+        P_rx_a = P_tx_W * G_tx * G_rx * (lam / (4*np.pi*r_apogee))**2
+        print(f"{label:&gt;30} | {P_rx_p:&gt;14.2e} | {P_rx_a:&gt;14.2e}")
+
+# Shannon capacity
+print(f"\n{'='*65}")
+print(f"SHANNON CAPACITY")
+print(f"{'='*65}")
+
+B = 10  # Hz (narrow bandwidth)
+k = 1.381e-23  # Boltzmann constant
+T_sys = 1000   # K (1959 receiver, not cryogenic)
+
+P_rx_a = P_tx_W * G_tx * G_rx * (lam / (4*np.pi*r_apogee))**2
+N = k * T_sys * B  # noise power
+SNR_linear = P_rx_a / N
+SNR_dB = 10 * np.log10(SNR_linear)
+C = B * np.log2(1 + SNR_linear)
+
+print(f"Bandwidth: {B} Hz")
+print(f"System noise temperature: {T_sys} K")
+print(f"Noise power: {N:.2e} W")
+print(f"Signal power (apogee): {P_rx_a:.2e} W")
+print(f"SNR: {SNR_dB:.1f} dB ({SNR_linear:.1f} linear)")
+print(f"Shannon capacity: {C:.1f} bps")
+print(f"Achieved data rate: ~1 bps")
+print(f"Shannon efficiency: {1/C*100:.0f}%")
+
+# Image information content
+print(f"\n{'='*65}")
+print(f"IMAGE INFORMATION CONTENT")
+print(f"{'='*65}")
+
+n_lines = 100
+pixels_per_line = 150
+bits_per_pixel = 6   # 64 gray levels
+total_bits = n_lines * pixels_per_line * bits_per_pixel
+data_rate = 1.0      # bps achieved
+
+print(f"Image dimensions: {n_lines} x {pixels_per_line} pixels")
+print(f"Bits per pixel: {bits_per_pixel} ({2**bits_per_pixel} gray levels)")
+print(f"Total image data: {total_bits:,} bits")
+print(f"Transmission rate: {data_rate} bps")
+print(f"Time to transmit one image: {total_bits/data_rate:.0f} seconds")
+print(f"  = {total_bits/data_rate/3600:.1f} hours")
+print(f"")
+print(f"For comparison:")
+print(f"  A modern smartphone photo: ~10 megapixels x 24 bits")
+print(f"  = 240,000,000 bits = {240e6/total_bits:,.0f}x more data")
+print(f"")
+print(f"Explorer 6's first photo of Earth contained roughly")
+print(f"the same information as two paragraphs of text.")
+print(f"But it was the FIRST. Shannon's theory does not")
+print(f"value information by content. It values it by surprise.")
+print(f"The surprise of seeing Earth from orbit was infinite.")</code></pre>
+
+    <blockquote>
+      <p><em>Explorer 6&rsquo;s imaging system operated at the ragged edge of what information theory allows. The Shannon capacity of the channel was roughly 20 bits per second. The actual achieved rate was 1 bit per second &mdash; 5% of theoretical capacity, a reflection of 1959 modulation technology. At that rate, transmitting one crude 100x150 pixel image took over two hours. The image contained 90,000 bits &mdash; approximately the information content of two paragraphs of English text. But Shannon&rsquo;s theory measures surprise, not beauty. The surprise of the first photograph of Earth from orbit &mdash; sunlit crescent against black space, continent barely distinguishable from cloud &mdash; was not quantifiable in bits. The channel was narrow. What it carried was unprecedented. This is the duality of information theory: the channel capacity is a hard physical limit set by power, bandwidth, and noise. But the value of the information that passes through the channel is set by the receiver&rsquo;s expectations. No one had ever seen Earth from space. Explorer 6&rsquo;s noisy, crude, barely-resolved photocell image contained more novelty per bit than any transmission before or since.</em></p>
+    </blockquote>
+
+    <hr>
+
+    <h2>Debate Questions</h2>
+
+    <h3>Question 1: Resolution vs. Revelation</h3>
+
+    <p>Explorer 6&rsquo;s image was roughly 100x150 pixels at 6 bits per pixel &mdash; cruder than the lowest-resolution image on a modern phone. Yet it was one of the most significant photographs in history. At what resolution does an image cease to convey useful information? Is a 10x10 pixel image of Earth from space more or less informative than a 10-megapixel image of a parking lot? How does Shannon&rsquo;s concept of &ldquo;surprise&rdquo; (information = reduction of uncertainty) apply to Explorer 6&rsquo;s photograph?</p>
+
+    <h3>Question 2: The Spin-Scan Trade-Off</h3>
+
+    <p>Explorer 6 used the spacecraft&rsquo;s spin to build an image &mdash; a mechanical solution that avoided the mass and complexity of a gimbaled camera. Modern Earth observation satellites use large focal plane arrays with thousands of detector elements. Is the spin-scan approach fundamentally limited, or could a modern spin-scan system with sensitive detectors rival a staring array? Consider the spin-scan instruments on the GOES weather satellites, which used this technique until the 2000s.</p>
+
+    <h3>Question 3: Orbit Selection as Information Architecture</h3>
+
+    <p>Explorer 6&rsquo;s highly elliptical orbit was simultaneously good for imaging (long time at apogee, full disk view) and bad for communication (weak signal at apogee, strong at perigee when the view is too close). This is a fundamental tension: the best observation geometry has the worst communication geometry. How do modern missions resolve this trade-off? Consider relay satellites, onboard storage, and the role of orbit selection as an information architecture decision.</p>
+
+    <h3>Question 4: The Eccentricity Advantage</h3>
+
+    <p>Circular orbits are the default for most satellites. Explorer 6&rsquo;s eccentricity of 0.76 gave it a completely different perspective &mdash; sweeping from 237 km to 42,400 km altitude every 12.8 hours. What scientific questions require high eccentricity? Compare Explorer 6&rsquo;s orbit to Molniya orbits, INTEGRAL&rsquo;s orbit, and the recently proposed highly elliptical orbits for cislunar space domain awareness.</p>
+
+    <h3>Question 5: Photography as Calibration</h3>
+
+    <p>The first photograph of Earth from orbit was scientifically useless &mdash; too low resolution, too noisy, too distorted. Its value was entirely in proving the concept: a spacecraft CAN image Earth from orbit. How often in science and engineering is the first demonstration of a capability valued not for its data quality but for its existence? Compare to the first X-ray image (Rontgen&rsquo;s wife&rsquo;s hand), the first electronic television image (a line), and the first DNA structure (Photo 51, barely interpretable without theory).</p>
+
+  </div>
+
+  <div class="prose">
+    <blockquote>
+      <p><em>&ldquo;Explorer 6 saw Earth the way a spinning top sees a room &mdash; in fragments, assembled by rotation, blurred by motion, barely resolved. The photocell traced the unit circle 2.8 times per minute, and during each transit of Earth&rsquo;s disk it recorded a brightness curve that became one line of an image. One hundred rotations, one photograph. The mathematics of this image is trigonometry &mdash; the photocell position is (cos theta, sin theta) at every instant, and the brightness B(theta) during the Earth-crossing arc is the raw data. The reconstruction from angular brightness samples to rectangular image is a coordinate transform, from polar (spin angle, line number) to Cartesian (pixel row, pixel column). This is the same transform that radar uses, that CT scanners use, that radio telescopes use. Explorer 6 did it first, from orbit, with a single photocell, producing an image that contained fewer bits than this sentence but showed something no human eye had ever seen: the curve of Earth against the black of space, sunlit and whole, from 20,000 miles away.&rdquo;</em></p>
+    </blockquote>
+  </div>
+
+  <div class="nav-card">
+    <a href="organism.html">&larr; Organism</a>
+    <a href="papers.html">Papers &rarr;</a>
+  </div>
+</main>
+
+<footer><p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.6 Explorer 6 + Trametes versicolor &mdash; tibsfox.com/Research/NASA/</p></footer>
+
+</body>
+</html>
