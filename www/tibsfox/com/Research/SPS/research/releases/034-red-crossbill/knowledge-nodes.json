@@ -1,0 +1,247 @@
+{
+  "degree": 34,
+  "species": "Red Crossbill",
+  "scientific_name": "Loxia curvirostra",
+  "slug": "034-red-crossbill",
+  "sound_type": "kip-kip-kip flight call + warble",
+  "energy": 4,
+  "ecosystem": "cone crop",
+  "season": "irruptive",
+  "family": "Fringillidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; found in mature conifer forests throughout Washington and Oregon, from coastal Sitka spruce to montane lodgepole pine. Distribution shifts year to year based on cone crop abundance. Present in Puget Sound lowlands when cone crops favor it, absent when they do not. The coordinates are the project anchor; the bird's home is wherever the cones are."
+  },
+  "taxonomy_note": {
+    "description": "Red Crossbill is the THIRD Fringillidae in the engine, and the SECOND consecutive Fringillidae after Cassin's Finch (degree 33). New genus: Loxia (crosswise). Described by Linnaeus in 1758. The crossed mandibles are the defining morphological feature -- a specialized adaptation for extracting seeds from closed conifer cones. The species harbors a type system of at least 10 call types in North America, each associated with different conifer species and bill morphologies. Type 9 was split as Cassia Crossbill (Loxia sinesciuris) in 2017 -- the first call type elevated to species status.",
+    "current_family": "Fringillidae",
+    "new_family": false,
+    "family_count_in_engine": 17,
+    "fringillidae_count_in_engine": 3,
+    "name_etymology": "Loxia = Ancient Greek loxos (crosswise, oblique), referencing the crossed mandibles. Curvirostra = Latin curvus (curved) + rostrum (bill) = curved-billed. Full translation: 'cross-billed curved-beak.' Both genus and species name describe the same feature -- the crossed bill. Compare with Spinus pinus (ecological naming) and Haemorhous cassinii (honorific naming). Three naming philosophies in one family.",
+    "genus_note": "Loxia is new to the engine. The genus contains 5-6 recognized species worldwide: Red Crossbill (L. curvirostra), White-winged Crossbill (L. leucoptera), Cassia Crossbill (L. sinesciuris), Scottish Crossbill (L. scotica), Parrot Crossbill (L. pytyopsittacus), and Hispaniolan Crossbill (L. megaplaga). All have crossed mandibles. All are conifer seed specialists. The genus represents an adaptive radiation into the niches presented by different conifer species.",
+    "type_system": {
+      "description": "The Red Crossbill type system is one of the most extraordinary taxonomic puzzles in ornithology. At least 10 distinct call types in North America, each with characteristic flight calls, bill morphologies, preferred conifer species, and largely assortative mating. The types represent an ongoing adaptive radiation -- speciation in progress, observable through vocalizations and morphology.",
+      "types_in_pnw": [
+        "Type 3: Western hemlock / Douglas-fir specialist, small bill, core range in Pacific Northwest",
+        "Type 10: Sitka spruce specialist, small bill, Pacific Northwest coast",
+        "Type 2: Ponderosa pine specialist, medium-large bill, western mountains including eastern Cascades",
+        "Type 5: Lodgepole pine specialist, medium-large bill, Rocky Mountains and boreal, including eastern Washington"
+      ],
+      "species_split": "Type 9 elevated to Cassia Crossbill (Loxia sinesciuris) in 2017 -- confined to ~70 km^2 in South Hills, Idaho. Evolved in absence of Red Squirrels (sinesciuris = 'without squirrels'). First call type recognized as distinct species.",
+      "key_researchers": "Jeff Groth (call type discovery, 1993), Craig Benkman (adaptive radiation, bill-cone coevolution, 1993-2024)"
+    },
+    "fringillidae_trio": {
+      "degree_12": "Spinus pinus (Pine Siskin) -- E=1, irruptive, ascending zhreee, tweezer bill for small seeds from open cones, nomadic",
+      "degree_33": "Haemorhous cassinii (Cassin's Finch) -- E=4, summer, rich warbling cadenza with mimicry, standard finch bill for open cones, territorial",
+      "degree_34": "Loxia curvirostra (Red Crossbill) -- E=4, irruptive, kip-kip-kip flight call + warble, crossed mandibles for closed cones, nomadic",
+      "status": "OPEN (3 of ~228 Fringillidae worldwide -- three genera now represented)",
+      "structure": "Three genera, three bill morphologies, three conifer-exploitation strategies, three seasonal/movement patterns. All conifer seed dependent. Energy spans E=1 to E=4. The family demonstrates maximum internal diversity in the engine -- more ecological and vocal variation within Fringillidae than within any other family represented."
+    },
+    "fringillidae_pair_33_34": {
+      "description": "Second consecutive same-family pair in the engine (after Bombycillidae 31-32). Cassin's Finch and Red Crossbill share Fringillidae, E=4, and conifer seed dependency. They differ in genus, bill morphology, vocal strategy, seasonal pattern, and territorial behavior. The Cassin's Finch mimics the Red Crossbill (degree 33 quotes degree 34). The crossbill does not mimic the Cassin's Finch. Asymmetric acoustic relationship.",
+      "key_contrast": "Cassin's Finch = individual voice (cadenza with mimicry, one bird many voices). Red Crossbill = tribal voice (flight call diagnostic of type, many birds one voice)."
+    }
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-7,000 (song); 3,000-5,000 (flight call)",
+    "peak_energy_band_hz": "3,000-5,000 (flight call); 2,500-5,500 (song)",
+    "song_duration_s": "2-10 (warble song); 0.05-0.1 per note (flight call)",
+    "syllable_rate_per_second": "Variable in song; 3-10 calls per second in flight call series",
+    "note_structure": "DUAL STRUCTURE: (1) Flight call -- short, sharp, percussive kip or jip notes, type-diagnostic, given in rapid series. (2) Song -- loose, sweet warble/trill, individually variable, preceded by flight-call-like notes. The dual structure is the defining vocal feature.",
+    "note_types": "THREE primary categories: (1) FLIGHT CALL -- the type-diagnostic kip-kip-kip or jip-jip-jip, given constantly in flight and foraging, the tribal identifier. (2) WARBLE SONG -- male display song, a loose trill/warble with buzzy notes and whistles, territorial/courtship. (3) EXCITEMENT CALL -- higher-pitched variant of flight call given during agitation or alarm.",
+    "phrase_structure": "Flight call: stereotyped within type, consistent through life, distinct between types. Song: variable and likely learned, individually distinctive, not type-diagnostic in the same way as flight call.",
+    "timbre": "Flight call: sharp, percussive, metallic or dry depending on type. Some types give a hard 'jip,' others a softer 'toop.' Song: sweet, warbling, looser and more melodic than the flight call. The contrast between the percussive call and melodic song is the dual-voice character.",
+    "amplitude": "Flight call: moderate, carrying -- audible at distance in flight. Song: moderate, from exposed perches. E=4 reflects the overall acoustic presence of a foraging flock giving constant flight calls plus the occasional male song -- not the loudest species individually but persistently vocal.",
+    "mimicry": "Red Crossbills do NOT regularly mimic other species. This contrasts directly with the Cassin's Finch (degree 33), which extensively mimics the Red Crossbill. The irony: the mimicked species does not mimic back. The flight call is species-typical (or type-typical), not borrowed.",
+    "context": "Flight call: given constantly -- in flight, while foraging in cones, as contact call within flocks. Maintains flock cohesion, enables type-assortative flocking, and enforces reproductive isolation between types. Song: male display, breeding period, from exposed perches. Less conspicuous than flight call because nomadic lifestyle reduces importance of sustained territorial defense.",
+    "key_property": "THE DIALECT -- the 35th acoustic element. A population-level vocal marker that identifies the speaker's group (call type), maintains social cohesion within the group, and enforces reproductive boundaries between groups. After the cadenza's individual virtuosity (degree 33), the dialect introduces collective identity as acoustic function. The flight call is not just a contact call -- it is a species-boundary marker in a complex undergoing active speciation."
+  },
+  "cone_crop_ecology": {
+    "definition": "A resource-defined ecosystem designation rather than a vegetation community. 'Cone crop' is the state of having mature conifer cones with accessible seeds, wherever that occurs -- from coastal Sitka spruce to montane lodgepole pine to suburban Douglas-fir. The first resource-defined ecosystem in the engine (previous ecosystems have been place-defined: old-growth, riparian, mountain conifer, etc.).",
+    "key_conifer_associations": [
+      "Western hemlock (Tsuga heterophylla) -- Type 3 primary food, small soft cones, PNW lowland/mid-elevation",
+      "Douglas-fir (Pseudotsuga menziesii) -- Type 3 and Type 4 food, medium cones, widespread PNW",
+      "Sitka spruce (Picea sitchensis) -- Type 10 primary food, soft cones, PNW coast",
+      "Ponderosa pine (Pinus ponderosa) -- Type 2 primary food, hard cones, eastern Cascades/dry side",
+      "Lodgepole pine (Pinus contorta) -- Type 5 primary food, medium-hard cones, montane/boreal"
+    ],
+    "cone_crop_dynamics": "Conifer cone production is irregular -- masting years with bumper crops interspersed with lean years. Timing and magnitude vary between species and regions. Crossbills track these fluctuations nomadically, settling to breed where food is sufficient and moving when crops fail.",
+    "squirrel_competition": "Red Squirrels (Tamiasciurus hudsonicus) are the primary competitor for conifer seeds. Where squirrels are abundant, they can strip cone crops before crossbills can exploit them. The absence of squirrels in the South Hills of Idaho enabled the Cassia Crossbill's speciation.",
+    "breeding_any_season": "Red Crossbills can breed in any month of the year if cone crops are sufficient. Nesting documented January through September in North America. This is a fundamentally different temporal strategy from all other species in the engine -- reproduction driven by food availability, not photoperiod.",
+    "significance": "First resource-defined ecosystem in the engine. Adds a new category to the ecosystem vocabulary: not a place but a condition. Reflects the crossbill's nomadic lifestyle -- its home is not a habitat type but a food availability state."
+  },
+  "crossed_bill_adaptation": {
+    "description": "The crossed mandibles are the Red Crossbill's defining morphological feature and one of the most specialized feeding adaptations in the bird world. The upper mandible curves to one side (left or right) while the lower mandible curves the opposite way, creating an X-shaped crossing at the tip.",
+    "mechanics": "Insert closed bill between cone scales -> bite -> lateral crossing acts as lever, lower mandible pushes scale sideways -> tongue extracts seed from base of scale -> seed coat removed with tongue and palate. The operation takes a few seconds per scale. Crossbills exploit CLOSED cones -- cones that have not yet opened naturally.",
+    "handedness": "Individual crossbills are either left-billed or right-billed (upper mandible crosses left or right). Ratio approximately 1:1 in populations. Left-billed birds tend to start feeding from left side of cone, right-billed from right.",
+    "coevolution": "Crossbills and conifers have been locked in a coevolutionary arms race for approximately one million years (Benkman 2024). Conifers evolve harder scales and deeper seed wells. Crossbills evolve larger bills and stronger jaw muscles. The result is a mosaic of bill-cone matching across the landscape.",
+    "significance_for_type_system": "Bill morphology drives the type system. Each type has a bill optimized for a particular conifer genus. Bill size -> foraging efficiency -> habitat preference -> assortative flocking -> assortative mating -> reproductive isolation -> flight call divergence -> type system -> incipient speciation."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The dialect -- the 35th acoustic element: a population-level vocal marker that identifies the speaker's group, maintains social cohesion, and enforces reproductive boundaries between incipient species. The flight call as species-boundary marker in a complex undergoing active speciation.",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/dialect/",
+      "examples": [
+        "Red Crossbill flight calls: 10+ distinct call types in North America, each associated with different conifer species and bill morphologies. Each individual gives only one call type throughout its life.",
+        "The dialect in human music: regional vocal styles that identify the singer's origin -- Appalachian singing vs. gospel vs. sean-nos vs. throat singing. The style declares affiliation before the words convey meaning.",
+        "The progression: whisper (31) -> buzz (32) -> cadenza (33) -> dialect (34). From passive collective signal through amplified collective signal through individual virtuosity to group-diagnostic marker.",
+        "Previous acoustic elements have been about sound quality (timbre, rhythm, complexity). The dialect is about sound IDENTITY -- which group produced this sound, and what does membership in that group mean.",
+        "The dialect is the first acoustic element in the engine that SEPARATES populations rather than connecting them. The chickadee's language (degree 3) communicates universally. The crossbill's flight call communicates exclusively."
+      ],
+      "music_theory_parallel": "In music, a dialect is a regional variant of a shared tradition -- the same underlying form (blues, raga, folk song) expressed differently by different communities. Each dialect is immediately recognizable to insiders and distinguishable by outsiders. A delta blues guitarist and a Chicago blues guitarist play 'the blues' but sound fundamentally different; the difference IS the dialect. Red Crossbill call types are exactly this: the same underlying vocalization (short percussive flight call) expressed differently by each type. The difference between Type 3 and Type 10 is the difference between delta and Chicago -- same form, different identity. And just as human musical dialects can mark social boundaries (you sound like you're from here / you don't), crossbill dialects mark reproductive boundaries (you sound like my type / you don't)."
+    },
+    {
+      "concept": "Fringillidae pair (degrees 33-34) -- second consecutive same-family pair after Bombycillidae (31-32). Cassin's Finch and Red Crossbill share the family, E=4, and conifer dependency. They differ in genus, bill, vocal strategy, season, and territorial behavior. The mimic and the mimicked.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/fringillidae-pair/",
+      "examples": [
+        "Bombycillidae pair (31-32): Cedar Waxwing (whisper, E=4) + Bohemian Waxwing (buzz, E=5). Same genus, shared food (berries), shared social structure (flocks).",
+        "Fringillidae pair (33-34): Cassin's Finch (cadenza, E=4) + Red Crossbill (dialect, E=4). Different genera, shared food class (conifer seeds), opposite vocal strategies (mimicry cadenza vs. type-diagnostic flight call).",
+        "The Cassin's Finch mimics the Red Crossbill (degree 33 quotes degree 34). The Red Crossbill does not mimic the Cassin's Finch. Asymmetric acoustic relationship.",
+        "Cassin's Finch = individual voice (one bird, many voices). Red Crossbill = tribal voice (many birds, one voice per type).",
+        "Consecutive same-family pairs are becoming a structural pattern: degrees 31-34 are two pairs from two families."
+      ],
+      "music_theory_parallel": "A double concerto where two soloists from the same instrument family play contrasting roles. The Cassin's Finch is the first violin -- melodic, virtuosic, quoting themes from the orchestra, the star of the cadenza. The Red Crossbill is the timpani -- percussive, rhythmic, type-defining, the voice that tells the orchestra which movement they're in. Same family of instruments (Fringillidae), utterly different roles. The first violin quotes the timpani's rhythm. The timpani never quotes the first violin's melody. The asymmetry is structural: melody borrows from rhythm, but rhythm does not borrow from melody."
+    },
+    {
+      "concept": "The type system as speciation in progress -- 10+ call types representing an active adaptive radiation driven by conifer cone morphology, observable through flight calls, bill measurements, and molecular genetics. The Red Crossbill is not one species or many -- it is a species complex caught in the act of diverging.",
+      "level": "foundational",
+      "department": "ecology/speciation",
+      "college_path": ".college/ecology/speciation/crossbill-type-system/",
+      "examples": [
+        "10+ call types in North America, each with diagnostic flight call, bill morphology optimized for a particular conifer, and largely assortative mating.",
+        "Type 9 elevated to species status in 2017 as Cassia Crossbill (Loxia sinesciuris) -- the first type formally recognized as a distinct species.",
+        "Craig Benkman's research: bill depth correlates with cone hardness, husking groove width correlates with seed size, foraging efficiency is type-specific.",
+        "The chain: cone morphology -> bill morphology -> foraging efficiency -> assortative flocking -> assortative mating -> reproductive isolation -> call divergence -> speciation.",
+        "The type system is the strongest evidence in the engine for a direct link between ecological specialization and acoustic divergence."
+      ],
+      "music_theory_parallel": "A theme and variations where the variations have drifted so far from the original that listeners debate whether they are still the same piece. Each variation (call type) is recognizably related to the others but has developed its own character, its own audience, its own performance tradition. Some variations have drifted far enough to be published as independent compositions (Cassia Crossbill). Others remain in the same opus but are performed by different ensembles who do not play together. The theme-and-variations form is dissolving into independent works in real time. This is speciation as musical process."
+    },
+    {
+      "concept": "Cone crop as the engine's first resource-defined ecosystem -- not a place but a condition, reflecting the crossbill's nomadic lifestyle where home is wherever the food is, whenever the food is there.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/cone-crop/",
+      "examples": [
+        "Previous ecosystems in the engine have been place-defined: old-growth, riparian, mountain conifer, open sky, estuary, berry stands.",
+        "Cone crop is resource-defined: the state of having mature conifer cones with accessible seeds. The habitat is the food, not the forest type.",
+        "The Red Crossbill can be found in coastal Sitka spruce, montane lodgepole pine, lowland Douglas-fir, suburban ornamental conifers -- wherever cones are available.",
+        "Breeding in any month: the temporal dimension is also resource-defined. The crossbill breeds when food is sufficient, not when the calendar says it should.",
+        "This is the ecological equivalent of a musician who plays wherever the gig is, whenever the gig is available."
+      ],
+      "music_theory_parallel": "Some musicians are resident -- they play the same venue every week, the same city, the same scene. Others are itinerant -- they go where the work is, play the festival circuit, follow the bookings. The venue is not their identity; the music is. The crossbill is the itinerant musician of the conifer forest. Its ecosystem is not a forest type (venue) but a food resource (gig). Wherever the cone crop is producing (wherever the gig is paying), that is home. The ecosystem category 'cone crop' is the booking calendar, not the venue address."
+    },
+    {
+      "concept": "The crossed mandibles as master key -- the morphological adaptation that enables the entire crossbill radiation, the evolutionary innovation that opened the closed-cone niche and set in motion the type system, the coevolutionary arms race with conifers, and the flight call divergence that may be producing new species.",
+      "level": "intermediate",
+      "department": "ecology/adaptation",
+      "college_path": ".college/ecology/adaptation/crossed-mandibles/",
+      "examples": [
+        "Upper and lower mandibles cross at the tips, creating a lever that pries open closed conifer cone scales.",
+        "Left-billed and right-billed individuals occur in approximately equal proportions.",
+        "The crossed bill enables exploitation of closed cones -- a food resource inaccessible to all other passerines.",
+        "Bill size varies between types: larger bills for harder cones (ponderosa, lodgepole), smaller bills for softer cones (hemlock, spruce).",
+        "One million years of coevolution: conifers evolve harder defenses, crossbills evolve stronger bills. The arms race drives the adaptive radiation."
+      ],
+      "music_theory_parallel": "The invention of the valve transformed brass instruments. Before valves, each brass instrument could play only the notes of its natural harmonic series. The valve allowed access to every chromatic note -- it opened the closed scale the way the crossed bill opens the closed cone. And once the valve existed, brass instruments diversified: the same basic innovation (valve/crossed bill) adapted to different registers (trumpet/horn/tuba) the way crossbill types adapted to different conifers. One mechanical innovation, an entire family radiation."
+    },
+    {
+      "concept": "E=4 sustained for the second consecutive degree -- the pair forms at E=4, maintaining the energy level from the cadenza through the dialect. Three of the last four degrees are E=4 (31, 33, 34). The E=5 spike at degree 32 is increasingly isolated as a single-degree accent.",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e4-pair/",
+      "examples": [
+        "Energy arc: E=4 (31) -> E=5 (32) -> E=4 (33) -> E=4 (34). The spike is confirmed as an accent. E=4 dominates.",
+        "E=4 now has 13 degrees (37.1% of engine -- largest share). E=5 has 1 degree (2.9%).",
+        "The Fringillidae pair at E=4 parallels the start of the waxwing pair at E=4 (31). Pairs form at E=4.",
+        "The engine has not used E=3 since degree 20 (14 degrees ago). The lower energy levels are increasingly distant.",
+        "Risk: E=4 dominance may reduce dynamic range. The engine needs E=3 or E=5 variation soon."
+      ],
+      "music_theory_parallel": "A sustained mezzo-forte passage. The sforzando accent at degree 32 was the exception. The prevailing dynamic is E=4 -- energetic, present, not extreme. Like a symphony's development section that maintains a consistent intensity while the harmonic and thematic material evolves. The constancy of the dynamic level allows the listener to focus on the timbral and structural changes (cadenza vs. dialect, mimicry vs. type-identity) rather than being distracted by volume shifts."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-033",
+      "title": "Cassin's Finch (Degree 33)",
+      "connection": "FRINGILLIDAE PAIR. Consecutive Fringillidae forming a pair like the waxwing pair (31-32). Different genera (Haemorhous vs. Loxia), different bill strategies (standard vs. crossed), different vocal strategies (mimicry cadenza vs. type-diagnostic flight call). The Cassin's Finch mimics the Red Crossbill -- degree 33 quotes degree 34 before degree 34 arrives. Both are conifer seed specialists."
+    },
+    {
+      "project": "SPS-012",
+      "title": "Pine Siskin (Degree 12)",
+      "connection": "THREE FRINGILLIDAE. Three genera (Spinus, Haemorhous, Loxia), three bill morphologies (tweezer, standard, crossed), three energy levels (E=1, E=4, E=4), three seasonal strategies (irruptive, summer, irruptive). The family now occupies more acoustic and ecological territory than any other family in the engine. All three are conifer seed specialists."
+    },
+    {
+      "project": "SPS-032",
+      "title": "Bohemian Waxwing (Degree 32)",
+      "connection": "IRRUPTIVE PAIR. Two irruptive species in three degrees (32 and 34). Bohemian Waxwing irrupts when berry crops fail. Red Crossbill irrupts when cone crops fail. Same movement strategy, different food triggers, different social structures."
+    },
+    {
+      "project": "SPS-031",
+      "title": "Cedar Waxwing (Degree 31)",
+      "connection": "FOUR-DEGREE ARC. Degrees 31-34: whisper (31) -> buzz (32) -> cadenza (33) -> dialect (34). Four consecutive degrees, three families, four acoustic elements, four fundamentally different relationships between sound and social organization."
+    },
+    {
+      "project": "SPS-024",
+      "title": "Western Tanager (Degree 24)",
+      "connection": "MOUNTAIN CONIFER COMPANION. Type 2 Red Crossbills (ponderosa specialists) forage alongside Western Tanagers in the same eastern Cascades forests. The cone crop ecosystem overlaps with the mountain conifer ecosystem."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "COMPLEXITY TRAJECTORY. From cascade to dialect. The Pacific Wren's cascade (degree 1) was sheer acoustic elaboration. The Red Crossbill's dual voice (degree 34) is complex in a different dimension: not more notes per second but more evolutionary significance per note."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Red Crossbill documented as resident/nomadic in mature conifer forests throughout Washington and Oregon. Multiple call types in PNW: Type 3 (western hemlock/Douglas-fir), Type 10 (Sitka spruce), Type 2 (ponderosa pine), Type 5 (lodgepole pine)."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Conifer seed ecology, cone crop dynamics, masting behavior. Red Squirrel competition. Old-growth dependency for maximum cone production. Fire ecology and conifer succession."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 33,
+    "total_entries": 35,
+    "families_represented": 17,
+    "largest_families": {
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Parulidae": 5,
+      "Fringillidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Cardinalidae": 2,
+      "Picidae": 2
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34],
+      "E5": [32]
+    },
+    "energy_note": "E=4 for the second consecutive degree. E=4 now has 13 degrees (37.1%), dominant. E=5 remains at 1 degree (2.9%). E=3 has not appeared since degree 20 (14 degrees ago). Dynamic range compression is a growing concern.",
+    "passeriformes_streak": "12 consecutive (23-34) -- EXTREME. MUST BREAK. Extended by one more degree. The Fringillidae pair kept us in Passeriformes.",
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive"],
+    "ecosystem_note": "Cone crop -- FIRST RESOURCE-DEFINED ECOSYSTEM in the engine. Not a place but a condition: the availability of mature conifer cones. Reflects the crossbill's nomadic lifestyle. Adds a new ecosystem category type.",
+    "type_system_note": "FIRST SPECIES IN ENGINE WITH A VOCAL TYPE SYSTEM representing incipient speciation. 10+ call types in North America, each associated with different conifer species and bill morphologies. The flight call is a species-boundary marker in a complex undergoing active speciation.",
+    "acoustic_element_35": "THE DIALECT -- a population-level vocal marker that identifies the speaker's group (call type), maintains social cohesion, and enforces reproductive boundaries between incipient species.",
+    "critical_gaps": [
+      "No marine/shoreline species in 34 degrees of 'The Sound of Puget Sound' -- 34 DEGREES OVERDUE -- CRISIS LEVEL (WORSENING)",
+      "Twelve consecutive Passeriformes (23-34) -- EXTREME -- UNPRECEDENTED STREAK (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 34 degrees",
+      "No raptor (Accipitridae, Falconidae) -- 34 degrees",
+      "No nocturnal species since degree 4 (30 degrees ago)",
+      "E=3 not used since degree 20 (14 degrees ago) -- dynamic range compression"
+    ]
+  }
+}

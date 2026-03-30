@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 34&deg; &mdash; Red Crossbill &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Dialect highlight card */
+    .dialect-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #7986CB 100%);
+      border: 2px solid #283593;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dialect-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Type system card */
+    .type-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .type-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Fringillidae trio card */
+    .family-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Crossed bill card */
+    .bill-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #81C784 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .bill-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 1px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.dialect { background: #283593; }
+    .theory-icon.pair { background: #1565C0; }
+    .theory-icon.speciation { background: #E65100; }
+    .theory-icon.cone { background: #2E7D32; }
+    .theory-icon.bill { background: #00695C; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">34&deg;</div>
+      <div class="release-title-block">
+        <h2>Red Crossbill</h2>
+        <div class="scientific">Loxia curvirostra &middot; Family Fringillidae (True Finches) &middot; 3rd Fringillidae in Engine</div>
+      </div>
+    </div>
+    <div class="release-subtitle">kip-kip-kip Flight Call + Warble &middot; Cone Crop &middot; Irruptive &middot; Energy 4 &mdash; Fringillidae Pair Closes</div>
+
+    <blockquote>
+      Somewhere in the Douglas fir canopy, a sound like pebbles clicking.
+      <em>Kip-kip-kip.</em> Sharp. Percussive. Rhythmic. A small flock moves
+      through the tree, hanging upside down from cones, prying scale after
+      scale with bills that evolution crossed at the tips &mdash; a tool so
+      specialized it looks broken until you see what it opens. The flight
+      call declares their type: <em>we are the hemlock crossbills, the
+      Douglas-fir crossbills, this is our tribe.</em> And when one male
+      pauses on an open branch, he pours out a different sound &mdash; a
+      loose, sweet warble, the song inside the call, the individual inside
+      the tribe. Two voices. One bird. The dialect and the melody. The
+      tribe and the self.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Dialect Card -->
+        <div class="dialect-card">
+          <h3>The Dialect &mdash; 35th Acoustic Element</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Red Crossbill&rsquo;s flight call is a <strong>population-level
+            vocal marker</strong> that identifies the speaker&rsquo;s call type,
+            maintains social cohesion within the type, and enforces reproductive
+            boundaries between types. After the cadenza&rsquo;s individual
+            virtuosity (degree 33), the dialect introduces <strong>collective
+            identity as acoustic function</strong>. This is the first
+            vocalization in the engine that <em>separates</em> populations
+            rather than connecting them.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Progression: whisper (31) &rarr; buzz (32) &rarr; cadenza (33)
+            &rarr; <strong>dialect (34)</strong>. Four degrees, four
+            fundamentally different relationships between sound and social
+            organization.
+          </p>
+        </div>
+
+        <!-- Type System Card -->
+        <div class="type-card">
+          <h3>The Type System &mdash; Speciation in Progress</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            At least <strong>10 distinct call types</strong> in North America,
+            each with a diagnostic flight call, a bill morphology optimized for
+            a particular conifer, and largely assortative mating. Type 9 was
+            elevated to full species status in 2017 as the <strong>Cassia
+            Crossbill</strong> (<em>Loxia sinesciuris</em>). The Red Crossbill
+            is a species complex caught in the act of diverging.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.82rem;">
+            <thead>
+              <tr><th>Type</th><th>Primary Conifer</th><th>Bill</th><th>PNW</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>2</td><td>Ponderosa pine</td><td>Medium-large</td><td>E. Cascades</td></tr>
+              <tr><td>3</td><td>W. hemlock / Douglas-fir</td><td>Small</td><td><strong>Core PNW</strong></td></tr>
+              <tr><td>5</td><td>Lodgepole pine</td><td>Medium-large</td><td>Montane</td></tr>
+              <tr><td>10</td><td>Sitka spruce</td><td>Small</td><td><strong>PNW coast</strong></td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Craig Benkman&rsquo;s research: bill depth correlates with cone
+            hardness. Husking groove width correlates with seed size. Each type
+            forages fastest on its preferred conifer. One million years of
+            coevolution.
+          </p>
+        </div>
+
+        <!-- Fringillidae Trio Card -->
+        <div class="family-card">
+          <h3>Fringillidae Trio &mdash; Three Genera, Three Strategies</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The third true finch in the engine. Three genera: <em>Spinus</em>,
+            <em>Haemorhous</em>, <em>Loxia</em>. Three bill morphologies:
+            tweezer, standard, crossed. All three are conifer seed specialists.
+            The family spans E=1 to E=4 and irruptive to summer.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Energy</th><th>Bill</th><th>Sound</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>12</td><td>Pine Siskin</td><td><em>Spinus</em></td><td>E=1</td><td>Tweezer</td><td>Rising zhreee</td></tr>
+              <tr><td>33</td><td>Cassin&rsquo;s Finch</td><td><em>Haemorhous</em></td><td>E=4</td><td>Standard</td><td>Rich warbling cadenza</td></tr>
+              <tr style="background: rgba(21,101,192,0.12); font-weight: 600;"><td>34</td><td>Red Crossbill</td><td><em>Loxia</em></td><td>E=4</td><td>Crossed</td><td>kip-kip-kip + warble</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            The Cassin&rsquo;s Finch mimics the Red Crossbill. The Red Crossbill
+            does not mimic the Cassin&rsquo;s Finch. Degree 33 quotes degree 34.
+            The quotation runs one direction.
+          </p>
+        </div>
+
+        <!-- Crossed Bill Card -->
+        <div class="bill-card">
+          <h3>The Crossed Mandibles &mdash; Evolution&rsquo;s Master Key</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Upper and lower mandibles cross at the tips, creating an X-shaped
+            lever that pries open <strong>closed conifer cone scales</strong>
+            &mdash; a food resource inaccessible to all other passerines. Left-
+            and right-billed individuals occur in equal proportions. The bill
+            drives the entire type system: cone morphology &rarr; bill
+            morphology &rarr; foraging efficiency &rarr; assortative flocking
+            &rarr; assortative mating &rarr; flight call divergence &rarr;
+            incipient speciation.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Dual Voice Bioacoustics: Flight Call + Song</h2>
+        <p>
+          The Red Crossbill&rsquo;s vocal repertoire has a <strong>dual
+          structure</strong> unique in the engine. The <strong>flight call</strong>
+          (kip-kip-kip) is a short, sharp, percussive contact call given
+          constantly in flight and while foraging &mdash; the tribal identifier
+          that defines the type system. The <strong>warble song</strong> is a
+          loose, sweet trill delivered by males from exposed perches &mdash;
+          the individual display.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Flight Call</th><th>Song</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>3&ndash;5 kHz</td><td>2&ndash;7 kHz</td></tr>
+            <tr><td>Duration</td><td>~50&ndash;100 ms per note</td><td>2&ndash;10 seconds per bout</td></tr>
+            <tr><td>Structure</td><td>Stereotyped within type, 2-note series</td><td>Variable, loose warble/trill</td></tr>
+            <tr><td>Function</td><td>Type identification, flock cohesion</td><td>Territory, courtship</td></tr>
+            <tr><td>Type-diagnostic?</td><td><strong>Yes &mdash; defines the type system</strong></td><td>Less so &mdash; individually variable</td></tr>
+            <tr><td>Learned?</td><td>Likely innate or learned very early</td><td>Likely learned</td></tr>
+            <tr><td>Mimicry</td><td>None</td><td>None (contrast with Cassin&rsquo;s Finch)</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>The 35th acoustic element: the dialect.</strong> A
+          population-level vocal marker that identifies the speaker&rsquo;s
+          group, maintains social cohesion within the group, and enforces
+          reproductive boundaries between groups. After the cadenza&rsquo;s
+          individual virtuosity, the dialect introduces collective identity.
+          The flight call is not merely a contact call &mdash; it is a
+          species-boundary marker in a complex undergoing active speciation.
+        </p>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=4 Sustained &mdash; The Pair Energy</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Energy arc: E=4 (31) &rarr; E=5 (32) &rarr; E=4 (33) &rarr;
+            <strong>E=4 (34)</strong>. The Fringillidae pair forms at E=4,
+            mirroring the start of the waxwing pair. E=4 now has 13 degrees
+            (37.1%), dominant. E=5 remains at 1 degree (2.9%). E=3 has not
+            appeared since degree 20 &mdash; 14 degrees ago. Dynamic
+            compression is growing.
+          </p>
+        </div>
+
+        <!-- Taxonomy Section -->
+        <h2>Taxonomy: The Cross-Billed Curved-Beak</h2>
+        <p>
+          <em>Loxia curvirostra</em> (Linnaeus, 1758). The genus name from
+          Ancient Greek <em>loxos</em> (&ldquo;crosswise&rdquo;); the species
+          from Latin <em>curvus</em> (&ldquo;curved&rdquo;) + <em>rostrum</em>
+          (&ldquo;bill&rdquo;). Both genus and species describe the same
+          feature: the crossed, curved mandibles. Three naming philosophies
+          now in the Fringillidae: ecological (<em>Spinus pinus</em>),
+          honorific (<em>Haemorhous cassinii</em>), anatomical
+          (<em>Loxia curvirostra</em>).
+        </p>
+        <p>
+          The genus <em>Loxia</em> contains 5&ndash;6 species worldwide, all
+          with crossed mandibles, all conifer seed specialists. The Red
+          Crossbill is the most widespread, ranging across the boreal and
+          temperate forests of the entire Northern Hemisphere. In North
+          America, the species harbors at least <strong>10 call types</strong>
+          that may represent incipient species.
+        </p>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-033: Cassin&rsquo;s Finch</strong>
+            <p>FRINGILLIDAE PAIR. Consecutive Fringillidae. Different genera
+            (Haemorhous vs. Loxia), different vocal strategies (mimicry cadenza
+            vs. type-diagnostic flight call). Degree 33 mimics degree 34&rsquo;s
+            call. The quotation runs one direction.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>THREE FRINGILLIDAE. Three genera, three bills (tweezer / standard
+            / crossed), energy span E=1 to E=4. All conifer seed specialists.
+            The family occupies more ecological territory than any other in the
+            engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-032: Bohemian Waxwing</strong>
+            <p>IRRUPTIVE PAIR. Two irruptive species in three degrees (32, 34).
+            Waxwing follows berries. Crossbill follows cones. Same movement
+            strategy, different food triggers.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-031: Cedar Waxwing</strong>
+            <p>FOUR-DEGREE ARC. Whisper (31) &rarr; buzz (32) &rarr;
+            cadenza (33) &rarr; dialect (34). Four degrees, three families,
+            four acoustic elements.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-024: Western Tanager</strong>
+            <p>MOUNTAIN CONIFER COMPANION. Type 2 Red Crossbills forage
+            alongside Western Tanagers in the same eastern Cascades forests.
+            Cone crop overlaps mountain conifer.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001: Pacific Wren</strong>
+            <p>COMPLEXITY TRAJECTORY. The wren&rsquo;s cascade (degree 1) was
+            sheer acoustic elaboration. The crossbill&rsquo;s dual voice
+            (degree 34) carries more evolutionary significance per note.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI + ECO</strong>
+            <p>Red Crossbill documented in mature conifer forests throughout
+            Washington and Oregon. Conifer seed ecology, cone crop dynamics,
+            masting behavior, Red Squirrel competition.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon dialect">D</div>
+            <div class="theory-content">
+              <h4>The Dialect <span class="theory-level foundational">Foundational</span></h4>
+              <p>Population-level vocal marker that identifies group, maintains
+              cohesion, and enforces reproductive boundaries. The first
+              vocalization in the engine that separates populations rather than
+              connecting them. Sound as tribal identity.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">F</div>
+            <div class="theory-content">
+              <h4>Fringillidae Pair <span class="theory-level foundational">Foundational</span></h4>
+              <p>Second consecutive same-family pair (after Bombycillidae
+              31&ndash;32). Cassin&rsquo;s Finch = individual voice (cadenza,
+              mimicry). Red Crossbill = tribal voice (dialect, type identity).
+              The mimic and the mimicked. Asymmetric quotation.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon speciation">S</div>
+            <div class="theory-content">
+              <h4>Speciation in Progress <span class="theory-level foundational">Foundational</span></h4>
+              <p>10+ call types in an active adaptive radiation. One type already
+              elevated to species (Cassia Crossbill, 2017). Bill-cone coevolution
+              drives divergence. The strongest link in the engine between
+              ecological specialization and acoustic divergence.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon cone">C</div>
+            <div class="theory-content">
+              <h4>Cone Crop Ecosystem <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>First resource-defined ecosystem in the engine. Not a place
+              but a condition: the availability of mature conifer cones. The
+              crossbill&rsquo;s home is wherever the food is, whenever the
+              food is there.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon bill">X</div>
+            <div class="theory-content">
+              <h4>Crossed Mandibles <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>The morphological innovation that opened the closed-cone niche.
+              One million years of coevolution with conifers. The bill drives
+              the type system, which drives the flight call, which drives
+              speciation. Anatomy as destiny.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>E=4 Sustained <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>Second consecutive E=4. The Fringillidae pair forms at E=4,
+              as the waxwing pair did at E=4/E=5. E=4 now at 13 degrees
+              (37.1%). E=3 absent for 14 degrees. Dynamic compression
+              growing.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Adkisson, C.S. (2020). Red Crossbill (<em>Loxia curvirostra</em>), version 1.0. <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>&ldquo;Red crossbill.&rdquo; Wikipedia.</li>
+          <li>&ldquo;Crossbill.&rdquo; Wikipedia.</li>
+          <li>Groth, J.G. (1993). Evolutionary differentiation in morphology, vocalizations, and allozymes among nomadic sibling species in the North American red crossbill complex. <em>Univ. Calif. Publ. Zool.</em> 127: 1&ndash;143.</li>
+          <li>Young, M.A. (2011). Red Crossbill call-types of New York. <em>The Kingbird</em> 61: 106&ndash;123.</li>
+          <li>Benkman, C.W. (1993). Adaptation to single resources and the evolution of crossbill diversity. <em>Ecol. Monogr.</em> 63: 305&ndash;325.</li>
+          <li>Benkman, C.W. (2003). Divergent selection drives the adaptive radiation of crossbills. <em>Evolution</em> 57: 1176&ndash;1181.</li>
+          <li>eBird. &ldquo;Crossbills of North America: Species and Red Crossbill Call Types.&rdquo;</li>
+          <li>Payne, R.B. (2017). Cassia Crossbill (<em>Loxia sinesciuris</em>). AOS species designation.</li>
+          <li>Cornell Lab. &ldquo;Red Crossbill Sounds.&rdquo; All About Birds.</li>
+          <li>Finch Research Network. &ldquo;Red Crossbill (<em>Loxia</em>) &mdash; NA.&rdquo;</li>
+          <li>Frontiers in Bird Science. &ldquo;Detection and identification of a cryptic red crossbill call type.&rdquo; (2024).</li>
+          <li>Cornell Lab. &ldquo;Red Crossbill Life History.&rdquo; All About Birds.</li>
+          <li>BirdWeb (Seattle Audubon). &ldquo;Red Crossbill.&rdquo;</li>
+          <li>BirdLife International. <em>Loxia curvirostra</em>. BirdLife DataZone.</li>
+          <li>Partners in Flight. Avian Conservation Assessment Database.</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey. USGS.</li>
+          <li>Oregon Department of Fish &amp; Wildlife. &ldquo;Red Crossbill.&rdquo;</li>
+          <li>Edelaar, P. et al. (2008). Assortative mating in Common Crossbill vocal types. <em>J. Avian Biol.</em> 39: 9&ndash;12.</li>
+          <li>Benkman, C.W. (2024). <em>Crossbills and Conifers: One Million Years of Adaptation and Coevolution</em>.</li>
+          <li>Frontiers in Bird Science. &ldquo;Is resource specialization the key?&rdquo; (2024).</li>
+          <li>My Edmonds News. &ldquo;Bird Lore: Red Crossbill.&rdquo; (2017).</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">34&deg; of 360&deg;</div>
+          <div class="stat-detail">9.4% of full circle</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Second consecutive E=4</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Cone Crop</div>
+          <div class="stat-detail">First resource-defined ecosystem</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Irruptive</div>
+          <div class="stat-detail">Breeds any month, follows food</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Fringillidae</div>
+          <div class="stat-detail">3rd in engine (Siskin, Cassin&rsquo;s, Crossbill)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Passeriformes</div>
+          <div class="stat-detail">12th consecutive &mdash; EXTREME</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">#35: The Dialect</div>
+          <div class="stat-detail">Group vocal marker, species boundary</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Unique Species</div>
+          <div class="stat-value">33</div>
+          <div class="stat-detail">35 entries (incl. degree 0 silence)</div>
+        </div>
+
+        <h3>Conservation</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">IUCN Status</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">Species-level; individual types vary</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~26 million (NA)</div>
+          <div class="stat-detail">90&ndash;180M globally (BirdLife)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Call Types</div>
+          <div class="stat-value">10+ (NA)</div>
+          <div class="stat-detail">Type 9 split as Cassia Crossbill</div>
+        </div>
+
+        <h3>Navigation</h3>
+        <div class="stat-card">
+          <div class="stat-detail">
+            <a href="../033-cassins-finch/index.html">&larr; Degree 33: Cassin&rsquo;s Finch</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      The Sound of Puget Sound &mdash; Part B: PNW 360 Species
+      &middot; Degree 34&deg;: Red Crossbill
+      &middot; v1.49.170
+    </p>
+  </footer>
+</body>
+</html>
