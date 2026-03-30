@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 44&deg; &mdash; Lesser Goldfinch &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Mosaic highlight card */
+    .mosaic-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .mosaic-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Consecutive pair card */
+    .pair-card {
+      background: linear-gradient(135deg, #FFFDE7 0%, #FDD835 100%);
+      border: 2px solid #F9A825;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Spinus trilogy card */
+    .trilogy-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trilogy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Range expansion card */
+    .range-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .range-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Fringillidae five card */
+    .family-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #5D4037;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.mosaic { background: #2E7D32; }
+    .theory-icon.pair { background: #F9A825; }
+    .theory-icon.trilogy { background: #1565C0; }
+    .theory-icon.range { background: #E65100; }
+    .theory-icon.family { background: #7B1FA2; }
+    .theory-icon.energy { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">44&deg;</div>
+      <div class="release-title-block">
+        <h2>Lesser Goldfinch</h2>
+        <div class="scientific">Spinus psaltria</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      high thin tsee-ee-ee &mdash; the mosaic, 5th Fringillidae, 3rd <em>Spinus</em> (first genus with three members), consecutive goldfinch pair with degree 43, the smallest North American <em>Spinus</em>, &ldquo;female lute player of the thorn bush,&rdquo; remarkable mimic of 39+ species, range expanding northward into the PNW
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Mosaic Element Card -->
+        <div class="mosaic-card">
+          <h3>The 45th Acoustic Element: The Mosaic</h3>
+          <p>A song assembled from fragments of <strong>dozens of other species&rsquo; vocalizations</strong>, woven together with the bird&rsquo;s own bright twittering phrases into a single continuous performance. Individual males maintain repertoires of <strong>70&ndash;105 unique phrase types</strong>, with approximately half being mimicry of other species&rsquo; songs and calls. 39 avian species plus one mammal documented as mimicry sources at a single site. Each fragment is a copy. The arrangement is unique.</p>
+          <p><strong>The first acoustic element defined by interspecific vocal appropriation</strong> &mdash; a song that exists because the singer listened to other species and remembered what they said.</p>
+        </div>
+
+        <!-- Consecutive Pair Card -->
+        <div class="pair-card">
+          <h3>Consecutive Goldfinch Pair &mdash; Degrees 43 &amp; 44</h3>
+          <p><strong>American Goldfinch (43) then Lesser Goldfinch (44).</strong> Same genus, consecutive degrees. The engine&rsquo;s third consecutive same-genus pair, after the flicker pair (21&ndash;22) and the waxwing pair (31&ndash;32). Like the waxwings, the common species enters first and the less common species follows. Like the flickers, consecutive entries from the same lineage reveal different acoustic strategies from the same genetic foundation.</p>
+        </div>
+
+        <!-- Spinus Trilogy Card -->
+        <div class="trilogy-card">
+          <h3>The <em>Spinus</em> Trilogy &mdash; First Genus With Three Members</h3>
+          <p>Pine Siskin (degree 12, <em>S. pinus</em>), American Goldfinch (degree 43, <em>S. tristis</em>), and Lesser Goldfinch (degree 44, <em>S. psaltria</em>). <strong>No other genus has three entries in the engine.</strong> Three species, three acoustic strategies: <strong>noise</strong> (electronic zhreee), <strong>melody</strong> (canary warble + undulation), <strong>mosaic</strong> (mimicry collage of 39+ species). The genus spans E=1 to E=4 and the full range from original composition to borrowed anthology.</p>
+        </div>
+
+        <!-- Range Expansion Card -->
+        <div class="range-card">
+          <h3>Range Expansion &mdash; A Bird Arriving in Real Time</h3>
+          <p>The Lesser Goldfinch is <strong>actively expanding northward into the PNW</strong>. First Washington breeding record: 1975. Washington population increase: <strong>110.5% between 2012 and 2022</strong>. Drivers: warming temperatures, river proximity, urban development, increased precipitation. Vagrant records increasing in the Puget Sound region. Once colonized, areas remain occupied. This is the engine&rsquo;s first species defined primarily by ongoing range expansion.</p>
+        </div>
+
+        <h2>The Lute Player of the Thorn Bush</h2>
+        <p><em>Spinus psaltria</em> &mdash; &ldquo;Female lute player of the thorn bush.&rdquo; <em>Spinus</em> = Latin for &ldquo;thorn bush&rdquo; (the weedy plants where goldfinches feed). <em>Psaltria</em> = Ancient Greek for &ldquo;a female harpist&rdquo; or &ldquo;a female lute player,&rdquo; from <em>psallo</em>, &ldquo;to pluck a stringed instrument.&rdquo; Named by Thomas Say in 1822 for the plucked-string quality of the bird&rsquo;s descending call note. The only species in the engine whose scientific name explicitly references a musical instrument and a human performer.</p>
+
+        <h3>The <em>Spinus</em> Naming Trilogy</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Binomial</th><th>Translation</th><th>Philosophy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>12</td><td>Pine Siskin</td><td><em>Spinus pinus</em></td><td>&ldquo;Thorn-spine of the pine&rdquo;</td><td>Ecological + Ecological</td></tr>
+            <tr><td>43</td><td>American Goldfinch</td><td><em>Spinus tristis</em></td><td>&ldquo;Sad thorn-bird&rdquo;</td><td>Ecological + Emotional</td></tr>
+            <tr><td><strong>44</strong></td><td><strong>Lesser Goldfinch</strong></td><td><strong><em>Spinus psaltria</em></strong></td><td><strong>&ldquo;Female lute player of the thorn bush&rdquo;</strong></td><td><strong>Ecological + Musical</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Three <em>Spinus</em>, three naming philosophies. The genus stays botanical. The species epithets diversify: a plant, a mood, a musician.</p>
+
+        <h2>The Sound: Mimicry Mosaic + Lute String Call</h2>
+        <p><strong>Contact call:</strong> A high, thin, whistled <em>tsee-ee</em> or <em>tee-yee</em>, 1&ndash;2 descending notes at approximately 5&ndash;7 kHz. More whistled and cleaner than the Pine Siskin&rsquo;s buzzy <em>tee-u</em>. The plucked-string call that earned the name <em>psaltria</em>.</p>
+        <p><strong>Song:</strong> An extended medley of twittering, buzzing, and whistled notes, spanning 1.6&ndash;6.7 kHz, lasting up to 10&ndash;16+ seconds. Approximately <strong>50% original phrases</strong> (bright <em>Spinus</em> twittering) and <strong>50% mimicry</strong> (recognizable fragments of other species&rsquo; calls and songs). Individual repertoires of 70&ndash;105 unique phrase types. The song sounds like a rapid channel-surf through the local bird community.</p>
+        <p><strong>Mimicry documented:</strong> 39 avian species at one Arizona study site. Copied species vary geographically: Bewick&rsquo;s Wren and Black Phoebe in the Southwest, House Finch and Song Sparrow in California, Eastern Phoebe in Texas. As the species expands into the PNW, its mimicry palette would incorporate local engine species.</p>
+
+        <h3>All Five Fringillidae Songs</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Sound Type</th><th>Element</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>12</td><td>Pine Siskin</td><td><em>Spinus</em></td><td>Rising zhreee / buzzy warble</td><td>Sawtooth sweep</td><td>Electronic</td></tr>
+            <tr><td>33</td><td>Cassin&rsquo;s Finch</td><td><em>Haemorhous</em></td><td>Rich warbling display</td><td>The Cadenza</td><td>Virtuosic</td></tr>
+            <tr><td>34</td><td>Red Crossbill</td><td><em>Loxia</em></td><td>kip-kip-kip + warble</td><td>The Dialect</td><td>Percussive</td></tr>
+            <tr><td>43</td><td>American Goldfinch</td><td><em>Spinus</em></td><td>per-chick-o-ree + canary song</td><td>The Undulation</td><td>Coupled, bright</td></tr>
+            <tr><td><strong>44</strong></td><td><strong>Lesser Goldfinch</strong></td><td><strong><em>Spinus</em></strong></td><td><strong>high thin tsee-ee-ee</strong></td><td><strong>The Mosaic</strong></td><td><strong>Mimicry collage</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Five finches, five acoustic elements, five strategies. The <em>Spinus</em> trio spans from electronic noise to original melody to borrowed mosaic. The family&rsquo;s vocal diversity exceeds any other family in the engine except Parulidae.</p>
+
+        <!-- Fringillidae Five Card -->
+        <div class="family-card">
+          <h3>Fringillidae Rises to Five &mdash; Tied for Second</h3>
+          <p>Fringillidae now has <strong>five members</strong> (degrees 12, 33, 34, 43, 44), tying with Hirundinidae and Turdidae as the engine&rsquo;s second-most represented family behind Parulidae (10). <em>Spinus</em> alone has 3 entries &mdash; more than entire families like Trochilidae (4), Bombycillidae (2), or Paridae (2). The true finches have become a structural pillar of the engine.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=4 Continues &mdash; 21st Degree, Seven Consecutive</h3>
+          <p>E=4 now at <strong>21 degrees</strong> (46.7%). E=3 absent for <strong>24 consecutive degrees</strong> (since degree 20). E=2 absent for 31 degrees. E=1 absent for 32 degrees. <strong>Seven consecutive E=4 across two families</strong> (38&ndash;44). Dynamic range compression at its most severe.</p>
+        </div>
+
+        <h2>The Smallest North American <em>Spinus</em></h2>
+        <p>At <strong>9&ndash;12 cm</strong> and <strong>8&ndash;11.5 grams</strong> (average ~9.7 g), the Lesser Goldfinch is the smallest of the three PNW <em>Spinus</em> and possibly one of the smallest true finches in the world. &ldquo;Lesser&rdquo; refers purely to body size &mdash; it says nothing about the bird&rsquo;s vocal complexity, which exceeds its larger congener&rsquo;s. The smallest bird in the family has the most borrowed voices.</p>
+
+        <h2>Plumage: Green-Backed Western Form</h2>
+        <p>The PNW subspecies <em>S. p. hesperophilus</em> (&ldquo;western-loving&rdquo;) is the <strong>green-backed goldfinch</strong>: males have olive-green to yellowish-green backs, black caps, bright yellow underparts, and dark wings with bold white patches. Females are olive-green above, dull yellow below. Unlike the American Goldfinch, the Lesser Goldfinch does <strong>not molt twice yearly</strong> &mdash; its plumage is relatively stable across seasons. Where the American Goldfinch transforms, the Lesser Goldfinch holds steady.</p>
+
+        <h2>Family Tracker After Degree 44</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td><strong>Fringillidae</strong></td><td>12, 33, 34, 43, <strong>44</strong></td><td><strong>5</strong></td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>4</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Paridae</td><td>3, 9</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+          </tbody>
+        </table>
+        <p>Fringillidae rises to second (tied). Three <em>Spinus</em> entries alone exceed entire families.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon mosaic">M</div>
+            <div class="theory-content">
+              <h4>The Mosaic <span class="theory-level foundational">foundational</span></h4>
+              <p>The 45th acoustic element. A song assembled from mimicry of 39+ species woven with original twittering. 70&ndash;105 phrase types per individual. ~50% borrowed, ~50% original. The first element defined by interspecific vocal appropriation &mdash; the bird sings the neighborhood.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">G</div>
+            <div class="theory-content">
+              <h4>Consecutive Goldfinch Pair <span class="theory-level foundational">foundational</span></h4>
+              <p>American Goldfinch (43) + Lesser Goldfinch (44). Third consecutive same-genus pair in the engine (after flickers 21&ndash;22, waxwings 31&ndash;32). Common species first, less common second. Same genus, different acoustic strategies: undulation vs. mosaic.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon trilogy">S</div>
+            <div class="theory-content">
+              <h4><em>Spinus</em> Trilogy <span class="theory-level foundational">foundational</span></h4>
+              <p>First genus with three members: Pine Siskin (12), American Goldfinch (43), Lesser Goldfinch (44). Three strategies: noise, melody, mosaic. Energy span E=1 to E=4. The genus that contains everything.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon range">R</div>
+            <div class="theory-content">
+              <h4>Range Expansion Species <span class="theory-level foundational">foundational</span></h4>
+              <p>First species defined by active northward expansion into the PNW. Washington population +110.5% (2012&ndash;2022). Climate-driven, urban-facilitated. A soundscape in motion &mdash; the leading edge arrives.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon family">5</div>
+            <div class="theory-content">
+              <h4>Fringillidae at Five <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Fifth Fringillidae. Family rises to tied second (with Hirundinidae and Turdidae) behind Parulidae. Consecutive pair at 43&ndash;44. Three <em>Spinus</em> alone exceed most families&rsquo; total count.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">4</div>
+            <div class="theory-content">
+              <h4>E=4 &mdash; 24 Degrees Without E&le;3 <span class="theory-level intermediate">intermediate</span></h4>
+              <p>21st degree at E=4 (46.7%). Seven consecutive E=4 across two families (38&ndash;44). E=3 absent 24 degrees. Dynamic range compression at its most severe. The <em>Spinus</em> energy bracket holds: E=1 at 12, E=4 at 43 and 44.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-043: American Goldfinch</strong>
+            <p>CONSECUTIVE GOLDFINCH PAIR. Same genus (<em>Spinus</em>), consecutive degrees (43&ndash;44). The undulation gives way to the mosaic. Original canary warble vs. mimicry collage. State bird vs. range expander. Twice-yearly molt vs. stable plumage. Larger vs. smaller.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>SPINUS TRILOGY &mdash; THIRD MEMBER. Three <em>Spinus</em> at degrees 12, 43, 44. Pine Siskin = noise (E=1, electronic zhreee, irruptive nomad). Lesser Goldfinch = mosaic (E=4, mimicry collage, range expander). The genus brackets from minimum energy to the most borrowed voices.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-033: Cassin&rsquo;s Finch</strong>
+            <p>FRINGILLIDAE MIMICRY GRADIENT. Cassin&rsquo;s Finch = moderate mimic (some borrowed phrases in cadenza). Lesser Goldfinch = extensive mimic (39+ species, 50% of song). The mimicry scales up from mountain to lowland, from occasional to systematic.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>FRINGILLIDAE COUSIN. Crossbill = population-specific dialect (learned but species-internal). Lesser Goldfinch = interspecific mosaic (learned from other species). Both represent vocal learning in finches; different sources of borrowed material.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-031/032: Cedar + Bohemian Waxwing</strong>
+            <p>CONSECUTIVE PAIR PARALLEL. Waxwings at 31&ndash;32, goldfinches at 43&ndash;44. Both are same-genus consecutive pairs. Common species first, less common second. The engine&rsquo;s pair-making pattern confirmed.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-042: Yellow-rumped Warbler</strong>
+            <p>E=4 STREAK. Yellow-rumped at 42 was the fifth consecutive E=4 (Parulidae). The goldfinch pair at 43&ndash;44 extends to seven consecutive E=4 across two families. The dynamic level did not change when the family changed twice.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Lesser Goldfinch documented as range expander in PNW. First Washington breeding 1975. Increasing in Willamette Valley, southern Washington, and vagrant in Puget Sound.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Weedy shrub ecology. Climate-driven range expansion. Composite-plant seed communities. Riparian corridors as expansion pathways. Urban facilitation of range expansion.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Lesser Goldfinch (<em>Spinus psaltria</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Lesser Goldfinch. Cornell Lab of Ornithology.</li>
+          <li>Coutlee, E. L. (1971). &ldquo;Vocalizations in the genus <em>Spinus</em>.&rdquo; <em>Animal Behaviour</em> 19: 556&ndash;565.</li>
+          <li>Mundinger, P. C. (1982). &ldquo;Vocal Copying in Lawrence&rsquo;s and Lesser Goldfinches.&rdquo; <em>Western Birds</em> 13: 29&ndash;33.</li>
+          <li>Wikipedia &mdash; &ldquo;Lesser goldfinch.&rdquo;</li>
+          <li>Audubon &mdash; Lesser Goldfinch Field Guide.</li>
+          <li>BirdWeb (Seattle Audubon) &mdash; Lesser Goldfinch.</li>
+          <li>Finch Research Network &mdash; Lesser Goldfinch.</li>
+          <li>Earbirding &mdash; &ldquo;Mimicry in Cardueline finches.&rdquo;</li>
+          <li>Sibley Guides &mdash; &ldquo;Vocal copying by Pine Siskins&rdquo; and &ldquo;More vocal copying.&rdquo;</li>
+          <li>Xeno-canto &mdash; Lesser Goldfinch recordings.</li>
+          <li>eBird &mdash; Lesser Goldfinch occurrence data.</li>
+          <li>Partners in Flight &mdash; Population estimates. BBS data. USGS.</li>
+          <li>Cornell Lab (2025). &ldquo;Study Reveals Factors Driving Range Expansion in Lesser Goldfinches.&rdquo;</li>
+          <li><em>Ornithology</em> (2025). &ldquo;Climate and landscape modification facilitate range expansion in <em>Spinus psaltria</em>.&rdquo;</li>
+          <li>Say, Thomas (1822). Description of <em>Fringilla psaltria</em>.</li>
+          <li>Animal Diversity Web &mdash; <em>Spinus psaltria</em>.</li>
+          <li>Oregon Dept. of Fish &amp; Wildlife &mdash; &ldquo;Lesser goldfinch.&rdquo;</li>
+          <li>Sibley, D. A. <em>The Sibley Guide to Birds</em>, 2nd edition.</li>
+          <li>Wahl, T. R., et al. <em>Birds of Washington: Status and Distribution</em>.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">44&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Mosaic</div>
+          <div class="stat-detail">#45 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">21st degree at E=4 (46.7%)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Fringillidae</div>
+          <div class="stat-detail">5th member &mdash; tied 2nd largest</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Spinus</em></div>
+          <div class="stat-detail">3rd appearance (12, 43, 44) &mdash; first genus with three</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Weedy Shrub</div>
+          <div class="stat-detail">Open shrubland, composites, low trees</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Breeds spring&ndash;summer in PNW</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">43 unique</div>
+          <div class="stat-detail">45 entries (0&ndash;44)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Fringillidae tied 2nd at 5</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">No new order at degree 44</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~15 Million</div>
+          <div class="stat-detail">IUCN Least Concern, expanding</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">~9.7 g</div>
+          <div class="stat-detail">Smallest North American <em>Spinus</em></div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Mimicry</div>
+          <div class="stat-value">39+ Species</div>
+          <div class="stat-detail">~50% of song is mimicry</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">WA Population Growth</div>
+          <div class="stat-value">+110.5%</div>
+          <div class="stat-detail">2012&ndash;2022 (range expansion)</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 044</p>
+  </footer>
+</body>
+</html>
