@@ -1,0 +1,315 @@
+{
+  "degree": 48,
+  "species": "White-crowned Sparrow",
+  "scientific_name": "Zonotrichia leucophrys",
+  "slug": "048-white-crowned-sparrow",
+  "sound_type": "clear whistled song with buzzy trills",
+  "energy": 2,
+  "ecosystem": "mountain meadow edge / alpine shrub",
+  "season": "summer (breeds at elevation, winters at lower elevations)",
+  "family": "Passerellidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Tailed Frog",
+    "original_scientific_name": "Ascaphus truei",
+    "reason": "SPS Part B engine is birds-and-mammals only. White-crowned Sparrow replaces Tailed Frog, preserving the original E=2 energy level and mountain/shrub habitat. Fourth consecutive CSV substitution replacing an amphibian (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48). The engine continues through the amphibian belt of the original CSV.",
+    "preserved": ["E=2 energy level", "mountain/shrub habitat"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Z. l. pugetensis breeds from coastal SE Alaska south through the PNW to NW California. In Washington, breeds in brushy habitats from coastal scrub to mountain meadow edges. Winters in Pacific lowlands from SW British Columbia to northern Los Angeles County. The pugetensis subspecies is LITERALLY NAMED for Puget Sound -- the only bird in the engine whose subspecific epithet is the name of the project's subject. In western Washington, pugetensis is the breeding form; gambelii passes through on migration and winters alongside pugetensis in the lowlands."
+  },
+  "taxonomy_note": {
+    "description": "White-crowned Sparrow is the FOURTH Passerellidae (New World Sparrows) in the engine, extending the unprecedented consecutive streak to four degrees (45-46-47-48) with four different genera. Zonotrichia leucophrys: 'the white-browed banded-hair bird' -- Zonotrichia from Ancient Greek zone (band) + thrix (hair), leucophrys from leukos (white) + ophrys (eyebrow). Named by Forster in 1772 for the bird's diagnostic bold black-and-white head stripes. Five subspecies: pugetensis (PNW, literally 'of Puget Sound'), nuttalli (California coast, resident), gambelii (western taiga, long-distance migrant), oriantha (mountain west), leucophrys (eastern taiga). The nuttalli-pugetensis pair forms the genetically most distinct clade within the species.",
+    "current_family": "Passerellidae",
+    "new_family": false,
+    "family_count_in_engine": 19,
+    "passerellidae_count_in_engine": 4,
+    "name_etymology": "Zonotrichia = Ancient Greek zone (band) + thrix/trichos (hair). 'Banded hair' -- referring to the bold striped head pattern diagnostic of the genus. The genus contains five species, all with striped heads: White-crowned, White-throated, Golden-crowned, Harris's, and Rufous-collared Sparrows. Leucophrys = Ancient Greek leukos (white) + ophrys (eyebrow, brow). 'White-browed' -- referring to the broad white crown stripes. Full translation: 'The white-browed banded-hair bird.' The name is entirely visual -- no acoustic, ecological, or temporal reference. Two consecutive Passerellidae (47-48) with non-acoustic names: 'the winter rush-bird' (ecological-temporal) followed by 'the white-browed banded-hair bird' (visual-visual).",
+    "genus_note": "Zonotrichia is a NEW genus in the engine -- the fourth in the Passerellidae quartet (Melospiza at 45, Pipilo at 46, Junco at 47, Zonotrichia at 48). Four consecutive same-family degrees, four different genera. The genus Zonotrichia contains 5 species, primarily in the Americas. The White-crowned Sparrow's closest relative in the genus is the White-throated Sparrow (Z. albicollis).",
+    "order_note": "Passeriformes continues from degree 47. ELEVENTH consecutive Passeriformes (38-48). 41 of 49 entries (83.7%) are Passeriformes.",
+    "family_position": "Passerellidae now has 4 members at degrees 45-46-47-48. Four-degree consecutive streak. TIES the Parulidae quintet (38-42) for longest same-family streak outside Hirundinidae (26-30). The Passerellidae quartet uses four different genera -- no other family streak has matched this genus diversity.",
+    "subspecies_note": "Five recognized subspecies: pugetensis (PNW coastal, short-distance migrant, dark lores, yellow-orange bill), nuttalli (California coast, resident, dark lores, yellow bill), gambelii (western taiga, long-distance migrant, pale lores, pinkish bill), oriantha (mountain west, medium-distance migrant, pinkish bill), leucophrys (eastern taiga, long-distance migrant, pinkish bill). The nuttalli-pugetensis pair is genetically the most distinct subdivision. Pugetensis described by Ridgway in 1898 from a Puget Sound type specimen.",
+    "pugetensis_note": "The subspecies Z. l. pugetensis is LITERALLY NAMED for Puget Sound. Described by Ridgway in 1898 from a type specimen collected in the Puget Sound region. Breeds from coastal SE Alaska to NW California. Winters in Pacific lowlands from SW British Columbia to northern Los Angeles County. Forms approximately 12 distinct song dialects along the PNW coast. This is the only bird in the engine whose subspecific epithet matches the project's name.",
+    "vocal_learning_note": "The White-crowned Sparrow is THE model species for vocal learning research. Peter Marler and Miwako Tamura (1964, Science) established the sensitive period (10-100 days), auditory template, and cultural transmission paradigm. Young males learn their song from local adults during the sensitive period, creating geographically stable dialects. Marler also studied Song Sparrow (degree 45). The White-crowned Sparrow is a stricter learner (one dialect, narrow window); the Song Sparrow is more flexible (multiple types, longer window)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-7,000 (across all vocalizations)",
+    "peak_energy_band_hz": "3,000-5,000 (introductory whistle energy concentration)",
+    "song_frequency_hz": "2,000-7,000 (full range); whistle 3,000-5,000, buzzes 3,000-7,000, trill 2,000-5,000",
+    "song_duration_s": "2.0-3.0 (per individual song)",
+    "note_structure": "MULTI-PART STRUCTURED SONG: (1) Introductory whistle -- clear pure-tone, 0.3-0.8 s, species ID. (2) Complex note(s) -- modulated frequency sweeps, individual ID. (3) Buzz(es) -- vibrato elements with rapid frequency modulation, highest frequencies. (4) Terminal trill -- rapid repetition of simple syllable, dialect ID. Four functional parts in one 2-3 second song. The most functionally differentiated song in the Passerellidae quartet.",
+    "note_types": "THREE vocalization categories: (1) FULL SONG -- the multi-part territorial and mate-attraction broadcast, 2-3 seconds. (2) CALL NOTE -- a sharp 'pink' or 'tseet', 0.05-0.1 seconds, 4-8 kHz. Year-round contact and alarm call. (3) FLIGHT NOTE -- a thin, high-pitched seep given in flight.",
+    "phrase_structure": "The most structurally complex in the Passerellidae quartet. Four distinct functional components within a single song: species identification (whistle), individual identification (complex notes), broadband energy (buzzes), and population/dialect identification (terminal trill). Compare: Song Sparrow (45) has complex multi-part structure but with individual improvisation; White-crowned Sparrow (48) has complex multi-part structure with cultural standardization. Both are complex, but organized by different principles.",
+    "timbre": "VARIABLE WITHIN A SINGLE SONG. Opens with a CLEAN, PURE whistle (narrow-band, tonal, minimal harmonics) then transitions to BUZZY, COMPLEX trills (broadband, vibrato, rich harmonics). The clean-to-complex transition within 2-3 seconds creates internal timbral contrast unique among the Passerellidae quartet. Song Sparrow (45) mixes tones and buzzes throughout. Spotted Towhee (46) is buzzy throughout. Dark-eyed Junco (47) is clean throughout. White-crowned Sparrow (48) is clean THEN buzzy -- sequential timbral shift.",
+    "amplitude": "E=2 -- moderate-soft volume. Clear introductory whistle is relatively soft and pure. Buzzy trills carry somewhat farther due to broadband energy. Overall song is quieter than the Spotted Towhee (E=3) or Dark-eyed Junco (E=3), similar to or slightly softer than the Song Sparrow (E=2). The Passerellidae energy arch: 2, 3, 3, 2.",
+    "tempo": "Variable by song section. Introductory whistle is sustained (0.3-0.8 s, no repetition). Terminal trill is rapid (specific rate varies by dialect). The functional differentiation extends to tempo: slow opening, fast closing.",
+    "context": "Song given primarily during breeding season (April-July in PNW for pugetensis). Males sing from elevated perches in or near breeding territories. Song output decreases after pairing. Terminal trill is the dialect marker -- most males within a dialect area share the same trill type. Call notes given year-round by both sexes.",
+    "key_property": "THE DIALECT -- the 49th acoustic element (species side). A culturally transmitted geographic song variant. Named 'the dialect' for three resonances: (1) the bird's identity as THE model species for song dialect research (Marler & Tamura 1964); (2) the Puget Sound connection -- pugetensis forms ~12 dialects along the PNW coast, mapped across decades; (3) the acoustic principle -- a dialect is a regional variant of a shared communication system. The first acoustic element defined by cultural transmission -- song learned from adult tutors, creating geographically stable traditions. After the preamble's structural complexity (45), the rasp's textural intensity (46), the snowbird's elemental reduction (47), and the dialect's cultural transmission (48), the Passerellidae quartet traverses four fundamentally different organizing principles for birdsong."
+  },
+  "plumage": {
+    "overall": "BOLD BLACK-AND-WHITE HEAD STRIPES -- one of the most recognizable field marks of any North American sparrow. Adult: broad white median crown stripe bordered by black lateral stripes, white supercilium, black eye line. Gray-brown upperparts. Plain gray breast (unstreaked). Subspecies vary in lore color and bill color.",
+    "adult": "Crown: broad white median stripe bordered by bold black lateral stripes. Supercilium: broad white stripe above eye. Eye line: black stripe through eye. Lores: variable by subspecies (dark in pugetensis/nuttalli, pale in gambelii/leucophrys). Bill: yellow-orange (pugetensis/nuttalli) or pinkish (gambelii/oriantha/leucophrys). Upperparts: gray-brown with darker streaking. Underparts: plain gray breast (unstreaked), buffy flanks.",
+    "immature": "Crown stripes brown and tan (not black and white), creating softer, less contrasting pattern. Frequently confused with Golden-crowned Sparrow (Z. atricapilla) immatures in the PNW.",
+    "pugetensis_field_marks": "Dark lores (black or dark gray between eye and bill) and yellow-orange bill distinguish pugetensis from gambelii (pale lores, pinkish bill). In western Washington, pugetensis is the breeding bird; gambelii passes through on migration.",
+    "field_id": "Medium-large sparrow with bold black-and-white head stripes, erect posture, and plain gray breast. Distinguished from Song Sparrow by lack of breast streaking and bold crown pattern. Distinguished from Golden-crowned Sparrow by white (not yellow) central crown stripe. Distinguished from White-throated Sparrow by larger size and black-and-white (not brown-and-white) crown stripes."
+  },
+  "mountain_meadow_ecology": {
+    "definition": "Mountain meadow edge / alpine shrub -- the brushy ecotone between open meadow or alpine grassland and forest or dense shrub. Requires a patchy mosaic of bare ground (foraging), dense shrubs (nesting/cover), and elevated perches (singing). This habitat characterizes the upper end of the Passerellidae quartet's elevational transect.",
+    "habitat_types": [
+      "Coastal scrub and brushy clearings from sea level upward (pugetensis lowland breeding)",
+      "Logged clearings with regenerating shrub growth",
+      "Suburban edges with dense hedgerows and brush piles",
+      "Mountain meadow margins with subalpine shrub (meadow-forest ecotone)",
+      "Avalanche chutes and natural openings in montane forest",
+      "Alpine and subalpine brushy areas in the Cascades and Olympics",
+      "Patchwork of bare ground and dense shrub at any elevation"
+    ],
+    "vertical_position": "0-3 m (foraging on ground), 2-5 m (singing from shrub tops or low tree branches). Forages on the ground, scratching in leaf litter and on bare soil. Males sing from the tops of shrubs or low trees at breeding territory edges.",
+    "pnw_distribution": [
+      "Western Washington -- pugetensis breeds in brushy habitats from sea level to subalpine",
+      "Puget Sound lowlands -- common in winter (pugetensis + gambelii flocks), less conspicuous in summer",
+      "Eastern Washington -- gambelii passes through on migration; oriantha may breed in mountain areas",
+      "Cascade Range -- breeds in meadow edges and avalanche chutes at middle-to-high elevations",
+      "Olympic Peninsula -- pugetensis breeds in coastal and montane brushy habitats",
+      "Urban Seattle -- common winter feeder visitor, foraging on ground beneath feeders"
+    ],
+    "altitudinal_migration": "pugetensis performs altitudinal migration: mountain-breeding individuals descend to lowland areas in winter. In addition, gambelii individuals from far northern breeding grounds pass through and winter in PNW lowlands. The result is that Seattle-area birders encounter White-crowned Sparrows most conspicuously in winter -- mixed-subspecies flocks in parks, yards, and brushy edges.",
+    "four_passerellidae_habitats": "Four Passerellidae, four habitat bands. Song Sparrow (45) = wetland edge (where water meets land). Spotted Towhee (46) = dense understory (where shrub meets forest). Dark-eyed Junco (47) = forest floor (where floor meets opening). White-crowned Sparrow (48) = mountain meadow edge (where meadow meets forest/shrub). The quartet creates a complete ground-level transect from pond to summit."
+  },
+  "marler_research": {
+    "researcher": "Peter Marler (1928-2014), Professor of Zoology, UC Davis and Rockefeller University",
+    "collaborator": "Miwako Tamura (1964 landmark paper co-author)",
+    "landmark_paper": "Marler, P. and Tamura, M. (1964). 'Culturally Transmitted Patterns of Vocal Behavior in Sparrows.' Science 146(3650): 1483-1486.",
+    "key_discoveries": [
+      "Sensitive period: song learned during first 10-50 days (later extended to ~100 days)",
+      "Auditory template: innate bias toward conspecific song over heterospecific song",
+      "Cultural transmission: song learned from adult tutors, not genetically inherited",
+      "Selective learning: will learn conspecific song but not other species' songs",
+      "Geographic dialects: local song traditions arise from young birds learning from local adults"
+    ],
+    "song_sparrow_connection": "Marler also studied Song Sparrow (Melospiza melodia, degree 45). Published on the sensitive period for song learning in Song Sparrow (Marler and Peters, 1988). Found that Song Sparrows have a longer, more flexible sensitive period and learn multiple song types, while White-crowned Sparrows have a shorter, stricter period and typically learn one dialect. Two Passerellidae, two learning strategies, one researcher.",
+    "significance": "The White-crowned Sparrow is the founding model organism for the study of vocal learning in birds. Marler's work established the framework for understanding how birds learn to sing -- sensitive periods, auditory templates, cultural transmission -- concepts that now underpin the entire field of avian vocal behavior and have influenced research on human language acquisition. The 1964 Science paper is one of the most cited papers in behavioral ecology."
+  },
+  "covid_song_shift": {
+    "event": "During COVID-19 lockdowns in spring 2020, White-crowned Sparrows in San Francisco changed their song in real time",
+    "researcher": "Elizabeth Derryberry, University of Tennessee, Knoxville",
+    "publication": "Derryberry, E. P. et al. (2020). 'Singing in a silent spring: Birds respond to a half-century soundscape reversion during the COVID-19 shutdown.' Science 370(6516): 575-579.",
+    "findings": [
+      "Sang approximately 35% more quietly (far more than 3% predicted by Lombard effect)",
+      "Lowered minimum frequency of their lowest notes",
+      "Widened bandwidth, expanding into frequency ranges previously masked by traffic noise",
+      "Songs more closely resembled 1970s recordings (before noise increase)",
+      "Quieter, lower-frequency songs actually traveled farther and were more attractive to females"
+    ],
+    "three_timescales": "The White-crowned Sparrow operates on three temporal scales of vocal change simultaneously: (1) EVOLUTIONARY -- subspecies diverge in song structure over millennia; (2) CULTURAL -- dialects shift over decades within a subspecies; (3) BEHAVIORAL -- individual birds adjust song parameters within days in response to ambient noise changes. Three timescales, one species, one song.",
+    "significance": "Demonstrates immediate vocal plasticity within a crystallized song -- distinct from both dialect learning (cultural) and subspecies divergence (evolutionary). The most temporally complex acoustic subject in the engine."
+  },
+  "pugetensis_dialects": {
+    "count": "Approximately 12 distinct dialects along the PNW coast",
+    "defining_feature": "Terminal trill -- the closing phrase of the song. Most males at each locality share the same trill type.",
+    "researchers": [
+      "Douglas Nelson (Ohio State University) -- 30+ year tracking of dialect changes",
+      "James Soha (Duke University, now at Borneo Nature Foundation)",
+      "Angelika Poesel -- gene flow across dialect boundaries"
+    ],
+    "key_findings": [
+      "Terminal trill (dialect marker) is remarkably stable over decades (Nelson 1996, 2004)",
+      "Complex note portion changes significantly over time -- 2.3x more improvisation than in terminal trill",
+      "Functional differentiation: whistle = species ID, trill = dialect ID, complex notes = individual ID",
+      "Dialect boundaries do NOT act as barriers to gene flow (Soha et al. 2004, Poesel et al. 2017)",
+      "Genetically one large population despite sharp cultural (dialect) boundaries",
+      "Inter-dialect dispersal is common (Poesel et al. 2017)"
+    ],
+    "functional_layering": "One song, three layers of identity: species identification (introductory whistle, highly conserved), population/dialect identification (terminal trill, moderately conserved), and individual identification (complex notes, highly variable). This functional layering is unique in the engine -- no other species has been shown to encode three distinct identity levels within a single vocalization."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The dialect -- the 49th acoustic element (species side): a culturally transmitted geographic song variant. The White-crowned Sparrow's song is a multi-part structure (clear whistle + complex notes + buzzy trills + terminal trill) that encodes three layers of identity: species (whistle), dialect/population (terminal trill), and individual (complex notes). The dialect is defined not by the physical characteristics of any single note but by the cultural pattern -- a shared tradition learned by young males from local adults during the first 10-100 days of life, creating geographically stable song regions. This is distinct from all three previous Passerellidae elements: the preamble (45) is about positional structure within a complex song; the rasp (46) is about textural intensity; the snowbird (47) is about elemental reduction. The dialect (48) is about collective learned tradition -- song as culture, not just sound.",
+      "level": "foundational",
+      "department": "music-theory/cultural-transmission",
+      "college_path": ".college/music/theory/cultural-transmission/dialect/",
+      "examples": [
+        "The 12 Puget Sound dialects: each defined by a shared terminal trill type. Males within a dialect area sing the same trill; males in neighboring areas sing different trills. The boundaries are sharp and stable across decades.",
+        "Contrast with the preamble (degree 45): the Song Sparrow's preamble is individually improvised -- each male creates his own version. The White-crowned Sparrow's dialect is culturally standardized -- each male learns the shared local version.",
+        "Contrast with the snowbird (degree 47): the snowbird is about what the song LACKS (complexity, variation). The dialect is about what the song CARRIES (geographic identity, cultural inheritance, population membership).",
+        "Contrast with the cadenza (degree 33): the cadenza celebrates individual virtuosity. The dialect celebrates collective conformity. The cadenza makes one singer unique. The dialect makes a population unified.",
+        "The linguistic parallel: a dialect in human language is a regional variant of a shared communication system. Same language, different pronunciation. A bird song dialect is the same: same species song, different regional delivery."
+      ],
+      "music_theory_parallel": "Folk music traditions -- regional song variants transmitted orally from generation to generation. The Appalachian ballad tradition, the Scottish folk song tradition, the blues of the Mississippi Delta. Each region develops its own version of shared material. The versions are similar enough to be recognized as the same tradition but different enough to identify the region. The White-crowned Sparrow's dialects are avian folk traditions: the same basic song structure, delivered in regionally distinct versions, transmitted from older singers to younger ones through direct imitation. The Song Sparrow (degree 45) is a jazz musician -- improvising within learned conventions. The White-crowned Sparrow (degree 48) is a folk singer -- faithfully reproducing a received tradition."
+    },
+    {
+      "concept": "Pugetensis -- the subspecies literally named for Puget Sound. Zonotrichia leucophrys pugetensis, described by Ridgway in 1898, breeds from coastal SE Alaska through the PNW to NW California. The only bird in the engine's 49-entry history whose subspecific epithet IS the name of the project's subject. The Sound of Puget Sound encounters a bird named for Puget Sound. The subspecies forms approximately 12 distinct song dialects along the Pacific Northwest coast, making 'the sound of Puget Sound' not a metaphor but a literal description of pugetensis singing in its type locality.",
+      "level": "foundational",
+      "department": "ecology/biogeography",
+      "college_path": ".college/ecology/biogeography/pugetensis/",
+      "examples": [
+        "The name connection: project = The Sound of Puget Sound. Subspecies = pugetensis ('of Puget Sound'). The bird's name IS the project's name.",
+        "The type locality: described from a specimen collected in the Puget Sound region. The subspecies was first defined HERE, in the geographic area the project maps.",
+        "The 12 dialects: pugetensis forms approximately 12 song dialects along the PNW coast. Each dialect is a regional 'sound of Puget Sound' -- a distinct acoustic signature of a specific area.",
+        "The nuttalli-pugetensis clade: the two Pacific coastal subspecies (nuttalli in California, pugetensis in the PNW) form the most genetically distinct subdivision within the species. The PNW bird is genetically distinctive, not just a northern extension of a California population.",
+        "Dark lores and yellow-orange bill: the field marks that distinguish pugetensis from the long-distance migrant gambelii, which passes through the PNW on migration. The breeding bird of Puget Sound looks different from the passing visitor."
+      ],
+      "music_theory_parallel": "The house band -- the resident ensemble that defines a venue's sound. Every jazz club, every concert hall, every recording studio has its characteristic acoustic identity, shaped partly by the space and partly by the regular performers. Pugetensis is Puget Sound's house band: the resident subspecies whose 12 dialects literally constitute 'the sound of Puget Sound.' Other subspecies (gambelii, oriantha) pass through on tour, but pugetensis is the one that lives here and defines the local acoustic character."
+    },
+    {
+      "concept": "Fourth consecutive Passerellidae -- the unprecedented four-degree family streak at degrees 45-46-47-48. Song Sparrow, Spotted Towhee, Dark-eyed Junco, White-crowned Sparrow. Four genera (Melospiza, Pipilo, Junco, Zonotrichia), four habitats (wetland edge, dense understory, forest floor, mountain meadow edge), four song strategies (improvisation, concentration, reduction, transmission). TIES the Parulidae quintet (38-42) for longest same-family streak outside Hirundinidae (26-30). The quartet creates a complete ecological and acoustic survey of the New World Sparrow family in the PNW.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/passerellidae-quartet/",
+      "examples": [
+        "Four-degree streaks: Passerellidae (45-48) with four genera. Compare Parulidae (38-42) with five members but fewer consecutive genera. The Passerellidae quartet has the most genus diversity of any family streak.",
+        "Habitat transect: wetland edge (45) -> dense understory (46) -> forest floor (47) -> mountain meadow edge (48). From pond to summit.",
+        "Song gradient: improvisation (45) -> concentration (46) -> reduction (47) -> transmission (48). Four organizing principles.",
+        "Energy arch: E=2 (45) -> E=3 (46) -> E=3 (47) -> E=2 (48). Symmetrical arch, beginning and ending at the same level.",
+        "Research lineage: Nice (Song Sparrow, 45), Ketterson (Dark-eyed Junco, 47), Marler (White-crowned Sparrow, 48). Three of the four species connected by landmark researchers. The Spotted Towhee (46) is the quartet's non-model species."
+      ],
+      "music_theory_parallel": "A four-movement symphony. Movement I (Song Sparrow): Allegro con brio -- complex, elaborate, energetic, with an improvised cadenza in each performance. Movement II (Spotted Towhee): Scherzo -- rhythmic, textural, concentrated, a buzzy romp through the understory. Movement III (Dark-eyed Junco): Adagio -- simple, clean, elemental, a single pure tone repeated. Movement IV (White-crowned Sparrow): Finale with theme and variations -- a structured composition learned from a tradition, each regional orchestra performing its own dialect version. Four movements, one family, a complete work."
+    },
+    {
+      "concept": "Peter Marler's legacy -- the researcher who established the White-crowned Sparrow as the model for vocal learning, and who also studied Song Sparrow (degree 45), bridging two Passerellidae through one researcher. Marler and Tamura (1964, Science) described the sensitive period, auditory template, and cultural transmission. Marler and Peters (1988) showed Song Sparrow has a longer, more flexible sensitive period. The Passerellidae quartet's three great researchers -- Margaret Morse Nice (Song Sparrow, 45), Ellen Ketterson (Dark-eyed Junco, 47), Peter Marler (White-crowned Sparrow, 48) -- form a century-spanning lineage of songbird science.",
+      "level": "foundational",
+      "department": "ecology/behavioral-ecology",
+      "college_path": ".college/ecology/behavioral-ecology/vocal-learning/",
+      "examples": [
+        "Marler's 1964 Science paper: founded the entire field of avian vocal learning. One of the most cited papers in behavioral ecology. Established that song is culturally transmitted, not genetically inherited.",
+        "The sensitive period: White-crowned Sparrows learn song during days 10-100 of life. Songs heard after the window closes have no effect. This is the strict end of the learning spectrum.",
+        "Song Sparrow comparison: Marler showed Song Sparrows have a longer, more flexible sensitive period and learn multiple song types. Two Passerellidae, two learning strategies, one researcher.",
+        "The three researchers: Nice studied Song Sparrow in the 1930s-1960s (behavioral ecology). Marler studied White-crowned Sparrow and Song Sparrow in the 1960s-2000s (vocal learning). Ketterson studied Dark-eyed Junco from the 1970s onward (endocrine control). Three approaches to the same family.",
+        "The auditory template: young birds possess an innate predisposition to learn conspecific songs over other species' songs. The template is not the song itself but a bias toward certain acoustic features. Nature provides the filter; nurture provides the content."
+      ],
+      "music_theory_parallel": "The conservatory tradition. Young musicians learn from master teachers during a critical period of development. They absorb the style, technique, and repertoire of their teachers and their local school. A pianist trained at Curtis sounds different from one trained at Juilliard, even playing the same piece -- not because of different talent but because of different teaching traditions. The White-crowned Sparrow's dialect learning IS a conservatory tradition: young birds learn from local masters during a critical window, absorbing the local style. The Song Sparrow (degree 45) is the jazz musician who absorbs multiple influences. The White-crowned Sparrow (degree 48) is the classical student who absorbs one tradition deeply."
+    },
+    {
+      "concept": "E=2 returns at degree 48, tipping the dynamic balance. E=2 + E=3 together now hold 22 degrees (44.9%), surpassing E=4's 21 degrees (42.9%) for the first time. The equilibrium achieved at degree 47 (21 = 21) has been broken in favor of the lower registers. The Passerellidae quartet's energy pattern is symmetrical: 2, 3, 3, 2 -- an arch that begins and ends at E=2 with E=3 in the middle. The family operates at E=2-3, establishing Passerellidae as a lower-middle-register family. No Passerellidae at E=4 or E=5.",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/lower-register-tilt/",
+      "examples": [
+        "Energy distribution at degree 48: E=1 (3 degrees, 6.1%), E=2 (13 degrees, 26.5%), E=3 (9 degrees, 18.4%), E=4 (21 degrees, 42.9%), E=5 (3 degrees, 6.1%).",
+        "The tilt: E=2 + E=3 = 22 degrees (44.9%) > E=4 = 21 degrees (42.9%). Lower registers exceed upper-middle for the first time.",
+        "The Passerellidae energy arch: E=2 (45), E=3 (46), E=3 (47), E=2 (48). Symmetrical. The quartet's dynamic center of gravity is E=2.5.",
+        "Contrast with Trochilidae (35-36-37): all E=5. The hummingbird streak was at one energy extreme; the Passerellidae streak spans E=2-3. Two family streaks at opposite dynamic positions.",
+        "E=1 remains absent for 36 degrees (since degree 12, Pine Siskin). Still the longest-absent energy level."
+      ],
+      "music_theory_parallel": "The dynamic tilt -- the point in a musical work where the cumulative weight of quiet passages exceeds the cumulative weight of loud passages, and the work's center of gravity shifts toward intimacy. In a symphony, this happens when the slow movements and quiet transitions outweigh the loud climaxes. The engine reaches this tilt at degree 48: four consecutive Passerellidae at E=2-3 have tipped the balance from forte toward piano. The Sound of Puget Sound is getting quieter."
+    },
+    {
+      "concept": "The COVID song experiment (Derryberry 2020) -- White-crowned Sparrows in San Francisco changed their songs in real time during COVID lockdowns, demonstrating that the species operates on three temporal scales of vocal change simultaneously: evolutionary (subspecies diverge over millennia), cultural (dialects shift over decades), and behavioral (individual birds adjust within days). This is the engine's most temporally complex acoustic subject.",
+      "level": "intermediate",
+      "department": "ecology/urban-ecology",
+      "college_path": ".college/ecology/urban-ecology/covid-song-shift/",
+      "examples": [
+        "The 35% reduction: birds sang approximately 35% more quietly during lockdown, far exceeding the 3% predicted by the Lombard effect. Not just compensating -- fundamentally resetting.",
+        "Frequency lowering: males lowered minimum frequency, expanding bandwidth into ranges previously masked by traffic noise. The song expanded when the city went quiet.",
+        "Reversion to 1970s patterns: lockdown songs resembled pre-noise-era recordings. Fifty years of acoustic adaptation reversed in weeks.",
+        "Paradoxical effectiveness: quieter, lower-frequency songs traveled FARTHER and were more attractive to females. Singing softly in silence > singing loudly in noise.",
+        "Three timescales: evolutionary (subspecies, millennia), cultural (dialects, decades), behavioral (plasticity, days). The junco UCSD evolution case (degree 47) showed two timescales. The White-crowned Sparrow shows three."
+      ],
+      "music_theory_parallel": "Acoustic ecology -- the study of how environmental soundscapes shape musical behavior. When a concert hall has poor acoustics, musicians play louder and with less nuance. When the hall is excellent, they play more quietly, with greater dynamic range and subtlety. The COVID experiment is a natural acoustics experiment: when the city's 'concert hall' suddenly improved (noise dropped), the sparrows immediately adjusted their performance -- softer, more nuanced, more effective. The birds are acoustic ecologists, adjusting their performance to their venue in real time."
+    },
+    {
+      "concept": "Mountain meadow edge habitat -- the fourth Passerellidae habitat band. After wetland edge (Song Sparrow, degree 45), dense understory (Spotted Towhee, degree 46), and forest floor (Dark-eyed Junco, degree 47), the White-crowned Sparrow occupies the mountain meadow edge and alpine shrub zone. The quartet's habitat transect now extends from water through forest to the upper forest edge and above. From the pond to the summit. The key habitat requirement is the brushy edge -- the boundary between open ground and dense vegetation.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/mountain-meadow-edge/",
+      "examples": [
+        "Four Passerellidae habitats: wetland edge (open, wet), dense understory (closed, dry), forest floor (open to moderate, variable), mountain meadow edge (open edge with shrub patches).",
+        "Elevation extension: the quartet now covers sea level (Song Sparrow) to alpine (White-crowned Sparrow). The Dark-eyed Junco bridges middle elevations. The Spotted Towhee anchors the lowland interior.",
+        "The edge requirement: White-crowned Sparrows need edges -- the boundary between open ground (foraging) and dense shrubs (nesting/cover). This is why they thrive in meadow margins, clearing edges, suburban hedgerows, and the forest-alpine transition zone.",
+        "Altitudinal migration: like the junco (47), the White-crowned Sparrow descends to lowlands in winter. Both species are more conspicuous at lower elevations during the cold months.",
+        "Suburban adaptation: pugetensis uses suburban edge habitat (hedgerows, brush piles, garden borders), providing some buffering against natural habitat loss."
+      ],
+      "music_theory_parallel": "The outdoor concert venue -- performance space at the edge between developed area and wilderness. Mountain meadow edge is where the formal concert hall meets the open sky. The Song Sparrow (45) performs at the waterside amphitheater. The Spotted Towhee (46) performs in the underground club. The Dark-eyed Junco (47) performs in the forest cathedral. The White-crowned Sparrow (48) performs at the mountain amphitheater -- open to the sky above, shrubby wings to either side, the whole alpine valley as the auditorium."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-047",
+      "title": "Dark-eyed Junco (Degree 47)",
+      "connection": "PASSERELLIDAE CONSECUTIVE (47-48). The snowbird (elemental reduction) meets the dialect (cultural transmission). Both are vocal learners. The junco's song is simpler and less dialectally structured; the White-crowned Sparrow's song is more complex and strongly dialectal. Ketterson's bird (47) meets Marler's bird (48). Both perform altitudinal migration in the PNW."
+    },
+    {
+      "project": "SPS-045",
+      "title": "Song Sparrow (Degree 45)",
+      "connection": "PASSERELLIDAE QUARTET ANCHOR + MARLER CONNECTION. Peter Marler studied BOTH Song Sparrow and White-crowned Sparrow. Song Sparrow has a longer, more flexible sensitive period (multiple song types); White-crowned Sparrow has a stricter window (one dialect). Margaret Morse Nice's bird (45) meets Marler's bird (48). Two masterclass species, one researcher, one family."
+    },
+    {
+      "project": "SPS-046",
+      "title": "Spotted Towhee (Degree 46)",
+      "connection": "PASSERELLIDAE QUARTET MEMBER. The rasp (textural intensity) is two degrees from the dialect (cultural transmission). Four consecutive Passerellidae, four organizing principles. The Spotted Towhee is the quartet's only non-model-organism species."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "PASSERELLIDAE DEEP CONNECTION. Degree 11 is a subspecies group within degree 47 (Dark-eyed Junco), which is the third member of the quartet that degree 48 completes. The Oregon Junco's metallic trill (degree 11) contrasts with the White-crowned Sparrow's structured dialect song (degree 48). Both are vocal learners; different learning outcomes."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "VOCAL TYPES AS POPULATION MARKERS. Red Crossbill has 10+ call types that may represent incipient species. White-crowned Sparrow has 12 Puget Sound dialects that demonstrably do NOT create genetic boundaries (Soha et al. 2004, Poesel et al. 2017). Two models of vocal variation: crossbill vocal types may separate populations genetically; sparrow dialects do not."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "SUSTAINED TONE CONTRAST. The Varied Thrush holds a pure, sustained, single-frequency tone throughout. The White-crowned Sparrow begins with a similar pure whistle (introductory component) but then transitions to complex buzzy trills. Clean-to-complex within one song (degree 48) vs. clean throughout (degree 2)."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "White-crowned Sparrow documented across Washington state. Pugetensis breeds in western WA; gambelii migrates through and winters. Common at feeders and in brushy habitats. Song dialects mapped along PNW coast by Nelson, Soha, and Poesel."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Mountain meadow edge ecology. Alpine/subalpine shrub habitat. Altitudinal migration patterns. Brushy edge as key habitat requirement. Climate-driven range shifts affecting mountain-breeding populations."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 46,
+    "total_entries": 49,
+    "families_represented": 19,
+    "largest_families": {
+      "Parulidae": 10,
+      "Fringillidae": 5,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Passerellidae": 4,
+      "Trochilidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 45, 48],
+      "E3": [14, 15, 16, 17, 18, 19, 20, 46, 47],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=2 RETURNS at degree 48. E=2 + E=3 together hold 22 degrees (44.9%), NOW SURPASSING E=4's 21 degrees (42.9%). The equilibrium at degree 47 (21 = 21) is broken -- lower registers now exceed E=4 for the first time. Passerellidae quartet energy arch: 2, 3, 3, 2. E=1 remains absent for 36 degrees (since degree 12).",
+    "passerellidae_streak_note": "FOUR CONSECUTIVE PASSERELLIDAE at degrees 45-46-47-48. Four different genera (Melospiza, Pipilo, Junco, Zonotrichia). TIES the Parulidae quintet (38-42) for longest same-family streak outside Hirundinidae (26-30). The most genus-diverse family streak in the engine.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer"],
+    "ecosystem_note": "Mountain meadow edge / alpine shrub -- the fourth Passerellidae habitat band. After wetland edge (45), dense understory (46), and forest floor (47), the White-crowned Sparrow occupies the brushy ecotone at the upper forest edge and above. The quartet's habitat transect extends from pond to summit.",
+    "acoustic_element_49": "THE DIALECT -- a culturally transmitted geographic song variant. The first element in the 'cultural transmission' category. The Passerellidae quartet: preamble (improvisation) -> rasp (concentration) -> snowbird (reduction) -> dialect (transmission). Four organizing principles in four degrees.",
+    "csv_substitution_note": "Tailed Frog (Ascaphus truei) replaced by White-crowned Sparrow (Zonotrichia leucophrys) because SPS Part B is birds-and-mammals only. E=2 and mountain/shrub habitat preserved from original CSV. FOURTH consecutive CSV substitution replacing an amphibian (45-46-47-48). The engine continues through the amphibian belt of the original CSV.",
+    "pugetensis_note": "DEGREE 48 IS NAMED FOR PUGET SOUND. The subspecies Z. l. pugetensis is literally 'of Puget Sound' -- the only bird in the engine whose subspecific epithet matches the project's name. The Sound names the bird and the bird names the Sound.",
+    "conservation_note": "LEAST CONCERN (IUCN). Population ~79 million (PIF). Continental Concern Score 7/20. BBS trend approximately stable overall (1966-2019) with regional variation. Smaller population than Dark-eyed Junco (47, ~220-630 million) but more stable. Pugetensis faces potential threats from loss of brushy edge habitat and climate-driven range shifts.",
+    "critical_gaps": [
+      "No marine/shoreline species in 48 degrees of 'The Sound of Puget Sound' -- 48 DEGREES OVERDUE -- EXISTENTIAL CRISIS (CRITICAL)",
+      "No corvid (Steller's Jay, crow, raven) -- 48 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 48 degrees -- URGENT",
+      "No nocturnal species since degree 4 (44 degrees ago) -- OVERDUE",
+      "No E=1 since degree 12 (36 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 48 DEGREES OF A PROJECT NAMED FOR PUGET SOUND",
+      "Only 5 orders in 49 entries -- a new order is strongly needed",
+      "ELEVEN consecutive Passeriformes (38-48) -- non-passerine needed URGENTLY",
+      "Fourth consecutive CSV substitution replacing an amphibian (45-46-47-48) -- the amphibian belt highlights the birds-and-mammals-only constraint",
+      "Four consecutive Passerellidae (45-48) -- same-family dominance at saturation. The quartet must end."
+    ]
+  }
+}
