@@ -1,0 +1,117 @@
+{
+  "mission": "1.2",
+  "title": "Pioneer 1 (Thor-Able I)",
+  "description": "Open datasets and source materials relevant to Pioneer 1 (1958), Van Allen radiation belts, cislunar trajectory analysis, and Polystichum munitum (Western Sword Fern)",
+  "sources": [
+    {
+      "id": "nssdc-pioneer-1",
+      "name": "NSSDC Master Catalog -- Pioneer 1",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-007A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "NASA Space Science Data Coordinated Archive entry for Pioneer 1. Spacecraft description, instrument manifest (ionization chamber, Geiger-Mueller tube, micrometeorite detector, search-coil magnetometer), mission timeline, orbital parameters, and telemetry summary for the 43-hour flight.",
+      "format": "HTML",
+      "access": "open",
+      "mission_relevance": "Definitive source for Pioneer 1 spacecraft specifications, instrument descriptions, and mission parameters. The NSSDC designation 1958-007A confirms Pioneer 1 as the seventh attempted launch of 1958."
+    },
+    {
+      "id": "nssdc-archive",
+      "name": "NASA Space Science Data Coordinated Archive -- Pioneer Program",
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/pioneer.html",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "Comprehensive archive for the entire Pioneer program, from Pioneer 0 through Pioneer Venus. Contains instrument data, mission timelines, spacecraft diagrams, and cross-references between Pioneer missions. Essential for understanding Pioneer 1 in context of the broader program.",
+      "format": "HTML/Data",
+      "access": "open",
+      "mission_relevance": "Provides the programmatic context: Pioneer 1 was the second of four rapid-fire lunar probe attempts (0, 1, 2, 3) in 1958, each learning from the previous. The archive connects Pioneer 1's radiation data to subsequent missions that confirmed and extended its findings."
+    },
+    {
+      "id": "rbsp-data-archive",
+      "name": "Van Allen Probes (RBSP) Science Gateway",
+      "url": "https://rbsp-ect.newmexicoconsortium.org/data_pub/",
+      "type": "primary-source",
+      "category": "radiation-environment",
+      "description": "Data archive from NASA's Van Allen Probes mission (2012-2019), which carried modern instruments through the same radiation belts Pioneer 1 first profiled. Energetic particle composition and thermal plasma data, magnetic field measurements, and radiation belt models. The RBSP data can be directly compared to Pioneer 1's 1958 measurements to show how the belts vary over solar cycles.",
+      "format": "CDF/ASCII",
+      "access": "open",
+      "mission_relevance": "Modern validation of Pioneer 1's discovery. The Van Allen Probes confirmed the two-belt structure and slot region that Pioneer 1 first detected, with 54 years of improved instrumentation. Enables quantitative comparison: what Pioneer 1 measured at 64.8 bps, RBSP measured at megabits per second."
+    },
+    {
+      "id": "omni-magnetosphere",
+      "name": "OMNIWeb -- High Resolution OMNI Magnetospheric Data",
+      "url": "https://omniweb.gsfc.nasa.gov/",
+      "type": "primary-source",
+      "category": "magnetosphere",
+      "description": "Multi-source magnetospheric and solar wind dataset maintained by NASA's Space Physics Data Facility. Includes interplanetary magnetic field, solar wind parameters, and geomagnetic indices from 1963 to present. Time-shifted to Earth's bow shock nose for consistency.",
+      "format": "ASCII/CDF",
+      "access": "open",
+      "mission_relevance": "Provides the magnetospheric context for Pioneer 1's magnetic field measurements. The OMNI dataset enables reconstruction of solar wind conditions during October 1958, which influenced the magnetic field distortions Pioneer 1 detected beyond 5 Earth radii. Essential for the magnetic dipole model knowledge node."
+    },
+    {
+      "id": "ntrs-pioneer-1",
+      "name": "NASA Technical Reports Server -- Pioneer 1 Reports",
+      "url": "https://ntrs.nasa.gov/search?q=pioneer%201%201958",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "description": "NASA's full-text technical report archive. Contains original engineering reports, mission analyses, instrument calibration documents, and post-flight assessments for Pioneer 1. Includes the accelerometer failure analysis, radiation measurement reports, and trajectory reconstruction documents produced by Space Technology Laboratories and the Jet Propulsion Laboratory.",
+      "format": "PDF",
+      "access": "open",
+      "mission_relevance": "Primary technical documentation for the accelerometer calibration error, the 234 m/s velocity deficit analysis, and the radiation belt measurements. These reports are the engineering record of what went wrong and what was learned -- the raw material for the failure-as-data and error-propagation knowledge nodes."
+    },
+    {
+      "id": "mcdowell-launch-db",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "description": "Comprehensive, independently maintained database of all orbital and suborbital launches. Includes Thor-Able launch history, payload masses, success/failure classification, and trajectory data. McDowell's classification system distinguishes between launch vehicle failures, spacecraft failures, and partial successes -- a distinction directly relevant to Pioneer 1.",
+      "format": "TSV/HTML",
+      "access": "open",
+      "mission_relevance": "Contextualizes Pioneer 1's partial failure within the Thor-Able launch record. The database shows that of the early Thor-Able launches, Pioneer 1 was the first to achieve a successful launch vehicle performance (all three stages fired) -- the failure was in guidance, not propulsion. This distinction matters for the partial success metrics knowledge node."
+    },
+    {
+      "id": "space-track-tle",
+      "name": "Space-Track TLE Archive",
+      "url": "https://www.space-track.org/",
+      "type": "primary-source",
+      "category": "orbital-data",
+      "description": "US Space Force maintained archive of Two-Line Element sets for tracked objects. While Pioneer 1 was not in a stable orbit (it reentered after 43 hours), the archive contains tracking data for contemporary objects and provides the orbital element format used to describe Pioneer 1's elliptical trajectory in period references.",
+      "format": "TLE/JSON",
+      "access": "open (registration required)",
+      "mission_relevance": "Provides the orbital mechanics context for understanding Pioneer 1's trajectory as a conic section. The TLE format encodes eccentricity, semi-major axis, and inclination -- the same parameters used in the vis-viva and conic sections knowledge nodes. Enables comparison of Pioneer 1's highly eccentric ellipse (e≈0.94) with stable orbits."
+    },
+    {
+      "id": "usda-feis-sword-fern",
+      "name": "USDA Fire Effects Information System -- Polystichum munitum",
+      "url": "https://www.fs.usda.gov/database/feis/plants/fern/polmun/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Comprehensive ecological profile of western sword fern: fire response and recovery, distribution across PNW ecoregions, habitat requirements, association with old-growth forests, rhizome persistence, and successional role. Includes post-disturbance recovery rates and survival mechanisms.",
+      "format": "HTML",
+      "access": "open",
+      "mission_relevance": "Primary ecological source for the organism pairing. Sword fern's persistence through disturbance -- surviving fire via rhizome, maintaining evergreen fronds through winter -- parallels Pioneer 1's persistence through mission failure (43 hours of data from a spacecraft that missed the Moon). The FEIS data on sword fern's understory dominance supports the resonance threads in multiple knowledge nodes."
+    },
+    {
+      "id": "usgs-plants-sword-fern",
+      "name": "USGS/USDA PLANTS Database -- Polystichum munitum",
+      "url": "https://plants.usda.gov/home/plantProfile?symbol=POLMU",
+      "type": "primary-source",
+      "category": "distribution",
+      "description": "Distribution maps, conservation status, wetland indicator status, and taxonomic classification for western sword fern across North America. Shows the species' range from southeastern Alaska to southern California, with peak density in the western Cascades and Olympic Peninsula.",
+      "format": "HTML/Shapefile",
+      "access": "open",
+      "mission_relevance": "Establishes the geographic context for the organism pairing. Sword fern's distribution maps to the PNW research series territory -- the same forests, the same understory, the same ecological context that grounds the entire mission organism pairing system."
+    },
+    {
+      "id": "nasa-image-library",
+      "name": "NASA Image and Video Library -- Pioneer 1",
+      "url": "https://images.nasa.gov/search?q=pioneer%201&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "description": "Historical photographs from the Pioneer program: spacecraft assembly at Space Technology Laboratories, Thor-Able I on Launch Complex 17A, Cape Canaveral operations, tracking station equipment, and mission control during the 43-hour flight. Public domain imagery suitable for educational use.",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "mission_relevance": "Visual documentation of Pioneer 1 hardware and operations. The spacecraft photographs show the instrument layout (GM tube, ionization chamber, magnetometer) referenced in the knowledge nodes. Launch photographs show the Thor-Able I vehicle configuration. Essential for simulation and creative arts tracks."
+    }
+  ]
+}

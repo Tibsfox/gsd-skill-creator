@@ -1,0 +1,420 @@
+{
+  "table_name": "Properties of Homogeneous Bodies",
+  "source": "McNeese & Hoag, Engineering and Technical Handbook, Table 11",
+  "mission": "1.2",
+  "description": "Volume, surface area, centroid, and moments of inertia for standard 3D solids",
+  "last_updated": "2026-03-29",
+  "tspb_layers": [2, 4],
+  "college_departments": ["mathematics", "engineering", "physics"],
+  "notation": "M = total mass (uniformly distributed), all moments of inertia about centroidal axes unless noted, k = radius of gyration = sqrt(I/M)",
+
+  "bodies": [
+    {
+      "name": "Rectangular parallelepiped (box)",
+      "shape_description": "Solid rectangular box with edge lengths a, b, c aligned along x, y, z axes respectively",
+      "volume": "abc",
+      "surface_area": "2(ab + bc + ca)",
+      "centroid": {
+        "x": "a/2",
+        "y": "b/2",
+        "z": "c/2",
+        "reference": "corner of the box at origin"
+      },
+      "moments_of_inertia": {
+        "Ix": "M(b² + c²)/12",
+        "Iy": "M(a² + c²)/12",
+        "Iz": "M(a² + b²)/12"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt((b² + c²)/12)",
+        "ky": "sqrt((a² + c²)/12)",
+        "kz": "sqrt((a² + b²)/12)"
+      },
+      "parameters": "a = length along x, b = length along y, c = length along z",
+      "nasa_application": "Satellite bus structures, electronic equipment boxes, solar panel substrates, payload fairings (rectangular cross-section), cargo modules",
+      "notes": "For a cube (a = b = c), all moments equal M·a²/6. The parallel axis theorem shifts I to any parallel axis: I' = I + Md²."
+    },
+    {
+      "name": "Right circular cylinder",
+      "shape_description": "Solid cylinder of radius r and height h, with the z-axis along the cylinder axis",
+      "volume": "πr²h",
+      "surface_area": {
+        "total": "2πr(r + h)",
+        "lateral": "2πrh",
+        "end_caps": "2πr²"
+      },
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "h/2",
+        "reference": "center of base circle at origin, z-axis along cylinder axis"
+      },
+      "moments_of_inertia": {
+        "Ix": "M(3r² + h²)/12",
+        "Iy": "M(3r² + h²)/12",
+        "Iz": "Mr²/2"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt((3r² + h²)/12)",
+        "ky": "sqrt((3r² + h²)/12)",
+        "kz": "r/sqrt(2)"
+      },
+      "parameters": "r = radius of circular cross-section, h = height (axial length)",
+      "nasa_application": "Rocket body stages, solid rocket boosters, cylindrical fuel tanks, centrifuge modules, habitat pressure vessels (ISS modules)",
+      "notes": "The dominant shape in rocketry. A thin-walled cylinder (shell) has Iz = Mr² and Ix = M(6r² + h²)/12. For h >> r, Ix approaches Mh²/12 (a slender rod)."
+    },
+    {
+      "name": "Hollow cylinder (pipe)",
+      "shape_description": "Thick-walled cylindrical tube with outer radius R, inner radius r, and height h",
+      "volume": "πh(R² - r²)",
+      "surface_area": {
+        "total": "2π(R + r)(R - r + h)",
+        "outer_lateral": "2πRh",
+        "inner_lateral": "2πrh",
+        "end_annuli": "2π(R² - r²)"
+      },
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "h/2",
+        "reference": "center of base annulus at origin, z-axis along cylinder axis"
+      },
+      "moments_of_inertia": {
+        "Ix": "M(3(R² + r²) + h²)/12",
+        "Iy": "M(3(R² + r²) + h²)/12",
+        "Iz": "M(R² + r²)/2"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt((3(R² + r²) + h²)/12)",
+        "ky": "sqrt((3(R² + r²) + h²)/12)",
+        "kz": "sqrt((R² + r²)/2)"
+      },
+      "parameters": "R = outer radius, r = inner radius, h = height (axial length)",
+      "nasa_application": "Rocket body tubes, pressure vessel walls, turbopump casings, heat exchangers, structural tubes in trusses (ISS truss segments)",
+      "notes": "As r approaches R (thin wall), Iz approaches MR² and this becomes a thin cylindrical shell. Stiffness-to-weight ratio is superior to solid cylinder for structural applications."
+    },
+    {
+      "name": "Right circular cone",
+      "shape_description": "Solid cone with base radius r and height h, apex at top, base in xy-plane",
+      "volume": "πr²h/3",
+      "surface_area": {
+        "total": "πr(r + sqrt(r² + h²))",
+        "lateral": "πr·sqrt(r² + h²)",
+        "base": "πr²"
+      },
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "h/4",
+        "reference": "center of base circle at origin, apex at z = h"
+      },
+      "moments_of_inertia": {
+        "Ix_centroid": "M(3r²/20 + 3h²/80)",
+        "Iy_centroid": "M(3r²/20 + 3h²/80)",
+        "Iz": "3Mr²/10",
+        "Ix_apex": "3M(r² + 4h²)/20"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt(3r²/20 + 3h²/80)",
+        "ky": "sqrt(3r²/20 + 3h²/80)",
+        "kz": "r·sqrt(3/10)"
+      },
+      "parameters": "r = base radius, h = height from base to apex, slant height l = sqrt(r² + h²)",
+      "nasa_application": "Nose cones and heat shields, reentry vehicle shapes, rocket nozzle exit cones, payload fairings (conical sections), Apollo command module shape",
+      "notes": "Centroid is at h/4 from the base (3/4 of the way from apex). The Ix_apex formula gives the moment about the apex — useful for spin-stabilized reentry vehicles. For a half-angle cone: tan(alpha) = r/h."
+    },
+    {
+      "name": "Frustum of a cone",
+      "shape_description": "Truncated cone with larger base radius R, smaller top radius r, and height h between parallel faces",
+      "volume": "πh(R² + Rr + r²)/3",
+      "surface_area": {
+        "total": "π(R² + r² + (R + r)·sqrt((R - r)² + h²))",
+        "lateral": "π(R + r)·sqrt((R - r)² + h²)",
+        "base_large": "πR²",
+        "base_small": "πr²"
+      },
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "h(R² + 2Rr + 3r²)/(4(R² + Rr + r²))",
+        "reference": "center of large base at origin, small base at z = h"
+      },
+      "moments_of_inertia": {
+        "Iz": "3M(R⁵ - r⁵)/(10(R³ - r³))",
+        "notes_on_Iz": "About the axis of symmetry. For transverse axes, use integration or subtract cone moments."
+      },
+      "radius_of_gyration": {
+        "kz": "sqrt(3(R⁵ - r⁵)/(10M(R³ - r³)))"
+      },
+      "parameters": "R = large base radius, r = small base radius, h = perpendicular height between bases, slant height l = sqrt((R - r)² + h²)",
+      "nasa_application": "Rocket interstage adapters, payload adapter rings, nozzle extensions, spacecraft bus transition sections, launch escape tower fairings",
+      "notes": "When r = 0, this reduces to a complete cone. When r = R, it becomes a cylinder. The centroid formula reduces to h/4 from the base when r = 0 (cone) and h/2 when r = R (cylinder). The Iz formula uses the relation V_frustum = V_large_cone - V_small_cone."
+    },
+    {
+      "name": "Sphere",
+      "shape_description": "Solid sphere of radius r centered at origin",
+      "volume": "4πr³/3",
+      "surface_area": "4πr²",
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "0",
+        "reference": "center of sphere at origin"
+      },
+      "moments_of_inertia": {
+        "Ix": "2Mr²/5",
+        "Iy": "2Mr²/5",
+        "Iz": "2Mr²/5"
+      },
+      "radius_of_gyration": {
+        "kx": "r·sqrt(2/5)",
+        "ky": "r·sqrt(2/5)",
+        "kz": "r·sqrt(2/5)"
+      },
+      "parameters": "r = radius",
+      "nasa_application": "Spherical fuel tanks (LOX/LH2), pressure vessels, reaction control propellant tanks, communications antenna radomes, planetary bodies (gravitational modeling)",
+      "notes": "Moments of inertia are equal about all axes through the center — maximum symmetry. A solid sphere has I = 2Mr²/5. Compare with thin spherical shell: I = 2Mr²/3. The sphere encloses maximum volume for minimum surface area."
+    },
+    {
+      "name": "Hollow sphere (spherical shell)",
+      "shape_description": "Thick-walled spherical shell with outer radius R and inner radius r",
+      "volume": "4π(R³ - r³)/3",
+      "surface_area": {
+        "outer": "4πR²",
+        "inner": "4πr²"
+      },
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "0",
+        "reference": "center of sphere at origin"
+      },
+      "moments_of_inertia": {
+        "Ix": "2M(R⁵ - r⁵)/(5(R³ - r³))",
+        "Iy": "2M(R⁵ - r⁵)/(5(R³ - r³))",
+        "Iz": "2M(R⁵ - r⁵)/(5(R³ - r³))"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt(2(R⁵ - r⁵)/(5(R³ - r³)))",
+        "ky": "sqrt(2(R⁵ - r⁵)/(5(R³ - r³)))",
+        "kz": "sqrt(2(R⁵ - r⁵)/(5(R³ - r³)))"
+      },
+      "parameters": "R = outer radius, r = inner radius",
+      "nasa_application": "Spherical pressure vessels (propellant tanks), reaction control system tanks, planetary interior modeling (layered core/mantle), crew module pressure shells",
+      "notes": "As r approaches 0, reduces to solid sphere (I = 2MR²/5). As r approaches R (thin shell), I approaches 2MR²/3. The thin shell limit is useful for quick estimates of tank rotational inertia."
+    },
+    {
+      "name": "Hemisphere",
+      "shape_description": "Solid half-sphere of radius r, flat face in the xy-plane",
+      "volume": "2πr³/3",
+      "surface_area": {
+        "total": "3πr²",
+        "curved": "2πr²",
+        "flat_base": "πr²"
+      },
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "3r/8",
+        "reference": "center of flat base at origin, curved surface extends in +z direction"
+      },
+      "moments_of_inertia": {
+        "Ix_centroid": "M(83r²/320)",
+        "Iy_centroid": "M(83r²/320)",
+        "Iz": "2Mr²/5",
+        "Ix_base": "2Mr²/5"
+      },
+      "radius_of_gyration": {
+        "kx_centroid": "r·sqrt(83/320)",
+        "ky_centroid": "r·sqrt(83/320)",
+        "kz": "r·sqrt(2/5)"
+      },
+      "parameters": "r = radius of the sphere from which the hemisphere is cut",
+      "nasa_application": "Dome ends of cylindrical pressure vessels, observatory domes, hemispherical antenna reflectors, heat shield shapes, tank bulkheads",
+      "notes": "Centroid is at 3r/8 above the flat face. Iz (about the axis of symmetry) equals that of a full sphere of the same radius. Ix about the base = 2Mr²/5 by symmetry of the integration. The Ix about the centroid uses the parallel axis theorem: Ix_centroid = 2Mr²/5 - M(3r/8)² = M(83r²/320)."
+    },
+    {
+      "name": "Ellipsoid",
+      "shape_description": "Solid ellipsoid with semi-axes a, b, c along the x, y, z axes: x²/a² + y²/b² + z²/c² = 1",
+      "volume": "4πabc/3",
+      "surface_area": "No closed-form expression in elementary functions (approximations exist; Knud Thomsen: S ≈ 4π((a^p·b^p + a^p·c^p + b^p·c^p)/3)^(1/p) where p ≈ 1.6075)",
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "0",
+        "reference": "center of ellipsoid at origin"
+      },
+      "moments_of_inertia": {
+        "Ix": "M(b² + c²)/5",
+        "Iy": "M(a² + c²)/5",
+        "Iz": "M(a² + b²)/5"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt((b² + c²)/5)",
+        "ky": "sqrt((a² + c²)/5)",
+        "kz": "sqrt((a² + b²)/5)"
+      },
+      "parameters": "a = semi-axis along x, b = semi-axis along y, c = semi-axis along z",
+      "nasa_application": "Oblate planet modeling (Earth: a = b > c), prolate spacecraft shapes, ellipsoidal fuel tank heads, gravitational potential modeling of asteroids and moons",
+      "notes": "When a = b = c = r, reduces to a sphere with I = 2Mr²/5. An oblate spheroid (a = b > c) models planetary flattening. Earth's oblateness (f ≈ 1/298.257) affects satellite orbit precession (J2 perturbation). The surface area has no elementary closed form — this is one of the classic unsolved problems in elementary geometry."
+    },
+    {
+      "name": "Paraboloid of revolution",
+      "shape_description": "Solid formed by rotating y = sqrt(x) (or z² = (r²/h)·x) about its axis, from vertex to height h, with base radius r",
+      "volume": "πr²h/2",
+      "surface_area": {
+        "total": "πr² + πr/(6h²)·((r² + 4h²)^(3/2) - r³)",
+        "lateral": "πr/(6h²)·((r² + 4h²)^(3/2) - r³)",
+        "base": "πr²"
+      },
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "2h/3",
+        "reference": "vertex of paraboloid at origin, axis along z, base at z = h"
+      },
+      "moments_of_inertia": {
+        "Ix_centroid": "M(3r² + h²)/18",
+        "Iy_centroid": "M(3r² + h²)/18",
+        "Iz": "Mr²/3"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt((3r² + h²)/18)",
+        "ky": "sqrt((3r² + h²)/18)",
+        "kz": "r/sqrt(3)"
+      },
+      "parameters": "r = radius of base circle, h = height from vertex to base",
+      "nasa_application": "Parabolic antenna reflectors (Deep Space Network), solar concentrators, rocket nozzle bell contour approximation, searchlight reflectors on spacecraft",
+      "notes": "The centroid is at 2h/3 from the vertex (h/3 from the base). Volume is exactly half that of the circumscribing cylinder. Parabolic reflectors focus parallel rays to a single point — the principle behind DSN's 70m dishes. Iz about the axis = Mr²/3 (compare cylinder Mr²/2)."
+    },
+    {
+      "name": "Torus",
+      "shape_description": "Solid torus (doughnut) generated by rotating a circle of radius r about an axis at distance R from the circle center (R > r)",
+      "volume": "2π²Rr²",
+      "surface_area": "4π²Rr",
+      "centroid": {
+        "x": "0",
+        "y": "0",
+        "z": "0",
+        "reference": "center of the torus at origin, torus lies in the xy-plane"
+      },
+      "moments_of_inertia": {
+        "Ix": "M(4R² + 5r²)/8",
+        "Iy": "M(4R² + 5r²)/8",
+        "Iz": "M(4R² + 3r²)/4"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt((4R² + 5r²)/8)",
+        "ky": "sqrt((4R² + 5r²)/8)",
+        "kz": "sqrt((4R² + 3r²)/4)"
+      },
+      "parameters": "R = distance from center of torus to center of tube (major radius), r = radius of the tube cross-section (minor radius), R > r for a ring torus",
+      "nasa_application": "O-ring seals (Challenger SRB joints), toroidal propellant tanks (proposed), space station habitat ring concepts, magnetic confinement geometries (fusion research)",
+      "notes": "Pappus' theorem gives both volume and surface area directly: V = 2πR × πr² (centroid path × cross-section area), S = 2πR × 2πr (centroid path × circumference). Iz is about the axis of symmetry (z-axis perpendicular to the torus plane) — reduces to MR² for a thin ring (r → 0). Ix = Iy are about diameters in the torus plane — reduce to MR²/2 for a thin ring."
+    },
+    {
+      "name": "Right prism (general)",
+      "shape_description": "Solid prism with arbitrary cross-section of area A and perimeter P, extruded to height h along the z-axis",
+      "volume": "Ah",
+      "surface_area": {
+        "total": "2A + Ph",
+        "lateral": "Ph",
+        "end_caps": "2A"
+      },
+      "centroid": {
+        "x": "x_bar of cross-section",
+        "y": "y_bar of cross-section",
+        "z": "h/2",
+        "reference": "base cross-section in xy-plane at z = 0, z-axis along prism axis"
+      },
+      "moments_of_inertia": {
+        "Ix": "M(Ix_area/A + h²/12)",
+        "Iy": "M(Iy_area/A + h²/12)",
+        "Iz": "M(Ix_area + Iy_area)/A",
+        "note": "Ix_area and Iy_area are the second moments of area of the cross-section about its centroidal axes"
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt(Ix_area/A + h²/12)",
+        "ky": "sqrt(Iy_area/A + h²/12)",
+        "kz": "sqrt((Ix_area + Iy_area)/A)"
+      },
+      "parameters": "A = cross-sectional area, P = perimeter of cross-section, h = height (length), Ix_area and Iy_area = second moments of area of the cross-section",
+      "nasa_application": "Structural beams and longerons, extruded truss members, hexagonal satellite bus sections, triangular cross-section stiffeners",
+      "notes": "This is the general form — substitute the specific cross-section properties from the plane areas table (engineering-tables.json). For example, a triangular prism with base b and height d has A = bd/2, Ix_area = bd³/36. The mass moments use the relation: I_mass = (M/A) × I_area for the transverse components plus the axial h²/12 term."
+    },
+    {
+      "name": "Pyramid (general)",
+      "shape_description": "Solid pyramid with arbitrary polygonal base of area A and height h, tapering to an apex",
+      "volume": "Ah/3",
+      "surface_area": "A + sum of lateral face areas (depends on base shape)",
+      "centroid": {
+        "x": "x_bar of base",
+        "y": "y_bar of base",
+        "z": "h/4",
+        "reference": "centroid of base at (x_bar, y_bar, 0), apex at z = h"
+      },
+      "moments_of_inertia": {
+        "Iz_apex": "M × (Ix_base_area + Iy_base_area)/(5A)",
+        "Iz_centroid": "3M × (Ix_base_area + Iy_base_area)/(20A)",
+        "note": "For a square base (side a): Iz_centroid = Ma²/10, Ix_centroid = M(a²/20 + 3h²/80)"
+      },
+      "radius_of_gyration": {
+        "note": "Depends on base shape — see specific cases below"
+      },
+      "parameters": "A = base area, h = perpendicular height from base to apex",
+      "nasa_application": "Pyramidal truss nodes, tetrahedral spacecraft structures (TDRS antenna feeds), launch escape system aerodynamic surfaces",
+      "notes": "Centroid is always at h/4 from the base, regardless of base shape — this is a general result. Volume is always Ah/3. For a right pyramid with square base (side a): V = a²h/3, centroid at h/4, Iz = Ma²/10 about the axis of symmetry."
+    },
+    {
+      "name": "Wedge",
+      "shape_description": "Solid wedge formed by cutting a rectangular parallelepiped diagonally — rectangular base of dimensions a (length) and b (width), with height h tapering linearly to zero along one edge",
+      "volume": "abh/6",
+      "surface_area": "ab/2 + bh/2 + b·sqrt(a² + h²)/2 + ah (two triangular faces + sloped face + rectangular base... depends on specific wedge orientation)",
+      "centroid": {
+        "x": "a/4",
+        "y": "b/2",
+        "z": "h/4",
+        "reference": "corner where height = h at origin, a along x (tapering to zero height), b along y, h along z"
+      },
+      "moments_of_inertia": {
+        "Ix_centroid": "M(b² + h²)/18",
+        "Iy_centroid": "M(a² + h²)/18",
+        "Iz_centroid": "M(a² + b²)/18",
+        "note": "These are approximate forms for a symmetric wedge. Exact values depend on the specific wedge geometry."
+      },
+      "radius_of_gyration": {
+        "kx": "sqrt((b² + h²)/18)",
+        "ky": "sqrt((a² + h²)/18)",
+        "kz": "sqrt((a² + b²)/18)"
+      },
+      "parameters": "a = length of base along tapering direction, b = width of base (constant), h = maximum height",
+      "nasa_application": "Aerodynamic control surfaces (fins, vanes), structural gussets, spacecraft docking adapter wedge rings, thermal protection tile shapes on orbiter leading edges",
+      "notes": "A wedge is half of a rectangular parallelepiped cut along a diagonal. Volume = abh/6 (one-sixth of the circumscribing box). The centroid at x = a/4 means the mass center is shifted toward the thick end. For a symmetric wedge (isosceles triangular cross-section), use the triangular prism formulas."
+    },
+    {
+      "name": "Regular tetrahedron",
+      "shape_description": "Solid regular tetrahedron with all four faces equilateral triangles of edge length a",
+      "volume": "a³√2/12",
+      "surface_area": "a²√3",
+      "centroid": {
+        "x": "a/2",
+        "y": "a√3/6",
+        "z": "a√(2/3)/4",
+        "reference": "one vertex at origin — centroid is equidistant from all four vertices at distance a√6/4 from each vertex"
+      },
+      "moments_of_inertia": {
+        "Ix": "Ma²/20",
+        "Iy": "Ma²/20",
+        "Iz": "Ma²/20"
+      },
+      "radius_of_gyration": {
+        "kx": "a/√20",
+        "ky": "a/√20",
+        "kz": "a/√20"
+      },
+      "parameters": "a = edge length (all edges equal)",
+      "nasa_application": "Tetrahedral satellite configurations (cluster missions like MMS — Magnetospheric Multiscale), structural nodes in truss systems, tetrahedral mesh elements in FEA",
+      "notes": "All moments of inertia about centroidal axes are equal (Ma²/20) due to the tetrahedral symmetry. Height of regular tetrahedron: h = a√(2/3). The centroid divides each median in ratio 3:1 from vertex. Volume can also be written as √2·a³/12 ≈ 0.1178·a³. The inscribed sphere has radius r = a/(2√6), the circumscribed sphere has radius R = a√6/4."
+    }
+  ]
+}
