@@ -1,0 +1,158 @@
+{
+  "mission": "1.9",
+  "title": "Explorer 3",
+  "date": "1958-03-26",
+  "organism": "Marchantia polymorpha",
+  "organism_common": "Common liverwort",
+  "organism_location": "A thalloid liverwort found on damp soil, rotting logs, stream banks, and disturbed ground throughout the Pacific Northwest, from sea level to about 1,500 meters elevation. Marchantia polymorpha is cosmopolitan — one of the most widespread land plants on Earth, found on every continent except Antarctica. In the PNW, it thrives in moist, shaded habitats: along creek banks in western red cedar forests, on bare soil exposed by logging or landslides, on old concrete and masonry, and on greenhouse floors. The thallus is a flat, forking green ribbon 2-10 cm wide, marked by diamond-shaped areolae on its upper surface (each areola contains a pore leading to internal air chambers for gas exchange). The most distinctive feature is the gemma cup: small circular cups on the thallus surface containing disc-shaped gemmae (clonal propagules). When rain splashes into a gemma cup, the gemmae are ejected and dispersed, each carrying a complete genetic copy of the parent. This makes Marchantia the biological analog of Explorer 3's tape recorder: both are store-and-forward systems. The liverwort records genetic data in gemmae, stores them in cups, and disperses copies via rain splash. Explorer 3 recorded radiation data on tape, stored it during orbit, and dispersed the data via compressed playback over ground stations. Both systems achieve complete information transfer without requiring a continuous connection.",
+  "bird": "Megaceryle alcyon",
+  "bird_common": "Belted Kingfisher",
+  "dedication": {
+    "name": "Joseph Campbell",
+    "born": "1904-03-26",
+    "died": "1987-10-30",
+    "birthplace": "White Plains, New York",
+    "field": "Comparative mythology, literature, religious studies",
+    "resonance": "Joseph Campbell mapped the hero's journey — the monomyth — by recording patterns across thousands of stories from every culture on Earth. His method was the tape recorder of comparative mythology: capture data across the full orbit of human storytelling, then play it back compressed, revealing the universal pattern hidden in the noise of individual narratives. In 'The Hero with a Thousand Faces' (1949), Campbell showed that the same story structure — departure, initiation, return — appears in myths worldwide, not because cultures borrowed from each other but because the pattern reflects something fundamental about the human experience of transformation. Explorer 3 ventured into the unknown (the radiation belt), faced the ordeal (Geiger saturation), obtained the boon (complete radiation data), and returned with knowledge that transformed our understanding of space. The satellite's journey maps precisely onto Campbell's monomyth. The tape recorder is the boon-carrier — the mechanism that brings knowledge back from the underworld. Campbell was born on March 26, 1904 — the same calendar date as Explorer 3's launch, March 26, 1958."
+  },
+  "nodes": [
+    {
+      "id": "1.9-magnetic-tape-recording",
+      "concept": "Magnetic tape recording — storing analog data as patterns of magnetization on a moving oxide-coated substrate",
+      "department": "engineering",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "Magnetic recording stores information by magnetizing a thin layer of ferromagnetic oxide (typically gamma-Fe2O3 or CrO2) coated on a flexible plastic substrate (Mylar/polyester). A record head — an electromagnet with a narrow gap — generates a magnetic field proportional to the input signal. As the tape moves past the gap, the oxide particles are magnetized in a pattern that encodes the signal. During playback, the magnetized tape moves past a pickup head, and the changing magnetic flux induces a voltage: V = -N * dPhi/dt, where N is the number of coil turns and dPhi/dt is the rate of flux change. The output voltage is proportional to tape speed, which is why faster playback produces a stronger signal (and higher frequencies — the 'chipmunk effect'). Explorer 3's tape recorder, designed by George Ludwig at the University of Iowa, used a miniature endless-loop tape approximately 4 meters long. It recorded Geiger counter data continuously at a slow speed during each orbit, then played back at 4x speed when over a ground station. This compressed an entire orbit's data into a brief telemetry burst. The recorder was one of the first data storage devices to operate in space.",
+      "resonance": "The tape recorder is the technological analog of the liverwort's gemma cup: both store information on a physical medium (oxide particles / DNA), both hold it until conditions trigger release (ground station / rain), and both deliver the complete record to a receiver that can act on it. The tape's oxide particles are magnetized in patterns they do not understand, just as DNA encodes information the molecule itself does not interpret. Both are substrates for meaning that transcends the medium.",
+      "worked_example": {
+        "description": "Calculate the data capacity and playback compression of Explorer 3's tape recorder",
+        "parameters": {
+          "tape_length_m": 4,
+          "record_speed_cm_s": 1,
+          "playback_speed_cm_s": 4,
+          "orbital_period_min": 115.7,
+          "sample_rate_hz": 1
+        },
+        "formula": "Recording time = tape_length / record_speed. Playback time = tape_length / playback_speed. Compression ratio = record_speed / playback_speed.",
+        "result": "Recording time: 4m / 1cm/s = 400s (~6.7 min). The tape loops, so it records continuously and overwrites old data. Playback time: 4m / 4cm/s = 100s (~1.7 min). Compression ratio: 4:1. One orbit (115.7 min) of data compressed into ~29 min of playback.",
+        "python": "tape_length = 4.0  # meters\nrec_speed = 0.01   # m/s (1 cm/s)\nplay_speed = 0.04  # m/s (4 cm/s)\norbit_period = 115.7 * 60  # seconds\n\nrec_time = tape_length / rec_speed\nplay_time = tape_length / play_speed\ncompression = play_speed / rec_speed\n\nprint(f'Tape length:     {tape_length} m')\nprint(f'Record speed:    {rec_speed*100:.0f} cm/s')\nprint(f'Playback speed:  {play_speed*100:.0f} cm/s')\nprint(f'Record time:     {rec_time:.0f} s ({rec_time/60:.1f} min)')\nprint(f'Playback time:   {play_time:.0f} s ({play_time/60:.1f} min)')\nprint(f'Compression:     {compression:.0f}:1')\nprint(f'Orbit period:    {orbit_period:.0f} s ({orbit_period/60:.1f} min)')\nprint(f'\\nThe tape loops continuously. In one orbit ({orbit_period/60:.0f} min),')\nprint(f'the tape makes {orbit_period/rec_time:.1f} complete loops.')\nprint(f'Only the last {rec_time:.0f}s of data is preserved per playback.')\nprint(f'\\nBut this was enough: the critical belt-crossing data')\nprint(f'was captured on every pass through the radiation belt.')"
+      }
+    },
+    {
+      "id": "1.9-data-confirmation",
+      "concept": "Data confirmation — how Explorer 3 transformed Explorer 1's inference into a discovery",
+      "department": "history",
+      "level": "foundational",
+      "tspb_layer": 1,
+      "tspb_section": "1.1",
+      "description": "Explorer 1, launched January 31, 1958, detected anomalous Geiger counter readings during its orbit: the count rate would rise as the satellite approached apogee, then drop suddenly to zero. James Van Allen at the University of Iowa recognized that zero counts could indicate maximum radiation (Geiger counter dead-time saturation) rather than equipment failure, but he could not prove it. Explorer 1's real-time telemetry was only available during ground station passes (~10% of each orbit), and the gaps in coverage coincided with the most critical orbital positions. Explorer 3, launched March 26, 1958 on the same Juno I rocket type, carried the same 14.1 kg instrument package with one addition: a miniature tape recorder designed by George Ludwig. The tape recorded Geiger counter data continuously, then played back at 4x speed over ground stations, providing the first complete radiation profile of an entire orbit. The data unambiguously showed the saturation signature: counts rising, then abruptly dropping to zero at apogee, then rising again on the descent — the bell curve with its center punched out. Van Allen presented these results at the National Academy of Sciences on May 1, 1958, announcing the discovery of Earth's radiation belts. Explorer 3's contribution was the confirmation — the complete dataset that made the inference certain.",
+      "resonance": "Explorer 1 was the observation; Explorer 3 was the confirmation. In ecology, Lobaria pulmonaria (Explorer 1's organism) indicates clean air by its presence; its absence indicates pollution, but you need to survey the entire forest to be certain it is truly absent. One survey with gaps (like Explorer 1's telemetry) might miss a surviving colony. A complete survey (like Explorer 3's tape) proves the absence. The liverwort gemma cup operates on the same principle as the tape: it does not need a continuous connection to transmit information, but the information it carries is complete. Confirmation requires completeness."
+    },
+    {
+      "id": "1.9-sampling-theorem",
+      "concept": "Sampling theorem — how often you must record to faithfully capture a continuous signal",
+      "department": "mathematics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.2",
+      "description": "The Nyquist-Shannon sampling theorem states that a continuous signal with maximum frequency f_max can be perfectly reconstructed from discrete samples if the sampling rate f_s >= 2 * f_max. Below this rate, aliasing occurs — high-frequency components masquerade as lower frequencies, corrupting the reconstruction. Explorer 3's tape recorder had to sample the Geiger counter output frequently enough to capture the radiation profile's spatial variations. The belt crossing takes approximately 10-15 minutes of the 115-minute orbit, during which the radiation intensity changes from background to peak to background. The characteristic time scale of the belt profile is ~5 minutes, requiring a minimum sampling rate of 1 sample per 2.5 minutes. The tape recorder sampled much faster (approximately once per second), far exceeding the Nyquist rate and providing a high-fidelity recording. Explorer 1's effective 'sampling rate' — determined by ground station visibility — was approximately 1 sample per 10 minutes, which undersampled the belt structure and produced gaps that could alias the radiation profile into unrecognizable fragments.",
+      "resonance": "The sampling theorem is the mathematical expression of a universal principle: you must measure frequently enough to capture the pattern you are looking for. The liverwort's gemma cups sample the environment implicitly — they produce gemmae continuously, so whenever rain comes (at whatever frequency), there are gemmae ready to be dispersed. The liverwort does not need to predict when rain will fall; it is always ready. Explorer 3's tape recorder did the same: it recorded continuously, so whenever the satellite crossed the belt, the data was captured. Both systems oversample their environment to ensure nothing is missed.",
+      "worked_example": {
+        "description": "Compare Explorer 1's effective sampling rate vs Explorer 3's tape recorder rate",
+        "parameters": {
+          "orbit_period_min": 115.7,
+          "belt_crossing_min": 12,
+          "e1_station_coverage_pct": 10,
+          "e3_tape_sample_rate_hz": 1
+        },
+        "formula": "Nyquist rate = 2 / belt_crossing_min. E1 rate = num_stations * pass_duration / orbit_period. E3 rate = tape_sample_rate.",
+        "result": "Nyquist requirement: 2 / 12 min = 1 sample per 6 minutes minimum. Explorer 1: ~6 station passes per orbit, ~5 min each = 30 min coverage / 115 min orbit = 1 'sample' per 19 min. BELOW NYQUIST. Explorer 3: 1 sample/second = far above Nyquist. Complete coverage.",
+        "python": "orbit = 115.7  # minutes\nbelt = 12      # minutes for belt crossing\n\nnyquist_period = belt / 2  # minutes\nprint(f'Belt crossing duration: {belt} minutes')\nprint(f'Nyquist requirement: 1 sample per {nyquist_period} min')\nprint()\n\n# Explorer 1\ne1_coverage = 0.10  # 10%\ne1_eff_rate = orbit / (e1_coverage * orbit)  # effective sample interval\nprint(f'Explorer 1:')\nprint(f'  Coverage: {e1_coverage*100:.0f}% of orbit')\nprint(f'  Effective sample interval: ~{1/e1_coverage:.0f} min')\nprint(f'  vs Nyquist: {\"BELOW\" if 1/e1_coverage > nyquist_period else \"ABOVE\"}')\nprint(f'  Result: belt may be missed entirely in some orbits')\nprint()\n\n# Explorer 3\ne3_rate = 1  # sample/second\ne3_interval = 1/60  # minutes\nprint(f'Explorer 3:')\nprint(f'  Tape sample rate: {e3_rate} Hz (1 per second)')\nprint(f'  Sample interval: {e3_interval*60:.0f} seconds')\nprint(f'  vs Nyquist: ABOVE by factor of {nyquist_period*60:.0f}')\nprint(f'  Result: complete belt profile captured every orbit')"
+      }
+    },
+    {
+      "id": "1.9-store-and-forward",
+      "concept": "Store-and-forward — the communication paradigm that buffers data for later transmission",
+      "department": "engineering",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.1",
+      "description": "Store-and-forward is a communication technique where data is temporarily stored at an intermediate node before being forwarded to its final destination. Unlike real-time (streaming) communication, which requires a continuous connection between sender and receiver, store-and-forward tolerates intermittent connectivity. The sender writes data to a buffer (tape, disk, memory); when a connection becomes available, the buffered data is transmitted. Explorer 3's tape recorder was one of the earliest implementations of store-and-forward in a digital communications context. The satellite recorded data continuously (store), waited until a ground station was in range (hold), then played back at 4x speed (forward). This paradigm later became fundamental to computer networking: email uses store-and-forward (SMTP relays), packet-switched networks use store-and-forward (routers buffer packets), and delay-tolerant networking (DTN) extends it to deep space communications where round-trip times can be hours. The liverwort's gemma cup is a biological store-and-forward system: genetic data is stored in gemmae, held in the cup, and forwarded (dispersed) when rain triggers release.",
+      "resonance": "The store-and-forward principle is the common thread between Explorer 3's tape recorder, the liverwort's gemma cup, and Campbell's monomyth. The hero stores the boon during the ordeal, holds it through the return, and forwards it to the community. The tape stores the Geiger counts during the orbit, holds them on oxide particles, and forwards them as a compressed burst over the ground station. The gemma stores the genome, holds it in the cup, and forwards it via rain splash. All three are buffered communication systems — they decouple the creation of information from its delivery."
+    },
+    {
+      "id": "1.9-orbital-decay",
+      "concept": "Orbital decay — how atmospheric drag determines satellite lifetime from perigee altitude",
+      "department": "aerospace",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.3",
+      "description": "A satellite's orbital lifetime depends critically on its perigee altitude, because atmospheric density decreases exponentially with altitude. Explorer 3's perigee (186 km) was 172 km lower than Explorer 1's (358 km), resulting in approximately 50x greater atmospheric density at perigee. This dramatically higher drag caused Explorer 3 to re-enter after only 93 days (June 27, 1958), compared to Explorer 1's 12-year lifetime. The atmospheric density at 186 km is approximately 2e-10 kg/m^3, while at 358 km it is approximately 7e-12 kg/m^3 — a factor of ~30. Combined with the solar activity effect (Solar Cycle 19, the strongest on record, peaked in 1958, expanding the upper atmosphere), Explorer 3 experienced severe drag. The drag force F = 0.5 * rho * v^2 * Cd * A removes kinetic energy on each perigee pass, lowering the apogee while the perigee initially remains approximately constant. The orbit circularizes near the original perigee altitude, then both perigee and apogee drop together in a rapid terminal spiral.",
+      "resonance": "Explorer 3's short lifetime illustrates the principle of expendable effort: the satellite was designed for a mission, not for survival. It gathered the data that was needed and was consumed by the atmosphere. The liverwort thallus operates similarly — individual thalli live for months to a few years, growing and producing gemmae, then dying and decomposing. The thallus is expendable; the gemmae carry the information forward. Explorer 3 was expendable; the tape data carried the discovery forward. Short-lived systems that produce lasting outputs are a recurrent pattern in both biology and engineering.",
+      "worked_example": {
+        "description": "Compare drag forces on Explorer 1 and Explorer 3 at their respective perigees",
+        "parameters": {
+          "e1_perigee_km": 358,
+          "e3_perigee_km": 186,
+          "mass_kg": 14,
+          "cross_section_m2": 0.036,
+          "Cd": 2.2
+        },
+        "formula": "F_drag = 0.5 * rho(h) * v_perigee^2 * Cd * A. Lifetime scales roughly as 1/rho(perigee).",
+        "result": "rho(186 km) ~ 2e-10 kg/m^3. rho(358 km) ~ 7e-12 kg/m^3. Ratio: ~29x. Drag on Explorer 3 was ~29x greater per perigee pass. Combined with solar maximum effects: effective ratio ~40-50x. Lifetime ratio: 12 years / 50 ~ 0.24 years ~ 88 days. Actual: 93 days.",
+        "python": "import numpy as np\n\ndef rho(h_km):\n    if h_km < 200: return 2e-10 * np.exp(-(h_km-200)/22)\n    if h_km < 300: return 2.5e-11 * np.exp(-(h_km-250)/34)\n    if h_km < 400: return 7e-12 * np.exp(-(h_km-350)/44)\n    return 3e-12 * np.exp(-(h_km-400)/50)\n\nR = 6371e3  # m\nmu = 3.986e14\n\nfor name, peri, life in [('Explorer 1', 358, '12 years'),\n                          ('Explorer 3', 186, '93 days')]:\n    r_p = R + peri * 1e3\n    v_p = np.sqrt(mu * 2 / r_p)  # approximate perigee velocity\n    d = rho(peri)\n    F = 0.5 * d * v_p**2 * 2.2 * 0.036\n    print(f'{name}:')\n    print(f'  Perigee: {peri} km')\n    print(f'  Density: {d:.2e} kg/m^3')\n    print(f'  V_perigee: {v_p:.0f} m/s')\n    print(f'  Drag force: {F:.2e} N')\n    print(f'  Lifetime: {life}')\n    print()\n\nratio = rho(186) / rho(358)\nprint(f'Density ratio (186/358 km): {ratio:.0f}x')\nprint(f'172 km of altitude = {ratio:.0f}x more drag')\nprint(f'= the difference between 12 years and 93 days')"
+      }
+    },
+    {
+      "id": "1.9-ground-station-coverage",
+      "concept": "Ground station coverage — the geometry of satellite visibility from fixed locations on a rotating Earth",
+      "department": "aerospace",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.2",
+      "description": "A satellite in low Earth orbit is visible from a ground station only when it is above the station's local horizon, which depends on the satellite's altitude, the station's location, and the satellite's orbital inclination. For Explorer 1 and 3 (inclination ~33 degrees), the ground track sinusoidal curve crosses latitudes between 33 N and 33 S. The Minitrack network of ground stations was spread along approximately the 75th meridian (western hemisphere) with a few stations elsewhere. Each station could receive telemetry for approximately 5-10 minutes per overhead pass, with the satellite in range when its elevation angle exceeded about 5 degrees. The visibility window from a single station spans a ground circle of roughly 2,000 km radius at the satellite's typical altitude. With 6-8 stations, the total coverage was approximately 10-15% of each orbit. For Explorer 1, this meant that 85-90% of the Geiger counter data was never received — it was transmitted into empty sky with no antenna listening. Explorer 3's tape recorder eliminated this limitation by recording continuously and playing back only during the coverage windows, achieving 100% data recovery.",
+      "resonance": "Ground station coverage is the technological analog of the liverwort's dispersal range. A gemma cup can only deliver gemmae to locations within splash range of the cup — perhaps 10-20 cm in still conditions, farther with flowing water. But each gemma carries the complete dataset, so a single successful delivery is sufficient. Explorer 3's tape similarly carried the complete orbit's data; a single successful playback over any station was enough. The coverage problem is not about reaching everywhere — it is about ensuring that the complete record reaches somewhere."
+    },
+    {
+      "id": "1.9-compressed-playback",
+      "concept": "Compressed playback — time-scaling recorded data for efficient transmission",
+      "department": "engineering",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.3",
+      "description": "Explorer 3's tape recorder played back at 4 times the recording speed, compressing the temporal bandwidth by a factor of 4. This time compression has both benefits and tradeoffs. Benefits: the telemetry burst is shorter, reducing the required ground station pass duration and improving the chance of completing the transmission within a single visibility window. The playback voltage is higher (V ∝ dPhi/dt ∝ tape_speed), improving signal-to-noise ratio. Tradeoffs: the signal bandwidth increases by a factor of 4 (frequencies shift up), requiring wider receiver bandwidth. The faster tape transport introduces more flutter and speed variation. For Explorer 3's relatively low-bandwidth Geiger counter data (maximum event rate ~1000 counts/sec at background levels), 4x compression was easily within the telemetry system's bandwidth. Modern data recorders use digital compression ratios far exceeding 4:1, but the principle is identical: record slow, transmit fast, use the compression to match the data rate to the available channel capacity.",
+      "resonance": "Compressed playback is time distortion in the service of communication. Campbell's comparative methodology does the same thing: thousands of years of myth, compressed into a single book, played back at a rate the reader can absorb. The hero's journey takes a lifetime in the myth but is read in an evening. The radiation belt crossing takes 15 minutes in orbit but plays back in under 4 minutes on tape. Both compressions preserve the essential structure while discarding the real-time duration. The pattern survives the compression because the pattern is what matters, not the time it took."
+    },
+    {
+      "id": "1.9-gemma-cup-reproduction",
+      "concept": "Gemma cup reproduction — asexual clonal propagation via rain-splash dispersal in liverworts",
+      "department": "biology",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.4",
+      "description": "Marchantia polymorpha produces gemmae (singular: gemma) in specialized structures called gemma cups (also called splash cups). Each gemma is a small (0.5-1 mm), lens-shaped disc of undifferentiated tissue that can grow into a complete new thallus. The gemma is attached to the cup floor by a short stalk that breaks easily. When a raindrop strikes the cup, the kinetic energy of the impact ejects the gemmae, projecting them up to 1 meter from the parent. Each gemma is genetically identical to the parent — a clone. Gemmae production is continuous under favorable conditions, with each cup containing 20-50 gemmae at any time. The ejection mechanism is purely physical — no biological trigger is needed beyond the presence of water. This makes the gemma cup one of the most elegant store-and-forward systems in biology: the plant continuously produces data packets (gemmae), stores them in a physical buffer (the cup), and uses an environmental trigger (rain) to forward them to new locations. The system requires no energy expenditure for dispersal — the rain provides the kinetic energy. The system requires no timing mechanism — rain comes when it comes, and the gemmae are always ready.",
+      "resonance": "The gemma cup and the tape recorder share a fundamental design principle: passive readiness. The tape does not choose when to play back — it plays back when the ground station is in range and the command is given. The gemma cup does not choose when to eject — it ejects when rain falls. Both systems decouple data production from data transmission, allowing the organism/satellite to record continuously without worrying about when the transmission opportunity will arise. This is the core insight of store-and-forward: separate the concerns of creation and delivery."
+    },
+    {
+      "id": "1.9-heros-journey",
+      "concept": "Hero's journey — Campbell's monomyth as a narrative template for discovery missions",
+      "department": "humanities",
+      "level": "foundational",
+      "tspb_layer": 1,
+      "tspb_section": "1.2",
+      "description": "Joseph Campbell's 'Hero with a Thousand Faces' (1949) identified a common narrative structure in myths worldwide: the monomyth or hero's journey. The cycle has three main phases: Departure (the hero leaves the ordinary world), Initiation (the hero faces trials and obtains a boon), and Return (the hero brings the boon back to the ordinary world). The 12-stage version includes: (1) Ordinary World, (2) Call to Adventure, (3) Refusal of the Call, (4) Meeting the Mentor, (5) Crossing the Threshold, (6) Tests/Allies/Enemies, (7) Approach to the Inmost Cave, (8) The Ordeal, (9) The Reward (Seizing the Boon), (10) The Road Back, (11) Resurrection, (12) Return with the Elixir. Explorer 3's mission maps directly onto this structure: the satellite departs Earth (launch), crosses the threshold (enters orbit), faces the ordeal (traverses the radiation belt where the Geiger counter saturates), seizes the boon (records the complete radiation profile on tape), takes the road back (orbits toward the ground station), and returns with the elixir (plays back the tape, delivering the data that confirms the Van Allen belts). The monomyth is not a prescription for storytelling — it is a description of how discovery works. The hero goes where others cannot, survives what others would not, and brings back knowledge that changes the community's understanding of the world.",
+      "resonance": "The hero's journey and the store-and-forward system are structural analogs. The hero stores the boon during the ordeal (recording), carries it through the return (buffering), and delivers it to the community (forwarding). The liverwort stores genetic data in gemmae, holds them in cups, and delivers them via rain. Explorer 3 stores radiation data on tape, holds it during orbit, and delivers it via compressed playback. Campbell recorded myths on index cards, held them in files, and delivered them via published books. All four are the same pattern: store, hold, forward. The monomyth is itself a meta-level store-and-forward system — it preserves the pattern of transformation across cultures and centuries."
+    },
+    {
+      "id": "1.9-squelch-noise-gating",
+      "concept": "Squelch and noise gating — automatic muting of audio output when no carrier signal is present",
+      "department": "electronics",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.5",
+      "description": "A squelch circuit (also called a noise gate) automatically mutes a radio receiver's audio output when no carrier signal is detected. Between stations, a receiver produces loud broadband noise (static) because the detector amplifies and demodulates the thermal noise of the receiver's own circuits. When a carrier is present, it captures the receiver's automatic gain control (AGC) and suppresses the noise floor, so the audio output contains mainly the modulated program material. The squelch circuit detects the noise level using a high-pass filter (noise is predominantly high-frequency) and a peak detector, then compares the result against an adjustable threshold. When noise exceeds the threshold (no carrier), a transistor switch mutes the audio. When noise drops below the threshold (carrier present), the switch opens and audio passes. This is the ninth stage in the progressive radio series, following volume/tone control (v1.8). The squelch makes the receiver 'civilized' — it speaks when there is something to say and stays quiet otherwise. Modern digital squelch systems use sub-audible tones (CTCSS) or digital codes (DCS) for more selective gating.",
+      "resonance": "The squelch circuit and Explorer 3's tape recorder solve complementary problems. The squelch gates out noise in real-time — it decides moment by moment whether the signal is worth passing through. The tape recorder captures everything and lets the scientists sort signal from noise later. The squelch is a filter; the tape is a buffer. Both address the fundamental challenge of signal extraction from noise, but from opposite directions. The squelch says 'ignore what is not worth hearing.' The tape says 'record everything and decide later.' In biology, the liverwort uses the tape approach: it produces gemmae continuously regardless of whether dispersal conditions exist. The rain (carrier) triggers dispersal when it arrives. There is no squelch — no mechanism to suppress gemma production during dry periods. Continuous recording is the liverwort's strategy, as it was Explorer 3's."
+    }
+  ]
+}

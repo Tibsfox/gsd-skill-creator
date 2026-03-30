@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.9 — Explorer 3 + Marchantia polymorpha | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --tape-deep: #0A0806;
+    --tape-mid: #1A1510;
+    --tape-brown: #5A4030;
+    --tape-bright: #8A6A50;
+    --data-green: #40CC40;
+    --data-dim: #206620;
+    --archive-amber: #D4A830;
+    --archive-bright: #E8D060;
+    --liverwort-green: #4A7A3A;
+    --liverwort-dark: #2A4A1A;
+    --space: #050508;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #3A2A18;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(64,204,64,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(32,102,32,0.06) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(232,208,96,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(74,122,58,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(90,64,48,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(64,204,64,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--data-green); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--archive-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--tape-deep) 25%, var(--tape-mid) 50%, var(--tape-brown) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--data-green); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(64,204,64,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(64,204,64,0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(64,204,64,0.12); border: 1px solid var(--data-green); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--data-green); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(64,204,64,0.15); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--data-green); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--archive-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--data-green); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--archive-bright); }
+  .prose em { color: var(--liverwort-green); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--data-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,8,0.5); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .nav-card { background: rgba(5,5,8,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--data-green); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--archive-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--data-green); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .card-grid { grid-template-columns: 1fr; } }
+
+  /* Card grid for landing page */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .card { background: rgba(5,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--data-green); }
+  .card h3 { font-size: 1rem; color: var(--data-green); margin-bottom: 0.5rem; }
+  .card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .card a { color: var(--data-green); text-decoration: none; }
+  .card a:hover { color: var(--archive-bright); }
+
+  .section-title { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--archive-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .section-title:first-of-type { margin-top: 0; }
+
+  .artifact-list { list-style: none; padding: 0; margin: 1rem 0; }
+  .artifact-list li { font-size: 0.9rem; line-height: 1.7; padding: 0.4rem 0; border-bottom: 1px solid rgba(58,42,24,0.3); color: var(--text); }
+  .artifact-list li:last-child { border-bottom: none; }
+  .artifact-label { color: var(--data-green); font-weight: 500; font-family: 'DM Mono', monospace; font-size: 0.85rem; }
+
+  .dedication-section { background: rgba(74,122,58,0.08); border: 1px solid var(--liverwort-dark); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .dedication-section h2 { color: var(--archive-amber); border-bottom-color: var(--liverwort-dark); }
+  .dedication-section p { font-size: 0.95rem; line-height: 1.8; color: var(--text); }
+
+  .summary-text { font-size: 0.95rem; line-height: 1.8; color: var(--text); max-width: 900px; margin-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a> <span class="sep">/</span> v1.9 Explorer 3
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.9</span>
+      <span class="track-badge">Mission Hub</span>
+    </div>
+    <h1>v1.9 &mdash; Explorer 3 + <em>Marchantia polymorpha</em></h1>
+    <p class="subtitle">The Tape Recorder &mdash; Confirmation of the Van Allen Radiation Belts</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> Mar 26, 1958</span>
+      <span><span class="label">Program:</span> Explorer (ABMA/JPL)</span>
+      <span><span class="label">Mass:</span> 14.1 kg</span>
+      <span><span class="label">Organism:</span> Common liverwort</span>
+      <span><span class="label">Bird:</span> Belted Kingfisher</span>
+      <span><span class="label">Dedication:</span> Joseph Campbell</span>
+      <span><span class="label">Status:</span> SUCCESS &mdash; confirmed Van Allen belts</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">Mission Summary</h2>
+
+  <p class="summary-text">Explorer 3 was launched on March 26, 1958, from Cape Canaveral Launch Complex 26A aboard a Juno I rocket &mdash; the same vehicle configuration that had successfully orbited Explorer 1 fifty-four days earlier and failed to orbit Explorer 2 twenty-one days before. The satellite was essentially identical to Explorer 1: a 14.1 kg cylinder carrying a Geiger-Mueller cosmic ray counter, a micrometeorite detector, and temperature sensors. The critical difference was a miniature magnetic tape recorder &mdash; the first data storage device to operate in space. Explorer 1 had transmitted its data in real time, but ground stations could only receive the signal during the 7% of each orbit when the satellite was within line of sight. 93% of the data was lost to the gaps between tracking passes. The tape recorder solved this by recording continuously and playing back the complete orbital data at 30x speed during ground station passes. Explorer 3 entered a 186 x 2,799 km orbit with a 115.7-minute period and 33.4-degree inclination. Its lower perigee (186 km vs Explorer 1&rsquo;s 358 km) placed it deeper in the atmosphere, limiting its lifetime to just 93 days before re-entry on June 27, 1958. But 93 days was enough. The tape-recorded data showed the complete radiation profile through the Van Allen belt on every orbit: counts rising from the cosmic ray background, climbing steeply through the inner belt, then dropping abruptly to zero as the Geiger counter saturated in a radiation field roughly 100 times stronger than the instrument&rsquo;s maximum counting rate. The symmetry of the profile &mdash; identical on ascending and descending legs &mdash; was irrefutable evidence that the zero counts represented detector saturation in intense radiation, not absence of radiation. Explorer 1 had discovered the anomaly. Explorer 3 confirmed the Van Allen radiation belts as a permanent feature of Earth&rsquo;s magnetosphere. The paired organism, <em>Marchantia polymorpha</em> (common liverwort), is a thalloid plant that reproduces asexually by producing gemmae &mdash; genetically identical copies dispersed from gemma cups by rain splash. Each gemma carries the complete genome into new territory, confirming the parent&rsquo;s genetic viability. The gemmae are tape recorders: they store a complete copy and deliver it when conditions allow. Both the satellite and the liverwort prioritize confirmation over endurance &mdash; completeness of data over length of mission, coverage of territory over depth of roots. The tape recorder that confirmed the radiation belts weighed 130 grams, was built by George Ludwig, a graduate student at the University of Iowa, and is the ancestor of every solid-state recorder on every spacecraft that has followed.</p>
+
+  <h2 class="section-title">Research Pages</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <a href="research.html">
+        <h3>Deep Research</h3>
+        <p>Track 1a &mdash; The full story of Explorer 3: the missing orbits of Explorer 1, the failure of Explorer 2, the miniature tape recorder, the launch, the 93-day mission, the confirmation of the Van Allen belts, and the legacy of onboard data recording.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="organism.html">
+        <h3>Organism Pairing</h3>
+        <p>Track 2 &mdash; <em>Marchantia polymorpha</em> (common liverwort): the thalloid plant that confirms its genome through gemmae &mdash; clonal propagules dispersed by rain splash, each carrying a complete genetic copy into new territory.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="mathematics.html">
+        <h3>Mathematics</h3>
+        <p>Track 3 &mdash; TSPB mathematics in McNeese-Hoag format. Geiger counter dead time, channel capacity and buffering, orbital decay from atmospheric drag, and the exponential atmosphere.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="papers.html">
+        <h3>Scientific Anchors</h3>
+        <p>Track 1b &mdash; Van Allen et al. (1959) combined radiation belt paper + 3 wall-clock arXiv papers: radiation-hardened NAND flash, orbital re-entry prediction, <em>Marchantia</em> chromatin dynamics.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="curriculum.html">
+        <h3>College of Knowledge</h3>
+        <p>Track 4 &mdash; Department deposits across Computer Science/Data Storage, Physics, Engineering, Botany/Bryology, Information Theory, and Mythology. TRY sessions: build a data logger, find liverwort in the wild, build a cassette tape data recorder.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="simulation.html">
+        <h3>Simulation &amp; Creative Arts</h3>
+        <p>Track 5 &mdash; What to build: real-time vs recorded data comparison, orbital decay simulator, tape recorder playback simulator, ground station coverage visualizer, ML gap interpolation, ring buffer exercises, Campbell&rsquo;s hero cycle as orbital diagram, <em>Marchantia</em> botanical illustration.</p>
+      </a>
+    </div>
+  </div>
+
+  <h2 class="section-title">Artifacts</h2>
+
+  <ul class="artifact-list">
+    <li><span class="artifact-label">Audio:</span> 2 FAUST synths &mdash; <code>explorer3-tape-synth.dsp</code> (tape recorder playback tone synthesis) and <code>belted-kingfisher.dsp</code> (Belted Kingfisher rattling call)</li>
+    <li><span class="artifact-label">Circuits:</span> 2 build guides &mdash; <code>data-logger.md</code> (Arduino SD card data logger with record/playback) and <code>squelch-circuit.md</code> (squelch circuit for radio receiver)</li>
+    <li><span class="artifact-label">Screensaver:</span> GLSL shader &mdash; <code>explorer3-screensaver.frag</code> (tape recorder visualization, radiation belt cross-section, orbital decay spiral)</li>
+    <li><span class="artifact-label">Simulations:</span> Python (2): <code>realtime-vs-recorded.py</code>, <code>orbital-decay.py</code> | SPICE (2): <code>tape-head.cir</code>, <code>squelch.cir</code> | Web (2): <code>tape-recorder.html</code>, <code>ground-coverage.html</code></li>
+    <li><span class="artifact-label">Stories:</span> &ldquo;The Tape Recorder&rdquo; &mdash; <code>the-tape-recorder.html</code> + <code>the-tape-recorder.tex</code></li>
+  </ul>
+
+  <h2 class="section-title">Data</h2>
+
+  <ul class="artifact-list">
+    <li><span class="artifact-label">knowledge-nodes.json</span> &mdash; Knowledge graph nodes for Explorer 3 mission concepts: magnetic tape recording, Geiger counter saturation, store-and-forward communication, orbital decay, ring buffers, Shannon channel capacity, and cross-references to Explorer 1 and Vanguard 1</li>
+    <li><span class="artifact-label">data-sources.json</span> &mdash; Authoritative data sources used in research (NASA NSSDCA, Van Allen Probes archive, IEEE Magnetics Society, NRLMSISE atmospheric models, iNaturalist <em>Marchantia</em> observations, <em>Marchantia</em> genome project, Joseph Campbell Foundation, JPL Explorer archives)</li>
+  </ul>
+
+  <div class="dedication-section">
+    <h2 class="section-title">Dedication: Joseph Campbell</h2>
+    <p>This mission is dedicated to <strong>Joseph Campbell</strong>, born March 26, 1904, in White Plains, New York &mdash; 54 years to the day before Explorer 3 launched. Campbell was a professor of literature at Sarah Lawrence College for thirty-eight years and the author of <em>The Hero with a Thousand Faces</em> (1949), the work that identified the monomyth &mdash; the narrative pattern of departure, initiation, and return that structures heroic mythology across cultures. The hero receives a call to adventure, crosses a threshold into an unknown world, faces trials and ordeals, achieves a revelation or transformation, and returns home bearing knowledge that benefits the community. Campbell spent his career demonstrating that this pattern recurs across every culture not because stories are borrowed but because the human mind works the same way everywhere. The hero&rsquo;s journey is the story the mind tells itself about what it means to grow. Explorer 3&rsquo;s mission maps precisely onto the monomyth: departure from Cape Canaveral, threshold crossing into orbit, the ordeal of the radiation belt (where the Geiger counter was overwhelmed, reading zero where radiation was strongest), the boon of the tape-recorded data (complete orbital profiles that proved the belt&rsquo;s existence), and the return &mdash; compressed playback over ground stations, the hero delivering knowledge to the community. Explorer 1 was the first hero &mdash; it ventured into the unknown and returned with a puzzling report. Explorer 3 was the confirming hero, sent with the tape recorder, who returned with irrefutable proof. Campbell&rsquo;s final major work was the television series <em>The Power of Myth</em> with Bill Moyers, recorded at George Lucas&rsquo;s Skywalker Ranch and broadcast on PBS in 1988, the year after Campbell&rsquo;s death. Lucas had read <em>The Hero with a Thousand Faces</em> and explicitly modeled the structure of Star Wars on Campbell&rsquo;s monomyth. The teacher&rsquo;s work shaped the most popular mythic narrative of the twentieth century. The knowledge returned. The story was told. The tape played back.</p>
+  </div>
+
+  <div class="nav-card">
+    <a href="../index.html">&larr; Mission Catalog</a>
+    <a href="research.html">Begin Reading &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.9 Explorer 3 + Marchantia polymorpha &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

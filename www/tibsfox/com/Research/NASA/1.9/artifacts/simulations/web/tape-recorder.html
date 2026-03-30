@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 3 Tape Recorder</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #c0c8d0;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #container {
+    max-width: 1400px;
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  #mission-tag {
+    font-size: 11px;
+    color: #D4A830;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  #title {
+    font-size: 28px;
+    color: #D4A830;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  #subtitle {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  canvas {
+    border: 1px solid #1a1a3a;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto 20px;
+  }
+  .controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  button {
+    background: #0c0c1a;
+    color: #D4A830;
+    border: 1px solid #D4A830;
+    padding: 8px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  button:hover { background: rgba(212,168,48,0.15); }
+  button.active { background: rgba(212,168,48,0.25); border-width: 2px; }
+  #status {
+    font-size: 14px;
+    color: #40CC40;
+    margin-bottom: 10px;
+    min-height: 20px;
+  }
+  #info {
+    max-width: 700px;
+    margin: 20px auto 0;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+    text-align: left;
+  }
+  .mode-label {
+    font-size: 11px;
+    color: #888;
+    margin-top: 5px;
+  }
+  .legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 11px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="mission-tag">NASA Mission Series v1.9</div>
+  <div id="title">EXPLORER 3 TAPE RECORDER</div>
+  <div id="subtitle">Store-and-Forward Data System &mdash; March 26, 1958</div>
+
+  <canvas id="canvas" width="900" height="500"></canvas>
+
+  <div id="status">Press RECORD to begin</div>
+
+  <div class="controls">
+    <button id="btn-record" onclick="startRecord()">RECORD</button>
+    <button id="btn-playback" onclick="startPlayback()">PLAYBACK (4x)</button>
+    <button id="btn-compare" onclick="toggleCompare()">COMPARE: Explorer 1</button>
+    <button id="btn-reset" onclick="resetAll()">RESET</button>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#D4A830"></div>
+      <span style="color:#888">Recording data</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#40CC40"></div>
+      <span style="color:#888">Playback data</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#CC3333"></div>
+      <span style="color:#888">Radiation belt</span>
+    </div>
+  </div>
+
+  <div id="info">
+    <strong style="color:#D4A830">The Tape Recorder Revolution:</strong>
+    Explorer 1 could only transmit data in real-time when visible from ground stations (~10% of each orbit).
+    Explorer 3 added a miniature tape recorder designed by George Ludwig at the University of Iowa.
+    It recorded continuously, then played back compressed at 4x speed over ground stations.
+    This gave scientists the first complete radiation profile of an orbit, confirming the Van Allen belts.
+    <br><br>
+    <strong style="color:#40CC40">Controls:</strong>
+    RECORD simulates one orbit of data collection. PLAYBACK replays the tape at 4x speed.
+    COMPARE shows what Explorer 1 would have seen (gaps where no ground station was visible).
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const statusEl = document.getElementById('status');
+
+// State
+let mode = 'idle'; // idle, recording, rewinding, playing
+let tapeData = [];
+let recordPos = 0;
+let playPos = 0;
+let compareMode = false;
+let animFrame = null;
+let lastTime = 0;
+
+// Tape visual parameters
+const TAPE_Y = 250;
+const TAPE_H = 40;
+const REEL_L_X = 150;
+const REEL_R_X = 750;
+const REEL_R = 80;
+const TAPE_START_X = REEL_L_X + REEL_R + 10;
+const TAPE_END_X = REEL_R_X - REEL_R - 10;
+const TAPE_LEN = TAPE_END_X - TAPE_START_X;
+const MAX_SAMPLES = 200;
+
+// Waveform display
+const WAVE_Y = 420;
+const WAVE_H = 60;
+
+// Radiation belt model
+function radiationProfile(pos) {
+  // pos: 0-1 through orbit
+  // Bell curve centered at 0.5 (apogee = belt crossing)
+  const beltCenter = 0.5;
+  const beltWidth = 0.12;
+  const intensity = Math.exp(-Math.pow(pos - beltCenter, 2) / (2 * beltWidth * beltWidth));
+
+  // Geiger saturation: at high intensity, measured value drops to zero
+  const satThreshold = 0.85;
+  if (intensity > satThreshold) {
+    return 0.02; // Saturated — near-zero reading
+  }
+  return intensity;
+}
+
+// Ground station visibility (for Explorer 1 comparison)
+function groundStationVisible(pos) {
+  // 5 stations, each visible for ~4% of orbit
+  for (let i = 0; i < 5; i++) {
+    const stationPos = 0.1 + i * 0.2;
+    const window = 0.04;
+    if (Math.abs(pos - stationPos) < window) {
+      return Math.exp(-Math.pow(pos - stationPos, 2) / (2 * (window/2) * (window/2)));
+    }
+  }
+  return 0;
+}
+
+// Reel rotation angle
+let reelAngle = 0;
+
+function drawReel(x, y, r, angle, tapeAmount) {
+  // Reel body
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = '#1a1a2a';
+  ctx.fill();
+  ctx.strokeStyle = '#333355';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Tape on reel (inner circle, size varies)
+  const tapeR = 15 + tapeAmount * (r - 20);
+  ctx.beginPath();
+  ctx.arc(x, y, tapeR, 0, Math.PI * 2);
+  ctx.fillStyle = '#5A4030';
+  ctx.fill();
+
+  // Hub
+  ctx.beginPath();
+  ctx.arc(x, y, 10, 0, Math.PI * 2);
+  ctx.fillStyle = '#555';
+  ctx.fill();
+
+  // Spokes
+  for (let i = 0; i < 3; i++) {
+    const a = angle + i * Math.PI * 2 / 3;
+    ctx.beginPath();
+    ctx.moveTo(x + Math.cos(a) * 12, y + Math.sin(a) * 12);
+    ctx.lineTo(x + Math.cos(a) * tapeR, y + Math.sin(a) * tapeR);
+    ctx.strokeStyle = '#444';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
+function drawTapePath() {
+  // Tape between reels
+  ctx.fillStyle = '#5A4030';
+  ctx.fillRect(TAPE_START_X, TAPE_Y - TAPE_H/2, TAPE_LEN, TAPE_H);
+
+  // Tape head (center)
+  const headX = (TAPE_START_X + TAPE_END_X) / 2;
+  ctx.fillStyle = '#888';
+  ctx.fillRect(headX - 3, TAPE_Y - TAPE_H/2 - 5, 6, TAPE_H + 10);
+
+  // Head label
+  ctx.fillStyle = '#666';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('HEAD', headX, TAPE_Y - TAPE_H/2 - 10);
+}
+
+function drawDataOnTape() {
+  if (tapeData.length === 0) return;
+
+  const dotSpacing = TAPE_LEN / MAX_SAMPLES;
+
+  for (let i = 0; i < tapeData.length; i++) {
+    const x = TAPE_START_X + i * dotSpacing;
+    const value = tapeData[i];
+    const dotR = 1 + value * 3;
+
+    // Color based on mode
+    let color;
+    if (mode === 'playing' && i <= playPos) {
+      color = `rgba(64, 204, 64, ${0.3 + value * 0.7})`;
+    } else {
+      color = `rgba(212, 168, 48, ${0.3 + value * 0.7})`;
+    }
+
+    ctx.beginPath();
+    ctx.arc(x, TAPE_Y, dotR, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+
+  // Current position indicator
+  let curPos;
+  if (mode === 'recording') curPos = recordPos;
+  else if (mode === 'playing') curPos = playPos;
+  else return;
+
+  const posX = TAPE_START_X + curPos * dotSpacing;
+  ctx.beginPath();
+  ctx.moveTo(posX, TAPE_Y - TAPE_H/2 - 15);
+  ctx.lineTo(posX - 4, TAPE_Y - TAPE_H/2 - 22);
+  ctx.lineTo(posX + 4, TAPE_Y - TAPE_H/2 - 22);
+  ctx.closePath();
+  ctx.fillStyle = mode === 'recording' ? '#D4A830' : '#40CC40';
+  ctx.fill();
+}
+
+function drawWaveform() {
+  if (tapeData.length === 0) return;
+
+  const waveStartX = 100;
+  const waveEndX = 800;
+  const waveW = waveEndX - waveStartX;
+
+  // Background
+  ctx.fillStyle = '#080810';
+  ctx.fillRect(waveStartX - 5, WAVE_Y - WAVE_H - 5, waveW + 10, WAVE_H * 2 + 10);
+  ctx.strokeStyle = '#222244';
+  ctx.strokeRect(waveStartX - 5, WAVE_Y - WAVE_H - 5, waveW + 10, WAVE_H * 2 + 10);
+
+  // Axes
+  ctx.strokeStyle = '#333';
+  ctx.beginPath();
+  ctx.moveTo(waveStartX, WAVE_Y);
+  ctx.lineTo(waveEndX, WAVE_Y);
+  ctx.stroke();
+
+  // True radiation profile (dotted)
+  ctx.strokeStyle = 'rgba(204, 51, 51, 0.4)';
+  ctx.setLineDash([3, 3]);
+  ctx.beginPath();
+  for (let i = 0; i < MAX_SAMPLES; i++) {
+    const x = waveStartX + (i / MAX_SAMPLES) * waveW;
+    const pos = i / MAX_SAMPLES;
+    const beltCenter = 0.5;
+    const beltWidth = 0.12;
+    const trueVal = Math.exp(-Math.pow(pos - beltCenter, 2) / (2 * beltWidth * beltWidth));
+    const y = WAVE_Y - trueVal * WAVE_H;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Explorer 3 data (or Explorer 1 comparison)
+  const drawCount = mode === 'playing' ? Math.min(playPos, tapeData.length) :
+                    mode === 'recording' ? Math.min(recordPos, tapeData.length) :
+                    tapeData.length;
+
+  if (compareMode) {
+    // Explorer 1 mode: only show data at ground station windows
+    ctx.strokeStyle = 'rgba(212, 168, 48, 0.6)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    let started = false;
+    for (let i = 0; i < drawCount; i++) {
+      const x = waveStartX + (i / MAX_SAMPLES) * waveW;
+      const pos = i / MAX_SAMPLES;
+      const visible = groundStationVisible(pos);
+      if (visible > 0.1) {
+        const y = WAVE_Y - tapeData[i] * WAVE_H * visible;
+        if (!started) { ctx.moveTo(x, y); started = true; }
+        else ctx.lineTo(x, y);
+      } else {
+        started = false;
+      }
+    }
+    ctx.stroke();
+
+    // Gap indicators
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.08)';
+    for (let i = 0; i < MAX_SAMPLES; i++) {
+      const pos = i / MAX_SAMPLES;
+      if (groundStationVisible(pos) < 0.1) {
+        const x = waveStartX + (i / MAX_SAMPLES) * waveW;
+        ctx.fillRect(x, WAVE_Y - WAVE_H, waveW / MAX_SAMPLES + 1, WAVE_H);
+      }
+    }
+  }
+
+  // Explorer 3 data (always shown)
+  ctx.strokeStyle = mode === 'playing' ? '#40CC40' :
+                    mode === 'recording' ? '#D4A830' : '#40CC40';
+  ctx.lineWidth = compareMode ? 1 : 2;
+  ctx.beginPath();
+  for (let i = 0; i < drawCount; i++) {
+    const x = waveStartX + (i / MAX_SAMPLES) * waveW;
+    const y = WAVE_Y - tapeData[i] * WAVE_H;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+  ctx.lineWidth = 1;
+
+  // Labels
+  ctx.fillStyle = '#666';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Perigee', waveStartX, WAVE_Y + 15);
+  ctx.fillText('Apogee (belt)', waveStartX + waveW/2, WAVE_Y + 15);
+  ctx.fillText('Perigee', waveEndX, WAVE_Y + 15);
+
+  if (compareMode) {
+    ctx.fillStyle = '#D4A830';
+    ctx.fillText('Explorer 1 (gaps)', waveStartX + waveW * 0.2, WAVE_Y - WAVE_H - 12);
+    ctx.fillStyle = '#40CC40';
+    ctx.fillText('Explorer 3 (complete)', waveStartX + waveW * 0.8, WAVE_Y - WAVE_H - 12);
+  }
+}
+
+function drawModeIndicator() {
+  const x = 80;
+  const y = 30;
+
+  if (mode === 'recording') {
+    // Pulsing red dot
+    const pulse = 0.5 + 0.5 * Math.sin(Date.now() / 200);
+    ctx.beginPath();
+    ctx.arc(x, y, 8, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(220, 40, 40, ${pulse})`;
+    ctx.fill();
+    ctx.fillStyle = '#CC3333';
+    ctx.font = '14px monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('REC', x + 15, y + 5);
+  } else if (mode === 'rewinding') {
+    ctx.fillStyle = '#D4A830';
+    ctx.font = '14px monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('<<< REWIND', x, y + 5);
+  } else if (mode === 'playing') {
+    ctx.beginPath();
+    ctx.moveTo(x - 5, y - 8);
+    ctx.lineTo(x + 10, y);
+    ctx.lineTo(x - 5, y + 8);
+    ctx.closePath();
+    ctx.fillStyle = '#40CC40';
+    ctx.fill();
+    ctx.fillStyle = '#40CC40';
+    ctx.font = '14px monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText('PLAY 4x', x + 18, y + 5);
+  }
+}
+
+function draw(timestamp) {
+  const dt = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Background
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Calculate tape amounts on reels
+  let leftTape = 0.3;
+  let rightTape = 0.7;
+  if (tapeData.length > 0) {
+    const progress = (mode === 'recording' ? recordPos : mode === 'playing' ? playPos : tapeData.length) / MAX_SAMPLES;
+    leftTape = 0.2 + progress * 0.6;
+    rightTape = 0.8 - progress * 0.6;
+  }
+
+  // Animate reels
+  if (mode === 'recording') {
+    reelAngle += dt * 2;
+  } else if (mode === 'rewinding') {
+    reelAngle -= dt * 8;
+  } else if (mode === 'playing') {
+    reelAngle += dt * 8; // 4x speed
+  }
+
+  // Draw components
+  drawReel(REEL_L_X, TAPE_Y, REEL_R, reelAngle, leftTape);
+  drawReel(REEL_R_X, TAPE_Y, REEL_R, -reelAngle, rightTape);
+  drawTapePath();
+  drawDataOnTape();
+  drawWaveform();
+  drawModeIndicator();
+
+  // Update simulation
+  if (mode === 'recording') {
+    if (recordPos < MAX_SAMPLES) {
+      // Record ~2 samples per frame at 60fps = ~120 samples over 2 seconds
+      const samplesPerFrame = 2;
+      for (let s = 0; s < samplesPerFrame && recordPos < MAX_SAMPLES; s++) {
+        const orbitalPos = recordPos / MAX_SAMPLES;
+        const value = radiationProfile(orbitalPos);
+        // Add some noise
+        const noise = (Math.random() - 0.5) * 0.05;
+        tapeData.push(Math.max(0, Math.min(1, value + noise)));
+        recordPos++;
+      }
+      statusEl.textContent = `Recording orbit data: ${Math.floor(recordPos/MAX_SAMPLES*100)}%`;
+      statusEl.style.color = '#D4A830';
+    } else {
+      mode = 'idle';
+      statusEl.textContent = `Recording complete. ${tapeData.length} samples stored. Press PLAYBACK for 4x replay.`;
+      statusEl.style.color = '#40CC40';
+      document.getElementById('btn-record').classList.remove('active');
+    }
+  } else if (mode === 'rewinding') {
+    playPos -= 10;
+    if (playPos <= 0) {
+      playPos = 0;
+      mode = 'playing';
+      statusEl.textContent = 'Playing back at 4x speed...';
+      statusEl.style.color = '#40CC40';
+    } else {
+      statusEl.textContent = `Rewinding... ${Math.floor((1 - playPos/tapeData.length)*100)}%`;
+      statusEl.style.color = '#D4A830';
+    }
+  } else if (mode === 'playing') {
+    // 4x speed: advance 8 samples per frame (vs 2 during recording)
+    const samplesPerFrame = 8;
+    playPos = Math.min(playPos + samplesPerFrame, tapeData.length);
+
+    if (playPos >= tapeData.length) {
+      mode = 'idle';
+      statusEl.textContent = 'Playback complete. Full orbit data received by ground station.';
+      statusEl.style.color = '#40CC40';
+      document.getElementById('btn-playback').classList.remove('active');
+    } else {
+      const pct = Math.floor(playPos / tapeData.length * 100);
+      statusEl.textContent = `Playback at 4x speed: ${pct}% (${playPos}/${tapeData.length} samples)`;
+    }
+  }
+
+  animFrame = requestAnimationFrame(draw);
+}
+
+function startRecord() {
+  tapeData = [];
+  recordPos = 0;
+  playPos = 0;
+  mode = 'recording';
+  document.getElementById('btn-record').classList.add('active');
+  document.getElementById('btn-playback').classList.remove('active');
+  statusEl.textContent = 'Recording orbit data...';
+  statusEl.style.color = '#D4A830';
+}
+
+function startPlayback() {
+  if (tapeData.length === 0) {
+    statusEl.textContent = 'No data recorded. Press RECORD first.';
+    statusEl.style.color = '#CC3333';
+    return;
+  }
+  playPos = tapeData.length;
+  mode = 'rewinding';
+  document.getElementById('btn-playback').classList.add('active');
+  document.getElementById('btn-record').classList.remove('active');
+  statusEl.textContent = 'Rewinding tape...';
+  statusEl.style.color = '#D4A830';
+}
+
+function toggleCompare() {
+  compareMode = !compareMode;
+  const btn = document.getElementById('btn-compare');
+  if (compareMode) {
+    btn.classList.add('active');
+    btn.textContent = 'COMPARE: ON';
+    statusEl.textContent = 'Comparison mode: amber = Explorer 1 (gaps), green = Explorer 3 (complete)';
+    statusEl.style.color = '#D4A830';
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = 'COMPARE: Explorer 1';
+  }
+}
+
+function resetAll() {
+  mode = 'idle';
+  tapeData = [];
+  recordPos = 0;
+  playPos = 0;
+  compareMode = false;
+  reelAngle = 0;
+  document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-compare').textContent = 'COMPARE: Explorer 1';
+  statusEl.textContent = 'Press RECORD to begin';
+  statusEl.style.color = '#40CC40';
+}
+
+// Start animation loop
+lastTime = performance.now();
+animFrame = requestAnimationFrame(draw);
+</script>
+</body>
+</html>

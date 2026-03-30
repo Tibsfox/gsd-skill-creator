@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ground Station Coverage Map</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #c0c8d0;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #container {
+    max-width: 1400px;
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  #mission-tag {
+    font-size: 11px;
+    color: #D4A830;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  #title {
+    font-size: 28px;
+    color: #D4A830;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  #subtitle {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+  canvas {
+    border: 1px solid #1a1a3a;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto 15px;
+  }
+  .controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  button {
+    background: #0c0c1a;
+    color: #D4A830;
+    border: 1px solid #D4A830;
+    padding: 8px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  button:hover { background: rgba(212,168,48,0.15); }
+  button.active { background: rgba(212,168,48,0.25); border-width: 2px; }
+  #status {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 8px;
+    min-height: 40px;
+    line-height: 1.4;
+  }
+  .stats {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin: 15px 0;
+    font-size: 12px;
+  }
+  .stat-box {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 8px;
+    padding: 12px 20px;
+    text-align: center;
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 10px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  #info {
+    max-width: 700px;
+    margin: 15px auto 0;
+    font-size: 11px;
+    color: #555;
+    line-height: 1.5;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="mission-tag">NASA Mission Series v1.9</div>
+  <div id="title">GROUND STATION COVERAGE</div>
+  <div id="subtitle">Real-Time Telemetry vs Tape-Recorded Data</div>
+
+  <canvas id="canvas" width="1000" height="500"></canvas>
+
+  <div id="status">Satellite orbiting. Ground stations receive data only during visibility windows.</div>
+
+  <div class="controls">
+    <button id="btn-e1" class="active" onclick="setMode('e1')">EXPLORER 1 (real-time)</button>
+    <button id="btn-e3" onclick="setMode('e3')">EXPLORER 3 (tape)</button>
+    <button id="btn-speed" onclick="toggleSpeed()">SPEED: 1x</button>
+    <button id="btn-pause" onclick="togglePause()">PAUSE</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat-box">
+      <div class="stat-value" id="stat-coverage" style="color:#D4A830">0%</div>
+      <div class="stat-label">Data Coverage</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value" id="stat-orbits" style="color:#40CC40">0</div>
+      <div class="stat-label">Orbits Complete</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-value" id="stat-gaps" style="color:#CC3333">0</div>
+      <div class="stat-label">Data Gaps</div>
+    </div>
+  </div>
+
+  <div id="info">
+    <strong style="color:#D4A830">Why Coverage Matters:</strong>
+    Explorer 1 relied on real-time telemetry &mdash; data transmitted directly to ground stations.
+    With stations spread around the equator, each station could receive data for only ~5-10 minutes
+    per 115-minute orbit. Total coverage: ~10-15%. The gaps were exactly where the radiation
+    was highest (over regions with no stations). Explorer 3's tape recorder stored data for the
+    entire orbit, achieving 100% coverage and confirming what Explorer 1 could only suggest.
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+
+// State
+let satelliteAngle = 0; // radians, orbital position
+let orbitCount = 0;
+let dataPoints = [];
+let totalSamples = 0;
+let coveredSamples = 0;
+let gapCount = 0;
+let currentMode = 'e1'; // e1 or e3
+let speed = 1;
+let paused = false;
+let lastTime = 0;
+
+// Map projection (equirectangular)
+const MAP_X = 50;
+const MAP_Y = 30;
+const MAP_W = W - 100;
+const MAP_H = H - 100;
+
+// Ground stations (longitude, latitude) — historical Minitrack network
+const stations = [
+  { lon: -76, lat: 37, name: 'Blossom Point, MD' },
+  { lon: -80, lat: 26, name: 'Fort Stewart, GA' },
+  { lon: -67, lat: 18, name: 'Quito, Ecuador' },
+  { lon: -43, lat: -23, name: 'Santiago, Chile' },
+  { lon: 28, lat: -34, name: 'South Africa' },
+  { lon: 77, lat: 13, name: 'Woomera, Australia' },
+  { lon: 136, lat: -31, name: 'Australia' },
+  { lon: 140, lat: 36, name: 'Japan' },
+  { lon: -157, lat: 21, name: 'Hawaii' },
+];
+
+// Station visibility radius (degrees on ground)
+const STATION_RADIUS = 15; // ~1,700 km ground radius
+
+function lonLatToXY(lon, lat) {
+  const x = MAP_X + (lon + 180) / 360 * MAP_W;
+  const y = MAP_Y + (90 - lat) / 180 * MAP_H;
+  return { x, y };
+}
+
+function drawMap() {
+  // Ocean background
+  ctx.fillStyle = '#0a1025';
+  ctx.fillRect(MAP_X, MAP_Y, MAP_W, MAP_H);
+
+  // Grid lines
+  ctx.strokeStyle = '#151530';
+  ctx.lineWidth = 0.5;
+  for (let lon = -180; lon <= 180; lon += 30) {
+    const p = lonLatToXY(lon, 0);
+    ctx.beginPath();
+    ctx.moveTo(p.x, MAP_Y);
+    ctx.lineTo(p.x, MAP_Y + MAP_H);
+    ctx.stroke();
+  }
+  for (let lat = -90; lat <= 90; lat += 30) {
+    const p = lonLatToXY(0, lat);
+    ctx.beginPath();
+    ctx.moveTo(MAP_X, p.y);
+    ctx.lineTo(MAP_X + MAP_W, p.y);
+    ctx.stroke();
+  }
+
+  // Simplified continents (rough outlines)
+  ctx.fillStyle = '#152015';
+  // North America
+  drawContinent([[-130,55],[-120,60],[-100,60],[-80,45],[-75,30],[-90,25],[-105,20],[-120,30],[-125,48]]);
+  // South America
+  drawContinent([[-80,10],[-60,5],[-35,-5],[-40,-23],[-55,-35],[-70,-50],[-75,-20],[-80,-5]]);
+  // Europe
+  drawContinent([[-10,35],[0,45],[10,55],[30,60],[40,55],[30,40],[10,35]]);
+  // Africa
+  drawContinent([[-15,35],[10,35],[35,10],[40,-10],[30,-35],[20,-35],[10,-5],[-5,5],[-15,15]]);
+  // Asia
+  drawContinent([[30,60],[60,55],[90,45],[120,50],[140,45],[130,30],[105,20],[80,15],[60,25],[40,35]]);
+  // Australia
+  drawContinent([[115,-15],[135,-12],[150,-25],[145,-38],[130,-32],[115,-22]]);
+
+  // Equator
+  ctx.strokeStyle = '#252540';
+  ctx.lineWidth = 1;
+  const eq = lonLatToXY(0, 0);
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
+  ctx.moveTo(MAP_X, eq.y);
+  ctx.lineTo(MAP_X + MAP_W, eq.y);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function drawContinent(points) {
+  ctx.beginPath();
+  for (let i = 0; i < points.length; i++) {
+    const p = lonLatToXY(points[i][0], points[i][1]);
+    if (i === 0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
+  }
+  ctx.closePath();
+  ctx.fill();
+}
+
+function drawStations() {
+  for (const station of stations) {
+    const p = lonLatToXY(station.lon, station.lat);
+
+    // Visibility circle
+    const radiusX = STATION_RADIUS / 360 * MAP_W;
+    const radiusY = STATION_RADIUS / 180 * MAP_H;
+
+    ctx.beginPath();
+    ctx.ellipse(p.x, p.y, radiusX, radiusY, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(212, 168, 48, 0.08)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(212, 168, 48, 0.25)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Station dot
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+    ctx.fillStyle = '#D4A830';
+    ctx.fill();
+
+    // Label
+    ctx.fillStyle = '#555';
+    ctx.font = '8px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(station.name, p.x, p.y + 12);
+  }
+}
+
+function groundTrack(angle, incl) {
+  // Simplified ground track: sinusoidal curve
+  // longitude advances ~25 degrees per orbit (Earth rotates under satellite)
+  const lon = (angle * 180 / Math.PI * 360 / 360) % 360 - 180;
+  const lat = incl * Math.sin(angle);
+  return { lon, lat };
+}
+
+function isVisibleFromStation(satLon, satLat) {
+  for (const station of stations) {
+    const dLon = Math.abs(satLon - station.lon);
+    const dLat = Math.abs(satLat - station.lat);
+    const dist = Math.sqrt(dLon * dLon + dLat * dLat);
+    if (dist < STATION_RADIUS) return true;
+  }
+  return false;
+}
+
+function drawGroundTrack() {
+  // Draw recent ground track
+  const trackLen = Math.PI * 4; // ~2 orbits of trail
+  const steps = 500;
+
+  for (let i = 0; i < steps; i++) {
+    const a = satelliteAngle - (i / steps) * trackLen;
+    const incl = 33.24;
+    const gt = groundTrack(a, incl);
+    const p = lonLatToXY(gt.lon, gt.lat);
+
+    const alpha = 1.0 - i / steps;
+    const visible = isVisibleFromStation(gt.lon, gt.lat);
+
+    if (currentMode === 'e1') {
+      // Explorer 1: only show track where visible
+      if (visible) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(212, 168, 48, ${alpha * 0.8})`;
+        ctx.fill();
+      } else {
+        // Dim gaps
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 0.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(100, 50, 50, ${alpha * 0.3})`;
+        ctx.fill();
+      }
+    } else {
+      // Explorer 3: full track (tape recorded)
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(64, 204, 64, ${alpha * 0.7})`;
+      ctx.fill();
+
+      // Still show station visibility for context
+      if (visible) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(212, 168, 48, ${alpha * 0.3})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Current satellite position
+  const gt = groundTrack(satelliteAngle, 33.24);
+  const p = lonLatToXY(gt.lon, gt.lat);
+  const visible = isVisibleFromStation(gt.lon, gt.lat);
+
+  // Satellite glow
+  const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, 15);
+  const satColor = currentMode === 'e3' ? '64,204,64' :
+                   visible ? '212,168,48' : '150,50,50';
+  gradient.addColorStop(0, `rgba(${satColor}, 0.6)`);
+  gradient.addColorStop(1, `rgba(${satColor}, 0)`);
+  ctx.fillStyle = gradient;
+  ctx.fillRect(p.x - 15, p.y - 15, 30, 30);
+
+  // Satellite dot
+  ctx.beginPath();
+  ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+  ctx.fillStyle = currentMode === 'e3' ? '#40CC40' :
+                  visible ? '#D4A830' : '#883333';
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Connection line to active station
+  if (visible) {
+    for (const station of stations) {
+      const dLon = Math.abs(gt.lon - station.lon);
+      const dLat = Math.abs(gt.lat - station.lat);
+      if (Math.sqrt(dLon*dLon + dLat*dLat) < STATION_RADIUS) {
+        const sp = lonLatToXY(station.lon, station.lat);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(sp.x, sp.y);
+        ctx.strokeStyle = 'rgba(212, 168, 48, 0.3)';
+        ctx.setLineDash([3, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+  }
+
+  return visible;
+}
+
+function updateStats() {
+  totalSamples++;
+  const gt = groundTrack(satelliteAngle, 33.24);
+  const visible = isVisibleFromStation(gt.lon, gt.lat);
+
+  if (currentMode === 'e3' || visible) {
+    coveredSamples++;
+  }
+
+  if (currentMode === 'e1' && !visible) {
+    // Check if we just entered a gap
+    const prevGt = groundTrack(satelliteAngle - 0.05, 33.24);
+    if (isVisibleFromStation(prevGt.lon, prevGt.lat)) {
+      gapCount++;
+    }
+  }
+
+  const coverage = totalSamples > 0 ? Math.round(coveredSamples / totalSamples * 100) : 0;
+  document.getElementById('stat-coverage').textContent = coverage + '%';
+  document.getElementById('stat-coverage').style.color =
+    currentMode === 'e3' ? '#40CC40' : coverage > 50 ? '#D4A830' : '#CC3333';
+
+  document.getElementById('stat-orbits').textContent = Math.floor(orbitCount);
+  document.getElementById('stat-gaps').textContent = currentMode === 'e3' ? '0' : gapCount;
+}
+
+function update(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const dt = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+
+  if (!paused) {
+    // Orbital angular velocity: one orbit per 115 minutes
+    // Compressed: one orbit per 10 seconds at 1x speed
+    const angularSpeed = (2 * Math.PI / 10) * speed;
+    satelliteAngle += angularSpeed * dt;
+
+    if (satelliteAngle > Math.PI * 2) {
+      orbitCount += Math.floor(satelliteAngle / (Math.PI * 2));
+      satelliteAngle %= Math.PI * 2;
+    }
+  }
+
+  // Draw
+  ctx.clearRect(0, 0, W, H);
+  drawMap();
+  drawStations();
+  const visible = drawGroundTrack();
+
+  if (!paused) updateStats();
+
+  // Status text
+  const gt = groundTrack(satelliteAngle, 33.24);
+  const statusText = currentMode === 'e1' ?
+    (visible ?
+      'TRANSMITTING: Ground station in range. Real-time data received.' :
+      'NO COVERAGE: Between ground stations. Data lost.') :
+    (visible ?
+      'TRANSMITTING: Playing back tape at 4x speed. Complete orbit data received.' :
+      'RECORDING: Tape recorder storing data. Will transmit over next station.');
+
+  document.getElementById('status').textContent = statusText;
+  document.getElementById('status').style.color = visible ? '#40CC40' : '#CC3333';
+
+  requestAnimationFrame(update);
+}
+
+function setMode(m) {
+  currentMode = m;
+  totalSamples = 0;
+  coveredSamples = 0;
+  gapCount = 0;
+
+  document.getElementById('btn-e1').classList.toggle('active', m === 'e1');
+  document.getElementById('btn-e3').classList.toggle('active', m === 'e3');
+}
+
+function toggleSpeed() {
+  speed = speed === 1 ? 3 : speed === 3 ? 10 : 1;
+  document.getElementById('btn-speed').textContent = `SPEED: ${speed}x`;
+}
+
+function togglePause() {
+  paused = !paused;
+  document.getElementById('btn-pause').textContent = paused ? 'RESUME' : 'PAUSE';
+  document.getElementById('btn-pause').classList.toggle('active', paused);
+}
+
+// Start
+requestAnimationFrame(update);
+</script>
+</body>
+</html>
