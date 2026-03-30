@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 50&deg; &mdash; Mountain Chickadee &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Memory element card */
+    .memory-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #7986CB 100%);
+      border: 2px solid #283593;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .memory-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Elevation gradient card */
+    .elevation-card {
+      background: linear-gradient(135deg, #E0F2F1 0%, #80CBC4 100%);
+      border: 2px solid #00695C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .elevation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #004D40;
+    }
+
+    /* Streak-break card */
+    .break-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .break-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #BCAAA4 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Hippocampus card */
+    .brain-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #AD1457;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .brain-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #880E4F;
+    }
+
+    /* Conservation card */
+    .conservation-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F9A825;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .conservation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.memory { background: #283593; }
+    .theory-icon.elevation { background: #00695C; }
+    .theory-icon.brain { background: #AD1457; }
+    .theory-icon.break { background: #E65100; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-icon.eyebrow { background: #37474F; }
+    .theory-icon.habitat { background: #33691E; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">50&deg;</div>
+      <div class="release-title-block">
+        <h2>Mountain Chickadee</h2>
+        <div class="scientific">Poecile gambeli</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      fee-bee-bay descending whistle &mdash; the memory, 3rd Paridae in the engine, 3rd <em>Poecile</em> &mdash; completes the three-chickadee elevation gradient (lowland / coastal / mountain), BREAKS the 5-consecutive Passerellidae streak (45&ndash;49), spatial memory specialist &mdash; caches tens of thousands of seeds and remembers every one, hippocampus larger than any other chickadee, Common Bird in Steep Decline (~39% population loss since 1966), white eyebrow diagnostic, E=2
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Rough-skinned Newt</strong> (<em>Taricha granulosa</em>) at degree 50. Because the SPS Part B engine is birds-and-mammals only, Mountain Chickadee replaces it. The substitution preserves the original&rsquo;s <strong>E=2 energy level</strong> and <strong>forested habitat</strong>. This is the <strong>sixth consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50) &mdash; the engine remains deep in the amphibian belt of the original CSV.</p>
+        </div>
+
+        <!-- Streak Break Card -->
+        <div class="break-card">
+          <h3>The Passerellidae Streak Ends at Five</h3>
+          <p>Mountain Chickadee is <strong>Paridae</strong>, NOT Passerellidae. This <strong>BREAKS</strong> the five-consecutive Passerellidae run (degrees 45&ndash;49). The sparrow quintet is complete. A new family enters the sequence for the first time in six degrees. Paridae was last seen at degree 9 (Chestnut-backed Chickadee) &mdash; 41 degrees ago.</p>
+        </div>
+
+        <!-- Elevation Gradient Card -->
+        <div class="elevation-card">
+          <h3>Three Chickadees, Three Elevations</h3>
+          <p>The Mountain Chickadee completes the engine&rsquo;s three-<em>Poecile</em> elevation gradient. <strong>Black-capped Chickadee</strong> (degree 3, lowland, mixed woodland). <strong>Chestnut-backed Chickadee</strong> (degree 9, mid-elevation, wet coastal conifer). <strong>Mountain Chickadee</strong> (degree 50, high elevation, dry montane conifer). Three elevation bands, three acoustic environments, three cognitive breakthroughs: language, variation, memory. The only genus with three representatives from the same family. Degrees 3, 9, and 50 span 47 degrees of the engine.</p>
+        </div>
+
+        <!-- Memory Element Card -->
+        <div class="memory-card">
+          <h3>The 51st Acoustic Element: The Memory</h3>
+          <p>The Mountain Chickadee&rsquo;s fee-bee-bay is a <strong>descending pure-toned whistle of spatial precision</strong> &mdash; 3&ndash;4 notes stepping downward in frequency, ~4,170 Hz to ~3,200 Hz, each note clean and sustained. Named &ldquo;the memory&rdquo; for three resonances: the bird&rsquo;s extraordinary spatial memory (tens of thousands of cached seeds, barcode neurons in the hippocampus), the recall of two previous <em>Poecile</em> in the engine (degrees 3 and 9), and the 50-degree milestone &mdash; looking back across half the circle.</p>
+          <p>The memory differs from the ballad (49) as precision differs from beauty. The ballad says &ldquo;listen to how beautiful this is.&rdquo; The memory says &ldquo;I know exactly where I am.&rdquo;</p>
+        </div>
+
+        <!-- Brain Card -->
+        <div class="brain-card">
+          <h3>The Hippocampal Specialist</h3>
+          <p>Mountain Chickadees cache <strong>tens of thousands of food items</strong> across the mountain landscape and retrieve them weeks or months later. Research (Chettih et al. 2024, <em>Cell</em>) revealed that each cache is individually encoded by unique &ldquo;barcode&rdquo; firing patterns in hippocampal neurons. Higher-elevation birds have <strong>larger hippocampi with more and larger neurons</strong>. A 2024 <em>Current Biology</em> study identified ~100 genes linked to spatial memory. Birds with better memory <strong>live two years longer</strong>. Natural selection acts directly on cognition.</p>
+        </div>
+
+        <!-- Conservation Card -->
+        <div class="conservation-card">
+          <h3>Common Bird in Steep Decline</h3>
+          <p>Partners in Flight designates the Mountain Chickadee as a <strong>Common Bird in Steep Decline</strong> &mdash; ~1% annual decline since 1966, cumulative loss of ~39%. Population ~7.9 million (vs. Black-capped ~42M, Chestnut-backed ~10M). Climate change may compress the mountain habitat upslope, and the memory-survival link that defines the species&rsquo; strategy may become less effective in unpredictable conditions. The <strong>most vulnerable</strong> of the three engine chickadees.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=2 &mdash; All Three <em>Poecile</em> Are Quiet</h3>
+          <p>E=2 at degree 50. All three engine chickadees are E=2 &mdash; a genus-level characteristic. E=2 + E=3 together now hold <strong>24 degrees (47.1%)</strong>, further widening the gap over E=4&rsquo;s 21 degrees (41.2%). Chickadees are quiet birds whose survival strategy is cognition, not acoustic power.</p>
+        </div>
+
+        <h2>The Variegated Bird of Gambel</h2>
+        <p><em>Poecile gambeli</em> &mdash; from Greek <em>poikilos</em> (&ldquo;variegated&rdquo;) + the honorific <em>gambeli</em> for <strong>William Gambel</strong> (1823&ndash;1849), a Philadelphia naturalist who collected the type specimen during his California expeditions. Gambel died of typhoid fever at age 27 while crossing the Sierra Nevada during the Gold Rush &mdash; a young naturalist lost in the same mountain forests this bird calls home. The species name commemorates a life cut short in the mountains.</p>
+
+        <h3>The Three <em>Poecile</em> Naming Arc</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Binomial</th><th>Translation</th><th>Philosophy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>3</td><td>Black-capped Chickadee</td><td><em>Poecile atricapillus</em></td><td>&ldquo;Variegated bird with the black cap&rdquo;</td><td>Morphological + Morphological</td></tr>
+            <tr><td>9</td><td>Chestnut-backed Chickadee</td><td><em>Poecile rufescens</em></td><td>&ldquo;Variegated bird becoming reddish&rdquo;</td><td>Morphological + Chromatic</td></tr>
+            <tr><td><strong>50</strong></td><td><strong>Mountain Chickadee</strong></td><td><strong><em>Poecile gambeli</em></strong></td><td><strong>&ldquo;Variegated bird of Gambel&rdquo;</strong></td><td><strong>Morphological + Honorific</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Three naming strategies across the genus. From description (black cap) through color (reddish) to commemoration (Gambel). The genus name stays constant; the species epithet evolves.</p>
+
+        <h2>The Sound: Fee-Bee-Bay</h2>
+        <p><strong>Song:</strong> 1&ndash;2 seconds, ~3,200&ndash;4,200 Hz. Three to four pure-toned whistled notes descending in a clean staircase. The mnemonic &ldquo;cheeseburger&rdquo; captures the rhythm. Purer and more sustained than the Black-capped&rsquo;s two-note fee-bee (degree 3) &mdash; the Mountain Chickadee has <strong>elaborated</strong> the ancestral song with additional descending steps.</p>
+        <p><strong>Chick-a-dee call:</strong> Six note types (A, A/B, B, C, Dh, D) &mdash; an <strong>expanded repertoire</strong> compared to the Black-capped&rsquo;s four types (degree 3). Hundreds of unique combinations encoding information about urgency, topic, subject, and threat level.</p>
+
+        <h3>Three <em>Poecile</em> Vocal Comparison</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Feature</th><th>Black-capped (3)</th><th>Chestnut-backed (9)</th><th>Mountain (50)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Fee-bee song</td><td>2 notes, minor third</td><td>Absent / vestigial</td><td><strong>3&ndash;4 notes, descending staircase</strong></td></tr>
+            <tr><td>Chick-a-dee note types</td><td>4 (A, B, C, D)</td><td>4 (same, faster/buzzier)</td><td><strong>6 (A, A/B, B, C, Dh, D)</strong></td></tr>
+            <tr><td>Habitat acoustics</td><td>Moderate (mixed woodland)</td><td>Heavy attenuation (wet conifer)</td><td><strong>Low attenuation (dry mountain)</strong></td></tr>
+            <tr><td>Song pitch</td><td>Fee ~3.5&ndash;4.5 kHz</td><td>N/A</td><td><strong>Fee ~4,170 Hz, Bay ~3,200 Hz</strong></td></tr>
+            <tr><td>Cognitive contribution</td><td>Language (syntax)</td><td>Variation (conservation)</td><td><strong>Memory (spatial encoding)</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h2>Spatial Memory Research</h2>
+        <p>The Mountain Chickadee is among the most intensively studied spatial memory systems in any wild animal. Key findings:</p>
+        <ul>
+          <li><strong>Barcode neurons</strong> &mdash; each cache encoded by a unique hippocampal firing pattern (Chettih et al. 2024, <em>Cell</em>)</li>
+          <li><strong>~100 memory-linked genes</strong> identified, concentrated in hippocampal neurogenesis pathways (<em>Current Biology</em> 2024)</li>
+          <li><strong>Larger hippocampus at higher elevations</strong> &mdash; more neurons, larger neurons, more neurogenesis (Pravosudov lab, UNR)</li>
+          <li><strong>Memory predicts lifespan</strong> &mdash; best-memory birds live ~2 years longer than worst-memory birds</li>
+          <li><strong>Natural selection on cognition</strong> &mdash; spatial memory ability directly affects overwinter survival</li>
+        </ul>
+
+        <h2>Elevational Replacement</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Species</th><th>Degree</th><th>Elevation</th><th>Habitat</th><th>Dominance Zone</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Black-capped Chickadee</td><td>3</td><td>0&ndash;500 m</td><td>Mixed woodland, urban</td><td>Lowland generalist</td></tr>
+            <tr><td>Chestnut-backed Chickadee</td><td>9</td><td>0&ndash;1,500 m</td><td>Wet coastal conifer</td><td>Maritime conifer zone</td></tr>
+            <tr><td><strong>Mountain Chickadee</strong></td><td><strong>50</strong></td><td><strong>600 m &ndash; timberline</strong></td><td><strong>Dry montane conifer</strong></td><td><strong>Eastern Cascades, Blue Mtns</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Three chickadees replace each other along an elevation transect. Where they overlap, they partition habitat by forest structure: deciduous (Black-capped), dense wet conifer (Chestnut-backed), open dry conifer (Mountain). Hybridization occurs at boundaries, increased by human landscape alteration.</p>
+
+        <h2>Family Tracker After Degree 50</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td><strong>Paridae</strong></td><td><strong>3, 9, 50</strong></td><td><strong>3 (all <em>Poecile</em>)</strong></td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+          </tbody>
+        </table>
+        <p>Paridae rises to 3 members &mdash; all <em>Poecile</em>, the tightest generic concentration in the engine. The Passerellidae streak is complete. Passeriformes continues for a 13th consecutive entry (38&ndash;50). Non-passerine urgently needed.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon memory">M</div>
+            <div class="theory-content">
+              <h4>The Memory <span class="theory-level foundational">foundational</span></h4>
+              <p>The 51st acoustic element. A descending pure-toned whistle of spatial precision. Named for the hippocampal memory specialist, the recall of two previous <em>Poecile</em> (degrees 3, 9), and the 50-degree milestone &mdash; looking back across half the circle.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon elevation">E</div>
+            <div class="theory-content">
+              <h4>Three-Chickadee Elevation Gradient <span class="theory-level foundational">foundational</span></h4>
+              <p>Lowland (degree 3) &rarr; mid-elevation coastal (degree 9) &rarr; high-elevation montane (degree 50). Three <em>Poecile</em>, three elevation bands, three cognitive breakthroughs: language, variation, memory. The only genus represented three times from the same family.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon brain">H</div>
+            <div class="theory-content">
+              <h4>The Hippocampal Specialist <span class="theory-level foundational">foundational</span></h4>
+              <p>Tens of thousands of caches, barcode neurons, ~100 memory-linked genes, natural selection on cognition. The most thoroughly researched spatial memory system in any wild songbird. Memory quality predicts survival &mdash; better memory, longer life.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon break">B</div>
+            <div class="theory-content">
+              <h4>Passerellidae Streak Broken <span class="theory-level foundational">foundational</span></h4>
+              <p>Five-consecutive Passerellidae (45&ndash;49) ends at degree 50. Paridae replaces Passerellidae. The sparrow quintet is complete. A new family enters for the first time in six degrees.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>E=2 &mdash; Genus-Level Quiet <span class="theory-level foundational">foundational</span></h4>
+              <p>All three <em>Poecile</em> are E=2. A genus-level characteristic. E=2 + E=3 = 24 degrees (47.1%) vs. E=4 = 21 (41.2%). Chickadees survive through cognition, not volume.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon eyebrow">W</div>
+            <div class="theory-content">
+              <h4>The White Eyebrow <span class="theory-level intermediate">intermediate</span></h4>
+              <p>The diagnostic field mark. A white supercilium bisecting the black cap &mdash; unique among North American chickadees. Visible in fresh plumage (fall/winter), may fade by late summer as white feather tips wear away.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon habitat">C</div>
+            <div class="theory-content">
+              <h4>Mountain Conifer Forest <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Ponderosa pine, Douglas fir, Engelmann spruce at 600 m to timberline. Dry, open, sun-warmed &mdash; acoustically different from the wet coastal conifer of the Chestnut-backed&rsquo;s habitat. Low sound attenuation favors the fee-bee-bay&rsquo;s pure tones.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-003: Black-capped Chickadee</strong>
+            <p>SAME GENUS, DIFFERENT ELEVATION. *Poecile* at lowland (degree 3) and mountain (degree 50). Fee-bee (2 notes) vs. fee-bee-bay (3&ndash;4 notes). Combinatorial syntax (4 note types) vs. expanded repertoire (6 note types). Language vs. memory. 47 degrees apart, same genus.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-009: Chestnut-backed Chickadee</strong>
+            <p>SAME GENUS, MID-ELEVATION. The third point on the elevation gradient. Coastal conifer specialist (degree 9) between the lowland Black-capped and the mountain Mountain. Lost the fee-bee song entirely. Syntax conserved across speciation but song diverged.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-049: Fox Sparrow</strong>
+            <p>FAMILY TRANSITION. The ballad (degree 49, Passerellidae) yields to the memory (degree 50, Paridae). The quintet ends, a new family begins. Melodious completeness yields to spatial precision. Dense thicket gives way to open mountain forest.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-045: Song Sparrow</strong>
+            <p>PASSERELLIDAE QUINTET START vs. POST-QUINTET. The preamble launched five consecutive Passerellidae. The memory follows five degrees later from a different family. Both are E=2 ground-level specialists.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>CONSERVATION PARALLEL. The Mountain Chickadee&rsquo;s &ldquo;Common Bird in Steep Decline&rdquo; status echoes the Spotted Owl&rsquo;s Near Threatened ranking. Two species declining in PNW conifer forests. Different causes, same habitat under pressure.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>CONIFER SPECIALIST PARALLEL. Both are montane conifer specialists with complex population structure. Red Crossbill has 10+ call types; Mountain Chickadee has two phylogeographic clades (potential species split). Conifer-dependent birds with unresolved taxonomy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Mountain Chickadee documented in eastern Washington. Two subspecies populations in the state: eastern Cascades (<em>P. g. baileyae</em>) and Blue Mountains / northeast (<em>P. g. gambeli</em>). Rare in western Washington except during winter irruptions.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Montane conifer forest ecology. Ponderosa pine and Douglas fir as primary habitat trees. Elevation-dependent species interactions. Climate change impacts on montane bird communities &mdash; upslope habitat compression, altered phenology.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Mountain Chickadee (<em>Poecile gambeli</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Mountain Chickadee. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Mountain Chickadee.</li>
+          <li>National Geographic &mdash; Mountain Chickadee.</li>
+          <li>Wikipedia &mdash; &ldquo;Mountain chickadee.&rdquo;</li>
+          <li>Gentry, K. E. et al. (2017). &ldquo;Mountain chickadees adjust songs, calls and chorus composition with increasing ambient and experimental anthropogenic noise.&rdquo; <em>Urban Ecosystems</em> 21(1): 1&ndash;14.</li>
+          <li>Audubon &mdash; Mountain Chickadee Field Guide.</li>
+          <li>Spellman, G. M. et al. (2007). &ldquo;Phylogeography of the mountain chickadee.&rdquo; <em>Molecular Ecology</em> 16(5): 1055&ndash;1068.</li>
+          <li>Dawson, M. R. W. et al. (2006). &ldquo;Statistical classification of black-capped and mountain chickadee call notes.&rdquo; <em>JASA</em> 119(4): 2165&ndash;2176.</li>
+          <li>Kozlovsky, D. Y. et al. (2024). &ldquo;Mountain chickadees have remarkable memories.&rdquo; <em>Current Biology</em> (2024).</li>
+          <li>Wikipedia &mdash; &ldquo;William Gambel.&rdquo;</li>
+          <li>Linda Hall Library &mdash; William Gambel, Scientist of the Day.</li>
+          <li>Earbirding &mdash; &ldquo;Splitting Mountain Chickadee.&rdquo;</li>
+          <li>The Conversation &mdash; &ldquo;Mountain chickadee chatter.&rdquo; (2024).</li>
+          <li>University of Nevada, Reno &mdash; &ldquo;Natural selection and spatial memory link.&rdquo; (2019).</li>
+          <li>Knowable Magazine &mdash; &ldquo;Total recall: A brilliant memory helps chickadees survive.&rdquo; (2019).</li>
+          <li>Chettih, S. N. et al. (2024). &ldquo;Barcoding of episodic memories in the hippocampus of a food-caching bird.&rdquo; <em>Cell</em> 187(14): 3692&ndash;3710.</li>
+          <li>University of Nevada, Reno &mdash; &ldquo;Chickadees with better spatial memory live longer.&rdquo; (2024).</li>
+          <li>Cornell Lab Bird Academy &mdash; &ldquo;How Chickadees Use Their Brains.&rdquo;</li>
+          <li>University of Nevada, Reno &mdash; &ldquo;Genetic link to spatial memory.&rdquo; (2021).</li>
+          <li>Cornell Lab &mdash; &ldquo;Mountain Chickadees Change Their Tune.&rdquo;</li>
+          <li>Montana eBird &mdash; &ldquo;To Be or Not To Be (a Hybrid Chickadee).&rdquo;</li>
+          <li>CU Boulder Today &mdash; &ldquo;The chickadee you see sitting on a tree? It might be a hybrid.&rdquo; (2022).</li>
+          <li>Curry Lab (Villanova) &mdash; &ldquo;Chickadee hybridization.&rdquo;</li>
+          <li>American Bird Conservancy &mdash; Mountain Chickadee species profile.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">50&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Memory</div>
+          <div class="stat-detail">#51 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 2</div>
+          <div class="stat-detail">E=2+E=3 = 24 (47.1%) > E=4 = 21</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Paridae</div>
+          <div class="stat-detail">3rd member &mdash; all <em>Poecile</em></div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Poecile</em></div>
+          <div class="stat-detail">3rd of genus &mdash; elevation gradient complete</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mountain Conifer</div>
+          <div class="stat-detail">Ponderosa / fir / spruce, 600 m&ndash;timberline</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round; altitudinal irruptive in harsh winters</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">48 unique</div>
+          <div class="stat-detail">51 entries (0&ndash;50)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">19</div>
+          <div class="stat-detail">Paridae at 3 members (sole 3rd place)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">13 consecutive Passeriformes (38&ndash;50)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~7.9 Million</div>
+          <div class="stat-detail">Common Bird in Steep Decline (~39% loss)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">9&ndash;14 g</div>
+          <div class="stat-detail">Same size class as Black-capped (degree 3)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">White Eyebrow</div>
+          <div class="stat-detail">Unique among N. American chickadees</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Caching</div>
+          <div class="stat-value">Tens of Thousands</div>
+          <div class="stat-detail">Seeds cached &amp; retrieved by hippocampal memory</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Phylogeography</div>
+          <div class="stat-value">2 Clades</div>
+          <div class="stat-detail">Western (Cascades) + Eastern (Rockies)</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 050</p>
+  </footer>
+</body>
+</html>
