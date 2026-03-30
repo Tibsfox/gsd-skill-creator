@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 38&deg; &mdash; Booker T. Jones &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1B5E20, #2E7D32);
+      color: #A5D6A7;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(27, 94, 32, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: white;
+      border: 1px solid #BF360C;
+    }
+
+    .soul-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #90CAF9;
+      border: 1px solid #1565C0;
+      margin-left: 0.3rem;
+    }
+
+    .memphis-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFE0B2;
+      border: 1px solid #F57C00;
+      margin-left: 0.3rem;
+    }
+
+    .touring-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1B5E20;
+      color: #C8E6C9;
+      border: 1px solid #388E3C;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1B5E20;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1B5E20;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #1B5E20;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F1F8E9;
+      font-style: italic;
+      color: #33691E;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>038 &mdash; Booker T. Jones</span>
+    </nav>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">38&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Booker T. Jones</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="soul-badge">R&amp;B / Soul</span>
+          <span class="label-badge">Stax Records</span>
+          <span class="memphis-badge">Memphis, TN</span>
+          <span class="touring-badge">Touring Anchor</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Visiting Dignitary</h2>
+          <p>
+            Degree 38 introduces the first artist in the engine explicitly framed as a visitor. The CSV reads
+            &ldquo;Booker T Jones (Seattle shows)&rdquo; &mdash; the parenthetical is the tell. Jones was born
+            November 12, 1944, in Memphis, Tennessee. He is the leader of <strong>Booker T. &amp; the M.G.&rsquo;s</strong>,
+            the house band at Stax Records, and arguably the most famous Hammond B-3 organist in the history of
+            American music. His presence in this engine reflects his repeated performances in Seattle and the
+            Pacific Northwest, and the deep structural connection between the Memphis soul tradition he helped
+            create and the R&amp;B/soul scene that developed in Seattle&rsquo;s Central District.
+          </p>
+          <blockquote>
+            &ldquo;When you walked in the door at Stax, there was absolutely no color.&rdquo;
+            &mdash; Steve Cropper
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Stax Records &amp; the M.G.&rsquo;s</h2>
+          <p>
+            In the summer of 1962, four musicians in the Stax studio &mdash; 17-year-old keyboardist Jones,
+            guitarist Steve Cropper, bassist Lewie Steinberg, and drummer Al Jackson Jr. &mdash; jammed on
+            a bluesy organ riff during downtime. The result was <strong>&ldquo;Green Onions,&rdquo;</strong>
+            which hit No. 1 on the R&amp;B chart and No. 3 on the Billboard Hot 100, selling over a million copies.
+            Jones was eighteen years old.
+          </p>
+          <p>
+            The M.G.&rsquo;s (&ldquo;Memphis Group&rdquo;) were two Black musicians (Jones, Jackson) and two
+            white musicians (Cropper, Steinberg &mdash; later Donald &ldquo;Duck&rdquo; Dunn). In 1962 Memphis,
+            an integrated band was not just unusual &mdash; it was dangerous. The records didn&rsquo;t come with
+            photographs. The music was racially ambiguous. The integration was hidden in plain sight, audible but invisible.
+          </p>
+          <p>
+            As Stax&rsquo;s house band, the M.G.&rsquo;s backed <strong>Otis Redding</strong>, <strong>Sam &amp; Dave</strong>,
+            <strong>Albert King</strong>, <strong>Wilson Pickett</strong>, <strong>Carla Thomas</strong>,
+            <strong>Eddie Floyd</strong>, and dozens of others. They were the engine room of Memphis soul &mdash;
+            the musicians who built the sound that other artists inhabited.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Seattle Connection</h2>
+          <p>
+            Jones has been performing in the Seattle/Pacific Northwest corridor for decades. Documented
+            recent performances include The Triple Door in Seattle (April 2022, October 2025), Kirkland
+            Performance Center (April 2024), and Mount Baker Theatre in Bellingham (October 2025). His
+            typical setlist runs approximately twelve songs, mixing canonical M.G.&rsquo;s material
+            (&ldquo;Green Onions,&rdquo; &ldquo;Time Is Tight,&rdquo; &ldquo;Hip Hug-Her&rdquo;) with
+            solo work and deep cuts.
+          </p>
+          <p>
+            Memphis and Seattle developed parallel Black music scenes rooted in the Great Migration, the
+            gospel tradition, and the blues. The <em>Wheedle&rsquo;s Groove</em> project documented
+            Seattle&rsquo;s forgotten soul and funk scene of the 1960s&ndash;70s &mdash; bands who played
+            Central District clubs, recorded on local labels, and were heard on KYAC radio &mdash; influenced
+            by the same Stax records Jones was making in Memphis.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Touring Anchor</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                39th artist-city pattern. The artist from another city whose repeated performances in Seattle
+                create an ongoing gravitational relationship between two musical traditions. The Touring Anchor
+                does not relocate or claim Seattle as home; the Touring Anchor returns because the traditions
+                are branches of the same tree.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Congregational Organ</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                39th acoustic element. The Hammond B-3, gospel-rooted, warm swirling tone from the rotating
+                Leslie speaker. Breaks the 3-degree Stratocaster thread (35&ndash;37). First keyboard-based
+                acoustic element in the engine.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Gospel Swell</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                38th blue note deployment. The blue note embedded in organ timbre &mdash; minor-to-major chord
+                ambiguity colored by the Leslie speaker&rsquo;s Doppler wobble. The warm communal wash hovering
+                between sadness and joy, between the secular and the sacred.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Institutional Tidal</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                7th E=5 mode. Energy measured through the institution (Stax, M.G.&rsquo;s, hundreds of sessions)
+                rather than the individual alone. The institution amplifies the individual; the individual
+                gives the institution its voice.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; Multi-instrumentalist, producer, Memphis-to-Seattle pipeline (reversed: Quincy left Seattle; Booker T. visits Seattle)</li>
+            <li><span class="ref-degree">29&deg;</span> Ivan &ldquo;Boogaloo Joe&rdquo; Jones &mdash; Last R&amp;B/Soul degree. Organ/guitar funk tradition shares DNA with M.G.&rsquo;s groove</li>
+            <li><span class="ref-degree">30&deg;</span> Ray Charles &mdash; Atlantic Records. The Atlantic&ndash;Stax distribution deal connects their label homes</li>
+            <li><span class="ref-degree">32&deg;</span> Luther Rabb &mdash; Session musician tradition. Anonymous architects of other artists&rsquo; sound</li>
+            <li><span class="ref-degree">34&deg;</span> The Tempos &mdash; Central District R&amp;B group from the 1960s, influenced by Stax records</li>
+            <li><span class="ref-degree">36&deg;</span> Jimi Hendrix &mdash; Structural connection: Memphis soul and blues-rock share common roots in the blues</li>
+            <li><span class="ref-degree">37&deg;</span> Ayron Jones &mdash; Contemporary Seattle artist; surname coincidence noted</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Nov 12, 1944</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Memphis, TN</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Hammond B-3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Band</span>
+            <span class="stat-value">M.G.&rsquo;s (1962)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">Various</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">38 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">R&amp;B/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">19</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#39 Touring Anchor</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#39 Congregational Organ</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#38 Gospel Swell</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row">
+            <span class="stat-label">1962</span>
+            <span class="stat-value">Green Onions</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1967</span>
+            <span class="stat-value">Hip Hug-Her</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1969</span>
+            <span class="stat-value">Time Is Tight</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1971</span>
+            <span class="stat-value">Melting Pot</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2009</span>
+            <span class="stat-value">Potato Hole</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Seattle Venues</h4>
+          <div class="stat-row">
+            <span class="stat-label">Triple Door</span>
+            <span class="stat-value">2022, 2025</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kirkland PC</span>
+            <span class="stat-value">2024</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Mt Baker</span>
+            <span class="stat-value">2025</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Honors</h4>
+          <div class="stat-row">
+            <span class="stat-label">Hall of Fame</span>
+            <span class="stat-value">1992</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grammy LTA</span>
+            <span class="stat-value">2007</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grammy Album</span>
+            <span class="stat-value">2010</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 38 of 360 &mdash; Booker T. Jones (Seattle Shows) &mdash;
+        v1.49.174 &mdash; R&amp;B/Soul &mdash; Stax Records
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to Seattle, on the ancestral
+        territory of the Duwamish Tribal Organization (duwamishtribe.org), the Muckleshoot Indian Tribe, and
+        related Coast Salish and Southern Lushootseed-speaking peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
