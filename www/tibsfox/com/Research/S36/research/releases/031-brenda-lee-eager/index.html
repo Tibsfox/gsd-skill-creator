@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 31&deg; &mdash; Brenda Lee Eager &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6A1B9A, #8E24AA);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFF3E0;
+      color: #E65100;
+      border: 1px solid #FFB74D;
+    }
+
+    .rb-soul-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #F3E5F5;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .mercury-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #E53935;
+      margin-left: 0.3rem;
+    }
+
+    .relay-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E8F5E9;
+      color: #1B5E20;
+      border: 1px solid #66BB6A;
+      margin-left: 0.3rem;
+    }
+
+    .gender-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FCE4EC;
+      color: #880E4F;
+      border: 1px solid #F48FB1;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .level-foundational { background: #FCE4EC; color: #880E4F; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #8E24AA;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #6A1B9A;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #6A1B9A;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .mercury-box {
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 2px solid #E53935;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .mercury-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFEB3B;
+      font-family: system-ui, sans-serif;
+    }
+    .mercury-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .mercury-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C62828;
+      color: #FFCDD2;
+    }
+    .mercury-box td:first-child { font-weight: 600; width: 30%; color: #FFEB3B; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: #FFF3E0;
+      border: 2px solid #FF6D00;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #FFE0B2;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #E65100;
+    }
+
+    .ray-charles-box {
+      background: #E8F5E9;
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .ray-charles-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #1B5E20;
+      font-family: system-ui, sans-serif;
+    }
+    .ray-charles-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .duet-box {
+      background: linear-gradient(135deg, #F3E5F5, #EDE7F6);
+      border: 2px solid #6A1B9A;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duet-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .duet-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .gender-box {
+      background: #FCE4EC;
+      border: 2px solid #AD1457;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .gender-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #880E4F;
+      font-family: system-ui, sans-serif;
+    }
+    .gender-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .gender-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .gender-box td, .gender-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #F8BBD0;
+    }
+    .gender-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #880E4F;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">31&deg;</div>
+      <div>
+        <h1>Brenda Lee Eager</h1>
+        <div class="subtitle">R&amp;B/Soul &middot; The Mellow Undertow &mdash; Chicago Soul via Mercury Records
+          <span class="energy-badge">Energy 4</span>
+          <span class="rb-soul-badge">R&amp;B/Soul</span>
+          <span class="mercury-badge">Mercury</span>
+          <span class="relay-badge">The Relay</span>
+          <span class="gender-badge">6th Woman</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../030-ray-charles/index.html">Degree 30&deg; (Ray Charles)</a>
+      <a href="../003-ernestine-anderson/index.html">Degree 3&deg; (Anderson)</a>
+      <a href="../026-shaina-shepherd/index.html">Degree 26&deg; (Shepherd)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Quincy Jones)</a>
+      <a href="../025-black-stax/index.html">Degree 25&deg; (Black Stax)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          She was born in Lower Peach Tree, Alabama, and sang in churches
+          before she could read music. She moved to Chicago and became the
+          voice beneath Jerry Butler&rsquo;s cool &mdash; the warmth under
+          the Iceman&rsquo;s surface. &ldquo;Ain&rsquo;t Understanding
+          Mellow&rdquo; sold a million copies on Mercury Records. She sang
+          backup for Ray Charles, wrote songs for Prince, Aretha Franklin,
+          and Gladys Knight. She carried the soul tradition forward through
+          five decades of duets, session work, songwriting, and choral
+          direction. The relay runner &mdash; not the one who starts the
+          race but the one who keeps the baton moving.
+          <em>The mellow undertow.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>This research is mapped to Seattle within the Seattle 360 engine.
+          The Seattle region sits on the ancestral territory of the
+          <strong>Duwamish Tribal Organization</strong>, the
+          <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. The Duwamish Tribe remains federally unrecognized.
+          This acknowledgment was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             RAY CHARLES CONNECTION
+             ======================================== -->
+
+        <div class="ray-charles-box">
+          <h4>Degree 30 / Degree 31 &mdash; The Relay Link</h4>
+          <p><strong>Brenda Lee Eager sang backup for Ray Charles</strong> &mdash;
+          the artist who carried Seattle&rsquo;s Central District musical culture
+          to the world and invented soul music. Eager&rsquo;s voice is literally
+          present on Ray Charles recordings, providing the harmonic and rhythmic
+          support that allowed his lead voice to do its work. Degree 31 sang for
+          degree 30. This is the most direct consecutive-degree musical link since
+          the founding cluster.</p>
+          <p style="margin-top:0.8rem"><a href="../030-ray-charles/index.html"
+            style="color:#1B5E20;font-weight:600">Read Degree 30&deg; &mdash; Ray Charles</a></p>
+        </div>
+
+        <!-- ========================================
+             MERCURY RECORDS
+             ======================================== -->
+
+        <div class="mercury-box">
+          <h4>Mercury Records &mdash; The Chicago Label</h4>
+          <table>
+            <tr><td>Founded</td><td>1945 by Irving Green, Berle Adams, Arthur Talmadge, and Ray Greenberg in Chicago, Illinois.</td></tr>
+            <tr><td>Eager&rsquo;s Years</td><td>1971&ndash;1973. &ldquo;Ain&rsquo;t Understanding Mellow&rdquo; (1971/72, Gold), &ldquo;(They Long to Be) Close to You&rdquo; (1972), <em>The Love We Have, The Love We Had</em> (1973 album with Jerry Butler).</td></tr>
+            <tr><td>Also on Mercury</td><td>Jerry Butler, Gene Chandler, the Dells, Ohio Players, the Bar-Kays, Con Funk Shun, Kool and the Gang.</td></tr>
+            <tr><td>Label Triad</td><td>Third consecutive major label: Prestige (degree 29), Atlantic (degree 30), Mercury (degree 31). Jazz &rarr; Soul/R&amp;B &rarr; Chicago Soul.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             DUET PARTNERSHIP
+             ======================================== -->
+
+        <div class="duet-box">
+          <h4>&ldquo;Ain&rsquo;t Understanding Mellow&rdquo; &mdash; The Gold Standard</h4>
+          <p>Written by Homer Talbert and Herscholt Polk, arranged by James Mack,
+          produced by Gerald Sims and Jerry Butler. Released late 1971 on Mercury Records.
+          <strong>No. 3 R&amp;B, No. 21 Hot 100.</strong> Over one million copies sold.
+          RIAA Gold certification, April 1972. The definitive Chicago soul duet of the
+          early 1970s &mdash; Butler&rsquo;s Iceman cool set against Eager&rsquo;s warm,
+          gospel-rooted delivery. The tension between the two vocal temperatures IS the song.</p>
+        </div>
+
+        <!-- ========================================
+             GENDER MILESTONE
+             ======================================== -->
+
+        <div class="gender-box">
+          <h4>Sixth Woman in the Engine</h4>
+          <p>Brenda Lee Eager is the sixth woman in thirty-two degrees of the
+          Seattle 360 engine. Ratio: <strong>6:26</strong> (women : men/male-led),
+          approximately 18.8%.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>Genre</th></tr>
+            <tr><td>3</td><td>Ernestine Anderson</td><td>Jazz</td></tr>
+            <tr><td>6</td><td>Patti Bown</td><td>Jazz</td></tr>
+            <tr><td>20</td><td>Whitney Monge</td><td>Americana/Soul/Blues</td></tr>
+            <tr><td>25</td><td>Black Stax (Loud)</td><td>Neo-Soul/Hip-Hop</td></tr>
+            <tr><td>26</td><td>Shaina Shepherd</td><td>Soul</td></tr>
+            <tr><td><strong>31</strong></td><td><strong>Brenda Lee Eager</strong></td><td><strong>R&amp;B/Soul</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY ARC
+             ======================================== -->
+
+        <h2>The Arc: Lower Peach Tree to Culver City</h2>
+
+        <div class="timeline-entry">
+          <div class="era">August 8, 1947 &mdash; Mobile, Alabama</div>
+          <p>Born <strong>Brenda Lee Eager</strong>. Raised in <strong>Lower Peach Tree</strong>,
+          Wilcox County, Alabama &mdash; a small rural town on the Alabama River. Begins
+          singing in church as a child. By tenth grade, leads her own vocal group.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">c. 1964 &mdash; Prichard, Alabama</div>
+          <p>First professional singing engagement at the <strong>Kings Club</strong>
+          in Prichard, at age seventeen. Develops stage presence on the small-venue
+          circuit of coastal Alabama.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Late 1960s &mdash; Chicago, Illinois</div>
+          <p>Relocates to Chicago, drawn by the city&rsquo;s soul music infrastructure:
+          Mercury Records, Chess Records, Brunswick/Dakar, Curtom. Joins the Chicago
+          soul scene during its peak period.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1971 &mdash; Jerry Butler&rsquo;s Peaches</div>
+          <p>Becomes lead singer of <strong>Peaches</strong>, Jerry Butler&rsquo;s
+          backup vocal group. Her voice &mdash; warm, controlled, gospel-rooted &mdash;
+          distinguishes her from other group members and earns her the role of
+          duet partner with &ldquo;The Iceman.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1971&ndash;1972 &mdash; Gold Single</div>
+          <p><strong>&ldquo;Ain&rsquo;t Understanding Mellow&rdquo;</strong> reaches
+          No. 3 R&amp;B, No. 21 Hot 100. Over one million copies sold. RIAA Gold
+          (April 1972). The Butler-Eager partnership also produces
+          &ldquo;(They Long to Be) Close to You&rdquo; (No. 6 R&amp;B).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1973 &mdash; Duet Album</div>
+          <p><em>The Love We Have, The Love We Had</em> &mdash; full duet album with
+          Jerry Butler on Mercury Records. Recorded in Memphis and Chicago. Conceptual
+          two-sided structure: &ldquo;The Love We Have&rdquo; vs. &ldquo;The Love We Had.&rdquo;</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1974&ndash;1984 &mdash; Solo Career</div>
+          <p>&ldquo;When I&rsquo;m With You&rdquo; (1974, produced by Larry Mizell) &mdash;
+          later sampled by Ghostface Killah and Snoop Dogg. &ldquo;Good Old Fashioned
+          Lovin&rsquo;&rdquo; (Playboy Records, 1975, No. 71 R&amp;B). &ldquo;Watch My Body
+          Talk&rdquo; (Private-I Records, 1984).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970s&ndash;1990s &mdash; Background and Songwriting</div>
+          <p>Background vocals for <strong>Ray Charles</strong> (degree 30),
+          <strong>Diana Ross</strong>, <strong>Stevie Wonder</strong>,
+          <strong>Mavis Staples</strong>, <strong>Graham Nash</strong>.
+          Songs recorded by <strong>Aretha Franklin</strong>, <strong>Gladys Knight</strong>,
+          <strong>Bobby Womack</strong>, <strong>Shirley Brown</strong>,
+          <strong>Peaches &amp; Herb</strong>.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1996 &mdash; Prince</div>
+          <p>Co-writes <strong>&ldquo;Somebody&rsquo;s Somebody&rdquo;</strong> with
+          Prince and Hilliard Wilson for Prince&rsquo;s <em>Emancipation</em> album.
+          The single achieves <strong>double-platinum</strong> certification &mdash;
+          Eager&rsquo;s most commercially successful composition.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2006&ndash;Present &mdash; Los Angeles</div>
+          <p>Directs <strong>The Heaven on Earth (T.H.E.) Choir</strong> at the
+          City of Angels Church, Culver City, California. Writes and performs
+          <em>Grace</em>, a one-woman musical theatre show based on her life
+          (premiered 2010). The arc returns to its origin: church singing.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Knowledge Architecture</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Relay</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Thirty-second artist-city pattern. An artist whose connection to
+            a city is defined not by residency but by carrying forward the musical
+            tradition the city produced. Eager sang backup for Ray Charles &mdash;
+            the Central District&rsquo;s most important export. She carried the
+            tradition through duets, songwriting, and choral direction.</p>
+            <div class="examples">Distinct from Export (degree 0) and Incubation
+            (degree 30): The Relay artist never lived in the city but propagates
+            its musical culture through direct collaboration.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Mellow Undertow</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Thirty-second acoustic element. Named for &ldquo;Ain&rsquo;t
+            Understanding <em>Mellow</em>.&rdquo; A warm, steady, slightly
+            pulling vocal current beneath the lead melody &mdash; exerting
+            emotional gravity without breaking the surface. Eager&rsquo;s
+            voice under Butler&rsquo;s Iceman cool.</p>
+            <div class="examples">Follows the rough brrit (degree 30):
+            after the eruption, the undertow. After the surface breaks,
+            the persistent warmth reasserts itself.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Chicago Soul Duet Form</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>The male-female dialogue structure specific to Chicago soul:
+            two distinct vocal temperatures in conversation, the contrast
+            carrying the emotional weight. Butler&rsquo;s cool vs.
+            Eager&rsquo;s warmth. Not Memphis (both hot) or Motown (both
+            polished) but Chicago (ice and warmth, restraint and openness).</p>
+            <div class="examples">Butler-Eager as exemplary case; descended from
+            the gospel-secular fusion that Charles (degree 30) pioneered.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Duet Vocal Warmth</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Thirty-first deployment of the blue note thread. The blue
+            note expressed as the warmth differential between two voices in
+            dialogue &mdash; the slight bend in emotional temperature that
+            gives a duet its tension. Not a pitch bend but a thermal bend:
+            the moment when Eager&rsquo;s warm voice pulls against Butler&rsquo;s
+            cool one.</p>
+            <div class="genealogy"><strong>31 deployments:</strong> bass-line (0)
+            through gospel-soul rasp (30) to duet vocal warmth (31). The warmth
+            differential as blue note mechanism.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>Energy Level 4 &mdash; Relay-Kinetic (Eleventh Consecutive)</h4>
+          <p><strong>Distribution: 2:13:6:11</strong> (E1:E2:E3:E4).
+          ELEVENTH consecutive E=4 (degrees 21&ndash;31). E=4 now leads E=3 (11 vs. 6)
+          and closes on E=2 (11 vs. 13). Relay-kinetic: the energy of transmission
+          &mdash; carrying a tradition forward through backup singing, duet partnership,
+          songwriting, and choral direction.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=4 Subtype</th></tr>
+            <tr><td>21</td><td>Polyrhythmics</td><td>Ensemble-kinetic</td></tr>
+            <tr><td>22</td><td>Foxy Apollo</td><td>Collective-kinetic</td></tr>
+            <tr><td>23</td><td>Allen Stone</td><td>Vocal-kinetic</td></tr>
+            <tr><td>24</td><td>Ron Artis II</td><td>Dynastic-kinetic</td></tr>
+            <tr><td>25</td><td>Black Stax</td><td>Congregational-kinetic</td></tr>
+            <tr><td>26</td><td>Shaina Shepherd</td><td>Metamorphic-kinetic</td></tr>
+            <tr><td>27</td><td>The Dynamics</td><td>Incubator-kinetic</td></tr>
+            <tr><td>28</td><td>Night Owls</td><td>Ambient-kinetic</td></tr>
+            <tr><td>29</td><td>Boogaloo Joe Jones</td><td>Groove-kinetic</td></tr>
+            <tr><td>30</td><td>Ray Charles</td><td>Tectonic-kinetic</td></tr>
+            <tr><td><strong>31</strong></td><td><strong>Brenda Lee Eager</strong></td><td><strong>Relay-kinetic</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <ul>
+          <li><strong>Degree 30 &mdash; Ray Charles:</strong> DIRECT MUSICAL LINK. Eager
+          sang backup for Charles. Degree 31 sang for degree 30. The most direct
+          consecutive-degree link since the founding cluster.</li>
+          <li><strong>Degree 0 &mdash; Quincy Jones:</strong> Chicago soul lineage.
+          Jerry Butler was a foundational figure in the soul tradition Jones helped build.</li>
+          <li><strong>Degree 3 &mdash; Ernestine Anderson:</strong> Gender milestone.
+          First and sixth women in the engine. Both Southern-born vocalists.</li>
+          <li><strong>Degree 26 &mdash; Shaina Shepherd:</strong> Women in soul.
+          Shepherd and Eager both navigate male-dominated R&amp;B/Soul industry.</li>
+          <li><strong>Degree 25 &mdash; Black Stax:</strong> Congregational continuity.
+          Eager now directs T.H.E. Choir &mdash; the congregation as musical unit.</li>
+          <li><strong>Degree 23 &mdash; Allen Stone:</strong> Gospel-vocal lineage.
+          Both trained in the gospel tradition as foundation for secular soul.</li>
+          <li><strong>Degree 29 &mdash; Boogaloo Joe Jones:</strong> Label triad.
+          Prestige (29), Atlantic (30), Mercury (31) &mdash; three consecutive
+          major labels documenting American Black music.</li>
+          <li><strong>Degree 24 &mdash; Ron Artis II:</strong> Soul dynasty.
+          Artis&rsquo;s dynastic soul inherits the tradition the Butler-Eager
+          duets helped define.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward Items for Degree 32</h4>
+          <ul>
+            <li><strong>ELEVENTH E=4:</strong> Distribution 2:13:6:11. E=4 closing on E=2. Track if streak continues.</li>
+            <li><strong>The mellow undertow:</strong> 32nd acoustic element. Post-brrit warmth phase. Track element 33.</li>
+            <li><strong>R&amp;B/Soul:</strong> Genre Stage 13. Jazz fully absent from compound genre for first time. Track.</li>
+            <li><strong>The Relay:</strong> 32nd artist-city pattern. Non-residential connection through musical collaboration.</li>
+            <li><strong>Mercury Records:</strong> Label triad complete: Prestige-Atlantic-Mercury (29-30-31).</li>
+            <li><strong>Gender:</strong> 6:26 ratio (~18.8%). Sixth woman. Track.</li>
+            <li><strong>Blue note:</strong> THIRTY-ONE deployments. Duet vocal warmth at 31.</li>
+            <li><strong>Songwriting lineage:</strong> Eager wrote for Franklin, Knight, Prince, Womack. Track songwriter thread.</li>
+            <li><strong>Hip-hop sampling:</strong> &ldquo;When I&rsquo;m With You&rdquo; sampled by Ghostface Killah and Snoop Dogg. Track 1970s-to-hip-hop pipeline.</li>
+          </ul>
+        </div>
+
+      </div><!-- .content -->
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Fast Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Aug. 8, 1947</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Birthplace</span>
+            <span class="stat-value">Mobile, AL</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Raised</span>
+            <span class="stat-value">Lower Peach Tree, AL</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Career Base</span>
+            <span class="stat-value">Chicago / Los Angeles</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">R&amp;B/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">4 (relay)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Mercury</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">31&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Version</span>
+            <span class="stat-value">v1.49.167</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">The mellow undertow</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">The Relay</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4 Streak</span>
+            <span class="stat-value">11 (21&ndash;31)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Recordings</h4>
+          <div class="stat-row">
+            <span class="stat-label">Signature Hit</span>
+            <span class="stat-value">Ain&rsquo;t Understanding Mellow</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chart Peak</span>
+            <span class="stat-value">No. 3 R&amp;B (1972)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Duet Album</span>
+            <span class="stat-value">The Love We Have (1973)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Prince Song</span>
+            <span class="stat-value">Somebody&rsquo;s Somebody (1996)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Songwriting Credits</h4>
+          <div class="stat-row">
+            <span class="stat-label">Prince</span>
+            <span class="stat-value">Somebody&rsquo;s Somebody (2x Plat)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Aretha Franklin</span>
+            <span class="stat-value">Just to Be Loved</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gladys Knight</span>
+            <span class="stat-value">Friends</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Mavis Staples</span>
+            <span class="stat-value">More Than Beautiful</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Cross-Degree Links</h4>
+          <div class="stat-row">
+            <span class="stat-label">Primary</span>
+            <span class="stat-value">Deg 30 (Ray Charles)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gender Thread</span>
+            <span class="stat-value">3, 6, 20, 25, 26</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label Triad</span>
+            <span class="stat-value">29, 30, 31</span>
+          </div>
+        </div>
+      </div><!-- .sidebar -->
+
+    </div><!-- .release-layout -->
+  </main>
+
+  <footer>
+    <p>Seattle 360 &mdash; Degree 31&deg; &mdash; Brenda Lee Eager &mdash; v1.49.167</p>
+    <p>Part of the <a href="../../../index.html">PNW Research Series</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,134 @@
+{
+  "degree": 31,
+  "artist": "Brenda Lee Eager",
+  "slug": "031-brenda-lee-eager",
+  "genre": "R&B/Soul",
+  "energy": 4,
+  "era": "1970s",
+  "location": {
+    "origin": "Mobile, Alabama (born August 8, 1947). Raised in Lower Peach Tree, Wilcox County, Alabama -- a small rural town on the Alabama River in the Black Belt region. Began singing in church as a child. Led own vocal group by tenth grade. First professional engagement at Kings Club, Prichard, Alabama, at age seventeen.",
+    "formative": "Chicago, Illinois (late 1960s-1970s). By 1971, lead singer of Jerry Butler's backup group Peaches. Duet partnership with Butler on Mercury Records: 'Ain't Understanding Mellow' (1971/72, No. 3 R&B, No. 21 Hot 100, Gold single, 1M+ copies). '(They Long to Be) Close to You' (1972, No. 6 R&B). Full duet album 'The Love We Have, The Love We Had' (Mercury, 1973). Chicago soul scene: Mercury, Chess, Brunswick/Dakar, Curtom all active.",
+    "career": "Solo singles: 'When I'm With You' (1974, produced by Larry Mizell -- later sampled by Ghostface Killah and Snoop Dogg), 'Good Old Fashioned Lovin'' (Playboy Records, 1975, No. 71 R&B), 'Watch My Body Talk' (Private-I Records, 1984). Songwriting: co-wrote 'Somebody's Somebody' with Prince and Hilliard Wilson (1996, Emancipation album, double platinum). Songs recorded by Aretha Franklin ('Just to Be Loved'), Mavis Staples ('More Than Beautiful'), Gladys Knight ('Friends'), Bobby Womack, Shirley Brown, Cliff Richard. Background vocals for Ray Charles (degree 30), Diana Ross, Stevie Wonder, Mavis Staples, Graham Nash, Carl Anderson. Musical theatre: 'The Message is in the Music' (with Della Reese), 'Wild Woman Blues' (European tour), 'Grace' (one-woman show, Los Angeles premiere 2010). Since 2006, directs The Heaven on Earth (T.H.E.) Choir at City of Angels Church, Culver City, California."
+  },
+  "born": "August 8, 1947, Mobile, Alabama",
+  "formed": null,
+  "died": null,
+  "labels": ["Mercury Records (1971-1973, Chicago -- duets with Jerry Butler)", "Playboy Records (1975 -- solo single)", "Private-I Records (1984 -- solo single)"],
+  "members": [],
+  "associated_musicians": [
+    {"name": "Jerry Butler", "role": "Duet partner, producer, bandleader (Mercury Records, 1971-1973)", "note": "Born December 8, 1939, Sunflower, Mississippi; raised in Chicago. 'The Iceman.' Co-founder of the Impressions with Curtis Mayfield. Solo career at Vee-Jay then Mercury Records. Hits: 'Never Gonna Give You Up' (1968), 'Hey Western Union Man' (1968), 'Only the Strong Survive' (1969). His cool vocal temperature set against Eager's warmth defined the Chicago soul duet form. Died February 2, 2025, age 85, Chicago."},
+    {"name": "Ray Charles", "role": "Employer (background vocalist)", "note": "Degree 30 in the Seattle 360 engine. Eager sang backup for Charles -- the most direct consecutive-degree link in the engine. Charles invented soul music; Eager carried the tradition forward through vocal support."},
+    {"name": "Prince", "role": "Co-songwriter ('Somebody's Somebody', 1996)", "note": "Eager co-wrote 'Somebody's Somebody' with Prince and Hilliard Wilson for Prince's Emancipation album (1996). The single achieved double-platinum certification -- Eager's most commercially successful composition by a wide margin."},
+    {"name": "Diana Ross", "role": "Employer (background vocalist)", "note": "Eager provided background vocals for Ross, connecting to the Motown soul tradition."},
+    {"name": "Stevie Wonder", "role": "Employer (background vocalist)", "note": "Eager provided background vocals for Wonder, further embedding her in the soul music lineage."},
+    {"name": "Mavis Staples", "role": "Employer (background vocalist) and artist who recorded Eager's songs", "note": "Staples recorded Eager's 'More Than Beautiful.' The Staples Singers connection links Eager to the gospel-soul tradition from its Chicago roots."},
+    {"name": "Aretha Franklin", "role": "Artist who recorded Eager's songs", "note": "Franklin recorded Eager's 'Just to Be Loved.' Franklin is the most direct inheritor of the gospel-secular fusion Ray Charles (degree 30) pioneered."},
+    {"name": "Gladys Knight", "role": "Artist who recorded Eager's songs", "note": "Knight recorded Eager's 'Friends.' Another connection in the soul music lineage."},
+    {"name": "Bobby Womack", "role": "Artist who recorded Eager's songs", "note": "Womack recorded Eager-penned songs. Specific titles not confirmed in available sources."},
+    {"name": "Larry Mizell", "role": "Producer ('When I'm With You', 1974)", "note": "Larry Mizell produced the track that would become Eager's most sampled recording. Mizell (with brother Fonce Mizell) was a key figure in jazz-funk production."},
+    {"name": "Homer Talbert", "role": "Co-writer, 'Ain't Understanding Mellow'", "note": "Co-wrote Eager's biggest hit with Herscholt Polk."},
+    {"name": "Herscholt Polk", "role": "Co-writer, 'Ain't Understanding Mellow'", "note": "Co-wrote with Homer Talbert."},
+    {"name": "Gerald Sims", "role": "Producer, 'Ain't Understanding Mellow'", "note": "Co-produced with Jerry Butler."},
+    {"name": "James Mack", "role": "Arranger, 'Ain't Understanding Mellow'", "note": "Arranged the orchestral soul backing that defined the Chicago soul duet sound."}
+  ],
+  "former_members": [],
+  "theory_nodes": [
+    {
+      "concept": "The Relay (artist-city pattern where an artist's connection to a city is defined not by physical residency but by carrying forward the musical tradition the city produced -- Eager never lived in Seattle but sang backup for Ray Charles (degree 30), whose three years in the Central District (1947-1950) seeded soul music; Eager carried that tradition forward through duets, songwriting, session work, and choral direction; the relay is the mechanism by which a city's musical tradition reaches artists who never lived there)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/structure/the-relay-pattern.md",
+      "examples": [
+        "Brenda Lee Eager (degree 31) -- sang backup for Ray Charles (degree 30), wrote songs for Aretha Franklin and Prince (soul music descendants), directs a church choir in California. Never lived in Seattle. The connection passes through Ray Charles: Alabama church -> Chicago soul -> Ray Charles backup vocals -> the engine's geographic framework.",
+        "Contrast with Export (degree 0, Quincy Jones) -- Jones left Seattle carrying its culture. The Relay artist never lived in the city but carries the culture through musical collaboration.",
+        "Contrast with The Incubation (degree 30, Ray Charles) -- the city transforms the artist. The Relay artist is transformed by an artist the city produced, not by the city itself.",
+        "Contrast with The Catalog (degree 29, Boogaloo Joe Jones) -- the relationship is mediated through recordings. The Relay artist is a participant IN the recordings as background singer or duet partner."
+      ],
+      "description": "The Relay is the thirty-second artist-city pattern in the Seattle 360 engine. It describes an artist whose connection to a city is defined not by physical residency or geographic proximity but by direct musical collaboration with artists the city produced. Brenda Lee Eager never lived in Seattle. But she sang backup for Ray Charles -- the artist whose three years in the Central District (1947-1950) produced the seeds of soul music that became the most significant musical innovation documented in the engine. Eager's voice is literally present on Ray Charles recordings. She also carried the tradition forward through songwriting (songs for Aretha Franklin, Gladys Knight, Prince -- all artists in the soul lineage that Charles initiated) and through choral direction (leading a church choir in Culver City, returning the tradition to its gospel roots). The Relay is the engine's first instance of a non-residential artist-city relationship documented through direct musical collaboration. It establishes that the engine's geographic framework can accommodate artists whose connection to Seattle is musical rather than biographical -- transmitted through the relay of tradition from one artist to another.",
+      "genealogy": {
+        "ancestors": ["Gospel tradition (Alabama Black churches) -- Eager's childhood singing was in the same tradition that Charles absorbed in Florida and fused with R&B", "Chicago soul infrastructure (Mercury Records, Jerry Butler, Curtis Mayfield ecosystem) -- the institutional framework that gave Eager a professional context", "Ray Charles (degree 30) -- the relay originates with Charles's Central District incubation and gospel-secular fusion", "Jerry Butler partnership -- the duet format that defined Eager's recording career and positioned her within the soul music lineage", "Soul music lineage (Charles -> Franklin -> Staples -> Knight -> Prince) -- the tradition that Eager carried forward through songwriting"],
+        "relationship": "The Relay pattern exists because musical traditions do not stop at city boundaries. The Central District's musical culture -- concentrated in the Jackson Street clubs during the late 1940s, absorbed by Ray Charles, fused into soul music at Atlantic Records -- continued to propagate through every artist who performed with Charles, every artist who recorded songs in the soul tradition, every choir that sings gospel-inflected music. Eager is one node in this relay. The pattern documents the propagation mechanism: how does a city's musical tradition reach an artist who never lived there? Through the musicians who carry it."
+      }
+    },
+    {
+      "concept": "The mellow undertow (thirty-second acoustic element -- a warm, steady, slightly pulling vocal current that runs beneath the lead melody, exerting emotional gravity without breaking the surface; named for 'Ain't Understanding Mellow'; Eager's voice beneath Butler's Iceman cool provides the warmth that makes the coolness meaningful; the undertow follows the rough brrit (degree 30) -- after the eruption, the persistent current beneath)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/acoustics/the-mellow-undertow.md",
+      "examples": [
+        "Brenda Lee Eager (degree 31) -- the warm vocal current beneath Jerry Butler's cool lead; the undertow that gives the Iceman's restraint its emotional depth; without Eager's warmth underneath, Butler's coolness would be cold rather than controlled",
+        "Ray Charles (degree 30) -- 'the rough brrit': friction, texture, eruption. The mellow undertow is the response: after the eruption, the pull. After the surface breaks, the current beneath reasserts itself.",
+        "Ernestine Anderson (degree 3) -- 'language': the fully articulated jazz vocal. The undertow is sub-surface, implicit, pulling rather than speaking. Language is the thing said; the undertow is the emotional current that gives it meaning.",
+        "Allen Stone (degree 23) -- 'the testimony': gospel-trained vocal power deployed on the surface. The undertow operates beneath the surface -- not the testimony itself but the emotional foundation that makes the testimony believable."
+      ],
+      "description": "The mellow undertow is the thirty-second acoustic element in the Seattle 360 engine. It is named after the defining word in Eager's signature recording: 'Ain't Understanding Mellow.' The undertow is a specific acoustic phenomenon: a warm, steady, slightly pulling vocal current that runs beneath the lead melody, exerting emotional gravity without ever breaking the surface. In the Butler-Eager duets, the undertow is literal: Eager's voice runs beneath Butler's 'Iceman' lead, providing harmonic warmth, melodic counterpoint, and the emotional pull that gives the cool surface its depth. The mellow undertow follows the rough brrit (degree 30) in the acoustic progression. The brrit broke the liquid triad with friction and rawness -- Ray Charles's voice as geological event. The undertow is the response: after the eruption, the pull. After the surface breaks, the current beneath reasserts itself. The progression rough brrit -> mellow undertow maps the transition from the originator (Charles, who created soul music) to the propagator (Eager, who carried it forward). The brrit is the moment of creation; the undertow is the persistence of the tradition after the creator moves on. Six women in thirty-two degrees, two acoustic elements named for female voices (language at degree 3, mellow undertow at degree 31) -- twenty-eight degrees apart.",
+      "genealogy": {
+        "ancestors": ["The rough brrit (degree 30, Ray Charles) -- the eruption that the undertow follows; friction vs. persistence; creation vs. propagation", "Language (degree 3, Ernestine Anderson) -- the articulate jazz vocal; the undertow is sub-surface where language is explicit; both are female-voiced acoustic elements", "The testimony (degree 23, Allen Stone) -- surface-level gospel power; the undertow operates beneath the testimony, providing its emotional foundation", "The congregation (degree 25, Black Stax) -- collective vocal energy; the undertow is the individual vocal current within the collective", "The caroling (degree 26, Shaina Shepherd) -- metamorphic vocal display; the undertow is steady where the caroling transforms"],
+        "relationship": "Thirty-two acoustic elements across thirty-two degrees. The mellow undertow opens a post-brrit phase defined by warmth and persistence rather than friction and rupture. The progression liquid brook (29) -> rough brrit (30) -> mellow undertow (31) maps three consecutive sonic states: flow, rupture, and recovery. The undertow is the recovery -- the warm current that persists after the surface turbulence of the brrit subsides. It is also the engine's acknowledgment that the tradition created by the brrit (soul music, invented by Charles) is carried forward not by repetition of the rupture but by the steady warmth of the musicians who propagate it."
+      }
+    },
+    {
+      "concept": "Chicago soul duet form (the male-female dialogue structure specific to Chicago soul music: two distinct vocal temperatures in conversation, with the contrast between them carrying the emotional weight; Butler's cool vs. Eager's warmth; distinct from Memphis soul duet (both voices hot and competing), Motown duet (both voices polished into unified sheen), and Philadelphia International duet (orchestral sweep enveloping both voices))",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/genre/chicago-soul-duet-form.md",
+      "examples": [
+        "Jerry Butler and Brenda Lee Eager (degree 31) -- 'Ain't Understanding Mellow' (1971/72): the exemplary Chicago soul duet. Butler's Iceman cool against Eager's gospel-rooted warmth. The arrangement serves the conversation.",
+        "Contrast with Memphis: Otis Redding and Carla Thomas ('Tramp', 'Knock on Wood') -- both voices are raw, hot, and Southern. No temperature differential.",
+        "Contrast with Motown: Marvin Gaye and Tammi Terrell ('Ain't No Mountain High Enough') -- both voices are polished into Motown's production sheen. The production temperature is uniform.",
+        "Ray Charles (degree 30) -- the gospel-secular fusion Charles invented provided the foundation for the Chicago soul duet form. The duet is a specific application of the fusion: sacred warmth (Eager) in dialogue with secular cool (Butler)."
+      ],
+      "description": "The Chicago soul duet form is a structural concept documenting the specific male-female dialogue structure that defines the Chicago soul tradition as distinct from other soul duet traditions. In the Chicago form, two vocalists with distinct 'temperatures' -- one cool, one warm; one restrained, one open -- engage in a dialogue where the contrast between the two temperatures carries the emotional weight. The arrangement is lush enough to be sophisticated but subordinate to the vocal conversation. Jerry Butler ('The Iceman') and Brenda Lee Eager exemplify the form: Butler's cool control and Eager's gospel-rooted warmth create a tension that the listener experiences as the gap between restraint and desire, between what is said and what is felt. The Chicago soul duet form descends from the gospel-secular fusion that Ray Charles (degree 30) pioneered, but it is a specific refinement: where Charles's fusion put gospel and secular in the same voice, the Chicago duet distributes them across two voices -- one carrying the secular cool, the other the sacred warmth.",
+      "genealogy": {
+        "ancestors": ["Gospel-secular fusion (degree 30, Ray Charles) -- the genre-creating mechanism that made the Chicago soul duet possible", "Chicago soul infrastructure (Mercury Records, Chess, Brunswick/Dakar, Curtom) -- the institutional ecosystem that supported the duet form", "Jerry Butler's Gamble-Huff sessions (late 1960s) -- the Philadelphia connection that refined Butler's cool vocal style before the Eager partnership", "Alabama gospel tradition (Eager's childhood) -- the warmth that Eager brought to the partnership"],
+        "relationship": "The Chicago soul duet form is a regional refinement of the gospel-secular fusion. Charles fused sacred and secular in a single voice. The Chicago duet distributes the fusion across two voices, creating a dialogue structure that dramatizes the relationship between emotional openness (gospel warmth) and emotional control (secular cool). This distribution makes the internal tension of soul music -- the pull between the sacred and the secular -- audible as a conversation between two people."
+      }
+    },
+    {
+      "concept": "Blue note -- duet vocal warmth (thirty-first deployment; the blue note expressed as the warmth differential between two voices in dialogue -- the slight bend in emotional temperature that gives a duet its tension; not a pitch bend but a thermal bend; the moment when Eager's warm voice pulls against Butler's cool one, creating a harmonic friction that is emotional rather than tonal)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/blue-note-duet-vocal-warmth.md",
+      "examples": [
+        "Brenda Lee Eager (degree 31) -- the warmth differential between Eager's voice and Butler's in 'Ain't Understanding Mellow'; the blue note is not a flatted note but a bending of emotional temperature",
+        "Ray Charles (degree 30) -- gospel-soul rasp: the blue note as vocal grain. Eager's blue note is the warmth that gives the grain its context -- the temperature beneath the texture.",
+        "Ernestine Anderson (degree 3) -- vocal blue note: jazz interpretation. Anderson's blue note is melodic choice; Eager's is thermal presence -- the warmth that exists even when she is not singing the lead.",
+        "Shaina Shepherd (degree 26) -- metamorphic blue note: genre-crossing transformation. Eager's blue note is steadier -- the constant warmth that anchors the transformation."
+      ],
+      "description": "Thirty-first deployment of the blue note thread. The duet vocal warmth is the blue note expressed as the temperature differential between two voices in dialogue. In the Butler-Eager duets, the blue note is not a flatted third or seventh, not a pitch bend, not a vocal rasp. It is the moment when Eager's warm voice pulls against Butler's cool one -- a bending not of pitch but of emotional temperature. The listener perceives this as tension, desire, the gap between what is controlled and what is felt. The duet vocal warmth blue note is specifically a Chicago soul phenomenon: it depends on the vocal temperature differential that defines the Chicago duet form. In a Memphis duet (both voices hot), there is no temperature differential to bend. In a Motown duet (both voices polished to the same sheen), the differential is production-managed rather than vocal. The Chicago duet lets the raw thermal difference between two singers carry the blue note. Thirty-one deployments across thirty-two degrees.",
+      "genealogy": {
+        "ancestors": ["Blue note -- all thirty prior deployments (degrees 0-30)", "Blue note -- gospel-soul rasp (degree 30, Ray Charles); vocal grain. Eager's blue note is the warmth beneath the grain.", "Blue note -- vocal (degree 3, Ernestine Anderson); jazz interpretation. Eager's blue note is thermal presence.", "Blue note -- metamorphic (degree 26, Shaina Shepherd); genre-crossing transformation. Eager's blue note is steadier.", "Blue note -- soul-vocal (degree 18, Maktub); collective soul expression. Eager's blue note is dialogic -- it requires two voices."],
+        "relationship": "Thirty-one deployments across thirty-two degrees. The duet vocal warmth blue note introduces a new mechanism: the blue note as a relationship between two voices rather than a property of a single voice. All prior vocal blue notes (degrees 3, 18, 23, 26, 30) were properties of individual singers. The duet vocal warmth exists only in the space between two singers -- it is the thermal differential itself, not either voice alone. This is the first relational blue note in the engine. Thirty-one mechanisms: bass-line (0), guitar (1), vocal (3), trumpet-warm (4), piano crush (5), altered voicings (6), trombone slide (7), bass fundamental (8), sax voice (9), alto cool bend (10), flute bent (11), bebop chromatic (12), modal integration (13), post-genre floating (14), assertive brass (15), synthesizer pitch bend (16), vocal glide (17), soul-vocal (18), collective-soul (19), americana-soul (20), funk-brass (21), vocal-funk (22), gospel-vocal (23), dynastic-soul (24), collective-activist (25), metamorphic (26), brass-section smear (27), supper-club vocal bend (28), boogaloo guitar bend (29), gospel-soul rasp (30), duet vocal warmth (31)."
+      }
+    }
+  ],
+  "cross_references": ["S36-030", "S36-000", "S36-003", "S36-023", "S36-024", "S36-025", "S36-026", "S36-029"],
+  "seattle_connection": "ENGINE PLACEMENT -- no specific Seattle residency, performance, or recording session documented in available sources. Connection is MUSICAL rather than geographic: Eager sang backup for Ray Charles (degree 30), the artist whose Central District years (1947-1950) seeded soul music. Eager's voice is literally present on Ray Charles recordings. She also carried the soul tradition forward through songwriting (Aretha Franklin, Gladys Knight, Prince) and choral direction (T.H.E. Choir, Culver City, CA). THE RELAY as 32nd artist-city pattern -- non-residential connection through direct musical collaboration with the city's most important export. R&B/SOUL as Genre Stage 13 -- first compound genre with NO Jazz component. Jazz fully absent for first time. ELEVENTH CONSECUTIVE E=4 (2:13:6:11) -- relay-kinetic subtype. THE MELLOW UNDERTOW as 32nd acoustic element -- warm vocal current beneath the lead; post-brrit persistence. MERCURY RECORDS -- Chicago-founded label (1945); completes the Prestige-Atlantic-Mercury label triad (degrees 29-30-31). SIXTH WOMAN in 32 degrees (6:26 ratio, ~18.8%). GOLD SINGLE: 'Ain't Understanding Mellow' (1972, 1M+ copies). PRINCE CONNECTION: co-wrote 'Somebody's Somebody' (1996, double platinum). HIP-HOP SAMPLING: 'When I'm With You' sampled by Ghostface Killah and Snoop Dogg. BLUE NOTE: thirty-first deployment (duet vocal warmth -- first relational blue note in the engine). CHICAGO SOUL DUET FORM documented as new theory node.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "The Relay (artist-city pattern where non-residential connection is through direct musical collaboration; Eager sang backup for Ray Charles (degree 30); the relay propagates the city's musical tradition beyond its geographic boundary)",
+      "The mellow undertow (thirty-second acoustic element; warm, steady, pulling vocal current beneath the lead; post-brrit persistence; named for 'Ain't Understanding Mellow')",
+      "Chicago soul duet form (male-female dialogue with distinct vocal temperatures; Butler's cool vs. Eager's warmth; regional refinement of the gospel-secular fusion)",
+      "Blue note -- duet vocal warmth (thirty-first deployment; first relational blue note -- exists in the space between two voices rather than as a property of one voice)",
+      "All carry-forward items from degrees 0-30"
+    ],
+    "engine_sequencing": [
+      "ELEVENTH consecutive E=4 (degrees 21-31): extends double-digit streak. Distribution 2:13:6:11. Eleven subtypes: ensemble (21), collective (22), vocal (23), dynastic (24), congregational (25), metamorphic (26), incubator (27), ambient (28), groove (29), tectonic (30), relay (31). E=4 closing on E=2 (11 vs. 13). Track if streak continues or breaks at degree 32.",
+      "GENRE Stage 13 at degree 31: R&B/Soul. First compound genre with NO Jazz component. Jazz fully absent. Track at degree 32.",
+      "MELLOW UNDERTOW opens post-brrit warmth phase. Track element 33 at degree 32.",
+      "MERCURY RECORDS documented: completes Prestige-Atlantic-Mercury label triad (29-30-31). Three consecutive major labels. Track.",
+      "LABEL TRIAD: Prestige (29, jazz) -> Atlantic (30, soul/R&B) -> Mercury (31, Chicago soul). Maps institutional infrastructure of mid-century American Black music. Track.",
+      "All engine sequencing items from degrees 0-30"
+    ],
+    "cultural_patterns": [
+      "Artist-city taxonomy: THIRTY-TWO named patterns (adding The Relay at degree 31). Classify every degree.",
+      "Gender ratio: 6:26 (women:men/male-led). Eager = female. Sixth woman. ~18.8%. Track.",
+      "WOMEN IN THE ENGINE: Anderson (3), Bown (6), Monge (20), Loud/Black Stax (25), Shepherd (26), Eager (31). Gaps: 3 degrees (3-6), 14 degrees (6-20), 5 degrees (20-25), 1 degree (25-26), 5 degrees (26-31). Track.",
+      "SONGWRITER THREAD new at 31: Eager wrote for Franklin, Knight, Prince, Womack, Staples, Shirley Brown. Songwriters as tradition-carriers. Track.",
+      "HIP-HOP SAMPLING PIPELINE new at 31: 'When I'm With You' (1974) sampled by Ghostface Killah and Snoop Dogg. 1970s soul -> hip-hop production pathway. Track.",
+      "PRINCE CONNECTION new at 31: 'Somebody's Somebody' double platinum (1996). Eager co-wrote with Prince for Emancipation. Track.",
+      "RAY CHARLES BACKUP: Eager sang for Charles. Direct consecutive-degree musical link (30-31). Track.",
+      "All cultural pattern items from degrees 0-30"
+    ]
+  }
+}
