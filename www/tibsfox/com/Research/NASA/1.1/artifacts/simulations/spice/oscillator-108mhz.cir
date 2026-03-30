@@ -1,0 +1,180 @@
+* Pioneer 0/1 Transmitter Oscillator — 108.06 MHz
+* =============================================
+* NASA Mission Series v1.1 — Pioneer 0
+*
+* Colpitts oscillator at 27.015 MHz (crystal-controlled)
+* followed by a x4 frequency multiplier stage.
+* Output: ~108 MHz (IGY tracking frequency)
+*
+* The crystal is modeled as a high-Q series LC resonator.
+* Active device: generic NPN model (1958-era parameters).
+* Multiplier: Class-C amplifier with output tank tuned to 4th harmonic.
+*
+* Reference: Pioneer spacecraft telemetry at 108.06 MHz, ~300 mW.
+*
+* Run: ngspice -b oscillator-108mhz.cir
+
+*--------------------------------------------------------------
+* POWER SUPPLY
+*--------------------------------------------------------------
+Vcc  vcc  0  DC 12
+
+* Startup pulse — kicks the oscillator into action
+* (simulates initial noise that triggers real oscillation)
+Vkick  kick  0  PULSE(0 0.5 1n 0.5n 0.5n 5n 500n)
+
+*--------------------------------------------------------------
+* 27 MHz CRYSTAL MODEL (simplified series-resonant LC)
+*   f = 1/(2*pi*sqrt(L*C))
+*   L = 0.1 uH, C = 347 pF -> f_res = 27.02 MHz
+*   Rs = 5 ohm (motional resistance, high-Q crystal)
+*   Cp = 4 pF (package/shunt capacitance)
+*--------------------------------------------------------------
+Lx   xin   xs1   0.1u
+Cx   xs1   xs2   347p
+Rx   xs2   xout  5
+Cp   xin   xout  4p
+
+*--------------------------------------------------------------
+* COLPITTS OSCILLATOR — 27 MHz
+*--------------------------------------------------------------
+.model QNPN NPN(BF=100 IS=1e-14 VAF=120 CJC=3p CJE=6p
++  TF=0.3n TR=8n RB=10 RC=1 RE=0.5)
+
+* Bias: voltage divider sets Q-point
+R1   vcc    base1  15k
+R2   base1  0      6.8k
+Re   emit1  0      220
+
+* Bypass capacitor on emitter (allows RF while setting DC bias)
+Ce   emit1  0      1n
+
+* Collector: RFC to VCC + tuned tank at 27 MHz
+*   RFC blocks RF, passes DC
+Lrfc  vcc   coll1  4.7u
+
+* Tank circuit at collector: L=0.15uH, C=234pF -> ~27 MHz
+Ltank  coll1  ct1  0.15u
+Ctank  ct1    0    234p
+Rtank  ct1    0    5k
+
+* Colpitts feedback: capacitive divider from collector to emitter
+* Crystal goes between the collector tap and the base
+C1   coll1  xin   22p
+Rkick  kick  xin   10k
+C2   xout   emit1  47p
+
+* Connect crystal output to base through DC-blocking cap
+Ccoup1  xout  base1  100p
+
+* Transistor Q1
+Q1  coll1  base1  emit1  QNPN
+
+*--------------------------------------------------------------
+* COUPLING — oscillator to multiplier
+*--------------------------------------------------------------
+Cc   coll1  min   4.7p
+
+*--------------------------------------------------------------
+* x4 FREQUENCY MULTIPLIER — 27 MHz -> 108 MHz
+*--------------------------------------------------------------
+* Class-C amplifier: low bias, conducts only on signal peaks.
+* Output tank tuned to 4th harmonic.
+* The nonlinear conduction generates harmonics; the tank
+* selects the 4th.
+
+* Input coupling and bias
+Rin    min    mbase  470
+Rbias  mbase  0      1.5k
+Cbias  mbase  0      100p
+
+* Emitter
+Rem    memit  0      68
+Cem    memit  0      100p
+
+* Collector: RFC + tank tuned to ~108 MHz
+*   L=10nH, C=217pF -> f = 108 MHz
+Lrfc2  vcc    mcoll  4.7u
+Lout   mcoll  mct    10n
+Cout   mct    0      217p
+Rout   mct    0      2k
+
+* Transistor Q2
+Q2  mcoll  mbase  memit  QNPN
+
+* Output coupling to 50 ohm load
+Cload  mcoll  output  4.7p
+Rload  output 0       50
+
+*--------------------------------------------------------------
+* ANALYSIS — runs from .control block
+*--------------------------------------------------------------
+
+.control
+  set filetype = ascii
+
+  echo "============================================="
+  echo "Pioneer 0/1 Transmitter — 108 MHz Oscillator"
+  echo "============================================="
+  echo ""
+
+  * Transient analysis: 500 ns with 0.1 ns step
+  echo "Running transient analysis (500 ns)..."
+  tran 0.1n 500n uic
+  echo "Transient complete."
+  echo ""
+
+  * Write waveform data
+  wrdata oscillator_transient.dat v(coll1) v(output)
+  echo "Wrote: oscillator_transient.dat"
+
+  * Measure oscillator swing at collector
+  meas tran coll_max MAX v(coll1) FROM=100n TO=500n
+  meas tran coll_min MIN v(coll1) FROM=100n TO=500n
+  let coll_pp = coll_max - coll_min
+  echo ""
+  echo "=== OSCILLATOR (collector) ==="
+  print coll_pp
+  print coll_max
+  print coll_min
+
+  * Measure output amplitude
+  meas tran out_pp PP v(output) FROM=100n TO=500n
+  echo ""
+  echo "=== OUTPUT (50 ohm load) ==="
+  print out_pp
+
+  * Frequency measurement: find rising edges at collector
+  * Use a threshold between min and max
+  let vthr = (coll_max + coll_min) / 2
+  echo ""
+  echo "=== FREQUENCY ==="
+  print vthr
+  echo "(If measurement fails, inspect oscillator_transient.dat manually.)"
+  echo "(Oscillator startup in SPICE may require longer simulation time.)"
+
+  echo ""
+
+  * AC small-signal analysis
+  echo "Running AC analysis (1 MHz to 200 MHz)..."
+  ac dec 100 1meg 200meg
+  echo "AC complete."
+
+  * wrdata for AC (magnitude and phase at output)
+  wrdata oscillator_ac.dat v(output)
+  echo "Wrote: oscillator_ac.dat"
+
+  echo ""
+  echo "============================================="
+  echo "Simulation complete."
+  echo "  oscillator_transient.dat — collector + output waveforms"
+  echo "  oscillator_ac.dat        — frequency response"
+  echo ""
+  echo "  Nominal oscillator: 27.015 MHz"
+  echo "  Nominal output:     108.06 MHz (x4 harmonic)"
+  echo "============================================="
+
+  quit
+.endc
+
+.end

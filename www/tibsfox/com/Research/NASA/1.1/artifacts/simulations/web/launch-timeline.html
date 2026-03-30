@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 0 — Launch-to-Explosion Timeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 15px;
+  }
+  h1 {
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: #4488cc;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 15px;
+    max-width: 1100px;
+    width: 100%;
+  }
+  .trajectory-panel {
+    flex: 1;
+    position: relative;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  canvas { display: block; }
+  .telemetry-panel {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .telem-block {
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .telem-block h3 {
+    font-size: 10px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #1a2040;
+    padding-bottom: 4px;
+  }
+  .telem-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 2px 0;
+  }
+  .telem-row .label { color: #667788; }
+  .telem-row .value { color: #88ccff; font-weight: bold; }
+  .telem-row .value.warning { color: #ffaa00; }
+  .telem-row .value.danger { color: #ff4444; }
+  .telem-row .value.nominal { color: #44ff88; }
+  .engine-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .status-light {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 1px solid #333;
+  }
+  .status-light.green { background: #44ff88; box-shadow: 0 0 6px #44ff88; }
+  .status-light.yellow { background: #ffaa00; box-shadow: 0 0 6px #ffaa00; }
+  .status-light.red { background: #ff4444; box-shadow: 0 0 6px #ff4444; }
+  .status-light.off { background: #222; }
+  .controls-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  button {
+    background: #1a2040;
+    color: #88ccff;
+    border: 1px solid #2a3060;
+    padding: 5px 14px;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+  button:hover { background: #2a3060; }
+  button.active { border-color: #4488cc; box-shadow: 0 0 8px rgba(68,136,204,0.3); }
+  .speed-buttons { display: flex; gap: 4px; }
+  .event-log {
+    max-height: 140px;
+    overflow-y: auto;
+    font-size: 10px;
+    line-height: 1.5;
+    scrollbar-width: thin;
+    scrollbar-color: #2a3060 #0a0e1a;
+  }
+  .event-log div { padding: 1px 0; }
+  .event-log .event-time { color: #4488cc; }
+  .event-log .event-nominal { color: #44ff88; }
+  .event-log .event-warning { color: #ffaa00; }
+  .event-log .event-critical { color: #ff4444; }
+</style>
+</head>
+<body>
+
+<h1>Pioneer 0 -- Launch Timeline</h1>
+<div class="subtitle">Thor-Able 1 | August 17, 1958 | Cape Canaveral LC-17A | 77-Second Flight</div>
+
+<div class="main-container">
+  <!-- Trajectory canvas -->
+  <div class="trajectory-panel">
+    <canvas id="trajectory" width="700" height="600"></canvas>
+  </div>
+
+  <!-- Telemetry panel -->
+  <div class="telemetry-panel">
+    <div class="telem-block">
+      <h3>Mission Clock</h3>
+      <div style="font-size: 28px; color: #88ccff; text-align: center; padding: 4px 0;" id="missionClock">
+        T+00.0
+      </div>
+    </div>
+
+    <div class="telem-block">
+      <h3>Flight Data</h3>
+      <div class="telem-row"><span class="label">Altitude</span><span class="value" id="tAlt">0 m</span></div>
+      <div class="telem-row"><span class="label">Velocity</span><span class="value" id="tVel">0 m/s</span></div>
+      <div class="telem-row"><span class="label">Acceleration</span><span class="value" id="tAccel">0.0 g</span></div>
+      <div class="telem-row"><span class="label">Downrange</span><span class="value" id="tDown">0 m</span></div>
+      <div class="telem-row"><span class="label">Dyn. Pressure</span><span class="value" id="tQ">0 kPa</span></div>
+      <div class="telem-row"><span class="label">Mass</span><span class="value" id="tMass">51,095 kg</span></div>
+    </div>
+
+    <div class="telem-block">
+      <h3>Engine Status</h3>
+      <div class="engine-status">
+        <div class="status-light off" id="engineLight"></div>
+        <span id="engineStatus" style="font-size: 12px;">PRE-IGNITION</span>
+      </div>
+      <div class="telem-row" style="margin-top: 6px;">
+        <span class="label">Thrust</span><span class="value" id="tThrust">0 kN</span>
+      </div>
+      <div class="telem-row">
+        <span class="label">Turbopump</span><span class="value nominal" id="tPump">STANDBY</span>
+      </div>
+    </div>
+
+    <div class="telem-block">
+      <h3>Event Log</h3>
+      <div class="event-log" id="eventLog"></div>
+    </div>
+
+    <div class="controls-bar">
+      <button id="btnPlayPause" class="active">PLAY</button>
+      <button id="btnReset">RESET</button>
+      <div class="speed-buttons">
+        <button class="speed-btn active" data-speed="1">1x</button>
+        <button class="speed-btn" data-speed="2">2x</button>
+        <button class="speed-btn" data-speed="5">5x</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// Pioneer 0 Launch Timeline — Interactive Simulation
+// ============================================================
+
+const canvas = document.getElementById('trajectory');
+const ctx = canvas.getContext('2d');
+const CW = canvas.width;
+const CH = canvas.height;
+
+// State
+let missionTime = -5;  // start at T-5 for countdown
+let playing = true;
+let timeScale = 1;
+let lastFrame = 0;
+
+// Flight events (logged once)
+const events = [
+  { t: -5, msg: 'Countdown sequence initiated', cls: 'event-nominal' },
+  { t: 0, msg: 'IGNITION -- LR-79 main engine start', cls: 'event-nominal' },
+  { t: 0.3, msg: 'LIFTOFF -- all clamps released', cls: 'event-nominal' },
+  { t: 10, msg: 'Gravity turn initiated', cls: 'event-nominal' },
+  { t: 52, msg: 'MAX-Q -- peak dynamic pressure', cls: 'event-warning' },
+  { t: 73.6, msg: 'TURBOPUMP FAILURE -- bearing seizure', cls: 'event-critical' },
+  { t: 74.0, msg: 'Thrust cutoff -- propellant flow ceased', cls: 'event-critical' },
+  { t: 75.5, msg: 'Vehicle tumbling -- aerodynamic breakup', cls: 'event-critical' },
+  { t: 77.0, msg: 'RANGE SAFETY DESTRUCT -- RSO command sent', cls: 'event-critical' },
+  { t: 78.0, msg: 'Signal lost -- mission terminated', cls: 'event-critical' },
+];
+let loggedEvents = new Set();
+
+// Trajectory data (pre-computed, matching Python simulation)
+// Simple physics model for real-time display
+const THRUST = 667000;
+const MASS_INIT = 51095;
+const MASS_RATE = 175;
+const G = 9.81;
+const RHO_SL = 1.225;
+const H_SCALE = 8500;
+const CD = 0.3;
+const AREA = Math.PI * (2.44/2) * (2.44/2);
+
+function computeState(t) {
+  if (t <= 0) return { alt: 0, vel: 0, accel: 0, downrange: 0, q: 0, mass: MASS_INIT, thrust: 0 };
+
+  // Numerical integration with small steps
+  const dt = 0.1;
+  let alt = 0, vx = 0, vy = 0, x = 0, mass = MASS_INIT;
+  let accel = 0, q = 0;
+
+  for (let ti = 0; ti < t; ti += dt) {
+    const tCurr = Math.min(ti, t);
+    const rho = RHO_SL * Math.exp(-alt / H_SCALE);
+    const v = Math.sqrt(vx*vx + vy*vy);
+    q = 0.5 * rho * v * v;
+    const drag = 0.5 * rho * v * v * CD * AREA;
+
+    let thrustMag = 0;
+    let tx = 0, ty = 0;
+
+    if (tCurr <= 73.6) {
+      thrustMag = THRUST + (758000 - THRUST) * (1 - Math.exp(-alt / H_SCALE));
+
+      if (tCurr < 10) {
+        tx = 0; ty = thrustMag;
+      } else {
+        const pitch = Math.min((tCurr - 10) * 0.012, 0.436);
+        tx = thrustMag * Math.sin(pitch);
+        ty = thrustMag * Math.cos(pitch);
+      }
+      mass -= MASS_RATE * dt;
+    }
+
+    let dragX = 0, dragY = 0;
+    if (v > 0) {
+      dragX = -drag * vx / v;
+      dragY = -drag * vy / v;
+    }
+
+    const ax = (tx + dragX) / mass;
+    const ay = (ty + dragY) / mass - G;
+    accel = Math.sqrt(ax*ax + (ay+G)*(ay+G)) / G;  // in g units
+
+    vx += ax * dt;
+    vy += ay * dt;
+    x += vx * dt;
+    alt += vy * dt;
+    if (alt < 0) { alt = 0; vy = 0; }
+  }
+
+  return {
+    alt, vel: Math.sqrt(vx*vx + vy*vy), accel,
+    downrange: x, q, mass,
+    thrust: t <= 73.6 ? THRUST / 1000 : 0,
+    vx, vy
+  };
+}
+
+// Cache trajectory for smooth rendering
+const trajectoryCache = [];
+for (let t = 0; t <= 80; t += 0.2) {
+  trajectoryCache.push({ t, ...computeState(t) });
+}
+
+function getState(t) {
+  if (t <= 0) return { alt: 0, vel: 0, accel: 0, downrange: 0, q: 0, mass: MASS_INIT, thrust: 0 };
+  const idx = Math.min(Math.floor(t / 0.2), trajectoryCache.length - 1);
+  return trajectoryCache[idx];
+}
+
+// Explosion particles
+let particles = [];
+let explosionTriggered = false;
+
+function triggerExplosion(state) {
+  if (explosionTriggered) return;
+  explosionTriggered = true;
+
+  for (let i = 0; i < 200; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 20 + Math.random() * 150;
+    particles.push({
+      x: state.downrange,
+      y: state.alt,
+      vx: Math.cos(angle) * speed + (Math.random() - 0.5) * 50,
+      vy: Math.sin(angle) * speed,
+      life: 1.0,
+      decay: 0.005 + Math.random() * 0.02,
+      size: 1 + Math.random() * 4,
+      type: Math.random() < 0.3 ? 'fire' : (Math.random() < 0.5 ? 'smoke' : 'debris')
+    });
+  }
+}
+
+// ============================================================
+// RENDERING
+// ============================================================
+
+function drawTrajectory() {
+  // Clear
+  ctx.fillStyle = '#0a0e1a';
+  ctx.fillRect(0, 0, CW, CH);
+
+  // Coordinate mapping
+  const maxAlt = 20000;    // 20 km
+  const maxDown = 8000;    // 8 km downrange
+  const margin = { top: 40, bottom: 50, left: 65, right: 30 };
+
+  const plotW = CW - margin.left - margin.right;
+  const plotH = CH - margin.top - margin.bottom;
+
+  function toScreen(downrange, altitude) {
+    return {
+      sx: margin.left + (downrange / maxDown) * plotW,
+      sy: margin.top + plotH - (altitude / maxAlt) * plotH
+    };
+  }
+
+  // Grid
+  ctx.strokeStyle = '#151a30';
+  ctx.lineWidth = 0.5;
+
+  // Altitude grid (every 2 km)
+  for (let alt = 0; alt <= maxAlt; alt += 2000) {
+    const { sy } = toScreen(0, alt);
+    ctx.beginPath();
+    ctx.moveTo(margin.left, sy);
+    ctx.lineTo(CW - margin.right, sy);
+    ctx.stroke();
+    ctx.fillStyle = '#334455';
+    ctx.font = '10px Courier New';
+    ctx.textAlign = 'right';
+    ctx.fillText(`${alt/1000} km`, margin.left - 8, sy + 4);
+  }
+
+  // Downrange grid (every 1 km)
+  for (let d = 0; d <= maxDown; d += 1000) {
+    const { sx } = toScreen(d, 0);
+    ctx.beginPath();
+    ctx.moveTo(sx, margin.top);
+    ctx.lineTo(sx, CH - margin.bottom);
+    ctx.stroke();
+    ctx.fillStyle = '#334455';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${d/1000}`, sx, CH - margin.bottom + 15);
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#556677';
+  ctx.font = '11px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('Downrange (km)', CW / 2, CH - 8);
+
+  ctx.save();
+  ctx.translate(14, CH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Altitude (km)', 0, 0);
+  ctx.restore();
+
+  // Title
+  ctx.fillStyle = '#4488cc';
+  ctx.font = 'bold 12px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('TRAJECTORY — ALTITUDE vs DOWNRANGE', CW / 2, 20);
+
+  // Atmosphere layers (faint background)
+  const tropoTop = toScreen(0, 12000).sy;
+  const stratoTop = toScreen(0, 20000).sy;
+  ctx.fillStyle = 'rgba(30, 50, 80, 0.08)';
+  ctx.fillRect(margin.left, tropoTop, plotW, CH - margin.bottom - tropoTop);
+  ctx.fillStyle = '#1a2540';
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'left';
+  ctx.fillText('Troposphere', margin.left + 5, CH - margin.bottom - 5);
+
+  // Draw trajectory trail
+  ctx.beginPath();
+  ctx.strokeStyle = '#4488cc';
+  ctx.lineWidth = 2.5;
+  ctx.shadowColor = '#4488cc';
+  ctx.shadowBlur = 6;
+
+  let firstPoint = true;
+  const tMax = Math.min(Math.max(missionTime, 0), 80);
+
+  for (let ti = 0; ti <= tMax; ti += 0.2) {
+    const s = getState(ti);
+    const { sx, sy } = toScreen(Math.max(0, s.downrange), Math.max(0, s.alt));
+    if (firstPoint) {
+      ctx.moveTo(sx, sy);
+      firstPoint = false;
+    } else {
+      ctx.lineTo(sx, sy);
+    }
+  }
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Current position marker (rocket)
+  if (missionTime > 0 && missionTime < 78) {
+    const state = getState(tMax);
+    const { sx, sy } = toScreen(Math.max(0, state.downrange), Math.max(0, state.alt));
+
+    if (missionTime < 77) {
+      // Draw rocket icon
+      ctx.save();
+      ctx.translate(sx, sy);
+
+      // Rocket body
+      let angle = Math.atan2(state.vy || 0, state.vx || 1);
+      if (missionTime > 73.6) {
+        // Tumbling
+        angle += (missionTime - 73.6) * 8;
+      }
+      ctx.rotate(-angle + Math.PI/2);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.moveTo(0, -12);
+      ctx.lineTo(-4, 6);
+      ctx.lineTo(4, 6);
+      ctx.closePath();
+      ctx.fill();
+
+      // Engine flame
+      if (missionTime <= 73.6) {
+        ctx.fillStyle = '#ff8800';
+        ctx.beginPath();
+        ctx.moveTo(-3, 6);
+        ctx.lineTo(0, 6 + 8 + Math.random() * 5);
+        ctx.lineTo(3, 6);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.fillStyle = '#ffcc44';
+        ctx.beginPath();
+        ctx.moveTo(-1.5, 6);
+        ctx.lineTo(0, 6 + 5 + Math.random() * 3);
+        ctx.lineTo(1.5, 6);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  // Event markers
+  const markerEvents = [
+    { t: 0.3, label: 'Liftoff', color: '#44ff88' },
+    { t: 10, label: 'Gravity Turn', color: '#44ff88' },
+    { t: 52, label: 'Max-Q', color: '#ffaa00' },
+    { t: 73.6, label: 'Pump Fail', color: '#ff4444' },
+    { t: 77, label: 'BREAKUP', color: '#ff4444' },
+  ];
+
+  for (const ev of markerEvents) {
+    if (missionTime >= ev.t) {
+      const s = getState(ev.t);
+      const { sx, sy } = toScreen(Math.max(0, s.downrange), Math.max(0, s.alt));
+
+      // Diamond marker
+      ctx.fillStyle = ev.color;
+      ctx.beginPath();
+      ctx.moveTo(sx, sy - 5);
+      ctx.lineTo(sx + 4, sy);
+      ctx.lineTo(sx, sy + 5);
+      ctx.lineTo(sx - 4, sy);
+      ctx.closePath();
+      ctx.fill();
+
+      // Label
+      ctx.fillStyle = ev.color;
+      ctx.font = '9px Courier New';
+      ctx.textAlign = 'left';
+      ctx.fillText(ev.label, sx + 8, sy + 3);
+    }
+  }
+
+  // Explosion particles
+  if (missionTime >= 77) {
+    if (!explosionTriggered) {
+      triggerExplosion(getState(77));
+    }
+  }
+
+  // Update and draw particles
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.x += p.vx * 0.016 * timeScale;
+    p.y += p.vy * 0.016 * timeScale;
+    p.vy -= 9.81 * 0.016 * timeScale * 0.5;
+    p.life -= p.decay * timeScale;
+
+    if (p.life <= 0) {
+      particles.splice(i, 1);
+      continue;
+    }
+
+    const { sx, sy } = toScreen(p.x, Math.max(0, p.y));
+
+    if (p.type === 'fire') {
+      const r = Math.round(255 * p.life);
+      const g = Math.round(150 * p.life * p.life);
+      ctx.fillStyle = `rgba(${r},${g},0,${p.life})`;
+    } else if (p.type === 'smoke') {
+      const v = Math.round(80 * p.life);
+      ctx.fillStyle = `rgba(${v},${v},${v},${p.life * 0.5})`;
+    } else {
+      ctx.fillStyle = `rgba(200,200,200,${p.life})`;
+    }
+
+    ctx.beginPath();
+    ctx.arc(sx, sy, p.size * p.life, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Launch pad marker
+  const { sx: padX, sy: padY } = toScreen(0, 0);
+  ctx.fillStyle = '#667788';
+  ctx.fillRect(padX - 8, padY - 2, 16, 4);
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('LC-17A', padX, padY + 14);
+}
+
+function updateTelemetry() {
+  const t = Math.max(missionTime, 0);
+  const state = getState(t);
+
+  // Mission clock
+  const clockEl = document.getElementById('missionClock');
+  if (missionTime < 0) {
+    clockEl.textContent = `T${missionTime.toFixed(1)}`;
+    clockEl.style.color = '#ffaa00';
+  } else {
+    clockEl.textContent = `T+${missionTime.toFixed(1)}`;
+    clockEl.style.color = missionTime >= 73.6 ? '#ff4444' : '#88ccff';
+  }
+
+  // Flight data
+  document.getElementById('tAlt').textContent = `${Math.round(state.alt).toLocaleString()} m`;
+  document.getElementById('tVel').textContent = `${Math.round(state.vel)} m/s`;
+  document.getElementById('tAccel').textContent = `${state.accel.toFixed(1)} g`;
+  document.getElementById('tDown').textContent = `${Math.round(state.downrange).toLocaleString()} m`;
+  document.getElementById('tQ').textContent = `${(state.q / 1000).toFixed(1)} kPa`;
+  document.getElementById('tMass').textContent = `${Math.round(state.mass).toLocaleString()} kg`;
+
+  // Colorize based on flight phase
+  const qEl = document.getElementById('tQ');
+  if (state.q > 25000) qEl.className = 'value warning';
+  else if (state.q > 30000) qEl.className = 'value danger';
+  else qEl.className = 'value';
+
+  // Engine status
+  const light = document.getElementById('engineLight');
+  const statusEl = document.getElementById('engineStatus');
+  const thrustEl = document.getElementById('tThrust');
+  const pumpEl = document.getElementById('tPump');
+
+  if (missionTime < 0) {
+    light.className = 'status-light off';
+    statusEl.textContent = 'PRE-IGNITION';
+    thrustEl.textContent = '0 kN';
+    pumpEl.textContent = 'STANDBY';
+    pumpEl.className = 'value';
+  } else if (missionTime <= 73.6) {
+    light.className = 'status-light green';
+    statusEl.textContent = 'LR-79 FIRING';
+    statusEl.style.color = '#44ff88';
+    thrustEl.textContent = `${Math.round(state.thrust)} kN`;
+    pumpEl.textContent = 'NOMINAL';
+    pumpEl.className = 'value nominal';
+  } else if (missionTime <= 77) {
+    light.className = 'status-light red';
+    statusEl.textContent = 'BEARING FAILURE';
+    statusEl.style.color = '#ff4444';
+    thrustEl.textContent = '0 kN';
+    pumpEl.textContent = 'SEIZED';
+    pumpEl.className = 'value danger';
+  } else {
+    light.className = 'status-light off';
+    statusEl.textContent = 'VEHICLE LOST';
+    statusEl.style.color = '#ff4444';
+    thrustEl.textContent = '---';
+    pumpEl.textContent = 'DESTROYED';
+    pumpEl.className = 'value danger';
+  }
+
+  // Event log
+  const logEl = document.getElementById('eventLog');
+  for (const ev of events) {
+    if (missionTime >= ev.t && !loggedEvents.has(ev.t)) {
+      loggedEvents.add(ev.t);
+      const div = document.createElement('div');
+      const timeStr = ev.t >= 0 ? `T+${ev.t.toFixed(1)}` : `T${ev.t.toFixed(1)}`;
+      div.innerHTML = `<span class="event-time">[${timeStr}]</span> <span class="${ev.cls}">${ev.msg}</span>`;
+      logEl.appendChild(div);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+  }
+}
+
+// ============================================================
+// ANIMATION LOOP
+// ============================================================
+
+function animate(timestamp) {
+  if (!lastFrame) lastFrame = timestamp;
+  const dt = (timestamp - lastFrame) / 1000;
+  lastFrame = timestamp;
+
+  if (playing) {
+    missionTime += dt * timeScale;
+    if (missionTime > 90) {
+      missionTime = 90;
+      playing = false;
+      document.getElementById('btnPlayPause').classList.remove('active');
+      document.getElementById('btnPlayPause').textContent = 'PLAY';
+    }
+  }
+
+  drawTrajectory();
+  updateTelemetry();
+
+  requestAnimationFrame(animate);
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+
+document.getElementById('btnPlayPause').addEventListener('click', function() {
+  playing = !playing;
+  this.classList.toggle('active', playing);
+  this.textContent = playing ? 'PLAYING' : 'PLAY';
+  if (playing && missionTime >= 90) {
+    missionTime = -5;
+    particles = [];
+    explosionTriggered = false;
+    loggedEvents.clear();
+    document.getElementById('eventLog').innerHTML = '';
+  }
+});
+
+document.getElementById('btnReset').addEventListener('click', function() {
+  missionTime = -5;
+  playing = true;
+  particles = [];
+  explosionTriggered = false;
+  loggedEvents.clear();
+  document.getElementById('eventLog').innerHTML = '';
+  document.getElementById('btnPlayPause').classList.add('active');
+  document.getElementById('btnPlayPause').textContent = 'PLAYING';
+});
+
+document.querySelectorAll('.speed-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    timeScale = parseInt(this.dataset.speed);
+  });
+});
+
+// Start
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>

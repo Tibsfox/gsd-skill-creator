@@ -1,0 +1,213 @@
+* Pioneer 2 TV Camera — Vidicon Tube Deflection Circuit
+* ====================================================
+* NASA Mission Series v1.3 — Pioneer 2
+*
+* Scan deflection oscillators for the vidicon camera tube.
+* Pioneer 2 carried the first TV camera on a Pioneer spacecraft.
+* The camera was a crude vidicon system intended to photograph
+* the Moon from lunar orbit. Since the third stage never fired,
+* the camera could only point back at Earth from 1,550 km.
+*
+* This circuit generates the two sawtooth waveforms that drive
+* the vidicon tube's deflection coils:
+*   - Horizontal deflection: ~15.75 kHz (line rate)
+*   - Vertical deflection:   ~30 Hz (frame rate, ~525 lines/frame)
+*
+* Each oscillator uses a UJT (unijunction transistor) relaxation
+* circuit — the standard sawtooth generator topology of the era.
+* A capacitor charges through a resistor; when it reaches the
+* UJT's peak voltage, the UJT fires and rapidly discharges the
+* capacitor through the deflection coil, producing the fast
+* retrace (flyback). The slow charge ramp is the forward scan.
+*
+* Reference: RCA vidicon camera tubes (1950s-1960s)
+* Active devices: 2N2646 unijunction transistor (period-correct)
+* Deflection coils: modeled as inductors with series resistance
+
+*--------------------------------------------------------------
+* POWER SUPPLY
+*--------------------------------------------------------------
+Vcc   vcc   0   DC 20
+Vneg  vneg  0   DC -20
+
+*--------------------------------------------------------------
+* UJT MODEL — 2N2646 (silicon unijunction transistor)
+*--------------------------------------------------------------
+* The UJT is modeled as a programmable unijunction using a
+* PUT (2N6027 equivalent) approximation. For ngspice, we use
+* a simplified behavioral model with an SCR latch.
+*
+* Intrinsic standoff ratio (eta) = 0.56 typical for 2N2646
+* Peak voltage Vp = eta * Vbb + 0.7 = 0.56 * 20 + 0.7 = 11.9V
+* Valley voltage Vv ~ 2V
+* Valley current Iv ~ 4 mA
+
+*--------------------------------------------------------------
+* HORIZONTAL DEFLECTION OSCILLATOR — 15.75 kHz
+*--------------------------------------------------------------
+* Timing: f = 1 / (R*C * ln(1/(1-eta)))
+* For f = 15.75 kHz, eta = 0.56:
+*   R*C = 1/(15750 * ln(1/0.44)) = 1/(15750 * 0.821) = 77.3 us
+*   R_h = 7.7k, C_h = 10 nF -> RC = 77 us
+*
+* UJT relaxation oscillator implemented with discrete components:
+* Op-amp integrator + comparator reset (more ngspice-friendly)
+
+* --- Horizontal sawtooth generator (op-amp based) ---
+* Comparator with hysteresis sets the reset threshold
+* Integrator ramps upward; when it hits threshold, comparator
+* fires and resets the integrator via a discharge transistor.
+
+* Current source charges C_h linearly (better linearity than RC)
+R_h1    vcc     h_chrg    7.7k
+C_h     h_chrg  0         10n   IC=0
+
+* Discharge switch: NPN transistor fires when voltage reaches Vp
+* Using a Schmitt trigger (two-transistor regenerative comparator)
+.model NPN_SW NPN(BF=100 IS=1e-14 CJC=2p CJE=4p TF=1n)
+.model PNP_SW PNP(BF=100 IS=1e-14 CJC=2p CJE=4p TF=1n)
+
+* Threshold detector: voltage divider sets trip point at ~11.9V
+* R divider: 10k/12.7k from h_chrg to ground via transistor base
+R_hth1  h_chrg   h_comp_b   10k
+R_hth2  h_comp_b 0          15k
+* Comparator transistor — triggers discharge
+Q_hcomp h_disc_b h_comp_b h_comp_e NPN_SW
+R_hce   h_comp_e 0         1k
+R_hcb   vcc      h_disc_b  4.7k
+
+* Discharge transistor — dumps C_h when triggered
+Q_hdisc h_chrg   h_disc_b  0  NPN_SW
+R_hdlim h_disc_b 0         1k
+
+* Output buffer for deflection coil drive
+* Sawtooth at h_chrg drives horizontal deflection
+R_hout  h_chrg   h_buf     1k
+* Horizontal deflection coil (modeled as inductor + resistance)
+L_hdefl h_buf    h_coil_r  2.2m
+R_hcoil h_coil_r 0         15
+
+*--------------------------------------------------------------
+* VERTICAL DEFLECTION OSCILLATOR — 30 Hz
+*--------------------------------------------------------------
+* Timing: f = 30 Hz
+*   R*C = 1/(30 * 0.821) = 40.6 ms
+*   R_v = 40.6k, C_v = 1 uF -> RC = 40.6 ms
+
+* Vertical ramp generator (same topology, slower)
+R_v1    vcc     v_chrg    40.6k
+C_v     v_chrg  0         1u    IC=0
+
+* Threshold detector for vertical
+R_vth1  v_chrg   v_comp_b   10k
+R_vth2  v_comp_b 0          15k
+Q_vcomp v_disc_b v_comp_b v_comp_e NPN_SW
+R_vce   v_comp_e 0         1k
+R_vcb   vcc      v_disc_b  4.7k
+
+* Discharge transistor — vertical retrace
+Q_vdisc v_chrg   v_disc_b  0  NPN_SW
+R_vdlim v_disc_b 0         1k
+
+* Output buffer for vertical deflection coil
+R_vout  v_chrg   v_buf     1k
+* Vertical deflection coil (larger inductance, slower scan)
+L_vdefl v_buf    v_coil_r  22m
+R_vcoil v_coil_r 0         45
+
+*--------------------------------------------------------------
+* BLANKING PULSE GENERATOR
+*--------------------------------------------------------------
+* During retrace (fast discharge), generate a blanking pulse
+* to turn off the vidicon beam. Differentiate the sawtooth
+* falling edge through a small capacitor.
+C_blank h_chrg   blank_r   100p
+R_blank blank_r  0         10k
+
+*--------------------------------------------------------------
+* INITIAL CONDITIONS
+*--------------------------------------------------------------
+.ic V(h_chrg)=0 V(v_chrg)=0
+
+*--------------------------------------------------------------
+* ANALYSIS
+*--------------------------------------------------------------
+
+* Transient: show ~2 complete horizontal lines within the
+* vertical ramp. Run for 200 us to see several H cycles.
+.tran 0.1u 200u uic
+
+*--------------------------------------------------------------
+* CONTROL BLOCK
+*--------------------------------------------------------------
+.control
+  echo "================================================"
+  echo "Pioneer 2 TV Camera — Vidicon Deflection Circuit"
+  echo "================================================"
+  echo ""
+  echo "Horizontal scan: ~15.75 kHz (63.5 us/line)"
+  echo "Vertical scan:   ~30 Hz     (33.3 ms/frame)"
+  echo "Lines per frame:  ~525"
+  echo ""
+
+  * Run transient analysis — show several horizontal scans
+  echo "Running transient analysis (200 us, 0.1 us step)..."
+  tran 0.1u 200u uic
+  echo "Transient analysis complete."
+  echo ""
+
+  * Write horizontal and vertical deflection waveforms
+  wrdata tv_deflection_horiz.dat v(h_chrg) v(h_buf)
+  wrdata tv_deflection_vert.dat v(v_chrg) v(v_buf)
+  wrdata tv_blanking.dat v(blank_r)
+  echo "Waveform data written:"
+  echo "  tv_deflection_horiz.dat — horizontal sawtooth + coil drive"
+  echo "  tv_deflection_vert.dat  — vertical sawtooth + coil drive"
+  echo "  tv_blanking.dat         — blanking pulses"
+  echo ""
+
+  * Measure horizontal scan frequency
+  meas tran h_period TRIG v(h_chrg) VAL=6.0 RISE=2 TARG v(h_chrg) VAL=6.0 RISE=3
+  let h_freq = 1.0 / h_period
+  echo "Horizontal scan frequency:"
+  print h_freq
+  echo ""
+
+  * Measure horizontal sawtooth amplitude
+  meas tran h_peak MAX v(h_chrg) FROM=50u TO=200u
+  meas tran h_valley MIN v(h_chrg) FROM=50u TO=200u
+  let h_swing = h_peak - h_valley
+  echo "Horizontal deflection swing:"
+  print h_swing
+  echo ""
+
+  * Show deflection coil current (voltage across R_hcoil / 15 ohms)
+  let i_hcoil = v(h_buf, h_coil_r) / 15
+  echo "Horizontal coil drive amplitude calculated."
+  echo ""
+
+  * Run a longer simulation to show vertical ramp starting
+  echo "Running extended transient (5 ms) to show vertical ramp..."
+  tran 1u 5m uic
+  wrdata tv_deflection_extended.dat v(h_chrg) v(v_chrg)
+  echo "Extended data written to tv_deflection_extended.dat"
+  echo ""
+
+  echo "================================================"
+  echo "Simulation complete."
+  echo ""
+  echo "The horizontal sawtooth drives the beam left-to-right"
+  echo "at ~15.75 kHz. The vertical sawtooth drives top-to-"
+  echo "bottom at ~30 Hz. Together they produce the raster"
+  echo "scan pattern that the vidicon camera uses to read"
+  echo "the photoconductive target."
+  echo ""
+  echo "Pioneer 2's camera was the first TV camera on a"
+  echo "Pioneer spacecraft. It never reached the Moon —"
+  echo "but the camera technology worked."
+  echo "================================================"
+
+  quit
+.endc
+
+.end

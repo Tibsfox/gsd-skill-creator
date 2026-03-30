@@ -1,0 +1,178 @@
+* Pioneer 3: Dual Geiger-Mueller Tube Radiation Detector
+* =========================================================================
+* Mission 1.4 — Pioneer 3 (Juno II), December 6, 1958
+* Pioneer 3 carried TWO GM tubes (Dr. James Van Allen's experiment):
+*   Tube A: Unshielded — detects all charged particles (total flux)
+*   Tube B: Shielded (1 mm lead) — detects only high-energy particles
+*                                    (penetrating inner belt radiation)
+*
+* The difference between the two readings revealed the DUAL structure
+* of the Van Allen belts — the discovery that earned Pioneer 3 its place
+* in history despite failing to reach the Moon.
+*
+* Each GM tube is modeled as:
+*   1. Neon lamp (gas discharge threshold trigger, ~65V breakdown)
+*   2. Quenching resistor (limits current, allows recovery)
+*   3. Pulse-shaping RC network (converts discharge to clean logic pulse)
+*   4. Coupling capacitor to counting circuit
+*
+* Random-interval pulses simulate radiation events via piecewise
+* voltage sources triggering the gas discharge at varying intervals.
+*
+* Run: ngspice -b dual-gm-tube.cir
+* =========================================================================
+
+* --- High Voltage Supply (typical GM tube: 300-900V, we use 100V for simulation) ---
+Vhv hv 0 DC 100
+
+* --- Neon Lamp Model ---
+* A neon lamp breaks down at ~65V and extinguishes at ~55V.
+* This models the GM tube's gas ionization avalanche.
+.model NEON SW(Vt=65 Vh=10 Ron=100 Roff=10Meg)
+
+* =========================================================================
+* TUBE A: Unshielded (detects all particles — higher count rate)
+* =========================================================================
+* The GM tube anode is held at HV through a large quenching resistor.
+* When a radiation event triggers ionization, the gas conducts briefly,
+* pulling the anode voltage down. The quenching resistor limits current
+* and allows the tube to recover (de-ionize).
+
+* Quenching resistor
+R_qa hv anode_a 10Meg
+
+* Anode capacitance (tube + wiring)
+C_a anode_a 0 5p
+
+* Radiation event simulator for Tube A (unshielded — frequent events)
+* Series of short pulses representing particle hits
+* In the Van Allen belts, rates reached thousands per second
+* We simulate with irregular pulses to show counting behavior
+V_rad_a rad_trig_a 0 PULSE(0 80 0.5m 1u 1u 10u 0.8m)
+R_trig_a rad_trig_a trig_node_a 100k
+
+* Trigger coupling — radiation pulse capacitively couples to anode
+C_trig_a trig_node_a anode_a 1p
+
+* Gas discharge switch (neon lamp model)
+S_a anode_a cathode_a anode_a 0 NEON
+
+* Cathode resistor (current sensing)
+R_ka cathode_a 0 1k
+
+* --- Pulse Shaping Network (Tube A) ---
+* Convert the raw discharge pulse into a clean digital-like pulse
+* for the counter circuit
+C_couple_a cathode_a shape_a 100p
+R_shape_a1 shape_a 0 100k
+R_shape_a2 shape_a count_a 10k
+C_shape_a count_a 0 47p
+
+* Output load (counter input impedance)
+R_out_a count_a 0 1Meg
+
+* =========================================================================
+* TUBE B: Shielded (detects only penetrating radiation — lower rate)
+* =========================================================================
+* Identical circuit but triggered at a lower rate (shielding blocks
+* low-energy particles, so only inner belt high-energy protons register)
+
+* Quenching resistor
+R_qb hv anode_b 10Meg
+
+* Anode capacitance
+C_b anode_b 0 5p
+
+* Radiation event simulator for Tube B (shielded — fewer events)
+* Longer interval between triggers = lower count rate
+V_rad_b rad_trig_b 0 PULSE(0 80 0.3m 1u 1u 10u 2.5m)
+R_trig_b rad_trig_b trig_node_b 100k
+
+* Trigger coupling
+C_trig_b trig_node_b anode_b 1p
+
+* Gas discharge switch
+S_b anode_b cathode_b anode_b 0 NEON
+
+* Cathode resistor
+R_kb cathode_b 0 1k
+
+* --- Pulse Shaping Network (Tube B) ---
+C_couple_b cathode_b shape_b 100p
+R_shape_b1 shape_b 0 100k
+R_shape_b2 shape_b count_b 10k
+C_shape_b count_b 0 47p
+
+* Output load
+R_out_b count_b 0 1Meg
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* Transient: 20 ms to see multiple pulses from both tubes
+* Step: 100 ns to resolve the fast discharge pulses
+.tran 100n 20m
+
+* =========================================================================
+* CONTROL BLOCK
+* =========================================================================
+.control
+  run
+
+  echo ""
+  echo "========================================================"
+  echo " Pioneer 3 — Dual Geiger-Mueller Tube Detector"
+  echo "========================================================"
+  echo " Tube A (unshielded): Detects ALL charged particles"
+  echo " Tube B (shielded):   Detects only high-energy (>1 MeV)"
+  echo ""
+  echo " The DIFFERENCE between A and B readings reveals the"
+  echo " dual Van Allen belt structure:"
+  echo "   - Inner belt: high-energy protons (both tubes respond)"
+  echo "   - Outer belt: lower-energy electrons (only Tube A responds)"
+  echo "   - Slot region: reduced counts in both tubes"
+  echo "========================================================"
+  echo ""
+
+  * Count pulses from Tube A (unshielded)
+  meas tran pulse_a_pp PP v(count_a) FROM=1m TO=20m
+  echo "Tube A (unshielded) output pulse amplitude (V):"
+  print pulse_a_pp
+
+  * Count pulses from Tube B (shielded)
+  meas tran pulse_b_pp PP v(count_b) FROM=1m TO=20m
+  echo "Tube B (shielded) output pulse amplitude (V):"
+  print pulse_b_pp
+
+  echo ""
+  echo "--- Waveform Plots ---"
+
+  * Plot 1: Both GM tube raw discharges
+  plot v(cathode_a) v(cathode_b)+2 xlimit 0 20m title 'Dual GM Tubes — Raw Discharge Pulses (B offset +2V for clarity)'
+
+  * Plot 2: Shaped output pulses (what the counter sees)
+  plot v(count_a) v(count_b)+0.5 xlimit 0 20m title 'Shaped Counter Pulses — Tube A (unshielded) vs Tube B (shielded)'
+
+  * Plot 3: Anode voltage showing discharge and recovery
+  plot v(anode_a) v(anode_b) xlimit 0 20m title 'GM Tube Anode Voltage — Discharge and Recovery Cycles'
+
+  * Plot 4: Zoomed view of single discharge event
+  plot v(cathode_a) v(count_a) xlimit 0 2m title 'Single GM Tube Discharge — Raw vs Shaped Pulse'
+
+  echo ""
+  echo "=== Simulation complete ==="
+  echo ""
+  echo "Pioneer 3 reached 102,322 km altitude over 38 hours."
+  echo "Van Allen's two GM tubes detected radiation peaks at:"
+  echo "  Inner belt: ~3,500 km (both tubes saturated)"
+  echo "  Outer belt: ~16,000 km (unshielded tube only)"
+  echo "  Slot region: ~7,000-10,000 km (reduced counts)"
+  echo ""
+  echo "This dual-peak structure was the DISCOVERY of the"
+  echo "Van Allen radiation belts' true dual nature."
+
+  quit
+.endc
+
+.end

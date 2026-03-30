@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 2 TV Camera — Raster Scan Simulation</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0a0a0e;
+    color: #88cc88;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* === HEADER === */
+  .header {
+    background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+    border-bottom: 2px solid #2a4a2a;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .header h1 {
+    font-size: 14px;
+    color: #00ff88;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .header .mission-info {
+    font-size: 11px;
+    color: #557755;
+  }
+
+  /* === MAIN DISPLAY === */
+  .display-area {
+    flex: 1;
+    display: flex;
+    gap: 0;
+    padding: 10px;
+    min-height: 0;
+  }
+
+  /* CRT Monitor Panel */
+  .crt-panel {
+    flex: 0 0 520px;
+    display: flex;
+    flex-direction: column;
+    background: #12120a;
+    border: 3px solid #333320;
+    border-radius: 12px;
+    padding: 15px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* CRT curvature overlay */
+  .crt-panel::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+    border-radius: 12px;
+  }
+
+  .crt-label {
+    font-size: 10px;
+    color: #445544;
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .crt-screen {
+    flex: 1;
+    position: relative;
+    background: #020204;
+    border: 2px solid #1a2a1a;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  #tvCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-rendering: pixelated;
+  }
+
+  /* Scanline overlay effect */
+  .scanlines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* Right panels */
+  .right-panels {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 10px;
+    min-width: 0;
+  }
+
+  /* Signal waveform panel */
+  .signal-panel {
+    flex: 0 0 180px;
+    background: #0a0a12;
+    border: 2px solid #1a2a3a;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .signal-label {
+    font-size: 9px;
+    color: #446688;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  #signalCanvas {
+    flex: 1;
+    width: 100%;
+    display: block;
+    background: #050510;
+    border-radius: 3px;
+  }
+
+  /* Telemetry panel */
+  .telemetry-panel {
+    flex: 0 0 auto;
+    background: #0f0f08;
+    border: 2px solid #2a2a1a;
+    border-radius: 6px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 20px;
+  }
+
+  .telem-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    padding: 2px 0;
+  }
+  .telem-label { color: #556644; }
+  .telem-value { color: #00ff88; font-weight: bold; }
+  .telem-value.warning { color: #ffaa00; }
+  .telem-value.danger { color: #ff4444; }
+
+  /* History panel — shows the last few complete frames */
+  .history-panel {
+    flex: 1;
+    background: #08080e;
+    border: 2px solid #1a1a2e;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .history-label {
+    font-size: 9px;
+    color: #445566;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .history-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+  }
+  .history-content canvas {
+    width: 100%;
+    flex: 1;
+    background: #020208;
+    border: 1px solid #1a1a2a;
+    border-radius: 3px;
+    image-rendering: pixelated;
+  }
+
+  /* === CONTROLS === */
+  .controls {
+    background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%);
+    border-top: 2px solid #2a4a2a;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+  }
+
+  .control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .control-label {
+    font-size: 10px;
+    color: #557755;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* Period-authentic knob styling */
+  .knob-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100px;
+    height: 6px;
+    background: #1a2a1a;
+    border-radius: 3px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle at 40% 35%, #4a6a4a, #2a3a2a);
+    border: 2px solid #5a7a5a;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(0,255,136,0.3);
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle at 40% 35%, #4a6a4a, #2a3a2a);
+    border: 2px solid #5a7a5a;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .btn {
+    background: #1a2a1a;
+    color: #00ff88;
+    border: 1px solid #2a4a2a;
+    padding: 6px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  .btn:hover { background: #2a4a2a; border-color: #3a6a3a; }
+  .btn.active { background: #004422; border-color: #00ff88; box-shadow: 0 0 8px rgba(0,255,136,0.3); }
+  .btn.danger { color: #ff4444; border-color: #4a2a2a; }
+  .btn.danger:hover { background: #2a1a1a; }
+
+  .speed-display {
+    font-size: 12px;
+    color: #00ff88;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  /* Status bar */
+  .status-bar {
+    font-size: 9px;
+    color: #335533;
+    margin-left: auto;
+    text-align: right;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Pioneer 2 Television Camera</h1>
+  <div class="mission-info">
+    NASA Mission v1.3 &mdash; November 8, 1958 &mdash; First Pioneer TV Camera &mdash; Thor-Able III
+  </div>
+</div>
+
+<div class="display-area">
+  <!-- CRT Monitor -->
+  <div class="crt-panel">
+    <div class="crt-label">Vidicon Camera Output &mdash; P31 Green Phosphor</div>
+    <div class="crt-screen">
+      <canvas id="tvCanvas"></canvas>
+      <div class="scanlines"></div>
+    </div>
+  </div>
+
+  <!-- Right side panels -->
+  <div class="right-panels">
+    <!-- Signal waveform -->
+    <div class="signal-panel">
+      <div class="signal-label">Composite Video Signal &mdash; Current Line</div>
+      <canvas id="signalCanvas"></canvas>
+    </div>
+
+    <!-- Telemetry -->
+    <div class="telemetry-panel">
+      <div class="telem-item">
+        <span class="telem-label">LINE</span>
+        <span class="telem-value" id="telem-line">0 / 160</span>
+      </div>
+      <div class="telem-item">
+        <span class="telem-label">FRAME</span>
+        <span class="telem-value" id="telem-frame">0</span>
+      </div>
+      <div class="telem-item">
+        <span class="telem-label">ALTITUDE</span>
+        <span class="telem-value" id="telem-alt">0 km</span>
+      </div>
+      <div class="telem-item">
+        <span class="telem-label">SIGNAL</span>
+        <span class="telem-value" id="telem-signal">-120 dBm</span>
+      </div>
+      <div class="telem-item">
+        <span class="telem-label">FREQ</span>
+        <span class="telem-value" id="telem-freq">108.06 MHz</span>
+      </div>
+      <div class="telem-item">
+        <span class="telem-label">STATUS</span>
+        <span class="telem-value" id="telem-status">ACQUIRING</span>
+      </div>
+      <div class="telem-item">
+        <span class="telem-label">ELAPSED</span>
+        <span class="telem-value" id="telem-time">T+00:00</span>
+      </div>
+      <div class="telem-item">
+        <span class="telem-label">STAGE 3</span>
+        <span class="telem-value danger" id="telem-stage3">NO IGNITION</span>
+      </div>
+    </div>
+
+    <!-- Frame history -->
+    <div class="history-panel">
+      <div class="history-label">Received Frames (oldest to newest)</div>
+      <div class="history-content">
+        <canvas id="histCanvas1"></canvas>
+        <canvas id="histCanvas2"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="control-group">
+    <button class="btn active" id="btn-play" onclick="togglePlay()">PAUSE</button>
+    <button class="btn" id="btn-reset" onclick="resetScan()">RESET</button>
+  </div>
+
+  <div class="control-group">
+    <span class="control-label">Speed</span>
+    <input type="range" id="speed-slider" min="1" max="100" value="20" oninput="updateSpeed()">
+    <span class="speed-display" id="speed-display">20x</span>
+  </div>
+
+  <div class="control-group">
+    <span class="control-label">Noise</span>
+    <input type="range" id="noise-slider" min="0" max="100" value="25" oninput="updateNoise()">
+    <span class="speed-display" id="noise-display">25%</span>
+  </div>
+
+  <div class="control-group">
+    <span class="control-label">Phosphor</span>
+    <input type="range" id="phosphor-slider" min="1" max="100" value="70" oninput="updatePhosphor()">
+    <span class="speed-display" id="phosphor-display">70%</span>
+  </div>
+
+  <div class="status-bar">
+    Pioneer 2: TV camera operational, third stage failed<br>
+    Maximum altitude: 1,550 km (target: 384,400 km)
+  </div>
+</div>
+
+<script>
+// ============================================================
+// Pioneer 2 TV Camera — Interactive Raster Scan Simulation
+// ============================================================
+// The crown jewel of the NASA Mission Series v1.3 simulations.
+//
+// Simulates the vidicon tube camera that Pioneer 2 carried —
+// the first TV camera on a Pioneer spacecraft. The raster scan
+// builds an image of Earth line by line, with phosphor persistence,
+// noise, and period-authentic CRT appearance.
+
+// --- Canvas setup ---
+const tvCanvas = document.getElementById('tvCanvas');
+const tvCtx = tvCanvas.getContext('2d');
+const sigCanvas = document.getElementById('signalCanvas');
+const sigCtx = sigCanvas.getContext('2d');
+const histCanvas1 = document.getElementById('histCanvas1');
+const histCtx1 = histCanvas1.getContext('2d');
+const histCanvas2 = document.getElementById('histCanvas2');
+const histCtx2 = histCanvas2.getContext('2d');
+
+// Image dimensions (vidicon resolution)
+const IMG_W = 200;
+const IMG_H = 160;
+const EARTH_R = 60;
+
+// Signal parameters
+const SYNC_LEVEL = 0.0;
+const BLANK_LEVEL = 0.15;
+const BLACK_LEVEL = 0.2;
+const WHITE_LEVEL = 1.0;
+
+// State
+let playing = true;
+let currentLine = 0;
+let currentFrame = 0;
+let linesPerTick = 20;  // speed control
+let noiseLevel = 0.25;
+let phosphorDecay = 0.70;
+let missionTime = 0;    // seconds
+let earthImage = null;
+let frameBuffer = null;
+let phosphorBuffer = null;
+let signalData = [];
+let frameHistory = [];
+
+// Pioneer 2 trajectory simulation
+// Ballistic arc: altitude = v0*t - 0.5*g*t^2 (simplified)
+// Peak at ~1550 km around T+22 min, total flight ~45 min
+const FLIGHT_DURATION = 45 * 60;  // 45 minutes in seconds
+const PEAK_ALT = 1550;            // km
+const PEAK_TIME = 22 * 60;        // peak at T+22 min
+
+function getAltitude(t) {
+  // Parabolic approximation of ballistic arc
+  const normalized = t / FLIGHT_DURATION;
+  // Peaks at PEAK_TIME/FLIGHT_DURATION
+  const peakNorm = PEAK_TIME / FLIGHT_DURATION;
+  // Parabola through (0,0), (peakNorm, PEAK_ALT), (1, 0)
+  const a = -PEAK_ALT / (peakNorm * (peakNorm - 1));
+  const alt = a * normalized * (normalized - 1);
+  return Math.max(0, alt);
+}
+
+function getSignalStrength(alt) {
+  // Signal strength decreases with distance squared
+  // At 1550 km: ~ -120 dBm, at ground: ~ -60 dBm
+  if (alt <= 0) return -999;
+  const base = -60;
+  const loss = 20 * Math.log10(alt / 10 + 1);
+  return Math.round(base - loss);
+}
+
+// --- Generate Earth image ---
+function generateEarth() {
+  const img = new Float32Array(IMG_H * IMG_W);
+  const cy = IMG_H / 2;
+  const cx = IMG_W / 2;
+
+  for (let y = 0; y < IMG_H; y++) {
+    for (let x = 0; x < IMG_W; x++) {
+      const dy = (y - cy) / EARTH_R;
+      const dx = (x - cx) / EARTH_R;
+      const r = Math.sqrt(dx * dx + dy * dy);
+
+      let brightness = 0;
+
+      if (r > 1.0) {
+        // Space — black with occasional star
+        brightness = (Math.random() < 0.003) ? 0.4 + Math.random() * 0.3 : 0.0;
+      } else if (r > 0.95) {
+        // Atmosphere limb — bright glow
+        const limbFactor = (1.0 - r) / 0.05;
+        brightness = 0.7 + 0.3 * limbFactor;
+      } else {
+        // Earth surface
+        const lat = dy;
+        let base = 0.32 + 0.14 * Math.abs(lat);
+
+        // Cloud patterns
+        const c1 = 0.15 * Math.sin(6.0 * dx + 2.0 * dy + 1.5);
+        const c2 = 0.10 * Math.sin(3.0 * dx - 5.0 * dy + 0.8);
+        const c3 = 0.08 * Math.cos(8.0 * dx + 4.0 * dy);
+        const c4 = 0.05 * Math.sin(14 * dx + 3 * dy + 2.1);
+
+        // Continents
+        let continent = 0;
+        // North America hint
+        if (dx > -0.35 && dx < 0.15 && dy > 0.05 && dy < 0.55) {
+          const d2 = (dx + 0.1) * (dx + 0.1) + (dy - 0.3) * (dy - 0.3);
+          continent += 0.09 * Math.exp(-d2 / 0.05);
+        }
+        // South America hint
+        if (dx > -0.12 && dx < 0.12 && dy > -0.55 && dy < -0.05) {
+          const d2 = (dx - 0.0) * (dx - 0.0) + (dy + 0.28) * (dy + 0.28);
+          continent += 0.07 * Math.exp(-d2 / 0.04);
+        }
+
+        brightness = base + c1 + c2 + c3 + c4 + continent;
+        brightness = Math.max(0.08, Math.min(0.92, brightness));
+      }
+
+      img[y * IMG_W + x] = brightness;
+    }
+  }
+
+  return img;
+}
+
+// --- Generate composite video signal for one line ---
+function generateLineSignal(lineIdx) {
+  const signal = [];
+  const syncSamples = 25;
+  const porchSamples = 15;
+  const activeSamples = 200;
+
+  // H-sync pulse
+  for (let i = 0; i < syncSamples; i++) {
+    signal.push(SYNC_LEVEL + (Math.random() - 0.5) * noiseLevel * 0.1);
+  }
+
+  // Back porch
+  for (let i = 0; i < porchSamples; i++) {
+    signal.push(BLANK_LEVEL + (Math.random() - 0.5) * noiseLevel * 0.15);
+  }
+
+  // Active video
+  if (lineIdx >= 0 && lineIdx < IMG_H && earthImage) {
+    for (let i = 0; i < activeSamples; i++) {
+      const px = Math.floor(i / activeSamples * IMG_W);
+      const brightness = earthImage[lineIdx * IMG_W + Math.min(px, IMG_W - 1)];
+      const videoLevel = BLACK_LEVEL + brightness * (WHITE_LEVEL - BLACK_LEVEL);
+      const noise = (Math.random() - 0.5) * noiseLevel * 0.6;
+      signal.push(Math.max(0, Math.min(1.2, videoLevel + noise)));
+    }
+  } else {
+    for (let i = 0; i < activeSamples; i++) {
+      signal.push(BLACK_LEVEL + (Math.random() - 0.5) * noiseLevel * 0.3);
+    }
+  }
+
+  // Front porch
+  for (let i = 0; i < porchSamples; i++) {
+    signal.push(BLANK_LEVEL + (Math.random() - 0.5) * noiseLevel * 0.15);
+  }
+
+  return signal;
+}
+
+// --- Render one scan line to the frame buffer ---
+function renderScanLine(lineIdx) {
+  if (lineIdx < 0 || lineIdx >= IMG_H || !earthImage) return;
+
+  for (let x = 0; x < IMG_W; x++) {
+    const brightness = earthImage[lineIdx * IMG_W + x];
+    // Add noise
+    const noise = (Math.random() - 0.5) * noiseLevel * 0.5;
+    const val = Math.max(0, Math.min(1, brightness + noise));
+    frameBuffer[lineIdx * IMG_W + x] = val;
+  }
+}
+
+// --- Draw the CRT display ---
+function drawCRT() {
+  const w = tvCanvas.width;
+  const h = tvCanvas.height;
+
+  // Apply phosphor decay to the entire screen
+  const imageData = tvCtx.getImageData(0, 0, w, h);
+  const data = imageData.data;
+  const decay = 1.0 - (1.0 - phosphorDecay) * 0.04;
+
+  for (let i = 0; i < data.length; i += 4) {
+    data[i]     = Math.floor(data[i] * decay);       // R
+    data[i + 1] = Math.floor(data[i + 1] * decay);   // G
+    data[i + 2] = Math.floor(data[i + 2] * decay);   // B
+  }
+  tvCtx.putImageData(imageData, 0, 0);
+
+  // Draw the current scan line (bright, fresh phosphor)
+  if (currentLine >= 0 && currentLine < IMG_H && frameBuffer) {
+    const scaleX = w / IMG_W;
+    const scaleY = h / IMG_H;
+
+    for (let x = 0; x < IMG_W; x++) {
+      const val = frameBuffer[currentLine * IMG_W + x];
+
+      // Green phosphor: P31 characteristic — dominant green, slight blue
+      const r = Math.floor(val * 30);
+      const g = Math.floor(val * 255);
+      const b = Math.floor(val * 40);
+
+      tvCtx.fillStyle = `rgb(${r},${g},${b})`;
+      tvCtx.fillRect(
+        Math.floor(x * scaleX),
+        Math.floor(currentLine * scaleY),
+        Math.ceil(scaleX) + 1,
+        Math.ceil(scaleY) + 1
+      );
+    }
+
+    // Bright scan beam spot (the beam position indicator)
+    const beamX = w;  // beam just finished this line
+    const beamY = currentLine * scaleY + scaleY / 2;
+
+    // Beam glow
+    const grd = tvCtx.createRadialGradient(beamX - 5, beamY, 0, beamX - 5, beamY, 15);
+    grd.addColorStop(0, 'rgba(150, 255, 180, 0.8)');
+    grd.addColorStop(0.3, 'rgba(50, 255, 100, 0.3)');
+    grd.addColorStop(1, 'rgba(0, 255, 50, 0)');
+    tvCtx.fillStyle = grd;
+    tvCtx.fillRect(beamX - 20, beamY - 15, 25, 30);
+  }
+}
+
+// --- Draw signal waveform ---
+function drawSignal() {
+  const w = sigCanvas.width;
+  const h = sigCanvas.height;
+
+  sigCtx.fillStyle = '#050510';
+  sigCtx.fillRect(0, 0, w, h);
+
+  if (signalData.length === 0) return;
+
+  // Grid lines
+  sigCtx.strokeStyle = '#0a1a2a';
+  sigCtx.lineWidth = 0.5;
+  for (let y = 0; y < h; y += h / 5) {
+    sigCtx.beginPath();
+    sigCtx.moveTo(0, y);
+    sigCtx.lineTo(w, y);
+    sigCtx.stroke();
+  }
+  for (let x = 0; x < w; x += w / 10) {
+    sigCtx.beginPath();
+    sigCtx.moveTo(x, 0);
+    sigCtx.lineTo(x, h);
+    sigCtx.stroke();
+  }
+
+  // Reference levels
+  const levelY = (level) => h - (level / 1.2) * h;
+
+  sigCtx.setLineDash([3, 3]);
+  sigCtx.lineWidth = 0.5;
+
+  // Sync level
+  sigCtx.strokeStyle = '#ff444466';
+  sigCtx.beginPath();
+  sigCtx.moveTo(0, levelY(SYNC_LEVEL));
+  sigCtx.lineTo(w, levelY(SYNC_LEVEL));
+  sigCtx.stroke();
+
+  // Blanking level
+  sigCtx.strokeStyle = '#4444ff66';
+  sigCtx.beginPath();
+  sigCtx.moveTo(0, levelY(BLANK_LEVEL));
+  sigCtx.lineTo(w, levelY(BLANK_LEVEL));
+  sigCtx.stroke();
+
+  // White level
+  sigCtx.strokeStyle = '#ffffff33';
+  sigCtx.beginPath();
+  sigCtx.moveTo(0, levelY(WHITE_LEVEL));
+  sigCtx.lineTo(w, levelY(WHITE_LEVEL));
+  sigCtx.stroke();
+
+  sigCtx.setLineDash([]);
+
+  // Signal trace (green phosphor style)
+  sigCtx.strokeStyle = '#00ff88';
+  sigCtx.lineWidth = 1.5;
+  sigCtx.shadowColor = '#00ff88';
+  sigCtx.shadowBlur = 3;
+  sigCtx.beginPath();
+
+  const step = w / signalData.length;
+  for (let i = 0; i < signalData.length; i++) {
+    const x = i * step;
+    const y = levelY(signalData[i]);
+    if (i === 0) sigCtx.moveTo(x, y);
+    else sigCtx.lineTo(x, y);
+  }
+  sigCtx.stroke();
+  sigCtx.shadowBlur = 0;
+
+  // Labels
+  sigCtx.font = '9px Courier New';
+  sigCtx.fillStyle = '#ff666688';
+  sigCtx.fillText('SYNC', 3, levelY(SYNC_LEVEL) - 3);
+  sigCtx.fillStyle = '#6666ff88';
+  sigCtx.fillText('BLANK', 3, levelY(BLANK_LEVEL) - 3);
+  sigCtx.fillStyle = '#ffffff55';
+  sigCtx.fillText('WHITE', 3, levelY(WHITE_LEVEL) - 3);
+
+  // H-SYNC label
+  const syncEnd = 25 * step;
+  sigCtx.fillStyle = '#ff444444';
+  sigCtx.fillRect(0, 0, syncEnd, h);
+  sigCtx.fillStyle = '#ff666688';
+  sigCtx.fillText('H-SYNC', 2, 12);
+}
+
+// --- Update telemetry display ---
+function updateTelemetry() {
+  document.getElementById('telem-line').textContent = `${currentLine} / ${IMG_H}`;
+  document.getElementById('telem-frame').textContent = currentFrame;
+
+  const alt = getAltitude(missionTime);
+  const altEl = document.getElementById('telem-alt');
+  altEl.textContent = `${Math.round(alt)} km`;
+  altEl.className = 'telem-value' + (alt < 100 ? ' danger' : alt < 500 ? ' warning' : '');
+
+  const sig = getSignalStrength(alt);
+  const sigEl = document.getElementById('telem-signal');
+  sigEl.textContent = sig > -999 ? `${sig} dBm` : 'NO SIGNAL';
+  sigEl.className = 'telem-value' + (sig < -140 ? ' danger' : sig < -125 ? ' warning' : '');
+
+  const min = Math.floor(missionTime / 60);
+  const sec = Math.floor(missionTime % 60);
+  document.getElementById('telem-time').textContent =
+    `T+${String(min).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+
+  const statusEl = document.getElementById('telem-status');
+  if (missionTime >= FLIGHT_DURATION) {
+    statusEl.textContent = 'SIGNAL LOST';
+    statusEl.className = 'telem-value danger';
+  } else if (alt > 1000) {
+    statusEl.textContent = 'SCANNING';
+    statusEl.className = 'telem-value';
+  } else if (alt > 200) {
+    statusEl.textContent = 'ACQUIRING';
+    statusEl.className = 'telem-value warning';
+  } else {
+    statusEl.textContent = alt > 0 ? 'ASCENDING' : 'PRE-LAUNCH';
+    statusEl.className = 'telem-value warning';
+  }
+}
+
+// --- Save current frame to history ---
+function saveFrameHistory() {
+  if (!frameBuffer) return;
+
+  // Shift history
+  if (frameHistory.length >= 2) {
+    frameHistory.shift();
+  }
+  frameHistory.push(new Float32Array(frameBuffer));
+
+  // Draw history canvases
+  const canvases = [histCanvas1, histCanvas2];
+  for (let i = 0; i < frameHistory.length; i++) {
+    const canvas = canvases[i];
+    const ctx = canvas.getContext('2d');
+    const w = canvas.width;
+    const h = canvas.height;
+    const scaleX = w / IMG_W;
+    const scaleY = h / IMG_H;
+
+    ctx.fillStyle = '#020208';
+    ctx.fillRect(0, 0, w, h);
+
+    const fb = frameHistory[i];
+    for (let y = 0; y < IMG_H; y++) {
+      for (let x = 0; x < IMG_W; x++) {
+        const val = fb[y * IMG_W + x];
+        if (val > 0.01) {
+          // Dimmer, amber tint for old frames
+          const r = Math.floor(val * 80);
+          const g = Math.floor(val * 160);
+          const b = Math.floor(val * 25);
+          ctx.fillStyle = `rgb(${r},${g},${b})`;
+          ctx.fillRect(
+            Math.floor(x * scaleX),
+            Math.floor(y * scaleY),
+            Math.ceil(scaleX),
+            Math.ceil(scaleY)
+          );
+        }
+      }
+    }
+
+    // Frame label
+    ctx.font = '9px Courier New';
+    ctx.fillStyle = '#446644';
+    ctx.fillText(`Frame ${currentFrame - frameHistory.length + i}`, 4, 12);
+  }
+}
+
+// --- Resize canvases ---
+function resizeCanvases() {
+  const containers = [
+    [tvCanvas, tvCanvas.parentElement],
+    [sigCanvas, sigCanvas.parentElement],
+    [histCanvas1, histCanvas1.parentElement],
+    [histCanvas2, histCanvas2.parentElement],
+  ];
+
+  for (const [canvas, container] of containers) {
+    const rect = container.getBoundingClientRect();
+    // Use higher resolution for CRT display
+    const scale = canvas === tvCanvas ? 1 : 1;
+    canvas.width = Math.floor(rect.width * scale);
+    canvas.height = Math.floor(rect.height * scale);
+  }
+}
+
+// --- Animation loop ---
+function tick() {
+  if (!playing) {
+    requestAnimationFrame(tick);
+    return;
+  }
+
+  // Process multiple lines per frame (speed control)
+  for (let i = 0; i < linesPerTick; i++) {
+    if (currentLine >= IMG_H) {
+      // Frame complete
+      saveFrameHistory();
+      currentFrame++;
+      currentLine = 0;
+      // Reset frame buffer but keep phosphor
+      frameBuffer = new Float32Array(IMG_H * IMG_W);
+    }
+
+    renderScanLine(currentLine);
+    signalData = generateLineSignal(currentLine);
+
+    // Advance mission time
+    // Each scan line represents real time passing
+    missionTime += 0.2;  // ~0.2 seconds per line at slow-scan rate
+
+    currentLine++;
+  }
+
+  // Draw everything
+  drawCRT();
+  drawSignal();
+  updateTelemetry();
+
+  requestAnimationFrame(tick);
+}
+
+// --- Controls ---
+function togglePlay() {
+  playing = !playing;
+  const btn = document.getElementById('btn-play');
+  btn.textContent = playing ? 'PAUSE' : 'PLAY';
+  btn.classList.toggle('active', playing);
+}
+
+function resetScan() {
+  currentLine = 0;
+  currentFrame = 0;
+  missionTime = 0;
+  frameBuffer = new Float32Array(IMG_H * IMG_W);
+  frameHistory = [];
+
+  // Clear CRT
+  tvCtx.fillStyle = '#020204';
+  tvCtx.fillRect(0, 0, tvCanvas.width, tvCanvas.height);
+
+  // Clear history
+  histCtx1.fillStyle = '#020208';
+  histCtx1.fillRect(0, 0, histCanvas1.width, histCanvas1.height);
+  histCtx2.fillStyle = '#020208';
+  histCtx2.fillRect(0, 0, histCanvas2.width, histCanvas2.height);
+
+  updateTelemetry();
+}
+
+function updateSpeed() {
+  const val = parseInt(document.getElementById('speed-slider').value);
+  linesPerTick = val;
+  document.getElementById('speed-display').textContent = val + 'x';
+}
+
+function updateNoise() {
+  const val = parseInt(document.getElementById('noise-slider').value);
+  noiseLevel = val / 100;
+  document.getElementById('noise-display').textContent = val + '%';
+}
+
+function updatePhosphor() {
+  const val = parseInt(document.getElementById('phosphor-slider').value);
+  phosphorDecay = val / 100;
+  document.getElementById('phosphor-display').textContent = val + '%';
+}
+
+// --- Initialize ---
+function init() {
+  resizeCanvases();
+  window.addEventListener('resize', resizeCanvases);
+
+  // Generate Earth image
+  earthImage = generateEarth();
+  frameBuffer = new Float32Array(IMG_H * IMG_W);
+
+  // Clear displays
+  tvCtx.fillStyle = '#020204';
+  tvCtx.fillRect(0, 0, tvCanvas.width, tvCanvas.height);
+
+  // Start animation
+  requestAnimationFrame(tick);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+  if (e.key === ' ') { togglePlay(); e.preventDefault(); }
+  if (e.key === 'r' || e.key === 'R') resetScan();
+  if (e.key === '+' || e.key === '=') {
+    const slider = document.getElementById('speed-slider');
+    slider.value = Math.min(100, parseInt(slider.value) + 5);
+    updateSpeed();
+  }
+  if (e.key === '-') {
+    const slider = document.getElementById('speed-slider');
+    slider.value = Math.max(1, parseInt(slider.value) - 5);
+    updateSpeed();
+  }
+});
+
+init();
+</script>
+</body>
+</html>

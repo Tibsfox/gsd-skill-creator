@@ -1,0 +1,151 @@
+* Pioneer 3 Ground Station: Diode Ring Mixer
+* =========================================================================
+* Mission 1.4 — Pioneer 3 (Juno II), December 6, 1958
+* Radio frequency mixer for ground receiving station
+*
+* A diode ring mixer (double-balanced mixer) multiplies two signals:
+*   RF input  = 10 kHz (received signal, simplified from 108 MHz)
+*   LO input  = 12 kHz (local oscillator)
+*   IF output = 2 kHz (difference) and 22 kHz (sum)
+*
+* The ring of four 1N4148 diodes performs analog multiplication.
+* An RC low-pass filter selects the 2 kHz difference (IF) product.
+*
+* In the real Pioneer ground station, RF=108.06 MHz, LO=107.605 MHz,
+* IF=455 kHz. We use lower frequencies here so ngspice transient
+* analysis completes in reasonable time with clear waveforms.
+*
+* Run: ngspice -b ring-mixer.cir
+* =========================================================================
+
+* --- Signal Sources ---
+* RF input: 10 kHz, 100 mV amplitude (received signal)
+Vrf rf_p 0 SIN(0 0.1 10k 0 0)
+
+* Local oscillator: 12 kHz, 500 mV amplitude (strong LO drive)
+Vlo lo_p lo_n SIN(0 0.5 12k 0 0)
+
+* --- Diode Model ---
+* 1N4148 small-signal switching diode
+.model D1N4148 D(Is=2.52n Rs=0.568 N=1.752 Bv=100 Ibv=100u
++ Cjo=4p M=0.4 Tt=20n)
+
+* --- Input Transformers (modeled as coupled inductors) ---
+* RF input transformer: center-tapped secondary
+* Primary side
+L_rf_pri rf_p 0 1m
+* Secondary side (center-tapped)
+L_rf_sec1 rf_a rf_ct 1m
+L_rf_sec2 rf_ct rf_b 1m
+K_rf L_rf_pri L_rf_sec1 0.95
+K_rf2 L_rf_pri L_rf_sec2 0.95
+
+* RF center tap is the IF output node
+* (in a real DBM, this is where IF is extracted)
+
+* LO input transformer: center-tapped secondary
+L_lo_pri lo_p lo_n 1m
+L_lo_sec1 lo_a lo_ct 1m
+L_lo_sec2 lo_ct lo_b 1m
+K_lo L_lo_pri L_lo_sec1 0.95
+K_lo2 L_lo_pri L_lo_sec2 0.95
+
+* LO center tap to ground
+R_lo_ct lo_ct 0 1
+
+* --- Diode Ring ---
+* The four diodes form a switching ring driven by the LO.
+* When LO is positive: D1 and D2 conduct (connect RF to IF one way)
+* When LO is negative: D3 and D4 conduct (connect RF to IF inverted)
+* Net effect: IF = RF * sign(LO) — multiplication
+
+D1 rf_a lo_a D1N4148
+D2 lo_a rf_b D1N4148
+D3 rf_b lo_b D1N4148
+D4 lo_b rf_a D1N4148
+
+* --- IF Output ---
+* Extract IF from RF transformer center tap
+* RC low-pass filter: cutoff ~ 5 kHz to select 2 kHz difference product
+* and reject 22 kHz sum product
+* f_c = 1/(2*pi*R*C) = 1/(2*pi*10k*3.3n) ~ 4.8 kHz
+R_if rf_ct if_filt 10k
+C_if if_filt 0 3.3n
+
+* Output load
+R_load if_filt if_out 1k
+C_out if_out 0 10n
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* Transient: 5 ms to see several cycles of the 2 kHz IF output
+* Step: 1 us resolves 12 kHz LO with ~83 points/cycle
+.tran 1u 5m
+
+* AC analysis: sweep from 100 Hz to 100 kHz
+.ac dec 100 100 100k
+
+* =========================================================================
+* CONTROL BLOCK
+* =========================================================================
+.control
+  run
+
+  echo ""
+  echo "========================================================"
+  echo " Pioneer 3 Ground Station — Diode Ring Mixer"
+  echo "========================================================"
+  echo " RF input:  10 kHz, 100 mV (received signal)"
+  echo " LO input:  12 kHz, 500 mV (local oscillator)"
+  echo " Expected:  2 kHz (difference) + 22 kHz (sum)"
+  echo " LP filter: ~4.8 kHz cutoff selects 2 kHz IF"
+  echo "========================================================"
+  echo ""
+
+  * Measure IF output frequency (should be ~2 kHz)
+  meas tran if_period TRIG v(if_out) VAL=0 RISE=3 TARG v(if_out) VAL=0 RISE=4
+  echo "IF output period (s):"
+  print if_period
+  let if_freq = 1/if_period
+  echo "IF output frequency (Hz) — expect ~2 kHz:"
+  print if_freq
+
+  * Measure IF output amplitude
+  meas tran if_pp PP v(if_out) FROM=2m TO=5m
+  echo "IF output peak-to-peak (V):"
+  print if_pp
+
+  * Measure RF feedthrough at output
+  meas tran rf_leak PP v(rf_ct) FROM=2m TO=5m
+  echo "RF at mixer output (before filter) peak-to-peak (V):"
+  print rf_leak
+
+  echo ""
+  echo "--- Waveform Plots ---"
+
+  * Plot 1: Input signals and mixer output
+  plot v(rf_p) v(lo_p)-v(lo_n) v(rf_ct) v(if_out) xlimit 0 3m title 'Ring Mixer: RF + LO -> IF (2 kHz difference product)'
+
+  * Plot 2: Zoomed IF output showing clean 2 kHz
+  plot v(if_out) xlimit 1m 5m title 'Filtered IF Output — 2 kHz Difference Product'
+
+  * Spectral analysis of mixer output (before filter)
+  linearize v(rf_ct)
+  spec 100 50k 100 v(rf_ct)
+  plot mag(v(rf_ct)) title 'Mixer Output Spectrum — 2 kHz + 22 kHz Products' ylabel 'Magnitude'
+
+  echo ""
+  echo "=== Simulation complete ==="
+  echo "The diode ring mixer extracts the intermediate frequency"
+  echo "by multiplying RF and LO signals. The 2 kHz difference"
+  echo "product passes the low-pass filter; the 22 kHz sum is rejected."
+  echo ""
+  echo "In the real Pioneer ground station:"
+  echo "  RF = 108.06 MHz, LO = 107.605 MHz, IF = 455 kHz"
+
+  quit
+.endc
+
+.end
