@@ -1,0 +1,285 @@
+{
+  "degree": 40,
+  "species": "Hermit Warbler",
+  "scientific_name": "Setophaga occidentalis",
+  "slug": "040-hermit-warbler",
+  "sound_type": "thin buzzy song conifer top",
+  "energy": 4,
+  "ecosystem": "mountain conifer",
+  "season": "summer",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds in mountain conifer forests from southern Washington south through the Oregon Cascades and Siskiyou Mountains into northern California. The species has retreated from its former northern range as Townsend's Warbler has expanded. Primary breeding habitat is the very tops of tall conifers: white fir, red fir, Douglas fir, mountain hemlock, at mid to high elevations in the southern Cascades and Siskiyous."
+  },
+  "taxonomy_note": {
+    "description": "Hermit Warbler is the EIGHTH Parulidae in the engine -- extending the family's lead to three over Hirundinidae and Turdidae (5 each). It is the THIRD CONSECUTIVE Parulidae (after BTG at 38 and Townsend's at 39), forming the engine's first consecutive family TRIO and first consecutive genus TRIO. Fourth Setophaga in the engine (after Yellow at 16, BTG at 38, and Townsend's at 39). THE DISPLACED SPECIES: Townsend's Warbler (degree 39) is actively displacing Hermit Warbler through hybridization and competitive exclusion. The victim arrives one degree after its aggressor.",
+    "current_family": "Parulidae",
+    "new_family": false,
+    "family_count_in_engine": 18,
+    "parulidae_count_in_engine": 8,
+    "name_etymology": "Setophaga = Ancient Greek ses/setos (moth) + phagos (eater) = 'moth-eater.' Occidentalis = Latin 'western,' referring to the species' geographic range in western North America. Full translation: 'Western moth-eater.' The fourth naming convention in Setophaga: morphology (petechia), process (nigrescens), patronym (townsendi), geography (occidentalis).",
+    "genus_note": "Setophaga now has FOUR members in the engine (16, 38, 39, 40) -- by far the largest genus representation. The last three are CONSECUTIVE (38-39-40), forming a displacement trio. The genus represents 4 of 8 Parulidae in the engine (50%).",
+    "order_note": "Passeriformes continues from degree 39. Third consecutive Passeriformes in the Setophaga trio.",
+    "warbler_trio_note": "Degrees 38-39-40 form the engine's first consecutive family TRIO and first consecutive genus TRIO. Unlike the hummingbird trio (35-37, same family but three genera), the warbler trio is a SINGLE GENUS across three degrees. And the three species are biologically entangled: Townsend's hybridizes with both BTG and Hermit. The trio maps a displacement cascade: secondary victim (BTG), aggressor (Townsend's), primary victim (Hermit).",
+    "dendroica_note": "Formerly placed in genus Dendroica. Same merger history as Townsend's Warbler -- the 2011 AOS decision merged Dendroica into Setophaga based on molecular phylogenetics [NEEDS VERIFICATION].",
+    "family_lead": "With 8 members, Parulidae now LEADS all families by THREE over Hirundinidae and Turdidae (5 each). Eight of ~115 North American Parulidae is about 7%. The family has THREE structural arcs: quintet (14-17, 20), pair-becoming-trio (38-39-40), and the displacement narrative that connects them.",
+    "hermit_name_note": "The common name 'Hermit Warbler' refers to the species' extreme canopy-top behavior -- it spends nearly all its time at the very tops of the tallest trees, appearing reclusive. The name has acquired a second meaning: the species is retreating, withdrawing from its former range. The hermit is becoming a hermit in both senses.",
+    "displacement_note": "The Hermit Warbler is being displaced by Townsend's Warbler through competitive exclusion via introgression. Range has contracted southward. Pure populations concentrated in the southern Oregon Cascades, Siskiyous, and northern California mountains. The hybrid zone moves south at approximately 0.5-1.0 km/year [NEEDS VERIFICATION]. The 2000 km genetic wake (Krosby & Rohwer, 2009) shows Townsend's alleles extending far south of the visible range front."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "5,000-9,500 (across thin buzzy phrases) [NEEDS VERIFICATION]",
+    "peak_energy_band_hz": "6,000-8,500 (primary song energy) [NEEDS VERIFICATION]",
+    "song_duration_s": "1.5-2.5 (3-5 thin buzzy phrases)",
+    "note_structure": "Series of 3-5 thin, high-pitched buzzy phrases: seely seely seely see. The phrases are thinner and higher than Townsend's. The terminal note often differs in pitch from preceding phrases. Song is more variable than Townsend's or BTG -- some renditions are flat, some have a distinctive terminal shift.",
+    "note_types": "TWO sound categories: (1) PRIMARY SONG -- 3-5 thin, high buzzy phrases with variable terminal note, moderate tempo. Thinner and higher than Townsend's. (2) CALL NOTE -- a flat tik or chip, similar to other Setophaga calls but thin.",
+    "phrase_structure": "Variable. Some songs are relatively isometric (flat). Others have a distinctly different terminal note (up or down). The variability itself is a distinguishing feature. Contrast with Townsend's (consistently ascending terminal) and BTG (consistently flat).",
+    "timbre": "THIN -- the defining quality. High, reedy, ethereal, attenuated. The buzzy character is present but stretched thin. Less husky than BTG, less sibilant than Townsend's, more gossamer. Almost insect-like. The sound of something being stretched to its limit.",
+    "amplitude": "E=4 -- same as BTG and Townsend's. But the thin quality makes it feel less substantial. The song carries from the treetop but sounds attenuated by the time it reaches the ground.",
+    "tempo": "MODERATE -- approximately 3-4 phrases per second [NEEDS VERIFICATION]. Similar to Townsend's. The thinness is in the timbre, not the tempo.",
+    "context": "Males sing from the very tops of the tallest conifers during breeding season (May-July). Even more canopy-bound than Townsend's. Song is territorial and mate-attraction. Rarely descends during breeding season. The song from the extreme canopy top is often the only evidence of the bird's presence.",
+    "key_property": "THE THINNING -- the 41st acoustic element. A thin, high, buzzy warbler song from the very tops of mountain conifers. After the canopy buzz's ascending robustness (degree 39), the thinning adds ATTENUATION within the buzz. Same Setophaga timbre family, but stretched thin. The buzz is still there but it has been attenuated -- higher, thinner, less substantial. Named 'the thinning' because it captures three simultaneous realities: (1) the thin quality of the song, (2) the thinning of the species' geographic range, (3) the thinning of its genetic identity through introgression. One word for three kinds of diminishment."
+  },
+  "plumage": {
+    "overall": "Bright yellow face on a gray-and-white body. The most extensively yellow face of any Setophaga in the engine -- solid yellow from forehead through throat in adult males. But the body is plain gray-and-white, unlike the colorful bodies of other Setophaga. All chromatic budget concentrated in the face.",
+    "head": "Entirely bright yellow face and crown. No black cheek patch (unlike Townsend's). No black crown stripe (unlike Townsend's). Clean, solid yellow. The brightest, most uninterrupted yellow face in the Setophaga quartet.",
+    "throat": "Yellow in adult males, with a small black chin/bib area. More extensively yellow than Townsend's (where the throat is black in adult males).",
+    "body": "Plain gray back (no olive tones). White to whitish-gray underparts (no yellow wash on breast). Two white wing bars. Dark tail with white outer feathers. Muted, restrained, almost ghostly compared to the vivid face.",
+    "field_id": "Bright yellow face with NO black cheek patch. Gray back. White underparts. The face is the field mark -- a beacon of yellow on an otherwise muted bird. At canopy height (20-50 m), the yellow face is the only visible feature.",
+    "setophaga_gradient": "Yellow Warbler (16) = yellow everywhere. Black-throated Gray (38) = one yellow dot. Townsend's (39) = yellow-and-black face with olive body and yellow breast. Hermit (40) = entirely yellow face on plain gray body. Four color strategies: maximum saturation, minimum color, bold pattern, face-only beacon.",
+    "hybrid_plumage": "In the hybrid zone, intermediate plumage: Hermit-like birds may show faint dusky cheek markings. Moderate hybrids have distinct dark cheek patches. Strong hybrids look like Townsend's with a slightly plainer body. The gradient from pure Hermit to pure Townsend's is a visible record of introgression -- every step adds a Townsend's feature."
+  },
+  "mountain_conifer_ecology": {
+    "definition": "Mountain conifer -- mid to high elevation conifer forests dominated by true firs (Abies), mountain hemlock, and associated species. Distinguished from the broader 'conifer canopy' of Townsend's by higher elevation, true fir dominance, and drier mountain conditions. This is the Hermit Warbler's refuge -- the habitat where Townsend's has not yet fully expanded.",
+    "forest_types": [
+      "White fir (Abies concolor) forests -- southern Cascades and Siskiyous",
+      "Red fir (Abies magnifica) forests -- high-elevation southern Cascades",
+      "Mountain hemlock (Tsuga mertensiana) forests -- subalpine zones",
+      "Mixed conifer with Douglas fir and incense cedar -- mid-elevation southern Cascades",
+      "Mature and old-growth stands with tall canopy at 900-2,300 m [NEEDS VERIFICATION]"
+    ],
+    "vertical_position": "Extreme canopy crown -- the very tops of the tallest trees. Even more treetop-restricted than Townsend's. Forages at approximately 20-50 m [NEEDS VERIFICATION]. The highest warbler stratum in the engine. Above the Townsend's crown zone in elevation and potentially in canopy position where both co-occur.",
+    "pnw_distribution": [
+      "Southern Oregon Cascades -- core breeding range",
+      "Siskiyou Mountains -- stronghold of pure populations",
+      "Northern California mountains (Mt. Shasta, Trinity Alps) -- southern range limit",
+      "Central Oregon Cascades -- hybrid zone with Townsend's",
+      "Southern Washington Cascades -- formerly bred, now mostly Townsend's territory",
+      "HISTORICAL: may have bred as far north as Olympic Peninsula [NEEDS VERIFICATION]"
+    ],
+    "significance": "Mountain conifer is the Hermit Warbler's last stronghold. The species has been pushed out of the northern Cascades' mesic conifer forests by Townsend's. The drier, higher mountain conifer forests of the southern Cascades and Siskiyous are the refugium. If climate change or continued hybridization pressure reaches these forests, the Hermit Warbler's pure populations have nowhere left to retreat."
+  },
+  "displacement": {
+    "aggressor": {
+      "species": "Townsend's Warbler (Setophaga townsendi)",
+      "degree": 39,
+      "mechanism": "Behavioral dominance, hybrid mating asymmetry, allelic introgression"
+    },
+    "hybrid_zone": {
+      "location": "Central and southern Oregon Cascades, where Townsend's range meets Hermit range",
+      "width": "Broad and variable -- the hybrid zone is not a sharp line but a gradient of intermediate phenotypes and genotypes [3, 4, 5]",
+      "movement": "Southward at approximately 0.5-1.0 km/year [NEEDS VERIFICATION]. The zone has moved south over observed decades.",
+      "genetic_wake": "Krosby and Rohwer (2009) documented Townsend's alleles extending approximately 2,000 km south of the phenotypic range front -- the genetic influence precedes visible displacement by a vast distance [5].",
+      "references": "[3, 4, 5, 6, 13]"
+    },
+    "range_contraction": {
+      "historical_north": "Southern Washington Cascades, possibly Olympic Peninsula [NEEDS VERIFICATION]",
+      "current_north": "Central Oregon Cascades (hybrid zone)",
+      "pure_population_stronghold": "Southern Oregon Cascades, Siskiyou Mountains, northern California mountains",
+      "trend": "Contracting southward. Pure populations shrinking. The northernmost 'Hermit Warblers' are increasingly hybrid."
+    },
+    "conservation_paradox": "If Townsend's absorbs Hermit through introgression, is that extinction? Genes survive in hybrids but species identity dissolves. The displacement is a natural evolutionary process -- Townsend's is not invasive, it is a native species expanding through natural competitive advantage. Intervention is both ethically ambiguous and practically impossible. The engine documents the paradox without resolving it.",
+    "engine_structure": "Degree 39 documented the aggressor. Degree 40 documents the victim. The engine presents both sides of the same ecological drama in consecutive degrees. The warbler trio (38-39-40) maps a displacement cascade: secondary victim (BTG), aggressor (Townsend's), primary victim (Hermit)."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "population_trend": "Declining [NEEDS VERIFICATION]",
+    "population_size": "Estimated 2.5-5 million [NEEDS VERIFICATION]",
+    "threats": [
+      "Competitive exclusion by Townsend's Warbler through hybridization and introgression -- the PRIMARY threat",
+      "Logging of mountain conifer forests reduces breeding habitat",
+      "Climate change may shift mountain conifer zones upslope, reducing high-elevation refuge",
+      "Increased wildfire in southern Cascades and Siskiyous threatens mountain conifer habitat"
+    ],
+    "paradox": "The primary threat is a natural process (competitive exclusion by a native congener). Conservation tools are poorly suited to this threat. The Hermit Warbler's genes persist in hybrids even as its species identity dissolves."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The thinning -- the 41st acoustic element: a thin, high, buzzy warbler song from the very tops of mountain conifers. After the canopy buzz's ascending robustness (degree 39), the thinning adds ATTENUATION within the buzz. Same Setophaga buzzy timbre family, but stretched thin -- higher, thinner, less substantial, a song that sounds like it is evaporating. Named 'the thinning' because it captures THREE simultaneous realities: (1) the thin acoustic quality of the song, (2) the thinning of the species' geographic range as Townsend's expands, (3) the thinning of its genetic identity through introgression. One word for three kinds of diminishment. The first acoustic element in the engine whose name carries ecological meaning.",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/thinning/",
+      "examples": [
+        "Hermit Warbler song: seely seely seely see. 3-5 thin, high buzzy phrases. Thinner and higher than Townsend's (zee-zee-zee-zwee-zweee). The buzz is still there but attenuated -- stretched toward gossamer.",
+        "Canopy buzz to thinning transition: canopy buzz (39, ascending, robust, conifer canopy) -> thinning (40, variable, attenuated, mountain conifer). Same genus. Same energy. Same buzzy timbre family. But the robust ascending buzz of degree 39 becomes the thin, fading buzz of degree 40. The aggressor sings with confidence. The victim sings thin.",
+        "Three Setophaga buzzes: drawl (38, flat, husky), canopy buzz (39, ascending, sibilant), thinning (40, variable, reedy). The buzz attenuates across the trio. From body to sibilance to gossamer. The genus's voice thins as the displacement story progresses.",
+        "Connection to filament (degree 37, Calliope Hummingbird): the filament was the thinnest thread of sound -- near-silent, mechanical. The thinning is a recognizable song that has been stretched thin -- still audible, still a warbler song, but attenuated. The filament was about absolute minimum. The thinning is about diminishment from something fuller.",
+        "Ecological resonance: no previous acoustic element name carried ecological meaning. Silence was a baseline. Cascade was a form. Hammer was a mechanism. 'Thinning' maps a biological process: the species is thinning. The range is thinning. The genome is thinning. The name is both acoustic description and ecological diagnosis."
+      ],
+      "music_theory_parallel": "If the drawl (38) is a sustained note played on an oboe, and the canopy buzz (39) is the same note rising on a clarinet, then the thinning (40) is that same note played on a high flute with diminuendo -- same woodwind family, same fundamental pitch class, but the sound is thinning, the air is running out, the instrument is at its upper register where tone gives way to breath. The orchestra is losing a voice, one degree at a time."
+    },
+    {
+      "concept": "The Setophaga trio -- degrees 38-39-40 as the engine's first consecutive genus TRIO. Three species of the same genus in three consecutive degrees: BTG (secondary victim), Townsend's (aggressor), Hermit (primary victim). The trio maps a displacement cascade -- competitive exclusion playing out in degree order. No previous engine sequence has placed three congeneric species back-to-back. The structural precedent: hummingbird trio (35-37) was same FAMILY but three genera. The warbler trio is same GENUS -- a deeper taxonomic concentration.",
+      "level": "foundational",
+      "department": "ecology/speciation",
+      "college_path": ".college/ecology/speciation/setophaga-trio/",
+      "examples": [
+        "Displacement cascade: BTG (38, secondary victim, slow displacement from dry woodland) -> Townsend's (39, aggressor, behaviorally dominant, range expanding) -> Hermit (40, primary victim, range contracting, genome dissolving). The ordering is dramatic: the aggressor enters between its two victims.",
+        "Previous consecutive runs: swallow quintet (26-30, 5 consecutive same-family), hummingbird trio (35-37, 3 consecutive same-family). The warbler trio (38-40) is the first 3-consecutive same-GENUS run. Deeper taxonomic concentration than any previous sequence.",
+        "The biological entanglement: all three species interact. Townsend's hybridizes with BOTH BTG and Hermit. The three degrees map three nodes of a hybridization triangle. The engine captures not just species but the network of interactions between them.",
+        "Conservation dimension: the trio presents all three roles in a displacement event. The listener moves from bystander (38) to aggressor (39) to victim (40). Each degree adds context that changes how you understand the others.",
+        "The 2000 km genetic wake: Townsend's alleles extend 2000 km south of the visible range front. The genetic displacement precedes the phenotypic displacement by a continental distance. The Hermit Warbler's genome is being colonized even where it still looks like a Hermit Warbler."
+      ],
+      "music_theory_parallel": "A three-movement suite where each movement uses the same theme but in a different emotional register. First movement (BTG, 38): the theme played at rest, in a minor key, unhurried. Second movement (Townsend's, 39): the same theme ascending, in a major key, triumphant. Third movement (Hermit, 40): the theme returning to the original register but thinner, fading, diminuendo al niente. The suite tells a story of displacement through dynamics alone."
+    },
+    {
+      "concept": "The displaced species -- the Hermit Warbler as the primary victim of Townsend's competitive exclusion. Range contracting southward, pure populations shrinking, genome dissolving through introgression. The engine presents the victim one degree after the aggressor. This is the engine's first documentation of both sides of an active ecological displacement in consecutive degrees. The displacement raises the hardest question in conservation biology: is genetic assimilation extinction?",
+      "level": "foundational",
+      "department": "ecology/conservation",
+      "college_path": ".college/ecology/conservation/displacement/",
+      "examples": [
+        "Range contraction: formerly bred from southern Washington south through the Cascades. Now pure populations concentrated in southern Oregon and northern California. The northernmost 'Hermit Warblers' are increasingly hybrid.",
+        "The 2000 km genetic wake (Krosby & Rohwer 2009): Townsend's alleles detected far south of the phenotypic range front. The genome is being colonized ahead of the visible displacement. Hermit Warblers that look 'pure' may already carry Townsend's genes.",
+        "Conservation paradox: the threat is a native species expanding through natural competitive advantage. Not invasive, not introduced, not pollution, not habitat loss. Another warbler. Standard conservation tools don't address this.",
+        "The extinction question: genes persist in hybrids. Phenotype changes. Species boundary dissolves. Is this extinction? Under biological species concept: absorption, not destruction. Under phylogenetic species concept: lineage erasure. The answer depends on the definition.",
+        "Dramatic structure: degree 39 tells the winner's story. Degree 40 tells the loser's story. The listener holds both perspectives. The engine does not take sides -- it documents."
+      ],
+      "music_theory_parallel": "A canon where the leading voice (Townsend's) gradually absorbs the following voice (Hermit). The following voice begins with its own distinct melody but over measures, the leading voice's intervals and ornaments appear in what was once independent material. Eventually the following voice is singing the leading voice's melody with only ghost notes of its original line remaining. The canon resolves to unison -- but one voice did not choose to join. It was absorbed."
+    },
+    {
+      "concept": "Parulidae at eight -- the engine's largest family by THREE. The warbler octet has THREE structural arcs: the quintet (14-17, 20) mapping five song endings at E=3, the pair-becoming-trio (38-39-40) mapping an ecological displacement at E=4, and the overarching narrative that connects them. Eight members. Three arcs. The deepest family footprint by far.",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/parulidae-eight/",
+      "examples": [
+        "Three arcs: Act I (quintet, degrees 14-17 + 20, E=3, wet, five song endings). Act II gap (degrees 21-37, eight other families). Act III (trio, degrees 38-39-40, E=4, displacement cascade).",
+        "Family lead: Parulidae 8, Hirundinidae 5, Turdidae 5. Three-member lead. No other family is close.",
+        "Genus dominance: Setophaga at 4 of 8 members (50%). Half the family is one genus. No other genus has more than 2 members.",
+        "The trio as narrative: the trio (38-39-40) is not a survey -- it tells a story. BTG introduces the displacement context. Townsend's presents the aggressor. Hermit presents the victim. The family's third arc is the engine's first story-driven family sequence.",
+        "Structural concern: three consecutive Parulidae risks warbler fatigue. Eight of 41 entries (19.5%) from one family. The engine needs maximum taxonomic distance at degree 41."
+      ],
+      "music_theory_parallel": "A symphony where the warbler theme has three appearances: the exposition (quintet, five variations on the warbler voice), the development (18-degree gap, exploring other instruments entirely), and the recapitulation (trio, the warbler theme returns as a three-voice drama). The recapitulation is darker than the exposition -- the same family, but now the voices are competing, absorbing, displacing. The symphony's warbler theme has gone from acoustic catalog to ecological tragedy."
+    },
+    {
+      "concept": "Mountain conifer ecosystem -- the Hermit Warbler's refuge. Distinguished from Townsend's broader 'conifer canopy' by higher elevation, true fir dominance, and drier mountain conditions. The southern Cascades and Siskiyous are where pure Hermit populations persist. If the hybrid zone reaches these mountains, the species has nowhere left to retreat. Mountain conifer is the same ecosystem tag as Cassin's Finch (degree 33) -- two high-elevation specialists sharing the same mountain forests.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/mountain-conifer-refuge/",
+      "examples": [
+        "Mountain conifer vs. conifer canopy: Townsend's (39) = broad conifer canopy from sea level to timberline. Hermit (40) = specifically mountain conifer at 900-2300 m [NEEDS VERIFICATION]. The distinction matters: the Hermit is adapted to a narrower habitat band.",
+        "True fir dominance: white fir (Abies concolor) and red fir (A. magnifica) forests, rather than the Douglas fir-western hemlock forests where Townsend's dominates. Different tree species, different canopy structure, different insect communities.",
+        "Cassin's Finch connection (degree 33): same ecosystem tag, different niche. Cassin's sings from dead snag tops (exposed). Hermit sings from living canopy tops (hidden). Both E=4 mountain conifer birds -- one a showman, one a recluse.",
+        "The refuge is shrinking: climate change pushes mountain conifer zones upslope. Wildfire thins mountain conifer stands. And Townsend's is expanding into the hybrid zone's southern edge. Three pressures converging on the Hermit's last stronghold.",
+        "Extreme crown position: 20-50 m [NEEDS VERIFICATION]. The highest warbler position in the engine. Above Townsend's 15-45 m zone. The Hermit Warbler has been pushed to the absolute top of the forest, as if the displacement has pushed it upward until there is nowhere higher to go."
+      ],
+      "music_theory_parallel": "The high register of the highest instrument. When the first violin is pushed to its upper register, the notes thin and the sound becomes fragile -- technically the same instrument, but at its limit. The mountain conifer is the Hermit Warbler's upper register: the same kind of habitat but higher, thinner, more precarious. Below this register, Townsend's plays the main melody."
+    },
+    {
+      "concept": "E=4 continues -- now at 17 degrees (41.5%). TWENTY consecutive degrees without E=3 or below. The Setophaga trio (38-39-40) is uniformly E=4 -- three straight degrees at the same energy level from the same genus in the same family. The dynamic range compression has now passed the 20-degree threshold. Degrees 21-40 have been exclusively E=4 and E=5. The lower three-fifths of the energy spectrum is absent from the entire second eleventh of the circle.",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e4-twenty-degrees/",
+      "examples": [
+        "E=4 dominance: 17 of 41 entries (41.5%). Has appeared in 17 of the last 20 degrees. The modal energy level by a wide margin.",
+        "E=3 absence: 20 consecutive degrees without E=3. The longest gap for any energy level, now at a round-number milestone. The quintet's uniform E=3 is now 20 degrees in the past.",
+        "E=2 absence: 27 degrees since the last E=2 (degree 13, Hutton's Vireo). Over two-thirds of the engine without the default quiet register.",
+        "E=1 absence: 28 degrees since the last E=1 (degree 12, Pine Siskin). The minimum energy level is a distant memory.",
+        "Three consecutive E=4: degrees 38-39-40 all E=4 from the same genus. The energy monotony is now structural -- it is built into the family sequence. The engine URGENTLY needs a low-energy species."
+      ],
+      "music_theory_parallel": "An orchestra that has been playing mezzo-forte for twenty bars straight. Twenty bars. The composer has written 'mf' at bar 21 and never changed it. The audience has forgotten what piano sounds like. The string section has not played below mezzo-forte since bar 20. The conductor is locked in a single dynamic. The Setophaga trio is three more bars of mezzo-forte from the same instrument section. The score needs a subito piano -- not a gradual decrease, but a sudden drop. The engine needs silence, or at least quiet."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-039",
+      "title": "Townsend's Warbler (Degree 39)",
+      "connection": "THE AGGRESSOR. Townsend's Warbler is actively displacing Hermit Warbler through hybridization and competitive exclusion. Degree 39 documented the expanding species. Degree 40 documents the contracting species. Same genus, same energy, same buzzy timbre family. But Townsend's is robust and ascending. Hermit is thin and fading. The victim arrives one degree after the aggressor."
+    },
+    {
+      "project": "SPS-038",
+      "title": "Black-throated Gray Warbler (Degree 38)",
+      "connection": "SETOPHAGA TRIO THIRD MEMBER. Degrees 38-39-40 form an unprecedented three-consecutive same-genus sequence. BTG is the secondary victim of Townsend's displacement (also hybridizes with Townsend's but in dry woodland). The trio maps a displacement cascade: secondary victim (38), aggressor (39), primary victim (40)."
+    },
+    {
+      "project": "SPS-016",
+      "title": "Yellow Warbler (Degree 16)",
+      "connection": "SETOPHAGA QUARTET. Four Setophaga now: Yellow (16, maximum yellow, clean ascending, riparian, E=3), BTG (38, minimum color, flat drawl, oak-pine, E=4), Townsend's (39, bold yellow-black, ascending buzz, conifer canopy, E=4), Hermit (40, yellow face on gray body, thin buzz, mountain conifer, E=4). The quartet maps the full range of Setophaga color strategies and song timbres."
+    },
+    {
+      "project": "SPS-033",
+      "title": "Cassin's Finch (Degree 33)",
+      "connection": "MOUNTAIN CONIFER PAIR. Both are mountain conifer specialists at mid to high elevation, both E=4. Cassin's Finch = exposed snag singer, cadenza, virtuoso. Hermit Warbler = hidden canopy-top singer, thinning, recluse. Same ecosystem, opposite visibility strategies."
+    },
+    {
+      "project": "SPS-020",
+      "title": "Orange-crowned Warbler (Degree 20)",
+      "connection": "LAST E=3 -- twenty degrees ago. Orange-crowned was the quintet closer (E=3, evaporation, partial migrant). Hermit is the trio closer (E=4, thinning, summer migrant). The 20-degree gap between E=3 (degree 20) and the current degree is now the engine's most severe energy compression milestone."
+    },
+    {
+      "project": "SPS-037",
+      "title": "Calliope Hummingbird (Degree 37)",
+      "connection": "FILAMENT vs. THINNING. The filament (degree 37) was the thinnest thread of sound -- near-silent, mechanical, at the edge of perception. The thinning (degree 40) is a recognizable warbler song that has been stretched thin -- still audible but attenuated. Filament = absolute minimum. Thinning = diminishment from something fuller."
+    },
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "GROUND vs. EXTREME CROWN. MacGillivray's introduced Parulidae at ground level (0-2 m). Hermit Warbler is the eighth Parulidae at the extreme crown (20-50 m). Eight warblers now span from forest floor to the absolute top of the tallest mountain conifers."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Hermit Warbler documented as breeder in mountain conifer forests of the southern Cascades and Siskiyous. Range contracting northward from former extent. Hybridization with Townsend's Warbler extensively documented."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Mountain conifer ecology. High-elevation forest zones. True fir and mountain hemlock communities. Species displacement through hybridization as an ecological process. The role of elevation gradients in maintaining species refugia."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 39,
+    "total_entries": 41,
+    "families_represented": 18,
+    "largest_families": {
+      "Parulidae": 8,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Trochilidae": 3,
+      "Fringillidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=4 continues. Now at 17 degrees (41.5%). E=3 absent for 20 DEGREES (since degree 20) -- TWENTY-DEGREE MILESTONE. E=5 at 3 degrees (7.3%). Dynamic range compression deepens further: degrees 21-40 exclusively E=4 and E=5. NO E=3, E=2, or E=1 in 20 degrees. The lower three-fifths of the energy spectrum is absent from the entire range since degree 21.",
+    "consecutive_trio": "Degrees 38-39-40 form the engine's first consecutive family TRIO (Parulidae) and first consecutive genus TRIO (Setophaga). All three E=4. The trio maps a displacement cascade: BTG (secondary victim), Townsend's (aggressor), Hermit (primary victim).",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive"],
+    "ecosystem_note": "Mountain conifer -- high-elevation conifer forests of the southern Cascades and Siskiyous. Distinguished from the broader 'conifer canopy' by elevation, true fir dominance, and drier conditions. Same ecosystem tag as Cassin's Finch (degree 33). The Hermit Warbler's refuge from Townsend's displacement.",
+    "acoustic_element_41": "THE THINNING -- a thin, high, buzzy warbler song from the very tops of mountain conifers. After the canopy buzz's ascending robustness (39), the thinning adds attenuation within the buzz. Named for three simultaneous realities: thin song quality, thinning range, thinning genetic identity. The first acoustic element with ecological meaning in its name.",
+    "parulidae_note": "EIGHTH PARULIDAE -- extending engine record. Leads by THREE over Hirundinidae and Turdidae (5 each). Third consecutive Parulidae (first consecutive family trio). Fourth Setophaga (first consecutive genus trio). Three structural arcs: quintet (14-17, 20), trio (38-39-40), and the displacement narrative.",
+    "hybridization_note": "The Setophaga trio (38-39-40) maps both sides of an active displacement: Townsend's (39) displacing both BTG (38) and Hermit (40) through competitive exclusion via introgression. The victim arrives one degree after the aggressor. The engine documents the complete ecological drama across three consecutive degrees.",
+    "conservation_note": "LEAST CONCERN (IUCN). Population declining [NEEDS VERIFICATION]. Range contracting southward. Primary threat is competitive exclusion by Townsend's Warbler through hybridization -- a natural process, not an anthropogenic one. Conservation paradox: the threat is a native species, the tools don't fit, the genes survive but the identity dissolves.",
+    "critical_gaps": [
+      "No marine/shoreline species in 40 degrees of 'The Sound of Puget Sound' -- 40 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 40 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 40 degrees -- URGENT",
+      "No nocturnal species since degree 4 (36 degrees ago) -- OVERDUE",
+      "E=3 not used since degree 20 (20 degrees ago) -- TWENTY-DEGREE MILESTONE -- CRITICAL",
+      "No E=2 since degree 13 (27 degrees ago) -- LOW ENERGY ABSENT",
+      "No E=1 since degree 12 (28 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "THREE consecutive Parulidae / Setophaga -- warbler fatigue risk at maximum",
+      "No marine species remains the engine's defining structural deficit -- 40 DEGREES OF A PROJECT NAMED FOR PUGET SOUND"
+    ]
+  }
+}
