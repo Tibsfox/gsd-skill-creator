@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Constellation Sphere — Complex Plane of Experience | PNW Research Series</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#020208;font-family:system-ui,-apple-system,sans-serif;color:#c8d0e0}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+#ui{position:absolute;top:0;left:0;right:0;pointer-events:none;z-index:10}
+#topbar{display:flex;align-items:center;padding:8px 12px;gap:8px;flex-wrap:wrap;pointer-events:auto;background:rgba(2,2,8,.85);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}
+#topbar a{color:#93c5fd;text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap}
+#topbar a:hover{color:#bfdbfe}
+.sep{color:rgba(255,255,255,.15);font-size:13px}
+#title{color:#e2e8f0;font-size:14px;font-weight:700;white-space:nowrap}
+#search{all:unset;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:4px 10px;color:#fff;font-size:12px;width:150px;pointer-events:auto;transition:all .2s}
+#search:focus{border-color:rgba(255,255,255,.3);width:200px;background:rgba(255,255,255,.1)}
+#search::placeholder{color:rgba(255,255,255,.25)}
+#clusters{display:flex;gap:3px;flex-wrap:wrap;flex:1;min-width:0}
+.cl{all:unset;cursor:pointer;padding:2px 7px;border-radius:3px;font-size:10px;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.06);transition:all .15s;pointer-events:auto;white-space:nowrap}
+.cl:hover{color:#fff;border-color:var(--c);background:rgba(255,255,255,.04)}
+.cl.on{color:#fff;background:var(--c);border-color:var(--c)}
+#tooltip{position:absolute;pointer-events:none;background:rgba(2,2,8,.92);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:8px 12px;font-size:12px;display:none;z-index:20;max-width:260px;box-shadow:0 4px 16px rgba(0,0,0,.6)}
+#tooltip .tt-id{color:rgba(255,255,255,.4);font-size:10px;font-family:monospace}
+#tooltip .tt-name{color:#fff;font-weight:600;margin:1px 0}
+#tooltip .tt-cluster{font-size:10px;margin-top:2px}
+#tooltip .tt-coords{font-size:9px;color:rgba(255,255,255,.3);margin-top:3px;font-family:monospace}
+#axes{position:absolute;bottom:12px;left:12px;pointer-events:none;z-index:10;font-size:10px;color:rgba(255,255,255,.3);line-height:1.6}
+#axes .real{color:rgba(100,180,255,.5)}
+#axes .imag{color:rgba(255,130,200,.5)}
+#stats{position:absolute;bottom:12px;right:12px;font-size:10px;color:rgba(255,255,255,.2);pointer-events:none;z-index:10;text-align:right}
+#viewToggle{all:unset;cursor:pointer;padding:3px 10px;border-radius:3px;font-size:11px;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.08);pointer-events:auto;transition:all .15s}
+#viewToggle:hover{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06)}
+@media(max-width:640px){#search{width:100%;order:20}#clusters{order:19}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+  <div id="topbar">
+    <a href="index.html">Research</a>
+    <span class="sep">/</span>
+    <a href="constellation.html">2D Map</a>
+    <span class="sep">/</span>
+    <span id="title">Constellation Sphere</span>
+    <div id="clusters"></div>
+    <input type="text" id="search" placeholder="Search...">
+    <button id="viewToggle">Auto-rotate</button>
+  </div>
+</div>
+<div id="tooltip"><div class="tt-id"></div><div class="tt-name"></div><div class="tt-cluster"></div><div class="tt-coords"></div></div>
+<div id="axes">
+  <span class="real">Real axis → Engineering / Concrete</span><br>
+  <span class="imag">Imaginary axis → Culture / Experiential</span><br>
+  Stereographic projection: C → S²
+</div>
+<div id="stats"></div>
+<script>
+// === DATA (same as constellation.html) ===
+var CLUSTERS=[
+{name:'Ecology',color:'#4CAF50',ids:['AGR','AVI','AWF','BCM','BPS','CAS','COL','CRV','ECO','FFA','GDN','LFR','MAM','PGP','PLT','ROF','SAL','TIBS','WYR']},
+{name:'Electronics',color:'#FFB300',ids:['BRC','EMG','FQC','LED','SGL','SHE','SNL','T55']},
+{name:'Infrastructure',color:'#78909C',ids:['CMH','DHP','DNS','FEC','K8S','MCF','MCM','MCS','MDS','OCN','OPS','PNP','PSG','PSS','RFC','SAN','SRD','SYS','TCP']},
+{name:'Energy',color:'#FF7043',ids:['HGE','NND','THE']},
+{name:'Creative',color:'#EC407A',ids:['ANM','APR','ARC','CFU','CHS','DDA','GRD','HEN','INP','MCR','MRW','NEH','SGM','SPA','VAV','VKD','VKS']},
+{name:'Business',color:'#42A5F5',ids:['ACC','BHM','BLA','CDS','JNS','MWC','PPM','PTG','SFC','WPH','WSB']},
+{name:'Vision',color:'#AB47BC',ids:['ABM','ACE','AIH','CDL','CGI','COK','FEG','GPG','GPO','GSA','GSD2','ICS','LLM','M05','MGU','MPC','PMG','SCR','SST','TSL']},
+{name:'Broadcasting',color:'#26A69A',ids:['ALV','AMR','BNY','CBC','CCT','CNA','DFQ','ENB','FCC','IBC','LNT','OTM','RBH','SNX','STA','SVB','TVH']},
+{name:'Science',color:'#5C6BC0',ids:['ATC','BHC','BHK','CYG','EAZ','FDR','GRB','KFU','LGW','LNV','LTS','MST','NWC','NWZ','OSC','PKD','SET','SMB','SMF','STE','WCN','YNT']},
+{name:'Music',color:'#EF5350',ids:['ABL','B52','BMR','C89','CAR','CDP','COI','CRY','CWC','DAA','DPM','DRN','FLS','GGT','GRG','GRV','GTP','HFE','HFR','HJX','KGX','KPZ','KSM','KUB','LKR','MDB','MIX','MTB','OCT','PIN','PJM','PRS','RLS','SFH','S36','SMP','SNY','SOC','SPS','SRG','SSM','TKH','WAL','WLF']},
+{name:'Space',color:'#1E88E5',ids:['CYG','SMB','GRB','BHC','LTS','YNT','MST']},
+{name:'AI',color:'#7E57C2',ids:['SST','CFU','LLM','AIH','AAR']},
+{name:'Graphics',color:'#8E24AA',ids:['NEH','VKD','VKS']}
+];
+
+var PROJECTS=[];
+'AAR:Architecture Alignment|ACC:Accounting|ACE:Compute Engine|ANM:90s Animation|AGR:PNW Agriculture|AIH:AI Horizon|ARC:Shapes & Colors|ATC:Aries-Taurus Cusp|AVI:Birds|B52:The B-52s|AWF:Air Water Food|ABL:Ableton Live|ABM:A Beautiful Mind|ALV:Almost Live!|AMR:AM Radio|APR:Artist Practice|BCM:Building|BPS:Bio-Physics|BHK:Black Holes|BHC:Black Hole Catalog|BHM:Bellingham Market|BLA:Business Law|BMR:Bob Marley|BNY:Bill Nye|BRC:Black Rock City|C89:C89.5 FM|CAS:Cascade Range|CMH:Comp. Mesh|CAR:The Cars|CBC:CBC/Radio-Canada|CCT:Comedy Central|CFU:ComfyUI|CGI:Caliber Integration|CDL:College Deep Linking|CDS:Central District|CDP:Coldplay|CHS:Chaos Sense|CNA:CN & Adult Swim|COI:Coil|COK:College of Knowledge|COL:Columbia Valley|CRV:Corvid PNW|CRY:Curren$y|CWC:Cooking with Claude|CYG:Cygnus X-3|DAA:Deep Audio|DFQ:Dead Frequencies|DHP:DHCP Protocol|DNS:DNS Protocol|DPM:Depeche Mode|DRN:Duran Duran|DDA:dada|EAZ:East Asian Zodiac|ECO:Living Systems|EMG:Electric Motors|ENB:Eskimo North BBS|FCC:FCC Catalog|FDR:Fire Dragon|FEC:Error Correction|FEG:FoxEdu Gap-Fill|FFA:Fur & Feathers|FLS:FL Studio|FQC:Freq. Continuum|GDN:Gardening|GGT:Geggy Tah|GTP:Geggy Tah Prod.|GRB:GRB 230906A|GRD:Gradient Engine|GSA:GSD Alignment|GPG:GPU Ecosystem|GPO:GPU Orchestration|GRG:Gorge Amphitheatre|GRV:Green River|GSD2:GSD-2 Arch.|HFE:Audio Engineering|HFR:Hi-Fi Audio|HEN:Jim Henson|HGE:Hydro-Geothermal|HJX:Hendrix & Joplin|IBC:Indigenous Broadcasting|ICS:Construction Set|INP:Ink & Paint|JNS:JanSport|K8S:Kubernetes|KFU:Mind-Body Practice|KGX:King\'s X|KSM:KISM 92.9|KPZ:KPLZ Seattle|KUB:KUBE 93.3|LED:LED & Controllers|LFR:Living Forest|LKR:Lion King Roots|LGW:LIGO Waves|LLM:Local LLM|LNT:Late Night TV|LNV:Larry Niven|LTS:Listening to Space|M05:Module Split|MAM:Mammals|MCM:Maritime Compute|MCF:Multi-Cluster Fed.|MCS:Maritime Costs|MCR:Minecraft RAG|MDB:Moody Blues|MDS:Markup & Data|MGU:Module Governance|MRW:MC Weather|MST:Mesh Telescope|MTB:Moontribe|MWC:Millwork Co-op|MIX:Sir Mix-A-Lot|MPC:Math Co-Proc.|NND:New New Deal|NEH:NeHe OpenGL|NWC:Norwescon|NWZ:Non-Western Zodiac|OCN:Open Compute|OCT:OctaMED & Trackers|OPS:OpenStack Cloud|OSC:Orson Scott Card|OTM:Odyssey of the Mind|PGP:Garbage Patch|PKD:Philip K. Dick|PJM:Pearl Jam|PLT:PNW Planting|PTG:Paper That Grows|PIN:Post-Industrial|PMG:Pi-Mono + GSD|PNP:Ports & Pipes|PPM:Pike Place Market|PRS:Polyrhythm Standard|PSG:Pacific Spine|PSS:PNW Signal Stack|RBH:Radio History|RFC:RFC Archive|RLS:Resonant Lands|ROF:Ring of Fire|SAL:Salmon Heritage|SCR:Source Code Review|SET:SETI|SFC:Silicon Forest|SFH:SF House Music|SGL:Signal & Light|SGM:Sacred Geometry|SAN:SANS Institute|SMB:SMBH Growth|SNX:Saturday Night Live|S36:Seattle 360|SPS:Sound of Puget Sound|SRD:SSH & RDP|SRG:Susan Rogers|SSM:Street Music|SST:States & Tape|STE:Storage Forensics|SVB:Student Voice|SHE:Smart Home|SMF:SMOFcon|SMP:Smashing Pumpkins|SNL:Sensing Layer|SNY:Sonic Youth|SOC:Strait Out of Compton|SYN:Synsor Corp|SPA:Spatial Awareness|STA:Steve Allen|SYS:Systems Admin|T55:555 Timer|TCP:TCP/IP Protocol|THE:Thermal Energy|TSL:Tessl Review|TIBS:Animal Speak|TKH:Talking Heads|TVH:Television Era|VAV:Voxel as Vessel|VKD:Vulkan Desktop|VKS:Vulkan Screensaver|WAL:Weird Al|WCN:Westercon|WPH:Weekly Phone|WLF:The Wolf|WYR:Weyerhaeuser|WSB:Small Business|YNT:Yuri\'s Night'.split('|').forEach(function(s){var p=s.split(':');PROJECTS.push({id:p[0],name:p[1]})});
+
+var EDGES=[];
+'ABL>FLS,OCT,WAL,DAA,SYN,NEH,SYS;ACE>GSD2,SYS,CMH,MPC,OCN,GPO,SGL,SFC,K8S;AIH>LLM,CFU,MST,TCP,SYS;ALV>SNX,TVH,RFC,DAA,COL,BRC;ANM>HEN,ARC,SPA,INP,STA,FFA,GPG,BNY;APR>BHK,ECO,WAL,COL,BRC,MCF,SYS,GRD,GDN;B52>PJM,FFA,SNY,DAA,DRN,DPM,TKH,CAR,BRC;BHC>BHK,GRB,LTS;BHK>GRD,MPC,SGM,LGW,SET,BPS,THE,FQC,DAA;BHM>PPM,WSB,KSM,SAL,ECO,GDN,AGR;BMR>LKR,CDS,HJX,TIBS,COI,PRS;BNY>SGL,BPS,HFE,LED,SVB,OTM,SFC,ECO;CBC>RBH,FCC,C89,KPZ,PSS,IBC,BHM;CDL>COK,FEG,GSD2,ACE,PMG,WAL,SGM,MPC;CDS>TIBS,BRC,MIX,GRV,PJM,FFA,KUB,SGL;CFU>LLM,AIH,MST,TCP,PNP,SYS,K8S,DNS;CGI>GSD2,ACE,PMG,GSA,MGU,CMH,MCF,K8S,OCN;CHS>VKS,RFC,GRD,ECO,BRC,WPH,SYS,K8S;COK>MPC,GRD,SGM,ACE,WAL,GSD2,OTM,BNY;CRY>MIX,SOC,WSB,ACC,KUB,BMR,HFE,CDS;CWC>COK,SAL,DAA,GRD,PPM,GSD2,MPC,BHM,ECO,AWF,GDN,BPS,AGR,ACC;DFQ>RBH,PSS,KPZ,WLF,FCC,C89,CBC,IBC;DHP>DNS,SYS,CMH,MCF,K8S,WPH,TCP,SAN;DNS>RFC,CMH,SYS,K8S,WPH,MCF,FCC,PSS;DPM>DAA,HFE,SGL,CAR,TKH,PIN,DRN,B52,COI;DRN>DPM,HFE,DAA,CAR,B52,FFA,TKH,CDP;EAZ>ATC,FDR,TIBS,LKR,NWZ,ECO,BMR,SGM;ENB>SYS,WPH,PSS,SFC,K8S,CMH,CDS,RBH;FCC>RBH,PSS,SGL,WPH,DAA,CBC,IBC,SVB,KPZ,C89,T55,LED,CMH,SHE,NND,WSB;FEG>COK,SGM,BNY,OTM,SVB,HEN,ACE,MPC;FLS>ABL,OCT,WAL,SYN,DAA;GPG>GPO,SGL,GSD2,K8S,ACE,MPC,GRD,CMH,LED,SYS,T55;GPO>ACE,MPC,K8S,GSD2,CMH,OCN,SYS,SGL,MCF;GRB>BHK,BHC,LTS;GSA>GSD2,CMH,ACE,MCF,PMG,K8S,MGU,COK;HEN>ANM,ARC,FFA,SGL,INP,BNY,STA,OTM,SVB;HFE>DAA,SGL,SRG,LED,FQC,GTP,HFR,SNY;HFR>DAA,SGL,EMG,FQC,BPS,SNL,SNY,LED;HJX>DAA,GRV,MIX,HFE,HFR,SGL,SRG,SSM,PJM,SNY;IBC>RBH,C89,KSM,TIBS,ECO,SAL,CDS,BHM,SYS,CMH,CBC;ICS>ACE,MPC,GSD2,SGM,BCM,OTM,SPA;INP>FFA,ARC,SPA,LED,HEN,ANM,GPG;KFU>TIBS,FFA,BMR,BRC,SGM,MTB,PRS,OTM;LGW>BHK,FQC,SGL,DAA,GRD,BPS,PSS,MPC;LLM>CFU,AIH,MST,TCP,SYS,K8S;LTS>BHC,BHK,GRB,WAL,APR,SYS,MCF;M05>GSD2,ACE,COK,CDL,CMH,MPC,PMG,CDS,MIX,SAL,SGL;MCF>K8S,SYS,GSD2,CMH,NND,OCN,BRC,MCM;MCS>MCM,NND,HGE,OCN,ROF,THE,ACC,WSB;MGU>PMG,GSD2,CDL,K8S,SYS,ACE,COK,MCF;MRW>PLT,CMH,SPA,SNL,BPS,MCR,ECO,VAV;MST>PNP,SYS,TCP,DNS,K8S,RFC,BRC,AVI,ECO,CFU,LLM,AIH,COL,BPS,MAM;MTB>BRC,FFA,TIBS,PRS,DPM,DAA,SGL,COL,BMR,ECO,PIN,COI,HFE;MWC>ACC,WSB,WYR,BCM,COL,NND,BHM,PPM;NEH>VKD,WAL;NWZ>ATC,FDR,SGM,TIBS,LKR,ECO,BMR,GDN;OCT>ABL,FLS,WAL,DAA,NEH;OPS>GSD2,CMH,ACE,K8S,SYS,NND,MCF,OCN;OSC>PKD,LNV,BNY,SGM,OTM,MPC,CMH,K8S;PIN>NND,SYS,OCN,K8S,CMH,MCM,WYR,SFC;PKD>LNV,OSC,COI,ACE,MRW,STE,DPM,PIN;PNP>TCP,SYS,CMH,GSD2,MCF,K8S,DNS,RFC,SGL,EMG;PPM>AGR,GDN,ECO,SAL,AWF,WSB,ACC;PRS>DAA,FQC,SGL,T55,GRD,BMR,TKH,HJX,SPA;PSS>SGL,FCC,BPS,LED,T55,RBH,SYS,K8S,PSG;PTG>WYR,LFR,ECO,FFA,INP,ICS,COK;RFC>SYS,CMH,K8S,WPH,FCC,DNS,MCF,ENB;SET>BPS,MPC,DAA,SGL,PSS,FQC,SNL,BHK,LGW;SFC>SYS,OCN,SYN,NND,K8S,MCM,WYR,PIN;SFH>DPM,DAA,CDS,HFE,SGL,PRS,MIX,BMR,BRC,MTB,C89;SGL>DAA,FQC,T55,GRD,EMG,LED,SPA,ARC;SGM>MPC,GRD,ARC,FQC,SPA,PRS,BHK,ECO;SMP>DAA,GRV,SNY,HFE,PJM,DPM,HJX,CAR;SNL>BPS,T55,SYS,LED,SGL,SHE,SPA,ECO,EMG,PSS,K8S,DAA,AWF,GSD2;SNX>TVH,ALV,RFC,BRC,DAA,GRD;SOC>CDS,GRV,HJX,KUB,PJM,MIX,BMR,CRY;SRD>TCP,PNP,RFC,FEC,SYS,K8S,MDS,CMH,DNS;SRG>HFE,DAA,SGL,FQC,PRS,HFR,DPM,CAR;SSM>PJM,GRV,PPM,SNY,KUB,MIX,SGL,DAA,COL,CAS,TIBS;SST>GSD2,MPC,GSA,DAA,FQC,HFR,MGU,ICS,GRD,BHK,M05,CGI,HFE;STE>SYS,CMH,SAN,K8S,OCN,ACE,VAV,SGL;SVB>C89,BNY,FCC,RBH,KSM,CBC,OTM;TCP>RFC,DNS,DHP,CMH,SYS,K8S,MCF,GRD,WPH;TKH>DPM,CAR,B52,SNY,DAA,HFE,BMR,DRN,PIN;TVH>RFC,SYS,TCP,PNP,DAA,ALV,COL,DHP,BRC;VKD>NEH,WAL,SYS;VKS>SYS,GRD,CMH,DAA,ECO,BRC,CHS,K8S;WPH>SHE,SYS,CMH,SGL,LED,FCC,PSS,GRD,EMG,RBH,BRC,DAA,HFE,GSD2;YNT>LTS,BHK,SYS,RFC,BRC'.split(';').forEach(function(g){var p=g.split('>');var s=p[0];p[1].split(',').forEach(function(t){EDGES.push([s,t])})});
+
+// Build index
+var idxMap={},clusterOf={},colorOf={};
+PROJECTS.forEach(function(p,i){idxMap[p.id]=i});
+CLUSTERS.forEach(function(c){c.ids.forEach(function(id){if(!clusterOf[id]){clusterOf[id]=c;colorOf[id]=c.color}})});
+PROJECTS.forEach(function(p){if(!clusterOf[p.id]){clusterOf[p.id]=CLUSTERS[0];colorOf[p.id]=CLUSTERS[0].color}});
+var N=PROJECTS.length;
+var edgeIdx=[];
+EDGES.forEach(function(e){var a=idxMap[e[0]],b=idxMap[e[1]];if(a!==undefined&&b!==undefined)edgeIdx.push([a,b])});
+var degree=new Uint16Array(N);
+edgeIdx.forEach(function(e){degree[e[0]]++;degree[e[1]]++});
+
+// === COMPLEX PLANE → SPHERE MAPPING ===
+// Each cluster maps to a region of the complex plane.
+// Real axis = how "concrete/engineering" the cluster is
+// Imaginary axis = how "cultural/experiential" the cluster is
+// Stereographic projection maps C → S²
+
+var clusterComplexCenter = {
+  'Infrastructure': { re: 0.9, im: -0.6 },   // very concrete, low experiential
+  'Electronics':    { re: 0.7, im: -0.2 },    // concrete, slightly technical
+  'Energy':         { re: 0.6, im: -0.4 },    // concrete, practical
+  'Science':        { re: 0.5, im: 0.3 },     // concrete + some wonder
+  'Space':          { re: 0.3, im: 0.7 },      // engineering + awe
+  'Vision':         { re: 0.1, im: 0.5 },      // abstract, forward-looking
+  'AI':             { re: 0.3, im: 0.2 },      // technical but abstract
+  'Business':       { re: 0.4, im: -0.5 },     // concrete, practical
+  'Ecology':        { re: -0.3, im: 0.6 },     // experiential, living
+  'Creative':       { re: -0.6, im: 0.8 },     // experiential, artistic
+  'Music':          { re: -0.8, im: 0.9 },     // deeply experiential
+  'Broadcasting':   { re: -0.2, im: -0.3 },    // communication, mixed
+  'Graphics':       { re: -0.4, im: 0.4 }      // visual, creative-technical
+};
+
+// Assign complex coordinates to each project
+var complexZ = new Float32Array(N * 2); // [re, im] pairs
+PROJECTS.forEach(function(p, i) {
+  var c = clusterOf[p.id];
+  var center = clusterComplexCenter[c.name] || { re: 0, im: 0 };
+  // Scatter within cluster region
+  var hash1 = (p.id.charCodeAt(0) * 31 + (p.id.charCodeAt(1)||0) * 17 + (p.id.charCodeAt(2)||0) * 7) % 1000 / 1000;
+  var hash2 = (p.id.charCodeAt(0) * 13 + (p.id.charCodeAt(1)||0) * 37 + (p.id.charCodeAt(2)||0) * 23) % 1000 / 1000;
+  complexZ[i*2]   = center.re + (hash1 - 0.5) * 0.4; // real
+  complexZ[i*2+1] = center.im + (hash2 - 0.5) * 0.4; // imaginary
+});
+
+// Stereographic projection: C → S²
+// (x, y) → (2x/(1+x²+y²), 2y/(1+x²+y²), (x²+y²-1)/(1+x²+y²))
+var spherePos = new Float32Array(N * 3);
+function projectToSphere() {
+  for (var i = 0; i < N; i++) {
+    var x = complexZ[i*2], y = complexZ[i*2+1];
+    var d = 1 + x*x + y*y;
+    spherePos[i*3]   = 2*x / d;
+    spherePos[i*3+1] = 2*y / d;
+    spherePos[i*3+2] = (x*x + y*y - 1) / d;
+  }
+}
+projectToSphere();
+
+// === WebGL RENDERER ===
+var canvas = document.getElementById('c');
+var gl = canvas.getContext('webgl', { antialias: true, alpha: false });
+if (!gl) { document.body.innerHTML = '<p style="color:red;padding:2rem;">WebGL not available</p>'; throw 'no gl'; }
+
+function resize() {
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = canvas.clientWidth * dpr;
+  canvas.height = canvas.clientHeight * dpr;
+  gl.viewport(0, 0, canvas.width, canvas.height);
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Shaders
+var vsrc = `
+  attribute vec3 aPos;
+  attribute vec3 aColor;
+  attribute float aSize;
+  attribute float aAlpha;
+  uniform mat4 uMVP;
+  uniform float uScale;
+  varying vec3 vColor;
+  varying float vAlpha;
+  void main() {
+    gl_Position = uMVP * vec4(aPos, 1.0);
+    gl_PointSize = aSize * uScale / gl_Position.w;
+    vColor = aColor;
+    vAlpha = aAlpha;
+  }
+`;
+var fsrc = `
+  precision mediump float;
+  varying vec3 vColor;
+  varying float vAlpha;
+  void main() {
+    float d = length(gl_PointCoord - 0.5) * 2.0;
+    if (d > 1.0) discard;
+    float glow = exp(-d * d * 3.0);
+    gl_FragColor = vec4(vColor * (0.6 + glow * 0.4), vAlpha * glow);
+  }
+`;
+
+function compileShader(type, src) {
+  var s = gl.createShader(type);
+  gl.shaderSource(s, src);
+  gl.compileShader(s);
+  if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(s));
+  return s;
+}
+var prog = gl.createProgram();
+gl.attachShader(prog, compileShader(gl.VERTEX_SHADER, vsrc));
+gl.attachShader(prog, compileShader(gl.FRAGMENT_SHADER, fsrc));
+gl.linkProgram(prog);
+gl.useProgram(prog);
+
+var aPos = gl.getAttribLocation(prog, 'aPos');
+var aColor = gl.getAttribLocation(prog, 'aColor');
+var aSize = gl.getAttribLocation(prog, 'aSize');
+var aAlpha = gl.getAttribLocation(prog, 'aAlpha');
+var uMVP = gl.getUniformLocation(prog, 'uMVP');
+var uScale = gl.getUniformLocation(prog, 'uScale');
+
+// Buffers
+var posBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+gl.bufferData(gl.ARRAY_BUFFER, spherePos, gl.STATIC_DRAW);
+
+var colors = new Float32Array(N * 3);
+PROJECTS.forEach(function(p, i) {
+  var hex = colorOf[p.id];
+  colors[i*3]   = parseInt(hex.slice(1,3),16) / 255;
+  colors[i*3+1] = parseInt(hex.slice(3,5),16) / 255;
+  colors[i*3+2] = parseInt(hex.slice(5,7),16) / 255;
+});
+var colBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, colBuf);
+gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
+
+var sizes = new Float32Array(N);
+for (var i = 0; i < N; i++) sizes[i] = 8 + degree[i] * 2;
+var sizeBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, sizeBuf);
+gl.bufferData(gl.ARRAY_BUFFER, sizes, gl.STATIC_DRAW);
+
+var alphas = new Float32Array(N);
+for (var i = 0; i < N; i++) alphas[i] = 1.0;
+var alphaBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, alphaBuf);
+gl.bufferData(gl.ARRAY_BUFFER, alphas, gl.DYNAMIC_DRAW);
+
+// Edge line buffer
+var edgeVerts = new Float32Array(edgeIdx.length * 6);
+for (var i = 0; i < edgeIdx.length; i++) {
+  var a = edgeIdx[i][0], b = edgeIdx[i][1];
+  edgeVerts[i*6]   = spherePos[a*3];   edgeVerts[i*6+1] = spherePos[a*3+1]; edgeVerts[i*6+2] = spherePos[a*3+2];
+  edgeVerts[i*6+3] = spherePos[b*3];   edgeVerts[i*6+4] = spherePos[b*3+1]; edgeVerts[i*6+5] = spherePos[b*3+2];
+}
+var edgeBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, edgeBuf);
+gl.bufferData(gl.ARRAY_BUFFER, edgeVerts, gl.STATIC_DRAW);
+
+// Simple line shader
+var lvsrc = 'attribute vec3 aPos;uniform mat4 uMVP;void main(){gl_Position=uMVP*vec4(aPos,1.0);}';
+var lfsrc = 'precision mediump float;uniform vec4 uLineColor;void main(){gl_FragColor=uLineColor;}';
+var lprog = gl.createProgram();
+gl.attachShader(lprog, compileShader(gl.VERTEX_SHADER, lvsrc));
+gl.attachShader(lprog, compileShader(gl.FRAGMENT_SHADER, lfsrc));
+gl.linkProgram(lprog);
+var laPos = gl.getAttribLocation(lprog, 'aPos');
+var luMVP = gl.getUniformLocation(lprog, 'uMVP');
+var luColor = gl.getUniformLocation(lprog, 'uLineColor');
+
+// Wireframe sphere
+var wireVerts = [];
+for (var lat = -80; lat <= 80; lat += 20) {
+  for (var lon = 0; lon < 360; lon += 5) {
+    var la1 = lat * Math.PI/180, lo1 = lon * Math.PI/180;
+    var la2 = lat * Math.PI/180, lo2 = (lon+5) * Math.PI/180;
+    wireVerts.push(Math.cos(la1)*Math.cos(lo1), Math.sin(la1), Math.cos(la1)*Math.sin(lo1));
+    wireVerts.push(Math.cos(la2)*Math.cos(lo2), Math.sin(la2), Math.cos(la2)*Math.sin(lo2));
+  }
+}
+for (var lon = 0; lon < 360; lon += 30) {
+  for (var lat = -90; lat < 90; lat += 5) {
+    var la1 = lat * Math.PI/180, lo1 = lon * Math.PI/180;
+    var la2 = (lat+5) * Math.PI/180;
+    wireVerts.push(Math.cos(la1)*Math.cos(lo1), Math.sin(la1), Math.cos(la1)*Math.sin(lo1));
+    wireVerts.push(Math.cos(la2)*Math.cos(lo1), Math.sin(la2), Math.cos(la2)*Math.sin(lo1));
+  }
+}
+// Equator (real axis) and prime meridian (imaginary axis) highlighted separately
+var axisVerts = [];
+for (var a = 0; a < 360; a += 2) {
+  var r1 = a * Math.PI/180, r2 = (a+2) * Math.PI/180;
+  // Equator (real axis)
+  axisVerts.push(Math.cos(r1), 0, Math.sin(r1));
+  axisVerts.push(Math.cos(r2), 0, Math.sin(r2));
+}
+for (var a = -90; a < 90; a += 2) {
+  var r1 = a * Math.PI/180, r2 = (a+2) * Math.PI/180;
+  // Prime meridian (imaginary axis)
+  axisVerts.push(0, Math.sin(r1), Math.cos(r1));
+  axisVerts.push(0, Math.sin(r2), Math.cos(r2));
+}
+
+var wireBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, wireBuf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(wireVerts), gl.STATIC_DRAW);
+var wireCount = wireVerts.length / 3;
+
+var axisBuf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, axisBuf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(axisVerts), gl.STATIC_DRAW);
+var axisCount = axisVerts.length / 3;
+
+// === Matrix math (minimal) ===
+function mat4Perspective(fov, aspect, near, far) {
+  var f = 1 / Math.tan(fov/2), nf = 1/(near-far);
+  return new Float32Array([f/aspect,0,0,0, 0,f,0,0, 0,0,(far+near)*nf,-1, 0,0,2*far*near*nf,0]);
+}
+function mat4LookAt(eye, center, up) {
+  var zx=eye[0]-center[0],zy=eye[1]-center[1],zz=eye[2]-center[2];
+  var zl=Math.sqrt(zx*zx+zy*zy+zz*zz);zx/=zl;zy/=zl;zz/=zl;
+  var xx=up[1]*zz-up[2]*zy,xy=up[2]*zx-up[0]*zz,xz=up[0]*zy-up[1]*zx;
+  var xl=Math.sqrt(xx*xx+xy*xy+xz*xz);xx/=xl;xy/=xl;xz/=xl;
+  var yx=zy*xz-zz*xy,yy=zz*xx-zx*xz,yz=zx*xy-zy*xx;
+  return new Float32Array([xx,yx,zx,0, xy,yy,zy,0, xz,yz,zz,0,
+    -(xx*eye[0]+xy*eye[1]+xz*eye[2]),-(yx*eye[0]+yy*eye[1]+yz*eye[2]),-(zx*eye[0]+zy*eye[1]+zz*eye[2]),1]);
+}
+function mat4Mul(a, b) {
+  var r = new Float32Array(16);
+  for (var i=0;i<4;i++) for(var j=0;j<4;j++) {
+    r[i*4+j] = a[j]*b[i*4] + a[4+j]*b[i*4+1] + a[8+j]*b[i*4+2] + a[12+j]*b[i*4+3];
+  }
+  return r;
+}
+
+// Camera
+var rotX = 0.3, rotY = 0, camDist = 3.5;
+var autoRotate = true;
+var dragging = false, lastMX, lastMY;
+var activeCluster = null, searchTerm = '';
+var hoverIdx = -1;
+
+// Interaction
+canvas.addEventListener('pointerdown', function(e) {
+  dragging = true; lastMX = e.clientX; lastMY = e.clientY;
+  autoRotate = false;
+  document.getElementById('viewToggle').textContent = 'Auto-rotate';
+  canvas.setPointerCapture(e.pointerId);
+});
+canvas.addEventListener('pointermove', function(e) {
+  if (dragging) {
+    rotY += (e.clientX - lastMX) * 0.005;
+    rotX += (e.clientY - lastMY) * 0.005;
+    rotX = Math.max(-Math.PI/2 + 0.1, Math.min(Math.PI/2 - 0.1, rotX));
+    lastMX = e.clientX; lastMY = e.clientY;
+  } else {
+    // Raycast for hover
+    hoverIdx = raycast(e.clientX, e.clientY);
+    updateTooltip(e.clientX, e.clientY);
+  }
+});
+canvas.addEventListener('pointerup', function(e) {
+  var wasDrag = dragging && (Math.abs(e.clientX - lastMX) > 3 || Math.abs(e.clientY - lastMY) > 3);
+  dragging = false;
+  if (!wasDrag && hoverIdx >= 0) window.location.href = PROJECTS[hoverIdx].id + '/index.html';
+});
+canvas.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  camDist *= e.deltaY > 0 ? 1.08 : 0.92;
+  camDist = Math.max(1.5, Math.min(8, camDist));
+}, { passive: false });
+
+// Raycast (approximate: check screen-space distance)
+function raycast(mx, my) {
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var sx = mx * dpr, sy = my * dpr;
+  var best = -1, bestD = 30; // pixel threshold
+  var proj = mat4Perspective(Math.PI/4, canvas.width/canvas.height, 0.1, 100);
+  var eyeX = Math.sin(rotY)*Math.cos(rotX)*camDist;
+  var eyeY = Math.sin(rotX)*camDist;
+  var eyeZ = Math.cos(rotY)*Math.cos(rotX)*camDist;
+  var view = mat4LookAt([eyeX,eyeY,eyeZ],[0,0,0],[0,1,0]);
+  var mvp = mat4Mul(proj, view);
+  for (var i = 0; i < N; i++) {
+    if (alphas[i] < 0.15) continue;
+    var x=spherePos[i*3],y=spherePos[i*3+1],z=spherePos[i*3+2];
+    var cx=mvp[0]*x+mvp[4]*y+mvp[8]*z+mvp[12];
+    var cy=mvp[1]*x+mvp[5]*y+mvp[9]*z+mvp[13];
+    var cw=mvp[3]*x+mvp[7]*y+mvp[11]*z+mvp[15];
+    if (cw < 0.01) continue;
+    var ndx=cx/cw, ndy=cy/cw;
+    var px2=(ndx*0.5+0.5)*canvas.width, py2=(0.5-ndy*0.5)*canvas.height;
+    var d=Math.sqrt((px2-sx)*(px2-sx)+(py2-sy)*(py2-sy));
+    if(d<bestD){bestD=d;best=i}
+  }
+  return best;
+}
+
+// Tooltip
+var tooltip = document.getElementById('tooltip');
+function updateTooltip(mx, my) {
+  if (hoverIdx < 0) { tooltip.style.display='none'; canvas.style.cursor='grab'; return; }
+  canvas.style.cursor='pointer';
+  var p = PROJECTS[hoverIdx], c = clusterOf[p.id];
+  tooltip.querySelector('.tt-id').textContent = p.id;
+  tooltip.querySelector('.tt-name').textContent = p.name;
+  tooltip.querySelector('.tt-cluster').innerHTML = '<span style="color:'+c.color+'">&#9679;</span> '+c.name+' &middot; '+degree[hoverIdx]+' connections';
+  tooltip.querySelector('.tt-coords').textContent = 'z = '+complexZ[hoverIdx*2].toFixed(2)+' + '+complexZ[hoverIdx*2+1].toFixed(2)+'i';
+  tooltip.style.display='block';
+  var tx=mx+14,ty=my-10;
+  if(tx+260>window.innerWidth)tx=mx-264;
+  tooltip.style.left=tx+'px';tooltip.style.top=ty+'px';
+}
+
+// Cluster buttons
+var clDiv = document.getElementById('clusters');
+CLUSTERS.forEach(function(c) {
+  var btn = document.createElement('button');
+  btn.className = 'cl'; btn.textContent = c.name;
+  btn.style.setProperty('--c', c.color);
+  btn.addEventListener('click', function() {
+    if (activeCluster === c) { activeCluster = null; btn.classList.remove('on'); }
+    else {
+      document.querySelectorAll('.cl').forEach(function(b){b.classList.remove('on')});
+      activeCluster = c; btn.classList.add('on');
+    }
+    updateVisibility();
+  });
+  clDiv.appendChild(btn);
+});
+
+// Search
+document.getElementById('search').addEventListener('input', function() {
+  searchTerm = this.value.toLowerCase().trim();
+  if (searchTerm) { activeCluster=null; document.querySelectorAll('.cl').forEach(function(b){b.classList.remove('on')}); }
+  updateVisibility();
+});
+
+// Auto-rotate toggle
+document.getElementById('viewToggle').addEventListener('click', function() {
+  autoRotate = !autoRotate;
+  this.textContent = autoRotate ? 'Stop rotation' : 'Auto-rotate';
+});
+
+function updateVisibility() {
+  var matchSet = null;
+  if (searchTerm) {
+    matchSet = new Set();
+    PROJECTS.forEach(function(p,i) {
+      if (p.name.toLowerCase().indexOf(searchTerm)!==-1 || p.id.toLowerCase().indexOf(searchTerm)!==-1) matchSet.add(i);
+    });
+  }
+  for (var i=0;i<N;i++) {
+    var vis = true;
+    if (activeCluster && clusterOf[PROJECTS[i].id] !== activeCluster) vis = false;
+    if (matchSet && !matchSet.has(i)) vis = false;
+    alphas[i] = vis ? 1.0 : 0.05;
+  }
+  gl.bindBuffer(gl.ARRAY_BUFFER, alphaBuf);
+  gl.bufferData(gl.ARRAY_BUFFER, alphas, gl.DYNAMIC_DRAW);
+}
+
+document.getElementById('stats').textContent = N+' projects \u00b7 '+edgeIdx.length+' connections \u00b7 Riemann sphere S\u00b2';
+
+// === RENDER ===
+gl.enable(gl.BLEND);
+gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+gl.clearColor(0.008, 0.008, 0.03, 1);
+
+function frame(t) {
+  requestAnimationFrame(frame);
+  if (autoRotate) rotY += 0.002;
+
+  resize();
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+  var aspect = canvas.width / canvas.height;
+  var proj = mat4Perspective(Math.PI/4, aspect, 0.1, 100);
+  var eyeX = Math.sin(rotY)*Math.cos(rotX)*camDist;
+  var eyeY = Math.sin(rotX)*camDist;
+  var eyeZ = Math.cos(rotY)*Math.cos(rotX)*camDist;
+  var view = mat4LookAt([eyeX, eyeY, eyeZ], [0,0,0], [0,1,0]);
+  var mvp = mat4Mul(proj, view);
+
+  // Draw wireframe sphere
+  gl.useProgram(lprog);
+  gl.uniformMatrix4fv(luMVP, false, mvp);
+  gl.uniform4f(luColor, 0.15, 0.2, 0.35, 0.12);
+  gl.bindBuffer(gl.ARRAY_BUFFER, wireBuf);
+  gl.enableVertexAttribArray(laPos);
+  gl.vertexAttribPointer(laPos, 3, gl.FLOAT, false, 0, 0);
+  gl.drawArrays(gl.LINES, 0, wireCount);
+
+  // Draw axes (real = blue, imaginary = pink)
+  gl.bindBuffer(gl.ARRAY_BUFFER, axisBuf);
+  gl.vertexAttribPointer(laPos, 3, gl.FLOAT, false, 0, 0);
+  // Real axis (equator) — first half
+  gl.uniform4f(luColor, 0.25, 0.55, 1.0, 0.3);
+  gl.drawArrays(gl.LINES, 0, axisCount / 2);
+  // Imaginary axis (meridian) — second half
+  gl.uniform4f(luColor, 1.0, 0.4, 0.7, 0.3);
+  gl.drawArrays(gl.LINES, axisCount / 2, axisCount / 2);
+
+  // Draw edges
+  gl.uniform4f(luColor, 0.3, 0.35, 0.5, 0.08);
+  gl.bindBuffer(gl.ARRAY_BUFFER, edgeBuf);
+  gl.vertexAttribPointer(laPos, 3, gl.FLOAT, false, 0, 0);
+  gl.drawArrays(gl.LINES, 0, edgeIdx.length * 2);
+  gl.disableVertexAttribArray(laPos);
+
+  // Draw points
+  gl.useProgram(prog);
+  gl.uniformMatrix4fv(uMVP, false, mvp);
+  gl.uniform1f(uScale, canvas.height * 0.4);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, posBuf);
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, colBuf);
+  gl.enableVertexAttribArray(aColor);
+  gl.vertexAttribPointer(aColor, 3, gl.FLOAT, false, 0, 0);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, sizeBuf);
+  gl.enableVertexAttribArray(aSize);
+  gl.vertexAttribPointer(aSize, 1, gl.FLOAT, false, 0, 0);
+
+  gl.bindBuffer(gl.ARRAY_BUFFER, alphaBuf);
+  gl.enableVertexAttribArray(aAlpha);
+  gl.vertexAttribPointer(aAlpha, 1, gl.FLOAT, false, 0, 0);
+
+  gl.drawArrays(gl.POINTS, 0, N);
+
+  gl.disableVertexAttribArray(aPos);
+  gl.disableVertexAttribArray(aColor);
+  gl.disableVertexAttribArray(aSize);
+  gl.disableVertexAttribArray(aAlpha);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
