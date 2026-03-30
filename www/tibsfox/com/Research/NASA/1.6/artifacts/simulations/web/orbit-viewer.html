@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 6 Orbit Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0A0A2E;
+    color: #B0C0E0;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #container {
+    max-width: 1400px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+  }
+  #canvas-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  canvas {
+    display: block;
+    background: #050520;
+    border: 1px solid #1A1A4A;
+    border-radius: 4px;
+  }
+  #panel {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  h1 { font-size: 14px; color: #7EC8E3; text-align: center; letter-spacing: 1px; }
+  h2 { font-size: 11px; color: #556688; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0D0D35;
+    border: 1px solid #1A1A5A;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+  .label { color: #556688; }
+  .value { color: #7EC8E3; font-weight: bold; }
+  .warn { color: #FF8844; }
+  .safe { color: #33CC33; }
+  .dim { color: #334466; }
+  .controls label {
+    font-size: 10px;
+    color: #556688;
+    display: flex;
+    justify-content: space-between;
+  }
+  .controls input[type="range"] {
+    width: 100%;
+    accent-color: #7EC8E3;
+    margin-top: 2px;
+  }
+  button {
+    background: #1A1A4A;
+    color: #7EC8E3;
+    border: 1px solid #7EC8E3;
+    padding: 8px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  button:hover { background: #2A2A5A; }
+  #radiation-bar {
+    height: 12px;
+    background: #111;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  #radiation-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #33CC33, #FFCC00, #FF4444);
+    border-radius: 3px;
+    transition: width 0.3s;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="canvas-frame">
+    <canvas id="orbit" width="800" height="800"></canvas>
+  </div>
+  <div id="panel">
+    <h1>EXPLORER 6 ORBIT VIEWER</h1>
+    <h2>Highly Elliptical Orbit &mdash; 237 x 42,400 km</h2>
+
+    <div class="box">
+      <span class="label">Altitude:</span> <span class="value" id="d-alt">237</span> <span class="dim">km</span><br>
+      <span class="label">Velocity:</span> <span class="value" id="d-vel">10.3</span> <span class="dim">km/s</span><br>
+      <span class="label">Phase:</span> <span class="value" id="d-phase">Perigee</span><br>
+      <span class="label">Orbit Time:</span> <span class="value" id="d-time">0:00</span><br>
+      <span class="label">Period:</span> <span class="value">12.5 hours</span>
+    </div>
+
+    <div class="box">
+      <span class="label">Radiation Zone:</span> <span id="d-zone" class="safe">Below Belts</span><br>
+      <span class="label">Dose Rate:</span> <span class="value" id="d-dose">Low</span><br>
+      <div id="radiation-bar"><div id="radiation-fill"></div></div>
+    </div>
+
+    <div class="box controls">
+      <label>Time Scale <span class="value" id="ts-val">100x</span></label>
+      <input type="range" id="timescale" min="10" max="1000" step="10" value="100">
+    </div>
+
+    <button id="btn-toggle">PAUSE</button>
+
+    <div class="box" style="font-size:10px; line-height:1.5;">
+      <span class="label">Legend:</span><br>
+      <span style="color:#7EC8E3;">&bull;</span> Explorer 6 spacecraft<br>
+      <span style="color:#FF666666;">&bull;</span> Inner Van Allen Belt (~1,500-5,000 km)<br>
+      <span style="color:#FF884466;">&bull;</span> Outer Van Allen Belt (~12,000-25,000 km)<br>
+      <span style="color:#4488FF44;">&bull;</span> Ring Current region (3-8 R<sub>E</sub>)<br>
+      <span style="color:#33333366;">&bull;</span> Slot region
+    </div>
+
+    <div class="box" style="font-size:10px; color:#556688; line-height:1.5;">
+      Explorer 6 traversed both Van Allen radiation belts on every orbit. Its highly elliptical trajectory took it from 237 km (skimming the atmosphere) to 42,400 km (beyond geosynchronous). Kepler's second law: fast at perigee, slow at apogee. Most time spent in the outer belt.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('orbit');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+const CX = W / 2;
+const CY = H / 2;
+
+// Physics constants
+const MU = 3.986e14;       // Earth gravitational parameter
+const R_EARTH = 6.371e6;   // Earth radius (m)
+const PERIGEE = 237e3 + R_EARTH;
+const APOGEE = 42400e3 + R_EARTH;
+const SEMI_MAJOR = (PERIGEE + APOGEE) / 2;
+const ECCENTRICITY = (APOGEE - PERIGEE) / (APOGEE + PERIGEE);
+const PERIOD = 2 * Math.PI * Math.sqrt(Math.pow(SEMI_MAJOR, 3) / MU);
+
+// Scale: map orbit to canvas
+const SCALE = (W * 0.42) / APOGEE;
+const EARTH_R = R_EARTH * SCALE;
+
+// State
+let meanAnomaly = 0;
+let paused = false;
+let timeScale = 100;
+let trail = [];
+const MAX_TRAIL = 500;
+
+// Controls
+document.getElementById('timescale').addEventListener('input', function() {
+  timeScale = parseInt(this.value);
+  document.getElementById('ts-val').textContent = timeScale + 'x';
+});
+
+document.getElementById('btn-toggle').addEventListener('click', function() {
+  paused = !paused;
+  this.textContent = paused ? 'RESUME' : 'PAUSE';
+});
+
+function solveKepler(M, e, iterations) {
+  let E = M;
+  for (let i = 0; i < iterations; i++) {
+    E = E - (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+  }
+  return E;
+}
+
+function getOrbitalState(M) {
+  const E = solveKepler(M, ECCENTRICITY, 20);
+  const trueAnomaly = 2 * Math.atan2(
+    Math.sqrt(1 + ECCENTRICITY) * Math.sin(E / 2),
+    Math.sqrt(1 - ECCENTRICITY) * Math.cos(E / 2)
+  );
+  const r = SEMI_MAJOR * (1 - ECCENTRICITY * ECCENTRICITY) /
+            (1 + ECCENTRICITY * Math.cos(trueAnomaly));
+  const v = Math.sqrt(MU * (2 / r - 1 / SEMI_MAJOR));
+  return { r, v, trueAnomaly };
+}
+
+function vanAllenFlux(altKm) {
+  const inner = 0.8 * Math.exp(-Math.pow((altKm - 3000) / 1500, 2));
+  const outer = 1.0 * Math.exp(-Math.pow((altKm - 18000) / 6000, 2));
+  return inner + outer;
+}
+
+function getRadiationZone(altKm) {
+  if (altKm < 1500) return { zone: 'Below Belts', color: '#33CC33' };
+  if (altKm < 5000) return { zone: 'INNER BELT', color: '#FF4444' };
+  if (altKm < 12000) return { zone: 'Slot Region', color: '#888888' };
+  if (altKm < 25000) return { zone: 'OUTER BELT', color: '#FF8844' };
+  return { zone: 'Above Belts', color: '#7EC8E3' };
+}
+
+function drawStars() {
+  // Fixed star field
+  const rng = (seed) => {
+    let s = seed;
+    return () => { s = (s * 16807) % 2147483647; return s / 2147483647; };
+  };
+  const rand = rng(42);
+  ctx.fillStyle = '#FFFFFF';
+  for (let i = 0; i < 200; i++) {
+    const x = rand() * W;
+    const y = rand() * H;
+    const brightness = rand() * 0.5 + 0.1;
+    ctx.globalAlpha = brightness;
+    ctx.fillRect(x, y, 1, 1);
+  }
+  ctx.globalAlpha = 1;
+}
+
+function drawVanAllenBelts() {
+  // Inner belt
+  const innerMin = (1500e3 + R_EARTH) * SCALE;
+  const innerMax = (5000e3 + R_EARTH) * SCALE;
+  const innerGrad = ctx.createRadialGradient(CX, CY, innerMin, CX, CY, innerMax);
+  innerGrad.addColorStop(0, 'rgba(255, 80, 80, 0)');
+  innerGrad.addColorStop(0.3, 'rgba(255, 80, 80, 0.08)');
+  innerGrad.addColorStop(0.7, 'rgba(255, 80, 80, 0.12)');
+  innerGrad.addColorStop(1, 'rgba(255, 80, 80, 0)');
+  ctx.fillStyle = innerGrad;
+  ctx.beginPath();
+  ctx.arc(CX, CY, innerMax, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Outer belt
+  const outerMin = (12000e3 + R_EARTH) * SCALE;
+  const outerMax = (25000e3 + R_EARTH) * SCALE;
+  const outerGrad = ctx.createRadialGradient(CX, CY, outerMin, CX, CY, outerMax);
+  outerGrad.addColorStop(0, 'rgba(255, 136, 68, 0)');
+  outerGrad.addColorStop(0.3, 'rgba(255, 136, 68, 0.06)');
+  outerGrad.addColorStop(0.7, 'rgba(255, 136, 68, 0.1)');
+  outerGrad.addColorStop(1, 'rgba(255, 136, 68, 0)');
+  ctx.fillStyle = outerGrad;
+  ctx.beginPath();
+  ctx.arc(CX, CY, outerMax, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Ring current region (subtle blue)
+  const ringMin = (3 * R_EARTH) * SCALE;
+  const ringMax = (8 * R_EARTH) * SCALE;
+  ctx.strokeStyle = 'rgba(68, 136, 255, 0.08)';
+  ctx.lineWidth = (ringMax - ringMin);
+  ctx.beginPath();
+  ctx.arc(CX, CY, (ringMin + ringMax) / 2, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Belt labels
+  ctx.font = '10px Courier New';
+  ctx.fillStyle = 'rgba(255, 100, 100, 0.4)';
+  ctx.fillText('Inner Belt', CX + innerMin + 5, CY - 5);
+  ctx.fillStyle = 'rgba(255, 136, 68, 0.4)';
+  ctx.fillText('Outer Belt', CX + outerMin + 5, CY - 5);
+}
+
+function drawOrbitPath() {
+  ctx.strokeStyle = 'rgba(126, 200, 227, 0.15)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let i = 0; i <= 360; i++) {
+    const M = (i / 360) * 2 * Math.PI;
+    const state = getOrbitalState(M);
+    const x = CX + Math.cos(state.trueAnomaly) * state.r * SCALE;
+    const y = CY + Math.sin(state.trueAnomaly) * state.r * SCALE;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.stroke();
+}
+
+function drawEarth() {
+  // Earth shadow (night side)
+  ctx.fillStyle = '#0A1A3A';
+  ctx.beginPath();
+  ctx.arc(CX, CY, EARTH_R, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Day side
+  const earthGrad = ctx.createRadialGradient(CX + 3, CY - 3, 0, CX, CY, EARTH_R);
+  earthGrad.addColorStop(0, '#4488CC');
+  earthGrad.addColorStop(0.6, '#336699');
+  earthGrad.addColorStop(1, '#1A3355');
+  ctx.fillStyle = earthGrad;
+  ctx.beginPath();
+  ctx.arc(CX, CY, EARTH_R, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Atmosphere glow
+  ctx.strokeStyle = 'rgba(100, 180, 255, 0.2)';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(CX, CY, EARTH_R + 2, 0, Math.PI * 2);
+  ctx.stroke();
+}
+
+let lastTimestamp = 0;
+
+function animate(timestamp) {
+  const dt = lastTimestamp ? (timestamp - lastTimestamp) / 1000 : 0;
+  lastTimestamp = timestamp;
+
+  if (!paused) {
+    // Advance mean anomaly
+    const dM = (2 * Math.PI / PERIOD) * dt * timeScale;
+    meanAnomaly = (meanAnomaly + dM) % (2 * Math.PI);
+  }
+
+  const state = getOrbitalState(meanAnomaly);
+  const altKm = (state.r - R_EARTH) / 1e3;
+  const velKms = state.v / 1e3;
+
+  // Spacecraft position on canvas
+  const scX = CX + Math.cos(state.trueAnomaly) * state.r * SCALE;
+  const scY = CY + Math.sin(state.trueAnomaly) * state.r * SCALE;
+
+  // Trail
+  if (!paused) {
+    trail.push({ x: scX, y: scY, flux: vanAllenFlux(altKm) });
+    if (trail.length > MAX_TRAIL) trail.shift();
+  }
+
+  // --- Draw ---
+  ctx.fillStyle = '#050520';
+  ctx.fillRect(0, 0, W, H);
+
+  drawStars();
+  drawVanAllenBelts();
+  drawOrbitPath();
+  drawEarth();
+
+  // Trail
+  for (let i = 0; i < trail.length - 1; i++) {
+    const alpha = (i / trail.length) * 0.6;
+    const flux = trail[i].flux;
+    const r = Math.floor(flux * 255);
+    const g = Math.floor((1 - flux) * 200);
+    ctx.strokeStyle = `rgba(${r}, ${g}, 100, ${alpha})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(trail[i].x, trail[i].y);
+    ctx.lineTo(trail[i + 1].x, trail[i + 1].y);
+    ctx.stroke();
+  }
+
+  // Spacecraft dot
+  ctx.fillStyle = '#7EC8E3';
+  ctx.beginPath();
+  ctx.arc(scX, scY, 5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = '#FFFFFF';
+  ctx.beginPath();
+  ctx.arc(scX, scY, 2, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Spacecraft glow
+  const scGlow = ctx.createRadialGradient(scX, scY, 0, scX, scY, 15);
+  scGlow.addColorStop(0, 'rgba(126, 200, 227, 0.3)');
+  scGlow.addColorStop(1, 'rgba(126, 200, 227, 0)');
+  ctx.fillStyle = scGlow;
+  ctx.beginPath();
+  ctx.arc(scX, scY, 15, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Altitude line to Earth
+  ctx.strokeStyle = 'rgba(126, 200, 227, 0.1)';
+  ctx.setLineDash([4, 8]);
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(CX, CY);
+  ctx.lineTo(scX, scY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // --- Update info panel ---
+  document.getElementById('d-alt').textContent = Math.round(altKm).toLocaleString();
+  document.getElementById('d-vel').textContent = velKms.toFixed(2);
+
+  const orbitSeconds = (meanAnomaly / (2 * Math.PI)) * PERIOD;
+  const hours = Math.floor(orbitSeconds / 3600);
+  const minutes = Math.floor((orbitSeconds % 3600) / 60);
+  document.getElementById('d-time').textContent =
+    hours + ':' + minutes.toString().padStart(2, '0');
+
+  // Phase
+  if (altKm < 500) document.getElementById('d-phase').textContent = 'Perigee';
+  else if (altKm > 40000) document.getElementById('d-phase').textContent = 'Apogee';
+  else if (meanAnomaly < Math.PI) document.getElementById('d-phase').textContent = 'Ascending';
+  else document.getElementById('d-phase').textContent = 'Descending';
+
+  // Radiation
+  const radInfo = getRadiationZone(altKm);
+  const doseRate = vanAllenFlux(altKm);
+  document.getElementById('d-zone').textContent = radInfo.zone;
+  document.getElementById('d-zone').style.color = radInfo.color;
+  document.getElementById('d-dose').textContent =
+    doseRate < 0.1 ? 'Low' : doseRate < 0.4 ? 'Moderate' : doseRate < 0.7 ? 'HIGH' : 'EXTREME';
+  document.getElementById('d-dose').style.color = radInfo.color;
+  document.getElementById('radiation-fill').style.width = (doseRate * 100) + '%';
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

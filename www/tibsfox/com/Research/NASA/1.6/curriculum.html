@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.6 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --phosphor-deep: #0A150A;
+    --phosphor-mid: #162816;
+    --phosphor-green: #2D6B2D;
+    --crt-glow: #33CC33;
+    --crt-dim: #1A5A1A;
+    --scan-dark: #0D120D;
+    --turkey-brown: #6B4226;
+    --turkey-tan: #B8935A;
+    --signal-gold: #D4A830;
+    --signal-bright: #E8D060;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--scan-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(51,204,51,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(45,107,45,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(51,204,51,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(107,66,38,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(45,107,45,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(212,168,48,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px; margin: 0 auto; padding: 1rem 2rem;
+    font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  .breadcrumb a { color: var(--crt-glow); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--signal-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--scan-dark) 0%, var(--phosphor-deep) 25%, var(--phosphor-mid) 50%, var(--phosphor-green) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--crt-glow);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(51,204,51,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(51,204,51,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(51,204,51,0.15); border: 1px solid var(--crt-glow);
+    border-radius: 6px; padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--crt-glow);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(51,204,51,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--crt-glow); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--signal-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--crt-glow); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+  .prose strong { color: var(--signal-bright); }
+  .prose em { color: var(--turkey-tan); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+  .prose blockquote {
+    border-left: 3px solid var(--phosphor-green); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(10,21,10,0.3); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim);
+  }
+
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(51,204,51,0.1); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--crt-glow); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; color: var(--text); }
+
+  .prose pre { background: rgba(10,21,10,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--crt-glow); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(51,204,51,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--crt-glow); }
+  .prose pre code { background: none; padding: 0; }
+
+  .sources-section { background: rgba(10,21,10,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources-section h2 { border-bottom-color: var(--phosphor-green); }
+  .sources-section h3 { color: var(--crt-glow); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card { background: rgba(10,21,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--crt-glow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--signal-bright); }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--crt-glow); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.6 Explorer 6</a> <span class="sep">/</span> Track 4: Curriculum
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.6</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Electronics, Imaging, Earth Sci</span>
+      <span><span class="label">Organism:</span> Turkey tail</span>
+      <span><span class="label">Bird:</span> Pacific Slope Flycatcher</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <p><strong>Mission:</strong> Explorer 6 (August 7, 1959) &mdash; First Photograph of Earth from Orbit<br>
+    <strong>Primary Departments:</strong> Electronics, Photography/Imaging, Earth Science<br>
+    <strong>Secondary Departments:</strong> Mycology, Mathematics, Communications<br>
+    <strong>Organism:</strong> <em>Trametes versicolor</em> (turkey tail fungus)<br>
+    <strong>Bird:</strong> <em>Empidonax difficilis</em> (Pacific Slope Flycatcher, degree 6)<br>
+    <strong>Dedication:</strong> Vincent van Gogh (March 30, 1853)</p>
+
+    <hr>
+
+    <h2>Department Deposits</h2>
+
+    <h3>Electronics (Primary)</h3>
+
+    <p><strong>Wing:</strong> Photocell Technology and Spin-Scan Instrumentation<br>
+    <strong>Concept:</strong> Using a single photoelectric sensor on a spinning platform to build an image &mdash; the engineering of Explorer 6&rsquo;s television scanner</p>
+
+    <p><strong>Deposit:</strong> Explorer 6&rsquo;s &ldquo;camera&rdquo; was not a camera in any modern sense. It was a photocell &mdash; a single light-sensitive element that measured the total brightness falling on its aperture at each instant. The spacecraft&rsquo;s spin at 2.8 rpm swept the photocell across the scene, and the brightness-versus-angle signal during each spin revolution became one scan line. The electronics department lesson is in the signal chain:</p>
+    <ul>
+      <li>Photocell: a photoconductive or photovoltaic element with a narrow field-of-view slit (~0.1 degrees). Sensitivity in the visible spectrum. Quantum efficiency approximately 1% (1959 silicon photocells were primitive)</li>
+      <li>Amplifier: the photocell signal (nanoamps to microamps) was amplified by a transistor amplifier with approximately 60 dB gain. The amplifier bandwidth was intentionally narrow (~10 Hz) to maximize signal-to-noise ratio</li>
+      <li>Analog-to-digital conversion: the amplified brightness was quantized to approximately 6 bits (64 gray levels) for telemetry transmission. The quantization noise was negligible compared to the photon noise and amplifier noise</li>
+      <li>Telemetry modulation: the quantized brightness was frequency-modulated onto the 108.06 MHz carrier. FM was chosen for noise immunity &mdash; the same choice Armstrong made for commercial broadcasting</li>
+      <li>Spin synchronization: a sun sensor provided a once-per-revolution timing pulse, synchronizing the brightness data to the spacecraft&rsquo;s angular position. Without this synchronization, the image could not be reconstructed &mdash; each brightness sample would be unlocatable in angle</li>
+      <li>Reconstruction on the ground: the telemetry was received, demodulated, and the brightness data was plotted on a CRT as the electron beam swept in synchronization with the spacecraft&rsquo;s spin rate. The image built up on photographic film exposed to the CRT</li>
+    </ul>
+
+    <p>This signal chain &mdash; photocell, amplifier, ADC, modulator, transmitter, receiver, demodulator, display &mdash; is the complete imaging pipeline. Every digital camera, medical imager, and Earth observation satellite uses a descendant of this chain. Explorer 6&rsquo;s version was crude in every element but correct in architecture. The 85-km-per-pixel resolution was limited by the photocell&rsquo;s dwell time (6 ms per pixel at spin rate), the narrow amplifier bandwidth (10 Hz), and the low telemetry rate (1 bps for imaging). Each limitation was a 1959 technology constraint, not an architecture flaw.</p>
+
+    <h3>Photography / Imaging (Primary)</h3>
+
+    <p><strong>Wing:</strong> Image Formation from Angular Sampling<br>
+    <strong>Concept:</strong> Constructing a two-dimensional image from a series of one-dimensional brightness profiles swept by spacecraft rotation &mdash; the birth of spin-scan imaging</p>
+
+    <p><strong>Deposit:</strong> The first photograph of Earth from orbit was not a photograph in the conventional sense. It was a reconstruction from angular brightness data, assembled over approximately 40 minutes (112 spin revolutions). The imaging department lesson covers the mathematics and practice of this reconstruction:</p>
+    <ul>
+      <li>The photocell sweeps a great circle on the celestial sphere during each spin revolution. The portion of that circle intersecting Earth&rsquo;s disk produces a brightness profile B(&theta;) for one scan line</li>
+      <li>Between successive revolutions, the spacecraft&rsquo;s orbital motion and attitude changes shift the scan circle slightly, producing the next line at a different angle across Earth&rsquo;s disk</li>
+      <li>The reconstructed image is a polar-to-Cartesian transform: from (spin angle &theta;, line number n) to (pixel row, pixel column)</li>
+      <li>Geometric distortion arises because the scan circles are not parallel &mdash; they are great circles on a sphere, and the angular offset between lines varies with spacecraft attitude. This distortion was partially correctable on the ground</li>
+      <li>The resulting image, transmitted on August 14, 1959, showed a sunlit crescent of Earth over the central Pacific Ocean. Cloud patterns were visible as brightness variations. The coastline of the Americas was at the limb. The image was approximately 100 lines by 150 pixels, at 6-bit depth</li>
+      <li>The image was crude by any standard. But it demonstrated that Earth could be imaged from orbit using a spinning spacecraft with a single detector &mdash; a concept that the GOES weather satellite program would use for the next 44 years (1975&ndash;2003)</li>
+    </ul>
+
+    <p>The connection to Van Gogh is structural: Van Gogh built images from discrete brushstrokes, each carrying color and direction information. Explorer 6 built an image from discrete brightness samples, each carrying intensity and angle information. In both cases, the individual samples are meaningless. The image emerges from their assembly. Pointillism and spin-scan imaging are the same idea, executed in paint and in photocells.</p>
+
+    <h3>Earth Science (Primary)</h3>
+
+    <p><strong>Wing:</strong> Planetary Observation from Space<br>
+    <strong>Concept:</strong> What the first photograph of Earth from orbit revealed about our planet, and what it meant for the discipline of Earth science</p>
+
+    <p><strong>Deposit:</strong> Before Explorer 6, every image of Earth was taken from within the atmosphere or from high-altitude balloons and sounding rockets that could see only limited areas. Explorer 6&rsquo;s photograph &mdash; crude as it was &mdash; showed the full disk of Earth as a celestial body. The Earth Science deposit records what this changed:</p>
+    <ul>
+      <li>Cloud patterns visible at continental scale: the image showed cloud formations spanning thousands of kilometers, confirming that weather systems have structure visible from orbit. This was the foundational observation for satellite meteorology</li>
+      <li>The day-night terminator: the crescent shape of the illuminated Earth was clearly visible, demonstrating that Earth is a sphere (self-evident, but never photographed from this perspective)</li>
+      <li>Albedo variation: even in the crude image, the brightness varied across the disk &mdash; brighter where clouds were present, darker over ocean. This brightness variation is the raw data for remote sensing</li>
+      <li>The limb: the edge of Earth against space was sharp and curved, with a thin bright line indicating the atmosphere. This limb observation would become critical for atmospheric composition studies using limb-scanning instruments on later missions</li>
+      <li>The central Pacific: the image was taken during an apogee pass over the Pacific, showing one of the most featureless regions of Earth&rsquo;s surface. Yet even this &ldquo;boring&rdquo; view contained information &mdash; the cloud patterns over the Pacific would later be recognized as part of the Intertropical Convergence Zone and the Pacific high-pressure cell</li>
+      <li>Explorer 6 also carried trapped radiation detectors, a magnetometer, and micrometeorite detectors. The combination of imaging and in-situ measurement established the template for Earth system science: observe the planet from outside while measuring the space environment it inhabits</li>
+    </ul>
+
+    <h3>Mycology (Secondary)</h3>
+
+    <p><strong>Wing:</strong> <em>Trametes versicolor</em> &mdash; The Decomposer<br>
+    <strong>Concept:</strong> Turkey tail fungus as the organism that breaks complexity into components, mirroring the way Explorer 6&rsquo;s photocell decomposed the image of Earth into angular brightness samples</p>
+
+    <p><strong>Deposit:</strong> <em>Trametes versicolor</em> (turkey tail) is one of the most common polypore fungi in temperate forests worldwide, and one of the most important wood decomposers. The organism paired with Explorer 6 operates through structural decomposition:</p>
+    <ul>
+      <li><em>T. versicolor</em> is a white-rot fungus &mdash; it produces enzymes (laccases, peroxidases) that break down lignin, the structural polymer that gives wood its rigidity. By decomposing lignin, turkey tail releases the cellulose locked within it, making the carbon available for further decomposition</li>
+      <li>The fruiting body displays concentric color bands (brown, tan, cream, gray, blue-green) that superficially resemble a topographic map or &mdash; if you squint &mdash; the scan lines of Explorer 6&rsquo;s image. This visual similarity is not the connection. The connection is functional</li>
+      <li>Turkey tail colonizes dead wood via a network of hyphae that extend through the substrate, sampling nutrient availability and moisture at each point. The mycelial network is a spatial mapping system: it builds a three-dimensional model of the resource landscape by growing through it, measuring at each point, and allocating resources to the most productive fronts</li>
+      <li>This is functionally equivalent to Explorer 6&rsquo;s imaging: the photocell swept across Earth&rsquo;s surface, sampling brightness at each angular position. The mycelium sweeps through the log, sampling nutrients at each spatial position. Both systems build a map through sequential sampling</li>
+      <li><em>T. versicolor</em> is found on fallen Douglas-fir logs throughout the Pacific Northwest &mdash; the same forests where mission 1.5&rsquo;s organism (Douglas-fir) grows. The pairing is ecological: the Douglas-fir grows; the turkey tail decomposes the fallen tree; the nutrients return to the soil; the next Douglas-fir seedling feeds on those nutrients. The cycle is carbon in, carbon out, mediated by fungal chemistry</li>
+      <li>In traditional medicine, turkey tail extracts (particularly polysaccharide-K, PSK) have been used as adjunct cancer therapy in Japan since the 1980s. The compound stimulates immune system response. The fungus that decomposes dead wood also stimulates the decomposition of abnormal cells. Pattern recognition at the molecular level</li>
+      <li>The Carboniferous connection: before fungi evolved the ability to decompose lignin (approximately 300 million years ago), dead trees accumulated as coal deposits. Turkey tail&rsquo;s ancestors closed the carbon cycle. Without fungal decomposition, there would be no old-growth forests &mdash; just layers of undecomposed wood. Explorer 6 photographed a planet whose living forests exist because fungi learned to eat wood</li>
+    </ul>
+
+    <h3>Mathematics (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Trigonometric Image Reconstruction<br>
+    <strong>Concept:</strong> The mathematics of converting angular brightness data from a spinning photocell into a rectangular image &mdash; coordinate transformation as the foundation of imaging science</p>
+
+    <p><strong>Deposit:</strong> Explorer 6&rsquo;s image reconstruction is fundamentally a coordinate transformation problem:</p>
+    <ul>
+      <li>Raw data: brightness B as a function of spin angle &theta; and line number n: B(&theta;, n)</li>
+      <li>Desired output: brightness I as a function of image coordinates (x, y): I(x, y)</li>
+      <li>The transformation requires knowing the spacecraft attitude (spin axis orientation) and orbital position (distance and direction to Earth) for each line</li>
+      <li>In polar coordinates (spin angle, line number), the image is distorted &mdash; scan lines are arcs of great circles, not straight parallel lines. The transformation to Cartesian corrects this distortion</li>
+      <li>The mathematics is trigonometric: the photocell position at time t is parameterized by (cos &theta;, sin &theta;), and the mapping from photocell direction to Earth-surface coordinates involves rotation matrices and spherical geometry</li>
+      <li>This same mathematics underlies CT scanning (reconstructing a 3D volume from angular projections &mdash; the Radon transform), synthetic aperture radar (SAR), and radio interferometry. Explorer 6&rsquo;s spin-scan technique is the ancestor of all angular-projection imaging systems</li>
+      <li>The Radon transform connection: the brightness profile B(&theta;) for one scan line is a line integral of the Earth&rsquo;s radiance field along the photocell&rsquo;s line of sight. The collection of all such profiles at different angles constitutes a Radon transform of the scene. Image reconstruction is inversion of the Radon transform. In 1959, this was done by direct CRT display. In modern medical imaging, it is done by filtered back-projection or iterative algorithms. The mathematical framework is identical</li>
+      <li>Rosetta connection: the trigonometry of spin-scan imaging connects to radar (angular resolution), sonar (beam sweeping), medical imaging (CT), and radio astronomy (aperture synthesis). All are angular sampling problems. Explorer 6 was the first to apply this mathematics from orbit</li>
+    </ul>
+
+    <h3>Communications (Secondary)</h3>
+
+    <p><strong>Wing:</strong> Low-Rate Telemetry and the Challenge of Bandwidth<br>
+    <strong>Concept:</strong> Transmitting an image at 1 bit per second &mdash; how Explorer 6&rsquo;s communication system constrained what could be seen</p>
+
+    <p><strong>Deposit:</strong> Explorer 6 transmitted imaging data at approximately 1 bit per second. This was not the spacecraft&rsquo;s full telemetry rate &mdash; the imaging channel was allocated a fraction of the available bandwidth because the magnetometer, radiation detectors, and housekeeping data also needed to be transmitted:</p>
+    <ul>
+      <li>Total telemetry rate: ~64 bps on the primary link</li>
+      <li>Imaging allocation: ~1 bps (shared with other experiments)</li>
+      <li>Bits per image: ~90,000 (100 lines x 150 pixels x 6 bits)</li>
+      <li>Time per image transmission: ~25 hours (at 1 bps)</li>
+      <li>In practice, images were transmitted in segments during favorable ground station passes, with data stored onboard on a magnetic tape recorder and played back during contact periods</li>
+      <li>The 108.06 MHz carrier frequency was in the VHF band &mdash; relatively low, with broad beamwidth from the ground station antenna. This limited the achievable link margin</li>
+      <li>Signal strength varied enormously across the orbit: strong at perigee (6,608 km), weak at apogee (48,771 km). Imaging data was typically transmitted during the perigee-to-apogee coast phase when signal strength was adequate and the spacecraft was at imaging altitude</li>
+      <li>The 2-watt transmitter degraded over the mission as radiation damage accumulated on the solar cells. Power management became increasingly critical, forcing trade-offs between science data and spacecraft housekeeping</li>
+      <li>The fundamental lesson: an imaging system is only as good as its communication link. Explorer 6 could scan a 100-line image in 40 minutes but needed 25 hours to transmit it. The bottleneck was not the sensor but the channel. This constraint drove the development of higher-frequency links, larger ground antennas, and eventually the Deep Space Network&rsquo;s high-data-rate capabilities</li>
+    </ul>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Build a Spin-Scan Camera with a Photoresistor</h3>
+
+    <p><strong>Duration:</strong> 45 minutes<br>
+    <strong>Difficulty:</strong> Beginner-Intermediate<br>
+    <strong>Department:</strong> Electronics / Photography<br>
+    <strong>What You Need:</strong> Arduino Uno ($15&ndash;25), photoresistor ($1), 10K resistor ($0.10), small DC motor with turntable ($5&ndash;10), LED or flashlight ($0.50), breadboard + wires ($5). Total: ~$30.</p>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> How to construct an image from angular brightness samples &mdash; the same technique Explorer 6 used to take the first photograph of Earth from orbit. You will spin a photoresistor, record brightness versus angle, and reconstruct a crude &ldquo;image&rdquo; on your computer.</p>
+
+    <p><strong>Entry Conditions:</strong></p>
+    <ul>
+      <li>Arduino IDE installed</li>
+      <li>Arduino Uno, photoresistor, resistor, motor, breadboard on hand</li>
+      <li>Python 3.8+ installed (for image reconstruction)</li>
+    </ul>
+
+    <p><strong>The Exercise:</strong></p>
+
+    <p><strong>Step 1: Build the spinning sensor</strong></p>
+
+<pre><code>Wiring:
+  Photoresistor &rarr; A0 (voltage divider with 10K to GND)
+  Other leg of photoresistor &rarr; 5V
+  Motor power from external 5V supply (don&rsquo;t power from Arduino)
+
+Mechanical setup:
+  Attach photoresistor to the edge of a small turntable or disk
+  mounted on the motor shaft. The photoresistor faces outward.
+  When the motor spins, the photoresistor sweeps a circle,
+  measuring brightness in all directions.
+
+  Add a small piece of tape on the disk that breaks an IR sensor
+  or triggers a hall effect sensor &mdash; this is your sync pulse,
+  marking 0 degrees on each revolution.</code></pre>
+
+    <p><strong>Step 2: Upload the scanning sketch</strong></p>
+
+<pre><code>// explorer6_spin_scan.ino
+// Spin-scan camera: records brightness vs angle during each revolution
+// Sync pulse marks 0 degrees
+
+const int PHOTO_PIN = A0;
+const int SYNC_PIN = 2;  // Hall effect or IR break sensor
+
+volatile bool sync_pulse = false;
+int scan_data[360];  // one sample per degree
+int angle_index = 0;
+unsigned long rev_start_time = 0;
+unsigned long rev_period = 0;  // measured revolution period
+
+void syncISR() {
+  sync_pulse = true;
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(SYNC_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(SYNC_PIN), syncISR, FALLING);
+  Serial.println("EXPLORER 6 SPIN-SCAN CAMERA");
+  Serial.println("Place objects around the sensor. Start the motor.");
+  Serial.println("Data format: LINE,angle,brightness");
+}
+
+int line_number = 0;
+
+void loop() {
+  if (sync_pulse) {
+    sync_pulse = false;
+    unsigned long now = micros();
+    if (rev_start_time &gt; 0) {
+      rev_period = now - rev_start_time;
+    }
+    rev_start_time = now;
+
+    // Print previous revolution&rsquo;s data
+    if (rev_period &gt; 0 &amp;&amp; line_number &gt; 0) {
+      for (int i = 0; i &lt; 360; i++) {
+        Serial.print(line_number);
+        Serial.print(",");
+        Serial.print(i);
+        Serial.print(",");
+        Serial.println(scan_data[i]);
+      }
+    }
+    line_number++;
+    angle_index = 0;
+  }
+
+  if (rev_period &gt; 0) {
+    unsigned long elapsed = micros() - rev_start_time;
+    int current_angle = (elapsed * 360) / rev_period;
+    if (current_angle &gt;= 0 &amp;&amp; current_angle &lt; 360 &amp;&amp; current_angle != angle_index) {
+      scan_data[current_angle] = analogRead(PHOTO_PIN);
+      angle_index = current_angle;
+    }
+  }
+}</code></pre>
+
+    <p><strong>Step 3: Set up a scene</strong></p>
+
+    <p>Place bright and dark objects around the spinning sensor at various angles:</p>
+    <ul>
+      <li>A bright lamp at one position (this is &ldquo;Earth&rdquo; &mdash; bright, sunlit)</li>
+      <li>A dark wall behind (this is &ldquo;space&rdquo; &mdash; dark)</li>
+      <li>A moderate-brightness object at another angle (this is &ldquo;cloud&rdquo;)</li>
+    </ul>
+
+    <p><strong>Step 4: Record and reconstruct</strong></p>
+
+<pre><code># reconstruct.py &mdash; build an image from spin-scan data
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Read CSV: line,angle,brightness
+data = np.loadtxt("scan_data.csv", delimiter=",")
+n_lines = int(data[:, 0].max())
+image = np.zeros((n_lines, 360))
+
+for row in data:
+    line = int(row[0]) - 1
+    angle = int(row[1])
+    brightness = row[2]
+    if line &lt; n_lines and angle &lt; 360:
+        image[line, angle] = brightness
+
+plt.figure(figsize=(12, 6))
+plt.imshow(image, cmap='gray', aspect='auto')
+plt.xlabel("Angle (degrees)")
+plt.ylabel("Scan line")
+plt.title("Explorer 6 Spin-Scan Image Reconstruction")
+plt.colorbar(label="Brightness (ADC counts)")
+plt.savefig("spin_scan_image.png", dpi=150)
+plt.show()
+
+print(f"Image: {n_lines} lines x 360 samples")
+print(f"Total pixels: {n_lines * 360:,}")
+print(f"Explorer 6 had ~100 lines x ~150 pixels = 15,000 pixels")
+print(f"Your image has {n_lines * 360:,} samples &mdash; "
+      f"{'more' if n_lines*360 &gt; 15000 else 'fewer'} than Explorer 6")</code></pre>
+
+    <p><strong>What Just Happened:</strong> You built a spin-scan camera. The photoresistor swept a circle, measuring brightness at every angle. Each revolution produced one line of data. The accumulated lines formed an image &mdash; a map of brightness versus angle versus time. This is exactly how Explorer 6 photographed Earth: a single photocell, spinning at 2.8 rpm, recording brightness during each transit of Earth&rsquo;s disk. Your scene was a room with lamps and walls. Explorer 6&rsquo;s scene was the sunlit face of Earth at 42,000 km.</p>
+
+    <p><strong>The NASA Connection:</strong> The spin-scan technique was used by GOES weather satellites for 44 years (1975&ndash;2003). Your Arduino version demonstrates the same physics at tabletop scale: a single detector, mechanical scanning, and image reconstruction from sequential angular samples. Modern weather satellites use 2D detector arrays and staring instruments &mdash; they don&rsquo;t need to spin. But the mathematics of image formation from angular samples is the same.</p>
+
+    <hr>
+
+    <h3>TRY 2: Identify Turkey Tail Fungus in Your Local Forest</h3>
+
+    <p><strong>Duration:</strong> 30 minutes to 1 hour (walking time)<br>
+    <strong>Difficulty:</strong> Beginner<br>
+    <strong>Department:</strong> Mycology / Ecology<br>
+    <strong>What You Need:</strong> Your eyes, a phone camera. Cost: $0.</p>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> How to identify <em>Trametes versicolor</em> (turkey tail) &mdash; one of the most common and ecologically important wood-decomposing fungi in temperate forests worldwide. If you live near any woodland, park, or trail with fallen logs, you will find turkey tail.</p>
+
+    <p><strong>Entry Conditions:</strong></p>
+    <ul>
+      <li>Willingness to go outside</li>
+      <li>Phone for photos (optional)</li>
+      <li>A park, trail, or wooded area with fallen logs nearby</li>
+    </ul>
+
+    <p><strong>The Exercise:</strong></p>
+
+    <p><strong>Step 1: Know what you&rsquo;re looking for</strong></p>
+
+<pre><code>Turkey tail identification features:
+
+FRUITING BODY:
+  - Shelf-like (bracket/conk) growing on dead wood
+  - Semi-circular, fan-shaped, often overlapping in rosettes
+  - Thin: 1-3 mm thick (flexible, not woody)
+  - Width: 2-8 cm per individual bracket
+  - Often in dense clusters of dozens of brackets
+
+UPPER SURFACE (diagnostic):
+  - Concentric color bands (the "turkey tail" pattern)
+  - Colors vary: brown, tan, cream, gray, blue-green, dark brown
+  - Bands are velvety to touch (fine hairs = tomentum)
+  - Color pattern varies with age, season, and local conditions
+  - The concentric banding is the key feature &mdash; no other common
+    shelf fungus has this combination of thin flexible brackets
+    with multi-colored concentric zones
+
+LOWER SURFACE (critical for ID):
+  - White to cream colored
+  - Covered in tiny pores (not gills, not smooth)
+  - Pores are 3-5 per millimeter (use a hand lens to see)
+  - The pore surface is the spore-bearing surface
+
+HABITAT:
+  - Dead hardwood logs and stumps (preferred)
+  - Also on dead conifer wood (including Douglas-fir)
+  - Common on fallen branches, fence posts, lumber
+  - Year-round (perennial fruiting body)
+  - Worldwide distribution in temperate zones
+
+LOOK-ALIKES (what it&rsquo;s NOT):
+  - Stereum ostrea (false turkey tail): similar bands BUT
+    smooth underside (no pores). Flip the bracket over.
+    Pores = turkey tail. Smooth = false turkey tail.
+  - Trichaptum biforme (violet-toothed polypore): similar
+    shape but underside has violet/purple tint when fresh
+  - Artist&rsquo;s conk (Ganoderma applanatum): much larger,
+    woody, hard, brown underside</code></pre>
+
+    <p><strong>Step 2: Go find some</strong></p>
+
+    <p>Walk to the nearest park or wooded area with fallen logs or stumps. Turkey tail is one of the most abundant fungi in temperate forests &mdash; it colonizes dead wood within months of the tree&rsquo;s death. Look on:</p>
+    <ol>
+      <li>Fallen logs (especially hardwoods: oak, maple, alder, birch)</li>
+      <li>Dead stumps (especially recently cut)</li>
+      <li>Fallen branches on the ground</li>
+      <li>Dead standing trees (snags) at eye level</li>
+    </ol>
+
+    <p>In the Pacific Northwest, look on fallen red alder (<em>Alnus rubra</em>) or bigleaf maple (<em>Acer macrophyllum</em>) first &mdash; these are preferred substrates. Turkey tail also grows on fallen Douglas-fir, connecting back to mission 1.5&rsquo;s organism.</p>
+
+    <p><strong>Step 3: Photograph and verify</strong></p>
+
+    <p>Take photos of:</p>
+    <ol>
+      <li>The cluster in context (showing the log or stump it grows on)</li>
+      <li>The upper surface close-up (showing concentric color bands)</li>
+      <li>The lower surface close-up (MUST show pores &mdash; this confirms ID)</li>
+      <li>The bracket in cross-section (thin and flexible, not hard)</li>
+    </ol>
+
+    <p><strong>Step 4: The decomposition check</strong></p>
+
+<pre><code>If you&rsquo;ve found turkey tail on a log, observe the wood:
+
+  - Is the wood soft and spongy near the brackets?
+    &rarr; White rot is active. The fungus is decomposing lignin.
+
+  - Can you peel layers of wood away with your fingers?
+    &rarr; Advanced decay. The cellulose skeleton is exposed.
+
+  - Is the log interior lighter in color than fresh wood?
+    &rarr; White rot characteristic: lignin removed, cellulose remains.
+
+  - Are there mycelial fans (white sheets of fungal tissue)
+    under the bark near the brackets?
+    &rarr; Active colonization front. The fungus is expanding.
+
+  Turkey tail can decompose a hardwood log to powder in 5-10 years.
+  A softwood (Douglas-fir) log takes 10-30 years.
+  In either case, the carbon returns to the soil.</code></pre>
+
+    <p><strong>What Just Happened:</strong> You identified the organism that closes the carbon cycle in temperate forests. <em>Trametes versicolor</em> breaks down dead wood, releasing the carbon that living trees captured from the atmosphere. Without this fungus (and its relatives), dead trees would accumulate indefinitely &mdash; as they did during the Carboniferous period, 300 million years ago, before fungi evolved the enzymatic machinery to decompose lignin. The PNW old-growth forests photographed by Explorer 6&rsquo;s successors exist because fungi like turkey tail recycle the fallen trees.</p>
+
+    <p><strong>The NASA Connection:</strong> Explorer 6&rsquo;s spin-scan camera decomposed the image of Earth into angular brightness samples. Turkey tail decomposes wood into molecular components. Both are decomposition processes &mdash; one temporal (scan line by scan line over 40 minutes), one chemical (enzyme by enzyme over years). The concentric color bands on the turkey tail fruiting body even resemble scan lines: concentric arcs of varying brightness, encoding information about the growth conditions at each stage. Explorer 6 scanned Earth. Turkey tail scans a log. Both build understanding through incremental sampling.</p>
+
+    <hr>
+
+    <h3>TRY 3: Calculate How Long Explorer 6 Spends Near Apogee</h3>
+
+    <p><strong>Duration:</strong> 20 minutes<br>
+    <strong>Difficulty:</strong> Beginner<br>
+    <strong>Department:</strong> Mathematics / Earth Science<br>
+    <strong>What You Need:</strong> Python 3.8+, or a scientific calculator</p>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> How Kepler&rsquo;s second law (equal areas in equal times) causes a highly eccentric orbit to spend most of its time near apogee. You will calculate the fraction of Explorer 6&rsquo;s orbit spent at various altitudes and understand why the spacecraft could image Earth&rsquo;s full disk for hours but only grazed perigee for minutes.</p>
+
+    <p><strong>Entry Conditions:</strong></p>
+    <ul>
+      <li>Python 3.8+ installed (or a scientific calculator)</li>
+      <li>Know what an orbit is</li>
+    </ul>
+
+    <p><strong>The Exercise:</strong></p>
+
+    <p><strong>Step 1: The orbital parameters</strong></p>
+
+<pre><code>import numpy as np
+
+# Explorer 6 orbital elements
+R_E = 6371       # Earth radius (km)
+h_p = 237        # perigee altitude (km)
+h_a = 42400      # apogee altitude (km)
+r_p = R_E + h_p  # perigee radius (km)
+r_a = R_E + h_a  # apogee radius (km)
+a = (r_p + r_a) / 2  # semi-major axis
+e = (r_a - r_p) / (r_a + r_p)  # eccentricity
+T = 12.8 * 3600  # orbital period (seconds)
+
+print(f"Explorer 6 Orbit:")
+print(f"  Perigee: {h_p} km alt ({r_p:,} km geocentric)")
+print(f"  Apogee:  {h_a:,} km alt ({r_a:,} km geocentric)")
+print(f"  Semi-major axis: {a:,.0f} km")
+print(f"  Eccentricity: {e:.4f}")
+print(f"  Period: {T/3600:.1f} hours")</code></pre>
+
+    <p><strong>Step 2: Time above various altitudes</strong></p>
+
+<pre><code>print(f"\nTime above various altitudes:")
+print(f"{'Altitude':&gt;12} | {'Fraction':&gt;8} | {'Time (hr)':&gt;10} | {'Meaning':&gt;30}")
+print(f"{'-'*70}")
+
+for h in [500, 2000, 5000, 10000, 20000, 30000, 40000]:
+    r = R_E + h
+    if r &gt;= r_a:
+        print(f"{h:&gt;10,} km | {'  ---':&gt;8} | {'  ---':&gt;10} | Never reaches this altitude")
+        continue
+    if r &lt;= r_p:
+        pct = 100.0
+    else:
+        cos_E = (a - r) / (a * e)
+        cos_E = np.clip(cos_E, -1, 1)
+        E_val = np.arccos(cos_E)
+        M_val = E_val - e * np.sin(E_val)
+        pct = (1 - M_val / np.pi) * 100
+    t_hr = pct / 100 * T / 3600
+    note = ""
+    if h == 500:
+        note = "Above ISS orbit"
+    elif h == 20000:
+        note = "GPS altitude"
+    elif h == 40000:
+        note = "Near apogee &mdash; imaging zone"
+    print(f"{h:&gt;10,} km | {pct:&gt;7.1f}% | {t_hr:&gt;9.1f}h | {note:&gt;30}")
+
+print(f"\nExplorer 6 spent more time above 20,000 km than below.")
+print(f"Kepler&rsquo;s second law: it moves slowly when far away.")
+print(f"This is why the orbit was chosen &mdash; hours of imaging")
+print(f"near apogee, minutes of atmospheric drag at perigee.")</code></pre>
+
+    <p><strong>What Just Happened:</strong> You proved that Kepler&rsquo;s second law turns a highly elliptical orbit into a natural observation platform. Explorer 6 spends ~76% of its time above 20,000 km and only ~3% below 1,000 km. At apogee, it drifts at 1.4 km/s &mdash; practically hovering compared to the 10.3 km/s at perigee. This asymmetry was the whole point: spend hours with the full Earth disk visible, take the imaging data, then race through perigee and come back up again.</p>
+
+    <hr>
+
+    <h2>DIY Projects</h2>
+
+    <h3>DIY 1: Arduino Slow-Scan TV (SSTV) Transmitter and Receiver</h3>
+
+    <p><strong>Duration:</strong> 6&ndash;8 hours<br>
+    <strong>Difficulty:</strong> Intermediate<br>
+    <strong>Department:</strong> Electronics / Communications / Photography<br>
+    <strong>Cost:</strong> ~$40</p>
+
+    <p><strong>Materials:</strong></p>
+    <ul>
+      <li>Arduino Nano or Uno ($8&ndash;25)</li>
+      <li>Si5351 frequency synthesizer module ($8) &mdash; generates audio tones</li>
+      <li>Small speaker or audio output jack ($2)</li>
+      <li>Photoresistor + 10K resistor ($1.10) &mdash; the &ldquo;camera&rdquo;</li>
+      <li>SSD1306 OLED display 128x64 ($8) &mdash; shows received image</li>
+      <li>Breadboard and wires ($5)</li>
+      <li>FM handheld radio (for transmission, optional) ($15&ndash;25)</li>
+    </ul>
+
+    <p><strong>What You Build:</strong> A slow-scan television system that converts brightness readings from a photoresistor into audio tones (bright = high frequency, dark = low frequency), transmits them as sound (or optionally over radio), and reconstructs the image on the OLED display at the receiver. This is the same principle used by amateur radio operators worldwide since the 1960s, and it is the direct descendant of Explorer 6&rsquo;s imaging telemetry.</p>
+
+<pre><code>SYSTEM ARCHITECTURE:
+
+TRANSMITTER (Arduino #1 or transmit mode):
+  Photoresistor &rarr; A0 &rarr; brightness value (0-1023)
+  brightness &rarr; frequency mapping (1500 Hz = black, 2300 Hz = white)
+  Si5351 &rarr; generates the audio tone at mapped frequency
+  Audio output &rarr; speaker or radio mic input
+
+  Transmission format (Martin M1 compatible):
+    - Sync pulse: 1200 Hz for 4.862 ms (marks line start)
+    - Scan line: 146.432 ms of frequency-modulated brightness
+    - 256 lines per image
+    - Total time per image: ~114 seconds
+
+RECEIVER (Arduino #2 or receive mode):
+  Audio input &rarr; analog comparator or ADC
+  Frequency measurement &rarr; brightness value
+  brightness &rarr; pixel on OLED display
+  Build image line by line as audio is received
+
+  The OLED shows the image building up in real time,
+  exactly as Explorer 6&rsquo;s ground station CRT showed
+  the Earth photograph assembling scan line by scan line.
+
+DISPLAY:
+  +----------------------------+
+  | SSTV RECEIVER              |
+  | ############ ############  |
+  | ######## ## ####           |
+  | ##### #####  #             |
+  |                            |  &larr; image builds here
+  | Line: 42/256  SNR: 18 dB  |
+  | Mode: Martin M1  114s     |
+  +----------------------------+</code></pre>
+
+    <p><strong>The Explorer 6 connection:</strong> Explorer 6 transmitted brightness as a modulated signal: photocell brightness modulated the telemetry signal&rsquo;s frequency. Your SSTV system does the same: photoresistor brightness modulates audio frequency. Explorer 6 transmitted at ~1 bps over radio across 48,000 km. Your SSTV transmits at ~100 bps over audio across a room. The data rate is different. The principle is identical. Both convert light to frequency to signal, transmit, and reconstruct the image at the receiver.</p>
+
+    <p><strong>Key learning moment:</strong> The student watches the image build up on the OLED display, line by line, over 2 minutes. Each line arrives as a sequence of tones &mdash; high for bright, low for dark. The student HEARS the image before SEEING it. This audio-to-visual translation is the essence of telemetry: information encoded in one medium (sound frequency), decoded into another (pixel brightness). Explorer 6&rsquo;s ground station operators experienced this same translation &mdash; listening to the signal quality while watching the CRT trace the image.</p>
+
+    <h3>DIY 2: Van Gogh Pixel Art Generator</h3>
+
+    <p><strong>Duration:</strong> 3&ndash;4 hours<br>
+    <strong>Difficulty:</strong> Beginner-Intermediate<br>
+    <strong>Department:</strong> Photography / Mathematics / Art<br>
+    <strong>Cost:</strong> $0 (software only)</p>
+
+    <p><strong>Materials:</strong></p>
+    <ul>
+      <li>Python 3.8+ with PIL/Pillow and numpy</li>
+      <li>Any digital image (start with a Van Gogh painting)</li>
+      <li>Computer with display</li>
+    </ul>
+
+    <p><strong>What You Build:</strong> A program that reduces any image to Explorer 6 resolution (~100x150 pixels, 64 gray levels) and reconstructs it using visible &ldquo;scan lines&rdquo; &mdash; showing what Van Gogh&rsquo;s Starry Night would have looked like if Explorer 6 had painted it. The program demonstrates that even at extreme low resolution, the essential composition of a great painting survives &mdash; the same insight that made Explorer 6&rsquo;s crude photograph meaningful.</p>
+
+<pre><code># van_gogh_explorer6.py
+# Reduce any image to Explorer 6 resolution and reconstruct
+# with visible scan-line artifacts
+
+from PIL import Image
+import numpy as np
+
+def explorer6_filter(input_path, output_path):
+    """Process an image through Explorer 6&rsquo;s imaging system."""
+    img = Image.open(input_path).convert('L')  # grayscale
+
+    # Downsample to Explorer 6 resolution
+    e6_width = 150
+    e6_height = 100
+    img_small = img.resize((e6_width, e6_height), Image.BILINEAR)
+
+    # Quantize to 6 bits (64 gray levels)
+    arr = np.array(img_small, dtype=float)
+    arr = np.round(arr / 4) * 4  # quantize to 64 levels
+    arr = np.clip(arr, 0, 255)
+
+    # Add scan line artifacts (brightness variation between lines)
+    for line in range(e6_height):
+        noise = np.random.normal(0, 8)  # line-to-line noise
+        arr[line, :] += noise
+
+    # Add photocell noise (per-pixel)
+    pixel_noise = np.random.normal(0, 12, arr.shape)
+    arr += pixel_noise
+    arr = np.clip(arr, 0, 255).astype(np.uint8)
+
+    # Upscale for display with visible scan lines
+    scale = 6
+    output = np.zeros((e6_height * scale, e6_width * scale), dtype=np.uint8)
+    for y in range(e6_height):
+        for x in range(e6_width):
+            # Fill block
+            output[y*scale:(y+1)*scale-1, x*scale:(x+1)*scale] = arr[y, x]
+            # Scan line gap (dark line between scan lines)
+            output[(y+1)*scale-1, x*scale:(x+1)*scale] = max(0, arr[y, x] - 40)
+
+    result = Image.fromarray(output)
+    result.save(output_path)
+    print(f"Explorer 6 filter applied: {input_path} -&gt; {output_path}")
+    print(f"Resolution: {e6_width}x{e6_height} ({e6_width*e6_height:,} pixels)")
+    print(f"Bit depth: 6 bits (64 gray levels)")
+    print(f"Total data: {e6_width * e6_height * 6:,} bits")
+    print(f"At 1 bps: {e6_width * e6_height * 6 / 3600:.1f} hours to transmit")
+
+# Usage: explorer6_filter("starry_night.jpg", "starry_night_e6.png")</code></pre>
+
+    <p><strong>Key learning moment:</strong> The student runs their favorite photograph through the Explorer 6 filter and sees it reduced to a grainy, scan-lined, barely recognizable version. Then they run Van Gogh&rsquo;s Starry Night through the same filter &mdash; and discover that the swirling composition is still visible even at 100x150 pixels. Van Gogh&rsquo;s paintings survive extreme downsampling because their composition is low-frequency: large swirling forms, broad color blocks, bold contrast. Explorer 6&rsquo;s photograph survived extreme downsampling for the same reason: Earth&rsquo;s disk against space is a fundamentally low-frequency image &mdash; bright crescent against dark void. Resolution does not matter when the signal has large-scale structure.</p>
+
+    <h3>DIY 3: Mushroom Spore Print Art</h3>
+
+    <p><strong>Duration:</strong> 2&ndash;3 hours (setup) + 12 hours (overnight print) + 1 hour (fixation)<br>
+    <strong>Difficulty:</strong> Beginner<br>
+    <strong>Department:</strong> Mycology / Art<br>
+    <strong>Cost:</strong> ~$5</p>
+
+    <p><strong>Materials:</strong></p>
+    <ul>
+      <li>Fresh turkey tail brackets (collected, not purchased)</li>
+      <li>White paper and black paper (one sheet each)</li>
+      <li>Glass or bowl to cover the mushroom</li>
+      <li>Clear fixative spray (hairspray works, or artist fixative, $5)</li>
+      <li>Phone camera</li>
+    </ul>
+
+    <p><strong>What You Build:</strong> A spore print from a turkey tail bracket &mdash; an impression of the spore-bearing surface created by allowing the mushroom to drop its spores onto paper overnight. Turkey tail spore prints are white (hence needing dark paper to see them), and the pattern reveals the pore structure of the fruiting body: a regular array of tiny holes, each producing a ring of spores on the paper. This is biological printing &mdash; the fungus reproducing its own image in microscopic detail.</p>
+
+<pre><code>SPORE PRINT PROCEDURE:
+
+1. Collect fresh turkey tail brackets (flexible, not dried)
+   - Look for brackets with white, clean pore surface
+   - Avoid old, dry, or insect-damaged specimens
+   - Collect 3-5 brackets of different sizes
+
+2. Prepare surfaces:
+   - Black paper for white-spored species (turkey tail = white spores)
+   - Place paper on a flat, vibration-free surface
+   - Have glass or bowl ready to cover each specimen
+
+3. Place brackets pore-side-down on paper:
+   - Handle gently (spore release is mechanical)
+   - Space brackets 5 cm apart
+   - Cover each with glass/bowl (prevents air currents)
+
+4. Wait 8-12 hours (overnight is ideal):
+   - Spores fall by gravity from pores onto paper
+   - Each pore produces a small ring of spores
+   - The accumulated pattern maps the pore geometry
+
+5. Remove brackets carefully (lift straight up)
+
+6. Observe the print:
+   - A white pattern of tiny dots/rings on dark paper
+   - The dots correspond to individual pores
+   - 3-5 pores per millimeter = visible pattern
+
+7. Fix the print:
+   - Light coat of clear fixative from 30 cm distance
+   - Let dry 10 minutes
+   - The print is now permanent art
+
+CONNECTION TO EXPLORER 6:
+  The spore print is an image created by biological sampling.
+  Each pore is a "pixel" that deposits spores proportional
+  to the maturity and health of that region of the bracket.
+  The print is a 1:1 resolution map of the fruiting body.
+  Explorer 6&rsquo;s photocell scanned Earth and recorded brightness.
+  The turkey tail&rsquo;s pores release spores and record fertility.
+  Both create spatial maps through sampling.</code></pre>
+
+    <p><strong>Key learning moment:</strong> The student holds up a spore print and a printout of Explorer 6&rsquo;s first photograph side by side. Both are low-resolution images created by physical sampling processes. The spore print has higher spatial resolution (3&ndash;5 points per millimeter) but no gray scale (spores are either present or absent). Explorer 6&rsquo;s image has lower spatial resolution (85 km per pixel) but 6-bit gray depth. Both encode information about their source through physical deposition: spores falling from pores, photons falling on a photocell.</p>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <h3>FoxFiber: Imaging and Remote Sensing Data Infrastructure</h3>
+
+    <p>Explorer 6 demonstrated that imaging from orbit produces data that must be transmitted, stored, processed, and distributed. FoxFiber&rsquo;s fiber optic infrastructure enables the high-bandwidth data pipelines that modern Earth observation systems require:</p>
+    <ul>
+      <li><strong>Satellite downlink bandwidth:</strong> GOES-R generates 2.8 Gbps of imaging data. This data flows through ground stations to data centers via fiber &mdash; the same fiber that FoxFiber would deploy</li>
+      <li><strong>Edge processing:</strong> Reducing raw satellite data to useful products (cloud detection, vegetation indices, thermal anomalies) at the edge, near the ground station, reduces backbone bandwidth requirements</li>
+      <li><strong>Data distribution:</strong> Making Earth observation data available to researchers, farmers, emergency responders, and the public requires fiber to the last mile. Explorer 6&rsquo;s image was available to a handful of engineers. Modern EO data should be available to everyone</li>
+    </ul>
+
+    <h3>SolarFox: Radiation-Hardened Power Systems</h3>
+
+    <p>Explorer 6 was powered by 8,000 silicon solar cells generating approximately 18 watts &mdash; and those cells degraded steadily as the spacecraft transited the Van Allen radiation belts twice per orbit. SolarFox&rsquo;s relevance:</p>
+    <ul>
+      <li><strong>Radiation-hard solar cell design:</strong> Explorer 6&rsquo;s power degradation is the founding case study for radiation effects on photovoltaics. SolarFox designs would incorporate shielding, radiation-tolerant cell architectures, and graceful degradation planning</li>
+      <li><strong>Environmental monitoring integration:</strong> Solar installations on Earth face degradation from UV, thermal cycling, and soiling &mdash; less dramatic than radiation but analogous in requiring long-term performance modeling. Explorer 6&rsquo;s power curve is the prototype degradation model</li>
+      <li><strong>Forest canopy monitoring:</strong> Turkey tail fungus decomposes dead wood, releasing carbon. SolarFox installations in forested areas would need to coexist with forest ecology &mdash; panels above the canopy, monitoring equipment in the understory, with awareness of the decomposition cycle beneath</li>
+    </ul>
+
+    <h3>Fox CapComm: Mission Communication Protocols</h3>
+
+    <p>Explorer 6 transmitted imaging data at 1 bit per second through a channel operating at 5% of Shannon capacity. Fox CapComm&rsquo;s communication coordination relevance:</p>
+    <ul>
+      <li><strong>Low-bandwidth protocol design:</strong> Many IoT and remote sensing applications operate at Explorer 6 data rates &mdash; LoRa, Sigfox, and satellite IoT systems transmit at 1&ndash;1000 bps. Designing efficient protocols for these channels is a direct descendant of Explorer 6&rsquo;s telemetry design</li>
+      <li><strong>Image compression for constrained channels:</strong> Explorer 6 transmitted raw, uncompressed brightness data. Modern systems use JPEG, JPEG2000, and learned compression to reduce image data by 10&ndash;100x before transmission. The mathematics of this compression is information theory &mdash; the same Shannon framework that defined Explorer 6&rsquo;s channel capacity</li>
+    </ul>
+
+    <hr>
+
+    <h2>Rosetta Connections</h2>
+
+    <h3>Cross-Department Synthesis</h3>
+
+    <p>Explorer 6&rsquo;s curriculum deposits connect across departments through the theme of <strong>decomposition and reconstruction</strong>:</p>
+
+    <ol>
+      <li><strong>Electronics &rarr; Photography:</strong> The photocell signal chain decomposes light into electrical signal. The image reconstruction chain reassembles those signals into a picture. The complete pipeline is decomposition followed by reconstruction &mdash; analysis and synthesis</li>
+      <li><strong>Photography &rarr; Mathematics:</strong> Image reconstruction from angular samples is a coordinate transformation (polar to Cartesian). The mathematics of this transformation is trigonometry &mdash; the same mathematics that describes the photocell&rsquo;s position on the unit circle</li>
+      <li><strong>Mathematics &rarr; Mycology:</strong> The Radon transform used in image reconstruction is a line integral. The mycelial network in a decomposing log is a three-dimensional sampling system. Both build spatial maps through linear traversal</li>
+      <li><strong>Mycology &rarr; Earth Science:</strong> Turkey tail decomposes dead wood, closing the carbon cycle in forests. Earth observation from orbit monitors forests at planetary scale. The fungus works at the molecular level; the satellite works at the continental level. Both measure the same ecosystem</li>
+      <li><strong>Earth Science &rarr; Communications:</strong> Earth observation data must be transmitted from orbit to ground. The communication link budget determines what can be observed &mdash; resolution, revisit time, spectral coverage. The science is limited by the channel</li>
+      <li><strong>Communications &rarr; Electronics:</strong> The communication link is the ultimate constraint on the electronics: there is no point building a higher-resolution sensor if the channel cannot transmit the data. Explorer 6&rsquo;s photocell was not the limiting factor &mdash; the 1 bps imaging channel was</li>
+    </ol>
+
+    <p>This circular dependency &mdash; each department constraining and enabling the next &mdash; is the architecture of any imaging mission. Explorer 6 demonstrated all six links in 1959, with 1959 technology, producing an image that proved the concept and launched the era of Earth observation from space.</p>
+
+    <hr>
+
+    <blockquote>
+      <p>&ldquo;Explorer 6 decomposed Earth into angular brightness samples and reassembled them into the first photograph from orbit. Turkey tail decomposes Douglas-fir logs into molecular components and reassembles them into fungal biomass and soil nutrients. Van Gogh decomposed landscapes into brushstrokes and reassembled them into paintings that still move people 136 years later. Decomposition is not destruction. It is the first step of understanding: break the complex into components, measure each component, then reconstruct from measurements. The photocell on the spinning spacecraft was not a camera. It was an analyst &mdash; sweeping the scene, recording one datum at a time, building understanding through accumulation. The turkey tail in the forest is the same kind of analyst &mdash; extending hyphae, sampling nutrients, mapping the resource landscape one point at a time. Both are slow. Both are thorough. Both produce maps from measurements. The first photograph of Earth and the first spore print of a turkey tail are the same act: making the invisible visible through patient, incremental observation.&rdquo;</p>
+    </blockquote>
+
+  </div>
+
+  <div class="nav-card">
+    <a href="papers.html">&larr; Papers</a>
+    <a href="simulation.html">Simulation &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.6 Explorer 6 + Trametes versicolor &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

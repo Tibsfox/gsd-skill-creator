@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 6 TV Camera Simulator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0A150A;
+    color: #A0B8A0;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #container {
+    max-width: 1400px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+  }
+  #crt-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #crt-housing {
+    background: #1A1A1A;
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 0 40px rgba(51, 204, 51, 0.1),
+                inset 0 0 20px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  #crt-bezel {
+    background: #111;
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+  }
+  canvas {
+    display: block;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(51, 204, 51, 0.15);
+  }
+  #crt-label {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 11px;
+    color: #4A6A4A;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  #panel {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  h1 {
+    font-size: 14px;
+    color: #33CC33;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  h2 {
+    font-size: 11px;
+    color: #6A8A6A;
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 4px;
+  }
+  .box {
+    background: #0D1F0D;
+    border: 1px solid #1A3A1A;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+  .label { color: #4A6A4A; }
+  .value { color: #33CC33; font-weight: bold; }
+  .dim { color: #2A4A2A; }
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .controls label {
+    font-size: 10px;
+    color: #6A8A6A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .controls input[type="range"] {
+    width: 100%;
+    accent-color: #33CC33;
+    margin-top: 2px;
+  }
+  button {
+    background: #1A3A1A;
+    color: #33CC33;
+    border: 1px solid #33CC33;
+    padding: 8px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  button:hover { background: #2A4A2A; }
+  button:active { background: #33CC33; color: #0A150A; }
+  #btn-row {
+    display: flex;
+    gap: 8px;
+  }
+  #btn-row button { flex: 1; }
+  .status-light {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .on { background: #33CC33; box-shadow: 0 0 6px #33CC33; }
+  .off { background: #1A3A1A; }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="crt-frame">
+    <div id="crt-housing">
+      <div id="crt-bezel">
+        <canvas id="tv" width="500" height="500"></canvas>
+      </div>
+    </div>
+    <div id="crt-label">Explorer 6 &mdash; Spin-Scan TV Camera &mdash; August 1959</div>
+  </div>
+  <div id="panel">
+    <h1>EXPLORER 6 TV CAMERA</h1>
+    <h2>First Photograph of Earth from Orbit</h2>
+
+    <div class="box">
+      <span class="status-light off" id="status-light"></span>
+      <span class="label">Status:</span> <span class="value" id="status">STANDBY</span><br>
+      <span class="label">Spin Rate:</span> <span class="value">2.8 RPM</span><br>
+      <span class="label">Revolution:</span> <span class="value" id="rev-count">0</span> / <span class="dim" id="total-revs">24</span><br>
+      <span class="label">Altitude:</span> <span class="value" id="altitude">237</span> <span class="dim">km</span><br>
+      <span class="label">Signal:</span> <span class="value" id="signal-strength">100</span><span class="dim">%</span>
+    </div>
+
+    <div class="box controls">
+      <label>Spin Speed
+        <span class="value" id="speed-val">1.0x</span>
+      </label>
+      <input type="range" id="speed" min="0.2" max="5" step="0.1" value="1.0">
+
+      <label>Noise Level
+        <span class="value" id="noise-val">50%</span>
+      </label>
+      <input type="range" id="noise" min="0" max="100" step="1" value="50">
+    </div>
+
+    <div id="btn-row">
+      <button id="btn-start">START SCAN</button>
+      <button id="btn-reset">RESET</button>
+    </div>
+
+    <div class="box" style="font-size:10px; line-height:1.6;">
+      <span class="label">Ground Station:</span> South Point, Hawaii<br>
+      <span class="label">Photocell:</span> Single-element scanner<br>
+      <span class="label">Scan method:</span> Spin-stabilized sweep<br>
+      <span class="label">Period:</span> 21.4 sec/revolution<br>
+      <span class="label">Image:</span> Sunlit crescent of Earth<br>
+      <span class="label">Date:</span> August 14, 1959
+    </div>
+
+    <div class="box" style="font-size:10px; color:#4A6A4A; line-height:1.5;">
+      Each revolution of the spacecraft sweeps the photocell across 360&deg; of sky. Where Earth's sunlit crescent falls in the field of view, brightness increases. The signal is transmitted to the ground station and recorded line by line. The image builds up slowly, degrading as the spacecraft climbs toward apogee.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('tv');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+const CX = W / 2;
+const CY = H / 2;
+const RADIUS = W / 2 - 2;
+
+// State
+let running = false;
+let scanAngle = 0;
+let revolution = 0;
+let totalRevolutions = 24;
+let imageData = null;
+let lastTime = 0;
+let noiseLevel = 0.5;
+let speedMult = 1.0;
+
+// Earth parameters (within the circular viewport)
+const earthCX = CX + 40;
+const earthCY = CY - 10;
+const earthRadius = 140;
+
+// Accumulated image buffer
+let imageBuffer = new Float32Array(W * H).fill(0);
+let scannedMask = new Uint8Array(W * H).fill(0);
+
+// Controls
+document.getElementById('speed').addEventListener('input', function() {
+  speedMult = parseFloat(this.value);
+  document.getElementById('speed-val').textContent = speedMult.toFixed(1) + 'x';
+});
+
+document.getElementById('noise').addEventListener('input', function() {
+  noiseLevel = parseInt(this.value) / 100;
+  document.getElementById('noise-val').textContent = this.value + '%';
+});
+
+document.getElementById('btn-start').addEventListener('click', function() {
+  if (!running) {
+    running = true;
+    document.getElementById('status').textContent = 'SCANNING';
+    document.getElementById('status-light').className = 'status-light on';
+    lastTime = performance.now();
+    requestAnimationFrame(animate);
+  }
+});
+
+document.getElementById('btn-reset').addEventListener('click', function() {
+  running = false;
+  scanAngle = 0;
+  revolution = 0;
+  imageBuffer.fill(0);
+  scannedMask.fill(0);
+  document.getElementById('status').textContent = 'STANDBY';
+  document.getElementById('status-light').className = 'status-light off';
+  document.getElementById('rev-count').textContent = '0';
+  document.getElementById('altitude').textContent = '237';
+  document.getElementById('signal-strength').textContent = '100';
+  drawFrame();
+});
+
+function getEarthBrightness(x, y) {
+  // Distance from Earth center
+  const dx = x - earthCX;
+  const dy = y - earthCY;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+
+  if (dist > earthRadius) return 0;
+
+  // Crescent: bright on the right side (sunlit)
+  const crescentFactor = (dx / earthRadius + 0.3);
+  if (crescentFactor < 0) return 0;
+
+  // Limb darkening
+  const limbFactor = 1 - (dist / earthRadius);
+  const limb = Math.pow(limbFactor, 0.3);
+
+  // Cloud-like brightness variations
+  const cloudX = x * 0.02 + 3.7;
+  const cloudY = y * 0.02 + 7.1;
+  const cloud = (Math.sin(cloudX * 3.1) * Math.cos(cloudY * 2.7) + 1) * 0.5;
+
+  const brightness = crescentFactor * limb * (0.6 + cloud * 0.4);
+  return Math.max(0, Math.min(1, brightness));
+}
+
+function drawFrame() {
+  // Clear to CRT black
+  ctx.fillStyle = '#0A150A';
+  ctx.fillRect(0, 0, W, H);
+
+  // Clip to circle
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(CX, CY, RADIUS, 0, Math.PI * 2);
+  ctx.clip();
+
+  // Draw accumulated image
+  const imgData = ctx.createImageData(W, H);
+  for (let i = 0; i < W * H; i++) {
+    if (scannedMask[i]) {
+      const brightness = imageBuffer[i];
+      // Phosphor green
+      const r = Math.floor(brightness * 40);
+      const g = Math.floor(brightness * 220);
+      const b = Math.floor(brightness * 40);
+      imgData.data[i * 4] = r;
+      imgData.data[i * 4 + 1] = g;
+      imgData.data[i * 4 + 2] = b;
+      imgData.data[i * 4 + 3] = 255;
+    } else {
+      imgData.data[i * 4] = 10;
+      imgData.data[i * 4 + 1] = 21;
+      imgData.data[i * 4 + 2] = 10;
+      imgData.data[i * 4 + 3] = 255;
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
+
+  // Draw scan line (bright line showing current sweep position)
+  if (running) {
+    ctx.strokeStyle = 'rgba(51, 204, 51, 0.6)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(CX, CY);
+    const lineX = CX + Math.cos(scanAngle) * RADIUS;
+    const lineY = CY + Math.sin(scanAngle) * RADIUS;
+    ctx.lineTo(lineX, lineY);
+    ctx.stroke();
+
+    // Scan line glow
+    ctx.strokeStyle = 'rgba(51, 204, 51, 0.15)';
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.moveTo(CX, CY);
+    ctx.lineTo(lineX, lineY);
+    ctx.stroke();
+  }
+
+  // CRT phosphor glow effect
+  const gradient = ctx.createRadialGradient(CX, CY, RADIUS * 0.7, CX, CY, RADIUS);
+  gradient.addColorStop(0, 'rgba(0,0,0,0)');
+  gradient.addColorStop(1, 'rgba(0,0,0,0.3)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.restore();
+
+  // CRT reflection highlight
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(CX, CY, RADIUS, 0, Math.PI * 2);
+  ctx.clip();
+  const highlight = ctx.createRadialGradient(CX - 80, CY - 80, 0, CX, CY, RADIUS);
+  highlight.addColorStop(0, 'rgba(255,255,255,0.03)');
+  highlight.addColorStop(0.5, 'rgba(255,255,255,0)');
+  ctx.fillStyle = highlight;
+  ctx.fillRect(0, 0, W, H);
+  ctx.restore();
+}
+
+function animate(timestamp) {
+  if (!running) return;
+
+  const dt = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+
+  // Spin rate: 2.8 rpm = 0.04667 Hz → one revolution every 21.4 seconds
+  // Compressed by speedMult for interactivity
+  const spinRate = (2 * Math.PI / 21.4) * speedMult;
+  const prevAngle = scanAngle;
+  scanAngle += spinRate * dt;
+
+  // Check for revolution completion
+  if (scanAngle >= 2 * Math.PI) {
+    scanAngle -= 2 * Math.PI;
+    revolution++;
+    document.getElementById('rev-count').textContent = revolution;
+
+    // Update altitude (linear interpolation for visual effect)
+    const orbitFraction = revolution / totalRevolutions;
+    const altitude = Math.round(237 + orbitFraction * (42400 - 237));
+    document.getElementById('altitude').textContent = altitude.toLocaleString();
+
+    // Signal strength decreases with distance squared
+    const distRatio = (237 + altitude) / (2 * 237);
+    const signalPct = Math.max(0, Math.round(100 / (distRatio * distRatio / 100)));
+    document.getElementById('signal-strength').textContent = Math.min(100, signalPct);
+  }
+
+  // Sample brightness along the scan line and add to image buffer
+  const numSamples = 200;
+  const orbitFraction = revolution / totalRevolutions;
+  const currentNoise = noiseLevel * (0.2 + orbitFraction * 2.0);
+
+  for (let i = 0; i < numSamples; i++) {
+    const r = (i / numSamples) * RADIUS;
+    const x = Math.round(CX + Math.cos(scanAngle) * r);
+    const y = Math.round(CY + Math.sin(scanAngle) * r);
+
+    if (x >= 0 && x < W && y >= 0 && y < H) {
+      // Check if within circular viewport
+      const dx = x - CX;
+      const dy = y - CY;
+      if (dx * dx + dy * dy < RADIUS * RADIUS) {
+        const idx = y * W + x;
+
+        // Get earth brightness at this position
+        let brightness = getEarthBrightness(x, y);
+
+        // Add noise
+        brightness += (Math.random() - 0.5) * currentNoise;
+        brightness = Math.max(0, Math.min(1, brightness));
+
+        // Accumulate (max of previous and current)
+        imageBuffer[idx] = Math.max(imageBuffer[idx], brightness * 0.9);
+        scannedMask[idx] = 1;
+
+        // Also mark neighboring pixels (scan line width)
+        for (let dy2 = -1; dy2 <= 1; dy2++) {
+          for (let dx2 = -1; dx2 <= 1; dx2++) {
+            const nx = x + dx2;
+            const ny = y + dy2;
+            if (nx >= 0 && nx < W && ny >= 0 && ny < H) {
+              const nidx = ny * W + nx;
+              const ndx = nx - CX;
+              const ndy = ny - CY;
+              if (ndx * ndx + ndy * ndy < RADIUS * RADIUS) {
+                imageBuffer[nidx] = Math.max(imageBuffer[nidx], brightness * 0.6);
+                scannedMask[nidx] = 1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  drawFrame();
+
+  // Stop after all revolutions
+  if (revolution >= totalRevolutions) {
+    running = false;
+    document.getElementById('status').textContent = 'SIGNAL LOST';
+    document.getElementById('status-light').className = 'status-light off';
+    document.getElementById('signal-strength').textContent = '0';
+    return;
+  }
+
+  requestAnimationFrame(animate);
+}
+
+// Initial draw
+drawFrame();
+</script>
+</body>
+</html>

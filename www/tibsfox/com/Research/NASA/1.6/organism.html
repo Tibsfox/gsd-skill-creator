@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Trametes versicolor — Turkey Tail | v1.6 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --phosphor-deep: #0A150A;
+    --phosphor-mid: #162816;
+    --phosphor-green: #2D6B2D;
+    --crt-glow: #33CC33;
+    --crt-dim: #1A5A1A;
+    --scan-dark: #0D120D;
+    --turkey-brown: #6B4226;
+    --turkey-tan: #B8935A;
+    --signal-gold: #D4A830;
+    --signal-bright: #E8D060;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--scan-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(51,204,51,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(45,107,45,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(51,204,51,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(107,66,38,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(45,107,45,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(212,168,48,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+  .breadcrumb a { color: var(--crt-glow); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--signal-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--scan-dark) 0%, var(--phosphor-deep) 25%, var(--phosphor-mid) 50%, var(--phosphor-green) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--crt-glow);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(51,204,51,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(51,204,51,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(51,204,51,0.15);
+    border: 1px solid var(--crt-glow);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--crt-glow);
+    margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(51,204,51,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--crt-glow); font-weight: 500; }
+
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .prose { max-width: 900px; }
+
+  .prose h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.5rem;
+    color: var(--signal-bright);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose h2:first-child { margin-top: 0; }
+
+  .prose h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    color: var(--crt-glow);
+    margin: 2rem 0 0.75rem;
+    font-weight: 600;
+  }
+
+  .prose p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  .prose strong { color: var(--signal-bright); }
+  .prose em { color: var(--turkey-tan); }
+
+  .prose ul, .prose ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.4rem;
+  }
+
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .prose blockquote {
+    border-left: 3px solid var(--phosphor-green);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(10,21,10,0.3);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+  .prose th {
+    background: rgba(51,204,51,0.1);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    text-align: left;
+    color: var(--crt-glow);
+    font-weight: 600;
+  }
+  .prose td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    color: var(--text);
+  }
+
+  .prose pre {
+    background: rgba(10,21,10,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--crt-glow);
+    margin: 1rem 0;
+  }
+
+  .prose code {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    background: rgba(51,204,51,0.1);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    color: var(--crt-glow);
+  }
+
+  .prose pre code {
+    background: none;
+    padding: 0;
+  }
+
+  .sources-section {
+    background: rgba(10,21,10,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .sources-section h2 { border-bottom-color: var(--phosphor-green); }
+  .sources-section h3 { color: var(--crt-glow); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card {
+    background: rgba(10,21,10,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2.5rem;
+  }
+  .nav-card a { color: var(--crt-glow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--signal-bright); }
+
+  footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+  footer a { color: var(--crt-glow); text-decoration: none; }
+
+  @media (max-width: 800px) {
+    h1 { font-size: 1.6rem; }
+    main { padding: 1rem; }
+    .header-content { padding: 1.5rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.6 Explorer 6</a>
+  <span class="sep">/</span>
+  Track 2: Organism
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.6</span>
+      <span>Explorer 6</span>
+      <span class="track-badge">Track 2</span>
+    </div>
+    <h1>Trametes versicolor (Turkey Tail)</h1>
+    <p class="subtitle">The scan lines of the forest</p>
+    <div class="meta-row">
+      <span><span class="label">Family:</span> Polyporaceae</span>
+      <span><span class="label">Habitat:</span> Dead hardwood logs, PNW forests</span>
+      <span><span class="label">Paired with:</span> Explorer 6</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>What Grows in Rings</h2>
+
+    <p>Pick up a fallen alder branch on the trail behind your house in Snohomish County &mdash; any trail, any time of year, any branch that has been down long enough for the bark to loosen and the sapwood to soften. Turn it over. On the underside, where the wood touches the damp soil, or on the cut end where the heartwood is exposed, or along a crack where moisture has been wicking into the interior for months, you will find them: thin, leathery brackets fanning outward from the wood like shelves on a wall, each one 2 to 7 centimeters across, each displaying concentric bands of color that run from the attachment point at the wood surface out to the thin, wavy margin at the edge.</p>
+
+    <p>The bands are what you notice first. Brown, tan, gray, white, sometimes with a zone of blue-green where algae have colonized the surface, sometimes with a flush of rust or ochre that shifts depending on the light angle. Each band represents a period of growth &mdash; a wave of hyphal expansion during which the fungus deposited a ring of tissue with a specific pigmentation, determined by the chemistry of the moment: the temperature, the moisture level, the available nutrients, the metabolic state of the mycelium beneath the surface. The next wave of growth, days or weeks later, deposited the next band with a different pigmentation. And the next. And the next. The bracket grew outward from the wood surface in successive waves, each wave leaving a visible ring, until the fruiting body reached its full extent and the growth slowed or stopped.</p>
+
+    <p>This is Trametes versicolor. Turkey tail. Named for the concentric color bands that resemble the fanned tail feathers of a wild turkey. It is one of the most common bracket fungi in the world. In the Pacific Northwest, it is everywhere &mdash; every rotting log, every dead stump, every fallen branch in every forest from the coast to the Cascade foothills. It grows year-round. It persists through winter rains and summer drought. It is so ubiquitous that most hikers walk past it without a second glance, the way most people walk past salal or step over sword fern without naming what their foot has touched.</p>
+
+    <p>But look at those bands. Each one is a scan line.</p>
+
+    <p>Explorer 6&rsquo;s photocell scanner built up an image of Earth one line at a time. The spacecraft spun, and each rotation swept the sensor&rsquo;s narrow field of view across the scene below, producing a single ribbon of brightness data. The next rotation, slightly displaced by orbital motion, produced the next ribbon. Forty minutes of spinning, forty minutes of sequential scan lines, and the accumulated ribbons merged into a picture &mdash; a crude, grainy crescent of sunlit Earth against the darkness of space.</p>
+
+    <p>Turkey tail builds its image of the wood the same way. Each concentric band is a ribbon of growth, swept outward by the expanding front of the mycelium. Each band records the conditions at the time of its deposition &mdash; the color is a log of the chemistry, the width is a log of the growth rate, the texture is a log of the humidity and temperature. The next band, deposited days or weeks later under different conditions, records a different set of parameters. The accumulated bands &mdash; ten, twenty, thirty concentric rings on a single bracket &mdash; are a record of the log&rsquo;s decomposition history, written in pigment the way Explorer 6&rsquo;s photograph was written in brightness values.</p>
+
+    <p>Both organisms build their products from sequential passes. Both record time as a spatial pattern. Both are legible only when enough passes have accumulated to reveal the whole. A single scan line from Explorer 6 is noise. A single concentric band from turkey tail is a half-ring of undifferentiated tissue. But a hundred scan lines are a photograph of Earth, and twenty concentric bands are a portrait of a log&rsquo;s slow chemical transformation. The scan line and the growth ring are the same thing: a record of a process that only becomes meaningful through accumulation.</p>
+
+    <hr>
+
+    <h2>Morphology and Life History</h2>
+
+    <p>Trametes versicolor is a polypore &mdash; a bracket fungus that produces spores in tiny tubes (pores) on the underside of its fruiting body, rather than on gills like an agaric mushroom or on teeth like a hydnoid. The genus name Trametes comes from the Latin <em>trames</em>, meaning &ldquo;one who crosses&rdquo; or &ldquo;a path,&rdquo; referring to the fungus&rsquo;s habit of growing across the surface of dead wood. The species epithet versicolor means &ldquo;many-colored&rdquo; or &ldquo;color-changing&rdquo; &mdash; a straightforward description of the concentric polychrome banding that makes this species instantly recognizable.</p>
+
+    <p>The fruiting bodies &mdash; the brackets, the part you see &mdash; are semicircular to fan-shaped, typically 2 to 7 centimeters across and 1 to 3 millimeters thick. They are thin enough to be flexible when fresh, leathery and slightly rigid when dry. The upper surface bears the characteristic concentric color zones: alternating bands of brown, tan, gray, cream, and white, sometimes with zones of blue, green, or rust depending on age, exposure, and the presence of algal colonists. The surface texture alternates between velvety zones (covered in fine hairs or tomentum) and smooth, glossy zones where the hairs have been worn away or were never produced. The margin &mdash; the growing edge &mdash; is typically white or pale cream, the color of active mycelium that has not yet developed pigmentation.</p>
+
+    <p>The underside is the spore-producing surface: a dense field of tiny pores, 3 to 8 per millimeter, each pore the opening of a tube lined with the spore-bearing tissue (hymenium). The pores are white to pale cream in healthy specimens, sometimes yellowing with age. The spores themselves are white, smooth, cylindrical to slightly curved, 5 to 8 micrometers long &mdash; invisible without magnification, produced in astronomical quantities, dispersed by air currents to colonize new wood substrates.</p>
+
+    <p>The brackets typically grow in overlapping clusters &mdash; rosettes, shelves, tiers &mdash; rather than as isolated individuals. A single dead log can host dozens or hundreds of brackets, layered on top of each other and arranged along the length of the log in a pattern that follows the availability of moisture and exposed wood surface. The visual effect is dramatic: a fallen alder or bigleaf maple covered in turkey tail looks decorated, festooned, as though someone has deliberately arranged hundreds of tiny fans along its surface. The arrangement is not deliberate in the human sense, but it is not random either. The brackets emerge where the mycelium below has accumulated enough resources to fund reproduction, and the mycelium accumulates resources where the wood is accessible and moist. The pattern on the surface is a map of the conditions inside the log.</p>
+
+    <p>The life of the fungus, however, is not in the brackets. The brackets are the reproductive structures &mdash; the mushroom equivalent of flowers and seeds. The organism itself is the mycelium: a vast network of microscopic filaments (hyphae) that permeate the dead wood, threading through cell walls, between fibers, along the grain and across it. The mycelium is invisible from the outside. You see the brackets, the way you see a tree&rsquo;s crown, but the functional body &mdash; the part that does the work of decomposition &mdash; is hidden inside the substrate. The mycelium of a single turkey tail colony can extend through an entire log, meters of hidden filament network extracting nutrients from wood that appears, from the outside, to be merely rotting.</p>
+
+    <p>The mycelium is the network. The brackets are the broadcast.</p>
+
+    <p>Explorer 6&rsquo;s instruments were the broadcast &mdash; the visible output, the data transmitted to the ground, the photograph published in the newspapers. But the network that made the broadcast possible was invisible: the tracking stations, the telemetry decoders, the orbit determination computers, the ground crews at South Point, Hawaii, who received the signal and reconstructed the scan lines into an image. The nascent space tracking network of 1959 &mdash; the stations that would evolve into the Deep Space Network &mdash; was the mycelium beneath the surface. Explorer 6&rsquo;s photograph was the bracket emerging from the wood, the visible evidence of a hidden infrastructure that was doing the real work.</p>
+
+    <hr>
+
+    <h2>Ecological Role: The White-Rot Chemist</h2>
+
+    <p>Turkey tail is a white-rot fungus. This classification &mdash; white rot versus brown rot &mdash; describes the specific chemical strategy the fungus uses to decompose wood, and it is one of the most consequential distinctions in forest ecology.</p>
+
+    <p>Wood is composed primarily of three polymers: cellulose (long chains of glucose molecules, providing tensile strength), hemicellulose (branching sugar polymers that cross-link the cellulose fibers), and lignin (a complex aromatic polymer that fills the spaces between cellulose fibers, providing rigidity and resistance to compression). Lignin is the hard part. Cellulose is relatively straightforward to degrade &mdash; many organisms produce cellulase enzymes that clip the glucose chains into digestible fragments. But lignin is one of the most chemically recalcitrant biological polymers on Earth. Its three-dimensional structure is irregular, cross-linked, and variable, with no single repeating bond that an enzyme can target efficiently. Lignin resists most biological degradation. It is the reason wood is hard. It is the reason wood persists after the tree dies. It is, in a real sense, the reason forests have structure at all.</p>
+
+    <p>White-rot fungi break down lignin. They are among the very few organisms on Earth that can do this effectively. The enzymes involved &mdash; lignin peroxidase, manganese peroxidase, and laccase &mdash; are oxidative rather than hydrolytic. They do not clip bonds in the way cellulase clips cellulose. Instead, they generate highly reactive free radicals (including hydroxyl radicals, some of the most reactive chemical species in biology) that attack the lignin structure indiscriminately, breaking it apart through oxidative fragmentation. The process is more akin to chemical erosion than to enzymatic digestion. The free radicals break bonds wherever they encounter them, progressively dismantling the lignin matrix and leaving behind the lighter-colored cellulose &mdash; hence &ldquo;white rot.&rdquo; The wood turns pale, soft, and fibrous as the dark lignin is removed and the white cellulose remains.</p>
+
+    <p>Brown-rot fungi take the opposite approach: they degrade the cellulose and hemicellulose but leave the lignin largely intact. The wood turns brown and crumbles into cubical fragments as the structural cellulose is removed and the rigid-but-brittle lignin matrix remains unsupported.</p>
+
+    <p>Turkey tail&rsquo;s white-rot strategy is the more complete decomposition. By removing lignin &mdash; the component that resists all other forms of biological attack &mdash; turkey tail opens the wood to total recycling. Once the lignin is broken down, the remaining cellulose and hemicellulose are accessible to a wide range of decomposer organisms: bacteria, other fungi, invertebrates, soil microbes. Turkey tail does not finish the job alone, but it does the part that nobody else can do. It breaks the lock. It makes the rest of the decomposition possible.</p>
+
+    <p>This is decomposition as analysis. Turkey tail encounters a complex structure &mdash; a dead log, a mass of interwoven polymers with different chemical properties &mdash; and breaks it into simpler components that can be processed individually. The lignin is attacked by oxidative enzymes. The cellulose is exposed and degraded by cellulases. The hemicellulose is hydrolyzed. The nutrients locked in the wood &mdash; nitrogen, phosphorus, potassium, calcium, the trace minerals that the living tree accumulated over decades or centuries &mdash; are released into the soil, where they become available to the next generation of living trees.</p>
+
+    <p>Explorer 6 encountered a complex structure too &mdash; the magnetosphere, a vast three-dimensional system of magnetic fields, charged particles, electric currents, and plasma interactions that extends from the upper atmosphere to tens of thousands of kilometers into space. The spacecraft broke this complex structure into measurable components: the magnetic field strength and direction (magnetometer), the particle flux and energy spectrum (scintillation counter, ion chamber, Geiger counter), the micrometeorite environment (impact detectors), and the visual appearance of the planet below (photocell scanner). Each instrument was an enzyme, specific to a particular component of the complex whole. Each measurement was a decomposition product &mdash; a simplified representation of one aspect of the magnetosphere that could be analyzed independently.</p>
+
+    <p>The ring current was the lignin. It was the component of the magnetospheric structure that resisted easy measurement from the ground. Ground-based magnetometers could detect its effects &mdash; the Dst index depression during geomagnetic storms &mdash; but could not measure the current directly. It took an in-situ measurement, a spacecraft carrying a magnetometer through the ring current region, to break down the complex signal into its components and confirm that the current existed where theory predicted. Explorer 6 did for the ring current what turkey tail does for lignin: attacked the resistant component directly, using tools specifically suited to the job, and broke it down into something the rest of the scientific community could process.</p>
+
+    <hr>
+
+    <h2>The Medicinal Dimension: PSK and the Forest Pharmacy</h2>
+
+    <p>In 1965, a Japanese chemist named Goro Chihara began investigating the polysaccharides produced by Trametes versicolor &mdash; specifically, a protein-bound polysaccharide extracted from the mycelium that would eventually be designated PSK (polysaccharide-K), also known by the trade name Krestin. The polysaccharide was a beta-glucan &mdash; a glucose polymer with beta-1,3 and beta-1,4 linkages &mdash; bound to a protein component that enhanced its bioavailability and immunological activity.</p>
+
+    <p>The research showed that PSK stimulated the immune system. It activated natural killer cells, enhanced T-cell function, stimulated cytokine production, and promoted the activity of dendritic cells &mdash; the antigen-presenting cells that coordinate the adaptive immune response. In clinical trials conducted in Japan through the 1970s and 1980s, PSK was shown to improve survival rates when used as an adjunct therapy for gastric, colorectal, and esophageal cancers, alongside conventional surgery and chemotherapy. The Japanese Ministry of Health approved PSK as a cancer treatment adjunct in 1977. By the 1980s, it was one of the most prescribed anticancer drugs in Japan, generating hundreds of millions of dollars in annual sales.</p>
+
+    <p>The significance of this for the Pacific Northwest came decades later, through Paul Stamets. Stamets &mdash; a mycologist based in Olympia, Washington, in the heart of the PNW &mdash; had been studying medicinal mushrooms for years when his mother, Patricia, was diagnosed with Stage 4 breast cancer in 2009. The tumor had metastasized. The prognosis was grim. Stamets, drawing on his knowledge of the mycological literature and his own research, recommended that his mother incorporate turkey tail supplements into her treatment regimen alongside the conventional oncology protocol prescribed by her doctors.</p>
+
+    <p>Patricia Stamets&rsquo;s cancer responded to treatment. The tumors regressed. She survived. Stamets does not claim that turkey tail cured his mother&rsquo;s cancer &mdash; he is careful to credit the full integrated treatment protocol, including the conventional medicine. But the case contributed to a growing body of evidence and anecdote that PSK and related turkey tail extracts could meaningfully support cancer treatment outcomes. Subsequent clinical trials in the United States &mdash; including NIH-funded studies &mdash; have investigated turkey tail polysaccharides as immunotherapy adjuncts, with results sufficiently promising that the FDA approved further clinical trials.</p>
+
+    <p>The medicinal resonance with Explorer 6 is not chemical but informational. Turkey tail heals through information &mdash; its polysaccharides do not kill cancer cells directly. Instead, they inform the immune system: they activate recognition pathways, stimulate surveillance cells, enhance the body&rsquo;s ability to detect and respond to threats that it was failing to address on its own. PSK is not a toxin. It is a signal. It tells the immune system to pay attention.</p>
+
+    <p>Explorer 6&rsquo;s photograph was also a signal, not a toxin. The crude image of Earth from orbit did not, by itself, change anything about the planet. It was 100 scan lines of marginal data. But it told humanity something: this is what you look like from up here. This is your planet, seen from outside. The information changed the observer, not the observed. The photograph was a stimulus to a recognition pathway that had never been activated before &mdash; the pathway that says, &ldquo;That object down there is home, and it is finite, and it is beautiful even in a smear of grainy telemetry.&rdquo;</p>
+
+    <p>The full development of that recognition pathway took years. The Earthrise photograph from Apollo 8 in December 1968, the Blue Marble from Apollo 17 in December 1972, the Pale Blue Dot from Voyager 1 in February 1990 &mdash; each subsequent image refined the signal, strengthened the response, activated deeper layers of recognition. But Explorer 6&rsquo;s crude crescent was the first dose. It was the initial exposure that primed the pathway, the way a first encounter with an antigen primes the adaptive immune system for a stronger response on subsequent exposure. The image was, in immunological terms, the primary immunization. Everything after was a booster.</p>
+
+    <hr>
+
+    <h2>The Substrate Network: Mycelium and Telemetry</h2>
+
+    <p>The mycelium of Trametes versicolor extends through dead wood in a network that is invisible from the surface but essential to the organism&rsquo;s function. The hyphae &mdash; individual filaments of the mycelial network, each one a tube of cytoplasm enclosed in a cell wall of chitin &mdash; are typically 2 to 10 micrometers in diameter. They are transparent. They are microscopic. They thread through the wood&rsquo;s cellular structure, penetrating cell walls, filling lumens, extending along the grain and branching across it. A cubic centimeter of actively decomposing wood can contain meters of hyphal filament, an intricate three-dimensional web of fungal tissue that is doing the actual work of decomposition while the brackets on the surface do the work of reproduction.</p>
+
+    <p>The mycelial network is not a static structure. It is dynamic, responsive, and in a limited sense intelligent. Hyphae extend at their tips, sensing the chemical and physical environment ahead and growing toward nutrient sources. When a hypha encounters a region of wood that is rich in accessible nutrients, the network reinforces the supply lines &mdash; thicker hyphae, more branching, greater transport capacity &mdash; channeling resources toward the productive zone. When a region is depleted, the hyphae withdraw, reallocating the cytoplasm to more productive frontiers. The network optimizes itself continuously, balancing exploration (extending hyphae into unknown territory) and exploitation (reinforcing productive zones).</p>
+
+    <p>This is remarkably similar to the nascent space tracking network that supported Explorer 6. In 1959, the network of ground stations capable of receiving telemetry from Earth-orbiting satellites was sparse, ad hoc, and still organizing itself. The South Point, Hawaii station that received the first photograph was one node. Cape Canaveral was another. Goldstone in the Mojave Desert, Woomera in Australia, stations in Singapore, Nigeria, and Peru &mdash; each contributed tracking coverage for different portions of Explorer 6&rsquo;s orbit. The network was not designed from a master plan. It had grown opportunistically, station by station, as the demands of each new mission revealed gaps in coverage that needed to be filled.</p>
+
+    <p>Like turkey tail&rsquo;s mycelium, the tracking network was invisible to the casual observer. The public saw the satellite, the photograph, the science results &mdash; the brackets on the surface. The network that made it all possible &mdash; the cables, the antennas, the timing signals, the orbit determination computers, the human operators working shifts to maintain continuous coverage &mdash; was hidden infrastructure. Essential, unglamorous, and utterly foundational. Without the mycelium, there are no brackets. Without the tracking network, there is no photograph.</p>
+
+    <p>The parallel extends to the network&rsquo;s evolution. Turkey tail&rsquo;s mycelium adapts to the substrate it encounters, reinforcing productive paths and abandoning unproductive ones. The space tracking network adapted the same way: stations that proved operationally valuable were expanded and upgraded; stations that were redundant or poorly positioned were deprioritized. By the time the network matured into the Deep Space Network of the 1960s and 1970s &mdash; three primary complexes at Goldstone, Madrid, and Canberra, spaced roughly 120 degrees apart in longitude to provide continuous sky coverage &mdash; the optimization process had been running for over a decade. The DSN was the mature mycelium, the network that had found its optimal configuration through years of exploratory growth and selective reinforcement.</p>
+
+    <hr>
+
+    <h2>Persistence and Patience</h2>
+
+    <p>A turkey tail bracket, once formed, persists. Unlike the fleshy mushrooms that emerge, release spores, and decay within days or weeks, turkey tail brackets are leathery, durable structures that can remain on a log for months or years. They do not rot quickly. The chitin in their cell walls resists bacterial degradation. The thin, flexible form sheds water and dries without cracking. A bracket that formed in spring may still be recognizable the following winter, bleached by sun and rain to pale gray but structurally intact. Some brackets persist for several years, accumulating additional growth zones as the mycelium below continues to feed and the bracket edge continues to expand.</p>
+
+    <p>This persistence is not dramatic. It is not the centuries-long endurance of an old-growth Douglas-fir or the millennia-long orbital lifetime of Pioneer 4 in its heliocentric orbit. It is the persistence of the ordinary &mdash; the kind that lasts because nothing conspires to destroy it and the organism is built to endure. Turkey tail is not rare, not endangered, not protected. It is the opposite: it is so common that its persistence is invisible. It is always there. That is the point.</p>
+
+    <p>Explorer 6 operated for 60 days &mdash; from August 7 to October 6, 1959. Then it orbited silently for another 23 months until reentry on October 1, 1961. Its operational lifetime was modest. Its photograph persists. The image &mdash; that crude, barely recognizable crescent &mdash; has been reproduced in thousands of publications, textbooks, museum exhibits, and web pages. It is cited every time someone traces the history of Earth observation from space. It is the first item in every chronology of satellite imaging. The photograph was terrible as a photograph. As a historical artifact, it is imperishable.</p>
+
+    <p>Turkey tail persists on the log. The photograph persists in the record. Both outlast the conditions that produced them. Both become more significant over time, not less &mdash; the bracket becomes a habitat for insects and microorganisms as it ages, the photograph becomes a landmark in the history of seeing as the technology that produced it is superseded by instruments a million times more capable. Neither was built for permanence. Both achieved it.</p>
+
+    <hr>
+
+    <h2>The Color Zones: A Record in Pigment</h2>
+
+    <p>Return to the bands. Each concentric zone on a turkey tail bracket represents a period of growth under specific conditions. The pigmentation of each zone is determined by the secondary metabolites the fungus was producing during that growth phase &mdash; compounds like trameterols, trametenolic acid, and various phenolic pigments whose production varies with temperature, moisture, nutrient availability, and the metabolic state of the mycelium.</p>
+
+    <p>The lightest zones &mdash; white to cream &mdash; typically represent periods of rapid growth when the mycelium was actively extending and the fungus was investing its resources in expansion rather than pigment production. The darker zones &mdash; brown, tan, russet &mdash; represent slower growth or growth under conditions that triggered the production of melanins and other protective pigments, compounds that shield the hyphal tips from UV radiation, desiccation, and microbial attack. The occasional blue-green zones are not produced by the fungus at all &mdash; they are the result of algal colonization, photosynthetic organisms that have established themselves on the bracket&rsquo;s surface, adding their own pigments to the record.</p>
+
+    <p>Read the bands from center to edge and you are reading the history of the bracket&rsquo;s growth: fast, slow, fast, slow, colonized, fast, slow, stopped. Each band is a line of data. Each transition between bands is a change in conditions. The complete pattern of bands is a record of the log&rsquo;s microenvironment over the period of the bracket&rsquo;s growth &mdash; weeks, months, sometimes years of environmental data encoded in concentric rings of pigment.</p>
+
+    <p>This is the deepest resonance with Explorer 6&rsquo;s scan-line image. The photograph was a record of conditions at a specific moment &mdash; the distribution of sunlight and cloud across a crescent of Earth on August 14, 1959. The turkey tail bracket is a record of conditions over time &mdash; the environmental history of a specific location on a specific log over the period of the bracket&rsquo;s growth. Both are records. Both encode information spatially. Both are produced by a process that sweeps across the subject and deposits a visible trace: the photocell sweeping its field of view across Earth, the growing edge of the bracket sweeping outward across the wood surface.</p>
+
+    <p>And both are beautiful in a way that transcends their information content. Explorer 6&rsquo;s photograph, for all its crudeness, carries the emotional weight of a first view &mdash; humanity&rsquo;s first look at itself from outside. Turkey tail brackets, for all their commonness, carry the visual complexity of a natural pattern produced by genuine biological processes operating over real time. The color bands are not decorative. They are data. But they are beautiful data, the way a weather map is beautiful when you understand what the isobars mean, the way a spectrogram is beautiful when you understand what the harmonics are saying.</p>
+
+    <p>Van Gogh would have understood turkey tail. He would have seen the concentric bands and recognized the brushstrokes of a patient maker, building up a composition through sequential passes, each pass slightly different from the last, the accumulated passes producing a pattern that no single pass could achieve. He would have seen the colors and wanted to paint them &mdash; the ochre, the umber, the gray-green, the cream, the rust. He would have recognized the bands as scan lines, though he would not have used that word. He would have called them what they are: marks left by something alive, moving outward, recording the conditions of its own existence in the only medium available to it.</p>
+
+    <p>The photocell recorded brightness. The fungus records chemistry. The painter recorded light. The method is the same. The scan line is universal.</p>
+
+    <hr>
+
+    <h2>Taxonomy Note</h2>
+
+    <p>The name Trametes versicolor has a nomenclatural history that reflects the confusion inherent in classifying a conspicuous, variable, and globally distributed organism that was noticed by European naturalists early and often. Linnaeus described it in 1753 as Boletus versicolor &mdash; placing it in the catch-all polypore genus Boletus, which at the time contained everything with pores that did not fit elsewhere. Curtis transferred it to Polyporus in 1781. Fries used Polyporus versicolor through much of the nineteenth century. Lloyd transferred it to Trametes in 1921, where it has remained in most modern treatments, though it has also been placed in Coriolus (by Quelet in 1886) and Polystictus at various times.</p>
+
+    <p>The name Coriolus versicolor persists in the medical and pharmaceutical literature, particularly in Japanese research on PSK, where it was established before the mycological community settled on Trametes. If you search for clinical trials on turkey tail polysaccharides, you will find both names used, sometimes in the same paper. The taxonomic instability is a minor inconvenience for researchers and a useful reminder that nomenclature is a human imposition on biological reality, not a property of the organism itself. Turkey tail does not know what genus it belongs to. It decomposes wood, produces spores, and builds concentric bands of color on the brackets it sends out from the network hidden inside the log. The name on the label changes. The work does not.</p>
+
+    <p>This mirrors the nomenclatural confusion around Explorer 6 itself: S-2 (the STL internal designation), 1959 Delta 1 (the international designation under the naming convention of the time), 1959-004A (the modern COSPAR designation), Explorer 6 (the NASA program designation). Four names for the same 64.4-kilogram sphere with solar paddles and a photocell. The names tell you something about who was doing the naming and when. They tell you nothing about what the spacecraft did. The ring current does not care what you call the magnetometer that measured it. The photograph does not care what you call the photocell that made it. The organism and the spacecraft both transcend their nomenclature. What they do is more durable than what they are called.</p>
+
+  </div>
+
+  <div class="nav-card">
+    <a href="research.html">&larr; Research</a>
+    <a href="mathematics.html">Mathematics &rarr;</a>
+  </div>
+</main>
+
+<footer><p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.6 Explorer 6 + Trametes versicolor &mdash; tibsfox.com/Research/NASA/</p></footer>
+
+</body>
+</html>

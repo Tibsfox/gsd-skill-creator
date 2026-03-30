@@ -1,0 +1,117 @@
+{
+  "mission": "1.6",
+  "title": "Explorer 6 (S-2)",
+  "description": "Open datasets and source materials relevant to Explorer 6 (1959), the first spacecraft to photograph Earth from orbit, Trametes versicolor (turkey tail fungus), Pacific Slope Flycatcher (Empidonax difficilis), spin-scan imaging, ring current discovery, and AM radio envelope detection",
+  "sources": [
+    {
+      "id": "nssdc-explorer-6",
+      "name": "NSSDC Master Catalog -- Explorer 6",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1959-004A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Explorer 6. Spacecraft description (64.4 kg sphere with four paddle-shaped solar cells), instrument manifest (photocell scanner, scintillation counter, ion chamber, fluxgate magnetometer, aspect sensor, micrometeorite detector), Thor-Able launch vehicle details, and mission timeline. NSSDC designation 1959-004A. Records the first photograph of Earth from orbit (August 14, 1959), the discovery of the ring current, and the mapping of the outer radiation belt. Documents the spacecraft's highly elliptical orbit (237 x 42,400 km, period 12.5 hours, inclination 47 degrees).",
+      "mission_relevance": "Definitive source for Explorer 6 specifications, orbital parameters, and scientific achievements. Documents the spin-scan imaging system, the photocell camera that produced the first Earth photograph, and the magnetometer data that revealed the ring current. Essential reference for all knowledge nodes in this mission."
+    },
+    {
+      "id": "nasa-image-explorer6",
+      "name": "NASA Image and Video Library -- Explorer 6",
+      "url": "https://images.nasa.gov/search?q=explorer%206",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "NASA's public image library containing the original Explorer 6 photograph of Earth -- the first TV image from space. Also includes spacecraft assembly photographs, launch imagery, ground station photographs, and diagrams of the spin-scan camera system. The famous first Earth photograph shows a blurry, crescent-shaped brightness pattern recorded on a strip-chart at the South Point, Hawaii tracking station on August 14, 1959. Additional images document the spacecraft's construction at Space Technology Laboratories and its integration with the Thor-Able launch vehicle.",
+      "mission_relevance": "Source for the actual first photograph of Earth from orbit -- the central artifact of Mission 1.6. The image is in the public domain and can be compared with the simulated scan-line reconstructions in the Python and web interactive artifacts. Historical photographs of the spacecraft and ground station provide context for the short story and circuit build guides."
+    },
+    {
+      "id": "omni-magnetosphere",
+      "name": "OMNIWeb -- Magnetospheric and Solar Wind Data",
+      "url": "https://omniweb.gsfc.nasa.gov/",
+      "type": "primary-source",
+      "category": "magnetosphere-data",
+      "format": "ASCII/CDF",
+      "access": "open",
+      "description": "NASA's OMNIWeb service provides near-Earth solar wind and magnetospheric data, including the Dst (Disturbance Storm Time) index that directly measures the ring current's magnetic field depression. Historical Dst data extends back to 1957, covering the period of Explorer 6's mission. The database includes magnetic field measurements, plasma parameters, energetic particle fluxes, and geomagnetic activity indices. OMNIWeb aggregates data from multiple spacecraft and ground observatories into a single, cross-calibrated dataset.",
+      "mission_relevance": "Provides the Dst index data that validates Explorer 6's ring current discovery. The ring current knowledge node references magnetic field depressions of 50-500 nT during storms, which are directly measurable in the Dst record. Essential for the orbit-radiation.py simulation overlay of ring current intensity versus altitude."
+    },
+    {
+      "id": "van-allen-probes-data",
+      "name": "Van Allen Probes Science Gateway",
+      "url": "https://rbspgway.jhuapl.edu/",
+      "type": "primary-source",
+      "category": "radiation-belt-data",
+      "format": "CDF/ASCII",
+      "access": "open",
+      "description": "Data from the Van Allen Probes mission (2012-2019, formerly RBSP), which carried modern instruments through the radiation belts on orbits similar to Explorer 6's. The probes provided the most detailed maps of the radiation belt structure ever made, including the discovery of a transient third radiation belt. Data includes energetic particle spectra, electric and magnetic field measurements, and plasma wave data. The radiation belt models used in the orbit-radiation.py simulation are validated against Van Allen Probes observations.",
+      "mission_relevance": "Modern validation data for the radiation belt profiles that Explorer 6 first measured in 1959. The Van Allen Probes confirmed the dual-belt structure with the slot region, and their data provides the ground truth for the simplified Gaussian belt model used in the orbit-radiation.py simulation and the orbit-viewer.html interactive. The continuity from Explorer 6 (1959) to Van Allen Probes (2012) spans 53 years of radiation belt science."
+    },
+    {
+      "id": "inat-trametes-versicolor",
+      "name": "iNaturalist -- Trametes versicolor Observations",
+      "url": "https://www.inaturalist.org/taxa/54026-Trametes-versicolor",
+      "type": "community-source",
+      "category": "organism-data",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community-contributed observations of Trametes versicolor (turkey tail fungus) worldwide, with photographs, geographic coordinates, dates, and identification confirmations. As of 2025, there are over 100,000 research-grade observations. The iNaturalist API provides programmatic access to observation data, enabling geographic distribution analysis, phenology studies, and substrate association mapping. Pacific Northwest observations are particularly dense, reflecting both the abundance of the species and the density of observers.",
+      "mission_relevance": "Primary data source for the organism component of Mission 1.6. Provides geographic distribution data for Trametes versicolor across the PNW, confirming its status as one of the most common bracket fungi in the region. Photograph data can be used to study the color band patterns (versicolor = many colors) that are a key metaphor in the knowledge nodes linking fungal growth rings to scan lines."
+    },
+    {
+      "id": "mycoportal",
+      "name": "MyCoPortal -- Mycology Collections Portal",
+      "url": "https://mycoportal.org/",
+      "type": "primary-source",
+      "category": "organism-data",
+      "format": "HTML/CSV",
+      "access": "open",
+      "description": "Aggregated herbarium records for fungi from research collections worldwide, including over 5.7 million specimen records. Contains vouchered specimen data for Trametes versicolor with collection dates, locations, substrates (host tree species), and collector notes. The portal links to high-resolution specimen images from participating herbaria. Provides more rigorous taxonomic data than iNaturalist, with specimens verified by professional mycologists.",
+      "mission_relevance": "Authoritative source for Trametes versicolor taxonomy, substrate associations, and geographic distribution. Herbarium records document the host trees (including Douglas-fir, the v1.5 organism) that turkey tail colonizes in the PNW, strengthening the cross-mission narrative. The substrate data is referenced in the white-rot decomposition knowledge node."
+    },
+    {
+      "id": "goes-earth-imagery",
+      "name": "GOES Image Viewer -- NOAA",
+      "url": "https://www.star.nesdis.noaa.gov/GOES/",
+      "type": "primary-source",
+      "category": "earth-observation",
+      "format": "JPEG/NetCDF",
+      "access": "open",
+      "description": "Real-time and archival imagery from the Geostationary Operational Environmental Satellite (GOES) series. GOES satellites use descendants of the spin-scan imaging technique pioneered by Explorer 6 -- the ATS-1 satellite (1966) was the first to use spin-scan from geosynchronous orbit, and GOES continued the lineage with the VISSR (Visible and Infrared Spin-Scan Radiometer) through the 1990s. Modern GOES-R series use staring imagers, but the heritage traces directly to Explorer 6's single photocell. Current imagery provides full-disk Earth views at 0.5 km resolution every 5 minutes.",
+      "mission_relevance": "Direct descendant technology of Explorer 6's spin-scan camera. Comparing Explorer 6's 12-scan-line crescent (1959) with a modern GOES full-disk image (2025) illustrates 66 years of progress in Earth observation from space. The GOES spin-scan heritage is referenced in the spin-scan imaging knowledge node. GOES Earth images can be used as source material for the scanline-camera.py simulation."
+    },
+    {
+      "id": "wmm-magnetic-model",
+      "name": "World Magnetic Model (WMM) -- NOAA/NCEI",
+      "url": "https://www.ncei.noaa.gov/products/world-magnetic-model",
+      "type": "primary-source",
+      "category": "geophysics",
+      "format": "ASCII/Software",
+      "access": "open",
+      "description": "The World Magnetic Model is a large-scale mathematical representation of Earth's main magnetic field, updated every 5 years (current: WMM2025). It provides the dipole and non-dipole components of Earth's internal field, which forms the 'bottle' that traps radiation belt particles. The WMM is essential for understanding why the Van Allen belts have the shape they do: the dipole field geometry determines where particles are trapped, and the South Atlantic Anomaly (where the field is weakest) allows radiation to reach lower altitudes. Explorer 6's magnetometer contributed early data to the understanding of the main field and its perturbation by the ring current.",
+      "mission_relevance": "Provides the magnetic field model needed to understand radiation belt geometry. The ring current knowledge node references the Dst magnetic field depression measured against the main field model. The WMM dipole moment determines the structure of the Van Allen belts that Explorer 6 mapped."
+    },
+    {
+      "id": "swpc-space-weather",
+      "name": "Space Weather Prediction Center -- NOAA",
+      "url": "https://www.swpc.noaa.gov/",
+      "type": "primary-source",
+      "category": "space-weather",
+      "format": "HTML/JSON/ASCII",
+      "access": "open",
+      "description": "Real-time and historical space weather data including geomagnetic storm indices (Kp, Dst, AE), solar wind parameters, energetic particle fluxes, and magnetospheric activity summaries. SWPC provides the operational context for Explorer 6's radiation belt measurements: the spacecraft experienced different radiation environments depending on solar activity, and its data contributed to the early understanding of how solar storms modulate the radiation belts. The Dst index archive includes values for August 1959, the month of Explorer 6's mission.",
+      "mission_relevance": "Provides space weather context for Explorer 6's radiation measurements. The AGC circuit knowledge node references the signal level variations caused by the spacecraft's orbit; solar storm data from SWPC shows that the radiation environment also varied with geomagnetic activity, adding another layer of variability that the ground station's AGC had to handle. The August 1959 Dst record shows the geomagnetic conditions during Explorer 6's ring current discovery."
+    },
+    {
+      "id": "itu-radio-propagation",
+      "name": "ITU Radiocommunication Study Group Data -- Radio Propagation",
+      "url": "https://www.itu.int/en/ITU-R/study-groups/rsg3/Pages/default.aspx",
+      "type": "primary-source",
+      "category": "radio-engineering",
+      "format": "PDF/Software",
+      "access": "partially-open",
+      "description": "International Telecommunication Union standards and data for radio wave propagation, including ionospheric models, free-space path loss calculations, and atmospheric attenuation data. ITU-R P.525 defines the free-space path loss formula that governs Explorer 6's link budget. ITU-R P.372 characterizes radio noise, which determines the noise floor at the South Point ground station. These standards provide the engineering basis for the telemetry bandwidth and signal-to-noise ratio knowledge nodes.",
+      "mission_relevance": "Provides the radio engineering framework for understanding Explorer 6's telemetry link. The free-space path loss calculation (1/r^2 signal power decrease) is central to the SNR knowledge node and explains why the first Earth photograph degraded over successive scan lines. The AM envelope detector circuit (progressive radio series v1.6) operates within the ITU framework for intermediate frequency processing. The 455 kHz IF standard referenced in the circuit guides has ITU origins."
+    }
+  ]
+}

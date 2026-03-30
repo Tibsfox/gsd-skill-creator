@@ -1,0 +1,111 @@
+* Explorer 6 Ground Station: AM Envelope Detector (455 kHz)
+* =========================================================================
+* Mission 1.6 — Explorer 6 (S-2), August 7, 1959
+* FIRST PHOTOGRAPH of Earth from orbit
+*
+* This is the envelope detector stage of the progressive ground station
+* receiver chain. It takes the amplified 455 kHz IF signal from the v1.5
+* IF amplifier and extracts the audio-frequency modulation envelope.
+*
+* Circuit: Germanium diode half-wave rectifier with RC filter
+*   - Input: 455 kHz AM signal (1 kHz modulation for test)
+*   - Diode: 1N34A germanium (V_f ~ 0.2V)
+*   - RC filter: R=10K, C=10nF (tau=100us, f_c=1592 Hz)
+*   - Output: Demodulated 1 kHz audio envelope
+*
+* The AM test signal is:
+*   v(t) = (1 + m * sin(2*pi*f_mod*t)) * sin(2*pi*f_carrier*t)
+*   where m=0.5 (50% modulation depth), f_mod=1 kHz, f_carrier=455 kHz
+*
+* Expected output: 1 kHz sine at the detector output, with the 455 kHz
+* carrier filtered out. Some residual carrier ripple will be present
+* but attenuated by ~30 dB relative to the audio.
+*
+* Run: ngspice -b envelope-detector.cir
+* =========================================================================
+
+* --- AM Modulated Input Signal ---
+* Carrier: 455 kHz, 500 mV peak (typical IF amplifier output)
+* Modulation: 1 kHz sine, 50% depth
+* V(t) = 0.5 * (1 + 0.5*sin(2*pi*1000*t)) * sin(2*pi*455000*t)
+* SPICE approximation using two sinusoidal sources and B-source
+
+* Carrier oscillator
+Vcarrier carrier_ref 0 SIN(0 0.5 455k 0 0)
+
+* Modulation oscillator
+Vmod mod_ref 0 SIN(0 0.25 1k 0 0)
+
+* AM modulated signal: B-source multiplies carrier by (1 + modulation)
+B_am input 0 V = (0.5 + V(mod_ref)) * V(carrier_ref) / 0.5
+
+* --- Input Coupling Capacitor ---
+* Blocks any DC from the previous stage
+C_in input diode_anode 100n
+
+* --- Germanium Diode (1N34A) ---
+* Point-contact germanium diode model
+* Low forward voltage (~0.2V) enables detection of weak signals
+.model D1N34A D(Is=2.6e-7 Rs=7 N=1.6 Bv=60 Ibv=1u
++ Cjo=0.5p M=0.5 Vj=0.3 Tt=11.5n)
+
+D1 diode_anode detector_out D1N34A
+
+* --- Detector Load (RC Filter) ---
+* R and C chosen so that:
+*   1/f_carrier << RC << 1/f_audio_max
+*   2.2 us << 100 us << 333 us (for 3 kHz audio)
+*
+* tau = R1 * C1 = 10e3 * 10e-9 = 100 us
+* f_c = 1/(2*pi*RC) = 1,592 Hz
+R1 detector_out 0 10k
+C1 detector_out 0 10n
+
+* --- AGC Tap ---
+* Long time constant for slowly-varying DC level proportional to
+* average signal strength. Used to control gain of preceding stages.
+* tau_agc = R_agc * C_agc = 100e3 * 10e-6 = 1.0 seconds
+R_agc detector_out agc_out 100k
+C_agc agc_out 0 10u
+
+* --- Output Coupling ---
+* Blocks DC, passes audio to next stage (audio amplifier)
+C_out detector_out audio_out 100n
+R_load audio_out 0 47k
+
+* --- Analysis ---
+* Transient: 5 ms total, 0.1 us timestep (resolve 455 kHz carrier)
+* This captures ~5 cycles of the 1 kHz modulation and ~2275 carrier cycles
+.tran 0.1u 5m 0 0.1u
+
+* --- Measurements ---
+* After simulation, compare:
+*   V(input)         — AM modulated 455 kHz signal
+*   V(detector_out)  — Rectified + filtered output (should show 1 kHz envelope)
+*   V(audio_out)     — AC-coupled audio output
+*   V(agc_out)       — DC level for AGC feedback
+
+.control
+  run
+  set hcopypscolor=1
+  set color0=white
+  set color1=black
+
+  * Plot input AM signal vs detected envelope
+  plot v(input) v(detector_out) v(audio_out) title 'AM Envelope Detector — 455 kHz IF to Audio'
+
+  * Measure detected audio amplitude and DC offset
+  meas tran v_audio_pp PP v(audio_out) from=2m to=5m
+  meas tran v_agc_dc AVG v(agc_out) from=3m to=5m
+  meas tran v_det_dc AVG v(detector_out) from=3m to=5m
+
+  echo ""
+  echo "=== Envelope Detector Results ==="
+  echo "Audio output peak-to-peak: should be ~250 mV for 50% modulation"
+  echo "AGC DC level: proportional to average signal strength"
+  echo "Detector DC: bias point for the detector output"
+  echo ""
+  echo "Next in chain: v1.7 audio amplifier + speaker driver"
+.endc
+
+.end
