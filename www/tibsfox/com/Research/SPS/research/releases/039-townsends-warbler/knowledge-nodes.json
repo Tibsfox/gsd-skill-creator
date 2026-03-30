@@ -1,0 +1,287 @@
+{
+  "degree": 39,
+  "species": "Townsend's Warbler",
+  "scientific_name": "Setophaga townsendi",
+  "slug": "039-townsends-warbler",
+  "sound_type": "buzzy zee-zee-zee-zwee-zweee",
+  "energy": 4,
+  "ecosystem": "conifer canopy",
+  "season": "summer",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds in conifer forests from Alaska south through the Pacific Northwest mountain ranges. In the PNW, found in mature and old-growth conifer forests at mid to high elevations during breeding season. Winters along the PNW coast -- unlike most North American warblers that migrate to the tropics. The coordinates mark the broader PNW range; primary breeding habitat is the upper canopy of tall conifers: Douglas fir, western hemlock, Sitka spruce, mountain hemlock."
+  },
+  "taxonomy_note": {
+    "description": "Townsend's Warbler is the SEVENTH Parulidae in the engine -- a record for any family. It is the SECOND CONSECUTIVE Parulidae (after Black-throated Gray at degree 38), forming the engine's first consecutive family pair and first consecutive genus pair. Third Setophaga in the engine (after Yellow at 16 and Black-throated Gray at 38). Townsend's and Black-throated Gray actually hybridize where their ranges overlap in the Cascades -- the engine is mapping both sides of an active hybrid zone.",
+    "current_family": "Parulidae",
+    "new_family": false,
+    "family_count_in_engine": 18,
+    "parulidae_count_in_engine": 7,
+    "name_etymology": "Setophaga = Ancient Greek ses/setos (moth) + phagos (eater) = 'moth-eater.' Townsendi = honoring John Kirk Townsend (1809-1851), 19th-century American naturalist and collector who traveled across western North America with Thomas Nuttall. Part of Nathaniel Wyeth's 1834 expedition from Independence, Missouri, to the Columbia River. Full translation: 'Townsend's moth-eater.' Formerly Dendroica townsendi before the 2011 AOS genus merger [NEEDS VERIFICATION -- approximate date].",
+    "genus_note": "Setophaga is the largest New World warbler genus with approximately 34 species [NEEDS VERIFICATION]. This is the engine's THIRD Setophaga (after Yellow Warbler, S. petechia, at degree 16 and Black-throated Gray, S. nigrescens, at degree 38). The three Setophaga map a chromatic gradient: maximum yellow (16), minimum color (38), bold yellow-and-black pattern (39). The last two are consecutive and hybridize in nature.",
+    "order_note": "Passeriformes continues from degree 38. Second consecutive Passeriformes after the Apodiformes break at degrees 35-37.",
+    "warbler_pair_note": "Degrees 38-39 form the engine's first consecutive family pair and first consecutive genus pair. This mirrors the consecutive family runs of Hirundinidae (26-30) and Trochilidae (35-37) but differs in that the warbler pair represents species that directly interact biologically -- they hybridize, compete, and one is displacing the other. The pair maps an ecological relationship, not just a family survey.",
+    "dendroica_note": "Formerly placed in genus Dendroica (Greek dendron = tree + oikos = dwelling = 'tree-dweller'). The 2011 AOS merger of Dendroica into Setophaga was based on molecular phylogenetics showing that the American Redstart (original Setophaga) was nested within Dendroica, requiring priority rules to merge the larger genus into the older name [NEEDS VERIFICATION].",
+    "family_lead": "With 7 members, Parulidae now LEADS all families in the engine by TWO over Hirundinidae and Turdidae (5 each). This is the largest family lead in the engine. Seven of ~115 North American Parulidae is barely 6%.",
+    "townsend_collector_note": "John Kirk Townsend was a skilled collector who also collected human remains from Indigenous burial sites in the PNW [NEEDS VERIFICATION]. This history is part of the colonial context of 19th-century natural history. The AOS naming committee has been evaluating species named after collectors with problematic legacies [NEEDS VERIFICATION].",
+    "hybridization_note": "Townsend's Warbler hybridizes with both Black-throated Gray Warbler and Hermit Warbler (S. occidentalis) where ranges overlap. The hybrid zones are in the southern Washington Cascades and Oregon Cascades. Townsend's is behaviorally dominant and is displacing both species through competitive exclusion via introgression -- one of the best-documented cases in North American birds."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "4,000-8,500 (across buzzy phrases) [NEEDS VERIFICATION]",
+    "peak_energy_band_hz": "5,000-7,500 (primary song energy) [NEEDS VERIFICATION]",
+    "song_duration_s": "1.5-2.5 (4-6 buzzy phrases)",
+    "note_structure": "Series of 4-6 buzzy phrases: zee-zee-zee-zwee-zweee. The first 3-4 phrases are at similar pitch (roughly isometric). The final 1-2 phrases rise in pitch, giving the song a distinctive ascending ending. The terminal note is often the highest and longest.",
+    "note_types": "TWO sound categories: (1) PRIMARY SONG -- 4-6 buzzy phrases with ascending terminal notes, moderate tempo, deliberate delivery. The signature sound. (2) CALL NOTE -- a sharp chip or tik, higher and sharper than the Black-throated Gray's flatter tup.",
+    "phrase_structure": "Isometric initial phrases followed by ascending terminal phrases. The overall contour is FLAT then RISING -- similar to the Black-throated Gray's structure but with a more emphatic upward ending. The rising terminal note is the key difference between the two congeneric songs.",
+    "timbre": "BUZZY -- but thinner and more sibilant than Black-throated Gray's husky wheeze. High, wiry, zee-like quality. Less rough than BTG, more insistent. The buzz is in the sibilance of the 'z' sounds rather than the huskiness of the 'w' sounds.",
+    "amplitude": "E=4 -- same as Black-throated Gray. The song carries well through dense conifer canopy from the crown position. Moderate volume but effective projection from height.",
+    "tempo": "MODERATE for a warbler -- approximately 3-4 phrases per second [NEEDS VERIFICATION]. Faster than Black-throated Gray's drawl (~2-3/s) but slower than Orange-crowned's trill (8-16 notes/s). Measured, not lazy.",
+    "context": "Males sing from the crown of tall conifers during breeding season (May-July). Song is territorial and mate-attraction. The high singing position provides excellent broadcast range. Often heard but not seen because of extreme canopy height.",
+    "key_property": "THE CANOPY BUZZ -- the 40th acoustic element. An ascending buzzy warbler song delivered from the crown of tall conifers. After the drawl's lazy flat delivery (degree 38), the canopy buzz adds vertical lift -- the terminal phrases rise. Same buzzy character, different trajectory. The drawl sat in one place. The canopy buzz climbs. Named 'canopy buzz' because it captures both the habitat (canopy crown) and the acoustic character (buzzy ascending phrases). The buzz comes from the top of the forest and goes up."
+  },
+  "plumage": {
+    "overall": "Yellow-and-black face pattern with olive-green upperparts. Vivid where the Black-throated Gray is stark. Bold contrast visible from the forest floor even when the bird is 30+ meters up in a conifer crown.",
+    "head": "Striking face pattern: bright yellow face with broad black cheek patch (auricular area), black crown, yellow supercilium. The face is the diagnostic field mark -- high-contrast yellow-and-black visible at distance.",
+    "throat": "Yellow in females and first-year males; black in adult males. The male black throat is a genus-level trait shared with Black-throated Gray (degree 38).",
+    "body": "Yellow breast, white belly, dark streaks on flanks. Olive-green back with dark streaks. Two white wing bars. Dark tail with white outer feathers.",
+    "field_id": "Yellow face with bold black cheek patch. Black throat (males). Olive-green back. White wing bars. Overall impression: a yellow-and-black warbler high in the conifers -- vivid face visible even from far below.",
+    "setophaga_gradient": "Yellow Warbler (degree 16, S. petechia) = entirely vivid yellow. Black-throated Gray (degree 38, S. nigrescens) = achromatic except one yellow loral spot. Townsend's (degree 39, S. townsendi) = bold yellow-and-black face with olive-green body. Three Setophaga, three color strategies: maximum saturation (16), minimum color (38), bold pattern at height (39).",
+    "hybrid_plumage": "In the hybrid zone with Black-throated Gray and Hermit Warblers, intermediate plumage appears -- more yellow than pure BTG, less vivid than pure Townsend's. The yellow is a gradient, not a boundary."
+  },
+  "conifer_canopy_ecology": {
+    "definition": "Conifer canopy -- the crown stratum of tall conifer forests (Douglas fir, western hemlock, Sitka spruce, mountain hemlock, true firs). Townsend's Warbler occupies the HIGHEST foraging position of any warbler in the engine: 15-45 m above ground [NEEDS VERIFICATION]. The canopy crown is a distinct microhabitat with more light, greater temperature variation, more wind exposure, and different arthropod communities than lower strata.",
+    "forest_types": [
+      "Douglas fir / western hemlock forests (western Cascades, Coast Range)",
+      "Sitka spruce forests (coastal, fog belt)",
+      "Mountain hemlock / Pacific silver fir forests (subalpine)",
+      "Mixed conifer with true firs (mid to high elevation)",
+      "Old-growth and mature second-growth with complex canopy structure"
+    ],
+    "vertical_position": "Crown canopy -- the highest stratum. Above the Golden-crowned Kinglet's inner canopy, above the Chestnut-backed Chickadee's mid-canopy, above the Red-breasted Nuthatch's trunk zone. Townsend's Warbler is the capstone of the conifer forest vertical column.",
+    "pnw_distribution": [
+      "Western Cascades -- mid to high elevation conifer forests",
+      "Olympic Mountains -- old-growth rainforest canopy",
+      "Coast Range -- mature conifer stands",
+      "North Cascades -- subalpine conifer forests",
+      "British Columbia south through Oregon -- wherever tall conifers form closed canopy",
+      "Winters along PNW coast at lower elevation in mixed forest, parks, suburban gardens"
+    ],
+    "significance": "Conifer canopy is the PNW's defining ecosystem. Townsend's Warbler occupies its highest stratum -- the crown. Previous conifer forest species worked lower strata (Spotted Owl mid-upper interior, Nuthatch trunks, Kinglet inner canopy, Chickadee mid-canopy). Townsend's completes the vertical column by occupying the top."
+  },
+  "hybridization": {
+    "btg_hybrid_zone": {
+      "location": "Southern Washington Cascades, Oregon Cascades, parts of northern Oregon Coast Range",
+      "mechanism": "Males respond to each other's songs. Territories overlap at ecotone between wet conifer and dry oak-pine. Mixed pairings produce viable, fertile offspring.",
+      "direction": "Townsend's alleles introgressing into Black-throated Gray populations. Hybrid zone appears to be moving south and east -- into BTG territory.",
+      "references": "[3, 4, 5]"
+    },
+    "hermit_hybrid_zone": {
+      "location": "Southern Washington Cascades, Oregon Cascades",
+      "mechanism": "Similar to BTG hybrid zone. Mixed pairings at ecological transition zone.",
+      "direction": "Townsend's displacing Hermit Warbler. Hermit range has contracted southward over observed decades. Hermit once bred as far north as Washington's Olympic Peninsula [NEEDS VERIFICATION].",
+      "references": "[3, 4, 5]"
+    },
+    "competitive_exclusion": "Townsend's males are behaviorally dominant -- respond more aggressively to rivals than BTG or Hermit males [NEEDS VERIFICATION]. Hybrid offspring tend to mate with Townsend's-like partners, pulling gene pool toward Townsend's phenotype. The boundary shifts over decades. One of the best-documented cases of competitive exclusion through hybridization in North American birds.",
+    "conservation_question": "If Townsend's absorbs Hermit Warbler through introgression, is that extinction? Genes persist in hybrids but phenotype changes and species boundary blurs. A prime case study in conservation biology."
+  },
+  "winter_ecology": {
+    "dual_strategy": "Many Townsend's Warblers winter in highland forests of Mexico and Central America. A significant population winters along the Pacific Coast from southern BC to northern California.",
+    "pnw_winter_habitat": "Coastal forests, parks, suburban gardens. Shift from high conifer canopy (breeding) to lower vegetation (winter). Visit suet feeders and ornamental plantings.",
+    "significance": "Year-round PNW presence for some populations -- present in summer as high-canopy breeder, present in winter as coastal lowland forager. Only the Orange-crowned Warbler (degree 20, partial migrant) has a similarly year-round PNW presence among engine Parulidae."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "population_trend": "Stable [NEEDS VERIFICATION]",
+    "population_size": "Estimated 20-30 million [NEEDS VERIFICATION]",
+    "threats": [
+      "Logging of old-growth and mature conifer forest reduces breeding habitat",
+      "Climate change may shift conifer zones upslope",
+      "Spruce budworm cycles affect prey availability"
+    ],
+    "hybridization_angle": "The competitive exclusion dynamic is a conservation concern for Black-throated Gray and especially Hermit Warbler, whose range has contracted. Not a concern for Townsend's itself (the expanding species)."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The canopy buzz -- the 40th acoustic element: an ascending buzzy warbler song delivered from the crown of tall conifers. After the drawl's lazy flat delivery (degree 38), the canopy buzz adds vertical lift. Same buzzy timbre, different trajectory. The drawl sat in one place -- isometric repetition, minimal change, a song at rest in motion. The canopy buzz starts similarly but then RISES. The terminal phrases climb. The song lifts at the end, as if the buzz itself is reaching for the upper canopy. Named for both habitat (canopy crown) and acoustic character (buzzy ascending phrases). The buzz that goes up.",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/canopy-buzz/",
+      "examples": [
+        "Townsend's Warbler song: zee-zee-zee-zwee-zweee. 4-6 buzzy phrases. Initial phrases at similar pitch, terminal phrases rising. The ascending ending is the key distinguishing feature from BTG's flat drawl.",
+        "Drawl-to-canopy-buzz transition: drawl (38, flat, lazy, oak-pine) -> canopy buzz (39, ascending, deliberate, conifer canopy). Same genus. Same energy. Same buzzy timbre. Different contour: flat vs. rising. The pair demonstrates that buzz can be both lazy and climbing.",
+        "Connection to buzz (degree 32, Bohemian Waxwing): buzz was collective and assertive (E=5, hundreds). Canopy buzz is solitary and territorial (E=4, one bird at the top of a conifer). Drawl (38) was solitary and lazy (E=4, one bird in an oak). Three flavors of buzz: social, resting, ascending.",
+        "The rising terminal note: the canopy buzz's ascending ending connects to the Yellow Warbler's ascending crescendo (degree 16, sweet-sweet-sweeter) -- both Setophaga, both ascending. But Yellow ascends in clean tones. Townsend's ascends in buzz. Same genus, same direction, different timbre.",
+        "The canopy buzz is named for WHERE it comes from as much as HOW it sounds. It is a buzzy song from the canopy crown -- the sound of the highest warbler in the engine singing from the highest point in the forest."
+      ],
+      "music_theory_parallel": "If the drawl (degree 38) is a whole note held at rest -- a fermata on a buzzy pitch -- then the canopy buzz is a buzzy ascending scale that lifts at the cadence. Both are in the same timbre family (buzz), but one rests and one rises. In orchestral terms: the oboe plays a sustained note (the drawl), and then the clarinet picks up the same note but walks it up a minor third at the phrase end (the canopy buzz). Same woodwind section. Same buzzy reed quality. Different phrasing."
+    },
+    {
+      "concept": "The Setophaga consecutive pair -- degrees 38-39 as the engine's first back-to-back same-genus species. Black-throated Gray Warbler and Townsend's Warbler are not just taxonomically related -- they hybridize where their ranges overlap. The engine maps both sides of an active hybrid zone: dry oak-pine (BTG) and wet conifer canopy (Townsend's). Between them, in the Cascades transition zone, their genes mingle and Townsend's pushes south. The pair is the engine's first INTERACTING consecutive species.",
+      "level": "foundational",
+      "department": "ecology/speciation",
+      "college_path": ".college/ecology/speciation/setophaga-pair/",
+      "examples": [
+        "Hybrid zone location: southern Washington Cascades and Oregon Cascades, at the ecotone between wet conifer forest and dry oak-pine woodland. Both species' songs carry across the boundary.",
+        "Competitive exclusion via introgression: Townsend's males are behaviorally dominant. Hybrids carry Townsend's traits. The hybrid zone moves southward. Over decades, Townsend's gains ground and BTG/Hermit lose it.",
+        "Previous consecutive species: Northern Flicker (21-22) was same species, different sounds. Cedar-Bohemian Waxwings (31-32) were same genus but not hybridizing. This pair hybridizes -- the biological interaction is the story.",
+        "The pair maps an ECOLOGICAL GRADIENT: dry (38) to wet (39), open (38) to dense (39), low canopy (38) to crown canopy (39), flat song (38) to ascending song (39). Every dimension shifts across the pair.",
+        "Evolution in real time: this is not a static snapshot. The hybrid zone is moving. The Townsend's range is expanding. The engine captures a moment in an ongoing process of competitive exclusion."
+      ],
+      "music_theory_parallel": "A duet where both instruments play variations on the same buzzy theme, but one instrument is gradually overtaking the other's part. In a fugue, the subject enters in one voice and the answer enters in another -- but here the answer is consuming the subject. Townsend's theme expands into the BTG's range. The musical form is a fugue becoming a solo."
+    },
+    {
+      "concept": "Parulidae at seven -- the engine's largest family by two. The warbler septet has two structural arcs: the quintet (14-17, 20) mapping five song endings at E=3 in wet habitats, and the pair (38-39) mapping an ecological gradient and hybrid zone at E=4 in dry-to-wet transition. No other family has two arcs. The Parulidae structural footprint is the deepest in the engine.",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/parulidae-seven/",
+      "examples": [
+        "Two arcs: Act I (quintet, degrees 14-17 + 20, E=3, wet, five song endings) and Act III (pair, degrees 38-39, E=4, dry-to-wet, ecological dynamics). Act II was the 18-degree gap (degrees 21-37, eight other families).",
+        "Family lead: Parulidae 7, Hirundinidae 5, Turdidae 5. Two-member lead. First family to reach 7.",
+        "Genus dominance: Setophaga at 3 of 7 members (43%). No other genus has more than 2 members (Geothlypis at degrees 14 and 17).",
+        "Structural evolution: quintet mapped acoustics (song endings). Pair maps ecology (hybridization, vertical gradient, ecosystem transition). The family's role in the engine has shifted from acoustic vocabulary to ecological dynamics.",
+        "What comes next: seven of ~115 North American Parulidae is barely 6%. The family will continue to grow. But the pair may be a structural unit -- an isolated episode, not the start of a warbler streak."
+      ],
+      "music_theory_parallel": "A symphony with a returning theme. The quintet was the exposition -- introducing the warbler theme in five variations. The gap was the development section -- exploring other material. The pair is the recapitulation -- the warbler theme returns, transformed. But this recapitulation has something the exposition didn't: the two voices are interacting, hybridizing, competing. The theme has become counterpoint."
+    },
+    {
+      "concept": "Conifer canopy crown -- the highest vertical stratum in the PNW forest. Townsend's Warbler is the capstone of the engine's conifer forest vertical column. Previous species worked lower strata: Spotted Owl (mid-upper interior, nocturnal), Red-breasted Nuthatch (trunks), Golden-crowned Kinglet (inner canopy), Chestnut-backed Chickadee (mid-canopy). Townsend's occupies the crown -- 15-45 m, full sun, wind exposure, maximum broadcast range. The engine's vertical column is now complete from ground to crown.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/conifer-crown/",
+      "examples": [
+        "Vertical column: ground/understory (MacGillivray's, 14) -> low shrub (Yellowthroat, 17) -> low-mid canopy (Wilson's, 15) -> mid canopy (Yellow, 16; Orange-crowned, 20) -> mid canopy dry (BTG, 38) -> CROWN (Townsend's, 39).",
+        "Crown microhabitat: full sun, greater temperature variation, more wind, different arthropod community. Songs from the crown travel farther than songs from lower strata.",
+        "The observer's challenge: Townsend's Warbler is often heard but not seen because it forages at extreme heights. The vivid yellow-and-black face pattern is an adaptation to this -- it needs to be identifiable from 30+ meters below.",
+        "Connection to Golden-crowned Kinglet (degree 8): both work the upper conifer canopy, but Kinglet is in the inner canopy (among the branches) while Townsend's is at the crown (at the top, exposed). Different microhabitats within the same canopy layer.",
+        "The conifer canopy as the PNW's defining ecosystem: Douglas fir, western hemlock, Sitka spruce are the signature trees. Townsend's Warbler occupies their summit. It is the warbler of the PNW's most iconic habitat."
+      ],
+      "music_theory_parallel": "The lead violin sitting in the first chair -- highest voice, most exposed position, most visible to the audience. The other instruments (nuthatch, kinglet, chickadee) occupy interior seats. Townsend's Warbler is the concertmaster of the conifer canopy -- the highest voice, broadcasting from the most exposed position, carrying the melody over the entire forest."
+    },
+    {
+      "concept": "Competitive exclusion via introgression -- Townsend's Warbler displacing both Black-throated Gray Warbler and Hermit Warbler through hybridization. This is evolution observable on a human timescale: the hybrid zone moves over decades, Townsend's alleles introgress into neighboring species' populations, and the Townsend's range expands at the competitors' expense. The engine at degrees 38-39 maps both the victor and the contested territory.",
+      "level": "intermediate",
+      "department": "ecology/speciation",
+      "college_path": ".college/ecology/speciation/competitive-exclusion/",
+      "examples": [
+        "Townsend's vs. Black-throated Gray: hybrid zone in the Cascades at the wet conifer/dry oak-pine transition. Townsend's alleles moving south/east into BTG territory.",
+        "Townsend's vs. Hermit Warbler: Hermit range has contracted southward. Once bred as far north as the Olympic Peninsula [NEEDS VERIFICATION]. Now limited to Oregon and northern California in areas where Townsend's has not yet expanded.",
+        "Mechanism: Townsend's males are behaviorally dominant [NEEDS VERIFICATION]. They respond more aggressively to rivals. Hybrids tend to mate with Townsend's-like partners. The gene pool drifts toward Townsend's phenotype over generations.",
+        "Conservation paradox: is genetic absorption extinction? The displaced species' genes persist in hybrids. The phenotype changes. The species boundary dissolves. This is one of the harder questions in conservation biology.",
+        "The engine's first real-time evolutionary dynamic. Previous degrees documented species as static snapshots. Degrees 38-39 document a relationship in motion -- a boundary that is shifting, a competition that is ongoing, a future that is unresolved."
+      ],
+      "music_theory_parallel": "Modulation by infiltration. One key gradually absorbs another through shared leading tones. The boundary between C major and G major blurs as more G-major characteristics appear in what was a C-major passage. Eventually the passage IS in G major, and C major exists only as a memory in the bass notes. Townsend's is the dominant key, modulating the passage. BTG and Hermit are the receding tonalities."
+    },
+    {
+      "concept": "E=4 continues -- now at 16 degrees (41.0%). The Setophaga pair (38-39) is both E=4. E=3 absent for 19 CONSECUTIVE DEGREES (since degree 20). E=2 absent for 26 degrees. E=1 absent for 27 degrees. The engine's dynamic range compression is at its worst: degrees 21-39 have been exclusively E=4 and E=5. The lower three-fifths of the energy spectrum is completely absent from the recent arc.",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e4-continued/",
+      "examples": [
+        "E=4 dominance: 16 of 40 entries (41.0%). The modal energy level. Has appeared in 16 of the last 19 degrees.",
+        "E=3 absence: 19 consecutive degrees without E=3. The longest gap for any energy level. The quintet's uniform E=3 is now 19 degrees in the past.",
+        "E=2 absence: 26 degrees since the last E=2 (degree 13, Hutton's Vireo). Over two-thirds of the engine without the default quiet register.",
+        "E=1 absence: 27 degrees since the last E=1 (degree 12, Pine Siskin). The minimum energy level is nearly forgotten.",
+        "Structural urgency: the engine NEEDS E=3 or lower. A marine species at E=2 would address the marine crisis (39 degrees without a marine species) AND the energy compression simultaneously."
+      ],
+      "music_theory_parallel": "An orchestra that has been playing in the mezzo-forte to fortissimo range for nineteen measures straight. The string section has not played piano in 19 bars. The lower dynamics exist on the score but have not been performed. The conductor needs to bring the volume down -- not to silence, but to a mezzo-piano or piano passage that reminds the audience what quiet sounds like. The canopy buzz is another mezzo-forte entry. The engine needs a pianissimo."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-038",
+      "title": "Black-throated Gray Warbler (Degree 38)",
+      "connection": "SETOPHAGA CONSECUTIVE PAIR. Same genus, same family, back-to-back degrees. These species HYBRIDIZE where their ranges overlap in the Cascades. BTG = dry oak-pine, flat drawl, E=4. Townsend's = wet conifer canopy, ascending canopy buzz, E=4. The engine maps both sides of an active hybrid zone. The pair is the engine's first interacting consecutive species."
+    },
+    {
+      "project": "SPS-016",
+      "title": "Yellow Warbler (Degree 16)",
+      "connection": "SETOPHAGA TRIO. Three Setophaga: Yellow (16, maximum yellow, ascending crescendo, wet riparian, E=3), Black-throated Gray (38, monochrome + one dot, flat drawl, dry woodland, E=4), Townsend's (39, yellow-and-black face, ascending buzz, wet conifer canopy, E=4). The genus now spans the full chromatic range of warbler aesthetics. Yellow's ascending contour connects to Townsend's ascending buzz -- both Setophaga, both rising, different timbre."
+    },
+    {
+      "project": "SPS-020",
+      "title": "Orange-crowned Warbler (Degree 20)",
+      "connection": "QUINTET CLOSER vs. PAIR MEMBER. Orange-crowned closed the warbler quintet (E=3, evaporation, partial migrant). Townsend's is the second member of the warbler pair (E=4, ascending buzz, summer + coastal winter). Both have year-round PNW presence: Orange-crowned as partial migrant, Townsend's through coastal wintering."
+    },
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "GROUND vs. CROWN. MacGillivray's introduced Parulidae from the understory -- the lowest warbler stratum. Townsend's is the seventh Parulidae and occupies the highest stratum: the conifer crown at 15-45 m. The warbler family now spans the complete vertical gradient from ground to crown."
+    },
+    {
+      "project": "SPS-008",
+      "title": "Golden-crowned Kinglet (Degree 8)",
+      "connection": "CONIFER CANOPY NEIGHBORS. Both work the upper canopy of tall conifers. Kinglet = inner canopy (among branches, ultrasonic contact calls, E=1). Townsend's = crown canopy (at the top, buzzy territorial song, E=4). Same forest, different microhabitats, different acoustic strategies, different energy levels."
+    },
+    {
+      "project": "SPS-005",
+      "title": "Red-breasted Nuthatch (Degree 5)",
+      "connection": "CONIFER VERTICAL COLUMN. Nuthatch = trunk zone (bark forager, nasal yank-yank, E=2). Townsend's = crown (canopy gleaner, ascending buzz, E=4). The engine's conifer forest now has voices from trunk to crown: Nuthatch (trunk), Chickadee (mid), Kinglet (inner canopy), Townsend's (crown)."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Spotted Owl (Degree 4)",
+      "connection": "OLD-GROWTH CONNECTION. Both require mature/old-growth conifer forest. Spotted Owl = interior, nocturnal, mid-upper canopy. Townsend's = exterior, diurnal, crown. Same forest dependence, different niches. Both affected by old-growth logging."
+    },
+    {
+      "project": "SPS-032",
+      "title": "Bohemian Waxwing (Degree 32)",
+      "connection": "THREE BUZZES. Bohemian Waxwing = the buzz (collective, assertive, E=5, hundreds). Black-throated Gray = the drawl (solitary, lazy, E=4, flat). Townsend's = the canopy buzz (solitary, territorial, E=4, ascending). The engine's three buzz variants at different scales, tempos, and trajectories."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Townsend's Warbler documented as common breeder in mature conifer forests across the PNW. Also present in winter along the coast. One of ~25 PNW Parulidae species. Hybridization with BTG and Hermit Warbler documented in the Cascades."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Conifer canopy ecology. Old-growth forest structure. Vertical stratification from floor to crown. The PNW's defining ecosystem represented at its highest stratum by Townsend's Warbler."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 38,
+    "total_entries": 40,
+    "families_represented": 18,
+    "largest_families": {
+      "Parulidae": 7,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Trochilidae": 3,
+      "Fringillidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=4 continues. Now at 16 degrees (41.0%). E=3 absent for 19 DEGREES (since degree 20) -- WORSENING. E=5 at 3 degrees (7.5%). The dynamic range compression deepens further: degrees 21-39 have been exclusively E=4 and E=5. NO E=3, E=2, or E=1 in 19 degrees. The lower three-fifths of the energy spectrum is completely absent from the recent arc.",
+    "consecutive_pair": "Degrees 38-39 form the engine's first consecutive family pair (Parulidae) and first consecutive genus pair (Setophaga). The pair represents species that hybridize in nature -- the engine's first interacting consecutive species.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive"],
+    "ecosystem_note": "Conifer canopy -- the crown stratum of tall conifer forests. The PNW's defining ecosystem represented at its highest point. Previous conifer forest species (Spotted Owl, Nuthatch, Kinglet, Chickadee) occupied lower strata. Townsend's completes the vertical column.",
+    "acoustic_element_40": "THE CANOPY BUZZ -- an ascending buzzy warbler song from the crown of tall conifers. After the drawl's flat delivery (degree 38), the canopy buzz adds vertical lift. Same buzzy character, different trajectory: flat (drawl) vs. ascending (canopy buzz). The 40th element.",
+    "parulidae_note": "SEVENTH PARULIDAE -- record for any family. Leads by TWO over Hirundinidae and Turdidae (5 each). Second consecutive Parulidae (first consecutive family pair in engine). Third Setophaga (first consecutive genus pair). Two structural arcs: quintet (14-17, 20) and pair (38-39).",
+    "hybridization_note": "The 38-39 pair maps both sides of an active hybrid zone in the Cascades. Townsend's Warbler is displacing both Black-throated Gray and Hermit Warblers through competitive exclusion via introgression. The engine captures a moment in an ongoing evolutionary process.",
+    "conservation_note": "LEAST CONCERN. Population stable. Primary concern is old-growth logging reducing breeding habitat. The hybridization dynamic is a conservation concern for BTG and Hermit Warblers (being displaced) but not for Townsend's (the expanding species).",
+    "critical_gaps": [
+      "No marine/shoreline species in 39 degrees of 'The Sound of Puget Sound' -- 39 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 39 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 39 degrees -- URGENT",
+      "No nocturnal species since degree 4 (35 degrees ago) -- OVERDUE",
+      "E=3 not used since degree 20 (19 degrees ago) -- dynamic range compression WORSENING",
+      "No E=2 since degree 13 (26 degrees ago) -- LOW ENERGY ABSENT",
+      "No E=1 since degree 12 (27 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 39 DEGREES OF A PROJECT NAMED FOR PUGET SOUND"
+    ]
+  }
+}
