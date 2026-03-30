@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 38&deg; &mdash; Black-throated Gray Warbler &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Drawl highlight card */
+    .drawl-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #5D4037;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .drawl-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Parulidae return card */
+    .parulidae-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .parulidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Oak-pine card */
+    .oakpine-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .oakpine-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Setophaga pair card */
+    .setophaga-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #42A5F5 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .setophaga-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Plumage card */
+    .plumage-card {
+      background: linear-gradient(135deg, #FAFAFA 0%, #BDBDBD 100%);
+      border: 2px solid #424242;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .plumage-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #212121;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.drawl { background: #5D4037; }
+    .theory-icon.parulidae { background: #2E7D32; }
+    .theory-icon.oakpine { background: #F57F17; }
+    .theory-icon.setophaga { background: #1565C0; }
+    .theory-icon.yellowdot { background: #424242; }
+    .theory-icon.energy { background: #C62828; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">38&deg;</div>
+      <div class="release-title-block">
+        <h2>Black-throated Gray Warbler</h2>
+        <div class="scientific">Setophaga nigrescens</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      lazy buzzy wheeze song &mdash; the drawl, Parulidae returns after 18 degrees, the engine&rsquo;s first dry woodland habitat
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Drawl Element Card -->
+        <div class="drawl-card">
+          <h3>The 39th Acoustic Element: The Drawl</h3>
+          <p>A slow, buzzy, unhurried warbler song from an oak-pine canopy: <em>weazy weazy weazy wee-zy</em>. After three hummingbird sounds &mdash; thrum (35, continuous hum), sonic boom (36, explosive chirp), filament (37, threadlike whisper) &mdash; the engine decelerates. The drawl is the laziest sound in the Parulidae. Each phrase gets its full measure of time. No acceleration. No crescendo. No evaporation. Just a bird in an oak tree, buzzing at the pace of a summer afternoon.</p>
+          <p><strong>Hummingbird trio &rarr; warbler drawl:</strong> thrum (35, E=5) &rarr; sonic boom (36, E=5) &rarr; filament (37, E=4) &rarr; <strong>drawl (38, E=4)</strong>. Mechanical extremes &rarr; lazy vocal buzz.</p>
+        </div>
+
+        <!-- Parulidae Return Card -->
+        <div class="parulidae-card">
+          <h3>Parulidae Returns &mdash; 18-Degree Gap</h3>
+          <p><strong>Sixth Parulidae.</strong> The warbler quintet (14&ndash;17, 20) closed at degree 20. Eighteen degrees of silence &mdash; the longest family gap followed by a return. The quintet mapped five song endings. The sixth warbler opens a new chapter:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>Quintet (14&ndash;20):</strong> All E=3. Wet/mixed habitats. Clean/thin tones. Fast tempo.</li>
+            <li><strong>Sixth (38):</strong> E=4. Dry woodland. Buzzy timbre. Slow tempo.</li>
+          </ul>
+          <p><strong>Parulidae now leads</strong> with 6 members, surpassing Hirundinidae and Turdidae (5 each).</p>
+        </div>
+
+        <h2>The Darkening Moth-Eater</h2>
+        <p><em>Setophaga nigrescens</em> &mdash; &ldquo;the darkening moth-eater.&rdquo; <em>Setophaga</em> = Greek &ldquo;moth-eater.&rdquo; <em>Nigrescens</em> = Latin &ldquo;becoming black&rdquo; or &ldquo;darkening&rdquo; &mdash; not <em>niger</em> (black) but <em>nigrescens</em> (blackening). The name describes a process, not a state. The species epithet contains motion. Formerly <em>Dendroica nigrescens</em> before the 2011 AOS genus merger.</p>
+
+        <!-- Setophaga Pair Card -->
+        <div class="setophaga-card">
+          <h3><em>Setophaga</em> Pair &mdash; Degrees 16 and 38</h3>
+          <table class="freq-table">
+            <thead>
+              <tr><th>Dimension</th><th>Yellow Warbler (16)</th><th>Black-throated Gray (38)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Plumage</td><td>Vivid yellow</td><td><strong>Black &amp; white + 1 yellow dot</strong></td></tr>
+              <tr><td>Song</td><td>Ascending crescendo</td><td><strong>Lazy buzzy drawl</strong></td></tr>
+              <tr><td>Ecosystem</td><td>Riparian willow (wet)</td><td><strong>Oak-pine (dry)</strong></td></tr>
+              <tr><td>Energy</td><td>E=3</td><td><strong>E=4</strong></td></tr>
+            </tbody>
+          </table>
+          <p>Same genus. Maximum contrast. The highlighter pen and the ink drawing.</p>
+        </div>
+
+        <h2>The Sound: Lazy Buzzy Wheeze</h2>
+        <p><em>Weazy weazy weazy wee-zy</em> &mdash; 4&ndash;5 buzzy phrases at approximately 3,500&ndash;7,000 Hz [NEEDS VERIFICATION]. Slow tempo for a warbler (~2&ndash;3 phrases/second). The first 3&ndash;4 phrases are isometric (same pitch), the final phrase rises or falls slightly &mdash; a gentle terminal accent. <strong>Buzzy, husky, wheezy timbre</strong> &mdash; more insect than flute. Dramatically different from the clean tones of Yellow Warbler or the thin trill of Orange-crowned.</p>
+
+        <h3>Warbler Song Comparison</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Quality</th><th>Tempo</th><th>Ending</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>14</td><td>MacGillivray&rsquo;s</td><td>Clear, musical</td><td>Moderate</td><td>Resolution</td></tr>
+            <tr><td>15</td><td>Wilson&rsquo;s</td><td>Chattering</td><td>Fast</td><td>Interruption</td></tr>
+            <tr><td>16</td><td>Yellow</td><td>Clear, ascending</td><td>Moderate</td><td>Climax</td></tr>
+            <tr><td>17</td><td>Yellowthroat</td><td>Loud, repetitive</td><td>Fast</td><td>Repetition</td></tr>
+            <tr><td>20</td><td>Orange-crowned</td><td>Thin, trilling</td><td>Fast</td><td>Evaporation</td></tr>
+            <tr><td><strong>38</strong></td><td><strong>Black-thr. Gray</strong></td><td><strong>Buzzy, wheezy</strong></td><td><strong>Slow</strong></td><td><strong>Drawl</strong></td></tr>
+          </tbody>
+        </table>
+
+        <!-- Oak-Pine Card -->
+        <div class="oakpine-card">
+          <h3>Oak-Pine &mdash; First Dry Woodland</h3>
+          <p>The engine&rsquo;s <strong>first explicitly dry habitat</strong>. Garry oak (<em>Quercus garryana</em>) &mdash; the PNW&rsquo;s only native oak &mdash; and ponderosa pine in open, sun-dappled, savanna-like arrangements. Bunchgrass understory. Rain shadow landscape. The dry side of the PNW that most visitors never see.</p>
+          <p><strong>Critically endangered ecosystem:</strong> less than 10% of historical Garry oak range remains [NEEDS VERIFICATION]. Fire suppression allows Douglas fir to overtop and shade out oaks. Where the warbler sings, the oaks are still standing.</p>
+        </div>
+
+        <!-- Plumage Card -->
+        <div class="plumage-card">
+          <h3>The Ink Drawing &mdash; With One Yellow Dot</h3>
+          <p><strong>Black, white, and gray.</strong> Bold black-and-white face pattern. Black throat (male). Gray back with black streaks. White wing bars. No color except one small <strong>yellow loral spot</strong> between eye and bill &mdash; the minimum field mark. One dot of warmth on an achromatic bird. The Yellow Warbler (16) was entirely yellow. The Black-throated Gray is entirely monochrome except for that one brushstroke.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=4 &mdash; First Parulidae Above E=3</h3>
+          <p>All five quintet warblers were E=3. The sixth breaks the ceiling. E=4 now at <strong>15 degrees</strong> (38.5%). E=3 absent for 18 degrees (since degree 20). E=2 absent for 25 degrees. E=1 absent for 26 degrees. <strong>Dynamic range compression is worsening</strong> &mdash; the lower half of the energy spectrum has been completely absent for 18+ degrees.</p>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon drawl">D</div>
+            <div class="theory-content">
+              <h4>The Drawl <span class="theory-level foundational">foundational</span></h4>
+              <p>The 39th acoustic element. Slow, buzzy, unhurried. After three hummingbird elements (thrum, sonic boom, filament), the engine decelerates into warbler time. The laziest sound in the Parulidae. The antithesis of urgency (degree 15).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon parulidae">P</div>
+            <div class="theory-content">
+              <h4>Parulidae Returns <span class="theory-level foundational">foundational</span></h4>
+              <p>18-degree absence &mdash; longest family gap followed by return. Quintet (E=3, wet, clean) gives way to sixth member (E=4, dry, buzzy). The family&rsquo;s tone has changed. Parulidae now leads all families with 6 members.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon oakpine">O</div>
+            <div class="theory-content">
+              <h4>Oak-Pine Ecosystem <span class="theory-level foundational">foundational</span></h4>
+              <p>First dry woodland in the engine. Garry oak savanna, ponderosa pine. The rain shadow side of the PNW. Critically endangered habitat &mdash; less than 10% of historical range remains.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon setophaga">S</div>
+            <div class="theory-content">
+              <h4><em>Setophaga</em> Pair <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Yellow Warbler (16) and Black-throated Gray (38) &mdash; same genus, maximum contrast. Vivid yellow vs. monochrome ink drawing. Ascending crescendo vs. lazy drawl. Wet riparian vs. dry woodland.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon yellowdot">Y</div>
+            <div class="theory-content">
+              <h4>The Yellow Loral Spot <span class="theory-level intermediate">intermediate</span></h4>
+              <p>One dot of yellow on a monochrome bird. The minimum field mark. Connects to Orange-crowned&rsquo;s hidden crown (degree 20): two warblers, two strategies of minimal color &mdash; one hides it, one shrinks it.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">4</div>
+            <div class="theory-content">
+              <h4>E=4 &mdash; First Parulidae Above E=3 <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Quintet was all E=3. Sixth member breaks the ceiling. E=4 now at 15 degrees. E=3 absent 18 degrees. Dynamic range compression deepens.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-020: Orange-crowned Warbler</strong>
+            <p>PARULIDAE RETURNS. 18-degree gap. Orange-crowned = evaporation (E=3, shrubby slope). Black-throated Gray = drawl (E=4, oak-pine). The quintet&rsquo;s closer and the sextet&rsquo;s opener.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-016: Yellow Warbler</strong>
+            <p>SETOPHAGA PAIR. Same genus, maximum contrast. Vivid yellow vs. monochrome + one dot. Ascending crescendo vs. lazy drawl. Wet riparian vs. dry woodland.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014: MacGillivray&rsquo;s Warbler</strong>
+            <p>FIRST vs. SIXTH WARBLER. MacGillivray&rsquo;s introduced Parulidae (wet understory, narrative, E=3). Black-throated Gray reopens it (dry canopy, drawl, E=4).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-037: Calliope Hummingbird</strong>
+            <p>ORDER CHANGE. Three Apodiformes (35&ndash;37) end. Passeriformes returns. Filament (3.1 g, mountain meadow) &rarr; drawl (~8 g, oak-pine). Extremes &rarr; normalcy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-032: Bohemian Waxwing</strong>
+            <p>BUZZ CONNECTION. Bohemian = collective buzz (E=5, hundreds). Black-throated Gray = solitary drawl (E=4, one bird). Social buzz vs. lazy drawl.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-033: Cassin&rsquo;s Finch</strong>
+            <p>DRY WOODLAND CONNECTION. Mountain conifer (high, closed) vs. oak-pine (low, open). Both dry-side species with ponderosa pine association.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Summer breeder in dry woodland. Locally common in Garry oak. One of ~25 PNW Parulidae species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems</strong>
+            <p>Garry oak woodland ecology. Fire-dependent ecosystem. Douglas fir encroachment. Among PNW&rsquo;s most endangered habitats.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Guzy, M.J. and Lowther, P.E. (2020). Black-throated Gray Warbler (<em>Setophaga nigrescens</em>), version 1.0. <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>&ldquo;Black-throated gray warbler.&rdquo; Wikipedia.</li>
+          <li>Cornell Lab of Ornithology. &ldquo;Black-throated Gray Warbler.&rdquo; All About Birds.</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Cornell Lab of Ornithology. &ldquo;Black-throated Gray Warbler Sounds.&rdquo; All About Birds.</li>
+          <li>Pieplow, N. (2017). <em>Peterson Field Guide to Bird Sounds of Western North America</em>. Houghton Mifflin.</li>
+          <li>Fuchs, M.A. (2001). &ldquo;Towards a Recovery Strategy for Garry Oak and Associated Ecosystems in Canada.&rdquo; Environment Canada.</li>
+          <li>Washington DNR. &ldquo;Garry Oak Woodlands.&rdquo; Natural Heritage Program.</li>
+          <li>Thysell, D.R. and Carey, A.B. (2001). &ldquo;Quercus garryana communities in the Puget Trough.&rdquo; <em>Northwest Science</em> 75(3): 219&ndash;235.</li>
+          <li>BirdWeb (Seattle Audubon). &ldquo;Black-throated Gray Warbler.&rdquo;</li>
+          <li>BirdLife International. IUCN Red List: <em>Setophaga nigrescens</em> &mdash; Least Concern.</li>
+          <li>Dunn, J.L. and Garrett, K.L. (1997). <em>A Field Guide to Warblers of North America</em>. Houghton Mifflin.</li>
+          <li>Kaufman, K. (1996). <em>Lives of North American Birds</em>. Houghton Mifflin.</li>
+          <li>U.S. Fish and Wildlife Service. &ldquo;Garry Oak Ecosystem.&rdquo; Pacific Region.</li>
+          <li>NatureServe. <em>Setophaga nigrescens</em> species account.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species</h3>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-size: 0.95rem; font-style: italic;">Setophaga nigrescens</div>
+          <div class="stat-detail">&ldquo;The darkening moth-eater&rdquo;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value" style="font-size: 1rem;">Passeriformes</div>
+          <div class="stat-detail">Returns after 3 Apodiformes</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value" style="font-size: 1rem;">Parulidae</div>
+          <div class="stat-detail">6th member (leads engine)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value" style="font-size: 0.82rem; font-style: italic;">Setophaga</div>
+          <div class="stat-detail">2nd in engine (after Yellow, 16)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Formerly</div>
+          <div class="stat-value" style="font-size: 0.82rem; font-style: italic;">Dendroica nigrescens</div>
+          <div class="stat-detail">&ldquo;Tree-dweller&rdquo; &rarr; merged to <em>Setophaga</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value" style="font-size: 0.95rem; color: #2E7D32;">Least Concern</div>
+          <div class="stat-detail">Habitat (Garry oak) declining</div>
+        </div>
+
+        <h3>Acoustics</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Lazy buzzy wheeze</div>
+          <div class="stat-detail">weazy weazy weazy wee-zy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value" style="font-size: 0.82rem;">~3,500&ndash;7,000 Hz</div>
+          <div class="stat-detail">[NEEDS VERIFICATION]</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value" style="font-size: 0.88rem;">#39: The Drawl</div>
+          <div class="stat-detail">Slow, buzzy, unhurried</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">1st Parulidae above E=3</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Oak-pine</div>
+          <div class="stat-detail">1st dry woodland in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Late Apr&ndash;Sep</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Garry oak / ponderosa</div>
+          <div class="stat-detail">Dry canopy, open woodland</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Field Mark</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Yellow loral spot</div>
+          <div class="stat-detail">1 dot of color on ink drawing</div>
+        </div>
+
+        <h3>Engine</h3>
+        <div class="stat-card">
+          <div class="stat-label">Unique Species</div>
+          <div class="stat-value">37</div>
+          <div class="stat-detail">39 total entries (0&ndash;38)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Parulidae leads with 6</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Passeriformes returns</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Release Engine &mdash; Degree 38&deg;</p>
+  </footer>
+</body>
+</html>
