@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: The Math of Leaving | v1.5 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --canopy-deep: #0A2E0A;
+    --canopy-mid: #1A4A1A;
+    --canopy-emerald: #2D6A2D;
+    --bark-brown: #4A3420;
+    --light-canopy: #A8D8A8;
+    --light-bright: #C8E8C8;
+    --forest-floor: #0D1A0D;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+    --success: #2D9A2D;
+    --success-light: #40CC40;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--forest-floor); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(168,216,168,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(45,106,45,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(168,216,168,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(200,232,200,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(45,106,45,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--light-canopy); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--light-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--forest-floor) 0%, var(--canopy-deep) 25%, var(--canopy-mid) 50%, var(--canopy-emerald) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--success); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(168,216,168,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(168,216,168,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(45,154,45,0.15); border: 1px solid var(--success); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--success-light); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--light-bright); }
+  .track-badge { background: rgba(168,216,168,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-canopy); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--light-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--light-canopy); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--light-bright); }
+  .prose em { color: var(--text-dim); }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+  th { background: rgba(45,106,45,0.15); color: var(--light-canopy); font-weight: 600; text-align: left; padding: 0.6rem 0.8rem; border: 1px solid var(--border); font-family: 'DM Mono', monospace; }
+  td { padding: 0.5rem 0.8rem; border: 1px solid rgba(45,90,45,0.3); color: var(--text); }
+  tr:nth-child(even) td { background: rgba(10,46,10,0.2); }
+
+  .formula-block {
+    background: rgba(10,46,10,0.5);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--light-bright);
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+
+  .code-block {
+    background: rgba(13,26,13,0.8);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--light-canopy);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .code-block .comment { color: var(--text-dim); }
+
+  .output-block {
+    background: rgba(11,61,145,0.1);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #7EB8DA;
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .resonance-statement {
+    border-left: 3px solid var(--canopy-emerald);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(10,46,10,0.3);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .debate-box {
+    background: rgba(212,168,48,0.06);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+  }
+  .debate-box h3 { color: var(--gold); font-family: 'Libre Baskerville', serif; margin-bottom: 0.75rem; }
+  .debate-box p { font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .debate-box p:last-child { margin-bottom: 0; }
+
+  .nav-card { background: rgba(10,46,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--light-canopy); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--light-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--light-canopy); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .formula-block, .code-block, .output-block { font-size: 0.7rem; padding: 1rem; } table { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">v1.5 Pioneer 4</a><span class="sep">/</span><span>Track 3: Mathematics</span>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.5</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Math of Leaving</h1>
+    <p class="subtitle">TSPB Mathematics &mdash; McNeese-Hoag Reference Standard (1959)</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 4 (Vector Calculus)</span>
+      <span><span class="label">Secondary:</span> 3, 5, 1</span>
+      <span><span class="label">Topics:</span> Escape Velocity, Hyperbolic Trajectory, Heliocentric Orbit, Signal Power</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <article class="prose">
+
+    <h2>Deposit 1: Escape Velocity Achieved (Layer 4, Section 4.3)</h2>
+
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 4 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>March 3, 1959, 05:10:56 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Juno II (Jupiter C derivative)</td></tr>
+      <tr><td>Spacecraft mass</td><td>m<sub>sc</sub></td><td>kg</td><td>6.08</td></tr>
+      <tr><td>Burnout velocity</td><td>v<sub>burnout</sub></td><td>km/s</td><td>~11.1 (estimated)</td></tr>
+      <tr><td>Escape velocity at burnout altitude</td><td>v<sub>escape</sub></td><td>km/s</td><td>~10.95</td></tr>
+      <tr><td>Hyperbolic excess velocity</td><td>v<sub>&infin;</sub></td><td>km/s</td><td>~1.5 (estimated)</td></tr>
+      <tr><td>Lunar flyby distance</td><td>d<sub>moon</sub></td><td>km</td><td>~60,000</td></tr>
+      <tr><td>Contact duration</td><td>t<sub>contact</sub></td><td>hr</td><td>~82</td></tr>
+      <tr><td>Maximum communication range</td><td>r<sub>max</sub></td><td>km</td><td>~655,300</td></tr>
+      <tr><td>Pioneer 1 burnout velocity</td><td>v<sub>P1</sub></td><td>km/s</td><td>~10.27</td></tr>
+      <tr><td>Pioneer 1 deficit</td><td>&Delta;v<sub>P1</sub></td><td>km/s</td><td>~0.68 (fell back)</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Escape Velocity:</strong> The minimum velocity required to leave a gravitational body permanently, starting from distance r:</p>
+
+    <div class="formula-block">v<sub>escape</sub> = sqrt(2 * G * M / r)
+
+where:
+  G = 6.674e-11 m&sup3;/(kg*s&sup2;)   (gravitational constant)
+  M = mass of the central body   (kg)
+  r = distance from center       (m)
+
+For Earth at the surface (r = R<sub>E</sub> = 6.371e6 m):
+  v<sub>escape</sub> = sqrt(2 * 3.986e14 / 6.371e6)
+           = sqrt(1.251e8)
+           = 11,186 m/s
+           &asymp; 11.2 km/s</div>
+
+    <p><strong>The Energy Equation:</strong> Escape velocity is an energy balance. Total specific orbital energy:</p>
+
+    <div class="formula-block">&epsilon; = v&sup2;/2 - &mu;/r
+
+where:
+  &epsilon; &lt; 0 &rarr; bound orbit (elliptical) &rarr; falls back
+  &epsilon; = 0 &rarr; parabolic escape &rarr; reaches infinity at v = 0
+  &epsilon; &gt; 0 &rarr; hyperbolic escape &rarr; reaches infinity with v &gt; 0
+
+For Pioneer 4:
+  v &asymp; 11,100 m/s at r &asymp; R<sub>E</sub> + 200 km = 6.571e6 m
+  &epsilon; = (11100)&sup2;/2 - 3.986e14/6.571e6
+     = 6.161e7 - 6.066e7
+     = 9.5e5 J/kg &gt; 0  &rarr; ESCAPE
+
+For Pioneer 1:
+  v &asymp; 10,270 m/s
+  &epsilon; = (10270)&sup2;/2 - 3.986e14/6.571e6
+     = 5.274e7 - 6.066e7
+     = -7.92e6 J/kg &lt; 0  &rarr; BOUND (fell back from 113,854 km)</div>
+
+    <h3>Five Pioneers at Burnout</h3>
+
+    <div class="output-block">Pioneer 0: v = 0 km/s       (exploded at T+77s)       &rarr; &epsilon; &lt;&lt; 0  (debris)
+Pioneer 1: v &asymp; 10.27 km/s   (Stage 2 short by 10s)    &rarr; &epsilon; &lt; 0   (fell back from 113,854 km)
+Pioneer 2: v &asymp; 7.7 km/s     (Stage 3 no ignition)     &rarr; &epsilon; &lt;&lt; 0  (fell back from 1,550 km)
+Pioneer 3: v &asymp; 10.4 km/s    (Stage 1 short by 3.7s)   &rarr; &epsilon; &lt; 0   (fell back from 102,322 km)
+Pioneer 4: v &asymp; 11.1 km/s    (ALL STAGES NOMINAL)      &rarr; &epsilon; &gt; 0   (ESCAPED)</div>
+
+    <div class="resonance-statement">Escape velocity is a threshold, not a gradient. Below it, you can go very far &mdash; Pioneer 1 reached 113,854 km, nearly a third of the way to the Moon &mdash; but you always fall back. Above it, even by 84 m/s, you never return. Pioneer 4 crossed the threshold. The energy equation is not forgiving: &epsilon; = v&sup2;/2 - &mu;/r. When that number changes sign from negative to positive, the entire character of the trajectory changes from elliptical to hyperbolic. Pioneer 4&rsquo;s margin was less than 1% of escape velocity. In rocketry, 1% is the difference between falling home and leaving forever.</div>
+
+    <hr>
+
+    <h2>Deposit 2: Hyperbolic Trajectory (Layer 4, Section 4.4)</h2>
+
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 4 Value</th></tr>
+      <tr><td>Semi-major axis (hyperbolic)</td><td>a</td><td>km</td><td>negative (convention)</td></tr>
+      <tr><td>Eccentricity</td><td>e</td><td>&mdash;</td><td>&gt;1 (hyperbolic)</td></tr>
+      <tr><td>Hyperbolic excess velocity</td><td>v<sub>&infin;</sub></td><td>km/s</td><td>~1.38</td></tr>
+      <tr><td>Periapsis (Earth center)</td><td>r<sub>p</sub></td><td>km</td><td>~6,571</td></tr>
+      <tr><td>Lunar flyby distance</td><td>d<sub>moon</sub></td><td>km</td><td>~60,000</td></tr>
+    </table>
+
+    <p><strong>Vis-Viva Equation for Hyperbolic Orbits:</strong></p>
+
+    <div class="formula-block">v&sup2; = &mu; * (2/r - 1/a)
+
+For a hyperbolic orbit, a &lt; 0, so -1/a &gt; 0:
+  v&sup2; = &mu; * (2/r + 1/|a|)
+
+At infinity (r &rarr; &infin;):
+  v<sub>&infin;</sub>&sup2; = &mu; / |a|
+  |a| = &mu; / v<sub>&infin;</sub>&sup2;</div>
+
+    <p><strong>Eccentricity of a Hyperbolic Orbit:</strong></p>
+
+    <div class="formula-block">e = 1 + r<sub>p</sub> * v<sub>&infin;</sub>&sup2; / &mu;
+
+For Pioneer 4:
+  r<sub>p</sub> = 6.571e6 m
+  v<sub>&infin;</sub> = 1378 m/s
+  e = 1 + (6.571e6 * 1378&sup2;) / 3.986e14
+  e = 1 + 0.0313
+  e &asymp; 1.031
+
+An eccentricity just barely above 1 &mdash; a hyperbola
+that is almost a parabola. Pioneer 4 barely escaped.
+But barely is enough.</div>
+
+    <div class="resonance-statement">Every orbit in the Pioneer fleet maps to a single number: eccentricity. Pioneer 2 had e = 0.09 &mdash; a tiny wobble above circular. Pioneer 1 had e = 0.89 &mdash; a long, thin ellipse reaching a third of the way to the Moon, but still bound. Pioneer 4 had e = 1.03 &mdash; three percent above the parabolic boundary, and that three percent changed everything. The shape has been known since Apollonius of Perga, circa 200 BC. Pioneer 4 traced it in March 1959, at 6.08 kilograms, barely above the threshold, never to return.</div>
+
+    <hr>
+
+    <h2>Deposit 3: Heliocentric Orbit Insertion (Layer 1, Section 1.5)</h2>
+
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 4 Value</th></tr>
+      <tr><td>Solar orbital semi-major axis</td><td>a<sub>sun</sub></td><td>AU</td><td>~1.15</td></tr>
+      <tr><td>Perihelion</td><td>r<sub>peri</sub></td><td>AU</td><td>~0.987</td></tr>
+      <tr><td>Aphelion</td><td>r<sub>aph</sub></td><td>AU</td><td>~1.31</td></tr>
+      <tr><td>Orbital eccentricity (solar)</td><td>e<sub>sun</sub></td><td>&mdash;</td><td>~0.14</td></tr>
+      <tr><td>Orbital period</td><td>T<sub>sun</sub></td><td>years</td><td>~1.23</td></tr>
+      <tr><td>Current status</td><td>&mdash;</td><td>&mdash;</td><td>Still orbiting the Sun</td></tr>
+    </table>
+
+    <p><strong>Heliocentric Orbit from Earth-Escape Velocity:</strong></p>
+
+    <div class="formula-block">v<sub>helio</sub> = v<sub>Earth</sub> +/- v<sub>&infin;</sub>(vector)
+
+v<sub>Earth</sub> = Earth's orbital velocity &asymp; 29.78 km/s
+For Pioneer 4 (prograde launch):
+  v<sub>helio</sub> &asymp; 29.78 + 1.38 = 31.16 km/s
+
+This is faster than Earth's circular velocity,
+so Pioneer 4 enters an elliptical orbit with
+aphelion beyond 1 AU and perihelion near 1 AU.</div>
+
+    <div class="output-block">Orbits completed since 1959: 54
+Pioneer 4 has circled the Sun 54 times in 67 years.
+It is still out there. Six grams over six kilograms of
+aluminum and instruments, orbiting in silence between
+Earth and Mars, exactly where the math put it in 1959.</div>
+
+    <div class="resonance-statement">When you escape Earth, you don&rsquo;t escape the Sun. You trade one orbit for another. Pioneer 4 left Earth at 1.38 km/s above escape velocity and entered a solar orbit with aphelion at 1.30 AU &mdash; between Earth and Mars. The orbit is permanent. The vis-viva equation at departure determined the orbit. The orbit determines the future. A 6.08 kg cone of aluminum, still tracing its departure curve extended into an ellipse around the Sun, because on March 3, 1959, every stage of the Juno II fired correctly.</div>
+
+    <hr>
+
+    <h2>Deposit 4: Communication Range and Signal Power (Layer 5, Section 5.5)</h2>
+
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 4 Value</th></tr>
+      <tr><td>Transmitter power</td><td>P<sub>tx</sub></td><td>mW</td><td>180</td></tr>
+      <tr><td>Transmitter frequency</td><td>f</td><td>MHz</td><td>960.05</td></tr>
+      <tr><td>Antenna gain (spacecraft)</td><td>G<sub>tx</sub></td><td>dBi</td><td>~2</td></tr>
+      <tr><td>Antenna gain (ground)</td><td>G<sub>rx</sub></td><td>dBi</td><td>~45 (Goldstone 26m)</td></tr>
+      <tr><td>Maximum range at loss of signal</td><td>r<sub>max</sub></td><td>km</td><td>~655,300</td></tr>
+      <tr><td>Light time at max range</td><td>t<sub>light</sub></td><td>s</td><td>~2.19</td></tr>
+    </table>
+
+    <p><strong>Inverse-Square Law for Signal Power (Friis Transmission Equation):</strong></p>
+
+    <div class="formula-block">P<sub>received</sub> = P<sub>tx</sub> * G<sub>tx</sub> * G<sub>rx</sub> * (&lambda; / (4&pi;r))&sup2;
+
+Double the distance, quarter the received power.
+The (1/r&sup2;) dependence is geometric: power spreads
+over a sphere of area 4&pi;r&sup2;.</div>
+
+    <h3>Signal Strength vs Distance</h3>
+    <table>
+      <tr><th>Time (hr)</th><th>Range (km)</th><th>P<sub>rx</sub> (W)</th><th>P<sub>rx</sub> (dBm)</th><th>Light (s)</th></tr>
+      <tr><td>0.2</td><td>1,000</td><td>1.12e-10</td><td>-39.5</td><td>0.00</td></tr>
+      <tr><td>2.0</td><td>10,000</td><td>1.12e-12</td><td>-59.5</td><td>0.03</td></tr>
+      <tr><td>8.0</td><td>50,000</td><td>4.48e-14</td><td>-73.5</td><td>0.17</td></tr>
+      <tr><td>16.0</td><td>100,000</td><td>1.12e-14</td><td>-79.5</td><td>0.33</td></tr>
+      <tr><td>32.0</td><td>200,000</td><td>2.80e-15</td><td>-85.5</td><td>0.67</td></tr>
+      <tr><td>50.0</td><td>384,400</td><td>7.57e-16</td><td>-91.2</td><td>1.28</td></tr>
+      <tr><td>65.0</td><td>500,000</td><td>4.48e-16</td><td>-93.5</td><td>1.67</td></tr>
+      <tr><td>82.0</td><td>655,300</td><td>2.61e-16</td><td>-95.8</td><td>2.19</td></tr>
+    </table>
+
+    <div class="output-block">At loss of signal (655,300 km):
+  Received power: 2.61e-16 W = -95.8 dBm
+  Signal at 1,000 km vs 655,300 km: 429,418x weaker
+  = 56 dB of signal loss from 1/r^2 alone
+
+  A 180 milliwatt transmitter, heard across 655,300 km.
+  The Goldstone 26m dish made this possible.</div>
+
+    <div class="resonance-statement">Pioneer 4&rsquo;s transmitter output 180 milliwatts &mdash; less than a dim light bulb. At 655,300 km, the signal arriving at Goldstone was 2.6 &times; 10<sup>-16</sup> watts. That is 0.26 femtowatts. Alexander Graham Bell, born March 3, 1847 &mdash; the same calendar date as Pioneer 4&rsquo;s launch &mdash; spent his life amplifying faint signals. The telephone was a device for making distant voices audible. The Goldstone dish is a telephone for spacecraft. Both solve the same problem: signal propagation over distance, fighting the 1/r&sup2; law with bigger receivers and better amplifiers.</div>
+
+    <hr>
+
+    <div class="debate-box">
+      <h3>Debate Questions</h3>
+
+      <p><strong>1. The Threshold Problem:</strong> Pioneer 1 achieved 10.27 km/s and reached 113,854 km but fell back. Pioneer 4 achieved 11.1 km/s and escaped forever. Is there a meaningful difference between &ldquo;almost escaped&rdquo; and &ldquo;escaped&rdquo;? Is the escape velocity threshold a property of the physics, or a property of our classification system?</p>
+
+      <p><strong>2. The Persistence of Orbits:</strong> Pioneer 4 is still orbiting the Sun and will continue for millions of years. Is a 6.08 kg artifact in heliocentric orbit fundamentally different from a 6.08 kg rock? At what point does a spacecraft become space debris?</p>
+
+      <p><strong>3. Convergence Through Failure:</strong> Five Pioneer missions: explosion, partial success, complete stage failure, partial success, full success. Is this convergence pattern typical of engineering programs? Was each failure necessary?</p>
+
+      <p><strong>4. Communication as the Final Constraint:</strong> Pioneer 4 succeeded mechanically but was only &ldquo;successful&rdquo; for 82 hours &mdash; the duration it could be tracked. Is a mission that cannot be communicated with still a mission?</p>
+
+      <p><strong>5. The Birthday Coincidence:</strong> Bell was born March 3, 1847. Pioneer 4 launched March 3, 1959. Is this coincidence meaningful, or an example of the human tendency to find patterns in dates?</p>
+    </div>
+
+    <div class="resonance-statement" style="margin-top: 2.5rem;">Pioneer 4 crossed the threshold by 84 meters per second. Five missions. Four failures of varying severity. One success. The math of leaving is not forgiving, but it is exact: exceed the threshold and the trajectory opens. Bell heard voices across wire. Goldstone heard Pioneer 4 across 655,300 kilometers of vacuum. The physics is the same: signals attenuate with distance, and the art is in making the receiver sensitive enough to hear what remains.</div>
+
+    <div class="nav-card">
+      <a href="organism.html">&larr; Organism Pairing</a>
+      <a href="papers.html">Scientific Anchors &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Track 3: TSPB Mathematics &mdash; v1.5 Pioneer 4 / Douglas-fir</p>
+</footer>
+
+</body>
+</html>

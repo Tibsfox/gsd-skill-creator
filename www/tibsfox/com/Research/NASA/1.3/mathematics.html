@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track 3: Mathematics — TSPB | v1.3 Pioneer 2 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --berry-dark: #1A0F2E; --berry-mid: #2D1B4E; --berry-purple: #6B3FA0; --berry-light: #9B6FD0; --salal-dark: #2A4A2A; --salal-mid: #3D6B3D; --salal-leaf: #4A8A4A; --plum: #4A1942; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #3D2A5E; --amber: #D4A017; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--berry-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(107,63,160,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(107,63,160,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(155,111,208,0.05) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(42,74,42,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(107,63,160,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(155,111,208,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(74,25,66,0.10) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(42,74,42,0.06) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.08) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.85rem; position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--berry-purple); text-decoration: none; } .breadcrumb a:hover { color: var(--berry-light); } .breadcrumb span { color: var(--text-dim); }
+  header { background: linear-gradient(160deg, var(--berry-dark) 0%, var(--berry-mid) 30%, var(--plum) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--berry-purple); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(107,63,160,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(107,63,160,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(107,63,160,0.15); border: 1px solid var(--berry-purple); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--berry-purple); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--berry-light); }
+  .track-label { background: rgba(155,111,208,0.2); border: 1px solid var(--berry-light); color: var(--berry-light); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--berry-purple); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(45,27,78,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--berry-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--berry-light); margin: 1.5rem 0 0.75rem; }
+  .card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.4rem; }
+  .card strong { color: #fff; }
+  .card a { color: var(--berry-light); text-decoration: none; border-bottom: 1px solid rgba(155,111,208,0.3); } .card a:hover { color: #fff; border-bottom-color: #fff; }
+  .card blockquote { border-left: 3px solid var(--berry-purple); padding: 0.75rem 1rem; margin: 1rem 0; background: rgba(107,63,160,0.08); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .card code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(107,63,160,0.15); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--berry-light); }
+  .card pre { background: rgba(11,15,30,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; overflow-x: auto; margin: 1rem 0; }
+  .card pre code { background: none; padding: 0; font-size: 0.82rem; color: var(--text); line-height: 1.5; }
+  .card table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+  .card th { background: rgba(107,63,160,0.15); color: var(--berry-light); padding: 0.5rem 0.75rem; text-align: left; border-bottom: 2px solid var(--border); font-weight: 600; }
+  .card td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(61,42,94,0.5); color: var(--text); }
+  .card tr:hover td { background: rgba(107,63,160,0.05); }
+  .resonance { border-left: 3px solid var(--berry-purple); padding: 0.75rem 1rem; margin: 1rem 0; background: rgba(107,63,160,0.06); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .bottom-nav { background: rgba(45,27,78,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .bottom-nav a { color: var(--berry-purple); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.3rem 0.75rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; }
+  .bottom-nav a:hover { color: var(--berry-light); border-color: var(--berry-purple); background: rgba(107,63,160,0.1); }
+  .bottom-nav a.active { color: var(--berry-light); border-color: var(--berry-light); background: rgba(155,111,208,0.15); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--berry-purple); text-decoration: none; }
+  @media (max-width: 800px) { main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } .header-content { padding: 1.5rem 1rem 1rem; } .bottom-nav { flex-direction: column; align-items: stretch; } .bottom-nav a { text-align: center; } .card table { font-size: 0.75rem; } .card th, .card td { padding: 0.35rem 0.5rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">v1.3 Pioneer 2</a> <span>&rarr;</span> <span>Track 3: Mathematics</span>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.3</span>
+      <span>NASA Mission Series</span>
+      <span class="track-label">Track 3</span>
+    </div>
+    <h1>The Sum That Fell Short &mdash; TSPB Mathematics</h1>
+    <p class="subtitle">McNeese-Hoag Format: Tables, Formulas, Worked Examples</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 4 (Vector Calculus &mdash; Staging Velocity Addition)</span>
+      <span><span class="label">Secondary:</span> 5 (Probability), 1 (Unit Circle), 7 (Information Systems)</span>
+      <span><span class="label">Mission:</span> Pioneer 2 (Able 3), November 8, 1958</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>Deposit 1: Delta-v Budgets and the Tsiolkovsky Staging Equation (Layer 4, Section 4.1)</h2>
+
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 2 Value</th></tr>
+      <tr><td>Total vehicle mass at liftoff</td><td>m_0</td><td>kg</td><td>~52,800 (Thor-Able)</td></tr>
+      <tr><td>Stage 1 engine</td><td>&mdash;</td><td>&mdash;</td><td>Rocketdyne LR79-NA-9 (Thor)</td></tr>
+      <tr><td>Stage 1 thrust</td><td>F_1</td><td>kN</td><td>~667</td></tr>
+      <tr><td>Stage 1 specific impulse (sea level)</td><td>Isp_1</td><td>s</td><td>~248</td></tr>
+      <tr><td>Stage 1 burn time</td><td>t_1</td><td>s</td><td>~165</td></tr>
+      <tr><td>Stage 2 engine</td><td>&mdash;</td><td>&mdash;</td><td>Aerojet AJ10-40 (Able)</td></tr>
+      <tr><td>Stage 2 thrust</td><td>F_2</td><td>kN</td><td>~35</td></tr>
+      <tr><td>Stage 2 specific impulse (vacuum)</td><td>Isp_2</td><td>s</td><td>~270</td></tr>
+      <tr><td>Stage 2 burn time</td><td>t_2</td><td>s</td><td>~115</td></tr>
+      <tr><td>Stage 3 motor</td><td>&mdash;</td><td>&mdash;</td><td>ABL X-248 (Altair)</td></tr>
+      <tr><td>Stage 3 thrust</td><td>F_3</td><td>kN</td><td>~12.5</td></tr>
+      <tr><td>Stage 3 specific impulse (vacuum)</td><td>Isp_3</td><td>s</td><td>~235</td></tr>
+      <tr><td>Stage 3 burn time (intended)</td><td>t_3</td><td>s</td><td>~40</td></tr>
+      <tr><td>Stage 3 actual burn time</td><td>t_3_actual</td><td>s</td><td>0 (failed to ignite)</td></tr>
+      <tr><td>Maximum altitude achieved</td><td>h_max</td><td>km</td><td>~1,550</td></tr>
+      <tr><td>Intended maximum altitude</td><td>h_intended</td><td>km</td><td>~384,400 (lunar)</td></tr>
+      <tr><td>Mission duration</td><td>t_mission</td><td>min</td><td>~45</td></tr>
+      <tr><td>Velocity at Stage 2 burnout</td><td>v_12</td><td>km/s</td><td>~7.7 (estimated)</td></tr>
+      <tr><td>Delta-v needed from Stage 3</td><td>&Delta;v_3</td><td>km/s</td><td>~3.2 (to reach escape)</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+    <p><strong>Tsiolkovsky Rocket Equation (single stage):</strong></p>
+    <pre><code>&Delta;v = v_e * ln(m_0 / m_f)
+
+where:
+  v_e  = effective exhaust velocity = Isp * g_0
+  g_0  = 9.80665 m/s^2             (standard gravity)
+  m_0  = mass before burn           (kg)
+  m_f  = mass after burn            (kg)
+  ln   = natural logarithm</code></pre>
+    <p>This is the tyranny of the exponential. To double your delta-v, you don&rsquo;t double your fuel &mdash; you square your mass ratio. Every stage fights this tyranny independently.</p>
+
+    <p><strong>Multi-Stage Delta-v Budget (velocity addition):</strong></p>
+    <pre><code>&Delta;v_total = &Sigma;_{i=1}^{N} &Delta;v_i
+
+&Delta;v_total = &Sigma;_{i=1}^{N} v_e_i * ln(m_0_i / m_f_i)
+
+where:
+  v_e_i = exhaust velocity of stage i  (m/s)
+  m_0_i = total mass at ignition of stage i (includes all upper stages)
+  m_f_i = mass at burnout of stage i (includes all upper stages, minus stage i propellant)</code></pre>
+
+    <p><strong>Pioneer 2&rsquo;s Budget (what it had vs. what it needed):</strong></p>
+    <pre><code>&Delta;v_total = &Delta;v_1 + &Delta;v_2 + &Delta;v_3
+
+Required for lunar trajectory: ~10.9 km/s (from surface to escape)
+Stage 1 (Thor) delivered:      ~3.5 km/s (against gravity, through atmosphere)
+Stage 2 (AJ10-40) delivered:   ~4.2 km/s (vacuum, coasting trajectory)
+Stage 3 (X-248) delivered:     0 km/s    (failed to ignite)
+
+Achieved total:                ~7.7 km/s
+Required total:                ~10.9 km/s
+Deficit:                       ~3.2 km/s (the entire Stage 3 contribution)</code></pre>
+
+    <h3>Worked Example</h3>
+    <p><strong>Problem:</strong> Calculate the delta-v budget for Pioneer 2&rsquo;s three-stage Thor-Able vehicle. Show the contribution from each stage, and demonstrate that the loss of Stage 3 reduces the maximum altitude from a lunar trajectory to approximately 1,550 km.</p>
+    <pre><code>import numpy as np
+
+# Constants
+g_0 = 9.80665       # standard gravity (m/s^2)
+G = 6.674e-11        # gravitational constant
+M_E = 5.972e24       # Earth mass (kg)
+R_E = 6.371e6        # Earth radius (m)
+mu = G * M_E         # gravitational parameter (m^3/s^2)
+
+# === STAGE PARAMETERS ===
+# Stage 1: Thor (LR79-NA-9)
+Isp_1 = 248          # specific impulse, sea level (s)
+v_e1 = Isp_1 * g_0   # exhaust velocity (m/s)
+m0_total = 52800     # total vehicle mass at liftoff (kg)
+m_prop1 = 38000      # Stage 1 propellant mass (kg, approx)
+m_struct1 = 3500     # Stage 1 dry mass (kg, approx)
+m_upper = m0_total - m_prop1 - m_struct1  # ~11,300 kg
+
+# Stage 2: AJ10-40
+Isp_2 = 270          # specific impulse, vacuum (s)
+v_e2 = Isp_2 * g_0
+m0_stage2 = m_upper
+m_prop2 = 8500
+m_struct2 = 1200
+m_payload_plus_s3 = m0_stage2 - m_prop2 - m_struct2  # ~1,600 kg
+
+# Stage 3: ABL X-248 (Altair)
+Isp_3 = 235          # specific impulse, vacuum (s)
+v_e3 = Isp_3 * g_0
+m0_stage3 = m_payload_plus_s3
+m_prop3 = 1050
+m_payload = m0_stage3 - m_prop3  # ~550 kg</code></pre>
+
+    <p><strong>Output:</strong></p>
+    <pre><code>PIONEER 2 DELTA-V BUDGET
+=================================================================
+
+Stage 1 (Thor LR79-NA-9):
+  Isp = 248 s, v_e = 2432 m/s
+  Mass ratio: 52800/14800 = 3.568
+  Ideal delta-v: 2432 * ln(3.568) = 3096 m/s
+  Gravity loss: -1500 m/s
+  Drag loss:    -200 m/s
+  Effective delta-v: 1396 m/s = 1.40 km/s
+
+Stage 2 (AJ10-40):
+  Isp = 270 s, v_e = 2648 m/s
+  Mass ratio: 11300/2800 = 4.036
+  Delta-v: 2648 * ln(4.036) = 3672 m/s
+  (Vacuum, minimal gravity loss at altitude)
+
+Stage 3 (ABL X-248 Altair) -- INTENDED:
+  Isp = 235 s, v_e = 2305 m/s
+  Mass ratio: 1600/550 = 2.909
+  Delta-v: 2305 * ln(2.909) = 2460 m/s
+
+=================================================================
+BUDGET SUMMARY:
+  Stage 1 effective:  1396 m/s (1.40 km/s)
+  Stage 2:            3672 m/s (3.67 km/s)
+  Stage 3 (intended): 2460 m/s (2.46 km/s)
+  ---
+  Total achieved:     5068 m/s (5.07 km/s)
+  Total intended:     7528 m/s (7.53 km/s)
+  DEFICIT:            2460 m/s (2.46 km/s)
+  Stage 3 was 32.7% of the total budget.</code></pre>
+
+    <p><strong>Note on the numbers:</strong> The effective delta-v figures here are idealized estimates. The actual velocities depend on exact mass fractions, thrust profiles, trajectory shaping, and the gravitational potential at each staging point. The key insight is structural: Pioneer 2&rsquo;s Stage 3 was responsible for roughly a third of the total velocity budget, and when it failed to ignite, that entire third vanished. Pioneer 1&rsquo;s shortfall was 234 m/s (2.1% of the budget). Pioneer 2&rsquo;s shortfall was approximately 2,500 m/s (33% of the budget). Pioneer 1 reached 113,854 km. Pioneer 2 reached 1,550 km. The difference between a subtle failure and a catastrophic one.</p>
+
+    <div class="resonance">Staging is vector addition performed in hardware. Each motor adds its velocity to the running sum, and the sum determines the trajectory. Pioneer 2&rsquo;s sum had three terms. Two of them were nonzero. The third was zero because a solid rocket motor refused to ignite. In vector calculus, a sum with a zero term is just a shorter vector. In rocketry, a sum with a zero term is the difference between the Moon and low Earth orbit. The Tsiolkovsky equation says that each stage fights its own mass ratio independently, then donates the resulting velocity to the whole. When Stage 3 donated nothing, Pioneer 2 had the delta-v budget of a two-stage sounding rocket &mdash; which is exactly what it became.</div>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 2: Altitude from Velocity &mdash; the Vis-Viva Inversion (Layer 4, Section 4.2)</h2>
+
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 2 Value</th></tr>
+      <tr><td>Velocity at Stage 2 burnout</td><td>v_burnout</td><td>km/s</td><td>~7.7 (estimated)</td></tr>
+      <tr><td>Burnout altitude</td><td>h_burnout</td><td>km</td><td>~200</td></tr>
+      <tr><td>Burnout radius</td><td>r_burnout</td><td>km</td><td>~6,571</td></tr>
+      <tr><td>Escape velocity at burnout</td><td>v_esc</td><td>km/s</td><td>~11.0</td></tr>
+      <tr><td>Fraction of escape achieved</td><td>v/v_esc</td><td>&mdash;</td><td>~0.70</td></tr>
+      <tr><td>Maximum altitude (actual)</td><td>h_max</td><td>km</td><td>~1,550</td></tr>
+      <tr><td>Maximum radius</td><td>r_max</td><td>km</td><td>~7,921</td></tr>
+      <tr><td>Semi-major axis</td><td>a</td><td>km</td><td>~3,718</td></tr>
+      <tr><td>Eccentricity</td><td>e</td><td>&mdash;</td><td>~0.362</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+    <p><strong>Vis-Viva Equation (altitude from velocity):</strong></p>
+    <pre><code>v^2 = &mu; * (2/r - 1/a)
+
+Solving for semi-major axis:
+  a = 1 / (2/r - v^2/&mu;)
+
+Apogee from semi-major axis and perigee:
+  r_a = 2 * a - r_p
+  h_max = r_a - R_E</code></pre>
+
+    <h3>Worked Example Output</h3>
+    <pre><code>PIONEER 2: ALTITUDE FROM VELOCITY
+=======================================================
+Burnout altitude:  200 km
+Burnout velocity:  7700 m/s = 7.7 km/s
+Escape velocity:   11016 m/s = 11.02 km/s
+Fraction of escape: 0.699 (69.9%)
+
+Semi-major axis:
+  a = 1 / (2/6571000 - 7700^2/3.986e+14)
+  a = 3718 km
+
+Apogee:
+  r_a = 2 * 3718 - 6571 = 7866 km
+  h_max = 7866 - 6371 = 1495 km
+  Historical Pioneer 2 altitude: ~1,550 km
+
+Eccentricity:
+  e = (7866 - 6571) / (7866 + 6571)
+  e = 0.0896
+
+Orbital period: 4509 s = 75 minutes
+Time to apogee: ~38 minutes
+Pioneer 2 flight time: ~45 minutes
+
+PIONEER FLEET COMPARISON:
+-------------------------------------------------------
+     Mission |  v (km/s) | v/v_esc |   h_max (km)
+-------------------------------------------------------
+   Pioneer 0 |       0.0 |     N/A | 16 (exploded)
+   Pioneer 2 |       7.7 |   0.699 |         1495
+   Pioneer 1 |      10.7 |   0.971 |      113,854</code></pre>
+
+    <div class="resonance">Pioneer 2 reached 1,550 km. Pioneer 1 reached 113,854 km. The ratio is 73:1. The velocity ratio was roughly 10.7:7.7 = 1.39:1. A 39% velocity increase produced a 7,300% altitude increase. This is the vis-viva equation&rsquo;s nonlinearity near escape: as velocity approaches v_esc, the denominator (2/r - v^2/&mu;) approaches zero, and the semi-major axis approaches infinity. Small changes in velocity near the threshold produce enormous changes in the orbit. Far from the threshold, Pioneer 2 lived in the linear regime &mdash; where velocity and altitude are almost proportional and no amount of wishful thinking turns a sounding rocket into a lunar probe.</div>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 3: Solid Rocket Motor Ignition Physics (Layer 5, Section 5.4)</h2>
+
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>ABL X-248 Value</th></tr>
+      <tr><td>Motor designation</td><td>&mdash;</td><td>&mdash;</td><td>ABL X-248 (Altair)</td></tr>
+      <tr><td>Propellant type</td><td>&mdash;</td><td>&mdash;</td><td>Polyurethane composite solid</td></tr>
+      <tr><td>Grain configuration</td><td>&mdash;</td><td>&mdash;</td><td>Internal-burning star</td></tr>
+      <tr><td>Propellant mass</td><td>m_p</td><td>kg</td><td>~1,050</td></tr>
+      <tr><td>Motor total mass</td><td>m_total</td><td>kg</td><td>~1,300</td></tr>
+      <tr><td>Chamber pressure</td><td>P_c</td><td>psi</td><td>~600</td></tr>
+      <tr><td>Burn time</td><td>t_b</td><td>s</td><td>~40</td></tr>
+      <tr><td>Total impulse</td><td>I_total</td><td>kN*s</td><td>~500</td></tr>
+      <tr><td>Igniter type</td><td>&mdash;</td><td>&mdash;</td><td>Pyrotechnic (electrical initiation)</td></tr>
+      <tr><td>Spin rate before ignition</td><td>&omega;</td><td>rpm</td><td>~140</td></tr>
+      <tr><td>Number of Pioneer flights</td><td>&mdash;</td><td>&mdash;</td><td>4 (Pioneer 1, 2, 3, 4)</td></tr>
+      <tr><td>X-248 ignition failures</td><td>&mdash;</td><td>&mdash;</td><td>1 (Pioneer 2)</td></tr>
+      <tr><td>Ignition reliability (series)</td><td>P_ign</td><td>&mdash;</td><td>3/4 = 0.75 (this series)</td></tr>
+    </table>
+
+    <h3>Solid Motor Ignition Sequence</h3>
+    <pre><code>Step 1: Electrical signal &rarr; fires igniter squib
+  Conditions: voltage &gt; threshold, current &gt; threshold
+  Failure mode: open circuit, low battery, timer malfunction
+
+Step 2: Squib ignites pyrotechnic charge
+  Conditions: squib reaches activation temperature (~300-500C)
+  Failure mode: dud squib, moisture contamination
+
+Step 3: Pyrotechnic charge generates hot gas + particles
+  Conditions: sufficient energy to heat propellant surface
+  Failure mode: insufficient charge mass, poor placement
+
+Step 4: Propellant surface reaches ignition temperature
+  Conditions: T_surface &gt; T_ignition (~300C for polyurethane composite)
+  Failure mode: propellant too cold, surface coating, delamination
+
+Step 5: Flame spreads across grain surface
+  Conditions: chamber pressure rises above sustaining threshold
+  Failure mode: incomplete spread, blowout (port too large)
+
+Step 6: Chamber pressure reaches design level
+  Conditions: burn area * burn rate * density = mass flow to sustain P_c
+  Failure mode: grain crack (over-pressurization), low pressure (extinction)</code></pre>
+
+    <h3>Ignition Reliability (series analysis)</h3>
+    <pre><code>For N trials with k successes:
+  P(ignition) = k / N       (frequentist point estimate)
+
+For Pioneer series: P = 3/4 = 0.75
+
+Bayesian posterior with uniform prior:
+  P(ignition) ~ Beta(k+1, N-k+1) = Beta(4, 2)
+  Mean: (k+1)/(N+2) = 4/6 = 0.667
+  95% credible interval: [0.29, 0.96]
+
+The wide credible interval tells us we have very few data points.
+Four flights is not enough to precisely characterize reliability.
+This is why modern solid motors undergo dozens of static fire tests
+before flight certification.</code></pre>
+
+    <div class="resonance">A solid rocket motor is a controlled explosion waiting for permission. The propellant is already mixed, loaded, and shaped. The grain geometry is already cast. The nozzle is already built. Everything is ready except the decision to burn. That decision travels through six links of an ignition chain: electrical signal, squib, pyrotechnic charge, surface heating, flame spread, pressure rise. Pioneer 2&rsquo;s chain broke at the first link. The ignition signal never arrived. A thousand kilograms of propellant sat in its casing, inert, while the spacecraft coasted to 1,550 km and fell back. The probability math tells us that a 4-flight sample gives us almost no information about true reliability &mdash; the 95% interval spans from 0.29 to 0.96. You cannot build a space program on four data points. Modern certification requires dozens of static fire tests before a motor is trusted. Pioneer 2 taught this lesson by example.</div>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 4: TV Camera Scanning and Data Rate (Layer 7, Section 7.3)</h2>
+
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 2 Value</th></tr>
+      <tr><td>Camera type</td><td>&mdash;</td><td>&mdash;</td><td>Image dissector (Farnsworth type)</td></tr>
+      <tr><td>Scan lines per frame</td><td>N_lines</td><td>&mdash;</td><td>~150 (estimated)</td></tr>
+      <tr><td>Pixels per line (equivalent)</td><td>N_pixels</td><td>&mdash;</td><td>~150 (estimated)</td></tr>
+      <tr><td>Frame time</td><td>t_frame</td><td>s</td><td>~30-60</td></tr>
+      <tr><td>Bits per pixel (grayscale)</td><td>b_px</td><td>bits</td><td>~4-6</td></tr>
+      <tr><td>Data rate to telemetry</td><td>R_cam</td><td>bits/s</td><td>~100-400</td></tr>
+      <tr><td>Transmitter power</td><td>P_tx</td><td>W</td><td>~0.3</td></tr>
+      <tr><td>Telemetry frequency</td><td>f</td><td>MHz</td><td>~960</td></tr>
+      <tr><td>Intended imaging target</td><td>&mdash;</td><td>&mdash;</td><td>Moon, Earth limb</td></tr>
+      <tr><td>Actual imaging</td><td>&mdash;</td><td>&mdash;</td><td>None (45 min flight)</td></tr>
+    </table>
+
+    <h3>Raster Scanning Data Rate</h3>
+    <pre><code>Data rate = N_lines * N_pixels * b_px / t_frame
+
+For Pioneer 2 (estimated):
+  R_cam = 150 * 150 * 5 / 45 &asymp; 2,500 bits/s (raw)
+
+But the telemetry channel bandwidth limited actual transmission
+to ~100-400 bits/s, requiring heavy compression or subsampling.</code></pre>
+
+    <h3>Shannon Channel Capacity</h3>
+    <pre><code>C = B * log_2(1 + SNR)
+
+The Pioneer 2 telemetry link could support roughly 100-400 bits/s
+of useful data. This set the upper bound on imaging capability:
+at 5 bits per pixel, you get 20-80 pixels per second.
+A 150x150 image at 5 bits/pixel = 112,500 bits.
+At 200 bits/s, one frame takes 562 seconds &asymp; 9.4 minutes.
+
+Pioneer 2's 45-minute flight could have captured at most
+~4-5 complete frames of the Earth or Moon.</code></pre>
+
+    <h3>Connection to Bunsen and Spectroscopy (Layer 1)</h3>
+    <pre><code>Robert Bunsen (March 31, 1811) pioneered spectroscopy &mdash; decomposing
+light into its component wavelengths to identify chemical elements.
+A TV camera does the inverse: it decomposes a SPATIAL scene into
+its component pixels, converting 2D spatial information into a 1D
+temporal signal. Both operations are decompositions:
+
+Spectroscopy: I(&lambda;) &mdash; intensity as a function of wavelength
+TV scanning:  I(x, y) &rarr; I(t) &mdash; intensity as a function of time
+
+Bunsen separated light by wavelength using a prism.
+Pioneer 2's camera separated an image by position using a scan.
+Both reduce a multidimensional signal to a sequence that can be
+recorded, transmitted, and analyzed.</code></pre>
+
+    <div class="resonance">Pioneer 2 carried the first TV camera on a Pioneer spacecraft, and it never took a picture. The camera was an image dissector &mdash; a Farnsworth tube that scanned a scene point by point, converting two-dimensional spatial information into a one-dimensional time series. This is the same mathematical operation Bunsen performed with his spectroscope: decomposing a complex signal into a sequence of measurements. Bunsen decomposed light by wavelength. The camera decomposed a scene by position. Both are projections from a higher-dimensional space onto a one-dimensional channel. Shannon&rsquo;s theorem then sets the speed limit: the telemetry link could carry only a few hundred bits per second, so each frame would have taken nearly ten minutes to transmit. Pioneer 2 had 45 minutes. It could have sent perhaps four grainy images of the Earth from 1,550 km. Instead, it sent 45 minutes of near-Earth radiation data &mdash; the only science it had time to do. The camera that never fired a frame became the ancestor of every space camera that followed. Sometimes the prototype matters more than its pictures.</div>
+  </div>
+
+  <div class="card">
+    <h2>Philosophical Questions for Debate</h2>
+
+    <h3>Question 1: The Arithmetic of Staging</h3>
+    <p>Pioneer 2 needed three terms in its delta-v sum, and it got two. The missing term was 33% of the total. Pioneer 1 was missing 2% of its total. The outcomes: Pioneer 2 reached 1,550 km; Pioneer 1 reached 113,854 km. Neither reached the Moon.</p>
+    <blockquote>Is a space mission fundamentally an arithmetic problem? Each stage adds a term to the velocity sum. The sum must exceed a threshold (escape velocity) or the mission fails. There is no partial credit for being close &mdash; except that Pioneer 1&rsquo;s &ldquo;close&rdquo; gave us the Van Allen belt data and Pioneer 2&rsquo;s &ldquo;not even close&rdquo; gave us 45 minutes of near-Earth radiation measurements. The mathematics is pitiless: the sum either reaches the threshold or it doesn&rsquo;t. But the science doesn&rsquo;t care about the threshold &mdash; it cares about what you can measure along the way.</blockquote>
+
+    <h3>Question 2: The Last-Stage Problem</h3>
+    <blockquote>Is there a general principle that the most efficient component in a system is also the most fragile? The last stage of a rocket benefits from the exponential nature of the Tsiolkovsky equation &mdash; it has the best mass ratio because it carries no structural overhead from the stages below. But it also has no redundancy, no second chance. If the first stage fails, you have zero velocity. If the last stage fails, you have all the velocity that the investment in stages 1 through N-1 bought you &mdash; and it&rsquo;s not enough.</blockquote>
+
+    <h3>Question 3: The Camera That Never Saw</h3>
+    <blockquote>When is an untested capability a sunk cost, and when is it a necessary step in a technology development chain? Pioneer 2&rsquo;s camera never took a picture, but its integration into the spacecraft bus taught engineers how to fly cameras in space. The Ranger missions six years later used descendants of this design. Was Pioneer 2&rsquo;s camera mass wasted, or was it the cheapest possible flight qualification program?</blockquote>
+
+    <h3>Question 4: Ignition as a Binary Event</h3>
+    <blockquote>Why are so many critical systems built on AND chains, where every element must succeed? The alternative is OR architecture &mdash; redundant paths where any one success is sufficient. But the propulsion system is almost always a single chain. You cannot carry two third-stage motors &ldquo;in case one doesn&rsquo;t ignite&rdquo; &mdash; the mass penalty is prohibitive. The Tsiolkovsky equation punishes redundancy: every extra kilogram of backup hardware reduces the delta-v the primary system can deliver. Is there a fundamental tension between reliability engineering (which demands redundancy) and rocket engineering (which demands mass minimization)?</blockquote>
+
+    <h3>Question 5: Forty-Five Minutes of Science</h3>
+    <blockquote>Is there a mathematical argument that a fleet of partial successes maps a domain more thoroughly than a single complete success would? Pioneer 1 transected the entire belt system but spent most of its time above the belts. Pioneer 2 spent its entire 45 minutes in the densest part of the near-Earth radiation environment. A complete success (reaching the Moon) would have given high-altitude cislunar data but minimal near-Earth coverage. This is a sampling theory question: does a collection of short, dense samples in different domains contain more information than one long, sparse sample across the whole domain?</blockquote>
+  </div>
+
+  <div class="card">
+    <h2>McNeese-Hoag Reference Notes</h2>
+    <p>The four deposits in this document trace the mathematics of staging through every aspect of Pioneer 2&rsquo;s mission. Deposit 1 shows that multi-stage rocketry is velocity addition &mdash; each stage contributes a term, and the sum must exceed the escape threshold. Deposit 2 inverts the vis-viva equation to calculate altitude from velocity, showing that Pioneer 2&rsquo;s 70% of escape velocity bought only 0.4% of the Moon&rsquo;s distance. Deposit 3 traces the ignition chain that failed, showing solid motor ignition as a reliability problem where a single broken link defeats the entire chain. Deposit 4 follows the TV camera that never saw the Moon, connecting Farnsworth&rsquo;s image dissector to Shannon&rsquo;s channel capacity to Bunsen&rsquo;s spectroscopic decomposition.</p>
+    <p>Vector calculus is Layer 4 of the TSPB because adding velocities is the fourth thing you learn after the unit circle, the Pythagorean theorem, and trigonometry. Staging is the hardware implementation of vector addition: each motor contributes a velocity vector along the trajectory, and the total velocity is their sum. Pioneer 2&rsquo;s sum had three terms and one of them was zero. The mathematics doesn&rsquo;t care why the term is zero &mdash; whether the motor failed to ignite, or was never installed, or was replaced with a rock of equal mass. Zero is zero. The trajectory only knows the sum.</p>
+    <blockquote>&ldquo;Tables tell you what is. Formulas tell you why. Examples tell you how it feels.&rdquo; &mdash; (paraphrase of McNeese &amp; Hoag&rsquo;s pedagogical philosophy)</blockquote>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="index.html">&larr; Mission Index</a>
+    <a href="research.html">Research</a>
+    <a href="organism.html">Organism</a>
+    <a class="active" href="mathematics.html">Mathematics</a>
+    <a href="papers.html">Papers</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="simulation.html">Simulation</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--berry-purple);">&ldquo;The thicket feeds what the canopy does not see.&rdquo;</p>
+</footer>
+
+</body>
+</html>

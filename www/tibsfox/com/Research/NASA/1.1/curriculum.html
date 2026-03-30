@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum — v1.1 Pioneer 0 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --fire-dark: #1A0A0A; --fire-mid: #3A1A1A; --magenta: #C850C0; --magenta-light: #E8A0E0; --fireweed: #D63384; --ash: #6B6B6B; --ember: #FF6B35; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #4A2A2A; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--fire-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(200,80,192,0.12) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(200,80,192,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(200,80,192,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(255,107,53,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(200,80,192,0.12) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(200,80,192,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(255,107,53,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  header { background: linear-gradient(160deg, var(--fire-dark) 0%, var(--fire-mid) 30%, #2D0D47 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--magenta); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(200,80,192,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(200,80,192,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--magenta); text-decoration: none; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(200,80,192,0.15); border: 1px solid var(--magenta); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--magenta); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--magenta-light); }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(58,26,26,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .dept-card { background: rgba(45,13,71,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1rem; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--magenta-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--fireweed); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.4rem; }
+  strong { color: #fff; font-weight: 600; }
+  em { font-style: italic; color: var(--magenta-light); }
+  a { color: var(--magenta); text-decoration: none; }
+  a:hover { color: var(--magenta-light); }
+  pre { background: rgba(26,10,10,0.8); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.9rem; }
+  thead th { background: rgba(200,80,192,0.15); color: var(--magenta-light); font-weight: 600; text-align: left; padding: 0.75rem 1rem; border: 1px solid var(--border); }
+  tbody td { padding: 0.6rem 1rem; border: 1px solid var(--border); color: var(--text); }
+  tbody tr:nth-child(even) { background: rgba(58,26,26,0.3); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .dept-wing { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--magenta); margin-bottom: 0.25rem; }
+  .dept-concept { font-size: 0.9rem; color: var(--text-dim); font-style: italic; margin-bottom: 0.75rem; }
+  .try-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+  .try-meta .label { color: var(--magenta); font-weight: 500; }
+  .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.9rem; }
+  .meta-table td { padding: 0.4rem 1rem 0.4rem 0; border-bottom: 1px solid rgba(74,42,42,0.5); vertical-align: top; }
+  .meta-table td:first-child { color: var(--magenta); font-weight: 500; white-space: nowrap; width: 180px; }
+  .track-nav { background: rgba(58,26,26,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-top: 2rem; }
+  .track-nav h3 { font-size: 0.9rem; color: #7EB8DA; margin-top: 0; margin-bottom: 0.75rem; font-family: 'DM Sans', sans-serif; font-weight: 600; }
+  .track-nav-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .track-nav-links a { display: inline-block; background: rgba(200,80,192,0.1); border: 1px solid var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; font-size: 0.8rem; color: var(--magenta); font-family: 'DM Mono', monospace; transition: all 0.2s; }
+  .track-nav-links a:hover { background: rgba(200,80,192,0.2); border-color: var(--magenta); color: var(--magenta-light); }
+  .track-nav-links a.current { background: rgba(200,80,192,0.25); border-color: var(--magenta); color: var(--magenta-light); font-weight: 500; }
+  .nav-card { background: rgba(58,26,26,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: var(--magenta); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--magenta-light); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--magenta); text-decoration: none; }
+  @media (max-width: 800px) { main { padding: 1rem; } h1 { font-size: 1.6rem; } .card, .dept-card { padding: 1rem 1.25rem; } .try-meta { flex-direction: column; gap: 0.25rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="breadcrumb"><a href="index.html">v1.1 Pioneer 0</a> / Curriculum</div>
+    <div class="mission-badge"><span class="version-number">v1.1</span><span>Track 4: Curriculum</span></div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department Mappings, TRY Sessions, DIY Projects, Fox Companies Pathways</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <table class="meta-table">
+      <tr><td>Mission</td><td>Pioneer 0 (Thor-Able 1)</td></tr>
+      <tr><td>Primary Departments</td><td>Mechanical Engineering, Physics, Ecology</td></tr>
+      <tr><td>Secondary Departments</td><td>History, Computer Science, Creative Arts, Music Theory</td></tr>
+      <tr><td>Organism</td><td><em>Chamerion angustifolium</em> (Fireweed)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Department Deposits</h2>
+
+    <div class="dept-card">
+      <h3>Mechanical Engineering (Primary)</h3>
+      <p class="dept-wing">Wing: Rotating Machinery and Tribology</p>
+      <p class="dept-concept">Concept: Turbopump bearing design &mdash; the intersection of material science, thermal management, and precision manufacturing</p>
+      <p><strong>Deposit:</strong> The LR-79 turbopump failure is a complete teaching case for bearing engineering:</p>
+      <ul>
+        <li>Hertzian contact stress analysis (what happens at the ball-race interface)</li>
+        <li>L10 bearing life prediction (statistical approach to failure timing)</li>
+        <li>Thermal gradient effects on bearing clearance (differential expansion)</li>
+        <li>Contamination sensitivity in cryogenic environments</li>
+        <li>The relationship between manufacturing precision and operational reliability</li>
+      </ul>
+      <p>This deposit connects to every subsequent NASA mission that uses liquid-fueled engines &mdash; which is almost all of them.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Physics (Primary)</h3>
+      <p class="dept-wing">Wing: Orbital Mechanics Fundamentals</p>
+      <p class="dept-concept">Concept: Multi-stage rocket physics and the Tsiolkovsky equation</p>
+      <p><strong>Deposit:</strong> Pioneer 0's three-stage vehicle is the simplest case study for staging:</p>
+      <ul>
+        <li>Why single-stage-to-orbit is (usually) impractical</li>
+        <li>How staging multiplies delta-v by shedding dry mass</li>
+        <li>The diminishing returns of additional stages</li>
+        <li>Mass ratio optimization for a given mission delta-v budget</li>
+      </ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>Ecology (Primary)</h3>
+      <p class="dept-wing">Wing: Succession and Disturbance Ecology</p>
+      <p class="dept-concept">Concept: Primary succession and the role of pioneer species in ecosystem recovery</p>
+      <ul>
+        <li>Why bare substrate is hostile to most organisms</li>
+        <li>How pioneers modify substrate to enable later species</li>
+        <li>The distinction between pioneer and climax communities</li>
+        <li>Succession timelines in the PNW (fire scar to old growth: 200&ndash;500 years)</li>
+        <li>Mt. St. Helens as a natural experiment in primary succession</li>
+      </ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>History (Secondary)</h3>
+      <p class="dept-wing">Wing: Cold War Science and Technology</p>
+      <p class="dept-concept">Concept: How military technology transfer created the civilian space program</p>
+      <ul><li>ARPA's role in coordinating interservice rivalries</li><li>The IGY as a framework for competitive cooperation</li><li>How weapons systems become exploration systems (functor mapping)</li><li>The institutional landscape before NASA existed</li></ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>Computer Science (Secondary)</h3>
+      <p class="dept-wing">Wing: Fault Tolerance and Reliability Engineering</p>
+      <p class="dept-concept">Concept: Single points of failure and redundancy design</p>
+      <ul><li>Fault tree analysis methodology</li><li>Mean Time Between Failures (MTBF) calculation</li><li>The cost/mass tradeoff of adding redundancy</li><li>Modern approaches (TMR, engine-out capability, health monitoring)</li></ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>Creative Arts (Secondary)</h3>
+      <p class="dept-wing">Wing: Generative Systems and Screensaver Art</p>
+      <p class="dept-concept">Concept: Using natural processes (seed dispersal, fire succession) as generative art algorithms</p>
+      <ul><li>Wind field simulation using Perlin noise</li><li>Particle trail accumulation as visual composition</li><li>The aesthetics of emergence (simple rules, complex patterns)</li><li>Screensaver as ambient information display (GSD-OS integration)</li></ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>Music Theory (Secondary)</h3>
+      <p class="dept-wing">Wing: Rhythm and Temporal Structure</p>
+      <p class="dept-concept">Concept: The 77-second phrase &mdash; brevity as structural device</p>
+      <ul><li>In music, a phrase that ends abruptly creates tension that demands resolution</li><li>The Pioneer program (0 &rarr; 1 &rarr; 2 &rarr; 3 &rarr; 4) is a five-bar phrase: failed attack, two partial resolutions, a rest, and finally the tonic</li><li>The sonic structure of a rocket launch maps directly to a musical crescendo &rarr; cutoff &rarr; percussion hit</li><li>Pioneer 0's silence is what made Pioneer 1 audible</li></ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Calculate Your Own Rocket's Delta-V Budget</h3>
+    <div class="try-meta">
+      <span><span class="label">Duration:</span> 30 min</span>
+      <span><span class="label">Difficulty:</span> Beginner</span>
+      <span><span class="label">Dept:</span> Physics</span>
+      <span><span class="label">Needs:</span> Python 3.8+ or calculator</span>
+    </div>
+    <p><strong>What You'll Learn:</strong> The moment you realize that a rocket is mostly fuel, and that staging is the only way to make the math work.</p>
+    <pre>import math
+dv = 248 * 9.81 * math.log(51095 / 6643)
+print(f"Thor delta-v: {dv:.0f} m/s")  # ~4,935 m/s
+
+mass_ratio = math.exp(10900 / (248 * 9.81))
+print(f"Single-stage mass ratio needed: {mass_ratio:.0f}:1")
+# ~84:1 -- physically impossible</pre>
+    <p>You just proved mathematically why Pioneer 0 needed three stages to reach the Moon. Every rocket that has ever launched beyond Earth orbit has used staging &mdash; from Saturn V to Falcon Heavy.</p>
+
+    <hr>
+
+    <h3>TRY 2: Build a Vibration Monitor with Arduino</h3>
+    <div class="try-meta">
+      <span><span class="label">Duration:</span> 1 hour</span>
+      <span><span class="label">Difficulty:</span> Beginner-Intermediate</span>
+      <span><span class="label">Dept:</span> Mechanical Engineering</span>
+      <span><span class="label">Needs:</span> Arduino Uno ($25), ADXL345 ($5), breadboard ($5)</span>
+    </div>
+    <p><strong>What You'll Learn:</strong> The "aha" moment when you see vibration data change as a bearing starts to fail &mdash; the same signal Pioneer 0's engineers couldn't detect.</p>
+    <pre>ADXL345 wiring:
+  VCC &rarr; 3.3V | GND &rarr; GND | SDA &rarr; A4 | SCL &rarr; A5</pre>
+    <pre>#include &lt;Wire.h&gt;
+#include &lt;Adafruit_ADXL345_U.h&gt;
+
+Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified(12345);
+
+void setup() {
+  Serial.begin(115200);
+  accel.begin();
+  accel.setRange(ADXL345_RANGE_16_G);
+  Serial.println("PIONEER 0 VIBRATION MONITOR");
+  Serial.println("Time_ms,X_g,Y_g,Z_g,Magnitude_g");
+}
+
+void loop() {
+  sensors_event_t event;
+  accel.getEvent(&amp;event);
+  float mag = sqrt(event.acceleration.x * event.acceleration.x +
+                   event.acceleration.y * event.acceleration.y +
+                   event.acceleration.z * event.acceleration.z);
+  Serial.print(millis()); Serial.print(",");
+  Serial.print(event.acceleration.x); Serial.print(",");
+  Serial.print(event.acceleration.y); Serial.print(",");
+  Serial.print(event.acceleration.z); Serial.print(",");
+  Serial.println(mag);
+  delay(10);
+}</pre>
+    <p>In 1958, Pioneer 0's LR-79 engine had no vibration sensor on its turbopump bearing. Your $30 Arduino setup does what NASA's IVHM system does today.</p>
+
+    <hr>
+
+    <h3>TRY 3: Draw a Fault Tree for Pioneer 0</h3>
+    <div class="try-meta">
+      <span><span class="label">Duration:</span> 45 min</span>
+      <span><span class="label">Difficulty:</span> Beginner</span>
+      <span><span class="label">Dept:</span> Systems Engineering</span>
+      <span><span class="label">Needs:</span> Paper and pencil (or draw.io)</span>
+    </div>
+    <p>Start with "MISSION LOSS" at the top. Trace backward: Vehicle breakup &rarr; Loss of stability &rarr; Loss of thrust &rarr; Turbopump failure &rarr; Bearing failure &rarr; [material fatigue | contamination | thermal stress | manufacturing defect].</p>
+    <p>Mark single points of failure (SPOF) with red. Pioneer 0's turbopump bearing is a SPOF: no backup, no health monitoring, no automatic shutdown. Your fault tree shows that Pioneer 0's failure was not unlucky; it was architecturally inevitable.</p>
+  </div>
+
+  <div class="card">
+    <h2>DIY Projects</h2>
+
+    <h3>DIY 1: Build a Multi-Stage Model Rocket</h3>
+    <div class="try-meta">
+      <span><span class="label">Dept:</span> Physics / Engineering</span>
+      <span><span class="label">Difficulty:</span> Intermediate</span>
+      <span><span class="label">Cost:</span> $60&ndash;80</span>
+      <span><span class="label">Duration:</span> Weekend (8&ndash;12 hours)</span>
+    </div>
+    <p>A two-stage model rocket (Estes tandem-X kit $45, C6-0 + C6-7 engines $12) that demonstrates staging. Paint in Thor-Able colors: white body, orange bands. Watch the first stage burn out and fall away, the second stage ignite. This is why staging works.</p>
+    <p><strong>Fox Companies:</strong> Local hobby rocketry education service. Monthly build sessions at a community makerspace. 10&ndash;20 participants per session, $25/person.</p>
+
+    <hr>
+
+    <h3>DIY 2: Grow Fireweed from Seed</h3>
+    <div class="try-meta">
+      <span><span class="label">Dept:</span> Ecology</span>
+      <span><span class="label">Difficulty:</span> Beginner</span>
+      <span><span class="label">Cost:</span> $15&ndash;25</span>
+      <span><span class="label">Duration:</span> 6-month growing project</span>
+    </div>
+    <p>Cold stratify seeds (4&ndash;6 weeks in fridge), surface sow on mineral-heavy soil (50% sand, 25% perlite, 25% compost), mist daily, watch the entire life cycle: germination &rarr; growth &rarr; progressive bloom &rarr; seed dispersal. 0.1 mg seeds become 2-meter plants.</p>
+    <p><strong>Fox Companies:</strong> Native plant nursery specializing in restoration species. Revenue from seedling sales to restoration projects, landscapers, and home gardeners.</p>
+
+    <hr>
+
+    <h3>DIY 3: Build the Pioneer 0 Telemetry Display</h3>
+    <div class="try-meta">
+      <span><span class="label">Dept:</span> Electronics / CS</span>
+      <span><span class="label">Difficulty:</span> Beginner-Intermediate</span>
+      <span><span class="label">Cost:</span> $44</span>
+      <span><span class="label">Duration:</span> Weekend (4&ndash;6 hours)</span>
+    </div>
+    <p>Arduino Uno ($25) + SSD1306 OLED ($8) + LED bar ($3) + piezo buzzer ($2) + button ($1) + breadboard ($5). Replays Pioneer 0's 77-second flight: countdown, ignition, flight data updates, BEARING FAILURE at T+73.6, RANGE SAFETY DESTRUCT at T+77.</p>
+    <p><strong>Fox Companies:</strong> Home electronics education service. Monthly subscription kits with pre-loaded data from each mission release.</p>
+  </div>
+
+  <div class="card">
+    <h2>Rosetta Stone Connections</h2>
+    <h3>Cross-Department Translations</h3>
+    <table>
+      <thead><tr><th>From</th><th>To</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td>Mechanical Eng. (bearing failure)</td><td>Ecology (pioneer species)</td><td>Both about what happens when the first attempt fails: the bearing fails and the spec improves; the pioneer dies and the soil improves</td></tr>
+        <tr><td>Physics (staging)</td><td>Ecology (succession)</td><td>Staging = discarding spent structure to reach higher velocity. Succession = each species preparing ground for the next</td></tr>
+        <tr><td>History (Cold War)</td><td>Music Theory (tension/resolution)</td><td>The Space Race is a tension that demands resolution. Pioneer 0's failure increases tension. Pioneer 4's success resolves it. I-IV-V-I progression</td></tr>
+        <tr><td>Computer Science (fault tolerance)</td><td>Creative Arts (generative art)</td><td>Fault tolerance uses redundancy for pattern persistence. Generative art uses local randomness for pattern emergence. Both: reliability of the whole from unreliability of the parts</td></tr>
+        <tr><td>Ecology (fireweed seeds)</td><td>Engineering (launch reliability)</td><td>80,000 seeds per plant, most land wrong. 12 early Thor launches, 7 failed. Both succeed by attempting enough times</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>GSD-OS Integration Points</h2>
+    <p><strong>Screensaver:</strong> Fireweed Bloom Cycle &mdash; XScreenSaver module, configurable bloom speed / particle density / wind strength. See <a href="simulation.html">simulation.html</a> E1.</p>
+    <p><strong>Desktop widget:</strong> Pioneer 0 Telemetry Widget &mdash; 77-second flight loop in notification tray. Click to expand full telemetry.</p>
+    <p><strong>Control surface:</strong> Launch Readiness Review (LRR) Panel &mdash; pre-execution checks for GSD workflows. Pioneer 0 lesson: if you don't check the bearings, they'll check themselves.</p>
+  </div>
+
+  <div class="card">
+    <h2>Community Business Pathways (Fox Companies)</h2>
+
+    <h3>Pathway 1: STEM Education Service</h3>
+    <p>Monthly workshops at community makerspace ($25&ndash;50/session). Real NASA data, not toy examples. Scale: 10&ndash;20 participants, 1 instructor. Annual revenue potential: $3,000&ndash;6,000 (part-time).</p>
+
+    <h3>Pathway 2: Native Plant Nursery</h3>
+    <p>Propagate PNW native species from ethically collected seed. Fire-adapted pioneers: fireweed, kinnikinnick, lupine. Seedlings $3&ndash;8 each, consulting $50&ndash;75/hr. Partner with local watershed restoration groups.</p>
+
+    <h3>Pathway 3: Electronics Prototyping Service</h3>
+    <p>Custom Arduino/Raspberry Pi prototypes for local businesses. Prototype builds $200&ndash;500 each, kit subscriptions $25/month. Knowledge base accumulates with each mission's specs.</p>
+  </div>
+
+  <div class="track-nav">
+    <h3>Mission Tracks</h3>
+    <div class="track-nav-links">
+      <a href="research.html">Research</a>
+      <a href="organism.html">Organism</a>
+      <a href="mathematics.html">Mathematics</a>
+      <a href="papers.html">Papers</a>
+      <a href="curriculum.html" class="current">Curriculum</a>
+      <a href="simulation.html">Simulation</a>
+    </div>
+  </div>
+
+  <div class="nav-card">
+    <a href="papers.html">&larr; Papers</a>
+    <a href="simulation.html">Simulation &rarr;</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--magenta);">"The fireweed blooms, and the forest grows in its wake."</p>
+</footer>
+
+</body>
+</html>

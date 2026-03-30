@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum — v1.4 Pioneer 3 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue:#0B3D91; --nasa-red:#FC3D21; --bark-dark:#1A1408; --bark-mid:#2A2010; --lichen-gold:#B8C99D; --lichen-light:#D4DEB2; --forest-deep:#1A2A1A; --forest-mid:#2A3D2A; --text:#E8E8E8; --text-dim:#A0A0A0; --border:#3D3A20; --amber:#D4A017; --amber-light:#F0D060; --amber-dark:#8B6914; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bark-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(184,201,157,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(212,222,178,0.05) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(26,42,26,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(184,201,157,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(212,222,178,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(26,42,26,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(184,201,157,0.06) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(42,61,42,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--lichen-gold); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--lichen-light); }
+  .breadcrumb span { margin: 0 0.4rem; }
+  header { background: linear-gradient(160deg, var(--bark-dark) 0%, var(--bark-mid) 30%, var(--forest-deep) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--lichen-gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(184,201,157,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(184,201,157,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(184,201,157,0.10); border: 1px solid var(--lichen-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--lichen-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--lichen-light); }
+  .track-badge { background: rgba(212,160,23,0.2); border: 1px solid var(--amber); color: var(--amber); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--lichen-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(42,32,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--lichen-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--lichen-gold); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--lichen-light); margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
+  .card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  .card ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.5rem; }
+  .card li strong { color: var(--lichen-light); }
+  .dept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+  .dept-card { background: rgba(26,20,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; }
+  .dept-card h3 { margin-top: 0; font-size: 1rem; }
+  .dept-card .wing { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--amber); margin-bottom: 0.5rem; }
+  .dept-card p { font-size: 0.88rem; line-height: 1.7; margin-bottom: 0.75rem; }
+  .dept-card ul { padding-left: 1.2rem; }
+  .dept-card li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.3rem; }
+  .try-card { background: rgba(26,42,26,0.4); border: 1px solid var(--forest-mid); }
+  .try-card h2 { color: var(--lichen-gold); }
+  .try-card h3 { color: var(--lichen-light); }
+  .try-meta { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--amber); margin-bottom: 0.75rem; }
+  .diy-card { background: rgba(11,61,145,0.08); border: 1px solid rgba(11,61,145,0.25); }
+  .diy-card h2 { color: #7EB8DA; }
+  .diy-card h3 { color: #7EB8DA; }
+  .rosetta-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+  .rosetta-table th { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--lichen-gold); color: var(--lichen-gold); font-weight: 600; }
+  .rosetta-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; font-size: 0.85rem; line-height: 1.5; }
+  .pathway-card { background: rgba(212,160,23,0.06); border: 1px solid var(--amber-dark); }
+  .pathway-card h2 { color: var(--amber); }
+  .pathway-card h3 { color: var(--amber); }
+  .nav-card { background: rgba(42,32,16,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--lichen-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--lichen-light); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--lichen-gold); text-decoration: none; }
+  @media (max-width: 800px) { .header-content { padding: 1.5rem 1rem; } main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } .dept-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.4 Pioneer 3</a>
+  <span>&rsaquo;</span>
+  Track 4: Curriculum
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.4</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 4 &mdash; Curriculum</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Physics, Mathematics, Biology</span>
+      <span><span class="label">Secondary:</span> Chemistry, Engineering, Art</span>
+      <span><span class="label">Organism:</span> <em>Usnea longissima</em></span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- DEPARTMENT DEPOSITS -->
+  <h2 style="font-family:'Libre Baskerville',serif; color:var(--lichen-light); margin-bottom:1rem; position:relative; z-index:1;">Department Deposits</h2>
+  <div class="dept-grid">
+    <div class="dept-card">
+      <h3>Physics (Primary)</h3>
+      <div class="wing">Wing: Radiation Belt Structure and Dual-Peak Detection</div>
+      <p>Pioneer 3 carried a single Geiger-Mueller tube and ionization chamber to 102,322 km altitude. The outbound and inbound radiation profiles were symmetric, each showing two distinct peaks separated by a minimum &mdash; proof of dual-belt structure.</p>
+      <ul>
+        <li>Inner belt: trapped protons, peak at ~3,500 km (L-shell ~1.5)</li>
+        <li>Outer belt: trapped electrons, peak at ~16,000 km (L-shell ~3.5&ndash;4.5)</li>
+        <li>Slot region: reduced intensity between 8,000&ndash;12,000 km</li>
+        <li>Count rate: thousands/s at peak, tens/s outside belts</li>
+      </ul>
+    </div>
+    <div class="dept-card">
+      <h3>Mathematics (Primary)</h3>
+      <div class="wing">Wing: Superposition and Fourier Analysis</div>
+      <p>The dual-peak radiation profile IS a superposition problem. Total intensity I(r) is the sum of two populations, each approximately Gaussian in L-shell space. Decomposing the measured profile into components is a nonlinear least squares problem.</p>
+      <ul>
+        <li>I(r) = I<sub>inner</sub>(r) + I<sub>outer</sub>(r)</li>
+        <li>Spatial frequency: ~3 Earth radii between peaks</li>
+        <li>Same mathematics as spectroscopy, audio engineering, medical imaging</li>
+      </ul>
+    </div>
+    <div class="dept-card">
+      <h3>Biology (Primary)</h3>
+      <div class="wing">Wing: Symbiosis and Dual-Organism Biology</div>
+      <p><em>Usnea longissima</em> is not one organism &mdash; it is a fungus (mycobiont) and an alga (photobiont) in obligate mutualism. Neither can survive alone. Pioneer 3 discovered dual belts; Schwendener discovered dual organisms. The pattern of resolving duality from apparent unity connects mission to organism.</p>
+    </div>
+    <div class="dept-card">
+      <h3>Chemistry (Secondary)</h3>
+      <div class="wing">Wing: Atmospheric Chemistry and Usnic Acid</div>
+      <p>Usnic acid (C<sub>18</sub>H<sub>16</sub>O<sub>7</sub>): the signature metabolite of <em>Usnea</em> species. Synthesized by the fungal partner via the polyketide pathway. Functions: UV protection, antibacterial defense, antiherbivore deterrent. <em>Usnea longissima</em> absorbs pollutants directly from the air &mdash; SO<sub>2</sub> sensitivity makes it a biomonitor.</p>
+    </div>
+    <div class="dept-card">
+      <h3>Engineering (Secondary)</h3>
+      <div class="wing">Wing: Juno II Launch Vehicle and Clustered Upper Stages</div>
+      <p>Jupiter first stage (LOX/RP-1, 667 kN) with clusters of solid-fuel Baby Sergeant rockets (11 in second stage, 3 in third, 1 in fourth). Spin stabilization before ignition. The 3.8-second first stage shortfall: similar failure class to Pioneer 1&rsquo;s Able shortfall, different vehicle, different team.</p>
+    </div>
+    <div class="dept-card">
+      <h3>Art (Secondary)</h3>
+      <div class="wing">Wing: Lichen Generative Art and Dual-Structure Visualization</div>
+      <p>Visual themes of hidden duality. Lichen close-up photography reveals algal cells invisible at naked-eye scale. Generative art from <em>Usnea</em> branching patterns: stochastic fractal L-systems. Color palette: lichen green-gray (#A8B89C), bark brown (#5C4033), inner belt amber (#D4A853), outer belt slate-blue (#5B7C99), slot dark (#1A1A2E).</p>
+    </div>
+  </div>
+
+  <!-- TRY SESSIONS -->
+  <div class="card try-card">
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Model the Dual Van Allen Belt Profile as Superposition of Two Gaussians</h3>
+    <div class="try-meta">30 minutes | Beginner | Mathematics / Physics | Python 3.8+, numpy, matplotlib</div>
+    <p>The moment you realize that Pioneer 3&rsquo;s radiation profile &mdash; a single wiggly line from a single instrument &mdash; contains two hidden populations, and that you can separate them with nothing more than curve fitting. Create the synthetic dual-belt profile, plot the dual-peak structure, then recover the two Gaussians by curve fitting using <code>scipy.optimize.curve_fit</code>.</p>
+
+    <h3>TRY 2: Count Poisson-Distributed Events with a Random Number Generator</h3>
+    <div class="try-meta">20 minutes | Beginner | Mathematics / Physics | Python 3.8+</div>
+    <p>The statistical heartbeat of every particle detector ever built. Simulate Pioneer 3&rsquo;s Geiger counter at different altitudes. Generate Poisson-distributed counts and observe: at 500 counts/sec (inner belt), relative error is 4.5%. At 2 counts/sec (beyond belts), relative error is 70.7%. The Poisson floor sets the minimum measurement time needed at each altitude.</p>
+
+    <h3>TRY 3: Find Usnea Lichen in a Local Forest and Photograph It</h3>
+    <div class="try-meta">2&ndash;4 hours (field trip) | Beginner | Biology / Art | Legs, eyes, camera</div>
+    <p>Find a dual organism in the wild. The field test: gently pull a strand of <em>Usnea</em> apart &mdash; the outer cortex breaks, revealing a white elastic central cord. This cord is diagnostic. Photograph the habitat, individual strands, and macro surface texture. Document location, tree species, strand length, and air quality notes. Every photograph is a conservation data point.</p>
+  </div>
+
+  <!-- DIY PROJECTS -->
+  <div class="card diy-card">
+    <h2>DIY Projects</h2>
+
+    <h3>DIY 1: Arduino Dual-Detector Radiation Simulator ($30)</h3>
+    <p>Two LED bar graphs simulating Pioneer 3&rsquo;s outbound and inbound radiation belt traversals. As simulated altitude increases, the bars light up showing two peaks on the way up, two on the way back. The symmetry between outbound and inbound was Pioneer 3&rsquo;s proof. Materials: Arduino Nano ($8), 2x LED bar graphs ($4 each), potentiometer ($1), SSD1306 OLED ($8), breadboard + wires ($5). Build time: 3&ndash;4 hours.</p>
+
+    <h3>DIY 2: Grow Lichen on a Surface ($10)</h3>
+    <p>The slowest, most patient project in the entire NASA mission series. Create conditions for lichen colonization on a rock or brick using a lichen/buttermilk slurry. Growth is measured in millimeters per year. If your substrate is near a road or in a polluted area, lichen will not grow &mdash; the experiment itself is an air quality test. Duration: months to years.</p>
+
+    <h3>DIY 3: Cartesian Coordinate Plotter with Stepper Motors ($45)</h3>
+    <p>A small XY plotter built from two stepper motors, a pen holder, and an Arduino &mdash; a machine that draws in Cartesian coordinates. Program it to draw Pioneer 3&rsquo;s trajectory, the dual-belt radiation profile, or <em>Usnea</em> branching patterns. The plotter literalizes Descartes&rsquo; contribution: every point on the paper is an (x, y) pair. Build time: 6&ndash;8 hours.</p>
+  </div>
+
+  <!-- ROSETTA STONE -->
+  <div class="card">
+    <h2>Rosetta Stone Connections</h2>
+    <table class="rosetta-table">
+      <thead><tr><th>From</th><th>To</th><th>Connection</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Physics</strong> (dual belt)</td><td><strong>Biology</strong> (dual organism)</td><td>Pioneer 3 discovered two radiation populations sharing one magnetic field. <em>Usnea longissima</em> IS two organisms sharing one thallus. Two components in partnership, neither viable alone.</td></tr>
+        <tr><td><strong>Mathematics</strong> (superposition)</td><td><strong>Physics</strong> (radiation profile)</td><td>The dual-peak profile IS a superposition of two Gaussians. Decomposition is the same operation as Fourier analysis &mdash; superposition is universal.</td></tr>
+        <tr><td><strong>Biology</strong> (symbiosis)</td><td><strong>Chemistry</strong> (usnic acid)</td><td>The lichen&rsquo;s chemical defenses are produced by the fungal partner using carbon from the algal partner. The chemistry IS the proof of partnership.</td></tr>
+        <tr><td><strong>Engineering</strong> (Juno II clusters)</td><td><strong>Mathematics</strong> (superposition)</td><td>The Juno II upper stages were clusters of solid rockets &mdash; total thrust is the superposition of individual motor thrusts.</td></tr>
+        <tr><td><strong>Art</strong> (lichen fractal)</td><td><strong>Physics</strong> (belt structure)</td><td>Both are emergent patterns shaped by invisible fields &mdash; wind for the lichen, magnetism for the belt.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- COMMUNITY BUSINESS PATHWAYS -->
+  <div class="card pathway-card">
+    <h2>Community Business Pathways (Fox Companies)</h2>
+
+    <h3>Pathway 1: Environmental Biomonitoring with Lichens</h3>
+    <p>Lichen-based air quality assessments for schools, parks, and neighborhoods ($75&ndash;150 per survey). No equipment cost. Certification: British Lichen Society methodology adapted for North America. Revenue: 2&ndash;3 surveys/week at $100 = $10,400&ndash;15,600/year part-time. Expansion: annual resurveys for trend data ($50/year per site).</p>
+
+    <h3>Pathway 2: STEM Education Kits and Workshops</h3>
+    <p>Educational electronics kits: dual-LED radiation belt simulator ($45/kit, $15 margin). Workshop series: &ldquo;Pioneer 3 &mdash; Two Things That Look Like One&rdquo; (superposition + symbiosis). Target: homeschool co-ops, after-school programs, science museums. Each new NASA mission adds a new kit to the catalog.</p>
+
+    <h3>Pathway 3: Plotter Art and Science Visualization</h3>
+    <p>Custom pen-plotter art: science data rendered as physical drawings ($25&ndash;75/piece). One plot per NASA mission. Workshop: &ldquo;Build Your Own Plotter&rdquo; ($40/person). Revenue: 10 prints/week at $40 avg = $20,800/year. The catalog grows forever.</p>
+  </div>
+
+  <div class="nav-card">
+    <a href="papers.html">&larr; Papers</a>
+    <a href="simulation.html">Track 5: Simulation &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--lichen-gold);">&ldquo;Two things that look like one thing, until you resolve them.&rdquo;</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Arts — v1.2 Pioneer 1 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --forest-dark: #0A1F14; --forest-mid: #152E20;
+    --fern: #4A7C59; --fern-light: #A8D5BA; --fern-deep: #1B3D2F;
+    --moss: #2E5E3F; --bark: #3A2E1A;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A4A35;
+    --amber: #D4A017; --amber-light: #F0D060; --amber-dark: #8B6914;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--forest-dark); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(74,124,89,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(168,213,186,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(46,94,63,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(168,213,186,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(46,94,63,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .top-nav { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; position: relative; z-index: 1; }
+  .top-nav a { color: var(--fern); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .top-nav a:hover { color: var(--fern-light); }
+  header { background: linear-gradient(160deg, var(--forest-dark) 0%, var(--forest-mid) 30%, var(--fern-deep) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--fern); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(74,124,89,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,124,89,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(74,124,89,0.15); border: 1px solid var(--fern); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--fern); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--fern-light); }
+  .track-badge { background: rgba(74,124,89,0.25); border: 1px solid var(--fern); color: var(--fern-light); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--fern); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(21,46,32,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--fern-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--fern-light); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--fern); font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .card strong { color: #fff; }
+  .card em { font-style: italic; color: var(--fern-light); }
+  .card a { color: var(--fern-light); text-decoration: underline; text-decoration-color: var(--border); }
+  .card a:hover { color: #fff; text-decoration-color: var(--fern); }
+  .card hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .card code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(10,31,20,0.6); border: 1px solid var(--border); border-radius: 3px; padding: 0.15rem 0.4rem; color: var(--fern-light); }
+  .card pre { background: rgba(10,31,20,0.7); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; overflow-x: auto; margin: 0.75rem 0; }
+  .card pre code { background: none; border: none; padding: 0; font-size: 0.85rem; line-height: 1.5; color: var(--text); }
+  .card blockquote { border-left: 3px solid var(--fern); padding: 0.5rem 1rem; margin: 0.75rem 0; background: rgba(74,124,89,0.06); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .bottom-nav { max-width: 1400px; margin: 0 auto; padding: 0 2rem 1rem; position: relative; z-index: 1; }
+  .track-links { background: rgba(21,46,32,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .track-links-label { font-size: 0.85rem; color: var(--text-dim); font-weight: 500; margin-right: 0.5rem; }
+  .track-links a { color: var(--fern); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; }
+  .track-links a:hover { color: var(--fern-light); border-color: var(--fern); background: rgba(74,124,89,0.1); }
+  .track-links a.active { color: var(--fern-light); border-color: var(--fern); background: rgba(74,124,89,0.2); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--fern); text-decoration: none; }
+  @media (max-width: 700px) { .header-content { padding: 1.5rem 1rem 1rem; } main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html">&larr; v1.2 Pioneer 1</a>
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.2</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 5: Simulation &amp; Arts</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts Specifications</h1>
+    <p class="subtitle">What to Build, Train, Visualize, and Create &mdash; Pioneer 1, first NASA-launched spacecraft</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti (8GB), 60GB RAM, i7-6700K</span>
+      <span><span class="label">Organism:</span> <em>Polystichum munitum</em></span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- A. SIMULATIONS -->
+  <div class="card">
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <h3>A1. Python: Pioneer 1 Trajectory and Radiation Profile (43 Hours)</h3>
+    <p><strong>What it is:</strong> A coupled physics simulation of Pioneer 1&rsquo;s complete 43-hour flight &mdash; from launch through apogee at 113,854 km to atmospheric reentry &mdash; overlaid with a radiation intensity model of the Van Allen belts.</p>
+    <p><strong>Why it matters:</strong> This is the first mission where the trajectory is long enough to study orbital mechanics AND the science data is interesting enough to overlay.</p>
+    <pre><code># pioneer1_trajectory_radiation.py
+# Three-stage launch: Thor (LR-79) + Able (AJ10-40) + X248 solid
+# Second stage cutoff 10 seconds early (234 m/s shortfall)
+# Resulting elliptical orbit: perigee ~200 km, apogee 113,854 km
+# Reentry over South Pacific after ~43 hours
+#
+# Radiation model: Inner belt proton peak at ~3,000 km (L=1.5)
+#                  Outer belt electron peak at ~20,000 km (L=4.5)
+#                  Slot region: 8,000-12,000 km
+#
+# Outputs: Dual-panel plot, altitude vs time, radiation vs time
+# Libraries: numpy, matplotlib, scipy.integrate
+# Difficulty: Intermediate | Duration: 3-4 hours</code></pre>
+    <p><strong>Key learning moments:</strong></p>
+    <ol>
+      <li>The trajectory is a beautiful symmetric arc &mdash; up through both belts, coast to apogee, back down through both belts</li>
+      <li>The radiation plot shows four peaks: inner belt ascent, outer belt ascent, outer belt descent, inner belt descent</li>
+      <li>The detector saturation in the inner belt core &mdash; the signal drops BECAUSE it is too high, not because radiation decreases</li>
+      <li>The 43-hour flight time gives you a real sense of orbital mechanics timescales</li>
+    </ol>
+    <p><strong>Extension:</strong> Add the Moon&rsquo;s position at launch time (Oct 11, 1958) and show how the intended trajectory would have intersected the Moon&rsquo;s orbit. The visual gap between the two trajectories is the 234 m/s.</p>
+
+    <hr>
+
+    <h3>A2. Python: Escape Velocity Threshold Visualizer</h3>
+    <p><strong>What it is:</strong> An interactive visualization showing how orbital shape changes as burnout velocity increases from suborbital through elliptical to escape. Drag a slider and watch the orbit morph.</p>
+    <pre><code># escape_threshold.py
+# Fixed burnout altitude: 200 km, fixed flight path angle: 25&deg;
+# Variable: burnout velocity (slider: 7,500 to 12,000 m/s)
+# Color-coded: red = suborbital, yellow = elliptical, green = escape
+# Pioneer 1 at 10,775 m/s | Escape at ~11,009 m/s
+# Libraries: numpy, matplotlib (with widgets for slider)
+# Difficulty: Intermediate | Duration: 2-3 hours</code></pre>
+    <p><strong>Key learning moment:</strong> As you approach escape velocity, the ellipse stretches dramatically. Then at escape velocity, the orbit snaps open from ellipse to hyperbola. Pioneer 1 was 234 m/s below that snap point.</p>
+
+    <hr>
+
+    <h3>A3. Minecraft: Pioneer 1 Spacecraft + Van Allen Belt Visualization</h3>
+    <p><strong>BUILD 1:</strong> Pioneer 1 at 4:1 scale (1 block = 0.185m). Gold blocks for the thermal coating. Instruments as iron bars, glass blocks, pressure plates. Build time: 2&ndash;3 hours.</p>
+    <p><strong>BUILD 2:</strong> Van Allen belt cross-section in the sky (1 block = 500 km). Earth as a 13-block-radius blue wool sphere. Inner belt in orange stained glass. Slot as clear air. Outer belt in light blue stained glass. Pioneer 1 trajectory as a red wool line reaching 228 blocks out. Build time: 4&ndash;6 hours, ~8,000 blocks.</p>
+    <p><strong>Key learning moment:</strong> Walking through the orange glass of the inner belt, across the clear slot, and into the blue glass of the outer belt gives spatial intuition no textbook diagram provides.</p>
+
+    <hr>
+
+    <h3>A4. Blender: Pioneer 1 43-Hour Arc Animation</h3>
+    <p><strong>What it is:</strong> A Cycles-rendered animation of the complete 43-hour flight with synchronized radiation intensity visualization.</p>
+    <ul>
+      <li><strong>Timeline:</strong> 2,580 frames at 30fps (86 seconds, compressing 43 hours)</li>
+      <li><strong>Models:</strong> Pioneer 1 spacecraft (gold truncated cone), Earth (Blue Marble), Van Allen belts (volumetric toroidal), Moon (distant reference)</li>
+      <li><strong>Animation:</strong> Launch &rarr; inner belt transit &rarr; slot &rarr; outer belt &rarr; coast to apogee &rarr; descent &rarr; reentry</li>
+      <li><strong>Data overlay:</strong> Scrolling radiation intensity graph at bottom of frame, color-matched to belt regions</li>
+      <li><strong>Render:</strong> Cycles GPU, 1920x1080, 64 samples denoised, estimated 4&ndash;8 hours</li>
+      <li><strong>Deliverables:</strong> .blend file, MP4, turntable render, poster stills</li>
+    </ul>
+    <p><strong>Build time:</strong> 12&ndash;20 hours</p>
+
+    <hr>
+
+    <h3>A5. GLSL Shader: Radiation Belt with Slot Region</h3>
+    <p><strong>What it is:</strong> A real-time fragment shader visualizing Earth&rsquo;s Van Allen radiation belts as volumetric structures with trapped particles spiraling along magnetic field lines.</p>
+    <ul>
+      <li>Earth at center (textured sphere SDF)</li>
+      <li>Dipole field lines (parametric curves, white)</li>
+      <li>Inner belt (L=1.2&ndash;2.0, warm colors, orange-red particles)</li>
+      <li>Outer belt (L=3.5&ndash;6.0, cool colors, blue-cyan particles)</li>
+      <li>Slot region (L=2.0&ndash;3.5, dark gap)</li>
+      <li>Pioneer 1 trajectory (animated gold dot on elliptical path)</li>
+      <li>Ray marching through belt volumes, bloom post-process</li>
+      <li>Target: 60fps on RTX 4060 Ti at 1080p</li>
+      <li>XScreenSaver-compatible wrapper for screensaver mode</li>
+    </ul>
+
+    <hr>
+
+    <h3>A6. Arduino: Radiation Detector with OLED Display</h3>
+    <p><strong>Hardware:</strong> Arduino Nano ($8) + Geiger module ($15&ndash;25) + SSD1306 OLED ($8) + piezo ($2) + button ($1). Total: ~$35.</p>
+    <h4>Display Modes</h4>
+    <p><strong>Mode 1: Real-Time Monitor</strong></p>
+    <pre><code>+----------------------------+
+| PIONEER-1 RAD   MODE:RT    |
+| CPM: 0024    0.14 uSv/h    |
+| ▁▂▃▅▇▅▃▂▁▂▃▅▃▂▁▂▃▂▁▂▁▂   |
+| BG:22 CPM  RUN: 00:15:23   |
++----------------------------+</code></pre>
+    <p><strong>Mode 2: Pioneer 1 Replay</strong> &mdash; Replays the 43-hour radiation profile. Shows altitude, belt identification (INNER / SLOT / OUTER / BEYOND), ascent/descent arrow.</p>
+    <p><strong>Mode 3: Comparison</strong> &mdash; Side-by-side of your current reading vs. Pioneer 1 at the same elapsed mission time. Shows the 270x intensity ratio between sea level and the belts.</p>
+
+    <hr>
+
+    <h3>A7. GMAT: Pioneer 1 Trajectory Recreation</h3>
+    <p><strong>What it is:</strong> A GMAT script recreating Pioneer 1&rsquo;s actual trajectory alongside the intended lunar transfer.</p>
+    <ul>
+      <li><strong>Scenario 1 (Actual):</strong> Able burn 105s (10 seconds short) &rarr; elliptical orbit, apogee 113,854 km, reentry ~43 hours</li>
+      <li><strong>Scenario 2 (Intended):</strong> Able burn 115s (full) &rarr; hyperbolic trajectory, lunar flyby at ~29,000 km</li>
+      <li><strong>Propagator:</strong> JGM-2 gravity (8x8), lunar + solar gravity, solar radiation pressure</li>
+      <li><strong>Plots:</strong> Dual trajectory overlay, altitude vs. time, velocity vs. time, radiation belt boundaries overlaid</li>
+      <li><strong>Difficulty:</strong> Advanced | <strong>Duration:</strong> 4&ndash;6 hours</li>
+    </ul>
+    <p><strong>The educational moment:</strong> Both trajectories start identically. They diverge only after the Able stage shutdown at T+285 vs T+295. Ten seconds of burn time difference. The plots show the trajectories separating like a fork &mdash; one curves back, the other escapes.</p>
+
+    <hr>
+
+    <h3>A8. Godot 4: Interactive Pioneer 1 Trajectory</h3>
+    <p><strong>What it is:</strong> An interactive experience where the player controls a velocity slider at burnout and watches the resulting orbit unfold in real time.</p>
+    <ul>
+      <li><strong>Phase 1 (Launch):</strong> Non-interactive 15-second compressed three-stage launch</li>
+      <li><strong>Phase 2 (The Choice):</strong> Burnout freeze-frame with velocity slider (10,000&ndash;12,000 m/s). Pioneer 1 actual marked at 10,775. Escape marked at 11,009.</li>
+      <li><strong>Phase 3 (Orbit):</strong> Release slider, orbit plays at 1000x. HUD shows altitude, velocity, radiation. Belt transits glow screen edge orange/blue.</li>
+      <li><strong>Phase 4 (Review):</strong> Post-flight overlay comparing your orbit vs. Pioneer 1 actual vs. intended lunar transfer.</li>
+      <li><strong>Achievement:</strong> &ldquo;The 234 m/s Problem&rdquo; &mdash; find the exact escape velocity</li>
+      <li><strong>Export:</strong> Linux x86_64 + HTML5/WebAssembly</li>
+    </ul>
+    <p><strong>Build time:</strong> 10&ndash;16 hours | <strong>Difficulty:</strong> Intermediate, GDScript</p>
+  </div>
+
+  <!-- B. MACHINE LEARNING -->
+  <div class="card">
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <h3>B1. Radiation Time Series Analysis</h3>
+    <p><strong>Model:</strong> LSTM sequence-to-sequence<br>
+    <strong>Input:</strong> Altitude time series (5-minute intervals, 43 hours = 516 steps) + latitude + longitude<br>
+    <strong>Output:</strong> Predicted radiation intensity (counts per minute)<br>
+    <strong>Training data:</strong> 5,000 synthetic trajectories with varying apogees (50,000&ndash;200,000 km), belt parameter variation (&plusmn;30% intensity, &plusmn;20% width), three solar wind states</p>
+    <p><strong>The student learns:</strong> LSTM sequence modeling, feature engineering, why the outer belt is harder to predict (more variable), comparison of model prediction vs. actual Pioneer 1 data.</p>
+    <p>Libraries: PyTorch, scikit-learn, matplotlib. GPU: RTX 4060 Ti. Training: ~20 minutes.</p>
+
+    <hr>
+
+    <h3>B2. Anomaly Detection for Telemetry Streams</h3>
+    <p><strong>Model:</strong> 1D Convolutional Autoencoder<br>
+    <strong>Input:</strong> 7-channel telemetry (thrust, chamber pressure, fuel flow, oxidizer flow, turbopump RPM, vibration, temperature) at 20 Hz<br>
+    <strong>Training:</strong> 10,000 nominal 115-second burns with &plusmn;3% sensor noise<br>
+    <strong>Test:</strong> 100 nominal + 100 early cutoffs (T+95 to T+114) + 50 degradation patterns</p>
+    <p><strong>Detection:</strong> Reconstruction error (MSE). Early cutoff should trigger anomaly flag 1&ndash;3 seconds before cutoff. The student learns why Pioneer 1&rsquo;s 10-second-early cutoff was hard to predict in real time.</p>
+    <p>Libraries: PyTorch, numpy, matplotlib. Training: ~15 minutes.</p>
+  </div>
+
+  <!-- C. COMPUTER SCIENCE -->
+  <div class="card">
+    <h2>C. Computer Science &mdash; What Pioneer 1 Teaches</h2>
+
+    <h3>C1. Error Propagation in Numerical Systems</h3>
+    <p>The chain: 10-second burn error &rarr; 234 m/s velocity shortfall (2.1%) &rarr; sub-escape instead of escape (sign change in specific energy) &rarr; 113,854 km instead of infinity &rarr; radiation survey instead of lunar flyby.</p>
+    <p><strong>Exercise:</strong> Implement a numerical error propagation simulator. Propagate orbit forward from initial state vector with uncertainty. Show how uncertainty ellipses explode near the escape velocity threshold.</p>
+
+    <h3>C2. Sensor Calibration and Dead Time Correction</h3>
+    <p>Pioneer 1&rsquo;s GM tube had ~100 &mu;s dead time. The correction formula:</p>
+    <pre><code>true_rate = measured_rate / (1 - measured_rate * dead_time)
+
+At 10,000 CPM:  true ~10,017 CPM  (0.17% error)
+At 100,000 CPM: true ~116,279 CPM (16% error)
+At 500,000 CPM: tube saturates, measured rate DECREASES</code></pre>
+    <p><strong>Exercise:</strong> Implement the dead time correction. Plot measured vs. true count rate. Identify the saturation threshold. Explain why Explorer 1 initially reported LOW radiation in the inner belt.</p>
+
+    <h3>C3. Real-Time Telemetry Processing</h3>
+    <p><strong>Exercise:</strong> Implement a simplified telemetry processing pipeline. Generate synthetic FM-modulated signal with three data channels (radiation, temperature, voltage). Demodulate, extract channels, display in real time. Add noise at levels corresponding to 113,854 km range.</p>
+  </div>
+
+  <!-- D. GAME THEORY -->
+  <div class="card">
+    <h2>D. Game Theory &mdash; What Trade-Offs</h2>
+
+    <h3>D1. The Risk-Reward Calculation of Launching with Known Issues</h3>
+    <table>
+      <tr><th></th><th>Able Performs Nominally</th><th>Able Underperforms</th></tr>
+      <tr><td><strong>Launch on schedule</strong></td><td>Moon mission success + prestige (HIGH)</td><td>Partial success + data (MEDIUM)</td></tr>
+      <tr><td><strong>Delay for more testing</strong></td><td>Better confidence, later window (MEDIUM)</td><td>Delay costs + political pressure (LOW)</td></tr>
+    </table>
+    <p>Pioneer 1&rsquo;s partial success &mdash; reaching a record 113,854 km and returning Van Allen belt data &mdash; validated the &ldquo;launch and learn&rdquo; approach. The radiation data was more scientifically valuable than the intended lunar flyby would have been with 1958 instruments.</p>
+    <p><strong>Exercise:</strong> Model as a multi-attribute decision problem. Show that launching with known risk can be optimal when partial success has high utility and delay has high cost.</p>
+
+    <h3>D2. Resource Allocation for Early NASA</h3>
+    <p>NASA was established October 1, 1958 &mdash; 10 days before Pioneer 1. It inherited Pioneer, Explorer, and Vanguard. Multiple competing teams, limited budget.</p>
+    <p><strong>Exercise:</strong> Model as a portfolio optimization problem. Allocate budget B across three programs to maximize expected scientific return. Pioneer 1 shows that partial success changes the calculation.</p>
+  </div>
+
+  <!-- E. CREATIVE ARTS -->
+  <div class="card">
+    <h2>E. Creative Arts &mdash; What to Create</h2>
+
+    <h3>E1. Data Visualization: The 43-Hour Arc (D3.js)</h3>
+    <p>Interactive web visualization with two linked panels:</p>
+    <ul>
+      <li><strong>Panel 1 (Trajectory):</strong> Earth at center, Pioneer 1 orbit as animated elliptical arc, Van Allen belt regions as translucent rings, Moon position, intended trajectory as dashed line</li>
+      <li><strong>Panel 2 (Data Timeline):</strong> Radiation intensity vs. time (four labeled peaks), altitude vs. time (symmetric arc), velocity vs. time</li>
+      <li><strong>Interaction:</strong> Scrub timeline, hover for data, play/pause at 100x&ndash;1000x, toggle belt regions and intended trajectory</li>
+    </ul>
+    <p>Static HTML + JavaScript, D3.js v7 (CDN). Build time: 6&ndash;8 hours.</p>
+
+    <hr>
+
+    <h3>E2. Sword Fern Frond as Data Display (Generative Art)</h3>
+    <p>Map Pioneer 1&rsquo;s radiation data onto a sword fern frond &mdash; each pinna represents a time segment, size/color encodes radiation intensity.</p>
+    <ul>
+      <li>Central rachis = mission timeline (bottom=launch, top=reentry)</li>
+      <li>Left pinnae = ascending data, right pinnae = descending data</li>
+      <li>Pinna length proportional to altitude, color from radiation intensity</li>
+      <li>Low radiation: deep green (#1B4D2E). Inner belt: warm amber (#C87A2E). Outer belt: cool blue (#2E5C8A). Slot: pale green (#6B8F5E).</li>
+    </ul>
+    <p>Output: SVG, PNG at 4K, animated version. Tools: p5.js or Processing. Build time: 4&ndash;6 hours.</p>
+
+    <hr>
+
+    <h3>E3. Varied Thrush Song Mapped to Radiation Intensity</h3>
+    <p>Sound design mapping Pioneer 1&rsquo;s radiation intensity profile to the harmonic structure of a varied thrush song. 43 hours compressed to 3 minutes, ~60 notes.</p>
+    <ul>
+      <li>Base pitch: 3.5 kHz (varied thrush fundamental)</li>
+      <li>Radiation intensity &rarr; pitch offset (+500 Hz inner belt, +300 Hz outer belt, -200 Hz slot)</li>
+      <li>Altitude &rarr; sustain duration (0.5 sec at low altitude to 3 sec at apogee)</li>
+      <li>Background: subtle PNW old-growth forest ambience, real varied thrush field recordings (CC0)</li>
+      <li>Synthesis: SuperCollider (saw wave + gentle FM for buzzy quality), cathedral reverb</li>
+    </ul>
+    <p>Output: WAV + MP3. Build time: 4&ndash;6 hours.</p>
+
+    <hr>
+
+    <h3>E4. GLSL Screensaver: Sword Fern Spore Release</h3>
+    <p>Linux-compatible screensaver showing a sword fern frond releasing spores from its sori into simulated forest wind currents.</p>
+    <ul>
+      <li>Sword fern frond as 2D SDF with recursive pinna structure</li>
+      <li>200&ndash;500 spore particles in 2D Perlin flow field</li>
+      <li>Dappled sunlight through canopy (Voronoi-based caustics)</li>
+      <li>Occasional prothallus (tiny green heart-shape) where a spore lands</li>
+      <li>Color palette: #2D1B0E (dark bark), #3A5F0B (fern green), #8B6914 (spore brown), #F5E6CC (sunlight)</li>
+      <li>60fps at 1080p, XScreenSaver-compatible</li>
+    </ul>
+    <p>Build time: 6&ndash;8 hours.</p>
+  </div>
+
+  <!-- F. PROBLEM SOLVING -->
+  <div class="card">
+    <h2>F. Problem Solving &mdash; Engineering Methodology</h2>
+
+    <h3>F1. Root Cause Analysis: The 10-Second Shortfall</h3>
+    <p><strong>Method:</strong> Ishikawa (Fishbone) Diagram + 5 Whys + Fault Tree</p>
+    <h4>5 Whys</h4>
+    <ol>
+      <li>Why did Pioneer 1 miss the Moon? Velocity was 234 m/s short.</li>
+      <li>Why was velocity short? Able second stage cut off 10 seconds early.</li>
+      <li>Why did it cut off early? Candidate causes: propellant depletion, guidance command error, mixture ratio drift, sensor-triggered cutoff.</li>
+      <li>Why wasn&rsquo;t this caught in pre-flight testing? Pioneer 0 never reached second stage. Pioneer 1 was the first full stack flight.</li>
+      <li>Why was test history limited? Pioneer 0&rsquo;s failure meant zero upper stage data. Ground test facilities couldn&rsquo;t simulate staging transients perfectly.</li>
+    </ol>
+    <p><strong>Root cause:</strong> Insufficient integrated testing compounded by loss of Pioneer 0 flight data.</p>
+    <p><strong>The meta-lesson:</strong> Pioneer 1&rsquo;s partial success generated more useful corrective data than Pioneer 0&rsquo;s total failure. A vehicle that flies for 43 hours teaches more than one that flies for 77 seconds. Partial success is the most efficient teacher.</p>
+    <p><strong>Exercise:</strong> Draw the Ishikawa diagram. Run the 5 Whys for each candidate cause. Build a fault tree with the Able cutoff as top event. Produce a two-page RCA report. Duration: 2 hours.</p>
+  </div>
+
+  <!-- G. GSD SELF-IMPROVEMENT -->
+  <div class="card">
+    <h2>G. GSD Self-Improvement &mdash; What This Mission Teaches the System</h2>
+
+    <h3>G1. New Pattern: Tolerance Budgets as Engineering Practice</h3>
+    <pre><code>Pattern derived from Pioneer 1:
+  In any multi-stage pipeline, each stage consumes margin from
+  a shared tolerance budget. Pioneer 1's tolerance budget for
+  velocity was ~234 m/s above escape. The Able stage consumed
+  that entire budget with a 10-second underperformance.
+
+  GSD application:
+    When planning multi-wave execution, explicitly define the
+    tolerance budget for each critical parameter:
+    - Time margin (buffer between estimated and deadline)
+    - Quality margin (tests passing above minimum threshold)
+    - Scope margin (features delivered above minimum viable)
+
+    Track margin consumption as waves execute. If Wave 1
+    consumes 80% of the time margin, Wave 2 must be more
+    conservative. Alert when margin drops below 20%.
+
+    This is the Pioneer 1 lesson: you can succeed at 97.9%
+    of your target -- but 97.9% of escape velocity is still
+    not escape velocity. Some thresholds are binary.</code></pre>
+
+    <h3>G2. New Pattern: Partial-Success Metrics</h3>
+    <pre><code>Pattern derived from Pioneer 1:
+  When a phase execution fails its primary acceptance criteria,
+  before marking it as failed, evaluate:
+  1. What DID it produce? (Pioneer 1: 43 hours of radiation data)
+  2. Is the partial output useful on its own? (Yes: belt mapping)
+  3. Can the primary objective be reattempted? (Yes: Pioneer 2)
+  4. Should the partial output be committed as a deliverable? (Yes)
+
+  Mark the phase as PARTIAL-SUCCESS with:
+  - Primary objective: MISSED (with gap analysis)
+  - Secondary deliverables: LIST (with value assessment)
+  - Corrective action: PLAN (for reattempt)
+  - Lesson: CAPTURED (in patterns directory)
+
+  The Pioneer 1 rule: "A flight that returns data is never a failure."</code></pre>
+
+    <h3>G3. New Rule Candidate: The Threshold Rule</h3>
+    <pre><code>Proposed hard rule:
+  "When a critical parameter has a binary threshold (pass/fail,
+  escape/capture, works/breaks), margin analysis must include
+  the worst-case combination of all stage tolerances."
+
+  Pioneer 1's 234 m/s shortfall was within the individual stage
+  tolerance bands, but the COMBINATION of tolerances consumed
+  all margin. No single stage failed catastrophically -- the
+  system failed by accumulation.
+
+  GSD application: Before executing a multi-wave plan where
+  success depends on a binary threshold, calculate worst-case
+  margin assuming each wave delivers its minimum acceptable
+  output. If worst-case margin is negative, add buffer waves
+  or reduce scope before executing.
+
+  This is the escape velocity rule: 97.9% is not 100%, and for
+  binary thresholds, there is no partial credit.</code></pre>
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+  <div class="track-links">
+    <span class="track-links-label">Mission Tracks:</span>
+    <a href="research.html">Research</a>
+    <a href="organism.html">Organism</a>
+    <a href="mathematics.html">Mathematics</a>
+    <a href="papers.html">Papers</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="simulation.html" class="active">Simulation</a>
+  </div>
+</nav>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--fern);">&ldquo;The understory holds what the canopy cannot see.&rdquo;</p>
+</footer>
+
+</body>
+</html>

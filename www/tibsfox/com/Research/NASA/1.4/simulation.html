@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Arts — v1.4 Pioneer 3 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue:#0B3D91; --nasa-red:#FC3D21; --bark-dark:#1A1408; --bark-mid:#2A2010; --lichen-gold:#B8C99D; --lichen-light:#D4DEB2; --forest-deep:#1A2A1A; --forest-mid:#2A3D2A; --text:#E8E8E8; --text-dim:#A0A0A0; --border:#3D3A20; --amber:#D4A017; --amber-light:#F0D060; --amber-dark:#8B6914; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bark-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(184,201,157,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(212,222,178,0.05) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(26,42,26,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(184,201,157,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(212,222,178,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(26,42,26,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(184,201,157,0.06) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(42,61,42,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--lichen-gold); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--lichen-light); }
+  .breadcrumb span { margin: 0 0.4rem; }
+  header { background: linear-gradient(160deg, var(--bark-dark) 0%, var(--bark-mid) 30%, var(--forest-deep) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--lichen-gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(184,201,157,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(184,201,157,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(184,201,157,0.10); border: 1px solid var(--lichen-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--lichen-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--lichen-light); }
+  .track-badge { background: rgba(212,160,23,0.2); border: 1px solid var(--amber); color: var(--amber); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--lichen-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .section-title { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--lichen-light); margin: 2rem 0 1rem; position: relative; z-index: 1; }
+  .section-title:first-of-type { margin-top: 0; }
+  .card { background: rgba(42,32,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--lichen-light); margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--lichen-gold); margin-top: 1.25rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.92rem; line-height: 1.8; color: var(--text); margin-bottom: 0.85rem; }
+  .card ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.88rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .card li strong { color: var(--lichen-light); }
+  .sim-meta { font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--amber); margin-bottom: 0.75rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+  .sim-meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+  pre { background: rgba(26,20,8,0.7); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0 1.25rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.78rem; line-height: 1.5; color: var(--lichen-light); }
+  .sim-card { background: rgba(26,42,26,0.3); border: 1px solid var(--forest-mid); }
+  .sim-card h2 { color: var(--lichen-gold); }
+  .ml-card { background: rgba(11,61,145,0.08); border: 1px solid rgba(11,61,145,0.25); }
+  .ml-card h2 { color: #7EB8DA; }
+  .cs-card { background: rgba(42,32,16,0.6); border: 1px solid var(--amber-dark); }
+  .cs-card h2 { color: var(--amber); }
+  .game-card { background: rgba(184,201,157,0.04); border: 1px solid var(--lichen-gold); }
+  .game-card h2 { color: var(--lichen-light); }
+  .art-card { background: rgba(26,20,8,0.6); border: 1px solid var(--border); }
+  .art-card h2 { color: var(--lichen-gold); }
+  .method-card { background: rgba(11,61,145,0.06); border: 1px solid rgba(11,61,145,0.2); }
+  .method-card h2 { color: #7EB8DA; }
+  .gsd-card { background: rgba(26,42,26,0.3); border: 1px solid var(--forest-mid); }
+  .gsd-card h2 { color: var(--lichen-gold); }
+  .nav-card { background: rgba(42,32,16,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--lichen-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--lichen-light); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--lichen-gold); text-decoration: none; }
+  @media (max-width: 800px) { .header-content { padding: 1.5rem 1rem; } main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } pre { font-size: 0.72rem; padding: 0.75rem; } .sim-meta { flex-direction: column; gap: 0.25rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.4 Pioneer 3</a>
+  <span>&rsaquo;</span>
+  Track 5: Simulation &amp; Arts
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.4</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 5 &mdash; Simulation &amp; Arts</span>
+    </div>
+    <h1>What to Build, Train, Visualize, and Create</h1>
+    <p class="subtitle">Pioneer 3 (Juno II) &mdash; First JPL/Army Mission Under NASA</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti (8GB), 60GB RAM, i7-6700K</span>
+      <span><span class="label">Organism:</span> <em>Usnea longissima</em></span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- A. SIMULATIONS -->
+  <h2 class="section-title">A. Simulations &mdash; What to Build Locally</h2>
+
+  <div class="card sim-card">
+    <h2>A1. Python: Dual-Belt Radiation Model</h2>
+    <div class="sim-meta">
+      <span><strong>Difficulty:</strong> Beginner-Intermediate</span>
+      <span><strong>Duration:</strong> 2&ndash;3 hours</span>
+      <span><strong>Libraries:</strong> numpy, matplotlib, scipy</span>
+    </div>
+    <p>A Python simulation of Pioneer 3&rsquo;s radial traverse through both Van Allen radiation belts, modeling the dual-peak intensity profile as a superposition of two Gaussian populations. Generate the profile, add Poisson noise, fit the dual Gaussian to recover belt parameters, and compare the outbound and inbound passes.</p>
+    <p><strong>Key learning moments:</strong></p>
+    <ul>
+      <li>The outbound and inbound profiles match &mdash; symmetry is the proof</li>
+      <li>Poisson noise is larger outside the belts and smaller inside</li>
+      <li>The curve fit recovers belt parameters within uncertainties &mdash; six numbers describe the entire radiation environment</li>
+      <li>The residuals are Poisson-distributed, confirming the model is adequate</li>
+    </ul>
+    <p><strong>Extension:</strong> Add a third Gaussian to model the temporary third belt discovered by the Van Allen Probes in 2013. Show that Pioneer 3&rsquo;s data does NOT support a third peak.</p>
+  </div>
+
+  <div class="card sim-card">
+    <h2>A2. Minecraft: Layered Glass Sphere Dual-Belt Visualization</h2>
+    <div class="sim-meta">
+      <span><strong>Scale:</strong> 1 block = 400 km</span>
+      <span><strong>Duration:</strong> 3&ndash;4 hours</span>
+      <span><strong>Materials:</strong> ~5,000 blocks</span>
+    </div>
+    <p>Earth surrounded by two concentric glass sphere shells &mdash; orange inner belt, blue outer belt, empty slot between them. Pioneer 3&rsquo;s trajectory as a red wool line tracing the radial path through both shells. Glowstone markers at belt boundaries. Walking through the orange inner belt glass, across the empty slot, and into the blue outer belt glass gives spatial intuition about the dual-belt structure.</p>
+  </div>
+
+  <div class="card sim-card">
+    <h2>A3. Blender: Pioneer 3 Cone at 5.87 kg Scale</h2>
+    <div class="sim-meta">
+      <span><strong>Engine:</strong> Cycles (GPU)</span>
+      <span><strong>Duration:</strong> 8&ndash;12 hours</span>
+      <span><strong>Output:</strong> 30-sec animation + stills</span>
+    </div>
+    <p>Detailed 1:1 scale model of Pioneer 3 &mdash; a tiny truncated cone 23 cm in diameter and 58 cm tall. Scene includes reference objects: bowling ball (same mass), basketball (same width), milk gallon (lighter). Animation: Pioneer 3 on desk with scale references, then flies outward through dual belt volumes (inner amber, outer blue). The scale comparison makes the absurdity tangible: hold a bowling ball, and you are holding the mass of the spacecraft that mapped half of Earth&rsquo;s radiation environment.</p>
+  </div>
+
+  <div class="card sim-card">
+    <h2>A4. GLSL Shader: Dual Radiation Ring Visualization</h2>
+    <div class="sim-meta">
+      <span><strong>Target:</strong> 60fps at 1080p (RTX 4060 Ti)</span>
+      <span><strong>Ray march:</strong> 48&ndash;64 steps</span>
+      <span><strong>Particles:</strong> 250 default</span>
+    </div>
+    <p>Real-time fragment shader: Earth surrounded by two concentric radiation rings (inner amber, outer blue), with clear dark slot between them. Pioneer 3 traces a radial path through both rings on a 60-second cycle. Inner belt particles: orange point sprites, fast bounce. Outer belt particles: blue point sprites, slower bounce. Dipole field lines guide particle motion. XScreenSaver-compatible wrapper for screensaver mode.</p>
+  </div>
+
+  <div class="card sim-card">
+    <h2>A5. Arduino: Dual-Peak LED Display ($30)</h2>
+    <div class="sim-meta">
+      <span><strong>Hardware:</strong> Arduino Nano + 2x LED bars + OLED</span>
+      <span><strong>Duration:</strong> 3&ndash;4 hours</span>
+    </div>
+    <p>Two LED bar graphs showing Pioneer 3&rsquo;s radiation intensity profile. Three modes: Manual altitude sweep (potentiometer), automatic 60-second mission replay, and Pioneer 1 vs Pioneer 3 comparison. Dual Gaussian radiation model stored in PROGMEM. Poisson noise added in real time. NeoPixel variant: amber LEDs for inner belt, off for slot, blue for outer belt. The color shift IS the science.</p>
+  </div>
+
+  <div class="card sim-card">
+    <h2>A6. Godot 4: Fly Through the Belts</h2>
+    <div class="sim-meta">
+      <span><strong>Duration:</strong> 12&ndash;18 hours to build</span>
+      <span><strong>Export:</strong> Linux x86_64 + HTML5/WebAssembly</span>
+      <span><strong>Difficulty:</strong> Intermediate</span>
+    </div>
+    <p>Interactive experience: fly a virtual Pioneer 3 radially outward through both Van Allen belts. Screen-edge glow changes: amber in inner belt, dark in slot, blue in outer belt. Geiger counter clicks accelerate in belts, fall silent in slot. HUD: altitude, velocity, radiation gauge, belt indicator. Post-flight data review compares outbound and inbound profiles &mdash; they match, and that match is the proof.</p>
+  </div>
+
+  <div class="card sim-card">
+    <h2>A7. GMAT: Juno II vs Thor-Able Trajectory Comparison</h2>
+    <div class="sim-meta">
+      <span><strong>Scenarios:</strong> 3 (Pioneer 3 actual, Pioneer 1 actual, Pioneer 3 nominal)</span>
+      <span><strong>Duration:</strong> 4&ndash;6 hours</span>
+      <span><strong>Difficulty:</strong> Advanced</span>
+    </div>
+    <p>Recreate Pioneer 3&rsquo;s trajectory alongside Pioneer 1&rsquo;s, plus a &ldquo;what if&rdquo; nominal scenario. Dual trajectory overlay, altitude/velocity vs time, radiation belt boundaries overlaid. The educational moment: two different rockets, two different teams, same class of failure (first/second stage underburn), similar science return.</p>
+  </div>
+
+  <!-- B. MACHINE LEARNING -->
+  <h2 class="section-title">B. Machine Learning &mdash; What to Train</h2>
+
+  <div class="card ml-card">
+    <h2>B1. Dual-Peak Detection in Noisy Data</h2>
+    <div class="sim-meta">
+      <span><strong>Model:</strong> 1D Convolutional Neural Network</span>
+      <span><strong>Training:</strong> 20,000 synthetic profiles, ~10 min on RTX 4060 Ti</span>
+    </div>
+    <p>Binary classifier: does a noisy 1D signal contain one peak or two? Train on synthetic radiation profiles with randomized Gaussian parameters and Poisson noise. Hard cases: dual peaks close together (slot barely visible) or very different amplitude (one dominates). Comparison: the model&rsquo;s decision boundary vs. human visual judgment. Pioneer 3&rsquo;s data was clear enough for human detection &mdash; when does the signal require ML?</p>
+  </div>
+
+  <div class="card ml-card">
+    <h2>B2. Poisson Noise Modeling and Denoising</h2>
+    <div class="sim-meta">
+      <span><strong>Model:</strong> 1D Denoising Autoencoder</span>
+      <span><strong>Training:</strong> 50,000 paired profiles, ~20 min</span>
+      <span><strong>Key insight:</strong> Use Poisson NLL loss, not MSE</span>
+    </div>
+    <p>Recover clean radiation profiles from Poisson-corrupted data. The correct loss function depends on the noise model. At very low count rates (outside belts), denoising helps the most. At very high count rates (belt cores), the raw data is already clean. This asymmetry &mdash; denoising matters more where data is sparse &mdash; is a general principle in experimental physics.</p>
+  </div>
+
+  <!-- C. COMPUTER SCIENCE -->
+  <h2 class="section-title">C. Computer Science &mdash; What Pioneer 3 Teaches</h2>
+
+  <div class="card cs-card">
+    <h2>C1. Partnership Protocols: Dual-Redundancy Design</h2>
+    <p>Design a monitoring system for two services sharing infrastructure &mdash; analogous to two radiation populations sharing a magnetic field. Service A (inner belt analog): high-throughput, compact, stable. Service B (outer belt analog): variable, broad, storm-sensitive. Slot detection: if both services appear healthy but shared infrastructure shows strain, you have found the &ldquo;slot.&rdquo; Duration: 3&ndash;4 hours, Intermediate.</p>
+  </div>
+
+  <div class="card cs-card">
+    <h2>C2. Dual-Organism Design: Symbiotic Microservices</h2>
+    <p><em>Usnea longissima</em>&rsquo;s symbiosis mapped to software: a producer-consumer symbiosis. Service A (photobiont): generates content but cannot persist it. Service B (mycobiont): provides storage and routing but cannot generate content. Neither functions alone (test this). Together they provide a working content service. Health check: if either partner stops contributing, the system degrades. Duration: 4&ndash;5 hours, Intermediate.</p>
+  </div>
+
+  <!-- D. GAME THEORY -->
+  <h2 class="section-title">D. Game Theory &mdash; What Trade-Offs</h2>
+
+  <div class="card game-card">
+    <h2>D1. Army vs Air Force Competition</h2>
+    <p>Model the Army/Air Force space race as a repeated game. Pioneer 3 was Army/JPL; Pioneers 0&ndash;2 were Air Force/STL. Show that pure competition leads to duplication but also redundancy. Pure cooperation would produce a single mission (higher individual success probability but single-point failure). The actual outcome &mdash; competition until NASA forced cooperation &mdash; may have been optimal for scientific discovery even though it was suboptimal for budget.</p>
+  </div>
+
+  <div class="card game-card">
+    <h2>D2. The Symbiosis Stability Game</h2>
+    <p>Model the lichen symbiosis as a Prisoner&rsquo;s Dilemma where the iterated solution (both cooperate) has been stable for ~400 million years. The stability comes from the fact that defection kills the defector too. Implement with different strategies (tit-for-tat, always cooperate, always defect, random). Show that always-cooperate dominates when defection is self-destructive.</p>
+  </div>
+
+  <!-- E. CREATIVE ARTS -->
+  <h2 class="section-title">E. Creative Arts &mdash; What to Create</h2>
+
+  <div class="card art-card">
+    <h2>E1. Lichen Fractal Art &mdash; &ldquo;Old Man&rsquo;s Beard &mdash; Data Drape&rdquo;</h2>
+    <div class="sim-meta">
+      <span><strong>Tools:</strong> p5.js or Processing</span>
+      <span><strong>Duration:</strong> 4&ndash;6 hours</span>
+      <span><strong>Output:</strong> SVG, PNG (4K), animated version</span>
+    </div>
+    <p>Generative art: branching lichen-like structures using L-systems with stochastic branching rules. Pioneer 3&rsquo;s altitude profile maps to strand length. Radiation intensity maps to branching probability. Inner belt zone: many short branches (high radiation = branching stress). Slot zone: long unbranched section. Colors: lichen green-gray (#A8B89C) with faint amber tint in high-radiation zones.</p>
+  </div>
+
+  <div class="card art-card">
+    <h2>E2. Northern Spotted Owl Hoot Rhythm &mdash; &ldquo;Four Notes in the Dark&rdquo;</h2>
+    <div class="sim-meta">
+      <span><strong>Tools:</strong> SuperCollider + Audacity</span>
+      <span><strong>Duration:</strong> 4&ndash;6 hours</span>
+      <span><strong>Output:</strong> WAV + MP3 (3 minutes)</span>
+    </div>
+    <p>Data sonification: Pioneer 3&rsquo;s radiation profile mapped to the Northern Spotted Owl&rsquo;s four-note call. 38.6-hour flight compressed to 3 minutes. Radiation intensity drives final note pitch. Two owls represent two belts &mdash; amber owl calls in inner belt zones, blue-toned owl calls in outer belt zones. Both fall silent in the slot. Background: PNW old-growth ambience with Geiger clicks during belt transits.</p>
+  </div>
+
+  <div class="card art-card">
+    <h2>E3. Dual-Band Color Visualization &mdash; &ldquo;Two Colors, One Flight&rdquo;</h2>
+    <div class="sim-meta">
+      <span><strong>Format:</strong> 3000 x 400 px (print at 20&Prime; x 2.7&Prime;)</span>
+      <span><strong>Duration:</strong> 3&ndash;4 hours</span>
+      <span><strong>Output:</strong> PNG, SVG, print-ready PDF</span>
+    </div>
+    <p>Horizontal strip: left edge = launch, center = apogee, right edge = reentry. Inner belt contribution drives amber channel (#D4A853). Outer belt drives blue channel (#5B7C99). Slot region is dark. Beyond belts: black with occasional cosmic ray sparkle. Vertical axis encodes energy spectrum. It looks like a sunset strip at first glance &mdash; but every pixel IS the data.</p>
+  </div>
+
+  <!-- F. PROBLEM SOLVING -->
+  <h2 class="section-title">F. Problem Solving &mdash; Engineering Methodology</h2>
+
+  <div class="card method-card">
+    <h2>F1. Confirming Something Exists with Limited Data</h2>
+    <div class="sim-meta">
+      <span><strong>Duration:</strong> 2 hours</span>
+      <span><strong>Method:</strong> Bayesian Information Criterion</span>
+    </div>
+    <p>How much data do you need to confirm a structure exists? Pioneer 3&rsquo;s symmetry argument: if the dual peaks were an artifact, the outbound and inbound profiles would NOT match. Compute BIC for dual-Gaussian (6 parameters) vs. single-Gaussian (3 parameters). Reduce data quality until BIC flips. Pioneer 3&rsquo;s instruments were just good enough &mdash; the noise level at which BIC flips is close to the actual Poisson noise of Pioneer 3&rsquo;s data.</p>
+  </div>
+
+  <!-- G. GSD SELF-IMPROVEMENT -->
+  <h2 class="section-title">G. GSD Self-Improvement &mdash; What This Mission Teaches the System</h2>
+
+  <div class="card gsd-card">
+    <h2>G1. New Pattern: Dual-Agent Collaboration (Symbiotic Agents)</h2>
+    <p>Two agents that cannot complete objectives independently but together produce results neither could achieve alone. Agent A (Photobiont): generates raw content. Agent B (Mycobiont): provides frameworks and integration. Shared medium: a defined exchange format. Health check: if either agent stops contributing, the system degrades but does not crash. Cached content serves as buffer.</p>
+  </div>
+
+  <div class="card gsd-card">
+    <h2>G2. New Pattern: Symmetry as Verification</h2>
+    <p>Pioneer 3&rsquo;s proof was the symmetry between outbound and inbound profiles. For any reversible operation in a build pipeline: perform forward, perform reverse, compare. If they match, the forward operation is likely correct. If they differ, the difference localizes the error. Add round-trip verification to data transformation phases.</p>
+  </div>
+
+  <div class="card gsd-card">
+    <h2>G3. New Rule Candidate: The Partnership Rule</h2>
+    <p>&ldquo;When two components must cooperate to deliver a result, test them together AND separately. The joint test confirms the partnership works. The separate tests confirm each component contributes. Both are necessary.&rdquo; If test 1 or test 2 succeeds fully alone, the partnership is decorative, not structural. Restructure.</p>
+  </div>
+
+  <div class="nav-card">
+    <a href="curriculum.html">&larr; Track 4: Curriculum</a>
+    <a href="index.html">Mission Index &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--lichen-gold);">&ldquo;The slot is the visual proof: if it were one belt, there would be no gap. The gap IS the discovery.&rdquo;</p>
+</footer>
+
+</body>
+</html>

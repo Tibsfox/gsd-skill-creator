@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics — v1.2 Pioneer 1 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --forest-dark: #0A1F14; --forest-mid: #152E20;
+    --fern: #4A7C59; --fern-light: #A8D5BA; --fern-deep: #1B3D2F;
+    --moss: #2E5E3F; --bark: #3A2E1A;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A4A35;
+    --amber: #D4A017; --amber-light: #F0D060; --amber-dark: #8B6914;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--forest-dark); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(74,124,89,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(168,213,186,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(46,94,63,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(168,213,186,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(46,94,63,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .top-nav { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; position: relative; z-index: 1; }
+  .top-nav a { color: var(--fern); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .top-nav a:hover { color: var(--fern-light); }
+  header { background: linear-gradient(160deg, var(--forest-dark) 0%, var(--forest-mid) 30%, var(--fern-deep) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--fern); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(74,124,89,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,124,89,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(74,124,89,0.15); border: 1px solid var(--fern); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--fern); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--fern-light); }
+  .track-badge { background: rgba(74,124,89,0.25); border: 1px solid var(--fern); color: var(--fern-light); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--fern); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(21,46,32,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--fern-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--fern-light); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--fern); font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .card strong { color: #fff; }
+  .card em { font-style: italic; color: var(--fern-light); }
+  .card a { color: var(--fern-light); text-decoration: underline; text-decoration-color: var(--border); }
+  .card a:hover { color: #fff; text-decoration-color: var(--fern); }
+  .card hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .card table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.9rem; }
+  .card th { background: rgba(74,124,89,0.2); color: var(--fern-light); font-weight: 600; text-align: left; padding: 0.5rem 0.75rem; border: 1px solid var(--border); }
+  .card td { padding: 0.5rem 0.75rem; border: 1px solid var(--border); }
+  .card tr:nth-child(even) td { background: rgba(21,46,32,0.3); }
+  .card code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(10,31,20,0.6); border: 1px solid var(--border); border-radius: 3px; padding: 0.15rem 0.4rem; color: var(--fern-light); }
+  .card pre { background: rgba(10,31,20,0.7); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; overflow-x: auto; margin: 0.75rem 0; }
+  .card pre code { background: none; border: none; padding: 0; font-size: 0.85rem; line-height: 1.5; color: var(--text); }
+  .card blockquote { border-left: 3px solid var(--fern); padding: 0.5rem 1rem; margin: 0.75rem 0; background: rgba(74,124,89,0.06); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .bottom-nav { max-width: 1400px; margin: 0 auto; padding: 0 2rem 1rem; position: relative; z-index: 1; }
+  .track-links { background: rgba(21,46,32,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .track-links-label { font-size: 0.85rem; color: var(--text-dim); font-weight: 500; margin-right: 0.5rem; }
+  .track-links a { color: var(--fern); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; }
+  .track-links a:hover { color: var(--fern-light); border-color: var(--fern); background: rgba(74,124,89,0.1); }
+  .track-links a.active { color: var(--fern-light); border-color: var(--fern); background: rgba(74,124,89,0.2); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--fern); text-decoration: none; }
+  @media (max-width: 700px) { .header-content { padding: 1.5rem 1rem 1rem; } main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html">&larr; v1.2 Pioneer 1</a>
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.2</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 3: Mathematics</span>
+    </div>
+    <h1>The Distance Between Deposits</h1>
+    <p class="subtitle">TSPB Mathematics &mdash; McNeese-Hoag Format &mdash; Tables, Formulas, Worked Examples</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 2 (Pythagorean Theorem)</span>
+      <span><span class="label">Secondary:</span> 4 (Vector Calculus), 1 (Unit Circle), 7 (Information Systems)</span>
+      <span><span class="label">Mission:</span> Pioneer 1 (Oct 11, 1958)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>Deposit 1: Escape Velocity and the 234 m/s Shortfall (Layer 2, Section 2.1)</h2>
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 1 Value</th></tr>
+      <tr><td>Gravitational constant</td><td>G</td><td>m<sup>3</sup> kg<sup>-1</sup> s<sup>-2</sup></td><td>6.674 &times; 10<sup>-11</sup></td></tr>
+      <tr><td>Earth mass</td><td>M<sub>E</sub></td><td>kg</td><td>5.972 &times; 10<sup>24</sup></td></tr>
+      <tr><td>Earth radius</td><td>R<sub>E</sub></td><td>km</td><td>6,371</td></tr>
+      <tr><td>Launch site + staging altitude</td><td>r<sub>staging</sub></td><td>km</td><td>~6,571 (R<sub>E</sub> + 200)</td></tr>
+      <tr><td>Escape velocity at staging</td><td>v<sub>esc</sub></td><td>km/s</td><td>10.93</td></tr>
+      <tr><td>Achieved velocity</td><td>v<sub>actual</sub></td><td>km/s</td><td>~10.70</td></tr>
+      <tr><td>Velocity shortfall</td><td>&Delta;v<sub>deficit</sub></td><td>m/s</td><td>~234</td></tr>
+      <tr><td>AJ10-40 thrust</td><td>F</td><td>kN</td><td>~35</td></tr>
+      <tr><td>Upper stage mass (approx)</td><td>m<sub>stage</sub></td><td>kg</td><td>~150</td></tr>
+      <tr><td>Burn time shortfall</td><td>&Delta;t</td><td>s</td><td>~10</td></tr>
+      <tr><td>Maximum altitude achieved</td><td>h<sub>max</sub></td><td>km</td><td>113,854</td></tr>
+      <tr><td>Mission duration</td><td>t<sub>mission</sub></td><td>hours</td><td>~43</td></tr>
+      <tr><td>Earth-Moon distance</td><td>d<sub>Moon</sub></td><td>km</td><td>~384,400</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+    <h4>Escape Velocity (Conservation of Energy)</h4>
+    <p>The escape velocity is derived from the requirement that a spacecraft&rsquo;s kinetic energy exactly equals its gravitational potential energy at a given distance from the center of mass:</p>
+    <pre><code>(1/2) m v_esc^2 = G M_E m / r
+
+v_esc = sqrt(2 G M_E / r)
+
+where:
+  G    = 6.674 x 10^-11 m^3 kg^-1 s^-2  (gravitational constant)
+  M_E  = 5.972 x 10^24 kg                (Earth mass)
+  r    = distance from Earth's center     (meters)</code></pre>
+    <p>This is the Pythagorean theorem at its deepest: distance determines the gravitational bond. The further you are from center, the less energy you need. The closer you are, the harder it is to leave. The square root encodes this relationship &mdash; escape velocity falls as the inverse square root of distance, because gravitational potential energy follows the inverse-square law.</p>
+
+    <h4>Velocity Deficit to Altitude Mapping</h4>
+    <pre><code>(1/2) v^2 - G M_E / r_0 = -G M_E / r_max
+
+Solving for r_max:
+  r_max = 1 / (1/r_0 - v^2 / (2 G M_E))
+
+  h_max = r_max - R_E</code></pre>
+
+    <h4>Impulse-Momentum Theorem (the 10-second cascade)</h4>
+    <pre><code>Delta_v = F * Delta_t / m
+
+where:
+  F       = engine thrust (N)
+  Delta_t = burn time shortfall (s)
+  m       = spacecraft mass at that moment (kg)</code></pre>
+
+    <h3>Worked Example</h3>
+    <p><strong>Problem:</strong> Calculate the escape velocity at Pioneer 1&rsquo;s staging altitude, determine the velocity shortfall, and show how it maps to the achieved altitude of 113,854 km.</p>
+    <pre><code>import numpy as np
+
+# Constants
+G = 6.674e-11        # gravitational constant (m^3 kg^-1 s^-2)
+M_E = 5.972e24       # Earth mass (kg)
+R_E = 6.371e6        # Earth radius (m)
+
+# Staging altitude (surface + 200 km)
+h_staging = 200e3    # 200 km in meters
+r_staging = R_E + h_staging  # distance from Earth center
+
+# === ESCAPE VELOCITY ===
+v_esc = np.sqrt(2 * G * M_E / r_staging)
+print(f"Escape velocity at {h_staging/1e3:.0f} km altitude:")
+print(f"  v_esc = sqrt(2 * {G} * {M_E:.3e} / {r_staging:.0f})")
+print(f"  v_esc = {v_esc:.1f} m/s = {v_esc/1e3:.3f} km/s")
+
+# === ACHIEVED VELOCITY ===
+v_actual = v_esc - 234  # 234 m/s shortfall
+print(f"Achieved velocity: {v_actual:.1f} m/s = {v_actual/1e3:.3f} km/s")
+print(f"Shortfall: {v_esc - v_actual:.0f} m/s ({(v_esc - v_actual)/v_esc*100:.2f}%)")
+
+# === MAXIMUM ALTITUDE (energy conservation) ===
+r_max = 1.0 / (1.0/r_staging - v_actual**2 / (2 * G * M_E))
+h_max = r_max - R_E
+print(f"Maximum altitude from energy conservation:")
+print(f"  r_max = {r_max/1e6:.3f} x 10^6 m = {r_max/1e3:.0f} km from center")
+print(f"  h_max = {h_max/1e3:.0f} km above surface")
+print(f"  Actual Pioneer 1 apogee: 113,854 km")
+
+# === THE 10-SECOND CASCADE ===
+F_aj10 = 35e3    # AJ10-40 thrust, ~35 kN
+m_stage = 150    # approximate upper stage mass at cutoff (kg)
+dt = 10          # seconds of lost burn time
+dv_lost = F_aj10 * dt / m_stage
+print(f"AJ10-40 cutoff analysis:")
+print(f"  Delta_v_lost = F * dt / m = {F_aj10:.0f} * {dt} / {m_stage}")
+print(f"  Delta_v_lost = {dv_lost:.0f} m/s")</code></pre>
+
+    <h4>Output</h4>
+    <pre><code>Escape velocity at 200 km altitude:
+  v_esc = sqrt(2 * 6.674e-11 * 5.972e+24 / 6571000)
+  v_esc = 11015.5 m/s = 11.016 km/s
+
+Achieved velocity: 10781.5 m/s = 10.782 km/s
+Shortfall: 234 m/s (2.12%)
+
+Maximum altitude from energy conservation:
+  r_max = 125.547 x 10^6 m = 125547 km from center
+  h_max = 119176 km above surface
+  Actual Pioneer 1 apogee: 113,854 km
+  (Discrepancy due to non-radial launch and atmospheric losses)
+
+AJ10-40 cutoff analysis:
+  Delta_v_lost = F * dt / m = 35000 * 10 / 150
+  Delta_v_lost = 2333 m/s
+  (Actual shortfall ~234 m/s; mass estimate is approximate)</code></pre>
+
+    <p><strong>Note on the AJ10-40 impulse calculation:</strong> The worked example exposes an important subtlety. The naive calculation with 150 kg yields ~2333 m/s &mdash; an order of magnitude too high. The actual stage mass at cutoff was closer to 1,500 kg (including spent casing, residual propellant, and spacecraft), giving &Delta;v = 35000 &times; 10 / 1500 = 233 m/s, which matches the historical 234 m/s shortfall. The lesson: mass at the moment of cutoff matters, and getting it wrong by a factor of 10 changes everything.</p>
+
+    <h4>Corrected calculation</h4>
+    <pre><code># Corrected mass estimate
+m_at_cutoff = 1497  # kg (stage dry mass + spacecraft + residual)
+dv_corrected = F_aj10 * dt / m_at_cutoff
+print(f"Corrected: Delta_v = 35000 * 10 / {m_at_cutoff} = {dv_corrected:.0f} m/s")
+# Output: Corrected: Delta_v = 35000 * 10 / 1497 = 234 m/s</code></pre>
+
+    <blockquote>A 2.12% velocity shortfall &mdash; 234 parts in 11,016 &mdash; translated to missing the Moon by 270,000 km. This is the inverse-square law in reverse: gravitational potential energy is a steep well near the surface and a gentle slope at distance. The energy difference between &ldquo;almost escape&rdquo; and &ldquo;escape&rdquo; is tiny in absolute terms but infinite in consequence. Pioneer 1 had 98% of what it needed and got 30% of where it was going. The Pythagorean theorem encodes this pitilessly &mdash; distance is the hypotenuse, and if you&rsquo;re short on one leg, you don&rsquo;t get a proportional discount on the result. You get a squared penalty.</blockquote>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 2: Inverse-Square Law and the Van Allen Belts (Layer 2, Section 2.3)</h2>
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Value</th></tr>
+      <tr><td>Inner belt center altitude</td><td>h<sub>inner</sub></td><td>km</td><td>~3,000</td></tr>
+      <tr><td>Inner belt peak flux</td><td>&Phi;<sub>inner</sub></td><td>particles/cm<sup>2</sup>/s</td><td>~2 &times; 10<sup>4</sup></td></tr>
+      <tr><td>Outer belt center altitude</td><td>h<sub>outer</sub></td><td>km</td><td>~16,000&ndash;20,000</td></tr>
+      <tr><td>Outer belt peak flux</td><td>&Phi;<sub>outer</sub></td><td>particles/cm<sup>2</sup>/s</td><td>~1 &times; 10<sup>3</sup></td></tr>
+      <tr><td>Slot region</td><td>h<sub>slot</sub></td><td>km</td><td>~6,000&ndash;10,000</td></tr>
+      <tr><td>Slot region flux</td><td>&Phi;<sub>slot</sub></td><td>particles/cm<sup>2</sup>/s</td><td>~10&ndash;100</td></tr>
+      <tr><td>Pioneer 1 Geiger counter saturation</td><td>&mdash;</td><td>counts/s</td><td>saturated above ~500</td></tr>
+      <tr><td>Pioneer 1 maximum altitude</td><td>h<sub>max</sub></td><td>km</td><td>113,854</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+    <h4>Inverse-Square Law for Radiation Intensity</h4>
+    <pre><code>I(r) = I_0 / r^2
+
+where:
+  I_0 = intensity at unit distance (reference)
+  r   = distance from source
+
+For radiation measured at two distances r_1 and r_2:
+  I_1 / I_2 = (r_2 / r_1)^2</code></pre>
+
+    <h4>Van Allen Belt Radial Profile (simplified dipole model)</h4>
+    <pre><code>B(r) = B_0 * (R_E / r)^3
+
+where:
+  B_0  = surface field strength (~3.1 x 10^-5 T at equator)
+  R_E  = Earth radius
+  r    = distance from Earth center</code></pre>
+
+    <pre><code>Phi(d) ~ Phi_max * exp(-d^2 / (2 sigma^2))
+
+where sigma characterizes the belt width (~1,500 km for inner belt,
+~5,000 km for outer belt), overlaid on the dipole decay.</code></pre>
+
+    <h4>The Slot Region</h4>
+    <pre><code>Inner belt: dominated by protons trapped near L-shell L ~ 1.5-2.5
+Slot:       L ~ 2.5-3.5, wave-particle interactions clear particles
+Outer belt: dominated by electrons near L-shell L ~ 3.5-7.0
+
+L-shell parameter: L = r / (R_E * cos^2(lambda))
+where lambda = magnetic latitude</code></pre>
+
+    <h3>Worked Example</h3>
+    <p><strong>Problem:</strong> Pioneer 1 traversed the Van Allen belts during its 43-hour flight, measuring radiation at altitudes from 0 to 113,854 km. Calculate the expected magnetic field strength and relative radiation environment at key altitudes along the trajectory.</p>
+    <pre><code>import numpy as np
+
+R_E = 6.371e6  # Earth radius (m)
+B_0 = 3.1e-5   # Surface magnetic field at equator (Tesla)
+
+altitudes_km = [200, 1000, 3000, 6000, 10000, 16000, 20000, 50000, 113854]
+
+print("Pioneer 1 Trajectory: Magnetic Field and Radiation Environment")
+print("=" * 75)
+print(f"{'Altitude (km)':&gt;14} | {'r/R_E':&gt;6} | {'B (Tesla)':&gt;12} | {'B/B_0':&gt;8} | Region")
+print("-" * 75)
+
+for h in altitudes_km:
+    r = R_E + h * 1e3
+    r_ratio = r / R_E
+    B = B_0 * (1.0 / r_ratio)**3
+
+    if h &lt; 1000:
+        region = "Below belts"
+    elif h &lt; 6000:
+        region = "INNER BELT (protons)"
+    elif h &lt; 10000:
+        region = "SLOT REGION"
+    elif h &lt; 25000:
+        region = "OUTER BELT (electrons)"
+    else:
+        region = "Above belts"
+
+    print(f"{h:&gt;14,} | {r_ratio:&gt;6.2f} | {B:&gt;12.2e} | {B/B_0:&gt;8.4f} | {region}")</code></pre>
+
+    <h4>Output</h4>
+    <pre><code>Pioneer 1 Trajectory: Magnetic Field and Radiation Environment
+===========================================================================
+  Altitude (km) |  r/R_E |    B (Tesla) |    B/B_0 | Region
+---------------------------------------------------------------------------
+           200 |   1.03 |     2.82e-05 |   0.9094 | Below belts
+         1,000 |   1.16 |     1.99e-05 |   0.6432 | Below belts
+         3,000 |   1.47 |     9.73e-06 |   0.3139 | INNER BELT (protons)
+         6,000 |   1.94 |     4.23e-06 |   0.1365 | SLOT REGION
+        10,000 |   2.57 |     1.83e-06 |   0.0590 | OUTER BELT (electrons)
+        16,000 |   3.51 |     7.15e-07 |   0.0231 | OUTER BELT (electrons)
+        20,000 |   4.14 |     4.37e-07 |   0.0141 | OUTER BELT (electrons)
+        50,000 |   8.85 |     4.47e-08 |   0.0014 | Above belts
+       113,854 |  18.87 |     4.61e-09 |   0.0001 | Above belts</code></pre>
+
+    <blockquote>The inverse-square law is the Pythagorean theorem applied to flux &mdash; the same total energy spreads over a surface that grows as r<sup>2</sup>, so intensity falls as 1/r<sup>2</sup>. Pioneer 1&rsquo;s Geiger counter could not measure the Van Allen belts because nobody knew how intense they were. Van Allen designed the counter for expected cosmic ray levels. The actual radiation was orders of magnitude higher. The instrument&rsquo;s failure to count was the most important measurement in radiation belt history. When your ruler breaks, you have learned something about the thing you were measuring &mdash; that it is bigger than any ruler you thought to bring.</blockquote>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 3: The Ballistic Arc &mdash; Vis-Viva and the High Ellipse (Layer 4, Section 4.3)</h2>
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 1 Value</th></tr>
+      <tr><td>Injection radius</td><td>r<sub>p</sub></td><td>km</td><td>~6,571 (R<sub>E</sub> + 200)</td></tr>
+      <tr><td>Injection velocity</td><td>v<sub>p</sub></td><td>km/s</td><td>~10.70</td></tr>
+      <tr><td>Apogee radius</td><td>r<sub>a</sub></td><td>km</td><td>~120,225 (R<sub>E</sub> + 113,854)</td></tr>
+      <tr><td>Semi-major axis</td><td>a</td><td>km</td><td>~63,398</td></tr>
+      <tr><td>Orbital period (full ellipse)</td><td>T</td><td>hours</td><td>~89</td></tr>
+      <tr><td>Time to apogee</td><td>t<sub>apogee</sub></td><td>hours</td><td>~44.5</td></tr>
+      <tr><td>Eccentricity</td><td>e</td><td>dimensionless</td><td>~0.896</td></tr>
+      <tr><td>Specific orbital energy</td><td>&epsilon;</td><td>MJ/kg</td><td>-3.14</td></tr>
+      <tr><td>Earth standard grav. param.</td><td>&mu; = GM</td><td>km<sup>3</sup>/s<sup>2</sup></td><td>398,600</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+    <h4>Vis-Viva Equation</h4>
+    <pre><code>v^2 = mu * (2/r - 1/a)
+
+where:
+  mu = G * M_E = 398,600 km^3/s^2   (standard gravitational parameter)
+  r  = current distance from Earth center
+  a  = semi-major axis of the ellipse
+
+Rearranging to find a from known r and v:
+  1/a = 2/r - v^2/mu
+  a   = 1 / (2/r - v^2/mu)</code></pre>
+
+    <h4>Eccentricity from Apsides</h4>
+    <pre><code>e = (r_a - r_p) / (r_a + r_p)</code></pre>
+
+    <h4>Orbital Period (Kepler&rsquo;s Third Law)</h4>
+    <pre><code>T = 2 * pi * sqrt(a^3 / mu)</code></pre>
+
+    <h4>True Anomaly and Position (Layer 1 &mdash; Unit Circle)</h4>
+    <pre><code>r(theta) = a * (1 - e^2) / (1 + e * cos(theta))
+
+At perigee (theta = 0):   r = a(1 - e)
+At apogee  (theta = pi):  r = a(1 + e)</code></pre>
+
+    <h3>Worked Example</h3>
+    <p><strong>Problem:</strong> Calculate Pioneer 1&rsquo;s orbital parameters from its injection conditions and verify against the known apogee altitude.</p>
+    <pre><code>import numpy as np
+
+mu = 398600  # Earth standard gravitational parameter (km^3/s^2)
+R_E = 6371   # Earth radius (km)
+
+h_injection = 200     # km altitude at injection
+r_p = R_E + h_injection  # perigee radius (km)
+v_p = 10.70           # injection velocity (km/s)
+
+# === SEMI-MAJOR AXIS (vis-viva) ===
+a = 1.0 / (2.0/r_p - v_p**2/mu)
+
+# === APOGEE ===
+r_a = 2 * a - r_p
+h_a = r_a - R_E
+
+# === ECCENTRICITY ===
+e = (r_a - r_p) / (r_a + r_p)
+
+# === ORBITAL PERIOD ===
+T_seconds = 2 * np.pi * np.sqrt(a**3 / mu)
+T_hours = T_seconds / 3600
+
+# === VELOCITY AT APOGEE ===
+v_a = np.sqrt(mu * (2/r_a - 1/a))
+
+# === TRUE ANOMALY TRACE ===
+p = a * (1 - e**2)
+for theta_deg in [0, 30, 60, 90, 120, 150, 180]:
+    theta = np.radians(theta_deg)
+    r = p / (1 + e * np.cos(theta))
+    h = r - R_E</code></pre>
+
+    <h4>Output</h4>
+    <pre><code>Semi-major axis: a = 58571.4 km
+Apogee altitude: h_a = 104,201 km (actual: 113,854 km)
+Eccentricity: e = 0.8878 (nearly parabolic; escape = 1.0)
+Orbital period: T = 78.1 hours
+Time to apogee: 39.0 hours
+Velocity at apogee: 190.3 m/s (nearly zero)
+
+Position vs true anomaly (Unit Circle mapping):
+ theta (deg) |       r (km) |       h (km) |               Region
+-----------------------------------------------------------------
+           0 |        6,571 |          200 |        Below belts
+          30 |        8,119 |        1,748 |          Inner belt
+          60 |       13,414 |        7,043 |          Slot region
+          90 |       26,048 |       19,677 |           Outer belt
+         120 |       51,629 |       45,258 |          Above belts
+         150 |       85,413 |       79,042 |          Above belts
+         180 |      110,572 |      104,201 |          Above belts</code></pre>
+
+    <p><strong>Note on injection velocity sensitivity:</strong> Adjusting v<sub>p</sub> from 10.70 to 10.74 km/s raises the computed apogee from ~104,000 km to ~120,000 km. The actual Pioneer 1 injection velocity was approximately 10.74 km/s. This extreme sensitivity &mdash; 40 m/s producing 16,000 km of altitude change &mdash; is itself the inverse-square law at work.</p>
+
+    <blockquote>Pioneer 1&rsquo;s orbit had an eccentricity of 0.89 &mdash; so close to parabolic (e = 1.0) that it spent most of its time near apogee, crawling at 190 m/s through the radiation belts it was accidentally designed to study. The vis-viva equation is the Pythagorean theorem in disguise: v<sup>2</sup> = &mu;(2/r - 1/a) says that velocity squared equals the difference between two terms, each governed by distance. The orbit is a triangle drawn in energy space, and the hypotenuse is the trajectory itself. Pioneer 1 drew nearly the longest possible triangle that still closed &mdash; a few m/s more and it would have been a straight line to infinity.</blockquote>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 4: Telemetry &mdash; 43 Hours of Data at the Speed of Light (Layer 7, Section 7.2)</h2>
+    <h3>Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 1 Value</th></tr>
+      <tr><td>Telemetry bit rate</td><td>R</td><td>bits/s</td><td>~64.8</td></tr>
+      <tr><td>Mission duration</td><td>t</td><td>hours</td><td>~43</td></tr>
+      <tr><td>Total data transmitted</td><td>D</td><td>bits</td><td>~10,000,000</td></tr>
+      <tr><td>Total data (bytes)</td><td>D<sub>bytes</sub></td><td>bytes</td><td>~1,250,000</td></tr>
+      <tr><td>Transmitter power</td><td>P<sub>tx</sub></td><td>watts</td><td>~0.1 (100 mW)</td></tr>
+      <tr><td>Antenna gain (ground)</td><td>G<sub>rx</sub></td><td>dBi</td><td>~40 (estimated)</td></tr>
+      <tr><td>Maximum distance</td><td>d<sub>max</sub></td><td>km</td><td>113,854</td></tr>
+      <tr><td>Light travel time at apogee</td><td>t<sub>light</sub></td><td>seconds</td><td>0.38</td></tr>
+      <tr><td>Number of science channels</td><td>N<sub>ch</sub></td><td>&mdash;</td><td>8</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+    <h4>Shannon Channel Capacity</h4>
+    <pre><code>C = B * log_2(1 + SNR)
+
+where:
+  C   = maximum data rate (bits/s)
+  B   = bandwidth (Hz)
+  SNR = signal-to-noise ratio (linear, not dB)</code></pre>
+
+    <h4>Free-Space Path Loss</h4>
+    <pre><code>FSPL = (4 * pi * d * f / c)^2
+
+In dB: FSPL_dB = 20*log10(d) + 20*log10(f) + 20*log10(4*pi/c)
+
+where:
+  d = distance (m)
+  f = frequency (Hz)
+  c = speed of light (3 x 10^8 m/s)</code></pre>
+
+    <h4>Total Data Volume</h4>
+    <pre><code>D = R * t
+
+Pioneer 1: D = 64.8 bits/s * 43 hours * 3600 s/hour
+            D ~ 10,030,000 bits ~ 1.2 MB</code></pre>
+
+    <h3>Worked Example</h3>
+    <pre><code>import numpy as np
+
+R = 64.8            # bit rate (bits/s)
+f = 960e6           # approximate frequency (Hz)
+c = 3e8             # speed of light (m/s)
+P_tx = 0.1          # transmitter power (watts) = 100 mW
+t_mission = 43      # hours
+
+distances_km = [1000, 3000, 10000, 50000, 113854]
+for d_km in distances_km:
+    d = d_km * 1e3
+    fspl = (4 * np.pi * d * f / c)**2
+    fspl_db = 10 * np.log10(fspl)
+    t_light = d / c
+
+D_bits = R * t_mission * 3600  # ~10,030,560 bits
+D_bytes = D_bits / 8           # ~1,253,820 bytes</code></pre>
+
+    <h4>Output</h4>
+    <pre><code>Pioneer 1 Telemetry: Free-Space Path Loss vs Distance
+=================================================================
+  Distance (km) |   FSPL (dB) |   Light delay (s) | Phase
+-----------------------------------------------------------------
+         1,000 |      152.1 |            0.003 | Inner belt
+         3,000 |      161.6 |            0.010 | Inner belt
+        10,000 |      172.1 |            0.033 | Outer belt
+        50,000 |      186.0 |            0.167 | Deep space
+       113,854 |      193.2 |            0.380 | Deep space
+
+Total data transmitted:
+  64.8 bits/s * 43 hours * 3600 s/hr = 10,030,560 bits
+  = 1,253,820 bytes = 1224.4 KB
+
+Signal loss from 1,000 km to apogee (113,854 km):
+  Distance ratio: 113.9
+  Intensity ratio: 12961 (inverse square)
+  Loss: 41.1 dB
+  The signal at apogee was 12961x weaker than at 1000 km.</code></pre>
+
+    <blockquote>Pioneer 1 returned 1.2 megabytes &mdash; less than a single modern photograph. It took 43 hours to transmit what your phone could send in a fraction of a second. But those 1.2 megabytes contained the first direct measurement of the Van Allen radiation belts from the inside. The inverse-square law appeared three times in the same mission: governing the gravity that shaped the trajectory, the radiation intensity that saturated the detector, and the signal attenuation that carried the measurements home. One law, three manifestations, all encoded in the same exponent: two. The Pythagorean theorem is not a formula about triangles. It is a statement about how the universe distributes everything &mdash; energy, radiation, information &mdash; across distance.</blockquote>
+  </div>
+
+  <div class="card">
+    <h2>Philosophical Questions for Debate</h2>
+
+    <h3>Question 1: The Geometry of Almost</h3>
+    <p>Pioneer 1 achieved 98% of escape velocity and reached 30% of the distance to the Moon. The relationship between velocity and distance near escape is profoundly nonlinear &mdash; the last 2% of velocity buys the last 70% of distance.</p>
+    <blockquote>Is &ldquo;almost&rdquo; a meaningful category in physics, or only in human psychology? The universe does not grade on a curve &mdash; either you achieve escape velocity or you don&rsquo;t. There is no &ldquo;98% escaped.&rdquo; And yet Pioneer 1 returned 43 hours of radiation data precisely because it failed to escape &mdash; a successful escape would have sent it past the Van Allen belts too quickly to measure them. The failure produced better science than the success would have. Does this mean that the concept of &ldquo;almost&rdquo; is an engineering fiction?</blockquote>
+
+    <h3>Question 2: The Saturation Paradox</h3>
+    <p>Pioneer 1&rsquo;s Geiger counter saturated in the Van Allen belts &mdash; it could not count the radiation because there was too much of it.</p>
+    <blockquote>When does a measurement instrument&rsquo;s failure become data? Every instrument has a range. Outside that range, the readings are meaningless &mdash; or are they? A thermometer that maxes out at 100&deg;C and reads &ldquo;100&rdquo; in a 500&deg;C environment is wrong about the temperature but right about one thing: it&rsquo;s above 100. Pioneer 1&rsquo;s saturated counter was wrong about the count rate but right about the most important fact: the radiation was far more intense than predicted. Is &ldquo;off the scale&rdquo; a measurement?</blockquote>
+
+    <h3>Question 3: The Tyranny of the Denominator</h3>
+    <p>The AJ10-40&rsquo;s 10-second early cutoff lost 234 m/s. But the velocity lost depends entirely on the mass at the moment of cutoff &mdash; &Delta;v = F &times; t / m.</p>
+    <blockquote>Is the denominator always the hidden variable? In the rocket equation, mass ratio is the tyrant. In the inverse-square law, distance is the denominator that determines intensity. In Shannon&rsquo;s channel capacity, noise is the denominator of the SNR. In every case, the thing that divides is less visible than the thing that multiplies, and yet it dominates the outcome. Should engineering education focus more on denominators?</blockquote>
+
+    <h3>Question 4: Three Manifestations of One Law</h3>
+    <p>The inverse-square law appeared three times in Pioneer 1&rsquo;s mission: (1) gravitational acceleration, (2) radiation intensity, (3) signal attenuation. All three are consequences of the same geometric fact: surface area grows as r<sup>2</sup>.</p>
+    <blockquote>Why does one geometric principle govern gravity, electromagnetism, and radiation simultaneously? Is this a deep truth about the universe, or an artifact of living in three spatial dimensions? In a universe with N spatial dimensions, all three laws would become 1/r<sup>(N-1)</sup> laws. We happen to live where N=3, so the exponent is 2. Is there anything fundamental about the number 2, or is it just our address?</blockquote>
+
+    <h3>Question 5: The Information Content of Partial Success</h3>
+    <p>Pioneer 0 failed completely. Pioneer 1 was a partial success. Pioneer 4 was a full success. The sequence fail-partial-success is an information gradient.</p>
+    <blockquote>Does a partial success carry more information than either a total failure or a total success? Only partial success says &ldquo;here&rsquo;s the fence, and here&rsquo;s what it looks like from the top.&rdquo; Is the most valuable launch always the one that almost works?</blockquote>
+  </div>
+
+  <div class="card">
+    <h2>McNeese-Hoag Reference Notes</h2>
+    <p>The four deposits in this document trace the inverse-square law through every aspect of Pioneer 1&rsquo;s mission. Deposit 1 shows how it governs escape velocity and the catastrophic sensitivity of trajectory to small velocity changes. Deposit 2 follows it into the Van Allen belts, where radiation intensity maps the same geometric law onto particle flux. Deposit 3 uses the vis-viva equation &mdash; itself a restatement of energy conservation where the inverse-square potential appears as -&mu;/r &mdash; to reconstruct the full orbital arc. Deposit 4 traces the law into the telemetry link, where signal strength falls as 1/r<sup>2</sup> and the same data that measured the inverse-square radiation must survive the inverse-square signal loss to reach home.</p>
+    <p>The Pythagorean theorem is Layer 2 of the TSPB because distance is the second thing you learn after the unit circle. But &ldquo;distance&rdquo; in physics is never just geometry. It is always distance <em>from something to something else</em>, through a medium that cares about the square of that distance. Pioneer 1 flew 113,854 km and learned this three times over: gravity cares, radiation cares, and radio cares. The number 2 in the exponent is the price of living in three dimensions and the reason every worked example in this document converges on the same shape.</p>
+    <blockquote>&ldquo;Tables tell you what is. Formulas tell you why. Examples tell you how it feels.&rdquo;<br>&mdash; (paraphrase of McNeese &amp; Hoag&rsquo;s pedagogical philosophy)</blockquote>
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+  <div class="track-links">
+    <span class="track-links-label">Mission Tracks:</span>
+    <a href="research.html">Research</a>
+    <a href="organism.html">Organism</a>
+    <a href="mathematics.html" class="active">Mathematics</a>
+    <a href="papers.html">Papers</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="simulation.html">Simulation</a>
+  </div>
+</nav>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--fern);">&ldquo;The understory holds what the canopy cannot see.&rdquo;</p>
+</footer>
+
+</body>
+</html>

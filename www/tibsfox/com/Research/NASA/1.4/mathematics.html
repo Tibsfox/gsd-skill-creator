@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics — v1.4 Pioneer 3 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --bark-dark: #1A1408;
+    --bark-mid: #2A2010;
+    --lichen-gold: #B8C99D;
+    --lichen-light: #D4DEB2;
+    --forest-deep: #1A2A1A;
+    --forest-mid: #2A3D2A;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #3D3A20;
+    --amber: #D4A017;
+    --amber-light: #F0D060;
+    --amber-dark: #8B6914;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bark-dark); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(184,201,157,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(212,222,178,0.05) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(26,42,26,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(184,201,157,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(212,222,178,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(26,42,26,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(184,201,157,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(42,61,42,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--lichen-gold); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--lichen-light); }
+  .breadcrumb span { margin: 0 0.4rem; }
+  header {
+    background: linear-gradient(160deg, var(--bark-dark) 0%, var(--bark-mid) 30%, var(--forest-deep) 60%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--lichen-gold); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(184,201,157,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(184,201,157,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(184,201,157,0.10); border: 1px solid var(--lichen-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--lichen-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--lichen-light); }
+  .track-badge { background: rgba(212,160,23,0.2); border: 1px solid var(--amber); color: var(--amber); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--lichen-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(42,32,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--lichen-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--lichen-gold); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .card li strong { color: var(--lichen-light); }
+  .data-table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.85rem; }
+  .data-table th { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 2px solid var(--lichen-gold); color: var(--lichen-gold); font-weight: 600; font-family: 'DM Mono', monospace; }
+  .data-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  .data-table td:first-child { color: var(--lichen-light); font-weight: 500; }
+  .data-table tr:last-child td { border-bottom: none; }
+  pre { background: rgba(26,20,8,0.7); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0 1.5rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--lichen-light); }
+  code { font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--lichen-gold); }
+  .resonance-quote { background: rgba(184,201,157,0.06); border-left: 3px solid var(--lichen-gold); padding: 1rem 1.25rem; margin: 1rem 0 1.5rem; font-style: italic; font-size: 0.9rem; line-height: 1.7; color: var(--text-dim); }
+  .deposit-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .deposit-num { background: var(--lichen-gold); color: var(--bark-dark); font-weight: 700; font-size: 0.85rem; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .deposit-label { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--amber); }
+  .question-card { background: rgba(11,61,145,0.10); border: 1px solid rgba(11,61,145,0.3); }
+  .question-card h2 { color: #7EB8DA; }
+  .question-card h3 { color: #7EB8DA; }
+  .question-card p { font-size: 0.9rem; }
+  .nav-card { background: rgba(42,32,16,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--lichen-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--lichen-light); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--lichen-gold); text-decoration: none; }
+  @media (max-width: 800px) { .header-content { padding: 1.5rem 1rem; } main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } pre { font-size: 0.75rem; padding: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.4 Pioneer 3</a>
+  <span>&rsaquo;</span>
+  Track 3: Mathematics
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.4</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 3 &mdash; TSPB Mathematics</span>
+    </div>
+    <h1>Two Peaks in the Dark</h1>
+    <p class="subtitle">McNeese-Hoag Format &mdash; Tables, Formulas, Worked Examples</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 1 (Unit Circle &mdash; Dual Periodic Phenomena)</span>
+      <span><span class="label">Secondary:</span> 5 (Probability), 4 (Vector Calculus), 3 (Trigonometry)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- DEPOSIT 1 -->
+  <div class="card">
+    <div class="deposit-header">
+      <span class="deposit-num">1</span>
+      <h2 style="border-bottom:none; margin-bottom:0; padding-bottom:0;">Dual-Peak Radiation Profile as Superposition</h2>
+    </div>
+    <span class="deposit-label">Layer 1, Section 1.4</span>
+
+    <h3>Table</h3>
+    <table class="data-table">
+      <thead><tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 3 Value</th></tr></thead>
+      <tbody>
+        <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>December 6, 1958, 05:45 UTC</td></tr>
+        <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Juno II (Jupiter C derivative)</td></tr>
+        <tr><td>Operating agency</td><td>&mdash;</td><td>&mdash;</td><td>JPL / U.S. Army (first JPL/Army mission)</td></tr>
+        <tr><td>Spacecraft mass</td><td>m<sub>sc</sub></td><td>kg</td><td>5.87</td></tr>
+        <tr><td>Maximum altitude</td><td>h<sub>max</sub></td><td>km</td><td>102,322</td></tr>
+        <tr><td>Flight duration</td><td>t<sub>flight</sub></td><td>hr</td><td>~38.6</td></tr>
+        <tr><td>Inner belt peak altitude</td><td>h<sub>inner</sub></td><td>km</td><td>~3,500</td></tr>
+        <tr><td>Outer belt peak altitude</td><td>h<sub>outer</sub></td><td>km</td><td>~16,000</td></tr>
+        <tr><td>Slot region (minimum)</td><td>h<sub>slot</sub></td><td>km</td><td>~7,000&ndash;10,000</td></tr>
+        <tr><td>Inner belt peak count rate</td><td>R<sub>inner</sub></td><td>counts/s</td><td>~35,000 (est., with saturation corrections)</td></tr>
+        <tr><td>Outer belt peak count rate</td><td>R<sub>outer</sub></td><td>counts/s</td><td>~25,000 (estimated)</td></tr>
+        <tr><td>Slot region count rate</td><td>R<sub>slot</sub></td><td>counts/s</td><td>~2,000&ndash;5,000 (estimated)</td></tr>
+        <tr><td>First stage burn shortfall</td><td>&Delta;t</td><td>s</td><td>3.7 (burned 3.7 s short)</td></tr>
+        <tr><td>Geiger-Mueller tube type</td><td>&mdash;</td><td>&mdash;</td><td>Anton 302 (two tubes)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Formulas</h3>
+    <p><strong>Superposition of Two Radiation Belts:</strong></p>
+    <p>Pioneer 3 discovered that Earth&rsquo;s radiation environment has TWO peaks, not one. The radiation intensity as a function of altitude can be modeled as the superposition of two bell-shaped distributions:</p>
+    <pre>R(h) = A_inner * exp(-(h - h_inner)^2 / (2 * sigma_inner^2))
+     + A_outer * exp(-(h - h_outer)^2 / (2 * sigma_outer^2))
+
+where:
+  R(h)         = radiation count rate at altitude h
+  A_inner      = amplitude of inner belt peak (~35,000 counts/s)
+  h_inner      = altitude of inner belt peak (~3,500 km)
+  sigma_inner  = width parameter of inner belt (~2,000 km)
+  A_outer      = amplitude of outer belt peak (~25,000 counts/s)
+  h_outer      = altitude of outer belt peak (~16,000 km)
+  sigma_outer  = width parameter of outer belt (~5,000 km)</pre>
+
+    <p><strong>The Unit Circle Connection:</strong></p>
+    <pre>f(theta) = A_1 * cos(theta) + A_2 * cos(2*theta)
+
+When theta corresponds to radial distance from Earth:
+  - A_1 * cos(theta) has one peak and one trough per cycle
+  - A_2 * cos(2*theta) has two peaks and two troughs per cycle
+  - Their sum has the shape of the dual-belt profile:
+    a large peak (inner belt), a minimum (slot region),
+    and a secondary peak (outer belt)</pre>
+
+    <p>Pioneer 3 saw two peaks in its Geiger-Mueller data. Two harmonics on the unit circle. Two maxima in the radiation profile. The dual-belt structure of Earth&rsquo;s magnetosphere is a superposition problem &mdash; and Pioneer 3 was the first instrument to measure both terms.</p>
+
+    <div class="resonance-quote">Pioneer 3 found two peaks where Explorer 1 and Pioneer 1 had found one. The radiation profile of Earth&rsquo;s magnetosphere is not a single hump &mdash; it is a superposition of two distributions, each with its own center, width, and intensity. This is the fundamental insight of Fourier analysis: complex profiles are sums of simpler components. Pioneer 3 was the first instrument to measure both terms. Two harmonics. Two peaks. One spacecraft, 5.87 kilograms, measuring the chord that Earth&rsquo;s magnetic field plays with the solar wind.</div>
+  </div>
+
+  <!-- DEPOSIT 2 -->
+  <div class="card">
+    <div class="deposit-header">
+      <span class="deposit-num">2</span>
+      <h2 style="border-bottom:none; margin-bottom:0; padding-bottom:0;">Geiger-Mueller Counting Statistics</h2>
+    </div>
+    <span class="deposit-label">Layer 5, Section 5.5</span>
+
+    <h3>Table</h3>
+    <table class="data-table">
+      <thead><tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 3 Value</th></tr></thead>
+      <tbody>
+        <tr><td>Detector type</td><td>&mdash;</td><td>&mdash;</td><td>Anton 302 Geiger-Mueller tubes</td></tr>
+        <tr><td>Number of detectors</td><td>&mdash;</td><td>&mdash;</td><td>2 (redundant pair)</td></tr>
+        <tr><td>Dead time per count</td><td>&tau;</td><td>&mu;s</td><td>~100 (estimated)</td></tr>
+        <tr><td>Maximum true count rate</td><td>R<sub>max</sub></td><td>counts/s</td><td>~10,000 (before saturation)</td></tr>
+        <tr><td>Background rate (cosmic rays)</td><td>R<sub>bg</sub></td><td>counts/s</td><td>~2&ndash;5</td></tr>
+        <tr><td>Counting distribution</td><td>&mdash;</td><td>&mdash;</td><td>Poisson</td></tr>
+        <tr><td>Counting interval</td><td>&Delta;t</td><td>s</td><td>~1 (telemetry frame)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Formulas</h3>
+    <p><strong>Poisson Statistics for Radioactive Detection:</strong></p>
+    <pre>P(k; lambda) = (lambda^k * e^(-lambda)) / k!
+
+where:
+  k       = number of counts observed in the interval
+  lambda  = expected number of counts (= R * Delta_t)
+  R       = true count rate (counts/s)
+  Delta_t = counting interval (s)
+
+Mean: E[k] = lambda
+Variance: Var[k] = lambda
+Standard deviation: sigma = sqrt(lambda)
+Relative uncertainty: sigma/lambda = 1/sqrt(lambda)</pre>
+
+    <p><strong>Dead Time Correction:</strong></p>
+    <pre>R_true = R_meas / (1 - R_meas * tau)
+
+For Pioneer 3:
+  If R_meas = 8,000 counts/s and tau = 100 us:
+  R_true = 8000 / (1 - 8000 * 100e-6)
+         = 8000 / (1 - 0.8)
+         = 8000 / 0.2
+         = 40,000 counts/s
+
+  The measured rate is 5x lower than reality!
+  Pioneer 1's counters saturated (R_meas * tau -> 1)
+  Pioneer 3's improved detectors reduced this problem.</pre>
+
+    <div class="resonance-quote">Poisson statistics are the language of counting rare events. Every click of a Geiger counter is a Poisson process &mdash; random, independent, with variance equal to the mean. Pioneer 3&rsquo;s contribution was not more data &mdash; it was better-calibrated data. Statistics tell you the answer. Calibration tells you whether you asked the right question.</div>
+  </div>
+
+  <!-- DEPOSIT 3 -->
+  <div class="card">
+    <div class="deposit-header">
+      <span class="deposit-num">3</span>
+      <h2 style="border-bottom:none; margin-bottom:0; padding-bottom:0;">Propellant Depletion &mdash; Burn Time as Function of Fuel Mass</h2>
+    </div>
+    <span class="deposit-label">Layer 4, Section 4.3</span>
+
+    <h3>Table</h3>
+    <table class="data-table">
+      <thead><tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Juno II Value</th></tr></thead>
+      <tbody>
+        <tr><td>First stage engine</td><td>&mdash;</td><td>&mdash;</td><td>Rocketdyne A-7 (NAA 75-110)</td></tr>
+        <tr><td>First stage thrust</td><td>F<sub>1</sub></td><td>kN</td><td>~667</td></tr>
+        <tr><td>First stage I<sub>sp</sub> (sea level)</td><td>I<sub>sp</sub></td><td>s</td><td>~235</td></tr>
+        <tr><td>Intended burn time</td><td>t<sub>intended</sub></td><td>s</td><td>~182</td></tr>
+        <tr><td>Actual burn time</td><td>t<sub>actual</sub></td><td>s</td><td>~178.3 (3.7 s short)</td></tr>
+        <tr><td>Propellant mass flow rate</td><td>m&#775;</td><td>kg/s</td><td>~290</td></tr>
+        <tr><td>Propellant lost by early cutoff</td><td>&Delta;m</td><td>kg</td><td>~1,073</td></tr>
+        <tr><td>&Delta;v lost</td><td>&Delta;v<sub>lost</sub></td><td>m/s</td><td>~234</td></tr>
+        <tr><td>Escape velocity at burnout</td><td>v<sub>esc</sub></td><td>km/s</td><td>~11.0</td></tr>
+        <tr><td>Achieved velocity</td><td>v<sub>actual</sub></td><td>km/s</td><td>~10.4 (estimated)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Formulas</h3>
+    <pre>t_burn = m_propellant / m_dot
+
+where:
+  m_dot = F / (Isp * g_0)
+  F     = thrust (N)
+  Isp   = specific impulse (s)
+  g_0   = 9.80665 m/s^2
+
+For Pioneer 3's first stage:
+  m_dot = 667,000 / (235 * 9.80665) = 289.4 kg/s
+  Intended: t = m_prop / 289.4 = 182 s
+  Actual: t = 178.3 s (3.7 s short)
+  Propellant remaining at cutoff: 3.7 * 289.4 = 1,071 kg</pre>
+
+    <pre>Delta_v_lost ~ v_e * (Delta_m / m_f)
+
+  v_e = Isp * g_0 = 235 * 9.80665 = 2,305 m/s
+  Delta_m = 1,071 kg
+  m_f ~ 10,500 kg (estimated)
+  Delta_v_lost ~ 2,305 * (1,071 / 10,500) ~ 235 m/s</pre>
+
+    <div class="resonance-quote">Pioneer 3&rsquo;s first stage burned 3.7 seconds short. At 289 kilograms per second, that&rsquo;s 1,071 kilograms of propellant that stayed in the tanks instead of becoming exhaust. Pioneer 3 had 95% of escape velocity. It reached 27% of the Moon&rsquo;s distance. The 3.7 seconds that denied Pioneer 3 the Moon gave it the outer radiation belt instead.</div>
+  </div>
+
+  <!-- DEPOSIT 4 -->
+  <div class="card">
+    <div class="deposit-header">
+      <span class="deposit-num">4</span>
+      <h2 style="border-bottom:none; margin-bottom:0; padding-bottom:0;">Cartesian Coordinates in Space</h2>
+    </div>
+    <span class="deposit-label">Layer 3, Section 3.4</span>
+
+    <h3>Table</h3>
+    <table class="data-table">
+      <thead><tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Coordinate system</td><td>&mdash;</td><td>&mdash;</td><td>Earth-centered, equatorial Cartesian</td></tr>
+        <tr><td>Origin</td><td>O</td><td>&mdash;</td><td>Earth center of mass</td></tr>
+        <tr><td>X-axis</td><td>&mdash;</td><td>&mdash;</td><td>Vernal equinox direction</td></tr>
+        <tr><td>Y-axis</td><td>&mdash;</td><td>&mdash;</td><td>Equatorial plane, 90&deg; east of X</td></tr>
+        <tr><td>Z-axis</td><td>&mdash;</td><td>&mdash;</td><td>North celestial pole</td></tr>
+        <tr><td>Launch latitude</td><td>&mdash;</td><td>deg</td><td>28.4 N (Cape Canaveral)</td></tr>
+        <tr><td>Apogee distance from center</td><td>r<sub>apo</sub></td><td>km</td><td>108,693 (102,322 + R<sub>E</sub>)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Formulas</h3>
+    <pre>Position: r = (x, y, z)
+Velocity: v = (dx/dt, dy/dt, dz/dt)
+
+Distance from origin:
+  |r| = sqrt(x^2 + y^2 + z^2)
+
+Conversion -- Spherical to Cartesian (tracking data):
+  x = r * cos(delta) * cos(alpha)
+  y = r * cos(delta) * sin(alpha)
+  z = r * sin(delta)
+
+where:
+  r     = range (distance from Earth center)
+  alpha = right ascension
+  delta = declination</pre>
+
+    <div class="resonance-quote">Ren&eacute; Descartes, born March 31, 1596, gave us the coordinate system that made spaceflight computable. Before Descartes, a trajectory was something you watched. After Descartes, a trajectory was something you calculated. The grid is invisible. The grid is everything.</div>
+  </div>
+
+  <!-- PHILOSOPHICAL QUESTIONS -->
+  <div class="card question-card">
+    <h2>Philosophical Questions for Debate</h2>
+
+    <h3>1. Superposition and Discovery</h3>
+    <p>Is every scientific discovery a decomposition problem? Van Allen&rsquo;s initial discovery detected &ldquo;radiation&rdquo; as a single signal. Pioneer 3 decomposed that signal into two components &mdash; like decomposing a chord into its constituent notes. Is the fundamental act of science always the same operation &mdash; taking a complex signal and separating it into simpler components? What peaks are we missing today because our instruments cannot yet resolve them?</p>
+
+    <h3>2. The Symbiosis of Failure</h3>
+    <p>Two branches of the military competing to reach the Moon first, with different rockets, different teams, different funding sources. Is competition between organizations a form of symbiosis? The rivalry produced two independent paths to deep space, and when the Air Force&rsquo;s Thor-Able had a string of partial successes, the Army&rsquo;s Juno II delivered the outer belt discovery. Did the rivalry actually benefit both programs, or did it waste resources through duplication?</p>
+
+    <h3>3. The 3.7-Second Question</h3>
+    <p>Pioneer 3 achieved 95% of escape velocity and reached 27% of the Moon&rsquo;s distance. If it had achieved 100%, it would have reached the Moon but contributed less to radiation belt science. Is there a case that &ldquo;almost reaching your destination&rdquo; is sometimes scientifically superior to &ldquo;reaching your destination&rdquo;? Or is this retroactive rationalization?</p>
+
+    <h3>4. Dual Systems</h3>
+    <p>Why does duality appear so frequently in nature and engineering? Is duality a fundamental organizational principle &mdash; a minimum complexity threshold below which structure cannot exist? A single radiation belt would be a feature. Two belts with a slot between them is a structure. The slot &mdash; the space between the peaks &mdash; is where the information lives. Is the gap always where the insight is?</p>
+
+    <h3>5. The Lightest Pioneer</h3>
+    <p>Pioneer 3 weighed 5.87 kg. Its simplicity meant every bit of data was radiation data. The constraint of a 5.87-kg mass budget eliminated everything except the essential question. Does constraint drive discovery? And if so, why do we keep building heavier, more complex spacecraft?</p>
+  </div>
+
+  <!-- REFERENCE NOTES -->
+  <div class="card">
+    <h2>McNeese-Hoag Reference Notes</h2>
+    <p>The four deposits trace Pioneer 3&rsquo;s mathematics through duality and superposition. Deposit 1 shows the dual Van Allen belt radiation profile as a superposition of two Gaussian peaks &mdash; two harmonics in the radial direction. Deposit 2 unpacks the Poisson counting statistics that governed Pioneer 3&rsquo;s Geiger-Mueller detectors. Deposit 3 follows the propellant depletion that burned Pioneer 3&rsquo;s first stage 3.7 seconds short. Deposit 4 grounds everything in Descartes&rsquo; coordinate system.</p>
+    <p style="font-style:italic; color:var(--text-dim);">&ldquo;Tables tell you what is. Formulas tell you why. Examples tell you how it feels.&rdquo; &mdash; (paraphrase of McNeese &amp; Hoag&rsquo;s pedagogical philosophy)</p>
+  </div>
+
+  <div class="nav-card">
+    <a href="organism.html">&larr; Track 2: Organism</a>
+    <a href="papers.html">Track: Papers &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--lichen-gold);">&ldquo;Two peaks = two harmonics = superposition.&rdquo;</p>
+</footer>
+
+</body>
+</html>

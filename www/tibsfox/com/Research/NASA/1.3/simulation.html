@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track 5: Simulation &amp; Creative Arts | v1.3 Pioneer 2 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --berry-dark: #1A0F2E; --berry-mid: #2D1B4E; --berry-purple: #6B3FA0; --berry-light: #9B6FD0; --salal-dark: #2A4A2A; --salal-mid: #3D6B3D; --salal-leaf: #4A8A4A; --plum: #4A1942; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #3D2A5E; --amber: #D4A017; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--berry-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(107,63,160,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(107,63,160,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(155,111,208,0.05) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(42,74,42,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(107,63,160,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(155,111,208,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(74,25,66,0.10) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(42,74,42,0.06) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.08) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.85rem; position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--berry-purple); text-decoration: none; } .breadcrumb a:hover { color: var(--berry-light); } .breadcrumb span { color: var(--text-dim); }
+  header { background: linear-gradient(160deg, var(--berry-dark) 0%, var(--berry-mid) 30%, var(--plum) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--berry-purple); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(107,63,160,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(107,63,160,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(107,63,160,0.15); border: 1px solid var(--berry-purple); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--berry-purple); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--berry-light); }
+  .track-label { background: rgba(252,61,33,0.15); border: 1px solid rgba(252,61,33,0.4); color: var(--nasa-red); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--berry-purple); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(45,27,78,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--berry-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--berry-light); margin: 1.5rem 0 0.75rem; }
+  .card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--nasa-red); margin: 1.25rem 0 0.5rem; font-weight: 600; }
+  .card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.4rem; }
+  .card strong { color: #fff; }
+  .card a { color: var(--berry-light); text-decoration: none; border-bottom: 1px solid rgba(155,111,208,0.3); } .card a:hover { color: #fff; border-bottom-color: #fff; }
+  .card blockquote { border-left: 3px solid var(--berry-purple); padding: 0.75rem 1rem; margin: 1rem 0; background: rgba(107,63,160,0.08); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .card code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(107,63,160,0.15); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--berry-light); }
+  .card pre { background: rgba(11,15,30,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; overflow-x: auto; margin: 1rem 0; }
+  .card pre code { background: none; padding: 0; font-size: 0.82rem; color: var(--text); line-height: 1.5; }
+  .card table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+  .card th { background: rgba(107,63,160,0.15); color: var(--berry-light); padding: 0.5rem 0.75rem; text-align: left; border-bottom: 2px solid var(--border); font-weight: 600; }
+  .card td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(61,42,94,0.5); color: var(--text); }
+  .sim-tag { display: inline-block; background: rgba(252,61,33,0.1); border: 1px solid rgba(252,61,33,0.3); border-radius: 4px; padding: 0.1rem 0.5rem; font-size: 0.75rem; color: var(--nasa-red); font-family: 'DM Mono', monospace; margin-right: 0.5rem; }
+  .sim-meta { font-size: 0.8rem; color: var(--text-dim); display: flex; flex-wrap: wrap; gap: 1rem; margin: 0.5rem 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .bottom-nav { background: rgba(45,27,78,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .bottom-nav a { color: var(--berry-purple); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.3rem 0.75rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; }
+  .bottom-nav a:hover { color: var(--berry-light); border-color: var(--berry-purple); background: rgba(107,63,160,0.1); }
+  .bottom-nav a.active { color: var(--nasa-red); border-color: rgba(252,61,33,0.4); background: rgba(252,61,33,0.08); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--berry-purple); text-decoration: none; }
+  @media (max-width: 800px) { main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } .header-content { padding: 1.5rem 1rem 1rem; } .bottom-nav { flex-direction: column; align-items: stretch; } .bottom-nav a { text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">v1.3 Pioneer 2</a> <span>&rarr;</span> <span>Track 5: Simulation &amp; Creative Arts</span>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.3</span>
+      <span>NASA Mission Series</span>
+      <span class="track-label">Track 5</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts Specifications</h1>
+    <p class="subtitle">What to build, train, visualize, and create &mdash; Pioneer 2, the Air Force&rsquo;s last Pioneer</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti (8GB), 60GB RAM, i7-6700K</span>
+      <span><span class="label">Organism:</span> Salal</span>
+      <span><span class="label">Bird:</span> Black-capped Chickadee</span>
+      <span><span class="label">Dedication:</span> Robert Bunsen</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <h3>A1. Python: 3-Stage Rocket Delta-V Calculator + Staging Visualization</h3>
+    <div class="sim-meta"><span class="sim-tag">Python</span> <span>numpy, matplotlib</span> <span>2&ndash;3 hours</span> <span>Beginner-Intermediate</span></div>
+    <p>A delta-v budget calculator for the Pioneer 2 Thor-Able stack that computes the ideal delta-v from each stage using the Tsiolkovsky rocket equation, then visualizes the staging sequence &mdash; including the third stage failure that doomed the mission. Three panels: stacked bar chart showing delta-v per stage (with Stage 3 in red), mass ratio waterfall, and altitude vs time comparing Pioneer 2&rsquo;s actual 1,550 km arc against the intended lunar trajectory.</p>
+    <p><strong>Key learning moments:</strong> The stacked bar chart makes the third-stage failure visceral: a red block sitting on top of two green blocks, well below the escape threshold line. Comparing Pioneer 1 (97.8% of target) to Pioneer 2 (73% of target) shows that losing an entire stage is categorically worse than losing 10 seconds of burn time.</p>
+
+    <hr>
+
+    <h3>A2. Minecraft: Launch Pad with Redstone 3-Stage Ignition Sequence</h3>
+    <div class="sim-meta"><span class="sim-tag">Minecraft</span> <span>Redstone</span> <span>3&ndash;4 hours</span> <span>Intermediate</span></div>
+    <p>A Minecraft redstone contraption simulating a three-stage rocket ignition sequence. Two stages fire correctly (TNT + observer chains), but the third stage has a broken redstone connection &mdash; one repeater facing the wrong direction. The student debugs the circuit: finds the misaligned repeater in the Stage 3 circuit, right-clicks to rotate it, presses the launch button again, and all three stages fire in sequence. A control room displays three status lamps (green, green, red) and signs reading &ldquo;PIONEER 2 &mdash; Nov 8, 1958&rdquo; and &ldquo;Third stage ignition failure.&rdquo;</p>
+    <p><strong>Key learning moment:</strong> The physical act of rotating one repeater to fix the mission is memorable. Hardware failures are often this simple &mdash; one component, one wrong orientation, one missed connection.</p>
+
+    <hr>
+
+    <h3>A3. Blender: 45-Minute Arc + TV Camera Scan Animation</h3>
+    <div class="sim-meta"><span class="sim-tag">Blender</span> <span>Cycles GPU</span> <span>10&ndash;16 hours</span> <span>Advanced</span></div>
+    <p>A Blender animation showing Pioneer 2&rsquo;s brief ~45-minute flight &mdash; from launch to 1,550 km altitude and back. Split screen: left is the trajectory view, right is the TV camera attempting to scan Earth. The scan lines build up a crude image that never completes because the flight is too short. 810 frames at 30fps (27 seconds, compressing ~45 minutes). The animation includes third-stage failure text overlay, partial TV image deterioration during descent, and reentry effects. The partial TV image is exported as standalone PNG: &ldquo;the image that never was.&rdquo;</p>
+    <p><strong>Key learning moment:</strong> The split screen is devastating. On the left, the trajectory barely reaches altitude. On the right, the TV camera is patiently building an image line by line &mdash; an image that will never be completed.</p>
+
+    <hr>
+
+    <h3>A4. GLSL Shader: Solid Rocket Grain Combustion</h3>
+    <div class="sim-meta"><span class="sim-tag">GLSL</span> <span>60fps @ 1080p</span> <span>6&ndash;8 hours</span> <span>Intermediate-Advanced</span></div>
+    <p>A real-time fragment shader visualizing the internal combustion of the X-248 Altair motor. 2D longitudinal cross-section showing the star-pattern grain geometry, flame front propagating inward using noise-perturbed boundaries, combustion gas particles flowing toward the nozzle, and Mach diamonds in the exhaust. Two modes: <strong>Mode 1 (Nominal)</strong> &mdash; igniter fires, flame propagates, 16-second burn to completion. <strong>Mode 2 (Pioneer 2 Failure)</strong> &mdash; igniter flashes briefly, flame does NOT propagate to main grain, motor sits cold and inert. XScreenSaver-compatible wrapper included.</p>
+    <p><strong>Key learning moment:</strong> The student sees the same motor, the same geometry. In one mode, combustion sweeps through in 16 seconds. In the other, the igniter flashes and nothing happens. Solid rockets are binary: they light or they don&rsquo;t.</p>
+
+    <hr>
+
+    <h3>A5. Arduino: Scanning Camera Image Builder + Stage Separation LEDs</h3>
+    <div class="sim-meta"><span class="sim-tag">Arduino</span> <span>~$25&ndash;40</span> <span>3&ndash;4 hours</span> <span>Beginner-Intermediate</span></div>
+    <p>Two builds in one. <strong>Build 1:</strong> A servo-swept phototransistor builds a 64x64 image line by line on an SSD1306 OLED display &mdash; Pioneer 2&rsquo;s image dissector in miniature. <strong>Build 2:</strong> Three LEDs (green, green, red) display the staging sequence. Press the button: Stage 1 lights, blinks, separates. Stage 2 lights, blinks, separates. Stage 3 blinks once dimly then stays dark &mdash; &ldquo;STAGE 3 &mdash; NO IGNITION.&rdquo; Hold the button during Stage 3 to see what should have happened.</p>
+
+    <hr>
+
+    <h3>A6. Godot 4: 3-Stage Rocket Game &mdash; Manage Ignition Timing</h3>
+    <div class="sim-meta"><span class="sim-tag">Godot 4</span> <span>GDScript</span> <span>10&ndash;16 hours</span> <span>Intermediate</span></div>
+    <p>A side-scrolling game where the player manually triggers each stage ignition at the right moment. The critical moment: Stage 3 ignition has only a <strong>2-second window</strong>. Click in time and the X-248 fires, velocity crosses escape threshold, Moon appears in the distance, TV camera activates. Miss the window (as Pioneer 2 did) and Stage 3 turns red &mdash; no ignition, no flame, silence. The spacecraft arcs to 1,550 km and falls back. TV camera activates anyway: partial scan, noisy, then static. &ldquo;Pioneer 2 reached 1,550 km. The Moon is 384,400 km away. TRY AGAIN.&rdquo;</p>
+    <p><strong>Key learning moment:</strong> The 2-second window for Stage 3 ignition IS the game. The first time the student misses the window and watches the rocket arc to 1,550 km instead of the Moon, they understand what happened on November 8, 1958.</p>
+
+    <hr>
+
+    <h3>A7. GMAT: Pioneer 2 Actual Trajectory vs Pioneer 1</h3>
+    <div class="sim-meta"><span class="sim-tag">GMAT</span> <span>Advanced</span> <span>4&ndash;6 hours</span></div>
+    <p>Three scenarios: Pioneer 2 actual (1,550 km ballistic arc), Pioneer 1 actual (113,854 km, 43 hours), and Pioneer 2 if Stage 3 had fired (escape trajectory). Triple trajectory overlay plot where Pioneer 2&rsquo;s arc is a small bump near the x-axis while Pioneer 1&rsquo;s sweeps up to 113,854 km. Same rocket, same design, one missing ignition. The altitude plot is the killer &mdash; the 1,550 km apogee is below GPS orbit altitude (20,200 km), below the inner Van Allen belt peak (3,000 km). Pioneer 2 never reached the space environment that Pioneer 1 mapped.</p>
+  </div>
+
+  <div class="card">
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <h3>B1. Image Reconstruction from Sparse TV Scan Data</h3>
+    <div class="sim-meta"><span class="sim-tag">PyTorch</span> <span>U-Net</span> <span>RTX 4060 Ti</span> <span>~30 min training</span> <span>Intermediate</span></div>
+    <p>Train a convolutional neural network to reconstruct complete images from partial TV camera scan data &mdash; the kind of data Pioneer 2&rsquo;s camera would have produced. Input: 256x256 grayscale Earth-from-space images degraded to 8&ndash;64 scan lines with Gaussian noise (SNR 10&ndash;30 dB). Output: reconstructed full image. Training data: 5,000 synthetic Earth-from-space images from NASA Blue Marble tiles. Test includes 50 images matching Pioneer 2&rsquo;s parameters (1,550 km altitude, 1.8 rev/sec spin smear, 12&ndash;15 scan lines).</p>
+
+    <h3>B2. Failure Prediction from Telemetry</h3>
+    <div class="sim-meta"><span class="sim-tag">XGBoost</span> <span>scikit-learn, SHAP</span> <span>CPU only</span> <span>~2 min training</span> <span>Beginner-Intermediate</span></div>
+    <p>Train a gradient-boosted classifier to predict ignition failure from 15 pre-ignition telemetry features (motor temperature, spin rate, battery voltage, squib circuit continuity, grain age, etc.). 10,000 synthetic ignition attempts with 92% nominal / 8% failure. The student discovers that squib circuit resistance and grain temperature dominate feature importance &mdash; simple checks that could prevent failures. This is why pre-flight checkout procedures exist: they ARE the classifier, implemented as human-executed decision trees.</p>
+  </div>
+
+  <div class="card">
+    <h2>C. Computer Science &mdash; What Pioneer 2 Teaches</h2>
+
+    <h3>C1. State Machines for Ignition Sequences</h3>
+    <p>Pioneer 2&rsquo;s launch sequence is a textbook finite state machine:</p>
+    <pre><code>IDLE &rarr; COUNTDOWN &rarr; STAGE1_BURN &rarr; STAGE1_SEP &rarr; STAGE2_BURN &rarr; STAGE2_SEP
+  &rarr; SPIN_UP &rarr; STAGE3_ARM &rarr; STAGE3_IGNITE_CMD &rarr; (STAGE3_BURN | STAGE3_FAIL)
+  &rarr; COAST &rarr; (ESCAPE | BALLISTIC_ARC) &rarr; (LUNAR_TRANSIT | REENTRY)</code></pre>
+    <p>Pioneer 2&rsquo;s path:</p>
+    <pre><code>IDLE &rarr; COUNTDOWN &rarr; STAGE1_BURN &rarr; STAGE1_SEP &rarr; STAGE2_BURN &rarr; STAGE2_SEP
+  &rarr; SPIN_UP &rarr; STAGE3_ARM &rarr; STAGE3_IGNITE_CMD &rarr; STAGE3_FAIL
+  &rarr; COAST &rarr; BALLISTIC_ARC &rarr; REENTRY</code></pre>
+    <p><strong>Exercise:</strong> Implement the complete launch state machine. Run it with Pioneer 0 inputs (Stage 1 failure), Pioneer 1 inputs (Stage 2 underperformance), and Pioneer 2 inputs (Stage 3 no-ignition). The same state machine traces three different paths through the graph.</p>
+
+    <h3>C2. Protocol Design: Command Verification</h3>
+    <p>Pioneer 2&rsquo;s third stage ignition was commanded by an onboard timer, not by ground control. Fire and hope. The exercise: design a command verification protocol for a 1958-era spacecraft with 5 bits/second uplink, 64.8 bits/second downlink, and ~2 seconds latency. The student discovers the fundamental problem: a solid motor cannot be stopped once ignited, and cannot be restarted if ignition fails. The verification protocol can only confirm or deny &mdash; it cannot correct. This is why Pioneer 2&rsquo;s failure was unrecoverable.</p>
+  </div>
+
+  <div class="card">
+    <h2>D. Game Theory &mdash; What Trade-Offs</h2>
+
+    <h3>D1. Risk of Adding Complexity (TV Camera) vs Mission Success Probability</h3>
+    <table>
+      <tr><th></th><th>Mission Succeeds (Stage 3 fires)</th><th>Mission Fails (Stage 3 doesn&rsquo;t fire)</th></tr>
+      <tr><td><strong>With TV camera</strong></td><td>Images from lunar distance + radiation data + PRESTIGE (VERY HIGH)</td><td>45-minute flight, camera data near-Earth only (LOW)</td></tr>
+      <tr><td><strong>Without TV camera</strong></td><td>Radiation data + magnetometer + lighter spacecraft (HIGH)</td><td>45-minute flight, same instruments as Pioneer 1 (LOW)</td></tr>
+    </table>
+    <p>The TV camera added 5 kg of mass. The exercise: calculate the delta-v impact of 5 kg using the Tsiolkovsky equation. Model this as a multi-attribute decision problem. The camera was the right decision IF the stages were reliable. But the camera did not cause the failure. The third stage would have failed with or without the camera. The 5 kg mass penalty was within margin. Pioneer 2&rsquo;s failure was orthogonal to the camera decision.</p>
+    <p><strong>The deeper lesson:</strong> Adding capability (complexity) is often blamed for failures it did not cause. Post-hoc analysis must separate &ldquo;what caused the failure&rdquo; from &ldquo;what was different about this mission.&rdquo;</p>
+  </div>
+
+  <div class="card">
+    <h2>E. Creative Arts &mdash; What to Create</h2>
+
+    <h3>E1. Pioneer 2 TV Camera Images as Generative Art</h3>
+    <div class="sim-meta"><span class="sim-tag">Python / p5.js</span> <span>4&ndash;6 hours</span> <span>Intermediate</span></div>
+    <p>A series of 6 images imagining what Pioneer 2&rsquo;s TV camera would have captured &mdash; rendered at 32x32 (authentic), 256x256 (enhanced), and 1024x1024 (artistic interpretation with CRT shader effects). Image 1: T+10 min at 200 km (Florida coastline). Image 2: T+25 min at 1,000 km (southeastern US). Image 3: T+40 min at 1,550 km apogee (Atlantic, North Africa). Images 4&ndash;6: imagined views at 10,000 km, 50,000 km, and lunar distance &mdash; what the camera was designed for but never saw.</p>
+
+    <h3>E2. Black-capped Chickadee Call Patterns as Data Sonification</h3>
+    <div class="sim-meta"><span class="sim-tag">SuperCollider + Audacity</span> <span>4&ndash;6 hours</span> <span>Intermediate</span></div>
+    <p>A sound design piece mapping Pioneer 2&rsquo;s telemetry to the chickadee&rsquo;s vocal repertoire. The number of &ldquo;dee&rdquo; notes in the <em>chick-a-dee-dee-dee</em> call encodes threat level. Pre-launch: calm <em>fee-bee</em>. Stage burns: base <em>chick-a-dee</em>. Stage 3 ignition command: increasing dees (tension). Stage 3 failure: maximum alarm &mdash; <em>chick-a-dee-dee-dee-dee-dee-dee</em>, each note at increasing pitch, sustained, no resolution. Then the calls slow, become quieter as the ballistic coast fades into forest silence. Total duration: ~2 minutes over PNW forest ambience.</p>
+
+    <h3>E3. Salal Berry Cluster Visualizations</h3>
+    <div class="sim-meta"><span class="sim-tag">p5.js / Processing</span> <span>4&ndash;6 hours</span> <span>Intermediate</span></div>
+    <p>Generative art mapping Pioneer 2&rsquo;s staging sequence onto a salal berry cluster. Main raceme stem = mission timeline. Berries 1&ndash;4: Stages 1&ndash;2 and separations (large, dark purple, nominal). Berry 5: Spin-up (medium, reddish). Berry 6: Stage 3 ignition command (turning red). Berry 7: Stage 3 FAILURE &mdash; small, pale green, <strong>withered</strong>. This berry did not ripen. Remaining berries above are smaller and paler &mdash; stunted by the failure below. A comparison raceme for Pioneer 1 is drawn alongside: full, heavy with ripe berries. The visual contrast tells the story.</p>
+  </div>
+
+  <div class="card">
+    <h2>F. Problem Solving &mdash; Engineering Methodology</h2>
+
+    <h3>F1. Progressive Failure Analysis: Pioneer 0-1-2</h3>
+    <table>
+      <tr><th>Mission</th><th>Primary Failure</th><th>Stage</th><th>Root Cause</th><th>Fix Applied to Next</th></tr>
+      <tr><td>P-0 (Aug)</td><td>Turbopump explosion T+77</td><td>1</td><td>Bearing lubrication</td><td>Improved bearing spec + testing</td></tr>
+      <tr><td>P-1 (Oct)</td><td>2nd stage cut off 10s early</td><td>2</td><td>Accelerometer bias + guidance</td><td>Full-duration burn timer as backup</td></tr>
+      <tr><td>P-2 (Nov)</td><td>3rd stage no ignition</td><td>3</td><td>Igniter failure or signal path</td><td>Improved ignition train + redundant squib circuits</td></tr>
+    </table>
+    <p>Each failure occurred ONE STAGE HIGHER than the previous. This is progressive debugging: fix the lowest-level failure first, run the system again, the NEXT failure reveals itself (it was always there, masked by the earlier failure). The pattern is identical to software debugging: fix the first crash, get a new crash further along. Each fix reveals the next layer.</p>
+    <p><strong>The meta-lesson:</strong> Pioneer 2 did not repeat Pioneer 1&rsquo;s failure. The second stage burned for the full duration. The fix worked. But fixing one stage revealed the next stage&rsquo;s weakness. This is the nature of complex systems: you cannot test all failure modes simultaneously. You discover them in series, one per flight.</p>
+  </div>
+
+  <div class="card">
+    <h2>G. GSD Self-Improvement &mdash; What This Mission Teaches the System</h2>
+
+    <h3>G1. New Pattern: Progressive Debugging (Fix One, Find the Next)</h3>
+    <p>When a multi-phase plan fails at Phase N: fix Phase N&rsquo;s root cause, re-execute from Phase N (not from the beginning), EXPECT a failure at Phase N+1 (it was masked before), track the &ldquo;failure waterline&rdquo; &mdash; the highest phase that has been tested end-to-end.</p>
+    <blockquote>Below the waterline: tested, known-good. At the waterline: current point of failure. Above the waterline: UNTESTED (not &ldquo;working&rdquo; &mdash; untested). Never assume phases above the waterline are working just because they haven&rsquo;t failed yet. They haven&rsquo;t been reached yet. That is not the same thing.</blockquote>
+
+    <h3>G2. New Pattern: Failure-as-Learning Metrics</h3>
+    <p>Three Pioneer failures in four months. By conventional metrics, the program was failing at 100%. By learning metrics, each failure advanced the system. When tracking failure metrics, add learning metrics alongside: <code>failure_count: 3</code>, <code>learning_events: 3</code> (1:1 &mdash; every failure taught something new), <code>repeated_failures: 0</code>, <code>coverage_advancement: failure waterline moved from Stage 1 to Stage 3</code>.</p>
+    <blockquote>A program where failure_count increases but learning_events stagnates is in trouble. A program where every failure produces a unique learning event and the waterline advances is making progress, even if the success count is zero. Sometimes progress looks like failure.</blockquote>
+
+    <h3>G3. New Rule Candidate: The Untested-is-Unknown Rule</h3>
+    <p><strong>Proposed hard rule:</strong> &ldquo;Any component or phase that has not been tested in the actual execution context is in an UNKNOWN state, regardless of how many times it has been tested in isolation.&rdquo;</p>
+    <p>Derived from: Pioneer 2&rsquo;s X-248 solid motor passed all ground tests. It was tested in vacuum chambers, in vibration fixtures, in thermal cycling. It had fired successfully in Pioneer 1 (a different unit, same design). The specific flight unit on Pioneer 2 never ignited. Ground testing and flight testing are different contexts.</p>
+    <blockquote>Pioneer 2&rsquo;s Stage 3 was UNIT-TESTED. It needed to be FLIGHT-TESTED. Those are different things, and the difference is a 45-minute arc instead of a lunar transit.</blockquote>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="index.html">&larr; Mission Index</a>
+    <a href="research.html">Research</a>
+    <a href="organism.html">Organism</a>
+    <a href="mathematics.html">Mathematics</a>
+    <a href="papers.html">Papers</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a class="active" href="simulation.html">Simulation</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--berry-purple);">&ldquo;The thicket feeds what the canopy does not see.&rdquo;</p>
+</footer>
+
+</body>
+</html>

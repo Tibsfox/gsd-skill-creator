@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track 4: Curriculum — College of Knowledge | v1.3 Pioneer 2 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --berry-dark: #1A0F2E; --berry-mid: #2D1B4E; --berry-purple: #6B3FA0; --berry-light: #9B6FD0; --salal-dark: #2A4A2A; --salal-mid: #3D6B3D; --salal-leaf: #4A8A4A; --plum: #4A1942; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #3D2A5E; --amber: #D4A017; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--berry-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(107,63,160,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(107,63,160,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(155,111,208,0.05) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(42,74,42,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(107,63,160,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(155,111,208,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(74,25,66,0.10) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(42,74,42,0.06) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.08) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.85rem; position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--berry-purple); text-decoration: none; } .breadcrumb a:hover { color: var(--berry-light); } .breadcrumb span { color: var(--text-dim); }
+  header { background: linear-gradient(160deg, var(--berry-dark) 0%, var(--berry-mid) 30%, var(--plum) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--berry-purple); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(107,63,160,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(107,63,160,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(107,63,160,0.15); border: 1px solid var(--berry-purple); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--berry-purple); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--berry-light); }
+  .track-label { background: rgba(212,160,23,0.2); border: 1px solid var(--amber); color: var(--amber); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--amber); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(45,27,78,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--berry-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--berry-light); margin: 1.5rem 0 0.75rem; }
+  .card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--amber); margin: 1.25rem 0 0.5rem; font-weight: 600; }
+  .card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.4rem; }
+  .card strong { color: #fff; }
+  .card a { color: var(--berry-light); text-decoration: none; border-bottom: 1px solid rgba(155,111,208,0.3); } .card a:hover { color: #fff; border-bottom-color: #fff; }
+  .card blockquote { border-left: 3px solid var(--berry-purple); padding: 0.75rem 1rem; margin: 1rem 0; background: rgba(107,63,160,0.08); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .card code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(107,63,160,0.15); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--berry-light); }
+  .card pre { background: rgba(11,15,30,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; overflow-x: auto; margin: 1rem 0; }
+  .card pre code { background: none; padding: 0; font-size: 0.82rem; color: var(--text); line-height: 1.5; }
+  .card table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+  .card th { background: rgba(107,63,160,0.15); color: var(--berry-light); padding: 0.5rem 0.75rem; text-align: left; border-bottom: 2px solid var(--border); font-weight: 600; }
+  .card td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(61,42,94,0.5); color: var(--text); }
+  .dept-tag { display: inline-block; background: rgba(107,63,160,0.15); border: 1px solid var(--berry-purple); border-radius: 4px; padding: 0.1rem 0.5rem; font-size: 0.75rem; color: var(--berry-light); font-family: 'DM Mono', monospace; margin-right: 0.5rem; }
+  .try-header { background: rgba(212,160,23,0.1); border: 1px solid rgba(212,160,23,0.3); border-radius: 6px; padding: 0.75rem 1rem; margin: 1rem 0 0.75rem; }
+  .try-header .try-title { font-weight: 700; color: var(--amber); font-size: 1rem; }
+  .try-meta { font-size: 0.8rem; color: var(--text-dim); display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.35rem; }
+  .diy-header { background: rgba(42,74,42,0.15); border: 1px solid var(--salal-mid); border-radius: 6px; padding: 0.75rem 1rem; margin: 1rem 0 0.75rem; }
+  .diy-header .diy-title { font-weight: 700; color: var(--salal-leaf); font-size: 1rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .bottom-nav { background: rgba(45,27,78,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .bottom-nav a { color: var(--berry-purple); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.3rem 0.75rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; }
+  .bottom-nav a:hover { color: var(--berry-light); border-color: var(--berry-purple); background: rgba(107,63,160,0.1); }
+  .bottom-nav a.active { color: var(--amber); border-color: var(--amber); background: rgba(212,160,23,0.1); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--berry-purple); text-decoration: none; }
+  @media (max-width: 800px) { main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } .header-content { padding: 1.5rem 1rem 1rem; } .bottom-nav { flex-direction: column; align-items: stretch; } .bottom-nav a { text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">v1.3 Pioneer 2</a> <span>&rarr;</span> <span>Track 4: Curriculum</span>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.3</span>
+      <span>NASA Mission Series</span>
+      <span class="track-label">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, and Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Engineering, Physics, Electronics</span>
+      <span><span class="label">Secondary:</span> Chemistry, Mathematics, Art</span>
+      <span><span class="label">Organism:</span> Gaultheria shallon (Salal)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>Department Deposits</h2>
+
+    <h3>Engineering (Primary)</h3>
+    <p><span class="dept-tag">Staging and Propulsion Systems</span></p>
+    <p><strong>Concept:</strong> Multi-stage rocket design, ignition systems, and the consequences of a single-point failure in the propulsion chain</p>
+    <p>Pioneer 2 flew on a three-stage Thor-Able vehicle. The first two stages performed nominally &mdash; the Thor booster lofted the vehicle through the atmosphere, and the AJ10-40 second stage accelerated it into a suborbital trajectory. The ABL X-248 third stage, a solid rocket motor, failed to ignite:</p>
+    <ul>
+      <li>Multi-stage rocket architecture: why stages exist (the Tsiolkovsky equation demands mass shedding)</li>
+      <li>Thor booster: LR79-NA-9 engine, kerosene/LOX, 667 kN thrust, the workhorse of early American rocketry</li>
+      <li>AJ10-40 second stage: pressure-fed, hypergolic, 35 kN thrust, the Able stage that also flew on Vanguard</li>
+      <li>ABL X-248 Altair third stage: solid composite propellant, polyurethane binder, internal-burning star grain</li>
+      <li>Ignition chain analysis: electrical timer, pyrotechnic squib, propellant surface ignition, chamber pressurization</li>
+      <li>Failure mode: the ignition signal never reached the motor &mdash; first-link failure in a six-link chain</li>
+      <li>Single point of failure: no redundant ignition path existed in 1958 solid motor designs</li>
+      <li>Delta-v budget: Stage 3 was responsible for approximately one-third of the total velocity; its loss reduced Pioneer 2 from a lunar probe to a sounding rocket reaching 1,550 km</li>
+      <li>Design heritage: the X-248 motor ignited successfully on Pioneer 1 (27 days earlier), Pioneer 3, and Pioneer 4 &mdash; three out of four flights</li>
+    </ul>
+
+    <h3>Physics (Primary)</h3>
+    <p><span class="dept-tag">Near-Earth Radiation Environment</span></p>
+    <p><strong>Concept:</strong> The radiation field between 200 and 1,550 km altitude &mdash; the low-altitude inner Van Allen belt and the transition from atmosphere to trapped particle regime</p>
+    <ul>
+      <li>The inner Van Allen belt: protons trapped by Earth&rsquo;s magnetic dipole field, concentrated at ~1,000&ndash;6,000 km altitude</li>
+      <li>Pioneer 2 sampled the bottom edge of the inner belt &mdash; the transition zone where atmospheric absorption competes with magnetic trapping</li>
+      <li>Geiger-Mueller counter measurements: count rate as a function of altitude from surface to 1,550 km</li>
+      <li>The South Atlantic Anomaly: where the inner belt dips to its lowest altitude due to the offset between Earth&rsquo;s geographic and magnetic axes</li>
+      <li>Altitude-dependent transition: cosmic ray regime (surface to ~500 km) &rarr; inner belt regime (500&ndash;6,000 km) &rarr; slot region (6,000&ndash;10,000 km)</li>
+    </ul>
+
+    <h3>Electronics (Primary)</h3>
+    <p><span class="dept-tag">TV Camera Systems and Scanning Technology</span></p>
+    <p><strong>Concept:</strong> Image dissector operation, raster scanning, and the first attempt to fly a camera beyond low Earth orbit on a Pioneer spacecraft</p>
+    <ul>
+      <li>Image dissector principle: an electron image of the scene is formed on a photocathode, then a deflection system steers individual pixel positions onto an aperture</li>
+      <li>Raster scanning: the deflection coils sweep the sampling aperture across the electron image in a systematic line-by-line pattern</li>
+      <li>Resolution: approximately 150 scan lines, 150 pixels per line &mdash; roughly 22,500 total pixels per frame</li>
+      <li>Frame rate: at the available telemetry bandwidth (~200 bits/s), each frame required approximately 9&ndash;10 minutes to transmit</li>
+      <li>The Farnsworth connection: Philo Farnsworth demonstrated the first all-electronic television in 1927; the image dissector was his invention</li>
+      <li>Technology lineage: image dissector (Pioneer 2) &rarr; vidicon tubes (Ranger, Mariner) &rarr; CCD arrays (Galileo, Hubble) &rarr; CMOS sensors (Mars rovers, JWST)</li>
+    </ul>
+
+    <h3>Chemistry (Secondary)</h3>
+    <p><span class="dept-tag">Solid Propellant Chemistry</span></p>
+    <ul>
+      <li>Oxidizer: ammonium perchlorate (NH<sub>4</sub>ClO<sub>4</sub>), crystalline particles providing the oxygen for combustion</li>
+      <li>Fuel: aluminum powder, typically 15&ndash;18% by mass, increasing specific impulse and flame temperature</li>
+      <li>Binder: polyurethane, the structural matrix that holds the oxidizer and fuel particles together, also contributing as fuel</li>
+      <li>The grain geometry (internal-burning star pattern) determines thrust profile</li>
+      <li>Connection to Bunsen: the X-248&rsquo;s combustion flame contains emission lines from aluminum, chlorine, sodium &mdash; each identifiable by spectroscopic methods Bunsen pioneered</li>
+    </ul>
+
+    <h3>Mathematics (Secondary)</h3>
+    <p><span class="dept-tag">Delta-v Budgets and Staging Optimization</span></p>
+    <ul>
+      <li>Total delta-v = sum of stage contributions: &Delta;v = &Delta;v_1 + &Delta;v_2 + &Delta;v_3</li>
+      <li>Each term: &Delta;v_i = v_e_i * ln(m_0_i / m_f_i) (Tsiolkovsky equation per stage)</li>
+      <li>Equal-delta-v staging: if all stages have the same specific impulse, the optimal strategy is to give each stage the same delta-v contribution</li>
+      <li>The zero-term catastrophe: when &Delta;v_3 = 0, the total becomes &Delta;v_1 + &Delta;v_2 &asymp; 7.7 km/s &mdash; 70% of escape, enough for 1,550 km but nowhere close to the Moon</li>
+    </ul>
+
+    <h3>Art (Secondary)</h3>
+    <p><span class="dept-tag">Early Space Imaging and Visual Record</span></p>
+    <ul>
+      <li>The decision to include a TV camera: Pioneer 2 added a camera &mdash; the first attempt to return visual imagery from beyond low Earth orbit on a Pioneer</li>
+      <li>The image dissector aesthetic: low resolution (150x150), slow scan, noisy &mdash; the images would have been grainy, ghostly, and historically priceless</li>
+      <li>Data visualization of the radiation profile: without images, Pioneer 2&rsquo;s science is presented as graphs &mdash; the art of translating invisible radiation into visible understanding</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>TRY Sessions</h2>
+
+    <div class="try-header">
+      <div class="try-title">TRY 1: Calculate Your Rocket&rsquo;s Delta-v Budget with Staging</div>
+      <div class="try-meta">
+        <span>Duration: 30 minutes</span>
+        <span>Difficulty: Beginner</span>
+        <span>Department: Mathematics / Engineering</span>
+        <span>Needs: Python 3.8+ or calculator</span>
+      </div>
+    </div>
+    <p><strong>What You&rsquo;ll Learn:</strong> How to split a velocity budget across multiple stages and feel the exponential tyranny of the Tsiolkovsky equation &mdash; why throwing away hardware mid-flight is the only way to reach orbit.</p>
+    <pre><code>&Delta;v = v_e * ln(m_0 / m_f)
+v_e = Isp * 9.80665</code></pre>
+    <p>This is the entire equation. Everything in rocketry flows from it. The exercise walks through single-stage, two-stage, and three-stage rockets using the same total mass &mdash; demonstrating that staging works by discarding dead weight. When Stage 3 is removed (the Pioneer 2 scenario), the total delta-v drops catastrophically.</p>
+    <p><strong>The NASA Connection:</strong> Every launch vehicle ever built uses staging. Saturn V: three stages to the Moon. Shuttle: two SRBs plus an external tank plus orbiter engines. Falcon 9: two stages. Pioneer 2 is the cautionary tale: your budget depends on every term in the sum being nonzero.</p>
+
+    <hr>
+
+    <div class="try-header">
+      <div class="try-title">TRY 2: Build a Simple Scanning Camera with Arduino</div>
+      <div class="try-meta">
+        <span>Duration: 45 minutes</span>
+        <span>Difficulty: Beginner-Intermediate</span>
+        <span>Department: Electronics / Art</span>
+        <span>Cost: ~$36</span>
+      </div>
+    </div>
+    <p><strong>What You&rsquo;ll Learn:</strong> How Pioneer 2&rsquo;s camera would have built up an image line by line by physically scanning across a scene &mdash; and why this is fundamentally the same operation as reading a book or mowing a lawn.</p>
+    <p>A photoresistor on a servo is your &ldquo;image dissector&rdquo; &mdash; it reads light intensity at one point, then the servo moves it to the next point. The output appears as ASCII art in the Serial Monitor. The principle is identical to Pioneer 2&rsquo;s camera: move a single-point detector across a scene to build up an image.</p>
+
+    <hr>
+
+    <div class="try-header">
+      <div class="try-title">TRY 3: Design a Solid Rocket Motor Grain Geometry</div>
+      <div class="try-meta">
+        <span>Duration: 45 minutes</span>
+        <span>Difficulty: Intermediate</span>
+        <span>Department: Engineering / Mathematics</span>
+        <span>Needs: Paper, pencil, compass, ruler, calculator</span>
+      </div>
+    </div>
+    <p><strong>What You&rsquo;ll Learn:</strong> A solid rocket motor&rsquo;s thrust profile depends on the surface area of burning propellant. As the grain burns, the surface changes shape. The geometry of the initial grain cross-section determines whether thrust increases, decreases, or stays constant during the burn.</p>
+    <p>You draw a 5-pointed star bore pattern inside a circle (the motor case), calculate the burning surface area, and sketch the burn progression from star to cylinder. The fact that a star grain maintains approximately constant surface area during most of the burn is the key design insight &mdash; the same one used in the SLS boosters, scaled up by a factor of a thousand.</p>
+  </div>
+
+  <div class="card">
+    <h2>DIY Projects</h2>
+
+    <div class="diy-header">
+      <div class="diy-title">DIY 1: Arduino Scanning Camera That Builds an Image</div>
+      <div class="try-meta">
+        <span>Cost: $25</span>
+        <span>Duration: Weekend (4&ndash;6 hours)</span>
+        <span>Difficulty: Intermediate</span>
+        <span>Department: Electronics / Art</span>
+      </div>
+    </div>
+    <p>A two-axis scanning camera that builds up a grayscale image pixel by pixel, displayed on an OLED screen &mdash; Pioneer 2&rsquo;s image dissector rebuilt from servos and a photoresistor. Two servos mounted orthogonally sweep a photoresistor across a scene. After completing a full 32x32 frame, the image appears on an SSD1306 OLED using grayscale dithering. At 100ms per pixel, a 32x32 image takes 102 seconds &mdash; the fundamental tradeoff Pioneer 2&rsquo;s camera faced: faster scans mean lower signal-to-noise per pixel.</p>
+
+    <hr>
+
+    <div class="diy-header">
+      <div class="diy-title">DIY 2: Model Rocket with Staged Ignition</div>
+      <div class="try-meta">
+        <span>Cost: $40</span>
+        <span>Duration: Weekend (build day + launch day)</span>
+        <span>Difficulty: Intermediate</span>
+        <span>Department: Engineering / Physics</span>
+      </div>
+    </div>
+    <p>A two-stage model rocket using commercially available Estes motors, demonstrating the same staging principle Pioneer 2 used. The B6-0 booster (zero-delay) ignites the C6-7 sustainer directly through hot exhaust gas. Flight 1 with staging: ~250&ndash;350 meters. Flight 2 without sustainer (Pioneer 2 simulation): ~80&ndash;120 meters. Ratio: roughly 3:1 &mdash; staging provides dramatically more altitude.</p>
+
+    <hr>
+
+    <div class="diy-header">
+      <div class="diy-title">DIY 3: Bunsen Burner Flame Spectroscopy with a Diffraction Grating</div>
+      <div class="try-meta">
+        <span>Cost: $15</span>
+        <span>Duration: 1 hour</span>
+        <span>Difficulty: Beginner</span>
+        <span>Department: Chemistry / Physics</span>
+      </div>
+    </div>
+    <p>A simple spectroscope using a diffraction grating to observe the characteristic emission lines of different elements when introduced to a flame &mdash; the exact experiment Robert Bunsen pioneered in the 1850s. Sodium (table salt) produces a bright yellow doublet at ~589 nm. Potassium (KCl salt substitute) produces faint violet. Copper sulfate produces brilliant green-blue. Each element&rsquo;s spectrum is different, the lines are at fixed wavelengths, and the pattern is the element&rsquo;s fingerprint &mdash; unique and reproducible. This is how Bunsen discovered cesium and rubidium.</p>
+  </div>
+
+  <div class="card">
+    <h2>Rosetta Stone Connections</h2>
+    <h3>Cross-Department Translations</h3>
+    <table>
+      <tr><th>From</th><th>To</th><th>Connection</th></tr>
+      <tr><td>Engineering (staging)</td><td>Mathematics (summation)</td><td>Multi-stage rocketry is the hardware implementation of addition. Each stage contributes a delta-v term. The total is their sum. When a term is zero, the sum is reduced.</td></tr>
+      <tr><td>Physics (radiation)</td><td>Electronics (TV camera)</td><td>Pioneer 2&rsquo;s Geiger counter measured radiation &mdash; electromagnetic energy deposited in a gas tube. The TV camera would have measured light &mdash; electromagnetic energy focused on a photocathode. Same physics, different wavelengths.</td></tr>
+      <tr><td>Chemistry (solid propellant)</td><td>Art (spectroscopy)</td><td>Bunsen&rsquo;s spectroscopy identifies elements by the light they emit when heated. A solid rocket motor heats its propellant to 3,500K during combustion. The exhaust plume is a spectroscopic laboratory: every element announces itself in light.</td></tr>
+      <tr><td>Electronics (scanning)</td><td>Mathematics (sampling)</td><td>The image dissector converts a 2D scene to a 1D time series by sampling points sequentially. Shannon&rsquo;s sampling theorem governs how many samples are needed. The Nyquist limit determines the minimum number of pixels.</td></tr>
+      <tr><td>Engineering (ignition chain)</td><td>Physics (particle cascades)</td><td>The solid motor ignition chain is a cascade where each stage triggers the next. A Geiger-Mueller tube works the same way: one ionizing particle creates an avalanche. Both are cascade amplifiers that fail completely if any link fails.</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Community Business Pathways (Fox Companies)</h2>
+
+    <h3>Pathway 1: Model Rocketry Education</h3>
+    <p><strong>Business model:</strong> Model rocket workshop series &ldquo;How Rockets Stage&rdquo; (4 sessions, progressive). Target: middle school and high school students, homeschool co-ops, scout troops. Revenue: $35&ndash;50/student, 12&ndash;20 students per session, monthly = $5,040&ndash;12,000/year. Certification: NAR level 1 as a program outcome.</p>
+
+    <h3>Pathway 2: Environmental Camera Networks</h3>
+    <p><strong>Business model:</strong> Low-cost camera installations for wildlife monitoring, construction timelapse, garden monitoring. Hardware: Arduino-based camera units ($40&ndash;60 assembled). Service: installation ($100), monthly image retrieval and time-lapse compilation ($25/month). Revenue: 15 clients at $25/month + 3 installations/month at $100 = $8,100/year.</p>
+
+    <h3>Pathway 3: Science Demonstration Services</h3>
+    <p><strong>Business model:</strong> Traveling science demonstrations for schools, libraries, and community events. Signature demo: flame spectroscopy (safe, visually stunning, connects to Space Age history). Revenue: $200&ndash;400 per event, 2&ndash;4 events per month = $4,800&ndash;19,200/year.</p>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="index.html">&larr; Mission Index</a>
+    <a href="research.html">Research</a>
+    <a href="organism.html">Organism</a>
+    <a href="mathematics.html">Mathematics</a>
+    <a href="papers.html">Papers</a>
+    <a class="active" href="curriculum.html">Curriculum</a>
+    <a href="simulation.html">Simulation</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--berry-purple);">&ldquo;The thicket feeds what the canopy does not see.&rdquo;</p>
+</footer>
+
+</body>
+</html>
