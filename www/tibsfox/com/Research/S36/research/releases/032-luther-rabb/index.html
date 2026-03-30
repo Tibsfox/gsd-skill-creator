@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 32&deg; &mdash; Luther Rabb &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E65100, #FF6D00);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #E53935;
+    }
+
+    .rb-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #F3E5F5;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .mercury-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #E53935;
+      margin-left: 0.3rem;
+    }
+
+    .foundation-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1B5E20;
+      color: #C8E6C9;
+      border: 1px solid #43A047;
+      margin-left: 0.3rem;
+    }
+
+    .e5-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+      margin-left: 0.3rem;
+      animation: pulse-e5 2s ease-in-out infinite;
+    }
+    @keyframes pulse-e5 {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(230, 81, 0, 0.4); }
+      50% { box-shadow: 0 0 8px 3px rgba(230, 81, 0, 0.2); }
+    }
+
+    .garfield-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #263238;
+      color: #B0BEC5;
+      border: 1px solid #546E7A;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .level-foundational { background: #FCE4EC; color: #880E4F; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #E65100;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #FF6D00;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #E65100;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .mercury-box {
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 2px solid #E53935;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .mercury-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFEB3B;
+      font-family: system-ui, sans-serif;
+    }
+    .mercury-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+    }
+    .mercury-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #C62828;
+      color: #FFCDD2;
+    }
+    .mercury-box td:first-child { font-weight: 600; width: 30%; color: #FFEB3B; }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: linear-gradient(135deg, #FF6D00, #E65100);
+      color: white;
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFECB3;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #FFECB3;
+    }
+
+    .garfield-box {
+      background: #263238;
+      color: #B0BEC5;
+      border: 2px solid #546E7A;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .garfield-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #80CBC4;
+      font-family: system-ui, sans-serif;
+    }
+    .garfield-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .garfield-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .garfield-box td, .garfield-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #37474F;
+      color: #B0BEC5;
+    }
+    .garfield-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #80CBC4;
+    }
+
+    .hendrix-box {
+      background: linear-gradient(135deg, #1A237E, #311B92);
+      color: #C5CAE9;
+      border: 2px solid #5C6BC0;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .hendrix-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #B388FF;
+      font-family: system-ui, sans-serif;
+    }
+    .hendrix-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .war-box {
+      background: linear-gradient(135deg, #4A148C, #6A1B9A);
+      color: #E1BEE7;
+      border: 2px solid #AB47BC;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .war-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #EA80FC;
+      font-family: system-ui, sans-serif;
+    }
+    .war-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .war-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .war-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #E1BEE7;
+    }
+    .war-box td:first-child { font-weight: 600; color: #EA80FC; width: 35%; }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">32&deg;</div>
+      <div>
+        <h1>Luther Rabb</h1>
+        <div class="subtitle">R&amp;B &middot; The Groove Lock &mdash; Seattle&rsquo;s Bass Foundation to War
+          <span class="e5-badge">Energy 5 &mdash; STREAK BREAK</span>
+          <span class="rb-badge">R&amp;B</span>
+          <span class="mercury-badge">Mercury x2</span>
+          <span class="foundation-badge">The Foundation</span>
+          <span class="garfield-badge">Garfield HS</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../031-brenda-lee-eager/index.html">Degree 31&deg; (Eager)</a>
+      <a href="../030-ray-charles/index.html">Degree 30&deg; (Ray Charles)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Quincy Jones)</a>
+      <a href="../021-polyrhythmics/index.html">Degree 21&deg; (Polyrhythmics)</a>
+      <a href="../017-reggie-watts/index.html">Degree 17&deg; (Reggie Watts)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          He was the son of a minister, born in Seattle, raised in the
+          Central District. He played saxophone with Jimi Hendrix in
+          the Velvetones &mdash; Hendrix&rsquo;s first band. He switched
+          to bass and co-founded Ballin&rsquo; Jack, opening for Hendrix
+          at the Fillmore. He sang lead for Santana on European arena stages.
+          He held down the bass groove for War &mdash; the band that made
+          the best-selling album of 1973 and gave the world &ldquo;Low Rider.&rdquo;
+          The foundation. The groove that locks and does not let go.
+          <em>E=5. The streak breaks.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>This research is mapped to Seattle within the Seattle 360 engine.
+          The Seattle region sits on the ancestral territory of the
+          <strong>Duwamish Tribal Organization</strong>, the
+          <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. The Duwamish Tribe remains federally unrecognized.
+          This acknowledgment was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             E=5 ENERGY BREAK
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>E=5 &mdash; THE STREAK BREAKS (First Appearance in the Engine)</h4>
+          <p><strong>Eleven consecutive E=4 degrees (21&ndash;31) end at degree 32.</strong>
+          E=5 is the first new energy level since E=4 first appeared. Distribution after
+          degree 32: <strong>2:13:6:11:1</strong> (E1:E2:E3:E4:E5). The E=5 assignment
+          reflects the tidal-scale cumulative energy of Rabb&rsquo;s career: the Velvetones
+          (Hendrix&rsquo;s first band), Ballin&rsquo; Jack (Columbia/Mercury, Fillmore stages),
+          Santana (European arena tours), and War (best-selling album of 1973, &ldquo;Low Rider,&rdquo;
+          multiple Gold and Platinum certifications). Each enterprise was E=4 individually.
+          Together: E=5.</p>
+          <table>
+            <tr><th>Energy</th><th>Count</th><th>Degrees</th></tr>
+            <tr><td>E=1</td><td>2</td><td>10, 12</td></tr>
+            <tr><td>E=2</td><td>13</td><td>0&ndash;9 (except 5), 11, 13, 14</td></tr>
+            <tr><td>E=3</td><td>6</td><td>5, 15&ndash;20 (selected)</td></tr>
+            <tr><td>E=4</td><td>11</td><td>21&ndash;31</td></tr>
+            <tr><td style="color:#FFECB3;font-weight:700">E=5</td><td style="color:#FFECB3;font-weight:700">1</td><td style="color:#FFECB3;font-weight:700">32 (Luther Rabb)</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             GARFIELD HIGH SCHOOL
+             ======================================== -->
+
+        <div class="garfield-box">
+          <h4>Garfield High School &mdash; 32-Degree Arc Closes</h4>
+          <p>Luther Rabb attended <strong>Garfield High School</strong> in
+          Seattle&rsquo;s Central District &mdash; the same school as
+          <strong>Quincy Jones</strong> (degree 0) and
+          <strong>Jimi Hendrix</strong>. Three of the Central District&rsquo;s
+          most significant musicians shared one building. Jones (graduated ~1950),
+          Hendrix (attended early 1960s), Rabb (attended early 1960s). The
+          32-degree arc from degree 0 to degree 32 closes at Garfield.</p>
+          <table>
+            <tr><th>Name</th><th>Engine Degree</th><th>Garfield Era</th></tr>
+            <tr><td>Quincy Jones</td><td>Degree 0</td><td>~1947&ndash;1950</td></tr>
+            <tr><td>Jimi Hendrix</td><td>&mdash;</td><td>~1959&ndash;1961</td></tr>
+            <tr><td style="color:#80CBC4;font-weight:700">Luther Rabb</td><td style="color:#80CBC4;font-weight:700">Degree 32</td><td style="color:#80CBC4;font-weight:700">~1957&ndash;1960</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             HENDRIX CONNECTION
+             ======================================== -->
+
+        <div class="hendrix-box">
+          <h4>The Hendrix Thread &mdash; Strongest Engine Link</h4>
+          <p>Luther Rabb was a saxophone player in <strong>The Velvetones</strong> &mdash;
+          <strong>Jimi Hendrix&rsquo;s first band</strong>. They played teen dances at
+          Yesler Terrace in the Central District. Rabb and Hendrix attended Garfield High
+          School together. Ballin&rsquo; Jack (co-founded by Rabb) toured with Hendrix on
+          the 1970 Cry of Love tour and opened for him at the Fillmore East and West. This
+          is the most direct documented musician-to-musician link between a Seattle 360
+          engine degree and Jimi Hendrix.</p>
+        </div>
+
+        <!-- ========================================
+             WAR: THE BAND
+             ======================================== -->
+
+        <div class="war-box">
+          <h4>War &mdash; The Multiracial Funk-Soul-Rock Institution</h4>
+          <table>
+            <tr><td>Formed</td><td>1969, Long Beach, California. Originally Eric Burdon and War.</td></tr>
+            <tr><td>Peak</td><td><em>The World Is a Ghetto</em> (1972) &mdash; <strong>best-selling album in America, 1973.</strong></td></tr>
+            <tr><td>&ldquo;Low Rider&rdquo;</td><td>No. 1 R&amp;B, No. 7 Hot 100 (1975). Gold single. Chicano cultural anthem.</td></tr>
+            <tr><td>&ldquo;The Cisco Kid&rdquo;</td><td>No. 2 Hot 100 (1973). Gold single. War&rsquo;s highest pop chart position.</td></tr>
+            <tr><td>&ldquo;Slippin&rsquo; Into Darkness&rdquo;</td><td>No. 16 Hot 100 (1972). Gold single. War&rsquo;s first big hit.</td></tr>
+            <tr><td>&ldquo;Why Can&rsquo;t We Be Friends?&rdquo;</td><td>No. 6 Hot 100 (1975). Cross-cultural anthem.</td></tr>
+            <tr><td>Rabb&rsquo;s tenure</td><td>1979&ndash;c. 1984. Replaced B.B. Dickerson on bass. Albums: <em>The Music Band 2</em>, <em>Outlaw</em>, <em>Life (Is So Strange)</em>.</td></tr>
+            <tr><td>Lineup</td><td>Multiracial: African American, Mexican American, Danish. Seven-piece: keys, guitar, bass, drums, congas, sax/flute, harmonica.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             MERCURY RECORDS
+             ======================================== -->
+
+        <div class="mercury-box">
+          <h4>Mercury Records &mdash; Second Consecutive Degree</h4>
+          <table>
+            <tr><td>Degree 31</td><td>Brenda Lee Eager &mdash; Jerry Butler duets (1971&ndash;1973)</td></tr>
+            <tr><td>Degree 32</td><td>Luther Rabb &mdash; Ballin&rsquo; Jack: <em>Special Pride</em> (1973), <em>Live And In Color</em> (1974)</td></tr>
+            <tr><td>Label Streak</td><td>Prestige (29) &rarr; Atlantic (30) &rarr; Mercury (31) &rarr; Mercury (32). Four consecutive major-label degrees.</td></tr>
+            <tr><td>Mercury Founded</td><td>1945, Chicago, Illinois. Irving Green, Berle Adams, Arthur Talmadge.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             BIOGRAPHY ARC
+             ======================================== -->
+
+        <h2>The Arc: Central District to the World Stage</h2>
+
+        <div class="timeline-entry">
+          <div class="era">September 7, 1942 &mdash; Seattle, Washington</div>
+          <p>Born <strong>Luther James Rabb</strong>. Son of a minister.
+          Raised in Seattle&rsquo;s Central District. Learns piano on
+          grandmother&rsquo;s instrument. Begins saxophone at age ten.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Late 1950s &mdash; The Velvetones</div>
+          <p>Plays tenor and baritone saxophone in <strong>The Velvetones</strong>
+          alongside <strong>Jimi Hendrix</strong> (guitar), Pernell Alexander (guitar),
+          Walter Jones (drums), Robert Green (piano). Teen dances at Yesler Terrace
+          in the Central District. Hendrix&rsquo;s first band.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Early 1960s &mdash; Garfield High School</div>
+          <p>Attends <strong>Garfield High School</strong> with Hendrix and
+          Ronnie Hammon. Passes through The Stags, The Nite Sounds, and
+          The Emergency Exit. Switches from saxophone to <strong>bass guitar</strong>.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1969 &mdash; Ballin&rsquo; Jack Founded</div>
+          <p>Co-founds <strong>Ballin&rsquo; Jack</strong> with Ronnie Hammon in Seattle.
+          Horn-rock/jazz-rock fusion. Signed to <strong>Columbia Records</strong> with
+          encouragement from Hendrix. Debut album (1970) charts at No. 180 Billboard.
+          &ldquo;Super Highway&rdquo; reaches No. 93 Hot 100.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1970 &mdash; Hendrix Cry of Love Tour</div>
+          <p>Ballin&rsquo; Jack opens for Hendrix across the United States.
+          Fillmore East, Fillmore West, large halls, outdoor festivals.
+          Band relocates from Seattle to Los Angeles.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1973&ndash;1974 &mdash; Mercury Records</div>
+          <p>Ballin&rsquo; Jack releases <em>Special Pride</em> (1973) and
+          <em>Live And In Color</em> (1974) on <strong>Mercury Records</strong>.
+          Band disbands in 1974 due to poor sales.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1976 &mdash; Santana</div>
+          <p>Lead vocalist for <strong>Carlos Santana</strong> on European tour
+          (Amigos Tour). Replaces Greg Walker. Arena-scale performances across Europe.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1979 &mdash; Joins War</div>
+          <p>Replaces <strong>B.B. Dickerson</strong> as bassist and vocalist for
+          <strong>War</strong>. Completes album sessions. Plays on <em>The Music Band 2</em>
+          (MCA), <em>Outlaw</em> (RCA, 1982), <em>Life (Is So Strange)</em> (RCA, 1983).</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">1986 &mdash; Car Accident</div>
+          <p>Neck injury causes numbness in hands. Unable to play bass.
+          Transitions to management and production work.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">2002 &mdash; Stroke</div>
+          <p>Stroke paralyzes Rabb from the chest down. Four years of declining health.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">January 22, 2006 &mdash; Los Angeles</div>
+          <p>Luther James Rabb dies at age 63. Buried at Forest Lawn Memorial Park
+          (Hollywood Hills), Los Angeles, California.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Knowledge Architecture</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Foundation</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Thirty-third artist-city pattern. An artist born and raised in
+            the city, formed entirely by its musical culture, who carries that
+            formation outward as the structural base of larger musical enterprises.
+            Rabb was Seattle&rsquo;s bass &mdash; the foundation of Ballin&rsquo; Jack,
+            Santana&rsquo;s European tour, and War.</p>
+            <div class="examples">Distinct from Export (degree 0): Jones led; Rabb
+            supported. The Foundation carries the city&rsquo;s culture in the structural
+            role &mdash; the bass, the groove, the architecture beneath.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Groove Lock</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>Thirty-third acoustic element. The moment a bass line locks into a
+            repeating, hypnotic groove pattern that becomes the immovable foundation
+            on which every other instrument builds. &ldquo;Low Rider&rdquo; IS a
+            groove lock. The bass does not vary, does not yield. It holds.</p>
+            <div class="examples">Follows the mellow undertow (degree 31): after
+            the warm sub-surface current, the declarative groove foundation. The
+            undertow pulls from beneath; the groove lock IS the surface.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Genre Refusal at Band Scale</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>War&rsquo;s music resists every genre category: funk, soul, rock,
+            jazz, Latin, R&amp;B. The multiracial lineup (African American, Mexican
+            American, Danish) produced a sound that made genre boundaries irrelevant.
+            &ldquo;Low Rider&rdquo; is not &ldquo;funk with Latin elements&rdquo;
+            &mdash; it is Low Rider music. The category IS the song.</p>
+            <div class="examples">Extends The Uncategorizable (degree 17, Reggie Watts):
+            individual genre refusal. War is collective genre refusal &mdash; seven
+            musicians from different backgrounds creating a genre that is itself.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note &mdash; Funk Bass Bend</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>Thirty-second deployment. The blue note expressed through the bass
+            guitar&rsquo;s rhythmic vocabulary: the moment a bass line bends a note
+            slightly flat, slightly behind the beat, creating the micro-tension that
+            transforms a pattern into a groove. The ingredient that makes &ldquo;Low
+            Rider&rdquo; feel alive.</p>
+            <div class="genealogy"><strong>32 deployments:</strong> bass-line (0)
+            through duet vocal warmth (31) to funk bass bend (32). The bend that
+            makes you move.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <ul>
+          <li><strong>Degree 0 &mdash; Quincy Jones:</strong> GARFIELD HIGH SCHOOL.
+          Both attended Garfield in the Central District. The 32-degree arc closes:
+          degree 0 and degree 32 share a school.</li>
+          <li><strong>Degree 30 &mdash; Ray Charles:</strong> CENTRAL DISTRICT LINEAGE.
+          Charles&rsquo;s Central District years (1947&ndash;1950) preceded Rabb&rsquo;s
+          by a decade. Same neighborhood, same musical ecosystem, different generations.</li>
+          <li><strong>Degree 31 &mdash; Brenda Lee Eager:</strong> MERCURY RECORDS.
+          Both recorded for Mercury. Second consecutive Mercury degree. Both are connective
+          tissue between generational figures.</li>
+          <li><strong>Degree 21 &mdash; Polyrhythmics:</strong> MULTICULTURAL FUNK.
+          War&rsquo;s multiracial genre fusion prefigured Polyrhythmics&rsquo; contemporary
+          multicultural funk ensemble.</li>
+          <li><strong>Degree 17 &mdash; Reggie Watts:</strong> GENRE REFUSAL.
+          Watts&rsquo;s uncategorizable Jazz/Comedy anticipates War&rsquo;s uncategorizable
+          funk-soul-rock-jazz-Latin fusion.</li>
+          <li><strong>Degree 4 &mdash; Floyd Standifer:</strong> CENTRAL DISTRICT EDUCATION.
+          Standifer&rsquo;s generation created the ecosystem that trained Rabb&rsquo;s generation.</li>
+          <li><strong>Degree 22 &mdash; Foxy Apollo:</strong> YOUNG BAND ENERGY.
+          Ballin&rsquo; Jack&rsquo;s explosive Fillmore-stage presence parallels Foxy Apollo&rsquo;s
+          raw collective energy.</li>
+          <li><strong>Degree 5 &mdash; Overton Berry:</strong> PERSISTENCE.
+          Berry stayed; Rabb left. Both represent the Central District&rsquo;s long tradition
+          of producing committed musicians.</li>
+        </ul>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward Items for Degree 33</h4>
+          <ul>
+            <li><strong>E=5 STREAK BREAK:</strong> Distribution 2:13:6:11:1. First E=5 at degree 32. Track whether E=5 recurs or returns to E=4.</li>
+            <li><strong>The groove lock:</strong> 33rd acoustic element. Post-undertow declarative phase. Track element 34.</li>
+            <li><strong>R&amp;B:</strong> Genre Stage 14. Pure R&amp;B, single word. First standalone R&amp;B. Track.</li>
+            <li><strong>The Foundation:</strong> 33rd artist-city pattern. Native son, structural base. Track.</li>
+            <li><strong>Mercury Records x2:</strong> Second consecutive Mercury degree (31&ndash;32). Label streak extends to four: Prestige-Atlantic-Mercury-Mercury.</li>
+            <li><strong>Garfield High School:</strong> Degrees 0 and 32 share Garfield. 32-degree arc. Track.</li>
+            <li><strong>Hendrix thread:</strong> Rabb was in Hendrix&rsquo;s first band (Velvetones). Strongest engine-to-Hendrix link. Track.</li>
+            <li><strong>Blue note:</strong> THIRTY-TWO deployments. Funk bass bend at 32.</li>
+            <li><strong>Gender:</strong> 6:27 ratio (~18.2%). Rabb = male. No change in women count. Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Card</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">32 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist</span>
+            <span class="stat-value">Luther Rabb</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value" style="color:#E65100">5 (FIRST)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1970s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Mercury</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Sep 7, 1942</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">Jan 22, 2006</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">The Foundation</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Element</span>
+            <span class="stat-value">The Groove Lock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">Funk Bass Bend</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Bands</h4>
+          <div class="stat-row">
+            <span class="stat-label">Velvetones</span>
+            <span class="stat-value">Late 1950s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ballin&rsquo; Jack</span>
+            <span class="stat-value">1969&ndash;1974</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Santana</span>
+            <span class="stat-value">1976</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">War</span>
+            <span class="stat-value">1979&ndash;c.1984</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>War Chart Peaks</h4>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;Low Rider&rdquo;</span>
+            <span class="stat-value">#1 R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;Cisco Kid&rdquo;</span>
+            <span class="stat-value">#2 Hot 100</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Best Album &rsquo;73</span>
+            <span class="stat-value">#1 Billboard</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Patterns</span>
+            <span class="stat-value">33 named</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Elements</span>
+            <span class="stat-value">33 acoustic</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Notes</span>
+            <span class="stat-value">32 deployed</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">14</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4 Streak</span>
+            <span class="stat-value" style="color:#E65100">BROKEN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 &middot; Degree 32&deg; &middot; Luther Rabb &middot;
+    R&amp;B &middot; The Foundation / The Groove Lock &middot; E=5
+    <br><small>Research: deep. Sources: cited. The groove locks.</small></p>
+  </footer>
+</body>
+</html>

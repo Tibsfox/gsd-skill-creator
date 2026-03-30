@@ -1,0 +1,259 @@
+{
+  "degree": 32,
+  "species": "Bohemian Waxwing",
+  "scientific_name": "Bombycilla garrulus",
+  "slug": "032-bohemian-waxwing",
+  "sound_type": "buzzy bzeee calls flock chorus",
+  "energy": 5,
+  "ecosystem": "berry stands",
+  "season": "irruptive (unpredictable winter invasion driven by boreal berry crop failure and population overshoot; appears in Pacific Northwest irregularly, primarily in eastern Washington, rarely reaching western Washington; not calendar-driven like migration but food-driven and population-driven; may appear one winter and not again for five years)",
+  "family": "Bombycillidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; berry stands in urban parks, mountain ash rows, hawthorn hedges, holly plantings, crabapple trees -- wherever concentrated fruit resources attract irruptive winter flocks. Bohemian Waxwings are rare west of the Cascades, reaching Puget Sound only in exceptional irruption years, typically embedded within Cedar Waxwing flocks. The coordinates represent potential, not typicality. In an irruption year, a Bohemian Waxwing in a Seattle berry stand is possible. In a normal year, it is not."
+  },
+  "taxonomy_note": {
+    "description": "The Bohemian Waxwing COMPLETES the Bombycillidae pair, delivering the 2nd of 3 species worldwide. Genus Bombycilla is from Latin bombyx ('silk') + Modern Latin -cilla ('tail'), yielding 'silk-tail' -- same genus as degree 31. Species epithet garrulus is Latin 'talkative/chattering,' applied by Conrad Gessner (1555) as Garrulus Bohemicus, comparing the bird to the Eurasian Jay. Formally described by Linnaeus (1758) as Lanius Garrulus. Full binomial: 'talkative silk-tail.' The Cedar Waxwing is named for diet (cedar berries). The Bohemian Waxwing is named for perceived behavior (talkativeness). Same genus, different naming axes.",
+    "current_family": "Bombycillidae",
+    "new_family": false,
+    "family_count_in_engine": 17,
+    "bombycillidae_count_in_engine": 2,
+    "name_etymology": "Bombycilla = Latin bombyx (silk) + -cilla (tail) = 'silk-tail.' Garrulus = Latin 'talkative, chattering.' Common name 'Bohemian' refers to nomadic, wandering lifestyle -- vagabond, not the Czech region. Full translation: 'talkative silk-tail.' Named for sound (garrulus) and texture (bombycilla). Contrast: Cedar Waxwing (cedrorum) = named for diet. Bohemian Waxwing (garrulus) = named for behavior.",
+    "genus_note": "Bombycilla now has 2 of 3 species in the engine. Family CLOSED. 66.7% coverage -- highest proportional family representation in the engine. Only the Japanese Waxwing (B. japonica, East Asia) remains unrepresented.",
+    "waxwing_pair": {
+      "degree_31": "Bombycilla cedrorum (Cedar Waxwing) -- temperate resident, E=4, the whisper, common year-round",
+      "degree_32": "Bombycilla garrulus (Bohemian Waxwing) -- boreal irruptive, E=5, the buzz, rare winter visitor",
+      "status": "CLOSED (2 of 2 delivered, pair complete)",
+      "structure": "Same genus, contrasting range + energy. Cedar = temperate + resident + E=4 + whisper. Bohemian = boreal + irruptive + E=5 + buzz. First same-genus pair with different energy levels. The pair separates genus-level constants (frugivory, flock behavior, wax tips, sibilant vocalization) from species-level variables (size, range, energy, seasonal pattern, call coarseness)."
+    },
+    "family_pair_comparison": {
+      "catharus_pair_18_19": "Same genus, same energy (E=3, E=3), spiral direction contrast",
+      "tachycineta_pair_27_28": "Same genus, same energy (E=4, E=4), ecological niche contrast",
+      "bombycilla_pair_31_32": "Same genus, DIFFERENT energy (E=4, E=5), geographic range + energy contrast",
+      "principle": "The Bombycilla pair is the first same-genus pair to break energy symmetry. Previous pairs held energy constant within the pair. Bombycilla adds a dynamic dimension to the contrast."
+    },
+    "bombycillidae_complete": {
+      "swallow_quintet": "Degrees 26-30: 5 species, 4 genera, 100% density, CLOSED",
+      "waxwing_pair": "Degrees 31-32: 2 species, 1 genus, 100% density, CLOSED",
+      "combined_family_run": "Degrees 26-32: 7 consecutive degrees across 2 families (Hirundinidae + Bombycillidae). The densest family-level run in engine history.",
+      "timbral_arc": "Liquid (26-28) -> Rough (29) -> Liquid synthesis (30) -> Sibilant whisper (31) -> Sibilant buzz (32). The timbral arc from water through sandpaper to glass to kazoo."
+    }
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "5,000-8,500",
+    "peak_energy_band_hz": "5,500-7,500",
+    "call_duration_s": "0.5-1.5",
+    "note_rate_per_second": "10-20 (coarser internal modulation than Cedar Waxwing, producing a buzzier quality)",
+    "note_structure": "Broader-bandwidth sibilant buzz -- wider spectral band on spectrogram than Cedar Waxwing, more diffuse energy distribution, rougher modulation texture. Still high-frequency but with more midrange body.",
+    "note_types": "Two primary variants: SHORT TRILL (few notes, given frequently during close-range social interaction) and LONG TRILL (sustained bzeee, given at longer intervals, often when taking flight from exposed perch). Both contribute to flock chorus. No true song -- like Cedar Waxwing, the Bohemian Waxwing lacks territorial song.",
+    "phrase_structure": "Simple and repetitive per individual. The 'phrase' is the flock chorus: hundreds to thousands of simultaneous bzeee calls creating a continuous buzzing wall of sound. The unit of perception is the flock, not the bird.",
+    "timbre": "Buzzy, hissing, assertive. Coarser than Cedar Waxwing's crystalline whisper. Still sibilant (same timbral category) but rougher-textured. The kazoo harmonium vs. the glass harmonica. A buzz, not a whisper.",
+    "amplitude": "Moderate to high per individual -- significantly louder than Cedar Waxwing. Combined with larger flock sizes (hundreds to thousands), the collective amplitude is substantial. E=5 reflects both per-individual loudness increase and massive flock scale.",
+    "context": "Given continuously in flock settings -- perched, feeding, flying. The flock chorus is the characteristic sound: arrival of a Bohemian Waxwing flock fills the acoustic space of an entire city block. Winter irruption flocks produce an unmistakable buzzing roar.",
+    "key_property": "THE BUZZY BZEEE FLOCK CHORUS -- the 33rd acoustic element, THE BUZZ. The whisper's boreal twin, amplified and coarsened. Same sibilant timbral category, same genus, but buzzy instead of crystalline, loud instead of quiet, E=5 instead of E=4. The flock chorus as primary sound unit -- perception is collective, not individual."
+  },
+  "irruptive_ecology": {
+    "definition": "Irruption is an unpredictable, food-driven displacement from breeding grounds -- fundamentally different from migration. Not calendar-driven, not bidirectional, not predictable. The bird moves south when conditions in the boreal north cannot support the population through winter.",
+    "triggers": "Complex interaction of berry crop failure, population density, and autumn food availability. Traditional hypothesis (simple crop failure) not fully supported by recent research. 2023 Journal of Ornithology study found winter numbers in south positively related to autumn food availability in north -- birds may need fuel from good autumn feeding to make long irruption flights.",
+    "frequency": "Irregular. Major irruptions every 2-10 years. Minor movements most years.",
+    "flock_sizes": "200-5,000+ birds typical in irruption years. Flocks exceeding 10,000 documented in exceptional events in prairie cities.",
+    "pnw_occurrence": "Fairly common winter visitor in NE Washington (Ferry, Okanogan, Stevens counties). Extends to Kittitas Valley (Cle Elum, Ellensburg) in moderate years. Rarely reaches western Washington. In Puget Sound lowlands, typically found within Cedar Waxwing flocks.",
+    "significance": "Sixth seasonal category in the engine. Previous categories: resident, migrant, partial migrant, summer, spring. Irruptive adds temporal unpredictability as an ecological dimension. The irruptive species is a messenger from elsewhere: its arrival tells you about conditions in a place you cannot see."
+  },
+  "frugivory": {
+    "diet_composition": "Almost entirely fruit in winter. Berries of mountain ash, juniper, hawthorn, crabapple, holly, Russian olive. Insects taken during breeding season.",
+    "key_fruits_pnw": "Mountain ash (Sorbus aucuparia, S. sitchensis), juniper (Juniperus), hawthorn (Crataegus), crabapple (Malus), holly (Ilex), Russian olive (Elaeagnus angustifolia).",
+    "berry_stand_ecology": "Dense concentrations of fruit-bearing trees -- often anthropogenic (ornamental plantings in cities). Berry stands differ from 'fruiting trees' (Cedar Waxwing) in implying concentrated, human-influenced fruit resources that support massive flock events.",
+    "ethanol_risk": "Susceptible to fermented berry intoxication, same as Cedar Waxwing. Family-level vulnerability. Larger body mass provides slightly higher tolerance per unit ethanol, but higher daily consumption partially offsets this.",
+    "seed_dispersal": "Important seed disperser across boreal and northern temperate zones. Rapid gut passage deposits viable seeds at new locations.",
+    "significance": "Second fruit-defined ecosystem in the engine. 'Berry stands' refines 'fruiting trees' (degree 31) toward concentrated, high-density fruit resources that support irruptive flock events."
+  },
+  "plumage": {
+    "overall": "Warm gray-brown, cooler and grayer than Cedar Waxwing. Same silk-smooth texture -- individual feathers barely distinguishable. Starling-sized.",
+    "crest": "Prominent, pointed, swept-back. Identical in form to Cedar Waxwing.",
+    "mask": "Black mask from bill through eye. Lacks the clear white border above the mask seen in Cedar Waxwing.",
+    "face": "Reddish-chestnut tinge on forehead/face area, absent in Cedar Waxwing.",
+    "undertail": "Rich cinnamon/chestnut -- the most reliable field mark separating from Cedar Waxwing (which has white undertail).",
+    "wings": "Bold white tips on primary coverts + yellow edges on flight feathers -- absent in Cedar Waxwing. Plus red wax tips on secondaries (shared with Cedar).",
+    "tail_band": "Bright yellow terminal band, as in Cedar Waxwing.",
+    "wax_tips": "Red waxy tips on secondary feathers. Same structure and function as Cedar Waxwing (age signal, modified keratin + carotenoid).",
+    "impression": "The more ornate sibling. Same aesthetic philosophy as Cedar Waxwing (sleek, unified, gradient-based) but with additional accent colors: wing whites, wing yellows, cinnamon undertail, rusty face tinge. The larger, more decorated twin."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The buzzy bzeee flock chorus -- the 33rd acoustic element, THE BUZZ: the whisper's boreal twin, amplified and coarsened within the same genus, same sibilant timbral category but buzzy instead of crystalline, E=5 instead of E=4",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/sibilant-buzz/",
+      "examples": [
+        "Bohemian Waxwing: buzzy sibilant trill at 5-8.5 kHz, 0.5-1.5 seconds, broader bandwidth. The buzz.",
+        "Cedar Waxwing (degree 31): thin sibilant trill at 6-10 kHz, 0.3-0.8 seconds, narrow bandwidth. The whisper.",
+        "Same genus (Bombycilla), same timbral category (sibilant), different texture: crystalline vs. buzzy.",
+        "The flock chorus as primary sound unit: hundreds to thousands of simultaneous bzeee calls creating a continuous buzzing wall of sound.",
+        "The engine's sibilant category now has two textures: sibilant-crystalline (Cedar, 31) and sibilant-buzzy (Bohemian, 32). The category has internal diversity."
+      ],
+      "music_theory_parallel": "The whisper-to-buzz transition within one genus is like two different registrations of the same organ stop. The glass harmonica (Cedar Waxwing) and the kazoo harmonium (Bohemian Waxwing) both belong to the sibilant register, but they produce qualitatively different textures. In orchestration, this is the difference between a muted trumpet and an open trumpet -- same instrument family, same register, but the mute changes the timbre from bright and piercing to warm and buzzy. The genus is the trumpet. The species determines the mute."
+    },
+    {
+      "concept": "E=5 breaks the eleven-degree E=4 plateau -- the first use of energy level 5 in the engine, restoring dynamic range, ending the longest unbroken energy streak in engine history",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-break/",
+      "examples": [
+        "Degrees 21-31: eleven consecutive E=4. The energy undecet.",
+        "Degree 32: E=5. The plateau breaks. The first E=5 in engine history.",
+        "Energy palette now spans 1-5 (previously 1-4). Full five-level dynamic range available.",
+        "The break comes within a same-genus pair: Cedar Waxwing E=4, Bohemian Waxwing E=5. The pair itself contains the energy transition.",
+        "First same-genus pair with different energy levels. Previous pairs (Catharus, Tachycineta) held energy constant."
+      ],
+      "music_theory_parallel": "The E=4 plateau was a dynamic pedal point -- a sustained bass note that the listener internalized as the default state. Breaking it at E=5 is not just a dynamic change but a reframing. When a piece holds mezzo-forte for 11 measures and then plays forte for the first time, the listener does not just hear 'louder.' The listener hears the absence of the constraint. The ceiling has been touched. The dynamic world is suddenly larger than it was. The first fortissimo in a piece that has never exceeded mezzo-forte is the loudest moment the listener has ever experienced in that context -- even if fortissimo is common in other music. Context creates meaning. E=5 is not just E=5. It is the first E=5."
+    },
+    {
+      "concept": "Irruptive as the sixth seasonal category -- temporal unpredictability as an ecological dimension, the species as a messenger from elsewhere, food-driven displacement vs. calendar-driven migration",
+      "level": "intermediate",
+      "department": "ecology/temporal-patterns",
+      "college_path": ".college/ecology/temporal/irruptive/",
+      "examples": [
+        "Six seasonal categories now: resident, migrant, partial migrant, summer, spring, IRRUPTIVE.",
+        "Irruption is not migration. Migration is predictable, calendar-driven, bidirectional. Irruption is unpredictable, food-driven, unidirectional displacement.",
+        "Previous irruptive species in engine: Pine Siskin (degree 12). Both irruptive, both flock birds, both depend on unpredictable food crops.",
+        "The irruptive species as messenger: Bohemian Waxwing arrival in Seattle tells you about berry crop failure in the Yukon. The bird carries information about a place you cannot see.",
+        "2023 research complicates simple trigger models: irruptions involve interaction of population density, crop quality, and autumn fueling in the north."
+      ],
+      "music_theory_parallel": "An irruptive species in the engine is like a cadenza in a concerto -- an unscheduled interruption that is part of the form but unpredictable in its timing and content. The orchestra (resident species) maintains the schedule. The soloist (irruptive species) arrives when conditions are right and plays an unscripted passage. The audience (observer) cannot predict when the cadenza will come, but recognizes it when it arrives. The irruption is the cadenza of the seasonal cycle."
+    },
+    {
+      "concept": "The waxwing pair closes -- third same-genus pair complete, first with energy asymmetry, completing Bombycillidae at 66.7% family coverage, the pair as a tool for separating genus-level constants from species-level variables",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/waxwing-pair-complete/",
+      "examples": [
+        "Three same-genus pairs: Catharus (18-19, spiral contrast, E=3/3), Tachycineta (27-28, niche contrast, E=4/4), Bombycilla (31-32, range+energy contrast, E=4/5).",
+        "Bombycilla pair is the first with energy asymmetry. The pair itself contains a dynamic transition.",
+        "Genus-level constants: frugivory, flock behavior, wax tips, sibilant call, silk plumage, crested head.",
+        "Species-level variables: body size, range, energy, seasonal pattern, call texture, undertail color.",
+        "Bombycillidae CLOSED at 2/3 species (66.7%). Highest proportional family coverage in engine."
+      ],
+      "music_theory_parallel": "The three same-genus pairs are like three variations on a theme, each variation exploring a different parameter while holding the theme constant. Variation 1 (Catharus): theme = thrush, varied parameter = spiral direction. Variation 2 (Tachycineta): theme = swallow, varied parameter = ecological niche. Variation 3 (Bombycilla): theme = waxwing, varied parameter = range + energy. The third variation is the most daring because it changes TWO parameters (range AND energy) while previous variations changed only one. The variation form is maturing."
+    },
+    {
+      "concept": "Berry stands as refined frugivore ecosystem -- concentrated, often anthropogenic fruit resources that support massive flock events, the human-landscape connection, ornamental plantings as ecological infrastructure",
+      "level": "intermediate",
+      "department": "ecology/frugivory",
+      "college_path": ".college/ecology/frugivory/berry-stands/",
+      "examples": [
+        "'Berry stands' refines 'fruiting trees' (degree 31). Both are fruit-defined ecosystems, but berry stands implies concentrated, high-density resources.",
+        "Mountain ash rows along city streets, hawthorn hedges, ornamental crabapple plantings. Human landscaping creates waxwing habitat.",
+        "The Bohemian Waxwing's irruptive ecology requires concentrated food: large flocks need dense berry stands, not scattered individual trees.",
+        "Prairie and Pacific Northwest cities with mountain ash plantings have increased the food base for irrupting waxwings over time.",
+        "The anthropogenic landscape as ecological infrastructure: human aesthetic choices (planting ornamental fruit trees) create habitat for irruptive frugivores."
+      ],
+      "music_theory_parallel": "Berry stands are like concert venues -- concentrated locations where performance (feeding) can happen at scale. A single fruiting tree is a street musician's corner. A berry stand is a concert hall. The Cedar Waxwing can work the corners (scattered fruiting trees). The Bohemian Waxwing needs the concert hall (concentrated berry stands) because its flock is a full orchestra that cannot fit on a corner. The venue must match the ensemble size."
+    },
+    {
+      "concept": "The Holarctic dimension -- Bohemian Waxwing as the engine's first truly Holarctic species, breeding across both Nearctic and Palearctic, introducing biogeographic breadth beyond the Western Hemisphere",
+      "level": "advanced",
+      "department": "ecology/biogeography",
+      "college_path": ".college/ecology/biogeography/holarctic/",
+      "examples": [
+        "Cedar Waxwing: Nearctic only (North America). Bohemian Waxwing: Holarctic (North America + Eurasia).",
+        "The waxwing pair spans hemispheres. The pair's range contrast is not just latitudinal (temperate vs. boreal) but continental (Nearctic vs. Holarctic).",
+        "Bohemian Waxwing breeds across boreal forests of Alaska, Canada, Scandinavia, and Siberia.",
+        "The engine's geographic scope implicitly expands: the Bohemian Waxwing connects the PNW to the circumpolar boreal.",
+        "When a Bohemian Waxwing appears in Seattle, it connects the Puget Sound soundscape to the boreal forests of two continents."
+      ],
+      "music_theory_parallel": "The Holarctic dimension is like a melody that appears in two different national traditions -- a folk tune shared between Scandinavian and North American music. The melody (genus Bombycilla) is the same, but it is performed in two different cultural contexts (Palearctic and Nearctic). The Bohemian Waxwing is the musician who has played both circuits. The Cedar Waxwing is the local artist. The Bohemian is the international touring act."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-031",
+      "title": "Cedar Waxwing (Degree 31)",
+      "connection": "WAXWING PAIR. Same genus Bombycilla. Cedar = whisper (E=4, resident, temperate, thin). Bohemian = buzz (E=5, irruptive, boreal, coarse). Pair CLOSED. First same-genus pair with different energy levels."
+    },
+    {
+      "project": "SPS-030",
+      "title": "Barn Swallow (Degree 30)",
+      "connection": "SWALLOW QUINTET FINAL. Quintet closed at 30; waxwing pair spans 31-32. Two family clusters back-to-back: quintet then pair. Seven consecutive degrees across two families (26-32). The densest family-level run in engine history."
+    },
+    {
+      "project": "SPS-027/028",
+      "title": "Tachycineta Pair (Degrees 27-28)",
+      "connection": "STRUCTURAL ECHO. Third same-genus pair echoes the Tachycineta pattern. But Bombycilla adds energy asymmetry -- Tachycineta held E=4 constant; Bombycilla splits E=4/E=5."
+    },
+    {
+      "project": "SPS-018/019",
+      "title": "Catharus Pair (Degrees 18-19)",
+      "connection": "STRUCTURAL ECHO. First same-genus pair held E=3 constant and explored spiral direction. Bombycilla explores range contrast and breaks energy symmetry. The variation form matures across three pairs."
+    },
+    {
+      "project": "SPS-012",
+      "title": "Pine Siskin (Degree 12)",
+      "connection": "IRRUPTIVE PARALLEL. Pine Siskin was the engine's first irruptive species. Both irruptive, both flock birds, both depend on unpredictable food crops. The engine's second irruptive species arrives 20 degrees after the first."
+    },
+    {
+      "project": "SPS-008",
+      "title": "Golden-crowned Kinglet (Degree 8)",
+      "connection": "HIGH-FREQUENCY CONNECTION. Both in the high-frequency sibilant zone. Kinglet = 'threshold' (element 9). Bohemian Waxwing = 'the buzz' (element 33). Both winter-hardy species surviving northern cold."
+    },
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "FRUGIVORY SPECTRUM. Robin = seasonal frugivore. Cedar Waxwing = year-round frugivore. Bohemian Waxwing = irruptive frugivore. Three points on the frugivory commitment spectrum."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Bohemian Waxwing documented as rare winter visitor. Irruptive. Most common in eastern Washington. Rarely reaches western Washington. Found within Cedar Waxwing flocks when present."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Berry stand ecology. Mountain ash and hawthorn as winter food. Ornamental plantings supporting irruptive populations. Boreal-temperate connectivity. Anthropogenic landscape as ecological infrastructure."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Luther Rabb (R&B/Funk, E=5, 1970s, Seattle, Columbia/MCA). Explosive live energy. Bass player as buzz. Irruptive career arc. Seattle roots, national reach. First E=5 in both Part A and Part B."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 31,
+    "total_entries": 33,
+    "families_represented": 17,
+    "largest_families": {
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Parulidae": 5,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Cardinalidae": 2,
+      "Picidae": 2,
+      "Fringillidae": 2
+    },
+    "energy_plateau": "E=4 streak BROKEN at degree 32 after 11 consecutive degrees (21-31). E=5 is NEW -- first use ever.",
+    "passeriformes_streak": "10 consecutive (23-32) -- CRITICALLY MUST BREAK",
+    "bombycillidae_streak": "2 (degrees 31-32) -- pair CLOSED",
+    "sibilant_timbral_category": "Now has two textures: sibilant-crystalline (Cedar, 31) and sibilant-buzzy (Bohemian, 32)",
+    "waxwing_pair": "CLOSED (Cedar Waxwing at 31, Bohemian Waxwing at 32)",
+    "same_genus_pairs": ["Catharus (18-19, CLOSED)", "Tachycineta (27-28, CLOSED)", "Bombycilla (31-32, CLOSED)"],
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+      "E5": [32]
+    },
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive"],
+    "irruptive_species": ["Pine Siskin (12)", "Bohemian Waxwing (32)"],
+    "critical_gaps": [
+      "No marine/shoreline species in 32 degrees of 'The Sound of Puget Sound' -- 32 DEGREES OVERDUE -- NON-NEGOTIABLE AT DEGREE 33",
+      "No corvid (Steller's Jay, crow, raven) -- 32 degrees",
+      "No raptor (Accipitridae, Falconidae) -- 32 degrees",
+      "No nocturnal species since degree 4 (28 degrees ago)",
+      "Ten consecutive Passeriformes (23-32) -- CRITICALLY MUST BREAK"
+    ]
+  }
+}

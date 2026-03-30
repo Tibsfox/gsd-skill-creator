@@ -1,0 +1,247 @@
+{
+  "degree": 31,
+  "species": "Cedar Waxwing",
+  "scientific_name": "Bombycilla cedrorum",
+  "slug": "031-cedar-waxwing",
+  "sound_type": "high thin see-see-see trilled",
+  "energy": 4,
+  "ecosystem": "fruiting trees",
+  "season": "resident (year-round in PNW, nomadic movements driven by fruit availability, most conspicuous in fall and winter when large flocks gather in fruiting trees, breeds late May through August)",
+  "family": "Bombycillidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; fruiting trees in urban parks, residential yards, riparian corridors, forest edges, and anywhere fruit-bearing trees and shrubs concentrate -- mountain ash, serviceberry, holly, hawthorn, crabapple, madrone, and ornamental plantings. The habitat is not a place but a phenological event: wherever fruit is ripe, the waxwings appear."
+  },
+  "taxonomy_note": {
+    "description": "The Cedar Waxwing is the FIRST Bombycillidae in the engine, introducing the 17th family. Genus Bombycilla is from Latin bombyx ('silk') + Modern Latin -cilla ('tail'), yielding 'silk-tail.' Species epithet cedrorum is Latin genitive plural 'of the cedars,' referring to eastern red cedar (Juniperus virginiana) berries. Full binomial: 'silk-tail of the cedars.' The first genus in the engine named for tactile quality rather than behavior, anatomy, or identity.",
+    "current_family": "Bombycillidae",
+    "new_family": true,
+    "family_count_in_engine": 17,
+    "bombycillidae_count_in_engine": 1,
+    "name_etymology": "Bombycilla = Latin bombyx (silk, silkworm) + Modern Latin -cilla (tail). The genus describes the bird's plumage texture: silky-smooth, satiny, feathers barely distinguishable. Cedrorum = Latin 'of the cedars.' The bird that eats cedar berries. Full translation: 'silk-tail of the cedars.' Named for touch and taste: texture (silk) + diet (cedar). The first genus in the engine named for aesthetic quality.",
+    "genus_note": "Bombycilla contains only 3 species worldwide: B. cedrorum (Cedar Waxwing, North America), B. garrulus (Bohemian Waxwing, Holarctic), B. japonica (Japanese Waxwing, East Asia). The engine will hold 2 of 3 species (66.7% of the family) -- the highest proportional coverage of any family in the engine. Bombycillidae is placed in superfamily Bombycilloidea, related to silky-flycatchers (Ptiliogonatidae) and Palmchat (Dulidae).",
+    "waxwing_pair": {
+      "degree_31": "Bombycilla cedrorum (Cedar Waxwing) -- temperate resident, common year-round, first frugivore, the whisper",
+      "degree_32": "Bombycilla garrulus (Bohemian Waxwing) -- boreal irruptive, winter visitor, larger and grayer",
+      "status": "OPEN (1 of 2 delivered, pair continues at degree 32)",
+      "structure": "Same genus, contrasting range. Cedar = temperate + resident. Bohemian = boreal + irruptive. Both frugivores, both thin-calling, both flock birds. The pair explores latitude contrast within one genus."
+    },
+    "family_pair_comparison": {
+      "tachycineta_pair_27_28": "Same genus, contrasting ecology (cliff specialist vs. field generalist)",
+      "bombycilla_pair_31_32": "Same genus, contrasting range (temperate resident vs. boreal irruptive)",
+      "principle": "The engine explores same-genus pairs through different contrast axes: ecology (Tachycineta), range (Bombycilla). Each pair illuminates what within-genus variation looks like along a different dimension."
+    },
+    "transition_from_hirundinidae": {
+      "swallow_quintet": "Degrees 26-30: 5 species, 4 genera, 100% density, CLOSED",
+      "waxwing_pair": "Degrees 31-32: 2 species, 1 genus, 100% density, OPEN",
+      "scale_contrast": "Quintet (5) to pair (2). The engine compressed its family exploration scale. After the most expansive family cluster, it delivers one of the most compact.",
+      "timbral_shift": "Liquid/rough (swallows) to sibilant (waxwings). New timbral category introduced."
+    }
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "6,000-10,000",
+    "peak_energy_band_hz": "7,000-9,000",
+    "call_duration_s": "0.3-0.8",
+    "note_rate_per_second": "15-30 (internal frequency modulation creating the trilled quality -- subtle wavering within each call)",
+    "note_structure": "Narrow-bandwidth sibilant whistle -- thin horizontal band on spectrogram, tightly constrained tonal whisper with subtle internal frequency modulation. Spectrally simple compared to swallow warbles. High-frequency energy concentrated above 7 kHz.",
+    "note_types": "One primary: the see-see-see -- a high, thin, trilled sibilant whistle used as contact call, flock cohesion, feeding coordination, and mild alarm. No true song. The Cedar Waxwing is among the few passerines that lack a learned territorial song. The see-see-see is innate, consistent, and sufficient.",
+    "phrase_structure": "Simple and repetitive. Individual calls are brief (0.3-0.8 s) and stereotyped. The 'phrase' is the collective: a flock of waxwings produces overlapping see-see-see calls that create a continuous shimmering texture. The unit of perception is the flock chorus, not the individual call.",
+    "timbre": "Thin, glassy, metallic, sibilant. The quality of a fine wire vibrating at the edge of audibility. Not liquid (swallows), not rough (Rough-winged), but a third timbral category: sibilant. Some describe it as 'cedary' -- dry, thin, slightly buzzy. The timbre is crystalline and delicate.",
+    "amplitude": "Low to moderate per individual. The sound does not project like the Barn Swallow's warble. It is a close-range contact call. Energy 4 reflects persistence and collective volume: a flock of 50-200 waxwings produces a continuous thin chorus that fills the acoustic space through repetition, not through individual power.",
+    "context": "Given almost continuously when flocks are active. Perched in fruiting trees, in flight between trees, during feeding. Cedar Waxwings are among the most vocal flock birds in the PNW. The sound is inseparable from the flock. A single waxwing calling alone sounds thin and lost. A flock calling together sounds like the tree itself is vibrating.",
+    "key_property": "THE HIGH THIN SEE-SEE-SEE -- the 32nd acoustic element. A new timbral category: SIBILANT. After the swallow quintet's liquid/rough explorations, the waxwing introduces a thin, high, crystalline whisper. The sharpest frequency shift in the engine: from the Barn Swallow's mid-wide 2-7.5 kHz to the Cedar Waxwing's high-narrow 6-10 kHz. From the river to the wire."
+  },
+  "frugivory": {
+    "diet_composition": "~84% fruit by volume during non-breeding season. Year-round frugivore. Among the most specialized fruit-eating passerines in North America.",
+    "key_fruits_pnw": "Mountain ash (Sorbus), serviceberry (Amelanchier), hawthorn (Crataegus), holly (Ilex), crabapple (Malus), Pacific madrone (Arbutus menziesii), Oregon grape (Mahonia), various Viburnum species.",
+    "gut_passage_time": "16-45 minutes. Rapid processing allows high throughput but requires large daily consumption (hundreds of berries per bird per day).",
+    "seed_dispersal": "Among the most important avian seed dispersers in North American ecosystems. Seeds pass through intact. The bird-fruit mutualism is bidirectional: plant provides food, bird provides seed transport.",
+    "ethanol_intoxication": "Susceptible to intoxication from fermented berries (crabapple, mountain ash). Documented mortality from acute ethanol toxicity. Partial physiological tolerance (enhanced alcohol dehydrogenase production). A cost of dietary specialization that generalists avoid.",
+    "significance": "The first fruit-defined ecosystem in the engine. Previous ecosystems described physical habitat. 'Fruiting trees' describes a food source. The Cedar Waxwing's habitat is a phenological event, not a geological feature."
+  },
+  "wax_tips": {
+    "structure": "Modified keratin extensions of feather shaft on secondaries, coated with carotenoid pigment (astaxanthin). Bright red, resembling drops of sealing wax.",
+    "function": "Age signal. Number and size increase with age. Assortative mating by wax tip count -- birds preferentially pair with similarly aged individuals.",
+    "diet_modification": "Orange wax tips observed since late 1960s due to non-native honeysuckle (Lonicera) berries containing rhodoxanthin. The bird's appearance changes based on diet. An introduced plant recoloring a native bird.",
+    "significance": "The bird wears its diet on its wings. A visible record of what was eaten during feather growth. The first plumage feature in the engine that is diet-dependent."
+  },
+  "plumage": {
+    "overall": "Warm brown fading to gray on wings and tail. Uniquely smooth and sleek -- individual feathers barely distinguishable. The 'silk-tail' that gives the genus its name.",
+    "crest": "Prominent, pointed, swept-back. Can be raised or lowered expressively.",
+    "mask": "Black mask from bill base through eye, bordered above by thin white line. Bandit-like.",
+    "belly": "Pale yellow wash on lower belly and undertail coverts.",
+    "tail_band": "Bright yellow terminal band (sometimes orange from diet). Diagnostic.",
+    "wax_tips": "Red (or orange) waxy drops on secondary feathers. Variable in number.",
+    "impression": "Designed by a graphic artist -- smooth gradients, clean lines, no harsh boundaries. The most aesthetically unified bird in the engine."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The high thin see-see-see -- the 32nd acoustic element, SIBILANT: a new timbral category after the swallow quintet's liquid/rough explorations, a thin high-frequency crystalline whisper that opens new territory in the engine's sound palette",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/sibilant-see/",
+      "examples": [
+        "Cedar Waxwing: high sibilant trill at 6-10 kHz, 0.3-0.8 seconds, thin bandwidth. The whisper.",
+        "Barn Swallow (degree 30): liquid melodic warble at 2-7.5 kHz, 3-8 seconds, wide bandwidth. The river.",
+        "Rough-winged Swallow (degree 29): broadband buzz at 2-6 kHz. The sandpaper.",
+        "Golden-crowned Kinglet (degree 8): ascending zee-zee-zee at 7-10 kHz. The threshold.",
+        "The engine's timbral palette now has three categories: tonal (degrees 0-25), liquid/rough (26-30), SIBILANT (31). The whisper is neither liquid nor rough. It is a third thing: crystalline, thin, high, glassy."
+      ],
+      "music_theory_parallel": "The sibilant see-see-see introduces a third timbral category to the engine's palette, analogous to adding a new register to an organ. Where the swallow quintet explored the flute register (liquid) and the reed register (rough), the Cedar Waxwing opens the string harmonics register -- the thin, high, shimmering overtones produced by lightly touching a string at a node. String harmonics are spectrally pure, high-pitched, and ethereal. They sound like they are barely there. The see-see-see is the engine's first harmonic -- a sound that shimmers rather than flows or grates."
+    },
+    {
+      "concept": "Bombycillidae enters the engine -- the 17th family, a new evolutionary lineage with no close relatives in the engine, introducing frugivory, nomadism, and sibilant vocalization as a family package",
+      "level": "advanced",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/bombycillidae-entry/",
+      "examples": [
+        "Bombycillidae: 3 species worldwide. Engine will hold 2 of 3 (66.7% coverage).",
+        "17th family. Previous new family: Hirundinidae at degree 26 (5 degrees ago).",
+        "Phylogenetically isolated: nearest relatives are silky-flycatchers and Palmchat -- neither in the PNW.",
+        "Family package: frugivory + nomadism + flock behavior + sibilant call + wax-tipped plumage. Every member shares these traits.",
+        "The engine adds a new node to its taxonomic graph. Bombycillidae connects to nothing already present -- an isolated vertex."
+      ],
+      "music_theory_parallel": "A new family entering the engine is like a new instrument joining an ensemble. The ensemble had strings (thrushes), woodwinds (warblers), brass (flickers), and percussion (swallows). Bombycillidae is a new instrument category: the glass harmonica. The glass harmonica produces thin, ethereal, high-pitched tones that are unlike any other orchestral instrument. It adds a timbral dimension that the existing instruments cannot replicate. Bombycillidae adds a timbral dimension (sibilant) that the existing families cannot replicate. The ensemble's palette grows by one color."
+    },
+    {
+      "concept": "The waxwing pair begins -- Cedar (31) + Bohemian (32) as a same-genus pair echoing Tachycineta (27-28), exploring range contrast rather than ecological contrast, the engine's third same-genus consecutive pair",
+      "level": "intermediate",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/waxwing-pair/",
+      "examples": [
+        "Same-genus pairs in engine: Catharus (18-19, ascending vs. descending spiral), Tachycineta (27-28, cliff vs. field), Bombycilla (31-32, temperate vs. boreal).",
+        "Each pair explores a different contrast axis: spiral direction (Catharus), ecological niche (Tachycineta), geographic range (Bombycilla).",
+        "Quintet-to-pair compression: 5 Hirundinidae (26-30) followed immediately by 2 Bombycillidae (31-32). Scale contracts from 5 to 2.",
+        "Both members are Bombycilla, both frugivores, both sibilant callers, both flock birds. The genus provides the constant; range provides the variable."
+      ],
+      "music_theory_parallel": "The waxwing pair is a theme stated twice in different keys. The theme (Bombycilla: frugivory, sibilant call, flock behavior) is constant. The key changes: C major (Cedar Waxwing, temperate, resident, common) and D-flat major (Bohemian Waxwing, boreal, irruptive, rare). Same melody, half-step apart. The listener hears the theme twice and learns what belongs to the theme (frugivory, flock behavior) versus what belongs to the key (range, abundance). The pair separates the essential from the accidental."
+    },
+    {
+      "concept": "Frugivory as ecosystem definition -- the first species in the engine defined by food source rather than habitat structure, introducing nomadism, phenological tracking, and seed dispersal mutualism",
+      "level": "intermediate",
+      "department": "ecology/frugivory",
+      "college_path": ".college/ecology/frugivory/cedar-waxwing/",
+      "examples": [
+        "Previous ecosystems: estuary, old-growth, conifer canopy, marsh, farmland -- all describe physical habitat.",
+        "'Fruiting trees' describes a food source. The Cedar Waxwing's habitat is a phenological event.",
+        "Nomadic movements track fruit availability: where the berries are, the waxwings are. No fixed territory.",
+        "Seed dispersal mutualism: bird eats fruit, defecates viable seeds. Bidirectional benefit.",
+        "Ethanol intoxication: the cost of frugivory. Fermented berries can kill waxwings. Specialists pay prices generalists avoid.",
+        "Diet-driven plumage: non-native honeysuckle berries change wax tip color from red to orange. The bird wears what it eats."
+      ],
+      "music_theory_parallel": "Frugivory as ecosystem is like a musician who follows the festival circuit rather than holding a residency. The residency musician (thrush in old-growth, martin on the box) has a fixed venue. The festival musician (waxwing in fruiting trees) goes wherever the gig is. The festival circuit musician's career is defined by the event schedule (fruit phenology), not by a home venue (fixed habitat). When the mountain ash fruits in October, the waxwing is there. When the holly fruits in December, the waxwing moves. The 'venue' changes; the performance (see-see-see) stays the same."
+    },
+    {
+      "concept": "Energy undecet -- eleventh consecutive E=4 degrees (21-31) extending the longest unbroken energy plateau in engine history, now spanning the swallow quintet plus the flicker/grosbeak/tanager/robin block plus the first waxwing",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-undecet/",
+      "examples": [
+        "Degrees 21-31: eleven textures at sustained E=4. From hammer to whisper. Same energy level.",
+        "The E=4 undecet: eleven degrees. Over one-third of all degrees emitted at one dynamic level.",
+        "Has survived family transitions (Picidae to Cardinalidae to Turdidae to Hirundinidae to Bombycillidae), timbral shifts (percussive to melodic to liquid to rough to sibilant), and ecosystem changes (woodland to forest to farmland to fruiting trees).",
+        "CRITICALLY must break. The degree 30 retrospective said 'must break at 31.' It did not. The degree 32 Bohemian Waxwing will either extend to twelve or finally end it."
+      ],
+      "music_theory_parallel": "Eleven consecutive E=4 degrees is the engine's energy undecet -- a dynamic pedal point that has held for over one-third of the engine's lifetime. The metaphor of a sustained bass note is breaking down because the pedal is now longer than any reasonable musical pedal point. This is closer to a ground bass in a chaconne -- a recurring pattern that the entire piece is built over. The E=4 ground has been there so long that the listener has internalized it as the default state. Breaking it will not just change the dynamic -- it will change the frame of reference. The listener does not know what E=3 or E=5 sounds like anymore. The ground bass has become the world."
+    },
+    {
+      "concept": "Vocal sufficiency -- the Cedar Waxwing as a passerine that lacks true song, using only a simple innate contact call, demonstrating that acoustic minimalism can be the optimal strategy for a nomadic frugivore that does not defend territory",
+      "level": "foundational",
+      "department": "music-theory/minimalism",
+      "college_path": ".college/music/theory/minimalism/vocal-sufficiency/",
+      "examples": [
+        "Cedar Waxwing: no learned song. Only innate see-see-see contact call. Among the few Passeri (oscine passerines) without territorial song.",
+        "Reason: no fixed territory to defend. Nomadic frugivores do not need territorial proclamations.",
+        "Contrast: Barn Swallow (degree 30) sang complex warbles for territory and mate attraction. Cedar Waxwing needs neither.",
+        "Previous acoustic minimalist: Bushtit (degree 10) with thin seep -- minimum viable signal. Cedar Waxwing's minimalism is different: not minimal because the bird is small, but minimal because the bird's ecology does not reward complexity.",
+        "Vocal sufficiency: the see-see-see is exactly enough. Not more, not less. The strategy matches the need."
+      ],
+      "music_theory_parallel": "Vocal sufficiency is the acoustic equivalent of Erik Satie's 'furniture music' (musique d'ameublement) -- music designed to be present without demanding attention. Satie composed music that was intentionally simple, repetitive, and background. It served a function (creating atmosphere) without asserting itself (demanding the listener's focus). The Cedar Waxwing's see-see-see is furniture music: it fills the acoustic environment with a continuous, simple, unintrusive presence that says 'we are here' without demanding anything more. In a forest of virtuoso singers (thrushes, warblers, swallows), the waxwing provides the ambient texture. The whisper is not less than the warble. It is sufficient."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-030",
+      "title": "Barn Swallow (Degree 30)",
+      "connection": "IMMEDIATE PREDECESSOR. Maximum timbral contrast: long liquid twittering warble (30) vs. high thin see-see-see (31). From the river to the wire. From the most complex swallow song to a thin sibilant whisper. Family boundary: Hirundinidae to Bombycillidae."
+    },
+    {
+      "project": "SPS-032",
+      "title": "Bohemian Waxwing (Degree 32)",
+      "connection": "WAXWING PAIR. Cedar Waxwing (31) + Bohemian Waxwing (32) form a same-genus pair (Bombycilla). Both frugivores, both sibilant callers, both flock birds. Range contrast: temperate resident vs. boreal irruptive."
+    },
+    {
+      "project": "SPS-027/028",
+      "title": "Tachycineta Pair (Degrees 27-28)",
+      "connection": "STRUCTURAL ECHO. Tachycineta pair explored ecological contrast within one genus. Bombycilla pair explores range contrast within one genus. Same structural pattern, different contrasting axis."
+    },
+    {
+      "project": "SPS-026-030",
+      "title": "Swallow Quintet (Degrees 26-30)",
+      "connection": "QUINTET-TO-PAIR TRANSITION. After 5 consecutive Hirundinidae (100% density), the engine enters 2 consecutive Bombycillidae. Scale contracts: quintet to pair. Timbre shifts: liquid/rough to sibilant."
+    },
+    {
+      "project": "SPS-008",
+      "title": "Golden-crowned Kinglet (Degree 8)",
+      "connection": "HIGH-FREQUENCY PARALLEL. Both thin, high, sibilant calls in the 7-10 kHz range. Kinglet = 'ultrasonic threshold' (element 9). Waxwing = 'the whisper' (element 32). Both explore the upper edge of human hearing."
+    },
+    {
+      "project": "SPS-010",
+      "title": "Bushtit (Degree 10)",
+      "connection": "MINIMUM SIGNAL PARALLEL. Both thin, quiet individually. But the Bushtit's seep was a single thread in silence; the Cedar Waxwing's see-see-see is one voice in a flock chorus. Minimum per individual, maximum per collective."
+    },
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "FRUGIVORY CONNECTION. Robin is a seasonal frugivore (berries in fall/winter). Cedar Waxwing is a year-round frugivore. Both use mountain ash, holly, crabapple. The waxwing is the specialist; the robin is the generalist."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Cedar Waxwing documented as common year-round resident. Frugivorous nomad. Flock species. Wax tips. One of the most aesthetically distinctive PNW birds."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Fruiting tree ecology. Seed dispersal mutualisms. Non-native plant interactions (honeysuckle recoloring wax tips). Phenological tracking."
+    },
+    {
+      "project": "S36",
+      "title": "Seattle 360 Music",
+      "connection": "Part A parallel: Brenda Lee Eager (R&B/Soul, E=4, 1970s, Seattle, Mercury). Smooth, silky vocal delivery -- the silk-tail of R&B. Polished and elegant, like the Cedar Waxwing's sleek plumage. Eleventh consecutive E=4."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 30,
+    "total_entries": 32,
+    "families_represented": 17,
+    "largest_families": {
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Parulidae": 5,
+      "Paridae": 2,
+      "Cardinalidae": 2,
+      "Picidae": 2,
+      "Fringillidae": 2,
+      "Bombycillidae": 1
+    },
+    "energy_plateau": "E=4 for 11 consecutive degrees (21-31) -- CRITICALLY MUST BREAK",
+    "passeriformes_streak": "9 consecutive (23-31) -- CRITICALLY MUST BREAK",
+    "bombycillidae_streak": "1 (degree 31) -- waxwing pair OPEN, degree 32 continues",
+    "sibilant_timbral_category": "NEW at degree 31 -- third timbral category after tonal (0-25) and liquid/rough (26-30)",
+    "waxwing_pair": "OPEN (Cedar Waxwing at 31, Bohemian Waxwing expected at 32)",
+    "same_genus_pairs": ["Catharus (18-19)", "Tachycineta (27-28)", "Bombycilla (31-32, in progress)"],
+    "archetype_arriving_last": ["Turdus/American Robin at degree 25 (after 4 thrush species)", "Hirundo/Barn Swallow at degree 30 (after 4 swallow species)"],
+    "critical_gaps": [
+      "No marine/shoreline species in 31 degrees of 'The Sound of Puget Sound' -- 31 DEGREES OVERDUE",
+      "No corvid (Steller's Jay, crow, raven) -- 31 degrees",
+      "No raptor (Accipitridae, Falconidae) -- 31 degrees",
+      "No nocturnal species since degree 4 (27 degrees ago)",
+      "E=5 never used",
+      "Nine consecutive Passeriformes (23-31)",
+      "Eleven consecutive E=4 (21-31) -- longest plateau in engine history"
+    ]
+  }
+}

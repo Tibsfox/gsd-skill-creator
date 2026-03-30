@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 36&deg; &mdash; Jimi Hendrix (Blues Context) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4A148C, #6A1B9A);
+      color: #CE93D8;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(74, 20, 140, 0.5);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #D50000;
+      color: white;
+      border: 1px solid #B71C1C;
+      animation: pulse-e6 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse-e6 {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(213, 0, 0, 0.5); }
+      50% { box-shadow: 0 0 12px 4px rgba(213, 0, 0, 0.3); }
+    }
+
+    .blues-rock-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #CE93D8;
+      border: 1px solid #7B1FA2;
+      margin-left: 0.3rem;
+    }
+
+    .reprise-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1B5E20;
+      color: #A5D6A7;
+      border: 1px solid #388E3C;
+      margin-left: 0.3rem;
+    }
+
+    .cd-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFE0B2;
+      border: 1px solid #F57C00;
+      margin-left: 0.3rem;
+    }
+
+    .landmark-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFD600;
+      color: #4A148C;
+      border: 1px solid #F9A825;
+      margin-left: 0.3rem;
+      animation: pulse-landmark 2s ease-in-out infinite;
+    }
+    @keyframes pulse-landmark {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 214, 0, 0.4); }
+      50% { box-shadow: 0 0 10px 4px rgba(255, 214, 0, 0.25); }
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #F3E5F5; color: #6A1B9A; }
+    .level-advanced { background: #EDE7F6; color: #4A148C; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: #4A148C; }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #4A148C;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #CE93D8;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #4A148C;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #EDE7F6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .blues-box {
+      background: linear-gradient(135deg, #4A148C, #6A1B9A);
+      color: #E1BEE7;
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .blues-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #CE93D8;
+      font-family: system-ui, sans-serif;
+    }
+    .blues-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .blues-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .blues-box td, .blues-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #6A1B9A;
+      color: #E1BEE7;
+    }
+    .blues-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #CE93D8;
+    }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: linear-gradient(135deg, #D50000, #B71C1C);
+      color: white;
+      border: 2px solid #880E4F;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFCDD2;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #FFCDD2;
+    }
+
+    .cd-box {
+      background: linear-gradient(135deg, #E65100, #F57C00);
+      color: #FFF3E0;
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cd-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFE0B2;
+      font-family: system-ui, sans-serif;
+    }
+    .cd-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .cd-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .cd-box td, .cd-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #FFF3E0;
+    }
+    .cd-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #FFE0B2;
+    }
+
+    .discography-box {
+      background: linear-gradient(135deg, #37474F, #455A64);
+      color: #B0BEC5;
+      border: 2px solid #78909C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .discography-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #CE93D8;
+      font-family: system-ui, sans-serif;
+    }
+    .discography-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .discography-box table {
+      width: 100%;
+      font-size: 0.82rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .discography-box td, .discography-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: #B0BEC5;
+    }
+    .discography-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #CE93D8;
+    }
+
+    .reprise-box {
+      background: linear-gradient(135deg, #1B5E20, #2E7D32);
+      color: #C8E6C9;
+      border: 2px solid #388E3C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .reprise-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #A5D6A7;
+      font-family: system-ui, sans-serif;
+    }
+    .reprise-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .cross-ref-box {
+      background: #F3E5F5;
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cross-ref-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .cross-ref-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .cross-ref-box li { margin-bottom: 0.4rem; }
+
+    .blues-lens-box {
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #C5CAE9;
+      border: 2px solid #3F51B5;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .blues-lens-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #90CAF9;
+      font-family: system-ui, sans-serif;
+    }
+    .blues-lens-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">36&deg;</div>
+      <div>
+        <h1>Jimi Hendrix</h1>
+        <div class="subtitle">Blues Rock &middot; The Supernova &mdash; Seattle&rsquo;s Most Famous Son
+          <span class="energy-badge">Energy 6 &mdash; First E=6</span>
+          <span class="blues-rock-badge">Blues Rock</span>
+          <span class="landmark-badge">Landmark</span>
+          <span class="reprise-badge">Reprise</span>
+          <span class="cd-badge">Central District</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../035-robert-cray/index.html">Degree 35&deg; (Cray)</a>
+      <a href="../032-luther-rabb/index.html">Degree 32&deg; (Luther Rabb)</a>
+      <a href="../030-ray-charles/index.html">Degree 30&deg; (Ray Charles)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Quincy Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Born November 27, 1942, in Seattle&rsquo;s Central District.
+          Third-generation Seattleite. Raised in poverty. Played in the
+          Velvetones with Luther Rabb. Learned the blues from his father&rsquo;s
+          records &mdash; Muddy Waters, B.B. King, Albert King. Expelled from
+          Garfield High School. Left Seattle for the Army, then the chitlin&rsquo;
+          circuit &mdash; backing Little Richard, the Isley Brothers, Curtis Knight.
+          Discovered in Greenwich Village, 1966. Three studio albums on Reprise.
+          &ldquo;Red House&rdquo; as pure blues. &ldquo;Voodoo Chile&rdquo; as
+          electrified Delta. &ldquo;Machine Gun&rdquo; as blues protest. Marshall
+          stacks at maximum volume. The most physically intense performer in rock
+          history. Died September 18, 1970, London, age 27. The biggest Export
+          from Seattle. The blues foundation beneath the most famous tree in rock
+          music. <strong>E=6 &mdash; the ceiling rises.</strong>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Territorial Acknowledgment</h4>
+          <p>This research is mapped to Seattle&rsquo;s Central District
+          within the Seattle 360 engine. The Central District sits on the
+          ancestral territory of the <strong>Duwamish Tribal Organization</strong>
+          (duwamishtribe.org), the <strong>Muckleshoot Indian Tribe</strong>,
+          and related Coast Salish peoples. The Jackson Street corridor where
+          Hendrix absorbed the blues was built on Duwamish land. Garfield High
+          School, where Hendrix and Quincy Jones walked the same halls, sits on
+          Duwamish land. The Duwamish Tribe remains federally unrecognized.
+          This acknowledgment was established at degree 20 and is inherited by
+          all subsequent releases.</p>
+        </div>
+
+        <!-- ========================================
+             BLUES LENS
+             ======================================== -->
+
+        <div class="blues-lens-box">
+          <h4>The Blues Lens &mdash; Why This Document Exists</h4>
+          <p>The CSV specifies <strong>&ldquo;Jimi Hendrix (blues context)&rdquo;</strong>
+          &mdash; a deliberate editorial instruction. The world knows Hendrix as
+          the psychedelic rock innovator. This document tells a different story:
+          Hendrix as a <strong>blues musician</strong>. The blues was the
+          foundation beneath everything &mdash; the first music he loved, the
+          tradition he learned on the chitlin&rsquo; circuit, the form he returned
+          to with Band of Gypsys. Every innovation (feedback, distortion, wah-wah)
+          was an extension of the blues, not a departure from it.</p>
+          <p style="margin-top:0.5rem"><em>&ldquo;You can call Jimi Hendrix
+          whatever you like, but he was a blues master &mdash; it&rsquo;s really
+          nothing but blues.&rdquo;</em> &mdash; Billy Cox</p>
+        </div>
+
+        <!-- ========================================
+             E=6 ENERGY (FIRST TIME)
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>E=6 &mdash; The Ceiling Rises (First Time Above Five)</h4>
+          <p><strong>The energy scale expands for the first time in 36 degrees.</strong>
+          E=6 is not E=5 + 1. It is a qualitative discontinuity &mdash;
+          <strong>transformative tidal</strong> &mdash; energy that redefines
+          the scale itself.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>Energy</th><th>Mode</th></tr>
+            <tr><td>32</td><td>Luther Rabb</td><td>E=5</td><td>Personal tidal</td></tr>
+            <tr><td>33</td><td>Larry English</td><td>E=5</td><td>Scene-cumulative tidal</td></tr>
+            <tr><td>34</td><td>The Tempos</td><td>E=5</td><td>Collective tidal</td></tr>
+            <tr><td>35</td><td>Robert Cray</td><td>E=5</td><td>Breakthrough tidal</td></tr>
+            <tr><td><strong>36</strong></td><td><strong>Jimi Hendrix</strong></td><td><strong>E=6</strong></td><td><strong>Transformative tidal</strong></td></tr>
+          </table>
+          <p style="margin-top:0.6rem">Distribution: 2:13:6:11:4:<strong>1</strong>.
+          One artist, alone at the top. Marshall stacks at maximum. Guitar on fire.
+          The most physically intense performer in rock history.</p>
+        </div>
+
+        <!-- ========================================
+             BLUES ROCK: NEW GENRE
+             ======================================== -->
+
+        <div class="blues-box">
+          <h4>Blues Rock &mdash; Genre Stage 18 (New Genre)</h4>
+          <p><strong>Blues Rock enters the engine.</strong> Blues appeared at
+          degree 35 (Robert Cray). At degree 36, the first <strong>fusion
+          genre</strong> is mapped &mdash; the combination of blues harmonic
+          vocabulary with rock amplification and performance energy.</p>
+          <table>
+            <tr><th>Stage</th><th>Degree</th><th>Genre</th></tr>
+            <tr><td>17</td><td>35</td><td>Blues (root genre)</td></tr>
+            <tr><td><strong>18</strong></td><td><strong>36</strong></td><td><strong>Blues Rock (fusion)</strong></td></tr>
+          </table>
+          <p style="margin-top:0.5rem">Hendrix did not invent blues rock, but he is
+          its most important practitioner &mdash; the artist who proved that blues
+          and rock are not separate traditions but a single continuum.</p>
+        </div>
+
+        <!-- ========================================
+             CENTRAL DISTRICT RETURNS
+             ======================================== -->
+
+        <div class="cd-box">
+          <h4>Central District Returns &mdash; 9th CD Degree</h4>
+          <p><strong>After Tacoma (35), the engine returns to the Central
+          District</strong> for its most famous artist. The CD cluster is now
+          the engine&rsquo;s densest geographic concentration.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>CD Connection</th></tr>
+            <tr><td>0</td><td>Quincy Jones</td><td>Raised in CD, Garfield HS</td></tr>
+            <tr><td>3</td><td>Ernestine Anderson</td><td>CD jazz scene</td></tr>
+            <tr><td>4</td><td>Floyd Standifer</td><td>CD jazz scene</td></tr>
+            <tr><td>5</td><td>Overton Berry</td><td>CD jazz scene</td></tr>
+            <tr><td>30</td><td>Ray Charles</td><td>Jackson Street clubs, 1947&ndash;1950</td></tr>
+            <tr><td>32</td><td>Luther Rabb</td><td>Born &amp; raised CD, Garfield HS</td></tr>
+            <tr><td>33</td><td>Larry English</td><td>CD music scene</td></tr>
+            <tr><td>34</td><td>The Tempos</td><td>CD R&amp;B group</td></tr>
+            <tr><td><strong>36</strong></td><td><strong>Jimi Hendrix</strong></td><td><strong>Born &amp; raised CD, Garfield HS</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             BIOGRAPHY TIMELINE
+             ======================================== -->
+
+        <h2>Career Timeline</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1942 &mdash; Born</div>
+          <p>November 27, King County Hospital, Seattle. Mother Lucille Jeter
+          (17). Father Al Hendrix (23), stationed at Fort Rucker, Alabama.
+          Third-generation Seattleite.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1942&ndash;1958 &mdash; Central District Childhood</div>
+          <p>Poverty, instability, constant moves across CD addresses. Parents
+          divorce 1950. Mother Lucille dies February 2, 1958, age 33. Absorbs
+          blues from father&rsquo;s records: Muddy Waters, B.B. King, Howlin&rsquo;
+          Wolf, Albert King.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1958 &mdash; First Guitar</div>
+          <p>Acquires first acoustic guitar for $5, mid-1958, age 15.
+          Left-handed, plays right-handed guitars flipped and restrung.
+          No formal instruction.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1958&ndash;1959 &mdash; The Velvetones</div>
+          <p>First band. Luther Rabb (degree 32) on saxophone. Pernell Alexander,
+          Walter Jones, Robert Green. Teen dances at Yesler Terrace and CD
+          recreation halls.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1959&ndash;1961 &mdash; Garfield &amp; The Rocking Kings</div>
+          <p>Enters Garfield High School fall 1959. Expelled October 1960.
+          Joins the Rocking Kings &mdash; Birdland club, Spanish Castle ballroom,
+          Washington Hall. Guitar stolen at Birdland intermission.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1961 &mdash; U.S. Army</div>
+          <p>Enlists 101st Airborne Division, Fort Campbell, Kentucky.
+          Meets Billy Cox &mdash; future Band of Gypsys bassist.
+          Discharged 1962.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1962&ndash;1966 &mdash; Chitlin&rsquo; Circuit</div>
+          <p>Backs Little Richard (fired over stage antics), the Isley Brothers
+          (&ldquo;Testify,&rdquo; 1964), Curtis Knight and the Squires (NYC),
+          King Curtis. Blues apprenticeship on the road.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1966 &mdash; Greenwich Village &amp; London</div>
+          <p>Leads Jimmy James and the Blue Flames in Greenwich Village.
+          Discovered by Chas Chandler (Animals). Moves to London. Forms
+          The Jimi Hendrix Experience with Noel Redding and Mitch Mitchell.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1967 &mdash; Are You Experienced / Axis</div>
+          <p>Two albums on Track/Reprise. &ldquo;Red House&rdquo; (pure blues,
+          UK only). &ldquo;Purple Haze,&rdquo; &ldquo;The Wind Cries Mary.&rdquo;
+          Sets guitar on fire at Monterey Pop Festival, June 18.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1968 &mdash; Electric Ladyland</div>
+          <p>Double album. &ldquo;Voodoo Chile&rdquo; (15-min blues jam).
+          &ldquo;Voodoo Child (Slight Return).&rdquo; &ldquo;All Along the
+          Watchtower.&rdquo; The magnum opus.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1969 &mdash; Woodstock</div>
+          <p>August 18. &ldquo;The Star-Spangled Banner&rdquo; through a
+          Stratocaster and Marshall stacks. The most famous guitar performance
+          in American history.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1969&ndash;1970 &mdash; Band of Gypsys</div>
+          <p>Hendrix, Billy Cox, Buddy Miles. Four concerts at Fillmore East,
+          New Year&rsquo;s Eve 1969 / New Year&rsquo;s Day 1970. &ldquo;Machine
+          Gun&rdquo; &mdash; blues as anti-war protest. Explicit blues-funk
+          direction.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1970-09-18 &mdash; Death</div>
+          <p>September 18, London. Samarkand Hotel, Lansdowne Crescent. Age 27.
+          Asphyxia. Open verdict. Buried at Greenwood Memorial Park, Renton, WA.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             KEY BLUES RECORDINGS
+             ======================================== -->
+
+        <h2>The Blues in the Recordings</h2>
+
+        <div class="discography-box">
+          <h4>Key Blues Recordings</h4>
+          <table>
+            <tr><th>Track</th><th>Album/Source</th><th>Year</th><th>Blues Significance</th></tr>
+            <tr><td>Red House</td><td>Are You Experienced (UK)</td><td>1967</td><td>Pure 12-bar blues. Albert King / B.B. King DNA. Omitted from US release.</td></tr>
+            <tr><td>Voodoo Chile</td><td>Electric Ladyland</td><td>1968</td><td>15-min slow blues in E. Based on Muddy Waters&rsquo; &ldquo;Rollin&rsquo; Stone.&rdquo;</td></tr>
+            <tr><td>Voodoo Child (Slight Return)</td><td>Electric Ladyland</td><td>1968</td><td>Compressed blues detonation. No. 1 UK posthumously.</td></tr>
+            <tr><td>Come On (Let the Good Times Roll)</td><td>Electric Ladyland</td><td>1968</td><td>Earl King cover. New Orleans blues tradition.</td></tr>
+            <tr><td>Machine Gun</td><td>Band of Gypsys</td><td>1970</td><td>12-min blues-protest. Feedback as gunfire. Fillmore East.</td></tr>
+            <tr><td>Hear My Train A Comin&rsquo;</td><td>Various live/posthumous</td><td>1968&ndash;70</td><td>Delta blues vocabulary. Acoustic version = stripped-down Delta.</td></tr>
+            <tr><td>Bleeding Heart</td><td>Fillmore East sessions</td><td>1970</td><td>Elmore James cover. Band of Gypsys blues emphasis.</td></tr>
+            <tr><td>Born Under a Bad Sign</td><td>Fillmore East sessions</td><td>1970</td><td>Albert King jam. Explicit blues homage.</td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <div class="cross-ref-box">
+          <h4>Engine Connections</h4>
+          <ul>
+            <li><strong>Degree 0 (Quincy Jones):</strong> Both Central District.
+            Both Garfield High School. Both exports. Jones = jazz-orchestral;
+            Hendrix = blues-rock. The two most famous musicians from Seattle
+            walked the same hallways.</li>
+            <li><strong>Degree 30 (Ray Charles):</strong> CD years overlap &mdash;
+            Charles played Jackson Street clubs while toddler Hendrix was in the
+            same neighborhood. Both shaped by the same ecosystem. Both Exports.</li>
+            <li><strong>Degree 32 (Luther Rabb):</strong> Born same year (1942),
+            same neighborhood, same school (Garfield), same first band (Velvetones).
+            Hendrix helped Rabb&rsquo;s Ballin&rsquo; Jack sign to Columbia and
+            invited them on his 1970 tour. The strongest direct cross-reference
+            in the engine.</li>
+            <li><strong>Degree 35 (Robert Cray):</strong> Blues (35) to Blues Rock
+            (36). Same instrument (Stratocaster), opposite approach: stinging clean
+            vs. controlled scream. Genre genealogy mapped in consecutive degrees.</li>
+            <li><strong>Garfield HS Thread:</strong> Three degrees share one
+            school &mdash; Jones (0), Rabb (32), Hendrix (36).</li>
+          </ul>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY CARDS
+             ======================================== -->
+
+        <h2>Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Supernova</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>37th artist-city pattern. Intense formation, total departure,
+            compressed career at maximum intensity, premature death. City claims
+            artist posthumously &mdash; MoPOP, park, statue, museum exhibits.
+            Maximum impact, minimum duration.</p>
+            <div class="examples">Export (0) = long career elsewhere. Incubator
+            (30) = brief transit. Deep Root (35) = stays regional. Supernova
+            (36) = burns bright, collapses, city keeps the afterglow.</div>
+            <div class="genealogy"><strong>Genealogy:</strong> Completes quartet
+            of PNW-to-global modes: Export, Incubator, Deep Root, Supernova.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Controlled Scream</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>37th acoustic element. Overdriven Stratocaster through Marshall
+            stacks at maximum volume. Feedback = sustained cry. Distortion =
+            rough voice. Wah-wah = vowel sounds. The blues expression of emotion
+            amplified to electromagnetic force.</p>
+            <div class="examples">Stinging clean (35) = precision, restraint.
+            Controlled scream (36) = power, intensity. Same guitar, opposite
+            philosophy. Consecutive Stratocaster pairing.</div>
+            <div class="genealogy"><strong>Genealogy:</strong> Guitar blue note
+            (1) &rarr; stinging clean (35) &rarr; controlled scream (36). Full
+            Stratocaster timbral spectrum mapped.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Screaming Bend</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>36th blue note deployment. The bend as full-body physical
+            experience &mdash; pitch transition saturated with overtones,
+            sustained by feedback, delivered at bone-resonating volume.
+            Opposite of the articulate sting&rsquo;s clean transparency.</p>
+            <div class="examples">&ldquo;Machine Gun,&rdquo; &ldquo;Voodoo
+            Chile,&rdquo; &ldquo;Red House&rdquo; bends. Ghost (33) &rarr;
+            unison (34) &rarr; articulate sting (35) &rarr; screaming
+            bend (36).</div>
+            <div class="genealogy"><strong>Genealogy:</strong> Both extremes of
+            guitar-bend spectrum mapped: max transparency (Cray) and max
+            saturation (Hendrix).</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Transformative Tidal</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>First E=6 mode. Energy that redefines the scale itself.
+            Not merely loud or energetic &mdash; transformed what an electric
+            guitar, amplifier, and stage show could physically do.
+            Distribution: 2:13:6:11:4:<strong>1</strong>.</p>
+            <div class="examples">Personal (32) &rarr; scene (33) &rarr;
+            collective (34) &rarr; breakthrough (35) &rarr; transformative (36).
+            Five modes across five consecutive maximum-or-above degrees.</div>
+            <div class="genealogy"><strong>Genealogy:</strong> E=6 may be
+            one-of-one. The energy scale expanded to accommodate a singular
+            artist.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             REPRISE RECORDS
+             ======================================== -->
+
+        <div class="reprise-box">
+          <h4>Reprise Records &mdash; New Label</h4>
+          <p>Founded by Frank Sinatra (1960). Acquired by Warner Bros. (1963).
+          US home of all three Jimi Hendrix Experience studio albums.
+          First appearance in the engine. Reprise omitted &ldquo;Red House&rdquo;
+          from the US <em>Are You Experienced</em> &mdash; a slow blues didn&rsquo;t
+          fit the rock marketing strategy. The blues was the part of Hendrix that
+          his American label thought wouldn&rsquo;t sell.</p>
+        </div>
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 37</h4>
+          <ul>
+            <li><strong>E=6 FIRST TIME.</strong> Distribution 2:13:6:11:4:1. Transformative tidal. Track whether E=6 recurs or remains unique.</li>
+            <li><strong>Blues Rock at Genre Stage 18.</strong> First fusion genre. Track at degree 37.</li>
+            <li><strong>The Supernova</strong> as 37th artist-city pattern. Track.</li>
+            <li><strong>The controlled scream</strong> as 37th acoustic element. Track element 38.</li>
+            <li><strong>The screaming bend</strong> as 36th blue note deployment. Track.</li>
+            <li><strong>Reprise Records x1.</strong> New major label. Track.</li>
+            <li><strong>Central District x9.</strong> Densest geographic cluster. Track.</li>
+            <li><strong>Garfield HS x3</strong> (0, 32, 36). Track for more.</li>
+            <li><strong>Gender: 6:31</strong> (~16.2%). Hendrix male. Track.</li>
+            <li><strong>Solo format continues</strong> from degree 35.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">36&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value" style="color:#D50000">6 (FIRST)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Blues Rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1962&ndash;1970</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Nov 27, 1942</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">Sep 18, 1970</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Age</span>
+            <span class="stat-value">27</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Reprise</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Fender Stratocaster</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">The Supernova (#37)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">Controlled scream (#37)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue note</span>
+            <span class="stat-value">Screaming bend (#36)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E mode</span>
+            <span class="stat-value">Transformative tidal</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre stage</span>
+            <span class="stat-value">18 (Blues Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD degrees</span>
+            <span class="stat-value">9</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Garfield HS</span>
+            <span class="stat-value">3 (0, 32, 36)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Blues Influences</h4>
+          <div class="stat-row">
+            <span class="stat-label">Muddy Waters</span>
+            <span class="stat-value">Foundational</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albert King</span>
+            <span class="stat-value">&ldquo;My idol&rdquo;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">B.B. King</span>
+            <span class="stat-value">Father&rsquo;s records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Howlin&rsquo; Wolf</span>
+            <span class="stat-value">Early influence</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Robert Johnson</span>
+            <span class="stat-value">Delta lineage</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Elmore James</span>
+            <span class="stat-value">Slide + tone</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Seattle Legacy</h4>
+          <div class="stat-row">
+            <span class="stat-label">MoPOP</span>
+            <span class="stat-value">6,000+ artifacts</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Hendrix Park</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Statue</span>
+            <span class="stat-value">Capitol Hill (1997)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Burial</span>
+            <span class="stat-value">Renton, WA</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 &mdash; Degree 36&deg; &mdash; Jimi Hendrix (Blues Context)
+    &mdash; <strong>E=6</strong> &mdash; v1.49.172</p>
+  </footer>
+</body>
+</html>

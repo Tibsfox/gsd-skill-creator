@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 33&deg; &mdash; Cassin&rsquo;s Finch &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Cadenza highlight card */
+    .cadenza-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F9A825;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .cadenza-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Mountain conifer card */
+    .mountain-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #81C784 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .mountain-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Fringillidae reunion card */
+    .family-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #90CAF9 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Energy return card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 1px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.cadenza { background: #F9A825; }
+    .theory-icon.family { background: #1565C0; }
+    .theory-icon.mountain { background: #2E7D32; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-icon.trio { background: #D84315; }
+    .theory-icon.mimicry { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">33&deg;</div>
+      <div class="release-title-block">
+        <h2>Cassin&rsquo;s Finch</h2>
+        <div class="scientific">Haemorhous cassinii &middot; Family Fringillidae (True Finches) &middot; 2nd Fringillidae in Engine</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Rich Warbling Song Male Display &middot; Mountain Conifer &middot; Summer &middot; Energy 4 &mdash; E=5 Spike Resolves</div>
+
+    <blockquote>
+      High in the ponderosa, on the top of a dead snag where the Cascade
+      crest drops into the dry country, a small rosy-crowned bird opens its
+      bill and pours out a sound the mountain has been assembling for millennia.
+      A rolling, tumbling, warbling cadenza &mdash; rapid and unpredictable,
+      syllable after syllable, trill after phrase, and then &mdash; wait, was
+      that a crossbill? A tanager? A robin? The Cassin&rsquo;s Finch borrows
+      everyone else&rsquo;s voice and weaves it into its own. The mountain
+      conifer soundscape, reassembled into a single performance. The soloist
+      steps to the front of the stage. The cadenza begins.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Cadenza Card -->
+        <div class="cadenza-card">
+          <h3>The Cadenza &mdash; 34th Acoustic Element</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The Cassin&rsquo;s Finch&rsquo;s song is a <strong>virtuosic solo
+            display</strong> that incorporates mimicked phrases from other species
+            &mdash; Red Crossbill, Western Tanager, American Robin, Mountain
+            Chickadee, and more. In classical music, a cadenza is the moment
+            where the soloist plays freely, quoting themes from the movement
+            and demonstrating mastery. The Cassin&rsquo;s Finch is the soloist
+            of the mountain conifer ecosystem.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Progression: whisper (31) &rarr; buzz (32) &rarr; <strong>cadenza (33)</strong>.
+            From collective sibilant texture to individual melodic virtuosity
+            with quotation. The engine&rsquo;s first mimic.
+          </p>
+        </div>
+
+        <!-- Fringillidae Reunion Card -->
+        <div class="family-card">
+          <h3>Fringillidae Returns &mdash; 21 Degrees Later</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The second true finch in the engine. Pine Siskin (degree 12) was
+            the first &mdash; <em>Spinus pinus</em>, E=1, irruptive, ascending
+            zhreee. Now Cassin&rsquo;s Finch: <em>Haemorhous cassinii</em>,
+            E=4, summer, rich warbling cadenza. <strong>Same family, maximally
+            different</strong> in energy, complexity, and seasonal strategy.
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Energy</th><th>Season</th><th>Sound</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>12</td><td>Pine Siskin</td><td><em>Spinus</em></td><td>E=1</td><td>Irruptive</td><td>Rising zhreee</td></tr>
+              <tr style="background: rgba(21,101,192,0.12); font-weight: 600;"><td>33</td><td>Cassin&rsquo;s Finch</td><td><em>Haemorhous</em></td><td>E=4</td><td>Summer</td><td>Rich warbling cadenza</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Both conifer-dependent. Siskin extracts seeds with a tweezer bill.
+            Cassin&rsquo;s takes seeds from open cones with a stouter bill.
+            Fringillidae now spans E=1 to E=4.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: Rich Warbling Song Male Display</h2>
+        <p>
+          The male Cassin&rsquo;s Finch produces a <strong>long, rollicking,
+          warbling series</strong> of rapid, varied syllables lasting
+          5&ndash;20+ seconds. Delivered from exposed high perches &mdash;
+          conifer tops, dead snags &mdash; during the breeding season
+          (May&ndash;July). The most complex song of the three <em>Haemorhous</em>
+          finches, and arguably the most complex finch song in western
+          North America.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>2&ndash;8 kHz (broad midrange, lower than waxwing sibilant zone)</td></tr>
+            <tr><td>Peak energy</td><td>2.5&ndash;6 kHz (warm, rich midrange)</td></tr>
+            <tr><td>Song duration</td><td>5&ndash;20 seconds (sometimes 30+)</td></tr>
+            <tr><td>Syllable rate</td><td>8&ndash;15 per second in dense passages</td></tr>
+            <tr><td>Phrase structure</td><td>Variable, non-repeating &mdash; warbles + trills + chips + mimicked phrases</td></tr>
+            <tr><td>Timbre</td><td>Warm, rich, clearly tonal &mdash; rolling and tumbling</td></tr>
+            <tr><td>Mimicry</td><td>Regular incorporation of other species&rsquo; phrases (defining feature)</td></tr>
+            <tr><td>Display type</td><td>Solo from high perch + aerial flight song during courtship</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>The 34th acoustic element: the cadenza.</strong> The engine&rsquo;s
+          first mimic. The Cassin&rsquo;s Finch does not merely sing its own
+          song &mdash; it quotes Red Crossbill flight calls, Western Tanager
+          warble phrases, American Robin caroling, Mountain Chickadee calls,
+          and more. Each male&rsquo;s mimicry repertoire is a <strong>record
+          of his acoustic environment</strong>. The cadenza is the mountain
+          conifer soundscape reassembled into a single virtuosic performance.
+        </p>
+
+        <!-- Mountain Conifer Card -->
+        <div class="mountain-card">
+          <h3>Mountain Conifer &mdash; First Montane Ecosystem</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The engine&rsquo;s <strong>first explicitly montane habitat</strong>.
+            Dry, open coniferous forests of the eastern Cascades and Rockies at
+            <strong>3,000&ndash;10,000 feet</strong> elevation. Ponderosa pine,
+            Douglas-fir, lodgepole pine, subalpine fir. Characterized by widely
+            spaced trees, low ambient noise, and exceptional acoustics for complex
+            song. A fundamentally different forest from the wet, dense old-growth
+            west of the Cascade crest.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Altitude as ecological dimension. The Cassin&rsquo;s Finch breeds
+            high and winters lower &mdash; a partial altitudinal migrant. In
+            Washington, breeding occurs in the eastern Cascades, Okanogan Highlands,
+            and Blue Mountains. Not present in Puget Sound lowlands.
+          </p>
+        </div>
+
+        <!-- Energy Return Card -->
+        <div class="energy-card">
+          <h3>E=4 Returns &mdash; The E=5 Spike Was a Sforzando</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Energy arc: E=4 plateau (21&ndash;31) &rarr; <strong>E=5 spike (32)</strong>
+            &rarr; E=4 return (33). The Bohemian Waxwing&rsquo;s E=5 lasted
+            exactly one degree. A sforzando accent, not a new plateau. E=4
+            after E=5 is a <strong>choice</strong>, not a default &mdash; the
+            engine has touched the ceiling and returned.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            E=4 regains the lead: 12 degrees (35.3%). E=5 remains rare:
+            1 degree (2.9%). The dynamic palette is flexible.
+          </p>
+        </div>
+
+        <!-- Taxonomy Section -->
+        <h2>Taxonomy: The Haemorhous Trio</h2>
+        <p>
+          <em>Haemorhous cassinii</em> (Baird, 1854). Named for <strong>John
+          Cassin</strong> (1813&ndash;1869), curator at the Academy of Natural
+          Sciences of Philadelphia, who described 194 new bird species.
+          Formerly <em>Carpodacus cassinii</em> until a 2012 molecular
+          phylogenetic reclassification (Zuccon et al.) moved the three
+          North American &ldquo;rosefinches&rdquo; to the resurrected genus
+          <em>Haemorhous</em> &mdash; Greek <em>haima</em> (&ldquo;blood&rdquo;) +
+          <em>orrhos</em> (&ldquo;rump&rdquo;) = &ldquo;blood-rumped.&rdquo;
+        </p>
+        <p>
+          The <strong>Haemorhous trio</strong> &mdash; Cassin&rsquo;s Finch,
+          Purple Finch, House Finch &mdash; is one of birding&rsquo;s most
+          notorious identification challenges. All three occur in the PNW:
+        </p>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Species</th><th>Crown</th><th>Bill</th><th>Habitat</th><th>Song</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Cassin&rsquo;s</strong></td>
+              <td>Bright red peaked</td>
+              <td>Longer, straight on top</td>
+              <td>Mountain conifer</td>
+              <td>Most complex, with mimicry</td>
+            </tr>
+            <tr>
+              <td>Purple</td>
+              <td>Rosy-red diffuse wash</td>
+              <td>Stout, curved</td>
+              <td>Moist conifer/mixed</td>
+              <td>Rich, no mimicry</td>
+            </tr>
+            <tr>
+              <td>House</td>
+              <td>Orange-red, round head</td>
+              <td>Short, curved</td>
+              <td>Urban/suburban</td>
+              <td>Simpler, variable</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>FRINGILLIDAE REUNION. Second true finch, 21 degrees later.
+            Spinus (E=1, irruptive, zhreee) vs. Haemorhous (E=4, summer,
+            cadenza). Family spans E=1 to E=4.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-032: Bohemian Waxwing</strong>
+            <p>ENERGY DESCENT. E=5 spike returns to E=4. Different family,
+            different ecosystem, different sound philosophy. The sforzando
+            resolves.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-031: Cedar Waxwing</strong>
+            <p>ENERGY BRACKETING. E=4 (whisper) &rarr; E=5 (buzz) &rarr;
+            E=4 (cadenza). Three degrees, two families, one bracket.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-024: Western Tanager</strong>
+            <p>MOUNTAIN CONIFER COMPANION + MIMICRY TARGET. Both breed at
+            similar elevations. The Cassin&rsquo;s Finch mimics the tanager.
+            Degree 33 quotes degree 24.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-023: Black-headed Grosbeak</strong>
+            <p>WARBLE EXPANSION. Both melodic warblers at E=4. Grosbeak =
+            smooth warble. Cassin&rsquo;s Finch = rich warble with mimicry.
+            Complexity grows.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001: Pacific Wren</strong>
+            <p>COMPLEXITY BOOKEND. The engine&rsquo;s first complex song (degree 1)
+            and the most complex since (degree 33). 32 degrees between the
+            two most elaborate vocalists.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>MIMICRY TARGET. The Cassin&rsquo;s Finch incorporates robin
+            caroling phrases. Degree 33 quotes degree 25.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI + ECO</strong>
+            <p>Cassin&rsquo;s Finch documented in eastern Cascades montane
+            conifer forests. Fire-adapted ponderosa pine ecology under pressure
+            from suppression and climate change.</p>
+          </div>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Acoustic Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon cadenza">C</div>
+            <div class="theory-content">
+              <h4>The Cadenza <span class="theory-level foundational">Foundational</span></h4>
+              <p>Virtuosic solo display incorporating borrowed material from other
+              species. The concerto soloist quotes the orchestra. The engine&rsquo;s
+              first mimic, most individually complex vocal performance since degree 1.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon family">F</div>
+            <div class="theory-content">
+              <h4>Fringillidae Reunion <span class="theory-level foundational">Foundational</span></h4>
+              <p>Second true finch in the engine. Pine Siskin (E=1, electronic
+              zhreee) and Cassin&rsquo;s Finch (E=4, melodic cadenza) &mdash;
+              same family, opposite ends of the energy and complexity spectra.
+              Both conifer-dependent.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mountain">M</div>
+            <div class="theory-content">
+              <h4>Mountain Conifer Ecosystem <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>First explicitly montane habitat. Altitude as ecological dimension.
+              Dry, open, 3,000&ndash;10,000 feet. Low ambient noise and long
+              sight/sound lines reward vocal complexity.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>E=5 Spike Resolves <span class="theory-level intermediate">Intermediate</span></h4>
+              <p>E=4 plateau (21&ndash;31) &rarr; E=5 spike (32) &rarr; E=4 return (33).
+              The sforzando accent. E=4 after E=5 is a choice, not a default.
+              Dynamic flexibility demonstrated.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon trio">T</div>
+            <div class="theory-content">
+              <h4>The Haemorhous Trio <span class="theory-level advanced">Advanced</span></h4>
+              <p>Three confusingly similar species separated by microhabitat,
+              bill structure, plumage detail, and song complexity. Cassin&rsquo;s =
+              mountain virtuoso. Purple = forest lyricist. House = urban busker.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mimicry">Q</div>
+            <div class="theory-content">
+              <h4>Mimicry as Acoustic Ecology <span class="theory-level advanced">Advanced</span></h4>
+              <p>The song as composite record of the mountain bird community.
+              Learned mimicry reflects place-specific acoustic environment.
+              The cadenza quotes the orchestra &mdash; jazz quotation in feathers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Hahn, T.P. (2020). Cassin&rsquo;s Finch (<em>Haemorhous cassinii</em>), version 1.0. <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>&ldquo;John Cassin.&rdquo; All About Birds, Cornell Lab of Ornithology.</li>
+          <li>&ldquo;John Cassin.&rdquo; Wikipedia.</li>
+          <li>Baird, S.F. (1854). Descriptions of new birds. <em>Proc. Acad. Nat. Sci. Philadelphia</em> 7: 118&ndash;120.</li>
+          <li>Zuccon, D. et al. (2012). Phylogenetic relationships and generic limits of finches. <em>Mol. Phylogenet. Evol.</em> 62: 581&ndash;596.</li>
+          <li>Chesser, R.T. et al. (2012). 53rd supplement to the AOU Check-list. <em>The Auk</em> 129: 573&ndash;588.</li>
+          <li>Jobling, J.A. (2010). <em>The Helm Dictionary of Scientific Bird Names</em>.</li>
+          <li>Project FeederWatch. &ldquo;Tricky Bird ID: Cassin&rsquo;s Finch, House Finch, and Purple Finch.&rdquo;</li>
+          <li>Audubon. &ldquo;Cassin&rsquo;s Finch.&rdquo; Field Guide.</li>
+          <li>Cornell Lab. &ldquo;Cassin&rsquo;s Finch Identification.&rdquo; All About Birds.</li>
+          <li>Cornell Lab. &ldquo;Cassin&rsquo;s Finch Overview.&rdquo; All About Birds.</li>
+          <li>BirdWeb (Seattle Audubon). &ldquo;Cassin&rsquo;s Finch.&rdquo;</li>
+          <li>Macaulay Library. Cassin&rsquo;s Finch recordings. Cornell Lab.</li>
+          <li>Xeno-canto. <em>Haemorhous cassinii</em> recordings.</li>
+          <li>Montana State University Acoustic Atlas. &ldquo;Cassin&rsquo;s Finch.&rdquo;</li>
+          <li>Earbirding. &ldquo;Mimicry in Cardueline Finches.&rdquo;</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song: Biological Themes and Variations</em>. 2nd ed.</li>
+          <li>NatureMapping Foundation. Cassin&rsquo;s Finch distribution, Washington state.</li>
+          <li>IUCN Red List. <em>Haemorhous cassinii</em>.</li>
+          <li>Partners in Flight. (2019). Avian Conservation Assessment Database.</li>
+          <li>Sauer, J.R. et al. (2020). North American Breeding Bird Survey. USGS.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">33&deg; of 360&deg;</div>
+          <div class="stat-detail">9.2% of full circle</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Return from E=5 spike</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mountain Conifer</div>
+          <div class="stat-detail">First montane habitat</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Breeding season at altitude</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Fringillidae</div>
+          <div class="stat-detail">2nd in engine (Pine Siskin = 1st)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Passeriformes</div>
+          <div class="stat-detail">11th consecutive &mdash; MUST BREAK</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">#34: The Cadenza</div>
+          <div class="stat-detail">Virtuosic solo with mimicry</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Unique Species</div>
+          <div class="stat-value">32</div>
+          <div class="stat-detail">34 entries (incl. degree 0 silence)</div>
+        </div>
+
+        <h3>Conservation</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">IUCN Status</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">Downlisted from Near Threatened 2019</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~3.2 million</div>
+          <div class="stat-detail">PIF Yellow Watch List-D</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Trend</div>
+          <div class="stat-value">Declining</div>
+          <div class="stat-detail">~0.56%/year (2006&ndash;2015)</div>
+        </div>
+
+        <h3>Navigation</h3>
+        <div class="stat-card">
+          <div class="stat-detail">
+            <a href="../032-bohemian-waxwing/index.html">&larr; Degree 32: Bohemian Waxwing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      The Sound of Puget Sound &mdash; Part B: PNW 360 Species
+      &middot; Degree 33&deg;: Cassin&rsquo;s Finch
+      &middot; v1.49.169
+    </p>
+  </footer>
+</body>
+</html>
