@@ -313,7 +313,7 @@
     <h1>NASA Mission Series</h1>
     <p class="tagline">&ldquo;The spaces between the missions are where the meaning lives.&rdquo;</p>
     <div class="stats-bar">
-      <span class="stat-pill"><strong>201</strong> missions cataloged</span>
+      <span class="stat-pill"><strong>552</strong> missions cataloged</span>
       <span class="stat-pill"><strong>6</strong> epochs</span>
       <span class="stat-pill"><strong>1958&ndash;2040s</strong> timeline</span>
       <span class="stat-pill"><strong>2</strong> missions complete</span>
@@ -375,7 +375,7 @@ const epochs = {
 const completedMissions = new Set(['1.0', '1.1']);
 
 // Parse CSV and build catalog
-fetch('catalog/nasa_master_mission_catalog.csv')
+fetch('catalog/nasa_master_mission_catalog_expanded.csv')
   .then(r => r.text())
   .then(csv => {
     const lines = csv.trim().split('\n');
