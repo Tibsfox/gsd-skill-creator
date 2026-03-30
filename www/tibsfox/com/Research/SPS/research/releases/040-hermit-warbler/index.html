@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 40&deg; &mdash; Hermit Warbler &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Thinning highlight card */
+    .thinning-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #AB47BC 100%);
+      border: 2px solid #6A1B9A;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .thinning-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Displacement card */
+    .displacement-card {
+      background: linear-gradient(135deg, #FFEBEE 0%, #EF5350 100%);
+      border: 2px solid #B71C1C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .displacement-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Setophaga trio card */
+    .trio-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #42A5F5 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trio-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Parulidae record card */
+    .parulidae-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .parulidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Plumage card */
+    .plumage-card {
+      background: linear-gradient(135deg, #FFFDE7 0%, #FDD835 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .plumage-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #5D4037;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.thinning { background: #6A1B9A; }
+    .theory-icon.trio { background: #1565C0; }
+    .theory-icon.displaced { background: #B71C1C; }
+    .theory-icon.parulidae { background: #C62828; }
+    .theory-icon.mountain { background: #33691E; }
+    .theory-icon.energy { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">40&deg;</div>
+      <div class="release-title-block">
+        <h2>Hermit Warbler</h2>
+        <div class="scientific">Setophaga occidentalis</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      thin buzzy song from the conifer top &mdash; the thinning, 8th Parulidae (extending record), THIRD consecutive <em>Setophaga</em>, the displaced species &mdash; victim of Townsend&rsquo;s competitive exclusion
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Displacement Card -->
+        <div class="displacement-card">
+          <h3>The Displaced Species</h3>
+          <p>Degree 39 documented the aggressor. <strong>Degree 40 documents the victim.</strong> Townsend&rsquo;s Warbler is actively displacing the Hermit Warbler through hybridization and competitive exclusion. The range is contracting southward. Pure populations are shrinking. The genome is dissolving through introgression. The victim arrives one degree after its aggressor.</p>
+          <p><strong>The 2,000 km genetic wake:</strong> Townsend&rsquo;s alleles extend approximately 2,000 km south of the visible range front [5]. The Hermit Warbler&rsquo;s genome is being colonized even where it still looks like a Hermit Warbler.</p>
+        </div>
+
+        <!-- Thinning Element Card -->
+        <div class="thinning-card">
+          <h3>The 41st Acoustic Element: The Thinning</h3>
+          <p>A thin, high, buzzy warbler song from the very tops of mountain conifers: <em>seely seely seely see</em>. After the canopy buzz&rsquo;s ascending robustness (degree 39), the thinning adds <strong>attenuation within the buzz</strong>. Same <em>Setophaga</em> timbre family, but stretched thin &mdash; higher, thinner, less substantial.</p>
+          <p><strong>Three meanings:</strong> (1) the thin quality of the song, (2) the thinning of the species&rsquo; geographic range, (3) the thinning of its genetic identity through introgression. One word for three kinds of diminishment. The first acoustic element with ecological meaning in its name.</p>
+        </div>
+
+        <!-- Setophaga Trio Card -->
+        <div class="trio-card">
+          <h3><em>Setophaga</em> Trio &mdash; Degrees 38 + 39 + 40</h3>
+          <table class="freq-table">
+            <thead>
+              <tr><th>Role</th><th>Degree</th><th>Species</th><th>Song</th><th>Range</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Secondary victim</td><td>38</td><td>Black-throated Gray</td><td>Flat drawl (husky)</td><td>Stable (slow contraction)</td></tr>
+              <tr><td>Aggressor</td><td>39</td><td>Townsend&rsquo;s</td><td>Ascending buzz (sibilant)</td><td><strong>Expanding</strong></td></tr>
+              <tr><td><strong>Primary victim</strong></td><td><strong>40</strong></td><td><strong>Hermit</strong></td><td><strong>Thin buzz (reedy)</strong></td><td><strong>Contracting</strong></td></tr>
+            </tbody>
+          </table>
+          <p>First consecutive genus TRIO. First consecutive family TRIO. Three species in the same genus across three degrees mapping a displacement cascade. The buzz attenuates across the trio: husky &rarr; sibilant &rarr; reedy. The song thins as the species thins.</p>
+        </div>
+
+        <h2>The Western Moth-Eater</h2>
+        <p><em>Setophaga occidentalis</em> &mdash; &ldquo;Western moth-eater.&rdquo; <em>Occidentalis</em> = Latin &ldquo;western,&rdquo; a geographic descriptor. Fourth <em>Setophaga</em> naming convention: morphology (<em>petechia</em>), process (<em>nigrescens</em>), patronym (<em>townsendi</em>), geography (<em>occidentalis</em>). Formerly <em>Dendroica occidentalis</em>. The common name &ldquo;Hermit&rdquo; reflects its extreme canopy-top behavior &mdash; rarely seen, almost always heard from above. The name has acquired a second meaning: the species is retreating, withdrawing from its former range.</p>
+
+        <h2>The Sound: Thin Buzzy Song</h2>
+        <p><em>Seely seely seely see</em> &mdash; 3&ndash;5 thin, high buzzy phrases at approximately 5,000&ndash;9,500 Hz [NEEDS VERIFICATION]. Thinner and higher than Townsend&rsquo;s. The phrases have a reedy, almost insect-like quality. Variable song structure &mdash; some renditions flat, some with a terminal pitch shift. The variability itself distinguishes it from the more consistent Townsend&rsquo;s and BTG songs.</p>
+
+        <h3><em>Setophaga</em> Song Comparison (All Four)</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Timbre</th><th>Pitch</th><th>Contour</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>16</td><td>Yellow</td><td>Clear, musical</td><td>~3.5&ndash;7 kHz [NV]</td><td>Ascending crescendo</td></tr>
+            <tr><td>38</td><td>Black-thr. Gray</td><td>Buzzy, husky</td><td>~3.5&ndash;7 kHz [NV]</td><td>Flat drawl</td></tr>
+            <tr><td>39</td><td>Townsend&rsquo;s</td><td>Buzzy, sibilant</td><td>~4&ndash;8.5 kHz [NV]</td><td>Ascending buzz</td></tr>
+            <tr><td><strong>40</strong></td><td><strong>Hermit</strong></td><td><strong>Thin, reedy</strong></td><td><strong>~5&ndash;9.5 kHz [NV]</strong></td><td><strong>Variable</strong></td></tr>
+          </tbody>
+        </table>
+        <p>[NV] = NEEDS VERIFICATION. The timbre thins and the pitch rises across the quartet. Clean tone &rarr; husky buzz &rarr; sibilant buzz &rarr; thin reedy buzz. The genus&rsquo;s voice attenuates as the displacement story progresses.</p>
+
+        <!-- Parulidae Record Card -->
+        <div class="parulidae-card">
+          <h3>Parulidae &mdash; 8 Members (Extending Record)</h3>
+          <p><strong>Eighth Parulidae.</strong> Leads Hirundinidae and Turdidae (5 each) by <strong>three</strong>. Three structural arcs:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>Quintet (14&ndash;20):</strong> Five species, five genera, five song endings. All E=3. Wet/mesic habitats.</li>
+            <li><strong>Trio (38&ndash;40):</strong> Three <em>Setophaga</em>, displacement cascade. All E=4. Mountain gradient.</li>
+            <li><strong>Overarching:</strong> The narrative connecting acoustic catalog (quintet) to ecological drama (trio).</li>
+          </ul>
+          <p>No other family has three structural arcs. 8 of ~115 North American Parulidae &asymp; 7%.</p>
+        </div>
+
+        <!-- Plumage Card -->
+        <div class="plumage-card">
+          <h3>The Yellow Face on Gray</h3>
+          <p><strong>Entirely bright yellow face and crown</strong> &mdash; the most extensively yellow face of any <em>Setophaga</em> in the engine. No black cheek patch (unlike Townsend&rsquo;s). Plain gray back, white underparts. All chromatic budget concentrated in one feature: the face that must be visible from the forest floor at 40+ meters.</p>
+          <p><strong><em>Setophaga</em> quartet:</strong> Yellow (16) = yellow everywhere. BTG (38) = one dot. Townsend&rsquo;s (39) = bold pattern. Hermit (40) = face-only beacon on muted body.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=4 Continues &mdash; 17th Degree, 20 Without E&le;3</h3>
+          <p>E=4 now at <strong>17 degrees</strong> (41.5%). E=3 absent for <strong>20 consecutive degrees</strong> (since degree 20) &mdash; the 20-degree milestone. E=2 absent for 27 degrees. E=1 absent for 28 degrees. Three consecutive E=4 from the same genus. <strong>The lower three-fifths of the energy spectrum is absent from degrees 21&ndash;40.</strong></p>
+        </div>
+
+        <h2>The Mountain Conifer Refuge</h2>
+        <p>The Hermit Warbler breeds in <strong>mountain conifer forests at 900&ndash;2,300 m</strong> [NEEDS VERIFICATION] &mdash; white fir, red fir, mountain hemlock, Douglas fir. Higher elevation and drier conditions than Townsend&rsquo;s typical conifer canopy. The southern Cascades and Siskiyou Mountains are the stronghold of pure populations. The species forages at the very tops of the tallest trees &mdash; <strong>20&ndash;50 m</strong> [NEEDS VERIFICATION], the highest warbler stratum in the engine.</p>
+        <p><strong>Migration:</strong> Unlike Townsend&rsquo;s (which winters along the PNW coast), the Hermit Warbler is a strict long-distance migrant &mdash; wintering in highland pine-oak forests of Mexico and Central America. It abandons the PNW entirely each fall.</p>
+
+        <h2>The Hybrid Zone</h2>
+        <p>In the central and southern Oregon Cascades, where Townsend&rsquo;s range meets Hermit range, a <strong>broad hybrid zone</strong> contains birds with intermediate plumage and mixed genomes [3, 4, 5]. The zone moves south at approximately 0.5&ndash;1.0 km/year [NEEDS VERIFICATION]. Townsend&rsquo;s males are behaviorally dominant [NEEDS VERIFICATION]. Hybrid offspring tend to mate with Townsend&rsquo;s-like partners. The gene pool drifts toward Townsend&rsquo;s phenotype over generations.</p>
+        <p><strong>Conservation paradox:</strong> The threat is a native species expanding through natural competitive advantage. Not invasive, not pollution, not habitat loss. Another warbler. If Townsend&rsquo;s absorbs Hermit through introgression, genes persist but species identity dissolves. Is genetic assimilation extinction?</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon thinning">T</div>
+            <div class="theory-content">
+              <h4>The Thinning <span class="theory-level foundational">foundational</span></h4>
+              <p>The 41st acoustic element. Thin, high, buzzy warbler song from mountain conifer tops. After the canopy buzz&rsquo;s ascending robustness (39), the thinning adds attenuation. Three meanings: thin song, thinning range, thinning genome. The first element with ecological meaning in its name.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon trio">S</div>
+            <div class="theory-content">
+              <h4><em>Setophaga</em> Trio <span class="theory-level foundational">foundational</span></h4>
+              <p>First consecutive genus trio. Three congeneric species across three degrees: BTG (secondary victim), Townsend&rsquo;s (aggressor), Hermit (primary victim). The buzz attenuates across the trio: husky &rarr; sibilant &rarr; reedy.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon displaced">D</div>
+            <div class="theory-content">
+              <h4>The Displaced Species <span class="theory-level foundational">foundational</span></h4>
+              <p>Range contracting, genome dissolving, pure populations shrinking. Degree 39 told the winner&rsquo;s story. Degree 40 tells the loser&rsquo;s story. Conservation paradox: is genetic assimilation extinction? The engine documents both sides.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon parulidae">8</div>
+            <div class="theory-content">
+              <h4>Parulidae at Eight <span class="theory-level foundational">foundational</span></h4>
+              <p>Engine record extended. Leads by three. Three arcs: quintet (14&ndash;20, acoustics), trio (38&ndash;40, displacement), and the narrative connecting them. Eight of ~115 North American Parulidae &asymp; 7%.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mountain">M</div>
+            <div class="theory-content">
+              <h4>Mountain Conifer Refuge <span class="theory-level intermediate">intermediate</span></h4>
+              <p>High-elevation true fir and mountain hemlock forests. The Hermit Warbler&rsquo;s last stronghold: southern Cascades, Siskiyous. If the hybrid zone reaches these mountains, pure populations have nowhere to retreat.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">4</div>
+            <div class="theory-content">
+              <h4>E=4 &mdash; 20 Degrees Without E&le;3 <span class="theory-level intermediate">intermediate</span></h4>
+              <p>17th degree at E=4 (41.5%). Twenty-degree milestone for E=3 absence. Three consecutive E=4 from same genus. Lower three-fifths of spectrum absent since degree 21.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-039: Townsend&rsquo;s Warbler</strong>
+            <p>THE AGGRESSOR. Displacing Hermit Warbler through hybridization and competitive exclusion. Degree 39 = expanding species. Degree 40 = contracting species. Same genus, same energy, same buzzy timbre family. Townsend&rsquo;s is robust. Hermit is thin.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-038: Black-throated Gray Warbler</strong>
+            <p>SETOPHAGA TRIO. Degrees 38-39-40 form an unprecedented three-consecutive same-genus sequence mapping a displacement cascade. BTG = secondary victim. Townsend&rsquo;s = aggressor. Hermit = primary victim.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-016: Yellow Warbler</strong>
+            <p>SETOPHAGA QUARTET. Four naming conventions, four color strategies, four song timbres, four ecosystems. Maximum yellow (16) to one dot (38) to bold pattern (39) to face-only beacon (40).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-033: Cassin&rsquo;s Finch</strong>
+            <p>MOUNTAIN CONIFER PAIR. Both high-elevation specialists, both E=4. Cassin&rsquo;s = exposed snag singer, virtuoso cadenza. Hermit = hidden canopy-top singer, thin buzz. Same ecosystem, opposite visibility.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-020: Orange-crowned Warbler</strong>
+            <p>LAST E=3 &mdash; twenty degrees ago. The quintet closer (E=3, degree 20) and the trio closer (E=4, degree 40) are separated by the engine&rsquo;s most severe energy compression gap.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-037: Calliope Hummingbird</strong>
+            <p>FILAMENT vs. THINNING. Filament = absolute minimum (near-silent, mechanical). Thinning = diminishment from something fuller (still audible, still a song, but attenuated).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014: MacGillivray&rsquo;s Warbler</strong>
+            <p>GROUND vs. EXTREME CROWN. First warbler (0&ndash;2 m) and eighth warbler (20&ndash;50 m). Eight warblers now span from forest floor to absolute tree top.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Hermit Warbler documented as breeder in southern Cascades and Siskiyous. Range contracting. Hybridization with Townsend&rsquo;s Warbler extensively documented.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems</strong>
+            <p>Mountain conifer ecology. High-elevation forest zones. Species displacement through hybridization. Elevation gradients as refugia.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Pearson, S.F. (1997). Hermit Warbler (<em>Setophaga occidentalis</em>), version 2.0. <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>Cornell Lab of Ornithology. &ldquo;Hermit Warbler.&rdquo; All About Birds.</li>
+          <li>Rohwer, S. and Wood, C. (1998). &ldquo;Three hybrid zones between Hermit and Townsend&rsquo;s Warblers in Oregon and Washington.&rdquo; <em>Auk</em> 115(2): 284&ndash;310.</li>
+          <li>Pearson, S.F. (2000). &ldquo;Behavioral asymmetries in a moving hybrid zone.&rdquo; <em>Behavioral Ecology</em> 11(1): 84&ndash;92.</li>
+          <li>Krosby, M. and Rohwer, S. (2009). &ldquo;A 2000 km genetic wake yields evidence for northern glacial refugia and hybrid zone movement in a pair of songbirds.&rdquo; <em>Proceedings of the Royal Society B</em> 276: 615&ndash;621.</li>
+          <li>Bermingham, E., Rohwer, S., Freeman, S., and Wood, C. (1992). &ldquo;Vicariance biogeography in the Pleistocene and speciation in North American wood warblers.&rdquo; <em>PNAS</em> 89: 6624&ndash;6628.</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+          <li>Pieplow, N. (2017). <em>Peterson Field Guide to Bird Sounds of Western North America</em>. Houghton Mifflin.</li>
+          <li>Cornell Lab of Ornithology. &ldquo;Hermit Warbler Sounds.&rdquo; All About Birds.</li>
+          <li>Dunn, J.L. and Garrett, K.L. (1997). <em>A Field Guide to Warblers of North America</em>. Houghton Mifflin.</li>
+          <li>BirdLife International. IUCN Red List: <em>Setophaga occidentalis</em> &mdash; Least Concern.</li>
+          <li>BirdWeb (Seattle Audubon). &ldquo;Hermit Warbler.&rdquo;</li>
+          <li>Rohwer, S., Bermingham, E., and Wood, C. (2001). &ldquo;Plumage and mtDNA haplotype variation across a moving hybrid zone.&rdquo; <em>Evolution</em> 55(2): 405&ndash;422.</li>
+          <li>NatureServe. <em>Setophaga occidentalis</em> species account.</li>
+          <li>Morrison, M.L. (1982). &ldquo;The structure of western warbler assemblages: ecomorphological analysis.&rdquo; <em>Auk</em> 99: 503&ndash;513.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species</h3>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-size: 0.95rem; font-style: italic;">Setophaga occidentalis</div>
+          <div class="stat-detail">&ldquo;Western moth-eater&rdquo;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value" style="font-size: 1rem;">Passeriformes</div>
+          <div class="stat-detail">Continues from degree 39</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value" style="font-size: 1rem;">Parulidae</div>
+          <div class="stat-detail">8th member (record, leads by 3)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value" style="font-size: 0.82rem; font-style: italic;">Setophaga</div>
+          <div class="stat-detail">4th in engine (16, 38, 39, 40)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Displacement</div>
+          <div class="stat-value" style="font-size: 0.82rem; color: #B71C1C;">Primary Victim</div>
+          <div class="stat-detail">Displaced by Townsend&rsquo;s (deg. 39)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value" style="font-size: 0.95rem; color: #E65100;">Least Concern*</div>
+          <div class="stat-detail">*Range contracting; declining</div>
+        </div>
+
+        <h3>Acoustics</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Thin buzzy song</div>
+          <div class="stat-detail">seely seely seely see</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value" style="font-size: 0.82rem;">~5,000&ndash;9,500 Hz</div>
+          <div class="stat-detail">[NEEDS VERIFICATION]</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value" style="font-size: 0.88rem;">#41: The Thinning</div>
+          <div class="stat-detail">Thin, attenuated, fading</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">17th degree at E=4 (41.5%)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Mountain conifer</div>
+          <div class="stat-detail">Extreme crown (20&ndash;50 m) [NV]</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Strict migrant (no PNW winter)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Habitat</div>
+          <div class="stat-value" style="font-size: 0.82rem;">White fir / red fir</div>
+          <div class="stat-detail">S. Cascades &amp; Siskiyous</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Hybrid Zone</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Oregon Cascades</div>
+          <div class="stat-detail">Moving south ~0.5&ndash;1 km/yr [NV]</div>
+        </div>
+
+        <h3>Engine</h3>
+        <div class="stat-card">
+          <div class="stat-label">Unique Species</div>
+          <div class="stat-value">39</div>
+          <div class="stat-detail">41 total entries (0&ndash;40)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Parulidae leads with 8</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Passeriformes continues</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Release Engine &mdash; Degree 40&deg;</p>
+  </footer>
+</body>
+</html>
