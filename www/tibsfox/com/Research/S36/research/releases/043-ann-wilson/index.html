@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 43&deg; &mdash; Ann Wilson (solo) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: white;
+      border: 1px solid #C62828;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .e6-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #D32F2F;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #B71C1C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #FFEBEE;
+      font-style: italic;
+      color: #B71C1C;
+    }
+
+    .first-banner {
+      background: linear-gradient(135deg, #B71C1C, #D32F2F);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .first-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .first-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>043 &mdash; Ann Wilson (solo)</span>
+    </nav>
+
+    <!-- E=6 Twin Peak Banner -->
+    <div class="first-banner">
+      <h3>Second E=6 &mdash; The Engine&rsquo;s Twin Peak</h3>
+      <p>
+        Only two artists in forty-four degrees have reached maximum energy. Both from Seattle.
+        Both Rock. <strong>Jimi Hendrix</strong> (degree 36&deg;) and <strong>Ann Wilson</strong>
+        (degree 43&deg;) &mdash; seven degrees apart, the engine&rsquo;s twin peaks. First
+        rock-primary genre stage. Ninth woman. Gender ratio crosses 20% for the first time.
+        35&ndash;50 million records sold. Rock and Roll Hall of Fame. Grammy Lifetime Achievement.
+        The voice that never diminished.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">43&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Ann Wilson (solo)</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 6</span>
+          <span class="genre-badge">Rock/Soul</span>
+          <span class="label-badge">BMG / Silver Lining / LouJon</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="first-badge">First Rock-Primary</span>
+          <span class="e6-badge">E=6 Twin Peak</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Voice That Defined Rock</h2>
+          <p>
+            Ann Dustin Wilson is one of the most powerful rock vocalists in history. Born
+            <strong>June 19, 1950</strong>, in <strong>San Diego, California</strong>, to a
+            Marine Corps Major and a concert pianist, she grew up on military bases in
+            <strong>Panama</strong> and <strong>Taiwan</strong> before her family settled in
+            <strong>Bellevue, Washington</strong>, in the early 1960s. She graduated from
+            <strong>Sammamish High School</strong> in 1968, sang in Seattle bar bands, and in
+            1970 answered a newspaper ad that led her to a band that would become
+            <strong>Heart</strong>.
+          </p>
+          <p>
+            Heart sold over <strong>35&ndash;50 million records worldwide</strong>, placed
+            <strong>29 singles on the Billboard Hot 100</strong>, scored two <strong>#1 hits</strong>
+            (&ldquo;These Dreams,&rdquo; &ldquo;Alone&rdquo;), and took their self-titled 1985
+            album to <strong>#1 on the Billboard 200</strong> (quintuple platinum). Wilson was
+            inducted into the <strong>Rock and Roll Hall of Fame</strong> (2013), received the
+            <strong>Grammy Lifetime Achievement Award</strong> (2023), and a
+            <strong>Hollywood Walk of Fame</strong> star (2012).
+          </p>
+          <blockquote>
+            &ldquo;I usually hate it when people try to cover &lsquo;Stairway to Heaven.&rsquo;
+            But I like your version.&rdquo; &mdash; Robert Plant to Ann Wilson, after Heart&rsquo;s
+            2012 Kennedy Center Honors performance
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Heart: The Discography (Selected)</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Dreamboat Annie</h4>
+              <div class="disco-years">1975 &middot; Mushroom</div>
+              <p>
+                Debut. &ldquo;Magic Man&rdquo; #9, &ldquo;Crazy on You&rdquo; #35.
+                <strong>#7 Billboard 200.</strong> Multi-platinum.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Little Queen</h4>
+              <div class="disco-years">1977 &middot; Portrait</div>
+              <p>
+                &ldquo;Barracuda&rdquo; #11 Hot 100. <strong>#9 Billboard 200.</strong>
+                Platinum. Written in fury at label exploitation.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Heart</h4>
+              <div class="disco-years">1985 &middot; Capitol</div>
+              <p>
+                <strong>#1 Billboard 200.</strong> Quintuple platinum.
+                &ldquo;These Dreams&rdquo; #1. Four Top 10 singles.
+                The reinvention.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Bad Animals</h4>
+              <div class="disco-years">1987 &middot; Capitol</div>
+              <p>
+                <strong>#2 Billboard 200.</strong> Triple platinum.
+                &ldquo;Alone&rdquo; #1 for three weeks.
+                Ann&rsquo;s defining power ballad vocal.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Brigade</h4>
+              <div class="disco-years">1990 &middot; Capitol</div>
+              <p>
+                <strong>#3 Billboard 200.</strong> Triple platinum.
+                &ldquo;All I Wanna Do Is Make Love to You&rdquo; #2.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Red Velvet Car</h4>
+              <div class="disco-years">2010 &middot; Legacy</div>
+              <p>
+                <strong>#10 Billboard 200.</strong> Return to prominence.
+                Top-10 album in fourth decade.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Solo Career: Immortal, Fierce Bliss, Another Door</h2>
+          <p>
+            Wilson&rsquo;s solo career launched with <strong><em>Hope &amp; Glory</em></strong>
+            (2007, Rounder/Zoe) &mdash; a covers album featuring Elton John, k.d. lang, and
+            Alison Krauss. The <strong>Ann Wilson Thing!</strong> EPs (2015&ndash;2016) declared
+            independence from Heart&rsquo;s commercial machinery.
+          </p>
+          <p>
+            <strong><em>Immortal</em></strong> (2018, BMG) paid tribute to departed friends
+            and influences: David Bowie, Amy Winehouse, Tom Petty, <strong>Chris Cornell</strong>
+            (another Seattle voice). <strong><em>Fierce Bliss</em></strong> (2022, Silver Lining Music)
+            was Wilson&rsquo;s first solo album with original material, featuring Vince Gill,
+            Kenny Wayne Shepherd, and Warren Haynes. <strong><em>Another Door</em></strong>
+            (2023, LouJon) was the <strong>first album where Wilson was the sole lyricist</strong>
+            on every track.
+          </p>
+          <p>
+            In <strong>July 2024</strong>, Wilson revealed a cancer diagnosis and underwent
+            surgery and chemotherapy. Heart&rsquo;s Royal Flush Tour resumed
+            <strong>February 2025</strong>. She performed seated with a broken elbow.
+            The voice did not diminish.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Radiance</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                44th acoustic element. The luminous overtone field generated when a
+                voice is projected at such power and precision that the harmonic series
+                becomes audible as a distinct sonic layer above the fundamental pitch.
+                Wilson&rsquo;s mezzo-soprano at full rock projection creates a radiance
+                &mdash; not vibrato, not tremolo, but radiance.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Lifer</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                44th artist-city pattern. The artist whose connection to a city spans
+                the entire career &mdash; childhood to late career, formation to legacy.
+                Wilson arrived in Bellevue in the 1960s, formed Heart from Seattle bands,
+                survived grunge, and remains a Seattle artist fifty-five years later.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Power Bend</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                43rd blue note deployment. The blue note delivered at full rock volume
+                &mdash; sustained, projected, room-filling. Where the sanctified bend
+                (42) bends upward into transcendence, the power bend radiates outward
+                into physical force.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=6 Twin Peak Mode</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                2nd E=6 deployment. Ties Jimi Hendrix (36&deg;) as maximum energy.
+                Both Seattle. Both Rock. Both transformed their instrument.
+                Distribution: 2:13:7:12:9:2. E=1 and E=6 symmetrical at 2.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 24: Rock/Soul</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                First rock-primary genre stage in the engine. Rock as primary element
+                for the first time in forty-four degrees. The soul qualifier maps the
+                vocal inheritance &mdash; Ray Charles records in the Wilson household,
+                opera with pancakes on Sunday mornings.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">42&deg;</span> Erica Campbell &mdash; <strong>Gospel/R&amp;B to Rock/Soul.</strong> Altar call followed by the radiance. E=5 to E=6. Both women, consecutive degrees. Campbell&rsquo;s solo gospel and Wilson&rsquo;s solo rock: parallel late-career independence.</li>
+            <li><span class="ref-degree">36&deg;</span> Jimi Hendrix &mdash; <strong>E=6 twin peak.</strong> Both Seattle. Both Rock. Both transformed their instrument. Supernova (36) and lifer (43). Seven degrees apart. The only E=6 pair in the engine.</li>
+            <li><span class="ref-degree">41&deg;</span> Shawn Smith &mdash; <strong>Seattle vocal spectrum.</strong> Whiskey falsetto (intimate) vs radiance (expansive). Both Seattle scene artists operating adjacent to the dominant sound. Opposite vocal orientations.</li>
+            <li><span class="ref-degree">37&deg;</span> Ayron Jones &mdash; <strong>Generational link.</strong> Jones inherits the Seattle rock tradition Wilson helped establish. Blues Rock (37) to Rock/Soul (43).</li>
+            <li><span class="ref-degree">35&deg;</span> Robert Cray &mdash; <strong>Blues-to-rock arc.</strong> Cray started the genre evolution at degree 35 (Blues). Wilson completes it at degree 43 (Rock/Soul). Nine degrees, genre primary shifts from blues to rock.</li>
+            <li><span class="ref-degree">30&deg;</span> Ray Charles &mdash; <strong>Sunday mornings.</strong> Wilson grew up listening to Ray Charles alongside opera. The soul in Rock/Soul descends from those records.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>Export vs Lifer.</strong> Jones left Seattle (degree 0); Wilson stayed (degree 43). The engine&rsquo;s first and forty-fourth artists, opposite city patterns.</li>
+            <li><span class="ref-degree">22&deg;</span> Foxy Apollo &mdash; <strong>Eastside connection.</strong> Both rooted in the Bellevue/Eastside suburban geography that feeds Seattle&rsquo;s music scene.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Jun 19, 1950</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">San Diego, CA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Raised</span>
+            <span class="stat-value">Bellevue, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">Sammamish HS &rsquo;68</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Voice</span>
+            <span class="stat-value">Mezzo-soprano</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Range</span>
+            <span class="stat-value">~4 octaves</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">43 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Rock/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">24</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#44 The Lifer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#44 The Radiance</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#43 Power Bend</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Heart Career</h4>
+          <div class="stat-row">
+            <span class="stat-label">Formed</span>
+            <span class="stat-value">1972 (Seattle)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">15</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sales</span>
+            <span class="stat-value">35&ndash;50M worldwide</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Hot 100 Singles</span>
+            <span class="stat-value">29</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">#1 Singles</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">#1 Albums</span>
+            <span class="stat-value">1</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Awards &amp; Honors</h4>
+          <div class="stat-row">
+            <span class="stat-label">Rock Hall</span>
+            <span class="stat-value">2013</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grammy</span>
+            <span class="stat-value">Lifetime (2023)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Walk of Fame</span>
+            <span class="stat-value">2012</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kennedy Ctr</span>
+            <span class="stat-value">2024 Honoree</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Heart Hit Singles</h4>
+          <div class="stat-row">
+            <span class="stat-label">Alone</span>
+            <span class="stat-value">#1 (3 weeks)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">These Dreams</span>
+            <span class="stat-value">#1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Magic Man</span>
+            <span class="stat-value">#9</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Barracuda</span>
+            <span class="stat-value">#11</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Never</span>
+            <span class="stat-value">#4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">What About Love</span>
+            <span class="stat-value">#10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">All I Wanna Do</span>
+            <span class="stat-value">#2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Solo Albums</h4>
+          <div class="stat-row">
+            <span class="stat-label">2007</span>
+            <span class="stat-value">Hope &amp; Glory</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2018</span>
+            <span class="stat-value">Immortal</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2022</span>
+            <span class="stat-value">Fierce Bliss</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2023</span>
+            <span class="stat-value">Another Door</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>E=6 Pair</h4>
+          <div class="stat-row">
+            <span class="stat-label">Hendrix</span>
+            <span class="stat-value">36&deg; (1966&ndash;70)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Wilson</span>
+            <span class="stat-value">43&deg; (1970&ndash;now)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Separation</span>
+            <span class="stat-value">7 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">City</span>
+            <span class="stat-value">Both Seattle</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 43</span>
+            <span class="stat-value">2:13:7:12:9:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6 Mode</span>
+            <span class="stat-value">2nd deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Women</span>
+            <span class="stat-value">9 / 44 (~20.5%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 43 of 360 &mdash; Ann Wilson (solo) &mdash;
+        v1.49.179 &mdash; Rock/Soul &mdash; BMG / Silver Lining / LouJon &mdash; Seattle &mdash;
+        Second E=6 &mdash; First Rock-Primary Genre Stage
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to the
+        Seattle metropolitan area, on the ancestral territory of the Duwamish Tribal Organization
+        (duwamishtribe.org), the Muckleshoot Indian Tribe, and related Coast Salish and
+        Southern Lushootseed-speaking peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
