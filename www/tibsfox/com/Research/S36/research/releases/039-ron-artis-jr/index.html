@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 39&deg; &mdash; Ron Artis Jr &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: white;
+      border: 1px solid #BF360C;
+    }
+
+    .blues-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1A237E;
+      color: #C5CAE9;
+      border: 1px solid #283593;
+      margin-left: 0.3rem;
+    }
+
+    .repeat-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .hawaii-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #1A237E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #E8EAF6;
+      font-style: italic;
+      color: #1A237E;
+    }
+
+    .dual-degree-banner {
+      background: linear-gradient(135deg, #B71C1C, #C62828);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .dual-degree-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .dual-degree-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>039 &mdash; Ron Artis Jr</span>
+    </nav>
+
+    <!-- Dual-Degree Banner -->
+    <div class="dual-degree-banner">
+      <h3>First Repeat Artist in the Engine</h3>
+      <p>
+        Ron Artis Jr and Ron Artis II (degree 24) are the same person. This is the engine&rsquo;s first
+        dual-degree artist &mdash; a single musician appearing at two different degrees, viewed through
+        different genre lenses: Soul/Jazz at 24&deg;, Blues/Soul at 39&deg;.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">39&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Ron Artis Jr</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="blues-badge">Blues / Soul</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="hawaii-badge">Hawaii &rarr; Seattle</span>
+          <span class="repeat-badge">Dual Degree (24&deg; + 39&deg;)</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Return: Same Artist, Different Lens</h2>
+          <p>
+            Ron Artis Jr is Ron Artis II. &ldquo;II&rdquo; and &ldquo;Jr&rdquo; both designate the son of
+            Ron Artis Sr. &mdash; the Motown session player who played keyboards on Michael Jackson&rsquo;s
+            <em>Thriller</em>. At degree 24, this artist was examined through the <strong>Soul/Jazz</strong>
+            lens: the Motown dynasty, the Hawaiian cultural context, KEXP as institutional amplifier. At
+            degree 39, the same artist is refracted through <strong>Blues/Soul</strong>: the blues guitar
+            tradition, the raw emotional performance, the self-released independence, and the deepening
+            migration from Hawaii to the Pacific Northwest.
+          </p>
+          <p>
+            Every dimension has shifted between the two appearances: genre (Soul/Jazz &rarr; Blues/Soul),
+            energy (E=4 &rarr; E=5), era (2010&ndash;present &rarr; Hawaii to Seattle), label (KEXP &rarr;
+            self-released), pattern (#25 Island Export &rarr; #40 Returning Wave), acoustic element
+            (#25 Invocation &rarr; #40 Pacific Crossing). The same person occupies different positions in
+            the engine&rsquo;s multidimensional space.
+          </p>
+          <blockquote>
+            &ldquo;We want to give you something to help with your journey and help keep music in your life.&rdquo;
+            &mdash; Ron Artis II, Maui fire instrument donation (ABC Good Morning America, December 2023)
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Blues Lens</h2>
+          <p>
+            At degree 24, the Motown lineage and Hawaiian culture were primary. At degree 39, the blues
+            takes the lead. Ron Artis Jr&rsquo;s guitar work &mdash; self-taught from age 13, shaped by
+            the North Shore music community &mdash; enters the blues thread that runs from Robert Cray
+            (35&deg;) through Jimi Hendrix (36&deg;) and Ayron Jones (37&deg;). Critics have compared his
+            playing to Hendrix and Gary Clark Jr. Blues &amp; Soul Magazine noted he &ldquo;rips, and has a
+            voice to match the big sounds coming from his guitar.&rdquo;
+          </p>
+          <p>
+            The Blues/Soul genre compound is new to the engine &mdash; blues primary with soul secondary.
+            It bridges the blues zone (35&ndash;37) and the soul zone (24, 29&ndash;30, 38) through a
+            single artist who embodies both traditions. The Hawaiian genre fluidity documented at degree 24
+            (kanikapila, multi-ethnic fusion) is the mechanism that makes this dual-genre identity possible:
+            when genre boundaries are cultural defaults, one artist can inhabit multiple genre positions
+            without contradiction.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Hawaii to Seattle: The Pacific Crossing</h2>
+          <p>
+            The era field &mdash; &ldquo;Hawaii to Seattle&rdquo; &mdash; describes a geographic trajectory,
+            not a time period. Ron Artis Jr has been building his Pacific Northwest presence since 2019:
+            Waterfront Blues Festival in Portland (2019, 2022), Neptune Theatre in Seattle (2022, 2023),
+            The Reser in Beaverton (2022), Portland Folk Festival (2023), The Rabbit Box in Seattle (2025),
+            and Central Oregon venues (2026). Seven documented PNW performances across seven years &mdash;
+            each return deepening the gravitational bond between island origin and mainland destination.
+          </p>
+          <p>
+            All four studio albums are self-released: <em>What Music Means to Me</em> (2016),
+            <em>Soul Street</em> (2018), <em>Purpose</em> (2021), and <em>We Are Not Machines</em>
+            (2024, Grammy-considered via John Oates submission). Independent by choice, not by default.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Returning Wave</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                40th artist-city pattern. The repeat visitor whose accumulating returns to the
+                Pacific Northwest deepen the gravitational bond. Extends the Island Export (24&deg;)
+                from static dual-geography to dynamic migration. Seven documented PNW visits (2019&ndash;2026).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Pacific Crossing</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                40th acoustic element. A musical tradition carried across 2,680 miles of ocean &mdash;
+                Hawaiian kanikapila warmth meeting PNW blues grit. The first acoustic element defined by
+                geographic displacement. Multi-instrumental fluidity in a blues context.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: Transoceanic Bend</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                39th blue note deployment. The dynastic-soul blue note from degree 24, weathered by
+                Pacific crossing and the blues festival circuit. The first blue note documented as a
+                maturation of a prior deployment by the same artist.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Migratory Tidal</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                8th E=5 mode. Energy generated by the artist&rsquo;s geographic migration &mdash;
+                building gravitational presence in the PNW while maintaining Hawaiian roots. Bidirectional
+                tidal force: Hawaii pulls home, PNW pulls toward the mainland circuit.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">24&deg;</span> Ron Artis II &mdash; <strong>Self-reference.</strong> Same person at a different degree. Soul/Jazz lens vs Blues/Soul lens. E=4 vs E=5. The engine&rsquo;s first internal loop.</li>
+            <li><span class="ref-degree">38&deg;</span> Booker T. Jones &mdash; Immediate predecessor. Documented collaborator at degree 24. Stax (38&deg;) adjacent to Motown-lineage (39&deg;) &mdash; the Motown-Stax bridge is now geometric.</li>
+            <li><span class="ref-degree">35&deg;</span> Robert Cray &mdash; Blues lineage. Both share precision and emotional control in blues guitar performance.</li>
+            <li><span class="ref-degree">36&deg;</span> Jimi Hendrix &mdash; Critics compare Ron Artis Jr&rsquo;s playing to Hendrix. Both have Hawaiian connections (Hendrix&rsquo;s 1970 Maui concert; Artis&rsquo;s Maui fire response).</li>
+            <li><span class="ref-degree">37&deg;</span> Ayron Jones &mdash; Both active on Seattle circuit. Inheritor (37&deg;) vs Returning Wave (39&deg;). Both E=5, both blues-influenced.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; Thriller circle (inherited from 24&deg;). Jones produced it; Ron Artis Sr. played keyboards.</li>
+            <li><span class="ref-degree">23&deg;</span> Allen Stone &mdash; Soul/Jazz pair partner at 23&ndash;24. Both independent artists; different genre lenses.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Aug 31, 1986</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Haleiwa, HI</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instruments</span>
+            <span class="stat-value">Guitar, Piano, Vox</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Band</span>
+            <span class="stat-value">The Truth</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">Hawaii &rarr; Seattle</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">39 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Blues/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">20</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#40 Returning Wave</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#40 Pacific Crossing</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#39 Transoceanic Bend</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Dual-Degree Delta</h4>
+          <div class="stat-row">
+            <span class="stat-label">24&deg; Genre</span>
+            <span class="stat-value">Soul/Jazz</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">39&deg; Genre</span>
+            <span class="stat-value">Blues/Soul</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">24&deg; Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">39&deg; Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">24&deg; Label</span>
+            <span class="stat-value">KEXP</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">39&deg; Label</span>
+            <span class="stat-value">Self-Released</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row">
+            <span class="stat-label">2016</span>
+            <span class="stat-value">What Music Means</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2018</span>
+            <span class="stat-value">Soul Street</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2021</span>
+            <span class="stat-value">Purpose</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2024</span>
+            <span class="stat-value">We Are Not Machines</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>PNW Venues</h4>
+          <div class="stat-row">
+            <span class="stat-label">Neptune</span>
+            <span class="stat-value">2022, 2023</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Rabbit Box</span>
+            <span class="stat-value">2025</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">WBF Portland</span>
+            <span class="stat-value">2019, 2022</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Reser</span>
+            <span class="stat-value">2022</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 39 of 360 &mdash; Ron Artis Jr (The Return) &mdash;
+        v1.49.175 &mdash; Blues/Soul &mdash; Self-Released &mdash; First Dual-Degree Artist
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to Seattle, on the ancestral
+        territory of the Duwamish Tribal Organization (duwamishtribe.org), the Muckleshoot Indian Tribe, and
+        related Coast Salish and Southern Lushootseed-speaking peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
