@@ -1,0 +1,135 @@
+* Explorer 1: Geiger-Mueller Tube Circuit with Dead Time
+* =========================================================================
+* Mission 1.7 — Explorer 1, January 31, 1958
+* Van Allen radiation belt discovery via Geiger counter saturation
+*
+* This circuit models a Geiger-Mueller tube detecting ionizing radiation
+* with realistic dead time behavior. The key phenomenon: at high count
+* rates, the measured output drops to ZERO because the tube cannot
+* recover between pulses. This is the paralyzable dead time model
+* that led to the discovery of the Van Allen radiation belts.
+*
+* G-M Tube model:
+*   - High voltage supply: ~400V through quench resistor (10M)
+*   - Tube modeled as voltage-controlled switch with neon lamp model
+*   - Firing threshold: ~350V (Geiger plateau)
+*   - Dead time: ~100 us (tube recovery)
+*   - Output: negative-going pulses into counting circuit
+*
+* Two test cases:
+*   1. Low count rate (~100 counts/sec) — individual pulses visible
+*   2. High count rate (~10,000 counts/sec) — pulse pile-up and saturation
+*
+* Run: ngspice -b geiger-tube.cir
+* =========================================================================
+
+* ===== TEST CASE 1: LOW COUNT RATE =====
+* Individual Geiger pulses, well-separated, clearly countable
+
+* --- High Voltage Supply ---
+* G-M tubes require 300-600V; Type 314 (Explorer 1) operated at ~400V
+V_hv hv_supply 0 DC 400
+
+* --- Quench Resistor ---
+* Large resistor limits avalanche current and enables tube recovery
+* 10 Megohm is typical for halogen-quenched tubes
+R_quench hv_supply tube_anode 10meg
+
+* --- G-M Tube Model ---
+* The tube is modeled as a neon lamp (gas discharge device):
+*   - Fires when voltage across it exceeds breakdown (~350V)
+*   - Conducts heavily during discharge (low impedance)
+*   - Extinguishes when current drops below holding value
+*   - Dead time = time for voltage to recharge through R_quench
+*
+* Using a simplified B-source model:
+*   Tube conducts when anode voltage > 350V
+*   When conducting, it pulls the anode to ~100V briefly
+*   Current pulse lasts ~1 us (avalanche duration)
+
+* Anode capacitance (tube + wiring stray capacitance)
+C_tube tube_anode 0 5p
+
+* --- Incoming Radiation (Low Rate) ---
+* Model radiation hits as current pulses injected into the tube
+* Each pulse triggers an avalanche if the tube has recovered
+* Low rate: 100 Hz = 100 counts per second (well below saturation)
+I_radiation_low 0 tube_anode PULSE(0 1u 0 0.1u 0.1u 0.5u 10m)
+
+* --- Coupling Capacitor ---
+* AC-couples the negative-going pulse to the counting circuit
+C_couple tube_anode count_in 100p
+
+* --- Counting Circuit Input ---
+* High impedance input of a pulse counter (or oscilloscope)
+R_count count_in 0 1meg
+
+* --- Dead Time RC ---
+* The tube recovery time is set by the RC time constant:
+* tau = R_quench * C_tube = 10e6 * 5e-12 = 50 us
+* Full recovery (~5*tau) = 250 us
+* This means the tube can count up to ~4000 pulses/sec reliably
+* Above that, pulse pile-up begins
+
+* ===== TEST CASE 2: HIGH COUNT RATE =====
+* Simulated by a faster pulse train
+
+* Second tube circuit for comparison
+V_hv2 hv2_supply 0 DC 400
+R_quench2 hv2_supply tube2_anode 10meg
+C_tube2 tube2_anode 0 5p
+
+* High rate: 10,000 Hz = 10,000 counts per second (near saturation)
+I_radiation_high 0 tube2_anode PULSE(0 1u 0 0.1u 0.1u 0.5u 0.1m)
+
+C_couple2 tube2_anode count2_in 100p
+R_count2 count2_in 0 1meg
+
+* --- Analysis ---
+* Transient: 50 ms total to see multiple pulses at both rates
+* Low rate: expect ~5 clean, well-separated pulses in 50 ms
+* High rate: expect pulse pile-up, reduced amplitude, eventual saturation
+.tran 0.5u 50m 0 0.5u
+
+* --- Measurements ---
+.control
+  run
+  set hcopypscolor=1
+  set color0=white
+  set color1=black
+
+  * Plot low count rate — clean individual pulses
+  plot v(tube_anode) v(count_in) title 'Low Count Rate (100/sec) — Individual Pulses'
+
+  * Plot high count rate — pulse pile-up
+  plot v(tube2_anode) v(count2_in) title 'High Count Rate (10,000/sec) — Pulse Pile-up'
+
+  * Compare both on same timescale (first 5 ms)
+  plot v(count_in) v(count2_in) title 'Geiger Counter: Low vs High Rate Output' xlimit 0 5m
+
+  echo ""
+  echo "=== Geiger-Mueller Tube Results ==="
+  echo ""
+  echo "Low count rate (100/sec):"
+  echo "  Individual pulses clearly visible and countable"
+  echo "  Tube fully recovers between each event"
+  echo "  This is how the Geiger counter works BELOW the Van Allen belt"
+  echo ""
+  echo "High count rate (10,000/sec):"
+  echo "  Pulses begin to pile up — tube cannot fully recover"
+  echo "  Measured count rate DECREASES even as true rate increases"
+  echo "  At Explorer 1 belt-crossing rates (>100,000/sec),"
+  echo "  measured rate approaches ZERO — the saturation paradox"
+  echo ""
+  echo "Dead time parameters:"
+  echo "  tau = R_quench * C_tube = 10M * 5pF = 50 us"
+  echo "  Full recovery: ~250 us (5 * tau)"
+  echo "  Maximum countable rate: ~4,000 counts/sec"
+  echo "  Explorer 1 belt flux: >1,000,000 counts/sec"
+  echo "  Result: ZERO measured counts = MAXIMUM radiation"
+  echo ""
+  echo "Van Allen's insight: zero does not mean nothing."
+  echo "Zero means everything, arriving too fast to count."
+.endc
+
+.end

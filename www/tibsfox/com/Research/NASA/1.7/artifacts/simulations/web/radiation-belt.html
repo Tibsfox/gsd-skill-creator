@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Van Allen Radiation Belt Viewer — Explorer 1</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #c0c8d0;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  #container {
+    max-width: 1400px;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+  }
+  #view-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #view-housing {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 0 30px rgba(212, 168, 48, 0.03);
+    width: 100%;
+  }
+  #view-header {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a1a3a;
+  }
+  #view-header h2 {
+    font-size: 13px;
+    color: #D4A830;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  #view-header .subtitle {
+    font-size: 10px;
+    color: #5a5a7a;
+    margin-top: 3px;
+  }
+  canvas {
+    display: block;
+    width: 100%;
+    border-radius: 4px;
+    background: #020208;
+  }
+  #info-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 6px;
+    font-size: 11px;
+  }
+  .info-item {
+    text-align: center;
+  }
+  .info-label {
+    font-size: 9px;
+    color: #4a4a6a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .info-value {
+    font-size: 16px;
+    color: #D4A830;
+    margin-top: 3px;
+  }
+  .info-value.danger { color: #ff4444; }
+  .info-value.safe { color: #00FF41; }
+  #panel {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .panel-section {
+    background: #080810;
+    border: 1px solid #1a1a3a;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .panel-section h3 {
+    font-size: 10px;
+    color: #D4A830;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #1a1a3a;
+  }
+  .control-row {
+    margin-bottom: 10px;
+  }
+  .control-label {
+    font-size: 9px;
+    color: #6a6a8a;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    background: #1a1a3a;
+    border-radius: 2px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #D4A830;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(212, 168, 48, 0.3);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 10px;
+    color: #8a8aa0;
+  }
+  .legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .info-text {
+    font-size: 10px;
+    color: #5a5a7a;
+    line-height: 1.6;
+  }
+  button {
+    background: #1a1a3a;
+    border: 1px solid #3a3a5a;
+    color: #D4A830;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    width: 100%;
+    margin-top: 5px;
+  }
+  button:hover { background: #2a2a4a; }
+</style>
+</head>
+<body>
+<div id="container">
+  <div id="view-frame">
+    <div id="view-housing">
+      <div id="view-header">
+        <h2>Van Allen Radiation Belt Viewer</h2>
+        <div class="subtitle">Meridional Cross-Section &mdash; Inner &amp; Outer Belts &mdash; Explorer 1 Orbit</div>
+      </div>
+      <canvas id="belt-canvas" width="900" height="700"></canvas>
+    </div>
+    <div id="info-bar">
+      <div class="info-item">
+        <div class="info-label">Altitude</div>
+        <div class="info-value" id="altitude-display">358 km</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Distance</div>
+        <div class="info-value" id="distance-display">1.06 R<sub>E</sub></div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Radiation Dose</div>
+        <div class="info-value" id="dose-display">Low</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Geiger Status</div>
+        <div class="info-value safe" id="geiger-display">Counting</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Orbit Phase</div>
+        <div class="info-value" id="phase-display">Perigee</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel">
+    <div class="panel-section">
+      <h3>Controls</h3>
+      <div class="control-row">
+        <div class="control-label">
+          <span>Animation Speed</span>
+          <span id="speed-value">1x</span>
+        </div>
+        <input type="range" id="speed" min="1" max="10" value="3">
+      </div>
+      <div class="control-row">
+        <div class="control-label">
+          <span>Field Lines</span>
+          <span id="field-value">8</span>
+        </div>
+        <input type="range" id="field-lines" min="0" max="16" value="8">
+      </div>
+      <button id="toggle-outer">Toggle Outer Belt</button>
+      <button id="toggle-particles">Toggle Particles</button>
+    </div>
+
+    <div class="panel-section">
+      <h3>Legend</h3>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#1a4a8a"></div>
+        Earth
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#D4A830"></div>
+        Inner Belt (~1.5 R<sub>E</sub>)
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#4a6aaa"></div>
+        Outer Belt (~4.5 R<sub>E</sub>)
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#00FF41"></div>
+        Explorer 1 Orbit
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background:#3a3a6a"></div>
+        Dipole Field Lines
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h3>Explorer 1 Orbit</h3>
+      <div class="info-text">
+        <p>Perigee: 358 km (below belt)</p>
+        <p>Apogee: 2,550 km (through belt)</p>
+        <p>Inclination: 33.24&deg;</p>
+        <p>Period: 114.8 minutes</p>
+        <p style="margin-top:6px">The orbit crosses the inner belt
+        on every pass. Watch the satellite enter the gold region
+        and see the Geiger status change.</p>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h3>Belt Structure</h3>
+      <div class="info-text">
+        <p><strong style="color:#D4A830">Inner belt</strong> (1.2&ndash;2.0 R<sub>E</sub>):
+        Trapped protons, stable for years. Explorer 1 discovered this.</p>
+        <p style="margin-top:4px"><strong style="color:#4a6aaa">Outer belt</strong> (3.5&ndash;6.0 R<sub>E</sub>):
+        Trapped electrons, dynamic, responds to solar wind. Pioneer 3 found this.</p>
+        <p style="margin-top:4px"><strong>Slot region</strong> (2.0&ndash;3.5 R<sub>E</sub>):
+        Relatively quiet gap between belts.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('belt-canvas');
+const ctx = canvas.getContext('2d');
+
+// State
+let showOuter = true;
+let showParticles = true;
+let satAngle = 0;
+let time = 0;
+
+// Scale: 1 Re = 100 pixels
+const SCALE = 90; // pixels per Earth radius
+const CX = canvas.width / 2;
+const CY = canvas.height / 2;
+
+// Explorer 1 orbit
+const PERIGEE = 358;  // km
+const APOGEE = 2550;  // km
+const RE = 6371;      // km
+const rPeri = (RE + PERIGEE) / RE; // in Earth radii
+const rApo = (RE + APOGEE) / RE;
+const semiMajor = (rPeri + rApo) / 2;
+const ecc = (rApo - rPeri) / (rApo + rPeri);
+
+// Particles
+const particles = [];
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    L: 1.3 + Math.random() * 0.6,  // inner belt L-shells
+    phase: Math.random() * Math.PI * 2,
+    speed: 0.3 + Math.random() * 0.4,
+    bounce: Math.random() * Math.PI * 2,
+    bounceSpeed: 0.5 + Math.random() * 0.5
+  });
+}
+// Outer belt particles
+for (let i = 0; i < 40; i++) {
+  particles.push({
+    L: 3.5 + Math.random() * 2.0,
+    phase: Math.random() * Math.PI * 2,
+    speed: 0.15 + Math.random() * 0.2,
+    bounce: Math.random() * Math.PI * 2,
+    bounceSpeed: 0.3 + Math.random() * 0.3,
+    outer: true
+  });
+}
+
+function toScreen(x_re, y_re) {
+  return [CX + x_re * SCALE, CY - y_re * SCALE];
+}
+
+function drawEarth() {
+  // Atmosphere glow
+  const atmosGrad = ctx.createRadialGradient(CX, CY, SCALE * 0.9, CX, CY, SCALE * 1.15);
+  atmosGrad.addColorStop(0, 'rgba(100, 150, 255, 0.15)');
+  atmosGrad.addColorStop(1, 'rgba(100, 150, 255, 0)');
+  ctx.fillStyle = atmosGrad;
+  ctx.beginPath();
+  ctx.arc(CX, CY, SCALE * 1.15, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Earth body
+  const earthGrad = ctx.createRadialGradient(CX - 15, CY - 15, 5, CX, CY, SCALE);
+  earthGrad.addColorStop(0, '#2a5a9a');
+  earthGrad.addColorStop(0.5, '#1a4a7a');
+  earthGrad.addColorStop(1, '#0a2a4a');
+  ctx.fillStyle = earthGrad;
+  ctx.beginPath();
+  ctx.arc(CX, CY, SCALE, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Simple continent hints
+  ctx.fillStyle = 'rgba(40, 100, 40, 0.3)';
+  ctx.beginPath();
+  ctx.ellipse(CX - 20, CY - 15, 25, 35, -0.3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(CX + 30, CY + 10, 20, 25, 0.2, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Terminator (day/night)
+  ctx.fillStyle = 'rgba(0, 0, 10, 0.3)';
+  ctx.beginPath();
+  ctx.arc(CX, CY, SCALE, -Math.PI * 0.5, Math.PI * 0.5);
+  ctx.fill();
+}
+
+function drawFieldLines() {
+  const numLines = parseInt(document.getElementById('field-lines').value);
+  ctx.strokeStyle = 'rgba(60, 60, 120, 0.15)';
+  ctx.lineWidth = 0.8;
+
+  for (let i = 1; i <= numLines; i++) {
+    const L = i * 0.8;
+    ctx.beginPath();
+    for (let lat = -Math.PI / 2.5; lat <= Math.PI / 2.5; lat += 0.02) {
+      const r = L * Math.cos(lat) * Math.cos(lat);
+      if (r < 1.0) continue;
+      const x = r * Math.cos(lat);
+      const y = r * Math.sin(lat);
+      const [sx, sy] = toScreen(x, y);
+      if (lat === -Math.PI / 2.5 || r < 1.01) ctx.moveTo(sx, sy);
+      else ctx.lineTo(sx, sy);
+    }
+    ctx.stroke();
+
+    // Mirror for southern hemisphere field lines that close differently
+    ctx.beginPath();
+    for (let lat = -Math.PI / 2.5; lat <= Math.PI / 2.5; lat += 0.02) {
+      const r = L * Math.cos(lat) * Math.cos(lat);
+      if (r < 1.0) continue;
+      const x = -r * Math.cos(lat);
+      const y = r * Math.sin(lat);
+      const [sx, sy] = toScreen(x, y);
+      if (lat === -Math.PI / 2.5 || r < 1.01) ctx.moveTo(sx, sy);
+      else ctx.lineTo(sx, sy);
+    }
+    ctx.stroke();
+  }
+}
+
+function drawBelts() {
+  // Inner belt: 1.2-2.0 Re, concentrated near equator
+  for (let r = 1.1; r <= 2.2; r += 0.05) {
+    for (let lat = -0.6; lat <= 0.6; lat += 0.05) {
+      const intensity = Math.exp(-((r - 1.5) * (r - 1.5)) / (2 * 0.2 * 0.2));
+      const latFade = Math.cos(lat) * Math.cos(lat) * Math.cos(lat);
+      const alpha = intensity * latFade * 0.15;
+      if (alpha < 0.005) continue;
+
+      const x = r * Math.cos(lat);
+      const y = r * Math.sin(lat);
+      const [sx, sy] = toScreen(x, y);
+
+      ctx.fillStyle = `rgba(212, 168, 48, ${alpha})`;
+      ctx.fillRect(sx - 3, sy - 3, 6, 6);
+    }
+  }
+
+  // Outer belt: 3.5-6.0 Re
+  if (showOuter) {
+    for (let r = 3.0; r <= 6.5; r += 0.1) {
+      for (let lat = -0.5; lat <= 0.5; lat += 0.05) {
+        const intensity = Math.exp(-((r - 4.5) * (r - 4.5)) / (2 * 0.7 * 0.7));
+        const latFade = Math.cos(lat) * Math.cos(lat);
+        const alpha = intensity * latFade * 0.08;
+        if (alpha < 0.003) continue;
+
+        const x = r * Math.cos(lat);
+        const y = r * Math.sin(lat);
+        const [sx, sy] = toScreen(x, y);
+
+        ctx.fillStyle = `rgba(80, 110, 180, ${alpha})`;
+        ctx.fillRect(sx - 3, sy - 3, 6, 6);
+      }
+    }
+  }
+}
+
+function drawParticles() {
+  if (!showParticles) return;
+
+  for (const p of particles) {
+    if (p.outer && !showOuter) continue;
+
+    // Particle drifts around Earth (protons westward, electrons eastward)
+    p.phase += p.speed * 0.01 * parseFloat(document.getElementById('speed').value);
+    p.bounce += p.bounceSpeed * 0.02;
+
+    const lat = Math.sin(p.bounce) * 0.5; // bounce between mirror points
+    const r = p.L * Math.cos(lat) * Math.cos(lat);
+
+    if (r < 1.0) continue;
+
+    const x = r * Math.cos(lat) * Math.cos(p.phase) -
+              r * Math.sin(lat) * Math.sin(p.phase) * 0.3;
+    const y = r * Math.sin(lat) * Math.cos(p.phase) +
+              r * Math.cos(lat) * Math.sin(p.phase) * 0.3;
+
+    // Simplified: just use drift angle for 2D projection
+    const px = r * Math.cos(p.phase);
+    const py = r * Math.sin(p.phase) * Math.cos(lat);
+
+    const [sx, sy] = toScreen(px, py);
+
+    const color = p.outer ? 'rgba(100, 140, 220, 0.6)' : 'rgba(212, 168, 48, 0.7)';
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(sx, sy, 1.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawOrbit() {
+  // Explorer 1 orbit ellipse
+  ctx.strokeStyle = 'rgba(0, 255, 65, 0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+
+  for (let theta = 0; theta <= Math.PI * 2; theta += 0.02) {
+    const r = semiMajor * (1 - ecc * ecc) / (1 + ecc * Math.cos(theta));
+    const x = r * Math.cos(theta);
+    const y = r * Math.sin(theta);
+    const [sx, sy] = toScreen(x, y);
+    if (theta === 0) ctx.moveTo(sx, sy);
+    else ctx.lineTo(sx, sy);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Satellite position
+  const speed = parseFloat(document.getElementById('speed').value);
+  satAngle += 0.005 * speed;
+
+  const satR = semiMajor * (1 - ecc * ecc) / (1 + ecc * Math.cos(satAngle));
+  const satX = satR * Math.cos(satAngle);
+  const satY = satR * Math.sin(satAngle);
+  const [sx, sy] = toScreen(satX, satY);
+
+  // Satellite trail
+  ctx.strokeStyle = 'rgba(0, 255, 65, 0.2)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let i = 1; i < 40; i++) {
+    const trailAngle = satAngle - i * 0.02;
+    const trailR = semiMajor * (1 - ecc * ecc) / (1 + ecc * Math.cos(trailAngle));
+    const tx = trailR * Math.cos(trailAngle);
+    const ty = trailR * Math.sin(trailAngle);
+    const [tsx, tsy] = toScreen(tx, ty);
+    if (i === 1) ctx.moveTo(tsx, tsy);
+    else ctx.lineTo(tsx, tsy);
+  }
+  ctx.stroke();
+
+  // Satellite dot
+  ctx.fillStyle = '#00FF41';
+  ctx.shadowColor = '#00FF41';
+  ctx.shadowBlur = 8;
+  ctx.beginPath();
+  ctx.arc(sx, sy, 4, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // Label
+  ctx.font = '10px Courier New';
+  ctx.fillStyle = '#00FF41';
+  ctx.fillText('Explorer 1', sx + 8, sy - 8);
+
+  // Update info displays
+  const altKm = (satR * RE) - RE;
+  const beltIntensity = Math.exp(-((satR - 1.5) * (satR - 1.5)) / (2 * 0.2 * 0.2));
+  const trueRate = 30 + beltIntensity * 1e6;
+  const tau = 100e-6;
+  const measuredRate = trueRate * Math.exp(-trueRate * tau);
+  const isSaturated = trueRate > 1000 && measuredRate < trueRate * 0.01;
+
+  document.getElementById('altitude-display').textContent =
+    Math.round(altKm) + ' km';
+  document.getElementById('distance-display').innerHTML =
+    satR.toFixed(2) + ' R<sub>E</sub>';
+
+  const doseEl = document.getElementById('dose-display');
+  if (beltIntensity > 0.7) {
+    doseEl.textContent = 'EXTREME';
+    doseEl.className = 'info-value danger';
+  } else if (beltIntensity > 0.3) {
+    doseEl.textContent = 'High';
+    doseEl.className = 'info-value danger';
+  } else if (beltIntensity > 0.05) {
+    doseEl.textContent = 'Moderate';
+    doseEl.className = 'info-value';
+  } else {
+    doseEl.textContent = 'Low';
+    doseEl.className = 'info-value safe';
+  }
+
+  const geigerEl = document.getElementById('geiger-display');
+  if (isSaturated) {
+    geigerEl.textContent = 'SATURATED';
+    geigerEl.className = 'info-value danger';
+  } else {
+    geigerEl.textContent = 'Counting';
+    geigerEl.className = 'info-value safe';
+  }
+
+  const phaseEl = document.getElementById('phase-display');
+  const normAngle = ((satAngle % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+  if (normAngle < 0.3 || normAngle > Math.PI * 2 - 0.3) {
+    phaseEl.textContent = 'Perigee';
+  } else if (Math.abs(normAngle - Math.PI) < 0.3) {
+    phaseEl.textContent = 'Apogee';
+  } else if (normAngle < Math.PI) {
+    phaseEl.textContent = 'Ascending';
+  } else {
+    phaseEl.textContent = 'Descending';
+  }
+}
+
+function drawScaleRings() {
+  // Distance reference rings
+  ctx.strokeStyle = 'rgba(80, 80, 100, 0.1)';
+  ctx.lineWidth = 0.5;
+  ctx.setLineDash([2, 6]);
+
+  for (let r = 2; r <= 7; r++) {
+    ctx.beginPath();
+    ctx.arc(CX, CY, r * SCALE, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Label
+    ctx.font = '9px Courier New';
+    ctx.fillStyle = 'rgba(80, 80, 100, 0.3)';
+    ctx.fillText(r + ' Re', CX + r * SCALE + 4, CY - 4);
+  }
+  ctx.setLineDash([]);
+}
+
+function draw() {
+  ctx.fillStyle = '#020208';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Background stars
+  for (let i = 0; i < 100; i++) {
+    const sx = (Math.sin(i * 127.1 + 43.7) * 0.5 + 0.5) * canvas.width;
+    const sy = (Math.cos(i * 311.7 + 78.3) * 0.5 + 0.5) * canvas.height;
+    const brightness = (Math.sin(i * 73.1) * 0.5 + 0.5) * 0.5;
+    ctx.fillStyle = `rgba(200, 200, 220, ${brightness})`;
+    ctx.fillRect(sx, sy, 1, 1);
+  }
+
+  drawScaleRings();
+  drawFieldLines();
+  drawBelts();
+  drawParticles();
+  drawEarth();
+  drawOrbit();
+
+  // Update control displays
+  document.getElementById('speed-value').textContent =
+    document.getElementById('speed').value + 'x';
+  document.getElementById('field-value').textContent =
+    document.getElementById('field-lines').value;
+
+  requestAnimationFrame(draw);
+}
+
+// Event listeners
+document.getElementById('toggle-outer').addEventListener('click', () => {
+  showOuter = !showOuter;
+  document.getElementById('toggle-outer').textContent =
+    showOuter ? 'Hide Outer Belt' : 'Show Outer Belt';
+});
+
+document.getElementById('toggle-particles').addEventListener('click', () => {
+  showParticles = !showParticles;
+  document.getElementById('toggle-particles').textContent =
+    showParticles ? 'Hide Particles' : 'Show Particles';
+});
+
+// Start animation
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>

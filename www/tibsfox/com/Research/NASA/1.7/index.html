@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.7 — Explorer 1 + Lungwort Lichen | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --geiger-deep: #050510;
+    --geiger-mid: #0A1520;
+    --geiger-glow: #00FF41;
+    --geiger-dim: #006B1A;
+    --cosmic-black: #050510;
+    --belt-gold: #D4A830;
+    --belt-bright: #E8D060;
+    --lichen-sage: #8FA880;
+    --lichen-brown: #6B5A42;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #1A3A1A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--cosmic-black); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(0,255,65,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(0,107,26,0.06) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(0,255,65,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(143,168,128,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(212,168,48,0.03) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(0,107,26,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--geiger-glow); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--belt-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--cosmic-black) 0%, var(--geiger-deep) 25%, var(--geiger-mid) 50%, var(--geiger-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--geiger-glow); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,255,65,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,65,0.02) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(0,255,65,0.1); border: 1px solid var(--geiger-glow); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--geiger-glow); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(0,255,65,0.15); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--geiger-glow); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--belt-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--geiger-glow); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--belt-bright); }
+  .prose em { color: var(--lichen-sage); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--geiger-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,16,0.5); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(0,255,65,0.08); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--geiger-glow); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; }
+  .prose pre { background: rgba(5,5,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--geiger-glow); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(0,255,65,0.08); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--geiger-glow); }
+  .prose pre code { background: none; padding: 0; }
+  .sources-section { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources-section h2 { border-bottom-color: var(--geiger-dim); }
+  .sources-section h3 { color: var(--geiger-glow); font-size: 1rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .sources-section li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+  .nav-card { background: rgba(5,5,16,0.4); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--geiger-glow); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--belt-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--geiger-glow); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+
+  /* Card grid for landing page */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+  .card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--geiger-glow); }
+  .card h3 { font-size: 1rem; color: var(--geiger-glow); margin-bottom: 0.5rem; }
+  .card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .card a { color: var(--geiger-glow); text-decoration: none; }
+  .card a:hover { color: var(--belt-bright); }
+
+  .section-title { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--belt-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .section-title:first-of-type { margin-top: 0; }
+
+  .artifact-list { list-style: none; padding: 0; margin: 1rem 0; }
+  .artifact-list li { font-size: 0.9rem; line-height: 1.7; padding: 0.4rem 0; border-bottom: 1px solid rgba(26,58,26,0.3); color: var(--text); }
+  .artifact-list li:last-child { border-bottom: none; }
+  .artifact-label { color: var(--geiger-glow); font-weight: 500; font-family: 'DM Mono', monospace; font-size: 0.85rem; }
+
+  .dedication-section { background: rgba(107,90,66,0.1); border: 1px solid var(--lichen-brown); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .dedication-section h2 { color: var(--belt-gold); border-bottom-color: var(--lichen-brown); }
+  .dedication-section p { font-size: 0.95rem; line-height: 1.8; color: var(--text); }
+
+  .summary-text { font-size: 0.95rem; line-height: 1.8; color: var(--text); max-width: 900px; margin-bottom: 1.5rem; }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a> <span class="sep">/</span> v1.7 Explorer 1
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.7</span>
+      <span class="track-badge">Mission Hub</span>
+    </div>
+    <h1>v1.7 &mdash; Explorer 1 + <em>Lobaria pulmonaria</em></h1>
+    <p class="subtitle">The First US Satellite &mdash; Discovery of the Van Allen Radiation Belts</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> Jan 31, 1958</span>
+      <span><span class="label">Program:</span> Explorer (ABMA/JPL/Iowa)</span>
+      <span><span class="label">Organism:</span> Lungwort lichen</span>
+      <span><span class="label">Bird:</span> Varied Thrush</span>
+      <span><span class="label">Dedication:</span> Robert Bunsen</span>
+      <span><span class="label">Status:</span> SUCCESS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">Mission Summary</h2>
+
+  <p class="summary-text">Explorer 1 was launched on January 31, 1958, aboard a Juno I rocket &mdash; a modified Redstone missile with spin-stabilized Sergeant solid rocket upper stages. It was the first American satellite, built by the Army Ballistic Missile Agency (ABMA) under Wernher von Braun, with a scientific instrument designed by James Van Allen&rsquo;s group at the University of Iowa. That instrument was a single Anton 314 Geiger-Muller tube, weighing less than 200 grams, operating at 900 volts, capable of counting individual charged particles. The total spacecraft mass was 13.97 kg &mdash; lighter than a cocker spaniel. At low altitudes (358 km perigee), the Geiger counter recorded normal cosmic ray background: approximately 30 counts per second. As Explorer 1 climbed through its elliptical orbit toward the 2,550 km apogee, the count rate rose steeply &mdash; hundreds, then thousands per second. Above approximately 1,500 km, the counter read zero. Not low. Zero. Van Allen recognized that the zeros were not instrument failure but instrument saturation: the radiation flux exceeded the Geiger tube&rsquo;s dead time limit of ~100 microseconds, causing the tube to enter continuous discharge and report silence at maximum intensity. Explorer 3 confirmed this interpretation with shielded counters, revealing count rates exceeding 35,000 per second at the altitudes where Explorer 1 read zero. The discovery of the Van Allen radiation belts &mdash; zones of intense trapped radiation encircling Earth &mdash; was the first major scientific finding of the Space Age. The paired organism, <em>Lobaria pulmonaria</em> (lungwort lichen), is a threshold detector that disappears from forests when air quality degrades, mirroring the Geiger counter&rsquo;s zero readings when overwhelmed by radiation. Both instruments tell their story through silence.</p>
+
+  <h2 class="section-title">Research Pages</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <a href="research.html">
+        <h3>Deep Research</h3>
+        <p>Track 1a &mdash; The full story of Explorer 1: the Juno I launch vehicle, the Anton 314 Geiger counter, the dead time saturation paradox, the Van Allen radiation belt discovery, and the spacecraft&rsquo;s 12-year orbital decay.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="organism.html">
+        <h3>Organism Pairing</h3>
+        <p>Track 2 &mdash; <em>Lobaria pulmonaria</em> (lungwort lichen): the tripartite symbiosis that detects air quality through threshold response. Old-growth indicator species, biological Geiger counter.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="mathematics.html">
+        <h3>Mathematics</h3>
+        <p>Track 3 &mdash; TSPB mathematics in McNeese-Hoag format. Dead time correction formulas, Poisson counting statistics, inverse-square law, orbital mechanics, spin stabilization on the unit circle.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="papers.html">
+        <h3>Scientific Anchors</h3>
+        <p>Track 1b &mdash; Van Allen et al. (1958) discovery paper + 3 wall-clock arXiv papers: radiation belt dynamics, lichen biomonitoring, SiPM Geiger-mode detectors for CubeSats.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="curriculum.html">
+        <h3>College of Knowledge</h3>
+        <p>Track 4 &mdash; Department deposits across Physics, Electronics, Space Science, Lichenology, Mathematics, and Engineering. TRY sessions: build a Geiger counter, find lungwort lichen, compute orbital parameters.</p>
+      </a>
+    </div>
+    <div class="card">
+      <a href="simulation.html">
+        <h3>Simulation &amp; Creative Arts</h3>
+        <p>Track 5 &mdash; What to build: dead time simulator, orbit propagator, interactive Geiger counter, Van Allen belt viewer, GMAT recreation, ML flux prediction, game theory, press conference art.</p>
+      </a>
+    </div>
+  </div>
+
+  <h2 class="section-title">Artifacts</h2>
+
+  <ul class="artifact-list">
+    <li><span class="artifact-label">Audio:</span> 2 FAUST synths &mdash; <code>explorer1-geiger-synth.dsp</code> (Geiger counter click synthesis) and <code>varied-thrush.dsp</code> (Varied Thrush call)</li>
+    <li><span class="artifact-label">Circuits:</span> 2 build guides &mdash; <code>led-radiation-belt.md</code> (LED radiation belt display) and <code>radio-audio-amp.md</code> (audio amplifier for Geiger counter)</li>
+    <li><span class="artifact-label">Screensaver:</span> GLSL shader &mdash; <code>explorer1-screensaver.frag</code> (radiation belt visualization, particle traces, Geiger counter saturation effect)</li>
+    <li><span class="artifact-label">Simulations:</span> Python (2): <code>geiger-saturation.py</code>, <code>orbit-belt-crossing.py</code> | SPICE (2): <code>audio-amplifier.cir</code>, <code>geiger-tube.cir</code> | Web (2): <code>geiger-counter.html</code>, <code>radiation-belt.html</code></li>
+    <li><span class="artifact-label">Stories:</span> &ldquo;The Belt&rdquo; &mdash; <code>the-belt.html</code> + <code>the-belt.tex</code></li>
+  </ul>
+
+  <h2 class="section-title">Data</h2>
+
+  <ul class="artifact-list">
+    <li><span class="artifact-label">knowledge-nodes.json</span> &mdash; Knowledge graph nodes for Explorer 1 mission concepts, instruments, radiation belt physics, and cross-references</li>
+    <li><span class="artifact-label">data-sources.json</span> &mdash; Authoritative data sources used in research (NASA NSSDCA, NSSDC, JPL Horizons, University of Iowa Van Allen archive)</li>
+  </ul>
+
+  <div class="dedication-section">
+    <h2 class="section-title">Dedication: Robert Bunsen</h2>
+    <p>This mission is dedicated to <strong>Robert Wilhelm Eberhard Bunsen</strong>, born March 30, 1811, in G&ouml;ttingen, Germany. Bunsen invented the spectroscope with Gustav Kirchhoff in 1860 &mdash; the instrument that revealed the chemical composition of stars by analyzing the specific wavelengths of light they emit. Before Bunsen and Kirchhoff, the composition of the Sun was a mystery. After their spectral analysis, it was chemistry. Bunsen also invented the Bunsen burner &mdash; but the burner was a means, not an end. He needed a clean, colorless flame so that the colors of burning elements would not be masked by the flame&rsquo;s own color. The burner served the spectroscope. The tool served the measurement. One hundred years after Bunsen, James Van Allen needed a clean, simple detector so that the signal of cosmic rays would not be masked by instrument noise. The Geiger counter served the same role as Bunsen&rsquo;s flame: a transparent medium through which the phenomenon could be observed. Bunsen&rsquo;s spectroscope found elements in stars. Van Allen&rsquo;s Geiger counter found protons in Earth&rsquo;s magnetic field. Both discovered invisible things by building instruments that made them visible. Both made the discovery because they understood their instruments completely &mdash; Bunsen knew his flame, Van Allen knew his tube. The Geiger counter is the spectroscope of the radiation belt.</p>
+  </div>
+
+  <div class="nav-card">
+    <a href="../index.html">&larr; Mission Catalog</a>
+    <a href="research.html">Begin Reading &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.7 Explorer 1 + Lobaria pulmonaria &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

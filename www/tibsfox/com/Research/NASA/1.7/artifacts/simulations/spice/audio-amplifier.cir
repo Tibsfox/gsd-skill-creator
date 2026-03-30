@@ -1,0 +1,136 @@
+* Explorer 1 Ground Station: LM386 Audio Output Amplifier
+* =========================================================================
+* Mission 1.7 — Explorer 1, January 31, 1958
+* FIRST US SATELLITE — Van Allen radiation belt discovery
+*
+* This is the audio output amplifier stage of the progressive ground station
+* receiver chain. It takes the demodulated audio from the v1.6 envelope
+* detector and amplifies it to drive an 8-ohm loudspeaker.
+*
+* Circuit: LM386 audio power amplifier (modeled as an op-amp with gain)
+*   - Input: demodulated audio from envelope detector (1 kHz test tone, 50 mV)
+*   - Gain: 200 (with 10 uF capacitor between pins 1 and 8)
+*   - Output: amplified audio to 8-ohm speaker through 250 uF coupling cap
+*   - Zobel network: 10 ohm + 47 nF across speaker for stability
+*
+* Expected output: 1 kHz sine at ~10V peak-to-peak across speaker
+* (limited by 9V supply — actual swing is ~7V pp)
+*
+* Run: ngspice -b audio-amplifier.cir
+* =========================================================================
+
+* --- Input Signal ---
+* Simulates demodulated audio from the v1.6 envelope detector
+* 1 kHz test tone, 50 mV peak (typical weak radio signal after detection)
+Vin input_ac 0 SIN(0 0.05 1k 0 0)
+
+* --- Input Coupling Capacitor ---
+* Blocks DC from previous stage, passes audio
+C_in input_ac input_node 100n
+
+* --- Volume Control ---
+* 10K potentiometer modeled as voltage divider at 50% position
+R_vol_top input_node vol_wiper 5k
+R_vol_bot vol_wiper 0 5k
+
+* --- LM386 Audio Amplifier Model ---
+* The LM386 is modeled as an op-amp with internal feedback
+* Gain with cap between pins 1-8: A_v = 200 (46 dB)
+*
+* Simplified model using voltage-controlled voltage source:
+*   Internal bias at half supply (4.5V for 9V supply)
+*   Gain of 200 from non-inverting input
+*   Output resistance ~0.5 ohm (push-pull output stage)
+
+* Power supply
+Vcc supply 0 DC 9
+
+* Bias (half-supply reference for the inverting input)
+R_bias1 supply bias_ref 100k
+R_bias2 bias_ref 0 100k
+C_bias bias_ref 0 10u
+
+* Non-inverting input (pin 3) — signal input
+* Inverting input (pin 2) — connected to ground through internal network
+
+* Gain stage — VCVS with gain of 200
+* E_amp output: gain * (V+ - V-)
+* V+ = vol_wiper (signal), V- = 0 (ground, single-ended)
+E_amp amp_out 0 vol_wiper 0 200
+
+* Add half-supply DC offset (LM386 output sits at ~Vcc/2)
+V_offset amp_biased amp_out DC -4.5
+* Note: E source output + offset gives output centered at 4.5V
+
+* Internal output resistance
+R_out amp_biased amp_output 0.5
+
+* Supply rail clipping (output cannot exceed 0V or Vcc)
+* Modeled with diode clamps
+D_clip_hi amp_output supply D_CLIP
+D_clip_lo gnd_clip amp_output D_CLIP
+V_gnd_clip gnd_clip 0 DC 0
+.model D_CLIP D(Is=1e-14 N=1 Rs=0.1)
+
+* --- Bypass Capacitor (Pin 7) ---
+* Decouples internal bias network for better PSRR
+* In this simplified model, represented as supply bypass
+C_bypass supply 0 10u
+
+* --- Output Coupling Capacitor ---
+* 250 uF electrolytic — blocks DC bias, passes audio to speaker
+* DC at amp_output is ~4.5V; only AC component passes
+C_out amp_output speaker_pos 250u
+
+* --- Speaker Load ---
+* 8-ohm dynamic loudspeaker
+R_speaker speaker_pos speaker_neg 8
+V_spk_gnd speaker_neg 0 DC 0
+
+* --- Zobel Network ---
+* Snubber across speaker: 10 ohm + 47 nF in series
+* Absorbs high-frequency energy, prevents ultrasonic oscillation
+R_zobel speaker_pos zobel_mid 10
+C_zobel zobel_mid speaker_neg 47n
+
+* --- Analysis ---
+* Transient: 10 ms total (10 cycles of 1 kHz), 1 us timestep
+.tran 1u 10m 0 1u
+
+* --- Measurements ---
+.control
+  run
+  set hcopypscolor=1
+  set color0=white
+  set color1=black
+
+  * Plot input vs amplified output vs speaker voltage
+  plot v(input_ac) v(amp_output) v(speaker_pos) title 'LM386 Audio Amplifier — 50 mV to Speaker'
+
+  * Plot speaker current
+  let i_speaker = (v(speaker_pos) - v(speaker_neg)) / 8
+  plot i_speaker title 'Speaker Current (A)'
+
+  * Measure amplified signal
+  meas tran v_in_pp PP v(input_ac) from=2m to=10m
+  meas tran v_out_pp PP v(amp_output) from=2m to=10m
+  meas tran v_spk_pp PP v(speaker_pos) from=2m to=10m
+
+  * Calculate actual gain
+  let actual_gain = v_out_pp / v_in_pp
+  echo ""
+  echo "=== Audio Amplifier Results ==="
+  echo "Input: 1 kHz, 50 mV peak (100 mV pp)"
+  echo "Target gain: 200 (46 dB)"
+  print v_in_pp
+  print v_out_pp
+  print v_spk_pp
+  echo ""
+  echo "With this stage, the receiver chain is:"
+  echo "  v1.2 oscillator -> v1.3 receiver -> v1.4 mixer"
+  echo "  -> v1.5 IF amp -> v1.6 detector -> v1.7 audio amp -> SPEAKER"
+  echo ""
+  echo "Next: v1.8 BFO (beat frequency oscillator for CW/SSB)"
+.endc
+
+.end

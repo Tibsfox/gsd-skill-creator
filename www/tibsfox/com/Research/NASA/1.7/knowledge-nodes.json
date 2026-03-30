@@ -1,0 +1,187 @@
+{
+  "mission": "1.7",
+  "title": "Explorer 1",
+  "date": "1958-01-31",
+  "organism": "Lobaria pulmonaria",
+  "organism_common": "Lungwort lichen",
+  "organism_location": "An epiphytic foliose lichen found on the bark and branches of mature deciduous and coniferous trees in old-growth forests with clean air. In the Pacific Northwest, it grows on bigleaf maple, red alder, and Douglas-fir in humid coastal and lower montane forests from sea level to about 1,200 meters. Lobaria pulmonaria is a tripartite lichen: a fungal partner (mycobiont) houses both a green alga (Dictyochloropsis reticulata) and a cyanobacterium (Nostoc), the latter fixing atmospheric nitrogen. The thallus is large (up to 30 cm), lobed, and ridged, with a surface texture resembling lung tissue -- hence 'pulmonaria.' It is highly sensitive to air pollution (sulfur dioxide, nitrogen oxides) and is used worldwide as a bioindicator species: its presence indicates clean air; its absence indicates pollution. This makes it the biological analog of Explorer 1's Geiger counter: an absence that indicates a presence.",
+  "bird": "Ixoreus naevius",
+  "bird_common": "Varied Thrush",
+  "dedication": {
+    "name": "Robert Bunsen",
+    "born": "1811-03-30",
+    "died": "1899-08-16",
+    "birthplace": "Gottingen, Kingdom of Westphalia",
+    "field": "Chemistry, spectroscopy, gas analysis, electrochemistry",
+    "resonance": "Robert Bunsen designed his burner to produce a clean, non-luminous flame -- one that did not emit its own light and therefore did not interfere with the spectral lines of elements heated in it. The Bunsen burner's genius is in what it does NOT produce: by removing the burner's own signal, it reveals the signals of the elements under study. Bunsen and Kirchhoff used this clean flame to discover cesium (1860) and rubidium (1861) by reading their characteristic spectral lines -- invisible patterns in light that revealed the presence of elements no one had seen before. This is the same logic Van Allen applied to Explorer 1's Geiger counter data: by understanding why the signal disappeared (dead time saturation), he revealed the presence of something no one had imagined -- the radiation belts. Both Bunsen and Van Allen found truth in what could not be seen directly. Both read an absence to discover a presence. The Bunsen burner's clean flame is the spectroscopic equivalent of the Geiger counter's saturated silence: a tool designed to NOT interfere becomes, through its very transparency, the revealer of hidden phenomena. Bunsen was born on March 30 -- the date this mission was written."
+  },
+  "nodes": [
+    {
+      "id": "1.7-van-allen-radiation-belt",
+      "concept": "Van Allen radiation belt -- trapped charged particles confined by Earth's dipole magnetic field",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.1",
+      "description": "The Van Allen radiation belts are regions of energetic charged particles (protons and electrons) trapped by Earth's magnetic field in toroidal zones surrounding the planet. The inner belt, discovered by Explorer 1 in 1958, extends from approximately 1,000 to 6,000 km altitude (1.2 to 2.0 Earth radii) and consists primarily of high-energy protons (10-100 MeV) with lifetimes of years to centuries. The outer belt, discovered by Pioneer 3 later in 1958, extends from approximately 13,000 to 60,000 km (3 to 10 Earth radii) and consists primarily of high-energy electrons (0.1-10 MeV) with lifetimes of days to weeks. Particles are trapped on closed magnetic field lines, bouncing between magnetic mirror points in the northern and southern hemispheres while drifting longitudinally around the Earth (protons westward, electrons eastward). The belts are sustained by injection of particles from the solar wind and cosmic rays, and depleted by charge exchange, Coulomb scattering, and wave-particle interactions. The inner belt is remarkably stable; the outer belt is highly dynamic, responding to geomagnetic storms driven by coronal mass ejections.",
+      "resonance": "Lobaria pulmonaria maps its environment by presence or absence, the way the Van Allen belts were mapped by the presence or absence of Geiger counter pulses. The lichen exists in clean air and disappears in polluted air; the Geiger counts exist at low radiation and disappear at high radiation. Both are threshold indicators: below the threshold, you see the organism/signal; above it, you see its absence. The belt is a region of trapped energy; the lichen is a community of trapped partnerships (fungus, alga, cyanobacterium). Both persist because conditions hold them in place -- the magnetic field confines the protons; the clean air sustains the lichen.",
+      "worked_example": {
+        "description": "Calculate the drift period of a trapped proton in the inner belt",
+        "parameters": {
+          "energy_MeV": 10,
+          "L_shell": 1.5,
+          "B0_T": 3.12e-5
+        },
+        "formula": "T_drift = 2*pi*m*c^2 / (3*L*q*B0*R_E) * (1/gamma_relativistic) for non-relativistic, T ~ 1/(L*E) hours",
+        "result": "For a 10 MeV proton at L=1.5: drift period is approximately 40 minutes. The proton completes one full circle around Earth in less than an hour, bouncing between mirror points every few seconds.",
+        "python": "import numpy as np\n\n# Proton parameters\nm_p = 1.673e-27      # kg\nq = 1.602e-19         # C\nc = 3e8               # m/s\nR_E = 6.371e6         # m\nB0 = 3.12e-5          # T (dipole moment)\n\n# 10 MeV proton\nE_MeV = 10\nE_J = E_MeV * 1.602e-13\nL = 1.5               # L-shell\n\n# Non-relativistic drift period (approximate)\n# T_d = 2*pi*q*R_E^2*B0 / (3*L*E)\nT_d = 2 * np.pi * q * R_E**2 * B0 / (3 * L * E_J)\n\nprint(f'Energy: {E_MeV} MeV proton at L = {L}')\nprint(f'Drift period: {T_d:.0f} seconds ({T_d/60:.1f} minutes)')\nprint(f'The proton circles Earth in ~{T_d/60:.0f} minutes.')\nprint(f'It was trapped before Explorer 1 launched.')\nprint(f'It may still be trapped today.')\nprint(f'\\nSome inner belt protons have been there for centuries.')\nprint(f'The belt is older than the instruments that found it.')"
+      }
+    },
+    {
+      "id": "1.7-geiger-counter-saturation",
+      "concept": "Geiger counter saturation -- the paradox where maximum radiation produces zero measured counts",
+      "department": "electronics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "A Geiger-Mueller tube detects ionizing radiation by gas avalanche ionization: one incoming particle creates an ion cascade that produces a detectable electrical pulse. After each pulse, the tube requires a recovery time (dead time, typically 100-200 microseconds) during which it cannot detect new particles. In the paralyzable (Type II, extending) dead time model, each new particle arriving during dead time resets the recovery clock. The measured count rate N_m is related to the true rate N_t by N_m = N_t * exp(-N_t * tau), where tau is the dead time. This function peaks at N_t = 1/tau and then DECREASES toward zero. At high true rates, the measured rate approaches zero because the tube never completes a recovery cycle. Explorer 1's Type 314 Geiger counter (tau ~ 100 us) returned zero counts when passing through the inner Van Allen belt peak, where the true particle flux exceeded 10^6 counts per second. Van Allen recognized that zero meant maximum, not failure, leading to the discovery of the radiation belts.",
+      "resonance": "Lobaria pulmonaria has its own saturation point: as air pollution increases, the lichen does not gradually fade -- it reaches a threshold and disappears entirely. Below the pollution threshold, you can read air quality from lichen coverage. Above the threshold, the lichen is gone and you read air quality from its absence. The Geiger counter below saturation reads radiation from its count rate. Above saturation, the counter is silent and you read radiation from the silence. Both are binary indicators at extremes: present/absent, counting/saturated. The threshold behavior is the key -- the transition from readable signal to informative absence.",
+      "worked_example": {
+        "description": "Find the peak measured rate and the true rate at which saturation occurs",
+        "parameters": {
+          "tau_us": 100,
+          "peak_condition": "dN_m/dN_t = 0"
+        },
+        "formula": "N_m = N_t * exp(-N_t * tau). Peak at dN_m/dN_t = (1 - N_t*tau) * exp(-N_t*tau) = 0, so N_t = 1/tau",
+        "result": "Peak at N_t = 1/tau = 10,000 counts/sec. Peak measured rate = 1/(tau*e) = 3,679 counts/sec. At N_t = 100,000: N_m = 4.5 counts/sec. At N_t = 1,000,000: N_m = 3.7e-38 (effectively zero).",
+        "python": "import numpy as np\n\ntau = 100e-6  # 100 microsecond dead time\n\n# Peak of the paralyzable model\nN_peak = 1 / tau\nN_m_peak = N_peak * np.exp(-1)  # = 1/(tau * e)\n\nprint(f'Dead time: {tau*1e6:.0f} microseconds')\nprint(f'Peak true rate for max measured: {N_peak:.0f} counts/sec')\nprint(f'Maximum measured rate: {N_m_peak:.0f} counts/sec')\nprint(f'')\n\n# Show the paradox at various rates\nfor N_t in [100, 1000, 5000, 10000, 50000, 100000, 1000000]:\n    N_m = N_t * np.exp(-N_t * tau)\n    pct = N_m / N_t * 100 if N_t > 0 else 100\n    print(f'  True: {N_t:>10,}/s  Measured: {N_m:>10,.1f}/s  ({pct:.1f}% detected)')\n\nprint(f'\\nAt 10^6/s: measured = {1e6 * np.exp(-1e6 * tau):.2e}/s')\nprint(f'Zero means maximum. The silence IS the signal.')"
+      }
+    },
+    {
+      "id": "1.7-dead-time-analysis",
+      "concept": "Dead time analysis -- mathematical models for detector recovery behavior",
+      "department": "signal-processing",
+      "level": "advanced",
+      "tspb_layer": 3,
+      "tspb_section": "3.3",
+      "description": "Dead time analysis encompasses the mathematical frameworks for understanding and correcting the count losses in radiation detectors. Two primary models exist: the non-paralyzable (Type I) model, where events during dead time are simply lost and N_m = N_t/(1 + N_t*tau) -- the measured rate saturates at 1/tau but never decreases; and the paralyzable (Type II) model, where each event resets the dead time and N_m = N_t*exp(-N_t*tau) -- the measured rate peaks then decreases to zero. Real detectors typically exhibit behavior between these two extremes. The choice of model has profound implications: with a non-paralyzable detector, high count rates produce a plateau (the detector is busy but never reads zero), while with a paralyzable detector, high count rates produce a false zero that can be mistaken for no radiation. Explorer 1's Geiger counter followed the paralyzable model, which is why Van Allen initially suspected instrument failure. Dead time correction is essential in nuclear physics, medical imaging (PET scanners), and any application involving high count rates.",
+      "resonance": "Dead time in a Geiger counter is analogous to the refractory period of a nerve cell -- the period after firing during which the nerve cannot fire again. Both are recovery processes that limit the maximum signaling rate. A nerve saturates when stimulation exceeds the refractory period, just as the Geiger tube saturates when radiation exceeds the dead time. Lobaria pulmonaria has its own version: the lichen's biochemical pathways for detoxifying sulfur dioxide have a finite capacity. Below that capacity, the lichen processes pollutants and survives. Above it, damage accumulates faster than repair, and the organism dies. The lichen's tolerance threshold is its dead time."
+    },
+    {
+      "id": "1.7-juno-i-launch-vehicle",
+      "concept": "Juno I launch vehicle -- modified Redstone missile with spinning upper stages",
+      "department": "aerospace",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.5",
+      "description": "The Juno I launch vehicle that carried Explorer 1 to orbit was a four-stage rocket based on the Army's Redstone ballistic missile. The first stage was a Redstone with an elongated fuel tank (Chrysler A-7 engine, LOX/hydyne propellant, 370 kN thrust). The upper three stages were clusters of scaled-down Sergeant solid-fuel rocket motors: 11 motors in the second stage, 3 in the third, and 1 in the fourth. The upper stages were mounted in a spinning tub atop the Redstone, rotating at 550-750 rpm before ignition to provide spin stabilization (gyroscopic rigidity) during unguided coast and burn phases. This spinning tub design, conceived by Wernher von Braun and the Army Ballistic Missile Agency team at Redstone Arsenal in Huntsville, Alabama, was an elegant solution to the guidance problem: without active attitude control on the upper stages, spin stabilization kept them pointed in the right direction. The entire upper assembly, including Explorer 1, was spun up before launch and remained spinning throughout the mission. Explorer 1 itself continued to spin at 750 rpm throughout its orbital lifetime.",
+      "resonance": "The spinning Juno I upper stages are a macroscopic gyroscope -- the same physics that keeps a bicycle wheel upright, a football spiraling true, and a bullet on target. The spin creates angular momentum that resists perturbation, allowing an unguided rocket stage to maintain its orientation during coast. Lobaria pulmonaria uses a different kind of stability: its tripartite symbiosis (fungus + alga + cyanobacterium) is a biological equilibrium that resists perturbation as long as environmental conditions stay within bounds. Both are systems that maintain alignment through internal dynamics -- spin for the rocket, biochemical mutualism for the lichen."
+    },
+    {
+      "id": "1.7-spin-stabilization",
+      "concept": "Spin stabilization -- using angular momentum to maintain spacecraft orientation without active control",
+      "department": "aerospace",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.4",
+      "description": "Spin stabilization is the simplest and earliest method of spacecraft attitude control. By spinning the spacecraft about its axis of maximum moment of inertia, gyroscopic rigidity resists torques that would change the spin axis orientation. The angular momentum L = I*omega acts as a stabilizing flywheel: external torques cause slow precession rather than tumbling. Explorer 1 spun at 750 rpm (12.5 Hz), giving it substantial angular momentum that kept its long axis pointed in a fixed direction relative to the stars. However, Explorer 1 was a long, thin cylinder -- it was spinning about its axis of MINIMUM moment of inertia (a pencil spin), not maximum. Energy dissipation in its flexible whip antennas gradually transferred angular momentum from the spin axis to a transverse axis, and the satellite eventually began tumbling in a flat spin. This unexpected behavior led to the formulation of the major-axis rule: a spinning body with internal energy dissipation will always evolve toward rotation about its axis of maximum moment of inertia. All subsequent spin-stabilized satellites were designed as oblate (frisbee-shaped) rather than prolate (pencil-shaped) bodies.",
+      "resonance": "A spinning satellite maintains orientation through angular momentum. A lichen colony on bark maintains its position through adhesion and growth. Both resist perturbation -- the satellite through gyroscopic rigidity, the lichen through its holdfast (the attachment structure). Both eventually succumb: the satellite's whip antennas dissipate energy and it tumbles; the lichen's bark substrate eventually decays and the colony falls. The persistence of both is a function of how well the stabilizing mechanism resists the destabilizing forces.",
+      "worked_example": {
+        "description": "Calculate Explorer 1's angular momentum and precession rate",
+        "parameters": {
+          "mass_kg": 13.97,
+          "length_m": 2.03,
+          "diameter_m": 0.152,
+          "spin_rpm": 750
+        },
+        "formula": "I_spin = m*r^2/2 (cylinder about long axis), L = I*omega",
+        "result": "I_spin = 0.5 * 13.97 * (0.076)^2 = 0.0404 kg*m^2. omega = 750 * 2*pi/60 = 78.5 rad/s. L = 0.0404 * 78.5 = 3.17 kg*m^2/s. This angular momentum kept the spacecraft pointing in a fixed direction for the first few weeks of its mission.",
+        "python": "import numpy as np\n\nm = 13.97       # kg\nL = 2.03        # m (length)\nd = 0.152       # m (diameter)\nr = d / 2       # radius\nrpm = 750\n\n# Moments of inertia (thin cylinder)\nI_spin = 0.5 * m * r**2        # about long axis (spin axis)\nI_transverse = m * (3*r**2 + L**2) / 12  # about transverse axis\n\nomega = rpm * 2 * np.pi / 60   # rad/s\nangular_momentum = I_spin * omega\n\nprint(f'Explorer 1 spin stabilization:')\nprint(f'  Mass: {m} kg')\nprint(f'  Dimensions: {L} m x {d} m')\nprint(f'  Spin rate: {rpm} rpm ({omega:.1f} rad/s)')\nprint(f'')\nprint(f'  I_spin (long axis):       {I_spin:.4f} kg*m^2')\nprint(f'  I_transverse:             {I_transverse:.4f} kg*m^2')\nprint(f'  I_transverse / I_spin:    {I_transverse/I_spin:.1f}')\nprint(f'')\nprint(f'  Angular momentum: {angular_momentum:.3f} kg*m^2/s')\nprint(f'')\nprint(f'  Problem: I_transverse > I_spin (ratio {I_transverse/I_spin:.1f})')\nprint(f'  Spinning about MINOR axis (pencil spin)')\nprint(f'  Energy dissipation in antennas caused flat-spin tumble')\nprint(f'  Lesson: always spin about the MAJOR axis')"
+      }
+    },
+    {
+      "id": "1.7-cosmic-ray-detection",
+      "concept": "Cosmic ray detection -- measuring high-energy particles from deep space",
+      "department": "physics",
+      "level": "intermediate",
+      "tspb_layer": 2,
+      "tspb_section": "2.2",
+      "description": "Cosmic rays are high-energy particles (primarily protons, with some heavier nuclei and electrons) originating from outside the solar system. They were discovered by Victor Hess in 1912 during balloon flights that showed ionization increasing with altitude -- the opposite of what would be expected if the radiation came from the ground. Explorer 1's primary scientific objective was to measure cosmic ray intensity as a function of altitude and latitude, continuing a research program that Van Allen had conducted with sounding rockets and balloons since the 1940s. The Type 314 Geiger-Mueller tube was calibrated for cosmic ray backgrounds of 10-100 counts per second. What it found instead was a region where the count rate exceeded 10^6 per second -- not cosmic rays from deep space, but charged particles trapped by Earth's magnetic field. The distinction is fundamental: cosmic rays pass through; Van Allen belt particles are trapped and orbit. The cosmic ray experiment inadvertently became a radiation belt experiment because the instrument encountered something it was not designed to measure.",
+      "resonance": "Cosmic rays come from everywhere, pass through everything, and cannot be trapped. Van Allen belt particles come from the solar wind, are trapped by the magnetic field, and orbit indefinitely. Lobaria pulmonaria is similarly sensitive to what passes through its environment: clean air passes through harmlessly, but pollutant particles accumulate and eventually kill the lichen. The cosmic ray background is like clean air -- always present, harmless at natural levels. The trapped radiation belt particles are like pollution -- concentrated, persistent, and damaging. Explorer 1's Geiger counter could handle the cosmic rays (clean air) but was overwhelmed by the belt particles (pollution)."
+    },
+    {
+      "id": "1.7-inner-outer-belt-structure",
+      "concept": "Inner and outer belt structure -- the two-zone architecture of trapped radiation",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.3",
+      "description": "The Van Allen radiation environment has a two-belt structure separated by a 'slot region' of relatively low particle flux. The inner belt (1.2-2.0 Earth radii, 1,200-6,400 km altitude) contains primarily high-energy protons (10-100+ MeV) produced by cosmic ray albedo neutron decay (CRAND): cosmic rays hit atmospheric nuclei, producing neutrons that escape upward, decay into protons and electrons, and are trapped by the magnetic field. These protons have lifetimes of years to centuries. The outer belt (3-7 Earth radii, 13,000-38,000 km) contains primarily high-energy electrons (0.1-10 MeV) injected from the magnetotail during substorms. These electrons have lifetimes of days to weeks and are highly variable. The slot region (2-3 Earth radii) is kept relatively clear by VLF wave-particle interactions that scatter particles into the loss cone. Explorer 1 only reached 2,550 km (1.4 Earth radii), sampling only the inner belt. Pioneer 3, launched December 6, 1958, reached 102,000 km and mapped both belts.",
+      "resonance": "The two-belt structure of the radiation environment mirrors the layered structure of a forest canopy. The inner belt (protons, stable, long-lived) is like the old-growth canopy -- ancient trees that have been there for centuries, providing the persistent structure. The outer belt (electrons, dynamic, short-lived) is like the understory -- constantly changing, responsive to disturbances (storms), with rapid turnover. The slot region between them is like the gap between canopy and understory where sunlight filters through -- a transitional zone maintained by active processes. Lobaria pulmonaria grows in this transitional zone, on branches that receive filtered light -- neither full canopy shade nor full sun exposure."
+    },
+    {
+      "id": "1.7-igy-context",
+      "concept": "International Geophysical Year -- the scientific context that made Explorer 1 possible",
+      "department": "history",
+      "level": "foundational",
+      "tspb_layer": 1,
+      "tspb_section": "1.3",
+      "description": "The International Geophysical Year (IGY) was an international scientific collaboration running from July 1, 1957, to December 31, 1958, involving 67 countries studying geophysical phenomena including the aurora, cosmic rays, geomagnetism, the ionosphere, and solar activity. Both the US and Soviet Union announced plans to launch artificial satellites as part of the IGY. The Soviet Union launched Sputnik 1 on October 4, 1957, shocking the American public and triggering a crash effort to launch a US satellite. The Navy's Vanguard rocket failed spectacularly on December 6, 1957 (the 'Flopnik' launch). The Army's Juno I, based on Wernher von Braun's Redstone missile, successfully launched Explorer 1 on January 31, 1958. The IGY framework gave the launch scientific legitimacy beyond Cold War competition: Explorer 1's instruments were designed for IGY cosmic ray measurements, and its discovery of the radiation belts was announced through IGY scientific channels.",
+      "resonance": "The IGY was a collaborative framework that enabled scientific discovery within a competitive political context. Explorer 1's radiation belt discovery happened because Van Allen had spent years preparing cosmic ray instruments for the IGY, and the satellite happened to carry them through a region nobody knew existed. The IGY is like the forest itself: a framework of shared resources (sunlight, water, nutrients, airspace) within which individual organisms compete and cooperate. Lobaria pulmonaria exists within the forest framework -- it could not survive in a parking lot, no matter how clean the air. The framework enables the organism."
+    },
+    {
+      "id": "1.7-three-way-collaboration",
+      "concept": "Three-way collaboration pattern -- ABMA + JPL + U of Iowa as a model for distributed engineering",
+      "department": "engineering",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.1",
+      "description": "Explorer 1 was the product of a three-way collaboration that became a template for NASA missions. The Army Ballistic Missile Agency (ABMA) in Huntsville, Alabama, under Wernher von Braun, provided the Juno I launch vehicle -- a modified military missile repurposed for scientific use. The Jet Propulsion Laboratory (JPL) in Pasadena, California, under William Pickering, designed and built the satellite bus, the telemetry system, and managed the tracking network. The University of Iowa, under James Van Allen, designed and built the scientific instruments -- the cosmic ray package that discovered the radiation belts. Three organizations, three cities, three expertise domains (launch vehicles, spacecraft systems, scientific instruments), integrated into a single mission. This pattern -- separate teams for launch vehicle, spacecraft bus, and instrument payload -- became the standard architecture for NASA science missions and persists to this day.",
+      "resonance": "The tripartite collaboration (ABMA + JPL + Iowa) mirrors the tripartite symbiosis of Lobaria pulmonaria (fungus + alga + cyanobacterium). In both cases, three distinct organisms/organizations with different capabilities combine to achieve something none could accomplish alone. The fungus provides structure and protection (like the launch vehicle providing the structural platform); the green alga provides photosynthesis/energy (like JPL providing the spacecraft systems -- power, telemetry, thermal control); the cyanobacterium provides nitrogen fixation (like Van Allen providing the unique scientific capability). Each partner is essential. Remove any one and the mission/organism fails.",
+      "worked_example": {
+        "description": "Map the three-way collaboration to Lobaria's tripartite symbiosis",
+        "parameters": {
+          "abma_role": "Launch vehicle (Juno I), structural platform, propulsion",
+          "jpl_role": "Satellite bus, telemetry, tracking, power, thermal",
+          "iowa_role": "Geiger counter, cosmic ray experiment, data analysis"
+        },
+        "formula": "Mission_success = f(launch_vehicle, spacecraft_bus, instruments) -- all three required",
+        "result": "ABMA ↔ Fungus (structural partner providing the physical platform). JPL ↔ Green alga (energy partner providing photosynthesis / power & communications). Iowa ↔ Cyanobacterium (nitrogen-fixing / unique capability partner). All three must function for the whole to survive.",
+        "python": "# Three-way collaboration mapping\npartners = {\n    'ABMA (Huntsville, AL)': {\n        'role': 'Launch vehicle',\n        'contribution': 'Juno I rocket (Redstone + spinning upper stages)',\n        'leader': 'Wernher von Braun',\n        'lichen_analog': 'Mycobiont (fungus) -- structural partner',\n    },\n    'JPL (Pasadena, CA)': {\n        'role': 'Spacecraft bus',\n        'contribution': 'Satellite structure, power, telemetry, tracking',\n        'leader': 'William Pickering',\n        'lichen_analog': 'Phycobiont (green alga) -- energy/comms partner',\n    },\n    'U of Iowa (Iowa City, IA)': {\n        'role': 'Instruments',\n        'contribution': 'Type 314 Geiger counter, cosmic ray package',\n        'leader': 'James Van Allen',\n        'lichen_analog': 'Cyanobiont (Nostoc) -- unique capability partner',\n    }\n}\n\nfor org, info in partners.items():\n    print(f'{org}')\n    for key, val in info.items():\n        print(f'  {key}: {val}')\n    print()\n\nprint('Remove any partner:')\nprint('  No ABMA: satellite cannot reach orbit (no structure = no lichen)')\nprint('  No JPL: instruments cannot communicate (no energy = no photosynthesis)')\nprint('  No Iowa: orbit but no discovery (no nitrogen fixation = stunted growth)')"
+      }
+    },
+    {
+      "id": "1.7-radiation-belt-geometry",
+      "concept": "Radiation belt geometry -- dipole field lines, L-shells, and particle drift",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.2",
+      "description": "The geometry of the Van Allen belts is determined by Earth's approximately dipolar magnetic field. Field lines are characterized by their L-shell value: the equatorial crossing distance in Earth radii. A field line at L=1.5 crosses the equator at 1.5 Earth radii (9,557 km from center, 3,186 km altitude) and reaches the surface at magnetic latitude arccos(1/sqrt(L)) = 35.3 degrees. Trapped particles gyrate around field lines (cyclotron motion), bounce between magnetic mirror points in opposite hemispheres (bounce motion), and drift longitudinally around Earth (gradient-curvature drift, protons westward, electrons eastward). The three motions have very different time scales: gyration (milliseconds), bounce (seconds), and drift (minutes to hours). The radiation intensity at any point depends on the L-shell, magnetic latitude, local time (for the outer belt), and geomagnetic activity level. The inner belt is nearly symmetric in longitude; the outer belt shows significant day-night asymmetry due to magnetospheric compression by the solar wind.",
+      "resonance": "The three nested motions of a trapped particle (gyrate, bounce, drift) are like the three nested scales of a lichen colony's existence: the individual cells (microscopic), the thallus lobes (centimeters), and the colony's extent across a tree trunk (meters). Each scale has its own dynamics and its own time constant. The gyration is fast and local; the drift is slow and global. Similarly, a single algal cell divides in hours, a lobe grows over months, and the colony colonizes a tree over years. Understanding the radiation belt requires tracking all three scales simultaneously, just as understanding a lichen colony requires seeing it at all three scales.",
+      "worked_example": {
+        "description": "Calculate the three characteristic time scales of a trapped proton",
+        "parameters": {
+          "energy_MeV": 10,
+          "L_shell": 1.5,
+          "mass_kg": 1.673e-27,
+          "charge_C": 1.602e-19,
+          "B0_T": 3.12e-5
+        },
+        "formula": "T_gyration = 2*pi*m/(q*B), T_bounce ~ 4*L*R_E/v, T_drift ~ 2*pi*m*c^2/(3*L*q*B0*R_E*v)",
+        "result": "For 10 MeV proton at L=1.5: T_gyration ~ 0.4 ms, T_bounce ~ 0.7 s, T_drift ~ 40 min. Three time scales spanning 6 orders of magnitude.",
+        "python": "import numpy as np\n\n# Constants\nm_p = 1.673e-27     # proton mass (kg)\nq = 1.602e-19       # charge (C)\nc = 3e8             # speed of light (m/s)\nR_E = 6.371e6       # Earth radius (m)\nB0 = 3.12e-5        # surface equatorial field (T)\n\n# Parameters\nE_MeV = 10\nL = 1.5\nE_J = E_MeV * 1.602e-13\nv = np.sqrt(2 * E_J / m_p)  # non-relativistic velocity\n\n# Magnetic field at equatorial L-shell\nB_eq = B0 / L**3\n\n# 1. Gyration period\nT_gyro = 2 * np.pi * m_p / (q * B_eq)\n\n# 2. Bounce period (approximate)\nT_bounce = 4 * L * R_E / v  # simplified\n\n# 3. Drift period\nT_drift = 2 * np.pi * q * R_E**2 * B0 / (3 * L * E_J)\n\nprint(f'10 MeV proton at L = {L}')\nprint(f'Velocity: {v/c*100:.1f}% of c')\nprint(f'B at equator: {B_eq*1e6:.1f} uT')\nprint(f'')\nprint(f'Gyration:  {T_gyro*1e3:.2f} ms  (spiral around field line)')\nprint(f'Bounce:    {T_bounce:.2f} s   (mirror point to mirror point)')\nprint(f'Drift:     {T_drift/60:.1f} min (full circle around Earth)')\nprint(f'')\nprint(f'Ratio: drift/bounce = {T_drift/T_bounce:.0f}')\nprint(f'Ratio: bounce/gyro  = {T_bounce/T_gyro:.0f}')\nprint(f'Three nested clocks, six orders of magnitude apart.')"
+      }
+    },
+    {
+      "id": "1.7-audio-power-amplification",
+      "concept": "Audio power amplification -- the LM386 as the final stage in a receiver chain",
+      "department": "electronics",
+      "level": "foundational",
+      "tspb_layer": 2,
+      "tspb_section": "2.6",
+      "description": "An audio power amplifier takes a small-signal audio voltage (millivolts from a detector or preamplifier) and amplifies it to a level sufficient to drive a loudspeaker (volts, delivering milliwatts to watts of power into a low-impedance load). The LM386 is a monolithic audio power amplifier IC in an 8-pin DIP package, operating from 4-12V supply, with adjustable gain from 20 to 200 and output power up to 325 mW into 8 ohms. It is the sixth stage in the progressive ground station build: transmitter (v1.2), receiver (v1.3), mixer (v1.4), IF amplifier (v1.5), envelope detector (v1.6), audio amplifier (v1.7). With this stage, the radio signal path from antenna to speaker is complete. The amplifier must match the high-impedance detector output to the low-impedance speaker, provide voltage gain (200x for weak signals), and maintain stability (the Zobel network prevents oscillation at ultrasonic frequencies). Power output is limited by the supply voltage and speaker impedance: P = V^2/(8*R_load).",
+      "resonance": "The audio amplifier is the last stage before the signal becomes audible -- the final transformation from electrical energy to mechanical energy (speaker cone motion) to acoustic energy (sound waves). Similarly, in the Lobaria symbiosis, the final stage of nitrogen fixation is the conversion of atmospheric N2 to ammonium (NH4+), which the green alga then uses for protein synthesis. Both are final-stage conversions that make the input useful: the amplifier makes the radio signal hearable, the cyanobacterium makes atmospheric nitrogen biologically available. Without the final conversion, the input exists but cannot be utilized."
+    }
+  ]
+}
