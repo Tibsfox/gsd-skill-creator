@@ -1,0 +1,129 @@
+{
+  "degree": 34,
+  "artist": "The Tempos",
+  "slug": "034-the-tempos",
+  "genre": "R&B/Soul",
+  "energy": 5,
+  "era": "1960s",
+  "location": {
+    "origin": "Central District, Seattle, Washington (47.608, -122.2976). No biographical details, formation date, or membership roster have been located for an R&B/Soul group called 'The Tempos' in Seattle's Central District. The name 'The Tempos' in Seattle returns documentation for a different ensemble: a big band/swing group founded in 1958 by Boeing engineer Henry Fichtner, co-led by Dr. Vernon J. Harkness, formally named in fall 1963, performing dance music at functions across Washington State. This big band does not match the CSV's R&B/Soul genre, Central District neighborhood, or E=5 energy designation. The R&B/Soul Tempos exist behind the documented big band's archival shadow.",
+    "formative": "Central District, Seattle (1960s). The 1960s Central District R&B/Soul scene included Birdland (2203 E. Madison, razed 1965), Black and Tan Club, Golden Crown, Trojan Horse, District Tavern, and later venues served by KYAC radio (1250 AM, 1965-1981). The Dynamics (degree 27), Gallahads, Dave Lewis Combo, Kings of Soul, and other groups performed in this ecosystem. The Tempos would have existed within this same circuit. [NEEDS VERIFICATION -- specific venues, dates, and musical collaborations cannot be confirmed.]",
+    "career": "No career details documented for the R&B/Soul version of The Tempos. The CSV designates them as an R&B/Soul group active in the 1960s with E=5 energy and the 'local (or small labels)' designation, indicating performance within the Central District's musical ecosystem without major label affiliation. The group format (band, not solo artist) makes this the engine's first undocumented group at E=5. The name collision with the documented big band/swing Tempos means that searches for 'The Tempos Seattle' return the wrong ensemble, a documentation gap disguised as documentation."
+  },
+  "born": null,
+  "formed": null,
+  "died": null,
+  "labels": ["local (or small labels) -- CSV designation; no specific label identified for the R&B/Soul group. The parenthetical '(or small labels)' suggests uncertainty: possible self-released 45s, possible release on an unidentified small label, possible unrecorded live performances. The small-label landscape for 1960s Seattle R&B included Nite Owl, Penguin, and various vanity imprints. None can be confirmed for The Tempos."],
+  "members": [],
+  "associated_musicians": [
+    {"name": "Central District R&B/Soul scene (collective)", "role": "Scene participants -- the aggregate of R&B and soul musicians, vocalists, and instrumentalists performing in Central District venues during the 1960s", "note": "The Tempos cannot be linked to specific musicians. However, the Central District scene was compact enough that overlap between active groups was inevitable. The Gallahads' dispersal in the early 1960s seeded multiple subsequent groups (Dynamics, Viceroys, El Caminos, Statics, Counts, Soul Deacons, Boss Five). The Tempos' membership may have drawn from this same talent pool. [NEEDS VERIFICATION]"},
+    {"name": "The Dynamics (degree 27)", "role": "Contemporary group in same city and era (1959-1968)", "note": "The Dynamics operated on Seattle's teen-dance circuit and covered Central District R&B material (Dave Lewis compositions). If The Tempos played the club circuit, the two groups would have shared venues, audiences, and possibly personnel. [NEEDS VERIFICATION]"},
+    {"name": "Night Owls (degree 28)", "role": "Contemporary group, R&B/Soul, 1960s, same documentation tier", "note": "The Night Owls occupy a similar position in the engine: a named R&B/Soul group from the 1960s with minimal documentation. The two groups may represent the same stratum of the Central District scene -- bands active enough to be named in community memory but not documented in surviving archives. [NEEDS VERIFICATION]"},
+    {"name": "Dave Lewis", "role": "Scene anchor (Central District R&B figurehead)", "note": "Lewis was the Central District's most significant R&B musician from 1957 onward, house band at Birdland. Any R&B group performing in the CD during the 1960s would have existed in Lewis's musical orbit. [NEEDS VERIFICATION for direct connection]"},
+    {"name": "The Tempos (big band/swing -- DIFFERENT ENSEMBLE)", "role": "Name collision entity", "note": "The documented 'Tempos' in Seattle is a 16-piece big band/swing ensemble founded in 1958 by Boeing engineer Henry Fichtner, co-led by Dr. Vernon J. Harkness. Genre: big band. Context: Boeing social events, community dances. This is NOT the R&B/Soul group described by the CSV. The name collision means searches return the wrong band."}
+  ],
+  "former_members": [],
+  "theory_nodes": [
+    {
+      "concept": "The Shadow Name (artist-city pattern where a band or artist shares a name with a better-documented entity in the same city, causing searches to return results for the wrong ensemble; more insidious than the pure documentation gap because the researcher finds data, but it is data about a different band; the documented namesake casts a shadow over the undocumented group; common in 1960s music history where no centralized band-name registry existed)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/structure/the-shadow-name-pattern.md",
+      "examples": [
+        "The Tempos (degree 34) -- R&B/Soul group from Central District, 1960s, hidden behind a documented big band/swing ensemble (Boeing engineer Henry Fichtner, 1958) that shares the same name in the same city. Searches return the wrong band.",
+        "Contrast with The Unrecorded (degree 33, Larry English) -- pure documentation gap where searches return zero results. The Shadow Name returns results, but for the wrong entity. Gap vs. decoy.",
+        "The Tempos on Discogs -- at least four distinct entries (artist/190979 Pittsburgh doo-wop group, artist/390653, artist/1368905, others). Band names recycled freely in the 1960s with no centralized registry.",
+        "Contrast with The Dynamics (degree 27) -- well-documented group whose name is unique enough in context to avoid collision. The Dynamics' detailed discography and member histories create a documentation footprint that cannot be confused with another band.",
+        "Any era before the internet: multiple groups in different cities could use the same name simultaneously without awareness of each other. The Shadow Name is a structural feature of pre-digital music, not an accident."
+      ],
+      "description": "The Shadow Name is the thirty-fifth artist-city pattern in the Seattle 360 engine. It describes a band or artist whose name, when searched, returns documentation for a different entity in the same city. The Shadow Name goes beyond the pure documentation gap (degree 33) -- where searches return nothing -- into active misdirection, where searches return something false. The documented Tempos (big band, Boeing engineer, swing music, community dances) cast a shadow over the undocumented Tempos (R&B/Soul, Central District, 1960s clubs, E=5 energy). The researcher who finds the PNW Bands page for 'The Tempos' might conclude they have identified the CSV's band, when in fact they have identified a different ensemble entirely. The Shadow Name is the documentation gap's more insidious cousin: instead of absence, there is a decoy. The pattern is common in pre-digital music history because band names were not registered, trademarked, or centrally catalogued. Multiple groups in different genres, neighborhoods, and social contexts could adopt the same name without knowledge of each other.",
+      "genealogy": {
+        "ancestors": ["The Unrecorded (degree 33, Larry English) -- the pure documentation gap, where no results exist. The Shadow Name extends this: results exist, but for the wrong entity.", "The Foundation (degree 32, Luther Rabb) -- the structural support player documented through associations. The Shadow Name's R&B Tempos lack any associations that would distinguish them from the big band namesake.", "Proto-fusion laboratory (degree 27, The Dynamics) -- the first well-documented group in the engine. The Shadow Name is the first undocumented group behind a documented namesake.", "Documentation gap as data (degree 33) -- the principle that absence is a finding. The Shadow Name extends this: false presence is also a finding."],
+        "relationship": "The Shadow Name completes a documentation-state trilogy: The Export (degree 0, Jones) is correctly documented. The Unrecorded (degree 33, English) is absent from documentation. The Shadow Name (degree 34, The Tempos) is incorrectly documented -- the name returns data, but the data describes a different band. Three states: correct documentation, no documentation, wrong documentation. The engine now maps the full spectrum of archival accuracy."
+      }
+    },
+    {
+      "concept": "The ensemble blend (thirty-fifth acoustic element -- the specific timbral result of multiple instruments and voices combining in a small-group R&B/Soul performance; the sound that exists BETWEEN the individual instruments; how a horn section's brass integrates with a rhythm guitar's chop, how a bass line and kick drum become a single composite sound, how backing vocals merge into a unified harmonic texture; the acoustic signature of the band format, distinguishing group from solo at the physical level of sound waves)",
+      "level": "advanced",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/acoustics/the-ensemble-blend.md",
+      "examples": [
+        "The Tempos (degree 34) -- the ensemble blend is the R&B/Soul group's composite sound: horn section, rhythm section, vocals all integrating into a single sonic event. No individual instrument dominates; the blend IS the music.",
+        "Larry English (degree 33) -- 'the room tone': the ambient environment. The ensemble blend is what fills that environment -- the band's collective voice projecting into the room.",
+        "Luther Rabb (degree 32) -- 'the groove lock': the bass line as foundation. The ensemble blend is everything built on top of the groove lock -- the horns, guitar, keys, and vocals that create the full texture.",
+        "The Dynamics (degree 27) -- at Parker's in 1964, their ensemble blend was captured on the live album. The Tempos' ensemble blend was not captured because no recording exists. But the blend itself -- the composite sound of multiple R&B/Soul musicians performing as a unit -- would have been the same physical phenomenon.",
+        "Any R&B horn section: the blend of trumpet, saxophone, and trombone into a unified brass voice is one of the genre's signature sounds. Individual players contribute pitch and timbre; the blend creates something none of them produce alone."
+      ],
+      "description": "The ensemble blend is the thirty-fifth acoustic element in the Seattle 360 engine. It describes the specific timbral result of multiple instruments and voices combining in a small-group R&B/Soul performance -- the sound that exists between the individual instruments, where individual timbres merge into a composite texture. The ensemble blend is what distinguishes a group performance from a solo performance at the physical level of sound waves: more frequency content, more rhythmic complexity, more harmonic density, more spatial distribution of sound sources. In the Central District clubs of the 1960s, the ensemble blend would have been shaped by small-room acoustics, close audience proximity, smaller PA systems requiring tighter instrumental balance, and the R&B/Soul tradition's emphasis on horn-section precision and rhythm-section lock. The ensemble blend follows the room tone (degree 33) in the engine's acoustic progression: the room tone described the ambient environment of the venue; the ensemble blend describes the composite sound that fills that environment. After the room responds (33), the band creates a unified voice that is more than the sum of its parts (34).",
+      "genealogy": {
+        "ancestors": ["The room tone (degree 33, Larry English) -- the ambient venue environment. The ensemble blend is what fills the room -- the band's composite sound projecting into the space.", "The groove lock (degree 32, Luther Rabb) -- the bass as immovable foundation. The ensemble blend is everything that locks on top of the groove: the full-band composite.", "The mellow undertow (degree 31, Brenda Lee Eager) -- sub-surface warmth. The ensemble blend operates at the surface: the full timbral spectrum audible to the audience.", "Brass-section smear (degree 27, The Dynamics) -- a specific component of the ensemble blend. The Dynamics' brass section contributed to their ensemble blend; the element now encompasses the full-band composite, not just the brass."],
+        "relationship": "Thirty-five acoustic elements across thirty-five degrees. The ensemble blend returns the acoustic thread to group performance after two solo-focused degrees (groove lock at 32, room tone at 33). The progression groove lock (32) -> room tone (33) -> ensemble blend (34) traces the arc from individual foundation through ambient environment to collective sound. The post-brrit sequence (30-34) is now five elements deep, spanning the full range from solo bass to full-band composite."
+      }
+    },
+    {
+      "concept": "The unnamed ensemble (structural category for a group/band format where the collective identity exists but individual membership is unknown; the band is named, the members are not; extends the documentation gap from individual artists to collective entities; raises questions specific to the group format -- who played what instrument, who sang lead, who arranged the horns, when did members join or leave -- that cannot be answered when the ensemble's internal structure is undocumented)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/structure/the-unnamed-ensemble.md",
+      "examples": [
+        "The Tempos (degree 34) -- named R&B/Soul group from Central District, 1960s. The band existed as a collective entity, but individual members are not documented. The group identity survives; the individual identities do not.",
+        "Contrast with The Dynamics (degree 27) -- a fully documented ensemble. Jimmy Hanna, Larry Coryell, Marcus Doubleday, Ron Woods, the Afdem brothers, and others are all named, with instruments, years, and later careers tracked. The Dynamics demonstrate what the Tempos' documentation COULD have looked like.",
+        "Contrast with Larry English (degree 33) -- an unnamed individual. The Tempos are an unnamed ensemble. The documentation gap operates at both the individual and collective level.",
+        "The Night Owls (degree 28) -- another minimally documented group from the same era. Together with The Tempos, they establish that the unnamed ensemble is not a singleton but a recurring category."
+      ],
+      "description": "The unnamed ensemble is a structural category in the Seattle 360 engine for groups whose collective identity is documented (they appear in the CSV by name) but whose individual membership is not. This extends the documentation gap from individual artists (Larry English at degree 33) to collective entities. The unnamed ensemble raises questions that the unnamed individual does not: in a band, there are roles -- lead vocalist, rhythm guitarist, horn player, drummer -- and the interplay between these roles is what creates the band's sound. When the membership is unknown, these roles are undefined. The Tempos' horn arrangements, rhythm section feel, vocal style, and stage presence are all inaccessible because we do not know who played what. The group format's structural complexity makes the documentation gap deeper: more information is lost when a band is undocumented than when a solo artist is undocumented, because the internal organization -- who contributed what to the collective sound -- disappears along with the individual names.",
+      "genealogy": {
+        "ancestors": ["Proto-fusion laboratory (degree 27, The Dynamics) -- the engine's first fully documented group. The unnamed ensemble is its structural inverse: a group without documentation.", "The Unrecorded (degree 33, Larry English) -- the individual documentation gap. The unnamed ensemble extends the gap to collective entities.", "Documentation gap as data (degree 33) -- the principle that absence is a finding. Applied here at the group level: the absence of membership data is itself a finding about the documentation infrastructure's failure to record group identity."],
+        "relationship": "The unnamed ensemble is the group-format analogue of The Unrecorded. Where The Unrecorded describes an individual below the archival threshold, the unnamed ensemble describes a group below that threshold. The engine now maps documentation gaps at both the individual and collective level."
+      }
+    },
+    {
+      "concept": "Blue note -- the unison bend (thirty-fourth deployment; the blue note played simultaneously by multiple musicians who bend the pitch together; the slight differences in each player's intonation create a chorus effect around the blue note's target pitch; the collective form of the blue note, richer and more complex than any individual bend; structural opposite of the ghost bend -- the ghost bend was a solo inflection lost to time, the unison bend is a collective inflection amplified by multiple voices)",
+      "level": "intermediate",
+      "department": "music-theory",
+      "college_path": ".college/music/theory/harmony/blue-note-unison-bend.md",
+      "examples": [
+        "The Tempos (degree 34) -- the unison bend is the collective blue note of an R&B/Soul horn section, rhythm section, and vocal group all bending a pitch together. The ensemble's micro-tonal chorus is the unison bend's signature.",
+        "Larry English (degree 33) -- 'the ghost bend': the solo blue note that was never recorded. The unison bend is the opposite: a collective blue note whose power comes from multiple players synchronizing their inflection.",
+        "The Dynamics (degree 27) -- 'brass-section smear': a specific form of unison bend within the horn section. The unison bend generalizes this to the full ensemble.",
+        "Any R&B horn section hitting a riff together: the slight intonation differences between trumpet, sax, and trombone create a natural chorus that enriches the blue note beyond what any single player achieves.",
+        "Gospel choir bends: when a choir bends a note together, the dozens of slightly different pitches create the characteristic 'shimmer' of collective worship music. The unison bend is this same phenomenon at band scale."
+      ],
+      "description": "Thirty-fourth deployment of the blue note thread. The unison bend is the blue note played simultaneously by multiple musicians who bend the pitch together. When a horn section hits a note and bends it as a unit, the slight differences in each player's intonation create a chorus effect around the blue note's target pitch -- a richer, more complex micro-tonal inflection than any individual instrument can produce alone. The unison bend is structurally the opposite of the ghost bend (degree 33): the ghost bend was a solo blue note that was never recorded, defined by individual absence; the unison bend is a collective blue note defined by group presence. Thirty-four deployments across thirty-five degrees now span the full spectrum from individual to collective and from documented to undocumented. The unison bend represents the blue note's most powerful form -- the moment when individual expression synchronizes into collective force without losing the micro-tonal detail that makes each bend unique.",
+      "genealogy": {
+        "ancestors": ["Blue note -- all thirty-three prior deployments (degrees 0-33)", "Blue note -- ghost bend (degree 33, Larry English): the solo, unrecorded blue note. The unison bend is the collective, performed blue note -- structural opposite.", "Blue note -- brass-section smear (degree 27, The Dynamics): a specific horn-section bend. The unison bend generalizes the brass-section smear to the full ensemble.", "Blue note -- collective-soul (degree 19, Fly Moon Royale): collective soul vocal bending. The unison bend extends this to instrumental + vocal ensemble."],
+        "relationship": "Thirty-four deployments across thirty-five degrees. The unison bend restores the blue note to collective performance after the ghost bend's radical individualism and absence. Ghost bend (33) = one player, no recording, maximum absence. Unison bend (34) = multiple players, maximum presence. The thread now oscillates between solitary and collective, documented and undocumented."
+      }
+    }
+  ],
+  "cross_references": ["S36-000", "S36-003", "S36-004", "S36-005", "S36-027", "S36-028", "S36-030", "S36-032", "S36-033"],
+  "seattle_connection": "CENTRAL DISTRICT -- third consecutive Central District degree (32-33-34). Eight CD degrees in the first 35 (0, 3, 4, 5, 30, 32, 33, 34). THE SHADOW NAME as 35th artist-city pattern -- the band whose name returns results for a different ensemble (documented big band/swing Tempos vs. undocumented R&B/Soul Tempos). THE ENSEMBLE BLEND as 35th acoustic element -- the composite timbral result of multiple instruments and voices in small-group R&B/Soul performance. THE UNISON BEND as 34th blue note deployment -- the collective blue note, structural opposite of the ghost bend (33). THE UNNAMED ENSEMBLE -- group format where collective identity exists but individual membership is unknown. E=5 THIRD CONSECUTIVE (degrees 32-33-34) -- the engine's first three-degree maximum-energy streak. Distribution 2:13:6:11:3. Three E=5 modes: personal tidal (32), scene-cumulative tidal (33), collective tidal (34). R&B/SOUL at Genre Stage 16 -- compound form restored after two-degree pure R&B phase (32-33). LOCAL LABEL continues (second consecutive, degrees 33-34). GROUP FORMAT returns after five solo degrees (29-33). GENDER: 6:29 ratio (~17.1%). Group (male-led assumed per era conventions). No change in women count.",
+  "carry_forward": {
+    "theory_genealogy": [
+      "The Shadow Name (artist-city pattern where a band name returns documentation for a different ensemble in the same city; the documentation gap disguised as documentation; more insidious than pure absence)",
+      "The ensemble blend (thirty-fifth acoustic element; composite timbral result of multiple instruments and voices in small-group R&B/Soul; the sound between the instruments; follows room tone -- after the room responds, the band creates a unified voice)",
+      "The unnamed ensemble (group format where collective identity is known but individual membership is not; extends documentation gap from individuals to collectives)",
+      "Blue note -- the unison bend (thirty-fourth deployment; collective blue note played by multiple musicians simultaneously; structural opposite of ghost bend; chorus effect from slight intonation differences)",
+      "All carry-forward items from degrees 0-33"
+    ],
+    "engine_sequencing": [
+      "E=5 THIRD CONSECUTIVE: Degrees 32-33-34. Distribution 2:13:6:11:3. Three modes: personal tidal (32), scene-cumulative tidal (33), collective tidal (34). Track whether E=5 continues at degree 35.",
+      "GENRE Stage 16 at degree 34: R&B/Soul. Compound form restored after pure R&B x2 (32-33). Track at degree 35.",
+      "ENSEMBLE BLEND opens collective-acoustic phase: group sound as composite. Track element 36 at degree 35.",
+      "LOCAL LABEL x2 (degrees 33-34): second consecutive local designation. Track at degree 35.",
+      "CENTRAL DISTRICT x3 (degrees 32-33-34): third consecutive CD degree. Eight CD degrees total. Track at degree 35.",
+      "GROUP FORMAT returns: The Tempos after five solo degrees (29-33). Track format at degree 35.",
+      "NAME COLLISION established: first instance at degree 34. Apply to future degrees where band names return wrong results.",
+      "All engine sequencing items from degrees 0-33"
+    ],
+    "cultural_patterns": [
+      "Artist-city taxonomy: THIRTY-FIVE named patterns (adding The Shadow Name at degree 34). Classify every degree.",
+      "Gender ratio: 6:29 (women:men/male-led). The Tempos = group (male-led assumed). ~17.1%. Track.",
+      "CENTRAL DISTRICT CLUSTER: 8 degrees (0, 3, 4, 5, 30, 32, 33, 34). Densest geographic cluster.",
+      "GROUP FORMAT: 6 group/band degrees (18, 21, 25, 27, 28, 34) in 35 total. ~17% group rate.",
+      "NAME COLLISION as archival phenomenon: documented entity shadows undocumented entity with same name. First instance at degree 34.",
+      "E=5 STREAK: 3 consecutive (32-33-34). All Central District. Three modes. Track for continuation.",
+      "All cultural pattern items from degrees 0-33"
+    ]
+  }
+}
