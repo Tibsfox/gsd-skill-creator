@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 48&deg; &mdash; Sera Cahoone &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3E2723);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>048 &mdash; Sera Cahoone</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Fourth Consecutive Folk-Adjacent &mdash; The Drummer Who Found Her Voice</h3>
+      <p>
+        Sera Cahoone at degree 48&deg; extends the folk run to four consecutive degrees
+        (45&ndash;46&ndash;47&ndash;48), the longest genre-family streak in engine history.
+        But the structural event is the instrument transition: Cahoone was a <strong>drummer</strong>
+        before she was a singer-songwriter. Drums for <strong>Carissa&rsquo;s Wierd</strong> until
+        2003. Session drums on <strong>Band of Horses&rsquo;</strong> Gold-certified debut. Then she
+        picked up a guitar, fought through stage fright, sent a demo to KEXP&rsquo;s John Richards,
+        and slowly bloomed into one of Seattle&rsquo;s most respected folk voices. Born August 4, 1975,
+        Littleton, Colorado. Columbine High School graduate. Dynamite salesman&rsquo;s daughter.
+        Moved to Seattle in 1998. Sub Pop artist. <strong>Ballard</strong> enters the engine.
+        The Tractor Tavern as home venue. The quiet folk zone deepens.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">48&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Sera Cahoone</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="neighborhood-badge">Ballard</span>
+          <span class="first-badge">Ballard Enters</span>
+          <span class="first-badge">First Instrument Transition</span>
+          <span class="first-badge">Carissa&rsquo;s Wierd Genealogy</span>
+          <span class="first-badge">4th Consec. Folk-Adjacent</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>A Dynamite Salesman&rsquo;s Daughter Who Drummed Her Way to Song</h2>
+          <p>
+            Sera Cahoone was born <strong>August 4, 1975</strong>. She grew up in
+            <strong>Littleton, Colorado</strong>, in the foothills southwest of Denver.
+            Her father, <strong>Bill Cahoone</strong>, was a Rocky Mountain dynamite salesman.
+            Her mother, <strong>Judy Cahoone</strong> (n&eacute;e Ahrendts), was a business
+            executive. Sera was raised primarily by her mother. She has a sister, <strong>Kal
+            Cahoone</strong>, and a brother, <strong>Nathan Cahoone</strong> &mdash; both musicians.
+          </p>
+          <p>
+            Cahoone graduated from <strong>Columbine High School</strong> in Littleton. She began
+            drumming at <strong>age twelve</strong> to combat <strong>anxiety</strong> &mdash;
+            a condition she has discussed openly across her career. Her first stage performance
+            was at <strong>Ziggie&rsquo;s Saloon</strong> in North Denver during a blues open-mic
+            night, while she was still a teenager. In <strong>1998</strong>, she moved to Seattle
+            when the snowboarding shop where she worked opened a Washington location. She quit
+            retail after two years, worked in a coffee shop, and began playing music full-time.
+          </p>
+          <blockquote>
+            &ldquo;I remember one day I turned on TV and I saw my principal. It was just a surreal,
+            crazy thing. I felt horrified of course, but also the fact that I was so far away and
+            there&rsquo;s my whole hometown on TV just made it worse.&rdquo; &mdash; Sera Cahoone,
+            on seeing the Columbine shooting from Seattle
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Carissa&rsquo;s Wierd Genealogy</h2>
+          <p>
+            After arriving in Seattle, Cahoone became the <strong>drummer for Carissa&rsquo;s
+            Wierd</strong>, the slow, sad, string-laden indie rock band founded by
+            <strong>Mat Brooke</strong> and <strong>Jenn Champion</strong>. The band played their
+            final shows at the <strong>Crocodile Cafe</strong> in <strong>November 2003</strong>.
+            From that single band emerged three major subsequent projects:
+          </p>
+          <ul style="margin: 1rem 0; padding-left: 1.5rem; font-size: 0.92rem; line-height: 1.6;">
+            <li><strong>Ben Bridwell</strong> &mdash; formed <strong>Band of Horses</strong> (Sub Pop debut 2006, RIAA Gold)</li>
+            <li><strong>Mat Brooke</strong> &mdash; formed <strong>Grand Archives</strong> (Sub Pop, 2008)</li>
+            <li><strong>Sera Cahoone</strong> &mdash; solo singer-songwriter (Sub Pop, 2008)</li>
+          </ul>
+          <p>
+            Cahoone played <strong>session drums</strong> on Band of Horses&rsquo; debut album
+            <em>Everything All The Time</em> (2006, Sub Pop) &mdash; the record that became the
+            band&rsquo;s commercial breakthrough. She received a <strong>Gold Record</strong> in
+            2019 for her contributions. The Carissa&rsquo;s Wierd genealogy parallels the Pedro
+            the Lion triangle (degrees 45&ndash;47): a single band producing multiple solo careers
+            that scatter across the Seattle scene.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Sera Cahoone</h4>
+              <div class="disco-years">2005 &middot; Self-released (Sub Pop distro)</div>
+              <p>
+                Debut album. Cahoone played guitar and drums herself.
+                Sent demo to KEXP&rsquo;s John Richards, who played it on air.
+                Praised by KEXP and NPR. Career-launching moment.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Only as the Day Is Long</h4>
+              <div class="disco-years">2008 &middot; Sub Pop (SP0759)</div>
+              <p>
+                Sub Pop debut. Acoustic guitar, pedal steel, understated vocals.
+                NPR Tiny Desk Concert (July 10, 2008). Established the
+                Americana-folk voice that defines Cahoone&rsquo;s solo identity.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Deer Creek Canyon</h4>
+              <div class="disco-years">2012 &middot; Sub Pop (SP1005)</div>
+              <p>
+                Named for the canyon in Littleton, CO where Cahoone grew up.
+                Produced by Thom Monahan. Recorded at Bear Creek Studios,
+                Woodinville, WA. The album where Colorado heritage meets
+                Seattle present. Her mother still lives on Deer Creek Canyon.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>From Where I Started</h4>
+              <div class="disco-years">2017 &middot; Lady Muleskinner</div>
+              <p>
+                Co-produced with John Morgan Askew at Flora Recording,
+                Portland, OR. NPR First Listen. Most personal album.
+                Jason Kardong on pedal steel, Jeff Fielder on guitar,
+                Annalisa Tornfelt on fiddle.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>The Flora String Sessions</h4>
+              <div class="disco-years">2018 &middot; Lady Muleskinner</div>
+              <p>
+                Reimagined songs with new string arrangements by Alex Guy
+                (Led to Sea). Guitar, violin, viola, cello. Career songs
+                stripped back and rebuilt.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Slow Bloom: From Drums to Voice</h2>
+          <p>
+            Cahoone&rsquo;s transition from drummer to singer-songwriter was <strong>gradual and
+            anxiety-ridden</strong>. She had been writing songs privately but was terrified of
+            performing them. She described herself as &ldquo;a super shy kid&rdquo; who found it
+            agonizing to have people hear her voice and lyrics. She forced herself through open mic
+            nights to overcome the fear. The process took years. There was no breakthrough moment
+            &mdash; no viral hit, no magazine cover, no festival-slot explosion. The career is the
+            sum of twenty-five years of showing up.
+          </p>
+          <p>
+            In <strong>July 2013</strong>, Cahoone and bandmate <strong>Jason Kardong</strong>
+            became the <strong>first musicians to perform on the rooftop of Seattle&rsquo;s Space
+            Needle</strong>, as part of Sub Pop&rsquo;s Silver Jubilee Celebration, broadcast live
+            on KEXP. The quiet folk singer from Ballard played on the same rooftop where
+            <strong>Mudhoney</strong> played that same day. Sub Pop&rsquo;s range: grunge and
+            folk on the same landmark.
+          </p>
+          <p>
+            By 2023, Cahoone had transitioned into a <strong>producer role</strong>, producing
+            <strong>Margo Cilker&rsquo;s</strong> sophomore album <em>Valley of Heart&rsquo;s
+            Delight</em> &mdash; also playing drums and singing backing vocals. The drummer became
+            a songwriter who became a producer: three career stages, each building on the last.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Held Rest</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                49th acoustic element. The silence within a song that functions
+                as a rhythmic event rather than an absence. When a drummer
+                leaves a beat empty, the space becomes part of the groove.
+                Cahoone&rsquo;s spare arrangements are built on held rests
+                &mdash; the songwriter who hears silence the way a drummer
+                hears rests. Extends the folk-vocal taxonomy to four elements:
+                murmur (45), confessional (46), parable tone (47), held rest (48).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Slow Bloom</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                49th artist-city pattern. The career that develops gradually
+                over many years without a single breakthrough moment. No
+                viral hit, no explosion &mdash; just steady work, word of
+                mouth, and incremental accumulation of respect. Cahoone
+                moved to Seattle in 1998, drummed for others until 2006,
+                self-released a debut in 2005, signed to Sub Pop in 2007,
+                transitioned to producing by 2023. Twenty-five years of
+                slow growth. The opposite of the supernova (37).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Drummer&rsquo;s Ghost</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                48th blue note deployment. The rhythmic muscle memory of a
+                musician who has changed instruments but cannot leave their
+                first instrument behind. Cahoone writes on guitar but hears
+                drums. Her pacing, vocal phrasing, and spare arrangements
+                carry the pulse of a rhythm section that isn&rsquo;t there.
+                Four consecutive folk-adjacent blue notes mapping absence:
+                held breath (45), crack (46), suspended resolve (47),
+                drummer&rsquo;s ghost (48).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Four Consecutive Folk-Adjacent</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48). Longest
+                genre-family run in engine history. Approaches the swallow
+                quintet&rsquo;s five-consecutive record. Four production
+                paradigms: fingerpicking (Jurado), punk-folk (Votolato),
+                concept-album indie (Bazan), Americana-folk (Cahoone).
+                Same folk root, four distinct sonic architectures.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=2 Extends Lead</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                15th E=2 deployment. Distribution: 2:15:9:12:10:2. E=2
+                widens its lead. The folk zone (45&ndash;48) is dominated
+                by low energy: E=2, E=3, E=3, E=2. Four consecutive degrees
+                below E=4. The musician&rsquo;s musician: known to those
+                who pay attention, invisible to the general public. NPR
+                Tiny Desk, KEXP premieres, Gold Record &mdash; but no
+                mainstream commercial breakthrough.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">45&deg;</span> Damien Jurado &mdash; <strong>Sub Pop folk siblings.</strong> Both folk-adjacent singer-songwriters on Sub Pop. Both E=2. Both championed by KEXP. Jurado and Cahoone bookend the four-degree folk run at the same energy level. Whispered fingerpicking (45) and held-rest Americana (48).</li>
+            <li><span class="ref-degree">46&deg;</span> Rocky Votolato &mdash; <strong>The Ballard connection.</strong> Both use the Tractor Tavern as a home venue. Both are Draw artists who relocated to Seattle. Votolato&rsquo;s punk-folk confession and Cahoone&rsquo;s Americana-folk share the same roots-music infrastructure: Tractor Tavern, Conor Byrne, KEXP.</li>
+            <li><span class="ref-degree">47&deg;</span> Pedro the Lion &mdash; <strong>Carissa&rsquo;s Wierd intersection.</strong> Cahoone drummed for Carissa&rsquo;s Wierd alongside Ben Bridwell, who formed Band of Horses on Sub Pop. Pedro the Lion&rsquo;s Casey Foubert produced Votolato. The Carissa&rsquo;s Wierd genealogy intersects the Pedro the Lion triangle. Degrees 45&ndash;48 are socially interconnected through shared band memberships, labels, and venues.</li>
+            <li><span class="ref-degree">44&deg;</span> Chong the Nomad &mdash; <strong>Five-degree arc.</strong> Electronic (44) to folk whisper (45) to folk confession (46) to indie-folk parable (47) to folk held-rest (48). Five consecutive independently produced, voice-forward degrees. The grain, the murmur, the confessional, the parable tone, the held rest.</li>
+            <li><span class="ref-degree">43&deg;</span> Ann Wilson &mdash; <strong>The drummer connection.</strong> Wilson (Heart, E=6) and Cahoone (Folk, E=2): both women in the engine, separated by five degrees and four energy levels. Stadium rock to Tractor Tavern folk. The full spectrum.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>Infrastructure arc.</strong> Mercury orchestras (0) through Sub Pop (45, 48) through Barsuk (46) through Jade Tree (47) through living rooms (47) through the Tractor Tavern (48, capacity ~400). Infrastructure continues to miniaturize.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Aug 4, 1975</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Littleton, CO</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">High School</span>
+            <span class="stat-value">Columbine</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">To Seattle</span>
+            <span class="stat-value">1998</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Father</span>
+            <span class="stat-value">Dynamite salesman</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">First Instrument</span>
+            <span class="stat-value">Drums (age 12)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Siblings</span>
+            <span class="stat-value">Kal &amp; Nathan (musicians)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">48 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">29</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#49 Slow Bloom</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#49 Held Rest</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#48 Drummer&rsquo;s Ghost</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Band History</h4>
+          <div class="stat-row">
+            <span class="stat-label">1998&ndash;2003</span>
+            <span class="stat-value">Carissa&rsquo;s Wierd (drums)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2006</span>
+            <span class="stat-value">Band of Horses (session)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2005&ndash;present</span>
+            <span class="stat-value">Solo career</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2023</span>
+            <span class="stat-value">Producer (Margo Cilker)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Label History</h4>
+          <div class="stat-row">
+            <span class="stat-label">2005</span>
+            <span class="stat-value">Self-released (Sub Pop distro)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2008&ndash;2012</span>
+            <span class="stat-value">Sub Pop Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2017&ndash;2018</span>
+            <span class="stat-value">Lady Muleskinner</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Carissa&rsquo;s Wierd Tree</h4>
+          <div class="stat-row">
+            <span class="stat-label">Ben Bridwell</span>
+            <span class="stat-value">Band of Horses</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Mat Brooke</span>
+            <span class="stat-value">Grand Archives</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sera Cahoone</span>
+            <span class="stat-value">Solo (this degree)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jenn Champion</span>
+            <span class="stat-value">Solo career</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Ballard Trifecta</h4>
+          <div class="stat-row">
+            <span class="stat-label">Tractor Tavern</span>
+            <span class="stat-value">~400 cap, home venue</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Conor Byrne</span>
+            <span class="stat-value">Stepping stone</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sunset Tavern</span>
+            <span class="stat-value">Stepping stone</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Milestones</h4>
+          <div class="stat-row">
+            <span class="stat-label">NPR Tiny Desk</span>
+            <span class="stat-value">July 10, 2008</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Space Needle</span>
+            <span class="stat-value">July 11, 2013</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gold Record</span>
+            <span class="stat-value">2019 (Band of Horses)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 48</span>
+            <span class="stat-value">2:15:9:12:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2 Mode</span>
+            <span class="stat-value">15th (extends lead)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk-adjacent</span>
+            <span class="stat-value">4 consec. (45&ndash;48)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Women</span>
+            <span class="stat-value">11 / 49 (~22.4%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 48 of 360 &mdash; Sera Cahoone &mdash;
+        Folk &mdash; Sub Pop &mdash;
+        Ballard &mdash;
+        Ballard Enters &mdash; First Instrument Transition &mdash; Carissa&rsquo;s Wierd Genealogy &mdash; 4th Consecutive Folk-Adjacent
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to the
+        Seattle metropolitan area, on the ancestral territory of the Duwamish Tribal Organization
+        (duwamishtribe.org), the Muckleshoot Indian Tribe, and related Coast Salish and
+        Southern Lushootseed-speaking peoples. Ballard sits on Duwamish land. The Duwamish
+        people fished at what is now the Ballard Locks and along Salmon Bay for thousands of
+        years before European settlement.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
