@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Degree 49: Fox Sparrow — The Ballad
+       5th consecutive Passerellidae. The fox in the sparrow.
+       Sooty form (PNW). Rich melodious song. Double-scratch forager.
+       Ink on parchment. Fibonacci proportions in tail/body ratio. -->
+  <style>
+    .ink { fill: none; stroke: #2a2a2a; stroke-linecap: round; stroke-linejoin: round; }
+    .ink-thin { stroke-width: 1.2; }
+    .ink-med { stroke-width: 2; }
+    .ink-bold { stroke-width: 3; }
+    .wash { fill: none; stroke: #c75b3a; stroke-width: 2; opacity: 0.3; }
+    .wash-fill { fill: #c75b3a; opacity: 0.08; }
+    .splash { fill: #e89848; opacity: 0.06; }
+    .splash-forest { fill: #2d5a3a; opacity: 0.04; }
+  </style>
+
+  <!-- Watercolor splashes — forest thicket feel -->
+  <ellipse class="splash" cx="200" cy="200" rx="140" ry="100"/>
+  <ellipse class="splash-forest" cx="130" cy="260" rx="80" ry="60"/>
+  <ellipse class="splash-forest" cx="280" cy="180" rx="60" ry="80"/>
+
+  <!-- Thicket branches — habitat suggestion -->
+  <path class="ink ink-thin" d="M 60,120 Q 100,140 140,130 Q 180,120 200,135" style="opacity:0.25;"/>
+  <path class="ink ink-thin" d="M 250,100 Q 280,120 310,110 Q 340,105 360,115" style="opacity:0.2;"/>
+  <path class="ink ink-thin" d="M 80,150 Q 110,160 130,150" style="opacity:0.15;"/>
+
+  <!-- Ground leaf litter — double-scratch zone -->
+  <path class="ink ink-thin" d="M 100,310 Q 115,305 130,310 Q 140,308 150,312" style="opacity:0.3;"/>
+  <path class="ink ink-thin" d="M 170,315 Q 185,310 200,315 Q 210,312 225,316" style="opacity:0.25;"/>
+  <path class="ink ink-thin" d="M 240,312 Q 255,308 270,313 Q 280,310 300,314" style="opacity:0.2;"/>
+
+  <!-- Fox Sparrow — perched, singing, the ballad -->
+  <!-- Tail — long, fox-rufous, held at 45° angle (phi ratio to body) -->
+  <path class="ink ink-bold" d="M 165,230 Q 140,255 120,280 Q 110,295 105,305"/>
+  <path class="ink ink-med" d="M 168,232 Q 145,258 128,282 Q 120,293 115,300"/>
+  <!-- Fox-orange wash on tail — the fox in the sparrow -->
+  <path class="wash" d="M 165,230 Q 140,255 120,280 Q 110,295 105,305" style="stroke-width:6; opacity:0.2;"/>
+
+  <!-- Body — round, hefty sparrow build -->
+  <path class="ink ink-bold" d="M 175,195 Q 195,175 220,180 Q 245,190 248,210 Q 245,235 225,245 Q 200,250 180,240 Q 165,225 170,205 Z"/>
+
+  <!-- Breast streaks — the heavy chevron markings -->
+  <path class="ink ink-thin" d="M 200,210 L 195,220 L 205,220" style="opacity:0.4;"/>
+  <path class="ink ink-thin" d="M 210,215 L 205,225 L 215,225" style="opacity:0.35;"/>
+  <path class="ink ink-thin" d="M 195,225 L 190,235 L 200,235" style="opacity:0.3;"/>
+  <path class="ink ink-thin" d="M 215,222 L 210,232 L 220,232" style="opacity:0.25;"/>
+
+  <!-- Wing fold -->
+  <path class="ink ink-med" d="M 225,200 Q 240,210 245,225 Q 242,235 235,240"/>
+
+  <!-- Head -->
+  <ellipse class="ink ink-med" cx="185" cy="185" rx="18" ry="15"/>
+
+  <!-- Eye — bright, alert -->
+  <circle cx="180" cy="182" r="3" fill="#2a2a2a"/>
+  <circle cx="179" cy="181" r="1" fill="white"/>
+
+  <!-- Beak — conical, seed-crushing, open (singing the ballad) -->
+  <path class="ink ink-bold" d="M 167,182 L 150,178"/>
+  <path class="ink ink-med" d="M 167,186 L 152,184"/>
+
+  <!-- Song — the ballad radiating from open beak -->
+  <!-- Sine wave representing the rich melodious song -->
+  <path class="ink ink-thin" d="M 148,180 Q 138,172 128,180 Q 118,188 108,180 Q 98,172 88,180" style="opacity:0.3;"/>
+  <path class="ink ink-thin" d="M 148,176 Q 135,168 122,176 Q 109,184 96,176" style="opacity:0.2;"/>
+
+  <!-- Feet — gripping branch -->
+  <path class="ink ink-med" d="M 200,248 L 195,270 L 185,275"/>
+  <path class="ink ink-thin" d="M 195,270 L 200,278"/>
+  <path class="ink ink-thin" d="M 195,270 L 190,280"/>
+  <path class="ink ink-med" d="M 215,246 L 220,268 L 228,273"/>
+  <path class="ink ink-thin" d="M 220,268 L 215,276"/>
+
+  <!-- Branch they're perched on -->
+  <path class="ink ink-med" d="M 140,272 Q 180,268 220,270 Q 260,272 300,265" style="opacity:0.5;"/>
+
+  <!-- Scattered leaves being kicked backward — double-scratch behavior -->
+  <path class="ink ink-thin" d="M 230,290 Q 240,285 245,290" style="opacity:0.2; fill:#5c4033; fill-opacity:0.06;"/>
+  <path class="ink ink-thin" d="M 160,295 Q 165,288 172,293" style="opacity:0.2; fill:#5c4033; fill-opacity:0.06;"/>
+
+  <!-- Fox-orange wash on breast center — the warm rufous -->
+  <ellipse class="wash-fill" cx="205" cy="220" rx="20" ry="15"/>
+
+  <!-- Degree label -->
+  <text x="200" y="355" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#8a8884">49° — Fox Sparrow</text>
+  <text x="200" y="371" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#8a8884" font-style="italic">the ballad</text>
+</svg>

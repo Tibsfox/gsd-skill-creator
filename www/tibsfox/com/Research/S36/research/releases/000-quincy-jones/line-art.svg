@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Degree 0: Quincy Jones — The Origin Point
+       Line art seed. Ink on parchment aesthetic.
+       Future passes refine and expand. -->
+  <style>
+    .ink { fill: none; stroke: #2a2a2a; stroke-linecap: round; stroke-linejoin: round; }
+    .ink-thin { stroke-width: 1.2; }
+    .ink-med { stroke-width: 2; }
+    .ink-bold { stroke-width: 3; }
+    .wash { fill: none; stroke: #c75b3a; stroke-width: 1.5; opacity: 0.25; }
+    .splash { fill: #e89848; opacity: 0.06; }
+    .splash-cool { fill: #1e6ca0; opacity: 0.05; }
+  </style>
+
+  <!-- Watercolor splashes -->
+  <ellipse class="splash" cx="200" cy="180" rx="100" ry="80"/>
+  <ellipse class="splash-cool" cx="160" cy="250" rx="70" ry="50"/>
+
+  <!-- Trumpet — Quincy's first instrument, the Seattle origin -->
+  <!-- Bell -->
+  <path class="ink ink-bold" d="M 280,160 Q 300,140 310,150 Q 320,170 310,190 Q 300,200 280,190"/>
+
+  <!-- Tube body -->
+  <path class="ink ink-med" d="M 280,175 L 180,175"/>
+
+  <!-- Valves -->
+  <rect class="ink ink-med" x="210" y="155" width="10" height="20" rx="3"/>
+  <rect class="ink ink-med" x="230" y="155" width="10" height="20" rx="3"/>
+  <rect class="ink ink-med" x="250" y="155" width="10" height="20" rx="3"/>
+  <line class="ink ink-thin" x1="215" y1="155" x2="215" y2="142"/>
+  <line class="ink ink-thin" x1="235" y1="155" x2="235" y2="145"/>
+  <line class="ink ink-thin" x1="255" y1="155" x2="255" y2="148"/>
+
+  <!-- Mouthpiece -->
+  <path class="ink ink-med" d="M 180,175 Q 165,175 160,172 Q 155,168 150,170"/>
+
+  <!-- Music staff lines radiating from bell — structured silence -->
+  <line class="ink ink-thin" x1="310" y1="155" x2="360" y2="145" style="opacity:0.3;"/>
+  <line class="ink ink-thin" x1="315" y1="165" x2="365" y2="158" style="opacity:0.25;"/>
+  <line class="ink ink-thin" x1="315" y1="175" x2="365" y2="170" style="opacity:0.2;"/>
+  <line class="ink ink-thin" x1="315" y1="185" x2="365" y2="182" style="opacity:0.25;"/>
+  <line class="ink ink-thin" x1="310" y1="195" x2="360" y2="195" style="opacity:0.3;"/>
+
+  <!-- Notes floating -->
+  <text x="340" y="152" font-family="Georgia, serif" font-size="14" fill="#2a2a2a" opacity="0.3">&#9834;</text>
+  <text x="355" y="175" font-family="Georgia, serif" font-size="11" fill="#2a2a2a" opacity="0.2">&#9835;</text>
+
+  <!-- Fox-orange wash on bell -->
+  <path class="wash" d="M 280,160 Q 300,140 310,150 Q 320,170 310,190 Q 300,200 280,190" style="stroke-width:4;"/>
+
+  <!-- Conductor's baton below — the arranger -->
+  <line class="ink ink-thin" x1="140" y1="230" x2="260" y2="260" style="opacity:0.4;"/>
+  <circle cx="140" cy="230" r="3" fill="#2a2a2a" opacity="0.3"/>
+
+  <!-- Degree label -->
+  <text x="200" y="340" text-anchor="middle" font-family="Georgia, serif" font-size="12" fill="#8a8884">0° — Quincy Jones</text>
+  <text x="200" y="356" text-anchor="middle" font-family="Georgia, serif" font-size="9" fill="#8a8884" font-style="italic">the origin point</text>
+</svg>
