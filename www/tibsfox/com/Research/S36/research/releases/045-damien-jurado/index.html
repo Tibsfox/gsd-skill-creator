@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 45&deg; &mdash; Damien Jurado &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1B5E20;
+      color: #C8E6C9;
+      border: 1px solid #2E7D32;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .first-banner {
+      background: linear-gradient(135deg, #3E2723, #4E342E);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .first-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .first-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>045 &mdash; Damien Jurado</span>
+    </nav>
+
+    <!-- First Folk Genre Banner -->
+    <div class="first-banner">
+      <h3>First Folk Genre &mdash; The Engine Reaches Its Quietest Register</h3>
+      <p>
+        Folk at degree 45&deg; is the engine&rsquo;s first folk-primary genre stage
+        (Genre Stage 27). E=2 returns after a 31-degree absence &mdash; the longest gap
+        for any energy level. First Sub Pop artist. First Secretly Canadian artist.
+        <strong>Damien Jurado</strong> &mdash; born 1972, Seattle. 22+ studio albums across
+        30+ years. Casa Recordings cassettes to Sub Pop to Secretly Canadian to Maraqopa Records.
+        Nick Drake comparisons since 1997. The Maraqopa trilogy. Richard Swift at National Freedom.
+        The murmur. The held breath. The quiet lifer. After the digital threshold at degree 44,
+        the engine returns to one voice and one guitar.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">45&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Damien Jurado</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Sub Pop / Secretly Canadian</span>
+          <span class="neighborhood-badge">Burien to Seattle</span>
+          <span class="first-badge">First Folk</span>
+          <span class="first-badge">First Sub Pop</span>
+          <span class="first-badge">E=2 Returns (31-degree gap)</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>A Vessel for Storytelling</h2>
+          <p>
+            Damien Jurado is <strong>Damien Troy Jurado</strong> &mdash; born
+            <strong>November 12, 1972</strong> in Seattle, Washington. His childhood
+            was itinerant: Houston, Texas, where he discovered <strong>punk rock</strong>
+            and <strong>skateboarding</strong> around age ten; the <strong>Olympic Peninsula
+            coast</strong>, a small timber town of 8,000 people where music arrived by
+            mail order and fanzine; and finally Seattle, where the family settled in
+            <strong>the fall of 1988</strong>. He met <strong>David Bazan</strong>
+            (future leader of Pedro the Lion) in high school. They played in bands
+            together &mdash; The Guilty, Linus, Coolidge &mdash; before each launched
+            a solo career.
+          </p>
+          <p>
+            Before music, Jurado wanted to be a <strong>visual artist</strong>. He
+            painted and drew from middle school until Sub Pop signed him at age 22.
+            The visual training persists: his songs are scenes, not arguments. Each
+            track is a portrait, a landscape, a room. He started making
+            <strong>lo-fi folk cassettes</strong> on his own label,
+            <strong>Casa Recordings</strong> (founded 1995 with Eben Haase), gaining
+            a cult following that reached <strong>Jeremy Enigk</strong> of
+            <strong>Sunny Day Real Estate</strong> through a recreational baseball team.
+            Enigk passed the demos to Sub Pop. The rest is thirty years of quiet,
+            relentless work.
+          </p>
+          <blockquote>
+            &ldquo;He doesn&rsquo;t sing as much as he emotes, but when this young talent
+            spins his altruistic tales of unrequited love lost and found, depression
+            doesn&rsquo;t sound any sweeter than this.&rdquo;
+            &mdash; Times Colonist, on <em>Rehearsals for Departure</em>
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Waters Ave S.</h4>
+              <div class="disco-years">1997 &middot; Sub Pop</div>
+              <p>
+                Debut. Produced by Steve Fisk. 13 songs. &ldquo;A tentative but
+                thoroughly charming debut&rdquo; (Trouser Press). Sub Pop&rsquo;s
+                shift from grunge to folk begins here.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Rehearsals for Departure</h4>
+              <div class="disco-years">1999 &middot; Sub Pop</div>
+              <p>
+                Produced by Ken Stringfellow. &ldquo;Uncanny reminders of the late
+                Nick Drake&rdquo; (The Guardian). The voice arrives in full.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Ghost of David</h4>
+              <div class="disco-years">2000 &middot; Sub Pop</div>
+              <p>
+                Bleakest, most personal record. Found-sound collage elements from
+                <em>Postcards and Audio Letters</em> bleed in. Darker, more alien.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Where Shall You Take Me?</h4>
+              <div class="disco-years">2003 &middot; Secretly Canadian</div>
+              <p>
+                First Secretly Canadian release. Return to folk ballads.
+                Begins a 15-year partnership with the Bloomington, Indiana label.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Saint Bartlett</h4>
+              <div class="disco-years">2010 &middot; Secretly Canadian</div>
+              <p>
+                First Richard Swift production. The collaboration that
+                transforms Jurado&rsquo;s sound. Live-to-tape at National Freedom.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Maraqopa</h4>
+              <div class="disco-years">2012 &middot; Secretly Canadian</div>
+              <p>
+                <strong>Maraqopa trilogy, part 1.</strong> Protagonist enters a
+                visionary space. Car accident. Swift&rsquo;s production breathes.
+                &ldquo;Expand and retract like a great beast&rsquo;s breath.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Brothers &amp; Sisters of the Eternal Son</h4>
+              <div class="disco-years">2014 &middot; Secretly Canadian</div>
+              <p>
+                <strong>Maraqopa trilogy, part 2.</strong> The car accident propels
+                deeper into Maraqopa. Spiritual imagery. Psychedelic warmth.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Visions of Us on the Land</h4>
+              <div class="disco-years">2016 &middot; Secretly Canadian</div>
+              <p>
+                <strong>Maraqopa trilogy, part 3.</strong> Silver Katharine alone
+                in Maraqopa. The others depart on a spaceship. Cosmic folk.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>In the Shape of a Storm</h4>
+              <div class="disco-years">2019 &middot; Secretly Canadian</div>
+              <p>
+                Sparsest album. Recorded in two hours. Voice, guitar, Josh Gordon
+                on Nashville-tuned guitar. Tribute to Swift. Archive of abandoned songs.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>The Monster Who Hated Pennsylvania</h4>
+              <div class="disco-years">2021 &middot; Maraqopa Records</div>
+              <p>
+                First release on his own label. Total independence declared.
+                The cassette kid founds a record company.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Private Hospital</h4>
+              <div class="disco-years">2025 &middot; Maraqopa Records</div>
+              <p>
+                22nd studio album. Released as a <strong>book</strong> with
+                download code. Completes the Reggae Film Star pentalogy.
+                Found sounds, minimal synths, piano vignettes.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Richard Swift Partnership</h2>
+          <p>
+            The pivotal creative partnership of Jurado&rsquo;s career began in
+            <strong>2010</strong> with producer <strong>Richard Swift</strong> at
+            <strong>National Freedom Studios</strong> in Cottage Grove, Oregon.
+            Swift&rsquo;s live-to-tape ethos and psychedelic sensibility transformed
+            Jurado&rsquo;s sound. Together they produced <em>Saint Bartlett</em> (2010),
+            <em>Maraqopa</em> (2012), <em>Brothers and Sisters of the Eternal Son</em>
+            (2014), <em>Visions of Us on the Land</em> (2016), and the covers album
+            <em>Other People&rsquo;s Songs, Vol. 1</em> &mdash; recorded in a single
+            weekend on a 4-track with one Coles 4038 ribbon microphone.
+          </p>
+          <p>
+            <strong>Richard Swift died in July 2018</strong>, at age 41, from complications
+            of alcoholism. <em>In the Shape of a Storm</em> (2019) was described as
+            Jurado&rsquo;s tribute to Swift &mdash; stripped of all the production
+            complexity they had built together, returning to voice and guitar alone.
+            National Freedom Studios remains open, maintained by engineer Chris Colbert
+            and Swift&rsquo;s family.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Murmur</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                46th acoustic element. The sonic phenomenon produced when a voice
+                operates at the threshold between speech and song, so quiet the
+                listener must lean in. The murmur is the acoustic signature of
+                hushed folk singing &mdash; the voice confiding inward toward a
+                single listener rather than projecting outward into a room. First
+                intimacy-based acoustic element. Jurado&rsquo;s vocal delivery is
+                the murmur in its purest form.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Quiet Lifer</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                46th artist-city pattern. An artist who inhabits a city for decades
+                without seeking the spotlight, building a body of work so large it
+                becomes inseparable from the city&rsquo;s identity, yet who remains
+                unknown to casual inhabitants. 33 years in Seattle. 22+ albums.
+                Every venue from bars to cathedrals. The musician&rsquo;s musician.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Held Breath</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                45th blue note deployment. The blue note that exists in the space
+                between notes &mdash; the pause before a vocal line resolves, the
+                silence where a more conventional singer would fill with sound.
+                First silence-based blue note. The ache of the absent note. The
+                quietest blue note in the engine.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 27: Folk</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                First folk-primary genre stage. After jazz, soul, funk, R&amp;B,
+                blues, neo-soul, gospel, rock, and electronic, the engine strips
+                down to its most elemental form: one person, one guitar, one story.
+                Electronic/R&amp;B (44) to Folk (45) &mdash; the engine&rsquo;s
+                second-largest single-degree genre leap.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=2 Returns</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                14th E=2 deployment. Returns after a 31-degree absence (degree 13
+                to degree 45) &mdash; the longest gap for any energy level. E=2
+                retakes the outright lead. Distribution: 2:14:7:12:10:2. The
+                engine&rsquo;s quiet register re-asserts itself after 31 degrees
+                of E=3+ energy.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">44&deg;</span> Chong the Nomad &mdash; <strong>Maximum contrast.</strong> Electronic/R&amp;B to Folk. E=5 to E=2. The grain to the murmur. Laptop to acoustic guitar. Both from the suburban south corridor (Renton/Kent and Burien). Both fiercely independent. The bedroom architect and the quiet lifer &mdash; opposite production paradigms, same independence.</li>
+            <li><span class="ref-degree">43&deg;</span> Ann Wilson &mdash; <strong>The lifer and the quiet lifer.</strong> Both decades-long Seattle fixtures. Both performed at St. Mark&rsquo;s Cathedral. Wilson is famous; Jurado is quietly respected. The radiance and the murmur &mdash; the voice that fills a hall and the voice that fills a room. E=6 to E=2.</li>
+            <li><span class="ref-degree">42&deg;</span> Erica Campbell &mdash; <strong>Faith thread.</strong> Campbell&rsquo;s Christianity is explicit and genre-defining (gospel). Jurado&rsquo;s Christianity is implicit and atmospheric (folk). The altar call and the held breath. Proclamation vs. contemplation.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>Label evolution arc.</strong> Mercury Records (degree 0) through Sub Pop and Secretly Canadian (degree 45) to Maraqopa Records (self-founded). The engine documents the shrinking of institutional scale and the growth of artistic independence.</li>
+            <li><span class="ref-degree">13&deg;</span> Marc Seales &mdash; <strong>E=2 bookend.</strong> Last E=2 was degree 13. 31-degree gap. Both quiet artists with deep institutional respect and limited mainstream visibility.</li>
+            <li><span class="ref-degree">36&deg;</span> Jimi Hendrix &mdash; <strong>Sub Pop bridge.</strong> Hendrix defined Seattle&rsquo;s music to the outside world; Jurado defines it to the inside. The supernova (36) and the quiet lifer (45). First Sub Pop artist arrives 9 degrees after Hendrix.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Full Name</span>
+            <span class="stat-value">Damien Troy Jurado</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Nov 12, 1972</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Childhood</span>
+            <span class="stat-value">Houston / Olympic Pen.</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Faith</span>
+            <span class="stat-value">Christian (since 17)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Visual Art</span>
+            <span class="stat-value">Painter (ongoing)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Relocated</span>
+            <span class="stat-value">So. California c. 2019</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">45 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">27</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#46 Quiet Lifer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#46 Murmur</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#45 Held Breath</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Label History</h4>
+          <div class="stat-row">
+            <span class="stat-label">1995</span>
+            <span class="stat-value">Casa Recordings</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1997&ndash;2002</span>
+            <span class="stat-value">Sub Pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2003&ndash;2018</span>
+            <span class="stat-value">Secretly Canadian</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2020</span>
+            <span class="stat-value">Mama Bird Rec. Co.</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2021&ndash;pres.</span>
+            <span class="stat-value">Maraqopa Records</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Richard Swift</span>
+            <span class="stat-value">Producer (2010&ndash;18)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">David Bazan</span>
+            <span class="stat-value">HS friend / producer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Steve Fisk</span>
+            <span class="stat-value">Debut producer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ken Stringfellow</span>
+            <span class="stat-value">Rehearsals producer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Josh Gordon</span>
+            <span class="stat-value">High-strung guitar</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jeremy Enigk</span>
+            <span class="stat-value">Sub Pop introduction</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Influences</h4>
+          <div class="stat-row">
+            <span class="stat-label">Comparison</span>
+            <span class="stat-value">Nick Drake</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Models</span>
+            <span class="stat-value">Neil Young, Dylan, Reed</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ethos</span>
+            <span class="stat-value">Punk / skateboarding</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Faith</span>
+            <span class="stat-value">Cash, Coltrane</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">22+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Career Span</span>
+            <span class="stat-value">1993&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle Years</span>
+            <span class="stat-value">33 (1988&ndash;c.2019)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albums in 2023</span>
+            <span class="stat-value">3 (prolific peak)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 45</span>
+            <span class="stat-value">2:14:7:12:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2 Mode</span>
+            <span class="stat-value">14th (retakes lead)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2 Gap</span>
+            <span class="stat-value">31 degrees (13&ndash;45)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Women</span>
+            <span class="stat-value">10 / 46 (~21.7%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 45 of 360 &mdash; Damien Jurado &mdash;
+        Folk &mdash; Sub Pop / Secretly Canadian / Maraqopa Records &mdash;
+        Burien to Seattle &mdash;
+        First Folk &mdash; First Sub Pop &mdash; E=2 Returns
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to the
+        Seattle metropolitan area, on the ancestral territory of the Duwamish Tribal Organization
+        (duwamishtribe.org), the Muckleshoot Indian Tribe, and related Coast Salish and
+        Southern Lushootseed-speaking peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
