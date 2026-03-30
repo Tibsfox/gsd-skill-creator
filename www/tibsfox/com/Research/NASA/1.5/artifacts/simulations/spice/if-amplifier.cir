@@ -1,0 +1,184 @@
+* Pioneer 4 Ground Station: IF Amplifier (455 kHz Tuned Collector)
+* =========================================================================
+* Mission 1.5 — Pioneer 4 (Juno II), March 3, 1959
+* FIRST SUCCESSFUL ESCAPE from Earth's gravity
+*
+* This is the intermediate frequency (IF) amplifier stage of the
+* Pioneer ground station receiver chain. It amplifies the 455 kHz
+* signal produced by the mixer (v1.4) with high selectivity.
+*
+* Circuit: Common-emitter 2N3904 with tuned LC collector
+*   - Input: 455 kHz IF signal from mixer
+*   - LC tank: L=120uH, C=1.023nF (resonant at ~455 kHz)
+*   - Voltage divider bias with emitter degeneration
+*   - Bandpass response centered on 455 kHz
+*
+* f_res = 1/(2*pi*sqrt(L*C))
+*       = 1/(2*pi*sqrt(120e-6 * 1.023e-9))
+*       = 1/(2*pi*sqrt(1.2276e-13))
+*       = 1/(2*pi * 3.504e-7)
+*       = 455,000 Hz (455 kHz)
+*
+* Run: ngspice -b if-amplifier.cir
+* =========================================================================
+
+* --- Power Supply ---
+Vcc vcc 0 DC 12
+
+* --- Transistor Model ---
+.model NPN2N3904 NPN(Is=6.734f Bf=416.4 Nf=1.259 Vaf=74.03
++ Ikf=66.78m Ise=6.734f Ne=1.259 Br=0.7389 Nr=2
++ Var=28 Ikr=0.9913 Isc=8.632f Nc=1.906 Rb=1
++ Irb=0.1 Rbm=1 Re=0.2219 Rc=0.3001 Cjc=3.638p
++ Mjc=0.3085 Vjc=0.75 Fc=0.5 Cje=4.493p Mje=0.2593
++ Vje=0.75 Tr=239.5n Tf=301.2p Itf=0.4 Vtf=4
++ Xtf=2 Xtb=1.5 Eg=1.11 Xti=3)
+
+* --- Input Signal ---
+* 455 kHz IF signal, 10 mV amplitude (weak signal from mixer)
+Vin in 0 SIN(0 0.01 455k 0 0)
+
+* --- Input Coupling ---
+C_in in base_ac 10n
+
+* --- Bias Network ---
+* Voltage divider: Vbase = Vcc * R2/(R1+R2) = 12 * 4.7k/(22k+4.7k) = 2.11V
+* Ic ~ (Vbase - Vbe) / Re = (2.11 - 0.7) / 470 = 3.0 mA
+R1 vcc base_dc 22k
+R2 base_dc 0 4.7k
+
+* Decouple AC from bias
+* Base node combines DC bias and AC signal
+R_base base_ac base_dc 1k
+
+* --- Transistor ---
+Q1 collector base_ac emitter NPN2N3904
+
+* --- Emitter ---
+* Emitter resistor with partial bypass for gain control
+* R_e sets DC operating point, C_bypass increases AC gain
+R_e emitter 0 470
+C_bypass emitter 0 0.1u
+
+* --- Tuned Collector Load ---
+* LC tank resonant at 455 kHz
+* L = 120 uH, C = 1.023 nF
+* Q factor modeled by series resistance in inductor
+L_tank vcc collector 120u
+R_L collector tank_mid 5
+C_tank tank_mid 0 1.023n
+
+* --- Output ---
+* Coupling capacitor to next stage (detector or second IF amp)
+C_out collector if_out 100p
+
+* Output load (next stage input impedance)
+R_load if_out 0 10k
+
+* --- Supply Decoupling ---
+C_decouple vcc 0 0.1u
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* Transient: 200 microseconds (about 91 cycles at 455 kHz)
+.tran 20n 200u
+
+* AC analysis: sweep from 100 kHz to 2 MHz for frequency response
+.ac dec 200 100k 2Meg
+
+* =========================================================================
+* CONTROL BLOCK
+* =========================================================================
+.control
+  run
+
+  echo ""
+  echo "========================================================"
+  echo " Pioneer 4 Ground Station — 455 kHz IF Amplifier"
+  echo "========================================================"
+  echo " Input:  455 kHz, 10 mV (from ring mixer)"
+  echo " Tank:   L=120uH, C=1.023nF (f_res=455 kHz)"
+  echo " Bias:   Ic~3.0 mA, Vce~8V"
+  echo "========================================================"
+  echo ""
+
+  * --- DC Operating Point ---
+  echo "=== DC Operating Point ==="
+  op
+  echo "Collector voltage:"
+  print v(collector)
+  echo "Emitter voltage:"
+  print v(emitter)
+  echo "Base voltage:"
+  print v(base_dc)
+  let vce = v(collector) - v(emitter)
+  echo "Vce:"
+  print vce
+  let ic = (v(vcc) - v(collector)) / 5
+  echo "Approximate Ic (mA):"
+  print ic
+
+  * --- Transient Measurements ---
+  echo ""
+  echo "=== Transient Analysis ==="
+  * Measure output amplitude (steady state, last 100 us)
+  meas tran vout_pp PP v(if_out) FROM=100u TO=200u
+  echo "IF output peak-to-peak (V):"
+  print vout_pp
+
+  meas tran vin_pp PP v(in) FROM=100u TO=200u
+  echo "Input peak-to-peak (V):"
+  print vin_pp
+
+  let gain = vout_pp / vin_pp
+  echo "Voltage gain (V/V):"
+  print gain
+
+  let gain_db = 20 * log(gain) / log(10)
+  echo "Voltage gain (dB):"
+  print gain_db
+
+  * Measure output frequency
+  meas tran out_period TRIG v(if_out) VAL=0 RISE=20 TARG v(if_out) VAL=0 RISE=21
+  echo "Output period (s):"
+  print out_period
+  let out_freq = 1/out_period
+  echo "Output frequency (Hz):"
+  print out_freq
+
+  echo ""
+  echo "--- Plots ---"
+
+  * Plot 1: Input vs output waveforms (last 50 us)
+  plot v(in)*100 v(if_out) xlimit 150u 200u title 'IF Amplifier: Input (x100) and Output at 455 kHz'
+
+  * Plot 2: Collector waveform showing tank resonance
+  plot v(collector) xlimit 150u 200u title 'Collector Waveform — LC Tank Resonance at 455 kHz'
+
+  * Plot 3: AC frequency response (bandpass characteristic)
+  * Switch to AC results
+  setplot ac1
+  plot vdb(if_out) xlimit 100k 2Meg title 'IF Amplifier Frequency Response — 455 kHz Bandpass' ylabel 'Gain (dB)'
+  plot vp(if_out) xlimit 100k 2Meg title 'IF Amplifier Phase Response' ylabel 'Phase (degrees)'
+
+  * Measure -3dB bandwidth
+  meas ac bw_3db TRIG vdb(if_out) VAL=-3 RISE=1 TARG vdb(if_out) VAL=-3 FALL=1
+  echo "Approximate -3dB bandwidth:"
+  print bw_3db
+
+  echo ""
+  echo "=== Simulation complete ==="
+  echo "This IF amplifier is the selectivity stage of the Pioneer"
+  echo "ground station receiver. The LC tank at 455 kHz rejects"
+  echo "adjacent-channel interference while amplifying the Pioneer 4"
+  echo "signal received from over 655,000 km away."
+  echo ""
+  echo "Pioneer 4 achieved escape velocity on March 3, 1959 —"
+  echo "the first successful American deep space mission."
+
+  quit
+.endc
+
+.end

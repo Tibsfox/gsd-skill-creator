@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 4 — Heliocentric Orbit Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a2e;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #orbit-canvas { flex: 1; }
+  #panel {
+    width: 300px;
+    background: #0d0d35;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 14px; color: #7ec8e3; text-align: center; }
+  h2 { font-size: 11px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #111144;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #7ec8e3; font-weight: bold; }
+  .box .earth { color: #4488cc; }
+  .box .mars { color: #cc4444; }
+  .box .p4 { color: #ffd700; }
+  #time-control {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  label { font-size: 11px; color: #aaa; }
+  input[type="range"] { width: 100%; accent-color: #7ec8e3; }
+  button {
+    background: #1a1a5e;
+    color: #7ec8e3;
+    border: 1px solid #7ec8e3;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+  }
+  button:hover { background: #2a2a7e; }
+  .btn-row { display: flex; gap: 6px; }
+  .btn-row button { flex: 1; }
+  .legend { font-size: 10px; line-height: 1.8; }
+  .legend span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+  .dot-earth { background: #4488cc; }
+  .dot-mars { background: #cc4444; }
+  .dot-p4 { background: #ffd700; }
+  .dot-sun { background: #ffdd00; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="orbit-canvas"></canvas>
+  <div id="panel">
+    <h1>HELIOCENTRIC ORBIT VIEWER</h1>
+    <h2>Pioneer 4 — First American object in solar orbit</h2>
+
+    <div class="box" id="date-box">
+      <div><span class="label">Date: </span><span class="value" id="disp-date">March 3, 1959</span></div>
+      <div><span class="label">Mission elapsed: </span><span class="value" id="disp-elapsed">0 years</span></div>
+      <div><span class="label">Pioneer 4 orbits: </span><span class="value" id="disp-orbits">0</span></div>
+    </div>
+
+    <div class="box">
+      <div><span class="label">Pioneer 4 \u2192 Sun: </span><span class="value p4" id="dist-p4-sun">1.00 AU</span></div>
+      <div><span class="label">Pioneer 4 \u2192 Earth: </span><span class="value p4" id="dist-p4-earth">0.00 AU</span></div>
+      <div><span class="label">Pioneer 4 \u2192 Mars: </span><span class="value p4" id="dist-p4-mars">0.52 AU</span></div>
+    </div>
+
+    <div class="box">
+      <div style="color: #4488cc;">Earth: <span id="earth-angle">0.0</span>&deg; | 1.000 AU</div>
+      <div style="color: #cc4444;">Mars: <span id="mars-angle">0.0</span>&deg; | 1.524 AU</div>
+      <div style="color: #ffd700;">Pioneer 4: <span id="p4-angle">0.0</span>&deg; | <span id="p4-r">1.15</span> AU</div>
+    </div>
+
+    <div id="time-control">
+      <label>Time Speed: <span id="speed-label">1</span> year/sec</label>
+      <input type="range" id="speed-slider" min="0" max="50" step="0.5" value="1">
+    </div>
+
+    <div class="btn-row">
+      <button id="btn-play" onclick="togglePlay()">&#9654; Play</button>
+      <button onclick="resetTime()">Reset</button>
+    </div>
+
+    <div class="btn-row">
+      <button onclick="goToDate(0)">1959</button>
+      <button onclick="goToDate(10)">1969</button>
+      <button onclick="goToDate(40)">1999</button>
+      <button onclick="goToDate(67)">TODAY</button>
+    </div>
+
+    <div class="legend">
+      <div><span class="dot-sun"></span> Sun</div>
+      <div><span class="dot-earth"></span> Earth (T = 1.000 yr, a = 1.000 AU)</div>
+      <div><span class="dot-mars"></span> Mars (T = 1.881 yr, a = 1.524 AU)</div>
+      <div><span class="dot-p4"></span> Pioneer 4 (T = 1.228 yr, a = 1.15 AU, e = 0.07)</div>
+    </div>
+
+    <div class="box" style="font-size: 10px; color: #666;">
+      Pioneer 4 entered heliocentric orbit on March 3, 1959.
+      It orbits the Sun approximately every 1.23 years on a
+      slightly eccentric orbit (e=0.07) between Earth and Mars.
+      After 67 years it has completed ~54 orbits. Its battery
+      died after 82 hours, but the spacecraft is still there,
+      silently circling the Sun.
+    </div>
+  </div>
+</div>
+
+<script>
+// ========================================================================
+// Orbital parameters
+// ========================================================================
+const AU = 1; // working in AU
+
+// Earth
+const EARTH_A = 1.000;
+const EARTH_E = 0.017;
+const EARTH_T = 1.000; // years
+
+// Mars
+const MARS_A = 1.524;
+const MARS_E = 0.093;
+const MARS_T = 1.881;
+
+// Pioneer 4
+const P4_A = 1.15;
+const P4_E = 0.07;
+const P4_T = 2 * Math.PI * Math.sqrt(P4_A * P4_A * P4_A); // Kepler T^2 = a^3
+// P4_T ~ 1.233 years
+
+// Launch date
+const LAUNCH_YEAR = 1959.17; // March 3, 1959
+
+// ========================================================================
+// State
+// ========================================================================
+let simYears = 0; // years since launch
+let playing = false;
+let timeSpeed = 1; // years per second
+let lastTimestamp = 0;
+
+const canvas = document.getElementById('orbit-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  const container = document.getElementById('container');
+  canvas.width = container.clientWidth - 300;
+  canvas.height = container.clientHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ========================================================================
+// Orbital mechanics — Kepler equation solver
+// ========================================================================
+function solveKepler(M, e, tol) {
+  // Solve M = E - e*sin(E) for E using Newton-Raphson
+  tol = tol || 1e-8;
+  let E = M;
+  for (let i = 0; i < 50; i++) {
+    const dE = (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+    E -= dE;
+    if (Math.abs(dE) < tol) break;
+  }
+  return E;
+}
+
+function orbitalPosition(a, e, T, t) {
+  // Mean anomaly
+  const M = (2 * Math.PI * t / T) % (2 * Math.PI);
+  // Eccentric anomaly
+  const E = solveKepler(M, e);
+  // True anomaly
+  const cosNu = (Math.cos(E) - e) / (1 - e * Math.cos(E));
+  const sinNu = (Math.sqrt(1 - e * e) * Math.sin(E)) / (1 - e * Math.cos(E));
+  const nu = Math.atan2(sinNu, cosNu);
+  // Radius
+  const r = a * (1 - e * e) / (1 + e * Math.cos(nu));
+  return {
+    x: r * Math.cos(nu),
+    y: r * Math.sin(nu),
+    r: r,
+    angle: nu * 180 / Math.PI
+  };
+}
+
+// ========================================================================
+// Rendering
+// ========================================================================
+function worldToScreen(wx, wy) {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const scale = Math.min(cx, cy) * 0.42; // pixels per AU
+  return { x: cx + wx * scale, y: cy - wy * scale };
+}
+
+function drawOrbit(a, e, color, lineWidth) {
+  ctx.beginPath();
+  const steps = 360;
+  for (let i = 0; i <= steps; i++) {
+    const nu = (i / steps) * 2 * Math.PI;
+    const r = a * (1 - e * e) / (1 + e * Math.cos(nu));
+    const p = worldToScreen(r * Math.cos(nu), r * Math.sin(nu));
+    if (i === 0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
+  }
+  ctx.closePath();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth || 1;
+  ctx.stroke();
+}
+
+function drawBody(wx, wy, radius, color, label, labelOffset) {
+  const p = worldToScreen(wx, wy);
+
+  // Glow
+  const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius * 3);
+  grad.addColorStop(0, color + '66');
+  grad.addColorStop(1, 'transparent');
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  ctx.arc(p.x, p.y, radius * 3, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Body
+  ctx.beginPath();
+  ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = color;
+  ctx.fill();
+
+  // Label
+  if (label) {
+    const off = labelOffset || { x: radius + 6, y: -radius - 4 };
+    ctx.font = '10px Courier New';
+    ctx.fillStyle = color;
+    ctx.fillText(label, p.x + off.x, p.y + off.y);
+  }
+}
+
+function drawDistanceLine(x1, y1, x2, y2, color) {
+  const p1 = worldToScreen(x1, y1);
+  const p2 = worldToScreen(x2, y2);
+  ctx.beginPath();
+  ctx.moveTo(p1.x, p1.y);
+  ctx.lineTo(p2.x, p2.y);
+  ctx.strokeStyle = color + '33';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#0a0a2e';
+  ctx.fillRect(0, 0, W, H);
+
+  // Stars (static background)
+  if (!draw._stars) {
+    draw._stars = [];
+    const rng = { next: function() { this.s = (this.s * 1103515245 + 12345) & 0x7fffffff; return this.s / 0x7fffffff; }, s: 42 };
+    for (let i = 0; i < 200; i++) {
+      draw._stars.push({
+        x: rng.next() * W * 2,
+        y: rng.next() * H * 2,
+        r: rng.next() * 1.5,
+        b: 0.3 + rng.next() * 0.5
+      });
+    }
+  }
+  for (const s of draw._stars) {
+    const sx = s.x % W, sy = s.y % H;
+    ctx.beginPath();
+    ctx.arc(sx, sy, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,255,${s.b})`;
+    ctx.fill();
+  }
+
+  // AU scale rings
+  ctx.strokeStyle = 'rgba(50,50,80,0.2)';
+  ctx.lineWidth = 0.5;
+  ctx.font = '9px Courier New';
+  ctx.fillStyle = '#333';
+  const center = worldToScreen(0, 0);
+  for (let r = 0.5; r <= 2; r += 0.5) {
+    const edge = worldToScreen(r, 0);
+    const pixR = edge.x - center.x;
+    ctx.beginPath();
+    ctx.arc(center.x, center.y, pixR, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.fillText(r.toFixed(1) + ' AU', edge.x + 4, center.y - 4);
+  }
+
+  // Orbit paths
+  drawOrbit(EARTH_A, EARTH_E, '#4488cc44', 1.5);
+  drawOrbit(MARS_A, MARS_E, '#cc444433', 1);
+  drawOrbit(P4_A, P4_E, '#ffd70044', 1.5);
+
+  // Compute positions
+  const earth = orbitalPosition(EARTH_A, EARTH_E, EARTH_T, simYears);
+  const mars = orbitalPosition(MARS_A, MARS_E, MARS_T, simYears);
+  const p4 = orbitalPosition(P4_A, P4_E, P4_T, simYears);
+
+  // Distance lines
+  drawDistanceLine(p4.x, p4.y, earth.x, earth.y, '#7ec8e3');
+  drawDistanceLine(p4.x, p4.y, mars.x, mars.y, '#cc4444');
+
+  // Sun
+  drawBody(0, 0, 12, '#ffdd00', 'Sun', { x: 16, y: 4 });
+
+  // Bodies
+  drawBody(earth.x, earth.y, 7, '#4488cc', 'Earth');
+  drawBody(mars.x, mars.y, 6, '#cc4444', 'Mars');
+  drawBody(p4.x, p4.y, 5, '#ffd700', 'Pioneer 4');
+
+  // Pioneer 4 trail (last portion of orbit)
+  ctx.beginPath();
+  const trailSteps = 120;
+  const trailSpan = P4_T * 0.3; // show ~30% of orbit as trail
+  for (let i = 0; i <= trailSteps; i++) {
+    const tTrail = simYears - trailSpan * (1 - i / trailSteps);
+    const pt = orbitalPosition(P4_A, P4_E, P4_T, tTrail);
+    const pp = worldToScreen(pt.x, pt.y);
+    if (i === 0) ctx.moveTo(pp.x, pp.y);
+    else ctx.lineTo(pp.x, pp.y);
+  }
+  ctx.strokeStyle = '#ffd70066';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Update readouts
+  const yearsSinceLaunch = simYears;
+  const currentYear = LAUNCH_YEAR + yearsSinceLaunch;
+  const dateStr = currentYear < 2027 ?
+    `~${Math.floor(currentYear)}` : `~${Math.floor(currentYear)}`;
+
+  document.getElementById('disp-date').textContent = dateStr;
+  document.getElementById('disp-elapsed').textContent =
+    yearsSinceLaunch.toFixed(1) + ' years';
+  document.getElementById('disp-orbits').textContent =
+    (yearsSinceLaunch / P4_T).toFixed(1);
+
+  // Distances
+  const d_p4_sun = p4.r;
+  const d_p4_earth = Math.sqrt((p4.x - earth.x) ** 2 + (p4.y - earth.y) ** 2);
+  const d_p4_mars = Math.sqrt((p4.x - mars.x) ** 2 + (p4.y - mars.y) ** 2);
+
+  document.getElementById('dist-p4-sun').textContent = d_p4_sun.toFixed(3) + ' AU';
+  document.getElementById('dist-p4-earth').textContent = d_p4_earth.toFixed(3) + ' AU';
+  document.getElementById('dist-p4-mars').textContent = d_p4_mars.toFixed(3) + ' AU';
+
+  document.getElementById('earth-angle').textContent = ((earth.angle + 360) % 360).toFixed(1);
+  document.getElementById('mars-angle').textContent = ((mars.angle + 360) % 360).toFixed(1);
+  document.getElementById('p4-angle').textContent = ((p4.angle + 360) % 360).toFixed(1);
+  document.getElementById('p4-r').textContent = p4.r.toFixed(3);
+}
+
+// ========================================================================
+// Animation
+// ========================================================================
+function animate(ts) {
+  if (lastTimestamp === 0) lastTimestamp = ts;
+  const dtSec = (ts - lastTimestamp) / 1000;
+  lastTimestamp = ts;
+
+  if (playing) {
+    simYears += dtSec * timeSpeed;
+  }
+
+  draw();
+  requestAnimationFrame(animate);
+}
+
+// ========================================================================
+// Controls
+// ========================================================================
+function togglePlay() {
+  playing = !playing;
+  document.getElementById('btn-play').textContent = playing ? '\u23F8 Pause' : '\u25B6 Play';
+}
+
+function resetTime() {
+  simYears = 0;
+  playing = false;
+  document.getElementById('btn-play').textContent = '\u25B6 Play';
+}
+
+function goToDate(years) {
+  simYears = years;
+}
+
+document.getElementById('speed-slider').addEventListener('input', function () {
+  timeSpeed = parseFloat(this.value);
+  document.getElementById('speed-label').textContent = timeSpeed.toFixed(1);
+});
+
+// ========================================================================
+// Init
+// ========================================================================
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

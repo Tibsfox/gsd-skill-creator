@@ -1,0 +1,243 @@
+* Pioneer 2 Ground Station — Superheterodyne Receiver Front End
+* ==============================================================
+* NASA Mission Series v1.3 — Pioneer 2
+*
+* Companion to v1.2's crystal oscillator transmitter. This circuit
+* models the receiver front end at the ground station — the first
+* stage of signal recovery from Pioneer 2's 108.06 MHz telemetry.
+*
+* The superheterodyne receiver converts the incoming 108.06 MHz
+* signal down to a 10.455 MHz intermediate frequency (IF) by
+* mixing with a 97.605 MHz local oscillator. The IF signal then
+* passes through a bandpass filter for selectivity.
+*
+* Architecture:
+*   [Antenna 108 MHz] -> [RF bandpass] -> [Diode mixer] -> [IF filter 10.455 MHz]
+*                                              |
+*                                     [Local oscillator 97.605 MHz]
+*
+* The 10.455 MHz IF is a common choice for VHF receivers of this era.
+* Lower-side injection: f_LO = f_RF - f_IF = 108.06 - 10.455 = 97.605 MHz
+*
+* Ground stations: Cape Canaveral, Jodrell Bank (250-ft dish),
+* Goldstone (85-ft dish) all used superheterodyne front ends.
+*
+* Active devices: 1N4148 silicon diode (mixer), 2N918 transistor (LO)
+* Reference: Standard VHF superhet receiver design (ARRL Handbook, 1958)
+
+*--------------------------------------------------------------
+* POWER SUPPLY
+*--------------------------------------------------------------
+Vcc  vcc  0  DC 12
+
+*--------------------------------------------------------------
+* RF INPUT SIGNAL — 108.06 MHz from Pioneer 2
+*--------------------------------------------------------------
+* Model the received signal as a voltage source.
+* At the ground station antenna terminals after the LNA:
+*   Pioneer 2 transmitter: 300 mW at 108.06 MHz
+*   At Jodrell Bank (250-ft dish), received power ~ -120 dBm
+*   After LNA (20 dB gain): ~ -100 dBm = 2.24 uV into 50 ohms
+*
+* For simulation clarity, use a stronger signal (1 mV amplitude)
+* to make the mixing products clearly visible.
+*
+* Modulated with a 1 kHz subcarrier (simplified telemetry)
+Vrf  rf_in  0  SIN(0 1m 108.06meg 0 0)
+
+*--------------------------------------------------------------
+* RF INPUT BANDPASS FILTER — tuned to 108 MHz
+*--------------------------------------------------------------
+* Series LC bandpass centered at 108 MHz
+* L = 10 nH, C = 217 pF -> f = 1/(2*pi*sqrt(LC)) = 108.0 MHz
+* Q ~ 50 (loaded), BW ~ 2.16 MHz
+
+* Input coupling
+C_rfin  rf_in     rf_f1     10p
+
+* Parallel LC tank (high impedance at resonance)
+L_rf1   rf_f1     rf_f1_r   10.8n
+R_rf1L  rf_f1_r   0         0.5
+C_rf1   rf_f1     0         217p
+
+* Second section for steeper skirts
+C_rfc   rf_f1     rf_f2     2.2p
+L_rf2   rf_f2     rf_f2_r   10.8n
+R_rf2L  rf_f2_r   0         0.5
+C_rf2   rf_f2     0         217p
+
+* Output coupling to mixer
+C_rfout rf_f2     mix_rf    10p
+
+*--------------------------------------------------------------
+* LOCAL OSCILLATOR — 97.605 MHz
+*--------------------------------------------------------------
+* Colpitts oscillator at 97.605 MHz (lower-side injection)
+* f_LO = f_RF - f_IF = 108.06 - 10.455 = 97.605 MHz
+*
+* For simulation, model as an ideal voltage source.
+* A real LO would use a crystal + PLL or VFO, but the mixing
+* behavior is what matters here.
+Vlo  lo_out  0  SIN(0 200m 97.605meg 0 0)
+
+* LO coupling to mixer
+C_lo  lo_out    mix_lo    10p
+
+*--------------------------------------------------------------
+* DIODE MIXER — single-ended (simplest topology)
+*--------------------------------------------------------------
+* The mixer exploits the diode's nonlinearity to produce
+* sum and difference frequencies:
+*   f_sum = 108.06 + 97.605 = 205.665 MHz (rejected by IF filter)
+*   f_diff = 108.06 - 97.605 = 10.455 MHz (the desired IF)
+*
+* Single-diode mixer: RF and LO are summed at the diode anode.
+* The diode's square-law region produces the mixing products.
+
+.model D1N4148 D(IS=2.52e-9 RS=0.568 N=1.752 BV=100 IBV=100u
++  CJO=4p VJ=0.7 M=0.4 TT=5n)
+
+* Summing node: RF + LO combined
+R_mix_rf  mix_rf   mix_sum   100
+R_mix_lo  mix_lo   mix_sum   100
+
+* Mixer diode
+D_mix  mix_sum  mix_out  D1N4148
+
+* Diode load (develops IF voltage)
+R_mixload  mix_out  0  1k
+
+*--------------------------------------------------------------
+* IF BANDPASS FILTER — 10.455 MHz
+*--------------------------------------------------------------
+* Double-tuned LC bandpass at 10.455 MHz
+* Provides selectivity: passes the IF, rejects RF feedthrough,
+* LO feedthrough, image frequency, and the sum product.
+*
+* L = 1 uH, C = 232 pF -> f = 1/(2*pi*sqrt(LC)) = 10.44 MHz
+* Q ~ 80 (loaded), BW ~ 130 kHz
+
+* Coupling from mixer
+C_ifin  mix_out   if_f1     100p
+
+* First IF tank
+L_if1   if_f1     if_f1_r   1u
+R_if1L  if_f1_r   0         1
+C_if1   if_f1     0         232p
+
+* Intertank coupling (controls bandwidth)
+C_ift   if_f1     if_f2     4.7p
+
+* Second IF tank
+L_if2   if_f2     if_f2_r   1u
+R_if2L  if_f2_r   0         1
+C_if2   if_f2     0         232p
+
+* IF output
+C_ifout if_f2     if_out    100p
+R_ifload if_out   0         10k
+
+*--------------------------------------------------------------
+* ANALYSIS
+*--------------------------------------------------------------
+
+* AC: Sweep from 1 MHz to 250 MHz to show both RF and IF
+* selectivity in one plot. Input is at the RF port.
+.ac dec 200 1meg 250meg
+
+* Transient: Show mixing in the time domain
+* Run for 2 us to capture several IF cycles (10.455 MHz -> 95.6 ns period)
+.tran 0.2n 2u
+
+*--------------------------------------------------------------
+* CONTROL BLOCK
+*--------------------------------------------------------------
+.control
+  echo "======================================================"
+  echo "Pioneer 2 Ground Station — Superhet Receiver Front End"
+  echo "======================================================"
+  echo ""
+  echo "RF input:         108.06 MHz (Pioneer 2 telemetry)"
+  echo "Local oscillator:  97.605 MHz (lower-side injection)"
+  echo "IF output:         10.455 MHz"
+  echo ""
+  echo "This is the first stage of signal recovery. The 108 MHz"
+  echo "signal from Pioneer 2 is mixed down to 10.455 MHz where"
+  echo "the narrow IF filter provides selectivity and gain."
+  echo ""
+
+  * ----- AC ANALYSIS -----
+  echo "Running AC analysis (1 MHz to 250 MHz)..."
+  ac dec 200 1meg 250meg
+  echo "AC analysis complete."
+  echo ""
+
+  * Write frequency response data
+  wrdata superhet_ac_rf.dat vdb(rf_f2)
+  wrdata superhet_ac_if.dat vdb(if_out)
+  echo "AC data written:"
+  echo "  superhet_ac_rf.dat — RF filter response"
+  echo "  superhet_ac_if.dat — IF filter response"
+  echo ""
+
+  * Measure RF filter center frequency
+  meas ac rf_peak MAX vdb(rf_f2) FROM=90meg TO=130meg
+  echo "RF bandpass filter peak gain:"
+  print rf_peak
+  echo ""
+
+  * Measure IF filter center frequency
+  meas ac if_peak MAX vdb(if_out) FROM=5meg TO=20meg
+  echo "IF bandpass filter peak gain:"
+  print if_peak
+  echo ""
+
+  * ----- TRANSIENT ANALYSIS -----
+  echo "Running transient analysis (2 us, 0.2 ns step)..."
+  tran 0.2n 2u
+  echo "Transient analysis complete."
+  echo ""
+
+  * Write time-domain waveforms
+  wrdata superhet_tran_rf.dat v(rf_in) v(rf_f2)
+  wrdata superhet_tran_mix.dat v(mix_sum) v(mix_out)
+  wrdata superhet_tran_if.dat v(if_out)
+  echo "Transient data written:"
+  echo "  superhet_tran_rf.dat  — RF input + filtered"
+  echo "  superhet_tran_mix.dat — mixer input + output"
+  echo "  superhet_tran_if.dat  — IF output (10.455 MHz)"
+  echo ""
+
+  * Measure IF output frequency
+  meas tran if_period TRIG v(if_out) VAL=0 RISE=5 TARG v(if_out) VAL=0 RISE=6
+  let if_freq = 1.0 / if_period
+  echo "Measured IF output frequency:"
+  print if_freq
+  echo ""
+
+  * Measure IF output amplitude
+  meas tran if_vpp PP v(if_out) FROM=0.5u TO=2u
+  echo "IF output peak-to-peak:"
+  print if_vpp
+  echo ""
+
+  echo "======================================================"
+  echo "Simulation complete."
+  echo ""
+  echo "The AC analysis shows two bandpass responses:"
+  echo "  1. RF filter centered at 108 MHz (antenna selectivity)"
+  echo "  2. IF filter centered at 10.455 MHz (receiver selectivity)"
+  echo ""
+  echo "The transient analysis shows the 108 MHz RF input being"
+  echo "converted to 10.455 MHz IF by the diode mixer. The IF"
+  echo "filter removes the LO feedthrough and sum frequency,"
+  echo "leaving a clean 10.455 MHz signal for the IF amplifier."
+  echo ""
+  echo "Companion circuit: v1.2/spice/oscillator-108mhz.cir"
+  echo "  (the transmitter that generates the 108 MHz signal)"
+  echo "======================================================"
+
+  quit
+.endc
+
+.end

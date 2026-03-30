@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 0 — 108.06 MHz Oscilloscope Display</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Courier New', monospace;
+    color: #33ff33;
+    overflow: hidden;
+  }
+  h1 {
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    color: #228822;
+    text-transform: uppercase;
+  }
+  .scope-body {
+    background: #1a1a18;
+    border: 3px solid #2a2a28;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.8),
+      inset 0 0 20px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .scope-screen {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #333;
+  }
+  canvas {
+    display: block;
+    border-radius: 6px;
+  }
+  /* CRT curvature overlay */
+  .crt-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    border-radius: 6px;
+    background: radial-gradient(
+      ellipse at center,
+      transparent 60%,
+      rgba(0,0,0,0.15) 75%,
+      rgba(0,0,0,0.4) 90%,
+      rgba(0,0,0,0.7) 100%
+    );
+  }
+  /* Scanline overlay */
+  .scanlines {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    border-radius: 6px;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(0,0,0,0.08) 1px,
+      rgba(0,0,0,0.08) 2px
+    );
+  }
+  .controls {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+    align-items: center;
+  }
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .control-group label {
+    font-size: 10px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #555;
+    border-radius: 50%;
+    border: 1px solid #888;
+    cursor: pointer;
+  }
+  button {
+    background: #2a2a28;
+    color: #33ff33;
+    border: 1px solid #444;
+    padding: 6px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  button:hover { background: #3a3a38; }
+  button.active { border-color: #33ff33; box-shadow: 0 0 6px rgba(51,255,51,0.3); }
+  .readout {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    font-size: 11px;
+    color: #228822;
+  }
+  .readout span { font-size: 13px; color: #33ff33; }
+  .status-line {
+    margin-top: 6px;
+    font-size: 10px;
+    color: #444;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  .status-line.signal { color: #33ff33; }
+  .status-line.warning { color: #ffaa00; }
+  .status-line.lost { color: #ff3333; }
+</style>
+</head>
+<body>
+
+<h1>Pioneer 0 Telemetry — 108.06 MHz Receiver</h1>
+
+<div class="scope-body">
+  <div class="scope-screen">
+    <canvas id="scope" width="800" height="400"></canvas>
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label>Sweep Rate</label>
+      <input type="range" id="sweepRate" min="0.5" max="5" step="0.1" value="2">
+    </div>
+    <div class="control-group">
+      <label>Intensity</label>
+      <input type="range" id="intensity" min="0.3" max="1.0" step="0.05" value="0.75">
+    </div>
+    <div class="control-group">
+      <label>V/Div</label>
+      <input type="range" id="vDiv" min="0.3" max="2.0" step="0.1" value="1.0">
+    </div>
+    <div class="control-group">
+      <label>Noise</label>
+      <input type="range" id="noiseLevel" min="0" max="0.5" step="0.02" value="0.05">
+    </div>
+    <button id="btnPlay" class="active">PLAY</button>
+    <button id="btnReset">RESET</button>
+  </div>
+
+  <div class="readout">
+    <div>TIME: <span id="readTime">T+00.0</span></div>
+    <div>ALT: <span id="readAlt">0 m</span></div>
+    <div>FREQ: <span id="readFreq">108.06 MHz</span></div>
+    <div>SIGNAL: <span id="readSignal">NOMINAL</span></div>
+  </div>
+
+  <div class="status-line signal" id="statusLine">
+    RECEIVING — CAPE CANAVERAL TRACKING STATION
+  </div>
+</div>
+
+<script>
+// ============================================================
+// Pioneer 0 Oscilloscope Display
+// Period-authentic green phosphor CRT simulation
+// ============================================================
+
+const canvas = document.getElementById('scope');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+
+// Controls
+const sweepRateSlider = document.getElementById('sweepRate');
+const intensitySlider = document.getElementById('intensity');
+const vDivSlider = document.getElementById('vDiv');
+const noiseLevelSlider = document.getElementById('noiseLevel');
+const btnPlay = document.getElementById('btnPlay');
+const btnReset = document.getElementById('btnReset');
+
+// Readouts
+const readTime = document.getElementById('readTime');
+const readAlt = document.getElementById('readAlt');
+const readFreq = document.getElementById('readFreq');
+const readSignal = document.getElementById('readSignal');
+const statusLine = document.getElementById('statusLine');
+
+// State
+let playing = true;
+let missionTime = 0;        // seconds (0 to 77+)
+let timeScale = 1.0;        // real-time multiplier
+let lastFrameTime = 0;
+
+// Phosphor persistence buffer (simulates CRT afterglow)
+let phosphorBuffer = new Float32Array(W * H);
+
+// Mission events
+const T_PUMP_FAIL = 73.6;
+const T_BREAKUP = 77.0;
+const T_SIGNAL_LOST = 78.0;
+
+// Pre-computed trajectory data (simplified from Python sim)
+function getAltitude(t) {
+  if (t <= 0) return 0;
+  if (t <= T_PUMP_FAIL) {
+    // Quadratic-ish ascent: ~16 km in ~74 seconds
+    // a(t) ~ 3.2 m/s^2 net initially, increasing as mass drops
+    const frac = t / T_PUMP_FAIL;
+    return 16000 * (frac * frac * 0.4 + frac * 0.6);
+  }
+  if (t <= T_BREAKUP) {
+    // Ballistic coast, barely climbing
+    const dt = t - T_PUMP_FAIL;
+    return 16000 + 200 * dt - 50 * dt * dt;
+  }
+  // After breakup: falling
+  const dt = t - T_BREAKUP;
+  return Math.max(0, 16200 - 100 * dt * dt);
+}
+
+function getVelocity(t) {
+  if (t <= 0) return 0;
+  if (t <= T_PUMP_FAIL) {
+    const frac = t / T_PUMP_FAIL;
+    return 700 * frac * (1 + 0.3 * frac);
+  }
+  if (t <= T_BREAKUP) {
+    const dt = t - T_PUMP_FAIL;
+    return 700 - 100 * dt;
+  }
+  return 0;
+}
+
+// Signal model
+function getSignalAmplitude(t) {
+  if (t < 0) return 0;
+  if (t < 2) return t / 2;  // signal acquisition ramp
+  if (t < T_PUMP_FAIL) return 1.0;
+  if (t < T_BREAKUP) {
+    // Signal degrading as vehicle tumbles (antenna depointing)
+    const dt = t - T_PUMP_FAIL;
+    const frac = dt / (T_BREAKUP - T_PUMP_FAIL);
+    return 1.0 - 0.6 * frac + 0.3 * Math.sin(dt * 15) * frac;
+  }
+  if (t < T_SIGNAL_LOST) {
+    // Noise burst from explosion, then fade
+    const dt = t - T_BREAKUP;
+    return 0.3 * Math.exp(-dt * 3) + 0.1 * Math.random();
+  }
+  return 0;
+}
+
+// Telemetry modulation (phase modulation for data encoding)
+function getTelemetryModulation(t) {
+  if (t < 2 || t > T_BREAKUP) return 0;
+  // 64 bps data rate -> phase shifts at ~15.6 ms intervals
+  // Visible as periodic phase perturbations
+  const dataRate = 64;
+  const bitPhase = Math.floor(t * dataRate);
+  // Pseudo-random bit pattern based on time
+  const bit = ((bitPhase * 1103515245 + 12345) >> 16) & 1;
+  return bit ? 0.15 : -0.15;
+}
+
+// Barrel distortion for CRT effect
+function barrelDistort(x, y, strength) {
+  const cx = 0.5, cy = 0.5;
+  const dx = x - cx, dy = y - cy;
+  const r2 = dx * dx + dy * dy;
+  const f = 1 + strength * r2;
+  return {
+    x: cx + dx * f,
+    y: cy + dy * f
+  };
+}
+
+// ============================================================
+// RENDERING
+// ============================================================
+
+function drawGraticule() {
+  ctx.strokeStyle = 'rgba(0, 80, 0, 0.3)';
+  ctx.lineWidth = 0.5;
+
+  // Major grid lines (8 horizontal, 10 vertical divisions)
+  const divX = W / 10;
+  const divY = H / 8;
+
+  for (let i = 1; i < 10; i++) {
+    ctx.beginPath();
+    ctx.moveTo(i * divX, 0);
+    ctx.lineTo(i * divX, H);
+    ctx.stroke();
+  }
+  for (let j = 1; j < 8; j++) {
+    ctx.beginPath();
+    ctx.moveTo(0, j * divY);
+    ctx.lineTo(W, j * divY);
+    ctx.stroke();
+  }
+
+  // Center crosshair (slightly brighter)
+  ctx.strokeStyle = 'rgba(0, 100, 0, 0.5)';
+  ctx.beginPath();
+  ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H);
+  ctx.moveTo(0, H/2); ctx.lineTo(W, H/2);
+  ctx.stroke();
+
+  // Minor tick marks along center lines
+  ctx.strokeStyle = 'rgba(0, 80, 0, 0.4)';
+  const tickLen = 4;
+  for (let i = 0; i < 50; i++) {
+    const x = i * W / 50;
+    ctx.beginPath();
+    ctx.moveTo(x, H/2 - tickLen);
+    ctx.lineTo(x, H/2 + tickLen);
+    ctx.stroke();
+  }
+  for (let j = 0; j < 40; j++) {
+    const y = j * H / 40;
+    ctx.beginPath();
+    ctx.moveTo(W/2 - tickLen, y);
+    ctx.lineTo(W/2 + tickLen, y);
+    ctx.stroke();
+  }
+}
+
+function drawPhosphor() {
+  // Decay the phosphor buffer (simulates P31 phosphor persistence)
+  const decayRate = 0.92;
+  for (let i = 0; i < phosphorBuffer.length; i++) {
+    phosphorBuffer[i] *= decayRate;
+  }
+
+  // Draw the waveform into the phosphor buffer
+  const sweepRate = parseFloat(sweepRateSlider.value);
+  const amplitude = parseFloat(vDivSlider.value);
+  const noiseLevel = parseFloat(noiseLevelSlider.value);
+  const intensity = parseFloat(intensitySlider.value);
+
+  // Base carrier frequency (scaled for display — real 108 MHz compressed)
+  const displayFreq = 8.0 * sweepRate;  // cycles across screen
+  const signalAmp = getSignalAmplitude(missionTime);
+  const telemetryMod = getTelemetryModulation(missionTime);
+
+  for (let px = 0; px < W; px++) {
+    // Phase along the sweep
+    const phase = (px / W) * displayFreq * 2 * Math.PI;
+
+    // Carrier signal with telemetry phase modulation
+    let signal;
+
+    if (missionTime > T_SIGNAL_LOST) {
+      // Dead silence — flatline with minimal noise
+      signal = (Math.random() - 0.5) * 0.02;
+    } else if (missionTime > T_BREAKUP) {
+      // Explosion noise burst decaying to nothing
+      const dt = missionTime - T_BREAKUP;
+      const noiseBurst = (Math.random() - 0.5) * Math.exp(-dt * 2) * 1.5;
+      signal = noiseBurst;
+    } else {
+      // Normal signal: carrier + modulation + noise
+      const carrierPhase = phase + telemetryMod * Math.PI;
+
+      // Vehicle tumble causes frequency wobble near failure
+      let freqWobble = 0;
+      if (missionTime > T_PUMP_FAIL) {
+        const dt = missionTime - T_PUMP_FAIL;
+        freqWobble = dt * 3 * Math.sin(dt * 25 + px * 0.1);
+      }
+
+      signal = signalAmp * Math.sin(carrierPhase + freqWobble);
+
+      // Add receiver noise
+      signal += (Math.random() - 0.5) * noiseLevel * 2;
+      signal += (Math.random() - 0.5) * noiseLevel * Math.sin(phase * 3.7);
+    }
+
+    // Scale to screen coordinates
+    const yCenter = H / 2;
+    const yScale = (H / 4) * amplitude;
+    const py = Math.round(yCenter - signal * yScale);
+
+    if (py >= 0 && py < H) {
+      const idx = py * W + px;
+      phosphorBuffer[idx] = Math.min(1.0, phosphorBuffer[idx] + intensity);
+
+      // Beam spread (CRT spot size)
+      if (py > 0) phosphorBuffer[(py-1) * W + px] = Math.min(1.0, phosphorBuffer[(py-1) * W + px] + intensity * 0.3);
+      if (py < H-1) phosphorBuffer[(py+1) * W + px] = Math.min(1.0, phosphorBuffer[(py+1) * W + px] + intensity * 0.3);
+    }
+  }
+
+  // Render phosphor buffer to canvas
+  const imageData = ctx.getImageData(0, 0, W, H);
+  const data = imageData.data;
+
+  for (let py = 0; py < H; py++) {
+    for (let px = 0; px < W; px++) {
+      const idx = py * W + px;
+      const val = phosphorBuffer[idx];
+
+      if (val > 0.01) {
+        const pixIdx = idx * 4;
+
+        // P31 phosphor: green with slight blue tint at high intensity
+        // Bloom effect: brighter pixels are more white-green
+        const g = Math.min(255, Math.round(val * 255));
+        const r = Math.min(255, Math.round(val * val * 80));   // slight warm tint at peak
+        const b = Math.min(255, Math.round(val * val * 40));
+
+        // Additive blend with existing pixel (graticule underneath)
+        data[pixIdx] = Math.min(255, data[pixIdx] + r);
+        data[pixIdx + 1] = Math.min(255, data[pixIdx + 1] + g);
+        data[pixIdx + 2] = Math.min(255, data[pixIdx + 2] + b);
+      }
+    }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+}
+
+function updateReadouts() {
+  const t = missionTime;
+
+  readTime.textContent = `T+${t.toFixed(1)}`;
+  readAlt.textContent = `${Math.round(getAltitude(t))} m`;
+
+  if (t < T_PUMP_FAIL) {
+    readFreq.textContent = '108.06 MHz';
+    readSignal.textContent = 'NOMINAL';
+    readSignal.style.color = '#33ff33';
+    statusLine.textContent = 'RECEIVING -- CAPE CANAVERAL TRACKING STATION';
+    statusLine.className = 'status-line signal';
+  } else if (t < T_BREAKUP) {
+    readFreq.textContent = '108.06 MHz (DRIFT)';
+    readSignal.textContent = 'DEGRADED';
+    readSignal.style.color = '#ffaa00';
+    statusLine.textContent = 'WARNING: SIGNAL ANOMALY -- CARRIER FREQUENCY DRIFT DETECTED';
+    statusLine.className = 'status-line warning';
+  } else if (t < T_SIGNAL_LOST) {
+    readFreq.textContent = '---';
+    readSignal.textContent = 'BREAKUP';
+    readSignal.style.color = '#ff3333';
+    statusLine.textContent = 'ALERT: VEHICLE BREAKUP -- RANGE SAFETY DESTRUCT';
+    statusLine.className = 'status-line lost';
+  } else {
+    readFreq.textContent = '---';
+    readSignal.textContent = 'LOST';
+    readSignal.style.color = '#ff3333';
+    statusLine.textContent = 'SIGNAL LOST -- T+77 -- MISSION TERMINATED';
+    statusLine.className = 'status-line lost';
+  }
+}
+
+function render(timestamp) {
+  if (!lastFrameTime) lastFrameTime = timestamp;
+  const dt = (timestamp - lastFrameTime) / 1000;
+  lastFrameTime = timestamp;
+
+  if (playing) {
+    missionTime += dt * timeScale;
+    // Stop at T+85 (well past signal loss)
+    if (missionTime > 85) {
+      missionTime = 85;
+      playing = false;
+      btnPlay.classList.remove('active');
+      btnPlay.textContent = 'PLAY';
+    }
+  }
+
+  // Clear to dark background
+  ctx.fillStyle = '#050505';
+  ctx.fillRect(0, 0, W, H);
+
+  // Draw graticule first
+  drawGraticule();
+
+  // Draw phosphor trace
+  drawPhosphor();
+
+  // Update readouts
+  updateReadouts();
+
+  requestAnimationFrame(render);
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+
+btnPlay.addEventListener('click', () => {
+  playing = !playing;
+  btnPlay.classList.toggle('active', playing);
+  btnPlay.textContent = playing ? 'PLAY' : 'PAUSE';
+  if (playing && missionTime >= 85) {
+    missionTime = 0;
+    phosphorBuffer.fill(0);
+  }
+});
+
+btnReset.addEventListener('click', () => {
+  missionTime = 0;
+  phosphorBuffer.fill(0);
+  playing = true;
+  btnPlay.classList.add('active');
+  btnPlay.textContent = 'PLAY';
+});
+
+// Start
+requestAnimationFrame(render);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 1 — Van Allen Belt Oscilloscope</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    color: #33ff33;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    color: #33ff33;
+    text-shadow: 0 0 10px #33ff3366;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: #22aa22;
+    margin-bottom: 16px;
+  }
+
+  .scope-housing {
+    background: #1a1a1a;
+    border: 3px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow:
+      inset 0 0 30px rgba(0,0,0,0.8),
+      0 0 20px rgba(0,0,0,0.5);
+    position: relative;
+  }
+
+  .scope-label {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 3px;
+  }
+
+  .scope-model {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    font-size: 10px;
+    color: #555;
+  }
+
+  canvas {
+    border: 2px solid #2a2a2a;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .controls {
+    margin-top: 16px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .control-group label {
+    font-size: 10px;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 140px;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    outline: none;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #33ff33;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 6px #33ff3366;
+  }
+
+  button {
+    background: #222;
+    color: #33ff33;
+    border: 1px solid #33ff33;
+    padding: 6px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  button:hover {
+    background: #33ff3322;
+  }
+
+  button.active {
+    background: #33ff3333;
+    box-shadow: 0 0 8px #33ff3344;
+  }
+
+  .readout {
+    margin-top: 12px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .readout-item {
+    text-align: center;
+  }
+
+  .readout-value {
+    font-size: 20px;
+    color: #33ff33;
+    text-shadow: 0 0 8px #33ff3366;
+  }
+
+  .readout-label {
+    font-size: 9px;
+    color: #666;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .info {
+    max-width: 900px;
+    margin-top: 20px;
+    padding: 12px 16px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #777;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<h1>PIONEER 1 — VAN ALLEN BELT OSCILLOSCOPE</h1>
+<div class="subtitle">Mission 1.2 | October 11, 1958 | 108.06 MHz Telemetry | Geiger-Mueller Tube</div>
+
+<div class="scope-housing">
+  <div class="scope-label">TEKTRONIX</div>
+  <div class="scope-model">MODEL 545A</div>
+  <canvas id="scope" width="900" height="500"></canvas>
+</div>
+
+<div class="controls">
+  <div class="control-group">
+    <label>Sweep Speed</label>
+    <input type="range" id="speed" min="1" max="200" value="60">
+    <span id="speed-label" style="font-size:11px;">60s compressed</span>
+  </div>
+
+  <div class="control-group">
+    <label>Phosphor Persistence</label>
+    <input type="range" id="persistence" min="1" max="50" value="20">
+  </div>
+
+  <div class="control-group">
+    <label>Audio</label>
+    <button id="audio-btn" onclick="toggleAudio()">CLICKS OFF</button>
+  </div>
+
+  <div class="control-group">
+    <label>Trace</label>
+    <button id="start-btn" onclick="startTrace()">START</button>
+    <button onclick="resetTrace()">RESET</button>
+  </div>
+</div>
+
+<div class="readout">
+  <div class="readout-item">
+    <div class="readout-value" id="alt-readout">0</div>
+    <div class="readout-label">ALTITUDE (KM)</div>
+  </div>
+  <div class="readout-item">
+    <div class="readout-value" id="rate-readout">0</div>
+    <div class="readout-label">COUNT RATE (/SEC)</div>
+  </div>
+  <div class="readout-item">
+    <div class="readout-value" id="time-readout">T+00:00</div>
+    <div class="readout-label">MISSION TIME</div>
+  </div>
+  <div class="readout-item">
+    <div class="readout-value" id="belt-readout">—</div>
+    <div class="readout-label">REGION</div>
+  </div>
+</div>
+
+<div class="info">
+  <strong>Pioneer 1 Van Allen Belt Oscilloscope</strong> — This display simulates the radiation
+  count rate as Pioneer 1 flew through the Van Allen belts during its 43-hour mission.
+  The Y-axis shows Geiger-Mueller tube clicks per second. The trace draws the radiation
+  profile as the spacecraft ascends through the inner belt (peak ~3,500 km), crosses the
+  slot region, passes through the outer belt (peak ~16,000 km), coasts to apogee at
+  113,854 km, and returns. Enable audio to hear the GM tube clicks — faster clicking
+  indicates higher radiation. The detector saturates in the inner belt core, causing
+  the measured count rate to drop despite increasing radiation — the phenomenon that
+  initially confused the Pioneer team.
+</div>
+
+<script>
+// =========================================================================
+// Pioneer 1 trajectory + radiation model (matches Python simulation)
+// =========================================================================
+
+const R_EARTH = 6371;           // km
+const MU = 3.986004418e5;       // km^3/s^2
+const BURNOUT_ALT = 200;        // km
+const APOGEE_ALT = 113854;      // km
+
+// Orbital elements
+const r_peri = R_EARTH + BURNOUT_ALT;
+const r_apo = R_EARTH + APOGEE_ALT;
+const a = (r_peri + r_apo) / 2;
+const e = (r_apo - r_peri) / (r_apo + r_peri);
+const T_orbit = 2 * Math.PI * Math.sqrt(a * a * a / MU); // seconds
+const MISSION_DURATION = 43 * 3600 + 17 * 60;
+
+// Kepler's equation solver (Newton-Raphson)
+function solveKepler(M, ecc) {
+  let E = M;
+  for (let i = 0; i < 50; i++) {
+    const dE = (E - ecc * Math.sin(E) - M) / (1 - ecc * Math.cos(E));
+    E -= dE;
+    if (Math.abs(dE) < 1e-10) break;
+  }
+  return E;
+}
+
+// Altitude at time t (seconds from launch)
+function altitudeAt(t) {
+  const n = 2 * Math.PI / T_orbit;
+  const M = n * t;
+  const E = solveKepler(M, e);
+  const r = a * (1 - e * Math.cos(E));
+  return r - R_EARTH; // km
+}
+
+// Van Allen belt radiation model
+function radiationAt(alt_km) {
+  // Inner belt: proton peak at 3500 km
+  const inner = 1000 * Math.exp(-0.5 * Math.pow((alt_km - 3500) / 1500, 2));
+  // Outer belt: electron peak at 16000 km
+  const outer = 600 * Math.exp(-0.5 * Math.pow((alt_km - 16000) / 5000, 2));
+  const trueRate = inner + outer;
+
+  // GM tube saturation (paralyzable detector)
+  const deadTime = 100e-6; // 100 us
+  const measured = trueRate * Math.exp(-trueRate * deadTime);
+
+  return { trueRate, measured, inner, outer };
+}
+
+// Region label
+function regionAt(alt_km) {
+  if (alt_km < 1000) return 'LOW EARTH';
+  if (alt_km < 6000) return 'INNER BELT';
+  if (alt_km < 10000) return 'SLOT REGION';
+  if (alt_km < 30000) return 'OUTER BELT';
+  if (alt_km < 100000) return 'CISLUNAR';
+  return 'NEAR APOGEE';
+}
+
+// =========================================================================
+// Canvas oscilloscope
+// =========================================================================
+
+const canvas = document.getElementById('scope');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+
+// Scope parameters
+const MARGIN_LEFT = 70;
+const MARGIN_RIGHT = 30;
+const MARGIN_TOP = 30;
+const MARGIN_BOTTOM = 50;
+const PLOT_W = W - MARGIN_LEFT - MARGIN_RIGHT;
+const PLOT_H = H - MARGIN_TOP - MARGIN_BOTTOM;
+
+// Trace state
+let tracePoints = [];   // {x, y, intensity} — phosphor points
+let missionTime = 0;    // current mission time (seconds)
+let running = false;
+let animFrame = null;
+let lastTimestamp = null;
+
+// Audio
+let audioCtx = null;
+let audioEnabled = false;
+let lastClickTime = 0;
+
+// Pre-compute full trajectory for the scope X-axis (altitude-based)
+const MAX_ALT = 120000; // km
+const MAX_RATE = 900;   // counts/sec (display max)
+
+function altToX(alt) {
+  return MARGIN_LEFT + (alt / MAX_ALT) * PLOT_W;
+}
+
+function rateToY(rate) {
+  return MARGIN_TOP + PLOT_H - (Math.min(rate, MAX_RATE) / MAX_RATE) * PLOT_H;
+}
+
+function drawGrid() {
+  // Background — CRT darkness with slight green tint
+  ctx.fillStyle = '#050805';
+  ctx.fillRect(0, 0, W, H);
+
+  // Graticule
+  ctx.strokeStyle = '#1a2a1a';
+  ctx.lineWidth = 0.5;
+
+  // Vertical grid lines (altitude)
+  for (let alt = 0; alt <= MAX_ALT; alt += 10000) {
+    const x = altToX(alt);
+    ctx.beginPath();
+    ctx.moveTo(x, MARGIN_TOP);
+    ctx.lineTo(x, MARGIN_TOP + PLOT_H);
+    ctx.stroke();
+  }
+
+  // Horizontal grid lines (count rate)
+  for (let rate = 0; rate <= MAX_RATE; rate += 100) {
+    const y = rateToY(rate);
+    ctx.beginPath();
+    ctx.moveTo(MARGIN_LEFT, y);
+    ctx.lineTo(MARGIN_LEFT + PLOT_W, y);
+    ctx.stroke();
+  }
+
+  // Major grid lines (brighter)
+  ctx.strokeStyle = '#224422';
+  ctx.lineWidth = 1;
+
+  for (let alt = 0; alt <= MAX_ALT; alt += 30000) {
+    const x = altToX(alt);
+    ctx.beginPath();
+    ctx.moveTo(x, MARGIN_TOP);
+    ctx.lineTo(x, MARGIN_TOP + PLOT_H);
+    ctx.stroke();
+  }
+
+  for (let rate = 0; rate <= MAX_RATE; rate += 300) {
+    const y = rateToY(rate);
+    ctx.beginPath();
+    ctx.moveTo(MARGIN_LEFT, y);
+    ctx.lineTo(MARGIN_LEFT + PLOT_W, y);
+    ctx.stroke();
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#448844';
+  ctx.font = '10px Courier New';
+  ctx.textAlign = 'center';
+
+  // X-axis labels
+  for (let alt = 0; alt <= MAX_ALT; alt += 20000) {
+    const x = altToX(alt);
+    ctx.fillText(`${alt/1000}k`, x, MARGIN_TOP + PLOT_H + 16);
+  }
+  ctx.fillText('Altitude (km)', MARGIN_LEFT + PLOT_W / 2, MARGIN_TOP + PLOT_H + 38);
+
+  // Y-axis labels
+  ctx.textAlign = 'right';
+  for (let rate = 0; rate <= MAX_RATE; rate += 200) {
+    const y = rateToY(rate);
+    ctx.fillText(`${rate}`, MARGIN_LEFT - 8, y + 4);
+  }
+
+  // Y-axis title (rotated)
+  ctx.save();
+  ctx.translate(14, MARGIN_TOP + PLOT_H / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center';
+  ctx.fillText('Count Rate (/sec)', 0, 0);
+  ctx.restore();
+
+  // Belt region markers
+  ctx.fillStyle = '#332200';
+  ctx.globalAlpha = 0.15;
+  // Inner belt
+  ctx.fillRect(altToX(1000), MARGIN_TOP, altToX(6000) - altToX(1000), PLOT_H);
+  // Outer belt
+  ctx.fillRect(altToX(10000), MARGIN_TOP, altToX(30000) - altToX(10000), PLOT_H);
+  ctx.globalAlpha = 1.0;
+
+  // Belt labels
+  ctx.fillStyle = '#554400';
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('INNER BELT', altToX(3500), MARGIN_TOP + 14);
+  ctx.fillText('SLOT', altToX(8000), MARGIN_TOP + 14);
+  ctx.fillText('OUTER BELT', altToX(20000), MARGIN_TOP + 14);
+
+  // Apogee marker
+  ctx.strokeStyle = '#336633';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(altToX(APOGEE_ALT), MARGIN_TOP);
+  ctx.lineTo(altToX(APOGEE_ALT), MARGIN_TOP + PLOT_H);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#336633';
+  ctx.fillText('APOGEE', altToX(APOGEE_ALT), MARGIN_TOP + PLOT_H - 6);
+}
+
+function drawPhosphor() {
+  const persistence = parseInt(document.getElementById('persistence').value);
+  const decayRate = 0.02 + (50 - persistence) * 0.004;
+
+  // Decay existing points
+  for (let i = tracePoints.length - 1; i >= 0; i--) {
+    tracePoints[i].intensity -= decayRate;
+    if (tracePoints[i].intensity <= 0) {
+      tracePoints.splice(i, 1);
+    }
+  }
+
+  // Draw all phosphor points
+  for (const pt of tracePoints) {
+    const alpha = Math.max(0, pt.intensity);
+    const brightness = Math.floor(255 * alpha);
+    const glow = Math.floor(50 * alpha);
+
+    // Phosphor glow (bloom effect)
+    ctx.beginPath();
+    ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${glow}, ${brightness}, ${glow}, ${alpha * 0.3})`;
+    ctx.fill();
+
+    // Core trace
+    ctx.beginPath();
+    ctx.arc(pt.x, pt.y, 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${Math.floor(brightness*0.5)}, ${brightness}, ${Math.floor(brightness*0.5)}, ${alpha})`;
+    ctx.fill();
+  }
+
+  // Beam spot (brightest at current position)
+  if (tracePoints.length > 0 && running) {
+    const last = tracePoints[tracePoints.length - 1];
+    ctx.beginPath();
+    ctx.arc(last.x, last.y, 6, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(100, 255, 100, 0.4)';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(last.x, last.y, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#88ff88';
+    ctx.fill();
+  }
+}
+
+function playClick() {
+  if (!audioEnabled || !audioCtx) return;
+  const now = audioCtx.currentTime;
+  if (now - lastClickTime < 0.005) return; // minimum 5ms between clicks
+  lastClickTime = now;
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.frequency.value = 800 + Math.random() * 200;
+  osc.type = 'square';
+  gain.gain.value = 0.05;
+  gain.gain.exponentialRampToValueAtTime(0.001, now + 0.01);
+  osc.start(now);
+  osc.stop(now + 0.012);
+}
+
+function updateReadouts(alt_km, rate, t_sec) {
+  document.getElementById('alt-readout').textContent = Math.floor(alt_km).toLocaleString();
+  document.getElementById('rate-readout').textContent = Math.floor(rate).toLocaleString();
+
+  const hours = Math.floor(t_sec / 3600);
+  const mins = Math.floor((t_sec % 3600) / 60);
+  document.getElementById('time-readout').textContent =
+    `T+${String(hours).padStart(2,'0')}:${String(mins).padStart(2,'0')}`;
+
+  document.getElementById('belt-readout').textContent = regionAt(alt_km);
+}
+
+function animate(timestamp) {
+  if (!running) return;
+
+  if (!lastTimestamp) lastTimestamp = timestamp;
+  const dt = (timestamp - lastTimestamp) / 1000; // seconds of wall clock
+  lastTimestamp = timestamp;
+
+  const speedSlider = parseInt(document.getElementById('speed').value);
+  // Map slider 1-200 to compression ratio
+  // At slider=60: 43 hours in 60 seconds (compression = 2580)
+  const compressionTarget = MISSION_DURATION / speedSlider;
+  const missionDt = dt * compressionTarget;
+
+  missionTime += missionDt;
+
+  if (missionTime >= MISSION_DURATION) {
+    missionTime = MISSION_DURATION;
+    running = false;
+    document.getElementById('start-btn').textContent = 'DONE';
+  }
+
+  // Update speed label
+  document.getElementById('speed-label').textContent = `${speedSlider}s compressed`;
+
+  // Compute current state
+  const alt = altitudeAt(missionTime);
+  const rad = radiationAt(alt);
+
+  // Add trace point
+  const x = altToX(alt);
+  const y = rateToY(rad.measured);
+  tracePoints.push({ x, y, intensity: 1.0 });
+
+  // Audio clicks — probability proportional to count rate
+  if (audioEnabled && audioCtx) {
+    const clicksPerFrame = rad.measured / 60 * dt * compressionTarget / 100;
+    if (Math.random() < Math.min(clicksPerFrame, 0.8)) {
+      playClick();
+    }
+  }
+
+  // Update readouts
+  updateReadouts(alt, rad.measured, missionTime);
+
+  // Redraw
+  drawGrid();
+  drawPhosphor();
+
+  animFrame = requestAnimationFrame(animate);
+}
+
+function startTrace() {
+  if (running) {
+    running = false;
+    document.getElementById('start-btn').textContent = 'RESUME';
+    if (animFrame) cancelAnimationFrame(animFrame);
+    return;
+  }
+
+  running = true;
+  lastTimestamp = null;
+  document.getElementById('start-btn').textContent = 'PAUSE';
+  document.getElementById('start-btn').classList.add('active');
+  animFrame = requestAnimationFrame(animate);
+}
+
+function resetTrace() {
+  running = false;
+  missionTime = 0;
+  tracePoints = [];
+  lastTimestamp = null;
+  if (animFrame) cancelAnimationFrame(animFrame);
+  document.getElementById('start-btn').textContent = 'START';
+  document.getElementById('start-btn').classList.remove('active');
+  updateReadouts(0, 0, 0);
+  drawGrid();
+}
+
+function toggleAudio() {
+  audioEnabled = !audioEnabled;
+  const btn = document.getElementById('audio-btn');
+
+  if (audioEnabled) {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    btn.textContent = 'CLICKS ON';
+    btn.classList.add('active');
+  } else {
+    btn.textContent = 'CLICKS OFF';
+    btn.classList.remove('active');
+  }
+}
+
+// Initial draw
+drawGrid();
+</script>
+</body>
+</html>

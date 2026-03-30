@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 1 — Signal Strength vs Distance</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0c0c14;
+    color: #aaccff;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    color: #88bbff;
+    text-shadow: 0 0 10px #88bbff44;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    color: #667799;
+    margin-bottom: 16px;
+  }
+
+  .panel {
+    background: #111118;
+    border: 2px solid #222233;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  canvas {
+    display: block;
+    border: 1px solid #1a1a2a;
+    border-radius: 4px;
+  }
+
+  .controls {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .control-group label {
+    font-size: 10px;
+    color: #667;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  button {
+    background: #181828;
+    color: #88bbff;
+    border: 1px solid #88bbff;
+    padding: 6px 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  button:hover { background: #88bbff22; }
+  button.active { background: #88bbff33; box-shadow: 0 0 8px #88bbff44; }
+
+  .formula-box {
+    background: #0a0a12;
+    border: 1px solid #222;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 900px;
+  }
+
+  .formula-box .formula {
+    color: #ffcc44;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .formula-box .value {
+    color: #88ff88;
+  }
+
+  .readout {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .readout-item { text-align: center; }
+
+  .readout-value {
+    font-size: 18px;
+    color: #88bbff;
+    text-shadow: 0 0 8px #88bbff44;
+  }
+
+  .readout-label {
+    font-size: 9px;
+    color: #556;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .info {
+    max-width: 900px;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: #111118;
+    border: 1px solid #1a1a2a;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #667799;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<h1>PIONEER 1 — SIGNAL STRENGTH VS DISTANCE</h1>
+<div class="subtitle">300 mW at 108.06 MHz | Inverse-Square Law | Free-Space Path Loss</div>
+
+<div class="panel">
+  <canvas id="chart" width="900" height="420"></canvas>
+</div>
+
+<div class="controls">
+  <div class="control-group">
+    <label>Animation</label>
+    <button id="anim-btn" onclick="toggleAnim()">START</button>
+    <button onclick="resetAnim()">RESET</button>
+  </div>
+  <div class="control-group">
+    <label>Speed</label>
+    <button onclick="setSpeed(0.5)">0.5x</button>
+    <button onclick="setSpeed(1)" class="active" id="speed1">1x</button>
+    <button onclick="setSpeed(3)">3x</button>
+  </div>
+</div>
+
+<div class="readout">
+  <div class="readout-item">
+    <div class="readout-value" id="dist-readout">0</div>
+    <div class="readout-label">DISTANCE (KM)</div>
+  </div>
+  <div class="readout-item">
+    <div class="readout-value" id="signal-readout">-0.0</div>
+    <div class="readout-label">SIGNAL (dBm)</div>
+  </div>
+  <div class="readout-item">
+    <div class="readout-value" id="fspl-readout">0.0</div>
+    <div class="readout-label">PATH LOSS (dB)</div>
+  </div>
+  <div class="readout-item">
+    <div class="readout-value" id="region-readout">LAUNCH</div>
+    <div class="readout-label">REGION</div>
+  </div>
+  <div class="readout-item">
+    <div class="readout-value" id="time-readout">T+00:00</div>
+    <div class="readout-label">MISSION TIME</div>
+  </div>
+</div>
+
+<div class="formula-box" id="formula-live">
+  <div class="formula">FSPL(dB) = 20*log10(d) + 20*log10(f) + 20*log10(4*pi/c)</div>
+  <div style="margin-top:6px;">
+    Transmit power: <span class="value">300 mW = +24.8 dBm</span><br>
+    Frequency: <span class="value">108.06 MHz</span><br>
+    Free-space path loss at <span class="value" id="formula-dist">0 km</span>:
+    <span class="value" id="formula-fspl">0.0 dB</span><br>
+    Received signal: <span class="value" id="formula-rx">+24.8 dBm</span><br>
+    Receiver threshold (Jodrell Bank 76m): <span class="value">~ -150 dBm</span>
+  </div>
+</div>
+
+<div class="info">
+  <strong>Pioneer 1 Signal Propagation</strong> — Pioneer 1 transmitted at 300 milliwatts
+  (0.3 W) on 108.06 MHz. As the spacecraft receded from Earth, signal strength dropped
+  following the inverse-square law. The animation shows power density at the ground station
+  decreasing with distance. Key altitudes are marked: the inner Van Allen belt (3,500 km),
+  the slot region (8,000 km), the outer belt (16,000 km), and apogee (113,854 km). The
+  76-meter Lovell Telescope at Jodrell Bank had sufficient sensitivity to receive the signal
+  even at apogee — the combination of dish gain and low receiver noise temperature provided
+  a link margin that kept the signal well above the noise floor throughout the 43-hour mission.
+  Without Jodrell Bank's large aperture, some of Pioneer 1's data would have been lost.
+</div>
+
+<script>
+// =========================================================================
+// Signal propagation model
+// =========================================================================
+
+const TX_POWER_W = 0.300;            // 300 mW
+const TX_POWER_DBM = 10 * Math.log10(TX_POWER_W * 1000); // +24.77 dBm
+const FREQ_HZ = 108.06e6;            // Hz
+const C = 299792458;                  // speed of light m/s
+const APOGEE_KM = 113854;
+const MISSION_DURATION = 43 * 3600 + 17 * 60;
+
+// Orbital mechanics (same as scope page)
+const R_EARTH = 6371;
+const MU = 3.986004418e5;
+const r_peri = R_EARTH + 200;
+const r_apo = R_EARTH + APOGEE_KM;
+const a = (r_peri + r_apo) / 2;
+const ecc = (r_apo - r_peri) / (r_apo + r_peri);
+const T_orbit = 2 * Math.PI * Math.sqrt(a * a * a / MU);
+
+function solveKepler(M, e) {
+  let E = M;
+  for (let i = 0; i < 50; i++) {
+    const dE = (E - e * Math.sin(E) - M) / (1 - e * Math.cos(E));
+    E -= dE;
+    if (Math.abs(dE) < 1e-10) break;
+  }
+  return E;
+}
+
+function altitudeAt(t) {
+  const n = 2 * Math.PI / T_orbit;
+  const M = n * t;
+  const E = solveKepler(M, ecc);
+  const r = a * (1 - ecc * Math.cos(E));
+  return r - R_EARTH;
+}
+
+// Free-space path loss (dB)
+function fspl(distance_km) {
+  if (distance_km <= 0) return 0;
+  const d_m = distance_km * 1000;
+  return 20 * Math.log10(d_m) + 20 * Math.log10(FREQ_HZ) +
+         20 * Math.log10(4 * Math.PI / C);
+}
+
+// Received power (dBm)
+function rxPower(distance_km) {
+  if (distance_km <= 0) return TX_POWER_DBM;
+  return TX_POWER_DBM - fspl(distance_km);
+}
+
+function regionAt(alt) {
+  if (alt < 500) return 'LEO';
+  if (alt < 6000) return 'INNER BELT';
+  if (alt < 10000) return 'SLOT';
+  if (alt < 30000) return 'OUTER BELT';
+  if (alt < 100000) return 'CISLUNAR';
+  return 'NEAR APOGEE';
+}
+
+// Key altitude markers
+const MARKERS = [
+  { alt: 3500,   label: 'Inner Belt Peak',  color: '#ff8844' },
+  { alt: 8000,   label: 'Slot Region',      color: '#888888' },
+  { alt: 16000,  label: 'Outer Belt Peak',  color: '#aa66ff' },
+  { alt: 113854, label: 'APOGEE',           color: '#4488ff' },
+];
+
+// Receiver threshold (Jodrell Bank estimated)
+const RX_THRESHOLD_DBM = -150;
+
+// =========================================================================
+// Chart rendering
+// =========================================================================
+
+const canvas = document.getElementById('chart');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+
+const ML = 80, MR = 30, MT = 30, MB = 50;
+const PW = W - ML - MR;
+const PH = H - MT - MB;
+
+// Axis ranges
+const MAX_DIST = 120000;     // km
+const MIN_DBM = -160;
+const MAX_DBM = 30;
+const DBM_RANGE = MAX_DBM - MIN_DBM;
+
+function distToX(d) { return ML + (d / MAX_DIST) * PW; }
+function dbmToY(dbm) { return MT + PH - ((dbm - MIN_DBM) / DBM_RANGE) * PH; }
+
+// Animation state
+let currentTime = 0;
+let animRunning = false;
+let animSpeed = 1;
+let animFrame = null;
+let lastTS = null;
+let trailPoints = [];
+
+function drawChart() {
+  // Background
+  ctx.fillStyle = '#08080f';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = '#151520';
+  ctx.lineWidth = 0.5;
+
+  for (let d = 0; d <= MAX_DIST; d += 10000) {
+    const x = distToX(d);
+    ctx.beginPath(); ctx.moveTo(x, MT); ctx.lineTo(x, MT + PH); ctx.stroke();
+  }
+
+  for (let dbm = MIN_DBM; dbm <= MAX_DBM; dbm += 10) {
+    const y = dbmToY(dbm);
+    ctx.beginPath(); ctx.moveTo(ML, y); ctx.lineTo(ML + PW, y); ctx.stroke();
+  }
+
+  // Receiver threshold line
+  const threshY = dbmToY(RX_THRESHOLD_DBM);
+  ctx.strokeStyle = '#ff444466';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([6, 4]);
+  ctx.beginPath(); ctx.moveTo(ML, threshY); ctx.lineTo(ML + PW, threshY); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#ff4444';
+  ctx.font = '9px Courier New';
+  ctx.textAlign = 'left';
+  ctx.fillText('Receiver threshold (est.)', ML + 4, threshY - 4);
+
+  // Static signal curve (full path)
+  ctx.strokeStyle = '#2255aa44';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let d = 100; d <= MAX_DIST; d += 200) {
+    const x = distToX(d);
+    const y = dbmToY(rxPower(d));
+    if (d === 100) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Marker altitude lines
+  for (const m of MARKERS) {
+    const x = distToX(m.alt);
+    ctx.strokeStyle = m.color + '44';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(x, MT); ctx.lineTo(x, MT + PH); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = m.color + '88';
+    ctx.font = '9px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText(m.label, x, MT + PH + 14);
+    ctx.fillText(`${(m.alt/1000).toFixed(0)}k km`, x, MT + PH + 26);
+  }
+
+  // Animated trail
+  if (trailPoints.length > 1) {
+    // Glow trail
+    ctx.strokeStyle = '#4488ff';
+    ctx.lineWidth = 2.5;
+    ctx.shadowColor = '#4488ff';
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    ctx.moveTo(trailPoints[0].x, trailPoints[0].y);
+    for (let i = 1; i < trailPoints.length; i++) {
+      ctx.lineTo(trailPoints[i].x, trailPoints[i].y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Current position dot
+    const last = trailPoints[trailPoints.length - 1];
+    ctx.beginPath();
+    ctx.arc(last.x, last.y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#88ccff';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(last.x, last.y, 10, 0, Math.PI * 2);
+    ctx.fillStyle = '#4488ff33';
+    ctx.fill();
+  }
+
+  // Signal strength bar (right side)
+  if (currentTime > 0) {
+    const alt = altitudeAt(currentTime);
+    const sig = rxPower(alt);
+    const barH = ((sig - MIN_DBM) / DBM_RANGE) * PH;
+    const barX = W - 20;
+    const barW = 10;
+
+    // Background
+    ctx.fillStyle = '#111';
+    ctx.fillRect(barX, MT, barW, PH);
+
+    // Signal bar
+    const hue = Math.max(0, Math.min(120, (sig - MIN_DBM) / DBM_RANGE * 120));
+    ctx.fillStyle = `hsl(${hue}, 80%, 50%)`;
+    ctx.fillRect(barX, MT + PH - barH, barW, barH);
+
+    // Threshold line on bar
+    const thBarY = MT + PH - ((RX_THRESHOLD_DBM - MIN_DBM) / DBM_RANGE) * PH;
+    ctx.strokeStyle = '#ff4444';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(barX - 2, thBarY);
+    ctx.lineTo(barX + barW + 2, thBarY);
+    ctx.stroke();
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#556688';
+  ctx.font = '10px Courier New';
+  ctx.textAlign = 'center';
+
+  for (let d = 0; d <= MAX_DIST; d += 20000) {
+    ctx.fillText(`${d/1000}k`, distToX(d), MT + PH + 40);
+  }
+  ctx.fillText('Distance from Earth (km)', ML + PW / 2, H - 4);
+
+  ctx.textAlign = 'right';
+  for (let dbm = MIN_DBM; dbm <= MAX_DBM; dbm += 20) {
+    ctx.fillText(`${dbm}`, ML - 6, dbmToY(dbm) + 4);
+  }
+
+  ctx.save();
+  ctx.translate(14, MT + PH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = 'center';
+  ctx.fillText('Received Power (dBm)', 0, 0);
+  ctx.restore();
+}
+
+function updateReadouts(alt, sig, loss, t) {
+  document.getElementById('dist-readout').textContent = Math.floor(alt).toLocaleString();
+  document.getElementById('signal-readout').textContent = sig.toFixed(1);
+  document.getElementById('fspl-readout').textContent = loss.toFixed(1);
+  document.getElementById('region-readout').textContent = regionAt(alt);
+
+  const hours = Math.floor(t / 3600);
+  const mins = Math.floor((t % 3600) / 60);
+  document.getElementById('time-readout').textContent =
+    `T+${String(hours).padStart(2,'0')}:${String(mins).padStart(2,'0')}`;
+
+  document.getElementById('formula-dist').textContent = `${Math.floor(alt).toLocaleString()} km`;
+  document.getElementById('formula-fspl').textContent = `${loss.toFixed(1)} dB`;
+  document.getElementById('formula-rx').textContent = `${sig.toFixed(1)} dBm`;
+}
+
+function animate(timestamp) {
+  if (!animRunning) return;
+  if (!lastTS) lastTS = timestamp;
+  const dt = (timestamp - lastTS) / 1000;
+  lastTS = timestamp;
+
+  // Compress 43 hours into 60 seconds at 1x speed
+  const compression = MISSION_DURATION / 60;
+  currentTime += dt * compression * animSpeed;
+
+  if (currentTime >= MISSION_DURATION) {
+    currentTime = MISSION_DURATION;
+    animRunning = false;
+    document.getElementById('anim-btn').textContent = 'DONE';
+  }
+
+  const alt = altitudeAt(currentTime);
+  const sig = rxPower(alt);
+  const loss = fspl(alt);
+
+  // Add trail point (subsample to avoid too many points)
+  const x = distToX(alt);
+  const y = dbmToY(sig);
+  if (trailPoints.length === 0 ||
+      Math.abs(x - trailPoints[trailPoints.length-1].x) > 1) {
+    trailPoints.push({ x, y });
+  }
+
+  updateReadouts(alt, sig, loss, currentTime);
+  drawChart();
+
+  animFrame = requestAnimationFrame(animate);
+}
+
+function toggleAnim() {
+  if (animRunning) {
+    animRunning = false;
+    document.getElementById('anim-btn').textContent = 'RESUME';
+    if (animFrame) cancelAnimationFrame(animFrame);
+    return;
+  }
+  animRunning = true;
+  lastTS = null;
+  document.getElementById('anim-btn').textContent = 'PAUSE';
+  document.getElementById('anim-btn').classList.add('active');
+  animFrame = requestAnimationFrame(animate);
+}
+
+function resetAnim() {
+  animRunning = false;
+  currentTime = 0;
+  trailPoints = [];
+  lastTS = null;
+  if (animFrame) cancelAnimationFrame(animFrame);
+  document.getElementById('anim-btn').textContent = 'START';
+  document.getElementById('anim-btn').classList.remove('active');
+  updateReadouts(0, TX_POWER_DBM, 0, 0);
+  drawChart();
+}
+
+function setSpeed(s) {
+  animSpeed = s;
+  document.querySelectorAll('.controls button').forEach(b => {
+    if (b.textContent === s + 'x') b.classList.add('active');
+    else if (['0.5x','1x','3x'].includes(b.textContent)) b.classList.remove('active');
+  });
+}
+
+// Initial draw
+drawChart();
+updateReadouts(0, TX_POWER_DBM, 0, 0);
+</script>
+</body>
+</html>

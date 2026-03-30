@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 4 — Escape Velocity Interactive Simulation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a2e;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  }
+  canvas {
+    display: block;
+  }
+  #sim-canvas {
+    flex: 1;
+  }
+  #panel {
+    width: 300px;
+    background: #0d0d35;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 14px; color: #7ec8e3; text-align: center; }
+  h2 { font-size: 11px; color: #888; text-align: center; font-weight: normal; margin-bottom: 6px; }
+  .box {
+    background: #111144;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #7ec8e3; font-weight: bold; }
+  .box .escape { color: #6bcb77; }
+  .box .captured { color: #ff6b6b; }
+  #velocity-control {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  #velocity-control label { font-size: 11px; color: #aaa; }
+  #velocity-control input[type="range"] { width: 100%; accent-color: #7ec8e3; }
+  .marker {
+    font-size: 9px;
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+  }
+  button {
+    background: #1a1a5e;
+    color: #7ec8e3;
+    border: 1px solid #7ec8e3;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+  }
+  button:hover { background: #2a2a7e; }
+  .presets { display: flex; gap: 4px; flex-wrap: wrap; }
+  .presets button { flex: 1; min-width: 80px; font-size: 10px; padding: 4px 6px; }
+  .presets button.p1 { border-color: #ffd93d; color: #ffd93d; }
+  .presets button.p4 { border-color: #6bcb77; color: #6bcb77; }
+  .presets button.esc { border-color: #ff6b6b; color: #ff6b6b; }
+  .trail-note { font-size: 9px; color: #555; text-align: center; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>ESCAPE VELOCITY</h1>
+    <h2>The boundary between capture and freedom</h2>
+
+    <div class="box" id="readout">
+      <div><span class="label">Launch velocity: </span><span class="value" id="v-launch">11.00 km/s</span></div>
+      <div><span class="label">Escape velocity: </span><span class="value" id="v-escape">11.00 km/s</span></div>
+      <div><span class="label">Current velocity: </span><span class="value" id="v-current">— km/s</span></div>
+      <div><span class="label">Altitude: </span><span class="value" id="alt-display">0 km</span></div>
+      <div><span class="label">Orbital energy: </span><span class="value" id="energy-display">0 MJ/kg</span></div>
+      <div><span class="label">Orbit type: </span><span class="value" id="orbit-type">—</span></div>
+    </div>
+
+    <div id="velocity-control">
+      <label>Launch Velocity: <span id="v-label">11.00</span> km/s</label>
+      <input type="range" id="v-slider" min="5" max="15" step="0.01" value="11.00">
+      <div class="marker">
+        <span>5 km/s</span>
+        <span>v_esc</span>
+        <span>15 km/s</span>
+      </div>
+    </div>
+
+    <div class="presets">
+      <button class="p1" onclick="setVelocity(10.27)">Pioneer 1<br>10.27 km/s</button>
+      <button class="esc" onclick="setVelocity(11.00)">Escape<br>11.00 km/s</button>
+      <button class="p4" onclick="setVelocity(11.10)">Pioneer 4<br>11.10 km/s</button>
+    </div>
+
+    <button id="btn-launch" onclick="launch()">LAUNCH</button>
+    <button onclick="resetSim()">RESET</button>
+
+    <div class="box" style="font-size: 10px;">
+      <div style="color: #ffd93d;">Pioneer 1: 10.27 km/s &mdash; fell back</div>
+      <div style="color: #6bcb77;">Pioneer 4: 11.10 km/s &mdash; escaped</div>
+      <div style="color: #ff6b6b; margin-top: 4px;">
+        Difference: 0.83 km/s (7.5%)
+      </div>
+      <div style="color: #666; margin-top: 4px;">
+        That tiny velocity difference separates<br>
+        "falls back to Earth" from "never returns."
+      </div>
+    </div>
+
+    <div class="trail-note">
+      Each launch leaves a trail.<br>
+      Compare trajectories side by side.
+    </div>
+  </div>
+</div>
+
+<script>
+// ========================================================================
+// Constants (SI units internally, display in km/s and km)
+// ========================================================================
+const G = 6.674e-11;
+const M_EARTH = 5.972e24;
+const R_EARTH = 6.371e6;
+const MU = G * M_EARTH;
+const BURNOUT_ALT = 300e3;
+const R0 = R_EARTH + BURNOUT_ALT;
+const V_ESCAPE = Math.sqrt(2 * MU / R0); // ~11.0 km/s
+const MOON_DIST = 3.844e8;
+
+// ========================================================================
+// State
+// ========================================================================
+let launchVelocity = 11.0e3; // m/s
+let spacecraft = null; // active spacecraft
+let trails = []; // previous trajectory trails
+const MAX_TRAILS = 10;
+
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  const container = document.getElementById('container');
+  canvas.width = container.clientWidth - 300;
+  canvas.height = container.clientHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ========================================================================
+// Physics
+// ========================================================================
+function createSpacecraft(v0) {
+  const specific_energy = 0.5 * v0 * v0 - MU / R0;
+  let orbitType;
+  if (specific_energy < -1e3) orbitType = 'elliptical';
+  else if (specific_energy < 1e3) orbitType = 'parabolic';
+  else orbitType = 'hyperbolic';
+
+  return {
+    x: 0, y: R0,
+    vx: v0, vy: 0,
+    trail: [],
+    v0: v0,
+    alive: true,
+    orbitType: orbitType,
+    color: v0 < V_ESCAPE - 50 ? '#ffd93d' :
+           v0 > V_ESCAPE + 50 ? '#6bcb77' : '#ff6b6b',
+    time: 0
+  };
+}
+
+function stepPhysics(sc, dt) {
+  if (!sc.alive) return;
+
+  const r = Math.sqrt(sc.x * sc.x + sc.y * sc.y);
+  if (r < R_EARTH) {
+    sc.alive = false;
+    return;
+  }
+  if (r > MOON_DIST * 2) {
+    sc.alive = false; // escaped well beyond Moon
+    return;
+  }
+
+  // Gravitational acceleration
+  const ax = -MU * sc.x / (r * r * r);
+  const ay = -MU * sc.y / (r * r * r);
+
+  // Velocity Verlet
+  const nx = sc.x + sc.vx * dt + 0.5 * ax * dt * dt;
+  const ny = sc.y + sc.vy * dt + 0.5 * ay * dt * dt;
+
+  const nr = Math.sqrt(nx * nx + ny * ny);
+  const nax = -MU * nx / (nr * nr * nr);
+  const nay = -MU * ny / (nr * nr * nr);
+
+  sc.vx += 0.5 * (ax + nax) * dt;
+  sc.vy += 0.5 * (ay + nay) * dt;
+  sc.x = nx;
+  sc.y = ny;
+
+  sc.time += dt;
+  sc.trail.push({ x: sc.x, y: sc.y });
+  if (sc.trail.length > 20000) sc.trail.shift();
+}
+
+// ========================================================================
+// Rendering
+// ========================================================================
+function worldToScreen(wx, wy) {
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+  const scale = Math.min(cx, cy) * 0.85 / (MOON_DIST * 0.6);
+  return {
+    x: cx + wx * scale,
+    y: cy - wy * scale // flip y
+  };
+}
+
+function draw() {
+  const W = canvas.width, H = canvas.height;
+  ctx.fillStyle = '#0a0a2e';
+  ctx.fillRect(0, 0, W, H);
+
+  // Gravitational field grid distortion
+  const cx = W / 2, cy = H / 2;
+  const gridSpacing = 40;
+  ctx.strokeStyle = 'rgba(50,50,80,0.3)';
+  ctx.lineWidth = 0.5;
+
+  for (let gx = gridSpacing; gx < W; gx += gridSpacing) {
+    ctx.beginPath();
+    for (let gy = 0; gy < H; gy += 4) {
+      const dx = gx - cx, dy = gy - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const earthScreenR = worldToScreen(R_EARTH, 0).x - cx;
+      const warp = earthScreenR * earthScreenR / (dist + earthScreenR) * 0.15;
+      const warpX = gx + (dx / (dist + 1)) * warp;
+      if (gy === 0) ctx.moveTo(warpX, gy);
+      else ctx.lineTo(warpX, gy);
+    }
+    ctx.stroke();
+  }
+
+  for (let gy = gridSpacing; gy < H; gy += gridSpacing) {
+    ctx.beginPath();
+    for (let gx = 0; gx < W; gx += 4) {
+      const dx = gx - cx, dy = gy - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const earthScreenR = worldToScreen(R_EARTH, 0).x - cx;
+      const warp = earthScreenR * earthScreenR / (dist + earthScreenR) * 0.15;
+      const warpY = gy + (dy / (dist + 1)) * warp;
+      if (gx === 0) ctx.moveTo(gx, warpY);
+      else ctx.lineTo(gx, warpY);
+    }
+    ctx.stroke();
+  }
+
+  // Earth
+  const earthScreen = worldToScreen(0, 0);
+  const earthEdge = worldToScreen(R_EARTH, 0);
+  const earthR = earthEdge.x - earthScreen.x;
+
+  const earthGrad = ctx.createRadialGradient(
+    earthScreen.x - earthR * 0.3, earthScreen.y - earthR * 0.3, earthR * 0.1,
+    earthScreen.x, earthScreen.y, earthR
+  );
+  earthGrad.addColorStop(0, '#4488cc');
+  earthGrad.addColorStop(0.6, '#2266aa');
+  earthGrad.addColorStop(1, '#114477');
+  ctx.beginPath();
+  ctx.arc(earthScreen.x, earthScreen.y, earthR, 0, Math.PI * 2);
+  ctx.fillStyle = earthGrad;
+  ctx.fill();
+
+  // Moon orbit circle (faint)
+  const moonScreen = worldToScreen(MOON_DIST, 0);
+  const moonR = moonScreen.x - earthScreen.x;
+  ctx.beginPath();
+  ctx.arc(earthScreen.x, earthScreen.y, moonR, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(150,150,150,0.15)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 8]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.font = '10px Courier New';
+  ctx.fillStyle = '#555';
+  ctx.fillText('Moon orbit', earthScreen.x + moonR - 40, earthScreen.y - 10);
+
+  // Previous trails
+  for (const trail of trails) {
+    if (trail.points.length < 2) continue;
+    ctx.beginPath();
+    const p0 = worldToScreen(trail.points[0].x, trail.points[0].y);
+    ctx.moveTo(p0.x, p0.y);
+    for (let i = 1; i < trail.points.length; i += 3) {
+      const p = worldToScreen(trail.points[i].x, trail.points[i].y);
+      ctx.lineTo(p.x, p.y);
+    }
+    ctx.strokeStyle = trail.color + '33';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Active spacecraft trail
+  if (spacecraft && spacecraft.trail.length > 1) {
+    ctx.beginPath();
+    const p0 = worldToScreen(spacecraft.trail[0].x, spacecraft.trail[0].y);
+    ctx.moveTo(p0.x, p0.y);
+    for (let i = 1; i < spacecraft.trail.length; i += 2) {
+      const p = worldToScreen(spacecraft.trail[i].x, spacecraft.trail[i].y);
+      ctx.lineTo(p.x, p.y);
+    }
+    ctx.strokeStyle = spacecraft.color;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Spacecraft dot
+    const scPos = worldToScreen(spacecraft.x, spacecraft.y);
+    ctx.beginPath();
+    ctx.arc(scPos.x, scPos.y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = spacecraft.color;
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Velocity vector
+    const r = Math.sqrt(spacecraft.x ** 2 + spacecraft.y ** 2);
+    const v = Math.sqrt(spacecraft.vx ** 2 + spacecraft.vy ** 2);
+    const vScale = 30 / v;
+    ctx.beginPath();
+    ctx.moveTo(scPos.x, scPos.y);
+    ctx.lineTo(scPos.x + spacecraft.vx * vScale, scPos.y - spacecraft.vy * vScale);
+    ctx.strokeStyle = '#ffffff88';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Escape velocity marker on slider region
+  const veSlider = document.getElementById('v-slider');
+  const sliderFrac = (V_ESCAPE / 1e3 - 5) / 10;
+}
+
+function updateReadout() {
+  if (!spacecraft) return;
+
+  const r = Math.sqrt(spacecraft.x ** 2 + spacecraft.y ** 2);
+  const v = Math.sqrt(spacecraft.vx ** 2 + spacecraft.vy ** 2);
+  const alt = (r - R_EARTH) / 1e3;
+  const vEscAtR = Math.sqrt(2 * MU / r);
+  const specificEnergy = 0.5 * v * v - MU / r;
+
+  document.getElementById('v-current').textContent = (v / 1e3).toFixed(2) + ' km/s';
+  document.getElementById('alt-display').textContent = Math.round(alt).toLocaleString() + ' km';
+  document.getElementById('energy-display').textContent = (specificEnergy / 1e6).toFixed(2) + ' MJ/kg';
+
+  const typeEl = document.getElementById('orbit-type');
+  if (specificEnergy > 100) {
+    typeEl.textContent = 'HYPERBOLIC (escape)';
+    typeEl.className = 'value escape';
+  } else if (specificEnergy > -100) {
+    typeEl.textContent = 'PARABOLIC (marginal)';
+    typeEl.className = 'value';
+  } else {
+    typeEl.textContent = 'ELLIPTICAL (captured)';
+    typeEl.className = 'value captured';
+  }
+}
+
+// ========================================================================
+// Simulation loop
+// ========================================================================
+let running = false;
+
+function simLoop() {
+  if (spacecraft && spacecraft.alive && running) {
+    // Multiple physics steps per frame for speed
+    const stepsPerFrame = 200;
+    const dt = 10; // seconds per step
+    for (let i = 0; i < stepsPerFrame; i++) {
+      stepPhysics(spacecraft, dt);
+      if (!spacecraft.alive) break;
+    }
+    updateReadout();
+  }
+  draw();
+  requestAnimationFrame(simLoop);
+}
+
+// ========================================================================
+// Controls
+// ========================================================================
+const vSlider = document.getElementById('v-slider');
+vSlider.addEventListener('input', function () {
+  launchVelocity = parseFloat(this.value) * 1e3;
+  document.getElementById('v-label').textContent = (launchVelocity / 1e3).toFixed(2);
+  document.getElementById('v-launch').textContent = (launchVelocity / 1e3).toFixed(2) + ' km/s';
+  document.getElementById('v-escape').textContent = (V_ESCAPE / 1e3).toFixed(2) + ' km/s';
+});
+
+function setVelocity(vKmS) {
+  launchVelocity = vKmS * 1e3;
+  vSlider.value = vKmS;
+  document.getElementById('v-label').textContent = vKmS.toFixed(2);
+  document.getElementById('v-launch').textContent = vKmS.toFixed(2) + ' km/s';
+}
+
+function launch() {
+  // Save previous trail
+  if (spacecraft && spacecraft.trail.length > 1) {
+    trails.push({ points: spacecraft.trail, color: spacecraft.color });
+    if (trails.length > MAX_TRAILS) trails.shift();
+  }
+
+  spacecraft = createSpacecraft(launchVelocity);
+  running = true;
+  document.getElementById('btn-launch').textContent = 'LAUNCHED';
+}
+
+function resetSim() {
+  spacecraft = null;
+  trails = [];
+  running = false;
+  document.getElementById('btn-launch').textContent = 'LAUNCH';
+  document.getElementById('v-current').textContent = '-- km/s';
+  document.getElementById('alt-display').textContent = '0 km';
+  document.getElementById('energy-display').textContent = '0 MJ/kg';
+  document.getElementById('orbit-type').textContent = '--';
+}
+
+// ========================================================================
+// Init
+// ========================================================================
+document.getElementById('v-escape').textContent = (V_ESCAPE / 1e3).toFixed(2) + ' km/s';
+requestAnimationFrame(simLoop);
+</script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 3 — Dual Van Allen Belt Interactive Visualization</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a2e;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  }
+  #main-canvas {
+    flex: 1;
+    cursor: crosshair;
+  }
+  #side-panel {
+    width: 320px;
+    background: #0d0d35;
+    border-left: 1px solid #333;
+    padding: 12px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  h1 {
+    font-size: 14px;
+    color: #7ec8e3;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  h2 {
+    font-size: 11px;
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 8px;
+    font-weight: normal;
+  }
+  .info-box {
+    background: #111144;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .info-box .label { color: #888; }
+  .info-box .value { color: #7ec8e3; font-weight: bold; }
+  .info-box .inner { color: #ff6b6b; }
+  .info-box .outer { color: #6b9fff; }
+  .info-box .slot { color: #666; }
+  #rate-canvas {
+    width: 100%;
+    height: 160px;
+    border: 1px solid #333;
+    border-radius: 4px;
+  }
+  #controls {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  #controls label {
+    font-size: 11px;
+    color: #aaa;
+  }
+  #controls input[type="range"] {
+    width: 100%;
+    accent-color: #7ec8e3;
+  }
+  #controls button {
+    background: #1a1a5e;
+    color: #7ec8e3;
+    border: 1px solid #7ec8e3;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+  }
+  #controls button:hover { background: #2a2a7e; }
+  #controls button.active { background: #7ec8e3; color: #0a0a2e; }
+  .legend {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .legend span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+  .legend .inner-dot { background: #ff6b6b; }
+  .legend .outer-dot { background: #6b9fff; }
+  .legend .slot-dot { background: #333; }
+  .legend .traj-dot { background: #ffd700; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="main-canvas"></canvas>
+  <div id="side-panel">
+    <h1>PIONEER 3 — VAN ALLEN BELTS</h1>
+    <h2>December 6, 1958 | Juno II | 102,322 km</h2>
+
+    <div class="info-box" id="cursor-info">
+      <span class="label">Click anywhere to probe radiation intensity</span>
+    </div>
+
+    <div class="info-box" id="spacecraft-info">
+      <div><span class="label">Time: </span><span class="value" id="disp-time">00:00:00</span></div>
+      <div><span class="label">Altitude: </span><span class="value" id="disp-alt">0 km</span></div>
+      <div><span class="label">Radiation: </span><span class="value" id="disp-rate">0 counts/sec</span></div>
+      <div><span class="label">Belt: </span><span class="value" id="disp-belt">—</span></div>
+    </div>
+
+    <canvas id="rate-canvas"></canvas>
+
+    <div id="controls">
+      <label>Discovery Mode: <span id="discovery-pct">100%</span></label>
+      <input type="range" id="discovery-slider" min="0" max="100" value="100">
+      <label>Animation Speed</label>
+      <input type="range" id="speed-slider" min="0" max="100" value="30">
+      <button id="btn-play">&#9654; Play</button>
+      <button id="btn-reset">Reset</button>
+    </div>
+
+    <div class="legend">
+      <div><span class="inner-dot"></span> Inner belt (3,500 km, protons)</div>
+      <div><span class="outer-dot"></span> Outer belt (16,000 km, electrons)</div>
+      <div><span class="slot-dot"></span> Slot region (7,000–10,000 km)</div>
+      <div><span class="traj-dot"></span> Pioneer 3 trajectory</div>
+    </div>
+
+    <div class="info-box" style="font-size: 10px; color: #666;">
+      Pioneer 3 discovered two distinct radiation belts, not one.
+      Dr. James Van Allen's dual GM tube experiment detected the
+      inner belt (high-energy protons) and outer belt (electrons)
+      separated by a quiet slot region.
+    </div>
+  </div>
+</div>
+
+<script>
+// ========================================================================
+// Configuration
+// ========================================================================
+const EARTH_RADIUS_KM = 6371;
+const MAX_ALT_KM = 102322;
+const FLIGHT_TIME_HR = 38;
+const INNER_PEAK = 3500, INNER_SIGMA = 1500, INNER_MAX = 10000;
+const OUTER_PEAK = 16000, OUTER_SIGMA = 5000, OUTER_MAX = 5000;
+const BACKGROUND = 5;
+const MOON_DIST_KM = 384400;
+
+// ========================================================================
+// State
+// ========================================================================
+let playing = false;
+let simTime = 0; // hours
+let animSpeed = 0.3;
+let discoveryPct = 100;
+let rateHistory = [];
+const MAX_HISTORY = 300;
+let mouseAlt = null;
+
+// ========================================================================
+// Physics
+// ========================================================================
+function radiationProfile(altKm) {
+  const inner = INNER_MAX * Math.exp(-0.5 * ((altKm - INNER_PEAK) / INNER_SIGMA) ** 2);
+  const outer = OUTER_MAX * Math.exp(-0.5 * ((altKm - OUTER_PEAK) / OUTER_SIGMA) ** 2);
+  return inner + outer + BACKGROUND;
+}
+
+function trajectoryAlt(tHours) {
+  const tHalf = FLIGHT_TIME_HR / 2;
+  const alt = MAX_ALT_KM * (1 - ((tHours - tHalf) / tHalf) ** 2);
+  return Math.max(0, alt);
+}
+
+function getBeltName(altKm) {
+  if (altKm < 1000) return '—';
+  if (altKm >= 1500 && altKm <= 6000) return 'INNER BELT';
+  if (altKm > 6000 && altKm < 10000) return 'SLOT REGION';
+  if (altKm >= 10000 && altKm <= 25000) return 'OUTER BELT';
+  return 'Beyond belts';
+}
+
+// ========================================================================
+// Rendering
+// ========================================================================
+const mainCanvas = document.getElementById('main-canvas');
+const mainCtx = mainCanvas.getContext('2d');
+const rateCanvas = document.getElementById('rate-canvas');
+const rateCtx = rateCanvas.getContext('2d');
+
+function resize() {
+  const container = document.getElementById('container');
+  mainCanvas.width = container.clientWidth - 320;
+  mainCanvas.height = container.clientHeight;
+  rateCanvas.width = rateCanvas.clientWidth * 2;
+  rateCanvas.height = rateCanvas.clientHeight * 2;
+}
+
+function kmToPixel(altKm) {
+  // Scale: Earth at center, max visible range = 40,000 km from surface
+  const cx = mainCanvas.width / 2;
+  const cy = mainCanvas.height / 2;
+  const maxRange = 35000; // km visible radius
+  const earthPixelR = Math.min(cx, cy) * 0.12;
+  const scale = (Math.min(cx, cy) - earthPixelR - 20) / maxRange;
+  return { cx, cy, earthR: earthPixelR, scale };
+}
+
+function pixelToKm(px, py) {
+  const { cx, cy, earthR, scale } = kmToPixel(0);
+  const dx = px - cx, dy = py - cy;
+  const distPx = Math.sqrt(dx * dx + dy * dy);
+  const distKm = (distPx - earthR) / scale;
+  return Math.max(0, distKm);
+}
+
+function drawMain() {
+  const ctx = mainCtx;
+  const W = mainCanvas.width, H = mainCanvas.height;
+  const { cx, cy, earthR, scale } = kmToPixel(0);
+
+  // Clear
+  ctx.fillStyle = '#0a0a2e';
+  ctx.fillRect(0, 0, W, H);
+
+  // Draw radiation belts as concentric rings with intensity-based color
+  const maxVisKm = 35000;
+  const steps = 400;
+  for (let i = steps; i >= 0; i--) {
+    const altKm = (i / steps) * maxVisKm;
+    const r = earthR + altKm * scale;
+    if (r < 1) continue;
+
+    const rate = radiationProfile(altKm);
+    const logRate = Math.log10(Math.max(rate, 1));
+    const maxLogRate = Math.log10(INNER_MAX);
+
+    // Color: inner belt warm (red-yellow), outer belt cool (blue-purple)
+    const innerWeight = INNER_MAX * Math.exp(-0.5 * ((altKm - INNER_PEAK) / INNER_SIGMA) ** 2);
+    const outerWeight = OUTER_MAX * Math.exp(-0.5 * ((altKm - OUTER_PEAK) / OUTER_SIGMA) ** 2);
+    const total = innerWeight + outerWeight + 0.001;
+    const warmFrac = innerWeight / total;
+
+    const intensity = Math.min(1, logRate / maxLogRate);
+
+    let red, green, blue;
+    if (warmFrac > 0.5) {
+      // Inner belt: red-yellow
+      red = Math.floor(255 * intensity);
+      green = Math.floor(120 * intensity * warmFrac);
+      blue = Math.floor(30 * intensity);
+    } else {
+      // Outer belt: blue-purple
+      red = Math.floor(80 * intensity);
+      green = Math.floor(60 * intensity);
+      blue = Math.floor(255 * intensity);
+    }
+
+    const alpha = intensity * 0.4;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(${red},${green},${blue},${alpha})`;
+    ctx.lineWidth = Math.max(1, maxVisKm * scale / steps);
+    ctx.stroke();
+  }
+
+  // Earth
+  const earthGrad = ctx.createRadialGradient(cx - earthR * 0.3, cy - earthR * 0.3, earthR * 0.1, cx, cy, earthR);
+  earthGrad.addColorStop(0, '#4488cc');
+  earthGrad.addColorStop(0.5, '#2266aa');
+  earthGrad.addColorStop(1, '#114477');
+  ctx.beginPath();
+  ctx.arc(cx, cy, earthR, 0, Math.PI * 2);
+  ctx.fillStyle = earthGrad;
+  ctx.fill();
+  ctx.strokeStyle = '#6699cc';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Belt labels
+  ctx.font = '11px Courier New';
+  ctx.fillStyle = 'rgba(255,100,100,0.6)';
+  ctx.fillText('INNER BELT', cx + earthR + INNER_PEAK * scale - 35, cy - 15);
+  ctx.fillStyle = 'rgba(100,150,255,0.6)';
+  ctx.fillText('OUTER BELT', cx + earthR + OUTER_PEAK * scale - 35, cy - 15);
+  ctx.fillStyle = 'rgba(100,100,100,0.5)';
+  ctx.fillText('SLOT', cx + earthR + 8500 * scale - 15, cy - 15);
+
+  // Pioneer 3 trajectory
+  const trajectoryPoints = [];
+  const tSteps = 500;
+  const discoveryTime = (discoveryPct / 100) * FLIGHT_TIME_HR;
+  for (let i = 0; i <= tSteps; i++) {
+    const t = (i / tSteps) * FLIGHT_TIME_HR;
+    if (t > discoveryTime) break;
+    const alt = trajectoryAlt(t);
+    if (alt <= 0) continue;
+    // Trajectory angle: swing from lower-left to upper-right
+    const angle = -Math.PI / 2 + (t / FLIGHT_TIME_HR) * Math.PI * 0.5 - Math.PI * 0.25;
+    const r = earthR + alt * scale;
+    trajectoryPoints.push({
+      x: cx + r * Math.cos(angle),
+      y: cy + r * Math.sin(angle),
+      t, alt
+    });
+  }
+
+  if (trajectoryPoints.length > 1) {
+    ctx.beginPath();
+    ctx.moveTo(trajectoryPoints[0].x, trajectoryPoints[0].y);
+    for (let i = 1; i < trajectoryPoints.length; i++) {
+      ctx.lineTo(trajectoryPoints[i].x, trajectoryPoints[i].y);
+    }
+    ctx.strokeStyle = 'rgba(255,215,0,0.6)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  // Spacecraft position
+  const currentAlt = trajectoryAlt(simTime);
+  const currentAngle = -Math.PI / 2 + (simTime / FLIGHT_TIME_HR) * Math.PI * 0.5 - Math.PI * 0.25;
+  const scR = earthR + currentAlt * scale;
+  const scX = cx + scR * Math.cos(currentAngle);
+  const scY = cy + scR * Math.sin(currentAngle);
+
+  // Spacecraft glow
+  const scRate = radiationProfile(currentAlt);
+  const glowIntensity = Math.min(1, Math.log10(Math.max(scRate, 1)) / 4);
+  ctx.beginPath();
+  ctx.arc(scX, scY, 8 + glowIntensity * 12, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(255,215,0,${0.2 + glowIntensity * 0.3})`;
+  ctx.fill();
+
+  // Spacecraft dot
+  ctx.beginPath();
+  ctx.arc(scX, scY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#ffd700';
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Mouse crosshair probe
+  if (mouseAlt !== null) {
+    const probeR = earthR + mouseAlt * scale;
+    ctx.beginPath();
+    ctx.arc(cx, cy, probeR, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Scale bar
+  ctx.font = '10px Courier New';
+  ctx.fillStyle = '#666';
+  const scaleBarKm = 5000;
+  const scaleBarPx = scaleBarKm * scale;
+  ctx.fillRect(20, H - 30, scaleBarPx, 2);
+  ctx.fillText(`${scaleBarKm.toLocaleString()} km`, 20, H - 35);
+}
+
+function drawRateGraph() {
+  const ctx = rateCtx;
+  const W = rateCanvas.width, H = rateCanvas.height;
+
+  ctx.fillStyle = '#0d0d35';
+  ctx.fillRect(0, 0, W, H);
+
+  if (rateHistory.length < 2) return;
+
+  // Find max for scaling
+  const maxRate = Math.max(...rateHistory.map(h => h.rate), 100);
+  const logMax = Math.log10(maxRate);
+
+  // Grid lines
+  ctx.strokeStyle = '#222';
+  ctx.lineWidth = 1;
+  for (let exp = 0; exp <= 4; exp++) {
+    const y = H - (exp / logMax) * (H - 20) - 10;
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(W, y);
+    ctx.stroke();
+    ctx.font = '16px Courier New';
+    ctx.fillStyle = '#555';
+    ctx.fillText(`10^${exp}`, 4, y - 4);
+  }
+
+  // Rate line
+  ctx.beginPath();
+  for (let i = 0; i < rateHistory.length; i++) {
+    const x = (i / MAX_HISTORY) * W;
+    const logR = Math.log10(Math.max(rateHistory[i].rate, 1));
+    const y = H - (logR / logMax) * (H - 20) - 10;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = '#7ec8e3';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Label
+  ctx.font = '14px Courier New';
+  ctx.fillStyle = '#7ec8e3';
+  ctx.fillText('Radiation Count Rate (log scale)', 10, 18);
+}
+
+// ========================================================================
+// Animation loop
+// ========================================================================
+let lastFrame = 0;
+
+function animate(ts) {
+  if (lastFrame === 0) lastFrame = ts;
+  const dt = (ts - lastFrame) / 1000; // seconds
+  lastFrame = ts;
+
+  if (playing) {
+    simTime += dt * animSpeed;
+    if (simTime >= FLIGHT_TIME_HR) {
+      simTime = FLIGHT_TIME_HR;
+      playing = false;
+      document.getElementById('btn-play').textContent = '\u25B6 Play';
+    }
+
+    // Record rate history
+    const alt = trajectoryAlt(simTime);
+    const rate = radiationProfile(alt);
+    rateHistory.push({ t: simTime, rate, alt });
+    if (rateHistory.length > MAX_HISTORY) rateHistory.shift();
+  }
+
+  // Update displays
+  const currentAlt = trajectoryAlt(simTime);
+  const currentRate = radiationProfile(currentAlt);
+  const hours = Math.floor(simTime);
+  const mins = Math.floor((simTime - hours) * 60);
+  const secs = Math.floor(((simTime - hours) * 60 - mins) * 60);
+
+  document.getElementById('disp-time').textContent =
+    `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  document.getElementById('disp-alt').textContent = `${Math.round(currentAlt).toLocaleString()} km`;
+  document.getElementById('disp-rate').textContent = `${Math.round(currentRate).toLocaleString()} counts/sec`;
+
+  const belt = getBeltName(currentAlt);
+  const beltEl = document.getElementById('disp-belt');
+  beltEl.textContent = belt;
+  beltEl.className = 'value' +
+    (belt.includes('INNER') ? ' inner' : belt.includes('OUTER') ? ' outer' : belt.includes('SLOT') ? ' slot' : '');
+
+  drawMain();
+  drawRateGraph();
+
+  requestAnimationFrame(animate);
+}
+
+// ========================================================================
+// Event handlers
+// ========================================================================
+document.getElementById('btn-play').addEventListener('click', function () {
+  playing = !playing;
+  this.textContent = playing ? '\u23F8 Pause' : '\u25B6 Play';
+  if (playing && simTime >= FLIGHT_TIME_HR) {
+    simTime = 0;
+    rateHistory = [];
+  }
+});
+
+document.getElementById('btn-reset').addEventListener('click', function () {
+  simTime = 0;
+  playing = false;
+  rateHistory = [];
+  document.getElementById('btn-play').textContent = '\u25B6 Play';
+});
+
+document.getElementById('speed-slider').addEventListener('input', function () {
+  animSpeed = this.value / 100 * 2; // 0 to 2 hours/sec
+});
+
+document.getElementById('discovery-slider').addEventListener('input', function () {
+  discoveryPct = parseInt(this.value);
+  document.getElementById('discovery-pct').textContent = discoveryPct + '%';
+});
+
+mainCanvas.addEventListener('click', function (e) {
+  const rect = mainCanvas.getBoundingClientRect();
+  const px = e.clientX - rect.left;
+  const py = e.clientY - rect.top;
+  const altKm = pixelToKm(px, py);
+  mouseAlt = altKm;
+
+  const rate = radiationProfile(altKm);
+  const belt = getBeltName(altKm);
+  document.getElementById('cursor-info').innerHTML =
+    `<div><span class="label">Probe altitude: </span><span class="value">${Math.round(altKm).toLocaleString()} km</span></div>` +
+    `<div><span class="label">Radiation: </span><span class="value">${Math.round(rate).toLocaleString()} counts/sec</span></div>` +
+    `<div><span class="label">Region: </span><span class="value">${belt}</span></div>`;
+});
+
+mainCanvas.addEventListener('mousemove', function (e) {
+  const rect = mainCanvas.getBoundingClientRect();
+  mouseAlt = pixelToKm(e.clientX - rect.left, e.clientY - rect.top);
+});
+
+mainCanvas.addEventListener('mouseleave', function () {
+  mouseAlt = null;
+});
+
+// ========================================================================
+// Init
+// ========================================================================
+window.addEventListener('resize', resize);
+resize();
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>

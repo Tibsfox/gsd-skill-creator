@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pioneer 2 Staging Failure — Three-Stage Rocket Visualization</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #08080e;
+    color: #c0c0c0;
+    font-family: 'Courier New', monospace;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .header {
+    background: linear-gradient(90deg, #1a0a0a, #1a1a2e, #0a0a1a);
+    border-bottom: 2px solid #333;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .header h1 { font-size: 13px; color: #ff8844; letter-spacing: 2px; }
+  .header .info { font-size: 10px; color: #666; }
+
+  .main {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+  }
+
+  /* Rocket animation canvas */
+  .rocket-panel {
+    flex: 0 0 400px;
+    position: relative;
+    background: linear-gradient(180deg, #000005 0%, #05051a 100%);
+    border-right: 1px solid #222;
+  }
+  #rocketCanvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Right side: graph + info */
+  .data-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  /* Altitude vs time graph */
+  .graph-panel {
+    flex: 1;
+    background: #0a0a12;
+    border-bottom: 1px solid #222;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .graph-label {
+    font-size: 10px;
+    color: #556;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  #graphCanvas {
+    flex: 1;
+    width: 100%;
+    display: block;
+    background: #050510;
+    border: 1px solid #1a1a2a;
+    border-radius: 3px;
+  }
+
+  /* Stage info panel */
+  .stage-panel {
+    flex-shrink: 0;
+    background: #0c0c08;
+    padding: 12px 16px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .stage-card {
+    flex: 1;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .stage-card h3 {
+    font-size: 11px;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .stage-card.s1 { border-color: #2a6a2a; }
+  .stage-card.s1 h3 { color: #44cc44; }
+  .stage-card.s2 { border-color: #6a6a2a; }
+  .stage-card.s2 h3 { color: #cccc44; }
+  .stage-card.s3 { border-color: #6a2a2a; }
+  .stage-card.s3 h3 { color: #ff4444; }
+  .stage-card .stat { color: #888; }
+  .stage-card .val { color: #ccc; }
+  .stage-card .fail { color: #ff4444; font-weight: bold; }
+  .stage-card .ok { color: #44cc44; }
+
+  /* Event log */
+  .event-panel {
+    flex-shrink: 0;
+    background: #0a0a0a;
+    border-top: 1px solid #222;
+    padding: 8px 12px;
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  .event-log {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .event-log .time { color: #666; }
+  .event-log .ok { color: #44cc44; }
+  .event-log .warn { color: #cccc44; }
+  .event-log .fail { color: #ff4444; }
+
+  /* Controls */
+  .controls {
+    background: #111;
+    border-top: 2px solid #333;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .btn {
+    background: #1a1a1a;
+    color: #aaa;
+    border: 1px solid #444;
+    padding: 5px 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    transition: all 0.15s;
+  }
+  .btn:hover { background: #2a2a2a; color: #fff; }
+  .btn.active { background: #1a3a1a; color: #44cc44; border-color: #44cc44; }
+  .btn.selected { background: #2a2a3a; color: #88aaff; border-color: #88aaff; }
+
+  .mission-select { display: flex; gap: 4px; }
+
+  .time-display {
+    font-size: 14px;
+    color: #ff8844;
+    font-weight: bold;
+    min-width: 100px;
+    letter-spacing: 1px;
+  }
+
+  .controls .spacer { flex: 1; }
+
+  .legend {
+    font-size: 9px;
+    color: #666;
+    display: flex;
+    gap: 12px;
+  }
+  .legend span::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .legend .l-target::before { background: #4466ff; }
+  .legend .l-actual::before { background: #ff8844; }
+  .legend .l-p0::before { background: #ff444488; }
+  .legend .l-p1::before { background: #ffaa4488; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Pioneer Staging Analysis</h1>
+  <div class="info">Three-Stage Thor-Able Rocket &mdash; Progressive Failure Migration</div>
+</div>
+
+<div class="main">
+  <div class="rocket-panel">
+    <canvas id="rocketCanvas"></canvas>
+  </div>
+
+  <div class="data-panel">
+    <div class="graph-panel">
+      <div class="graph-label">Altitude vs Time &mdash; Real-Time Trajectory</div>
+      <canvas id="graphCanvas"></canvas>
+    </div>
+
+    <div class="stage-panel">
+      <div class="stage-card s1">
+        <h3>STAGE 1: THOR DM-18</h3>
+        <div><span class="stat">Engine:</span> <span class="val">LR-79 (LOX/RP-1)</span></div>
+        <div><span class="stat">Thrust:</span> <span class="val">667 kN</span></div>
+        <div><span class="stat">Burn:</span> <span class="val">165 s</span></div>
+        <div><span class="stat">Status:</span> <span class="ok" id="s1-status">NOMINAL</span></div>
+      </div>
+      <div class="stage-card s2">
+        <h3>STAGE 2: ABLE (AJ10-40)</h3>
+        <div><span class="stat">Engine:</span> <span class="val">AJ10-40 (UDMH/IRFNA)</span></div>
+        <div><span class="stat">Thrust:</span> <span class="val">35 kN</span></div>
+        <div><span class="stat">Burn:</span> <span class="val">115 s</span></div>
+        <div><span class="stat">Status:</span> <span class="ok" id="s2-status">NOMINAL</span></div>
+      </div>
+      <div class="stage-card s3">
+        <h3>STAGE 3: X-248 ALTAIR</h3>
+        <div><span class="stat">Motor:</span> <span class="val">Solid (polysulfide)</span></div>
+        <div><span class="stat">Thrust:</span> <span class="val">13 kN (if fired)</span></div>
+        <div><span class="stat">Burn:</span> <span class="val">16 s (never started)</span></div>
+        <div><span class="stat">Status:</span> <span class="fail" id="s3-status">NO IGNITION</span></div>
+      </div>
+    </div>
+
+    <div class="event-panel">
+      <div class="event-log" id="event-log"></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="btn active" id="btn-play" onclick="togglePlay()">PAUSE</button>
+  <button class="btn" onclick="resetSim()">RESET</button>
+
+  <div class="mission-select">
+    <button class="btn selected" id="btn-p2" onclick="selectMission('p2')">Pioneer 2</button>
+    <button class="btn" id="btn-p1" onclick="selectMission('p1')">Pioneer 1</button>
+    <button class="btn" id="btn-p0" onclick="selectMission('p0')">Pioneer 0</button>
+    <button class="btn" id="btn-all" onclick="selectMission('all')">All Three</button>
+  </div>
+
+  <span class="time-display" id="time-display">T+00:00</span>
+
+  <div class="spacer"></div>
+
+  <div class="legend">
+    <span class="l-actual">Actual trajectory</span>
+    <span class="l-target">Moon (384,400 km)</span>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// Pioneer Staging Failure Visualization
+// ============================================================
+// Interactive rocket staging animation showing the three-stage
+// Thor-Able rocket and Pioneer 2's third-stage failure.
+// Toggle between Pioneer 0, 1, 2 to see failure migration.
+
+const rocketCanvas = document.getElementById('rocketCanvas');
+const rktCtx = rocketCanvas.getContext('2d');
+const graphCanvas = document.getElementById('graphCanvas');
+const gCtx = graphCanvas.getContext('2d');
+
+// --- Mission profiles ---
+const missions = {
+  p0: {
+    name: 'Pioneer 0',
+    date: 'Aug 17, 1958',
+    color: '#ff4444',
+    // Stage 1 explodes at T+77 seconds
+    stage1_ok: false,
+    stage1_fail_time: 77,
+    stage2_ok: false,
+    stage3_ok: false,
+    peak_alt: 16,       // km — barely left the pad area before exploding
+    flight_time: 77,
+    events: [
+      { t: 0, msg: 'Liftoff', type: 'ok' },
+      { t: 50, msg: 'Stage 1 nominal, altitude 30 km', type: 'ok' },
+      { t: 73, msg: 'WARNING: Turbopump bearing failure detected', type: 'warn' },
+      { t: 77, msg: 'STAGE 1 EXPLOSION — Vehicle destroyed at 16 km', type: 'fail' },
+    ]
+  },
+  p1: {
+    name: 'Pioneer 1',
+    date: 'Oct 11, 1958',
+    color: '#ffaa44',
+    stage1_ok: true,
+    stage1_burn: 165,
+    stage2_ok: true,     // but 10s early cutoff
+    stage2_burn: 105,    // 115 nominal, cut 10s early
+    stage3_ok: true,
+    stage3_burn: 16,
+    peak_alt: 113854,    // km
+    flight_time: 43 * 3600,
+    target_alt: 384400,
+    events: [
+      { t: 0, msg: 'Liftoff', type: 'ok' },
+      { t: 165, msg: 'Stage 1 burnout + separation — NOMINAL', type: 'ok' },
+      { t: 167, msg: 'Stage 2 ignition — NOMINAL', type: 'ok' },
+      { t: 272, msg: 'WARNING: Stage 2 early cutoff (10s short)', type: 'warn' },
+      { t: 275, msg: 'Stage 2 separation', type: 'ok' },
+      { t: 278, msg: 'Stage 3 spin-up + ignition — NOMINAL', type: 'ok' },
+      { t: 294, msg: 'Stage 3 burnout — 234 m/s short of escape velocity', type: 'warn' },
+      { t: 600, msg: 'Trajectory: suborbital. Will not reach Moon.', type: 'warn' },
+    ]
+  },
+  p2: {
+    name: 'Pioneer 2',
+    date: 'Nov 8, 1958',
+    color: '#ff8844',
+    stage1_ok: true,
+    stage1_burn: 165,
+    stage2_ok: true,
+    stage2_burn: 115,
+    stage3_ok: false,
+    stage3_fail_msg: 'NO IGNITION',
+    peak_alt: 1550,
+    flight_time: 45 * 60,
+    target_alt: 384400,
+    events: [
+      { t: 0, msg: 'Liftoff — Thor-Able III', type: 'ok' },
+      { t: 165, msg: 'Stage 1 burnout + separation — NOMINAL', type: 'ok' },
+      { t: 167, msg: 'Stage 2 ignition — NOMINAL', type: 'ok' },
+      { t: 282, msg: 'Stage 2 burnout + separation — NOMINAL', type: 'ok' },
+      { t: 285, msg: 'Spin-up sequence initiated...', type: 'ok' },
+      { t: 288, msg: 'STAGE 3: WAITING FOR IGNITION...', type: 'warn' },
+      { t: 295, msg: 'STAGE 3: NO IGNITION DETECTED', type: 'fail' },
+      { t: 300, msg: 'STAGE 3 FAILURE CONFIRMED — No thrust', type: 'fail' },
+      { t: 400, msg: 'Spacecraft coasting on Stage 2 momentum only', type: 'warn' },
+      { t: 1320, msg: 'Peak altitude: 1,550 km (target: 384,400 km)', type: 'warn' },
+      { t: 1500, msg: 'TV camera activated — scanning Earth', type: 'ok' },
+      { t: 2400, msg: 'Descent — signal degrading', type: 'warn' },
+      { t: 2700, msg: 'Signal lost — reentry', type: 'fail' },
+    ]
+  }
+};
+
+// --- State ---
+let selectedMission = 'p2';
+let showAll = false;
+let playing = true;
+let simTime = 0;         // seconds
+let timeScale = 3;       // seconds per frame
+let trajectoryPoints = [];
+let trajectoryP0 = [];
+let trajectoryP1 = [];
+let eventIndex = 0;
+
+// --- Trajectory computation ---
+function getTrajectory(mission, t) {
+  const m = missions[mission];
+  if (t > m.flight_time) t = m.flight_time;
+
+  if (mission === 'p0') {
+    // Rises linearly then explodes at T+77
+    if (t >= m.stage1_fail_time) return { alt: 0, phase: 'destroyed' };
+    return { alt: (t / m.stage1_fail_time) * m.peak_alt, phase: 'stage1' };
+  }
+
+  // For P1 and P2: parabolic arc (simplified)
+  const totalTime = m.flight_time;
+  // Peak altitude at ~40% of flight time (ascent faster than descent)
+  const peakFraction = mission === 'p1' ? 0.3 : 0.49;
+  const peakTime = totalTime * peakFraction;
+
+  let phase;
+  if (t < (m.stage1_burn || 165)) phase = 'stage1';
+  else if (t < (m.stage1_burn || 165) + (m.stage2_burn || 115) + 2) phase = 'stage2';
+  else if (m.stage3_ok && t < (m.stage1_burn || 165) + (m.stage2_burn || 115) + 2 + (m.stage3_burn || 16)) phase = 'stage3';
+  else if (!m.stage3_ok && t >= 285 && t <= 300) phase = 'stage3_fail';
+  else phase = 'coast';
+
+  // Altitude: quadratic through (0,0), (peakTime, peakAlt), (totalTime, 0)
+  // alt = -peakAlt * ((t - peakTime)^2 / peakTime^2 - 1)
+  // Simplified: alt = peakAlt * (1 - ((t - peakTime) / peakTime)^2) * correction
+  const norm = (t - peakTime) / (totalTime - peakTime);
+  const altNorm = (t - peakTime) / peakTime;
+  let alt;
+  if (t <= peakTime) {
+    alt = m.peak_alt * (1 - ((t - peakTime) / peakTime) ** 2);
+  } else {
+    alt = m.peak_alt * (1 - ((t - peakTime) / (totalTime - peakTime)) ** 2);
+  }
+  alt = Math.max(0, alt);
+
+  return { alt, phase };
+}
+
+// --- Draw rocket ---
+function drawRocket(t) {
+  const w = rocketCanvas.width;
+  const h = rocketCanvas.height;
+
+  // Clear
+  rktCtx.fillStyle = '#000005';
+  rktCtx.fillRect(0, 0, w, h);
+
+  // Stars
+  const starSeed = 12345;
+  let s = starSeed;
+  for (let i = 0; i < 80; i++) {
+    s = (s * 1103515245 + 12345) & 0x7fffffff;
+    const sx = (s % w);
+    s = (s * 1103515245 + 12345) & 0x7fffffff;
+    const sy = (s % h);
+    s = (s * 1103515245 + 12345) & 0x7fffffff;
+    const bright = 0.3 + (s % 70) / 100;
+    rktCtx.fillStyle = `rgba(255,255,255,${bright})`;
+    rktCtx.fillRect(sx, sy, 1, 1);
+  }
+
+  const m = missions[selectedMission];
+  const { alt, phase } = getTrajectory(selectedMission, t);
+
+  // Position the rocket on screen
+  // Y-axis: bottom = ground, top = peak altitude
+  const groundY = h - 60;
+  const topY = 60;
+  const maxDisplayAlt = Math.max(m.peak_alt * 1.2, 2000);
+  const rocketY = groundY - (alt / maxDisplayAlt) * (groundY - topY);
+
+  // Ground
+  rktCtx.fillStyle = '#1a1510';
+  rktCtx.fillRect(0, groundY, w, h - groundY);
+  rktCtx.strokeStyle = '#333320';
+  rktCtx.beginPath();
+  rktCtx.moveTo(0, groundY);
+  rktCtx.lineTo(w, groundY);
+  rktCtx.stroke();
+
+  // Altitude markers
+  rktCtx.font = '9px Courier New';
+  rktCtx.fillStyle = '#333';
+  const altMarkers = [0, 500, 1000, 1550];
+  for (const a of altMarkers) {
+    const y = groundY - (a / maxDisplayAlt) * (groundY - topY);
+    rktCtx.fillText(`${a} km`, 5, y - 2);
+    rktCtx.strokeStyle = '#1a1a1a';
+    rktCtx.setLineDash([3, 5]);
+    rktCtx.beginPath();
+    rktCtx.moveTo(40, y);
+    rktCtx.lineTo(w, y);
+    rktCtx.stroke();
+    rktCtx.setLineDash([]);
+  }
+
+  // Draw the rocket
+  const rx = w / 2;
+  const ry = Math.max(topY, Math.min(groundY - 10, rocketY));
+  const scale = 0.8;
+
+  if (phase === 'destroyed') {
+    // Explosion effect for Pioneer 0
+    const explT = (t - m.stage1_fail_time) * 5;
+    for (let i = 0; i < 30; i++) {
+      const angle = (i / 30) * Math.PI * 2 + explT * 0.1;
+      const dist = explT * (1 + Math.sin(i * 7) * 0.5);
+      const ex = rx + Math.cos(angle) * dist;
+      const ey = groundY - 40 + Math.sin(angle) * dist;
+      const size = Math.max(1, 8 - explT * 0.3);
+      const alpha = Math.max(0, 1 - explT * 0.05);
+
+      const grd = rktCtx.createRadialGradient(ex, ey, 0, ex, ey, size);
+      grd.addColorStop(0, `rgba(255,200,50,${alpha})`);
+      grd.addColorStop(0.5, `rgba(255,100,20,${alpha * 0.6})`);
+      grd.addColorStop(1, `rgba(200,50,10,0)`);
+      rktCtx.fillStyle = grd;
+      rktCtx.fillRect(ex - size, ey - size, size * 2, size * 2);
+    }
+    return;
+  }
+
+  // Rocket body segments
+  const stageH = [60, 36, 20];  // pixel heights
+  const stageW = [22, 16, 10];
+
+  // Determine which stages are still attached
+  const s1Attached = phase === 'stage1';
+  const s2Attached = phase === 'stage1' || phase === 'stage2';
+  const s3Attached = true;  // stays attached (even if failed)
+
+  let totalH = 0;
+  if (s3Attached) totalH += stageH[2];
+  if (s2Attached) totalH += stageH[1];
+  if (s1Attached) totalH += stageH[0];
+
+  let drawY = ry - totalH / 2;
+
+  // Payload (gold cone) — always on top
+  rktCtx.fillStyle = '#cc9933';
+  rktCtx.beginPath();
+  rktCtx.moveTo(rx, drawY - 12);
+  rktCtx.lineTo(rx - 5, drawY);
+  rktCtx.lineTo(rx + 5, drawY);
+  rktCtx.closePath();
+  rktCtx.fill();
+
+  // Stage 3
+  if (s3Attached) {
+    rktCtx.fillStyle = '#ddd';
+    rktCtx.fillRect(rx - stageW[2] / 2, drawY, stageW[2], stageH[2]);
+    // Stage 3 label
+    if (phase === 'stage3_fail') {
+      // Flashing red X
+      if (Math.floor(t * 3) % 2 === 0) {
+        rktCtx.strokeStyle = '#ff0000';
+        rktCtx.lineWidth = 3;
+        rktCtx.beginPath();
+        rktCtx.moveTo(rx - 8, drawY + 2);
+        rktCtx.lineTo(rx + 8, drawY + stageH[2] - 2);
+        rktCtx.moveTo(rx + 8, drawY + 2);
+        rktCtx.lineTo(rx - 8, drawY + stageH[2] - 2);
+        rktCtx.stroke();
+        rktCtx.lineWidth = 1;
+      }
+    }
+    drawY += stageH[2];
+  }
+
+  // Stage 2
+  if (s2Attached) {
+    rktCtx.fillStyle = '#bbb';
+    rktCtx.fillRect(rx - stageW[1] / 2, drawY, stageW[1], stageH[1]);
+
+    // Engine flame — Stage 2
+    if (phase === 'stage2') {
+      drawFlame(rx, drawY + stageH[1], 12, '#dddd44', '#ff8800');
+    }
+    drawY += stageH[1];
+  }
+
+  // Stage 1
+  if (s1Attached) {
+    rktCtx.fillStyle = '#999';
+    rktCtx.fillRect(rx - stageW[0] / 2, drawY, stageW[0], stageH[0]);
+    // Fins
+    rktCtx.fillStyle = '#777';
+    rktCtx.beginPath();
+    rktCtx.moveTo(rx - stageW[0] / 2, drawY + stageH[0] - 10);
+    rktCtx.lineTo(rx - stageW[0] / 2 - 8, drawY + stageH[0]);
+    rktCtx.lineTo(rx - stageW[0] / 2, drawY + stageH[0]);
+    rktCtx.closePath();
+    rktCtx.fill();
+    rktCtx.beginPath();
+    rktCtx.moveTo(rx + stageW[0] / 2, drawY + stageH[0] - 10);
+    rktCtx.lineTo(rx + stageW[0] / 2 + 8, drawY + stageH[0]);
+    rktCtx.lineTo(rx + stageW[0] / 2, drawY + stageH[0]);
+    rktCtx.closePath();
+    rktCtx.fill();
+
+    // Engine flame — Stage 1
+    if (phase === 'stage1') {
+      drawFlame(rx, drawY + stageH[0], 20, '#44ff44', '#22aa00');
+    }
+    drawY += stageH[0];
+  }
+
+  // Detached stages falling away (debris)
+  if (!s1Attached && t < (m.stage1_burn || 165) + 30) {
+    const dt = t - (m.stage1_burn || 165);
+    const debrisY = groundY - ((m.peak_alt * 0.3) / maxDisplayAlt) * (groundY - topY) + dt * 8;
+    rktCtx.globalAlpha = Math.max(0, 1 - dt / 30);
+    rktCtx.fillStyle = '#666';
+    rktCtx.fillRect(rx - 11, debrisY, 22, 30);
+    rktCtx.globalAlpha = 1;
+  }
+
+  if (!s2Attached && s1Attached === false) {
+    const s2Sep = (m.stage1_burn || 165) + (m.stage2_burn || 115) + 2;
+    if (t < s2Sep + 20) {
+      const dt = t - s2Sep;
+      const debrisY = ry + dt * 5;
+      rktCtx.globalAlpha = Math.max(0, 1 - dt / 20);
+      rktCtx.fillStyle = '#888';
+      rktCtx.fillRect(rx - 8, debrisY, 16, 20);
+      rktCtx.globalAlpha = 1;
+    }
+  }
+
+  // Altitude readout on rocket panel
+  rktCtx.font = 'bold 12px Courier New';
+  rktCtx.fillStyle = m.color;
+  rktCtx.textAlign = 'center';
+  rktCtx.fillText(`${Math.round(alt)} km`, rx, ry - totalH / 2 - 22);
+  rktCtx.font = '10px Courier New';
+  rktCtx.fillStyle = '#888';
+  rktCtx.fillText(m.name, rx, ry - totalH / 2 - 36);
+  rktCtx.textAlign = 'left';
+
+  // "Where we needed to go" marker
+  if (m.target_alt) {
+    rktCtx.font = '9px Courier New';
+    rktCtx.fillStyle = '#4466ff';
+    const moonY = topY - 15;
+    rktCtx.fillText(`Moon: 384,400 km`, w / 2 - 50, moonY);
+    rktCtx.strokeStyle = '#4466ff44';
+    rktCtx.setLineDash([2, 4]);
+    rktCtx.beginPath();
+    rktCtx.moveTo(w / 2 - 55, moonY + 3);
+    rktCtx.lineTo(w / 2 + 55, moonY + 3);
+    rktCtx.stroke();
+    rktCtx.setLineDash([]);
+
+    // Scale comparison
+    const scaleRatio = m.peak_alt / m.target_alt;
+    rktCtx.fillStyle = '#666';
+    rktCtx.fillText(`Reached: ${(scaleRatio * 100).toFixed(1)}% of target`, 5, h - 25);
+  }
+}
+
+function drawFlame(x, y, size, color1, color2) {
+  const flicker = Math.random() * 4;
+  const len = size + flicker;
+
+  const grd = rktCtx.createLinearGradient(x, y, x, y + len);
+  grd.addColorStop(0, color1);
+  grd.addColorStop(0.4, color2);
+  grd.addColorStop(1, 'rgba(255,100,0,0)');
+
+  rktCtx.fillStyle = grd;
+  rktCtx.beginPath();
+  rktCtx.moveTo(x - 6 - flicker / 2, y);
+  rktCtx.quadraticCurveTo(x, y + len * 1.2, x + 6 + flicker / 2, y);
+  rktCtx.closePath();
+  rktCtx.fill();
+
+  // Inner flame
+  const grd2 = rktCtx.createLinearGradient(x, y, x, y + len * 0.6);
+  grd2.addColorStop(0, '#ffffcc');
+  grd2.addColorStop(1, color1 + '00');
+  rktCtx.fillStyle = grd2;
+  rktCtx.beginPath();
+  rktCtx.moveTo(x - 3, y);
+  rktCtx.quadraticCurveTo(x, y + len * 0.7, x + 3, y);
+  rktCtx.closePath();
+  rktCtx.fill();
+}
+
+// --- Draw altitude graph ---
+function drawGraph(t) {
+  const w = graphCanvas.width;
+  const h = graphCanvas.height;
+
+  gCtx.fillStyle = '#050510';
+  gCtx.fillRect(0, 0, w, h);
+
+  const pad = { left: 60, right: 20, top: 20, bottom: 35 };
+  const plotW = w - pad.left - pad.right;
+  const plotH = h - pad.top - pad.bottom;
+
+  const m = missions[selectedMission];
+  const maxTime = showAll ? Math.max(missions.p0.flight_time, missions.p1.flight_time / 60, missions.p2.flight_time) : m.flight_time;
+  const maxAlt = showAll ? Math.max(missions.p1.peak_alt, missions.p2.peak_alt) * 1.1 :
+                 m.peak_alt * 1.3;
+
+  // Grid
+  gCtx.strokeStyle = '#1a1a2a';
+  gCtx.lineWidth = 0.5;
+  for (let i = 0; i <= 5; i++) {
+    const y = pad.top + (i / 5) * plotH;
+    gCtx.beginPath();
+    gCtx.moveTo(pad.left, y);
+    gCtx.lineTo(w - pad.right, y);
+    gCtx.stroke();
+
+    const altLabel = Math.round(maxAlt * (1 - i / 5));
+    gCtx.font = '9px Courier New';
+    gCtx.fillStyle = '#555';
+    gCtx.textAlign = 'right';
+    gCtx.fillText(altLabel.toLocaleString() + ' km', pad.left - 5, y + 3);
+  }
+
+  for (let i = 0; i <= 6; i++) {
+    const x = pad.left + (i / 6) * plotW;
+    gCtx.beginPath();
+    gCtx.moveTo(x, pad.top);
+    gCtx.lineTo(x, h - pad.bottom);
+    gCtx.stroke();
+
+    const timeLabel = Math.round(maxTime * i / 6);
+    const min = Math.floor(timeLabel / 60);
+    const sec = timeLabel % 60;
+    gCtx.textAlign = 'center';
+    gCtx.fillText(`T+${min}:${String(sec).padStart(2, '0')}`, x, h - pad.bottom + 14);
+  }
+
+  gCtx.textAlign = 'left';
+
+  // Moon line (if applicable)
+  if (m.target_alt && m.target_alt <= maxAlt * 2) {
+    const moonY = pad.top + plotH * (1 - m.target_alt / maxAlt);
+    if (moonY > pad.top) {
+      gCtx.strokeStyle = '#4466ff44';
+      gCtx.setLineDash([5, 5]);
+      gCtx.beginPath();
+      gCtx.moveTo(pad.left, moonY);
+      gCtx.lineTo(w - pad.right, moonY);
+      gCtx.stroke();
+      gCtx.setLineDash([]);
+      gCtx.fillStyle = '#4466ff';
+      gCtx.fillText('Moon: 384,400 km', pad.left + 5, moonY - 4);
+    }
+  }
+
+  // Peak altitude line
+  const peakY = pad.top + plotH * (1 - m.peak_alt / maxAlt);
+  gCtx.strokeStyle = m.color + '44';
+  gCtx.setLineDash([3, 3]);
+  gCtx.beginPath();
+  gCtx.moveTo(pad.left, peakY);
+  gCtx.lineTo(w - pad.right, peakY);
+  gCtx.stroke();
+  gCtx.setLineDash([]);
+  gCtx.fillStyle = m.color;
+  gCtx.font = '9px Courier New';
+  gCtx.fillText(`Peak: ${m.peak_alt.toLocaleString()} km`, pad.left + 5, peakY - 4);
+
+  // Function to draw a trajectory
+  function drawTraj(missionKey, points, alpha) {
+    const mm = missions[missionKey];
+    if (points.length < 2) return;
+    gCtx.strokeStyle = mm.color + (alpha < 1 ? '88' : 'ff');
+    gCtx.lineWidth = alpha < 1 ? 1 : 2;
+    gCtx.beginPath();
+    for (let i = 0; i < points.length; i++) {
+      const px = pad.left + (points[i].t / maxTime) * plotW;
+      const py = pad.top + plotH * (1 - points[i].alt / maxAlt);
+      if (i === 0) gCtx.moveTo(px, py);
+      else gCtx.lineTo(px, py);
+    }
+    gCtx.stroke();
+    gCtx.lineWidth = 1;
+  }
+
+  // Draw comparison trajectories if 'all' mode
+  if (showAll) {
+    drawTraj('p0', trajectoryP0, 0.5);
+    drawTraj('p1', trajectoryP1, 0.5);
+  }
+
+  // Main trajectory
+  drawTraj(selectedMission, trajectoryPoints, 1.0);
+
+  // Current point marker
+  if (trajectoryPoints.length > 0) {
+    const last = trajectoryPoints[trajectoryPoints.length - 1];
+    const px = pad.left + (last.t / maxTime) * plotW;
+    const py = pad.top + plotH * (1 - last.alt / maxAlt);
+
+    gCtx.beginPath();
+    gCtx.arc(px, py, 4, 0, Math.PI * 2);
+    gCtx.fillStyle = m.color;
+    gCtx.fill();
+
+    // Glow
+    const grd = gCtx.createRadialGradient(px, py, 0, px, py, 10);
+    grd.addColorStop(0, m.color + '66');
+    grd.addColorStop(1, m.color + '00');
+    gCtx.fillStyle = grd;
+    gCtx.fillRect(px - 10, py - 10, 20, 20);
+  }
+
+  // Axes labels
+  gCtx.font = '10px Courier New';
+  gCtx.fillStyle = '#666';
+  gCtx.textAlign = 'center';
+  gCtx.fillText('Mission Elapsed Time', pad.left + plotW / 2, h - 3);
+  gCtx.save();
+  gCtx.translate(12, pad.top + plotH / 2);
+  gCtx.rotate(-Math.PI / 2);
+  gCtx.fillText('Altitude (km)', 0, 0);
+  gCtx.restore();
+}
+
+// --- Event log ---
+function addEvent(time, msg, type) {
+  const log = document.getElementById('event-log');
+  const min = Math.floor(time / 60);
+  const sec = Math.floor(time % 60);
+  const timeStr = `T+${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+
+  const div = document.createElement('div');
+  div.innerHTML = `<span class="time">[${timeStr}]</span> <span class="${type}">${msg}</span>`;
+  log.appendChild(div);
+  log.parentElement.scrollTop = log.parentElement.scrollHeight;
+}
+
+// --- Update stage status cards ---
+function updateStageCards(t) {
+  const m = missions[selectedMission];
+  const s1 = document.getElementById('s1-status');
+  const s2 = document.getElementById('s2-status');
+  const s3 = document.getElementById('s3-status');
+
+  if (selectedMission === 'p0') {
+    s1.textContent = t >= m.stage1_fail_time ? 'EXPLODED' : 'BURNING';
+    s1.className = t >= m.stage1_fail_time ? 'fail' : 'ok';
+    s2.textContent = 'N/A';
+    s2.className = 'stat';
+    s3.textContent = 'N/A';
+    s3.className = 'stat';
+    return;
+  }
+
+  // Stage 1
+  if (t < (m.stage1_burn || 165)) {
+    s1.textContent = 'BURNING';
+    s1.className = 'ok';
+  } else {
+    s1.textContent = 'SEPARATED';
+    s1.className = 'stat';
+  }
+
+  // Stage 2
+  const s2Start = (m.stage1_burn || 165) + 2;
+  const s2End = s2Start + (m.stage2_burn || 115);
+  if (t < s2Start) {
+    s2.textContent = 'STANDBY';
+    s2.className = 'stat';
+  } else if (t < s2End) {
+    s2.textContent = 'BURNING';
+    s2.className = 'ok';
+  } else {
+    s2.textContent = m.stage2_burn < 115 ? 'EARLY CUTOFF' : 'SEPARATED';
+    s2.className = m.stage2_burn < 115 ? 'warn' : 'stat';
+  }
+
+  // Stage 3
+  const s3Start = s2End + 3;
+  if (t < s3Start) {
+    s3.textContent = 'STANDBY';
+    s3.className = 'stat';
+  } else if (m.stage3_ok) {
+    if (t < s3Start + (m.stage3_burn || 16)) {
+      s3.textContent = 'BURNING';
+      s3.className = 'ok';
+    } else {
+      s3.textContent = 'BURNOUT';
+      s3.className = 'ok';
+    }
+  } else {
+    s3.textContent = 'NO IGNITION';
+    s3.className = 'fail';
+  }
+}
+
+// --- Resize ---
+function resize() {
+  rocketCanvas.width = rocketCanvas.parentElement.clientWidth;
+  rocketCanvas.height = rocketCanvas.parentElement.clientHeight;
+  graphCanvas.width = graphCanvas.parentElement.clientWidth - 20;
+  graphCanvas.height = graphCanvas.parentElement.clientHeight - 24;
+}
+
+// --- Animation loop ---
+function tick() {
+  if (playing) {
+    simTime += timeScale;
+
+    const m = missions[selectedMission];
+
+    // Record trajectory point
+    const { alt } = getTrajectory(selectedMission, simTime);
+    if (simTime <= m.flight_time + 10) {
+      trajectoryPoints.push({ t: simTime, alt });
+    }
+
+    // Record comparison trajectories
+    if (showAll) {
+      const p0 = getTrajectory('p0', simTime);
+      if (simTime <= missions.p0.flight_time + 10)
+        trajectoryP0.push({ t: simTime, alt: p0.alt });
+
+      const p1 = getTrajectory('p1', simTime);
+      if (simTime <= missions.p1.flight_time + 10)
+        trajectoryP1.push({ t: simTime, alt: p1.alt });
+    }
+
+    // Fire events
+    while (eventIndex < m.events.length && simTime >= m.events[eventIndex].t) {
+      const evt = m.events[eventIndex];
+      addEvent(evt.t, evt.msg, evt.type);
+      eventIndex++;
+    }
+
+    // Update time display
+    const min = Math.floor(simTime / 60);
+    const sec = Math.floor(simTime % 60);
+    document.getElementById('time-display').textContent =
+      `T+${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+
+    updateStageCards(simTime);
+  }
+
+  drawRocket(simTime);
+  drawGraph(simTime);
+
+  requestAnimationFrame(tick);
+}
+
+// --- Controls ---
+function togglePlay() {
+  playing = !playing;
+  document.getElementById('btn-play').textContent = playing ? 'PAUSE' : 'PLAY';
+  document.getElementById('btn-play').classList.toggle('active', playing);
+}
+
+function resetSim() {
+  simTime = 0;
+  eventIndex = 0;
+  trajectoryPoints = [];
+  trajectoryP0 = [];
+  trajectoryP1 = [];
+  document.getElementById('event-log').innerHTML = '';
+  document.getElementById('time-display').textContent = 'T+00:00';
+  updateStageCards(0);
+}
+
+function selectMission(id) {
+  // Remove selected class from all
+  document.querySelectorAll('.mission-select .btn').forEach(b => b.classList.remove('selected'));
+
+  if (id === 'all') {
+    showAll = true;
+    selectedMission = 'p2';
+    document.getElementById('btn-all').classList.add('selected');
+  } else {
+    showAll = false;
+    selectedMission = id;
+    document.getElementById('btn-' + id).classList.add('selected');
+  }
+
+  resetSim();
+}
+
+// --- Init ---
+function init() {
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Start
+  requestAnimationFrame(tick);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === ' ') { togglePlay(); e.preventDefault(); }
+  if (e.key === 'r' || e.key === 'R') resetSim();
+  if (e.key === '0') selectMission('p0');
+  if (e.key === '1') selectMission('p1');
+  if (e.key === '2') selectMission('p2');
+  if (e.key === '3') selectMission('all');
+});
+
+init();
+</script>
+</body>
+</html>

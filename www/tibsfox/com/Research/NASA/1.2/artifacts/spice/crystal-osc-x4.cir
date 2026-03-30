@@ -1,0 +1,205 @@
+* Pioneer 1 VHF Transmitter: Crystal Oscillator + x4 Frequency Multiplier
+* =========================================================================
+* Mission 1.2 — Pioneer 1 (Thor-Able I), October 11, 1958
+* Transmitter frequency: 108.06 MHz (27.015 MHz x 4)
+* Power: 300 mW into antenna
+*
+* This netlist models the complete transmitter chain:
+*   Stage 1: Colpitts crystal oscillator at 27.015 MHz
+*   Stage 2: Class C x4 frequency multiplier with LC tank at 108.06 MHz
+*   Stage 3: Buffer amplifier for output isolation
+*
+* Run: ngspice -b crystal-osc-x4.cir
+* =========================================================================
+
+* --- Power Supply ---
+Vcc vcc 0 DC 9
+
+* =========================================================================
+* STAGE 1: Colpitts Crystal Oscillator (27.015 MHz)
+* =========================================================================
+* The crystal is modeled as a series RLC with parallel capacitance.
+* This is the Butterworth-Van Dyke equivalent circuit for a quartz crystal.
+
+* Crystal model: 27.015 MHz fundamental
+* Series arm: Rs=25 ohm, Ls=10 mH, Cs=0.012 pF
+* Parallel (shunt) capacitance: Cp=4 pF
+* Series resonance: fs = 1/(2*pi*sqrt(Ls*Cs)) ~ 27.015 MHz
+
+* Crystal equivalent circuit (between nodes xin and xout)
+Rs_xtal xin x1 25
+Ls_xtal x1 x2 10m
+Cs_xtal x2 xout 0.012p
+Cp_xtal xin xout 4p
+
+* Transistor Q1: Colpitts oscillator
+.model NPN2N3904 NPN(Is=6.734f Bf=416.4 Nf=1.259 Vaf=74.03
++ Ikf=66.78m Ise=6.734f Ne=1.259 Br=0.7389 Nr=2
++ Var=28 Ikr=0.9913 Isc=8.632f Nc=1.906 Rb=1
++ Irb=0.1 Rbm=1 Re=0.2219 Rc=0.3001 Cjc=3.638p
++ Mjc=0.3085 Vjc=0.75 Fc=0.5 Cje=4.493p Mje=0.2593
++ Vje=0.75 Tr=239.5n Tf=301.2p Itf=0.4 Vtf=4
++ Xtf=2 Xtb=1.5 Eg=1.11 Xti=3)
+
+Q1 osc_c osc_b osc_e NPN2N3904
+
+* Collector load
+R1 vcc osc_c 1k
+
+* Bias network for Q1
+R2 vcc osc_b 47k
+R3 osc_b 0 10k
+
+* Emitter resistor with bypass
+R4 osc_e 0 470
+C_bypass osc_e 0 0.1u
+
+* Colpitts capacitive divider (feedback from emitter to base through crystal)
+C1 osc_b xin 100p
+C2 xout osc_e 220p
+
+* DC blocking / AC coupling from crystal to ground reference
+* The crystal connects across the capacitive divider via C1 and C2
+
+* Collector output coupling to next stage
+C_couple1 osc_c mult_in 10p
+
+* Supply decoupling
+C_decouple1 vcc 0 0.01u
+
+* =========================================================================
+* STAGE 2: x4 Frequency Multiplier (Class C Amplifier + LC Tank)
+* =========================================================================
+* A Class C amplifier is biased well below cutoff so it conducts only
+* on signal peaks, generating rich harmonics. The output LC tank is
+* tuned to the 4th harmonic (108.06 MHz), selecting it and rejecting
+* the fundamental and other harmonics.
+
+Q2 mult_c mult_in mult_e NPN2N3904
+
+* Class C bias: base pulled below ground threshold via negative bias
+* Use a voltage divider that biases the base below the transistor Vbe
+R5 mult_in 0 4.7k
+C_input mult_in 0 1p
+
+* Emitter to ground (no emitter degeneration — max gain/harmonics)
+R6 mult_e 0 10
+
+* Collector: LC tank tuned to 108.06 MHz
+* f = 1/(2*pi*sqrt(L*C))
+* For f=108.06 MHz: choose L=22 nH, then C = 1/(4*pi^2*f^2*L)
+*   C = 1/(4 * 9.8696 * (108.06e6)^2 * 22e-9)
+*   C ≈ 97.7 pF — use 100 pF
+L_tank mult_c tank_tap 22n
+C_tank tank_tap 0 100p
+
+* Tank Q-factor resistor (models losses, sets bandwidth)
+R_tank mult_c tank_tap 500
+
+* DC feed to collector through RF choke
+L_choke vcc mult_c 1u
+
+* Supply decoupling
+C_decouple2 vcc 0 0.01u
+
+* Coupling to buffer stage
+C_couple2 tank_tap buf_in 4.7p
+
+* =========================================================================
+* STAGE 3: Buffer Amplifier (output isolation)
+* =========================================================================
+* Common-emitter buffer provides isolation between the multiplier tank
+* and the antenna load. Prevents antenna impedance variations from
+* pulling the oscillator frequency.
+
+Q3 buf_c buf_in buf_e NPN2N3904
+
+* Bias
+R7 vcc buf_in 22k
+R8 buf_in 0 4.7k
+R9 buf_e 0 100
+C_bypass3 buf_e 0 0.01u
+
+* Collector load (represents antenna matching network)
+R10 vcc buf_c 330
+
+* Output coupling
+C_out buf_c rf_out 10p
+
+* 50 ohm antenna load
+R_antenna rf_out 0 50
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* Initial condition to kick-start oscillation
+.ic V(osc_c)=4.5 V(osc_b)=0.7
+
+* Transient analysis: 5 microseconds to see oscillation build and stabilize
+* Step size 0.1 ns resolves 108 MHz (period ~9.26 ns) with ~90 points/cycle
+.tran 0.1n 5u uic
+
+* =========================================================================
+* CONTROL BLOCK — batch mode plotting and measurement
+* =========================================================================
+.control
+  run
+
+  * --- Plot 1: Oscillator startup and steady-state ---
+  set hcopydevtype=postscript
+  set color0=white
+  set color1=green
+
+  * Full transient — oscillator collector
+  echo "=== Pioneer 1 Crystal Oscillator + x4 Multiplier ==="
+  echo "=== Stage 1: Colpitts Oscillator at 27.015 MHz ==="
+  echo "=== Stage 2: x4 Multiplier -> 108.06 MHz ==="
+  echo "=== Stage 3: Buffer -> 50 ohm antenna ==="
+  echo ""
+
+  * Measure oscillator frequency from steady-state region
+  * (after 2 us of startup transient)
+  meas tran osc_period TRIG v(osc_c) VAL=4.5 RISE=20 TARG v(osc_c) VAL=4.5 RISE=21
+  echo "Oscillator period (measured):"
+  print osc_period
+  let osc_freq = 1/osc_period
+  echo "Oscillator frequency (Hz):"
+  print osc_freq
+
+  * Measure multiplier output frequency
+  meas tran mult_period TRIG v(tank_tap) VAL=0 RISE=80 TARG v(tank_tap) VAL=0 RISE=81
+  echo "Multiplier output period:"
+  print mult_period
+  let mult_freq = 1/mult_period
+  echo "Multiplier output frequency (Hz):"
+  print mult_freq
+
+  * Measure output amplitude at antenna
+  meas tran vout_pp PP v(rf_out) FROM=3u TO=5u
+  echo "Output voltage peak-to-peak at antenna (V):"
+  print vout_pp
+
+  * Calculate output power into 50 ohms
+  let pout = (vout_pp/2/1.414)^2/50
+  echo "Estimated output power (W):"
+  print pout
+
+  echo ""
+  echo "=== Simulation complete ==="
+  echo "Pioneer 1 transmitted at 108.06 MHz, 300 mW, for 43 hours."
+  echo "Signal received at Cape Canaveral, Jodrell Bank, and Goldstone."
+
+  * Plot: Oscillator, multiplier, and output waveforms (last 200 ns)
+  plot v(osc_c) v(tank_tap) v(rf_out) xlimit 4.8u 5u title 'Pioneer 1 Transmitter Chain — Last 200 ns'
+
+  * Spectral analysis of multiplier output
+  * Linearize and FFT to see harmonic content
+  linearize v(tank_tap)
+  spec 1meg 500meg 1meg v(tank_tap)
+  plot mag(v(tank_tap)) xlimit 0 300meg title 'Multiplier Output Spectrum — 4th Harmonic Selection' ylabel 'Magnitude'
+
+  quit
+.endc
+
+.end

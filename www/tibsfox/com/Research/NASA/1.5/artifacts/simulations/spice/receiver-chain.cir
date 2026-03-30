@@ -1,0 +1,264 @@
+* Pioneer Ground Station: Complete Receiver Chain
+* =========================================================================
+* Mission 1.5 — Pioneer 4 (Juno II), March 3, 1959
+* FIRST AMERICAN DEEP SPACE SUCCESS
+*
+* This netlist combines the entire Pioneer ground station front-end:
+*   Stage 1: Crystal oscillator (LO) at 107.545 MHz (from v1.2)
+*   Stage 2: Diode ring mixer (from v1.4)
+*   Stage 3: IF amplifier at 455 kHz (from v1.5)
+*   Stage 4: Envelope detector (AM demodulator)
+*   Stage 5: Audio output amplifier
+*
+* Signal path: RF in (108 MHz) -> Mixer -> IF (455 kHz) -> Detector -> Audio
+*
+* NOTE: For simulation tractability, we use scaled frequencies:
+*   RF = 460 kHz (represents 108 MHz)
+*   LO = 455 kHz (represents 107.545 MHz, from crystal osc * multiplier)
+*   IF = 5 kHz (represents 455 kHz — difference product)
+*   Audio = 400 Hz tone modulated on the carrier
+*
+* The circuit topology and component ratios are faithful to the
+* real Pioneer receiver. Only frequencies are scaled down.
+*
+* Run: ngspice -b receiver-chain.cir
+* =========================================================================
+
+* --- Power Supply ---
+Vcc vcc 0 DC 12
+
+* --- Diode and Transistor Models ---
+.model D1N4148 D(Is=2.52n Rs=0.568 N=1.752 Bv=100 Ibv=100u Cjo=4p M=0.4 Tt=20n)
+.model NPN2N3904 NPN(Is=6.734f Bf=416.4 Nf=1.259 Vaf=74.03
++ Ikf=66.78m Ise=6.734f Ne=1.259 Br=0.7389 Nr=2
++ Var=28 Ikr=0.9913 Isc=8.632f Nc=1.906 Rb=1
++ Irb=0.1 Rbm=1 Re=0.2219 Rc=0.3001 Cjc=3.638p
++ Mjc=0.3085 Vjc=0.75 Fc=0.5 Cje=4.493p Mje=0.2593
++ Vje=0.75 Tr=239.5n Tf=301.2p Itf=0.4 Vtf=4
++ Xtf=2 Xtb=1.5 Eg=1.11 Xti=3)
+
+* =========================================================================
+* STAGE 1: RF INPUT (simulated Pioneer signal)
+* =========================================================================
+* AM-modulated carrier: 460 kHz carrier with 400 Hz audio modulation
+* V_rf = (1 + m*sin(2*pi*400*t)) * A * sin(2*pi*460k*t)
+* Using SIN sources and behavioral source for AM modulation
+
+* Carrier at 460 kHz
+V_carrier carrier_node 0 SIN(0 1 460k)
+* Audio modulation at 400 Hz
+V_audio audio_mod 0 SIN(0 0.3 400)
+* AM modulated RF signal (behavioral source)
+* V_rf = 50mV * (1 + 0.3*sin(2*pi*400*t)) * sin(2*pi*460k*t)
+B_rf rf_in 0 V = 0.05 * (1 + v(audio_mod)) * v(carrier_node)
+
+* RF input coupling
+C_rf_in rf_in rf_coupled 100p
+R_rf_match rf_coupled 0 50
+
+* =========================================================================
+* STAGE 2: LOCAL OSCILLATOR (simplified — represents crystal osc + mult)
+* =========================================================================
+* In the real receiver, this comes from the v1.2 crystal oscillator
+* chain. Here we use a clean source at 455 kHz.
+V_lo lo_p lo_n SIN(0 0.5 455k)
+
+* =========================================================================
+* STAGE 3: DIODE RING MIXER
+* =========================================================================
+* Four 1N4148 diodes in a ring (from v1.4)
+* RF and LO couple through transformers (modeled as coupled inductors)
+
+* RF transformer
+L_rf_pri rf_coupled 0 100u
+L_rf_sec1 mix_rf_a mix_rf_ct 100u
+L_rf_sec2 mix_rf_ct mix_rf_b 100u
+K_rf1 L_rf_pri L_rf_sec1 0.9
+K_rf2 L_rf_pri L_rf_sec2 0.9
+
+* LO transformer
+L_lo_pri lo_p lo_n 100u
+L_lo_sec1 mix_lo_a mix_lo_ct 100u
+L_lo_sec2 mix_lo_ct mix_lo_b 100u
+K_lo1 L_lo_pri L_lo_sec1 0.9
+K_lo2 L_lo_pri L_lo_sec2 0.9
+
+* LO center tap to ground
+R_lo_gnd mix_lo_ct 0 10
+
+* Diode ring
+D1 mix_rf_a mix_lo_a D1N4148
+D2 mix_lo_a mix_rf_b D1N4148
+D3 mix_rf_b mix_lo_b D1N4148
+D4 mix_lo_b mix_rf_a D1N4148
+
+* IF output from RF center tap
+* Coupling to IF amplifier
+C_mix_out mix_rf_ct if_in 10n
+
+* =========================================================================
+* STAGE 4: IF AMPLIFIER (455 kHz tuned collector, from v1.5)
+* =========================================================================
+* NOTE: Our IF is actually 5 kHz (460k - 455k). We tune the IF amp
+* to 5 kHz for this simulation.
+
+* Bias network
+R_if_bias1 vcc if_base 47k
+R_if_bias2 if_base 0 10k
+
+* Base coupling
+R_if_base if_in if_base 1k
+
+* Transistor
+Q_if if_coll if_base if_emit NPN2N3904
+
+* Emitter
+R_if_emit if_emit 0 470
+C_if_bypass if_emit 0 1u
+
+* Tuned collector: LC resonant at 5 kHz
+* f = 1/(2*pi*sqrt(L*C)), for f=5kHz, L=100mH:
+* C = 1/(4*pi^2*25e6*0.1) = 1/(98.696*25e6*0.1) = 1/(246.74e6) = 10.13nF
+L_if_tank vcc if_coll 100m
+C_if_tank if_coll 0 10.13n
+R_if_tank_q if_coll if_tap 200
+
+* IF output coupling
+C_if_out if_tap det_in 100n
+
+* =========================================================================
+* STAGE 5: ENVELOPE DETECTOR (AM demodulation)
+* =========================================================================
+* Simple diode detector: rectify the IF signal, then low-pass filter
+* to recover the audio modulation envelope.
+
+* Detector diode
+D_det det_in det_rect D1N4148
+
+* RC time constant: must pass 400 Hz audio but reject 5 kHz IF
+* tau = R*C, f_c = 1/(2*pi*R*C)
+* For f_c ~ 2 kHz: R=10k, C=8.2nF -> f_c = 1.94 kHz
+R_det det_rect det_filt 10k
+C_det det_filt 0 8.2n
+
+* DC blocking (remove the DC offset from rectification)
+C_dc_block det_filt audio_ac 1u
+R_dc_bias audio_ac 0 100k
+
+* =========================================================================
+* STAGE 6: AUDIO OUTPUT
+* =========================================================================
+* Simple common-emitter audio amplifier
+
+* Bias
+R_aud_b1 vcc aud_base 100k
+R_aud_b2 aud_base 0 22k
+
+* Coupling
+C_aud_in audio_ac aud_base 1u
+
+* Transistor
+Q_aud aud_coll aud_base aud_emit NPN2N3904
+
+* Emitter
+R_aud_emit aud_emit 0 1k
+C_aud_bypass aud_emit 0 10u
+
+* Collector load
+R_aud_coll vcc aud_coll 4.7k
+
+* Output coupling to speaker/headphones
+C_aud_out aud_coll audio_out 10u
+R_speaker audio_out 0 600
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* Transient: 10 ms to see several cycles of 400 Hz audio
+* (5 kHz IF needs resolution, so use 1 us steps)
+.tran 1u 10m
+
+* =========================================================================
+* CONTROL BLOCK
+* =========================================================================
+.control
+  run
+
+  echo ""
+  echo "================================================================"
+  echo " Pioneer Ground Station — Complete Receiver Chain"
+  echo "================================================================"
+  echo " Stage 1: RF input 460 kHz (AM modulated, 400 Hz audio)"
+  echo " Stage 2: Local oscillator 455 kHz"
+  echo " Stage 3: Diode ring mixer -> 5 kHz IF"
+  echo " Stage 4: IF amplifier (tuned collector at 5 kHz)"
+  echo " Stage 5: Envelope detector (diode + RC filter)"
+  echo " Stage 6: Audio amplifier -> 600 ohm speaker"
+  echo "================================================================"
+  echo ""
+  echo " In the real Pioneer receiver:"
+  echo "   RF = 108.06 MHz, LO = 107.605 MHz, IF = 455 kHz"
+  echo "   Frequencies scaled down for simulation tractability."
+  echo "   Circuit topology and component ratios are faithful."
+  echo "================================================================"
+  echo ""
+
+  * Measure IF frequency at mixer output
+  meas tran if_period TRIG v(if_tap) VAL=0 RISE=5 TARG v(if_tap) VAL=0 RISE=6
+  echo "IF period (s):"
+  print if_period
+  let if_freq = 1/if_period
+  echo "IF frequency (Hz) — expect ~5 kHz:"
+  print if_freq
+
+  * Measure audio output frequency
+  meas tran aud_period TRIG v(audio_out) VAL=0 RISE=2 TARG v(audio_out) VAL=0 RISE=3
+  echo "Audio output period (s):"
+  print aud_period
+  let aud_freq = 1/aud_period
+  echo "Audio frequency (Hz) — expect ~400 Hz:"
+  print aud_freq
+
+  * Measure output amplitude
+  meas tran aud_pp PP v(audio_out) FROM=5m TO=10m
+  echo "Audio output peak-to-peak (V):"
+  print aud_pp
+
+  echo ""
+  echo "--- Signal Chain Plots ---"
+
+  * Plot 1: Full signal chain overview
+  plot v(rf_in)*20 v(if_tap) v(det_filt) v(audio_out) xlimit 0 10m title 'Complete Receiver: RF(x20) -> IF -> Detector -> Audio'
+
+  * Plot 2: Mixer input and output detail
+  plot v(rf_coupled) v(mix_rf_ct) xlimit 0 2m title 'Mixer: RF Input and IF Output'
+
+  * Plot 3: IF amplifier detail
+  plot v(if_tap) xlimit 4m 6m title 'IF Amplifier Output — Tuned to 5 kHz'
+
+  * Plot 4: Envelope detection — IF and recovered audio
+  plot v(det_filt) v(audio_out) xlimit 2m 10m title 'Envelope Detection: IF Rectified -> Audio Recovered'
+
+  * Plot 5: Audio output — the sound of Pioneer 4
+  plot v(audio_out) xlimit 2m 10m title 'Audio Output — The Sound of Pioneer 4 from 655,000 km'
+
+  echo ""
+  echo "=== Simulation complete ==="
+  echo ""
+  echo "This complete receiver chain represents the signal path"
+  echo "that tracked Pioneer 4 as it escaped Earth's gravity."
+  echo ""
+  echo "The receiver at Goldstone, Cape Canaveral, and Jodrell Bank"
+  echo "maintained contact for 82 hours as Pioneer 4 receded to"
+  echo "655,000 km — the farthest any spacecraft had communicated."
+  echo ""
+  echo "Built progressively across the mission series:"
+  echo "  v1.2: Crystal oscillator (LO source)"
+  echo "  v1.4: Diode ring mixer"
+  echo "  v1.5: IF amplifier + complete chain"
+
+  quit
+.endc
+
+.end
