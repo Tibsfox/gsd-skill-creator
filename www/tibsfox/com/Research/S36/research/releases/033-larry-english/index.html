@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 33&deg; &mdash; Larry English &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #37474F, #546E7A);
+      color: #B0BEC5;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+    }
+
+    .rb-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #F3E5F5;
+      color: #6A1B9A;
+      border: 1px solid #CE93D8;
+      margin-left: 0.3rem;
+    }
+
+    .local-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #455A64;
+      color: #B0BEC5;
+      border: 1px solid #78909C;
+      margin-left: 0.3rem;
+    }
+
+    .unrecorded-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #263238;
+      color: #78909C;
+      border: 1px solid #546E7A;
+      margin-left: 0.3rem;
+    }
+
+    .cd-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1B5E20;
+      color: #C8E6C9;
+      border: 1px solid #43A047;
+      margin-left: 0.3rem;
+    }
+
+    .e5-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+      margin-left: 0.3rem;
+      animation: pulse-e5 2s ease-in-out infinite;
+    }
+    @keyframes pulse-e5 {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(230, 81, 0, 0.4); }
+      50% { box-shadow: 0 0 8px 3px rgba(230, 81, 0, 0.2); }
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .level-foundational { background: #FCE4EC; color: #880E4F; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #546E7A;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #78909C;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #546E7A;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .gap-box {
+      background: #263238;
+      color: #B0BEC5;
+      border: 2px solid #546E7A;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .gap-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #80CBC4;
+      font-family: system-ui, sans-serif;
+    }
+    .gap-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .gap-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .gap-box td, .gap-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #37474F;
+      color: #B0BEC5;
+    }
+    .gap-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #80CBC4;
+    }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: linear-gradient(135deg, #FF6D00, #E65100);
+      color: white;
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFECB3;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #FFECB3;
+    }
+
+    .cd-box {
+      background: linear-gradient(135deg, #1B5E20, #2E7D32);
+      color: #C8E6C9;
+      border: 2px solid #43A047;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cd-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #A5D6A7;
+      font-family: system-ui, sans-serif;
+    }
+    .cd-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .cd-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .cd-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #C8E6C9;
+    }
+    .cd-box td:first-child { font-weight: 600; color: #A5D6A7; width: 30%; }
+
+    .scene-box {
+      background: linear-gradient(135deg, #37474F, #455A64);
+      color: #B0BEC5;
+      border: 2px solid #78909C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .scene-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #80DEEA;
+      font-family: system-ui, sans-serif;
+    }
+    .scene-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">33&deg;</div>
+      <div>
+        <h1>Larry English</h1>
+        <div class="subtitle">R&amp;B &middot; The Room Tone &mdash; Central District&rsquo;s Unrecorded Foundation
+          <span class="e5-badge">Energy 5 &mdash; x2</span>
+          <span class="rb-badge">R&amp;B</span>
+          <span class="local-badge">Local</span>
+          <span class="unrecorded-badge">The Unrecorded</span>
+          <span class="cd-badge">Central District</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../032-luther-rabb/index.html">Degree 32&deg; (Rabb)</a>
+      <a href="../031-brenda-lee-eager/index.html">Degree 31&deg; (Eager)</a>
+      <a href="../030-ray-charles/index.html">Degree 30&deg; (Ray Charles)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Quincy Jones)</a>
+      <a href="../005-overton-berry/index.html">Degree 5&deg; (Overton Berry)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          He played the Central District clubs. R&amp;B, 1960s and 1970s.
+          No recordings have been found. No archive holds his name.
+          No compilation recovered his 45s. No oral history captured
+          his story. But the scene existed because musicians like him
+          constituted it. The clubs were open seven nights a week.
+          Someone was on stage. The room was full. The room had a tone.
+          <em>The gap in the record IS the record.</em>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Duwamish Territorial Acknowledgment</h4>
+          <p>This research is mapped to Seattle within the Seattle 360 engine.
+          The Seattle region sits on the ancestral territory of the
+          <strong>Duwamish Tribal Organization</strong>, the
+          <strong>Muckleshoot Indian Tribe</strong>, and related Coast Salish
+          peoples. The Duwamish Tribe remains federally unrecognized.
+          This acknowledgment was established at degree 20.</p>
+        </div>
+
+        <!-- ========================================
+             DOCUMENTATION GAP
+             ======================================== -->
+
+        <div class="gap-box">
+          <h4>The Documentation Gap &mdash; Primary Research Finding</h4>
+          <p>Extensive research across 15+ sources produced <strong>zero results</strong>
+          for Larry English as a musician. Searched: Discogs, AllMusic, Wikipedia,
+          Northwest Music Archives, HistoryLink.org (5 articles), Wheedle&rsquo;s Groove
+          Vols. I &amp; II tracklists, Kearney Barton archive, Paul de Barros&rsquo;s
+          <em>Jackson Street After Hours</em>, Peter Blecha&rsquo;s <em>Stomp and Shout</em>,
+          KNKX/KUOW oral histories, City Arts Magazine, Converge Media, SeattleMet.</p>
+          <p style="margin-top:0.8rem"><strong>The absence is the finding.</strong>
+          The Central District&rsquo;s 1960s&ndash;1970s scene produced far more musicians
+          than it documented. For every artist recovered by the Wheedle&rsquo;s Groove
+          project, unknown numbers remain below the archival threshold. Larry English
+          represents the base of the pyramid &mdash; the local musicians whose nightly
+          work built the scene that the famous emerged from.</p>
+          <table>
+            <tr><th>Source</th><th>Result</th></tr>
+            <tr><td>Discogs / AllMusic</td><td>No artist entry</td></tr>
+            <tr><td>Wikipedia (Seattle musicians)</td><td>Not listed</td></tr>
+            <tr><td>Wheedle&rsquo;s Groove I &amp; II</td><td>Not on either compilation</td></tr>
+            <tr><td>HistoryLink.org (5 articles)</td><td>No mention</td></tr>
+            <tr><td>NW Music Archives</td><td>No results</td></tr>
+            <tr><td>KNKX / KUOW / Converge</td><td>No mention</td></tr>
+            <tr><td>SeattleMet / City Arts</td><td>No mention</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             E=5 ENERGY (SECOND CONSECUTIVE)
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>E=5 &mdash; Second Consecutive (Degrees 32&ndash;33)</h4>
+          <p><strong>E=5 continues from degree 32 (Luther Rabb).</strong>
+          At degree 32, E=5 was &ldquo;tidal energy&rdquo; &mdash; cumulative force of
+          multiple massive enterprises. At degree 33, E=5 is reinterpreted as
+          <strong>scene-cumulative tidal energy</strong> &mdash; the energy of the
+          entire Central District musical ecosystem across its 1965&ndash;1975
+          lifespan: clubs open seven nights a week until 4 AM, local bands topping
+          KYAC charts over national artists, community-sustained infrastructure
+          at full capacity for a decade.</p>
+          <table>
+            <tr><th>Energy</th><th>Count</th><th>Distribution</th></tr>
+            <tr><td>E=1</td><td>2</td><td>Various</td></tr>
+            <tr><td>E=2</td><td>13</td><td>Various</td></tr>
+            <tr><td>E=3</td><td>6</td><td>Various</td></tr>
+            <tr><td>E=4</td><td>11</td><td>21&ndash;31 (streak)</td></tr>
+            <tr><td>E=5</td><td><strong>2</strong></td><td>32&ndash;33</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             CENTRAL DISTRICT CLUSTER
+             ======================================== -->
+
+        <div class="cd-box">
+          <h4>Central District &mdash; The Engine&rsquo;s Heart Returns</h4>
+          <p><strong>First explicit &ldquo;Central District&rdquo; neighborhood designation
+          in the CSV.</strong> Previous CD connections were inferred from biography.
+          At degree 33, the Central District IS the designation &mdash; not inferred
+          but stated. Seven Central District degrees in the first 34:</p>
+          <table>
+            <tr><td>Degree 0</td><td>Quincy Jones &mdash; born &amp; raised in CD</td></tr>
+            <tr><td>Degree 3</td><td>Ernestine Anderson &mdash; sang in CD clubs</td></tr>
+            <tr><td>Degree 4</td><td>Floyd Standifer &mdash; CD educator &amp; performer</td></tr>
+            <tr><td>Degree 5</td><td>Overton Berry &mdash; CD pianist</td></tr>
+            <tr><td>Degree 30</td><td>Ray Charles &mdash; incubated in CD</td></tr>
+            <tr><td>Degree 32</td><td>Luther Rabb &mdash; born &amp; raised in CD</td></tr>
+            <tr><td><strong>Degree 33</strong></td><td><strong>Larry English &mdash; Central District (explicit)</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THE SCENE
+             ======================================== -->
+
+        <h2>The Scene Larry English Performed In</h2>
+
+        <p>Without individual biographical data, the research documents the
+        musical ecosystem that the CSV data places English within. The Central
+        District&rsquo;s 1960s&ndash;1970s R&amp;B scene is well-documented at the
+        aggregate level even when individual musicians are not.</p>
+
+        <div class="scene-box">
+          <h4>Central District Soul &amp; Funk Ecosystem (1965&ndash;1975)</h4>
+          <p><strong>Venues:</strong> Black and Tan Club, Golden Crown, Trojan Horse,
+          Birdland Supper Club, District Tavern. Open 7 nights/week until 4 AM.</p>
+          <p><strong>Radio:</strong> KYAC 1250 AM (1965&ndash;1981), Black-owned and
+          operated. Local bands topped KYAC charts over national artists.</p>
+          <p><strong>Recording:</strong> Kearney Barton&rsquo;s Audio Recording studio.
+          Self-released 45s in runs of 200&ndash;1,000 copies.</p>
+          <p><strong>Documented bands:</strong> Black on White Affair, Cold Bold &amp;
+          Together, Robbie Hill&rsquo;s Family Affair, Cookin&rsquo; Bag, Soul Swingers,
+          Dave Lewis Trio, Overton Berry Trio.</p>
+          <p><strong>Decline:</strong> Disco killed the live scene (mid-to-late 1970s).
+          Musicians left, took day jobs, or returned to church choirs.</p>
+        </div>
+
+        <div class="timeline-entry">
+          <div class="era">Mid-1960s</div>
+          <p>Central District soul scene emerges. KYAC begins broadcasting (1965).
+          Venues fill with live R&amp;B acts seven nights a week.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">Late 1960s</div>
+          <p>Scene peaks. Local bands top KYAC charts over national singles.
+          Black on White Affair, Cold Bold &amp; Together become local stars.
+          Self-released 45s circulate through neighborhood record shops.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">Early 1970s</div>
+          <p>Funk and soul at maximum intensity. Clubs packed until 4 AM.
+          Larry English&rsquo;s era designation (1960s&ndash;1970s) spans this peak.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">Mid-1970s</div>
+          <p>Disco arrives. Venues change programming. The Central District
+          live scene fades. Musicians disperse.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2001&ndash;2014</div>
+          <p>DJ Mr. Supreme finds a Black on White Affair 45 in a 99-cent bin.
+          Wheedle&rsquo;s Groove compilations (Vols. I &amp; II) recover approximately
+          20 artists. Larry English is not among them.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             LABEL BREAK
+             ======================================== -->
+
+        <h2>The Label Break: From Major to Local</h2>
+
+        <p>The four-degree major-label streak ends at degree 33 with the most
+        extreme possible break:</p>
+
+        <table style="width:100%;font-size:0.9rem;border-collapse:collapse;margin:1rem 0">
+          <tr style="border-bottom:2px solid #E8EAF6">
+            <th style="text-align:left;padding:0.4rem">Degree</th>
+            <th style="text-align:left;padding:0.4rem">Artist</th>
+            <th style="text-align:left;padding:0.4rem">Label</th>
+          </tr>
+          <tr style="border-bottom:1px solid #F3F4F6">
+            <td style="padding:0.4rem">29</td>
+            <td style="padding:0.4rem">Ivan &ldquo;Boogaloo Joe&rdquo; Jones</td>
+            <td style="padding:0.4rem">Prestige</td>
+          </tr>
+          <tr style="border-bottom:1px solid #F3F4F6">
+            <td style="padding:0.4rem">30</td>
+            <td style="padding:0.4rem">Ray Charles</td>
+            <td style="padding:0.4rem">Atlantic</td>
+          </tr>
+          <tr style="border-bottom:1px solid #F3F4F6">
+            <td style="padding:0.4rem">31</td>
+            <td style="padding:0.4rem">Brenda Lee Eager</td>
+            <td style="padding:0.4rem">Mercury</td>
+          </tr>
+          <tr style="border-bottom:1px solid #F3F4F6">
+            <td style="padding:0.4rem">32</td>
+            <td style="padding:0.4rem">Luther Rabb</td>
+            <td style="padding:0.4rem">Mercury</td>
+          </tr>
+          <tr style="border-bottom:2px solid #546E7A;background:#ECEFF1">
+            <td style="padding:0.4rem;font-weight:700">33</td>
+            <td style="padding:0.4rem;font-weight:700">Larry English</td>
+            <td style="padding:0.4rem;font-weight:700">local</td>
+          </tr>
+        </table>
+
+        <p>&ldquo;Local&rdquo; is the first unnamed label designation in the engine.
+        It means one or more of: self-released 45s, local studio recordings
+        never distributed nationally, unrecorded live performances, or recordings
+        that existed but are lost.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY NODES
+             ======================================== -->
+
+        <h2>Theory Contributions</h2>
+
+        <div class="theory-grid">
+
+          <div class="theory-card">
+            <h4>The Unrecorded</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p><strong>34th artist-city pattern.</strong> The musician fully embedded in the
+            city&rsquo;s musical culture whose documentation does not survive the transition
+            from live performance to permanent archive. Not about quality or significance
+            &mdash; about the mechanics of preservation.</p>
+            <div class="examples">The base of the pyramid beneath The Foundation (32).
+            You cannot build a scene without the musicians who perform in it but whose
+            names are not written down.</div>
+            <div class="genealogy"><strong>Lineage:</strong> The Export (0) leaves and is
+            documented. The Foundation (32) supports and is partially documented.
+            The Unrecorded (33) stays and is not documented. Full spectrum.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Room Tone</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p><strong>34th acoustic element.</strong> The ambient sound of a venue
+            &mdash; crowd murmur, glass clink, floor creak, room resonance.
+            What survives when no recording exists. The audience&rsquo;s presence made audible.</p>
+            <div class="examples">The Golden Crown at midnight. The Black and Tan on a Saturday.
+            The sound of the room IS the surviving music when no tape was rolling.</div>
+            <div class="genealogy"><strong>Lineage:</strong> Follows the groove lock (32).
+            After the bass locks in, the room responds. Environmental-acoustic phase begins.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Documentation Gap as Data</h4>
+            <span class="level level-advanced">Advanced</span>
+            <p><strong>Historiographic principle.</strong> The absence of documentation is a
+            research finding, not a failure. The gap reveals structural inequities in
+            preservation &mdash; who had studio access, which labels signed whom, which
+            archives preserved what, which historians interviewed whom.</p>
+            <div class="examples">Gaps track lines of race, class, geography, institutional power.
+            Segregated musicians&rsquo; unions. Studio time costs money. Tiny press runs
+            that don&rsquo;t survive. The engine&rsquo;s first meta-theory node.</div>
+            <div class="genealogy"><strong>Lineage:</strong> Elevates NEEDS VERIFICATION
+            tags from specific claims to a structural principle about entire scenes.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: The Ghost Bend</h4>
+            <span class="level level-intermediate">Intermediate</span>
+            <p><strong>33rd blue note deployment.</strong> The blue note played but
+            not recorded. The micro-tonal inflection that existed in live performance
+            but was never captured on tape or vinyl. The most fundamental form &mdash;
+            spontaneous, unrepeatable, bound to the moment.</p>
+            <div class="examples">Completes 33-degree arc: from fully documented
+            (degree 0, Jones) to fully undocumented (degree 33, English).
+            Every blue note English ever played is a ghost bend.</div>
+            <div class="genealogy"><strong>Lineage:</strong> 33 deployments.
+            Bass-line (0) &rarr; ... &rarr; funk bass bend (32) &rarr; ghost bend (33).
+            First unrecorded mechanism in the blue note thread.</div>
+          </div>
+
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THE PYRAMID
+             ======================================== -->
+
+        <h2>Why This Degree Matters</h2>
+
+        <p>Every scene is a pyramid. The visible peak requires an invisible base.
+        For every Quincy Jones who left the Central District and achieved global
+        recognition, for every Dave Lewis whose 45s survived in a collector&rsquo;s bin,
+        there were fifty, a hundred, two hundred Larry Englishes who stayed, who played,
+        who <em>were</em> the scene.</p>
+
+        <p>The engine documents what it can and names what it cannot document.
+        This degree is a named space for the unnamed. The &ldquo;local&rdquo; label
+        is not a lesser category &mdash; it is the most common category for Central
+        District musicians of this era. The base matters as much as the peak.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 34</h4>
+          <ul>
+            <li><strong>E=5 x2:</strong> Second consecutive. Distribution 2:13:6:11:2.
+            Scene-cumulative tidal energy established. Track at degree 34.</li>
+            <li><strong>Pure R&amp;B x2:</strong> Genre Stage 15. Second consecutive
+            pure R&amp;B. Track.</li>
+            <li><strong>The Unrecorded (NEW):</strong> 34th artist-city pattern.
+            Documentation absence as structural finding. Track.</li>
+            <li><strong>The room tone (NEW):</strong> 34th acoustic element.
+            Environmental-acoustic phase begins. Track element 35.</li>
+            <li><strong>Ghost bend (NEW):</strong> 33rd blue note deployment.
+            Unrecorded mechanism. 33-degree arc complete. Track.</li>
+            <li><strong>Documentation gap as data (NEW):</strong> Historiographic
+            principle. Apply to all future degrees with incomplete sourcing.</li>
+            <li><strong>Local label:</strong> First unnamed label. Ends Prestige&ndash;Atlantic&ndash;Mercury&ndash;Mercury streak. Track.</li>
+            <li><strong>Central District cluster:</strong> 7 degrees (0, 3, 4, 5, 30, 32, 33).
+            Densest geographic cluster. Track.</li>
+            <li><strong>Gender:</strong> 6:28 (~17.6%). No change in women count. Track.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+
+        <div class="stat-card">
+          <h4>Degree Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">33 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist</span>
+            <span class="stat-value">Larry English</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E=5 (x2)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1960s&ndash;1970s</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">local</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Coordinates</span>
+            <span class="stat-value">47.608, -122.298</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine State</h4>
+          <div class="stat-row">
+            <span class="stat-label">Pattern (#34)</span>
+            <span class="stat-value">The Unrecorded</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Element (#34)</span>
+            <span class="stat-value">The Room Tone</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note (#33)</span>
+            <span class="stat-value">Ghost Bend</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">15 (R&amp;B x2)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E Distribution</span>
+            <span class="stat-value">2:13:6:11:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD Cluster</span>
+            <span class="stat-value">7 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gender Ratio</span>
+            <span class="stat-value">6:28 (17.6%)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Documentation Status</h4>
+          <div class="stat-row">
+            <span class="stat-label">Online Sources</span>
+            <span class="stat-value" style="color:#B71C1C">0 results</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Archives</span>
+            <span class="stat-value" style="color:#B71C1C">Not found</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Compilations</span>
+            <span class="stat-value" style="color:#B71C1C">Not included</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Finding</span>
+            <span class="stat-value" style="color:#1B5E20">Gap = Data</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Version</h4>
+          <div class="stat-row">
+            <span class="stat-label">Release</span>
+            <span class="stat-value">v1.49.169</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Prev Degree</span>
+            <span class="stat-value">32 (Rabb)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bird #33</span>
+            <span class="stat-value">Bohemian Waxwing</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 Engine &middot; Degree 33 of 360 &middot; Larry English &middot;
+    Central District R&amp;B &middot; The Unrecorded</p>
+    <p>The gap in the record IS the record.</p>
+  </footer>
+</body>
+</html>
