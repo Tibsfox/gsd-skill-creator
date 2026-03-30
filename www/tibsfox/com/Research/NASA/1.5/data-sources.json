@@ -1,0 +1,117 @@
+{
+  "mission": "1.5",
+  "title": "Pioneer 4 (Juno II)",
+  "description": "Open datasets and source materials relevant to Pioneer 4 (1959), the first US spacecraft to achieve escape velocity, Pseudotsuga menziesii (Douglas-fir), Red-breasted Nuthatch (Sitta canadensis), and deep space communication",
+  "sources": [
+    {
+      "id": "nssdc-pioneer-4",
+      "name": "NSSDC Master Catalog -- Pioneer 4",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1959-013A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Pioneer 4. Spacecraft description (6.08 kg cone), instrument manifest (single Geiger-Mueller tube trigger-type ionization chamber), Juno II launch vehicle details, mission timeline for the 82-hour communication window, and the first confirmed US escape trajectory. NSSDC designation 1959-013A. Records the lunar flyby at approximately 60,000 km and the resulting heliocentric orbit between Earth and Mars.",
+      "mission_relevance": "Definitive source for Pioneer 4 spacecraft specifications, trajectory parameters, and mission outcomes. Documents the first successful three-stage Juno II burn, the escape velocity achievement, and the confirmation of Pioneer 3's dual Van Allen belt measurements. Contains the orbital parameters for Pioneer 4's permanent heliocentric orbit."
+    },
+    {
+      "id": "jpl-small-bodies-pioneer4",
+      "name": "JPL Small-Body Database -- Pioneer 4 Heliocentric Orbit",
+      "url": "https://ssd.jpl.nasa.gov/",
+      "type": "primary-source",
+      "category": "orbital-data",
+      "format": "HTML/API",
+      "access": "open",
+      "description": "JPL's Solar System Dynamics group maintains ephemeris data for Pioneer 4 as an artificial solar system body. Orbital elements: semi-major axis approximately 1.22 AU, eccentricity approximately 0.17, inclination approximately 12 degrees, orbital period approximately 395 days. The database enables computation of Pioneer 4's current position relative to Earth, Mars, and the Sun using the HORIZONS ephemeris system.",
+      "mission_relevance": "Provides the precise heliocentric orbital elements that define Pioneer 4's permanent trajectory around the Sun. Essential for computing the spacecraft's current position (still orbiting between Earth and Mars) and for the heliocentric orbit knowledge node. Enables comparison of Pioneer 4's orbit with Earth's orbit (1.00 AU, e=0.017) and Mars' orbit (1.52 AU, e=0.093)."
+    },
+    {
+      "id": "ntrs-pioneer-4",
+      "name": "NASA Technical Reports Server -- Pioneer 4 Reports",
+      "url": "https://ntrs.nasa.gov/search?q=pioneer%204",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open",
+      "description": "Full-text technical report archive containing JPL engineering reports, trajectory analyses, radiation measurement publications, and mission summaries for Pioneer 4. Includes the final mission report documenting the first US escape velocity achievement, the Juno II performance analysis showing nominal three-stage operation, and the radiation data that confirmed Pioneer 3's dual Van Allen belt discovery.",
+      "mission_relevance": "Primary technical documentation for Pioneer 4's trajectory, instrument performance, and scientific results. Contains the engineering narrative of how the Juno II modifications between Pioneer 3 and Pioneer 4 (primarily propellant loading procedures and first-stage burn monitoring) resolved the issues that had prevented escape on all previous attempts. Documents the 82-hour communication timeline and the signal loss at 655,300 km."
+    },
+    {
+      "id": "jpl-horizons-ephemeris",
+      "name": "JPL HORIZONS Ephemeris System",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "ephemeris",
+      "format": "ASCII/API",
+      "access": "open",
+      "description": "JPL's general-purpose ephemeris computation service providing high-accuracy positions, velocities, and orbital elements for solar system bodies including spacecraft. HORIZONS can compute Pioneer 4's position at any epoch from launch (1959-03-03) to the present, referenced to any solar system body or barycenter. The system uses numerical integration of the equations of motion including perturbations from all major planets.",
+      "mission_relevance": "Enables precise reconstruction of Pioneer 4's trajectory from Earth escape through lunar flyby to heliocentric orbit insertion. Essential for the hyperbolic trajectory knowledge node (computing specific orbital energy at injection), the gravitational slingshot analysis (Moon encounter geometry), and the heliocentric orbit node (current position computation). Can generate ephemeris tables for the screensaver's orbit visualization mode."
+    },
+    {
+      "id": "mcdowell-launch-db",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "format": "TSV/HTML",
+      "access": "open",
+      "description": "Comprehensive, independently maintained database of all orbital and suborbital launches. Includes the complete Juno II launch history (10 flights, 1958-1961), payload masses, success/failure classification, and trajectory data. Pioneer 4 is classified as a full success -- the first for a Juno II deep space mission. The database documents the progression from Pioneer 0 (failure) through Pioneer 4 (success) with detailed notes on each mission outcome.",
+      "mission_relevance": "Contextualizes Pioneer 4 within the Juno II launch record and the convergence-through-iteration narrative. Provides the quantitative basis for the Juno II reliability knowledge node: 4 successes, 2 partial, 4 failures in 10 flights. Documents the parallel launch vehicle development (Atlas, Thor, Juno) during 1958-1959 that gave the US multiple paths to escape velocity."
+    },
+    {
+      "id": "usda-feis-douglas-fir",
+      "name": "USDA Fire Effects Information System -- Pseudotsuga menziesii",
+      "url": "https://www.fs.usda.gov/database/feis/plants/tree/psemen/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Comprehensive ecological profile of Douglas-fir (Pseudotsuga menziesii var. menziesii and var. glauca) in North American forests. Covers growth rates (up to 1.5 m/year in optimal conditions for young trees), maximum dimensions (100 m height, 4+ m diameter), fire ecology (thick bark fire resistance in mature trees, fire-dependent regeneration), seed dispersal ecology, mycorrhizal associations, wildlife habitat values, and old-growth characteristics. Includes range maps showing the coastal variety dominating the PNW from British Columbia to northern California.",
+      "mission_relevance": "Establishes the complete biological and ecological context for the organism pairing. Douglas-fir's growth trajectory -- from seedling struggling for light to canopy emergent reaching the sky -- is the central resonance with Pioneer 4's trajectory from failed predecessors to escape velocity. The FEIS data on seed germination rates (1 in 1,000 survival to 10 years), bark fire resistance developing with age, and old-growth canopy structure provides the quantitative basis for the resonance axes."
+    },
+    {
+      "id": "osu-old-growth-data",
+      "name": "Oregon State University Old-Growth Forest Research Data",
+      "url": "https://andrewsforest.oregonstate.edu/data",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "CSV/Database",
+      "access": "open",
+      "description": "Long-term ecological research data from the H.J. Andrews Experimental Forest in the Oregon Cascades -- one of the best-studied old-growth Douglas-fir forests in the world. Data spans 1948 to present, including permanent plot measurements (tree diameter, height, mortality, recruitment), forest microclimate records, canopy light interception measurements, mycorrhizal network mapping, and carbon flux measurements. The Andrews Forest is a 6,400-hectare research site containing old-growth stands exceeding 500 years.",
+      "mission_relevance": "Provides the quantitative data for the old-growth ecosystem knowledge node: biomass accumulation rates, canopy development timelines, species richness over succession stages, and the multi-century convergence toward old-growth steady state. The permanent plot data showing individual Douglas-firs tracked for 70+ years enables the serial reliability calculation (annual survival probability compounded over centuries). Essential for the worked example comparing forest succession convergence to Pioneer program convergence."
+    },
+    {
+      "id": "nasa-image-library",
+      "name": "NASA Image and Video Library -- Pioneer 4",
+      "url": "https://images.nasa.gov/search?q=pioneer+4&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "Historical photographs from the Pioneer program: Pioneer 4 spacecraft assembly at JPL, Juno II on Launch Complex 5 at Cape Canaveral (same pad as Pioneer 3), mission control during the 82-hour tracking period, tracking station antenna photographs, and diagrams of the escape trajectory. Public domain imagery suitable for educational use.",
+      "mission_relevance": "Visual documentation of Pioneer 4 hardware, the Juno II vehicle, and the JPL/ABMA team. The spacecraft photographs show the 6.08 kg cone (slightly heavier than Pioneer 3's 5.87 kg). Launch photographs from LC-5 show the same pad that launched Pioneer 3 three months earlier. Essential for the Minecraft scale model, Blender trajectory animation, and simulation tracks."
+    },
+    {
+      "id": "space-track-tle",
+      "name": "Space-Track TLE Archive",
+      "url": "https://www.space-track.org/",
+      "type": "primary-source",
+      "category": "orbital-data",
+      "format": "TLE/JSON",
+      "access": "open (registration required)",
+      "description": "US Space Force maintained archive of Two-Line Element sets for tracked objects. Contains tracking data from the Pioneer 4 era for objects in Earth orbit and beyond. While Pioneer 4 itself escaped Earth orbit (and therefore has no TLE -- TLEs describe Earth-orbiting objects), the archive provides the tracking infrastructure context: the same ground stations that tracked Pioneer 4 during its 82-hour communication window also maintained the TLE catalog for all orbiting objects.",
+      "mission_relevance": "Provides context for Pioneer 4's tracking infrastructure and the transition from Earth-orbit tracking to deep-space tracking. Pioneer 4's escape demonstrated that the existing tracking network could maintain contact with objects leaving Earth's sphere of influence, informing the design of the Deep Space Network. Essential for understanding the signal attenuation knowledge node and the communication link budget."
+    },
+    {
+      "id": "national-forest-inventory",
+      "name": "USDA Forest Service National Forest Inventory (FIA)",
+      "url": "https://www.fia.fs.usda.gov/",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "CSV/Database",
+      "access": "open",
+      "description": "The Forest Inventory and Analysis program of the US Forest Service maintains a permanent network of approximately 300,000 sample plots across all US forests, inventoried on a rotating 5-10 year cycle. For the Pacific Northwest, this includes extensive Douglas-fir stand measurements: tree diameter, height, crown class, damage agents, mortality causes, regeneration density, and stand age. The database enables computation of Douglas-fir population statistics across its entire range, from seedling density to old-growth survival rates.",
+      "mission_relevance": "Provides the population-level data for Douglas-fir survival statistics used in the Juno II reliability knowledge node: seedling-to-maturity survival rates, annual mortality probabilities, and the serial chain of survival events required to reach old growth. The FIA data showing that less than 1% of Douglas-fir seedlings survive to 100 years (and far fewer to 500+) directly parallels the low reliability of early launch vehicles. Essential for the worked example comparing rocket system reliability to tree survival probability."
+    }
+  ]
+}
