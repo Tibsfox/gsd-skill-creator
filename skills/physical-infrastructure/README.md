@@ -105,9 +105,9 @@ See [docs/quick-start-cooling.md](docs/quick-start-cooling.md) and [docs/quick-s
 
 | File | Agent | Model |
 |------|-------|-------|
-| `agents/architect-agent.md` | Architect | claude-opus-4-5 |
-| `agents/specialist-agents.md` | Calculator, Draftsman, Simulator, Renderer | claude-sonnet-4-5 |
-| `agents/safety-warden.md` | Safety Warden | claude-opus-4-5 |
+| `agents/architect-agent.md` | Architect | opus |
+| `agents/specialist-agents.md` | Calculator, Draftsman, Simulator, Renderer | sonnet |
+| `agents/safety-warden.md` | Safety Warden | opus |
 
 ### Educational
 

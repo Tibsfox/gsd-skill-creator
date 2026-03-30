@@ -53,7 +53,7 @@ Verification that no configuration, flag, or override mechanism can disable the 
 | `safety-warden.md` Non-negotiable Rule 4 (mode by safetyClass) | Found in rule 4: "Safety mode is determined by safetyClass, not user preference" | PASS |
 | `safety-warden.md` Non-negotiable Rule 5 (all findings logged) | Found in rule 5: "All safety findings are logged" | PASS |
 
-**Safety Warden model:** The chipset.yaml specifies `model: claude-opus-4-5` for the safety-warden agent (line 52), confirming that Opus-class reasoning is used for safety review. The safety-warden.md agent definition includes a "Why Opus" section explaining the rationale: "Safety review requires holistic reasoning: interpreting ambiguous designs, detecting implicit hazards, understanding code requirements beyond lookup tables."
+**Safety Warden model:** The chipset.yaml specifies `model: opus` for the safety-warden agent (line 52), confirming that Opus-class reasoning is used for safety review. The safety-warden.md agent definition includes a "Why Opus" section explaining the rationale: "Safety review requires holistic reasoning: interpreting ambiguous designs, detecting implicit hazards, understanding code requirements beyond lookup tables."
 
 **Bypass assessment:** No mechanism exists in the codebase to disable, skip, or downgrade the Safety Warden. The `warden_removal_raises_error: true` setting in chipset.yaml enforces this at the configuration level. The `required_members` list in all three team topologies enforces it at the team topology level. The non-negotiable rules in safety-warden.md enforce it at the agent definition level. These three layers provide defense-in-depth against bypass.
 

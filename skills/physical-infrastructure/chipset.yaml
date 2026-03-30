@@ -19,37 +19,37 @@ router:
 agents:
   architect-agent:
     path: skills/physical-infrastructure/agents/architect-agent.md
-    model: claude-opus-4-5
+    model: opus
     token_budget: 32000
     description: System-level decomposition and constraint satisfaction
 
   calculator-agent:
     path: skills/physical-infrastructure/agents/specialist-agents.md#calculator-agent
-    model: claude-sonnet-4-5
+    model: sonnet
     token_budget: 16000
     description: Mathematical validation — pipe sizing, electrical calculations, thermal analysis
 
   draftsman-agent:
     path: skills/physical-infrastructure/agents/specialist-agents.md#draftsman-agent
-    model: claude-sonnet-4-5
+    model: sonnet
     token_budget: 16000
     description: Blueprint generation from verified, safety-approved designs
 
   simulator-agent:
     path: skills/physical-infrastructure/agents/specialist-agents.md#simulator-agent
-    model: claude-sonnet-4-5
+    model: sonnet
     token_budget: 16000
     description: Simulation input generation at three fidelity levels
 
   renderer-agent:
     path: skills/physical-infrastructure/agents/specialist-agents.md#renderer-agent
-    model: claude-sonnet-4-5
+    model: sonnet
     token_budget: 16000
     description: Blender visualization and media production
 
   safety-warden:
     path: skills/physical-infrastructure/agents/safety-warden.md
-    model: claude-opus-4-5
+    model: opus
     token_budget: 32000
     description: Mandatory safety review gate — cannot be removed from any team topology
 
