@@ -1,0 +1,269 @@
+{
+  "degree": 42,
+  "species": "Yellow-rumped Warbler",
+  "scientific_name": "Setophaga coronata",
+  "slug": "042-yellow-rumped-warbler",
+  "sound_type": "loose trill varied song",
+  "energy": 4,
+  "ecosystem": "conifer edge",
+  "season": "resident/summer",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds in coniferous and mixed forests throughout the PNW, preferring open stands and edges. The Audubon's subspecies (S. c. auduboni) occupies the PNW. Uniquely among engine warblers, this species overwinters in the region -- found in lowland parks, streamside woodlands, and shrubby areas with berry-producing plants through the winter months. The main winter warbler of the PNW."
+  },
+  "taxonomy_note": {
+    "description": "Yellow-rumped Warbler is the TENTH Parulidae in the engine -- extending the family's lead to FIVE over Hirundinidae and Turdidae (5 each). It is the FIFTH CONSECUTIVE Parulidae (after BTG at 38, Townsend's at 39, Hermit at 40, Nashville at 41), an absolutely unprecedented run. Setophaga returns after the Leiothlypis break at degree 41 -- but not with another specialist. Setophaga coronata is the GENERALIST: the most abundant warbler in North America (~170 million), the only warbler that can digest wax, the one that stays through winter. The species complex (Audubon's / Myrtle / Goldman's / Black-fronted) has one of the most complex taxonomic histories in North American ornithology: split as separate species for most of the 20th century, lumped in 1973 based on a Canadian Rockies hybrid zone, genus changed from Dendroica to Setophaga in 2011, possibly to be re-split based on genomic evidence.",
+    "current_family": "Parulidae",
+    "new_family": false,
+    "family_count_in_engine": 18,
+    "parulidae_count_in_engine": 10,
+    "name_etymology": "Setophaga = Ancient Greek ses (moth) + phagein (to eat) = 'moth-eater.' Coronata = Latin coronatus (crowned). Full translation: 'Crowned moth-eater.' Named by Linnaeus in 1766 in the twelfth edition of Systema Naturae, originally as Motacilla coronata. The crown refers to the yellow crown patch -- one of five yellow points (crown, rump, two flanks, throat in Audubon's form). Unlike the hidden crowns of Leiothlypis (degrees 20, 41), this crown is DISPLAYED.",
+    "genus_note": "Setophaga now has FIVE members in the engine (16, 38, 39, 40, 42) -- the largest genus representation in any family. The genus returns after the Leiothlypis break at degree 41. But Setophaga coronata is fundamentally different from the Setophaga trio at 38-40: those were niche specialists in crisis. This is the generalist in triumph. Same genus, different strategy, different outcome.",
+    "order_note": "Passeriformes continues from degree 41. Fifth consecutive Passeriformes in the warbler quintet.",
+    "warbler_quintet_note": "Degrees 38-39-40-41-42 form the engine's first five-consecutive same-family run from Parulidae, MATCHING the swallow quintet (Hirundinidae, 26-30) at five consecutive. The warbler quintet spans THREE genera (Setophaga at 38-40 and 42, Leiothlypis at 41), FOUR ecosystems (oak-pine, conifer canopy/mountain conifer, brush, conifer edge), and maps THREE ecological stories (displacement cascade, disturbance ecology, generalist triumph).",
+    "audubon_myrtle_note": "The Yellow-rumped Warbler complex: Myrtle (eastern, white throat), Audubon's (western, yellow throat -- the PNW form), Goldman's (Guatemalan highlands), Black-fronted (NW Mexico). Split as separate species before 1973. Lumped based on Hubbard (1969) hybrid zone study. Genus changed from Dendroica to Setophaga in 2011 (Chesser et al.). Re-split debate ongoing -- IOC already treats as separate species.",
+    "family_lead": "With 10 members, Parulidae now LEADS all families by FIVE over Hirundinidae and Turdidae (5 each). Ten of ~115 North American Parulidae is about 9%. The family has FOUR structural arcs plus an exclamation point: quintet (14-17, 20), trio (38-40, displacement cascade), coda (41, genus shift + habitat descent), exclamation point (42, generalist triumph), and the overarching narrative.",
+    "visible_crown_note": "After two Leiothlypis with hidden crowns (Orange-crowned at 20, Nashville at 41), the Setophaga at degree 42 displays its yellow crown openly. Coronata = 'crowned.' The engine now has three crown species: two hidden (Leiothlypis) and one displayed (Setophaga). The genus contrast is literal: Leiothlypis conceals, Setophaga displays.",
+    "wax_adaptation_note": "The Yellow-rumped Warbler produces elevated bile salts that dissolve waxy coatings on bayberry, wax myrtle, juniper, and poison ivy berries -- an adaptation UNIQUE among New World warblers. This allows the species to overwinter in temperate North America when all other warblers must migrate to the tropics. The wax adaptation is the foundation of the species' abundance (170 million) and its unique resident/summer season status in the engine.",
+    "generalist_note": "After four specialists (BTG in oak-pine, Townsend's in canopy, Hermit in mountain conifer, Nashville in brush), the Yellow-rumped is the GENERALIST. Conifer edge habitat. Can eat insects, berries, wax, sap. Can survive winter. Found in every forest type in the PNW. Population 170 million -- the most abundant warbler in North America. The evolutionary lesson: specialize narrowly and face displacement. Generalize broadly and thrive."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "3,500-8,000 (across the shivering trill) [NEEDS VERIFICATION]",
+    "peak_energy_band_hz": "4,500-6,500 (primary song energy) [NEEDS VERIFICATION]",
+    "song_duration_s": "1.0-2.8 (mean approximately 1.5-2.0 s)",
+    "note_structure": "LOOSE SHIVERING TRILL: 7-21 notes (mean ~12) with a thin, bell-like quality. Notes are vaguely doubled -- each has a slight internal structure of two sub-elements blurred into one, giving the trill its characteristic 'loose' or 'shivering' texture. The terminal pitch direction is VARIABLE: sometimes rising, sometimes falling. The same bird may sing rising and falling versions.",
+    "note_types": "THREE sound categories: (1) TERRITORIAL TRILL (type I song) -- the primary shivering trill used in dawn song and territory defense. Thin, bell-like, erratic. (2) INTERACTION SONG (type II) -- a weaker, more disorganized warbling used in close interactions. Less structured than type I. (3) CALL NOTES -- a sharp emphatic chek/tchep (year-round foraging call) and a softer psit (breeding season). Audubon's form call is softer and less metallic than Myrtle form's call.",
+    "phrase_structure": "Monophasic trill with variable ending. Unlike the Nashville's clean binary partition, the Yellow-rumped's song is a single continuous trill that varies in its terminal direction. The looseness comes from the doubled note structure and the unpredictable ending.",
+    "timbre": "THIN, BELL-LIKE -- distinctly different from the buzzy Setophaga trio at 38-40. The Yellow-rumped's tone is cleaner, sweeter, with a bell-like overtone. Not buzzy, not harsh, not insistent. A shimmering, wavering quality that none of the previous Setophaga songs had. The genus has timbral range.",
+    "amplitude": "E=4 -- moderate volume from mid-canopy perches at conifer edges (5-15 m). Carries well across forest openings. The song is audible but not powerful. Consistent with the moderate energy typical of mid-canopy territorial warblers.",
+    "tempo": "Moderate, with approximately 5-8 notes per second in the main trill. Not as fast as the Nashville's teedle-teedle trill (~8-12/s) or as slow as the BTG's lazy buzzy phrases. The doubled note structure makes the trill feel slower than it actually is.",
+    "context": "Males sing from mid-canopy perches at conifer edges (5-15 m), often at the boundary between forest and opening. Dawn chorus singing from prominent perches in the canopy. Also sings during spring migration -- an early spring song that arrives weeks before other warblers.",
+    "key_property": "THE SHIMMER -- the 43rd acoustic element. A loose shivering trill with variable terminal pitch, thin bell-like timbre, and doubled note structure. After the partition's structural duality (degree 41), the shimmer introduces TONAL VARIABILITY -- a song defined by its refusal to be the same thing twice. Named 'the shimmer' for five resonances: (1) the song's internal pitch variability, (2) the taxonomic shimmer between Audubon's and Myrtle, (3) the seasonal shimmer between resident and migratory, (4) five yellow patches that flash like gold through foliage, (5) the generalist shimmer across all habitats. The first acoustic element named for INCONSISTENCY as a defining trait."
+  },
+  "plumage": {
+    "overall": "A strikingly patterned warbler with five conspicuous yellow patches -- crown, rump, two flanks, and throat (Audubon's form). The return to bold Setophaga display after the understated Leiothlypis at degree 41. Blue-gray and black streaking above, white below with black breast streaking. Large white wing patches.",
+    "head": "Blue-gray crown with a conspicuous YELLOW CROWN PATCH -- the 'corona' the species is named for. Broken white eye-rings. The Audubon's form has a plainer gray face compared to the Myrtle's black-and-white mask. The crown is VISIBLE and DISPLAYED -- unlike the hidden crowns of Leiothlypis (degrees 20, 41).",
+    "crown_patch": "A bright YELLOW crown patch that is VISIBLE in the field -- the feature the species is named for (coronata = 'crowned'). This is the engine's THIRD crown species and the first with a DISPLAYED crown. Orange-crowned (20) had a hidden orange crown. Nashville (41) had a hidden rufous crown. Yellow-rumped (42) has a visible yellow crown. The crown progression: hidden, hidden, displayed.",
+    "throat_breast": "Audubon's form: YELLOW THROAT -- the diagnostic feature separating Audubon's from Myrtle (which has a white throat). Below the yellow throat, white breast with bold black streaking. Two conspicuous YELLOW FLANK PATCHES partially tucked under the wings, flashing when the bird moves.",
+    "back": "Slate blue-gray, streaked with black. Bold patterning -- the opposite of the Nashville's smooth olive-green back. Large white wing patches (not just wing bars but substantial patches of white).",
+    "rump": "The NAMESAKE -- a bright YELLOW RUMP PATCH that flashes conspicuously in flight. The 'butter butt.' The single most consistent field mark across all four forms and all seasons. Even dull winter birds retain the yellow rump.",
+    "field_id": "Five yellow points (crown, rump, two flanks, throat in Audubon's form) on a blue-gray and black-and-white body. The yellow rump flash in flight is usually the first field mark noticed. Breeding males are unmistakable. Winter/female birds are drabber but retain the yellow rump.",
+    "setophaga_comparison": "Five Setophaga species in the engine: Yellow Warbler (16, maximum yellow), BTG (38, black-and-white ink), Townsend's (39, yellow-and-black face), Hermit (40, yellow beacon on gray), Yellow-rumped (42, five yellow points on blue-gray). The genus spans from monochromatic yellow (degree 16) to multi-point display (degree 42). The Yellow-rumped has the most complex color pattern of any Setophaga in the engine.",
+    "visible_crown_significance": "The visible crown at degree 42 resolves the hidden-crown pattern established by Leiothlypis at degrees 20 and 41. The engine's crown progression: hidden orange (20, Leiothlypis), hidden rufous (41, Leiothlypis), displayed yellow (42, Setophaga). The Setophaga return is a visual statement: this genus does not hide."
+  },
+  "wax_ecology": {
+    "adaptation": "Elevated bile salt production in the gastrointestinal tract allows digestion of waxy coatings on berries. Unique among New World warblers. The bile salts dissolve saturated fats that other warblers cannot process.",
+    "target_berries": [
+      "Bayberry (Morella spp.) -- the original 'Myrtle' berry the Myrtle form was named for",
+      "Wax myrtle (Morella cerifera) -- waxy-coated coastal and southern berries",
+      "Juniper (Juniperus spp.) -- waxy blue berries, available year-round in PNW dry habitats",
+      "Poison ivy (Toxicodendron radicans) -- waxy white berries, consumed without ill effects",
+      "Virginia creeper (Parthenocissus quinquefolia) -- blue-black berries",
+      "Dogwood (Cornus spp.) -- available in PNW forests"
+    ],
+    "ecological_significance": "The wax adaptation allows the Yellow-rumped Warbler to overwinter in temperate North America while all other warblers migrate to the tropics. When insect populations collapse in winter, the Yellow-rumped switches to wax-coated berries. The berries are abundant and available all winter. This is the single most consequential physiological adaptation in the warbler family for determining winter range.",
+    "population_impact": "The ability to exploit a food source unavailable to competitors is likely the foundation of the Yellow-rumped Warbler's extraordinary abundance (170 million breeding adults). By occupying a winter niche that no other warbler can fill, the species avoids the mortality pressures of tropical wintering (predation, habitat loss, competition) while exploiting underutilized temperate resources.",
+    "pnw_winter": "In the PNW, the Yellow-rumped Warbler is the main winter warbler. It can be found in lowland parks, streamside woodlands, open pine forests, and residential areas with ornamental berry-producing plants. Most Audubon's form birds move to lower elevations in winter but remain in Washington state. Some individuals present year-round where berry resources are adequate."
+  },
+  "conifer_edge_ecology": {
+    "definition": "Conifer edge -- the transitional zone where conifer forest meets another habitat type (meadow, clearcut, stream, mixed forest, development). Not deep forest interior, not open brush. The ecotone. The Yellow-rumped Warbler prefers open conifer stands and edges rather than dense closed-canopy forest.",
+    "habitat_types": [
+      "Open conifer stands -- gaps, light, structural diversity within conifer forest",
+      "Forest-meadow edges -- where conifer forest meets subalpine or valley meadow",
+      "Forest-clearcut edges -- transitional zone at logging boundaries",
+      "Canopy gaps and bogs -- open microhabitats within otherwise dense western Washington forests",
+      "Mixed forests -- where conifers and broadleaf trees coexist",
+      "Higher-elevation eastern Washington -- open ponderosa pine and Douglas fir"
+    ],
+    "vertical_position": "Mid-canopy at conifer edges (5-15 m singing perch, 5-15 m nesting height). Not as high as the Hermit Warbler's extreme crown (20-50 m) or the Townsend's canopy perch (15-45 m), but higher than the Nashville's brush-top perch (1-3 m). The Yellow-rumped occupies the middle of the vertical column -- consistent with edge habitat where trees are shorter or more open than deep forest.",
+    "pnw_distribution": [
+      "Western Washington -- coniferous forests, preferring open stands, canopy gaps, bog edges, meadow margins",
+      "Eastern Washington -- common in drier conifer forests at higher elevations on the eastern Cascades slopes",
+      "Olympics -- present in conifer forests, especially northeast Olympics",
+      "Oregon -- throughout Cascades and Coast Range in conifer and mixed forest",
+      "British Columbia -- southern interior and coastal mountains"
+    ],
+    "significance": "The conifer edge is the generalist's habitat. An edge specialist draws resources from both adjacent habitats -- canopy insects from the forest side, berry shrubs from the open side. The Yellow-rumped Warbler's preference for edges maps to its generalist ecology: it lives where two worlds overlap, taking from both. The edge is the shimmer between habitats -- not committed to either side, thriving in the transition."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The shimmer -- the 43rd acoustic element: a loose, erratic shivering trill with thin, bell-like quality and variable terminal pitch direction. After the partition's structural duality (degree 41), the shimmer introduces TONAL VARIABILITY -- a song defined by its refusal to be the same thing twice. The same bird sings rising and falling versions. Males have multiple song types. The doubled note structure gives the trill a wavering, shimmering texture. Named 'the shimmer' for five simultaneous resonances: (1) the song's internal pitch and direction variability, (2) the taxonomic shimmer between Audubon's and Myrtle (split/lumped/debated/possibly re-split), (3) the seasonal shimmer between resident and migratory, (4) five yellow patches that flash like gold through dark foliage as the bird moves, (5) the generalist shimmer across all habitats. The first acoustic element named for INCONSISTENCY as a defining trait.",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/shimmer/",
+      "examples": [
+        "Yellow-rumped Warbler song: tuwee-tuwee-tuwee-tuwee. A shivering trill with thin, bell-like quality. The terminal pitch direction is unpredictable -- sometimes rising, sometimes falling. The same individual varies its ending. No previous engine warbler showed this level of within-individual variation.",
+        "Partition to shimmer transition: the partition (41, binary, two fixed halves) -> the shimmer (42, variable, changing each time). After a song that was explicitly two things, a song that refuses to be any one thing. The partition was deterministic. The shimmer is probabilistic.",
+        "Structural novelty: no previous acoustic element described within-individual inconsistency as a defining characteristic. The shimmer is not a quality of sound (brightness, roughness) or a structure (partition, cadenza). It is a quality of CHANGE -- the song's variability itself is the named element.",
+        "The doubled note structure: each tuwee is vaguely doubled -- two sub-notes blurred into one. This gives the trill its wavering, shimmering quality. The internal structure of each note is ambiguous, neither clearly single nor clearly double. The shimmer operates at every level: note, phrase, song, species.",
+        "The Setophaga timbral expansion: BTG (buzzy), Townsend's (harsh buzz), Hermit (thin reedy buzz), Yellow-rumped (thin bell-like shimmer). The genus moves from buzzy to bell-like at degree 42. Setophaga has timbral range."
+      ],
+      "music_theory_parallel": "Rubato -- the expressive fluctuation of tempo in performance, where the musician speeds up and slows down within a passage, never playing the same phrase at exactly the same speed twice. The Yellow-rumped Warbler's variable terminal pitch is natural rubato: the song's ending is not fixed but expressively flexible. Classical pianists like Chopin and Debussy were masters of rubato -- the music breathes, shimmers, refuses to be metronomic. The Yellow-rumped Warbler composes in rubato. Its song breathes."
+    },
+    {
+      "concept": "The five-consecutive Parulidae run -- degrees 38-39-40-41-42 as the engine's longest same-family consecutive sequence, now MATCHING the swallow quintet (Hirundinidae, degrees 26-30) at five consecutive. Five warbler species across three genera (Setophaga for 38-40 and 42, Leiothlypis for 41), four ecosystems (oak-pine, conifer canopy/mountain conifer, brush, conifer edge), and THREE ecological stories: displacement cascade (38-40), disturbance ecology (41), generalist triumph (42). The warbler quintet is more taxonomically and ecologically diverse than the swallow quintet within its family run.",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/warbler-quintet-consecutive/",
+      "examples": [
+        "Five degrees: BTG (38, Setophaga, oak-pine, drawl), Townsend's (39, Setophaga, conifer canopy, canopy buzz), Hermit (40, Setophaga, mountain conifer, thinning), Nashville (41, Leiothlypis, brush, partition), Yellow-rumped (42, Setophaga, conifer edge, shimmer). Same family. Three genera. Four ecosystems. Three ecological stories.",
+        "The genus pattern: Setophaga (38-40), Leiothlypis break (41), Setophaga return (42). The Leiothlypis interlude at degree 41 was a single-degree genus shift -- a brief partition -- before Setophaga reclaimed the engine. The quintet is bookended by Setophaga with a Leiothlypis insert.",
+        "Swallow comparison: the swallow quintet (26-30) was 5 consecutive Hirundinidae in aerial habitat -- a family survey. The warbler quintet (38-42) is 5 consecutive Parulidae across 4 ecosystems -- a story arc from specialist to generalist. The swallows surveyed. The warblers narrated.",
+        "The specialist-to-generalist arc: BTG (specialist), Townsend's (aggressor), Hermit (specialist in decline), Nashville (disturbance specialist), Yellow-rumped (generalist). The arc ends with the species that refused to specialize -- and has 170 million individuals as a result.",
+        "Warbler saturation: 10 of 43 entries (23.3%) from one family. FIVE consecutive. The engine is at maximum warbler density. This must break at degree 43."
+      ],
+      "music_theory_parallel": "A theme and variations. The warbler quintet is a theme (Parulidae, the warbler sound) run through five variations: variation 1 (drawl -- the slow version), variation 2 (canopy buzz -- the aggressive version), variation 3 (thinning -- the diminishing version), variation 4 (partition -- the divided version), variation 5 (shimmer -- the free variation, where the theme is recognized but no longer bound to any single form). In classical variation form, the final variation often takes the greatest liberties with the original theme. The shimmer is the free variation -- the generalist rendition of the warbler sound."
+    },
+    {
+      "concept": "The visible crown -- the engine's third crown-named species and the first with a DISPLAYED crown. After Orange-crowned (degree 20, hidden orange under olive, celata = 'hidden') and Nashville (degree 41, hidden rufous under gray, ruficapilla = 'red-capped'), the Yellow-rumped Warbler (degree 42) has a visible yellow crown (coronata = 'crowned'). The crown progression: hidden, hidden, displayed. The Leiothlypis genus conceals its crowns. The Setophaga genus displays its crown. The genus difference is literal.",
+      "level": "foundational",
+      "department": "ecology/plumage",
+      "college_path": ".college/ecology/plumage/visible-crown/",
+      "examples": [
+        "Three crown species: Orange-crowned (celata = hidden, orange hidden under olive), Nashville (ruficapilla = red-capped, rufous hidden under gray), Yellow-rumped (coronata = crowned, yellow DISPLAYED). Two hidden, one visible. Two Leiothlypis, one Setophaga.",
+        "Genus aesthetic confirmed: Leiothlypis = concealment (smooth-feathered, hidden crowns). Setophaga = display (moth-eater, bold patterns, visible crown). The genus names literally describe the plumage strategy.",
+        "Five yellow patches: the Yellow-rumped Warbler does not just display one crown -- it has five conspicuous yellow points (crown, rump, two flanks, throat in Audubon's form). After two species that hid their single crown patch, the engine gets a species with five visible gold points. Maximum display after maximum concealment.",
+        "The naming progression: celata = 'hidden' (acknowledging invisibility), ruficapilla = 'red-capped' (describing as if visible when it is not), coronata = 'crowned' (describing what IS visible). Three naming strategies for three crown realities.",
+        "The rump patch as the universal crown: even dull winter birds, even the Myrtle form with its different face pattern, even juveniles -- all retain the yellow rump. It is the species' one non-negotiable display. The butter butt transcends all forms and all seasons."
+      ],
+      "music_theory_parallel": "A musical motif that starts in a minor key (hidden, understated) and finally resolves into major (displayed, triumphant). The crown motif in the engine: first appearance in minor mode (Orange-crowned, hidden, E=3, degree 20 -- the quiet closer). Second appearance still in minor (Nashville, hidden, E=4, degree 41 -- the partition closer). Third appearance resolves into major (Yellow-rumped, displayed, E=4, degree 42 -- the generalist triumph). The motif was introduced quietly, repeated quietly, and finally played loud. The crowned one."
+    },
+    {
+      "concept": "The wax adaptation -- the Yellow-rumped Warbler's unique ability to digest waxy berry coatings through elevated bile salt production. No other New World warbler has this adaptation. It allows overwintering in temperate zones while all other warblers migrate to the tropics. The physiological foundation of the species' extraordinary abundance (~170 million) and its unique resident/summer season status in the engine. The warbler that stayed.",
+      "level": "intermediate",
+      "department": "ecology/physiology",
+      "college_path": ".college/ecology/physiology/wax-digestion/",
+      "examples": [
+        "The biochemistry: elevated bile salts in the gastrointestinal tract dissolve saturated fats in waxy berry coatings. Target berries: bayberry, wax myrtle, juniper, poison ivy, Virginia creeper, dogwood.",
+        "The winter advantage: when insects vanish, other warblers must flee to the tropics. The Yellow-rumped switches to berries. The berries are abundant, year-round, underexploited. The wax adaptation opens a food niche no other warbler can access.",
+        "The population consequence: 170 million breeding adults. By far the most abundant warbler in North America. The wax adaptation underlies this dominance -- the species avoids tropical wintering mortality while exploiting an exclusive temperate food source.",
+        "The PNW winter presence: the main winter warbler in the region. Found in lowland parks, streamside woodlands, open pine forests. Some individuals present year-round. The only warbler in the engine's five-degree run that stays.",
+        "The evolutionary parallel: the Cedar Waxwing (degree 31) also eats berries with waxy coatings. But the waxwing's approach is different -- it passes the berries rapidly through its gut. The Yellow-rumped Warbler DIGESTS the wax itself. Different physiological solutions to the same food challenge."
+      ],
+      "music_theory_parallel": "An instrument with an extended technique -- a way of producing sound that the instrument was not originally designed for, but that opens entirely new musical territory. The cello played col legno (with the wood of the bow) instead of arco (with the hair). The flute overblown to produce harmonics. The Yellow-rumped Warbler's wax digestion is an extended technique: a warbler digestive system repurposed to process a food source no warbler should be able to eat. The extended technique opened a new niche. The new niche opened a continent."
+    },
+    {
+      "concept": "Conifer edge ecosystem and the generalist habitat strategy -- the Yellow-rumped Warbler breeds at forest edges rather than in deep interior, preferring open stands, canopy gaps, forest-meadow transitions, and mixed forest. After four habitat specialists (BTG in oak-pine, Townsend's in canopy, Hermit in mountain conifer, Nashville in brush), the conifer edge represents the GENERALIST NICHE: the ecotone where two worlds overlap, offering resources from both adjacent habitats. The edge is not a specialist habitat -- it is the absence of specialization.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/conifer-edge/",
+      "examples": [
+        "The edge as ecotone: forest edges have higher light levels, greater structural complexity, higher insect diversity, and berry-producing shrubs that deep-forest interiors lack. The Yellow-rumped Warbler's edge preference gives it access to both forest resources and open-habitat resources.",
+        "The five-warbler habitat gradient: BTG (dry oak-pine interior), Townsend's (wet conifer canopy), Hermit (mountain conifer summit), Nashville (post-disturbance brush), Yellow-rumped (conifer edge). The five habitats span from deep interior to extreme edge. The specialist-to-generalist arc maps directly onto the interior-to-edge gradient.",
+        "Western Washington microhabitats: in dense wet forests of western Washington, the Yellow-rumped selects open microhabitats -- canopy gaps, bog edges, meadow margins. Even within closed-canopy forest, it finds the edges, the openings, the transitional spaces.",
+        "The edge as shimmer: an edge is by definition the transition between two things. The conifer edge is where forest shimmers into something else -- meadow, clearcut, riparian, suburban. The Yellow-rumped Warbler lives in the shimmer between habitats.",
+        "Nesting at edges: the Yellow-rumped nests on conifer branches (5-15 m) at or near edge habitat. The nest cup is lined with feathers that curve over the rim, partially covering the eggs -- a distinctive 'hooded' nest construction shared by few other warblers."
+      ],
+      "music_theory_parallel": "The bridge passage in a musical composition -- the section between two themes, belonging to neither but connecting both. In sonata form, the bridge (or transition) modulates from the first theme to the second theme. It has no theme of its own -- it is defined by what it connects. The conifer edge is the Yellow-rumped Warbler's bridge passage: not forest, not meadow, but the transition between them. The bird lives in the modulation."
+    },
+    {
+      "concept": "E=4 continues at 19 degrees (44.2%) -- the energy compression deepens further. E=3 absent for 22 consecutive degrees, E=2 for 29, E=1 for 30. The entire lower half of the energy spectrum has been absent for over two-thirds of the engine. The Yellow-rumped Warbler's E=4 is its FIFTH consecutive degree at that level from the same family (38-39-40-41-42 all Parulidae, all E=4). Dynamic range compression now extends to an unprecedented five-degree same-family same-energy run.",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e4-twenty-two-degrees/",
+      "examples": [
+        "E=4 dominance: 19 of 43 entries (44.2%). Has appeared in 19 of the last 22 degrees. The modal energy level by a wide margin.",
+        "E=3 absence: 22 consecutive degrees without E=3. Deepening past the 21-degree milestone set one degree ago.",
+        "E=2 absence: 29 degrees since the last E=2 (degree 13, Hutton's Vireo). Nearly 70% of the engine without the default quiet register.",
+        "E=1 absence: 30 degrees since the last E=1 (degree 12, Pine Siskin). The minimum energy level is a distant memory.",
+        "Five consecutive E=4 from same family: degrees 38-39-40-41-42 all Parulidae, all E=4. The energy monotony is entrenched across the longest family sequence in the engine."
+      ],
+      "music_theory_parallel": "An orchestra that has been playing mezzo-forte for twenty-two bars. The warbler quintet adds five more bars of mezzo-forte from the same instrument section (woodwinds). The audience has thoroughly forgotten what pianissimo sounds like. The dynamic range of the piece has collapsed to a single band for over half its duration. A subito piano is not just overdue -- it is compositionally essential for the piece to function as music rather than a sustained drone at one dynamic level."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-041",
+      "title": "Nashville Warbler (Degree 41)",
+      "connection": "PREDECESSOR -- CONSECUTIVE PARULIDAE, GENUS BRACKET. The Nashville Warbler (degree 41, Leiothlypis) broke the Setophaga streak. The Yellow-rumped Warbler (degree 42, Setophaga) returns to the genus. The Leiothlypis interlude was one degree -- a brief partition before Setophaga reclaimed the engine. Degrees 41-42 map from specialist (disturbance-dependent brush) to generalist (conifer edge, eats everything). Hidden crown (41) to displayed crown (42)."
+    },
+    {
+      "project": "SPS-040",
+      "title": "Hermit Warbler (Degree 40)",
+      "connection": "SETOPHAGA CONTRAST -- SPECIALIST vs. GENERALIST. Hermit = old-growth mountain conifer specialist, declining population, displaced by Townsend's. Yellow-rumped = conifer-edge generalist, 170 million individuals, thriving. Same genus. Opposite strategies. Opposite outcomes. The thinning vs. the shimmer."
+    },
+    {
+      "project": "SPS-039",
+      "title": "Townsend's Warbler (Degree 39)",
+      "connection": "SETOPHAGA AGGRESSOR vs. GENERALIST. Townsend's dominates through competitive displacement -- it out-competes in canopy. Yellow-rumped dominates through dietary adaptation -- it survives winter when others cannot. Both successful Setophaga strategies. Townsend's is the sword. Yellow-rumped is the shield."
+    },
+    {
+      "project": "SPS-038",
+      "title": "Black-throated Gray Warbler (Degree 38)",
+      "connection": "QUINTET BOOKENDS. BTG began the five-consecutive Parulidae run. Yellow-rumped closes it. BTG = dry-forest specialist, the drawl. Yellow-rumped = conifer-edge generalist, the shimmer. The quintet runs from specialist to generalist, from drawl to shimmer."
+    },
+    {
+      "project": "SPS-020",
+      "title": "Orange-crowned Warbler (Degree 20)",
+      "connection": "CROWN PROGRESSION -- HIDDEN to DISPLAYED. Orange-crowned (Leiothlypis, hidden orange crown, celata = 'hidden'). Yellow-rumped (Setophaga, visible yellow crown, coronata = 'crowned'). The engine's crown species progress from concealed to displayed. Both closers: Orange-crowned closed the quintet, Yellow-rumped closes the five-degree run."
+    },
+    {
+      "project": "SPS-016",
+      "title": "Yellow Warbler (Degree 16)",
+      "connection": "SETOPHAGA BRIGHTNESS. Both Setophaga. Both yellow-dominated. Yellow Warbler = maximum yellow, riparian, clear ascending song, E=3. Yellow-rumped = five yellow points, conifer edge, shivering trill, E=4. The genus spans from sweet simplicity (degree 16) to shimmering complexity (degree 42)."
+    },
+    {
+      "project": "SPS-031",
+      "title": "Cedar Waxwing (Degree 31)",
+      "connection": "BERRY ECOLOGY. Both species eat berries with waxy coatings. The Cedar Waxwing passes berries rapidly through its gut. The Yellow-rumped Warbler DIGESTS the wax with elevated bile salts. Different physiological solutions to the same food challenge. Both are winter berry-eaters in the PNW."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Yellow-rumped Warbler documented as common breeder in coniferous forests and winter resident in lowland PNW. Audubon's subspecies auduboni. The most abundant warbler species in North America and the main winter warbler of the Pacific Northwest."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Conifer edge ecology. Forest-meadow ecotone dynamics. Berry-producing shrub communities in forest openings. Wax-fruited plant ecology (juniper, bayberry analogs). The ecological role of edges as high-diversity transition zones."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 41,
+    "total_entries": 43,
+    "families_represented": 18,
+    "largest_families": {
+      "Parulidae": 10,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Trochilidae": 3,
+      "Fringillidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=4 continues. Now at 19 degrees (44.2%). E=3 absent for 22 DEGREES (since degree 20). E=5 at 3 degrees (7.0%). Dynamic range compression at its most severe: degrees 21-42 exclusively E=4 and E=5. NO E=3, E=2, or E=1 in 22 degrees. The lower three-fifths of the energy spectrum is absent from the entire range since degree 21. Five consecutive E=4 from the same family (38-42, all Parulidae).",
+    "consecutive_quintet": "Degrees 38-39-40-41-42 form the engine's FIRST five-consecutive same-family run from Parulidae, MATCHING the swallow quintet (Hirundinidae, 26-30). The warbler quintet spans THREE genera (Setophaga for 38-40 and 42, Leiothlypis for 41), FOUR ecosystems, and THREE ecological stories. All five E=4.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer"],
+    "ecosystem_note": "Conifer edge -- the transitional zone where conifer forest meets other habitat. The Yellow-rumped Warbler prefers open stands, forest-meadow edges, canopy gaps. The generalist habitat -- the ecotone where two worlds overlap. After four specialist habitats in the quintet (oak-pine, conifer canopy, mountain conifer, brush), conifer edge represents the generalist niche.",
+    "acoustic_element_43": "THE SHIMMER -- a loose shivering trill with variable terminal pitch, thin bell-like timbre, and doubled note structure. After the partition's structural duality (41), the shimmer introduces tonal variability -- a song defined by its inconsistency. Named for five resonances: song variability, taxonomic shimmer (Audubon's/Myrtle), seasonal shimmer (resident/migratory), five yellow patches flashing, generalist shimmer across habitats. The first acoustic element named for INCONSISTENCY as a defining trait.",
+    "parulidae_note": "TENTH PARULIDAE -- engine record extended further. Leads by FIVE over Hirundinidae and Turdidae (5 each). Fifth consecutive Parulidae (unprecedented, matches swallow quintet). Four arcs plus exclamation point: quintet (14-17, 20), trio (38-40, displacement), coda (41, genus shift), exclamation point (42, generalist triumph), and the overarching narrative. 10 of ~115 North American Parulidae = ~9%.",
+    "setophaga_note": "FIFTH Setophaga in the engine (16, 38, 39, 40, 42) -- the largest genus representation in any family. Returns after the Leiothlypis break at degree 41. But Setophaga coronata is different from the trio: a generalist, not a specialist. The genus spans from riparian (16) to mountain conifer (40) to conifer edge (42). Five ecosystems in one genus.",
+    "wax_adaptation_note": "UNIQUE among New World warblers. Elevated bile salt production enables digestion of waxy berry coatings. Allows overwintering in temperate zones. Foundation of the species' extraordinary abundance (~170 million). The warbler that stayed when all other warblers left.",
+    "conservation_note": "LEAST CONCERN (IUCN). Population ~170 million -- the most abundant warbler in North America. BBS trend stable to slightly increasing (~+1.8%/yr). Continental Concern Score 6/20 (low concern). The generalist thrives while specialists face displacement and habitat loss.",
+    "critical_gaps": [
+      "No marine/shoreline species in 42 degrees of 'The Sound of Puget Sound' -- 42 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 42 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 42 degrees -- URGENT",
+      "No nocturnal species since degree 4 (38 degrees ago) -- OVERDUE",
+      "E=3 not used since degree 20 (22 degrees ago) -- CRITICAL",
+      "No E=2 since degree 13 (29 degrees ago) -- LOW ENERGY ABSENT",
+      "No E=1 since degree 12 (30 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "FIVE consecutive Parulidae / same family -- warbler fatigue at ABSOLUTE MAXIMUM",
+      "No marine species remains the engine's defining structural deficit -- 42 DEGREES OF A PROJECT NAMED FOR PUGET SOUND"
+    ]
+  }
+}
