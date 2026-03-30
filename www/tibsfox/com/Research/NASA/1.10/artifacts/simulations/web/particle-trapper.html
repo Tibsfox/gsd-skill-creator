@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 4 — Magnetic Particle Trapper</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  canvas {
+    display: block;
+  }
+  #sim-canvas {
+    flex: 1;
+  }
+  #panel {
+    width: 280px;
+    background: #0a0a20;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 13px; color: #40FF80; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d2a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #40FF80; font-weight: bold; }
+  .box .amber { color: #D4A830; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  .control-group input[type="range"] { width: 100%; accent-color: #40FF80; }
+  .marker { font-size: 8px; display: flex; justify-content: space-between; color: #666; }
+  button {
+    background: #151540;
+    color: #40FF80;
+    border: 1px solid #40FF80;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 10px;
+  }
+  button:hover { background: #252560; }
+  button.detonate {
+    border-color: #FF6B6B;
+    color: #FF6B6B;
+  }
+  button.detonate:hover { background: #3a1515; }
+  .instructions {
+    font-size: 9px;
+    color: #666;
+    text-align: center;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>MAGNETIC PARTICLE TRAPPER</h1>
+    <h2>Explorer 4 &mdash; Project Argus (1958)</h2>
+
+    <div class="box">
+      <span class="label">Particles trapped:</span> <span class="value" id="particle-count">0</span><br>
+      <span class="label">In loss cone:</span> <span class="amber" id="lost-count">0</span><br>
+      <span class="label">Active:</span> <span class="value" id="active-count">0</span>
+    </div>
+
+    <div class="control-group">
+      <label>Pitch Angle: <span id="pitch-val">45</span>&deg;</label>
+      <input type="range" id="pitch-angle" min="5" max="85" value="45" step="1">
+      <div class="marker"><span>5&deg; (loss cone)</span><span>85&deg; (deep trap)</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Energy: <span id="energy-val">500</span> keV</label>
+      <input type="range" id="energy" min="50" max="2000" value="500" step="50">
+      <div class="marker"><span>50 keV</span><span>2000 keV</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Field Strength: <span id="field-val">1.0</span>x</label>
+      <input type="range" id="field-strength" min="0.2" max="3.0" value="1.0" step="0.1">
+      <div class="marker"><span>Weak</span><span>Strong</span></div>
+    </div>
+
+    <button onclick="injectParticle()">INJECT PARTICLE</button>
+    <button class="detonate" onclick="argusDetonation()">ARGUS DETONATION</button>
+    <button onclick="clearAll()">CLEAR ALL</button>
+
+    <div class="box">
+      <span class="label">Loss cone angle:</span> <span class="amber" id="loss-cone">12.3</span>&deg;<br>
+      <span class="label">Mirror latitude:</span> <span class="value" id="mirror-lat">43.2</span>&deg;<br>
+      <span class="label">Bounce period:</span> <span class="value" id="bounce-period">0.25</span>s
+    </div>
+
+    <div class="instructions">
+      Click on the field to inject a particle.<br>
+      Particles with pitch angle inside the<br>
+      loss cone hit the atmosphere and are lost.<br>
+      Red shading = loss cone region.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+
+// State
+let particles = [];
+let totalInjected = 0;
+let totalLost = 0;
+let flashAlpha = 0;
+
+// Controls
+const pitchSlider = document.getElementById('pitch-angle');
+const energySlider = document.getElementById('energy');
+const fieldSlider = document.getElementById('field-strength');
+
+// Resize
+function resize() {
+  const panel = document.getElementById('panel');
+  canvas.width = window.innerWidth - panel.offsetWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Physics
+const R_EARTH_PX = 40; // Earth radius in pixels
+
+function getCenter() {
+  return { x: canvas.width / 2, y: canvas.height / 2 };
+}
+
+function dipoleFieldStrength(r, lambda) {
+  // Normalized: B = (1/r^3) * sqrt(1 + 3*sin^2(lambda))
+  const fieldMult = parseFloat(fieldSlider.value);
+  return fieldMult * Math.sqrt(1 + 3 * Math.sin(lambda) ** 2) / (r ** 3);
+}
+
+function mirrorLatitude(pitchDeg) {
+  const sin2a = Math.sin(pitchDeg * Math.PI / 180) ** 2;
+  // Solve cos^6(lam) / sqrt(1 + 3*sin^2(lam)) = sin^2(alpha)
+  for (let lam = 0; lam < Math.PI / 2; lam += 0.001) {
+    const lhs = Math.cos(lam) ** 6 / Math.sqrt(1 + 3 * Math.sin(lam) ** 2);
+    if (lhs <= sin2a) return lam * 180 / Math.PI;
+  }
+  return 90;
+}
+
+function lossConeAngle(L) {
+  // Mirror at atmosphere: r_atm ~ 1.02 R_E
+  const r_atm_norm = 1.02 / L;
+  if (r_atm_norm >= 1) return 90;
+  // cos^2(lam_atm) = r_atm / L (on field line)
+  const lam_atm = Math.acos(Math.sqrt(r_atm_norm));
+  const B_eq = 1.0; // normalized
+  const B_atm = Math.sqrt(1 + 3 * Math.sin(lam_atm) ** 2) / (r_atm_norm ** 3 * L ** 3);
+  const sin2_lc = B_eq / B_atm;
+  if (sin2_lc >= 1) return 90;
+  return Math.asin(Math.sqrt(sin2_lc)) * 180 / Math.PI;
+}
+
+// Particle class
+class Particle {
+  constructor(L, pitchAngleDeg, energyKeV) {
+    this.L = L;
+    this.pitchAngleDeg = pitchAngleDeg;
+    this.energy = energyKeV;
+    this.mirrorLat = mirrorLatitude(pitchAngleDeg);
+    this.lossCone = lossConeAngle(L);
+    this.lost = pitchAngleDeg < this.lossCone;
+    this.phase = 0; // bounce phase (0 to 2pi = full bounce)
+    this.speed = 0.02 + (energyKeV / 2000) * 0.04;
+    this.driftPhase = Math.random() * Math.PI * 2;
+    this.driftSpeed = 0.003 + (energyKeV / 2000) * 0.01;
+    this.alpha = 1.0;
+    this.age = 0;
+    this.trail = [];
+  }
+
+  update() {
+    this.phase += this.speed;
+    this.driftPhase += this.driftSpeed;
+    this.age++;
+
+    if (this.lost) {
+      this.alpha -= 0.02;
+    } else {
+      // Gradual decay (belt dissipation)
+      this.alpha -= 0.0002;
+    }
+
+    // Current latitude (bouncing)
+    const mirrorRad = this.mirrorLat * Math.PI / 180;
+    const lambda = mirrorRad * Math.sin(this.phase);
+
+    // Position on field line
+    const r = this.L * Math.cos(lambda) ** 2;
+    const center = getCenter();
+
+    // 2D projection with drift
+    const driftOffset = 0.05 * Math.sin(this.driftPhase);
+    const x = center.x + (r + driftOffset) * R_EARTH_PX * 4 * Math.cos(lambda);
+    const y = center.y - r * R_EARTH_PX * 4 * Math.sin(lambda);
+
+    this.x = x;
+    this.y = y;
+    this.lambda = lambda;
+    this.r = r;
+
+    // Trail
+    this.trail.push({ x, y, alpha: this.alpha * 0.3 });
+    if (this.trail.length > 40) this.trail.shift();
+  }
+
+  draw() {
+    if (this.alpha <= 0) return;
+
+    // Trail
+    for (let i = 0; i < this.trail.length; i++) {
+      const t = this.trail[i];
+      ctx.beginPath();
+      ctx.arc(t.x, t.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = this.lost
+        ? `rgba(212, 168, 48, ${t.alpha * 0.5})`
+        : `rgba(64, 255, 128, ${t.alpha * 0.5})`;
+      ctx.fill();
+    }
+
+    // Particle dot
+    const brightness = 0.4 + 0.6 * Math.abs(Math.sin(this.lambda));
+    const size = 3 + 2 * brightness;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+
+    if (this.lost) {
+      ctx.fillStyle = `rgba(255, 107, 107, ${this.alpha})`;
+    } else {
+      const g = Math.floor(128 + 127 * (1 - brightness));
+      const r = Math.floor(64 + 148 * brightness);
+      ctx.fillStyle = `rgba(${r}, ${g}, 48, ${this.alpha})`;
+    }
+    ctx.fill();
+
+    // Glow
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, size + 4, 0, Math.PI * 2);
+    ctx.fillStyle = this.lost
+      ? `rgba(255, 107, 107, ${this.alpha * 0.15})`
+      : `rgba(64, 255, 128, ${this.alpha * 0.15})`;
+    ctx.fill();
+  }
+}
+
+function drawEarth() {
+  const center = getCenter();
+  // Earth
+  const gradient = ctx.createRadialGradient(
+    center.x, center.y, R_EARTH_PX * 0.3,
+    center.x, center.y, R_EARTH_PX
+  );
+  gradient.addColorStop(0, '#1a4a8a');
+  gradient.addColorStop(0.6, '#0f2f5f');
+  gradient.addColorStop(1, '#081830');
+  ctx.beginPath();
+  ctx.arc(center.x, center.y, R_EARTH_PX, 0, Math.PI * 2);
+  ctx.fillStyle = gradient;
+  ctx.fill();
+  ctx.strokeStyle = '#2a5a9a';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Axis
+  ctx.beginPath();
+  ctx.moveTo(center.x, center.y - R_EARTH_PX * 6);
+  ctx.lineTo(center.x, center.y + R_EARTH_PX * 6);
+  ctx.strokeStyle = 'rgba(100, 100, 150, 0.15)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Equator
+  ctx.beginPath();
+  ctx.moveTo(center.x - R_EARTH_PX * 8, center.y);
+  ctx.lineTo(center.x + R_EARTH_PX * 8, center.y);
+  ctx.strokeStyle = 'rgba(100, 100, 150, 0.1)';
+  ctx.stroke();
+}
+
+function drawFieldLines() {
+  const center = getCenter();
+  const fieldMult = parseFloat(fieldSlider.value);
+
+  for (let L = 1.5; L <= 5.0; L += 0.5) {
+    ctx.beginPath();
+    for (let theta = -Math.PI / 2.2; theta <= Math.PI / 2.2; theta += 0.02) {
+      const r = L * Math.cos(theta) ** 2;
+      const x = center.x + r * R_EARTH_PX * 4 * Math.cos(theta);
+      const y = center.y - r * R_EARTH_PX * 4 * Math.sin(theta);
+      if (theta === -Math.PI / 2.2) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    const alpha = L === 2.0 ? 0.3 : 0.1;
+    ctx.strokeStyle = `rgba(30, 60, 150, ${alpha})`;
+    ctx.lineWidth = L === 2.0 ? 1.5 : 0.5;
+    ctx.stroke();
+  }
+}
+
+function drawLossCone() {
+  const center = getCenter();
+  const lc = lossConeAngle(2.0);
+  const lcRad = lc * Math.PI / 180;
+
+  // Shade loss cone regions (near poles)
+  ctx.save();
+  ctx.globalAlpha = 0.08;
+  // North
+  ctx.beginPath();
+  ctx.moveTo(center.x, center.y);
+  const northR = 5 * R_EARTH_PX;
+  ctx.lineTo(center.x + northR * Math.cos(Math.PI / 2 - 0.3), center.y - northR * Math.sin(Math.PI / 2 - 0.3));
+  ctx.lineTo(center.x - northR * Math.cos(Math.PI / 2 - 0.3), center.y - northR * Math.sin(Math.PI / 2 - 0.3));
+  ctx.fillStyle = '#FF6B6B';
+  ctx.fill();
+  // South
+  ctx.beginPath();
+  ctx.moveTo(center.x, center.y);
+  ctx.lineTo(center.x + northR * Math.cos(Math.PI / 2 - 0.3), center.y + northR * Math.sin(Math.PI / 2 - 0.3));
+  ctx.lineTo(center.x - northR * Math.cos(Math.PI / 2 - 0.3), center.y + northR * Math.sin(Math.PI / 2 - 0.3));
+  ctx.fillStyle = '#FF6B6B';
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawFlash() {
+  if (flashAlpha > 0) {
+    ctx.fillStyle = `rgba(255, 255, 255, ${flashAlpha})`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    flashAlpha -= 0.03;
+  }
+}
+
+function drawStars() {
+  // Seeded pseudo-random stars
+  for (let i = 0; i < 200; i++) {
+    const x = ((i * 7919 + 104729) % canvas.width);
+    const y = ((i * 6271 + 87119) % canvas.height);
+    const b = ((i * 3571) % 100) / 200 + 0.1;
+    ctx.fillStyle = `rgba(180, 180, 220, ${b})`;
+    ctx.fillRect(x, y, 1, 1);
+  }
+}
+
+function injectParticle() {
+  const pitch = parseInt(pitchSlider.value);
+  const energy = parseInt(energySlider.value);
+  const L = 2.0;
+  const p = new Particle(L, pitch, energy);
+  particles.push(p);
+  totalInjected++;
+  if (p.lost) totalLost++;
+}
+
+function argusDetonation() {
+  flashAlpha = 0.8;
+  // Inject 20 particles at random pitch angles (fission spectrum)
+  for (let i = 0; i < 20; i++) {
+    const pitch = 10 + Math.random() * 70;
+    const energy = 100 + Math.random() * 1500;
+    const L = 1.5 + Math.random() * 1.5;
+    const p = new Particle(L, pitch, energy);
+    particles.push(p);
+    totalInjected++;
+    if (p.lost) totalLost++;
+  }
+}
+
+function clearAll() {
+  particles = [];
+  totalInjected = 0;
+  totalLost = 0;
+  flashAlpha = 0;
+}
+
+function updateUI() {
+  document.getElementById('pitch-val').textContent = pitchSlider.value;
+  document.getElementById('energy-val').textContent = energySlider.value;
+  document.getElementById('field-val').textContent = parseFloat(fieldSlider.value).toFixed(1);
+
+  const active = particles.filter(p => p.alpha > 0).length;
+  document.getElementById('particle-count').textContent = totalInjected;
+  document.getElementById('lost-count').textContent = totalLost;
+  document.getElementById('active-count').textContent = active;
+
+  const pitch = parseInt(pitchSlider.value);
+  const ml = mirrorLatitude(pitch);
+  const lc = lossConeAngle(2.0);
+  document.getElementById('loss-cone').textContent = lc.toFixed(1);
+  document.getElementById('mirror-lat').textContent = ml.toFixed(1);
+
+  const energy = parseInt(energySlider.value);
+  const bouncePeriod = (0.5 - (energy / 2000) * 0.3).toFixed(2);
+  document.getElementById('bounce-period').textContent = bouncePeriod;
+}
+
+// Click to inject
+canvas.addEventListener('click', (e) => {
+  injectParticle();
+});
+
+function animate() {
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  drawStars();
+  drawLossCone();
+  drawFieldLines();
+  drawEarth();
+
+  // Update and draw particles
+  particles = particles.filter(p => p.alpha > 0);
+  for (const p of particles) {
+    p.update();
+    p.draw();
+  }
+
+  drawFlash();
+  updateUI();
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</body>
+</html>

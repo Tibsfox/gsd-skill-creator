@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 4 — Project Argus Timeline</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #c0c8d0;
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  h1 {
+    font-size: 1.4rem;
+    color: #40FF80;
+    text-align: center;
+    margin-bottom: 0.3rem;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 2rem;
+  }
+  .timeline-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 2rem;
+  }
+  canvas { display: block; width: 100%; height: 100%; }
+  .controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  button {
+    background: #0d0d2a;
+    color: #40FF80;
+    border: 1px solid #40FF80;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+  }
+  button:hover { background: #1a1a40; }
+  button.active { background: #1a3a1a; }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .info-card {
+    background: #0a0a20;
+    border: 1px solid #222;
+    border-radius: 6px;
+    padding: 1rem;
+  }
+  .info-card h3 {
+    font-size: 0.85rem;
+    color: #40FF80;
+    margin-bottom: 0.5rem;
+  }
+  .info-card p, .info-card li {
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #999;
+  }
+  .info-card ul { padding-left: 1.2rem; }
+  .stat { color: #D4A830; font-weight: bold; }
+  .event-detail {
+    background: #0d0d2a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-top: 1rem;
+    min-height: 80px;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .event-detail .title { color: #40FF80; font-weight: bold; font-size: 0.9rem; }
+  .event-detail .date { color: #D4A830; font-size: 0.75rem; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>PROJECT ARGUS &mdash; EXPLORER 4 TIMELINE</h1>
+  <p class="subtitle">Nuclear Detonations in Space: Jul 26 &ndash; Oct 1958 | Radiation Belt Creation &amp; Decay</p>
+
+  <div class="controls">
+    <button id="btn-play" onclick="togglePlay()">&#9654; PLAY</button>
+    <button onclick="setSpeed(0.5)">0.5x</button>
+    <button onclick="setSpeed(1)" class="active" id="btn-1x">1x</button>
+    <button onclick="setSpeed(3)">3x</button>
+    <button onclick="resetTimeline()">RESET</button>
+  </div>
+
+  <div class="timeline-container">
+    <canvas id="timeline-canvas"></canvas>
+  </div>
+
+  <div class="event-detail" id="event-detail">
+    <span class="title">Explorer 4 Launch</span><br>
+    <span class="date">July 26, 1958</span><br>
+    Hover over timeline events to see details. Click PLAY to animate the Argus sequence.
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>Explorer 4 Spacecraft</h3>
+      <ul>
+        <li>Mass: <span class="stat">11.7 kg</span></li>
+        <li>Orbit: <span class="stat">263 x 2,210 km</span></li>
+        <li>Inclination: <span class="stat">50.3&deg;</span></li>
+        <li>Instruments: Scintillation counters (CsI)</li>
+        <li>Purpose: Measure Argus artificial belts</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Project Argus</h3>
+      <ul>
+        <li>Three <span class="stat">1.7 kt</span> W-25 warheads</li>
+        <li>Launched from USS Norton Sound</li>
+        <li>X-17A rockets, South Atlantic</li>
+        <li>Predicted by Nicholas Christofilos</li>
+        <li>Top secret until 1959 (leaked by NYT)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>The Christofilos Effect</h3>
+      <p>Greek physicist Nicholas Christofilos predicted in 1957 that nuclear detonations at high altitude would inject electrons into Earth's magnetic field, creating artificial radiation belts. The electrons would spiral along field lines, trapped between magnetic mirror points. The belts would persist for days to weeks depending on injection altitude. Explorer 4 confirmed every prediction.</p>
+    </div>
+    <div class="info-card">
+      <h3>Carl Jung (Dedication)</h3>
+      <p>Jung's concept of the Shadow &mdash; the part of the self we cannot see but which shapes us nonetheless &mdash; resonates with the invisible radiation belts. Explorer 4 made the invisible visible, just as Jung's analytical psychology made the unconscious conscious. The Argus tests literally created a shadow around Earth: an invisible shell of trapped particles that could only be detected by instruments designed to look for it.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('timeline-canvas');
+const ctx = canvas.getContext('2d');
+const detailBox = document.getElementById('event-detail');
+
+// Resize
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Timeline events
+const events = [
+  {
+    date: new Date(1958, 6, 26), // Jul 26
+    label: 'Explorer 4 Launch',
+    type: 'launch',
+    color: '#40FF80',
+    detail: 'Explorer 4 launches from Cape Canaveral on a Juno I rocket. Payload: 11.7 kg with two scintillation counters specifically designed to measure the Argus artificial radiation belts. Orbit: 263 x 2,210 km, 50.3 degree inclination. The satellite is in position before the first detonation.',
+    radiation: 0
+  },
+  {
+    date: new Date(1958, 7, 1), // Aug 1
+    label: 'Pre-Argus baseline',
+    type: 'measurement',
+    color: '#888',
+    detail: 'Explorer 4 establishes baseline radiation measurements for 4 weeks before the first Argus test. Natural Van Allen belt intensity recorded. These pre-test measurements are essential for detecting the artificial enhancement.',
+    radiation: 0.05
+  },
+  {
+    date: new Date(1958, 7, 27), // Aug 27
+    label: 'ARGUS I',
+    type: 'detonation',
+    color: '#FF6B6B',
+    detail: 'ARGUS I: 1.7 kt W-25 warhead detonated at 200 km altitude over the South Atlantic (38.5S, 11.5W). Launched from USS Norton Sound via X-17A rocket at 02:28 UTC. Fission electrons injected into L~1.7 shell. Explorer 4 detects sharp rise in particle counts within hours.',
+    radiation: 0.8
+  },
+  {
+    date: new Date(1958, 7, 30), // Aug 30
+    label: 'ARGUS II',
+    type: 'detonation',
+    color: '#FFB347',
+    detail: 'ARGUS II: 1.7 kt at 240 km altitude (49.5S, 8.2W) at 03:18 UTC. Slightly higher injection. Residual particles from Argus I still detectable. Explorer 4 measures combined artificial belt from both detonations. Particle counts rise again.',
+    radiation: 0.9
+  },
+  {
+    date: new Date(1958, 8, 6), // Sep 6
+    label: 'ARGUS III',
+    type: 'detonation',
+    color: '#40FF80',
+    detail: 'ARGUS III: 1.7 kt at 540 km altitude (49.5S, 9.7W) at 22:13 UTC. Highest altitude injection — deepest into the trapping region. Creates the most persistent artificial belt. Explorer 4 records the highest particle counts of the entire experiment. Belt at L~2.0 shell.',
+    radiation: 1.0
+  },
+  {
+    date: new Date(1958, 8, 15), // Sep 15
+    label: 'Peak belt measurement',
+    type: 'measurement',
+    color: '#D4A830',
+    detail: 'Explorer 4 continues to detect elevated particle counts from all three Argus injections. Argus I belt has largely decayed. Argus II belt fading. Argus III belt still strong at L~2.0. Decay rates match Christofilos predictions for atmospheric loss and pitch-angle scattering.',
+    radiation: 0.6
+  },
+  {
+    date: new Date(1958, 9, 1), // Oct 1
+    label: 'Belt decay continues',
+    type: 'measurement',
+    color: '#888',
+    detail: 'Artificial belts continue to decay. Argus I and II belts have returned to near-background levels. Argus III belt still detectable above natural Van Allen belt background. The experiment confirms the Christofilos effect and validates the theory of magnetic trapping.',
+    radiation: 0.2
+  },
+  {
+    date: new Date(1958, 9, 22), // Oct 22
+    label: 'Return to background',
+    type: 'measurement',
+    color: '#888',
+    detail: 'All artificial radiation belts have decayed to levels indistinguishable from the natural Van Allen belt background. The experiment is complete. Project Argus has confirmed that nuclear detonations in space create temporary artificial radiation belts that decay through atmospheric loss at rates predictable from first principles.',
+    radiation: 0.05
+  }
+];
+
+// State
+let playing = false;
+let speed = 1;
+let currentDay = 0; // days from Jul 26
+const startDate = new Date(1958, 6, 26);
+const endDate = new Date(1958, 9, 31);
+const totalDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+
+function dayToX(day) {
+  const margin = 80;
+  return margin + (day / totalDays) * (canvas.width - margin * 2);
+}
+
+function dateToDay(d) {
+  return (d - startDate) / (1000 * 60 * 60 * 24);
+}
+
+function getRadiationAt(day) {
+  // Compute radiation level based on events
+  let rad = 0.05; // background
+  for (const ev of events) {
+    if (ev.type !== 'detonation') continue;
+    const evDay = dateToDay(ev.date);
+    const elapsed = day - evDay;
+    if (elapsed < 0) continue;
+    const decayDays = ev.label === 'ARGUS III' ? 14 : ev.label === 'ARGUS II' ? 5 : 3;
+    const rise = 1 - Math.exp(-elapsed / 0.5);
+    const decay = Math.exp(-elapsed / decayDays);
+    rad += ev.radiation * rise * decay;
+  }
+  return Math.min(rad, 1.2);
+}
+
+function draw() {
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const margin = 80;
+  const timelineY = canvas.height * 0.6;
+  const graphTop = 40;
+  const graphBottom = timelineY - 30;
+
+  // --- Radiation level graph (area fill) ---
+  ctx.beginPath();
+  ctx.moveTo(dayToX(0), graphBottom);
+  for (let d = 0; d <= totalDays; d += 0.5) {
+    const rad = getRadiationAt(d);
+    const y = graphBottom - rad * (graphBottom - graphTop);
+    ctx.lineTo(dayToX(d), y);
+  }
+  ctx.lineTo(dayToX(totalDays), graphBottom);
+  ctx.closePath();
+
+  const grad = ctx.createLinearGradient(0, graphTop, 0, graphBottom);
+  grad.addColorStop(0, 'rgba(64, 255, 128, 0.3)');
+  grad.addColorStop(0.5, 'rgba(212, 168, 48, 0.15)');
+  grad.addColorStop(1, 'rgba(5, 5, 16, 0)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Radiation line
+  ctx.beginPath();
+  for (let d = 0; d <= totalDays; d += 0.5) {
+    const rad = getRadiationAt(d);
+    const y = graphBottom - rad * (graphBottom - graphTop);
+    if (d === 0) ctx.moveTo(dayToX(d), y);
+    else ctx.lineTo(dayToX(d), y);
+  }
+  ctx.strokeStyle = '#40FF80';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Y-axis label
+  ctx.save();
+  ctx.translate(20, (graphTop + graphBottom) / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillStyle = '#666';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Radiation Intensity', 0, 0);
+  ctx.restore();
+
+  // Background level line
+  ctx.beginPath();
+  ctx.moveTo(margin, graphBottom - 0.05 * (graphBottom - graphTop));
+  ctx.lineTo(canvas.width - margin, graphBottom - 0.05 * (graphBottom - graphTop));
+  ctx.strokeStyle = 'rgba(136, 136, 136, 0.3)';
+  ctx.lineWidth = 0.5;
+  ctx.setLineDash([4, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle = '#666';
+  ctx.font = '8px monospace';
+  ctx.textAlign = 'right';
+  ctx.fillText('natural background', margin - 5, graphBottom - 0.05 * (graphBottom - graphTop) + 3);
+
+  // --- Timeline axis ---
+  ctx.beginPath();
+  ctx.moveTo(margin, timelineY);
+  ctx.lineTo(canvas.width - margin, timelineY);
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Month labels
+  const months = ['Jul', 'Aug', 'Sep', 'Oct'];
+  for (let m = 0; m < months.length; m++) {
+    const monthDate = new Date(1958, 6 + m, 1);
+    const d = dateToDay(monthDate);
+    if (d >= 0 && d <= totalDays) {
+      ctx.fillStyle = '#666';
+      ctx.font = '10px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText(months[m] + ' 1958', dayToX(d), timelineY + 25);
+      ctx.beginPath();
+      ctx.moveTo(dayToX(d), timelineY - 5);
+      ctx.lineTo(dayToX(d), timelineY + 5);
+      ctx.strokeStyle = '#444';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+
+  // --- Events ---
+  for (const ev of events) {
+    const d = dateToDay(ev.date);
+    const x = dayToX(d);
+
+    // Vertical line to radiation curve
+    if (ev.type === 'detonation') {
+      const rad = getRadiationAt(d + 0.5);
+      const ry = graphBottom - rad * (graphBottom - graphTop);
+      ctx.beginPath();
+      ctx.moveTo(x, timelineY);
+      ctx.lineTo(x, ry);
+      ctx.strokeStyle = ev.color + '44';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 3]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Event marker
+    const size = ev.type === 'detonation' ? 8 : 5;
+    ctx.beginPath();
+    if (ev.type === 'detonation') {
+      // Diamond for detonations
+      ctx.moveTo(x, timelineY - size);
+      ctx.lineTo(x + size, timelineY);
+      ctx.lineTo(x, timelineY + size);
+      ctx.lineTo(x - size, timelineY);
+      ctx.closePath();
+      ctx.fillStyle = ev.color;
+    } else if (ev.type === 'launch') {
+      // Triangle for launch
+      ctx.moveTo(x, timelineY - size);
+      ctx.lineTo(x + size, timelineY + size);
+      ctx.lineTo(x - size, timelineY + size);
+      ctx.closePath();
+      ctx.fillStyle = ev.color;
+    } else {
+      ctx.arc(x, timelineY, size * 0.6, 0, Math.PI * 2);
+      ctx.fillStyle = ev.color;
+    }
+    ctx.fill();
+
+    // Label
+    ctx.fillStyle = ev.color;
+    ctx.font = ev.type === 'detonation' ? 'bold 9px monospace' : '8px monospace';
+    ctx.textAlign = 'center';
+    const labelY = ev.type === 'detonation' ? timelineY + size + 14 : timelineY - size - 6;
+    ctx.fillText(ev.label, x, labelY);
+  }
+
+  // --- Playhead ---
+  if (currentDay > 0) {
+    const px = dayToX(currentDay);
+    ctx.beginPath();
+    ctx.moveTo(px, graphTop);
+    ctx.lineTo(px, timelineY + 10);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Current radiation readout
+    const curRad = getRadiationAt(currentDay);
+    ctx.fillStyle = '#D4A830';
+    ctx.font = 'bold 11px monospace';
+    ctx.textAlign = 'left';
+    const curDate = new Date(startDate.getTime() + currentDay * 86400000);
+    const dateStr = curDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    ctx.fillText(dateStr + ' | Rad: ' + (curRad * 100).toFixed(0) + '%', px + 8, graphTop + 15);
+  }
+
+  // Title
+  ctx.fillStyle = '#40FF80';
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('EXPLORER 4 RADIATION MEASUREMENTS', canvas.width / 2, 20);
+}
+
+function togglePlay() {
+  playing = !playing;
+  document.getElementById('btn-play').textContent = playing ? '⏸ PAUSE' : '▶ PLAY';
+}
+
+function setSpeed(s) {
+  speed = s;
+  document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+}
+
+function resetTimeline() {
+  currentDay = 0;
+  playing = false;
+  document.getElementById('btn-play').textContent = '▶ PLAY';
+}
+
+// Hover detection
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+
+  for (const ev of events) {
+    const d = dateToDay(ev.date);
+    const x = dayToX(d);
+    if (Math.abs(mx - x) < 15) {
+      detailBox.innerHTML = `<span class="title">${ev.label}</span><br>` +
+        `<span class="date">${ev.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span><br>` +
+        ev.detail;
+      return;
+    }
+  }
+});
+
+function animate() {
+  if (playing) {
+    currentDay += 0.3 * speed;
+    if (currentDay > totalDays) {
+      currentDay = 0;
+      playing = false;
+      document.getElementById('btn-play').textContent = '▶ PLAY';
+    }
+  }
+  draw();
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</body>
+</html>
