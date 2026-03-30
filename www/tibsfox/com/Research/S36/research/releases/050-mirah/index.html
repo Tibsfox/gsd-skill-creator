@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 50&deg; &mdash; Mirah &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3E2723);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .milestone-banner {
+      background: linear-gradient(135deg, #B71C1C, #C62828, #D32F2F);
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+    }
+    .milestone-banner h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .milestone-banner p {
+      margin: 0.3rem 0 0;
+      font-size: 0.82rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>050 &mdash; Mirah</span>
+    </nav>
+
+    <!-- Milestone Banner -->
+    <div class="milestone-banner">
+      <h3>Degree 50 &mdash; The Fiftieth Rotation</h3>
+      <p>First one-seventh of the circle complete. 50 / 360 degrees documented.</p>
+    </div>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Record Broken &mdash; Six Consecutive Folk-Adjacent &mdash; The Elverum Connection</h3>
+      <p>
+        Mirah at degree 50&deg; breaks the swallow quintet record with the engine&rsquo;s
+        <strong>sixth consecutive folk-adjacent degree</strong> (45&ndash;50). Born September 17,
+        1974, in Philadelphia. Moved to Olympia at seventeen to attend <strong>Evergreen State
+        College</strong>. Taught herself guitar as a class assignment. <strong>K Records</strong>
+        artist &mdash; four solo albums produced by <strong>Phil Elverum</strong> (The
+        Microphones/Mount Eerie). &ldquo;A masterpiece of lo-fi beauty.&rdquo; Second consecutive
+        <strong>Olympia</strong> degree (49&ndash;50). Pitchfork <strong>Best New Music</strong>
+        for <em>C&rsquo;mon Miracle</em>. The bakery kid who became Olympia&rsquo;s quiet architect
+        of indie folk.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">50&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Mirah</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Indie Folk</span>
+          <span class="label-badge">K Records</span>
+          <span class="neighborhood-badge">Olympia</span>
+          <span class="record-badge">6th Folk-Adjacent &mdash; Record Broken</span>
+          <span class="first-badge">1st Evergreen Student</span>
+          <span class="first-badge">2nd K Records</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Bakery Kid Who Taught Herself Guitar at Evergreen</h2>
+          <p>
+            Mirah Yom Tov Zeitlyn was born <strong>September 17, 1974</strong>, in
+            <strong>Philadelphia, Pennsylvania</strong>, the youngest of three children.
+            Her middle name, <strong>Yom Tov</strong>, means &ldquo;good day&rdquo; in
+            Hebrew. Her parents operated a <strong>small natural foods bakery</strong>
+            throughout her childhood. Her mother is also a painter and massage therapist.
+            She grew up in <strong>Bala Cynwyd</strong>, a Philadelphia suburb, listening
+            to <strong>Motown, 1960s R&amp;B, soul, and folk music</strong>. Her parents
+            were, in her words, &ldquo;kind of hippies.&rdquo;
+          </p>
+          <p>
+            Mirah graduated high school early at <strong>age sixteen</strong>. After a year
+            of traveling, she moved to <strong>Olympia, Washington, in 1992</strong> to attend
+            <strong>The Evergreen State College</strong>. She was seventeen. She taught herself
+            <strong>guitar</strong> at Evergreen. She wrote her <strong>first song as a class
+            assignment</strong>. She worked at a <strong>collectively run vegetarian campus
+            cafe</strong> alongside <strong>Kimya Dawson</strong>. She helped run
+            <strong>The Red Horse Cafe</strong>, a &ldquo;secret cafe&rdquo; in her
+            one-bedroom apartment. The school that demanded nothing specific gave her
+            everything she needed: the freedom to discover songwriting.
+          </p>
+          <blockquote>
+            &ldquo;In my family, we just are who we are.&rdquo; &mdash; Mirah, on
+            growing up queer in a family with eight queer members across generations
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Phil Elverum Partnership</h2>
+          <p>
+            In <strong>2000</strong>, Mirah released her debut album,
+            <strong><em>You Think It&rsquo;s Like This But Really It&rsquo;s Like
+            This</em></strong>, on <strong>K Records</strong>. It was produced by
+            <strong>Mirah and Phil Elverum</strong> (The Microphones/Mount Eerie) and
+            recorded at <strong>Dub Narcotic Studio</strong> in Olympia. AllMusic called
+            it &ldquo;a masterpiece of lo-fi beauty.&rdquo; The Mirah&ndash;Elverum
+            production partnership would span <strong>four albums over a decade</strong>
+            &mdash; one of independent music&rsquo;s most sustained producer-artist
+            collaborations.
+          </p>
+          <p>
+            <strong><em>Advisory Committee</em></strong> (2002) earned
+            <strong>AllMusic 4.5/5</strong> and <strong>Pitchfork 8.3/10</strong>.
+            Its standout track, &ldquo;<strong>Cold Cold Water</strong>,&rdquo; is
+            Mirah&rsquo;s signature: Pitchfork described &ldquo;Phil Elverum&rsquo;s
+            panoramic, Morricone-esque production technique explodes onto the
+            soundstage.&rdquo; The steel drums. The desire. The drowning.
+          </p>
+          <p>
+            <strong><em>C&rsquo;mon Miracle</em></strong> (2004) earned
+            <strong>Pitchfork Best New Music</strong> with a score of
+            <strong>8.5/10</strong> &mdash; the highest critical recognition
+            of Mirah&rsquo;s career. <strong><em>(a)spera</em></strong> (2009)
+            completed the four-album Elverum run, with PopMatts calling their
+            partnership &ldquo;one of those rare perfect meeting of the minds.&rdquo;
+            It peaked at <strong>#46 on Billboard Top Heatseekers</strong> &mdash;
+            Mirah&rsquo;s only Billboard chart appearance.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>You Think It&rsquo;s Like This&hellip;</h4>
+              <div class="disco-years">2000 &middot; K Records</div>
+              <p>
+                Debut album. Produced by Mirah and Phil Elverum at Dub
+                Narcotic Studio. AllMusic 4/5: &ldquo;a masterpiece of
+                lo-fi beauty.&rdquo; Includes &ldquo;Engine Heart&rdquo;
+                (later in <em>Love &amp; Other Drugs</em> soundtrack).
+                20th anniversary reissue by Polyvinyl (2020).
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Advisory Committee</h4>
+              <div class="disco-years">2002 &middot; K Records</div>
+              <p>
+                Produced by Mirah and Phil Elverum. AllMusic 4.5/5.
+                Pitchfork 8.3/10. Includes &ldquo;Cold Cold Water&rdquo;
+                &mdash; panoramic production, steel drums, Mirah&rsquo;s
+                signature track. &ldquo;Morricone-esque.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>C&rsquo;mon Miracle</h4>
+              <div class="disco-years">2004 &middot; K Records</div>
+              <p>
+                Pitchfork <strong>Best New Music</strong>, 8.5/10. The
+                critical peak. More confident, more ambitious. Third
+                album in the Elverum production run. Released the year
+                Mirah moved to Portland.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>(a)spera</h4>
+              <div class="disco-years">2009 &middot; K Records</div>
+              <p>
+                Fourth and final Elverum-produced album. Tucker Martine
+                on 4 tracks. Pitchfork 7.8/10. PopMatts 8/10. Billboard
+                Top Heatseekers #46. &ldquo;A rare perfect meeting of
+                the minds.&rdquo;
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Share This Place</h4>
+              <div class="disco-years">2007 &middot; K Records (w/ Spectratone Int&rsquo;l)</div>
+              <p>
+                Concept album about insect lives. Inspired by J. Henri
+                Fabre. Vocals recorded by Steve Fisk and Phil Elverum.
+                Stop-motion films. Lori Goldston (Nirvana Unplugged
+                cellist) and Kyle Hanson.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Changing Light</h4>
+              <div class="disco-years">2014 &middot; Absolute Magnitude / K Records</div>
+              <p>
+                Fifth solo album. Debut on Mirah&rsquo;s own imprint,
+                Absolute Magnitude. Features Mary Timony, Greg Saunier
+                (Deerhoof), Jherek Bischoff, Emily Wells. Written
+                after a breakup. New chapter.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Understanding</h4>
+              <div class="disco-years">2018 &middot; Absolute Magnitude</div>
+              <p>
+                Sixth solo album. Demos from Headlands Center for the
+                Arts residency. Produced with Greg Saunier (Deerhoof)
+                and Eli Crews (Tune-Yards). Released the week Mirah
+                announced her first pregnancy.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Olympia: The Incubator Graduate</h2>
+          <p>
+            Mirah arrived in Olympia at <strong>seventeen</strong>, before she was a
+            musician. Olympia taught her everything: how to play guitar, write songs,
+            perform in secret cafes, record at <strong>Dub Narcotic Studio</strong>,
+            and release music on <strong>K Records</strong>. She lived there for
+            approximately twelve years (1992&ndash;2004), longer than she lived in
+            Philadelphia. She was part of the <strong>K Records renaissance</strong>
+            alongside <strong>The Microphones</strong> (Phil Elverum),
+            <strong>The Blow</strong> (Khaela Maricich), and <strong>Old Time
+            Relijun</strong> (Arrington de Dionyso).
+          </p>
+          <p>
+            She moved to <strong>Portland, Oregon</strong> in 2004, then to
+            <strong>Brooklyn, New York</strong> by fall 2013. But the Olympia DNA
+            persists: she continued releasing on K Records through 2014, continued
+            working with Elverum through 2009, and the lo-fi, community-embedded
+            aesthetic of her Olympia years remains the foundation of everything she
+            has produced since. Olympia made Mirah. Mirah carries Olympia.
+          </p>
+          <p>
+            <strong>The Evergreen State College</strong> &mdash; the progressive
+            liberal arts college where Calvin Johnson founded K Records (1982) and
+            Kathleen Hanna attended before co-founding Bikini Kill &mdash; is the
+            institutional origin of Mirah&rsquo;s career. She is the first engine
+            artist who actually <strong>attended Evergreen</strong>. The school&rsquo;s
+            ethos (no grades, student-directed learning, experimental curriculum)
+            became the template for her entire career: self-produced, self-distributed,
+            community-embedded music.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Intimate Architecture</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                51st acoustic element. The production technique that gives
+                small, personal songs spatial depth without sacrificing
+                intimacy. The voice is near; the reverb trail extends.
+                The guitar is dry; the room hums behind it. Phil
+                Elverum&rsquo;s &ldquo;panoramic&rdquo; production on
+                Mirah&rsquo;s records: bedroom folk that sounds like a
+                forest clearing. Completes the six-element folk-acoustic
+                taxonomy: murmur (45), confessional (46), parable tone
+                (47), held rest (48), lullaby subversion (49), intimate
+                architecture (50).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Incubator Graduate</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                51st artist-city pattern. The artist formed by a city&rsquo;s
+                artistic infrastructure during formative years, who then
+                carries that city&rsquo;s aesthetic into the wider world.
+                Mirah arrived in Olympia at 17, before she was a musician.
+                Olympia taught her guitar, songwriting, recording, and
+                releasing. She departed but carries the DNA. Distinct from
+                the radical transplant (ideological migration), the Draw
+                (attracted to scene), and the Lifer (permanent residence).
+                The city makes the artist; the artist carries the city.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Submerged Current</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                50th blue note deployment. The emotional undertow that
+                pulls a song in a direction the melody does not
+                acknowledge. &ldquo;Cold Cold Water&rdquo; &mdash; the
+                title names the element: desire beneath calm surface.
+                <em>You Think It&rsquo;s Like This But Really It&rsquo;s
+                Like This</em> &mdash; the title IS about submerged
+                currents. Six consecutive folk-adjacent blue notes:
+                held breath (45), crack (46), suspended resolve (47),
+                drummer&rsquo;s ghost (48), Trojan lullaby (49),
+                submerged current (50).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Six Consecutive Folk-Adjacent &mdash; Record Broken</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48), Folk
+                Punk (49), Indie Folk (50). <strong>Six consecutive
+                folk-adjacent degrees</strong> &mdash; breaks the swallow
+                quintet record. Six production paradigms: fingerpicking,
+                punk-folk, concept-album, Americana-folk, anti-folk punk,
+                lo-fi intimate architecture. Genre Stage 31. Three cities
+                (Seattle, Olympia, Philadelphia&rarr;Olympia&rarr;Brooklyn).
+                The longest genre-family streak in engine history.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=2 Rises to Sixteen</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                16th E=2 deployment. Distribution: 2:16:10:12:10:2.
+                E=2 extends its lead as most frequent energy. Mirah:
+                Pitchfork Best New Music, AllMusic 4&ndash;4.5 stars,
+                but never a household name. Heatseekers #46 &mdash;
+                not Billboard 200. Musician&rsquo;s musician. Folk zone
+                energy: 2-3-3-2-3-2. Six consecutive below E=4.
+                Three of six at E=2.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">49&deg;</span> Kimya Dawson &mdash; <strong>The Olympia pair.</strong> Consecutive K Records artists from Olympia. Both shaped by Evergreen&rsquo;s orbit. Both worked at the same vegetarian campus cafe. Both worked with Phil Elverum. Both recorded at Dub Narcotic Studio. Dawson = radical transplant. Mirah = incubator graduate. Two modes of how Olympia shapes artists. Sixth consecutive folk-adjacent (50) following Dawson&rsquo;s fifth (49).</li>
+            <li><span class="ref-degree">48&deg;</span> Sera Cahoone &mdash; <strong>Two quiet women.</strong> Both E=2, both folk-adjacent, both women. Cahoone = slow bloom in Seattle. Mirah = incubator graduate from Olympia. Two E=2 folk-adjacent women in three degrees. The quiet register&rsquo;s feminine presence.</li>
+            <li><span class="ref-degree">47&deg;</span> Pedro the Lion &mdash; <strong>The Indie Folk pair.</strong> The only two Indie Folk degrees. Bazan&rsquo;s theological concept-albums vs. Mirah&rsquo;s literary confessionalism. The parable tone (47) and the intimate architecture (50) both layer meaning beneath accessible surfaces.</li>
+            <li><span class="ref-degree">45&deg;</span> Damien Jurado &mdash; <strong>Sub Pop to K Records bookends.</strong> Both E=2. Both prolific across decades. The murmur (45) and the intimate architecture (50) are the two ends of the six-element folk-acoustic taxonomy. Six degrees, two E=2 bookends.</li>
+            <li><span class="ref-degree">44&deg;</span> Chong the Nomad &mdash; <strong>Seven-degree arc.</strong> Electronic (44) through indie-folk architecture (50). Seven acoustic elements in seven degrees. The engine&rsquo;s longest continuous acoustic-element run.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>The full arc.</strong> Mercury orchestras (0) through K Records (49, 50). From Quincy Jones to Mirah and Phil Elverum. From orchestral budgets to Dub Narcotic basement. Fifty-one degrees of infrastructure miniaturization.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Sep 17, 1974</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Philadelphia, PA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Raised</span>
+            <span class="stat-value">Bala Cynwyd, PA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">To Olympia</span>
+            <span class="stat-value">1992 (age 17)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Guitar</span>
+            <span class="stat-value">Self-taught at Evergreen</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">First Song</span>
+            <span class="stat-value">Class assignment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Identity</span>
+            <span class="stat-value">Queer, Jewish</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Current</span>
+            <span class="stat-value">Brooklyn, NY</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">50 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">31</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#51 Incubator Graduate</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#51 Intimate Architecture</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#50 Submerged Current</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Phil Elverum Partnership</h4>
+          <div class="stat-row">
+            <span class="stat-label">Albums</span>
+            <span class="stat-value">4 (2000&ndash;2009)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Studio</span>
+            <span class="stat-value">Dub Narcotic (Olympia)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Years</span>
+            <span class="stat-value">10-year collaboration</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Legacy</span>
+            <span class="stat-value">Microphones / Mt. Eerie</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Critical Reception</h4>
+          <div class="stat-row">
+            <span class="stat-label">C&rsquo;mon Miracle</span>
+            <span class="stat-value">P4k BNM, 8.5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Advisory Committee</span>
+            <span class="stat-value">P4k 8.3, AM 4.5/5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">(a)spera</span>
+            <span class="stat-value">P4k 7.8, AM 4/5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Debut</span>
+            <span class="stat-value">AM 4/5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Billboard</span>
+            <span class="stat-value">Heatseekers #46</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>K Records Releases</h4>
+          <div class="stat-row">
+            <span class="stat-label">2000</span>
+            <span class="stat-value">You Think It&rsquo;s Like This</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2002</span>
+            <span class="stat-value">Advisory Committee</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2004</span>
+            <span class="stat-value">C&rsquo;mon Miracle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2009</span>
+            <span class="stat-value">(a)spera</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2014</span>
+            <span class="stat-value">Changing Light (co-release)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Phil Elverum</span>
+            <span class="stat-value">Producer (4 albums)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Tucker Martine</span>
+            <span class="stat-value">(a)spera (4 tracks)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lori Goldston</span>
+            <span class="stat-value">Spectratone Int&rsquo;l</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Greg Saunier</span>
+            <span class="stat-value">Understanding</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jherek Bischoff</span>
+            <span class="stat-value">Changing Light, Sundial</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Steve Fisk</span>
+            <span class="stat-value">Share This Place</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Olympia Infrastructure</h4>
+          <div class="stat-row">
+            <span class="stat-label">Evergreen State</span>
+            <span class="stat-value">Attended 1992+</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">K Records</span>
+            <span class="stat-value">Signed 1999</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Dub Narcotic</span>
+            <span class="stat-value">Recording studio</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Red Horse Cafe</span>
+            <span class="stat-value">Secret cafe (DIY venue)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">In Olympia</span>
+            <span class="stat-value">~1992&ndash;2004</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 50</span>
+            <span class="stat-value">2:16:10:12:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2 Mode</span>
+            <span class="stat-value">16th (leads all)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk-adjacent</span>
+            <span class="stat-value">6 consec. (45&ndash;50)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">13 / 51 (~25.5%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 50 of 360 &mdash; Mirah &mdash;
+        Indie Folk &mdash; K Records &mdash;
+        Olympia &mdash;
+        6th Consecutive Folk-Adjacent (Record Broken) &mdash; 1st Evergreen Student &mdash;
+        2nd K Records Artist &mdash; Degree 50 Milestone
+      </p>
+      <p>
+        Territorial Acknowledgment: This research documents music mapped to the Seattle
+        metropolitan area and the broader Pacific Northwest. The Seattle 360 engine operates on
+        the ancestral territory of the Duwamish Tribal Organization (duwamishtribe.org), the
+        Muckleshoot Indian Tribe, and related Coast Salish and Southern Lushootseed-speaking
+        peoples. Degree 50 maps to Olympia, Washington, on the ancestral territory of the
+        Squaxin Island Tribe, the Nisqually Indian Tribe, and related Coast Salish peoples.
+        The Steh-Chass band of the Squaxin Island Tribe historically occupied Budd Inlet, where
+        Olympia now stands. The ancestral lands ceded in the 1854 Treaty of Medicine Creek
+        included approximately 4,000 square miles.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

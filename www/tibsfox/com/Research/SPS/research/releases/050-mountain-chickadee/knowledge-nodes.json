@@ -1,0 +1,274 @@
+{
+  "degree": 50,
+  "species": "Mountain Chickadee",
+  "scientific_name": "Poecile gambeli",
+  "slug": "050-mountain-chickadee",
+  "sound_type": "fee-bee-bay descending whistle",
+  "energy": 2,
+  "ecosystem": "mountain conifer forest",
+  "season": "resident (year-round); altitudinal irruptive in harsh winters",
+  "family": "Paridae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Rough-skinned Newt",
+    "original_scientific_name": "Taricha granulosa",
+    "reason": "SPS Part B engine is birds-and-mammals only. Mountain Chickadee replaces Rough-skinned Newt, preserving the original E=2 energy level and forested habitat. The Rough-skinned Newt is a forest-floor inhabitant of moist PNW woodlands; the Mountain Chickadee occupies montane coniferous forest at higher elevations, preserving the quiet, forested character of the original CSV entry. Sixth consecutive CSV substitution replacing an amphibian-class species (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50). The engine remains deep in the amphibian belt of the original CSV.",
+    "preserved": ["E=2 energy level", "forested habitat"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Mountain Chickadees in Washington inhabit the eastern Cascades and Blue Mountains. Two subspecies populations: P. g. baileyae in the eastern Cascades (Western phylogeographic clade) and P. g. gambeli in the Blue Mountains and northeast Washington (Eastern clade). Year-round resident of montane coniferous forest from approximately 600 m to timberline. Rare in western Washington except during harsh-winter altitudinal irruptions."
+  },
+  "taxonomy_note": {
+    "description": "Mountain Chickadee is the THIRD Paridae in the engine, the THIRD Poecile, and the species that BREAKS the five-consecutive Passerellidae streak (degrees 45-49). Paridae was last seen at degree 9 (Chestnut-backed Chickadee) -- 41 degrees ago. The three Poecile map a complete elevation gradient: Black-capped (degree 3, lowland), Chestnut-backed (degree 9, mid-elevation coastal), Mountain (degree 50, high-elevation montane). The only genus with three representatives from the same family in the engine. Poecile gambeli: 'the variegated bird of Gambel' -- Poecile from Greek poikilos (variegated), gambeli honoring William Gambel (1823-1849), a Philadelphia naturalist who died at age 27 crossing the Sierra Nevada during the Gold Rush.",
+    "current_family": "Paridae",
+    "new_family": false,
+    "family_count_in_engine": 19,
+    "paridae_count_in_engine": 3,
+    "name_etymology": "Poecile = Greek poikilos (variegated, dappled). The genus name describes the patterned plumage shared by all chickadees -- dark cap, light cheeks, dark bib. gambeli = honorific for William Gambel (1823-1849), American naturalist and ornithologist from Philadelphia. Protege of Thomas Nuttall. First botanist to enter California overland from the east (1841, age 18). Collected the type specimen of this species during California fieldwork. Died of typhoid fever at Rose's Bar on the Yuba River, December 13, 1849, during a Gold Rush-era Sierra Nevada crossing.",
+    "genus_note": "Poecile is represented three times in the engine -- all from the family Paridae. This is the tightest generic concentration in the engine: one genus, three species, one family. Compare Fringillidae: 5 members across 3 genera (Spinus, Haemorhous, Loxia). Paridae: 3 members, 1 genus (Poecile). The three Poecile span degrees 3, 9, and 50 -- a 47-degree spread across the engine's first quarter.",
+    "order_note": "Passeriformes continues from degree 49. THIRTEENTH consecutive Passeriformes (38-50). 43 of 51 entries (84.3%) are Passeriformes.",
+    "family_position": "Paridae now has 3 members at degrees 3, 9, 50. Sole occupant of third place by family count. Passerellidae streak (45-49) is BROKEN -- Mountain Chickadee is the first non-Passerellidae since degree 44 (Lesser Goldfinch, Fringillidae).",
+    "phylogeographic_note": "Two major phylogeographic clades: Western Clade (Sierra Nevada, Cascades, California coastal mountains -- sometimes designated Poecile baileyae / Bailey's Chickadee) and Eastern Clade (Rocky Mountains, Great Basin -- retains Poecile gambeli sensu stricto). Spellman et al. (2007, Molecular Ecology) documented significant genetic divergence between clades. Washington State contains BOTH clades: Western in the eastern Cascades, Eastern in the Blue Mountains and Okanogan. A potential species split has been discussed but not formally proposed.",
+    "white_eyebrow_note": "The diagnostic field mark: a white supercilium (eyebrow) interrupting the black cap above each eye. Unique among North American chickadees. The white consists of white feather TIPS on otherwise black feathers -- when plumage is worn (late summer), the stripe may become faint or nearly invisible. Bold and obvious in fresh plumage (fall and winter)."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "3,200-4,200 (across fee-bee-bay song notes)",
+    "peak_energy_band_hz": "3,600-4,200 (fee note energy concentration)",
+    "song_frequency_hz": "Fee ~4,170 Hz, Bee ~3,692 Hz, Bay ~3,200 Hz (when present). Nearly pure-toned whistles at single frequencies.",
+    "song_duration_s": "1.0-2.0 (per individual song, 3-4 notes)",
+    "note_structure": "DESCENDING STAIRCASE OF PURE-TONED WHISTLES: 3-4 clean, sustained notes stepping downward in frequency. Each note is a nearly pure tone with minimal frequency modulation. The mnemonic 'cheeseburger' captures the rhythm and cadence. More notes and wider total descent than the Black-capped Chickadee's 2-note fee-bee (degree 3). The Chestnut-backed Chickadee (degree 9) has lost the fee-bee song entirely.",
+    "note_types": "TWO vocalization categories: (1) FEE-BEE-BAY SONG -- the descending territorial whistle, 1-2 seconds. (2) CHICK-A-DEE CALL -- combinatorial call with SIX note types (A, A/B, B, C, Dh, D), an expansion of the Black-capped's four-note-type system. Hundreds of unique combinations encoding urgency, topic, subject, and threat level.",
+    "phrase_structure": "Simpler than the Fox Sparrow's rich ballad (degree 49) but more precisely structured. Three to four notes, each at a single frequency, descending in a clean staircase. No trills, no buzzes, no melodic embellishment. The precision of the intervals and the purity of the tones are the song's defining characteristics.",
+    "timbre": "PURE, CLEAN, WHISTLE-LIKE. Nearly pure tones with minimal harmonic content. Among the purest-toned songs in the engine. Compare: Black-capped fee-bee (degree 3) is similarly pure but with only 2 notes. The purity is an adaptation to the dry mountain conifer acoustic environment where pure tones propagate with minimal degradation.",
+    "amplitude": "E=2 -- soft to moderate. Comparable to the Black-capped Chickadee (E=2, degree 3) and the Chestnut-backed Chickadee (E=2, degree 9). All three Poecile in the engine are E=2 -- a genus-level characteristic. Chickadees survive through cognition, not acoustic power.",
+    "tempo": "Moderate to slow. Notes are sustained (0.3-0.5 s each) with clean silent gaps between them. Unhurried delivery -- each note rings clearly before the next begins.",
+    "context": "Song given primarily during breeding season (males, February-June). Also given year-round at lower intensity. The chick-a-dee call is given year-round by both sexes. Alarm and mobbing calls intensify in response to predators, with D-note count encoding threat level (as documented for the Black-capped at degree 3).",
+    "regional_variation": "Considerable. Some Rocky Mountain populations produce 3-fee songs (fee-fee-fee). Some Alberta populations produce fee-bee-bee (second bee >200 Hz lower than first). Core pattern is the descending 3-4 note staircase but the number and arrangement of notes varies geographically. Urban populations produce more atypical song variants (Gentry et al. 2017).",
+    "key_property": "THE MEMORY -- the 51st acoustic element (species side). A descending pure-toned whistle of spatial precision. Named 'the memory' for three resonances: (1) the hippocampal memory specialist -- Mountain Chickadees cache tens of thousands of food items and retrieve them using spatial memory, with a larger hippocampus and more neurons than lowland chickadees; (2) the recall of two previous Poecile in the engine -- degree 50 remembers degree 3 (language) and degree 9 (variation), the fee-bee-bay remembers the fee-bee; (3) the 50-degree milestone -- looking back across 50 degrees of accumulated sound. Precision, not beauty. Place-knowledge, not melody."
+  },
+  "plumage": {
+    "overall": "Gray-backed chickadee with black cap interrupted by a distinctive white supercilium (eyebrow). Less colorful than either the Black-capped (buffy flanks) or the Chestnut-backed (rich rufous back and flanks). The grayest, coolest-toned chickadee in the engine.",
+    "diagnostic_mark": "WHITE SUPERCILIUM -- a white eyebrow stripe interrupting the black cap above each eye. Unique among North American chickadees. The white consists of white feather tips on otherwise black feathers; may fade to near-invisibility in worn plumage (late summer) but is bold and obvious in fresh plumage (fall/winter).",
+    "cap": "Black, interrupted by white eyebrow. Compare: Black-capped (solid black cap), Chestnut-backed (dark brown cap).",
+    "back": "Gray. Compare: Black-capped (blue-gray), Chestnut-backed (rich chestnut-brown).",
+    "flanks": "Pale gray to buffy. Less colorful than Black-capped (buffy) and much less colorful than Chestnut-backed (rich rufous).",
+    "wing_edges": "Pale gray and inconspicuous. Compare: Black-capped has prominently white wing edges -- an important secondary field mark when the eyebrow is worn.",
+    "field_id": "Small chickadee of mountain conifer forests. Distinguished from Black-capped Chickadee by the white eyebrow (when visible), pale gray wing edges (vs. white), and montane habitat. Distinguished from Chestnut-backed by gray back (vs. rich chestnut), pale flanks (vs. rufous), and drier, higher-elevation habitat. In western Washington, the Mountain Chickadee would be a rarity -- check location and habitat before claiming."
+  },
+  "spatial_memory": {
+    "description": "Mountain Chickadees are among the most extraordinary spatial memory specialists in the animal kingdom. They cache tens of thousands of food items -- seeds, insects -- in bark crevices, under dead leaves, inside pinecones, and in other small hiding places across the mountain landscape. They retrieve these caches weeks or months later using spatial memory.",
+    "hippocampus": {
+      "size_comparison": "Larger than the Black-capped Chickadee's hippocampus. High-elevation Mountain Chickadees have larger hippocampi than conspecifics at lower elevations.",
+      "neuron_count": "More neurons in the hippocampus than lowland chickadees. The neurons themselves are larger.",
+      "neurogenesis": "Elevated neurogenesis (new neuron formation) in the hippocampus. Ongoing neural turnover supports the capacity to form new spatial memories for new caching events.",
+      "barcode_neurons": "Chettih et al. (2024, Cell) demonstrated that each caching event is represented by a unique burst of firing in a distinct set of hippocampal neurons. These 'barcode-like' patterns are sparse and different even for separate caches at the same location. When a bird later retrieves a specific cache, the barcode is transiently reactivated.",
+      "genetic_basis": "Kozlovsky et al. (2024, Current Biology) identified nearly 100 genes associated with spatial memory in Mountain Chickadees. A large proportion of these genetic variants are associated with neuron formation in the hippocampus."
+    },
+    "survival_link": "Chickadees with better spatial learning and memory are more likely to survive their first winter. Chickadees with the best spatial cognition live on average two years longer than those with the worst. Natural selection directly favors individuals with superior spatial memory.",
+    "three_poecile_cognitive_contributions": [
+      "Degree 3 (Black-capped): LANGUAGE -- combinatorial syntax, referential alarm calls, predator size encoding in D-note count",
+      "Degree 9 (Chestnut-backed): VARIATION -- syntax conservation across 2.5-million-year speciation event, acoustic adaptation to habitat",
+      "Degree 50 (Mountain): MEMORY -- hippocampal spatial encoding, barcode neurons, natural selection acting on cognition, genetic basis for memory"
+    ]
+  },
+  "elevation_gradient": {
+    "description": "The three Poecile in the engine map a complete elevation gradient across the PNW landscape. Black-capped (degree 3): lowland generalist, 0-500 m, mixed woodland and urban. Chestnut-backed (degree 9): mid-elevation coastal specialist, 0-1500 m, wet coastal conifer. Mountain (degree 50): high-elevation montane specialist, 600 m to timberline, dry mountain conifer. Three elevation bands, three habitat types, three acoustic environments.",
+    "niche_partition": "Where the three species overlap geographically, they partition habitat by forest structure. Black-capped takes deciduous patches. Chestnut-backed retreats into dense wet conifer. Mountain occupies drier, more open conifer at higher elevation.",
+    "hybridization": "Mountain x Black-capped hybrids occur sporadically at elevation transitions. No narrow hybrid zone -- hybrids pop up across a wide area. Female hybrids likely sterile; male hybrids can reproduce, predominantly backcrossing with Black-capped. Human landscape alteration (planting deciduous trees in conifer zones) increases hybridization.",
+    "acoustic_environments": [
+      "Black-capped (degree 3): mixed woodland -- moderate sound attenuation",
+      "Chestnut-backed (degree 9): wet coastal conifer -- heavy attenuation (dense canopy, moss, moisture absorb sound)",
+      "Mountain (degree 50): dry mountain conifer -- low attenuation (open canopy, dry air, hard surfaces reflect sound)"
+    ]
+  },
+  "theory_nodes": [
+    {
+      "concept": "The memory -- the 51st acoustic element (species side): a descending pure-toned whistle of spatial precision. The Mountain Chickadee's fee-bee-bay is 3-4 clean whistled notes stepping downward in frequency (~4,170 Hz to ~3,200 Hz). Named 'the memory' because: (1) the Mountain Chickadee is a spatial memory specialist that caches tens of thousands of food items and retrieves them by hippocampal memory; (2) the fee-bee-bay remembers the fee-bee of degree 3 and the lost song of degree 9 -- the Mountain Chickadee carries forward the vocal heritage of two previous Poecile across 47 degrees; (3) at degree 50, the engine has accumulated 50 elements -- the memory is the milestone name, looking back across half the circle. The element is defined by spatial precision: clean tones, exact intervals, reliable descent. A memory is precise because it has to be.",
+      "level": "foundational",
+      "department": "music-theory/song-form",
+      "college_path": ".college/music/theory/song-form/memory/",
+      "examples": [
+        "The fee-bee-bay descends in pure tones: ~4,170 Hz -> ~3,692 Hz -> ~3,200 Hz. Three steps down. No trills, no buzzes -- just clean, precise whistles. The precision mirrors the spatial precision of cache retrieval.",
+        "Contrast with the ballad (degree 49): the ballad is defined by beauty -- rich, warm, melodious. The memory is defined by precision -- clean, pure, descending. Beauty vs. exactness.",
+        "Contrast with language (degree 3): language encodes referential information about the external world (predator type/size). Memory encodes spatial information about the self's relationship to the landscape. World-knowledge vs. place-knowledge.",
+        "Contrast with the snowbird (degree 47): the snowbird's trill is one note repeated. The memory's notes descend -- each one different, each one lower. Stasis vs. movement.",
+        "The 50-degree milestone name: 50 accumulated elements, half the circle traversed. The memory looks back. It carries forward everything that came before."
+      ],
+      "music_theory_parallel": "The descending scale passage -- a musical gesture that moves step by step through a defined interval space. In music, descending scales convey resolution, arrival, the return home. The fee-bee-bay is a three-note descending scale: from the high fee through the middle bee to the low bay. The Mountain Chickadee sings a miniature descent, three notes covering approximately 1,000 Hz -- a small frequency journey that mirrors the bird's daily altitude journeys through the mountain landscape."
+    },
+    {
+      "concept": "The three-chickadee elevation gradient -- three Poecile species mapping lowland (degree 3), mid-elevation coastal (degree 9), and high-elevation montane (degree 50). The only genus represented three times from the same family in the engine. Three elevation bands, three habitat types, three acoustic environments, three cognitive breakthroughs: language (Black-capped), variation (Chestnut-backed), memory (Mountain). Degrees 3, 9, and 50 span 47 degrees of the engine's first quarter.",
+      "level": "foundational",
+      "department": "ecology/biogeography",
+      "college_path": ".college/ecology/biogeography/elevation-gradient/",
+      "examples": [
+        "Black-capped (degree 3): 0-500 m, mixed woodland, fee-bee (2 notes), language/syntax",
+        "Chestnut-backed (degree 9): 0-1500 m, wet coastal conifer, no fee-bee (song lost), variation/conservation",
+        "Mountain (degree 50): 600 m to timberline, dry mountain conifer, fee-bee-bay (3-4 notes), memory/spatial encoding",
+        "The three species rarely overlap. Where they do, they partition habitat by forest structure. Deciduous (Black-capped), dense wet conifer (Chestnut-backed), open dry conifer (Mountain).",
+        "The only genus with three members from the same family in the engine. Fringillidae has 5 members but across 3 genera. Paridae has 3 members all from Poecile."
+      ],
+      "music_theory_parallel": "The three-octave survey. A musician who demonstrates the range of an instrument typically plays the same phrase in three different registers: low, middle, high. The three Poecile are the same genus played in three different registers of the PNW landscape: lowland, mid-elevation, and mountain. The 'instrument' is Poecile; the 'registers' are elevation bands. The same combinatorial syntax performed at three different altitudes."
+    },
+    {
+      "concept": "Hippocampal spatial memory specialist -- Mountain Chickadees cache tens of thousands of food items and retrieve them by hippocampal memory. Research has identified barcode neurons (each cache encoded by unique hippocampal firing pattern), ~100 memory-linked genes concentrated in neurogenesis pathways, larger hippocampi at higher elevations, and a direct link between spatial cognition and survival/lifespan. Natural selection acts on memory. Three Poecile, three cognitive breakthroughs: language (degree 3), variation (degree 9), memory (degree 50).",
+      "level": "foundational",
+      "department": "neuroscience/spatial-cognition",
+      "college_path": ".college/neuroscience/spatial-cognition/hippocampal-memory/",
+      "examples": [
+        "Barcode neurons: each caching event encoded by a unique burst of firing in a distinct set of hippocampal neurons. Sparse, unique even for caches at the same location. Reactivated during retrieval (Chettih et al. 2024, Cell).",
+        "~100 genes identified for spatial memory, concentrated in hippocampal neurogenesis pathways (Kozlovsky et al. 2024, Current Biology).",
+        "Higher-elevation birds have larger hippocampi, more neurons, bigger neurons, and more neurogenesis than lower-elevation conspecifics.",
+        "Best-memory birds live ~2 years longer than worst-memory birds. Memory quality directly predicts survival.",
+        "Natural selection acts on cognition: spatial memory ability determines overwinter survival, creating evolutionary pressure that increases hippocampal capacity."
+      ],
+      "music_theory_parallel": "Perfect pitch -- the rare ability to identify or produce a specific musical pitch without a reference tone. Like perfect pitch, the Mountain Chickadee's spatial memory is an extraordinary cognitive ability with a measurable neural basis (specific brain structures, specific genes) that directly determines performance (finding food, surviving winter). The brain encodes the locations of thousands of caches the way a musician with perfect pitch encodes the frequencies of musical notes -- precisely, individually, accessibly."
+    },
+    {
+      "concept": "Passerellidae five-degree streak BROKEN at degree 50. The Mountain Chickadee (Paridae) is the first non-Passerellidae since degree 44 (Lesser Goldfinch, Fringillidae). The sparrow quintet (degrees 45-49) is complete. Paridae replaces Passerellidae. The engine returns to a family it last visited 41 degrees ago (degree 9, Chestnut-backed Chickadee). Three quintets (Hirundinidae 26-30, Parulidae 38-42, Passerellidae 45-49) remain at five-consecutive -- no family has exceeded the record.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/streak-break/",
+      "examples": [
+        "Passerellidae quintet: Song Sparrow (45), Spotted Towhee (46), Dark-eyed Junco (47), White-crowned Sparrow (48), Fox Sparrow (49). COMPLETE.",
+        "Mountain Chickadee (50) is Paridae -- different family. The five-degree streak ends. Three quintets at five-consecutive (Hirundinidae, Parulidae, Passerellidae) -- the engine record holds.",
+        "Paridae last seen at degree 9 (Chestnut-backed Chickadee). 41 degrees between Paridae entries.",
+        "The transition from Passerellidae to Paridae shifts the acoustic register: from the ballad's melodious richness to the memory's spatial precision.",
+        "Passeriformes continues unbroken: 13 consecutive entries (38-50). The ORDER streak persists even though the FAMILY streak is broken."
+      ],
+      "music_theory_parallel": "The modulation -- the moment in a musical work when the key changes. The engine has been 'in the key of Passerellidae' for five consecutive degrees. Degree 50 modulates to Paridae. The harmonic language shifts. The listener's ear adjusts to a new tonal center. The modulation does not invalidate the previous key -- it acknowledges that the quintet is complete and a new section begins."
+    },
+    {
+      "concept": "E=2 at degree 50 -- genus-level quiet. All three Poecile in the engine are E=2 (Black-capped at degree 3, Chestnut-backed at degree 9, Mountain at degree 50). E=2 is a genus-level characteristic: chickadees are quiet birds whose survival strategy is cognition, not acoustic power. E=2 + E=3 together now hold 24 degrees (47.1%), further widening the gap over E=4's 21 degrees (41.2%). E=2 rises to 14 degrees (27.5%) -- now the second-largest energy category after E=4 (21 degrees, 41.2%).",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/genus-level-quiet/",
+      "examples": [
+        "Three Poecile, three E=2. Black-capped (3, E=2), Chestnut-backed (9, E=2), Mountain (50, E=2). No variation across the genus.",
+        "Energy distribution at degree 50: E=1 (3, 5.9%), E=2 (14, 27.5%), E=3 (10, 19.6%), E=4 (21, 41.2%), E=5 (3, 5.9%).",
+        "E=2 + E=3 = 24 (47.1%) > E=4 = 21 (41.2%). The gap widens to 3 degrees.",
+        "E=1 remains absent for 38 degrees (since degree 12, Pine Siskin). Still the longest-absent energy level.",
+        "The Passerellidae quintet (45-49) had energies 2, 3, 3, 2, 3 (center 2.6). Adding degree 50 at E=2 continues the lower-register trend."
+      ],
+      "music_theory_parallel": "The pianissimo genus. Some instrument families are inherently quiet -- the lute, the harpsichord, the classical guitar. They compensate with precision, articulation, and intimacy. The Poecile chickadees are the pianissimo genus of the engine: always E=2, always quiet, always compensating with cognitive sophistication (language, variation, memory). Volume is not their strategy. Intelligence is."
+    },
+    {
+      "concept": "The white eyebrow (supercilium) -- the diagnostic field mark distinguishing the Mountain Chickadee from all other North American chickadees. A white stripe above each eye interrupting the black cap. The white consists of white feather TIPS on otherwise black feathers -- bold and obvious in fresh plumage (fall/winter), may fade to near-invisibility in worn plumage (late summer). When worn, secondary field marks (pale gray wing edges vs. Black-capped's white edges) become important.",
+      "level": "intermediate",
+      "department": "ecology/field-identification",
+      "college_path": ".college/ecology/field-id/supercilium/",
+      "examples": [
+        "The only chickadee in North America with a white eyebrow. Instant identification when visible.",
+        "Seasonal variation: bold in fall/winter (fresh plumage), faint in late summer (worn plumage). Birders in summer must look for secondary marks.",
+        "The three Poecile chromatic gradient: warm-moderate (Black-capped), warmest (Chestnut-backed), coolest/grayest (Mountain). The Mountain is the least colorful chickadee.",
+        "Wing edges provide backup ID: pale gray and inconspicuous in Mountain, prominently white in Black-capped.",
+        "Hybrid identification challenge: Mountain x Black-capped hybrids may show a reduced eyebrow. Check location, habitat, and song."
+      ],
+      "music_theory_parallel": "The key signature -- the visual mark at the beginning of a musical score that tells you what key the piece is in. The white eyebrow is the Mountain Chickadee's key signature: it tells you instantly what species you are looking at. When the key signature fades (worn plumage), you must read the notes themselves (wing edges, habitat, song) to identify the key."
+    },
+    {
+      "concept": "Mountain conifer forest habitat -- ponderosa pine, Douglas fir, Engelmann spruce, subalpine fir from 600 m to timberline. Acoustically different from the wet coastal conifer of the Chestnut-backed Chickadee: open canopy, dry air, hard surfaces produce low sound attenuation and high reflectivity. The fee-bee-bay's pure tones exploit these favorable propagation conditions. The third acoustic environment in the Poecile trilogy: moderate (mixed woodland), heavy attenuation (wet coastal conifer), low attenuation (dry mountain conifer).",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/mountain-conifer/",
+      "examples": [
+        "Ponderosa pine: the most characteristic Mountain Chickadee habitat. Open stands, sun-warmed bark, wide tree spacing.",
+        "Eastern Cascades: primary PNW range. Drier, more continental climate than the wet western slopes.",
+        "Blue Mountains: secondary PNW range in northeast Oregon and southeast Washington.",
+        "Altitudinal irruption: in harsh winters, Mountain Chickadees descend to lower-elevation valleys where they encounter Black-capped Chickadees.",
+        "Three Poecile, three rooms: mixed woodland (concert hall), wet coastal conifer (dampened club), dry mountain conifer (open-air amphitheater)."
+      ],
+      "music_theory_parallel": "The amphitheater -- an outdoor performance space where the natural acoustics of the landscape become part of the performance. Mountain conifer forest is the Poecile amphitheater: open, dry, reflective, carrying sound across distance with minimal loss. The fee-bee-bay rings in this space like a voice in a natural bowl, each pure note reflecting off bark and rock."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-003",
+      "title": "Black-capped Chickadee (Degree 3)",
+      "connection": "SAME GENUS, DIFFERENT ELEVATION. Poecile at lowland (degree 3) and mountain (degree 50). Fee-bee (2 notes) vs. fee-bee-bay (3-4 notes). Combinatorial syntax with 4 note types (Black-capped) vs. 6 note types (Mountain). Language (referential alarm calls) vs. memory (spatial encoding). 47 degrees apart, same genus, same family. The Black-capped is the ambassador; the Mountain is the specialist."
+    },
+    {
+      "project": "SPS-009",
+      "title": "Chestnut-backed Chickadee (Degree 9)",
+      "connection": "SAME GENUS, MID-ELEVATION. The third point on the elevation gradient. Coastal conifer specialist (degree 9) between the lowland Black-capped and the montane Mountain. Lost the fee-bee song entirely -- syntax conserved but melody diverged. The Chestnut-backed plays the same call in a different room; the Mountain Chickadee sings an elaborated version of the original fee-bee."
+    },
+    {
+      "project": "SPS-049",
+      "title": "Fox Sparrow (Degree 49)",
+      "connection": "FAMILY TRANSITION. The ballad (degree 49, Passerellidae) yields to the memory (degree 50, Paridae). The Passerellidae quintet ends. A new family begins. Melodious completeness (rich, warm, beautiful) gives way to spatial precision (clean, pure, descending). Dense thicket habitat yields to open mountain forest."
+    },
+    {
+      "project": "SPS-045",
+      "title": "Song Sparrow (Degree 45)",
+      "connection": "QUINTET START vs. POST-QUINTET. The Song Sparrow's preamble launched five consecutive Passerellidae. The Mountain Chickadee's memory follows five degrees later from a different family. Both are E=2 ground-level specialists. The preamble opens; the memory arrives after the quintet closes."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Northern Spotted Owl (Degree 4)",
+      "connection": "CONSERVATION PARALLEL. The Mountain Chickadee's 'Common Bird in Steep Decline' status (~39% loss since 1966) echoes the Spotted Owl's Near Threatened ranking. Two species declining in PNW conifer forests. Different causes (habitat fragmentation vs. old-growth loss), same fundamental pressure: forest under stress."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "CONIFER SPECIALIST PARALLEL. Both are montane conifer specialists with complex intraspecific structure. Red Crossbill has 10+ call types (potential cryptic species). Mountain Chickadee has two phylogeographic clades (potential species split). Both depend on conifer seed crops. Conifer-dependent birds with unresolved taxonomy."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Mountain Chickadee documented in eastern Washington. Two subspecies populations: P. g. baileyae in the eastern Cascades (Western phylogeographic clade) and P. g. gambeli in the Blue Mountains and northeast WA (Eastern clade). Rare in western Washington except during harsh-winter altitudinal irruptions."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Montane conifer forest ecology. Ponderosa pine and Douglas fir as primary habitat trees. Elevation-dependent species interactions. Climate change impacts on montane communities -- upslope habitat compression, altered phenology, seed crop unpredictability affecting cache-dependent species."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 48,
+    "total_entries": 51,
+    "families_represented": 19,
+    "largest_families": {
+      "Parulidae": 10,
+      "Passerellidae": 5,
+      "Hirundinidae": 5,
+      "Fringillidae": 5,
+      "Turdidae": 5,
+      "Paridae": 3,
+      "Trochilidae": 3,
+      "Bombycillidae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 45, 48, 50],
+      "E3": [14, 15, 16, 17, 18, 19, 20, 46, 47, 49],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=2 at degree 50. E=2 rises to 14 degrees (27.5%). E=2 + E=3 together hold 24 degrees (47.1%), widening the gap over E=4's 21 degrees (41.2%). All three Poecile are E=2 -- a genus-level characteristic. E=1 remains absent for 38 degrees (since degree 12).",
+    "passerellidae_streak_note": "PASSERELLIDAE STREAK BROKEN at degree 50. Mountain Chickadee (Paridae) ends the five-consecutive Passerellidae run (45-49). Three quintets remain at five-consecutive: Hirundinidae (26-30), Parulidae (38-42), Passerellidae (45-49). No family has exceeded five.",
+    "paridae_elevation_note": "Three Paridae at degrees 3, 9, 50 -- all Poecile. Complete elevation gradient: lowland (Black-capped), mid-elevation coastal (Chestnut-backed), high-elevation montane (Mountain). The only genus with three representatives from one family. Three cognitive breakthroughs: language, variation, memory.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer", "winter", "resident/altitudinal irruptive"],
+    "ecosystem_note": "Mountain conifer forest -- ponderosa pine, Douglas fir, Engelmann spruce, subalpine fir from 600 m to timberline. The third Poecile acoustic environment: moderate attenuation (Black-capped, mixed woodland), heavy attenuation (Chestnut-backed, wet coastal conifer), low attenuation (Mountain, dry mountain conifer). The fee-bee-bay's pure tones exploit the favorable propagation conditions of dry mountain air.",
+    "acoustic_element_51": "THE MEMORY -- a descending pure-toned whistle of spatial precision. Named for hippocampal spatial memory, the recall of two previous Poecile, and the 50-degree milestone. The first element defined by spatial precision.",
+    "csv_substitution_note": "Rough-skinned Newt (Taricha granulosa) replaced by Mountain Chickadee (Poecile gambeli) because SPS Part B is birds-and-mammals only. E=2 and forested habitat preserved from original CSV. SIXTH consecutive CSV substitution replacing an amphibian-class species (45-46-47-48-49-50). The engine remains deep in the amphibian belt of the original CSV.",
+    "conservation_note": "IUCN Least Concern but COMMON BIRD IN STEEP DECLINE (Partners in Flight). Population ~7.9 million. BBS trend ~1% annual decline, ~39% cumulative loss since 1966. The most vulnerable of the three engine Poecile. Climate change may compress montane habitat upslope. The memory-survival link adds a conservation dimension: the hippocampal advantage may become less effective in unpredictable conditions.",
+    "critical_gaps": [
+      "No marine/shoreline species in 50 degrees of 'The Sound of Puget Sound' -- 50 DEGREES OVERDUE -- EXISTENTIAL CRISIS (CRITICAL, ABSOLUTE)",
+      "No corvid (Steller's Jay, crow, raven) -- 50 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 50 degrees -- URGENT",
+      "No nocturnal species since degree 4 (46 degrees ago) -- OVERDUE",
+      "No E=1 since degree 12 (38 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 50 DEGREES OF A PROJECT NAMED FOR PUGET SOUND",
+      "Only 5 orders in 51 entries -- a new order is critically needed",
+      "THIRTEEN consecutive Passeriformes (38-50) -- non-passerine needed CRITICALLY",
+      "Sixth consecutive CSV substitution replacing an amphibian-class species (45-50) -- deep in the amphibian belt",
+      "No mammal in 51 entries -- the engine is 100% avian"
+    ]
+  }
+}
