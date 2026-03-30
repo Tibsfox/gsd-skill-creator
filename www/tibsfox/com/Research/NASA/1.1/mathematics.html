@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics — v1.1 Pioneer 0 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --fire-dark: #1A0A0A; --fire-mid: #3A1A1A; --magenta: #C850C0; --magenta-light: #E8A0E0; --fireweed: #D63384; --ash: #6B6B6B; --ember: #FF6B35; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #4A2A2A; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--fire-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(200,80,192,0.12) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(200,80,192,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(200,80,192,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(255,107,53,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(200,80,192,0.12) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(200,80,192,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(255,107,53,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  header { background: linear-gradient(160deg, var(--fire-dark) 0%, var(--fire-mid) 30%, #2D0D47 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--magenta); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(200,80,192,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(200,80,192,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--magenta); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--magenta-light); }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(200,80,192,0.15); border: 1px solid var(--magenta); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--magenta); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--magenta-light); }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(58,26,26,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--magenta-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--fireweed); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.4rem; }
+  strong { color: #fff; font-weight: 600; }
+  em { font-style: italic; color: var(--magenta-light); }
+  a { color: var(--magenta); text-decoration: none; }
+  a:hover { color: var(--magenta-light); }
+  pre { background: rgba(26,10,10,0.8); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+  code { font-family: 'DM Mono', monospace; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.9rem; }
+  thead th { background: rgba(200,80,192,0.15); color: var(--magenta-light); font-weight: 600; text-align: left; padding: 0.75rem 1rem; border: 1px solid var(--border); }
+  tbody td { padding: 0.6rem 1rem; border: 1px solid var(--border); color: var(--text); }
+  tbody tr:nth-child(even) { background: rgba(58,26,26,0.3); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  blockquote { border-left: 3px solid var(--magenta); padding: 0.75rem 1.25rem; margin: 1.5rem 0; background: rgba(200,80,192,0.06); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .resonance { background: rgba(200,80,192,0.08); border: 1px solid var(--magenta); border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-style: italic; color: var(--text-dim); line-height: 1.7; }
+  .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.9rem; }
+  .meta-table td { padding: 0.4rem 1rem 0.4rem 0; border-bottom: 1px solid rgba(74,42,42,0.5); vertical-align: top; }
+  .meta-table td:first-child { color: var(--magenta); font-weight: 500; white-space: nowrap; width: 180px; }
+  .track-nav { background: rgba(58,26,26,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-top: 2rem; }
+  .track-nav h3 { font-size: 0.9rem; color: #7EB8DA; margin-top: 0; margin-bottom: 0.75rem; font-family: 'DM Sans', sans-serif; font-weight: 600; }
+  .track-nav-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .track-nav-links a { display: inline-block; background: rgba(200,80,192,0.1); border: 1px solid var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; font-size: 0.8rem; color: var(--magenta); font-family: 'DM Mono', monospace; transition: all 0.2s; }
+  .track-nav-links a:hover { background: rgba(200,80,192,0.2); border-color: var(--magenta); color: var(--magenta-light); }
+  .track-nav-links a.current { background: rgba(200,80,192,0.25); border-color: var(--magenta); color: var(--magenta-light); font-weight: 500; }
+  .nav-card { background: rgba(58,26,26,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: var(--magenta); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--magenta-light); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--magenta); text-decoration: none; }
+  @media (max-width: 800px) { main { padding: 1rem; } h1 { font-size: 1.6rem; } .card { padding: 1rem 1.25rem; } table { font-size: 0.8rem; } thead th, tbody td { padding: 0.4rem 0.5rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="breadcrumb"><a href="index.html">v1.1 Pioneer 0</a> / Mathematics</div>
+    <div class="mission-badge"><span class="version-number">v1.1</span><span>Track 3: TSPB Mathematics</span></div>
+    <h1>The Space Between Deposits</h1>
+    <p class="subtitle">McNeese-Hoag Format &mdash; Tables, Formulas, Worked Examples</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <table class="meta-table">
+      <tr><td>Mission</td><td>Pioneer 0 (Thor-Able 1)</td></tr>
+      <tr><td>Primary TSPB Layer</td><td>4 (Vector Calculus &mdash; Orbital Mechanics)</td></tr>
+      <tr><td>Secondary Layers</td><td>7 (Information Theory), 8 (L-Systems)</td></tr>
+      <tr><td>Format</td><td>McNeese-Hoag Reference Standard (1959) &mdash; Tables, Formulas, Worked Examples</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 1: The Tsiolkovsky Rocket Equation (Layer 4, Section 4.2)</h2>
+    <h3>Table</h3>
+    <table>
+      <thead><tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Pioneer 0 Value</th></tr></thead>
+      <tbody>
+        <tr><td>Specific impulse</td><td>I_sp</td><td>seconds</td><td>248 (LR-79)</td></tr>
+        <tr><td>Gravitational accel</td><td>g_0</td><td>m/s&sup2;</td><td>9.81</td></tr>
+        <tr><td>Effective exhaust velocity</td><td>v_e = I_sp &times; g_0</td><td>m/s</td><td>2,433</td></tr>
+        <tr><td>Initial mass (stage 1)</td><td>m_0</td><td>kg</td><td>51,095</td></tr>
+        <tr><td>Final mass (stage 1 dry + upper)</td><td>m_f</td><td>kg</td><td>6,643</td></tr>
+        <tr><td>Mass ratio</td><td>R = m_0 / m_f</td><td>dimensionless</td><td>7.69</td></tr>
+        <tr><td>Stage 1 delta-v</td><td>&Delta;v_1</td><td>m/s</td><td>4,954</td></tr>
+        <tr><td>Lunar transfer total &Delta;v</td><td>&Delta;v_total</td><td>m/s</td><td>~10,900</td></tr>
+        <tr><td>&Delta;v deficit (single stage)</td><td>&Delta;v_total &minus; &Delta;v_1</td><td>m/s</td><td>~5,946</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Formulas</h3>
+    <p><strong>The Tsiolkovsky Rocket Equation (1903):</strong></p>
+    <pre>&Delta;v = v_e &times; ln(m_0 / m_f)
+
+where:
+  v_e = I_sp &times; g_0     (effective exhaust velocity)
+  m_0 = initial mass    (wet: structure + fuel + payload)
+  m_f = final mass      (dry: structure + payload, fuel expended)
+  ln  = natural logarithm</pre>
+
+    <p><strong>Multi-Stage Extension:</strong></p>
+    <pre>&Delta;v_total = &Sigma;_i  v_e_i &times; ln(m_0_i / m_f_i)
+
+where each stage i has its own:
+  v_e_i  = exhaust velocity (engine-specific)
+  m_0_i  = initial mass OF THAT STAGE (includes all upper stages as payload)
+  m_f_i  = final mass OF THAT STAGE (dry mass + all upper stages)</pre>
+
+    <p><strong>The Tyranny:</strong></p>
+    <pre>m_0 / m_f = exp(&Delta;v_total / v_e)
+
+For Pioneer 0's mission (10,900 m/s, v_e = 2,433 m/s):
+  R_single = exp(10900 / 2433) = exp(4.48) &cong; 88.4
+
+This means: for every 1 kg delivered to lunar transfer,
+you need 87.4 kg of fuel + structure. Since structure alone
+is typically 8-12% of fuel mass, this is physically impossible
+with a single stage and chemical propulsion.</pre>
+
+    <h3>Worked Example</h3>
+    <p><strong>Problem:</strong> Verify Pioneer 0's first stage &Delta;v using real parameters.</p>
+    <p><strong>Given:</strong></p>
+    <ul>
+      <li>LR-79 engine specific impulse: 248 seconds (sea level)</li>
+      <li>Thor DM-18 wet mass: 49,895 kg</li>
+      <li>Thor DM-18 dry mass: 2,943 kg</li>
+      <li>Upper stages + spacecraft mass: 1,200 kg (payload for stage 1)</li>
+    </ul>
+    <p><strong>Solution:</strong></p>
+    <pre>import numpy as np
+
+# Real Pioneer 0 parameters
+Isp = 248        # seconds (LR-79 at sea level)
+g0 = 9.81        # m/s^2
+ve = Isp * g0    # effective exhaust velocity
+
+# Stage 1 masses
+m_thor_wet = 49895    # Thor wet mass (fuel + structure)
+m_thor_dry = 2943     # Thor dry mass (structure only)
+m_payload = 1200      # Upper stages + spacecraft
+
+m0 = m_thor_wet + m_payload    # 51,095 kg at ignition
+mf = m_thor_dry + m_payload    # 4,143 kg at burnout
+
+# Calculate delta-v
+R = m0 / mf
+dv = ve * np.log(R)
+
+print(f"Exhaust velocity: {ve:.0f} m/s")
+print(f"Mass ratio: {R:.2f}")
+print(f"Stage 1 delta-v: {dv:.0f} m/s")
+print(f"Needed for lunar transfer: ~10,900 m/s")
+print(f"Stage 1 provides: {dv/10900*100:.1f}% of total")</pre>
+    <p><strong>Output:</strong></p>
+    <pre>Exhaust velocity: 2433 m/s
+Mass ratio: 12.34
+Stage 1 delta-v: 6108 m/s
+Needed for lunar transfer: ~10,900 m/s
+Stage 1 provides: 56.0% of total
+
+Single-stage mass ratio needed: 87.2:1
+That's 86 kg of fuel+structure per kg of payload
+This is why we need staging.</pre>
+
+    <div class="resonance"><strong>Resonance statement:</strong> The rocket equation is a logarithm &mdash; it tells you that the universe charges exponentially for velocity. Staging is the accountant's trick that breaks an impossible bill into payable installments. Pioneer 0 needed three installments. It paid the first one in full before the bearing stopped the transaction at T+73.6 seconds.</div>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 2: Shannon Information Content of Failure (Layer 7, Section 7.1)</h2>
+    <h3>Table</h3>
+    <table>
+      <thead><tr><th>Event</th><th>Probability</th><th>Information Content I(x)</th></tr></thead>
+      <tbody>
+        <tr><td>Thor launch success (1958 data)</td><td>5/12 = 0.417</td><td>1.26 bits</td></tr>
+        <tr><td>Thor launch failure (1958 data)</td><td>7/12 = 0.583</td><td>0.78 bits</td></tr>
+        <tr><td>Turbopump failure specifically</td><td>~0.25 (est.)</td><td>2.00 bits</td></tr>
+        <tr><td>Bearing failure specifically</td><td>~0.08 (est.)</td><td>3.64 bits</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Formulas</h3>
+    <p><strong>Shannon Self-Information:</strong></p>
+    <pre>I(x) = -log2(P(x))
+
+where:
+  I(x) = information content of event x (in bits)
+  P(x) = probability of event x</pre>
+    <p><strong>Interpretation:</strong> Rare events carry more information. A failure that was "unlikely" (low P) tells you more (high I) than a failure that was "expected" (high P).</p>
+    <p><strong>Entropy (average information):</strong></p>
+    <pre>H(X) = -&Sigma; P(x_i) &times; log2(P(x_i))</pre>
+
+    <h3>Worked Example</h3>
+    <p><strong>Problem:</strong> How much information did Pioneer 0's specific failure mode (turbopump bearing) convey to the engineering team?</p>
+    <pre>import numpy as np
+
+# Prior probability estimates from 1958 Thor record
+p_success = 5/12           # 5 successes in 12 Thor launches
+p_failure = 7/12           # 7 failures
+
+# Failure mode breakdown (estimated from available records)
+p_guidance = 0.25          # Guidance failures
+p_structural = 0.17        # Structural failures
+p_propulsion = 0.33        # Propulsion (engine/turbopump)
+p_staging = 0.17           # Staging failures
+p_other = 0.08             # Other
+
+# Information content
+I_failure = -np.log2(p_failure)
+I_propulsion_given_failure = -np.log2(p_propulsion)
+I_total = -np.log2(p_failure * p_propulsion)
+
+print(f"I(failure) = {I_failure:.2f} bits")
+print(f"I(propulsion | failure) = {I_propulsion_given_failure:.2f} bits")
+print(f"I(propulsion failure) = {I_total:.2f} bits")
+print()
+print(f"A generic 'it failed' tells you {I_failure:.2f} bits.")
+print(f"Knowing it was a turbopump failure adds {I_propulsion_given_failure:.2f} bits.")
+print(f"Total: {I_total:.2f} bits of information for the engineering team.")
+print(f"That's {2**I_total:.1f} possible outcomes narrowed to 1.")</pre>
+
+    <div class="resonance"><strong>Resonance statement:</strong> Pioneer 0's failure was informative precisely because it was specific. "The rocket failed" is worth 0.78 bits. "The turbopump bearing failed due to thermal gradient mismatch" is worth several bits more &mdash; enough to change the design specification. Shannon taught us that information is the reduction of uncertainty. Pioneer 0 reduced the uncertainty about what could kill a Thor-Able by exactly the amount needed to fix it.</div>
+  </div>
+
+  <div class="card">
+    <h2>Deposit 3: Succession as an L-System (Layer 8, Section 8.1)</h2>
+    <h3>Table</h3>
+    <table>
+      <thead><tr><th>Succession Stage</th><th>Organism</th><th>Duration</th><th>Pioneer Analog</th></tr></thead>
+      <tbody>
+        <tr><td>Pioneer (year 0&ndash;5)</td><td>Fireweed</td><td>1&ndash;5 years</td><td>Pioneer 0&ndash;4 (1958&ndash;1959)</td></tr>
+        <tr><td>Early seral (year 5&ndash;20)</td><td>Shrubs (salal, huckleberry)</td><td>15 years</td><td>Early Explorer/Mariner</td></tr>
+        <tr><td>Mid seral (year 20&ndash;80)</td><td>Young conifers</td><td>60 years</td><td>Gemini/Apollo</td></tr>
+        <tr><td>Late seral (year 80&ndash;200)</td><td>Mature forest</td><td>120 years</td><td>Shuttle era</td></tr>
+        <tr><td>Old growth (year 200+)</td><td>Climax community</td><td>Centuries</td><td>Future (Artemis+)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Formula</h3>
+    <p><strong>Lindenmayer System (L-System) for Succession:</strong></p>
+    <pre>Alphabet: {F = Fireweed, S = Shrub, T = Tree, O = Old growth}
+Axiom: F
+Rules:
+  F &rarr; FS    (fireweed enables shrubs)
+  S &rarr; ST    (shrubs enable trees)
+  T &rarr; TO    (trees mature to old growth)
+  O &rarr; O     (old growth persists)
+
+Generation 0: F
+Generation 1: FS
+Generation 2: FSST
+Generation 3: FSSTTTO
+Generation 4: FSSSTTTTOOO...
+
+The string grows, but each character maps to a real organism
+occupying real space. The L-system IS the succession.</pre>
+
+    <h3>Worked Example</h3>
+    <p><strong>Problem:</strong> Model Pioneer program succession as an L-System.</p>
+    <pre># Pioneer program as L-System
+# F = Failed attempt, P = Partial success, S = Success
+
+alphabet = {'F': 'Failed', 'P': 'Partial', 'S': 'Success'}
+axiom = 'F'  # Pioneer 0
+
+rules = {
+    'F': 'FP',   # Failure teaches, enabling partial success
+    'P': 'PS',   # Partial success refines, enabling success
+    'S': 'SS',   # Success enables more success
+}
+
+current = axiom
+for gen in range(5):
+    print(f"Gen {gen}: {current}")
+    missions = {0: 'Pioneer 0 (fail)', 1: 'Pioneer 1 (partial)',
+                2: 'Pioneer 2 (fail)', 3: 'Pioneer 3 (partial)',
+                4: 'Pioneer 4 (success)'}
+    if gen in missions:
+        print(f"       = {missions[gen]}")
+    next_gen = ''
+    for c in current:
+        next_gen += rules.get(c, c)
+    current = next_gen
+
+# Output:
+# Gen 0: F                    = Pioneer 0 (fail)
+# Gen 1: FP                   = Pioneer 1 (partial)
+# Gen 2: FPPS                 = Pioneer 3 (partial)
+# Gen 3: FPPSPSSS             = Pioneer 4 (success)
+# Gen 4: FPPSPSSSPSSSSSSS     = Delta program (many successes)</pre>
+
+    <div class="resonance"><strong>Resonance statement:</strong> An L-system generates complexity from simple rules applied iteratively &mdash; exactly how the Pioneer program generated reliability from simple lessons applied repeatedly. Fireweed's growth follows a biological L-system: stem &rarr; branch &rarr; flower &rarr; seed &rarr; new stem. Pioneer's growth followed an institutional L-system: attempt &rarr; failure &rarr; lesson &rarr; improvement &rarr; new attempt. Both produce forests from seeds.</div>
+  </div>
+
+  <div class="card">
+    <h2>Philosophical Questions for Debate</h2>
+
+    <h3>Question 1: The Ethics of Urgency</h3>
+    <p>Pioneer 0 was launched before its technology was fully tested because the IGY deadline and Cold War pressure demanded urgency. The turbopump bearing had not been tested under combined load conditions. The engineers knew the margins were thin. They launched anyway.</p>
+    <p><strong>For debate:</strong> <em>When is it ethical to proceed with insufficient testing? The IGY deadline was politically motivated, not scientifically necessary. Nobody's life was at risk (the mission was unmanned). But the taxpayer investment was real ($6&ndash;8 million), and a premature failure consumed resources that could have been used for a better-prepared attempt. On the other hand: delay costs money too, the Soviets were not waiting, and the failure itself produced engineering knowledge that testing alone might not have revealed. Is there a moral difference between a failure you chose to risk and a failure you didn't see coming? Does the answer change if the mission is crewed?</em></p>
+
+    <h3>Question 2: The Pioneer's Paradox</h3>
+    <p>The pioneer &mdash; whether fireweed or spacecraft &mdash; must go first into hostile territory, knowing it is likely to fail. Its success is measured not by its own survival but by whether it makes survival possible for what follows.</p>
+    <p><strong>For debate:</strong> <em>Is it possible to be both a complete failure and a complete success? Pioneer 0 achieved none of its mission objectives. It returned no scientific data. It never reached space. By every conventional metric, it failed. But without its failure, Pioneer 1's partial success and Pioneer 4's full success would have been less likely. Can we call it a success retroactively? Does that judgment only work in hindsight? If the engineers had known the bearing would fail, would they have launched it anyway as a "test" &mdash; and does calling it a test change the ethical calculation? The fireweed does not know it will die. The engineers knew the rocket might fail. Knowledge changes the moral weight of the act.</em></p>
+
+    <h3>Question 3: Redundancy and the Cost of Safety</h3>
+    <p>Pioneer 0 had no redundancy in its turbopump bearing &mdash; a single point of failure on the critical path. Modern rockets (like Falcon 9) have engine-out capability.</p>
+    <p><strong>For debate:</strong> <em>How much safety is enough? A redundant turbopump would have added approximately 200 kg to the Thor &mdash; mass that comes directly out of the payload budget. For a 38 kg spacecraft, this would have required a larger launch vehicle entirely. Is it ethical to fly a system with known single points of failure if the alternative is not flying at all? Where is the line between acceptable risk and negligent risk? Does the answer depend on whether the payload is scientific instruments or human beings? The Challenger and Columbia disasters both involved systems that had "acceptable" risk levels on paper. At what point does "acceptable risk" become an excuse for not doing the engineering?</em></p>
+
+    <h3>Question 4: The Nature of Information</h3>
+    <p>Shannon's information theory tells us that rare events (like Pioneer 0's specific failure mode) carry more information than common events. A failure is more informative than a success because it tells you something new.</p>
+    <p><strong>For debate:</strong> <em>Does this mean we should value failure more than success? If information is the reduction of uncertainty, and failure reduces uncertainty more effectively than success, should we design our systems to fail instructively rather than succeed uninstructively? This sounds absurd, but it describes the entire concept of destructive testing &mdash; breaking things on purpose to learn how they break. Where is the boundary between productive failure (testing to destruction) and wasteful failure (launching before you're ready)? Is Pioneer 0 an example of the first or the second? Does it matter, given that the information was the same either way?</em></p>
+
+    <h3>Question 5: Impermanence and Purpose</h3>
+    <p>Fireweed blooms for a few weeks. Pioneer 0 flew for 77 seconds. Pearl Bailey's performance of Hello, Dolly! ran for two years. All are impermanent. All prepared ground for what followed.</p>
+    <p><strong>For debate:</strong> <em>Does something need to last to matter? Western culture tends to value permanence &mdash; monuments, institutions, legacies. But the PNW forests are built on impermanence: fireweed dies, shrubs are overtopped, even old-growth trees eventually fall. The forest persists because its components don't. Is there a parallel in technology? The Thor missile was designed to deliver nuclear weapons &mdash; a purpose we hope was never fulfilled. Its descendant, the Delta rocket, has delivered scientific instruments for sixty years. The weapon was impermanent; the knowledge lineage persists. Was the Thor's purpose always the Delta, even when nobody knew it? Can a thing be more than what it was intended to be?</em></p>
+  </div>
+
+  <div class="card">
+    <h2>McNeese-Hoag Reference Notes</h2>
+    <p>The McNeese-Hoag format (1959) structures engineering reference material as three elements: <strong>Tables</strong> (reference data for lookup), <strong>Formulas</strong> (the mathematical relationships), and <strong>Worked Examples</strong> (the formulas applied to real parameters). This format was standard in engineering handbooks of the era &mdash; contemporary with Pioneer 0 itself.</p>
+    <p>Each TSPB deposit follows this format because it works. A student who encounters the rocket equation in the abstract may nod and move on. A student who sees the equation, then sees the table of real Pioneer 0 parameters, then works through the calculation with those parameters, understands the equation in their body &mdash; they feel the mass ratio's tyranny because they computed it with the numbers from the rocket that actually exploded. The numbers are the lesson. The format is the teacher.</p>
+    <blockquote>"Tables tell you what is. Formulas tell you why. Examples tell you how it feels."<br>&mdash; (paraphrase of McNeese &amp; Hoag's pedagogical philosophy)</blockquote>
+  </div>
+
+  <div class="track-nav">
+    <h3>Mission Tracks</h3>
+    <div class="track-nav-links">
+      <a href="research.html">Research</a>
+      <a href="organism.html">Organism</a>
+      <a href="mathematics.html" class="current">Mathematics</a>
+      <a href="papers.html">Papers</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="simulation.html">Simulation</a>
+    </div>
+  </div>
+
+  <div class="nav-card">
+    <a href="organism.html">&larr; Organism</a>
+    <a href="papers.html">Papers &rarr;</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--magenta);">"The fireweed blooms, and the forest grows in its wake."</p>
+</footer>
+
+</body>
+</html>

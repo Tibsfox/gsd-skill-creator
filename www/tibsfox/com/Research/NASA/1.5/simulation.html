@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Creative Arts: Pioneer 4 | v1.5 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --canopy-deep: #0A2E0A;
+    --canopy-mid: #1A4A1A;
+    --canopy-emerald: #2D6A2D;
+    --bark-brown: #4A3420;
+    --light-canopy: #A8D8A8;
+    --light-bright: #C8E8C8;
+    --forest-floor: #0D1A0D;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+    --success: #2D9A2D;
+    --success-light: #40CC40;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--forest-floor); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(168,216,168,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(45,106,45,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(168,216,168,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(200,232,200,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(45,106,45,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--light-canopy); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--light-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--forest-floor) 0%, var(--canopy-deep) 25%, var(--canopy-mid) 50%, var(--canopy-emerald) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--canopy-emerald); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(168,216,168,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(168,216,168,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(45,154,45,0.15); border: 1px solid var(--success); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--success-light); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--light-bright); }
+  .track-badge { background: rgba(168,216,168,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-canopy); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--light-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--light-canopy); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--light-bright); }
+  .prose em { color: var(--text-dim); }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  .sim-card {
+    background: rgba(10,46,10,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .sim-card h3 { color: var(--light-bright); font-family: 'Libre Baskerville', serif; margin-top: 0; margin-bottom: 0.5rem; }
+  .sim-meta { display: flex; flex-wrap: wrap; gap: 0.75rem; font-family: 'DM Mono', monospace; font-size: 0.78rem; color: var(--text-dim); margin-bottom: 1rem; }
+  .sim-meta span { background: rgba(13,26,13,0.6); padding: 0.2rem 0.6rem; border-radius: 4px; }
+  .sim-card p { font-size: 0.9rem; line-height: 1.7; }
+
+  .spec-block {
+    background: rgba(13,26,13,0.8);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--light-canopy);
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .ml-card {
+    background: rgba(11,61,145,0.08);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .ml-card h3 { color: #7EB8DA; font-family: 'Libre Baskerville', serif; margin-top: 0; }
+
+  .creative-card {
+    background: rgba(212,168,48,0.05);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .creative-card h3 { color: var(--gold); font-family: 'Libre Baskerville', serif; margin-top: 0; }
+
+  .gsd-card {
+    background: rgba(45,106,45,0.06);
+    border: 1px solid var(--success);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .gsd-card h3 { color: var(--success-light); font-family: 'Libre Baskerville', serif; margin-top: 0; }
+
+  .key-learning {
+    border-left: 3px solid var(--canopy-emerald);
+    padding: 0.75rem 1.25rem;
+    margin: 1rem 0;
+    background: rgba(10,46,10,0.3);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .closing-quote {
+    border-left: 3px solid var(--canopy-emerald);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: rgba(10,46,10,0.3);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .nav-card { background: rgba(10,46,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--light-canopy); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--light-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--light-canopy); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .spec-block { font-size: 0.65rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">v1.5 Pioneer 4</a><span class="sep">/</span><span>Track 5: Simulation &amp; Creative Arts</span>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.5</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts</h1>
+    <p class="subtitle">What to build, train, visualize, and create &mdash; Pioneer 4 and Douglas-fir</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti (8GB), 60GB RAM, i7-6700K</span>
+      <span><span class="label">Tools:</span> Python, Minecraft, Blender, GLSL, Arduino, Godot 4, GMAT</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <article class="prose">
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <div class="sim-card">
+      <h3>A1. Python: Hyperbolic Trajectory + Heliocentric Orbit Calculator</h3>
+      <div class="sim-meta">
+        <span>Intermediate</span><span>4&ndash;6 hours</span><span>numpy, matplotlib</span>
+      </div>
+      <p>A trajectory simulator that computes Pioneer 4&rsquo;s escape from Earth and insertion into heliocentric orbit. Three phases: (1) escape hyperbola from Earth with Pioneer 1&rsquo;s bound ellipse overlaid, (2) heliocentric orbit between Earth and Mars animated over 67 years, (3) five-Pioneer comparison chart where P-4 exits the chart entirely.</p>
+      <div class="key-learning"><strong>Key learning:</strong> The Phase 1 plot shows the qualitative difference between Pioneer 1&rsquo;s ellipse (closed, falls back) and Pioneer 4&rsquo;s hyperbola (open, leaves forever). Same physics, different energy sign. Extension: add a burnout velocity slider and watch the trajectory morph from suborbital arc through the parabolic singularity to hyperbola.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A2. Minecraft: Earth-Moon-Sun System with Pioneer 4 Trajectory</h3>
+      <div class="sim-meta">
+        <span>Beginner&ndash;Intermediate</span><span>4&ndash;6 hours</span><span>~500 blocks</span><span>Scale: 1 block = 5,000 km</span>
+      </div>
+      <p>Earth (3x3x3 blue/green sphere), Moon (77 blocks away, white cube), Pioneer 4 trajectory in gold blocks curving past the Moon and continuing into open space. Pioneer 1 in yellow blocks arcing back to Earth. Redstone lamp chain: lit from Earth to 131 blocks (signal range), dark beyond. Last lit lamp has sign: &ldquo;655,300 km &mdash; LAST CONTACT.&rdquo;</p>
+      <div class="key-learning"><strong>Key learning:</strong> The 77-block walk from Earth to Moon takes about 30 seconds. Pioneer 1&rsquo;s yellow path curves back. Pioneer 4&rsquo;s gold path keeps going until the student gets tired of walking. Closed vs. open. Bound vs. free.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A3. Blender: Escape Trajectory Animation &mdash; Earth Shrinking Behind</h3>
+      <div class="sim-meta">
+        <span>Intermediate&ndash;Advanced</span><span>14&ndash;20 hours</span><span>Cycles GPU render</span><span>1920x1080, 40 seconds</span>
+      </div>
+      <p>First-person POV from Pioneer 4 looking backward at Earth. Earth fills the frame at launch, shrinks through inner radiation belt transit (Geiger counter spikes), Moon sweeps past during flyby, Earth becomes a point of light, signal degrades to static, then &ldquo;SIGNAL LOST &mdash; 655,300 km.&rdquo; Final frames: Earth as a single bright pixel in a star field. &ldquo;Pioneer 4 entered heliocentric orbit. It is still there.&rdquo;</p>
+      <div class="key-learning"><strong>Key learning:</strong> Earth goes from a world to a disk to a point to a pixel. The signal degradation is the engineering reality: the spacecraft is still there, still transmitting, but the signal has dropped below the noise floor. Pioneer 4 did not stop communicating. We stopped being able to hear.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A4. GLSL Shader: Heliocentric Orbit &mdash; Pioneer 4 Between Earth and Mars</h3>
+      <div class="sim-meta">
+        <span>Intermediate</span><span>6&ndash;8 hours</span><span>60fps target</span><span>XScreenSaver compatible</span>
+      </div>
+      <p>Real-time top-down inner solar system. Sun at center, Mercury, Venus, Earth (blue), Mars (red), Pioneer 4 (gold dot on gold ellipse, 1.0&ndash;1.30 AU). All bodies solve Kepler&rsquo;s equation per frame. Pioneer 4 leaves a fading gold trail. Year counter shows elapsed time since 1959. Screensaver loops at 67 years (335 seconds at 1 year/5 seconds).</p>
+      <div class="key-learning"><strong>Key learning:</strong> Pioneer 4&rsquo;s gold dot laps Earth&rsquo;s blue dot, year after year. The 1.23:1.00 orbital resonance means they never synchronize. The gold dot traces its path endlessly, a 6.08 kg artifact of 1959 engineering still following Newton&rsquo;s laws.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A5. Arduino: Signal Strength Display Fading with Distance</h3>
+      <div class="sim-meta">
+        <span>Beginner&ndash;Intermediate</span><span>3&ndash;4 hours</span><span>~$22&ndash;$39</span>
+      </div>
+      <p>Arduino + OLED display + 8-LED bar graph + potentiometer (distance) + piezo buzzer. Turn the knob to increase distance: LEDs go dark following 1/r&sup2;, OLED shows declining signal power and SNR, buzzer tone degrades from clear to noisy to silent. At maximum: &ldquo;SIGNAL LOST.&rdquo; &ldquo;Bell mode&rdquo;: Morse code for &ldquo;PIONEER 4&rdquo; degrading with distance.</p>
+      <div class="key-learning"><strong>Key learning:</strong> The potentiometer makes the 1/r&sup2; law tactile. The student&rsquo;s hand controls the distance that Pioneer 4 covered at 1.38 km/s.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A6. Godot 4: Gravity Slingshot Game</h3>
+      <div class="sim-meta">
+        <span>Intermediate</span><span>12&ndash;18 hours</span><span>GDScript</span><span>Linux + HTML5 export</span>
+      </div>
+      <p>Top-down 2D game: launch a spacecraft from Earth, navigate past the Moon, enter heliocentric orbit. Velocity slider (8&ndash;13 km/s) with red/yellow/green zones. Outcomes: Fall Back (like Pioneer 1), Lunar Impact, Close Flyby (gravity assist), Wide Flyby (Pioneer 4 scenario), Escape + Heliocentric Orbit. Challenge modes recreate each Pioneer mission. Restricted three-body physics with Verlet integration.</p>
+      <div class="key-learning"><strong>Key learning:</strong> The velocity slider is the game. Moving from 10.0 to 11.0 km/s changes the trajectory from &ldquo;fall back&rdquo; to &ldquo;leave forever.&rdquo; Pioneer 4 took the brute-force approach: escape velocity before reaching the Moon.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A7. GMAT: Pioneer 4 Actual Trajectory with Moon Flyby</h3>
+      <div class="sim-meta">
+        <span>Advanced</span><span>6&ndash;8 hours</span><span>GMAT</span><span>JGM-3 gravity, LP165P Moon</span>
+      </div>
+      <p>Full trajectory reconstruction from launch through lunar flyby to heliocentric orbit insertion. Realistic force models, actual launch date/time, Moon position on March 3, 1959. Five mission phases: Earth departure, cislunar transit, lunar flyby (~60,000 km), Earth escape, heliocentric orbit. Overlay Pioneer 1&rsquo;s trajectory for comparison. The specific energy plot crossing zero is the story.</p>
+      <div class="key-learning"><strong>Key learning:</strong> The specific energy curve starts negative (bound), climbs through escape burn, crosses zero &mdash; the moment Pioneer 4 became permanently free. Pioneer 1&rsquo;s curve approaches zero but never crosses. Same physics, different sign.</div>
+    </div>
+
+    <hr>
+
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <div class="ml-card">
+      <h3>B1. Trajectory Prediction from Launch Parameters</h3>
+      <div class="sim-meta">
+        <span>Beginner&ndash;Intermediate</span><span>~5 min training</span><span>PyTorch or scikit-learn</span><span>CPU sufficient</span>
+      </div>
+      <p>Multi-layer perceptron (3 hidden layers, 64-128-64) trained on 50,000 simulated launches. Input: burnout velocity, altitude, flight path angle, azimuth, Moon phase. Output: escape probability, maximum distance, heliocentric orbital elements. The student discovers that the escape boundary is almost entirely determined by velocity &mdash; a sharp decision surface, not a gradient. This is why Pioneer 4 succeeded: they got the velocity right.</p>
+    </div>
+
+    <div class="ml-card">
+      <h3>B2. Signal Classification at Extreme Range</h3>
+      <div class="sim-meta">
+        <span>Intermediate</span><span>~10 min training</span><span>PyTorch</span><span>RTX 4060 Ti</span>
+      </div>
+      <p>1D CNN processing simulated radio telemetry windows (960 MHz carrier + noise). At high SNR (+10 dB), classification is trivial. At 0 dB, the CNN achieves ~85% by exploiting signal structure. Below -3 dB, even the CNN fails &mdash; this is where Pioneer 4&rsquo;s signal was lost. The CNN acts as a matched filter, the same thing Bell&rsquo;s telephone required the listener to do: recognize patterns in noise.</p>
+    </div>
+
+    <hr>
+
+    <h2>C. Computer Science &mdash; The Convergence Problem</h2>
+
+    <div class="sim-card">
+      <h3>C1. How Iterative Failure Produces Success</h3>
+      <p>The five Pioneers as a multi-component reliability problem:</p>
+      <div class="spec-block">P-0 (0 km)      -> P-1 (113,854)  -> P-2 (1,550)    -> P-3 (102,322) -> P-4 (ESCAPED)
+                                               ^--- REGRESSION
+
+NOT monotonically improving. Pioneer 2 was WORSE than Pioneer 1.
+Progress is not linear when the problem has multiple failure modes.
+
+Software analog:
+  v0.1 crashes on startup (P-0: infrastructure)
+  v0.2 runs but wrong results (P-1: close but not right)
+  v0.3 regression, different module (P-2: dependency breaks)
+  v0.4 almost correct (P-3: precision error)
+  v0.5 works (P-4: all modules pass)</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>C2. Orbit Propagation as Numerical Methods</h3>
+      <p>Implement three integrators &mdash; Euler (1st order), RK4 (4th order), Verlet (symplectic) &mdash; and propagate Pioneer 4 for 82 hours. Euler diverges after ~10 hours. RK4 accurate to ~100 km at 82 hours. Verlet preserves energy to machine precision. The physics hasn&rsquo;t changed since 1959. The numerics have improved by six orders of magnitude.</p>
+    </div>
+
+    <hr>
+
+    <h2>D. Game Theory &mdash; When Is &ldquo;Good Enough&rdquo; Actually Success?</h2>
+
+    <div class="sim-card">
+      <h3>D1. The 60,000 km Flyby vs. the 24,000 km Target</h3>
+      <p>Pioneer 4 missed its flyby target by 2.5x. The photoelectric sensor never triggered. By the mission specification, partial failure. But Pioneer 4 is universally regarded as a success. Why?</p>
+      <p><strong>The insight:</strong> Escape velocity was the hard requirement. Lunar flyby distance was the nice-to-have. Pioneer 4 achieved the hard requirement perfectly (margin: 0.8%) and missed the nice-to-have by a factor of 2.5. The mission is judged by the hard requirement because it was the unprecedented achievement.</p>
+      <p><strong>Exercise:</strong> An MVP that ships with core functionality but missing two planned features, versus a product with all features but failing the core use case. Pioneer 4&rsquo;s answer: the one that achieves the unprecedented hard requirement is the success.</p>
+    </div>
+
+    <hr>
+
+    <h2>E. Creative Arts &mdash; What to Create</h2>
+
+    <div class="creative-card">
+      <h3>E1. Douglas-fir Old-Growth Visualization: &ldquo;Escape the Canopy&rdquo;</h3>
+      <div class="sim-meta">
+        <span>Intermediate generative art</span><span>6&ndash;10 hours</span><span>p5.js / Processing / Python</span>
+      </div>
+      <p>Five trees representing Pioneers 0&ndash;4, left to right. Tree 1 (P-0): stump with shelf mushrooms. Tree 2 (P-1): tall but bent back. Tree 3 (P-2): tiny understory. Tree 4 (P-3): similar to Tree 2, slightly shorter. Tree 5 (P-4): THE EMERGENT GIANT &mdash; trunk rises through canopy, crown EXITS THE FRAME into star field. Canopy plane drawn as dashed &ldquo;ESCAPE VELOCITY THRESHOLD.&rdquo; All trees connected by mycorrhizal network below ground, labeled &ldquo;SHARED KNOWLEDGE &mdash; EACH FAILURE FED THE NEXT.&rdquo;</p>
+    </div>
+
+    <div class="creative-card">
+      <h3>E2. Red-breasted Nuthatch Sound Design: &ldquo;Yank-Yank to the Sun&rdquo;</h3>
+      <div class="sim-meta">
+        <span>Intermediate audio</span><span>4&ndash;6 hours</span><span>SuperCollider + Audacity</span><span>90 seconds</span>
+      </div>
+      <p>Mission timeline sonified through the Nuthatch&rsquo;s vocal repertoire. Pre-launch: soft &ldquo;tit-tit-tit&rdquo; in PNW forest ambience. Launch: &ldquo;yank-yank&rdquo; calls accelerating in tempo as velocity milestones pass. Lunar flyby: rapid calls with bass Moon gravity note. Deep space: calls spacing out, reverb increasing. Signal loss: calls breaking up (&ldquo;ya--k... y---...&rdquo;), static, silence &mdash; then one real field-recorded nuthatch call, clear and close. Forest returns.</p>
+    </div>
+
+    <div class="creative-card">
+      <h3>E3. The Arc of the Five Pioneers: Visual Narrative</h3>
+      <div class="sim-meta">
+        <span>Intermediate&ndash;Advanced</span><span>8&ndash;12 hours</span><span>SVG / Illustrator / p5.js</span>
+      </div>
+      <p>Five panels, each 1920x1080. Panel 1 (P-0): charcoal explosion on black. Panel 2 (P-1): watercolor arc that curves back down, almost reaching the Moon. Panel 3 (P-2): minimal ink wash, tiny arc hugging the ground. Panel 4 (P-3): stipple/pointillism with two bright radiation belt clusters. Panel 5 (P-4): clean vector gold hyperbola that EXITS THE FRAME with an arrow. A Red-breasted Nuthatch silhouette perches on the arc. The five panels show convergence from chaos to precision.</p>
+    </div>
+
+    <hr>
+
+    <h2>F. Problem Solving &mdash; Convergence Analysis</h2>
+
+    <div class="sim-card">
+      <h3>F1. Plotting the Improvement Across Pioneer 0&ndash;4</h3>
+      <div class="spec-block">Mission | Date          | Max Distance (km) | Failure Mode          | Fixed Next?
+--------|---------------|--------------------|-----------------------|----------
+P-0     | Oct 11, 1958  | 16                 | Stage 1 bearing       | Yes (P-1)
+P-1     | Oct 11, 1958  | 113,854            | Stage 2 timing        | Partially
+P-2     | Nov 8, 1958   | 1,550              | Stage 3 ignition      | Yes (P-3,P-4)
+P-3     | Dec 6, 1958   | 102,322            | Stage 1 burn duration | Yes (P-4)
+P-4     | Mar 3, 1959   | infinity (escaped) | None                  | N/A</div>
+      <p>Exercises: Plot max distance vs. mission number (log scale). Map failure mode migration. Model cumulative knowledge as reliability product. Analyze the cost of iteration (~$45M for one success).</p>
+    </div>
+
+    <hr>
+
+    <h2>G. GSD &mdash; The Iterative Improvement Pattern</h2>
+
+    <div class="gsd-card">
+      <h3>G1. Convergence Metrics: When to Declare Success</h3>
+      <p>Pioneer 4 mapped to GSD workflow phases:</p>
+      <ul>
+        <li><strong>Phase 0 (Pioneer 0):</strong> Initial attempt, fundamental failure. GSD: doesn&rsquo;t build. Metric: 0%. Action: fix the foundation.</li>
+        <li><strong>Phase 1 (Pioneer 1):</strong> Partial success, close to target. GSD: passes some tests, fails integration. Metric: 97%.</li>
+        <li><strong>Phase 2 (Pioneer 2):</strong> Regression. GSD: different subsystem breaks. Metric: worse than Phase 1.</li>
+        <li><strong>Phase 3 (Pioneer 3):</strong> Near-success, new science. GSD: close again, ships the science.</li>
+        <li><strong>Phase 4 (Pioneer 4):</strong> Success. GSD: all subsystems nominal. DECLARE SUCCESS. Move to next milestone.</li>
+      </ul>
+      <p><strong>Decision rules:</strong> Primary objective &gt; 95% AND no regressions = DECLARE SUCCESS. 3+ iterations without improvement = REDESIGN (like switching from Thor-Able to Juno II). Side-channel value high = SHIP PARTIAL (like Pioneer 3&rsquo;s radiation belt discovery from a &ldquo;failed&rdquo; lunar probe).</p>
+    </div>
+
+    <div class="closing-quote">&ldquo;Five missions. Five months. One escape. The convergence from Pioneer 0&rsquo;s explosion to Pioneer 4&rsquo;s heliocentric orbit is not a straight line &mdash; it passes through Pioneer 2&rsquo;s regression and Pioneer 3&rsquo;s near-miss. The switch to Juno II was the pivot. Pioneer 4 succeeded because every failure before it had been diagnosed, understood, and fixed &mdash; not just the most recent one, but all of them, simultaneously. The math of leaving is exact. The engineering of leaving is iterative. On March 3, 1959 &mdash; the 112th birthday of Alexander Graham Bell &mdash; the iteration converged.&rdquo;</div>
+
+    <div class="nav-card">
+      <a href="curriculum.html">&larr; Curriculum</a>
+      <a href="index.html">v1.5 Overview &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Track 5: Simulation &amp; Creative Arts &mdash; v1.5 Pioneer 4 / Douglas-fir</p>
+</footer>
+
+</body>
+</html>

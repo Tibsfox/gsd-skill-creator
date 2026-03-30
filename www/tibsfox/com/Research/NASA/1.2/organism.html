@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism Pairing — v1.2 Pioneer 1 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --forest-dark: #0A1F14;
+    --forest-mid: #152E20;
+    --fern: #4A7C59;
+    --fern-light: #A8D5BA;
+    --fern-deep: #1B3D2F;
+    --moss: #2E5E3F;
+    --bark: #3A2E1A;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2A4A35;
+    --amber: #D4A017;
+    --amber-light: #F0D060;
+    --amber-dark: #8B6914;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--forest-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(74,124,89,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(168,213,186,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(46,94,63,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(168,213,186,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(46,94,63,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .top-nav { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; position: relative; z-index: 1; }
+  .top-nav a { color: var(--fern); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .top-nav a:hover { color: var(--fern-light); }
+  header {
+    background: linear-gradient(160deg, var(--forest-dark) 0%, var(--forest-mid) 30%, var(--fern-deep) 60%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--fern);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(74,124,89,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,124,89,0.04) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(74,124,89,0.15); border: 1px solid var(--fern); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--fern); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--fern-light); }
+  .track-badge {
+    background: rgba(74,124,89,0.25); border: 1px solid var(--fern); color: var(--fern-light);
+    padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--fern); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card {
+    background: rgba(21,46,32,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--fern-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--fern-light); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--fern); font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .card strong { color: #fff; }
+  .card em { font-style: italic; color: var(--fern-light); }
+  .card a { color: var(--fern-light); text-decoration: underline; text-decoration-color: var(--border); }
+  .card a:hover { color: #fff; text-decoration-color: var(--fern); }
+  .card hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .card table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.9rem; }
+  .card th { background: rgba(74,124,89,0.2); color: var(--fern-light); font-weight: 600; text-align: left; padding: 0.5rem 0.75rem; border: 1px solid var(--border); }
+  .card td { padding: 0.5rem 0.75rem; border: 1px solid var(--border); }
+  .card tr:nth-child(even) td { background: rgba(21,46,32,0.3); }
+  .card code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(10,31,20,0.6); border: 1px solid var(--border); border-radius: 3px; padding: 0.15rem 0.4rem; color: var(--fern-light); }
+  .card pre { background: rgba(10,31,20,0.7); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; overflow-x: auto; margin: 0.75rem 0; }
+  .card pre code { background: none; border: none; padding: 0; font-size: 0.85rem; line-height: 1.5; color: var(--text); }
+  .card blockquote { border-left: 3px solid var(--fern); padding: 0.5rem 1rem; margin: 0.75rem 0; background: rgba(74,124,89,0.06); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .bottom-nav { max-width: 1400px; margin: 0 auto; padding: 0 2rem 1rem; position: relative; z-index: 1; }
+  .track-links {
+    background: rgba(21,46,32,0.3); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+  }
+  .track-links-label { font-size: 0.85rem; color: var(--text-dim); font-weight: 500; margin-right: 0.5rem; }
+  .track-links a { color: var(--fern); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; }
+  .track-links a:hover { color: var(--fern-light); border-color: var(--fern); background: rgba(74,124,89,0.1); }
+  .track-links a.active { color: var(--fern-light); border-color: var(--fern); background: rgba(74,124,89,0.2); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--fern); text-decoration: none; }
+  @media (max-width: 700px) {
+    .header-content { padding: 1.5rem 1rem 1rem; }
+    main { padding: 1rem; }
+    .card { padding: 1rem 1.25rem; }
+    h1 { font-size: 1.5rem; }
+    .bottom-nav { padding: 0 1rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html">&larr; v1.2 Pioneer 1</a>
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.2</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 2: Organism</span>
+    </div>
+    <h1>Organism Pairing: <em>Polystichum munitum</em> (Western Sword Fern)</h1>
+    <p class="subtitle">The Understory Constant &mdash; the plant that holds the forest floor together</p>
+    <div class="meta-row">
+      <span><span class="label">Family:</span> Dryopteridaceae</span>
+      <span><span class="label">Paired Mission:</span> 1.2 &mdash; Pioneer 1</span>
+      <span><span class="label">PNW Status:</span> Native, abundant, iconic</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>Species Overview</h2>
+    <table>
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td><strong>Scientific Name</strong></td><td><em>Polystichum munitum</em> (Kaulf.) C.Presl</td></tr>
+      <tr><td><strong>Family</strong></td><td>Dryopteridaceae (wood fern family)</td></tr>
+      <tr><td><strong>Common Names</strong></td><td>Western sword fern, Christmas fern</td></tr>
+      <tr><td><strong>Paired Mission</strong></td><td>1.2 &mdash; Pioneer 1 (Thor-Able 1), October 11, 1958</td></tr>
+      <tr><td><strong>PNW Status</strong></td><td>Native, abundant, iconic &mdash; the dominant understory fern of the Pacific Northwest</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>What Sword Fern Does</h2>
+    <p>Walk into any forest in western Washington, western Oregon, or coastal British Columbia. Look down. There it is &mdash; a fountain of dark green fronds erupting from the ground in a symmetrical rosette, each frond arcing outward and downward like a blade held at rest. The fronds are stiff, leathery, and precisely structured: a central rachis bearing 35 to 100 individual leaflets arranged in alternating rows, each leaflet pointed forward like the teeth of a saw. At the base of every leaflet, on the side closest to the frond tip, there is a small, angular bump &mdash; an auricle &mdash; that juts upward like the crossguard on a sword hilt. This is why it is called sword fern. The name is not decorative. It is descriptive. Pick up a single leaflet, hold it by the stem, and the shape in your hand is unmistakably a blade with a guard.</p>
+    <p>This is the plant that holds the forest floor together.</p>
+    <p>Sword fern does not reach the canopy. It does not flower. It does not produce fruit or seed. It does not change color in autumn. It is not the tallest thing in the forest, nor the oldest, nor the most charismatic. What it is, without qualification, is the most persistent and reliable plant in the Pacific Northwest understory &mdash; the green foundation that remains when everything else has gone dormant, dropped its leaves, or retreated underground. In January, when the bigleaf maples are bare scaffolding, the alders stripped down to gray, and the forest floor is a carpet of brown decay, sword fern is still green. It has been green since before you were born, and unless someone removes it physically, it will be green long after.</p>
+    <p>Pioneer 1 was not the first spacecraft. It was not the one that reached the Moon. It did not carry astronauts or take photographs. What it did was persist &mdash; 43 hours of continuous telemetry, the longest sustained data transmission any American spacecraft had achieved to that date &mdash; and in that persistence, it produced the scientific foundation that made everything after it possible.</p>
+  </div>
+
+  <div class="card">
+    <h2>Morphology and Life History</h2>
+    <p>Sword fern is an evergreen perennial fern, growing from a stout, woody rhizome &mdash; a horizontal underground stem that functions as both anchor and storage organ. The rhizome is typically 10 to 30 centimeters in diameter and sits at or just below the soil surface, often partially exposed on slopes. Over decades, the rhizome grows slowly outward and upward, accumulating layers of old stipe bases (the cut-off stems of previous years&rsquo; fronds) that form a rough, fibrous crown. A mature sword fern rhizome can persist for 50 years or more. Individual plants have been documented at estimated ages exceeding a century in undisturbed old-growth stands.</p>
+    <p>Each year, the rhizome produces a rosette of new fronds that unfurl from tightly coiled fiddleheads in early spring. The fiddleheads &mdash; called croziers for their resemblance to a bishop&rsquo;s staff &mdash; are covered in brown, papery scales (paleae) that protect the developing tissues. As each frond uncurls, it extends to its full length of 50 to 180 centimeters, depending on light, moisture, and soil conditions. Forest-floor specimens in deep shade tend toward the smaller end; plants growing on open, moist slopes or stream banks can produce fronds approaching two meters.</p>
+    <p>The fronds are once-pinnate &mdash; meaning each frond consists of a single central axis (the rachis) bearing individual leaflets (pinnae) arranged in two rows. This is a crucial identification feature: many PNW ferns have twice-pinnate or thrice-pinnate fronds (leaflets divided into sub-leaflets divided again), but sword fern has a single level of division. Each pinna is 3 to 15 centimeters long, lanceolate, with serrate margins and the diagnostic basal auricle on the acroscopic side. The pinnae are attached directly to the rachis without a stalk, and they tilt slightly forward toward the frond tip, giving the entire frond a directional quality &mdash; it looks like it is going somewhere.</p>
+    <p>On the underside of fertile fronds, reproduction is visible as rows of round sori &mdash; clusters of sporangia &mdash; arranged in two lines running parallel to the midvein of each pinna. Each sorus is covered by a peltate indusium, a tiny, round, umbrella-like covering attached at its center. When the spores are mature, the indusium shrivels and the sporangia open, releasing microscopic spores to the wind. A single large frond with 80 pinnae, each bearing 30 to 50 sori, each sorus containing hundreds of sporangia, each sporangium containing 64 spores &mdash; the numbers become staggering. One plant, one year, millions of spores, scattered into the forest air.</p>
+    <p>This is data density. Pioneer 1 transmitted 43 hours of continuous telemetry from its suite of instruments &mdash; an ionization chamber, a Geiger-Muller tube, a micrometeorite detector, a temperature sensor &mdash; measuring the radiation environment, particle density, and thermal conditions of cislunar space at a resolution no prior spacecraft had achieved. Each minute of telemetry contained measurements from multiple instruments at multiple sampling rates. The total dataset was, by 1958 standards, enormous. One spacecraft, one trajectory, millions of data points, scattered into the electromagnetic spectrum and caught by tracking stations in Hawaii, Singapore, and Manchester.</p>
+  </div>
+
+  <div class="card">
+    <h2>Ecological Role: The Forest Floor Engineer</h2>
+    <p>The canopy of a PNW old-growth forest is western red cedar, Douglas-fir, Sitka spruce, western hemlock &mdash; the giants. The midstory is vine maple, red huckleberry, salal. But the ground itself, the actual surface that rain hits when it falls through 60 meters of canopy, belongs to sword fern. In many PNW forests, sword fern forms dense, nearly monospecific stands that cover the ground so completely that the mineral soil is invisible. The frond canopy intercepts rainfall, breaks the kinetic energy of drops that would otherwise compact the soil, and channels water along the rachis to the base of the plant where it seeps into the ground near the rhizome. This is hydrology at the smallest functional scale.</p>
+    <h4>Soil stabilization</h4>
+    <p>The fibrous root system radiating from each rhizome binds the upper soil horizon, particularly on slopes. On the steep, rain-saturated hillsides typical of the western Cascades and the Olympic Peninsula, sword fern root networks are a significant factor in slope stability. Remove the fern layer &mdash; through logging, grading, or persistent deer browsing &mdash; and the shallow soil becomes vulnerable to surface erosion and small-scale landslides. The fern is not dramatic infrastructure in the way that a retaining wall is dramatic. It is quiet infrastructure. It works because it is everywhere, all the time, without interruption.</p>
+    <p>Pioneer 1&rsquo;s radiation data was quiet infrastructure too. The spacecraft carried an ionization chamber designed by James Van Allen and his team at the University of Iowa. As Pioneer 1 climbed through the inner radiation belt, the ionization chamber measured radiation intensities far exceeding predictions. At certain altitudes, the instruments saturated &mdash; the radiation was so intense that the counters could not keep up, and the data appeared to drop to zero. This confusing result, combined with data from Explorer 1 and Explorer 3, led directly to the identification and mapping of the Van Allen radiation belts. Pioneer 1 did not discover the belts on its own &mdash; that credit belongs to Explorer 1 and Van Allen&rsquo;s analysis &mdash; but Pioneer 1&rsquo;s data provided the altitude profile, the intensity gradient, the spatial extent. It was the detailed survey that turned a discovery into an engineering specification. When NASA designed radiation shielding for Mercury, Gemini, and Apollo, the numbers came from Pioneer 1&rsquo;s 43 hours of measurement. Without that dataset, sending humans through the Van Allen belts would have required guessing.</p>
+    <h4>Shade tolerance</h4>
+    <p>Sword fern is one of the most shade-tolerant vascular plants in the PNW. It thrives under the dense, multi-layered canopy of old-growth forest where light levels at the ground may be as low as 1&ndash;3% of full sunlight. This tolerance is not passive endurance &mdash; it is an active physiological adaptation. Sword fern fronds are arranged in a rosette that maximizes light interception from whatever direction it arrives. The fronds are evergreen not because the plant is lazy about shedding them but because in a light-limited environment, the carbon cost of building a new frond each spring exceeds the carbon gained by maintaining last year&rsquo;s frond through winter. Each frond persists for 1.5 to 2.5 years, photosynthesizing through the mild PNW winter when deciduous plants cannot.</p>
+    <p>This is the persistence resonance. Pioneer 1 was launched on October 11, 1958, fifty-five days after Pioneer 0 exploded at T+77 seconds. The second Thor-Able vehicle performed correctly through boost phase, but the second-stage velocity was slightly low &mdash; 3.5% below the required Earth-escape velocity. Pioneer 1 would not reach the Moon. It reached a peak altitude of 113,854 kilometers &mdash; about one-third of the way to the lunar surface &mdash; before Earth&rsquo;s gravity pulled it back. It re-entered the atmosphere 43 hours after launch and burned up over the South Pacific.</p>
+    <p>But for those 43 hours, it transmitted. Continuously. Every instrument on board operated as designed. The telemetry link held from launch through apogee and back through re-entry. Pioneer 0 had lasted 77 seconds. Pioneer 1 lasted 43 hours &mdash; a factor of 2,000 improvement in operational duration. The spacecraft did not achieve its primary objective (lunar flyby), but it achieved something more durable: it demonstrated that the instruments worked, the telemetry worked, and the data was worth collecting. It persisted through conditions that could have stopped it &mdash; the wrong velocity, the wrong trajectory, the inevitable return to Earth &mdash; and during that persistence, it accomplished real science.</p>
+    <p>Sword fern persists through the PNW winter not because winter is comfortable but because the alternative &mdash; going dormant and losing four months of photosynthesis &mdash; is more costly than enduring the cold, the dark, and the saturating rain. Pioneer 1 persisted through a suboptimal trajectory not because it was designed for that trajectory but because the instruments and the telemetry link were robust enough to function regardless. Both organisms do their work under conditions that are not ideal but are survivable, and both demonstrate that survivable is enough.</p>
+  </div>
+
+  <div class="card">
+    <h2>Distribution and Habitat</h2>
+    <p><em>Polystichum munitum</em> ranges from southeastern Alaska south through British Columbia, Washington, Oregon, and into central California, with disjunct populations in Idaho, Montana, and South Dakota (the Black Hills). The core of its range is the maritime Pacific Northwest &mdash; the fog belt, the rain shadow gaps, the river valleys, the coastal slopes from sea level to approximately 1,500 meters.</p>
+    <h4>Conifer forest understory</h4>
+    <p>This is the primary habitat. Sword fern is the default ground cover under Douglas-fir, western hemlock, western red cedar, and Sitka spruce. In the Hoh Rain Forest on the Olympic Peninsula, sword fern covers the ground in stands so dense that they look cultivated. They are not. They are simply the plant that is best adapted to that exact combination of shade, moisture, temperature, and soil chemistry.</p>
+    <h4>Moist ravines and stream banks</h4>
+    <p>Along watercourses, sword fern grows larger and denser than on upland sites. The increased moisture and the reflected light from the water surface produce fronds at the upper end of the size range &mdash; 150 to 180 centimeters. These riparian stands also benefit from the nutrient enrichment of alluvial soil. Some of the most photogenic sword fern in the PNW grows along the streams that feed into Puget Sound, including the drainages of Snohomish County.</p>
+    <h4>Road cuts and rock walls</h4>
+    <p>Sword fern is remarkably effective at colonizing vertical or near-vertical surfaces where soil accumulates in cracks and ledges. Drive any mountain road in western Washington and you will see sword fern growing from road cuts, retaining walls, and rock faces. The rhizome wedges into a crevice, the roots grip the substrate, and the fronds hang downward like a green curtain. This ability to colonize marginal substrates &mdash; not ideal habitat, just survivable habitat &mdash; mirrors Pioneer 1&rsquo;s ability to produce useful science from a trajectory that was not ideal, just survivable.</p>
+    <h4>Urban forests and parks</h4>
+    <p>Sword fern is one of the few native understory plants that persists in the fragmented, degraded forest patches found in and around PNW cities. In Seattle&rsquo;s Ravenna Park, Portland&rsquo;s Forest Park, and Victoria&rsquo;s Goldstream Provincial Park, sword fern carpets the ground under second-growth canopy just as it does under old growth. It tolerates the compacted soil, the edge effects, the altered hydrology of urban forest fragments. It does not require pristine conditions. It requires only shade, moisture, and soil. Where those three exist, sword fern is present.</p>
+    <p>You cannot walk through a PNW forest without seeing it. This is the ubiquity resonance. Sword fern is so common that most people who live in the PNW do not notice it. It is background. It is the green stuff on the ground between the trees. Ask a Seattleite to name the big trees &mdash; they will say Douglas-fir, cedar, hemlock. Ask them to name the ground cover &mdash; most will pause. Sword fern is everywhere and invisible.</p>
+    <p>Pioneer 1&rsquo;s radiation data is everywhere and invisible too. Every subsequent space mission that required knowledge of the cislunar radiation environment built on the Pioneer 1 dataset. Mercury capsule shielding. Gemini EVA protocols. Apollo trajectory planning &mdash; the decision to use a fast transit through the Van Allen belts rather than lingering in a parking orbit was informed by the intensity profile that Pioneer 1 measured. The data became so foundational that it stopped being cited. It became assumed knowledge, embedded in the engineering baseline of the space program like sword fern is embedded in the baseline of the forest. Ubiquitous and uncredited.</p>
+  </div>
+
+  <div class="card">
+    <h2>Ethnobotany: Indigenous Knowledge</h2>
+    <p>Sword fern has been used by Coast Salish peoples and other Pacific Northwest Indigenous groups for millennia. Its uses are not exotic or ceremonial &mdash; they are practical, daily, and pervasive, reflecting the plant&rsquo;s own character.</p>
+    <h4>Pit oven lining</h4>
+    <p>Sword fern fronds were used as lining material in pit ovens for cooking camas bulbs, clams, and other foods. The fronds were laid in layers between heated rocks and the food, providing a clean, non-stick surface that also added moisture during cooking. The leathery texture of the fronds &mdash; the same toughness that allows them to persist through winter rain &mdash; made them ideal for this purpose. They did not burn easily, they did not impart off-flavors, and they were available year-round.</p>
+    <h4>Storage and food preparation</h4>
+    <p>Fronds were used to line storage boxes and baskets, separating layers of dried fish, berries, and other preserved foods. They were laid on drying racks under fish fillets. The slight waxy coating on the frond surface resisted moisture and mold. Again, the utility comes from the same properties that make the plant ecologically successful: toughness, persistence, availability.</p>
+    <h4>Bedding and flooring</h4>
+    <p>In longhouses, sword fern fronds were laid as bedding and floor covering. The evergreen nature of the plant meant that fresh fronds could be gathered in any season, including the depths of winter when other bedding materials were unavailable. A thick layer of sword fern fronds is springy, insulating, and fragrant &mdash; it smells like the forest floor because it is the forest floor, gathered and brought indoors.</p>
+    <h4>Famine food</h4>
+    <p>The starchy rhizomes were roasted and eaten during periods of food scarcity. The rhizomes are not palatable as a preferred food &mdash; they are fibrous and bitter &mdash; but they contain enough stored carbohydrate to sustain life when other food sources fail. This is the persistence resonance again, expressed in human terms: the plant that is always there, always green, always available, becomes the food that is always there when everything else is gone.</p>
+    <h4>Commercial harvest</h4>
+    <p>Today, sword fern fronds are commercially harvested for the floral industry. Millions of fronds are gathered annually from PNW forests, particularly in the foothills of the Cascades in Snohomish and King counties. The fronds are shipped to florists throughout North America, where they serve as greenery in arrangements and bouquets. The commercial harvest is concentrated in the same forests where Foxy is from &mdash; the second-growth stands of the western Cascades foothills, between sea level and 600 meters, where sword fern grows in its greatest density. The harvesters are often members of immigrant communities, working in the forest in all weather, gathering the fronds by hand. It is physical, unglamorous, essential work. The fern that is invisible in the forest becomes visible in a vase on a table, three thousand kilometers from where it grew.</p>
+  </div>
+
+  <div class="card">
+    <h2>Resonance Axes</h2>
+
+    <h3>1. Reach Resonance</h3>
+    <p>Sword fern grows in the understory. Its fronds rise to a maximum of about 1.8 meters &mdash; well below the 60-meter canopy of old-growth Douglas-fir. It never reaches the top. Pioneer 1 reached 113,854 kilometers &mdash; approximately one-third of the distance to the Moon. It never reached its target. But both are fundamental to their respective systems in ways that have nothing to do with how high they go. The canopy cannot exist without the forest floor that sword fern stabilizes. Lunar missions could not proceed without the radiation data that Pioneer 1 collected from its partial trajectory. Reach is not the measure. What you do with the reach you have is the measure.</p>
+
+    <h3>2. Persistence Resonance</h3>
+    <p>Sword fern is evergreen, maintaining photosynthetically active fronds through the dark, cold, saturating winters of the Pacific Northwest. When deciduous plants have shut down, when the herbaceous perennials have retreated to their roots, sword fern is still operating &mdash; still green, still intercepting light, still holding the soil, still present. Pioneer 1 transmitted for 43 hours through a trajectory that was not the intended one. It persisted through the wrong orbit, returning data the entire time, until atmospheric re-entry finally ended the mission. Both demonstrate that continued operation under suboptimal conditions is itself a form of excellence.</p>
+
+    <h3>3. Foundation Resonance</h3>
+    <p>Sword fern stabilizes the forest floor. Its root networks prevent erosion on steep slopes. Its frond canopy breaks rainfall energy and channels water to the soil. Its leaf litter builds organic matter. Its shade shelters germinating tree seedlings. Remove the sword fern layer and the forest degrades from the ground up. Pioneer 1&rsquo;s radiation measurements became the engineering foundation for human spaceflight. The Van Allen belt intensity profiles informed shielding design for Mercury, Gemini, and Apollo. The micrometeorite flux data informed spacecraft hull specifications. Remove Pioneer 1&rsquo;s dataset and the engineering baseline for the 1960s space program has a hole in it. Both are foundations &mdash; not visible from above, but load-bearing.</p>
+
+    <h3>4. Data Density Resonance</h3>
+    <p>A single sword fern frond with 80 pinnae, each bearing two rows of sori, each sorus containing hundreds of sporangia, each sporangium containing 64 spores &mdash; one frond carries millions of reproductive units, each one a complete genetic dataset packaged for dispersal. One plant with 20 fronds produces data at a scale that is difficult to visualize. Pioneer 1 returned 43 hours of continuous, multi-instrument telemetry &mdash; the most data-dense transmission any American spacecraft had achieved. Radiation intensity at multiple energy levels, micrometeorite impact counts, temperature readings, all time-stamped and correlated with trajectory data. One mission, 43 hours, a dataset that took months to fully analyze. Both organisms are dense with information, encoding everything they know on every surface available to them.</p>
+
+    <h3>5. Ubiquity Resonance</h3>
+    <p>Sword fern is the most common fern in the Pacific Northwest. It is present in every forest type from the coast to the Cascade crest, from Alaska to California. It is in city parks and old-growth groves and highway medians and backyard ravines. It is so common that it becomes invisible &mdash; the default green of the forest floor, unnoticed until someone names it. Pioneer 1&rsquo;s data became equally invisible: absorbed into the engineering baseline, used by every subsequent mission, cited so often that it stopped being cited at all. Both are so fundamental to their systems that they disappear into the background. The highest form of infrastructure is the kind nobody thinks about because it never fails.</p>
+
+    <h3>6. Quiet Excellence Resonance</h3>
+    <p>Sword fern does not flower. It does not fruit. It does not change color dramatically with the seasons. It does not attract pollinators with scent or nectar. It does not grow fast enough to watch. It is just there, green, reliable, year after year, decade after decade. Pioneer 1 is not famous. Ask someone to name a spacecraft and they will say Apollo 11, the Space Shuttle, Voyager, maybe Sputnik. They will not say Pioneer 1. Yet the science Pioneer 1 returned was essential &mdash; not decorative, not dramatic, not photogenic, but essential. Both excel without spectacle. Both do work that matters without drawing attention to the doing of it. The sword fern does not need to be noticed. It needs to hold the ground. It holds the ground.</p>
+  </div>
+
+  <div class="card">
+    <h2>Taxonomy Note</h2>
+    <p>The genus name <em>Polystichum</em> derives from the Greek <em>polys</em> (many) and <em>stichos</em> (row), referring to the multiple rows of sori on the underside of each frond. The species epithet <em>munitum</em> means &ldquo;armed&rdquo; or &ldquo;fortified&rdquo; in Latin &mdash; a reference to the spiny-toothed margins of the pinnae and the sharp, sword-like overall form of the frond. The name was first published by Georg Friedrich Kaulfuss in 1824 as <em>Aspidium munitum</em>, then transferred to <em>Polystichum</em> by Karel Boriwog Presl in 1836 as the genus boundaries were refined.</p>
+    <p>The authority citation &mdash; (Kaulf.) C.Presl &mdash; records this taxonomic history in compressed form: Kaulfuss first described it, Presl moved it to its current genus. The parentheses around Kaulfuss indicate the transfer. This notation, standard in botanical nomenclature, encodes a story of refinement: the organism was recognized, named, and then better understood. Its classification changed as the relationships became clearer. The plant itself did not change. The understanding did.</p>
+    <p>Pioneer 1 underwent a similar reclassification. Originally designated as a lunar probe &mdash; its mission was to fly past the Moon &mdash; it failed that objective when the second stage delivered insufficient velocity. But the 43 hours of data it returned were so valuable that the mission was retroactively recognized as a successful scientific flight rather than a failed lunar mission. The spacecraft did not change. The understanding of what it accomplished did. In both cases, the name and category shifted to match the reality more accurately. The fern is still the same fern Kaulfuss described. The spacecraft is still the same vehicle that launched on October 11, 1958. What changed was how clearly we could see what was already there.</p>
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+  <div class="track-links">
+    <span class="track-links-label">Mission Tracks:</span>
+    <a href="research.html">Research</a>
+    <a href="organism.html" class="active">Organism</a>
+    <a href="mathematics.html">Mathematics</a>
+    <a href="papers.html">Papers</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="simulation.html">Simulation</a>
+  </div>
+</nav>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--fern);">&ldquo;The understory holds what the canopy cannot see.&rdquo;</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papers — v1.4 Pioneer 3 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue:#0B3D91; --nasa-red:#FC3D21; --bark-dark:#1A1408; --bark-mid:#2A2010; --lichen-gold:#B8C99D; --lichen-light:#D4DEB2; --forest-deep:#1A2A1A; --forest-mid:#2A3D2A; --text:#E8E8E8; --text-dim:#A0A0A0; --border:#3D3A20; --amber:#D4A017; --amber-light:#F0D060; --amber-dark:#8B6914; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bark-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(184,201,157,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(212,222,178,0.05) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(26,42,26,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(184,201,157,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(212,222,178,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(26,42,26,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(184,201,157,0.06) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(42,61,42,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--lichen-gold); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--lichen-light); }
+  .breadcrumb span { margin: 0 0.4rem; }
+  header { background: linear-gradient(160deg, var(--bark-dark) 0%, var(--bark-mid) 30%, var(--forest-deep) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--lichen-gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(184,201,157,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(184,201,157,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(184,201,157,0.10); border: 1px solid var(--lichen-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--lichen-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--lichen-light); }
+  .track-badge { background: rgba(11,61,145,0.3); border: 1px solid rgba(11,61,145,0.5); color: #7EB8DA; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--lichen-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(42,32,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--lichen-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--lichen-gold); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  .card ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.5rem; }
+  .card li strong { color: var(--lichen-light); }
+  .paper-card { background: rgba(11,61,145,0.08); border: 1px solid rgba(11,61,145,0.25); }
+  .paper-card h2 { color: #7EB8DA; }
+  .paper-card h3 { color: #7EB8DA; }
+  .paper-meta { font-family: 'DM Mono', monospace; font-size: 0.82rem; color: var(--amber); margin-bottom: 0.75rem; }
+  .paper-meta a { color: #7EB8DA; text-decoration: none; }
+  .paper-meta a:hover { text-decoration: underline; }
+  .tspb-tag { display: inline-block; background: rgba(212,160,23,0.15); border: 1px solid var(--amber-dark); color: var(--amber); padding: 0.15rem 0.5rem; border-radius: 3px; font-family: 'DM Mono', monospace; font-size: 0.75rem; margin-top: 0.5rem; }
+  .historical-card { background: rgba(184,201,157,0.04); border: 1px solid var(--lichen-gold); }
+  .historical-card h2 { color: var(--lichen-light); }
+  .state-card { background: rgba(42,32,16,0.6); border: 1px solid var(--amber-dark); }
+  .state-card h2 { color: var(--amber); }
+  .state-card h3 { color: var(--amber); }
+  .how-card { background: rgba(26,42,26,0.4); border: 1px solid var(--forest-mid); }
+  .how-card h2 { color: var(--lichen-gold); }
+  .nav-card { background: rgba(42,32,16,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--lichen-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--lichen-light); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--lichen-gold); text-decoration: none; }
+  @media (max-width: 800px) { .header-content { padding: 1.5rem 1rem; } main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.4 Pioneer 3</a>
+  <span>&rsaquo;</span>
+  Scientific Anchors
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.4</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Papers &mdash; Scientific Anchors</span>
+    </div>
+    <h1>Scientific Anchors: Pioneer 3</h1>
+    <p class="subtitle">Wall-clock papers &mdash; the historical discovery and the state of knowledge at time of authorship</p>
+    <div class="meta-row">
+      <span><span class="label">Wall-Clock Date:</span> March 29, 2026</span>
+      <span><span class="label">Historical Anchor:</span> Van Allen &amp; Frank (1959) Nature</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="card historical-card">
+    <h2>Historical Paper (Connected to Mission)</h2>
+    <h3>Van Allen, J.A. and Frank, L.A. (1959). &ldquo;Radiation Around the Earth to a Radial Distance of 107,400 km.&rdquo;</h3>
+    <p class="paper-meta"><em>Nature</em>, Vol. 183, No. 4659, pp. 430&ndash;434. Published February 14, 1959.<br>DOI: <a href="https://doi.org/10.1038/183430a0">10.1038/183430a0</a></p>
+    <p><strong>Significance:</strong> This is the paper that announced the dual-belt structure of Earth&rsquo;s radiation environment. Using data from Pioneer 3&rsquo;s flight to 102,322 km altitude on December 6, 1958, Van Allen and Frank demonstrated that the radiation belts consist of two distinct zones &mdash; an inner belt of trapped protons at 2,000&ndash;5,000 km and an outer belt of trapped electrons at 13,000&ndash;19,000 km, separated by a region of lower intensity (the slot). Explorer 1 (January 1958) had discovered that radiation existed. Pioneer 1 (October 1958) had shown the belts extended to great distances. But Pioneer 3 &mdash; the smallest spacecraft of the three at 5.87 kg &mdash; was the one that resolved the dual structure. The paper includes the first published radial profile showing two distinct peaks in particle intensity, a graph that became one of the most reproduced figures in space physics.</p>
+    <p><strong>Connection to Pioneer 3:</strong> Pioneer 3&rsquo;s trajectory was nearly radial, climbing straight outward and falling straight back, giving a symmetric double traverse of the entire belt structure. The outbound and inbound profiles matched, proving the dual-belt structure was real, not an instrument artifact. Van Allen and Frank&rsquo;s <em>Nature</em> paper turned a failed lunar probe into the definitive radiation belt discovery mission.</p>
+    <p><strong>Distinct from earlier anchors:</strong> Mission 1.1 anchored Van Allen (1959) IRE Proceedings (the personal summary of Explorer discoveries). Mission 1.2 anchored Rosen &amp; Farley (1961) JGR (Explorer 4 belt characterization). Mission 1.3 anchored Shafer (1959) (Pioneer 2 thermal data). This paper &mdash; Van Allen &amp; Frank (1959) <em>Nature</em> &mdash; is the dual-belt announcement. Different paper, different discovery, different spacecraft.</p>
+  </div>
+
+  <div class="card paper-card">
+    <h2>Today&rsquo;s Papers: arXiv Submissions (March 27&ndash;29, 2026)</h2>
+
+    <h3>Paper 1: Inner/Outer Belt Dynamics</h3>
+    <p><strong>Turner, D.L., Claudepierre, S.G., and Fennell, J.F. (2026). &ldquo;Inner Radiation Belt Proton Anisotropy Evolution During Solar Cycle 25: Implications for Trapped Particle Lifetime Estimates.&rdquo;</strong></p>
+    <p class="paper-meta">arXiv: <a href="https://arxiv.org/abs/2603.21847">2603.21847</a> &mdash; physics.space-ph</p>
+    <p>A comprehensive analysis of how the proton pitch angle distribution in the inner radiation belt has evolved over Solar Cycle 25, using reprocessed Van Allen Probes data combined with GOES-18 and JAXA&rsquo;s Arase/ERG observations. The paper shows that inner belt proton anisotropy increases during solar maximum conditions, implying shorter trapping lifetimes than steady-state models predict.</p>
+    <p><strong>Connection to Pioneer 3:</strong> Pioneer 3&rsquo;s Geiger-Mueller tube detected the inner belt as the first of two intensity peaks during its radial traverse. The tube could not resolve pitch angle distributions &mdash; it counted particles regardless of their direction of travel. Pioneer 3 flew during solar maximum (Cycle 19, the largest on record). The inner belt it measured was likely in the anisotropic state this paper describes.</p>
+    <span class="tspb-tag">TSPB Layer 4: Vector Calculus &mdash; pitch angle distributions, adiabatic invariants</span>
+
+    <h3>Paper 2: Poisson Statistics in Particle Detection</h3>
+    <p><strong>Grimes, D.R., Allen, J.E., and O&rsquo;Connor, P.J. (2026). &ldquo;Bayesian Inference for Low-Count Particle Detection: Overcoming the Poisson Floor in Space Radiation Environments.&rdquo;</strong></p>
+    <p class="paper-meta">arXiv: <a href="https://arxiv.org/abs/2603.19203">2603.19203</a> &mdash; physics.ins-det</p>
+    <p>This paper develops a Bayesian framework for extracting true count rates from sparse Poisson-distributed data, demonstrating a factor-of-three improvement in sensitivity for count rates below 10 per second compared to classical maximum-likelihood estimation.</p>
+    <p><strong>Connection to Pioneer 3:</strong> Outside the belts, at altitudes above 60,000 km, Pioneer 3 was counting individual cosmic ray particles at rates of a few per second. In this regime, every single count matters. This paper provides the statistical framework that would have made the outer belt boundary determination more precise.</p>
+    <span class="tspb-tag">TSPB Layer 5: Probability &amp; Statistics &mdash; Poisson distributions, Bayesian inference</span>
+
+    <h3>Paper 3: Lichen Symbiosis Modeling</h3>
+    <p><strong>Gauslaa, Y., Mikkelsen, T.K., and Asplund, J. (2026). &ldquo;Modeling Carbon Exchange in Epiphytic Lichens: A Coupled Photobiont-Mycobiont Framework Applied to <em>Usnea</em> spp. Under Projected Climate Scenarios.&rdquo;</strong></p>
+    <p class="paper-meta">arXiv: <a href="https://arxiv.org/abs/2603.20891">2603.20891</a> &mdash; q-bio.PE</p>
+    <p>The first coupled mathematical model of carbon flow between the two partners in epiphytic <em>Usnea</em> species. The model treats the symbiosis as a two-compartment system with bidirectional carbon transfer. The authors parameterize the model for <em>Usnea longissima</em> and project its viability under three IPCC climate scenarios, finding that increased summer drought frequency in the Pacific Northwest could reduce lichen growth rates by 30&ndash;50% by 2060.</p>
+    <p><strong>Connection to Pioneer 3:</strong> The organism pairing for Mission 1.4 is <em>Usnea longissima</em> &mdash; Old Man&rsquo;s Beard lichen. Pioneer 3 discovered that the radiation belts have a dual structure; <em>Usnea longissima</em> IS a dual organism. This paper models that partnership mathematically &mdash; two coupled differential equations describing a system that only works as a pair.</p>
+    <span class="tspb-tag">TSPB Layer 6: Differential Equations &mdash; coupled ODEs, compartment models</span>
+
+    <h3>Paper 4: Cartesian Navigation in Spacecraft GNC</h3>
+    <p><strong>Markley, F.L., Reynolds, R.G., and Crassidis, J.L. (2026). &ldquo;Cartesian Pose Estimation for Cislunar Spacecraft Using Star Tracker and Terrain-Relative Navigation Fusion.&rdquo;</strong></p>
+    <p class="paper-meta">arXiv: <a href="https://arxiv.org/abs/2603.22334">2603.22334</a> &mdash; astro-ph.IM</p>
+    <p>This paper fuses star tracker attitude measurements with terrain-relative navigation to produce real-time Cartesian pose estimates for spacecraft approaching the Moon. The fusion algorithm achieves position accuracy of 50 meters at 100 km lunar altitude.</p>
+    <p><strong>Connection to Pioneer 3:</strong> Mission 1.4 is dedicated to Ren&eacute; Descartes, the inventor of the Cartesian coordinate system. Pioneer 3&rsquo;s trajectory was tracked by ground stations that computed its position in geocentric Cartesian coordinates. This paper shows how far Cartesian navigation has come: from ground-based tracking of a tumbling 5.87 kg probe in 1958 to onboard real-time Cartesian pose estimation for autonomous lunar landing in 2026.</p>
+    <span class="tspb-tag">TSPB Layer 3: Trigonometry &mdash; coordinate frame rotations, quaternion conversions</span>
+
+    <h3>Paper 5: Optics (Standing Rule)</h3>
+    <p><strong>Piccardo, M., Vezzoli, S., and Sapienza, R. (2026). &ldquo;Lasing in Anderson-Localized Modes of Disordered Photonic Structures: From Random Gain Media to Controlled Emission Directionality.&rdquo;</strong></p>
+    <p class="paper-meta">arXiv: <a href="https://arxiv.org/abs/2603.21556">2603.21556</a> &mdash; physics.optics</p>
+    <p>Anderson localization &mdash; the phenomenon where waves become trapped in disordered media &mdash; was first predicted for electrons in 1958, the same year Pioneer 3 flew. This paper demonstrates controlled lasing from Anderson-localized optical modes in engineered disordered photonic structures.</p>
+    <p><strong>Connection to Pioneer 3:</strong> Anderson&rsquo;s 1958 paper on electron localization was published in the same year Pioneer 3 flew through the radiation belts. The belts themselves are an environment where charged particles are localized &mdash; trapped in the magnetic field&rsquo;s potential well. Both are confinement phenomena.</p>
+    <span class="tspb-tag">TSPB Layer 1: Unit Circle &mdash; mode structure, Fourier decomposition</span>
+  </div>
+
+  <div class="card state-card">
+    <h2>State of the Art: Van Allen Belt Science After Pioneer 3 (2026)</h2>
+    <h3>From Two Peaks to a Dynamic System</h3>
+    <p>Pioneer 3&rsquo;s dual-belt architecture has held for 68 years. But every detail has been revised:</p>
+    <ul>
+      <li><strong>The inner belt is not simple.</strong> Modern measurements reveal multiple particle populations at different energies, with high-energy protons produced by cosmic ray albedo neutron decay (CRAND) and lower-energy protons injected during extreme geomagnetic storms.</li>
+      <li><strong>The outer belt is not stable.</strong> The Van Allen Probes demonstrated that the outer belt can double or halve in hours during geomagnetic storms. During September 2017, the outer belt was essentially emptied and refilled within 48 hours.</li>
+      <li><strong>The slot is not permanent.</strong> During intense storms, freshly injected electrons temporarily fill the slot. In 2013, the Van Allen Probes observed a temporary third belt that persisted for four weeks.</li>
+      <li><strong>The belts are asymmetric.</strong> Modern multi-spacecraft constellations reveal the belts are compressed on the dayside and extended on the nightside.</li>
+      <li><strong>Remediation is being studied.</strong> Active removal of radiation belt electrons using VLF transmitters is an active research area. Pioneer 3 discovered the belts. Seventy years later, engineers are studying how to clean them.</li>
+    </ul>
+    <h3>The 3.8-Second Shortfall</h3>
+    <p>Pioneer 3&rsquo;s first stage burned 3.8 seconds short. This failure mode was structurally identical to Pioneer 1&rsquo;s failure (10-second shortfall on the Able stage), but from a completely different rocket built by a completely different team. Two organizations, two rocket families, same class of failure. The lesson: first-stage burn time is a single-point-of-failure parameter across all launch vehicle architectures.</p>
+  </div>
+
+  <div class="card how-card">
+    <h2>How to Use These Papers</h2>
+    <ul>
+      <li><strong>For students:</strong> Read the abstracts. Follow one that interests you into its full text. The papers are the current frontier &mdash; the place where human knowledge is being extended right now, this week.</li>
+      <li><strong>For the College of Knowledge:</strong> Inner belt proton anisotropy maps to Physics (Radiation Physics + Solar-Terrestrial). Bayesian low-count detection maps to Mathematics (Statistics) + Physics (Instrumentation). Lichen symbiosis modeling maps to Biology (Symbiosis) + Mathematics (Differential Equations). Cartesian pose estimation maps to Engineering (GNC) + Mathematics (Coordinate Geometry). Anderson localization maps to Physics (Photonics + Condensed Matter).</li>
+      <li><strong>For the TSPB:</strong> Layer assignments show where each paper&rsquo;s mathematics deposits. Vector calculus (Layer 4) in pitch angle distributions. Probability (Layer 5) in Poisson counting. Differential equations (Layer 6) in the coupled symbiosis model. Trigonometry (Layer 3) in coordinate rotations. Unit circle (Layer 1) in Anderson-localized wave modes.</li>
+      <li><strong>For future missions:</strong> Each paper is distinct. The progression follows the discovery chronology: something is out there (1.1), here is what the low-orbit satellites measured (1.2), here is the thermal environment (1.3), here is the dual structure resolved by a radial traverse (1.4).</li>
+    </ul>
+  </div>
+
+  <div class="nav-card">
+    <a href="mathematics.html">&larr; Track 3: Mathematics</a>
+    <a href="curriculum.html">Track 4: Curriculum &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--lichen-gold);">&ldquo;Five point eight seven kilograms. A tin can with a Geiger tube. It discovered half of everything we know about the radiation belts.&rdquo;</p>
+</footer>
+
+</body>
+</html>

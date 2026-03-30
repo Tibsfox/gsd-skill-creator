@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: Pioneer 4 | v1.5 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --canopy-deep: #0A2E0A;
+    --canopy-mid: #1A4A1A;
+    --canopy-emerald: #2D6A2D;
+    --bark-brown: #4A3420;
+    --light-canopy: #A8D8A8;
+    --light-bright: #C8E8C8;
+    --forest-floor: #0D1A0D;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+    --success: #2D9A2D;
+    --success-light: #40CC40;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--forest-floor); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(168,216,168,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(45,106,45,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(168,216,168,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(200,232,200,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(45,106,45,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--light-canopy); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--light-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--forest-floor) 0%, var(--canopy-deep) 25%, var(--canopy-mid) 50%, var(--canopy-emerald) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(168,216,168,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(168,216,168,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(45,154,45,0.15); border: 1px solid var(--success); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--success-light); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--light-bright); }
+  .track-badge { background: rgba(212,168,48,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; color: var(--gold-light); }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-canopy); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--light-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--light-canopy); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  .prose strong { color: var(--light-bright); }
+  .prose em { color: var(--text-dim); }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  .dept-card {
+    background: rgba(10,46,10,0.4);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .dept-card h3 { color: var(--light-bright); font-family: 'Libre Baskerville', serif; margin-top: 0; margin-bottom: 0.5rem; }
+  .dept-card .wing { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--gold); margin-bottom: 0.75rem; }
+  .dept-card p { font-size: 0.9rem; line-height: 1.7; }
+  .dept-card ul { margin-top: 0.5rem; }
+  .dept-card li { font-size: 0.9rem; }
+
+  .try-session {
+    background: rgba(45,106,45,0.06);
+    border: 1px solid var(--success);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .try-session h3 { color: var(--success-light); font-family: 'Libre Baskerville', serif; margin-top: 0; }
+  .try-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1rem; }
+  .try-meta span { background: rgba(10,46,10,0.4); padding: 0.2rem 0.6rem; border-radius: 4px; }
+
+  .code-block {
+    background: rgba(13,26,13,0.8);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--light-canopy);
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .diy-project {
+    background: rgba(212,168,48,0.05);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .diy-project h3 { color: var(--gold); font-family: 'Libre Baskerville', serif; margin-top: 0; }
+
+  .closing-quote {
+    border-left: 3px solid var(--canopy-emerald);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    background: rgba(10,46,10,0.3);
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .nav-card { background: rgba(10,46,10,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--light-canopy); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--light-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--light-canopy); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .code-block { font-size: 0.7rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">v1.5 Pioneer 4</a><span class="sep">/</span><span>Track 4: Curriculum</span>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.5</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Physics, Engineering, Communications</span>
+      <span><span class="label">Secondary:</span> Forestry, Mathematics, History</span>
+      <span><span class="label">Bird:</span> Red-breasted Nuthatch (degree 5)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <article class="prose">
+
+    <h2>Department Deposits</h2>
+
+    <div class="dept-card">
+      <h3>Physics (Primary)</h3>
+      <div class="wing">Wing: Escape Velocity and Orbital Mechanics</div>
+      <p>Pioneer 4 was the first US spacecraft to achieve escape velocity and enter a permanent heliocentric orbit. The physics spans the full vocabulary of orbital mechanics:</p>
+      <ul>
+        <li>Escape velocity: v<sub>escape</sub> = sqrt(2GM/r) &asymp; 11.0 km/s at 200 km altitude. Pioneer 4 achieved ~11.1 km/s &mdash; a margin of roughly 84 m/s (0.8%)</li>
+        <li>Specific orbital energy: &epsilon; = v&sup2;/2 - &mu;/r. When &epsilon; crosses zero, the trajectory changes from elliptical (bound) to hyperbolic (unbound)</li>
+        <li>Hyperbolic trajectory: eccentricity e &asymp; 1.031 &mdash; barely above the parabolic boundary</li>
+        <li>Heliocentric orbit: semi-major axis &asymp; 1.15 AU, perihelion &asymp; 1.0 AU, aphelion &asymp; 1.30 AU, period &asymp; 1.23 years</li>
+        <li>Convergence: P-0 (explosion), P-1 (fell back from 113,854 km), P-2 (fell back from 1,550 km), P-3 (fell back from 102,322 km), P-4 (escaped)</li>
+      </ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>Engineering (Primary)</h3>
+      <div class="wing">Wing: Launch Vehicle Reliability and the Juno II</div>
+      <p>Pioneer 4 flew on the Juno II &mdash; convergence through iteration:</p>
+      <ul>
+        <li>Juno II configuration: modified Jupiter IRBM first stage (S-3D engine, LOX/RP-1, 667 kN) + spinning solid upper stages</li>
+        <li>Upper stages: 11 solid rocket motors in three tiers, spin-stabilized at ~750 rpm</li>
+        <li>Pioneer 4 mass: 6.08 kg &mdash; the lightest Pioneer. Reliability through simplicity</li>
+        <li>JPL connection: first JPL mission to fully succeed. The NASA/JPL relationship that produced Ranger, Surveyor, Mariner, Viking, Voyager began here</li>
+      </ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>Communications (Primary)</h3>
+      <div class="wing">Wing: Deep Space Tracking</div>
+      <p>Pioneer 4&rsquo;s 82-hour contact period established the template for all subsequent deep space communication:</p>
+      <ul>
+        <li>Transmitter: 180 mW at 960.05 MHz &mdash; less power than a typical LED flashlight</li>
+        <li>Goldstone 26m dish: 45 dBi gain was the critical enabler</li>
+        <li>Signal at max range: ~2.6 &times; 10<sup>-16</sup> watts (0.26 femtowatts)</li>
+        <li>Telemetry: ~64.8 bits/second</li>
+        <li>Deep Space Network origin: the Goldstone station built for Pioneer tracking became the foundation of NASA&rsquo;s DSN</li>
+      </ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>Forestry / Ecology (Secondary)</h3>
+      <div class="wing">Wing: Old-Growth Ecosystems</div>
+      <p><em>Pseudotsuga menziesii</em> &mdash; the dominant conifer of the Pacific Northwest:</p>
+      <ul>
+        <li>Old-growth specimens exceed 80 meters in height and 2 meters in diameter, with lifespans exceeding 1,000 years</li>
+        <li>Root systems connect to mycorrhizal networks &mdash; the &ldquo;wood wide web&rdquo;</li>
+        <li>The escape metaphor: a seedling that survives its first decades can &ldquo;escape&rdquo; understory suppression, mirroring the escape velocity threshold</li>
+        <li>Douglas-fir wood built the Pacific Northwest: bridges, buildings, ships. Pioneer 4 built the infrastructure of deep space communication</li>
+      </ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>Mathematics (Secondary)</h3>
+      <div class="wing">Wing: Hyperbolic Functions and Conic Sections</div>
+      <p>Pioneer 4&rsquo;s trajectory is a hyperbola &mdash; the conic section with eccentricity greater than one:</p>
+      <ul>
+        <li>Conic sections: circle (e = 0), ellipse (0 &lt; e &lt; 1), parabola (e = 1), hyperbola (e &gt; 1)</li>
+        <li>Pioneer fleet eccentricities: P-0 (0), P-2 (0.09), P-3 (~0.36), P-1 (0.89), P-4 (1.03) &mdash; tracing the entire taxonomy</li>
+        <li>The semi-major axis is negative for hyperbolic orbits by convention &mdash; one of the most elegant boundary crossings in classical mechanics</li>
+      </ul>
+    </div>
+
+    <div class="dept-card">
+      <h3>History (Secondary)</h3>
+      <div class="wing">Wing: Alexander Graham Bell and the Communication Revolution</div>
+      <p>Bell was born March 3, 1847 &mdash; exactly 112 years before Pioneer 4&rsquo;s launch:</p>
+      <ul>
+        <li>Bell&rsquo;s core problem: transmitting signals across distance, fighting attenuation. Pioneer 4&rsquo;s same problem: 1/r&sup2; attenuation across 655,300 km</li>
+        <li>Bell&rsquo;s photophone (1880) anticipated deep space optical communication by 146 years</li>
+        <li>Goldstone&rsquo;s 26m dish is an acoustic amplifier for a deaf Earth trying to hear a whispering spacecraft</li>
+      </ul>
+    </div>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <div class="try-session">
+      <h3>TRY 1: Calculate Escape Velocity for Earth, Moon, and Mars</h3>
+      <div class="try-meta">
+        <span>30 minutes</span><span>Beginner</span><span>Physics / Mathematics</span><span>Python 3.8+ or calculator</span>
+      </div>
+      <p>One formula. Three bodies. Three very different velocities.</p>
+      <div class="code-block">v_escape = sqrt(2 * G * M / R)
+
+G = 6.674e-11 m^3/(kg*s^2)
+
+Body    | Mass (kg)    | Radius (km) | v_esc (km/s)
+--------|-------------|-------------|-------------
+Earth   | 5.972e24    |       6,371 |        11.19
+Moon    | 7.342e22    |       1,737 |         2.38
+Mars    | 6.417e23    |       3,390 |         5.03
+
+Pioneer 4 achieved 11.1 km/s. Earth escape: 11.0 km/s.
+Margin: 0.1 km/s. That's the margin between orbiting
+Earth forever and orbiting the Sun forever.</div>
+      <p><strong>What Just Happened:</strong> You proved that escape velocity is a sharp threshold. At 99% you fall back. At 101% you leave forever. Pioneer 4 was at roughly 100.8%.</p>
+    </div>
+
+    <div class="try-session">
+      <h3>TRY 2: Build a Signal Strength Meter with Arduino</h3>
+      <div class="try-meta">
+        <span>45 minutes</span><span>Beginner-Intermediate</span><span>Communications / Electronics</span><span>~$20</span>
+      </div>
+      <p>Arduino Uno + photoresistor + LED. Use a flashlight as Pioneer 4&rsquo;s transmitter in a dark room. Move it away: at 2x distance, signal drops to ~1/4. At 4x distance, ~1/16. Find your &ldquo;maximum range&rdquo; &mdash; the distance at which the LED goes completely dark. That&rsquo;s your Goldstone moment.</p>
+      <p><strong>What Just Happened:</strong> You experienced the inverse-square law in your hands. The signal drops by a factor of 4 every time you double the distance. Bell understood this for sound. Goldstone applied it for radio. Your Arduino proved it for light.</p>
+    </div>
+
+    <div class="try-session">
+      <h3>TRY 3: Identify Douglas-fir by Cone and Bark</h3>
+      <div class="try-meta">
+        <span>30&ndash;60 minutes</span><span>Beginner</span><span>Forestry / Ecology</span><span>$0</span>
+      </div>
+      <p>Go outside. If you&rsquo;re in the PNW, Douglas-fir is the most common tree in the region. Look for cones on the ground &mdash; the three-pointed &ldquo;mouse-tail&rdquo; bracts are unmistakable. Photograph the cone, bark (young smooth vs. mature furrowed), needles, and whole tree silhouette.</p>
+      <div class="code-block">Rough age estimates from diameter at breast height (DBH):
+  10 cm DBH  -> ~20-30 years
+  30 cm DBH  -> ~50-80 years
+  60 cm DBH  -> ~100-200 years
+  100 cm DBH -> ~200-400 years
+  150+ cm DBH -> ~400-1000+ years (old growth)</div>
+      <p><strong>What Just Happened:</strong> You identified the tree paired with the first US spacecraft to leave Earth. The Douglas-fir does not need to escape &mdash; it grows where it is, for centuries, connected to its neighbors through fungal networks.</p>
+    </div>
+
+    <hr>
+
+    <h2>DIY Projects</h2>
+
+    <div class="diy-project">
+      <h3>DIY 1: Arduino Range Finder That Calculates Signal Drop-Off</h3>
+      <div class="try-meta">
+        <span>3&ndash;4 hours</span><span>Intermediate</span><span>~$25</span>
+      </div>
+      <p>Arduino + HC-SR04 ultrasonic sensor + SSD1306 OLED display. The range finder maps centimeters to thousands of kilometers. At 5 cm (&ldquo;50,000 km&rdquo;), the signal is strong. At 65 cm (&ldquo;655,300 km&rdquo;), the display shows &ldquo;SIGNAL LOST&rdquo; &mdash; matching Pioneer 4&rsquo;s actual loss-of-signal range.</p>
+      <div class="code-block">DISPLAY LAYOUT:
++----------------------------+
+| PIONEER 4 RANGE FINDER     |
+| Distance: 42.3 cm          |
+| Scale: 1 cm = 10,000 km    |
+| Equiv: 423,000 km          |
+| Signal: ========-- -32 dB  |
+| P_rx: 6.25e-14 W           |
+| Status: TRACKING            |
++----------------------------+</div>
+    </div>
+
+    <div class="diy-project">
+      <h3>DIY 2: Model Rocket That Achieves &ldquo;Escape&rdquo; from a School Field</h3>
+      <div class="try-meta">
+        <span>4&ndash;6 hours build + 1 hour launch</span><span>Intermediate</span><span>~$50</span>
+      </div>
+      <p>Estes model rocket with B6-4 or C6-5 motor. Define a field &ldquo;escape altitude&rdquo; (half the field diameter). Calculate whether your rocket can escape, then launch and measure. Before launch, compute predicted altitude using the Tsiolkovsky equation. The prediction might be wrong &mdash; Pioneer&rsquo;s predictions were wrong too.</p>
+    </div>
+
+    <div class="diy-project">
+      <h3>DIY 3: Plant a Douglas-fir Seedling</h3>
+      <div class="try-meta">
+        <span>1 hour (planting) + decades (growing)</span><span>Beginner (planting), Advanced (patience)</span><span>~$5</span>
+      </div>
+      <p>One <em>Pseudotsuga menziesii</em> seedling from a state forestry nursery. Plant it. It will reach 10 meters in 20&ndash;30 years, 30 meters in 60&ndash;80 years, 60+ meters in 200+ years. Pioneer 4 weighs 6.08 kg and travels at 31 km/s. Your seedling will weigh several thousand kilograms at maturity and never move from where you planted it. Both are permanent. The tree is the better investment.</p>
+    </div>
+
+    <div class="closing-quote">&ldquo;Pioneer 4 escaped on March 3, 1959, the birthday of Alexander Graham Bell. It carried 180 milliwatts across 655,300 kilometers. Bell carried the human voice across the first telephone wire in 1876. The physics is the same: signals attenuate with distance, and the art is building receivers sensitive enough to hear what&rsquo;s left. The Douglas-fir does not need to escape. It grows where it stands, for a thousand years, connected to everything around it.&rdquo;</div>
+
+    <div class="nav-card">
+      <a href="papers.html">&larr; Scientific Anchors</a>
+      <a href="simulation.html">Simulation &amp; Arts &rarr;</a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Track 4: College of Knowledge Curriculum &mdash; v1.5 Pioneer 4 / Douglas-fir</p>
+</footer>
+
+</body>
+</html>

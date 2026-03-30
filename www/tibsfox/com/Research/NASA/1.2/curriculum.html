@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum — v1.2 Pioneer 1 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --forest-dark: #0A1F14; --forest-mid: #152E20;
+    --fern: #4A7C59; --fern-light: #A8D5BA; --fern-deep: #1B3D2F;
+    --moss: #2E5E3F; --bark: #3A2E1A;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A4A35;
+    --amber: #D4A017; --amber-light: #F0D060; --amber-dark: #8B6914;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--forest-dark); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(74,124,89,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(168,213,186,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(46,94,63,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(74,124,89,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(168,213,186,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(46,94,63,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .top-nav { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; position: relative; z-index: 1; }
+  .top-nav a { color: var(--fern); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .top-nav a:hover { color: var(--fern-light); }
+  header { background: linear-gradient(160deg, var(--forest-dark) 0%, var(--forest-mid) 30%, var(--fern-deep) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--fern); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(74,124,89,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(74,124,89,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(74,124,89,0.15); border: 1px solid var(--fern); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--fern); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--fern-light); }
+  .track-badge { background: rgba(74,124,89,0.25); border: 1px solid var(--fern); color: var(--fern-light); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--fern); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(21,46,32,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--fern-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--fern-light); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--fern); font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+  .card p { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .card strong { color: #fff; }
+  .card em { font-style: italic; color: var(--fern-light); }
+  .card a { color: var(--fern-light); text-decoration: underline; text-decoration-color: var(--border); }
+  .card a:hover { color: #fff; text-decoration-color: var(--fern); }
+  .card hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .card table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.9rem; }
+  .card th { background: rgba(74,124,89,0.2); color: var(--fern-light); font-weight: 600; text-align: left; padding: 0.5rem 0.75rem; border: 1px solid var(--border); }
+  .card td { padding: 0.5rem 0.75rem; border: 1px solid var(--border); }
+  .card tr:nth-child(even) td { background: rgba(21,46,32,0.3); }
+  .card code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(10,31,20,0.6); border: 1px solid var(--border); border-radius: 3px; padding: 0.15rem 0.4rem; color: var(--fern-light); }
+  .card pre { background: rgba(10,31,20,0.7); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.25rem; overflow-x: auto; margin: 0.75rem 0; }
+  .card pre code { background: none; border: none; padding: 0; font-size: 0.85rem; line-height: 1.5; color: var(--text); }
+  .card blockquote { border-left: 3px solid var(--fern); padding: 0.5rem 1rem; margin: 0.75rem 0; background: rgba(74,124,89,0.06); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .bottom-nav { max-width: 1400px; margin: 0 auto; padding: 0 2rem 1rem; position: relative; z-index: 1; }
+  .track-links { background: rgba(21,46,32,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
+  .track-links-label { font-size: 0.85rem; color: var(--text-dim); font-weight: 500; margin-right: 0.5rem; }
+  .track-links a { color: var(--fern); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; }
+  .track-links a:hover { color: var(--fern-light); border-color: var(--fern); background: rgba(74,124,89,0.1); }
+  .track-links a.active { color: var(--fern-light); border-color: var(--fern); background: rgba(74,124,89,0.2); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--fern); text-decoration: none; }
+  @media (max-width: 700px) { .header-content { padding: 1.5rem 1rem 1rem; } main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html">&larr; v1.2 Pioneer 1</a>
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.2</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 4: Curriculum</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department Mappings, TRY Sessions, DIY Projects, Fox Companies Pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Physics, Engineering, Mathematics</span>
+      <span><span class="label">Secondary:</span> Electronics, Earth Science, Art</span>
+      <span><span class="label">Organism:</span> <em>Polystichum munitum</em></span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- DEPARTMENT DEPOSITS -->
+  <div class="card">
+    <h2>Department Deposits</h2>
+
+    <h3>Physics (Primary)</h3>
+    <p><strong>Wing:</strong> Radiation Physics and Particle Detection<br>
+    <strong>Concept:</strong> Charged particle interactions with matter &mdash; how radiation deposits energy and how detectors measure it</p>
+    <p><strong>Deposit:</strong> Pioneer 1 carried a Geiger-Mueller tube and an ionization chamber into uncharted territory. The 43 hours of radiation data it returned revealed the true extent of the Van Allen radiation belts:</p>
+    <ul>
+      <li>Geiger-Mueller tube physics (gas ionization cascade, dead time, saturation)</li>
+      <li>Ionization chamber operation (continuous current vs. pulse counting)</li>
+      <li>Radiation dose vs. flux vs. energy spectrum (the distinctions matter)</li>
+      <li>Trapped particle dynamics (why charged particles spiral along magnetic field lines)</li>
+      <li>The inverse-square law applied to radiation intensity vs. altitude</li>
+      <li>Detector saturation: Pioneer 1&rsquo;s counters maxed out in the belt core, proving it was far more intense than Explorer 1 had suggested</li>
+    </ul>
+    <p>This deposit feeds forward into every mission that carries a radiation instrument, every spacecraft that must be hardened against the belts, and every astronaut dosimetry calculation for crewed missions.</p>
+
+    <h3>Engineering (Primary)</h3>
+    <p><strong>Wing:</strong> Propulsion Systems and Staging Performance<br>
+    <strong>Concept:</strong> The cascade failure of a velocity shortfall &mdash; how 10 seconds of early engine cutoff becomes 234 m/s of missing delta-v becomes a Moon mission that never reaches escape velocity</p>
+    <p><strong>Deposit:</strong> Pioneer 1&rsquo;s second stage (AJ10-40) cut off 10 seconds early. This single event teaches the entire propulsion error chain:</p>
+    <ul>
+      <li>Specific impulse and its relationship to burn time (every second matters)</li>
+      <li>The exponential sensitivity of the Tsiolkovsky equation (small burn-time errors create large velocity errors)</li>
+      <li>Guidance and propulsion coupling (velocity shortfall changes the optimal trajectory)</li>
+      <li>The difference between &ldquo;almost enough&rdquo; and &ldquo;enough&rdquo; in orbital mechanics (113,854 km vs. 384,400 km)</li>
+      <li>Engine shutdown causes: propellant depletion, mixture ratio drift, sensor-triggered cutoff, programmed timing error</li>
+      <li>Tolerance budgets in propulsion: what margin do you carry, and what happens when you exceed it?</li>
+    </ul>
+    <p>Pioneer 0 failed at T+77 seconds from a bearing. Pioneer 1 reached space but fell short of the Moon from a 10-second cutoff. The failure moved from catastrophic to subtle &mdash; and subtle failures are harder to prevent.</p>
+
+    <h3>Mathematics (Primary)</h3>
+    <p><strong>Wing:</strong> Orbital Mechanics and Trajectory Analysis<br>
+    <strong>Concept:</strong> Escape velocity, conic sections, and the mathematics of &ldquo;almost but not quite&rdquo;</p>
+    <p><strong>Deposit:</strong> Pioneer 1 is the cleanest possible case study for escape velocity mathematics:</p>
+    <ul>
+      <li>Escape velocity derivation from conservation of energy (kinetic + gravitational potential = 0)</li>
+      <li>Earth escape velocity: 11,186 m/s at the surface, decreasing with altitude</li>
+      <li>Pioneer 1&rsquo;s actual velocity at burnout vs. required velocity (the 234 m/s gap)</li>
+      <li>Conic sections: the trajectory was a high ellipse (apogee 113,854 km) instead of the intended hyperbola (lunar transfer)</li>
+      <li>Vis-viva equation: v<sup>2</sup> = GM(2/r - 1/a) &mdash; the single equation that describes all Keplerian orbits</li>
+      <li>Perturbation theory: the Moon&rsquo;s gravity did tug on Pioneer 1, but not enough to capture it</li>
+      <li>Reentry dynamics: the ellipse brought Pioneer 1 back to Earth, where it burned up over the South Pacific after 43 hours</li>
+    </ul>
+    <p>The math is elegant and cruel: 234 m/s is only 2.1% of escape velocity, but 2.1% is the difference between leaving Earth forever and falling back to burn.</p>
+
+    <h3>Electronics (Secondary)</h3>
+    <p><strong>Wing:</strong> Telemetry Systems and Data Encoding<br>
+    <strong>Concept:</strong> How Pioneer 1 transmitted 43 hours of radiation data back to Earth with 1958 electronics</p>
+    <ul>
+      <li>Transmitter power: 300 mW at 108.06 MHz (VHF band) &mdash; less than a walkie-talkie</li>
+      <li>Signal-to-noise ratio at 113,854 km range (free-space path loss)</li>
+      <li>Data encoding: analog FM subcarriers multiplexed onto the carrier</li>
+      <li>Ground station receiver sensitivity (Goldstone 26-meter dish, early DSN)</li>
+      <li>The tradeoff between data rate and link margin (Pioneer 1 had to transmit slowly to be heard)</li>
+      <li>Antenna pattern: the spinning spacecraft created a modulated signal as the antenna swept past Earth pointing</li>
+      <li>The data that survived: 43 hours of continuous telemetry, the longest dataset from any Pioneer to date</li>
+    </ul>
+
+    <h3>Earth Science (Secondary)</h3>
+    <p><strong>Wing:</strong> Magnetospheric Physics<br>
+    <strong>Concept:</strong> The Van Allen radiation belts &mdash; structure, origin, and significance</p>
+    <ul>
+      <li>Inner belt structure: protons trapped by Earth&rsquo;s magnetic field (1,000&ndash;6,000 km)</li>
+      <li>Outer belt structure: electrons at higher altitudes (13,000&ndash;60,000 km)</li>
+      <li>The slot region between the belts (a relative minimum in radiation intensity)</li>
+      <li>South Atlantic Anomaly: where the inner belt dips closest to Earth&rsquo;s surface</li>
+      <li>Belt dynamics: solar wind compression on the dayside, stretched tail on the nightside</li>
+      <li>Pioneer 1 data vs. Explorer 1/3 data: filling in the vertical profile that the lower-orbit Explorers could not reach</li>
+      <li>Why the belts matter: radiation hazard to spacecraft electronics and astronaut health, influence on satellite orbit selection</li>
+    </ul>
+
+    <h3>Art (Secondary)</h3>
+    <p><strong>Wing:</strong> Data Visualization and Scientific Illustration<br>
+    <strong>Concept:</strong> Transforming 43 hours of radiation numbers into visual understanding</p>
+    <ul>
+      <li>The raw data is a time series of radiation counts vs. altitude and time</li>
+      <li>James Van Allen&rsquo;s original hand-drawn plots of Explorer/Pioneer radiation data became iconic images of the Space Age</li>
+      <li>Representing three-dimensional belt structure (latitude, longitude, altitude) in two-dimensional media</li>
+      <li>Color mapping: radiation intensity to color gradient (the visual language of dosimetry)</li>
+      <li>The challenge of representing detector saturation visually (the signal maxes out &mdash; how do you show &ldquo;off the scale&rdquo;?)</li>
+      <li>Cross-section diagrams: the canonical dipole field line + trapped particle visualization</li>
+      <li>Modern tools (matplotlib, D3.js, ParaView) applied to 1958 data formats</li>
+    </ul>
+  </div>
+
+  <!-- TRY SESSIONS -->
+  <div class="card">
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Calculate Escape Velocity and the Pioneer 1 Shortfall</h3>
+    <p><strong>Duration:</strong> 30 minutes | <strong>Difficulty:</strong> Beginner | <strong>Department:</strong> Mathematics / Physics<br>
+    <strong>What You Need:</strong> Python 3.8+, or a scientific calculator</p>
+    <p><strong>What You&rsquo;ll Learn:</strong> The moment you realize that 234 m/s &mdash; roughly the speed of a prop airplane &mdash; is the difference between reaching the Moon and falling back to Earth.</p>
+    <h4>Entry Conditions</h4>
+    <ul>
+      <li>Python 3.8+ installed (or a scientific calculator)</li>
+      <li>Know what kinetic energy and gravitational potential energy are (even if rusty)</li>
+    </ul>
+    <h4>The Exercise</h4>
+    <p><strong>Step 1: Derive escape velocity from energy conservation</strong></p>
+    <pre><code>(1/2) * m * v_esc^2 - G * M * m / r = 0
+v_esc = sqrt(2 * G * M / r)</code></pre>
+    <p><strong>Step 2: Calculate escape velocity at Pioneer 1&rsquo;s burnout altitude</strong></p>
+    <pre><code>import math
+
+G = 6.674e-11
+M_earth = 5.972e24
+R_earth = 6.371e6
+h_burnout = 200e3  # 200 km altitude
+
+r = R_earth + h_burnout
+v_esc = math.sqrt(2 * G * M_earth / r)
+print(f"Escape velocity at {h_burnout/1000:.0f} km: {v_esc:.0f} m/s")
+# Expected: ~11,009 m/s</code></pre>
+    <p><strong>Step 3: Calculate Pioneer 1&rsquo;s actual velocity and the shortfall</strong></p>
+    <pre><code>v_actual = v_esc - 234
+v_ratio = v_actual / v_esc
+print(f"Required: {v_esc:.0f} m/s")
+print(f"Achieved: {v_actual:.0f} m/s")
+print(f"Percentage of escape: {v_ratio*100:.1f}%")
+# About 97.9% of escape velocity</code></pre>
+    <p><strong>Step 4: Calculate the resulting apogee</strong> using the vis-viva equation.</p>
+    <pre><code>mu = G * M_earth
+epsilon = v_actual**2 / 2 - mu / r
+a = -mu / (2 * epsilon)
+r_apogee = 2 * a - r
+h_apogee = r_apogee - R_earth
+print(f"Apogee altitude: {h_apogee/1000:.0f} km")
+print(f"Pioneer 1 reached {h_apogee/384400e3*100:.1f}% of the way to the Moon")</code></pre>
+    <p><strong>What Just Happened:</strong> You proved mathematically that a 2.1% velocity shortfall turned a lunar mission into a suborbital arc. The vis-viva equation shows that orbital energy depends on v<sup>2</sup>, so small velocity differences create large orbit differences.</p>
+
+    <hr>
+
+    <h3>TRY 2: Build a Radiation Detector with a Geiger Counter Module</h3>
+    <p><strong>Duration:</strong> 1 hour | <strong>Difficulty:</strong> Beginner-Intermediate | <strong>Department:</strong> Physics / Electronics<br>
+    <strong>What You Need:</strong> Arduino Uno ($25), Geiger counter module with GM tube ($25), breadboard + wires ($5)</p>
+    <h4>Wiring</h4>
+    <pre><code>Geiger Module &rarr; Arduino:
+  VCC &rarr; 5V
+  GND &rarr; GND
+  SIG &rarr; Digital Pin 2 (interrupt-capable)</code></pre>
+    <h4>Sketch</h4>
+    <pre><code>// pioneer1_geiger.ino
+volatile unsigned long counts = 0;
+unsigned long previousMillis = 0;
+const unsigned long interval = 1000;
+
+void countPulse() { counts++; }
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(2, INPUT);
+  attachInterrupt(digitalPinToInterrupt(2), countPulse, FALLING);
+  Serial.println("PIONEER 1 RADIATION DETECTOR");
+  Serial.println("Time_s,CPM,uSv_h");
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+    noInterrupts();
+    unsigned long cpm = counts * 60;
+    counts = 0;
+    interrupts();
+    float usvh = cpm * 0.0057;
+    Serial.print(currentMillis / 1000); Serial.print(",");
+    Serial.print(cpm); Serial.print(",");
+    Serial.println(usvh, 3);
+  }
+}</code></pre>
+    <p><strong>What Just Happened:</strong> You built a radiation detector that operates on the same principle as Pioneer 1&rsquo;s primary science instrument. Every click is a single ionizing particle passing through the GM tube. Pioneer 1 counted these clicks for 43 hours as it climbed to 113,854 km and fell back.</p>
+
+    <hr>
+
+    <h3>TRY 3: Map the Van Allen Belts from Pioneer/Explorer Data</h3>
+    <p><strong>Duration:</strong> 90 minutes | <strong>Difficulty:</strong> Intermediate | <strong>Department:</strong> Earth Science / Physics<br>
+    <strong>What You Need:</strong> Python 3.8+, matplotlib, numpy</p>
+    <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.colors import LogNorm
+
+altitudes = np.linspace(200, 120000, 500)
+l_shells = np.linspace(1.0, 10.0, 200)
+
+# Inner belt: protons, peak at L=1.5
+inner = 1e4 * np.exp(-((l_shells[np.newaxis,:] - 1.5) / 0.3)**2) * \
+        np.exp(-((altitudes[:,np.newaxis] - 3000) / 2000)**2)
+
+# Outer belt: electrons, peak at L=4.5
+outer = 5e3 * np.exp(-((l_shells[np.newaxis,:] - 4.5) / 1.2)**2) * \
+        np.exp(-((altitudes[:,np.newaxis] - 20000) / 12000)**2)
+
+total = inner + outer
+
+fig, ax = plt.subplots(1, 1, figsize=(12, 8))
+im = ax.pcolormesh(l_shells, altitudes/1000, total,
+                   norm=LogNorm(vmin=1, vmax=1e4),
+                   cmap='inferno', shading='auto')
+ax.set_xlabel('L-shell (Earth radii)')
+ax.set_ylabel('Altitude (thousands of km)')
+ax.set_title('Van Allen Radiation Belts - Pioneer 1 Profile')
+plt.colorbar(im, label='Particle flux (relative units)')
+ax.axhline(y=113.854, color='cyan', linestyle=':',
+           label='Pioneer 1 apogee: 113,854 km')
+ax.legend()
+plt.tight_layout()
+plt.savefig('van_allen_belts_pioneer1.png', dpi=150)
+plt.show()</code></pre>
+    <p><strong>What Just Happened:</strong> You reconstructed the Van Allen belt structure from the same type of measurements Pioneer 1 returned. The basic two-belt-plus-slot architecture Pioneer 1 revealed has held up for nearly 70 years.</p>
+  </div>
+
+  <!-- DIY PROJECTS -->
+  <div class="card">
+    <h2>DIY Projects</h2>
+
+    <h3>DIY 1: Arduino Geiger Counter with OLED Telemetry Display</h3>
+    <p><strong>Department:</strong> Electronics / Physics | <strong>Difficulty:</strong> Beginner-Intermediate | <strong>Cost:</strong> $35 | <strong>Duration:</strong> Weekend (4&ndash;6 hours)</p>
+    <h4>Materials</h4>
+    <ul>
+      <li>Arduino Nano ($8) or Uno ($25)</li>
+      <li>Geiger counter module with GM tube ($15&ndash;25)</li>
+      <li>SSD1306 OLED display 128x64 ($8)</li>
+      <li>Piezo buzzer ($2)</li>
+      <li>Breadboard + jumper wires ($5)</li>
+    </ul>
+    <h4>OLED Display Layout</h4>
+    <pre><code>+----------------------------+
+| PIONEER-1 RAD   00:05:23   |
+| CPM: 0024    0.14 uSv/h    |
+| ▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░   |
+| ▁▂▃▂▁▂▃▅▃▂▁▂▃▂▁▂▃▂▁▂▁▂   |
++----------------------------+</code></pre>
+    <p><strong>Fox Companies Connection:</strong> A radiation monitoring service for home inspectors and environmental consultants. The same $35 detector, ruggedized with a 3D-printed case, becomes a radon screening tool. Revenue: device sales ($75&ndash;100 assembled), calibration service ($25/year), data logging software subscription ($5/month).</p>
+
+    <hr>
+
+    <h3>DIY 2: Build a Ballistic Trajectory Simulator</h3>
+    <p><strong>Department:</strong> Mathematics / Physics | <strong>Difficulty:</strong> Intermediate | <strong>Cost:</strong> $0 (software only) | <strong>Duration:</strong> 2 hours</p>
+    <ol>
+      <li>Implement 2D orbital mechanics using scipy.integrate (RK45 integrator)</li>
+      <li>Model Earth&rsquo;s gravitational field (point mass, then add J2 oblateness)</li>
+      <li>Set initial conditions matching Pioneer 1&rsquo;s burnout state</li>
+      <li>Run the simulation and plot the elliptical orbit with 113,854 km apogee</li>
+      <li>Add 234 m/s to the burnout velocity and run again &mdash; watch the orbit open to a hyperbola</li>
+      <li>Create a slider that lets you sweep velocity from 10,000 to 12,000 m/s</li>
+      <li>Mark the Moon&rsquo;s distance on the plot as a circle at 384,400 km</li>
+    </ol>
+    <pre><code>Pioneer 1 actual:    v = 10,775 m/s  &rarr; ellipse, apogee 113,854 km
+Pioneer 1 intended:  v = 11,009 m/s  &rarr; hyperbola, lunar transfer
+Difference:          234 m/s (a Cessna's cruising speed)</code></pre>
+
+    <hr>
+
+    <h3>DIY 3: Grow Sword Ferns from Spores</h3>
+    <p><strong>Department:</strong> Ecology / Biology | <strong>Difficulty:</strong> Beginner (patience required) | <strong>Cost:</strong> $10 | <strong>Duration:</strong> 6-month project</p>
+    <h4>Materials</h4>
+    <ul>
+      <li>Sword fern frond with ripe sori ($0 &mdash; collect, or $5 from a native nursery)</li>
+      <li>Peat moss + perlite mix ($5)</li>
+      <li>Clear plastic container with lid ($0)</li>
+      <li>Spray bottle ($2)</li>
+      <li>Patience (6 months of it)</li>
+    </ul>
+    <h4>Steps</h4>
+    <ol>
+      <li>Collect spores: find a mature frond with brown sori. Place face-down on white paper for 24 hours.</li>
+      <li>Sterilize growing medium: microwave damp peat/perlite mix for 2 minutes. Cool completely.</li>
+      <li>Sprinkle spores thinly onto the surface. Do NOT bury them.</li>
+      <li>Cover with clear lid. Bright indirect light (no direct sun).</li>
+      <li>Mist every few days. Never let it dry out.</li>
+      <li>Week 2&ndash;4: Green film appears (prothalli &mdash; the gametophyte generation).</li>
+      <li>Week 4&ndash;8: Tiny heart-shaped plants develop. Fertilization happens via water film.</li>
+      <li>Month 2&ndash;4: First true fronds emerge (the sporophyte generation).</li>
+      <li>Month 4&ndash;6: Transplant to individual pots with rich, acidic soil. Place in shade.</li>
+      <li>Year 1+: Fronds reach 30&ndash;60 cm. Mature plants reach 1.5 meters in ground.</li>
+    </ol>
+    <p><strong>What You Learn:</strong> Alternation of generations (gametophyte to sporophyte) &mdash; a lifecycle most seed plants have lost. Why ferns need moisture for reproduction (the sperm must swim). The connection to Pioneer 1: both the fern spore and the spacecraft are launched on trajectories they cannot control.</p>
+  </div>
+
+  <!-- ROSETTA STONE CONNECTIONS -->
+  <div class="card">
+    <h2>Rosetta Stone Connections</h2>
+    <h3>Cross-Department Translations</h3>
+    <table>
+      <tr><th>From</th><th>To</th><th>Connection</th></tr>
+      <tr><td>Physics (radiation)</td><td>Electronics (radio)</td><td>The same electromagnetic spectrum that carries radiation carries radio signals. Pioneer 1&rsquo;s Geiger counter detected particles; its radio transmitted data about those particles. Detection and transmission are mirrors of the same physics.</td></tr>
+      <tr><td>Engineering (propulsion shortfall)</td><td>Art (data visualization)</td><td>The 234 m/s shortfall is invisible in raw numbers but devastating in a trajectory plot. Visualization transforms abstract velocity into visible geometry &mdash; the ellipse that should have been a hyperbola.</td></tr>
+      <tr><td>Mathematics (inverse-square law)</td><td>Physics (radiation intensity)</td><td>The inverse-square law governs radiation intensity (1/r<sup>2</sup>), gravitational force (1/r<sup>2</sup>), signal strength (1/r<sup>2</sup>), and light intensity (1/r<sup>2</sup>). One equation, four departments, one truth: distance dilutes everything.</td></tr>
+      <tr><td>Electronics (telemetry)</td><td>Mathematics (signal processing)</td><td>Pioneer 1&rsquo;s analog telemetry encoded radiation counts as FM subcarriers. Decoding requires Fourier analysis. Shannon&rsquo;s sampling theorem sets the floor: sample at 2x the highest frequency or lose information.</td></tr>
+      <tr><td>Earth Science (magnetosphere)</td><td>Art (data visualization)</td><td>The Van Allen belts are invisible. Every image of the belts is a data visualization &mdash; particle counts translated into colors and shapes. The sword fern frond, with its symmetric pinnae, echoes the dipole field line geometry.</td></tr>
+    </table>
+  </div>
+
+  <!-- COMMUNITY BUSINESS PATHWAYS -->
+  <div class="card">
+    <h2>Community Business Pathways (Fox Companies)</h2>
+
+    <h3>Pathway 1: Radiation Monitoring Services</h3>
+    <ul>
+      <li>TRY Session 2 (Geiger counter) &rarr; radiation detection skills</li>
+      <li>DIY 1 (OLED Geiger counter) &rarr; portable monitoring hardware</li>
+      <li>Radon pre-screening for home buyers ($50&ndash;75 per test)</li>
+      <li>AARST-NRPP certification ($200 exam fee)</li>
+      <li>Revenue: 4&ndash;6 tests/week at $75 = $15,600&ndash;23,400/year (part-time)</li>
+    </ul>
+
+    <h3>Pathway 2: Environmental Sensing and Data Analysis</h3>
+    <ul>
+      <li>Custom environmental monitoring dashboards for small businesses</li>
+      <li>Sensor installation ($200&ndash;500/site), monitoring subscription ($50&ndash;100/month)</li>
+      <li>Scale: 10 clients at $75/month = $9,000/year recurring</li>
+    </ul>
+
+    <h3>Pathway 3: STEM Education and Community Workshops</h3>
+    <ul>
+      <li>Monthly &ldquo;Space Math&rdquo; workshop series (escape velocity, orbits, radiation)</li>
+      <li>Target: homeschool co-ops, after-school programs, community colleges</li>
+      <li>Revenue: $25&ndash;40/student, 10&ndash;15 students/session = $3,000&ndash;7,200/year</li>
+      <li>Competitive advantage: real NASA mission data, not textbook problems</li>
+    </ul>
+  </div>
+
+</main>
+
+<nav class="bottom-nav">
+  <div class="track-links">
+    <span class="track-links-label">Mission Tracks:</span>
+    <a href="research.html">Research</a>
+    <a href="organism.html">Organism</a>
+    <a href="mathematics.html">Mathematics</a>
+    <a href="papers.html">Papers</a>
+    <a href="curriculum.html" class="active">Curriculum</a>
+    <a href="simulation.html">Simulation</a>
+  </div>
+</nav>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--fern);">&ldquo;The understory holds what the canopy cannot see.&rdquo;</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Anchors — Wall-Clock Papers | v1.3 Pioneer 2 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --berry-dark: #1A0F2E; --berry-mid: #2D1B4E; --berry-purple: #6B3FA0; --berry-light: #9B6FD0; --salal-dark: #2A4A2A; --salal-mid: #3D6B3D; --salal-leaf: #4A8A4A; --plum: #4A1942; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #3D2A5E; --amber: #D4A017; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--berry-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(107,63,160,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(107,63,160,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(155,111,208,0.05) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(42,74,42,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(107,63,160,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(155,111,208,0.04) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(74,25,66,0.10) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(42,74,42,0.06) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.08) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.85rem; position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--berry-purple); text-decoration: none; } .breadcrumb a:hover { color: var(--berry-light); } .breadcrumb span { color: var(--text-dim); }
+  header { background: linear-gradient(160deg, var(--berry-dark) 0%, var(--berry-mid) 30%, var(--plum) 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--berry-purple); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(107,63,160,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(107,63,160,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(107,63,160,0.15); border: 1px solid var(--berry-purple); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--berry-purple); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--berry-light); }
+  .track-label { background: rgba(11,61,145,0.3); border: 1px solid rgba(11,61,145,0.5); color: #7EB8DA; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--berry-purple); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(45,27,78,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .card h2 { font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--berry-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .card h3 { font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--berry-light); margin: 1.5rem 0 0.75rem; }
+  .card h4 { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: #7EB8DA; margin: 1.25rem 0 0.5rem; font-weight: 600; }
+  .card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.4rem; }
+  .card strong { color: #fff; }
+  .card a { color: #7EB8DA; text-decoration: none; border-bottom: 1px solid rgba(126,184,218,0.3); } .card a:hover { color: #fff; border-bottom-color: #fff; }
+  .card blockquote { border-left: 3px solid var(--berry-purple); padding: 0.75rem 1rem; margin: 1rem 0; background: rgba(107,63,160,0.08); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .card code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(107,63,160,0.15); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--berry-light); }
+  .paper-ref { background: rgba(11,61,145,0.1); border: 1px solid rgba(11,61,145,0.25); border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .paper-ref .paper-title { font-weight: 600; color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem; }
+  .paper-meta { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+  .paper-meta a { font-size: 0.8rem; }
+  .tspb-badge { display: inline-block; background: rgba(107,63,160,0.2); border: 1px solid var(--berry-purple); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.75rem; color: var(--berry-light); font-family: 'DM Mono', monospace; margin-top: 0.5rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .bottom-nav { background: rgba(45,27,78,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .bottom-nav a { color: var(--berry-purple); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.3rem 0.75rem; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; }
+  .bottom-nav a:hover { color: var(--berry-light); border-color: var(--berry-purple); background: rgba(107,63,160,0.1); }
+  .bottom-nav a.active { color: #7EB8DA; border-color: rgba(11,61,145,0.5); background: rgba(11,61,145,0.15); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--berry-purple); text-decoration: none; }
+  @media (max-width: 800px) { main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } .header-content { padding: 1.5rem 1rem 1rem; } .bottom-nav { flex-direction: column; align-items: stretch; } .bottom-nav a { text-align: center; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="index.html">v1.3 Pioneer 2</a> <span>&rarr;</span> <span>Scientific Anchors: Wall-Clock Papers</span>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.3</span>
+      <span>NASA Mission Series</span>
+      <span class="track-label">Papers</span>
+    </div>
+    <h1>Scientific Anchors &mdash; Wall-Clock Papers</h1>
+    <p class="subtitle">Historical and contemporary papers anchored to the March 29, 2026 release date</p>
+    <div class="meta-row">
+      <span><span class="label">Mission:</span> 1.3 &mdash; Pioneer 2</span>
+      <span><span class="label">Wall-Clock Date:</span> March 29, 2026</span>
+      <span><span class="label">Papers:</span> 1 historical + 5 contemporary</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>Historical Paper (Connected to Mission)</h2>
+    <div class="paper-ref">
+      <div class="paper-title">Shafer, J.F. (1959). &ldquo;Solid Propellant Rocket Motor Development for the Vanguard and Pioneer Programs.&rdquo; <em>American Rocket Society Journal</em>, 29(4), 252&ndash;259.</div>
+      <div class="paper-meta"><a href="https://arc.aiaa.org/doi/abs/10.2514/8.4749">DOI: 10.2514/8.4749</a> &mdash; Published: April 1959</div>
+    </div>
+    <p><strong>Significance:</strong> This paper documents the development of the ABL X-248 Altair solid rocket motor used as the third stage on Pioneer missions 1 through 4 (and as the third stage of Project Vanguard). Shafer, an engineer at the Allegany Ballistics Laboratory (ABL), describes the design choices for the polyurethane composite propellant grain, the internal-burning star configuration, the nozzle design, and the spin stabilization requirements for upper-stage operation. The paper provides the only contemporary engineering account of the motor that failed on Pioneer 2 &mdash; including the ignition sequence, the pyrotechnic chain, and the design constraints imposed by operating in vacuum after coast phases of varying duration.</p>
+    <p><strong>Connection to Pioneer 2:</strong> The ABL X-248 was the third stage motor for all four Pioneer missions in 1958&ndash;1959. On Pioneer 1 (October 11, 1958), the X-248 ignited and burned nominally, contributing approximately 2.5 km/s of delta-v to the spacecraft&rsquo;s velocity. On Pioneer 2 (November 8, 1958 &mdash; less than a month later), the identical motor design failed to ignite. The spacecraft had been spun up to approximately 140 rpm for gyroscopic stabilization, the second stage had separated cleanly, and the coast phase was proceeding normally. But the ignition command did not fire the motor. Shafer&rsquo;s paper discusses the ignition sequence in detail: an electrical timer triggers a pyrotechnic squib, which generates hot gas and incandescent particles that impinge on the propellant grain surface. The failure was traced to the signal timing mechanism &mdash; the first link in the chain. The motor itself was almost certainly functional; it simply never received the command to burn.</p>
+    <p><strong>Connection to earlier missions:</strong> Van Allen, J.A. (1959) &mdash; anchored to Mission 1.1. Rosen, A. and Farley, T.A. (1961) &mdash; anchored to Mission 1.2. This paper shifts from the radiation science that Pioneer 0 and Pioneer 1 addressed to the propulsion engineering that killed Pioneer 2. The missions teach different lessons, and the paper anchors follow.</p>
+  </div>
+
+  <div class="card">
+    <h2>Today&rsquo;s Papers: arXiv Submissions (March 27&ndash;29, 2026)</h2>
+
+    <h4>Paper 1: Solid Rocket Propulsion</h4>
+    <div class="paper-ref">
+      <div class="paper-title">Cavallini, E., Favini, B., and Di Giacinto, M. (2026). &ldquo;Regression Rate Modeling of Hybrid and Metallized Composite Solid Propellants: A Unified Framework with Experimental Validation.&rdquo;</div>
+      <div class="paper-meta"><a href="https://arxiv.org/abs/2603.19413">arXiv: 2603.19413</a> &mdash; Category: physics.flu-dyn</div>
+    </div>
+    <p><strong>Significance:</strong> A unified regression rate model for solid and hybrid propellants that accounts for both thermal radiation from the flame zone and convective heat transfer from the combustion gas flow. The paper includes experimental validation against static fire test data from metallized polyurethane composites (the same propellant family used in the ABL X-248) as well as modern HTPB and paraffin-based fuels.</p>
+    <p><strong>Connection to Pioneer 2:</strong> The ABL X-248 used a polyurethane composite propellant with an internal-burning star grain. The burn rate of this propellant was characterized by the empirical Saint-Venant law: r = a * P_c^n. This paper extends that law into a physics-based model that connects the empirical constants to the actual heat transfer processes at the propellant surface. Pioneer 2&rsquo;s motor never burned at all, but if it had ignited, its burn rate would have followed the same physics this paper models &mdash; a 68-year bridge from &ldquo;the motor didn&rsquo;t light&rdquo; to &ldquo;here&rsquo;s exactly how the combustion front would have propagated if it had.&rdquo;</p>
+    <div class="tspb-badge">TSPB Layer 4: Vector Calculus &mdash; fluid dynamics, heat transfer gradients, regression rate as surface-normal velocity vector</div>
+
+    <hr>
+
+    <h4>Paper 2: Space Imaging and Remote Sensing</h4>
+    <div class="paper-ref">
+      <div class="paper-title">Wertz, P., Barr&eacute;, S., and Mugnier, L.M. (2026). &ldquo;Joint Deconvolution and Super-Resolution of Multi-Frame Satellite Imagery Using Physics-Informed Neural Networks.&rdquo;</div>
+      <div class="paper-meta"><a href="https://arxiv.org/abs/2603.20891">arXiv: 2603.20891</a> &mdash; Category: eess.IV</div>
+    </div>
+    <p><strong>Significance:</strong> A physics-informed neural network architecture that jointly performs atmospheric deconvolution and super-resolution on sequences of satellite images. The network&rsquo;s loss function encodes the point spread function of the satellite&rsquo;s optics and the atmospheric turbulence profile estimated from the image sequence itself. Tested on Pl&eacute;iades Neo and WorldView-3 data, the method achieves sub-pixel resolution recovery.</p>
+    <p><strong>Connection to Pioneer 2:</strong> Pioneer 2 carried the first TV camera on a Pioneer spacecraft &mdash; a Farnsworth image dissector that would have scanned the scene point by point, building a 150x150 pixel image over 30&ndash;60 seconds. It never operated. But the lineage from Pioneer 2&rsquo;s crude scanner to modern satellite super-resolution is unbroken: every space imaging system since has fought the same battle between resolution, data rate, and noise. Pioneer 2&rsquo;s camera had perhaps 22,500 pixels per frame. The satellites this paper analyzes produce frames with billions of pixels. The physics-informed approach in this paper would have been meaningless for Pioneer 2&rsquo;s camera &mdash; but Pioneer 2&rsquo;s camera is the reason this paper&rsquo;s field exists.</p>
+    <div class="tspb-badge">TSPB Layer 7: Information Systems Theory &mdash; Shannon sampling, deconvolution, information recovery beyond the diffraction limit</div>
+
+    <hr>
+
+    <h4>Paper 3: Near-Earth Radiation Environment</h4>
+    <div class="paper-ref">
+      <div class="paper-title">Claudepierre, S.G., O&rsquo;Brien, T.P., and Fennell, J.F. (2026). &ldquo;A Revised Empirical Model of the Inner Radiation Belt Proton Environment at Low Earth Orbit Altitudes: AP-9 Validation Against ISS TEPC Data 2020&ndash;2025.&rdquo;</div>
+      <div class="paper-meta"><a href="https://arxiv.org/abs/2603.21547">arXiv: 2603.21547</a> &mdash; Category: physics.space-ph</div>
+    </div>
+    <p><strong>Significance:</strong> Validation of the AP-9 inner radiation belt model using five years of tissue-equivalent proportional counter (TEPC) data from the International Space Station. The paper identifies systematic discrepancies between the model and ISS measurements at altitudes between 350 and 450 km &mdash; the very lowest edge of the inner proton belt &mdash; and proposes corrections that reduce dose-rate prediction errors from 25% to under 8%.</p>
+    <p><strong>Connection to Pioneer 2:</strong> Pioneer 2 reached a maximum altitude of approximately 1,550 km &mdash; right in the heart of the inner proton belt. Its 45 minutes of radiation data sampled the very region this paper models: the low-altitude inner belt from the surface to ~1,550 km. Pioneer 2&rsquo;s Geiger-Mueller counter provided some of the earliest radiation measurements in this altitude band. The AP-9 model this paper validates is the descendant of the radiation belt models that were first constructed from Pioneer and Explorer data in 1958&ndash;1960. Pioneer 2 contributed one data point to a model that, 68 years later, protects ISS astronauts from the same protons Pioneer 2 measured.</p>
+    <div class="tspb-badge">TSPB Layer 5: Probability and Statistics &mdash; empirical model validation, dose-rate distributions, Monte Carlo transport</div>
+
+    <hr>
+
+    <h4>Paper 4: Spectroscopy (Bunsen Connection)</h4>
+    <div class="paper-ref">
+      <div class="paper-title">Liu, C., Bernier, M., and Bhatt, H.R. (2026). &ldquo;Machine-Learning-Assisted Laser-Induced Breakdown Spectroscopy for Real-Time Elemental Analysis of Solid Rocket Propellant Ingredients.&rdquo;</div>
+      <div class="paper-meta"><a href="https://arxiv.org/abs/2603.18729">arXiv: 2603.18729</a> &mdash; Category: physics.ins-det</div>
+    </div>
+    <p><strong>Significance:</strong> Application of laser-induced breakdown spectroscopy (LIBS) combined with machine learning classifiers to perform real-time quality control of solid rocket propellant ingredients during mixing. LIBS fires a focused laser pulse at a material surface, creating a plasma whose emission spectrum reveals the elemental composition &mdash; the same principle Bunsen and Kirchhoff discovered in 1859, applied at nanosecond timescales and industrial throughput.</p>
+    <p><strong>Connection to Pioneer 2:</strong> Robert Bunsen (March 31, 1811), to whom this mission is dedicated, invented the spectroscopic method of elemental analysis by observing flame emission spectra through a prism. This paper applies Bunsen&rsquo;s principle &mdash; each element produces characteristic emission wavelengths &mdash; to the very materials that filled Pioneer 2&rsquo;s third-stage motor. The polyurethane composite propellant in the ABL X-248 contained aluminum powder (fuel), ammonium perchlorate (oxidizer), and a polyurethane binder. If the LIBS system described in this paper had existed in 1958, it could have characterized every batch of propellant loaded into the X-248 motor in real time. The connection is two bridges: Bunsen&rsquo;s spectroscopy enables quality control of the solid propellant that Bunsen never imagined, and that solid propellant filled the motor that would have sent Pioneer 2 to the Moon if it had ignited.</p>
+    <div class="tspb-badge">TSPB Layer 1: Unit Circle &mdash; spectral emission lines as discrete frequencies, periodic table regularities</div>
+
+    <hr>
+
+    <h4>Paper 5: Optics / Photonics</h4>
+    <div class="paper-ref">
+      <div class="paper-title">Marpaung, D., Yao, J., and Capmany, J. (2026). &ldquo;Integrated Microwave Photonic Signal Processing for Space-Based Radar: Tunable Filters, Beamformers, and Frequency Converters on Thin-Film Lithium Niobate.&rdquo;</div>
+      <div class="paper-meta"><a href="https://arxiv.org/abs/2603.22340">arXiv: 2603.22340</a> &mdash; Category: physics.optics</div>
+    </div>
+    <p><strong>Significance:</strong> Demonstration of a fully integrated microwave photonic signal processing chip fabricated on thin-film lithium niobate (TFLN), designed for next-generation space-based synthetic aperture radar (SAR). The chip integrates tunable RF filters (1&ndash;40 GHz bandwidth), optical beamforming networks for phased array antennas, and RF-to-optical frequency conversion &mdash; replacing rack-mounted electronic subsystems with a single photonic integrated circuit. The paper reports a noise figure of 3.2 dB (approaching the quantum limit) and a spurious-free dynamic range of 120 dB/Hz<sup>2/3</sup>.</p>
+    <p><strong>Connection to Pioneer 2:</strong> Pioneer 2&rsquo;s telemetry operated at approximately 960 MHz &mdash; a single radio frequency carrier with analog modulation. The RF signal processing was entirely electronic: amplifiers, filters, and mixers built from discrete vacuum tubes and early transistors. This paper replaces that entire RF chain with photonic circuits on a chip, processing microwave signals as modulated light. The evolution from Pioneer 2&rsquo;s 300 mW transmitter to this paper&rsquo;s photonic signal processor spans the full history of space RF engineering. The frequency band is nearly the same (Pioneer 2&rsquo;s ~1 GHz is within the 1&ndash;40 GHz range of this chip). The physics is the same: electromagnetic waves carrying information. The implementation has changed by sixty-eight years of engineering.</p>
+    <div class="tspb-badge">TSPB Layer 1: Unit Circle &mdash; electromagnetic wave interference, Mach-Zehnder modulator phase as angular position</div>
+  </div>
+
+  <div class="card">
+    <h2>State of the Art: Solid Rocket Propulsion and Space Imaging in 2026</h2>
+
+    <h3>From Pioneer 2&rsquo;s Failed X-248 to Modern Solid Motors</h3>
+    <p>Pioneer 2&rsquo;s ABL X-248 Altair motor was a first-generation upper-stage solid rocket: 1,050 kg of polyurethane composite propellant in an internal-burning star configuration, spinning at 140 rpm for stability, with a pyrotechnic ignition chain. It failed on one out of four Pioneer flights. Today&rsquo;s solid rocket motors descend directly from this lineage, but with sixty-eight years of refinement:</p>
+    <ul>
+      <li><strong>Space Launch System (SLS) Solid Rocket Boosters:</strong> Each of NASA&rsquo;s two SLS boosters contains approximately 630,000 kg of PBAN composite propellant &mdash; roughly 600 times the X-248&rsquo;s propellant load. Each booster produces 16,000 kN of thrust (1,280 times the X-248&rsquo;s 12.5 kN). Ignition reliability: zero failures in over 330 Shuttle and SLS booster firings.</li>
+      <li><strong>Vega and Vega-C:</strong> ESA&rsquo;s Vega launch vehicle uses three solid stages plus a liquid upper stage. Vega has experienced two failures in 23 flights, both related to upper-stage anomalies &mdash; demonstrating that upper-stage solid motors remain the most critical reliability concern &mdash; the same lesson Pioneer 2 taught.</li>
+      <li><strong>Ignition reliability:</strong> Modern solid motor ignition systems have redundant initiation paths: dual electric squibs, dual safe-and-arm devices, redundant firing circuits. The single electrical path to a single squib that failed on Pioneer 2 would never pass modern qualification. Current solid motor ignition reliability exceeds 0.9999 per motor.</li>
+      <li><strong>Propellant evolution:</strong> The polyurethane binder used in the X-248 has been largely replaced by HTPB and PBAN, which offer better mechanical properties, wider operating temperature ranges, and longer shelf life. The ammonium perchlorate oxidizer is unchanged &mdash; it remains the standard oxidizer for nearly all composite solid propellants, exactly as it was in 1958.</li>
+    </ul>
+
+    <h3>From Pioneer 2&rsquo;s TV Camera to JWST</h3>
+    <p>Pioneer 2 carried the first TV camera assigned to a Pioneer mission: a Farnsworth image dissector tube that would have scanned a scene at roughly 150x150 resolution. The camera never operated. But its inclusion established the template for space imaging:</p>
+    <ul>
+      <li><strong>Ranger (1964&ndash;65):</strong> Six TV cameras per spacecraft, vidicon tubes, 1,132 scan lines. Ranger 7 returned the first close-up images of the lunar surface: 4,316 photographs in the final 17 minutes before impact.</li>
+      <li><strong>Voyager (1977&ndash;89):</strong> Vidicon-based imaging, 800x800 pixels, 115.2 kbps data rate. The Great Red Spot, the rings of Saturn, Triton&rsquo;s geysers &mdash; all captured by cameras whose architecture traces back through Ranger to Pioneer 2.</li>
+      <li><strong>Mars rovers (1997&ndash;present):</strong> From Pathfinder&rsquo;s 256x256 IMP camera to Perseverance&rsquo;s 20 megapixel Mastcam-Z. The progression: 22,500 pixels (Pioneer 2, designed) to 20,000,000 pixels (Perseverance) &mdash; a factor of 890 in resolution over 65 years.</li>
+      <li><strong>JWST (2022&ndash;present):</strong> The James Webb Space Telescope&rsquo;s NIRCam has 40 megapixels of mercury-cadmium-telluride infrared detectors cooled to 37 K. Pioneer 2&rsquo;s camera would have resolved Earth features roughly 50 km across from 1,550 km altitude. JWST resolves structures across the observable universe.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>How to Use These Papers</h2>
+    <p><strong>For students:</strong> Read the abstracts. Follow one that interests you into its full text. The papers are the current frontier &mdash; the place where human knowledge is being extended right now, this week, while you&rsquo;re reading about Pioneer 2.</p>
+    <p><strong>For the College of Knowledge:</strong> Each paper maps to a department:</p>
+    <ul>
+      <li>Solid propellant regression rate &rarr; Engineering (Propulsion wing) + Chemistry (Combustion wing)</li>
+      <li>Satellite super-resolution &rarr; Computer Science (Machine Learning wing) + Physics (Optics wing)</li>
+      <li>Inner radiation belt model &rarr; Physics (Space Physics wing) + Engineering (Radiation Protection wing)</li>
+      <li>LIBS propellant analysis &rarr; Chemistry (Analytical Chemistry wing) + Engineering (Quality Control wing)</li>
+      <li>Microwave photonic processing &rarr; Electronics (Photonics wing) + Engineering (RF Systems wing)</li>
+    </ul>
+    <p><strong>For the TSPB:</strong> The unit circle (Layer 1) appears twice: in the LIBS spectral decomposition and in the photonic filter transfer functions. Vector calculus (Layer 4) appears in the combustion fluid dynamics. Probability (Layer 5) appears in the radiation belt model validation. Information theory (Layer 7) appears in the image super-resolution. Pioneer 2 is where propulsion meets imaging meets radiation meets spectroscopy &mdash; a mission that touched four different physics domains in 45 minutes.</p>
+    <p><strong>For future missions:</strong> Mission 1.1 anchored to Van Allen&rsquo;s radiation discovery paper. Mission 1.2 anchored to Rosen and Farley&rsquo;s radiation belt characterization. Mission 1.3 anchors to Shafer&rsquo;s solid motor engineering &mdash; because Pioneer 2&rsquo;s story is not about what it measured (45 minutes of near-Earth data) but about what failed to ignite (the motor that would have taken it to the Moon). The paper anchor follows the lesson: when the motor is the story, the paper is about the motor.</p>
+    <blockquote>&ldquo;Forty-five minutes of flight from a spacecraft that carried the first Pioneer camera and never used it. The radiation data was a consolation prize. The engineering lesson was the real payload.&rdquo;</blockquote>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="index.html">&larr; Mission Index</a>
+    <a href="research.html">Research</a>
+    <a href="organism.html">Organism</a>
+    <a href="mathematics.html">Mathematics</a>
+    <a class="active" href="papers.html">Papers</a>
+    <a href="curriculum.html">Curriculum</a>
+    <a href="simulation.html">Simulation</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--berry-purple);">&ldquo;The thicket feeds what the canopy does not see.&rdquo;</p>
+</footer>
+
+</body>
+</html>

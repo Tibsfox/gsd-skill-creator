@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism Pairing — v1.4 Pioneer 3 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --bark-dark: #1A1408;
+    --bark-mid: #2A2010;
+    --lichen-gold: #B8C99D;
+    --lichen-light: #D4DEB2;
+    --forest-deep: #1A2A1A;
+    --forest-mid: #2A3D2A;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #3D3A20;
+    --amber: #D4A017;
+    --amber-light: #F0D060;
+    --amber-dark: #8B6914;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--bark-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(184,201,157,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(212,222,178,0.05) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(26,42,26,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(184,201,157,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(212,222,178,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(26,42,26,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(184,201,157,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(42,61,42,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--lichen-gold); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--lichen-light); }
+  .breadcrumb span { margin: 0 0.4rem; }
+  header {
+    background: linear-gradient(160deg, var(--bark-dark) 0%, var(--bark-mid) 30%, var(--forest-deep) 60%, var(--forest-mid) 100%);
+    border-bottom: 3px solid var(--lichen-gold);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(184,201,157,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,201,157,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2rem 2rem 1.5rem; position: relative; }
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(184,201,157,0.10); border: 1px solid var(--lichen-gold);
+    border-radius: 6px; padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--lichen-gold); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--lichen-light); }
+  .track-badge {
+    background: rgba(26,42,26,0.5); border: 1px solid var(--forest-mid);
+    color: var(--lichen-gold); padding: 0.2rem 0.6rem; border-radius: 4px;
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--lichen-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card {
+    background: rgba(42,32,16,0.5); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.3rem; color: var(--lichen-light);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card h3 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.05rem; color: var(--lichen-gold);
+    margin-top: 1.5rem; margin-bottom: 0.75rem;
+  }
+  .card p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  .card ul, .card ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .card li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.5rem; }
+  .card li strong { color: var(--lichen-light); }
+  .card em { color: var(--text-dim); }
+  .resonance-card { border-color: var(--lichen-gold); background: rgba(184,201,157,0.04); }
+  .resonance-axis { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(184,201,157,0.12); }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--lichen-gold); color: var(--bark-dark); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.6; }
+  .axis-title { font-weight: 600; color: var(--lichen-light); }
+  .taxonomy-card { background: rgba(11,61,145,0.10); border: 1px solid rgba(11,61,145,0.3); }
+  .taxonomy-card h2 { color: #7EB8DA; }
+  .nav-card {
+    background: rgba(42,32,16,0.3); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--lichen-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--lichen-light); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--lichen-gold); text-decoration: none; }
+  @media (max-width: 800px) { .header-content { padding: 1.5rem 1rem; } main { padding: 1rem; } .card { padding: 1rem 1.25rem; } h1 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.4 Pioneer 3</a>
+  <span>&rsaquo;</span>
+  Track 2: Organism Pairing
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.4</span>
+      <span>NASA Mission Series</span>
+      <span class="track-badge">Track 2 &mdash; Organism</span>
+    </div>
+    <h1>Usnea longissima &mdash; Old Man&rsquo;s Beard Lichen</h1>
+    <p class="subtitle">The dual organism: a fungus and an alga living as one</p>
+    <div class="meta-row">
+      <span><span class="label">Scientific Name:</span> <em>Usnea longissima</em> Ach.</span>
+      <span><span class="label">Family:</span> Parmeliaceae</span>
+      <span><span class="label">PNW Status:</span> Native, declining</span>
+      <span><span class="label">Paired Mission:</span> 1.4 &mdash; Pioneer 3</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <h2>What Hangs in the Canopy</h2>
+    <p>Walk into the old growth on the western slope of the Cascades &mdash; the Hoh, the Quinault, the carbon river valleys of Mount Rainier&rsquo;s northwest face &mdash; and look up. Not at the canopy itself, not at the crown of the Douglas-fir or the top of the Sitka spruce. Look at the branches about twenty to forty meters up, the lower limbs of the canopy trees where enough light filters through to sustain photosynthesis but not enough to burn. Look at what hangs from them.</p>
+    <p>Pale green-gray strands, sometimes a meter long, sometimes two, sometimes three, draping from branch to branch like the hair of something ancient that fell asleep in the canopy a century ago and never woke up. The strands are fine &mdash; a few millimeters in diameter &mdash; and they move in any breeze, swaying slowly with a weight that seems too slight to generate momentum. They are not moss, though people call them moss. They are not parasites, though they look like something feeding on the tree. They are not even, in the conventional sense, a single organism.</p>
+    <p>They are <em>Usnea longissima</em>. Old Man&rsquo;s Beard. And they are two things at once.</p>
+    <p>Every strand of <em>Usnea longissima</em> is a partnership. The visible structure &mdash; the pale green filament that hangs from the branch, sways in the wind, catches the fog &mdash; is produced by a fungus, the mycobiont. The fungus builds the architecture: the outer cortex that protects against UV radiation and desiccation, the medullary fibers that provide tensile strength, the central cord that runs the length of the strand like a cable inside a suspension bridge. The fungus does the construction, the engineering, the structural work. But the fungus cannot feed itself. Fungi are heterotrophs &mdash; they cannot photosynthesize, cannot capture energy from light, cannot make sugar from air and water and sunshine.</p>
+    <p>The photosynthesis is done by the other partner: the photobiont, a green alga of the genus <em>Trebouxia</em>. The algal cells live embedded in the fungal matrix, clustered in a thin layer just below the outer cortex where light can reach them. They are microscopic &mdash; invisible without magnification. From the outside, you see only the fungal structure. But inside, the algal cells are working: capturing photons, splitting water molecules, fixing carbon dioxide into sugars, and sharing those sugars with the fungus that houses them. The fungus provides shelter, structure, and access to moisture and minerals. The alga provides food. Neither can survive alone in the wild. Together, they are <em>Usnea longissima</em>.</p>
+    <p>This is not symbiosis in the loose sense of mutual benefit. This is obligate mutualism &mdash; neither partner can complete its life cycle without the other. The fungus, without the alga, is a dead filament. The alga, without the fungus, is a free-floating cell vulnerable to desiccation, UV damage, and every passing herbivore. Together, they are a composite organism that can hang from a branch in a Pacific Northwest rainforest for decades, photosynthesizing through the fog, growing at a rate measured in millimeters per year, outlasting storms and droughts and the gradual decay of the branches that support them.</p>
+    <p>Two things, functioning as one. The duality is the organism.</p>
+  </div>
+
+  <div class="card">
+    <h2>Morphology and Growth</h2>
+    <p><em>Usnea longissima</em> is a fruticose lichen &mdash; the growth form that produces three-dimensional, shrubby or pendant structures rather than flat crusts or leafy lobes. Among fruticose lichens, it is the pendant specialist: where other <em>Usnea</em> species grow as tufted clumps or short beards, <em>longissima</em> grows long. The species epithet means &ldquo;longest,&rdquo; and it earns the name. Documented specimens have exceeded five meters in length. Typical mature strands in undisturbed PNW old growth range from one to three meters.</p>
+    <p>The strand is unbranched or very sparsely branched &mdash; another distinguishing feature. Most <em>Usnea</em> species produce abundantly branching thalli that form bushy clumps. <em>Usnea longissima</em> sends out a single main axis, or at most a few, that hangs straight down or drapes across branches. The effect is less bush, more curtain. In forests where it occurs in abundance, the accumulated strands create a visual texture unlike any other lichen: the canopy appears to be weeping.</p>
+    <p>The central cord &mdash; the axial strand running through the center of each filament &mdash; is a diagnostic feature of the genus <em>Usnea</em>. If you gently pull a strand of <em>Usnea</em> apart, the outer cortex and medulla will tear, but the central cord stretches elastically before breaking, like a wire inside a rubber tube. This cord provides the tensile strength that allows strands to grow to extreme lengths without breaking under their own weight. The engineering is remarkably efficient: the cord is a tiny fraction of the strand&rsquo;s cross-sectional area but bears most of the mechanical load. The rest of the structure &mdash; cortex, algal layer, medulla &mdash; is optimized for gas exchange, light capture, and water retention, not strength.</p>
+    <p>Growth rates are glacial by vascular plant standards. <em>Usnea longissima</em> grows approximately 1 to 5 centimeters per year in favorable conditions. A one-meter strand may represent twenty to fifty years of growth. A three-meter specimen in undisturbed old growth could easily be a century old. The growth is indeterminate &mdash; there is no programmed maximum size. The strand keeps growing as long as the fungal-algal partnership can capture enough resources and the substrate holds. What limits growth in practice is not biology but mechanics: eventually the strand becomes long enough and heavy enough that wind, ice, or the decay of the supporting branch breaks it free.</p>
+    <p>This breakage is not waste. It is reproduction. <em>Usnea longissima</em> reproduces primarily by fragmentation. When a strand breaks, the detached piece carries both partners &mdash; fungus and alga, the complete dual organism &mdash; and if it lands on a suitable substrate (another branch, in humid forest, with clean air), it can attach and resume growing. Vegetative reproduction by fragmentation is the primary way <em>Usnea longissima</em> colonizes new trees. Sexual reproduction &mdash; via apothecia, the cup-shaped spore-producing structures &mdash; does occur but is rare in this species. When it does happen, only the fungal spores are dispersed. The germinating fungal spore must encounter the correct alga species to reconstitute the lichen partnership. Fragmentation is more reliable because it disperses the proven, functional partnership intact.</p>
+  </div>
+
+  <div class="card">
+    <h2>Ecological Role: The Canopy Indicator</h2>
+    <p><em>Usnea longissima</em> does not build the forest. It does not stabilize slopes like sword fern&rsquo;s root networks. It does not fix nitrogen the way red alder&rsquo;s bacterial symbionts do. It does not create habitat structure like the standing dead trees that woodpeckers excavate. What <em>Usnea longissima</em> does is indicate.</p>
+    <p>Its presence tells you something. Its absence tells you more.</p>
+    <p><em>Usnea longissima</em> requires three conditions simultaneously: old-growth or mature forest structure (large branches in the mid-canopy that persist for decades, providing stable substrate), high ambient humidity (consistent fog, mist, or rainfall to maintain hydration in an organism that has no roots and cannot draw water from the soil), and clean air. The third condition is the critical one. <em>Usnea longissima</em> is exquisitely sensitive to air pollution, particularly sulfur dioxide. Concentrations that have no visible effect on vascular plants &mdash; that do not wilt leaves or yellow needles or reduce tree growth in any measurable way &mdash; are sufficient to kill <em>Usnea longissima</em>. The lichen has no protective cuticle, no stomata it can close, no root system to draw uncontaminated water from deep soil. It absorbs everything directly from the atmosphere through its entire surface. Whatever is in the air is in the lichen.</p>
+    <p>This makes <em>Usnea longissima</em> a bioindicator &mdash; an organism whose presence or absence reliably indicates environmental conditions that are difficult or expensive to measure directly. Air quality monitoring stations are expensive to build, expensive to operate, and sparse. They sample the air at one point. <em>Usnea longissima</em> samples the air everywhere it grows, continuously, for as long as it lives. A forest draped with Old Man&rsquo;s Beard is a forest with clean air. A forest where Old Man&rsquo;s Beard has disappeared &mdash; where the strands have thinned and shortened and finally vanished over a period of years &mdash; is a forest where something has changed in the atmosphere, possibly before any monitoring station has detected it.</p>
+    <p>Pioneer 3&rsquo;s Geiger-Mueller tubes were bioindicators of a different environment. The twin detectors measured the radiation intensity of cislunar space, producing a continuous profile of an environment that was invisible to every other sensor humanity possessed. You cannot see the Van Allen belts. You cannot feel them from the ground. You cannot detect them with optical telescopes or radio receivers (not directly). You detect them by sending an instrument through them and reading what it reports. Pioneer 3&rsquo;s instruments were the lichen of the magnetosphere &mdash; organisms (in the engineering sense) whose readings indicated the health and structure of an environment that was otherwise unobservable.</p>
+    <p>And like <em>Usnea longissima</em>, Pioneer 3&rsquo;s instruments were sensitive to exactly the thing that mattered. The Geiger-Mueller tubes responded to charged particle radiation &mdash; the specific hazard that would determine whether humans could safely transit the Van Allen belts en route to the Moon. The sensitivity was not accidental. Van Allen designed the instruments to measure exactly what needed measuring, just as evolution optimized <em>Usnea longissima</em> to respond to exactly the atmospheric conditions that determine old-growth forest health. Both are exquisitely tuned to their environment. Both report truthfully. Both are easy to ignore until you need what they are telling you.</p>
+  </div>
+
+  <div class="card">
+    <h2>Distribution and Decline</h2>
+    <p><em>Usnea longissima</em> ranges from southeastern Alaska south through British Columbia, Washington, Oregon, and into northern California, with the core of its distribution in the coastal fog belt and the west slope of the Cascades. It occurs at elevations from sea level to approximately 1,500 meters, always in areas where humidity is high and temperature is moderate. It is rare or absent east of the Cascade crest, where drier continental air and temperature extremes exceed its tolerance.</p>
+    <p>Within its range, <em>Usnea longissima</em> is declining. The two forces driving the decline are old-growth logging and air pollution, and they are complementary in the worst sense: logging removes the substrate, and pollution degrades the atmosphere. A second-growth forest, even if it grows to maturity, may never support <em>Usnea longissima</em> if the air quality has deteriorated in the decades since the old growth was cut. The lichen requires both the forest and the clean air simultaneously. Remove either one and it cannot persist.</p>
+    <p>In Washington state, <em>Usnea longissima</em> is most abundant in the Olympic Peninsula&rsquo;s old-growth valleys &mdash; the Hoh, Queets, and Quinault river drainages, where the combination of old trees, persistent fog, and distance from industrial sources creates the trifecta of conditions the lichen requires. It is present but less abundant in the old growth of the western Cascades, particularly in the upper Skagit and Nooksack river drainages. In the lowland Puget Sound basin, it is rare &mdash; too much development, too much air pollution, too few old trees.</p>
+    <p>The decline is slow and largely invisible. <em>Usnea longissima</em> does not die dramatically. It thins. The strands get shorter. New growth fails to keep pace with breakage. Over years, then decades, the canopy curtains that once characterized old-growth forests become sparse, then patchy, then absent. By the time someone notices the lichen is gone, the conditions that supported it may have been deteriorating for twenty years. The indicator species indicates most urgently by its absence, and absence is the hardest thing to notice.</p>
+    <p>This is the slow revelation resonance. The Van Allen belt structure was not revealed in a single flash of insight. Explorer 1 detected anomalous radiation in January 1958. Pioneer 1 extended the measurements in October 1958. Pioneer 3 resolved the dual-belt structure in December 1958. Van Allen and Frank published the definitive paper in 1959. The full picture took a year to assemble, from multiple missions, multiple instruments, multiple analysis cycles. Each measurement was partial. Each measurement contributed something the previous ones had not. The belts revealed themselves slowly, across missions, the way <em>Usnea longissima</em> reveals the health of a forest slowly, across decades.</p>
+  </div>
+
+  <div class="card">
+    <h2>Ethnobotany: Medicine from the Dual Organism</h2>
+    <p>Indigenous peoples of the Pacific Northwest used <em>Usnea</em> species &mdash; including <em>longissima</em> and the more common <em>U. barbata</em> and <em>U. hirta</em> &mdash; for purposes that reflect a practical understanding of the lichen&rsquo;s properties long before Western chemistry identified the active compounds.</p>
+    <p>The primary traditional use was as wound dressing. <em>Usnea</em> was applied directly to cuts, abrasions, and infections. The lichen was packed into wounds, wrapped around injuries, and used as a poultice. This practice was not sympathetic magic or cultural convention. It was applied pharmacology. <em>Usnea</em> contains usnic acid &mdash; a dibenzofuran derivative produced by the fungal partner &mdash; that has documented antimicrobial activity against a range of gram-positive bacteria, including <em>Staphylococcus aureus</em>, <em>Streptococcus</em> species, and <em>Mycobacterium tuberculosis</em>. The traditional wound dressing was a delivery mechanism for an antibiotic compound, centuries before germ theory.</p>
+    <p>Usnic acid is one of the most studied lichen metabolites. It disrupts bacterial cell membrane function and inhibits RNA synthesis. Its activity is primarily against gram-positive organisms &mdash; the same class of bacteria most commonly responsible for wound infections. The traditional use was targeting the right pathogens with the right compound, delivered in a matrix (the lichen thallus) that also provided physical wound coverage, moisture retention, and a slightly acidic microenvironment that further inhibited bacterial growth.</p>
+    <p><em>Usnea</em> was also used as bedding and baby diaper material. The absorbency of dried lichen &mdash; the medullary layer acts as a sponge &mdash; combined with the antimicrobial properties of usnic acid made it a practical choice for infant care in an environment where other absorbent materials might harbor harmful bacteria. The dual function &mdash; absorbent and antimicrobial &mdash; comes from the dual nature of the organism: the fungal structure provides absorbency, the fungal chemistry provides the antibiotic.</p>
+    <p>The dual organism produces dual utility. The partnership between fungus and alga, which enables the lichen to exist, also produces secondary metabolites &mdash; usnic acid, diffractaic acid, barbatic acid &mdash; that neither partner produces alone. The chemistry of partnership is richer than the chemistry of either individual. This is a literal expression of the principle that Pioneer 3&rsquo;s mission demonstrated at the institutional level: the ABMA-JPL partnership produced results (Explorer 1, Pioneer 3, the entire subsequent history of JPL planetary exploration) that neither organization could have produced alone. The Army had rockets but not spacecraft expertise. JPL had spacecraft and instruments but not heavy-lift launch vehicles. Together, they created the institutional lichen that explored the solar system.</p>
+  </div>
+
+  <div class="card resonance-card">
+    <h2>Resonance Axes</h2>
+    <div class="resonance-axis">
+      <span class="axis-num">1</span>
+      <div class="axis-text">
+        <span class="axis-title">Dual Nature:</span> <em>Usnea longissima</em> is two organisms functioning as one &mdash; a fungus and an alga in obligate mutualism, neither viable alone. Pioneer 3&rsquo;s most important discovery was that the Van Allen radiation environment is two structures, not one &mdash; an inner belt and an outer belt, distinct in altitude, particle population, and behavior, with a slot between them. The singular became plural. The lichen is dual by nature. The belts are dual by measurement. Pioneer 3 found the duality that was already there, the way close examination of a lichen strand reveals the algal cells that were already there inside the fungal cortex.
+      </div>
+    </div>
+    <div class="resonance-axis">
+      <span class="axis-num">2</span>
+      <div class="axis-text">
+        <span class="axis-title">Partnership:</span> The fungus-alga partnership within every strand of <em>Usnea longissima</em> mirrors the institutional partnership that created Pioneer 3. The Army Ballistic Missile Agency provided structure &mdash; the Juno II launch vehicle, the rocket that lifted everything off the ground. JPL provided the science &mdash; the spacecraft, the instruments, the telemetry that captured the data. ABMA was the fungus: the structural partner, the one that built the architecture. JPL was the alga: the photosynthetic partner, the one that captured the energy (the data) and turned it into something nourishing (scientific knowledge). Neither could have done it alone.
+      </div>
+    </div>
+    <div class="resonance-axis">
+      <span class="axis-num">3</span>
+      <div class="axis-text">
+        <span class="axis-title">Indicator Species:</span> <em>Usnea longissima</em> indicates old-growth forest health and air quality. Its presence means the conditions are right &mdash; old trees, clean air, persistent humidity. Its absence means something has degraded. Pioneer 3&rsquo;s Geiger-Mueller tubes indicated the radiation health of the space environment. Their readings told mission planners whether a given altitude was safe for satellites, for astronauts, for long-duration operations. Both the lichen and the instruments are truthful reporters of environmental conditions that determine what can live where.
+      </div>
+    </div>
+    <div class="resonance-axis">
+      <span class="axis-num">4</span>
+      <div class="axis-text">
+        <span class="axis-title">Light and Delicate:</span> <em>Usnea longissima</em> is wispy, almost weightless &mdash; a meter-long strand masses only a few grams. It hangs in the canopy like something that is not quite there, visible in the right light, invisible in the wrong light, always on the edge of being overlooked. Pioneer 3 was 5.87 kilograms &mdash; the lightest Pioneer, less than one-sixth the mass of the Air Force Pioneers that preceded it. Both are delicate structures that accomplished their purpose not through mass or force but through sensitivity. The lichen&rsquo;s sensitivity to air chemistry and the spacecraft&rsquo;s sensitivity to charged particle radiation are the same principle expressed at different scales.
+      </div>
+    </div>
+    <div class="resonance-axis">
+      <span class="axis-num">5</span>
+      <div class="axis-text">
+        <span class="axis-title">Slow Revelation:</span> <em>Usnea longissima</em> grows one to five centimeters per year. A meter-long strand is a biography of decades, written in millimeters. The lichen reveals the history of its environment through its length, its health, its presence or absence &mdash; but the revelation takes time. The Van Allen belt structure was revealed the same way: not in one mission but across Explorer 1, Pioneer 1, Pioneer 3, and subsequent missions. Each measurement added to the picture. Each mission saw a little farther, a little more clearly.
+      </div>
+    </div>
+    <div class="resonance-axis">
+      <span class="axis-num">6</span>
+      <div class="axis-text">
+        <span class="axis-title">Sensitivity:</span> <em>Usnea longissima</em> is exquisitely sensitive to sulfur dioxide and other air pollutants &mdash; concentrations invisible to human senses, harmless to vascular plants, are lethal to the lichen. It absorbs its entire environment through its surface, without filters, without defenses. Pioneer 3&rsquo;s twin Geiger-Mueller tubes were built to the same principle: open to the radiation environment, absorbing every charged particle that entered the detection volume, counting without discrimination, reporting the total. The lichen and the Geiger tube both succeed by being defenseless. What they cannot block, they can measure.
+      </div>
+    </div>
+  </div>
+
+  <div class="card taxonomy-card">
+    <h2>Taxonomy Note</h2>
+    <p>The genus name <em>Usnea</em> derives from the Arabic <em>ushnah</em> (or Persian <em>ushna</em>), meaning &ldquo;lichen&rdquo; or &ldquo;moss.&rdquo; The word entered European botanical Latin through medieval Arabic medical texts, where <em>Usnea</em> species were described for their pharmaceutical properties &mdash; the same antimicrobial wound-dressing use documented in Pacific Northwest indigenous practices, independently discovered across an ocean and several millennia. The species epithet <em>longissima</em> is the superlative of the Latin <em>longus</em> &mdash; &ldquo;longest.&rdquo; The name was published by Erik Acharius in 1810, formally describing what PNW peoples and European herbalists had been using for centuries.</p>
+    <p>The authority citation &mdash; Ach. &mdash; records Acharius as the describing authority. Erik Acharius (1757&ndash;1819) was a Swedish botanist who is considered the founder of lichenology as a formal discipline. His <em>Methodus Lichenum</em> (1803) and <em>Lichenographia Universalis</em> (1810) established the taxonomic framework for classifying lichens &mdash; the same dual organisms that had resisted easy classification because they were not, strictly speaking, one thing. Acharius gave names to organisms that were partnerships, and in doing so, made it possible to study them systematically.</p>
+    <p>Pioneer 3 received its designation as part of the Pioneer sequence, but its institutional classification changed. Conceived as an Army-JPL mission, it launched three days after JPL became a NASA laboratory. The spacecraft did not change. The instruments did not change. The trajectory did not change. What changed was the name on the letterhead. Like <em>Usnea longissima</em> &mdash; the same organism whether you call it a fungus, an alga, a lichen, or Old Man&rsquo;s Beard &mdash; Pioneer 3 was the same spacecraft regardless of which institution claimed it. The naming conventions shift to match the institutions. The organism remains what it has always been.</p>
+  </div>
+
+  <div class="nav-card">
+    <a href="research.html">&larr; Track 1: Research</a>
+    <a href="mathematics.html">Track 3: Mathematics &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--lichen-gold);">&ldquo;Two things, functioning as one. The duality is the organism.&rdquo;</p>
+</footer>
+
+</body>
+</html>

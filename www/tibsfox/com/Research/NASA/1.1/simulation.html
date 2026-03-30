@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Creative Arts — v1.1 Pioneer 0 | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --fire-dark: #1A0A0A; --fire-mid: #3A1A1A; --magenta: #C850C0; --magenta-light: #E8A0E0; --fireweed: #D63384; --ash: #6B6B6B; --ember: #FF6B35; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #4A2A2A; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--fire-dark); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(1px 1px at 8% 12%, rgba(200,80,192,0.12) 0%, transparent 100%), radial-gradient(1px 1px at 22% 35%, rgba(200,80,192,0.08) 0%, transparent 100%), radial-gradient(1px 1px at 40% 8%, rgba(200,80,192,0.10) 0%, transparent 100%), radial-gradient(1px 1px at 55% 60%, rgba(255,107,53,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 70% 25%, rgba(200,80,192,0.12) 0%, transparent 100%), radial-gradient(1px 1px at 85% 50%, rgba(200,80,192,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 15% 80%, rgba(11,61,145,0.10) 0%, transparent 100%), radial-gradient(2px 2px at 60% 85%, rgba(255,107,53,0.08) 0%, transparent 100%), radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.10) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  header { background: linear-gradient(160deg, var(--fire-dark) 0%, var(--fire-mid) 30%, #2D0D47 60%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--magenta); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(200,80,192,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(200,80,192,0.04) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--magenta); text-decoration: none; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(200,80,192,0.15); border: 1px solid var(--magenta); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--magenta); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: var(--magenta-light); }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1rem; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .card { background: rgba(58,26,26,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px); }
+  .spec-card { background: rgba(45,13,71,0.25); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem 2rem; margin-bottom: 1rem; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--magenta-light); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--fireweed); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 1rem; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.4rem; }
+  strong { color: #fff; font-weight: 600; }
+  em { font-style: italic; color: var(--magenta-light); }
+  a { color: var(--magenta); text-decoration: none; }
+  a:hover { color: var(--magenta-light); }
+  pre { background: rgba(26,10,10,0.8); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin-bottom: 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--text); }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; font-size: 0.9rem; }
+  thead th { background: rgba(200,80,192,0.15); color: var(--magenta-light); font-weight: 600; text-align: left; padding: 0.75rem 1rem; border: 1px solid var(--border); }
+  tbody td { padding: 0.6rem 1rem; border: 1px solid var(--border); color: var(--text); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .spec-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+  .spec-meta .label { color: var(--magenta); font-weight: 500; }
+  .meta-table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 0.9rem; }
+  .meta-table td { padding: 0.4rem 1rem 0.4rem 0; border-bottom: 1px solid rgba(74,42,42,0.5); vertical-align: top; }
+  .meta-table td:first-child { color: var(--magenta); font-weight: 500; white-space: nowrap; width: 160px; }
+  .track-nav { background: rgba(58,26,26,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-top: 2rem; }
+  .track-nav h3 { font-size: 0.9rem; color: #7EB8DA; margin-top: 0; margin-bottom: 0.75rem; font-family: 'DM Sans', sans-serif; font-weight: 600; }
+  .track-nav-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .track-nav-links a { display: inline-block; background: rgba(200,80,192,0.1); border: 1px solid var(--border); border-radius: 4px; padding: 0.35rem 0.75rem; font-size: 0.8rem; color: var(--magenta); font-family: 'DM Mono', monospace; transition: all 0.2s; }
+  .track-nav-links a:hover { background: rgba(200,80,192,0.2); border-color: var(--magenta); color: var(--magenta-light); }
+  .track-nav-links a.current { background: rgba(200,80,192,0.25); border-color: var(--magenta); color: var(--magenta-light); font-weight: 500; }
+  .nav-card { background: rgba(58,26,26,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; }
+  .nav-card a { color: var(--magenta); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--magenta-light); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--magenta); text-decoration: none; }
+  @media (max-width: 800px) { main { padding: 1rem; } h1 { font-size: 1.6rem; } .card, .spec-card { padding: 1rem 1.25rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="breadcrumb"><a href="index.html">v1.1 Pioneer 0</a> / Simulation &amp; Creative Arts</div>
+    <div class="mission-badge"><span class="version-number">v1.1</span><span>Track 5: Simulation &amp; Arts</span></div>
+    <h1>What to Build, Train, Visualize, and Create</h1>
+    <p class="subtitle">Pioneer 0 (Thor-Able 1) &mdash; RTX 4060 Ti target hardware</p>
+  </div>
+</header>
+
+<main>
+
+  <div class="card">
+    <table class="meta-table">
+      <tr><td>Mission</td><td>Pioneer 0 (Thor-Able 1) &mdash; First US Lunar Probe Attempt</td></tr>
+      <tr><td>Hardware Target</td><td>RTX 4060 Ti (8GB VRAM), 60GB RAM, i7-6700K</td></tr>
+      <tr><td>Organism</td><td><em>Chamerion angustifolium</em> (Fireweed)</td></tr>
+    </table>
+  </div>
+
+  <!-- Section A: Simulations -->
+  <div class="card">
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <div class="spec-card">
+      <h3>A1. Python: Thor-Able Trajectory Simulation (77 Seconds)</h3>
+      <p>A physics simulation of Pioneer 0's actual flight from T+0 to T+77 seconds, modeling thrust, gravity, drag, and the moment of turbopump failure. The simplest possible orbital mechanics simulation &mdash; only 77 seconds of flight.</p>
+      <pre># pioneer0_trajectory.py
+# Parameters (real):
+#   Launch mass: ~49,895 kg (Thor wet) + ~1,200 kg (upper + spacecraft)
+#   Thrust: 667 kN (sea level)
+#   Burn rate: ~175 kg/s (RP-1/LOX)
+#   Gravity turn at ~T+10, Max-Q at ~T+55-60
+#   Thrust cutoff at T+73.6 (bearing failure)
+#   Vehicle breakup at ~16 km altitude
+#
+# Outputs: Altitude vs time, Velocity vs time, Dynamic pressure (Q) vs time
+# Libraries: numpy, matplotlib, scipy.integrate
+# Difficulty: Intermediate | Duration: 2-3 hours</pre>
+      <p><strong>Key learning moments:</strong> Watching altitude climb smoothly to 16 km then stop. Seeing Max-Q &mdash; the peak stress point the vehicle survived before the bearing killed it. Understanding 77 seconds consumed ~12,775 kg of propellant.</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>A2. Python: Turbopump Bearing Stress Model</h3>
+      <p>Simplified mechanical engineering simulation of bearing loads in a rocket turbopump. Models Hertzian contact stress, L10 bearing life (Lundberg-Palmgren), thermal expansion mismatch, and stress intensity factor growth. Shaft RPM: ~6,000; radial load: ~15 kN; thermal gradient: &minus;183&deg;C (LOX) to +300&deg;C (gas generator).</p>
+      <p class="spec-meta"><span class="label">Difficulty:</span> Advanced | <span class="label">Duration:</span> 4&ndash;6 hours</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>A3. Minecraft: Cape Canaveral Launch Complex 17A</h3>
+      <p>Scale 1 block = 0.5 meters. Launch Pad 17A (concrete pad, flame deflector, hold-down clamps). Service Tower (50 blocks, iron bar lattice, swing arms with pistons). Thor-Able rocket (44 blocks tall, gold blocks for Pioneer 0 spacecraft, campfire engine flames). Redstone launch sequence ending in TNT explosion at T+77.</p>
+      <p class="spec-meta"><span class="label">Build time:</span> 4&ndash;8 hours | <span class="label">Materials:</span> ~2,000 blocks</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>A4. Blender: Pioneer 0 Launch and Failure Animation</h3>
+      <p>30-second Cycles animation. 750 frames at 30fps. Ground-level tracking camera. Thor-Able model (white metallic, copper engine bell, gold Pioneer 0). Volumetric fire simulation, rigid body fracture at T+77, debris particle system. Estimated render: 2&ndash;4 hours on RTX 4060 Ti.</p>
+      <p class="spec-meta"><span class="label">Build time:</span> 8&ndash;16 hours | <span class="label">Resolution:</span> 1920&times;1080, 128 samples denoised</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>A5. GLSL Shader: Rocket Exhaust and Explosion</h3>
+      <p>Real-time fragment shader. Phase 1 (0&ndash;0.7): steady exhaust plume with Mach diamond shock pattern, 3D Perlin noise turbulence. Phase 2 (0.7&ndash;0.8): thrust decay, asymmetric flicker. Phase 3 (0.8&ndash;1.0): expanding fireball (sphere SDF + noise displacement), debris particles, smoke column. Blackbody radiation color ramp. Target: 60fps at 1080p.</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>A6. Arduino: Pioneer 0 Telemetry Display</h3>
+      <p>Arduino Uno + SSD1306 OLED 128&times;64 + 5-LED bar + piezo buzzer + pushbutton. Total: ~$44.</p>
+      <pre>Display Layout:
+  PIONEER 0  T+00:00
+  ALT: 0000m  VEL: 000m/s
+  Q: 000 kPa  THR: 100%
+  [progress bar]  STATUS</pre>
+      <p>Button press &rarr; countdown from T&minus;10 &rarr; ignition (green LEDs) &rarr; flight data updates &rarr; T+73.6: "BEARING FAILURE" (red LED, alarm) &rarr; T+77: "RANGE SAFETY: DESTRUCT" (all LEDs flash). Data pre-computed from Python simulation (A1) stored in PROGMEM.</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>A7. GMAT: Intended Lunar Transfer Trajectory</h3>
+      <p>GMAT script modeling the trajectory Pioneer 0 WOULD have flown. Launch: Aug 17, 1958, 12:18 UTC. Three burns: Thor (dv ~3,540 m/s), Able (dv ~4,200 m/s), X248 (dv ~3,160 m/s). Total: ~10,900 m/s. 3D plot Earth to Moon, mark T+77 on the trajectory. The student sees the whole trajectory and where Pioneer 0 stopped.</p>
+      <p class="spec-meta"><span class="label">Difficulty:</span> Advanced | <span class="label">Duration:</span> 3&ndash;5 hours</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>A8. Godot 4: Interactive Launch Simulation</h3>
+      <p>Player controls camera (orbit, zoom, free-fly). Real-time countdown, 77-second flight, bearing whine at T+73.6, explosion with camera shake at T+77. Post-failure freeze frame with telemetry overlay. Export: Linux x86_64 binary + HTML5/WebAssembly.</p>
+      <p class="spec-meta"><span class="label">Build time:</span> 8&ndash;12 hours | <span class="label">Difficulty:</span> Intermediate | GDScript</p>
+    </div>
+  </div>
+
+  <!-- Section B: ML -->
+  <div class="card">
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <div class="spec-card">
+      <h3>B1. Time Series Anomaly Detection: Turbopump Telemetry</h3>
+      <p>LSTM autoencoder on synthetic turbopump telemetry (RPM, vibration_x/y, temperature, pressure). 10,000 normal training runs, 100+100 test with injected bearing degradation. Learn: how anomaly detection works, why NASA monitors all turbopumps now, the difference between detection and prediction.</p>
+      <p class="spec-meta"><span class="label">GPU:</span> RTX 4060 Ti (8GB sufficient) | <span class="label">Training:</span> ~10 min</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>B2. Image Classification: Launch Failure Categorization</h3>
+      <p>ResNet-18 transfer learning. 200&ndash;500 images from NASA Image Library. 5 classes: nominal_launch, stage_separation, explosion, pad_fire, debris. Fine-tune last 2 layers, augmentation. Target: 85%+ accuracy.</p>
+    </div>
+  </div>
+
+  <!-- Section C: CS -->
+  <div class="card">
+    <h2>C. Computer Science &mdash; What Pioneer 0 Teaches</h2>
+
+    <div class="spec-card">
+      <h3>C1. Fault Tolerance and Redundancy</h3>
+      <p>Pioneer 0 had NO redundancy in its turbopump. Modern rockets use: redundant avionics (TMR), engine-out capability (Falcon 9), health monitoring with automatic shutdown.</p>
+      <p><strong>Exercise:</strong> Design a fault tree for the LR-79 turbopump. Identify SPOFs. Propose redundancy additions and calculate mass/cost penalty. At what point does redundancy mass exceed payload mass?</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>C2. Real-Time Systems: The Range Safety Officer's Decision</h3>
+      <p>Binary, irreversible decision (destruct/no-destruct) based on noisy real-time tracking data. Deadline before vehicle crosses destruct line. False positive wastes a mission; false negative endangers lives.</p>
+      <p><strong>Exercise:</strong> Implement a simplified RSO algorithm. Given noisy position/velocity data and a destruct boundary, determine when to send the command. Explore the tradeoff using an ROC curve.</p>
+    </div>
+  </div>
+
+  <!-- Section D: Game Theory -->
+  <div class="card">
+    <h2>D. Game Theory &mdash; What Trade-Offs</h2>
+
+    <div class="spec-card">
+      <h3>D1. The Pioneer Schedule Game</h3>
+      <p>ARPA had to decide: launch four attempts before IGY deadline, or delay for more testing.</p>
+      <table>
+        <thead><tr><th></th><th>IGY On Time</th><th>Miss IGY Deadline</th></tr></thead>
+        <tbody>
+          <tr><td><strong>4 attempts, accept risk</strong></td><td>Possible success + prestige</td><td>Failures but data gathered</td></tr>
+          <tr><td><strong>Delay for testing</strong></td><td>No IGY entry</td><td>Better odds per attempt</td></tr>
+        </tbody>
+      </table>
+      <p>The Soviets also had a player: Luna 1 (January 1959) was in development. Model as 2-player game. Find Nash equilibrium. Connect to Prisoner's Dilemma structure of arms races.</p>
+    </div>
+  </div>
+
+  <!-- Section E: Creative Arts -->
+  <div class="card">
+    <h2>E. Creative Arts &mdash; What to Create</h2>
+
+    <div class="spec-card">
+      <h3>E1. GLSL Screensaver: Fireweed Bloom Cycle</h3>
+      <p>Linux-compatible screensaver. Procedural fireweed meadow: parallax layers (3&ndash;5 depth planes), progressive bloom (buds &rarr; flowers &rarr; seed pods), white pappus particles on simulated wind, season cycle (green &rarr; magenta &rarr; brown &rarr; snow &rarr; green). PNW mountain silhouette background. One stem briefly catches fire (Pioneer 0 reference), then fireweed grows where it burned.</p>
+      <p>SDF rendering for stems/flowers, 2D Perlin noise wind, 100&ndash;200 seed particles, ray marching for distant volumetric seed clouds. Palette: #C850C0 (magenta), #4A0E4E (deep purple), #2D5016 (stem green). XScreenSaver-compatible module.</p>
+      <p class="spec-meta"><span class="label">Target:</span> 60fps @ 1080p on RTX 4060 Ti | <span class="label">Build time:</span> 6&ndash;10 hours</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>E2. Data Visualization: Early Launch Success Rates</h3>
+      <p>D3.js interactive timeline (1957&ndash;1962). Each launch a dot: X=date, Y=vehicle type, color=outcome (green/yellow/red), size=payload mass. Pioneer 0 highlighted. Running success rate overlay. Data: McDowell's Launch Vehicle Database.</p>
+      <p class="spec-meta"><span class="label">Format:</span> Static HTML + D3.js v7 (CDN) | <span class="label">Build time:</span> 4&ndash;6 hours</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>E3. Technical Illustration: Thor-Able Cutaway Drawing</h3>
+      <p>Detailed SVG. Half-section (left cutaway, right exterior). Annotated: LR-79 engine bell, turbopump assembly (highlighted RED), RP-1 + LOX tanks, Able second stage, X248 motor, Pioneer 0 spacecraft (gold, instruments labeled). Dimensions: 27.4 m total, 2.44 m diameter, 51,000 kg launch mass, 38 kg spacecraft.</p>
+      <p class="spec-meta"><span class="label">Tools:</span> Inkscape | <span class="label">Build time:</span> 6&ndash;10 hours</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>E4. Sound Design: "T+77"</h3>
+      <p>90-second audio reconstruction. 0:00&ndash;0:10 Cape Canaveral ambient. 0:10&ndash;0:15 countdown. 0:15&ndash;0:25 ignition + liftoff (bass rumble &rarr; full-spectrum roar). 0:25&ndash;1:00 ascent (Doppler-shifting roar). 1:00&ndash;1:07 bearing failure (metallic grinding harmonic). 1:07&ndash;1:10 silence (thrust cutoff). 1:10&ndash;1:15 explosion. 1:15&ndash;1:30 debris, return to ambient, one bird call.</p>
+      <p class="spec-meta"><span class="label">Tools:</span> Audacity, SuperCollider, or Vital synth | <span class="label">Build time:</span> 3&ndash;5 hours</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>E5. Generative Art: "80,000 Seeds"</h3>
+      <p>p5.js/Processing sketch. Seeds released from central point, carried by 2D Perlin flow field. Each seed leaves a faint trail (#C850C0, alpha 2&ndash;5). 80,000 total seeds (matching real fireweed). Canvas: 3840&times;2160 (4K). Finished image: organic flowing pattern in magenta on black &mdash; resembles mycelial network or river delta. Each seed is an attempt, each path is a trajectory, the pattern IS the program.</p>
+      <p class="spec-meta"><span class="label">Output:</span> High-res PNG + animated MP4 | <span class="label">Build time:</span> 2&ndash;4 hours</p>
+    </div>
+  </div>
+
+  <!-- Section F: Problem Solving -->
+  <div class="card">
+    <h2>F. Problem Solving &mdash; Engineering Methodology</h2>
+
+    <div class="spec-card">
+      <h3>F1. Root Cause Analysis: Pioneer 0 Failure Investigation</h3>
+      <p>Ishikawa (Fishbone) Diagram + 5 Whys:</p>
+      <p><strong>Categories:</strong> Machine (turbopump spec), Material (bearing alloy, lubricant), Method (acceptance testing), Measurement (vibration monitoring &mdash; absent in 1958), Environment (launch loads, thermal gradient), Human (IGY schedule pressure).</p>
+      <pre>5 Whys:
+  1. Why did Pioneer 0 fail? Turbopump bearing failed.
+  2. Why did the bearing fail? Stress exceeded capacity.
+  3. Why was stress too high? Spec didn't account for thermal gradient.
+  4. Why not? Insufficient testing under combined conditions.
+  5. Why insufficient? IGY deadline compressed test schedule.
+
+Root cause: Schedule pressure + immature testing methodology
+Corrective action: Revised bearing spec + extended vibration testing</pre>
+      <p class="spec-meta"><span class="label">Duration:</span> 1&ndash;2 hours</p>
+    </div>
+  </div>
+
+  <!-- Section G: GSD Self-Improvement -->
+  <div class="card">
+    <h2>G. GSD Self-Improvement &mdash; What This Mission Teaches the System</h2>
+
+    <div class="spec-card">
+      <h3>G1. New Skill: Failure Analysis Documenter</h3>
+      <p>When a GSD execution fails (tests fail, build breaks, agent error), automatically generate a mini-RCA: what was attempted, what failed, 5 Whys analysis, corrective action applied, verification. This is Pioneer 0's lesson: failure is data. Extract it.</p>
+    </div>
+
+    <div class="spec-card">
+      <h3>G2. Hard Rule Candidate: The Bearing Rule</h3>
+      <p><strong>Proposed rule:</strong> <em>"No single untested component may exist on the critical path of a mission-critical pipeline."</em></p>
+      <p>Derived from Pioneer 0's turbopump bearing &mdash; a single point of failure not tested under combined thermal + mechanical load conditions. GSD application: before executing a multi-wave plan, verify every critical-path component has been independently tested. This is why we run Wave 0 (foundation) before Wave 1 (execution).</p>
+    </div>
+  </div>
+
+  <div class="track-nav">
+    <h3>Mission Tracks</h3>
+    <div class="track-nav-links">
+      <a href="research.html">Research</a>
+      <a href="organism.html">Organism</a>
+      <a href="mathematics.html">Mathematics</a>
+      <a href="papers.html">Papers</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="simulation.html" class="current">Simulation</a>
+    </div>
+  </div>
+
+  <div class="nav-card">
+    <a href="curriculum.html">&larr; Curriculum</a>
+    <a href="index.html">Back to v1.1 Pioneer 0 &rarr;</a>
+  </div>
+
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--magenta);">"The fireweed blooms, and the forest grows in its wake."</p>
+</footer>
+
+</body>
+</html>
