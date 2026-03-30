@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorer 5 — Fault Tree Analysis</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050505;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  h1 { font-size: 16px; color: #D4A830; text-align: center; margin-bottom: 5px; }
+  h2 { font-size: 11px; color: #888; text-align: center; font-weight: normal; margin-bottom: 15px; }
+  #tree-canvas {
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+  }
+  #info-panel {
+    max-width: 800px;
+    margin: 15px auto;
+    background: #0a0a15;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 11px;
+    line-height: 1.6;
+    min-height: 80px;
+  }
+  #info-panel .node-name { color: #D4A830; font-weight: bold; font-size: 13px; }
+  #info-panel .prob { color: #CC2020; }
+  #info-panel .desc { color: #aaa; margin-top: 4px; }
+  .legend {
+    text-align: center;
+    font-size: 10px;
+    color: #666;
+    margin-top: 10px;
+  }
+  .legend span { margin: 0 10px; }
+  .legend .lg { color: #40CC40; }
+  .legend .lr { color: #CC2020; }
+  .legend .la { color: #D4A830; }
+</style>
+</head>
+<body>
+<div id="container">
+  <h1>EXPLORER 5 FAULT TREE ANALYSIS</h1>
+  <h2>Interactive failure mode decomposition &mdash; August 24, 1958</h2>
+  <canvas id="tree-canvas" width="1200" height="700"></canvas>
+  <div id="info-panel">
+    <span style="color:#666;">Click any node to explore its failure mode and probability.</span>
+  </div>
+  <div class="legend">
+    <span class="la">&#9679; AND/OR Gate</span>
+    <span class="lg">&#9679; Success Path</span>
+    <span class="lr">&#9679; Failure Path (Explorer 5)</span>
+    <span>&#9679; Click to expand</span>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('tree-canvas');
+const ctx = canvas.getContext('2d');
+const infoPanel = document.getElementById('info-panel');
+
+// Fault tree data structure
+const nodes = [
+  {
+    id: 'top',
+    label: 'MISSION\nFAILURE',
+    type: 'or',
+    x: 600, y: 40,
+    prob: 0.33,
+    children: ['launch', 'separation', 'upper_stage', 'orbit'],
+    expanded: true,
+    highlight: true,
+    desc: 'Top event: Explorer 5 fails to achieve orbit. Any single stage failure causes total mission loss. The Juno I vehicle had approximately 33% historical failure rate across all missions.',
+  },
+  {
+    id: 'launch',
+    label: 'LAUNCH\nFAILURE',
+    type: 'or',
+    x: 200, y: 160,
+    prob: 0.05,
+    children: ['engine_fail', 'guidance_fail'],
+    expanded: false,
+    highlight: false,
+    desc: 'First stage launch failure. The Rocketdyne A-7 engine had good reliability by 1958, with approximately 95% success rate. Failures included combustion instability, turbopump seizure, and guidance malfunction.',
+  },
+  {
+    id: 'separation',
+    label: 'SEPARATION\nFAILURE',
+    type: 'or',
+    x: 450, y: 160,
+    prob: 0.15,
+    children: ['clearance', 'pyro_fail', 'spring_fail'],
+    expanded: true,
+    highlight: true,
+    desc: 'Upper cluster separation failure — THIS IS WHERE EXPLORER 5 FAILED. The spinning tub must separate cleanly from the booster. Failure modes include insufficient clearance, pyrotechnic bolt failure, and spring mechanism failure. The 15% probability reflects the tight mechanical tolerances involved.',
+  },
+  {
+    id: 'upper_stage',
+    label: 'UPPER STAGE\nFAILURE',
+    type: 'or',
+    x: 750, y: 160,
+    prob: 0.08,
+    children: ['solid_motor', 'timing'],
+    expanded: false,
+    highlight: false,
+    desc: 'Upper stage ignition or burn failure. The Juno I used clusters of Sergeant solid rocket motors. Failures included motor grain cracking, ignition delay, and burn-through.',
+  },
+  {
+    id: 'orbit',
+    label: 'ORBIT\nINSERTION\nFAILURE',
+    type: 'or',
+    x: 1000, y: 160,
+    prob: 0.05,
+    children: ['velocity', 'angle'],
+    expanded: false,
+    highlight: false,
+    desc: 'Orbit insertion failure even with good separation and upper stage performance. Includes velocity shortfall and incorrect insertion angle. The fourth-stage Baby Sergeant motor had to fire at precisely the right point in the trajectory.',
+  },
+  // Separation children (expanded)
+  {
+    id: 'clearance',
+    label: 'INSUFFICIENT\nCLEARANCE',
+    type: 'basic',
+    x: 300, y: 310,
+    prob: 0.10,
+    children: ['manufacturing', 'thermal', 'eccentric'],
+    expanded: true,
+    highlight: true,
+    desc: 'EXPLORER 5 ROOT CAUSE. Insufficient radial clearance between the spinning upper cluster and the booster body. The clearance margin was only a few centimeters, and manufacturing tolerance, thermal expansion, and mass eccentricity could all reduce it to zero. When the edge of the tub contacted the booster, the off-axis impulse induced nutation that destroyed the trajectory.',
+  },
+  {
+    id: 'pyro_fail',
+    label: 'PYRO BOLT\nFAILURE',
+    type: 'basic',
+    x: 450, y: 310,
+    prob: 0.03,
+    children: [],
+    expanded: false,
+    highlight: false,
+    desc: 'Pyrotechnic bolt failure to fire or incomplete separation. Explosive bolts that hold the spinning tub to the booster must fire simultaneously to release the assembly. A single bolt failure can cause asymmetric release and contact.',
+  },
+  {
+    id: 'spring_fail',
+    label: 'SPRING\nMECH FAIL',
+    type: 'basic',
+    x: 600, y: 310,
+    prob: 0.02,
+    children: [],
+    expanded: false,
+    highlight: false,
+    desc: 'Separation spring mechanism failure. The springs that push the spinning cluster away from the booster must provide sufficient velocity to clear the danger zone before the tub completes a rotation. Weak springs or asymmetric spring force can leave the tub in contact range.',
+  },
+  // Clearance children
+  {
+    id: 'manufacturing',
+    label: 'MANUFACTURING\nTOLERANCE',
+    type: 'basic',
+    x: 200, y: 460,
+    prob: 0.04,
+    children: [],
+    expanded: false,
+    highlight: true,
+    desc: 'Manufacturing tolerance stack-up reduces the designed clearance. Each component (booster shell, tub shell, adapter ring, pyro bolts) has dimensional tolerance. In the worst case, all tolerances accumulate to reduce clearance by 1-2 cm from the designed value.',
+  },
+  {
+    id: 'thermal',
+    label: 'THERMAL\nEXPANSION',
+    type: 'basic',
+    x: 350, y: 460,
+    prob: 0.03,
+    children: [],
+    expanded: false,
+    highlight: true,
+    desc: 'Differential thermal expansion from engine heat. The first-stage engine heats the booster body during the ~150-second burn. The hot booster shell expands slightly, reducing the clearance to the spinning tub. Temperature gradients can also cause the booster to bend (thermal bow), further reducing clearance on one side.',
+  },
+  {
+    id: 'eccentric',
+    label: 'MASS\nECCENTRICITY',
+    type: 'basic',
+    x: 500, y: 460,
+    prob: 0.03,
+    children: [],
+    expanded: false,
+    highlight: true,
+    desc: 'Mass imbalance in the spinning tub causes the center of rotation to differ from the geometric center. At 450 RPM, even a 2mm offset creates centrifugal displacement that can consume the entire clearance margin. The tub was balanced before flight, but asymmetric fuel grain burning in the solid motors could shift the center of mass during flight.',
+  },
+  // Other leaf nodes (not expanded by default)
+  {
+    id: 'engine_fail',
+    label: 'ENGINE\nFAILURE',
+    type: 'basic',
+    x: 150, y: 310,
+    prob: 0.03,
+    children: [],
+    expanded: false,
+    highlight: false,
+    desc: 'Rocketdyne A-7 engine failure during powered flight. Includes combustion instability, turbopump failure, and thrust chamber burn-through.',
+  },
+  {
+    id: 'guidance_fail',
+    label: 'GUIDANCE\nFAILURE',
+    type: 'basic',
+    x: 250, y: 310,
+    prob: 0.02,
+    children: [],
+    expanded: false,
+    highlight: false,
+    desc: 'First stage guidance system failure. The Juno I used a simple tilt program — failures could include gyroscope malfunction or attitude jet failure.',
+  },
+  {
+    id: 'solid_motor',
+    label: 'MOTOR\nFAILURE',
+    type: 'basic',
+    x: 700, y: 310,
+    prob: 0.05,
+    children: [],
+    expanded: false,
+    highlight: false,
+    desc: 'Sergeant solid rocket motor failure. Grain cracks, ignition failure, or case burn-through in any of the clustered motors.',
+  },
+  {
+    id: 'timing',
+    label: 'TIMING\nERROR',
+    type: 'basic',
+    x: 800, y: 310,
+    prob: 0.03,
+    children: [],
+    expanded: false,
+    highlight: false,
+    desc: 'Upper stage ignition timing error. The motors must fire at the precise moment when the spinning cluster is pointed in the correct direction.',
+  },
+  {
+    id: 'velocity',
+    label: 'VELOCITY\nSHORTFALL',
+    type: 'basic',
+    x: 950, y: 310,
+    prob: 0.03,
+    children: [],
+    expanded: false,
+    highlight: false,
+    desc: 'Insufficient velocity for orbital insertion. Even with good separation and upper stage burns, if total delta-v falls short of ~7.8 km/s, the payload enters a suborbital trajectory.',
+  },
+  {
+    id: 'angle',
+    label: 'WRONG\nANGLE',
+    type: 'basic',
+    x: 1050, y: 310,
+    prob: 0.02,
+    children: [],
+    expanded: false,
+    highlight: false,
+    desc: 'Incorrect orbital insertion angle. The fourth stage must fire at the right point in the ballistic arc. Angular error from spin-axis precession or timing error causes the orbit to intersect the atmosphere.',
+  },
+];
+
+const nodeMap = {};
+nodes.forEach(n => nodeMap[n.id] = n);
+
+let selectedNode = null;
+let hoverNode = null;
+let animTime = 0;
+
+function drawNode(node) {
+  const x = node.x;
+  const y = node.y;
+  const w = 90;
+  const h = node.label.split('\n').length * 14 + 16;
+
+  // Node background
+  ctx.fillStyle = node.highlight ? '#1a0808' : '#0a0a1a';
+  if (selectedNode === node.id) ctx.fillStyle = '#151530';
+  ctx.strokeStyle = node.highlight ? '#CC2020' : (node.type === 'or' ? '#D4A830' : '#555');
+  if (selectedNode === node.id) ctx.strokeStyle = '#D4A830';
+  ctx.lineWidth = node.highlight ? 2.5 : 1.5;
+
+  // Pulsing for Explorer 5's failure path
+  if (node.highlight) {
+    const pulse = 0.3 + 0.2 * Math.sin(animTime * 3);
+    ctx.shadowColor = `rgba(204, 32, 32, ${pulse})`;
+    ctx.shadowBlur = 10;
+  }
+
+  // Draw box
+  ctx.beginPath();
+  if (node.type === 'or') {
+    // OR gate shape — rounded rectangle
+    const r = 6;
+    ctx.moveTo(x - w/2 + r, y);
+    ctx.lineTo(x + w/2 - r, y);
+    ctx.arcTo(x + w/2, y, x + w/2, y + r, r);
+    ctx.lineTo(x + w/2, y + h - r);
+    ctx.arcTo(x + w/2, y + h, x + w/2 - r, y + h, r);
+    ctx.lineTo(x - w/2 + r, y + h);
+    ctx.arcTo(x - w/2, y + h, x - w/2, y + h - r, r);
+    ctx.lineTo(x - w/2, y + r);
+    ctx.arcTo(x - w/2, y, x - w/2 + r, y, r);
+  } else {
+    // Basic event — rectangle
+    ctx.rect(x - w/2, y, w, h);
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Gate symbol for OR nodes
+  if (node.type === 'or') {
+    ctx.fillStyle = '#D4A830';
+    ctx.font = '8px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('OR', x, y + h + 10);
+  }
+
+  // Label text
+  ctx.fillStyle = node.highlight ? '#CC2020' : '#ccc';
+  ctx.font = 'bold 9px monospace';
+  ctx.textAlign = 'center';
+  const lines = node.label.split('\n');
+  lines.forEach((line, i) => {
+    ctx.fillText(line, x, y + 14 + i * 13);
+  });
+
+  // Probability
+  ctx.fillStyle = node.prob > 0.10 ? '#CC2020' : (node.prob > 0.05 ? '#D4A830' : '#40CC40');
+  ctx.font = '9px monospace';
+  ctx.fillText((node.prob * 100).toFixed(0) + '%', x, y + h - 4);
+
+  // Expand indicator
+  if (node.children.length > 0) {
+    const indicator = node.expanded ? '[-]' : '[+]';
+    ctx.fillStyle = '#666';
+    ctx.font = '8px monospace';
+    ctx.fillText(indicator, x + w/2 - 10, y + 10);
+  }
+
+  // Store bounds for hit testing
+  node._bounds = { x: x - w/2, y, w, h };
+}
+
+function drawConnections(node) {
+  if (!node.expanded || node.children.length === 0) return;
+
+  const h = node.label.split('\n').length * 14 + 16;
+  const fromY = node.y + h;
+
+  node.children.forEach(childId => {
+    const child = nodeMap[childId];
+    if (!child) return;
+
+    ctx.strokeStyle = child.highlight ? 'rgba(204,32,32,0.6)' : 'rgba(100,100,120,0.4)';
+    ctx.lineWidth = child.highlight ? 2 : 1;
+    ctx.beginPath();
+    ctx.moveTo(node.x, fromY);
+    ctx.lineTo(node.x, fromY + 15);
+    ctx.lineTo(child.x, child.y - 15);
+    ctx.lineTo(child.x, child.y);
+    ctx.stroke();
+  });
+}
+
+function draw() {
+  animTime += 1/60;
+  ctx.fillStyle = '#050505';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Title
+  ctx.fillStyle = '#888';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Click nodes to expand failure modes. Red path = Explorer 5 failure chain.', 600, 690);
+
+  // Draw connections first (behind nodes)
+  nodes.forEach(n => drawConnections(n));
+
+  // Draw nodes
+  nodes.forEach(n => {
+    // Only draw if parent is expanded or it's a root
+    const parent = nodes.find(p => p.children.includes(n.id));
+    if (!parent || parent.expanded) {
+      drawNode(n);
+    }
+  });
+}
+
+// Hit testing
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  for (const node of nodes) {
+    if (!node._bounds) continue;
+    const b = node._bounds;
+    if (mx >= b.x && mx <= b.x + b.w && my >= b.y && my <= b.y + b.h) {
+      // Toggle expansion
+      if (node.children.length > 0) {
+        node.expanded = !node.expanded;
+      }
+      selectedNode = node.id;
+
+      // Update info panel
+      infoPanel.innerHTML = `
+        <div class="node-name">${node.label.replace(/\n/g, ' ')}</div>
+        <div class="prob">Probability: ${(node.prob * 100).toFixed(1)}%</div>
+        <div class="desc">${node.desc}</div>
+      `;
+      break;
+    }
+  }
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  let found = false;
+  for (const node of nodes) {
+    if (!node._bounds) continue;
+    const b = node._bounds;
+    if (mx >= b.x && mx <= b.x + b.w && my >= b.y && my <= b.y + b.h) {
+      canvas.style.cursor = 'pointer';
+      found = true;
+      break;
+    }
+  }
+  if (!found) canvas.style.cursor = 'default';
+});
+
+function loop() {
+  draw();
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>

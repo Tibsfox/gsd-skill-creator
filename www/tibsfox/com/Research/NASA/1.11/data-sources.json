@@ -1,0 +1,117 @@
+{
+  "mission": "1.11",
+  "title": "Explorer 5 (Juno I)",
+  "description": "Open datasets and source materials relevant to Explorer 5 (1958), the Juno I separation failure, Amanita muscaria (fly agaric mushroom), Townsend's Warbler (Setophaga townsendi), and the engineering of failure analysis",
+  "sources": [
+    {
+      "id": "nssdc-explorer-5",
+      "name": "NSSDC Master Catalog -- Explorer 5",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=EXPLR5",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Explorer 5. Documents the spacecraft as a failed mission: launched August 24, 1958, on a Juno I launch vehicle from Cape Canaveral. The upper stage contacted the booster during separation, inducing nutation that prevented orbital insertion. The payload carried improved Van Allen belt instruments including Geiger-Mueller tubes and a magnetometer. NSSDC designation EXPLR5 (no international designator assigned — failed missions do not receive COSPAR IDs). Records the intended orbit parameters and the actual suborbital trajectory.",
+      "mission_relevance": "Definitive source for Explorer 5 mission parameters and failure description. The NSSDC entry confirms the failure mode (separation contact), the intended instruments (Van Allen belt mappers), and the mission context (fifth in the Explorer series, third Juno I failure). Essential for establishing the mission narrative and the specific engineering failure that forms the core of this mission's educational content."
+    },
+    {
+      "id": "jpl-explorer-archive",
+      "name": "JPL Historical Archive -- Explorer Program",
+      "url": "https://www.jpl.nasa.gov/missions/explorer-1",
+      "type": "primary-source",
+      "category": "mission-history",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "Jet Propulsion Laboratory's historical archive of the Explorer program, including mission descriptions, technical specifications, launch records, and lessons learned for all Explorer missions from Explorer 1 (1958) through the extended program. The archive contextualizes Explorer 5 within the broader program: Explorer 1 (success, discovered Van Allen belts), Explorer 2 (failure, 4th stage), Explorer 3 (success, confirmed belts), Explorer 4 (success, Argus experiment), Explorer 5 (failure, separation contact). The archive documents JPL's role in designing the upper stages and the spinning tub separation mechanism that failed.",
+      "mission_relevance": "Provides the engineering context for the Juno I separation system design. JPL designed and built the upper stages including the spinning tub, the pyrotechnic separation mechanism, and the solid rocket motor clusters. The archive documents the design clearances, the spin-up procedure, and the post-failure analysis that identified the contact event. Essential for the separation dynamics, clearance margin, and fault tree analysis knowledge nodes."
+    },
+    {
+      "id": "nasa-failure-reports",
+      "name": "NASA Lessons Learned Information System (LLIS)",
+      "url": "https://llis.nasa.gov/",
+      "type": "primary-source",
+      "category": "failure-analysis",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "NASA's institutional repository of lessons learned from mission successes and failures. The LLIS contains entries for separation failures, tolerance stack-up problems, spin-stabilization anomalies, and clearance margin design guidelines that trace directly back to the Explorer-era experience. While the Explorer 5 entry itself may not be in the modern database (predates the system), the design guidelines for separation clearance, the FMEA methodology for stage separation, and the spin-stabilization stability criteria all incorporate lessons from the Juno I failures.",
+      "mission_relevance": "Provides the institutional knowledge that flowed from Explorer 5's failure into modern spacecraft design practices. The clearance margin guidelines, the requirement for Monte Carlo tolerance analysis, and the FMEA process for separation mechanisms all incorporate lessons that Explorer 5 taught through its failure. Essential for the reliability engineering, FMEA, and clearance margin knowledge nodes."
+    },
+    {
+      "id": "reliability-engineering-handbook",
+      "name": "MIL-HDBK-338B -- Electronic Reliability Design Handbook",
+      "url": "https://www.navsea.navy.mil/",
+      "type": "secondary-source",
+      "category": "engineering-standards",
+      "format": "PDF",
+      "access": "open (public domain)",
+      "description": "The military standard handbook for electronic and mechanical reliability engineering. Contains the mathematical foundations for reliability prediction, fault tree analysis, FMEA methodology, Monte Carlo simulation techniques, and series/parallel system reliability calculations. Originally developed in the late 1950s and early 1960s in direct response to the high failure rates of early missile and space programs — including the Explorer series. The handbook's emphasis on tolerance analysis, worst-case design, and probabilistic margin assessment reflects the engineering culture that developed after missions like Explorer 5 demonstrated the consequences of inadequate margin.",
+      "mission_relevance": "Provides the formal mathematical framework for all reliability analysis in this mission. The fault tree analysis methods (MIL-STD-1629), the FMEA process, the series system reliability calculations, and the Monte Carlo tolerance analysis techniques are all derived from or codified in this family of standards. Essential for the fault tree analysis, FMEA, reliability engineering, and Monte Carlo knowledge nodes."
+    },
+    {
+      "id": "fmea-standard",
+      "name": "SAE J1739 / MIL-STD-1629A -- FMEA Standards",
+      "url": "https://www.sae.org/standards/content/j1739_200901/",
+      "type": "secondary-source",
+      "category": "engineering-standards",
+      "format": "PDF",
+      "access": "restricted (SAE members) / MIL-STD public domain",
+      "description": "The formal standards for Failure Mode and Effects Analysis. MIL-STD-1629A (military) and SAE J1739 (automotive/aerospace) define the procedures for identifying failure modes, assessing their effects, and calculating Risk Priority Numbers. The military standard was developed in the 1960s-1970s partly in response to early space program failures where systematic failure analysis could have identified critical failure modes before flight. The RPN methodology (severity × probability × detectability) provides a quantitative framework for prioritizing design improvements.",
+      "mission_relevance": "Provides the formal methodology for the FMEA knowledge node. The Explorer 5 separation failure is a textbook case for FMEA: a failure mode with high severity (mission loss), moderate probability (tolerance-dependent), and low detectability (cannot verify clearance in flight) — yielding a high RPN that should have triggered design review. The FMEA exercise in the knowledge node uses this exact framework."
+    },
+    {
+      "id": "inaturalist-amanita",
+      "name": "iNaturalist -- Amanita muscaria Observations",
+      "url": "https://www.inaturalist.org/taxa/48715-Amanita-muscaria",
+      "type": "community-science",
+      "category": "ecology",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community science observations of Amanita muscaria (fly agaric) from iNaturalist's global database. Observations include geolocated photographs showing the full range of fruiting body morphology: perfect symmetrical caps with evenly distributed white patches, deformed caps where the veil tore unevenly, tilted stipes from soil obstruction, and the complete sequence from egg (universal veil intact) through veil-breaking to mature fruiting body with spore release. Distribution data shows the circumboreal range with particular abundance in Pacific Northwest forests under Sitka spruce, Douglas-fir, and birch.",
+      "mission_relevance": "Establishes the geographic and morphological context for the organism pairing. iNaturalist photographs document the full range of veil-breaking outcomes — from clean separation (symmetrical caps) to problematic separation (deformed, asymmetric caps) — providing direct visual analogies to the Explorer 5 separation failure. Photographs of the universal veil at various stages of tearing illustrate the clearance concept. Essential for the separation dynamics and clearance margin knowledge nodes."
+    },
+    {
+      "id": "borges-collected-works",
+      "name": "Jorge Luis Borges -- Collected Fictions and Essays",
+      "url": "https://www.penguinrandomhouse.com/books/110485/collected-fictions-by-jorge-luis-borges/",
+      "type": "secondary-source",
+      "category": "literature",
+      "format": "Books",
+      "access": "purchase required",
+      "description": "The collected short stories and essays of Jorge Luis Borges (1899-1986), including 'The Library of Babel' (1941), 'The Garden of Forking Paths' (1941), 'The Aleph' (1945), and 'Pierre Menard, Author of the Quixote' (1939). Borges was born August 24, 1899 — exactly 59 years before Explorer 5's failed launch on August 24, 1958. His work explores infinity (the Library contains every possible book), branching possibilities (the Garden of Forking Paths where every outcome exists), and the relationship between the real and the possible (the Aleph where all points in space are simultaneously visible).",
+      "mission_relevance": "Establishes the literary and philosophical context for the dedication and the story's thematic structure. Borges's Library of Babel contains the book of Explorer 5's orbital data — data that was never collected but exists as possibility. The Garden of Forking Paths is the metaphor for the separation moment where the mission's future branched into success and failure. The Aleph is the brief moment at apogee when the payload was inside the Van Allen belts, measuring them from within. Essential for the story 'The One That Didn't' and the screensaver's labyrinth mode."
+    },
+    {
+      "id": "juno-i-design-docs",
+      "name": "Army Ballistic Missile Agency -- Juno I Technical Reports",
+      "url": "https://ntrs.nasa.gov/",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open (NTRS)",
+      "description": "Technical reports from the Army Ballistic Missile Agency (ABMA) at Redstone Arsenal documenting the Juno I launch vehicle design, the upper stage spinning tub mechanism, the separation system specifications, and the post-flight failure analyses. Available through NASA Technical Reports Server (NTRS). Key reports include the Juno I vehicle description (JPL Technical Report 32-31), the separation mechanism design specification, and the Explorer 5 post-flight investigation report. The reports document the designed clearance, the separation spring specifications, the spin-up procedure, and the failure investigation conclusions.",
+      "mission_relevance": "Provides the primary engineering documentation for the Juno I separation system. The design specifications give the exact clearance margins, spring forces, and spin rates used in the simulations and knowledge node calculations. The failure investigation report confirms the contact event and identifies the contributing factors (tolerance, thermal expansion, eccentricity). Essential for the separation dynamics, nutation, and clearance margin knowledge nodes."
+    },
+    {
+      "id": "separation-mechanics-papers",
+      "name": "AIAA/AAS -- Launch Vehicle Stage Separation Papers",
+      "url": "https://arc.aiaa.org/",
+      "type": "secondary-source",
+      "category": "technical-papers",
+      "format": "PDF",
+      "access": "restricted (AIAA members) / some open access",
+      "description": "Academic and professional papers on launch vehicle stage separation dynamics from the American Institute of Aeronautics and Astronautics (AIAA) and the American Astronautical Society (AAS). Papers cover separation mechanism design, clearance analysis methods, contact dynamics modeling, nutation analysis for spinning bodies, and the evolution of separation technology from the Juno I era (pyrotechnic bolts and springs) through modern systems (pneumatic pushers, linear shaped charges, and motorized separation). The papers document how lessons from early separation failures (including Explorer 5) shaped modern design requirements.",
+      "mission_relevance": "Provides the technical depth for the separation dynamics, nutation, and spin stability knowledge nodes. Papers on contact dynamics modeling inform the SPICE separation impulse simulation. Papers on spin-stabilized separation inform the clearance margin and Monte Carlo analysis. The historical evolution papers show how Explorer 5's failure contributed to improved separation system design in all subsequent launch vehicles."
+    },
+    {
+      "id": "mushroom-identification",
+      "name": "MycoKey / Mushroom Expert -- Amanita muscaria Identification",
+      "url": "https://www.mushroomexpert.com/amanita_muscaria.html",
+      "type": "secondary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Comprehensive identification guides for Amanita muscaria including morphological descriptions, taxonomic classification, habitat preferences, distribution maps, toxicology, and the developmental sequence from button (universal veil intact) through veil-breaking to mature fruiting body. MushroomExpert.com (Michael Kuo) provides the most detailed photographic documentation of the veil-breaking process: the universal veil stretching, thinning, and finally tearing as the cap expands, leaving the characteristic white warts (veil remnants) on the red cap. The guides also document the volva (cup at the base) and annulus (ring on the stipe) as additional veil remnants.",
+      "mission_relevance": "Provides the biological detail for the organism pairing. The photographic documentation of veil-breaking stages — intact veil, stretching, initial tear, full emergence — provides direct visual analogues to the separation sequence. The description of how veil thickness, cap expansion rate, and soil resistance interact to determine the quality of emergence (clean break vs. deformation) directly parallels the engineering of clearance margins. Essential for the separation dynamics resonance sections and the story's mushroom imagery."
+    }
+  ]
+}

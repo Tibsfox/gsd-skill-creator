@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation: What to Build | v1.11 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --failure-deep: #0A0505; --failure-mid: #1A0A0A;
+    --failure-red: #CC2020; --failure-dim: #661010;
+    --warning-amber: #D4A830; --warning-bright: #E8D060;
+    --mushroom-red: #CC3030; --mushroom-white: #F0F0E8;
+    --success-green: #40CC40; --labyrinth: #8A7A6A;
+    --space: #050505; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #3A1A1A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(204,32,32,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(102,16,16,0.08) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(212,168,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(204,48,48,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(204,32,32,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(138,122,106,0.04) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--failure-red); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--warning-bright); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--failure-deep) 25%, var(--failure-mid) 50%, var(--failure-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--failure-red); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(204,32,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,32,32,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(204,32,32,0.1); border: 1px solid var(--failure-red); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--failure-red); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(204,32,32,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--failure-red); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .prose { max-width: 900px; }
+  .prose h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; color: var(--warning-bright); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .prose h2:first-child { margin-top: 0; }
+  .prose h3 { font-family: 'DM Sans', sans-serif; font-size: 1.1rem; color: var(--failure-red); margin: 2rem 0 0.75rem; font-weight: 600; }
+  .prose p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+  .prose strong { color: var(--warning-bright); }
+  .prose em { color: var(--mushroom-white); }
+  .prose ul, .prose ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .prose li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .prose hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+  .prose blockquote { border-left: 3px solid var(--failure-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(10,5,5,0.3); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); }
+  .prose pre { background: rgba(10,5,5,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--failure-red); margin: 1rem 0; }
+  .prose code { font-family: 'DM Mono', monospace; font-size: 0.85rem; background: rgba(204,32,32,0.1); padding: 0.15rem 0.4rem; border-radius: 3px; color: var(--failure-red); }
+  .prose pre code { background: none; padding: 0; }
+  .nav-card { background: rgba(10,5,5,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; }
+  .nav-card a { color: var(--failure-red); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--warning-bright); }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--failure-red); text-decoration: none; }
+  .prose table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  .prose th { background: rgba(204,32,32,0.08); border: 1px solid var(--border); padding: 0.6rem 1rem; text-align: left; color: var(--failure-red); font-weight: 600; }
+  .prose td { border: 1px solid var(--border); padding: 0.5rem 1rem; color: var(--text); }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+  <a href="index.html">v1.11 Explorer 5</a>
+  <span class="sep">/</span>
+  Track 5: Simulation &amp; Arts
+</nav>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.11</span>
+      <span>Explorer 5</span>
+      <span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts</h1>
+    <p class="subtitle">What to build, train, visualize, and create</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti</span>
+      <span><span class="label">Platforms:</span> Python, Web, SPICE, GMAT</span>
+      <span><span class="label">Mission:</span> Explorer 5</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="prose">
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <h3>A1. Python: Spin-Separation Dynamics</h3>
+
+    <p><strong>What it is:</strong> A Python simulation that models the separation of Explorer 5&rsquo;s spinning upper stage cluster from the Juno I booster. The student sets initial conditions (spin rate, spring force, mass offset, structural flex) and watches the separation unfold in real time. Under nominal conditions, the cluster clears cleanly. Under perturbed conditions, it contacts the booster wall, producing the off-axis torque that tilts the spin axis and destroys the trajectory.</p>
+
+    <p><strong>Why it matters:</strong> Explorer 5&rsquo;s failure was a mechanical event measured in centimeters and milliseconds. The simulation makes the event visible: the student watches the spinning cluster drift sideways during the fraction of a second it takes to exit the booster fairing, sees the contact event when the clearance margin is exceeded, and observes the resulting nutation that disrupts the thrust vector. The transition from success to failure is sharp &mdash; a few millimeters of additional drift turns orbit into suborbital arc. The student discovers the sensitivity of the outcome to small changes in initial conditions.</p>
+
+<pre><code># explorer5_separation.py
+# Spin-separation dynamics: the contact event that failed Explorer 5
+#
+# Process:
+#   1. Model the booster fairing as a cylinder (inner diameter 1.78 m)
+#   2. Model the upper stage cluster as a spinning cylinder (0.90 m)
+#   3. Apply separation spring force (axial, with optional asymmetry)
+#   4. Integrate equations of motion:
+#      Axial: m * d2z/dt2 = F_spring (pushes cluster out)
+#      Lateral: m * d2x/dt2 = F_asymmetry + F_wobble
+#      Rotational: I * d(omega)/dt = 0 (no torque until contact)
+#   5. At each timestep, check clearance:
+#      clearance = (d_booster/2) - (d_cluster/2) - |x_lateral|
+#      If clearance &lt;= 0: CONTACT EVENT
+#   6. If contact: apply tangential friction force -&gt; torque -&gt; nutation
+#   7. Track spin axis tilt angle (nutation) after contact
+#   8. If nutation &gt; threshold: mission failure
+#
+# Parameters (user-adjustable):
+#   spin_rpm: 500-1000 (nominal 750)
+#   spring_force_N: 100-500 (nominal 300)
+#   spring_asymmetry: 0-20% (lateral force as fraction of axial)
+#   mass_offset_mm: 0-30 (center of mass offset from spin axis)
+#   booster_flex_mm: 0-50 (lateral displacement of fairing)
+#   n_runs: 1-100 (for Monte Carlo mode)
+#
+# Visualization:
+#   - View 1: Cross-section view (looking down the axis)
+#   - View 2: Side view (longitudinal)
+#   - View 3: Clearance vs time
+#   - View 4: Nutation angle vs time (post-contact)
+#
+# Libraries: numpy, matplotlib, scipy
+# Difficulty: Intermediate
+# Duration: 4-6 hours</code></pre>
+
+    <p><strong>Key learning moments:</strong></p>
+    <ol>
+      <li><strong>The clearance margin.</strong> The student runs the simulation at nominal conditions and sees clean separation with ~44 cm of clearance. Then they add 10 mm of mass offset and 10 mm of booster flex. The clearance drops but remains positive. Then they add 20 mm of each &mdash; and contact occurs. The margin is finite and can be consumed by modest perturbations. The student sees that &ldquo;adequate clearance&rdquo; is a probabilistic statement, not a deterministic one.</li>
+      <li><strong>The contact cascade.</strong> When contact occurs, the student watches the sequence: contact force creates torque, torque creates nutation, nutation misaligns the thrust vector, misaligned thrust sends the trajectory off-course. Each step is physically intuitive, but the cascade happens in milliseconds. The student sees that a centimeter-scale mechanical event propagates into a mission-killing trajectory error.</li>
+      <li><strong>The Monte Carlo mode.</strong> The student runs 100 separations with random perturbations drawn from realistic distributions. Some succeed, some fail. The failure rate (e.g., 5-15% depending on parameter uncertainties) emerges statistically. This is the probabilistic reliability analysis the 1958 engineers lacked.</li>
+    </ol>
+
+    <p><strong>Extension:</strong> Add a &ldquo;design improvement&rdquo; mode where the student can increase the clearance (larger booster fairing), increase the spring force (faster separation), or add guide rails (constrain lateral motion). Each improvement has a mass and cost penalty. The student optimizes the separation system for maximum reliability within a mass budget &mdash; a real engineering design trade.</p>
+
+    <hr>
+
+    <h3>A2. Python: Monte Carlo Reliability Analysis</h3>
+
+    <p><strong>What it is:</strong> A Monte Carlo simulation that models N separation attempts with randomly varied parameters, computing the probability of contact and the distribution of nutation angles. The student varies the parameter uncertainties and observes how the failure probability changes &mdash; discovering the relationship between design margin, parameter uncertainty, and system reliability.</p>
+
+<pre><code># explorer5_monte_carlo.py
+# Monte Carlo reliability analysis of Juno I separation
+#
+# Process:
+#   1. Define parameter distributions:
+#      - Spring force: Normal(300 N, sigma=30 N)
+#      - Spring asymmetry: Uniform(0, 15%)
+#      - Mass offset: Normal(0 mm, sigma=10 mm)
+#      - Booster flex: Normal(0 mm, sigma=15 mm)
+#      - Spin rate: Normal(750 rpm, sigma=25 rpm)
+#      - Vibration amplitude: Rayleigh(sigma=5 mm)
+#   2. For each of N trials:
+#      a. Draw random parameter values from distributions
+#      b. Run separation dynamics simulation
+#      c. Record: contact (yes/no), nutation angle, min clearance
+#   3. Compute failure probability: P(fail) = n_contact / N
+#   4. Compute confidence interval on P(fail)
+#   5. Generate sensitivity analysis: which parameter contributes
+#      most to failure probability?
+#
+# Visualization:
+#   - Plot 1: Histogram of minimum clearance values
+#   - Plot 2: Scatter plot of mass_offset vs booster_flex
+#   - Plot 3: Tornado diagram (sensitivity analysis)
+#   - Plot 4: P(fail) vs design margin
+#
+# Libraries: numpy, matplotlib, scipy.stats
+# Difficulty: Intermediate
+# Duration: 3-4 hours</code></pre>
+
+    <p><strong>Key learning moments:</strong></p>
+    <ol>
+      <li><strong>The failure boundary.</strong> The scatter plot shows that the separation fails when the combined perturbation exceeds the clearance. The boundary is not a simple line &mdash; parameter interactions make it curved. The student learns that failure depends on combinations, not individual parameters.</li>
+      <li><strong>The sensitivity tornado.</strong> The tornado diagram reveals which parameter contributes most to failure risk. The student discovers that booster flex and mass offset are more important than spring force or spin rate &mdash; identifying where quality control effort should be focused.</li>
+      <li><strong>The S-curve.</strong> The P(fail) vs design margin plot shows the sharp transition from safe to unsafe. At 55 cm clearance, the failure probability is negligible. At 35 cm, it is significant. At 44 cm (the actual Explorer 5 design), it falls in the transition region &mdash; where small changes in the flight environment make the difference between success and failure. This is why 4 of 5 flights succeeded: the design was in the transition region, not solidly in the safe zone.</li>
+    </ol>
+
+    <hr>
+
+    <h3>A3. Web: Interactive Separation Simulator</h3>
+
+    <p><strong>What it is:</strong> An interactive web application where the user adjusts separation parameters with sliders and watches the cluster separate from the booster in real time. The user can explore the parameter space, find the failure boundary, and develop intuition for the relationship between clearance, perturbation, and outcome.</p>
+
+<pre><code>WEB APPLICATION: Explorer 5 Separation Simulator
+=====================================================
+
+Technology: HTML5 Canvas + JavaScript (no frameworks)
+Target: Modern browser, 1920x1080
+
+Main view (70% of viewport):
+  TOP: Cross-section view (end-on, looking down the axis)
+    Outer circle: booster fairing (grey, 1.78 m diameter)
+    Inner circle: cluster tub (blue, 0.90 m diameter)
+    The inner circle rotates (showing spin rate)
+    The inner circle drifts laterally during separation
+    Clearance shown as the gap between circles
+    Contact: inner circle touches outer circle, flash red
+    Nutation: after contact, spin axis shown as wobbling arrow
+
+  BOTTOM: Side view (longitudinal section)
+    Booster fairing: grey rectangle
+    Cluster tub: blue rectangle rising upward
+    Spring: compressed, then extending as separation begins
+    Axial position shown with scale bar
+    Time display: milliseconds from separation initiation
+    Contact event: red flash at contact point, force vector shown
+
+Controls (side panel, 30%):
+  - "SPIN RATE" slider: 500-1000 rpm (default 750)
+  - "SPRING FORCE" slider: 100-500 N (default 300)
+  - "SPRING ASYMMETRY" slider: 0-20% (default 0)
+  - "MASS OFFSET" slider: 0-30 mm (default 0)
+  - "BOOSTER FLEX" slider: 0-50 mm (default 0)
+  - "VIBRATION" slider: 0-20 mm (default 0)
+  - "SEPARATE" button: initiate separation with current parameters
+  - "RESET" button: reset to pre-separation state
+  - "AUTO-RUN 100" button: Monte Carlo mode
+  - "EXPLORER 1" button: sets parameters to E1 conditions (success)
+  - "EXPLORER 5" button: sets parameters to E5 conditions (failure)
+
+Info panel:
+  - Minimum clearance during this separation
+  - Contact detected: YES/NO
+  - Nutation angle (if contact): N degrees
+  - Mission outcome: ORBIT / SUBORBITAL
+  - Monte Carlo results: X/100 successes (if auto-run)
+
+Deliverables:
+  - Single HTML file, self-contained
+  - &lt; 800 lines total
+  - 60 fps rendering</code></pre>
+
+    <p><strong>Key learning moment:</strong> The &ldquo;EXPLORER 1&rdquo; and &ldquo;EXPLORER 5&rdquo; preset buttons. The student clicks &ldquo;EXPLORER 1&rdquo; and sees a clean separation. Then clicks &ldquo;EXPLORER 5&rdquo; and sees the contact. The parameter differences between the two presets are small &mdash; a few millimeters here, a few percent there. The student sees that the boundary between success and failure is not a large gap but a narrow ridge.</p>
+
+    <hr>
+
+    <h3>A4. Web: Failure Tree Visualization</h3>
+
+    <p><strong>What it is:</strong> An interactive fault tree analysis diagram for Explorer 5&rsquo;s failure. The student can expand and collapse nodes, toggle between qualitative and quantitative views, and explore how the top-level failure (no orbit) decomposes into contributing events and their logical relationships.</p>
+
+<pre><code>WEB APPLICATION: Explorer 5 Fault Tree Analysis
+=====================================================
+
+Technology: HTML5 Canvas + JavaScript (no frameworks)
+Target: Modern browser, 1920x1080
+
+The fault tree:
+  TOP EVENT: "No orbit achieved" (red rectangle)
+    |
+    OR gate (curved bottom symbol)
+    |-- "Booster failure" (grey rectangle)
+    |     |-- OR gate
+    |     |-- "Engine failure"
+    |     |-- "Structural failure"
+    |     |-- "Guidance failure"
+    |
+    |-- "Upper stage failure" (red rectangle -- this branch)
+          |
+          OR gate
+          |-- "Separation failure" (red rectangle -- this event)
+          |     |
+          |     AND gate (flat bottom symbol)
+          |     |-- "Lateral displacement exceeds clearance"
+          |     |     |
+          |     |     OR gate
+          |     |     |-- "Mass imbalance wobble"
+          |     |     |-- "Spring asymmetry drift"
+          |     |     |-- "Booster structural flex"
+          |     |     |-- "Vibration excursion"
+          |     |
+          |     |-- "Insufficient clearance margin"
+          |           |
+          |           AND gate
+          |           |-- "Design clearance = 44 cm"
+          |           |-- "Perturbation &gt; 44 cm"
+          |
+          |-- "Ignition failure"
+          |     |-- "Timer malfunction"
+          |     |-- "Propellant defect"
+          |
+          |-- "Guidance after separation"
+                |-- "Spin rate error"
+                |-- "Attitude reference error"
+
+Interactive features:
+  - Click any node to expand/collapse its subtree
+  - Hover shows description and probability
+  - Toggle: "QUALITATIVE" / "QUANTITATIVE"
+  - "MINIMAL CUT SETS" button
+  - Color coding: red = failed, grey = non-contributing,
+    green = would have prevented failure
+
+Deliverables:
+  - Single HTML file, self-contained
+  - &lt; 600 lines
+  - Smooth expand/collapse animations</code></pre>
+
+    <p><strong>Key learning moment:</strong> The &ldquo;MINIMAL CUT SETS&rdquo; button. The student discovers that the separation failure has a minimal cut set of size 1 &mdash; a single event (lateral displacement exceeding clearance) that alone causes the top-level failure. This is a single-point failure mode: no redundancy, no backup, no alternative path. Modern spacecraft design requires that no single-point failure mode can cause mission loss. Explorer 5&rsquo;s separation mechanism violated this requirement.</p>
+
+    <hr>
+
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <h3>B1. Failure Prediction from Pre-Launch Telemetry</h3>
+
+    <p><strong>What it is:</strong> Train a classifier to predict separation outcome (success/failure) from pre-launch telemetry data: spin rate uniformity, spring compression symmetry, mass balance measurements, structural vibration signatures. The training data is synthetic (generated by the Monte Carlo separation simulator), but the prediction task is real: can you predict a failure before it happens?</p>
+
+<pre><code>Model: Binary classifier (success/failure)
+
+Input features (simulated pre-launch telemetry):
+  - Spin rate (rpm) and spin rate variability (rpm std)
+  - Spring compression force (N) for each spring
+  - Mass balance: center-of-mass offset (mm, 2 axes)
+  - Structural vibration: peak amplitude (mm) at 3 frequencies
+  - Temperature gradient across the separation plane (deg C)
+  - Total: 12-15 features
+
+Output: P(failure) -- probability of separation contact
+
+Training data: 50,000 separation simulations from the Monte Carlo
+  model (A2), with input parameters as features and contact/no-contact
+  as labels.
+
+Architecture: Start with logistic regression (interpretable),
+  then random forest (feature importance), then small neural
+  network (comparison).
+
+The student learns:
+  - Logistic regression identifies the linear boundary between
+    success and failure in parameter space
+  - Random forest identifies nonlinear interactions
+  - The neural network achieves slightly higher accuracy but is
+    less interpretable
+  - The false negative rate is the critical metric
+
+Libraries: scikit-learn, numpy, matplotlib
+GPU: Not required (small model, tabular data)
+Difficulty: Intermediate</code></pre>
+
+    <hr>
+
+    <h2>C. Computer Science &mdash; Fault Tree Analysis as Boolean Logic</h2>
+
+    <h3>C1. Boolean Algebra of Failure</h3>
+
+    <p>A fault tree is a Boolean expression. The top event (no orbit) is a function of base events connected by AND and OR gates. The minimal cut sets are the prime implicants of the Boolean function. This connection between reliability engineering and Boolean algebra is deep and computationally useful.</p>
+
+<pre><code>ALGORITHM: Minimal Cut Set Computation
+
+The fault tree for Explorer 5 can be written as a Boolean function:
+
+  TOP = BOOSTER_FAIL OR UPPER_STAGE_FAIL
+
+  UPPER_STAGE_FAIL = SEP_FAIL OR IGN_FAIL OR GUID_FAIL
+
+  SEP_FAIL = (WOBBLE OR DRIFT OR FLEX OR VIBRATION)
+             AND (CLEARANCE_INSUFFICIENT)
+
+  CLEARANCE_INSUFFICIENT = (DESIGN_MARGIN = 44 cm)
+                           AND (PERTURBATION &gt; 44 cm)
+
+Expanding:
+  SEP_FAIL = WOBBLE AND MARGIN_EXCEEDED
+          OR DRIFT AND MARGIN_EXCEEDED
+          OR FLEX AND MARGIN_EXCEEDED
+          OR VIBRATION AND MARGIN_EXCEEDED
+
+  But MARGIN_EXCEEDED = (total perturbation &gt; 44 cm),
+  and total perturbation = wobble + drift + flex + vibration.
+
+  So the real minimal cut sets involve COMBINATIONS of
+  base events that sum to exceed the margin:
+    {wobble=30, drift=15} -&gt; total=45 &gt; 44: FAIL
+    {flex=25, vibration=20} -&gt; total=45 &gt; 44: FAIL
+    {wobble=15, drift=10, flex=10, vibration=10} -&gt; total=45: FAIL
+
+  This is a THRESHOLD gate, not a pure AND/OR structure.
+
+IMPLEMENTATION (Python):
+
+  def fault_tree(wobble_mm, drift_mm, flex_mm, vibration_mm,
+                 clearance_mm=440):
+      """Evaluate the Explorer 5 separation fault tree."""
+      total_perturbation = wobble_mm + drift_mm + flex_mm + vibration_mm
+      sep_fail = total_perturbation &gt; clearance_mm
+      ign_fail = False
+      guid_fail = False
+      upper_stage_fail = sep_fail or ign_fail or guid_fail
+      booster_fail = False
+      mission_fail = booster_fail or upper_stage_fail
+      return mission_fail, total_perturbation
+
+  # Monte Carlo: evaluate fault tree with random perturbations
+  import numpy as np
+
+  N = 100000
+  failures = 0
+  for _ in range(N):
+      wobble = abs(np.random.normal(0, 10))
+      drift = abs(np.random.normal(0, 8))
+      flex = abs(np.random.normal(0, 15))
+      vibration = np.random.rayleigh(5)
+      fail, total = fault_tree(wobble, drift, flex, vibration,
+                               clearance_mm=440)
+      if fail:
+          failures += 1
+
+  print(f"Failure probability: {failures/N*100:.2f}%")
+
+THE CONNECTION TO BOOLEAN ALGEBRA:
+  Pure AND/OR fault trees are Boolean functions.
+  Threshold gates extend Boolean algebra to weighted
+  threshold functions -- the same functions that form
+  the basis of neural networks (a perceptron is a
+  threshold gate).</code></pre>
+
+    <hr>
+
+    <h2>D. Game Theory &mdash; Risk Acceptance Under Schedule Pressure</h2>
+
+    <h3>D1. The Launch Decision Game</h3>
+
+    <p>The decision to launch Explorer 5 was not a pure engineering decision &mdash; it was a strategic decision made under time pressure, political competition, and institutional survival pressure. Game theory provides a framework for analyzing such decisions.</p>
+
+<pre><code>GAME: LAUNCH UNDER UNCERTAINTY
+
+Players:
+  - ENGINEER: wants high confidence of success before launch
+  - MANAGER: wants to launch on schedule
+  - NATURE: determines the actual parameter values (unknown)
+
+                        | NATURE: Safe params  | NATURE: Unsafe params
+-----------------------|---------------------|----------------------
+ENGINEER: "Launch"     | SUCCESS             | FAILURE
+                       | (+10, +10)          | (-20, -15)
+-----------------------|---------------------|----------------------
+ENGINEER: "Hold"       | MISSED OPPORTUNITY  | AVOIDED FAILURE
+                       | (-5, -3)            | (+5, -1)
+
+P(safe) = estimated reliability (65-85% based on prior flights).
+
+EXPECTED VALUES:
+  Launch: P(safe)*10 + (1-P(safe))*(-20)
+  Hold:   P(safe)*(-5) + (1-P(safe))*(5)
+
+  At P(safe) = 0.75:
+    E[Launch] = 0.75*10 + 0.25*(-20) = +2.5
+    E[Hold]   = 0.75*(-5) + 0.25*(5) = -2.5
+    Launch has higher expected value.
+
+  At P(safe) = 0.60:
+    E[Launch] = 0.60*10 + 0.40*(-20) = -2.0
+    E[Hold]   = 0.60*(-5) + 0.40*(5) = -1.0
+    HOLD has higher expected value.
+
+  The crossover is at P(safe) ~ 0.67.
+
+THE EXPLORER 5 REALITY:
+  The actual reliability was probably 65-75%.
+  Right at the crossover point.
+  The decision was genuinely difficult.
+
+EXERCISE:
+  1. Modify the payoff matrix to reflect your own values.
+  2. Find YOUR crossover probability.
+  3. Compare your threshold with a partner's.
+  4. Now play the role of the manager.</code></pre>
+
+    <hr>
+
+    <h2>E. Creative Arts &mdash; What to Create</h2>
+
+    <h3>E1. Borges-Inspired Labyrinth Visualization</h3>
+
+    <p><strong>What it is:</strong> A visual art piece depicting the parameter space of Explorer 5&rsquo;s separation as a Borgesian labyrinth. Each path through the labyrinth represents a possible combination of parameters (wobble, drift, flex, vibration). Paths that lead to successful separation exit the labyrinth into open sky. Paths that lead to contact terminate in dead ends. The labyrinth is the garden of forking paths &mdash; each fork is a parameter choice, each terminus is an outcome.</p>
+
+<pre><code>ART PIECE: "The Garden of Separating Stages"
+=============================================
+
+Composition (16:9 widescreen or 11x14 print):
+
+  Central image: a labyrinth viewed from above (bird's eye)
+
+  The labyrinth walls are thin, curved, branching structures
+  that resemble both:
+  - The cross-section of the booster fairing with the spinning
+    cluster inside (concentric circles with gaps)
+  - The cap of an Amanita muscaria seen from above (red with
+    white spots = the contact points)
+
+  Color scheme:
+  - Walls: dark grey (booster structure)
+  - Successful paths: blue-green gradient (opening to sky)
+  - Failed paths: red-orange gradient (dead ends with white dots)
+  - Background: deep indigo (space, the destination)
+  - Text (optional): Borges quote from "The Garden of
+    Forking Paths"
+
+  Style: precise geometric construction with organic curves.
+  The labyrinth is mathematical but rendered with the
+  aesthetic of an illuminated manuscript or Escher lithograph.</code></pre>
+
+    <h3>E2. Amanita muscaria Growth Stages</h3>
+
+    <p><strong>What it is:</strong> A botanical illustration series showing the five stages of <em>Amanita muscaria</em> development, from button stage (the universal veil intact, the mushroom a white ball emerging from the soil) through full maturity (expanded red cap with white warts, spore release). Each stage is annotated with the parallel stage of a rocket launch: assembly, rollout, ignition, flight, separation. The fifth stage &mdash; spore release &mdash; parallels the moment of separation: the mushroom releases its reproductive payload into the air, as the rocket releases its payload into orbit. In Explorer 5&rsquo;s case, the release failed. In <em>A. muscaria</em>&rsquo;s lifecycle, spore release almost always succeeds &mdash; the mushroom has had 100 million years to optimize its separation mechanism.</p>
+
+<pre><code>ILLUSTRATION SERIES: "Five Stages / Two Separations"
+=====================================================
+
+Format: Five panels, each ~8x10 inches, side by side
+
+Panel 1: BUTTON STAGE / ASSEMBLY
+  Caption: "Everything begins connected."
+
+Panel 2: ELONGATION / ROLLOUT
+  Caption: "Growth requires leaving the ground."
+
+Panel 3: EXPANSION / IGNITION
+  Caption: "The energy is committed."
+
+Panel 4: MATURITY / FLIGHT
+  Caption: "The structure serves the payload."
+
+Panel 5: SPORE RELEASE / SEPARATION
+  Two versions, split diagonally:
+    Upper-left: Explorer 1 -- clean separation, orbit achieved.
+    Lower-right: Explorer 5 -- contact, suborbital arc.
+  Caption: "Separation is the moment of truth."
+
+Medium: Watercolor or colored pencil for mycological panels
+(warm, organic, detailed). Technical illustration style for
+rocket panels (cool, precise, annotated).</code></pre>
+
+    <hr>
+
+    <h2>F. Problem Solving &mdash; Root Cause Analysis Methodology</h2>
+
+    <h3>F1. The 5 Whys Applied to Explorer 5</h3>
+
+<pre><code>ROOT CAUSE ANALYSIS: EXPLORER 5
+
+Why 1: Why did Explorer 5 fail to reach orbit?
+  Because the thrust vector was misaligned after upper
+  stage ignition, producing a suborbital trajectory.
+
+Why 2: Why was the thrust vector misaligned?
+  Because the spin axis of the upper stage cluster was
+  perturbed by a nutation induced during separation.
+
+Why 3: Why did nutation occur during separation?
+  Because the spinning cluster contacted the booster
+  fairing, applying an off-axis torque.
+
+Why 4: Why did the cluster contact the fairing?
+  Because the lateral displacement of the cluster
+  during separation exceeded the clearance margin.
+
+Why 5: Why did the lateral displacement exceed the margin?
+  Because the combined effects of mass imbalance, spring
+  asymmetry, structural flex, and vibration produced a
+  larger lateral displacement on this flight than on
+  previous flights, and the design margin did not account
+  for the full range of these perturbations.
+
+ROOT CAUSE:
+  Insufficient clearance margin for the actual (not nominal)
+  range of lateral perturbations during separation.
+
+CORRECTIVE ACTION OPTIONS:
+  A. Increase the clearance margin (larger fairing)
+  B. Reduce lateral perturbations (better balance, springs)
+  C. Add guide rails or centering mechanisms
+  D. Redesign the upper stage (eliminate spinning cluster)
+  E. Accept the risk (fly same design, accept ~5-15% failure)
+
+ACTUAL DECISION:
+  Option D. Explorer 6 flew on Thor-Able, a completely
+  different launch vehicle. The Juno I spinning cluster
+  design was retired after Explorer 5.</code></pre>
+
+    <hr>
+
+    <h2>G. GSD Integration &mdash; Failure as Learning, the Retry Pattern</h2>
+
+    <h3>G1. The GSD Failure Protocol</h3>
+
+    <p>In GSD (Get Stuff Done), failure is not an exception &mdash; it is a data point. The system is designed to handle failure gracefully, extract the learning, and retry with improved conditions. Explorer 5 embodies this pattern.</p>
+
+<pre><code>GSD FAILURE PROTOCOL (Explorer 5 as case study):
+
+1. DETECT: The mission failed. No orbit achieved.
+   GSD equivalent: a phase execution fails.
+
+2. DIAGNOSE: Apply failure analysis (Bayesian, 5 Whys, fault tree).
+   Identify the root cause, not just the symptom.
+
+3. DOCUMENT: Record what failed, why it failed, and what
+   conditions were different from successful runs.
+   GSD equivalent: update STATE.md with the failure note.
+
+4. DECIDE: Fix or replace?
+   - Retry with same approach, adjusted parameters
+   - Retry with a different approach
+   - Abort and redirect resources
+
+5. RETRY: Execute the improved plan.
+
+6. VALIDATE: Confirm the retry succeeded AND that the fix
+   did not introduce new failure modes.
+
+EXPLORER 5 IN GSD TERMS:
+  Phase: "Launch Explorer 5 to continue Van Allen mapping"
+  Execution: FAILED at separation
+  Diagnosis: clearance margin insufficient
+  Decision: REPLACE (new vehicle for Explorer 6)
+  Retry: Explorer 6 on Thor-Able (Aug 7, 1959, SUCCESS)
+  Validation: Explorer 6 achieved orbit, operated 2 months
+
+GRACEFUL DEGRADATION:
+  Explorer 5 degraded gracefully: the failure was a data
+  point, not a catastrophe. No one was hurt. The instruments
+  were lost but not irreplaceable. The knowledge was delayed
+  but not canceled.
+
+  The worst failure is a failure that teaches nothing.
+  Explorer 5 taught plenty. In GSD terms, it was a failed
+  phase with a high-quality retrospective.</code></pre>
+
+    <hr>
+
+    <blockquote>
+      <p>&ldquo;Jorge Luis Borges wrote &lsquo;The Garden of Forking Paths&rsquo; in 1941, seventeen years before Explorer 5 failed to reach orbit. In the story, Dr. Yu Tsun discovers that his ancestor Ts&rsquo;ui P&ecirc;n created a novel that is also a labyrinth &mdash; a book where every narrative possibility is realized simultaneously. At each point of decision, the narrative branches, and both branches continue. The novel does not select one future. It contains all futures. Explorer 5&rsquo;s launch was a point of decision in the Juno I program&rsquo;s narrative. The branch where separation succeeds was the intended path &mdash; orbit, data, extended Van Allen mapping, the sixth data point after Explorers 1, 3, and 4. The branch where separation fails was the actual path &mdash; suborbital arc, no data, engineering autopsy, program redirection. In Borges&rsquo;s framework, both branches exist. The physics selected one. The program absorbed the selection and continued along the failed branch, which led, through Explorer 6 and beyond, to achievements the successful branch would never have reached because the failure forced a redesign that was ultimately superior to the original plan. The labyrinth of forking paths does not have good branches and bad branches. It has explored branches and unexplored branches. Explorer 5 explored a branch that the previous four flights had avoided. The exploration was costly but not wasted. <em>Amanita muscaria</em> scatters millions of spores. Most land on dead ends. The few that find a living root establish something that persists for decades &mdash; a mycelial network that feeds the forest. Explorer 5 was a spore that landed on rock. The network persisted underground. The next spore &mdash; Explorer 6, on a different substrate, from a different fruiting body &mdash; found its root and thrived.&rdquo;</p>
+    </blockquote>
+
+    <div class="nav-card">
+      <a href="curriculum.html">&larr; Curriculum</a>
+      <a href="index.html">v1.11 Mission Hub &rarr;</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.11 Explorer 5 + Amanita muscaria &mdash; tibsfox.com/Research/NASA/</p>
+</footer>
+
+</body>
+</html>

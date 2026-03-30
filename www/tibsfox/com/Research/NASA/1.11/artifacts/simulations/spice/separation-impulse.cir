@@ -1,0 +1,162 @@
+* Explorer 5 Separation Impulse — Mechanical-Electrical Analogy
+* =========================================================================
+* Mission 1.11 — Explorer 5 (Juno I / ABMA), August 24, 1958
+* SEPARATION FAILURE — Contact Event Modeled as RLC Transient
+*
+* The mechanical system of the spinning upper cluster contacting
+* the booster is modeled as an electrical analogy:
+*
+*   Mechanical              Electrical
+*   ----------              ----------
+*   Force (N)           →   Voltage (V)
+*   Velocity (m/s)      →   Current (A)
+*   Mass (kg)           →   Inductance (H)
+*   Spring (N/m)        →   Capacitance (F)
+*   Damping (N*s/m)     →   Resistance (Ω)
+*   Contact impulse     →   Voltage spike
+*
+* The spinning tub is a damped spring-mass system:
+*   Mass = 80 kg → L = 80 H
+*   Spring constant = 10,000 N/m → C = 100 uF
+*   Damping = 200 N*s/m → R = 200 Ω
+*
+* Natural frequency: f_n = 1/(2*pi*sqrt(LC))
+*   = 1/(2*pi*sqrt(80 * 100e-6))
+*   = 1/(2*pi*sqrt(0.008))
+*   = 1/(2*pi*0.0894)
+*   ≈ 1.78 Hz (nutation frequency)
+*
+* The contact event is a voltage spike (impulse) applied to the
+* circuit, causing it to ring at the natural frequency. The ringing
+* represents the nutation — the wobble induced by the contact.
+*
+* Two cases are simulated:
+*   1. Nominal separation (no contact) — small initial disturbance, heavily damped
+*   2. Explorer 5 failure (contact) — large impulse, underdamped ringing
+*
+* The transient response shows:
+*   - Initial spike (contact moment)
+*   - Ringing (nutation oscillation)
+*   - Exponential decay (energy dissipation)
+*   - Steady-state offset (permanent trajectory deviation)
+*
+* Run: ngspice -b separation-impulse.cir
+* =========================================================================
+
+.title Explorer 5 — Separation Contact Impulse (RLC Analogy)
+
+* =========================================================================
+* CASE 1: Nominal Separation (Clean Release)
+* =========================================================================
+* Small disturbance from spring asymmetry, heavily damped.
+* The tub separates cleanly — minimal ringing, quick settling.
+
+* Spring release disturbance (small, brief)
+V_nom_impulse nom_in 0 PULSE(0 0.5 0.1 0.001 0.001 0.005 100)
+
+* Mass (inductance) — 80 kg → 80 H
+L_nom nom_in nom_mass 80
+
+* Spring (capacitance) — 10,000 N/m → 100 uF
+C_nom nom_mass nom_spring 100u IC=0
+
+* Damping (resistance) — 500 N*s/m → 500 Ω (overdamped for nominal)
+R_nom nom_spring 0 500
+
+* =========================================================================
+* CASE 2: Explorer 5 Failure (Contact Event)
+* =========================================================================
+* Large off-axis impulse from edge contact, underdamped.
+* The tub begins to nutate — ringing persists.
+
+* Contact impulse (large, sharp)
+V_fail_impulse fail_in 0 PULSE(0 5.0 0.1 0.0005 0.0005 0.002 100)
+
+* Mass (inductance) — same 80 kg
+L_fail fail_in fail_mass 80
+
+* Spring (capacitance) — same spring constant
+C_fail fail_mass fail_spring 100u IC=0
+
+* Damping (resistance) — 100 N*s/m → 100 Ω (underdamped for failure)
+* Less damping because the contact disrupted the separation mechanism
+R_fail fail_spring 0 100
+
+* =========================================================================
+* CASE 3: Gyroscopic Coupling (Nutation Mode)
+* =========================================================================
+* The nutation mode couples the spin axis wobble to the trajectory.
+* Modeled as a second RLC stage driven by the first.
+*
+* The nutation feeds back into the thrust vector alignment,
+* creating a growing trajectory deviation.
+
+* Coupling from nutation to trajectory
+R_couple fail_spring traj_in 50
+
+* Trajectory mass (larger — whole vehicle)
+L_traj traj_in traj_mass 200
+
+* Trajectory restoration (gravity gradient — weak)
+C_traj traj_mass traj_out 47u IC=0
+
+* Atmospheric drag (very weak at altitude)
+R_traj traj_out 0 1k
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* Transient: 5 seconds to see full nutation development and decay
+.tran 0.005 5 0 0.005
+
+.control
+  run
+
+  set color0 = white
+  set color1 = rgb:40:cc:40
+  set color2 = rgb:cc:20:20
+  set color3 = rgb:d4:a8:30
+
+  * Plot 1: Nominal vs Failure — impulse response comparison
+  plot v(nom_mass) v(fail_mass) title 'Separation Response: Nominal (green) vs Failure (red)' xlabel 'Time (s)' ylabel 'Displacement (analogy: velocity)'
+
+  * Plot 2: Failure case detail — nutation ringing
+  plot v(fail_mass) title 'Explorer 5 Nutation — Underdamped Ringing' xlabel 'Time (s)' ylabel 'Nutation Amplitude'
+
+  * Plot 3: Trajectory deviation
+  plot v(traj_out) title 'Trajectory Deviation (Coupled from Nutation)' xlabel 'Time (s)' ylabel 'Trajectory Error'
+
+  * Plot 4: All three signals overlaid
+  plot v(nom_mass) v(fail_mass) v(traj_out) title 'Complete System Response' xlabel 'Time (s)' ylabel 'Amplitude'
+
+  * Plot 5: Energy in the nutation mode
+  * Energy stored in L and C: E = 0.5*L*I^2 + 0.5*C*V^2
+  let nutation_energy = 0.5 * 80 * v(fail_in,fail_mass)^2 + 0.5 * 100e-6 * v(fail_mass)^2
+  plot nutation_energy title 'Nutation Energy Decay' xlabel 'Time (s)' ylabel 'Energy (analogy)'
+
+  * Measurements
+  meas tran nom_peak max v(nom_mass) from=0 to=5
+  meas tran fail_peak max v(fail_mass) from=0 to=5
+  meas tran fail_period trig v(fail_mass) val=0 rise=2 targ v(fail_mass) val=0 rise=3
+
+  echo ""
+  echo "========================================="
+  echo "Separation Impulse Analysis"
+  echo "========================================="
+  echo "Nominal peak response:  $&nom_peak"
+  echo "Failure peak response:  $&fail_peak"
+  echo "Peak ratio (fail/nom):  " $&fail_peak / $&nom_peak
+  echo ""
+  echo "Nutation period: $&fail_period seconds"
+  let nut_freq = 1/fail_period
+  echo "Nutation frequency: $&nut_freq Hz"
+  echo ""
+  echo "The ringing IS the nutation."
+  echo "The decay IS the energy dissipation."
+  echo "The trajectory coupling IS the mission loss."
+  echo "========================================="
+
+.endc
+
+.end
