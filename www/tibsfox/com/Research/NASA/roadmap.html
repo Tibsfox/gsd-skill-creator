@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NASA Mission Series — Roadmap | tibsfox.com/Research</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #06080C;
+    --panel: rgba(12,18,28,0.85);
+    --border: rgba(255,255,255,0.06);
+    --text: #C8D0E0;
+    --dim: #5A6478;
+    --gold: #C4A35A;
+    --gold-dim: rgba(196,163,90,0.15);
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --green: #4CAF50;
+    --magenta: #C850C0;
+    --teal: #26A69A;
+    --amber: #FFB300;
+    --purple: #7E57C2;
+    --coral: #FF7043;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* Star field */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 3% 8%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 12% 45%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 28% 18%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 42% 72%, rgba(255,255,255,0.2) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 34%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 71% 88%, rgba(255,255,255,0.25) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 12%, rgba(255,255,255,0.35) 0%, transparent 100%),
+      radial-gradient(1px 1px at 93% 56%, rgba(255,255,255,0.2) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { max-width: 1100px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .header .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--nasa-blue);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.4rem;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .header .sub {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Stats row */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .stat-box {
+    text-align: center;
+    background: var(--gold-dim);
+    border: 1px solid rgba(196,163,90,0.2);
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+  }
+  .stat-box .val {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .stat-box .lbl {
+    font-size: 0.65rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Unit circle diagram */
+  .circle-section {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  @media (max-width: 800px) { .circle-section { flex-direction: column; } }
+
+  .circle-diagram {
+    flex-shrink: 0;
+    width: 280px;
+    height: 280px;
+    position: relative;
+  }
+  .circle-diagram svg { width: 100%; height: 100%; }
+  .circle-text {
+    flex: 1;
+  }
+  .circle-text h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .circle-text p {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .circle-text .formula {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--gold);
+    background: rgba(196,163,90,0.08);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 0.3rem;
+  }
+
+  /* 6-Track pipeline */
+  .pipeline {
+    margin: 2.5rem 0;
+  }
+  .pipeline h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+  .track-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+  @media (max-width: 700px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    border-left: 3px solid var(--track-color, var(--dim));
+  }
+  .track .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--track-color, var(--dim));
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+  .track h3 {
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 0.3rem;
+  }
+  .track p {
+    font-size: 0.78rem;
+    color: var(--dim);
+    line-height: 1.5;
+  }
+
+  .track-qa {
+    background: var(--panel);
+    border: 1px solid rgba(252,61,33,0.2);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    text-align: center;
+  }
+  .track-qa .num { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--nasa-red); letter-spacing: 0.1em; }
+  .track-qa h3 { font-size: 0.95rem; color: #fff; margin: 0.3rem 0; }
+  .track-qa p { font-size: 0.78rem; color: var(--dim); }
+
+  /* Artifacts */
+  .artifacts {
+    margin: 2.5rem 0;
+  }
+  .artifacts h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .artifact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.6rem;
+  }
+  .artifact {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .artifact:hover { border-color: var(--gold); }
+  .artifact .icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+  .artifact .name { font-size: 0.8rem; color: #fff; font-weight: 500; }
+  .artifact .detail { font-size: 0.65rem; color: var(--dim); margin-top: 0.2rem; }
+
+  /* Epoch timeline */
+  .epochs {
+    margin: 2.5rem 0;
+  }
+  .epochs h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+  .epoch-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 0.5rem;
+  }
+  .epoch-bar {
+    height: 48px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    font-size: 0.75rem;
+    color: #fff;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    min-width: 60px;
+    transition: opacity 0.2s;
+  }
+  .epoch-bar .count {
+    position: absolute;
+    right: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    opacity: 0.7;
+  }
+
+  /* Rosetta */
+  .rosetta {
+    margin: 2.5rem 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .rosetta h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .rosetta .sub { font-size: 0.85rem; color: var(--dim); margin-bottom: 1rem; }
+  .rosetta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+  }
+  .rosetta-item {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    border-left: 2px solid var(--gold);
+    background: rgba(196,163,90,0.04);
+    color: var(--text);
+  }
+  .rosetta-item.done { border-left-color: var(--green); }
+  .rosetta-item.done::after { content: ' ✓'; color: var(--green); font-size: 0.7rem; }
+
+  /* Memorial */
+  .memorial {
+    margin: 2.5rem 0;
+    background: linear-gradient(135deg, rgba(12,18,28,0.9), rgba(40,20,20,0.4));
+    border: 1px solid rgba(252,61,33,0.15);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .memorial h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .memorial p { font-size: 0.9rem; color: var(--text); max-width: 600px; margin: 0 auto; }
+  .memorial .number {
+    font-family: 'DM Mono', monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--nasa-red);
+    margin: 1rem 0 0.5rem;
+    opacity: 0.8;
+  }
+  .memorial .names {
+    font-size: 0.78rem;
+    color: var(--dim);
+    margin-top: 1rem;
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* Complex plane */
+  .complex-plane {
+    margin: 2.5rem 0;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+  @media (max-width: 800px) { .complex-plane { flex-direction: column; } }
+  .plane-visual {
+    flex-shrink: 0;
+    width: 260px;
+    height: 260px;
+  }
+  .plane-text { flex: 1; }
+  .plane-text h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .plane-text p { font-size: 0.88rem; color: var(--text); margin-bottom: 0.5rem; }
+  .axis-label { font-family: 'DM Mono', monospace; font-size: 0.8rem; padding: 0.2rem 0.5rem; border-radius: 3px; }
+  .axis-real { background: rgba(100,180,255,0.1); color: #64B4FF; }
+  .axis-imag { background: rgba(255,130,200,0.1); color: #FF82C8; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--dim);
+  }
+  .footer a { color: var(--gold); text-decoration: none; }
+  .footer .quote {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="label">tibsfox.com / Research / NASA</div>
+    <h1>NASA Mission Series</h1>
+    <div class="sub">720 missions across two full revolutions of the unit circle</div>
+    <div class="stats">
+      <div class="stat-box"><div class="val">720</div><div class="lbl">Missions</div></div>
+      <div class="stat-box"><div class="val">6</div><div class="lbl">Epochs</div></div>
+      <div class="stat-box"><div class="val">6</div><div class="lbl">Tracks / Mission</div></div>
+      <div class="stat-box"><div class="val">168</div><div class="lbl">Memorial</div></div>
+      <div class="stat-box"><div class="val">39</div><div class="lbl">Rosetta Tables</div></div>
+      <div class="stat-box"><div class="val">4&pi;</div><div class="lbl">Radians</div></div>
+    </div>
+  </div>
+
+  <!-- Unit Circle -->
+  <div class="circle-section">
+    <div class="circle-diagram">
+      <svg viewBox="0 0 280 280">
+        <!-- Outer circle (revolution 2) -->
+        <circle cx="140" cy="140" r="125" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+        <!-- Inner circle (revolution 1) -->
+        <circle cx="140" cy="140" r="85" fill="none" stroke="rgba(196,163,90,0.2)" stroke-width="1.5"/>
+        <!-- Axes -->
+        <line x1="10" y1="140" x2="270" y2="140" stroke="rgba(100,180,255,0.15)" stroke-width="1"/>
+        <line x1="140" y1="10" x2="140" y2="270" stroke="rgba(255,130,200,0.15)" stroke-width="1"/>
+        <!-- Axis labels -->
+        <text x="265" y="135" fill="#64B4FF" font-size="9" font-family="DM Mono, monospace" text-anchor="end">Re</text>
+        <text x="145" y="18" fill="#FF82C8" font-size="9" font-family="DM Mono, monospace">Im</text>
+        <!-- Revolution 1 arc (missions 1-360) -->
+        <path d="M 225 140 A 85 85 0 1 1 224.9 140.1" fill="none" stroke="var(--gold)" stroke-width="2.5" stroke-dasharray="4 2" opacity="0.7"/>
+        <!-- Revolution 2 arc (missions 361-720) -->
+        <path d="M 265 140 A 125 125 0 1 1 264.9 140.1" fill="none" stroke="var(--nasa-blue)" stroke-width="2" stroke-dasharray="3 3" opacity="0.5"/>
+        <!-- Degree 0 marker (mission 1.0) -->
+        <circle cx="225" cy="140" r="5" fill="var(--gold)" stroke="#fff" stroke-width="1.5"/>
+        <text x="235" y="137" fill="var(--gold)" font-size="8" font-family="DM Mono, monospace">0°</text>
+        <text x="235" y="148" fill="var(--dim)" font-size="7" font-family="DM Sans, sans-serif">v1.0</text>
+        <!-- Degree 1 marker (mission 1.1) -->
+        <circle cx="224.2" cy="131.2" r="3.5" fill="var(--magenta)" stroke="#fff" stroke-width="1"/>
+        <!-- Degree 90 marker -->
+        <circle cx="140" cy="55" r="3" fill="var(--teal)" stroke="#fff" stroke-width="1" opacity="0.4"/>
+        <text x="148" y="52" fill="var(--dim)" font-size="7" font-family="DM Mono, monospace">90°</text>
+        <!-- Degree 180 marker -->
+        <circle cx="55" cy="140" r="3" fill="var(--coral)" stroke="#fff" stroke-width="1" opacity="0.4"/>
+        <text x="35" y="137" fill="var(--dim)" font-size="7" font-family="DM Mono, monospace">180°</text>
+        <!-- Degree 270 marker -->
+        <circle cx="140" cy="225" r="3" fill="var(--purple)" stroke="#fff" stroke-width="1" opacity="0.4"/>
+        <text x="148" y="228" fill="var(--dim)" font-size="7" font-family="DM Mono, monospace">270°</text>
+        <!-- Center -->
+        <circle cx="140" cy="140" r="2" fill="rgba(255,255,255,0.3)"/>
+        <!-- Spiral hint -->
+        <text x="100" y="110" fill="var(--gold)" font-size="8" font-family="DM Mono, monospace" opacity="0.5">Rev 1</text>
+        <text x="80" y="85" fill="#64B4FF" font-size="8" font-family="DM Mono, monospace" opacity="0.4">Rev 2</text>
+        <!-- Memorial dots scattered on rev 2 -->
+        <circle cx="175" cy="35" r="1.5" fill="var(--nasa-red)" opacity="0.4"/>
+        <circle cx="50" cy="95" r="1.5" fill="var(--nasa-red)" opacity="0.4"/>
+        <circle cx="200" cy="245" r="1.5" fill="var(--nasa-red)" opacity="0.4"/>
+        <circle cx="35" cy="180" r="1.5" fill="var(--nasa-red)" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="circle-text">
+      <h2>Two Revolutions</h2>
+      <p><strong>Revolution 1</strong> (missions 1&ndash;552): The full NASA timeline from NACA founding through Artemis. Each mission is a point on the inner circle, advancing 360&deg; through history.</p>
+      <p><strong>Revolution 2</strong> (missions 553&ndash;720): 168 memorial missions on the outer circle, dedicated to every person lost in the pursuit of spaceflight. Same angles, greater radius.</p>
+      <p>The two revolutions are a spiral, not a loop. Everything traversed changes the distance from the origin.</p>
+      <div class="formula">720 missions &times; 0.5&deg;/mission = 360&deg; &times; 2 = 4&pi; radians</div>
+    </div>
+  </div>
+
+  <!-- 6-Track Pipeline -->
+  <div class="pipeline">
+    <h2>Per-Mission Pipeline &mdash; 6 Tracks</h2>
+    <div class="track-grid">
+      <div class="track" style="--track-color: #4CAF50;">
+        <div class="num">Track 1 &mdash; Parallel</div>
+        <h3>Mission Research</h3>
+        <p>History, science, engineering, operations. 3&ndash;5K words, sourced from NASA.gov, JPL, NSSDC, NTRS.</p>
+      </div>
+      <div class="track" style="--track-color: #8E24AA;">
+        <div class="num">Track 2 &mdash; Parallel</div>
+        <h3>Organism Pairing</h3>
+        <p>Non-animal organism (fungi, plants, lichens). PNW species preferred. 2&ndash;3K words. 6 resonance axes.</p>
+      </div>
+      <div class="track" style="--track-color: #FFB300;">
+        <div class="num">Track 3 &mdash; Parallel</div>
+        <h3>TSPB Mathematics</h3>
+        <p>McNeese-Hoag format: Tables, Formulas, Worked Examples. Real mission parameters. 8 TSPB layers. Philosophical debate questions.</p>
+      </div>
+      <div class="track" style="--track-color: #42A5F5;">
+        <div class="num">Track 4 &mdash; Parallel</div>
+        <h3>College Curriculum</h3>
+        <p>TRY sessions, DIY projects, department deposits, Rosetta connections, Fox Companies business pathways.</p>
+      </div>
+      <div class="track" style="--track-color: #EC407A;">
+        <div class="num">Track 5 &mdash; Parallel</div>
+        <h3>Simulation &amp; Creative Arts</h3>
+        <p>Python, Minecraft, Blender, GLSL, Arduino, Godot, GMAT. ML models. Sound design. Generative art. Screensavers.</p>
+      </div>
+      <div class="track" style="--track-color: #26A69A;">
+        <div class="num">Track 6 &mdash; Parallel</div>
+        <h3>Scientific Papers</h3>
+        <p>Historical paper + today's arXiv + state-of-the-art review. Wall-clock anchored. Living knowledge.</p>
+      </div>
+    </div>
+    <div class="track-qa">
+      <div class="num">QA Gate &mdash; Sequential (blocks release)</div>
+      <h3>Verification + Sync + Deploy</h3>
+      <p>Build &amp; test all artifacts. Validate JSON. Compile LaTeX &rarr; PDF. Sync from main. Push to tibsfox.com. Nothing ships unverified.</p>
+    </div>
+  </div>
+
+  <!-- Creative Artifacts -->
+  <div class="artifacts">
+    <h2>Creative Artifacts Per Mission</h2>
+    <div class="artifact-grid">
+      <div class="artifact"><div class="icon" style="color:var(--magenta);">&#9998;</div><div class="name">Story</div><div class="detail">HTML + LaTeX + PDF</div></div>
+      <div class="artifact"><div class="icon" style="color:var(--teal);">&#9836;</div><div class="name">FAUST Synth</div><div class="detail">VST / LV2 / JACK</div></div>
+      <div class="artifact"><div class="icon" style="color:var(--amber);">&#9889;</div><div class="name">LED Circuit</div><div class="detail">555 / CD4017 / LM3914</div></div>
+      <div class="artifact"><div class="icon" style="color:var(--coral);">&#9835;</div><div class="name">Analog Circuit</div><div class="detail">Preamp / VCF / VCO</div></div>
+      <div class="artifact"><div class="icon" style="color:var(--purple);">&#10070;</div><div class="name">GLSL Shader</div><div class="detail">Screensaver / Wallpaper</div></div>
+      <div class="artifact"><div class="icon" style="color:var(--green);">&#9881;</div><div class="name">Synth Module</div><div class="detail">Accumulates to full synth</div></div>
+      <div class="artifact"><div class="icon" style="color:#64B4FF;">&#9671;</div><div class="name">SVG Drawing</div><div class="detail">Technical illustration</div></div>
+      <div class="artifact"><div class="icon" style="color:var(--gold);">&#9733;</div><div class="name">Debate Questions</div><div class="detail">Philosophy of engineering</div></div>
+    </div>
+  </div>
+
+  <!-- Epochs -->
+  <div class="epochs">
+    <h2>Six Epochs &mdash; 68 Years of Spaceflight</h2>
+    <div class="epoch-row">
+      <div class="epoch-bar" style="flex:130; background: linear-gradient(90deg, #1B5E20, #4CAF50);">Epoch 1: Origins<span class="count">130</span></div>
+    </div>
+    <div class="epoch-row">
+      <div class="epoch-bar" style="flex:35; background: linear-gradient(90deg, #B71C1C, #E53935);">Epoch 2: Apollo<span class="count">35</span></div>
+    </div>
+    <div class="epoch-row">
+      <div class="epoch-bar" style="flex:47; background: linear-gradient(90deg, #E65100, #FF9800);">Epoch 3: Post-Apollo<span class="count">47</span></div>
+    </div>
+    <div class="epoch-row">
+      <div class="epoch-bar" style="flex:157; background: linear-gradient(90deg, #0D47A1, #1E88E5);">Epoch 4: Shuttle<span class="count">157</span></div>
+    </div>
+    <div class="epoch-row">
+      <div class="epoch-bar" style="flex:146; background: linear-gradient(90deg, #4A148C, #7E57C2);">Epoch 5: Robotic<span class="count">146</span></div>
+    </div>
+    <div class="epoch-row">
+      <div class="epoch-bar" style="flex:37; background: linear-gradient(90deg, #004D40, #26A69A);">Epoch 6: Artemis<span class="count">37</span></div>
+    </div>
+    <div style="text-align:center; margin-top:0.5rem; font-size:0.7rem; color:var(--dim);">
+      552 missions + 168 memorial = 720 total &middot; 1958&ndash;2040s
+    </div>
+  </div>
+
+  <!-- Complex Plane -->
+  <div class="complex-plane">
+    <div class="plane-visual">
+      <svg viewBox="0 0 260 260">
+        <!-- Grid -->
+        <line x1="0" y1="130" x2="260" y2="130" stroke="rgba(100,180,255,0.12)" stroke-width="1"/>
+        <line x1="130" y1="0" x2="130" y2="260" stroke="rgba(255,130,200,0.12)" stroke-width="1"/>
+        <!-- Grid lines -->
+        <line x1="0" y1="65" x2="260" y2="65" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+        <line x1="0" y1="195" x2="260" y2="195" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+        <line x1="65" y1="0" x2="65" y2="260" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+        <line x1="195" y1="0" x2="195" y2="260" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+        <!-- Cluster positions -->
+        <circle cx="205" cy="170" r="14" fill="none" stroke="rgba(120,144,156,0.3)" stroke-width="1"/><text x="205" y="173" text-anchor="middle" fill="rgba(120,144,156,0.5)" font-size="6" font-family="DM Sans">Infra</text>
+        <circle cx="175" cy="145" r="10" fill="none" stroke="rgba(255,179,0,0.3)" stroke-width="1"/><text x="175" y="148" text-anchor="middle" fill="rgba(255,179,0,0.5)" font-size="6" font-family="DM Sans">Elec</text>
+        <circle cx="60" cy="55" r="16" fill="none" stroke="rgba(239,83,80,0.3)" stroke-width="1"/><text x="60" y="58" text-anchor="middle" fill="rgba(239,83,80,0.5)" font-size="6" font-family="DM Sans">Music</text>
+        <circle cx="90" cy="75" r="13" fill="none" stroke="rgba(76,175,80,0.3)" stroke-width="1"/><text x="90" y="78" text-anchor="middle" fill="rgba(76,175,80,0.5)" font-size="6" font-family="DM Sans">Ecology</text>
+        <circle cx="45" cy="45" r="11" fill="none" stroke="rgba(236,64,122,0.3)" stroke-width="1"/><text x="45" y="48" text-anchor="middle" fill="rgba(236,64,122,0.5)" font-size="6" font-family="DM Sans">Creative</text>
+        <circle cx="150" cy="75" r="12" fill="none" stroke="rgba(30,136,229,0.3)" stroke-width="1"/><text x="150" y="78" text-anchor="middle" fill="rgba(30,136,229,0.5)" font-size="6" font-family="DM Sans">Space</text>
+        <circle cx="125" cy="100" r="11" fill="none" stroke="rgba(171,71,188,0.3)" stroke-width="1"/><text x="125" y="103" text-anchor="middle" fill="rgba(171,71,188,0.5)" font-size="6" font-family="DM Sans">Vision</text>
+        <!-- Axis labels -->
+        <text x="250" y="125" fill="#64B4FF" font-size="8" font-family="DM Mono, monospace" text-anchor="end">Re</text>
+        <text x="135" y="12" fill="#FF82C8" font-size="8" font-family="DM Mono, monospace">Im</text>
+        <text x="250" y="142" fill="rgba(100,180,255,0.3)" font-size="6.5" font-family="DM Sans">Engineering</text>
+        <text x="10" y="142" fill="rgba(100,180,255,0.3)" font-size="6.5" font-family="DM Sans">Culture</text>
+        <text x="138" y="250" fill="rgba(255,130,200,0.3)" font-size="6.5" font-family="DM Sans">Concrete</text>
+        <text x="138" y="18" fill="rgba(255,130,200,0.3)" font-size="6.5" font-family="DM Sans">Experiential</text>
+      </svg>
+    </div>
+    <div class="plane-text">
+      <h2>The Complex Plane of Experience</h2>
+      <p>Every mission is a point in two dimensions. The <span class="axis-label axis-real">Real axis</span> measures how concrete and engineering-focused the content is. The <span class="axis-label axis-imag">Imaginary axis</span> measures how cultural and experiential.</p>
+      <p>Music lives high on the imaginary axis. Infrastructure lives on the real axis. Space bridges both &mdash; engineering at the service of awe. The Rosetta Stone translates between axes.</p>
+      <p>The Riemann sphere maps this plane onto S&sup2; via stereographic projection &mdash; the 3D constellation.</p>
+    </div>
+  </div>
+
+  <!-- Rosetta -->
+  <div class="rosetta">
+    <h2>Rosetta Stone &mdash; Engineering Reference Tables</h2>
+    <div class="sub">McNeese-Hoag standard. Tables / Formulas / Worked Examples. 39 reference tables building across missions.</div>
+    <div class="rosetta-grid">
+      <div class="rosetta-item done">Greek alphabet</div>
+      <div class="rosetta-item done">Physical constants</div>
+      <div class="rosetta-item done">Periodic table / elements</div>
+      <div class="rosetta-item done">Water properties</div>
+      <div class="rosetta-item done">Material strength</div>
+      <div class="rosetta-item done">Wood strength (PNW)</div>
+      <div class="rosetta-item done">Friction coefficients</div>
+      <div class="rosetta-item done">Factors of safety</div>
+      <div class="rosetta-item done">Plane area properties</div>
+      <div class="rosetta-item">Homogeneous bodies</div>
+      <div class="rosetta-item">Structural steel shapes</div>
+      <div class="rosetta-item">Angle sections</div>
+      <div class="rosetta-item">Wire &amp; sheet metal gauges</div>
+      <div class="rosetta-item">Timber standard sizes</div>
+      <div class="rosetta-item">Beam diagrams</div>
+      <div class="rosetta-item">NEC reference tables</div>
+      <div class="rosetta-item">Copper wire tables</div>
+      <div class="rosetta-item">Aluminum wire tables</div>
+      <div class="rosetta-item">Stranded conductors</div>
+      <div class="rosetta-item">Balanced circuits</div>
+      <div class="rosetta-item">Manning's coefficients</div>
+      <div class="rosetta-item">Conversion factors</div>
+      <div class="rosetta-item">Temperature formulas</div>
+      <div class="rosetta-item">Derivatives (Table 49)</div>
+      <div class="rosetta-item">Standard series (Table 50)</div>
+      <div class="rosetta-item">Table of integrals (51)</div>
+      <div class="rosetta-item">Trigonometric identities</div>
+      <div class="rosetta-item">Arithmetic &amp; algebra</div>
+      <div class="rosetta-item">Geometry</div>
+      <div class="rosetta-item">Plane trigonometry</div>
+      <div class="rosetta-item">Spherical trigonometry</div>
+      <div class="rosetta-item">Hyperbolic functions</div>
+      <div class="rosetta-item">Analytic geometry</div>
+      <div class="rosetta-item">Differential calculus</div>
+      <div class="rosetta-item">Integral calculus</div>
+      <div class="rosetta-item">Mathematical constants</div>
+      <div class="rosetta-item">Factorials &amp; gamma</div>
+      <div class="rosetta-item">Logarithm tables</div>
+      <div class="rosetta-item">Trig function tables</div>
+    </div>
+  </div>
+
+  <!-- Memorial -->
+  <div class="memorial">
+    <h2>The Second Revolution</h2>
+    <div class="number">168</div>
+    <p>Missions 553&ndash;720 are dedicated to every person lost in the pursuit of spaceflight. Astronauts, cosmonauts, test pilots, ground crew, engineers. Each name receives a full mission &mdash; research, organism, story, art. Interspersed in the timeline where they fell.</p>
+    <div class="names">
+      Grissom &middot; White &middot; Chaffee &middot; Komarov &middot; Dobrovolsky &middot; Volkov &middot; Patsayev &middot;
+      Scobee &middot; Smith &middot; Resnik &middot; Onizuka &middot; McNair &middot; Jarvis &middot; McAuliffe &middot;
+      Husband &middot; McCool &middot; Anderson &middot; Brown &middot; Chawla &middot; Clark &middot; Ramon &middot;
+      Adams &middot; Apt &middot; Alsbury &middot; and 144 more
+    </div>
+    <p style="margin-top:1.5rem; font-style:italic; color:var(--gold); font-family:'Libre Baskerville',serif;">No one is forgotten. That is the point.</p>
+  </div>
+
+  <div class="footer">
+    <a href="index.html">NASA Mission Series</a> &middot;
+    <a href="../constellation-sphere.html">3D Sphere</a> &middot;
+    <a href="../index.html">Research Index</a> &middot;
+    <a href="https://github.com/Tibsfox/gsd-skill-creator">GitHub</a>
+    <div class="quote">&ldquo;The spaces between the missions are where the meaning lives.&rdquo;</div>
+    <div style="margin-top:0.5rem;">Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
