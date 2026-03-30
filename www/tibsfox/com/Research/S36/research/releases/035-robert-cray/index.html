@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 35&deg; &mdash; Robert Cray &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #90CAF9;
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+    }
+
+    .blues-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1A237E;
+      color: #90CAF9;
+      border: 1px solid #3F51B5;
+      margin-left: 0.3rem;
+    }
+
+    .mercury-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #E53935;
+      margin-left: 0.3rem;
+    }
+
+    .tacoma-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #004D40;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .new-genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FFD600;
+      color: #1A237E;
+      border: 1px solid #F9A825;
+      margin-left: 0.3rem;
+      animation: pulse-new 2s ease-in-out infinite;
+    }
+    @keyframes pulse-new {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 214, 0, 0.4); }
+      50% { box-shadow: 0 0 8px 3px rgba(255, 214, 0, 0.2); }
+    }
+
+    .e5-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #FF6D00;
+      color: white;
+      border: 1px solid #E65100;
+      margin-left: 0.3rem;
+      animation: pulse-e5 2s ease-in-out infinite;
+    }
+    @keyframes pulse-e5 {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(230, 81, 0, 0.4); }
+      50% { box-shadow: 0 0 8px 3px rgba(230, 81, 0, 0.2); }
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid var(--seattle-navy);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E3F2FD; color: #1565C0; }
+    .level-advanced { background: #E8EAF6; color: #1A237E; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #1565C0;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: var(--seattle-navy); }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #1A237E;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #90CAF9;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #1A237E;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8EAF6;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .blues-box {
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #C5CAE9;
+      border: 2px solid #3F51B5;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .blues-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #90CAF9;
+      font-family: system-ui, sans-serif;
+    }
+    .blues-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .blues-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .blues-box td, .blues-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid #283593;
+      color: #C5CAE9;
+    }
+    .blues-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #90CAF9;
+    }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: linear-gradient(135deg, #FF6D00, #E65100);
+      color: white;
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFECB3;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #FFECB3;
+    }
+
+    .tacoma-box {
+      background: linear-gradient(135deg, #004D40, #00695C);
+      color: #B2DFDB;
+      border: 2px solid #00897B;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .tacoma-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #80CBC4;
+      font-family: system-ui, sans-serif;
+    }
+    .tacoma-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .tacoma-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .tacoma-box td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #B2DFDB;
+    }
+    .tacoma-box td:first-child { font-weight: 600; color: #80CBC4; width: 30%; }
+
+    .discography-box {
+      background: linear-gradient(135deg, #37474F, #455A64);
+      color: #B0BEC5;
+      border: 2px solid #78909C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .discography-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #80DEEA;
+      font-family: system-ui, sans-serif;
+    }
+    .discography-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .discography-box table {
+      width: 100%;
+      font-size: 0.82rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .discography-box td, .discography-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: #B0BEC5;
+    }
+    .discography-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #80DEEA;
+    }
+
+    .mercury-box {
+      background: linear-gradient(135deg, #B71C1C, #C62828);
+      color: #FFCDD2;
+      border: 2px solid #E53935;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .mercury-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #EF9A9A;
+      font-family: system-ui, sans-serif;
+    }
+    .mercury-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .mercury-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .mercury-box td, .mercury-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #FFCDD2;
+    }
+    .mercury-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #EF9A9A;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">35&deg;</div>
+      <div>
+        <h1>Robert Cray</h1>
+        <div class="subtitle">Blues &middot; The Deep Root &mdash; Tacoma&rsquo;s Gift to the World
+          <span class="e5-badge">Energy 5 &mdash; x4</span>
+          <span class="blues-badge">Blues</span>
+          <span class="new-genre-badge">New Genre</span>
+          <span class="mercury-badge">Mercury</span>
+          <span class="tacoma-badge">Tacoma</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../034-the-tempos/index.html">Degree 34&deg; (The Tempos)</a>
+      <a href="../033-larry-english/index.html">Degree 33&deg; (English)</a>
+      <a href="../030-ray-charles/index.html">Degree 30&deg; (Ray Charles)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Quincy Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          A shy Army brat discovers Muddy Waters in his father&rsquo;s
+          record collection. Albert Collins tells him to &ldquo;keep it
+          up&rdquo; at a Tacoma graduation party. He moves to Eugene, plays
+          bass in <em>Animal House</em>, forms the Robert Cray Band, and
+          spends a decade on the Pacific Northwest bar circuit. Then
+          <em>Strong Persuader</em> goes triple-platinum, &ldquo;Smoking
+          Gun&rdquo; hits No. 1, and the blues is alive again. Five Grammys.
+          Blues Hall of Fame. A Fender signature Stratocaster. Fifty years
+          and counting. The root stayed planted in the Pacific Northwest.
+          The branches reached the world.
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Territorial Acknowledgment</h4>
+          <p>This research is mapped to the Tacoma/Seattle metropolitan area
+          within the Seattle 360 engine. Tacoma sits on the ancestral territory
+          of the <strong>Puyallup Tribe of Indians</strong>, the
+          <strong>Nisqually Indian Tribe</strong>, and related Coast Salish
+          peoples. The broader Puget Sound region is territory of the
+          <strong>Duwamish Tribal Organization</strong> and the
+          <strong>Muckleshoot Indian Tribe</strong>. The Duwamish Tribe
+          remains federally unrecognized. This acknowledgment was established
+          at degree 20 and extends here to the Puyallup people.</p>
+        </div>
+
+        <!-- ========================================
+             BLUES ENTERS THE ENGINE
+             ======================================== -->
+
+        <div class="blues-box">
+          <h4>Blues Enters the Engine &mdash; Genre Stage 17</h4>
+          <p><strong>Blues is a new genre.</strong> Every previous degree has
+          been Jazz, R&amp;B, R&amp;B/Soul, R&amp;B/Jazz, or Soul. At degree
+          35, the engine maps the <strong>root genre</strong> &mdash; the
+          tradition from which R&amp;B, Soul, and Rock all descend. Robert
+          Cray&rsquo;s blues is modern, infused with R&amp;B and soul, but
+          the genre designation acknowledges the foundational trunk beneath
+          every branch the engine has traced for 34 degrees.</p>
+          <table>
+            <tr><th>Stage</th><th>Degree</th><th>Genre</th></tr>
+            <tr><td>12</td><td>30</td><td>R&amp;B/Jazz</td></tr>
+            <tr><td>13</td><td>31</td><td>R&amp;B/Soul</td></tr>
+            <tr><td>14&ndash;15</td><td>32&ndash;33</td><td>R&amp;B (pure)</td></tr>
+            <tr><td>16</td><td>34</td><td>R&amp;B/Soul</td></tr>
+            <tr><td><strong>17</strong></td><td><strong>35</strong></td><td><strong>Blues (NEW)</strong></td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             E=5 ENERGY (FOURTH CONSECUTIVE)
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>E=5 &mdash; Fourth Consecutive (Degrees 32&ndash;35)</h4>
+          <p><strong>The E=5 streak extends to four degrees &mdash; the
+          engine&rsquo;s longest maximum-energy run.</strong>
+          Four modes now established:</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>E=5 Mode</th></tr>
+            <tr><td>32</td><td>Luther Rabb</td><td>Personal tidal</td></tr>
+            <tr><td>33</td><td>Larry English</td><td>Scene-cumulative tidal</td></tr>
+            <tr><td>34</td><td>The Tempos</td><td>Collective tidal</td></tr>
+            <tr><td><strong>35</strong></td><td><strong>Robert Cray</strong></td><td><strong>Breakthrough tidal</strong></td></tr>
+          </table>
+          <p style="margin-top:0.6rem">Distribution: 2:13:6:11:<strong>4</strong>.
+          Breakthrough tidal is E=5 at escape velocity &mdash; the energy of
+          <em>Strong Persuader</em> going 3x Platinum, &ldquo;Smoking Gun&rdquo;
+          hitting No.&nbsp;1, a Tacoma kid recognized as a peer of Clapton
+          and Collins on the world stage.</p>
+        </div>
+
+        <!-- ========================================
+             TACOMA: NEW GEOGRAPHIC NODE
+             ======================================== -->
+
+        <div class="tacoma-box">
+          <h4>Tacoma &mdash; First City Beyond Seattle</h4>
+          <p><strong>The engine expands from a Seattle engine to a Puget
+          Sound engine.</strong> Tacoma is 30 miles south of Seattle, with
+          its own identity, port, and musical ecosystem shaped by the
+          military presence at Fort Lewis.</p>
+          <table>
+            <tr><td>Born</td><td>Columbus, Georgia (August 1, 1953)</td></tr>
+            <tr><td>Raised</td><td>Various (Army brat) &rarr; Tacoma, WA (1968)</td></tr>
+            <tr><td>High school</td><td>Lakes HS, Lakewood, WA (graduated 1971)</td></tr>
+            <tr><td>Band formed</td><td>Eugene, Oregon (1974)</td></tr>
+            <tr><td>Breakthrough</td><td>Strong Persuader (Mercury, 1986)</td></tr>
+            <tr><td>Still touring</td><td>2025&ndash;2026 (&ldquo;Out Driving Around&rdquo; tour)</td></tr>
+          </table>
+          <p style="margin-top:0.6rem">The Central District streak (32&ndash;34)
+          breaks at degree 35 &mdash; the engine leaves the CD not for
+          another Seattle neighborhood but for another city entirely.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             BIOGRAPHY TIMELINE
+             ======================================== -->
+
+        <h2>Career Timeline</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1953 &mdash; Born</div>
+          <p>August 1, Columbus, Georgia. Father stationed at Fort Benning.
+          Military family moves through Virginia, California, Germany.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1968 &mdash; Tacoma</div>
+          <p>Family settles in Tacoma, WA. Cray attends Lakes High School
+          in Lakewood. Discovers Muddy Waters and Howlin&rsquo; Wolf in
+          his father&rsquo;s record collection.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1969 &mdash; Richard Cousins</div>
+          <p>Meets bassist Richard Cousins in Tacoma. They study the blues
+          together, play Tacoma bars, form a musical partnership lasting
+          over 20 years.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1971 &mdash; Albert Collins</div>
+          <p>Attends high school graduation party where Albert Collins performs.
+          Collins tells the young guitarist to &ldquo;keep it up.&rdquo;
+          The lineage is seeded.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1974 &mdash; Eugene, Oregon</div>
+          <p>Cray and Cousins move to Eugene. The Robert Cray Band forms
+          with Tom Murphy on drums. Bar-circuit years begin. Curtis Salgado
+          joins as singer/harp player; they merge into the Cray-Hawks.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1977&ndash;78 &mdash; Animal House</div>
+          <p>Cray plays bass (uncredited) in Otis Day and the Knights for
+          <em>National Lampoon&rsquo;s Animal House</em>, filmed at the
+          University of Oregon. Belushi&rsquo;s exposure to PNW blues
+          helps inspire <em>The Blues Brothers</em>.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1980 &mdash; Debut</div>
+          <p><em>Who&rsquo;s Been Talkin&rsquo;</em> recorded in 1978, released
+          on Tomato Records. Label goes bankrupt. Album is functionally
+          invisible.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1983&ndash;85 &mdash; Hightone</div>
+          <p><em>Bad Influence</em> (1983) and <em>False Accusations</em> (1985)
+          on Hightone Records. &ldquo;Phone Booth&rdquo; later covered by
+          Albert King. Critical breakthrough.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1985 &mdash; Showdown!</div>
+          <p>Records <em>Showdown!</em> with Albert Collins and Johnny
+          Copeland. Wins Grammy for Best Traditional Blues Recording. The
+          graduation-party lineage bears fruit.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1986 &mdash; Strong Persuader</div>
+          <p>Mercury Records debut. 3x Platinum. No. 13 Billboard 200.
+          &ldquo;Smoking Gun&rdquo; hits No. 1 Rock Tracks, No. 22 Hot 100.
+          Grammy for Best Contemporary Blues Recording. The best-selling
+          blues album since the 1960s revival.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1988&ndash;99 &mdash; Mercury Era</div>
+          <p>Ten Billboard 200 albums. Tours with Eric Clapton. Five total
+          Grammy Awards. Fender designs signature Robert Cray Stratocaster
+          (1990).</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2000s&ndash;Present</div>
+          <p>Continues recording and touring. Blues Hall of Fame inductee.
+          <em>That&rsquo;s What I Heard</em> (2020). &ldquo;Out Driving
+          Around&rdquo; tour (2025). Over 50 years as a working musician.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             KEY ALBUMS
+             ======================================== -->
+
+        <h2>Selected Discography</h2>
+
+        <div class="discography-box">
+          <h4>Key Albums</h4>
+          <table>
+            <tr><th>Year</th><th>Album</th><th>Label</th><th>Notes</th></tr>
+            <tr><td>1980</td><td>Who&rsquo;s Been Talkin&rsquo;</td><td>Tomato</td><td>Debut; label bankruptcy</td></tr>
+            <tr><td>1983</td><td>Bad Influence</td><td>Hightone</td><td>&ldquo;Phone Booth&rdquo;</td></tr>
+            <tr><td>1985</td><td>Showdown!</td><td>Alligator</td><td>Grammy; w/ Collins &amp; Copeland</td></tr>
+            <tr><td>1986</td><td>Strong Persuader</td><td>Mercury</td><td>3x Platinum; Grammy; &ldquo;Smoking Gun&rdquo;</td></tr>
+            <tr><td>1988</td><td>Don&rsquo;t Be Afraid of the Dark</td><td>Mercury</td><td>Top 40 Billboard 200</td></tr>
+            <tr><td>1999</td><td>Take Your Shoes Off</td><td>Rykodisc</td><td>Grammy Award</td></tr>
+            <tr><td>2017</td><td>Robert Cray &amp; Hi Rhythm</td><td>Jay-Vee</td><td>Grammy nomination</td></tr>
+            <tr><td>2020</td><td>That&rsquo;s What I Heard</td><td>Nozzle</td><td>Curtis Mayfield, Bobby Bland tributes</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             MERCURY RECORDS
+             ======================================== -->
+
+        <div class="mercury-box">
+          <h4>Mercury Records &mdash; Third Degree (31, 32, 35)</h4>
+          <p>Mercury returns after two local-label degrees (33&ndash;34).
+          Three Mercury degrees now in the engine:</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>Mercury Context</th></tr>
+            <tr><td>31</td><td>Brenda Lee Eager</td><td>R&amp;B/Soul on Mercury</td></tr>
+            <tr><td>32</td><td>Luther Rabb</td><td>Via War (associated label)</td></tr>
+            <tr><td><strong>35</strong></td><td><strong>Robert Cray</strong></td><td><strong>Signed directly; Strong Persuader</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY CONTRIBUTIONS
+             ======================================== -->
+
+        <h2>Theory Contributions</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Deep Root</h4>
+            <div class="level level-advanced">Advanced &middot; Artist-City #36</div>
+            <p>The artist raised in a PNW city during formative years who
+            stays regional during the transition from amateur to professional
+            (Tacoma &rarr; Eugene) before achieving national/global
+            recognition &mdash; while the root stays planted in Pacific
+            Northwest soil. Unlike The Export (degree 0), the Deep Root
+            never leaves the region during formation.</p>
+            <div class="examples">Cray: Tacoma upbringing &rarr; Eugene bar circuit &rarr;
+            national via Strong Persuader. PNW-rooted throughout.</div>
+            <div class="genealogy"><strong>Ancestor:</strong> The Export (degree 0, Quincy Jones).
+            The Export leaves entirely; the Deep Root stays regional, then goes global.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Stinging Clean</h4>
+            <div class="level level-advanced">Advanced &middot; Acoustic Element #36</div>
+            <p>The timbral quality of a Fender Stratocaster played clean with
+            pickups lowered flush to the pickguard &mdash; bright, articulate,
+            with a sharp leading edge and clear decay. The sound of restraint:
+            dynamic range and touch over gain and wattage. Defined the 1980s
+            blues revival&rsquo;s tonal palette.</p>
+            <div class="examples">Cray&rsquo;s &ldquo;Smoking Gun&rdquo; opening riff: clean
+            Strat, every note placed precisely. Contrast with Vaughan&rsquo;s
+            overdriven approach.</div>
+            <div class="genealogy"><strong>Follows:</strong> The ensemble blend (34). From
+            collective composite sound to individual voice cutting through
+            with precision.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: The Articulate Sting</h4>
+            <div class="level level-intermediate">Intermediate &middot; Blue Note #35</div>
+            <p>The blue note on a clean-toned Stratocaster where every
+            micro-tonal increment of the bend is audible. No distortion to
+            smear the pitch transition. The departure, the passage through
+            the blue-note zone, the arrival &mdash; all exposed under
+            a magnifying glass of clarity.</p>
+            <div class="examples">35th deployment. Follows the unison bend (34, collective).
+            Returns to solo voice at higher precision. Clean tone = nothing hidden.</div>
+            <div class="genealogy"><strong>Opposite:</strong> Ghost bend (33, unrecorded). The
+            articulate sting is maximally audible; the ghost bend was never captured.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Breakthrough Tidal (E=5 Mode 4)</h4>
+            <div class="level level-intermediate">Intermediate &middot; Energy</div>
+            <p>E=5 at escape velocity: the energy of an artist who breaks
+            through from local/regional to national/global. Not contained
+            within the scene (modes 2&ndash;3) or distributed across
+            enterprises (mode 1). Breakthrough tidal is explosive outward
+            expansion &mdash; 3x Platinum from a Tacoma kid.</p>
+            <div class="examples">Distribution now 2:13:6:11:4. Four consecutive E=5 degrees
+            (32&ndash;35) with four distinct modes.</div>
+            <div class="genealogy"><strong>Sequence:</strong> Personal (32) &rarr; Scene (33) &rarr;
+            Collective (34) &rarr; Breakthrough (35). Individual to local to
+            group to global.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             DOCUMENTATION SPECTRUM
+             ======================================== -->
+
+        <h2>The Documentation Spectrum Completes</h2>
+
+        <p>Degrees 33&ndash;34&ndash;35 map the full documentation spectrum:</p>
+
+        <div class="discography-box">
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>Documentation</th><th>Challenge</th></tr>
+            <tr><td>33</td><td>Larry English</td><td>Zero results</td><td>Finding anything</td></tr>
+            <tr><td>34</td><td>The Tempos</td><td>Wrong results</td><td>Distinguishing decoy from target</td></tr>
+            <tr><td><strong>35</strong></td><td><strong>Robert Cray</strong></td><td><strong>Abundant</strong></td><td><strong>Curating from surplus</strong></td></tr>
+          </table>
+        </div>
+
+        <p>After two degrees of documentation gaps and misdirection, degree 35
+        presents the opposite condition: Robert Cray is one of the most
+        thoroughly documented blues musicians alive. The engine now has
+        methodology for all three states: absence, misdirection, abundance.</p>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <div class="carry-forward-box">
+          <h4>Carry-Forward to Degree 36</h4>
+          <ul>
+            <li><strong>E=5 x4 (32&ndash;35):</strong> Four consecutive, four modes. Distribution 2:13:6:11:4. Track whether streak continues.</li>
+            <li><strong>Blues at Genre Stage 17:</strong> New genre entered. Root genre mapped. Track genre at degree 36.</li>
+            <li><strong>Tacoma as second city:</strong> Engine is now Puget Sound, not just Seattle. Track geography.</li>
+            <li><strong>The Deep Root (artist-city #36):</strong> PNW lifer who went global. Apply to future PNW-raised artists.</li>
+            <li><strong>The Stinging Clean (acoustic #36):</strong> Clean Strat tone. Track next acoustic element.</li>
+            <li><strong>Blue Note #35 (articulate sting):</strong> Clean-tone precision bend. Track next deployment.</li>
+            <li><strong>Mercury x3 (31, 32, 35):</strong> Most frequent major label. Track label at degree 36.</li>
+            <li><strong>Solo format returns:</strong> After group (34). Track format.</li>
+            <li><strong>CD streak broken:</strong> Three consecutive (32&ndash;34), broken at 35. Track geography.</li>
+            <li><strong>Gender: 6:30 (~16.7%).</strong> Cray is male. No change in women count.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Degree Profile</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">35 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist</span>
+            <span class="stat-value">Robert Cray</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Blues (NEW)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E=5 (x4 streak)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">1980s&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Location</span>
+            <span class="stat-value">Tacoma, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Mercury Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Aug 1, 1953</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Career Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Grammys</span>
+            <span class="stat-value">5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Platinum</span>
+            <span class="stat-value">3x (Strong Persuader)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Billboard 200 peak</span>
+            <span class="stat-value">No. 13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Career span</span>
+            <span class="stat-value">1974&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Guitar</span>
+            <span class="stat-value">Fender Stratocaster</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Signature model</span>
+            <span class="stat-value">Since 1990</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Artist-city #</span>
+            <span class="stat-value">36 (Deep Root)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic #</span>
+            <span class="stat-value">36 (Stinging Clean)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue note #</span>
+            <span class="stat-value">35 (Articulate Sting)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre stage</span>
+            <span class="stat-value">17 (Blues &mdash; NEW)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Format</span>
+            <span class="stat-value">Solo (bandleader)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Documentation</span>
+            <span class="stat-value">Abundant</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 &mdash; Degree 35&deg; &mdash; Robert Cray &mdash; v1.49.171</p>
+    <p><small>Blues enters the engine. The root genre is mapped.</small></p>
+  </footer>
+</body>
+</html>
