@@ -1,0 +1,161 @@
+* Explorer 7 — L-Network Antenna Tuner
+* =========================================================================
+* Mission 1.12 — Explorer 7 (Goddard SFC / Juno II), October 13, 1959
+* Progressive Radio Series v1.12: Antenna Impedance Matching
+*
+* An L-network matching circuit transforms the antenna impedance to
+* the receiver's 50-ohm input impedance. Two configurations are
+* simulated: series-L/shunt-C for high-Z antennas, and
+* series-C/shunt-L for low-Z antennas.
+*
+* The AC analysis sweeps frequency to show the matching bandwidth:
+* at the design frequency, the network presents 50 ohms to the receiver.
+* Away from resonance, the mismatch increases and signal transfer drops.
+*
+* Three cases:
+*   1. High-Z antenna (200Ω) matched to 50Ω at 7 MHz
+*   2. Low-Z antenna (20Ω) matched to 50Ω at 7 MHz
+*   3. Frequency sweep showing bandwidth of the match
+*
+* Explorer 7's telemetry at 108 MHz used a matching network between
+* the transmitter and the spacecraft antenna to maximize radiated power.
+* Every milliwatt mattered at 573-1073 km altitude.
+*
+* Run: ngspice -b antenna-tuner.cir
+* =========================================================================
+
+.title Explorer 7 — L-Network Antenna Tuner (Impedance Matching)
+
+* =========================================================================
+* CASE 1: High-Z Antenna (200Ω → 50Ω at 7 MHz)
+* =========================================================================
+* L-network: series inductor + shunt capacitor
+*
+* Design:
+*   Q = sqrt(R_ant/R_load - 1) = sqrt(200/50 - 1) = 1.732
+*   X_L = Q × R_load = 1.732 × 50 = 86.6 Ω → L = 1.97 µH
+*   X_C = R_ant / Q = 200 / 1.732 = 115.5 Ω → C = 197 pF
+
+* Source: 1V signal through source impedance (receiver side = 50Ω)
+V_hi hi_src 0 AC 1
+
+* Receiver impedance (50Ω)
+R_hi_rx hi_src hi_in 50
+
+* L-network: series L, shunt C
+L_hi hi_in hi_out 1.97u
+C_hi hi_out 0 197p
+
+* Antenna impedance (200Ω)
+R_hi_ant hi_out 0 200
+
+* =========================================================================
+* CASE 2: Low-Z Antenna (20Ω → 50Ω at 7 MHz)
+* =========================================================================
+* L-network: series capacitor + shunt inductor
+*
+* Design:
+*   Q = sqrt(R_load/R_ant - 1) = sqrt(50/20 - 1) = 1.225
+*   X_C = Q × R_ant = 1.225 × 20 = 24.5 Ω → C = 928 pF
+*   X_L = R_load / Q = 50 / 1.225 = 40.8 Ω → L = 0.93 µH
+
+V_lo lo_src 0 AC 1
+
+* Receiver impedance (50Ω)
+R_lo_rx lo_src lo_in 50
+
+* L-network: series C, shunt L
+C_lo lo_in lo_out 928p
+L_lo lo_out 0 0.93u
+
+* Antenna impedance (20Ω)
+R_lo_ant lo_out 0 20
+
+* =========================================================================
+* CASE 3: Unmatched (direct connection, 200Ω to 50Ω)
+* =========================================================================
+* No matching network — shows the mismatch loss
+
+V_un un_src 0 AC 1
+
+* Receiver impedance (50Ω)
+R_un_rx un_src un_out 50
+
+* Antenna impedance (200Ω) — direct connection
+R_un_ant un_out 0 200
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* AC sweep from 1 MHz to 30 MHz (covers HF bands)
+.ac dec 500 1Meg 30Meg
+
+.control
+  run
+
+  set color0 = white
+  set color1 = rgb:e8:d0:60
+  set color2 = rgb:cc:40:20
+  set color3 = rgb:20:40:aa
+  set color4 = rgb:8a:aa:70
+
+  * --- Plot 1: Voltage at antenna for all three cases ---
+  * Higher voltage at antenna = better power transfer
+  plot vdb(hi_out) vdb(lo_out) vdb(un_out) title 'Antenna Voltage: Matched vs Unmatched' xlabel 'Frequency (Hz)' ylabel 'Voltage (dB)'
+
+  * --- Plot 2: Power delivered to antenna ---
+  * P = V^2 / R
+  let p_hi = v(hi_out) * v(hi_out) / 200
+  let p_lo = v(lo_out) * v(lo_out) / 20
+  let p_un = v(un_out) * v(un_out) / 200
+  let p_avail = 1 * 1 / (4 * 50)
+
+  * Normalized to available power
+  let gain_hi = p_hi / p_avail
+  let gain_lo = p_lo / p_avail
+  let gain_un = p_un / p_avail
+
+  plot vdb(hi_out) vdb(lo_out) vdb(un_out) title 'Signal Transfer: High-Z Match / Low-Z Match / No Match' xlabel 'Frequency' ylabel 'dB'
+
+  * --- Plot 3: Input impedance seen by receiver ---
+  let z_hi_mag = v(hi_in) / (v(hi_src) - v(hi_in)) * 50
+  plot mag(z_hi_mag) title 'Input Impedance Magnitude (High-Z L-network)' xlabel 'Frequency' ylabel '|Z| (Ohms)'
+
+  * Measurements at design frequency
+  meas ac v_hi_7mhz find vdb(hi_out) at=7e6
+  meas ac v_lo_7mhz find vdb(lo_out) at=7e6
+  meas ac v_un_7mhz find vdb(un_out) at=7e6
+
+  * 3dB bandwidth of the high-Z match
+  let v_hi_peak = maximum(vdb(hi_out))
+
+  echo ""
+  echo "========================================="
+  echo "L-Network Antenna Tuner Analysis"
+  echo "========================================="
+  echo "Design frequency: 7 MHz"
+  echo ""
+  echo "CASE 1: 200Ω antenna matched to 50Ω"
+  echo "  L = 1.97 uH (series), C = 197 pF (shunt)"
+  echo "  Signal at 7 MHz: $&v_hi_7mhz dB"
+  echo ""
+  echo "CASE 2: 20Ω antenna matched to 50Ω"
+  echo "  C = 928 pF (series), L = 0.93 uH (shunt)"
+  echo "  Signal at 7 MHz: $&v_lo_7mhz dB"
+  echo ""
+  echo "CASE 3: 200Ω antenna UNMATCHED"
+  echo "  Signal at 7 MHz: $&v_un_7mhz dB"
+  echo ""
+  echo "Matching gain: High-Z matched vs unmatched"
+  echo "  improvement at 7 MHz dB"
+  echo ""
+  echo "The L-network delivers maximum power at the"
+  echo "design frequency. Away from resonance, the"
+  echo "match degrades — this is the bandwidth limit"
+  echo "of a simple two-component network."
+  echo "========================================="
+
+.endc
+
+.end

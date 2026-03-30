@@ -1,0 +1,239 @@
+{
+  "mission": "1.12",
+  "title": "Explorer 7 (Juno II)",
+  "date": "1959-10-13",
+  "status": "SUCCESS",
+  "primary_achievement": "First Earth radiation budget measurement from space. Suomi-Parent bolometers separated reflected solar from emitted thermal radiation using black and white hemispheric sensors.",
+  "organism": "Usnea longissima",
+  "organism_common": "Methuselah's beard lichen",
+  "organism_location": "Old-growth conifer forests of the Pacific Northwest — pendant from Sitka spruce, western hemlock, and Douglas-fir branches. The longest lichen in the world, with strands reaching 3+ meters. Absorbs moisture and nutrients directly from the air, making it exquisitely sensitive to atmospheric change. Found in moist, temperate rainforest conditions with clean air and stable humidity. Increasingly rare in lowland PNW forests due to air quality decline and climate change. Its presence indicates pristine old-growth conditions; its absence diagnoses environmental degradation. A biological bolometer — it measures the atmosphere by living in it.",
+  "bird": "Cinclus mexicanus",
+  "bird_common": "American Dipper",
+  "dedication": {
+    "name": "Rudolf Virchow",
+    "born": "1821-10-13",
+    "died": "1902-09-05",
+    "birthplace": "Schivelbein, Pomerania (now Świdwin, Poland)",
+    "field": "Cellular pathology, public health, social medicine",
+    "resonance": "Rudolf Virchow was born on October 13, 1821 — exactly 138 years before Explorer 7's launch on October 13, 1959. Virchow established the principle that disease in the whole organism can be diagnosed by examining individual cells — that the part reveals the condition of the whole. His 1858 work Cellular Pathology transformed medicine from a practice of observing symptoms to a science of understanding mechanisms at the cellular level. Suomi's bolometers were cellular pathology for the planet: two small sensors (cells) that diagnosed the Earth's energy imbalance (disease) from orbit (outside the body). Virchow also insisted that medicine was a social science — that the physician's obligation extended beyond diagnosis to advocacy. 'The physicians are the natural attorneys of the poor,' he wrote. Suomi carried this principle to climate science: the measurement was not enough; the measurement demanded action. Both Virchow and Suomi understood that the most powerful diagnostic requires the simplest instrument — a microscope, a bolometer — applied with insight to the right question."
+  },
+  "nodes": [
+    {
+      "id": "radiation-budget",
+      "concept": "Earth's radiation budget — the balance between absorbed solar and emitted thermal energy",
+      "department": "climate-science",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.1",
+      "description": "Earth's radiation budget is the accounting of energy flowing into and out of the Earth system. The Sun delivers S₀ = 1361 W/m² to Earth's cross-sectional area. Earth intercepts this over πR², but distributes emission over 4πR², so the effective input is S₀/4 = 340 W/m². Of this, about 30% (α = 0.30) is reflected back to space as shortwave radiation (by clouds, ice, and surface albedo), and 70% is absorbed. The absorbed 239 W/m² must be balanced by thermal emission to space at infrared wavelengths. When the outgoing energy equals the incoming absorbed energy, the system is in radiative equilibrium. When they differ, the planet warms or cools. Explorer 7 made the first measurement of this budget from orbit using Suomi-Parent bolometers.",
+      "resonance": "Usnea longissima maintains its own radiation budget. The lichen absorbs light for photosynthesis (its 'solar input') and loses water through evaporation (its 'thermal output'). When moisture input from fog and rain equals evaporative loss, the lichen grows steadily. When the balance shifts — less moisture, more evaporation from warming — the lichen's growth rate drops and strands thin. The lichen's health is a direct readout of its local energy and moisture budget, just as the bolometer readings are a direct readout of Earth's global energy budget.",
+      "worked_example": {
+        "description": "Calculate Earth's radiation budget and equilibrium temperature",
+        "parameters": {
+          "S0_W_m2": 1361,
+          "albedo": 0.30,
+          "sigma_W_m2_K4": 5.67e-8
+        },
+        "formula": "Absorbed = S₀(1-α)/4; T_eq = (Absorbed/(ε×σ))^0.25",
+        "result": "Absorbed = 1361 × 0.70 / 4 = 238.2 W/m². With ε=1: T_eq = (238.2/5.67e-8)^0.25 = 254.9 K = −18.3°C. Actual surface: 288 K = 15°C. Greenhouse warming: 33.1°C.",
+        "python": "import numpy as np\n\nS0 = 1361  # Solar constant (W/m²)\nalpha = 0.30  # Earth albedo\nsigma = 5.670374e-8  # Stefan-Boltzmann constant\n\nabsorbed = S0 * (1 - alpha) / 4\nprint(f'Solar constant: {S0} W/m²')\nprint(f'Albedo: {alpha}')\nprint(f'Absorbed: {absorbed:.1f} W/m²')\n\n# Equilibrium temperature (no greenhouse)\nT_eq = (absorbed / sigma)**0.25\nprint(f'T_eq (no greenhouse): {T_eq:.1f} K ({T_eq-273.15:.1f}°C)')\n\n# Actual surface temperature\nT_actual = 288  # K\nprint(f'T_actual: {T_actual} K ({T_actual-273.15:.0f}°C)')\nprint(f'Greenhouse warming: {T_actual - T_eq:.1f} K')"
+      }
+    },
+    {
+      "id": "stefan-boltzmann",
+      "concept": "Stefan-Boltzmann law — thermal radiation scales as temperature to the fourth power",
+      "department": "physics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "The Stefan-Boltzmann law states that the total energy radiated per unit surface area of a black body is proportional to the fourth power of its temperature: P = σT⁴, where σ = 5.67 × 10⁻⁸ W/m²/K⁴. For a grey body with emissivity ε < 1: P = εσT⁴. The T⁴ dependence has profound consequences: doubling the temperature increases radiation by a factor of 16. This is why hot objects glow visibly (T ≈ 1000K → visible emission) while room-temperature objects emit only infrared. For Earth's radiation budget, the Stefan-Boltzmann law links the planet's effective temperature to its total thermal emission: T_eff = (P_out/σ)^0.25 = 255 K. The fourth-power relationship also provides a stabilizing feedback: as the planet warms, it radiates more efficiently, opposing the warming.",
+      "resonance": "The lichen's metabolic rate follows a similar nonlinear relationship with temperature — not T⁴, but exponential (Arrhenius equation). A small temperature increase produces a disproportionately large increase in metabolic rate, which increases water loss, which desiccates the lichen. Both systems exhibit positive feedback amplified by nonlinear temperature dependence: the planet radiates as T⁴, the lichen desiccates as e^(-Ea/RT). Small changes in conditions produce large changes in output.",
+      "worked_example": {
+        "description": "Calculate thermal emission from Earth at different temperatures",
+        "parameters": {
+          "T_values_K": [220, 240, 255, 270, 288, 310],
+          "sigma": 5.67e-8
+        },
+        "formula": "P = σT⁴",
+        "result": "At 255K: P = 5.67e-8 × 255⁴ = 239 W/m². At 288K: P = 5.67e-8 × 288⁴ = 390 W/m². The surface emits 390 W/m² but only 239 W/m² escapes to space — the atmosphere absorbs and re-emits the difference.",
+        "python": "import numpy as np\n\nsigma = 5.670374e-8\n\ntemps = [220, 240, 255, 270, 288, 310]\nprint(f'{\"T (K)\":>8s} {\"T (°C)\":>8s} {\"P (W/m²)\":>10s} {\"Ratio\":>8s}')\nprint('-' * 40)\nfor T in temps:\n  P = sigma * T**4\n  ratio = P / (sigma * 255**4)\n  print(f'{T:8.0f} {T-273.15:8.1f} {P:10.1f} {ratio:8.2f}')\n\nprint(f'\\nSurface (288K) emits: {sigma*288**4:.0f} W/m²')\nprint(f'TOA effective (255K):  {sigma*255**4:.0f} W/m²')\nprint(f'Greenhouse trapping:   {sigma*288**4 - sigma*255**4:.0f} W/m²')"
+      }
+    },
+    {
+      "id": "albedo",
+      "concept": "Albedo — the fraction of incident light reflected by a surface",
+      "department": "climate-science",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.2",
+      "description": "Albedo is the fraction of incoming electromagnetic radiation reflected by a surface, ranging from 0 (perfect absorber) to 1 (perfect reflector). Earth's mean albedo is approximately 0.30, meaning 30% of incoming solar radiation is reflected back to space. The albedo varies dramatically across surface types: fresh snow (0.80-0.90), sea ice (0.50-0.70), clouds (0.40-0.80), desert sand (0.30-0.45), forest (0.10-0.20), ocean (0.06-0.10). Changes in albedo directly affect the radiation budget: if albedo increases by 0.01, absorbed solar decreases by ~3.4 W/m², equivalent to removing a significant fraction of the current greenhouse forcing. Ice-albedo feedback is a critical positive feedback: warming melts ice, reducing albedo, increasing absorption, causing more warming.",
+      "resonance": "Usnea longissima's thallus has its own albedo — the sage-green surface reflects approximately 30-40% of visible light, similar to Earth's mean albedo. When the lichen becomes desiccated or stressed, its albedo changes: it becomes lighter grey, reflecting more light but also losing its photosynthetic efficiency. A dying lichen strand is a miniature ice sheet: higher albedo, lower biological productivity, a feedback loop where loss of function changes the surface properties.",
+      "worked_example": {
+        "description": "Calculate the effect of albedo change on absorbed solar radiation",
+        "parameters": {
+          "S0": 1361,
+          "albedo_current": 0.30,
+          "albedo_change": 0.01
+        },
+        "formula": "ΔAbsorbed = S₀ × Δα / 4",
+        "result": "ΔAbsorbed = 1361 × 0.01 / 4 = 3.40 W/m². A 1% increase in albedo reduces absorbed solar by 3.4 W/m² — nearly 4× the current anthropogenic forcing of 0.87 W/m². This is why ice-albedo feedback is so powerful: melting Arctic sea ice reduces Earth's albedo by ~0.01 per decade.",
+        "python": "S0 = 1361\nalbedos = {'Ocean': 0.08, 'Forest': 0.15, 'Desert': 0.35,\n           'Clouds': 0.60, 'Sea ice': 0.60, 'Snow': 0.85}\n\nprint(f'{\"Surface\":>10s} {\"Albedo\":>8s} {\"Absorbed\":>10s}')\nfor name, a in albedos.items():\n  absorbed = S0 * (1 - a) / 4\n  print(f'{name:>10s} {a:8.2f} {absorbed:10.1f} W/m²')\n\n# Impact of albedo change\nfor da in [0.01, 0.05, 0.10]:\n  dA = S0 * da / 4\n  print(f'\\nΔα = {da:.2f} → ΔAbsorbed = {dA:.1f} W/m²')"
+      }
+    },
+    {
+      "id": "bolometer-physics",
+      "concept": "Bolometer — measuring radiation by detecting temperature change",
+      "department": "instrumentation",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.2",
+      "description": "A bolometer is a device that measures incident electromagnetic radiation by detecting the temperature change it causes in an absorbing element. The Suomi-Parent bolometers on Explorer 7 were among the simplest possible designs: hemispheric shells with known absorptive and emissive properties, whose temperature was measured by embedded thermistors. The black hemisphere (absorptance α ≈ 0.97 across all wavelengths) measured total radiation — solar plus thermal. The white hemisphere (reflectance ~0.90 for visible, absorptance ~0.90 for infrared) measured only the thermal component. The temperature difference between the two sensors isolated the solar component. The thermal time constant τ = MC/(4εσAT³) determined how quickly the sensor responded to changes in radiation — fast enough to resolve orbital variations but smoothing out rapid fluctuations.",
+      "resonance": "Usnea longissima is a biological bolometer. Its growth rate, moisture content, and color respond to the total radiation environment: light for photosynthesis, infrared for thermal balance, UV for DNA damage. The lichen integrates these inputs over time — days to weeks rather than the bolometer's seconds to minutes — but the principle is identical: a body absorbs environmental radiation, and its temperature (or biological state) reveals the flux. The lichen has no Wheatstone bridge or telemetry link; its readout is its presence or absence.",
+      "worked_example": {
+        "description": "Calculate bolometer equilibrium temperature and time constant",
+        "parameters": {
+          "flux_W_m2": 340,
+          "absorptance": 0.97,
+          "emissivity": 0.97,
+          "area_m2": 0.002,
+          "mass_kg": 0.010,
+          "specific_heat_J_kg_K": 500
+        },
+        "formula": "T_eq = (α×F/(ε×σ))^0.25; τ = m×c/(4×ε×σ×A×T³)",
+        "result": "T_eq = (0.97×340/(0.97×5.67e-8))^0.25 = (340/5.67e-8)^0.25 = 278.6 K. Time constant τ = 0.010×500/(4×0.97×5.67e-8×0.002×278.6³) = 5/(9.54e-4) ≈ 5240 seconds ≈ 87 minutes. The sensor responds on a timescale comparable to the orbital period.",
+        "python": "import numpy as np\n\nalpha = 0.97\nepsilon = 0.97\nsigma = 5.67e-8\nflux = 340  # W/m²\nA = 0.002  # m² (sensor area)\nm = 0.010  # kg\nc = 500  # J/kg/K\n\n# Equilibrium temperature\nT_eq = (alpha * flux / (epsilon * sigma))**0.25\nprint(f'Equilibrium T: {T_eq:.1f} K ({T_eq-273.15:.1f}°C)')\n\n# Time constant\ntau = m * c / (4 * epsilon * sigma * A * T_eq**3)\nprint(f'Time constant: {tau:.0f} s ({tau/60:.1f} min)')\nprint(f'Orbital period: 6072 s (101.2 min)')\nprint(f'Ratio τ/T_orbit: {tau/6072:.2f}')"
+      }
+    },
+    {
+      "id": "greenhouse-effect",
+      "concept": "Greenhouse effect — atmospheric absorption and re-emission of thermal radiation",
+      "department": "climate-science",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.3",
+      "description": "The greenhouse effect occurs when atmospheric gases absorb outgoing infrared radiation from Earth's surface and re-emit it in all directions — including back toward the surface. This effectively reduces the rate at which energy escapes to space, requiring a higher surface temperature to maintain radiative equilibrium. The natural greenhouse effect raises Earth's surface temperature from 255 K (−18°C) to 288 K (15°C), a warming of 33°C. The primary greenhouse gases are H₂O (contributes ~60% of the effect), CO₂ (~25%), CH₄ (~5%), N₂O (~5%), and others. The enhanced greenhouse effect from anthropogenic CO₂ emissions adds approximately 0.87 W/m² to the energy imbalance. Explorer 7's bolometers measured this effect for the first time from space by comparing total energy input (black hemisphere) with thermal energy output (white hemisphere in shadow).",
+      "resonance": "Old-growth forests with Usnea longissima function as greenhouse systems at a local scale. The dense canopy traps moisture and warmth beneath it, creating a microclimate that is warmer, more humid, and more stable than the surrounding environment. The lichen depends on this greenhouse effect — it needs the trapped moisture and moderated temperature to survive. When the canopy is thinned (by logging, windthrow, or fire), the local greenhouse effect weakens, the microclimate becomes drier and more variable, and the lichen declines. The forest canopy is the atmosphere; the lichen is the surface temperature sensor.",
+      "worked_example": {
+        "description": "Calculate the greenhouse effect's contribution to surface temperature",
+        "parameters": {
+          "T_effective_K": 255,
+          "T_surface_K": 288,
+          "sigma": 5.67e-8
+        },
+        "formula": "P_surface = σT_surface⁴; P_TOA = σT_effective⁴; P_greenhouse = P_surface - P_TOA",
+        "result": "P_surface = 5.67e-8 × 288⁴ = 390.1 W/m². P_TOA = 5.67e-8 × 255⁴ = 239.7 W/m². P_greenhouse = 390.1 - 239.7 = 150.4 W/m². The atmosphere absorbs and re-emits 150 W/m² of surface radiation — 63% of the surface emission is trapped.",
+        "python": "import numpy as np\n\nsigma = 5.670374e-8\nT_surface = 288  # K\nT_effective = 255  # K\n\nP_surface = sigma * T_surface**4\nP_TOA = sigma * T_effective**4\nP_greenhouse = P_surface - P_TOA\n\nprint(f'Surface emission: {P_surface:.1f} W/m²')\nprint(f'TOA emission: {P_TOA:.1f} W/m²')\nprint(f'Greenhouse trapping: {P_greenhouse:.1f} W/m²')\nprint(f'Fraction trapped: {P_greenhouse/P_surface:.1%}')\nprint(f'Temperature lift: {T_surface - T_effective:.0f} K')"
+      }
+    },
+    {
+      "id": "energy-balance",
+      "concept": "Energy balance — the condition of radiative equilibrium in a planetary system",
+      "department": "climate-science",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.3",
+      "description": "Energy balance is the state where the total energy entering a system equals the total energy leaving it. For Earth: absorbed solar radiation (S₀(1−α)/4 ≈ 239 W/m²) must equal emitted thermal radiation (εσT⁴ ≈ 239 W/m²) for the system to be in equilibrium. Any imbalance drives temperature change: positive imbalance (more in than out) → warming; negative imbalance → cooling. The current Earth energy imbalance (EEI) is approximately +0.87 W/m², meaning Earth absorbs 0.87 watts more per square meter than it emits. This imbalance, though small, integrated over the entire Earth surface (5.1 × 10¹⁴ m²) and over years, accounts for the observed warming of oceans, atmosphere, land, and ice. Explorer 7 demonstrated that this balance could be measured from space.",
+      "resonance": "The lichen maintains its own energy balance: photosynthetic energy capture must equal metabolic expenditure plus water evaporation loss for the organism to grow. When the balance is positive (more energy captured than spent), the lichen grows new tissue. When negative, it consumes stored reserves and eventually dies. The lichen's 'energy imbalance' is visible in its growth rate — centimeters per year in good conditions, zero in poor conditions, negative (tissue loss) in hostile conditions.",
+      "worked_example": {
+        "description": "Calculate Earth's energy imbalance and its consequences",
+        "parameters": {
+          "EEI_W_m2": 0.87,
+          "earth_surface_m2": 5.1e14,
+          "ocean_depth_m": 4000,
+          "ocean_fraction": 0.71,
+          "water_specific_heat": 4186
+        },
+        "formula": "Total imbalance = EEI × Area; Ocean heating rate = Total / (ocean_mass × c_water)",
+        "result": "Total imbalance = 0.87 × 5.1e14 = 4.44 × 10¹⁴ W = 444 TW. Ocean mass (top 700m) ≈ 2.6 × 10²⁰ kg. Heating rate = 444e12/(2.6e20 × 4186) = 4.1 × 10⁻¹⁰ K/s = 0.013 K/year. Over 50 years: ~0.65°C — consistent with observed ocean warming.",
+        "python": "EEI = 0.87  # W/m²\nA_earth = 5.1e14  # m²\n\ntotal_W = EEI * A_earth\nprint(f'Total imbalance: {total_W:.2e} W ({total_W/1e12:.0f} TW)')\n\n# Ocean heating (top 700m)\nrho_water = 1025  # kg/m³\ndepth = 700  # m\nocean_frac = 0.71\nocean_area = A_earth * ocean_frac\nocean_volume = ocean_area * depth\nocean_mass = ocean_volume * rho_water\nc_water = 4186  # J/kg/K\n\ndT_dt = total_W / (ocean_mass * c_water)  # K/s\ndT_year = dT_dt * 365.25 * 24 * 3600\nprint(f'Ocean mass (top {depth}m): {ocean_mass:.2e} kg')\nprint(f'Heating rate: {dT_year:.4f} K/year')\nprint(f'Over 50 years: {dT_year*50:.2f} K')"
+      }
+    },
+    {
+      "id": "climate-sensitivity",
+      "concept": "Climate sensitivity — the temperature response to a doubling of atmospheric CO₂",
+      "department": "climate-science",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.1",
+      "description": "Equilibrium Climate Sensitivity (ECS) is the long-term temperature increase resulting from a doubling of atmospheric CO₂ concentration. The radiative forcing from CO₂ doubling is approximately ΔF = 5.35 × ln(2) ≈ 3.7 W/m². The temperature response depends on feedbacks: water vapor feedback (positive, ~+1.8 W/m²/K), ice-albedo feedback (positive, ~+0.3 W/m²/K), cloud feedback (uncertain, ~+0.3 to +1.0 W/m²/K), and the Planck response (negative, −3.2 W/m²/K, the stabilizing T⁴ radiation increase). Current best estimate: ECS = 3°C (likely range 2.5-4.0°C). The sensitivity parameter λ = ECS/ΔF relates forcing to temperature. Explorer 7's measurement of the radiation budget was the first step toward quantifying these feedback parameters from space.",
+      "resonance": "Usnea longissima has its own 'climate sensitivity' — the growth rate change per degree of temperature increase. Unlike ECS, which involves many feedbacks and takes centuries to fully manifest, the lichen's sensitivity is immediate and directly observable. A 1°C increase in mean temperature corresponds to approximately a 5-10% decrease in Usnea coverage in sensitive habitats (primarily through increased evaporative demand). The lichen's sensitivity is higher than ECS because it has no feedbacks that can compensate — no equivalent of the Planck response to increase its radiation and restore balance.",
+      "worked_example": {
+        "description": "Calculate temperature change from CO₂ increase using simple climate model",
+        "parameters": {
+          "CO2_preindustrial_ppm": 280,
+          "CO2_current_ppm": 420,
+          "ECS_K": 3.0
+        },
+        "formula": "ΔF = 5.35 × ln(CO₂/CO₂_ref); λ = ECS/(5.35×ln(2)); ΔT = λ × ΔF",
+        "result": "ΔF = 5.35 × ln(420/280) = 5.35 × 0.405 = 2.17 W/m². λ = 3.0/(5.35×0.693) = 0.809 K/(W/m²). ΔT = 0.809 × 2.17 = 1.76°C. This is the equilibrium response; transient warming is lower (~1.1°C observed) because the ocean hasn't fully warmed yet.",
+        "python": "import numpy as np\n\nCO2_ref = 280  # ppm (pre-industrial)\nCO2_now = 420  # ppm (current)\nECS = 3.0  # K per doubling\n\n# Forcing\ndF_doubling = 5.35 * np.log(2)  # 3.71 W/m²\nlam = ECS / dF_doubling  # sensitivity parameter\n\ndF_now = 5.35 * np.log(CO2_now / CO2_ref)\ndT_eq = lam * dF_now\n\nprint(f'CO₂: {CO2_ref} → {CO2_now} ppm')\nprint(f'Forcing: {dF_now:.2f} W/m²')\nprint(f'ECS: {ECS} K per doubling')\nprint(f'λ: {lam:.3f} K/(W/m²)')\nprint(f'Equilibrium ΔT: {dT_eq:.2f}°C')\nprint(f'Observed ΔT: ~1.1°C (transient, ocean lag)')"
+      }
+    },
+    {
+      "id": "solid-angle",
+      "concept": "Solid angle integration — calculating radiation received from an extended source",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.2",
+      "description": "When a satellite bolometer measures Earth's radiation, it receives flux from a solid angle determined by the Earth's apparent size at the satellite's altitude. The solid angle subtended by Earth from altitude h is Ω = 2π(1 − cos(θ)) where θ = arcsin(R/(R+h)) is the half-angle. At 573 km (perigee): θ = arcsin(6371/6944) = 66.5°, Ω = 4.42 sr (out of 2π = 6.28 sr for a hemisphere). At 1073 km (apogee): θ = arcsin(6371/7444) = 58.8°, Ω = 3.52 sr. The received flux depends on both the emission from the source (Earth) and the solid angle it subtends. This is why the bolometer readings vary with altitude: at perigee, Earth fills more of the sensor's field of view.",
+      "resonance": "The lichen's relationship to its environment is also governed by solid angle — the fraction of sky visible through gaps in the canopy determines how much light reaches the lichen for photosynthesis and how much infrared it loses to the cold sky. In a dense old-growth canopy, the solid angle of visible sky is small (most of the hemisphere is blocked by branches and foliage), creating the warm, humid microclimate the lichen needs. When canopy gaps open (from logging or windthrow), the sky solid angle increases, radiative cooling increases, humidity drops, and the lichen's energy balance shifts.",
+      "worked_example": {
+        "description": "Calculate Earth's solid angle from Explorer 7's orbit",
+        "parameters": {
+          "R_earth_km": 6371,
+          "perigee_km": 573,
+          "apogee_km": 1073
+        },
+        "formula": "θ = arcsin(R/(R+h)); Ω = 2π(1 − cos(θ)); view_factor = Ω/(2π)",
+        "result": "Perigee (573 km): θ = 66.5°, Ω = 4.42 sr, view factor = 0.703. Apogee (1073 km): θ = 58.8°, Ω = 3.52 sr, view factor = 0.561. Earth fills 70% of the bolometer's hemisphere at perigee but only 56% at apogee — a 25% variation that must be calibrated.",
+        "python": "import numpy as np\n\nR = 6371  # km\nalts = [573, 1073]  # km\n\nfor h in alts:\n  r = R + h\n  theta = np.arcsin(R / r)\n  omega = 2 * np.pi * (1 - np.cos(theta))\n  vf = omega / (2 * np.pi)\n  print(f'Alt {h:5.0f} km: θ = {np.degrees(theta):.1f}°, '\n        f'Ω = {omega:.2f} sr, view factor = {vf:.3f}')\n\n# Variation\nomega_p = 2 * np.pi * (1 - np.cos(np.arcsin(R / (R + 573))))\nomega_a = 2 * np.pi * (1 - np.cos(np.arcsin(R / (R + 1073))))\nprint(f'\\nFlux ratio (apogee/perigee): {omega_a/omega_p:.3f}')\nprint(f'Variation: {(1-omega_a/omega_p)*100:.1f}%')"
+      }
+    },
+    {
+      "id": "hemispheric-measurement",
+      "concept": "Hemispheric measurement — separating radiation components using selective sensors",
+      "department": "instrumentation",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.4",
+      "description": "Suomi and Parent's key innovation was using two sensors with different spectral responses to separate the components of Earth's radiation field. The black hemisphere absorbed all wavelengths (shortwave solar + longwave thermal), measuring total flux F_total = F_solar + F_reflected + F_thermal. The white hemisphere reflected shortwave (~90% of visible) but absorbed longwave (~90% of thermal), measuring approximately F_thermal. The difference F_total − F_thermal ≈ F_solar + F_reflected — the shortwave component that determines the radiation budget. This differential measurement technique eliminates common-mode errors (temperature drifts, orbital mechanics effects) that affect both sensors equally, leaving only the signal of interest.",
+      "resonance": "The differential measurement principle appears throughout biology. The human eye uses rod cells (sensitive to all visible wavelengths, like the black bolometer) and three types of cone cells (selective for red, green, or blue wavelengths, like the white bolometer). The brain computes differences between these signals to extract color information — exactly the same principle Suomi used to extract the radiation budget. The lichen performs an analogous separation: its photobiont (algal partner) absorbs visible light for photosynthesis while the mycobiont (fungal partner) is more sensitive to thermal and moisture conditions. The partnership separates the environmental signal into components.",
+      "worked_example": {
+        "description": "Calculate the differential signal from Suomi-Parent bolometers",
+        "parameters": {
+          "solar_direct_W_m2": 340,
+          "earth_reflected_W_m2": 100,
+          "earth_thermal_W_m2": 240,
+          "black_absorptance_all": 0.97,
+          "white_absorptance_vis": 0.10,
+          "white_absorptance_ir": 0.90
+        },
+        "formula": "F_black = α_black × (F_solar + F_refl + F_therm); F_white = α_vis × (F_solar + F_refl) + α_ir × F_therm; Difference = F_black - F_white",
+        "result": "F_black = 0.97 × (340 + 100 + 240) = 659 W/m². F_white = 0.10 × (340 + 100) + 0.90 × 240 = 44 + 216 = 260 W/m². Difference = 659 − 260 = 399 W/m². The difference isolates the solar + reflected component (actual: 440 W/m²). The isolation is not perfect due to the white sensor's 10% visible absorption, but it provides ~91% rejection.",
+        "python": "# Suomi-Parent bolometer differential measurement\nF_solar = 340  # W/m² (hemisphere average)\nF_refl = 100  # W/m² (Earth reflected)\nF_therm = 240  # W/m² (Earth thermal)\n\n# Black hemisphere (absorbs all)\nalpha_black = 0.97\nF_black = alpha_black * (F_solar + F_refl + F_therm)\n\n# White hemisphere (reflects visible, absorbs IR)\nalpha_vis = 0.10\nalpha_ir = 0.90\nF_white = alpha_vis * (F_solar + F_refl) + alpha_ir * F_therm\n\ndiff = F_black - F_white\nactual_solar = F_solar + F_refl\n\nprint(f'Black sensor:   {F_black:.0f} W/m²')\nprint(f'White sensor:   {F_white:.0f} W/m²')\nprint(f'Difference:     {diff:.0f} W/m²')\nprint(f'Actual solar:   {actual_solar:.0f} W/m²')\nprint(f'Isolation:      {diff/actual_solar*100:.1f}%')"
+      }
+    },
+    {
+      "id": "antenna-impedance-matching",
+      "concept": "Antenna impedance matching — maximizing power transfer between antenna and receiver",
+      "department": "radio-engineering",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.8",
+      "description": "An antenna tuner is a circuit that transforms the antenna's impedance to match the receiver's input impedance (typically 50 ohms), maximizing power transfer. The simplest matching network is the L-network: two reactive components (one inductor, one capacitor) arranged in an L shape. For a high-impedance antenna (>50Ω): series inductor + shunt capacitor. For a low-impedance antenna (<50Ω): series capacitor + shunt inductor. The design equations are: Q = sqrt(R_high/R_low − 1), X_series = Q × R_low, X_shunt = R_high/Q. This is the progressive radio circuit for v1.12, building on all previous stages from v1.2 transmitter through v1.11 BFO. The antenna tuner is the front door of the receiver — the first circuit the signal encounters.",
+      "resonance": "Impedance matching appears in every energy transfer system. Explorer 7's telemetry transmitter used a matching network to couple its 50-ohm output to the spacecraft antenna, ensuring maximum radiated power from a 60-milliwatt transmitter. At 573-1073 km altitude, with path loss of >130 dB, every decibel of mismatch loss was a decibel of science data lost. The lichen performs its own impedance matching: the cortex (outer layer) has optical properties tuned to transmit photosynthetically active radiation to the photobiont while reflecting UV and excess heat — matching the radiation impedance to the biological load.",
+      "worked_example": {
+        "description": "Design an L-network to match a 200Ω antenna to a 50Ω receiver at 7 MHz",
+        "parameters": {
+          "R_ant_ohm": 200,
+          "R_rx_ohm": 50,
+          "f_MHz": 7
+        },
+        "formula": "Q = sqrt(R_ant/R_rx − 1); X_L = Q × R_rx; X_C = R_ant/Q; L = X_L/(2πf); C = 1/(2πf×X_C)",
+        "result": "Q = sqrt(200/50 − 1) = 1.732. X_L = 1.732 × 50 = 86.6Ω → L = 86.6/(2π×7e6) = 1.97 µH. X_C = 200/1.732 = 115.5Ω → C = 1/(2π×7e6×115.5) = 197 pF. At 7 MHz, the network presents 50Ω to the receiver when the antenna is 200Ω.",
+        "python": "import numpy as np\n\nR_ant = 200  # ohm\nR_rx = 50    # ohm\nf = 7e6      # Hz\n\n# L-network design (high-Z to low-Z)\nQ = np.sqrt(R_ant / R_rx - 1)\nX_L = Q * R_rx  # series inductance\nX_C = R_ant / Q  # shunt capacitance\nL = X_L / (2 * np.pi * f)\nC = 1 / (2 * np.pi * f * X_C)\n\nprint(f'Antenna: {R_ant}Ω → Receiver: {R_rx}Ω at {f/1e6} MHz')\nprint(f'Q factor: {Q:.3f}')\nprint(f'Series L: {X_L:.1f}Ω → {L*1e6:.2f} µH')\nprint(f'Shunt C: {X_C:.1f}Ω → {C*1e12:.0f} pF')\n\n# Bandwidth\nBW = f / Q\nprint(f'3dB bandwidth: {BW/1e6:.1f} MHz')\nprint(f'Usable range: {(f-BW/2)/1e6:.1f} – {(f+BW/2)/1e6:.1f} MHz')"
+      }
+    }
+  ]
+}
