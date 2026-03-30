@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 46&deg; &mdash; Rocky Votolato &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .consecutive-banner {
+      background: linear-gradient(135deg, #3E2723, #4E342E);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .consecutive-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .consecutive-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>046 &mdash; Rocky Votolato</span>
+    </nav>
+
+    <!-- Consecutive Folk Banner -->
+    <div class="consecutive-banner">
+      <h3>Consecutive Folk &mdash; The Engine Holds Its Quietest Register</h3>
+      <p>
+        Folk at degree 46&deg; extends the genre stage established at degree 45&deg;
+        (Damien Jurado) &mdash; the first consecutive same-genre since Blues Rock (36&ndash;37).
+        Both born in Texas, both transplanted to Seattle, both shaped by punk, both fiercely
+        independent. The murmur and the confessional &mdash; the whisper and the declaration.
+        <strong>Rocky Votolato</strong> &mdash; born 1977, Dallas, Texas. Raised on a 50-acre
+        horse farm in Frost, TX. Moved to the Pacific Northwest at 14. Waxwing co-founder.
+        Blood Brothers sibling. 250 shows a year. Punk-to-folk conversion. West Seattle.
+        Casey Foubert (Pedro the Lion) as primary producer. Chris Walla (Death Cab for Cutie)
+        on <em>Hospital Handshakes</em>. Lost a child in 2021. <em>Wild Roots</em> as memorial.
+        The confessional. The crack. The molt.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">46&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Rocky Votolato</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Barsuk / Second Nature / Spartan</span>
+          <span class="neighborhood-badge">West Seattle</span>
+          <span class="first-badge">Consecutive Folk (45&ndash;46)</span>
+          <span class="first-badge">First Barsuk</span>
+          <span class="first-badge">West Seattle Enters</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>A Horse Farm Kid Who Found Punk and Folk</h2>
+          <p>
+            Rocky Votolato was born <strong>March 8, 1977</strong>, in <strong>Dallas, Texas</strong>.
+            He spent his childhood on a <strong>50-acre horse farm</strong> in <strong>Frost, Texas</strong>
+            &mdash; a town of approximately 647 people, located 100 miles south of Dallas. His father
+            was a member of the <strong>Scorpions</strong>, a Dallas-based motorcycle gang that rivaled
+            the Hell&rsquo;s Angels. The household soundtrack was <strong>Willie Nelson</strong>,
+            <strong>Steve Earle</strong>, and <strong>Johnny Cash</strong>. When his parents divorced
+            and his mother remarried, the family moved to the <strong>Pacific Northwest</strong> in
+            <strong>1991</strong>, settling near <strong>Redmond, Washington</strong>. Votolato
+            attended <strong>Inglemoor High School</strong> in Kenmore. Alienated by his Southern
+            roots in a Pacific Northwest context, the isolation drove him toward the guitar and
+            toward songwriting.
+          </p>
+          <p>
+            Seeing <strong>Jawbreaker</strong> perform live was the catalytic moment: &ldquo;That&rsquo;s
+            exactly what I want to do with my life.&rdquo; <strong>Fugazi</strong>&rsquo;s DIY ethics
+            became his operational model. He co-founded <strong>Waxwing</strong> in the late 1990s
+            with his brother <strong>Cody Votolato</strong> (who would go on to guitar the
+            <strong>Blood Brothers</strong>). But even while playing post-hardcore, Rocky was
+            writing on acoustic guitar. His first guitar was acoustic. The folk was always underneath
+            the distortion. The transition was not a departure &mdash; it was an unveiling.
+          </p>
+          <blockquote>
+            &ldquo;His voice is rich and dynamic, ranging from falsetto highs to a near scream.
+            No matter how he approaches a particular song, his voice is always strong and beautiful.&rdquo;
+            &mdash; Scene Point Blank, on <em>Suicide Medicine</em>
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Rocky Votolato</h4>
+              <div class="disco-years">1999 &middot; Status / Henry&rsquo;s Finest</div>
+              <p>
+                Self-titled debut. Recorded in a basement with two microphones
+                over a four-hour session. Punk kid making folk music in the
+                cheapest possible way.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Burning My Travels Clean</h4>
+              <div class="disco-years">2001 &middot; Second Nature</div>
+              <p>
+                Produced by Matt Bayles (Pearl Jam, Botch). Folk elements
+                with rock strains. Relationship with wife, dedication to music.
+                Received almost no press upon release.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Suicide Medicine</h4>
+              <div class="disco-years">2003 &middot; Second Nature</div>
+              <p>
+                Critical breakthrough. Compared to Bob Dylan for lyrical detail.
+                &ldquo;A really, really great record&rdquo; (Scene Point Blank).
+                Voice from falsetto to scream.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Makers</h4>
+              <div class="disco-years">2006 &middot; Barsuk</div>
+              <p>
+                Barsuk debut. Co-produced with Casey Foubert (Pedro the Lion).
+                &ldquo;White Daisy Passing&rdquo; on <em>The OC</em> and
+                NPR Song of the Day. Commercial peak.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>The Brag and Cuss</h4>
+              <div class="disco-years">2007 &middot; Barsuk</div>
+              <p>
+                Deep into Texas roots. Country-tinged folk. Wife April
+                contributed lyrics. Willie Nelson&rsquo;s ghost in the chords.
+                The title itself is Texan.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>True Devotion</h4>
+              <div class="disco-years">2010 &middot; Barsuk</div>
+              <p>
+                Third and final Barsuk album. Casey Foubert producing.
+                Ten tracks of the recognizable gravelly vocals. End of the
+                most commercially stable period.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Television of Saints</h4>
+              <div class="disco-years">2012 &middot; Self-released</div>
+              <p>
+                First Kickstarter-funded album. 712 backers, $38,225 pledged
+                (nearly double the $20K goal). Stripped down: 10 tracks,
+                33 minutes. Brothers Cody and Sonny featured.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Hospital Handshakes</h4>
+              <div class="disco-years">2015 &middot; No Sleep / Glitterhouse</div>
+              <p>
+                Produced by Chris Walla (Death Cab for Cutie). Recorded in
+                two weeks in Omaha. Seattle Met called it the
+                &ldquo;road to redemption.&rdquo; Billboard premiered the stream.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Wild Roots</h4>
+              <div class="disco-years">2022 &middot; Spartan / Thirty Something</div>
+              <p>
+                <strong>Fifteen epistolary songs &mdash; letters to family.</strong>
+                Written before, completed after the death of his child Kienan
+                in December 2021. &ldquo;Grief is love with nowhere to go.&rdquo;
+                The most exposed album in the catalog.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Punk-to-Folk Pipeline</h2>
+          <p>
+            Rocky Votolato&rsquo;s career is defined by a visible genre transformation:
+            from the post-hardcore of <strong>Waxwing</strong> (three albums, 1999&ndash;2002,
+            Second Nature Recordings) to solo folk-rooted songwriting. The transformation was
+            not abrupt &mdash; he was releasing solo acoustic material while Waxwing was still
+            active. His brother <strong>Cody</strong> went deeper into post-hardcore with
+            <strong>the Blood Brothers</strong>; Rocky went toward the acoustic guitar. Same
+            household, same punk roots, opposite genre destinations.
+          </p>
+          <p>
+            The punk ethics persisted even as the sound changed. <strong>Fugazi&rsquo;s</strong>
+            model of DIY independence maps directly onto Votolato&rsquo;s
+            <strong>Kickstarter</strong> campaigns, <strong>living room shows</strong>, and
+            self-released records. The punk is in the business model, not the chord progression.
+            The 250-show-a-year touring schedule is punk endurance applied to folk venues.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Casey Foubert &amp; Chris Walla Partnerships</h2>
+          <p>
+            <strong>Casey Foubert</strong> &mdash; multi-instrumentalist of <strong>Pedro the
+            Lion</strong> and contributor to Sufjan Stevens projects &mdash; produced four of
+            Votolato&rsquo;s albums (<em>Makers</em>, <em>The Brag and Cuss</em>,
+            <em>True Devotion</em>, <em>Television of Saints</em>). The partnership spanned
+            approximately six years (2006&ndash;2012) and defined Votolato&rsquo;s commercial
+            peak. Foubert&rsquo;s multi-instrumental depth (drums, piano, keyboards, violin,
+            bass) expanded Votolato&rsquo;s stripped-down songwriting into fuller arrangements.
+          </p>
+          <p>
+            <strong>Chris Walla</strong> &mdash; guitarist and producer of <strong>Death Cab
+            for Cutie</strong> &mdash; produced <em>Hospital Handshakes</em> (2015) in a
+            two-week burst in Omaha, Nebraska. Walla&rsquo;s sonic clarity brought a new
+            precision to Votolato&rsquo;s rawness. The Pedro the Lion and Death Cab connections
+            place Votolato at the center of a network of Seattle independent musicians who
+            collaborate across genre and label boundaries.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Confessional</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                47th acoustic element. The sonic phenomenon at the intersection of
+                singing and emotional disclosure, where the singer&rsquo;s vocal cords
+                carry the physical residue of lived experience: road wear, grief,
+                exhilaration, and thousands of performances. The confessional declares
+                outward at full emotional volume. Counterpart to the murmur (degree 45).
+                The murmur whispers; the confessional reports. Votolato&rsquo;s gravelly
+                voice &mdash; punk residue in folk singing &mdash; is the confessional
+                in its most distilled form.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Molt</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                47th artist-city pattern. An artist who publicly sheds one genre identity
+                and grows another while remaining rooted in the same city. The city
+                witnesses the transformation. Votolato arrived as Waxwing&rsquo;s
+                post-hardcore frontman and emerged as a folk singer-songwriter. Same
+                venues, same brother on guitar, completely different genre. The old
+                skin falls away in public view. Distinct from the quiet lifer (45),
+                who maintains one identity across decades.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Crack</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                46th blue note deployment. The moment when a voice breaks from controlled
+                singing into raw, unguarded exposure. Not a vocal error but the point
+                where technique fails to contain feeling. The frequency shift when vocal
+                cords lose controlled vibration under emotional pressure. Follows the
+                held breath (45) &mdash; absence followed by rupture. Two consecutive
+                deployments mapping the extremes of folk vocal vulnerability.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Consecutive Folk</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                Second folk-primary degree. Genre Stage 27 continues. First consecutive
+                same-genre since Blues Rock (36&ndash;37). The repeat proves folk is not
+                an anomaly but a register the engine intends to occupy. The murmur (45)
+                and the confessional (46) are opposite ends of the folk vocal spectrum.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 Rises</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                8th E=3 deployment. Distribution: 2:14:8:12:10:2. Votolato registers
+                higher than Jurado (E=2) on the cultural impact scale: 250 shows/year,
+                OC placement, NPR Song of the Day, Death Cab/Pedro the Lion producer
+                connections. Visible-but-not-mainstream.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">45&deg;</span> Damien Jurado &mdash; <strong>Consecutive Folk.</strong> Both born in Texas, both transplanted to Seattle, both shaped by punk, both operating outside commercial mainstream. The murmur and the confessional. E=2 and E=3. Both connected to Pedro the Lion (Bazan produced Jurado; Foubert produced Votolato). First consecutive same-genre since Blues Rock (36&ndash;37).</li>
+            <li><span class="ref-degree">44&deg;</span> Chong the Nomad &mdash; <strong>Three-degree contrast arc.</strong> Electronic/R&amp;B (44) to folk whisper (45) to folk confession (46). The grain, the murmur, the confessional. Three consecutive fiercely independent Seattle artists, three completely different production paradigms.</li>
+            <li><span class="ref-degree">37&deg;</span> Ayron Jones &mdash; <strong>Punk energy thread.</strong> Both E=3. Both arrived through genre transformation (Jones from blues/punk/metal, Votolato from punk/post-hardcore to folk). Raw guitar attack as shared foundation.</li>
+            <li><span class="ref-degree">42&deg;</span> Erica Campbell &mdash; <strong>Private suffering made public.</strong> Campbell&rsquo;s gospel channels faith through loss; Votolato&rsquo;s <em>Wild Roots</em> channels grief through folk. Different registers, same willingness to expose private pain.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>Infrastructure arc.</strong> Mercury Records (0) through Sub Pop (45) to Barsuk (46) to Kickstarter (46) to living rooms (46). The progressive miniaturization of institutional infrastructure across 47 degrees.</li>
+            <li><span class="ref-degree">36&deg;</span> Jimi Hendrix &mdash; <strong>Consecutive genre precedent.</strong> Blues Rock repeated at 36&ndash;37 (Hendrix/Jones). Folk repeats at 45&ndash;46 (Jurado/Votolato). Same structural pattern: genre sustained across consecutive degrees to prove it is a register, not a one-off.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Full Name</span>
+            <span class="stat-value">Rocky Votolato</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Mar 8, 1977</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Dallas / Frost, TX</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Childhood</span>
+            <span class="stat-value">50-acre horse farm</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">HS</span>
+            <span class="stat-value">Inglemoor (Kenmore)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Resides</span>
+            <span class="stat-value">West Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Brother</span>
+            <span class="stat-value">Cody (Blood Brothers)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">46 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">27 (cont.)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#47 The Molt</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#47 Confessional</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#46 The Crack</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Label History</h4>
+          <div class="stat-row">
+            <span class="stat-label">1999</span>
+            <span class="stat-value">Status / Henry&rsquo;s Finest</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2001&ndash;2003</span>
+            <span class="stat-value">Second Nature</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2006&ndash;2010</span>
+            <span class="stat-value">Barsuk Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2012</span>
+            <span class="stat-value">Self-released (KS)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2015</span>
+            <span class="stat-value">No Sleep / Glitterhouse</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2022</span>
+            <span class="stat-value">Spartan / Thirty Something</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Casey Foubert</span>
+            <span class="stat-value">Producer (2006&ndash;12)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Chris Walla</span>
+            <span class="stat-value">Producer (2015)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Cody Votolato</span>
+            <span class="stat-value">Brother / guitarist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Matt Bayles</span>
+            <span class="stat-value">Producer (2001)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Eric Corson</span>
+            <span class="stat-value">Long Winters</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Andy Lum</span>
+            <span class="stat-value">My Goodness</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Influences</h4>
+          <div class="stat-row">
+            <span class="stat-label">Punk</span>
+            <span class="stat-value">Jawbreaker, Fugazi</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk</span>
+            <span class="stat-value">Dylan, Cat Stevens</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Country</span>
+            <span class="stat-value">Cash, Willie, Earle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Post-HC</span>
+            <span class="stat-value">Drive Like Jehu</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Solo Albums</span>
+            <span class="stat-value">9</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Waxwing Albums</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Career Span</span>
+            <span class="stat-value">1997&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Peak Touring</span>
+            <span class="stat-value">250 shows/year</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kickstarter</span>
+            <span class="stat-value">$38,225 (712 backers)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 46</span>
+            <span class="stat-value">2:14:8:12:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3 Mode</span>
+            <span class="stat-value">8th (rises from 7)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Consec. Folk</span>
+            <span class="stat-value">2 (45&ndash;46)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Women</span>
+            <span class="stat-value">10 / 47 (~21.3%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 46 of 360 &mdash; Rocky Votolato &mdash;
+        Folk &mdash; Barsuk / Second Nature / Spartan &mdash;
+        West Seattle &mdash;
+        Consecutive Folk &mdash; First Barsuk &mdash; West Seattle Enters
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to the
+        Seattle metropolitan area, on the ancestral territory of the Duwamish Tribal Organization
+        (duwamishtribe.org), the Muckleshoot Indian Tribe, and related Coast Salish and
+        Southern Lushootseed-speaking peoples. West Seattle takes its name from its position
+        west of the Duwamish River &mdash; the river named for the Duwamish people.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

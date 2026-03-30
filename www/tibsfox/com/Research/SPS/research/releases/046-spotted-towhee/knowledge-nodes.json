@@ -1,0 +1,263 @@
+{
+  "degree": 46,
+  "species": "Spotted Towhee",
+  "scientific_name": "Pipilo maculatus",
+  "slug": "046-spotted-towhee",
+  "sound_type": "buzzy drink-your-tea trill + sharp mew call",
+  "energy": 3,
+  "ecosystem": "forest shrub edge / dense understory",
+  "season": "resident",
+  "family": "Passerellidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Columbia Spotted Frog",
+    "original_scientific_name": "Rana luteiventris",
+    "reason": "SPS Part B engine is birds-and-mammals only. Spotted Towhee replaces Columbia Spotted Frog, preserving the original E=3 energy level and forest/shrub edge habitat. The Spotted Towhee occupies exactly the dense understory and shrub-edge habitat where a forest-associated amphibian would be found. The word 'spotted' threads between original and replacement.",
+    "preserved": ["E=3 energy level", "forest/shrub edge habitat"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; common year-round resident in western Washington lowlands. Found in shrubby habitats in forested lowlands throughout Washington. Present on both sides of the Cascades during breeding season. In eastern Washington, common breeder from late April to mid-September, uncommon in winter. PNW subspecies oregonus is the darkest Spotted Towhee subspecies -- intensely black with reduced white spotting. Population increased in western Washington following historical clear-cutting that created shrubby habitat. Found in residential thickets, clear-cut edges, riparian corridors, and around wetlands. One of the most frequently encountered birds in western Washington's shrubby lowland habitats."
+  },
+  "taxonomy_note": {
+    "description": "Spotted Towhee is the SECOND Passerellidae (New World Sparrows) in the engine, forming a consecutive same-family pair with Song Sparrow (degree 45). Pipilo maculatus: 'the spotted chirper' -- pipilo = Latin 'to chirp,' maculatus = Latin 'spotted.' Formerly part of 'Rufous-sided Towhee' (Pipilo erythrophthalmus), split from Eastern Towhee in 1995 by the AOU based on plumage, song, call, and genetic differences. 21 recognized subspecies. 4-9 song types per male. The largest Passerellidae in the engine at 33-49 g. Ground-scratching specialist with distinctive double-footed backward hop. E=3 restored after 25 degrees of absence.",
+    "current_family": "Passerellidae",
+    "new_family": false,
+    "family_count_in_engine": 19,
+    "passerellidae_count_in_engine": 2,
+    "name_etymology": "Pipilo = Latin pipilo/pipilare (to chirp, to twitter). Onomatopoeic genus name evoking the bird's vocalizations. Maculatus = Latin maculatus (spotted, stained), from macula (spot). Full translation: 'The spotted chirper' -- the genus names the sound, the species names the plumage. Unlike the Song Sparrow (Melospiza melodia = 'melody song-finch,' pure acoustics), the Spotted Towhee's binomial splits between acoustic and visual. Named by William Swainson in 1827.",
+    "genus_note": "Pipilo has ONE member in the engine (degree 46). The genus contains four species: Spotted Towhee (P. maculatus), Eastern Towhee (P. erythrophthalmus), Green-tailed Towhee (P. chlorurus), and Collared Towhee (P. ocai). All are large, heavy-bodied, ground-dwelling sparrows that forage by scratching in leaf litter. The genus is the 'ground floor' of Passerellidae -- the heaviest members of the family.",
+    "order_note": "Passeriformes continues from degree 45. NINTH consecutive Passeriformes (38-46). 39 of 47 entries (83.0%) are Passeriformes.",
+    "family_position": "Passerellidae now has 2 members at degrees 45-46. The Passerellidae pair is complete. Song Sparrow (melodic generalist) + Spotted Towhee (textural specialist).",
+    "subspecies_note": "21 recognized subspecies (Peter Pyle 2023 proposes reducing to 7). Three PNW subspecies: oregonus (western WA, darkest), curtatus (eastern WA, intermediate), arcticus (NE WA, most boldly spotted). Geographic variation follows coast-interior gradient: dark/reduced-spotting coastally, lighter/more-spotted inland.",
+    "split_note": "Split from Eastern Towhee in 1995. Formerly 'Rufous-sided Towhee' (Pipilo erythrophthalmus). Diverged approximately one million years ago. Key split criteria: plumage (white spots vs. none), song (harsher/more variable vs. cleaner), call notes, and mitochondrial DNA. Narrow hybrid zone in Great Plains (Nebraska, Dakotas).",
+    "vocal_learning_note": "Vocal learner. Songs acquired through imitation of neighboring adults. High degree of song-sharing among males on adjacent territories in PNW oregonus populations. Song structure changes relatively rapidly over short distances. Song differences between Spotted and Eastern Towhee accumulated through cultural transmission and sexual selection, eventually contributing to reproductive isolation."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1,500-8,000 (across all vocalizations)",
+    "peak_energy_band_hz": "2,000-6,000 (song trill energy concentration)",
+    "song_frequency_hz": "1,500-8,000 (full range); most energy 2,000-6,000",
+    "song_duration_s": "~1.5 (per individual song)",
+    "note_structure": "ONE-TO-TWO-PART STRUCTURE with geographic variation: (1) INTRODUCTORY NOTES -- 1-2 (up to 8) short, clear notes that precede the trill. Present in interior/mountain populations, often ABSENT in Pacific Coast populations including PNW oregonus. (2) THE TRILL -- the defining element: a fast, buzzy, vibrating trill that sounds like a taut rubber band being plucked or paper stuck in a fan. Classic mnemonic: 'drink-your-tea!' Pacific Coast birds often sing trill-only songs.",
+    "note_types": "THREE vocalization categories: (1) SONG -- the buzzy trill (with or without introductory notes), ~1.5 seconds, delivered from perch 1-4 m high. 4-9 song types per male, including both fast and slow trill types. (2) MEW CALL -- a sharp, descending, cat-like 'meewww?' lasting about half a second. The most distinctive call note; year-round contact and alarm call. (3) LISPING CALL -- a soft, quiet contact call exchanged between paired birds foraging in dense cover.",
+    "phrase_structure": "Simpler than Song Sparrow. Each song type features a trill with specific rate and frequency characteristics. Males maintain 4-9 types. Both fast and slow trill types present in every population studied. Pacific Coast birds simplify further, often dropping introductory notes entirely.",
+    "timbre": "BUZZY, VIBRATING, ROUGH-TEXTURED. The trill's rapid frequency modulation creates a broad-spectrum buzz that fills the dense understory. Harsher and more variable than Eastern Towhee. The mew call is nasal, descending, cat-like. Overall vocal character rougher than Song Sparrow -- appropriate for a bird that communicates through dense vegetation.",
+    "amplitude": "E=3 -- moderate-to-strong volume from low perches in dense understory. The buzzy trill cuts through vegetation absorption. Louder and more penetrating than Song Sparrow (E=2) but less commanding than canopy-projecting species like American Robin (E=4). The rasp fills the thicket without leaving it.",
+    "tempo": "Trill: rapid, typically 10-20+ notes per second, fusing into a continuous buzz. Introductory notes (when present): deliberate, evenly spaced, slower than the trill. Overall song pace fast -- the trill is compressed into ~1.5 seconds.",
+    "context": "Song given during breeding season (February-July in PNW). Males sing from low to mid-level perches within shrub cover. Mew call given year-round as contact and alarm. Lisping call exchanged between mates during foraging. Double-footed scratch produces its own acoustic signal year-round.",
+    "key_property": "THE RASP -- the 47th acoustic element (species side). A concentrated, buzzy, vibrating trill defined by textural intensity rather than melodic complexity. The trill's individual notes are so rapid and tightly packed that they fuse into a continuous rough texture -- repetition becomes texture. Named 'the rasp' for the sound's file-like quality, the tool metaphor (coarse abrasion shaping material through friction), and the foraging behavior (double-footed scratch rasps the ground before the syrinx rasps the air). The first acoustic element defined by textural concentration."
+  },
+  "plumage": {
+    "overall": "STRONG SEXUAL DIMORPHISM in coloration (not in pattern). Males: jet black head/back, rich rufous flanks, white breast, white spots. Females: dark brown replacing black, same pattern. GEOGRAPHIC VARIATION across 21 subspecies -- PNW oregonus is darkest with most reduced white spotting.",
+    "adult_male": "Jet black hood, back, wings, and tail. Rich rufous (rusty orange-brown) flanks. White breast center. Bold white spots on wings and back -- the diagnostic feature (maculatus = 'spotted'). White outer tail corners (variable, less extensive in Pacific populations). Bright red-orange eye (varies geographically). Dark conical bill.",
+    "adult_female": "Similar pattern to male but dark brown replacing jet black. Rufous flanks, white spots, white breast center, brown hood. Less contrast overall.",
+    "pnw_form": "Subspecies oregonus -- the DARKEST Spotted Towhee subspecies. Males intensely black. White spotting reduced compared to interior populations. White tail corners less extensive. Follows Gloger's rule: wet, shaded PNW habitats select for darker plumage. Compare with Song Sparrow's dark morphna and Oregon Junco's dark western form.",
+    "geographic_extremes": "Oregonus (Pacific Coast): darkest, most reduced spotting. Arcticus (Great Plains): lightest, most extensive white spotting, largest tail corners. Coast-interior gradient parallels Song Sparrow morphna-merrilli gradient.",
+    "juvenile": "Similar to female but with finer streaking on breast. Less distinct pattern overall.",
+    "molt_cycle": "Single annual prebasic molt. No dramatic seasonal plumage change.",
+    "field_id": "Large sparrow with bold black (male) or brown (female) hood, bright rufous flanks, white breast, white spots on wings/back. Long tail often cocked upright. Red-orange eye in most populations. Distinguished from Eastern Towhee by white spots on back and wings. Distinguished from Dark-eyed Junco by much larger size, rufous flanks, and different body shape. The double-footed scratch and mew call are additional identification aids."
+  },
+  "understory_ecology": {
+    "definition": "Forest shrub edge / dense understory -- the tangled zone where forest trees meet shrubby undergrowth. Salal, Oregon grape, snowberry, sword fern, and blackberry form impenetrable thickets below the canopy. This is the habitat you walk past on a forest trail and hear something scratching loudly in the leaves but cannot see.",
+    "habitat_types": [
+      "Forest edges with dense shrub understory (salal, Oregon grape, snowberry)",
+      "Clear-cut regeneration areas with young shrubs and dense ground cover",
+      "Riparian thickets along streams with dense understory",
+      "Suburban gardens with dense plantings and accumulated leaf litter",
+      "Blackberry tangles and hedgerows",
+      "Madrone and oak woodlands with shrubby understory",
+      "Mixed conifer-deciduous forest edges with well-developed shrub layer",
+      "Second-growth forest with dense shrub layer"
+    ],
+    "vertical_position": "0-3 m above ground. Forages on the ground in leaf litter (double-footed scratch). Sings from perches at 1-4 m (low to mid shrub level). Nests on the ground, sunk into leaf litter under shrub cover.",
+    "pnw_distribution": [
+      "Western Washington -- common year-round resident in lowland shrubby habitats",
+      "Puget Sound lowlands -- abundant in residential thickets, parks, forest edges",
+      "Eastern Washington -- common breeder late April to mid-September, uncommon in winter",
+      "Coastal Washington -- less common than in interior western WA",
+      "Both sides of Cascades during breeding season"
+    ],
+    "habitat_history": "Formerly rare in western Washington, especially along the coast. Clear-cutting of extensive forests created additional shrubby habitat, enabling the population to increase dramatically. One of the few PNW species that benefited from logging. A species of ecological succession -- thrives in early-to-mid stages of forest regrowth.",
+    "significance": "The engine's first dense-understory species. After Song Sparrow's wetland edge (degree 45), the Spotted Towhee moves to the adjacent habitat band: the closed, tangled shrub layer where forest meets clearing. The engine descends from canopy to water edge (45) to forest floor (46)."
+  },
+  "double_scratch": {
+    "description": "The Spotted Towhee's most distinctive behavioral trait: a double-footed backward scratch in which the bird makes a quick forward hop followed by an immediate backward hop, during which both feet kick backward simultaneously through the leaf litter, displacing it to expose food items beneath.",
+    "mechanics": "Pendular motion: feet swing forward and back in a single coordinated action. Both feet move simultaneously (not alternating). The movement displaces a spray of leaf litter behind the bird.",
+    "acoustic_significance": "The scratching is LOUD. In dry leaves, the sound carries clearly through the understory. Often the first indication that a Spotted Towhee is present. In dense cover, the scratching noise is more audible than the bird's song or calls. The scratch is an unintentional acoustic signal of presence.",
+    "diagnostic_value": "While other Passerellidae scratch (Fox Sparrow, juncos), the Spotted Towhee is the most committed ground-scratcher in the PNW -- spending more time on the ground and producing more vigorous scratching than any sympatric species.",
+    "connection_to_rasp": "The double-scratch is the physical complement to the vocal rasp: both involve rapid, repetitive, friction-based action. The feet rasp the ground. The syrinx rasps the air. The bird's entire behavioral repertoire is organized around concentrated, textured, abrasive repetition."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The rasp -- the 47th acoustic element (species side): a concentrated, vibrating, single-frequency trill defined by textural intensity rather than melodic complexity. The Spotted Towhee's song is a buzzy trill that sounds like a taut rubber band being plucked or a piece of paper stuck into a fan. The individual notes are so rapid and tightly packed that they fuse into a continuous rough texture -- repetition becomes texture. Named 'the rasp' for three resonances: (1) the sound's file-like quality (rough, vibrating, concentrated, producing a continuous rough tone from rapid repetition), (2) the tool metaphor (a rasp is a coarse file that shapes material through friction -- the towhee's song 'abrades' the silence of the underbrush), (3) the foraging behavior (the double-footed backward scratch is itself a rasping action, dragging clawed feet across leaf litter). The first acoustic element defined by textural concentration -- an event that achieves its character through the sheer density of repetition within a narrow frequency band.",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/rasp/",
+      "examples": [
+        "The trill: ~1.5 seconds of buzzy vibration. Classic mnemonic 'drink-your-tea!' -- the 'teeeea' is the rasp. Pacific Coast birds often skip the introductory notes entirely and deliver the rasp alone.",
+        "Contrast with the preamble (degree 45): the preamble opens a complex passage with clear notes. The rasp IS the passage -- concentrated, vibrating, complete in a single buzzy gesture. The Song Sparrow introduces; the Spotted Towhee declares.",
+        "Contrast with the buzz (degree 32): the Bohemian Waxwing's buzz is thin, high-pitched, social -- a narrow-frequency contact call exchanged within flocks. The rasp is territorial -- a broad-frequency, moderate-amplitude trill delivered from a fixed perch to stake a claim.",
+        "Contrast with the thrum (degree 35): the Rufous Hummingbird's thrum is mechanical, produced by wing feathers. The rasp is vocal, produced by rapid syringeal vibration. Both are buzzy and insistent, but the thrum comes from flight and the rasp comes from the throat.",
+        "The double-scratch connection: the bird rasps the ground before it rasps the air. Feet and syrinx use the same principle -- rapid, repetitive, friction-based action producing a concentrated textured sound."
+      ],
+      "music_theory_parallel": "The tremolo -- a rapid repetition of a single note so fast that the individual attacks blur into a continuous, vibrating tone. On a mandolin, the tremolo is produced by rapid alternating picks; the individual picks are inaudible but the sustained vibration fills the space. The Spotted Towhee's trill is a syringeal tremolo -- individual notes picked so rapidly they fuse into a rough, buzzing tone. In electronic music, this is a square-wave oscillator at high frequency: a simple waveform repeated so rapidly it becomes timbre rather than rhythm. The rasp is where repetition crosses the threshold into texture."
+    },
+    {
+      "concept": "Second Passerellidae -- the Passerellidae pair is complete. Song Sparrow (degree 45) + Spotted Towhee (degree 46) forms a consecutive same-family pair following the engine's pairing pattern (waxwings 31-32, goldfinches 43-44). The pair represents complementary acoustic strategies within the same family: melodic complexity (Song Sparrow's preamble + elaborate body) paired with textural concentration (Spotted Towhee's buzzy rasp). Different genera within Passerellidae: Melospiza (song finch) and Pipilo (chirper). Different habitats: wetland edge (open) and forest shrub edge (closed). Same vertical range (0-3 m), same season (resident), same family.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/passerellidae-pair/",
+      "examples": [
+        "Pairing pattern: Waxwings (quiet Cedar to loud Bohemian). Goldfinches (simple American to borrowed Lesser). Sparrows (melodic Song Sparrow to textural Spotted Towhee). Each pair explores a contrast within the family.",
+        "Habitat complement: Song Sparrow = wetland edge (open, low vegetation, beside water). Spotted Towhee = forest shrub edge (closed, dense vegetation, beneath canopy). Adjacent habitats, minimal overlap.",
+        "Size contrast: Song Sparrow ~25-28 g (PNW). Spotted Towhee ~37-40 g (PNW). The towhee is substantially larger -- the heaviest Passerellidae in the engine.",
+        "Vocal contrast: Song Sparrow = 8-12 song types, complex multi-part songs. Spotted Towhee = 4-9 song types, simpler structure, texturally rougher.",
+        "Plumage contrast: Song Sparrow = brown, streaked, cryptic. Spotted Towhee = black/rufous/white, boldly patterned. The sparrow hides in plain sight; the towhee hides behind vegetation."
+      ],
+      "music_theory_parallel": "A duo sonata -- two instruments from the same family playing complementary roles. The Song Sparrow is the first violin: melodic, complex, singing the theme. The Spotted Towhee is the viola: lower, rougher, providing textural depth. Same string family, different registers, different roles. The pair is the Passerellidae's contribution to the engine's ensemble -- one melody, one texture."
+    },
+    {
+      "concept": "E=3 restored after 25 degrees of absence -- the last E=3 was degree 20 (Orange-crowned Warbler). The Spotted Towhee continues the energy restoration that began at degree 45 (E=2). Two consecutive lower-energy entries break the seven-consecutive-E=4 streak (38-44) and restore two energy levels in two degrees. E=3 now at 8 degrees (17.0%). Three of five energy levels active in the last two degrees. The dynamic range decompression continues.",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e3-restored/",
+      "examples": [
+        "E=3 timeline: degrees 14-20 (continuous run of 7), then ABSENT for 25 degrees, then degree 46 (Spotted Towhee). The gap is the second-longest energy absence after E=2's 31-degree gap.",
+        "Two-degree restoration: E=2 at degree 45 (Song Sparrow), then E=3 at degree 46 (Spotted Towhee). Sequential energy restorations. The engine climbs one step: 2 to 3.",
+        "Breaking the E=4 monopoly: E=4 held 21 of 47 degrees (44.7%). Now E=2 + E=3 together hold 20 degrees (42.5%) -- nearly matching E=4. The lower registers are competitive again.",
+        "Why E=3: the Spotted Towhee's buzzy trill cuts through dense vegetation (louder than Song Sparrow's E=2 preamble) but the bird sings from within the thicket, not above it (quieter than American Robin's E=4 rooftop broadcast). The rasp fills the thicket without leaving it.",
+        "Energy stepping: E=4 (degrees 38-44) -> E=2 (degree 45) -> E=3 (degree 46). The engine dropped two levels then rose one. A sawtooth pattern rather than a smooth ramp."
+      ],
+      "music_theory_parallel": "Mezzo-piano -- the dynamic marking between pianissimo (E=2) and mezzo-forte (E=4). After the dramatic subito piano at degree 45, the engine steps up to mezzo-piano at degree 46. Not a return to loud -- a gradual re-entry from quiet. The Spotted Towhee's rasp is louder than a whisper but not a shout. The dynamic contour follows a V-shape: loud (E=4, degrees 38-44), then sudden quiet (E=2, degree 45), then rising (E=3, degree 46). The restoration is stepwise, not instant."
+    },
+    {
+      "concept": "The double-footed backward scratch as behavioral acoustic signature -- the Spotted Towhee's foraging technique produces a loud, distinctive scratching sound in leaf litter that is often the first sign of the bird's presence. In the dense understory, three sounds together identify the species: the scratch, the mew, and the rasp. The physical scratching is the behavioral complement to the vocal rasp: both involve rapid, repetitive, friction-based action. The feet rasp the ground; the syrinx rasps the air. The bird's entire behavioral repertoire is organized around concentrated, textured, abrasive repetition.",
+      "level": "foundational",
+      "department": "ecology/behavioral-ecology",
+      "college_path": ".college/ecology/behavioral-ecology/double-scratch/",
+      "examples": [
+        "The mechanics: forward hop then backward hop, both feet kicking backward simultaneously through leaf litter. Pendular motion -- feet swing forward and back in a single coordinated action.",
+        "Acoustic detection: the scratching noise in dry leaves carries clearly through the understory and is often more audible than the bird's song or calls. Birders learn to identify Spotted Towhees by the sound of their feet.",
+        "Three-sound identification: scratch (foraging noise) + mew (cat-like call) + rasp (buzzy song). All three from the same dense thicket. The scratch is the ground percussion, the mew is the alarm/contact, the rasp is the territorial broadcast.",
+        "Comparison with other scratchers: Fox Sparrow and juncos also scratch, but Spotted Towhee is the most vigorous and committed ground-scratcher. Larger body, stronger legs, more displaced litter.",
+        "Ecological succession link: the bird needs deep leaf litter to scratch in. Old-growth forests with closed canopies produce leaf litter; young second-growth with shrubby understory provides both litter and cover. The scratch requires the habitat that logging created."
+      ],
+      "music_theory_parallel": "The brush stroke on a snare drum -- a sweeping friction across the drumhead that produces a continuous, textured sound from a single gesture. The drummer drags the brush; the towhee drags its feet. Both produce sound through friction rather than percussion. In the Spotted Towhee's habitat, the scratching is the rhythm section: a repeated, textured, ground-level pulse that provides the beat beneath the melodic rasp and the punctuating mew."
+    },
+    {
+      "concept": "Dense understory as habitat type -- the engine's first dense-understory species. The closed, tangled shrub layer where forest trees meet undergrowth: salal, Oregon grape, snowberry, sword fern, blackberry. A species heard but rarely seen, identified by the sounds it makes in the undergrowth. After the Song Sparrow's wetland edge (degree 45), the Spotted Towhee occupies the adjacent habitat band -- the forest floor beneath the canopy. The engine descends from canopy to water edge to forest floor.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/dense-understory/",
+      "examples": [
+        "Habitat progression: deep forest (0-13) -> mid-canopy (14-20) -> woodpecker (21-22) -> open lawn (23-25) -> aerial (26-30) -> open canopy (31-34) -> hummingbird (35-37) -> conifer canopy (38-42) -> weedy open (43-44) -> wetland edge (45) -> DENSE UNDERSTORY (46).",
+        "Adjacent to Song Sparrow's habitat: wetland edge and forest shrub edge are neighboring habitat bands. The Song Sparrow works the open margin beside water. The Spotted Towhee works the closed margin beneath forest canopy. Same elevation zone, different light level and vegetation density.",
+        "Acoustic environment: dense vegetation absorbs and scatters sound. The rasp's buzzy quality (broad frequency spectrum) cuts through this absorption better than a pure tone would. The roughness of the sound increases its audibility in cluttered environments.",
+        "Historical habitat change: formerly rare in western WA. Clear-cutting created shrubby habitat that increased the population. One of the few PNW species that benefited from logging -- a counterpoint to Spotted Owl (degree 4) and Hermit Thrush (degree 7).",
+        "Ecological succession species: thrives in early-to-mid stages of forest regrowth. As second-growth forests mature and canopy closes, Spotted Towhee habitat decreases."
+      ],
+      "music_theory_parallel": "The sotto voce passage -- music played from under a heavy orchestral texture, barely visible but distinctly audible through the density. The Spotted Towhee sings from beneath the vegetation canopy, its rasp cutting through the acoustic clutter the way a solo oboe cuts through a dense orchestral passage. The dense understory is the orchestration: layers of shrubs, ferns, and leaf litter that muffle and scatter sound. The towhee has evolved a sound (the rasp) and a strategy (low perch, broad frequency) that penetrates this particular orchestration."
+    },
+    {
+      "concept": "The 1995 Rufous-sided Towhee split as case study in vocal speciation -- the Spotted Towhee and Eastern Towhee were a single species until 1995, when differences in plumage, song, call notes, and genetics justified splitting them. Song differences between the two forms accumulated through cultural transmission and sexual selection over approximately one million years of isolation. The split demonstrates that learned vocalizations can drive speciation: song divergence creates reproductive isolation. The engine first encountered vocal speciation at degree 34 (Red Crossbill dialects); the Spotted Towhee provides a case where the vocal divergence reached its conclusion -- a formal taxonomic split.",
+      "level": "intermediate",
+      "department": "ecology/speciation",
+      "college_path": ".college/ecology/speciation/vocal-speciation/",
+      "examples": [
+        "The split: Rufous-sided Towhee (Pipilo erythrophthalmus) -> Spotted Towhee (P. maculatus) + Eastern Towhee (P. erythrophthalmus). AOU 1995. Based on plumage, song, calls, and mitochondrial DNA.",
+        "Vocal differences: Spotted Towhee songs are more variable and harsher; Pacific Coast birds sing trill-only songs. Eastern Towhee songs are cleaner, more stereotyped, with clear 'drink-your-tea' structure.",
+        "Hybrid zone: narrow zone in Great Plains (Nebraska, Dakotas). Interbreeding occurs but is limited. Song differences help maintain species boundary.",
+        "Comparison with Red Crossbill (degree 34): crossbills have population-specific call types that may represent incipient species. The towhee split is what happens when the vocal divergence completes -- formal species recognition.",
+        "Cultural transmission: song learned from neighbors, not inherited genetically. But cultural differences can become as effective as genetic differences in preventing hybridization. Learned song shapes evolution."
+      ],
+      "music_theory_parallel": "Genre divergence -- when a single musical tradition splits into two distinct genres through accumulated stylistic differences. Blues split into Chicago blues and Delta blues; jazz split into bebop and cool jazz. The Rufous-sided Towhee's song tradition split into the Spotted Towhee's harsh, variable western style and the Eastern Towhee's clean, stereotyped eastern style. Same ancestral form, different accumulated choices, eventually too different to merge back."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-045",
+      "title": "Song Sparrow (Degree 45)",
+      "connection": "PASSERELLIDAE PAIR. Consecutive same-family entries (45-46). Song Sparrow = melodic complexity (preamble + elaborate body, E=2, wetland edge). Spotted Towhee = textural intensity (buzzy rasp, E=3, forest shrub edge). Same family, complementary habitats, complementary acoustics. Both year-round PNW residents, both ground-to-low-shrub birds (0-3 m), both heard more often than seen. The Passerellidae pair is complete."
+    },
+    {
+      "project": "SPS-044",
+      "title": "Lesser Goldfinch (Degree 44)",
+      "connection": "MOSAIC TO RASP transition. The mosaic (degree 44) was defined by borrowed content -- interspecific mimicry assembling a patchwork of other species' phrases. The rasp (degree 46) is defined by textural concentration -- a single buzzy trill compressed into pure vibrating texture. Maximum compositional complexity (mosaic) to minimum compositional complexity (rasp) in two degrees. Also: Fringillidae (44) -> Passerellidae (45-46) family transition."
+    },
+    {
+      "project": "SPS-020",
+      "title": "Orange-crowned Warbler (Degree 20)",
+      "connection": "LAST E=3. Orange-crowned Warbler at degree 20 was the last E=3 entry -- 25 degrees of absence before the Spotted Towhee restores it. Both sing from within dense vegetation. Both occupy the shrubby edge zone. The E=3 register returns."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "VOCAL SPECIATION. Red Crossbill has population-specific call types that may represent incipient species (10+ types). Spotted Towhee was ALREADY split from Eastern Towhee (1995) based partly on vocal differences. The crossbill shows vocal divergence in progress. The towhee shows vocal divergence completed. Both demonstrate that learned vocalizations can drive speciation."
+    },
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "PASSERELLIDAE GROUND-FORAGING. Oregon Junco at degree 11 (now classified Passerellidae) also forages on the ground by scratching in leaf litter. The Spotted Towhee at degree 46 is the most extreme ground-scratcher in the family. Both are dark PNW subspecies following Gloger's rule. Three Passerellidae total in the engine (junco retroactively, Song Sparrow, Spotted Towhee)."
+    },
+    {
+      "project": "SPS-004",
+      "title": "Northern Spotted Owl (Degree 4)",
+      "connection": "LOGGING COUNTERPOINT. The Spotted Owl declined due to old-growth forest loss from logging. The Spotted Towhee INCREASED in western Washington due to logging -- clear-cutting created shrubby habitat the towhee needs. Two PNW species, opposite responses to the same disturbance. The forest's loss is the understory's gain."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Spotted Towhee documented as common year-round resident in western Washington. Three subspecies in WA (oregonus, curtatus, arcticus). Dark oregonus form dominant in Puget Sound lowlands. Population historically rare in western WA, increased following clear-cutting."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Dense understory ecology. Ecological succession -- thrives in early-to-mid stages of forest regrowth. Shrub-edge habitat created by disturbance. Double-footed scratch as foraging adaptation to leaf-litter-rich forest floor. Geographic variation across 21 subspecies following Gloger's rule."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 45,
+    "total_entries": 47,
+    "families_represented": 19,
+    "largest_families": {
+      "Parulidae": 10,
+      "Fringillidae": 5,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Trochilidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Passerellidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 45],
+      "E3": [14, 15, 16, 17, 18, 19, 20, 46],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=3 RESTORED after 25 degrees of absence (last E=3 was degree 20). Continues the energy restoration begun at degree 45 (E=2). Two consecutive lower-energy entries break the E=4 monopoly. E=3 now at 8 degrees (17.0%). E=2 + E=3 = 20 degrees (42.5%), nearly matching E=4's 21 degrees (44.7%). Dynamic range decompression continues.",
+    "passerellidae_pair_note": "PASSERELLIDAE PAIR COMPLETE at degrees 45-46. Song Sparrow (melodic, E=2, wetland edge) + Spotted Towhee (textural, E=3, forest shrub edge). Second consecutive same-family pair after Fringillidae (43-44).",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer"],
+    "ecosystem_note": "Forest shrub edge / dense understory -- the engine's first dense-understory habitat. After wetland edge (45), the engine moves to the forest floor beneath the canopy. Adjacent habitat band, different light level and vegetation density.",
+    "acoustic_element_47": "THE RASP -- a concentrated, buzzy, vibrating trill defined by textural intensity. The first element in the 'textural concentration' category. After the preamble (structural opening), the rasp (textural declaration).",
+    "csv_substitution_note": "Columbia Spotted Frog (Rana luteiventris) replaced by Spotted Towhee (Pipilo maculatus) because SPS Part B is birds-and-mammals only. E=3 and forest/shrub edge habitat preserved from original CSV. Second consecutive CSV substitution (both replaced frogs).",
+    "conservation_note": "LEAST CONCERN (IUCN). Population approximately 40 million (Partners in Flight). Continental Concern Score 8/20. BBS trend stable 1966-2019. Washington population increasing in western WA (habitat creation through logging). Common year-round resident in western Washington.",
+    "critical_gaps": [
+      "No marine/shoreline species in 46 degrees of 'The Sound of Puget Sound' -- 46 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 46 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 46 degrees -- URGENT",
+      "No nocturnal species since degree 4 (42 degrees ago) -- OVERDUE",
+      "No E=1 since degree 12 (34 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 46 DEGREES OF A PROJECT NAMED FOR PUGET SOUND",
+      "Only 5 orders in 47 entries -- a new order is strongly needed",
+      "NINE consecutive Passeriformes (38-46) -- non-passerine needed urgently",
+      "Second consecutive CSV substitution (frogs at 45-46) -- the engine is replacing amphibians, highlighting the birds-and-mammals-only constraint"
+    ]
+  }
+}
