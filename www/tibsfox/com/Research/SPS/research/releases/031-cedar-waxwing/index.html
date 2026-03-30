@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 31&deg; &mdash; Cedar Waxwing &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.whisper { background: #5C6BC0; }
+    .theory-icon.family { background: #00695C; }
+    .theory-icon.pair { background: #7B1FA2; }
+    .theory-icon.fruit { background: #E65100; }
+    .theory-icon.energy { background: #B71C1C; }
+    .theory-icon.sufficiency { background: #2E7D32; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* New family card -- Bombycillidae */
+    .new-family-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #9FA8DA 100%);
+      border: 2px solid #3F51B5;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .new-family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Waxwing pair card */
+    .pair-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Frugivory card */
+    .frugivory-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE082 100%);
+      border: 1px solid #FFA000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .frugivory-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Wax tips card */
+    .wax-card {
+      background: linear-gradient(135deg, #FFEBEE 0%, #EF9A9A 100%);
+      border: 1px solid #E53935;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .wax-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">31&deg;</div>
+      <div class="release-title-block">
+        <h2>Cedar Waxwing</h2>
+        <div class="scientific">Bombycilla cedrorum &middot; Family Bombycillidae (Waxwings) &middot; NEW FAMILY &mdash; 17th in Engine</div>
+      </div>
+    </div>
+    <div class="release-subtitle">High Thin See-See-See Trilled &middot; Fruiting Trees &middot; Resident &middot; Energy 4</div>
+
+    <blockquote>
+      In the mountain ash at the edge of the park, the tree is alive with birds
+      &mdash; dozens of sleek, crested shapes passing berries from branch to beak
+      in quick succession. A thin, high, shimmering chorus fills the air:
+      <em>see-see-see, see-see-see</em> &mdash; not one voice but many, overlapping,
+      blending into a crystalline whisper that sounds like the tree itself is
+      vibrating. Warm brown plumage fading to gray, black masks, yellow tail bands,
+      tiny drops of red wax on the wings. <em>Bombycilla cedrorum.</em> The
+      silk-tail of the cedars. A new family enters the engine. After five swallows
+      and a river of liquid song, the whisper arrives.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- New Family Card: Bombycillidae -->
+        <div class="new-family-card">
+          <h3>New Family: Bombycillidae (Waxwings) &mdash; 17th Family</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Bombycillidae enters the engine for the first time &mdash; the
+            <strong>17th family</strong> across 32 degrees. Only 3 species
+            worldwide: Cedar Waxwing, Bohemian Waxwing, Japanese Waxwing. The
+            engine will hold 2 of 3 (<strong>66.7% of the family</strong>)
+            &mdash; the highest proportional coverage of any family.
+            Phylogenetically isolated: nearest relatives are silky-flycatchers
+            and Palmchat, neither in the PNW. A new node on the taxonomic graph
+            with no family-level neighbors.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            <em>Bombycilla</em> = Latin <em>bombyx</em> (silk) +
+            <em>-cilla</em> (tail). <em>Cedrorum</em> = of the cedars.
+            Full name: <strong>&ldquo;silk-tail of the cedars.&rdquo;</strong>
+            Named for texture (silk) + diet (cedar berries). The first genus in
+            the engine named for tactile quality.
+          </p>
+        </div>
+
+        <!-- Waxwing Pair Card -->
+        <div class="pair-card">
+          <h3>Waxwing Pair Beginning (Degrees 31&ndash;32)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Cedar Waxwing (31) + Bohemian Waxwing (32) form the engine&rsquo;s
+            <strong>third same-genus consecutive pair</strong>, after Catharus
+            (18&ndash;19) and Tachycineta (27&ndash;28). Each pair explores a
+            different contrast axis:
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Pair</th><th>Degrees</th><th>Genus</th><th>Contrast Axis</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Catharus</td><td>18&ndash;19</td><td><em>Catharus</em></td><td>Spiral direction (ascending vs. descending)</td></tr>
+              <tr><td>Tachycineta</td><td>27&ndash;28</td><td><em>Tachycineta</em></td><td>Ecological niche (cliff vs. field)</td></tr>
+              <tr style="background: rgba(123,31,162,0.12); font-weight: 600;"><td>Bombycilla</td><td>31&ndash;32</td><td><em>Bombycilla</em></td><td>Geographic range (temperate vs. boreal)</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            After the swallow quintet (5 in 5), the engine compresses:
+            <strong>pair (2 in 2)</strong>. Same 100% density, smaller scale.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: High Thin See-See-See Trilled</h2>
+        <p>
+          The Cedar Waxwing produces a <strong>high-pitched, thin, sibilant
+          trill</strong> &mdash; a metallic whisper at the edge of audibility.
+          Not a song: Cedar Waxwings are among the few passerines that
+          <strong>lack true territorial song</strong>. The see-see-see is an
+          innate contact call used for flock cohesion, feeding coordination, and
+          predator alert. No territory to defend means no song to defend it with.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>6.0&ndash;10.0 kHz (higher than any swallow &mdash; near upper limit of comfortable human hearing)</td></tr>
+            <tr><td>Peak energy</td><td>7.0&ndash;9.0 kHz (nearly an octave above Barn Swallow&rsquo;s 3&ndash;6 kHz peak)</td></tr>
+            <tr><td>Call duration</td><td>0.3&ndash;0.8 seconds (an order of magnitude shorter than Barn Swallow&rsquo;s 3&ndash;8 s)</td></tr>
+            <tr><td>Modulation</td><td>15&ndash;30 Hz internal FM creating the trilled quality</td></tr>
+            <tr><td>Note structure</td><td>Narrow-bandwidth sibilant whistle &mdash; thin spectral band, spectrally simple</td></tr>
+            <tr><td>Timbre</td><td>Thin, glassy, metallic, sibilant &mdash; the whisper</td></tr>
+            <tr><td>Amplitude</td><td>Low to moderate per individual &mdash; E=4 reflects flock persistence</td></tr>
+            <tr><td>Context</td><td>Continuous when flocks active &mdash; feeding, flying, perched. Flock chorus.</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>The 32nd acoustic element: the whisper.</strong> After the
+          swallow quintet&rsquo;s liquid/rough explorations, the engine introduces
+          a <strong>third timbral category: sibilant</strong>. Not liquid, not
+          rough &mdash; crystalline, thin, high, glassy. The sharpest frequency
+          shift in the engine: from the Barn Swallow&rsquo;s mid-wide 2&ndash;7.5
+          kHz to the Cedar Waxwing&rsquo;s high-narrow 6&ndash;10 kHz. From the
+          river to the wire.
+        </p>
+
+        <!-- Frugivory Card -->
+        <div class="frugivory-card">
+          <h3>Frugivory: The First Fruit-Defined Ecosystem</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            The first ecosystem in the engine defined by <strong>food source</strong>
+            rather than habitat structure. Previous ecosystems: estuary, old-growth,
+            farmland. &ldquo;Fruiting trees&rdquo; describes what the bird eats,
+            not where it lives. <strong>~84% fruit by volume</strong> in
+            non-breeding diet. Gut passage 16&ndash;45 minutes. Hundreds of berries
+            per bird per day. Key PNW fruits: mountain ash, serviceberry, hawthorn,
+            holly, crabapple, madrone, Oregon grape.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            <strong>Nomadic movements</strong> track fruit availability &mdash;
+            no fixed territory, no migration route. Where the berries are, the
+            waxwings are. <strong>Seed dispersal mutualism:</strong> plant provides
+            food, bird provides seed transport. <strong>Ethanol risk:</strong>
+            fermented berries (crabapple, mountain ash) cause documented intoxication
+            and mortality &mdash; a cost of dietary specialization.
+          </p>
+        </div>
+
+        <!-- Wax Tips Card -->
+        <div class="wax-card">
+          <h3>The Wax Tips: A Bird That Wears Its Diet</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Red waxy tips on secondary feathers &mdash; modified keratin coated
+            with carotenoid pigment (astaxanthin). Number increases with age:
+            <strong>age signal</strong> driving assortative mating. Since the
+            1960s, <strong>orange tips</strong> observed from non-native
+            honeysuckle berries (rhodoxanthin replaces astaxanthin). An introduced
+            plant is literally <strong>recoloring a native bird</strong>. The
+            Cedar Waxwing wears its diet on its wings.
+          </p>
+        </div>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy: Bombycilla cedrorum</h2>
+        <p>
+          <em>Bombycilla</em>: Latin <em>bombyx</em> (silk) + <em>-cilla</em>
+          (tail) = &ldquo;silk-tail.&rdquo; <em>Cedrorum</em>: Latin &ldquo;of
+          the cedars.&rdquo; Named by <strong>Vieillot in 1808</strong>. Full
+          binomial: <strong>&ldquo;silk-tail of the cedars.&rdquo;</strong> The
+          first genus in the engine named for tactile quality. Bombycillidae is
+          a small family &mdash; only 3 species worldwide. Phylogenetically
+          placed in superfamily Bombycilloidea with silky-flycatchers and Palmchat.
+        </p>
+        <p>
+          <strong>17th family.</strong> The engine now spans 17 families across
+          32 degrees. Bombycillidae is phylogenetically isolated &mdash; no close
+          relatives among the engine&rsquo;s other 16 families.
+        </p>
+
+        <!-- Ecosystem -->
+        <h2>Ecosystem: Fruiting Trees</h2>
+        <p>
+          Urban parks, residential yards, riparian corridors, forest edges &mdash;
+          anywhere fruit-bearing trees and shrubs concentrate. The Cedar Waxwing&rsquo;s
+          habitat is a <strong>phenological event</strong>, not a geological feature.
+          Mountain ash in October, holly in December, serviceberry in June. The
+          flock follows the fruit. <strong>Year-round resident</strong> in the PNW,
+          with nomadic movements within the region. Peak flock sizes in Seattle:
+          200&ndash;400 individuals in a single fruiting tree.
+        </p>
+
+        <!-- Conservation -->
+        <h2>Conservation: Stable to Increasing</h2>
+        <p>
+          Unlike the declining Barn Swallow, the Cedar Waxwing is
+          <strong>stable or slightly increasing</strong> (~0.2&ndash;0.5% per year).
+          Favored by non-native fruit plantings (ornamental crabapple, holly,
+          honeysuckle), edge habitat creation, and climate warming extending
+          growing seasons. Broad breeding range from Alaska to Mexico buffers
+          against local declines. One of the PNW&rsquo;s conservation success
+          stories &mdash; a native species that benefits from human landscape
+          modification.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon whisper">W</div>
+            <div class="theory-content">
+              <h4>The High Thin See-See-See &mdash; The Whisper</h4>
+              <p>32nd acoustic element. SIBILANT: third timbral category after tonal (0&ndash;25) and liquid/rough (26&ndash;30). Thin, high, crystalline. Sharpest frequency shift in engine: mid-wide to high-narrow. From the river to the wire.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon family">F</div>
+            <div class="theory-content">
+              <h4>Bombycillidae Enters &mdash; 17th Family</h4>
+              <p>New evolutionary lineage. 3 species worldwide, engine holds 2 of 3 (66.7%). Phylogenetically isolated. Introduces frugivory, nomadism, and sibilant vocalization as a family package.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">P</div>
+            <div class="theory-content">
+              <h4>Waxwing Pair Begins &mdash; Bombycilla (31&ndash;32)</h4>
+              <p>Third same-genus pair. Echoes Tachycineta (27&ndash;28). Range contrast: temperate resident vs. boreal irruptive. Quintet-to-pair compression after 5 swallows.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon fruit">D</div>
+            <div class="theory-content">
+              <h4>Frugivory as Ecosystem &mdash; Food, Not Habitat</h4>
+              <p>First fruit-defined ecosystem. Habitat is a phenological event. Nomadic movements track fruit availability. Seed dispersal mutualism. Ethanol intoxication risk. Diet-driven plumage change.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>Energy Undecet: Eleventh Consecutive E=4</h4>
+              <p>Degrees 21&ndash;31: eleven textures at E=4. Over one-third of all degrees. Has survived 5 family transitions. CRITICALLY must break. The plateau has become the world.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon sufficiency">S</div>
+            <div class="theory-content">
+              <h4>Vocal Sufficiency &mdash; No Song, Just Enough</h4>
+              <p>No learned territorial song. Only innate contact call. Nomads don&rsquo;t need territorial proclamations. The see-see-see is exactly enough: Satie&rsquo;s furniture music for the forest canopy.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-030: Barn Swallow</strong>
+            <p>IMMEDIATE PREDECESSOR. Maximum timbral contrast: long liquid twittering warble vs. high thin see-see-see. From the river to the wire. Family boundary: Hirundinidae to Bombycillidae.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-032: Bohemian Waxwing</strong>
+            <p>WAXWING PAIR. Same genus (Bombycilla). Range contrast: temperate resident vs. boreal irruptive. Both frugivores, both sibilant, both flock birds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-027/028: Tachycineta Pair</strong>
+            <p>STRUCTURAL ECHO. Tachycineta explored ecology contrast. Bombycilla explores range contrast. Same pattern, different axis.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-026&ndash;030: Swallow Quintet</strong>
+            <p>QUINTET-TO-PAIR. After 5 Hirundinidae (100% density), 2 Bombycillidae. Scale contracts: quintet to pair. Timbre shifts: liquid/rough to sibilant.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-008: Golden-crowned Kinglet</strong>
+            <p>HIGH-FREQUENCY PARALLEL. Both thin, high, sibilant calls at 7&ndash;10 kHz. Kinglet = &ldquo;threshold&rdquo; (element 9). Waxwing = &ldquo;whisper&rdquo; (element 32).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-010: Bushtit</strong>
+            <p>MINIMUM SIGNAL PARALLEL. Both thin, quiet individually. Bushtit: one thread in silence. Waxwing: one voice in a flock chorus. Minimum per individual, maximum per collective.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>FRUGIVORY CONNECTION. Robin is seasonal frugivore. Waxwing is year-round specialist. Both use mountain ash, holly, crabapple. Specialist vs. generalist.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Cedar Waxwing: common year-round resident. Frugivorous nomad. Flock species. Wax tips. One of the most aesthetically distinctive PNW birds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Fruiting tree ecology. Seed dispersal mutualisms. Non-native plant interactions. Phenological tracking of fruit availability.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A: Brenda Lee Eager (R&amp;B/Soul, E=4, 1970s, Seattle, Mercury). Smooth, silky delivery &mdash; the silk-tail of R&amp;B. Eleventh consecutive E=4.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Witmer, M.C., Mountjoy, D.J., and Elliot, L. (2014). Cedar Waxwing (<em>Bombycilla cedrorum</em>), version 2.0. <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>. 2nd ed. Knopf.</li>
+          <li>Spellman, G.M., et al. (2008). Clarifying the systematics of an enigmatic avian lineage. <em>Mol. Phylogenetics Evol.</em> 49: 1036&ndash;1040.</li>
+          <li>Barker, F.K., et al. (2004). Phylogeny and diversification of the largest avian radiation. <em>PNAS</em> 101: 11040&ndash;11045.</li>
+          <li>Macaulay Library. Cedar Waxwing recordings. Cornell Lab of Ornithology.</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song</em>. 2nd ed. Cambridge University Press.</li>
+          <li>Levey, D.J. and del Rio, C.M. (2001). It takes guts (and more) to eat fruit. <em>The Auk</em> 118: 819&ndash;831.</li>
+          <li>Fitzgerald, S.D., et al. (1990). Suspected ethanol toxicosis in Cedar Waxwings. <em>Avian Diseases</em> 34: 488&ndash;490.</li>
+          <li>Kinde, H., et al. (2012). Ethanol toxicosis in Cedar Waxwings. <em>J. Ornithology</em> 153: 995&ndash;998.</li>
+          <li>Mountjoy, D.J. and Robertson, R.J. (1988). Why are waxwings &ldquo;waxy&rdquo;? <em>The Auk</em> 105: 61&ndash;69.</li>
+          <li>Hudon, J. and Brush, A.H. (1989). Probable dietary basis of a color variant. <em>J. Field Ornithology</em> 60: 361&ndash;368.</li>
+          <li>Sauer, J.R., et al. (2020). North American Breeding Bird Survey, 1966&ndash;2019. USGS.</li>
+          <li>BirdWeb (Seattle Audubon). Cedar Waxwing. birdweb.org</li>
+          <li>Levey, D.J. (1987). Seed size and fruit-handling techniques. <em>American Naturalist</em> 129: 471&ndash;485.</li>
+          <li>Mountjoy, D.J. (1998). Phenotypic variation in wax color. <em>The Condor</em> 100: 156&ndash;161.</li>
+          <li>Breuner, C.W. and Hahn, T.P. (2003). Integrating stress physiology and behavior. <em>Hormones and Behavior</em> 43: 115&ndash;123.</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">31&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Bombycillidae</div>
+          <div class="stat-detail">NEW FAMILY &mdash; 17th in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Bombycilla</div>
+          <div class="stat-detail">&ldquo;Silk-tail&rdquo; &mdash; named for plumage texture</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">High Thin See-See-See Trilled</div>
+          <div class="stat-detail">SIBILANT &mdash; new timbral category</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Eleventh consecutive E=4 (degrees 21&ndash;31)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Fruiting Trees</div>
+          <div class="stat-detail">First fruit-defined ecosystem in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round in PNW &mdash; nomadic within range</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">6.0&ndash;10.0 kHz</div>
+          <div class="stat-detail">Peak 7.0&ndash;9.0 kHz &mdash; near hearing limit</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">30&ndash;36 g</div>
+          <div class="stat-detail">Medium-small &mdash; sleek, crested profile</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Warm Brown &rarr; Gray</div>
+          <div class="stat-detail">Silk-smooth gradients, black mask, wax tips</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Tail Band</div>
+          <div class="stat-value">Yellow (or Orange)</div>
+          <div class="stat-detail">Diagnostic &mdash; sometimes diet-modified</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wax Tips</div>
+          <div class="stat-value">Red (or Orange)</div>
+          <div class="stat-detail">Age signal &mdash; diet can change color</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Diet</div>
+          <div class="stat-value">~84% Fruit</div>
+          <div class="stat-detail">Most specialized frugivore in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Waxwing Pair</div>
+          <div class="stat-value">1 of 2</div>
+          <div class="stat-detail">Degrees 31&ndash;32 &mdash; pair OPEN</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 31 &mdash; S36</div>
+          <div class="parallel-name">Brenda Lee Eager</div>
+          <div class="parallel-detail">R&amp;B/Soul &middot; E=4 &middot; 1970s &middot; Seattle &middot; Mercury</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Smooth, silky vocal delivery &mdash; the silk-tail of R&amp;B.
+            Mercury Records: polished and elegant, like the Cedar
+            Waxwing&rsquo;s sleek plumage. Eleventh consecutive E=4.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 31&deg; of 360&deg; &mdash; v1.49.167</p>
+  </footer>
+</body>
+</html>
