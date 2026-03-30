@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XScreenSaver configuration for Pioneer 0 / Fireweed screensaver -->
+<!-- Install: cp pioneer0-screensaver.frag ~/.local/share/xscreensaver/ -->
+<!-- Run:     glslViewer pioneer0-screensaver.frag -w 1920 -h 1080 -->
+<!-- GSD-OS:  Register via screensaver-registry.json -->
+
+<screensaver name="pioneer0" _label="Pioneer 0 — Fireweed">
+  <command arg="-root"/>
+  <command arg="-visual"/>
+  <command arg="GLX"/>
+
+  <_description>
+    Pioneer 0 / Fireweed multi-mode screensaver.
+
+    Cycles through four visual modes:
+    1. Rocket exhaust plume with Mach diamonds
+    2. Fireweed meadow with progressive bloom
+    3. Generative seed dispersal art (80,000 Seeds)
+    4. Explosion and rebirth (failure → fireweed)
+
+    Each mode runs 20 seconds with 2-second crossfade.
+    Total cycle: 80 seconds.
+
+    NASA Mission Series v1.1
+    Organism: Chamerion angustifolium (Fireweed)
+    Dedication: Pearl Bailey (1918-1990)
+  </_description>
+
+  <hgroup>
+    <vgroup>
+      <number id="speed" type="slider" arg="-speed %"
+              _label="Animation speed" _low-label="Slow" _high-label="Fast"
+              low="0.25" high="4.0" default="1.0"/>
+      <number id="particles" type="slider" arg="-particles %"
+              _label="Seed count" _low-label="Few" _high-label="Many"
+              low="20" high="300" default="150"/>
+    </vgroup>
+    <vgroup>
+      <number id="wind" type="slider" arg="-wind %"
+              _label="Wind strength" _low-label="Calm" _high-label="Gale"
+              low="0.0" high="2.0" default="1.0"/>
+      <boolean id="stars" _label="Show stars" arg-set="-stars" arg-unset="-no-stars"/>
+    </vgroup>
+  </hgroup>
+
+  <xscreensaver-updater/>
+</screensaver>

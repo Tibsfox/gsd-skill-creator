@@ -1,0 +1,137 @@
+{
+  "mission": "1.1",
+  "title": "Pioneer 0 (Thor-Able 1)",
+  "description": "Open datasets and source materials relevant to Pioneer 0 (1958), Thor-Able launch vehicle, early Pioneer program, and Chamerion angustifolium (Fireweed)",
+  "sources": [
+    {
+      "id": "nssdc-pioneer-0",
+      "name": "NSSDC Master Catalog -- Pioneer 0",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=PION0",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "NASA Space Science Data Coordinated Archive entry for Pioneer 0. Spacecraft description, instrument inventory, mission profile, launch vehicle details.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-sp-4524",
+      "name": "Deep Space Chronicle (NASA SP-2002-4524)",
+      "url": "https://history.nasa.gov/SP-4524/sp4524.htm",
+      "type": "primary-source",
+      "category": "mission-history",
+      "description": "Asif Siddiqi's comprehensive chronology of deep space and planetary probes, 1958-2000. Pioneer 0 mission profile, launch vehicle details, failure analysis, program context.",
+      "format": "HTML/PDF",
+      "access": "open"
+    },
+    {
+      "id": "nasa-sp-4210",
+      "name": "Lunar Impact: A History of Project Ranger (NASA SP-4210)",
+      "url": "https://history.nasa.gov/SP-4210/sp4210.htm",
+      "type": "primary-source",
+      "category": "program-history",
+      "description": "R. Cargill Hall's history of Project Ranger. Provides institutional context for the early lunar missions, including the Pioneer program's role as precursor.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-sp-4227",
+      "name": "Uplink-Downlink: History of the Deep Space Network (NASA SP-2001-4227)",
+      "url": "https://history.nasa.gov/SP-4227/SP-4227.htm",
+      "type": "primary-source",
+      "category": "communications",
+      "description": "Douglas Mudgway's history of the DSN. Covers tracking and communications infrastructure for Pioneer missions.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "mcdonalds-launch-log",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "description": "Comprehensive launch log for all orbital and suborbital launches. Thor launch history, success/failure rates, payload masses. Essential for the launch success rate visualization (simulation E2).",
+      "format": "TSV/HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-image-library",
+      "name": "NASA Image and Video Library -- Pioneer Program",
+      "url": "https://images.nasa.gov/search?q=pioneer%200&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "description": "Historical photographs related to the Pioneer program. Thor-Able on launch pad, Cape Canaveral LC-17A, spacecraft assembly.",
+      "format": "JPEG/TIFF",
+      "access": "open"
+    },
+    {
+      "id": "usgs-feis-fireweed",
+      "name": "USGS Fire Effects Information System -- Chamerion angustifolium",
+      "url": "https://www.fs.usda.gov/database/feis/plants/forb/chaang/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Comprehensive ecological profile of fireweed: fire response, post-fire succession, distribution, management implications. Includes data from Mt. St. Helens recovery studies.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "fna-fireweed",
+      "name": "Flora of North America -- Chamerion angustifolium",
+      "url": "http://floranorthamerica.org/Chamerion_angustifolium",
+      "type": "primary-source",
+      "category": "taxonomy",
+      "description": "Authoritative taxonomic description: morphology, distribution, habitat, variation. Includes the Epilobium → Chamerion reclassification rationale.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "usda-plants-fireweed",
+      "name": "USDA PLANTS Database -- Chamerion angustifolium",
+      "url": "https://plants.usda.gov/home/plantProfile?symbol=CHAN9",
+      "type": "primary-source",
+      "category": "distribution",
+      "description": "Distribution maps, conservation status, wetland indicator status for fireweed across North America.",
+      "format": "HTML/Shapefile",
+      "access": "open"
+    },
+    {
+      "id": "msh-succession-studies",
+      "name": "Mount St. Helens Succession Studies (USFS PNW Research Station)",
+      "url": "https://www.fs.usda.gov/pnw/topics/mount-st-helens",
+      "type": "primary-source",
+      "category": "succession-ecology",
+      "description": "Long-term ecological research from the Mount St. Helens blast zone. Fireweed colonization data, primary succession timelines, permanent plot monitoring (1980-present).",
+      "format": "HTML/PDF",
+      "access": "open"
+    },
+    {
+      "id": "smithsonian-pioneer",
+      "name": "Smithsonian National Air and Space Museum -- Pioneer Program",
+      "url": "https://airandspace.si.edu/collection-objects/pioneer-spacecraft",
+      "type": "secondary-source",
+      "category": "museum-collection",
+      "description": "Museum collection records for Pioneer program artifacts. Engineering models, diagrams, historical photographs.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "rocketdyne-lr79-specs",
+      "name": "Astronautix -- Rocketdyne LR-79 Engine",
+      "url": "http://www.astronautix.com/l/lr-79.html",
+      "type": "secondary-source",
+      "category": "propulsion",
+      "description": "Engine specifications for the LR-79: thrust, Isp, mass, dimensions, propellant flow rates. Used in trajectory simulation and turbopump analysis.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "pearl-bailey-archives",
+      "name": "Georgetown University Library -- Pearl Bailey Papers",
+      "url": "https://www.library.georgetown.edu/special-collections",
+      "type": "secondary-source",
+      "category": "dedication",
+      "description": "Pearl Bailey attended Georgetown University and earned a B.A. in theology in 1985 at age 67. The special collections may hold papers related to her time there.",
+      "format": "Archive",
+      "access": "restricted-onsite"
+    }
+  ]
+}
