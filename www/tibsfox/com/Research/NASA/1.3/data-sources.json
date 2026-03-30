@@ -1,0 +1,117 @@
+{
+  "mission": "1.3",
+  "title": "Pioneer 2 (Thor-Able III)",
+  "description": "Open datasets and source materials relevant to Pioneer 2 (1958), solid rocket motor ignition, early spacecraft television, and Gaultheria shallon (Salal)",
+  "sources": [
+    {
+      "id": "nssdc-pioneer-2",
+      "name": "NSSDC Master Catalog -- Pioneer 2",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-007C",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "NASA Space Science Data Coordinated Archive entry for Pioneer 2. Spacecraft description, instrument manifest (TV camera, radiation detectors, magnetometer, micrometeorite sensors), mission timeline, and failure summary for the ~45-minute flight. Includes spacecraft mass (39.2 kg), launch vehicle configuration (Thor-Able III), and the third stage ignition failure that limited the mission to a 1,550 km ballistic arc.",
+      "format": "HTML",
+      "access": "open",
+      "mission_relevance": "Definitive source for Pioneer 2 spacecraft specifications and mission parameters. Confirms the TV camera as the primary new instrument distinguishing Pioneer 2 from Pioneer 1. Documents the third stage failure without conclusive root cause identification -- consistent with the absence of motor telemetry discussed in the command verification protocol knowledge node."
+    },
+    {
+      "id": "nssdc-archive",
+      "name": "NASA Space Science Data Coordinated Archive -- Pioneer Program",
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/pioneer.html",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "Comprehensive archive for the entire Pioneer program, from Pioneer 0 through Pioneer Venus. Contains instrument data, mission timelines, spacecraft diagrams, and cross-references between Pioneer missions. Essential for understanding Pioneer 2 as the third of four rapid-fire lunar probe attempts in 1958, and as the last Pioneer managed by the Air Force before the program transferred fully to NASA.",
+      "format": "HTML/Data",
+      "access": "open",
+      "mission_relevance": "Provides programmatic context for the progressive failure analysis: Pioneer 0 (Stage 1), Pioneer 1 (Stage 2), Pioneer 2 (Stage 3). The archive connects the three missions as a debugging sequence -- each flight tested one stage deeper into the launch vehicle stack. Also documents Pioneer 2 as the last Air Force Pioneer, marking the transition to NASA-led missions."
+    },
+    {
+      "id": "celestrak-radiation",
+      "name": "CelesTrak Space Environment Data -- Near-Earth Radiation",
+      "url": "https://celestrak.org/space-data/",
+      "type": "primary-source",
+      "category": "radiation-environment",
+      "description": "Space environment datasets including solar flux indices (F10.7), geomagnetic indices (Ap, Kp), and solar wind parameters. CelesTrak maintains historical records back through the 1950s, covering the period of Pioneer 2's flight. The November 1958 launch occurred during the approach to Solar Cycle 19's maximum -- the most intense solar cycle on record -- which enhanced the outer Van Allen belt and elevated near-Earth particle flux.",
+      "format": "CSV/Text",
+      "access": "open",
+      "mission_relevance": "Provides the radiation environment context for Pioneer 2's brief flight through the lowest portion of the near-Earth radiation profile. At 1,550 km, Pioneer 2 was well below the inner belt peak, but solar activity in November 1958 would have elevated the background particle flux above quiet-time levels. The data enables comparison of what Pioneer 2 measured versus what it would have measured at Pioneer 1's altitude during the same solar cycle phase."
+    },
+    {
+      "id": "ntrs-pioneer-2",
+      "name": "NASA Technical Reports Server -- Pioneer 2 Reports",
+      "url": "https://ntrs.nasa.gov/search?q=pioneer%202%201958",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "description": "NASA's full-text technical report archive containing original engineering reports, mission analyses, and post-flight assessments for Pioneer 2. Includes the third stage failure investigation reports, TV camera specifications, and comparative analysis with Pioneer 0 and Pioneer 1. Space Technology Laboratories (STL) and Air Force Ballistic Missile Division (AFBMD) reports documenting the transition of the Pioneer program from military to civilian management.",
+      "format": "PDF",
+      "access": "open",
+      "mission_relevance": "Primary technical documentation for the X-248 ignition failure analysis, TV camera design specifications, and the comparative failure analysis across Pioneers 0-1-2. These reports are the engineering record of what was known, what was unknown, and what was changed for Pioneer 3. Essential source for the progressive failure analysis knowledge node and the command verification protocol discussion."
+    },
+    {
+      "id": "solid-motor-research",
+      "name": "NASA Technical Reports -- Solid Propellant Motor Research (1950s-1960s)",
+      "url": "https://ntrs.nasa.gov/search?q=solid%20propellant%20motor%20ignition",
+      "type": "primary-source",
+      "category": "propulsion-research",
+      "description": "Collection of technical reports on solid rocket motor design, propellant formulation, ignition systems, and combustion characteristics from the 1950s and 1960s. Includes reports on polysulfide composite propellants (the type used in the X-248 Altair), ignition train design (squib-to-initiator-to-grain sequence), and burn rate characterization (Vielle's law parameters). Also contains reports on solid motor testing at Allegany Ballistics Laboratory and other facilities.",
+      "format": "PDF",
+      "access": "open",
+      "mission_relevance": "Provides the technical foundation for the solid rocket ignition knowledge node. The X-248 Altair motor was one of the earliest upper-stage solid motors -- its propellant chemistry, grain geometry, and ignition system design are documented in these reports. Understanding polysulfide burn rate characteristics (a ≈ 0.04 cm/s, n ≈ 0.4) is essential for the GLSL combustion shader and the Tsiolkovsky calculations."
+    },
+    {
+      "id": "mcdowell-launch-db",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "description": "Comprehensive, independently maintained database of all orbital and suborbital launches. Includes Thor-Able launch history with Pioneer 0, 1, 2, and 3 entries, payload masses, failure classifications, and trajectory data. McDowell's classification system distinguishes between launch vehicle failure stages, enabling the progressive failure analysis across the Pioneer series.",
+      "format": "TSV/HTML",
+      "access": "open",
+      "mission_relevance": "Contextualizes Pioneer 2 within the Thor-Able launch record and the broader 1958 launch campaign. The database confirms Pioneer 2's apogee at ~1,550 km and flight time of ~45 minutes, and classifies the failure as a third stage ignition failure -- distinct from Pioneer 1's guidance error and Pioneer 0's first stage failure. Enables the stacked bar chart in the delta-v staging visualization."
+    },
+    {
+      "id": "nist-atomic-spectra",
+      "name": "NIST Atomic Spectra Database",
+      "url": "https://www.nist.gov/pml/atomic-spectra-database",
+      "type": "primary-source",
+      "category": "spectroscopy",
+      "description": "The definitive reference for atomic spectral line data -- wavelengths, energy levels, transition probabilities, and ionization energies for every element. Maintained by the National Institute of Standards and Technology (NIST) Physical Measurement Laboratory. Contains the spectral data for cesium and rubidium that Bunsen and Kirchhoff first identified in 1860-1861, as well as the Balmer series of hydrogen and the emission lines of every element encountered in space science.",
+      "format": "HTML/ASCII (interactive query)",
+      "access": "open",
+      "mission_relevance": "Direct connection to the Robert Bunsen dedication and the spectroscopy/emission-lines knowledge node. The NIST database contains the precise wavelengths Bunsen observed through his spectroscope -- the cesium 455 nm sky-blue lines that gave the element its name, the rubidium 780 nm deep-red lines. These are the same atomic transitions that space-based spectrometers measure in stellar atmospheres, planetary emissions, and interstellar gas clouds. The database bridges Bunsen's 1860 laboratory flame to modern space spectroscopy in a direct, traceable line."
+    },
+    {
+      "id": "usda-plants-salal",
+      "name": "USDA PLANTS Database -- Gaultheria shallon",
+      "url": "https://plants.usda.gov/home/plantProfile?symbol=GASH",
+      "type": "primary-source",
+      "category": "distribution",
+      "description": "Distribution maps, conservation status, wetland indicator status, and taxonomic classification for salal across North America. Shows the species' range from southeastern Alaska to central California, with peak density in coastal and low-elevation forests west of the Cascade crest. Salal is classified as a facultative upland species (FACU), meaning it typically occurs in non-wetland settings but can tolerate moist conditions.",
+      "format": "HTML/Shapefile",
+      "access": "open",
+      "mission_relevance": "Establishes the geographic context for the organism pairing. Salal's range map precisely overlaps the PNW research series territory -- it is the most ubiquitous understory shrub in western Washington and Oregon forests. The species name 'shallon' derives from the Chinook language, documenting Indigenous ecological knowledge in the taxonomic record. Salal is present on essentially every trail in the region -- at knee height, thick-leaved, persistent year-round."
+    },
+    {
+      "id": "usda-feis-salal",
+      "name": "USDA Fire Effects Information System -- Gaultheria shallon",
+      "url": "https://www.fs.usda.gov/database/feis/plants/shrub/gaushal/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Comprehensive ecological profile of salal: fire response and recovery, distribution across PNW ecoregions, habitat requirements, association with Douglas-fir and western hemlock forests, rhizome network persistence, and successional role. Salal is a vigorous resprouter from rhizomes after fire -- it can recolonize burned areas within 2-3 years from underground root networks that survive moderate-severity fires. Includes data on berry production (important food for birds and mammals), browse value, and cultural significance to Indigenous peoples.",
+      "format": "HTML",
+      "access": "open",
+      "mission_relevance": "Primary ecological source for the organism pairing. Salal's ability to survive fire and resprout from underground networks parallels the Pioneer program's ability to survive mission failures and produce the next attempt from the same organizational infrastructure. The FEIS data on salal's persistence -- it is evergreen, shade-tolerant, and nearly impossible to eradicate once established -- supports the resonance thread: salal endures in the understory the way the Pioneer program endured through three consecutive failures."
+    },
+    {
+      "id": "nasa-image-library",
+      "name": "NASA Image and Video Library -- Pioneer 2",
+      "url": "https://images.nasa.gov/search?q=pioneer%202&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "description": "Historical photographs from the Pioneer program: spacecraft assembly at Space Technology Laboratories, Thor-Able III on the launch pad at Cape Canaveral, TV camera integration photographs, and Air Force personnel involved in the Pioneer 2 mission. Public domain imagery suitable for educational use. Also includes photographs of the X-248 Altair solid motor and the spacecraft's instrument package layout.",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "mission_relevance": "Visual documentation of Pioneer 2 hardware with emphasis on the TV camera installation and the X-248 third stage motor. The camera photographs show the scanning mechanism that would have built images line by line -- essential reference for the TV raster scanning knowledge node, the Blender animation, and the Arduino line-scanning project. Motor photographs show the nozzle, igniter, and grain geometry referenced in the solid rocket ignition knowledge node."
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "mission": "1.3",
+  "title": "Pioneer 2 (Thor-Able III)",
+  "date": "1958-11-08",
+  "organism": "Gaultheria shallon",
+  "organism_common": "Salal",
+  "organism_location": "Dominant understory shrub of the Pacific Northwest -- western Washington, Oregon, coastal British Columbia, southeastern Alaska",
+  "bird": "Poecile atricapillus",
+  "bird_common": "Black-capped Chickadee",
+  "dedication": {
+    "name": "Robert Bunsen",
+    "born": "1811-03-30",
+    "died": "1899-08-16",
+    "birthplace": "Gottingen, Kingdom of Westphalia (now Germany)",
+    "field": "Chemistry, spectroscopy, laboratory instrumentation",
+    "resonance": "Bunsen co-developed flame spectroscopy with Kirchhoff, establishing that each element produces a unique spectral signature when heated. This is the foundational principle behind all emission-line spectroscopy used in space science -- from identifying solar composition to analyzing planetary atmospheres. Pioneer 2 carried instruments that would benefit from the spectroscopic tradition Bunsen helped create. The Bunsen burner, his most famous invention, was not his most important contribution -- it was the clean, non-luminous flame that ENABLED spectroscopy by removing the background light that would otherwise contaminate the spectral signal. The tool that seems simple is often the one that makes everything else possible. Pioneer 2's TV camera was supposed to be that tool -- the instrument that made a new kind of observation possible. Both Bunsen's burner and Pioneer 2's camera were enabling technologies that cleared the way for the science behind them."
+  },
+  "nodes": [
+    {
+      "id": "delta-v-budgets-staging",
+      "concept": "Delta-v budgets and staging -- why rockets shed mass to reach orbit",
+      "department": "orbital-mechanics",
+      "level": "intermediate",
+      "tspb_layer": 4,
+      "tspb_section": "4.2",
+      "description": "The Tsiolkovsky rocket equation, delta_v = Isp * g0 * ln(m_initial / m_final), is the fundamental constraint on all spaceflight. A single-stage rocket with 1958 technology cannot reach escape velocity because the mass of the fuel tanks, engines, and structure consumed by the equation's logarithm makes the mass ratio too small. Staging solves this by discarding dead mass: after Stage 1 burns out, the empty tanks and engine are jettisoned, and Stage 2 starts with a much smaller initial mass. Pioneer 2's Thor-Able stack was three stages: Thor (LR-79, LOX/RP-1, Isp 282s), Able (AJ10-40, UDMH/IRFNA, Isp 270s), and X-248 Altair (polysulfide solid, Isp 235s). Each stage contributed to the cumulative delta-v budget. Stage 1 provided approximately 3,800 m/s, Stage 2 approximately 4,000 m/s, and Stage 3 was supposed to provide approximately 2,800 m/s. The total budget of ~10,600 m/s exceeded the escape velocity requirement of ~10,950 m/s at burnout altitude only when all three stages delivered. Pioneer 2 achieved Stage 1 + Stage 2 = ~7,800 m/s. Without Stage 3's 2,800 m/s, the spacecraft was 3,150 m/s below escape velocity. The result was a ballistic arc peaking at 1,550 km -- not even reaching the inner Van Allen belt that Pioneer 1 had mapped in detail from 113,854 km.",
+      "resonance": "Salal's growth strategy is staged allocation. The root system invests first (Stage 1 -- underground biomass that anchors and feeds). Then the stem emerges and extends (Stage 2 -- vertical growth). Finally, the reproductive structures -- flowers and berry clusters -- deploy at the tips (Stage 3 -- the payload). If any stage fails to deliver, the stages above it receive nothing. A salal plant with a damaged root system (Stage 1 failure) never grows tall. A plant that grows tall but cannot flower (Stage 3 failure) survives but does not reproduce. Pioneer 2 grew tall enough (Stages 1-2) but never delivered its payload to its destination.",
+      "worked_example": {
+        "description": "Calculate Pioneer 2's delta-v budget per stage using the Tsiolkovsky equation",
+        "parameters": {
+          "stage1_Isp": 282,
+          "stage1_prop_mass_kg": 46000,
+          "stage1_dry_mass_kg": 3200,
+          "stage2_Isp": 270,
+          "stage2_prop_mass_kg": 2100,
+          "stage2_dry_mass_kg": 200,
+          "stage3_Isp": 235,
+          "stage3_prop_mass_kg": 86,
+          "stage3_dry_mass_kg": 14,
+          "payload_mass_kg": 39.2,
+          "g0": 9.81
+        },
+        "formula": "delta_v = Isp * g0 * ln((m_stage + m_upper) / (m_dry + m_upper))",
+        "result": "Stage 1: ~3,800 m/s, Stage 2: ~4,000 m/s, Stage 3: ~2,800 m/s (never delivered). Total delivered: ~7,800 m/s. Required: ~10,950 m/s. Deficit: ~3,150 m/s.",
+        "python": "import numpy as np\ng0 = 9.81\n# Stage 3\nm_payload = 39.2\nm3_prop = 86\nm3_dry = 14\ndv3 = 235 * g0 * np.log((m3_dry + m3_prop + m_payload) / (m3_dry + m_payload))\n# Stage 2 (carries Stage 3 + payload)\nm_upper2 = m3_dry + m3_prop + m_payload  # 139.2 kg\nm2_prop = 2100\nm2_dry = 200\ndv2 = 270 * g0 * np.log((m2_dry + m2_prop + m_upper2) / (m2_dry + m_upper2))\n# Stage 1 (carries everything)\nm_upper1 = m2_dry + m2_prop + m_upper2  # 2439.2 kg\nm1_prop = 46000\nm1_dry = 3200\ndv1 = 282 * g0 * np.log((m1_dry + m1_prop + m_upper1) / (m1_dry + m_upper1))\nprint(f'Stage 1 delta-v: {dv1:.0f} m/s')\nprint(f'Stage 2 delta-v: {dv2:.0f} m/s')\nprint(f'Stage 3 delta-v: {dv3:.0f} m/s (NOT DELIVERED)')\nprint(f'Total delivered: {dv1+dv2:.0f} m/s')\nprint(f'Total planned: {dv1+dv2+dv3:.0f} m/s')"
+      }
+    },
+    {
+      "id": "solid-rocket-ignition",
+      "concept": "Solid rocket motor ignition -- the irreversible moment",
+      "department": "propulsion",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.5",
+      "description": "A solid rocket motor ignites through a chain of events that must proceed in exact sequence. First, an electrical signal fires a squib -- a small pyrotechnic charge. The squib ignites an initiator charge, which produces hot gas and burning particles. These particles impinge on the surface of the main propellant grain, raising its temperature above the ignition threshold. Once the grain surface ignites, the flame front propagates across the entire exposed grain surface within milliseconds, chamber pressure rises rapidly, and the motor produces thrust. The X-248 Altair motor on Pioneer 2 used a polysulfide composite propellant with a star-pattern internal grain geometry designed to maximize initial burn surface area. The burn rate follows Vielle's law: r = a * Pc^n, where r is the linear regression rate, Pc is chamber pressure, and a and n are empirical constants for the propellant formulation. For polysulfide composites, n is approximately 0.4, meaning the burn rate increases moderately with pressure -- a stabilizing characteristic (higher pressure burns faster, which increases gas generation, but the nozzle also flows more gas, limiting the pressure rise). Pioneer 2's X-248 never entered this regime. The ignition chain failed -- either the squib did not fire, the initiator did not produce sufficient energy to ignite the grain, or the signal to fire the squib never arrived. The specific failure mode was never conclusively determined because there was no telemetry from the motor itself. The motor sat cold and inert for the remaining 45 minutes of flight.",
+      "resonance": "Salal berry development requires a similar ignition chain: pollination (the signal), pollen tube growth (the squib), fertilization (the initiator), and embryo development (the grain igniting). If any link in the chain fails, the berry does not develop. An unpollinated salal flower drops from the raceme -- it sits briefly, withers, and falls. The flower had all the potential to become a berry. The ovary was formed, the ovules were ready. But the ignition chain was never completed. The X-248 had all the potential to produce 2,800 m/s. The grain was cast, the nozzle was machined, the propellant was cured. But the ignition chain was never completed. In both cases, the system was complete except for the initiating event.",
+      "worked_example": {
+        "description": "Solid motor chamber pressure and burn rate using Vielle's law",
+        "parameters": {
+          "a_burn_rate_coeff": 0.04,
+          "n_pressure_exponent": 0.4,
+          "rho_propellant_kg_m3": 1600,
+          "A_burn_initial_m2": 0.05,
+          "A_throat_m2": 0.002,
+          "c_star_ms": 1200
+        },
+        "formula": "Pc = (rho * a * c_star * A_burn / A_throat)^(1/(1-n))",
+        "result": "Steady-state chamber pressure: ~3.5 MPa (~500 psi). Burn rate at this pressure: ~0.7 cm/s. Web burnout in ~16 seconds.",
+        "python": "import numpy as np\na = 0.04e-2  # burn rate coeff in m/s at 1 Pa^n (converted from cm/s)\nn = 0.4\nrho = 1600  # propellant density kg/m^3\nA_b = 0.05  # initial burn area m^2 (star pattern)\nA_t = 0.002  # throat area m^2\nc_star = 1200  # characteristic velocity m/s\n# Steady-state: Pc = (rho * a * c_star * A_b / A_t)^(1/(1-n))\nPc = (rho * a * c_star * A_b / A_t) ** (1/(1-n))\nr = a * Pc**n  # burn rate m/s\nweb = 0.05  # approximate web thickness m\nt_burn = web / r\nthrust = Pc * A_t  # approximate thrust (simplified)\nprint(f'Chamber pressure: {Pc/1e6:.1f} MPa ({Pc/6895:.0f} psi)')\nprint(f'Burn rate: {r*100:.2f} cm/s')\nprint(f'Approx burn time: {t_burn:.1f} s')\nprint(f'Approx thrust: {thrust/1e3:.1f} kN')"
+      }
+    },
+    {
+      "id": "tv-raster-scanning",
+      "concept": "TV raster scanning -- building images one line at a time",
+      "department": "electronics",
+      "level": "intermediate",
+      "tspb_layer": 7,
+      "tspb_section": "7.6",
+      "description": "Pioneer 2 carried the first TV camera on a Pioneer spacecraft -- an infrared scanning device designed to build up images by sweeping a single photosensitive element across the scene. Unlike a modern CCD or CMOS sensor that captures an entire image simultaneously, the Pioneer 2 camera had a single detector that scanned in a raster pattern: left to right across one line, then stepped down to the next line, left to right again. The spacecraft's spin (1.8 rev/sec) provided one axis of scanning; the camera's own scan mechanism provided the other. The resulting image had approximately 32x32 pixel resolution -- crude by any standard, but sufficient to distinguish Earth's limb from space, identify major cloud formations, and potentially resolve large-scale lunar surface features from close range. The raster scanning principle is identical to how a CRT television works: an electron beam sweeps across the phosphor screen, one line at a time, from top to bottom, at a rate fast enough that the human eye perceives a complete image. Pioneer 2's camera was essentially a television camera operated in reverse -- instead of painting an image with a beam, it read an image with a sensor, one pixel at a time. The data rate was constrained by the telemetry bandwidth: at 64.8 bps, transmitting a single 32x32 image (1,024 pixels, 8 bits each = 8,192 bits) took approximately 126 seconds. Two minutes per image. In a 45-minute flight, at most 20 images could have been transmitted -- and that assumes the camera started scanning immediately and the entire bandwidth was dedicated to imagery.",
+      "resonance": "A black-capped chickadee builds its environmental model the same way: not by taking a snapshot, but by scanning. The chickadee's eyes are positioned laterally, giving nearly 360-degree coverage but poor binocular overlap. To examine an object in detail, the chickadee tilts its head, shifting the object from peripheral to foveal vision, then tilts again for a different angle. Each head-tilt is a scan line. The mental image is assembled from multiple sequential observations, not from a single exposure. Pioneer 2's camera and the chickadee's visual system both solve the same problem: building a detailed image from a sensor that can only look at one small region at a time."
+    },
+    {
+      "id": "progressive-failure-analysis",
+      "concept": "Progressive failure analysis -- each fix reveals the next flaw",
+      "department": "systems-engineering",
+      "level": "intermediate",
+      "tspb_layer": 5,
+      "tspb_section": "5.4",
+      "description": "The Pioneer program's first three missions demonstrate a pattern fundamental to complex system development: each mission's failure occurred one level higher than the previous mission's failure. Pioneer 0 (August 1958) failed at Stage 1 -- a turbopump bearing explosion at T+77 seconds destroyed the vehicle before the upper stages could be tested. Pioneer 1 (October 1958) succeeded at Stage 1, but Stage 2 cut off 10 seconds early -- the vehicle reached 113,854 km instead of the Moon. Pioneer 2 (November 1958) succeeded at Stages 1 and 2 (both nominal for the first time), but Stage 3 failed to ignite -- the vehicle reached only 1,550 km. The failure waterline rose from Stage 1 to Stage 2 to Stage 3 across three flights. This is progressive debugging: fixing the lowest-level failure does not guarantee success; it reveals the next failure that was previously masked. The Stage 3 ignition problem on Pioneer 2 may have existed on Pioneer 0 as well -- but since Pioneer 0 never reached Stage 3, the flaw was invisible. Testing in the actual flight environment is the only test that matters for integration-level bugs. Ground testing tests components. Flight testing tests the system. They find different bugs.",
+      "resonance": "Salal propagation follows the same progressive exposure to failure modes. A seed must first survive dispersal (Stage 1 -- most are eaten by birds or fail to reach suitable substrate). If it survives, it must germinate (Stage 2 -- many fail due to light or moisture conditions). If it germinates, it must establish a root system before the first dry summer (Stage 3 -- the critical integration test that ground conditions could not predict). Each stage reveals the next vulnerability. A seed that was eaten never gets to test its germination. A seed that germinated in deep shade never gets to test its drought tolerance. The failure analysis is always serial: you discover weaknesses in the order you encounter them, not in the order of their importance.",
+      "worked_example": {
+        "description": "Pioneer 0-1-2 progressive failure analysis: cumulative test coverage",
+        "parameters": {
+          "stages": 3,
+          "missions": ["Pioneer 0", "Pioneer 1", "Pioneer 2"],
+          "failure_stage": [1, 2, 3],
+          "stages_tested": [[1], [1, 2, 3], [1, 2, 3]]
+        },
+        "formula": "coverage(mission) = stages_tested_nominal / total_stages",
+        "result": "P-0: 0/3 stages nominal (0%). P-1: 2/3 stages nominal (67%). P-2: 2/3 stages nominal (67%). Combined: all 3 stages tested in flight, 2/3 demonstrated nominal at least once. Stage 3 nominal in P-1 but failed in P-2 (different unit, same design).",
+        "python": "missions = [\n    {'name': 'Pioneer 0', 'stage1': 'FAIL', 'stage2': 'UNTESTED', 'stage3': 'UNTESTED'},\n    {'name': 'Pioneer 1', 'stage1': 'PASS', 'stage2': 'PARTIAL', 'stage3': 'PASS'},\n    {'name': 'Pioneer 2', 'stage1': 'PASS', 'stage2': 'PASS', 'stage3': 'FAIL'},\n]\nfor m in missions:\n    tested = sum(1 for v in [m['stage1'], m['stage2'], m['stage3']] if v != 'UNTESTED')\n    passed = sum(1 for v in [m['stage1'], m['stage2'], m['stage3']] if v == 'PASS')\n    print(f\"{m['name']}: {m['stage1']}/{m['stage2']}/{m['stage3']}\")\n    print(f'  Stages tested: {tested}/3, Stages passed: {passed}/3')\nprint('\\nCombined coverage: all 3 stages tested in flight')\nprint('Stage 1: PASS (P-1, P-2) | Stage 2: PASS (P-2) | Stage 3: needs retest')"
+      }
+    },
+    {
+      "id": "spin-stabilization",
+      "concept": "Spin stabilization physics -- angular momentum as attitude control",
+      "department": "physics",
+      "level": "intermediate",
+      "tspb_layer": 4,
+      "tspb_section": "4.1",
+      "description": "Pioneer 2, like all early Pioneer spacecraft, was spin-stabilized at approximately 1.8 revolutions per second. Spin stabilization exploits conservation of angular momentum: a spinning body resists changes to its rotation axis, maintaining orientation in space without active control systems. The physics is the same as a gyroscope or a spinning top. The angular momentum vector L = I * omega (moment of inertia times angular velocity) is conserved unless an external torque acts on the body. For Pioneer 2, spinning at 1.8 rev/sec with an estimated moment of inertia of ~0.5 kg*m^2 (truncated cone with instruments), the angular momentum was approximately 5.7 kg*m^2/s. Any torque -- from solar radiation pressure asymmetry, residual magnetic dipole interaction, or thruster imbalance -- would cause precession (slow wobble of the spin axis) rather than tumble. The spin rate also provided a dual benefit for the TV camera: one axis of the raster scan was provided by the spacecraft rotation itself. Each revolution swept the camera's field of view through 360 degrees; the camera's internal mechanism only needed to step the scan line between revolutions. This coupling of attitude control and instrument scanning was an elegant design solution -- the same spin that stabilized the spacecraft also scanned the camera. When the third stage failed to ignite, the spin stabilization still functioned. Pioneer 2 maintained its attitude throughout the 45-minute flight, which meant the TV camera could have scanned (and likely did, briefly) even on the failed mission.",
+      "resonance": "Salal branches exhibit their own form of stabilization through opposed leaf pairs. Salal leaves are arranged alternately along the stem, each leaf's petiole angled to balance the mass distribution around the central stem axis. In wind, the bush sways but does not topple -- the distributed mass provides moment-of-inertia stability. A spinning Pioneer and a swaying salal bush are both using mass distribution to resist perturbation. The salal bush cannot 'spin' but it can distribute mass symmetrically enough that wind loads produce bending (precession) rather than breakage (tumble).",
+      "worked_example": {
+        "description": "Angular momentum and precession rate for Pioneer 2",
+        "parameters": {
+          "spin_rate_rps": 1.8,
+          "moment_of_inertia_kgm2": 0.5,
+          "solar_torque_Nm": 1e-7
+        },
+        "formula": "L = I * omega; precession_rate = torque / L",
+        "result": "L = 5.65 kg*m^2/s. Solar torque precession: ~1.8e-8 rad/s = ~0.001 deg/s. Over 45 minutes: ~2.7 degrees of precession -- negligible for mission operations.",
+        "python": "import numpy as np\nf_spin = 1.8  # rev/sec\nomega = 2 * np.pi * f_spin  # rad/s\nI = 0.5  # kg*m^2 (estimated)\nL = I * omega\nprint(f'Spin rate: {omega:.1f} rad/s ({f_spin} rev/s)')\nprint(f'Angular momentum: {L:.2f} kg*m^2/s')\n# Precession from solar radiation torque\ntorque = 1e-7  # N*m (estimated solar pressure asymmetry)\nprecession = torque / L  # rad/s\nprint(f'Precession rate: {precession:.2e} rad/s')\nprint(f'Precession in 45 min: {np.degrees(precession * 45 * 60):.3f} degrees')"
+      }
+    },
+    {
+      "id": "near-earth-radiation-profile",
+      "concept": "Near-Earth radiation profile -- what Pioneer 2 flew through (and what it missed)",
+      "department": "earth-science",
+      "level": "intermediate",
+      "tspb_layer": 2,
+      "tspb_section": "2.6",
+      "description": "Pioneer 2's apogee of 1,550 km placed it well below the inner Van Allen belt's peak at approximately 3,000 km altitude. The spacecraft traversed only the lowest fringe of the trapped radiation environment -- the region where cosmic ray albedo neutrons are just beginning to be captured by Earth's magnetic field. At 1,550 km, the proton flux is orders of magnitude lower than at the 3,000 km peak. Pioneer 2's radiation instruments detected background cosmic radiation and the faint beginnings of the trapped particle population, but never reached the intense radiation that Pioneer 1 had profiled from 200 km to 113,854 km. The near-Earth radiation environment below 2,000 km is dominated by: (1) galactic cosmic rays (isotropic background, ~2 particles/cm^2/s), (2) South Atlantic Anomaly (SAA) particles at certain longitudes where the inner belt dips to lower altitudes, and (3) solar energetic particles during active periods. Pioneer 2 launched during a solar active period (near solar maximum of Cycle 19), so the outer radiation environment was enhanced -- but the spacecraft never climbed high enough to sample it. The radiation data from Pioneer 2 was scientifically meager compared to Pioneer 1's comprehensive belt profile. This is the cost of the third stage failure: not just altitude, but the entire radiation mapping mission.",
+      "resonance": "Salal grows in the understory -- the lowest stratum of the forest, below 2 meters. It never reaches the canopy at 50-70 meters. Like Pioneer 2, salal occupies the base of the vertical profile. But unlike Pioneer 2, this is by design. Salal thrives in low light and would suffer in the canopy (photoinhibition, desiccation). Pioneer 2 was built for the canopy and trapped in the understory. Salal was built for the understory and thrives there. The same altitude profile can be a prison or a home, depending on what you were designed for."
+    },
+    {
+      "id": "spectroscopy-emission-lines",
+      "concept": "Spectroscopy and emission lines -- how elements reveal themselves through light",
+      "department": "physics",
+      "level": "intermediate",
+      "tspb_layer": 1,
+      "tspb_section": "1.4",
+      "description": "Robert Bunsen, to whom this mission is dedicated, co-discovered that each chemical element produces a unique set of spectral lines when heated in a flame. With Kirchhoff, he established the three laws of spectroscopy: (1) a hot dense body emits a continuous spectrum, (2) a hot low-density gas emits discrete bright lines at characteristic wavelengths, and (3) a cool gas in front of a continuous source absorbs at those same wavelengths, producing dark lines. These laws, published in 1859-1860 -- just one year after Pioneer 2 -- are the foundation of all remote chemical analysis, from solar composition to planetary atmospheres to interstellar gas clouds. The connection to spaceflight is direct: every spectrometer that has flown on every space mission uses the principle Bunsen and Kirchhoff established. The atomic emission lines arise from quantum mechanical transitions between electron energy levels. When an electron drops from a higher energy state to a lower one, it emits a photon with energy exactly equal to the energy difference. This energy corresponds to a specific wavelength: lambda = hc / (E_high - E_low). The pattern of wavelengths is unique to each element because each element has a unique set of electron energy levels, determined by its nuclear charge and electron configuration. Bunsen discovered cesium (1860) and rubidium (1861) purely through their spectral signatures -- he had never seen or isolated these elements before recognizing their unique spectral lines in mineral water samples. The elements announced themselves through light.",
+      "resonance": "The connection operates on two levels. Physically: spectroscopy is how space scientists identify what they are looking at, from solar corona composition to exoplanet atmospheres. Pioneer 2's instruments included a radiation detector sensitive to specific energy bands -- a crude form of spectroscopy applied to particles rather than photons. Conceptually: Bunsen's insight was that identity is encoded in emission. Each element has a spectral fingerprint that cannot be forged. Each PNW plant species has a phenological fingerprint -- the timing and pattern of leaf emergence, flowering, fruiting, and dormancy. Salal's evergreen persistence through winter, when deciduous species are bare, is a spectral line that identifies it from a distance. You can identify salal in January by what it DOESN'T do (lose leaves) just as you can identify hydrogen by the wavelengths it DOESN'T emit.",
+      "worked_example": {
+        "description": "Calculate emission line wavelengths for hydrogen (Balmer series) and connect to Bunsen's method",
+        "parameters": {
+          "Rydberg_constant_m": 1.097e7,
+          "n_lower": 2,
+          "n_upper_range": [3, 4, 5, 6, 7]
+        },
+        "formula": "1/lambda = R * (1/n_lower^2 - 1/n_upper^2)",
+        "result": "H-alpha: 656.3 nm (red), H-beta: 486.1 nm (blue-green), H-gamma: 434.0 nm (violet). Bunsen would have seen these lines through his spectroscope -- the same lines visible in stellar spectra.",
+        "python": "import numpy as np\nR = 1.097e7  # Rydberg constant, 1/m\nn_low = 2  # Balmer series\nfor n_high in range(3, 8):\n    inv_lambda = R * (1/n_low**2 - 1/n_high**2)\n    lam = 1 / inv_lambda  # meters\n    lam_nm = lam * 1e9\n    name = {3:'H-alpha', 4:'H-beta', 5:'H-gamma', 6:'H-delta', 7:'H-epsilon'}[n_high]\n    color = {3:'red', 4:'blue-green', 5:'violet', 6:'deep violet', 7:'near-UV'}[n_high]\n    print(f'{name} (n={n_high}→{n_low}): {lam_nm:.1f} nm ({color})')"
+      }
+    },
+    {
+      "id": "command-verification-protocols",
+      "concept": "Command verification protocols -- confirming that what you commanded is what happened",
+      "department": "electronics",
+      "level": "advanced",
+      "tspb_layer": 7,
+      "tspb_section": "7.4",
+      "description": "Pioneer 2's third stage ignition was commanded by an onboard sequencer -- a timer that sent an electrical signal to fire the X-248 motor's squib at a predetermined time after Stage 2 separation. There was no command verification protocol: no acknowledgment that the signal was sent, no confirmation that the squib received the signal, no feedback that chamber pressure was rising. The ground station knew the ignition was supposed to happen at a specific mission elapsed time. When the expected acceleration did not appear in the telemetry, they knew it had failed -- but not why. Was the command signal never generated? Was the signal generated but the squib circuit open? Was the squib fired but the initiator insufficient? Was the initiator sufficient but the grain surface conditioned wrong? Without command verification, the failure mode is unknown. Modern spacecraft use a layered verification protocol: (1) Command sent (logged by flight computer), (2) Command received (acknowledged by subsystem), (3) Command executed (actuator position confirmed), (4) Effect observed (expected telemetry change detected). Each layer narrows the fault diagnosis. Pioneer 2 had only layer 4 -- and layer 4 said 'no effect observed,' which tells you the chain failed but not where. The absence of verification telemetry from the X-248 motor is why the exact failure mode was never determined.",
+      "resonance": "The black-capped chickadee's alarm call system IS a command verification protocol. When a chickadee spots a predator, it issues the 'chick-a-dee' alarm call. Other chickadees repeat the call (acknowledgment), mobbing behavior begins (execution), and the predator is driven away or avoided (effect observed). Each stage of the response provides feedback to the originator. If no other birds repeat the call, the originator escalates (more 'dee' notes). If mobbing doesn't start, the originator increases alarm intensity. The protocol is closed-loop: command, acknowledge, execute, verify. Pioneer 2's ignition protocol was open-loop: command, hope. The chickadee's survival depends on the closed loop. Pioneer 2's mission failed partly because it lacked one.",
+      "worked_example": {
+        "description": "Design a command verification timeline for solid motor ignition",
+        "parameters": {
+          "command_send_ms": 0,
+          "squib_fire_delay_ms": 50,
+          "igniter_burn_ms": 200,
+          "grain_ignition_ms": 300,
+          "pressure_rise_ms": 500,
+          "nominal_pressure_MPa": 3.5,
+          "verification_timeout_ms": 2000
+        },
+        "formula": "If pressure > threshold at T+verification_timeout: IGNITION_CONFIRMED, else IGNITION_FAILED",
+        "result": "At T+0ms: command sent. T+50ms: squib fires (if circuit intact). T+300ms: grain surface ignites. T+500ms: chamber pressure reaches 3.5 MPa. T+2000ms: verification deadline. Pioneer 2: pressure never rose above ambient. Verdict: IGNITION_FAILED at T+2000ms.",
+        "python": "import numpy as np\n# Ignition timeline model\ntimeline = [\n    (0, 'Command signal sent to squib circuit'),\n    (50, 'Squib fires (electrical → pyrotechnic)'),\n    (200, 'Initiator charge burns (hot gas + particles)'),\n    (300, 'Main grain surface ignites (flame front propagation)'),\n    (500, 'Chamber pressure reaches nominal (3.5 MPa)'),\n    (2000, 'VERIFICATION DEADLINE'),\n]\nprint('Nominal ignition timeline:')\nfor t, event in timeline:\n    print(f'  T+{t:4d} ms: {event}')\nprint(f'\\nPioneer 2 actual:')\nprint(f'  T+   0 ms: Command signal sent (assumed)')\nprint(f'  T+  50 ms: Squib fires? -- UNKNOWN (no telemetry)')\nprint(f'  T+ 200 ms: Initiator burns? -- UNKNOWN')\nprint(f'  T+ 300 ms: Grain ignites? -- NO (no pressure rise detected)')\nprint(f'  T+2000 ms: VERDICT: IGNITION_FAILED')\nprint(f'  Failure point: somewhere between T+0 and T+300 ms')\nprint(f'  Root cause: UNDETERMINED (no mid-chain telemetry)')"
+      }
+    },
+    {
+      "id": "flame-spectroscopy-bunsen",
+      "concept": "Flame spectroscopy -- Bunsen's method for reading the light of burning elements",
+      "department": "chemistry",
+      "level": "intermediate",
+      "tspb_layer": 1,
+      "tspb_section": "1.3",
+      "description": "Robert Bunsen's contribution to spectroscopy began with a practical problem: he needed a clean, non-luminous flame that would not contaminate spectral observations with its own light. The Bunsen burner -- a gas burner with an adjustable air intake that produces a nearly colorless flame -- solved this problem. With the flame as a tool, Bunsen could introduce small samples of unknown materials and observe the characteristic colors they produced. Sodium burns yellow-orange (589 nm doublet). Potassium burns violet (766/770 nm). Lithium burns crimson red (670.8 nm). Copper burns blue-green. Each element's flame color is produced by electron transitions specific to that element's atomic structure. Bunsen and Kirchhoff formalized this into analytical flame spectroscopy: pass the flame light through a prism or diffraction grating, and the emission lines are separated by wavelength. Each line corresponds to a specific electron transition. The pattern of lines is an elemental fingerprint. Bunsen discovered two new elements -- cesium (from the Latin 'caesius,' sky-blue, for its distinctive spectral lines) and rubidium (from 'rubidus,' deep red) -- purely by their spectral signatures before ever isolating them in pure form. The connection to Pioneer 2 and space science: every element in the universe emits the same spectral lines it emits in Bunsen's flame. A hydrogen atom on Pioneer 2's trajectory emits the same Balmer series as a hydrogen atom in Bunsen's laboratory. Spectroscopy is universal because atomic physics is universal. This is why we can determine the chemical composition of stars, nebulae, and planetary atmospheres from Earth -- or from a spacecraft.",
+      "resonance": "Bunsen read identity from emission. The flame reveals what is present by what light emerges. Salal reveals its identity by what it emits in each season: white bell-shaped flowers in spring (its emission spectrum), dark berries in late summer (a different spectral line), persistent thick green leaves in winter (the ground state, always present). An experienced naturalist identifies salal from a distance the same way Bunsen identified cesium -- by the pattern of what it produces, not by holding it in hand. The pattern is the identification. And like spectral lines, salal's phenological pattern is determined by its internal structure (genetics, adaptation) just as emission lines are determined by electron structure. The pattern cannot be forged.",
+      "worked_example": {
+        "description": "Flame test wavelengths for common elements as Bunsen would have observed them",
+        "parameters": {
+          "elements": ["Na", "K", "Li", "Cu", "Ca", "Sr", "Ba", "Cs", "Rb"],
+          "wavelengths_nm": [589, 766, 670.8, 510, 622, 460, 553, 455, 780],
+          "colors": ["yellow-orange", "violet", "crimson red", "blue-green", "orange-red", "blue", "yellow-green", "sky-blue", "deep red"]
+        },
+        "formula": "E = hc/lambda (photon energy from wavelength)",
+        "result": "Na: 589 nm (2.11 eV), K: 766 nm (1.62 eV), Li: 670.8 nm (1.85 eV), Cs: 455 nm (2.73 eV), Rb: 780 nm (1.59 eV)",
+        "python": "import numpy as np\nh = 6.626e-34  # Planck constant, J*s\nc = 3e8  # speed of light, m/s\neV = 1.602e-19  # electron-volt in Joules\nelements = [\n    ('Sodium (Na)', 589, 'yellow-orange'),\n    ('Potassium (K)', 766, 'violet'),\n    ('Lithium (Li)', 670.8, 'crimson red'),\n    ('Copper (Cu)', 510, 'blue-green'),\n    ('Calcium (Ca)', 622, 'orange-red'),\n    ('Cesium (Cs)', 455, 'sky-blue'),\n    ('Rubidium (Rb)', 780, 'deep red'),\n]\nprint('Bunsen flame test -- emission lines and photon energies:')\nprint(f'{\"Element\":<18} {\"lambda (nm)\":<12} {\"Color\":<16} {\"Energy (eV)\"}')\nfor name, lam, color in elements:\n    E = h * c / (lam * 1e-9) / eV\n    print(f'{name:<18} {lam:<12.1f} {color:<16} {E:.2f}')\nprint(f'\\nBunsen discovered Cs and Rb purely from these spectral lines.')"
+      }
+    }
+  ]
+}
