@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 37&deg; &mdash; Ayron Jones &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1B5E20, #2E7D32);
+      color: #A5D6A7;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(27, 94, 32, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: white;
+      border: 1px solid #BF360C;
+    }
+
+    .blues-rock-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #CE93D8;
+      border: 1px solid #7B1FA2;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #90CAF9;
+      border: 1px solid #1565C0;
+      margin-left: 0.3rem;
+    }
+
+    .cd-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFE0B2;
+      border: 1px solid #F57C00;
+      margin-left: 0.3rem;
+    }
+
+    .inheritor-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1B5E20;
+      color: #C8E6C9;
+      border: 1px solid #388E3C;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1B5E20;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1B5E20;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .level-intermediate { background: #E8F5E9; color: #1B5E20; }
+    .level-advanced { background: #C8E6C9; color: #1B5E20; }
+    .theory-card p { font-size: 0.88rem; margin: 0.3rem 0 0; }
+    .theory-card .examples {
+      font-size: 0.82rem;
+      color: #757575;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .theory-card .genealogy {
+      font-size: 0.78rem;
+      color: #2E7D32;
+      margin-top: 0.5rem;
+      padding-top: 0.4rem;
+      border-top: 1px dashed #E8EAF6;
+    }
+    .theory-card .genealogy strong { color: #1B5E20; }
+
+    .timeline-entry {
+      padding: 0.8rem 0 0.8rem 1.5rem;
+      border-left: 3px solid #1B5E20;
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 1.1rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #A5D6A7;
+      border: 2px solid white;
+    }
+    .timeline-entry .era {
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      color: #1B5E20;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .timeline-entry p { font-size: 0.92rem; margin: 0.2rem 0 0; }
+
+    .carry-forward-box {
+      background: #E8F5E9;
+      border: 1px solid #81C784;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .carry-forward-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #1B5E20;
+      font-family: system-ui, sans-serif;
+    }
+    .carry-forward-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .carry-forward-box li { margin-bottom: 0.3rem; }
+
+    .succession-box {
+      background: linear-gradient(135deg, #1B5E20, #2E7D32);
+      color: #C8E6C9;
+      border: 2px solid #388E3C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .succession-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #A5D6A7;
+      font-family: system-ui, sans-serif;
+    }
+    .succession-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .succession-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .succession-box td, .succession-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #C8E6C9;
+    }
+    .succession-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #A5D6A7;
+    }
+
+    .duwamish-box {
+      background: #FFF8E1;
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .duwamish-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .duwamish-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .energy-box {
+      background: linear-gradient(135deg, #E65100, #F57C00);
+      color: #FFF3E0;
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .energy-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFE0B2;
+      font-family: system-ui, sans-serif;
+    }
+    .energy-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .energy-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .energy-box td, .energy-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #FFF3E0;
+    }
+    .energy-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #FFE0B2;
+    }
+
+    .blues-rock-box {
+      background: linear-gradient(135deg, #4A148C, #6A1B9A);
+      color: #E1BEE7;
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .blues-rock-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #CE93D8;
+      font-family: system-ui, sans-serif;
+    }
+    .blues-rock-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .cd-box {
+      background: linear-gradient(135deg, #E65100, #F57C00);
+      color: #FFF3E0;
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cd-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #FFE0B2;
+      font-family: system-ui, sans-serif;
+    }
+    .cd-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .cd-box table {
+      width: 100%;
+      font-size: 0.85rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .cd-box td, .cd-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      color: #FFF3E0;
+    }
+    .cd-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #FFE0B2;
+    }
+
+    .discography-box {
+      background: linear-gradient(135deg, #37474F, #455A64);
+      color: #B0BEC5;
+      border: 2px solid #78909C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .discography-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #A5D6A7;
+      font-family: system-ui, sans-serif;
+    }
+    .discography-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+    .discography-box table {
+      width: 100%;
+      font-size: 0.82rem;
+      border-collapse: collapse;
+      margin-top: 0.5rem;
+    }
+    .discography-box td, .discography-box th {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      color: #B0BEC5;
+    }
+    .discography-box th {
+      text-align: left;
+      font-weight: 600;
+      color: #A5D6A7;
+    }
+
+    .cross-ref-box {
+      background: #E8F5E9;
+      border: 2px solid #388E3C;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .cross-ref-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #1B5E20;
+      font-family: system-ui, sans-serif;
+    }
+    .cross-ref-box ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+    }
+    .cross-ref-box li { margin-bottom: 0.4rem; }
+
+    .quote-box {
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #C5CAE9;
+      border: 2px solid #3F51B5;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .quote-box h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.88rem;
+      color: #90CAF9;
+      font-family: system-ui, sans-serif;
+    }
+    .quote-box p {
+      font-size: 0.88rem;
+      margin: 0.3rem 0 0;
+    }
+  </style>
+</head>
+<body class="project-s36">
+  <header>
+    <div style="display:flex;align-items:center">
+      <div class="degree-badge">37&deg;</div>
+      <div>
+        <h1>Ayron Jones</h1>
+        <div class="subtitle">Blues Rock &middot; The Inheritor &mdash; Carrying the Tradition Forward
+          <span class="energy-badge">Energy 5</span>
+          <span class="blues-rock-badge">Blues Rock</span>
+          <span class="inheritor-badge">Inheritor</span>
+          <span class="label-badge">Big Machine</span>
+          <span class="cd-badge">Central District</span>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <a href="../../index.html">S36 Home</a>
+      <a href="../036-jimi-hendrix/index.html">Degree 36&deg; (Hendrix)</a>
+      <a href="../035-robert-cray/index.html">Degree 35&deg; (Cray)</a>
+      <a href="../000-quincy-jones/index.html">Degree 0&deg; (Quincy Jones)</a>
+      <a href="../../page.html?doc=01-vision-doc">Vision</a>
+      <a href="../../../index.html">Research Series</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="release-layout">
+      <div class="content">
+
+        <blockquote>
+          Born August 23, 1986, in Seattle. Raised in the Central District
+          &mdash; same neighborhood as Hendrix. Same middle school (Washington).
+          Adopted by his aunt at age four after parents&rsquo; drug addiction.
+          A child of the state &mdash; literally, legally, emotionally.
+          Self-taught guitarist. Gospel and soul household. Grunge and Hendrix
+          through the speakers. Discovered by Sir Mix-a-Lot at a dive bar, 2012.
+          A decade of club shows in Seattle. <em>Child of the State</em> (2021)
+          &mdash; &ldquo;Mercy&rdquo; No.&nbsp;1 Mainstream Rock. Two chart-toppers.
+          Fender Next class. Played Hendrix&rsquo;s Woodstock Stratocaster at the
+          Experience Hendrix Tour, Seattle, 2024. &ldquo;Rock and roll is a creation
+          of Black America.&rdquo; <strong>The Inheritor &mdash; the tradition
+          didn&rsquo;t die. It went underground for a generation. He brought it
+          back.</strong>
+        </blockquote>
+
+        <!-- ========================================
+             DUWAMISH ACKNOWLEDGMENT
+             ======================================== -->
+
+        <div class="duwamish-box">
+          <h4>Territorial Acknowledgment</h4>
+          <p>This research is mapped to Seattle within the Seattle 360 engine.
+          The Central District where Ayron Jones grew up sits on the ancestral
+          territory of the <strong>Duwamish Tribal Organization</strong>
+          (duwamishtribe.org), the <strong>Muckleshoot Indian Tribe</strong>,
+          and related Coast Salish peoples. Washington Middle School, where
+          Jones first saw a mural of Jimi Hendrix, sits on Duwamish land. The
+          venues where Jones played hundreds of shows occupy Duwamish territory.
+          The Duwamish Tribe remains federally unrecognized. This acknowledgment
+          was established at degree 20 and is inherited by all subsequent
+          releases.</p>
+        </div>
+
+        <!-- ========================================
+             THE SUCCESSION
+             ======================================== -->
+
+        <div class="succession-box">
+          <h4>The Hendrix Succession &mdash; Degree 36 to Degree 37</h4>
+          <p><strong>This degree directly follows Jimi Hendrix.</strong> The
+          engine places a living, working, currently-touring Seattle blues-rock
+          guitarist immediately after the most famous guitarist in American music
+          history. Jones does not claim equivalence. He claims
+          <strong>continuity</strong>: &ldquo;I&rsquo;m only continuing the work
+          that he laid down.&rdquo;</p>
+          <table>
+            <tr><th>Shared Attribute</th><th>Hendrix (36&deg;)</th><th>Jones (37&deg;)</th></tr>
+            <tr><td>Neighborhood</td><td>Central District</td><td>Central District</td></tr>
+            <tr><td>School</td><td>Washington MS, Garfield HS</td><td>Washington MS</td></tr>
+            <tr><td>Genre</td><td>Blues Rock</td><td>Blues Rock</td></tr>
+            <tr><td>Instrument</td><td>Fender Stratocaster</td><td>Fender Stratocaster</td></tr>
+            <tr><td>Self-taught</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Era</td><td>1962&ndash;1970</td><td>2010&ndash;present</td></tr>
+            <tr><td>Energy</td><td>E=6 (transformative)</td><td>E=5 (successor)</td></tr>
+          </table>
+          <p style="margin-top:0.6rem">The forty-year gap between eras
+          (1970&ndash;2010) is the largest between consecutive degrees in the
+          engine. The blues-rock tradition went underground &mdash; into grunge,
+          into alternative rock &mdash; and re-emerged in Jones.</p>
+        </div>
+
+        <!-- ========================================
+             ENERGY
+             ======================================== -->
+
+        <div class="energy-box">
+          <h4>E=5 &mdash; Successor Tidal (After E=6)</h4>
+          <p><strong>E=5 returns after the singular E=6 at degree 36.</strong>
+          Successor tidal is the energy of carrying a transformative
+          predecessor&rsquo;s legacy into sustained contemporary practice. Not
+          diminished &mdash; differently distributed.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>Energy</th><th>Mode</th></tr>
+            <tr><td>32</td><td>Luther Rabb</td><td>E=5</td><td>Personal tidal</td></tr>
+            <tr><td>33</td><td>Larry English</td><td>E=5</td><td>Scene-cumulative</td></tr>
+            <tr><td>34</td><td>The Tempos</td><td>E=5</td><td>Collective tidal</td></tr>
+            <tr><td>35</td><td>Robert Cray</td><td>E=5</td><td>Breakthrough tidal</td></tr>
+            <tr><td>36</td><td>Jimi Hendrix</td><td>E=6</td><td>Transformative tidal</td></tr>
+            <tr><td><strong>37</strong></td><td><strong>Ayron Jones</strong></td><td><strong>E=5</strong></td><td><strong>Successor tidal</strong></td></tr>
+          </table>
+          <p style="margin-top:0.6rem">Distribution: 2:13:6:11:<strong>5</strong>:1.
+          E=5 count rises to five. E=6 remains singular (Hendrix only).
+          Two No.&nbsp;1 Mainstream Rock singles. A decade-plus of sustained output.</p>
+        </div>
+
+        <!-- ========================================
+             BLUES ROCK CONTINUES
+             ======================================== -->
+
+        <div class="blues-rock-box">
+          <h4>Blues Rock Continues &mdash; Second Consecutive Degree</h4>
+          <p><strong>Blues Rock for the second consecutive degree</strong>
+          (36&ndash;37). The genre that entered the engine with Hendrix continues
+          with Jones. Same genre, same instrument, same neighborhood &mdash;
+          different generation. The trunk holds.</p>
+        </div>
+
+        <!-- ========================================
+             CENTRAL DISTRICT
+             ======================================== -->
+
+        <div class="cd-box">
+          <h4>Central District &mdash; 10th CD Degree</h4>
+          <p><strong>The Central District cluster expands to 10 degrees</strong>
+          &mdash; more than one-quarter of all artists in the engine.</p>
+          <table>
+            <tr><th>Degree</th><th>Artist</th><th>CD Connection</th></tr>
+            <tr><td>0</td><td>Quincy Jones</td><td>Raised in CD, Garfield HS</td></tr>
+            <tr><td>3</td><td>Ernestine Anderson</td><td>CD jazz scene</td></tr>
+            <tr><td>4</td><td>Floyd Standifer</td><td>CD jazz scene</td></tr>
+            <tr><td>5</td><td>Overton Berry</td><td>CD jazz scene</td></tr>
+            <tr><td>30</td><td>Ray Charles</td><td>Jackson Street clubs</td></tr>
+            <tr><td>32</td><td>Luther Rabb</td><td>Born &amp; raised CD</td></tr>
+            <tr><td>33</td><td>Larry English</td><td>CD music scene</td></tr>
+            <tr><td>34</td><td>The Tempos</td><td>CD R&amp;B group</td></tr>
+            <tr><td>36</td><td>Jimi Hendrix</td><td>Born &amp; raised CD</td></tr>
+            <tr><td><strong>37</strong></td><td><strong>Ayron Jones</strong></td><td><strong>Born &amp; raised CD, Washington MS</strong></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             BIOGRAPHY TIMELINE
+             ======================================== -->
+
+        <h2>Career Timeline</h2>
+
+        <div class="timeline-entry">
+          <div class="era">1986 &mdash; Born</div>
+          <p>August 23, University of Washington Medical Center, Seattle.
+          Mother age 19. Father absent. Both parents struggled with drug
+          addiction.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">1986&ndash;1993 &mdash; Foster Care &amp; Adoption</div>
+          <p>Placed under state supervision by age four. Adopted by aunt and
+          uncle. Legal adoption finalized around age seven. &ldquo;Child of
+          the State&rdquo; &mdash; literally.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">Childhood &mdash; Central District</div>
+          <p>Raised in gospel and soul household. Learned piano and drums.
+          Guitar as birthday gift from biological mother. Attended Washington
+          Middle School &mdash; same school as Hendrix. First saw Hendrix
+          mural on the wall.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2000s &mdash; Self-Taught Guitarist</div>
+          <p>Absorbed Hendrix, Nirvana, Soundgarden, Michael Jackson, Freddie
+          King, B.B. King, Roy Buchanan, Mike McCready, Kim Thayil. Seattle
+          as &ldquo;a living, breathing master class for the aspiring
+          artist.&rdquo;</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2010 &mdash; Ayron Jones and the Way</div>
+          <p>Founded power trio with DeAndre Enrico (bass) and Kai Van De Pitte
+          (drums). Named after Hendrix Experience / Cream / SRV format.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2012 &mdash; Discovered by Sir Mix-a-Lot</div>
+          <p>University District dive bar, sleepy Wednesday night. Mix heard the
+          music from outside: &ldquo;three 50-year-old white dudes&rdquo; based
+          on the sound. Found three young Black men playing blues and rock.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2013 &mdash; Dream</div>
+          <p>Self-released debut album, produced by Sir Mix-a-Lot.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2010&ndash;2020 &mdash; The Seattle Circuit</div>
+          <p>Hundreds of club shows. Opening slots for B.B. King, Rolling
+          Stones, Jeff Beck, Living Colour, Guns N&rsquo; Roses, Slipknot.
+          A decade of apprenticeship in one city.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2020 &mdash; Big Machine / John Varvatos</div>
+          <p>Signs to Big Machine Label Group / John Varvatos Records.
+          &ldquo;Take Me Away&rdquo; debuts Top 5 on Active Rock chart.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2021 &mdash; Child of the State</div>
+          <p>Major-label debut (May 21). &ldquo;Mercy&rdquo; reaches No.&nbsp;1
+          on Billboard Mainstream Rock Airplay. Fender Next class of 2021.
+          One of the few Black solo rock artists to top the chart.</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2023 &mdash; Chronicles of the Kid</div>
+          <p>Second major-label album. &ldquo;Blood in the Water&rdquo;
+          reaches No.&nbsp;1 Mainstream Rock. Covers Elmore James&rsquo;
+          &ldquo;The Sky Is Crying.&rdquo;</p>
+        </div>
+        <div class="timeline-entry">
+          <div class="era">2024 &mdash; Experience Hendrix Tour</div>
+          <p>Participates in the Experience Hendrix Tour. At the Seattle
+          kickoff, plays Hendrix&rsquo;s actual Woodstock Fender Stratocaster.
+          The living Seattle inheritor, playing the dead legend&rsquo;s
+          instrument, in the city they share.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             KEY RECORDINGS
+             ======================================== -->
+
+        <h2>Key Recordings</h2>
+
+        <div class="discography-box">
+          <h4>Discography &amp; Key Tracks</h4>
+          <table>
+            <tr><th>Track / Album</th><th>Year</th><th>Significance</th></tr>
+            <tr><td><em>Dream</em></td><td>2013</td><td>Self-released debut. Produced by Sir Mix-a-Lot. Power trio format.</td></tr>
+            <tr><td>&ldquo;Baptized in Muddy Waters&rdquo;</td><td>2013/2021</td><td>Double reference: spiritual baptism + Muddy Waters blues tribute. Originally recorded with the trio; re-recorded for major-label album.</td></tr>
+            <tr><td>&ldquo;Take Me Away&rdquo;</td><td>2020</td><td>Breakout single. Top 5 Billboard Active Rock. Guitar-driven with grunge dynamics and blues bends.</td></tr>
+            <tr><td><em>Child of the State</em></td><td>2021</td><td>Major-label debut. 12 tracks. Title refers to his literal legal status as a ward of the state.</td></tr>
+            <tr><td>&ldquo;Mercy&rdquo;</td><td>2021</td><td>No.&nbsp;1 Billboard Mainstream Rock Airplay. First chart-topper.</td></tr>
+            <tr><td>&ldquo;Boys From the Puget Sound&rdquo;</td><td>2021</td><td>Seattle anthem. Written in response to police being called on the band for being &ldquo;too loud.&rdquo;</td></tr>
+            <tr><td><em>Chronicles of the Kid</em></td><td>2023</td><td>Second major-label album. 10 tracks. Continues autobiographical thread.</td></tr>
+            <tr><td>&ldquo;Blood in the Water&rdquo;</td><td>2023</td><td>Second No.&nbsp;1 Mainstream Rock. Two-time chart-topper.</td></tr>
+            <tr><td>&ldquo;The Sky Is Crying&rdquo;</td><td>2023</td><td>Elmore James cover. Three-generation blues chain: James &rarr; Hendrix &rarr; Jones.</td></tr>
+          </table>
+        </div>
+
+        <!-- ========================================
+             QUOTE
+             ======================================== -->
+
+        <div class="quote-box">
+          <h4>&ldquo;Rock and Roll Is a Creation of Black America&rdquo;</h4>
+          <p>&ldquo;Rock and roll is a creation of Black America. Even though
+          it may be less talked about and may be forgotten by some of the newer
+          generations, it&rsquo;s our sound.&rdquo; &mdash; Ayron Jones,
+          <em>Consequence of Sound</em></p>
+          <p style="margin-top:0.5rem">&ldquo;Our generation doesn&rsquo;t
+          have a guitar player &mdash; I want to be that guy.&rdquo;
+          &mdash; Ayron Jones, <em>Louder</em></p>
+          <p style="margin-top:0.5rem">&ldquo;Like if Michael Jackson played
+          guitar like Jimi Hendrix in Kurt Cobain&rsquo;s band.&rdquo;
+          &mdash; Ayron Jones, describing his own sound</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CROSS-REFERENCES
+             ======================================== -->
+
+        <h2>Cross-References</h2>
+
+        <div class="cross-ref-box">
+          <h4>Engine Connections</h4>
+          <ul>
+            <li><strong>Degree 36 (Jimi Hendrix):</strong> Same neighborhood
+            (CD), same middle school (Washington), same genre (Blues Rock),
+            same instrument (Stratocaster). Jones was friends with Hendrix&rsquo;s
+            nephew. Played Hendrix&rsquo;s Woodstock Strat in Seattle. The
+            strongest succession relationship in the engine.</li>
+            <li><strong>Degree 35 (Robert Cray):</strong> Three consecutive
+            Stratocaster degrees (35&ndash;36&ndash;37). Blues (35) &rarr;
+            Blues Rock (36&ndash;37). Stinging clean &rarr; controlled scream
+            &rarr; dynamic grit.</li>
+            <li><strong>Degree 0 (Quincy Jones):</strong> Central District.
+            The Export (0) and The Inheritor (37) bracket the engine&rsquo;s
+            first 38 degrees.</li>
+            <li><strong>Degree 30 (Ray Charles):</strong> Central District
+            across generations. Blues tradition.</li>
+            <li><strong>Degree 32 (Luther Rabb):</strong> Same educational
+            ecosystem (Garfield HS / Washington MS). Hendrix connects both:
+            Rabb played with Hendrix; Jones carries Hendrix&rsquo;s legacy.</li>
+            <li><strong>Degree 19 (Fly Moon Royale):</strong> Previous most
+            recent contemporary artist. Jones is now the most recent active
+            artist in the engine.</li>
+            <li><strong>Stratocaster Thread:</strong> Three consecutive degrees
+            (35&ndash;36&ndash;37) &mdash; longest single-instrument run in the
+            engine.</li>
+          </ul>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             THEORY CARDS
+             ======================================== -->
+
+        <h2>Theory Nodes</h2>
+
+        <div class="theory-grid">
+          <div class="theory-card">
+            <h4>The Inheritor</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>38th artist-city pattern. The artist who grows up in the same
+            city, same neighborhood, same schools as a transformative predecessor
+            and explicitly claims continuity with that tradition. Extends the
+            legacy into a new era with new materials. The structural complement
+            to The Supernova (36&deg;).</p>
+            <div class="examples">Jones: same CD, same school, same instrument,
+            same genre as Hendrix. &ldquo;I&rsquo;m only continuing the work
+            that he laid down.&rdquo;</div>
+            <div class="genealogy"><strong>Genealogy:</strong> Supernova (36)
+            collapsed &rarr; Inheritor (37) continues. Five PNW-to-global
+            modes: Export, Incubator, Deep Root, Supernova, Inheritor.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>The Dynamic Grit</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>38th acoustic element. Stratocaster through overdriven-but-contained
+            amplification with grunge soft/loud dynamics. Grittier than the
+            stinging clean (35&deg;), more controlled than the controlled scream
+            (36&deg;). Drama through contrast, not maximum volume.</p>
+            <div class="examples">Fender Hot Rod Deluxe + DS-1 + Tube Screamer.
+            Three consecutive Stratocaster degrees: clean &rarr; scream &rarr;
+            grit.</div>
+            <div class="genealogy"><strong>Genealogy:</strong> Stinging clean
+            (35) &rarr; controlled scream (36) &rarr; dynamic grit (37). Three
+            philosophies of one instrument.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Blue Note: The Grunge Bend</h4>
+            <div class="level level-intermediate">Intermediate</div>
+            <p>37th blue note deployment. The bend shaped by soft/loud dynamics
+            &mdash; begins in restraint and swells into distortion, or begins
+            loud and pulls back. A hybrid of the articulate sting and the
+            screaming bend.</p>
+            <div class="examples">&ldquo;Take Me Away,&rdquo; &ldquo;Mercy,&rdquo;
+            &ldquo;Blood in the Water&rdquo; &mdash; the same bend sounds different
+            depending on dynamic context.</div>
+            <div class="genealogy"><strong>Genealogy:</strong> Articulate sting
+            (35) + screaming bend (36) &rarr; grunge bend (37). Synthesis
+            through dynamics.</div>
+          </div>
+
+          <div class="theory-card">
+            <h4>Successor Tidal (E=5)</h4>
+            <div class="level level-advanced">Advanced</div>
+            <p>6th E=5 mode. Energy of an artist who follows a transformative
+            predecessor (E=6) and channels that legacy into sustained
+            contemporary practice. Not diminished &mdash; differently
+            distributed over a longer timeline.</p>
+            <div class="examples">Two No.&nbsp;1 Mainstream Rock singles. Decade-plus
+            career. Distribution: 2:13:6:11:5:1. E=6 remains
+            singular.</div>
+            <div class="genealogy"><strong>Genealogy:</strong> Transformative
+            (E=6, 36) &rarr; successor (E=5, 37). The arc rises to maximum
+            and continues at high sustained energy.</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- ========================================
+             CARRY-FORWARD
+             ======================================== -->
+
+        <h2>Carry-Forward Items</h2>
+
+        <div class="carry-forward-box">
+          <h4>Items for Degree 38</h4>
+          <ul>
+            <li><strong>E=5 returns:</strong> Distribution 2:13:6:11:5:1.
+            Successor tidal as 6th E=5 mode. E=6 remains Hendrix only.
+            Track at degree 38.</li>
+            <li><strong>Blues Rock x2:</strong> Second consecutive degree
+            (36&ndash;37). Will it continue at 38?</li>
+            <li><strong>Stratocaster x3:</strong> Three consecutive degrees
+            (35&ndash;36&ndash;37). Longest single-instrument run. Track at 38.</li>
+            <li><strong>Central District x10:</strong> Now ~26.3% of all degrees.
+            Track for additional CD artists.</li>
+            <li><strong>The Inheritor (NEW):</strong> 38th artist-city pattern.
+            Succession as defining characteristic.</li>
+            <li><strong>The Dynamic Grit (NEW):</strong> 38th acoustic element.
+            Grunge-informed dynamics on Stratocaster.</li>
+            <li><strong>Big Machine / John Varvatos x1:</strong> New label.
+            Track at 38.</li>
+            <li><strong>Solo format x3:</strong> Cray (35), Hendrix (36),
+            Jones (37). Track at 38.</li>
+            <li><strong>Gender:</strong> 6:32 (~15.8%). Jones = male.</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ========================================
+           SIDEBAR
+           ======================================== -->
+
+      <div class="sidebar">
+        <div class="stat-card">
+          <h4>Degree 37 &mdash; Quick Stats</h4>
+          <div class="stat-row">
+            <span class="stat-label">Artist</span>
+            <span class="stat-value">Ayron Jones</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Blues Rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E=5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2010&ndash;present</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">1986-08-23</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Neighborhood</span>
+            <span class="stat-value">Central District</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Big Machine / Varvatos</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instrument</span>
+            <span class="stat-value">Fender Stratocaster</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lat/Lon</span>
+            <span class="stat-value">47.6062, -122.3321</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">#38 (Inheritor)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#38 (Dynamic Grit)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#37 (Grunge Bend)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">18 (continues)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CD Cluster</span>
+            <span class="stat-value">10 degrees</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Strat Thread</span>
+            <span class="stat-value">3 consecutive</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Chart Performance</h4>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;Take Me Away&rdquo;</span>
+            <span class="stat-value">Top 5 Active Rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;Mercy&rdquo;</span>
+            <span class="stat-value">No. 1 Mainstream</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;Blood in the Water&rdquo;</span>
+            <span class="stat-value">No. 1 Mainstream</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>The Succession</h4>
+          <div class="stat-row">
+            <span class="stat-label">Predecessor</span>
+            <span class="stat-value">Hendrix (36&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shared</span>
+            <span class="stat-value">CD, School, Genre</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era Gap</span>
+            <span class="stat-value">40+ years</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Seattle 360 &mdash; Degree 37&deg; &mdash; Ayron Jones &mdash;
+    v1.49.173</p>
+    <p><a href="../036-jimi-hendrix/index.html">&larr; Degree 36&deg;
+    (Hendrix)</a></p>
+  </footer>
+</body>
+</html>
