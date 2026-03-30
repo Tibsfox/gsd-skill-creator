@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.5 — Pioneer 4 + Douglas-fir | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --canopy-deep: #0A2E0A;
+    --canopy-mid: #1A4A1A;
+    --canopy-emerald: #2D6A2D;
+    --bark-brown: #4A3420;
+    --bark-dark: #2A1A0E;
+    --light-canopy: #A8D8A8;
+    --light-bright: #C8E8C8;
+    --forest-floor: #0D1A0D;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #2D5A2D;
+    --success: #2D9A2D;
+    --success-light: #40CC40;
+    --success-dark: #1A6A1A;
+    --gold: #D4A830;
+    --gold-light: #E8C860;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--forest-floor);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Old-growth canopy light background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(168,216,168,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(45,106,45,0.08) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(168,216,168,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(200,232,200,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(45,106,45,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(168,216,168,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 18% 75%, rgba(10,46,10,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 80%, rgba(45,106,45,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 92% 8%, rgba(11,61,145,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--forest-floor) 0%, var(--canopy-deep) 25%, var(--canopy-mid) 50%, var(--canopy-emerald) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--success);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(168,216,168,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(168,216,168,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(45,154,45,0.15);
+    border: 1px solid var(--success);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--success-light);
+    margin-bottom: 1rem;
+  }
+
+  .version-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--light-bright);
+  }
+
+  .status-success {
+    background: rgba(45,154,45,0.3);
+    border: 1px solid var(--success);
+    color: var(--success-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--light-canopy); font-weight: 500; }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(10,46,10,0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--light-bright);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card p, .card li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card {
+    border-color: var(--success);
+    background: rgba(45,106,45,0.06);
+  }
+
+  .resonance-axis {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(168,216,168,0.12);
+  }
+
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num {
+    background: var(--success);
+    color: var(--forest-floor);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--light-bright); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(10,46,10,0.5);
+    border: 1px solid var(--canopy-emerald);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .organism-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--light-canopy);
+    margin-bottom: 0.75rem;
+  }
+
+  .organism-card .sci-name {
+    font-style: italic;
+    color: var(--light-canopy);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: rgba(13,26,13,0.6);
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--light-bright);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dedication-card {
+    background: rgba(212,168,48,0.08);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .dedication-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .data-links {
+    background: rgba(11,61,145,0.15);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .data-links h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .data-links a {
+    display: block;
+    color: #7EB8DA;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.2);
+    transition: color 0.2s;
+  }
+
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card {
+    background: rgba(26,26,58,0.4);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .tracks-card h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .track-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.15);
+    font-size: 0.85rem;
+  }
+
+  .track-item:last-child { border-bottom: none; }
+
+  .track-num {
+    background: rgba(11,61,145,0.3);
+    color: #7EB8DA;
+    font-weight: 700;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-card {
+    background: rgba(10,46,10,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .nav-card a {
+    color: var(--light-canopy);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-card a:hover { color: var(--light-bright); }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--light-canopy); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.5</span>
+      <span>NASA Mission Series</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>Pioneer 4 &mdash; Escape</h1>
+    <p class="subtitle">The first American spacecraft to leave Earth forever, and the tree that reaches the sky</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> March 3, 1959</span>
+      <span><span class="label">Program:</span> Pioneer (NASA/ABMA/JPL)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Juno II</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On March 3, 1959 &mdash; Alexander Graham Bell&rsquo;s birthday &mdash; Pioneer 4 became the first American spacecraft to achieve escape velocity. All three Juno II stages performed nominally. The 6.08-kilogram cone reached the Moon&rsquo;s vicinity at approximately 60,000 km, then continued into heliocentric orbit between Earth and Mars. For 82 hours across 655,300 kilometers, its 180-milliwatt transmitter sent back radiation data that confirmed Pioneer 3&rsquo;s dual Van Allen belt discovery. Pioneer 4 is still out there, orbiting the Sun.</p>
+      <p>After four tries &mdash; an explosion, a velocity shortfall, a stage that never fired, and a burn that ended too early &mdash; the fifth Pioneer reached escape velocity and never looked back. The learning curve of a species reaching beyond its atmosphere. Pioneer 0 (October 11, 1958) exploded 77 seconds after launch. Pioneer 1 (October 11, 1958) reached 113,854 km but fell back due to a guidance error. Pioneer 2 (November 8, 1958) lost its third stage entirely at 1,550 km. Pioneer 3 (December 6, 1958) came within 73 m/s of escape but the first stage cut off 3.8 seconds early. Five months. Five attempts. Each failure fed back into the next design. The Juno II propellant loading procedure that failed on Pioneer 3 was corrected for Pioneer 4. The learning was specific, incremental, and cumulative &mdash; and on March 3, 1959, it was enough.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> 6.08 kg (gold-plated cone, slightly heavier than Pioneer 3&rsquo;s 5.87 kg)</li>
+        <li><strong>Instruments:</strong> Single trigger-type Geiger-Mueller tube with ionization chamber &mdash; confirming Pioneer 3&rsquo;s dual belt measurements along the escape trajectory</li>
+        <li><strong>Power:</strong> Mercury batteries (82 hours operational life)</li>
+        <li><strong>Transmitter:</strong> 960.05 MHz, 180 milliwatts</li>
+        <li><strong>Stabilization:</strong> Spin-stabilized at ~400 rpm</li>
+        <li><strong>Builder:</strong> Jet Propulsion Laboratory (for NASA)</li>
+        <li><strong>Launch vehicle:</strong> Juno II (modified Jupiter IRBM + solid upper stages, all three stages nominal for the first time)</li>
+        <li><strong>Key achievement:</strong> First US spacecraft to achieve escape velocity and enter heliocentric orbit</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Success</h2>
+      <p><strong>T+0 (05:10:56 UTC):</strong> Juno II ignition from LC-5, Cape Canaveral. Same pad that launched Pioneer 3 three months earlier. The modified Jupiter IRBM first stage lights cleanly.</p>
+      <p><strong>T+0 to T+183:</strong> First stage burn. The Rocketdyne S-3D engine produces 667 kN of thrust and burns for its full planned duration. The propellant depletion sensor that triggered early on Pioneer 3 has been recalibrated. The LOX tank is loaded to the corrected level. Every second of planned burn time is delivered.</p>
+      <p><strong>T+183 onward:</strong> Upper stages fire in sequence. The solid rocket cluster performs nominally. Combined with the full first-stage burn, the cumulative delta-v exceeds escape velocity. For the first time in the Pioneer program, the total energy is positive.</p>
+      <p><strong>T+41 hours:</strong> Lunar flyby. Pioneer 4 passes the Moon at approximately 60,000 km &mdash; too far for the planned photoelectric sensor to trigger (it required passage within 30,000 km), but close enough to confirm the spacecraft was on an escape trajectory. The lunar gravity deflects Pioneer 4&rsquo;s path by approximately 0.06 degrees.</p>
+      <p><strong>T+82 hours (655,300 km):</strong> Signal lost. The 180-milliwatt transmitter, spreading its signal across an ever-expanding sphere, finally drops below the detection threshold of the Goldstone and Cape Canaveral tracking stations. Pioneer 4 continues outward in silence.</p>
+      <p><strong>Heliocentric orbit insertion:</strong> Pioneer 4 crosses the Earth&rsquo;s gravitational sphere of influence and enters a permanent orbit around the Sun. Semi-major axis approximately 1.22 AU, eccentricity approximately 0.17, orbital period approximately 395 days. The first American artificial planet.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Pioneer program convergence plotter &mdash; chart the delta-v deficit across all five Pioneer missions (P0 through P4), showing the non-monotonic approach to escape velocity</li>
+        <li><strong>Minecraft:</strong> Pioneer 4 escape trajectory at scale &mdash; build the cone at scale, then a line of blocks ascending beyond the render distance. Unlike Pioneers 1&ndash;3, this one does not come back</li>
+        <li><strong>Blender:</strong> Escape trajectory animation &mdash; Pioneer 4 rising from Earth, passing the Moon, and shrinking to a dot as it enters heliocentric orbit. Earth shrinks in the background. The camera stays with the spacecraft (Cycles render, 90 sec)</li>
+        <li><strong>GLSL:</strong> 4-mode screensaver &mdash; Douglas-fir canopy from below, Pioneer 4 escape trajectory, heliocentric orbit, Nuthatch on trunk</li>
+        <li><strong>Arduino:</strong> Escape velocity LED display ($15) &mdash; ascending LEDs that reach the top and STAY ON (escape achieved), contrasting with Pioneer 1&ndash;3 circuits where LEDs reversed</li>
+        <li><strong>Godot 4:</strong> Escape or fall back &mdash; adjust launch parameters (stage timing, propellant load, burn duration) and see whether the trajectory curves back to Earth (ellipse) or continues outward (hyperbola)</li>
+        <li><strong>GMAT:</strong> Pioneer 4 trajectory reconstruction &mdash; full three-stage burn, lunar flyby at 60,000 km, heliocentric orbit insertion, compare with Pioneer 3&rsquo;s elliptical fall-back</li>
+        <li><strong>Radio:</strong> IF amplifier circuit ($18) &mdash; takes the intermediate frequency from v1.4&rsquo;s mixer and amplifies it with selectivity. Single-stage tuned amplifier at 455 kHz</li>
+        <li><strong>Screensaver:</strong> Douglas-fir canopy &rarr; Pioneer 4 escape &rarr; heliocentric orbit &rarr; Nuthatch spiral (XScreenSaver / GSD-OS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Calculate escape velocity &mdash; derive v_escape = sqrt(2GM/r) from energy conservation. Compute it at Earth&rsquo;s surface, at 200 km altitude, at Pioneer 3&rsquo;s apogee. Show how the threshold decreases with altitude (30 min, Python or pencil)</li>
+        <li><strong>TRY 2:</strong> Plot the convergence &mdash; graph the Pioneer program&rsquo;s approach to escape velocity across all five missions. Identify the regression (Pioneer 2) and the final breakthrough (Pioneer 4). Compare to Newton&rsquo;s method convergence (30 min, Python + matplotlib)</li>
+        <li><strong>TRY 3:</strong> Heliocentric orbit calculator &mdash; given Pioneer 4&rsquo;s escape velocity and direction, compute the resulting solar orbit parameters (semi-major axis, eccentricity, period). Where is Pioneer 4 today? (45 min, Python + astropy or manual Kepler)</li>
+        <li><strong>DIY 1:</strong> Build the escape trajectory LED circuit ($15) &mdash; 555+CD4017 with latching so the top LED stays on. Compare with Pioneer 1&ndash;3 circuits where the LEDs reverse</li>
+        <li><strong>DIY 2:</strong> Build the IF amplifier ($18) &mdash; common-emitter amplifier with tuned LC collector at 455 kHz. Connect to v1.4&rsquo;s mixer output and observe amplified, filtered IF signal</li>
+        <li><strong>DIY 3:</strong> Douglas-fir growth ring observation &mdash; obtain a cross-section of Douglas-fir wood (craft stores carry wood rounds). Count the rings. Measure ring width variation. Each wide ring was a good year; each narrow ring was a drought. The tree recorded its own data, one ring per year, for centuries</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-canopy.html" style="color: var(--light-bright);">Story: &ldquo;The Canopy&rdquo;</a>
+          <a href="artifacts/stories/the-canopy.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; A thousand-year-old Douglas-fir tells the story of reaching for the sky
+        </li>
+        <li><a href="artifacts/audio/escape-velocity-synth.dsp" style="color: #7EB8DA;">Audio: Escape Velocity</a> &mdash; FAUST VST/LV2 (three-stage rumble building to escape, silence at separation, expanding ascending tone into solar wind hum, 120 seconds)</li>
+        <li><a href="artifacts/audio/nuthatch-yank.dsp" style="color: #7EB8DA;">Audio: Nuthatch Yank-Yank</a> &mdash; FAUST generative (nasal tin-horn call at 1500&ndash;2000 Hz, rapid bursts, forest background)</li>
+        <li><a href="artifacts/circuits/led-escape-trajectory.md" style="color: var(--light-bright);">Circuit: Escape Trajectory LEDs</a> &mdash; Ascending LEDs that reach the top and STAY ON &mdash; escape achieved ($15)</li>
+        <li><a href="artifacts/circuits/radio-if-amplifier.md" style="color: var(--light-bright);">Circuit: IF Amplifier</a> &mdash; Tuned common-emitter amplifier at 455 kHz, the radio series v1.5 ($18)</li>
+        <li><a href="artifacts/screensaver/pioneer4-screensaver.frag" style="color: #7EB8DA;">Screensaver: 4-Mode GLSL</a> &mdash; Douglas-fir canopy, Pioneer 4 escape, heliocentric orbit, Nuthatch spiral</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Height and reach:</span> Douglas-fir reaches 100 meters &mdash; the tallest conifer species in the PNW, the second tallest tree species on Earth. Pioneer 4 reached escape velocity and left Earth entirely. Both go higher than everything around them. The Douglas-fir breaks through the canopy; Pioneer 4 broke through the gravity well. Neither comes back.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Persistence through generations:</span> A Douglas-fir lives 500 to 1,000+ years, standing through centuries of storms, fires, droughts, and ice. Pioneer 4 has been orbiting the Sun for 67 years and will continue for millions. Both persist far beyond the lifespans of the organisms and engineers that created the conditions for their existence. The tree outlives the seed. The spacecraft outlives the program.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">Misnamed success:</span> Pseudotsuga menziesii is not a true fir &mdash; the name &ldquo;Douglas-fir&rdquo; is a misnomer. It belongs to its own genus. Pioneer 4 was classified as a partial success by some accounts because it missed the planned 30,000-km lunar flyby (passing at 60,000 km instead). But it achieved escape velocity &mdash; the actual milestone that matters. Both are better than their names suggest. The tree is more than a fir. The mission was more than partial.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Ecosystem foundation:</span> Douglas-fir is the keystone structural species of the PNW old-growth forest. Its massive trunks create the canopy architecture, its fallen logs become nurse logs for the next generation, its root systems support mycorrhizal networks. Pioneer 4&rsquo;s escape velocity achievement was the foundation for everything that followed &mdash; Ranger, Mariner, Viking, Voyager, New Horizons. The first success is the nurse log for the next fifty years of exploration.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">Canopy finally reached:</span> A Douglas-fir seedling on the forest floor may wait decades for a canopy gap that lets in enough light to grow. When the gap opens, the tree races upward. If it reaches the canopy, it is self-sustaining. Pioneers 0&ndash;3 were the seedling in the dark. Pioneer 4 was the gap opening. After five months of attempts, the canopy was finally reached. The light was there all along &mdash; it just took five tries to grow tall enough.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">Supporting an entire ecosystem:</span> A single old-growth Douglas-fir supports hundreds of species &mdash; epiphytic lichens on its bark (including Usnea longissima, the v1.4 organism), Red-breasted Nuthatches nesting in its cavities, red tree voles in its crown, spotted owls in its canopy. Pioneer 4&rsquo;s success supported an entire institutional ecosystem &mdash; proving that JPL could reach deep space, that the Juno II could work, that escape was achievable. One tree holds up a forest. One successful mission held up a space program.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Five-Mission Arc</h2>
+      <p>The Pioneer program from October 1958 to March 1959 is one of the most compressed learning arcs in engineering history. Five missions in five months, each one informed by the last:</p>
+      <p><strong>Pioneer 0 (Oct 11, 1958):</strong> Thor-Able explosion at T+77 seconds. Total loss. Lesson: the launch vehicle itself is the first risk.</p>
+      <p><strong>Pioneer 1 (Oct 11, 1958):</strong> Reached 113,854 km &mdash; the deepest any human object had penetrated space. Fell back due to a guidance programming error. Lesson: achieving altitude is not the same as achieving escape. But Pioneer 1 discovered the inner Van Allen belt and returned the first deep space data.</p>
+      <p><strong>Pioneer 2 (Nov 8, 1958):</strong> Third stage failed to ignite. Reached only 1,550 km. Regression. Lesson: multi-stage reliability is a serial chain. Every stage must work.</p>
+      <p><strong>Pioneer 3 (Dec 6, 1958):</strong> First stage burned 3.8 seconds short. Reached 102,322 km &mdash; deep enough to discover the outer Van Allen belt, but not enough for escape. 73 m/s deficit. Lesson: propellant loading precision matters. Small margins determine outcomes.</p>
+      <p><strong>Pioneer 4 (Mar 3, 1959):</strong> All stages nominal. Escape velocity achieved. Lunar flyby at 60,000 km. Heliocentric orbit. 82 hours of communication across 655,300 km. The first American spacecraft to leave Earth forever.</p>
+      <p>Five months. Five missions. An explosion, a near miss, a regression, a heartbreaker, and a breakthrough. The learning curve of a species.</p>
+    </div>
+
+    <div class="card">
+      <h2>Still Out There</h2>
+      <p>Pioneer 4 is still orbiting the Sun. Its batteries died in April 1959. Its transmitter has been silent for more than six decades. But its 6.08 kg aluminum cone continues on its heliocentric orbit &mdash; approximately 1.22 AU semi-major axis, 395-day period, between Earth and Mars. It has completed roughly 62 orbits since launch. In the absence of atmospheric drag, significant perturbations, or collision, it will continue orbiting for millions of years. It is a permanent solar system object &mdash; as permanent as any asteroid, any comet, any grain of dust. The first American thing to become a feature of the solar system rather than a visitor to it.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.4/index.html">&larr; v1.4 Pioneer 3</a>
+      <a href="../1.6/index.html">v1.6 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Pseudotsuga menziesii (Douglas-fir)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">100m</div>
+          <div class="stat-label">Height</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4m</div>
+          <div class="stat-label">Diameter</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1000+</div>
+          <div class="stat-label">Lifespan (yrs)</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Region</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">THE Pacific Northwest tree. Not a true fir &mdash; it belongs to its own genus, Pseudotsuga (&ldquo;false hemlock&rdquo;). The largest specimens reach 100 m (330 ft) in height and 4+ m (13+ ft) in diameter. Old-growth Douglas-firs exceeding 500 years are the structural foundation of the PNW temperate rainforest, supporting hundreds of associated species from epiphytic lichens to nesting spotted owls. Their thick bark (up to 30 cm) makes mature trees fire-resistant. Their fallen logs become nurse logs that sustain the next generation of forest. They store more carbon per hectare than any tropical rainforest. Named for David Douglas, who introduced them to European botany in 1826, but the Coast Salish peoples knew them for millennia.</p>
+    </div>
+
+    <div class="organism-card" style="border-color: var(--gold); background: rgba(74,52,32,0.3);">
+      <h3 style="color: var(--gold);">Bird Connection</h3>
+      <p class="sci-name" style="color: var(--gold-light);">Sitta canadensis (Red-breasted Nuthatch)</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Degree 5. A small, compact bird that spirals headfirst down Douglas-fir trunks &mdash; the only direction most birds cannot go. Its nasal &ldquo;yank-yank-yank&rdquo; call is the tin horn of the conifer forest, pitched to cut through canopy clutter. Nests in cavities excavated in dead wood, applying conifer resin around the entrance to deter predators. The Nuthatch sees the tree from an angle no other bird does: top-down, headfirst, reading the bark for insects that upward-climbing birds miss. Pioneer 4 left Earth headfirst and never looked back.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Alexander Graham Bell</h3>
+      <p style="font-size:0.85rem;">March 3, 1847 &mdash; August 2, 1922</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Born on the exact day Pioneer 4 launched, 112 years apart. Invented the telephone &mdash; communication across distance. Pioneer 4 communicated across 655,300 km with 180 milliwatts. Bell proved that the human voice could travel through wire. Pioneer 4 proved that a spacecraft&rsquo;s data could travel through vacuum across interplanetary distances. Both solved the same problem: encoding information into a signal, transmitting it through a medium, and decoding it at the far end. &ldquo;Mr. Watson, come here. I want to see you.&rdquo; Pioneer 4 said: &ldquo;I am leaving. Here is what I found on the way out.&rdquo;</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (knowledge-nodes.json)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1959-013A">NSSDC &mdash; Pioneer 4</a>
+      <a href="https://ssd.jpl.nasa.gov/">JPL Small-Body Database</a>
+      <a href="https://ntrs.nasa.gov/search?q=pioneer%204">NASA NTRS &mdash; Pioneer 4 Reports</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS Ephemeris</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://www.fs.usda.gov/database/feis/plants/tree/psemen/all.html">USDA FEIS &mdash; Douglas-fir</a>
+      <a href="https://andrewsforest.oregonstate.edu/data">OSU Andrews Forest Data</a>
+      <a href="https://images.nasa.gov/search?q=pioneer+4&media=image">NASA Image Library</a>
+      <a href="https://www.space-track.org/">Space-Track TLE Archive</a>
+      <a href="https://www.fia.fs.usda.gov/">USDA Forest Inventory (FIA)</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--light-canopy);">"The canopy is not the destination. It is where the sky begins."</p>
+</footer>
+
+</body>
+</html>
