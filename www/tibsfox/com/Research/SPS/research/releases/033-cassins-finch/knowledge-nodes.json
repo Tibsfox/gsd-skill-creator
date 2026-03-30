@@ -1,0 +1,233 @@
+{
+  "degree": 33,
+  "species": "Cassin's Finch",
+  "scientific_name": "Haemorhous cassinii",
+  "slug": "033-cassins-finch",
+  "sound_type": "rich warbling song male display",
+  "energy": 4,
+  "ecosystem": "mountain conifer",
+  "season": "summer",
+  "family": "Fringillidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeding habitat is east of the Cascade crest in open montane conifer forests at 3,000-10,000 feet elevation. Ponderosa pine, Douglas-fir, lodgepole pine, subalpine fir. The species does not breed in Puget Sound lowlands. The coordinates represent the project anchor; the bird's true home is the high country of the eastern Cascades, Okanogan Highlands, and Blue Mountains."
+  },
+  "taxonomy_note": {
+    "description": "Cassin's Finch is the SECOND Fringillidae in the engine, 21 degrees after Pine Siskin (degree 12). Different genus: Haemorhous vs. Spinus. Named for John Cassin (1813-1869), curator at the Academy of Natural Sciences of Philadelphia, who described 194 new bird species. Spencer F. Baird named the finch in 1854 from Pacific Railroad Survey specimens. Reclassified from Carpodacus to Haemorhous in 2012 based on molecular phylogenetics showing the three North American 'rosefinches' form a separate clade from Old World Carpodacus.",
+    "current_family": "Fringillidae",
+    "new_family": false,
+    "family_count_in_engine": 17,
+    "fringillidae_count_in_engine": 2,
+    "name_etymology": "Haemorhous = Greek haima (blood) + orrhos (rump) = 'blood-rumped,' referencing rosy male plumage. Cassinii = honoring John Cassin. Full translation: 'Cassin's blood-rumped [finch].' Compare Pine Siskin: Spinus pinus = 'spine of the pine.' Two naming philosophies in the same family: ecological (siskin) vs. honorific (Cassin's Finch).",
+    "genus_note": "Haemorhous is new to the engine. The genus contains three species (Cassin's Finch, Purple Finch, House Finch) -- the 'Haemorhous trio,' one of birding's most confusing ID challenges. All three occur in the PNW with different habitat preferences: Cassin's = montane, Purple = moist forest, House = urban/suburban.",
+    "haemorhous_trio": {
+      "cassins_finch": "H. cassinii -- bright red peaked crown, crisp fine streaks, longer straighter bill, mountain conifer, most complex song with mimicry",
+      "purple_finch": "H. purpureus -- vivid rosy-red wash, diffuse color, stout curved bill, moist conifer/mixed forest, rich song without mimicry",
+      "house_finch": "H. mexicanus -- orange-red concentrated on face/throat, blurry broad streaks, short curved bill, urban/suburban, simpler variable song"
+    },
+    "fringillidae_pair": {
+      "degree_12": "Spinus pinus (Pine Siskin) -- E=1, irruptive, ascending zhreee, conifer seed crop, electronic buzzy sound, nomadic",
+      "degree_33": "Haemorhous cassinii (Cassin's Finch) -- E=4, summer, rich warbling song with mimicry, mountain conifer, melodic complex sound, territorial",
+      "status": "OPEN (2 of many Fringillidae -- family has ~228 species worldwide, largest songbird family)",
+      "structure": "Different genera, maximally different energy (E=1 vs. E=4), opposite seasonal strategies (irruptive vs. summer breeding), opposite vocal strategies (minimal electronic signal vs. maximal melodic display with mimicry). Both conifer-dependent."
+    },
+    "reclassification_note": "Formerly Carpodacus cassinii until 2012 AOU reclassification. Molecular phylogenetics (Zuccon et al. 2012) showed North American 'rosefinches' not closely related to Old World Carpodacus. All three moved to resurrected genus Haemorhous (Swainson 1837). The reclassification is a reminder that superficial similarity (rosy plumage) does not indicate close relationship. Convergent evolution in coloring misled taxonomists for over a century."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-8,000",
+    "peak_energy_band_hz": "2,500-6,000",
+    "song_duration_s": "5-20 (sometimes 30+)",
+    "syllable_rate_per_second": "8-15 in dense passages",
+    "note_structure": "Complex, variable syllable types -- warbles, trills, chips, buzzes, and mimicked phrases arranged in non-repeating sequences. No rigid syntax. Individual males have unique repertoires. Mimicked material embedded within warble.",
+    "note_types": "THREE primary categories: (1) DISPLAY SONG -- the long, rollicking warble delivered from high perch, includes mimicry. (2) FLIGHT SONG -- display song delivered during fluttering aerial display. (3) TIDILIP CALL -- distinctive liquid two-to-three-syllable contact call (tee-dee-yip / giddy-up), diagnostic for species ID.",
+    "phrase_structure": "Variable and improvisatory. Each song bout contains warble sequences, trill passages, mimicked phrases from other species, and species-typical syllables, arranged in non-fixed order. The song changes between bouts.",
+    "timbre": "Warm, rich, melodic. Clearly tonal with harmonic structure. Rolling and tumbling quality from rapid pitch alternation. Qualitatively different from sibilant waxwing territory (degrees 31-32) and from buzzy siskin territory (degree 12). The warmest, most conventionally 'musical' finch song in the engine.",
+    "amplitude": "Moderate to strong. Projects well from high conifer perches across mountain clearings. E=4 reflects the sustained, carrying quality of a territorial display song -- not the collective volume of a flock (like E=5 waxwing) but the individual power of a solo singer.",
+    "mimicry": "DEFINING CHARACTERISTIC. Males regularly incorporate imitations of other species: Red Crossbill flight calls, Western Tanager warble phrases, American Robin caroling, Cassin's Vireo paired phrases, Mountain Chickadee fee-bee, Pygmy Nuthatch yapping, various warblers. Each male's mimicry repertoire reflects his acoustic environment during development -- a record of the mountain conifer bird community.",
+    "context": "Male territorial and mate-attraction display. Sung from exposed high perches (conifer tops, dead snags) during breeding season (May-July). Flight song variant during courtship. The richest, most complex vocal display in the engine since the Pacific Wren's cascade at degree 1.",
+    "key_property": "THE CADENZA -- the 34th acoustic element. A virtuosic display passage that incorporates borrowed material from other species, delivered from a prominent position by a solo performer. The engine moves from collective sibilant texture (waxwing flock chorus) to individual melodic virtuosity (Cassin's Finch solo display). The cadenza is the most individually complex sound in the engine."
+  },
+  "mountain_conifer_ecology": {
+    "definition": "Dry, open coniferous forests of the western mountains at 3,000-10,000 feet elevation. Characterized by widely spaced trees, needle litter, cold winters, and continental (rain-shadow) climate. First explicitly montane ecosystem in the engine.",
+    "key_tree_species": [
+      "Ponderosa pine (Pinus ponderosa) -- the classic Cassin's Finch habitat, open park-like stands",
+      "Douglas-fir (Pseudotsuga menziesii) -- mid-elevation, important for nesting and foraging",
+      "Lodgepole pine (Pinus contorta) -- higher-elevation Rocky Mountain and Cascade forests",
+      "Subalpine fir (Abies lasiocarpa) -- upper-elevation near treeline",
+      "Engelmann spruce (Picea engelmannii) -- upper-elevation, often mixed with subalpine fir"
+    ],
+    "acoustic_properties": "Low ambient noise, open structure with long sight/sound lines, low breeding bird density (less acoustic competition), characteristic forest reverberation. Complex songs carry well. The quiet mountain environment rewards vocal complexity.",
+    "altitudinal_migration": "Cassin's Finch breeds high and winters lower -- partial altitudinal migrant. Not irruptive like Pine Siskin. The 'summer' designation reflects breeding ecology at altitude.",
+    "significance": "First montane ecosystem in the engine. Adds altitude as an ecological dimension. Previous ecosystems were lowland or non-altitude-specific. Mountain conifer is fundamentally different from the wet, dense forests of western Washington slopes."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The cadenza -- the 34th acoustic element: a virtuosic solo display that incorporates borrowed material from other species, the engine's first mimic, the most individually complex vocal performance since degree 1",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/cadenza/",
+      "examples": [
+        "Cassin's Finch: 5-20+ second rolling warble incorporating mimicked phrases from Red Crossbill, Western Tanager, American Robin, Cassin's Vireo, Mountain Chickadee, and others.",
+        "The cadenza in classical music: a virtuosic solo passage where the performer plays freely, often quoting themes from the preceding movement.",
+        "The progression: whisper (31) -> buzz (32) -> cadenza (33). From simplest sibilant signal, through collective amplification, to individual virtuosity with quotation.",
+        "The engine's first mimic. Previous species sang their own material. The Cassin's Finch sings everyone else's material too.",
+        "Each male's mimicry repertoire is a record of his acoustic environment -- the cadenza is literally the mountain conifer soundscape reassembled into a single performance."
+      ],
+      "music_theory_parallel": "In a concerto, the cadenza is the moment where the soloist steps forward and the orchestra falls silent. The soloist demonstrates mastery by quoting themes from the movement, adding virtuosic embellishment, and revealing capabilities that the orchestral tutti could not showcase. The Cassin's Finch is the soloist of the mountain conifer ecosystem: from a prominent perch, it sings a cadenza that quotes the Red Crossbill's flight call (a theme from the mountain), the tanager's hoarse warble (a theme from the canopy), the robin's caroling (a theme from the meadow edge). The cadenza is the soloist proving it has listened to the entire orchestra."
+    },
+    {
+      "concept": "Fringillidae returns -- the second true finch, 21 degrees after the first, same family but maximally different in energy, complexity, and seasonal strategy, the family now spans E=1 to E=4",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/fringillidae-pair/",
+      "examples": [
+        "Pine Siskin (degree 12): Spinus pinus, E=1, irruptive, ascending zhreee, electronic buzzy sweep, nomadic, conifer seed crop.",
+        "Cassin's Finch (degree 33): Haemorhous cassinii, E=4, summer, rich warbling with mimicry, melodic complex, territorial, mountain conifer.",
+        "Same family, different genera. Energy gap: E=1 to E=4 (three energy levels apart). Complexity gap: minimal electronic signal to maximal melodic display.",
+        "Both conifer-dependent. Siskin extracts seeds with tweezer bill. Cassin's takes seeds from open cones with stouter finch bill.",
+        "Fringillidae is the largest songbird family (~228 species worldwide). Two species in the engine is barely scratching the surface."
+      ],
+      "music_theory_parallel": "A symphony orchestra's string section includes both the piccolo-scale violin and the furniture-scale double bass. Same family of instruments, maximally different in register, volume, and role. The Pine Siskin is the violin -- small, high, quick, threading a thin line through the texture. The Cassin's Finch is the cello -- warm, midrange, complex, carrying the melody with richness and depth. Same Fringillidae. Different register, different role, different presence."
+    },
+    {
+      "concept": "Mountain conifer -- the engine's first explicitly montane ecosystem, introducing altitude as an ecological dimension, dry open conifer forests at 3,000-10,000 feet",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/mountain-conifer/",
+      "examples": [
+        "Previous ecosystems were lowland or non-altitude-specific: estuary, old-growth, mixed woodland, riparian, conifer canopy, forest edge, open sky, farmland, fruiting trees, berry stands.",
+        "Mountain conifer specifies: dry, open, continental climate, widely spaced ponderosa/Douglas-fir/lodgepole, 3,000-10,000 feet elevation.",
+        "The acoustic environment: low ambient noise, long sight/sound lines, low breeding bird density. Complex songs carry well. The quiet mountain rewards vocal complexity.",
+        "Fundamentally different from western Washington's wet, dense, moss-draped forests. Eastern Cascades rain-shadow ecology.",
+        "Altitude introduces new ecological constraints: shorter growing season, cold winters, altitudinal migration, fire-adapted tree species."
+      ],
+      "music_theory_parallel": "The concert venue shapes the music. A cathedral's reverberation rewards slow, sustained tones. A jazz club's intimacy rewards rapid, intricate improvisation. The mountain conifer forest is a concert hall with exceptional acoustics: low noise floor, minimal competing performers, clear sightlines. The Cassin's Finch's complex cadenza is optimized for this venue -- a virtuosic performance that would be masked in a dense lowland forest with dozens of competing singers, but which carries clearly through the open mountain pines."
+    },
+    {
+      "concept": "E=4 returns after the single-degree E=5 spike -- the spike was an accent, not a new plateau, the engine demonstrates dynamic flexibility, E=4 after E=5 is a choice not a default",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e5-spike/",
+      "examples": [
+        "Energy arc: E=4 plateau (21-31) -> E=5 spike (32) -> E=4 return (33). A sforzando accent, not a dynamic level change.",
+        "The E=4 at degree 33 is different from E=4 at degree 31. Before, E=4 was the ceiling (E=5 didn't exist). Now, E=4 is chosen with E=5 available.",
+        "Musical parallel: mezzo-forte -> fortissimo -> mezzo-forte. The fortissimo accent makes the surrounding mezzo-forte sound different.",
+        "The engine has demonstrated it can spike and return. Energy is not monotonically increasing. The dynamic palette is flexible.",
+        "E=4 now has 12 degrees (35.3% of engine). E=5 has 1 (2.9%). E=5 remains rare -- a fortissimo accent in a predominantly mezzo-forte piece."
+      ],
+      "music_theory_parallel": "A sforzando (sf or sfz) is a sudden, sharp accent -- a brief spike of volume that immediately returns to the prevailing dynamic level. The Bohemian Waxwing at E=5 was a sforzando. The Cassin's Finch at E=4 is the return to tempo. The sforzando changed the character of the passage without changing the overall dynamic. After a sforzando, the listener hears the mezzo-forte differently -- it is now mezzo-forte-after-fortissimo, which is lighter and more spacious than mezzo-forte-that-has-never-known-fortissimo."
+    },
+    {
+      "concept": "The Haemorhous trio -- three confusingly similar species separated by microhabitat, bill structure, plumage detail, and song complexity, the identification challenge as a lesson in close observation",
+      "level": "advanced",
+      "department": "ecology/speciation",
+      "college_path": ".college/ecology/speciation/haemorhous-trio/",
+      "examples": [
+        "Cassin's Finch: peaked red crown, crisp fine streaks, longer straight bill, mountain conifer, most complex song with mimicry.",
+        "Purple Finch: rosy wash over entire head, diffuse color, stout curved bill, moist forest, rich song without mimicry.",
+        "House Finch: orange-red on face/throat only, blurry broad streaks, short curved bill, urban/suburban, simpler song.",
+        "All three overlap in PNW transitional zones. Female/immature identification requires attention to streak pattern, bill shape, undertail coverts.",
+        "The trio is a microhabitat partitioning case study: same genus, same region, different elevations and moisture preferences."
+      ],
+      "music_theory_parallel": "Three variations on a theme that look nearly identical on the page but sound completely different in performance. The theme is 'North American rosefinch' -- same genus, same body plan, same rosy coloring. The variations are the habitat, the bill, and the song. Cassin's Finch is the virtuoso performer (mountain stage, complex cadenza). Purple Finch is the lyric singer (forest stage, rich melody). House Finch is the busker (urban stage, adaptable tune). Same theme. Three performances so different that the audience argues about whether it was the same piece."
+    },
+    {
+      "concept": "Mimicry as acoustic ecology -- the Cassin's Finch song as a composite record of the mountain conifer bird community, the singer as environmental sampler, borrowed material as honest signal",
+      "level": "advanced",
+      "department": "music-theory/composition",
+      "college_path": ".college/music/theory/composition/mimicry/",
+      "examples": [
+        "The Cassin's Finch mimics Red Crossbill, Western Tanager, American Robin, Cassin's Vireo, Mountain Chickadee, Pygmy Nuthatch, and various warblers.",
+        "Each male's mimicry repertoire reflects his acoustic environment during development -- a learned, place-specific record.",
+        "A Cassin's Finch in the eastern Cascades mimics different species than one in the southern Rockies, because the bird communities differ.",
+        "Hypotheses for function: repertoire size signaling, territory defense through acoustic deception, honest signal of cognitive ability, or no adaptive function.",
+        "The cadenza quotes the orchestra: the finch's song contains phrases from the species it lives among, reassembled into a virtuosic solo."
+      ],
+      "music_theory_parallel": "Jazz musicians quote other musicians' solos. A saxophonist who drops a Charlie Parker lick into an original improvisation is demonstrating listening, memory, technical facility, and cultural literacy simultaneously. The Cassin's Finch does the same thing: dropping a Red Crossbill call into a warble demonstrates that the bird has listened to its acoustic environment, stored the pattern, and can reproduce it in a new context. The quotation is both tribute and proof of competence. The jazz parallel is exact: learned material, incorporated into improvisation, demonstrating mastery of the surrounding musical tradition."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-012",
+      "title": "Pine Siskin (Degree 12)",
+      "connection": "FRINGILLIDAE REUNION. Second true finch, 21 degrees after the first. Spinus (E=1, irruptive, electronic zhreee) vs. Haemorhous (E=4, summer, melodic cadenza with mimicry). Same family, maximally different strategies. Both conifer-dependent. Family now spans E=1 to E=4."
+    },
+    {
+      "project": "SPS-032",
+      "title": "Bohemian Waxwing (Degree 32)",
+      "connection": "ENERGY DESCENT. E=5 spike (32) returns to E=4 (33). The spike was a sforzando accent, not a new plateau. Different family (Bombycillidae -> Fringillidae), different ecosystem (berry stands -> mountain conifer), different sound philosophy (collective buzz -> solo cadenza)."
+    },
+    {
+      "project": "SPS-031",
+      "title": "Cedar Waxwing (Degree 31)",
+      "connection": "ENERGY BRACKETING. E=4 (whisper) -> E=5 (buzz) -> E=4 (cadenza). Three degrees, two families, one energy bracket. The Cassin's Finch returns to the energy level the Cedar Waxwing held, but after the E=5 spike the context has changed."
+    },
+    {
+      "project": "SPS-023",
+      "title": "Black-headed Grosbeak (Degree 23)",
+      "connection": "WARBLE EXPANSION. Both melodic warblers. Grosbeak = smooth robin-like warble (E=4, degree 23). Cassin's Finch = rich warble with mimicry (E=4, degree 33). The engine's warble vocabulary grows: smooth (23), hoarse (24), liquid (30), mimicry-laden (33)."
+    },
+    {
+      "project": "SPS-024",
+      "title": "Western Tanager (Degree 24)",
+      "connection": "MOUNTAIN CONIFER COMPANION + MIMICRY TARGET. Both breed in montane conifer forests at similar elevations. The Cassin's Finch mimics the tanager's hoarse warble. Degree 33 quotes degree 24."
+    },
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "MIMICRY TARGET. The Cassin's Finch incorporates robin caroling phrases into its warble. Degree 33 quotes degree 25. The robin's familiarity becomes raw material for the finch's cadenza."
+    },
+    {
+      "project": "SPS-001",
+      "title": "Pacific Wren (Degree 1)",
+      "connection": "COMPLEXITY BOOKEND. The Pacific Wren's cascade (degree 1) was the engine's first complex song. The Cassin's Finch's cadenza (degree 33) is the most complex since. Thirty-two degrees between the two most elaborate vocalists."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Cassin's Finch documented as uncommon breeder in eastern Cascades montane conifer forests. Part of the montane finch community with Red Crossbill, Evening Grosbeak, and Pine Siskin."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Mountain conifer ecology. Ponderosa pine forests, fire-adapted ecosystems, altitudinal zonation, rain-shadow climate of the eastern Cascades. Fire suppression and climate change as habitat threats."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 32,
+    "total_entries": 34,
+    "families_represented": 17,
+    "largest_families": {
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Parulidae": 5,
+      "Fringillidae": 2,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Cardinalidae": 2,
+      "Picidae": 2
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33],
+      "E5": [32]
+    },
+    "energy_note": "E=4 returns after the single-degree E=5 spike. E=5 was a sforzando accent. E=4 now has 12 degrees (35.3%), regaining the lead. The energy palette remains 1-5 but E=5 is rare (1 degree, 2.9%).",
+    "passeriformes_streak": "11 consecutive (23-33) -- CRITICALLY MUST BREAK. Extended by one more degree. URGENT.",
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive"],
+    "new_ecosystem": "mountain conifer -- FIRST EXPLICITLY MONTANE HABITAT in the engine. Altitude as ecological dimension.",
+    "mimicry_note": "FIRST MIMIC in the engine. Cassin's Finch incorporates phrases from other species into its song. Cross-references within engine: mimics Western Tanager (24), American Robin (25). A new acoustic capability.",
+    "acoustic_element_34": "THE CADENZA -- virtuosic solo display with borrowed material. The most individually complex sound in the engine.",
+    "critical_gaps": [
+      "No marine/shoreline species in 33 degrees of 'The Sound of Puget Sound' -- 33 DEGREES OVERDUE -- CRISIS LEVEL",
+      "Eleven consecutive Passeriformes (23-33) -- CRITICALLY MUST BREAK -- UNPRECEDENTED STREAK",
+      "No corvid (Steller's Jay, crow, raven) -- 33 degrees",
+      "No raptor (Accipitridae, Falconidae) -- 33 degrees",
+      "No nocturnal species since degree 4 (29 degrees ago)"
+    ]
+  }
+}

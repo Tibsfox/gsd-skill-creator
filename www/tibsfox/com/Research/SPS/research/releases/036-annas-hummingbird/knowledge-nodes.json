@@ -1,0 +1,269 @@
+{
+  "degree": 36,
+  "species": "Anna's Hummingbird",
+  "scientific_name": "Calypte anna",
+  "slug": "036-annas-hummingbird",
+  "sound_type": "metallic chip + dive display buzz",
+  "energy": 5,
+  "ecosystem": "urban/coastal",
+  "season": "resident",
+  "family": "Trochilidae",
+  "order": "Apodiformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; year-round resident throughout western Washington and Oregon, the only hummingbird that overwinters in the Pacific Northwest. Present in Seattle neighborhoods twelve months a year, from January ice storms to August heat. The coordinates mark the urban gardens, backyard feeders, and ornamental plantings where Anna's Hummingbirds have established permanent territories. Arrived in Seattle approximately 1964, now one of the most commonly seen birds in residential areas throughout the Puget Sound lowlands."
+  },
+  "taxonomy_note": {
+    "description": "Anna's Hummingbird is the SECOND Trochilidae in the engine (after Rufous Hummingbird at degree 35). Same family, different genus (Calypte vs. Selasphorus). Trochilidae now has 2 degrees, joining the seven multi-degree families. The hummingbird pair (35-36) explores migrant vs. resident strategies within a single family. Anna's introduces the first explicitly urban ecosystem, year-round residence, and the fastest vertebrate dive (by body-length metric).",
+    "current_family": "Trochilidae",
+    "new_family": false,
+    "family_count_in_engine": 18,
+    "trochilidae_count_in_engine": 2,
+    "name_etymology": "Calypte = Ancient Greek kaluptre (woman's veil, headdress), from kalupto (to cover). Named by John Gould in 1856 for hummingbirds whose males have 'not only the throat, but the entire head as glitteringly resplendent as if they had been dipped in molten metal.' Anna = Anna de Belle Massena, Duchess of Rivoli, wife of ornithologist and collector Francois Victor Massena, 3rd Duke of Rivoli. Described by Rene Lesson in 1829 from a California specimen. Full translation: 'Anna's veiled one' -- a person's name and a reference to the jeweled headdress of iridescent plumage.",
+    "genus_note": "Calypte contains only 2 species: Anna's Hummingbird (C. anna) and Costa's Hummingbird (C. costae). Both are relatively sedentary compared to Selasphorus, with males possessing elaborate iridescent crowns covering the entire head. Calypte males sing complex, learned songs -- unusual for hummingbirds. The genus contrast with Selasphorus (flame-bearers, migrants, non-singers) maps the ecological contrast of the hummingbird pair.",
+    "order_note": "Apodiformes continues from degree 35. Second Apodiformes entry. Same order, different genus. The order now has 2 degrees, matching Piciformes (21-22). Strigiformes still has only 1 degree (4).",
+    "hummingbird_pair": "Rufous (35, Selasphorus, migrant, summer, thrum, Near Threatened, declining 65%) + Anna's (36, Calypte, resident, year-round, sonic boom, Least Concern, increasing 2%/yr). Same family, opposite strategies. The engine's most instructive species pair -- two hummingbirds that share flight mechanics but differ on temporal strategy, ecosystem, song, conservation, and range trajectory.",
+    "pnw_hummingbirds": [
+      "Rufous Hummingbird (Selasphorus rufus) -- common summer breeder, DEGREE 35",
+      "Anna's Hummingbird (Calypte anna) -- year-round resident, DEGREE 36",
+      "Calliope Hummingbird (Selasphorus calliope) -- summer breeder in mountain meadows, smallest North American bird",
+      "Black-chinned Hummingbird (Archilochus alexandri) -- summer breeder east of Cascades"
+    ]
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "4,000 (dive chirp fundamental, ~C8); 6,000-8,000 (metallic chip call); variable (complex song, multi-frequency)",
+    "peak_energy_band_hz": "4,000-8,000 (dive chirp harmonics and chip call); 3,000-10,000 (song range)",
+    "song_duration_s": "10+ seconds per song bout; 0.06 (dive chirp, ~60 ms tail spread); instantaneous (chip call)",
+    "dive_speed_m_per_s": "27.3 (maximum during courtship dive)",
+    "dive_speed_body_lengths_per_s": "385 (highest known length-specific velocity of any vertebrate)",
+    "dive_height_m": "~40 (131 feet)",
+    "dive_g_force": "~9 g at pullout",
+    "dive_duration_s": "~12 (full display sequence)",
+    "note_structure": "THREE distinct sound types: (1) Metallic chip -- single sharp vocal call (tsik), ~6-8 kHz, contact and aggression. (2) Complex song -- learned, culturally transmitted, 10+ seconds, thin squeaky buzzy phrases. (3) Dive chirp (Cdive) -- mechanical, tail-feather-generated (R5), ~4 kHz fundamental, produced at 27.3 m/s by split-second tail spread. Loudest sound relative to body size.",
+    "note_types": "THREE sound categories: (1) METALLIC CHIP -- vocal (syrinx), sharp single note, versatile context (contact, alarm, aggression). (2) COMPLEX SONG -- vocal (syrinx), learned by imitation, crystallizes by 11 months, geographic dialects, 10+ second bouts, one of very few hummingbirds with learned song. (3) DIVE CHIRP -- mechanical (tail feather R5 vibrating like a clarinet reed), ~4 kHz, ~60 ms duration, explosive, louder than vocal capacity.",
+    "phrase_structure": "Chip: single discrete notes, repeated at irregular intervals. Song: extended bouts of 10+ seconds, thin squeaky buzzes and chirps in learned sequence, delivered from a conspicuous perch. Dive chirp: single explosive event at the nadir of a 40-meter vertical dive, synchronized with maximum speed and gorget flash.",
+    "timbre": "Chip: hard, metallic, percussive quality. Distinctly sharper and cleaner than Rufous Hummingbird's buzzy chitter. Song: thin, squeaky, scratchy, with buzzy and chirpy elements interspersed. Not melodious in the passerine sense but structurally complex. Dive chirp: explosive, tonal, piercing -- louder and more focused than the vocal song.",
+    "amplitude": "E=5 -- the dive chirp is the loudest sound in the engine relative to the body that produces it. The song is conspicuous but not especially loud. The chip is sharp and carries well. The E=5 reflects the dive's acoustic extremity: 385 body lengths per second, 9 g pullout, 60 ms of tail-feather sonation. Individual explosive intensity.",
+    "mechanical_sound_significance": "SECOND MECHANICAL SPECIES in the engine (after Rufous at 35). But Anna's dive chirp is the MOST STUDIED and MOST EXTREME aeromechanical sound: Clark (2008) identified the specific feather (R5), Clark (2009) measured the dive speed (385 BL/s, fastest vertebrate). The dive chirp mechanism is reed-like vibration -- the trailing vane of R5 flutters in airflow like a clarinet reed, producing a tonal chirp at ~4 kHz. This is the most precisely characterized mechanical sound in any bird.",
+    "song_learning_significance": "FIRST NON-PASSERINE VOCAL LEARNER in the engine. Anna's Hummingbird males learn their songs through imitation (subsong -> plastic song -> crystallized song, 4-11 months). Regional dialects exist. Males have enlarged HVC (higher vocal center) driven by testosterone. Represents independent convergent evolution of vocal learning -- same complex behavior as songbirds, evolved separately in Trochilidae. The Rufous Hummingbird (degree 35) does NOT learn its songs.",
+    "context": "Chip: multi-purpose contact/alarm/aggression call, given by both sexes. Song: male display from conspicuous perch, especially during breeding season (begins November in PNW). Dive chirp: male courtship and territorial display, directed at females or intruders, 40-meter climb followed by near-vertical plunge with explosive tail-feather sonation at nadir.",
+    "key_property": "THE SONIC BOOM -- the 37th acoustic element. A brief, explosive, mechanically generated sound produced by tail feathers (R5) vibrating like a clarinet reed at extreme airflow speed during a 40-meter courtship dive at 385 body lengths per second. The loudest sound relative to body size. After the thrum (continuous flight hum), the sonic boom is the aeromechanical category pushed to its maximum: instantaneous, explosive, concentrated. The thrum says 'I am here.' The sonic boom says 'LOOK AT ME.'"
+  },
+  "urban_coastal_ecology": {
+    "definition": "An urban/coastal ecosystem -- habitat defined by human modification (residential gardens, ornamental plantings, sugar-water feeders, urban parks) in the maritime-influenced coastal lowlands. The engine's FIRST explicitly urban ecosystem. Distinguished from all previous ecosystems by its dependence on human activity: the bird expanded into this habitat because humans planted flowers and hung feeders.",
+    "urban_features": [
+      "Residential neighborhoods with ornamental plantings",
+      "Sugar-water hummingbird feeders maintained year-round",
+      "Urban parks with exotic flowering shrubs",
+      "Commercial landscapes with ornamental vegetation",
+      "Nest sites on human structures (porch lights, wind chimes, hanging baskets)"
+    ],
+    "coastal_features": [
+      "Maritime-influenced climate zone west of Cascades",
+      "Puget Sound corridor lowlands",
+      "Mild winter temperatures buffered by oceanic influence",
+      "Urban heat islands providing microclimates"
+    ],
+    "key_plants_urban_pnw": [
+      "Mahonia (Oregon grape) -- native, winter-blooming",
+      "Rosemary -- non-native, winter-blooming",
+      "Grevillea -- non-native, winter-blooming",
+      "Winter jasmine -- non-native, winter-blooming",
+      "Camellia -- non-native, common ornamental",
+      "Red-flowering currant (Ribes sanguineum) -- native, early spring",
+      "Various garden flowers and ornamental shrubs"
+    ],
+    "range_expansion": "Historically restricted to California and Baja California. Expanded northward to Oregon, Washington, and British Columbia beginning in the 1960s. First Seattle records ~1964. Now year-round from Baja to BC, with regular occurrence in SE Alaska. Range expanded ~900 miles northward in 60 years, driven by ornamental plantings, feeders, climate moderation, and urban heat islands.",
+    "significance": "First explicitly URBAN ecosystem in the engine. First ecosystem defined by HUMAN MODIFICATION rather than natural features. The bird did not evolve in cities -- it expanded into them. The urban/coastal ecosystem exists because humans created it. This makes Anna's Hummingbird the engine's first species whose PNW presence is contingent on human activity."
+  },
+  "year_round_residence": {
+    "definition": "The northernmost year-round resident hummingbird in the world. Present in Seattle and the PNW twelve months a year. Every other PNW hummingbird migrates to Mexico for winter. Anna's stays, endures, enters nightly torpor, and survives freezing temperatures through metabolic shutdown.",
+    "winter_torpor": {
+      "frequency": "Nightly during winter, routine not exceptional",
+      "body_temperature_drop": "~40C to as low as 8.8C (104F to 48F)",
+      "heart_rate_drop": "~1,200 bpm to ~50 bpm",
+      "breathing_drop": "245 breaths/min to <10, with multi-minute suspensions",
+      "metabolic_reduction": "Up to 95%, consuming 50x less energy than when awake",
+      "daily_energy_cycle": "Forage during day, gain up to 16% body weight in fat, enter torpor at nightfall, burn stored fat overnight, warm up at dawn (20-30 min), resume foraging immediately",
+      "risk": "Insufficient fat reserves = death overnight. Inability to forage after waking = death. Prolonged cold snaps = lethal. Ice-coated feeders = lethal."
+    },
+    "significance": "Year-round residence for a hummingbird in the PNW is extraordinary. A 4-gram bird with the highest metabolic rate by mass of any bird, surviving freezing Seattle winters through nightly metabolic shutdown. The Rufous Hummingbird's solution to winter is migration. Anna's solution is endurance. Same thermodynamic problem, opposite answers."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "population_trend": "Increasing (~2% per year since 1966)",
+    "population_size": "~9.6 million mature individuals",
+    "range_trend": "Expanding northward",
+    "contrast_with_rufous": "OPPOSITE trajectories. Rufous: Near Threatened, 65% decline, range contracting, natural habitat degrading. Anna's: Least Concern, population increasing, range expanding, urban habitat growing. Same family, opposite fates. The migrant is losing; the resident is winning. The specialist is declining; the generalist is thriving.",
+    "contingency_note": "Anna's success depends on human activity: feeders, ornamental plants, urban microclimates. A shift in human behavior (fewer feeders, different plantings) or an extreme winter event could reverse the trajectory. The expansion is real but contingent."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The sonic boom -- the 37th acoustic element: a brief, explosive, mechanically generated sound produced by tail feathers (R5) vibrating like a clarinet reed at the bottom of a 40-meter dive at 385 body lengths per second (the fastest vertebrate dive by body-length metric). After the thrum (continuous mechanical hum), the sonic boom is the aeromechanical category pushed to its extreme: instantaneous, explosive, concentrated. The thrum is the hum of the engine. The sonic boom is the afterburner.",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/sonic-boom/",
+      "examples": [
+        "Anna's Hummingbird dive chirp: ~4 kHz fundamental (C8), produced by R5 tail feather vibrating like a clarinet reed at 27.3 m/s airflow. 60 ms duration. Louder than the bird's vocal capacity.",
+        "The progression: whisper (31) -> buzz (32) -> cadenza (33) -> dialect (34) -> thrum (35) -> sonic boom (36). Six consecutive degrees, six fundamentally different acoustic strategies. The sonic boom completes the aeromechanical pair opened by the thrum.",
+        "Comparison: thrum = continuous (wingbeat, 52-62 Hz, always-on). Sonic boom = instantaneous (dive chirp, 4 kHz, 60 ms). One is the baseline hum. The other is the peak event. Together they define the full range of mechanical sound production in hummingbirds.",
+        "385 body lengths per second: nearly 2x peregrine falcon stoop speed by the same metric, ~10x faster than a fighter jet relative to fuselage length. 9 g pullout at the nadir. The fastest and most violent acoustic display in the vertebrate world.",
+        "Clark (2008, 2009): the most precise characterization of any mechanical sound in birds. Specific feather identified (R5), mechanism confirmed (reed-like vibration in wind tunnel), speed and g-force measured."
+      ],
+      "music_theory_parallel": "If the thrum is a bass drone -- a continuous note from a hurdy-gurdy or bagpipe -- then the sonic boom is a sforzando accent: a single, explosive note played as loudly as possible, cutting through everything. In orchestral terms, the thrum is the contrabass sustain and the sonic boom is the timpani strike. One provides the foundation. The other provides the moment. The dive display is the most dramatic musical gesture in the engine: a 12-second silence (the climb), followed by a single fff accent (the chirp), followed by a circular return. It is a fermata broken by a cannon shot."
+    },
+    {
+      "concept": "Urban/coastal as the engine's first explicitly urban ecosystem -- habitat defined by human modification (gardens, feeders, ornamental plants). Anna's Hummingbird did not evolve in the PNW. It expanded into human-created habitat within living memory. The ecosystem exists because humans built it.",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/urban-coastal/",
+      "examples": [
+        "Previous ecosystem types: forest-defined (old-growth, mountain conifer), water-defined (riparian, estuary), resource-defined (cone crop at 34, flower meadow at 35). Urban/coastal adds a new category: human-defined.",
+        "Range expansion timeline: historically California/Baja. First Seattle records ~1964. Now year-round from Baja to BC. ~900 miles northward in 60 years.",
+        "Drivers: ornamental plantings (winter-blooming exotics), sugar-water feeders (year-round), climate moderation, urban heat islands.",
+        "The urban ecosystem is both opportunity and dependency. Anna's thrives because humans create its habitat. But that dependence is a structural fragility: the bird has bet its northern range on humans continuing to garden and feed."
+      ],
+      "music_theory_parallel": "An electric guitar in a concert that was previously all-acoustic. The urban ecosystem is amplified habitat -- human technology (feeders, ornamental horticulture, heated buildings) boosting the signal that allows a warm-climate bird to survive at 47 degrees north. The bird plugged in. The sound changed. The question is whether someone pulls the plug."
+    },
+    {
+      "concept": "Year-round residence as the opposite of migration -- Anna's Hummingbird is the only hummingbird that overwinters in the PNW. While the Rufous Hummingbird follows the bloom south, Anna's stays, entering nightly torpor to survive freezing temperatures. Same thermodynamic problem, opposite solutions.",
+      "level": "foundational",
+      "department": "ecology/temporal",
+      "college_path": ".college/ecology/temporal/year-round-resident/",
+      "examples": [
+        "The hummingbird pair: Rufous = migration (3,900 miles to Mexico). Anna's = torpor (nightly metabolic shutdown in Seattle).",
+        "Torpor physiology: body temperature from 40C to 8.8C, heart rate from 1,200 to 50 bpm, breathing from 245 to <10/min, metabolic rate reduced 95%.",
+        "Daily energy cycle: forage by day (gain 16% body weight), torpor at night (burn it all), warm up at dawn (20-30 min), repeat.",
+        "Season designation 'resident' has appeared before (e.g., chickadees, nuthatch), but no previous resident faces the metabolic challenge of a hummingbird in winter. This is resident status at the physiological edge.",
+        "The engine's 'resident' category now spans from the Black-capped Chickadee (degree 3, moderate metabolism, seed-caching) to Anna's Hummingbird (degree 36, extreme metabolism, nightly torpor). The word 'resident' covers an enormous range of survival strategies."
+      ],
+      "music_theory_parallel": "The resident vs. migrant contrast is like a musician who stays in one city and builds a local following (Anna's) vs. a touring musician who follows the festival circuit (Rufous). The resident plays the same venue year-round -- including the dead months when nobody else is performing. The tourist plays only the peak season and moves on. Both are professional musicians. But the resident knows what December sounds like in this town, and the tourist never will."
+    },
+    {
+      "concept": "Learned song in a non-passerine -- Anna's Hummingbird is one of the only hummingbirds that learns its song by imitation, representing convergent evolution of vocal learning. Males acquire song through subsong -> plastic song -> crystallized song, with geographic dialects maintained by cultural transmission. The first non-passerine vocal learner in the engine.",
+      "level": "intermediate",
+      "department": "music-theory/composition",
+      "college_path": ".college/music/theory/composition/learned-song/",
+      "examples": [
+        "Three independent origins of vocal learning in birds: oscine passerines (~4,000 spp.), parrots (~400 spp.), hummingbirds (~375 spp.). Not closely related. Convergent evolution.",
+        "Anna's song development: subsong at 4-7 months, plastic song at 7-10 months, crystallized adult song by ~11 months. Same developmental trajectory as oscine passerines.",
+        "Geographic dialects: neighbors share song types, populations a few km apart may differ. Cultural transmission, not genetic.",
+        "Neural basis: enlarged HVC in males, androgen-dependent. Females and non-singing hummingbirds (including Rufous) lack this structure.",
+        "The Rufous Hummingbird has no song. Anna's has a learned song. Within the same family, the engine encounters both the absence and presence of vocal learning."
+      ],
+      "music_theory_parallel": "The distinction between a musician who plays only by ear (Rufous, innate calls) and one who studies under a master, learns the tradition, and then develops a personal style within it (Anna's, learned song with regional dialects). The Anna's Hummingbird is a jazz musician who learned the standards from the neighborhood players and now improvises within that framework. The Rufous is a drummer -- all rhythm, no melody, no need for lessons. Both are valid. But one carries culture."
+    },
+    {
+      "concept": "Conservation mirror -- the hummingbird pair presents opposite population trajectories within the same family. Rufous: Near Threatened, 65% decline, habitat degrading. Anna's: Least Concern, 2%/year increase, range expanding. The migrant that depends on natural habitat is declining. The resident that depends on human habitat is thriving. Same family, opposite fates.",
+      "level": "intermediate",
+      "department": "ecology/conservation",
+      "college_path": ".college/ecology/conservation/expansion/",
+      "examples": [
+        "Rufous Hummingbird: Near Threatened, 65% decline since 1970s, flower meadows degrading, phenological mismatch from climate change.",
+        "Anna's Hummingbird: Least Concern, ~9.6 million individuals, 2%/year increase since 1966, range expanding 900 miles northward.",
+        "The divergence: the Rufous depends on natural wildflower blooms that are declining. Anna's depends on ornamental plantings and feeders that are increasing. One is a natural ecosystem species in a degrading world. The other is an urban adapter in an urbanizing world.",
+        "The contingency: Anna's success is real but dependent on human behavior. A cultural shift away from feeders and gardens could reverse the trajectory."
+      ],
+      "music_theory_parallel": "Two bands from the same scene. One stayed true to the original sound and watched the audience shrink as the culture moved on (Rufous). The other adapted to the new venue -- went electric, played the corporate gigs, built a following in the streaming era (Anna's). The purist is endangered. The adapter is thriving. Both are the same genre. The question is which strategy survives when the next cultural shift comes."
+    },
+    {
+      "concept": "E=5 enters its third expression -- explosive individual display. The engine now has three E=5 degrees: collective swarm (Bohemian Waxwing, 32), sustained individual intensity (Rufous Hummingbird, 35), and explosive individual detonation (Anna's Hummingbird, 36). Three models of maximum acoustic energy from three fundamentally different mechanisms.",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e5-explosive/",
+      "examples": [
+        "E=5 at degree 32: Bohemian Waxwing -- collective energy, hundreds of birds, massive flocks.",
+        "E=5 at degree 35: Rufous Hummingbird -- sustained individual energy, continuous thrum, relentless territorial defense.",
+        "E=5 at degree 36: Anna's Hummingbird -- explosive individual energy, 40-meter dive, 385 BL/s, single 60-ms chirp.",
+        "Three dynamics: fff sustained (string section at full bow), fff sustained (solo trumpet at full volume), fff sforzando (cannon shot).",
+        "Back-to-back E=5 (degrees 35-36) in the hummingbird pair. The first consecutive E=5 entries in the engine."
+      ],
+      "music_theory_parallel": "Three ways to hit fortissimo: (1) the whole orchestra plays at maximum volume (Bohemian Waxwing -- collective mass). (2) A single instrument sustains maximum output (Rufous Hummingbird -- continuous intensity). (3) A single stroke on a bass drum or timpani -- one hit, maximum impact, then silence (Anna's Hummingbird -- the dive chirp). The first is a wall of sound. The second is a screaming solo. The third is a detonation."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-035",
+      "title": "Rufous Hummingbird (Degree 35)",
+      "connection": "HUMMINGBIRD PAIR. Second consecutive Trochilidae. Same family, opposite strategies. Rufous (migrant/summer/thrum/Near Threatened/declining 65%) vs. Anna's (resident/year-round/sonic boom/Least Concern/increasing 2%/yr). The Rufous follows the bloom; Anna's waits for it. The Rufous has no song; Anna's has a learned song. Maximum ecological contrast within minimum taxonomic distance."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "LEARNED SONG PARALLEL. Red Crossbill flight call types may involve cultural transmission. Anna's Hummingbird definitively learns its song through imitation, with geographic dialects. Both involve culturally transmitted vocalizations. Different scales of the same phenomenon: call types sorting incipient species (crossbill) vs. song dialects varying within one species (Anna's)."
+    },
+    {
+      "project": "SPS-032",
+      "title": "Bohemian Waxwing (Degree 32)",
+      "connection": "E=5 TRIO. Three E=5 entries now in the engine: collective energy (waxwing swarm, 32), sustained individual intensity (Rufous thrum, 35), and explosive individual display (Anna's dive chirp, 36). Three models of maximum acoustic energy from three different mechanisms."
+    },
+    {
+      "project": "SPS-031",
+      "title": "Cedar Waxwing (Degree 31)",
+      "connection": "RESIDENT VS. RESIDENT. Two year-round PNW residents with opposite acoustic strategies. Cedar Waxwing = whisper (E=4, quiet flock contact). Anna's Hummingbird = sonic boom (E=5, explosive dive display). Both present in Seattle yards in December."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker (Degree 21)",
+      "connection": "MECHANICAL SOUND EVOLUTION. Four entries, three mechanical mechanisms: percussive drumming (bill on wood, 21-22), aeromechanical thrum (wing feathers, 35), aeromechanical dive chirp (tail feather R5, 36). The mechanical sound vocabulary expands with each non-passerine entry."
+    },
+    {
+      "project": "SPS-000",
+      "title": "Great Blue Heron (Degree 0)",
+      "connection": "URBAN HABITAT KINSHIP. Two species comfortable in urban settings. Heron hunts in urban shorelines and parks. Anna's nests in urban gardens and feeds at backyard feeders. But the heron was always present in diverse habitats; Anna's EXPANDED INTO urban habitat from a different range entirely."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Anna's Hummingbird documented as year-round resident in western Washington and Oregon, the only PNW hummingbird present in winter. One of four regularly occurring PNW hummingbird species. Population increasing, range expanding northward."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Urban ecology, ornamental plant communities, human-wildlife interaction. Feeder culture and range expansion. Winter survival strategies. Torpor ecology. Climate change and range shift dynamics."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 35,
+    "total_entries": 37,
+    "families_represented": 18,
+    "largest_families": {
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Parulidae": 5,
+      "Fringillidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Trochilidae": 2,
+      "Cardinalidae": 1,
+      "Picidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=5 appears for the THIRD time (degrees 32, 35, 36). First back-to-back E=5 in the engine (35-36). E=5 now at 3 degrees (8.1%). E=4 still dominant at 13 degrees (35.1%). E=3 absent for 16 DEGREES (since degree 20). Dynamic range compression worsens -- the upper register dominates, the middle register is abandoned. E=3 or lower is urgently needed.",
+    "passeriformes_streak": "STILL BROKEN. Apodiformes continues for a second degree (35-36). But this creates a new concern: back-to-back Apodiformes is now itself a mini-streak. The engine needs taxonomic diversity, not a different kind of repetition.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive"],
+    "ecosystem_note": "Urban/coastal -- FIRST URBAN ECOSYSTEM in the engine. First ecosystem defined by human modification. After two consecutive non-place ecosystems (cone crop at 34, flower meadow at 35), the engine now adds a human-defined ecosystem. Three consecutive degrees (34-36) with novel ecosystem categories: resource-defined, mutualism-defined, human-defined.",
+    "mechanical_sound_note": "SECOND AEROMECHANICAL SPECIES. The dive chirp (tail feather R5, ~4 kHz, 60 ms) is the most precisely characterized mechanical sound in any bird. Adds to the thrum (wingbeat, 52-62 Hz, continuous). Two consecutive mechanical-sound species (35-36), both Trochilidae.",
+    "acoustic_element_37": "THE SONIC BOOM -- a brief, explosive, mechanically generated sound produced by tail feathers vibrating like a clarinet reed at the bottom of a 40-meter dive at 385 body lengths per second. The loudest sound relative to body size in the vertebrate world. After the thrum (continuous), the sonic boom (instantaneous). Mechanical sound from sustained flight vs. mechanical sound from committed display.",
+    "conservation_note": "LEAST CONCERN -- INCREASING. The conservation MIRROR to degree 35. Same family, opposite trajectories. Rufous declining 65%, Anna's increasing 2%/year. The migrant losing natural habitat; the resident gaining urban habitat. The hummingbird pair is the engine's sharpest conservation contrast.",
+    "song_learning_note": "FIRST NON-PASSERINE VOCAL LEARNER in the engine. Anna's Hummingbird learns its song by imitation, with geographic dialects and cultural transmission. Convergent evolution of vocal learning with oscine passerines. The Rufous Hummingbird (degree 35, same family) does NOT learn its songs. Within Trochilidae, the engine encounters both innate and learned vocalizations.",
+    "critical_gaps": [
+      "No marine/shoreline species in 36 degrees of 'The Sound of Puget Sound' -- 36 DEGREES OVERDUE -- CRISIS LEVEL (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 36 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 36 degrees -- URGENT",
+      "No nocturnal species since degree 4 (32 degrees ago) -- OVERDUE",
+      "E=3 not used since degree 20 (16 degrees ago) -- dynamic range compression WORSENING",
+      "Back-to-back E=5 (35-36) and back-to-back Apodiformes (35-36) risk new repetition patterns",
+      "No marine species remains the engine's defining structural deficit -- 36 DEGREES OF A PROJECT NAMED FOR PUGET SOUND"
+    ]
+  }
+}

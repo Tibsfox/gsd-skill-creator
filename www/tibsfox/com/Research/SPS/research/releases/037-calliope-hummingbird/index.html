@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 37&deg; &mdash; Calliope Hummingbird &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Filament highlight card */
+    .filament-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .filament-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Trio card */
+    .trio-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .trio-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Smallest bird card */
+    .smallest-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .smallest-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Mountain meadow card */
+    .meadow-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #42A5F5 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .meadow-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Muse paradox card */
+    .muse-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 1px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .muse-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Genus pair card */
+    .genus-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #7986CB 100%);
+      border: 2px solid #283593;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Energy drop card */
+    .energy-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.filament { background: #7B1FA2; }
+    .theory-icon.smallest { background: #2E7D32; }
+    .theory-icon.meadow { background: #1565C0; }
+    .theory-icon.muse { background: #E65100; }
+    .theory-icon.genus { background: #283593; }
+    .theory-icon.energy { background: #C62828; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">37&deg;</div>
+      <div class="release-title-block">
+        <h2>Calliope Hummingbird</h2>
+        <div class="scientific">Selasphorus calliope</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      soft rising tsee-tsee &mdash; the filament, the smallest bird in North America, named for the muse of epic poetry
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Filament Element Card -->
+        <div class="filament-card">
+          <h3>The 38th Acoustic Element: The Filament</h3>
+          <p>A thin, barely audible thread of high-pitched vocal sound produced by the <strong>smallest bird in North America</strong> (~3.1 g, 7&ndash;8 cm), so quiet it is almost lost in the ambient noise of a mountain meadow. After the thrum (35, continuous aeromechanical hum) and the sonic boom (36, explosive dive chirp at 385 BL/s), the third hummingbird <em>whispers</em>. The filament is the pilot light &mdash; the smallest flame that still burns.</p>
+          <p><strong>The trio&rsquo;s diminuendo:</strong> thrum (35, E=5) &rarr; sonic boom (36, E=5) &rarr; <strong>filament (37, E=4)</strong>. Engine &rarr; afterburner &rarr; candle flame.</p>
+        </div>
+
+        <!-- Hummingbird Trio Card -->
+        <div class="trio-card">
+          <h3>The Hummingbird Trio &mdash; Unprecedented</h3>
+          <p><strong>Three consecutive Trochilidae.</strong> No family has ever held three consecutive degrees. Three species, two genera, three strategies:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>Rufous (35):</strong> <em>Selasphorus</em>. E=5. Thrum. Flower meadow. Fighter.</li>
+            <li><strong>Anna&rsquo;s (36):</strong> <em>Calypte</em>. E=5. Sonic boom. Urban/coastal. Resident.</li>
+            <li><strong>Calliope (37):</strong> <em>Selasphorus</em>. E=4. Filament. Mountain meadow. Infiltrator.</li>
+          </ul>
+          <p>Genus pair: <em>Selasphorus</em> bookends <em>Calypte</em> &mdash; ABA framing. Two flame-bearers flanking a veiled jewel.</p>
+        </div>
+
+        <h2>The Smallest Bird in North America</h2>
+        <p><strong>~3.1 g average body mass. 7&ndash;8 cm total length.</strong> Smaller than a Rufous (3.4 g). Smaller than a chickadee. A nickel weighs 5 grams &mdash; the Calliope weighs less than two-thirds of a nickel. And this bird migrates ~5,000 miles round trip from PNW mountain meadows to the highlands of Mexico &mdash; the <strong>smallest long-distance migrant in the world</strong>.</p>
+
+        <!-- Smallest Bird Card -->
+        <div class="smallest-card">
+          <h3>Smallest Bird &mdash; By the Numbers</h3>
+          <table class="freq-table">
+            <thead>
+              <tr><th>Measurement</th><th>Calliope (37)</th><th>Rufous (35)</th><th>Anna&rsquo;s (36)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Body mass</td><td><strong>~3.1 g</strong></td><td>~3.4 g</td><td>~4.3 g</td></tr>
+              <tr><td>Total length</td><td><strong>7&ndash;8 cm</strong></td><td>8&ndash;9 cm</td><td>9.9&ndash;10.9 cm</td></tr>
+              <tr><td>Energy</td><td><strong>E=4</strong></td><td>E=5</td><td>E=5</td></tr>
+              <tr><td>Acoustic element</td><td><strong>Filament</strong></td><td>Thrum</td><td>Sonic Boom</td></tr>
+            </tbody>
+          </table>
+          <p>Sound scales with mass. The smallest bird makes the smallest sound. Physics, not choice.</p>
+        </div>
+
+        <h2>Taxonomy: Calliope&rsquo;s Flame-Bearer</h2>
+        <p><em>Selasphorus calliope</em> &mdash; &ldquo;Calliope&rsquo;s flame-bearer.&rdquo; <em>Selasphorus</em> = same genus as Rufous Hummingbird (Greek <em>selas</em> + <em>phoros</em> = &ldquo;flame-bearer&rdquo;). <em>Calliope</em> = Greek <em>Kalliope</em>, the muse of epic poetry, &ldquo;beautiful voice.&rdquo; The grandest muse names the smallest bird.</p>
+        <p><strong>Formerly <em>Stellula calliope</em></strong> (&ldquo;Calliope&rsquo;s little star&rdquo;). Molecular phylogenetics merged <em>Stellula</em> into <em>Selasphorus</em> in 2017. The little star is now officially a flame-bearer &mdash; phylogenetically correct, poetically bittersweet.</p>
+
+        <!-- Muse Paradox Card -->
+        <div class="muse-card">
+          <h3>The Calliope Paradox</h3>
+          <p>Calliope presided over the <em>Iliad</em> and the <em>Odyssey</em> &mdash; the grandest form of literary expression. The bird that bears her name weighs less than a nickel and produces a sound barely louder than the wind. <strong>Smallest bird, grandest name.</strong></p>
+          <p>And yet: this bird&rsquo;s story IS an epic. Breeds at 3,000 m, nests in a cup the size of a thimble, migrates 5,000 miles at 3 grams. The muse of epic poetry would recognize the subject. The filament carries a story that would fill books.</p>
+        </div>
+
+        <h2>The Sound: Soft Rising Tsee-Tsee</h2>
+        <p>A soft, high-pitched <em>tsee</em> or <em>tsee-tsee</em>, approximately 6&ndash;10 kHz [NEEDS VERIFICATION]. Higher in pitch and softer in volume than the Rufous&rsquo;s chitter or Anna&rsquo;s metallic chip. Barely carries 10 meters in a mountain meadow. <strong>No complex learned song</strong> &mdash; unlike Anna&rsquo;s. Simple, presumably innate calls. The flame-bearers (<em>Selasphorus</em>) do not sing.</p>
+
+        <h3>Shuttle Display (Not Dive)</h3>
+        <p>The Calliope performs a <strong>horizontal shuttle display</strong> &mdash; back-and-forth flights in front of the female &mdash; instead of the dramatic vertical dives used by Rufous and Anna&rsquo;s. The shuttle produces a quiet <em>bzt</em> or <em>zing</em> from wing feathers. No explosive chirp. No 385 BL/s plunge. The smallest bird displays close, quiet, and persistent &mdash; a pendulum, not a cannon shot.</p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Display Type</th><th>Rufous (35)</th><th>Anna&rsquo;s (36)</th><th>Calliope (37)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Shape</td><td>J-dive (vertical)</td><td>Vertical dive (~40 m)</td><td><strong>Shuttle (horizontal)</strong></td></tr>
+            <tr><td>Sound</td><td>Moderate buzz</td><td>Explosive chirp</td><td><strong>Quiet zing</strong></td></tr>
+            <tr><td>Strategy</td><td>Force</td><td>Spectacle</td><td><strong>Persistence</strong></td></tr>
+          </tbody>
+        </table>
+
+        <!-- Mountain Meadow Card -->
+        <div class="meadow-card">
+          <h3>Mountain Meadow &mdash; High Elevation Specialist</h3>
+          <p>Breeds at <strong>1,200&ndash;3,400 m</strong> in subalpine meadows of the Cascades, Olympics, and Blue Mountains. Indian paintbrush, penstemon, columbine &mdash; red and orange tubular wildflowers of the subalpine zone. The engine&rsquo;s second montane ecosystem (after mountain conifer at degree 33).</p>
+          <p><strong>Elevation partitioning:</strong> Anna&rsquo;s holds the lowlands (0&ndash;500 m). Rufous ranges broadly (0&ndash;3,000+ m). Calliope specializes at the mountaintops (1,200&ndash;3,400 m). Three hummingbirds map the full PNW elevation gradient.</p>
+        </div>
+
+        <!-- Genus Pair Card -->
+        <div class="genus-card">
+          <h3><em>Selasphorus</em> Bookends &mdash; ABA Genus Framing</h3>
+          <p>Degrees 35 and 37 share genus <em>Selasphorus</em>. Degree 36 (<em>Calypte</em>) sits between them. The flame-bearers bookend the veiled jewel:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>35 <em>Selasphorus rufus</em>:</strong> Loud, aggressive, broad-range. The torch.</li>
+            <li><strong>36 <em>Calypte anna</em>:</strong> Spectacular, resident, learned singer. The jewel.</li>
+            <li><strong>37 <em>Selasphorus calliope</em>:</strong> Quiet, montane, infiltrator. The candle.</li>
+          </ul>
+          <p>Same genus, different everything else. The loud flame-bearer and the quiet flame-bearer.</p>
+        </div>
+
+        <!-- Energy Drop Card -->
+        <div class="energy-card">
+          <h3>E=4 &mdash; The Diminuendo</h3>
+          <p>After back-to-back E=5 (degrees 35&ndash;36), energy returns to E=4. The smallest bird makes less noise. E=4 now at <strong>14 degrees</strong> (37.8%). E=5 stays at 3 degrees (8.1%). E=3 still absent for 17 degrees (since degree 20). The dynamic range compression is not resolved &mdash; but the drop from E=5 to E=4 is a step in the right direction.</p>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon filament">F</div>
+            <div class="theory-content">
+              <h4>The Filament <span class="theory-level foundational">foundational</span></h4>
+              <p>The 38th acoustic element. A thin thread of high-pitched vocal sound, barely audible. The smallest bird makes the smallest sound. After thrum (continuous) and sonic boom (explosive), the filament (threadlike). The pilot light.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon smallest">S</div>
+            <div class="theory-content">
+              <h4>Smallest Bird in North America <span class="theory-level foundational">foundational</span></h4>
+              <p>~3.1 g, 7&ndash;8 cm. Smallest long-distance migrant in the world. ~5,000 miles round trip at less than the weight of a nickel. Sound, strategy, and display all scale with body size.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon meadow">M</div>
+            <div class="theory-content">
+              <h4>Mountain Meadow Specialist <span class="theory-level foundational">foundational</span></h4>
+              <p>1,200&ndash;3,400 m subalpine habitat. Second montane ecosystem (after mountain conifer at 33). Three hummingbirds map the full elevation gradient: lowlands (Anna&rsquo;s), broad (Rufous), mountaintops (Calliope).</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon muse">C</div>
+            <div class="theory-content">
+              <h4>The Calliope Paradox <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Named for the muse of epic poetry &mdash; the grandest literary form. The bird is the smallest, quietest hummingbird. But its migration story IS epic: 5,000 miles at 3 grams. The name fits after all.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon genus">G</div>
+            <div class="theory-content">
+              <h4><em>Selasphorus</em> Genus Pair <span class="theory-level intermediate">intermediate</span></h4>
+              <p>ABA genus framing: <em>Selasphorus</em> (35) &ndash; <em>Calypte</em> (36) &ndash; <em>Selasphorus</em> (37). Formerly <em>Stellula</em> (&ldquo;little star&rdquo;), merged into <em>Selasphorus</em> (&ldquo;flame-bearer&rdquo;) by molecular phylogenetics.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">4</div>
+            <div class="theory-content">
+              <h4>E=4 Return <span class="theory-level intermediate">intermediate</span></h4>
+              <p>After back-to-back E=5, energy drops for the smallest bird. The trio&rsquo;s diminuendo: 5 &rarr; 5 &rarr; 4. Dynamic range compression persists but the step down begins.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-036: Anna&rsquo;s Hummingbird</strong>
+            <p>HUMMINGBIRD TRIO. Three consecutive Trochilidae. Anna&rsquo;s (sonic boom, E=5, 4.3 g) vs. Calliope (filament, E=4, 3.1 g). Sound scales with mass. The largest makes the loudest sound; the smallest makes the quietest.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-035: Rufous Hummingbird</strong>
+            <p>GENUS PAIR. Both <em>Selasphorus</em>. Rufous = loud, aggressive, broad-range, thrum. Calliope = quiet, infiltrating, montane, filament. Same genus, opposite strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-033: Cassin&rsquo;s Finch</strong>
+            <p>MONTANE PAIR. Mountain conifer (33, closed canopy) vs. mountain meadow (37, open subalpine). Same elevation band, different habitats.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-031: Cedar Waxwing</strong>
+            <p>QUIET BOOKENDS. Whisper (31, E=4, flock contact) and filament (37, E=4, individual call). Both defined by how quiet they are.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-032: Bohemian Waxwing</strong>
+            <p>E=5 ARC ENDS. Three E=5 degrees (32, 35, 36) end at 36. Degree 37 returns to E=4. The diminuendo begins.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker</strong>
+            <p>MECHANICAL SOUND RECEDES. Flicker (percussive) &rarr; Rufous (thrum) &rarr; Anna&rsquo;s (dive chirp) &rarr; Calliope (vocal). The mechanical lineage peaks at Anna&rsquo;s and fades.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Smallest North American bird. Summer breeder in Cascades/Olympics mountain meadows. One of four PNW hummingbird species. High-elevation specialist.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems</strong>
+            <p>Mountain meadow ecology. Subalpine wildflower communities. Elevation niche partitioning. Climate-driven habitat compression at treeline.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Calder, W.A. and Calder, L.L. (2020). Calliope Hummingbird (<em>Selasphorus calliope</em>), version 1.0. <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>&ldquo;Calliope hummingbird.&rdquo; Wikipedia.</li>
+          <li>Audubon. &ldquo;Calliope Hummingbird.&rdquo; Field Guide.</li>
+          <li>Cornell Lab of Ornithology. &ldquo;Calliope Hummingbird.&rdquo; All About Birds.</li>
+          <li>Birds of the World. &ldquo;Sounds and Vocal Behavior &mdash; Calliope Hummingbird.&rdquo;</li>
+          <li>McGuire, J.A. et al. (2014). Molecular phylogenetics and the diversification of hummingbirds. <em>Current Biology</em> 24: 910&ndash;916.</li>
+          <li>Chesser, R.T. et al. (2017). 58th supplement to the AOS Check-list. <em>The Auk</em> 134: 751&ndash;773.</li>
+          <li>Cornell Lab of Ornithology. &ldquo;Calliope Hummingbird Sounds.&rdquo; All About Birds.</li>
+          <li>Animal Diversity Web. <em>Selasphorus calliope</em>.</li>
+          <li>BirdWeb (Seattle Audubon). &ldquo;Calliope Hummingbird.&rdquo;</li>
+          <li>Phillips, A.R. (1975). Migrations of Allen&rsquo;s and other hummingbirds. <em>The Condor</em> 77: 196&ndash;205.</li>
+          <li>BirdLife International. IUCN Red List: <em>Selasphorus calliope</em> &mdash; Least Concern.</li>
+          <li>U.S. Forest Service. &ldquo;Calliope Hummingbird &mdash; Pollinator.&rdquo;</li>
+          <li>NatureServe. <em>Selasphorus calliope</em> species account.</li>
+          <li>Kaufman, K. (1996). <em>Lives of North American Birds</em>. Houghton Mifflin.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species</h3>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-size: 0.95rem; font-style: italic;">Selasphorus calliope</div>
+          <div class="stat-detail">&ldquo;Calliope&rsquo;s flame-bearer&rdquo;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value" style="font-size: 1rem;">Apodiformes</div>
+          <div class="stat-detail">3rd consecutive (35&ndash;37)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value" style="font-size: 1rem;">Trochilidae</div>
+          <div class="stat-detail">3rd member (trio)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Formerly</div>
+          <div class="stat-value" style="font-size: 0.82rem; font-style: italic;">Stellula calliope</div>
+          <div class="stat-detail">&ldquo;Little star&rdquo; &rarr; merged to <em>Selasphorus</em></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">~3.1 g</div>
+          <div class="stat-detail">Smallest bird in North America</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value" style="font-size: 0.95rem; color: #2E7D32;">Least Concern</div>
+          <div class="stat-detail">Climate compression risk</div>
+        </div>
+
+        <h3>Acoustics</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Soft rising tsee-tsee</div>
+          <div class="stat-detail">Vocal, ~6&ndash;10 kHz [NEEDS VERIF.]</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Display</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Horizontal shuttle</div>
+          <div class="stat-detail">Not vertical dive</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value" style="font-size: 0.88rem;">#38: The Filament</div>
+          <div class="stat-detail">Threadlike, barely audible</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Down from E=5 (35&ndash;36)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Mountain meadow</div>
+          <div class="stat-detail">2nd montane (after 33)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Late Apr&ndash;early Sep</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Elevation</div>
+          <div class="stat-value" style="font-size: 0.82rem;">1,200&ndash;3,400 m</div>
+          <div class="stat-detail">Subalpine specialist</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Migration</div>
+          <div class="stat-value" style="font-size: 0.82rem;">~5,000 mi RT</div>
+          <div class="stat-detail">Smallest long-distance migrant</div>
+        </div>
+
+        <h3>Engine</h3>
+        <div class="stat-card">
+          <div class="stat-label">Unique Species</div>
+          <div class="stat-value">36</div>
+          <div class="stat-detail">38 total entries (0&ndash;37)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Trochilidae now 3 members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Apodiformes: 3 degrees</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Release Engine &mdash; Degree 37&deg;</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 35&deg; &mdash; Rufous Hummingbird &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Thrum highlight card */
+    .thrum-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .thrum-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Order break card */
+    .order-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .order-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Family card */
+    .family-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Flower meadow card */
+    .meadow-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .meadow-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Conservation card */
+    .conservation-card {
+      background: linear-gradient(135deg, #FFEBEE 0%, #EF9A9A 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .conservation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 1px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.thrum { background: #F57F17; }
+    .theory-icon.order { background: #2E7D32; }
+    .theory-icon.meadow { background: #7B1FA2; }
+    .theory-icon.energy { background: #E65100; }
+    .theory-icon.conservation { background: #C62828; }
+    .theory-icon.dive { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">35&deg;</div>
+      <div class="release-title-block">
+        <h2>Rufous Hummingbird</h2>
+        <div class="scientific">Selasphorus rufus</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      ch-ch-ch wingbeat thrum + chitter &mdash; the mechanical voice, the flame-bearer, the flower guardian
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Thrum Element Card -->
+        <div class="thrum-card">
+          <h3>The 36th Acoustic Element: The Thrum</h3>
+          <p>A mechanically generated sound produced by the physical interaction of wing feathers with air at 52&ndash;62 beats per second, creating a continuous tonal hum that is both involuntary byproduct of flight and controllable signal. The first non-vocal, non-percussive sound in the engine. After 34 degrees of vocal and percussive sound, the engine encounters a species that generates its signature sound by <em>simply flying</em>. Sound from motion. The body as instrument.</p>
+          <p><strong>The progression:</strong> whisper (31) &rarr; buzz (32) &rarr; cadenza (33) &rarr; dialect (34) &rarr; <strong>thrum (35)</strong>. Five consecutive degrees, five fundamentally different relationships between sound and its source.</p>
+        </div>
+
+        <!-- Order Break Card -->
+        <div class="order-card">
+          <h3>Order Apodiformes &mdash; The Streak Ends</h3>
+          <p>The 12-degree Passeriformes streak (degrees 23&ndash;34) is <strong>broken</strong>. Degree 35 enters <strong>Apodiformes</strong> &mdash; the order of hummingbirds and swifts. The first Apodiformes in the engine. Only the fourth non-Passeriformes entry overall (after Pelecaniformes at 0, Strigiformes at 4, Piciformes at 21&ndash;22). Five orders now represented.</p>
+          <p>Each non-Passeriformes entry has introduced a new sound mechanism: silence (Pelecaniformes), percussion (Piciformes), and now <strong>aeromechanical sound</strong> (Apodiformes). The hummingbird&rsquo;s wingbeat thrum is the third sound-production category in the engine.</p>
+        </div>
+
+        <h2>Taxonomy: The Flame-Bearer</h2>
+        <p><em>Selasphorus</em> &mdash; Ancient Greek <em>selas</em> (&ldquo;light, flame&rdquo;) + <em>phoros</em> (&ldquo;bearing&rdquo;) = <strong>&ldquo;flame-bearer.&rdquo;</strong> <em>Rufus</em> &mdash; Latin for &ldquo;red, reddish-brown.&rdquo; The full binomial <em>Selasphorus rufus</em> translates to <strong>&ldquo;red flame-bearer&rdquo;</strong> or <strong>&ldquo;rufous torch-bearer&rdquo;</strong> &mdash; both genus and species name describe light and color, the incandescence of a 3-gram bird. The most luminous binomial in the engine.</p>
+        <p>Described by Gmelin in 1788. Monotypic &mdash; no subspecies recognized. Closest relative: Allen&rsquo;s Hummingbird (<em>Selasphorus sasin</em>), which is nearly identical in female and immature plumage and hybridizes in a narrow zone in southern Oregon.</p>
+
+        <!-- Family Card -->
+        <div class="family-card">
+          <h3>Trochilidae &mdash; The 18th Family</h3>
+          <p>Hummingbirds. Entirely New World. Approximately 375 species in 113 genera, from Alaska to Tierra del Fuego. The most species-rich bird family in the Americas. The only birds capable of sustained hovering flight. The highest metabolic rate by mass of any bird.</p>
+          <p><strong>Four PNW hummingbirds:</strong> Rufous (common summer breeder), Anna&rsquo;s (year-round resident), Calliope (mountain meadows), Black-chinned (east of Cascades). The Rufous is the most widespread and the most aggressive.</p>
+        </div>
+
+        <h2>The Sound: Three Sources</h2>
+
+        <h3>1. Wingbeat Thrum (Aeromechanical)</h3>
+        <p>52&ndash;62 beats per second in hovering flight. Air flows across narrowed feather tips, generating a continuous tonal hum with a fundamental frequency of 52&ndash;62 Hz and audible harmonics. Not vocal. Controllable through wingbeat frequency modulation (&ldquo;Cobra&rdquo; maneuvers change pitch and amplitude). The thrum is the engine&rsquo;s first aeromechanical sound.</p>
+
+        <h3>2. Chitter (Vocal)</h3>
+        <p>Rapid series of sharp, buzzy chip notes &mdash; &ldquo;ch-ch-ch-ch-ch&rdquo; &mdash; syrinx-generated. Given during aggressive territorial encounters. 3&ndash;8 kHz, broadband, harsh. The voice of a 3-gram bird that chases hawks. Almost exclusively aggressive in context.</p>
+
+        <h3>3. J-Dive Sonation (Aeromechanical)</h3>
+        <p>Male dives from 10&ndash;30 meters, reaching speeds exceeding 25 m/s. At the nadir of the J-shaped arc, tail feathers vibrate in the airflow, producing a sharp mechanical buzz. Synchronized with maximum speed and iridescent gorget flash &mdash; all in approximately 300 milliseconds.</p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Sound Type</th><th>Mechanism</th><th>Frequency</th><th>Context</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Wingbeat thrum</td><td>Aeromechanical (wing)</td><td>52&ndash;62 Hz fundamental</td><td>All flight</td></tr>
+            <tr><td>Chitter</td><td>Vocal (syrinx)</td><td>3&ndash;8 kHz</td><td>Territory defense</td></tr>
+            <tr><td>J-dive sonation</td><td>Aeromechanical (tail)</td><td>Variable</td><td>Courtship display</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Flower Meadow Card -->
+        <div class="meadow-card">
+          <h3>Flower Meadow &mdash; First Flower-Defined Ecosystem</h3>
+          <p>The engine&rsquo;s first ecosystem defined by blooms. The second non-place ecosystem (after cone crop at degree 34). The first ecosystem defined by a <strong>mutualistic relationship</strong>: the hummingbird extracts nectar and pollinates the flower. Two-way exchange, not one-way extraction.</p>
+          <p><strong>Key PNW nectar plants:</strong> Red columbine, Indian paintbrush, scarlet gilia, salmonberry, red-flowering currant, penstemons, garden fuchsia.</p>
+          <p><strong>The migration IS the ecosystem:</strong> The Rufous Hummingbird&rsquo;s clockwise annual circuit &mdash; north along the Pacific Coast in spring, south through the Rockies in late summer &mdash; tracks the flower bloom. A 3,900-mile nectar corridor.</p>
+        </div>
+
+        <h2>Ecology: The Fastest Engine</h2>
+        <p><strong>Body mass:</strong> 2&ndash;5 grams (typically 3&ndash;3.5 g). Weighs less than a US nickel.</p>
+        <p><strong>Metabolism:</strong> Highest mass-specific metabolic rate of any bird. Must consume 2&ndash;3x body weight in nectar daily. Enters torpor nightly (metabolic rate drops up to 95%, body temperature may fall from ~40&deg;C to ~8&deg;C).</p>
+        <p><strong>Migration:</strong> ~3,900 miles one way, Alaska to Mexico. Approximately 78,470,000 body lengths per trip &mdash; the longest migration relative to body size of any bird.</p>
+        <p><strong>Territory:</strong> The most aggressive hummingbird in North America. Guards flower patches against all comers &mdash; other hummingbirds, hawks, jays, squirrels. The aggression is thermodynamic: a 3-gram bird with the highest metabolic rate of any bird cannot afford to share.</p>
+
+        <!-- Conservation Card -->
+        <div class="conservation-card">
+          <h3>Near Threatened &mdash; The Engine&rsquo;s First Conservation Alarm</h3>
+          <p><strong>IUCN:</strong> Near Threatened. <strong>Population decline:</strong> ~65% since the 1970s, accelerating. <strong>State of the Birds 2022:</strong> &ldquo;Tipping Point&rdquo; species.</p>
+          <p><strong>Threats:</strong> Breeding habitat loss, climate change (phenological mismatch between bloom timing and migration), drought reducing floral abundance, pesticides, glass collisions.</p>
+          <p>The first genuinely declining common species in the engine. Not a specialist losing its niche (like the Spotted Owl) but a formerly abundant bird losing its world. Fewer hummingbirds &rarr; less pollination &rarr; fewer wildflowers &rarr; less nectar &rarr; fewer hummingbirds. The mutualism is under pressure from both sides.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=5 &mdash; Individual Intensity</h3>
+          <p>Second E=5 in the engine (after Bohemian Waxwing at degree 32). Two models of maximum energy:</p>
+          <ul>
+            <li><strong>Bohemian Waxwing (32):</strong> Collective E=5. Hundreds of birds buzzing. Mass as force.</li>
+            <li><strong>Rufous Hummingbird (35):</strong> Individual E=5. One 3-gram bird defending against everything. Concentration as force.</li>
+          </ul>
+          <p>Fortissimo from a full orchestra vs. fortissimo from a solo trumpet.</p>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon thrum">T</div>
+            <div class="theory-content">
+              <h4>The Thrum <span class="theory-level foundational">foundational</span></h4>
+              <p>Mechanically generated sound from wing feathers in airflow. 52&ndash;62 Hz continuous hum. First aeromechanical sound in the engine. The body as instrument, flight as performance.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon order">A</div>
+            <div class="theory-content">
+              <h4>Apodiformes Entry <span class="theory-level foundational">foundational</span></h4>
+              <p>First Apodiformes, 18th family. Breaks 12-degree Passeriformes streak. Fifth order in engine. Introduces hovering flight, extreme metabolism, mechanical sound production.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon meadow">F</div>
+            <div class="theory-content">
+              <h4>Flower Meadow Ecosystem <span class="theory-level foundational">foundational</span></h4>
+              <p>First flower-defined, first mutualism-defined ecosystem. Hummingbird-plant pollination partnership. The migration tracks the bloom. The ecosystem is a moving wave of nectar.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">5</div>
+            <div class="theory-content">
+              <h4>E=5 Individual Intensity <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Second E=5 after Bohemian Waxwing (32). Collective mass (waxwing) vs. individual ferocity (hummingbird). Two models of maximum acoustic energy.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon conservation">!</div>
+            <div class="theory-content">
+              <h4>Near Threatened Status <span class="theory-level intermediate">intermediate</span></h4>
+              <p>65% decline since 1970s. First genuinely declining common species. Mutualism under pressure &mdash; pollinator and plants both threatened.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon dive">J</div>
+            <div class="theory-content">
+              <h4>J-Dive Multi-Modal Display <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Speed + tail-feather sonation + iridescent gorget flash, synchronized in ~300 ms. The most complex display behavior in the engine.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>ORDER BREAK. Passeriformes streak ends. Vocal dialect (E=4, cone crop) &rarr; mechanical thrum (E=5, flower meadow). Maximum transition across every dimension.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-032: Bohemian Waxwing</strong>
+            <p>E=5 PAIR. Two models of maximum energy: collective (waxwing swarm) vs. individual (hummingbird fury). The only E=5 entries in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000: Great Blue Heron</strong>
+            <p>NON-PASSERIFORMES KINSHIP. Three non-passerine sounds: silence (0), percussion (21-22), aeromechanical (35). Each order adds a new sound mechanism.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker</strong>
+            <p>MECHANICAL SOUND LINEAGE. Percussive drumming (bill on wood) &rarr; aeromechanical thrum (wing feathers in air) &rarr; J-dive sonation (tail feathers in dive).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>RESOURCE-TRACKING MIGRANTS. Siskin follows cone crops at E=1. Hummingbird follows flower blooms at E=5. Maximum energy contrast between food-tracking strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Spotted Owl</strong>
+            <p>CONSERVATION CONCERN. Two declining PNW icons: old-growth specialist (owl) and formerly common pollinator (hummingbird). Different habitats, same trajectory.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Rufous Hummingbird documented as common summer breeder. One of four PNW hummingbird species. Trochilidae family accounts.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems</strong>
+            <p>Flower meadow ecology, pollination mutualism, nectar plant communities. Climate change impacts on wildflower phenology.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Healy, S. and Calder, W.A. (2020). Rufous Hummingbird (<em>Selasphorus rufus</em>), version 1.0. <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>&ldquo;Rufous hummingbird.&rdquo; Wikipedia.</li>
+          <li>&ldquo;Allen&rsquo;s hummingbird.&rdquo; Wikipedia.</li>
+          <li>&ldquo;Hummingbird.&rdquo; Wikipedia.</li>
+          <li>&ldquo;Coevolution of Hummingbirds and Flowers.&rdquo; Ask A Biologist, Arizona State University.</li>
+          <li>Oregon State University Extension Service. &ldquo;Hummingbird visitors to Pacific Northwest gardens.&rdquo;</li>
+          <li>Cornell Lab of Ornithology. &ldquo;Rufous Hummingbird Sounds.&rdquo; All About Birds.</li>
+          <li>Birds of the World. &ldquo;Sounds and Vocal Behavior &mdash; Rufous Hummingbird.&rdquo;</li>
+          <li>Clark, C.J. et al. (2018). Synchronization of speed, sound and iridescent color in a hummingbird aerial courtship dive. <em>Nature Communications</em> 9: 5260.</li>
+          <li>Pollinator.org. &ldquo;Hummingbirds.&rdquo;</li>
+          <li>Audubon. &ldquo;Rufous Hummingbird.&rdquo; Field Guide.</li>
+          <li>Wildlife Nomads. &ldquo;Inside the Epic, Defiant World of the Rufous Hummingbirds.&rdquo;</li>
+          <li>Avian Conservation and Ecology (2024). &ldquo;Breeding habitat loss linked to declines in Rufous Hummingbirds.&rdquo;</li>
+          <li>U.S. Fish &amp; Wildlife Service. &ldquo;Rufous Hummingbird (<em>Selasphorus rufus</em>).&rdquo;</li>
+          <li>State of the Birds 2022.</li>
+          <li>Partners in Flight. Avian Conservation Assessment Database.</li>
+          <li>Frontiers in Ecology and Evolution (2022). Rufous Hummingbird annual survival.</li>
+          <li>BirdLife International. Rufous Hummingbird factsheet.</li>
+          <li>Animal Diversity Web. <em>Selasphorus rufus</em>.</li>
+          <li>&ldquo;Apodiformes.&rdquo; Wikipedia.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species</h3>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-size: 0.95rem; font-style: italic;">Selasphorus rufus</div>
+          <div class="stat-detail">&ldquo;Red flame-bearer&rdquo;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value" style="font-size: 1rem;">Apodiformes</div>
+          <div class="stat-detail">NEW ORDER &mdash; 1st in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value" style="font-size: 1rem;">Trochilidae</div>
+          <div class="stat-detail">NEW &mdash; 18th family in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value" style="font-size: 0.95rem; color: #C62828;">Near Threatened</div>
+          <div class="stat-detail">~65% decline since 1970s</div>
+        </div>
+
+        <h3>Acoustics</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value" style="font-size: 0.88rem;">Wingbeat thrum + chitter</div>
+          <div class="stat-detail">First mechanical primary sound</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Wingbeat Frequency</div>
+          <div class="stat-value">52&ndash;62 Hz</div>
+          <div class="stat-detail">Beats per second in hover</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value" style="font-size: 0.95rem;">#36: The Thrum</div>
+          <div class="stat-detail">Sound from motion</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">2nd E=5 (after degree 32)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value" style="font-size: 0.88rem;">Flower meadow</div>
+          <div class="stat-detail">1st flower-defined ecosystem</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">March&ndash;September in PNW</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">3&ndash;3.5 g</div>
+          <div class="stat-detail">Less than a US nickel</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Migration</div>
+          <div class="stat-value" style="font-size: 0.88rem;">~3,900 mi</div>
+          <div class="stat-detail">78.5M body lengths/trip</div>
+        </div>
+
+        <h3>Engine</h3>
+        <div class="stat-card">
+          <div class="stat-label">Unique Species</div>
+          <div class="stat-value">34</div>
+          <div class="stat-detail">36 total entries (0&ndash;35)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Trochilidae is NEW</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Apodiformes is NEW</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Release Engine &mdash; Degree 35&deg;</p>
+  </footer>
+</body>
+</html>

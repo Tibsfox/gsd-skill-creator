@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 32&deg; &mdash; Bohemian Waxwing &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Part A parallel card */
+    .parallel-card {
+      background: linear-gradient(135deg, var(--puget-light) 0%, #F3E5F5 100%);
+      border: 1px solid #CE93D8;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+    }
+    .parallel-card .parallel-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #7B1FA2;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .parallel-card .parallel-name {
+      font-size: 1rem;
+      color: #4A148C;
+      font-weight: 600;
+    }
+    .parallel-card .parallel-detail {
+      font-size: 0.78rem;
+      color: #6A1B9A;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.2rem;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.buzz { background: #5C6BC0; }
+    .theory-icon.energy { background: #B71C1C; }
+    .theory-icon.irruptive { background: #E65100; }
+    .theory-icon.pair { background: #7B1FA2; }
+    .theory-icon.berry { background: #2E7D32; }
+    .theory-icon.holarctic { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+    .theory-level.advanced { background: #F3E5F5; color: #7B1FA2; }
+
+    /* Waxwing pair complete card */
+    .pair-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Energy break card */
+    .energy-card {
+      background: linear-gradient(135deg, #FFEBEE 0%, #EF9A9A 100%);
+      border: 2px solid #B71C1C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Irruptive ecology card */
+    .irruptive-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE082 100%);
+      border: 1px solid #FFA000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .irruptive-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Berry stand card */
+    .berry-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #A5D6A7 100%);
+      border: 1px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .berry-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../../../index.html" class="back-link">&larr; Back to SPS overview</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">32&deg;</div>
+      <div class="release-title-block">
+        <h2>Bohemian Waxwing</h2>
+        <div class="scientific">Bombycilla garrulus &middot; Family Bombycillidae (Waxwings) &middot; Pair COMPLETE &mdash; 2 of 3 species worldwide</div>
+      </div>
+    </div>
+    <div class="release-subtitle">Buzzy Bzeee Calls Flock Chorus &middot; Berry Stands &middot; Irruptive &middot; Energy 5 &mdash; E=4 STREAK BROKEN</div>
+
+    <blockquote>
+      They arrive without warning. One morning the mountain ash on the corner
+      &mdash; the same tree that held a quiet flock of Cedar Waxwings last week
+      &mdash; is alive with hundreds of larger, grayer, louder birds. The air
+      fills with a buzzing roar: <em>bzeee, bzeee, bzeee</em> &mdash; coarser,
+      lower, more assertive than the Cedar&rsquo;s crystalline whisper. Bold
+      white and yellow wing markings flash as they strip the tree bare in hours.
+      Cinnamon undertails, rusty faces, the same sleek crests but bigger,
+      chunkier, wilder. <em>Bombycilla garrulus.</em> The talkative silk-tail.
+      The Bohemian &mdash; the vagabond, the wanderer from the boreal north.
+      They came because the berries failed in the Yukon. They will leave when
+      the berries run out here. The whisper has become a buzz. E=5.
+    </blockquote>
+
+    <!-- Main Grid: Content + Sidebar -->
+    <div class="release-grid">
+      <div class="content-body">
+
+        <!-- Energy Break Card -->
+        <div class="energy-card">
+          <h3>E=5 &mdash; The Eleven-Degree E=4 Plateau BREAKS</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Degrees 21&ndash;31: <strong>eleven consecutive E=4</strong> &mdash;
+            the longest unbroken energy plateau in engine history. The
+            retrospectives at degrees 30 and 31 both declared it &ldquo;critically
+            must break.&rdquo; <strong>It breaks here.</strong> E=5 is used for
+            the first time. The dynamic range expands upward. The ceiling has
+            been touched. The full five-level energy palette (E=1 through E=5)
+            is now active.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            E=5 is justified by: massive flock scale (hundreds to thousands),
+            louder per-individual calls, irruptive arrival intensity, and
+            structural necessity after eleven degrees of constraint.
+          </p>
+        </div>
+
+        <!-- Waxwing Pair Complete Card -->
+        <div class="pair-card">
+          <h3>Waxwing Pair Complete (Degrees 31&ndash;32)</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Cedar Waxwing (31) + Bohemian Waxwing (32) = the engine&rsquo;s
+            <strong>third same-genus consecutive pair</strong>. The first pair
+            with <strong>energy asymmetry</strong> (E=4 vs. E=5). Bombycillidae
+            CLOSED at 2 of 3 species worldwide (66.7%).
+          </p>
+          <table style="margin: 0.75rem 0; width: 100%; font-size: 0.85rem;">
+            <thead>
+              <tr><th>Pair</th><th>Degrees</th><th>Genus</th><th>Contrast Axis</th><th>Energy</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Catharus</td><td>18&ndash;19</td><td><em>Catharus</em></td><td>Spiral direction</td><td>E=3 / E=3</td></tr>
+              <tr><td>Tachycineta</td><td>27&ndash;28</td><td><em>Tachycineta</em></td><td>Ecological niche</td><td>E=4 / E=4</td></tr>
+              <tr style="background: rgba(123,31,162,0.12); font-weight: 600;"><td>Bombycilla</td><td>31&ndash;32</td><td><em>Bombycilla</em></td><td>Range + Energy</td><td>E=4 / E=5</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Genus-level constants: frugivory, flock behavior, wax tips, sibilant vocalization.
+            Species-level variables: body size, range, energy, call texture, undertail color.
+          </p>
+        </div>
+
+        <!-- Song Bioacoustics -->
+        <h2>Song Bioacoustics: Buzzy Bzeee Calls Flock Chorus</h2>
+        <p>
+          The Bohemian Waxwing produces a <strong>high, rapid, buzzy trill</strong>
+          &mdash; transcribed as <em>sirrrr</em> or <em>bzeee</em> or
+          <em>zir-r-r-r</em>. Rougher, lower-pitched, and less wavering than
+          the Cedar Waxwing&rsquo;s ethereal see-see-see. No true song &mdash;
+          like its smaller cousin, the Bohemian Waxwing <strong>lacks territorial
+          song</strong>. The bzeee is a contact and social call.
+        </p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Parameter</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Frequency range</td><td>5.0&ndash;8.5 kHz (lower than Cedar Waxwing&rsquo;s 6&ndash;10 kHz)</td></tr>
+            <tr><td>Peak energy</td><td>5.5&ndash;7.5 kHz (more midrange body than Cedar&rsquo;s 7&ndash;9 kHz)</td></tr>
+            <tr><td>Call duration</td><td>0.5&ndash;1.5 seconds (longer than Cedar&rsquo;s 0.3&ndash;0.8 s)</td></tr>
+            <tr><td>Modulation</td><td>Coarser amplitude/frequency modulation &mdash; buzz rather than shimmer</td></tr>
+            <tr><td>Note structure</td><td>Broader bandwidth &mdash; wider, more diffuse spectral band</td></tr>
+            <tr><td>Timbre</td><td>Buzzy, hissing, assertive &mdash; the buzz (sibilant-coarse)</td></tr>
+            <tr><td>Amplitude</td><td>Moderate to high per individual &mdash; louder than Cedar Waxwing</td></tr>
+            <tr><td>Flock chorus</td><td>Hundreds to thousands of simultaneous calls = continuous buzzing wall of sound</td></tr>
+          </tbody>
+        </table>
+
+        <p>
+          <strong>The 33rd acoustic element: the buzz.</strong> After the Cedar
+          Waxwing&rsquo;s crystalline whisper, the Bohemian delivers a buzzy,
+          communal roar. Same sibilant timbral category, same genus &mdash; but
+          amplified and coarsened. The glass harmonica becomes a kazoo choir.
+          The sibilant category now has two textures:
+          <strong>sibilant-crystalline</strong> (Cedar, 31) and
+          <strong>sibilant-buzzy</strong> (Bohemian, 32).
+        </p>
+
+        <!-- Irruptive Ecology Card -->
+        <div class="irruptive-card">
+          <h3>Irruptive Ecology: The Sixth Seasonal Category</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            <strong>Irruption</strong> is fundamentally different from migration.
+            Migration is predictable and calendar-driven. Irruption is
+            <strong>unpredictable and food-driven</strong> &mdash; a displacement
+            from boreal breeding grounds when winter berry crops cannot support
+            the population. Triggers: interaction of berry crop failure, population
+            overshoot, and autumn food availability. Major irruptions every
+            2&ndash;10 years. The irruptive species is a <strong>messenger from
+            elsewhere</strong>: its arrival tells you about conditions in a place
+            you cannot see.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Previous irruptive species: Pine Siskin (degree 12). The engine&rsquo;s
+            second irruptive species. Six seasonal categories now active:
+            resident, migrant, partial migrant, summer, spring, <strong>irruptive</strong>.
+          </p>
+        </div>
+
+        <!-- Berry Stand Card -->
+        <div class="berry-card">
+          <h3>Ecosystem: Berry Stands</h3>
+          <p style="font-size: 0.9rem; color: var(--page-text); margin: 0.5rem 0;">
+            Dense concentrations of fruit-bearing trees &mdash; mountain ash rows,
+            hawthorn hedges, crabapple plantings, holly in residential yards.
+            Often <strong>anthropogenic</strong>: ornamental fruit plantings in
+            cities create habitat for irruptive waxwings. Refines
+            &ldquo;fruiting trees&rdquo; (degree 31) toward concentrated,
+            high-density resources that support massive flock events.
+          </p>
+          <p style="font-size: 0.85rem; color: var(--page-text-light); margin: 0.5rem 0;">
+            Key PNW species: mountain ash (<em>Sorbus</em>), juniper, hawthorn,
+            crabapple, holly. Large flocks need dense berry stands &mdash; not
+            scattered individual trees. The city as ecological infrastructure.
+          </p>
+        </div>
+
+        <!-- Taxonomy -->
+        <h2>Taxonomy: Bombycilla garrulus</h2>
+        <p>
+          <em>Bombycilla</em>: Latin <em>bombyx</em> (silk) + <em>-cilla</em>
+          (tail) = &ldquo;silk-tail.&rdquo; <em>Garrulus</em>: Latin
+          &ldquo;talkative, chattering.&rdquo; Named by <strong>Linnaeus in
+          1758</strong> (earlier applied by Gessner in 1555 as <em>Garrulus
+          Bohemicus</em>). Full binomial:
+          <strong>&ldquo;talkative silk-tail.&rdquo;</strong>
+          Compare: Cedar Waxwing = &ldquo;silk-tail of the cedars&rdquo;
+          (named for diet). Bohemian Waxwing = &ldquo;talkative silk-tail&rdquo;
+          (named for perceived behavior). &ldquo;Bohemian&rdquo; = vagabond,
+          wanderer &mdash; not the Czech region.
+        </p>
+        <p>
+          <strong>Bombycillidae CLOSED.</strong> 2 of 3 species worldwide in the
+          engine (66.7%). Only the Japanese Waxwing (<em>B. japonica</em>) remains
+          unrepresented. Highest proportional family coverage of any family.
+          The engine&rsquo;s first <strong>Holarctic</strong> species &mdash;
+          breeds across both North America and Eurasia.
+        </p>
+
+        <!-- PNW Distribution -->
+        <h2>PNW Distribution: Rare Winter Visitor</h2>
+        <p>
+          Unlike the Cedar Waxwing (common year-round resident), the Bohemian
+          Waxwing is a <strong>rare and irregular winter visitor</strong> to
+          western Washington. Most common in <strong>northeastern Washington</strong>
+          (Ferry, Okanogan, Stevens counties). Extends to the Kittitas Valley
+          (Cle Elum, Ellensburg) in moderate years. <strong>Rarely reaches
+          western Washington</strong> &mdash; typically found embedded within
+          Cedar Waxwing flocks during major irruptions.
+        </p>
+        <p>
+          Finding a Bohemian Waxwing in Seattle is a genuine event. The
+          coordinates reflect <strong>potential, not typicality</strong>. Key
+          field marks: larger and chunkier, gray belly, <strong>cinnamon
+          undertail coverts</strong> (vs. white in Cedar), bold
+          <strong>white and yellow wing markings</strong> (absent in Cedar),
+          reddish face tinge.
+        </p>
+
+        <!-- Conservation -->
+        <h2>Conservation: Least Concern with Caveats</h2>
+        <p>
+          IUCN: <strong>Least Concern</strong>. Global breeding population
+          ~5 million. However, Partners in Flight estimates a
+          <strong>~55% decline</strong> in North American populations since 1970
+          &mdash; though this must be interpreted with extreme caution given
+          the species&rsquo; nomadic nature, which makes population monitoring
+          difficult. Apparent declines may partly reflect a northward shift
+          in wintering range rather than absolute population loss. Included on
+          Partners in Flight&rsquo;s list of <strong>Common Birds in Steep
+          Decline</strong>.
+        </p>
+
+        <!-- Acoustic Theory Map -->
+        <div class="acoustic-map">
+          <h3>Knowledge Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon buzz">B</div>
+            <div class="theory-content">
+              <h4>The Buzzy Bzeee Flock Chorus &mdash; The Buzz</h4>
+              <p>33rd acoustic element. Sibilant-buzzy: same timbral category as Cedar Waxwing&rsquo;s whisper but coarser, louder, more assertive. The glass harmonica becomes a kazoo choir. Sibilant now has two textures.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>E=5 Breaks the Plateau &mdash; First E=5 Ever</h4>
+              <p>Eleven consecutive E=4 (degrees 21&ndash;31) ends. The first E=5 in engine history. Full five-level dynamic range now active. The ceiling has been touched. Context creates meaning: the first fortissimo in a piece that never exceeded mezzo-forte.</p>
+              <span class="theory-level foundational">Foundational</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon irruptive">I</div>
+            <div class="theory-content">
+              <h4>Irruptive &mdash; Sixth Seasonal Category</h4>
+              <p>Not migration but food-driven displacement. Unpredictable, population-dependent, irregular. The bird as messenger from elsewhere. Second irruptive species after Pine Siskin (12). The cadenza of the seasonal cycle.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon pair">P</div>
+            <div class="theory-content">
+              <h4>Waxwing Pair Closes &mdash; First Energy-Asymmetric Pair</h4>
+              <p>Third same-genus pair complete. First with different energy levels (E=4/E=5). Genus constants: frugivory, flock behavior, wax tips, sibilant call. Species variables: size, range, energy, call texture. The variation form matures.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon berry">S</div>
+            <div class="theory-content">
+              <h4>Berry Stands &mdash; Concentrated Frugivore Ecosystem</h4>
+              <p>Refines &ldquo;fruiting trees&rdquo; toward dense, often anthropogenic fruit resources. Mountain ash rows, ornamental plantings. The city as ecological infrastructure for irruptive flock events.</p>
+              <span class="theory-level intermediate">Intermediate</span>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon holarctic">H</div>
+            <div class="theory-content">
+              <h4>Holarctic Dimension &mdash; First Truly Holarctic Species</h4>
+              <p>Breeds across North America AND Eurasia. The waxwing pair spans hemispheres: Nearctic (Cedar) vs. Holarctic (Bohemian). Connects PNW soundscape to the circumpolar boreal.</p>
+              <span class="theory-level advanced">Advanced</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-031: Cedar Waxwing</strong>
+            <p>WAXWING PAIR. Same genus Bombycilla. Cedar = whisper (E=4, resident). Bohemian = buzz (E=5, irruptive). First same-genus pair with different energy levels. Pair CLOSED.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-030: Barn Swallow</strong>
+            <p>SWALLOW QUINTET FINAL. Two family clusters back-to-back: quintet (26&ndash;30) then pair (31&ndash;32). Seven consecutive family-dense degrees. Densest run in engine history.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-027/028: Tachycineta Pair</strong>
+            <p>STRUCTURAL ECHO. Third same-genus pair echoes the pattern but adds energy asymmetry. Tachycineta held E=4; Bombycilla splits E=4/E=5.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-018/019: Catharus Pair</strong>
+            <p>STRUCTURAL ECHO. First same-genus pair held E=3 constant. Bombycilla breaks energy symmetry. The variation form matures across three pairs.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-012: Pine Siskin</strong>
+            <p>IRRUPTIVE PARALLEL. Engine&rsquo;s first irruptive species. Both flock birds, both food-dependent nomads. Second irruptive arrives 20 degrees after the first.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-008: Golden-crowned Kinglet</strong>
+            <p>HIGH-FREQUENCY CONNECTION. Both in the sibilant zone. Kinglet = &ldquo;threshold&rdquo; (element 9). Bohemian = &ldquo;buzz&rdquo; (element 33). Both winter-hardy northern species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>FRUGIVORY SPECTRUM. Robin = seasonal frugivore. Cedar Waxwing = year-round. Bohemian Waxwing = irruptive. Three points on the frugivory commitment scale.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Bohemian Waxwing: rare winter visitor. Irruptive. Most common in eastern Washington. Rarely west of Cascades. Found within Cedar Waxwing flocks.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Berry stand ecology. Ornamental plantings as ecological infrastructure. Boreal-temperate connectivity. Mountain ash, hawthorn, crabapple as irruptive food base.</p>
+          </div>
+          <div class="xref-card">
+            <strong>S36: Seattle 360 Music</strong>
+            <p>Part A: Luther Rabb (R&amp;B/Funk, E=5, 1970s, Seattle, Columbia/MCA). Explosive energy, bass as buzz, irruptive career arc. First E=5 in both Part A and Part B.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ul class="sources">
+          <li>Witmer, M.C., Mountjoy, D.J., and Elliot, L. (2014). Bohemian Waxwing (<em>Bombycilla garrulus</em>), version 2.0. <em>Birds of the World</em>. Cornell Lab.</li>
+          <li>Sibley, D.A. (2014). <em>The Sibley Guide to Birds</em>. 2nd ed. Knopf.</li>
+          <li>Macaulay Library. Bohemian Waxwing recordings. Cornell Lab of Ornithology.</li>
+          <li>Catchpole, C.K. and Slater, P.J.B. (2008). <em>Bird Song</em>. 2nd ed. Cambridge University Press.</li>
+          <li>Jobling, J.A. (2010). <em>Helm Dictionary of Scientific Bird Names</em>. Christopher Helm.</li>
+          <li>Larkwire. Bohemian Waxwing songs and calls. larkwire.com.</li>
+          <li>BirdWeb (Seattle Audubon). Bohemian Waxwing. birdweb.org.</li>
+          <li>Newton, I. (2006). <em>The Migration Ecology of Birds</em>. Academic Press.</li>
+          <li>Suhonen, J. and Jokimaki, J. (2023). Irruptions of Bohemian Waxwings in relation to population density and food availability. <em>J. Ornithology</em> 164: 857&ndash;866.</li>
+          <li>Fitzgerald, S.D., et al. (1990). Suspected ethanol toxicosis in Cedar Waxwings. <em>Avian Diseases</em> 34: 488&ndash;490.</li>
+          <li>Eastside Audubon Society. Bohemian Waxwing. eastsideaudubon.org.</li>
+          <li>Birds and Blooms. Bohemian Waxwing vs Cedar Waxwing: ID Tips. birdsandblooms.com.</li>
+          <li>Partners in Flight. (2019). Avian Conservation Assessment Database. partnersinflight.org.</li>
+          <li>Alaska Species Ranking System. Bohemian Waxwing. University of Alaska Anchorage.</li>
+          <li>NW Music Archives. Luther Rabb. nwmusicarchives.com.</li>
+          <li>Jive Time Records. Ballin&rsquo; Jack. jivetimerecords.com.</li>
+          <li>Find a Grave. Luther James Rabb (1942&ndash;2006). findagrave.com.</li>
+          <li>Sauer, J.R., et al. (2020). North American Breeding Bird Survey, 1966&ndash;2019. USGS.</li>
+        </ul>
+
+      </div><!-- /content-body -->
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species Data</h3>
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">32&deg; of 360&deg;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Bombycillidae</div>
+          <div class="stat-detail">Pair COMPLETE &mdash; 2 of 3 species (66.7%)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value">Bombycilla</div>
+          <div class="stat-detail">&ldquo;Silk-tail&rdquo; &mdash; shared with Cedar Waxwing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value">Buzzy Bzeee Flock Chorus</div>
+          <div class="stat-detail">Sibilant-buzzy &mdash; coarser than Cedar&rsquo;s whisper</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value" style="color: #B71C1C;">5 &mdash; NEW</div>
+          <div class="stat-detail">E=4 streak BROKEN after 11 degrees (21&ndash;31)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Berry Stands</div>
+          <div class="stat-detail">Concentrated fruit &mdash; often anthropogenic</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value" style="color: #E65100;">Irruptive &mdash; NEW</div>
+          <div class="stat-detail">Unpredictable winter invasion &mdash; 6th category</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">5.0&ndash;8.5 kHz</div>
+          <div class="stat-detail">Peak 5.5&ndash;7.5 kHz &mdash; lower than Cedar</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Size</div>
+          <div class="stat-value">45&ndash;70 g (~55 g avg)</div>
+          <div class="stat-detail">Nearly 2x Cedar Waxwing mass &mdash; starling-sized</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Plumage</div>
+          <div class="stat-value">Gray-Brown &rarr; Gray</div>
+          <div class="stat-detail">Cooler than Cedar + bold wing whites/yellows</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Undertail</div>
+          <div class="stat-value" style="color: #BF360C;">Cinnamon</div>
+          <div class="stat-detail">Key field mark (Cedar = white)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Range</div>
+          <div class="stat-value">Holarctic Boreal</div>
+          <div class="stat-detail">First Holarctic species in engine</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">PNW Status</div>
+          <div class="stat-value">Rare Winter Visitor</div>
+          <div class="stat-detail">Mostly eastern WA &mdash; rare west of Cascades</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Waxwing Pair</div>
+          <div class="stat-value">2 of 2 &mdash; CLOSED</div>
+          <div class="stat-detail">Cedar (31, E=4) + Bohemian (32, E=5)</div>
+        </div>
+
+        <h3>Part A Parallel</h3>
+        <div class="parallel-card">
+          <div class="parallel-label">Degree 32 &mdash; S36</div>
+          <div class="parallel-name">Luther Rabb</div>
+          <div class="parallel-detail">R&amp;B/Funk &middot; E=5 &middot; 1970s &middot; Seattle &middot; Columbia/MCA</div>
+          <div class="parallel-detail" style="margin-top: 0.4rem;">
+            Bass player &mdash; Ballin&rsquo; Jack, War, Santana tour.
+            Explosive live energy. Irruptive career arc: sudden arrival,
+            intense presence, unpredictable movements. Seattle roots,
+            national reach. Bass as buzz. First E=5 in both Part A and Part B.
+          </div>
+        </div>
+
+        <h3>Key Links</h3>
+        <div class="stat-card">
+          <div class="stat-label">Research</div>
+          <div class="stat-value"><a href="research.md">research.md</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Knowledge Nodes</div>
+          <div class="stat-value"><a href="knowledge-nodes.json">knowledge-nodes.json</a></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Retrospective</div>
+          <div class="stat-value"><a href="retrospective.md">retrospective.md</a></div>
+        </div>
+      </div><!-- /sidebar -->
+    </div><!-- /release-grid -->
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; Degree 32&deg; of 360&deg; &mdash; v1.49.168</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 36&deg; &mdash; Anna&rsquo;s Hummingbird &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Sonic boom highlight card */
+    .boom-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #42A5F5 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .boom-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Pair card */
+    .pair-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .pair-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Urban card */
+    .urban-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .urban-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Resident card */
+    .resident-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .resident-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Song learning card */
+    .song-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 1px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .song-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Conservation mirror card */
+    .mirror-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #7986CB 100%);
+      border: 2px solid #283593;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .mirror-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.boom { background: #1565C0; }
+    .theory-icon.urban { background: #7B1FA2; }
+    .theory-icon.resident { background: #2E7D32; }
+    .theory-icon.song { background: #E65100; }
+    .theory-icon.conservation { background: #283593; }
+    .theory-icon.energy { background: #C62828; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">36&deg;</div>
+      <div class="release-title-block">
+        <h2>Anna&rsquo;s Hummingbird</h2>
+        <div class="scientific">Calypte anna</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      metallic chip + dive display buzz &mdash; the sonic boom, the winter hummingbird, the one that stayed
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Sonic Boom Element Card -->
+        <div class="boom-card">
+          <h3>The 37th Acoustic Element: The Sonic Boom</h3>
+          <p>A brief, explosive, mechanically generated sound produced by tail feathers (R5) vibrating like a clarinet reed at the bottom of a <strong>40-meter courtship dive at 385 body lengths per second</strong> &mdash; the fastest vertebrate dive by the body-length metric, nearly 2&times; the peregrine falcon&rsquo;s stoop speed. A single 60-millisecond chirp at ~4 kHz (C8, four octaves above middle C), louder than the bird&rsquo;s vocal capacity. ~9 g centripetal acceleration at pullout.</p>
+          <p><strong>The progression:</strong> whisper (31) &rarr; buzz (32) &rarr; cadenza (33) &rarr; dialect (34) &rarr; thrum (35) &rarr; <strong>sonic boom (36)</strong>. The thrum was continuous. The sonic boom is instantaneous. The thrum says &ldquo;I am here.&rdquo; The sonic boom says &ldquo;LOOK AT ME.&rdquo;</p>
+        </div>
+
+        <!-- Hummingbird Pair Card -->
+        <div class="pair-card">
+          <h3>The Hummingbird Pair &mdash; Rufous (35) + Anna&rsquo;s (36)</h3>
+          <p>The engine&rsquo;s <strong>fourth species pair</strong> and its most instructive. Same family (Trochilidae), different genus (<em>Selasphorus</em> vs. <em>Calypte</em>). Opposite strategies:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>Rufous:</strong> Migrant. Summer. Follows the bloom. No song. Near Threatened (65% decline). Natural habitat.</li>
+            <li><strong>Anna&rsquo;s:</strong> Resident. Year-round. Waits for the bloom. Learned song. Least Concern (increasing). Urban habitat.</li>
+          </ul>
+          <p>One leaves. One stays. The migrant is declining. The resident is expanding.</p>
+        </div>
+
+        <h2>Taxonomy: The Veiled Jewel</h2>
+        <p><em>Calypte</em> &mdash; Ancient Greek <em>kaluptre</em> (&ldquo;woman&rsquo;s veil, headdress&rdquo;), from <em>kalupto</em> (&ldquo;to cover&rdquo;). John Gould erected the genus in 1856 for hummingbirds whose males have &ldquo;not only the throat, but the entire head as glitteringly resplendent as if they had been dipped in molten metal.&rdquo; <em>Anna</em> &mdash; Anna de Belle Masséna, Duchess of Rivoli. Described by René Lesson in 1829.</p>
+        <p>Compare: <em>Selasphorus rufus</em> = &ldquo;red flame-bearer&rdquo; (pure description). <em>Calypte anna</em> = &ldquo;Anna&rsquo;s veiled one&rdquo; (a person&rsquo;s name and structural color physics). The flame-bearer names what it looks like. The veiled one names who named it.</p>
+
+        <h2>The Sound: Three Components</h2>
+
+        <h3>1. Metallic Chip (Vocal)</h3>
+        <p>A sharp, hard <em>tsik</em> or <em>chip</em>, approximately 6&ndash;8 kHz, with a metallic quality distinctly different from the Rufous&rsquo;s buzzy chitter. Given by both sexes in foraging, contact, and aggressive contexts.</p>
+
+        <h3>2. Complex Learned Song (Vocal)</h3>
+        <p>A thin, squeaky, buzzy series lasting over 10 seconds, delivered from a conspicuous perch. <strong>Learned by imitation</strong> &mdash; one of the only hummingbirds with culturally transmitted song. Males begin practicing at 4&ndash;7 months; song crystallizes by ~11 months. Geographic dialects exist. First non-passerine vocal learner in the engine.</p>
+
+        <h3>3. Dive Display Chirp (Mechanical)</h3>
+        <p>Male climbs to ~40 m, plummets at 27.3 m/s (385 body lengths/s), spreads tail for ~60 ms at the nadir. The outer tail feather (R5) vibrates like a clarinet reed, producing an explosive tonal chirp at ~4 kHz (C8). Louder than vocal capacity. ~9 g at pullout. Synchronized with gorget flash.</p>
+
+        <table class="freq-table">
+          <thead>
+            <tr><th>Sound Type</th><th>Mechanism</th><th>Frequency</th><th>Context</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Metallic chip</td><td>Vocal (syrinx)</td><td>6&ndash;8 kHz</td><td>Contact, alarm, aggression</td></tr>
+            <tr><td>Complex song</td><td>Vocal (syrinx, learned)</td><td>3&ndash;10 kHz</td><td>Male display from perch</td></tr>
+            <tr><td>Dive chirp</td><td>Mechanical (tail R5)</td><td>~4 kHz (C8)</td><td>Courtship/territory dive</td></tr>
+          </tbody>
+        </table>
+
+        <!-- Song Learning Card -->
+        <div class="song-card">
+          <h3>Learned Song &mdash; Convergent Vocal Learning</h3>
+          <p>Three bird lineages independently evolved vocal learning: songbirds, parrots, and hummingbirds. Anna&rsquo;s Hummingbird is the <strong>best-documented hummingbird vocal learner</strong>. Males have an enlarged higher vocal center (HVC), androgen-dependent. The Rufous Hummingbird (same family) does NOT learn its songs. Within Trochilidae, the engine encounters both innate and learned vocalizations.</p>
+          <p>This is the <strong>first non-passerine vocal learner in the engine</strong> &mdash; proof that song learning evolved independently in an entirely different avian lineage.</p>
+        </div>
+
+        <!-- Urban Ecosystem Card -->
+        <div class="urban-card">
+          <h3>Urban/Coastal &mdash; First Urban Ecosystem</h3>
+          <p>The engine&rsquo;s <strong>first explicitly urban ecosystem</strong>. Defined by human modification: residential gardens, ornamental plantings, sugar-water feeders, urban parks. Anna&rsquo;s Hummingbird did not evolve in Seattle &mdash; it <em>expanded</em> into human-created habitat. First records in Seattle ~1964. Range expanded ~900 miles northward in 60 years.</p>
+          <p><strong>Drivers:</strong> Ornamental winter-blooming plants, year-round feeders, climate moderation, urban heat islands. The bird bet its northern range on humans continuing to garden. So far, the bet is paying off.</p>
+        </div>
+
+        <!-- Year-Round Resident Card -->
+        <div class="resident-card">
+          <h3>Year-Round Resident &mdash; The Winter Hummingbird</h3>
+          <p>The <strong>northernmost year-round resident hummingbird in the world</strong>. Every other PNW hummingbird migrates to Mexico. Anna&rsquo;s stays through January ice, February snow, the long dark months. Present in Seattle twelve months a year.</p>
+          <p><strong>Survival mechanism:</strong> Nightly torpor. Body temperature drops from 40&deg;C to 8.8&deg;C. Heart rate from 1,200 to 50 bpm. Breathing from 245/min to &lt;10. Metabolic rate drops 95%. Gains 16% body weight in fat by day, burns it all by dawn. Razor-thin margin.</p>
+          <p>The Rufous migrates. Anna&rsquo;s endures.</p>
+        </div>
+
+        <!-- Conservation Mirror Card -->
+        <div class="mirror-card">
+          <h3>Conservation Mirror &mdash; Opposite Trajectories</h3>
+          <p>Same family, opposite fates:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>Rufous (35):</strong> Near Threatened. 65% decline. Natural habitat degrading. Migrant losing flowers.</li>
+            <li><strong>Anna&rsquo;s (36):</strong> Least Concern. ~9.6 million, increasing 2%/yr. Urban habitat expanding. Resident gaining feeders.</li>
+          </ul>
+          <p>The migrant depending on wild flowers is losing. The resident depending on human gardens is winning. The sharpest conservation contrast in the engine.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=5 &mdash; Explosive Detonation</h3>
+          <p>Third E=5 in the engine. First <strong>back-to-back E=5</strong> (degrees 35&ndash;36). Three models of maximum energy:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>Bohemian Waxwing (32):</strong> Collective swarm. Hundreds buzzing.</li>
+            <li><strong>Rufous Hummingbird (35):</strong> Sustained intensity. Continuous thrum.</li>
+            <li><strong>Anna&rsquo;s Hummingbird (36):</strong> Explosive detonation. Single 60-ms chirp from a 40-m dive.</li>
+          </ul>
+          <p>Orchestra tutti vs. sustained solo vs. cannon shot.</p>
+        </div>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon boom">S</div>
+            <div class="theory-content">
+              <h4>The Sonic Boom <span class="theory-level foundational">foundational</span></h4>
+              <p>Tail-feather R5 vibrating like a clarinet reed at 27.3 m/s. 385 body lengths/s &mdash; fastest vertebrate. 60 ms, ~4 kHz, ~9 g. The aeromechanical category pushed to its extreme.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon urban">U</div>
+            <div class="theory-content">
+              <h4>Urban/Coastal Ecosystem <span class="theory-level foundational">foundational</span></h4>
+              <p>First urban, first human-defined ecosystem. Ornamental plants, feeders, urban heat islands. Anna&rsquo;s expanded into human-created habitat within living memory.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon resident">R</div>
+            <div class="theory-content">
+              <h4>Year-Round Residence <span class="theory-level foundational">foundational</span></h4>
+              <p>Only PNW hummingbird that overwinters. Nightly torpor: 40&deg;C&rarr;8.8&deg;C, 1,200&rarr;50 bpm. The opposite of migration. The price of staying.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon song">L</div>
+            <div class="theory-content">
+              <h4>Learned Song <span class="theory-level intermediate">intermediate</span></h4>
+              <p>First non-passerine vocal learner. Convergent evolution with songbirds. Geographic dialects. The Rufous (same family) has no song. Anna&rsquo;s has learned, culturally transmitted song.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon conservation">M</div>
+            <div class="theory-content">
+              <h4>Conservation Mirror <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Same family, opposite trajectories. Rufous: declining 65%. Anna&rsquo;s: increasing 2%/yr. The migrant losing, the resident winning. The engine&rsquo;s sharpest conservation contrast.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">5</div>
+            <div class="theory-content">
+              <h4>E=5 Explosive Display <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Third E=5. First back-to-back E=5. Three models: collective (32), sustained (35), explosive (36). The dive chirp concentrates all energy into 60 ms.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-035: Rufous Hummingbird</strong>
+            <p>HUMMINGBIRD PAIR. Same family, opposite strategies. Migrant/summer/thrum/declining vs. resident/year-round/sonic boom/expanding. The engine&rsquo;s most instructive species pair.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>LEARNED SONG PARALLEL. Crossbill type calls may involve cultural transmission. Anna&rsquo;s definitively learns its song. Different scales of vocal culture.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-032: Bohemian Waxwing</strong>
+            <p>E=5 TRIO. Three models of maximum energy: collective swarm (32), sustained intensity (35), explosive detonation (36).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-031: Cedar Waxwing</strong>
+            <p>RESIDENT VS. RESIDENT. Both year-round in Seattle. Waxwing whispers (E=4). Hummingbird dive-bombs (E=5). December neighbors.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker</strong>
+            <p>MECHANICAL SOUND EVOLUTION. Percussive (bill on wood) &rarr; aeromechanical thrum (wing) &rarr; aeromechanical dive chirp (tail R5). Three mechanisms, zero syrinx.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000: Great Blue Heron</strong>
+            <p>URBAN KINSHIP. Both comfortable in urban settings. But the heron was always there; Anna&rsquo;s expanded into cities from a different range.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the PNW</strong>
+            <p>Year-round resident, only winter hummingbird. One of four PNW hummingbird species. Population increasing, range expanding.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems</strong>
+            <p>Urban ecology, human-wildlife interaction, feeder culture, range expansion. Torpor physiology. Climate change and range dynamics.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Clark, C.J. and Russell, S.M. (2020). Anna&rsquo;s Hummingbird (<em>Calypte anna</em>), version 1.0. <em>Birds of the World</em>. Cornell Lab of Ornithology.</li>
+          <li>&ldquo;Anna&rsquo;s hummingbird.&rdquo; Wikipedia.</li>
+          <li>Lesson, R.P. (1829). <em>Histoire naturelle des oiseaux-mouches</em>.</li>
+          <li>Audubon. &ldquo;Anna&rsquo;s Hummingbird.&rdquo; Field Guide.</li>
+          <li>Birds of the World. &ldquo;Sounds and Vocal Behavior &mdash; Anna&rsquo;s Hummingbird.&rdquo;</li>
+          <li>Baptista, L.F. and Schuchmann, K.L. (1990). Song learning in the Anna Hummingbird. <em>Ethology</em> 84: 15&ndash;26.</li>
+          <li>Cornell Lab of Ornithology. &ldquo;Anna&rsquo;s Hummingbird Sounds.&rdquo; All About Birds.</li>
+          <li>Animal Diversity Web. <em>Calypte anna</em>.</li>
+          <li>Goldstein, M.H. et al. (2020). Ontogeny of vocal learning in a hummingbird. <em>Animal Behaviour</em> 167: 139&ndash;150.</li>
+          <li>Clark, C.J. and Feo, T.J. (2008). The Anna&rsquo;s hummingbird chirps with its tail. <em>Proc. R. Soc. B</em> 275: 955&ndash;962.</li>
+          <li>Clark, C.J. (2009). Courtship dives of Anna&rsquo;s hummingbird offer insights into flight performance limits. <em>Proc. R. Soc. B</em> 276: 3047&ndash;3052.</li>
+          <li>Salish Current (2022). &ldquo;Winter leaves hummingbirds in the cold.&rdquo;</li>
+          <li>Whidbey Camano Land Trust. &ldquo;How Hummingbirds Survive Our Cold Winter Nights.&rdquo;</li>
+          <li>BirdWeb (Seattle Audubon). &ldquo;Anna&rsquo;s Hummingbird.&rdquo;</li>
+          <li>BirdLife International. IUCN Red List: <em>Calypte anna</em> &mdash; Least Concern.</li>
+          <li>North American Breeding Bird Survey. Population trend data.</li>
+          <li>U.S. Forest Service. &ldquo;Calypte anna &mdash; Pollinator of the Month.&rdquo;</li>
+          <li>National Geographic. &ldquo;Anna&rsquo;s hummingbird outflies falcons and fighter pilots.&rdquo;</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Species</h3>
+        <div class="stat-card">
+          <div class="stat-label">Scientific Name</div>
+          <div class="stat-value" style="font-size: 0.95rem; font-style: italic;">Calypte anna</div>
+          <div class="stat-detail">&ldquo;Anna&rsquo;s veiled one&rdquo;</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value" style="font-size: 1rem;">Apodiformes</div>
+          <div class="stat-detail">Continues from degree 35</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value" style="font-size: 1rem;">Trochilidae</div>
+          <div class="stat-detail">2nd member (pair with Rufous)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value" style="font-size: 0.95rem; color: #2E7D32;">Least Concern</div>
+          <div class="stat-detail">Increasing ~2%/yr, ~9.6M</div>
+        </div>
+
+        <h3>Acoustics</h3>
+        <div class="stat-card">
+          <div class="stat-label">Sound Type</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Metallic chip + dive buzz</div>
+          <div class="stat-detail">Vocal + mechanical (R5 tail)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dive Speed</div>
+          <div class="stat-value">385 BL/s</div>
+          <div class="stat-detail">Fastest vertebrate (body-length)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dive Chirp</div>
+          <div class="stat-value">~4 kHz (C8)</div>
+          <div class="stat-detail">R5 feather, 60 ms, ~9 g</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value" style="font-size: 0.88rem;">#37: The Sonic Boom</div>
+          <div class="stat-detail">Explosive mechanical display</div>
+        </div>
+
+        <h3>Ecology</h3>
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 5</div>
+          <div class="stat-detail">3rd E=5 (1st back-to-back)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value" style="font-size: 0.82rem;">Urban/coastal</div>
+          <div class="stat-detail">1st urban ecosystem</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round &mdash; only winter hummingbird</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dive Height</div>
+          <div class="stat-value">~40 m</div>
+          <div class="stat-detail">131 ft, 12-second display</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Torpor</div>
+          <div class="stat-value" style="font-size: 0.82rem;">40&deg;C &rarr; 8.8&deg;C</div>
+          <div class="stat-detail">Nightly winter shutdown</div>
+        </div>
+
+        <h3>Engine</h3>
+        <div class="stat-card">
+          <div class="stat-label">Unique Species</div>
+          <div class="stat-value">35</div>
+          <div class="stat-detail">37 total entries (0&ndash;36)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Trochilidae now 2 members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Apodiformes: 2 degrees</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Release Engine &mdash; Degree 36&deg;</p>
+  </footer>
+</body>
+</html>
