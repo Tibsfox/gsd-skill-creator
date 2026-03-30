@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 45&deg; &mdash; Song Sparrow &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Preamble highlight card */
+    .preamble-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #81C784 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .preamble-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* New family card */
+    .family-new-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .family-new-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Energy restoration card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Nice card */
+    .nice-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #5D4037;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .nice-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.preamble { background: #2E7D32; }
+    .theory-icon.family { background: #1565C0; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-icon.nice { background: #5D4037; }
+    .theory-icon.reference { background: #E65100; }
+    .theory-icon.wetland { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">45&deg;</div>
+      <div class="release-title-block">
+        <h2>Song Sparrow</h2>
+        <div class="scientific">Melospiza melodia</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      complex melodious song &mdash; the preamble, 1st Passerellidae (NEW family), E=2 restored after 31 degrees, &ldquo;melody song-finch&rdquo; &mdash; the bird whose name means &ldquo;song song,&rdquo; most studied songbird in North America, Margaret Morse Nice&rsquo;s bird, 8&ndash;12 song types per male, year-round PNW resident
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Pacific Chorus Frog</strong> (<em>Pseudacris regilla</em>) at degree 45. Because the SPS Part B engine is birds-and-mammals only, Song Sparrow replaces it. The substitution preserves the original&rsquo;s <strong>E=2 energy level</strong> and <strong>wetland/pond margin habitat</strong>. The Song Sparrow occupies exactly the pond-edge habitat where the chorus frog calls.</p>
+        </div>
+
+        <!-- Preamble Element Card -->
+        <div class="preamble-card">
+          <h3>The 46th Acoustic Element: The Preamble</h3>
+          <p>Every Song Sparrow song opens with <strong>2&ndash;4 clear, deliberate introductory notes</strong> before launching into a complex body of trills and buzzy phrases. The preamble is a formal opening statement &mdash; it announces complexity that follows. Named &ldquo;the preamble&rdquo; for the song&rsquo;s structure, for Nice&rsquo;s studies as the preamble to modern behavioral ecology, and for the engine reaching its one-eighth mark.</p>
+          <p><strong>The first acoustic element defined by formal positional structure</strong> &mdash; an event meaningful because of where it occurs in the sequence, not what it sounds like in isolation.</p>
+        </div>
+
+        <!-- New Family Card -->
+        <div class="family-new-card">
+          <h3>First Passerellidae &mdash; 19th Family in the Engine</h3>
+          <p><strong>Passerellidae (New World Sparrows)</strong> enters the engine for the first time. Split from Emberizidae by the AOS in 2017, Passerellidae contains approximately 140 species in 30 genera. The Song Sparrow is the family&rsquo;s type example &mdash; the most common, most studied, most vocal New World sparrow. The engine adds its first true sparrow.</p>
+        </div>
+
+        <!-- Energy Restoration Card -->
+        <div class="energy-card">
+          <h3>E=2 Restored &mdash; After 31 Degrees of Absence</h3>
+          <p>The last E=2 was degree 14 (MacGillivray&rsquo;s Warbler) &mdash; <strong>31 degrees ago</strong>. Seven consecutive E=4 across degrees 38&ndash;44 compressed the dynamic range to its most severe. E=2 returns at degree 45, dropping two levels and restoring the engine&rsquo;s lower register. The Song Sparrow sings from low perches beside the water &mdash; conversational, not declamatory.</p>
+        </div>
+
+        <!-- Nice Card -->
+        <div class="nice-card">
+          <h3>Margaret Morse Nice&rsquo;s Bird</h3>
+          <p>Nice&rsquo;s eight-year study of Song Sparrows (1928&ndash;1936, published 1937 and 1943) invented modern population ecology methodology. Konrad Lorenz: &ldquo;a major breakthrough in the methods of studying animal behavior.&rdquo; Ernst Mayr: &ldquo;the finest piece of life history work ever done.&rdquo; Nice worked as a <strong>scientific outsider</strong> &mdash; no university position, working from her own backyard, publishing foundational science. The Song Sparrow was the organism; the contribution was epoch-making.</p>
+        </div>
+
+        <h2>The Bird Whose Name Means &ldquo;Song Song&rdquo;</h2>
+        <p><em>Melospiza melodia</em> &mdash; from Greek <em>melos</em> (song) + <em>spiza</em> (finch) and Latin <em>melodia</em> (melody). &ldquo;Melody song-finch&rdquo; &mdash; the bird so defined by its voice that both halves of its binomial say the same thing. No other species in the engine has a name so completely devoted to sound.</p>
+
+        <h3>Recent Naming Comparison</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Binomial</th><th>Translation</th><th>Philosophy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>43</td><td>American Goldfinch</td><td><em>Spinus tristis</em></td><td>&ldquo;Sad thorn-bird&rdquo;</td><td>Ecological + Emotional</td></tr>
+            <tr><td>44</td><td>Lesser Goldfinch</td><td><em>Spinus psaltria</em></td><td>&ldquo;Female lute player of the thorn bush&rdquo;</td><td>Ecological + Musical</td></tr>
+            <tr><td><strong>45</strong></td><td><strong>Song Sparrow</strong></td><td><strong><em>Melospiza melodia</em></strong></td><td><strong>&ldquo;Melody song-finch&rdquo;</strong></td><td><strong>Musical + Musical</strong></td></tr>
+          </tbody>
+        </table>
+        <p>The naming escalates: from a musician (<em>psaltria</em>) to the music itself (<em>melodia</em>). The Song Sparrow&rsquo;s name is pure acoustics &mdash; no habitat, no emotion, no instrument. Just song.</p>
+
+        <h2>The Sound: Preamble + Body</h2>
+        <p><strong>Song:</strong> 2&ndash;4 seconds. Opens with 2&ndash;4 clear introductory notes (the preamble), then launches into a complex body of trills, buzzy notes, and varied phrases. Frequency 2&ndash;8 kHz, most energy in 2&ndash;6 kHz. Classic mnemonic: &ldquo;Maids! Maids! Maids! Put on your tea-kettle-ettle-ettle.&rdquo;</p>
+        <p><strong>Repertoire:</strong> Each male sings <strong>8&ndash;12 distinct song types</strong>, each with a different preamble pattern. Males sing in &ldquo;eventual variety&rdquo; &mdash; repeating one type 5&ndash;15 times before switching. A territorial male may sing more than <strong>1,000 songs per day</strong>.</p>
+        <p><strong>Learning:</strong> Age-limited learner. Memorizes songs from neighboring adult males during a 40-day sensitive period starting at ~22 days of age. Song crystallizes by first spring and is maintained unchanged for life. The preamble is set once and held forever.</p>
+        <p><strong>Soft song:</strong> A quiet, close-range version of the full song, first described by Margaret Morse Nice. Given during aggressive encounters. A whispered threat.</p>
+
+        <h3>Contrast: Mosaic vs. Preamble</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Feature</th><th>Lesser Goldfinch (44)</th><th>Song Sparrow (45)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acoustic element</td><td>The Mosaic</td><td><strong>The Preamble</strong></td></tr>
+            <tr><td>Song source</td><td>~50% other species</td><td>All conspecific</td></tr>
+            <tr><td>Repertoire</td><td>70&ndash;105 phrases</td><td>8&ndash;12 song types</td></tr>
+            <tr><td>Learning</td><td>Lifelong, interspecific</td><td>Age-limited, conspecific</td></tr>
+            <tr><td>Energy</td><td>E=4</td><td><strong>E=2</strong></td></tr>
+            <tr><td>Defining quality</td><td>Borrowed content</td><td>Structural position</td></tr>
+          </tbody>
+        </table>
+        <p>The mosaic is defined by <em>what</em> the song borrows. The preamble is defined by <em>where</em> the song begins. Content vs. structure.</p>
+
+        <h2>24 Subspecies &mdash; A Continent of Variation</h2>
+        <p>The Song Sparrow has <strong>24&ndash;25 recognized subspecies</strong> (52 named historically) &mdash; one of the most polytypic birds in North America. Size varies from the tiny desert <em>saltonis</em> (~18 g) to the enormous Aleutian <em>maxima</em> (~53 g). PNW birds are subspecies <em>morphna</em> &mdash; dark, heavily streaked, year-round residents of the wet Pacific lowlands. Four subspecies occur in Washington, three breeding.</p>
+
+        <h2>Family Tracker After Degree 45</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Paridae</td><td>3, 9</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+            <tr><td><strong>Passerellidae</strong></td><td><strong>45</strong></td><td><strong>1 (NEW)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Passerellidae enters the engine. The 19th family. The first true sparrow.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon preamble">P</div>
+            <div class="theory-content">
+              <h4>The Preamble <span class="theory-level foundational">foundational</span></h4>
+              <p>The 46th acoustic element. A formal opening statement &mdash; 2&ndash;4 clear introductory notes that announce complex song body that follows. The first element defined by positional structure: meaningful because of where it occurs, not what it sounds like in isolation.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon family">F</div>
+            <div class="theory-content">
+              <h4>First Passerellidae <span class="theory-level foundational">foundational</span></h4>
+              <p>New World Sparrows enter the engine. 19th family. Split from Emberizidae in 2017. ~140 species in 30 genera. The Song Sparrow is the family&rsquo;s type example &mdash; the default sparrow.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">2</div>
+            <div class="theory-content">
+              <h4>E=2 Restored <span class="theory-level foundational">foundational</span></h4>
+              <p>First E=2 since degree 14 &mdash; 31 degrees of absence. Breaks seven consecutive E=4 (38&ndash;44). Dynamic range restored. The engine has a lower register again.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon nice">N</div>
+            <div class="theory-content">
+              <h4>Nice&rsquo;s Model Organism <span class="theory-level foundational">foundational</span></h4>
+              <p>The most studied songbird in North America. Nice&rsquo;s 1937&ndash;1943 studies invented modern population ecology. Marler&rsquo;s vocal learning research established the field. The Song Sparrow is to ornithology what <em>Drosophila</em> is to genetics.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon reference">R</div>
+            <div class="theory-content">
+              <h4>The Reference Species <span class="theory-level intermediate">intermediate</span></h4>
+              <p>The &ldquo;default&rdquo; bird &mdash; other species&rsquo; songs are described relative to Song Sparrow. The baseline, the comparison point, the bird you learn first. The engine acquires its reference pitch.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon wetland">W</div>
+            <div class="theory-content">
+              <h4>Wetland Edge Habitat <span class="theory-level intermediate">intermediate</span></h4>
+              <p>The engine&rsquo;s first true wetland-edge species. Pond margins, marsh edges, riparian thickets. The transition zone where water meets land. The habitat the engine has been missing since degree 0.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-044: Lesser Goldfinch</strong>
+            <p>FAMILY TRANSITION. Fringillidae (44) to Passerellidae (45). E=4 to E=2. Mimicry mosaic (borrowed voices) to preamble (original composition). Lifelong learner to age-limited learner. Summer visitor to year-round resident. The engine pivots.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014: MacGillivray&rsquo;s Warbler</strong>
+            <p>LAST E=2. MacGillivray&rsquo;s at degree 14 was the last E=2 entry &mdash; 31 degrees of absence before the Song Sparrow restores the energy level. Both are low-perching, dense-vegetation birds with moderate songs. Both name their sound (churry-churry-churry-sweet vs. the preamble).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000: Great Blue Heron</strong>
+            <p>WETLAND RETURN. The Great Blue Heron at degree 0 stood in the water. The Song Sparrow at degree 45 stands beside the water. 45 degrees between the engine&rsquo;s two water-associated species. The heron was silence; the sparrow is the preamble.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-011: Oregon Junco</strong>
+            <p>PASSERELLIDAE LINK. The junco at degree 11 was entered under Emberizidae but is now classified as Passerellidae. The Song Sparrow is the first species explicitly entered as Passerellidae. Two sparrow-family members, 34 degrees apart, bookending the family&rsquo;s reclassification.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>VOCAL LEARNING CONTRAST. Crossbill = population-specific dialects (species-internal). Song Sparrow = individually learned repertoires from local tutors (neighbor-specific). Both involve vocal learning; different spatial scales of transmission.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-017: Common Yellowthroat</strong>
+            <p>WETLAND NEIGHBOR. The yellowthroat sings from cattail stalks in the same marshes where Song Sparrows nest. Witchety-witchety vs. Maids-Maids-Maids. E=3 vs. E=2. Both are low-perching wetland-edge birds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Song Sparrow documented as common year-round resident in western Washington. Four subspecies in WA, three breeding. Dark <em>morphna</em> form dominant in Puget Sound lowlands.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Wetland-edge ecology. Pond margin habitat. Riparian thickets. Geographic adaptation across 24+ subspecies. Gloger&rsquo;s rule in PNW coloration. Omnivore-generalist diet ecology.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Song Sparrow (<em>Melospiza melodia</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Song Sparrow. Cornell Lab of Ornithology.</li>
+          <li>Nice, Margaret Morse (1937). <em>Studies in the Life History of the Song Sparrow, Vol. I.</em></li>
+          <li>BirdWeb (Seattle Audubon) &mdash; Song Sparrow.</li>
+          <li>Wikipedia &mdash; &ldquo;Song sparrow.&rdquo;</li>
+          <li>Audubon &mdash; Song Sparrow Field Guide.</li>
+          <li>Johnson, N. K., et al. (2013). &ldquo;The Subspecies of the Song Sparrow.&rdquo; IBP.</li>
+          <li>10,000 Things of the Pacific Northwest &mdash; <em>Melospiza melodia</em>.</li>
+          <li>Cool Green Science (2016). &ldquo;The Battles of Song Sparrows.&rdquo;</li>
+          <li>Marler, P. &amp; Sherman, V. (1987). &ldquo;A Sensitive Period for Song Acquisition in the Song Sparrow.&rdquo; <em>Ethology</em>.</li>
+          <li>Marler, P. &amp; Peters, S. (1988). &ldquo;The Role of Song Phonology and Syntax in Vocal Learning.&rdquo; <em>Ethology</em>.</li>
+          <li>The Conversation (2019). &ldquo;Margaret Morse Nice thought like a song sparrow.&rdquo;</li>
+          <li>Clark University (2023). &ldquo;Margaret Morse Nice: Animal Behavior.&rdquo;</li>
+          <li>Beecher, M. D. &amp; Brenowitz, E. A. (2005). &ldquo;Functional aspects of song learning.&rdquo; <em>TREE</em>.</li>
+          <li>Nordby, J. C. et al. (2002). &ldquo;Adult song sparrows do not alter their song repertoires.&rdquo; <em>Ethology</em>.</li>
+          <li>Beecher, M. D. et al. (1996). &ldquo;Repertoire matching between neighbouring song sparrows.&rdquo; <em>Animal Behaviour</em>.</li>
+          <li>Anderson, R. C. et al. (2008). &ldquo;Soft Song in Song Sparrows.&rdquo; <em>Ethology</em>.</li>
+          <li>Wikipedia &mdash; &ldquo;New World sparrow&rdquo; (Passerellidae).</li>
+          <li>Partners in Flight &mdash; Song Sparrow population estimates. BBS data.</li>
+          <li>Wahl, T. R. et al. <em>Birds of Washington: Status and Distribution.</em></li>
+          <li>Animal Diversity Web &mdash; <em>Melospiza melodia</em>.</li>
+          <li>National Geographic &mdash; Song Sparrow.</li>
+          <li>Smithsonian National Zoo &mdash; Song Sparrow.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">45&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Preamble</div>
+          <div class="stat-detail">#46 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 2</div>
+          <div class="stat-detail">First E=2 since degree 14 (31&deg; gap)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Passerellidae</div>
+          <div class="stat-detail">NEW &mdash; 19th family in engine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Melospiza</em></div>
+          <div class="stat-detail">1st appearance &mdash; &ldquo;song finch&rdquo;</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Wetland Edge</div>
+          <div class="stat-detail">Pond margin, marsh edge, riparian</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round in western Washington</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">44 unique</div>
+          <div class="stat-detail">46 entries (0&ndash;45)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">19</div>
+          <div class="stat-detail">Passerellidae NEW at degree 45</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">Passeriformes continues</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~130 Million</div>
+          <div class="stat-detail">IUCN Least Concern</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">~22&ndash;28 g</div>
+          <div class="stat-detail">PNW <em>morphna</em> subspecies</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Song Types</div>
+          <div class="stat-value">8&ndash;12</div>
+          <div class="stat-detail">Per male, learned from local tutors</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value">24&ndash;25</div>
+          <div class="stat-detail">Most polytypic N. American passerine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Songs/Day</div>
+          <div class="stat-value">1,000+</div>
+          <div class="stat-detail">During breeding season peak</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 045</p>
+  </footer>
+</body>
+</html>
