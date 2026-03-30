@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.4 — Pioneer 3 + Old Man's Beard | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91;
+    --nasa-red: #FC3D21;
+    --bark-dark: #1A1408;
+    --bark-mid: #2A2010;
+    --lichen-gold: #B8C99D;
+    --lichen-light: #D4DEB2;
+    --forest-deep: #1A2A1A;
+    --forest-mid: #2A3D2A;
+    --text: #E8E8E8;
+    --text-dim: #A0A0A0;
+    --border: #3D3A20;
+    --amber: #D4A017;
+    --amber-light: #F0D060;
+    --amber-dark: #8B6914;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--bark-dark);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* Lichen-on-bark background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(1px 1px at 8% 12%, rgba(184,201,157,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(212,222,178,0.05) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 8%, rgba(26,42,26,0.10) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(184,201,157,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(212,222,178,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 50%, rgba(26,42,26,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(184,201,157,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 60% 85%, rgba(42,61,42,0.08) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--bark-dark) 0%, var(--bark-mid) 30%, var(--forest-deep) 60%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--lichen-gold);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(184,201,157,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,201,157,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+  }
+
+  .mission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(184,201,157,0.10);
+    border: 1px solid var(--lichen-gold);
+    border-radius: 6px;
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--lichen-gold);
+    margin-bottom: 1rem;
+  }
+
+  .version-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--lichen-light);
+  }
+
+  .status-partial {
+    background: rgba(212,160,23,0.2);
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    font-style: italic;
+    font-family: 'Libre Baskerville', serif;
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--lichen-gold); font-weight: 500; }
+
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 2rem;
+  }
+
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(42,32,16,0.5);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .card h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.2rem;
+    color: var(--lichen-light);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card p, .card li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+
+  .resonance-card {
+    border-color: var(--lichen-gold);
+    background: rgba(184,201,157,0.04);
+  }
+
+  .resonance-axis {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(184,201,157,0.12);
+  }
+
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .axis-num {
+    background: var(--lichen-gold);
+    color: var(--bark-dark);
+    font-weight: 700;
+    font-size: 0.8rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--lichen-light); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(26,42,26,0.4);
+    border: 1px solid var(--forest-mid);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .organism-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--lichen-gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .organism-card .sci-name {
+    font-style: italic;
+    color: var(--lichen-gold);
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stat {
+    background: rgba(26,20,8,0.5);
+    border-radius: 4px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--lichen-light);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .dedication-card {
+    background: rgba(212,160,23,0.08);
+    border: 1px solid var(--amber);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .dedication-card h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+  }
+
+  .data-links {
+    background: rgba(11,61,145,0.15);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .data-links h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .data-links a {
+    display: block;
+    color: #7EB8DA;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.2);
+    transition: color 0.2s;
+  }
+
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .tracks-card {
+    background: rgba(26,26,58,0.4);
+    border: 1px solid rgba(11,61,145,0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .tracks-card h3 {
+    font-size: 0.9rem;
+    color: #7EB8DA;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .track-item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(11,61,145,0.15);
+    font-size: 0.85rem;
+  }
+
+  .track-item:last-child { border-bottom: none; }
+
+  .track-num {
+    background: rgba(11,61,145,0.3);
+    color: #7EB8DA;
+    font-weight: 700;
+    font-size: 0.7rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-card {
+    background: rgba(42,32,16,0.3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .nav-card a {
+    color: var(--lichen-gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .nav-card a:hover { color: var(--lichen-light); }
+
+  footer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer a { color: var(--lichen-gold); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.4</span>
+      <span>NASA Mission Series</span>
+      <span class="status-partial">PARTIAL SUCCESS</span>
+    </div>
+    <h1>Pioneer 3 &mdash; The Second Belt</h1>
+    <p class="subtitle">The lightest Pioneer found the hidden structure, and the lichen that is two organisms in one</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> December 6, 1958</span>
+      <span><span class="label">Program:</span> Pioneer (NASA/ABMA/JPL)</span>
+      <span><span class="label">Epoch:</span> 1 &mdash; Early Space Age</span>
+      <span><span class="label">Vehicle:</span> Juno II</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>Pioneer 3, weighing just 5.87 kilograms, was the first JPL spacecraft &mdash; launched three days after JPL officially transferred to NASA. Its Juno II rocket&rsquo;s first stage burned 3.8 seconds short, but during 38 hours at up to 102,322 km, its twin Geiger-Mueller tubes detected something extraordinary: a second, outer radiation belt peaking around 16,000 km altitude. This confirmed the Van Allen belts are a dual structure &mdash; inner belt of energetic protons, outer belt of energetic electrons, separated by a slot region. Van Allen &amp; Frank published these results in Nature, cementing our understanding of Earth&rsquo;s radiation environment.</p>
+      <p>Pioneer 3 was a transition spacecraft in every sense. It was the first mission managed jointly by the Army Ballistic Missile Agency and the newly operational NASA, built at JPL rather than Space Technology Laboratories, and launched on a Juno II &mdash; a modified Jupiter IRBM &mdash; rather than the Thor-Able vehicles that carried Pioneers 0 through 2. At 5.87 kg, it was a cone of instruments barely larger than a basketball, spin-stabilized at 400 rpm, transmitting at 960.05 MHz on a tiny battery budget. Everything about it was minimal. And yet it found what the heavier, more capable Pioneer 1 had only hinted at: the outer radiation belt, a second zone of trapped particles at 16,000 km that Pioneer 1 had passed through too quickly to resolve.</p>
+    </div>
+
+    <div class="card">
+      <h2>The Spacecraft</h2>
+      <ul>
+        <li><strong>Mass:</strong> 5.87 kg (cone-shaped, 25 cm diameter base, 58 cm tall)</li>
+        <li><strong>Instruments:</strong> Two Geiger-Mueller tubes (Anton 213 type), one shielded (filtering low-energy particles) and one unshielded, providing differential energy measurements</li>
+        <li><strong>Power:</strong> Mercury batteries (limited life, ~38 hours)</li>
+        <li><strong>Transmitter:</strong> 960.05 MHz, 180 milliwatts</li>
+        <li><strong>Stabilization:</strong> Spin-stabilized at ~400 rpm via solid rocket spin motors</li>
+        <li><strong>Builder:</strong> Jet Propulsion Laboratory (first JPL spacecraft for NASA)</li>
+        <li><strong>Launch vehicle:</strong> Juno II (modified Jupiter IRBM + solid upper stages)</li>
+        <li><strong>Key innovation:</strong> Dual GM tubes with differential shielding &mdash; enabled energy spectrum separation that revealed the two-belt structure</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>The Partial Success</h2>
+      <p><strong>T+0 (05:45 UTC):</strong> Juno II ignition from LC-5, Cape Canaveral. The vehicle is a modified Jupiter IRBM with a cluster of solid-propellant upper stages derived from the Explorer 1 launch vehicle.</p>
+      <p><strong>T+0 to T+180:</strong> First stage burn. The Rocketdyne S-3D engine produces 667 kN of thrust, but the engine cuts off 3.8 seconds early. The cause: a premature signal from the propellant depletion sensor, likely triggered by fuel sloshing in the tank under the acceleration profile. The shortfall costs approximately 235 m/s of delta-v.</p>
+      <p><strong>T+180 onward:</strong> Upper stages fire nominally. The solid rocket cluster performs correctly, but the first stage velocity deficit means Pioneer 3 cannot reach escape velocity. It follows a high elliptical trajectory instead of a lunar transfer orbit.</p>
+      <p><strong>Peak altitude:</strong> 102,322 km (approximately 16 Earth radii) &mdash; far short of the Moon at 384,400 km, but deep enough into the magnetosphere to sweep through both radiation belts on the way up and again on the way down.</p>
+      <p><strong>T+38 hours:</strong> Pioneer 3 reenters the atmosphere over Africa after a complete elliptical arc. Battery exhaustion and reentry end the mission. Total flight time: approximately 38 hours and 6 minutes.</p>
+      <p><strong>The discovery:</strong> The twin GM tubes recorded a clear double-peaked radiation profile. The inner belt peaked around 3,000 km (confirming Van Allen&rsquo;s Explorer 1 discovery). The outer belt peaked around 16,000 km &mdash; a second, distinct zone of trapped energetic electrons that no previous mission had resolved. The slot region between the two belts, at roughly 7,000&ndash;13,000 km, showed a marked decrease in particle flux. This was the first definitive evidence of the two-belt structure.</p>
+    </div>
+
+    <div class="card">
+      <h2>What to Build</h2>
+      <ul>
+        <li><strong>Python:</strong> Dual radiation belt profile plotter &mdash; reconstruct Pioneer 3&rsquo;s GM tube counts vs. altitude, showing the inner belt peak at 3,000 km, the slot region, and the outer belt peak at 16,000 km</li>
+        <li><strong>Minecraft:</strong> Pioneer 3 at scale (basketball-sized cone) + dual radiation belt cross-section &mdash; two concentric rings of glowstone around a central Earth, with a dark gap between them</li>
+        <li><strong>Blender:</strong> 38-hour trajectory arc animation &mdash; Pioneer 3 rising through inner belt (orange glow), crossing the slot (dark), sweeping through outer belt (blue glow), and falling back (Cycles render, 60 sec)</li>
+        <li><strong>GLSL:</strong> Dual radiation belt shader &mdash; two concentric toroidal zones around a dipole field, particles trapped on field lines, slot region visible as the quiet gap between them</li>
+        <li><strong>Arduino:</strong> Dual Geiger counter simulator ($20) &mdash; two detectors with different shielding thicknesses, LED bar graphs showing differential count rates as you sweep a radioactive source past them</li>
+        <li><strong>Godot 4:</strong> Radiation belt explorer &mdash; fly a virtual spacecraft through a 2D cross-section of Earth&rsquo;s magnetosphere, watch the GM tube count rate rise and fall through both belts and the slot</li>
+        <li><strong>GMAT:</strong> Pioneer 3 trajectory reconstruction &mdash; model the Juno II velocity shortfall and propagate the resulting elliptical orbit to 102,322 km apogee, overlay the radiation belt boundaries</li>
+        <li><strong>Radio:</strong> Frequency mixer circuit ($15) &mdash; Pioneer 3 transmitted at 960.05 MHz, received by mixing down to an intermediate frequency. Build the core of a superheterodyne front end: local oscillator + mixer + IF filter</li>
+        <li><strong>Screensaver:</strong> Lichen filament growth &rarr; dual radiation belt cross-section &rarr; GM tube pulse cascade &rarr; Usnea draping from old growth (XScreenSaver / GSD-OS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>TRY Sessions &amp; DIY Projects</h2>
+      <ul>
+        <li><strong>TRY 1:</strong> Map the two belts &mdash; plot radiation intensity vs. altitude from 0 to 102,322 km using Pioneer 3&rsquo;s published GM tube data. Identify the inner peak, slot, and outer peak altitudes (45 min, Python + matplotlib)</li>
+        <li><strong>TRY 2:</strong> Calculate the delta-v deficit &mdash; the first stage burned 3.8 seconds short. Given the S-3D engine&rsquo;s thrust and the vehicle mass, compute the missing velocity and determine what trajectory Pioneer 3 would have followed with full burn (30 min, Python or pencil)</li>
+        <li><strong>TRY 3:</strong> Symbiosis math &mdash; model a simple mutualism: two populations (fungus and alga) where each benefits from the other&rsquo;s presence. Lotka-Volterra with positive interaction terms instead of predation (30 min, Python)</li>
+        <li><strong>DIY 1:</strong> Build the dual detector circuit ($20, two photodiodes with different optical filters simulating shielded/unshielded GM tubes &mdash; compare differential response to a light source)</li>
+        <li><strong>DIY 2:</strong> Build a frequency mixer ($15, NE602 double-balanced mixer IC + crystal oscillator + IF filter. Combine two frequencies, extract the difference &mdash; the principle behind every radio receiver)</li>
+        <li><strong>DIY 3:</strong> Grow lichen observation terrarium ($12, collect a lichen-covered twig from old growth, place in a glass jar with moist bark &mdash; observe the dual-organism structure with a hand lens over weeks)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/two-in-one.html" style="color: var(--lichen-light);">Story: &ldquo;Two in One&rdquo;</a>
+          <a href="artifacts/stories/two-in-one.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; The lichen tells the story of two becoming one
+        </li>
+        <li><a href="artifacts/audio/slot-region-drone.dsp" style="color: #7EB8DA;">Audio: Slot Region Drone</a> &mdash; FAUST VST/LV2 (inner belt hum rising, silence in the slot, outer belt shimmer at the peak, 60 seconds)</li>
+        <li><a href="artifacts/audio/usnea-wind.dsp" style="color: #7EB8DA;">Audio: Usnea in Wind</a> &mdash; FAUST ambient (long filaments swaying in old-growth canopy breeze, filtered noise through resonant combs)</li>
+        <li><a href="artifacts/circuits/dual-detector.md" style="color: var(--lichen-light);">Circuit: Dual Detector</a> &mdash; Shielded/unshielded photodiode pair for differential particle energy simulation ($20)</li>
+        <li><a href="artifacts/circuits/frequency-mixer.md" style="color: var(--lichen-light);">Circuit: Frequency Mixer</a> &mdash; NE602 mixer + crystal oscillator + IF filter, the superheterodyne core ($15)</li>
+        <li><a href="artifacts/circuits/lichen-moisture-sensor.md" style="color: var(--lichen-light);">Circuit: Lichen Moisture Sensor</a> &mdash; Resistive humidity sensor on bark substrate, lichen as bioindicator ($10)</li>
+        <li><a href="artifacts/screensaver/pioneer3-screensaver.frag" style="color: #7EB8DA;">Screensaver: 4-Mode GLSL</a> &mdash; Lichen filament growth, dual radiation belts, GM tube pulses, Usnea draping</li>
+        <li><a href="artifacts/math/two-belt-profile.py" style="color: var(--lichen-light);">Math: Two-Belt Profile</a> &mdash; Python reconstruction of Pioneer 3&rsquo;s radiation intensity vs. altitude curve</li>
+        <li><a href="artifacts/papers/van-allen-frank-1959.md" style="color: var(--lichen-light);">Paper: Van Allen &amp; Frank (1959)</a> &mdash; Annotated reading guide to the Nature paper that established the two-belt model</li>
+        <li><a href="artifacts/papers/pioneer3-jpl-report.md" style="color: var(--lichen-light);">Paper: JPL Pioneer 3 Technical Report</a> &mdash; Annotated guide to the first JPL mission report under NASA management</li>
+      </ul>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <span class="axis-title">Dual nature:</span> Lichen is not one organism &mdash; it is a fungus and an alga living as one, neither able to thrive alone in the same niche. The Van Allen belts are not one belt &mdash; they are two distinct zones, inner protons and outer electrons, separated by a slot where neither dominates. Duality hidden inside what looks like a single thing.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <span class="axis-title">Partnership:</span> The fungus provides structure and moisture retention; the alga provides photosynthesis and sugar. Neither is parasitizing the other &mdash; both contribute what the other lacks. Pioneer 3 was the first joint ABMA/NASA/JPL spacecraft, three institutions contributing different capabilities to a single mission. Partnership across boundaries.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <span class="axis-title">Indicator species:</span> Usnea longissima is an air quality indicator &mdash; it cannot survive where the air is polluted. Its presence means the forest is healthy; its absence is a warning. Pioneer 3&rsquo;s radiation measurements became indicators of magnetospheric health &mdash; the belt structure tells you whether the solar wind is quiet or storming. Sensitive instruments, honest signals.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <span class="axis-title">Light and delicate:</span> Usnea filaments are gossamer threads, easily torn by wind or touch, yet they persist on old-growth bark for decades. Pioneer 3 was 5.87 kg &mdash; the lightest Pioneer, barely heavier than a house cat &mdash; yet it mapped the radiation environment to 102,322 km. Fragile form, durable results.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <span class="axis-title">Slow revelation:</span> Lichen grows at 1&ndash;2 mm per year. Usnea longissima takes decades to reach its full 1&ndash;3 meter length. The two-belt structure of the Van Allen belts was not discovered in a single measurement but revealed gradually across Pioneer 1, Explorer missions, and finally confirmed by Pioneer 3&rsquo;s dual GM tube data. Understanding that builds strand by strand.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <span class="axis-title">Sensitivity:</span> Usnea absorbs everything from the air &mdash; nutrients, moisture, pollutants &mdash; with no roots to filter through soil. It is fully exposed to its environment. Pioneer 3&rsquo;s unshielded GM tube absorbed every particle that hit it, providing the raw total count, while the shielded tube filtered the low-energy component. Sensitivity as a scientific instrument, vulnerability as a method.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>The Two-Belt Discovery</h2>
+      <p>Explorer 1 had found the inner radiation belt in January 1958. Pioneer 1 had hinted at a complex structure beyond it. But Pioneer 3, with its two differentially shielded GM tubes sweeping slowly through 102,322 km of altitude on a 38-hour arc, provided the clean dataset that James Van Allen and Louis Frank needed. Their 1959 Nature paper laid out the evidence: a distinct inner belt of trapped protons peaking near 3,000 km, a quiet slot region from roughly 7,000 to 13,000 km, and an outer belt of energetic electrons peaking around 16,000 km.</p>
+      <p>The slot region was the key insight. It is not simply a gap &mdash; it is a zone where the magnetic field geometry transitions from stable proton trapping to stable electron trapping. The two belts are different populations in different magnetic regimes. Pioneer 3&rsquo;s dual detectors, by providing energy-differentiated counts at the same altitude, showed that the particle composition changed across the slot boundary. This was the measurement that turned &ldquo;the Van Allen belt&rdquo; (singular) into &ldquo;the Van Allen belts&rdquo; (plural).</p>
+    </div>
+
+    <div class="card">
+      <h2>JPL&rsquo;s First Spacecraft</h2>
+      <p>Pioneer 3 marked a quiet institutional revolution. JPL had been an Army laboratory, building Explorer satellites for the ABMA. When NASA was created on October 1, 1958, JPL was transferred to the new civilian agency on December 3. Pioneer 3 launched on December 6 &mdash; three days later. It was simultaneously the last ABMA-era spacecraft and the first JPL-for-NASA spacecraft, straddling the boundary between the military and civilian space programs. The institutional transition mirrored the spacecraft&rsquo;s scientific discovery: what looked like one program was actually two, separated by a boundary that redefined everything that followed.</p>
+    </div>
+
+    <div class="nav-card">
+      <a href="../1.3/index.html">&larr; v1.3 Pioneer 2</a>
+      <a href="../1.5/index.html">v1.5 &rarr;</a>
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Usnea longissima (Old Man&rsquo;s Beard)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">1-3m</div>
+          <div class="stat-label">Length</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2</div>
+          <div class="stat-label">Partners</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Old-growth</div>
+          <div class="stat-label">Habitat</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Region</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; color:var(--text-dim);">The long, pendulous lichen that drapes from ancient conifers in old-growth PNW forests. Not a single organism but a mutualism &mdash; a fungus (mycobiont) and a green alga (photobiont) living as one. Usnea longissima can reach 3 meters, growing at 1&ndash;2 mm per year, meaning the longest strands are decades old. Extremely sensitive to air pollution &mdash; its presence indicates clean, moist forest air. Listed as endangered or threatened across much of its range due to old-growth habitat loss.</p>
+    </div>
+
+    <div class="dedication-card">
+      <h3>Dedicated to Ren&eacute; Descartes</h3>
+      <p style="font-size:0.85rem;">March 31, 1596 &mdash; February 11, 1650</p>
+      <p style="font-size:0.85rem; color:var(--text-dim);">Invented the Cartesian coordinate system &mdash; the framework that turns geometry into algebra and algebra into geometry. Every plot of radiation intensity versus altitude, every trajectory traced on a graph, every shader coordinate in this series exists because Descartes unified position and number. &ldquo;Cogito, ergo sum&rdquo; &mdash; the most fundamental verification. Like Pioneer 3 verifying the outer belt exists: &ldquo;I measured it, therefore it is.&rdquo;</p>
+    </div>
+
+    <div class="tracks-card">
+      <h3>Mission Tracks</h3>
+      <div class="track-item"><span class="track-num">1</span> Mission Research (research.md)</div>
+      <div class="track-item"><span class="track-num">2</span> Organism Pairing (organism.md)</div>
+      <div class="track-item"><span class="track-num">3</span> Mathematics (knowledge-nodes.json)</div>
+      <div class="track-item"><span class="track-num">4</span> Curriculum (curriculum.md)</div>
+      <div class="track-item"><span class="track-num">5</span> Simulation &amp; Arts (simulation.md)</div>
+      <div class="track-item"><span class="track-num">6</span> QA &amp; Verification</div>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-008A">NSSDC &mdash; Pioneer 3</a>
+      <a href="https://rbsp-ect.newmexicoconsortium.org/data_pub/">Van Allen Probes Science Gateway</a>
+      <a href="https://ntrs.nasa.gov/search?q=pioneer%203">NASA NTRS &mdash; Pioneer 3 Reports</a>
+      <a href="https://lichenportal.org/portal/">Northwest Lichen Guide</a>
+      <a href="https://www.fs.usda.gov/database/feis/lichens/usnea/all.html">USDA FEIS &mdash; Usnea</a>
+      <a href="https://planet4589.org/space/lvdb/">McDowell Launch Vehicle DB</a>
+      <a href="https://physics.nist.gov/PhysRefData/ASD/lines_form.html">NIST Atomic Spectra Database</a>
+      <a href="https://images.nasa.gov/search?q=pioneer+3&media=image">NASA Image Library</a>
+      <a href="https://www.space-track.org/">Space-Track TLE Archive</a>
+      <a href="https://oregonstate.edu/dept/botany/herbarium/">OSU Lichen Herbarium</a>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="https://github.com/Tibsfox/gsd-skill-creator">gsd-skill-creator</a> (nasa branch)</p>
+  <p>Research by Miles Tiberius Foxglove &mdash; Mukilteo, WA &mdash; March 29, 2026</p>
+  <p style="margin-top:0.5rem; font-style:italic; color:var(--lichen-gold);">"The lichen knows: two can see what one cannot."</p>
+</footer>
+
+</body>
+</html>

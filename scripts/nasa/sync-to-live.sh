@@ -3,7 +3,10 @@
 # Usage: ./scripts/nasa/sync-to-live.sh [--dry-run]
 #
 # Pushes www/tibsfox/com/Research/NASA/ to tibsfox.com/Research/NASA/
-# Only run at version release boundaries — not mid-mission.
+# Uses ncftpput (not lftp — password has a leading single quote that breaks lftp)
+#
+# FTP root = tibsfox.com/Research/ (not /public_html/)
+# So NASA content goes to /NASA/ on the FTP server
 #
 # Requires .env with: FTP_HOST, FTP_USER, FTP_PASS, FTP_PATH
 
@@ -12,42 +15,40 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LOCAL_DIR="$PROJECT_ROOT/www/tibsfox/com/Research/NASA"
-REMOTE_SUBDIR="Research/NASA"
 
-# Load credentials
-ENV_FILE="$PROJECT_ROOT/.env"
-if [ ! -f "$ENV_FILE" ]; then
-  # Try the main repo .env
-  ENV_FILE="/path/to/projectGSD/dev-tools/gsd-skill-creator/.env"
-fi
+# Load credentials via Python (password has a leading ' that breaks bash sourcing)
+read_env() {
+  python3 -c "
+env = {}
+with open('$PROJECT_ROOT/.env') as f:
+    for line in f:
+        line = line.strip()
+        if '=' in line and not line.startswith('#'):
+            key, val = line.split('=', 1)
+            env[key] = val
+import sys
+print(env.get(sys.argv[1], ''))
+" "$1"
+}
 
-if [ ! -f "$ENV_FILE" ]; then
-  echo "Error: No .env file found."
-  echo "Create one with: FTP_HOST, FTP_USER, FTP_PASS, FTP_PATH"
-  exit 1
-fi
-
-source "$ENV_FILE"
+FTP_HOST=$(read_env FTP_HOST)
+FTP_USER=$(read_env FTP_USER)
+FTP_PASS=$(read_env FTP_PASS)
 
 if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
   echo "Error: FTP credentials not set in .env"
-  echo "Required: FTP_HOST, FTP_USER, FTP_PASS"
-  echo "Optional: FTP_PATH (default: /public_html)"
   exit 1
 fi
 
-FTP_PATH="${FTP_PATH:-/public_html}"
-REMOTE_DIR="$FTP_PATH/$REMOTE_SUBDIR"
 DRY_RUN=""
-
 if [ "$1" = "--dry-run" ]; then
-  DRY_RUN="--dry-run"
-  echo "=== DRY RUN — no changes will be made ==="
+  DRY_RUN="true"
+  echo "=== DRY RUN — listing files only ==="
 fi
 
 echo "=== NASA Mission Series — Sync to Live ==="
 echo "Local:  $LOCAL_DIR"
-echo "Remote: $FTP_HOST:$REMOTE_DIR"
+echo "Remote: $FTP_HOST:/NASA/"
 echo ""
 
 # Count local files
@@ -61,21 +62,58 @@ echo "Completed missions:"
 for dir in "$LOCAL_DIR"/1.*/; do
   if [ -f "$dir/index.html" ]; then
     version=$(basename "$dir")
-    echo "  v$version ✓"
+    echo "  v$version"
   fi
 done
 echo ""
 
-# Sync using lftp mirror
+if [ -n "$DRY_RUN" ]; then
+  echo "Would upload $FILE_COUNT files. Exiting dry run."
+  exit 0
+fi
+
+# Sync using ncftpput (handles the tricky password correctly)
 echo "Starting sync..."
-lftp -c "
-  set ssl:verify-certificate no;
-  set net:max-retries 3;
-  set net:reconnect-interval-base 5;
-  open -u $FTP_USER,$FTP_PASS $FTP_HOST;
-  mirror --reverse --verbose --only-newer --no-perms $DRY_RUN \
-    '$LOCAL_DIR' '$REMOTE_DIR';
-  bye;
+python3 -c "
+import subprocess, os, sys
+
+env = {}
+with open('$PROJECT_ROOT/.env') as f:
+    for line in f:
+        line = line.strip()
+        if '=' in line and not line.startswith('#'):
+            key, val = line.split('=', 1)
+            env[key] = val
+
+host = env['FTP_HOST']
+user = env['FTP_USER']
+password = env['FTP_PASS']
+
+local_base = '$LOCAL_DIR'
+ok = 0
+fail = 0
+
+for root, dirs, files in os.walk(local_base):
+    for fname in files:
+        local_path = os.path.join(root, fname)
+        rel = os.path.relpath(root, local_base)
+        if rel == '.':
+            remote_dir = '/NASA'
+        else:
+            remote_dir = f'/NASA/{rel}'
+
+        cmd = ['ncftpput', '-u', user, '-p', password, '-m', host, remote_dir, local_path]
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        if result.returncode == 0:
+            ok += 1
+            print(f'  OK: NASA/{rel}/{fname}')
+        else:
+            fail += 1
+            print(f'  FAIL: NASA/{rel}/{fname}', file=sys.stderr)
+
+print(f'\nUploaded: {ok}, Failed: {fail}')
+if fail > 0:
+    sys.exit(1)
 "
 
 echo ""
@@ -83,13 +121,11 @@ echo "=== Sync complete ==="
 echo "Live at: https://tibsfox.com/Research/NASA/"
 echo ""
 
-# Verify index is accessible
-if [ -z "$DRY_RUN" ]; then
-  echo "Verifying..."
-  HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://tibsfox.com/Research/NASA/index.html" 2>/dev/null || echo "000")
-  if [ "$HTTP_CODE" = "200" ]; then
-    echo "✓ Index page returns 200 OK"
-  else
-    echo "⚠ Index page returned HTTP $HTTP_CODE — check manually"
-  fi
+# Verify index
+echo "Verifying..."
+HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://tibsfox.com/Research/NASA/index.html" 2>/dev/null || echo "000")
+if [ "$HTTP_CODE" = "200" ]; then
+  echo "Index page returns 200 OK"
+else
+  echo "Index page returned HTTP $HTTP_CODE — check manually"
 fi

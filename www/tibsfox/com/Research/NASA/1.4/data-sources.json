@@ -1,0 +1,117 @@
+{
+  "mission": "1.4",
+  "title": "Pioneer 3 (Juno II)",
+  "description": "Open datasets and source materials relevant to Pioneer 3 (1958), Van Allen dual radiation belt structure, Juno II launch vehicle, and Usnea longissima (Old Man's Beard lichen)",
+  "sources": [
+    {
+      "id": "nssdc-pioneer-3",
+      "name": "NSSDC Master Catalog -- Pioneer 3",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1958-008A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Pioneer 3. Spacecraft description (5.87 kg cone), twin Geiger-Mueller tube instrument manifest, Juno II launch vehicle details, mission timeline for the 38-hour flight, and radiation measurement summary. NSSDC designation 1958-008A.",
+      "mission_relevance": "Definitive source for Pioneer 3 spacecraft specifications, instrument descriptions, and orbital parameters. Contains the mission summary documenting the first stage early cutoff (3.8 seconds short) and the resulting 102,322 km apogee trajectory that enabled the outer radiation belt discovery."
+    },
+    {
+      "id": "rbsp-van-allen-probes",
+      "name": "Van Allen Probes (RBSP) Science Gateway",
+      "url": "https://rbsp-ect.newmexicoconsortium.org/data_pub/",
+      "type": "primary-source",
+      "category": "radiation-environment",
+      "format": "CDF/ASCII",
+      "access": "open",
+      "description": "Data archive from NASA's Van Allen Probes mission (2012-2019). Modern measurements of the same dual radiation belt structure that Pioneer 3 first resolved in 1958. Includes energetic particle composition data, magnetic field measurements, and radiation belt models showing the inner belt, slot region, and outer belt.",
+      "mission_relevance": "Modern validation and high-resolution mapping of the two-belt structure Pioneer 3 discovered. Enables quantitative comparison: Pioneer 3's twin GM tubes detected the dual peak profile that the Van Allen Probes later mapped with orders of magnitude more precision. Essential for the dual radiation belt knowledge node and the Python belt profile plotter."
+    },
+    {
+      "id": "ntrs-pioneer-3",
+      "name": "NASA Technical Reports Server -- Pioneer 3 Reports",
+      "url": "https://ntrs.nasa.gov/search?q=pioneer%203",
+      "type": "primary-source",
+      "category": "technical-reports",
+      "format": "PDF",
+      "access": "open",
+      "description": "Full-text technical report archive containing JPL engineering reports, mission analyses, radiation measurement publications, and post-flight trajectory reconstructions for Pioneer 3. Includes Van Allen and Frank's data analyses, Juno II performance assessments, and the first-stage cutoff anomaly investigation.",
+      "mission_relevance": "Primary technical documentation for the 3.8-second first-stage burn shortfall, the dual GM tube measurement methodology, and the two-belt radiation profile data. These reports contain the original plots showing the inner belt peak, slot region, and outer belt peak that Pioneer 3 mapped during its 38-hour flight."
+    },
+    {
+      "id": "nw-lichen-guide",
+      "name": "Northwest Lichen Guide (Consortium of Pacific Northwest Herbaria)",
+      "url": "https://lichenportal.org/portal/",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML/Images",
+      "access": "open",
+      "description": "Regional lichen identification portal with species descriptions, distribution maps, habitat associations, and photographic references for Pacific Northwest lichen species. Includes Usnea longissima identification keys, substrate preferences, and conservation status across PNW ecoregions.",
+      "mission_relevance": "Primary identification and ecological source for the organism pairing. Usnea longissima's restriction to old-growth habitat with clean air directly parallels Pioneer 3's sensitivity as a radiation detector -- both are indicator organisms/instruments that reveal invisible environmental conditions through their presence or measurements."
+    },
+    {
+      "id": "usda-feis-usnea",
+      "name": "USDA Fire Effects Information System -- Usnea Species",
+      "url": "https://www.fs.usda.gov/database/feis/lichens/usnea/all.html",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "HTML",
+      "access": "open",
+      "description": "Ecological profile of Usnea species in North American forests: fire response and recovery rates, distribution across PNW old-growth ecosystems, substrate requirements (primarily conifer bark), sensitivity to air quality degradation, and growth rates of 1-2 mm per year. Includes the mutualistic biology of the fungal-algal partnership.",
+      "mission_relevance": "Establishes the ecological and biological context for the organism pairing. Usnea's dual-organism mutualism (fungus + alga = lichen) is the central resonance with Pioneer 3's discovery of the dual radiation belt structure. The FEIS data on Usnea's extreme sensitivity to environmental conditions supports the indicator species resonance axis."
+    },
+    {
+      "id": "mcdowell-launch-db",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/",
+      "type": "secondary-source",
+      "category": "launch-data",
+      "format": "TSV/HTML",
+      "access": "open",
+      "description": "Comprehensive, independently maintained database of all orbital and suborbital launches. Includes Juno II launch history, payload masses, success/failure classification, and trajectory data. Distinguishes Pioneer 3's partial success (reached 102,322 km but not lunar trajectory) from full failures and full successes.",
+      "mission_relevance": "Contextualizes Pioneer 3 within the Juno II launch record and the broader transition from Army (ABMA) to civilian (NASA) space launch operations. The database documents the shift from Thor-Able (Pioneers 0-2) to Juno II (Pioneer 3) launch vehicles, reflecting the institutional transition from Air Force to Army/JPL management."
+    },
+    {
+      "id": "nist-atomic-spectra",
+      "name": "NIST Atomic Spectra Database",
+      "url": "https://physics.nist.gov/PhysRefData/ASD/lines_form.html",
+      "type": "primary-source",
+      "category": "reference-data",
+      "format": "HTML/ASCII",
+      "access": "open",
+      "description": "Comprehensive atomic spectral line database maintained by the National Institute of Standards and Technology. Contains energy levels, wavelengths, and transition probabilities for all elements. Relevant to understanding the particle species (protons, electrons) trapped in the Van Allen belts and their interactions with detector materials.",
+      "mission_relevance": "Reference for understanding the physics of particle detection in GM tubes. The Geiger-Mueller tubes on Pioneer 3 detected ionizing radiation -- energetic protons and electrons interacting with the tube's fill gas. The atomic interaction cross-sections in NIST's database underpin the detector response models used to interpret Pioneer 3's count rate data."
+    },
+    {
+      "id": "nasa-image-library",
+      "name": "NASA Image and Video Library -- Pioneer 3",
+      "url": "https://images.nasa.gov/search?q=pioneer+3&media=image",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "Historical photographs from the Pioneer program: Pioneer 3 spacecraft assembly at JPL, Juno II on Launch Complex 5 at Cape Canaveral, ABMA/JPL team photographs, and diagrams of the dual GM tube instrument configuration. Public domain imagery suitable for educational use.",
+      "mission_relevance": "Visual documentation of Pioneer 3 hardware and the JPL/ABMA team. The spacecraft photographs show the 5.87 kg cone and the twin GM tube placement. Juno II launch photographs show the modified Jupiter IRBM configuration. Essential for the Minecraft scale model, Blender animation, and simulation tracks."
+    },
+    {
+      "id": "space-track-tle",
+      "name": "Space-Track TLE Archive",
+      "url": "https://www.space-track.org/",
+      "type": "primary-source",
+      "category": "orbital-data",
+      "format": "TLE/JSON",
+      "access": "open (registration required)",
+      "description": "US Space Force maintained archive of Two-Line Element sets for tracked objects. Contains tracking data for objects in the Pioneer 3 era and provides the orbital element format used to describe Pioneer 3's high elliptical trajectory (apogee 102,322 km, perigee ~0 km at reentry).",
+      "mission_relevance": "Provides the orbital mechanics framework for understanding Pioneer 3's trajectory as a highly eccentric ellipse. The TLE format's eccentricity and semi-major axis parameters enable reconstruction of the 38-hour flight path through both radiation belts. Essential for the GMAT trajectory reconstruction and the delta-v deficit calculation TRY session."
+    },
+    {
+      "id": "osu-lichen-herbarium",
+      "name": "Oregon State University Lichen Herbarium",
+      "url": "https://oregonstate.edu/dept/botany/herbarium/",
+      "type": "primary-source",
+      "category": "specimen-data",
+      "format": "HTML/Database",
+      "access": "open",
+      "description": "One of the largest lichen herbaria in western North America, with extensive collections of Usnea longissima and related species from PNW old-growth forests. Contains specimen records with collection locations, substrate types, habitat descriptions, and associated species. The herbarium's research program includes lichen ecology, air quality biomonitoring, and conservation genetics.",
+      "mission_relevance": "Provides specimen-level documentation of Usnea longissima distribution and habitat associations in PNW old-growth forests. The herbarium records establish the geographic and ecological context for the organism pairing -- the same forests, the same ancient bark substrates, the same clean-air requirement that makes Usnea an indicator species. Essential for the lichen observation terrarium DIY project and the organism pairing track."
+    }
+  ]
+}
