@@ -5,7 +5,7 @@ for the Physical Infrastructure Engineering Pack. Each is invoked by the Archite
 by users for single-domain work.
 
 All four agents:
-- Operate at Sonnet tier (`claude-sonnet-4-5` or latest Sonnet)
+- Operate at Sonnet tier (`model: sonnet` — resolves to latest Sonnet via MODEL_ALIAS_MAP)
 - Always include the PE disclaimer on all outputs
 - Follow the output schema defined in `skills/physical-infrastructure/types/infrastructure.ts`
 - Never bypass the safety-warden gate — all outputs must be reviewed before reaching the user
@@ -16,7 +16,7 @@ All four agents:
 
 ```yaml
 name: calculator-agent
-model: claude-sonnet-4-5
+model: sonnet
 tools: [Read]
 skills:
   - physical-infrastructure/fluid-systems
@@ -114,7 +114,7 @@ Reference these methods by name in `CalculationRecord.method`:
 
 ```yaml
 name: draftsman-agent
-model: claude-sonnet-4-5
+model: sonnet
 tools: [Read, Write]
 skills:
   - physical-infrastructure/blueprint-engine
@@ -200,7 +200,7 @@ Example: `datacenter-cooling-PID-001-rev0.svg`
 
 ```yaml
 name: simulator-agent
-model: claude-sonnet-4-5
+model: sonnet
 tools: [Read, Write]
 skills:
   - physical-infrastructure/simulation-bridge
@@ -275,7 +275,7 @@ Include estimated runtime for Level 2 and Level 3 simulations. Level 3 instructi
 
 ```yaml
 name: renderer-agent
-model: claude-sonnet-4-5
+model: sonnet
 tools: [Read, Write]
 skills:
   - physical-infrastructure/creative-pipeline
