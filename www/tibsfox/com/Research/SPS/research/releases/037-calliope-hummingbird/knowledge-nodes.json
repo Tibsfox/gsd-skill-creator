@@ -1,0 +1,277 @@
+{
+  "degree": 37,
+  "species": "Calliope Hummingbird",
+  "scientific_name": "Selasphorus calliope",
+  "slug": "037-calliope-hummingbird",
+  "sound_type": "soft rising tsee-tsee",
+  "energy": 4,
+  "ecosystem": "mountain meadow",
+  "season": "summer",
+  "family": "Trochilidae",
+  "order": "Apodiformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds in mountain meadows of the Cascades, Olympics, and Blue Mountains at elevations of 1,200-3,400 m. Occasionally seen in lowland areas during spring and fall migration. The coordinates mark the broader PNW range; primary breeding habitat is the subalpine meadows of Mount Rainier, the North Cascades, and the Olympic Mountains where wildflowers carpet the slopes in July and August. Present in the PNW for approximately 3-4 months (late April to early September)."
+  },
+  "taxonomy_note": {
+    "description": "Calliope Hummingbird is the THIRD Trochilidae in the engine (after Rufous at degree 35 and Anna's at degree 36). Three consecutive hummingbirds -- unprecedented. Same genus as Rufous (Selasphorus), creating an ABA genus pattern: Selasphorus (35) - Calypte (36) - Selasphorus (37). Formerly placed in the monotypic genus Stellula ('little star'), merged into Selasphorus based on molecular phylogenetics. The smallest bird in North America (~3.1 g, 7-8 cm). Named for Calliope, the muse of epic poetry -- the grandest name for the smallest bird.",
+    "current_family": "Trochilidae",
+    "new_family": false,
+    "family_count_in_engine": 18,
+    "trochilidae_count_in_engine": 3,
+    "name_etymology": "Selasphorus = Ancient Greek selas (light, flame) + phoros (bearing) = 'flame-bearer' or 'torch-bearer.' Same genus as Rufous Hummingbird. Calliope = Ancient Greek Kalliope, from kallos (beauty) + ops (voice) = 'beautiful voice.' Calliope was the chief of the nine Muses, the muse of eloquence and epic poetry, who inspired Homer's Iliad and Odyssey. Full translation: 'Calliope's flame-bearer' -- the muse of epic poetry's torch-bearer. Formerly Stellula calliope = 'Calliope's little star', referencing the streaked gorget rays.",
+    "genus_note": "Selasphorus now contains ~9 species including Rufous Hummingbird (S. rufus), Allen's Hummingbird (S. sasin), and Calliope Hummingbird (S. calliope, formerly Stellula). Calliope was moved from Stellula to Selasphorus based on McGuire et al. (2014) molecular phylogenetics, formalized by AOS in approximately 2017. The genus pair Selasphorus-Selasphorus at degrees 35 and 37 is the engine's first genus recurrence separated by one degree in the same family sequence.",
+    "order_note": "Apodiformes continues for a THIRD consecutive degree (35, 36, 37). Three consecutive Apodiformes is now the engine's longest non-Passeriformes streak. The hummingbird trio has extended the Apodiformes representation from 2 to 3 degrees.",
+    "hummingbird_trio": "Rufous (35, Selasphorus, E=5, thrum, flower meadow, fighter) + Anna's (36, Calypte, E=5, sonic boom, urban/coastal, resident) + Calliope (37, Selasphorus, E=4, filament, mountain meadow, infiltrator). Three species, two genera (ABA), three elevation zones, three acoustic elements, a diminuendo from E=5 to E=4. The engine's first three-consecutive-degree family sequence.",
+    "former_genus": "Stellula (Gould, 1861) -- Latin stellula = 'little star'. Named for the streaked gorget rays that radiate like a starburst. Monotypic genus containing only Calliope Hummingbird. Merged into Selasphorus based on molecular evidence showing Calliope is nested within the Selasphorus clade.",
+    "pnw_hummingbirds": [
+      "Rufous Hummingbird (Selasphorus rufus) -- common summer breeder, DEGREE 35",
+      "Anna's Hummingbird (Calypte anna) -- year-round resident, DEGREE 36",
+      "Calliope Hummingbird (Selasphorus calliope) -- summer breeder in mountain meadows, DEGREE 37, smallest North American bird",
+      "Black-chinned Hummingbird (Archilochus alexandri) -- summer breeder east of Cascades"
+    ]
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "6,000-10,000 (soft tsee-tsee call) [NEEDS VERIFICATION]",
+    "peak_energy_band_hz": "6,000-10,000 (primary call range) [NEEDS VERIFICATION]",
+    "song_duration_s": "Brief -- individual tsee or tsee-tsee notes, each lasting a fraction of a second. No extended song bouts like Anna's Hummingbird.",
+    "note_structure": "Simple soft rising tsee or tsee-tsee. High-pitched, thin, barely audible at distance. Much quieter than Rufous Hummingbird chitter or Anna's Hummingbird metallic chip. No complex learned song. Shuttle display produces a quiet bzt or zing from wing feathers.",
+    "note_types": "TWO sound categories: (1) SOFT TSEE-TSEE -- vocal (syrinx), high-pitched, rising, soft, used as contact/alarm/aggressive call. Barely carries 10 meters. (2) SHUTTLE DISPLAY ZING -- partly mechanical (wing feathers in horizontal shuttle flight), a quiet buzzy sound during courtship display. Much quieter than Rufous J-dive or Anna's dive chirp.",
+    "phrase_structure": "Tsee-tsee: individual or paired notes, rising inflection. No extended song sequence. Shuttle display: continuous quiet buzzing during horizontal back-and-forth flight.",
+    "timbre": "Thin, high-pitched, threadlike. The quietest primary vocalization of any hummingbird in the trio. Barely distinguishable from ambient insect sounds at distance. A filament of sound.",
+    "amplitude": "E=4 -- reduced from E=5 at degrees 35-36. The smallest hummingbird produces the quietest sound. Sound scales with body mass. The filament is the trio's diminuendo.",
+    "display_comparison": "Rufous (35): vertical J-dive, 10-30 m, moderate tail buzz. Anna's (36): vertical dive, ~40 m, explosive R5 chirp at 385 BL/s, 9 g. Calliope (37): HORIZONTAL SHUTTLE, close-range, quiet wing zing. The Calliope cannot generate dive-speed sonations because its body mass is insufficient for the physics. It compensates with proximity and persistence.",
+    "context": "Tsee-tsee: foraging, contact, mild aggression. Less aggressive than Rufous. Tends to avoid confrontation with larger hummingbirds. Infiltration strategy -- exploit gaps in larger birds' territories rather than direct challenge.",
+    "key_property": "THE FILAMENT -- the 38th acoustic element. A thin, barely audible thread of high-pitched vocal sound produced by the smallest bird in North America (~3.1 g, 7-8 cm), so quiet it is almost lost in the ambient noise of a mountain meadow. After the thrum (continuous mechanical hum, 35) and the sonic boom (explosive mechanical chirp, 36), the filament (threadlike vocal whisper, 37). The trio's diminuendo: engine -> afterburner -> pilot light. The smallest flame that still burns."
+  },
+  "smallest_bird": {
+    "definition": "The Calliope Hummingbird is the SMALLEST BIRD IN NORTH AMERICA. Average body mass ~3.1 g (range 2.5-3.4 g). Total length 7-8 cm. Smaller than a Rufous Hummingbird (3.4 g avg), smaller than an Anna's Hummingbird (4.3 g avg). Only the Bee Hummingbird of Cuba (~2.0 g) is smaller worldwide.",
+    "comparison_within_trio": {
+      "calliope_mass_g": "2.5-3.4 (avg ~3.1)",
+      "rufous_mass_g": "2.9-3.9 (avg ~3.4)",
+      "annas_mass_g": "3.5-5.7 (avg ~4.3)"
+    },
+    "migration": "Smallest long-distance migrant in the world. ~5,000 miles round trip, from PNW mountain meadows to highlands of central Mexico. Elliptical route: spring via Pacific coast, fall via Rocky Mountain interior. Pre-migratory fat loading increases mass by 30-40% [NEEDS VERIFICATION].",
+    "significance": "Body size is the organizing principle of the hummingbird trio. Sound scales with mass (thrum > sonic boom > filament in amplitude). Display scales with mass (vertical dive > vertical dive > horizontal shuttle). Aggression scales with mass (fighter > defender > infiltrator). The Calliope is the floor -- the smallest body that can execute the hummingbird strategy of sustained hovering flight, long-distance migration, and nectar feeding."
+  },
+  "mountain_meadow_ecology": {
+    "definition": "Mountain meadow -- open subalpine habitat at 1,200-3,400 m elevation in western mountain ranges. Characterized by wildflower-dominated ground cover, minimal tree canopy, and harsh thermal environment with regular below-freezing nighttime temperatures during the breeding season.",
+    "breeding_habitat": [
+      "Subalpine meadows with wildflower bloom",
+      "Mountain brushfields",
+      "Edges of montane conifer forests",
+      "Regenerating clearcuts at high elevation",
+      "Riparian willow thickets in mountain valleys"
+    ],
+    "key_plants": [
+      "Indian paintbrush (Castilleja spp.) -- red tubular flowers, primary nectar source",
+      "Penstemon (Penstemon spp.) -- tubular flowers, pollination mutualism",
+      "Columbine (Aquilegia spp.) -- tubular flowers",
+      "Other red and orange tubular wildflowers of the subalpine zone"
+    ],
+    "elevation_partitioning": {
+      "annas_zone": "0-500 m (urban/coastal lowlands)",
+      "rufous_zone": "0-3,000+ m (broad range, flower meadows at any elevation)",
+      "calliope_zone": "1,200-3,400 m (subalpine specialist)"
+    },
+    "pnw_breeding_locations": [
+      "Mount Rainier National Park -- subalpine meadows",
+      "North Cascades -- mountain meadows and brushfields",
+      "Olympic Mountains -- high meadows",
+      "Blue Mountains (eastern Oregon/Washington)"
+    ],
+    "nest_placement": "Typically in conifers, often on a branch below an overhanging branch or cone cluster for thermal insulation. Nests frequently reused or built atop old nests. Nest cup approximately the size of a thimble or walnut.",
+    "significance": "Second montane ecosystem in the engine (after mountain conifer at degree 33). First open subalpine habitat. The trio now spans three ecosystem types: flower meadow (35), urban/coastal (36), mountain meadow (37). Combined with the elevation partitioning, the trio maps the full PNW hummingbird landscape from sea level to timberline."
+  },
+  "gorget": {
+    "description": "Streaked magenta/purple rays radiating from the throat, with white gaps between the rays. Not a solid sheet of iridescence (unlike Rufous's solid copper-orange or Anna's solid magenta-rose extending over crown). Individual elongated feathers with iridescent tips separated by white interspaces create a starburst pattern.",
+    "comparison": {
+      "rufous_35": "Solid copper-orange gorget",
+      "annas_36": "Solid magenta-rose gorget extending over entire crown",
+      "calliope_37": "Streaked magenta rays with white interspaces -- starburst pattern"
+    },
+    "significance": "The streaked gorget is why Gould originally placed the Calliope in genus Stellula ('little star'). The gorget is less visually impactful than solid gorgets -- light catches only individual ray tips, producing a fragmented rather than blazing effect. Visual display, like vocal display, is understated. The smallest, quietest, most refined version of the hummingbird archetype."
+  },
+  "conservation": {
+    "iucn_status": "Least Concern",
+    "population_trend": "Stable to slightly declining in some regions [NEEDS VERIFICATION]",
+    "population_size": "Not well documented [NEEDS VERIFICATION]",
+    "threats": [
+      "Loss of mountain meadow habitat from fire suppression and conifer encroachment",
+      "Climate-driven upslope shift in treeline reducing subalpine meadow area",
+      "Climate-driven phenological mismatch between wildflower bloom and arrival timing"
+    ],
+    "climate_vulnerability": "HIGH -- as a high-elevation specialist, the Calliope is vulnerable to habitat compression. If treeline moves upward, subalpine meadows shrink, and habitat at the top of the mountain disappears. Unlike lowland species that can shift northward, montane species have a ceiling.",
+    "trio_conservation_comparison": "Rufous (35): Near Threatened, declining 65%. Anna's (36): Least Concern, increasing 2%/yr. Calliope (37): Least Concern, stable/uncertain. The trio spans declining (Rufous), thriving (Anna's), and holding-for-now (Calliope)."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The filament -- the 38th acoustic element: a thin, barely audible thread of high-pitched vocal sound produced by the smallest bird in North America (~3.1 g, 7-8 cm), so quiet it is almost lost in the ambient noise of a mountain meadow. After the thrum (continuous aeromechanical hum, degree 35) and the sonic boom (explosive aeromechanical chirp, degree 36), the filament is the trio's diminuendo: the smallest flame-bearer producing the thinnest thread of sound. Engine -> afterburner -> pilot light. The thrum fills a meadow. The sonic boom cracks across a garden. The filament threads between two wildflowers and vanishes.",
+      "level": "foundational",
+      "department": "music-theory/timbre",
+      "college_path": ".college/music/theory/timbre/filament/",
+      "examples": [
+        "Calliope Hummingbird soft rising tsee-tsee: ~6-10 kHz [NEEDS VERIFICATION], barely audible at 10 meters. The quietest primary vocalization of any hummingbird in the PNW.",
+        "The trio's acoustic arc: thrum (35, continuous, E=5) -> sonic boom (36, explosive, E=5) -> filament (37, threadlike, E=4). Three consecutive degrees, three acoustic strategies, a structural diminuendo.",
+        "Naming: a filament is the thinnest thread -- the glowing wire inside a bulb, the finest fiber in a web. The Calliope's tsee-tsee is an acoustic filament: sound reduced to its minimum, carrying just enough energy to reach a nearby ear.",
+        "The filament is vocal, not mechanical. After two degrees of aeromechanical sound (thrum from wings, sonic boom from tail), the smallest hummingbird returns to the syrinx. Too small for dramatic mechanical sound production.",
+        "The filament is also a pilot light -- the smallest flame that still burns. In a genus called 'flame-bearer' (Selasphorus), the Calliope carries the dimmest torch. But it carries it."
+      ],
+      "music_theory_parallel": "If the thrum is a bass drone (hurdy-gurdy, continuous) and the sonic boom is a sforzando timpani strike (explosive, instantaneous), then the filament is a single harmonic played pppp on a violin -- a note so quiet the audience must hold its breath to hear it. The pianissimo after the fortissimo. The trio is fff -> fff -> pppp. In orchestral terms: the full brass section (thrum), the cannon shot (sonic boom), and then a solo violin harmonic (filament). The diminuendo is the most dramatic dynamic shift in the engine."
+    },
+    {
+      "concept": "Smallest bird in North America -- the Calliope Hummingbird at ~3.1 g and 7-8 cm is the continental minimum for avian body size. Body mass is the organizing principle of the hummingbird trio: sound scales with mass (thrum > sonic boom > filament), display scales with mass (vertical dive > vertical dive > horizontal shuttle), aggression scales with mass (fighter > defender > infiltrator). The Calliope is the floor -- the smallest body that can execute the hummingbird strategy. And this smallest body makes the longest journey relative to its size: ~5,000 miles round trip, the smallest long-distance migrant in the world.",
+      "level": "foundational",
+      "department": "ecology/morphology",
+      "college_path": ".college/ecology/morphology/minimum-body-size/",
+      "examples": [
+        "Body mass comparison: Calliope ~3.1 g < Rufous ~3.4 g < Anna's ~4.3 g. A nickel weighs 5 g -- the Calliope weighs less than two-thirds of a nickel.",
+        "Migration at minimum mass: ~5,000 miles round trip, from PNW mountain meadows (1,200-3,400 m) to Mexican highlands. Pre-migratory fat loading adds 30-40% body mass [NEEDS VERIFICATION] -- the entire fuel reserve is less than 1.5 g of fat.",
+        "Sound at minimum mass: the soft rising tsee-tsee is the quietest hummingbird vocalization in the trio. The body cannot produce more volume. The physics set the ceiling.",
+        "Display at minimum mass: horizontal shuttle instead of vertical dive. A 3.1 g bird cannot generate the airspeed a 4.3 g bird achieves in a 40-meter plunge. The Calliope compensates with proximity and persistence.",
+        "Aggression at minimum mass: infiltration strategy. Avoids direct confrontation. Exploits gaps in larger birds' territories. The small bird picks locks rather than kicks down doors."
+      ],
+      "music_theory_parallel": "The piccolo -- the smallest instrument in the orchestra. High-pitched, thin, easily lost in the tutti. But in a quiet passage, the piccolo can cut through everything with a single pure note. The Calliope is the piccolo of the hummingbird section: smallest voice, highest pitch, most easily overlooked, but carrying its own irreplaceable frequency."
+    },
+    {
+      "concept": "Mountain meadow as the engine's second montane ecosystem -- open subalpine habitat at 1,200-3,400 m elevation, characterized by wildflower bloom, minimal canopy, and harsh thermal environment. The trio's three ecosystems (flower meadow at 35, urban/coastal at 36, mountain meadow at 37) span the full PNW hummingbird landscape from sea-level gardens to summit wildflowers. Three hummingbirds partition the elevation gradient: Anna's holds the lowlands, Rufous ranges broadly, Calliope occupies the mountaintops.",
+      "level": "foundational",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/mountain-meadow/",
+      "examples": [
+        "Second montane ecosystem after Cassin's Finch mountain conifer (degree 33). Both at 1,000-3,400 m elevation but different structure: closed canopy vs. open meadow.",
+        "Elevation partitioning: Anna's 0-500 m, Rufous 0-3,000+ m, Calliope 1,200-3,400 m. The trio maps the gradient from sea level to timberline.",
+        "Key plants: Indian paintbrush (Castilleja), penstemon, columbine -- red and orange tubular wildflowers of the subalpine zone. Classic hummingbird pollination syndrome.",
+        "PNW breeding locations: Mount Rainier subalpine meadows, North Cascades mountain meadows, Olympic Mountains high meadows.",
+        "Climate vulnerability: subalpine meadows are shrinking as treeline moves upward. Unlike lowland species that can shift north, montane species face a ceiling."
+      ],
+      "music_theory_parallel": "The mountain meadow is the high register -- the uppermost octave where only the smallest, most specialized instruments play. The urban/coastal ecosystem (36) is the middle register, populated and familiar. The flower meadow (35) is the working range. The mountain meadow is the overtone -- the frequency you hear only if you climb high enough and listen carefully. The Calliope lives in the highest octave of the PNW landscape."
+    },
+    {
+      "concept": "The Calliope Paradox -- the smallest bird in North America is named for the chief of the Muses, the patroness of epic poetry, the muse who inspired the Iliad and the Odyssey. Smallest bird, grandest name. Quietest voice, named 'beautiful voice.' The paradox resolves when you consider the bird's life story: breeding at 3,000 m in a cup the size of a thimble, migrating 5,000 miles at 3 grams, the smallest long-distance migrant in the world. The story IS epic. The muse chose well.",
+      "level": "intermediate",
+      "department": "music-theory/etymology",
+      "college_path": ".college/music/theory/etymology/calliope-paradox/",
+      "examples": [
+        "Calliope = Greek Kalliope = kallos (beauty) + ops (voice) = 'beautiful voice.' The muse of eloquence and epic poetry. Homer's inspirer.",
+        "The bird: 3.1 grams, 7 cm, barely audible tsee-tsee, mountain meadow specialist. The gap between the mythological grandeur of the name and the physical miniature of the bird is immense.",
+        "The trio's names: Rufous = 'red flame-bearer' (visual description). Anna's = 'Anna's veiled one' (person + physics). Calliope = 'Calliope's flame-bearer' (muse + aspiration). Each name encodes a different relationship between bird and namer.",
+        "Former name Stellula calliope = 'Calliope's little star' -- the diminutive 'little star' acknowledged the bird's size. The merger into Selasphorus lost this. 'Calliope's flame-bearer' is grander than the bird. 'Calliope's little star' matched it.",
+        "The resolution: the bird's migration IS an epic. 5,000 miles at 3 grams. Deserts, mountain passes, the Gulf of California. Calliope, the muse of epic journeys, would recognize this subject."
+      ],
+      "music_theory_parallel": "Naming a piccolo concerto 'Symphony for Full Orchestra.' The instrument is tiny. The ambition is vast. But when the piccolo plays the melody alone -- high, thin, exposed -- the name makes sense. The smallness IS the grandeur. It is harder to play fortissimo on a piccolo than on a tuba. The Calliope Hummingbird's life is a piccolo concerto named for a symphony."
+    },
+    {
+      "concept": "Selasphorus genus pair (ABA framing) -- degrees 35 and 37 share genus Selasphorus, with Calypte (degree 36) between them. The flame-bearers bookend the veiled jewel. Same genus, opposite strategies: Rufous (loud, aggressive, broad-range, thrum) vs. Calliope (quiet, infiltrating, montane, filament). The taxonomic reshuffle from Stellula to Selasphorus created this pair -- without the molecular phylogenetics, the Calliope would still be in its own genus and the ABA pattern would not exist.",
+      "level": "intermediate",
+      "department": "taxonomy/phylogenetics",
+      "college_path": ".college/taxonomy/phylogenetics/selasphorus-pair/",
+      "examples": [
+        "ABA genus pattern: Selasphorus (35) - Calypte (36) - Selasphorus (37). First genus recurrence within a family sequence in the engine.",
+        "Rufous S. rufus: loud, E=5, thrum, flower meadow, broad range, fighter. The torch.",
+        "Calliope S. calliope: quiet, E=4, filament, mountain meadow, high elevation, infiltrator. The candle.",
+        "The genus question: what does it mean to be a Selasphorus? Is a flame-bearer defined by its fire (Rufous) or by carrying light at all, however dim (Calliope)? Both carry the flame. One blazes. One glows.",
+        "The reshuffle: Stellula ('little star') merged into Selasphorus ('flame-bearer') based on McGuire et al. 2014. The molecular evidence is clear. The poetry of 'little star' is lost. The phylogenetic accuracy of 'flame-bearer' is gained."
+      ],
+      "music_theory_parallel": "Two movements in the same key but different tempo. The Rufous is allegro con fuoco (fast, with fire). The Calliope is adagio pianissimo (slow, very soft). Same key (Selasphorus). Same tonic. Completely different character. The ABA framing is like a sonata: exposition (35, energetic), contrasting section (36, different key), recapitulation (37, same key but transformed)."
+    },
+    {
+      "concept": "E=4 return -- after back-to-back E=5 (degrees 35-36), energy drops to E=4 at degree 37. The smallest bird makes less noise. This is the trio's diminuendo: 5 -> 5 -> 4. The dynamic range compression that worsened at degrees 35-36 (three E=5 total, 16 degrees without E=3) takes a step toward correction. E=4 is not E=3 or E=2 (still needed), but the downward step from E=5 to E=4 breaks the upward compression.",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e4-diminuendo/",
+      "examples": [
+        "E=5 arc: Bohemian Waxwing (32), Rufous (35), Anna's (36). Three E=5 in 5 degrees. Back-to-back at 35-36.",
+        "E=4 return at 37: Calliope Hummingbird. The trio diminishes: 5, 5, 4.",
+        "E=4 count: now 14 degrees (37.8% of 37 entries). Still the dominant energy level.",
+        "E=3 absence: 17 degrees since last E=3 (degree 20, Orange-crowned Warbler). WORSENING.",
+        "The structural need: E=3 or lower. The drop from E=5 to E=4 is a half-step. The engine needs a full step down to E=3 or E=2 to restore dynamic range."
+      ],
+      "music_theory_parallel": "A diminuendo from fff to mf. The volume drops, but it has not reached piano yet. The trio's dynamic arc (fff -> fff -> mf) is a controlled decrease but not a resolution. Resolution would require pp or p -- E=2 or E=3. The filament begins the quieting. Something quieter must continue it."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-036",
+      "title": "Anna's Hummingbird (Degree 36)",
+      "connection": "HUMMINGBIRD TRIO. Third consecutive Trochilidae -- unprecedented. Anna's (sonic boom, E=5, urban/coastal, 4.3 g, learned song, resident) vs. Calliope (filament, E=4, mountain meadow, 3.1 g, no song, summer migrant). Sound scales with mass: the largest hummingbird (Anna's) produces the loudest sound (sonic boom). The smallest (Calliope) produces the quietest (filament). The trio spans three ecosystems, three energy levels, three elevation zones."
+    },
+    {
+      "project": "SPS-035",
+      "title": "Rufous Hummingbird (Degree 35)",
+      "connection": "GENUS PAIR (Selasphorus). Both Selasphorus, separated by one degree. ABA genus framing with Calypte (Anna's) between them. Rufous = loud, aggressive, broad-range, thrum, E=5. Calliope = quiet, infiltrating, montane, filament, E=4. Same genus, opposite strategies. The loud flame-bearer and the quiet flame-bearer. Together they define the range of Selasphorus: from maximum aggression to minimum confrontation."
+    },
+    {
+      "project": "SPS-033",
+      "title": "Cassin's Finch (Degree 33)",
+      "connection": "MONTANE PAIR. Two mountain birds at similar elevations. Cassin's Finch = mountain conifer (closed canopy, 1,000-3,000 m, the cadenza from a ponderosa top). Calliope Hummingbird = mountain meadow (open subalpine, 1,200-3,400 m, the filament among wildflowers). Same elevation band, different habitats: forest vs. meadow."
+    },
+    {
+      "project": "SPS-031",
+      "title": "Cedar Waxwing (Degree 31)",
+      "connection": "QUIET BOOKENDS. Two quiet sounds in the engine. Cedar Waxwing = the whisper (degree 31, E=4, flock contact at the edge of hearing, many soft voices). Calliope Hummingbird = the filament (degree 37, E=4, individual call barely audible, one thin voice). Both E=4. Both defined by quietness. The whisper is collective. The filament is solitary."
+    },
+    {
+      "project": "SPS-032",
+      "title": "Bohemian Waxwing (Degree 32)",
+      "connection": "E=5 ARC ENDS. Three E=5 degrees: Bohemian Waxwing (32, collective), Rufous (35, sustained), Anna's (36, explosive). Degree 37 returns to E=4, closing the E=5 arc. The trio's diminuendo begins the step down from the engine's loudest entries."
+    },
+    {
+      "project": "SPS-021",
+      "title": "Northern Flicker (Degree 21)",
+      "connection": "MECHANICAL SOUND LINEAGE RECEDES. Four mechanical-sound degrees: Flicker (percussive, bill on wood, 21-22), Rufous (aeromechanical thrum, wing, 35), Anna's (aeromechanical dive chirp, tail R5, 36). At degree 37, the Calliope returns primarily to vocal sound -- its tsee-tsee comes from the syrinx, not from feathers. The mechanical sound lineage peaks at Anna's dive chirp and fades at Calliope."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Calliope Hummingbird documented as summer breeding visitor to mountain meadows of the Cascades, Olympics, and Blue Mountains. Smallest North American bird. One of four regularly occurring PNW hummingbird species. High-elevation specialist with limited lowland occurrence during migration."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Mountain meadow ecology, subalpine wildflower communities, hummingbird pollination syndromes. Elevational niche partitioning among PNW hummingbirds. Climate-driven habitat compression at treeline. Fire suppression and conifer encroachment in mountain meadows."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 36,
+    "total_entries": 38,
+    "families_represented": 18,
+    "largest_families": {
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Parulidae": 5,
+      "Trochilidae": 3,
+      "Fringillidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Cardinalidae": 1,
+      "Picidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=4 returns after back-to-back E=5 (35-36). E=4 now at 14 degrees (36.8%). E=5 at 3 degrees (7.9%). E=3 absent for 17 DEGREES (since degree 20). The diminuendo from E=5 to E=4 is a step in the right direction but E=3 or lower is urgently needed. Dynamic range compression persists.",
+    "apodiformes_streak": "THREE consecutive Apodiformes (35, 36, 37). The hummingbird trio. This is now the engine's longest non-Passeriformes streak. Degree 38 MUST leave Apodiformes. Three consecutive degrees from one non-Passeriformes order is unprecedented and must not extend to four.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive"],
+    "ecosystem_note": "Mountain meadow -- second montane ecosystem (after mountain conifer at 33). The hummingbird trio has introduced three different ecosystems in three degrees: flower meadow (35), urban/coastal (36), mountain meadow (37). Four consecutive degrees (34-37) with distinct ecosystem types: cone crop, flower meadow, urban/coastal, mountain meadow.",
+    "acoustic_element_38": "THE FILAMENT -- a thin, barely audible thread of high-pitched vocal sound from the smallest bird in North America. After thrum (continuous mechanical) and sonic boom (explosive mechanical), the filament (threadlike vocal). The trio's diminuendo. The pilot light. The smallest flame that still burns.",
+    "conservation_note": "LEAST CONCERN but with climate vulnerability. Mountain meadow habitat is at risk from treeline advance and conifer encroachment. The trio's conservation spectrum: Rufous (Near Threatened, declining 65%), Anna's (Least Concern, increasing 2%/yr), Calliope (Least Concern, stable/uncertain with climate pressure).",
+    "hummingbird_trio_note": "THREE CONSECUTIVE TROCHILIDAE (35, 36, 37) -- unprecedented. No family has held three consecutive degrees before. Two genera (ABA: Selasphorus-Calypte-Selasphorus). Three ecosystems. A diminuendo from E=5 to E=4. The trio is complete. Degree 38 MUST leave Trochilidae.",
+    "critical_gaps": [
+      "No marine/shoreline species in 37 degrees of 'The Sound of Puget Sound' -- 37 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 37 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 37 degrees -- URGENT",
+      "No nocturnal species since degree 4 (33 degrees ago) -- OVERDUE",
+      "E=3 not used since degree 20 (17 degrees ago) -- dynamic range compression WORSENING",
+      "Three consecutive Apodiformes (35-37) -- degree 38 MUST change order",
+      "No marine species remains the engine's defining structural deficit -- 37 DEGREES OF A PROJECT NAMED FOR PUGET SOUND"
+    ]
+  }
+}
