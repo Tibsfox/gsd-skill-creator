@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 41&deg; &mdash; Shawn Smith &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: white;
+      border: 1px solid #0D47A1;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .memorial-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #263238;
+      color: #B0BEC5;
+      border: 1px solid #37474F;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .streak-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .streak-banner {
+      background: linear-gradient(135deg, #B71C1C, #C62828);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .streak-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .streak-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .band-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .band-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .band-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .band-card .band-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .band-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>041 &mdash; Shawn Smith</span>
+    </nav>
+
+    <!-- Streak-Break Banner -->
+    <div class="streak-banner">
+      <h3>E=4 Returns &mdash; The Nine-Degree Streak Breaks</h3>
+      <p>
+        Nine consecutive E=5+ degrees (32&ndash;40) ended at degree 41. The longest sustained
+        high-energy streak in the engine&rsquo;s first forty degrees. Capitol Hill enters as a new
+        geographic node. The first explicit grunge-era link through personal connections to founding
+        figures. Seattle&rsquo;s best-kept secret enters the record.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">41&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Shawn Smith</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Soul/Blues</span>
+          <span class="label-badge">Epic / Sub Pop</span>
+          <span class="neighborhood-badge">Capitol Hill</span>
+          <span class="streak-badge">Streak Break</span>
+          <span class="memorial-badge">1965&ndash;2019</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Soul Singer of the Grunge Capital</h2>
+          <p>
+            Shawn Smith was a vocalist, multi-instrumentalist, and songwriter whose voice
+            spanned from <strong>deep baritone to celestial falsetto</strong> &mdash; a range
+            he used to inhabit soul, blues, funk, rock, and electronic music across more than
+            twenty albums with multiple projects. Born in <strong>Spokane, Washington</strong>,
+            raised in <strong>Bakersfield, California</strong>, he relocated to Seattle in
+            <strong>1987</strong> and became part of the city&rsquo;s music scene years before
+            grunge became a global phenomenon.
+          </p>
+          <p>
+            Despite being called <strong>&ldquo;Seattle&rsquo;s best-kept secret&rdquo;</strong>
+            by Greg Dulli of the Afghan Whigs and hailed as <strong>one of the best rock
+            vocalists of all time</strong> by Mojo Magazine, Smith never achieved the commercial
+            success of the grunge peers he played alongside. His primary influence was
+            <strong>Prince</strong> &mdash; &ldquo;the rock in the center of it all&rdquo; &mdash;
+            and his music was soul and blues filtered through alternative rock, not the other
+            way around.
+          </p>
+          <blockquote>
+            &ldquo;Prince is kind of the rock in the center of it all. That&rsquo;s where I
+            really learned. That&rsquo;s who I was focusing on when I was learning how to
+            write songs.&rdquo; &mdash; Shawn Smith
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Projects: Four Bands, One Voice</h2>
+          <div class="band-grid">
+            <div class="band-card">
+              <h4>Brad</h4>
+              <div class="band-years">1992&ndash;2023 &middot; 6 albums</div>
+              <p>
+                With <strong>Stone Gossard</strong> (Pearl Jam). Alternative rock + soul.
+                Debut <em>Shame</em> on Epic (1993). Final album <em>In The Moment That
+                You&rsquo;re Born</em> (2023, posthumous).
+              </p>
+            </div>
+            <div class="band-card">
+              <h4>Satchel</h4>
+              <div class="band-years">1994&ndash;2010 &middot; 3 albums</div>
+              <p>
+                With <strong>Regan Hagar</strong>. Soul/funk emphasis. More direct expression
+                of Smith&rsquo;s soul instincts without Gossard&rsquo;s guitar rock framing.
+              </p>
+            </div>
+            <div class="band-card">
+              <h4>Pigeonhed</h4>
+              <div class="band-years">1993&ndash;1997 &middot; 3 albums</div>
+              <p>
+                With <strong>Steve Fisk</strong>. Electronic/trip-hop. On <strong>Sub Pop</strong>.
+                &ldquo;Battle Flag&rdquo; remix hit <strong>#6 Billboard Alternative Songs</strong>
+                (1999) &mdash; Smith&rsquo;s only major chart hit.
+              </p>
+            </div>
+            <div class="band-card">
+              <h4>Solo</h4>
+              <div class="band-years">1999&ndash;2016 &middot; 10+ releases</div>
+              <p>
+                Soul-rock, acoustic blues, singer-songwriter. &ldquo;Imagines Stevie Wonder
+                fronting The Band&rdquo; (Louder). <em>Shield of Thorns</em> on <em>The Sopranos</em>.
+                42 Bandcamp releases.
+              </p>
+            </div>
+          </div>
+          <p>
+            Smith also contributed vocals to the <strong>Afghan Whigs</strong>&rsquo;
+            <em>Black Love</em> (1996), Greg Dulli&rsquo;s <strong>Twilight Singers</strong> debut
+            (2000), and fronted the reformed <strong>Malfunkshun</strong> (performing Andrew Wood&rsquo;s
+            lyrics) and a <strong>Mother Love Bone</strong> reunion (2010).
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Grunge Connection</h2>
+          <p>
+            Degree 41 is the engine&rsquo;s <strong>first explicit grunge-era link</strong> through
+            personal connections to the founding figures. Smith met <strong>Regan Hagar</strong> at
+            Tower Records in the late 1980s. Through Hagar, he connected to the
+            <strong>Malfunkshun</strong> circle &mdash; the band of <strong>Andrew Wood</strong>,
+            whose death in 1990 catalyzed Temple of the Dog and Pearl Jam. Smith knew Wood personally,
+            cited him as an influence, and later replaced him as Malfunkshun&rsquo;s vocalist.
+          </p>
+          <p>
+            Smith played with <strong>Stone Gossard</strong> for thirty-one years in Brad.
+            <strong>Mike McCready</strong> (Pearl Jam) played lead guitar on Brad&rsquo;s
+            <em>Interiors</em>. Smith was inside the most commercially successful music scene of
+            the 1990s &mdash; and his own music was soul and blues, not grunge. The scene native:
+            present for everything, classified as something else.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Whiskey Falsetto</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                42nd acoustic element. A falsetto that carries the warmth and grain of baritone
+                soul singing into the highest register &mdash; textured, weathered, emotionally
+                weighted rather than clean and ethereal. The falsetto sounds like it has lived
+                a life.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Scene Native</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                42nd artist-city pattern. An artist who arrives during a major scene&rsquo;s
+                formation, participates personally, but whose musical identity diverges from the
+                scene&rsquo;s commercial genre. Inverse of the cultural satellite (degree 40&deg;).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Interior Blue</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                41st blue note deployment. The blue note that bends inward &mdash; emotional
+                intensity directed at the artist rather than the audience. The sound of singing
+                to yourself in a room full of people. Acoustic manifestation of E=4 interior energy.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=4 Interior Mode</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                7th E=4 mode. Breaks nine consecutive E=5+ degrees (32&ndash;40). Energy
+                directed inward &mdash; immense talent filtered through obscurity rather than
+                amplified through commercial channels. Recalibration, not decline.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Capitol Hill: A New Geographic Node</h2>
+          <p>
+            Degree 41 introduces <strong>Capitol Hill</strong> as the engine&rsquo;s first
+            neighborhood outside the Central District and Tacoma. Capitol Hill is Seattle&rsquo;s
+            arts and music neighborhood &mdash; home to venues like Neumos (since 1992 as
+            Moe&rsquo;s Mo&rsquo;Roc&rsquo;N Cafe), the Comet Tavern, and Cafe Racer (where
+            Smith played his final show in January 2019). The Central District was the home of
+            Black music in Seattle; Capitol Hill was the home of the alternative and indie rock
+            scene. Smith was the soul singer who lived in the rock neighborhood &mdash; a
+            geographic expression of his career-long genre divergence.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Legacy: April 3, 2019</h2>
+          <p>
+            Shawn Smith was found dead at his home in Seattle on April 5, 2019; autopsy later
+            determined the date of death as <strong>April 3, 2019</strong>. He was 53. Cause of
+            death: <strong>torn aorta and high blood pressure</strong>. The news was confirmed by
+            Ken Stringfellow (The Posies), the Afghan Whigs, and Mike Inez (Alice in Chains).
+            <strong>KEXP</strong> dedicated programming to his memory.
+          </p>
+          <p>
+            Stone Gossard and the surviving members of Brad completed the posthumous album
+            <em>In The Moment That You&rsquo;re Born</em> (July 28, 2023, Loosegroove Records)
+            using vocal recordings Smith had made before his death. The title carries the weight
+            of what it means: the moment of birth as the framing device for an album released
+            after death.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">40&deg;</span> Alice Smith &mdash; <strong>Consecutive Epic Records degrees.</strong> Both soul-rooted, both genre-fluid. Both connected to Prince (covered / cited). E=5 to E=4 drop is the structural headline.</li>
+            <li><span class="ref-degree">39&deg;</span> Ron Artis Jr &mdash; Blues/Soul (39) to Soul/Blues (41). Reverse genre compound. Both genre-fluid multi-instrumentalists.</li>
+            <li><span class="ref-degree">36&deg;</span> Jimi Hendrix &mdash; Genre freedom lineage. Smith connected through Malfunkshun/Andrew Wood/Mother Love Bone web. Both broke genre boundaries in Seattle.</li>
+            <li><span class="ref-degree">37&deg;</span> Ayron Jones &mdash; Post-grunge Seattle rock. Jones inherited the legacy; Smith was present during its creation. Different generations, same city.</li>
+            <li><span class="ref-degree">30&deg;</span> Ray Charles &mdash; Soul/blues foundation. Both had whiskey-textured voices. Both operated across genre boundaries. Both connected to Seattle.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; Epic Records connection. Jones produced Thriller on Epic; Brad released Shame on Epic thirty years later.</li>
+            <li><span class="ref-degree">35&deg;</span> Robert Cray &mdash; Geographic presence with genre divergence. Cray in Tacoma with blues; Smith in Capitol Hill with soul. Same pattern, different neighborhoods.</li>
+            <li><span class="ref-degree">24&deg;</span> Ron Artis II &mdash; KEXP connection. Both soul artists in Seattle. Artis II amplified by KEXP; Smith memorialized by KEXP.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Oct 28, 1965</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Died</span>
+            <span class="stat-value">Apr 3, 2019</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Spokane, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Raised</span>
+            <span class="stat-value">Bakersfield, CA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Home</span>
+            <span class="stat-value">Capitol Hill, Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle Since</span>
+            <span class="stat-value">1987 (32 years)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">41 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Soul/Blues</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">22</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#42 Scene Native</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#42 Whiskey Falsetto</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#41 Interior Blue</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Brad Discography</h4>
+          <div class="stat-row">
+            <span class="stat-label">1993</span>
+            <span class="stat-value">Shame</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">1997</span>
+            <span class="stat-value">Interiors</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2002</span>
+            <span class="stat-value">Discovery Park</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2010</span>
+            <span class="stat-value">Best Friends?</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2012</span>
+            <span class="stat-value">United We Stand</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2023</span>
+            <span class="stat-value">...You're Born</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Other Projects</h4>
+          <div class="stat-row">
+            <span class="stat-label">Satchel</span>
+            <span class="stat-value">3 albums</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pigeonhed</span>
+            <span class="stat-value">3 albums</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Solo</span>
+            <span class="stat-value">10+ releases</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bandcamp</span>
+            <span class="stat-value">42 releases</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Recognition</h4>
+          <div class="stat-row">
+            <span class="stat-label">Greg Dulli</span>
+            <span class="stat-value">Best-Kept Secret</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Mojo</span>
+            <span class="stat-value">Best Vocalists</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Billboard #6</span>
+            <span class="stat-value">Battle Flag (1999)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sopranos</span>
+            <span class="stat-value">Shield of Thorns</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Influences</h4>
+          <div class="stat-row">
+            <span class="stat-label">Primary</span>
+            <span class="stat-value">Prince</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Soul</span>
+            <span class="stat-value">Stevie Wonder</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Rock</span>
+            <span class="stat-value">Freddie Mercury</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Seattle</span>
+            <span class="stat-value">Andy Wood</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Streak</h4>
+          <div class="stat-row">
+            <span class="stat-label">Streak</span>
+            <span class="stat-value">9 E=5+ broken</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Range</span>
+            <span class="stat-value">32&deg;&ndash;40&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Distribution</span>
+            <span class="stat-value">2:13:7:11:8:1</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 41 of 360 &mdash; Shawn Smith &mdash;
+        v1.49.177 &mdash; Soul/Blues &mdash; Epic / Sub Pop &mdash; Capitol Hill &mdash;
+        1965&ndash;2019
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to Seattle, on the ancestral
+        territory of the Duwamish Tribal Organization (duwamishtribe.org), the Muckleshoot Indian Tribe, and
+        related Coast Salish and Southern Lushootseed-speaking peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
