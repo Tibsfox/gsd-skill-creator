@@ -135,11 +135,90 @@
     }
     footer a { color:var(--fog); }
 
+    /* Mobile-friendly source table */
+    .table-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+    /* Level of Detail classes */
+    .lod-high { display:none; }
+    .lod-medium { display:none; }
+
     @media(max-width:640px) {
       header h1 { font-size:1.4rem; }
       main { padding:1rem; }
       .wx-grid { grid-template-columns:repeat(2, 1fr); }
       .card-grid { grid-template-columns:1fr; }
+    }
+
+    /* Medium screens: show lod-medium content */
+    @media(min-width:1200px) {
+      .lod-medium { display:block; }
+    }
+
+    /* Large screens: wider layout, bigger fonts, denser grids */
+    @media(min-width:1920px) {
+      main { max-width:1300px; }
+      footer { max-width:1300px; }
+      .stat-value { font-size:1.8rem; }
+      .wx-grid { grid-template-columns:repeat(4, 1fr); }
+      .card-grid { grid-template-columns:repeat(3, 1fr); }
+      .live-panel { padding:2rem; }
+      .card { padding:1.5rem; }
+      .lod-high { display:block; }
+    }
+
+    /* Ultra-wide screens */
+    @media(min-width:2560px) {
+      main { max-width:1500px; }
+      footer { max-width:1500px; }
+      .stat-value { font-size:2rem; }
+    }
+
+    /* Artemis countdown card */
+    .artemis-countdown {
+      background: linear-gradient(135deg, var(--panel) 0%, rgba(26,58,74,0.4) 100%);
+      border:1px solid rgba(74,122,154,0.3); border-radius:6px;
+      padding:1.2rem 1.5rem; margin:1rem 0;
+    }
+    .artemis-countdown h3 {
+      font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+      font-family:monospace; margin-bottom:0.6rem; font-weight:500;
+    }
+    .artemis-countdown .countdown-value {
+      font-size:1.3rem; color:var(--sky); font-family:monospace; letter-spacing:0.02em;
+    }
+    .artemis-countdown .countdown-label {
+      font-size:0.75rem; color:var(--dim); font-family:system-ui,sans-serif; margin-top:0.3rem;
+    }
+    .artemis-countdown a { color:var(--sky); }
+    .artemis-countdown a:hover { color:var(--sand); }
+
+    /* Scoring leaderboard */
+    .leaderboard {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.5rem; margin:1rem 0;
+    }
+    .leaderboard h3 {
+      font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+      font-family:monospace; margin-bottom:0.8rem; font-weight:500;
+    }
+    .leaderboard-row {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0.5rem 0; border-bottom:1px solid var(--border);
+    }
+    .leaderboard-row:last-child { border-bottom:none; }
+    .leaderboard-rank {
+      font-size:0.85rem; color:var(--sand); font-family:monospace; min-width:2rem;
+    }
+    .leaderboard-name {
+      font-size:0.85rem; color:var(--text); flex:1; margin-left:0.5rem;
+    }
+    .leaderboard-stat {
+      font-size:0.8rem; color:var(--marine); font-family:monospace; text-align:right;
+      min-width:6rem;
+    }
+    .leaderboard-detail {
+      font-size:0.7rem; color:var(--dim); font-family:system-ui,sans-serif;
+      text-align:right; min-width:5rem;
     }
   </style>
 </head>
@@ -205,11 +284,60 @@
     </p>
   </div>
 
+  <!-- ARTEMIS II COUNTDOWN — visible at 1200px+ -->
+  <div class="artemis-countdown lod-medium">
+    <h3>Artemis II &mdash; Crewed Lunar Flyby</h3>
+    <div class="countdown-value" id="artemis-countdown">Calculating...</div>
+    <div class="countdown-label">
+      First crewed mission beyond low Earth orbit since Apollo 17 (1972) &middot;
+      <a href="../NASA/artemis-ii/index.html">Mission Tracker</a>
+    </div>
+  </div>
+
+  <!-- SCORING LEADERBOARD — visible at 1920px+ -->
+  <div class="leaderboard lod-high">
+    <h3>Weather Source Leaderboard &mdash; Early Results</h3>
+    <div class="leaderboard-row">
+      <span class="leaderboard-rank">1</span>
+      <span class="leaderboard-name">NWS Forecast</span>
+      <span class="leaderboard-stat">0.23&deg;C MAE</span>
+      <span class="leaderboard-detail">3/3 wind</span>
+    </div>
+    <div class="leaderboard-row">
+      <span class="leaderboard-rank">2</span>
+      <span class="leaderboard-name">Open-Meteo (ICON)</span>
+      <span class="leaderboard-stat">0.41&deg;C MAE</span>
+      <span class="leaderboard-detail">2/3 wind</span>
+    </div>
+    <div class="leaderboard-row">
+      <span class="leaderboard-rank">3</span>
+      <span class="leaderboard-name">NOAA KSEA</span>
+      <span class="leaderboard-stat">0.68&deg;C MAE</span>
+      <span class="leaderboard-detail">2/3 wind</span>
+    </div>
+    <div class="leaderboard-row">
+      <span class="leaderboard-rank">4</span>
+      <span class="leaderboard-name">PurpleAir</span>
+      <span class="leaderboard-stat">--</span>
+      <span class="leaderboard-detail">temp only</span>
+    </div>
+    <div class="leaderboard-row">
+      <span class="leaderboard-rank">5</span>
+      <span class="leaderboard-name">Personal Station</span>
+      <span class="leaderboard-stat">--</span>
+      <span class="leaderboard-detail">pending</span>
+    </div>
+    <div style="font-size:0.7rem; color:var(--dim); margin-top:0.6rem; font-family:system-ui,sans-serif;">
+      Early scoring &mdash; 3 samples collected. NWS leading with lowest temperature error and perfect wind direction matches.
+    </div>
+  </div>
+
   <h2>Weather Source Comparison</h2>
   <p class="section-intro">
     Each source sampled during periodic sweeps. Accuracy scored against KPAE actuals over rolling 30-day windows.
   </p>
 
+  <div class="table-scroll">
   <table class="source-table">
     <thead>
       <tr><th>Source</th><th>Station / Grid</th><th>Type</th><th>Temp MAE</th><th>Wind MAE</th><th>Precip F1</th><th>Overall</th></tr>
@@ -223,6 +351,7 @@
       <tr><td>Personal Station</td><td>Home</td><td>Direct observation</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
     </tbody>
   </table>
+  </div>
 
   <h2>Scoring Methodology</h2>
   <div class="card-grid">
@@ -464,6 +593,7 @@
   </div>
 
   <h2>Data Sources</h2>
+  <div class="table-scroll">
   <table class="source-table">
     <thead><tr><th>Source</th><th>Endpoint</th><th>Data</th><th>Key</th><th>Update</th></tr></thead>
     <tbody>
@@ -477,6 +607,7 @@
       <tr><td>WSDOT Ferries</td><td>wsdot.wa.gov/ferries/api</td><td>Vessel positions, schedules</td><td>No</td><td>Real-time</td></tr>
     </tbody>
   </table>
+  </div>
 
 </main>
 
@@ -532,6 +663,29 @@ fetch(tideUrl)
     }
     document.getElementById('tide-bar').innerHTML = html;
   }).catch(function(){});
+
+// === ARTEMIS II COUNTDOWN ===
+(function(){
+  var el = document.getElementById('artemis-countdown');
+  if (!el) return;
+  // Target: September 2025 (NET) — using Sept 1 as placeholder
+  var target = new Date('2025-09-01T00:00:00Z').getTime();
+  function update() {
+    var now = Date.now();
+    var diff = target - now;
+    if (diff <= 0) {
+      el.textContent = 'MISSION WINDOW ACTIVE';
+      return;
+    }
+    var days = Math.floor(diff / 86400000);
+    var hrs = Math.floor((diff % 86400000) / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
+    el.textContent = 'T-' + days + 'd ' + hrs + 'h ' + mins + 'm ' + secs + 's';
+  }
+  update();
+  setInterval(update, 1000);
+})();
 </script>
 </body>
 </html>

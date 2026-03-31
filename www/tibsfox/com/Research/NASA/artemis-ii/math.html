@@ -189,6 +189,31 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   border-top:1px solid var(--border);
 }
 
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  .content { max-width: 1100px; }
+  /* Larger monospace font for derivation blocks */
+  .derivation { font-size: 1rem; line-height: 2; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .content { max-width: 1300px; }
+}
+
 /* === RESPONSIVE === */
 @media(max-width:768px) {
   .mission-header h1 { font-size:1.3rem; }
@@ -201,6 +226,12 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 @media(max-width:480px) {
   .nav-links { font-size: 0.7rem; padding: 0.5rem 1rem; }
   .section-header h2 { font-size: 1rem; }
+  main { padding: 0.8rem; }
+  h1 { font-size: 1.3rem; }
+  .spec-table, .comp-table { font-size: 0.7rem; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* Prevent code/derivation overflow on mobile */
+  .derivation { overflow-x: auto; white-space: pre-wrap; }
 }
 </style>
 </head>

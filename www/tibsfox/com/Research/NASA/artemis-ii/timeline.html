@@ -374,6 +374,40 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   border-top: 1px solid var(--border);
 }
 
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  /* Wider timeline with more space between entries */
+  .timeline-container { max-width: 1100px; }
+  .tl-item { margin-bottom: 1.2rem; }
+  .tl-content { padding: 1rem 1.4rem; }
+  .tl-title { font-size: 0.95rem; }
+  .tl-desc { font-size: 0.82rem; }
+  .flight-plan { max-width: 1100px; }
+  .coverage-section { max-width: 1100px; }
+  .next-missions { max-width: 1100px; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .timeline-container { max-width: 1300px; }
+  .flight-plan { max-width: 1300px; }
+  .coverage-section { max-width: 1300px; }
+  .next-missions { max-width: 1300px; }
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .mission-header h1 { font-size: 1.3rem; }
@@ -392,6 +426,11 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 @media (max-width: 480px) {
   .gap-number { font-size: 2.2rem; }
   .tl-content { padding: 0.5rem 0.7rem; }
+  main { padding: 0.8rem; }
+  h1 { font-size: 1.3rem; }
+  .spec-table, .comp-table { font-size: 0.7rem; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* Single column timeline on mobile (already handled by 768px breakpoint) */
 }
 </style>
 </head>
