@@ -1,0 +1,117 @@
+{
+  "degree": 15,
+  "version": "1.15",
+  "title": "The Weather Eye",
+  "sync_date": "2026-03-31",
+
+  "threads": {
+    "mission": {
+      "name": "TIROS-1",
+      "date": "1960-04-01",
+      "program": "TIROS",
+      "type": "weather observation satellite",
+      "epoch": 1,
+      "significance": "First weather satellite — took 22,952 cloud-cover photographs in 78 days, proving that satellites could observe weather patterns from orbit. Changed meteorology from a ground-up discipline to a top-down one. The first time humanity saw its own weather from outside."
+    },
+    "artist": {
+      "name": "Thomas Marriott",
+      "degree": 15,
+      "genre": "Jazz (trumpet, post-bop, hard bop)",
+      "era": "2000s-present",
+      "born": "Seattle (1979)",
+      "died": null,
+      "seattle_connection": "Native-born, studied at UW under Marc Seales, chose to stay in Seattle and build locally. Origin Records partnership — four albums documenting the Seattle jazz scene from within. The Builder-Stayer.",
+      "significance": "Observes the Seattle jazz scene from inside it — the hard bop trumpet voice documenting a living community through Origin Records' documentary realism aesthetic. The fifteenth blue note deployment: assertive brass at energy-3, half-valve bends and scooped approaches."
+    },
+    "organism": {
+      "scientific_name": "Aurelia aurita",
+      "common_name": "Moon Jellyfish",
+      "kingdom": "Animalia",
+      "location": "Native, common in Puget Sound, coastal waters, and estuaries throughout the Pacific Northwest",
+      "significance": "Pulses rhythmically through the water column — a metronome of the sea, its bell contracting and relaxing in a pattern-driven locomotion cycle. Transparent body reveals its internal structure: the four horseshoe-shaped gonads visible through the bell like a clover pattern. The organism wears its pattern on the outside."
+    },
+    "bird": {
+      "scientific_name": "Brachyramphus marmoratus",
+      "common_name": "Marbled Murrelet",
+      "family": "Alcidae",
+      "pnw_status": "Year-round resident of PNW coastal waters; nests in old-growth forests up to 80 km inland",
+      "significance": "One of the last North American birds whose nesting site was discovered — its inland old-growth tree nesting was not confirmed until 1974. For decades, ornithologists observed the bird at sea but could not find where it nested. The pattern was hidden in plain sight: a seabird nesting in ancient trees, miles from the ocean."
+    },
+    "dedication": "Sergei Rachmaninoff (April 1, 1873 -- March 28, 1943)"
+  },
+
+  "resonance_matrix": {
+    "observation_and_pattern": {
+      "theme": "All four threads are about seeing patterns — from orbit, from the bandstand, through the water, in the ancient forest",
+      "mission": "TIROS-1 saw weather patterns that ground observers could never perceive. A hurricane is invisible from the ground — you experience wind and rain, but the spiral structure only appears from altitude. TIROS-1's 22,952 photographs revealed the geometry of weather systems for the first time: spiral cyclones, frontal boundaries, jet stream flows. The pattern existed before the satellite. The observation made it visible. Meteorologists had theorized these structures; TIROS-1 showed them directly.",
+      "artist": "Marriott observes the Seattle jazz scene from within it — not from academic remove (Seales, degree 13) or from a distant career center (Parks, degree 14), but from the bandstand, the recording studio, the local venue circuit. His Origin Records albums are documentary observations of a living community: Flexicon, Human, Dialogue, Urban Folklore — each title names an observational lens. The hard bop vocabulary he deploys is itself a pattern — a language of chromatic runs, arpeggiated chord tones, and post-bop harmonic extensions that a trained ear can identify immediately, the way a meteorologist identifies a frontal boundary in a satellite image.",
+      "organism": "Aurelia aurita IS a visible pattern. The moon jellyfish's transparent bell reveals its internal anatomy — the four horseshoe-shaped gonads form a clover-like pattern visible from above, a natural logo displayed through translucent tissue. The jellyfish's locomotion is pattern-driven: rhythmic bell contractions at a regular pulse rate (approximately once per second), creating a jet-propulsion cycle that moves the animal through the water. The pattern of contraction is so regular it can be modeled as a simple harmonic oscillator — a biological sine wave pulsing through Puget Sound.",
+      "bird": "The Marbled Murrelet hid its pattern for over a century. Ornithologists knew the bird — they saw it at sea daily — but its nesting site remained a mystery until 1974, when a tree trimmer in Big Basin Redwoods State Park found a chick on a moss-covered branch 45 meters up in a Douglas-fir. The pattern was a seabird nesting in old-growth forest, flying up to 80 kilometers inland at dawn and dusk. The observation required looking in the wrong place — not at the sea where the bird fed, but in the ancient forest where it nested. TIROS-1 saw weather by looking down from orbit; the murrelet's secret was found by looking up from the forest floor."
+    },
+    "persistence_of_observation": {
+      "theme": "Reliable pattern detection requires sustained, repeated observation — not a single glance but a continuous watch",
+      "mission": "TIROS-1 operated for 78 days, taking 22,952 photographs. A single photograph shows a cloud formation; 22,952 photographs show a weather system evolving over time. The satellite's value was not any single image but the time series — the continuous observation that revealed how patterns formed, moved, and dissipated. Meteorological forecasting requires persistence: you cannot predict weather from a snapshot; you need the trajectory.",
+      "artist": "Marriott has recorded four albums for Origin Records spanning 2006 to 2013 — a seven-year time series of the Seattle jazz scene. Each album is a photograph; the series reveals the trajectory. The Builder-Stayer pattern IS persistence of observation: by staying in Seattle and continuously recording, Marriott creates a longitudinal document that no visiting artist could produce. He sees the same musicians evolve, the same venues change, the same scene develop. The observation is continuous because the observer is embedded.",
+      "organism": "The moon jellyfish's rhythmic pulsing is itself a persistent observation mechanism. Each pulse drives water through the oral arms, where nematocysts and mucus trap plankton. The jellyfish does not hunt in bursts — it pulses continuously, sampling the water column with metronomic regularity. One pulse captures nothing; 86,400 pulses per day (at one per second) filter an enormous volume of water. The moon jellyfish is a persistent sampler, its observation of the plankton field never stopping.",
+      "bird": "The murrelet's nesting pattern was discovered only because observers persisted. Decades of failed searches — ornithologists following birds from the coast at dawn, trying to track their fast low flight inland — yielded nothing. The discovery in 1974 was not the result of a new technique but of accumulated observation: enough people looking in enough places for enough years that someone finally happened to be in the right tree. The pattern was always there. It took persistent observation to find it."
+    },
+    "the_view_from_inside": {
+      "theme": "The most revealing observations come from within the system, not from outside it",
+      "mission": "TIROS-1 was revolutionary because it observed FROM orbit — inside the atmosphere's gravitational sphere, close enough to resolve cloud structures, but above the weather it was observing. Prior weather observation was entirely ground-based: instruments measuring temperature, pressure, and humidity at single points. TIROS-1 did not measure weather — it PHOTOGRAPHED it, capturing the spatial pattern that point measurements could never reveal. The satellite was inside the Earth system but above the weather — the perfect observational position.",
+      "artist": "Marriott's observation is from inside the Seattle scene. He is not a visitor documenting exotica or an academic studying a subject — he is a working musician recording with the people he plays with at the clubs he performs at, on a local label run by a local drummer. Origin Records' documentary realism aesthetic captures this inside position: the recordings sound like the room, not like a studio. The observation preserves the system as it is experienced by participants, not as it appears to outsiders. Urban Folklore: the title names this explicitly — folklore is knowledge transmitted from inside the community.",
+      "organism": "The moon jellyfish observes its environment from inside the water column. Unlike surface-dwelling organisms that observe through the air-water boundary, the jellyfish IS in the medium it samples. Its entire body is a sensory surface — the bell, the oral arms, the tentacles all detect chemical gradients, current patterns, and prey density directly, without the distortion of observing through a boundary layer. The jellyfish does not look at the ocean; it feels the ocean from within.",
+      "bird": "The murrelet nests inside old-growth forest canopy — the most structurally complex habitat in the Pacific Northwest, a three-dimensional maze of branches, moss, and epiphytes where no satellite could photograph and no ground observer could easily see. The bird chose the interior of the most opaque system in the PNW as its nesting site. The observation that found it had to come from inside the canopy — a tree trimmer at branch height, not a birder with binoculars at the forest edge. The pattern was visible only to someone already inside the system."
+    }
+  },
+
+  "theory_bridge": {
+    "music_to_math": [
+      {
+        "music_concept": "Hard bop trumpet vocabulary (Clifford Brown lineage)",
+        "tspb_layer": 2,
+        "tspb_section": "2.15",
+        "bridge": "The Clifford Brown trumpet lineage translates bebop's chromatic vocabulary to brass: rapid arpeggiated runs through chord tones, chromatic approach notes leading to target pitches, and the physical endurance for multi-chorus solos at tempo. On the unit circle, arpeggiated chord tones are discrete angular jumps — root (0 degrees), third (120 degrees for major), fifth (210 degrees), seventh (330 degrees) — creating a path that leaps around the circle rather than walking stepwise. Marriott's hard bop trumpet traces these angular leaps at speed, the way TIROS-1 traced the angular path of cyclonic weather patterns from orbit. Both see the same underlying structure (chord changes, weather fronts) but from a vantage point that reveals the pattern: the trumpet above the rhythm section, the satellite above the atmosphere."
+      },
+      {
+        "music_concept": "Origin Records documentary realism (third production aesthetic)",
+        "tspb_layer": 7,
+        "tspb_section": "7.15",
+        "bridge": "Origin Records' documentary realism is a signal processing philosophy: minimize the transfer function between performance and recording. Where ECM (Eicher) convolves the signal with reverberant room acoustics, and Blue Note (Van Gelder) convolves it with tube compression and studio character, Origin (Bishop) aims for H(s) approaching 1 — the recording IS the performance with minimal processing artifact. In information theory, this is minimum-distortion encoding: the channel between source (performance) and receiver (listener) introduces the least possible noise. TIROS-1's cameras had a similar design goal: capture the cloud patterns with minimum distortion, producing images that represented what the satellite actually saw rather than what post-processing reconstructed. Documentary realism in both domains: record what is there."
+      },
+      {
+        "music_concept": "Swing-to-even-eighths rhythmic continuum",
+        "tspb_layer": 4,
+        "tspb_section": "4.15",
+        "bridge": "Marriott navigates a rhythmic continuum from swung eighth notes (the long-short pattern of traditional jazz, approximately 2:1 ratio) to even eighth notes (equal division, 1:1 ratio). This is a continuous parameter, not a binary switch — the swing ratio can take any value between 1:1 and 3:1. On the unit circle, the swing ratio maps to the angular spacing between subdivisions: even eighths are equally spaced (every 15 degrees in a measure of 24 subdivisions), while swung eighths cluster (alternating wider and narrower angular gaps). TIROS-1's two cameras had different scan rates — wide-angle (covering more area with less detail) and narrow-angle (covering less area with more detail). The ratio between coverage and resolution is a continuous parameter, just like the swing ratio: you trade breadth for precision."
+      }
+    ],
+    "organism_to_math": [
+      {
+        "organism_concept": "Rhythmic bell contraction as simple harmonic oscillator",
+        "tspb_layer": 1,
+        "tspb_section": "1.15",
+        "bridge": "The moon jellyfish's bell contracts and relaxes at a regular frequency — approximately 1 Hz — producing jet propulsion through periodic water expulsion. This is a simple harmonic oscillator: the bell's displacement from resting state follows a sinusoidal path, with elastic tissue providing the restoring force. The equation of motion is x(t) = A*cos(omega*t + phi), where A is the contraction amplitude, omega is the angular frequency, and phi is the phase. On the unit circle, the jellyfish's bell traces a circular path at constant angular velocity — one full revolution per contraction cycle. This is the most literal unit-circle motion in the organism catalog: the moon jellyfish's locomotion IS circular motion projected onto a linear axis."
+      },
+      {
+        "organism_concept": "Murrelet nesting as hidden Markov model",
+        "tspb_layer": 5,
+        "tspb_section": "5.15",
+        "bridge": "The Marbled Murrelet's behavior alternates between observable states (at sea, feeding, flying) and hidden states (nesting inland, incubating, chick-rearing in canopy). Observers see the bird's emissions (surface behaviors) but cannot directly observe the internal state (nesting activity). This is a hidden Markov model: the bird's observable behavior sequence is generated by a hidden state sequence with probabilistic transitions. For decades, ornithologists could model the feeding behavior (observable) but not the nesting behavior (hidden) because the emission probabilities from the nesting state were nearly zero — the bird was essentially invisible while nesting. TIROS-1 solved an analogous problem: weather at the surface was observable but the large-scale atmospheric state was hidden. Satellite observation made the hidden states visible."
+      }
+    ]
+  },
+
+  "creative_synthesis": {
+    "title": "Degree Fifteen: The Weather Eye",
+    "narrative": "On April 1, 1960, TIROS-1 opened its camera and looked down. For the first time in history, a weather system was photographed from above — not measured by instruments at a point, not inferred from barometric readings, but seen. The spiral arm of a cyclone, obvious from orbit, invisible from the ground. In 78 days, 22,952 photographs. The weather had always been there. The pattern had always existed. TIROS-1 did not create the pattern; it created the vantage point. Thomas Marriott stands on the stage at Tula's Jazz Club in Seattle and plays a Clifford Brown line — the same chromatic vocabulary that Brown invented in the 1950s, heard now in a room full of Seattle musicians who know every note, because Marriott is one of them. He is not observing from outside. He is documenting from within, the way TIROS-1 documented weather from inside the atmosphere. Origin Records captures the room as it sounds to the people in it. In Puget Sound, a moon jellyfish pulses through the water column — one contraction per second, 86,400 per day, each pulse a frame in a continuous time-lapse of the plankton field. The jellyfish sees nothing; it has no eyes, no brain. But it samples continuously, its transparent bell a living weather station floating through the Sound, its four-lobed gonad pattern visible through the tissue like a logo stamped on glass. And somewhere in the old-growth canopy of the Olympic Peninsula, a Marbled Murrelet sits on a moss-covered branch 50 meters above the forest floor, incubating a single egg in a nest that ornithologists spent a century trying to find. The pattern was always there — a seabird nesting in ancient trees. The observation just hadn't reached the right altitude. Fifteen degrees: the eye opens, the pattern resolves, the weather becomes visible.",
+    "haiku": "Twenty thousand frames —\nthe murrelet nests in fog\nwhere no lens can reach"
+  },
+
+  "cross_references": {
+    "s36_path": "www/tibsfox/com/Research/S36/research/releases/015-thomas-marriott/",
+    "nasa_path": "www/tibsfox/com/Research/NASA/1.15/",
+    "rosetta_clusters": ["Music", "Space & Astrophysics", "Ecology"],
+    "college_departments": ["music-theory", "marine-biology", "meteorology", "ornithology", "signal-processing"],
+    "tspb_layers_touched": [1, 2, 4, 5, 7]
+  }
+}

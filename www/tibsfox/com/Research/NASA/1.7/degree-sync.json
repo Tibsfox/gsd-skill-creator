@@ -1,0 +1,117 @@
+{
+  "degree": 7,
+  "version": "1.7",
+  "title": "The Discovery Network",
+  "sync_date": "2026-03-31",
+
+  "threads": {
+    "mission": {
+      "name": "Explorer 1",
+      "date": "1958-01-31",
+      "program": "Explorer (Army Ballistic Missile Agency / Jet Propulsion Laboratory)",
+      "type": "Earth orbiter",
+      "epoch": 1,
+      "significance": "First US satellite. Discovered the Van Allen radiation belts -- invisible magnetic architecture surrounding Earth that no one knew existed until Explorer 1's Geiger counter saturated and James Van Allen realized the instrument wasn't broken, the radiation was real."
+    },
+    "artist": {
+      "name": "Julian Priester",
+      "degree": 7,
+      "genre": "Jazz (trombone -- post-bop, avant-garde, ECM)",
+      "era": "1970s-present",
+      "born": "1935",
+      "died": null,
+      "seattle_connection": "Cornish College of the Arts faculty (1979-present), Seattle experimental jazz constellation alongside Horvitz and Frisell",
+      "significance": "Explored harmonic territory no trombonist had mapped before -- from Sun Ra's Arkestra through Herbie Hancock's Mwandishi sextet to ECM solo recordings. The trombone slide as continuous-pitch discovery instrument, finding notes between the notes."
+    },
+    "organism": {
+      "scientific_name": "Lobaria pulmonaria",
+      "common_name": "Lungwort Lichen",
+      "kingdom": "Fungi/Algae (symbiosis)",
+      "location": "Mature conifers and hardwoods in moist old-growth forests throughout the Pacific Northwest",
+      "significance": "A bioindicator species -- its presence or absence reveals air quality invisible to human senses. Lobaria discovers pollution the way Explorer 1 discovered radiation: by being sensitive to what others cannot detect. Found only where the air is clean enough to sustain it."
+    },
+    "bird": {
+      "scientific_name": "Ixoreus naevius",
+      "common_name": "Varied Thrush",
+      "family": "Turdidae",
+      "pnw_status": "Year-round resident in dense coniferous forests, winters in lowland areas",
+      "significance": "Sings a single pure tone -- a long, ethereal, buzzing whistle that seems to come from everywhere and nowhere at once. The song is a discovery in the forest: you hear it and cannot locate the source. The Varied Thrush reveals the forest's acoustic architecture the way Explorer 1 revealed Earth's magnetic architecture."
+    },
+    "dedication": "Robert Bunsen (March 30, 1811 -- August 16, 1899)"
+  },
+
+  "resonance_matrix": {
+    "discovery_of_the_invisible": {
+      "theme": "All four threads discover hidden structures that were always present but never detected",
+      "mission": "Explorer 1's Geiger-Mueller counter saturated at high altitudes. The initial interpretation was instrument failure. Van Allen's insight was to flip the reading: the counter wasn't broken, it was overwhelmed. The Van Allen belts had been there since Earth's magnetic field formed -- billions of years of invisible radiation architecture, discovered because an instrument was sensitive enough to overload.",
+      "artist": "Priester's trombone slide discovers pitches that valved brass instruments cannot reach. The continuous slide mechanism accesses the microtonal territory between the twelve notes of equal temperament -- an infinite set of frequencies that the Western chromatic system renders invisible. His Mwandishi recordings processed the trombone through electronics, discovering timbres that were neither acoustic nor electronic but a new category between.",
+      "organism": "Lobaria pulmonaria is a discovery instrument. Its thallus accumulates atmospheric pollutants -- sulfur dioxide, nitrogen compounds, heavy metals -- that are invisible and odorless to humans. Lichenologists survey Lobaria populations to map air quality gradients across forests. Where Lobaria thrives, the air is clean. Where it disappears, something invisible has changed. The lichen detects what the human body cannot.",
+      "bird": "The Varied Thrush's song reveals the acoustic architecture of dense coniferous forest. The single pure tone -- sustained for 1-2 seconds, then silence, then a tone at a different pitch -- bounces off trunks, canopy, and understory to create an omnidirectional sound field. The listener discovers the forest's acoustic geometry through the bird's song. You hear the thrush before you see it; the song discovers the space."
+    },
+    "instrument_saturation": {
+      "theme": "What happens when a sensing instrument reaches its limit reveals more than normal operation",
+      "mission": "Explorer 1's cosmic ray detector was designed to count particles. In the Van Allen belts, the particle flux was so intense that the counter saturated -- registering zero counts because it could not reset between impacts. Zero meant not 'nothing' but 'too much to measure.' The discovery came from recognizing that the instrument's failure mode was data.",
+      "artist": "Priester pushed the trombone through electronic processing in the Mwandishi sextet -- wah-wah, Echoplex, distortion. These effects saturated the trombone's acoustic signal, transforming it into something the instrument was never designed to produce. The saturation was not failure; it was the discovery of electroacoustic trombone as a new voice. The instrument's overload became its vocabulary.",
+      "organism": "Lobaria accumulates pollutants until its photobiont (the algal partner) can no longer photosynthesize. The lichen does not gradually weaken -- it reaches a threshold and dies. The death is the data point. Air quality researchers use Lobaria mortality as a binary indicator: present means clean, absent means contaminated. The organism's saturation limit is the measurement.",
+      "bird": "The Varied Thrush's pure-tone song is at the threshold of what forest acoustics can carry without degradation. The single frequency propagates farther through dense vegetation than complex songs because it does not scatter across the frequency spectrum. The bird has evolved a signal optimized for the medium's saturation point -- any more complex and the forest would absorb it. The simplicity IS the discovery of the medium's capacity."
+    },
+    "new_territory_mapped": {
+      "theme": "The discovery creates a map where none existed before",
+      "mission": "Before Explorer 1, there was no map of Earth's radiation environment. After Explorer 1 and the confirming flights, the Van Allen belts were mapped in three dimensions -- inner belt (protons), outer belt (electrons), slot region between. This radiation map became essential for every subsequent space mission. The discovery did not just find something; it created the cartography that made spaceflight safe.",
+      "artist": "Priester's career maps territory between three musical worlds: Sun Ra's Afrofuturist free exploration (the cosmic), Hancock's Mwandishi electronic jazz (the technological), and ECM's contemplative acoustic space (the meditative). No other trombonist occupies all three territories. His discography is a map of post-bop trombone possibilities -- from the Arkestra's collective improvisation through electronic processing to solo ECM contemplation.",
+      "organism": "Lobaria distribution maps create air quality cartography. Forest ecologists survey lichen populations to produce gradient maps: distance from pollution sources, elevation effects, canopy density, moisture regime. The lichen map is a translation of invisible atmospheric chemistry into visible geographic pattern. Each Lobaria colony is a data point; the population is the map.",
+      "bird": "The Varied Thrush's territory is mapped by song. Males establish breeding territories through their pure-tone broadcasts, each at a slightly different pitch. The overlapping song fields create an acoustic map of the forest's social geography -- who controls what space, where the boundaries are, how the population is distributed. Ornithologists use thrush song mapping as a census technique for old-growth forest health."
+    }
+  },
+
+  "theory_bridge": {
+    "music_to_math": [
+      {
+        "music_concept": "Continuous pitch via trombone slide (glissando, portamento, microtonal expression)",
+        "tspb_layer": 2,
+        "tspb_section": "2.7",
+        "bridge": "The trombone slide maps position to frequency as a continuous function: f(x) = f_0 / (1 + x/L), where x is slide extension and L is the tube length at first position. Unlike valved instruments (which produce discrete pitch sets corresponding to different tube lengths), the trombone accesses every frequency between its harmonic series positions. On the unit circle, a valved instrument jumps between discrete points (like clock positions); the trombone traces continuous arcs. Priester's microtonal vocabulary exploits this continuity -- the blue-note zone between major and minor third is not a single point but a continuous interval, and the slide can park anywhere within it. This is the difference between Z (integers, discrete, valved brass) and R (reals, continuous, slide brass)."
+      },
+      {
+        "music_concept": "Modal jazz -- static harmonic fields (Dorian, Mixolydian, Lydian)",
+        "tspb_layer": 3,
+        "tspb_section": "3.7",
+        "bridge": "Modal jazz replaces rapid chord changes with static harmonic fields. Mathematically, this is a change of basis: bebop harmonic rhythm cycles through keys at 1-2 beats per chord change (high angular velocity on the circle of fifths); modal jazz holds a single mode for 16-32 bars (near-zero angular velocity, the musician explores a single arc of the circle). The Dorian mode on D is the same set of pitches as C major but with D as the tonal center -- a rotation of the reference frame without changing the underlying set. The Mwandishi sextet sustained modal fields for entire sides of albums, giving Priester's trombone room to explore the microtonal interior of each mode. Low angular velocity + continuous pitch instrument = maximum discovery potential."
+      },
+      {
+        "music_concept": "Electronic signal processing chain (wah-wah as bandpass filter, Echoplex as delay line, distortion as harmonic enrichment)",
+        "tspb_layer": 6,
+        "tspb_section": "6.7",
+        "bridge": "The Mwandishi signal chain is a cascade of signal-processing operations: the trombone's acoustic signal is the input, each effect is a transfer function, and the output is the electroacoustic result. The wah-wah pedal is a voltage-controlled bandpass filter -- it sweeps the center frequency, selectively amplifying different overtone regions. This is convolution in the frequency domain: H(f) * X(f), where H(f) is the filter's frequency response and X(f) is the trombone's spectrum. The Echoplex is a delay line: y(t) = x(t) + a*x(t-d), where d is the delay time and a is the feedback coefficient. At high feedback, the delay creates a series of decaying copies -- a finite impulse response. Priester's trombone through this chain was the first jazz electroacoustic instrument, and the signal processing is identical to what NASA uses in satellite telemetry: filter, delay, decode."
+      }
+    ],
+    "organism_to_math": [
+      {
+        "organism_concept": "Bioindicator threshold function (Lobaria as binary air quality sensor)",
+        "tspb_layer": 4,
+        "tspb_section": "4.7",
+        "bridge": "Lobaria pulmonaria functions as a step function in air quality assessment: present above the threshold of air purity, absent below. This is a Heaviside function: H(q - q_0), where q is air quality and q_0 is the survival threshold. The lichen integrates pollutant exposure over time -- sulfur dioxide concentration multiplied by exposure duration -- until the cumulative dose exceeds the photobiont's tolerance. This is a dose-response model: the lichen's survival probability P(s) = 1 / (1 + exp(k(D - D_0))), a logistic function where D is cumulative dose and D_0 is the lethal dose. Explorer 1's Geiger counter had an analogous threshold: below a certain particle flux, it counted normally; above, it saturated to zero. Both instruments have transfer functions with critical thresholds."
+      },
+      {
+        "organism_concept": "Symbiosis as parallel processing (fungal + algal + cyanobacterial partners)",
+        "tspb_layer": 7,
+        "tspb_section": "7.7",
+        "bridge": "Lobaria pulmonaria is a three-way symbiosis: fungal partner (structure, water retention, substrate attachment), green algal partner (photosynthesis, carbon fixation), and cyanobacterial partner (nitrogen fixation from atmospheric N2). These are three parallel processors sharing a single physical substrate. Each partner processes a different input stream: the fungus processes water and minerals from the substrate, the alga processes light and CO2 from the atmosphere, the cyanobacterium processes atmospheric nitrogen. The outputs are shared -- the carbon from photosynthesis feeds the fungus, the nitrogen from fixation feeds the alga, the structure from the fungus houses both. This is a three-channel parallel architecture with shared memory (the thallus). The Mwandishi sextet was an analogous parallel-processing system: six musicians processing the same harmonic field through different instruments, sharing musical memory through listening."
+      }
+    ]
+  },
+
+  "creative_synthesis": {
+    "title": "Degree Seven: The Saturated Counter",
+    "narrative": "At degree seven, the instruments overload and the overload is the discovery. Explorer 1's Geiger counter saturates to zero and Van Allen realizes that zero means infinity -- the radiation is so intense that the instrument cannot count it. Priester's trombone saturates through electronic processing and becomes something neither acoustic nor electronic -- a new voice in the space between categories. Lobaria saturates with pollutants and dies, and the death is the data point that maps the invisible chemistry of the atmosphere. The Varied Thrush sings a single pure tone that saturates the forest's acoustic space, and the saturation reveals the architecture of the canopy. Seven degrees into the unit circle, the engine reaches its first saturation point: the instruments designed to measure the known have discovered the unknown. The Van Allen belts were always there. The microtones between equal-tempered pitches were always there. The air quality gradient was always there. The forest's acoustic geometry was always there. Discovery is not creation -- it is the moment when the instrument becomes sensitive enough to register what was already present. The slide finds the note. The counter finds the belt. The lichen finds the air. The thrush finds the forest.",
+    "haiku": "Geiger reads zero --\nthe slide finds the hidden note\nwhere the lichen breathes"
+  },
+
+  "cross_references": {
+    "s36_path": "www/tibsfox/com/Research/S36/research/releases/007-julian-priester/",
+    "nasa_path": "www/tibsfox/com/Research/NASA/1.7/",
+    "rosetta_clusters": ["Music", "Ecology", "Space & Astrophysics"],
+    "college_departments": ["music-theory", "lichenology", "aerospace-history", "ornithology", "signal-processing"],
+    "tspb_layers_touched": [2, 3, 4, 6, 7]
+  }
+}
