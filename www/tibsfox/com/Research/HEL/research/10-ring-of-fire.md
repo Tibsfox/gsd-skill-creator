@@ -52,7 +52,7 @@ South Korea's Samsung has also invested heavily in Austin, Texas fab capacity (T
 
 Japan occupies a unique dual role in the Ring of Fire helium system: consumer and equipment manufacturer. Japanese semiconductor fabrication (Rapidus, Sony Semiconductor Solutions, Renesas) generates significant helium demand. But Japan's more consequential role is as the manufacturer of the cryogenic and precision equipment that the entire global helium supply chain depends on.
 
-Sumitomo Heavy Industries manufactures cryocoolers used in MRI systems, dilution refrigerators, and helium reliquefaction units worldwide. Taiyo Nippon Sanso (a Nippon Steel subsidiary, now part of Matheson Tri-Gas parent company) is one of the world's largest industrial gas companies. Tokyo Electron (TEL) is the third-largest semiconductor equipment company globally, manufacturing the etch and deposition tools that consume helium in fabs around the world.
+Sumitomo Heavy Industries manufactures cryocoolers used in MRI systems, dilution refrigerators, and helium reliquefaction units worldwide. Taiyo Nippon Sanso (parent company of Matheson Tri-Gas)) is one of the world's largest industrial gas companies. Tokyo Electron (TEL) is the third-largest semiconductor equipment company globally, manufacturing the etch and deposition tools that consume helium in fabs around the world.
 
 Japan is also the world's most earthquake-experienced advanced economy, with building codes, supply chain practices, and disaster response systems shaped by centuries of seismic events. Japanese supply chain management philosophy -- emphasizing buffer inventory, multiple suppliers, and rapid recovery -- provides a model for resilient helium logistics.
 
