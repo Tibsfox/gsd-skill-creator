@@ -63,15 +63,47 @@
       margin: 0 auto;
       padding: 2rem 1.5rem 4rem;
     }
-    .section-intro {
-      font-size: 0.95rem;
-      color: var(--charcoal);
-      margin-bottom: 1rem;
+
+    /* === Force light mode — override any dark-mode variables === */
+    body { background: #f5f0e6 !important; color: #2a2a2a !important; }
+    blockquote {
+      border-left: 4px solid #c75b3a !important;
+      background: rgba(199,91,58,0.04) !important;
+      color: #5a5a5a !important;
+      padding: 1.2rem 1.5rem !important;
+      border-radius: 0 6px 6px 0 !important;
+      margin: 1.5rem 0 !important;
+      font-style: italic !important;
     }
-    .card:hover { text-decoration: none; }
-    .card h3 { color: var(--ink-soft); }
-    .stat-value { color: var(--fox); }
-    footer { --content-width: 64rem; }
+    .stats {
+      display: flex !important; justify-content: center !important;
+      gap: 2rem !important; padding: 1.5rem 0 !important; flex-wrap: wrap !important;
+      background: transparent !important;
+    }
+    .stat { text-align: center !important; min-width: 80px !important; }
+    .stat-value { display: block !important; font-size: 1.6rem !important; font-weight: 700 !important; color: #c75b3a !important; font-family: system-ui, sans-serif !important; }
+    .stat-label { font-size: 0.7rem !important; color: #8a8884 !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; font-family: system-ui, sans-serif !important; }
+    h2 { color: #3d3d3d !important; font-size: 1.3rem !important; font-weight: 400 !important; border-bottom: 1px solid #e8dcc8 !important; padding-bottom: 0.3rem !important; margin: 2rem 0 0.5rem !important; }
+    .section-intro { font-size: 0.95rem !important; color: #5a5a5a !important; margin-bottom: 1rem !important; }
+    .card-grid {
+      display: grid !important; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+      gap: 1.2rem !important; margin: 1.5rem 0 !important;
+    }
+    .card {
+      background: #ffffff !important; border: 1px solid #e8dcc8 !important;
+      border-radius: 8px !important; padding: 1.5rem !important;
+      display: block !important; text-decoration: none !important; color: #2a2a2a !important;
+      box-shadow: 0 2px 8px rgba(42,42,42,0.06) !important;
+      transition: box-shadow 0.2s, transform 0.15s !important;
+    }
+    .card:hover { box-shadow: 0 4px 16px rgba(42,42,42,0.12) !important; transform: translateY(-2px) !important; text-decoration: none !important; }
+    .card h3 { color: #3d3d3d !important; font-size: 1.1rem !important; margin: 0 0 0.3rem !important; }
+    .card .meta { font-size: 0.82rem !important; color: #8a8884 !important; margin-bottom: 0.5rem !important; }
+    .card .meta .tag { display: inline-block; background: rgba(199,91,58,0.08); color: #c75b3a; padding: 0.1rem 0.5rem; border-radius: 3px; font-size: 0.72rem; font-family: system-ui, sans-serif; }
+    .card p { font-size: 0.92rem !important; color: #5a5a5a !important; margin: 0 !important; }
+    .accent-bar { height: 4px !important; border-radius: 2px !important; margin-bottom: 1rem !important; }
+    footer { color: #8a8884 !important; border-top: 1px solid #e8dcc8 !important; }
+    footer a { color: #c75b3a !important; }
 
     /* === Header trio: Moon circle | Fox+Title | Sun circle === */
     .header-row {
