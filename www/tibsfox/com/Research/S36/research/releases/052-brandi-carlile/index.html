@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 52&deg; &mdash; Brandi Carlile &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3E2723);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .grammy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.85rem;
+    }
+    .grammy-table th {
+      background: #1A237E;
+      color: #9FA8DA;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .grammy-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid #E8EAF6;
+      color: #424242;
+    }
+    .grammy-table tr:nth-child(even) { background: #F5F5F5; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>052 &mdash; Brandi Carlile</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>8th Consecutive Folk-Adjacent &mdash; E=4 Returns &mdash; The Rural Breakout</h3>
+      <p>
+        Brandi Carlile at degree 52&deg; extends the folk-adjacent record to
+        <strong>eight consecutive degrees</strong> (45&ndash;52). Born in
+        <strong>Ravensdale, Washington</strong> &mdash; rural King County, thirty miles
+        from Seattle. <strong>Nine Grammy Awards</strong> across Americana, Roots, Country,
+        and Rock. &ldquo;The Joke&rdquo; &mdash; career-defining standing ovation at the
+        61st Grammys. Championed <strong>Joni Mitchell&rsquo;s</strong> return to the stage.
+        <strong>Super Bowl LX</strong> performer. First <strong>Columbia Records</strong>
+        artist in the engine. First rural artist. First openly LGBTQ+ artist. The loudest
+        voice in the folk zone.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">52&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Brandi Carlile</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 4</span>
+          <span class="genre-badge">Folk / Rock</span>
+          <span class="label-badge">Columbia</span>
+          <span class="neighborhood-badge">Ravensdale to Auburn</span>
+          <span class="record-badge">8th Folk-Adjacent &mdash; Record Extends</span>
+          <span class="first-badge">1st Columbia Records</span>
+          <span class="first-badge">1st Rural Artist</span>
+          <span class="first-badge">1st Openly LGBTQ+</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Rural Girl Who Became the Loudest Voice in Americana</h2>
+          <p>
+            <strong>Brandi Marie Carlile</strong> was born on June 1, 1981, in
+            <strong>Ravensdale, Washington</strong> &mdash; a small unincorporated
+            community in southeastern King County, thirty miles from downtown Seattle.
+            She grew up across rural King County: Ravensdale, Maple Valley, Black Diamond,
+            Auburn, and Sumner. &ldquo;The only house for miles.&rdquo; At age four, she
+            nearly died from <strong>bacterial meningitis</strong>. Her heart stopped
+            multiple times. She survived with partial hearing loss in her left ear. She
+            began singing country songs on stage at age eight. She dropped out of high
+            school. Her pastor publicly <strong>refused to baptize her</strong> because
+            she was gay. Music was the only path she could see.
+          </p>
+          <p>
+            In <strong>1999</strong>, producer <strong>Rick Parashar</strong> introduced
+            Carlile to <strong>Phil and Tim Hanseroth</strong> &mdash; identical twin
+            brothers who had been playing in The Fighting Machinists. The trio became
+            inseparable. They have been together for over twenty-five years. Phil Hanseroth
+            wrote <strong>&ldquo;The Story&rdquo;</strong> &mdash; the song that would
+            become Carlile&rsquo;s signature. <strong>Columbia Records</strong> signed
+            Carlile in <strong>2004</strong> on the strength of home recordings and Seattle
+            club performances. She was twenty-three.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Columbia Years (2005&ndash;2012)</h2>
+          <p>
+            The self-titled debut (2005) and <strong><em>The Story</em></strong> (2007)
+            established Carlile as a major voice. <em>The Story</em> peaked at
+            <strong>#41 on the Billboard 200</strong> and earned
+            <strong>RIAA Gold certification</strong>. The title track &mdash; a raw,
+            full-throated declaration where Carlile&rsquo;s voice cracks and strains and
+            pushes through the break &mdash; is one of the most celebrated vocal
+            performances of the 2000s. <strong><em>Give Up the Ghost</em></strong> (2009)
+            was produced by <strong>Rick Rubin</strong> and <strong>T Bone Burnett</strong>,
+            featuring an <strong>Elton John</strong> collaboration (&ldquo;Caroline&rdquo;).
+          </p>
+          <p>
+            <strong><em>Live at Benaroya Hall with the Seattle Symphony</em></strong>
+            (2011) &mdash; two sold-out nights, orchestral arrangements by
+            <strong>Paul Buckmaster</strong>. The rural girl from Ravensdale performing
+            with the Seattle Symphony. <strong><em>Bear Creek</em></strong> (2012)
+            debuted at <strong>#10 on the Billboard 200</strong> &mdash; her first top
+            ten. It was her last album on Columbia.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>&ldquo;The Joke&rdquo; and the Grammy Breakthrough</h2>
+          <p>
+            <strong><em>The Firewatcher&rsquo;s Daughter</em></strong> (2015, ATO Records)
+            earned her first Grammy nomination (Best Americana Album). Then came
+            <strong><em>By the Way, I Forgive You</em></strong> (2018, Elektra), produced
+            by <strong>Dave Cobb</strong> &mdash; the album that changed everything.
+            Six Grammy nominations, <strong>three wins</strong>: Best Americana Album,
+            Best American Roots Performance, and Best American Roots Song for
+            <strong>&ldquo;The Joke.&rdquo;</strong>
+          </p>
+          <blockquote>
+            &ldquo;Let &rsquo;em laugh while they can / Let &rsquo;em spin, let &rsquo;em
+            scatter in the wind / I have been to the movies, I&rsquo;ve seen how it ends /
+            And the joke&rsquo;s on them.&rdquo;
+          </blockquote>
+          <p>
+            Carlile&rsquo;s Grammy performance of &ldquo;The Joke&rdquo; on February 10,
+            2019, received a <strong>standing ovation</strong>. Rolling Stone called it
+            &ldquo;devastating.&rdquo; The song hit <strong>#1 on the Rock charts</strong>.
+            Carlile was the <strong>most nominated woman</strong> at the ceremony.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Highwomen, Tanya Tucker &amp; In These Silent Days</h2>
+          <p>
+            In 2019, Carlile co-produced <strong>Tanya Tucker&rsquo;s</strong> comeback
+            album <em>While I&rsquo;m Livin&rsquo;</em> &mdash; <strong>2 Grammy
+            wins</strong> (Best Country Album, Best Country Song). She co-founded
+            <strong>The Highwomen</strong> with Amanda Shires, Maren Morris, and Natalie
+            Hemby &mdash; &ldquo;Crowded Table&rdquo; won <strong>Best Country Song</strong>
+            at the 2021 Grammys.
+          </p>
+          <p>
+            <strong><em>In These Silent Days</em></strong> (2021, Elektra) won
+            <strong>three more Grammys</strong> at the 2023 ceremony: Best Americana Album,
+            Best Rock Performance, and Best Rock Song for
+            <strong>&ldquo;Broken Horses.&rdquo;</strong> Rolling Stone wrote that Carlile
+            &ldquo;rocks the f&mdash; out of the Grammys&rdquo; with her performance.
+            A folk artist winning Rock categories. The &ldquo;Rock&rdquo; in Folk/Rock.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Joni Mitchell, the Super Bowl &amp; Now</h2>
+          <p>
+            Carlile&rsquo;s memoir <strong><em>Broken Horses</em></strong> (2021) debuted
+            as a <strong>#1 New York Times bestseller</strong>. She organized monthly
+            <strong>&ldquo;Joni Jams&rdquo;</strong> at Joni Mitchell&rsquo;s home,
+            helping Mitchell recover from her 2015 brain aneurysm. In
+            <strong>July 2022</strong>, Carlile brought Mitchell on stage at the
+            <strong>Newport Folk Festival</strong> &mdash; Mitchell&rsquo;s first public
+            performance in years. Carlile: &ldquo;It falls into the category of my legacy
+            as a human.&rdquo;
+          </p>
+          <p>
+            <strong><em>Who Believes in Angels?</em></strong> (2025, with Elton John).
+            <strong><em>Returning to Myself</em></strong> (2025, Interscope/Lost Highway)
+            debuted at <strong>#7 on the Billboard 200</strong>. On
+            <strong>February 8, 2026</strong>, Carlile performed
+            <strong>&ldquo;America the Beautiful&rdquo;</strong> at
+            <strong>Super Bowl LX</strong> at Levi&rsquo;s Stadium, accompanied by
+            SistaStrings. She dedicated the performance to &ldquo;queer and marginalized
+            communities.&rdquo; The rural girl from Ravensdale singing for 120 million
+            people.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Nine Grammy Awards</h2>
+          <table class="grammy-table">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Category</th>
+                <th>Work</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2019</td>
+                <td>Best Americana Album</td>
+                <td><em>By the Way, I Forgive You</em></td>
+              </tr>
+              <tr>
+                <td>2019</td>
+                <td>Best American Roots Performance</td>
+                <td>&ldquo;The Joke&rdquo;</td>
+              </tr>
+              <tr>
+                <td>2019</td>
+                <td>Best American Roots Song</td>
+                <td>&ldquo;The Joke&rdquo;</td>
+              </tr>
+              <tr>
+                <td>2020</td>
+                <td>Best Country Song</td>
+                <td>&ldquo;Bring My Flowers Now&rdquo; (w/ Tanya Tucker)</td>
+              </tr>
+              <tr>
+                <td>2020</td>
+                <td>Best Country Album</td>
+                <td><em>While I&rsquo;m Livin&rsquo;</em> (Tanya Tucker, as producer)</td>
+              </tr>
+              <tr>
+                <td>2021</td>
+                <td>Best Country Song</td>
+                <td>&ldquo;Crowded Table&rdquo; (The Highwomen)</td>
+              </tr>
+              <tr>
+                <td>2023</td>
+                <td>Best Americana Album</td>
+                <td><em>In These Silent Days</em></td>
+              </tr>
+              <tr>
+                <td>2023</td>
+                <td>Best Rock Performance</td>
+                <td>&ldquo;Broken Horses&rdquo;</td>
+              </tr>
+              <tr>
+                <td>2023</td>
+                <td>Best Rock Song</td>
+                <td>&ldquo;Broken Horses&rdquo;</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>The Story</h4>
+              <div class="disco-years">2007 &middot; Columbia</div>
+              <p>
+                Breakthrough. Billboard 200 #41. RIAA Gold.
+                &ldquo;The Story&rdquo; &mdash; career signature,
+                the testimony roar. Written by Phil Hanseroth.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>By the Way, I Forgive You</h4>
+              <div class="disco-years">2018 &middot; Elektra</div>
+              <p>
+                3 Grammy wins. &ldquo;The Joke&rdquo; &mdash;
+                standing ovation at the 61st Grammys.
+                Produced by Dave Cobb.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>In These Silent Days</h4>
+              <div class="disco-years">2021 &middot; Elektra</div>
+              <p>
+                3 Grammy wins. &ldquo;Broken Horses&rdquo; &mdash;
+                Best Rock Performance + Best Rock Song.
+                Pandemic album. Dave Cobb + Shooter Jennings.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Bear Creek</h4>
+              <div class="disco-years">2012 &middot; Columbia</div>
+              <p>
+                Billboard 200 #10. First top ten.
+                Recorded at Bear Creek Studio,
+                Woodinville, WA. Last Columbia album.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Returning to Myself</h4>
+              <div class="disco-years">2025 &middot; Interscope / Lost Highway</div>
+              <p>
+                Billboard 200 #7. Produced with Andrew Watt,
+                Aaron Dessner, Justin Vernon.
+                Fifth top-ten album.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>The Highwomen</h4>
+              <div class="disco-years">2019 &middot; Elektra (supergroup)</div>
+              <p>
+                With Amanda Shires, Maren Morris, Natalie
+                Hemby. &ldquo;Crowded Table&rdquo; won
+                Grammy for Best Country Song (2021).
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Testimony Roar</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                53rd acoustic element. The voice pushed past its
+                comfortable range into a zone where the strain
+                itself becomes the message. Not a scream (which
+                sacrifices pitch) or a belt (which maintains
+                through technique) but the point where the voice
+                reveals its physical limits and transforms that
+                revelation into emotional power. Carlile&rsquo;s
+                vocal on &ldquo;The Story&rdquo; cracks at the
+                climax &mdash; the crack is the most celebrated
+                moment. Extends the folk-acoustic taxonomy to
+                eight elements: murmur (45), confessional (46),
+                parable tone (47), held rest (48), lullaby
+                subversion (49), intimate architecture (50),
+                communal harmony (51), testimony roar (52).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Rural Breakout</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                53rd artist-city pattern. The artist who grows
+                up outside the city, commutes into its
+                infrastructure (clubs, studios, labels), achieves
+                success exceeding city-based peers, and returns
+                to the countryside. Carlile: Ravensdale to Seattle
+                clubs to Columbia Records to nine Grammys to
+                Super Bowl &mdash; and still lives in Maple Valley.
+                The city was the vehicle; the countryside is home.
+                Distinct from the Draw, the Lifer, and the
+                incubator graduate.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Survivor&rsquo;s Crack</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                52nd blue note deployment. The moment a voice
+                breaks under strain and transforms that break
+                into evidence of survival. The meningitis at
+                age four. The pastor&rsquo;s refusal. The
+                poverty. The years of struggle. The voice
+                cracks because it carries weight. &ldquo;The
+                Story&rdquo; cracks at the climax &mdash; the
+                most celebrated moment. Eight consecutive
+                folk-adjacent blue notes (45&ndash;52). Resonance
+                with the crack (degree 46): same physical event,
+                opposite valence. 46 exposes vulnerability;
+                52 proves survival.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Eight Consecutive Folk-Adjacent &mdash; Record Extends</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48),
+                Folk Punk (49), Indie Folk (50), Indie Folk (51),
+                Folk/Rock (52).
+                <strong>Eight consecutive folk-adjacent degrees</strong>
+                &mdash; extends the record set at degree 51.
+                Eight production paradigms, one shared root.
+                Genre Stage 33. First Folk/Rock in the octad.
+                The longest genre-family streak in engine history.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=4 Returns &mdash; Rises to Thirteen</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                13th E=4 deployment. Distribution: 2:16:11:13:10:2.
+                E=4 takes the lead over E=3 (11). First E=4 in
+                the folk zone. Last E=4 was degree 41 (Shawn Smith).
+                9 Grammy Awards, Super Bowl performer, Billboard
+                top-ten albums &mdash; but primary medium is
+                acoustic folk/rock, not pop mainstream. E=4 is
+                the folk zone&rsquo;s ceiling.
+                Folk zone energy: 2-3-3-2-3-2-3-<strong>4</strong>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">51&deg;</span> Grand Archives &mdash; <strong>The folk zone&rsquo;s quiet end.</strong> Grand Archives&rsquo; communal harmony (51) is multiple voices blending. Carlile&rsquo;s testimony roar (52) is one voice pushing past limits. Eight degrees, eight acoustic elements: murmur to roar.</li>
+            <li><span class="ref-degree">48&deg;</span> Sera Cahoone &mdash; <strong>The energy extremes.</strong> Cahoone (E=2, the held rest) and Carlile (E=4, the testimony roar). Both women. Both PNW folk. Two energy levels apart. Quiet pole and loud pole.</li>
+            <li><span class="ref-degree">45&deg;</span> Damien Jurado &mdash; <strong>Sub Pop anchor vs. Columbia breakout.</strong> Jurado started the folk streak (murmur, E=2, Sub Pop). Carlile extends it (testimony roar, E=4, Columbia). The bookends of the folk-acoustic taxonomy.</li>
+            <li><span class="ref-degree">43&deg;</span> Ann Wilson &mdash; <strong>PNW&rsquo;s powerful female voices.</strong> Wilson (Heart, Rock, E=5) and Carlile (Folk/Rock, E=4). Both PNW women whose voices fill buildings. Nine degrees apart. Stadium rock and folk-to-arena scale.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>The arc reaches folk E=4.</strong> Mercury orchestras (0) through Columbia folk/rock (52). Both major-label. Both multi-Grammy. Both arranged for orchestras. The scale changed; the ambition did not.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Jun 1, 1981</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Birthplace</span>
+            <span class="stat-value">Ravensdale, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Home</span>
+            <span class="stat-value">Maple Valley, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Columbia (2004&ndash;12)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">8 (+ live, collab)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grammy Awards</span>
+            <span class="stat-value">9</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">52 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 4</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk / Rock</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">33</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#53 Rural Breakout</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#53 Testimony Roar</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#52 Survivor&rsquo;s Crack</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Songs</h4>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;The Story&rdquo;</span>
+            <span class="stat-value">2007 (Gold)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;The Joke&rdquo;</span>
+            <span class="stat-value">2018 (2 Grammys)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;Broken Horses&rdquo;</span>
+            <span class="stat-value">2021 (2 Grammys)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">&ldquo;Crowded Table&rdquo;</span>
+            <span class="stat-value">2019 (1 Grammy)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>The Trio</h4>
+          <div class="stat-row">
+            <span class="stat-label">Brandi Carlile</span>
+            <span class="stat-value">Vocals, guitar</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Phil Hanseroth</span>
+            <span class="stat-value">Bass, vocals</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Tim Hanseroth</span>
+            <span class="stat-value">Guitar, vocals</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Together since</span>
+            <span class="stat-value">1999 (27 years)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Milestones</h4>
+          <div class="stat-row">
+            <span class="stat-label">Super Bowl LX</span>
+            <span class="stat-value">Feb 8, 2026</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Memoir</span>
+            <span class="stat-value">#1 NYT Bestseller</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Joni Mitchell</span>
+            <span class="stat-value">Newport 2022</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Looking Out Fdn</span>
+            <span class="stat-value">$8M+ donated</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 52</span>
+            <span class="stat-value">2:16:11:13:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4 Mode</span>
+            <span class="stat-value">13th (leads E=3)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk-adjacent</span>
+            <span class="stat-value">8 consec. (45&ndash;52)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">14 / 53 (~26.4%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 52 of 360 &mdash; Brandi Carlile &mdash;
+        Folk / Rock &mdash; Columbia &mdash;
+        Ravensdale to Auburn &mdash;
+        8th Consecutive Folk-Adjacent (Record Extends) &mdash; E=4 Returns &mdash;
+        1st Columbia Records &mdash; 1st Rural Artist &mdash; 1st Openly LGBTQ+ &mdash;
+        The Testimony Roar &mdash; The Rural Breakout
+      </p>
+      <p>
+        Territorial Acknowledgment: This research documents music mapped to the Seattle
+        metropolitan area and the broader Pacific Northwest. The Seattle 360 engine operates on
+        the ancestral territory of the Duwamish Tribal Organization (duwamishtribe.org), the
+        Muckleshoot Indian Tribe (muckleshoot.nsn.us), and related Coast Salish and Southern
+        Lushootseed-speaking peoples. The Duwamish Tribe remains federally unrecognized despite
+        continuous habitation and cultural practice. Degree 52 maps to Ravensdale, Maple Valley,
+        and Auburn, Washington &mdash; the ancestral territory of the Muckleshoot Indian Tribe,
+        descendants of the Duwamish and Upper Puyallup peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
