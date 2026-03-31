@@ -1,0 +1,42 @@
+# HELP artemis_sweep_version Current sweep version number
+# TYPE artemis_sweep_version gauge
+artemis_sweep_version{mission="artemis-ii"} 1.007
+# HELP muk_wx_temp_celsius Weather temperature by source
+# TYPE muk_wx_temp_celsius gauge
+muk_wx_temp_celsius{source="kpae",station="Paine Field"} 2.8
+muk_wx_temp_celsius{source="ksea",station="Sea-Tac"} 3.3
+muk_wx_temp_celsius{source="nws",station="NWS Forecast"} 3.0
+muk_wx_temp_celsius{source="open_meteo",station="Open-Meteo"} 3.1
+muk_wx_temp_celsius{source="kxmr",station="Cape Canaveral"} 25.0
+# HELP muk_wx_wind_kmh Wind speed by source
+# TYPE muk_wx_wind_kmh gauge
+muk_wx_wind_kmh{source="kpae"} 0
+muk_wx_wind_kmh{source="ksea"} 13
+muk_wx_wind_kmh{source="nws"} 0
+muk_wx_wind_kmh{source="open_meteo"} 8.0
+# HELP muk_wx_pressure_hpa Barometric pressure
+# TYPE muk_wx_pressure_hpa gauge
+muk_wx_pressure_hpa{source="kpae"} 1012.1
+muk_wx_pressure_hpa{source="ksea"} 1012.4
+muk_wx_pressure_hpa{source="nws"} 1011.9
+muk_wx_pressure_hpa{source="open_meteo"} 1012.2
+# HELP muk_forecast_temp_error_celsius Forecast temp error vs KPAE
+# TYPE muk_forecast_temp_error_celsius gauge
+muk_forecast_temp_error_celsius{source="ksea"} 0.5
+muk_forecast_temp_error_celsius{source="nws"} 0.2
+muk_forecast_temp_error_celsius{source="open_meteo"} 0.3
+# HELP space_wx_kp_index Planetary Kp index
+# TYPE space_wx_kp_index gauge
+space_wx_kp_index 2.0
+# HELP space_wx_solar_wind_speed_kms Solar wind speed
+# TYPE space_wx_solar_wind_speed_kms gauge
+space_wx_solar_wind_speed_kms 404
+# HELP muk_river_flow_cfs Snohomish River discharge
+# TYPE muk_river_flow_cfs gauge
+muk_river_flow_cfs{station="12150800"} 11400
+# HELP artemis_countdown_hours Hours until Artemis II launch
+# TYPE artemis_countdown_hours gauge
+artemis_countdown_hours 32
+# HELP muk_sweep_sample_count Weather samples collected
+# TYPE muk_sweep_sample_count gauge
+muk_sweep_sample_count 3
