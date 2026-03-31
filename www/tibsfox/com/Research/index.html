@@ -34,17 +34,19 @@
       font-size: 2.4rem;
       font-weight: 400;
       letter-spacing: 0.02em;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.4);
     }
     .header-text .subtitle {
       font-size: 1.05rem;
-      opacity: 0.9;
+      color: #fff8e8;
       margin-top: 0.3rem;
       font-style: italic;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
     header nav { margin-top: 0.8rem; }
     header nav a {
-      color: rgba(255,255,255,0.85);
+      color: #ffffff;
       margin-right: 1.2rem;
       font-family: system-ui, sans-serif;
       font-size: 0.88rem;
@@ -52,10 +54,11 @@
       padding: 0.2rem 0;
       border-bottom: 2px solid transparent;
       transition: color 0.2s, border-color 0.2s;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     }
     header nav a:hover {
       color: white;
-      border-bottom-color: rgba(255,255,255,0.5);
+      border-bottom-color: #fff8e8;
       text-decoration: none;
     }
     main {
@@ -105,34 +108,7 @@
     footer { color: #8a8884 !important; border-top: 1px solid #e8dcc8 !important; }
     footer a { color: #c75b3a !important; }
 
-    /* === Header trio: Moon circle | Fox+Title | Sun circle === */
-    .header-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 2rem; max-width: 68rem; margin: 0 auto; padding: 1.5rem 2rem;
-    }
-    .cel-orb {
-      flex-shrink: 0; width: 120px; height: 120px; border-radius: 50%;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-decoration: none; color: white; font-family: system-ui, sans-serif;
-      transition: box-shadow 0.3s; text-align: center;
-    }
-    .cel-orb:hover { text-decoration: none; color: white; }
-    .cel-moon-orb {
-      background: radial-gradient(circle at 35% 35%, #d4d8dc 0%, #8a9098 40%, #4a5058 80%, #2a2e34 100%);
-      border: 3px solid rgba(200,210,220,0.25);
-      box-shadow: 0 4px 20px rgba(180,200,220,0.15);
-    }
-    .cel-moon-orb:hover { box-shadow: 0 4px 24px rgba(180,200,220,0.3); }
-    .cel-sun-orb {
-      background: radial-gradient(circle at 40% 35%, #ffe088 0%, #e8a838 35%, #c07820 70%, #8a4a10 100%);
-      border: 3px solid rgba(232,168,56,0.3);
-      box-shadow: 0 4px 20px rgba(232,168,56,0.15);
-    }
-    .cel-sun-orb:hover { box-shadow: 0 4px 24px rgba(232,168,56,0.3); }
-    .cel-orb-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; }
-    .cel-orb-value { font-size: 0.72rem; font-weight: 700; line-height: 1.2; margin-top: 0.15rem; }
-    .cel-orb-detail { font-size: 0.55rem; opacity: 0.65; margin-top: 0.1rem; line-height: 1.2; }
-    .header-center { flex: 1; min-width: 0; }
+    /* === (orbs removed — celestial data moved to data bar) ===*/
 
     /* === Data bar: time, weather, mission — full width === */
     .data-bar {
@@ -149,7 +125,7 @@
       text-align: center;
     }
     .db-cell:last-child { border-right: none; }
-    .db-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
+    .db-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); }
     .db-value { font-size: 0.9rem; font-weight: 600; color: white; margin-top: 0.1rem; }
     .db-hot { color: #ff8866; }
 
@@ -180,11 +156,8 @@
     .tk-hot:hover { border-color: #FC3D21; background: rgba(252,61,33,0.08); }
 
     @media (max-width: 900px) {
-      .header-row { flex-wrap: wrap; gap: 1rem; }
-      .cel-orb { width: 90px; height: 90px; }
-      .cel-orb-value { font-size: 0.65rem; }
       .data-bar-inner { flex-wrap: wrap; }
-      .db-cell { flex: none; width: 33.33%; }
+      .db-cell { flex: none; width: 25%; }
     }
     @media (max-width: 640px) {
       .header-inner { flex-direction: column; text-align: center; padding: 1.5rem 1rem; gap: 1rem; }
@@ -192,60 +165,42 @@
       .header-text h1 { font-size: 1.6rem; }
       header nav { text-align: center; }
       main { padding: 1rem; }
-      .cel-orb { width: 80px; height: 80px; }
-      .header-row { gap: 0.8rem; padding: 1rem; }
       .db-cell { width: 50%; }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-row">
-      <a href="SOL/index.html" class="cel-orb cel-moon-orb" id="moon-card">
-        <div class="cel-orb-label">Moon</div>
-        <div class="cel-orb-value" id="cel-moon-phase">--</div>
-        <div class="cel-orb-detail" id="cel-moon-illum">--</div>
-        <div class="cel-orb-detail">6:33p / 6:12a</div>
-      </a>
-      <div class="header-center">
-        <div class="header-inner">
-          <img src="images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
-          <div class="header-text">
-            <h1>Tibsfox Research</h1>
-            <div class="subtitle">Pacific Northwest bioregion mapping, space research, visual art science, and 190+ projects of open-source craft</div>
-            <nav>
-              <a href="PNW/index.html">PNW Series</a>
-              <a href="NASA/index.html">NASA Missions</a>
-              <a href="NASA/artemis-ii/index.html">Artemis II</a>
-              <a href="SOL/index.html">Sun &amp; Moon</a>
-              <a href="MUK/index.html">Mukilteo</a>
-              <a href="constellation.html">Constellation</a>
-              <a href="LIVE/index.html">Live</a>
-              <a href="../index.html">tibsfox.com</a>
-            </nav>
-          </div>
-        </div>
+    <div class="header-inner">
+      <img src="images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
+      <div class="header-text">
+        <h1>Tibsfox Research</h1>
+        <div class="subtitle">Pacific Northwest bioregion mapping, space research, visual art science, and 190+ projects of open-source craft</div>
+        <nav>
+          <a href="PNW/index.html">PNW Series</a>
+          <a href="NASA/index.html">NASA Missions</a>
+          <a href="NASA/artemis-ii/index.html">Artemis II</a>
+          <a href="SOL/index.html">Sun &amp; Moon</a>
+          <a href="MUK/index.html">Mukilteo</a>
+          <a href="constellation.html">Constellation</a>
+          <a href="LIVE/index.html">Live</a>
+          <a href="../index.html">tibsfox.com</a>
+        </nav>
       </div>
-      <a href="SOL/index.html" class="cel-orb cel-sun-orb" id="sun-card">
-        <div class="cel-orb-label">Sun</div>
-        <div class="cel-orb-value" id="cel-sun-day">--</div>
-        <div class="cel-orb-detail">6:49a / 7:39p</div>
-        <div class="cel-orb-detail" id="cel-sun-kp">Kp --</div>
-      </a>
     </div>
   </header>
 
-  <!-- === DATA BAR: time, weather, mission === -->
+  <!-- === DATA BAR: time, celestial, weather, mission === -->
   <div class="data-bar">
     <div class="data-bar-inner">
-      <div class="db-cell"><div class="db-label">Zulu (UTC)</div><div class="db-value" id="lb-utc">--:--:-- Z</div></div>
-      <div class="db-cell"><div class="db-label">Pacific (PDT)</div><div class="db-value" id="lb-pdt">--:--:--</div></div>
-      <div class="db-cell"><div class="db-label">KPAE Temp</div><div class="db-value" id="lb-temp">--</div></div>
+      <div class="db-cell"><div class="db-label">Zulu (UTC)</div><div class="db-value" id="lb-utc">--</div></div>
+      <div class="db-cell"><div class="db-label">Pacific (PDT)</div><div class="db-value" id="lb-pdt">--</div></div>
+      <div class="db-cell"><div class="db-label">Moon</div><div class="db-value" id="cel-moon-phase">--</div></div>
+      <div class="db-cell"><div class="db-label">Sun</div><div class="db-value" id="cel-sun-day">--</div></div>
+      <div class="db-cell"><div class="db-label">KPAE</div><div class="db-value" id="lb-temp">--</div></div>
       <div class="db-cell"><div class="db-label">Wind</div><div class="db-value" id="lb-wind">--</div></div>
-      <div class="db-cell"><div class="db-label">Pressure</div><div class="db-value" id="lb-pres">--</div></div>
       <div class="db-cell"><div class="db-label">Artemis II</div><div class="db-value db-hot" id="lb-artemis">T---</div></div>
-      <div class="db-cell"><div class="db-label">Kp Index</div><div class="db-value" id="lb-kp">--</div></div>
-      <div class="db-cell"><div class="db-label">Sweep</div><div class="db-value" id="lb-sweep">v1.0.12</div></div>
+      <div class="db-cell"><div class="db-label">Kp</div><div class="db-value" id="lb-kp">--</div></div>
     </div>
   </div>
 
@@ -454,13 +409,18 @@
 // === LIVE DATA FOR HEADER + STATUS BAR ===
 var LAUNCH = new Date('2026-04-01T22:24:00Z');
 
+var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmtDate(d) { return MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear(); }
+
 function updateClocks() {
   var now = new Date();
-  var u = now.toISOString().slice(11,19) + ' Z';
+  var uDate = fmtDate(now);
+  var uTime = now.toISOString().slice(11,19);
   var p = new Date(now.getTime() - 7*3600000);
-  var ps = String(p.getUTCHours()).padStart(2,'0') + ':' + String(p.getUTCMinutes()).padStart(2,'0') + ':' + String(p.getUTCSeconds()).padStart(2,'0') + ' PDT';
-  document.getElementById('lb-utc').textContent = u;
-  document.getElementById('lb-pdt').textContent = ps;
+  var pDate = fmtDate(p);
+  var pTime = String(p.getUTCHours()).padStart(2,'0') + ':' + String(p.getUTCMinutes()).padStart(2,'0') + ':' + String(p.getUTCSeconds()).padStart(2,'0');
+  document.getElementById('lb-utc').textContent = uDate + ' ' + uTime + ' Z';
+  document.getElementById('lb-pdt').textContent = pDate + ' ' + pTime;
 
   // Artemis countdown
   var diff = (LAUNCH - now) / 1000;
