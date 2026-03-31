@@ -111,21 +111,33 @@
     footer { color: #8a8884 !important; border-top: 1px solid #e8dcc8 !important; max-width: 90rem !important; margin: 0 auto !important; }
     footer a { color: #c75b3a !important; }
 
-    /* === Moon/Sun info cards in header === */
+    /* === Moon/Sun circles in header — match fox logo 120px === */
     .header-row {
       display: flex; align-items: center; justify-content: center;
-      max-width: 90rem; margin: 0 auto; padding: 0 1rem; gap: 1rem;
+      max-width: 90rem; margin: 0 auto; padding: 0.5rem 2rem; gap: 1.5rem;
     }
-    .cel-info {
-      flex-shrink: 0; width: 140px; padding: 0.6rem 0.8rem;
-      background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 8px; color: white; font-family: system-ui, sans-serif;
-      text-decoration: none; text-align: center; transition: background 0.2s;
+    .cel-orb {
+      flex-shrink: 0; width: 120px; height: 120px; border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-decoration: none; color: white; font-family: system-ui, sans-serif;
+      text-align: center; transition: box-shadow 0.3s;
     }
-    .cel-info:hover { background: rgba(0,0,0,0.35); color: white; text-decoration: none; }
-    .cel-info-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
-    .cel-info-value { font-size: 0.85rem; font-weight: 600; margin-top: 0.15rem; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
-    .cel-info-detail { font-size: 0.62rem; opacity: 0.7; margin-top: 0.1rem; }
+    .cel-orb:hover { text-decoration: none; color: white; }
+    .cel-moon {
+      background: radial-gradient(circle at 38% 35%, #e0e4e8 0%, #a0a8b0 35%, #606870 65%, #383c42 100%);
+      border: 3px solid rgba(200,210,220,0.3);
+      box-shadow: 0 4px 20px rgba(180,200,220,0.2);
+    }
+    .cel-moon:hover { box-shadow: 0 6px 28px rgba(180,200,220,0.35); }
+    .cel-sun {
+      background: radial-gradient(circle at 42% 38%, #ffe888 0%, #e8a838 30%, #c07820 60%, #884410 100%);
+      border: 3px solid rgba(232,168,56,0.35);
+      box-shadow: 0 4px 20px rgba(232,168,56,0.2);
+    }
+    .cel-sun:hover { box-shadow: 0 6px 28px rgba(232,168,56,0.35); }
+    .cel-orb-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; text-shadow: 0 1px 4px rgba(0,0,0,0.6); opacity: 0.85; }
+    .cel-orb-value { font-size: 0.78rem; font-weight: 700; line-height: 1.2; margin-top: 0.15rem; text-shadow: 0 1px 5px rgba(0,0,0,0.7); }
+    .cel-orb-detail { font-size: 0.58rem; opacity: 0.8; margin-top: 0.1rem; text-shadow: 0 1px 3px rgba(0,0,0,0.6); line-height: 1.2; }
     .header-center { flex: 1; min-width: 0; }
 
     /* === Data bar: time, weather, mission — full width === */
@@ -137,15 +149,18 @@
       max-width: 90rem; margin: 0 auto;
       display: flex; align-items: stretch;
     }
+    .db-row { display: flex; align-items: stretch; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .db-row:last-child { border-bottom: none; }
     .db-cell {
-      flex: 1; padding: 0.5rem 0.8rem;
+      flex: 1; padding: 0.4rem 0.6rem;
       border-right: 1px solid rgba(255,255,255,0.06);
-      text-align: center;
+      text-align: center; white-space: nowrap;
     }
     .db-cell:last-child { border-right: none; }
-    .db-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); }
-    .db-value { font-size: 0.9rem; font-weight: 600; color: white; margin-top: 0.1rem; }
+    .db-label { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); }
+    .db-value { font-size: 0.82rem; font-weight: 600; color: white; margin-top: 0.1rem; }
     .db-hot { color: #ff8866; }
+    .db-row-detail .db-value { font-size: 0.75rem; font-weight: 500; color: rgba(255,255,255,0.7); }
 
     /* === Live tracks bar: full width row of pill links === */
     .tracks-bar {
@@ -174,9 +189,10 @@
     .tk-hot:hover { border-color: #FC3D21; background: rgba(252,61,33,0.08); }
 
     @media (max-width: 900px) {
-      .header-row { flex-wrap: wrap; }
-      .cel-info { width: 120px; }
-      .data-bar-inner { flex-wrap: wrap; }
+      .header-row { flex-wrap: wrap; gap: 0.8rem; }
+      .cel-orb { width: 90px; height: 90px; }
+      .cel-orb-value { font-size: 0.65rem; }
+      .db-row { flex-wrap: wrap; }
       .db-cell { flex: none; width: 25%; }
     }
     @media (max-width: 640px) {
@@ -192,10 +208,10 @@
 <body>
   <header>
     <div class="header-row">
-      <a href="SOL/index.html" class="cel-info">
-        <div class="cel-info-label">Moon</div>
-        <div class="cel-info-value" id="cel-moon-phase">--</div>
-        <div class="cel-info-detail" id="cel-moon-illum">--</div>
+      <a href="SOL/index.html" class="cel-orb cel-moon">
+        <div class="cel-orb-label">Moon</div>
+        <div class="cel-orb-value" id="cel-moon-phase">--</div>
+        <div class="cel-orb-detail" id="cel-moon-illum">--</div>
       </a>
       <div class="header-center">
         <div class="header-inner">
@@ -216,25 +232,35 @@
           </div>
         </div>
       </div>
-      <a href="SOL/index.html" class="cel-info">
-        <div class="cel-info-label">Sun</div>
-        <div class="cel-info-value" id="cel-sun-day">--</div>
-        <div class="cel-info-detail">6:49a / 7:39p PDT</div>
+      <a href="SOL/index.html" class="cel-orb cel-sun">
+        <div class="cel-orb-label">Sun</div>
+        <div class="cel-orb-value" id="cel-sun-day">--</div>
+        <div class="cel-orb-detail">6:49a / 7:39p</div>
       </a>
     </div>
   </header>
 
-  <!-- === DATA BAR: time, celestial, weather, mission === -->
+  <!-- === DATA BAR: two rows — time+mission, weather+detail === -->
   <div class="data-bar">
     <div class="data-bar-inner">
-      <div class="db-cell"><div class="db-label">Zulu (UTC)</div><div class="db-value" id="lb-utc">--</div></div>
-      <div class="db-cell"><div class="db-label">Pacific (PDT)</div><div class="db-value" id="lb-pdt">--</div></div>
-      <div class="db-cell"><div class="db-label">Moon</div><div class="db-value" id="cel-moon-phase">--</div></div>
-      <div class="db-cell"><div class="db-label">Sun</div><div class="db-value" id="cel-sun-day">--</div></div>
-      <div class="db-cell"><div class="db-label">KPAE</div><div class="db-value" id="lb-temp">--</div></div>
-      <div class="db-cell"><div class="db-label">Wind</div><div class="db-value" id="lb-wind">--</div></div>
-      <div class="db-cell"><div class="db-label">Artemis II</div><div class="db-value db-hot" id="lb-artemis">T---</div></div>
-      <div class="db-cell"><div class="db-label">Kp</div><div class="db-value" id="lb-kp">--</div></div>
+      <div class="db-row">
+        <div class="db-cell"><div class="db-label">Zulu (UTC)</div><div class="db-value" id="lb-utc">--</div></div>
+        <div class="db-cell"><div class="db-label">Pacific (PDT)</div><div class="db-value" id="lb-pdt">--</div></div>
+        <div class="db-cell"><div class="db-label">Temp (KPAE)</div><div class="db-value" id="lb-temp">--</div></div>
+        <div class="db-cell"><div class="db-label">Wind</div><div class="db-value" id="lb-wind">--</div></div>
+        <div class="db-cell"><div class="db-label">Pressure</div><div class="db-value" id="lb-pres">--</div></div>
+        <div class="db-cell"><div class="db-label">Artemis II</div><div class="db-value db-hot" id="lb-artemis">T---</div></div>
+        <div class="db-cell"><div class="db-label">Kp Index</div><div class="db-value" id="lb-kp">--</div></div>
+      </div>
+      <div class="db-row db-row-detail">
+        <div class="db-cell"><div class="db-label">Dewpoint</div><div class="db-value" id="lb-dew">--</div></div>
+        <div class="db-cell"><div class="db-label">Humidity</div><div class="db-value" id="lb-hum">--</div></div>
+        <div class="db-cell"><div class="db-label">Visibility</div><div class="db-value" id="lb-vis">--</div></div>
+        <div class="db-cell"><div class="db-label">Conditions</div><div class="db-value" id="lb-cond">--</div></div>
+        <div class="db-cell"><div class="db-label">Spread</div><div class="db-value" id="lb-spread">--</div></div>
+        <div class="db-cell"><div class="db-label">River (cfs)</div><div class="db-value" id="lb-river">--</div></div>
+        <div class="db-cell"><div class="db-label">Sweep</div><div class="db-value">v1.0.12</div></div>
+      </div>
     </div>
   </div>
 
@@ -502,10 +528,17 @@ fetch('NASA/artemis-ii/status.json')
   .then(function(d){
     if(d && d.weather && d.weather.kpae){
       var w = d.weather.kpae;
-      document.getElementById('lb-temp').textContent = w.temp_c + '\u00b0C ' + w.conditions;
-      if (document.getElementById('lb-wind')) document.getElementById('lb-wind').textContent = w.wind_dir + '\u00b0 ' + w.wind_kmh + ' km/h';
-      if (document.getElementById('lb-pres')) document.getElementById('lb-pres').textContent = w.pressure_hpa + ' hPa';
+      var el = function(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; };
+      el('lb-temp', w.temp_c + '\u00b0C');
+      el('lb-wind', w.wind_dir + '\u00b0 ' + w.wind_kmh + ' km/h');
+      el('lb-pres', w.pressure_hpa + ' hPa');
+      el('lb-cond', w.conditions || '--');
+      if(w.dewpoint_c != null) el('lb-dew', w.dewpoint_c + '\u00b0C');
+      if(w.humidity != null) el('lb-hum', w.humidity + '%');
+      if(w.visibility_m != null) el('lb-vis', (w.visibility_m/1000).toFixed(1) + ' km');
+      if(w.spread_c != null) el('lb-spread', w.spread_c + '\u00b0C');
     }
+    if(d && d.river) el('lb-river', d.river.flow_cfs ? d.river.flow_cfs.toLocaleString() : '--');
   }).catch(function(){});
 
 updateClocks();
