@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Science &amp; Technology</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAV === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+
+/* === CONTENT === */
+.page-content { max-width:960px; margin:0 auto; padding:2rem 2rem 1rem; }
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+.section-header {
+  padding: 1rem 1.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.01);
+}
+.section-header h2 {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.03em;
+}
+.section-header .section-tag {
+  font-size: 0.65rem;
+  color: var(--artemis-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.2rem;
+}
+.section-body { padding: 1.2rem 1.5rem; }
+.section-body p { margin-bottom: 0.8rem; font-size: 0.85rem; line-height: 1.7; }
+.section-body p:last-child { margin-bottom: 0; }
+
+/* === STAT ROWS === */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  margin: 0.8rem 0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.stat-cell {
+  background: var(--deep-space);
+  padding: 0.8rem 1rem;
+}
+.stat-label {
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+.stat-value {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 400;
+}
+.stat-value.gold { color: var(--artemis-gold); }
+.stat-value.red { color: var(--artemis-red); }
+.stat-value.silver { color: var(--orion-silver); }
+.stat-note {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-top: 0.15rem;
+}
+
+/* === COMPARISON BLOCK === */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin: 0.8rem 0;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.comparison-side {
+  background: var(--deep-space);
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+.comparison-side.old { border-right: 1px solid var(--border); }
+.comparison-side.new { border-left: 1px solid var(--border); }
+.comparison-vs {
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  padding: 0 0.6rem;
+  font-size: 0.65rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.comparison-metric {
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2rem;
+}
+.comparison-value {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 400;
+}
+.comparison-detail {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-top: 0.15rem;
+}
+
+/* === HIGHLIGHT BOX === */
+.highlight {
+  background: rgba(196,163,90,0.06);
+  border-left: 3px solid var(--artemis-gold);
+  padding: 0.8rem 1.2rem;
+  margin: 0.8rem 0;
+  font-size: 0.82rem;
+  color: var(--orion-silver);
+  line-height: 1.7;
+}
+.highlight strong { color: var(--artemis-gold); font-weight: 500; }
+
+/* === DATA TABLE === */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  font-size: 0.8rem;
+}
+.data-table th {
+  text-align: left;
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+.data-table td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table .country { color: var(--artemis-gold); font-size: 0.7rem; }
+.data-table .payload-name { color: #fff; font-weight: 500; }
+.data-table .payload-desc { color: var(--dim); font-size: 0.75rem; margin-top: 0.15rem; }
+
+/* === DIFFERENCE LIST === */
+.diff-list { list-style: none; margin: 0.5rem 0; }
+.diff-list li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  font-size: 0.82rem;
+  border-bottom: 1px solid var(--border);
+}
+.diff-list li:last-child { border-bottom: none; }
+.diff-list li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: var(--artemis-gold);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.diff-new { color: #fff; }
+.diff-detail { color: var(--dim); font-size: 0.75rem; }
+
+/* === DSN STATIONS === */
+.dsn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin: 0.8rem 0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.dsn-station {
+  background: var(--deep-space);
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+.dsn-name {
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+.dsn-location {
+  font-size: 0.7rem;
+  color: var(--dim);
+}
+.dsn-dishes {
+  font-size: 0.75rem;
+  color: var(--orion-silver);
+  margin-top: 0.3rem;
+}
+
+/* === FOOTER === */
+.page-footer {
+  padding:1.2rem 2rem; text-align:center;
+  font-size:0.7rem; color:rgba(255,255,255,0.2);
+  border-top:1px solid var(--border);
+}
+.data-source-bar {
+  padding:0.4rem 2rem; text-align:center; font-size:0.65rem;
+  color:rgba(255,255,255,0.15); background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+
+/* === RESPONSIVE === */
+@media(max-width:768px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .page-content { padding: 1.2rem 1rem 1rem; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .comparison { grid-template-columns: 1fr; }
+  .comparison-vs { justify-content: center; padding: 0.4rem; }
+  .comparison-side.old { border-right: none; border-bottom: 1px solid var(--border); }
+  .comparison-side.new { border-left: none; border-top: 1px solid var(--border); }
+  .dsn-grid { grid-template-columns: 1fr; }
+  .section-body { padding: 1rem; }
+}
+@media(max-width:480px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .nav-links { font-size: 0.7rem; padding: 0.5rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-links">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <strong style="color:var(--orion-silver);">Science</strong> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="timeline.html">Timeline</a> &middot;
+  <a href="../../index.html">Research</a> &middot;
+  <a href="../index.html">NASA Missions</a>
+</div>
+
+<div class="mission-header">
+  <h1>Science &amp; Technology</h1>
+  <div class="subtitle">Optical communications, organ-on-chip biology, crew health monitoring, and deep space network</div>
+  <div class="catalog-id">Artemis II &middot; Mission 1.190 &middot; Science Payloads &amp; Technology Demonstrations</div>
+</div>
+
+<div class="page-content">
+
+<!-- ============================================================
+     O2O OPTICAL COMMUNICATIONS
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Technology Demonstration</div>
+    <h2>O2O Optical Communications System</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      Orion carries a 4-inch (100 mm) optical telescope mounted on dual gimbals, enabling
+      laser-based data transmission between the spacecraft and ground stations in California
+      and New Mexico. This is the first crewed deep space test of optical communications,
+      a technology that fundamentally changes how much data we can move from beyond
+      low Earth orbit.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Downlink Rate</div>
+        <div class="stat-value gold">260 Mbps</div>
+        <div class="stat-note">optical laser channel</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">S-Band Radio</div>
+        <div class="stat-value">~2 Mbps</div>
+        <div class="stat-note">conventional RF downlink</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Speed Improvement</div>
+        <div class="stat-value gold">130x</div>
+        <div class="stat-note">faster than radio</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Wavelength</div>
+        <div class="stat-value silver">~1550 nm</div>
+        <div class="stat-note">telecom IR band</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Telescope Aperture</div>
+        <div class="stat-value">100 mm</div>
+        <div class="stat-note">4-inch diameter</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Gimbal Axes</div>
+        <div class="stat-value">2</div>
+        <div class="stat-note">azimuth + elevation</div>
+      </div>
+    </div>
+
+    <p>
+      The advantage of optical over radio comes down to beam physics. A laser at
+      ~1550 nm wavelength produces a beam with divergence of approximately 18.9
+      microradians. A 3-meter S-band dish operating at ~2.2 GHz produces a beam
+      diverging at roughly 55,000 microradians. The optical beam is 2,900 times
+      tighter.
+    </p>
+
+    <div class="comparison">
+      <div class="comparison-side old">
+        <div class="comparison-metric">S-Band Radio Footprint</div>
+        <div class="comparison-value" style="color:var(--dim);">~21,142 km</div>
+        <div class="comparison-detail">at lunar distance (384,400 km)</div>
+        <div class="comparison-detail">3m dish, ~55 mrad divergence</div>
+      </div>
+      <div class="comparison-vs">vs</div>
+      <div class="comparison-side new">
+        <div class="comparison-metric">Optical Laser Footprint</div>
+        <div class="comparison-value gold">~7.27 km</div>
+        <div class="comparison-detail">at lunar distance (384,400 km)</div>
+        <div class="comparison-detail">100mm telescope, ~18.9 urad divergence</div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>Why this matters:</strong> A tighter beam concentrates energy on the
+      receiver instead of scattering it across thousands of kilometers of empty space.
+      This enables HD video streaming from deep space &mdash; not just voice calls and
+      telemetry data. Future missions to Mars and beyond depend on optical links to
+      transmit the science data volumes that radio physically cannot carry at those distances.
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Ground Station 1</div>
+        <div class="stat-value">California</div>
+        <div class="stat-note">optical ground terminal</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Ground Station 2</div>
+        <div class="stat-value">New Mexico</div>
+        <div class="stat-note">optical ground terminal</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     AVATAR
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Biological Science</div>
+    <h2>AVATAR &mdash; A Virtual Astronaut Tissue Analog Response</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      AVATAR uses organ-on-chip technology &mdash; microfluidic devices containing living
+      human cells arranged to mimic the structure and function of real organs. These
+      millimeter-scale chips simulate physiological responses that would otherwise require
+      exposing actual tissue to deep space conditions over extended periods.
+    </p>
+
+    <p>
+      This is the first test of organ-on-chip devices in deep space, beyond the Van Allen
+      radiation belts that partially shield the International Space Station. The ISS orbits
+      within Earth's magnetosphere; Artemis II will carry these devices through the full
+      radiation environment that future lunar surface crews will face.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Technology</div>
+        <div class="stat-value">Organ-on-Chip</div>
+        <div class="stat-note">microfluidic tissue analogs</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Environment</div>
+        <div class="stat-value red">Deep Space</div>
+        <div class="stat-note">beyond Van Allen belts</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Variables Studied</div>
+        <div class="stat-value">Radiation + Microgravity</div>
+        <div class="stat-note">combined exposure effects</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Previous Testing</div>
+        <div class="stat-value silver">ISS Only</div>
+        <div class="stat-note">low Earth orbit (LEO)</div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>Why this matters:</strong> Before sending crew to the lunar surface on
+      Artemis III, NASA needs data on how deep space radiation and microgravity interact
+      at the cellular level. The combined effect may differ from either stressor alone.
+      AVATAR provides this data without requiring long-duration human exposure &mdash;
+      the chips serve as biological proxies for astronaut tissue.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ARCHAR
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Crew Health Science</div>
+    <h2>ARCHAR &mdash; Artemis Research for Crew Health And Readiness</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      ARCHAR is a longitudinal study that collects data on crew health before, during,
+      and after the mission. Unlike a single snapshot, this three-phase design captures
+      how the body changes from baseline through deep space exposure and back to recovery,
+      providing a complete picture of the physiological arc of a lunar flyby mission.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Movement Monitoring</div>
+        <div class="stat-value">Wearable Sensors</div>
+        <div class="stat-note">actigraphy + motion tracking</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Sleep Assessment</div>
+        <div class="stat-value">Continuous</div>
+        <div class="stat-note">pre-flight, in-flight, post-flight</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Immune Biomarkers</div>
+        <div class="stat-value silver">Saliva Samples</div>
+        <div class="stat-note">immune response indicators</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Radiation Exposure</div>
+        <div class="stat-value red">Dosimetry</div>
+        <div class="stat-note">personal radiation assessment</div>
+      </div>
+    </div>
+
+    <p>
+      The study also examines psychological effects of isolation. Four crew members in a
+      relatively small vehicle, farther from Earth than any humans in over fifty years,
+      provide a unique data point for understanding the mental health dimensions of deep
+      space transit. This data feeds directly into crew support planning for longer
+      Artemis III surface missions and eventual Mars expeditions.
+    </p>
+
+    <div class="highlight">
+      <strong>Data collection phases:</strong> Pre-flight baseline measurements establish
+      each crew member's normal ranges. In-flight data captures changes under actual
+      mission conditions. Post-flight follow-up tracks recovery timeline and any persistent
+      effects. The longitudinal design is what makes this study valuable &mdash; single
+      time-point measurements miss the trajectory of change.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     CUBESAT SECONDARY PAYLOADS
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">International Partners</div>
+    <h2>CubeSat Secondary Payloads</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      Five CubeSat secondary payloads from international partners will deploy from the
+      Orion stage adapter ring after trans-lunar injection. These small satellites carry
+      focused experiments that take advantage of the deep space trajectory without adding
+      mass or complexity to the primary mission.
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Payload</th>
+          <th>Nation</th>
+          <th>Investigation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="payload-name">TACHELES</div>
+          </td>
+          <td><span class="country">Germany</span></td>
+          <td>
+            <div class="payload-desc">Electrical component impact studies in deep space radiation environment. Testing how commercial electronics degrade beyond Earth's magnetosphere.</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="payload-name">ATENEA</div>
+          </td>
+          <td><span class="country">Argentina</span></td>
+          <td>
+            <div class="payload-desc">Radiation shielding effectiveness, GPS reception at lunar distance, and deep space communication systems validation.</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="payload-name">K-RadCube</div>
+          </td>
+          <td><span class="country">South Korea</span></td>
+          <td>
+            <div class="payload-desc">Dosimeter testing and calibration in the deep space radiation environment. Characterizing radiation flux beyond the Van Allen belts.</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="payload-name">Space Weather CubeSat-1</div>
+          </td>
+          <td><span class="country">Saudi Arabia</span></td>
+          <td>
+            <div class="payload-desc">Space weather measurement and characterization along the cislunar corridor. Solar particle and galactic cosmic ray monitoring.</div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="payload-name">Avionics Unit</div>
+          </td>
+          <td><span class="country">TBD</span></td>
+          <td>
+            <div class="payload-desc">Avionics technology demonstration. Testing next-generation spacecraft computing and control systems in deep space.</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================
+     DEEP SPACE NETWORK
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Ground Infrastructure</div>
+    <h2>Deep Space Network (DSN)</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      NASA's Deep Space Network provides the primary communication link to Orion
+      throughout the mission. Three ground complexes spaced roughly 120 degrees apart
+      in longitude ensure that at least one station can always see the spacecraft,
+      regardless of Earth's rotation.
+    </p>
+
+    <div class="dsn-grid">
+      <div class="dsn-station">
+        <div class="dsn-name">Goldstone</div>
+        <div class="dsn-location">Barstow, California, USA</div>
+        <div class="dsn-dishes">70m DSS-14 + 34m BWG antennas</div>
+      </div>
+      <div class="dsn-station">
+        <div class="dsn-name">Madrid</div>
+        <div class="dsn-location">Robledo de Chavela, Spain</div>
+        <div class="dsn-dishes">70m DSS-63 + 34m BWG antennas</div>
+      </div>
+      <div class="dsn-station">
+        <div class="dsn-name">Canberra</div>
+        <div class="dsn-location">Tidbinbilla, Australia</div>
+        <div class="dsn-dishes">70m DSS-43 + 34m BWG antennas</div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Uplink / Downlink</div>
+        <div class="stat-value">S-Band + X-Band</div>
+        <div class="stat-note">radio frequency channels</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">70m Dish Capability</div>
+        <div class="stat-value silver">Deep Space</div>
+        <div class="stat-note">interplanetary-class antennas</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">34m BWG Antennas</div>
+        <div class="stat-value">Beam Waveguide</div>
+        <div class="stat-note">high-efficiency design</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Supplementary Link</div>
+        <div class="stat-value gold">O2O Optical</div>
+        <div class="stat-note">laser comms (see above)</div>
+      </div>
+    </div>
+
+    <p>
+      For Artemis II, DSN provides the operational backbone: S-band for voice communication
+      and commands, X-band for higher-rate telemetry. The O2O optical system operates as a
+      supplementary technology demonstration channel, not a primary link. If the laser
+      connection is lost, the mission continues on radio without interruption.
+    </p>
+
+    <div class="highlight">
+      <strong>Watch DSN live:</strong> NASA's DSN Now interface at
+      <a href="https://eyes.nasa.gov/dsn/dsn.html" target="_blank" rel="noopener">eyes.nasa.gov/dsn/dsn.html</a>
+      shows real-time antenna pointing and data rates for every active spacecraft.
+      During Artemis II, you can see which dishes are tracking Orion and the current
+      uplink/downlink status.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ARTEMIS I vs ARTEMIS II
+     ============================================================ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-tag">Mission Comparison</div>
+    <h2>What Makes This Different from Artemis I</h2>
+  </div>
+  <div class="section-body">
+    <p>
+      Artemis I (November 2022) was an uncrewed test flight that validated the SLS rocket
+      and Orion spacecraft systems. Artemis II adds crew, science, and new technology
+      to transform a vehicle test into a deep space expedition.
+    </p>
+
+    <ul class="diff-list">
+      <li>
+        <span class="diff-new">Crew aboard</span>
+        <div class="diff-detail">Four astronauts (3 NASA + 1 CSA) versus uncrewed Artemis I. First humans beyond low Earth orbit since Apollo 17 in December 1972.</div>
+      </li>
+      <li>
+        <span class="diff-new">Life support systems active and tested</span>
+        <div class="diff-detail">Environmental Control and Life Support System (ECLSS) operating under real crew load. Artemis I carried sensors only, no active life support demand.</div>
+      </li>
+      <li>
+        <span class="diff-new">Optical communications first</span>
+        <div class="diff-detail">O2O laser terminal providing 260 Mbps downlink. Artemis I used radio only. This is the first crewed deep space optical link ever attempted.</div>
+      </li>
+      <li>
+        <span class="diff-new">Science payloads</span>
+        <div class="diff-detail">AVATAR organ-on-chip and ARCHAR crew health studies. Artemis I carried technology demonstrations but no biological or crew health investigations.</div>
+      </li>
+      <li>
+        <span class="diff-new">Modified reentry trajectory</span>
+        <div class="diff-detail">Steeper direct reentry rather than the skip reentry profile used on Artemis I. Different thermal and G-loading profile on the heat shield. The skip entry on Artemis I bounced off the upper atmosphere to reduce peak heating; Artemis II enters more directly.</div>
+      </li>
+      <li>
+        <span class="diff-new">International CubeSat payloads</span>
+        <div class="diff-detail">Five secondary payloads from Germany, Argentina, South Korea, Saudi Arabia, and one TBD partner. Deep space radiation and technology experiments.</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- .page-content -->
+
+<div class="data-source-bar">
+  Sources: NASA Artemis II Press Kit &middot; NASA O2O Optical Communications &middot; NASA AVATAR Investigation &middot; NASA ARCHAR Study &middot; JPL Deep Space Network &middot; NASA CubeSat Partners
+</div>
+
+<div class="nav-links" style="border-top:1px solid var(--border);">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <strong style="color:var(--orion-silver);">Science</strong> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="timeline.html">Timeline</a>
+</div>
+
+<div class="page-footer">
+  Artemis II &middot; Mission 1.190 &middot; NASA Exploration Systems Development &middot;
+  Data: NASA, ESA, CSA, JPL &middot; <a href="RESEARCH.md">Research Baseline</a> &middot;
+  tibsfox.com/Research/NASA/artemis-ii/
+</div>
+
+</body>
+</html>

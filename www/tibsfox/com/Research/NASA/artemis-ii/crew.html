@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Crew</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAV === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+.sub-nav {
+  display:flex; justify-content:center; flex-wrap:wrap; gap:0.3rem 1.2rem;
+  padding:0.5rem 2rem; font-size:0.75rem;
+  background: var(--void); border-bottom:1px solid var(--border);
+}
+.sub-nav a { color: var(--orion-silver); }
+.sub-nav a:hover { color: var(--artemis-gold); }
+.sub-nav .active { color: var(--artemis-gold); border-bottom:1px solid var(--artemis-gold); }
+
+/* === CREW GRID === */
+.crew-section { max-width:1000px; margin:0 auto; padding:2rem 1.5rem; }
+.crew-section > h2 {
+  font-family:Georgia,serif; font-size:1.1rem; font-weight:400; color:#fff;
+  letter-spacing:0.04em; margin-bottom:0.3rem;
+}
+.crew-section > .section-sub {
+  font-size:0.7rem; color:var(--dim); margin-bottom:1.5rem;
+  text-transform:uppercase; letter-spacing:0.1em;
+}
+
+/* === CREW CARD === */
+.crew-card {
+  background: var(--panel); border:1px solid var(--border);
+  padding:1.5rem 1.8rem; margin-bottom:1.2rem;
+  position:relative;
+}
+.crew-card::before {
+  content:''; position:absolute; top:0; left:0; width:3px; height:100%;
+}
+.crew-card.commander::before { background: var(--artemis-gold); }
+.crew-card.pilot::before { background: var(--artemis-red); }
+.crew-card.ms1::before { background: var(--artemis-blue); }
+.crew-card.ms2::before { background: var(--orion-silver); }
+.crew-card.backup::before { background: rgba(255,255,255,0.15); }
+
+.card-header { display:flex; align-items:baseline; flex-wrap:wrap; gap:0.5rem 1rem; margin-bottom:0.8rem; }
+.crew-card .name {
+  font-family:Georgia,serif; font-size:1.15rem; color:#fff; font-weight:400;
+}
+.role-tag {
+  font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em;
+  padding:0.15rem 0.6rem; border-radius:2px; display:inline-block;
+}
+.role-tag.commander { background:rgba(196,163,90,0.2); color:var(--artemis-gold); border:1px solid rgba(196,163,90,0.3); }
+.role-tag.pilot { background:rgba(252,61,33,0.15); color:var(--artemis-red); border:1px solid rgba(252,61,33,0.3); }
+.role-tag.ms1 { background:rgba(11,61,145,0.25); color:#6fa8ff; border:1px solid rgba(11,61,145,0.4); }
+.role-tag.ms2 { background:rgba(184,192,204,0.12); color:var(--orion-silver); border:1px solid rgba(184,192,204,0.2); }
+.role-tag.backup { background:rgba(255,255,255,0.05); color:var(--dim); border:1px solid rgba(255,255,255,0.1); }
+
+.agency-line { font-size:0.75rem; color:var(--dim); margin-bottom:0.6rem; }
+.agency-line .agency { color: var(--orion-silver); }
+
+.stats-row {
+  display:flex; flex-wrap:wrap; gap:0.6rem 1.5rem;
+  margin-bottom:1rem; padding-bottom:0.8rem;
+  border-bottom:1px solid var(--border);
+}
+.stat-chip {
+  font-size:0.7rem; color:#c8d0e0;
+}
+.stat-chip .label { color:var(--dim); }
+.stat-chip .value { color:#fff; font-weight:500; }
+
+/* === TIMELINE (career milestones) === */
+.career-timeline { padding-left:1rem; }
+.milestone {
+  position:relative; padding-left:1.2rem; padding-bottom:0.6rem;
+  border-left:1px solid rgba(255,255,255,0.08);
+  font-size:0.8rem; color:rgba(255,255,255,0.6);
+}
+.milestone:last-child { border-left-color:transparent; padding-bottom:0; }
+.milestone::before {
+  content:''; position:absolute; left:-4px; top:0.35rem;
+  width:7px; height:7px; border-radius:50%;
+  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);
+}
+.milestone.highlight::before {
+  background: var(--artemis-gold); border-color: var(--artemis-gold);
+  box-shadow: 0 0 6px rgba(196,163,90,0.3);
+}
+.milestone .year { color:var(--dim); font-size:0.7rem; min-width:3rem; display:inline-block; }
+.milestone .event { color:#c8d0e0; }
+.milestone .note { color:var(--dim); font-size:0.7rem; font-style:italic; display:block; margin-top:0.1rem; }
+
+/* === FIRSTS SECTION === */
+.firsts-section {
+  max-width:1000px; margin:0 auto; padding:0 1.5rem 2rem;
+}
+.firsts-section h2 {
+  font-family:Georgia,serif; font-size:1.1rem; font-weight:400; color:#fff;
+  letter-spacing:0.04em; margin-bottom:0.3rem;
+}
+.firsts-section .section-sub {
+  font-size:0.7rem; color:var(--dim); margin-bottom:1.2rem;
+  text-transform:uppercase; letter-spacing:0.1em;
+}
+.firsts-grid {
+  display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:1px; background:rgba(255,255,255,0.03);
+}
+.first-card {
+  background: var(--panel); padding:1rem 1.2rem;
+  border-left:2px solid var(--artemis-gold);
+}
+.first-card .first-title {
+  font-family:Georgia,serif; font-size:0.9rem; color:var(--artemis-gold);
+  margin-bottom:0.3rem;
+}
+.first-card .first-desc { font-size:0.78rem; color:rgba(255,255,255,0.55); }
+.first-card .first-who { font-size:0.7rem; color:var(--orion-silver); margin-top:0.3rem; }
+
+/* === MISSION CONTEXT === */
+.context-section {
+  max-width:1000px; margin:0 auto; padding:0 1.5rem 2rem;
+}
+.context-section h2 {
+  font-family:Georgia,serif; font-size:1.1rem; font-weight:400; color:#fff;
+  letter-spacing:0.04em; margin-bottom:0.3rem;
+}
+.context-section .section-sub {
+  font-size:0.7rem; color:var(--dim); margin-bottom:1.2rem;
+  text-transform:uppercase; letter-spacing:0.1em;
+}
+.context-panel {
+  background: var(--panel); border:1px solid var(--border);
+  padding:1.2rem 1.5rem; font-size:0.8rem; color:rgba(255,255,255,0.55);
+  line-height:1.7;
+}
+.context-panel p { margin-bottom:0.8rem; }
+.context-panel p:last-child { margin-bottom:0; }
+
+/* === FOOTER === */
+.data-source-bar {
+  padding:0.4rem 2rem; text-align:center; font-size:0.65rem;
+  color:rgba(255,255,255,0.15); background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+.page-footer {
+  padding:1.2rem 2rem; text-align:center;
+  font-size:0.7rem; color:rgba(255,255,255,0.2);
+  border-top:1px solid var(--border);
+}
+
+/* === RESPONSIVE === */
+@media(max-width:768px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .crew-card { padding:1.2rem; }
+  .stats-row { gap:0.4rem 1rem; }
+  .firsts-grid { grid-template-columns:1fr; }
+}
+@media(max-width:480px) {
+  .crew-section { padding:1.5rem 1rem; }
+  .firsts-section { padding:0 1rem 1.5rem; }
+  .card-header { flex-direction:column; gap:0.3rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-links">
+  <a href="../../index.html">Research</a> &middot;
+  <a href="../index.html">NASA Missions</a> &middot;
+  <a href="../roadmap.html">Roadmap</a>
+</div>
+
+<div class="mission-header">
+  <h1>Artemis II &mdash; Crew</h1>
+  <div class="subtitle">Four astronauts. The first humans beyond Earth orbit in over fifty years.</div>
+  <div class="catalog-id">Mission 1.190 &middot; Epoch 6: Artemis &middot; Crew Selection: April 3, 2023</div>
+</div>
+
+<div class="sub-nav">
+  <a href="index.html">Tracker</a>
+  <a class="active" href="crew.html">Crew</a>
+  <a href="vehicle.html">Vehicle</a>
+  <a href="science.html">Science</a>
+  <a href="math.html">Math</a>
+  <a href="timeline.html">Timeline</a>
+</div>
+
+<!-- ============================================================ -->
+<!--  PRIME CREW                                                   -->
+<!-- ============================================================ -->
+
+<div class="crew-section">
+  <h2>Prime Crew</h2>
+  <div class="section-sub">Announced April 3, 2023 &middot; Johnson Space Center, Houston, TX</div>
+
+  <!-- REID WISEMAN -->
+  <div class="crew-card commander">
+    <div class="card-header">
+      <span class="name">Reid Wiseman</span>
+      <span class="role-tag commander">Commander</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">NASA</span> &middot; USN Captain &middot; Born November 11, 1975 &middot; Baltimore, Maryland
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="label">Flights: </span><span class="value">2nd spaceflight</span></div>
+      <div class="stat-chip"><span class="label">Days in space: </span><span class="value">165</span></div>
+      <div class="stat-chip"><span class="label">EVAs: </span><span class="value">2 (12h 58m)</span></div>
+      <div class="stat-chip"><span class="label">Selection: </span><span class="value">2004 (NASA Group 20)</span></div>
+    </div>
+    <div class="career-timeline">
+      <div class="milestone">
+        <span class="year">1997</span>
+        <span class="event">B.S. Computer Engineering, United States Naval Academy (Annapolis)</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2001</span>
+        <span class="event">U.S. Naval Test Pilot School, NAS Patuxent River</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2009</span>
+        <span class="event">Selected as NASA astronaut (Group 20)</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2014</span>
+        <span class="event">ISS Expedition 41 &mdash; 165 days, Soyuz TMA-13M</span>
+        <span class="note">2 spacewalks totaling 12 hours 58 minutes</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2020</span>
+        <span class="event">Chief of the Astronaut Office</span>
+        <span class="note">Served 2020&ndash;2022</span>
+      </div>
+      <div class="milestone highlight">
+        <span class="year">2023</span>
+        <span class="event">Selected as Artemis II Commander</span>
+        <span class="note">Announced April 3, 2023</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VICTOR GLOVER -->
+  <div class="crew-card pilot">
+    <div class="card-header">
+      <span class="name">Victor Glover</span>
+      <span class="role-tag pilot">Pilot</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">NASA</span> &middot; USN Captain &middot; Born April 30, 1976 &middot; Pomona, California
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="label">Flights: </span><span class="value">2nd spaceflight</span></div>
+      <div class="stat-chip"><span class="label">Days in space: </span><span class="value">168</span></div>
+      <div class="stat-chip"><span class="label">EVAs: </span><span class="value">4</span></div>
+      <div class="stat-chip"><span class="label">Aircraft types: </span><span class="value">24+</span></div>
+      <div class="stat-chip"><span class="label">Flight hours: </span><span class="value">3,000+</span></div>
+    </div>
+    <div class="career-timeline">
+      <div class="milestone">
+        <span class="year">1999</span>
+        <span class="event">M.S. Flight Test Engineering, Air University</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2007</span>
+        <span class="event">M.S. Military Operational Art and Science, Air University</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2009</span>
+        <span class="event">M.A.S. Engineering and Management, MIT</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2013</span>
+        <span class="event">Selected as NASA astronaut (Group 21)</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2014</span>
+        <span class="event">Edwards AFB Test Pilot School graduate</span>
+        <span class="note">F/A-18 combat pilot, 24 aircraft types, 3,000+ flight hours</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2020</span>
+        <span class="event">SpaceX Crew-1 Pilot &mdash; 168 days aboard ISS</span>
+        <span class="note">First operational Crew Dragon flight; 4 EVAs</span>
+      </div>
+      <div class="milestone highlight">
+        <span class="year">2023</span>
+        <span class="event">Selected as Artemis II Pilot</span>
+        <span class="note">First person of color assigned to a lunar mission</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHRISTINA KOCH -->
+  <div class="crew-card ms1">
+    <div class="card-header">
+      <span class="name">Christina Koch</span>
+      <span class="role-tag ms1">Mission Specialist 1</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">NASA</span> &middot; Civilian &middot; Born January 29, 1979 &middot; Grand Rapids, Michigan
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="label">Flights: </span><span class="value">2nd spaceflight</span></div>
+      <div class="stat-chip"><span class="label">Days in space: </span><span class="value">328 consecutive</span></div>
+      <div class="stat-chip"><span class="label">EVAs: </span><span class="value">6</span></div>
+      <div class="stat-chip"><span class="label">Record: </span><span class="value">Longest single spaceflight by a woman</span></div>
+    </div>
+    <div class="career-timeline">
+      <div class="milestone">
+        <span class="year">2001</span>
+        <span class="event">B.S. Electrical Engineering and Physics, NC State University</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2002</span>
+        <span class="event">M.S. Electrical Engineering, NC State University</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2002</span>
+        <span class="event">NASA Goddard Space Flight Center &mdash; instrument development</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2004</span>
+        <span class="event">Johns Hopkins Applied Physics Laboratory</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2005</span>
+        <span class="event">NOAA field stations &mdash; Palmer Station (Antarctica) and American Samoa</span>
+        <span class="note">Scientific instruments and remote station operations</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2013</span>
+        <span class="event">Selected as NASA astronaut (Group 21)</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2019</span>
+        <span class="event">ISS Expedition 59/60/61 &mdash; 328 consecutive days</span>
+        <span class="note">Women's single spaceflight duration record; 6 EVAs including first all-female EVA with Jessica Meir (Oct 18, 2019)</span>
+      </div>
+      <div class="milestone highlight">
+        <span class="year">2023</span>
+        <span class="event">Selected as Artemis II Mission Specialist 1</span>
+        <span class="note">First woman assigned to a lunar mission</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- JEREMY HANSEN -->
+  <div class="crew-card ms2">
+    <div class="card-header">
+      <span class="name">Jeremy Hansen</span>
+      <span class="role-tag ms2">Mission Specialist 2</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">CSA</span> &middot; Canadian Forces Colonel &middot; Born January 27, 1976 &middot; London, Ontario, Canada
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="label">Flights: </span><span class="value">1st spaceflight</span></div>
+      <div class="stat-chip"><span class="label">Military: </span><span class="value">CF-18 fighter pilot</span></div>
+      <div class="stat-chip"><span class="label">Analog: </span><span class="value">NEEMO 19 aquanaut</span></div>
+      <div class="stat-chip"><span class="label">ISS role: </span><span class="value">Capcom (Exp. 44/45)</span></div>
+    </div>
+    <div class="career-timeline">
+      <div class="milestone">
+        <span class="year">1999</span>
+        <span class="event">B.Sc. Space Science, Royal Military College of Canada</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2000s</span>
+        <span class="event">CF-18 Hornet fighter pilot, Canadian Forces</span>
+        <span class="note">Fighter weapons instructor, top graduate of tactical fighter course</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2009</span>
+        <span class="event">Selected by Canadian Space Agency (CSA astronaut class of 2009)</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2014</span>
+        <span class="event">NEEMO 19 &mdash; NASA Extreme Environment Mission Operations</span>
+        <span class="note">Underwater analog at Aquarius Reef Base, Key Largo, Florida</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2015</span>
+        <span class="event">Capcom for ISS Expeditions 44 and 45</span>
+      </div>
+      <div class="milestone highlight">
+        <span class="year">2023</span>
+        <span class="event">Selected as Artemis II Mission Specialist 2</span>
+        <span class="note">First Canadian and first non-American assigned to a lunar mission</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  BACKUP CREW                                                  -->
+<!-- ============================================================ -->
+
+<div class="crew-section" style="padding-top:0;">
+  <h2>Backup Crew</h2>
+  <div class="section-sub">Designated backup astronauts for Artemis II</div>
+
+  <!-- ANDRE DOUGLAS -->
+  <div class="crew-card backup">
+    <div class="card-header">
+      <span class="name">Andre Douglas</span>
+      <span class="role-tag backup">Backup</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">NASA</span> &middot; Born c. 1986 &middot; Astronaut Group 23 &ldquo;The Flies&rdquo; (2021)
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="label">Education: </span><span class="value">MIT PhD (Engineering)</span></div>
+      <div class="stat-chip"><span class="label">Service: </span><span class="value">NOAA Corps / Coast Guard</span></div>
+      <div class="stat-chip"><span class="label">Specialty: </span><span class="value">Structural engineering</span></div>
+    </div>
+    <div class="career-timeline">
+      <div class="milestone">
+        <span class="year">2010s</span>
+        <span class="event">NOAA Commissioned Officer Corps</span>
+        <span class="note">Coast Guard service; structural engineer specializing in marine and aerospace systems</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2019</span>
+        <span class="event">Ph.D. in Engineering, Massachusetts Institute of Technology</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2021</span>
+        <span class="event">Selected as NASA astronaut (Group 23 &mdash; &ldquo;The Flies&rdquo;)</span>
+      </div>
+      <div class="milestone highlight">
+        <span class="year">2024</span>
+        <span class="event">Designated Artemis II backup crew member</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- JENNI GIBBONS -->
+  <div class="crew-card backup">
+    <div class="card-header">
+      <span class="name">Jenni Gibbons</span>
+      <span class="role-tag backup">Backup</span>
+    </div>
+    <div class="agency-line">
+      <span class="agency">CSA</span> &middot; Flight Test Engineer &middot; Selected by CSA 2017
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="label">Previous: </span><span class="value">NRC Canada flight test engineer</span></div>
+      <div class="stat-chip"><span class="label">Distinction: </span><span class="value">First CSA mission specialist backup</span></div>
+    </div>
+    <div class="career-timeline">
+      <div class="milestone">
+        <span class="year">2010s</span>
+        <span class="event">Flight test engineer, National Research Council Canada</span>
+        <span class="note">Aircraft systems testing and evaluation</span>
+      </div>
+      <div class="milestone">
+        <span class="year">2017</span>
+        <span class="event">Selected by Canadian Space Agency (CSA astronaut recruitment 2017)</span>
+      </div>
+      <div class="milestone highlight">
+        <span class="year">2024</span>
+        <span class="event">Designated Artemis II backup &mdash; first CSA mission specialist backup</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  MISSION FIRSTS                                               -->
+<!-- ============================================================ -->
+
+<div class="firsts-section">
+  <h2>Mission Firsts</h2>
+  <div class="section-sub">Historic records Artemis II will set</div>
+
+  <div class="firsts-grid">
+    <div class="first-card">
+      <div class="first-title">First Crewed Flight Beyond LEO Since 1972</div>
+      <div class="first-desc">No humans have traveled beyond low Earth orbit since Apollo 17 splashed down on December 19, 1972. Artemis II ends a gap of over fifty years.</div>
+      <div class="first-who">All crew</div>
+    </div>
+    <div class="first-card">
+      <div class="first-title">First Woman Beyond Low Earth Orbit</div>
+      <div class="first-desc">Christina Koch will become the first woman to travel beyond LEO. All 24 humans who previously flew beyond Earth orbit were men, all on Apollo missions between 1968 and 1972.</div>
+      <div class="first-who">Christina Koch &mdash; Mission Specialist 1</div>
+    </div>
+    <div class="first-card">
+      <div class="first-title">First Person of Color Beyond Low Earth Orbit</div>
+      <div class="first-desc">Victor Glover will be the first person of color to fly beyond LEO, expanding the demographics of deep space exploration beyond the exclusively white crews of the Apollo era.</div>
+      <div class="first-who">Victor Glover &mdash; Pilot</div>
+    </div>
+    <div class="first-card">
+      <div class="first-title">First Canadian Beyond Low Earth Orbit</div>
+      <div class="first-desc">Jeremy Hansen will be the first Canadian citizen to travel beyond LEO, representing the Canadian Space Agency on a lunar mission for the first time in history.</div>
+      <div class="first-who">Jeremy Hansen &mdash; Mission Specialist 2</div>
+    </div>
+    <div class="first-card">
+      <div class="first-title">First Non-American Beyond Low Earth Orbit</div>
+      <div class="first-desc">Every previous crewed mission beyond LEO launched exclusively American crews. Hansen will be the first citizen of any non-US nation to fly a lunar trajectory.</div>
+      <div class="first-who">Jeremy Hansen &mdash; Mission Specialist 2</div>
+    </div>
+    <div class="first-card">
+      <div class="first-title">First Crewed Orion / SLS Flight</div>
+      <div class="first-desc">The first crewed flight of both the Orion spacecraft (CM-003 &ldquo;Integrity&rdquo;) and the Space Launch System. Artemis I flew the stack uncrewed in November 2022.</div>
+      <div class="first-who">All crew</div>
+    </div>
+    <div class="first-card">
+      <div class="first-title">First Crewed Free-Return Trajectory Since Apollo 13</div>
+      <div class="first-desc">Artemis II will fly a free-return lunar flyby, a trajectory profile not used with crew since Apollo 13 in April 1970. The path uses the Moon's gravity to return the spacecraft to Earth without requiring a propulsive maneuver.</div>
+      <div class="first-who">All crew</div>
+    </div>
+    <div class="first-card">
+      <div class="first-title">Most Diverse Crew Beyond LEO</div>
+      <div class="first-desc">With a woman, a person of color, a Canadian, and two Navy captains from different generations, Artemis II will be the most diverse crew ever sent beyond Earth orbit.</div>
+      <div class="first-who">All crew</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  CREW CONTEXT                                                 -->
+<!-- ============================================================ -->
+
+<div class="context-section">
+  <h2>Selection Context</h2>
+  <div class="section-sub">How the crew was chosen and what they bring</div>
+
+  <div class="context-panel">
+    <p>
+      The Artemis II crew was announced by NASA Administrator Bill Nelson on April 3, 2023, at Ellington Field near Johnson Space Center in Houston, Texas. The selection balanced deep space experience, test pilot credentials, engineering expertise, and international partnership obligations under the Artemis Accords.
+    </p>
+    <p>
+      Combined, the prime crew brings 661 days of spaceflight experience, 12 EVAs, test pilot qualifications across dozens of aircraft types, advanced engineering degrees from MIT, NC State, Johns Hopkins, and the Royal Military College of Canada, and field experience ranging from Antarctic research stations to combat operations.
+    </p>
+    <p>
+      Reid Wiseman, who served as Chief of the Astronaut Office from 2020 to 2022, commands the mission. Victor Glover, a SpaceX Crew Dragon veteran and F/A-18 combat pilot, serves as pilot. Christina Koch, holder of the women's single spaceflight duration record at 328 days, is Mission Specialist 1. Jeremy Hansen, a CF-18 fighter pilot and the first non-American selected for a beyond-LEO mission, is Mission Specialist 2 representing the Canadian Space Agency.
+    </p>
+    <p>
+      The backup crew &mdash; Andre Douglas (NASA) and Jenni Gibbons (CSA) &mdash; stand ready to step in if any prime crew member is unable to fly. Douglas, a structural engineer with a PhD from MIT, was part of NASA's 2021 astronaut class. Gibbons, a flight test engineer selected by CSA in 2017, is the first Canadian Space Agency backup for a mission specialist role.
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!--  FOOTER                                                       -->
+<!-- ============================================================ -->
+
+<div class="data-source-bar">
+  Crew data: NASA Astronaut Biographies &middot; CSA Astronaut Profiles &middot; NASA Artemis II Mission Page &middot; JSC Oral History Project
+</div>
+
+<div class="page-footer">
+  Artemis II &middot; Crew Manifest &middot; NASA / CSA &middot;
+  <a href="index.html">Mission Tracker</a> &middot;
+  <a href="RESEARCH.md">Research Baseline</a> &middot;
+  tibsfox.com/Research/NASA/artemis-ii/crew.html
+</div>
+
+</body>
+</html>
