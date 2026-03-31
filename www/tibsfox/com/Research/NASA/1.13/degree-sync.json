@@ -1,0 +1,117 @@
+{
+  "degree": 13,
+  "version": "1.13",
+  "title": "The Long Call",
+  "sync_date": "2026-03-31",
+
+  "threads": {
+    "mission": {
+      "name": "Pioneer 5",
+      "date": "1960-03-11",
+      "program": "Pioneer",
+      "type": "interplanetary probe",
+      "epoch": 1,
+      "significance": "First deep space probe between planets — set communications distance record of 36.2 million km, measured interplanetary magnetic field and solar wind. The longest successful call in human history at the time."
+    },
+    "artist": {
+      "name": "Marc Seales",
+      "degree": 13,
+      "genre": "Jazz (piano, post-bop, contemporary)",
+      "era": "1990s-present",
+      "born": "Seattle",
+      "died": null,
+      "seattle_connection": "Native-born Seattle musician — entire educational path through DMA completed within Seattle. University of Washington School of Music faculty, director of jazz studies. The Institutional Anchor.",
+      "significance": "Deep reach through jazz education at UW — the professor whose signal travels through generations of students. Modal jazz vocabulary deployed with quartal voicings and Lydian Dominant color. The thirteenth degree of the blue note thread: modal integration where the blue note IS the mode."
+    },
+    "organism": {
+      "scientific_name": "Halichondria panicea",
+      "common_name": "Breadcrumb Sponge",
+      "kingdom": "Animalia",
+      "location": "Rocky intertidal and subtidal surfaces along the Pacific Northwest coast",
+      "significance": "Filter feeder processing enormous volumes of water to extract nutrients — a living communications receiver, pulling signal from noise across vast throughput. The sponge's body IS the filter. No nervous system, no brain, yet it processes more seawater per unit mass than almost any other marine organism."
+    },
+    "bird": {
+      "scientific_name": "Cepphus columba",
+      "common_name": "Pigeon Guillemot",
+      "family": "Alcidae",
+      "pnw_status": "Year-round resident of PNW rocky coastlines and harbors",
+      "significance": "Dives to depths of 45 meters to feed, then surfaces to communicate with its mate through distinctive high-pitched whistles that carry across the water. The guillemot bridges two worlds — the silent hunting depth and the vocal surface — maintaining contact across the boundary between them."
+    },
+    "dedication": "Douglas Adams (March 11, 1952 -- May 11, 2001)"
+  },
+
+  "resonance_matrix": {
+    "distance_and_filtering": {
+      "theme": "All four threads operate across vast distances — extracting meaningful signal from an ocean of noise",
+      "mission": "Pioneer 5 transmitted at 5 watts across 36.2 million kilometers — the signal arriving at Earth was extraordinarily faint, buried in cosmic radio noise. The Deep Space Network had to filter the spacecraft's telemetry from the background radiation of the universe. Every bit of data was a needle in a haystack of electromagnetic noise. The distance record stood because the filtering worked.",
+      "artist": "Seales filters jazz tradition through academic rigor. The modal vocabulary he teaches is the product of filtering — decades of jazz evolution distilled into a curriculum. Quartal voicings are a filter: they remove the thirds that define major and minor, leaving an ambiguous open sound that can function in multiple harmonic contexts simultaneously. The DMA is itself a filter: years of study reducing the vast body of jazz knowledge to a transmittable pedagogical signal.",
+      "organism": "Halichondria panicea IS a filter. The sponge's entire body is a water-processing system: ostia (pores) draw water in, choanocyte chambers lined with flagellated cells extract bacteria and organic particles, and osculum vents expel the filtered water. A single sponge can process thousands of liters per day. The signal (nutrients) is extracted from the noise (seawater) through physical architecture — the sponge's body plan is a filter topology. No brain required. The filtering is structural.",
+      "bird": "The Pigeon Guillemot filters its environment across two media. Underwater, it filters visually — scanning murky water for the flash of a sculpin or gunnel against the rocky substrate. At the surface, it filters acoustically — its high-pitched whistle must be distinguished from wave noise, wind, and the calls of other seabirds by its mate waiting at the nesting crevice. The guillemot's survival depends on extracting signal in both media: food signal underwater, social signal in air."
+    },
+    "deep_reach": {
+      "theme": "The capacity to extend influence far beyond the point of origin — and to maintain coherence across that distance",
+      "mission": "Pioneer 5 reached 36.2 million km from Earth and still returned usable data. The probe's reach was not just distance — it was coherent distance. The signal degraded with the inverse square of distance, but the information remained decodable because the transmission protocol was designed for deep reach. The probe didn't just travel far; it stayed in contact.",
+      "artist": "Seales's deep reach is pedagogical. As UW director of jazz studies, his influence extends through every student who passes through the program — a network of graduates carrying modal vocabulary, quartal voicings, and the academic jazz framework into their own careers and teaching. The institutional reproduction mechanism means his reach extends beyond his own career. Aaron Parks (degree 14) attended UW pre-college; Thomas Marriott (degree 15) studied under Seales directly. The signal propagates through the institution.",
+      "organism": "The breadcrumb sponge's reach is volumetric. It processes seawater at a rate disproportionate to its physical size — a small encrusting sponge on a rock can filter hundreds of liters daily, reaching far into the water column through suction. The sponge's influence extends invisibly through the entire local water volume. The filtered water that exits the sponge is cleaner, lower in bacteria, higher in dissolved oxygen — the sponge's processing reach shapes the chemistry of the surrounding environment.",
+      "bird": "The guillemot's deep reach is vertical. It dives from the sunlit surface to 45 meters below — a distance equivalent to a 15-story building — into cold, dark, pressurized water, captures prey, and returns. Each dive is a round trip across the light boundary, carrying nutrients from the deep zone back to the surface where its chick waits. The guillemot is a vertical courier, maintaining a link between the surface world and the benthic zone."
+    },
+    "the_invisible_network": {
+      "theme": "The infrastructure that enables communication is invisible to the casual observer — the network exists before the message",
+      "mission": "Pioneer 5's communication depended on the Deep Space Network — a global array of radio antennas in Goldstone (California), Madrid (Spain), and Canberra (Australia), positioned to maintain continuous contact as Earth rotates. This infrastructure was invisible to the public; the headlines were about the probe, not the antennas. The network existed before the message. Without the DSN, Pioneer 5's signal would have been lost in space.",
+      "artist": "Seales's network is the UW jazz program itself — curriculum, practice rooms, ensemble rehearsals, faculty, and the institutional apparatus that sustains them. Students experience the music; the infrastructure that delivers it (academic governance, funding, scheduling, facility maintenance) is invisible. The program generates its own successors through degree granting, creating a self-perpetuating pedagogical network that does not depend on any single individual. The network exists before each new student arrives.",
+      "organism": "The sponge's aquiferous system IS an invisible network. The internal canal system — ostia, prosopyles, choanocyte chambers, apopyles, excurrent canals, osculum — is a plumbing network as complex as any engineered filtration system, hidden inside an organism that looks like a yellow-green crust on a rock. The casual observer sees a lumpy growth on a tide pool rock. The sponge is running a water processing plant inside that crust.",
+      "bird": "The guillemot's invisible network is its knowledge of the underwater substrate. Each bird maintains a mental map of productive feeding sites — specific rock formations, kelp beds, and crevices where sculpins and gunnels hide. This cognitive map is invisible to observers who see only a bird diving and surfacing. The guillemot's foraging success depends on a network of spatial knowledge built over years of diving the same waters."
+    }
+  },
+
+  "theory_bridge": {
+    "music_to_math": [
+      {
+        "music_concept": "Modal jazz vocabulary (Dorian, Mixolydian, Lydian scales)",
+        "tspb_layer": 2,
+        "tspb_section": "2.13",
+        "bridge": "Modal scales are rotations of the same parent scale — Dorian is the major scale starting from the second degree, Mixolydian from the fifth. On the unit circle, rotating the starting point of a scale is angular displacement: C Dorian starts at 2/12 of the circle (60 degrees), C Mixolydian at 7/12 (210 degrees). Every mode is the same set of intervals viewed from a different angular position. Seales teaches this implicitly when he teaches modal improvisation — the student learns to hear the same notes differently depending on which one is 'home.' Pioneer 5 measured the interplanetary magnetic field from a heliocentric orbit — the same solar system viewed from a different angular position between Earth and Venus. The probe's data looked different from data collected at Earth orbit because the observation point had rotated."
+      },
+      {
+        "music_concept": "Quartal voicings (stacked fourths)",
+        "tspb_layer": 3,
+        "tspb_section": "3.13",
+        "bridge": "Quartal voicings build chords from perfect fourths (C-F-Bb-Eb) rather than the thirds that define traditional major/minor harmony. On the unit circle, stacking fourths means moving 5/12 of the circle per interval (150 degrees) — a larger angular step than thirds (4/12 = 120 degrees for major, 3/12 = 90 degrees for minor). The wider angular spacing produces chords that cover more of the circle's circumference, which is why quartal voicings sound 'open' — they span a wider harmonic territory. Pioneer 5's signal was spread-spectrum: the information was distributed across a wider frequency band to improve signal-to-noise ratio over vast distances. Wider spread, better reception. Quartal voicings are the harmonic equivalent of spread-spectrum — distributing harmonic information across a wider pitch band to improve clarity."
+      },
+      {
+        "music_concept": "Institutional knowledge transmission (academic jazz pedagogy)",
+        "tspb_layer": 7,
+        "tspb_section": "7.13",
+        "bridge": "Academic pedagogy is a channel coding problem. The jazz knowledge Seales transmits to students must be encoded (lesson plans, exercises, repertoire lists, ensemble parts), transmitted (lectures, demonstrations, coaching), and decoded (student practice, performance, internalization). Shannon's noisy channel theorem says that reliable communication at any rate below channel capacity is possible if you use appropriate coding. The DMA curriculum IS the code — it structures the transmission of jazz knowledge to ensure reliable reception despite the noise of differing student backgrounds, aptitudes, and attention. The institutional structure (semesters, grades, recitals, juries) is the error-correction protocol. Pioneer 5 used coherent signal processing to maintain data integrity across 36.2 million km. The UW jazz program uses institutional structure to maintain pedagogical integrity across generations of students."
+      }
+    ],
+    "organism_to_math": [
+      {
+        "organism_concept": "Filter feeding as signal processing",
+        "tspb_layer": 5,
+        "tspb_section": "5.13",
+        "bridge": "The sponge's filtration is a physical implementation of bandpass filtering. Choanocyte collars trap particles in a specific size range (0.1-50 micrometers) — too small passes through, too large cannot enter the ostia. This is exactly the behavior of an electronic bandpass filter: frequencies below the low cutoff and above the high cutoff are rejected; the passband transmits. Pioneer 5's receivers used bandpass filters to isolate the spacecraft's signal frequency from cosmic noise. The sponge and the spacecraft both solve the same mathematical problem: extracting a target signal from a noisy medium using a filter with defined pass/reject characteristics. The transfer function H(s) = output/input describes both systems."
+      },
+      {
+        "organism_concept": "Volumetric processing rate (liters per day per gram of tissue)",
+        "tspb_layer": 6,
+        "tspb_section": "6.13",
+        "bridge": "The sponge's processing rate — thousands of liters per day through a small body — is a throughput metric analogous to data rate in telecommunications. Pioneer 5's data rate was approximately 8 bits per second at maximum distance — extremely low throughput, but sufficient for the scientific payload (magnetic field measurements, radiation counts). The sponge's water throughput is enormous but its nutrient extraction rate is low (a tiny fraction of the water volume becomes food). Both systems are optimized for the same strategy: high volume, low extraction rate, continuous operation. The information density is low, but the system never stops filtering."
+      }
+    ]
+  },
+
+  "creative_synthesis": {
+    "title": "Degree Thirteen: The Long Call",
+    "narrative": "At 36.2 million kilometers, Pioneer 5's transmitter was still calling home — five watts of signal threading through the electromagnetic noise of interplanetary space, arriving at Earth as barely-detectable whispers that only the Deep Space Network's parabolic ears could hear. Marc Seales sits at a piano in a practice room at the University of Washington and plays a Dorian scale. The same seven notes that Miles Davis played on Kind of Blue, the same intervals that McCoy Tyner stacked into quartal voicings, the same modal vocabulary that has traveled from 1959 to the present — a signal that has crossed sixty years without losing coherence because the institutional network (universities, recordings, curricula) kept receiving and retransmitting it. On a tidepool rock at Deception Pass, a breadcrumb sponge pumps seawater through its body at a rate that would fill a bathtub every hour, extracting the microscopic signal of bacteria from the noise of the open ocean, processing more water in a day than a human drinks in a year — all without a single neuron. And a Pigeon Guillemot surfaces from a 40-meter dive in the San Juan Islands, a sculpin crosswise in its bill, and gives a sharp whistle that carries across the water to its mate waiting in a rocky crevice on the cliff face — the signal arriving, the filter working, the long call answered. Thirteen degrees into the circle, the theme is reach: how far can you extend a signal and still receive it clearly? The answer, from all four threads, is the same — as far as your filter can handle the noise.",
+    "haiku": "Five watts cross the void —\nthe sponge filters the ocean\nnote by patient note"
+  },
+
+  "cross_references": {
+    "s36_path": "www/tibsfox/com/Research/S36/research/releases/013-marc-seales/",
+    "nasa_path": "www/tibsfox/com/Research/NASA/1.13/",
+    "rosetta_clusters": ["Music", "Space & Astrophysics", "Ecology"],
+    "college_departments": ["music-theory", "marine-biology", "telecommunications", "ornithology", "signal-processing"],
+    "tspb_layers_touched": [2, 3, 5, 6, 7]
+  }
+}
