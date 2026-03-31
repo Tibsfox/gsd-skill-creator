@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: The Mathematics of What Went Wrong | v1.20 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040608; --bio-mid: #081018;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --bell-copper: #B07030; --bell-dim: #583818;
+    --abyss-blue: #183050; --abyss-dim: #0C1828;
+    --octopus-red: #C04830; --octopus-dim: #602418;
+    --depth-teal: #206068; --space: #040508;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2028;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(176,112,48,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(192,72,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(176,112,48,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--abyss-dim) 55%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--bell-copper); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--bell-copper); } em { color: var(--octopus-red); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  pre { background: rgba(4,5,8,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin: 1rem 0 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+  pre code { color: var(--text); font-size: inherit; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.85rem; }
+  th { background: rgba(176,112,48,0.1); color: var(--bell-copper); font-weight: 600; text-align: left; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--bell-dim); }
+  td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  tr:hover td { background: rgba(176,184,192,0.03); }
+  .nav-card { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: var(--bell-copper); } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--mercury-silver); text-decoration: none; }
+  blockquote { border-left: 3px solid var(--abyss-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(4,5,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.20 Mercury-Redstone 4</a><span class="sep">/</span>
+  Track 3: TSPB Mathematics
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.20</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of What Went Wrong</h1>
+    <p class="subtitle">Explosive bolt mechanics, hydrostatic flooding, terminal sinking velocity, Harlequin Duck hydrodynamics</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 4 (Applied Mechanics)</span>
+      <span><span class="label">Secondary:</span> 4b (Fluid Dynamics), 7 (Probability)</span>
+      <span><span class="label">Format:</span> McNeese-Hoag Reference Standard (1959)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Deposit 1: Explosive Bolt Mechanics</h2>
+
+    <h3>Parameter Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>MR-4 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>July 21, 1961, 12:20 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>Redstone MR-8</td></tr>
+      <tr><td>Spacecraft</td><td>&mdash;</td><td>Mercury capsule #11 (Liberty Bell 7)</td></tr>
+      <tr><td>Pilot</td><td>&mdash;</td><td>Virgil Ivan &ldquo;Gus&rdquo; Grissom</td></tr>
+      <tr><td>Engine thrust</td><td>F</td><td>78,000 lbf / 347 kN</td></tr>
+      <tr><td>Specific impulse</td><td>I<sub>sp</sub></td><td>~235 s (ethanol/LOX)</td></tr>
+      <tr><td>Vehicle mass at ignition</td><td>m<sub>0</sub></td><td>~30,000 kg</td></tr>
+      <tr><td>Capsule mass (dry)</td><td>m<sub>cap</sub></td><td>1,100 kg</td></tr>
+      <tr><td>Burnout velocity</td><td>v<sub>bo</sub></td><td>2,303 m/s</td></tr>
+      <tr><td>Peak altitude</td><td>h<sub>max</sub></td><td>190.3 km</td></tr>
+      <tr><td>Downrange distance</td><td>R</td><td>487 km</td></tr>
+      <tr><td>Flight duration</td><td>t<sub>flight</sub></td><td>937 s (15 min 37 sec)</td></tr>
+      <tr><td>Peak g-force (reentry)</td><td>g<sub>reentry</sub></td><td>11.1</td></tr>
+      <tr><td>Hatch failure time</td><td>t<sub>hatch</sub></td><td>~300 s after splashdown</td></tr>
+      <tr><td>Capsule flooding rate</td><td>Q</td><td>~100 L/s</td></tr>
+      <tr><td>Sinking depth</td><td>d<sub>sink</sub></td><td>4,900 m</td></tr>
+    </table>
+
+    <h3>The MDF System</h3>
+    <pre><code>THE MILD DETONATING FUSE (MDF) SYSTEM:
+
+  The MDF is a thin metal tube (~5 mm diameter)
+  filled with PETN (detonation velocity ~8,400 m/s).
+  The tube is routed through the hatch frame, passing
+  through each of the 70 bolts.
+
+  Hatch circumference:
+    C = pi * d_hatch = pi * 0.58 m = 1.82 m
+
+  Time for detonation to traverse the full perimeter:
+    t_det = C / v_det = 1.82 / 8,400 = 0.000217 s = 0.217 ms
+
+  All 70 bolts are severed within 0.22 milliseconds.
+
+  BOLT SHEAR MECHANICS:
+
+  Each titanium bolt cross-section at the shear plane:
+    A_bolt = pi * (0.003)^2 = 2.83 x 10^-5 m^2
+
+  Force to shear one bolt (titanium, tau_ult ~ 400 MPa):
+    F_shear = 400e6 * 2.83e-5 = 11,320 N = 2,545 lbf
+
+  Force to shear all 70 bolts:
+    F_total = 70 * 11,320 = 792,400 N = 178,156 lbf
+
+  THE INITIATOR PLUNGER:
+
+  Force required: 5.5 lbf (24.5 N)
+  Plunger travel: ~6 mm
+  Energy: F * d = 24.5 * 0.006 = 0.147 J
+  Contact pressure on 20 mm knurled surface:
+    P = 24.5 / (pi * 0.01^2) = 78,025 Pa = 0.78 atm
+  This pressure on skin leaves a visible mark.
+  Grissom's hands: no mark found.</code></pre>
+
+    <h3>Probability Analysis of Hatch Failure</h3>
+    <pre><code>Three candidate failure mechanisms:
+
+  1. MECHANICAL (Grissom struck the plunger):
+     - No bruising observed
+     - Grissom denied activation
+     - Probability: LOW (0.05-0.15)
+
+  2. THERMAL EXPANSION / VIBRATION:
+     - Capsule in tropical Atlantic sun
+     - PETN detonators have temperature-dependent sensitivity
+     - Wave action transmits energy to plunger
+     - Probability: MODERATE (0.30-0.50)
+
+  3. ELECTRICAL FAULT:
+     - Backup electrical firing path exists
+     - Salt water is an excellent conductor
+     - Capsule partially submerged for minutes
+     - Probability: MODERATE (0.25-0.40)
+
+  Bayesian reasoning: posterior probability shifts
+  strongly toward mechanisms 2 or 3.
+  The hatch blew due to a design vulnerability,
+  not pilot error. Grissom was exonerated by the physics.</code></pre>
+
+    <h3>Trajectory Comparison: MR-3 vs MR-4</h3>
+    <table>
+      <tr><th>Parameter</th><th>Freedom 7 (MR-3)</th><th>Liberty Bell 7 (MR-4)</th></tr>
+      <tr><td>Date</td><td>May 5, 1961</td><td>July 21, 1961</td></tr>
+      <tr><td>Booster</td><td>Redstone MR-7</td><td>Redstone MR-8</td></tr>
+      <tr><td>Burnout velocity</td><td>2,294 m/s</td><td>2,303 m/s</td></tr>
+      <tr><td>Apogee</td><td>187.5 km</td><td>190.3 km</td></tr>
+      <tr><td>Range</td><td>486 km</td><td>487 km</td></tr>
+      <tr><td>Duration</td><td>15m 28s</td><td>15m 37s</td></tr>
+      <tr><td>Reentry g</td><td>11.6g</td><td>11.1g</td></tr>
+      <tr><td>Capsule</td><td>RECOVERED</td><td>LOST (sank)</td></tr>
+    </table>
+
+    <hr>
+
+    <h2>Deposit 2: Hydrostatics of a Sinking Capsule</h2>
+
+    <pre><code>VOLUME FLOW THROUGH THE HATCH OPENING:
+
+  Hatch area: A = pi * (0.29)^2 = 0.264 m^2
+
+  With 0.5 m wave pushing water into the capsule:
+    delta_P = 1025 * 9.8 * 0.5 = 5,023 Pa
+
+  Volume flow rate:
+    Q = 0.6 * 0.264 * sqrt(2 * 5023 / 1025) = 0.495 m^3/s
+  Conservative continuous average: Q_avg ~ 80-120 L/s
+
+  TIME TO CRITICAL FLOODING:
+
+  Internal free volume: ~1,000-1,200 L
+  Helicopter max lift (tropical conditions): ~1,800-2,200 kg
+  Maximum tolerable water: 2,000 - 1,100 = 900 kg
+
+  Time to reach helicopter's lifting limit:
+    t_critical = 900 / (100 * 1.025) = 8.8 seconds
+
+  The helicopter had less than 9 seconds. The hook
+  attachment process takes 30-60 seconds minimum.
+
+  TERMINAL SINKING VELOCITY:
+
+  Net downward force:
+    F_net = (2,100 - 1,333) * 9.8 = 7,517 N
+
+  Terminal velocity:
+    v_sink = sqrt(2 * 7,517 / (1025 * 0.8 * 1.5))
+           = sqrt(12.22) = 3.50 m/s = 12.6 km/h
+
+  Time to reach 4,900 m floor:
+    t_sink = 4,900 / 3.50 = 1,400 s = 23 minutes
+
+  PRESSURE AT 4,900 METERS:
+    P = 101,325 + 1025 * 9.8 * 4,900
+      = 49,297,825 Pa = 493 atm</code></pre>
+
+    <hr>
+
+    <h2>Deposit 3: Harlequin Duck Hydrodynamics</h2>
+
+    <p>The <em>Harlequin Duck</em> (Histrionicus histrionicus, degree 20) breeds along the fastest, most turbulent mountain streams in the Pacific Northwest. No other North American duck routinely occupies habitat this violent.</p>
+
+    <pre><code>REYNOLDS NUMBER COMPARISON:
+
+  Harlequin Duck in PNW mountain stream:
+    Re = 1000 * 1.5 * 0.40 / 0.0013 = 461,538
+    Flow regime: TURBULENT
+
+  Liberty Bell 7 sinking in Atlantic:
+    Re = 1025 * 3.5 * 1.89 / 0.0017 = 3,989,412
+    Flow regime: TURBULENT
+
+  Both objects in the same regime -- both surrounded
+  by chaotic, vortex-shedding flow.
+
+  Critical difference: CONTROL AUTHORITY
+    Duck: full (legs, wings, tail)
+    Capsule: none (dead weight)
+
+  HARLEQUIN DUCK DIVING MECHANICS:
+
+  Buoyancy (submerged): ~5.88 N
+  Weight: 0.6 * 9.8 = 5.88 N
+  Net buoyancy: ~0 N (NEARLY NEUTRALLY BUOYANT)
+
+  Propulsive force (both feet): ~0.75 N per stroke cycle
+  Adequate for 0.5-1.0 m/s through water</code></pre>
+
+    <h3>Comparison Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Harlequin Duck</th><th>Liberty Bell 7</th></tr>
+      <tr><td>Mass</td><td>0.6 kg</td><td>2,100 kg (flooded)</td></tr>
+      <tr><td>Velocity</td><td>1.5 m/s (swimming)</td><td>3.5 m/s (sinking)</td></tr>
+      <tr><td>Char. length</td><td>0.40 m</td><td>1.89 m</td></tr>
+      <tr><td>Reynolds number</td><td>461,538</td><td>3,989,412</td></tr>
+      <tr><td>Drag coefficient</td><td>~0.05 (streamlined)</td><td>~0.8 (blunt cone)</td></tr>
+      <tr><td>Control authority</td><td>Full</td><td>None</td></tr>
+      <tr><td>Outcome</td><td>Survives</td><td>Sinks to 4,900 m</td></tr>
+    </table>
+
+    <hr>
+
+    <h2>Rosetta Table</h2>
+    <table>
+      <tr><th>Concept</th><th>MR-4 Application</th><th>Prior Mission</th></tr>
+      <tr><td>Suborbital trajectory</td><td>190.3 km apogee, 487 km range</td><td>MR-3 (1.19): 187.5 km, 486 km</td></tr>
+      <tr><td>Burnout velocity</td><td>2,303 m/s</td><td>MR-3: 2,294 m/s</td></tr>
+      <tr><td>Explosive bolt mechanics</td><td>MDF, 70 bolts, 8,400 m/s det velocity</td><td>&mdash; (first in series)</td></tr>
+      <tr><td>Hydrostatic flooding</td><td>~100 L/s, unliftable in &lt;10 s</td><td>&mdash; (first in series)</td></tr>
+      <tr><td>Terminal velocity (sinking)</td><td>3.5 m/s, 23 min to 4,900 m</td><td>MR-3: falcon stoop 108 m/s</td></tr>
+      <tr><td>Reynolds number</td><td>Duck: 461K; Capsule: 3,989K</td><td>MR-3: falcon ~600K (air)</td></tr>
+      <tr><td>Pressure at depth</td><td>493 atm at 4,900 m</td><td>&mdash; (first in series)</td></tr>
+      <tr><td>Reentry g-force</td><td>11.1g</td><td>MR-3: 11.6g; MR-2: 14.7g</td></tr>
+      <tr><td>Fault tree analysis</td><td>Mech, thermal, electrical branches</td><td>&mdash; (first in series)</td></tr>
+    </table>
+
+    <hr>
+
+    <blockquote>The bell sank. That is the fact, the physics, the end of the story in every way except the human one. The math gave the recovery crew 9 seconds of margin, and the hatch blew 60 seconds before the hook was attached. Nine seconds against sixty. The capsule was dead the moment the bolts severed &mdash; all 70 of them, in 0.22 milliseconds. Grissom understood this. He was an engineer, Purdue-educated. He understood that the physics exonerated him even as the institution did not. The Harlequin Duck dove through whitewater to pull a caddisfly larva from the cobble &mdash; the same cobble where Pacific giant salamanders hunt. The duck surfaced, shook the water from its crested head, and dove again. The bell sank to 4,900 meters and rested under 493 atmospheres for 38 years. A man can be destroyed but not defeated. The bell was destroyed. Grissom was not defeated.</blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="organism.html">&larr; Track 2: Organism</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">v1.20 Overview</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="curriculum.html">Track 4: Curriculum &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.20 Track 3: TSPB Mathematics &mdash; Mercury-Redstone 4 / Liberty Bell 7 &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

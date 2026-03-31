@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.20 — Mercury-Redstone 4 / Liberty Bell 7 + Giant Pacific Octopus | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040608; --bio-mid: #081018;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --bell-copper: #B07030; --bell-dim: #583818;
+    --abyss-blue: #183050; --abyss-dim: #0C1828;
+    --octopus-red: #C04830; --octopus-dim: #602418;
+    --depth-teal: #206068; --space: #040508;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2028;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(176,112,48,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(192,72,48,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(96,104,112,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(32,96,104,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(176,112,48,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(4,5,8,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(24,48,80,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--abyss-dim) 55%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mercury-silver);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-partial {
+    background: rgba(200,160,40,0.2); border: 1px solid #C8A028;
+    color: #C8A028; padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--bell-copper);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--bell-copper); }
+  .card em { color: var(--octopus-red); }
+
+  .resonance-card { border-color: var(--abyss-blue); background: rgba(24,48,80,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(24,48,80,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--bell-copper); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--mercury-silver); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--mercury-silver); background: rgba(176,184,192,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--bell-copper); }
+  .track-card.t2 .track-title { color: var(--octopus-red); }
+  .track-card.t3 .track-title { color: var(--mercury-silver); }
+  .track-card.t4 .track-title { color: var(--bell-copper); }
+  .track-card.t5 .track-title { color: var(--mercury-silver); }
+  .track-card.t6 .track-title { color: var(--octopus-red); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(32,96,104,0.08); border: 1px solid var(--octopus-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--octopus-red); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(4,5,8,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--bell-copper); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(176,184,192,0.06); border: 1px solid rgba(176,184,192,0.2);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--mercury-silver); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(176,184,192,0.15); transition: color 0.2s; }
+  .data-links a:hover { color: var(--bell-copper); }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--bell-copper); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.20</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-partial">PARTIAL</span>
+    </div>
+    <h1>v1.20 &mdash; Mercury-Redstone 4 / Liberty Bell 7 + <em>Enteroctopus dofleini</em></h1>
+    <p class="subtitle">The Bell That Sank &mdash; Gus Grissom, Grace Under Pressure</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> July 21, 1961</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Gus Grissom</span>
+      <span><span class="label">Peak Alt:</span> 190.3 km</span>
+      <span><span class="label">Max G:</span> 11.1</span>
+      <span><span class="label">Duration:</span> 15:37</span>
+      <span><span class="label">Organism:</span> Giant Pacific Octopus</span>
+      <span><span class="label">Bird:</span> Harlequin Duck</span>
+      <span><span class="label">Dedication:</span> Ernest Hemingway</span>
+      <span><span class="label">Status:</span> SUCCESS (pilot) / PARTIAL (capsule lost)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On July 21, 1961, Virgil Ivan &ldquo;Gus&rdquo; Grissom launched from Cape Canaveral&rsquo;s Launch Complex 5 atop a Redstone MR-8 booster, inside Mercury capsule #11 &mdash; which he had named <strong>Liberty Bell 7</strong>, complete with a white crack painted on the hull in homage to the original. The flight lasted fifteen minutes and thirty-seven seconds. It was suborbital &mdash; a ballistic arc to <strong>190.3 km</strong> altitude, 487 km downrange, with approximately five minutes of weightlessness. Grissom tested manual attitude control in all three axes, confirmed Shepard&rsquo;s MR-3 findings, and evaluated the new centerline observation window. He experienced <strong>11.1g</strong> during reentry. The flight was nominal. Every system worked. Every test objective was met.</p>
+      <p>Then the explosive hatch blew. Seventy titanium bolts detonated in 0.22 milliseconds, blasting the hatch outward while Grissom was still inside completing his post-landing checklist. The Atlantic Ocean poured through the 0.58-meter opening at approximately <strong>100 liters per second</strong>. Grissom scrambled out through the hatch and into the ocean. His suit&rsquo;s oxygen inlet was open; seawater flooded in, pulling him under. Lieutenant Jim Lewis, piloting the recovery helicopter, hooked the capsule and tried to lift it &mdash; but the waterlogged spacecraft exceeded the helicopter&rsquo;s capacity within <em>nine seconds</em> of the hatch blowing. The engine chip warning light illuminated. Lewis cut the capsule loose. <strong>Liberty Bell 7 sank to 4,900 meters</strong> &mdash; nearly five kilometers down &mdash; and rested on the Atlantic floor for 38 years.</p>
+      <p>Grissom treaded water for five minutes in a suit filling with seawater, was rescued by a second helicopter, and was recovered safely. He insisted he had not blown the hatch. His hands showed no bruising &mdash; the plunger required 24.5 N of force and consistently left marks on the hand. The physical evidence supported him. The press did not. Tom Wolfe wrote it with literary ambiguity. The public remembered the doubt. In <strong>1999</strong>, Curt Newport&rsquo;s deep-sea expedition recovered the capsule from the ocean floor &mdash; one day before the 38th anniversary of the flight, thirty years and one day after the Apollo 11 Moon landing. The cracked bell came home. Grissom did not live to see it &mdash; he died in the <strong>Apollo 1 fire</strong> on January 27, 1967, killed by a hatch that would not open, the inverse of the hatch that opened when it should not have.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The Bell That Sank</div>
+            <div class="track-desc">Grissom&rsquo;s quiet competence, the flight, the hatch, the drowning, the controversy, Liberty Bell 7&rsquo;s 38-year rest, the 1999 recovery, Apollo 1, Hemingway resonance</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">MR-4 official report, explosive bolt failure probability (Monte Carlo), octopus distributed cognition, deep-sea artifact recovery (Bayesian search), spacecraft egress history</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Enteroctopus dofleini</em></div>
+            <div class="track-desc">Giant Pacific Octopus &mdash; 6m span, 500M neurons, distributed intelligence, chromatophore camouflage, semelparous reproduction, PNW apex invertebrate</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of What Went Wrong</div>
+            <div class="track-desc">Explosive bolt mechanics, MDF detonation velocity, hydrostatic flooding, terminal sinking velocity, 493 atm pressure, Harlequin Duck hydrodynamics, Reynolds number comparison</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Failure Analysis, Marine Biology, Literature (Hemingway), Aerospace Engineering, Ethics (operator blame), Psychology (drowning composure). FTA workshop. Octopus observation. DIY pressure sensor.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Sink, Recover, Create</div>
+            <div class="track-desc">Capsule flooding simulator, Monte Carlo hatch analysis, helicopter recovery game, Harlequin Duck stream navigator, &ldquo;4,900 Meters&rdquo; shader, &ldquo;The Bell&rdquo; story, squelch circuit</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Ocean Floor / Deep Intelligence</div>
+          The Giant Pacific Octopus inhabits the cold, dark, pressurized waters of the northeastern Pacific. Liberty Bell 7 sank to 4,900 meters and rested on the ocean floor for 38 years, becoming part of the deep-ocean environment &mdash; encrusted with marine growth, colonized by organisms, absorbed into the ecology of the abyss. Both the octopus and the capsule are residents of the deep. Both occupy spaces that the surface world cannot see without going down.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Camouflage / Dual Narrative</div>
+          The octopus&rsquo;s chromatophore system presents any appearance it chooses &mdash; matching surroundings, displaying threat signals, pulsing with communicative patterns. What you see on the surface is not what is underneath. The Grissom hatch controversy carried the same structure: the surface narrative (astronaut panicked, blew the hatch) was not the reality underneath (mechanical malfunction, physical evidence supporting the pilot&rsquo;s account). Both involve a gap between what the surface shows and what actually exists.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Survival / Grace Under Pressure</div>
+          The Giant Pacific Octopus solves problems in an environment of constant threat from predators, temperature extremes, and resource competition. Grissom solved problems under pressure throughout his career: 100 combat missions in Korea, test pilot evaluations at Edwards, and most critically the moments after the hatch blew when he was in the Atlantic with a flooding suit and had to keep swimming, keep breathing, keep his head above the waves. Intelligence under pressure is the defining characteristic of both.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Distributed Intelligence</div>
+          The octopus distributes two-thirds of its 500 million neurons into its arms, creating a network of semi-autonomous processors coordinated by a central brain. The Mercury mission control architecture distributed control across a global network of ground stations, each with local autonomy, coordinated by Mercury Control Center at Cape Canaveral. Both solve the same problem: managing complex tasks across distance with communication delays. Distributed intelligence is the architecture of both.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Total Commitment</div>
+          The Giant Pacific Octopus lives three to five years and reproduces once, investing everything in a single reproductive event that kills it. Grissom&rsquo;s commitment to spaceflight was total &mdash; he did not leave the program after Liberty Bell 7 sank, did not step back after the controversy. He commanded Gemini 3 and was selected for Apollo 1. He stayed in the program until the program killed him. Both commitments were irreversible. Both ended in death. Both produced something that survived.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <div class="axis-title">Recovery from the Deep</div>
+          The Giant Pacific Octopus lives in dens &mdash; dark cavities in the reef, concealed from the surface, hidden from casual observation. The octopus emerges from the den to hunt, to explore, and then retreats back into the dark. Liberty Bell 7 sat in its own den &mdash; the ocean floor, 4,900 meters down, concealed for 38 years &mdash; until Curt Newport&rsquo;s expedition brought it back into the light. Both involve something emerging from the deep: the octopus from its rocky cavity, the capsule from its abyssal resting place.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><strong>Shader: &ldquo;4,900 Meters&rdquo;</strong> &mdash; GLSL fragment shader, Liberty Bell 7&rsquo;s descent through the Atlantic: sunlit surface to abyssal black, bioluminescent flickers, marine snow, 23-minute compressed sinking</li>
+        <li><strong>Story: &ldquo;The Bell&rdquo;</strong> &mdash; Creative nonfiction from Grissom&rsquo;s perspective, second by second from hatch detonation through five minutes in the water</li>
+        <li><strong>Audio: Liberty Bell 7 Splashdown</strong> &mdash; Faust DSP synthesis of splashdown impact, hatch crack, flooding rush, sinking drone to abyssal silence</li>
+        <li><strong>Audio: Whitewater Harlequin</strong> &mdash; Faust DSP: PNW mountain stream, Harlequin Duck calls, dive sequence with underwater perspective shift</li>
+        <li><strong>Circuit: Underwater Pressure Sensor</strong> &mdash; BMP280 + Arduino Nano depth indicator with syringe interface, displays equivalent ocean depth</li>
+        <li><strong>Circuit: Squelch Circuit</strong> &mdash; Progressive radio series #20: carrier-operated audio muting for receiver operation between transmissions</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><strong>Python: Capsule Flooding &amp; Sinking Rate</strong> &mdash; Models water ingress, mass vs time, helicopter load limit crossing at 9 seconds, terminal sinking velocity, 23-minute descent to 4,900 m</li>
+        <li><strong>Python: Explosive Bolt Monte Carlo</strong> &mdash; Probability of premature hatch detonation under varying temperature, vibration, and electrical noise &mdash; quantifies Grissom&rsquo;s exoneration</li>
+        <li><strong>Web: &ldquo;Save Liberty Bell 7&rdquo;</strong> &mdash; Helicopter recovery game &mdash; physically accurate, unwinnable under actual conditions, proving Lewis had to let go</li>
+        <li><strong>Web: Harlequin Duck Turbulence Navigator</strong> &mdash; Stream foraging game with real-time Reynolds number, energy management, eddy resting, dive mechanics</li>
+        <li><strong>SPICE: Explosive Bolt Firing Circuit</strong> &mdash; Bridgewire detonator with salt water leakage path &mdash; models the electrical fault that may have sunk Liberty Bell 7</li>
+        <li><strong>SPICE: Squelch Circuit</strong> &mdash; Progressive radio #20: comparator-driven JFET audio gate, carrier-operated muting</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: var(--mercury-silver);">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(176,112,48,0.04); border-color: var(--bell-dim);">
+      <h2 style="color: var(--bell-copper);">Dedication: Ernest Hemingway</h2>
+      <p><strong>Born July 21, 1899 &mdash; Died July 2, 1961</strong></p>
+      <p>Ernest Miller Hemingway was born on the exact calendar date, sixty-two years earlier, that Gus Grissom launched from Cape Canaveral. He died nineteen days before the flight. The timing placed Grissom&rsquo;s launch in the immediate aftermath of Hemingway&rsquo;s death: the nation was still absorbing the loss of its most famous living writer when its second astronaut rode a rocket into the Atlantic sky.</p>
+      <p>The resonance is structural. Hemingway&rsquo;s <em>&ldquo;The Old Man and the Sea&rdquo;</em> tells the story of Santiago, who catches the greatest marlin of his life and then loses it to sharks on the long sail home. Grissom caught his marlin &mdash; a perfect flight, every system nominal &mdash; and then the ocean took it. The tourists looked at Santiago&rsquo;s skeleton and asked the wrong question. The press looked at Grissom&rsquo;s sunken capsule and asked the wrong question. Both men came home with nothing except the knowledge that the effort was real.</p>
+      <p><em>&ldquo;A man can be destroyed but not defeated.&rdquo;</em> Santiago lost the marlin. Grissom lost the capsule. Neither was defeated. Grissom flew again &mdash; Gemini 3, Apollo 1. He stayed in the program until the program killed him. He was destroyed. He was not defeated.</p>
+      <p style="font-style: italic; color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; text-align: center;"><strong style="color: var(--bell-copper); font-size: 1.3rem;">Courage is grace under pressure. Grissom experienced it literally &mdash; grace under 493 atmospheres.</strong></p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.19/index.html">&larr; v1.19 Freedom 7</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.21/index.html">v1.21 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Enteroctopus dofleini (Giant Pacific Octopus)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">6 m</div>
+          <div class="stat-label">Arm Span</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">500M</div>
+          <div class="stat-label">Neurons</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3&ndash;5 yr</div>
+          <div class="stat-label">Lifespan</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1x</div>
+          <div class="stat-label">Semelparous</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        The largest octopus on Earth, inhabiting the cold rocky waters of the Pacific Northwest from Alaska to Northern California. Possesses <strong style="color: var(--bell-copper);">500 million neurons</strong> &mdash; two-thirds distributed across eight semi-autonomous arms. Chromatophore skin changes color in 200 milliseconds. Opens jars, navigates mazes, exhibits individual personality, and plays. Reproduces once and dies &mdash; the female guards 20,000&ndash;100,000 eggs for six months without eating, then expires. An apex invertebrate predator and icon of PNW marine ecology.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(176,184,192,0.06); border-color: var(--mercury-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Bird: Harlequin Duck</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em style="color: var(--octopus-red);">Histrionicus histrionicus</em> (degree 20). The only North American duck that routinely breeds on fast-flowing mountain streams. Forages by diving to the stream bottom in turbulent whitewater, clinging to cobble to grab caddisfly larvae. Near-neutral buoyancy when submerged (<strong style="color: var(--bell-copper);">~1000 kg/m&sup3;</strong>). Reynolds number in a PNW stream: <strong style="color: var(--bell-copper);">461,538</strong> &mdash; fully turbulent. The duck that navigates chaos by choice. Breeds on the same cold streams where <em style="color: var(--octopus-red);">Dicamptodon</em> (v1.19) hunts.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(32,96,104,0.06); border-color: var(--abyss-blue);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Liberty Bell 7 Flight &amp; Depth Data</h3>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">190.3 km</div>
+          <div class="stat-label">Peak Altitude</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2,303 m/s</div>
+          <div class="stat-label">Burnout Velocity</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">15:37</div>
+          <div class="stat-label">Flight Duration</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">11.1g</div>
+          <div class="stat-label">Reentry G</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4,900 m</div>
+          <div class="stat-label">Sinking Depth</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">493 atm</div>
+          <div class="stat-label">Floor Pressure</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3.5 m/s</div>
+          <div class="stat-label">Terminal Sink</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">38 yr</div>
+          <div class="stat-label">Time on Floor</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--bell-copper);">Range:</strong> 487 km downrange. <strong style="color: var(--bell-copper);">Flooding rate:</strong> ~100 L/s. <strong style="color: var(--bell-copper);">Unliftable in:</strong> &lt;9 seconds. <strong style="color: var(--bell-copper);">Sink time:</strong> ~23 min. <strong style="color: var(--bell-copper);">Recovery:</strong> July 20, 1999 by Curt Newport. Now at Kansas Cosmosphere, Hutchinson, KS.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: MR-4 / Liberty Bell 7</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS System</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://airandspace.si.edu/">Smithsonian Air &amp; Space Museum</a>
+      <a href="https://cosmo.org/">Kansas Cosmosphere: Liberty Bell 7</a>
+      <a href="https://www.inaturalist.org/">iNaturalist: Enteroctopus dofleini</a>
+      <a href="https://www.gbif.org/">GBIF: E. dofleini Occurrence Records</a>
+      <a href="https://www.seattleaquarium.org/">Seattle Aquarium: GPO Exhibit</a>
+    </div>
+
+    <div class="card" style="background: rgba(176,112,48,0.06); border-color: var(--bell-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--bell-copper);">Primary:</strong> Failure Analysis (Explosive Bolt Investigation, Fault Tree Analysis), Marine Biology (Giant Pacific Octopus, Distributed Intelligence), Literature (Hemingway, Santiago&rsquo;s Marlin)<br>
+        <strong style="color: var(--bell-copper);">Secondary:</strong> Aerospace Engineering (Emergency Egress, Recovery Systems), Ethics (Operator Blame vs System Failure), Psychology (Drowning Composure, Survival Decision-Making)
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(176,112,48,0.06); border-color: var(--bell-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">TSPB Layers</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--bell-copper);">Layer 4:</strong> Applied Mechanics &mdash; Explosive bolt shear, MDF detonation, hydrostatic flooding, terminal sinking velocity<br>
+        <strong style="color: var(--bell-copper);">Layer 4b:</strong> Fluid Dynamics &mdash; Harlequin Duck hydrodynamics, Reynolds number, turbulent flow regime, diving propulsion<br>
+        <strong style="color: var(--bell-copper);">Layer 6:</strong> Probability &amp; Statistics &mdash; Fault tree analysis, Bayesian hatch failure reasoning, Monte Carlo explosive bolt simulation<br>
+        <strong style="color: var(--bell-copper);">Layer 7:</strong> Information Theory &mdash; Brain-arm communication bandwidth, distributed cognition as data compression
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.20 Mercury-Redstone 4 / Liberty Bell 7 + <em>Enteroctopus dofleini</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

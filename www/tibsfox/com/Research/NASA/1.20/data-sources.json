@@ -1,0 +1,107 @@
+{
+  "mission": "1.20",
+  "title": "Mercury-Redstone 4 / Liberty Bell 7",
+  "description": "Open datasets and source materials relevant to Mercury-Redstone 4 (1961), Gus Grissom's suborbital flight, Liberty Bell 7 capsule, the 1999 deep-sea recovery expedition, Enteroctopus dofleini, Giant Pacific Octopus ecology and intelligence, and Ernest Hemingway",
+  "sources": [
+    {
+      "id": "nssdc-mr4",
+      "name": "NSSDC Master Catalog — Mercury-Redstone 4",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-019A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "NASA Space Science Data Coordinated Archive entry for MR-4 / Liberty Bell 7. Mission profile, spacecraft description (Mercury spacecraft #11), launch vehicle (Redstone MR-8), suborbital trajectory parameters (apogee 190.3 km, 486 km downrange), and mission outcome. Canonical NASA record of the second American crewed spaceflight. Includes launch date (July 21, 1961, 12:20 UTC from LC-5, Cape Canaveral), flight duration (15 minutes 37 seconds), peak velocity (~2,300 m/s), maximum deceleration (11.1 g during reentry), and the post-splashdown loss of the capsule. After water landing, the explosive hatch blew prematurely — Grissom egressed into the Atlantic, treading water in a flooding spacesuit while the capsule took on water and sank. Recovery helicopter Marine Corps Lt. James Lewis hooked the capsule but the waterlogged spacecraft exceeded the helicopter's lift capacity (estimated 2,260 kg wet vs. 1,130 kg dry). The capsule was released and sank to a depth of approximately 4,900 meters. Grissom was rescued by a second helicopter after approximately four minutes in the water. Classification: MISSION SUCCESS, CAPSULE LOST.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-mr4-report",
+      "name": "Results of the Second United States Manned Suborbital Space Flight (NASA)",
+      "url": "https://ntrs.nasa.gov/citations/19620004691",
+      "type": "primary-source",
+      "category": "mission-report",
+      "description": "NASA's official post-flight report on Mercury-Redstone 4, published 1961. Contains comprehensive mission data: Redstone MR-8 launch vehicle performance (engine cutoff at T+142.7s), spacecraft systems telemetry (cabin and suit pressure, environmental control system, communications), pilot biomedical data (heart rate, respiration), and detailed timeline of the flight. Documents Grissom's manual attitude control experiments during the 5-minute weightless period, his observation of landmarks through the trapezoidal window, and the nominal reentry and parachute deployment sequence. The critical post-landing section details the explosive hatch event: at T+15:37 the capsule splashed down nominally; Grissom completed the post-landing checklist, removed his helmet, disconnected the oxygen inlet hose, and was preparing for helicopter hookup when the hatch detonated. The report includes Grissom's debriefing testimony that he did not actuate the plunger, and engineering analysis of the mild detonating fuse (MDF) initiator mechanism. The hatch question remained officially unresolved, though Grissom consistently maintained he did not blow the hatch.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "ntrs-mercury-history",
+      "name": "This New Ocean: A History of Project Mercury (NASA SP-4201)",
+      "url": "https://history.nasa.gov/SP-4201/toc.htm",
+      "type": "primary-source",
+      "category": "program-history",
+      "description": "Loyd S. Swenson Jr., James M. Grimwood, and Charles C. Alexander's comprehensive history of the Mercury program, published by NASA in 1966. Chapter 11 covers MR-4 in detail: the flight preparation, Grissom's selection as the second pilot, the 15-minute 37-second suborbital trajectory (nearly identical to Shepard's MR-3 profile but with improvements to the window and instrument panel), and the explosive hatch incident. The book documents the engineering controversy: the MDF (mild detonating fuse) hatch was designed with a manual plunger requiring 5 pounds of force — Grissom had no bruising on his hand consistent with striking the plunger. The hatch external lanyard (which recovery swimmers could pull from outside) was intact. No definitive cause was established. SP-4201 also records the political aftermath — the loss of the capsule generated press speculation about pilot error, a cloud that followed Grissom despite NASA's internal confidence in his account. Grissom went on to command the first Gemini mission (Gemini 3, 'Molly Brown' — named in pointed reference to Liberty Bell 7's sinking) and was assigned command of Apollo 1.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "smithsonian-lb7",
+      "name": "Smithsonian National Air and Space Museum — Liberty Bell 7 Capsule",
+      "url": "https://airandspace.si.edu/collection-objects/capsule-mercury-mr-4-liberty-bell-7/nasm_A20010071000",
+      "type": "primary-source",
+      "category": "museum",
+      "description": "The Smithsonian's collection entry for Mercury spacecraft #11, Liberty Bell 7, recovered from the Atlantic Ocean floor in 1999 after 38 years at a depth of approximately 4,900 meters. Grissom chose 'Liberty Bell' for the capsule's bell-like shape and its echo of American independence; he added a crack painted on the exterior in reference to the Liberty Bell in Philadelphia. The '7' continued the tradition Shepard established with Freedom 7, honoring all seven Mercury astronauts. The recovered capsule shows remarkably good preservation despite nearly four decades in saltwater at extreme pressure — the titanium and nickel-alloy structure resisted deep-ocean corrosion, and many instruments and switches remained identifiable. The explosive hatch opening is clearly visible, with the MDF detonation pattern preserved in the metal. The capsule is displayed at the Kansas Cosmosphere and Space Center in Hutchinson, Kansas, after extensive conservation treatment. It is one of only two Mercury capsules recovered from the ocean floor (the other being the unmanned Big Joe capsule).",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "jpl-horizons",
+      "name": "JPL HORIZONS System — Ephemeris Service",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "orbital-mechanics",
+      "description": "JPL's HORIZONS system provides ephemeris data for solar system objects including spacecraft trajectories. Useful for reconstructing MR-4's suborbital ballistic arc: launch from LC-5, Cape Canaveral (28.4722 N, 80.5431 W), engine cutoff at approximately 142.7 seconds yielding ~2,300 m/s velocity, apogee of 190.3 km at approximately T+5 minutes, and splashdown 486 km downrange at approximately T+15.6 minutes. MR-4's trajectory was nearly identical to MR-3 but achieved a slightly higher apogee (190.3 km vs. 187.5 km) due to minor differences in burnout conditions. The system allows computation of the ballistic trajectory using launch azimuth, cutoff velocity, and flight path angle. Also provides Earth orientation and gravitational field data needed for trajectory reconstruction. The 2.8 km difference in apogee between MR-3 and MR-4 — barely 1.5% — demonstrates the Redstone's remarkable repeatability for a vehicle derived from the V-2 missile program.",
+      "format": "text/JSON/CSV",
+      "access": "open"
+    },
+    {
+      "id": "mcdowell-launches",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/index.html",
+      "type": "secondary-source",
+      "category": "launch-vehicle",
+      "description": "Jonathan McDowell (Harvard-Smithsonian Center for Astrophysics) maintains the most comprehensive publicly available database of orbital and suborbital launches. The database includes Redstone launch records with serial numbers, payload identifications, trajectory data, and success/failure classifications. Redstone MR-8 (the vehicle that launched Liberty Bell 7) is cataloged with launch time, trajectory parameters, and staging events. The database allows comparison across the full Mercury-Redstone series: MR-1 (4-inch flight, November 1960), MR-1A (success, December 1960), MR-2 (Ham's suborbital, January 1961), MR-BD (booster development retest, March 1961), MR-3 (Shepard, May 1961), MR-4 (Grissom, July 1961). MR-4 was the final flight of the Mercury-Redstone combination — subsequent Mercury missions used the Atlas D launch vehicle for orbital flights. Also includes the broader Redstone missile test record and its lineage from the V-2 through the Jupiter program.",
+      "format": "text/HTML",
+      "access": "open"
+    },
+    {
+      "id": "newport-lost-spacecraft",
+      "name": "Curt Newport — 'Lost Spacecraft: The Search for Liberty Bell 7' (1999 Recovery Expedition)",
+      "url": "https://www.libertybellrecovery.com/",
+      "type": "primary-source",
+      "category": "deep-sea-recovery",
+      "description": "Curt Newport led the 1999 expedition that located and recovered Liberty Bell 7 from the floor of the Atlantic Ocean, approximately 4,900 meters (16,000 feet) below the surface. The capsule had rested at approximately 493 atmospheres of pressure for 38 years. Newport's account documents the search strategy (sonar sweeps of the splashdown zone), the discovery (the capsule was found largely intact, upright on the seabed), and the recovery operation using a remotely operated vehicle (ROV) and a specialized lifting rig. The capsule weighed approximately 1,130 kg dry but had accumulated sediment and biological growth. Recovery required careful management of differential pressure — artifacts at 493 atm that contain trapped air pockets can explosively decompress if brought to the surface too quickly. The expedition was funded by the Discovery Channel and documented in Newport's book 'Lost Spacecraft' (2002, Apogee Books). The recovery demonstrated that the explosive hatch detonation pattern was consistent with internal initiation, but the evidence was too degraded after 38 years of saltwater immersion to be conclusive about the mechanism of actuation.",
+      "format": "book/HTML",
+      "access": "partial (book purchase; website free)"
+    },
+    {
+      "id": "inaturalist-octopus",
+      "name": "iNaturalist — Enteroctopus dofleini Observations",
+      "url": "https://www.inaturalist.org/taxa/51212-Enteroctopus-dofleini",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Community-submitted observations of the Giant Pacific Octopus across its range from the Gulf of Alaska through British Columbia, Washington, Oregon, and into northern California, extending across the North Pacific to Japan. Distribution maps showing dense populations in the Puget Sound, San Juan Islands, Strait of Juan de Fuca, and along the outer coast of British Columbia and Washington. Photographs capture the remarkable chromatic range: individuals displaying deep red-brown, mottled white, pale cream, textured papillae, and smooth camouflage states — often multiple appearances from the same animal minutes apart. Observations document habitat associations: rocky reefs, boulder fields, kelp forests, and artificial structures (docks, piers, sunken objects) from intertidal to 200+ meters depth. Particularly dense observation records from Puget Sound dive sites (Edmonds Underwater Park, Mukilteo, Keystone Jetty), the San Juan Islands, and Bamfield Marine Sciences Centre in British Columbia. Enteroctopus dofleini is the largest octopus species in the world, with documented arm spans exceeding 6 meters and weights to 71 kg.",
+      "format": "HTML/JSON",
+      "access": "open"
+    },
+    {
+      "id": "seattle-aquarium-octopus",
+      "name": "Seattle Aquarium — Giant Pacific Octopus Research and Education",
+      "url": "https://www.seattleaquarium.org/animals/giant-pacific-octopus/",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "The Seattle Aquarium has maintained Giant Pacific Octopuses continuously since its opening in 1977, making it one of the longest-running captive cephalopod programs in the world. The aquarium's octopus exhibit is among its most popular attractions — the resident octopus is a signature animal of the institution, embodying Seattle's maritime identity. The aquarium conducts and supports research on E. dofleini behavior, cognition, and welfare: problem-solving experiments (opening jars, navigating mazes, recognizing individual human handlers), enrichment studies, stress indicators, and lifespan observations. Captive individuals typically live 3-5 years, consistent with the species' semelparous life history — after mating, females brood their eggs for 6-10 months without eating, tending up to 100,000 eggs by gently aerating and cleaning them, then dying shortly after the eggs hatch. Males also die within months of mating. The aquarium's research contributes to understanding octopus distributed intelligence: approximately 500 million neurons, with two-thirds located in the arms rather than the central brain, enabling semi-autonomous arm behavior even when severed from the body.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "gbif-octopus",
+      "name": "GBIF — Enteroctopus dofleini Occurrence Records",
+      "url": "https://www.gbif.org/species/2291723",
+      "type": "primary-source",
+      "category": "biodiversity",
+      "description": "The Global Biodiversity Information Facility aggregates occurrence records from museum specimens, research collections, and citizen science observations worldwide. GBIF holds thousands of georeferenced records for Enteroctopus dofleini spanning the North Pacific from California to Japan. The data reveal the species' core range: a circumboreal Pacific distribution centered on cold, nutrient-rich coastal waters, with highest densities in the Pacific Northwest (Puget Sound, British Columbia, Gulf of Alaska) and northern Japan (Hokkaido). Depth range: intertidal to approximately 1,500 meters, though most records are between 0-200 meters on the continental shelf. Historical specimen records document the species' long taxonomic history — first described by Wulker in 1910 from Japanese specimens, later synonymized with the Northeast Pacific populations that had been described under multiple names. The aggregated dataset supports distribution modeling, population trend analysis, and climate vulnerability assessments. E. dofleini populations appear stable in the PNW but face pressures from ocean acidification (affecting prey species), warming waters (octopuses are sensitive to temperature increases above 15 C), and commercial harvest in some jurisdictions.",
+      "format": "CSV/JSON/HTML",
+      "access": "open"
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research: Mercury-Redstone 4 — The Bell That Sank | v1.20 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040608; --bio-mid: #081018;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --bell-copper: #B07030; --bell-dim: #583818;
+    --abyss-blue: #183050; --abyss-dim: #0C1828;
+    --octopus-red: #C04830; --octopus-dim: #602418;
+    --depth-teal: #206068; --space: #040508;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2028;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--space);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(176,112,48,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(192,72,48,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(176,112,48,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px; margin: 0 auto; padding: 1rem 2rem;
+    font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--abyss-dim) 55%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mercury-silver);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+
+  h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--bell-copper);
+    margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver);
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--bell-copper); }
+  em { color: var(--octopus-red); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+
+  a { color: var(--mercury-silver); text-decoration: none; }
+  a:hover { color: #fff; }
+
+  blockquote {
+    border-left: 3px solid var(--abyss-blue); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(4,5,8,0.4); border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  .sources {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-top: 2rem;
+  }
+  .sources h2 { margin-top: 0; }
+  .sources h3 { font-size: 1rem; color: var(--mercury-silver); margin-top: 1.5rem; }
+  .sources li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--bell-copper); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.20 Mercury-Redstone 4</a>
+  <span class="sep">/</span>
+  Track 1a: Deep Research
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.20</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 1a</span>
+    </div>
+    <h1>Deep Research: The Bell That Sank</h1>
+    <p class="subtitle">Mercury-Redstone 4 / Liberty Bell 7 &mdash; Gus Grissom, second American in space</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> July 21, 1961</span>
+      <span><span class="label">Program:</span> Mercury (NASA / McDonnell Aircraft / Space Task Group)</span>
+      <span><span class="label">Crew:</span> Virgil Ivan &ldquo;Gus&rdquo; Grissom (Captain, USAF)</span>
+      <span><span class="label">Dedication:</span> Ernest Hemingway</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>The Quiet Pilot</h2>
+
+    <p>Virgil Ivan Grissom was born on April 3, 1926, in Mitchell, Indiana &mdash; a small town in the limestone belt of southern Indiana, population approximately 3,000, where the primary industries were quarrying and agriculture and where the landscape was flat enough that a boy who wanted to see the horizon could see it without climbing anything. His father, Dennis Grissom, worked for the Baltimore and Ohio Railroad as a signalman. His mother, Cecile, raised four children. Gus was the second. The family was not poor in the way that poverty is dramatic, and not comfortable in the way that comfort is invisible. They were working people in a working town, and the boy grew up understanding that what you got in life was proportional to what you worked for, and that the proportion was not always generous.</p>
+
+    <p>Grissom enlisted in the United States Army Air Forces in 1944, at the age of eighteen. He did not see combat before the war ended. He was discharged, returned to Indiana, and enrolled at <strong>Purdue University</strong> on the GI Bill. He studied mechanical engineering. He was not a brilliant student in the way that brilliance is conspicuous &mdash; he did not publish papers, did not win academic prizes, did not attract the attention of faculty who collect prodigies. He was a competent, disciplined engineering student who learned the material, passed the examinations, and graduated with a bachelor of science degree in February 1950. He married Betty Moore, his high school sweetheart, during his junior year.</p>
+
+    <p>After Purdue, Grissom re-enlisted in the newly independent United States Air Force and earned his pilot wings. In 1951, he was deployed to Korea. He flew <strong>100 combat missions</strong> in the F-86 Sabre &mdash; the swept-wing jet fighter that met the Soviet-built MiG-15 over the Yalu River in the first jet-versus-jet air combat in history. He came home from Korea with 100 combat missions behind him, a decoration record that proved he had been there and done the thing, and no stories that he volunteered to tell. He did not talk about Korea. He did not talk about combat. He did not talk about himself.</p>
+
+    <p>After Korea, Grissom was selected for the <strong>USAF Test Pilot School at Edwards Air Force Base</strong> &mdash; the same school where Chuck Yeager had broken the sound barrier in 1947. Grissom was selected as one of the <strong>Mercury Seven</strong> on April 9, 1959. In the press conference that introduced the seven astronauts to the nation, Grissom was the one who spoke the least. The press found him the least quotable of the seven. The engineers found him the most useful. He understood the machine. He could read a schematic. He could diagnose a system malfunction from its symptoms. He was the Mercury astronaut who worked most naturally in the engineering spaces.</p>
+
+    <p>Robert Gilruth selected Grissom for MR-4 &mdash; the second slot. The mission was substantially identical to Shepard&rsquo;s: a suborbital arc on a Redstone booster, fifteen minutes from launch to splashdown. The differences were in the details: an improved capsule window, an upgraded <strong>explosive hatch mechanism</strong> designed for faster post-landing egress, and a revised set of pilot tasks. The explosive hatch was new. Seventy explosive bolts, fired simultaneously by a detonator actuated by a plunger requiring five pounds of deliberate force. It was an engineering improvement. It solved a real problem. It would create a different problem entirely.</p>
+
+    <hr>
+
+    <h2>The Flight</h2>
+
+    <p>July 21, 1961. Cape Canaveral, Florida. Launch Complex 5. Grissom was awakened at 1:10 AM. He ate breakfast &mdash; steak and eggs. He suited up, was driven to the pad, and was inserted into Liberty Bell 7 at approximately 3:58 AM.</p>
+
+    <p>At <strong>7:20 AM</strong> Eastern Standard Time, the Redstone ignited. <em>&ldquo;Ah, roger, this is Liberty Bell 7. The clock is operating,&rdquo;</em> Grissom reported. His voice was flat, factual, controlled &mdash; a data transmission, not a performance. The Redstone&rsquo;s A-7 engine burned for 142 seconds, accelerating the capsule to <strong>2,303 meters per second</strong>. At engine cutoff, the capsule separated from the booster. Grissom was in space.</p>
+
+    <p>The trajectory was marginally higher than Shepard&rsquo;s &mdash; a peak altitude of <strong>190.3 kilometers</strong> compared to Shepard&rsquo;s 187.5 km. Grissom experienced approximately five minutes and eighteen seconds of weightlessness. He tested the manual attitude control system &mdash; pitch, yaw, roll, each axis responsive. He confirmed Shepard&rsquo;s finding: the Mercury capsule was flyable.</p>
+
+    <p>Then Grissom turned to the new window. He looked through it and reported what he saw: <em>&ldquo;I can see the coast, but I can&rsquo;t identify anything.&rdquo;</em> The filter on the window was too dark. Grissom recommended a lighter filter for future capsules. The engineering feedback was precise, specific, and useful. He did not describe the view poetically. He described the optical performance of a window and recommended a design change. The view was data.</p>
+
+    <p>The retrorockets fired on schedule. Liberty Bell 7 entered the atmosphere. The deceleration built to a maximum of <strong>11.1g</strong>. The drogue parachute deployed. The main parachute deployed. At 7:36 AM, fifteen minutes and thirty-seven seconds after launch, Liberty Bell 7 splashed down in the Atlantic Ocean. The flight was over. It had been nominal. Every system had worked. Every test objective had been met. Everything that followed was not.</p>
+
+    <hr>
+
+    <h2>The Hatch</h2>
+
+    <p>Liberty Bell 7 was floating on the Atlantic swells. Grissom was inside, running through the post-landing checklist. A Marine helicopter from the recovery ship USS Randolph was overhead, its pilot, Lieutenant Jim Lewis, maneuvering to hook the capsule&rsquo;s recovery loop.</p>
+
+    <p>Grissom had armed the explosive hatch detonator &mdash; a required step in the post-landing checklist, to enable emergency egress if the capsule began to sink. Arming the detonator did not fire the hatch. Firing required a deliberate five-pound push on the plunger. Grissom had armed the system. He had not touched the plunger.</p>
+
+    <p>At approximately 7:36 AM &mdash; within minutes of splashdown &mdash; <strong>the hatch blew</strong>.</p>
+
+    <p>The seventy explosive bolts detonated. The hatch flew outward. The Atlantic Ocean poured into Liberty Bell 7 through a nineteen-and-a-half-inch opening. Grissom scrambled out through the hatch and into the ocean. His pressure suit&rsquo;s oxygen inlet valve was open; water began entering the suit. The helicopter pilot saw the hatch blow. He made an immediate decision: hook the capsule first, then pick up Grissom.</p>
+
+    <p>Liberty Bell 7, full of water, weighed approximately <strong>2,200 kilograms</strong> &mdash; roughly 1,000 kilograms more than its dry weight. The helicopter&rsquo;s engine strained. The chip detector light illuminated. Lewis held the lift. The engine temperature climbed. Lewis was going to lose the helicopter. He released the capsule. It dropped back into the ocean, settled, and sank. Liberty Bell 7 descended through <strong>4,900 meters</strong> of Atlantic water and came to rest on the ocean floor. The capsule was gone.</p>
+
+    <hr>
+
+    <h2>The Drowning</h2>
+
+    <p>Grissom was in the Atlantic Ocean. His pressure suit was filling with water through the open oxygen inlet valve. The buoyancy of the suit decreased as the water displaced the trapped air. He swam. He kicked. He tried to stay at the surface. The suit weighed him down. The waves washed over his helmet. He swallowed seawater.</p>
+
+    <p>Grissom was in the water for approximately <strong>four to five minutes</strong>. He was exhausted. His suit was waterlogged. He was fighting to keep his head above the surface with a suit that was actively trying to pull him under. The second helicopter lowered a horse collar sling. Grissom grabbed it. He was hoisted out of the ocean and brought to the Randolph. He was alive.</p>
+
+    <p>The capsule was at the bottom of the Atlantic. The film from the window observation was gone. The flight recorder data was gone. Fifteen minutes of flight data, seven years of capsule development &mdash; all of it sitting on the ocean floor in 4,900 meters of water.</p>
+
+    <hr>
+
+    <h2>The Controversy</h2>
+
+    <p>The question of whether Grissom deliberately blew the hatch became one of the most persistent controversies in the history of the American space program. NASA&rsquo;s official investigation concluded that the hatch had fired due to an internal malfunction. The critical physical evidence was the <strong>absence of bruising</strong>. The explosive hatch plunger required five pounds of deliberate force, and its actuation produced a sharp recoil. Wally Schirra, who would fly Mercury-Atlas 8 with the same explosive hatch, deliberately blew his hatch after his flight and sustained a visible cut and bruise on his hand. <strong>Grissom&rsquo;s hand showed no bruise, no cut, no abrasion.</strong> He had not hit the plunger.</p>
+
+    <p>The engineering evidence was more ambiguous. The detonator mechanism was at the bottom of the ocean, unavailable for examination. The engineers could not rule out a mechanical failure because they could not examine the mechanism. They concluded that the hatch had malfunctioned and moved on.</p>
+
+    <p>The public did not move on. Tom Wolfe, in <em>&ldquo;The Right Stuff&rdquo;</em> (1979), wrote the hatch incident with a literary ambiguity that left the question open. Wolfe was a journalist, not an engineer, and his interest was in the psychological drama of the astronaut corps, not in the failure modes of explosive bolts. His treatment was brilliant literature and lousy engineering analysis.</p>
+
+    <p>The controversy was deeply unfair to Grissom. He was a combat veteran who had flown 100 missions over Korea without a single incident of panic or loss of control. He said he did not blow the hatch. The physical evidence supported him. The engineering evidence was consistent with a mechanical malfunction. But the suspicion persisted, carried by the press, by the public, and by the cultural narrative that found a flawed hero more interesting than a blameless pilot with a malfunctioning detonator.</p>
+
+    <hr>
+
+    <h2>Liberty Bell 7</h2>
+
+    <p>Grissom named his capsule Liberty Bell 7. He painted a <strong>white crack</strong> on the capsule&rsquo;s exterior, replicating the famous crack in the Liberty Bell in Philadelphia. The crack was a piece of visual wit &mdash; a deliberate, playful reference to one of the most recognizable symbols in American history.</p>
+
+    <p>The crack became darkly prophetic. After the hatch blew and the capsule sank, the name took on a resonance that Grissom could not have intended. The cracked bell that sank. The symbol of American liberty that went to the bottom of the ocean. The joke that turned into a prophecy.</p>
+
+    <hr>
+
+    <h2>The Recovery: 38 Years Later</h2>
+
+    <p>Liberty Bell 7 sat on the ocean floor for <strong>thirty-eight years</strong>. In the mid-1990s, <strong>Curt Newport</strong> &mdash; an engineer and underwater recovery specialist &mdash; began planning an expedition to locate and raise the capsule. The technical challenges were formidable: 4,900 meters depth, approximately 490 atmospheres of pressure, a small object on a featureless abyssal plain.</p>
+
+    <p>Newport&rsquo;s first expedition, in 1992, failed to locate the capsule. His second expedition, in May 1999, succeeded. On <strong>July 20, 1999</strong> &mdash; the thirtieth anniversary of Apollo 11, one day before the thirty-eighth anniversary of the MR-4 flight &mdash; the ROV descended to the capsule. The camera images showed Liberty Bell 7 sitting upright on the ocean floor, partially buried in sediment, the painted crack still faintly visible on its corroded hull.</p>
+
+    <p>Liberty Bell 7 was transported to the <strong>Kansas Cosmosphere and Space Center</strong> in Hutchinson, Kansas, where it underwent conservation treatment and is now on permanent display. The crack that Grissom painted is gone &mdash; dissolved by 38 years of salt water. But the capsule is there. It came home.</p>
+
+    <hr>
+
+    <h2>The Dark Humor</h2>
+
+    <p>Grissom&rsquo;s next spacecraft was Gemini 3. He named it <strong>&ldquo;Molly Brown&rdquo;</strong> &mdash; a reference to <em>&ldquo;The Unsinkable Molly Brown,&rdquo;</em> the Broadway musical about Margaret Brown, a Titanic survivor. The name was Grissom&rsquo;s dark humor at its most precise: his last capsule had sunk, so his next capsule was named after a woman who refused to sink.</p>
+
+    <p>NASA officials were not amused. They asked Grissom to choose something more dignified. Grissom offered an alternative: <strong>&ldquo;Titanic.&rdquo;</strong> NASA accepted &ldquo;Molly Brown.&rdquo;</p>
+
+    <p>Gemini 3 flew a successful three-orbit mission. It did not sink.</p>
+
+    <hr>
+
+    <h2>Apollo 1</h2>
+
+    <p>On January 27, 1967, Gus Grissom, Ed White, and Roger Chaffee were inside Apollo spacecraft 012 on Pad 34 at Cape Canaveral, conducting a &ldquo;plugs-out&rdquo; test. The cabin was pressurized with <strong>100% oxygen at 16.7 psi</strong>. At 6:31 PM, a spark ignited in the pure oxygen atmosphere. Materials that are ordinarily fire-resistant become explosively flammable in 100% oxygen. The temperature exceeded 1,400 degrees Fahrenheit within seconds.</p>
+
+    <p>Grissom, White, and Chaffee fought to open the hatch. The Apollo hatch was not explosive &mdash; it was a manually operated, inward-opening hatch that required approximately 90 seconds to open under nominal conditions. Under the conditions of the fire, the hatch could not be opened. The crew lost consciousness from smoke inhalation within approximately 30 seconds.</p>
+
+    <p>The irony was savage. <strong>Grissom had nearly drowned because a hatch opened too easily. He died because a hatch would not open at all.</strong> Liberty Bell 7&rsquo;s explosive hatch had blown when it should not have. Apollo 1&rsquo;s mechanical hatch stayed sealed when it had to open. The two hatch failures bookended Grissom&rsquo;s career. The engineer who had questioned the Apollo hatch design during development died because the hatch he had criticized was the hatch that killed him.</p>
+
+    <p>Gus Grissom was forty years old. He is buried at Arlington National Cemetery, Section 3, Lot 2503-A.</p>
+
+    <hr>
+
+    <h2>The Hemingway Resonance</h2>
+
+    <p>Ernest Miller Hemingway was born on <strong>July 21, 1899</strong>, in Oak Park, Illinois &mdash; the same calendar date, sixty-two years earlier, that Gus Grissom launched from Cape Canaveral. Hemingway died on July 2, 1961 &mdash; nineteen days before Grissom&rsquo;s flight.</p>
+
+    <p>The resonance is structural. It concerns the relationship between a man and the thing he loses, and the way the loss defines him more completely than the possession ever did. Hemingway&rsquo;s <em>&ldquo;The Old Man and the Sea&rdquo;</em> is the story of Santiago, who catches the greatest marlin of his life and then loses it to sharks on the long sail home. Santiago fights them with his harpoon, his knife, an oar, the tiller. He arrives at the dock with a skeleton lashed to his skiff. The tourists look at the skeleton and ask the waiter what it is. They do not understand what they are looking at.</p>
+
+    <p>Grissom caught his marlin. He flew Liberty Bell 7 &mdash; a perfect flight, every system nominal. And then the ocean took it. The tourists &mdash; the press, the public, the readers of Tom Wolfe &mdash; looked at the aftermath and asked the wrong question.</p>
+
+    <p><em>&ldquo;A man can be destroyed but not defeated.&rdquo;</em> Grissom lost his capsule but flew again. He named his next spacecraft after an unsinkable woman and flew it to orbit. He was selected to command the first Apollo mission. He was not defeated by the hatch, by the ocean, by the suspicion. He was destroyed &mdash; killed in a fire on a launch pad, at the age of forty &mdash; but he was not defeated.</p>
+
+    <p><em>&ldquo;Courage is grace under pressure.&rdquo;</em> Grissom, in the water with his suit filling, kicking to stay afloat &mdash; Grissom in that moment was grace under pressure in its most literal form. Hemingway described the quality. Grissom demonstrated it. The writer died nineteen days before the pilot flew.</p>
+
+    <hr>
+
+    <div class="sources">
+      <h2>Sources</h2>
+
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Swenson, Loyd S. Jr.; Grimwood, James M.; and Alexander, Charles C. &ldquo;This New Ocean: A History of Project Mercury.&rdquo;</strong> NASA Special Publication SP-4201, 1966. The official NASA history of Project Mercury, covering the MR-4 mission.</li>
+        <li><strong>&ldquo;Results of the Second United States Manned Suborbital Space Flight, July 21, 1961.&rdquo;</strong> NASA Manned Spacecraft Center, 1961. The official MR-4 post-flight report.</li>
+        <li><strong>Grimwood, James M. &ldquo;Project Mercury: A Chronology.&rdquo;</strong> NASA Special Publication SP-4001, 1963. Day-by-day documentation of MR-4 mission events.</li>
+      </ul>
+
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Grissom, Virgil I. &ldquo;Gemini! A Personal Account of Man&rsquo;s Venture into Space.&rdquo;</strong> Macmillan, 1968. Grissom&rsquo;s own account of his Mercury and Gemini flights, including the hatch incident.</li>
+        <li><strong>Wolfe, Tom. &ldquo;The Right Stuff.&rdquo;</strong> Farrar, Straus and Giroux, 1979. Literary treatment of the Mercury program with narrative ambiguity on the hatch controversy.</li>
+        <li><strong>Newport, Curt. &ldquo;Lost Spacecraft: The Search for Liberty Bell 7.&rdquo;</strong> Apogee Books, 2002. The definitive account of the 1999 recovery expedition.</li>
+        <li><strong>Leopold, George. &ldquo;Calculated Risk: The Supersonic Life and Times of Gus Grissom.&rdquo;</strong> Purdue University Press, 2016. Comprehensive biography of Grissom.</li>
+        <li><strong>Shepard, Alan; and Slayton, Deke. &ldquo;Moon Shot: The Inside Story of America&rsquo;s Race to the Moon.&rdquo;</strong> Turner Publishing, 1994.</li>
+        <li><strong>Burgess, Colin; and Doolan, Kate. &ldquo;Fallen Astronauts.&rdquo;</strong> University of Nebraska Press, 2003. Detailed account of the Apollo 1 fire.</li>
+        <li><strong>Siddiqui, Asif A. &ldquo;Challenge to Apollo.&rdquo;</strong> NASA SP-2000-4408, 2000. Context for the competitive pressure driving Mercury&rsquo;s schedule.</li>
+      </ul>
+
+      <h3>Dedication Sources</h3>
+      <ul>
+        <li><strong>Hemingway, Ernest. &ldquo;The Old Man and the Sea.&rdquo;</strong> Charles Scribner&rsquo;s Sons, 1952.</li>
+        <li><strong>Hemingway, Ernest. &ldquo;A Farewell to Arms.&rdquo;</strong> Charles Scribner&rsquo;s Sons, 1929.</li>
+        <li><strong>Baker, Carlos. &ldquo;Ernest Hemingway: A Life Story.&rdquo;</strong> Charles Scribner&rsquo;s Sons, 1969.</li>
+        <li><strong>Hemingway, Ernest. &ldquo;Death in the Afternoon.&rdquo;</strong> Charles Scribner&rsquo;s Sons, 1932. Contains the definition of courage as &ldquo;grace under pressure.&rdquo;</li>
+      </ul>
+
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>NASA NSSDC Master Catalog &mdash; Mercury-Redstone 4 (MR-4 / Liberty Bell 7).</strong> Mission ID: NSSDCA 1961-019A.</li>
+        <li><strong>JPL HORIZONS System</strong> &mdash; Trajectory verification for the MR-4 ballistic arc.</li>
+        <li><strong>Jonathan McDowell&rsquo;s Launch Vehicle Database (planet4589.org).</strong></li>
+        <li><strong>Kansas Cosmosphere and Space Center &mdash; Liberty Bell 7 Conservation Records.</strong></li>
+        <li><strong>NOAA NCEI &mdash; Atlantic Ocean Bathymetric Data</strong> for the MR-4 splashdown area.</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">&larr; v1.20 Overview</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="organism.html">Track 2: Organism &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.20 Track 1a: Deep Research &mdash; Mercury-Redstone 4 / Liberty Bell 7 &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

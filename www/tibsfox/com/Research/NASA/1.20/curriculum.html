@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge — MR-4 Liberty Bell 7 | v1.20 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040608; --bio-mid: #081018;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --bell-copper: #B07030; --bell-dim: #583818;
+    --abyss-blue: #183050; --abyss-dim: #0C1828;
+    --octopus-red: #C04830; --octopus-dim: #602418;
+    --depth-teal: #206068; --space: #040508;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2028;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(176,112,48,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(192,72,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(176,112,48,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--abyss-dim) 55%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--bell-copper); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--bell-copper); } em { color: var(--octopus-red); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  pre { background: rgba(4,5,8,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin: 1rem 0 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+  blockquote { border-left: 3px solid var(--abyss-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(4,5,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .dept-card { background: rgba(32,96,104,0.06); border: 1px solid var(--depth-teal); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .dept-card h3 { margin-top: 0; color: var(--bell-copper); }
+  .dept-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .try-card { background: rgba(176,112,48,0.04); border: 1px solid var(--bell-dim); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .try-card h3 { margin-top: 0; }
+  .nav-card { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: var(--bell-copper); } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.20 Mercury-Redstone 4</a><span class="sep">/</span>
+  Track 4: Curriculum
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.20</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Failure Analysis, Marine Biology, Literature, Aerospace Engineering, Ethics, Psychology</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Failure Analysis, Marine Biology, Literature</span>
+      <span><span class="label">Secondary:</span> Aerospace Engineering, Ethics, Psychology</span>
+      <span><span class="label">Organism:</span> <em>Enteroctopus dofleini</em></span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Department Deposits</h2>
+
+    <div class="dept-card">
+      <h3>Failure Analysis (Primary)</h3>
+      <p class="dept-meta"><strong>Wing:</strong> Explosive Bolt Investigation, Fault Tree Analysis, Root Cause vs Contributing Factors, Evidence-Based Exoneration</p>
+
+      <p>Failure analysis is the discipline of working backward from an observed failure to its root cause. It is one of the most important disciplines in engineering because it prevents recurrence. If you correctly identify why something broke, you can prevent it from breaking again. If you incorrectly identify the cause &mdash; or assign blame to a convenient scapegoat &mdash; the actual failure mechanism remains in the system.</p>
+
+      <p>The Liberty Bell 7 hatch failure is a case study in how NOT to conduct failure analysis, followed by how to do it correctly. The initial NASA response leaned toward pilot error &mdash; the simplest explanation, the one that required no redesign. Fault tree analysis (FTA) is the systematic method for evaluating failure mechanisms, working top-down from the observed failure.</p>
+
+      <p><strong>The fault tree for the hatch failure:</strong></p>
+      <ul>
+        <li><strong>Branch 1 &mdash; Mechanical (pilot struck plunger):</strong> No bruising on hands, consistent denial. Assessment: physically possible but unsupported.</li>
+        <li><strong>Branch 2 &mdash; Thermal activation:</strong> Capsule in direct sunlight, PETN sensitivity is temperature-dependent. Assessment: plausible mechanism.</li>
+        <li><strong>Branch 3 &mdash; Electrical activation:</strong> Salt water intrusion into wiring, stray currents, relay malfunction. Assessment: plausible mechanism.</li>
+        <li><strong>Branch 4 &mdash; Vibrational activation:</strong> Wave action transmitting energy to the plunger. Assessment: possible contributing factor.</li>
+      </ul>
+
+      <p>The institutional lesson: fault tree analysis requires that all branches be evaluated objectively, without weighting toward the explanation most convenient for the organization. NASA eventually accepted environmental activation and modified the hatch system &mdash; but the damage to Grissom&rsquo;s reputation was done.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Marine Biology (Primary)</h3>
+      <p class="dept-meta"><strong>Wing:</strong> Giant Pacific Octopus, Cephalopod Intelligence, Distributed Neural Architecture, PNW Marine Ecology</p>
+
+      <p><em>Enteroctopus dofleini</em> possesses approximately <strong>500 million neurons</strong>, with two-thirds (~330 million) located in the arms. Each arm contains approximately 40 million neurons organized into semi-autonomous ganglia. This is distributed intelligence in the most literal sense: the arms can taste, touch, and manipulate objects without central brain involvement. A severed arm continues to respond to stimuli for several minutes.</p>
+
+      <p>The octopus&rsquo;s problem-solving ability includes opening screw-top jars, navigating mazes, distinguishing between human individuals, and escaping from secure tanks. The species lives 3&ndash;5 years. Females die after a single reproductive event, brooding eggs for 6&ndash;9 months without feeding. The intelligence is not cumulative across generations &mdash; each octopus reinvents problem-solving from scratch, mirroring the Mercury program&rsquo;s approach where each mission independently qualified the system.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Literature (Primary)</h3>
+      <p class="dept-meta"><strong>Wing:</strong> Ernest Hemingway, &ldquo;The Old Man and the Sea,&rdquo; Santiago and the Marlin, Grace Under Pressure</p>
+
+      <p>Hemingway was born on <strong>July 21, 1899</strong> &mdash; exactly 62 years before Grissom&rsquo;s launch. He died July 2, 1961, nineteen days before the mission. The parallel to Grissom&rsquo;s mission is structural: Santiago caught the marlin (Grissom flew the mission). Forces beyond Santiago&rsquo;s control destroyed what he won (forces beyond Grissom&rsquo;s control destroyed what he won). Both lost the prize but survived. And in both cases, the world judged the outcome rather than the effort.</p>
+
+      <p><em>&ldquo;Courage is grace under pressure&rdquo;</em> describes Grissom&rsquo;s behavior after the hatch blew: he did not panic, did not flail, did not freeze. He unbuckled, egressed, inflated his vest, and treaded water for five minutes in a suit that weighed 10 kg more than it should have. Grace under pressure. The phrase could have been written for that morning.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Ethics (Secondary)</h3>
+      <p class="dept-meta"><strong>Wing:</strong> Operator Blame vs System Failure, Institutional Narrative, Whistleblower Protection</p>
+
+      <p>The institutional treatment of Grissom is one of the clearest cases of unjust operator blame in aerospace history. The physical evidence supported him. The redesign of the system for subsequent flights was itself an admission that the system was flawed. Yet the implication of pilot error persisted because it was organizationally convenient.</p>
+
+      <p>This pattern recurs: <strong>Tenerife (1977)</strong> &mdash; captain blamed, systemic factors ignored. <strong>Therac-25 (1985&ndash;87)</strong> &mdash; &ldquo;operator error&rdquo; hid a software race condition. The ethical principle: the burden of failure belongs to the system designer, not the operator, when the system allows a failure mode the operator could not reasonably have prevented.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Psychology (Secondary)</h3>
+      <p class="dept-meta"><strong>Wing:</strong> Decision-Making Under Drowning Stress, Survival Psychology, Cognitive Function Under Threat</p>
+
+      <p>Grissom&rsquo;s response sequence after the hatch blew: <strong>Recognition</strong> (1&ndash;2 seconds) &rarr; <strong>Decision</strong> (get out) &rarr; <strong>Execution</strong> (harness release, egress) &rarr; <strong>Adaptation</strong> (vest inflation, treading water) &rarr; <strong>Survival</strong> (5 minutes until rescue). This is a pure adaptive response. His heart rate was elevated, cortisol levels presumably high, physiological stress extreme &mdash; yet his sequence of decisions was coherent, correctly prioritized, and executed without hesitation.</p>
+
+      <p>Could Grissom&rsquo;s composure under drowning stress be reconciled with the hypothesis that he had panicked? No. A panicked astronaut thrashes, inhales water, and requires immediate rescue. Grissom&rsquo;s psychology was consistent with an engineer responding to an unexpected emergency.</p>
+    </div>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <div class="try-card">
+      <h3>TRY 1: Fault Tree Analysis Workshop</h3>
+      <p><strong>Duration:</strong> 2&ndash;3 hours &nbsp;|&nbsp; <strong>Difficulty:</strong> Beginner-Intermediate &nbsp;|&nbsp; <strong>Cost:</strong> $0</p>
+      <p>Build the fault tree for the Liberty Bell 7 hatch failure from scratch. Define the top event, decompose into candidate causes, assign evidence to each, draw the tree with AND/OR logic gates, assign probability estimates, and reach an evidence-based conclusion. Compare your conclusion to NASA&rsquo;s redesign decision &mdash; if the pilot was at fault, why redesign the hardware?</p>
+    </div>
+
+    <div class="try-card">
+      <h3>TRY 2: Giant Pacific Octopus Observation</h3>
+      <p><strong>Duration:</strong> 2&ndash;4 hours (aquarium) or 1 hour (desktop) &nbsp;|&nbsp; <strong>Difficulty:</strong> Beginner &nbsp;|&nbsp; <strong>Cost:</strong> $0&ndash;30</p>
+      <p>Visit the <strong>Seattle Aquarium</strong>, Oregon Coast Aquarium, Vancouver Aquarium, or Monterey Bay Aquarium. Observe arm independence, color changes, chromatophore activity, and movement patterns for 15 minutes. Calculate depth pressures: octopus at 1,500 m (~150 atm) vs Liberty Bell 7 at 4,900 m (~493 atm). The octopus survives by accommodation; the capsule was damaged by resistance.</p>
+    </div>
+
+    <hr>
+
+    <h2>DIY Projects</h2>
+
+    <div class="try-card">
+      <h3>DIY 1: Underwater Pressure Sensor (Capsule Depth Indicator)</h3>
+      <p><strong>Duration:</strong> 4&ndash;6 hours &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate &nbsp;|&nbsp; <strong>Cost:</strong> $25&ndash;40</p>
+      <p>Build a depth-indicating pressure sensor using a <strong>BMP280</strong> barometric sensor, <strong>Arduino Nano</strong>, OLED display, and a syringe-and-tubing interface. Push the syringe to increase pressure; the display shows equivalent ocean depth in meters using P = &rho;gd. Demonstrates that your maximum syringe pressure (~10 m) is a tiny fraction of Liberty Bell 7&rsquo;s resting depth (4,900 m).</p>
+    </div>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <h3>FoxFiber</h3>
+    <p>The hatch failure was a single-point-of-failure in the recovery chain. FoxFiber&rsquo;s network architecture must avoid this pattern &mdash; every critical path needs redundancy or graceful degradation. The hatch had neither: no redundant sealing, no way to limit flooding once open.</p>
+
+    <h3>FoxCompute</h3>
+    <p>The octopus&rsquo;s distributed neural architecture &mdash; 330M neurons in the arms, 170M in the brain &mdash; is the biological template for distributed processing. Each compute node should be capable of semi-autonomous operation, continuing its task even if disconnected from the coordinator.</p>
+
+    <h3>SolarFox</h3>
+    <p>The hydrostatic pressure analysis (493 atm at 4,900 m) maps directly to structural analysis for submarine power cable routing. The capsule&rsquo;s failure under pressure is a cautionary example: design for the ACTUAL pressure at deployment depth.</p>
+
+    <h3>Fox CapComm</h3>
+    <p>Grissom&rsquo;s autonomous egress decision demonstrates the value of operator autonomy in emergencies. The trust system should grant agents emergency autonomy &mdash; the ability to deviate from the plan when the plan is no longer viable &mdash; with post-hoc review rather than pre-authorization.</p>
+
+    <hr>
+
+    <blockquote>The Giant Pacific Octopus does not fight the ocean. It becomes the water. Its body flows through crevices, changes color in 200 milliseconds, squeezes through any opening larger than its beak. The capsule fought the ocean and the ocean won in 9 seconds. Grissom did not fight the ocean. He swam. He adapted, like the octopus, to the situation as it actually was rather than as it was supposed to be. Hemingway, born this day 62 years earlier, wrote that courage is grace under pressure. He meant it metaphorically. Grissom experienced it literally.</blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="mathematics.html">&larr; Track 3: Mathematics</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">v1.20 Overview</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="simulation.html">Track 5: Simulation &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.20 Track 4: Curriculum &mdash; Mercury-Redstone 4 / Liberty Bell 7 &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

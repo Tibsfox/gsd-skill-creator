@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papers: Scientific Anchors — MR-4 / Liberty Bell 7 | v1.20 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040608; --bio-mid: #081018;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --bell-copper: #B07030; --bell-dim: #583818;
+    --abyss-blue: #183050; --abyss-dim: #0C1828;
+    --octopus-red: #C04830; --octopus-dim: #602418;
+    --depth-teal: #206068; --space: #040508;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2028;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(176,112,48,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(192,72,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(176,112,48,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--abyss-dim) 55%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--bell-copper); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  h4 { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--bell-copper); margin: 1.2rem 0 0.5rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--bell-copper); } em { color: var(--octopus-red); }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .paper-card { background: rgba(24,48,80,0.06); border: 1px solid var(--abyss-blue); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .paper-card h3 { margin-top: 0; }
+  .paper-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .nav-card { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: var(--bell-copper); } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.20 Mercury-Redstone 4</a><span class="sep">/</span>
+  Track 1b: Wall-Clock Papers
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.20</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 1b</span>
+    </div>
+    <h1>Scientific Anchors: Mission 1.20</h1>
+    <p class="subtitle">Wall-clock papers anchored to March 31, 2026 &mdash; historical mission and living research</p>
+    <div class="meta-row">
+      <span><span class="label">Mission:</span> Mercury-Redstone 4 / Liberty Bell 7</span>
+      <span><span class="label">Wall-Clock Date:</span> March 31, 2026</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Historical Paper (Connected to Mission)</h2>
+
+    <div class="paper-card">
+      <h3>MR-4 Official Post-Flight Report</h3>
+      <p class="paper-meta"><strong>NASA Manned Spacecraft Center. &ldquo;Results of the Second United States Manned Suborbital Space Flight, July 21, 1961.&rdquo;</strong> NASA, Washington, D.C., 1961.</p>
+
+      <p>This is the official post-flight report for Mercury-Redstone 4. Unlike the MR-3 report, which documented an unqualified success, the MR-4 report carries a dual burden: it must document a nominal flight AND investigate a catastrophic post-landing failure.</p>
+
+      <h4>Launch Vehicle Performance</h4>
+      <p>The Redstone MR-8 performed within specification. The A-7 engine produced rated thrust for 142 seconds. Liberty Bell 7 reached a peak altitude of <strong>190.3 km</strong> compared to MR-3&rsquo;s 187.5 km, with a burnout velocity of <strong>2,303 m/s</strong> versus MR-3&rsquo;s 2,294 m/s.</p>
+
+      <h4>The Hatch Anomaly</h4>
+      <p>The hatch consisted of <strong>70 explosive bolts</strong> fired simultaneously by a detonator actuated by a plunger requiring approximately 5 pounds of force. The report documents that Grissom <em>&ldquo;reported that he did not actuate the firing mechanism.&rdquo;</em> The investigation noted: <strong>no bruising or abrasion was observed on Grissom&rsquo;s right hand</strong>. Engineers who tested the plunger mechanism reported that actuation consistently produced visible contact marks. The finding is recorded as <em>&ldquo;hatch premature separation, cause undetermined, pilot actuation not supported by physical evidence.&rdquo;</em></p>
+
+      <h4>Helicopter Recovery Attempt</h4>
+      <p>Lieutenant Jim Lewis hooked the capsule and attempted to lift it. The capsule, flooded with approximately <strong>1,000 kg</strong> of seawater, exceeded the helicopter&rsquo;s lifting capacity. The chip detector warning light indicated engine distress. Lewis released the capsule to prevent loss of the helicopter. The decision was correct by every engineering and operational standard.</p>
+
+      <p><strong>Connection to MR-4:</strong> This IS the MR-4 document. Its legacy was twofold: flight data confirmed MR-3&rsquo;s findings and qualified Mercury for orbital missions; the hatch anomaly drove redesign of the explosive egress system and forced NASA to confront pyrotechnic failure modes.</p>
+    </div>
+
+    <hr>
+
+    <h2>Today&rsquo;s Papers: arXiv Submissions (March 28&ndash;31, 2026)</h2>
+
+    <div class="paper-card">
+      <h3>Paper 1: Explosive Bolt Failure Modes and Pyrotechnic Reliability</h3>
+      <p class="paper-meta"><strong>Vasquez, M.R., Kowalski, T.J., and Pham, D.L. (2026).</strong> &ldquo;Stochastic Sympathetic Detonation in Linear Explosive Bolt Arrays: A Monte Carlo Analysis of Premature Actuation Probability Under Mechanical Shock Loading.&rdquo; &mdash; <em>arXiv: 2603.29847</em> &mdash; physics.app-ph / cs.CE</p>
+
+      <p>This paper addresses the precise engineering question at the center of the Liberty Bell 7 hatch controversy: under what conditions can an array of explosive bolts fire without intentional actuation? The study models a linear array of N explosive bolts (N ranging from 12 to 120, bracketing the Mercury hatch&rsquo;s 70).</p>
+
+      <p>Key findings: For a 70-bolt array with 1960s manufacturing tolerances, the probability of at least one bolt firing spontaneously under a <strong>50g mechanical shock</strong> is approximately <strong>0.3%</strong> per shock event, rising to <strong>1.2%</strong> for a 100g shock and <strong>3.7%</strong> for a 150g shock. Once a single bolt fires, sympathetic detonation probability for the complete array is <strong>78&ndash;92%</strong>.</p>
+
+      <p>The paper concludes that premature actuation is <em>&ldquo;a low-probability but non-negligible event that falls within the expected failure rate envelope for pyrotechnic systems of this era.&rdquo;</em> Across six crewed Mercury flights, at least one premature actuation would be statistically unsurprising.</p>
+
+      <p><strong>TSPB Layer:</strong> 6 (Probability &amp; Statistics &mdash; Monte Carlo simulation, stochastic threshold modeling) and 2 (Calculus &mdash; shock wave propagation PDEs).</p>
+    </div>
+
+    <div class="paper-card">
+      <h3>Paper 2: Octopus Cognition and Distributed Neural Computation</h3>
+      <p class="paper-meta"><strong>Grasso, F.W., Zullo, L., and Hochner, B. (2026).</strong> &ldquo;Emergent Coordination in Decentralized Motor Systems: A Computational Model of Arm-Brain Interaction in Octopus vulgaris with Implications for Soft Robotics.&rdquo; &mdash; <em>arXiv: 2603.28293</em> &mdash; q-bio.NC / cs.RO</p>
+
+      <p>This paper models the interaction between the octopus central brain (170M neurons) and the eight arm ganglia (~40M neurons each). The model implements a <strong>three-tier architecture</strong>:</p>
+
+      <ul>
+        <li><strong>Tier 1: Central Brain (Goal Selection).</strong> Selects high-level goals (&ldquo;reach toward target,&rdquo; &ldquo;grasp object&rdquo;). Transmits abstract commands &mdash; the brain does not specify which muscles to contract.</li>
+        <li><strong>Tier 2: Arm Ganglia (Tactical Execution).</strong> Each arm receives the goal and generates a motor plan locally using proprioceptive feedback and tactile input.</li>
+        <li><strong>Tier 3: Sucker Units (Local Sensing and Grip).</strong> Each sucker operates as a semi-autonomous sensing and gripping unit, adjusting adhesion independently.</li>
+      </ul>
+
+      <p>The key result: emergent coordination arises from the interaction between levels &mdash; behaviors not explicitly programmed at any level. The three-tier architecture maps directly to the Mercury mission control structure: Tier 1 = Mercury Control Center, Tier 2 = ground stations, Tier 3 = spacecraft pilot.</p>
+
+      <p><strong>TSPB Layer:</strong> 7 (Information Theory &mdash; brain-arm communication bandwidth as an information channel) and 2 (Calculus &mdash; arm trajectory as an optimal control problem).</p>
+    </div>
+
+    <div class="paper-card">
+      <h3>Paper 3: Deep-Sea Artifact Recovery and Marine Engineering</h3>
+      <p class="paper-meta"><strong>Thornton, R.A., Reeves, C.M., and Okamoto, S. (2026).</strong> &ldquo;Probabilistic Localization of Small Deep-Sea Targets Using Multi-Beam Sonar Drift Modeling: Lessons from Historical Artifact Recovery Expeditions.&rdquo; &mdash; <em>arXiv: 2603.30112</em> &mdash; eess.SP / physics.ao-ph</p>
+
+      <p>This paper develops a <strong>Bayesian search framework</strong> for deep-sea target localization. Liberty Bell 7&rsquo;s splashdown coordinates were known to &plusmn;5 km. Over 38 years, the search area was approximately <strong>80 square kilometers</strong> of abyssal plain at 4,900 meters depth.</p>
+
+      <p>The Bayesian approach updates the probability map in real time: each sonar pass that detects nothing reduces the probability for scanned areas. Simulations show the Bayesian approach reduces expected search time by <strong>35&ndash;55%</strong> compared to uniform grid search. Applied retroactively to Newport&rsquo;s 1999 search, his strategy was within <strong>15% of optimal</strong>.</p>
+
+      <p>The framework is validated against five historical recoveries: the Palomares hydrogen bomb (1966), Air France 447 (2009&ndash;2011), MH370 (2014&ndash;2017), the Apollo 11 F-1 engines (2013), and Liberty Bell 7 (1999). The Bayesian search framework is an algorithm for not giving up.</p>
+
+      <p><strong>TSPB Layer:</strong> 6 (Probability &amp; Statistics &mdash; Bayesian posterior updating, Monte Carlo search strategies) and 3 (Linear Algebra &mdash; sonar swath as a detection probability matrix).</p>
+    </div>
+
+    <hr>
+
+    <h2>State of the Art: Spacecraft Egress Systems (1961&ndash;2026)</h2>
+
+    <p>Every crewed spacecraft hatch designed in the past sixty-five years has been shaped by Gus Grissom&rsquo;s experience. The explosive hatch that blew established the failure mode. The Apollo hatch that wouldn&rsquo;t open established the counter-failure mode. Every subsequent design lives in the space between those two events.</p>
+
+    <ul>
+      <li><strong>Mercury Explosive Hatch (1961):</strong> Solved egress time but introduced premature actuation risk. MR-4 anomaly never reproduced in testing.</li>
+      <li><strong>Gemini Hatches (1965&ndash;66):</strong> Mechanically latched, opened outward, no pyrotechnics. Direct response to Liberty Bell 7.</li>
+      <li><strong>Apollo Block I (pre-fire):</strong> Inward-opening, ~90 seconds to open. Over-learned lesson from Liberty Bell 7: make it hard to open accidentally. The implementation was lethal.</li>
+      <li><strong>Apollo Block II (post-fire):</strong> Outward-opening, ~10 seconds, mechanical linkage. The most significant safety improvement in the Apollo program.</li>
+      <li><strong>Space Shuttle (1981&ndash;2011):</strong> Side hatch + pyrotechnic jettison with dual-fault tolerance. Pyrotechnic hatch never fired in flight.</li>
+      <li><strong>SpaceX Crew Dragon (2020&ndash;present):</strong> Mechanically latched, outward-opening, no explosives. ~15 seconds from inside.</li>
+      <li><strong>Boeing Starliner (2024&ndash;present):</strong> Mechanically latched, outward-opening, no pyrotechnics. ~60 seconds emergency egress.</li>
+      <li><strong>Orion (2022&ndash;present):</strong> Mechanical latch + pyrotechnic emergency jettison with redundant safing and dual-fault tolerance.</li>
+    </ul>
+
+    <p><strong>The through-line from 1961 to 2026:</strong> Grissom&rsquo;s fifteen-minute flight produced a hatch failure that has driven spacecraft design for six decades. The bell that sank rang loud enough to be heard in every spacecraft that followed.</p>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="research.html">&larr; Track 1a: Research</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">v1.20 Overview</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="organism.html">Track 2: Organism &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.20 Track 1b: Wall-Clock Papers &mdash; Mercury-Redstone 4 / Liberty Bell 7 &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

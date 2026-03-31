@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Arts: Build, Sink, Recover, Create | v1.20 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040608; --bio-mid: #081018;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --bell-copper: #B07030; --bell-dim: #583818;
+    --abyss-blue: #183050; --abyss-dim: #0C1828;
+    --octopus-red: #C04830; --octopus-dim: #602418;
+    --depth-teal: #206068; --space: #040508;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2028;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(176,112,48,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(192,72,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(176,112,48,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--abyss-dim) 55%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--bell-copper); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--bell-copper); } em { color: var(--octopus-red); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  pre { background: rgba(4,5,8,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin: 1rem 0 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+  blockquote { border-left: 3px solid var(--abyss-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(4,5,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .sim-card { background: rgba(24,48,80,0.06); border: 1px solid var(--abyss-blue); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .sim-card h3 { margin-top: 0; color: var(--bell-copper); }
+  .sim-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .art-card { background: rgba(192,72,48,0.04); border: 1px solid var(--octopus-dim); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .art-card h3 { margin-top: 0; color: var(--octopus-red); }
+  .nav-card { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: var(--bell-copper); } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.20 Mercury-Redstone 4</a><span class="sep">/</span>
+  Track 5: Simulation &amp; Arts
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.20</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts</h1>
+    <p class="subtitle">Build, Sink, Recover, Create &mdash; what to build, train, visualize, and compose</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti, 60GB RAM, i7-6700K</span>
+      <span><span class="label">Organism:</span> <em>Enteroctopus dofleini</em></span>
+      <span><span class="label">Bird:</span> Harlequin Duck</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <div class="sim-card">
+      <h3>A1. Python: Capsule Flooding and Sinking Rate Calculator</h3>
+      <p class="sim-meta"><strong>Libraries:</strong> numpy, matplotlib &nbsp;|&nbsp; <strong>Difficulty:</strong> Beginner-Intermediate &nbsp;|&nbsp; <strong>Duration:</strong> 2&ndash;3 hours</p>
+      <p>Models the complete post-hatch-failure sequence: water ingress through the open hatch, rising capsule mass, helicopter load limit comparison, the moment the capsule becomes unliftable, release, and terminal sinking velocity through 4,900 meters. Adjustable parameters include hatch diameter, sea state, helicopter payload, and ocean depth.</p>
+      <p><strong>4 plots:</strong> (1) Capsule mass vs time &mdash; the blue area crosses the red helicopter limit at t&asymp;9s, with the hook attachment time at t=60s far to the right. (2) Depth vs time with GPO range shaded at 0&ndash;1500 m and Harlequin Duck range at 0&ndash;20 m. (3) Velocity vs depth showing terminal velocity of ~3.5 m/s reached within 100 m. (4) Pressure vs depth &mdash; the linear simplicity is the point.</p>
+      <p><strong>Key learning:</strong> The helicopter needed 60+ seconds to hook up. The capsule became unliftable in ~9 seconds. The gap between 9 and 60 is mathematical proof that Liberty Bell 7 was lost the moment the hatch blew.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A2. Python: Explosive Bolt Failure Probability Analysis (Monte Carlo)</h3>
+      <p class="sim-meta"><strong>Libraries:</strong> numpy, matplotlib &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate &nbsp;|&nbsp; <strong>Duration:</strong> 3&ndash;4 hours</p>
+      <p>Monte Carlo simulation modeling probability of premature hatch detonation under varying temperature, vibration, and electrical noise. Defines probability distributions for environmental parameters and a detonator activation threshold model. Runs 100,000 simulated post-splashdown scenarios.</p>
+      <p><strong>4 plots:</strong> (1) Pie chart of failure causes &mdash; thermal/vibrational, electrical, pilot mechanical. (2) Probability vs temperature showing sharp rise above 40&deg;C. (3) Histogram of thresholds at failure. (4) Cumulative probability over time after splashdown.</p>
+      <p><strong>Key learning:</strong> The Monte Carlo consistently attributes the majority of premature detonations to thermal + electrical mechanisms, with pilot error as a statistically unlikely minority cause.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A3. Web: &ldquo;Save Liberty Bell 7&rdquo; &mdash; Helicopter Recovery Game</h3>
+      <p class="sim-meta"><strong>Technology:</strong> HTML5 Canvas + JavaScript &nbsp;|&nbsp; <strong>Target:</strong> 1920&times;1080 &nbsp;|&nbsp; <strong>&lt;1200 lines</strong></p>
+      <p>A physically accurate helicopter recovery game where the player must hook the capsule and lift it before it floods and sinks. The capsule floods at ~100 L/s. The helicopter has limited payload. <strong>The game is unwinnable under actual conditions</strong> &mdash; proving viscerally that no pilot could have saved the capsule. Scoring: &ldquo;Lewis&rsquo;s Choice&rdquo; (pilot saved, capsule lost) is the historically accurate correct outcome.</p>
+      <p><strong>Key learning:</strong> The moment the player hooks the capsule and sees the lift gauge go deep red &mdash; the engine chip light flashing, the capsule pulling the helicopter down. This is not a skill problem. It is a MATH problem.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A4. Web: Harlequin Duck Turbulence Navigator</h3>
+      <p class="sim-meta"><strong>Technology:</strong> HTML5 Canvas + JavaScript &nbsp;|&nbsp; <strong>Target:</strong> 1920&times;1080 &nbsp;|&nbsp; <strong>&lt;1000 lines</strong></p>
+      <p>Interactive fluid dynamics simulation: control a Harlequin Duck navigating a PNW mountain stream. Rocks, rapids, eddies, varying current velocities. Dive to the stream bottom for caddisfly larvae, manage energy, find eddy resting spots behind boulders. Real-time Reynolds number display (~461,000, fully turbulent). Force balance panel shows drag, propulsion, current, buoyancy, and net force.</p>
+      <p><strong>Key learning:</strong> The first time the player rests in an eddy and watches flow particles stream past, then ventures into the main current and is immediately swept downstream. The Harlequin Duck&rsquo;s survival strategy is reading turbulence to find eddies. Liberty Bell 7 had no eddies.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A5. SPICE: Explosive Bolt Firing Circuit</h3>
+      <p class="sim-meta"><strong>Tool:</strong> ngspice &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate</p>
+      <p>Models the electrical initiation circuit for the Mercury hatch. Includes the bridgewire detonator (R=1.0&Omega;), the 28V spacecraft bus, the firing relay, and the salt water fault path. Normal operation: 8.75A through bridgewire, fires in 0.65 ms. <strong>Salt water fault:</strong> with R<sub>salt</sub>=100&Omega; across the open relay, leakage current of 0.271A delivers 50 mJ firing energy in ~0.7 seconds. The capsule was in salt water for minutes.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A6. SPICE: Squelch Circuit &mdash; Progressive Radio #20</h3>
+      <p class="sim-meta"><strong>Tool:</strong> ngspice &nbsp;|&nbsp; <strong>Difficulty:</strong> Beginner-Intermediate</p>
+      <p>Carrier-operated squelch circuit: mutes audio output when no signal is present, eliminating the loud hiss between transmissions. Uses a comparator-driven JFET audio switch with adjustable threshold. Mercury ground stations used squelch circuits on their tracking receivers. The last telemetry from Liberty Bell 7 was silence &mdash; the squelch muting a signal that was no longer there because the antenna was 4,900 meters below the surface.</p>
+    </div>
+
+    <hr>
+
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <div class="sim-card">
+      <h3>B1. Fault Classification from Sensor Telemetry</h3>
+      <p class="sim-meta"><strong>Libraries:</strong> scikit-learn or PyTorch &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate &nbsp;|&nbsp; <strong>Duration:</strong> 3&ndash;4 hours</p>
+      <p>Multi-class classifier (CNN or Random Forest) distinguishing &ldquo;normal,&rdquo; &ldquo;thermal anomaly,&rdquo; &ldquo;electrical fault,&rdquo; and &ldquo;mechanical impact&rdquo; from simulated capsule telemetry. 8 features per sample at 100 Hz, 5,000 windows per class. <strong>Expected:</strong> Mechanical impact is the easiest to classify (sharp, distinctive transient) &mdash; which means the ABSENCE of a mechanical signature in the actual data is significant evidence against pilot error.</p>
+    </div>
+
+    <hr>
+
+    <h2>C. Computer Science &mdash; FMEA for Recovery Systems</h2>
+
+    <div class="sim-card">
+      <h3>C1. Failure Mode and Effects Analysis</h3>
+      <p>The FMEA reveals the explosive hatch as the highest-risk component in the recovery chain:</p>
+      <ul>
+        <li><strong>Severity:</strong> 10 (total loss of capsule)</li>
+        <li><strong>Detection:</strong> 10 (no sensor warned of impending premature detonation)</li>
+        <li><strong>Occurrence:</strong> 3 (unlikely but not impossible)</li>
+        <li><strong>RPN = 10 &times; 3 &times; 10 = 300</strong> (action threshold: 100)</li>
+      </ul>
+      <p>If this FMEA had been performed before MR-4 with accurate occurrence estimates, the hatch system would have been flagged for redesign before the flight.</p>
+    </div>
+
+    <hr>
+
+    <h2>D. Creative Arts &mdash; What to Compose, Write, and Render</h2>
+
+    <div class="art-card">
+      <h3>D1. GLSL Shader: &ldquo;4,900 Meters&rdquo;</h3>
+      <p>Fragment shader rendering Liberty Bell 7&rsquo;s descent through the Atlantic. The ocean depth is diminishing light: bright turquoise at the surface, fading through twilight (200 m), midnight blue (1,000 m), to pure black at 4,900 m. Bioluminescent flickers in the 300&ndash;1,000 m range. Marine snow particles. Air bubbles trailing from the open hatch (decreasing with depth as air compresses). At 4,900 m: the capsule settles into sediment. Depth counter: <code>DEPTH: 4900 m / PRESSURE: 493 atm</code>. Then: <em>&ldquo;July 21, 1961 &mdash; July 20, 1999.&rdquo;</em></p>
+    </div>
+
+    <div class="art-card">
+      <h3>D2. Short Story: &ldquo;The Bell&rdquo;</h3>
+      <p>Creative nonfiction from Grissom&rsquo;s perspective. First person, present tense during the water sequence. Engineer&rsquo;s voice: precise, observational, understated. Ten sections keyed to elapsed time from hatch detonation: T+0:00 THE BANG, T+0:03 ASSESSMENT, T+0:08 EGRESS, T+0:15 THE SUIT, T+0:30 THE VEST, T+1:00 THE HELICOPTER, T+2:00 SWIMMING, T+3:00 THE CUT, T+5:00 THE SLING, and AFTER. 2,500&ndash;3,500 words. Provided as HTML + LaTeX.</p>
+      <p><em>&ldquo;The bell sank. I did not. Hemingway wrote: &lsquo;A man can be destroyed but not defeated.&rsquo; The bell sank. The man swam.&rdquo;</em></p>
+    </div>
+
+    <div class="art-card">
+      <h3>D3. FAUST Synth: Liberty Bell 7 Splashdown</h3>
+      <p>180-second real-time synthesis: splashdown impact (broadband burst + 40 Hz thud), surface floating (wave-modulated noise, metallic hull creaks), <strong>hatch detonation</strong> (sharp &lt;1 ms transient at 2+ kHz), flooding (water rush through resonant lowpass, air bubbles), sinking (deep 20&ndash;30 Hz drone decreasing in frequency, hull compression groans), ocean floor impact (15 Hz thud, sediment settle, silence).</p>
+    </div>
+
+    <div class="art-card">
+      <h3>D4. FAUST Synth: Whitewater Harlequin</h3>
+      <p>60-second PNW mountain stream soundscape: continuous stream flow (pink-filtered noise, 800&ndash;2000 Hz), rock splash (irregular noise bursts), Harlequin Duck calls (squeaky whistles at 2&ndash;4 kHz), forest ambient. At T+30: dive sequence &mdash; lowpass filter sweeps from 4 kHz to 500 Hz as the duck submerges, underwater rumble and paddling pulses at ~4 Hz, then return to surface.</p>
+    </div>
+
+    <div class="art-card">
+      <h3>D5&ndash;D6. Hardware Circuits</h3>
+      <p><strong>D5: Underwater Pressure Sensor</strong> &mdash; BMP280 + Arduino Nano + OLED + syringe/tubing interface. Displays equivalent ocean depth. Cost: $25&ndash;40. (Full spec in curriculum.md.)</p>
+      <p><strong>D6: Analog Depth Indicator (LED Bar)</strong> &mdash; LM3914 driving 10 LEDs representing 0&ndash;4,900 m. Blue (sunlit) to dark blue (twilight) to purple (midnight) to red (abyss). Potentiometer simulates depth sensor. LED 3 (~1,470 m): &ldquo;Giant Pacific Octopus maximum depth.&rdquo; LED 10 (~4,900 m): &ldquo;Liberty Bell 7 rests here.&rdquo; Cost: ~$8.</p>
+    </div>
+
+    <hr>
+
+    <h2>E. Problem-Solving Methodology &mdash; Failure-Mode-First Design</h2>
+
+    <p><strong>The inversion:</strong> Traditional design asks &ldquo;How do we make it work?&rdquo; Failure-mode-first asks &ldquo;How can it break?&rdquo;</p>
+
+    <p>For the Liberty Bell 7 hatch, redesigned with failure-mode-first thinking:</p>
+    <ul>
+      <li><strong>Prevention:</strong> Thermally insulate the MDF. Add a second independent safety interlock. Shield the electrical firing path from salt water. Add a mechanical lock on the plunger.</li>
+      <li><strong>Detection:</strong> Temperature sensor on hatch frame. Current monitor on firing circuit. Plunger position sensor in telemetry.</li>
+      <li><strong>Mitigation:</strong> Secondary flotation collar around hatch opening. Automatic bilge pump. Pre-positioned inflatable pontoon.</li>
+    </ul>
+
+    <p>The goal is not to prevent all failures. The goal is to ensure that no single failure propagates to total system loss &mdash; which is exactly what happened when a single hatch failure cascaded to capsule loss because there was no prevention, no detection, and no mitigation.</p>
+
+    <hr>
+
+    <h2>F. GSD Improvements &mdash; Chipsets</h2>
+
+    <h3>F1. Failure Mode Analysis Chipset</h3>
+    <p>4 chips: <strong>fmea-scanner</strong> (scan workflow steps for failure modes before execution), <strong>cascade-analyzer</strong> (trace downstream effects of each failure), <strong>mitigation-planner</strong> (propose retry/fallback/rollback for high-RPN modes), <strong>pre-flight-check</strong> (abort if any failure mode exceeds RPN threshold). The pre-flight review that Liberty Bell 7 needed for its explosive hatch.</p>
+
+    <h3>F2. Octopus Architecture (Distributed Adaptive Response)</h3>
+    <p>4 chips: <strong>arm-autonomy</strong> (agents handle local problems without central approval), <strong>brain-strategy</strong> (coordinator sets goals, intervenes only on conflicts), <strong>severed-arm-protocol</strong> (continue working if disconnected from coordinator), <strong>chemoreception</strong> (continuous local environment sampling for informed autonomous decisions).</p>
+
+    <hr>
+
+    <blockquote>Hemingway wrote the old man and the sea because he understood that the ocean does not negotiate. Santiago's marlin was magnificent. And the sharks took it anyway. Grissom's flight was successful. The hatch blew and the ocean came. The Giant Pacific Octopus in its PNW den understands something about the ocean: the ocean is not an opponent. It is an environment. You do not defeat an environment. You accommodate it. The octopus flows. It adapts. The capsule could not become smaller than the ocean. Grissom could. He squeezed through the hatch, shed the capsule like the octopus sheds a spent spermatophore, and swam for his life. The bell sank. The man swam. The octopus, 4,900 meters below and 1,000 miles northwest, reached one arm out of its den and tasted the cold Pacific water and did not know that a capsule was falling through the Atlantic at 3.5 meters per second, settling toward the floor of an ocean that takes what it takes and does not negotiate the terms.</blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="curriculum.html">&larr; Track 4: Curriculum</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">v1.20 Overview</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.20 Track 5: Simulation &amp; Arts &mdash; Mercury-Redstone 4 / Liberty Bell 7 &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>
