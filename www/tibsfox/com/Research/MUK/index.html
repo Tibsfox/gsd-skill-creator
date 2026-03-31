@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUK — Mukilteo Microclimate Observatory</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header .coords { color:rgba(255,255,255,0.3); font-size:0.75rem; font-family:monospace; margin-top:0.5rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin-right:1.2rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+    blockquote {
+      font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light);
+      padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+    }
+
+    .stats {
+      display:flex; flex-wrap:wrap; gap:1.5rem; margin:1.5rem 0 2.5rem;
+      padding:1rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .stat { text-align:center; min-width:80px; }
+    .stat-value { display:block; font-size:1.5rem; font-weight:400; color:var(--marine); font-family:monospace; }
+    .stat-label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+
+    h2 {
+      font-size:1.1rem; font-weight:400; color:var(--sand); margin:2.5rem 0 1rem;
+      padding-bottom:0.3rem; border-bottom:1px solid var(--border);
+    }
+    .section-intro { font-size:0.9rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif; }
+
+    .card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1rem; }
+    .card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; transition:border-color 0.2s;
+    }
+    .card:hover { border-color:var(--sea-light); text-decoration:none; }
+    .card h3 { font-size:1rem; color:var(--text); margin-bottom:0.4rem; }
+    .card p { font-size:0.85rem; color:var(--dim); line-height:1.5; }
+    .card .meta { font-size:0.75rem; margin-bottom:0.5rem; }
+    .tag {
+      display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+      font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:500;
+      border:1px solid; margin-right:0.3rem;
+    }
+    .tag-wx { background:rgba(58,138,154,0.1); color:var(--marine); border-color:rgba(58,138,154,0.3); }
+    .tag-tide { background:rgba(26,58,74,0.2); color:var(--sky); border-color:rgba(74,122,154,0.3); }
+    .tag-score { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+    .tag-transit { background:rgba(42,74,48,0.2); color:#6a9a70; border-color:rgba(42,74,48,0.4); }
+    .tag-live { background:rgba(76,175,80,0.1); color:#6abf6e; border-color:rgba(76,175,80,0.3); }
+
+    /* Live data panel */
+    .live-panel {
+      background: var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.5rem; margin:1.5rem 0;
+    }
+    .live-panel h3 {
+      font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em;
+      font-family:monospace; margin-bottom:0.8rem; font-weight:500;
+      display:flex; align-items:center; gap:0.5rem;
+    }
+    .live-dot { width:6px; height:6px; border-radius:50%; background:#4CAF50; box-shadow:0 0 6px rgba(76,175,80,0.5); }
+    .wx-grid {
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+      gap:0.8rem;
+    }
+    .wx-item { }
+    .wx-label { font-size:0.7rem; color:var(--dim); font-family:system-ui,sans-serif; }
+    .wx-value { font-size:1.1rem; color:#fff; font-family:monospace; }
+    .wx-value.small { font-size:0.9rem; }
+
+    .tide-bar {
+      display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.8rem;
+    }
+    .tide-event {
+      background:rgba(26,58,74,0.3); border:1px solid rgba(74,122,154,0.2);
+      border-radius:4px; padding:0.5rem 0.8rem; text-align:center;
+    }
+    .tide-type { font-size:0.65rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+    .tide-time { font-size:0.95rem; color:var(--sky); font-family:monospace; }
+    .tide-height { font-size:0.8rem; color:var(--dim); font-family:monospace; }
+
+    .source-table { width:100%; border-collapse:collapse; font-size:0.8rem; margin:1rem 0; }
+    .source-table th {
+      text-align:left; font-size:0.65rem; color:var(--dim); text-transform:uppercase;
+      letter-spacing:0.08em; font-family:system-ui,sans-serif; font-weight:500;
+      padding:0.4rem 0.6rem; border-bottom:1px solid var(--border);
+    }
+    .source-table td { padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); color:var(--text); }
+    .source-table tr:hover td { background:rgba(58,138,154,0.04); }
+
+    footer {
+      max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+      font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+      font-family:system-ui,sans-serif;
+    }
+    footer a { color:var(--fog); }
+
+    @media(max-width:640px) {
+      header h1 { font-size:1.4rem; }
+      main { padding:1rem; }
+      .wx-grid { grid-template-columns:repeat(2, 1fr); }
+      .card-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Mukilteo Microclimate Observatory</h1>
+  <div class="subtitle">Weather source accuracy, tidal rhythms, ferry transit, and the marine convergence zone</div>
+  <div class="coords">47.9063&deg;N 122.2816&deg;W &middot; Paine Field / Possession Sound &middot; Salish Sea watershed</div>
+  <nav>
+    <a href="index.html" class="active">Dashboard</a>
+    <a href="../index.html">Research</a>
+    <a href="../NASA/artemis-ii/index.html">Artemis II</a>
+  </nav>
+</header>
+
+<main>
+  <blockquote>
+    Multiple weather sources report conditions for the same place. Over time, their accuracy diverges.
+    The marine air funneling up Possession Sound, the Puget Sound Convergence Zone forming over Mukilteo,
+    the rain shadow edge at the Cascade foothills &mdash; each microclimate feature tests the models differently.
+    Measure. Compare. Score. Let the data decide which source knows this place best.
+  </blockquote>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value" id="s-sources">6</span><span class="stat-label">Weather Sources</span></div>
+    <div class="stat"><span class="stat-value" id="s-samples">0</span><span class="stat-label">Samples Collected</span></div>
+    <div class="stat"><span class="stat-value" id="s-days">0</span><span class="stat-label">Days Tracked</span></div>
+    <div class="stat"><span class="stat-value" id="s-tide">4</span><span class="stat-label">Tide Events/Day</span></div>
+    <div class="stat"><span class="stat-value" id="s-ferries">2</span><span class="stat-label">Ferry Routes</span></div>
+    <div class="stat"><span class="stat-value" id="s-accuracy">--</span><span class="stat-label">Best Source</span></div>
+  </div>
+
+  <!-- LIVE WEATHER -->
+  <div class="live-panel">
+    <h3><span class="live-dot"></span> Current Conditions &mdash; KPAE Paine Field</h3>
+    <div class="wx-grid">
+      <div class="wx-item"><div class="wx-label">Temperature</div><div class="wx-value" id="wx-temp">--</div></div>
+      <div class="wx-item"><div class="wx-label">Dewpoint</div><div class="wx-value" id="wx-dew">--</div></div>
+      <div class="wx-item"><div class="wx-label">Spread (fog threshold)</div><div class="wx-value" id="wx-spread">--</div></div>
+      <div class="wx-item"><div class="wx-label">Wind</div><div class="wx-value" id="wx-wind">--</div></div>
+      <div class="wx-item"><div class="wx-label">Humidity</div><div class="wx-value" id="wx-hum">--</div></div>
+      <div class="wx-item"><div class="wx-label">Pressure</div><div class="wx-value" id="wx-pres">--</div></div>
+      <div class="wx-item"><div class="wx-label">Visibility</div><div class="wx-value" id="wx-vis">--</div></div>
+      <div class="wx-item"><div class="wx-label">Conditions</div><div class="wx-value small" id="wx-cond">--</div></div>
+    </div>
+  </div>
+
+  <!-- TIDES -->
+  <div class="live-panel">
+    <h3><span class="live-dot"></span> Tides Today &mdash; Everett (Station 9447659)</h3>
+    <div class="tide-bar" id="tide-bar">
+      <div class="tide-event"><div class="tide-type">Loading...</div></div>
+    </div>
+    <p style="font-size:0.75rem; color:var(--dim); margin-top:0.6rem; font-family:system-ui,sans-serif;">
+      Mixed semidiurnal &mdash; two unequal highs and two unequal lows per day. Affects Mukilteo Lighthouse Beach, Picnic Point, Meadowdale Beach, Possession Point.
+    </p>
+  </div>
+
+  <h2>Weather Source Comparison</h2>
+  <p class="section-intro">
+    Each source sampled during periodic sweeps. Accuracy scored against KPAE actuals over rolling 30-day windows.
+  </p>
+
+  <table class="source-table">
+    <thead>
+      <tr><th>Source</th><th>Station / Grid</th><th>Type</th><th>Temp MAE</th><th>Wind MAE</th><th>Precip F1</th><th>Overall</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>NOAA KPAE</td><td>Paine Field</td><td>Aviation METAR</td><td colspan="4" style="color:var(--sand);">Ground truth (reference)</td></tr>
+      <tr><td>NOAA KSEA</td><td>Sea-Tac Airport</td><td>Aviation METAR</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
+      <tr><td>NWS Forecast</td><td>47.9N, 122.3W</td><td>Model (GFS/NAM)</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
+      <tr><td>Open-Meteo</td><td>47.9N, 122.3W</td><td>Model (ICON/ERA5)</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
+      <tr><td>PurpleAir</td><td>Mukilteo sensors</td><td>Community IoT</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
+      <tr><td>Personal Station</td><td>Home</td><td>Direct observation</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Scoring Methodology</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Temperature MAE</h3>
+      <div class="meta"><span class="tag tag-score">Accuracy</span></div>
+      <p>Mean absolute error in &deg;C between predicted and actual temperature. Lower is better. Scored over rolling 30-day window. Accounts for microclimate variation between airport and waterfront.</p>
+    </div>
+    <div class="card">
+      <h3>Wind Accuracy</h3>
+      <div class="meta"><span class="tag tag-score">Accuracy</span></div>
+      <p>Combined direction error (degrees) and speed ratio. Marine wind channeling up Possession Sound creates local patterns that regional models often miss.</p>
+    </div>
+    <div class="card">
+      <h3>Precipitation F1</h3>
+      <div class="meta"><span class="tag tag-score">Accuracy</span></div>
+      <p>F1 score for binary rain prediction (did it rain when they said it would?). Puget Sound Convergence Zone makes this the hardest metric &mdash; rain can fall on Mukilteo while Everett stays dry.</p>
+    </div>
+    <div class="card">
+      <h3>Fog Prediction</h3>
+      <div class="meta"><span class="tag tag-score">Accuracy</span></div>
+      <p>Dewpoint spread &lt; 2.5&deg;C predicts fog. Score: did fog actually form? Radiation fog on calm clear nights, advection fog off Possession Sound. Binary classification F1.</p>
+    </div>
+    <div class="card">
+      <h3>Confidence Calibration</h3>
+      <div class="meta"><span class="tag tag-score">Accuracy</span></div>
+      <p>Brier score &mdash; when they say 80% chance of rain, does it rain 80% of the time? Measures whether probability forecasts are well-calibrated, not just whether they're right.</p>
+    </div>
+    <div class="card">
+      <h3>Timing Accuracy</h3>
+      <div class="meta"><span class="tag tag-score">Accuracy</span></div>
+      <p>Hours off on front arrival. When the forecast says rain starts at 2 PM, does it? Convergence Zone events are notoriously hard to time &mdash; this metric reveals which models handle them.</p>
+    </div>
+  </div>
+
+  <h2>Local Transit</h2>
+  <p class="section-intro">
+    Ferry schedules, loading estimates, and connections to regional transit.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Mukilteo &mdash; Clinton Ferry</h3>
+      <div class="meta"><span class="tag tag-transit">WSF</span> <span class="tag tag-live">Live</span></div>
+      <p>Washington State Ferries route connecting Mukilteo to Whidbey Island. 20-minute crossing. Real-time vessel positions and loading estimates via WSDOT API.</p>
+      <p style="margin-top:0.5rem;"><a href="https://wsdot.wa.gov/ferries/schedule/scheduledetailbyroute.aspx?route=muk-cl">Schedule</a> &middot; <a href="https://wsdot.wa.gov/ferries/vesselwatch/">VesselWatch</a></p>
+    </div>
+    <div class="card">
+      <h3>Edmonds &mdash; Kingston Ferry</h3>
+      <div class="meta"><span class="tag tag-transit">WSF</span> <span class="tag tag-live">Live</span></div>
+      <p>WSF route connecting Edmonds to Kingston (Kitsap Peninsula). 30-minute crossing. Edmonds is 8 miles south of Mukilteo along the waterfront.</p>
+      <p style="margin-top:0.5rem;"><a href="https://wsdot.wa.gov/ferries/schedule/scheduledetailbyroute.aspx?route=ed-king">Schedule</a> &middot; <a href="https://wsdot.wa.gov/ferries/vesselwatch/">VesselWatch</a></p>
+    </div>
+    <div class="card">
+      <h3>Light Rail Connection</h3>
+      <div class="meta"><span class="tag tag-transit">Sound Transit</span></div>
+      <p>Lynnwood Link (Line 1) is the nearest light rail. Connects to University of Washington, Capitol Hill, downtown Seattle, Sea-Tac Airport. Bus connections from Mukilteo via Community Transit.</p>
+      <p style="margin-top:0.5rem;"><a href="https://www.soundtransit.org/ride-with-us/routes-schedules">Sound Transit</a> &middot; <a href="https://www.communitytransit.org/">Community Transit</a></p>
+    </div>
+    <div class="card">
+      <h3>Sounder Train</h3>
+      <div class="meta"><span class="tag tag-transit">Sound Transit</span></div>
+      <p>Sounder North line: Everett &mdash; Mukilteo &mdash; Edmonds &mdash; King Street Station (Seattle). Commuter rail along the waterfront. Limited schedule (peak hours).</p>
+      <p style="margin-top:0.5rem;"><a href="https://www.soundtransit.org/ride-with-us/routes-schedules/n-line">N Line Schedule</a></p>
+    </div>
+  </div>
+
+  <h2>Microclimate Features</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Puget Sound Convergence Zone</h3>
+      <div class="meta"><span class="tag tag-wx">Weather</span></div>
+      <p>When marine air splits around the Olympic Mountains, the two streams converge over north King County / south Snohomish County. This creates a narrow band of heavy precipitation that can dump rain on Mukilteo while Everett stays dry. The PSCZ is the primary source of forecast error for this location.</p>
+    </div>
+    <div class="card">
+      <h3>Possession Sound Marine Layer</h3>
+      <div class="meta"><span class="tag tag-wx">Weather</span></div>
+      <p>Cool marine air funnels up Possession Sound from the Strait of Juan de Fuca. Creates morning fog, moderates temperatures, and channels wind differently than inland stations report. KPAE sits at the airport, 2 miles from the waterfront &mdash; the microclimate differs.</p>
+    </div>
+    <div class="card">
+      <h3>Cascade Rain Shadow Edge</h3>
+      <div class="meta"><span class="tag tag-wx">Weather</span></div>
+      <p>Mukilteo sits at the western edge of the Cascade rain shadow transition. Annual precipitation drops sharply east of the Cascades. The foothills to the east receive more orographic lift precipitation than the waterfront. Elevation matters at every scale.</p>
+    </div>
+    <div class="card">
+      <h3>Tidal Influence on Air Temperature</h3>
+      <div class="meta"><span class="tag tag-tide">Tide</span> <span class="tag tag-wx">Weather</span></div>
+      <p>Large tidal exchanges in Possession Sound affect nearshore air temperature and humidity. Low tide exposes mudflats that warm differently than open water. The 12.4-hour tidal cycle overlays the 24-hour diurnal cycle, creating beat frequencies in temperature and fog formation.</p>
+    </div>
+  </div>
+
+  <h2>Data Sources</h2>
+  <table class="source-table">
+    <thead><tr><th>Source</th><th>Endpoint</th><th>Data</th><th>Key</th><th>Update</th></tr></thead>
+    <tbody>
+      <tr><td>NOAA KPAE</td><td>api.weather.gov/stations/KPAE</td><td>Full METAR observation</td><td>No</td><td>~5 min</td></tr>
+      <tr><td>NOAA KSEA</td><td>api.weather.gov/stations/KSEA</td><td>Full METAR observation</td><td>No</td><td>~5 min</td></tr>
+      <tr><td>NOAA Tides</td><td>tidesandcurrents.noaa.gov (9447659)</td><td>Hi/Lo predictions + water level</td><td>No</td><td>Daily/6 min</td></tr>
+      <tr><td>NWS Forecast</td><td>api.weather.gov/gridpoints/SEW</td><td>7-day hourly forecast</td><td>No</td><td>Hourly</td></tr>
+      <tr><td>Open-Meteo</td><td>api.open-meteo.com/v1/forecast</td><td>Multi-model forecasts</td><td>No</td><td>Hourly</td></tr>
+      <tr><td>NOAA Kp Index</td><td>services.swpc.noaa.gov</td><td>Geomagnetic activity</td><td>No</td><td>3 hours</td></tr>
+      <tr><td>USGS Snohomish</td><td>waterservices.usgs.gov (12150800)</td><td>River flow + gage height</td><td>No</td><td>15 min</td></tr>
+      <tr><td>WSDOT Ferries</td><td>wsdot.wa.gov/ferries/api</td><td>Vessel positions, schedules</td><td>No</td><td>Real-time</td></tr>
+    </tbody>
+  </table>
+
+</main>
+
+<footer>
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="../NASA/artemis-ii/index.html">Artemis II</a> &middot;
+  MUK &mdash; Mukilteo Microclimate Observatory &middot;
+  47.9&deg;N 122.3&deg;W &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a>
+</footer>
+
+<script>
+// === LIVE WEATHER ===
+fetch('https://api.weather.gov/stations/KPAE/observations/latest', {headers:{'Accept':'application/geo+json'}})
+  .then(function(r){return r.json()})
+  .then(function(d){
+    var p = d.properties || {};
+    var temp = p.temperature && p.temperature.value !== null ? p.temperature.value : null;
+    var dew = p.dewpoint && p.dewpoint.value !== null ? p.dewpoint.value : null;
+    var wind = p.windSpeed && p.windSpeed.value !== null ? p.windSpeed.value : null;
+    var dir = p.windDirection && p.windDirection.value !== null ? p.windDirection.value : null;
+    var hum = p.relativeHumidity && p.relativeHumidity.value !== null ? p.relativeHumidity.value : null;
+    var pres = p.seaLevelPressure && p.seaLevelPressure.value !== null ? p.seaLevelPressure.value / 100 : null;
+    var vis = p.visibility && p.visibility.value !== null ? p.visibility.value : null;
+    var desc = p.textDescription || '--';
+
+    document.getElementById('wx-temp').textContent = temp !== null ? temp.toFixed(1) + '\u00B0C' : '--';
+    document.getElementById('wx-dew').textContent = dew !== null ? dew.toFixed(1) + '\u00B0C' : '--';
+    document.getElementById('wx-spread').textContent = (temp !== null && dew !== null) ? (temp - dew).toFixed(1) + '\u00B0C' + ((temp - dew) < 2.5 ? ' \u2014 FOG LIKELY' : '') : '--';
+    document.getElementById('wx-wind').textContent = (dir !== null && wind !== null) ? dir.toFixed(0) + '\u00B0 at ' + wind.toFixed(0) + ' km/h' : '--';
+    document.getElementById('wx-hum').textContent = hum !== null ? hum.toFixed(0) + '%' : '--';
+    document.getElementById('wx-pres').textContent = pres !== null ? pres.toFixed(1) + ' hPa' : '--';
+    document.getElementById('wx-vis').textContent = vis !== null ? (vis / 1000).toFixed(1) + ' km' : '--';
+    document.getElementById('wx-cond').textContent = desc;
+  }).catch(function(){});
+
+// === TIDES ===
+var tideUrl = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?date=today&station=9447659&product=predictions&datum=MLLW&time_zone=lst_ldt&units=metric&interval=hilo&format=json';
+fetch(tideUrl)
+  .then(function(r){return r.json()})
+  .then(function(d){
+    if (!d.predictions) return;
+    var html = '';
+    for (var i = 0; i < d.predictions.length; i++) {
+      var p = d.predictions[i];
+      var type = parseFloat(p.v) > 1.5 ? 'High' : 'Low';
+      var time = p.t.split(' ')[1] || p.t;
+      html += '<div class="tide-event">';
+      html += '<div class="tide-type">' + type + '</div>';
+      html += '<div class="tide-time">' + time + '</div>';
+      html += '<div class="tide-height">' + parseFloat(p.v).toFixed(2) + ' m</div>';
+      html += '</div>';
+    }
+    document.getElementById('tide-bar').innerHTML = html;
+  }).catch(function(){});
+</script>
+</body>
+</html>
