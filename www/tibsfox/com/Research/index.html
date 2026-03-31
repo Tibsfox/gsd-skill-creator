@@ -108,7 +108,22 @@
     footer { color: #8a8884 !important; border-top: 1px solid #e8dcc8 !important; }
     footer a { color: #c75b3a !important; }
 
-    /* === (orbs removed — celestial data moved to data bar) ===*/
+    /* === Moon/Sun info cards in header === */
+    .header-row {
+      display: flex; align-items: center; justify-content: center;
+      max-width: 68rem; margin: 0 auto; padding: 0 1rem; gap: 1rem;
+    }
+    .cel-info {
+      flex-shrink: 0; width: 140px; padding: 0.6rem 0.8rem;
+      background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px; color: white; font-family: system-ui, sans-serif;
+      text-decoration: none; text-align: center; transition: background 0.2s;
+    }
+    .cel-info:hover { background: rgba(0,0,0,0.35); color: white; text-decoration: none; }
+    .cel-info-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; }
+    .cel-info-value { font-size: 0.85rem; font-weight: 600; margin-top: 0.15rem; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+    .cel-info-detail { font-size: 0.62rem; opacity: 0.7; margin-top: 0.1rem; }
+    .header-center { flex: 1; min-width: 0; }
 
     /* === Data bar: time, weather, mission — full width === */
     .data-bar {
@@ -156,6 +171,8 @@
     .tk-hot:hover { border-color: #FC3D21; background: rgba(252,61,33,0.08); }
 
     @media (max-width: 900px) {
+      .header-row { flex-wrap: wrap; }
+      .cel-info { width: 120px; }
       .data-bar-inner { flex-wrap: wrap; }
       .db-cell { flex: none; width: 25%; }
     }
@@ -171,22 +188,36 @@
 </head>
 <body>
   <header>
-    <div class="header-inner">
-      <img src="images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
-      <div class="header-text">
-        <h1>Tibsfox Research</h1>
-        <div class="subtitle">Pacific Northwest bioregion mapping, space research, visual art science, and 190+ projects of open-source craft</div>
-        <nav>
-          <a href="PNW/index.html">PNW Series</a>
-          <a href="NASA/index.html">NASA Missions</a>
-          <a href="NASA/artemis-ii/index.html">Artemis II</a>
-          <a href="SOL/index.html">Sun &amp; Moon</a>
-          <a href="MUK/index.html">Mukilteo</a>
-          <a href="constellation.html">Constellation</a>
-          <a href="LIVE/index.html">Live</a>
-          <a href="../index.html">tibsfox.com</a>
-        </nav>
+    <div class="header-row">
+      <a href="SOL/index.html" class="cel-info">
+        <div class="cel-info-label">Moon</div>
+        <div class="cel-info-value" id="cel-moon-phase">--</div>
+        <div class="cel-info-detail" id="cel-moon-illum">--</div>
+      </a>
+      <div class="header-center">
+        <div class="header-inner">
+          <img src="images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
+          <div class="header-text">
+            <h1>Tibsfox Research</h1>
+            <div class="subtitle">Pacific Northwest bioregion mapping, space research, visual art science, and 190+ projects of open-source craft</div>
+            <nav>
+              <a href="PNW/index.html">PNW Series</a>
+              <a href="NASA/index.html">NASA Missions</a>
+              <a href="NASA/artemis-ii/index.html">Artemis II</a>
+              <a href="SOL/index.html">Sun &amp; Moon</a>
+              <a href="MUK/index.html">Mukilteo</a>
+              <a href="constellation.html">Constellation</a>
+              <a href="LIVE/index.html">Live</a>
+              <a href="../index.html">tibsfox.com</a>
+            </nav>
+          </div>
+        </div>
       </div>
+      <a href="SOL/index.html" class="cel-info">
+        <div class="cel-info-label">Sun</div>
+        <div class="cel-info-value" id="cel-sun-day">--</div>
+        <div class="cel-info-detail">6:49a / 7:39p PDT</div>
+      </a>
     </div>
   </header>
 
