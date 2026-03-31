@@ -1,0 +1,19 @@
+{
+  "sample_id": 4,
+  "timestamp_utc": "2026-03-31T15:00:00Z",
+  "timestamp_pdt": "2026-03-31T08:00:00",
+  "sources": {
+    "kpae": {"temp_c": 9.4, "dewpoint_c": -2.8, "wind_dir": 0, "wind_kmh": 0, "humidity": 45, "pressure_hpa": 1011.0, "conditions": "Clear", "spread_c": 12.2},
+    "ksea": {"temp_c": 8.3, "dewpoint_c": -1.7, "wind_dir": 0, "wind_kmh": 0, "humidity": 50, "pressure_hpa": 1010.6, "conditions": "SCT150 BKN180"},
+    "open_meteo": {"temp_c": 9.7, "dewpoint_c": 2.9, "wind_dir": 240, "wind_kmh": 2.9, "humidity": 63, "pressure_hpa": 1011.1, "conditions": "Overcast (WMO 3)"},
+    "nws": {"temp_c": 10, "dewpoint_c": null, "wind_dir": 140, "wind_kmh": 7.4, "humidity": null, "pressure_hpa": 1010.5, "conditions": "Clear"}
+  },
+  "scoring": {
+    "ground_truth": "kpae",
+    "ksea": {"temp_error_c": 1.1, "wind_error_kmh": 0, "precip_hit": true},
+    "open_meteo": {"temp_error_c": 0.3, "wind_error_kmh": 2.9, "precip_hit": true},
+    "nws": {"temp_error_c": 0.6, "wind_error_kmh": 7.4, "precip_hit": true}
+  },
+  "notes": "Big warming — KPAE up 6.6C in 2 hours (2.8 to 9.4). Open-Meteo best temp again (0.3C). NWS overshot by 0.6C. KSEA calm for first time (was 13-17 km/h all night). Spread widening (12.2C dewpoint depression — very dry air). KSC 26.6C, clear, launch wx excellent. River dropping (10,600 from 11,400 — receding).",
+  "nws_grid": "SEW/129,82"
+}
