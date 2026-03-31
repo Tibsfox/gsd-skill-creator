@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snohomish County &amp; Mukilteo History</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header .coords { color:rgba(255,255,255,0.3); font-size:0.75rem; font-family:monospace; margin-top:0.5rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin-right:1.2rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+    blockquote {
+      font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light);
+      padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+    }
+
+    h2 {
+      font-size:1.1rem; font-weight:400; color:var(--sand); margin:2.5rem 0 1rem;
+      padding-bottom:0.3rem; border-bottom:1px solid var(--border);
+    }
+    h2 .era { font-size:0.8rem; color:var(--dim); font-family:monospace; margin-left:0.5rem; }
+    .section-intro { font-size:0.9rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif; }
+
+    .section {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.5rem; margin-bottom:1.5rem; transition:border-color 0.2s;
+    }
+    .section:hover { border-color:var(--sea-light); }
+    .section h3 { font-size:1.05rem; color:#fff; margin-bottom:0.3rem; }
+    .section .tagline { font-size:0.82rem; color:var(--marine); font-style:italic; margin-bottom:0.8rem; }
+    .section p { font-size:0.88rem; color:var(--text); margin-bottom:0.6rem; }
+    .section .detail { font-size:0.85rem; color:var(--fog); }
+
+    .timeline {
+      border-left:2px solid var(--border); margin:0.8rem 0 0.8rem 0.5rem; padding-left:1.2rem;
+    }
+    .timeline .event {
+      position:relative; margin-bottom:0.5rem; font-size:0.82rem; color:var(--fog);
+    }
+    .timeline .event::before {
+      content:''; position:absolute; left:-1.45rem; top:0.45rem;
+      width:8px; height:8px; border-radius:50%; background:var(--marine);
+      border:2px solid var(--bg);
+    }
+    .timeline .event .year { color:var(--sand); font-family:monospace; font-size:0.78rem; margin-right:0.3rem; }
+
+    .highlight {
+      background:rgba(58,138,154,0.06); border:1px solid rgba(58,138,154,0.15);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0; font-size:0.85rem;
+    }
+    .highlight strong { color:var(--marine); }
+
+    .tag {
+      display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+      font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:500;
+      border:1px solid; margin-right:0.3rem; margin-bottom:0.3rem;
+    }
+    .tag-treaty { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+    .tag-industry { background:rgba(58,138,154,0.1); color:var(--marine); border-color:rgba(58,138,154,0.3); }
+    .tag-military { background:rgba(42,74,48,0.15); color:#6a9a70; border-color:rgba(42,74,48,0.4); }
+    .tag-transit { background:rgba(74,122,154,0.1); color:var(--sky); border-color:rgba(74,122,154,0.3); }
+    .tag-tech { background:rgba(154,106,216,0.1); color:#a88ad8; border-color:rgba(154,106,216,0.3); }
+    .tag-weather { background:rgba(90,122,138,0.1); color:var(--rain); border-color:rgba(90,122,138,0.3); }
+    .tag-labor { background:rgba(184,102,74,0.1); color:#b8664a; border-color:rgba(184,102,74,0.3); }
+
+    .quote {
+      font-style:italic; color:var(--fog); font-size:0.88rem; margin:0.6rem 0;
+      padding-left:1rem; border-left:2px solid var(--sea-light);
+    }
+
+    footer {
+      max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+      font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+      font-family:system-ui,sans-serif;
+    }
+    footer a { color:var(--fog); }
+
+    @media(max-width:640px) {
+      header h1 { font-size:1.4rem; }
+      main { padding:1rem; }
+      .section { padding:1rem; }
+    }
+
+    @media(min-width:1920px) {
+      main { max-width:1300px; }
+      footer { max-width:1300px; }
+      header h1 { font-size:2.6rem; }
+      header .subtitle { font-size:1.1rem; margin-top:0.4rem; }
+      header nav a { font-size:0.9rem; margin-right:1.8rem; }
+      h2 { font-size:1.4rem; }
+      .section { padding:2rem; }
+      .section h3 { font-size:1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Snohomish County &amp; Mukilteo History</h1>
+  <div class="subtitle">From Coast Salish longhouses to Boeing widebodies &mdash; the land beneath the convergence zone</div>
+  <div class="coords">47.9063&deg;N 122.2816&deg;W &middot; Snohomish County &middot; Salish Sea watershed</div>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="trips.html">Trip Planner</a>
+    <a href="food.html">Food Heritage</a>
+    <a href="whidbey.html">Whidbey</a>
+    <a href="history.html" class="active">History</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <blockquote>
+    The Point Elliott Treaty was signed on the beach at Mukilteo in 1855. One hundred and thirteen years later,
+    the largest building in the world rose from the same county's forests. The distance between those two events
+    is measured in displacement, extraction, and reinvention &mdash; and the land remembers all of it.
+  </blockquote>
+
+  <!-- ========== 1. Indigenous History ========== -->
+
+  <h2>Indigenous History <span class="era">time immemorial &ndash; 1855</span></h2>
+  <p class="section-intro">The original peoples of this land shaped it for thousands of years before European contact.</p>
+
+  <div class="section">
+    <h3>The Snohomish People</h3>
+    <div class="tagline">Sdoh-doh-hohbsh &mdash; "a style of crossing a stream" or "sleeping waters"</div>
+    <span class="tag tag-treaty">Coast Salish</span>
+
+    <p>The Snohomish were a Southern Coast Salish people whose territory spanned the Snohomish River drainage,
+    the shores of Possession Sound, and the lowlands of what is now Snohomish County. Their language,
+    Lushootseed, connected them to a network of Salish Sea peoples stretching from the Skagit to the Puyallup.</p>
+
+    <p>They built cedar longhouses along riverbanks and shorelines &mdash; structures that could house
+    multiple families and last for generations. Cedar was the foundation of material culture: canoes, clothing,
+    baskets, and the great bent-wood boxes used for cooking and storage.</p>
+
+    <p class="detail">Salmon was the center of the food economy. Five species of Pacific salmon &mdash; Chinook,
+    Coho, Sockeye, Pink, and Chum &mdash; returned to the rivers each year in overlapping runs from spring
+    through fall. The First Salmon Ceremony honored the returning fish and ensured continued abundance.</p>
+
+    <div class="timeline">
+      <div class="event"><span class="year">~8000 BCE</span> Post-glacial habitation along Puget Sound shorelines begins</div>
+      <div class="event"><span class="year">~3000 BCE</span> Established village sites along the Snohomish and Stillaguamish rivers</div>
+      <div class="event"><span class="year">1792</span> George Vancouver charts Possession Sound, names Whidbey Island</div>
+      <div class="event"><span class="year">1841</span> Wilkes Expedition maps the region in detail</div>
+      <div class="event"><span class="year">1855</span> Point Elliott Treaty signed at Mukilteo &mdash; tribes cede most of their land</div>
+    </div>
+
+    <div class="highlight">
+      <strong>Point Elliott Treaty (January 22, 1855):</strong> Signed on the beach at Mukilteo between
+      Governor Isaac Stevens and leaders of the Duwamish, Suquamish, Snoqualmie, Snohomish, Lummi, Skagit,
+      Swinomish, and allied bands. The tribes ceded most of their territory in exchange for reservations,
+      fishing rights, and cash payments. Chief Seattle (Si'ahl) was among the signers.
+    </div>
+
+    <p class="detail">The <strong>Tulalip Reservation</strong> was established under the treaty, consolidating
+    the Snohomish, Snoqualmie, Skykomish, and other bands onto a single reservation on the shores of
+    Tulalip Bay. The Tulalip Tribes today operate as a federally recognized tribal government and are
+    the largest employer in Marysville.</p>
+  </div>
+
+  <!-- ========== 2. Mukilteo ========== -->
+
+  <h2>Mukilteo <span class="era">1855 &ndash; present</span></h2>
+  <p class="section-intro">Named from the Snohomish word Buk-wil-tee-oh &mdash; "good camping ground" or "narrow passage."</p>
+
+  <div class="section">
+    <h3>Treaty Ground to Ferry Town</h3>
+    <span class="tag tag-treaty">Treaty Site</span>
+    <span class="tag tag-transit">Ferry</span>
+    <span class="tag tag-industry">Boeing</span>
+
+    <p>Mukilteo sits on the Snohomish word <em>Buk-wil-tee-oh</em>, meaning "good camping ground" or
+    "narrow passage" &mdash; a reference to the narrowing of Possession Sound between the mainland and
+    Whidbey Island. The Point Elliott Treaty was signed on this beach on January 22, 1855, making it
+    one of the most historically significant sites in the Pacific Northwest.</p>
+
+    <div class="timeline">
+      <div class="event"><span class="year">1855</span> Point Elliott Treaty signed on the beach at Mukilteo</div>
+      <div class="event"><span class="year">1862</span> Mukilteo established as Snohomish County seat (until 1897)</div>
+      <div class="event"><span class="year">1900</span> Population reaches ~300; lumber and fishing economy</div>
+      <div class="event"><span class="year">1906</span> Mukilteo Lighthouse constructed &mdash; one of the most photographed lighthouses in Washington</div>
+      <div class="event"><span class="year">1909</span> Ferry landing food service begins (see <a href="food.html">Food Heritage</a>)</div>
+      <div class="event"><span class="year">1947</span> Mukilteo incorporated as a city</div>
+      <div class="event"><span class="year">1967</span> Boeing begins building the Everett factory adjacent to Paine Field</div>
+      <div class="event"><span class="year">2019</span> Paine Field commercial terminal opens &mdash; Alaska Airlines service</div>
+    </div>
+
+    <div class="highlight">
+      <strong>Mukilteo Lighthouse (1906):</strong> Built by the U.S. Lighthouse Service on the point where
+      the treaty was signed. The wood-frame lighthouse guided ships through the narrow passage between
+      Whidbey Island and the mainland. Now a city park and museum, it remains one of the most photographed
+      lighthouses in Washington State.
+    </div>
+
+    <div class="highlight">
+      <strong>Paine Field &amp; Boeing:</strong> The Boeing Everett Factory, built starting in 1967 on the
+      edge of Paine Field, is the largest building by volume in the world &mdash; 472 million cubic feet.
+      It produces the 747, 767, 777, and 787 widebody aircraft. Paine Field itself dates to the 1930s
+      and became a major military airfield during World War II before transitioning to commercial and
+      industrial aviation use.
+    </div>
+  </div>
+
+  <!-- ========== 3. Everett ========== -->
+
+  <h2>Everett <span class="era">1890 &ndash; present</span></h2>
+  <p class="section-intro">Founded on eastern capital, built on timber, tested by labor conflict, transformed by aerospace.</p>
+
+  <div class="section">
+    <h3>The County Seat</h3>
+    <span class="tag tag-industry">Timber</span>
+    <span class="tag tag-labor">Labor</span>
+    <span class="tag tag-military">Naval Station</span>
+    <span class="tag tag-industry">Boeing</span>
+
+    <p>Everett was founded in 1890 by Henry Hewitt Jr. and a group of eastern investors, including
+    John D. Rockefeller associates, who envisioned a Pacific Northwest industrial hub. The city was
+    named after Everett Colby, son of investor Charles L. Colby, president of the Wisconsin Central
+    Railroad.</p>
+
+    <p>The early economy centered on Weyerhaeuser timber, paper mills, and shipyards. The deep water
+    of Port Gardner Bay made Everett a natural port, and the arrival of the Great Northern Railway in
+    1893 connected the city to eastern markets.</p>
+
+    <div class="timeline">
+      <div class="event"><span class="year">1890</span> City founded by Henry Hewitt Jr. and eastern investors</div>
+      <div class="event"><span class="year">1893</span> Great Northern Railway reaches Everett via Stevens Pass</div>
+      <div class="event"><span class="year">1900</span> Weyerhaeuser Timber Company establishes massive mill operations</div>
+      <div class="event"><span class="year">1916</span> Everett Massacre &mdash; IWW labor conflict on the steamer Verona</div>
+      <div class="event"><span class="year">1917</span> Everett Pulp &amp; Paper Company operational (later Scott Paper, Kimberly-Clark)</div>
+      <div class="event"><span class="year">1943</span> Naval presence during WWII &mdash; shipyard production</div>
+      <div class="event"><span class="year">1968</span> Boeing Everett Factory opens &mdash; 472 million cubic feet</div>
+      <div class="event"><span class="year">1984</span> Last major sawmill closes in downtown Everett</div>
+      <div class="event"><span class="year">1992</span> Naval Station Everett commissioned &mdash; home to Nimitz-class carriers and destroyers</div>
+      <div class="event"><span class="year">1994</span> USS Abraham Lincoln arrives as first carrier</div>
+      <div class="event"><span class="year">2023</span> Boeing 777X flight testing continues from Paine Field</div>
+    </div>
+
+    <div class="highlight">
+      <strong>The Everett Massacre (November 5, 1916):</strong> Members of the Industrial Workers of the
+      World (IWW, "Wobblies") sailed from Seattle on the steamer <em>Verona</em> to support striking
+      shingle weavers in Everett. When the ship docked at the city wharf, armed vigilantes and deputies
+      opened fire. Five IWW members were killed, with two deputies also dead &mdash; likely from
+      crossfire. The event became a defining moment in Pacific Northwest labor history.
+    </div>
+
+    <div class="highlight">
+      <strong>Naval Station Everett (1992):</strong> The Navy's most modern homeport, built on the
+      former Scott Paper mill site on Port Gardner Bay. Home to a carrier strike group, guided-missile
+      destroyers, and Coast Guard cutters. The base brought approximately 6,000 military personnel
+      and their families to Snohomish County.
+    </div>
+  </div>
+
+  <!-- ========== 4. Silicon Forest ========== -->
+
+  <h2>Silicon Forest <span class="era">1917 &ndash; present</span></h2>
+  <p class="section-intro">From Boeing's first factory to the semiconductor corridor &mdash; the tech roots of the Pacific Northwest.</p>
+
+  <div class="section">
+    <h3>The Tech Corridor</h3>
+    <span class="tag tag-tech">Tech</span>
+    <span class="tag tag-industry">Aerospace</span>
+    <span class="tag tag-tech">Semiconductors</span>
+
+    <p>The Pacific Northwest tech ecosystem is often dated to Boeing's founding in Seattle in 1916, but
+    the broader "Silicon Forest" label emerged from the Portland-area cluster of Tektronix, Intel, and
+    Hewlett-Packard in the 1970s. In Snohomish County, the story threads differently &mdash; through
+    precision instruments, aerospace, and semiconductor fabrication.</p>
+
+    <div class="timeline">
+      <div class="event"><span class="year">1916</span> Boeing founded in Seattle &mdash; Pacific Aero Products Co.</div>
+      <div class="event"><span class="year">1917</span> First Boeing factory on the Duwamish River</div>
+      <div class="event"><span class="year">1946</span> Tektronix founded in Portland &mdash; sparks Oregon's Silicon Forest</div>
+      <div class="event"><span class="year">1948</span> Fluke Corporation founded &mdash; test and measurement instruments</div>
+      <div class="event"><span class="year">1953</span> Hewlett-Packard opens first PNW operations</div>
+      <div class="event"><span class="year">1968</span> Boeing Everett Factory &mdash; world's largest building, widebody jet production</div>
+      <div class="event"><span class="year">1975</span> Microsoft founded in Albuquerque, moves to Bellevue 1979</div>
+      <div class="event"><span class="year">1980s</span> Philips Semiconductor establishes Bothell/Mill Creek corridor</div>
+      <div class="event"><span class="year">1990s</span> NXP (Philips spin-off) continues semiconductor fabrication in the corridor</div>
+      <div class="event"><span class="year">2000s</span> Microsoft influence spreads north from Redmond through south Snohomish County</div>
+      <div class="event"><span class="year">2010s</span> Tech workforce increasingly distributed across Snohomish County</div>
+    </div>
+
+    <div class="highlight">
+      <strong>Fluke Corporation:</strong> John Fluke Sr. started the company in his Springdale, Connecticut
+      garage in 1948, building precision electrical measurement instruments. The company relocated to
+      Seattle and eventually to Everett, where it became a major employer. Fluke's multimeters and
+      calibration instruments are standard equipment in electronics labs worldwide. The company is now
+      a Fortive subsidiary but maintains its Everett presence.
+    </div>
+
+    <div class="highlight">
+      <strong>Philips/NXP Semiconductor Corridor:</strong> The Bothell-Mill Creek area became a node in
+      the global semiconductor supply chain through Philips Semiconductor (later NXP) fabrication
+      facilities. Combined with the Fluke instrumentation tradition and Boeing's avionics demands,
+      Snohomish County developed a quiet but persistent electronics manufacturing base that
+      predates the software-dominated tech narrative.
+    </div>
+  </div>
+
+  <!-- ========== 5. The Convergence Zone ========== -->
+
+  <h2>The Convergence Zone <span class="era">atmospheric</span></h2>
+  <p class="section-intro">Where Pacific air splits around the Olympics, then crashes back together over south Snohomish County.</p>
+
+  <div class="section">
+    <h3>Puget Sound Convergence Zone</h3>
+    <span class="tag tag-weather">Microclimate</span>
+    <span class="tag tag-weather">PSCZ</span>
+
+    <p>The Puget Sound Convergence Zone (PSCZ) is one of the most distinctive and locally frustrating
+    weather phenomena in the Pacific Northwest. When prevailing westerly or northwesterly winds encounter
+    the Olympic Mountains, the airflow splits &mdash; one branch goes north through the Strait of Juan de Fuca,
+    the other south through the Chehalis Gap. These two branches reconverge over the central Puget Sound lowlands,
+    typically across a band from Everett to Lynnwood.</p>
+
+    <p>The convergence creates a narrow zone of enhanced precipitation, cloud formation, and sometimes
+    thunderstorms that can be entirely absent just a few miles north or south. A day that is sunny in
+    Seattle and sunny in Stanwood can deliver steady rain in Mukilteo.</p>
+
+    <p class="detail">The PSCZ is the reason weather forecasts for Snohomish County are notoriously unreliable.
+    The zone shifts north and south depending on wind direction and speed, and it can activate or collapse
+    within hours. This is the phenomenon that the <a href="index.html">Mukilteo Microclimate Observatory</a>
+    was built to track.</p>
+
+    <div class="highlight">
+      <strong>Why models disagree here:</strong> The PSCZ exists at the resolution limit of most weather
+      models. A 12km grid cell cannot resolve a 5-mile-wide convergence band. Higher-resolution models
+      (HRRR at 3km, NAM Nest at 3km) perform better, but the zone's rapid shifts still defeat deterministic
+      prediction. This is why multiple source comparison &mdash; the core of the MUK dashboard &mdash;
+      matters most in this specific geography.
+    </div>
+
+    <p class="detail">Communities most affected by the PSCZ: Mukilteo, south Everett, Lynnwood, Edmonds,
+    Mountlake Terrace, Bothell, and Mill Creek. The zone's northern boundary roughly follows the
+    Snohomish River; its southern boundary varies but rarely extends past the King County line.</p>
+  </div>
+
+  <!-- ========== 6. Transportation ========== -->
+
+  <h2>Transportation <span class="era">1893 &ndash; 2037</span></h2>
+  <p class="section-intro">Railroads, interurbans, highways, ferries, and the light rail yet to come.</p>
+
+  <div class="section">
+    <h3>Connecting the Corridor</h3>
+    <span class="tag tag-transit">Rail</span>
+    <span class="tag tag-transit">Ferry</span>
+    <span class="tag tag-transit">Aviation</span>
+    <span class="tag tag-transit">Light Rail</span>
+
+    <p>Snohomish County's transportation history tracks the broader arc of American mobility: from rail
+    to trolley to automobile to air, with water crossings woven through every era. The county sits on
+    the I-5 corridor between Seattle and the Canadian border, and its ferry connection to Whidbey Island
+    remains one of the busiest routes in the Washington State Ferries system.</p>
+
+    <div class="timeline">
+      <div class="event"><span class="year">1893</span> Great Northern Railway reaches Everett &mdash; James J. Hill's Stevens Pass route</div>
+      <div class="event"><span class="year">1910</span> Interurban trolley begins service: Everett to Seattle electric rail</div>
+      <div class="event"><span class="year">1916</span> Mukilteo-Columbia Beach ferry service begins</div>
+      <div class="event"><span class="year">1927</span> Auto ferries replace steam vessels on the Mukilteo-Clinton route</div>
+      <div class="event"><span class="year">1939</span> Interurban trolley ceases operation &mdash; killed by the automobile</div>
+      <div class="event"><span class="year">1951</span> Washington State Ferries acquires the Mukilteo-Clinton route</div>
+      <div class="event"><span class="year">1957</span> Interstate 5 construction begins through Snohomish County</div>
+      <div class="event"><span class="year">1969</span> I-5 fully open through the county</div>
+      <div class="event"><span class="year">1992</span> Sounder commuter rail planning begins</div>
+      <div class="event"><span class="year">2003</span> Sounder North Line: Everett to Seattle commuter rail opens</div>
+      <div class="event"><span class="year">2019</span> Paine Field commercial flights begin &mdash; Alaska Airlines</div>
+      <div class="event"><span class="year">2024</span> Link Light Rail Lynnwood extension opens</div>
+      <div class="event"><span class="year">2037</span> Link Light Rail extension to Everett (planned opening)</div>
+    </div>
+
+    <div class="highlight">
+      <strong>Interurban Trolley (1910&ndash;1939):</strong> The Everett-Seattle interurban electric
+      railway ran 33 miles along a dedicated right-of-way, connecting Everett, Edmonds, Ballard, and
+      downtown Seattle. At its peak it carried over a million passengers a year. The Interurban Trail,
+      a paved multi-use path through Shoreline and Edmonds, follows parts of the original route.
+    </div>
+
+    <div class="highlight">
+      <strong>Mukilteo-Clinton Ferry:</strong> The crossing between Mukilteo and Clinton on Whidbey Island
+      is approximately 20 minutes and is operated by Washington State Ferries. The route is the primary
+      vehicle connection between Whidbey Island and the mainland, carrying approximately 4 million passengers
+      per year. The Mukilteo terminal was rebuilt and relocated in 2020 to a new multimodal facility.
+    </div>
+
+    <div class="highlight">
+      <strong>Link Light Rail to Everett (2037):</strong> Sound Transit's Everett Link Extension will
+      connect downtown Everett to the regional light rail network, running through south Everett, the
+      SR 99 corridor, and connecting to the existing Lynnwood Link station. When complete, the trip
+      from Everett to downtown Seattle will take approximately 55 minutes by rail &mdash; closing a
+      loop that the interurban trolley opened over a century earlier.
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  <a href="index.html">MUK Dashboard</a> &middot;
+  Snohomish County &amp; Mukilteo History &middot;
+  47.9&deg;N 122.3&deg;W &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a>
+</footer>
+
+</body>
+</html>
