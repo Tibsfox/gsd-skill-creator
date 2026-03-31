@@ -46,6 +46,86 @@
       padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.9rem; font-family:Georgia,serif;
     }
 
+    /* ======== HERO ROW ======== */
+    .hero-row {
+      display:grid; grid-template-columns:1fr 1.2fr 1fr; gap:1.2rem;
+      margin-bottom:1.5rem; align-items:stretch;
+    }
+    .hero-card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; transition:border-color 0.2s;
+    }
+    .hero-card:hover { border-color:rgba(224,168,48,0.15); }
+    .hero-card.moon-hero { border-color:rgba(184,200,216,0.1); }
+    .hero-card.sun-hero { border-color:rgba(224,168,48,0.1); }
+    .hero-card.title-hero {
+      background:transparent; border:none;
+      justify-content:center; padding:0.5rem 1rem;
+    }
+    .hero-card.title-hero:hover { border-color:transparent; }
+    .hero-card h3 {
+      font-size:0.65rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.12em;
+      margin-bottom:0.6rem; font-weight:500;
+    }
+    .hero-card .hero-value {
+      font-size:1.3rem; color:#fff; font-weight:300; margin-bottom:0.3rem;
+    }
+    .hero-card .hero-detail {
+      font-size:0.75rem; color:var(--dim); line-height:1.5;
+    }
+    .hero-card .hero-detail span { display:block; }
+
+    .hero-moon-viz {
+      width:64px; height:64px; border-radius:50%; margin-bottom:0.5rem;
+      position:relative; overflow:hidden;
+      background: var(--lunar-silver);
+      box-shadow: 0 0 16px rgba(184,200,216,0.12);
+    }
+    .hero-moon-viz .moon-shadow {
+      position:absolute; inset:0; border-radius:50%;
+      background:#101820;
+      transition: clip-path 0.5s ease;
+    }
+
+    .hero-title-text { font-size:1.4rem; font-weight:400; color:#fff; font-family:Georgia,serif; letter-spacing:0.04em; }
+    .hero-title-sub { font-size:0.8rem; color:var(--solar-gold); font-style:italic; margin-top:0.2rem; font-family:Georgia,serif; }
+
+    /* ======== DAYLIGHT PROGRESS BAR ======== */
+    .daylight-bar-wrap {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1rem 1.2rem; margin-bottom:1.5rem;
+    }
+    .daylight-bar-wrap h3 {
+      font-size:0.65rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.12em;
+      margin-bottom:0.6rem; font-weight:500; display:flex; align-items:center; gap:0.5rem;
+    }
+    .daylight-bar {
+      position:relative; height:24px; border-radius:12px; overflow:hidden;
+      background:linear-gradient(90deg,
+        #0a0e18 0%,
+        #1a2040 var(--dawn-pct),
+        #e0a830 var(--sunrise-pct),
+        #f0d060 var(--noon-pct),
+        #e0a830 var(--sunset-pct),
+        #1a2040 var(--dusk-pct),
+        #0a0e18 100%
+      );
+    }
+    .daylight-bar .now-marker {
+      position:absolute; top:0; bottom:0; width:3px;
+      background:#fff; border-radius:2px;
+      box-shadow:0 0 8px rgba(255,255,255,0.6);
+      transition:left 60s linear;
+    }
+    .daylight-labels {
+      display:flex; justify-content:space-between;
+      font-size:0.65rem; color:var(--dim); margin-top:0.3rem; padding:0 0.2rem;
+    }
+    .daylight-labels span { white-space:nowrap; }
+    .daylight-labels .label-now { color:var(--solar-gold); font-weight:600; }
+
+    /* ======== LIVE GRID ======== */
     .live-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.2rem; margin:1.5rem 0; }
     .panel {
       background:var(--panel); border:1px solid var(--border); border-radius:6px;
@@ -88,8 +168,14 @@
 
     .moon-viz {
       width:80px; height:80px; border-radius:50%; margin:0 auto 0.5rem;
-      background: radial-gradient(circle at 35% 40%, var(--lunar-silver) 0%, #606878 50%, #303840 100%);
+      position:relative; overflow:hidden;
+      background: var(--lunar-silver);
       box-shadow: 0 0 20px rgba(184,200,216,0.1);
+    }
+    .moon-viz .moon-shadow {
+      position:absolute; inset:0; border-radius:50%;
+      background:#101820;
+      transition: clip-path 0.5s ease;
     }
     .moon-info { text-align:center; }
 
@@ -106,11 +192,118 @@
     }
     footer a { color:rgba(255,255,255,0.4); }
 
+    /* ======== LOD: Level of Detail classes ======== */
+    .lod-high { display:none; }
+    .lod-medium { display:none; }
+
+    /* ======== RESPONSIVE BREAKPOINTS ======== */
+
+    /* Mobile: 1 column, compact (already existed, enhanced) */
     @media(max-width:640px) {
       header h1 { font-size:1.4rem; }
       main { padding:1rem; }
       .live-grid { grid-template-columns:1fr; }
+      .hero-row { grid-template-columns:1fr; }
+      .hero-card.title-hero { order:-1; }
+      .daylight-labels { font-size:0.6rem; }
+      .hero-card .hero-value { font-size:1.1rem; }
     }
+
+    /* Tablet / small desktop: 2 columns */
+    @media(max-width:1200px) and (min-width:641px) {
+      .live-grid { grid-template-columns:repeat(2, 1fr); }
+      .hero-row { grid-template-columns:1fr 1.2fr 1fr; }
+    }
+
+    /* Large desktop: show medium LOD, 3 columns default */
+    @media(min-width:1201px) {
+      .lod-medium { display:block; }
+    }
+
+    /* Widescreen 1920+: 4-column grid, larger fonts, more spacing, show high LOD */
+    @media(min-width:1920px) {
+      main { max-width:1500px; padding:2.5rem 2rem 5rem; }
+      header h1 { font-size:2.2rem; }
+      header .subtitle { font-size:1rem; }
+      header .coords { font-size:0.85rem; }
+      blockquote { font-size:1rem; padding:1rem 1.5rem; margin-bottom:2.5rem; }
+      .live-grid { grid-template-columns:repeat(4, 1fr); gap:1.5rem; }
+      .panel { padding:1.5rem; }
+      .panel h3 { font-size:0.8rem; margin-bottom:1rem; }
+      .data-row { padding:0.35rem 0; }
+      .data-label { font-size:0.85rem; }
+      .data-value { font-size:1.05rem; }
+      h2 { font-size:1.3rem; margin:3rem 0 0.7rem; }
+      .info-card { padding:1.5rem; margin-bottom:1.2rem; }
+      .info-card h4 { font-size:1.1rem; margin-bottom:0.5rem; }
+      .info-card p { font-size:0.95rem; }
+      .spec-table { font-size:0.9rem; }
+      .spec-table th { font-size:0.72rem; padding:0.5rem 0.8rem; }
+      .spec-table td { padding:0.5rem 0.8rem; }
+      footer { max-width:1500px; font-size:0.85rem; }
+      .hero-row { gap:1.5rem; }
+      .hero-card .hero-value { font-size:1.5rem; }
+      .hero-card .hero-detail { font-size:0.82rem; }
+      .hero-title-text { font-size:1.7rem; }
+      .hero-title-sub { font-size:0.95rem; }
+      .daylight-bar { height:30px; }
+      .daylight-labels { font-size:0.75rem; }
+      .lod-high { display:block; }
+      .lod-medium { display:block; }
+    }
+
+    /* 4K portrait: even larger type, constrained width */
+    @media(min-width:2560px) {
+      main { max-width:1400px; padding:3rem 2.5rem 6rem; }
+      header h1 { font-size:2.6rem; letter-spacing:0.08em; }
+      header .subtitle { font-size:1.15rem; }
+      header .coords { font-size:0.95rem; }
+      header { padding:3rem 2.5rem 2rem; }
+      blockquote { font-size:1.1rem; padding:1.2rem 1.8rem; }
+      .live-grid { grid-template-columns:repeat(4, 1fr); gap:1.8rem; }
+      .panel { padding:1.8rem; }
+      .panel h3 { font-size:0.85rem; }
+      .data-label { font-size:0.9rem; }
+      .data-value { font-size:1.1rem; }
+      h2 { font-size:1.5rem; margin:3.5rem 0 0.8rem; }
+      .info-card { padding:1.8rem; }
+      .info-card h4 { font-size:1.2rem; }
+      .info-card p { font-size:1rem; }
+      .spec-table { font-size:0.95rem; }
+      .spec-table th { font-size:0.78rem; }
+      footer { max-width:1400px; font-size:0.9rem; }
+      .hero-card .hero-value { font-size:1.7rem; }
+      .hero-title-text { font-size:2rem; }
+    }
+
+    /* ======== LIVE DATA STATUS ======== */
+    .live-status {
+      font-size:0.6rem; color:var(--dim); text-align:right; margin-top:0.3rem;
+    }
+    .live-status.fresh { color:var(--aurora-green); }
+    .live-status.stale { color:var(--corona); }
+
+    /* ======== SOLAR CYCLE GRAPH PLACEHOLDER (lod-high) ======== */
+    .solar-cycle-graph {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; margin:1rem 0;
+    }
+    .solar-cycle-graph h4 {
+      font-size:0.95rem; color:#fff; margin-bottom:0.4rem; font-family:Georgia,serif;
+    }
+    .solar-cycle-graph .graph-placeholder {
+      height:120px; border:1px dashed rgba(224,168,48,0.15); border-radius:4px;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--dim); font-size:0.75rem; margin-top:0.5rem;
+      background:repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 39px,
+        rgba(255,255,255,0.02) 39px,
+        rgba(255,255,255,0.02) 40px
+      );
+    }
+    .solar-cycle-graph p { font-size:0.85rem; color:rgba(255,255,255,0.6); line-height:1.6; }
   </style>
 </head>
 <body>
@@ -136,17 +329,70 @@
     SOL tracks the celestial mechanics that connect the sky above Mukilteo to the missions beyond it.
   </blockquote>
 
+  <!-- ==================== HERO ROW ==================== -->
+
+  <div class="hero-row">
+    <!-- MOON HERO CARD -->
+    <div class="hero-card moon-hero">
+      <h3>Moon Phase</h3>
+      <div class="hero-moon-viz" id="hero-moon-viz">
+        <div class="moon-shadow" id="hero-moon-shadow"></div>
+      </div>
+      <div class="hero-value" id="hero-moon-phase">--</div>
+      <div class="hero-detail">
+        <span id="hero-moon-illum">Illumination: --</span>
+        <span id="hero-moon-rise">Rise: --</span>
+        <span id="hero-moon-set">Set: --</span>
+      </div>
+    </div>
+
+    <!-- TITLE HERO CARD -->
+    <div class="hero-card title-hero">
+      <div class="hero-title-text">Sun &amp; Moon</div>
+      <div class="hero-title-sub">Live celestial data for 47.9&deg;N</div>
+    </div>
+
+    <!-- SUN HERO CARD -->
+    <div class="hero-card sun-hero">
+      <h3>Day Cycle</h3>
+      <div class="hero-value" id="hero-sun-position">--</div>
+      <div class="hero-detail">
+        <span id="hero-sun-rise">Rise: --</span>
+        <span id="hero-sun-set">Set: --</span>
+        <span id="hero-day-length">Day: --</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== DAYLIGHT PROGRESS BAR ==================== -->
+
+  <div class="daylight-bar-wrap">
+    <h3><span class="live-dot dot-amber"></span> Daylight Progress</h3>
+    <div class="daylight-bar" id="daylight-bar"
+         style="--dawn-pct:10%;--sunrise-pct:18%;--noon-pct:50%;--sunset-pct:82%;--dusk-pct:90%;">
+      <div class="now-marker" id="daylight-now" style="left:50%;"></div>
+    </div>
+    <div class="daylight-labels">
+      <span id="label-dawn">Dawn</span>
+      <span id="label-sunrise">Sunrise</span>
+      <span id="label-noon">Noon</span>
+      <span id="label-sunset">Sunset</span>
+      <span id="label-dusk">Dusk</span>
+      <span class="label-now" id="label-now">Now: --</span>
+    </div>
+  </div>
+
   <!-- ==================== LIVE PANELS ==================== -->
 
   <div class="live-grid">
 
     <!-- SUN TODAY -->
     <div class="panel">
-      <h3><span class="live-dot dot-amber"></span> Sun Today &mdash; March 31, 2026</h3>
-      <div class="data-row"><span class="data-label">Sunrise</span><span class="data-value gold">6:49 AM PDT</span></div>
-      <div class="data-row"><span class="data-label">Solar Noon</span><span class="data-value gold">1:13 PM PDT</span></div>
-      <div class="data-row"><span class="data-label">Sunset</span><span class="data-value gold">7:39 PM PDT</span></div>
-      <div class="data-row"><span class="data-label">Day Length</span><span class="data-value">12h 52m</span></div>
+      <h3><span class="live-dot dot-amber"></span> Sun Today &mdash; <span id="sun-date">March 31, 2026</span></h3>
+      <div class="data-row"><span class="data-label">Sunrise</span><span class="data-value gold" id="sun-rise-val">6:49 AM PDT</span></div>
+      <div class="data-row"><span class="data-label">Solar Noon</span><span class="data-value gold" id="sun-noon-val">1:13 PM PDT</span></div>
+      <div class="data-row"><span class="data-label">Sunset</span><span class="data-value gold" id="sun-set-val">7:39 PM PDT</span></div>
+      <div class="data-row"><span class="data-label">Day Length</span><span class="data-value" id="sun-day-length">12h 52m</span></div>
       <div class="data-row"><span class="data-label">Civil Twilight</span><span class="data-value">6:18 AM &ndash; 8:09 PM</span></div>
       <div class="data-row"><span class="data-label">Nautical Twilight</span><span class="data-value">5:40 AM &ndash; 8:47 PM</span></div>
       <div class="data-row"><span class="data-label">Astronomical Twilight</span><span class="data-value">5:00 AM &ndash; 9:26 PM</span></div>
@@ -157,25 +403,28 @@
     <div class="panel">
       <h3><span class="live-dot"></span> Moon Today</h3>
       <div class="moon-info">
-        <div class="moon-viz"></div>
+        <div class="moon-viz" id="moon-viz-panel">
+          <div class="moon-shadow" id="moon-shadow-panel"></div>
+        </div>
       </div>
-      <div class="data-row"><span class="data-label">Phase</span><span class="data-value silver">Waxing Gibbous</span></div>
-      <div class="data-row"><span class="data-label">Illumination</span><span class="data-value silver">98%</span></div>
+      <div class="data-row"><span class="data-label">Phase</span><span class="data-value silver" id="moon-phase-val">Waxing Gibbous</span></div>
+      <div class="data-row"><span class="data-label">Illumination</span><span class="data-value silver" id="moon-illum-val">98%</span></div>
       <div class="data-row"><span class="data-label">Next Full Moon</span><span class="data-value silver">April 1, 7:12 PM PDT</span></div>
-      <div class="data-row"><span class="data-label">Moonrise</span><span class="data-value">6:33 PM PDT</span></div>
-      <div class="data-row"><span class="data-label">Moonset</span><span class="data-value">6:12 AM PDT</span></div>
+      <div class="data-row"><span class="data-label">Moonrise</span><span class="data-value" id="moon-rise-val">6:33 PM PDT</span></div>
+      <div class="data-row"><span class="data-label">Moonset</span><span class="data-value" id="moon-set-val">6:12 AM PDT</span></div>
       <div class="data-row"><span class="data-label">Distance</span><span class="data-value" id="moon-dist-live">~384,400 km</span></div>
     </div>
 
     <!-- SPACE WEATHER -->
     <div class="panel">
-      <h3><span class="live-dot"></span> Space Weather</h3>
-      <div class="data-row"><span class="data-label">Kp Index</span><span class="data-value green">2.0 (G0 &mdash; Quiet)</span></div>
-      <div class="data-row"><span class="data-label">Aurora Risk (PNW)</span><span class="data-value">None</span></div>
-      <div class="data-row"><span class="data-label">Solar Wind Speed</span><span class="data-value">404 km/s</span></div>
-      <div class="data-row"><span class="data-label">Solar Wind Density</span><span class="data-value">2.8 p/cm&sup3;</span></div>
-      <div class="data-row"><span class="data-label">Solar Wind Temp</span><span class="data-value">51,000 K</span></div>
+      <h3><span class="live-dot" id="sw-dot"></span> Space Weather</h3>
+      <div class="data-row"><span class="data-label">Kp Index</span><span class="data-value green" id="kp-val">2.0 (G0 &mdash; Quiet)</span></div>
+      <div class="data-row"><span class="data-label">Aurora Risk (PNW)</span><span class="data-value" id="aurora-val">None</span></div>
+      <div class="data-row"><span class="data-label">Solar Wind Speed</span><span class="data-value" id="sw-speed-val">404 km/s</span></div>
+      <div class="data-row"><span class="data-label">Solar Wind Density</span><span class="data-value" id="sw-density-val">2.8 p/cm&sup3;</span></div>
+      <div class="data-row"><span class="data-label">Solar Wind Temp</span><span class="data-value" id="sw-temp-val">51,000 K</span></div>
       <div class="data-row"><span class="data-label">Solar Cycle</span><span class="data-value">Cycle 25 (ascending)</span></div>
+      <div class="live-status" id="sw-status">Static data</div>
     </div>
 
     <!-- ARTEMIS LINK -->
@@ -223,6 +472,21 @@
     </table>
   </div>
 
+  <!-- lod-medium: expanded solar table (visible at 1200px+) -->
+  <div class="info-card lod-medium">
+    <h4>Solar Structure</h4>
+    <table class="spec-table">
+      <tr><th>Layer</th><th>Depth</th><th>Temperature</th><th>Notes</th></tr>
+      <tr><td>Core</td><td>0 &ndash; 0.25 R</td><td>~15.7 MK</td><td>pp-chain fusion, 99% of energy output</td></tr>
+      <tr><td>Radiative Zone</td><td>0.25 &ndash; 0.7 R</td><td>7 &ndash; 2 MK</td><td>Photon random walk: ~170,000 years to cross</td></tr>
+      <tr><td>Tachocline</td><td>~0.7 R</td><td>~2 MK</td><td>Shear layer, origin of magnetic dynamo</td></tr>
+      <tr><td>Convective Zone</td><td>0.7 &ndash; 1.0 R</td><td>2 MK &ndash; 5,778 K</td><td>Convection cells visible as granulation</td></tr>
+      <tr><td>Photosphere</td><td>Surface</td><td>5,778 K</td><td>Visible "surface," sunspots form here</td></tr>
+      <tr><td>Chromosphere</td><td>+2,000 km</td><td>~20,000 K</td><td>Visible during eclipses as pink rim</td></tr>
+      <tr><td>Corona</td><td>+millions km</td><td>1 &ndash; 3 MK</td><td>Coronal heating problem: hotter than surface</td></tr>
+    </table>
+  </div>
+
   <div class="info-card">
     <h4>Solar Cycle 25</h4>
     <p>We are in <span class="highlight">Solar Cycle 25</span>, which began December 2019. Solar maximum is expected 2025&ndash;2026, making this an active period for sunspots, solar flares, and coronal mass ejections. The Kp index measures geomagnetic disturbance driven by solar wind interaction with Earth's magnetosphere.</p>
@@ -230,10 +494,33 @@
     <p style="margin-top:0.5rem;"><strong>For Artemis II:</strong> Space weather affects crew radiation exposure and communications. The O2O optical system is less affected by solar radio interference than S-band. Current Kp 2.0 is benign.</p>
   </div>
 
+  <!-- lod-high: solar cycle graph placeholder (visible at 1920px+) -->
+  <div class="solar-cycle-graph lod-high">
+    <h4>Solar Cycle 25 Activity</h4>
+    <p>Sunspot number tracks the 11-year solar magnetic cycle. Cycle 25 has exceeded initial predictions, with observed sunspot numbers consistently above the forecast curve since late 2023. The current ascending phase means increased flare probability and more frequent geomagnetic storms.</p>
+    <div class="graph-placeholder" id="solar-cycle-placeholder">
+      Sunspot number timeline &mdash; Cycle 24 (2008-2019) to Cycle 25 (2019-present)
+    </div>
+    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--dim);">Data source: NOAA SWPC &middot; WDC-SILSO (Royal Observatory of Belgium)</p>
+  </div>
+
   <div class="info-card">
     <h4>Latitude 47.9&deg;N &mdash; What the Sun Does Here</h4>
     <p>At Mukilteo's latitude, the day length swings from <span class="highlight">8h 21m (winter solstice) to 16h 02m (summer solstice)</span> &mdash; a 7h 41m range. Today (March 31) is just past the equinox, gaining ~3 minutes of daylight per day. The Sun reaches a maximum altitude of ~65&deg; at summer solstice, never directly overhead.</p>
     <p style="margin-top:0.5rem;">The marine layer, Olympic rain shadow, and Cascade convergence zone all interact with solar heating to create Mukilteo's microclimate &mdash; fog burns off later here than 10 miles inland.</p>
+  </div>
+
+  <!-- lod-high: expanded solar altitude explanation (visible at 1920px+) -->
+  <div class="info-card lod-high">
+    <h4>Solar Altitude Through the Year at 47.9&deg;N</h4>
+    <p>The Sun's maximum altitude at solar noon varies with the seasons due to Earth's 23.44&deg; axial tilt:</p>
+    <table class="spec-table">
+      <tr><th>Date</th><th>Event</th><th>Noon Altitude</th><th>Day Length</th></tr>
+      <tr><td>June 20</td><td>Summer Solstice</td><td>65.5&deg;</td><td>16h 02m</td></tr>
+      <tr><td>Mar 20 / Sep 22</td><td>Equinoxes</td><td>42.1&deg;</td><td>12h 10m</td></tr>
+      <tr><td>Dec 21</td><td>Winter Solstice</td><td>18.7&deg;</td><td>8h 21m</td></tr>
+    </table>
+    <p style="margin-top:0.5rem;">The low winter sun angle means solar panels at this latitude are most efficient tilted 40-50&deg; from horizontal. The long summer days compensate for lower per-hour insolation, giving Mukilteo surprisingly good annual solar potential (~4.2 kWh/m&sup2;/day average).</p>
   </div>
 
   <!-- ==================== MOON SCIENCE ==================== -->
@@ -257,6 +544,19 @@
       <tr><td>Orbital inclination</td><td>5.145&deg; to ecliptic</td></tr>
       <tr><td>Recession rate</td><td>3.8 cm/year (moving away from Earth)</td></tr>
     </table>
+  </div>
+
+  <!-- lod-medium: expanded lunar geology (visible at 1200px+) -->
+  <div class="info-card lod-medium">
+    <h4>Lunar Surface Composition</h4>
+    <table class="spec-table">
+      <tr><th>Feature</th><th>Coverage</th><th>Composition</th><th>Age</th></tr>
+      <tr><td>Highlands (terrae)</td><td>~83% of surface</td><td>Anorthosite (Ca-feldspar)</td><td>4.4 &ndash; 4.0 Ga</td></tr>
+      <tr><td>Maria (dark plains)</td><td>~17% of surface</td><td>Basalt (Fe, Ti-rich)</td><td>3.9 &ndash; 3.1 Ga</td></tr>
+      <tr><td>Regolith</td><td>Entire surface</td><td>Pulverized rock, 2&ndash;20 m deep</td><td>Ongoing</td></tr>
+      <tr><td>South Pole (Artemis III target)</td><td>Craters</td><td>Water ice in permanently shadowed regions</td><td>Ancient</td></tr>
+    </table>
+    <p style="margin-top:0.5rem; font-size:0.85rem; color:rgba(255,255,255,0.6);">The far side that Artemis II will overfly has almost no maria &mdash; its crust is thicker, preventing magma from reaching the surface. The crew will see a dramatically different landscape from what is visible from Earth.</p>
   </div>
 
   <div class="info-card">
@@ -289,6 +589,22 @@
     <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--dim);">Approximate visibility from 47.9&deg;N latitude. Actual visibility depends on atmospheric conditions and obstructions. The nearly-full Moon will wash out fainter objects tonight.</p>
   </div>
 
+  <!-- lod-high: expanded planet table (visible at 1920px+) -->
+  <div class="info-card lod-high">
+    <h4>All Planets &mdash; Current Positions</h4>
+    <table class="spec-table">
+      <tr><th>Planet</th><th>Distance from Sun</th><th>Distance from Earth</th><th>Magnitude</th><th>Constellation</th><th>Status</th></tr>
+      <tr><td>Mercury</td><td>0.39 AU</td><td>~1.2 AU</td><td>+0.5</td><td>Pisces</td><td>Lost in twilight</td></tr>
+      <tr><td>Venus</td><td>0.72 AU</td><td>~1.4 AU</td><td>-4.0</td><td>Aquarius</td><td>Morning star, brilliant</td></tr>
+      <tr><td>Mars</td><td>1.52 AU</td><td>~1.6 AU</td><td>+1.2</td><td>Gemini</td><td>Evening, fading</td></tr>
+      <tr><td>Jupiter</td><td>5.20 AU</td><td>~5.8 AU</td><td>-2.1</td><td>Taurus</td><td>Evening, prominent</td></tr>
+      <tr><td>Saturn</td><td>9.54 AU</td><td>~10.4 AU</td><td>+1.0</td><td>Pisces</td><td>Solar conjunction</td></tr>
+      <tr><td>Uranus</td><td>19.19 AU</td><td>~20.0 AU</td><td>+5.8</td><td>Taurus</td><td>Binocular object, near Jupiter</td></tr>
+      <tr><td>Neptune</td><td>30.07 AU</td><td>~30.9 AU</td><td>+7.9</td><td>Pisces</td><td>Telescope required</td></tr>
+    </table>
+    <p style="margin-top:0.5rem; font-size:0.8rem; color:var(--dim);">Distances and magnitudes are approximate for late March 2026. Inner planet positions change rapidly; outer planets shift slowly.</p>
+  </div>
+
   <!-- ==================== CELESTIAL MECHANICS ==================== -->
 
   <h2>Celestial Mechanics &mdash; The Math Behind the Sky</h2>
@@ -304,11 +620,33 @@
     <p>The <strong>sidereal month</strong> (27.322 days) is the time for the Moon to orbit 360&deg; relative to the stars. The <strong>synodic month</strong> (29.531 days) is the time between identical phases (e.g., full moon to full moon). The synodic month is longer because Earth has moved ~27&deg; around the Sun during one lunar orbit, so the Moon needs ~2.2 extra days to "catch up" to the same Sun-Earth-Moon geometry.</p>
   </div>
 
+  <!-- lod-high: expanded celestial mechanics (visible at 1920px+) -->
+  <div class="info-card lod-high">
+    <h4>Lagrange Points &amp; the JWST Connection</h4>
+    <p>The Sun-Earth system has five <span class="highlight">Lagrange points</span> where gravitational and centripetal forces balance. L1 (sunward, 1.5M km) hosts DSCOVR/SOHO for solar monitoring. L2 (anti-sunward, 1.5M km) hosts JWST and Gaia. L4/L5 (60&deg; ahead/behind Earth) collect Trojan dust.</p>
+    <p style="margin-top:0.5rem;">The Earth-Moon system also has Lagrange points. Earth-Moon L2 (behind the far side) is where the Queqiao relay satellite operates for Chang'e missions. A future relay at EM-L2 could eliminate the communication blackout that Artemis II will experience during the far-side flyby.</p>
+    <p style="margin-top:0.5rem;">Formula for L1/L2 distance: r &asymp; R &times; (m<sub>2</sub> / 3m<sub>1</sub>)<sup>1/3</sup>, where R is the orbital radius and m<sub>1</sub>, m<sub>2</sub> are the two masses.</p>
+  </div>
+
   <div class="info-card">
     <h4>Sphere of Influence</h4>
     <p>The Moon's <span class="highlight">gravitational sphere of influence</span> extends ~66,000 km from its center. Inside this boundary, the Moon's gravity dominates over Earth's for trajectory calculations. Artemis II enters this sphere on Day 3-4 outbound, and the free-return trajectory uses the Moon's gravity to redirect the spacecraft homeward without an engine burn.</p>
     <p style="margin-top:0.5rem;">Formula: r<sub>SOI</sub> = a &times; (m<sub>Moon</sub>/m<sub>Earth</sub>)<sup>2/5</sup> = 384,400 &times; (0.0123)<sup>0.4</sup> &asymp; 66,183 km</p>
     <p style="margin-top:0.5rem;"><a href="../NASA/artemis-ii/math.html">Full worked examples &rarr;</a></p>
+  </div>
+
+  <!-- lod-high: orbital resonances (visible at 1920px+) -->
+  <div class="info-card lod-high">
+    <h4>Orbital Resonances in the Solar System</h4>
+    <p>Orbital mechanics produces elegant integer ratios throughout the solar system. These resonances stabilize (or destabilize) orbits over millions of years:</p>
+    <table class="spec-table">
+      <tr><th>Bodies</th><th>Ratio</th><th>Type</th><th>Effect</th></tr>
+      <tr><td>Moon (rotation:orbit)</td><td>1:1</td><td>Spin-orbit</td><td>Tidal locking, same face to Earth</td></tr>
+      <tr><td>Mercury (rotation:orbit)</td><td>3:2</td><td>Spin-orbit</td><td>3 rotations per 2 orbits</td></tr>
+      <tr><td>Io:Europa:Ganymede</td><td>1:2:4</td><td>Laplace</td><td>Mutual tidal heating (Io volcanism)</td></tr>
+      <tr><td>Pluto:Neptune</td><td>2:3</td><td>Mean-motion</td><td>Prevents close approaches</td></tr>
+      <tr><td>Jupiter:Saturn</td><td>~2:5</td><td>Near-resonance</td><td>Grand Tack migration theory</td></tr>
+    </table>
   </div>
 
   <!-- ==================== DATA SOURCES ==================== -->
@@ -336,8 +674,45 @@
 </footer>
 
 <script>
-// Live countdown to Artemis II
+// ================================================================
+// SOL — Live Data Engine
+// ================================================================
+
+// --- CONSTANTS ---
 var LAUNCH = new Date('2026-04-01T22:24:00Z');
+var SYNODIC_PERIOD = 29.53059;
+var REF_NEW_MOON_JD = 2451550.1;    // known new moon Julian date
+var J2000_EPOCH = 2451545.0;
+var ANOMALISTIC_PERIOD = 27.55455;
+
+// Mukilteo coordinates
+var LAT = 47.9063;
+var LNG = -122.2816;
+
+// Sun times for March 31, 2026 at Mukilteo (PDT = UTC-7)
+// These are the static baseline; sunrise-sunset API could override
+var SUN_TIMES = {
+  dawn:    { h:6, m:18 },  // civil twilight start
+  sunrise: { h:6, m:49 },
+  noon:    { h:13, m:13 },
+  sunset:  { h:19, m:39 },
+  dusk:    { h:20, m:9 }   // civil twilight end
+};
+
+// --- UTILITY ---
+function pad2(n) { return n < 10 ? '0' + n : '' + n; }
+
+function toJD(date) {
+  return (date.getTime() / 86400000) + 2440587.5;
+}
+
+function formatTime12(h, m) {
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  var h12 = h % 12 || 12;
+  return h12 + ':' + pad2(m) + ' ' + ampm;
+}
+
+// --- ARTEMIS COUNTDOWN ---
 function updateCountdown() {
   var now = new Date();
   var diff = (LAUNCH - now) / 1000;
@@ -351,22 +726,365 @@ function updateCountdown() {
   document.getElementById('artemis-countdown').textContent = 'T-' + (d > 0 ? d + 'd ' : '') + h + 'h ' + m + 'm';
 }
 
-// Moon distance (synodic approximation)
-function updateMoonDist() {
+// --- MOON DISTANCE (anomalistic period approximation) ---
+function getMoonDistance() {
   var now = new Date();
   var daysSinceJ2000 = (now.getTime() / 86400000) - 10957.5;
-  var anomalisticPeriod = 27.55455;
-  var meanAnomaly = ((daysSinceJ2000 / anomalisticPeriod) % 1) * 2 * Math.PI;
+  var meanAnomaly = ((daysSinceJ2000 / ANOMALISTIC_PERIOD) % 1) * 2 * Math.PI;
   var e = 0.0549;
   var E = meanAnomaly + e * Math.sin(meanAnomaly);
-  var r = 384400 * (1 - e * Math.cos(E));
+  return 384400 * (1 - e * Math.cos(E));
+}
+
+function updateMoonDist() {
+  var r = getMoonDistance();
   document.getElementById('moon-dist-live').textContent = Math.floor(r).toLocaleString() + ' km';
 }
 
-updateCountdown();
-updateMoonDist();
-setInterval(updateCountdown, 60000);
-setInterval(updateMoonDist, 300000);
+// --- MOON PHASE CALCULATION ---
+// Uses JD-based synodic month, reference new moon JD 2451550.1, period 29.53059
+function getMoonPhaseData() {
+  var now = new Date();
+  var jd = toJD(now);
+  var daysSinceRef = jd - REF_NEW_MOON_JD;
+  var cycles = daysSinceRef / SYNODIC_PERIOD;
+  var phase = cycles - Math.floor(cycles); // 0..1 where 0=new, 0.5=full
+
+  var illumination = (1 - Math.cos(phase * 2 * Math.PI)) / 2;
+  var illumPct = Math.round(illumination * 100);
+
+  var phaseName;
+  if (phase < 0.0335)      phaseName = 'New Moon';
+  else if (phase < 0.215)  phaseName = 'Waxing Crescent';
+  else if (phase < 0.285)  phaseName = 'First Quarter';
+  else if (phase < 0.465)  phaseName = 'Waxing Gibbous';
+  else if (phase < 0.535)  phaseName = 'Full Moon';
+  else if (phase < 0.715)  phaseName = 'Waning Gibbous';
+  else if (phase < 0.785)  phaseName = 'Last Quarter';
+  else if (phase < 0.9665) phaseName = 'Waning Crescent';
+  else                     phaseName = 'New Moon';
+
+  return { phase: phase, illumination: illumPct, name: phaseName };
+}
+
+// Render moon shadow using clip-path
+// phase: 0..1 (0=new, 0.5=full)
+function renderMoonShadow(shadowEl, phase) {
+  // phase 0 = new (fully dark), 0.5 = full (fully lit)
+  // We model the terminator as an ellipse whose x-radius varies
+  // Shadow covers the unlit portion
+  var angle = phase * 2 * Math.PI; // 0..2pi
+
+  if (phase < 0.01 || phase > 0.99) {
+    // New moon: fully dark
+    shadowEl.style.clipPath = 'circle(50% at 50% 50%)';
+    return;
+  }
+  if (phase > 0.49 && phase < 0.51) {
+    // Full moon: no shadow
+    shadowEl.style.clipPath = 'circle(0% at 50% 50%)';
+    return;
+  }
+
+  // Build clip-path polygon for the shadow
+  // The terminator is an ellipse. We need to shade the dark half.
+  var points = [];
+  var N = 60;
+
+  if (phase < 0.5) {
+    // Waxing: shadow on the left, terminator curves from right (crescent) to center (quarter) to left (gibbous)
+    // terminator x offset: at phase 0 = center (50%), at phase 0.25 = center, at phase 0.5 = gone
+    var terminatorX = 50 + 50 * Math.cos(angle); // goes from 100 (new) -> 50 (quarter) -> 0 (full)
+
+    // Shadow is left of terminator
+    // Top arc follows circle edge on left, terminator ellipse on right
+    // Build: go down the left edge, then up the terminator
+    for (var i = 0; i <= N; i++) {
+      var t = (i / N) * Math.PI; // 0..pi, top to bottom
+      var y = 50 - 50 * Math.cos(t);
+      var circleX = 50 - 50 * Math.sin(t); // left edge of circle
+      points.push(circleX.toFixed(1) + '% ' + y.toFixed(1) + '%');
+    }
+    // Back up along the terminator
+    for (var i = N; i >= 0; i--) {
+      var t = (i / N) * Math.PI;
+      var y = 50 - 50 * Math.cos(t);
+      var tx = 50 + (terminatorX - 50) * Math.sin(t);
+      points.push(tx.toFixed(1) + '% ' + y.toFixed(1) + '%');
+    }
+  } else {
+    // Waning: shadow on the right
+    var terminatorX = 50 + 50 * Math.cos(angle); // goes from 0 (full) -> 50 (3rd quarter) -> 100 (new)
+
+    // Shadow is right of terminator
+    // Go down the terminator, then back up the right edge
+    for (var i = 0; i <= N; i++) {
+      var t = (i / N) * Math.PI;
+      var y = 50 - 50 * Math.cos(t);
+      var tx = 50 + (terminatorX - 50) * Math.sin(t);
+      points.push(tx.toFixed(1) + '% ' + y.toFixed(1) + '%');
+    }
+    for (var i = N; i >= 0; i--) {
+      var t = (i / N) * Math.PI;
+      var y = 50 - 50 * Math.cos(t);
+      var circleX = 50 + 50 * Math.sin(t); // right edge of circle
+      points.push(circleX.toFixed(1) + '% ' + y.toFixed(1) + '%');
+    }
+  }
+
+  shadowEl.style.clipPath = 'polygon(' + points.join(', ') + ')';
+}
+
+function updateMoonPhase() {
+  var data = getMoonPhaseData();
+
+  // Update text displays
+  var phaseEl = document.getElementById('moon-phase-val');
+  var illumEl = document.getElementById('moon-illum-val');
+  var heroPhaseEl = document.getElementById('hero-moon-phase');
+  var heroIllumEl = document.getElementById('hero-moon-illum');
+
+  if (phaseEl) phaseEl.textContent = data.name;
+  if (illumEl) illumEl.textContent = data.illumination + '%';
+  if (heroPhaseEl) heroPhaseEl.textContent = data.name;
+  if (heroIllumEl) heroIllumEl.textContent = 'Illumination: ' + data.illumination + '%';
+
+  // Render dynamic moon visuals
+  var panelShadow = document.getElementById('moon-shadow-panel');
+  var heroShadow = document.getElementById('hero-moon-shadow');
+  if (panelShadow) renderMoonShadow(panelShadow, data.phase);
+  if (heroShadow) renderMoonShadow(heroShadow, data.phase);
+}
+
+// --- HERO CARDS ---
+function updateHeroCards() {
+  var now = new Date();
+  var h = now.getHours();
+  var m = now.getMinutes();
+  var totalMin = h * 60 + m;
+
+  // Sun position description
+  var sunRiseMin = SUN_TIMES.sunrise.h * 60 + SUN_TIMES.sunrise.m;
+  var sunSetMin = SUN_TIMES.sunset.h * 60 + SUN_TIMES.sunset.m;
+  var noonMin = SUN_TIMES.noon.h * 60 + SUN_TIMES.noon.m;
+  var dawnMin = SUN_TIMES.dawn.h * 60 + SUN_TIMES.dawn.m;
+  var duskMin = SUN_TIMES.dusk.h * 60 + SUN_TIMES.dusk.m;
+
+  var sunPos = 'Night';
+  if (totalMin >= duskMin) sunPos = 'Dusk';
+  else if (totalMin >= sunSetMin) sunPos = 'Twilight';
+  else if (totalMin > noonMin + 60) sunPos = 'Afternoon';
+  else if (totalMin >= noonMin - 30) sunPos = 'Solar Noon';
+  else if (totalMin >= sunRiseMin) sunPos = 'Morning';
+  else if (totalMin >= dawnMin) sunPos = 'Dawn';
+
+  var heroSunEl = document.getElementById('hero-sun-position');
+  if (heroSunEl) heroSunEl.textContent = sunPos;
+
+  var heroSunRise = document.getElementById('hero-sun-rise');
+  var heroSunSet = document.getElementById('hero-sun-set');
+  var heroDayLen = document.getElementById('hero-day-length');
+  if (heroSunRise) heroSunRise.textContent = 'Rise: ' + formatTime12(SUN_TIMES.sunrise.h, SUN_TIMES.sunrise.m) + ' PDT';
+  if (heroSunSet) heroSunSet.textContent = 'Set: ' + formatTime12(SUN_TIMES.sunset.h, SUN_TIMES.sunset.m) + ' PDT';
+  if (heroDayLen) heroDayLen.textContent = 'Day: 12h 52m';
+
+  // Moon hero
+  var heroMoonRise = document.getElementById('hero-moon-rise');
+  var heroMoonSet = document.getElementById('hero-moon-set');
+  if (heroMoonRise) heroMoonRise.textContent = 'Rise: 6:33 PM PDT';
+  if (heroMoonSet) heroMoonSet.textContent = 'Set: 6:12 AM PDT';
+}
+
+// --- DAYLIGHT PROGRESS BAR ---
+function updateDaylightBar() {
+  var now = new Date();
+  var h = now.getHours();
+  var m = now.getMinutes();
+  var totalMin = h * 60 + m;
+  var dayTotalMin = 24 * 60;
+
+  // Convert sun times to minutes
+  var dawnMin = SUN_TIMES.dawn.h * 60 + SUN_TIMES.dawn.m;
+  var riseMin = SUN_TIMES.sunrise.h * 60 + SUN_TIMES.sunrise.m;
+  var noonMin = SUN_TIMES.noon.h * 60 + SUN_TIMES.noon.m;
+  var setMin = SUN_TIMES.sunset.h * 60 + SUN_TIMES.sunset.m;
+  var duskMin = SUN_TIMES.dusk.h * 60 + SUN_TIMES.dusk.m;
+
+  // Convert to percentages
+  var dawnPct = (dawnMin / dayTotalMin * 100).toFixed(1) + '%';
+  var risePct = (riseMin / dayTotalMin * 100).toFixed(1) + '%';
+  var noonPct = (noonMin / dayTotalMin * 100).toFixed(1) + '%';
+  var setPct = (setMin / dayTotalMin * 100).toFixed(1) + '%';
+  var duskPct = (duskMin / dayTotalMin * 100).toFixed(1) + '%';
+  var nowPct = (totalMin / dayTotalMin * 100);
+
+  var bar = document.getElementById('daylight-bar');
+  if (bar) {
+    bar.style.setProperty('--dawn-pct', dawnPct);
+    bar.style.setProperty('--sunrise-pct', risePct);
+    bar.style.setProperty('--noon-pct', noonPct);
+    bar.style.setProperty('--sunset-pct', setPct);
+    bar.style.setProperty('--dusk-pct', duskPct);
+  }
+
+  var marker = document.getElementById('daylight-now');
+  if (marker) {
+    marker.style.left = nowPct.toFixed(1) + '%';
+  }
+
+  // Update labels
+  var labelDawn = document.getElementById('label-dawn');
+  var labelSunrise = document.getElementById('label-sunrise');
+  var labelNoon = document.getElementById('label-noon');
+  var labelSunset = document.getElementById('label-sunset');
+  var labelDusk = document.getElementById('label-dusk');
+  var labelNow = document.getElementById('label-now');
+
+  if (labelDawn) labelDawn.textContent = formatTime12(SUN_TIMES.dawn.h, SUN_TIMES.dawn.m);
+  if (labelSunrise) labelSunrise.textContent = formatTime12(SUN_TIMES.sunrise.h, SUN_TIMES.sunrise.m);
+  if (labelNoon) labelNoon.textContent = 'Noon';
+  if (labelSunset) labelSunset.textContent = formatTime12(SUN_TIMES.sunset.h, SUN_TIMES.sunset.m);
+  if (labelDusk) labelDusk.textContent = formatTime12(SUN_TIMES.dusk.h, SUN_TIMES.dusk.m);
+  if (labelNow) labelNow.textContent = 'Now: ' + formatTime12(h, m);
+}
+
+// --- LIVE DATA: Kp INDEX ---
+function fetchKpIndex() {
+  fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data || data.length < 2) return;
+      // Last entry (skip header row at index 0)
+      var last = data[data.length - 1];
+      // Format: [time_tag, Kp, Kp_fraction, a_running, station_count]
+      var kp = parseFloat(last[1]);
+      var kpEl = document.getElementById('kp-val');
+      var auroraEl = document.getElementById('aurora-val');
+      var dotEl = document.getElementById('sw-dot');
+
+      // Determine storm level
+      var level = 'G0';
+      var desc = 'Quiet';
+      var auroraRisk = 'None';
+      var colorClass = 'green';
+
+      if (kp >= 9) { level = 'G5'; desc = 'Extreme Storm'; auroraRisk = 'Visible statewide'; colorClass = 'gold'; }
+      else if (kp >= 8) { level = 'G4'; desc = 'Severe Storm'; auroraRisk = 'Likely from Mukilteo'; colorClass = 'gold'; }
+      else if (kp >= 7) { level = 'G3'; desc = 'Strong Storm'; auroraRisk = 'Possible from Mukilteo'; colorClass = 'gold'; }
+      else if (kp >= 6) { level = 'G2'; desc = 'Moderate Storm'; auroraRisk = 'Possible, look north'; colorClass = 'gold'; }
+      else if (kp >= 5) { level = 'G1'; desc = 'Minor Storm'; auroraRisk = 'Faint, horizon'; colorClass = 'gold'; }
+      else if (kp >= 4) { level = 'G0'; desc = 'Unsettled'; auroraRisk = 'Unlikely'; }
+      else if (kp >= 3) { level = 'G0'; desc = 'Active'; auroraRisk = 'None'; }
+
+      if (kpEl) {
+        kpEl.textContent = kp.toFixed(1) + ' (' + level + ' \u2014 ' + desc + ')';
+        kpEl.className = 'data-value ' + colorClass;
+      }
+      if (auroraEl) auroraEl.textContent = auroraRisk;
+      if (dotEl && kp >= 5) {
+        dotEl.className = 'live-dot dot-amber';
+      }
+
+      updateSWStatus('Kp updated');
+    })
+    .catch(function() {
+      updateSWStatus('Kp fetch failed', true);
+    });
+}
+
+// --- LIVE DATA: SOLAR WIND ---
+function fetchSolarWind() {
+  fetch('https://services.swpc.noaa.gov/products/solar-wind/plasma-5-minute.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data || data.length < 4) return;
+      // Header is index 0; get last 3 data entries
+      var entries = data.slice(-3);
+
+      // Average last 3 entries for smoother display
+      var speedSum = 0, densitySum = 0, tempSum = 0;
+      var speedCount = 0, densityCount = 0, tempCount = 0;
+
+      for (var i = 0; i < entries.length; i++) {
+        // Format: [time_tag, density, speed, temperature]
+        var density = parseFloat(entries[i][1]);
+        var speed = parseFloat(entries[i][2]);
+        var temp = parseFloat(entries[i][3]);
+        if (!isNaN(speed) && speed > 0) { speedSum += speed; speedCount++; }
+        if (!isNaN(density) && density > 0) { densitySum += density; densityCount++; }
+        if (!isNaN(temp) && temp > 0) { tempSum += temp; tempCount++; }
+      }
+
+      var speedEl = document.getElementById('sw-speed-val');
+      var densityEl = document.getElementById('sw-density-val');
+      var tempEl = document.getElementById('sw-temp-val');
+
+      if (speedCount > 0 && speedEl) {
+        speedEl.textContent = Math.round(speedSum / speedCount) + ' km/s';
+      }
+      if (densityCount > 0 && densityEl) {
+        densityEl.textContent = (densitySum / densityCount).toFixed(1) + ' p/cm\u00B3';
+      }
+      if (tempCount > 0 && tempEl) {
+        var avgTemp = tempSum / tempCount;
+        tempEl.textContent = Math.round(avgTemp).toLocaleString() + ' K';
+      }
+
+      updateSWStatus('Solar wind updated');
+    })
+    .catch(function() {
+      updateSWStatus('Solar wind fetch failed', true);
+    });
+}
+
+var lastSWUpdate = null;
+function updateSWStatus(msg, isError) {
+  var el = document.getElementById('sw-status');
+  if (!el) return;
+  var now = new Date();
+  var timeStr = formatTime12(now.getHours(), now.getMinutes());
+  el.textContent = msg + ' at ' + timeStr;
+  el.className = 'live-status ' + (isError ? 'stale' : 'fresh');
+  lastSWUpdate = now;
+}
+
+// --- LIVE DATA: AUTO-REFRESH ---
+function fetchAllLiveData() {
+  fetchKpIndex();
+  fetchSolarWind();
+}
+
+// --- UPDATE DATE DISPLAY ---
+function updateDateDisplay() {
+  var now = new Date();
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var dateStr = months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+  var dateEl = document.getElementById('sun-date');
+  if (dateEl) dateEl.textContent = dateStr;
+}
+
+// --- INITIALIZE ---
+function init() {
+  updateCountdown();
+  updateMoonDist();
+  updateMoonPhase();
+  updateHeroCards();
+  updateDaylightBar();
+  updateDateDisplay();
+
+  // Fetch live data
+  fetchAllLiveData();
+
+  // Refresh intervals
+  setInterval(updateCountdown, 60000);          // countdown: every minute
+  setInterval(updateMoonDist, 300000);           // moon distance: every 5 min
+  setInterval(updateMoonPhase, 3600000);         // moon phase: every hour
+  setInterval(updateDaylightBar, 60000);         // daylight bar: every minute
+  setInterval(updateHeroCards, 60000);            // hero cards: every minute
+  setInterval(fetchAllLiveData, 300000);          // live space weather: every 5 min
+}
+
+init();
 </script>
 
 </body>
