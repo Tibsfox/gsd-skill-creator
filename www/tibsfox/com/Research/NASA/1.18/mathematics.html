@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: The Mathematics of Orbiting | v1.18 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --orbital-deep: #040818; --orbital-mid: #081430;
+    --orbital-blue: #2050CC; --orbital-dim: #102868;
+    --atlas-silver: #C0C0D0; --atlas-dim: #606070;
+    --kelp-brown: #5A4020; --kelp-green: #308030;
+    --ocean-deep: #081830; --puffin-orange: #D08040;
+    --space: #040810; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2040;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(32,80,204,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(192,192,208,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(48,128,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,96,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(192,192,208,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(32,80,204,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--orbital-blue); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--atlas-silver); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--orbital-deep) 25%, var(--orbital-mid) 50%, var(--orbital-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--orbital-blue); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(192,192,208,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(192,192,208,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(32,80,204,0.12); border: 1px solid var(--orbital-blue); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--orbital-blue); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(32,80,204,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--atlas-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--atlas-silver); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--orbital-blue); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--atlas-silver); }
+  em { color: var(--kelp-green); }
+  code { color: var(--orbital-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--orbital-blue); text-decoration: none; }
+  a:hover { color: var(--atlas-silver); }
+  pre { background: rgba(4,8,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin: 1rem 0 1.5rem; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
+  th { background: rgba(32,80,204,0.08); color: var(--atlas-silver); font-weight: 600; text-align: left; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--border); }
+  td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  blockquote { border-left: 3px solid var(--orbital-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(4,8,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .rosetta { background: rgba(32,80,204,0.04); border: 1px solid var(--orbital-dim); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; }
+  .rosetta h2 { margin-top: 0; color: var(--orbital-blue); }
+  .nav-card { background: rgba(4,8,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--orbital-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--atlas-silver); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--orbital-blue); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.18 Mercury-Atlas 5</a>
+  <span class="sep">/</span>
+  Track 3: Mathematics
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.18</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of Orbiting</h1>
+    <p class="subtitle">TSPB Mathematics &mdash; McNeese-Hoag Format</p>
+    <div class="meta-row">
+      <span><span class="label">Mission:</span> Mercury-Atlas 5 (November 29, 1961)</span>
+      <span><span class="label">Primary Layer:</span> 4 (Vector Calculus)</span>
+      <span><span class="label">Secondary:</span> 1, 3, 7</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Deposit 1: Orbital Velocity and Period (Layer 4, Section 4.18)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>MA-5 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>November 29, 1961, 15:08 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Atlas D (No. 93-D)</td></tr>
+      <tr><td>Operating agency</td><td>&mdash;</td><td>&mdash;</td><td>NASA / Space Task Group, Langley</td></tr>
+      <tr><td>Spacecraft</td><td>&mdash;</td><td>&mdash;</td><td>Mercury capsule #9A (biological payload)</td></tr>
+      <tr><td>Passenger</td><td>&mdash;</td><td>&mdash;</td><td>Enos (chimpanzee, Cameroon-born, ~17 kg)</td></tr>
+      <tr><td>Sustainer thrust</td><td>F<sub>sus</sub></td><td>kN</td><td>~253 (56,000 lbf)</td></tr>
+      <tr><td>Booster thrust (each)</td><td>F<sub>boost</sub></td><td>kN</td><td>~668 (150,000 lbf each)</td></tr>
+      <tr><td>Total liftoff thrust</td><td>F<sub>total</sub></td><td>kN</td><td>~1,589 (357,000 lbf)</td></tr>
+      <tr><td>Vehicle mass at ignition</td><td>m<sub>0</sub></td><td>kg</td><td>~117,000 (258,000 lb)</td></tr>
+      <tr><td>Planned orbits</td><td>&mdash;</td><td>&mdash;</td><td>3</td></tr>
+      <tr><td>Actual orbits</td><td>&mdash;</td><td>&mdash;</td><td>2 (mission cut short)</td></tr>
+      <tr><td>Perigee altitude</td><td>h<sub>p</sub></td><td>km</td><td>~161</td></tr>
+      <tr><td>Apogee altitude</td><td>h<sub>a</sub></td><td>km</td><td>~237</td></tr>
+      <tr><td>Orbital period</td><td>T</td><td>min</td><td>~88.5</td></tr>
+      <tr><td>Orbital velocity (perigee)</td><td>v<sub>p</sub></td><td>km/s</td><td>~7.82</td></tr>
+      <tr><td>Orbital velocity (apogee)</td><td>v<sub>a</sub></td><td>km/s</td><td>~7.68</td></tr>
+      <tr><td>Orbital inclination</td><td>i</td><td>deg</td><td>~32.5</td></tr>
+      <tr><td>Reentry peak g-load</td><td>g<sub>max</sub></td><td>g</td><td>~7.6</td></tr>
+      <tr><td>Flight duration</td><td>t<sub>flight</sub></td><td>hr:min</td><td>3:20:59</td></tr>
+      <tr><td>Max velocity</td><td>v<sub>max</sub></td><td>km/s</td><td>~7.84 (at perigee)</td></tr>
+      <tr><td>Recovery ship</td><td>&mdash;</td><td>&mdash;</td><td>USS Stormes (DD-780)</td></tr>
+      <tr><td>Result</td><td>&mdash;</td><td>&mdash;</td><td>SUCCESS</td></tr>
+    </table>
+
+    <h3>The Threshold of Orbiting: Circular Velocity</h3>
+
+    <p>Mercury-Atlas 5 was the first Mercury flight to achieve orbit with a biological payload. The transition from suborbital (MR-2, mission 1.17) to orbital is not gradual &mdash; it is a sharp threshold defined by one number: the circular velocity at a given altitude. Below circular velocity, what goes up comes down on a ballistic arc. At circular velocity, what goes up stays up. Above circular velocity, the orbit becomes an ellipse with increasing apogee. At escape velocity (<code>sqrt(2)</code> times circular velocity), the object leaves Earth entirely.</p>
+
+<pre>CIRCULAR VELOCITY:
+
+  v_c = sqrt(GM / r)
+
+  where:
+    G   = gravitational constant (6.674 x 10^-11 m^3 kg^-1 s^-2)
+    M   = mass of Earth (5.972 x 10^24 kg)
+    GM  = standard gravitational parameter = 3.986 x 10^14 m^3/s^2
+    r   = distance from Earth's center = R_earth + h
+    R_earth = 6,371 km
+
+  At h = 161 km (MA-5 perigee):
+    r = 6,532 km = 6,532,000 m
+    v_c = sqrt(3.986 x 10^14 / 6,532,000)
+        = 7,812 m/s = 7.81 km/s = 28,123 km/h
+
+  At h = 237 km (MA-5 apogee):
+    r = 6,608 km
+    v_c = 7,767 m/s = 7.77 km/s
+
+  At h = 200 km (typical LEO reference):
+    r = 6,571 km
+    v_c = 7,788 m/s ≈ 7.79 km/s</pre>
+
+    <p>This number &mdash; approximately 7.8 km/s at low Earth orbit altitude &mdash; is the velocity that divides suborbital from orbital. Ham&rsquo;s MR-2 reached 2.3 km/s: fast enough to arc to 253 km, but nowhere close to orbital. Enos&rsquo;s MA-5 reached 7.82 km/s at perigee: orbital velocity. The difference is a factor of 3.4 in velocity, but because kinetic energy scales as v&sup2;, it is a factor of 11.6 in energy.</p>
+
+    <h3>Comparison: Redstone vs Atlas Delta-V</h3>
+
+<pre>DELTA-V COMPARISON:
+
+  Mercury-Redstone (MR-2):
+    Burn time: ~144 s | Burnout velocity: ~2,292 m/s
+    Result: suborbital, apogee 253 km
+
+  Mercury-Atlas (MA-5):
+    2 x booster engines: ~135 s burn each
+    1 x sustainer engine: ~300 s burn
+    Burnout velocity: ~7,820 m/s
+    Result: orbit, 161 x 237 km
+
+  Velocity ratio: 7,820 / 2,292 = 3.41
+  Energy ratio: (7,820)^2 / (2,292)^2 = 11.6
+  Mass ratio: 117,000 / 30,000 = 3.9
+
+  TSIOLKOVSKY ROCKET EQUATION:
+    delta_v = v_e * ln(m_0 / m_f)
+
+  The logarithm means each additional km/s of delta-v
+  requires exponentially more fuel:
+
+    m_0/m_f = exp(7800/3000) / exp(2300/3000)
+            = 13.46 / 2.15 = 6.26
+
+  The mass ratio increases by 6.26x to achieve 3.4x
+  more velocity. The rocket equation is exponential
+  tyranny: the cost of speed grows faster than the
+  speed itself.</pre>
+
+    <h3>Orbital Period</h3>
+
+<pre>ORBITAL PERIOD (KEPLER'S THIRD LAW):
+
+  T = 2 * pi * sqrt(a^3 / GM)
+
+  a = semi-major axis = (6,532 + 6,608) / 2 = 6,570 km
+
+  T = 2 * pi * sqrt((6,570,000)^3 / (3.986 x 10^14))
+    = 2 * pi * 843.0
+    = 5,296 seconds = 88.3 minutes
+
+  Enos circled the Earth once every 88.3 minutes.
+  In 3h 21m of flight, he completed ~2.25 orbits.
+  He experienced ~2.25 sunrises and sunsets, each
+  orbit crossing the Atlantic, Africa, the Indian
+  Ocean, Australia, the Pacific, and back.</pre>
+
+    <h3>Debate Questions (Layer 4)</h3>
+
+    <ol>
+      <li><strong>The Atlas vs. Redstone choice was a risk-capability tradeoff.</strong> The Atlas D had a ~30% failure rate through 1961. The Redstone was ~95% reliable but only suborbital. If you were managing Mercury, would you have flown more Redstone tests first, accepting the delay, or moved to Atlas despite the risk? What is the value function that determines when increased risk is justified by increased capability?</li>
+      <li><strong>Enos&rsquo;s orbit was elliptical (161 x 237 km), not circular.</strong> A circular 200 km orbit would have been simpler. The ellipse was what the Atlas hardware could deliver. How does engineering constraint shape mathematical ideals?</li>
+      <li><strong>The Tufted Puffin (<em>Fratercula cirrhata</em>, degree 18) dives to 60+ meters.</strong> At depth, hydrostatic pressure compresses its air sacs. Is the puffin&rsquo;s dive-and-return profile analogous to an elliptical orbit? What are the &ldquo;orbital elements&rdquo; of a puffin dive?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Deposit 2: The Reentry Corridor (Layer 3, Section 3.18)</h2>
+
+    <h3>The Geometry of Safe Return</h3>
+
+    <p>Orbital reentry is the most dangerous phase of spaceflight. The capsule must decelerate from 7.8 km/s to zero &mdash; losing ~30 megajoules of kinetic energy per kilogram. The reentry corridor is the narrow range of entry angles that produce survivable deceleration: too shallow and the capsule skips off the atmosphere (skip-out); too steep and the g-forces and heating destroy the vehicle (burn-up).</p>
+
+<pre>REENTRY CORRIDOR GEOMETRY:
+
+  Entry angle gamma_e measured from local horizontal
+  at 120 km altitude.
+
+  SKIP-OUT BOUNDARY:
+    gamma_skip ≈ -1.0 degrees (Mercury, L/D ≈ 0.05)
+
+  BURN-UP BOUNDARY:
+    gamma_burnup ≈ -7.5 degrees (g &gt; 20g, heating exceeded)
+
+  THE CORRIDOR:
+    -1.0 &lt; gamma_e &lt; -7.5 degrees
+    Width: ~6.5 degrees
+
+    At 7,800 m/s, a 1-degree change =
+      7,800 * sin(1°) = 136 m/s vertical component
+
+    Skip-out to burn-up = 6.5 * 136 = 884 m/s window
+
+  MA-5 ACTUAL ENTRY:
+    gamma_e ≈ -1.5 degrees (nominal)
+    Peak g-force: ~7.6 g
+    Well within the corridor.</pre>
+
+    <h3>Why Cutting from 3 to 2 Orbits Required Immediate Action</h3>
+
+<pre>RETROFIRE TIMING:
+
+  Problems detected during orbit 2:
+  1. Malfunctioning thruster → yaw oscillation
+  2. Excessive ASCS fuel consumption
+  3. Projected fuel at orbit 3: below minimum for retrofire
+
+  Retrofire delta-v: ~150 m/s (three retrorockets × ~50 m/s)
+  This 2% velocity reduction drops perigee to ~-50 km
+  (below surface) → atmospheric intersection
+
+  Position sensitivity:
+    At 7,800 m/s: 1-minute timing error = 468 km
+    Recovery fleet search radius: ~200 km
+
+  MA-5's early retrofire executed at end of orbit 2,
+  same orbital position as the planned orbit-3 fire.
+  Splashdown ~330 km short of primary zone —
+  USS Stormes reached Enos within 75 minutes.</pre>
+
+    <h3>Debate Questions (Layer 3)</h3>
+
+    <ol>
+      <li><strong>Mercury&rsquo;s 6.5-degree corridor is generous compared to the Shuttle&rsquo;s ~2 degrees.</strong> Wider corridor = higher g-forces (no lift modulation). Narrower corridor = lower g-forces but demands more precise guidance. What is the optimal tradeoff?</li>
+      <li><strong>Bull kelp operates in a structural &ldquo;corridor&rdquo;:</strong> if the stipe is too rigid, wave forces snap it (burn-up). If too flexible, the canopy cannot maintain surface position (skip-out). What is the structural reentry corridor for a kelp stipe?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Deposit 3: Decision Under Faulty Feedback (Layer 7, Section 7.18)</h2>
+
+    <h3>Enos&rsquo;s Lever Task with Reversed Rewards</h3>
+
+    <p>During the second orbit, the reward mechanism malfunctioned &mdash; correct responses were punished (shock), incorrect responses rewarded (pellet). Enos continued to pull the correct lever. This is one of the most remarkable behavioral data points in the history of spaceflight.</p>
+
+<pre>BAYESIAN ANALYSIS OF ENOS'S DECISION:
+
+  Prior belief (18 months of ground training):
+    P(correct | trained_lever) ≈ 0.95
+    Based on ~10,000 training trials
+
+  After malfunction (~20 reversed trials):
+    A full Bayesian updater should detect the reversal
+    within 5-15 trials and switch. Enos did NOT switch.
+
+  EXPLANATION 1: Strong Prior Overwhelms Weak Evidence
+    With N_training ≈ 10,000 and N_shock ≈ 20,
+    the prior dominates overwhelmingly. Enos would need
+    ~10,000 reversed trials to cross the 0.5 threshold.
+
+  EXPLANATION 2: Procedural-Declarative Dissociation
+    Procedural memory (basal ganglia): encodes what to DO
+    Declarative memory (prefrontal cortex): evaluates outcomes
+    Under stress, procedural memory is more robust.
+    Enos fell back on what he knew how to DO.
+
+  EXPLANATION 3: Extinction Resistance
+    Variable-ratio reinforcement produces behavior that is
+    essentially extinction-proof in the short term.
+
+  Shannon channel capacity:
+    Before malfunction: 1 bit per trial (perfect disambiguation)
+    During malfunction: 1 bit per trial (still perfect — but
+      the mapping is reversed)
+    Information content unchanged; only the mapping changed.
+
+  Enos chose accuracy over reward. When the feedback
+  channel is unreliable, trust the prior.</pre>
+
+    <h3>Python: Computing the Bayesian Update</h3>
+
+<pre># enos_bayesian.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+def bayesian_update(prior_strength, n_reversed_trials):
+    log_odds_per_trial = np.log(0.95 / 0.05)  # ≈ 2.944
+    log_odds = (prior_strength * log_odds_per_trial
+                - n_reversed_trials * log_odds_per_trial)
+    return 1 / (1 + np.exp(-log_odds))
+
+prior_strengths = [100, 1000, 5000, 10000]
+n_reversed = np.arange(0, 200)
+
+plt.figure(figsize=(10, 6))
+for ps in prior_strengths:
+    posteriors = [bayesian_update(ps, n) for n in n_reversed]
+    plt.plot(n_reversed, posteriors, label=f'{ps} training trials')
+
+plt.axhline(y=0.5, color='red', linestyle='--', label='Decision boundary')
+plt.axvline(x=20, color='gray', linestyle=':', label="Enos's ~20 reversed trials")
+plt.xlabel('Number of Reversed Feedback Trials')
+plt.ylabel('P(trained lever is correct)')
+plt.title("Enos's Bayesian Belief Under Reversed Feedback")
+plt.legend(); plt.grid(True, alpha=0.3)
+plt.ylim(-0.05, 1.05); plt.tight_layout()
+plt.savefig('enos_bayesian_update.png', dpi=150)
+plt.show()
+
+# With 10,000 training trials, 20 reversed trials
+# barely dent the prior. His behavior was Bayes-optimal.</pre>
+
+    <h3>Debate Questions (Layer 7)</h3>
+
+    <ol>
+      <li><strong>Should Enos have switched levers?</strong> A reward-maximizer would have. But Enos didn&rsquo;t know the malfunction was permanent. An agent that switches on the first contradictory signal is fragile; one that maintains trained behavior is robust. Under what assumptions is each strategy optimal?</li>
+      <li><strong>Bull kelp grows toward the surface using phototropism.</strong> If you illuminate a holdfast from below, the kelp does not grow downward. Its &ldquo;prior&rdquo; overwhelms the &ldquo;evidence.&rdquo; Is the kelp&rsquo;s phototropism a biological Bayesian prior?</li>
+      <li><strong>The Tufted Puffin returns to the same burrow year after year.</strong> If a researcher displaces the nest entrance, the puffin searches for the original location first. Is this the same Bayesian conservatism Enos demonstrated?</li>
+    </ol>
+
+    <div class="rosetta">
+      <h2>Rosetta Table: Orbital Mechanics</h2>
+      <table>
+        <tr><th>Concept</th><th>MA-5 Application</th><th>Prior Mission Reference</th></tr>
+        <tr><td>Circular velocity</td><td>v<sub>c</sub> = sqrt(GM/r) = 7.81 km/s at 161 km</td><td>MR-2 (1.17): v<sub>max</sub> = 2.29 km/s, suborbital</td></tr>
+        <tr><td>Orbital period</td><td>T = 2&pi;*sqrt(a&sup3;/GM) = 88.3 min</td><td>&mdash; (first orbital mission)</td></tr>
+        <tr><td>Vis-viva equation</td><td>v&sup2; = GM*(2/r - 1/a)</td><td>MR-2 (1.17): suborbital ellipse</td></tr>
+        <tr><td>Tsiolkovsky equation</td><td>&Delta;v = v<sub>e</sub> * ln(m<sub>0</sub>/m<sub>f</sub>)</td><td>MR-2 (1.17): Redstone single stage</td></tr>
+        <tr><td>Reentry corridor</td><td>-1 to -7.5 deg entry angle</td><td>MR-2: no corridor (suborbital)</td></tr>
+        <tr><td>Retrofire timing</td><td>468 km error per minute</td><td>MR-2: no retrofire (ballistic)</td></tr>
+        <tr><td>Bayesian prior</td><td>P(correct) maintained despite reversal</td><td>MR-2: consistent feedback</td></tr>
+      </table>
+    </div>
+
+    <blockquote>
+      <p>Bull kelp grows from the seafloor to the surface in a single season &mdash; up to 36 meters in approximately 180 days, one of the fastest-growing organisms on Earth. The growth rate peaks at 10-15 centimeters per day during summer, driven by the same sunlight that Enos saw streaming through his capsule window every 88 minutes as he crossed from night to day. The kelp does not orbit, but it does circle: its blades trace a daily arc in the current, streaming with the tide, curving back as the tide reverses, tracing an ellipse on the water&rsquo;s surface. The puffin nests above the kelp forest on the cliff face and dives through the canopy to hunt fish sheltering in the kelp&rsquo;s understory. The puffin&rsquo;s orbit is smaller than Enos&rsquo;s &mdash; 60 meters of depth instead of 237 kilometers of altitude &mdash; but the mathematics is the same: velocity determines trajectory, gravity determines the return, and the organism must manage its energy budget across the entire cycle or it does not come home. Three organisms in three media &mdash; space, water, air &mdash; each managing the same fundamental problem: how to go out and come back, trading energy for distance, trusting the mathematics of return. C.S. Lewis, born on this day in 1898, wrote about a voyage to another world in Out of the Silent Planet, and his character Ransom discovered that space was not empty darkness but a sea of light. Enos could not read Lewis, but he flew through the same medium, circling a planet that Lewis saw as the Silent Planet, and he came back with the data that proved a primate could work in that sea of light, even when the instruments that were supposed to help him lied. He pulled the correct lever. The kelp grows toward the correct light. The puffin returns to the correct burrow. Prior knowledge, honestly acquired through long experience, is more reliable than any single measurement, especially when the measurement apparatus has malfunctioned. Lewis would have appreciated the parable. Enos lived it.</p>
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="organism.html">&larr; Organism</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Mission Hub</div>
+        <a href="index.html">v1.18 Index</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="papers.html">Papers &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.18 Mercury-Atlas 5 + <em>Nereocystis luetkeana</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+{
+  "mission": "1.18",
+  "title": "Mercury-Atlas 5 (MA-5)",
+  "date": "1961-11-29",
+  "organism": "Nereocystis luetkeana",
+  "organism_common": "Bull Kelp",
+  "organism_location": "Pacific Northwest rocky coastline, subtidal zone from Unalaska Island (Alaska) to San Luis Obispo County (California), anchored to rocky substrate in exposed and semi-exposed coastal waters, 2-20 meters depth",
+  "dedication": {
+    "name": "C.S. Lewis",
+    "born": "1898-11-29",
+    "died": "1963-11-22",
+    "birthplace": "Belfast, Northern Ireland",
+    "field": "Literature, theology, medieval studies, literary criticism",
+    "resonance": "Born November 29 — the exact date MA-5 launched. Lewis wrote about wardrobes that opened into other worlds (The Lion, the Witch and the Wardrobe) and about the moral dimensions of suffering (The Problem of Pain). The Mercury capsule was a wardrobe — six feet wide, opening into the impossible space of orbit. Enos was punished for doing right, a problem Lewis spent his career examining. Lewis died on November 22, 1963, the same day as Kennedy's assassination — the president who committed America to the Moon."
+  },
+  "nodes": [
+    {
+      "id": "orbital-velocity",
+      "concept": "Orbital velocity — the minimum horizontal speed required to maintain a stable orbit at a given altitude",
+      "department": "physics",
+      "level": "intermediate",
+      "tspb_layer": 4,
+      "tspb_section": "4.2",
+      "description": "Orbital velocity is the speed at which an object must travel horizontally for the curvature of its free-fall trajectory to match the curvature of the body it orbits. For a circular orbit, v_circular = sqrt(GM/r), where G is the gravitational constant, M is Earth's mass, and r is the orbital radius (Earth's radius plus altitude). At 161 km altitude (MA-5 perigee), the circular velocity is approximately 7,812 m/s. At 237 km (apogee), it is approximately 7,777 m/s. For an elliptical orbit like MA-5's 161x237 km, the actual velocity varies: faster at perigee, slower at apogee, governed by the vis-viva equation v = sqrt(GM(2/r - 1/a)) where a is the semi-major axis. The threshold between suborbital and orbital is sharp. Ham's Redstone achieved ~2.3 km/s — 30% of orbital velocity — and fell back after 16 minutes. Enos's Atlas achieved ~7.8 km/s and stayed up for 3 hours 21 minutes across 2 complete orbits. The difference between a ballistic arc and a stable orbit is entirely determined by velocity at engine cutoff. The Atlas D's 360,000 lbf of thrust from three engines was required precisely because achieving orbital velocity demands roughly 3.4 times more energy than a suborbital lob.",
+      "resonance": "Bull kelp (Nereocystis luetkeana) has its own velocity threshold. In currents below approximately 0.5 m/s, the kelp stands relatively upright, blades floating near the surface. Above approximately 1.5 m/s, the stipe stretches horizontal, blades stream, and the holdfast experiences maximum tensile load. There is a critical current velocity beyond which the holdfast fails and the kelp detaches — its own skip-out boundary. The kelp does not choose its current velocity, just as the capsule does not choose its orbital velocity. Both must withstand whatever the environment delivers or be torn loose.",
+      "worked_example": {
+        "description": "Calculate orbital velocity at MA-5 perigee and apogee using the vis-viva equation",
+        "parameters": {"perigee_km": 161, "apogee_km": 237, "earth_radius_km": 6371, "GM": 3.986e14},
+        "formula": "v = sqrt(GM × (2/r - 1/a)); a = R_earth + (perigee + apogee)/2",
+        "result": "At perigee (161 km): v = 7,844 m/s. At apogee (237 km): v = 7,737 m/s.",
+        "python": "import numpy as np\nGM = 3.986e14  # m^3/s^2\nR = 6371e3  # Earth radius in meters\nperigee = 161e3; apogee = 237e3\na = R + (perigee + apogee) / 2  # semi-major axis\nr_peri = R + perigee; r_apo = R + apogee\nv_peri = np.sqrt(GM * (2/r_peri - 1/a))\nv_apo = np.sqrt(GM * (2/r_apo - 1/a))\nprint(f'Perigee velocity: {v_peri:.0f} m/s ({v_peri/1e3:.2f} km/s)')\nprint(f'Apogee velocity:  {v_apo:.0f} m/s ({v_apo/1e3:.2f} km/s)')\nprint(f'Circular at 161 km: {np.sqrt(GM/r_peri):.0f} m/s')"
+      }
+    },
+    {
+      "id": "orbital-period",
+      "concept": "Orbital period — the time for one complete orbit, determined entirely by the semi-major axis",
+      "department": "physics",
+      "level": "beginner",
+      "tspb_layer": 4,
+      "tspb_section": "4.1",
+      "description": "Kepler's Third Law states that the orbital period depends only on the semi-major axis of the orbit, not on the eccentricity, the mass of the orbiting object, or any other parameter. T = 2*pi*sqrt(a^3/GM). For MA-5's orbit (semi-major axis = Earth's radius + (161+237)/2 = 6,570 km), the period was 88.5 minutes. This means Enos circled the entire Earth — every ocean, every continent, every time zone — in less than an hour and a half. At perigee (161 km), he traveled faster; at apogee (237 km), slower. But the period remained constant regardless of where in the orbit you measured it. A circular orbit at the same semi-major axis would have the identical period despite having a different shape. Period depends only on the average distance from the center of mass, not on the geometry of the path. The 88.5-minute period also determined the ground track spacing: each successive orbit crossed the equator approximately 22.1 degrees of longitude further west, because Earth rotated under the orbit during each revolution.",
+      "resonance": "Bull kelp lives by a tidal period set by orbital mechanics — the Moon's gravitational pull creates tidal currents that reverse direction every approximately 6.2 hours. The kelp's blades stream one direction, then the other, in a rhythm as predictable as Kepler's laws. Every 12.4 hours, the tidal cycle completes. The kelp's daily existence is literally governed by orbital mechanics — the same physics that determined Enos's 88.5-minute period around Earth determines the tidal period that the kelp's stipe must flex through twice daily. The kelp forest is an orbital system, anchored to rock, swaying to the Moon's orbit.",
+      "worked_example": {
+        "description": "Calculate MA-5's orbital period from perigee and apogee altitudes",
+        "parameters": {"perigee_km": 161, "apogee_km": 237, "earth_radius_km": 6371},
+        "formula": "T = 2*pi*sqrt(a^3 / GM); a = R_earth + (perigee + apogee)/2",
+        "result": "a = 6570 km; T = 2*pi*sqrt((6.570e6)^3 / 3.986e14) = 5,310 s = 88.5 min",
+        "python": "import numpy as np\nGM = 3.986e14\na = (6371 + (161 + 237)/2) * 1e3  # semi-major axis in meters\nT = 2 * np.pi * np.sqrt(a**3 / GM)\nprint(f'Semi-major axis: {a/1e3:.0f} km')\nprint(f'Orbital period: {T:.0f} s = {T/60:.1f} min')\nprint(f'Ground track shift per orbit: {360 * T / 86400:.1f} degrees longitude')"
+      }
+    },
+    {
+      "id": "reentry-corridor",
+      "concept": "Reentry corridor geometry — the narrow band of flight path angles permitting safe atmospheric entry",
+      "department": "physics",
+      "level": "advanced",
+      "tspb_layer": 4,
+      "tspb_section": "4.3",
+      "description": "The reentry corridor is the range of flight path angles at the atmospheric entry interface (approximately 122 km / 400,000 ft altitude) that produces a survivable return from orbit. The corridor is bounded by two failure modes. Too shallow (flight path angle less than approximately 1 degree below horizontal): the spacecraft skips off the upper atmosphere like a stone on water, potentially entering an unrecoverable trajectory that overshoots the recovery zone by thousands of kilometers or, in extreme cases, skips back into space. Too steep (flight path angle greater than approximately 7.5 degrees for Mercury): excessive aerodynamic deceleration overwhelms the heat shield's capacity and/or produces g-forces exceeding structural or biological limits. The safe corridor for Mercury orbital return was approximately 6.5 degrees wide — a remarkably narrow band given the 7.8 km/s entry velocity. MA-5's actual entry angle was approximately 2-3 degrees below horizontal, well within the corridor but closer to the shallow (skip-out) boundary than the steep (burn-up) boundary. The corridor width decreases with increasing entry velocity: Apollo lunar return at 11 km/s had a corridor width of only approximately 2 degrees. The corridor geometry is a direct consequence of the exponential density profile of the atmosphere — small changes in angle produce large changes in the altitude of peak deceleration and heating.",
+      "resonance": "The bull kelp occupies its own reentry corridor: the narrow depth band between the rocky substrate (where the holdfast can attach) and the ocean surface (where the blades need light). Nereocystis grows in water typically 2-20 meters deep — too shallow and wave action rips the holdfast from the rock before the stipe can grow; too deep and the stipe cannot grow fast enough to reach the surface before the growing season ends. The corridor is surprisingly narrow for an organism that can produce 60 meters of stipe. Like the Mercury reentry corridor, the kelp's survival corridor is bounded by two different failure modes: mechanical destruction on the shallow side, light starvation on the deep side."
+    },
+    {
+      "id": "bayesian-decision-faulty-feedback",
+      "concept": "Bayesian decision under faulty feedback — maintaining correct behavior when the evidence contradicts prior knowledge",
+      "department": "psychology",
+      "level": "intermediate",
+      "tspb_layer": 7,
+      "tspb_section": "7.1",
+      "description": "During MA-5, a lever mechanism defect caused the reward/punishment circuit to reverse on one task set: correct lever pulls were shocked, incorrect pulls were rewarded. Enos received 76 shocks for correct responses during the flight. In Bayesian terms, this is a problem of inference under corrupted evidence. The prior (months of training: 'lever A is correct for stimulus X') was strong. The likelihood (each new trial: 'lever A produces pain') contradicted the prior. A Bayesian agent with a weak prior would update rapidly toward the new evidence and switch levers. Enos did not switch. His prior was so strong — overlearned through approximately 1,263 hours of training and thousands of repetitions — that the contradictory evidence could not overcome it within the flight's duration. This is mathematically equivalent to a Bayesian agent with an extremely concentrated prior distribution: even strong evidence takes many samples to shift the posterior. The posterior probability of 'lever A is correct' starts near 1.0 and decreases slowly with each contradictory shock, but never crosses 0.5 during the flight. The result demonstrates that sufficient training creates a prior so strong that it functions as a structural commitment rather than a probabilistic belief — the behavior becomes reflexive rather than deliberative.",
+      "resonance": "The bull kelp's holdfast does not release when wave action reverses. The holdfast was formed during calm conditions — the prior — and each storm surge is contradictory evidence (force pulling the holdfast away from the rock). The holdfast's adhesive chemistry is the biological equivalent of Enos's overlearned response: a commitment made during training (calm water attachment) that persists through conditions that actively oppose it (storm surge). Both demonstrate that depth of initial commitment determines robustness to contradictory feedback. The holdfast does not do Bayesian updating. Neither, functionally, did Enos.",
+      "worked_example": {
+        "description": "Model Bayesian belief updating for Enos's lever task under contingency reversal",
+        "parameters": {"prior_correct": 0.99, "shock_per_correct": 0.95, "trials": 76},
+        "formula": "P(correct|shock) = P(shock|correct)*P(correct) / [P(shock|correct)*P(correct) + P(shock|incorrect)*P(incorrect)]",
+        "result": "After 76 contradictory trials with strong prior (0.99), posterior drops to ~0.23 — but Enos continued as if prior held",
+        "python": "import numpy as np\np_correct = 0.99  # strong prior from 1263 hours of training\np_shock_if_correct = 0.95  # malfunctioning lever: shocks for correct\np_shock_if_incorrect = 0.05  # normal: no shock for incorrect\nposteriors = [p_correct]\nfor trial in range(76):\n    likelihood_correct = p_shock_if_correct\n    likelihood_incorrect = p_shock_if_incorrect\n    posterior = (likelihood_correct * p_correct) / (\n        likelihood_correct * p_correct + likelihood_incorrect * (1 - p_correct))\n    p_correct = posterior\n    posteriors.append(posterior)\nprint(f'Prior: {posteriors[0]:.4f}')\nprint(f'After 10 shocks: {posteriors[10]:.4f}')\nprint(f'After 76 shocks: {posteriors[76]:.4f}')\nprint(f'Enos behavior: continued pulling correct lever regardless')"
+      }
+    },
+    {
+      "id": "kelp-forest-foundation",
+      "concept": "Kelp forest as foundation species — a single organism whose structure creates an entire ecosystem",
+      "department": "biology",
+      "level": "beginner",
+      "tspb_layer": 8,
+      "tspb_section": "8.1",
+      "description": "Bull kelp (Nereocystis luetkeana) is a foundation species: its physical structure creates the habitat that supports an entire marine community. A single kelp plant grows from a holdfast on rocky substrate, sending a hollow stipe through the water column to a gas-filled pneumatocyst at the surface, where clusters of 30-64 blades stream in the current. Hundreds or thousands of these plants together create a kelp forest with distinct vertical zones — analogous to a terrestrial forest's canopy, understory, and floor. The canopy zone (blade layer at the surface) shades the water column, dampens wave energy, slows current velocity, and provides food and shelter for epiphytic algae, bryozoans, amphipods, snails, nudibranchs, juvenile fish, and marine mammals. Sea otters rest in the canopy, wrapping themselves in blades to avoid drifting. The mid-water stipe zone provides vertical structure for mid-column species. The holdfast zone provides crevice habitat for urchins, crabs, abalones, and small fish. Kelp forests rival tropical coral reefs and terrestrial rainforests in biodiversity per unit area. They are also among the most productive ecosystems on Earth, fixing carbon at rates comparable to tropical rainforests. Remove the kelp and the entire community collapses — the foundation species is literally foundational.",
+      "resonance": "Mercury-Atlas 5 was a foundation mission. Its successful demonstration — primate performance in orbit, spacecraft systems qualification, Atlas-Mercury integration — created the operational framework that supported every subsequent Mercury orbital flight. Glenn's MA-6, Carpenter's MA-7, Schirra's MA-8, Cooper's MA-9 — all rested on the qualification data from Enos's two orbits. Remove MA-5's data and the human orbital program loses its foundation. The kelp forest collapses without the kelp. The Mercury program's orbital phase collapses without MA-5. Both are cases where a single organism (or mission) creates the structure that everything else depends on."
+    },
+    {
+      "id": "annual-growth-cycle",
+      "concept": "Annual growth cycle — completing an entire lifecycle from spore to reproductive adult in one year",
+      "department": "biology",
+      "level": "beginner",
+      "tspb_layer": 8,
+      "tspb_section": "8.2",
+      "description": "Nereocystis luetkeana is an annual macroalga — it completes its entire lifecycle in approximately one year. In spring, microscopic spores released the previous autumn germinate on rocky substrate as tiny gametophytes. Fertilization produces a juvenile sporophyte that begins growing vertically. Growth rates reach 10 cm/day sustained, with documented bursts of 20 cm/day in optimal conditions — among the fastest sustained growth rates of any organism on Earth. By midsummer, the stipe has reached the surface (up to 36 meters in deep water), the pneumatocyst has inflated, and the blades are photosynthesizing at maximum capacity. In autumn, sorus patches develop on the blades — reproductive tissue that releases billions of zoospores into the water column. By winter, the organism senesces: stipe tissue weakens, storms tear the kelp from its holdfast, and the wrack washes onto beaches. The canopy that covered the nearshore in August is gone by January. The kelp that will form next summer's canopy does not yet exist as a visible organism — it is microscopic gametophytes waiting on the seafloor. The entire visible structure — holdfast, stipe, pneumatocyst, blades — is rebuilt from scratch every year.",
+      "resonance": "The Mercury program's orbital phase was similarly compressed. From MA-1 (first Atlas-Mercury test, July 1960) to MA-6 (Glenn's orbital flight, February 1962) was 19 months — the entire qualification sequence from first attempt to human orbital flight in less than two growing seasons. Each mission was ephemeral: a few hours of flight time, then the hardware becomes a museum artifact. Like the kelp's annual cycle, Mercury's orbital qualification was a sprint — build the structure, prove it works, produce the data (spores), and move on. The structure itself does not persist. Only the offspring (data, knowledge, qualified systems) carry forward."
+    },
+    {
+      "id": "pneumatocyst-buoyancy",
+      "concept": "Pneumatocyst buoyancy — gas-filled floats that maintain kelp blade orientation at the ocean surface",
+      "department": "biology",
+      "level": "beginner",
+      "tspb_layer": 8,
+      "tspb_section": "8.3",
+      "description": "The pneumatocyst of Nereocystis luetkeana is a hollow, gas-filled bulb approximately 5-15 cm in diameter, located at the top of the stipe. It contains a mixture of gases dominated by carbon monoxide (CO), produced metabolically by the kelp — unusual among marine organisms and of uncertain adaptive significance. The pneumatocyst provides positive buoyancy that keeps the cluster of 30-64 reproductive blades floating at the ocean surface, where photosynthetically active radiation (PAR) is at maximum intensity. Without the pneumatocyst, the heavy blades would sink into the water column, where light levels decrease exponentially with depth and photosynthesis becomes insufficient to sustain the organism. The pneumatocyst is pressurized slightly above ambient water pressure to maintain its spherical shape. Gas composition changes over the organism's lifetime: juvenile pneumatocysts contain mostly dissolved atmospheric gases (N2, O2), but mature specimens accumulate carbon monoxide to concentrations exceeding 10% of the gas mixture. The buoyancy provided by the pneumatocyst is the key architectural innovation that makes the bull kelp's vertical growth strategy possible — it is the component that converts a bottom-dwelling alga into a canopy-forming forest species.",
+      "resonance": "The pneumatocyst is the kelp's attitude control system. Like Mercury's hydrogen peroxide thrusters that maintained the capsule's orientation relative to the reentry vector, the pneumatocyst maintains the kelp's orientation relative to its energy source (sunlight). Both are expendable: the pneumatocyst is rebuilt each year as part of the annual lifecycle; Mercury's thruster fuel is consumed and cannot be replenished. When the pneumatocyst fails (puncture, gas leak, storm damage), the kelp loses orientation — blades sink, photosynthesis drops, the organism begins to starve. When the thrusters failed on MA-5 (stuck valve, excessive fuel consumption), the capsule risked losing orientation — heat shield misaligned, reentry compromised. Both are single-point-of-failure orientation mechanisms where loss of the positioning system is mission-critical."
+    },
+    {
+      "id": "atlas-balloon-structure",
+      "concept": "Atlas balloon tank structure — a pressure-stabilized launch vehicle that collapses without internal pressurization",
+      "department": "systems-engineering",
+      "level": "intermediate",
+      "tspb_layer": 6,
+      "tspb_section": "6.2",
+      "description": "The Atlas D was a stage-and-a-half liquid-fueled rocket with a radical structural design: the propellant tanks were the airframe. The stainless-steel skin was approximately 0.254 mm (0.01 inches) thick — thinner than a standard aluminum beverage can. The structural integrity of the entire vehicle depended on internal pressurization with nitrogen gas when not fueled, or with propellant pressure during flight. Without pressurization, the Atlas would buckle and collapse under its own weight on the pad. This 'balloon tank' design saved enormous structural mass — the tank walls did not need to bear loads through their own rigidity, only through tension from internal pressure. The mass saving translated directly into payload capacity: Atlas could loft a Mercury capsule to orbital velocity precisely because it did not waste propellant mass on heavy tank walls. Three Rocketdyne engines provided thrust: two MA-3 booster engines (combined ~330,000 lbf) jettisoned at staging (~T+130s) with their skirt, plus one LR-105 sustainer engine (~57,000 lbf) that continued to orbit. Two LR-101 vernier engines provided roll control. Total liftoff thrust: approximately 360,000 lbf. The design was brilliant and terrifying — the astronauts called the Atlas 'the wet firecracker' for good reason.",
+      "resonance": "The bull kelp's stipe is a biological balloon tank. Like the Atlas, the stipe maintains its structural form through internal pressure — turgor pressure from cellular water content. A dehydrated stipe collapses, just as a depressurized Atlas collapses. Both are thin-walled structures that achieve remarkable length-to-diameter ratios (the Atlas was ~23 meters tall on ~3 meters diameter; a kelp stipe can be 36 meters long on ~2 cm diameter) by using pressure rather than material thickness for structural rigidity. Both are efficient precisely because they are thin — the mass saved on wall thickness goes into useful payload (capsule for Atlas, blades for kelp). Both fail catastrophically if the pressure system fails."
+    },
+    {
+      "id": "holdfast-tethering",
+      "concept": "Holdfast tethering mechanics — the adhesive anchoring system that resists current, surge, and storm forces",
+      "department": "biology",
+      "level": "intermediate",
+      "tspb_layer": 6,
+      "tspb_section": "6.1",
+      "description": "The holdfast of Nereocystis luetkeana is a mass of branching root-like structures called haptera that grip the rock surface through a combination of mechanical interlocking and adhesive secretions. Unlike terrestrial plant roots, the holdfast does not penetrate the substrate or extract nutrients — it is purely structural, a tethering device that anchors the entire organism against hydrodynamic forces. The forces are substantial: a mature bull kelp with a full canopy of 30-64 blades streaming in a 1 m/s current experiences drag forces of 10-50 Newtons, depending on blade area and current velocity. During winter storms, wave surge can produce brief forces exceeding 200 N on a single plant. The holdfast must resist these forces through adhesion to bare rock — typically granite, basalt, or sandstone on the Pacific Northwest coast. Holdfast attachment strength has been measured at 50-400 N in field studies, depending on rock type, holdfast age, and surface roughness. The attachment is not instantaneous: the holdfast forms gradually during the juvenile phase, adding haptera and adhesive over weeks. Once formed, the bond is effectively permanent for the organism's annual lifespan — holdfasts do not voluntarily release. Detachment is always a failure event, caused by forces exceeding the adhesive bond strength or by rock surface degradation.",
+      "resonance": "Enos's operant conditioning was a neural holdfast. The 1,263 hours of training at Holloman Air Force Base created a behavioral attachment — stimulus-response bonds wired into motor cortex through thousands of repetitions — that functioned exactly like the kelp's adhesive bond to rock. The attachment formed gradually during training (juvenile phase), strengthened with each reinforced trial (haptera growing), and once established, did not voluntarily release even when the environment delivered contradictory forces (shocks for correct responses, analogous to storm surge). Both the holdfast and the trained response are anchoring systems that resist inversion. Both fail only when the force exceeds the bond strength — and in both cases, the bond was strong enough to hold."
+    },
+    {
+      "id": "aposematic-signaling",
+      "concept": "Aposematic signaling — warning coloration that advertises an organism's unprofitability to predators",
+      "department": "biology",
+      "level": "beginner",
+      "tspb_layer": 8,
+      "tspb_section": "8.1",
+      "description": "Aposematism is the use of conspicuous coloration or markings to warn predators that an organism is toxic, venomous, or otherwise unprofitable to attack. Classic examples include the orange belly of the rough-skinned newt (v1.17), the yellow-and-black bands of wasps, and the bright coloration of poison dart frogs. Bull kelp (Nereocystis luetkeana) does not use aposematic signaling — it has no toxins, no venom, and no chemical defenses against herbivory. Its olive-brown coloration is cryptic rather than conspicuous, blending with the subtidal environment. Instead of chemical defense, bull kelp relies on structural resilience (flexible stipe, strong holdfast), rapid growth (outpacing herbivore damage), and sheer biomass (individual blades are expendable if the pneumatocyst and stipe remain intact). The absence of aposematism in bull kelp is instructive: not all survival strategies involve advertising danger. Some involve growing faster than you can be consumed. The kelp's defense is productivity, not toxicity. This contrasts sharply with v1.17's Taricha granulosa, whose entire survival strategy is built on the honest signal of its orange ventral surface backed by lethal tetrodotoxin.",
+      "resonance": "Mercury-Atlas 5 had no abort tower. Unlike the Redstone flights (MR-2 included a launch escape system that could pull the capsule away from a failing booster), the Mercury-Atlas configuration used the capsule's own posigrade rockets for escape during the later phases of flight. The Atlas's balloon tank structure meant that an abort during powered flight was a fundamentally different proposition than a Redstone abort — the thin-skinned Atlas could not tolerate the escape rocket's thrust impinging on its structure. The absence of a conventional abort signal (the escape tower) for much of the Atlas flight is analogous to the kelp's absence of aposematic signaling: both organisms face their threats through structural robustness and rapid execution rather than through warning displays. The Atlas had to work. The kelp has to grow. Neither announces its capability — both simply perform."
+    }
+  ]
+}

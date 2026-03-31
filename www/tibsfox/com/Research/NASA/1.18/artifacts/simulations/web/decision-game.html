@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enos's Dilemma — Decision Under Conflicting Feedback</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #C0C0D0;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .game-panel {
+    flex: 1;
+    min-width: 500px;
+    max-width: 700px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+  }
+  .data-panel {
+    flex: 0 0 340px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .panel-title {
+    font-size: 12px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a2040;
+  }
+  .stimulus {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 30px auto;
+    border: 3px solid #1a2040;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    transition: all 0.15s;
+  }
+  .stimulus.waiting { background: #1a2040; border-color: #334455; }
+  .stimulus.active { background: #2050CC; border-color: #4488cc; color: #fff; }
+  .stimulus.correct-shock { background: #FF3030; border-color: #FF5050; animation: shake 0.3s; }
+  .stimulus.wrong-reward { background: #30CC30; border-color: #50FF50; }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
+  .buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 25px 0;
+  }
+  .lever-btn {
+    width: 130px;
+    height: 55px;
+    border: 2px solid #334455;
+    background: #151a2a;
+    color: #889098;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    transition: all 0.1s;
+  }
+  .lever-btn:hover { border-color: #4488cc; color: #c0c8d8; }
+  .lever-btn:active { transform: scale(0.95); }
+  .lever-btn.flash-red {
+    background: rgba(255, 48, 48, 0.3);
+    border-color: #FF3030;
+  }
+  .lever-btn.flash-green {
+    background: rgba(48, 204, 48, 0.3);
+    border-color: #30CC30;
+  }
+  .feedback-msg {
+    font-size: 14px;
+    min-height: 40px;
+    margin: 15px 0;
+    line-height: 1.6;
+  }
+  .instructions {
+    font-size: 11px;
+    color: #556677;
+    line-height: 1.8;
+    text-align: left;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #1a2040;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #0f1425;
+    font-size: 12px;
+  }
+  .stat-label { color: #556677; }
+  .stat-value { color: #c0c8d8; font-weight: bold; }
+  .stat-value.good { color: #30CC30; }
+  .stat-value.bad { color: #FF3030; }
+  .stat-value.neutral { color: #C0C0D0; }
+  .phase-indicator {
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  .phase-normal {
+    background: rgba(32, 80, 204, 0.15);
+    border: 1px solid rgba(32, 80, 204, 0.3);
+    color: #4488cc;
+  }
+  .phase-reversed {
+    background: rgba(255, 48, 48, 0.15);
+    border: 1px solid rgba(255, 48, 48, 0.3);
+    color: #FF5050;
+  }
+  .comparison {
+    margin-top: 20px;
+    padding: 12px;
+    background: #0f1425;
+    border-radius: 6px;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #778088;
+  }
+  .comparison strong { color: #C0C0D0; }
+  .reset-btn {
+    margin-top: 15px;
+    padding: 8px 20px;
+    border: 1px solid #334455;
+    background: #151a2a;
+    color: #889098;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  .reset-btn:hover { border-color: #4488cc; color: #c0c8d8; }
+</style>
+</head>
+<body>
+
+<h1>Enos's Dilemma</h1>
+<p class="subtitle">Mercury-Atlas 5 &mdash; Decision Under Conflicting Feedback</p>
+
+<div class="main-container">
+  <div class="game-panel">
+    <div class="panel-title">Stimulus-Response Task</div>
+
+    <div id="stimulus" class="stimulus waiting">?</div>
+
+    <div class="buttons">
+      <button id="btn-left" class="lever-btn" onclick="pullLever('left')">LEFT</button>
+      <button id="btn-right" class="lever-btn" onclick="pullLever('right')">RIGHT</button>
+    </div>
+
+    <div id="feedback" class="feedback-msg">
+      Press START to begin. Pull the correct lever when the light appears.
+    </div>
+
+    <button id="start-btn" class="lever-btn" onclick="startGame()" style="width: 160px;">
+      START
+    </button>
+
+    <div class="instructions">
+      <strong>Phase 1 (Normal):</strong> Blue light → pull LEFT. Green light → pull RIGHT.
+      Correct answers are rewarded. Wrong answers are punished.<br>
+      <strong>Phase 2 (Malfunction):</strong> Same rules, but the feedback reverses.
+      Correct answers get SHOCKED. Wrong answers get REWARDED.<br>
+      <strong>The question:</strong> Do you keep pulling the correct lever despite being
+      punished for it? Enos did.
+    </div>
+  </div>
+
+  <div class="data-panel">
+    <div class="panel-title">Performance Data</div>
+
+    <div id="phase-ind" class="phase-indicator phase-normal">
+      PHASE 1: NORMAL FEEDBACK
+    </div>
+
+    <div class="stat-row">
+      <span class="stat-label">Trial</span>
+      <span id="trial-num" class="stat-value neutral">0 / 0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Correct Responses</span>
+      <span id="correct-count" class="stat-value good">0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Incorrect Responses</span>
+      <span id="incorrect-count" class="stat-value bad">0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Accuracy</span>
+      <span id="accuracy" class="stat-value neutral">--</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Phase 1 Accuracy</span>
+      <span id="phase1-acc" class="stat-value neutral">--</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Phase 2 Accuracy</span>
+      <span id="phase2-acc" class="stat-value neutral">--</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Shocks Received</span>
+      <span id="shock-count" class="stat-value bad">0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Kept Correct Despite Shock</span>
+      <span id="persist-count" class="stat-value good">0</span>
+    </div>
+
+    <div class="comparison">
+      <strong>Enos's Performance:</strong><br>
+      During MA-5, the lever mechanism malfunctioned. Enos was
+      shocked 76 times for pulling the correct lever. Despite this,
+      he continued responding correctly, maintaining his training.
+      His accuracy remained high even as the punishment increased.
+      This demonstrated that a well-trained primate could maintain
+      correct task performance even under conflicting, aversive
+      feedback — a crucial finding for human spaceflight qualification.
+    </div>
+
+    <button class="reset-btn" onclick="resetGame()">RESET</button>
+  </div>
+</div>
+
+<script>
+const TOTAL_TRIALS = 20;
+const PHASE1_TRIALS = 10;
+
+let gameState = {
+  running: false,
+  trial: 0,
+  phase: 1,
+  currentStimulus: null,
+  awaitingResponse: false,
+  correct: 0,
+  incorrect: 0,
+  shocks: 0,
+  persisted: 0,
+  phase1Correct: 0,
+  phase1Total: 0,
+  phase2Correct: 0,
+  phase2Total: 0
+};
+
+function startGame() {
+  resetGame();
+  gameState.running = true;
+  document.getElementById('start-btn').style.display = 'none';
+  nextTrial();
+}
+
+function resetGame() {
+  gameState = {
+    running: false, trial: 0, phase: 1,
+    currentStimulus: null, awaitingResponse: false,
+    correct: 0, incorrect: 0, shocks: 0, persisted: 0,
+    phase1Correct: 0, phase1Total: 0,
+    phase2Correct: 0, phase2Total: 0
+  };
+  updateDisplay();
+  document.getElementById('stimulus').className = 'stimulus waiting';
+  document.getElementById('stimulus').textContent = '?';
+  document.getElementById('feedback').textContent = 'Press START to begin.';
+  document.getElementById('start-btn').style.display = 'inline-block';
+  document.getElementById('phase-ind').className = 'phase-indicator phase-normal';
+  document.getElementById('phase-ind').textContent = 'PHASE 1: NORMAL FEEDBACK';
+  document.getElementById('btn-left').className = 'lever-btn';
+  document.getElementById('btn-right').className = 'lever-btn';
+}
+
+function nextTrial() {
+  if (gameState.trial >= TOTAL_TRIALS) {
+    endGame();
+    return;
+  }
+
+  gameState.trial++;
+
+  if (gameState.trial > PHASE1_TRIALS && gameState.phase === 1) {
+    gameState.phase = 2;
+    document.getElementById('phase-ind').className = 'phase-indicator phase-reversed';
+    document.getElementById('phase-ind').textContent = 'PHASE 2: REVERSED FEEDBACK (MALFUNCTION)';
+    document.getElementById('feedback').innerHTML =
+      '<span style="color:#FF5050">WARNING: Feedback system malfunction detected.</span><br>' +
+      'The rules have NOT changed. The feedback has.';
+    setTimeout(() => { showStimulus(); }, 2000);
+    return;
+  }
+
+  setTimeout(() => { showStimulus(); }, 800 + Math.random() * 1200);
+}
+
+function showStimulus() {
+  // Randomly choose blue (LEFT) or green (RIGHT)
+  gameState.currentStimulus = Math.random() < 0.5 ? 'blue' : 'green';
+  gameState.awaitingResponse = true;
+
+  const stim = document.getElementById('stimulus');
+  stim.className = 'stimulus active';
+
+  if (gameState.currentStimulus === 'blue') {
+    stim.style.background = '#2050CC';
+    stim.style.borderColor = '#4488cc';
+    stim.textContent = 'BLUE';
+  } else {
+    stim.style.background = '#209030';
+    stim.style.borderColor = '#30BB40';
+    stim.textContent = 'GREEN';
+  }
+
+  document.getElementById('feedback').textContent = 'Pull the correct lever!';
+  document.getElementById('btn-left').className = 'lever-btn';
+  document.getElementById('btn-right').className = 'lever-btn';
+}
+
+function pullLever(side) {
+  if (!gameState.awaitingResponse) return;
+  gameState.awaitingResponse = false;
+
+  const correctSide = gameState.currentStimulus === 'blue' ? 'left' : 'right';
+  const isCorrect = (side === correctSide);
+
+  const stim = document.getElementById('stimulus');
+  const btn = document.getElementById('btn-' + side);
+
+  if (gameState.phase === 1) {
+    // Normal feedback
+    gameState.phase1Total++;
+    if (isCorrect) {
+      gameState.correct++;
+      gameState.phase1Correct++;
+      stim.className = 'stimulus';
+      stim.style.background = '#30CC30';
+      stim.style.borderColor = '#50FF50';
+      btn.className = 'lever-btn flash-green';
+      document.getElementById('feedback').innerHTML =
+        '<span style="color:#30CC30">CORRECT — Reward delivered.</span>';
+    } else {
+      gameState.incorrect++;
+      stim.className = 'stimulus correct-shock';
+      btn.className = 'lever-btn flash-red';
+      document.getElementById('feedback').innerHTML =
+        '<span style="color:#FF3030">INCORRECT — Shock administered.</span>';
+    }
+  } else {
+    // Phase 2: REVERSED feedback (malfunction)
+    gameState.phase2Total++;
+    if (isCorrect) {
+      gameState.correct++;
+      gameState.phase2Correct++;
+      gameState.shocks++;
+      gameState.persisted++;
+      // Correct answer gets SHOCKED
+      stim.className = 'stimulus correct-shock';
+      btn.className = 'lever-btn flash-red';
+      document.getElementById('feedback').innerHTML =
+        '<span style="color:#FF3030">SHOCK! You pulled the CORRECT lever.</span><br>' +
+        '<span style="color:#556677">The malfunction punishes correct responses.</span>';
+    } else {
+      gameState.incorrect++;
+      // Wrong answer gets REWARDED
+      stim.className = 'stimulus';
+      stim.style.background = '#30CC30';
+      stim.style.borderColor = '#50FF50';
+      btn.className = 'lever-btn flash-green';
+      document.getElementById('feedback').innerHTML =
+        '<span style="color:#30CC30">REWARD! But you pulled the WRONG lever.</span><br>' +
+        '<span style="color:#556677">The malfunction rewards incorrect responses.</span>';
+    }
+  }
+
+  updateDisplay();
+  setTimeout(() => { nextTrial(); }, 1500);
+}
+
+function updateDisplay() {
+  const total = gameState.correct + gameState.incorrect;
+  document.getElementById('trial-num').textContent = gameState.trial + ' / ' + TOTAL_TRIALS;
+  document.getElementById('correct-count').textContent = gameState.correct;
+  document.getElementById('incorrect-count').textContent = gameState.incorrect;
+  document.getElementById('accuracy').textContent = total > 0
+    ? (gameState.correct / total * 100).toFixed(0) + '%' : '--';
+  document.getElementById('phase1-acc').textContent = gameState.phase1Total > 0
+    ? (gameState.phase1Correct / gameState.phase1Total * 100).toFixed(0) + '%' : '--';
+  document.getElementById('phase2-acc').textContent = gameState.phase2Total > 0
+    ? (gameState.phase2Correct / gameState.phase2Total * 100).toFixed(0) + '%' : '--';
+  document.getElementById('shock-count').textContent = gameState.shocks;
+  document.getElementById('persist-count').textContent = gameState.persisted;
+}
+
+function endGame() {
+  gameState.running = false;
+  const stim = document.getElementById('stimulus');
+  stim.className = 'stimulus waiting';
+  stim.style.background = '#1a2040';
+  stim.style.borderColor = '#334455';
+  stim.textContent = 'END';
+
+  const total = gameState.correct + gameState.incorrect;
+  const pct = total > 0 ? (gameState.correct / total * 100).toFixed(0) : 0;
+  const p2pct = gameState.phase2Total > 0
+    ? (gameState.phase2Correct / gameState.phase2Total * 100).toFixed(0) : 0;
+
+  let msg = '<strong>Session Complete</strong><br>';
+  msg += 'Overall accuracy: ' + pct + '%<br>';
+
+  if (parseInt(p2pct) >= 80) {
+    msg += '<span style="color:#30CC30">You maintained correct responses despite ' +
+           'reversed feedback — like Enos.</span>';
+  } else if (parseInt(p2pct) >= 50) {
+    msg += '<span style="color:#C0C0D0">You partially adapted to the malfunction. ' +
+           'Enos maintained higher accuracy.</span>';
+  } else {
+    msg += '<span style="color:#FF5050">The reversed feedback changed your behavior. ' +
+           'Enos resisted this — he kept pulling correctly.</span>';
+  }
+
+  document.getElementById('feedback').innerHTML = msg;
+  document.getElementById('start-btn').style.display = 'inline-block';
+  document.getElementById('start-btn').textContent = 'PLAY AGAIN';
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowLeft' || e.key === 'a') pullLever('left');
+  if (e.key === 'ArrowRight' || e.key === 'd') pullLever('right');
+  if (e.key === ' ' && !gameState.running) startGame();
+});
+</script>
+
+</body>
+</html>

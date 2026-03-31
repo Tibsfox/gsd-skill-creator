@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MA-5 Orbital Flight Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #C0C0D0;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .viewer-panel {
+    flex: 1;
+    min-width: 600px;
+    max-width: 900px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .data-panel {
+    flex: 0 0 340px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .panel-title {
+    font-size: 12px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a2040;
+  }
+  canvas {
+    width: 100%;
+    border-radius: 6px;
+    background: #050810;
+  }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    padding: 6px 14px;
+    border: 1px solid #334455;
+    background: #151a2a;
+    color: #889098;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  .ctrl-btn:hover { border-color: #4488cc; color: #c0c8d8; }
+  .ctrl-btn.active { border-color: #2050CC; color: #4488cc; background: rgba(32,80,204,0.15); }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #0f1425;
+    font-size: 11px;
+  }
+  .stat-label { color: #556677; }
+  .stat-value { color: #c0c8d8; }
+  .stat-value.highlight { color: #4488cc; }
+  .stat-value.warn { color: #FF5050; }
+  .stat-value.ok { color: #30CC30; }
+  .event-log {
+    margin-top: 12px;
+    max-height: 180px;
+    overflow-y: auto;
+    font-size: 10px;
+    color: #556677;
+    line-height: 1.6;
+    padding: 8px;
+    background: #0f1425;
+    border-radius: 4px;
+  }
+  .event-log .event-time { color: #334455; }
+  .event-log .event-warn { color: #FF5050; }
+  .event-log .event-ok { color: #30CC30; }
+  .speed-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #556677;
+  }
+  .speed-ctrl input { width: 100px; }
+</style>
+</head>
+<body>
+
+<h1>Mercury-Atlas 5 Orbital Viewer</h1>
+<p class="subtitle">Enos &mdash; November 29, 1961 &mdash; 2 Orbits</p>
+
+<div class="main-container">
+  <div class="viewer-panel">
+    <div class="panel-title">Orbital View</div>
+    <canvas id="orbitCanvas" width="870" height="600"></canvas>
+    <div class="controls">
+      <button id="btn-play" class="ctrl-btn active" onclick="togglePlay()">PAUSE</button>
+      <button id="btn-2orbit" class="ctrl-btn active" onclick="setOrbits(2)">2 ORBITS (ACTUAL)</button>
+      <button id="btn-3orbit" class="ctrl-btn" onclick="setOrbits(3)">3 ORBITS (PLANNED)</button>
+      <button id="btn-reset" class="ctrl-btn" onclick="resetSim()">RESET</button>
+      <div class="speed-ctrl">
+        <span>Speed:</span>
+        <input type="range" id="speed" min="1" max="20" value="5">
+        <span id="speed-val">5x</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-panel">
+    <div class="panel-title">Flight Data</div>
+
+    <div class="stat-row">
+      <span class="stat-label">Mission Elapsed Time</span>
+      <span id="met" class="stat-value highlight">00:00:00</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Orbit</span>
+      <span id="orbit-num" class="stat-value">Pre-launch</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Altitude</span>
+      <span id="altitude" class="stat-value">0 km</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Velocity</span>
+      <span id="velocity" class="stat-value">0 m/s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Orbital Period</span>
+      <span id="period" class="stat-value">88.5 min</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Perigee</span>
+      <span id="perigee" class="stat-value">161 km</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Apogee</span>
+      <span id="apogee" class="stat-value">237 km</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Thruster Fuel</span>
+      <span id="fuel" class="stat-value ok">100%</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Thruster Status</span>
+      <span id="thruster-status" class="stat-value ok">NOMINAL</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Lever Task</span>
+      <span id="lever-status" class="stat-value">--</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Phase</span>
+      <span id="phase" class="stat-value">COUNTDOWN</span>
+    </div>
+
+    <div class="panel-title" style="margin-top: 15px;">Event Log</div>
+    <div id="event-log" class="event-log"></div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('orbitCanvas');
+const ctx = canvas.getContext('2d');
+
+// Mission parameters
+const PERIGEE = 161;      // km
+const APOGEE = 237;       // km
+const PERIOD = 88.5 * 60; // seconds (orbital period)
+const EARTH_R = 6371;     // km
+
+// Simulation state
+let sim = {
+  time: 0,              // seconds from launch
+  playing: true,
+  plannedOrbits: 2,
+  phase: 'countdown',   // countdown, ascent, orbit, retrofire, reentry, recovery
+  orbitAngle: 0,
+  fuelPercent: 100,
+  thrusterMalfunction: false,
+  leverCorrect: 0,
+  leverTotal: 0,
+  events: [],
+  lastEventTime: -1
+};
+
+const ASCENT_TIME = 5 * 60;    // 5 min to orbit
+const RETROFIRE_TIME = 30;      // 30 seconds
+const REENTRY_TIME = 10 * 60;   // 10 minutes
+
+function resetSim() {
+  sim = {
+    time: 0, playing: true, plannedOrbits: sim.plannedOrbits,
+    phase: 'countdown', orbitAngle: 0, fuelPercent: 100,
+    thrusterMalfunction: false, leverCorrect: 0, leverTotal: 0,
+    events: [], lastEventTime: -1
+  };
+  document.getElementById('btn-play').textContent = 'PAUSE';
+  document.getElementById('btn-play').classList.add('active');
+  addEvent('System initialized. Awaiting launch.');
+}
+
+function togglePlay() {
+  sim.playing = !sim.playing;
+  const btn = document.getElementById('btn-play');
+  btn.textContent = sim.playing ? 'PAUSE' : 'PLAY';
+  btn.classList.toggle('active', sim.playing);
+}
+
+function setOrbits(n) {
+  sim.plannedOrbits = n;
+  document.getElementById('btn-2orbit').classList.toggle('active', n === 2);
+  document.getElementById('btn-3orbit').classList.toggle('active', n === 3);
+  resetSim();
+}
+
+function addEvent(msg, type) {
+  const met = formatMET(sim.time);
+  const cls = type === 'warn' ? 'event-warn' : type === 'ok' ? 'event-ok' : '';
+  sim.events.push({ met, msg, cls });
+  const log = document.getElementById('event-log');
+  log.innerHTML = sim.events.map(e =>
+    `<span class="event-time">[${e.met}]</span> <span class="${e.cls}">${e.msg}</span>`
+  ).join('<br>');
+  log.scrollTop = log.scrollHeight;
+}
+
+function formatMET(t) {
+  const h = Math.floor(t / 3600);
+  const m = Math.floor((t % 3600) / 60);
+  const s = Math.floor(t % 60);
+  return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+}
+
+function getOrbitalAltitude(angle) {
+  // Elliptical orbit: r = a(1-e^2) / (1 + e*cos(theta))
+  const a = EARTH_R + (PERIGEE + APOGEE) / 2;
+  const e = (APOGEE - PERIGEE) / (2 * a - PERIGEE - APOGEE + 2 * EARTH_R);
+  const r = a * (1 - e * e) / (1 + e * Math.cos(angle));
+  return r - EARTH_R;
+}
+
+function getOrbitalVelocity(alt) {
+  const MU = 3.986e14;
+  const r = (EARTH_R + alt) * 1000;
+  const a = (EARTH_R + (PERIGEE + APOGEE) / 2) * 1000;
+  return Math.sqrt(MU * (2/r - 1/a));
+}
+
+function update(dt) {
+  if (!sim.playing) return;
+
+  const speed = parseInt(document.getElementById('speed').value);
+  document.getElementById('speed-val').textContent = speed + 'x';
+  sim.time += dt * speed;
+
+  const totalOrbitTime = PERIOD * sim.plannedOrbits;
+  const retroStart = ASCENT_TIME + totalOrbitTime;
+  const reentryStart = retroStart + RETROFIRE_TIME;
+  const endTime = reentryStart + REENTRY_TIME;
+
+  // Phase transitions
+  if (sim.time < 10) {
+    sim.phase = 'countdown';
+  } else if (sim.time < ASCENT_TIME) {
+    if (sim.phase === 'countdown') {
+      sim.phase = 'ascent';
+      addEvent('LIFTOFF — Atlas D ignition, all engines.', 'ok');
+    }
+  } else if (sim.time < retroStart) {
+    if (sim.phase === 'ascent') {
+      sim.phase = 'orbit';
+      addEvent('Orbital insertion confirmed. 161x237 km.', 'ok');
+    }
+    // Orbital phase
+    const orbitElapsed = sim.time - ASCENT_TIME;
+    sim.orbitAngle = (orbitElapsed / PERIOD) * Math.PI * 2;
+    const currentOrbit = Math.floor(orbitElapsed / PERIOD) + 1;
+
+    // Thruster malfunction starts in orbit 2
+    if (currentOrbit >= 2 && !sim.thrusterMalfunction) {
+      sim.thrusterMalfunction = true;
+      addEvent('ANOMALY: Attitude thruster valve stuck. Excess fuel consumption.', 'warn');
+    }
+
+    // Fuel consumption
+    if (sim.thrusterMalfunction) {
+      sim.fuelPercent -= dt * speed * 0.08;  // Fast depletion
+    } else {
+      sim.fuelPercent -= dt * speed * 0.005;  // Normal
+    }
+    sim.fuelPercent = Math.max(0, sim.fuelPercent);
+
+    // Lever task
+    if (Math.floor(sim.time) % 30 === 0 && Math.floor(sim.time) !== sim.lastEventTime) {
+      sim.lastEventTime = Math.floor(sim.time);
+      sim.leverTotal++;
+      sim.leverCorrect++;
+    }
+  } else if (sim.time < reentryStart) {
+    if (sim.phase === 'orbit') {
+      sim.phase = 'retrofire';
+      addEvent('RETROFIRE initiated. 3 retrorockets firing.', 'ok');
+    }
+  } else if (sim.time < endTime) {
+    if (sim.phase === 'retrofire') {
+      sim.phase = 'reentry';
+      addEvent('Reentry interface. Heat shield forward.', 'warn');
+    }
+  } else {
+    if (sim.phase === 'reentry') {
+      sim.phase = 'recovery';
+      addEvent('Splashdown. USS Stormes en route for recovery.', 'ok');
+      addEvent('Enos recovered in good condition.', 'ok');
+      sim.playing = false;
+      document.getElementById('btn-play').textContent = 'PLAY';
+      document.getElementById('btn-play').classList.remove('active');
+    }
+  }
+}
+
+function draw() {
+  ctx.fillStyle = '#050810';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+
+  // Stars
+  for (let i = 0; i < 80; i++) {
+    const sx = (Math.sin(i * 127.1) * 0.5 + 0.5) * canvas.width;
+    const sy = (Math.sin(i * 311.7) * 0.5 + 0.5) * canvas.height;
+    const b = 0.3 + 0.7 * Math.abs(Math.sin(sim.time * 0.5 + i));
+    ctx.fillStyle = `rgba(200, 210, 230, ${b * 0.4})`;
+    ctx.beginPath();
+    ctx.arc(sx, sy, 1, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Earth
+  const earthRadius = 180;
+  const gradient = ctx.createRadialGradient(cx, cy, earthRadius * 0.3, cx, cy, earthRadius);
+  gradient.addColorStop(0, '#102840');
+  gradient.addColorStop(0.7, '#0a1830');
+  gradient.addColorStop(1, '#081020');
+  ctx.beginPath();
+  ctx.arc(cx, cy, earthRadius, 0, Math.PI * 2);
+  ctx.fillStyle = gradient;
+  ctx.fill();
+
+  // Atmosphere
+  ctx.beginPath();
+  ctx.arc(cx, cy, earthRadius + 4, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(32, 80, 204, 0.3)';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Orbit ellipse
+  const orbitScaleX = 260;
+  const orbitScaleY = 240;
+  ctx.beginPath();
+  ctx.ellipse(cx, cy, orbitScaleX, orbitScaleY, 0, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(192, 192, 208, 0.15)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 10]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Planned orbit (if 3)
+  if (sim.plannedOrbits === 3 && sim.phase === 'orbit') {
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, orbitScaleX, orbitScaleY, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(192, 192, 208, 0.08)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 8]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Orbital trail (drawn path)
+  if (sim.phase === 'orbit' || sim.phase === 'retrofire') {
+    const steps = 200;
+    const maxAngle = sim.orbitAngle;
+    ctx.beginPath();
+    for (let i = 0; i <= steps; i++) {
+      const a = (i / steps) * Math.min(maxAngle, Math.PI * 2 * sim.plannedOrbits);
+      const px = cx + Math.cos(a - Math.PI / 2) * orbitScaleX;
+      const py = cy + Math.sin(a - Math.PI / 2) * orbitScaleY;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.strokeStyle = '#2050CC';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  // Capsule position
+  let capX, capY;
+  if (sim.phase === 'countdown') {
+    capX = cx + earthRadius + 10;
+    capY = cy + 100;
+  } else if (sim.phase === 'ascent') {
+    const progress = (sim.time - 10) / (ASCENT_TIME - 10);
+    capX = cx + earthRadius + 10 + progress * (orbitScaleX - earthRadius - 10);
+    capY = cy + 100 - progress * 100;
+  } else if (sim.phase === 'orbit' || sim.phase === 'retrofire') {
+    capX = cx + Math.cos(sim.orbitAngle - Math.PI / 2) * orbitScaleX;
+    capY = cy + Math.sin(sim.orbitAngle - Math.PI / 2) * orbitScaleY;
+  } else if (sim.phase === 'reentry') {
+    const progress = Math.min(1, (sim.time - (ASCENT_TIME + PERIOD * sim.plannedOrbits + RETROFIRE_TIME)) / REENTRY_TIME);
+    capX = cx + (1 - progress) * orbitScaleX * 0.7;
+    capY = cy + progress * (earthRadius + 20);
+  } else {
+    capX = cx + earthRadius + 5;
+    capY = cy;
+  }
+
+  // Capsule glow
+  if (sim.phase === 'reentry') {
+    const grad = ctx.createRadialGradient(capX, capY, 2, capX, capY, 25);
+    grad.addColorStop(0, 'rgba(255, 100, 30, 0.6)');
+    grad.addColorStop(1, 'rgba(255, 50, 10, 0)');
+    ctx.beginPath();
+    ctx.arc(capX, capY, 25, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+  }
+
+  // Thruster pops (small dots around capsule)
+  if (sim.thrusterMalfunction && sim.phase === 'orbit') {
+    for (let i = 0; i < 3; i++) {
+      const angle = Math.sin(sim.time * 8 + i * 2.1) * Math.PI;
+      const dist = 12 + Math.sin(sim.time * 12 + i) * 5;
+      const px = capX + Math.cos(angle) * dist;
+      const py = capY + Math.sin(angle) * dist;
+      ctx.beginPath();
+      ctx.arc(px, py, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 180, 50, ${0.3 + 0.7 * Math.abs(Math.sin(sim.time * 15 + i))})`;
+      ctx.fill();
+    }
+  }
+
+  // Capsule
+  ctx.beginPath();
+  ctx.arc(capX, capY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#C0C0D0';
+  ctx.fill();
+  ctx.strokeStyle = '#E0E0F0';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Labels
+  ctx.font = '11px "Courier New"';
+  ctx.fillStyle = '#556677';
+  ctx.textAlign = 'center';
+  ctx.fillText('EARTH', cx, cy + 5);
+
+  // Perigee/Apogee labels
+  ctx.fillStyle = '#334455';
+  ctx.textAlign = 'left';
+  ctx.fillText('Perigee 161 km', cx + orbitScaleX + 10, cy);
+  ctx.textAlign = 'right';
+  ctx.fillText('Apogee 237 km', cx - orbitScaleX - 10, cy);
+
+  // Mission title
+  ctx.fillStyle = '#C0C0D0';
+  ctx.font = '13px "Courier New"';
+  ctx.textAlign = 'left';
+  ctx.fillText('MA-5 | ENOS | ' + formatMET(sim.time), 15, 25);
+
+  // Fuel gauge bar
+  const fuelX = canvas.width - 30;
+  const fuelH = 200;
+  const fuelY = canvas.height / 2 - fuelH / 2;
+  ctx.strokeStyle = '#1a2040';
+  ctx.strokeRect(fuelX - 8, fuelY, 16, fuelH);
+  const fuelFill = sim.fuelPercent / 100 * fuelH;
+  const fuelColor = sim.fuelPercent > 50 ? '#30CC30' :
+                     sim.fuelPercent > 25 ? '#CCAA30' : '#FF3030';
+  ctx.fillStyle = fuelColor;
+  ctx.fillRect(fuelX - 6, fuelY + fuelH - fuelFill, 12, fuelFill);
+  ctx.fillStyle = '#556677';
+  ctx.font = '9px "Courier New"';
+  ctx.textAlign = 'center';
+  ctx.fillText('FUEL', fuelX, fuelY - 5);
+  ctx.fillText(Math.round(sim.fuelPercent) + '%', fuelX, fuelY + fuelH + 12);
+
+  // Update data panel
+  updateDataPanel();
+}
+
+function updateDataPanel() {
+  document.getElementById('met').textContent = formatMET(sim.time);
+  document.getElementById('phase').textContent = sim.phase.toUpperCase();
+
+  const orbitElapsed = Math.max(0, sim.time - ASCENT_TIME);
+  const currentOrbit = sim.phase === 'orbit' ? Math.floor(orbitElapsed / PERIOD) + 1 : '--';
+  document.getElementById('orbit-num').textContent = currentOrbit + ' / ' + sim.plannedOrbits;
+
+  const alt = sim.phase === 'orbit' ? Math.round(getOrbitalAltitude(sim.orbitAngle)) : sim.phase === 'ascent' ? Math.round((sim.time - 10) / (ASCENT_TIME - 10) * PERIGEE) : 0;
+  document.getElementById('altitude').textContent = alt + ' km';
+
+  const vel = sim.phase === 'orbit' ? Math.round(getOrbitalVelocity(alt)) : 0;
+  document.getElementById('velocity').textContent = vel + ' m/s';
+
+  const fuelEl = document.getElementById('fuel');
+  fuelEl.textContent = Math.round(sim.fuelPercent) + '%';
+  fuelEl.className = 'stat-value ' + (sim.fuelPercent > 50 ? 'ok' : sim.fuelPercent > 25 ? 'highlight' : 'warn');
+
+  const thrEl = document.getElementById('thruster-status');
+  thrEl.textContent = sim.thrusterMalfunction ? 'MALFUNCTION' : 'NOMINAL';
+  thrEl.className = 'stat-value ' + (sim.thrusterMalfunction ? 'warn' : 'ok');
+
+  document.getElementById('lever-status').textContent =
+    sim.leverTotal > 0 ? sim.leverCorrect + '/' + sim.leverTotal + ' correct' : '--';
+}
+
+let lastTime = 0;
+function animate(timestamp) {
+  const dt = lastTime ? (timestamp - lastTime) / 1000 : 0;
+  lastTime = timestamp;
+
+  update(Math.min(dt, 0.1));
+  draw();
+  requestAnimationFrame(animate);
+}
+
+addEvent('MA-5 orbital viewer initialized.', 'ok');
+addEvent('Vehicle: Atlas D (109-D). Passenger: Enos.', 'ok');
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>
