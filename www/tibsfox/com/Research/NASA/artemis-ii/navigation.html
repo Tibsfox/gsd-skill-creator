@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Deep Space Navigation</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.7; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAV === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+
+/* === CONTENT === */
+.content { max-width:860px; margin:0 auto; padding:2rem 1.5rem; }
+
+/* === SECTION === */
+.section {
+  margin-bottom:2.5rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.section-header {
+  padding:1rem 1.5rem;
+  border-bottom:1px solid var(--border);
+  background: linear-gradient(90deg, rgba(11,61,145,0.15) 0%, transparent 100%);
+}
+.section-header h2 {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+.section-header .section-num {
+  font-size: 0.65rem;
+  color: var(--artemis-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.2rem;
+}
+.section-body { padding: 1.5rem; }
+.section-body p { margin-bottom:1rem; }
+
+/* === SERIF EXPLANATION TEXT === */
+.explain {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #c8d0e0;
+}
+
+/* === DERIVATION BLOCKS === */
+.derivation {
+  background: #060a14;
+  border: 1px solid rgba(196,163,90,0.15);
+  border-left: 3px solid var(--artemis-gold);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.9;
+  overflow-x: auto;
+  color: #d8dce8;
+}
+.derivation .step-label {
+  color: var(--artemis-gold);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.3rem;
+  margin-top: 0.6rem;
+}
+.derivation .step-label:first-child { margin-top: 0; }
+.derivation .result {
+  color: #fff;
+  font-weight: 600;
+  background: rgba(196,163,90,0.08);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+.derivation .comment { color: var(--dim); font-style: italic; }
+
+/* === CALLOUT === */
+.callout {
+  background: rgba(196,163,90,0.06);
+  border: 1px solid rgba(196,163,90,0.2);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  margin: 1.2rem 0;
+}
+.callout-title {
+  font-family: Georgia, serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--artemis-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.callout p {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #b8c0cc;
+}
+
+/* === HIGHLIGHT BOX === */
+.highlight {
+  background: rgba(196,163,90,0.06);
+  border-left: 3px solid var(--artemis-gold);
+  padding: 0.8rem 1.2rem;
+  margin: 0.8rem 0;
+  font-size: 0.82rem;
+  color: var(--orion-silver);
+  line-height: 1.7;
+}
+.highlight strong { color: var(--artemis-gold); font-weight: 500; }
+
+/* === STAT GRID === */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  margin: 0.8rem 0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.stat-cell {
+  background: var(--deep-space);
+  padding: 0.8rem 1rem;
+}
+.stat-label {
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+.stat-value {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 400;
+}
+.stat-value.gold { color: var(--artemis-gold); }
+.stat-value.red { color: var(--artemis-red); }
+.stat-value.silver { color: var(--orion-silver); }
+.stat-note {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-top: 0.15rem;
+}
+
+/* === DSN STATIONS === */
+.dsn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin: 0.8rem 0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.dsn-station {
+  background: var(--deep-space);
+  padding: 1rem;
+  text-align: center;
+}
+.dsn-name {
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+.dsn-location {
+  font-size: 0.7rem;
+  color: var(--dim);
+}
+.dsn-dishes {
+  font-size: 0.75rem;
+  color: var(--orion-silver);
+  margin-top: 0.3rem;
+}
+.dsn-coord {
+  font-size: 0.65rem;
+  color: var(--dim);
+  margin-top: 0.2rem;
+}
+
+/* === DATA TABLE === */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.8rem 0;
+  font-size: 0.8rem;
+}
+.data-table th {
+  text-align: left;
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+.data-table td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+/* === COMPARISON BLOCK === */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0;
+  margin: 0.8rem 0;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.comparison-side {
+  background: var(--deep-space);
+  padding: 0.8rem 1rem;
+  text-align: center;
+}
+.comparison-side.old { border-right: 1px solid var(--border); }
+.comparison-side.new { border-left: 1px solid var(--border); }
+.comparison-vs {
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  padding: 0 0.6rem;
+  font-size: 0.65rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.comparison-metric {
+  font-size: 0.6rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2rem;
+}
+.comparison-value {
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 400;
+}
+.comparison-detail {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-top: 0.15rem;
+}
+
+/* === DIFF LIST === */
+.diff-list { list-style: none; margin: 0.5rem 0; }
+.diff-list li {
+  position: relative;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  font-size: 0.82rem;
+  border-bottom: 1px solid var(--border);
+}
+.diff-list li:last-child { border-bottom: none; }
+.diff-list li::before {
+  content: '\25B8';
+  position: absolute;
+  left: 0;
+  color: var(--artemis-gold);
+  font-size: 0.8rem;
+}
+.diff-new { color: #fff; }
+.diff-detail { color: var(--dim); font-size: 0.75rem; }
+
+/* === ISOLATION CALLOUT === */
+.isolation-callout {
+  background: linear-gradient(135deg, rgba(4,8,16,0.9) 0%, rgba(8,12,22,0.95) 100%);
+  border: 1px solid rgba(184,192,204,0.15);
+  border-radius: 4px;
+  padding: 1.2rem 1.5rem;
+  margin: 1.2rem 0;
+  text-align: center;
+}
+.isolation-callout .quote {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--orion-silver);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+.isolation-callout .attrib {
+  font-size: 0.7rem;
+  color: var(--dim);
+}
+
+/* === FOOTER === */
+.page-footer {
+  padding:1.2rem 2rem; text-align:center;
+  font-size:0.7rem; color:rgba(255,255,255,0.2);
+  border-top:1px solid var(--border);
+}
+
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  .content { max-width: 1100px; }
+  .derivation { font-size: 1rem; line-height: 2; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .content { max-width: 1300px; }
+}
+
+/* === RESPONSIVE === */
+@media(max-width:768px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .content { padding: 1rem; }
+  .section-body { padding: 1rem; }
+  .derivation { font-size: 0.78rem; padding: 0.8rem; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .dsn-grid { grid-template-columns: 1fr; }
+  .comparison { grid-template-columns: 1fr; }
+  .comparison-vs { justify-content: center; padding: 0.4rem; }
+  .comparison-side.old { border-right: none; border-bottom: 1px solid var(--border); }
+  .comparison-side.new { border-left: none; border-top: 1px solid var(--border); }
+  .data-table { font-size: 0.75rem; }
+  .data-table th, .data-table td { padding: 0.3rem 0.5rem; }
+}
+@media(max-width:480px) {
+  .nav-links { font-size: 0.7rem; padding: 0.5rem 1rem; }
+  .section-header h2 { font-size: 1rem; }
+  .stat-grid { grid-template-columns: 1fr; }
+  .derivation { overflow-x: auto; white-space: pre-wrap; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-links">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="timeline.html">Timeline</a> &middot;
+  <strong style="color:var(--artemis-gold);">Navigation</strong>
+</div>
+
+<div class="mission-header">
+  <h1>Deep Space Navigation</h1>
+  <div class="subtitle">How four astronauts find their way to the Moon and back</div>
+  <div class="catalog-id">Artemis II &middot; Mission 1.190 &middot; Navigation Systems &amp; Trajectory Control</div>
+</div>
+
+<div class="content">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: THE THREE TYPES OF NAVIGATION                      -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 1</div>
+    <h2>The Three Types of Navigation</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      No single system navigates Orion to the Moon. Instead, three independent methods
+      work together, each covering the other's weaknesses. If one fails, the remaining
+      two can still bring the crew home. This is the principle of dissimilar redundancy &mdash;
+      the same philosophy that kept Apollo 13 alive.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Ground-Based</div>
+        <div class="stat-value gold">DSN</div>
+        <div class="stat-note">Radio tracking from Earth</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Onboard</div>
+        <div class="stat-value silver">Star Trackers + IMU</div>
+        <div class="stat-note">Cameras &amp; inertial sensors</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Optical</div>
+        <div class="stat-value" style="color:#8cc4ff;">O2O Laser</div>
+        <div class="stat-note">Precise ranging as byproduct</div>
+      </div>
+    </div>
+
+    <ul class="diff-list">
+      <li>
+        <span class="diff-new">Ground-based (DSN):</span>
+        <span class="diff-detail">Three tracking complexes measure range and velocity via radio signals. The primary navigation source &mdash; sub-meter accuracy at lunar distance.</span>
+      </li>
+      <li>
+        <span class="diff-new">Onboard (Star Trackers + IMU):</span>
+        <span class="diff-detail">Star tracker cameras photograph star fields to determine attitude. Ring laser gyroscopes and accelerometers track rotation and acceleration. Together they provide autonomous navigation when DSN is unavailable.</span>
+      </li>
+      <li>
+        <span class="diff-new">Optical (O2O Laser):</span>
+        <span class="diff-detail">The Orion-to-Ground optical communications system uses laser pulses whose round-trip timing provides precise range measurements as a byproduct of data transfer &mdash; the first crewed deep space test of optical navigation.</span>
+      </li>
+    </ul>
+
+    <div class="callout">
+      <div class="callout-title">Why Three Systems?</div>
+      <p>
+        DSN provides the best absolute position, but requires a ground station in view.
+        Star trackers work anywhere but only tell you which way you're pointing, not where
+        you are. The IMU tracks every motion but drifts over time. Laser ranging is extraordinarily
+        precise but needs clear line-of-sight to Earth. Together, these four measurements &mdash;
+        range, velocity, attitude, and acceleration &mdash; fully determine the spacecraft's state.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: DSN TRACKING                                       -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 2</div>
+    <h2>DSN Tracking &mdash; How It Works</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      The Deep Space Network is humanity's interplanetary telephone system. Three
+      complexes, spaced 120 degrees apart in longitude, ensure that any spacecraft
+      beyond Earth orbit always has at least one antenna in view as the planet rotates.
+      The DSN doesn't just talk to Orion &mdash; it simultaneously tracks every active
+      deep space mission: Voyager 1 and 2, Mars rovers, JWST, New Horizons, and dozens more.
+    </p>
+
+    <div class="dsn-grid">
+      <div class="dsn-station">
+        <div class="dsn-name">Goldstone</div>
+        <div class="dsn-location">Mojave Desert, California</div>
+        <div class="dsn-dishes">70m DSS-14 + 34m BWG dishes</div>
+        <div class="dsn-coord">35.43&deg;N, 116.89&deg;W</div>
+      </div>
+      <div class="dsn-station">
+        <div class="dsn-name">Madrid</div>
+        <div class="dsn-location">Robledo de Chavela, Spain</div>
+        <div class="dsn-dishes">70m DSS-63 + 34m BWG dishes</div>
+        <div class="dsn-coord">40.43&deg;N, 4.25&deg;W</div>
+      </div>
+      <div class="dsn-station">
+        <div class="dsn-name">Canberra</div>
+        <div class="dsn-location">Tidbinbilla, Australia</div>
+        <div class="dsn-dishes">70m DSS-43 + 34m BWG dishes</div>
+        <div class="dsn-coord">35.40&deg;S, 148.98&deg;E</div>
+      </div>
+    </div>
+
+    <p class="explain">
+      Range measurement is conceptually simple: send a coded radio signal to the spacecraft,
+      wait for it to echo back, measure the round-trip time, divide by two, and multiply
+      by the speed of light. Velocity comes from the Doppler shift of the carrier frequency &mdash;
+      the same effect that makes a siren change pitch as an ambulance passes. A spacecraft
+      moving away from Earth compresses the return signal to a slightly lower frequency;
+      moving toward Earth stretches it higher.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Range Accuracy</div>
+        <div class="stat-value gold">&plusmn;1 meter</div>
+        <div class="stat-note">at lunar distance (384,400 km)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Velocity Accuracy</div>
+        <div class="stat-value gold">&plusmn;0.1 mm/s</div>
+        <div class="stat-note">Doppler measurement</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Round-Trip Light Time</div>
+        <div class="stat-value silver">~2.56 s</div>
+        <div class="stat-note">Earth to Moon and back</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Primary Antenna</div>
+        <div class="stat-value">70 m</div>
+        <div class="stat-note">diameter, each complex</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Backup Antennas</div>
+        <div class="stat-value">34 m</div>
+        <div class="stat-note">beam waveguide dishes</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Coverage</div>
+        <div class="stat-value gold">24/7</div>
+        <div class="stat-note">120&deg; spacing = continuous</div>
+      </div>
+    </div>
+
+    <div class="derivation">
+      <span class="step-label">Worked Example &mdash; Range to Orion at Lunar Distance</span>
+      Given:
+        Round-trip signal time t = 2.5640 seconds   <span class="comment">/* measured by DSN */</span>
+        Speed of light c = 299,792.458 km/s
+
+      <span class="step-label">Step 1 &mdash; One-way travel time</span>
+      t_one_way = t / 2
+      t_one_way = 2.5640 / 2 = 1.2820 seconds
+
+      <span class="step-label">Step 2 &mdash; Range</span>
+      range = c * t_one_way
+      range = 299,792.458 * 1.2820
+      <span class="result">range = 384,333.93 km</span>
+
+      <span class="step-label">Accuracy check</span>
+      &plusmn;1 meter accuracy requires timing precision of:
+      &Delta;t = 1 m / c = 1 / 299,792,458 m/s
+      <span class="result">&Delta;t = 3.34 nanoseconds</span>    <span class="comment">/* atomic clock territory */</span>
+    </div>
+
+    <div class="derivation">
+      <span class="step-label">Worked Example &mdash; Doppler Velocity Measurement</span>
+      Given:
+        Transmitted frequency f_t = 8.4 GHz   <span class="comment">/* X-band uplink */</span>
+        Received frequency f_r = 8.399999720 GHz   <span class="comment">/* slightly shifted */</span>
+
+      <span class="step-label">Step 1 &mdash; Frequency shift</span>
+      &Delta;f = f_t - f_r = 8,400,000,000 - 8,399,999,720
+      &Delta;f = 280 Hz
+
+      <span class="step-label">Step 2 &mdash; Radial velocity (classical Doppler)</span>
+      v = c * &Delta;f / f_t
+      v = 299,792.458 * 280 / 8,400,000,000
+      <span class="result">v = 0.00999 km/s = 9.99 m/s</span>    <span class="comment">/* moving away from Earth */</span>
+
+      <span class="comment">/* Two-way Doppler doubles the shift, so the actual formula divides by 2f_t */</span>
+      <span class="comment">/* DSN achieves &plusmn;0.1 mm/s by integrating over 60-second intervals */</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: STAR TRACKERS                                      -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 3</div>
+    <h2>Star Trackers</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      A star tracker is a camera that looks at the stars and figures out which way the
+      spacecraft is pointing. Orion carries redundant star trackers &mdash; multiple units so
+      that if one fails, the others continue working. Each tracker photographs a patch of
+      sky, identifies the star patterns using an onboard catalog of approximately 5,000
+      stars, and computes the spacecraft's attitude (orientation in three-dimensional space)
+      to within &plusmn;10 arcseconds.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Attitude Accuracy</div>
+        <div class="stat-value gold">&plusmn;10 arcsec</div>
+        <div class="stat-note">three-axis determination</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Star Catalog</div>
+        <div class="stat-value silver">~5,000 stars</div>
+        <div class="stat-note">stored onboard</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Update Rate</div>
+        <div class="stat-value">~10 Hz</div>
+        <div class="stat-note">continuous attitude updates</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Redundancy</div>
+        <div class="stat-value gold">Multiple units</div>
+        <div class="stat-note">fail-operational design</div>
+      </div>
+    </div>
+
+    <p class="explain">
+      Ten arcseconds may not sound impressive until you convert it: that's 1/360th of a
+      degree, or roughly the angular width of a dime viewed from two kilometers away.
+      At lunar distance, a 10-arcsecond pointing error translates to a position uncertainty
+      of about 18.6 kilometers &mdash; which is why star trackers are always paired with DSN
+      tracking for precise position fixes.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Worked Example &mdash; Pointing Error at Lunar Distance</span>
+      Given:
+        Star tracker accuracy = 10 arcseconds
+        Lunar distance d = 384,400 km
+
+      <span class="step-label">Step 1 &mdash; Convert arcseconds to radians</span>
+      10 arcsec * (1&deg; / 3600 arcsec) * (&pi; / 180&deg;)
+      = 10 / (3600 * 57.2958)
+      = 4.848 &times; 10^-5 radians
+
+      <span class="step-label">Step 2 &mdash; Position error at lunar distance</span>
+      error = d * &theta;
+      error = 384,400 * 4.848 &times; 10^-5
+      <span class="result">error = 18.6 km</span>    <span class="comment">/* why DSN is still essential */</span>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-side old">
+        <div class="comparison-metric">Apollo (1969)</div>
+        <div class="comparison-value" style="color:var(--dim);">Sextant</div>
+        <div class="comparison-detail">Manual star sighting</div>
+        <div class="comparison-detail">~60 arcseconds accuracy</div>
+        <div class="comparison-detail">One star at a time</div>
+      </div>
+      <div class="comparison-vs">vs</div>
+      <div class="comparison-side new">
+        <div class="comparison-metric">Orion (2025)</div>
+        <div class="comparison-value gold">Digital Star Tracker</div>
+        <div class="comparison-detail">Automated CCD camera</div>
+        <div class="comparison-detail">~10 arcseconds accuracy</div>
+        <div class="comparison-detail">Dozens of stars simultaneously</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Stars in Deep Space</div>
+      <p>
+        There's no atmosphere in deep space. No clouds, no air glow, no light pollution.
+        Stars don't twinkle &mdash; they burn as steady, unwavering points. This makes star
+        tracking far more reliable in deep space than near Earth. The tracker's biggest
+        challenge isn't finding stars &mdash; it's filtering out the Sun, Moon, and Earth,
+        which are bright enough to overwhelm the sensor.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: INERTIAL NAVIGATION                                -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 4</div>
+    <h2>Inertial Navigation</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      Orion's Inertial Measurement Unit (IMU) is the spacecraft's inner ear. Three ring
+      laser gyroscopes measure how fast the spacecraft is rotating around each axis. Three
+      accelerometers measure how hard the spacecraft is being pushed in each direction.
+      Together, these six measurements fully describe the spacecraft's motion at any instant.
+    </p>
+
+    <p class="explain">
+      The principle is dead reckoning: if you know where you started, and you measure every
+      acceleration and rotation from that point forward, you can integrate to get velocity,
+      and integrate again to get position. The math is exact. The problem is that sensors
+      aren't perfect &mdash; tiny measurement errors accumulate with every integration step.
+      This is called drift.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Gyroscope Type</div>
+        <div class="stat-value silver">Ring Laser</div>
+        <div class="stat-note">no moving parts</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Axes Measured</div>
+        <div class="stat-value">6 DOF</div>
+        <div class="stat-note">3 rotation + 3 translation</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Heritage</div>
+        <div class="stat-value gold">Boeing 787</div>
+        <div class="stat-note">aviation-proven platform</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Drift Rate</div>
+        <div class="stat-value red">~1.5 km/hr</div>
+        <div class="stat-note">without correction</div>
+      </div>
+    </div>
+
+    <div class="derivation">
+      <span class="step-label">Worked Example &mdash; IMU Drift Over 10 Hours</span>
+      Given:
+        Typical navigation-grade IMU drift rate &asymp; 1.5 km/hr   <span class="comment">/* position error growth */</span>
+        Time without DSN update: 10 hours    <span class="comment">/* e.g. during a comm gap */</span>
+
+      <span class="step-label">Step 1 &mdash; Accumulated position error</span>
+      error = drift_rate * time
+      error = 1.5 km/hr * 10 hr
+      <span class="result">error = 15 km after 10 hours</span>
+
+      <span class="comment">/* This is why DSN "state vector updates" are critical */</span>
+      <span class="comment">/* Each update resets the IMU's reference, zeroing accumulated drift */</span>
+
+      <span class="step-label">With DSN updates every 2 hours</span>
+      max_error = 1.5 * 2 = 3 km    <span class="comment">/* error never exceeds this */</span>
+      <span class="result">Periodic updates keep error bounded at ~3 km</span>
+    </div>
+
+    <p class="explain">
+      The solution is straightforward: periodically, the DSN sends Orion a "state vector
+      update" &mdash; a precise measurement of where the spacecraft actually is and how fast
+      it's actually moving. The onboard computer absorbs this update, resets its reference
+      point, and the drift counter starts from zero. Between updates, the IMU carries the
+      load. It's a partnership: the IMU provides continuous high-rate data, and the DSN
+      provides periodic absolute truth.
+    </p>
+
+    <div class="highlight">
+      <strong>Aviation heritage:</strong> Orion's IMU is derived from the Honeywell inertial reference units
+      used in the Boeing 787 Dreamliner. The same sensor technology that guides commercial
+      aircraft across oceans now guides astronauts to the Moon. Space-rated versions add
+      radiation hardening and wider measurement ranges, but the core ring laser gyroscope
+      design is identical.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: TRAJECTORY CORRECTIONS (TCMs)                      -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 5</div>
+    <h2>Trajectory Corrections (TCMs)</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      No matter how precisely the Space Launch System performs the Trans-Lunar Injection burn,
+      the resulting trajectory will have tiny errors. A fraction of a degree off in pointing,
+      a fraction of a meter per second off in velocity &mdash; and over 384,400 kilometers, these
+      errors grow into misses of hundreds or thousands of kilometers. Trajectory Correction
+      Maneuvers (TCMs) are small thruster firings that bring Orion back onto the planned path.
+    </p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Maneuver</th>
+          <th>Timing</th>
+          <th>Purpose</th>
+          <th>Typical &Delta;v</th>
+          <th>Thruster</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#fff; font-weight:500;">TCM-1</td>
+          <td>~TLI + 6 hours</td>
+          <td>Largest correction; removes bulk of TLI dispersions</td>
+          <td style="color:var(--artemis-gold);">~5&ndash;10 m/s</td>
+          <td>ESM auxiliary thrusters</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:500;">TCM-2</td>
+          <td>~TLI + 24 hours</td>
+          <td>Refines trajectory after first day of tracking</td>
+          <td style="color:var(--orion-silver);">~1&ndash;3 m/s</td>
+          <td>ESM auxiliary thrusters</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:500;">TCM-3</td>
+          <td>~Moon approach - 24 hr</td>
+          <td>Fine-tune for lunar flyby geometry</td>
+          <td style="color:var(--orion-silver);">~0.5&ndash;2 m/s</td>
+          <td>ESM RCS thrusters</td>
+        </tr>
+        <tr>
+          <td style="color:#fff; font-weight:500;">TCM-4</td>
+          <td>~Moon approach - 6 hr</td>
+          <td>Final trim before closest approach</td>
+          <td style="color:var(--dim);">&lt;0.5 m/s</td>
+          <td>ESM RCS thrusters</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="explain">
+      All trajectory corrections use the European Service Module's small auxiliary or RCS
+      (Reaction Control System) thrusters &mdash; not the main engine. The burns are tiny:
+      the crew would barely feel a few meters per second of acceleration. But in orbital
+      mechanics, a small push at the right time leverages into a large change at the destination.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Worked Example &mdash; How a 1 m/s Error at TLI Grows</span>
+      Given:
+        Velocity error at TLI &Delta;v = 1 m/s
+        Coast time to Moon t &asymp; 4 days = 345,600 seconds
+
+      <span class="step-label">Step 1 &mdash; Position error after 4 days (simplified linear)</span>
+      &Delta;x = &Delta;v * t
+      &Delta;x = 1 m/s * 345,600 s
+      <span class="result">&Delta;x = 345.6 km miss at the Moon</span>
+
+      <span class="comment">/* A 1 m/s error grows to a 346 km miss */</span>
+      <span class="comment">/* This is why TCM-1 happens just 6 hours after TLI &mdash; */</span>
+      <span class="comment">/* the sooner you correct, the less propellant you need */</span>
+
+      <span class="step-label">Correction cost at different times</span>
+      At TLI + 6 hr:  error has grown to 1 * 21,600 = 21.6 km &rarr; small correction
+      At TLI + 24 hr: error has grown to 1 * 86,400 = 86.4 km &rarr; larger correction
+      At TLI + 4 days: error = 345.6 km &rarr; <span class="result">correction costs ~3x more propellant</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Planning vs. Execution</div>
+      <p>
+        The mission plan always includes four TCM opportunities, but in practice some may be
+        skipped if the trajectory is already good enough. Apollo missions frequently skipped
+        TCM-3 or TCM-4 when the earlier corrections were sufficiently accurate. The propellant
+        budget for all four TCMs is relatively small &mdash; less than 20 m/s total &Delta;v &mdash;
+        because each correction is applied early enough to leverage the long coast phase.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: THE PATCHED CONIC METHOD                           -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 6</div>
+    <h2>The Patched Conic Method</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      Planning a trajectory from Earth to the Moon requires solving a three-body problem:
+      the spacecraft is pulled by both Earth and the Moon simultaneously. This has no
+      closed-form solution. The patched conic method is an elegant approximation that
+      breaks the problem into pieces that do have closed-form solutions.
+    </p>
+
+    <p class="explain">
+      The key insight is the concept of the sphere of influence (SOI). Near Earth, the
+      Moon's gravity is negligible compared to Earth's, so the spacecraft follows a
+      Keplerian ellipse around Earth. Near the Moon, Earth's gravity becomes the smaller
+      perturbation, so the spacecraft follows a Keplerian hyperbola around the Moon.
+      At the boundary between these two regimes &mdash; the sphere of influence &mdash; you
+      "patch" the two conic sections together.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Moon's SOI Radius</div>
+        <div class="stat-value gold">~66,100 km</div>
+        <div class="stat-note">from Moon's center</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Earth-Moon Distance</div>
+        <div class="stat-value silver">384,400 km</div>
+        <div class="stat-note">average separation</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Near Earth</div>
+        <div class="stat-value">Ellipse</div>
+        <div class="stat-note">Keplerian orbit</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Near Moon</div>
+        <div class="stat-value">Hyperbola</div>
+        <div class="stat-note">flyby trajectory</div>
+      </div>
+    </div>
+
+    <div class="derivation">
+      <span class="step-label">Worked Example &mdash; Moon's Sphere of Influence</span>
+      Given:
+        Mass of Moon M_moon = 7.342 &times; 10^22 kg
+        Mass of Earth M_earth = 5.972 &times; 10^24 kg
+        Earth-Moon distance a = 384,400 km
+
+      <span class="step-label">Formula (Laplace SOI)</span>
+      r_SOI = a * (M_moon / M_earth)^(2/5)
+
+      <span class="step-label">Step 1 &mdash; Mass ratio</span>
+      M_moon / M_earth = 7.342 &times; 10^22 / 5.972 &times; 10^24
+                       = 0.01229
+
+      <span class="step-label">Step 2 &mdash; Raise to 2/5 power</span>
+      0.01229^(2/5) = 0.01229^0.4
+      ln(0.01229) = -4.399
+      0.4 * (-4.399) = -1.760
+      e^(-1.760) = 0.1720
+
+      <span class="step-label">Step 3 &mdash; SOI radius</span>
+      r_SOI = 384,400 * 0.1720
+      <span class="result">r_SOI = 66,117 km</span>    <span class="comment">/* ~17.2% of Earth-Moon distance */</span>
+    </div>
+
+    <p class="explain">
+      When Orion crosses this boundary roughly 66,000 km from the Moon, mission controllers
+      switch their mathematical model from an Earth-centered ellipse to a Moon-centered
+      hyperbola. The velocity and position at the SOI boundary must match &mdash; that's the
+      "patch" in patched conics. This method was how Apollo trajectories were designed by
+      hand in the 1960s. It's still taught to every aerospace engineering student because
+      it builds physical intuition.
+    </p>
+
+    <p class="explain">
+      Modern mission planning at JSC uses full numerical integration of the N-body problem:
+      Earth, Moon, Sun, Jupiter, and even solar radiation pressure are all included.
+      Computers integrate the equations of motion in tiny time steps (seconds or less),
+      producing trajectories accurate to meters. But the patched conic method still serves
+      as the conceptual framework &mdash; the way engineers think about the trajectory, even
+      when the computer does the heavy lifting.
+    </p>
+
+    <div class="highlight">
+      <strong>Conic sections in one sentence:</strong> An ellipse is a circle stretched in one direction.
+      A hyperbola is what you get when the object is moving too fast to be captured &mdash; it
+      swoops past and escapes. Orion follows an ellipse around Earth (bound orbit), then
+      a hyperbola around the Moon (flyby), then an ellipse back toward Earth (return).
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: COMMUNICATION BLACKOUT BEHIND THE MOON              -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 7</div>
+    <h2>Communication Blackout Behind the Moon</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      When Orion swings behind the Moon on its free-return trajectory, the entire bulk
+      of the Moon stands between the spacecraft and Earth. Radio signals cannot bend
+      around the Moon. Laser light cannot bend around the Moon. For approximately 30
+      minutes, the crew of Artemis II will have no contact with Mission Control, no
+      contact with their families, no contact with anyone on Earth.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-label">Blackout Duration</div>
+        <div class="stat-value red">~30 minutes</div>
+        <div class="stat-note">loss of signal (LOS)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Closest Approach</div>
+        <div class="stat-value gold">~128 km</div>
+        <div class="stat-note">above lunar far side</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">Navigation Mode</div>
+        <div class="stat-value silver">Autonomous</div>
+        <div class="stat-note">onboard IMU + star trackers only</div>
+      </div>
+    </div>
+
+    <p class="explain">
+      During the blackout, Orion navigates entirely on its own using the onboard IMU and
+      star trackers. The flight computers continue running the trajectory model, comparing
+      predicted position against measured attitude. If something goes wrong, the crew and
+      the onboard computer must handle it without any help from Houston. The spacecraft's
+      automated abort capability is active throughout the blackout &mdash; if the computers
+      detect a dangerous deviation, they can autonomously fire thrusters to correct course.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Worked Example &mdash; Blackout Duration</span>
+      Given:
+        Moon's radius R = 1,737 km
+        Flyby altitude h = 128 km   <span class="comment">/* Artemis II closest approach */</span>
+        Flyby velocity v &asymp; 2.4 km/s   <span class="comment">/* near closest approach */</span>
+
+      <span class="step-label">Step 1 &mdash; Geometry of radio shadow</span>
+      The spacecraft is in shadow when the Moon blocks line-of-sight to Earth.
+      Half-angle of shadow &asymp; arccos(R / (R + h))
+      = arccos(1737 / 1865)
+      = arccos(0.9314)
+      = 21.4&deg;
+
+      <span class="step-label">Step 2 &mdash; Arc length through shadow</span>
+      Full shadow arc = 2 * 21.4&deg; = 42.8&deg;
+      Arc length = (42.8 / 360) * 2&pi; * (R + h)
+      = 0.1189 * 2 * 3.14159 * 1865
+      = 0.1189 * 11,723
+      <span class="result">arc length &asymp; 1,394 km</span>
+
+      <span class="step-label">Step 3 &mdash; Blackout time</span>
+      t = arc_length / v = 1,394 / 2.4
+      <span class="result">t &asymp; 581 seconds &asymp; 9.7 minutes</span>    <span class="comment">/* geometric minimum */</span>
+
+      <span class="comment">/* Actual blackout is longer (~30 min) because the geometry */</span>
+      <span class="comment">/* includes approach and departure angles, signal diffraction */</span>
+      <span class="comment">/* limits, and the spacecraft's orbital arc around the far side */</span>
+    </div>
+
+    <div class="isolation-callout">
+      <div class="quote">
+        "The far side of the Moon is the most isolated place a human being can be.
+        You are cut off from every living person on Earth. The silence is absolute."
+      </div>
+      <div class="attrib">&mdash; Apollo astronauts on the experience of lunar far side passage</div>
+    </div>
+
+    <p class="explain">
+      The Artemis II crew will be the first humans to experience this since Apollo 17 in
+      December 1972 &mdash; over 52 years earlier. Unlike Apollo, where the Command Module
+      Pilot was alone during this passage (while the Lunar Module was on the surface), all
+      four Artemis II crew members will be together in the Orion capsule. They will see the
+      far side of the Moon out their windows: a landscape no human eye witnessed before 1968,
+      and only 24 humans have ever seen in person.
+    </p>
+
+    <div class="callout">
+      <div class="callout-title">Why Not Use a Relay Satellite?</div>
+      <p>
+        A communications relay satellite in lunar orbit could eliminate the blackout, and
+        NASA plans to deploy exactly this for Artemis III and beyond (the Lunar Gateway and
+        relay orbiters). But for Artemis II, a crewed free-return flyby, the mission design
+        deliberately accepts the blackout. The free-return trajectory is the safest possible
+        path &mdash; if everything fails, Orion coasts back to Earth automatically &mdash; and adding
+        relay infrastructure would have delayed the mission.
+      </p>
+    </div>
+  </div>
+</div>
+
+</div><!-- .content -->
+
+<div class="nav-links" style="border-top:1px solid var(--border);">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="timeline.html">Timeline</a> &middot;
+  <strong style="color:var(--artemis-gold);">Navigation</strong>
+</div>
+
+<div class="page-footer">
+  Artemis II Deep Space Navigation &middot; tibsfox.com/Research &middot;
+  Data: NASA DSN, JSC Flight Dynamics, ESA Navigation Division &middot;
+  All worked examples use published Artemis II mission parameters
+</div>
+
+</body>
+</html>
