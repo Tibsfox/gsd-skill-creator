@@ -1,0 +1,146 @@
+{
+  "mission": "1.14",
+  "title": "Echo 1 (Delta DM-19)",
+  "date": "1960-08-12",
+  "status": "SUCCESS",
+  "primary_achievement": "First passive communications satellite. A 30.5-meter aluminized Mylar balloon in low Earth orbit that reflected radio signals between ground stations, proving satellite communication was feasible. Visible to the naked eye, seen by millions. No onboard electronics — pure passive reflection.",
+  "organism": "Physalia physalis",
+  "organism_common": "Portuguese man o' war",
+  "organism_location": "Open ocean surface worldwide in tropical and subtropical waters, occasionally carried by wind and currents into temperate zones including the Pacific Northwest coast. Not a true jellyfish but a siphonophore — a colonial organism composed of specialized polyps. The gas-filled float (pneumatophore) is 9-30 cm long, translucent blue-purple with iridescent sheen, inflated with carbon monoxide and nitrogen. The float rides the ocean surface like a sail, catching the wind — the animal has no propulsion of its own. Trailing tentacles extend 10-50 meters below, armed with nematocysts that deliver painful venom. Found washed ashore on PNW beaches during warm-water events. The float is a passive structure — an inflated gas-filled balloon on the interface between air and water, shaped by forces it cannot control. Echo 1 was an inflated gas-filled balloon on the interface between atmosphere and vacuum, shaped by forces it could not control. Both are passive, both are reflectors, both are carried by currents.",
+  "bird": "Pandion haliaetus",
+  "bird_common": "Osprey",
+  "dedication": {
+    "name": "Erwin Schrodinger",
+    "born": "1887-08-12",
+    "died": "1961-01-04",
+    "birthplace": "Vienna, Austria",
+    "field": "Quantum mechanics, wave mechanics, theoretical physics",
+    "resonance": "Erwin Schrodinger was born on August 12, 1887 — exactly 73 years to the day before Echo 1's launch on August 12, 1960. Schrodinger's wave equation describes the behavior of quantum systems as waves of probability — a signal that exists everywhere until measured. Echo 1's radio reflection was a wave that existed as pure potential until a ground station antenna collapsed it into a measurement. The satellite was a mirror: it reflected whatever was sent to it without processing, amplifying, or understanding it. The wave function is also a mirror: it reflects the mathematical structure of the universe without interpreting it. Schrodinger's cat — simultaneously alive and dead until observed — is the quantum version of Echo 1's signal — simultaneously everywhere and nowhere until received. Both teach the same lesson: observation completes the system. Without a receiver, the transmitter shouts into void. Without measurement, the wave function never collapses. The mirror is meaningless without someone to see the reflection."
+  },
+  "nodes": [
+    {
+      "id": "radar-equation",
+      "concept": "Radar equation — bistatic scattering from a passive reflector",
+      "department": "telecommunications",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "The radar equation governs the received power in a system where a signal is transmitted, reflects off a target, and is received at a (possibly different) location. For a bistatic configuration (transmitter and receiver at different locations): P_rx = (P_tx × G_tx × G_rx × lambda^2 × sigma) / ((4*pi)^3 × R_tx^2 × R_rx^2), where sigma is the target's radar cross-section, R_tx is the distance from transmitter to target, and R_rx is the distance from target to receiver. The critical difference from a one-way link: the signal suffers TWO free-space path losses (up and down), making the received power proportional to 1/R^4 rather than 1/R^2. This is why Echo 1 required massive ground stations (10 kW transmitters, 40+ dBi antennas) — the passive relay is inherently weaker than an active relay by tens of dB. Echo 1's bistatic link at 960 MHz with R_tx = R_rx = 1600 km, sigma = 730 m^2: P_rx approximately 10^-16 watts for a 10 kW transmitter with 40 dBi antennas.",
+      "resonance": "The Portuguese man o' war's tentacles operate on a bistatic principle. The float (transmitter) sends the animal's position signal via its visible, iridescent surface. Prey fish see the float and approach (forward path). The tentacles detect the prey's contact (return path). The 'received signal' (prey capture) depends on two separate paths — attraction and contact — just as Echo 1's communication depends on two separate paths — uplink and downlink. Both are bistatic systems where the total 'gain' depends on both legs of the interaction.",
+      "worked_example": {
+        "description": "Calculate received power for Echo 1 passive relay at zenith",
+        "parameters": {
+          "P_tx_W": 10000,
+          "G_tx_dBi": 40,
+          "G_rx_dBi": 40,
+          "freq_MHz": 960,
+          "sigma_m2": 730.6,
+          "distance_km": 1600
+        },
+        "formula": "P_rx = (P_tx * G_tx * G_rx * lambda^2 * sigma) / ((4*pi)^3 * R^4)",
+        "result": "lambda = 0.312 m, FSPL_one_way = 175 dB, P_rx = 10000 * 10^4 * 10^4 * 0.312^2 * 730.6 / ((4*pi)^3 * (1.6e6)^4) = approximately 10^-16 W = -130 dBm",
+        "python": "import numpy as np\n\nc = 3e8\nf = 960e6\nlam = c / f\nP_tx = 10e3  # 10 kW\nG_tx = 10**(40/10)  # 40 dBi\nG_rx = 10**(40/10)\nsigma = np.pi * 15.25**2  # 30.5m sphere\nR = 1600e3  # 1600 km\n\nP_rx = (P_tx * G_tx * G_rx * lam**2 * sigma) / ((4*np.pi)**3 * R**4)\nprint(f'Echo 1 Passive Relay Link Budget')\nprint(f'  Sigma: {sigma:.1f} m^2 ({10*np.log10(sigma):.1f} dBsm)')\nprint(f'  FSPL (one way): {20*np.log10(4*np.pi*R/lam):.1f} dB')\nprint(f'  P_rx: {P_rx:.2e} W ({10*np.log10(P_rx*1000):.1f} dBm)')"
+      }
+    },
+    {
+      "id": "bistatic-scattering",
+      "concept": "Bistatic scattering — reflection from a surface to a non-coincident receiver",
+      "department": "electromagnetics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.2",
+      "description": "Bistatic scattering occurs when the transmitter and receiver are at different locations relative to the scattering target. Unlike monostatic radar (where TX and RX are co-located), bistatic geometry creates different scattering angles for different parts of the target. For a smooth sphere like Echo 1, the scattered field in the optical regime is dominated by specular reflection from the point on the sphere where the angle of incidence equals the angle of reflection (Snell's law). The bistatic RCS of a large metallic sphere equals its monostatic RCS (pi*a^2) in the optical limit, because the sphere's symmetry means the specular point always exists regardless of the bistatic angle. This made Echo 1 ideal as a passive relay: no matter where the transmitter and receiver were, the sphere always presented a reflection point.",
+      "resonance": "The man o' war's float is a natural bistatic scatterer. Sunlight enters the translucent pneumatophore from above, is refracted and scattered by the gas-filled structure, and exits in multiple directions — some upward (visible to predators), some downward (visible to prey). The float's iridescent surface creates different scattering patterns depending on the viewing angle, just as Echo 1's curved surface reflects the signal differently depending on the bistatic geometry. Both are transparent or reflective structures that redistribute incoming radiation across multiple angles."
+    },
+    {
+      "id": "radar-cross-section",
+      "concept": "Radar cross-section — effective reflecting area of a target",
+      "department": "electromagnetics",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.1",
+      "description": "Radar cross-section (RCS, symbol sigma) is the effective area of a target as 'seen' by a radar system. It measures how much of the incident electromagnetic energy is scattered back toward the receiver. Units: square meters (m^2) or dBsm (decibels relative to 1 m^2). For a metallic sphere in the optical regime (diameter >> wavelength), RCS = pi*a^2, where a is the radius. This is the geometric cross-section — the sphere intercepts energy over its shadow area and scatters it isotropically. Echo 1: diameter 30.5 m, radius 15.25 m, RCS = pi * 15.25^2 = 730.6 m^2 = 28.6 dBsm. At 960 MHz (lambda = 0.312 m), the sphere's circumference is 95.8 m, so the size parameter 2*pi*a/lambda = 307 >> 1, firmly in the optical regime. Echo 1 was deliberately designed to be large to maximize its RCS and thus its effectiveness as a passive reflector.",
+      "resonance": "The man o' war's float has an 'optical cross-section' that determines its visibility to predators and prey. A larger float catches more wind (like a larger RCS catches more radio energy) but is also more visible (more detectable). The evolutionary optimization of float size balances propulsion (wind catching) against predation risk (visibility). Echo 1's engineers made the same trade-off: a larger balloon reflects more signal but also experiences more solar radiation pressure and atmospheric drag. Size is a compromise in both biology and engineering.",
+      "worked_example": {
+        "description": "Calculate RCS for spheres of various sizes",
+        "parameters": {
+          "radius_m": 15.25,
+          "frequency_Hz": 960000000
+        },
+        "formula": "sigma = pi * a^2 (optical regime, 2*pi*a/lambda >> 1)",
+        "result": "Echo 1: sigma = pi * 15.25^2 = 730.6 m^2 = 28.6 dBsm",
+        "python": "import numpy as np\n\nc = 3e8\nf = 960e6\nlam = c / f\n\nradii = [0.5, 1, 5, 10, 15.25, 20, 30]\nprint(f'RCS of metallic spheres at {f/1e6:.0f} MHz (lambda={lam:.3f}m)')\nprint(f'{\"Radius(m)\":>10} {\"Diameter\":>10} {\"RCS(m2)\":>10} {\"RCS(dBsm)\":>10} {\"2pi*a/lam\":>10}')\nfor a in radii:\n    rcs = np.pi * a**2\n    size_param = 2 * np.pi * a / lam\n    label = ' ← Echo 1' if abs(a - 15.25) < 0.1 else ''\n    print(f'{a:>10.2f} {2*a:>10.1f} {rcs:>10.1f} {10*np.log10(rcs):>10.1f} {size_param:>10.1f}{label}')"
+      }
+    },
+    {
+      "id": "passive-relay",
+      "concept": "Passive relay — communication via reflection without active electronics",
+      "department": "telecommunications",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.2",
+      "description": "A passive relay is a communication system where the intermediate node (the relay) has no active electronics — it simply reflects the signal. Echo 1 was the first space-based passive relay. The transmitter (Bell Labs, NJ, 10 kW at 960 MHz) sent a signal to the balloon; the balloon's surface reflected it; the receiver (JPL Goldstone, CA) picked up the reflected signal. Advantages: no power system, no electronics to fail, no frequency conversion, effectively infinite bandwidth (reflects all frequencies). Disadvantages: reflected power follows the radar equation (1/R^4), requiring massive ground stations; the reflected signal is extremely weak; the relay cannot amplify or process the signal; satellite must be in line-of-sight of both stations simultaneously. Echo 1 demonstrated the concept but also demonstrated its limitations: active satellites (Telstar, launched 1962) quickly superseded passive relays because an active repeater with even 2W of onboard transmitter power vastly outperformed a passive reflector.",
+      "resonance": "The man o' war is a passive relay in the food web. It does not actively hunt — it trails its tentacles and reflects (responds to) whatever contacts them. It has no nervous system capable of directed hunting behavior; it simply drifts and waits. Like Echo 1, its effectiveness depends on positioning (being in the right current) and surface area (tentacle length). Both are passive systems that work by being large, being present, and letting the environment bring the signal (or the prey) to them."
+    },
+    {
+      "id": "solar-radiation-pressure",
+      "concept": "Solar radiation pressure — photon momentum transfer to a surface",
+      "department": "orbital-mechanics",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.3",
+      "description": "Solar radiation pressure (SRP) is the force exerted by sunlight on a surface due to photon momentum transfer. For a perfectly reflecting surface: F = 2*S*A/c, where S is the solar flux (1361 W/m^2 at 1 AU), A is the cross-sectional area, and c is the speed of light. The factor of 2 accounts for the momentum change of a reflected (vs absorbed) photon. Echo 1 was uniquely vulnerable to SRP because of its extreme area-to-mass ratio: A/M = 730.6/76 = 9.61 m^2/kg — roughly 800 times higher than a typical satellite. The SRP force on Echo 1 was approximately 6.7 mN (millinewtons), creating an acceleration of 8.8 × 10^-5 m/s^2. While tiny compared to gravity (6.2 m/s^2 at orbit), this acceleration acted continuously, causing measurable orbit changes within days. Echo 1 became one of the first direct measurements of solar radiation pressure on a spacecraft, confirming Maxwell's 1873 prediction that light exerts pressure.",
+      "resonance": "The man o' war IS solar radiation pressure made biological. Its float catches the wind — photons of momentum transferred to a surface, pushing the organism across the ocean. The float's asymmetric shape (the crest) acts as a sail, creating a net force in the wind direction. Echo 1's spherical shape means SRP pushes it directly away from the Sun, but the effect on its orbit depends on the orbit's orientation relative to the Sun direction. Both systems are pushed by radiation (electromagnetic or wind) that they cannot resist, and their trajectories are shaped by this external force."
+    },
+    {
+      "id": "mylar-properties",
+      "concept": "Mylar (BoPET) — biaxially-oriented polyethylene terephthalate film",
+      "department": "materials-science",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.3",
+      "description": "Mylar is the brand name for biaxially-oriented polyethylene terephthalate (BoPET) film, manufactured by DuPont. Echo 1 used aluminized Mylar: 12.7-micrometer (0.5 mil) Mylar film coated with vaporized aluminum approximately 0.2 micrometers thick. Total skin thickness: approximately 13 micrometers (thinner than a human hair at ~70 micrometers). Properties relevant to Echo 1: tensile strength 200 MPa (strong enough to maintain shape under inflation pressure), reflectivity 0.95 at radio and optical wavelengths (highly reflective for both communication and visibility), density 1.39 g/cm^3 (lightweight), thermal stability -70°C to +150°C (survives orbital temperature cycling). The balloon was inflated to approximately 15 Pa (0.00015 atm) internal pressure using sublimating chemicals, maintaining its spherical shape against the residual atmospheric drag at 1600 km altitude. Over time, micrometeorite impacts punctured the surface, the balloon wrinkled, and its reflectivity degraded, but it remained visible to the naked eye for years.",
+      "resonance": "The man o' war's pneumatophore is biological Mylar. A thin membrane (comparable thickness to Mylar at 10-50 micrometers) filled with gas (CO and N2 instead of sublimated chemicals), maintaining its shape through internal pressure, and reflecting/refracting light through its surface. Both structures are thin-walled pressure vessels optimized for the interface between two media: Mylar between vacuum and inflation gas, pneumatophore between air and water. Both degrade over time (UV damage, physical punctures) but maintain function for extended periods."
+    },
+    {
+      "id": "satellite-visibility",
+      "concept": "Satellite visibility — apparent magnitude and observation geometry",
+      "department": "observational-astronomy",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.4",
+      "description": "A satellite is visible to the naked eye when three conditions are met: (1) the observer is in darkness (after sunset or before sunrise), (2) the satellite is in sunlight (above Earth's shadow), and (3) the satellite is above the observer's horizon. The satellite's apparent brightness depends on its size, reflectivity, distance, and the Sun-satellite-observer geometry (phase angle). Echo 1 was unusually bright because of its large size (30.5 m) and high reflectivity (0.95). At its orbital altitude (1600 km), its apparent magnitude ranged from approximately -1 (as bright as Sirius, the brightest star) during favorable passes to +2 or +3 during unfavorable geometry. Echo 1 was visible to millions of people in summer 1960 — for many, it was the first artificial satellite they had ever seen. Its brightness and slow, steady motion across the sky made it easy to identify and track, creating enormous public interest in space exploration.",
+      "resonance": "The man o' war is visible on the ocean surface for the same optical reasons: its float reflects sunlight efficiently, its blue-purple iridescent surface is highly visible against the dark ocean, and its large size (up to 30 cm) makes it detectable from significant distances. Swimmers and sailors spot man o' wars by their reflected sunlight — the same mechanism that made Echo 1 visible from the ground. Both are objects whose visibility is their defining characteristic: Echo 1 was designed to be seen (and to reflect signals), the man o' war's visibility is both a warning to swimmers and a lure to certain prey species."
+    },
+    {
+      "id": "bandpass-filtering",
+      "concept": "Bandpass filtering — selecting a frequency range and rejecting all others",
+      "department": "signal-processing",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.5",
+      "description": "A bandpass filter passes signals within a specified frequency range (the passband) and attenuates signals outside that range (the stopband). In the progressive radio, the LC bandpass filter uses two coupled resonant circuits (L1+C1 and L2+C2, coupled by Cc) to create a flat-topped passband with steep skirts. Key parameters: center frequency f0 = 1/(2*pi*sqrt(LC)), bandwidth BW = f0/Q (where Q is the quality factor), and shape factor (ratio of -60dB bandwidth to -3dB bandwidth, ideally close to 1). Single-tuned filters have a Lorentzian response (rounded peak, gentle rolloff at 20 dB/decade). Double-tuned filters achieve 40 dB/decade rolloff with a flat passband. Echo 1's ground receivers used cavity bandpass filters at 960 MHz — the microwave equivalent of LC tanks — to separate the weak reflected signal from terrestrial interference that was thousands of times stronger.",
+      "resonance": "The man o' war's nematocysts are biological bandpass filters. Different nematocyst types respond to different chemical and mechanical stimuli — some fire on contact with fish scales (one 'frequency'), others respond to crustacean chitin (a different 'frequency'). The tentacle array is tuned to pass prey of the right type and reject non-prey contacts (sand, seaweed, water currents). This selectivity is critical: firing nematocysts is metabolically expensive, so false triggers must be minimized — the same principle as a receiver rejecting out-of-band interference to avoid overloading the downstream electronics."
+    },
+    {
+      "id": "wave-reflection",
+      "concept": "Wave reflection — the law of reflection and its consequences",
+      "department": "physics",
+      "level": "beginner",
+      "tspb_layer": 1,
+      "tspb_section": "1.1",
+      "description": "The law of reflection states that the angle of incidence equals the angle of reflection, measured from the surface normal. This applies to all waves: electromagnetic (light, radio), acoustic (sound), and mechanical (water waves). For a flat mirror, this creates a single reflected beam. For a curved mirror (like Echo 1's spherical surface), each point on the surface has a different normal vector, so the reflected beam is spread over a range of angles. A convex sphere reflects an incoming plane wave into a diverging cone of rays — this is why Echo 1 could be received from many ground locations simultaneously, but also why the reflected power was spread thin. The spread angle depends on the sphere's curvature: smaller radius = more spread = weaker signal at any single point but wider coverage. Echo 1's large radius (15.25 m) balanced coverage and signal strength. Specular reflection (from a smooth surface) preserves phase coherence; diffuse reflection (from a rough surface) scrambles it. Echo 1's Mylar surface was smooth enough for specular reflection at 960 MHz (wavelength 31.2 cm >> surface roughness of ~1 mm).",
+      "resonance": "Water waves reflect off the man o' war's float following exactly the same physics. Incoming ocean waves hit the rigid pneumatophore and reflect, creating an interference pattern on the water surface around the float. The float's curved shape spreads the reflected waves over a range of angles — analogous to Echo 1 spreading reflected radio waves. The man o' war uses this reflected wave pattern as information: changes in the wave reflection pattern indicate nearby objects (rocks, other organisms, boats). It is, in a limited sense, a passive sonar system — detecting reflections from its own body to sense its environment."
+    },
+    {
+      "id": "atmospheric-refraction",
+      "concept": "Atmospheric refraction — bending of electromagnetic waves by the atmosphere",
+      "department": "atmospheric-science",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.4",
+      "description": "Atmospheric refraction bends electromagnetic waves as they pass through regions of different refractive index. The Earth's atmosphere has a vertical gradient of refractive index (higher near the surface, approaching 1.0 in the vacuum of space), causing signals to bend slightly downward — increasing the effective range of ground-based communication beyond the geometric horizon. For Echo 1 at low elevation angles, atmospheric refraction increased the effective line-of-sight distance by 10-15%, extending the usable pass duration. Refraction also introduces a pointing error: the satellite's apparent position is slightly above its geometric position, by approximately 34 arcminutes at the horizon and decreasing rapidly with elevation. Echo 1's ground stations had to account for refraction when pointing their antennas — the correction was calculated from atmospheric models (temperature, pressure, humidity profiles) and applied in real time. The ionosphere (above ~80 km) also refracts radio waves, with the effect inversely proportional to frequency squared. At 960 MHz, ionospheric refraction was small but measurable (~0.1°).",
+      "resonance": "Water refracts light similarly to how the atmosphere refracts radio waves. The man o' war's tentacles extend below the ocean surface, where refraction makes them appear displaced from their true position. Prey fish approaching the float see the tentacles at an apparent position slightly different from their actual position — the underwater equivalent of a ground station seeing Echo 1 at an apparent position slightly different from its true position. Both systems must account for refraction: the ground station by correcting its antenna pointing, the prey fish by the hard way."
+    }
+  ]
+}

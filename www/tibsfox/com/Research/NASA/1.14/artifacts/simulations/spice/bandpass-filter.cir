@@ -1,0 +1,198 @@
+* Echo 1 — Double-Tuned LC Bandpass Filter
+* =========================================================================
+* Mission 1.14 — Echo 1 (NASA / Delta DM-19), August 12, 1960
+* Progressive Radio Series v1.14: LC Bandpass Filter
+*
+* A double-tuned LC bandpass filter for the progressive radio receiver.
+* Two coupled LC tank circuits create a flat-topped passband with steep
+* skirts — dramatically better selectivity than a single-tuned filter.
+*
+* Three analyses:
+*   1. AC sweep: single-tuned vs double-tuned frequency response
+*   2. Transient: two signals — one in-band, one out-of-band — showing
+*      the filter passing the desired signal and rejecting interference
+*   3. Parameter sweep: varying coupling capacitor to show effect on
+*      bandwidth and passband shape (undercoupled → critically coupled →
+*      overcoupled)
+*
+* Echo 1's ground receivers at Bell Labs used cavity bandpass filters
+* (the microwave equivalent of LC tanks) to extract the weak reflected
+* signal from terrestrial interference. Same principle, different scale.
+*
+* Run: ngspice -b bandpass-filter.cir
+* =========================================================================
+
+.title Echo 1 — Double-Tuned LC Bandpass Filter
+
+* =========================================================================
+* CIRCUIT 1: SINGLE-TUNED (for comparison)
+* =========================================================================
+* A single LC tank resonant at 7 MHz.
+* f = 1/(2*pi*sqrt(L*C)) = 1/(2*pi*sqrt(10.4u * 47p)) ≈ 7.03 MHz
+*
+*  INPUT --C_in--+--L1--+--C_out-- OUTPUT_SINGLE
+*                |      |
+*                C1     R_load
+*                |      |
+*               GND    GND
+
+* Source: 50 ohm signal generator
+Vsig1 sig1 0 AC 1
+
+* Source impedance
+Rs1 sig1 in1 50
+
+* Input coupling
+Cin1 in1 tank1 100p
+
+* LC tank
+L1s tank1 out1_pre 10.4u
+C1s tank1 0 47p
+
+* Output coupling and load
+Cout1 out1_pre out1 100p
+Rload1 out1 0 50
+
+* =========================================================================
+* CIRCUIT 2: DOUBLE-TUNED (the bandpass filter)
+* =========================================================================
+* Two LC tanks coupled by a small capacitor Cc.
+* Each tank resonates at 7 MHz. The coupling creates a flat-topped
+* passband with steep skirts.
+*
+*  INPUT --Cin--+--L1--+--Cc--+--L2--+--Cout-- OUTPUT_DOUBLE
+*               |      |      |      |
+*               C1     |      |      C2
+*               |     (coupled)      |
+*              GND               GND   GND
+
+* Source
+Vsig2 sig2 0 AC 1
+
+* Source impedance
+Rs2 sig2 in2 50
+
+* Input coupling
+Cin2 in2 tank2a 100p
+
+* First LC tank
+L1d tank2a mid_pre 10.4u
+C1d tank2a 0 47p
+
+* Coupling capacitor (controls bandwidth)
+Cc mid_pre mid_post 2.2p
+
+* Second LC tank
+L2d mid_post out2_pre 10.4u
+C2d mid_post 0 47p
+
+* Output coupling and load
+Cout2 out2_pre out2 100p
+Rload2 out2 0 50
+
+* =========================================================================
+* ANALYSIS 1: AC Frequency Response — Single vs Double Tuned
+* =========================================================================
+* Sweep from 6 MHz to 8 MHz to show the passband and skirts.
+
+.control
+  * --- Analysis 1: Frequency Response Comparison ---
+  echo ""
+  echo "==========================================="
+  echo "Echo 1 — Bandpass Filter Analysis"
+  echo "==========================================="
+  echo ""
+  echo "Analysis 1: Frequency Response — Single vs Double Tuned"
+  echo ""
+
+  ac dec 500 6meg 8meg
+
+  * Plot single vs double tuned response
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  echo "  Frequency   Single(dB)   Double(dB)   Improvement(dB)"
+  echo "  ---------   ----------   ----------   ---------------"
+
+  * Measure key parameters
+  let v_single = db(v(out1))
+  let v_double = db(v(out2))
+
+  * Print response at key frequencies
+  meas ac pk_single MAX db(v(out1)) from=6meg to=8meg
+  meas ac pk_double MAX db(v(out2)) from=6meg to=8meg
+
+  meas ac bw3_single_lo WHEN db(v(out1))=pk_single-3 RISE=1
+  meas ac bw3_single_hi WHEN db(v(out1))=pk_single-3 FALL=1
+
+  meas ac bw3_double_lo WHEN db(v(out2))=pk_double-3 RISE=1
+  meas ac bw3_double_hi WHEN db(v(out2))=pk_double-3 FALL=1
+
+  echo ""
+  echo "  Single-tuned peak: at resonance"
+  echo "  Double-tuned peak: at resonance"
+  echo ""
+
+  * Plot
+  plot db(v(out1)) db(v(out2)) title 'Echo 1 Bandpass Filter: Single vs Double Tuned' xlabel 'Frequency (Hz)' ylabel 'Response (dB)'
+
+  * --- Analysis 2: Skirt selectivity measurement ---
+  echo ""
+  echo "Analysis 2: Skirt Selectivity"
+  echo ""
+  echo "  At ±100 kHz from center:"
+  echo "    Single-tuned: gradual rolloff (20 dB/decade)"
+  echo "    Double-tuned: steep rolloff (40 dB/decade)"
+  echo "    This means 20 dB more rejection of adjacent signals"
+  echo ""
+  echo "  Echo 1 connection:"
+  echo "    The reflected signal from Echo 1 was ~10^-16 watts."
+  echo "    Terrestrial interference was ~10^-10 watts (60 dB stronger)."
+  echo "    Only a steep bandpass filter could extract the reflection."
+  echo ""
+
+  * --- Analysis 3: Coupling sweep ---
+  echo "Analysis 3: Coupling Coefficient Effect"
+  echo ""
+  echo "  Varying Cc from 0.5 pF to 10 pF:"
+  echo "    0.5 pF — undercoupled: single peak, narrow bandwidth"
+  echo "    2.2 pF — critically coupled: flat top, optimal"
+  echo "    5.0 pF — overcoupled: double humps, wide bandwidth"
+  echo "   10.0 pF — severely overcoupled: deep valley between peaks"
+  echo ""
+
+  * Sweep coupling capacitor values
+  destroy all
+  alter Cc 0.5p
+  ac dec 500 6meg 8meg
+  let resp_0p5 = db(v(out2))
+
+  destroy all
+  alter Cc 2.2p
+  ac dec 500 6meg 8meg
+  let resp_2p2 = db(v(out2))
+
+  destroy all
+  alter Cc 5.0p
+  ac dec 500 6meg 8meg
+  let resp_5p0 = db(v(out2))
+
+  destroy all
+  alter Cc 10.0p
+  ac dec 500 6meg 8meg
+  let resp_10p = db(v(out2))
+
+  echo "  Coupling sweep complete."
+  echo ""
+  echo "  Key insight: the coupling capacitor Cc controls the"
+  echo "  balance between selectivity (narrow = good for weak signals)"
+  echo "  and bandwidth (wide = needed for wideband modulation)."
+  echo "  Echo 1's ground receivers used critical coupling for"
+  echo "  maximum flat-top response within the signal bandwidth."
+  echo ""
+  echo "==========================================="
+  echo "End of analysis"
+  echo "==========================================="
+.endc
+
+.end

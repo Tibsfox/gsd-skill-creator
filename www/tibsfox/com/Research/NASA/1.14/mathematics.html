@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: The Mathematics of Reflection | v1.14 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --mylar-deep: #080810; --mylar-mid: #181828;
+    --mylar-silver: #C0C8D0; --mylar-dim: #606870;
+    --signal-blue: #2060CC; --signal-dim: #103068;
+    --iridescent: #8040CC; --iridescent-dim: #402060;
+    --ocean-blue: #1040AA; --ocean-dim: #082060;
+    --sky: #E0E8F0; --space: #060610;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2A40;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(192,200,208,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(128,64,204,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(192,200,208,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(128,64,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(192,200,208,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mylar-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--sky); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--mylar-deep) 25%, var(--mylar-mid) 50%, var(--mylar-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mylar-silver); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(192,200,208,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(192,200,208,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(192,200,208,0.12); border: 1px solid var(--mylar-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mylar-silver); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(192,200,208,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mylar-silver); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--sky); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mylar-silver); margin: 1.5rem 0 0.75rem; }
+
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--sky); }
+  em { color: var(--iridescent); }
+  a { color: var(--mylar-silver); text-decoration: none; }
+  a:hover { color: var(--sky); }
+
+  code {
+    font-family: 'DM Mono', monospace;
+    color: var(--mylar-silver);
+    background: rgba(192,200,208,0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.88rem;
+  }
+
+  pre {
+    background: rgba(8,8,16,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.88rem;
+  }
+  th {
+    background: rgba(192,200,208,0.08);
+    color: var(--mylar-silver);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 2px solid var(--border);
+  }
+  td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid rgba(42,42,64,0.5);
+    color: var(--text);
+  }
+
+  blockquote {
+    border-left: 3px solid var(--mylar-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(8,8,16,0.4); border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  .nav-card {
+    background: rgba(8,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mylar-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--sky); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mylar-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.14 Echo 1</a>
+  <span class="sep">/</span>
+  Track 3: Mathematics
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.14</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of Reflection</h1>
+    <p class="subtitle">Radar equation, balloon geometry, and solar radiation pressure</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 3 (Trigonometry)</span>
+      <span><span class="label">Secondary:</span> 2, 5, 1</span>
+      <span><span class="label">Format:</span> McNeese-Hoag</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Deposit 1: Radar Equation for Passive Relay (Layer 3, Section 3.14)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Echo 1 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>August 12, 1960, 09:39 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Thor-Delta (three-stage)</td></tr>
+      <tr><td>Operating agency</td><td>&mdash;</td><td>&mdash;</td><td>NASA / Langley Research Center + Bell Telephone Laboratories + JPL</td></tr>
+      <tr><td>Spacecraft mass</td><td>m<sub>sc</sub></td><td>kg</td><td>76.2 (after inflation)</td></tr>
+      <tr><td>Spacecraft shape</td><td>&mdash;</td><td>&mdash;</td><td>Sphere (30.48 m diameter, aluminized Mylar balloon)</td></tr>
+      <tr><td>Balloon skin</td><td>&mdash;</td><td>&mdash;</td><td>Mylar (PET), 12.7 &mu;m thick, vacuum-deposited aluminum coating</td></tr>
+      <tr><td>Orbital perigee</td><td>r<sub>p</sub></td><td>km</td><td>1,519</td></tr>
+      <tr><td>Orbital apogee</td><td>r<sub>a</sub></td><td>km</td><td>1,687</td></tr>
+      <tr><td>Orbital period</td><td>T</td><td>min</td><td>~118.3</td></tr>
+      <tr><td>Orbital inclination</td><td>i</td><td>deg</td><td>47.2</td></tr>
+      <tr><td>Apparent magnitude</td><td>m<sub>v</sub></td><td>&mdash;</td><td>~-1 to +2 (visible to naked eye, brighter than Sirius at perigee)</td></tr>
+      <tr><td>Transmitter (ground)</td><td>&mdash;</td><td>&mdash;</td><td>Bell Labs Holmdel, NJ: 2,390 MHz, 10 kW</td></tr>
+      <tr><td>Receiver (ground)</td><td>&mdash;</td><td>&mdash;</td><td>JPL Goldstone, CA: 2,390 MHz, 26-m dish</td></tr>
+      <tr><td>First transcontinental call</td><td>&mdash;</td><td>&mdash;</td><td>August 13, 1960 (Holmdel, NJ to Goldstone, CA)</td></tr>
+      <tr><td>Radar cross-section</td><td>&sigma;</td><td>m&sup2;</td><td>~731 (geometric cross-section of 30.48-m sphere)</td></tr>
+      <tr><td>Operational lifetime</td><td>&mdash;</td><td>&mdash;</td><td>~8 years (orbit decayed May 24, 1968)</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>The Bistatic Radar Equation &mdash; Why Passive Relay is Beautiful and Impractical:</strong></p>
+
+    <p>Echo 1 was the simplest satellite ever built: a sphere. No electronics, no transmitter, no receiver, no attitude control, no solar panels, no computer. A balloon 100 feet across, made of 12.7-micron Mylar coated with vapor-deposited aluminum. It reflected radio signals the way a mirror reflects light &mdash; passively, impartially, in all directions. Bell Telephone Laboratories transmitted a signal from Holmdel, New Jersey. The signal traveled upward to the balloon, bounced off the curved aluminum surface, and scattered in all directions. A tiny fraction of the scattered energy happened to fall on the 26-meter dish at Goldstone, California, 3,944 km away. That fraction was enough to carry a voice call.</p>
+
+    <p>The mathematics of this relay is the bistatic radar equation &mdash; the radar equation generalized to the case where the transmitter and receiver are at different locations, both looking at the same target.</p>
+
+<pre>THE BISTATIC RADAR EQUATION:
+
+  The standard monostatic radar equation (transmitter and receiver
+  co-located) is:
+
+    P_rx = (P_t * G_t * sigma * G_r * lambda^2) / ((4*pi)^3 * R^4)
+
+  where R is the range to the target. The 1/R^4 factor reflects
+  the inverse-square law applied TWICE: once on the outbound path
+  (transmitter to target) and once on the return path (target back
+  to receiver).
+
+  For a BISTATIC system (transmitter and receiver at different
+  locations), the equation becomes:
+
+    P_rx = (P_t * G_t * sigma_b * G_r * lambda^2) /
+           ((4*pi)^3 * R_t^2 * R_r^2)
+
+  where:
+    P_t = transmitter power (W)
+    G_t = transmit antenna gain (dimensionless or dBi)
+    sigma_b = bistatic radar cross-section of the target (m^2)
+    G_r = receive antenna gain (dimensionless or dBi)
+    lambda = wavelength (m)
+    R_t = distance from transmitter to target (m)
+    R_r = distance from target to receiver (m)
+
+  The 1/R^4 has split into 1/(R_t^2 * R_r^2). The signal
+  is attenuated by the inverse-square law on each leg
+  independently.
+
+ECHO 1 PARAMETERS:
+
+  Transmitter: Bell Labs Holmdel, NJ
+    P_t = 10,000 W (10 kW) at 2,390 MHz
+    G_t = 46 dBi (26-meter horn-reflector antenna, the
+          famous "sugar scoop" antenna that would later
+          discover the cosmic microwave background)
+    lambda = c / f = 3e8 / 2.39e9 = 0.1255 m
+
+  Target: Echo 1 balloon
+    Diameter: D = 30.48 m (100 feet)
+    The balloon is a conducting sphere much larger than the
+    wavelength (D/lambda = 30.48/0.1255 = 243). In this
+    regime (the optical limit), the radar cross-section of
+    a sphere equals its geometric cross-section:
+
+    sigma = pi * (D/2)^2 = pi * 15.24^2 = 729.7 m^2
+
+  Receiver: JPL Goldstone, CA
+    D_dish = 26 m (85-foot dish)
+    eta = 0.55 (aperture efficiency)
+    G_r = eta * (pi * D_dish / lambda)^2
+        = 0.55 * (pi * 26 / 0.1255)^2
+        = 0.55 * (651.0)^2
+        = 0.55 * 423,801
+        = 233,091
+        = 53.7 dBi
+
+  Geometry (typical pass):
+    Balloon altitude: ~1,600 km (midpoint of orbit)
+    Slant range from Holmdel to balloon: ~2,000 km (R_t)
+    Slant range from balloon to Goldstone: ~2,500 km (R_r)
+
+COMPUTING THE RECEIVED POWER:
+
+  P_rx = (P_t * G_t_lin * sigma * G_r_lin * lambda^2) /
+         ((4*pi)^3 * R_t^2 * R_r^2)
+
+  Converting to linear units:
+    P_t = 10,000 W
+    G_t_lin = 10^(46/10) = 39,811
+    sigma = 729.7 m^2
+    G_r_lin = 233,091
+    lambda^2 = 0.01576 m^2
+    (4*pi)^3 = 1,984
+    R_t = 2.0e6 m
+    R_r = 2.5e6 m
+
+  Numerator:
+    10,000 * 39,811 * 729.7 * 233,091 * 0.01576
+    = 10^4 * 3.98e4 * 7.30e2 * 2.33e5 * 1.58e-2
+    = 1.065 x 10^15
+
+  Denominator:
+    1,984 * (2.0e6)^2 * (2.5e6)^2
+    = 1,984 * 4.0e12 * 6.25e12
+    = 1,984 * 2.5e25
+    = 4.96 x 10^28
+
+  P_rx = 1.065e15 / 4.96e28 = 2.15 x 10^-14 W
+       = -136.7 dBW
+
+  This is 10^-14 watts -- ten thousand times stronger than
+  Pioneer 5's received signal at maximum range (-181 dBW).
+
+THE FUNDAMENTAL PROBLEM WITH PASSIVE RELAY:
+
+  Compare Echo 1 (passive) to Telstar 1 (active, launched 1962):
+
+  Echo 1:
+    Transmitter: 10 kW on the ground
+    Relay: passive reflection (sigma = 730 m^2)
+    Received power: ~10^-14 W at typical geometry
+    Bandwidth: narrow (voice-grade, ~4 kHz)
+
+  Telstar 1:
+    Transmitter: ~2 W on the spacecraft
+    Relay: active transponder (receive, amplify, retransmit)
+    Received power: ~10^-12 W
+    Bandwidth: wide (television, ~5 MHz)
+
+  Telstar, with a 2-watt transmitter in orbit, delivered
+  100x more received power than Echo 1 with a 10,000-watt
+  transmitter on the ground. The difference is that Telstar's
+  transmitter directed its energy toward the receiver, while
+  Echo 1's balloon scattered it uniformly across the sky.
+
+  This is why Echo 1 was a proof of concept, not a
+  production system. The radar equation made this
+  inevitable: 1/(R_t^2 * R_r^2) is unforgiving.</pre>
+
+    <h3>Worked Example</h3>
+
+    <p><strong>Problem:</strong> Compute the received signal power for Echo 1 at several geometries, and compare to an active relay satellite with a 2-watt transponder.</p>
+
+<pre>import numpy as np
+
+print("ECHO 1: BISTATIC RADAR EQUATION FOR PASSIVE RELAY")
+print("=" * 65)
+
+# Constants
+c = 3.0e8           # speed of light (m/s)
+k = 1.381e-23       # Boltzmann constant (J/K)
+pi = np.pi
+
+# Echo 1 parameters
+D_balloon = 30.48    # balloon diameter (m) = 100 feet
+sigma = pi * (D_balloon / 2)**2   # geometric cross-section (m^2)
+f_Hz = 2.39e9        # frequency (Hz)
+lam = c / f_Hz       # wavelength (m)
+
+# Transmitter: Bell Labs Holmdel
+P_t_W = 10000.0      # 10 kW
+D_tx = 26.0           # horn-reflector antenna effective diameter
+eta_tx = 0.55
+G_t_lin = eta_tx * (pi * D_tx / lam)**2
+G_t_dBi = 10 * np.log10(G_t_lin)
+
+# Receiver: JPL Goldstone
+D_rx = 26.0           # 26-m dish
+eta_rx = 0.55
+G_r_lin = eta_rx * (pi * D_rx / lam)**2
+G_r_dBi = 10 * np.log10(G_r_lin)
+
+print(f"\nEcho 1 Passive Relay Parameters:")
+print(f"  Balloon diameter: {D_balloon:.2f} m ({D_balloon*3.281:.0f} ft)")
+print(f"  Geometric cross-section (sigma): {sigma:.1f} m^2")
+print(f"  Frequency: {f_Hz/1e9:.3f} GHz, wavelength: {lam*100:.2f} cm")
+print(f"  D/lambda = {D_balloon/lam:.0f} (optical regime)")
+print(f"  Transmitter: {P_t_W/1000:.0f} kW, antenna gain: {G_t_dBi:.1f} dBi")
+print(f"  Receiver: {D_rx}-m dish, gain: {G_r_dBi:.1f} dBi")
+
+# Various geometries
+geometries = [
+    (1600, 1600, "Overhead both stations"),
+    (2000, 2500, "Typical Holmdel-Goldstone pass"),
+    (2500, 3000, "Low elevation pass"),
+    (1600, 1600, "Best case (balloon at midpoint)"),
+    (3000, 3500, "Near-horizon pass"),
+]
+
+for R_t_km, R_r_km, desc in geometries:
+    R_t = R_t_km * 1000.0
+    R_r = R_r_km * 1000.0
+    P_rx = (P_t_W * G_t_lin * sigma * G_r_lin * lam**2) / \
+           ((4*pi)**3 * R_t**2 * R_r**2)
+    P_rx_dBW = 10 * np.log10(P_rx)
+    print(f"  R_t={R_t_km:>5,} km  R_r={R_r_km:>5,} km  "
+          f"P_rx={P_rx_dBW:>7.1f} dBW = {P_rx:.2e} W  {desc}")
+
+# Compare Echo 1 (passive) to Telstar 1 (active)
+R_t_typ = 2000e3
+R_r_typ = 2500e3
+
+P_echo = (P_t_W * G_t_lin * sigma * G_r_lin * lam**2) / \
+         ((4*pi)**3 * R_t_typ**2 * R_r_typ**2)
+
+P_telstar_tx = 2.0
+G_telstar_tx = 10**(17/10)
+FSPL_down = ((4*pi*R_r_typ)/lam)**2
+P_telstar = (P_telstar_tx * G_telstar_tx * G_r_lin) / FSPL_down
+
+print(f"\n  Echo 1 (passive, 10 kW ground TX):  {10*np.log10(P_echo):.1f} dBW")
+print(f"  Telstar (active, 2 W space TX):     {10*np.log10(P_telstar):.1f} dBW")
+print(f"  Advantage of active relay: {10*np.log10(P_telstar/P_echo):.1f} dB")
+print(f"  The active satellite delivers {P_telstar/P_echo:.0f}x more power")
+print(f"  with {P_t_W/P_telstar_tx:.0f}x LESS transmitter power.")</pre>
+
+    <p><strong>Debate Question 1:</strong> Echo 1 proved that satellite communication was possible using passive reflection. Within two years, Telstar 1 proved that active transponders were vastly more efficient. The mathematics was known before Echo 1 launched &mdash; the radar equation clearly showed that passive relay would be limited to narrowband, low-data-rate applications. So why build Echo 1 at all? The answer is threefold. First, Echo 1 had no electronics to fail &mdash; it was a balloon, and it worked for eight years until atmospheric drag brought it down. Active satellites in 1960&ndash;62 had mean lifetimes measured in months (Telstar 1 failed after seven months due to radiation damage to its transistors). Second, Echo 1 was visible. It was the brightest artificial object in the night sky, and millions of people saw it. It made satellite communication tangible to the public in a way that an invisible active satellite never could. Third, Echo 1 established the legal and regulatory framework for satellite communications &mdash; the first international agreements on frequency allocation and orbital slots were negotiated using Echo 1 as the existence proof that satellites could relay signals across national boundaries. The mathematics said passive was inefficient. The engineering said active was fragile. The politics said visible was powerful. Echo 1 optimized for the last two.</p>
+
+    <h2>Deposit 2: Balloon Geometry and Solid Angle (Layer 1, Section 1.14)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Value</th></tr>
+      <tr><td>Balloon diameter</td><td>D</td><td>m</td><td>30.48 (100 ft)</td></tr>
+      <tr><td>Balloon radius</td><td>r<sub>b</sub></td><td>m</td><td>15.24</td></tr>
+      <tr><td>Surface area</td><td>A<sub>s</sub></td><td>m&sup2;</td><td>2,919.6</td></tr>
+      <tr><td>Geometric cross-section</td><td>A<sub>c</sub></td><td>m&sup2;</td><td>729.9</td></tr>
+      <tr><td>Mylar thickness</td><td>t</td><td>&mu;m</td><td>12.7 (0.5 mil)</td></tr>
+      <tr><td>Mylar density</td><td>&rho;</td><td>kg/m&sup3;</td><td>1,390</td></tr>
+      <tr><td>Skin mass</td><td>m<sub>skin</sub></td><td>kg</td><td>~51.4</td></tr>
+      <tr><td>Internal gas mass</td><td>m<sub>gas</sub></td><td>kg</td><td>~24.8</td></tr>
+      <tr><td>Altitude</td><td>h</td><td>km</td><td>~1,600 (average)</td></tr>
+      <tr><td>Solid angle of receiver</td><td>&Omega;<sub>r</sub></td><td>sr</td><td>~1.0 &times; 10<sup>-13</sup></td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Sphere Geometry and the Fraction of Energy Reaching the Receiver:</strong></p>
+
+    <p>Echo 1 was a sphere 30.48 meters in diameter &mdash; 100 feet, the height of a ten-story building. It was the largest object ever placed in orbit at the time, and remained so until space stations decades later. Its purpose was to present a large, smooth, conducting surface to incoming radio signals and scatter them in all directions so that ground stations at various locations could receive the reflected energy.</p>
+
+<pre>SPHERE SURFACE GEOMETRY:
+
+  Surface area of the balloon:
+    A_s = 4 * pi * r_b^2
+        = 4 * pi * (15.24)^2
+        = 4 * pi * 232.3
+        = 2,919.6 m^2
+
+  This is approximately 0.7 acres -- the area of a small
+  parking lot, or about half a football field.
+
+  Geometric cross-section (silhouette):
+    A_c = pi * r_b^2
+        = pi * (15.24)^2
+        = 729.9 m^2
+
+FRACTION OF REFLECTED ENERGY REACHING THE RECEIVER:
+
+  The receiver antenna subtends a solid angle:
+
+    Omega_receiver = A_eff / R_r^2
+
+  For the Goldstone 26-m dish:
+    A_eff = eta * pi * (D_dish/2)^2
+          = 0.55 * pi * 13^2
+          = 292.2 m^2
+
+  At R_r = 2,500 km = 2.5 x 10^6 m:
+    Omega_receiver = 292.2 / (2.5e6)^2
+                   = 292.2 / 6.25e12
+                   = 4.68 x 10^-11 sr
+
+  The fraction of scattered energy captured:
+    f = Omega_receiver / (4 * pi)
+      = 4.68e-11 / 12.566
+      = 3.72 x 10^-12
+
+  Less than four parts per TRILLION of the reflected energy
+  reaches the Goldstone dish.
+
+MASS BUDGET OF THE BALLOON:
+
+  Skin volume:
+    V_skin = A_s * t
+           = 2,919.6 * 12.7e-6
+           = 0.03708 m^3
+
+  Skin mass:
+    m_skin = rho * V_skin
+           = 1,390 * 0.03708
+           = 51.5 kg
+
+  The aluminum coating adds ~2-3 grams over the entire surface.
+  The remaining ~25 kg was the inflation system.
+  The entire satellite weighed 76.2 kg.
+  Area-to-mass ratio: 38.3 m^2/kg.</pre>
+
+<pre>import numpy as np
+
+print("ECHO 1: BALLOON GEOMETRY AND SOLID ANGLE")
+print("=" * 60)
+
+pi = np.pi
+r_balloon = 15.24    # radius (m)
+D_balloon = 30.48     # diameter (m)
+
+# Surface geometry
+A_surface = 4 * pi * r_balloon**2
+A_cross = pi * r_balloon**2
+V_balloon = (4/3) * pi * r_balloon**3
+
+print(f"\nBalloon Geometry:")
+print(f"  Diameter: {D_balloon:.2f} m ({D_balloon*3.281:.0f} ft)")
+print(f"  Surface area: {A_surface:.1f} m^2 ({A_surface*10.764:.0f} ft^2)")
+print(f"  Cross-section: {A_cross:.1f} m^2")
+print(f"  Volume: {V_balloon:.0f} m^3 ({V_balloon*35.315:.0f} ft^3)")
+
+# Mass budget
+t_mylar = 12.7e-6
+rho_mylar = 1390.0
+V_skin = A_surface * t_mylar
+m_skin = rho_mylar * V_skin
+m_total = 76.2
+
+print(f"\nMass Budget:")
+print(f"  Mylar thickness: {t_mylar*1e6:.1f} microns")
+print(f"  Skin mass: {m_skin:.1f} kg")
+print(f"  Inflation system: ~{m_total - m_skin:.1f} kg")
+print(f"  Total: {m_total} kg")
+print(f"  Area-to-mass ratio: {A_cross/m_total:.1f} m^2/kg")
+
+# Solid angle calculation
+D_dish = 26.0
+eta_dish = 0.55
+A_eff = eta_dish * pi * (D_dish/2)**2
+
+distances_km = [1600, 2000, 2500, 3000, 3500]
+for R_r_km in distances_km:
+    R_r = R_r_km * 1000.0
+    Omega = A_eff / R_r**2
+    frac = Omega / (4 * pi)
+    N = 1.0 / frac
+    print(f"  R_r={R_r_km:>5,} km  Omega={Omega:.2e} sr  "
+          f"Fraction={frac:.2e}  (1 in {N:.1e})")</pre>
+
+    <h2>Deposit 3: Solar Radiation Pressure on Echo 1 (Layer 2, Section 2.14)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>Value</th></tr>
+      <tr><td>Solar constant at 1 AU</td><td>S</td><td>W/m&sup2;</td><td>1,361</td></tr>
+      <tr><td>Speed of light</td><td>c</td><td>m/s</td><td>2.998 &times; 10<sup>8</sup></td></tr>
+      <tr><td>Radiation pressure (perfect reflection)</td><td>P<sub>rad</sub></td><td>Pa</td><td>9.08 &times; 10<sup>-6</sup></td></tr>
+      <tr><td>Balloon cross-section</td><td>A<sub>c</sub></td><td>m&sup2;</td><td>729.9</td></tr>
+      <tr><td>Force on balloon</td><td>F<sub>rad</sub></td><td>N</td><td>6.63 &times; 10<sup>-3</sup></td></tr>
+      <tr><td>Balloon mass</td><td>m</td><td>kg</td><td>76.2</td></tr>
+      <tr><td>Acceleration from radiation pressure</td><td>a<sub>rad</sub></td><td>m/s&sup2;</td><td>8.7 &times; 10<sup>-5</sup></td></tr>
+      <tr><td>Gravitational acceleration at 1,600 km</td><td>g</td><td>m/s&sup2;</td><td>~6.27</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Solar Radiation Pressure &mdash; Why the Balloon Wrinkled and the Orbit Shifted:</strong></p>
+
+    <p>Echo 1 was the most radiation-sensitive spacecraft ever flown. Its enormous cross-section (730 m&sup2;) and tiny mass (76 kg) gave it an area-to-mass ratio of 9.6 m&sup2;/kg &mdash; orders of magnitude higher than any conventional satellite. Solar radiation pressure, which is negligible for compact, heavy spacecraft, was a significant perturbation on Echo 1&rsquo;s orbit.</p>
+
+<pre>RADIATION PRESSURE FROM SUNLIGHT:
+
+  Solar flux at 1 AU:
+    S = 1,361 W/m^2
+
+  For ABSORPTION: P_absorb = S / c
+    = 1,361 / 2.998e8 = 4.54 x 10^-6 Pa
+
+  For PERFECT REFLECTION: P_reflect = 2 * S / c
+    = 2 * 1,361 / 2.998e8 = 9.08 x 10^-6 Pa
+
+FORCE ON ECHO 1:
+
+    F_rad = P_reflect * A_cross
+          = 9.08e-6 * 729.9
+          = 6.63 x 10^-3 N
+
+  Six millinewtons. The weight of a small insect. But
+  applied continuously, 24 hours a day (except during
+  eclipse), for eight years.
+
+ACCELERATION:
+
+    a_rad = F_rad / m
+          = 6.63e-3 / 76.2
+          = 8.70 x 10^-5 m/s^2
+
+  Compare to gravitational acceleration at 1,600 km altitude:
+    g = GM / r^2
+      = 3.986e14 / (7.971e6)^2
+      = 6.27 m/s^2
+
+  The ratio:
+    a_rad / g = 8.70e-5 / 6.27 = 1.39 x 10^-5
+
+  The radiation pressure acceleration is about 14 parts per
+  million of gravity. Tiny. But perturbation theory teaches
+  us that small forces, acting continuously over many orbits,
+  produce cumulative effects.
+
+  ORBITAL PERTURBATION EFFECTS:
+
+  1. The orbit eccentricity oscillated with a period equal
+     to the solar angle's precession rate.
+
+  2. The mean altitude gradually decreased because the
+     radiation pressure partially canceled the orbital
+     velocity during portions of each orbit, reducing the
+     total orbital energy.
+
+  3. The balloon's skin wrinkled. Solar heating on one side
+     and cooling on the other created temperature gradients
+     that distorted the thin Mylar skin.</pre>
+
+    <h3>Worked Example</h3>
+
+    <p><strong>Problem:</strong> Compute the solar radiation pressure force on Echo 1, the resulting acceleration, and the velocity change over one orbit. Compare to a conventional satellite.</p>
+
+<pre>import numpy as np
+
+print("ECHO 1: SOLAR RADIATION PRESSURE")
+print("=" * 60)
+
+c = 2.998e8
+S = 1361.0
+G = 6.674e-11
+M_earth = 5.972e24
+R_earth = 6.371e6
+
+D_balloon = 30.48
+r_balloon = D_balloon / 2
+A_cross = np.pi * r_balloon**2
+m_balloon = 76.2
+h_orbit = 1600e3
+r_orbit = R_earth + h_orbit
+
+reflectivity = 0.92
+P_actual = (1 + reflectivity) * S / c
+F_rad = P_actual * A_cross
+a_rad = F_rad / m_balloon
+
+g_orbit = G * M_earth / r_orbit**2
+T_orbit = 2 * np.pi * np.sqrt(r_orbit**3 / (G * M_earth))
+
+print(f"\nSolar Radiation Pressure:")
+print(f"  Pressure (actual, R={reflectivity}): {P_actual:.3e} Pa")
+print(f"  Force: {F_rad:.3e} N ({F_rad*1000:.2f} mN)")
+print(f"  Acceleration: {a_rad:.3e} m/s^2")
+print(f"  g at {h_orbit/1000:.0f} km: {g_orbit:.2f} m/s^2")
+print(f"  a_rad / g = {a_rad/g_orbit:.2e}")
+
+delta_v_max = a_rad * T_orbit
+print(f"\nOrbital period: {T_orbit/60:.1f} minutes")
+print(f"  Maximum delta-v per orbit: {delta_v_max:.3f} m/s")
+print(f"  Over 1000 orbits: {delta_v_max*1000:.1f} m/s")
+
+# Compare to conventional satellite
+m_conv = 1000.0
+A_conv = 5.0
+F_conv = P_actual * A_conv
+a_conv = F_conv / m_conv
+
+print(f"\n  Echo 1 A/m: {A_cross/m_balloon:.1f} m^2/kg")
+print(f"  Conventional A/m: {A_conv/m_conv:.3f} m^2/kg")
+print(f"  Echo 1 is {(a_rad/a_conv):.0f}x more sensitive to radiation pressure.")</pre>
+
+    <p><strong>Debate Question 2:</strong> Solar radiation pressure on Echo 1 was both a nuisance (it perturbed the orbit and wrinkled the balloon) and a landmark measurement (it confirmed the momentum of light at engineering scale). The same force that damaged the satellite also validated Maxwell&rsquo;s theory. Today, solar sails deliberately exploit this pressure for propulsion &mdash; the Japanese IKAROS spacecraft (2010) used a 196 m&sup2; solar sail to demonstrate radiation-pressure propulsion in interplanetary space. IKAROS had an area-to-mass ratio of 0.61 m&sup2;/kg. Echo 1 had 9.6 m&sup2;/kg &mdash; it would have been a more effective solar sail than IKAROS if it had been designed for it. The difference is intent: IKAROS was designed to harness radiation pressure; Echo 1 was designed despite it. The <em>Physalia physalis</em> &mdash; the Portuguese man o&rsquo; war &mdash; faces an analogous problem. Its pneumatophore catches the wind like a sail, propelling the colony across the ocean surface. The wind is both the man o&rsquo; war&rsquo;s propulsion and its hazard: it drives the colony into coastlines where it becomes stranded. Both are sail-like structures at the mercy of a medium-borne force &mdash; one electromagnetic, one aerodynamic &mdash; and both demonstrated that sometimes the best engineering solution is to accept the perturbation rather than fight it.</p>
+
+    <blockquote>
+      <p>&ldquo;Echo 1 was the Moon of the Space Age &mdash; a bright, round, silent presence in the night sky that anyone could see. It rose in the west and crossed the sky in minutes, a steady point of light brighter than any star, silent as a balloon should be. Millions of people stood in their backyards and watched it, not knowing they were seeing a sphere of aluminum-coated Mylar thinner than a garbage bag, inflated by sublimating chemicals in the vacuum of space, 1,600 kilometers overhead and moving at 7.5 kilometers per second. <em>Physalia physalis</em>, the Portuguese man o&rsquo; war, sails the surface of the Pacific on a gas-filled bladder of tissue thinner than Echo 1&rsquo;s Mylar &mdash; approximately 10 microns of living membrane stretched over a colony of specialized polyps, propelled by wind and current. It catches the light at the surface the way Echo 1 caught the light in orbit: iridescent, translucent, beautiful, and dangerous to touch. Echo 1&rsquo;s legacy trails behind it too &mdash; every communications satellite in geostationary orbit, every direct-broadcast television signal, every satellite phone call, every GPS fix, all descend from the proof that a signal could be reflected from orbit and received on the ground. The balloon proved the concept. The concept built the industry. The industry connected the world. And it started with something so simple that its entire schematic could be written in four words: inflate sphere, reflect signal.&rdquo;</p>
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="organism.html">&larr; Organism</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="papers.html">Papers &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.14 Echo 1 + Physalia physalis &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

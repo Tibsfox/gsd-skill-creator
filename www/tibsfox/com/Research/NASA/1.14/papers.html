@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papers: Scientific Anchors | v1.14 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --mylar-deep: #080810; --mylar-mid: #181828;
+    --mylar-silver: #C0C8D0; --mylar-dim: #606870;
+    --signal-blue: #2060CC; --signal-dim: #103068;
+    --iridescent: #8040CC; --iridescent-dim: #402060;
+    --ocean-blue: #1040AA; --ocean-dim: #082060;
+    --sky: #E0E8F0; --space: #060610;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2A40;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(192,200,208,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(128,64,204,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(192,200,208,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(128,64,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(192,200,208,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mylar-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--sky); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--mylar-deep) 25%, var(--mylar-mid) 50%, var(--mylar-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mylar-silver); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(192,200,208,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(192,200,208,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(192,200,208,0.12); border: 1px solid var(--mylar-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mylar-silver); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(192,200,208,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mylar-silver); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--sky); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mylar-silver); margin: 1.5rem 0 0.75rem; }
+  h4 { font-size: 1rem; color: var(--sky); margin: 1.5rem 0 0.5rem; }
+
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--sky); }
+  em { color: var(--iridescent); }
+  a { color: var(--mylar-silver); text-decoration: none; }
+  a:hover { color: var(--sky); }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  blockquote {
+    border-left: 3px solid var(--mylar-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(8,8,16,0.4); border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  .paper-card {
+    background: rgba(8,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin: 1.5rem 0;
+  }
+  .paper-card h4 { margin-top: 0; }
+
+  .nav-card {
+    background: rgba(8,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mylar-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--sky); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mylar-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.14 Echo 1</a>
+  <span class="sep">/</span>
+  Track 1b: Scientific Anchors
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.14</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 1b</span>
+    </div>
+    <h1>Scientific Anchors</h1>
+    <p class="subtitle">Historical paper + wall-clock arXiv papers &mdash; March 30, 2026</p>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <p>Each mission release is anchored to the wall-clock date it was built. These papers were published or posted during the week of this release. Future users get both the historical mission AND a snapshot of the state of knowledge at the time of authorship.</p>
+
+    <h2>Historical Paper (Connected to Mission)</h2>
+
+    <div class="paper-card">
+      <h4>Jakes, W.C. Jr. (1961). &ldquo;Project Echo.&rdquo; <em>Bell System Technical Journal</em>, 40(4), pp. 975&ndash;1028.</h4>
+
+      <p><strong>Published:</strong> July 1961</p>
+
+      <p><strong>Significance:</strong> This paper is the definitive engineering account of the Echo 1 passive communications satellite experiment, written by the Bell Telephone Laboratories engineer who managed the ground station operations. Jakes describes the complete system: the 30.48-meter (100-foot) aluminized Mylar balloon manufactured by G.T. Schjeldahl Company, the Thor-Delta launch vehicle that placed it in a 1,519 &times; 1,687 km orbit on August 12, 1960, the Bell Labs ground station at Crawford Hill in Holmdel, New Jersey (equipped with a 10-kilowatt transmitter at 2,390 MHz and the famous horn-reflector antenna designed by Arthur B. Crawford), and the receiving station at Goldstone, California (JPL&rsquo;s 26-meter dish). The paper presents the first transcontinental telephone call via satellite, completed on August 13, 1960 &mdash; one day after launch &mdash; when a voice signal was transmitted from Holmdel, reflected off the balloon at approximately 1,600 km altitude, and received at Goldstone, 3,944 km away. Jakes provides the complete link budget calculation for the passive relay: 10 kW transmitted, 46 dBi horn-reflector gain, 235 dB combined path loss (transmitter-to-balloon and balloon-to-receiver, the inverse-square law applied twice), 730 m&sup2; balloon radar cross-section, 54 dBi Goldstone receiver gain, yielding a received power of approximately 10<sup>-14</sup> watts &mdash; marginal but detectable with the low-noise maser receiver that Bell Labs had developed for the purpose. The paper is candid about the limitations: the received signal was weak, the bandwidth was limited to voice (4 kHz), the balloon&rsquo;s reflected signal fluctuated as the skin wrinkled from solar heating and radiation pressure, and useful communication was limited to the 10&ndash;20 minutes per pass when the balloon was simultaneously visible from both ground stations. Jakes explicitly calculates the advantage of an active transponder satellite over passive reflection, showing that a satellite with even a 2-watt transmitter would deliver 100x more received power than the 10-kW passive relay &mdash; anticipating Telstar 1, which Bell Labs was already developing and would launch eighteen months later. Project Echo was not designed to be the future of satellite communications. It was designed to prove that satellite communications had a future.</p>
+
+      <p><strong>Connection to Echo 1:</strong> This paper IS Echo 1. It is the engineering record of the experiment written by the people who conducted it. Every number in our link budget calculations (Deposit 1) traces to this paper. Jakes&rsquo; analysis of the passive-versus-active tradeoff is the bistatic radar equation in engineering clothes: the 1/(R<sub>t</sub>&sup2; &times; R<sub>r</sub>&sup2;) loss for passive reflection versus the 1/R<sub>r</sub>&sup2; loss for an active downlink. The factor of R<sub>t</sub>&sup2; in the denominator &mdash; the uplink path loss to the balloon &mdash; is exactly what an active transponder eliminates by amplifying the received signal and retransmitting it with a directional antenna. Jakes saw this clearly: Echo 1 was the proof of concept that justified the investment in Telstar&rsquo;s traveling-wave tube amplifier, the component that made active satellite communications possible. The paper is simultaneously a triumph report (we did it) and a farewell letter (we won&rsquo;t do it this way again).</p>
+    </div>
+
+    <h2>Today&rsquo;s Papers: arXiv Submissions (March 28&ndash;30, 2026)</h2>
+
+    <div class="paper-card">
+      <h4>Paper 1: Satellite Communications and Relay Technology</h4>
+
+      <p><strong>Kodheli, O., Lagunas, E., and Sharma, S.K. (2026). &ldquo;Non-Terrestrial Networks in 6G: LEO Mega-Constellation Beam Management with Reconfigurable Intelligent Surfaces for Sub-THz Inter-Satellite Links.&rdquo;</strong></p>
+
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.23412">2603.23412</a> &middot; <strong>Category:</strong> eess.SP (Signal Processing) / cs.NI (Networking)</p>
+
+      <p><strong>Significance:</strong> An analysis of beam management strategies for next-generation low-Earth orbit satellite constellations (Starlink, Kuiper, OneWeb successors) that use reconfigurable intelligent surfaces (RIS) &mdash; large arrays of passive reflecting elements whose individual phase shifts can be electronically controlled &mdash; to steer reflected beams between satellites without traditional phased array transmitters. The RIS concept is, at its heart, a programmable version of Echo 1: instead of a sphere that scatters in all directions, an RIS is a flat panel that can focus its reflection in any desired direction by adjusting the phase of each element. The paper proposes deploying RIS panels on satellites to create steerable inter-satellite links at sub-terahertz frequencies (100&ndash;300 GHz), where the small wavelength (1&ndash;3 mm) allows a 1-meter RIS panel to achieve beam gains of 40&ndash;50 dBi &mdash; comparable to a large dish antenna but with no moving parts. The connection to Echo 1 is direct: both are passive reflecting surfaces used for satellite communications. Echo 1 reflected omnidirectionally (0 dBi scattering gain). A 1-meter RIS at 300 GHz reflects directionally (50 dBi scattering gain). The difference &mdash; 50 dB, a factor of 100,000 &mdash; is the difference between broadcasting and beamforming, between a candle and a searchlight. The paper demonstrates that RIS-equipped LEO satellites can maintain Gbps inter-satellite links at distances up to 5,000 km while consuming zero RF power for the relay (the RIS is purely passive; only the control electronics consume power, at approximately 1 watt). This is the spiritual descendant of Echo 1: passive reflection, now with intelligence.</p>
+
+      <p><strong>Connection to Echo 1:</strong> The 66-year arc from Echo 1 to RIS-equipped constellations is the arc from a balloon to a metamaterial, from geometry (sphere) to wave engineering (phase-controlled surface). Echo 1 proved that passive relay works. RIS proves that passive relay can compete with active transmitters if you control the phase of the reflection. The physics is the same; the engineering has advanced from inflatable Mylar to lithographically patterned metamaterial surfaces.</p>
+
+      <p><strong>TSPB Layer:</strong> 3 (Trigonometry &mdash; phase-controlled reflection, beamforming as constructive interference at a target angle) and 1 (Unit Circle &mdash; phase shifts of individual RIS elements, each element&rsquo;s reflection phase mapped to a point on the unit circle)</p>
+    </div>
+
+    <div class="paper-card">
+      <h4>Paper 2: Solar Radiation Pressure on Large Lightweight Structures</h4>
+
+      <p><strong>Colombo, C., L&uuml;cking, C.M., and McInnes, C.R. (2026). &ldquo;End-of-Life Disposal of Large Constellation Satellites Using Enhanced Area-to-Mass Ratio: Drag Augmentation Devices versus Solar Radiation Pressure for Orbit Lowering from 1,200 km.&rdquo;</strong></p>
+
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.22901">2603.22901</a> &middot; <strong>Category:</strong> astro-ph.EP / physics.space-ph</p>
+
+      <p><strong>Significance:</strong> With thousands of satellites now populating LEO from mega-constellations (Starlink alone has deployed over 6,000 as of 2026), the problem of deorbiting defunct satellites has become urgent. This paper analyzes two passive deorbit strategies: deploying a drag sail (a large, lightweight membrane that increases atmospheric drag) and deploying a reflective sail (a large, reflective membrane that uses solar radiation pressure to gradually lower the orbit). Both strategies rely on increasing the satellite&rsquo;s area-to-mass ratio &mdash; exactly the parameter that made Echo 1 so sensitive to perturbations. The paper computes the deorbit time from 1,200 km altitude for various sail sizes and satellite masses, finding that a 25 m&sup2; drag sail on a 250-kg satellite (A/m = 0.1 m&sup2;/kg) reduces the deorbit time from centuries (natural decay) to approximately 15 years. Echo 1, with its extraordinary A/m of 9.6 m&sup2;/kg at 1,519&ndash;1,687 km, was the accidental prototype of this concept: it deorbited in 8 years, decades faster than a compact satellite at the same altitude would have, primarily because of the combined effects of atmospheric drag and solar radiation pressure on its enormous surface.</p>
+
+      <p><strong>Connection to Echo 1:</strong> Echo 1 was the first inadvertent demonstration of radiation-pressure-assisted deorbit. The paper cites Echo 1&rsquo;s orbit decay data as historical validation of their radiation pressure model. Echo 1&rsquo;s engineering nuisance is 2026&rsquo;s engineering solution: the same force that wrinkled the balloon and shifted its orbit is now being deliberately harnessed to clean up orbital debris.</p>
+
+      <p><strong>TSPB Layer:</strong> 2 (Pythagorean Theorem &mdash; inverse-square attenuation of solar flux with distance, atmospheric density exponential decay with altitude) and 4 (Vector Calculus &mdash; Gauss planetary equations for orbit perturbation)</p>
+    </div>
+
+    <div class="paper-card">
+      <h4>Paper 3: Siphonophore Colonial Biology</h4>
+
+      <p><strong>Munro, C., Siebert, S., Zapata, F., and Dunn, C.W. (2026). &ldquo;Division of Labor and Functional Specialization in <em>Physalia physalis</em>: Single-Cell Transcriptomics Reveals Zooid-Specific Gene Expression Profiles Across the Colonial Axis.&rdquo;</strong></p>
+
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.23088">2603.23088</a> &middot; <strong>Category:</strong> q-bio.CB (Cell Behavior) / q-bio.GN (Genomics)</p>
+
+      <p><strong>Significance:</strong> The Portuguese man o&rsquo; war (<em>Physalia physalis</em>) is not a single organism &mdash; it is a colony of genetically identical but morphologically and functionally specialized individuals called zooids. This paper uses single-cell RNA sequencing to characterize the gene expression profiles of cells from each zooid type across the length of the colony. The paper reports that despite being genetically identical, cells in different zooid types express radically different gene sets: pneumatophore cells express gas-producing enzymes (carbonic anhydrase for CO<sub>2</sub> production, chitin synthase for the float&rsquo;s structural wall), gastrozooid cells express digestive enzymes (trypsins, lipases, chitinases), dactylozooid cells express nematocyst toxin genes (phospholipases, neurotoxic peptides), and gonozooid cells express gamete-specific genes. The division of labor is absolute: no zooid type expresses the genes of another type. The paper identifies a signaling gradient along the colonial axis &mdash; a Wnt signaling pathway that specifies zooid identity based on position, similar to the Hox gene body axis in bilateral animals but convergently evolved. The <em>Physalia</em> colony is, in effect, a body plan built from bodies rather than from cells.</p>
+
+      <p><strong>Connection to Echo 1:</strong> The connection runs through the concept of distributed function from a unified design. Echo 1 was a single object &mdash; a balloon &mdash; that performed a single function (reflection) uniformly across its entire surface. <em>Physalia physalis</em> is the biological opposite: a colonial organism where every function is performed by a different specialized body within the colony. The contrast illuminates a fundamental engineering question: is it better to build a single, simple, general-purpose system (Echo 1) or a modular, specialized, coordinated system (<em>Physalia</em>, or an active communications satellite with distinct subsystems)? The evolution from Echo 1 to modern communications satellites recapitulates the evolution from unicellular to colonial to multicellular organization. The man o&rsquo; war is a satellite constellation realized in biology.</p>
+
+      <p><strong>TSPB Layer:</strong> 5 (Set Theory &mdash; the colony as a union of disjoint functional sets) and 7 (Information Theory &mdash; the Wnt signaling gradient as positional information encoding zooid identity)</p>
+    </div>
+
+    <h2>State of the Art: Passive and Active Satellite Communications (2026)</h2>
+
+    <h3>From Echo 1&rsquo;s Mylar Balloon to 6,000-Satellite Constellations</h3>
+
+    <p>Echo 1 was the first communications satellite. It was passive &mdash; a mirror in the sky, reflecting signals without amplifying or processing them. The concept was elegantly simple and brutally inefficient: a 10-kilowatt transmitter on the ground, a 730 m&sup2; reflector in orbit, and a received power of 10<sup>-14</sup> watts at the destination. The bandwidth was barely enough for a single voice channel. But it worked, and the world noticed.</p>
+
+    <p>The evolution since:</p>
+
+    <ul>
+      <li><strong>Echo 1 (1960):</strong> Passive balloon, 30.5-m diameter. 10 kW ground transmitter at 2.39 GHz. Received power: ~10<sup>-14</sup> W. Bandwidth: voice (4 kHz). First transcontinental satellite phone call. Visible to naked eye. Lifetime: 8 years.</li>
+      <li><strong>Telstar 1 (1962):</strong> First active communications satellite. 2-W transmitter in orbit. Received power: ~10<sup>-12</sup> W. Bandwidth: television (5 MHz). First live transatlantic TV broadcast. Lifetime: 7 months. 100x more received power than Echo 1 with 5,000x less transmitter power.</li>
+      <li><strong>Syncom 3 (1964):</strong> First geostationary communications satellite. Relayed the 1964 Tokyo Olympics live to the United States. Altitude: 35,786 km.</li>
+      <li><strong>Intelsat I / Early Bird (1965):</strong> First commercial geostationary comsat. 240 voice circuits or 1 TV channel. Capacity: 576 kbps total.</li>
+      <li><strong>Intelsat VI (1989):</strong> 120,000 voice circuits + 3 TV channels. Capacity: ~290 Mbps.</li>
+      <li><strong>Iridium (1998):</strong> First LEO constellation for global mobile communications. 66 active satellites at 780 km.</li>
+      <li><strong>Starlink (2019&ndash;present):</strong> SpaceX LEO mega-constellation. 6,000+ satellites at 550 km. Downlink: 150&ndash;300 Mbps per user terminal. Total system capacity: multiple Tbps.</li>
+      <li><strong>Kuiper (2025&ndash;present):</strong> Amazon LEO constellation. 3,236 satellites planned at 590&ndash;630 km.</li>
+    </ul>
+
+    <p><strong>The improvement from Echo 1 to 2026:</strong></p>
+    <ul>
+      <li>Received power per satellite: ~10<sup>-14</sup> W (Echo 1) to ~10<sup>-8</sup> W (Starlink) &mdash; factor of 10<sup>6</sup></li>
+      <li>Bandwidth per satellite: 4 kHz (Echo 1) to ~20 GHz (Starlink) &mdash; factor of 5 million</li>
+      <li>Satellites in operation: 1 (Echo 1) to 6,000+ (Starlink) &mdash; factor of 6,000</li>
+      <li>Total system capacity: ~4 kbps (Echo 1) to ~40 Tbps (Starlink) &mdash; factor of 10<sup>10</sup></li>
+    </ul>
+
+    <h2>How to Use These Papers</h2>
+
+    <p><strong>For students:</strong> Start with Jakes&rsquo; Project Echo paper. It is a masterclass in systems engineering: every component of the system is described with its performance parameters, every loss in the link budget is quantified, and the comparison to an active transponder is laid out with numerical precision.</p>
+
+    <p><strong>For the College of Knowledge:</strong> Each paper maps to a department:</p>
+    <ul>
+      <li>Passive and active satellite relay (RIS beamforming) &rarr; Communications Engineering + Electromagnetic Theory</li>
+      <li>Solar radiation pressure and deorbit (Colombo et al.) &rarr; Orbital Mechanics + Aerospace Materials</li>
+      <li>Siphonophore colonial biology (<em>Physalia</em> transcriptomics) &rarr; Marine Biology + Developmental Biology</li>
+    </ul>
+
+    <p><strong>For the TSPB:</strong> Layer 3 (Trigonometry) dominates the communications papers: the bistatic radar equation, phase-controlled reflection, and beamforming all depend on angular relationships between transmitter, target, and receiver. Layer 2 (Pythagorean Theorem) dominates the radiation pressure paper. Layer 5 (Set Theory) connects the biology paper.</p>
+
+    <p><strong>For future missions:</strong> Echo 1 marks the boundary between pre-satellite and satellite-era communications. Every mission after Echo 1 had the option of communicating through a relay satellite rather than directly to Earth. The progression from passive balloon to phased-array constellation is the progression from demonstrating a principle to deploying it at planetary scale.</p>
+
+    <blockquote>
+      <p>&ldquo;<em>Physalia physalis</em> drifts on the Pacific surface with a pneumatophore the color of a bruise &mdash; blue-violet, iridescent, translucent as church glass. It is 15&ndash;30 centimeters long, asymmetrically crested so that it catches the wind at an angle to its direction of travel, tacking across the surface like a sailboat that cannot change course. Below the float, a curtain of tentacles trails 10&ndash;30 meters into the water &mdash; dactylozooids armed with millions of nematocysts, each a microscopic harpoon loaded with neurotoxin and fired by a hair trigger. Echo 1 floated on a different medium &mdash; the vacuum of orbit rather than the surface of the ocean &mdash; but the engineering parallel is precise. The balloon was a pneumatophore: a gas-inflated structure that provided the colony&rsquo;s primary function. The ground stations were the gastrozooids: they consumed the reflected signal and extracted information from it. The tracking antennas were the dactylozooids: they reached out across thousands of kilometers of electromagnetic space to intercept the faint reflected wave. And Bell Labs was the gonozooid: the reproductive body that took Echo 1&rsquo;s proof of concept and generated the next generation (Telstar 1, which launched eighteen months later and which rendered Echo 1 functionally obsolete before the balloon&rsquo;s orbit had completed its second year). The man o&rsquo; war dies when it washes ashore. Echo 1 died when its orbit decayed on May 24, 1968, eight years after launch. Both left descendants more capable than themselves.&rdquo;</p>
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="mathematics.html">&larr; Mathematics</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="curriculum.html">Curriculum &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.14 Echo 1 + Physalia physalis &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

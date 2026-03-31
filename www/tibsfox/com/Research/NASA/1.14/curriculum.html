@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.14 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --mylar-deep: #080810; --mylar-mid: #181828;
+    --mylar-silver: #C0C8D0; --mylar-dim: #606870;
+    --signal-blue: #2060CC; --signal-dim: #103068;
+    --iridescent: #8040CC; --iridescent-dim: #402060;
+    --ocean-blue: #1040AA; --ocean-dim: #082060;
+    --sky: #E0E8F0; --space: #060610;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2A40;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(192,200,208,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(128,64,204,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(192,200,208,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(128,64,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(192,200,208,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mylar-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--sky); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--mylar-deep) 25%, var(--mylar-mid) 50%, var(--mylar-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mylar-silver); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(192,200,208,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(192,200,208,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(192,200,208,0.12); border: 1px solid var(--mylar-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mylar-silver); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(192,200,208,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mylar-silver); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--sky); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mylar-silver); margin: 1.5rem 0 0.75rem; }
+
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--sky); }
+  em { color: var(--iridescent); }
+  a { color: var(--mylar-silver); text-decoration: none; }
+  a:hover { color: var(--sky); }
+
+  code { font-family: 'DM Mono', monospace; color: var(--mylar-silver); background: rgba(192,200,208,0.08); padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.88rem; }
+
+  pre {
+    background: rgba(8,8,16,0.6); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.25rem; overflow-x: auto; margin: 1rem 0 1.5rem;
+    font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--text);
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  blockquote {
+    border-left: 3px solid var(--mylar-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(8,8,16,0.4); border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  .dept-card {
+    background: rgba(8,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin: 1.5rem 0;
+  }
+
+  .nav-card {
+    background: rgba(8,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mylar-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--sky); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mylar-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.14 Echo 1</a>
+  <span class="sep">/</span>
+  Track 4: Curriculum
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.14</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Communications, Optics, Aerospace Materials</span>
+      <span><span class="label">Organism:</span> Man o&rsquo; war</span>
+      <span><span class="label">Bird:</span> Osprey</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Department Deposits</h2>
+
+    <div class="dept-card">
+      <h3>Communications Engineering (Primary)</h3>
+      <p><strong>Wing:</strong> Passive Relay, Bistatic Link Budget, Satellite-to-Ground Architecture</p>
+      <p><strong>Concept:</strong> The engineering of bouncing signals off orbiting objects &mdash; how a passive reflector in space can relay communications between ground stations separated by thousands of kilometers, and why this approach was both historically essential and mathematically doomed</p>
+      <p>Echo 1 demonstrated the first satellite communication link on August 13, 1960, when a voice call was transmitted from Bell Labs at Holmdel, New Jersey, reflected off the 30.48-meter aluminized Mylar balloon at 1,600 km altitude, and received at JPL&rsquo;s Goldstone station in California. The system architecture was radical in its simplicity:</p>
+      <ul>
+        <li><strong>Ground transmitter:</strong> Bell Labs&rsquo; horn-reflector antenna at Crawford Hill transmitted 10 kW at 2,390 MHz (S-band, wavelength 12.55 cm). The horn-reflector design &mdash; Arthur Crawford&rsquo;s &ldquo;sugar scoop&rdquo; &mdash; provided 46 dBi of gain with exceptionally low sidelobe levels. This same antenna, repurposed two years later by Arno Penzias and Robert Wilson, would detect the cosmic microwave background radiation &mdash; the echo of the Big Bang, detected by the antenna built for an echo satellite.</li>
+        <li><strong>The balloon:</strong> No electronics. No power system. No attitude control. A sphere of 12.7-micron Mylar coated with vapor-deposited aluminum, inflated in orbit by sublimating benzoic acid and anthraquinone. Total mass: 76.2 kg. Diameter: 30.48 m (100 feet). The balloon&rsquo;s only function was to exist &mdash; to present a large, smooth, conducting surface. Its radar cross-section (730 m&sup2;) determined how much energy was intercepted and reradiated. A sphere has no preferred direction &mdash; which meant the balloon required no attitude control. This was the design&rsquo;s genius.</li>
+        <li><strong>Ground receiver:</strong> JPL&rsquo;s 26-meter dish at Goldstone, equipped with a cryogenic maser amplifier (noise temperature approximately 30&ndash;50 K). The maser was essential: the reflected signal was approximately 10<sup>-14</sup> watts.</li>
+        <li><strong>The link:</strong> Total path approximately 4,500 km, with the inverse-square law applied twice. The received power was approximately 10<sup>-14</sup> watts &mdash; enough for a single voice channel (4 kHz bandwidth) with minimal margin.</li>
+      </ul>
+      <p>The Osprey (<em>Pandion haliaetus</em>, degree 14) hunts by plunge-diving from 10&ndash;40 meters above the water surface, spotting fish through the water&rsquo;s surface from altitude, then folding its wings and diving feet-first. The osprey&rsquo;s hunting strategy is a reflection problem: light from the fish travels upward through water (refractive index 1.33), crosses the air-water interface (refraction changes the apparent position), and reaches the osprey&rsquo;s eyes. The bird must compute the actual position of the fish from its apparent position &mdash; solving Snell&rsquo;s law unconsciously on every dive. Both the osprey and the ground station must account for the geometry of reflection.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Optics/Reflection (Primary)</h3>
+      <p><strong>Wing:</strong> Specular and Diffuse Reflection, Radar Cross-Section, Conducting Sphere Scattering</p>
+      <p><strong>Concept:</strong> How electromagnetic waves interact with a conducting sphere much larger than the wavelength &mdash; the physics that made Echo 1 work</p>
+      <p>Echo 1&rsquo;s function was purely optical in principle: it reflected electromagnetic waves the same way a mirror reflects light. The physics depends on the ratio of sphere diameter to wavelength:</p>
+      <ul>
+        <li><strong>D/&lambda; &lt;&lt; 1 (Rayleigh regime):</strong> Scatters weakly, cross-section proportional to (D/&lambda;)<sup>4</sup>. This is why the sky is blue.</li>
+        <li><strong>D/&lambda; ~ 1 (Mie regime):</strong> Complex scattering pattern with multiple lobes and resonances. The regime of fog droplets.</li>
+        <li><strong>D/&lambda; &gt;&gt; 1 (optical regime):</strong> Geometric scattering. RCS approaches the geometric cross-section (&pi; &times; r&sup2;). Echo 1 operated here: D/&lambda; = 243.</li>
+      </ul>
+      <p>As Echo 1&rsquo;s skin wrinkled over the first months in orbit, surface roughness increased relative to the wavelength. The specular reflection was replaced by increasingly diffuse scattering, and the received signal strength became more variable. The balloon was losing its optical quality.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Aerospace Materials (Primary)</h3>
+      <p><strong>Wing:</strong> Mylar, Thin-Film Structures, Inflatable Space Structures</p>
+      <p><strong>Concept:</strong> The materials science of Echo 1&rsquo;s balloon &mdash; how a 12.7-micron polymer film coated with aluminum became the largest structure in orbit</p>
+      <ul>
+        <li><strong>Mylar properties:</strong> Tensile strength ~200 MPa. Young&rsquo;s modulus ~4 GPa. Density 1,390 kg/m&sup3;. Thickness 12.7 &mu;m (0.5 mil). Compressed to 1/100,000th of inflated volume for launch.</li>
+        <li><strong>Aluminum coating:</strong> Deposited by vacuum evaporation. Thickness ~200&ndash;500 nm. Reflectivity exceeding 0.98 at microwave wavelengths. Coating mass ~2&ndash;3 grams total.</li>
+        <li><strong>Inflation:</strong> ~25 kg of sublimating powders &mdash; benzoic acid and anthraquinone. No valves, no pumps, no seals. The balloon inflated because chemistry works.</li>
+        <li><strong>Echo 1 was NOT rigidized.</strong> Thermal cycling (~16 orbits/day) gradually degraded the spherical shape. This lesson influenced Echo 2 (1964), which used a Mylar/aluminum foil laminate.</li>
+      </ul>
+      <p>The <em>Physalia physalis</em> pneumatophore is a biological thin-film inflatable structure &mdash; approximately 10 microns thick (comparable to Echo 1&rsquo;s 12.7-micron Mylar). Inflated by gas secreted by a specialized gas gland: primarily carbon monoxide (~12%), nitrogen (~80%), and oxygen (~8%). Both structures solve the same problem: maintain a large, thin-walled, gas-filled shape against external forces.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Marine Biology (Secondary)</h3>
+      <p><strong>Wing:</strong> Siphonophorae &mdash; Colonial Organization and <em>Physalia physalis</em></p>
+      <p><em>Physalia physalis</em> is not a jellyfish &mdash; it is a siphonophore, a colonial organism. The zooids are genetically identical but morphologically specialized: pneumatophore (float), gastrozooids (feeding), dactylozooids (defense/capture with tentacles 10&ndash;30 m long), gonozooids (reproduction). The colony is dioecious &mdash; each is either male or female. The connection to Echo 1 is through passive interaction with a medium-borne force: Echo 1 was pushed by solar radiation pressure; <em>Physalia</em> is pushed by wind. Both are large, lightweight, thin-walled structures whose primary function depends on their interaction with an environmental force. Neither chooses where it goes. Both go everywhere.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Mathematics (Secondary)</h3>
+      <p><strong>Wing:</strong> The Radar Equation, Inverse-Square Law Applied Twice</p>
+      <p>The received power is: P<sub>rx</sub> = (P<sub>t</sub> &times; G<sub>t</sub> &times; &sigma; &times; G<sub>r</sub> &times; &lambda;&sup2;) / ((4&pi;)&sup3; &times; R<sub>t</sub>&sup2; &times; R<sub>r</sub>&sup2;). The key insight is the denominator: R<sub>t</sub>&sup2; &times; R<sub>r</sub>&sup2; represents the inverse-square law applied twice. Compare to an active relay, where only 1/R<sub>r</sub>&sup2; matters &mdash; the passive relay pays an additional factor of 1/R<sub>t</sub>&sup2;, approximately 160 dB at 2,000 km range. This is why Telstar, with a 2-watt transmitter, outperformed Echo 1 with 10,000 watts.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Wave Physics (Secondary)</h3>
+      <p><strong>Wing:</strong> Schr&ouml;dinger&rsquo;s Wave Equation and Electromagnetic Wave Reflection</p>
+      <p>Schr&ouml;dinger was born on August 12, 1887 &mdash; exactly 73 years before Echo 1&rsquo;s launch. The time-independent Schr&ouml;dinger equation for a particle encountering a potential step produces partial reflection when E &gt; V. For Echo 1, the electromagnetic wave travels through vacuum (impedance Z<sub>0</sub> = 377 &Omega;) and encounters aluminum (impedance Z<sub>Al</sub> &asymp; 0.01 &Omega;). The reflection coefficient R = |(Z<sub>Al</sub> - Z<sub>0</sub>) / (Z<sub>Al</sub> + Z<sub>0</sub>)|&sup2; &asymp; 1.0 &mdash; nearly perfect reflection. The mathematics of reflection at an impedance boundary is universal: it does not care whether the wave is a photon, an electron, or a sound wave.</p>
+    </div>
+
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Build a Parabolic Reflector</h3>
+    <p><strong>Duration:</strong> 2&ndash;3 hours &middot; <strong>Difficulty:</strong> Beginner &middot; <strong>Department:</strong> Optics/Reflection &middot; <strong>Cost:</strong> $0&ndash;10</p>
+
+<pre>BUILD A PARABOLIC REFLECTOR:
+
+1. DRAW THE PARABOLA:
+   On a large sheet of cardboard, draw a parabolic curve.
+   Use the string-and-focus technique:
+   - Mark the focus point F at the center, 10 cm from the base
+   - Mark the directrix line 10 cm below the base
+   - For each point on the curve: distance to F = distance to directrix
+   - This gives a parabola with focal length f = 10 cm
+
+   Alternatively, compute y = x^2 / (4*f) and plot points:
+   x (cm):   0    5    10   15   20   25
+   y (cm):   0   0.63  2.5  5.6  10.0 15.6
+
+2. CUT AND FORM:
+   Cut the cardboard along the parabolic profile.
+   Cut a second identical piece. Cross at 90 degrees.
+   Line the inside with aluminum foil (shiny side out).
+
+3. TEST:
+   Point the dish at a distant light source.
+   Hold a small piece of white paper at the focal point (10 cm).
+   You should see a bright spot.
+
+   For the Sun: THE BRIGHT SPOT CAN BE HOT ENOUGH TO BURN PAPER.
+
+4. MEASURE THE GAIN:
+   Using a phone light-meter app or a photoresistor:
+   a. Measure the light level at the focal point WITH the dish
+   b. Measure WITHOUT the dish
+   c. Gain = reading_with / reading_without
+
+   For D = 50 cm, sensor = 1 cm^2:
+   Expected gain = pi * 25^2 / 1 = ~1,960 (~33 dBi)
+
+5. CONNECT TO ECHO 1:
+   Echo 1 had NO dish. It reflected in all directions.
+   Goldstone had a DISH that concentrated the scattered energy.
+   Your dish demonstrates what made Echo 1 work.
+
+REFLECTION:
+   Which approach is better: a simple satellite with complex
+   ground stations, or a complex satellite with simple ground
+   stations? Echo 1 chose the first. Modern comsats choose
+   the second. The answer changed because space hardware
+   got more reliable.</pre>
+
+    <h3>TRY 2: Physalia Observation (Ocean Safety)</h3>
+    <p><strong>Duration:</strong> 1&ndash;2 hours &middot; <strong>Difficulty:</strong> Beginner (OBSERVE ONLY) &middot; <strong>Department:</strong> Marine Biology &middot; <strong>Cost:</strong> $0</p>
+    <p style="color: var(--nasa-red); font-weight: 600;">SAFETY: Never touch a Portuguese man o&rsquo; war, even if it appears dead. The nematocysts remain active for hours after death.</p>
+
+<pre>PHYSALIA FIELD OBSERVATION:
+
+1. TIMING: Check after sustained onshore winds (3+ days).
+
+2. SEARCH the tide line for:
+   - Blue-violet translucent bladder, 15-30 cm long
+   - Asymmetric sail-like crest along the top
+   - Tentacles (may be tangled, blue-purple)
+
+3. OBSERVE FROM DISTANCE (minimum 1 meter):
+   - Is the crest "left-handed" or "right-handed"?
+   - Estimate the float length
+   - Is the float inflated or deflated?
+   - What color? (New = vivid blue-violet; old = clear/white)
+
+4. PHOTOGRAPH with scale reference near (NOT touching) specimen.
+
+5. CONNECT TO ECHO 1:
+   Both are gas-filled, thin-walled structures that interact
+   passively with environmental forces. Both have high
+   area-to-mass ratios. Both are vulnerable to their
+   environment.
+
+WARNING: NEVER TOUCH A PORTUGUESE MAN O' WAR.
+   Dead specimens sting as effectively as live ones.
+   If stung: rinse with seawater (NOT fresh water),
+   apply vinegar or baking soda paste, seek medical
+   attention for severe reactions.</pre>
+
+    <h2>DIY Projects</h2>
+
+    <h3>DIY 1: Mylar Balloon Satellite Model</h3>
+    <p><strong>Duration:</strong> 1&ndash;2 hours &middot; <strong>Difficulty:</strong> Beginner &middot; <strong>Cost:</strong> $10&ndash;25</p>
+
+<pre>MYLAR BALLOON SATELLITE MODEL:
+
+1. INFLATE:
+   Inflate a 36" silver Mylar balloon with helium.
+   Your model is 1/33 the diameter of Echo 1.
+
+2. REFLECT:
+   In a darkened room, shine a flashlight at the balloon.
+   Observe from various angles:
+   - From behind the flashlight (backscatter): bright glint
+   - From 45 degrees off-axis: dimmer, more diffuse
+   - From 90 degrees: dim but visible
+   - From behind the balloon: bright diffraction ring
+
+3. MEASURE INVERSE-SQUARE:
+   At 1m: baseline
+   At 2m: 1/4 intensity (6 dB loss)
+   At 3m: 1/9 intensity (9.5 dB loss)
+   At 4m: 1/16 intensity (12 dB loss)
+
+4. OBSERVE WRINKLING over days as helium leaks.
+   The specular glint breaks into multiple spots.
+   This is exactly what happened to Echo 1 in orbit.
+
+   Scale: Your balloon 0.91 m diameter, ~0.005 kg
+          Echo 1: 30.48 m diameter, 76.2 kg
+          Physics: identical.</pre>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <div class="dept-card">
+      <h3>FoxFiber Alignment</h3>
+      <p>Echo 1 demonstrated the first satellite communication relay &mdash; the ancestor of all space-based communication infrastructure. FoxFiber&rsquo;s mesh networking architecture mirrors this evolution: where Echo 1 proved that signals could be relayed through an intermediary (the balloon), FoxFiber nodes relay data through mesh intermediaries. The progression from passive relay (Echo 1, omnidirectional, inefficient) to active relay (Telstar, directional, efficient) to mesh relay (FoxFiber, adaptive, distributed) is a single arc of increasing intelligence in the relay element. The link budget lesson applies: passive relay wastes energy; active, directed relay conserves it.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Fox CapComm Alignment</h3>
+      <p><em>Physalia physalis</em>&rsquo;s colonial organization &mdash; specialized zooids coordinated into a functioning superorganism &mdash; maps directly to Fox CapComm&rsquo;s multi-agent coordination architecture. Each zooid type corresponds to a specialized agent role (navigation, resource acquisition, defense/monitoring, reproduction/scaling). The Wnt signaling gradient that specifies zooid identity along the colonial axis is analogous to Fox CapComm&rsquo;s role-assignment protocol. <em>Physalia</em>&rsquo;s lesson: absolute specialization enables performance impossible for generalists, but at the cost of total interdependence.</p>
+    </div>
+
+    <blockquote>
+      <p>&ldquo;Schr&ouml;dinger&rsquo;s cat is in the box, simultaneously alive and dead, until the box is opened and the wavefunction collapses to one state or the other. Twenty-five years later, on the seventy-third anniversary of Schr&ouml;dinger&rsquo;s birth, Echo 1 launched into orbit and became a macroscopic object whose state was, in a practical sense, in superposition: the balloon was simultaneously everywhere and nowhere, reflecting signals from every ground station that could see it to every ground station that could receive them. The balloon&rsquo;s reflected field at any point is the sum of contributions from every illuminating source, weighted by the scattering geometry. Change the observation point and you measure a different superposition of the same sources. Schr&ouml;dinger would have appreciated the irony: his birthday satellite demonstrated, at macroscopic scale, the principle he had formulated at microscopic scale &mdash; that the observed state depends on the observer&rsquo;s position, and that the complete state is richer than any single observation can capture.&rdquo;</p>
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="papers.html">&larr; Papers</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="simulation.html">Simulation &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.14 Echo 1 + Physalia physalis &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

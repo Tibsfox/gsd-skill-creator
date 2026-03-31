@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echo 1 — Radio Reflection Simulator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #sim-canvas { flex: 1; }
+  #panel {
+    width: 340px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 13px; color: #C0C8D0; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #C0C8D0; font-weight: bold; }
+  .box .signal { color: #2060CC; font-weight: bold; }
+  .box .warn { color: #CC4020; font-weight: bold; }
+  .box .good { color: #8AAA70; font-weight: bold; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  .control-group input[type="range"] { width: 100%; accent-color: #C0C8D0; }
+  .marker { font-size: 8px; display: flex; justify-content: space-between; color: #666; }
+  .instructions { font-size: 9px; color: #666; text-align: center; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>ECHO 1 REFLECTION SIMULATOR</h1>
+    <h2>First Passive Communications Satellite &mdash; August 12, 1960</h2>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">Altitude:</span> <span id="alt-val" class="value">1600 km</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Slant range:</span> <span id="slant-val" class="value">1600 km</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Round-trip delay:</span> <span id="delay-val" class="signal">10.67 ms</span></div>
+    </div>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">TX power:</span> <span id="tx-val" class="value">10 kW</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">RX power:</span> <span id="rx-val" class="signal">-140 dBm</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Path loss (total):</span> <span id="pl-val" class="warn">-350 dB</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Signal strength:</span> <span id="sig-status" class="good">DETECTABLE</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Satellite Altitude (km)</label>
+      <input type="range" id="altitude" min="200" max="5000" value="1600" step="50">
+      <div class="marker"><span>200</span><span>1600</span><span>5000</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Transmitter Angle (degrees)</label>
+      <input type="range" id="tx-angle" min="10" max="80" value="45" step="1">
+      <div class="marker"><span>10&deg;</span><span>45&deg;</span><span>80&deg;</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Balloon Diameter (m)</label>
+      <input type="range" id="diameter" min="5" max="60" value="30.5" step="0.5">
+      <div class="marker"><span>5m</span><span>30.5m</span><span>60m</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>TX Power (kW)</label>
+      <input type="range" id="tx-power" min="1" max="100" value="10" step="1">
+      <div class="marker"><span>1</span><span>10</span><span>100</span></div>
+    </div>
+
+    <div class="box" style="border-color:#2060CC">
+      <div class="label" style="color:#2060CC;font-weight:bold">ECHO 1 FACTS</div>
+      <div style="margin-top:4px">
+        <div>Diameter: 30.5 m (100 ft)</div>
+        <div>Mass: 76 kg (167 lb)</div>
+        <div>Orbit: 1,519 &times; 1,687 km</div>
+        <div>Material: Aluminized Mylar</div>
+        <div>Visible: naked eye (mag -1)</div>
+        <div>No electronics onboard</div>
+      </div>
+    </div>
+
+    <div class="instructions">
+      Adjust controls to see how altitude, angle,<br>
+      and balloon size affect the reflected signal.<br>
+      Watch the radio beam animate in real-time.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+
+// Controls
+const altSlider = document.getElementById('altitude');
+const angleSlider = document.getElementById('tx-angle');
+const diaSlider = document.getElementById('diameter');
+const powerSlider = document.getElementById('tx-power');
+
+// Physics constants
+const C_LIGHT = 3e8; // m/s
+const R_EARTH = 6371; // km
+const PI = Math.PI;
+
+// Animation state
+let beamPhase = 0;
+let lastTime = 0;
+
+function resize() {
+  const container = canvas.parentElement;
+  canvas.width = container.clientWidth - 340;
+  canvas.height = container.clientHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+function slantRange(altKm, elevDeg) {
+  const el = elevDeg * PI / 180;
+  const r = R_EARTH + altKm;
+  return -R_EARTH * Math.sin(el) + Math.sqrt(
+    Math.pow(R_EARTH * Math.sin(el), 2) + 2 * R_EARTH * altKm + altKm * altKm
+  );
+}
+
+function draw(timestamp) {
+  const dt = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  beamPhase += dt * 2;
+
+  const W = canvas.width;
+  const H = canvas.height;
+
+  // Read controls
+  const altitude = parseFloat(altSlider.value);
+  const txAngle = parseFloat(angleSlider.value);
+  const diameter = parseFloat(diaSlider.value);
+  const txPower = parseFloat(powerSlider.value);
+
+  // Calculate physics
+  const sRange = slantRange(altitude, txAngle);
+  const roundTripDelay = 2 * sRange / (C_LIGHT / 1000) * 1000; // ms
+  const radius = diameter / 2;
+  const rcs = PI * radius * radius;
+  const rcsDbsm = 10 * Math.log10(rcs);
+  const lambda = C_LIGHT / 960e6;
+  const fsplOneWay = 20 * Math.log10(4 * PI * sRange * 1000 / lambda);
+  const txPowerDbm = 10 * Math.log10(txPower * 1000 * 1000);
+  const gTx = 40; // dBi
+  const gRx = 40; // dBi
+  const rxPowerDbm = txPowerDbm + gTx - fsplOneWay + rcsDbsm - fsplOneWay + gRx
+                     - 10 * Math.log10(Math.pow(4 * PI, 3));
+  const noiseFloor = -170; // dBm (rough)
+  const snr = rxPowerDbm - noiseFloor;
+
+  // Update display
+  document.getElementById('alt-val').textContent = altitude.toFixed(0) + ' km';
+  document.getElementById('slant-val').textContent = sRange.toFixed(0) + ' km';
+  document.getElementById('delay-val').textContent = roundTripDelay.toFixed(2) + ' ms';
+  document.getElementById('tx-val').textContent = txPower + ' kW';
+  document.getElementById('rx-val').textContent = rxPowerDbm.toFixed(1) + ' dBm';
+  document.getElementById('pl-val').textContent = (2 * fsplOneWay).toFixed(0) + ' dB';
+
+  const sigStatus = document.getElementById('sig-status');
+  if (snr > 10) {
+    sigStatus.textContent = 'STRONG';
+    sigStatus.className = 'good';
+  } else if (snr > 0) {
+    sigStatus.textContent = 'DETECTABLE';
+    sigStatus.className = 'signal';
+  } else {
+    sigStatus.textContent = 'BELOW NOISE';
+    sigStatus.className = 'warn';
+  }
+
+  // Clear
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, W, H);
+
+  // Scale: map km to pixels
+  const maxAlt = 5500;
+  const earthRadius = H * 0.35;
+  const earthCenterY = H + earthRadius * 0.7;
+  const earthCenterX = W / 2;
+  const kmPerPixel = (R_EARTH + maxAlt) / (earthRadius + H * 0.45);
+
+  // Draw stars
+  for (let i = 0; i < 100; i++) {
+    const sx = (Math.sin(i * 127.1) * 0.5 + 0.5) * W;
+    const sy = (Math.cos(i * 311.7) * 0.5 + 0.5) * H * 0.6;
+    const sb = 0.3 + 0.7 * ((Math.sin(i * 73.3 + timestamp * 0.001) + 1) * 0.5);
+    ctx.fillStyle = `rgba(200,210,220,${sb * 0.5})`;
+    ctx.fillRect(sx, sy, 1.5, 1.5);
+  }
+
+  // Draw Earth (arc at bottom)
+  ctx.beginPath();
+  ctx.arc(earthCenterX, earthCenterY, earthRadius, -PI, 0);
+  const earthGrad = ctx.createRadialGradient(earthCenterX, earthCenterY, earthRadius * 0.8, earthCenterX, earthCenterY, earthRadius);
+  earthGrad.addColorStop(0, '#0a2040');
+  earthGrad.addColorStop(1, '#051020');
+  ctx.fillStyle = earthGrad;
+  ctx.fill();
+
+  // Earth atmosphere glow
+  ctx.beginPath();
+  ctx.arc(earthCenterX, earthCenterY, earthRadius + 3, -PI, 0);
+  ctx.strokeStyle = 'rgba(100,150,255,0.2)';
+  ctx.lineWidth = 6;
+  ctx.stroke();
+
+  // Ground surface line
+  const groundY = earthCenterY - earthRadius;
+
+  // Transmitter position
+  const txAngleRad = txAngle * PI / 180;
+  const txX = earthCenterX - W * 0.3;
+  const txY = groundY;
+
+  // Satellite position
+  const satAltPixels = altitude / kmPerPixel;
+  const satX = earthCenterX;
+  const satY = groundY - satAltPixels;
+  const satRadius = Math.max(3, diameter / kmPerPixel * 50); // exaggerated for visibility
+
+  // Receiver position
+  const rxX = earthCenterX + W * 0.3;
+  const rxY = groundY;
+
+  // Draw orbit arc (dashed)
+  ctx.beginPath();
+  ctx.arc(earthCenterX, earthCenterY, earthRadius + satAltPixels, -PI * 0.9, -PI * 0.1);
+  ctx.setLineDash([4, 8]);
+  ctx.strokeStyle = 'rgba(192,200,208,0.15)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Draw radio beam: TX → Satellite
+  const beamSpeed = 0.15;
+  const numPulses = 5;
+  for (let i = 0; i < numPulses; i++) {
+    const phase = (beamPhase * beamSpeed + i / numPulses) % 1;
+    const bx = txX + (satX - txX) * phase;
+    const by = txY + (satY - txY) * phase;
+    const alpha = Math.sin(phase * PI) * 0.8;
+
+    ctx.beginPath();
+    ctx.arc(bx, by, 3, 0, 2 * PI);
+    ctx.fillStyle = `rgba(32,96,204,${alpha})`;
+    ctx.fill();
+  }
+
+  // Beam line TX → Satellite
+  ctx.beginPath();
+  ctx.moveTo(txX, txY);
+  ctx.lineTo(satX, satY);
+  ctx.strokeStyle = 'rgba(32,96,204,0.2)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Draw radio beam: Satellite → RX (reflected)
+  for (let i = 0; i < numPulses; i++) {
+    const phase = (beamPhase * beamSpeed + i / numPulses + 0.3) % 1;
+    const bx = satX + (rxX - satX) * phase;
+    const by = satY + (rxY - satY) * phase;
+    const alpha = Math.sin(phase * PI) * 0.5 * Math.min(1, Math.max(0, snr / 20));
+
+    ctx.beginPath();
+    ctx.arc(bx, by, 2.5, 0, 2 * PI);
+    ctx.fillStyle = `rgba(32,96,204,${alpha})`;
+    ctx.fill();
+  }
+
+  // Beam line Satellite → RX
+  ctx.beginPath();
+  ctx.moveTo(satX, satY);
+  ctx.lineTo(rxX, rxY);
+  ctx.strokeStyle = `rgba(32,96,204,${0.1 * Math.min(1, Math.max(0.1, snr / 20))})`;
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Draw Echo 1 balloon
+  ctx.beginPath();
+  ctx.arc(satX, satY, satRadius, 0, 2 * PI);
+  const balloonGrad = ctx.createRadialGradient(
+    satX - satRadius * 0.3, satY - satRadius * 0.3, satRadius * 0.1,
+    satX, satY, satRadius
+  );
+  balloonGrad.addColorStop(0, '#E0E8F0');
+  balloonGrad.addColorStop(0.5, '#C0C8D0');
+  balloonGrad.addColorStop(1, '#808890');
+  ctx.fillStyle = balloonGrad;
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(192,200,208,0.5)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Reflection highlight on balloon
+  ctx.beginPath();
+  ctx.arc(satX - satRadius * 0.2, satY - satRadius * 0.2, satRadius * 0.3, 0, 2 * PI);
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.fill();
+
+  // Draw transmitter
+  ctx.fillStyle = '#2060CC';
+  ctx.fillRect(txX - 8, txY - 15, 16, 15);
+  // Antenna
+  ctx.beginPath();
+  ctx.moveTo(txX, txY - 15);
+  ctx.lineTo(txX - 12, txY - 35);
+  ctx.lineTo(txX + 12, txY - 35);
+  ctx.closePath();
+  ctx.fillStyle = '#3070DD';
+  ctx.fill();
+
+  // Draw receiver
+  ctx.fillStyle = '#2060CC';
+  ctx.fillRect(rxX - 8, rxY - 15, 16, 15);
+  ctx.beginPath();
+  ctx.moveTo(rxX, rxY - 15);
+  ctx.lineTo(rxX - 12, rxY - 35);
+  ctx.lineTo(rxX + 12, rxY - 35);
+  ctx.closePath();
+  ctx.fillStyle = '#3070DD';
+  ctx.fill();
+
+  // Labels
+  ctx.fillStyle = '#888';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('TRANSMITTER', txX, txY + 15);
+  ctx.fillText('(Bell Labs, NJ)', txX, txY + 27);
+  ctx.fillText('RECEIVER', rxX, rxY + 15);
+  ctx.fillText('(JPL, CA)', rxX, rxY + 27);
+
+  ctx.fillStyle = '#C0C8D0';
+  ctx.font = '11px monospace';
+  ctx.fillText('ECHO 1', satX, satY - satRadius - 10);
+  ctx.font = '9px monospace';
+  ctx.fillStyle = '#888';
+  ctx.fillText(diameter.toFixed(1) + 'm balloon', satX, satY - satRadius - 24);
+  ctx.fillText(altitude.toFixed(0) + ' km altitude', satX, satY + satRadius + 15);
+
+  // Delay indicator
+  ctx.fillStyle = '#2060CC';
+  ctx.font = '12px monospace';
+  ctx.fillText('Round-trip delay: ' + roundTripDelay.toFixed(2) + ' ms', W / 2, 30);
+
+  // Signal strength bar at bottom
+  const barWidth = W * 0.4;
+  const barX = (W - barWidth) / 2;
+  const barY = H - 40;
+  ctx.fillStyle = '#111';
+  ctx.fillRect(barX, barY, barWidth, 12);
+  const signalFrac = Math.max(0, Math.min(1, (snr + 20) / 60));
+  const barColor = snr > 10 ? '#8AAA70' : snr > 0 ? '#2060CC' : '#CC4020';
+  ctx.fillStyle = barColor;
+  ctx.fillRect(barX, barY, barWidth * signalFrac, 12);
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('SIGNAL STRENGTH: ' + snr.toFixed(1) + ' dB SNR', W / 2, barY - 5);
+
+  requestAnimationFrame(draw);
+}
+
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>
