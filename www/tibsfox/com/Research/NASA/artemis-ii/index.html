@@ -203,6 +203,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   <div class="clock-sub">
     <span id="utc-time">UTC --:--:--</span>
     <span id="edt-time">EDT --:--:--</span>
+    <span id="pdt-time">PDT --:--:--</span>
     <span id="met-compact">MET --</span>
   </div>
   <div id="phase-badge" class="phase-badge phase-prelaunch">Pre-Launch</div>
@@ -404,8 +405,8 @@ var TRAJ = [
   [  172800,   170000,   2.8,  0.0, 'outbound',  'Day 2 — outbound coast'],
   [  259200,   285000,   1.5,  0.0, 'outbound',  'Day 3 — deep space'],
   [  324000,   360000,   1.1,  0.0, 'outbound',  'Day 3.75 — lunar approach'],
-  [  345600,   386137,   1.0,  0.0, 'lunar',     'Closest approach — 6,513 km from surface'],
-  [  352800,   399737,   1.3,  0.0, 'lunar',     'Beyond the Moon — max distance'],
+  [  345600,   392650,   1.0,  0.0, 'lunar',     'Closest approach — 6,513 km from surface'],
+  [  352800,   393737,   1.3,  0.0, 'lunar',     'Beyond the Moon — max distance'],
   [  432000,   340000,   1.4,  0.0, 'return',    'Day 5 — return coast begins'],
   [  518400,   260000,   1.8,  0.0, 'return',    'Day 6 — homeward bound'],
   [  604800,   170000,   2.5,  0.0, 'return',    'Day 7 — increasing velocity'],
@@ -473,6 +474,11 @@ function updateClock() {
   var edtM = String(edt.getUTCMinutes()).padStart(2,'0');
   var edtS = String(edt.getUTCSeconds()).padStart(2,'0');
   document.getElementById('edt-time').textContent = 'EDT ' + edtH + ':' + edtM + ':' + edtS;
+  var pdt = new Date(now.getTime() - 7*3600000);
+  var pdtH = String(pdt.getUTCHours()).padStart(2,'0');
+  var pdtM = String(pdt.getUTCMinutes()).padStart(2,'0');
+  var pdtS = String(pdt.getUTCSeconds()).padStart(2,'0');
+  document.getElementById('pdt-time').textContent = 'PDT ' + pdtH + ':' + pdtM + ':' + pdtS;
 
   var labelEl = document.getElementById('clock-label');
   var badgeEl = document.getElementById('phase-badge');
@@ -775,11 +781,11 @@ var TRAJ_PATH_OUT = [
   [48,   170000,  -15],   // Day 2
   [72,   285000,   -5],   // Day 3
   [90,   360000,    2],   // Approach
-  [96,   386137,    5],   // Closest approach
+  [96,   392650,    5],   // Closest approach
 ];
 var TRAJ_PATH_RET = [
-  [96,   386137,    5],   // Closest approach
-  [98,   399737,   12],   // Beyond Moon
+  [96,   392650,    5],   // Closest approach
+  [98,   393737,   12],   // Beyond Moon
   [120,  340000,   20],   // Day 5
   [144,  260000,   30],   // Day 6
   [168,  170000,   40],   // Day 7
