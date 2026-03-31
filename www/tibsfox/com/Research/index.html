@@ -47,65 +47,6 @@
       z-index: 1;
     }
 
-    /* ═══ Celestial cards — moon left, sun right ═══ */
-    .hero-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-center { text-align: center; }
-    .celestial-card {
-      background: var(--surface);
-      border: 1px solid var(--surface-edge);
-      border-radius: 10px;
-      padding: 0.8rem 1rem;
-      min-width: 160px;
-      max-width: 200px;
-      font-family: system-ui, sans-serif;
-      box-shadow: var(--card-shadow);
-      position: relative;
-      z-index: 1;
-      transition: box-shadow 0.3s;
-    }
-    .celestial-card:hover { box-shadow: var(--card-shadow-hover); }
-    .celestial-card a { color: var(--link); }
-    .celestial-card a:hover { color: var(--link-hover); }
-    .cel-label {
-      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--text-faint); margin-bottom: 0.4rem;
-    }
-    .cel-value {
-      font-size: 1.1rem; font-weight: 600; color: var(--text);
-      line-height: 1.3;
-    }
-    .cel-detail {
-      font-size: 0.72rem; color: var(--text-quiet); margin-top: 0.2rem;
-      line-height: 1.4;
-    }
-    .cel-moon-icon {
-      display: inline-block; width: 28px; height: 28px; border-radius: 50%;
-      vertical-align: middle; margin-right: 0.4rem;
-      background: radial-gradient(circle at 35% 40%, #d4d8dc 0%, #8a9098 55%, #4a5058 100%);
-      box-shadow: 0 0 8px rgba(180,190,200,0.15);
-    }
-    .cel-sun-icon {
-      display: inline-block; width: 28px; height: 28px; border-radius: 50%;
-      vertical-align: middle; margin-right: 0.4rem;
-      background: radial-gradient(circle at 40% 35%, #ffe088 0%, #e8a838 50%, #c07820 100%);
-      box-shadow: 0 0 10px rgba(232,168,56,0.25);
-    }
-    @media (max-width: 900px) {
-      .hero-row { flex-direction: column; gap: 1rem; }
-      .celestial-card { max-width: 280px; width: 100%; }
-    }
-    @media (max-width: 640px) {
-      .celestial-card { min-width: unset; padding: 0.6rem 0.8rem; }
-      .cel-value { font-size: 0.95rem; }
-    }
-
     /* ═══ Stats — ink-framed watercolor badges ═══ */
     .stats-bar {
       display: flex;
@@ -492,27 +433,9 @@
 </head>
 <body>
   <div class="hero">
-    <div class="hero-row">
-      <a href="SOL/index.html" class="celestial-card" id="moon-card">
-        <div class="cel-label"><span class="cel-moon-icon"></span> Moon</div>
-        <div class="cel-value" id="cel-moon-phase">Waxing Gibbous</div>
-        <div class="cel-detail" id="cel-moon-illum">98% illuminated</div>
-        <div class="cel-detail" id="cel-moon-rise">Rise 6:33 PM &middot; Set 6:12 AM</div>
-        <div class="cel-detail" id="cel-moon-full">Full Moon Apr 1 &rarr;</div>
-      </a>
-      <div class="hero-center">
-        <img src="../images/tibsfox.png" alt="Tibsfox — watercolor fox" class="hero-logo">
-        <h1>Tibsfox Research</h1>
-        <div class="subtitle">From Pacific Northwest ecology to the edge of the solar system</div>
-      </div>
-      <a href="SOL/index.html" class="celestial-card" id="sun-card">
-        <div class="cel-label"><span class="cel-sun-icon"></span> Sun</div>
-        <div class="cel-value" id="cel-sun-daylight">12h 52m daylight</div>
-        <div class="cel-detail" id="cel-sun-rise">Rise 6:49 AM &middot; Set 7:39 PM</div>
-        <div class="cel-detail" id="cel-sun-progress">+3m 12s/day (gaining)</div>
-        <div class="cel-detail" id="cel-sun-kp">Kp 2.0 &middot; G0 quiet &rarr;</div>
-      </a>
-    </div>
+    <img src="../images/tibsfox.png" alt="Tibsfox — watercolor fox" class="hero-logo">
+    <h1>Tibsfox Research</h1>
+    <div class="subtitle">From Pacific Northwest ecology to the edge of the solar system</div>
   </div>
 
   <div class="stats-bar">
@@ -520,8 +443,8 @@
     <div class="stat"><span class="stat-value">13</span><span class="stat-label">Clusters</span></div>
     <div class="stat"><span class="stat-value">552</span><span class="stat-label">NASA Missions</span></div>
     <div class="stat"><span class="stat-value">739</span><span class="stat-label">Cross-Refs</span></div>
-    <div class="stat"><span class="stat-value">12</span><span class="stat-label">Live Pages</span></div>
-    <div class="stat"><span class="stat-value">91</span><span class="stat-label">Local Businesses</span></div>
+    <div class="stat"><span class="stat-value">16</span><span class="stat-label">Live Pages</span></div>
+    <div class="stat"><span class="stat-value">91</span><span class="stat-label">Businesses</span></div>
   </div>
 
   <div class="nav-row">
@@ -529,10 +452,10 @@
     <a href="constellation-3d.html" class="nav-link">3D Sphere</a>
     <a href="NASA/index.html" class="nav-link">NASA Missions</a>
     <a href="PNW/index.html" class="nav-link">PNW Series</a>
-    <a href="LIVE/index.html" class="nav-link">Live</a>
+    <a href="NASA/artemis-ii/index.html" class="nav-link">Artemis II</a>
     <a href="MUK/index.html" class="nav-link">Mukilteo</a>
     <a href="SOL/index.html" class="nav-link">Sun &amp; Moon</a>
-    <a href="NASA/artemis-ii/index.html" class="nav-link">Artemis II</a>
+    <a href="LIVE/index.html" class="nav-link">Live</a>
     <a href="../index.html" class="nav-link">Home</a>
   </div>
 
@@ -601,120 +524,62 @@
       </a>
     </div>
 
-    <!-- ═══════════════════════════════════════════
-         LIVE OBSERVATORIES & FIELD GUIDES
-         These sections provide real-time data,
-         local guides, and ongoing research.
-    ═══════════════════════════════════════════ -->
-
-    <h3 class="section" style="margin-top:2rem;">Live Observatories &amp; Field Guides</h3>
-    <p style="color:var(--text-quiet); font-size:0.9rem; margin-bottom:1rem; max-width:800px;">
-      Real-time data feeds, local knowledge, and ongoing field research. These sections pull live data
-      from NOAA, NASA, USGS, and local weather stations. Updated hourly during active sweeps.
-    </p>
+    <h3 class="section" style="margin-top:0.5rem;">Live Observatories &amp; Field Guides</h3>
     <div class="series-grid">
       <a href="NASA/artemis-ii/index.html" class="series-card series-nasa">
         <h2>Artemis II &mdash; Live Mission Tracker</h2>
-        <div class="desc">
-          Live countdown, telemetry dashboard, trajectory visualization, KSC weather, Deep Space Network status,
-          and Moon phase tracking. Launch April 1, 2026 at 3:24 PM PDT &mdash; the first crewed mission beyond
-          low Earth orbit in 53 years. Crew biographies, vehicle systems, science payloads, worked math examples,
-          and the complete mission timeline from T-48h through splashdown.
-        </div>
-        <div class="meta">T-32h &middot; 4 crew &middot; 10-day mission &middot; live telemetry</div>
+        <div class="desc">Live countdown, telemetry, trajectory visualization, KSC weather, DSN status. Launch April 1, 2026. Crew bios, vehicle systems, science payloads, worked math, and full timeline.</div>
+        <div class="meta">T-32h &middot; 4 crew &middot; 10-day mission &middot; 5 deep-dive pages</div>
       </a>
       <a href="MUK/index.html" class="series-card series-pnw">
         <h2>Mukilteo Microclimate Observatory</h2>
-        <div class="desc">
-          Weather source accuracy comparison across 4 providers (KPAE, KSEA, NWS, Open-Meteo),
-          tidal rhythms for Possession Sound, ferry transit schedules, and the marine convergence zone.
-          After 3 sweeps, NWS leads on both temperature accuracy (avg 0.23&deg;C error) and wind accuracy
-          (perfect calm matches). Open-Meteo consistently over-reports cloud cover.
-        </div>
+        <div class="desc">Weather source accuracy across 4 providers, tidal rhythms, ferry transit, and the marine convergence zone. NWS leads with 0.23&deg;C avg error after 3 sweeps.</div>
         <div class="meta">4 sources &middot; 3 sweeps &middot; scoring in progress</div>
       </a>
-      <a href="SOL/index.html" class="series-card" style="border-left-color:var(--amber)">
-        <h2>SOL &mdash; Sun, Moon &amp; Celestial Observatory</h2>
-        <div class="desc">
-          Daily sun and moon times for Mukilteo's latitude (47.9&deg;N), space weather from NOAA SWPC,
-          solar wind conditions, Kp index and aurora probability, planetary visibility, and the celestial
-          mechanics that connect the sky above Puget Sound to the missions beyond it. Full Moon on Artemis II
-          launch day &mdash; the crew flies behind the same Moon rising over Possession Sound tonight.
-        </div>
-        <div class="meta">sunrise/sunset &middot; moon phase &middot; Kp index &middot; solar wind</div>
+      <a href="SOL/index.html" class="series-card series-nasa">
+        <h2>SOL &mdash; Celestial Observatory</h2>
+        <div class="desc">Sun and moon times, space weather, solar wind, Kp index, aurora probability, planetary visibility, and the celestial mechanics connecting Puget Sound to the missions beyond it.</div>
+        <div class="meta">sunrise/sunset &middot; moon phase &middot; Kp index &middot; live data</div>
       </a>
-      <a href="LIVE/index.html" class="series-card" style="border-left-color:var(--moss)">
-        <h2>LIVE &mdash; Real-Time Hub</h2>
-        <div class="desc">
-          Central hub linking all live data pages: weather comparisons, tide charts, mission tracker,
-          celestial data, and the forest ecosystem simulation. Updated continuously.
-        </div>
-        <div class="meta">10+ live data feeds &middot; hub page</div>
-      </a>
-      <a href="MUK/food.html" class="series-card" style="border-left-color:var(--fox-warm)">
+      <a href="MUK/food.html" class="series-card series-pnw">
         <h2>PNW Food Heritage</h2>
-        <div class="desc">
-          The restaurants that built the culture &mdash; 14 profiles spanning 1908 to present. From the Dog House
-          in Langley (a 1908 Olympic Club turned Prohibition tavern, now on the National Register) to Dick's Drive-In
-          (no-substitution burgers since 1954), Ivar's (Keep Clam since 1938), Ezell's (Oprah's favorite chicken),
-          Beth's Cafe (450,000 eggs a year), and the ferry-landing history at Mukilteo going back to 1909.
-          Every restaurant backed by Postgres data and JSON API.
-        </div>
+        <div class="desc">14 restaurants from 1908 to present. The Dog House (Langley), Dick's Drive-In, Ivar's, Ezell's, Beth's Cafe, Totem Diner, and the ferry-landing history at Mukilteo since 1909.</div>
         <div class="meta">14 restaurants &middot; 4 counties &middot; 3 on Nat'l Register</div>
       </a>
-      <a href="MUK/trips.html" class="series-card" style="border-left-color:var(--river)">
-        <h2>Mukilteo Trip Planner &amp; Business Guide</h2>
-        <div class="desc">
-          Local trip planning with real-time transit, tide-aware beach timing, and a comprehensive guide to
-          91 local businesses across 8 cities and 8 categories. Harbour Pointe, Highway 99 corridor,
-          112th Street, city resources, and the ferry schedule to Whidbey Island.
-        </div>
+      <a href="MUK/trips.html" class="series-card series-pnw">
+        <h2>Trip Planner &amp; Business Guide</h2>
+        <div class="desc">91 local businesses across 8 cities, ferry schedules, tide-aware beach timing, and the Mukilteo&ndash;Clinton&ndash;Langley corridor.</div>
         <div class="meta">91 businesses &middot; 8 cities &middot; 8 categories</div>
       </a>
-      <a href="MUK/radio.html" class="series-card" style="border-left-color:var(--river)">
-        <h2>PNW Radio Guide</h2>
-        <div class="desc">
-          AM, FM, NOAA Weather Radio, and Marine VHF frequencies receivable from Mukilteo.
-          Emergency broadcasts, marine weather, traffic, and the stations that sound like the Pacific Northwest.
-        </div>
-        <div class="meta">AM/FM/NOAA/VHF &middot; emergency freqs &middot; station profiles</div>
+      <a href="LIVE/index.html" class="series-card series-nasa">
+        <h2>LIVE &mdash; Real-Time Hub</h2>
+        <div class="desc">Central hub for all live data: weather, tides, mission tracker, celestial, and the forest simulation.</div>
+        <div class="meta">10+ live feeds &middot; updated continuously</div>
       </a>
       <a href="PARK/index.html" class="series-card series-pnw">
-        <h2>Parks &amp; Trails Guide</h2>
-        <div class="desc">
-          20+ parks from Snohomish County to King County. Japanese Gulch (160-acre forest preserve with
-          detailed trails, history, and ecology), Meadowdale Beach, Picnic Point, Discovery Park,
-          and a Paine Field park proposal with parcel ownership research.
-        </div>
-        <div class="meta">20+ parks &middot; trail maps &middot; ecology notes</div>
+        <h2>Parks &amp; Trails</h2>
+        <div class="desc">20+ parks from Snohomish to King County. Japanese Gulch, Meadowdale Beach, Discovery Park, and more.</div>
+        <div class="meta">20+ parks &middot; trails &middot; ecology</div>
       </a>
-      <a href="BEACH/index.html" class="series-card" style="border-left-color:var(--river)">
-        <h2>Beaches, Boat Launches &amp; Fishing</h2>
-        <div class="desc">
-          Puget Sound waterfront access: boat launches, the Ballard Locks, fishing guide,
-          and Washington State Ferry routes. Tide-aware planning for Mukilteo Lighthouse Beach,
-          Possession Point, and the greater Salish Sea coastline.
-        </div>
-        <div class="meta">boat launches &middot; locks &middot; fishing &middot; ferries</div>
+      <a href="BEACH/index.html" class="series-card series-nasa">
+        <h2>Beaches &amp; Boat Launches</h2>
+        <div class="desc">Puget Sound waterfront access, Ballard Locks, fishing guide, and ferry routes.</div>
+        <div class="meta">launches &middot; locks &middot; fishing &middot; ferries</div>
       </a>
-      <a href="OPEN/index.html" class="series-card" style="border-left-color:var(--cosmic)">
+      <a href="MUK/radio.html" class="series-card series-pnw">
+        <h2>PNW Radio Guide</h2>
+        <div class="desc">AM, FM, NOAA Weather Radio, and Marine VHF frequencies from Mukilteo.</div>
+        <div class="meta">AM/FM/NOAA/VHF &middot; emergency freqs</div>
+      </a>
+      <a href="OPEN/index.html" class="series-card series-nasa">
         <h2>OPEN &mdash; 12 Unsolved Problems</h2>
-        <div class="desc">
-          Active research questions spanning AI reasoning, multi-agent coordination, mathematical emergence,
-          and complex systems. Each problem framed as an open question with known approaches, current gaps,
-          and potential breakthrough paths.
-        </div>
+        <div class="desc">Active research questions in AI reasoning, multi-agent coordination, mathematical emergence, and complex systems.</div>
         <div class="meta">12 problems &middot; AI + math + emergence</div>
       </a>
       <a href="forest/index.html" class="series-card series-pnw">
-        <h2>Forest Ecosystem Simulation</h2>
-        <div class="desc">
-          Interactive PNW forest with 7 real bird species from the S36 catalog, fireweed bloom cycles,
-          circadian rhythms from sun altitude, barometric pressure-driven foraging, fog from dewpoint spread,
-          aurora from NOAA Kp index, Kuramoto-coupled firefly synchronization, and 400 wind-swayed grass blades.
-          55,000+ bytes of simulation.js.
-        </div>
-        <div class="meta">7 species &middot; 5 plant types &middot; real weather coupling</div>
+        <h2>Forest Simulation</h2>
+        <div class="desc">Interactive PNW forest with 7 bird species, fireweed, circadian rhythms, barometric foraging, fog, aurora, and firefly synchronization.</div>
+        <div class="meta">7 species &middot; 55K simulation.js</div>
       </a>
     </div>
 
@@ -735,68 +600,7 @@
   </main>
 
   <footer>
-    <a href="../index.html">tibsfox.com</a> &middot; <a href="constellation.html">Constellation Map</a> &middot; <a href="PNW/index.html">PNW</a> &middot; <a href="NASA/index.html">NASA</a> &middot; <a href="S36/index.html">S36</a> &middot; <a href="NASA/artemis-ii/index.html">Artemis II</a> &middot; <a href="MUK/index.html">Mukilteo</a> &middot; <a href="SOL/index.html">SOL</a> &middot; <a href="LIVE/index.html">Live</a> &middot; <a href="PARK/index.html">Parks</a> &middot; <a href="BEACH/index.html">Beaches</a> &middot; <a href="MUK/food.html">Food Heritage</a>
+    <a href="../index.html">tibsfox.com</a> &middot; <a href="constellation.html">Constellation</a> &middot; <a href="PNW/index.html">PNW</a> &middot; <a href="NASA/index.html">NASA</a> &middot; <a href="S36/index.html">S36</a> &middot; <a href="NASA/artemis-ii/index.html">Artemis II</a> &middot; <a href="MUK/index.html">Mukilteo</a> &middot; <a href="SOL/index.html">SOL</a> &middot; <a href="LIVE/index.html">Live</a>
   </footer>
-
-<script>
-// Live celestial data for moon/sun cards
-(function() {
-  // Moon phase from synodic month
-  var now = new Date();
-  var JD = now.getTime() / 86400000 + 2440587.5;
-  var refNewMoon = 2451550.1;
-  var synodicMonth = 29.53059;
-  var phase = ((JD - refNewMoon) % synodicMonth) / synodicMonth;
-  if (phase < 0) phase += 1;
-  var illum = (1 - Math.cos(phase * 2 * Math.PI)) / 2;
-  var names = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
-  var idx = Math.floor(phase * 8) % 8;
-
-  var moonPhaseEl = document.getElementById('cel-moon-phase');
-  var moonIllumEl = document.getElementById('cel-moon-illum');
-  if (moonPhaseEl) moonPhaseEl.textContent = names[idx];
-  if (moonIllumEl) moonIllumEl.textContent = (illum * 100).toFixed(0) + '% illuminated';
-
-  // Moon distance
-  var daysSinceJ2000 = (now.getTime() / 86400000) - 10957.5;
-  var anomalisticPeriod = 27.55455;
-  var meanAnomaly = ((daysSinceJ2000 / anomalisticPeriod) % 1) * 2 * Math.PI;
-  var e = 0.0549;
-  var E = meanAnomaly + e * Math.sin(meanAnomaly);
-  var moonDist = 384400 * (1 - e * Math.cos(E));
-
-  // Sun day progress
-  var pdt = new Date(now.getTime() - 7 * 3600000);
-  var hrs = pdt.getUTCHours() + pdt.getUTCMinutes() / 60;
-  var sunriseH = 6 + 49/60; // 6:49 AM
-  var sunsetH = 19 + 39/60; // 7:39 PM
-  var dayLen = sunsetH - sunriseH;
-  var progressEl = document.getElementById('cel-sun-progress');
-  if (progressEl) {
-    if (hrs < sunriseH) {
-      progressEl.textContent = 'Pre-dawn \u00b7 +3m 12s/day';
-    } else if (hrs > sunsetH) {
-      progressEl.textContent = 'After sunset \u00b7 +3m 12s/day';
-    } else {
-      var pct = ((hrs - sunriseH) / dayLen * 100).toFixed(0);
-      progressEl.textContent = pct + '% through daylight \u00b7 +3m/day';
-    }
-  }
-
-  // Fetch live Kp
-  fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json')
-    .then(function(r){return r.json()})
-    .then(function(data){
-      if (data && data.length > 1) {
-        var last = data[data.length - 1];
-        var kp = parseFloat(last[1]);
-        var gScale = kp < 4 ? 'G0 quiet' : kp < 5 ? 'G1 minor' : 'G' + Math.min(5, Math.floor(kp) - 3);
-        var kpEl = document.getElementById('cel-sun-kp');
-        if (kpEl) kpEl.textContent = 'Kp ' + kp.toFixed(1) + ' \u00b7 ' + gScale + ' \u2192';
-      }
-    })
-    .catch(function(){});
-})();
-</script>
 </body>
 </html>
