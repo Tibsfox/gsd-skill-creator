@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUK — Whidbey Island Research &amp; Guide</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header .coords { color:rgba(255,255,255,0.3); font-size:0.75rem; font-family:monospace; margin-top:0.5rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin-right:1.2rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+    h2 {
+      font-size:1.1rem; font-weight:400; color:var(--sand); margin:2.5rem 0 1rem;
+      padding-bottom:0.3rem; border-bottom:1px solid var(--border);
+    }
+    h2:first-child { margin-top:0; }
+    .section-intro { font-size:0.9rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif; }
+
+    .card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1rem; }
+    .card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; transition:border-color 0.2s;
+    }
+    .card:hover { border-color:var(--sea-light); }
+    .card h3 { font-size:1rem; color:#fff; margin-bottom:0.4rem; }
+    .card p { font-size:0.85rem; color:var(--dim); line-height:1.5; }
+    .card .meta { font-size:0.75rem; margin-bottom:0.5rem; }
+    .tag {
+      display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+      font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:500;
+      border:1px solid; margin-right:0.3rem;
+    }
+    .tag-south { background:rgba(58,138,154,0.1); color:var(--marine); border-color:rgba(58,138,154,0.3); }
+    .tag-central { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+    .tag-north { background:rgba(42,74,48,0.2); color:#6a9a70; border-color:rgba(42,74,48,0.4); }
+    .tag-park { background:rgba(76,175,80,0.1); color:#6abf6e; border-color:rgba(76,175,80,0.3); }
+    .tag-ferry { background:rgba(74,122,154,0.15); color:var(--sky); border-color:rgba(74,122,154,0.3); }
+    .tag-mil { background:rgba(180,80,80,0.12); color:#c07070; border-color:rgba(180,80,80,0.3); }
+    .tag-landmark { background:rgba(180,140,60,0.12); color:#c0a050; border-color:rgba(180,140,60,0.3); }
+
+    /* Detail sections */
+    .detail-section {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.5rem; margin-bottom:1.5rem;
+    }
+    .detail-section h3 { font-size:1.1rem; color:#fff; margin-bottom:0.6rem; }
+    .detail-section p { font-size:0.88rem; margin-bottom:0.8rem; line-height:1.7; }
+    .detail-section ul {
+      list-style:none; padding:0; margin:0 0 0.8rem;
+    }
+    .detail-section li {
+      font-size:0.85rem; padding:0.3rem 0 0.3rem 1rem; position:relative;
+      border-left:2px solid var(--border);
+    }
+    .detail-section li strong { color:#fff; }
+    .detail-section .note {
+      font-size:0.78rem; color:var(--fog); font-style:italic; margin-top:0.4rem;
+    }
+
+    /* Timeline */
+    .timeline { margin:1rem 0; }
+    .timeline-event {
+      display:flex; gap:1rem; padding:0.4rem 0; border-left:2px solid var(--sea);
+      padding-left:1rem; margin-left:0.5rem;
+    }
+    .timeline-event .year {
+      font-family:monospace; font-size:0.78rem; color:var(--marine); min-width:3.5rem; flex-shrink:0;
+    }
+    .timeline-event .desc { font-size:0.82rem; color:var(--dim); font-family:system-ui,sans-serif; }
+
+    /* Ferry schedule panel */
+    .ferry-panel {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.5rem; margin-bottom:1.5rem;
+    }
+    .ferry-panel h3 {
+      font-size:1rem; color:#fff; margin-bottom:0.8rem;
+    }
+    .ferry-routes { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1rem; }
+    .ferry-route {
+      background:rgba(26,58,74,0.2); border:1px solid rgba(58,138,154,0.2); border-radius:4px;
+      padding:1rem;
+    }
+    .ferry-route h4 { font-size:0.9rem; color:var(--marine); margin-bottom:0.4rem; }
+    .ferry-route p { font-size:0.8rem; color:var(--dim); font-family:system-ui,sans-serif; line-height:1.5; }
+    .ferry-route .crossing { font-family:monospace; color:var(--sky); font-size:0.78rem; margin-bottom:0.3rem; }
+
+    /* Stats bar */
+    .stats {
+      display:flex; flex-wrap:wrap; gap:1.5rem; margin:1.5rem 0 2.5rem;
+      padding:1rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+      justify-content:center;
+    }
+    .stat { text-align:center; min-width:80px; }
+    .stat-value { display:block; font-size:1.5rem; font-weight:400; color:var(--marine); font-family:monospace; }
+    .stat-label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+
+    footer {
+      max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+      font-size:0.72rem; color:var(--dim); border-top:1px solid var(--border);
+      font-family:system-ui,sans-serif;
+    }
+    footer a { color:rgba(255,255,255,0.4); margin:0 0.3rem; }
+    footer a:hover { color:var(--sand); }
+
+    @media(max-width:640px) {
+      header { padding:1.5rem 1rem 1.2rem; }
+      header h1 { font-size:1.4rem; }
+      main { padding:1.5rem 1rem 3rem; }
+      .card-grid { grid-template-columns:1fr; }
+      .ferry-routes { grid-template-columns:1fr; }
+      .stats { gap:1rem; }
+      .stat { min-width:60px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Whidbey Island</h1>
+  <div class="subtitle">Largest island in Washington &middot; 55 miles of farms, forests, and military jets</div>
+  <div class="coords">48.2332&deg;N 122.6830&deg;W &middot; Island County, Washington</div>
+  <nav>
+    <a href="../MUK/index.html">Dashboard</a>
+    <a href="trips.html">Trip Planner</a>
+    <a href="food.html">Food Heritage</a>
+    <a class="active" href="whidbey.html">Whidbey</a>
+    <a href="../PARK/index.html">Parks</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value">55</span><span class="stat-label">Miles Long</span></div>
+    <div class="stat"><span class="stat-value">20</span><span class="stat-label">Min Ferry</span></div>
+    <div class="stat"><span class="stat-value">17"</span><span class="stat-label">Rain/Year</span></div>
+    <div class="stat"><span class="stat-value">1850</span><span class="stat-label">First Settled</span></div>
+    <div class="stat"><span class="stat-value">~70K</span><span class="stat-label">Population</span></div>
+  </div>
+
+  <!-- ================ THE ISLAND ================ -->
+  <h2>The Island</h2>
+  <div class="detail-section">
+    <h3>Geography and Regions</h3>
+    <p>Whidbey Island is the largest island in Washington State and the fourth-longest in the contiguous United States, stretching 55 miles from Clinton in the south to Deception Pass in the north. Connected to Mukilteo by the Clinton&ndash;Mukilteo ferry, it sits between Possession Sound, Saratoga Passage, and Admiralty Inlet.</p>
+
+    <ul>
+      <li><span class="tag tag-south">South</span> <strong>Clinton</strong> &mdash; Ferry terminal. Gateway to the island from Mukilteo. SR 525 heads north from here.</li>
+      <li><span class="tag tag-south">South</span> <strong>Langley</strong> &mdash; "Village by the Sea." Art galleries, restaurants, bluff-top views of Saratoga Passage. 15 minutes south of Clinton.</li>
+      <li><span class="tag tag-south">South</span> <strong>Freeland</strong> &mdash; Unincorporated community at Holmes Harbor. Small-town commercial center for south Whidbey.</li>
+      <li><span class="tag tag-central">Central</span> <strong>Greenbank</strong> &mdash; Narrow waist of the island. Greenbank Farm (former loganberry wine operation, now community center).</li>
+      <li><span class="tag tag-central">Central</span> <strong>Coupeville</strong> &mdash; County seat of Island County. Historic downtown on Penn Cove. One of the oldest towns in Washington (incorporated 1881).</li>
+      <li><span class="tag tag-north">North</span> <strong>Oak Harbor</strong> &mdash; Largest city on the island (~24,000). Home of Naval Air Station Whidbey Island. Commercial center for the north end.</li>
+      <li><span class="tag tag-north">North</span> <strong>Deception Pass</strong> &mdash; Northern tip. State park, bridge to Fidalgo Island and the mainland.</li>
+    </ul>
+  </div>
+
+  <!-- ================ LANGLEY ================ -->
+  <h2>Langley &mdash; Village by the Sea</h2>
+  <div class="detail-section">
+    <h3>Population ~1,100 &middot; Perched on a Bluff above Saratoga Passage</h3>
+    <p>Founded in 1891 by Judge J.W. Langley, this compact village is the cultural heart of south Whidbey. First Street runs along the bluff edge with galleries, shops, and restaurants looking out over the water toward Camano Island and the Cascades.</p>
+
+    <ul>
+      <li><strong>First Street Galleries</strong> &mdash; A row of artist studios and galleries on the main bluff-top street. Glass, painting, sculpture, woodwork. Walkable in 20 minutes.</li>
+      <li><strong>The Whale Bell</strong> &mdash; A bell on the waterfront bluff. Ring it when you spot orcas in Saratoga Passage. A Langley tradition.</li>
+      <li><strong>Seawall Park</strong> &mdash; Small waterfront park below the bluff. Beach access, picnic tables, views of the passage. Stairs down from First Street.</li>
+      <li><strong><a href="food.html#dog-house-langley">The Dog House</a></strong> &mdash; Originally the 1908 Olympic Club building. Corner of First and Anthes. Langley's only structure on the National Register of Historic Places. Three levels: mercantile, game club, and the basketball court for Langley High School in the basement. Hosted the first movie shown in Langley (1922). The name comes from Prohibition-era gambling sessions &mdash; husbands who spent Sundays at the club came home Monday "in the dog house."</li>
+      <li><strong>Clyde Theatre</strong> &mdash; Built in 1937, recently restored. Art deco cinema that still shows films. One of the few surviving small-town theaters in Washington.</li>
+      <li><strong>South Whidbey Historical Museum</strong> &mdash; Local history collection. Logging, farming, and maritime heritage of the south end.</li>
+    </ul>
+
+    <p class="note">Annual events: Mystery Weekend (February &mdash; the whole town becomes a whodunit), Island Fair (summer), DjangoFest Northwest (September &mdash; Gypsy jazz festival, one of the largest in North America).</p>
+  </div>
+
+  <!-- ================ DECEPTION PASS ================ -->
+  <h2>Deception Pass</h2>
+  <div class="detail-section">
+    <h3>Most-Visited State Park in Washington</h3>
+    <p>Deception Pass State Park spans 4,134 acres across the northern tip of Whidbey Island and the southern end of Fidalgo Island. The park's centerpiece is the dramatic bridge completed in 1935, arching 180 feet above the narrow tidal channel where the Strait of Juan de Fuca meets Skagit Bay.</p>
+
+    <ul>
+      <li><span class="tag tag-park">Park</span> <strong>The Bridge</strong> &mdash; Two spans (Canoe Pass and Deception Pass) built by the Civilian Conservation Corps, 1934&ndash;1935. Walk across for views straight down into the churning water. Pull-off parking on both sides.</li>
+      <li><strong>Tidal currents</strong> &mdash; Water rushes through the pass at up to 8 knots during tidal exchanges. The turbulence is visible from the bridge &mdash; standing waves, whirlpools, and boils.</li>
+      <li><span class="tag tag-park">Park</span> <strong>Old-growth forest</strong> &mdash; Trails wind through stands of Douglas fir and Western red cedar on both sides of the pass.</li>
+      <li><span class="tag tag-park">Park</span> <strong>Cranberry Lake</strong> &mdash; Freshwater lake on the Whidbey side. Swimming, fishing, boat launch (no motors).</li>
+      <li><span class="tag tag-park">Park</span> <strong>Rosario Beach</strong> &mdash; Tide pools, CCC-era structures, the Maiden of Deception Pass story pole (Samish Nation). Interpretive trail along the rocky shore.</li>
+    </ul>
+
+    <p class="note">The pass was named by George Vancouver in 1792 after realizing the "peninsula" he'd mapped was actually an island. He felt "deceived" by the narrow, hidden channel.</p>
+  </div>
+
+  <!-- ================ EBEY'S LANDING ================ -->
+  <h2>Ebey's Landing National Historical Reserve</h2>
+  <div class="detail-section">
+    <h3>First National Historical Reserve in the United States (1978)</h3>
+    <p>Ebey's Landing preserves the rural character of central Whidbey Island &mdash; an unbroken landscape of prairie farmland, shoreline, and historic structures that has been continuously cultivated since the 1850s. Unlike a national park, the reserve is a working community where farms and towns coexist with federal preservation.</p>
+
+    <ul>
+      <li><span class="tag tag-landmark">Historic</span> <strong>Colonel Isaac Ebey</strong> &mdash; First permanent white settler on Whidbey (1850). Customs collector, legislator, farmer. Beheaded by a Haida raiding party in 1857 in retaliation for the killing of a Haida chief by U.S. forces at Port Gamble. His head was recovered two years later through ransom negotiations.</li>
+      <li><span class="tag tag-park">Trail</span> <strong>Bluff Trail</strong> &mdash; 5.6-mile loop along 200-foot bluffs above Admiralty Inlet. Views of the Olympic Mountains, Mount Baker, and shipping traffic. One of the most scenic hikes in the Puget Sound region.</li>
+      <li><strong>Prairie farmland</strong> &mdash; The prairies above the bluffs have been farmed continuously since the 1850s &mdash; first by Salish peoples managing camas meadows, then by American settlers growing grain. The open fields against the water remain essentially unchanged.</li>
+      <li><span class="tag tag-landmark">Historic</span> <strong>Coupeville</strong> &mdash; The county seat sits within the reserve. Front Street along Penn Cove has buildings from the 1880s&ndash;1900s. Penn Cove mussels are farmed in the cove and served at local restaurants.</li>
+    </ul>
+  </div>
+
+  <!-- ================ NAS WHIDBEY ================ -->
+  <h2>Naval Air Station Whidbey Island</h2>
+  <div class="detail-section">
+    <h3>Home of the EA-18G Growler</h3>
+    <p>NAS Whidbey Island is the Navy's premier electronic warfare base, located just north of Oak Harbor. It is home to all Navy EA-18G Growler electronic attack squadrons, making it the center of U.S. airborne electronic warfare capability.</p>
+
+    <ul>
+      <li><span class="tag tag-mil">Military</span> <strong>Ault Field</strong> &mdash; Main airfield on the north end. Two runways. Primary base for Growler operations, training, and deployment.</li>
+      <li><span class="tag tag-mil">Military</span> <strong>OLF Coupeville</strong> &mdash; Outlying landing field near Coupeville used for field carrier landing practice (FCLP). Source of ongoing noise complaints from central Whidbey residents.</li>
+      <li><strong>EA-18G Growler</strong> &mdash; Electronic attack variant of the F/A-18F Super Hornet. Jams and suppresses enemy radar and communications. The loudest jets in the Navy &mdash; they are a constant presence over the island, particularly during training cycles.</li>
+    </ul>
+
+    <div class="timeline">
+      <div class="timeline-event"><span class="year">1942</span><span class="desc">Ault Field established as a naval air facility during WWII. Searchlight operations and patrol.</span></div>
+      <div class="timeline-event"><span class="year">1950s</span><span class="desc">Cold War expansion. P-2 Neptune and later P-3 Orion maritime patrol aircraft for submarine hunting.</span></div>
+      <div class="timeline-event"><span class="year">1970s</span><span class="desc">EA-6B Prowler electronic warfare aircraft arrive. Whidbey becomes the Navy's EW center.</span></div>
+      <div class="timeline-event"><span class="year">2009+</span><span class="desc">Transition from EA-6B Prowler to EA-18G Growler. All Growler squadrons based at Whidbey.</span></div>
+    </div>
+
+    <p class="note">The economic impact on Oak Harbor and Island County is substantial. NAS Whidbey is the largest employer in the county, and the military community shapes the character of the north end.</p>
+  </div>
+
+  <!-- ================ NATURAL HISTORY ================ -->
+  <h2>Natural History</h2>
+  <div class="detail-section">
+    <h3>Rain Shadow, Old Growth, and Marine Life</h3>
+    <p>Whidbey Island sits in the rain shadow of the Olympic Mountains. The Olympics block Pacific moisture systems from the southwest, giving the island a drier climate than the mainland &mdash; roughly 17 inches of rain per year compared to Seattle's 37. The result is a landscape unlike the rest of western Washington: open prairies, Garry oak meadows, and drier conifer forests alongside the typical Douglas fir.</p>
+
+    <ul>
+      <li><span class="tag tag-park">Park</span> <strong>South Whidbey State Park</strong> &mdash; 255 acres of old-growth forest. Some trees are 500+ years old. A trail loop winds through massive Douglas fir and Western red cedar. One of the last old-growth stands in the Puget Sound lowlands.</li>
+      <li><strong>Douglas fir and Western red cedar</strong> &mdash; The dominant conifers. Old-growth specimens reach 200+ feet. The understory includes sword fern, salal, and Oregon grape.</li>
+      <li><strong>Rain shadow effect</strong> &mdash; 17 inches/year (Coupeville) vs 37 inches/year (Seattle). The dry conditions support prairie grasslands and Garry oak ecosystems rare elsewhere in western Washington.</li>
+    </ul>
+
+    <h3 style="margin-top:1.2rem;">Marine Ecology</h3>
+    <ul>
+      <li><strong>Southern Resident orcas</strong> &mdash; The endangered J, K, and L pods transit Saratoga Passage and Admiralty Inlet. Langley's Whale Bell exists because sightings happen from the bluff. Population around 75 individuals.</li>
+      <li><strong>Gray whales</strong> &mdash; Migrate north along the coast in spring (March&ndash;May). Some "resident" gray whales feed in the shallows around Whidbey through summer.</li>
+      <li><strong>Harbor seals</strong> &mdash; Common on rocks and beaches around the island. Hauled out at low tide along Admiralty Inlet and Saratoga Passage.</li>
+      <li><strong>Bald eagles</strong> &mdash; Nesting pairs along the entire shoreline. Particularly visible at Deception Pass and along the bluffs of Ebey's Landing.</li>
+    </ul>
+  </div>
+
+  <!-- ================ FERRY CONNECTION ================ -->
+  <h2>Ferry Connection</h2>
+  <p class="section-intro">
+    The Mukilteo&ndash;Clinton ferry is Whidbey Island's primary link to the mainland for south and central island residents. Part of the Washington State Ferries system &mdash; the largest ferry fleet in the United States.
+  </p>
+
+  <div class="ferry-panel">
+    <h3>Routes Serving Whidbey Island</h3>
+    <div class="ferry-routes">
+
+      <div class="ferry-route">
+        <h4>Mukilteo &harr; Clinton</h4>
+        <div class="crossing">20-minute crossing &middot; Possession Sound</div>
+        <p>Primary route for south Whidbey. Departs every 30 minutes during peak season (hourly late night). Walk-on and vehicle. Connects to SR 525 on both sides.</p>
+        <p><strong>From Clinton:</strong> Langley 15 min south. Freeland 25 min. Coupeville 45 min. Oak Harbor 60 min. Deception Pass 75 min.</p>
+        <p style="margin-top:0.4rem;">Reservations available on WSDOT website for vehicle traffic. Walk-on passengers board without reservation.</p>
+      </div>
+
+      <div class="ferry-route">
+        <h4>Keystone &harr; Port Townsend</h4>
+        <div class="crossing">30-minute crossing &middot; Admiralty Inlet</div>
+        <p>Central Whidbey to the Olympic Peninsula. Departs from Keystone (near Coupeville). Smaller vessel, weather-dependent &mdash; this route sees more cancellations than Mukilteo&ndash;Clinton due to strong currents in Admiralty Inlet.</p>
+        <p><strong>Connection:</strong> Coupeville to Keystone 10 min. Access to Port Townsend, Sequim, Olympic National Park.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <h3>Ferry Tips</h3>
+    <ul>
+      <li><strong>Peak weekends</strong> &mdash; Summer Friday evenings (westbound) and Sunday afternoons (eastbound) are the busiest sailings. Arrive 60+ minutes early or use reservations.</li>
+      <li><strong>Walk-on</strong> &mdash; No reservation needed. Pedestrians board last but always make the boat. Bike racks available.</li>
+      <li><strong>Fares</strong> &mdash; Collected westbound only (Mukilteo to Clinton). The return trip is free. Check <a href="https://wsdot.wa.gov/ferries">wsdot.wa.gov/ferries</a> for current schedule and fares.</li>
+      <li><strong>Real-time status</strong> &mdash; WSDOT vessel watch shows ferry positions live. Alerts for delays and cancellations via email or app.</li>
+    </ul>
+  </div>
+
+  <!-- ================ MUKILTEO CONNECTION ================ -->
+  <h2>Mukilteo Connection</h2>
+  <p class="section-intro">
+    Whidbey Island is Mukilteo's closest neighbor across the water. The ferry terminal is the town's anchor &mdash; the reason Mukilteo exists as more than a railroad stop.
+  </p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="meta"><span class="tag tag-ferry">Ferry</span></div>
+      <h3>New Mukilteo Ferry Terminal</h3>
+      <p>Opened 2023. Replaced the 1950s-era terminal. Designed to reflect Coast Salish architecture. Multimodal &mdash; connects to Sounder commuter rail, Community Transit buses, and the Mukilteo Speedway corridor.</p>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="tag tag-ferry">Ferry</span></div>
+      <h3>Day Trip: Mukilteo to Langley</h3>
+      <p>20-minute ferry + 15-minute drive. Walk First Street, browse galleries, lunch overlooking the passage, then catch the ferry back. Works as a walk-on trip with Langley's compact layout.</p>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="tag tag-ferry">Ferry</span></div>
+      <h3>Day Trip: Mukilteo to Deception Pass</h3>
+      <p>Full day. 20-minute ferry + 75-minute drive through the length of the island. Stop at Coupeville and Ebey's Landing on the way. Return via the same ferry or loop back through the mainland via Deception Pass Bridge and I-5.</p>
+    </div>
+    <div class="card">
+      <div class="meta"><span class="tag tag-south">South</span><span class="tag tag-ferry">Ferry</span></div>
+      <h3>Possession Sound Crossing</h3>
+      <p>The 20-minute crossing between Mukilteo and Clinton traverses Possession Sound &mdash; named by George Vancouver in 1792 when he took formal possession of the region for Britain. On clear days: Mount Baker to the north, the Cascades to the east, the Olympics to the west.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../MUK/index.html">Dashboard</a> &middot;
+  <a href="trips.html">Trips</a> &middot;
+  <a href="food.html">Food</a> &middot;
+  <a href="whidbey.html">Whidbey</a> &middot;
+  <a href="../PARK/index.html">Parks</a> &middot;
+  <a href="../index.html">Research</a>
+  &middot; Whidbey Island Research
+</footer>
+</body>
+</html>
