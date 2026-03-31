@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Save Liberty Bell 7 — Helicopter Recovery Challenge</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #C0C0D0;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sim-panel {
+    flex: 1;
+    min-width: 600px;
+    max-width: 800px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .data-panel {
+    flex: 0 0 320px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .panel-title {
+    font-size: 12px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a2040;
+  }
+  canvas {
+    width: 100%;
+    border-radius: 6px;
+    background: #050810;
+  }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    padding: 6px 14px;
+    border: 1px solid #334455;
+    background: #151a2a;
+    color: #889098;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  .ctrl-btn:hover { border-color: #4488cc; color: #c0c8d8; }
+  .ctrl-btn.active { border-color: #2050CC; color: #4488cc; background: rgba(32,80,204,0.15); }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #0f1425;
+    font-size: 11px;
+  }
+  .stat-label { color: #556677; }
+  .stat-value { color: #c0c8d8; }
+  .stat-value.highlight { color: #4488cc; }
+  .stat-value.warn { color: #FF5050; }
+  .stat-value.ok { color: #30CC30; }
+  .instructions {
+    margin-top: 12px;
+    font-size: 10px;
+    color: #556677;
+    line-height: 1.6;
+    padding: 8px;
+    background: #0f1425;
+    border-radius: 4px;
+  }
+  .instructions kbd {
+    background: #1a2040;
+    border: 1px solid #334455;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: #c0c8d8;
+    font-size: 10px;
+  }
+  .result-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+  }
+  .result-box {
+    background: #0a0e1a;
+    border: 2px solid #CC6830;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    max-width: 450px;
+  }
+  .result-box h2 { color: #C0C0D0; margin-bottom: 15px; font-size: 18px; }
+  .result-box p { color: #889098; margin-bottom: 8px; font-size: 12px; line-height: 1.5; }
+  .result-box .score { color: #CC6830; font-size: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Save Liberty Bell 7</h1>
+<p class="subtitle">Helicopter Recovery Challenge &mdash; July 21, 1961 &mdash; Arrow Keys + Space</p>
+
+<div class="main-container">
+  <div class="sim-panel">
+    <div class="panel-title">Atlantic Ocean &mdash; Recovery Zone</div>
+    <canvas id="simCanvas" width="780" height="550"></canvas>
+    <div class="controls">
+      <button class="ctrl-btn active" onclick="startGame()">START</button>
+      <button class="ctrl-btn" onclick="resetGame()">RESET</button>
+      <span style="color:#556677;font-size:10px;padding-top:8px">
+        Lower hook, attach to capsule, lift before it sinks
+      </span>
+    </div>
+  </div>
+
+  <div class="data-panel">
+    <div class="panel-title">Recovery Status</div>
+    <div class="stat-row">
+      <span class="stat-label">Time Since Hatch Blow</span>
+      <span id="time-val" class="stat-value highlight">0.0s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Water in Capsule</span>
+      <span id="water-val" class="stat-value">0 kg</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Capsule Weight</span>
+      <span id="weight-val" class="stat-value">1,089 kg</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Helicopter Load</span>
+      <span id="load-val" class="stat-value">0 kg</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Max Lift Capacity</span>
+      <span id="maxlift-val" class="stat-value">1,814 kg</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Engine Temp</span>
+      <span id="engine-val" class="stat-value ok">Normal</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Hook Status</span>
+      <span id="hook-val" class="stat-value">Retracted</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Cable Status</span>
+      <span id="cable-val" class="stat-value">Ready</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Capsule Status</span>
+      <span id="capsule-val" class="stat-value highlight">Floating</span>
+    </div>
+
+    <div class="panel-title" style="margin-top: 15px;">Controls</div>
+    <div class="instructions">
+      <kbd>&larr;</kbd> <kbd>&rarr;</kbd> Move helicopter<br>
+      <kbd>&uarr;</kbd> <kbd>&darr;</kbd> Raise/lower altitude<br>
+      <kbd>S</kbd> Lower/raise hook<br>
+      <kbd>Space</kbd> Attempt to attach hook<br>
+      <kbd>L</kbd> Lift (once attached)<br>
+      <br>
+      <strong>Goal:</strong> Attach the recovery hook to the capsule
+      and lift it before the water weight exceeds your helicopter's
+      maximum lift capacity (1,814 kg / 4,000 lbs).<br>
+      <br>
+      <strong>The math is against you.</strong> Water floods through
+      a 48.3 cm hatch opening at ~100 kg/s. The capsule started at
+      1,089 kg. You have maybe 30-40 seconds before it becomes
+      too heavy. Jim Lewis tried. You try.<br>
+      <br>
+      <em>Can you save Liberty Bell 7?</em>
+    </div>
+  </div>
+</div>
+
+<div id="result-overlay" class="result-overlay">
+  <div class="result-box">
+    <h2 id="result-title">Recovery Failed</h2>
+    <p id="result-msg"></p>
+    <p class="score" id="result-score"></p>
+    <p id="result-detail"></p>
+    <br>
+    <button class="ctrl-btn" onclick="closeResult()">TRY AGAIN</button>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('simCanvas');
+const ctx = canvas.getContext('2d');
+
+// Physics
+const CAPSULE_DRY = 1089;      // kg
+const CAPSULE_VOL = 1.56;      // m^3 internal
+const HATCH_AREA = 0.1833;     // m^2 (48.3cm diameter)
+const CD = 0.61;               // discharge coefficient
+const RHO = 1025;              // kg/m^3 seawater
+const G = 9.81;
+const MAX_LIFT = 1814;          // kg (UH-34D hover max)
+const WARNING_LOAD = 1680;      // kg (chip light)
+const CABLE_BREAK = 2268;       // kg
+const FLOOD_HEAD = 0.35;        // m (effective head for flow)
+
+// Game state
+let game = {
+  running: false,
+  time: 0,
+  heliX: 390, heliY: 80,       // Helicopter position
+  hookDown: false,
+  hookY: 0,                     // Hook extension below heli
+  attached: false,
+  lifting: false,
+  capsuleX: 390, capsuleY: 380, // Capsule position
+  capsuleWater: 0,              // kg of water inside
+  capsuleSunk: false,
+  engineOverheat: 0,
+  keys: {},
+  result: null
+};
+
+function resetGame() {
+  game = {
+    running: false,
+    time: 0,
+    heliX: 200, heliY: 80,
+    hookDown: false,
+    hookY: 0,
+    attached: false,
+    lifting: false,
+    capsuleX: 390, capsuleY: 380,
+    capsuleWater: 0,
+    capsuleSunk: false,
+    engineOverheat: 0,
+    keys: {},
+    result: null
+  };
+  document.getElementById('result-overlay').style.display = 'none';
+}
+
+function startGame() {
+  if (!game.running) {
+    game.running = true;
+  }
+}
+
+function closeResult() {
+  document.getElementById('result-overlay').style.display = 'none';
+  resetGame();
+}
+
+function showResult(title, msg, score, detail) {
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-msg').textContent = msg;
+  document.getElementById('result-score').textContent = score;
+  document.getElementById('result-detail').textContent = detail;
+  document.getElementById('result-overlay').style.display = 'flex';
+  game.running = false;
+}
+
+document.addEventListener('keydown', e => { game.keys[e.key] = true; e.preventDefault(); });
+document.addEventListener('keyup', e => { game.keys[e.key] = false; });
+
+function update(dt) {
+  if (!game.running) return;
+  game.time += dt;
+
+  // --- Water flooding ---
+  if (!game.capsuleSunk && game.capsuleWater < CAPSULE_VOL * RHO) {
+    const fillFrac = game.capsuleWater / (CAPSULE_VOL * RHO);
+    const flowRate = CD * HATCH_AREA * Math.sqrt(2 * G * FLOOD_HEAD)
+                   * Math.max(0.05, 1 - fillFrac * 0.8) * RHO;
+    game.capsuleWater = Math.min(CAPSULE_VOL * RHO, game.capsuleWater + flowRate * dt);
+  }
+
+  const totalWeight = CAPSULE_DRY + game.capsuleWater;
+  const buoyancy = 1.03 * RHO;  // Displacement when floating
+
+  // --- Helicopter controls ---
+  const heliSpeed = 120; // pixels/s
+  if (game.keys['ArrowLeft']) game.heliX -= heliSpeed * dt;
+  if (game.keys['ArrowRight']) game.heliX += heliSpeed * dt;
+  if (game.keys['ArrowUp']) game.heliY -= heliSpeed * 0.5 * dt;
+  if (game.keys['ArrowDown']) game.heliY += heliSpeed * 0.5 * dt;
+  game.heliX = Math.max(50, Math.min(730, game.heliX));
+  game.heliY = Math.max(30, Math.min(200, game.heliY));
+
+  // Hook controls
+  if (game.keys['s'] || game.keys['S']) {
+    if (!game.hookDown) {
+      game.hookDown = true;
+      game.hookY = 0;
+    }
+  }
+  if (game.hookDown && !game.attached) {
+    game.hookY = Math.min(350, game.hookY + 80 * dt);
+  }
+
+  // Attach attempt
+  if (game.keys[' '] && game.hookDown && !game.attached) {
+    const hookWorldY = game.heliY + 30 + game.hookY;
+    const hookWorldX = game.heliX;
+    const dist = Math.sqrt(
+      (hookWorldX - game.capsuleX) ** 2 +
+      (hookWorldY - game.capsuleY) ** 2
+    );
+    if (dist < 30) {
+      game.attached = true;
+    }
+  }
+
+  // Lift attempt
+  if (game.keys['l'] || game.keys['L']) {
+    if (game.attached) game.lifting = true;
+  }
+
+  // --- Capsule physics ---
+  if (!game.attached) {
+    // Capsule sinks when too heavy
+    if (totalWeight > buoyancy && !game.capsuleSunk) {
+      game.capsuleY += (totalWeight - buoyancy) * 0.0003 * dt;
+      if (game.capsuleY > 550) {
+        game.capsuleSunk = true;
+        showResult('CAPSULE LOST',
+          'Liberty Bell 7 sank to the bottom of the Atlantic.',
+          Math.round(totalWeight) + ' kg when lost',
+          'The capsule was not recovered until 1999, from 4,900 meters depth.');
+      }
+    }
+    // Slight wave bobbing
+    game.capsuleY += Math.sin(game.time * 2) * 0.3;
+  } else {
+    // Attached — helicopter tries to lift
+    if (game.lifting) {
+      const load = Math.max(0, totalWeight - buoyancy);
+
+      if (load > CABLE_BREAK) {
+        showResult('CABLE SNAPPED',
+          'The recovery cable broke under the load.',
+          Math.round(load) + ' kg exceeded ' + CABLE_BREAK + ' kg cable limit',
+          'The capsule fell back and sank.');
+        return;
+      }
+
+      if (load > MAX_LIFT) {
+        game.engineOverheat += dt;
+        if (game.engineOverheat > 3) {
+          showResult('ENGINE FAILURE',
+            'Jim Lewis had to release the cable. The engine chip warning light was on. Any longer and the helicopter would have crashed.',
+            Math.round(load) + ' kg load vs ' + MAX_LIFT + ' kg max lift',
+            'This is exactly what happened on July 21, 1961. The math was impossible.');
+          return;
+        }
+      } else {
+        game.engineOverheat = Math.max(0, game.engineOverheat - dt * 0.5);
+        // Actually lifting!
+        game.capsuleY -= (MAX_LIFT - load) * 0.001 * dt;
+        game.heliY -= 5 * dt;
+
+        if (game.capsuleY < 100) {
+          // SUCCESS! (nearly impossible with real physics)
+          showResult('CAPSULE RECOVERED!',
+            'Against all odds, you lifted Liberty Bell 7!',
+            Math.round(game.time) + ' seconds, ' + Math.round(totalWeight) + ' kg',
+            'In reality, this was impossible. The water entered too fast. But congratulations on beating physics.');
+          return;
+        }
+      }
+    }
+
+    // Capsule follows hook
+    game.capsuleX = game.heliX;
+    const hookBottomY = game.heliY + 30 + game.hookY;
+    if (!game.lifting) {
+      game.capsuleY = hookBottomY;
+    }
+  }
+}
+
+function draw() {
+  ctx.fillStyle = '#050810';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Sky gradient
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, 350);
+  skyGrad.addColorStop(0, '#182848');
+  skyGrad.addColorStop(1, '#0a1830');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0, 0, canvas.width, 350);
+
+  // Ocean
+  const waterY = 350;
+  const oceanGrad = ctx.createLinearGradient(0, waterY, 0, canvas.height);
+  oceanGrad.addColorStop(0, '#0a3060');
+  oceanGrad.addColorStop(1, '#030810');
+  ctx.fillStyle = oceanGrad;
+  ctx.fillRect(0, waterY, canvas.width, canvas.height - waterY);
+
+  // Waves
+  ctx.strokeStyle = 'rgba(40, 80, 140, 0.3)';
+  ctx.lineWidth = 1;
+  for (let w = 0; w < 5; w++) {
+    ctx.beginPath();
+    for (let x = 0; x < canvas.width; x += 3) {
+      const y = waterY + w * 8 + Math.sin(x * 0.02 + game.time * 1.5 + w) * 3;
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+
+  // Clouds
+  ctx.fillStyle = 'rgba(60, 70, 90, 0.3)';
+  for (let i = 0; i < 4; i++) {
+    const cx = (i * 200 + 50 + Math.sin(game.time * 0.1 + i) * 20) % 800;
+    ctx.beginPath();
+    ctx.ellipse(cx, 40 + i * 15, 60, 15, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // --- Capsule ---
+  const totalWeight = CAPSULE_DRY + game.capsuleWater;
+  const fillPct = game.capsuleWater / (CAPSULE_VOL * RHO);
+
+  // Capsule body
+  ctx.save();
+  ctx.translate(game.capsuleX, game.capsuleY);
+
+  // Water level inside capsule (visual)
+  ctx.fillStyle = '#1a1a22';
+  ctx.beginPath();
+  ctx.ellipse(0, 0, 18, 14, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Water inside
+  if (fillPct > 0) {
+    ctx.fillStyle = 'rgba(20, 60, 120, 0.6)';
+    const waterH = 28 * fillPct;
+    ctx.fillRect(-18, 14 - waterH, 36, waterH);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 18, 14, 0, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.fillStyle = 'rgba(20, 60, 120, 0.6)';
+    ctx.fillRect(-18, 14 - waterH, 36, waterH);
+  }
+  ctx.restore();
+
+  // Capsule outline
+  ctx.strokeStyle = '#556677';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.ellipse(game.capsuleX, game.capsuleY, 18, 14, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Dye marker
+  if (!game.capsuleSunk) {
+    ctx.fillStyle = 'rgba(50, 150, 30, 0.2)';
+    ctx.beginPath();
+    ctx.ellipse(game.capsuleX + 25, game.capsuleY + 10, 20, 8, 0.3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // --- Helicopter ---
+  ctx.save();
+  ctx.translate(game.heliX, game.heliY);
+
+  // Body
+  ctx.fillStyle = '#2a3040';
+  ctx.fillRect(-25, -5, 50, 14);
+  ctx.fillRect(-15, -12, 30, 8);
+
+  // Tail boom
+  ctx.fillStyle = '#222830';
+  ctx.fillRect(25, -3, 30, 6);
+
+  // Tail rotor
+  ctx.strokeStyle = '#445566';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(55, -8);
+  ctx.lineTo(55, 8);
+  ctx.stroke();
+
+  // Main rotor (spinning)
+  const rotorAngle = game.time * 40;
+  ctx.strokeStyle = 'rgba(100, 120, 140, 0.5)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  const r = 45;
+  ctx.moveTo(-r * Math.cos(rotorAngle), -14);
+  ctx.lineTo(r * Math.cos(rotorAngle), -14);
+  ctx.stroke();
+
+  // Rotor mast
+  ctx.strokeStyle = '#445566';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(0, -12);
+  ctx.lineTo(0, -16);
+  ctx.stroke();
+
+  ctx.restore();
+
+  // --- Hook and cable ---
+  if (game.hookDown) {
+    const hookEndY = game.heliY + 30 + game.hookY;
+    ctx.strokeStyle = game.attached ? '#CCAA30' : '#556677';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(game.heliX, game.heliY + 10);
+    // Cable sag
+    const midX = game.heliX;
+    const midY = (game.heliY + 10 + hookEndY) / 2 + 10;
+    ctx.quadraticCurveTo(midX + 5, midY, game.attached ? game.capsuleX : game.heliX, hookEndY);
+    ctx.stroke();
+
+    // Hook
+    ctx.fillStyle = game.attached ? '#CCAA30' : '#889098';
+    ctx.beginPath();
+    ctx.arc(game.attached ? game.capsuleX : game.heliX, hookEndY, 4, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // --- HUD ---
+  ctx.fillStyle = '#C0C0D0';
+  ctx.font = '14px "Courier New"';
+  ctx.fillText('T+' + game.time.toFixed(1) + 's', 15, 25);
+
+  // Weight bar
+  const barX = 15, barY = 500, barW = 200, barH = 10;
+  ctx.strokeStyle = '#334455';
+  ctx.strokeRect(barX, barY, barW, barH);
+  const loadFrac = Math.min(1, totalWeight / CABLE_BREAK);
+  const maxLiftFrac = MAX_LIFT / CABLE_BREAK;
+  ctx.fillStyle = totalWeight > MAX_LIFT ? '#FF4040' :
+                  totalWeight > WARNING_LOAD ? '#CCAA30' : '#30AA50';
+  ctx.fillRect(barX, barY, barW * loadFrac, barH);
+
+  // Max lift line
+  ctx.strokeStyle = '#FF4040';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(barX + barW * maxLiftFrac, barY - 2);
+  ctx.lineTo(barX + barW * maxLiftFrac, barY + barH + 2);
+  ctx.stroke();
+
+  ctx.fillStyle = '#556677';
+  ctx.font = '9px "Courier New"';
+  ctx.fillText(Math.round(totalWeight) + ' / ' + MAX_LIFT + ' kg', barX, barY - 5);
+
+  // Engine warning
+  if (game.engineOverheat > 0) {
+    const flash = Math.sin(game.time * 10) > 0;
+    if (flash) {
+      ctx.fillStyle = '#FF4040';
+      ctx.font = '16px "Courier New"';
+      ctx.fillText('ENGINE CHIP WARNING', 250, 530);
+    }
+  }
+
+  // Update data panel
+  updatePanel(totalWeight);
+}
+
+function updatePanel(totalWeight) {
+  document.getElementById('time-val').textContent = game.time.toFixed(1) + 's';
+  document.getElementById('water-val').textContent = Math.round(game.capsuleWater).toLocaleString() + ' kg';
+  document.getElementById('weight-val').textContent = Math.round(totalWeight).toLocaleString() + ' kg';
+
+  const load = game.attached ? Math.max(0, totalWeight - 1.03 * RHO) : 0;
+  document.getElementById('load-val').textContent = Math.round(load).toLocaleString() + ' kg';
+
+  const engineEl = document.getElementById('engine-val');
+  if (game.engineOverheat > 2) {
+    engineEl.textContent = 'CRITICAL'; engineEl.className = 'stat-value warn';
+  } else if (game.engineOverheat > 0) {
+    engineEl.textContent = 'WARNING'; engineEl.className = 'stat-value highlight';
+  } else {
+    engineEl.textContent = 'Normal'; engineEl.className = 'stat-value ok';
+  }
+
+  document.getElementById('hook-val').textContent = game.hookDown ?
+    (game.attached ? 'ATTACHED' : 'Lowering') : 'Retracted';
+  document.getElementById('cable-val').textContent = game.attached ? 'Under load' : 'Ready';
+
+  const capsuleEl = document.getElementById('capsule-val');
+  if (game.capsuleSunk) {
+    capsuleEl.textContent = 'SUNK'; capsuleEl.className = 'stat-value warn';
+  } else if (game.capsuleWater > CAPSULE_VOL * RHO * 0.7) {
+    capsuleEl.textContent = 'FLOODING'; capsuleEl.className = 'stat-value warn';
+  } else if (game.capsuleWater > CAPSULE_VOL * RHO * 0.3) {
+    capsuleEl.textContent = 'Taking water'; capsuleEl.className = 'stat-value highlight';
+  } else {
+    capsuleEl.textContent = 'Floating'; capsuleEl.className = 'stat-value highlight';
+  }
+}
+
+let lastTime = 0;
+function animate(timestamp) {
+  const dt = lastTime ? Math.min((timestamp - lastTime) / 1000, 0.05) : 0;
+  lastTime = timestamp;
+  update(dt);
+  draw();
+  requestAnimationFrame(animate);
+}
+
+resetGame();
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>

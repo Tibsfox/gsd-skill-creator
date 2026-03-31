@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harlequin Duck — Whitewater Navigation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #C0C0D0;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sim-panel {
+    flex: 1;
+    min-width: 600px;
+    max-width: 800px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .data-panel {
+    flex: 0 0 280px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .panel-title {
+    font-size: 12px;
+    color: #2080AA;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a2040;
+  }
+  canvas { width: 100%; border-radius: 6px; background: #050810; }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .ctrl-btn {
+    padding: 6px 14px;
+    border: 1px solid #334455;
+    background: #151a2a;
+    color: #889098;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .ctrl-btn:hover { border-color: #2080AA; color: #c0c8d8; }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #0f1425;
+    font-size: 11px;
+  }
+  .stat-label { color: #556677; }
+  .stat-value { color: #c0c8d8; }
+  .stat-value.highlight { color: #2080AA; }
+  .stat-value.warn { color: #FF5050; }
+  .stat-value.ok { color: #30CC30; }
+  .instructions {
+    margin-top: 12px;
+    font-size: 10px;
+    color: #556677;
+    line-height: 1.6;
+    padding: 8px;
+    background: #0f1425;
+    border-radius: 4px;
+  }
+  .instructions kbd {
+    background: #1a2040;
+    border: 1px solid #334455;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: #c0c8d8;
+  }
+</style>
+</head>
+<body>
+
+<h1>Harlequin Duck &mdash; Whitewater Navigation</h1>
+<p class="subtitle">Histrionicus histrionicus &mdash; Navigate the rapids to reach the food source</p>
+
+<div class="main-container">
+  <div class="sim-panel">
+    <div class="panel-title">Mountain Stream &mdash; Class III Rapids</div>
+    <canvas id="simCanvas" width="780" height="550"></canvas>
+    <div class="controls">
+      <button class="ctrl-btn" onclick="resetSim()">RESET</button>
+      <span style="color:#556677;font-size:10px;padding-top:8px">
+        Arrow keys to swim. Reach the yellow food source downstream.
+      </span>
+    </div>
+  </div>
+
+  <div class="data-panel">
+    <div class="panel-title">Duck Status</div>
+    <div class="stat-row">
+      <span class="stat-label">Velocity</span>
+      <span id="vel-val" class="stat-value">0.0 m/s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Turbulence</span>
+      <span id="turb-val" class="stat-value">Low</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Energy</span>
+      <span id="energy-val" class="stat-value ok">100%</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Distance to Food</span>
+      <span id="dist-val" class="stat-value highlight">--</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Current Speed</span>
+      <span id="current-val" class="stat-value">-- m/s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Dives</span>
+      <span id="dive-val" class="stat-value">0</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Food Found</span>
+      <span id="food-val" class="stat-value">0 / 3</span>
+    </div>
+
+    <div class="panel-title" style="margin-top: 15px;">Info</div>
+    <div class="instructions">
+      <kbd>&uarr;</kbd> Swim upstream (against current)<br>
+      <kbd>&darr;</kbd> Swim downstream (with current)<br>
+      <kbd>&larr;</kbd> <kbd>&rarr;</kbd> Swim laterally<br>
+      <kbd>D</kbd> Dive (avoid turbulence, find food)<br>
+      <br>
+      <strong>About:</strong> Harlequin Ducks are one of the only
+      ducks that live in whitewater rapids year-round. They walk
+      along the streambed, feeding on aquatic insects, in currents
+      that would sweep other waterfowl away. Their compact body and
+      strong feet are adapted for this extreme habitat.<br>
+      <br>
+      <em>The stream is faster than you. Use eddies behind rocks.</em>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('simCanvas');
+const ctx = canvas.getContext('2d');
+
+const W = canvas.width;
+const H = canvas.height;
+
+// Stream physics
+const BASE_CURRENT = 2.0;     // m/s base stream velocity
+const DUCK_SWIM_SPEED = 1.5;  // m/s duck swimming force
+const DUCK_DIVE_SPEED = 0.8;  // m/s when diving (slower but immune to surface turbulence)
+const DRAG = 0.95;
+const ENERGY_DRAIN = 0.03;    // per second when swimming
+const ENERGY_REGEN = 0.01;    // per second when resting in eddy
+
+// World (scrolling downstream)
+let worldY = 0;
+
+// Rocks (obstacles that create eddies)
+let rocks = [];
+let foods = [];
+let duck = {};
+let keys = {};
+let foodCount = 0;
+let diveCount = 0;
+
+function generateRocks() {
+  rocks = [];
+  for (let i = 0; i < 25; i++) {
+    rocks.push({
+      x: 80 + Math.random() * (W - 160),
+      y: i * 180 + 100 + Math.random() * 80,
+      r: 15 + Math.random() * 25,
+      type: Math.random() < 0.3 ? 'boulder' : 'rock'
+    });
+  }
+}
+
+function generateFoods() {
+  foods = [];
+  // Place 3 food sources at increasing distances downstream
+  for (let i = 0; i < 3; i++) {
+    foods.push({
+      x: 100 + Math.random() * (W - 200),
+      y: 600 + i * 1200 + Math.random() * 400,
+      collected: false,
+      type: ['caddisfly', 'stonefly', 'mayfly'][i]
+    });
+  }
+}
+
+function resetSim() {
+  worldY = 0;
+  foodCount = 0;
+  diveCount = 0;
+  duck = {
+    x: W / 2,
+    y: 100,
+    vx: 0,
+    vy: 0,
+    energy: 100,
+    diving: false,
+    alive: true
+  };
+  generateRocks();
+  generateFoods();
+}
+
+document.addEventListener('keydown', e => { keys[e.key] = true; e.preventDefault(); });
+document.addEventListener('keyup', e => { keys[e.key] = false; });
+
+function getStreamVelocity(x, y) {
+  // Base current (flows downward = positive Y)
+  let vx = 0;
+  let vy = BASE_CURRENT;
+
+  // Stream is faster in center, slower at edges
+  const centerDist = Math.abs(x - W / 2) / (W / 2);
+  vy *= (1.0 - centerDist * 0.4);
+
+  // Add turbulence from rocks
+  for (const rock of rocks) {
+    const screenRockY = rock.y - worldY;
+    const dx = x - rock.x;
+    const dy = y - (rock.y - worldY);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const influence = rock.r * 3;
+
+    if (dist < influence && dist > rock.r) {
+      // Deflection around rock
+      const strength = (1 - dist / influence) * 2.0;
+      const angle = Math.atan2(dy, dx);
+      vx += Math.cos(angle + Math.PI / 2) * strength;
+      vy -= strength * 0.3;  // Eddy behind rock (reduced velocity)
+    }
+  }
+
+  // Channel narrowing adds speed
+  const bankL = 30 + 15 * Math.sin((y + worldY) * 0.005);
+  const bankR = W - 30 - 15 * Math.sin((y + worldY) * 0.005 + 2);
+  const channelW = bankR - bankL;
+  const narrowFactor = 700 / channelW;
+  vy *= Math.min(2.0, narrowFactor);
+
+  return { vx, vy };
+}
+
+function getTurbulence(x, y) {
+  let turb = 0;
+  for (const rock of rocks) {
+    const dx = x - rock.x;
+    const dy = y - (rock.y - worldY);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < rock.r * 4) {
+      turb += (1 - dist / (rock.r * 4)) * 0.5;
+    }
+  }
+  return Math.min(1.0, turb);
+}
+
+function update(dt) {
+  if (!duck.alive) return;
+
+  // Diving
+  if (keys['d'] || keys['D']) {
+    if (!duck.diving && duck.energy > 10) {
+      duck.diving = true;
+      diveCount++;
+    }
+  } else {
+    duck.diving = false;
+  }
+
+  // Swimming forces
+  const swimSpeed = duck.diving ? DUCK_DIVE_SPEED : DUCK_SWIM_SPEED;
+  let swimX = 0, swimY = 0;
+  let swimming = false;
+
+  if (keys['ArrowUp']) { swimY = -swimSpeed; swimming = true; }
+  if (keys['ArrowDown']) { swimY = swimSpeed * 0.5; swimming = true; }
+  if (keys['ArrowLeft']) { swimX = -swimSpeed; swimming = true; }
+  if (keys['ArrowRight']) { swimX = swimSpeed; swimming = true; }
+
+  // Stream current at duck position
+  const stream = getStreamVelocity(duck.x, duck.y);
+  const turb = duck.diving ? getTurbulence(duck.x, duck.y) * 0.2 : getTurbulence(duck.x, duck.y);
+
+  // Apply forces
+  const currentScale = duck.diving ? 0.3 : 1.0;  // Diving reduces current effect
+  duck.vx += (swimX + stream.vx * currentScale) * dt * 3;
+  duck.vy += (swimY + stream.vy * currentScale) * dt * 3;
+
+  // Turbulence (random force)
+  if (!duck.diving) {
+    duck.vx += (Math.random() - 0.5) * turb * 2 * dt;
+    duck.vy += (Math.random() - 0.5) * turb * 1 * dt;
+  }
+
+  // Drag
+  duck.vx *= DRAG;
+  duck.vy *= DRAG;
+
+  // Position update
+  duck.x += duck.vx * dt * 60;
+  duck.y += duck.vy * dt * 60;
+
+  // Energy
+  if (swimming) {
+    duck.energy -= ENERGY_DRAIN * dt * 60 * (duck.diving ? 1.5 : 1.0);
+  } else {
+    // Resting — regen if in eddy (low current)
+    if (Math.abs(stream.vy) < BASE_CURRENT * 0.5) {
+      duck.energy = Math.min(100, duck.energy + ENERGY_REGEN * dt * 60);
+    }
+  }
+
+  if (duck.energy <= 0) {
+    duck.energy = 0;
+    // Exhausted — carried by current (can still drift to eddies)
+  }
+
+  // Banks collision
+  const bankL = 30 + 15 * Math.sin((duck.y + worldY) * 0.005);
+  const bankR = W - 30 - 15 * Math.sin((duck.y + worldY) * 0.005 + 2);
+  if (duck.x < bankL + 8) { duck.x = bankL + 8; duck.vx = 0.5; }
+  if (duck.x > bankR - 8) { duck.x = bankR - 8; duck.vx = -0.5; }
+
+  // Rock collision
+  for (const rock of rocks) {
+    const dx = duck.x - rock.x;
+    const dy = duck.y - (rock.y - worldY);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < rock.r + 6) {
+      // Push away from rock
+      const angle = Math.atan2(dy, dx);
+      duck.x = rock.x + Math.cos(angle) * (rock.r + 8);
+      duck.y = (rock.y - worldY) + Math.sin(angle) * (rock.r + 8);
+      duck.vx = Math.cos(angle) * 0.5;
+      duck.vy = Math.sin(angle) * 0.5;
+    }
+  }
+
+  // Food collection
+  for (const food of foods) {
+    if (food.collected) continue;
+    const dx = duck.x - food.x;
+    const dy = duck.y - (food.y - worldY);
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 20 && duck.diving) {
+      food.collected = true;
+      foodCount++;
+      duck.energy = Math.min(100, duck.energy + 30);  // Eating restores energy
+    }
+  }
+
+  // Scroll world to keep duck in view
+  if (duck.y > H * 0.6) {
+    const scroll = (duck.y - H * 0.6) * 0.1;
+    worldY += scroll;
+    duck.y -= scroll;
+  }
+  if (duck.y < H * 0.3) {
+    const scroll = (H * 0.3 - duck.y) * 0.1;
+    worldY -= scroll;
+    duck.y += scroll;
+  }
+
+  duck.y = Math.max(10, Math.min(H - 10, duck.y));
+}
+
+function draw() {
+  ctx.fillStyle = '#050810';
+  ctx.fillRect(0, 0, W, H);
+
+  // Stream background
+  const bankL = x => 30 + 15 * Math.sin((x + worldY) * 0.005);
+  const bankR = x => W - 30 - 15 * Math.sin((x + worldY) * 0.005 + 2);
+
+  // Draw water
+  for (let y = 0; y < H; y += 2) {
+    const bL = bankL(y);
+    const bR = bankR(y);
+    const stream = getStreamVelocity((bL + bR) / 2, y);
+    const speed = Math.sqrt(stream.vx * stream.vx + stream.vy * stream.vy);
+    const brightness = 0.08 + speed * 0.03;
+    ctx.fillStyle = `rgba(15, ${40 + speed * 15}, ${70 + speed * 20}, ${brightness + 0.3})`;
+    ctx.fillRect(bL, y, bR - bL, 2);
+  }
+
+  // Flow lines (animated)
+  ctx.strokeStyle = 'rgba(80, 150, 200, 0.12)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i < 20; i++) {
+    const startX = 100 + (i * 37) % (W - 200);
+    const startY = (i * 73 + worldY * 0.5) % H;
+    ctx.beginPath();
+    let px = startX, py = startY;
+    for (let s = 0; s < 15; s++) {
+      const sv = getStreamVelocity(px, py);
+      px += sv.vx * 3;
+      py += sv.vy * 3;
+      if (s === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+  }
+
+  // Banks
+  ctx.fillStyle = '#1a1510';
+  for (let y = 0; y < H; y += 2) {
+    ctx.fillRect(0, y, bankL(y), 2);
+    ctx.fillRect(bankR(y), y, W - bankR(y), 2);
+  }
+
+  // Bank edges
+  ctx.strokeStyle = '#3a3020';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let y = 0; y < H; y += 3) {
+    if (y === 0) { ctx.moveTo(bankL(y), y); } else { ctx.lineTo(bankL(y), y); }
+  }
+  ctx.stroke();
+  ctx.beginPath();
+  for (let y = 0; y < H; y += 3) {
+    if (y === 0) { ctx.moveTo(bankR(y), y); } else { ctx.lineTo(bankR(y), y); }
+  }
+  ctx.stroke();
+
+  // Rocks
+  for (const rock of rocks) {
+    const ry = rock.y - worldY;
+    if (ry < -50 || ry > H + 50) continue;
+
+    ctx.fillStyle = rock.type === 'boulder' ? '#2a2820' : '#1e1c18';
+    ctx.beginPath();
+    ctx.ellipse(rock.x, ry, rock.r, rock.r * 0.8, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#3a3830';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Foam behind rock
+    ctx.fillStyle = 'rgba(180, 200, 220, 0.08)';
+    ctx.beginPath();
+    ctx.ellipse(rock.x, ry + rock.r * 1.5, rock.r * 0.8, rock.r * 1.2, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Food sources
+  for (const food of foods) {
+    if (food.collected) continue;
+    const fy = food.y - worldY;
+    if (fy < -30 || fy > H + 30) continue;
+
+    ctx.fillStyle = '#CCAA30';
+    ctx.beginPath();
+    ctx.arc(food.x, fy, 6, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = '#FFDD50';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.fillStyle = '#CCAA30';
+    ctx.font = '8px "Courier New"';
+    ctx.textAlign = 'center';
+    ctx.fillText(food.type, food.x, fy - 10);
+    ctx.textAlign = 'left';
+  }
+
+  // Duck
+  ctx.save();
+  ctx.translate(duck.x, duck.y);
+
+  if (duck.diving) {
+    // Diving — show as translucent circle below surface
+    ctx.globalAlpha = 0.5;
+    ctx.fillStyle = '#3050A0';
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 8, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1.0;
+  } else {
+    // Surface — Harlequin duck colors
+    // Body (slate blue)
+    ctx.fillStyle = '#3050A0';
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 8, 6, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // White crescent (ear patch)
+    ctx.fillStyle = '#DDDDCC';
+    ctx.beginPath();
+    ctx.arc(-3, -3, 3, 0, Math.PI, true);
+    ctx.fill();
+
+    // Russet flank
+    ctx.fillStyle = '#A05030';
+    ctx.beginPath();
+    ctx.ellipse(3, 2, 3, 2, 0.3, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Eye
+    ctx.fillStyle = '#FF8800';
+    ctx.beginPath();
+    ctx.arc(-4, -2, 1, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // Energy bar
+  const eBarX = 15, eBarY = H - 25, eBarW = 100, eBarH = 8;
+  ctx.strokeStyle = '#334455';
+  ctx.strokeRect(eBarX, eBarY, eBarW, eBarH);
+  const eCol = duck.energy > 50 ? '#30AA50' : duck.energy > 20 ? '#CCAA30' : '#FF4040';
+  ctx.fillStyle = eCol;
+  ctx.fillRect(eBarX, eBarY, eBarW * duck.energy / 100, eBarH);
+  ctx.fillStyle = '#556677';
+  ctx.font = '9px "Courier New"';
+  ctx.fillText('Energy: ' + Math.round(duck.energy) + '%', eBarX, eBarY - 4);
+
+  // Food counter
+  ctx.fillStyle = '#CCAA30';
+  ctx.font = '11px "Courier New"';
+  ctx.fillText('Food: ' + foodCount + ' / 3', W - 100, H - 15);
+
+  if (duck.diving) {
+    ctx.fillStyle = '#2080AA';
+    ctx.font = '10px "Courier New"';
+    ctx.fillText('DIVING', duck.x - 15, duck.y - 15);
+  }
+
+  // Update panel
+  const sv = getStreamVelocity(duck.x, duck.y);
+  const vel = Math.sqrt(duck.vx * duck.vx + duck.vy * duck.vy);
+  const currentSpd = Math.sqrt(sv.vx * sv.vx + sv.vy * sv.vy);
+  const turb = getTurbulence(duck.x, duck.y);
+
+  document.getElementById('vel-val').textContent = vel.toFixed(1) + ' m/s';
+  document.getElementById('current-val').textContent = currentSpd.toFixed(1) + ' m/s';
+
+  const turbEl = document.getElementById('turb-val');
+  if (turb > 0.6) { turbEl.textContent = 'HIGH'; turbEl.className = 'stat-value warn'; }
+  else if (turb > 0.3) { turbEl.textContent = 'Medium'; turbEl.className = 'stat-value highlight'; }
+  else { turbEl.textContent = 'Low'; turbEl.className = 'stat-value ok'; }
+
+  const energyEl = document.getElementById('energy-val');
+  energyEl.textContent = Math.round(duck.energy) + '%';
+  energyEl.className = 'stat-value ' + (duck.energy > 50 ? 'ok' : duck.energy > 20 ? 'highlight' : 'warn');
+
+  // Distance to nearest uncollected food
+  let minDist = Infinity;
+  for (const food of foods) {
+    if (food.collected) continue;
+    const d = Math.sqrt((duck.x - food.x) ** 2 + (duck.y - (food.y - worldY)) ** 2);
+    minDist = Math.min(minDist, d);
+  }
+  document.getElementById('dist-val').textContent = minDist < Infinity ?
+    Math.round(minDist) + ' px' : 'All found!';
+
+  document.getElementById('dive-val').textContent = diveCount;
+  document.getElementById('food-val').textContent = foodCount + ' / 3';
+}
+
+let lastTime = 0;
+function animate(timestamp) {
+  const dt = lastTime ? Math.min((timestamp - lastTime) / 1000, 0.05) : 0;
+  lastTime = timestamp;
+  update(dt);
+  draw();
+  requestAnimationFrame(animate);
+}
+
+resetSim();
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>

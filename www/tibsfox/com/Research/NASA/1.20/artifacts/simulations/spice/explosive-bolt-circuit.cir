@@ -1,0 +1,184 @@
+* Explosive Bolt Firing Circuit — Mercury Capsule Hatch System
+* =========================================================================
+* NASA Mission Series v1.20
+*
+* Models the explosive bolt firing circuit for the Mercury capsule
+* side hatch. The hatch was secured by a ring of 70 Mild Detonating
+* Fuse (MDF) bolts — essentially a linear shaped charge that cuts
+* through the bolt shank when the detonation wave passes.
+*
+* The system had two activation paths:
+*   1. Electrical: A firing current heats a bridgewire initiator,
+*      which ignites the MDF. This was the nominal recovery method.
+*   2. Manual: The astronaut strikes a plunger (T-handle) that
+*      mechanically fires a percussion cap, initiating the MDF.
+*      Requires ~100N of force — leaves distinctive palm bruise.
+*
+* This simulation models the ELECTRICAL path and investigates
+* how fault conditions (stray current, salt water leakage) could
+* have caused premature firing.
+*
+* Circuit description:
+*   1. 28V spacecraft bus → safety interlock (normally open relay)
+*   2. Relay closes on command → current flows to bridgewire
+*   3. Bridgewire (1Ω nichrome) heats to ignition temperature
+*   4. At ~1A for >10ms, bridgewire reaches ~300°C — MDF ignites
+*   5. Detonation wave propagates around ring — all 70 bolts sever
+*
+* Fault analysis:
+*   A. NOMINAL: Relay closed, full 28V, clean ignition (~20ms)
+*   B. STRAY CURRENT: Salt water leakage creates parallel path
+*      bypassing the safety relay. If leakage resistance is low
+*      enough, bridgewire reaches ignition threshold.
+*   C. STATIC DISCHARGE: Accumulated charge on connector fires
+*      the initiator without relay closure.
+*
+* Run: ngspice -b explosive-bolt-circuit.cir
+
+*--------------------------------------------------------------
+* POWER SOURCE — 28V SPACECRAFT BUS
+*--------------------------------------------------------------
+V_bus  bus_28v  0  DC 28
+
+*--------------------------------------------------------------
+* SAFETY INTERLOCK RELAY
+*--------------------------------------------------------------
+* Normally open relay — closes only on astronaut command
+* Modeled as a switch with control voltage
+*
+* Nominal operation: relay closes at t=5ms (simulating manual command)
+* Fault condition: relay stays open (no command given)
+
+V_relay_ctrl  relay_ctrl  0  PULSE(0 5 5m 0.1m 0.1m 50m 100m)
+
+* Relay switch (voltage-controlled switch)
+* ON resistance: 0.1Ω, OFF resistance: 10MΩ
+S_relay  bus_28v  relay_out  relay_ctrl  0  SW_RELAY
+.model SW_RELAY SW(VT=2.5 VH=0.5 RON=0.1 ROFF=10Meg)
+
+*--------------------------------------------------------------
+* CURRENT LIMITER
+*--------------------------------------------------------------
+* Resistor limits peak current to protect bus
+R_limit  relay_out  bridge_in  10
+
+*--------------------------------------------------------------
+* BRIDGEWIRE INITIATOR
+*--------------------------------------------------------------
+* Nichrome bridgewire: 1Ω, embedded in primary explosive charge
+* At 1A continuous, heats to ignition temperature in ~10-20ms
+* Thermal model: simplified as resistor with temperature readout
+R_bridge  bridge_in  bridge_gnd  1.0
+
+* Return path
+R_return  bridge_gnd  0  0.1
+
+*--------------------------------------------------------------
+* FAULT PATH: SALT WATER LEAKAGE
+*--------------------------------------------------------------
+* If seawater reaches the connector, it creates a low-impedance
+* path from the 28V bus directly to the bridgewire, bypassing
+* the safety relay.
+*
+* Seawater conductivity: ~5 S/m
+* Typical connector gap: ~5mm
+* Cross-section of water bridge: ~10mm^2
+* R_leak = L / (sigma × A) = 0.005 / (5 × 10e-5) = 100Ω
+* But variable — can range from 50Ω to 10KΩ depending on
+* how much water has penetrated.
+*
+* Modeled as a resistance that decreases over time (water intrusion)
+
+* Time-varying leakage resistance (decreasing as water penetrates)
+* Start at 100KΩ (dry), decrease to 200Ω over 10ms (water flooding)
+V_leak_env  leak_env  0  PWL(0 0  3m 0  5m 0.5  10m 1.0  20m 1.0)
+B_leak_r  bus_28v  bridge_in  I = V(bus_28v, bridge_in) / (100e3 * (1 - 0.998 * V(leak_env)) + 200 * V(leak_env))
+
+*--------------------------------------------------------------
+* STATIC DISCHARGE PATH
+*--------------------------------------------------------------
+* Modeled as a brief high-voltage pulse at the bridgewire
+* Triboelectric charging on the recovery helicopter + seawater
+* can generate several kV static discharge
+*
+* Brief 500V pulse, 1μs duration, at t=2ms (before relay closes)
+V_static  static_src  0  PULSE(0 500 2m 0.1u 0.1u 1u 100m)
+R_static  static_src  bridge_in  1k
+C_static  static_src  0  100p
+
+*--------------------------------------------------------------
+* MONITORING PROBES
+*--------------------------------------------------------------
+* Current through bridgewire (the critical measurement)
+V_sense  bridge_gnd  0  DC 0
+
+*--------------------------------------------------------------
+* SIMULATION
+*--------------------------------------------------------------
+* Run for 30ms to see:
+* - Static discharge at 2ms
+* - Salt water leakage building from 3-10ms
+* - Nominal relay closure at 5ms (overlapping with fault)
+.tran 0.01m 30m
+
+*--------------------------------------------------------------
+* OUTPUT
+*--------------------------------------------------------------
+.control
+  run
+
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  * Plot 1: Voltage at bridgewire
+  hardcopy bolt_voltage.png v(bridge_in) v(relay_out)
+  + title 'Explosive Bolt Circuit — Bridgewire Voltage'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 2: Current through bridgewire
+  hardcopy bolt_current.png @v_sense[current]
+  + title 'Bridgewire Current (ignition threshold ~1A for 10ms)'
+  + xlabel 'Time (s)' ylabel 'Current (A)'
+
+  * Plot 3: Relay control vs fault paths
+  hardcopy bolt_control.png v(relay_ctrl) v(leak_env)
+  + title 'Control Signals: Relay Command vs Salt Water Intrusion'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Measurements
+  echo ""
+  echo "=== EXPLOSIVE BOLT FIRING CIRCUIT ANALYSIS ==="
+  echo ""
+  echo "Mercury capsule MDF hatch bolt system"
+  echo "Bridgewire: 1 ohm nichrome, ignition at ~1A sustained >10ms"
+  echo ""
+
+  echo "--- Nominal Operation (relay closes at t=5ms) ---"
+  meas tran v_nominal AVG v(bridge_in) from=6m to=10m
+  meas tran i_nominal AVG @v_sense[current] from=6m to=10m
+
+  echo ""
+  echo "--- Fault Condition: Static Discharge (t=2ms) ---"
+  meas tran v_static MAX v(bridge_in) from=1.9m to=2.2m
+  meas tran i_static MAX @v_sense[current] from=1.9m to=2.2m
+
+  echo ""
+  echo "--- Fault Condition: Salt Water Leakage ---"
+  meas tran i_leak AVG @v_sense[current] from=8m to=12m
+
+  echo ""
+  echo "Interpretation:"
+  echo "  Nominal relay path: ~2.5A through 1-ohm bridgewire — clean ignition"
+  echo "  Static discharge: brief high-current pulse — may or may not fire"
+  echo "  Salt water leakage: gradual current buildup — could reach"
+  echo "  ignition threshold if leakage resistance drops below ~200 ohms"
+  echo ""
+  echo "The Mercury hatch firing circuit had NO safe-arm mechanism"
+  echo "beyond the relay. Any path that delivered >1A to the bridgewire"
+  echo "for >10ms could fire the MDF ring. Salt water intrusion after"
+  echo "splashdown provided exactly such a path."
+
+  quit
+.endc
+
+.end

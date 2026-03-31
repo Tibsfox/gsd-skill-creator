@@ -1,0 +1,211 @@
+* Squelch Circuit — Noise-Gated Audio Mute for Receiver Output
+* =========================================================================
+* NASA Mission Series v1.20
+*
+* Models the squelch circuit from the v1.20 progressive radio series.
+* When no signal is present, a receiver outputs broadband noise.
+* The squelch circuit detects this noise and mutes the audio output.
+* When a signal appears above the noise floor, the squelch opens
+* and audio passes through.
+*
+* Mercury context: Ground stations monitoring Liberty Bell 7 needed
+* squelch to avoid continuous noise between capsule passes. The
+* capsule was within communication range of each station for only
+* a few minutes during the suborbital flight. Without squelch,
+* operators would hear deafening static between signal windows.
+*
+* Circuit description:
+*   1. Audio input splits to two paths: audio and noise detection
+*   2. Noise detection: high-pass filter (>4 kHz) + rectifier + peak hold
+*   3. When only noise present: HF content high → detector voltage high
+*   4. When signal present: HF noise drops → detector voltage drops
+*   5. Comparator compares noise level to adjustable threshold
+*   6. Comparator controls analog switch in audio path
+*   7. High noise (no signal) → switch open → muted
+*   8. Low noise (signal present) → switch closed → audio passes
+*
+* Test: Audio input alternates between noise-only and signal+noise.
+* Squelch should mute during noise-only periods and pass audio
+* during signal periods.
+*
+* Run: ngspice -b squelch-circuit.cir
+
+*--------------------------------------------------------------
+* AUDIO INPUT — ALTERNATING SIGNAL AND NOISE
+*--------------------------------------------------------------
+* Simulates a receiver that alternately receives:
+*   - Noise only (no signal — capsule out of range)
+*   - Signal + noise (capsule in range, voice + carrier)
+*
+* 1 kHz test tone represents voice/signal (present 50% of time)
+* Broadband noise always present (receiver noise floor)
+
+* Test tone (1 kHz, representing demodulated voice)
+V_tone  tone_src  0  SIN(0 0.3 1k)
+
+* Signal envelope: ON from 5-15ms, OFF from 15-25ms, ON from 25-35ms
+V_sig_env  sig_env  0  PWL(0 0  4m 0  5m 1  15m 1  16m 0  24m 0  25m 1  40m 1)
+
+* Modulated signal = tone × envelope
+B_signal  signal_out  0  V = V(tone_src) * V(sig_env)
+
+* Broadband noise (always present)
+* Using a pseudo-noise source: multiple incommensurate oscillators
+V_n1  n1  0  SIN(0 0.05 4.7k)
+V_n2  n2  0  SIN(0 0.04 6.3k)
+V_n3  n3  0  SIN(0 0.03 8.1k)
+V_n4  n4  0  SIN(0 0.06 5.2k)
+V_n5  n5  0  SIN(0 0.05 9.7k)
+V_n6  n6  0  SIN(0 0.04 11.3k)
+V_n7  n7  0  SIN(0 0.03 7.4k)
+
+* Sum noise components
+R_n1  n1  noise_sum  10k
+R_n2  n2  noise_sum  10k
+R_n3  n3  noise_sum  10k
+R_n4  n4  noise_sum  10k
+R_n5  n5  noise_sum  10k
+R_n6  n6  noise_sum  10k
+R_n7  n7  noise_sum  10k
+R_nsum  noise_sum  0  1k
+
+* Combined audio input = signal + noise
+R_sig  signal_out  audio_in  1k
+R_noise  noise_sum  audio_in  1k
+R_in_term  audio_in  0  10k
+
+*--------------------------------------------------------------
+* AUDIO PATH — ANALOG SWITCH
+*--------------------------------------------------------------
+* CD4066 analog switch modeled as voltage-controlled switch
+* Control signal from comparator
+
+R_audio_in  audio_in  sw_in  10k
+
+* Analog switch (CD4066)
+S_audio  sw_in  audio_out  squelch_ctrl  0  SW_CD4066
+.model SW_CD4066 SW(VT=2.5 VH=0.2 RON=100 ROFF=100Meg)
+
+R_audio_out  audio_out  0  10k
+
+*--------------------------------------------------------------
+* NOISE DETECTION PATH
+*--------------------------------------------------------------
+* High-pass filter: only pass frequencies above ~4 kHz
+* This isolates the noise content from the signal content
+* (Voice/signal energy is concentrated below 3 kHz)
+
+C_hp  audio_in  hp_out  1n
+R_hp  hp_out  0  39k
+
+* Rectifier — peak detector
+* Diode charges capacitor to peak of noise signal
+D_rect  hp_out  detected  D_DETECT
+C_detect  detected  0  10n
+R_detect  detected  0  100k
+
+.model D_DETECT D(IS=2.52e-9 N=1.752 BV=100 RS=0.568)
+
+*--------------------------------------------------------------
+* COMPARATOR — LM393
+*--------------------------------------------------------------
+* Compares noise detector level to adjustable threshold
+* When noise > threshold: output LOW (mute)
+* When noise < threshold: output HIGH (unmute)
+*
+* Using a behavioral voltage source to model the comparator
+* with hysteresis
+
+* Threshold voltage (from potentiometer — set to mid-range)
+V_threshold  threshold  0  DC 0.025
+
+* Comparator with hysteresis
+* Output goes HIGH (5V) when noise < threshold (signal present)
+* Output goes LOW (0V) when noise > threshold (noise only)
+B_comp  comp_out  0  V = 5.0 * (1.0 / (1.0 + exp(100 * (V(detected) - V(threshold)))))
+
+* Hysteresis feedback
+R_hyst  comp_out  threshold  100k
+
+* Pull-up resistor (LM393 open-collector output emulation)
+R_pullup  comp_out  vcc  10k
+V_vcc  vcc  0  DC 5
+
+* Squelch control signal (buffered)
+R_ctrl  comp_out  squelch_ctrl  1k
+C_ctrl  squelch_ctrl  0  100n
+
+*--------------------------------------------------------------
+* REFERENCE — UNSQUELCHED OUTPUT
+*--------------------------------------------------------------
+* Same audio input, no switch — for comparison
+R_ref  audio_in  ref_out  10k
+R_ref_term  ref_out  0  10k
+
+*--------------------------------------------------------------
+* SIMULATION
+*--------------------------------------------------------------
+.tran 0.01m 40m
+
+*--------------------------------------------------------------
+* OUTPUT
+*--------------------------------------------------------------
+.control
+  run
+
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  * Plot 1: Input signal (signal + noise, with envelope)
+  hardcopy squelch_input.png v(audio_in) v(sig_env)
+  + title 'Squelch Input: Audio with Alternating Signal/Noise Periods'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 2: Squelched output vs unsquelched
+  hardcopy squelch_output.png v(audio_out) v(ref_out)
+  + title 'Squelch Output (gated) vs Reference (ungated)'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 3: Noise detector and control signals
+  hardcopy squelch_control.png v(detected) v(threshold) v(squelch_ctrl)
+  + title 'Squelch Control: Noise Detector, Threshold, and Gate Signal'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Measurements
+  echo ""
+  echo "=== SQUELCH CIRCUIT ANALYSIS ==="
+  echo ""
+  echo "Noise detection principle:"
+  echo "  High-pass filter isolates >4 kHz noise content"
+  echo "  When signal present: noise content DROPS (signal replaces noise)"
+  echo "  When no signal: noise content HIGH (broadband noise)"
+  echo ""
+
+  echo "--- Noise-only period (0-5ms) ---"
+  meas tran noise_det_high AVG v(detected) from=2m to=4m
+  meas tran ctrl_noise AVG v(squelch_ctrl) from=2m to=4m
+
+  echo ""
+  echo "--- Signal period (5-15ms) ---"
+  meas tran noise_det_low AVG v(detected) from=8m to=12m
+  meas tran ctrl_signal AVG v(squelch_ctrl) from=8m to=12m
+
+  echo ""
+  echo "--- Audio output comparison ---"
+  meas tran out_muted RMS v(audio_out) from=2m to=4m
+  meas tran out_active RMS v(audio_out) from=8m to=12m
+  meas tran ref_noise RMS v(ref_out) from=2m to=4m
+
+  echo ""
+  echo "Squelch action:"
+  echo "  Noise-only period: audio output should be near zero (muted)"
+  echo "  Signal period: audio output should pass the 1 kHz test tone"
+  echo "  Reference (no squelch): outputs everything including noise"
+  echo ""
+  echo "Mercury ground stations used this principle to maintain"
+  echo "operator sanity during the long gaps between capsule passes."
+
+  quit
+.endc
+
+.end

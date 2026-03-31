@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Enteroctopus dofleini — Giant Pacific Octopus | v1.20 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040608; --bio-mid: #081018;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --bell-copper: #B07030; --bell-dim: #583818;
+    --abyss-blue: #183050; --abyss-dim: #0C1828;
+    --octopus-red: #C04830; --octopus-dim: #602418;
+    --depth-teal: #206068; --space: #040508;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2028;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(192,72,48,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(32,96,104,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(192,72,48,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--abyss-dim) 55%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--bell-copper); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--bell-copper); }
+  em { color: var(--octopus-red); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; }
+  a:hover { color: #fff; }
+  blockquote { border-left: 3px solid var(--abyss-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(4,5,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .sources { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources h2 { margin-top: 0; }
+  .sources h3 { font-size: 1rem; color: var(--mercury-silver); margin-top: 1.5rem; }
+  .sources li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+  .nav-card { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--bell-copper); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.20 Mercury-Redstone 4</a>
+  <span class="sep">/</span>
+  Track 2: Organism Pairing
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.20</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 2</span>
+    </div>
+    <h1>Organism Pairing: <em>Enteroctopus dofleini</em></h1>
+    <p class="subtitle">Giant Pacific Octopus &mdash; The Intelligence of the Deep</p>
+    <div class="meta-row">
+      <span><span class="label">Family:</span> Enteroctopodidae</span>
+      <span><span class="label">Range:</span> Alaska to Northern California</span>
+      <span><span class="label">PNW Status:</span> Native &mdash; largest octopus on Earth</span>
+      <span><span class="label">Mission:</span> 1.20 &mdash; Mercury-Redstone 4, July 21, 1961</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>The Shape-Shifter</h2>
+
+    <p><em>Enteroctopus dofleini</em> is the largest octopus on Earth by every measure that matters: arm span, body mass, and the sheer improbability of an invertebrate that can grow to the size of a human being and outthink most vertebrates in the water column. Adults regularly reach arm spans of <strong>4.3 meters</strong> &mdash; over fourteen feet from tip to tip &mdash; and body masses of 15 to 30 kilograms. Exceptional specimens have been documented at arm spans exceeding <strong>6 meters</strong> and weights exceeding 50 kilograms. The body is soft &mdash; no skeleton, no shell, no rigid structure of any kind. The entire animal, excluding its beak, can compress and deform to pass through any opening larger than the beak. A 30-kilogram octopus can fit through a hole the size of a lemon.</p>
+
+    <p>The skin is the most expressive organ in the animal kingdom. <em>Enteroctopus dofleini</em> possesses approximately <strong>280 chromatophores per square millimeter</strong> of skin surface &mdash; tiny pigment-containing organs, each under direct neural control. By selectively activating different chromatophores, the octopus can change its color, pattern, and apparent texture in approximately <strong>200 milliseconds</strong> &mdash; less than the time it takes a human to blink.</p>
+
+    <p>Beneath the chromatophores are <strong>iridophores</strong> &mdash; cells producing structural color through thin-film interference &mdash; and beneath those are <strong>leucophores</strong> &mdash; broadband reflectors producing a white base layer. The three layers operate in concert to produce a camouflage system that is, by any engineering standard, the most sophisticated adaptive surface on the planet.</p>
+
+    <p>The skin also has <strong>papillae</strong> &mdash; small muscular projections that can be erected or flattened, changing the physical texture of the skin surface. An octopus resting on a coral-encrusted rock does not merely look like the rock in color. It looks like the rock in shape. The skin is a lie told with perfect fidelity.</p>
+
+    <p>What you see is not necessarily what is there. Liberty Bell 7 presented a similar gap. What the public saw was an astronaut whose capsule sank &mdash; the appearance of failure. What actually existed was a man who flew a perfect mission and survived a mechanical malfunction. The octopus and the hatch controversy share a structure: the truth is hidden by what the surface presents.</p>
+
+    <hr>
+
+    <h2>The Mind</h2>
+
+    <p><em>Enteroctopus dofleini</em> has approximately <strong>500 million neurons</strong>. A honeybee has approximately 1 million. A mouse has approximately 75 million. A dog has approximately 530 million. The Giant Pacific Octopus has a neural count comparable to a dog&rsquo;s, packed into a body plan that diverged from the vertebrate lineage more than 500 million years ago. Whatever intelligence the octopus possesses was evolved independently &mdash; an alternative solution to the problem of cognition, built from different hardware.</p>
+
+    <p>The brain proper contains approximately <strong>170 million neurons</strong>. But two-thirds of the octopus&rsquo;s neurons are not in the brain. They are in the arms. Each of the eight arms contains a semi-autonomous neural cluster &mdash; approximately <strong>40 million neurons per arm</strong> &mdash; that processes tactile and chemical information, generates local motor commands, and can execute complex behaviors without direct instruction from the central brain. The arms are partially autonomous agents that negotiate with the central brain.</p>
+
+    <p>When a Giant Pacific Octopus opens a jar &mdash; and they do, reliably, in laboratory settings &mdash; the brain initiates the task. The arms solve the mechanics locally. The central brain monitors progress and adjusts strategy. The arms execute tactics. It is a <strong>command-and-control architecture with distributed tactical autonomy</strong>.</p>
+
+    <p>This architecture resonates with the Mercury mission control structure. The Mercury Control Center coordinated. The ground stations &mdash; distributed around the world at Muchea, Kano, Zanzibar, Canton Island, Guaymas &mdash; each had partial autonomy. The pilot in the capsule had his own local autonomy. Three levels of distributed intelligence: central control, ground stations, pilot. The octopus operates on the same principle: central brain, arm ganglia, individual suckers.</p>
+
+    <p>Play behavior has been documented. At the <strong>Seattle Aquarium</strong>, individual Giant Pacific Octopuses have been observed repeatedly jetting water at floating objects &mdash; pushing pill bottles back and forth in a pattern with no apparent survival function. An invertebrate that plays. An animal with no backbone, no warm blood, no social group &mdash; pushing bottles around for fun.</p>
+
+    <hr>
+
+    <h2>The Den</h2>
+
+    <p><em>Enteroctopus dofleini</em> inhabits rocky reefs, boulder fields, kelp forests, and artificial structures in the cold waters of the northeastern Pacific. The range extends from Alaska&rsquo;s Aleutian Islands south through British Columbia, Washington, Oregon, and into northern California, with the densest populations in <strong>Puget Sound</strong>, the San Juan Islands, the Strait of Juan de Fuca, and British Columbia&rsquo;s Gulf Islands.</p>
+
+    <p>The octopus lives in a den &mdash; a sheltered cavity among rocks. From the den, the octopus makes foraging excursions, typically at night, hunting crabs, shrimp, clams, mussels, and fish. The discarded shells accumulate outside the den entrance, forming a <strong>midden</strong> that divers use to locate dens.</p>
+
+    <p>The den is at the depth where Liberty Bell 7 rested &mdash; not literally (the octopus typically inhabits waters to approximately 200 meters, while Liberty Bell 7 sank to 4,900 meters), but in the sense that matters: it is a creature of the deep, living in cold, dark, pressurized spaces where humans cannot go without technology. When Curt Newport&rsquo;s ROV photographed the capsule in 1999, the images showed a spacecraft colonized by the deep &mdash; encrusted, corroded, incorporated into the ecology of the abyss. The capsule had not merely sunk. It had been absorbed. The ocean does not store things. It digests them.</p>
+
+    <hr>
+
+    <h2>The Final Act</h2>
+
+    <p>The Giant Pacific Octopus lives <strong>three to five years</strong>. This is catastrophically short. The end is <strong>semelparous reproduction</strong>. The octopus reproduces once and dies.</p>
+
+    <p>The female lays between 20,000 and 100,000 eggs in her den. She then guards them constantly &mdash; aerating them, cleaning them, defending the den entrance. <strong>She does not eat.</strong> For six to seven months, the female guards her eggs without feeding. She metabolizes her own body tissues. Her muscles atrophy. Her chromatophores dim. She becomes a pale, emaciated shadow of the animal she was.</p>
+
+    <p>When the eggs hatch, the paralarvae swim out of the den. The female dies. Total commitment. Everything invested in a single act. No reserves, no second chances, no fallback position.</p>
+
+    <p>Grissom was committed. After Liberty Bell 7 sank, after the controversy, after the press questioned his account &mdash; he did not step back. He flew again. He commanded Gemini 3. He was selected to command Apollo 1. He stayed in the capsule. The commitment was irreversible not because biology demanded it but because character demanded it. Grissom was going to fly to the Moon or die trying. He died trying.</p>
+
+    <hr>
+
+    <h2>Coast Salish and Makah Significance</h2>
+
+    <p>The Giant Pacific Octopus holds a specific place in the traditional ecological knowledge of Pacific Northwest coastal Indigenous peoples, particularly the <strong>Makah, S&rsquo;Klallam, and Coast Salish nations</strong>. The animal was harvested from rocky intertidal and subtidal habitats and prepared as food &mdash; typically boiled, dried, or smoked.</p>
+
+    <p>The octopus&rsquo;s intelligence, camouflage, and shape-shifting behavior placed it in a specific category within Coast Salish cosmology: beings that cross boundaries between forms. An animal that can change its color, texture, and apparent shape is an animal that does not respect the boundaries between categories. In a worldview where transformation is a fundamental property of the natural world, the octopus is a creature that enacts transformation as a daily behavior.</p>
+
+    <p>The <strong>Makah</strong>, whose traditional territory includes Neah Bay and the outermost reaches of the Olympic Peninsula, harvested Giant Pacific Octopuses from rocky reefs exposed at extreme low tides. The harvest required knowledge of specific reef locations, tidal timing, and denning behavior &mdash; knowledge transmitted within families across generations.</p>
+
+    <hr>
+
+    <h2>Six Resonance Axes</h2>
+
+    <h3>1. Ocean Floor Dweller</h3>
+    <p>The Giant Pacific Octopus is an animal of the deep. Liberty Bell 7 sank to 4,900 meters and rested on the ocean floor for 38 years, becoming part of the deep-ocean environment. Both are residents of the deep. Both occupy spaces that the surface world cannot see without going down.</p>
+
+    <h3>2. Camouflage and Dual Appearance</h3>
+    <p>The octopus presents any appearance it chooses. The Grissom hatch controversy was the same structure: the surface narrative was not the reality underneath. Both involve a gap between what the surface shows and what actually exists.</p>
+
+    <h3>3. Intelligence Under Pressure</h3>
+    <p>The octopus solves problems in an environment of constant threat. Grissom solved problems under pressure throughout his career: 100 combat missions, test pilot evaluations, and the moments after the hatch blew when he was in the Atlantic with a flooding suit. Intelligence under pressure is the defining characteristic of both.</p>
+
+    <h3>4. Short Life, Total Commitment</h3>
+    <p>The octopus lives three to five years and reproduces once, investing everything. Grissom&rsquo;s commitment to spaceflight was total. Both commitments were irreversible. Both ended in death. Both produced something that survived: the octopus&rsquo;s paralarvae, Grissom&rsquo;s engineering legacy and the safety reforms that the Apollo 1 fire forced.</p>
+
+    <h3>5. Distributed Intelligence</h3>
+    <p>The octopus&rsquo;s neural architecture distributes two-thirds of its neurons into the arms. The Mercury mission control architecture distributed control across a global network of ground stations. Both systems solve the same problem: managing complex tasks across distance with communication delays.</p>
+
+    <h3>6. Recovery from the Deep</h3>
+    <p>The octopus lives in dens &mdash; dark cavities concealed from the surface &mdash; and emerges to hunt and explore. Liberty Bell 7 sat in its own den at 4,900 meters for 38 years until Newport&rsquo;s expedition brought it back into the light. Both involve something emerging from the deep.</p>
+
+    <hr>
+
+    <div class="sources">
+      <h2>Sources</h2>
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Anderson, Roland C. &ldquo;The Giant Pacific Octopus, Enteroctopus dofleini.&rdquo;</strong> Festivus, Vol. 31, 1999.</li>
+        <li><strong>Mather, Jennifer A.; Anderson, Roland C.; and Wood, James B. &ldquo;Octopus: The Ocean&rsquo;s Intelligent Invertebrate.&rdquo;</strong> Timber Press, Portland, Oregon, 2010.</li>
+        <li><strong>Scheel, David; and Anderson, Roland C. &ldquo;Variability in the Diet Specialization of Enteroctopus dofleini.&rdquo;</strong> American Malacological Bulletin, Vol. 30, No. 2, 2012.</li>
+      </ul>
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Mather, Jennifer A. &ldquo;Cephalopod Consciousness: Behavioural Evidence.&rdquo;</strong> Consciousness and Cognition, Vol. 17, No. 1, 2008.</li>
+        <li><strong>Godfrey-Smith, Peter. &ldquo;Other Minds: The Octopus, the Sea, and the Deep Origins of Consciousness.&rdquo;</strong> Farrar, Straus and Giroux, 2016.</li>
+        <li><strong>Burghardt, Gordon M. &ldquo;The Genesis of Animal Play.&rdquo;</strong> MIT Press, 2005.</li>
+        <li><strong>Hochner, Binyamin. &ldquo;An Embodied View of Octopus Neurobiology.&rdquo;</strong> Current Biology, Vol. 22, No. 20, 2012.</li>
+        <li><strong>Hanlon, Roger T.; and Messenger, John B. &ldquo;Cephalopod Behaviour.&rdquo;</strong> Cambridge University Press, 2nd edition, 2018.</li>
+        <li><strong>Cosgrove, James A.; and McDaniel, Neil G. &ldquo;Super Suckers.&rdquo;</strong> Harbour Publishing, Madeira Park, BC, 2009.</li>
+        <li><strong>Turner, Nancy J. &ldquo;The Earth&rsquo;s Blanket.&rdquo;</strong> Douglas &amp; McIntyre, Vancouver, 2005.</li>
+        <li><strong>Renker, Ann M. &ldquo;The Makah Tribe: People of the Sea and the Forest.&rdquo;</strong> Makah Cultural and Research Center, Neah Bay, Washington, 2012.</li>
+      </ul>
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>GBIF &mdash; Enteroctopus dofleini occurrence records.</strong> 3,200+ confirmed records from Alaska to Northern California.</li>
+        <li><strong>iNaturalist &mdash; E. dofleini observations, PNW region.</strong> 8,500+ verified observations.</li>
+        <li><strong>Washington Department of Fish and Wildlife &mdash; Marine Survey Data.</strong></li>
+        <li><strong>NOAA NMFS &mdash; Cephalopod Fisheries Data, NE Pacific.</strong></li>
+        <li><strong>Seattle Aquarium &mdash; Giant Pacific Octopus Behavioral Records.</strong></li>
+        <li><strong>NatureServe &mdash; E. dofleini conservation status.</strong></li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="research.html">&larr; Track 1a: Research</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">v1.20 Overview</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="mathematics.html">Track 3: Mathematics &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.20 Track 2: Organism Pairing &mdash; <em>Enteroctopus dofleini</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>
