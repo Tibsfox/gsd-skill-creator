@@ -1,20 +1,18 @@
 {
-  "updated": "2026-03-31T15:00:00Z",
-  "source": "sweep-v1.0.8",
+  "updated": "2026-03-31T21:00:00Z",
+  "source": "sweep-v1.0.14",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:24:00Z",
     "phase": "prelaunch",
-    "status": "Launch countdown — T-31h — all systems GO",
+    "status": "Launch countdown — T-25h — all systems GO",
     "go_probability": 80
   },
   "weather": {
-    "kpae": {"temp_c": 9.4, "dewpoint_c": -2.8, "wind_dir": 0, "wind_kmh": 0, "humidity": 45, "pressure_hpa": 1011.0, "conditions": "Clear", "spread_c": 12.2},
-    "ksea": {"temp_c": 8.3, "dewpoint_c": -1.7, "wind_dir": 0, "wind_kmh": 0, "humidity": 50, "pressure_hpa": 1010.6, "conditions": "SCT150 BKN180"},
-    "open_meteo": {"temp_c": 9.7, "dewpoint_c": 2.9, "wind_dir": 240, "wind_kmh": 2.9, "humidity": 63, "pressure_hpa": 1011.1, "conditions": "Overcast (WMO 3)"},
-    "nws": {"temp_c": 10, "dewpoint_c": null, "wind_dir": 140, "wind_kmh": 7.4, "humidity": null, "pressure_hpa": 1010.5, "conditions": "Clear"},
-    "kxmr": {"temp_c": 26.6, "dewpoint_c": 14.7, "wind_dir": 120, "wind_kmh": 20.4, "humidity": 64, "pressure_hpa": 1023.5, "conditions": "FEW190"}
+    "kpae": {"temp_c": 11.1, "dewpoint_c": -2.8, "wind_dir": 330, "wind_kmh": 5.6, "humidity": 33, "pressure_hpa": 1009.6, "visibility_m": 16093, "conditions": "Clear", "spread_c": 13.9},
+    "ksea": {"temp_c": 11.7, "dewpoint_c": -0.6, "wind_dir": 0, "wind_kmh": 0, "humidity": 35, "pressure_hpa": 1010.1, "conditions": "FEW130 SCT170 BKN200"},
+    "kxmr": {"temp_c": 26, "dewpoint_c": 15.1, "wind_dir": 100, "wind_kmh": 20.4, "humidity": 52, "pressure_hpa": 1021.8, "conditions": "Clear"}
   },
   "tides_everett": [
     {"time": "04:51", "height_m": 3.37, "type": "high"},
@@ -24,44 +22,28 @@
   ],
   "river": {
     "site": "Snohomish River near Monroe",
-    "flow_cfs": 10600,
-    "timestamp": "2026-03-31T11:15:00-07:00"
+    "flow_cfs": 10500,
+    "timestamp": "2026-03-31T13:15:00-07:00"
   },
   "space_weather": {
-    "kp_index": 2.0,
+    "kp_index": 0.67,
     "g_scale": "G0",
     "aurora_risk": "none"
   },
   "scoring": {
-    "sample_count": 4,
+    "sample_count": 10,
     "leaders": {
-      "temp_accuracy": "Open-Meteo leads (avg 0.3C across 4 samples — remarkably consistent)",
-      "wind_accuracy": "NWS leads (0 error 3/4 samples, slipped to 7.4 at 8am)",
-      "overall": "Open-Meteo best temp, NWS best wind. KSEA finally calm at 8am."
-    },
-    "trend": "Warming fast: 2.8C at 6am to 9.4C at 8am (+6.6C in 2h). Dewpoint dropping — very dry air."
+      "temp_accuracy": "Open-Meteo leads early (0.3C avg), KSEA improving in afternoon",
+      "wind_accuracy": "NWS best morning, KSEA best afternoon (both calm)",
+      "overall": "10 samples collected. Afternoon warming to 11.1C. Very dry air (spread 13.9C)."
+    }
   },
   "telemetry": null,
-  "pages_deployed": {
-    "live": "/Research/LIVE/",
-    "sol": "/Research/SOL/",
-    "muk": "/Research/MUK/",
-    "food": "/Research/MUK/food.html",
-    "whidbey": "/Research/MUK/whidbey.html",
-    "tracker": "/Research/NASA/artemis-ii/",
-    "crew": "/Research/NASA/artemis-ii/crew.html",
-    "vehicle": "/Research/NASA/artemis-ii/vehicle.html",
-    "science": "/Research/NASA/artemis-ii/science.html",
-    "math": "/Research/NASA/artemis-ii/math.html",
-    "timeline": "/Research/NASA/artemis-ii/timeline.html",
-    "dedication": "/Research/NASA/artemis-ii/dedication.html",
-    "watch": "/Research/NASA/artemis-ii/watch.html"
-  },
   "announcements": [
-    {"time": "2026-03-31T15:00:00Z", "text": "v1.0.8: T-31h. Warming fast (9.4C). Open-Meteo best temp. Whidbey Island guide, Sophie Germain dedication, Snohomish history, launch viewing guide deployed. Research index restored to original fox/orange theme."},
-    {"time": "2026-03-31T14:15:00Z", "text": "v1.0.7: SOL observatory, 5 research pages, responsive LOD, constellation upgrade."},
-    {"time": "2026-03-31T14:00:00Z", "text": "v1.0.6: NWS best temp (0.2C). KSC clear 25C. Food Heritage live."},
-    {"time": "2026-03-31T12:00:00Z", "text": "v1.0.5: 5am sweep. Sources converge on 3-4C."},
+    {"time": "2026-03-31T21:00:00Z", "text": "v1.0.14: T-25h 2pm. Peak 11.1C holding. Kp 0.67 very quiet. Pressure dropping. Radio guide expanded with 4 station profiles (C89.5, KEXP, KISW, KISM)."},
+    {"time": "2026-03-31T20:00:00Z", "text": "v1.0.13: T-26h 1pm. 11.1C peak. Variable wind. Kp dropped to 0.67."},
+    {"time": "2026-03-31T19:00:00Z", "text": "v1.0.12: Noon. Zulu timeclock. Paine Field + Salish Sea pages."},
+    {"time": "2026-03-31T15:00:00Z", "text": "v1.0.8: Warming fast 9.4C. Whidbey + Germain + history pages."},
     {"time": "2026-03-30T22:13:00Z", "text": "Launch countdown begins at KSC"}
   ]
 }
