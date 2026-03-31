@@ -146,6 +146,33 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   border-top:1px solid var(--border);
 }
 
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  .section { max-width: 1200px; }
+  /* Larger spec tables with more breathing room */
+  .spec-table { font-size: 0.9rem; }
+  .spec-table th { padding: 0.7rem 1.2rem; font-size: 0.72rem; }
+  .spec-table td { padding: 0.6rem 1.2rem; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .section { max-width: 1400px; }
+}
+
 /* === RESPONSIVE === */
 @media(max-width:768px) {
   .mission-header h1 { font-size:1.3rem; }
@@ -158,6 +185,11 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 @media(max-width:480px) {
   .engine-grid { grid-template-columns: 1fr 1fr; }
   .page-nav { flex-direction:column; gap:0.3rem; }
+  main { padding: 0.8rem; }
+  h1 { font-size: 1.3rem; }
+  .spec-table, .comp-table { font-size: 0.7rem; }
+  /* Horizontal scroll for wide tables on mobile */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 </style>
 </head>
@@ -221,7 +253,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     </div>
   </div>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">Integrated Vehicle Summary</th>
     </tr>
@@ -231,7 +263,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Payload to Trans-Lunar Injection</td><td><span class="value">27,000+ kg</span></td></tr>
     <tr><td class="label">Launch Pad</td><td><span class="value">LC-39B, Kennedy Space Center</span></td></tr>
     <tr><td class="label">Vehicle Designation</td><td><span class="value">SLS-2</span></td></tr>
-  </table>
+  </table></div>
 
   <div class="callout heritage">
     <strong>Heritage note:</strong> Saturn V stood 110.6 m and massed 2,970,000 kg.
@@ -254,7 +286,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     approximately 480 seconds.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">Core Stage Specifications</th>
     </tr>
@@ -267,7 +299,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Burn Duration</td><td><span class="value">~480 s</span></td></tr>
     <tr><td class="label">Stage Separation Altitude</td><td><span class="value">~185 km</span></td></tr>
     <tr><td class="label">Manufacturer</td><td><span class="value">Boeing (Michoud Assembly Facility)</span></td></tr>
-  </table>
+  </table></div>
 
   <h3>RS-25D Engines &mdash; Artemis II Serial Numbers</h3>
 
@@ -301,7 +333,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     </div>
   </div>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">RS-25D Engine Specifications</th>
     </tr>
@@ -316,7 +348,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Dry Mass</td><td><span class="value">~3,527 kg</span><span class="unit">(7,775 lb)</span></td></tr>
     <tr><td class="label">Heritage</td><td><span class="value silver">Space Shuttle Main Engine</span></td></tr>
     <tr><td class="label">Total Shuttle Flights</td><td><span class="value">135 missions (1981&ndash;2011)</span></td></tr>
-  </table>
+  </table></div>
 
   <div class="callout heritage">
     <strong>Flight heritage:</strong> The RS-25 is the only large liquid rocket engine
@@ -339,7 +371,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     total liftoff thrust. They are the largest human-rated solid rockets ever flown.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">5-Segment SRB Specifications (each)</th>
     </tr>
@@ -354,7 +386,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Separation Altitude</td><td><span class="value">~48 km</span><span class="unit">(~157,000 ft)</span></td></tr>
     <tr><td class="label">Segments</td><td><span class="value">5</span><span class="unit">(4-segment on Shuttle)</span></td></tr>
     <tr><td class="label">Manufacturer</td><td><span class="value">Northrop Grumman</span></td></tr>
-  </table>
+  </table></div>
 
   <div class="callout heritage">
     <strong>Shuttle comparison:</strong> The Shuttle SRBs used 4 segments. The SLS
@@ -378,7 +410,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     on Artemis II the ESM handles TLI from HEO.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">ICPS Specifications</th>
     </tr>
@@ -392,7 +424,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Target Orbit</td><td><span class="value">HEO: ~200 km x 70,000 km</span></td></tr>
     <tr><td class="label">Heritage</td><td><span class="value silver">Delta IV DCSS / Centaur lineage</span></td></tr>
     <tr><td class="label">Manufacturer</td><td><span class="value">United Launch Alliance</span></td></tr>
-  </table>
+  </table></div>
 
   <div class="callout heritage">
     <strong>Heritage note:</strong> The RL10 engine family has been flying since 1963
@@ -415,7 +447,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     355,056 individual parts spanning 77,150 distinct part types.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">Crew Module Specifications</th>
     </tr>
@@ -432,7 +464,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Glass Cockpit</td><td><span class="value">3 displays, Boeing 787 derived</span></td></tr>
     <tr><td class="label">Life Support</td><td><span class="value">21 days (nominal)</span></td></tr>
     <tr><td class="label">Manufacturer</td><td><span class="value">Lockheed Martin</span></td></tr>
-  </table>
+  </table></div>
 
   <div class="callout">
     <strong>Apollo comparison:</strong> The Apollo Command Module had a habitable volume
@@ -466,7 +498,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     ESM-2 is the second unit built; ESM-1 flew on Artemis I.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">ESM-2 Specifications</th>
     </tr>
@@ -484,7 +516,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Key Burns</td><td><span class="value">TLI (from HEO), mid-course corrections, return</span></td></tr>
     <tr><td class="label">Builder</td><td><span class="value">Airbus Defence and Space (Bremen, Germany)</span></td></tr>
     <tr><td class="label">Agency</td><td><span class="value silver">European Space Agency (ESA)</span></td></tr>
-  </table>
+  </table></div>
 
   <div class="callout heritage">
     <strong>Heritage note:</strong> The AJ10-190 engine was the Orbital Maneuvering
@@ -520,7 +552,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     &mdash; the fastest any crewed vehicle has traveled since Apollo 17 in 1972.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">AVCOAT Heat Shield</th>
     </tr>
@@ -531,7 +563,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Maximum Reentry Temperature</td><td><span class="value red">~2,760 &deg;C</span><span class="unit">(~5,000 &deg;F)</span></td></tr>
     <tr><td class="label">Reentry Velocity</td><td><span class="value red">~40,000 km/h</span><span class="unit">(Mach 32)</span></td></tr>
     <tr><td class="label">Heritage</td><td><span class="value silver">Apollo CM &middot; Shuttle tile program</span></td></tr>
-  </table>
+  </table></div>
 
   <h3>Artemis I Heat Shield Investigation</h3>
 
@@ -561,7 +593,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     for the revised trajectory.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th>Parameter</th>
       <th>Artemis I (Skip Entry)</th>
@@ -592,7 +624,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
       <td><span class="value">&mdash;</span></td>
       <td><span class="value">Independent review, Dec 2024: safe</span></td>
     </tr>
-  </table>
+  </table></div>
 </div>
 
 <!-- ================================================================
@@ -609,7 +641,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     separation.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">LAS Specifications</th>
     </tr>
@@ -621,7 +653,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Coverage</td><td><span class="value gold">Pad to SRB separation (~126 s, ~48 km)</span></td></tr>
     <tr><td class="label">Activation</td><td><span class="value">Automatic (FTS) or crew-commanded</span></td></tr>
     <tr><td class="label">Manufacturer</td><td><span class="value">Lockheed Martin / Northrop Grumman</span></td></tr>
-  </table>
+  </table></div>
 
   <h3>Three Motors, One Mission</h3>
 
@@ -657,7 +689,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     partnership with NASA&rsquo;s Exploration Ground Systems.
   </p>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">Parachute System</th>
     </tr>
@@ -669,9 +701,9 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Canopy Material</td><td><span class="value">Nomex cloth</span></td></tr>
     <tr><td class="label">Descent Rate (3 mains)</td><td><span class="value">~7.6 m/s</span><span class="unit">(~17 mph)</span></td></tr>
     <tr><td class="label">Descent Rate (2 mains)</td><td><span class="value">~9.2 m/s</span><span class="unit">(safe with 1 failed)</span></td></tr>
-  </table>
+  </table></div>
 
-  <table class="spec-table">
+  <div class="table-wrap"><table class="spec-table">
     <tr>
       <th colspan="2">Recovery Operations</th>
     </tr>
@@ -681,7 +713,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <tr><td class="label">Uprighting System</td><td><span class="value">5 airbags on crew module</span></td></tr>
     <tr><td class="label">Crew Egress</td><td><span class="value">Hatch opening on stable-1 orientation</span></td></tr>
     <tr><td class="label">Backup</td><td><span class="value">Helicopter extraction if vessel unavailable</span></td></tr>
-  </table>
+  </table></div>
 
   <div class="callout heritage">
     <strong>Apollo comparison:</strong> Apollo splashed down in the Pacific and was recovered

@@ -135,9 +135,199 @@
     }
     footer a { color:var(--fog); }
 
+    /* LOD visibility defaults — hidden until breakpoint activates */
+    .lod-medium { display:none; }
+    .lod-high { display:none; }
+
+    /* Restaurant grid container */
+    .restaurant-grid {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:1.5rem;
+    }
+    .restaurant-grid .restaurant { margin-bottom:0; }
+
+    /* ==================== MOBILE (existing + stats fix) ==================== */
     @media(max-width:640px) {
       header h1 { font-size:1.4rem; }
       main { padding:1rem; }
+      .stats {
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:0.8rem;
+      }
+      .stat { min-width:unset; }
+      .stat-value { font-size:1.2rem; }
+    }
+
+    /* ==================== MEDIUM (1200px+) ==================== */
+    @media(min-width:1200px) {
+      .lod-medium { display:block; }
+
+      .ferry-connection {
+        padding:2rem 2.5rem;
+        position:relative;
+      }
+      .ferry-connection .route {
+        font-size:1.4rem;
+        margin-bottom:0.6rem;
+      }
+      .ferry-connection .desc {
+        font-size:0.9rem;
+        max-width:600px;
+        margin:0 auto;
+      }
+      .ferry-route-line {
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:0.8rem;
+        margin:1rem auto 0.8rem;
+        max-width:500px;
+      }
+      .ferry-route-line .port {
+        font-size:0.75rem;
+        font-family:monospace;
+        color:var(--sky);
+        white-space:nowrap;
+        letter-spacing:0.05em;
+      }
+      .ferry-route-line .line {
+        flex:1;
+        height:2px;
+        background:linear-gradient(90deg, var(--marine), var(--sky), var(--marine));
+        position:relative;
+      }
+      .ferry-route-line .line::before {
+        content:'\2693'; /* anchor */
+        position:absolute;
+        top:-0.6rem;
+        left:50%;
+        transform:translateX(-50%);
+        font-size:0.8rem;
+        color:var(--sky);
+      }
+      .ferry-route-line .duration {
+        font-size:0.65rem;
+        color:var(--dim);
+        font-family:system-ui,sans-serif;
+        text-align:center;
+        margin-top:0.2rem;
+      }
+    }
+
+    /* ==================== HIGH (1920px+) ==================== */
+    @media(min-width:1920px) {
+      .lod-high { display:block; }
+      .lod-medium { display:block; }
+
+      main { max-width:1300px; padding:3rem 2.5rem 5rem; }
+
+      header { padding:3.5rem 3rem 2.5rem; }
+      header h1 { font-size:2.6rem; }
+      header .subtitle { font-size:1.1rem; margin-top:0.4rem; }
+      header .coords { font-size:0.85rem; margin-top:0.6rem; }
+      header nav a { font-size:0.9rem; margin-right:1.8rem; }
+
+      h2 { font-size:1.5rem; margin:3.5rem 0 0.8rem; }
+      h2 .era { font-size:0.9rem; }
+      .section-intro { font-size:0.95rem; }
+
+      blockquote { font-size:1.05rem; padding:1rem 1.5rem; margin-bottom:2.5rem; }
+
+      .stats {
+        display:grid;
+        grid-template-columns:repeat(6,1fr);
+        gap:1.2rem;
+        padding:1.5rem 0;
+        margin:2rem 0 3rem;
+      }
+      .stat-value { font-size:2rem; }
+      .stat-label { font-size:0.78rem; }
+
+      .restaurant-grid {
+        grid-template-columns:repeat(2,1fr);
+        gap:2rem;
+      }
+
+      .restaurant { padding:2rem; }
+      .restaurant h3 { font-size:1.3rem; }
+      .restaurant p { font-size:0.95rem; }
+      .restaurant .detail { font-size:0.9rem; }
+
+      .ferry-connection {
+        padding:2.5rem 3rem;
+      }
+
+      footer { max-width:1300px; }
+
+      /* Scoring summary panel */
+      .scoring-summary {
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:1.5rem;
+        background:linear-gradient(135deg, rgba(184,102,74,0.08), rgba(196,144,64,0.06));
+        border:1px solid rgba(196,144,64,0.2);
+        border-radius:8px;
+        padding:1.8rem 2rem;
+        margin:0 0 2.5rem;
+      }
+      .scoring-summary .score-item { text-align:center; }
+      .scoring-summary .score-value {
+        display:block;
+        font-size:2.2rem;
+        font-weight:400;
+        color:var(--amber);
+        font-family:monospace;
+        line-height:1.2;
+      }
+      .scoring-summary .score-detail {
+        font-size:0.72rem;
+        color:var(--dim);
+        text-transform:uppercase;
+        letter-spacing:0.06em;
+        font-family:system-ui,sans-serif;
+        margin-top:0.3rem;
+      }
+      .scoring-summary .score-sub {
+        font-size:0.78rem;
+        color:var(--fog);
+        font-style:italic;
+        margin-top:0.2rem;
+      }
+
+      /* Expanded timeline context */
+      .timeline-expanded {
+        font-size:0.82rem;
+        color:var(--fog);
+        background:rgba(26,58,74,0.1);
+        border-left:3px solid var(--warm);
+        padding:0.8rem 1.2rem;
+        margin:0.6rem 0;
+        border-radius:0 4px 4px 0;
+      }
+      .timeline-expanded strong { color:var(--sand); }
+    }
+
+    /* ==================== ULTRA-WIDE (2560px+) ==================== */
+    @media(min-width:2560px) {
+      main { max-width:1500px; padding:4rem 3rem 6rem; }
+      header { padding:4rem 3.5rem 3rem; }
+      header h1 { font-size:3rem; }
+
+      .stats { gap:2rem; padding:2rem 0; margin:2.5rem 0 3.5rem; }
+      .stat-value { font-size:2.4rem; }
+
+      .restaurant-grid { gap:2.5rem; }
+      .restaurant { padding:2.5rem; }
+      .restaurant h3 { font-size:1.45rem; }
+
+      h2 { font-size:1.7rem; margin:4rem 0 1rem; }
+
+      .scoring-summary { padding:2.2rem 2.5rem; gap:2rem; }
+      .scoring-summary .score-value { font-size:2.6rem; }
+
+      footer { max-width:1500px; }
     }
   </style>
 </head>
@@ -173,6 +363,31 @@
     <div class="stat"><span class="stat-value">1938</span><span class="stat-label">Oldest Active Brand</span></div>
     <div class="stat"><span class="stat-value">4</span><span class="stat-label">Counties</span></div>
     <div class="stat"><span class="stat-value">3</span><span class="stat-label">On Nat'l Register</span></div>
+    <div class="stat"><span class="stat-value">560+</span><span class="stat-label">Combined Years</span></div>
+  </div>
+
+  <!-- LOD-HIGH: Scoring summary panel (visible 1920px+) -->
+  <div class="lod-high scoring-summary">
+    <div class="score-item">
+      <span class="score-value">1908</span>
+      <span class="score-detail">Oldest Building</span>
+      <span class="score-sub">The Dog House, Langley</span>
+    </div>
+    <div class="score-item">
+      <span class="score-value">1938</span>
+      <span class="score-detail">Oldest Active Brand</span>
+      <span class="score-sub">Ivar's (88 years)</span>
+    </div>
+    <div class="score-item">
+      <span class="score-value">560+</span>
+      <span class="score-detail">Combined Operating Years</span>
+      <span class="score-sub">14 restaurants, 4 counties</span>
+    </div>
+    <div class="score-item">
+      <span class="score-value">48&thinsp;mi</span>
+      <span class="score-detail">Geographic Spread</span>
+      <span class="score-sub">Langley to Pioneer Square</span>
+    </div>
   </div>
 
   <!-- ==================== MUKILTEO & FERRY LANDING ==================== -->
@@ -180,6 +395,7 @@
   <h2>Mukilteo &amp; the Ferry Landing <span class="era">est. 1909&ndash;present</span></h2>
   <p class="section-intro">The ferry landing has drawn restaurants since before Washington was a generation old. The site where Ivar's Mukilteo Landing now stands has served food continuously since 1909.</p>
 
+  <div class="restaurant-grid">
   <div class="restaurant">
     <h3>Ivar's Mukilteo Landing</h3>
     <div class="est">Founded 1938 (brand) &middot; Mukilteo site since 1991</div>
@@ -203,6 +419,10 @@
     </div>
 
     <p class="detail">Ivar Haglund purchased Smith Tower in 1976 &mdash; once the tallest building west of the Mississippi. He was elected port commissioner in 1983 "as a prank." In 2009, Ivar's planted fake "historic billboards" on the floor of Puget Sound, conspiring with a local historian to "discover" them. The chain now runs 24+ seafood bars, 3 fish bars, and 3 full-service restaurants. They also own Kidd Valley burgers.</p>
+
+    <div class="lod-high timeline-expanded">
+      <strong>117 years of continuous food service at one site.</strong> The Mukilteo ferry landing location has passed through at least seven distinct operators since 1909 &mdash; saloon, lunchroom, Eagles lodge, family restaurant, waterfront dining room, and corporate seafood chain. The Taylor family's 47-year tenure (1944&ndash;1991) shaped the modern site: they built the over-water dining room in 1962, hosted civic events, and raised two sons who became community leaders. When Ivar's purchased in 1991, they inherited not just a building but a century of waterfront dining culture. The 2016 sale to MSI Mukilteo LLC kept it within the extended Haglund family orbit.
+    </div>
   </div>
 
   <div class="restaurant">
@@ -221,12 +441,27 @@
     </div>
 
     <p class="detail">Panoramic views of Possession Sound from the bluff. Previously known as "53rd Street Manor" and "Mukilteo Chop and Oyster House." Claude had been head chef at Chez Claude in Edmonds before opening here.</p>
+
+    <div class="lod-high timeline-expanded">
+      <strong>Prohibition architecture as dining destination.</strong> The building's bootlegging infrastructure &mdash; the hidden basement, the tunnel to the gulch &mdash; became part of its mystique as a restaurant. Claude Faure's 25-year run (1989&ndash;2014) transformed a smuggler's den into one of Snohomish County's premier French dining rooms. The $850,000 sale price at closing reflected the bluff-top real estate value rather than the business; the restaurant's true legacy was proving that fine dining could thrive north of Seattle if anchored to a place with genuine character.
+    </div>
   </div>
+  </div><!-- end restaurant-grid -->
 
   <!-- ==================== FERRY CONNECTION ==================== -->
 
   <div class="ferry-connection">
     <div class="route">Mukilteo &harr; Clinton &harr; Langley</div>
+    <div class="lod-medium ferry-route-line">
+      <span class="port">MUKILTEO</span>
+      <span class="line"></span>
+      <span class="port">CLINTON</span>
+      <span class="line"></span>
+      <span class="port">LANGLEY</span>
+    </div>
+    <div class="lod-medium" style="display:none;text-align:center;margin-bottom:0.6rem;">
+      <span style="font-size:0.7rem;color:var(--dim);font-family:system-ui,sans-serif;">20 min ferry &nbsp;&bull;&nbsp; 15 min drive &nbsp;&bull;&nbsp; Possession Sound crossing</span>
+    </div>
     <div class="desc">The Mukilteo&ndash;Clinton ferry crosses Possession Sound to Whidbey Island. From Clinton, it's a 15-minute drive south to Langley &mdash; "The Village by the Sea."</div>
   </div>
 
@@ -235,6 +470,7 @@
   <h2>Whidbey Island <span class="era">est. 1908&ndash;present</span></h2>
   <p class="section-intro">The other side of the ferry. South Whidbey's village of Langley sits on a bluff above Saratoga Passage, looking back toward Camano Island. The Dog House is its oldest surviving building.</p>
 
+  <div class="restaurant-grid">
   <div class="restaurant">
     <h3>The Dog House</h3>
     <div class="est">Building 1908 &middot; Tavern since 1937</div>
@@ -261,13 +497,19 @@
     </div>
 
     <p class="detail">Interior featured an <strong>1881 tavern bar</strong>, oak tables, a restored <strong>1923 player piano</strong>, and a <strong>1910 water buffalo head</strong>. The exterior resembles an old West saloon. Sweeping wall-to-wall window view of Saratoga Passage and Camano Island. The only one of the four original buildings at the downtown intersection that survived &mdash; the large hotel burned in 1921. Langley's only structure on the National Register.</p>
+
+    <div class="lod-high timeline-expanded">
+      <strong>118 years of continuous use in a town of 1,100.</strong> The Dog House has been reinvented at least six times: gentlemen's club, mercantile, confectionary, movie theater, Prohibition gambling den, and tavern. The building's survival through 2014's demolition inquiry &mdash; which triggered an emergency city ordinance &mdash; reveals how deeply a single structure can embed itself in community identity. The Kleiners' 2010 purchase and subsequent renovation plan (restaurant, residence, event space, water-view decks) represents the latest chapter in what amounts to the entire commercial history of downtown Langley compressed into one building.
+    </div>
   </div>
+  </div><!-- end restaurant-grid -->
 
   <!-- ==================== SEATTLE ICONS ==================== -->
 
   <h2>Seattle Icons <span class="era">est. 1938&ndash;present</span></h2>
   <p class="section-intro">The restaurants that defined Seattle's food identity &mdash; from the waterfront to Aurora Avenue to the Central District.</p>
 
+  <div class="restaurant-grid">
   <div class="restaurant">
     <h3>Dick's Drive-In</h3>
     <div class="est">Founded January 28, 1954</div>
@@ -288,6 +530,10 @@
       <div class="event"><span class="year">2021</span> Bellevue Crossroads</div>
       <div class="event"><span class="year">2023</span> Federal Way</div>
       <div class="event"><span class="year">2025</span> Everett (northernmost)</div>
+    </div>
+
+    <div class="lod-high timeline-expanded">
+      <strong>72 years of expansion at roughly one location per decade.</strong> Dick's growth pattern is uniquely conservative for fast food: five locations in 20 years (1954&ndash;1974), then a 37-year pause before expanding outside Seattle in 2011. The post-2018 acceleration (five locations in seven years) suggests a generational shift in strategy. The employee benefits &mdash; 100% healthcare and $28,000 tuition &mdash; predate the modern "living wage" movement by decades. Dick Spady was a pioneer of structured dialogue in civic planning, not just burger-making.
     </div>
   </div>
 
@@ -328,11 +574,13 @@
 
     <p class="detail">Jason retired before 66. He'd hoped his sons would take over, but they declined. On one of its final days, an enormous line snaked out the door as people came to pay tribute. The Seattle Times, Cascade PBS, and KNKX eulogized it as the death of "old Seattle."</p>
   </div>
+  </div><!-- end restaurant-grid -->
 
   <!-- ==================== PIKE PLACE ==================== -->
 
   <h2>Pike Place Market <span class="era">est. 1907&ndash;present</span></h2>
 
+  <div class="restaurant-grid">
   <div class="restaurant">
     <h3>The Crumpet Shop</h3>
     <div class="est">Founded 1976</div>
@@ -352,12 +600,14 @@
 
     <p class="detail">Haglund was born March 21, 1905, to Swedish and Norwegian immigrant families. His maternal grandparents purchased Alki Point in 1869. His mother died in 1908 under the care of Linda Hazzard, a controversial "fasting specialist," though autopsy revealed terminal cancer. He graduated UW in 1928, built his aquarium in 1938, and died of a heart attack January 30, 1985. With no heirs, his estate went to the UW School of Business Restaurant Program.</p>
   </div>
+  </div><!-- end restaurant-grid -->
 
   <!-- ==================== SNOHOMISH COUNTY ==================== -->
 
   <h2>Snohomish County <span class="era">est. 1947&ndash;present</span></h2>
   <p class="section-intro">From retro diners to legendary cinnamon rolls &mdash; the county's own food institutions, many predating the suburban expansion.</p>
 
+  <div class="restaurant-grid">
   <div class="restaurant">
     <h3>Totem Family Dining</h3>
     <div class="est">Building since 1947 &middot; Family-owned since 1953</div>
@@ -403,11 +653,13 @@
 
     <p class="detail">Represents the lost era of kitschy, family-friendly themed diners on the Aurora corridor and in suburban malls. A Facebook nostalgia group post drew significant engagement from people recalling family meals.</p>
   </div>
+  </div><!-- end restaurant-grid -->
 
   <!-- ==================== GONE BUT NOT FORGOTTEN ==================== -->
 
   <h2>Gone But Not Forgotten</h2>
 
+  <div class="restaurant-grid">
   <div class="restaurant">
     <h3>Alfy's Pizza</h3>
     <div class="est">Founded 1973 &middot; Last Everett location closed 2023</div>
@@ -415,6 +667,7 @@
 
     <p>Classic pizzas, all-you-can-eat salad bar, arcade games. A staple for kids and families for nearly 50 years. The last Everett location was converted to a thrift shop.</p>
   </div>
+  </div><!-- end restaurant-grid -->
 
 </main>
 

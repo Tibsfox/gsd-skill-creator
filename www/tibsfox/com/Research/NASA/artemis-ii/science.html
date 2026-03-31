@@ -253,6 +253,36 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   border-top: 1px solid var(--border);
 }
 
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  .page-content { max-width: 1300px; }
+  /* CubeSat table and DSN stations side-by-side */
+  .science-wide-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .science-wide-row .section { margin-bottom: 0; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .page-content { max-width: 1500px; }
+}
+
 /* === RESPONSIVE === */
 @media(max-width:768px) {
   .mission-header h1 { font-size:1.3rem; }
@@ -268,6 +298,10 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 @media(max-width:480px) {
   .stat-grid { grid-template-columns: 1fr; }
   .nav-links { font-size: 0.7rem; padding: 0.5rem 1rem; }
+  main { padding: 0.8rem; }
+  h1 { font-size: 1.3rem; }
+  .spec-table, .comp-table { font-size: 0.7rem; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 </style>
 </head>
@@ -502,6 +536,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   </div>
 </div>
 
+<div class="science-wide-row">
 <!-- ============================================================
      CUBESAT SECONDARY PAYLOADS
      ============================================================ -->
@@ -650,6 +685,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     </div>
   </div>
 </div>
+</div><!-- .science-wide-row -->
 
 <!-- ============================================================
      ARTEMIS I vs ARTEMIS II

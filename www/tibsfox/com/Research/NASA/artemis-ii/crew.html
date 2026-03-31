@@ -181,6 +181,40 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   border-top:1px solid var(--border);
 }
 
+/* === SCALEABLE LOD === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+
+@media (min-width: 1200px) {
+  .lod-medium { display: block; }
+}
+
+@media (min-width: 1920px) {
+  .lod-high { display: block; }
+  main { max-width: 1300px; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.4rem; }
+  /* Crew cards in 2-column grid at 1920px+ */
+  .crew-section { max-width: 1300px; }
+  .crew-grid-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  .crew-grid-2col .crew-card { margin-bottom: 0; }
+  .firsts-section { max-width: 1300px; }
+  .context-section { max-width: 1300px; }
+}
+
+@media (min-width: 2560px) {
+  main { max-width: 1500px; }
+  body { font-size: 1.05em; }
+  h1 { font-size: 2.5rem; }
+  .crew-section { max-width: 1500px; }
+  .firsts-section { max-width: 1500px; }
+  .context-section { max-width: 1500px; }
+}
+
 /* === RESPONSIVE === */
 @media(max-width:768px) {
   .mission-header h1 { font-size:1.3rem; }
@@ -192,6 +226,13 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   .crew-section { padding:1.5rem 1rem; }
   .firsts-section { padding:0 1rem 1.5rem; }
   .card-header { flex-direction:column; gap:0.3rem; }
+  main { padding: 0.8rem; }
+  h1 { font-size: 1.3rem; }
+  .spec-table, .comp-table { font-size: 0.7rem; }
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* Single column crew cards on mobile */
+  .crew-grid-2col { display: block; }
+  .crew-grid-2col .crew-card { margin-bottom: 1.2rem; }
 }
 </style>
 </head>
@@ -226,6 +267,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   <h2>Prime Crew</h2>
   <div class="section-sub">Announced April 3, 2023 &middot; Johnson Space Center, Houston, TX</div>
 
+  <div class="crew-grid-2col">
   <!-- REID WISEMAN -->
   <div class="crew-card commander">
     <div class="card-header">
@@ -422,6 +464,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
       </div>
     </div>
   </div>
+  </div><!-- .crew-grid-2col -->
 </div>
 
 <!-- ============================================================ -->
