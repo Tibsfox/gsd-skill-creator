@@ -1,0 +1,179 @@
+* Product Detector — NE602/SA612 Synchronous SSB/CW Demodulation
+* ==============================================================
+* NASA Mission Series v1.18
+*
+* Models a product detector using a balanced mixer (representing
+* the NE602/SA612) as a synchronous demodulator for SSB and CW
+* signals. The BFO (Beat Frequency Oscillator) provides a local
+* carrier that replaces the suppressed carrier in SSB, producing
+* clean audio output.
+*
+* Product detection: output = IF_signal × BFO
+*   For SSB: the difference frequency is the recovered audio
+*   For CW:  the difference frequency is an audible beat note
+*
+* This is the v1.18 progressive radio circuit. Mercury telemetry
+* used product detection in the ground station subcarrier
+* demodulators to extract biomedical data from the FM/PM
+* telemetry stream carrying Enos's vital signs from orbit.
+*
+* Comparison: envelope detection vs product detection
+*   Envelope detector: output = |signal| → garbled for SSB
+*   Product detector:  output = signal × BFO → clean audio
+*
+* Circuit:
+*   1. IF signal (SSB at 455 kHz) → balanced mixer input A
+*   2. BFO signal (453.5 kHz for USB) → mixer input B
+*   3. Mixer output = difference frequency (audio 0-3 kHz)
+*   4. Low-pass filter removes sum frequency (908.5 kHz)
+*   5. Audio output to amplifier
+*
+* Run: ngspice -b product-detector.cir
+
+*--------------------------------------------------------------
+* INPUT SIGNALS
+*--------------------------------------------------------------
+* SSB signal: a 455 kHz carrier modulated by 1 kHz audio
+* In true SSB, only one sideband is present (no carrier).
+* We model USB: signal at 456 kHz (= 455 kHz + 1 kHz audio)
+*
+* This represents a voice signal that has been frequency-shifted
+* to the IF frequency by the receiver's mixer stage.
+
+V_ssb  ssb_in  0  SIN(0 0.05 456k)
+
+* BFO signal: local oscillator at 455 kHz
+* For USB reception, BFO is at the suppressed carrier frequency.
+* The difference: 456 kHz - 455 kHz = 1 kHz (the original audio).
+V_bfo  bfo_in  0  SIN(0 0.3 455k)
+
+*--------------------------------------------------------------
+* CW TEST SIGNAL (alternate, for Morse code demonstration)
+*--------------------------------------------------------------
+* CW signal: pure carrier at 455 kHz, keyed on/off
+* The product detector produces a beat note at BFO_freq - signal_freq
+* With BFO at 455.7 kHz: beat note = 700 Hz (standard CW pitch)
+
+V_cw  cw_carrier  0  SIN(0 0.05 455k)
+* CW keying: on for 100ms (dit), off for 100ms, on for 300ms (dah)
+V_key  cw_key  0  PULSE(0 1 0 1u 1u 100m 500m)
+
+* CW BFO: offset by 700 Hz for audible beat
+V_cw_bfo  cw_bfo_in  0  SIN(0 0.3 455.7k)
+
+*--------------------------------------------------------------
+* PRODUCT DETECTOR — SSB PATH
+*--------------------------------------------------------------
+* The NE602/SA612 is modeled as an analog multiplier.
+* In SPICE, we use a behavioral voltage source (B element)
+* to implement the multiplication: Vout = Vin1 × Vin2 × gain
+
+* Input coupling capacitors (DC blocking)
+C_in1  ssb_in  mixer_a  100p
+R_in1  mixer_a  0  1.5k
+
+C_in2  bfo_in  mixer_b  100p
+R_in2  mixer_b  0  1.5k
+
+* Balanced mixer (NE602 model: analog multiplier)
+* Conversion gain of NE602 is approximately +14 dB ≈ gain of 5
+B_mixer  mixer_out  0  V = 5 * V(mixer_a) * V(mixer_b)
+
+*--------------------------------------------------------------
+* OUTPUT LOW-PASS FILTER
+*--------------------------------------------------------------
+* Removes the sum frequency component (456k + 455k = 911 kHz)
+* Passes the difference frequency (456k - 455k = 1 kHz = audio)
+*
+* First-order RC LPF: f_c = 1/(2π × 10k × 4.7n) ≈ 3.4 kHz
+R_lpf  mixer_out  audio_ssb  10k
+C_lpf  audio_ssb  0  4.7n
+
+* Output coupling
+C_out  audio_ssb  ssb_audio_out  0.1u
+R_load  ssb_audio_out  0  10k
+
+*--------------------------------------------------------------
+* PRODUCT DETECTOR — CW PATH
+*--------------------------------------------------------------
+* Same principle, but with CW signal and offset BFO
+
+* CW signal × key envelope (on/off keying)
+B_cw_keyed  cw_keyed  0  V = V(cw_carrier) * V(cw_key)
+
+* CW product detector
+C_cw_in  cw_keyed  cw_mix_a  100p
+R_cw_in  cw_mix_a  0  1.5k
+
+C_cw_bfo  cw_bfo_in  cw_mix_b  100p
+R_cw_bfo  cw_mix_b  0  1.5k
+
+B_cw_mixer  cw_mix_out  0  V = 5 * V(cw_mix_a) * V(cw_mix_b)
+
+* CW audio filter
+R_cw_lpf  cw_mix_out  cw_audio_filt  10k
+C_cw_lpf  cw_audio_filt  0  4.7n
+
+C_cw_out  cw_audio_filt  cw_audio_out  0.1u
+R_cw_load  cw_audio_out  0  10k
+
+*--------------------------------------------------------------
+* ENVELOPE DETECTOR (comparison — shows why it fails on SSB)
+*--------------------------------------------------------------
+* Simple diode envelope detector: rectifies the SSB signal
+* Without the carrier, the envelope is NOT the audio
+
+D_env  ssb_in  env_peak  D_SIGNAL
+C_env  env_peak  0  1n
+R_env  env_peak  0  10k
+
+* Output (this will be distorted garble, not clean audio)
+C_env_out  env_peak  env_audio_out  0.1u
+R_env_load  env_audio_out  0  10k
+
+*--------------------------------------------------------------
+* MODELS
+*--------------------------------------------------------------
+.model D_SIGNAL D(IS=1e-14 N=1.0 BV=75 RS=10)
+
+*--------------------------------------------------------------
+* SIMULATION
+*--------------------------------------------------------------
+* Transient analysis: 5 ms to see several audio cycles
+.tran 0.1u 5m
+
+*--------------------------------------------------------------
+* OUTPUT
+*--------------------------------------------------------------
+.control
+  run
+
+  * Plot SSB product detection results
+  set hcopydevtype = png
+  set hcopypscolor = 1
+  hardcopy product_ssb.png v(ssb_in) v(ssb_audio_out) v(env_audio_out)
+  + title 'Product Detector vs Envelope Detector (SSB signal)'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot CW product detection results
+  hardcopy product_cw.png v(cw_keyed) v(cw_audio_out)
+  + title 'CW Product Detection — 700 Hz Beat Note'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Measurements
+  echo "=== PRODUCT DETECTOR ANALYSIS ==="
+  echo "SSB audio output (should be clean 1 kHz sine):"
+  meas tran ssb_pp PP v(ssb_audio_out) from=2m to=5m
+  echo "Envelope detector output (should be garbled):"
+  meas tran env_pp PP v(env_audio_out) from=2m to=5m
+  echo "CW audio output (should be 700 Hz tone when keyed):"
+  meas tran cw_pp PP v(cw_audio_out) from=2m to=5m
+  echo ""
+  echo "Compare SSB outputs: product detector produces clean sine,"
+  echo "envelope detector produces distorted, unintelligible output."
+  echo "This is why SSB/CW reception REQUIRES product detection."
+
+  quit
+.endc
+
+.end

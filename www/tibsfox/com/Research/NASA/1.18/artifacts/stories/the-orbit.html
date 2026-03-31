@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Orbit | Mission 1.18 — Mercury-Atlas 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0808;
+    --text: #D4D0C8;
+    --accent: #2050CC;
+    --accent-dim: rgba(32,80,204,0.3);
+    --silver: #C0C0D0;
+    --kelp: #308030;
+    --separator: rgba(32,80,204,0.2);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.9;
+    min-height: 100vh;
+  }
+  .story-container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+  .story-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--separator);
+  }
+  .story-header h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .story-header .subtitle {
+    font-style: italic;
+    color: var(--accent);
+    font-size: 0.95rem;
+  }
+  .story-header .mission-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent-dim);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+  }
+  .story-header .mission-link:hover { background: var(--accent-dim); }
+  .story-body p {
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    text-indent: 2em;
+  }
+  .story-body p:first-of-type { text-indent: 0; }
+  .story-body p em { color: var(--kelp); }
+  .story-body .section-break {
+    text-align: center;
+    margin: 2.5rem 0;
+    color: var(--accent);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+  }
+  .dedication {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--separator);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--accent);
+  }
+  .story-footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--separator);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(212,208,200,0.4);
+  }
+  .story-footer a { color: var(--accent); text-decoration: none; }
+  @media print {
+    body { background: #fff; color: #000; }
+    .story-header .mission-link { display: none; }
+    .story-footer { display: none; }
+    .story-body p em { color: #333; }
+    .section-break { color: #666; }
+    .dedication { color: #333; }
+  }
+</style>
+</head>
+<body>
+
+<div class="story-container">
+  <div class="story-header">
+    <h1>The Orbit</h1>
+    <p class="subtitle">A short story from Mission 1.18 &mdash; Mercury-Atlas 5</p>
+    <a href="../../index.html" class="mission-link">v1.18 &mdash; NASA Mission Series</a>
+  </div>
+
+  <div class="story-body">
+    <p>The numbers were wrong. That was the first thing Ed Gruenwald noticed on the second pass, the thing that changed the shape of the day: the numbers were wrong and they were getting wronger.</p>
+
+    <p>He sat in the third row of consoles at Mercury Control, Cape Canaveral, the one labeled PROCEDURES. It was November 29, 1961, and the chimpanzee named Enos was one hundred and sixty-one kilometers above the Atlantic Ocean, traveling at seven thousand eight hundred and forty meters per second, and the attitude control fuel was disappearing faster than the flight plan allowed.</p>
+
+    <p>The telemetry showed it clearly. Hydrogen peroxide consumption, orbit one: nominal. Five point two pounds, right on the line. Hydrogen peroxide consumption, orbit two: twenty-one pounds and climbing. The attitude thrusters were firing in long, wasteful pulses instead of the crisp quarter-second bursts the system was designed for. Something was stuck. A valve, most likely. Partially open, bleeding propellant into the catalyst bed in lazy surges when it should have been snapping shut between firings.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>The flight plan called for three orbits. Three complete circuits of the Earth, each one eighty-eight and a half minutes, the capsule threading its ellipse between one hundred and sixty-one kilometers at perigee and two hundred and thirty-seven at apogee. Three orbits was the qualification requirement. Three orbits proved the spacecraft, the tracking network, the recovery fleet, the life support, the retrorocket system. Three orbits meant John Glenn could fly.</p>
+
+    <p>But the numbers were wrong.</p>
+
+    <p>He pulled the fuel calculation sheet from under his console and ran it again. Total capacity: sixty pounds. Orbit one consumed five. Orbit two was consuming at four times the normal rate. If the trend held &mdash; and stuck valves don't unstick themselves &mdash; orbit three would consume another twenty-five pounds. That left ten pounds for retrofire orientation. The retrorockets themselves didn't need attitude control fuel; they were solid-propellant and fired in a fixed direction. But the capsule had to be oriented correctly before firing them. Heat shield forward, pitched down five degrees, yawed to the correct azimuth. That orientation maneuver required fuel. The minimum was twelve pounds.</p>
+
+    <p>Ten available. Twelve required. The margin wasn't thin. The margin was negative.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>He picked up the phone. "Flight, Procedures."</p>
+
+    <p>"Go, Procedures."</p>
+
+    <p>"Flight, I'm showing attitude fuel consumption at four times nominal on orbit two. If the rate holds, we'll be below retrofire reserve at the end of orbit three. Recommend we plan for a two-orbit mission."</p>
+
+    <p>The pause on the line lasted exactly long enough for a man to look at his own console, verify the numbers he'd been watching for the last twenty minutes, and decide that the man on the other end of the phone was confirming what he already knew.</p>
+
+    <p>"Copy, Procedures. We're tracking the same. Retrofire will be at end of orbit two, over the recovery zone."</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>What they didn't discuss on that call &mdash; what didn't need to be discussed because every man in the room already knew it &mdash; was the other anomaly. The lever.</p>
+
+    <p>Enos had been trained at Holloman Air Force Base in the New Mexico desert. Eighteen months of operant conditioning. Blue light: pull the left lever. White light: pull the right lever. Correct response: banana pellet. Incorrect or late response: mild electric shock to the soles of the feet. The training had been thorough, painstaking, and effective. Enos responded correctly ninety-eight percent of the time on the ground. In the centrifuge. On the vibration table. Under every stress condition they could simulate.</p>
+
+    <p>The lever mechanism on spacecraft number nine had a defect. A contact in the reward circuit had crossed with the punishment circuit. When Enos pulled the correct lever, the mechanism shocked him. When he pulled the wrong lever, it rewarded him.</p>
+
+    <p>The telemetry showed this clearly too. Shock indicators lighting up after correct responses. Reward indicators after incorrect ones. The system was lying to him, punishing him for being right, rewarding him for being wrong.</p>
+
+    <p>Enos kept pulling the correct lever.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>Gruenwald thought about this while he watched the fuel numbers. Seventy-six shocks. That was the count by the end of orbit two. Seventy-six times the mechanism had punished Enos for doing exactly what he'd been trained to do, exactly what the mission required, exactly what would prove that a primate could perform cognitive tasks in orbit. Seventy-six times the world had told him he was wrong when he was right.</p>
+
+    <p>He kept pulling the correct lever.</p>
+
+    <p>There was something in that. Something that went beyond the mission report, beyond the biomedical data, beyond the qualification matrix. The chimpanzee <em>knew</em>. Not knew the way a computer knows &mdash; not lookup table, not if-then-else. Knew the way a living thing knows: the lever is correct because the training was deep, because the pattern is in the body, because the blue light means left and no amount of contradictory feedback can overwrite what the bones remember.</p>
+
+    <p><em>The holdfast of a bull kelp anchors to rock. Not to sand, not to soft substrate, not to anything that shifts. The kelp chooses its attachment point once, and then the current can do what it likes. The stipe flexes. The blades stream. The pneumatocyst bobs. But the holdfast does not move. It chose rock, and rock is what it holds.</em></p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>The retrofire sequence began over the Indian Ocean tracking station. Three solid-propellant retrorockets, fired in sequence at five-second intervals, each one braking the capsule by approximately one hundred and fifty meters per second. The attitude control system, despite its stuck valve, managed to hold the correct orientation. The fuel gauge showed eight pounds remaining when the retros fired. Two pounds under the calculated minimum. They'd cut it closer than anyone wanted to think about.</p>
+
+    <p>The capsule hit the atmosphere at four hundred thousand feet, the arbitrary line where air becomes thick enough to notice. The heat shield, an ablative fiberglass composite, began shedding material in a controlled burn that absorbed the kinetic energy of orbital velocity. Enos experienced deceleration forces of approximately seven point eight g &mdash; less than Ham's fourteen point seven on the abort-modified MR-2 trajectory, but sustained for longer. The capsule was in the corridor: not too steep, not too shallow. The narrow band of flight path angles that separated skip-out from burn-up.</p>
+
+    <p>Threading the needle.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>C.S. Lewis would have understood the lever. Lewis, who wrote about the problem of pain, about the moral dimensions of suffering, about what it means to be punished for doing right. In <em>The Problem of Pain</em>, Lewis argued that suffering serves a purpose: it breaks through the crust of complacency, it forces attention, it makes the comfortable uncomfortable. But that framework assumes the suffering is meaningful &mdash; that the universe is, in some deep sense, fair.</p>
+
+    <p>Enos's lever was not fair. The mechanism was broken. The universe was not teaching him a lesson. The universe had a wiring defect. And Enos's response &mdash; to keep doing the right thing despite being told he was wrong &mdash; was not philosophical. It was not a reasoned moral stance. It was the holdfast on the rock. It was training so deep it had become identity. The current changed. The holdfast held.</p>
+
+    <p>Lewis also wrote about Narnia. About a wardrobe that opened into another world. The Mercury capsule was a wardrobe. Six feet in diameter, nine feet six inches tall, an impossibly small space that opened into the impossible space of orbit. Enos went through the wardrobe. He saw what was on the other side. He came back. He didn't have words for it. Neither, perhaps, would we.</p>
+
+    <div class="section-break">&bull; &bull; &bull;</div>
+
+    <p>The capsule splashed down in the Atlantic, south of Bermuda, three hours and twenty minutes after launch. The destroyer USS <em>Stormes</em> was on station. Recovery swimmers opened the hatch and found Enos in his couch, alert, vital signs normal. He had been shocked seventy-six times for correct responses and had continued responding correctly. He had orbited the Earth twice in a spacecraft whose attitude control system was consuming fuel at four times the planned rate. He had threaded the reentry corridor in a capsule oriented by a fuel system operating below its design minimum.</p>
+
+    <p>The mission was officially designated a success. Mercury was qualified for human orbital flight. John Glenn launched on February 20, 1962, eighty-three days later.</p>
+
+    <p>Gruenwald filed his flight report. The fuel numbers filled three pages. The lever malfunction filled one paragraph. Nobody wrote about the holdfast, or the wardrobe, or what it means to keep pulling the correct lever when the world shocks you for it.</p>
+
+    <p><em>The bull kelp grows to sixty meters in a single season. It is the fastest-growing organism in the temperate ocean, building a stipe from holdfast to surface in months. The pneumatocyst at the top &mdash; a gas-filled float the size of a fist &mdash; keeps the blades at the surface where the light is. The whole structure is anchored by a holdfast that looks like nothing: a fist of root-like threads gripping rock. Pull on it. It holds. Pull harder. It holds. The current changes direction six times a day with the tide and the kelp flexes with every change, and the holdfast holds. It chose rock.</em></p>
+
+    <p>Enos chose the correct lever.</p>
+  </div>
+
+  <div class="dedication">
+    Dedicated to C.S. Lewis (1898&ndash;1963)<br>
+    who wrote about wardrobes, and pain, and what lies on the other side
+  </div>
+
+  <div class="story-footer">
+    <p>NASA Mission Series v1.18 &mdash; Mercury-Atlas 5 &mdash; November 29, 1961</p>
+    <p>Organism: <em>Nereocystis luetkeana</em> (Bull Kelp) &bull; Bird: Tufted Puffin (degree 18)</p>
+    <p><a href="../../index.html">Return to Mission Index</a></p>
+  </div>
+</div>
+
+</body>
+</html>

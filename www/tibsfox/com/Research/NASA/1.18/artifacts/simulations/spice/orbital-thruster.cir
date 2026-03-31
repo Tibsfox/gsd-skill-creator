@@ -1,0 +1,203 @@
+* Mercury Attitude Control Thruster — Fuel Consumption Model
+* ==========================================================
+* NASA Mission Series v1.18
+*
+* Models the Mercury spacecraft attitude control system that
+* caused MA-5 to be cut from 3 orbits to 2. The system used
+* hydrogen peroxide (H2O2) thrusters controlled by solenoid
+* valves. A stuck valve on one thruster caused excessive fuel
+* consumption — the thruster was firing in long pulses instead
+* of short bursts.
+*
+* Mercury attitude control system:
+*   - 18 thrusters (6 per axis: pitch, yaw, roll)
+*   - Each axis: 2 high-thrust (24 lbf) + 4 low-thrust (1 lbf)
+*   - Fuel: 90% hydrogen peroxide (H2O2)
+*   - Total fuel capacity: ~60 lbs
+*   - Normal consumption: ~5 lbs per orbit
+*   - MA-5 orbit 2 consumption: ~20 lbs (stuck valve)
+*
+* This circuit models:
+*   1. Solenoid valve driver (switch + flyback diode)
+*   2. RC model of fuel flow (current = fuel flow rate)
+*   3. Integrator (capacitor voltage = total fuel consumed)
+*   4. Comparator (alarm when fuel drops below safe threshold)
+*
+* The comparison: normal operation vs stuck valve shows why
+* ground controllers decided to bring Enos home after 2 orbits.
+*
+* Run: ngspice -b orbital-thruster.cir
+
+*--------------------------------------------------------------
+* POWER SUPPLY
+*--------------------------------------------------------------
+V_supply  vcc  0  DC 12
+
+*--------------------------------------------------------------
+* NORMAL THRUSTER — SHORT BURSTS
+*--------------------------------------------------------------
+* Normal attitude control: brief pulses every few seconds
+* Pulse width: 50ms ON, 2000ms period (2.5% duty cycle)
+* This represents healthy thruster operation during orbit 1
+
+V_normal_cmd  norm_cmd  0  PULSE(0 12 0 1m 1m 50m 2000m)
+
+* Solenoid valve driver (MOSFET switch)
+M_norm  norm_drain  norm_cmd  0  0  NMOS_SW
+R_coil_norm  vcc  norm_drain  50
+
+* Flyback diode (protects MOSFET from solenoid inductance spike)
+D_flyback_norm  0  norm_drain  D_FLYBACK
+L_coil_norm  norm_drain  norm_mid  10m
+
+* Fuel flow model: current through solenoid = fuel flow
+* When valve opens, H2O2 flows to catalyst bed
+R_flow_norm  norm_mid  norm_flow  100
+
+* Fuel consumption integrator
+* Capacitor voltage represents cumulative fuel used
+* C = 10uF: each coulomb = proportional to fuel consumed
+C_fuel_norm  norm_flow  0  10u IC=0
+R_leak_norm  norm_flow  0  1Meg
+
+*--------------------------------------------------------------
+* STUCK THRUSTER — LONG PULSES (MA-5 MALFUNCTION)
+*--------------------------------------------------------------
+* Malfunctioning attitude control: valve sticks partially open
+* Pulse width: 400ms ON, 1000ms period (40% duty cycle)
+* 16x more fuel consumption per pulse than normal!
+* This represents the stuck thruster during orbit 2
+
+V_stuck_cmd  stuck_cmd  0  PULSE(0 12 0 1m 1m 400m 1000m)
+
+* Solenoid valve driver
+M_stuck  stuck_drain  stuck_cmd  0  0  NMOS_SW
+R_coil_stuck  vcc  stuck_drain  50
+
+* Flyback diode
+D_flyback_stuck  0  stuck_drain  D_FLYBACK
+L_coil_stuck  stuck_drain  stuck_mid  10m
+
+* Fuel flow model (same flow rate, but valve open much longer)
+R_flow_stuck  stuck_mid  stuck_flow  100
+
+* Fuel consumption integrator
+C_fuel_stuck  stuck_flow  0  10u IC=0
+R_leak_stuck  stuck_flow  0  1Meg
+
+*--------------------------------------------------------------
+* FUEL LEVEL MONITOR
+*--------------------------------------------------------------
+* Fuel remaining = initial supply - consumed
+* V_total represents full fuel tank (normalized to 12V = 100%)
+V_total  fuel_total  0  DC 12
+
+* Fuel remaining for normal operation
+* (In reality this would be subtracted; here we just compare slopes)
+R_sense_norm  norm_flow  sense_norm  1k
+C_sense_norm  sense_norm  0  1u
+
+* Fuel remaining for stuck thruster
+R_sense_stuck  stuck_flow  sense_stuck  1k
+C_sense_stuck  sense_stuck  0  1u
+
+*--------------------------------------------------------------
+* LOW FUEL ALARM
+*--------------------------------------------------------------
+* Comparator: triggers when fuel consumption exceeds threshold
+* In the actual Mercury system, ground controllers saw the
+* telemetry data showing excessive H2O2 consumption and made
+* the decision to deorbit after orbit 2
+
+* Reference: threshold at which 3rd orbit becomes unsafe
+* Set to ~40% of total fuel (if >40% consumed in 2 orbits,
+* not enough left for orbit 3 + retrofire orientation)
+V_threshold  alarm_thresh  0  DC 4.8
+
+* Simple comparator using behavioral source
+B_alarm_norm  alarm_norm  0  V = V(sense_norm) > V(alarm_thresh) ? 12 : 0
+B_alarm_stuck  alarm_stuck  0  V = V(sense_stuck) > V(alarm_thresh) ? 12 : 0
+
+*--------------------------------------------------------------
+* LED INDICATORS
+*--------------------------------------------------------------
+* Normal thruster activity LED
+R_led_norm  vcc  led_norm_a  1k
+D_led_norm  led_norm_a  norm_drain  D_LED
+
+* Stuck thruster activity LED (blinks more frequently)
+R_led_stuck  vcc  led_stuck_a  1k
+D_led_stuck  led_stuck_a  stuck_drain  D_LED
+
+* Alarm LED (lights when fuel threshold exceeded)
+R_led_alarm  alarm_stuck  led_alarm_a  1k
+D_led_alarm  led_alarm_a  0  D_LED
+
+*--------------------------------------------------------------
+* MODELS
+*--------------------------------------------------------------
+.model NMOS_SW NMOS(VTO=2 KP=0.5 LAMBDA=0.01)
+.model D_FLYBACK D(IS=1e-14 N=1 BV=100 RS=1)
+.model D_LED D(IS=1e-20 N=2 BV=5 RS=5)
+
+*--------------------------------------------------------------
+* SIMULATION
+*--------------------------------------------------------------
+* Run for 10 seconds to see several thruster cycles
+.tran 1m 10
+
+*--------------------------------------------------------------
+* OUTPUT
+*--------------------------------------------------------------
+.control
+  run
+
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  * Plot thruster commands: normal vs stuck
+  hardcopy thruster_commands.png v(norm_cmd) v(stuck_cmd)
+  + title 'Thruster Commands: Normal (50ms pulses) vs Stuck (400ms pulses)'
+  + xlabel 'Time (s)' ylabel 'Command Voltage (V)'
+
+  * Plot fuel consumption: normal vs stuck
+  hardcopy fuel_consumption.png v(norm_flow) v(stuck_flow) v(alarm_thresh)
+  + title 'Cumulative Fuel Consumption — Normal vs Stuck Thruster'
+  + xlabel 'Time (s)' ylabel 'Fuel Consumed (proportional V)'
+
+  * Plot alarm status
+  hardcopy alarm_status.png v(alarm_norm) v(alarm_stuck)
+  + title 'Low Fuel Alarm — Stuck Thruster Triggers First'
+  + xlabel 'Time (s)' ylabel 'Alarm (12V = TRIGGERED)'
+
+  * Measurements
+  echo ""
+  echo "=== MA-5 THRUSTER FUEL ANALYSIS ==="
+  echo ""
+  echo "Normal thruster duty cycle:  2.5% (50ms/2000ms)"
+  echo "Stuck thruster duty cycle:   40%  (400ms/1000ms)"
+  echo "Fuel consumption ratio:      ~16x higher with stuck valve"
+  echo ""
+  echo "Fuel consumption at T=5s (mid-orbit):"
+  meas tran fuel_norm_5s FIND v(norm_flow) AT=5
+  meas tran fuel_stuck_5s FIND v(stuck_flow) AT=5
+  echo ""
+  echo "Fuel consumption at T=10s (end of orbit):"
+  meas tran fuel_norm_10s FIND v(norm_flow) AT=10
+  meas tran fuel_stuck_10s FIND v(stuck_flow) AT=10
+  echo ""
+  echo "Alarm trigger times:"
+  meas tran alarm_norm_time TRIG v(alarm_norm) VAL=6 RISE=1
+  meas tran alarm_stuck_time TRIG v(alarm_stuck) VAL=6 RISE=1
+  echo ""
+  echo "This is why MA-5 was cut from 3 to 2 orbits."
+  echo "The stuck thruster consumed fuel 16x faster than normal."
+  echo "Ground controllers saw the consumption rate on telemetry"
+  echo "and made the correct decision: bring Enos home safely"
+  echo "rather than risk a third orbit without enough fuel for"
+  echo "proper retrofire orientation."
+
+  quit
+.endc
+
+.end

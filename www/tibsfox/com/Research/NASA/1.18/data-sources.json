@@ -1,0 +1,107 @@
+{
+  "mission": "1.18",
+  "title": "Mercury-Atlas 5 (MA-5)",
+  "description": "Open datasets and source materials relevant to Mercury-Atlas 5 (1961), Enos the chimpanzee, Mercury orbital qualification, Nereocystis luetkeana, kelp forest ecology, and C.S. Lewis",
+  "sources": [
+    {
+      "id": "nssdc-ma5",
+      "name": "NSSDC Master Catalog — Mercury-Atlas 5",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-029A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "NASA Space Science Data Coordinated Archive entry for MA-5. Mission profile, spacecraft description (Mercury spacecraft #9), launch vehicle (Atlas D, serial 109-D), orbital parameters (161x237 km, 32.5 degree inclination, 88.5 min period), and mission outcome. Canonical NASA record of the first American primate orbital flight. Includes launch date (November 29, 1961), flight duration (3h 20m 59s), recovery details (USS Stormes, south of Bermuda), and classification as SUCCESS despite the 2-orbit truncation from planned 3 orbits.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-sp39",
+      "name": "Results of the Project Mercury Ballistic and Orbital Chimpanzee Flights (NASA SP-39)",
+      "url": "https://ntrs.nasa.gov/citations/19640001858",
+      "type": "primary-source",
+      "category": "biomedical",
+      "description": "NASA Special Publication 39: comprehensive biomedical report on both Mercury chimpanzee flights — MR-2 (Ham, suborbital) and MA-5 (Enos, orbital). Contains detailed physiological data: heart rate, respiration, body temperature, lever-pull reaction times, error rates, and g-force tolerance measurements for both flights. Documents the lever mechanism malfunction during MA-5 — the reversed reward/punishment circuit that delivered 76 electric shocks for correct responses. Includes pre-flight training protocols (1,263 hours for Enos), in-flight telemetry data, post-flight medical examinations, and the behavioral analysis showing that Enos maintained correct responses despite contingency reversal. This is the primary scientific record of primate cognitive performance during orbital spaceflight.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "ntrs-mercury-history",
+      "name": "This New Ocean: A History of Project Mercury (NASA SP-4201)",
+      "url": "https://history.nasa.gov/SP-4201/toc.htm",
+      "type": "primary-source",
+      "category": "program-history",
+      "description": "Loyd S. Swenson Jr., James M. Grimwood, and Charles C. Alexander's comprehensive history of the Mercury program, published by NASA in 1966. Chapter 11 covers the orbital qualification flights including MA-5. Details the Atlas D vehicle history, its balloon-tank pressurized structure, the troubled test record (MA-1 failure, MA-3 destruction), the selection and training of Enos at Holloman Air Force Base, the launch sequence, the lever malfunction discovery during flight, the decision to shorten from 3 to 2 orbits due to thruster fuel consumption and elevated body temperature, recovery operations, and the path from MA-5 to Glenn's MA-6 orbital flight 83 days later.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "jpl-horizons",
+      "name": "JPL HORIZONS System — Ephemeris Service",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "orbital-mechanics",
+      "description": "JPL's HORIZONS system provides ephemeris data for solar system objects including spacecraft. Can generate state vectors, orbital elements, and observer quantities for Mercury spacecraft during their missions. Useful for reconstructing MA-5's orbital parameters: 161x237 km orbit, 32.5 degree inclination, 88.5 minute period. The system allows computation of orbital velocity at any point in the orbit using the vis-viva equation, ground track visualization, and comparison between planned and actual orbital elements. Also provides Earth orientation data needed for recovery zone calculations.",
+      "format": "text/JSON/CSV",
+      "access": "open"
+    },
+    {
+      "id": "smithsonian-mercury",
+      "name": "Smithsonian National Air and Space Museum — Mercury Program Collection",
+      "url": "https://airandspace.si.edu/collection-objects/capsule-mercury-ma-9-faith-7/nasm_A19650022000",
+      "type": "primary-source",
+      "category": "museum",
+      "description": "The Smithsonian's collection of Mercury program artifacts includes spacecraft, flight hardware, spacesuits, and mission documentation. Mercury spacecraft #9 (the capsule flown on MA-5) was recovered and preserved. The collection provides photographic documentation of the capsule interior including the modified psychomotor test apparatus used by Enos, the lever mechanism, the banana pellet dispenser, and the shock delivery system. Also includes Atlas launch vehicle components, Mercury pressure suit specimens, and documentation of the capsule qualification process from unmanned tests through primate flights to human missions.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "inaturalist-nereocystis",
+      "name": "iNaturalist — Nereocystis luetkeana Observations",
+      "url": "https://www.inaturalist.org/taxa/55938-Nereocystis-luetkeana",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Community-submitted observations of bull kelp across its Pacific coast range from Unalaska Island (Alaska) to San Luis Obispo County (California). Distribution maps showing dense populations in Washington, Oregon, and British Columbia. Photographs of holdfasts, stipes, pneumatocysts, and blade canopies in various seasonal conditions. Observations capture the annual lifecycle: spring sporelings emerging from rocky substrate, summer canopy formation with blades streaming at the surface, fall reproduction with sorus patches on blades, winter senescence as storms tear weakened stipes from exhausted holdfasts. Particularly dense observation records from the San Juan Islands, Strait of Juan de Fuca, and outer Washington coast.",
+      "format": "HTML/JSON",
+      "access": "open"
+    },
+    {
+      "id": "noaa-kelp-surveys",
+      "name": "NOAA Kelp Forest Monitoring — Pacific Coast",
+      "url": "https://www.fisheries.noaa.gov/west-coast/habitat-conservation/kelp-forest-monitoring",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "NOAA's long-term kelp forest monitoring program along the Pacific coast. Includes aerial survey data showing kelp canopy extent, Landsat satellite-derived kelp cover estimates, and in-situ monitoring of kelp forest health indicators. Data covers Nereocystis luetkeana and Macrocystis pyrifera distribution, density, and temporal trends. Recent data shows concerning declines in bull kelp populations in northern California and parts of Oregon, attributed to marine heat waves, purple sea urchin (Strongylocentrotus purpuratus) overgrazing following sea star wasting disease, and reduced nutrient upwelling. Washington populations remain relatively stable but are monitored for similar decline signals.",
+      "format": "CSV/GIS/HTML",
+      "access": "open"
+    },
+    {
+      "id": "wa-dnr-kelp",
+      "name": "Washington Department of Natural Resources — Kelp Monitoring Program",
+      "url": "https://www.dnr.wa.gov/programs-and-services/aquatics/aquatic-science/kelp-monitoring",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Washington DNR's statewide kelp monitoring program tracks floating kelp canopy (primarily Nereocystis luetkeana) using aerial surveys, kayak-based surveys, and fixed transects. The program covers major bull kelp beds in the San Juan Islands, Strait of Juan de Fuca, and outer coast. Data includes canopy area measurements, stipe density counts, holdfast condition assessments, and correlations with water temperature, salinity, and nutrient levels. The program has documented year-to-year variability in bull kelp abundance consistent with the species' annual lifecycle — each year's canopy is an entirely new crop grown from spores released the previous autumn.",
+      "format": "PDF/GIS/HTML",
+      "access": "open"
+    },
+    {
+      "id": "algaebase-nereocystis",
+      "name": "AlgaeBase — Nereocystis luetkeana",
+      "url": "https://www.algaebase.org/search/species/detail/?species_id=p5454a68e35e6d36d",
+      "type": "primary-source",
+      "category": "taxonomy",
+      "description": "AlgaeBase is the global taxonomic database for algae, maintained by the National University of Ireland, Galway. The entry for Nereocystis luetkeana (K.Mertens) Postels and Ruprecht provides accepted taxonomy, nomenclatural history, type locality information, synonyms, and distribution records. Classification: Phaeophyceae (brown algae), order Laminariales, family Laminariaceae. The genus Nereocystis is monotypic — N. luetkeana is the only species. The name derives from Greek 'nereo' (sea nymph) + 'cystis' (bladder), referring to the gas-filled pneumatocyst. First described from specimens collected in the North Pacific by Karl Heinrich Mertens.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "mcdowell-launches",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/index.html",
+      "type": "secondary-source",
+      "category": "launch-vehicle",
+      "description": "Jonathan McDowell (Harvard-Smithsonian Center for Astrophysics) maintains the most comprehensive publicly available database of orbital and suborbital launches. The database includes Atlas D launch records with serial numbers, payload identifications, orbital parameters, and success/failure classifications. Atlas 93-D (the vehicle that launched MA-5) is cataloged with launch time, trajectory data, and staging events. The database allows comparison across the Mercury-Atlas series: MA-1 (failed), MA-2 (success), MA-3 (failed), MA-4 (success), MA-5 (success), MA-6 through MA-9 (all success). Also includes the broader Atlas ICBM test record that informed astronaut confidence assessments.",
+      "format": "text/HTML",
+      "access": "open"
+    }
+  ]
+}

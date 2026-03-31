@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.18 — Mercury-Atlas 5 + Bull Kelp | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040A08; --bio-mid: #081810;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --kelp-green: #508840; --kelp-dim: #284420;
+    --orbit-gold: #D4A030; --orbit-dim: #6A5018;
+    --kelp-amber: #C09030; --kelp-amber-dim: #604818;
+    --ocean-teal: #207880; --space: #050510;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2820;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(212,160,48,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(192,144,48,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(96,104,112,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(80,136,64,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(212,160,48,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(5,5,16,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(32,120,128,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 20%, var(--bio-mid) 40%, var(--kelp-dim) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mercury-silver);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-success {
+    background: rgba(40,180,80,0.2); border: 1px solid #28B450;
+    color: #28B450; padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--orbit-gold);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--orbit-gold); }
+  .card em { color: var(--kelp-amber); }
+
+  .resonance-card { border-color: var(--kelp-dim); background: rgba(40,68,32,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(40,68,32,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--orbit-gold); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--mercury-silver); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--mercury-silver); background: rgba(176,184,192,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--orbit-gold); }
+  .track-card.t2 .track-title { color: var(--kelp-amber); }
+  .track-card.t3 .track-title { color: var(--mercury-silver); }
+  .track-card.t4 .track-title { color: var(--orbit-gold); }
+  .track-card.t5 .track-title { color: var(--mercury-silver); }
+  .track-card.t6 .track-title { color: var(--kelp-amber); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(192,144,48,0.08); border: 1px solid var(--kelp-amber-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--kelp-amber); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(5,5,16,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--orbit-gold); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(176,184,192,0.06); border: 1px solid rgba(176,184,192,0.2);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--mercury-silver); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(176,184,192,0.15); transition: color 0.2s; }
+  .data-links a:hover { color: var(--orbit-gold); }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--orbit-gold); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.18</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>v1.18 &mdash; Mercury-Atlas 5 + <em>Nereocystis luetkeana</em></h1>
+    <p class="subtitle">The Orbit &mdash; Enos the Chimpanzee Qualifies Mercury for Human Orbital Flight</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> November 29, 1961</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Enos (Chimpanzee, ~17 kg)</span>
+      <span><span class="label">Orbits:</span> 2 of 3 planned</span>
+      <span><span class="label">Duration:</span> 3:20:59</span>
+      <span><span class="label">Organism:</span> Bull kelp</span>
+      <span><span class="label">Bird:</span> Tufted Puffin</span>
+      <span><span class="label">Dedication:</span> C.S. Lewis</span>
+      <span><span class="label">Status:</span> SUCCESS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On November 29, 1961, Mercury-Atlas 5 launched from Cape Canaveral carrying Enos &mdash; a five-year-old Cameroon-born chimpanzee trained at Holloman Air Force Base &mdash; atop an Atlas D, the pressurized balloon-tank ICBM that the astronauts called &ldquo;the wet firecracker.&rdquo; The Atlas was not a Redstone. Where Ham&rsquo;s rocket had been a single-engine ballistic missile that could loft a capsule to space and drop it back, the Atlas was an intercontinental weapon with three engines producing 360,000 pounds of thrust, a stainless-steel skin thinner than a dime that would collapse without internal pressurization, and a documented history of explosive failure. It was also the only American rocket that could accelerate a Mercury capsule to <strong>7.82 km/s</strong> &mdash; orbital velocity.</p>
+      <p>Enos reached a 161 &times; 237 km orbit with a period of 88.5 minutes. During the first orbit, a lever mechanism defect reversed the reward/punishment circuit: correct lever pulls delivered electric shocks instead of banana pellets. Enos was being <strong>punished for doing exactly what he had been trained to do</strong>. He continued pulling the correct lever. He absorbed 76 shocks for correct responses and maintained his trained behavior throughout. The contingency reversal &mdash; one of the most stressful experiences in operant conditioning &mdash; did not break him. His accuracy did not drop to chance. His response direction did not change. He was slower, consistent with conflict, but correct.</p>
+      <p>The flight was cut from three orbits to two. A stuck thruster valve was consuming hydrogen peroxide at four times the planned rate, threatening to leave the capsule without attitude control for reentry. Enos&rsquo;s body temperature was also rising, likely from the combined stress of the suit&rsquo;s thermal system underperforming and the sustained shock conflict. The retrofire sequence fired on schedule. The capsule reentered at <strong>7.6g</strong>, splashed down south of Bermuda, and was recovered by the USS Stormes. Enos was alert, active, and uninjured. Eighty-three days later, John Glenn flew Mercury-Atlas 6 &mdash; the first American orbital flight. Every system Glenn trusted had been qualified by a chimpanzee who kept pulling the right lever while the machine told him he was wrong.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The Orbit</div>
+            <div class="track-desc">Atlas balloon structure, Enos&rsquo;s orbital flight, the lever malfunction, aversive contingency reversal, thruster fuel anomaly, 2-orbit return, Glenn qualification</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">Orbital mechanics primer, kelp forest carbon sequestration, operant conditioning under compound stress, blunt-body reentry heating</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Nereocystis luetkeana</em></div>
+            <div class="track-desc">Bull kelp &mdash; annual lifecycle, 36m in one season, holdfast anchor, pneumatocyst buoyancy, kelp forest ecology, PNW rocky coast canopy</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Orbit</div>
+            <div class="track-desc">Vis-viva equation, orbital period, reentry corridor geometry, Bayesian decision under faulty feedback, balloon tank stress analysis</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Orbital Mechanics, Marine Biology, Behavioral Psychology, Ethics of Animal Testing, Music. LED orbital display DIY. Product detector circuit.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Orbit, Visualize, Create</div>
+            <div class="track-desc">Orbital velocity calculator, reentry corridor simulator, &ldquo;Right Lever Wrong Shock&rdquo; decision game, orbit viewer, &ldquo;The Orbit&rdquo; shader, &ldquo;The Orbit&rdquo; story</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Tether / Anchor</div>
+          The bull kelp&rsquo;s holdfast grips bare rock at the seafloor, anchoring the entire organism against current, surge, and storm. The Mercury capsule was tethered to the Atlas &mdash; a pressurized balloon that held itself together only through internal pressure, anchoring the astronaut&rsquo;s fate to a structure as thin as a dime. Both organisms depend on a single anchor point. Both face destruction if the anchor fails.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Growth Speed / Qualification Speed</div>
+          Nereocystis grows at up to 10 cm/day &mdash; from spore to 36-meter canopy-forming adult in a single season, one of the fastest sustained growth rates on Earth. Mercury went from first Atlas test failure (MA-1, July 1960) to human orbital flight (MA-6, February 1962) in 19 months. Both raced against a deadline. The kelp races the season before winter storms destroy the stipe. Mercury raced the Soviets before the political window closed.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Annual Lifecycle / Ephemeral Mission</div>
+          Bull kelp is an annual. The entire organism &mdash; holdfast, stipe, pneumatocyst, blades &mdash; grows, reproduces, and dies in one year. Mercury flights were similarly ephemeral: a few hours of orbital time, then the capsule is a museum piece and the mission exists only as data. Both invest everything in a single cycle. Neither gets a second attempt. The kelp that fails to reach the surface starves. The capsule that fails reentry burns.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Foundation Species / Foundation Mission</div>
+          Nereocystis is a foundation species: its vertical structure creates the kelp forest ecosystem that supports hundreds of other species. MA-5 was a foundation mission: its successful qualification created the operational framework that supported every subsequent Mercury orbital flight. Remove the kelp and the forest collapses. Remove MA-5&rsquo;s data and Glenn does not fly in February 1962.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Canopy at Boundary / Orbit at Boundary</div>
+          The kelp&rsquo;s blades float at the ocean surface &mdash; the boundary between water and atmosphere, where light is maximum. The Mercury capsule orbited at the boundary between atmosphere and space &mdash; low enough for drag to be significant, high enough for orbital mechanics to dominate. Both organisms position themselves at the interface where their energy source is accessible: photons for the kelp, velocity for the capsule.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <div class="axis-title">Prior Knowledge Robustness</div>
+          Enos was shocked for correct responses and continued pulling the correct lever &mdash; his prior training was robust enough to withstand contradictory feedback. The bull kelp&rsquo;s holdfast maintains its grip through storm surge, tidal reversal, and wave impact &mdash; the attachment formed during calm conditions persists through conditions that are the opposite of calm. Both demonstrate that deeply established patterns resist inversion. Prior knowledge, whether encoded in neural pathways or adhesive chemistry, does not release under contradiction.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><strong>Shader: &ldquo;The Orbit&rdquo;</strong> &mdash; <a href="artifacts/screensaver/ma5-screensaver.frag" style="color: var(--mercury-silver);">GLSL fragment shader</a>, view from Mercury capsule #9 in low Earth orbit, kelp-green aurora bands</li>
+        <li><strong>Story: &ldquo;The Orbit&rdquo;</strong> &mdash; <a href="artifacts/stories/the-orbit.html" style="color: var(--mercury-silver);">HTML</a> / <a href="artifacts/stories/the-orbit.tex" style="color: var(--mercury-silver);">LaTeX</a> &mdash; Creative nonfiction following Enos through two orbits of silence, shock, and correct behavior</li>
+        <li><strong>Story: &ldquo;The Anchor&rdquo;</strong> &mdash; Bull kelp holdfast as metaphor for the training that held Enos steady when the rewards inverted</li>
+        <li><strong>Audio: MA-5 Synthesis</strong> &mdash; <a href="artifacts/audio/ma5-enos-synth.dsp" style="color: var(--mercury-silver);">Faust DSP</a> (Atlas triple-engine ignition, staging jolt, orbital silence, retrofire)</li>
+        <li><strong>Audio: Tufted Puffin</strong> &mdash; <a href="artifacts/audio/tufted-puffin.dsp" style="color: var(--mercury-silver);">Faust DSP</a> (low growling calls from nesting burrow)</li>
+        <li><strong>Circuit: LED Orbital Display</strong> &mdash; <a href="artifacts/circuits/led-orbital-display.md" style="color: var(--mercury-silver);">Design doc</a> &mdash; Shift-register LED ring showing capsule position along orbital track</li>
+        <li><strong>Circuit: Product Detector</strong> &mdash; <a href="artifacts/circuits/radio-product-detector.md" style="color: var(--mercury-silver);">Design doc</a> &mdash; Progressive radio series: NE602 product detector for SSB reception</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><strong>Python: Orbital Velocity Calculator</strong> &mdash; <a href="artifacts/simulations/python/orbital-velocity.py" style="color: var(--mercury-silver);">orbital-velocity.py</a> &mdash; Vis-viva equation, velocity at perigee/apogee, comparison with Redstone suborbital</li>
+        <li><strong>Python: Reentry Corridor Simulator</strong> &mdash; <a href="artifacts/simulations/python/reentry-corridor.py" style="color: var(--mercury-silver);">reentry-corridor.py</a> &mdash; Flight path angle sweep, skip-out vs. burn-up boundaries, Mercury safe corridor</li>
+        <li><strong>Web: &ldquo;Right Lever Wrong Shock&rdquo;</strong> &mdash; <a href="artifacts/simulations/web/decision-game.html" style="color: var(--mercury-silver);">decision-game.html</a> &mdash; Interactive decision game simulating Enos&rsquo;s contingency reversal</li>
+        <li><strong>Web: Orbit Viewer</strong> &mdash; <a href="artifacts/simulations/web/orbit-viewer.html" style="color: var(--mercury-silver);">orbit-viewer.html</a> &mdash; 161 &times; 237 km orbit visualization with perigee/apogee markers</li>
+        <li><strong>SPICE: Product Detector</strong> &mdash; <a href="artifacts/simulations/spice/product-detector.cir" style="color: var(--mercury-silver);">product-detector.cir</a> &mdash; Progressive radio series: NE602-based product detector with BFO</li>
+        <li><strong>SPICE: Orbital Thruster Model</strong> &mdash; <a href="artifacts/simulations/spice/orbital-thruster.cir" style="color: var(--mercury-silver);">orbital-thruster.cir</a> &mdash; H2O2 monopropellant thruster valve model with stuck-open failure mode</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: var(--mercury-silver);">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(212,160,48,0.04); border-color: var(--orbit-dim);">
+      <h2 style="color: var(--orbit-gold);">Dedication: C.S. Lewis</h2>
+      <p><strong>Born November 29, 1898 &mdash; Died November 22, 1963</strong></p>
+      <p>Clive Staples Lewis was born on the exact calendar date that Mercury-Atlas 5 launched, sixty-three years before Enos orbited the Earth. Lewis spent his career writing about wardrobes that opened into other worlds. The Mercury capsule was six feet wide. It opened into orbit. The wardrobe in <em>The Lion, the Witch and the Wardrobe</em> was a passage from the ordinary into the numinous, from a spare room in an English country house into a world where animals spoke and winter never ended. The Mercury hatch was a passage from a concrete pad in Florida into a world where a chimpanzee circled the planet every 88.5 minutes while being shocked for correct answers.</p>
+      <p>Lewis also wrote <em>The Problem of Pain</em> &mdash; a book-length examination of why suffering exists in a world governed by a benevolent creator. Enos, who could not read Lewis, lived the problem of pain at 161 kilometers altitude: punished for doing right, maintaining correct behavior despite contradictory feedback, absorbing shocks because the lever his training said was correct was the lever his body said was wrong. Lewis would have recognized the situation. He spent decades arguing that suffering has meaning even when the sufferer cannot see it. Enos could not see the meaning. He pulled the lever anyway.</p>
+      <p>Lewis died on November 22, 1963 &mdash; the same day President Kennedy was assassinated in Dallas. The president who had committed America to the Moon died on the same afternoon as the author who had imagined space travel as a journey into deeper reality. Lewis&rsquo;s death went largely unnoticed in the coverage. The Space Trilogy &mdash; <em>Out of the Silent Planet</em>, <em>Perelandra</em>, <em>That Hideous Strength</em> &mdash; imagined other worlds not as targets for conquest but as places where the moral questions of Earth played out at larger scale. Mercury was that kind of passage. The capsule was the wardrobe. The orbit was Narnia. And the chimpanzee who flew through it proved that the passage could be survived.</p>
+      <p style="font-style: italic; color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; text-align: center;"><strong style="color: var(--orbit-gold); font-size: 1.3rem;">The wardrobe opened. The lever was pulled. The orbit was real.</strong></p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.17/index.html">&larr; v1.17 Mercury-Redstone 2</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.19/index.html">v1.19 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Nereocystis luetkeana (Bull Kelp)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">36 m</div>
+          <div class="stat-label">Max Length</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">10 cm/d</div>
+          <div class="stat-label">Growth Rate</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Annual</div>
+          <div class="stat-label">Lifecycle</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">30&ndash;64</div>
+          <div class="stat-label">Blades</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        The defining kelp of the Pacific Northwest coast. Grows from a microscopic spore to a 36-meter canopy-forming adult in a single season &mdash; one of the fastest sustained growth rates on Earth. Holdfast grips rocky substrate; hollow stipe rises through the water column; gas-filled pneumatocyst floats blades at the surface for photosynthesis. Architecture is vertical, integrated, and without redundancy. Every component is essential. The kelp reaches the surface and thrives, or it does not reach the surface and dies.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(176,184,192,0.06); border-color: var(--mercury-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Bird: Tufted Puffin</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em style="color: var(--kelp-amber);">Fratercula cirrhata</em> (degree 18). Nests in earthen burrows on offshore islands and steep coastal cliffs throughout the North Pacific, from California to Alaska to Japan. Distinctive golden head tufts and massive orange bill during breeding season. Dives to 60+ meters to catch fish and squid, using wings for underwater propulsion &mdash; flying through water the way Enos flew through vacuum. Populations declining in the southern part of their range, correlated with warming sea surface temperatures and reduced forage fish availability in kelp forest ecosystems.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(80,136,64,0.06); border-color: var(--kelp-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Enos&rsquo;s Flight Data</h3>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">161 km</div>
+          <div class="stat-label">Perigee</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">237 km</div>
+          <div class="stat-label">Apogee</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3:20:59</div>
+          <div class="stat-label">Flight Time</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">7.6g</div>
+          <div class="stat-label">Reentry G</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--orbit-gold);">Orbits:</strong> 2 of 3 planned (cut short: thruster fuel + body temp). <strong style="color: var(--orbit-gold);">Velocity:</strong> 7.82 km/s orbital. <strong style="color: var(--orbit-gold);">Period:</strong> 88.5 min. <strong style="color: var(--orbit-gold);">Lever malfunction:</strong> 76 shocks for correct responses. Maintained trained behavior throughout. Glenn flew MA-6 eighty-three days later.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: MA-5</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS System</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://airandspace.si.edu/">Smithsonian Air &amp; Space Museum</a>
+      <a href="https://www.inaturalist.org/">iNaturalist: Nereocystis luetkeana</a>
+      <a href="https://www.fisheries.noaa.gov/">NOAA Kelp Forest Monitoring</a>
+      <a href="https://www.dnr.wa.gov/">Washington DNR Kelp Monitoring</a>
+      <a href="https://www.algaebase.org/">AlgaeBase</a>
+    </div>
+
+    <div class="card" style="background: rgba(212,160,48,0.06); border-color: var(--orbit-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--orbit-gold);">Primary:</strong> Orbital Mechanics (Vis-Viva, Reentry Corridor), Marine Biology (Kelp Forest Ecology, Annual Growth Cycle), Behavioral Psychology (Operant Conditioning, Contingency Reversal)<br>
+        <strong style="color: var(--orbit-gold);">Secondary:</strong> Systems Engineering (Atlas Balloon Tank, Thruster Design), Ethics (Animal Testing, Compound Stress), Music (C.S. Lewis, Imagination Under Pressure)
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(212,160,48,0.06); border-color: var(--orbit-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">TSPB Layers</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--orbit-gold);">Layer 4:</strong> Vector Calculus &mdash; Orbital velocity, vis-viva equation, reentry corridor geometry<br>
+        <strong style="color: var(--orbit-gold);">Layer 7:</strong> Information Theory &mdash; Bayesian decision under faulty feedback, operant conditioning as channel<br>
+        <strong style="color: var(--orbit-gold);">Layer 6:</strong> Structures &mdash; Atlas balloon tank, pneumatocyst buoyancy, holdfast mechanics<br>
+        <strong style="color: var(--orbit-gold);">Layer 8:</strong> Biology &mdash; Kelp forest ecology, annual lifecycle, foundation species dynamics
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.18 Mercury-Atlas 5 + <em>Nereocystis luetkeana</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>
