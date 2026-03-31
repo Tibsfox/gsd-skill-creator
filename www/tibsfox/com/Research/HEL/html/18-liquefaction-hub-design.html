@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquefaction Hub Design — Site Selection and
+Specifications — HEL Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --accent: #e94560;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4fc3f7;
+            --border: #2a2a4a;
+            --helium: #ffd700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--helium); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--helium); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--helium); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--helium); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--helium); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(79,195,247,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--helium); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        HEL — Helium Supply Chain &amp; Pacific Rim Semiconductor Infrastructure<br>
+        PNW Research Series · <a href="../index.html">Back to HEL Index</a> · <a href="../../index.html">Series Index</a>
+    </div>
+    <h1
+    id="liquefaction-hub-design-site-selection-and-specifications">Liquefaction
+    Hub Design — Site Selection and Specifications</h1>
+    <h2 id="what-the-hub-does">What the Hub Does</h2>
+    <p>The central hub receives crude helium (50–70% purity) from
+    distributed sources, purifies it to Grade-A (99.999%) or Research
+    Grade (99.9999%), optionally liquefies it to -269°C, and distributes
+    it to customers via cylinder, dewar, or ISO container.</p>
+    <h2 id="facility-layout">Facility Layout</h2>
+    <pre><code>┌─────────────────────────────────────────────────────┐
+│                  CO-OP HELIUM HUB                    │
+│                                                      │
+│  RECEIVING          PROCESSING         STORAGE       │
+│  ┌──────────┐      ┌──────────────┐   ┌──────────┐  │
+│  │ Tube     │      │ Membrane     │   │ High-P   │  │
+│  │ trailer  │─────►│ separation   │──►│ gas      │  │
+│  │ bay      │      │ (50→80% He)  │   │ storage  │  │
+│  │ (2 bays) │      └──────┬───────┘   └──────────┘  │
+│  └──────────┘             │                          │
+│                    ┌──────▼───────┐   ┌──────────┐  │
+│                    │ PSA          │   │ Liquid   │  │
+│  QUALITY LAB       │ purification │──►│ He      │  │
+│  ┌──────────┐      │ (80→99.999%) │   │ storage  │  │
+│  │ GC/MS    │      └──────┬───────┘   │ (dewar)  │  │
+│  │ analysis │             │           └──────────┘  │
+│  └──────────┘      ┌──────▼───────┐                 │
+│                    │ Liquefier    │   DISPATCH       │
+│  UTILITIES         │ (-269°C)    │   ┌──────────┐  │
+│  ┌──────────┐      └──────┬───────┘   │ Cylinder │  │
+│  │ Power    │             │           │ fill     │  │
+│  │ Water    │             └──────────►│ station  │  │
+│  │ Cooling  │                         │ Loading  │  │
+│  └──────────┘                         └──────────┘  │
+│                                                      │
+│  Footprint: 5,000-15,000 sq ft indoor               │
+│  Lot: 1-3 acres (truck access, trailer parking)     │
+└─────────────────────────────────────────────────────┘</code></pre>
+    <h2 id="capital-costs">Capital Costs</h2>
+    <h3 id="small-hub-100-lday-liquid-output">Small Hub (100 L/day
+    liquid output)</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Component</th>
+    <th>Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Membrane separation system</td>
+    <td>$200K–$400K</td>
+    </tr>
+    <tr>
+    <td>PSA purification (99.999%)</td>
+    <td>$300K–$1M</td>
+    </tr>
+    <tr>
+    <td>Liquefier (Chart/Cryomech)</td>
+    <td>$500K–$2M</td>
+    </tr>
+    <tr>
+    <td>High-pressure gas storage (tube bank)</td>
+    <td>$100K–$200K</td>
+    </tr>
+    <tr>
+    <td>Liquid helium storage dewar (5,000L)</td>
+    <td>$150K–$300K</td>
+    </tr>
+    <tr>
+    <td>Cylinder/dewar fill station</td>
+    <td>$200K–$500K</td>
+    </tr>
+    <tr>
+    <td>Quality lab (GC, mass spec, moisture)</td>
+    <td>$300K–$500K</td>
+    </tr>
+    <tr>
+    <td>Building/site improvements</td>
+    <td>$500K–$1.5M</td>
+    </tr>
+    <tr>
+    <td>Utilities (electrical, water, cooling)</td>
+    <td>$200K–$500K</td>
+    </tr>
+    <tr>
+    <td>Permitting and engineering</td>
+    <td>$200K–$400K</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>$2.7M–$7.3M</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="medium-hub-500-lday-liquid-output">Medium Hub (500 L/day
+    liquid output)</h3>
+    <p>Scale up processing equipment, add redundancy, larger storage: -
+    <strong>Total: $6M–$15M</strong></p>
+    <h2 id="site-requirements">Site Requirements</h2>
+    <table>
+    <colgroup>
+    <col style="width: 48%" />
+    <col style="width: 51%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Requirement</th>
+    <th>Specification</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Power</strong></td>
+    <td>200–500 kW connected load (liquefier is the primary draw)</td>
+    </tr>
+    <tr>
+    <td><strong>Water</strong></td>
+    <td>Cooling water for compressors, ~5–20 GPM (closed-loop cooling
+    tower preferred)</td>
+    </tr>
+    <tr>
+    <td><strong>Zoning</strong></td>
+    <td>Industrial (I-1 or I-2 in most jurisdictions). Hazmat storage
+    requires setbacks.</td>
+    </tr>
+    <tr>
+    <td><strong>Road access</strong></td>
+    <td>Must accommodate tractor-trailers (tube trailers in,
+    cylinders/dewars out)</td>
+    </tr>
+    <tr>
+    <td><strong>Proximity to I-5</strong></td>
+    <td>Within 10 miles for efficient corridor distribution</td>
+    </tr>
+    <tr>
+    <td><strong>Port proximity</strong></td>
+    <td>Within 30 miles of Tacoma/Seattle ports for export
+    containers</td>
+    </tr>
+    <tr>
+    <td><strong>Lot size</strong></td>
+    <td>1–3 acres minimum (building + truck access + trailer
+    staging)</td>
+    </tr>
+    <tr>
+    <td><strong>Building</strong></td>
+    <td>5,000–15,000 sq ft, high-bay for equipment, concrete floor rated
+    for heavy loads</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="candidate-locations-along-i-5">Candidate Locations Along
+    I-5</h2>
+    <table>
+    <colgroup>
+    <col style="width: 27%" />
+    <col style="width: 30%" />
+    <col style="width: 41%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Location</th>
+    <th>Advantages</th>
+    <th>Considerations</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Smokey Point, WA</strong></td>
+    <td>Central Welding fill plant already there; industrial zoning; I-5
+    access</td>
+    <td>North of Seattle — adds distance to Portland customers</td>
+    </tr>
+    <tr>
+    <td><strong>Kent/Auburn, WA</strong></td>
+    <td>Heavy industrial zoning; close to Port of Tacoma; rail access
+    (BNSF)</td>
+    <td>Higher land costs</td>
+    </tr>
+    <tr>
+    <td><strong>Tumwater/Olympia, WA</strong></td>
+    <td>Mid-corridor; industrial land available; state capital
+    (grants)</td>
+    <td>Smaller labor pool</td>
+    </tr>
+    <tr>
+    <td><strong>Portland industrial district</strong></td>
+    <td>Close to Silicon Forest (Hillsboro ~25 mi); rail access; large
+    industrial market</td>
+    <td>Oregon vs. WA regulatory differences</td>
+    </tr>
+    <tr>
+    <td><strong>Hillsboro/Beaverton, OR</strong></td>
+    <td>Directly adjacent to Intel D1X; maximum customer proximity</td>
+    <td>Land costs near Intel campus are premium</td>
+    </tr>
+    <tr>
+    <td><strong>Wilsonville, OR</strong></td>
+    <td>I-5 access; industrial zoning; between Portland and Salem</td>
+    <td>Good balance of access and cost</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="power-requirements-detail">Power Requirements Detail</h2>
+    <table>
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 20%" />
+    <col style="width: 17%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Component</th>
+    <th>Power Draw</th>
+    <th>Running Hours</th>
+    <th>Monthly kWh</th>
+    <th>Monthly Cost ($0.07/kWh)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Membrane compressor</td>
+    <td>30 kW</td>
+    <td>24/7</td>
+    <td>21,600</td>
+    <td>$1,512</td>
+    </tr>
+    <tr>
+    <td>PSA system</td>
+    <td>15 kW</td>
+    <td>24/7</td>
+    <td>10,800</td>
+    <td>$756</td>
+    </tr>
+    <tr>
+    <td>Liquefier</td>
+    <td>100–200 kW</td>
+    <td>24/7</td>
+    <td>108,000</td>
+    <td>$7,560</td>
+    </tr>
+    <tr>
+    <td>Fill station compressor</td>
+    <td>30 kW</td>
+    <td>8 hrs/day</td>
+    <td>7,200</td>
+    <td>$504</td>
+    </tr>
+    <tr>
+    <td>Cooling tower/chillers</td>
+    <td>20 kW</td>
+    <td>24/7</td>
+    <td>14,400</td>
+    <td>$1,008</td>
+    </tr>
+    <tr>
+    <td>Facility (lighting, HVAC, lab)</td>
+    <td>15 kW</td>
+    <td>24/7</td>
+    <td>10,800</td>
+    <td>$756</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>210–310 kW</strong></td>
+    <td></td>
+    <td><strong>~173,000</strong></td>
+    <td><strong>~$12,100</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>At PNW rates, <strong>electricity is ~$12K/month</strong> for a
+    small hub. At Southwest rates ($0.10/kWh), the same facility would
+    cost ~$17K/month. The PNW advantage is real but not overwhelming at
+    this scale — it matters more as the operation scales up.</p>
+    <h2 id="timeline-site-selection-to-first-output">Timeline: Site
+    Selection to First Output</h2>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 35%" />
+    <col style="width: 39%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Phase</th>
+    <th>Duration</th>
+    <th>Activities</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Site selection &amp; lease</td>
+    <td>2–4 months</td>
+    <td>Evaluate candidates, negotiate terms</td>
+    </tr>
+    <tr>
+    <td>Permitting (SEPA, building, hazmat)</td>
+    <td>3–6 months</td>
+    <td>Environmental review, building permits, fire marshal</td>
+    </tr>
+    <tr>
+    <td>Equipment order</td>
+    <td>0 months (order during permitting)</td>
+    <td>Chart PSA, membrane modules, liquefier</td>
+    </tr>
+    <tr>
+    <td>Building preparation</td>
+    <td>2–4 months</td>
+    <td>Concrete, electrical, water, ventilation</td>
+    </tr>
+    <tr>
+    <td>Equipment delivery &amp; install</td>
+    <td>4–8 months (from order)</td>
+    <td>Equipment arrives, mechanical/electrical installation</td>
+    </tr>
+    <tr>
+    <td>Commissioning &amp; testing</td>
+    <td>1–2 months</td>
+    <td>System integration, purity verification, safety checks</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>12–24 months</strong></td>
+    <td>From decision to first liquid helium output</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="regulatory-path">Regulatory Path</h2>
+    <ol type="1">
+    <li><strong>SEPA review</strong> (WA) or <strong>land use
+    review</strong> (OR) for new industrial facility</li>
+    <li><strong>Building permit</strong> from local jurisdiction</li>
+    <li><strong>Air quality permit</strong> from Ecology (WA) or DEQ
+    (OR) — emissions are minimal for helium processing</li>
+    <li><strong>Fire marshal review</strong> for compressed/cryogenic
+    gas storage</li>
+    <li><strong>DOT registration</strong> if operating transport
+    vehicles</li>
+    <li><strong>No federal permits required</strong> for a
+    processing-only facility (not extracting from the ground)</li>
+    </ol>
+    <p>The regulatory path is straightforward for a gas processing
+    facility. This is not a chemical plant or refinery — helium is
+    inert, non-toxic, non-flammable. The primary safety concern is
+    oxygen displacement in enclosed spaces (standard industrial gas
+    hazard with well-established protocols).</p>
+    <div class="nav">
+        <a href="../index.html">← Back to HEL Index</a> ·
+        Published 2026-03-31 · PNW Research Series ·
+        <a href="https://tibsfox.com/Research/HEL/">tibsfox.com/Research/HEL</a>
+    </div>
+</body>
+</html>

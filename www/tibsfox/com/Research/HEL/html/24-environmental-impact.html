@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Impact Assessment — HEL Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --accent: #e94560;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4fc3f7;
+            --border: #2a2a4a;
+            --helium: #ffd700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--helium); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--helium); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--helium); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--helium); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--helium); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(79,195,247,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--helium); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        HEL — Helium Supply Chain &amp; Pacific Rim Semiconductor Infrastructure<br>
+        PNW Research Series · <a href="../index.html">Back to HEL Index</a> · <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="environmental-impact-assessment">Environmental Impact
+    Assessment</h1>
+    <h2 id="the-short-version">The Short Version</h2>
+    <p>Helium processing is one of the cleanest industrial operations
+    possible. Helium is inert, non-toxic, non-flammable, and
+    non-reactive. It does not produce emissions, does not contaminate
+    water, and does not generate hazardous waste. The primary
+    environmental impact is <strong>electricity consumption</strong> for
+    compression and cryogenic cooling — and in the PNW, that electricity
+    is predominantly hydroelectric.</p>
+    <h2 id="impact-categories">Impact Categories</h2>
+    <h3 id="air-emissions">Air Emissions</h3>
+    <p><strong>Essentially zero direct emissions.</strong> Helium
+    processing does not involve combustion, chemical reactions, or
+    volatile compounds. The only atmospheric release is helium itself
+    (an inert noble gas that has no greenhouse effect, no ozone
+    interaction, and no toxicity).</p>
+    <p>Minor indirect emissions from: - Compressor lubrication systems
+    (oil-free compressors eliminate this) - Emergency generator (diesel,
+    if installed — intermittent use only) - Vehicle emissions from
+    delivery trucks (standard industrial transport)</p>
+    <h3 id="water-use">Water Use</h3>
+    <p>A helium processing hub requires cooling water for compressors
+    and potentially for the liquefier:</p>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 27%" />
+    <col style="width: 41%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Component</th>
+    <th>Water Use</th>
+    <th>Recirculation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Compressor cooling</td>
+    <td>5–10 GPM</td>
+    <td>Closed-loop cooling tower (&gt;95% recirculated)</td>
+    </tr>
+    <tr>
+    <td>Liquefier cooling</td>
+    <td>5–15 GPM</td>
+    <td>Closed-loop (&gt;95% recirculated)</td>
+    </tr>
+    <tr>
+    <td>Facility domestic</td>
+    <td>Minimal</td>
+    <td>Standard plumbing</td>
+    </tr>
+    <tr>
+    <td><strong>Net consumption</strong></td>
+    <td><strong>&lt;500 gallons/day</strong></td>
+    <td>Evaporation losses from cooling tower</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>For context: a single-family home in the PNW uses ~150–200
+    gallons/day. A helium hub uses 2–3x that — comparable to a small
+    restaurant, not an industrial water consumer.</p>
+    <p><strong>No process water discharge.</strong> Helium processing
+    does not use water in the process itself — only for cooling. Cooling
+    tower water is recirculated, not discharged.</p>
+    <h3 id="electricity-consumption">Electricity Consumption</h3>
+    <p>This is the primary environmental footprint. A small hub
+    consuming 200–300 kW runs approximately: - <strong>~175,000
+    kWh/month</strong> - <strong>~2.1 million kWh/year</strong></p>
+    <h4 id="pnw-grid-carbon-intensity">PNW Grid Carbon Intensity</h4>
+    <p>The PNW electrical grid is among the cleanest in the US due to
+    hydroelectric dominance:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Grid</th>
+    <th>Carbon Intensity</th>
+    <th>Annual CO2 for Hub</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>PNW (WA/OR)</td>
+    <td>~100–150 g CO2/kWh</td>
+    <td>~210–315 tonnes/year</td>
+    </tr>
+    <tr>
+    <td>US average</td>
+    <td>~400 g CO2/kWh</td>
+    <td>~840 tonnes/year</td>
+    </tr>
+    <tr>
+    <td>Texas (ERCOT)</td>
+    <td>~350 g CO2/kWh</td>
+    <td>~735 tonnes/year</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>A PNW helium hub has roughly <strong>one-third the carbon
+    footprint</strong> of an equivalent facility in Texas or the
+    Midwest. This is a genuine environmental advantage, not greenwashing
+    — it comes from the region’s hydroelectric infrastructure.</p>
+    <p>For comparison: 210–315 tonnes CO2/year is equivalent to ~45–70
+    passenger cars.</p>
+    <h3 id="waste-streams">Waste Streams</h3>
+    <table>
+    <colgroup>
+    <col style="width: 30%" />
+    <col style="width: 22%" />
+    <col style="width: 22%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Waste Type</th>
+    <th>Source</th>
+    <th>Volume</th>
+    <th>Handling</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Spent PSA adsorbent</td>
+    <td>Bed replacement (every 5–8 years)</td>
+    <td>500–2,000 lbs per change</td>
+    <td>Non-hazardous solid waste — landfill or adsorbent recycler</td>
+    </tr>
+    <tr>
+    <td>Spent membrane modules</td>
+    <td>Module replacement (every 5–10 years)</td>
+    <td>50–200 lbs per change</td>
+    <td>Polymer — standard recycling or landfill</td>
+    </tr>
+    <tr>
+    <td>Compressor oil</td>
+    <td>Oil changes (if not oil-free)</td>
+    <td>5–20 gallons/year</td>
+    <td>Standard used oil recycling</td>
+    </tr>
+    <tr>
+    <td>Filter elements</td>
+    <td>Pre-treatment filters (quarterly)</td>
+    <td>&lt;50 lbs/year</td>
+    <td>Non-hazardous solid waste</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>No hazardous waste.</strong> Helium processing generates
+    no RCRA-listed waste, no radioactive waste, no toxic chemicals.</p>
+    <h3 id="noise">Noise</h3>
+    <p>Compressors and cryogenic equipment generate noise (typically
+    70–85 dB at 1 meter). Standard mitigation: - Equipment enclosed in
+    building - Sound-dampening enclosures on compressors - Property line
+    setbacks per local zoning - Comparable to a commercial HVAC
+    system</p>
+    <h3 id="land-use">Land Use</h3>
+    <p>1–3 acres for the facility. No significant habitat impact on
+    industrial-zoned land. No wetland fill anticipated for any of the
+    candidate corridor locations identified in the hub design
+    document.</p>
+    <h2 id="sepa-environmental-checklist-washington-state">SEPA
+    Environmental Checklist (Washington State)</h2>
+    <p>A helium processing facility in Washington would require a
+    <strong>SEPA Environmental Checklist</strong> (WAC 197-11-960).
+    Expected determination: <strong>Determination of Non-Significance
+    (DNS)</strong> — the project does not have a probable significant
+    adverse environmental impact.</p>
+    <p>Key checklist items and expected answers:</p>
+    <table>
+    <colgroup>
+    <col style="width: 35%" />
+    <col style="width: 64%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Item</th>
+    <th>Assessment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Earth/geology</td>
+    <td>No excavation beyond building foundation. Industrial-zoned
+    land.</td>
+    </tr>
+    <tr>
+    <td>Air</td>
+    <td>No significant emissions. De minimis for NWCAA/PSCAA</td>
+    </tr>
+    <tr>
+    <td>Water</td>
+    <td>Closed-loop cooling, &lt;500 gal/day net consumption, no process
+    discharge</td>
+    </tr>
+    <tr>
+    <td>Plants/animals</td>
+    <td>Industrial-zoned site, no habitat impact</td>
+    </tr>
+    <tr>
+    <td>Energy</td>
+    <td>200–300 kW. Served by existing grid.</td>
+    </tr>
+    <tr>
+    <td>Noise</td>
+    <td>Enclosed equipment, standard industrial levels</td>
+    </tr>
+    <tr>
+    <td>Land use</td>
+    <td>Consistent with industrial zoning</td>
+    </tr>
+    <tr>
+    <td>Transportation</td>
+    <td>2–4 truck deliveries/month (receiving), 5–10 deliveries/month
+    (outgoing)</td>
+    </tr>
+    <tr>
+    <td>Public services</td>
+    <td>No additional demand</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="community-benefits">Community Benefits</h2>
+    <p>A helium processing hub provides positive community impact:</p>
+    <table>
+    <colgroup>
+    <col style="width: 50%" />
+    <col style="width: 50%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Benefit</th>
+    <th>Detail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Jobs</td>
+    <td>3–5 direct FTE + contractor support</td>
+    </tr>
+    <tr>
+    <td>Tax revenue</td>
+    <td>Property tax, B&amp;O tax (WA), local business license</td>
+    </tr>
+    <tr>
+    <td>Supply chain resilience</td>
+    <td>Local helium source for hospitals (MRI), universities, tech
+    companies</td>
+    </tr>
+    <tr>
+    <td>Cooperative ownership</td>
+    <td>Economic benefit stays in the community</td>
+    </tr>
+    <tr>
+    <td>Workforce development</td>
+    <td>Training partnerships with Sno-Isle TECH, community
+    colleges</td>
+    </tr>
+    <tr>
+    <td>No environmental burden</td>
+    <td>Clean operation with minimal footprint</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="comparison-to-other-industrial-operations">Comparison to
+    Other Industrial Operations</h2>
+    <table>
+    <colgroup>
+    <col style="width: 18%" />
+    <col style="width: 17%" />
+    <col style="width: 24%" />
+    <col style="width: 27%" />
+    <col style="width: 12%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Operation</th>
+    <th>Water Use</th>
+    <th>Air Emissions</th>
+    <th>Hazardous Waste</th>
+    <th>Noise</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Helium processing hub</strong></td>
+    <td>Low (cooling only)</td>
+    <td>None</td>
+    <td>None</td>
+    <td>Moderate (enclosed)</td>
+    </tr>
+    <tr>
+    <td>Chemical manufacturing</td>
+    <td>High</td>
+    <td>Significant</td>
+    <td>Yes</td>
+    <td>Variable</td>
+    </tr>
+    <tr>
+    <td>Metal fabrication</td>
+    <td>Moderate</td>
+    <td>Some</td>
+    <td>Often</td>
+    <td>High</td>
+    </tr>
+    <tr>
+    <td>Data center</td>
+    <td>High (cooling)</td>
+    <td>None</td>
+    <td>Electronic waste</td>
+    <td>Moderate</td>
+    </tr>
+    <tr>
+    <td>Brewery</td>
+    <td>High</td>
+    <td>Minor</td>
+    <td>Wastewater</td>
+    <td>Low</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>A helium hub is cleaner than a data center and quieter than a
+    machine shop. The environmental story is genuinely favorable — this
+    is not an operation that communities should fear.</p>
+    <h2 id="the-community-trust-document">The Community Trust
+    Document</h2>
+    <p>This research exists so that when a co-op proposes a helium hub
+    in a PNW community, the environmental questions have honest,
+    documented answers. Not marketing — data. The operation is clean,
+    the footprint is small, the water use is minimal, the waste is
+    non-hazardous, and the grid carbon is low because of where we
+    are.</p>
+    <p>The environment is not a reason not to do this. It’s a reason to
+    do it here.</p>
+    <div class="nav">
+        <a href="../index.html">← Back to HEL Index</a> ·
+        Published 2026-03-31 · PNW Research Series ·
+        <a href="https://tibsfox.com/Research/HEL/">tibsfox.com/Research/HEL</a>
+    </div>
+</body>
+</html>
