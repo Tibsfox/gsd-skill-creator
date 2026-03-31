@@ -72,35 +72,142 @@
     .card h3 { color: var(--ink-soft); }
     .stat-value { color: var(--fox); }
     footer { --content-width: 64rem; }
+
+    /* === Celestial info cards in header === */
+    .header-row { display: flex; align-items: center; gap: 1.5rem; max-width: 68rem; margin: 0 auto; padding: 0 2rem; }
+    .cel-card {
+      flex-shrink: 0; width: 170px; padding: 0.7rem 0.9rem;
+      background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; color: white; font-family: system-ui, sans-serif;
+      font-size: 0.78rem; line-height: 1.4; text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cel-card:hover { background: rgba(0,0,0,0.4); text-decoration: none; color: white; }
+    .cel-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5; margin-bottom: 0.3rem; }
+    .cel-value { font-size: 1rem; font-weight: 600; }
+    .cel-detail { font-size: 0.7rem; opacity: 0.6; margin-top: 0.15rem; }
+    .cel-icon { display: inline-block; width: 20px; height: 20px; border-radius: 50%; vertical-align: middle; margin-right: 0.3rem; }
+    .cel-moon { background: radial-gradient(circle at 35% 40%, #d4d8dc 0%, #8a9098 55%, #4a5058 100%); }
+    .cel-sun { background: radial-gradient(circle at 40% 35%, #ffe088 0%, #e8a838 50%, #c07820 100%); }
+    .header-grow { flex: 1; }
+
+    /* === Live status bar below header === */
+    .live-bar {
+      background: var(--ink, #2a2a2a); color: white; padding: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-family: system-ui, sans-serif;
+    }
+    .live-bar-inner {
+      max-width: 68rem; margin: 0 auto;
+      display: flex; align-items: stretch; flex-wrap: wrap;
+    }
+    .lb-cell {
+      padding: 0.6rem 1rem; border-right: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.75rem; line-height: 1.4; color: rgba(255,255,255,0.7);
+    }
+    .lb-cell:last-child { border-right: none; }
+    .lb-value { color: white; font-weight: 600; font-size: 0.85rem; }
+    .lb-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.4; }
+    .lb-link { color: var(--fox-warm, #d4823a); text-decoration: none; font-weight: 600; }
+    .lb-link:hover { color: white; }
+    .lb-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #4CAF50; margin-right: 0.3rem; vertical-align: middle; box-shadow: 0 0 4px rgba(76,175,80,0.5); }
+    .lb-tracks { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; padding: 0.5rem 1rem; flex: 1; }
+    .lb-track {
+      display: inline-block; padding: 0.2rem 0.6rem; border-radius: 3px;
+      font-size: 0.68rem; font-weight: 500; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);
+      transition: all 0.15s;
+    }
+    .lb-track:hover { color: white; border-color: var(--fox-warm, #d4823a); background: rgba(255,255,255,0.06); }
+    .lb-track-hot { border-color: rgba(252,61,33,0.4); color: #ff8866; }
+
+    @media (max-width: 900px) {
+      .header-row { flex-direction: column; padding: 0 1rem; }
+      .cel-card { width: 100%; max-width: 300px; }
+    }
     @media (max-width: 640px) {
       .header-inner { flex-direction: column; text-align: center; padding: 1.5rem 1rem; gap: 1rem; }
       .brand-mark { width: 90px; height: 90px; }
       .header-text h1 { font-size: 1.6rem; }
       header nav { text-align: center; }
       main { padding: 1rem; }
+      .cel-card { display: none; }
+      .lb-cell { padding: 0.4rem 0.6rem; font-size: 0.7rem; }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-inner">
-      <img src="../images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
-      <div class="header-text">
-        <h1>Tibsfox Research</h1>
-        <div class="subtitle">Pacific Northwest bioregion mapping, space research, visual art science, and 190+ projects of open-source craft</div>
-        <nav>
-          <a href="PNW/index.html">PNW Series</a>
-          <a href="NASA/index.html">NASA Missions</a>
-          <a href="NASA/artemis-ii/index.html">Artemis II</a>
-          <a href="SOL/index.html">Sun &amp; Moon</a>
-          <a href="MUK/index.html">Mukilteo</a>
-          <a href="constellation.html">Constellation</a>
-          <a href="LIVE/index.html">Live</a>
-          <a href="../index.html">tibsfox.com</a>
-        </nav>
+    <div class="header-row">
+      <a href="SOL/index.html" class="cel-card" id="moon-card">
+        <div class="cel-label"><span class="cel-icon cel-moon"></span> Moon</div>
+        <div class="cel-value" id="cel-moon-phase">--</div>
+        <div class="cel-detail" id="cel-moon-illum">--</div>
+        <div class="cel-detail">Rise 6:33 PM &middot; Set 6:12 AM</div>
+      </a>
+      <div class="header-grow">
+        <div class="header-inner">
+          <img src="../images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
+          <div class="header-text">
+            <h1>Tibsfox Research</h1>
+            <div class="subtitle">Pacific Northwest bioregion mapping, space research, visual art science, and 190+ projects of open-source craft</div>
+            <nav>
+              <a href="PNW/index.html">PNW Series</a>
+              <a href="NASA/index.html">NASA Missions</a>
+              <a href="NASA/artemis-ii/index.html">Artemis II</a>
+              <a href="SOL/index.html">Sun &amp; Moon</a>
+              <a href="MUK/index.html">Mukilteo</a>
+              <a href="constellation.html">Constellation</a>
+              <a href="LIVE/index.html">Live</a>
+              <a href="../index.html">tibsfox.com</a>
+            </nav>
+          </div>
+        </div>
       </div>
+      <a href="SOL/index.html" class="cel-card" id="sun-card">
+        <div class="cel-label"><span class="cel-icon cel-sun"></span> Sun</div>
+        <div class="cel-value" id="cel-sun-day">--</div>
+        <div class="cel-detail">Rise 6:49 AM &middot; Set 7:39 PM</div>
+        <div class="cel-detail" id="cel-sun-kp">Kp -- &middot; --</div>
+      </a>
     </div>
   </header>
+
+  <!-- === LIVE STATUS BAR === -->
+  <div class="live-bar">
+    <div class="live-bar-inner">
+      <div class="lb-cell">
+        <div class="lb-label">Zulu</div>
+        <div class="lb-value" id="lb-utc">--:--:-- Z</div>
+      </div>
+      <div class="lb-cell">
+        <div class="lb-label">Pacific</div>
+        <div class="lb-value" id="lb-pdt">--:--:-- PDT</div>
+      </div>
+      <div class="lb-cell">
+        <div class="lb-label">KPAE Temp</div>
+        <div class="lb-value" id="lb-temp">--</div>
+      </div>
+      <div class="lb-cell">
+        <div class="lb-label">Artemis II</div>
+        <div class="lb-value lb-track-hot" id="lb-artemis">T---</div>
+      </div>
+      <div class="lb-cell">
+        <div class="lb-label">Kp Index</div>
+        <div class="lb-value" id="lb-kp">--</div>
+      </div>
+      <div class="lb-tracks">
+        <span class="lb-label" style="margin-right:0.3rem"><span class="lb-dot"></span>Live Tracks:</span>
+        <a href="NASA/artemis-ii/index.html" class="lb-track lb-track-hot">Artemis II Tracker</a>
+        <a href="MUK/index.html" class="lb-track">Mukilteo Weather</a>
+        <a href="SOL/index.html" class="lb-track">Sun &amp; Moon</a>
+        <a href="LIVE/index.html" class="lb-track">Live Hub</a>
+        <a href="MUK/salish-sea.html" class="lb-track">Salish Sea</a>
+        <a href="forest/index.html" class="lb-track">Forest Sim</a>
+        <a href="constellation.html" class="lb-track">Constellation</a>
+      </div>
+    </div>
+  </div>
 
   <main>
     <blockquote>
@@ -286,5 +393,64 @@
     <a href="MUK/index.html">Mukilteo</a> &middot;
     <a href="LIVE/index.html">Live</a>
   </footer>
+
+<script>
+// === LIVE DATA FOR HEADER + STATUS BAR ===
+var LAUNCH = new Date('2026-04-01T22:24:00Z');
+
+function updateClocks() {
+  var now = new Date();
+  var u = now.toISOString().slice(11,19) + ' Z';
+  var p = new Date(now.getTime() - 7*3600000);
+  var ps = String(p.getUTCHours()).padStart(2,'0') + ':' + String(p.getUTCMinutes()).padStart(2,'0') + ':' + String(p.getUTCSeconds()).padStart(2,'0') + ' PDT';
+  document.getElementById('lb-utc').textContent = u;
+  document.getElementById('lb-pdt').textContent = ps;
+
+  // Artemis countdown
+  var diff = (LAUNCH - now) / 1000;
+  if (diff > 0) {
+    var d = Math.floor(diff/86400), h = Math.floor((diff%86400)/3600), m = Math.floor((diff%3600)/60);
+    document.getElementById('lb-artemis').textContent = 'T-' + (d>0?d+'d ':'') + h + 'h ' + m + 'm';
+  } else {
+    document.getElementById('lb-artemis').textContent = 'LAUNCHED';
+  }
+}
+
+// Moon phase
+var JD = new Date().getTime() / 86400000 + 2440587.5;
+var phase = ((JD - 2451550.1) % 29.53059) / 29.53059;
+if (phase < 0) phase += 1;
+var illum = (1 - Math.cos(phase * 2 * Math.PI)) / 2;
+var names = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
+document.getElementById('cel-moon-phase').textContent = names[Math.floor(phase*8)%8];
+document.getElementById('cel-moon-illum').textContent = (illum*100).toFixed(0) + '% illuminated';
+
+// Sun day progress
+var pdt = new Date(new Date().getTime() - 7*3600000);
+var hrs = pdt.getUTCHours() + pdt.getUTCMinutes()/60;
+var dayPct = Math.max(0, Math.min(100, ((hrs - 6.82) / (19.65 - 6.82)) * 100));
+document.getElementById('cel-sun-day').textContent = hrs < 6.82 ? 'Pre-dawn' : hrs > 19.65 ? 'After sunset' : Math.round(dayPct) + '% daylight';
+
+// Fetch live Kp
+fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json')
+  .then(function(r){return r.json()})
+  .then(function(d){
+    if(d&&d.length>1){var kp=parseFloat(d[d.length-1][1]);var g=kp<4?'G0 quiet':kp<5?'G1':'G'+Math.min(5,Math.floor(kp)-3);
+    document.getElementById('cel-sun-kp').textContent='Kp '+kp.toFixed(1)+' \u00b7 '+g;
+    document.getElementById('lb-kp').textContent='Kp '+kp.toFixed(1)+' ('+g+')';}
+  }).catch(function(){});
+
+// Fetch KPAE temp from status.json
+fetch('NASA/artemis-ii/status.json')
+  .then(function(r){return r.json()})
+  .then(function(d){
+    if(d&&d.weather&&d.weather.kpae){
+      document.getElementById('lb-temp').textContent=d.weather.kpae.temp_c+'\u00b0C '+d.weather.kpae.conditions;
+    }
+  }).catch(function(){});
+
+updateClocks();
+setInterval(updateClocks, 1000);
+</script>
 </body>
 </html>
