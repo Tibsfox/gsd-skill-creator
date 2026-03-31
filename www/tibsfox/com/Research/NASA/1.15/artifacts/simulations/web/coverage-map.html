@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIROS-1 — Coverage Map</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #map-canvas { flex: 1; cursor: crosshair; }
+  #panel {
+    width: 300px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 13px; color: #E8E8F0; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #E8E8F0; font-weight: bold; }
+  .box .covered { color: #4080CC; font-weight: bold; }
+  .box .pct { color: #8AAA70; font-weight: bold; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  input[type=range] { width: 100%; }
+  button {
+    padding: 6px 12px;
+    background: #1a2040;
+    color: #aaa;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 10px;
+    font-family: inherit;
+  }
+  button:hover { background: #2a3060; color: #ddd; }
+  button.active { background: #4080CC; color: #fff; border-color: #4080CC; }
+  .btn-row { display: flex; gap: 4px; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="map-canvas"></canvas>
+  <div id="panel">
+    <h1>TIROS-1 Coverage Map</h1>
+    <h2>Mission 1.15 &mdash; Ground Track & Coverage</h2>
+
+    <div class="box">
+      <span class="label">Orbit: </span><span class="value">693 &times; 756 km</span><br>
+      <span class="label">Inclination: </span><span class="value">48.4&deg;</span><br>
+      <span class="label">Period: </span><span class="value">99.2 min</span><br>
+      <span class="label">Orbits Complete: </span><span class="value" id="v-orbits">0</span><br>
+      <span class="label">Elapsed Time: </span><span class="value" id="v-time">0h 0m</span>
+    </div>
+
+    <div class="box">
+      <span class="label">Area Observed: </span><span class="covered" id="v-area">0 km&sup2;</span><br>
+      <span class="label">Coverage: </span><span class="pct" id="v-coverage">0%</span><br>
+      <span class="label">Observable Band: </span><span class="value">48.4&deg;S&ndash;48.4&deg;N</span><br>
+      <span class="label">Current Lat: </span><span class="value" id="v-lat">0&deg;</span><br>
+      <span class="label">Current Lon: </span><span class="value" id="v-lon">0&deg;</span>
+    </div>
+
+    <div class="control-group">
+      <label>Simulation Speed (orbits/sec)</label>
+      <input type="range" id="speed" min="1" max="50" value="5">
+      <span id="speed-label" style="font-size:10px;color:#666">5x</span>
+    </div>
+
+    <div class="control-group">
+      <label>Swath Width</label>
+      <input type="range" id="swath" min="200" max="3000" value="1500">
+      <span id="swath-label" style="font-size:10px;color:#666">1500 km (wide-angle)</span>
+    </div>
+
+    <div class="btn-row">
+      <button id="btn-pause">Pause</button>
+      <button id="btn-reset">Reset</button>
+    </div>
+
+    <div class="btn-row">
+      <button id="btn-1day">Show 1 Day</button>
+      <button id="btn-78days">Show 78 Days</button>
+    </div>
+
+    <div class="box" style="margin-top:8px;">
+      <span class="label">Color Key:</span><br>
+      <span style="color:#1a3050">&block;</span> Ocean / Land<br>
+      <span style="color:#4080CC">&block;</span> Observed (camera swath)<br>
+      <span style="color:#CC6040">&block;</span> Current position<br>
+      <span style="color:#E8E8F0">&block;</span> Ground track<br>
+      <span style="color:#606878">---</span> Latitude limits (&pm;48.4&deg;)
+    </div>
+
+    <div class="box">
+      TIROS-1: April 1, 1960.<br>
+      22,952 photos in 78 days.<br>
+      Wide-angle camera: ~1500 km swath.<br>
+      Proved weather observation from<br>
+      space was practical and valuable.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('map-canvas');
+const ctx = canvas.getContext('2d');
+
+// Constants
+const R_EARTH = 6371; // km
+const INCL = 48.4; // degrees
+const PERIOD = 99.2; // minutes
+const PERI = 693, APO = 756;
+const ALT = (PERI + APO) / 2;
+const DEG = Math.PI / 180;
+
+// State
+let paused = false;
+let simTime = 0; // in minutes
+let orbitPhase = 0; // 0 to 1 per orbit
+
+// Coverage grid (360 x 180, 1 degree resolution)
+const coverageGrid = new Uint8Array(360 * 180);
+let totalCovered = 0;
+
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width - 300;
+  canvas.height = rect.height;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Orbital mechanics (simplified)
+function getSatPosition(t_minutes) {
+  const n = 2 * Math.PI / PERIOD; // mean motion (rad/min)
+  const omega_earth = 2 * Math.PI / (24 * 60); // Earth rotation (rad/min)
+
+  const nu = n * t_minutes; // mean anomaly ~ true anomaly (near-circular)
+
+  // Latitude
+  const lat = Math.asin(Math.sin(INCL * DEG) * Math.sin(nu)) / DEG;
+
+  // Longitude (with Earth rotation)
+  const lon_inertial = Math.atan2(Math.cos(INCL * DEG) * Math.sin(nu), Math.cos(nu));
+  const lon = ((lon_inertial - omega_earth * t_minutes) / DEG % 360 + 540) % 360 - 180;
+
+  return { lat, lon };
+}
+
+// Map projection: equirectangular
+function lonLatToXY(lon, lat) {
+  const W = canvas.width;
+  const H = canvas.height;
+  const x = (lon + 180) / 360 * W;
+  const y = (90 - lat) / 180 * H;
+  return { x, y };
+}
+
+// Mark coverage
+function markCoverage(lat, lon, swathKm) {
+  const swathDeg = swathKm / (2 * Math.PI * R_EARTH * Math.cos(lat * DEG)) * 360;
+  const swathLatDeg = swathKm / (2 * Math.PI * R_EARTH) * 360;
+
+  const lonMin = Math.floor(lon - swathDeg / 2);
+  const lonMax = Math.ceil(lon + swathDeg / 2);
+  const latMin = Math.floor(lat - swathLatDeg / 2);
+  const latMax = Math.ceil(lat + swathLatDeg / 2);
+
+  for (let la = Math.max(-90, latMin); la <= Math.min(89, latMax); la++) {
+    for (let lo = lonMin; lo <= lonMax; lo++) {
+      const loWrap = ((lo + 180) % 360 + 360) % 360;
+      const laIdx = la + 90;
+      const idx = laIdx * 360 + loWrap;
+      if (idx >= 0 && idx < 360 * 180 && !coverageGrid[idx]) {
+        coverageGrid[idx] = 1;
+        totalCovered++;
+      }
+    }
+  }
+}
+
+// Draw map
+function drawMap() {
+  const W = canvas.width;
+  const H = canvas.height;
+
+  // Background (dark ocean)
+  ctx.fillStyle = '#081828';
+  ctx.fillRect(0, 0, W, H);
+
+  // Simple land masses (very approximate continental outlines)
+  ctx.fillStyle = '#152515';
+  // These are just rough rectangles - a proper map would use GeoJSON
+  const continents = [
+    // North America
+    [-130, 25, -60, 55],
+    [-170, 55, -130, 70],
+    // South America
+    [-80, -55, -35, 10],
+    // Europe
+    [-10, 35, 40, 70],
+    // Africa
+    [-20, -35, 50, 35],
+    // Asia
+    [40, 10, 145, 70],
+    // Australia
+    [110, -40, 155, -10],
+  ];
+  for (const [lonMin, latMin, lonMax, latMax] of continents) {
+    const p1 = lonLatToXY(lonMin, latMax);
+    const p2 = lonLatToXY(lonMax, latMin);
+    ctx.fillRect(p1.x, p1.y, p2.x - p1.x, p2.y - p1.y);
+  }
+
+  // Grid lines
+  ctx.strokeStyle = '#1a3050';
+  ctx.lineWidth = 0.5;
+  for (let lat = -60; lat <= 60; lat += 30) {
+    const p = lonLatToXY(-180, lat);
+    ctx.beginPath();
+    ctx.moveTo(0, p.y);
+    ctx.lineTo(W, p.y);
+    ctx.stroke();
+  }
+  for (let lon = -150; lon <= 150; lon += 30) {
+    const p = lonLatToXY(lon, 0);
+    ctx.beginPath();
+    ctx.moveTo(p.x, 0);
+    ctx.lineTo(p.x, H);
+    ctx.stroke();
+  }
+
+  // Equator
+  const eq = lonLatToXY(0, 0);
+  ctx.strokeStyle = '#2a4060';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, eq.y);
+  ctx.lineTo(W, eq.y);
+  ctx.stroke();
+
+  // Inclination limits
+  const limN = lonLatToXY(0, INCL);
+  const limS = lonLatToXY(0, -INCL);
+  ctx.strokeStyle = '#606878';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
+  ctx.moveTo(0, limN.y);
+  ctx.lineTo(W, limN.y);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(0, limS.y);
+  ctx.lineTo(W, limS.y);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Shade uncovered latitudes
+  ctx.fillStyle = 'rgba(204,96,64,0.08)';
+  ctx.fillRect(0, 0, W, limN.y);
+  ctx.fillRect(0, limS.y, W, H - limS.y);
+
+  // Draw coverage
+  ctx.fillStyle = 'rgba(64,128,204,0.25)';
+  for (let la = 0; la < 180; la++) {
+    for (let lo = 0; lo < 360; lo++) {
+      if (coverageGrid[la * 360 + lo]) {
+        const lon = lo - 180;
+        const lat = la - 90;
+        const p = lonLatToXY(lon, lat + 0.5);
+        const p2 = lonLatToXY(lon + 1, lat - 0.5);
+        ctx.fillRect(p.x, p.y, Math.max(1, p2.x - p.x), Math.max(1, p2.y - p.y));
+      }
+    }
+  }
+
+  // Draw ground track (last 3 orbits)
+  ctx.strokeStyle = 'rgba(232,232,240,0.4)';
+  ctx.lineWidth = 1;
+  const trackStart = Math.max(0, simTime - PERIOD * 3);
+  let prevX = null, prevY = null;
+  for (let tt = trackStart; tt < simTime; tt += 0.5) {
+    const pos = getSatPosition(tt);
+    const p = lonLatToXY(pos.lon, pos.lat);
+    if (prevX !== null && Math.abs(p.x - prevX) < W / 2) {
+      ctx.beginPath();
+      ctx.moveTo(prevX, prevY);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+    }
+    prevX = p.x;
+    prevY = p.y;
+  }
+
+  // Current position
+  const currentPos = getSatPosition(simTime);
+  const cp = lonLatToXY(currentPos.lon, currentPos.lat);
+  ctx.beginPath();
+  ctx.arc(cp.x, cp.y, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#CC6040';
+  ctx.fill();
+  ctx.strokeStyle = '#E8E8F0';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Swath indicator at current position
+  const swathKm = parseInt(document.getElementById('swath').value);
+  const swathDeg = swathKm / (2 * Math.PI * R_EARTH * Math.cos(currentPos.lat * DEG)) * 360;
+  const swathPx = swathDeg / 360 * W;
+  ctx.strokeStyle = 'rgba(64,128,204,0.5)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(cp.x - swathPx / 2, cp.y - 3, swathPx, 6);
+
+  // Labels
+  ctx.fillStyle = '#666';
+  ctx.font = '9px monospace';
+  ctx.fillText(`${INCL}\u00B0N`, 3, limN.y - 3);
+  ctx.fillText(`${INCL}\u00B0S`, 3, limS.y + 10);
+  ctx.fillText('Equator', 3, eq.y - 3);
+
+  // Update panel
+  const orbits = simTime / PERIOD;
+  const hours = Math.floor(simTime / 60);
+  const mins = Math.floor(simTime % 60);
+  document.getElementById('v-orbits').textContent = orbits.toFixed(1);
+  document.getElementById('v-time').textContent = `${hours}h ${mins}m`;
+  document.getElementById('v-lat').textContent = currentPos.lat.toFixed(1) + '\u00B0';
+  document.getElementById('v-lon').textContent = currentPos.lon.toFixed(1) + '\u00B0';
+
+  // Observable area: between +-48.4 deg latitude
+  const observableArea = 2 * Math.PI * R_EARTH * R_EARTH * 2 * Math.sin(INCL * DEG);
+  const coveredArea = totalCovered * (R_EARTH * DEG) * (R_EARTH * DEG); // rough
+  const coveragePct = Math.min(100, totalCovered / (360 * (INCL * 2)) * 100);
+  document.getElementById('v-area').textContent = (coveredArea / 1e6).toFixed(2) + 'M km\u00B2';
+  document.getElementById('v-coverage').textContent = coveragePct.toFixed(1) + '%';
+}
+
+function update() {
+  if (!paused) {
+    const speed = parseInt(document.getElementById('speed').value);
+    const dt = PERIOD / 60 * speed * 0.016; // minutes per frame
+    simTime += dt;
+
+    // Mark coverage
+    const swathKm = parseInt(document.getElementById('swath').value);
+    const pos = getSatPosition(simTime);
+    if (Math.abs(pos.lat) <= INCL) {
+      markCoverage(pos.lat, pos.lon, swathKm);
+    }
+  }
+
+  drawMap();
+  requestAnimationFrame(update);
+}
+
+// Controls
+document.getElementById('btn-pause').addEventListener('click', function() {
+  paused = !paused;
+  this.textContent = paused ? 'Resume' : 'Pause';
+  this.classList.toggle('active', paused);
+});
+
+document.getElementById('btn-reset').addEventListener('click', () => {
+  simTime = 0;
+  totalCovered = 0;
+  coverageGrid.fill(0);
+});
+
+document.getElementById('btn-1day').addEventListener('click', () => {
+  const swathKm = parseInt(document.getElementById('swath').value);
+  for (let t = simTime; t < simTime + 24 * 60; t += 1) {
+    const pos = getSatPosition(t);
+    if (Math.abs(pos.lat) <= INCL) markCoverage(pos.lat, pos.lon, swathKm);
+  }
+  simTime += 24 * 60;
+});
+
+document.getElementById('btn-78days').addEventListener('click', () => {
+  const swathKm = parseInt(document.getElementById('swath').value);
+  for (let t = simTime; t < simTime + 78 * 24 * 60; t += 5) {
+    const pos = getSatPosition(t);
+    if (Math.abs(pos.lat) <= INCL) markCoverage(pos.lat, pos.lon, swathKm);
+  }
+  simTime += 78 * 24 * 60;
+});
+
+document.getElementById('speed').addEventListener('input', function() {
+  document.getElementById('speed-label').textContent = this.value + 'x';
+});
+
+document.getElementById('swath').addEventListener('input', function() {
+  document.getElementById('swath-label').textContent = this.value + ' km';
+});
+
+update();
+</script>
+</body>
+</html>

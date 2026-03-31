@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Aurelia aurita — The Lens | v1.15 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --atmo-deep: #060810; --atmo-mid: #101828;
+    --cloud-white: #E8E8F0; --cloud-dim: #808890;
+    --sky-blue: #4080CC; --sky-dim: #204068;
+    --storm-gray: #606878; --storm-dark: #303840;
+    --jelly-clear: #C0D0E0; --jelly-dim: #607080;
+    --ocean-dark: #081828; --space: #060810;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A3040;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(192,208,224,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(64,128,204,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(192,208,224,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,112,128,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(64,128,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(192,208,224,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--sky-blue); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--cloud-white); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--atmo-deep) 25%, var(--atmo-mid) 50%, var(--sky-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--sky-blue); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(64,128,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,204,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(64,128,204,0.12); border: 1px solid var(--sky-blue); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--sky-blue); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(64,128,204,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--sky-blue); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--cloud-white); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--sky-blue); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--cloud-white); }
+  em { color: var(--jelly-clear); }
+  code { color: var(--sky-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+
+  a { color: var(--sky-blue); text-decoration: none; }
+  a:hover { color: var(--cloud-white); }
+
+  blockquote {
+    border-left: 3px solid var(--sky-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(6,8,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  .resonance-card {
+    background: rgba(64,128,204,0.04); border: 1px solid var(--sky-dim); border-radius: 8px;
+    padding: 1.5rem; margin: 2rem 0;
+  }
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(64,128,204,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--sky-blue); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--sky-blue); }
+
+  .sources {
+    background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-top: 2rem;
+  }
+  .sources h2 { margin-top: 0; }
+  .sources h3 { font-size: 1rem; color: var(--sky-blue); margin-top: 1.5rem; }
+  .sources li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card {
+    background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--sky-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--cloud-white); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--sky-blue); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.15 TIROS-1</a>
+  <span class="sep">/</span>
+  Track 2: Organism Pairing
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.15</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 2</span>
+    </div>
+    <h1><em>Aurelia aurita</em> (Moon Jellyfish)</h1>
+    <p class="subtitle">The lens</p>
+    <div class="meta-row">
+      <span><span class="label">Family:</span> Ulmaridae</span>
+      <span><span class="label">Habitat:</span> Puget Sound, PNW coastal waters</span>
+      <span><span class="label">Paired with:</span> TIROS-1</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>The Most Ordinary Extraordinary Animal in the Water</h2>
+
+    <p>If you stand on the pier at the Seattle Aquarium and look down into the dark green water of Elliott Bay on a calm day in late May or early June, you will see them. They are everywhere. Dozens, sometimes hundreds, pulsing slowly just below the surface &mdash; translucent, disc-shaped, the size of dinner plates, each one trailing four delicate oral arms and a fringe of short tentacles so fine they are nearly invisible in the murky water. They glow faintly, not with bioluminescence but with transmitted light &mdash; the diffuse sunlight of a Pacific Northwest afternoon passing through their gelatinous bodies, illuminating the internal structures like a lamp behind a curtain. The four horseshoe-shaped gonads are visible through the bell, lavender or pink or pale orange depending on the animal&rsquo;s sex and reproductive state, arranged in a four-pointed pattern that looks, from above, like a four-leaf clover, or like the symbol for a compass rose, or like the crosshairs of a lens.</p>
+
+    <p>This is <em>Aurelia aurita</em>. The moon jellyfish. The common jellyfish. The jellyfish that people who do not know any other jellyfish know, because it is the one in every aquarium, every tide pool touch tank, every nature documentary about ocean life. It is the jellyfish that children encounter first, the one that washes up on beaches in gelatinous heaps that look like discarded contact lenses the size of Frisbees, the one that fills harbors and marinas in bloom events so dense that the water appears to be made of jellyfish rather than containing them. <em>Aurelia aurita</em> is the most common large jellyfish in the temperate oceans of the world. It is found in the Atlantic, the Pacific, the Indian Ocean, the Mediterranean, the Black Sea, the Baltic, the North Sea, and essentially every other body of saltwater between roughly 70 degrees north and 40 degrees south. It is so common, so ubiquitous, so familiar that it has become the default jellyfish &mdash; the image that forms in the mind when someone says the word &ldquo;jellyfish&rdquo; without further qualification.</p>
+
+    <p>And yet <em>Aurelia aurita</em> is an extraordinary organism. It is almost entirely water. The bell &mdash; the dome-shaped body that constitutes the visible animal &mdash; is approximately 95 percent water by mass. The remaining 5 percent is collagen, a few proteins, some minerals, and a scattering of cells organized into the thinnest possible layers of functional tissue. The bell has no bones, no cartilage, no shell, no rigid structure of any kind. It holds its shape through the elastic properties of the mesoglea &mdash; the gelatinous matrix that makes up the bulk of the bell&rsquo;s volume, a hydrated gel of collagen fibers that is, in mechanical terms, a viscoelastic solid: it resists deformation, it springs back when compressed, it transmits force across its volume, but it is soft, yielding, and nearly transparent. The mesoglea is the jellyfish. Everything else &mdash; the thin epithelium on the outer surface, the thin gastrodermis on the inner surface, the muscles, the nerves, the gonads, the oral arms &mdash; is draped across or embedded within the mesoglea like structures painted on a window. The window is the animal. The paint is the machinery.</p>
+
+    <p>This transparency is not accidental. It is not a failure of pigmentation, not an absence of color that the animal simply has not evolved to fill. Transparency is an adaptation &mdash; a survival strategy, a way of being invisible in a medium where invisibility is the most effective defense. The open ocean has no hiding places. There are no rocks, no crevices, no vegetation, no substrate of any kind. An animal in the open water column is visible from every direction to every predator within visual range. The only way to hide in open water is to be invisible, and the most effective way to be invisible in water is to be made of water &mdash; to match the optical properties of the medium so closely that light passes through you the same way it passes through the water around you, rendering you undetectable to visual predators. <em>Aurelia aurita</em>&rsquo;s transparency is a lens trick. The animal is there, but the light does not know it.</p>
+
+    <h2>The Pulse</h2>
+
+    <p><em>Aurelia aurita</em> moves by pulsing its bell &mdash; a rhythmic contraction and relaxation of the subumbrellar muscles that line the inner surface of the dome. The contraction squeezes the bell, expelling water from the subumbrellar cavity and propelling the animal in the direction opposite to the jet &mdash; upward and forward, typically, though the direction depends on the animal&rsquo;s orientation. The relaxation allows the elastic mesoglea to spring the bell back to its resting shape, refilling the subumbrellar cavity with water in preparation for the next contraction. The cycle repeats at a frequency of roughly one pulse per second, though the rate varies with temperature, salinity, food availability, and the animal&rsquo;s physiological state.</p>
+
+    <p>The pulse is the most primitive form of jet propulsion in the animal kingdom. It is not efficient. The thrust generated by each contraction is small relative to the animal&rsquo;s size, and the drag on the bell &mdash; which is, geometrically, a very high-drag shape, a broad disc presented face-first to the flow &mdash; is large. <em>Aurelia aurita</em> does not swim fast. It does not swim far. It cannot swim against a current of any significant strength. In any body of water with tidal currents or wind-driven circulation, the jellyfish is carried by the current far more than it propels itself. The pulse keeps the animal in the water column &mdash; prevents it from sinking &mdash; and provides a small degree of vertical positioning, allowing it to move up or down in response to light, temperature, or food gradients. But horizontal movement is almost entirely passive. The jellyfish goes where the water goes.</p>
+
+    <p>This is the first resonance with TIROS-1. The satellite orbited the Earth at 700 kilometers altitude, circling once every 99 minutes, carried by the momentum imparted at launch and constrained by gravity into an elliptical path it could not alter. It had no propulsion. It had no ability to change its orbit, to speed up, to slow down, to move sideways, to station itself over a particular point on the surface. It went where the physics took it. It observed along the way. <em>Aurelia aurita</em> pulses through Puget Sound, carried by the tidal currents of the Strait of Juan de Fuca and the Admiralty Inlet, constrained by the basin&rsquo;s geometry into paths it did not choose. It has propulsion &mdash; the bell pulse &mdash; but the propulsion is overwhelmed by the current, and the animal goes where the water takes it. It feeds along the way. Both the satellite and the jellyfish are observers in transit, carried by forces larger than themselves, unable to control their trajectory, performing their function &mdash; observation for the satellite, feeding for the jellyfish &mdash; during the journey that the medium imposes on them.</p>
+
+    <p>The pulse also creates a scanning pattern. As <em>Aurelia aurita</em> contracts its bell, the animal moves forward and slightly upward. As the bell relaxes, the animal drifts slightly backward and downward. The net motion is a scalloped path &mdash; an oscillating trajectory that sweeps the animal&rsquo;s oral arms and tentacles through a volume of water larger than the animal would traverse if it simply drifted passively. This scanning behavior increases the animal&rsquo;s encounter rate with prey &mdash; the tiny zooplankton, copepods, fish larvae, and other small organisms that <em>Aurelia aurita</em> feeds on. The pulse is not just propulsion. It is a sampling strategy, a way of sweeping a larger volume of the medium for the resources it contains.</p>
+
+    <p>TIROS-1 scanned as well. The satellite&rsquo;s spin &mdash; twelve revolutions per minute &mdash; caused the cameras to sweep across the scene below in a rotating pattern, sampling the cloud cover in strips as the satellite moved along its ground track. The spin was not designed as a scanning mechanism &mdash; it was designed for attitude stabilization &mdash; but it had the effect of creating a scan pattern, sweeping the camera&rsquo;s field of view across the Earth&rsquo;s surface in a series of arcs that covered a wider swath than a non-spinning, fixed-pointing camera would have. The pulse of the jellyfish and the spin of the satellite both create periodic, rhythmic sampling patterns that sweep the observer through a larger volume of the medium than passive drift alone would permit. The jellyfish pulses through the water, sweeping for plankton. The satellite spins through the orbit, sweeping for clouds. The mechanism is different. The function is identical: increase the coverage, sample more of the medium, see more of what is there.</p>
+
+    <h2>The Nerve Net</h2>
+
+    <p><em>Aurelia aurita</em> has no brain. It has no central nervous system. It has no spinal cord, no ganglia, no concentrated cluster of neurons that processes information and issues commands. What it has is a nerve net &mdash; a diffuse, decentralized network of interconnected nerve cells spread throughout the body, with a slight concentration around the bell margin where the sensory organs are located. The nerve net conducts signals between cells, coordinating the bell contractions that produce the pulse, but it does not process information in the way that a brain processes information. There is no computation. There is no decision-making in any meaningful sense. There is stimulus and response, mediated by a network that transmits signals in all directions from the point of stimulation, like ripples spreading from a stone dropped in a pond.</p>
+
+    <p>The sensory organs &mdash; the rhopalia &mdash; are located at regular intervals around the bell margin, typically eight in number, each one a small club-shaped structure containing a statocyst (a gravity sensor, a tiny crystal of calcium sulfate suspended in a fluid-filled chamber, whose position relative to the chamber walls tells the animal which way is up), an ocellus (a simple light-sensing organ, a cluster of photoreceptor cells that can detect the presence and direction of light but cannot form an image), and chemoreceptors (cells that detect dissolved chemicals in the water). The rhopalia are the jellyfish&rsquo;s entire sensory apparatus. They provide information about gravity, light, and water chemistry. They do not provide vision. <em>Aurelia aurita</em> cannot see. It can sense light &mdash; it can tell bright from dark, and it can orient itself relative to the direction of maximum illumination &mdash; but it cannot form an image. It cannot resolve shapes, cannot detect movement, cannot identify predators or prey by sight. Its world is one of gradients: brighter here, darker there, saltier here, fresher there, food here, no food there. It navigates these gradients with its pulse, swimming toward conditions that favor feeding and reproduction, swimming away from conditions that threaten survival.</p>
+
+    <p>The light-sensing rhopalia are the most direct connection between <em>Aurelia aurita</em> and TIROS-1. The jellyfish&rsquo;s ocelli are the simplest possible optical sensor &mdash; a cluster of cells that detect light and transmit a signal indicating its presence and intensity. They are, in the most basic sense, cameras without a lens, detectors without resolution, sensors that record brightness without detail. TIROS-1&rsquo;s vidicon cameras were, by the standards of modern imaging, almost equally primitive &mdash; vacuum tube devices that produced grainy, low-contrast, geometrically distorted images with a resolution of a few kilometers at best. The vidicon was to modern satellite imagery what the ocellus is to the human eye: a first attempt, a proof of concept, a device that demonstrated that optical information could be captured from that vantage point, even if the capture was crude. Both the ocellus and the vidicon answer the same fundamental question: is there light here, and what does it look like? The ocellus answers with a gradient. The vidicon answers with a photograph. The sophistication differs. The question is the same.</p>
+
+    <h2>The Bloom</h2>
+
+    <p>Moon jellyfish bloom. This is the word marine biologists use for the phenomenon, and it is the right word, because what happens is more like a flowering than a swarming. Under favorable conditions &mdash; warm water temperatures, abundant food, low predation pressure, the right combination of salinity and current and photoperiod &mdash; <em>Aurelia aurita</em> populations can increase explosively, producing aggregations so dense that the water becomes a living tissue. Bloom events in Puget Sound can produce concentrations of hundreds of individuals per cubic meter of water. The jellyfish fill bays, clog marina intakes, coat the pilings of docks, and turn the water into a thick, pulsing gel that makes swimming unpleasant and sometimes impossible. A bloom of moon jellyfish in a confined body of water is an overwhelming visual phenomenon: everywhere you look, in every direction, to every depth, there are jellyfish, translucent and pulsing, filling the space the way bubbles fill a glass of champagne.</p>
+
+    <p>The bloom is a coverage event. The jellyfish, individually, are small &mdash; 10 to 40 centimeters in bell diameter, depending on age and food availability. Individually, each one samples a tiny volume of water with each pulse. But in a bloom, thousands or millions of individuals, pulsing simultaneously, sample the entire water column. The bloom achieves saturation coverage &mdash; every cubic meter of the bay is being filtered, every parcel of water is being swept by oral arms and tentacles, every planktonic organism in the bloom zone is within capture range of a jellyfish. The bloom is, in effect, a distributed sensor network: each individual jellyfish is a node, each pulse is a sampling event, and the aggregate effect is complete coverage of the environment.</p>
+
+    <p>TIROS-1 was also the first node in a coverage network. A single satellite, in a single orbit, could photograph only a fraction of the Earth&rsquo;s weather &mdash; limited by the spin-axis pointing problem, by the orbital inclination, by the camera&rsquo;s field of view. But TIROS-1 was not meant to be alone. It was the first of ten TIROS satellites, launched between 1960 and 1965, each one adding coverage, each one filling gaps left by its predecessors, each one extending the temporal and spatial sampling of the global weather system. By the time TIROS-10 was operating, the network of orbiting cameras provided something approaching continuous coverage of the global cloud pattern. The operational ESSA and NOAA satellites that followed achieved true saturation coverage &mdash; every point on the Earth&rsquo;s surface photographed at least once every twelve hours, the entire planet monitored continuously, no storm undetected, no weather system unobserved. The TIROS network bloomed, the way <em>Aurelia</em> blooms &mdash; from a single individual to a population that covers the entire medium.</p>
+
+    <p>The parallel between jellyfish blooms and satellite constellations is structural, not metaphorical. Both achieve their function through the multiplication of simple, identical units. Each moon jellyfish is a simple organism &mdash; no brain, no complex behavior, no coordination with its neighbors. Each TIROS satellite was a simple machine &mdash; two cameras, a tape recorder, a transmitter, no ability to communicate with other satellites or coordinate its observations with theirs. But the aggregate effect of many simple units, distributed across the medium, each one independently sampling its local environment, is comprehensive coverage. The coverage is emergent. No individual jellyfish intends to cover the bay. No individual satellite intends to cover the globe. The coverage arises from the properties of the medium &mdash; the currents that distribute the jellyfish, the orbital mechanics that distribute the satellites &mdash; acting on a population of identical units. The bloom and the constellation are both examples of the same principle: comprehensive observation through the distribution of simple sensors.</p>
+
+    <h2>The Life Cycle</h2>
+
+    <p>The life cycle of <em>Aurelia aurita</em> is one of the most remarkable in the animal kingdom, not because it is unique &mdash; many cnidarians share its basic pattern &mdash; but because it is so completely unlike the life cycles of the animals most people are familiar with. <em>Aurelia aurita</em> alternates between two radically different body forms: the polyp and the medusa. The medusa is the jellyfish &mdash; the pulsing, translucent, free-swimming form that most people recognize. The polyp is something else entirely: a small, sessile, tube-shaped organism, typically a few millimeters tall, attached to a hard surface &mdash; a rock, a dock piling, a piece of shell &mdash; by a basal disc, with a ring of tentacles surrounding a single opening that serves as both mouth and anus. The polyp looks nothing like the medusa. It looks like a tiny sea anemone. It sits on its substrate, captures passing food particles with its tentacles, and grows. It can reproduce asexually, budding off copies of itself that settle nearby and establish a clone of genetically identical polyps. A single polyp can produce, over months or years, a dense carpet of clones covering a patch of substrate.</p>
+
+    <p>When conditions are right &mdash; typically in late winter or early spring, triggered by dropping water temperatures and changing photoperiod &mdash; the polyp undergoes strobilation. The body of the polyp segments itself into a stack of disc-shaped structures, each one developing its own set of tentacles and sensory organs. The stack looks like a pile of coins, or a column of discs, each one slightly different from the last, the uppermost ones more fully developed and the lowermost ones still forming. One by one, starting from the top, the discs detach from the stack and swim away. Each detached disc is an ephyra &mdash; a juvenile medusa, a tiny, star-shaped, pulsing creature about 2 millimeters in diameter, barely visible to the naked eye, that will feed and grow and develop over the course of weeks or months into a full-sized adult medusa. A single polyp can produce dozens of ephyrae in a single strobilation event, and a carpet of polyps can release thousands, producing the raw material for a bloom.</p>
+
+    <p>The polyp stage is the persistence stage. The medusae are seasonal &mdash; they appear in spring or summer, grow, reproduce sexually, and die in autumn or winter. But the polyps persist year-round, attached to their substrate, surviving conditions that would kill the medusae. Polyps can survive cold temperatures, low food availability, poor water quality, even periods of desiccation if they are in the intertidal zone. They are the library&rsquo;s archive &mdash; the stored potential that survives from year to year, accumulating slowly, waiting for the right conditions to release the next generation of medusae. The bloom does not appear from nothing. It appears from the polyp carpet, which has been growing quietly, invisibly, on the underside of a dock or the shaded surface of a rock, for months or years before the bloom erupts.</p>
+
+    <p>This duality &mdash; the visible, dramatic, short-lived medusa and the invisible, quiet, persistent polyp &mdash; mirrors the duality of the TIROS program itself. The satellites were the medusae: visible, dramatic, finite in their operational lifetimes (78 days for TIROS-1, months to a few years for its successors), producing the observations that made the news and changed the science. But the ground infrastructure &mdash; the receiving stations, the data processing centers, the forecasting offices, the communication networks that transmitted the images from Fort Monmouth to the weather service analysis centers &mdash; was the polyp carpet: invisible, persistent, unglamorous, essential. The satellites came and went. The ground stations remained. New satellites were launched, and the ground stations received their data. The infrastructure persisted while the individual satellites, like individual medusae, lived out their operational lifetimes and were replaced. The TIROS program&rsquo;s true achievement was not any single satellite but the establishment of the polyp carpet &mdash; the institutional, technical, and operational infrastructure that would persist for decades and support generation after generation of weather satellites.</p>
+
+    <h2>The Translucent Bell</h2>
+
+    <p>The bell of <em>Aurelia aurita</em> is a lens. Not a lens in the optical engineering sense &mdash; it does not focus light to a point, it does not form an image, it does not have a focal length or an aperture or any of the properties that define a lens in the vocabulary of optics. But it is a lens in the physical sense: it is a transparent, curved, refractive body through which light passes, and the passage of light through it is modified by the geometry and composition of the body. The mesoglea &mdash; the gelatinous matrix that constitutes 95 percent of the bell &mdash; has a refractive index very close to that of seawater. This is why the jellyfish is nearly invisible in water: light passes through it almost without bending, almost without reflecting, almost without scattering, because the optical density of the bell is nearly identical to the optical density of the medium around it. The jellyfish is, optically, a piece of water shaped like a jellyfish.</p>
+
+    <p>But &ldquo;nearly&rdquo; is not &ldquo;exactly.&rdquo; The refractive index of the mesoglea is slightly higher than that of seawater, and this slight mismatch means that some light is refracted as it passes through the bell, bending slightly as it enters and again as it exits, the way light bends when it passes through a glass of water. The bell does not focus this light &mdash; its curvature is too irregular, its composition too heterogeneous &mdash; but it transmits it, and the transmitted light carries information about the structures inside the bell. The gonads, the gastrovascular canals, the oral arms, the radial muscles &mdash; all of these internal structures are visible through the bell because the bell transmits the light that illuminates them. The jellyfish is its own window. You can see inside it because the outside is transparent.</p>
+
+    <p>TIROS-1&rsquo;s cameras were lenses in the engineering sense. The wide-angle lens focused light from the Earth&rsquo;s surface onto the vidicon tube&rsquo;s photoconductive target, forming an image that could be scanned and transmitted. The narrow-angle lens did the same at a different scale, capturing finer detail over a smaller area. Both lenses were transparent, curved, refractive bodies that transmitted light and modified it in a controlled way. The cameras looked through their lenses at the Earth the way a biologist looks through a jellyfish bell at the structures inside: the lens transmits the light, the light carries the information, the information reveals the structure. The jellyfish bell transmits daylight and reveals its own gonads. The TIROS lens transmitted daylight reflected from the Earth and revealed the cloud structures below.</p>
+
+    <p>The connection is deeper than analogy. The jellyfish bell and the TIROS lens are both optical systems that achieve their function through transparency &mdash; through the property of transmitting light rather than absorbing or reflecting it. Transparency is not the absence of interaction with light. It is a specific kind of interaction: the light enters, passes through, and exits, and the exit light carries information about what it encountered during the passage. An opaque object stops the light. A reflective object sends it back. A transparent object lets it through, and the &ldquo;letting through&rdquo; is itself a form of observation, because what comes out the other side is different from what went in. The light that passes through the jellyfish bell carries information about the bell&rsquo;s internal structure. The light that passed through the TIROS lens carried information about the Earth&rsquo;s cloud cover. Both are transparent systems that observe by transmitting.</p>
+
+    <h2>Puget Sound</h2>
+
+    <p><em>Aurelia aurita</em> is one of the most abundant large invertebrates in Puget Sound. The Sound &mdash; a complex, glacially carved fjord system extending approximately 160 kilometers southward from the Strait of Juan de Fuca into the interior of western Washington &mdash; provides ideal habitat for moon jellyfish: protected waters, moderate tidal currents, abundant plankton, hard substrate for polyp attachment, and the seasonal temperature variations that trigger strobilation. The polyps colonize dock pilings, floating docks, pier foundations, boat hulls, oyster shells, and natural rock surfaces throughout the Sound, forming dense carpets in sheltered locations with good water flow.</p>
+
+    <p>The spring bloom typically begins in March or April &mdash; the same month that TIROS-1 launched &mdash; when rising water temperatures and increasing day length trigger strobilation in the overwintering polyp population. The ephyrae released by the polyps grow rapidly, feeding on copepods and other small zooplankton, and by May or June the adult medusae are abundant, filling the surface waters of bays and inlets from Bellingham to Olympia. The bloom peaks in late summer, when the largest individuals &mdash; bells 30 to 40 centimeters in diameter &mdash; are common in the sheltered waters of the San Juan Islands, Hood Canal, and the southern reaches of the Sound.</p>
+
+    <p>The bloom is an ecological event of considerable significance. Moon jellyfish are voracious planktivores. A single adult <em>Aurelia</em> can filter several liters of water per hour, capturing copepods, fish larvae, and other zooplankton with the mucus coating on its bell surface and oral arms. In a dense bloom, the aggregate filtration rate can be enormous &mdash; millions of jellyfish, each filtering liters per hour, collectively processing a significant fraction of the water column&rsquo;s planktonic biomass every day. This filtration has cascading effects on the food web: when jellyfish consume large quantities of zooplankton, there is less zooplankton available for fish larvae, potentially reducing fish recruitment. When jellyfish consume fish larvae directly &mdash; which they do, since small fish are not distinguishable from large zooplankton to an organism that feeds by non-selective mucus entrapment &mdash; they are both competing with and preying upon the next generation of fish. The relationship between jellyfish blooms and fish populations is one of the most active areas of research in marine ecology, and Puget Sound&rsquo;s well-documented <em>Aurelia</em> blooms provide some of the best data in the Pacific Northwest for studying it.</p>
+
+    <p>The blooms are also increasing. In Puget Sound and in temperate waters worldwide, moon jellyfish populations appear to be growing &mdash; blooms are becoming more frequent, more intense, and longer in duration. The causes are debated: warming water temperatures extend the growing season and may increase strobilation rates. Overfishing of jellyfish predators (ocean sunfish, leatherback sea turtles, certain species of fish) may reduce top-down control. Eutrophication &mdash; the enrichment of coastal waters with nutrients from agricultural runoff and wastewater &mdash; may increase plankton production, providing more food for jellyfish. Coastal development provides additional hard substrate for polyp attachment in the form of pilings, bulkheads, and floating structures. The bloom may be, in part, a consequence of human modification of the coastal environment &mdash; a feedback loop in which we create conditions that favor jellyfish and disfavor the organisms that would otherwise control them.</p>
+
+    <h2>Taxonomy Note</h2>
+
+    <p><em>Aurelia aurita</em> was described by Carl Linnaeus in the twelfth edition of his <em>Systema Naturae</em> (1758), based on specimens from European waters. The genus name <em>Aurelia</em> derives from the Latin <em>aureus</em>, meaning &ldquo;golden&rdquo; or &ldquo;of gold,&rdquo; a reference to the golden or amber color sometimes displayed by the gonads seen through the translucent bell. The specific epithet <em>aurita</em> derives from the Latin <em>auritus</em>, meaning &ldquo;eared&rdquo; or &ldquo;long-eared,&rdquo; a reference to the oral arms that extend from the underside of the bell and were thought by early naturalists to resemble ears. The common name &ldquo;moon jellyfish&rdquo; refers to the translucent, disc-shaped bell, which, when seen from above in calm water, resembles a full moon &mdash; circular, pale, glowing faintly with transmitted light.</p>
+
+    <p><em>Aurelia aurita</em> is classified in the class Scyphozoa (true jellyfish), within the phylum Cnidaria (stinging animals). The Scyphozoa are distinguished from other cnidarian classes by the dominance of the medusa stage in their life cycle &mdash; unlike the Hydrozoa, where the polyp stage is often dominant, scyphozoan medusae are large, free-swimming, and conspicuous, while their polyps are small and inconspicuous. The family Ulmaridae, to which <em>Aurelia</em> belongs, contains several genera of large, disc-shaped jellyfish distributed throughout the world&rsquo;s oceans.</p>
+
+    <p>The taxonomy of <em>Aurelia</em> is complicated by cryptic speciation. What was long considered a single cosmopolitan species &mdash; <em>Aurelia aurita</em> &mdash; has been revealed by molecular phylogenetic studies to be a species complex, a group of morphologically similar but genetically distinct species that cannot be reliably distinguished by external appearance alone. At least sixteen species within the <em>Aurelia</em> genus have been identified through molecular analysis, and the name &ldquo;<em>Aurelia aurita</em>&rdquo; in the strict sense may apply only to populations from the type locality in European waters. The <em>Aurelia</em> populations in Puget Sound and the Pacific Northwest have not been conclusively assigned to a species within this complex, and they may represent a distinct, undescribed species or a known species other than <em>A. aurita</em> sensu stricto. Pending resolution of the species complex taxonomy, the name <em>Aurelia aurita</em> is used here in the broad sense, referring to the moon jellyfish species group as it occurs in the Pacific Northwest.</p>
+
+    <div class="resonance-card">
+      <h2 style="margin-top: 0;">Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Lens / Camera</div>
+          The jellyfish bell is translucent &mdash; a curved, transparent body through which light passes, illuminating the internal structures and transmitting information about what lies within. TIROS-1&rsquo;s vidicon cameras looked through glass lenses at the Earth below. Both are optical systems that achieve their function through transparency &mdash; through the property of transmitting light rather than blocking it.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Pulsing / Scanning</div>
+          The jellyfish pulses its bell rhythmically &mdash; approximately once per second &mdash; creating a periodic motion that sweeps its feeding surfaces through the water column. TIROS-1 spun at twelve revolutions per minute, creating a periodic rotation that swept its cameras across the scene below. Both achieve observation through periodicity.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Drift / Orbit</div>
+          Moon jellyfish drift with currents, carried by tidal flows and wind-driven circulation through Puget Sound&rsquo;s channels and basins, unable to resist the large-scale movements of the water. TIROS-1 orbited following the trajectory imparted at launch, carried by momentum and constrained by gravity. Both are passive travelers &mdash; observers in transit.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Translucent / Transparent</div>
+          The moon jellyfish bell is 95 percent water, nearly invisible in its medium, transmitting light through its body with minimal distortion. TIROS-1&rsquo;s cameras transmitted images of what they observed &mdash; light passed through the lens, struck the vidicon target, and was converted to a signal. Both systems are characterized by transparency: windows rather than walls.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Bloom / Coverage</div>
+          Moon jellyfish bloom in massive aggregations, achieving saturation sampling of the water column through millions of individual organisms. TIROS-1 was the first node in a satellite constellation that would eventually achieve global coverage. Both achieve comprehensive coverage through the multiplication of simple, identical units.
+        </div>
+      </div>
+    </div>
+
+    <div class="sources">
+      <h2>Sources</h2>
+
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Russell, Frederick S. &ldquo;The Medusae of the British Isles. Volume II: Pelagic Scyphozoa.&rdquo;</strong> Cambridge University Press, 1970. Foundational monograph on British scyphozoan medusae including comprehensive treatment of <em>Aurelia aurita</em> biology, morphology, life cycle, and ecology.</li>
+        <li><strong>Arai, Mary N. &ldquo;A Functional Biology of Scyphozoa.&rdquo;</strong> Chapman &amp; Hall, London, 1997. Authoritative reference on scyphozoan biology covering feeding, locomotion, sensory systems, reproduction, and ecology.</li>
+        <li><strong>Dawson, Michael N., and Jacobs, David K. &ldquo;Molecular Evidence for Cryptic Species of Aurelia aurita (Cnidaria, Scyphozoa).&rdquo;</strong> Biological Bulletin, Vol. 200, No. 1, 2001. Landmark paper demonstrating that <em>Aurelia aurita</em> is a species complex.</li>
+      </ul>
+
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Purcell, Jennifer E. &ldquo;Jellyfish and Ctenophore Blooms Coincide with Human Proliferations and Environmental Perturbations.&rdquo;</strong> Annual Review of Marine Science, Vol. 4, 2012. Review of global trends in jellyfish blooms.</li>
+        <li><strong>Lucas, Cathy H. &ldquo;Reproduction and Life History Strategies of the Common Jellyfish, Aurelia aurita, in Relation to Its Ambient Environment.&rdquo;</strong> Hydrobiologia, Vol. 451, 2001. Study of <em>Aurelia aurita</em> life cycle dynamics.</li>
+        <li><strong>Mills, Claudia E. &ldquo;Jellyfish Blooms: Are Populations Increasing Globally in Response to Changing Ocean Conditions?&rdquo;</strong> Hydrobiologia, Vol. 451, 2001. Analysis of evidence for increasing jellyfish populations.</li>
+        <li><strong>Costello, John H., and Colin, Sean P. &ldquo;Morphology, Fluid Motion and Predation by the Scyphomedusa Aurelia aurita.&rdquo;</strong> Marine Biology, Vol. 121, 1994. Hydrodynamic analysis of bell pulsation.</li>
+        <li><strong>Albert, David J. &ldquo;What&rsquo;s on the Mind of a Jellyfish? A Review of Behavioural Observations on Aurelia sp. Jellyfish.&rdquo;</strong> Neuroscience &amp; Biobehavioral Reviews, Vol. 35, No. 3, 2011. Review of <em>Aurelia</em> behavioral studies.</li>
+        <li><strong>Brodeur, Richard D. et al. &ldquo;Rise and Fall of Jellyfish in the Eastern Bering Sea in Relation to Climate Regime Shifts.&rdquo;</strong> Progress in Oceanography, Vol. 77, 2008. Study of jellyfish population fluctuations in the North Pacific.</li>
+        <li><strong>Hamner, William M., and Dawson, Michael N. &ldquo;A Review and Synthesis on the Systematics and Evolution of Jellyfish Blooms.&rdquo;</strong> Hydrobiologia, Vol. 616, 2009. Synthesis of knowledge on jellyfish bloom dynamics.</li>
+      </ul>
+
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>GBIF (Global Biodiversity Information Facility)</strong> &mdash; <em>Aurelia aurita</em> occurrence records. Global distribution data including Pacific Northwest records.</li>
+        <li><strong>World Register of Marine Species (WoRMS)</strong> &mdash; <em>Aurelia aurita</em> (Linnaeus, 1758). Taxonomic authority record.</li>
+        <li><strong>iNaturalist</strong> &mdash; <em>Aurelia aurita</em> observations, Pacific Northwest region. Community science occurrence records.</li>
+        <li><strong>Washington Department of Fish and Wildlife</strong> &mdash; Marine Invertebrate Surveys. Monitoring data on jellyfish populations in Puget Sound.</li>
+        <li><strong>NOAA National Centers for Environmental Information</strong> &mdash; Puget Sound Oceanographic Data. Sea surface temperature, salinity, and nutrient data.</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="research.html">&larr; Research</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Next Track</div>
+        <a href="mathematics.html">Mathematics &rarr;</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Mission Hub</div>
+        <a href="index.html">v1.15 TIROS-1</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.15 TIROS-1 + Aurelia aurita &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

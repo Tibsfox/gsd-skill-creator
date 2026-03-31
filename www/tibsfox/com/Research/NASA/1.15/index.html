@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.15 — TIROS-1 + Aurelia aurita | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --atmo-deep: #060810; --atmo-mid: #101828;
+    --cloud-white: #E8E8F0; --cloud-dim: #808890;
+    --sky-blue: #4080CC; --sky-dim: #204068;
+    --storm-gray: #606878; --storm-dark: #303840;
+    --jelly-clear: #C0D0E0; --jelly-dim: #607080;
+    --ocean-dark: #081828; --space: #060810;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A3040;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(64,128,204,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(192,208,224,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(64,128,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(96,104,120,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(192,208,224,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(64,128,204,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(6,8,16,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(64,128,204,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--atmo-deep) 20%, var(--atmo-mid) 40%, var(--sky-dim) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--sky-blue);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(64,128,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,204,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(64,128,204,0.12); border: 1px solid var(--sky-blue); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--sky-blue); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-success {
+    background: rgba(64,128,204,0.3); border: 1px solid var(--sky-blue);
+    color: var(--sky-blue); padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--sky-blue); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--cloud-white);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--cloud-white); }
+  .card em { color: var(--jelly-clear); }
+
+  .resonance-card { border-color: var(--sky-dim); background: rgba(64,128,204,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(64,128,204,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--sky-blue); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--sky-blue); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--sky-blue); background: rgba(64,128,204,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--sky-blue); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--cloud-white); }
+  .track-card.t2 .track-title { color: var(--jelly-clear); }
+  .track-card.t3 .track-title { color: var(--sky-blue); }
+  .track-card.t4 .track-title { color: var(--cloud-white); }
+  .track-card.t5 .track-title { color: var(--sky-blue); }
+  .track-card.t6 .track-title { color: var(--jelly-clear); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(64,128,204,0.08); border: 1px solid var(--sky-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--sky-blue); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--jelly-clear); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(6,8,16,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--sky-blue); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(64,128,204,0.12); border: 1px solid rgba(64,128,204,0.3);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--sky-blue); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--sky-blue); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(64,128,204,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: var(--cloud-white); }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--sky-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--cloud-white); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--sky-blue); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.15</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>v1.15 &mdash; TIROS-1 + <em>Aurelia aurita</em></h1>
+    <p class="subtitle">The Weather Eye &mdash; First Satellite to Photograph Earth&rsquo;s Weather</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> April 1, 1960</span>
+      <span><span class="label">Program:</span> TIROS (NASA/RCA/Weather Bureau)</span>
+      <span><span class="label">Mass:</span> 120 kg</span>
+      <span><span class="label">Diameter:</span> 107 cm</span>
+      <span><span class="label">Organism:</span> Moon jellyfish</span>
+      <span><span class="label">Bird:</span> Marbled Murrelet</span>
+      <span><span class="label">Dedication:</span> Rachmaninoff</span>
+      <span><span class="label">Status:</span> SUCCESS &mdash; 22,952 photographs in 78 days</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On April 1, 1960, a Thor-Able rocket launched TIROS-1 &mdash; a 120-kilogram, drum-shaped satellite carrying two RCA vidicon television cameras &mdash; into a 693 &times; 756 km orbit at 48.4&deg; inclination. <strong>The question: can a satellite photograph the Earth&rsquo;s weather from orbit?</strong></p>
+      <p>The answer came forty minutes later, when the first image arrived at Fort Monmouth, New Jersey: thick cloud formations over the North Atlantic, swirling, structured masses of white against the dark curve of the Earth. Meteorologists had drawn these patterns on maps for decades. They had never seen one. The photograph was the thing itself.</p>
+      <p>TIROS-1 operated for 78 days, returning 22,952 cloud-cover photographs. Approximately 13,770 were of sufficient quality for analysis. On the first day, it discovered a previously unknown vortex system near New Zealand. Within a week, its images were being used in operational weather forecasting. The quiet revolution it began would lead to a global satellite constellation that, by the late 1960s, ensured no major storm anywhere on Earth went undetected. The difference between Galveston (1900, 6,000-12,000 dead) and Hurricane Andrew (1992, 65 dead) is, in large part, the difference between no satellite observations and continuous satellite observations.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The Weather Eye</div>
+            <div class="track-desc">First weather satellite, 22,952 photographs, the spin-scan problem, vidicon cameras, the quiet revolution, Rachmaninoff&rsquo;s clouds</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">Wexler&rsquo;s vision (1961), foundation models for satellite imagery, optimal constellation design, global jellyfish blooms meta-analysis</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Aurelia aurita</em></div>
+            <div class="track-desc">Moon jellyfish &mdash; the lens, the pulse, the nerve net, the bloom, translucent bell, Puget Sound ecology, 95% water</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Observation</div>
+            <div class="track-desc">Image geometry from orbit, swath width, TV bandwidth, Shannon information, ground track regression, J2 perturbation</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Meteorology, Photography, Orbital Mechanics. Time-lapse TRY. NOAA APT ground station DIY. Marbled Murrelet perspective.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Train, Visualize, Create</div>
+            <div class="track-desc">Image geometry calculator, ground track simulator, cloud viewer, coverage calculator, cloud classifier, cyclone shader, Rachmaninoff guide</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Lens / Camera</div>
+          The jellyfish bell is translucent &mdash; a curved, transparent body through which light passes. TIROS-1&rsquo;s vidicon cameras looked through glass lenses at the Earth below. Both are optical systems that achieve their function through transparency.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Pulsing / Scanning</div>
+          The jellyfish pulses its bell rhythmically, creating a periodic sampling pattern. TIROS-1 spun at twelve RPM, sweeping its cameras across the scene below. Both achieve observation through periodicity.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Drift / Orbit</div>
+          Moon jellyfish drift with currents, unable to resist large-scale water movements. TIROS-1 orbited following launch trajectory, carried by momentum and constrained by gravity. Both are passive travelers &mdash; observers in transit.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Translucent / Transparent</div>
+          The moon jellyfish bell is 95% water, nearly invisible in its medium. TIROS-1&rsquo;s cameras transmitted images &mdash; light passed through the lens, struck the vidicon target, converted to signal. Both systems are windows rather than walls.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Bloom / Coverage</div>
+          Moon jellyfish bloom in massive aggregations, achieving saturation sampling through millions of individuals. TIROS-1 was the first node in a constellation that would achieve global coverage. Both achieve comprehensive coverage through the multiplication of simple, identical units.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li>
+          <a href="artifacts/stories/the-weather-eye.html" style="color: var(--sky-blue);">Story: &ldquo;The Weather Eye&rdquo;</a>
+          <a href="artifacts/stories/the-weather-eye.tex" style="color: var(--text-dim); font-size: 0.75rem; margin-left: 0.5rem; border: 1px solid var(--border); padding: 0.1rem 0.4rem; border-radius: 3px; text-decoration: none;">LaTeX</a>
+          &mdash; TIROS-1&rsquo;s 78 days, told from a forecaster&rsquo;s perspective
+        </li>
+        <li><a href="artifacts/audio/tiros1-weather-synth.dsp" style="color: var(--sky-blue);">Audio: TIROS-1 Weather Synth</a> &mdash; FAUST synth, atmospheric observation sonification (VST/LV2)</li>
+        <li><a href="artifacts/audio/marbled-murrelet.dsp" style="color: var(--sky-blue);">Audio: Marbled Murrelet</a> &mdash; FAUST synth, old-growth canopy and coastal flight (VST/LV2)</li>
+        <li><a href="artifacts/circuits/led-weather-display.md" style="color: var(--sky-blue);">Circuit: LED Weather Display</a> &mdash; Cloud cover visualization with LEDs</li>
+        <li><a href="artifacts/circuits/radio-crystal-filter.md" style="color: var(--sky-blue);">Circuit: Radio Crystal Filter</a> &mdash; Crystal filter for satellite signal reception</li>
+        <li><a href="artifacts/screensaver/tiros1-screensaver.frag" style="color: var(--sky-blue);">Screensaver: TIROS-1</a> &mdash; GLSL fragment shader, cyclone from orbit with vidicon aesthetic</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><a href="artifacts/simulations/python/image-geometry.py" style="color: var(--sky-blue);">Python: Image Geometry Calculator</a> &mdash; Camera footprint and resolution from orbit</li>
+        <li><a href="artifacts/simulations/python/ground-track.py" style="color: var(--sky-blue);">Python: Ground Track and Coverage</a> &mdash; Orbital ground track with J2 perturbation</li>
+        <li><a href="artifacts/simulations/web/cloud-viewer.html" style="color: var(--sky-blue);">Web: Cloud Pattern Viewer</a> &mdash; Interactive vidicon camera simulation</li>
+        <li><a href="artifacts/simulations/web/coverage-map.html" style="color: var(--sky-blue);">Web: Orbital Coverage Calculator</a> &mdash; Compare TIROS-1 vs modern satellite constellations</li>
+        <li><a href="artifacts/simulations/spice/vidicon-camera.cir" style="color: var(--sky-blue);">SPICE: Vidicon Camera</a> &mdash; Photoconductive target analog circuit (ngspice)</li>
+        <li><a href="artifacts/simulations/spice/crystal-filter.cir" style="color: var(--sky-blue);">SPICE: Crystal Filter</a> &mdash; Quartz crystal bandpass filter model (ngspice)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: var(--sky-blue);">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(64,128,204,0.04); border-color: var(--sky-dim);">
+      <h2 style="color: var(--cloud-white);">Dedication: Sergei Rachmaninoff</h2>
+      <p><strong>Born April 1, 1873 &mdash; Died March 28, 1943</strong></p>
+      <p>Rachmaninoff was born exactly 87 years before TIROS-1 launched. His Piano Concerto No. 2 in C minor opens with a sequence of slowly building chords &mdash; rising like a wave, gathering mass and momentum, swelling from whisper to full-orchestral climax. The architecture is tidal: it surges and recedes, builds and dissipates, accumulates energy through long arcs of harmonic tension that resolve in cascading releases of sound. His music is weather-like: not in the programmatic sense, but in its dynamics, in the way it occupies space and moves through time.</p>
+      <p>He was a Russian who became an American. He left Russia in 1917 and never returned. The Rhapsody on a Theme of Paganini (1934) contains the eighteenth variation &mdash; an inversion of Paganini&rsquo;s theme, descending made ascending, minor made major. It sounds like remembering. Like seeing something whole from a distance. TIROS-1 saw the weather whole because it was finally far enough away. Rachmaninoff heard Russia whole because he was finally far enough away. The exile&rsquo;s perspective and the satellite&rsquo;s perspective are the same: the view from above, where distance creates clarity.</p>
+      <p style="font-style: italic; color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; text-align: center;"><strong style="color: var(--sky-blue); font-size: 1.3rem;">Point cameras down, photograph weather.</strong></p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.14/index.html">&larr; v1.14 Echo 1</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.16/index.html">v1.16 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Aurelia aurita (Moon Jellyfish)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">95%</div>
+          <div class="stat-label">Water</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">~1 Hz</div>
+          <div class="stat-label">Pulse Rate</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">10&ndash;40 cm</div>
+          <div class="stat-label">Bell Diameter</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">8</div>
+          <div class="stat-label">Rhopalia</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        The most common large jellyfish in the world&rsquo;s temperate oceans. Translucent bell with four horseshoe-shaped gonads visible through the mesoglea. No brain, no bones, no blood. Pulses rhythmically, drifts with currents, senses light with simple ocelli. Found in Puget Sound blooms every spring &mdash; the same month TIROS-1 launched. The jellyfish is its own window: you can see inside it because the outside is transparent.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(64,128,204,0.06); border-color: var(--sky-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--sky-blue); margin-bottom: 0.5rem;">Bird: Marbled Murrelet</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em>Brachyramphus marmoratus</em> (degree 15). Nests 45 meters up in old-growth conifers &mdash; above the searchers&rsquo; perspective. The nest was not found until 1974. TIROS-1 solved the opposite problem: weather patterns hidden above the observers&rsquo; perspective. A change in altitude revealed what had been there all along.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: TIROS-1 (1960-002B)</a>
+      <a href="https://www.nesdis.noaa.gov/">NOAA TIROS History</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS System</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://www.star.nesdis.noaa.gov/GOES/">GOES Satellite Imagery</a>
+      <a href="https://www.ssec.wisc.edu/">SSEC Wisconsin</a>
+      <a href="https://www.inaturalist.org/taxa/51515-Aurelia-aurita">iNaturalist: A. aurita</a>
+      <a href="https://www.gbif.org/">GBIF: A. aurita Records</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+    </div>
+
+    <div class="card" style="background: rgba(64,128,204,0.08); border-color: rgba(64,128,204,0.3);">
+      <h3 style="font-size: 0.9rem; color: var(--sky-blue); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        Meteorology &middot; Photography/Imaging &middot; Orbital Mechanics &middot; Marine Biology &middot; Information Theory &middot; Music/Composition
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(6,8,16,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--sky-blue); margin-bottom: 0.5rem;">Catalog Position</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim);">
+        Mission 16 of 720 &middot; Epoch 1 (Early Space Age) &middot; April 1, 1960
+      </p>
+      <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 0.5rem;">
+        <strong style="color: var(--sky-blue);">Thesis:</strong> The first satellite to look down at Earth rather than outward at space. Two television cameras, 120 kg, spinning twelve times per minute, photographing clouds from 700 km altitude. 22,952 images in 78 days proved that weather could be observed from orbit. The quiet revolution that followed saved hundreds of thousands of lives per decade through storm warnings. TIROS-1 is the ancestor of every weather satellite in orbit today.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(6,8,16,0.4);">
+      <h3 style="font-size: 0.9rem; color: var(--sky-dim); margin-bottom: 0.5rem;">TIROS-1 Specifications</h3>
+      <p style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.8;">
+        <strong style="color: var(--sky-blue);">Mass:</strong> 120 kg &middot;
+        <strong style="color: var(--sky-blue);">Diameter:</strong> 107 cm &middot;
+        <strong style="color: var(--sky-blue);">Height:</strong> 48 cm &middot;
+        <strong style="color: var(--sky-blue);">Launch:</strong> Thor-Able &middot;
+        <strong style="color: var(--sky-blue);">Orbit:</strong> 693 &times; 756 km &middot;
+        <strong style="color: var(--sky-blue);">Period:</strong> 99.2 min &middot;
+        <strong style="color: var(--sky-blue);">Inclination:</strong> 48.4&deg; &middot;
+        <strong style="color: var(--sky-blue);">Spin:</strong> ~12 RPM &middot;
+        <strong style="color: var(--sky-blue);">Cameras:</strong> 2 RCA vidicon &middot;
+        <strong style="color: var(--sky-blue);">Wide FOV:</strong> 104&deg; (3.6 km/line) &middot;
+        <strong style="color: var(--sky-blue);">Narrow FOV:</strong> 12&deg; (300 m/line) &middot;
+        <strong style="color: var(--sky-blue);">Resolution:</strong> 500 lines &middot;
+        <strong style="color: var(--sky-blue);">Tape:</strong> 32 frames &middot;
+        <strong style="color: var(--sky-blue);">Images:</strong> 22,952 &middot;
+        <strong style="color: var(--sky-blue);">Lifetime:</strong> 78 days &middot;
+        <strong style="color: var(--sky-blue);">Achievement:</strong> First weather satellite
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.15 TIROS-1 + Aurelia aurita &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+  <p style="margin-top: 0.5rem;"><em style="color: var(--jelly-clear);">&ldquo;Point cameras down, photograph weather. The satellite proved the concept. The concept saved millions of lives. Every hurricane tracked, every storm warned, every forecast improved traces back to a 120-kilogram drum that launched on April Fools&rsquo; Day, 1960.&rdquo;</em></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+* TIROS-1 — Crystal Ladder Filter at 455 kHz
+* =========================================================================
+* Mission 1.15 — TIROS-1 (NASA / Thor-Able), April 1, 1960
+* Progressive Radio Series v1.15: Crystal Filter
+*
+* A crystal ladder filter using 2-3 quartz crystals at 455 kHz IF.
+* Demonstrates the extremely narrow passband achievable with quartz
+* resonators — bandwidth of ~3 kHz compared to ~50 kHz for LC filters.
+*
+* Three analyses:
+*   1. AC sweep: 2-crystal ladder filter frequency response
+*   2. AC sweep: 3-crystal ladder for comparison (steeper skirts)
+*   3. Comparison: crystal filter vs LC bandpass from v1.14
+*
+* Quartz crystal model (Butterworth-Van Dyke equivalent circuit):
+*   Series arm: Lm (motional inductance) + Cm (motional capacitance) + Rm
+*   Parallel: Co (holder/package capacitance)
+*   For 455 kHz crystal: Lm=30mH, Cm=4.1fF, Rm=15 ohm, Co=5pF
+*   Q = 2*pi*f*Lm/Rm = 2*pi*455000*0.030/15 = 5,718
+*
+* The crystal's Q is 100-1000x higher than any LC circuit can achieve.
+* This is why crystal filters define the state of the art in IF selectivity.
+*
+* Run: ngspice -b crystal-filter.cir
+* =========================================================================
+
+.title TIROS-1 — Crystal Ladder Filter at 455 kHz
+
+* =========================================================================
+* CRYSTAL MODEL — Butterworth-Van Dyke (BVD) equivalent
+* =========================================================================
+* Each crystal is modeled as:
+*   Series: Lm -- Cm -- Rm  (motional arm)
+*   Parallel: Co             (holder capacitance)
+*
+* Subcircuit: .SUBCKT XTAL in out
+*   Lm: motional inductance
+*   Cm: motional capacitance
+*   Rm: motional resistance (ESR)
+*   Co: package capacitance
+
+.SUBCKT XTAL in out PARAMS: Lm=30m Cm=4.1f Rm=15 Co=5p
+* Motional (series) arm
+Lm in mid1 {Lm}
+Cm mid1 mid2 {Cm}
+Rm mid2 out {Rm}
+* Holder (parallel) capacitance
+Co in out {Co}
+.ENDS XTAL
+
+* =========================================================================
+* CIRCUIT 1: 2-CRYSTAL LADDER FILTER
+* =========================================================================
+*
+*  INPUT         Y1              Y2           OUTPUT
+*    ──Rs──●──[XTAL]──●──[XTAL]──●──RL──
+*              │              │
+*             Cs1            Cs2
+*              │              │
+*             GND            GND
+*
+* Cs (shunt capacitors) control the bandwidth:
+*   Cs = 100 pF → BW ≈ 3.0 kHz (SSB)
+*   Cs = 47 pF  → BW ≈ 1.5 kHz (CW)
+*   Cs = 220 pF → BW ≈ 5.0 kHz (AM)
+
+* Signal source
+Vsig1 sig1 0 AC 1
+
+* Source impedance (matched to crystal impedance)
+Rs1 sig1 in1 500
+
+* Crystal 1
+XY1 in1 mid1 XTAL PARAMS: Lm=30m Cm=4.1f Rm=15 Co=5p
+
+* Shunt capacitor 1
+Cs1 mid1 0 100p
+
+* Crystal 2
+XY2 mid1 out1 XTAL PARAMS: Lm=30m Cm=4.1f Rm=15 Co=5p
+
+* Shunt capacitor 2
+Cs2 out1 0 100p
+
+* Load impedance
+RL1 out1 0 1K
+
+* =========================================================================
+* CIRCUIT 2: 3-CRYSTAL LADDER FILTER (steeper skirts)
+* =========================================================================
+
+* Signal source
+Vsig2 sig2 0 AC 1
+
+* Source impedance
+Rs2 sig2 in2 500
+
+* Crystal 1
+XY3 in2 mid2a XTAL PARAMS: Lm=30m Cm=4.1f Rm=15 Co=5p
+
+* Shunt capacitor 1
+Cs3 mid2a 0 100p
+
+* Crystal 2
+XY4 mid2a mid2b XTAL PARAMS: Lm=30m Cm=4.1f Rm=15 Co=5p
+
+* Shunt capacitor 2
+Cs4 mid2b 0 100p
+
+* Crystal 3
+XY5 mid2b out2 XTAL PARAMS: Lm=30m Cm=4.1f Rm=15 Co=5p
+
+* Shunt capacitor 3
+Cs5 out2 0 100p
+
+* Load impedance
+RL2 out2 0 1K
+
+* =========================================================================
+* CIRCUIT 3: LC BANDPASS (for comparison — from v1.14)
+* =========================================================================
+* Double-tuned LC bandpass at 455 kHz for comparison.
+* f = 1/(2*pi*sqrt(L*C)) = 455 kHz
+* L = 2.45 uH, C = 50 pF → f = 454.6 kHz
+
+* Signal source
+Vsig3 sig3 0 AC 1
+
+* Source impedance
+Rs3 sig3 in3 500
+
+* Input coupling
+Cin3 in3 tank3a 22p
+
+* LC Tank 1
+L3a tank3a out3a 2.45u
+C3a tank3a 0 50p
+
+* Coupling capacitor
+Cc3 out3a tank3b 4.7p
+
+* LC Tank 2
+L3b tank3b out3b 2.45u
+C3b tank3b 0 50p
+
+* Output coupling and load
+Cout3 out3b out3 22p
+RL3 out3 0 1K
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* AC sweep: 440 kHz to 470 kHz with 10000 points (fine resolution)
+.ac lin 10000 440K 470K
+
+* =========================================================================
+* OUTPUT AND PLOTTING
+* =========================================================================
+
+.control
+run
+
+* Plot all three filters on the same axes
+set hcopypscolor = 1
+set color0 = white
+set color1 = black
+
+* Frequency response comparison
+plot vdb(out1) vdb(out2) vdb(out3) title 'Crystal Filter vs LC Bandpass — Frequency Response' xlabel 'Frequency (Hz)' ylabel 'Gain (dB)'
+
+* Zoomed view: passband detail
+plot vdb(out1) vdb(out2) vdb(out3) xlimit 450K 460K title 'Passband Detail — 450-460 kHz' xlabel 'Frequency (Hz)' ylabel 'Gain (dB)'
+
+* Phase response
+plot cph(v(out1))*180/pi cph(v(out2))*180/pi title 'Crystal Filter Phase Response' xlabel 'Frequency (Hz)' ylabel 'Phase (degrees)'
+
+* Measure -3dB bandwidth for 2-crystal filter
+meas ac f_low1 when vdb(out1)=vdb(out1,max(vdb(out1)))-3 rise=1
+meas ac f_high1 when vdb(out1)=vdb(out1,max(vdb(out1)))-3 fall=1
+let bw2xtal = f_high1 - f_low1
+
+* Measure -3dB bandwidth for 3-crystal filter
+meas ac f_low2 when vdb(out2)=vdb(out2,max(vdb(out2)))-3 rise=1
+meas ac f_high2 when vdb(out2)=vdb(out2,max(vdb(out2)))-3 fall=1
+let bw3xtal = f_high2 - f_low2
+
+echo ""
+echo "========================================"
+echo "TIROS-1 — Crystal Filter Analysis"
+echo "========================================"
+echo ""
+echo "2-Crystal Ladder Filter:"
+echo "  -3dB bandwidth: measured above"
+echo "  Center: 455 kHz nominal"
+echo "  Crystal Q: ~5,700"
+echo ""
+echo "3-Crystal Ladder Filter:"
+echo "  -3dB bandwidth: measured above"
+echo "  Steeper skirts, better shape factor"
+echo ""
+echo "LC Bandpass (v1.14 reference):"
+echo "  Double-tuned, Q ~100"
+echo "  Much wider passband"
+echo ""
+echo "Crystal advantage: 50-100x narrower passband"
+echo "========================================"
+
+.endc
+
+.end

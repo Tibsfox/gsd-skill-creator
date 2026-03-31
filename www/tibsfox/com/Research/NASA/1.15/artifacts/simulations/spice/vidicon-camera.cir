@@ -1,0 +1,215 @@
+* TIROS-1 — Simplified Vidicon Camera Signal Chain
+* =========================================================================
+* Mission 1.15 — TIROS-1 (NASA / Thor-Able), April 1, 1960
+* First weather satellite — Two vidicon TV cameras
+*
+* Models the signal chain from the vidicon camera tube's photoconductive
+* target through to the video output. The vidicon tube works by:
+*   1. Light from the scene focuses on a photoconductive target
+*      (antimony trisulfide, Sb2S3)
+*   2. The target's resistance changes with light intensity
+*   3. An electron beam scans across the target
+*   4. Where the target was illuminated, charge flows through —
+*      creating a current proportional to scene brightness
+*   5. This current is amplified to produce a video signal
+*
+* This simulation models ONE SCAN LINE across a cloud scene:
+*   - A varying resistance represents the photoconductive target
+*   - The scanning beam is modeled as a switched current source
+*   - A transimpedance amplifier converts current to voltage
+*   - An output video amplifier drives the telemetry transmitter
+*
+* Run: ngspice -b vidicon-camera.cir
+* =========================================================================
+
+.title TIROS-1 — Vidicon Camera Signal Chain (One Scan Line)
+
+* =========================================================================
+* SCENE MODEL — One scan line across a cloud pattern
+* =========================================================================
+* The photoconductive target has high resistance (dark) or low
+* resistance (bright clouds). We model this as a time-varying
+* voltage source that represents the light pattern on one scan line.
+*
+* Scene: left side dark (ocean), center bright (cloud), right dark
+* with a smaller bright patch (another cloud).
+*
+* Video bandwidth: TIROS-1 used 500-line TV at ~2 frames/sec
+*   Horizontal scan rate: ~1000 lines/sec (500 lines × 2 fps)
+*   Line time: ~1 ms
+*   Video bandwidth: ~250 kHz
+
+* Time scale: 0 to 1 ms = one horizontal scan line
+* Scene brightness profile (voltage = light intensity):
+*   0-0.2 ms:   ocean (dark, ~0.1V)
+*   0.2-0.5 ms: cloud band (bright, ~0.8V, with texture)
+*   0.5-0.65 ms: ocean (dark, ~0.1V)
+*   0.65-0.8 ms: smaller cloud (bright, ~0.6V)
+*   0.8-1.0 ms: ocean (dark, ~0.1V)
+
+* PWL (piecewise linear) scene brightness
+Vscene scene 0 PWL(
++ 0.0m 0.1
++ 0.15m 0.1
++ 0.20m 0.8
++ 0.25m 0.75
++ 0.30m 0.85
++ 0.35m 0.78
++ 0.40m 0.82
++ 0.45m 0.70
++ 0.50m 0.1
++ 0.55m 0.12
++ 0.60m 0.1
++ 0.65m 0.15
++ 0.70m 0.60
++ 0.75m 0.55
++ 0.80m 0.1
++ 0.85m 0.1
++ 0.90m 0.12
++ 0.95m 0.1
++ 1.0m 0.1 )
+
+* =========================================================================
+* PHOTOCONDUCTIVE TARGET — Voltage-controlled current source
+* =========================================================================
+* The scanning electron beam extracts current proportional to the
+* stored charge (which is proportional to light intensity).
+* Model: scene brightness → current (0.1 uA dark, 10 uA bright)
+*
+* Electron beam current: ~2 uA scanning current
+* Signal current: ~0.1-10 uA depending on illumination
+
+* Beam scanning current (constant during active scan)
+Ibeam 0 target DC 2u
+
+* Photoconductive signal: voltage-controlled current source
+* Current proportional to scene brightness
+Gphoto 0 target scene 0 10u
+
+* Target capacitance (Sb2S3 layer ~30 pF)
+Ctarget target 0 30p
+
+* Target load resistance (defines dark current)
+Rtarget target 0 1Meg
+
+* =========================================================================
+* PREAMPLIFIER — Low-noise transimpedance stage
+* =========================================================================
+* Converts the small target current to a voltage.
+* Uses a simple common-emitter amplifier with feedback.
+*
+* Gain: ~100 kV/A (100 kOhm transimpedance)
+* Bandwidth: ~500 kHz (sufficient for video)
+
+* Coupling capacitor (AC coupled to remove DC bias)
+Ccouple target preamp_in 10n
+
+* Bias network
+Rbias1 vcc preamp_base 47K
+Rbias2 preamp_base 0 10K
+
+* Input coupling
+Rin preamp_in preamp_base 1K
+
+* Transistor (2N2222 equivalent — NPN)
+Q1 preamp_coll preamp_base preamp_emit NPNMOD
+
+* Emitter resistor (sets gain with bypass)
+Re1 preamp_emit 0 100
+Ce1 preamp_emit 0 10u
+
+* Collector load
+Rc1 vcc preamp_coll 10K
+
+* Supply
+Vcc vcc 0 DC 12
+
+* =========================================================================
+* VIDEO AMPLIFIER — Output stage
+* =========================================================================
+* Second stage amplifies the video signal to ~1V peak-to-peak
+* for transmission via the telemetry link.
+
+* Coupling
+Ccouple2 preamp_coll vidamp_in 100n
+
+* Bias
+Rbias3 vcc vidamp_base 22K
+Rbias4 vidamp_base 0 4.7K
+
+* Input coupling
+Rin2 vidamp_in vidamp_base 470
+
+* Transistor
+Q2 vidamp_coll vidamp_base vidamp_emit NPNMOD
+
+* Emitter
+Re2 vidamp_emit 0 47
+Ce2 vidamp_emit 0 47u
+
+* Collector load
+Rc2 vcc vidamp_coll 4.7K
+
+* Output coupling to telemetry transmitter (50 ohm load)
+Coutput vidamp_coll video_out 100n
+Rload video_out 0 50
+
+* =========================================================================
+* TRANSISTOR MODEL
+* =========================================================================
+.model NPNMOD NPN (BF=200 IS=1e-14 VAF=100 CJC=5p CJE=10p TF=0.3n)
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* Transient: one complete scan line (1 ms)
+.tran 0.5u 1.0m
+
+* AC analysis: video bandwidth
+.ac dec 100 1K 10Meg
+
+* =========================================================================
+* OUTPUT
+* =========================================================================
+
+.control
+run
+
+* Plot the scan line: scene, target, and video output
+plot v(scene) v(target)*100 v(video_out) title 'TIROS-1 Vidicon Camera — One Scan Line' xlabel 'Time (s)' ylabel 'Voltage'
+
+* Plot the video output alone
+plot v(video_out) title 'Video Output Signal — One Horizontal Line' xlabel 'Time (s)' ylabel 'Video Output (V)'
+
+* Plot video frequency response
+ac
+plot vdb(video_out) title 'Video Amplifier Frequency Response' xlabel 'Frequency (Hz)' ylabel 'Gain (dB)'
+
+echo ""
+echo "============================================"
+echo "TIROS-1 — Vidicon Camera Signal Chain"
+echo "============================================"
+echo ""
+echo "Scene profile (one scan line):"
+echo "  0.0-0.2 ms: Ocean (dark)"
+echo "  0.2-0.5 ms: Cloud band (bright)"
+echo "  0.5-0.65 ms: Ocean (dark)"
+echo "  0.65-0.8 ms: Small cloud (bright)"
+echo "  0.8-1.0 ms: Ocean (dark)"
+echo ""
+echo "Vidicon tube specifications:"
+echo "  Target: Antimony trisulfide (Sb2S3)"
+echo "  Signal current: 0.1-10 uA"
+echo "  Target capacitance: ~30 pF"
+echo "  Scan rate: ~1000 lines/sec"
+echo "  Video bandwidth: ~250 kHz"
+echo ""
+echo "The video signal shows the cloud brightness"
+echo "profile along one scan line — this is exactly"
+echo "what TIROS-1 transmitted to ground stations."
+echo "============================================"
+
+.endc
+
+.end

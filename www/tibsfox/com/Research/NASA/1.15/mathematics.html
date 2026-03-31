@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: The Mathematics of Observation | v1.15 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --atmo-deep: #060810; --atmo-mid: #101828;
+    --cloud-white: #E8E8F0; --cloud-dim: #808890;
+    --sky-blue: #4080CC; --sky-dim: #204068;
+    --storm-gray: #606878; --storm-dark: #303840;
+    --jelly-clear: #C0D0E0; --jelly-dim: #607080;
+    --ocean-dark: #081828; --space: #060810;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A3040;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(64,128,204,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(192,208,224,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(64,128,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,120,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(192,208,224,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(64,128,204,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--sky-blue); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--cloud-white); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--atmo-deep) 25%, var(--atmo-mid) 50%, var(--sky-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--sky-blue); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(64,128,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,204,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(64,128,204,0.12); border: 1px solid var(--sky-blue); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--sky-blue); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(64,128,204,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--sky-blue); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--cloud-white); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--sky-blue); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--cloud-white); }
+  em { color: var(--jelly-clear); }
+  code { color: var(--sky-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--sky-blue); text-decoration: none; }
+  a:hover { color: var(--cloud-white); }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  pre {
+    background: rgba(6,8,16,0.6); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.25rem; margin: 1.5rem 0; overflow-x: auto;
+    font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--jelly-clear);
+  }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  th { background: rgba(64,128,204,0.08); color: var(--cloud-white); text-align: left; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--border); font-weight: 600; }
+  td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  tr:hover td { background: rgba(64,128,204,0.04); }
+  blockquote { border-left: 3px solid var(--sky-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(6,8,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .nav-card { background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--sky-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--cloud-white); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--sky-blue); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.15 TIROS-1</a>
+  <span class="sep">/</span>
+  Track 3: Mathematics
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.15</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of Observation</h1>
+    <p class="subtitle">Image geometry, TV bandwidth, and orbital coverage patterns</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 3 (Trigonometry)</span>
+      <span><span class="label">Secondary:</span> 7, 4, 1</span>
+      <span><span class="label">Format:</span> McNeese-Hoag</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Deposit 1: Image Geometry from Orbit (Layer 3)</h2>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>TIROS-1 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>April 1, 1960, 11:40 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Thor-Able (three-stage)</td></tr>
+      <tr><td>Spacecraft mass</td><td>m<sub>sc</sub></td><td>kg</td><td>120 (drum-shaped)</td></tr>
+      <tr><td>Spacecraft shape</td><td>&mdash;</td><td>&mdash;</td><td>18-sided polyhedron, 107 cm diameter, 48 cm height</td></tr>
+      <tr><td>Orbital perigee</td><td>r<sub>p</sub></td><td>km</td><td>693</td></tr>
+      <tr><td>Orbital apogee</td><td>r<sub>a</sub></td><td>km</td><td>756</td></tr>
+      <tr><td>Orbital period</td><td>T</td><td>min</td><td>~99.2</td></tr>
+      <tr><td>Orbital inclination</td><td>i</td><td>deg</td><td>48.4</td></tr>
+      <tr><td>Spin rate</td><td>&omega;</td><td>rpm</td><td>~12 (spin-stabilized)</td></tr>
+      <tr><td>Wide-angle camera FOV</td><td>&theta;<sub>w</sub></td><td>deg</td><td>104</td></tr>
+      <tr><td>Narrow-angle camera FOV</td><td>&theta;<sub>n</sub></td><td>deg</td><td>12</td></tr>
+      <tr><td>Vidicon resolution</td><td>&mdash;</td><td>lines</td><td>500 lines per frame</td></tr>
+      <tr><td>Total images returned</td><td>N<sub>img</sub></td><td>&mdash;</td><td>22,952 in 78 days</td></tr>
+      <tr><td>Image transmission rate</td><td>&mdash;</td><td>&mdash;</td><td>2 frames per second (readout)</td></tr>
+    </table>
+
+    <h3>What Does a Camera See from 700 km?</h3>
+
+    <p>TIROS-1 was the first satellite to look down. Every satellite before it &mdash; Explorer, Vanguard, Pioneer, Echo &mdash; was designed to measure the space environment or to relay signals. TIROS-1 carried two television cameras pointed at the Earth. It was designed to see clouds. The mathematics of what it could see begins with the geometry of projection: a camera in orbit, pointed at a curved surface, producing a flat image.</p>
+
+    <p>The fundamental question is deceptively simple: from 700 km altitude, how much of the Earth&rsquo;s surface does a camera with a 104-degree field of view capture in a single frame?</p>
+
+    <pre>IMAGE GEOMETRY FROM ORBIT:
+
+  The camera is at altitude h above the Earth's surface.
+  Earth radius: R_E = 6,371 km.
+  The camera's half-angle field of view: alpha = FOV/2.
+
+  For TIROS-1's wide-angle camera:
+    h = 700 km (approximate average altitude)
+    FOV = 104 degrees
+    alpha = 52 degrees
+
+  SWATH WIDTH AT NADIR:
+    At nadir, the ground distance corresponding to the full
+    field of view is:
+
+    W_nadir = 2 * h * tan(alpha)
+            = 2 * 700 * tan(52 deg)
+            = 2 * 700 * 1.2799
+            = 1,792 km
+
+    The wide-angle camera captures a swath approximately
+    1,800 km across. This is the distance from New York
+    to Denver, or from London to Athens.
+
+  HORIZON GEOMETRY:
+    The angular radius of the visible Earth (the horizon):
+
+    rho = arccos(R_E / (R_E + h))
+        = arccos(6371 / 7071)
+        = arccos(0.9010)
+        = 25.74 degrees
+
+    Maximum visible ground distance: 2,862 km
+
+    The camera's 52-degree half-angle is within the horizon
+    angle, so the entire FOV sees the Earth's surface when
+    pointing at nadir.
+
+  GROUND RESOLUTION:
+    Resolution_nadir = W_nadir / 500
+                     = 1,792 km / 500
+                     = 3.58 km per line
+
+    Each TV line corresponded to approximately 3.6 km on
+    the ground. Crude by modern standards, but sufficient
+    for meteorology: clouds are big.
+
+  EDGE RESOLUTION:
+    Resolution_edge = 3.58 * (1137/700) * (1/cos(52))
+                    = 9.45 km per line
+
+    The edge of the image has approximately 2.6x worse
+    resolution than the center. This is the universal
+    tradeoff in wide-angle imaging from orbit.</pre>
+
+    <h3>Worked Example: Global Coverage Estimate</h3>
+
+    <pre>import numpy as np
+
+print("TIROS-1: IMAGE GEOMETRY FROM ORBIT")
+print("=" * 60)
+
+R_E = 6371.0        # Earth radius (km)
+h_avg = 725.0        # average altitude (km)
+FOV_wide = 104.0     # wide-angle camera FOV (degrees)
+FOV_narrow = 12.0    # narrow-angle camera FOV (degrees)
+n_lines = 500        # vidicon resolution (lines)
+
+alpha_w = np.radians(FOV_wide / 2)
+alpha_n = np.radians(FOV_narrow / 2)
+
+# Horizon angle
+rho = np.arccos(R_E / (R_E + h_avg))
+rho_deg = np.degrees(rho)
+D_horizon = R_E * rho
+print(f"  Angular radius of Earth: {rho_deg:.2f} degrees")
+print(f"  Maximum visible ground distance: {D_horizon:.0f} km")
+
+# Wide-angle camera footprint
+W_nadir_flat = 2 * h_avg * np.tan(alpha_w)
+print(f"  Flat-Earth swath width: {W_nadir_flat:.0f} km")
+
+# Spherical correction
+r = R_E + h_avg
+phi_w = alpha_w
+sin_nadir = (r / R_E) * np.sin(phi_w)
+nadir_angle = np.arcsin(sin_nadir)
+eca = np.pi - phi_w - nadir_angle
+swath_full = 2 * R_E * eca
+print(f"  Spherical swath width: {swath_full:.0f} km")
+
+# Footprint area (spherical cap)
+A_footprint = 2 * np.pi * R_E**2 * (1 - np.cos(2 * eca))
+A_earth = 4 * np.pi * R_E**2
+coverage_fraction = A_footprint / A_earth
+print(f"  Footprint area: {A_footprint:,.0f} km^2")
+print(f"  Fraction of Earth: {coverage_fraction*100:.2f}%")
+
+# Resolution
+res_nadir = W_nadir_flat / n_lines
+print(f"  Resolution at nadir: {res_nadir:.2f} km/line")
+
+# Narrow-angle camera
+W_narrow = 2 * h_avg * np.tan(alpha_n)
+res_narrow = W_narrow / n_lines
+print(f"  Narrow-angle swath: {W_narrow:.0f} km")
+print(f"  Narrow-angle resolution: {res_narrow:.2f} km/line")
+
+# Coverage statistics
+T_orbit = 99.2  # minutes
+orbits_per_day = 24 * 60 / T_orbit
+total_images = 22952
+images_per_day = total_images / 78
+images_per_orbit = images_per_day / orbits_per_day
+print(f"  Orbits per day: {orbits_per_day:.1f}")
+print(f"  Total images in 78 days: {total_images:,}")
+print(f"  Images per orbit: {images_per_orbit:.1f}")</pre>
+
+    <p><strong>Debate Question 1:</strong> TIROS-1 could only image the Earth when its spin brought the cameras to point downward &mdash; roughly 25% of each rotation. Why did NASA choose spin-stabilization instead of three-axis stabilization? The answer reveals the engineering tradeoffs of 1960. Spin-stabilization requires no sensors, no actuators, no control electronics. Three-axis stabilization requires horizon sensors, reaction wheels, and a control computer &mdash; technologies that were immature and unreliable in 1960. If spin-stabilization wastes 75% of observing time but succeeds with 95% probability, while three-axis stabilization uses 100% of observing time but succeeds with only 50% probability, the expected yield favors spin. But more importantly: spin-stabilization fails gracefully (reduced observation), while three-axis can fail catastrophically (the satellite tumbles and observes nothing). Risk-averse engineering chooses the approach with the better worst case. TIROS-1 delivered 22,952 images. A tumbling satellite delivers zero.</p>
+
+    <h2>Deposit 2: TV Bandwidth and Image Information (Layer 7)</h2>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>TIROS-1 Value</th></tr>
+      <tr><td>Vidicon resolution</td><td>&mdash;</td><td>lines</td><td>500</td></tr>
+      <tr><td>Pixels per line (effective)</td><td>&mdash;</td><td>&mdash;</td><td>~500 (square aspect)</td></tr>
+      <tr><td>Bits per pixel (estimated)</td><td>&mdash;</td><td>bits</td><td>~6 (64 gray levels)</td></tr>
+      <tr><td>Image size (estimated)</td><td>&mdash;</td><td>bits</td><td>~1.5 Mbit per frame</td></tr>
+      <tr><td>Transmission bandwidth</td><td>B</td><td>kHz</td><td>~100 (FM video)</td></tr>
+      <tr><td>Frame readout time</td><td>&mdash;</td><td>s</td><td>~2 s per stored frame</td></tr>
+      <tr><td>Tape recorder capacity</td><td>&mdash;</td><td>frames</td><td>32 frames per orbit</td></tr>
+      <tr><td>Total data volume</td><td>&mdash;</td><td>&mdash;</td><td>~22,952 &times; 1.5 Mbit = ~34.4 Gbit</td></tr>
+    </table>
+
+    <h3>How Much Information Is in a Weather Photograph?</h3>
+
+    <pre>INFORMATION CONTENT OF A TIROS-1 IMAGE:
+
+  SPATIAL RESOLUTION:
+    Each vidicon frame: ~500 x 500 pixels = 250,000 pixels
+
+  GRAY LEVEL RESOLUTION:
+    ~6 bits (64 distinguishable gray levels)
+
+  RAW INFORMATION PER FRAME:
+    I_raw = 250,000 * 6 = 1,500,000 bits = 1.5 Mbit
+
+  SHANNON INFORMATION (accounting for redundancy):
+    Adjacent pixels are highly correlated (clouds are
+    spatially smooth, ocean is uniform).
+
+    First-order entropy: H_1 ~ 3-4 bits/pixel
+    Second-order entropy: H_2 ~ 1.5 bits/pixel
+
+    Shannon information per frame:
+    I_Shannon = 250,000 * 1.5 = 375,000 bits = 375 kbit
+
+    Actual information content: ~25% of raw data.
+    The remaining 75% is spatial redundancy.
+
+  TOTAL MISSION DATA:
+    22,952 frames * 1.5 Mbit = 34.4 Gbit = 4.3 GB
+
+    In 78 days, TIROS-1 returned approximately 4 gigabytes.
+    By 2026 standards, this fits on a USB thumb drive.
+    In 1960, it required rooms full of magnetic tape reels.</pre>
+
+    <h3>Connection to Shannon</h3>
+
+    <p>Claude Shannon published &ldquo;A Mathematical Theory of Communication&rdquo; in 1948 &mdash; twelve years before TIROS-1. Shannon&rsquo;s framework tells us that the fundamental limit on data transmission is the channel capacity: <code>C = B &times; log2(1 + SNR)</code>. For TIROS-1&rsquo;s FM downlink with bandwidth B &asymp; 100 kHz and SNR &asymp; 20 dB (100:1), the channel capacity is approximately 666 kbps. TIROS-1&rsquo;s analog video used approximately 300&ndash;500 kbps &mdash; reasonably efficient for 1960 FM technology.</p>
+
+    <p>The deeper insight: the 22,952 images contain approximately 8.6 Gbit of Shannon information out of 34.4 Gbit of raw data &mdash; a compressibility ratio of 0.25, confirmed by decades of subsequent research on natural scene statistics. Modern satellite imagery compresses at approximately 4:1 to 10:1 for lossless compression, matching Shannon&rsquo;s prediction.</p>
+
+    <p><strong>Debate Question 2:</strong> TIROS-1 transmitted analog video &mdash; a continuous signal, not digital bits. Analog transmission has no &ldquo;bit errors&rdquo; but has noise. Digital transmission has bit errors but can correct them. Which approach was better? Analog degrades gracefully: a noisy image is still interpretable. A digital image with too many uncorrected bit errors is corrupted and useless. In 1960, error-correcting codes were in their infancy. Analog was the pragmatic choice. The switch to digital came in the 1970s (Landsat 1, 1972), when onboard digitization and error-correcting codes had matured.</p>
+
+    <h2>Deposit 3: Orbital Ground Track and Coverage (Layer 4)</h2>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>TIROS-1 Value</th></tr>
+      <tr><td>Semi-major axis</td><td>a</td><td>km</td><td>7,095.5</td></tr>
+      <tr><td>Eccentricity</td><td>e</td><td>&mdash;</td><td>0.0044 (nearly circular)</td></tr>
+      <tr><td>Inclination</td><td>i</td><td>deg</td><td>48.4</td></tr>
+      <tr><td>Period</td><td>T</td><td>min</td><td>99.2</td></tr>
+      <tr><td>Ground track regression</td><td>&mdash;</td><td>deg/orbit</td><td>24.8</td></tr>
+      <tr><td>Orbits per day</td><td>&mdash;</td><td>&mdash;</td><td>14.5</td></tr>
+    </table>
+
+    <h3>Where Does the Satellite Go?</h3>
+
+    <pre>GROUND TRACK REGRESSION:
+
+  Earth rotation rate:
+    omega_E = 360 / 86164 = 0.004178 deg/s = 15.04 deg/hour
+
+  During one orbit (T = 99.2 min = 5,952 s), Earth rotates:
+    Delta_lambda = 0.004178 * 5952 = 24.87 degrees
+
+  Each successive ground track shifts ~24.9 degrees westward.
+
+  TIROS-1's orbit was NOT sun-synchronous. Consequences:
+  1. Could only observe between 48.4 N and 48.4 S latitude
+  2. Local solar time of observation changed continuously
+  3. RAAN drifted at -3.33 degrees/day (J2 perturbation)
+
+COVERAGE ANALYSIS:
+  Equatorial circumference: 40,075 km
+  Camera swath: ~1,800 km
+  Swaths needed: 40,075 / 1,800 = 22.3
+  Orbits for equatorial coverage: ~22.5
+  Time: 22.5 / 14.5 = 1.55 days (theoretical minimum)</pre>
+
+    <h3>Connection to the Unit Circle (Layer 1)</h3>
+
+    <p>TIROS-1&rsquo;s spin-stabilization places the Unit Circle at the heart of its observing strategy. The satellite spun at approximately 12 RPM (one rotation every 5 seconds). The cameras swept through 360 degrees of azimuth every 5 seconds. The camera &ldquo;sees&rdquo; the Earth only when it points within approximately 52 degrees of nadir. On the Unit Circle, this corresponds to an arc:</p>
+
+    <p><code>Camera duty cycle = 2 &times; 52 / 360 = 0.289 = 28.9%</code></p>
+
+    <p>The camera was Earth-pointed for approximately 29% of each spin. At 12 RPM, the spin angular velocity is <code>&omega; = 2&pi; &times; 12/60 = 1.257 rad/s</code>. The Earth-pointing arc spans from <code>cos(&theta;) = cos(52&deg;) = 0.616</code> to <code>cos(&theta;) = 1.0</code> on the unit circle.</p>
+
+    <pre>import numpy as np
+
+print("TIROS-1: GROUND TRACK AND COVERAGE ANALYSIS")
+print("=" * 60)
+
+R_E = 6371.0
+J2 = 1.08263e-3
+mu = 398600.4
+
+h_p = 693.0
+h_a = 756.0
+inc = 48.4
+inc_rad = np.radians(inc)
+
+a = R_E + (h_p + h_a) / 2
+e = (h_a - h_p) / (2 * a - 2 * R_E + h_p + h_a)
+T = 2 * np.pi * np.sqrt(a**3 / mu)
+T_min = T / 60
+n = 2 * np.pi / T
+
+print(f"  Semi-major axis: {a:.1f} km")
+print(f"  Eccentricity: {e:.4f}")
+print(f"  Period: {T_min:.1f} minutes")
+
+omega_E = 360.0 / 86164.0
+delta_lon = omega_E * T
+orbits_per_day = 86400.0 / T
+print(f"  Earth rotation per orbit: {delta_lon:.2f} degrees")
+print(f"  Orbits per day: {orbits_per_day:.1f}")
+
+RAAN_dot = -(3.0/2) * J2 * (R_E / a)**2 * n * np.cos(inc_rad)
+RAAN_dot_deg_day = np.degrees(RAAN_dot) * 86400.0
+print(f"  RAAN drift: {RAAN_dot_deg_day:.2f} degrees/day")
+
+# Latitude coverage
+A_band = 2 * np.pi * R_E**2 * (np.sin(inc_rad) - np.sin(-inc_rad))
+A_earth = 4 * np.pi * R_E**2
+frac = A_band / A_earth
+print(f"  Latitude band area: {frac*100:.1f}% of Earth")
+
+# Image statistics
+total_images = 22952
+img_per_day = total_images / 78
+spin_period = 60.0 / 12.0
+print(f"  Images per day: {img_per_day:.0f}")
+print(f"  Spin period: {spin_period:.1f} s")</pre>
+
+    <p><strong>Debate Question 3:</strong> Why didn&rsquo;t NASA put TIROS-1 in a polar orbit for global coverage? The Thor-Able launched eastward from Cape Canaveral to gain the Earth&rsquo;s rotational velocity (~410 m/s). A polar launch from Cape Canaveral would require launching due south over Cuba &mdash; not permitted. Polar orbits require launches from Vandenberg AFB in California (southward over the Pacific). In 1960, the Thor-Able was not yet qualified for Vandenberg. TIROS-9 (1965) was the first TIROS to achieve a near-polar, sun-synchronous orbit, launched from Vandenberg. The five-year gap is the time it took to solve the logistics of launching from the West Coast.</p>
+
+    <blockquote>&ldquo;The Marbled Murrelet (Brachyramphus marmoratus, degree 15) nests in the canopy of old-growth conifers, 30-60 meters above the forest floor &mdash; one of the last North American seabirds whose nesting habits remained unknown until 1974. The bird had been hiding in plain sight, nesting above the heads of ornithologists who searched the ground. TIROS-1 solved the opposite problem: meteorologists had been looking at weather from the ground for centuries. TIROS-1 climbed above the weather and looked down, and in 78 days it taught meteorologists more about the large-scale structure of the atmosphere than a century of ground-based observation had revealed. The Murrelet nests where no one looks up. The weather lives where no one looks down. TIROS-1 looked down. 22,952 times.&rdquo;</blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="organism.html">&larr; Organism</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Next Track</div>
+        <a href="papers.html">Papers &rarr;</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Mission Hub</div>
+        <a href="index.html">v1.15 TIROS-1</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.15 TIROS-1 + Aurelia aurita &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>
