@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNW Forest — Distributed Ecosystem Simulation</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#040810; color:#c8d0e0; font-family:system-ui,sans-serif; overflow-x:hidden; }
+#forest-container { width:100%; position:relative; }
+#status-bar {
+  position:absolute; bottom:0; left:0; right:0; z-index:10;
+  padding:6px 12px; font-size:10px; font-family:monospace;
+  color:rgba(200,210,220,0.6); background:rgba(4,8,16,0.7);
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;
+}
+#status-bar .bright { color:rgba(200,210,220,0.9); }
+#status-bar a { color:rgba(196,163,90,0.7); text-decoration:none; }
+#status-bar a:hover { color:rgba(196,163,90,1); }
+.sync-dot { display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+.sync-dot.connected { background:#4CAF50; }
+.sync-dot.local { background:#FFB300; }
+.sync-dot.offline { background:#777; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+</head>
+<body>
+<div id="forest-container">
+  <div id="sketch-holder"></div>
+  <div id="check-box" style="display:none"></div>
+  <div id="status-bar">
+    <span id="wx-status">Loading weather...</span>
+    <span id="eco-status">Initializing...</span>
+    <span id="sync-status"><span class="sync-dot local"></span>Local</span>
+    <span><a href="../index.html">Research</a> · <a href="about.html">About</a></span>
+  </div>
+</div>
+<script>
+// Override API base for the forest directory
+var FOREST_API = 'api/forest.php';
+</script>
+<script src="simulation.js"></script>
+</body>
+</html>
