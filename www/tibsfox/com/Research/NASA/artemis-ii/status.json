@@ -1,20 +1,20 @@
 {
-  "updated": "2026-03-31T12:00:00Z",
-  "source": "sweep-v1.0.5",
+  "updated": "2026-03-31T14:00:00Z",
+  "source": "sweep-v1.0.6",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:24:00Z",
     "phase": "prelaunch",
-    "status": "Launch countdown — T-34h — all systems GO",
+    "status": "Launch countdown — T-32h — all systems GO",
     "go_probability": 80
   },
   "weather": {
-    "kpae": {"temp_c": 3.3, "dewpoint_c": -1.1, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1014.3, "visibility_m": 16093, "conditions": "Clear", "spread_c": 4.4},
-    "ksea": {"temp_c": 3.9, "dewpoint_c": 0, "wind_dir": 10, "wind_kmh": 16.7, "humidity": 50, "pressure_hpa": 1013.5, "conditions": "BKN170"},
-    "open_meteo": {"temp_c": 3.6, "dewpoint_c": 0.6, "wind_dir": 7, "wind_kmh": 8.7, "humidity": 81, "pressure_hpa": 1013.4, "conditions": "Overcast (WMO 3)"},
-    "nws": {"temp_c": 3, "dewpoint_c": -1, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1013.2, "conditions": "Clear"},
-    "kxmr": {"temp_c": 20.4, "dewpoint_c": 16.6, "wind_dir": 130, "wind_kmh": 11.1, "humidity": 78, "pressure_hpa": 1023.7, "conditions": "Clear"}
+    "kpae": {"temp_c": 2.8, "dewpoint_c": -0.6, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1012.1, "visibility_m": 16093, "conditions": "FEW120", "spread_c": 3.4},
+    "ksea": {"temp_c": 3.3, "dewpoint_c": -0.6, "wind_dir": 30, "wind_kmh": 13, "humidity": 76, "pressure_hpa": 1012.4, "conditions": "FEW120 BKN160"},
+    "open_meteo": {"temp_c": 3.1, "dewpoint_c": -1.5, "wind_dir": 8, "wind_kmh": 8.0, "humidity": 72, "pressure_hpa": 1012.2, "conditions": "Overcast (WMO 3)"},
+    "nws": {"temp_c": 3, "dewpoint_c": -1, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1011.9, "conditions": "Clear"},
+    "kxmr": {"temp_c": 25, "dewpoint_c": 16.1, "wind_dir": 130, "wind_kmh": 22.2, "humidity": 64, "pressure_hpa": 1024.7, "conditions": "Clear"}
   },
   "tides_everett": [
     {"time": "04:51", "height_m": 3.37, "type": "high"},
@@ -24,20 +24,20 @@
   ],
   "river": {
     "site": "Snohomish River near Monroe",
-    "flow_cfs": 11600,
-    "timestamp": "2026-03-31T04:15:00-07:00"
+    "flow_cfs": 11400,
+    "timestamp": "2026-03-31T06:15:00-07:00"
   },
   "space_weather": {
-    "kp_index": 2.33,
+    "kp_index": 2.0,
     "g_scale": "G0",
     "aurora_risk": "none"
   },
   "scoring": {
-    "sample_count": 2,
+    "sample_count": 3,
     "leaders": {
-      "temp_accuracy": "NWS + Open-Meteo tied (0.3°C error)",
-      "wind_accuracy": "NWS (0 km/h error — matched calm)",
-      "overall": "NWS improving, Open-Meteo consistent on temp"
+      "temp_accuracy": "NWS leading (avg 0.23C error across 3 samples)",
+      "wind_accuracy": "NWS (0 km/h error — 3/3 calm matches)",
+      "overall": "NWS clear winner. Open-Meteo good on temp, poor on cloud cover."
     }
   },
   "telemetry": null,
@@ -47,16 +47,17 @@
     "muk": "/Research/MUK/",
     "trips": "/Research/MUK/trips.html",
     "radio": "/Research/MUK/radio.html",
+    "food": "/Research/MUK/food.html",
     "park": "/Research/PARK/",
     "beach": "/Research/BEACH/",
     "tracker": "/Research/NASA/artemis-ii/",
     "forest": "/Research/forest/"
   },
   "announcements": [
-    {"time": "2026-03-31T12:00:00Z", "text": "v1.0.5: T-34h. 5am sweep — NWS matches calm wind, all sources converge on 3-4°C. KSC clear 20°C."},
+    {"time": "2026-03-31T14:00:00Z", "text": "v1.0.6: T-32h 6am sweep. NWS best temp (0.2C). KSC clear 25C, warming. PNW Food Heritage page live (14 restaurants)."},
+    {"time": "2026-03-31T12:00:00Z", "text": "v1.0.5: T-34h. 5am sweep — NWS matches calm wind, all sources converge on 3-4C."},
     {"time": "2026-03-31T11:35:00Z", "text": "v1.0.3: T-17h. LIVE hub, OPEN problems, PARK, BEACH, MUK trips deployed."},
     {"time": "2026-03-31T11:01:00Z", "text": "v1.0.1: T-18h, all GO, 3 new papers, TSPB deposits, ground cover"},
-    {"time": "2026-03-30T22:13:00Z", "text": "Launch countdown begins at KSC"},
-    {"time": "2026-03-27T20:10:00Z", "text": "Crew arrives at Kennedy Space Center"}
+    {"time": "2026-03-30T22:13:00Z", "text": "Launch countdown begins at KSC"}
   ]
 }
