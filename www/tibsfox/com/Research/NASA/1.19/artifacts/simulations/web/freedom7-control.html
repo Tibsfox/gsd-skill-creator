@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can You Fly Freedom 7? — Manual Attitude Control</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #C0C0D0;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sim-panel {
+    flex: 1;
+    min-width: 600px;
+    max-width: 800px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .data-panel {
+    flex: 0 0 320px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .panel-title {
+    font-size: 12px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a2040;
+  }
+  canvas {
+    width: 100%;
+    border-radius: 6px;
+    background: #050810;
+    cursor: crosshair;
+  }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    padding: 6px 14px;
+    border: 1px solid #334455;
+    background: #151a2a;
+    color: #889098;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  .ctrl-btn:hover { border-color: #4488cc; color: #c0c8d8; }
+  .ctrl-btn.active { border-color: #2050CC; color: #4488cc; background: rgba(32,80,204,0.15); }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #0f1425;
+    font-size: 11px;
+  }
+  .stat-label { color: #556677; }
+  .stat-value { color: #c0c8d8; }
+  .stat-value.highlight { color: #4488cc; }
+  .stat-value.warn { color: #FF5050; }
+  .stat-value.ok { color: #30CC30; }
+  .instructions {
+    margin-top: 12px;
+    font-size: 10px;
+    color: #556677;
+    line-height: 1.6;
+    padding: 8px;
+    background: #0f1425;
+    border-radius: 4px;
+  }
+  .instructions kbd {
+    background: #1a2040;
+    border: 1px solid #334455;
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: #c0c8d8;
+    font-size: 10px;
+  }
+  .result-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+  }
+  .result-box {
+    background: #0a0e1a;
+    border: 2px solid #2050CC;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    max-width: 400px;
+  }
+  .result-box h2 { color: #C0C0D0; margin-bottom: 15px; font-size: 18px; }
+  .result-box p { color: #889098; margin-bottom: 8px; font-size: 12px; }
+  .result-box .score { color: #4488cc; font-size: 24px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Can You Fly Freedom 7?</h1>
+<p class="subtitle">Manual Attitude Control &mdash; Arrow Keys to Fire Thrusters &mdash; 5 Minutes of Weightlessness</p>
+
+<div class="main-container">
+  <div class="sim-panel">
+    <div class="panel-title">Attitude Display</div>
+    <canvas id="simCanvas" width="780" height="550"></canvas>
+    <div class="controls">
+      <button id="btn-start" class="ctrl-btn active" onclick="startSim()">START</button>
+      <button id="btn-reset" class="ctrl-btn" onclick="resetSim()">RESET</button>
+      <span style="color:#556677;font-size:10px;padding-top:8px">
+        Align capsule to target (green ring) before time runs out
+      </span>
+    </div>
+  </div>
+
+  <div class="data-panel">
+    <div class="panel-title">Flight Data</div>
+    <div class="stat-row">
+      <span class="stat-label">Time Remaining</span>
+      <span id="time-left" class="stat-value highlight">5:00</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Pitch</span>
+      <span id="pitch-val" class="stat-value">0.0 deg</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Yaw</span>
+      <span id="yaw-val" class="stat-value">0.0 deg</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Roll</span>
+      <span id="roll-val" class="stat-value">0.0 deg</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Pitch Rate</span>
+      <span id="pitch-rate" class="stat-value">0.0 deg/s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Yaw Rate</span>
+      <span id="yaw-rate" class="stat-value">0.0 deg/s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Roll Rate</span>
+      <span id="roll-rate" class="stat-value">0.0 deg/s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">H2O2 Fuel</span>
+      <span id="fuel-pct" class="stat-value ok">100.0%</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Target Error</span>
+      <span id="error-val" class="stat-value">--</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Status</span>
+      <span id="status-val" class="stat-value">READY</span>
+    </div>
+
+    <div class="panel-title" style="margin-top: 15px;">Controls</div>
+    <div class="instructions">
+      <kbd>&uarr;</kbd> <kbd>&darr;</kbd> Pitch thrusters<br>
+      <kbd>&larr;</kbd> <kbd>&rarr;</kbd> Yaw thrusters<br>
+      <kbd>Q</kbd> <kbd>E</kbd> Roll thrusters (CCW/CW)<br>
+      <br>
+      <strong>Goal:</strong> Align all three axes within 2 degrees of the
+      green target ring before time expires. Use short, controlled bursts
+      — just like Shepard did.<br>
+      <br>
+      <strong>Warning:</strong> H2O2 fuel is limited. Every thruster firing
+      costs fuel. Run out and you can't control the capsule.<br>
+      <br>
+      <em>Shepard had 5 minutes. Can you do it?</em>
+    </div>
+  </div>
+</div>
+
+<div id="result-overlay" class="result-overlay">
+  <div class="result-box">
+    <h2 id="result-title">Mission Complete</h2>
+    <p id="result-msg"></p>
+    <p class="score" id="result-score"></p>
+    <p id="result-detail"></p>
+    <br>
+    <button class="ctrl-btn" onclick="closeResult()">TRY AGAIN</button>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('simCanvas');
+const ctx = canvas.getContext('2d');
+
+// Physics constants
+const MOI = 150.0;        // kg⋅m² (Mercury capsule moment of inertia)
+const THRUST = 106.8;     // N (24 lbf thruster)
+const ARM = 0.65;         // m (distance from CG)
+const TORQUE = THRUST * ARM;
+const ALPHA = TORQUE / MOI;  // rad/s² angular acceleration
+const DAMPING = 0.02;     // Very slight numerical damping
+const FUEL_PER_SEC = 0.4; // % fuel consumed per second of firing
+const TOTAL_TIME = 300;   // 5 minutes in seconds
+const WIN_ERROR = 2.0;    // degrees — must be within this of target
+const WIN_HOLD = 3.0;     // seconds — must hold alignment this long
+
+// Simulation state
+let sim = {
+  running: false,
+  time: 0,
+  pitch: 0, yaw: 0, roll: 0,       // degrees
+  pitchRate: 0, yawRate: 0, rollRate: 0,  // deg/s
+  fuel: 100.0,
+  targetPitch: 0, targetYaw: 0, targetRoll: 0,
+  alignedTime: 0,
+  keys: {},
+  won: false
+};
+
+function resetSim() {
+  // Random starting attitude (drifted during coast)
+  sim.pitch = (Math.random() - 0.5) * 40;
+  sim.yaw = (Math.random() - 0.5) * 40;
+  sim.roll = (Math.random() - 0.5) * 30;
+  sim.pitchRate = (Math.random() - 0.5) * 3;
+  sim.yawRate = (Math.random() - 0.5) * 3;
+  sim.rollRate = (Math.random() - 0.5) * 2;
+  sim.fuel = 100.0;
+  sim.time = 0;
+  sim.running = false;
+  sim.alignedTime = 0;
+  sim.won = false;
+
+  // Random target attitude (the "correct" orientation for retrofire)
+  sim.targetPitch = (Math.random() - 0.5) * 20;
+  sim.targetYaw = (Math.random() - 0.5) * 20;
+  sim.targetRoll = (Math.random() - 0.5) * 15;
+
+  document.getElementById('status-val').textContent = 'READY';
+  document.getElementById('status-val').className = 'stat-value';
+  document.getElementById('result-overlay').style.display = 'none';
+}
+
+function startSim() {
+  if (!sim.running) {
+    sim.running = true;
+    document.getElementById('status-val').textContent = 'FLYING';
+    document.getElementById('status-val').className = 'stat-value highlight';
+  }
+}
+
+function closeResult() {
+  document.getElementById('result-overlay').style.display = 'none';
+  resetSim();
+}
+
+function showResult(title, msg, score, detail) {
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-msg').textContent = msg;
+  document.getElementById('result-score').textContent = score;
+  document.getElementById('result-detail').textContent = detail;
+  document.getElementById('result-overlay').style.display = 'flex';
+  sim.running = false;
+}
+
+// Key handling
+document.addEventListener('keydown', e => {
+  sim.keys[e.key] = true;
+  e.preventDefault();
+});
+document.addEventListener('keyup', e => {
+  sim.keys[e.key] = false;
+});
+
+function update(dt) {
+  if (!sim.running) return;
+
+  sim.time += dt;
+  const timeLeft = TOTAL_TIME - sim.time;
+
+  if (timeLeft <= 0 && !sim.won) {
+    const err = getError();
+    showResult('TIME UP',
+      'Retrofire window closed.',
+      err.toFixed(1) + ' deg error',
+      err < 10 ? 'Close! Shepard would nod.' : 'The capsule drifted. Try shorter bursts.');
+    return;
+  }
+
+  if (sim.fuel <= 0) {
+    sim.fuel = 0;
+    // Can't fire thrusters, but still drifting
+  }
+
+  // Thruster inputs (angular acceleration in deg/s²)
+  const alphaDeg = (ALPHA * 180 / Math.PI);  // Convert to deg/s²
+  let firing = false;
+
+  if (sim.fuel > 0) {
+    if (sim.keys['ArrowUp']) { sim.pitchRate += alphaDeg * dt; firing = true; }
+    if (sim.keys['ArrowDown']) { sim.pitchRate -= alphaDeg * dt; firing = true; }
+    if (sim.keys['ArrowLeft']) { sim.yawRate -= alphaDeg * dt; firing = true; }
+    if (sim.keys['ArrowRight']) { sim.yawRate += alphaDeg * dt; firing = true; }
+    if (sim.keys['q'] || sim.keys['Q']) { sim.rollRate -= alphaDeg * dt; firing = true; }
+    if (sim.keys['e'] || sim.keys['E']) { sim.rollRate += alphaDeg * dt; firing = true; }
+
+    if (firing) {
+      sim.fuel -= FUEL_PER_SEC * dt;
+    }
+  }
+
+  // Slight numerical damping (not physical — just prevents numerical drift)
+  sim.pitchRate *= (1 - DAMPING * dt);
+  sim.yawRate *= (1 - DAMPING * dt);
+  sim.rollRate *= (1 - DAMPING * dt);
+
+  // Integrate rates to angles
+  sim.pitch += sim.pitchRate * dt;
+  sim.yaw += sim.yawRate * dt;
+  sim.roll += sim.rollRate * dt;
+
+  // Wrap angles
+  sim.pitch = ((sim.pitch + 180) % 360 + 360) % 360 - 180;
+  sim.yaw = ((sim.yaw + 180) % 360 + 360) % 360 - 180;
+  sim.roll = ((sim.roll + 180) % 360 + 360) % 360 - 180;
+
+  // Check alignment
+  const err = getError();
+  if (err < WIN_ERROR) {
+    sim.alignedTime += dt;
+    if (sim.alignedTime >= WIN_HOLD) {
+      sim.won = true;
+      const fuelLeft = sim.fuel.toFixed(1);
+      const timeUsed = sim.time.toFixed(0);
+      showResult('ALIGNED!',
+        'Retrofire orientation achieved. Heat shield forward.',
+        fuelLeft + '% fuel remaining',
+        'Time: ' + timeUsed + 's. Shepard did it in about 60 seconds.');
+    }
+  } else {
+    sim.alignedTime = 0;
+  }
+}
+
+function getError() {
+  const dp = sim.pitch - sim.targetPitch;
+  const dy = sim.yaw - sim.targetYaw;
+  const dr = sim.roll - sim.targetRoll;
+  return Math.sqrt(dp * dp + dy * dy + dr * dr);
+}
+
+function draw() {
+  ctx.fillStyle = '#050810';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+
+  // Stars
+  for (let i = 0; i < 60; i++) {
+    const sx = (Math.sin(i * 127.1) * 0.5 + 0.5) * canvas.width;
+    const sy = (Math.sin(i * 311.7) * 0.5 + 0.5) * canvas.height;
+    ctx.fillStyle = `rgba(200, 210, 230, ${0.2 + 0.1 * Math.sin(Date.now() * 0.001 + i)})`;
+    ctx.beginPath();
+    ctx.arc(sx, sy, 1, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Attitude ball (artificial horizon)
+  const ballR = 160;
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(cx, cy, ballR, 0, Math.PI * 2);
+  ctx.clip();
+
+  // Horizon line (rotated by pitch and roll)
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(-sim.roll * Math.PI / 180);
+
+  // Sky half
+  const horizonY = sim.pitch * 3;  // Pixels per degree
+  ctx.fillStyle = '#182848';
+  ctx.fillRect(-ballR * 2, -ballR * 2, ballR * 4, ballR * 2 + horizonY);
+
+  // Ground half (not really ground in space — Earth below)
+  ctx.fillStyle = '#0a1830';
+  ctx.fillRect(-ballR * 2, horizonY, ballR * 4, ballR * 4);
+
+  // Horizon line
+  ctx.strokeStyle = '#4488cc';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-ballR * 2, horizonY);
+  ctx.lineTo(ballR * 2, horizonY);
+  ctx.stroke();
+
+  // Pitch ladder
+  ctx.strokeStyle = 'rgba(68, 136, 204, 0.3)';
+  ctx.lineWidth = 1;
+  ctx.font = '9px "Courier New"';
+  ctx.fillStyle = '#556677';
+  for (let deg = -90; deg <= 90; deg += 10) {
+    if (deg === 0) continue;
+    const y = horizonY - deg * 3;
+    if (Math.abs(y) < ballR) {
+      const w = (deg % 30 === 0) ? 40 : 20;
+      ctx.beginPath();
+      ctx.moveTo(-w, y);
+      ctx.lineTo(w, y);
+      ctx.stroke();
+      if (deg % 30 === 0) {
+        ctx.fillText(deg + '', w + 5, y + 3);
+      }
+    }
+  }
+
+  ctx.restore();
+
+  // Yaw indicator (compass-like) at the horizon
+  ctx.save();
+  ctx.translate(cx, cy);
+  const yawPx = sim.yaw * 3;
+  ctx.strokeStyle = 'rgba(68, 136, 204, 0.3)';
+  ctx.lineWidth = 1;
+  for (let deg = -180; deg <= 180; deg += 10) {
+    const x = -yawPx + deg * 3;
+    if (Math.abs(x) < ballR) {
+      const h = (deg % 30 === 0) ? 8 : 4;
+      ctx.beginPath();
+      ctx.moveTo(x, -ballR + 10);
+      ctx.lineTo(x, -ballR + 10 + h);
+      ctx.stroke();
+    }
+  }
+  ctx.restore();
+
+  ctx.restore(); // Unclip
+
+  // Ball border
+  ctx.beginPath();
+  ctx.arc(cx, cy, ballR, 0, Math.PI * 2);
+  ctx.strokeStyle = '#334455';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Center crosshair (fixed reference)
+  ctx.strokeStyle = '#CCAA44';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(cx - 25, cy); ctx.lineTo(cx - 8, cy);
+  ctx.moveTo(cx + 8, cy); ctx.lineTo(cx + 25, cy);
+  ctx.moveTo(cx, cy - 8); ctx.lineTo(cx, cy + 8);
+  ctx.stroke();
+
+  // Target ring (where you need to aim)
+  const tpx = (sim.targetPitch - sim.pitch) * 3;
+  const tyx = (sim.targetYaw - sim.yaw) * 3;
+  const err = getError();
+  const targetColor = err < WIN_ERROR ? '#30CC30' : err < 10 ? '#CCAA44' : '#FF5050';
+
+  ctx.beginPath();
+  ctx.arc(cx + tyx, cy - tpx, 12, 0, Math.PI * 2);
+  ctx.strokeStyle = targetColor;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  // Inner dot
+  ctx.beginPath();
+  ctx.arc(cx + tyx, cy - tpx, 2, 0, Math.PI * 2);
+  ctx.fillStyle = targetColor;
+  ctx.fill();
+
+  // Roll indicator (around the ball)
+  const rollR = ballR + 20;
+  ctx.save();
+  ctx.translate(cx, cy);
+
+  // Roll arc
+  ctx.beginPath();
+  ctx.arc(0, 0, rollR, -Math.PI * 0.8, -Math.PI * 0.2);
+  ctx.strokeStyle = '#1a2040';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Roll tick marks
+  for (let deg = -60; deg <= 60; deg += 10) {
+    const angle = (-90 + deg) * Math.PI / 180;
+    const inner = rollR - 5;
+    const outer = rollR + (deg % 30 === 0 ? 8 : 4);
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+    ctx.lineTo(Math.cos(angle) * outer, Math.sin(angle) * outer);
+    ctx.strokeStyle = '#334455';
+    ctx.stroke();
+  }
+
+  // Roll pointer (current roll angle)
+  const rollAngle = (-90 + sim.roll) * Math.PI / 180;
+  ctx.beginPath();
+  ctx.moveTo(Math.cos(rollAngle) * (rollR - 8), Math.sin(rollAngle) * (rollR - 8));
+  ctx.lineTo(Math.cos(rollAngle) * (rollR + 10), Math.sin(rollAngle) * (rollR + 10));
+  ctx.strokeStyle = '#CCAA44';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.restore();
+
+  // Thruster firing indicators
+  const thSize = 8;
+  const thY = canvas.height - 40;
+  const thStartX = 20;
+
+  function drawThruster(x, y, label, active) {
+    ctx.fillStyle = active ? '#FF8844' : '#1a2040';
+    ctx.fillRect(x, y, thSize * 3, thSize);
+    ctx.strokeStyle = '#334455';
+    ctx.strokeRect(x, y, thSize * 3, thSize);
+    ctx.fillStyle = active ? '#CCAA44' : '#334455';
+    ctx.font = '8px "Courier New"';
+    ctx.fillText(label, x, y - 3);
+  }
+
+  drawThruster(thStartX, thY, 'P+', sim.keys['ArrowUp']);
+  drawThruster(thStartX + 40, thY, 'P-', sim.keys['ArrowDown']);
+  drawThruster(thStartX + 80, thY, 'Y-', sim.keys['ArrowLeft']);
+  drawThruster(thStartX + 120, thY, 'Y+', sim.keys['ArrowRight']);
+  drawThruster(thStartX + 160, thY, 'R-', sim.keys['q'] || sim.keys['Q']);
+  drawThruster(thStartX + 200, thY, 'R+', sim.keys['e'] || sim.keys['E']);
+
+  // Fuel bar
+  const fuelX = canvas.width - 35;
+  const fuelH = 200;
+  const fuelY = cy - fuelH / 2;
+  ctx.strokeStyle = '#1a2040';
+  ctx.strokeRect(fuelX - 8, fuelY, 16, fuelH);
+  const fuelFill = Math.max(0, sim.fuel) / 100 * fuelH;
+  const fuelColor = sim.fuel > 50 ? '#30CC30' : sim.fuel > 20 ? '#CCAA30' : '#FF3030';
+  ctx.fillStyle = fuelColor;
+  ctx.fillRect(fuelX - 6, fuelY + fuelH - fuelFill, 12, fuelFill);
+  ctx.fillStyle = '#556677';
+  ctx.font = '9px "Courier New"';
+  ctx.textAlign = 'center';
+  ctx.fillText('H2O2', fuelX, fuelY - 8);
+  ctx.fillText(Math.round(sim.fuel) + '%', fuelX, fuelY + fuelH + 12);
+  ctx.textAlign = 'left';
+
+  // Timer
+  const timeLeft = Math.max(0, TOTAL_TIME - sim.time);
+  const min = Math.floor(timeLeft / 60);
+  const sec = Math.floor(timeLeft % 60);
+  ctx.fillStyle = timeLeft < 60 ? '#FF5050' : '#C0C0D0';
+  ctx.font = '14px "Courier New"';
+  ctx.fillText(min + ':' + sec.toString().padStart(2, '0'), 15, 25);
+
+  // Alignment progress bar (if close to aligned)
+  if (sim.alignedTime > 0 && err < WIN_ERROR) {
+    const progW = 200;
+    const progH = 6;
+    const progX = cx - progW / 2;
+    const progY = cy + ballR + 30;
+    ctx.strokeStyle = '#30CC30';
+    ctx.strokeRect(progX, progY, progW, progH);
+    ctx.fillStyle = '#30CC30';
+    ctx.fillRect(progX, progY, progW * (sim.alignedTime / WIN_HOLD), progH);
+    ctx.fillStyle = '#30CC30';
+    ctx.font = '9px "Courier New"';
+    ctx.textAlign = 'center';
+    ctx.fillText('HOLDING ALIGNMENT...', cx, progY - 5);
+    ctx.textAlign = 'left';
+  }
+
+  // Update data panel
+  updatePanel(timeLeft, err);
+}
+
+function updatePanel(timeLeft, err) {
+  const min = Math.floor(timeLeft / 60);
+  const sec = Math.floor(timeLeft % 60);
+  document.getElementById('time-left').textContent = min + ':' + sec.toString().padStart(2, '0');
+  document.getElementById('time-left').className = 'stat-value ' + (timeLeft < 60 ? 'warn' : 'highlight');
+
+  document.getElementById('pitch-val').textContent = sim.pitch.toFixed(1) + ' deg';
+  document.getElementById('yaw-val').textContent = sim.yaw.toFixed(1) + ' deg';
+  document.getElementById('roll-val').textContent = sim.roll.toFixed(1) + ' deg';
+  document.getElementById('pitch-rate').textContent = sim.pitchRate.toFixed(1) + ' deg/s';
+  document.getElementById('yaw-rate').textContent = sim.yawRate.toFixed(1) + ' deg/s';
+  document.getElementById('roll-rate').textContent = sim.rollRate.toFixed(1) + ' deg/s';
+
+  const fuelEl = document.getElementById('fuel-pct');
+  fuelEl.textContent = Math.max(0, sim.fuel).toFixed(1) + '%';
+  fuelEl.className = 'stat-value ' + (sim.fuel > 50 ? 'ok' : sim.fuel > 20 ? 'highlight' : 'warn');
+
+  const errEl = document.getElementById('error-val');
+  errEl.textContent = err.toFixed(1) + ' deg';
+  errEl.className = 'stat-value ' + (err < 2 ? 'ok' : err < 10 ? 'highlight' : 'warn');
+}
+
+let lastTime = 0;
+function animate(timestamp) {
+  const dt = lastTime ? Math.min((timestamp - lastTime) / 1000, 0.05) : 0;
+  lastTime = timestamp;
+  update(dt);
+  draw();
+  requestAnimationFrame(animate);
+}
+
+resetSim();
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>

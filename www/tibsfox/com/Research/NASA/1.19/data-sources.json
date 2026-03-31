@@ -1,0 +1,107 @@
+{
+  "mission": "1.19",
+  "title": "Mercury-Redstone 3 / Freedom 7",
+  "description": "Open datasets and source materials relevant to Mercury-Redstone 3 (1961), Alan Shepard's suborbital flight, Freedom 7 capsule, Dicamptodon tenebrosus, Pacific giant salamander ecology, and Søren Kierkegaard",
+  "sources": [
+    {
+      "id": "nssdc-mr3",
+      "name": "NSSDC Master Catalog — Mercury-Redstone 3",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-012A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "NASA Space Science Data Coordinated Archive entry for MR-3 / Freedom 7. Mission profile, spacecraft description (Mercury spacecraft #7), launch vehicle (Redstone MR-7), suborbital trajectory parameters (apogee 187.5 km, 486 km downrange), and mission outcome. Canonical NASA record of the first American crewed spaceflight. Includes launch date (May 5, 1961, 15:34 UTC), flight duration (15 minutes 28 seconds), peak velocity (2,294 m/s), maximum deceleration (11.6 g during reentry), and recovery by USS Lake Champlain in the Atlantic Ocean. Classification: SUCCESS. Alan Bartlett Shepard Jr. became the first American in space, 23 days after Gagarin's orbital flight on Vostok 1.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-mr3-report",
+      "name": "Results of the First United States Manned Suborbital Space Flight (NASA)",
+      "url": "https://ntrs.nasa.gov/citations/19620002468",
+      "type": "primary-source",
+      "category": "mission-report",
+      "description": "NASA's official post-flight report on Mercury-Redstone 3, published June 6, 1961. Contains comprehensive mission data: Redstone MR-7 launch vehicle performance (engine cutoff at T+142s, 2,294 m/s velocity), spacecraft systems telemetry (cabin pressure, suit pressure, oxygen consumption, coolant temperatures), pilot biomedical data (heart rate peaking at 138 bpm during max-q, respiration, body temperature), and detailed timeline of Shepard's manual attitude control experiments during the 5-minute weightless period. Documents the periscope observations, manual fly-by-wire thruster firings in pitch, yaw, and roll, and the retrorocket sequence. Includes the abort system checkout, spacecraft separation dynamics, drogue and main parachute deployment, and water landing impact loads. This is the primary engineering record of the first American spaceflight.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "ntrs-mercury-history",
+      "name": "This New Ocean: A History of Project Mercury (NASA SP-4201)",
+      "url": "https://history.nasa.gov/SP-4201/toc.htm",
+      "type": "primary-source",
+      "category": "program-history",
+      "description": "Loyd S. Swenson Jr., James M. Grimwood, and Charles C. Alexander's comprehensive history of the Mercury program, published by NASA in 1966. Chapter 10 ('From the Beaches') covers MR-3 in full detail: the selection of Shepard over Glenn and Grissom as the first to fly (peer ranking among the Mercury 7), the launch delays (weather, cloud cover, hold for inverter replacement), the legendary 'light this candle' moment during the extended pad hold, the 15-minute 28-second flight profile, Shepard's manual control demonstrations, and the flawless recovery by USS Lake Champlain. Also documents the political context — Kennedy's pressure after Gagarin's April 12 flight, the debate over live television coverage, and the decision to name the astronaut publicly before the flight rather than after.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "smithsonian-freedom7",
+      "name": "Smithsonian National Air and Space Museum — Freedom 7 Capsule",
+      "url": "https://airandspace.si.edu/collection-objects/capsule-mercury-mr-3-freedom-7/nasm_A19710747000",
+      "type": "primary-source",
+      "category": "museum",
+      "description": "The Smithsonian's collection entry for Mercury spacecraft #7, the Freedom 7 capsule flown by Alan Shepard on MR-3. The capsule is displayed at the National Air and Space Museum in Washington, D.C. — one of the most viewed artifacts in the museum's collection. Photographic documentation of the capsule exterior (ablative heat shield showing reentry charring, recovery antenna, periscope housing), interior (instrument panel with 120 indicators, hand controller for manual attitude control, contour couch custom-molded to Shepard's body), and associated artifacts (spacesuit, helmet, survival kit). The capsule naming convention began with Freedom 7 — Shepard chose 'Freedom' as the concept, and the '7' honored all seven Mercury astronauts, establishing the tradition that Grissom (Liberty Bell 7), Glenn (Friendship 7), and subsequent astronauts followed.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "jpl-horizons",
+      "name": "JPL HORIZONS System — Ephemeris Service",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "type": "primary-source",
+      "category": "orbital-mechanics",
+      "description": "JPL's HORIZONS system provides ephemeris data for solar system objects including spacecraft trajectories. Useful for reconstructing MR-3's suborbital ballistic arc: launch from Cape Canaveral (28.4722 N, 80.5431 W), engine cutoff at 142 seconds yielding 2,294 m/s velocity, apogee of 187.5 km at approximately T+5 minutes, and splashdown 486 km downrange at approximately T+15.5 minutes. The system allows computation of the ballistic trajectory using launch azimuth, cutoff velocity, and flight path angle. Also provides Earth orientation and gravitational field data needed for trajectory reconstruction and comparison between planned and actual impact points.",
+      "format": "text/JSON/CSV",
+      "access": "open"
+    },
+    {
+      "id": "mcdowell-launches",
+      "name": "Jonathan McDowell's Launch Vehicle Database",
+      "url": "https://planet4589.org/space/lvdb/index.html",
+      "type": "secondary-source",
+      "category": "launch-vehicle",
+      "description": "Jonathan McDowell (Harvard-Smithsonian Center for Astrophysics) maintains the most comprehensive publicly available database of orbital and suborbital launches. The database includes Redstone launch records with serial numbers, payload identifications, trajectory data, and success/failure classifications. Redstone MR-7 (the vehicle that launched Freedom 7) is cataloged with launch time, trajectory parameters, and staging events. The database allows comparison across the Mercury-Redstone series: MR-1 (4-inch flight, November 1960), MR-1A (success, December 1960), MR-2 (Ham's suborbital, January 1961), MR-BD (booster development retest, March 1961), MR-3 (Shepard, May 1961), MR-4 (Grissom, July 1961). Also includes the broader Redstone missile test record and its lineage from the V-2 through the Jupiter program.",
+      "format": "text/HTML",
+      "access": "open"
+    },
+    {
+      "id": "inaturalist-dicamptodon",
+      "name": "iNaturalist — Dicamptodon tenebrosus Observations",
+      "url": "https://www.inaturalist.org/taxa/26713-Dicamptodon-tenebrosus",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Community-submitted observations of the Pacific giant salamander across its range from southwestern British Columbia through Washington, Oregon, and into northern California. Distribution maps showing dense populations in the Cascade Range, Coast Range, and Olympic Peninsula — concentrated in cold, fast-flowing, forested mountain streams. Photographs capture both life stages: the large, dark-brown terrestrial adults (up to 34 cm total length, the largest terrestrial salamander in the Pacific Northwest) and the aquatic neotenic form with feathery external gills that some individuals retain permanently. Observations document habitat associations: old-growth and mature second-growth coniferous forest, streams with coarse gravel substrate and large woody debris, water temperatures below 18 C. Particularly dense observation records from Olympic National Forest, Mt. Baker-Snoqualmie National Forest, and the Oregon Coast Range.",
+      "format": "HTML/JSON",
+      "access": "open"
+    },
+    {
+      "id": "amphibiaweb-dicamptodon",
+      "name": "AmphibiaWeb — Dicamptodon tenebrosus (Pacific Giant Salamander)",
+      "url": "https://amphibiaweb.org/species/4078",
+      "type": "primary-source",
+      "category": "taxonomy",
+      "description": "AmphibiaWeb, maintained by the University of California, Berkeley, provides the authoritative taxonomic and natural history account for Dicamptodon tenebrosus. Classification: order Caudata, family Dicamptodontidae (a monogeneric family — Dicamptodon is the only genus). The species exhibits facultative neoteny: some individuals metamorphose into terrestrial adults while others retain larval morphology (external gills, lateral line system, fin-fold tail) and remain permanently aquatic. This dual life strategy is unique among PNW salamanders. The species is also the only salamander known to vocalize — terrestrial adults produce a low-pitched bark or yelp when disturbed, generated by forcing air through the glottis. Diet includes insects, other salamanders, small mice, and even small snakes. Adults are aggressive predators with a powerful bite. Conservation status: Least Concern (IUCN), but dependent on intact forest stream habitat.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "usfs-pnw-streams",
+      "name": "USFS Pacific Northwest Research Station — Stream Amphibian Surveys",
+      "url": "https://www.fs.usda.gov/research/pnw/products/dataandtools",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "The USDA Forest Service Pacific Northwest Research Station conducts long-term monitoring of stream-associated amphibians across National Forests in Washington and Oregon. Survey data for Dicamptodon tenebrosus includes population density estimates (typically 0.5-3.0 individuals per square meter of stream habitat in occupied reaches), occupancy modeling across forest management regimes, and correlations with habitat variables: canopy cover, stream gradient, substrate composition, large woody debris density, and water temperature. Studies have documented the species' sensitivity to timber harvest — populations decline sharply in clearcut streams due to increased water temperature, sedimentation, and loss of invertebrate prey base. Recovery after harvest takes 30-50 years, tracking the regrowth of riparian canopy. These data establish Dicamptodon as a key indicator species for old-growth stream health in the PNW.",
+      "format": "CSV/PDF/HTML",
+      "access": "open"
+    },
+    {
+      "id": "gbif-dicamptodon",
+      "name": "GBIF — Dicamptodon tenebrosus Occurrence Records",
+      "url": "https://www.gbif.org/species/2432120",
+      "type": "primary-source",
+      "category": "biodiversity",
+      "description": "The Global Biodiversity Information Facility aggregates occurrence records from museum specimens, research collections, and citizen science observations worldwide. GBIF holds thousands of georeferenced records for Dicamptodon tenebrosus spanning over a century of collection history. The data reveal the species' core range: a narrow band along the Pacific coast from southwestern British Columbia to Mendocino County, California, concentrated west of the Cascade and Sierra crest. Elevation range: sea level to approximately 2,100 meters, though most records are below 1,200 meters in montane and lowland forest streams. Historical specimen records from the late 1800s and early 1900s provide baseline distribution data for comparison with current surveys, documenting range stability in intact forest regions and local extirpation in heavily logged or urbanized watersheds. The aggregated dataset supports species distribution modeling and climate change vulnerability assessments.",
+      "format": "CSV/JSON/HTML",
+      "access": "open"
+    }
+  ]
+}

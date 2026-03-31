@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.19 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --bio-deep: #050808; --bio-mid: #0A1418; --mercury-silver: #B0B8C0; --mercury-dim: #606870; --freedom-blue: #2870C0; --freedom-dim: #143860; --falcon-gold: #C8A028; --falcon-dim: #644E14; --salamander-brown: #886830; --salamander-dim: #443418; --stream-teal: #308078; --space: #050510; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2428; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(200,160,40,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(136,104,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(200,160,40,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 25%, var(--bio-mid) 50%, var(--freedom-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--falcon-gold); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--falcon-gold); } em { color: var(--salamander-brown); }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .dept-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .dept-card h3 { margin-top: 0; color: var(--falcon-gold); font-size: 1.1rem; }
+  .dept-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; font-style: italic; }
+  blockquote { border-left: 3px solid var(--freedom-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .nav-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: #fff; } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span><a href="index.html">v1.19 Mercury-Redstone 3</a><span class="sep">/</span>Track 4: Curriculum
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.19</span><span>NASA Mission Series</span><span>&middot;</span><span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department Mappings, TRY Sessions, DIY Projects, Fox Companies Pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Aerospace Engineering, Human Factors, Herpetology</span>
+      <span><span class="label">Secondary:</span> Philosophy, History, Ethics</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Department Deposits</h2>
+
+    <div class="dept-card">
+      <h3>Aerospace Engineering (Primary)</h3>
+      <p class="dept-meta">Wing: Suborbital Trajectory Design, Manual Spacecraft Control, Launch Vehicle Selection</p>
+      <p>The selection of the Redstone for America&rsquo;s first human spaceflight was a deliberate engineering decision. The Redstone had an excellent reliability record &mdash; below 5% failure rate by 1961. The Atlas D was far more powerful but far less reliable, with its &ldquo;balloon tank&rdquo; stainless steel skin only 0.01 inches thick. NASA&rsquo;s decision: fly the pilot first on the reliable Redstone (suborbital, limited data but low risk), then fly on the powerful Atlas (orbital, maximum data but higher risk). <strong>Incremental qualification.</strong></p>
+      <p>The manual control system was the astronauts&rsquo; victory in the &ldquo;spam in a can&rdquo; debate. The original Mercury design gave the astronaut no manual control. The Mercury 7 argued for &mdash; and won &mdash; a fly-by-wire manual mode. Shepard proved it worked. This engineering pattern &mdash; reliable booster first, manual control included, incremental qualification &mdash; is the template for all subsequent human spaceflight programs.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Human Factors (Primary)</h3>
+      <p class="dept-meta">Wing: Pilot Workload Management, Manual vs Automatic Control, the &ldquo;Spam in a Can&rdquo; Debate</p>
+      <p>Shepard&rsquo;s workload during Freedom 7 was extraordinary: monitoring all spacecraft systems, reporting to Mission Control, observing through the periscope, monitoring his own physiological state &mdash; all while experiencing 6.3g launch, 5 minutes of weightlessness, and 11.6g reentry. His physiological data answered the most fundamental question: does the space environment impair human performance? Heart rate peaked at 138 bpm during launch, settled to ~108 bpm during weightlessness. Manual control inputs were precise and appropriate. <strong>No impairment.</strong></p>
+      <p>Enos (mission 1.18) demonstrated that a primate could perform a <em>trained task</em>. Shepard demonstrated that a human could perform an <em>adaptive task</em>. The distinction: Enos performed stimulus-response. Shepard performed model-based prediction. Enos proved an organism could <strong>work</strong> in space. Shepard proved a human could <strong>think</strong> in space.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Herpetology (Primary)</h3>
+      <p class="dept-meta">Wing: Dicamptodon tenebrosus &mdash; Neoteny, Paedomorphosis, PNW Stream Ecology</p>
+      <p><em>Dicamptodon tenebrosus</em> &mdash; up to 35 cm, the largest terrestrial salamander in North America. Its range closely follows old-growth coniferous forest. Its <strong>facultative neoteny</strong> is directly analogous to the Redstone-vs-Atlas decision: the Mercury program had two modes (suborbital and orbital), choosing which to activate based on environmental conditions. The Atlas was unreliable in 1961, so the program remained in &ldquo;suborbital mode&rdquo; until the environment improved.</p>
+      <p>The salamander&rsquo;s ambush strike takes 15&ndash;20 milliseconds &mdash; ballistic once initiated, no course correction possible. The salamander commits at the moment of launch, exactly as Freedom 7 committed at engine cutoff.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Philosophy &mdash; Kierkegaard (Secondary)</h3>
+      <p class="dept-meta">Wing: The Leap of Faith, &ldquo;Anxiety Is the Dizziness of Freedom,&rdquo; Subjectivity as Truth</p>
+      <p>Kierkegaard was born May 5, 1813 &mdash; exactly 148 years before Shepard&rsquo;s launch. His &ldquo;leap of faith&rdquo; is not blind belief but committed action in the face of objective uncertainty. Shepard on the gantry: he has done the analysis, the risk is acceptable, but knowing the risk is acceptable is not the same as accepting the risk. The gap between intellectual acceptance and volitional commitment is Kierkegaard&rsquo;s leap.</p>
+      <p>The Peregrine Falcon at the top of its stoop faces the same existential moment. The salamander coiled under its cobble faces the same moment. All three leaps are instances of the same structure: a free agent choosing to act and accepting the consequences.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>History (Secondary)</h3>
+      <p class="dept-meta">Wing: The Space Race, Gagarin&rsquo;s Flight, Kennedy&rsquo;s Challenge</p>
+      <p>Gagarin orbited on April 12 &mdash; 23 days before Shepard. The Soviet achievement was objectively greater. Yet Freedom 7 was broadcast <em>live</em> to 45 million viewers. The Soviets announced after the fact; the Americans invited the world to watch. Kennedy&rsquo;s Moon speech came 20 days later, authorized on the strength of a 15-minute flight. The flight was as much a political mission as a technical one, and it achieved both objectives.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Ethics (Secondary)</h3>
+      <p class="dept-meta">Wing: Informed Consent, the Astronaut&rsquo;s Bargain</p>
+      <p><strong>Alan Shepard volunteered.</strong> This is the fundamental ethical distinction from the biological flights. Ham did not volunteer. Enos did not volunteer. Shepard understood the risk, had full freedom to decline, and chose to go. The risk was not imposed &mdash; it was accepted. Kierkegaard would have recognized this as the &ldquo;ethical stage&rdquo;: duty that is self-imposed rather than externally enforced.</p>
+    </div>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <div class="dept-card">
+      <h3>TRY 1: Suborbital Trajectory Calculator</h3>
+      <p class="dept-meta">Duration: 1&ndash;2 hours | Difficulty: Beginner | Cost: $0</p>
+      <p>Compute the complete trajectory of Freedom 7 using simplified ballistic equations: burnout velocity components, time to apogee, peak altitude, range, and reentry g-force estimate. Compare your results to actual flight data. Understand why the range equation gives an approximation but not the exact answer. A student who can compute the range of a baseball can compute the range of a Mercury capsule. The universe does not have special equations for spaceflight.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>TRY 2: Salamander Stream Survey</h3>
+      <p class="dept-meta">Duration: 2&ndash;4 hours (field) or 1 hour (desktop) | Difficulty: Beginner | Cost: $0</p>
+      <p>If in the PNW: visit a cold, clear, forested stream and look for <em>Dicamptodon tenebrosus</em>. Assess habitat quality, count gilled vs non-gilled individuals, record stream conditions. If not in PNW: use iNaturalist to explore the range map, compare larval and adult forms, overlay with <em>Falco peregrinus</em> range. <strong>IMPORTANT:</strong> Do NOT handle salamanders. Observe from the stream bank.</p>
+    </div>
+
+    <hr>
+
+    <h2>DIY Project: Model Rocket with Manual Attitude Control</h2>
+
+    <p class="dept-meta">Duration: 8&ndash;16 hours build, 1&ndash;2 hours flight test | Difficulty: Intermediate | Cost: $40&ndash;80</p>
+
+    <p>Build a model rocket with a deflectable fin controlled by a servo motor. The fin angle (set before launch) induces a predictable roll during flight. Fly at 0&deg;, 5&deg;, 10&deg;, and 15&deg; deflection. Plot roll rate vs fin deflection angle. Your single-axis fin control is the simplest possible version of Shepard&rsquo;s three-axis thruster control. The gap between your system and his is what Mercury&rsquo;s engineering bridged.</p>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <div class="dept-card">
+      <h3>FoxFiber Alignment</h3>
+      <p>Shepard&rsquo;s manual control added value not by being faster than the ASCS but by being more <strong>fuel-efficient</strong> and more <strong>adaptive</strong>. FoxFiber&rsquo;s network management should incorporate the same principle: automatic for routine, human override for novel situations. The manual interface should be proportional (not just on/off) with clear feedback showing the effect of inputs on network state.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>FoxCompute Alignment</h3>
+      <p>The salamander&rsquo;s facultative neoteny maps to container scaling. A container in &ldquo;neotenous mode&rdquo; (minimal resources) is not degraded &mdash; it is optimized for its current workload. Metamorphosis to &ldquo;terrestrial mode&rdquo; (full resources) should be triggered by environmental metrics, not pre-scheduled.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Fox CapComm Alignment</h3>
+      <p>The &ldquo;spam in a can&rdquo; debate is the central question of AI agent architecture. Fox CapComm agents should have a <strong>Shepard Mode</strong>: manual control that allows proportional, nuanced human intervention. The human&rsquo;s bandwidth is lower (~8 bits/s vs thousands) but the human&rsquo;s judgment is broader.</p>
+    </div>
+
+    <blockquote>
+      The Pacific giant salamander lives in two worlds. Both forms are successful. The choice between them is not made by the salamander&rsquo;s will but by the stream&rsquo;s temperature, the forest&rsquo;s shade. Shepard did not have this luxury. He chose to metamorphose. The environment did not decide for him. He decided, and the environment accommodated. Kierkegaard would have understood: anxiety is the dizziness of freedom, and Shepard&rsquo;s freedom made the country dizzy.
+    </blockquote>
+
+    <div class="nav-card">
+      <div><div class="nav-label">Previous Track</div><a href="mathematics.html">&larr; Track 3: Mathematics</a></div>
+      <div style="text-align: center;"><div class="nav-label">Landing Page</div><a href="index.html">v1.19 Overview</a></div>
+      <div style="text-align: right;"><div class="nav-label">Next Track</div><a href="simulation.html">Track 5: Simulation &rarr;</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.19 Track 4: Curriculum &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

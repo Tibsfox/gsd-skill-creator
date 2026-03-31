@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.19 — Mercury-Redstone 3 / Freedom 7 + Pacific Giant Salamander | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #050808; --bio-mid: #0A1418;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --freedom-blue: #2870C0; --freedom-dim: #143860;
+    --falcon-gold: #C8A028; --falcon-dim: #644E14;
+    --salamander-brown: #886830; --salamander-dim: #443418;
+    --stream-teal: #308078; --space: #050510;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2428;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(200,160,40,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(136,104,48,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(96,104,112,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(48,128,120,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(200,160,40,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(5,5,16,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(40,112,192,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 20%, var(--bio-mid) 40%, var(--freedom-dim) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mercury-silver);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-success {
+    background: rgba(40,180,80,0.2); border: 1px solid #28B450;
+    color: #28B450; padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--falcon-gold);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--falcon-gold); }
+  .card em { color: var(--salamander-brown); }
+
+  .resonance-card { border-color: var(--freedom-dim); background: rgba(20,56,96,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(20,56,96,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--falcon-gold); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--mercury-silver); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--mercury-silver); background: rgba(176,184,192,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--falcon-gold); }
+  .track-card.t2 .track-title { color: var(--salamander-brown); }
+  .track-card.t3 .track-title { color: var(--mercury-silver); }
+  .track-card.t4 .track-title { color: var(--falcon-gold); }
+  .track-card.t5 .track-title { color: var(--mercury-silver); }
+  .track-card.t6 .track-title { color: var(--salamander-brown); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(136,104,48,0.08); border: 1px solid var(--salamander-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--salamander-brown); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(5,5,16,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--falcon-gold); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(176,184,192,0.06); border: 1px solid rgba(176,184,192,0.2);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--mercury-silver); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(176,184,192,0.15); transition: color 0.2s; }
+  .data-links a:hover { color: var(--falcon-gold); }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--falcon-gold); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.19</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>v1.19 &mdash; Mercury-Redstone 3 / Freedom 7 + <em>Dicamptodon tenebrosus</em></h1>
+    <p class="subtitle">The Leap &mdash; Alan Shepard, First American in Space</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> May 5, 1961</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Alan Shepard</span>
+      <span><span class="label">Peak Alt:</span> 187.5 km</span>
+      <span><span class="label">Max G:</span> 11.6</span>
+      <span><span class="label">Duration:</span> 15:28</span>
+      <span><span class="label">Organism:</span> Pacific giant salamander</span>
+      <span><span class="label">Bird:</span> Peregrine Falcon</span>
+      <span><span class="label">Dedication:</span> S&oslash;ren Kierkegaard</span>
+      <span><span class="label">Status:</span> SUCCESS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On May 5, 1961, Alan Bartlett Shepard Jr. launched from Cape Canaveral&rsquo;s Launch Complex 5 atop a Redstone MR-7 booster, inside Mercury capsule #7 &mdash; which he had named <strong>Freedom 7</strong>. He was the first American in space. The flight lasted fifteen minutes and twenty-eight seconds. It was suborbital &mdash; a ballistic arc to 187.5 km altitude, 486 km downrange, with approximately five minutes of weightlessness at the top of the parabola. During those five minutes, Shepard manually controlled the capsule in all three axes &mdash; pitch, yaw, and roll &mdash; proving that a human pilot could fly a spacecraft in the space environment. He experienced <strong>11.6g</strong> during reentry, reported <em>&ldquo;What a beautiful view,&rdquo;</em> and was recovered by helicopter eight minutes after splashdown.</p>
+      <p>Shepard had been selected from the Mercury Seven by Robert Gilruth in January 1961 &mdash; beating John Glenn and Gus Grissom for the first flight. He had waited through two weather scrubs, over four hours on the pad, and the indignity of urinating in his pressure suit because nobody had planned for a bladder during a four-hour wait before a fifteen-minute flight. When yet another hold was called, Shepard keyed his microphone and delivered the most quoted sentence in Mercury history: <strong>&ldquo;Why don&rsquo;t you fix your little problem and light this candle?&rdquo;</strong></p>
+      <p>Twenty days after Shepard&rsquo;s flight, President Kennedy addressed Congress and committed the nation to landing a man on the Moon before the decade was out. Shepard&rsquo;s fifteen minutes gave Kennedy the political foundation for twenty billion Apollo dollars. The flight was a proof of concept. The concept it proved was not technical &mdash; it was political: the American people would support the venture, they would watch, they would care. Forty-five million watched the launch live on television, with no delay, no safety net. If the rocket exploded, forty-five million people would watch it explode. It did not. Shepard came back, and America went to the Moon.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The Leap</div>
+            <div class="track-desc">Mercury Seven selection, Shepard vs Glenn vs Grissom, the delays, &ldquo;light this candle,&rdquo; 15:28 of flight, manual attitude control, Kennedy&rsquo;s Moon speech, Apollo 14, Kierkegaard resonance</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">MR-3 official mission report, cognitive performance under high-g, Pacific giant salamander neoteny genetics, Kierkegaard decision theory, suborbital-to-commercial state of the art</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Dicamptodon tenebrosus</em></div>
+            <div class="track-desc">Pacific giant salamander &mdash; only vocalizing salamander in North America, 35 cm apex predator, facultative neoteny, PNW old-growth stream indicator species</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Fifteen Minutes</div>
+            <div class="track-desc">Suborbital ballistic trajectory, burnout velocity, range equation, manual control bandwidth, Shannon information rate, Peregrine Falcon terminal velocity, stoop vs reentry comparison</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Aerospace Engineering, Human Factors, Herpetology, Kierkegaard&rsquo;s philosophy, History, Ethics. Trajectory calculator TRY session. Model rocket DIY. Fox Companies pathways.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Fly, Visualize, Create</div>
+            <div class="track-desc">Trajectory comparator, manual control game, falcon stoop simulator, AGC circuit, CW filter, &ldquo;Freedom&rdquo; shader, &ldquo;Fifteen Minutes&rdquo; story, Faust launch synth</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Voice / First to Speak</div>
+          The Pacific giant salamander is the only North American salamander that vocalizes &mdash; a low, raspy bark from an animal that should be mute. Alan Shepard was the first American voice from space: &ldquo;Roger, liftoff, and the clock is started.&rdquo; Both broke a silence that defined their category. Salamanders are silent; this one barks. Americans had not spoken from above the atmosphere; this one said &ldquo;What a beautiful view.&rdquo;
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Boundary Crossing</div>
+          The metamorphosis of the Pacific giant salamander &mdash; from aquatic larva with gills to terrestrial adult with lungs &mdash; is a boundary crossing between two fundamentally different environments. Shepard&rsquo;s flight was the same kind of crossing: from atmosphere to space, from aerodynamic flight to ballistic trajectory, from air-breathing to sealed life support. Both crossed the boundary between domains that require different bodies and different strategies.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Dual Strategy &mdash; The Leap and the Wait</div>
+          Dicamptodon maintains two simultaneous life strategies: neotenic individuals remain aquatic while metamorphosed individuals become terrestrial. Shepard lived two careers: the Mercury astronaut who flew first in 1961, and the Apollo commander who walked on the Moon in 1971, separated by five years of grounding from Meni&egrave;re&rsquo;s disease. The surgery that cured him was his metamorphosis. The late metamorphosis of a salamander that spends extra time in the aquatic form mirrors the late flight of an astronaut grounded for five years.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Predator Confidence</div>
+          The Pacific giant salamander is the apex predator of its stream system. It does not retreat. It faces threats, opens its mouth, vocalizes, and bites. Shepard was the apex competitor of the Mercury Seven. He did not retreat from the selection process, the launch delays, or the post-Gagarin pressure. He said &ldquo;light this candle.&rdquo; Both are defined by a confidence that is not performative but functional.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Pristine Conditions / Pristine Engineering</div>
+          Dicamptodon requires cold, clear, well-oxygenated water under intact forest canopy. The Mercury capsule required pristine engineering &mdash; every system within specification. Both are intolerant of degraded conditions. The salamander vanishes from warm, silted streams. The capsule fails if systems are out of spec. Both are honest tests of quality: the salamander proves the stream is healthy, Freedom 7 proved the engineering was sound.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <div class="axis-title">Scale Belies Impact</div>
+          The Pacific giant salamander &mdash; up to 35 cm, the largest terrestrial salamander in North America &mdash; lives in small headwater streams barely a meter wide. Shepard&rsquo;s flight lasted fifteen minutes and twenty-eight seconds &mdash; the shortest crewed spaceflight in the American program. Kennedy&rsquo;s Moon speech came twenty days later. Apollo was authorized on the strength of a fifteen-minute flight. The biggest animal lives in the smallest water. The largest consequences came from the smallest mission.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><strong>Shader: &ldquo;Freedom&rdquo;</strong> &mdash; GLSL fragment shader, periscope view from Freedom 7 at apogee: Atlantic Ocean, Bahamas, thin blue atmosphere line</li>
+        <li><strong>Story: &ldquo;Fifteen Minutes&rdquo;</strong> &mdash; Creative nonfiction following Shepard second by second from ignition to helicopter recovery</li>
+        <li><strong>Audio: MR-3 Launch Sequence</strong> &mdash; Faust DSP synthesis of Redstone A-7 ignition through engine cutoff and the silence of space</li>
+        <li><strong>Audio: Peregrine Falcon Stoop</strong> &mdash; Faust DSP: wind over folded feathers accelerating to 390 km/h, pullout, strike</li>
+        <li><strong>Circuit: LED G-Force Indicator</strong> &mdash; LM3914 bar display showing 0&ndash;12g, simulating Freedom 7&rsquo;s accelerometer</li>
+        <li><strong>Circuit: Audio CW Filter</strong> &mdash; Progressive radio series #19: twin-T active bandpass for Morse code reception</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><strong>Python: Suborbital Trajectory Comparator</strong> &mdash; Shepard vs Ham vs Gagarin trajectories on the same Earth-centered diagram</li>
+        <li><strong>Python: Manual Control Bandwidth Calculator</strong> &mdash; Human proportional vs ASCS bang-bang: fuel efficiency, Shannon information rate</li>
+        <li><strong>Web: &ldquo;Can You Fly Freedom 7?&rdquo;</strong> &mdash; Manual attitude control game &mdash; fire H2O2 thrusters in all three axes, compare to Shepard&rsquo;s performance</li>
+        <li><strong>Web: Peregrine Falcon Stoop Simulator</strong> &mdash; Interactive stoop physics: wing tuck, terminal velocity, 24g pullout</li>
+        <li><strong>SPICE: AGC Circuit</strong> &mdash; Automatic gain control for rate gyro signal conditioning in Mercury attitude control</li>
+        <li><strong>SPICE: Audio CW Filter</strong> &mdash; Progressive radio #19: twin-T active bandpass centered at 700 Hz</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: var(--mercury-silver);">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(200,160,40,0.04); border-color: var(--falcon-dim);">
+      <h2 style="color: var(--falcon-gold);">Dedication: S&oslash;ren Kierkegaard</h2>
+      <p><strong>Born May 5, 1813 &mdash; Died November 11, 1855</strong></p>
+      <p>S&oslash;ren Aabye Kierkegaard was born on the exact calendar date, 148 years earlier, that Alan Shepard launched from Cape Canaveral. He is generally regarded as the first existentialist philosopher. His central philosophical concern was the nature of individual choice under conditions of uncertainty. He argued that the most important human decisions &mdash; the decisions that define who a person is rather than merely what a person does &mdash; cannot be resolved by rational calculation. They are what he called &ldquo;leaps&rdquo; &mdash; acts of commitment that go beyond what evidence and reason can justify.</p>
+      <p>Kierkegaard called anxiety <em>&ldquo;the dizziness of freedom&rdquo;</em> &mdash; the vertigo that comes from looking over the edge and realizing that you could jump, that you are free to jump, that nothing prevents you from jumping except your own choice. Shepard, lying on his back in Freedom 7 during the four-hour-plus wait, was in a state Kierkegaard would have recognized instantly. Multiple futures were real. The rocket could fly. The rocket could explode. The dizziness of freedom is the condition of the astronaut on the pad before ignition: everything is still possible, nothing is yet determined, and the only way forward is to choose.</p>
+      <p><strong>&ldquo;Light this candle&rdquo;</strong> was Shepard&rsquo;s response to the anxiety of the boundary. Kierkegaard argued that deliberation, taken to its extreme, becomes paralysis. The antidote is the leap: the moment when the individual stops calculating and starts acting. Shepard&rsquo;s &ldquo;light this candle&rdquo; is the colloquial form of Kierkegaard&rsquo;s leap. Enough analysis. Ignite the engine. Accept the outcome. Go.</p>
+      <p style="font-style: italic; color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; text-align: center;"><strong style="color: var(--falcon-gold); font-size: 1.3rem;">Anxiety is the dizziness of freedom. Shepard&rsquo;s freedom made the country dizzy.</strong></p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.18/index.html">&larr; v1.18 Mercury-Atlas 5</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.20/index.html">v1.20 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Dicamptodon tenebrosus (Pacific Giant Salamander)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">35 cm</div>
+          <div class="stat-label">Max Length</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Vocal</div>
+          <div class="stat-label">Only NA Salamander</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">PNW</div>
+          <div class="stat-label">Endemic Range</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Dual</div>
+          <div class="stat-label">Neotenic / Metamorphic</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        The largest terrestrial salamander in North America, restricted to the old-growth stream systems of the Pacific Northwest. The only North American salamander that vocalizes &mdash; a low, raspy bark from an animal that should be silent. Exhibits <strong style="color: var(--falcon-gold);">facultative neoteny</strong>: some individuals metamorphose to terrestrial adults with lungs while others retain gills and remain aquatic for life. An apex predator of PNW headwater streams and an honest indicator of stream health &mdash; where the salamander lives, the water is cold, clear, and the forest canopy is intact.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(176,184,192,0.06); border-color: var(--mercury-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Bird: Peregrine Falcon</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em style="color: var(--salamander-brown);">Falco peregrinus</em> (degree 19). The fastest animal on Earth &mdash; reaching <strong style="color: var(--falcon-gold);">390+ km/h</strong> (240+ mph) in its hunting stoop, a near-vertical dive from altitude onto prey. The stoop is a controlled ballistic descent: the falcon tucks its wings, creates a teardrop profile, and plunges through the atmosphere. Pullout g-force at the bottom of the stoop: <strong style="color: var(--falcon-gold);">~24g</strong> &mdash; more than double what Shepard endured during reentry. Nests on cliff faces along PNW rivers and coastlines, the same drainages where <em style="color: var(--salamander-brown);">Dicamptodon</em> lives.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(48,128,120,0.06); border-color: var(--freedom-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Freedom 7 Flight Data</h3>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">187.5 km</div>
+          <div class="stat-label">Peak Altitude</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2,294 m/s</div>
+          <div class="stat-label">Burnout Velocity</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">15:28</div>
+          <div class="stat-label">Flight Duration</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">11.6g</div>
+          <div class="stat-label">Reentry G</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--falcon-gold);">Range:</strong> 486 km downrange. <strong style="color: var(--falcon-gold);">Weightless:</strong> ~5 min. <strong style="color: var(--falcon-gold);">Manual control:</strong> First human manual spacecraft control &mdash; all three axes tested. <strong style="color: var(--falcon-gold);">Recovery:</strong> USS Lake Champlain, 8 min after splashdown. <strong style="color: var(--falcon-gold);">Viewers:</strong> 45 million watched live. Kennedy&rsquo;s Moon speech came 20 days later.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: MR-3 / Freedom 7</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS System</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://airandspace.si.edu/">Smithsonian Air &amp; Space Museum</a>
+      <a href="https://www.inaturalist.org/">iNaturalist: Dicamptodon tenebrosus</a>
+      <a href="https://www.gbif.org/">GBIF: Dicamptodon Occurrence Records</a>
+      <a href="https://www.dnr.wa.gov/">Washington DNR Stream Monitoring</a>
+      <a href="https://waterdata.usgs.gov/">USGS Water Data (NWIS)</a>
+    </div>
+
+    <div class="card" style="background: rgba(200,160,40,0.06); border-color: var(--falcon-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--falcon-gold);">Primary:</strong> Aerospace Engineering (Suborbital Trajectory, Manual Control), Human Factors (Pilot Workload, &ldquo;Spam in a Can&rdquo;), Herpetology (Pacific Giant Salamander, Neoteny)<br>
+        <strong style="color: var(--falcon-gold);">Secondary:</strong> Philosophy (Kierkegaard, Leap of Faith), History (Space Race, Kennedy&rsquo;s Moon Speech), Ethics (Informed Consent, Astronaut&rsquo;s Bargain)
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(200,160,40,0.06); border-color: var(--falcon-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">TSPB Layers</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--falcon-gold);">Layer 4:</strong> Vector Calculus &mdash; Suborbital ballistics, parabolic arcs, range equations, burnout velocity<br>
+        <strong style="color: var(--falcon-gold);">Layer 7:</strong> Information Theory &mdash; Human-in-the-loop control, manual piloting bandwidth, Shannon rate<br>
+        <strong style="color: var(--falcon-gold);">Layer 4b:</strong> Applied Mechanics &mdash; Peregrine Falcon terminal velocity, atmospheric drag, stoop physics<br>
+        <strong style="color: var(--falcon-gold);">Layer 6:</strong> Probability &amp; Statistics &mdash; G-tolerance distributions, Kierkegaard threshold
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.19 Mercury-Redstone 3 / Freedom 7 + <em>Dicamptodon tenebrosus</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>
