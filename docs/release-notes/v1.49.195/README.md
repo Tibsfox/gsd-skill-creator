@@ -3,7 +3,8 @@
 **Released:** 2026-03-31
 **Type:** Research + Infrastructure + Ecosystem Alignment
 **Series:** PNW Research Series + gsd-skill-creator tooling
-**Commits:** 16
+**Commits:** 17
+**Dedicated to:** Trekkie — for the issue-triage-pr-review skill. 28KB of battle-tested engineering that turns repository maintenance into a parallel, adversarial, test-first pipeline. From the GSD community, built with the kind of rigor that makes everyone's work better. Thank you.
 
 ## Summary
 
