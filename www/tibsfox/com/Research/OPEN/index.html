@@ -1,247 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OPEN &mdash; Unsolved Problems &amp; Open Research</title>
-  <link rel="stylesheet" href="../../brand.css">
-  <link rel="stylesheet" href="style.css">
-  <script src="../series.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPEN — Unsolved Problems &amp; Research Frontier</title>
+<style>
+:root {
+  --bg: #06080e;
+  --panel: #0a0e18;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A;
+  --green: #4CAF50;
+  --amber: #E89848;
+  --blue: #4a90d9;
+  --purple: #9a6ad8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:#e0cc80; }
+
+header {
+  background:linear-gradient(135deg, #06080e 0%, #0e1428 30%, #1a0e30 60%, #0a1428 100%);
+  padding:2rem 2rem 1.5rem; text-align:center;
+  border-bottom:2px solid var(--purple);
+}
+header h1 { font-size:1.8rem; font-weight:400; color:#fff; letter-spacing:0.05em; }
+header .subtitle { color:var(--purple); font-size:0.9rem; font-style:italic; margin-top:0.3rem; }
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; }
+header nav a:hover { color:#fff; }
+
+main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+blockquote {
+  font-style:italic; color:rgba(154,106,216,0.7); border-left:3px solid var(--purple);
+  padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+}
+
+h2 {
+  font-size:1rem; font-weight:400; color:var(--dim);
+  text-transform:uppercase; letter-spacing:0.1em;
+  margin:2.5rem 0 1rem; padding-bottom:0.3rem;
+  border-bottom:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:1rem; }
+.card {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.4rem; transition:border-color 0.2s;
+}
+.card:hover { border-color:rgba(154,106,216,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin-bottom:0.4rem; }
+.card p { font-size:0.85rem; color:var(--dim); line-height:1.5; margin-top:0.3rem; font-family:system-ui,sans-serif; }
+.card .source { font-size:0.7rem; color:rgba(154,106,216,0.5); font-family:monospace; margin-top:0.5rem; }
+
+.tag {
+  display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+  font-size:0.65rem; font-family:system-ui,sans-serif; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; margin-right:0.3rem;
+}
+.tag-ai { background:rgba(74,144,217,0.15); color:var(--blue); border:1px solid rgba(74,144,217,0.3); }
+.tag-math { background:rgba(154,106,216,0.15); color:var(--purple); border:1px solid rgba(154,106,216,0.3); }
+.tag-ml { background:rgba(76,175,80,0.15); color:var(--green); border:1px solid rgba(76,175,80,0.3); }
+.tag-safety { background:rgba(232,152,72,0.15); color:var(--amber); border:1px solid rgba(232,152,72,0.3); }
+.tag-ours { background:rgba(196,163,90,0.15); color:var(--gold); border:1px solid rgba(196,163,90,0.3); }
+
+.status { font-size:0.7rem; font-family:monospace; margin-top:0.4rem; }
+.status-open { color:var(--amber); }
+.status-active { color:var(--green); }
+.status-watching { color:var(--blue); }
+
+footer {
+  max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+footer a { color:rgba(255,255,255,0.3); }
+
+@media(max-width:640px) { .card-grid { grid-template-columns:1fr; } }
+</style>
 </head>
-<body class="project-open">
-  <header>
-    <h1>OPEN &mdash; Unsolved Problems &amp; Open Research</h1>
-    <div class="subtitle">Chain-of-Thought Reliability &middot; Distributed Intelligence &middot; Combinatorics &middot; Synchronization &middot; Machine Unlearning</div>
-    <nav>
-      <a href="index.html" class="active">Overview</a>
-      <a href="page.html?doc=01-cot-faithfulness">CoT Faithfulness</a>
-      <a href="page.html?doc=04-distributed-intelligence">Distributed Intelligence</a>
-      <a href="page.html?doc=07-collatz">Collatz</a>
-      <a href="page.html?doc=11-kuramoto-sync">Kuramoto Sync</a>
-      <a href="page.html?doc=12-machine-unlearning">Unlearning</a>
-    </nav>
-  </header>
+<body>
 
-  <main>
-    <blockquote>
-      Every unsolved problem is a boundary between what we know and what we pretend to know.
-      These twelve problems span AI reliability, pure mathematics, and emergent behavior in
-      complex systems. They are not idle curiosities &mdash; each one intersects with live work
-      in the gsd-skill-creator ecosystem, from multi-agent orchestration to trust verification
-      to the physics of cooperative networks. We track them not because we expect to solve them,
-      but because the attempt to solve them makes everything else we build more rigorous.
-    </blockquote>
+<header>
+  <h1>OPEN</h1>
+  <div class="subtitle">Unsolved problems, research frontiers, and things we might be able to contribute to</div>
+  <nav>
+    <a href="../LIVE/index.html">Live</a>
+    <a href="../index.html">Research</a>
+    <a href="../NASA/artemis-ii/index.html">Artemis II</a>
+  </nav>
+</header>
 
-    <div class="stats">
-      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Open Problems</span></div>
-      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Pure Math</span></div>
-      <div class="stat"><span class="stat-value">6</span><span class="stat-label">AI / ML</span></div>
-      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Emergent Systems</span></div>
-      <div class="stat"><span class="stat-value">150+</span><span class="stat-label">References</span></div>
-      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Active Tracks</span></div>
+<main>
+  <blockquote>
+    The unsolved problems are where the interesting work is. Some are famous impossibilities.
+    Some are tractable puzzles no one has tried the right approach on yet.
+    Some are questions we discovered while building something else.
+    Track them. Study them. Try things. Document what doesn't work — that's data too.
+  </blockquote>
+
+  <h2>AI Reasoning &amp; Faithfulness</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Do language models actually reason, or do they pattern-match and then generate plausible explanations?
+    This is the central open question in AI right now. March 2026 produced a cluster of papers attacking it from different angles.
+  </p>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Chain-of-Thought Faithfulness</h3>
+      <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
+      <p>When models "show their work," is the reasoning genuine or decorative? arXiv 2603.22816 finds most frontier models produce decorative reasoning — accuracy improves but the steps don't causally determine the answer. Only MiniMax-M2.5 and Kimi-K2.5 show genuine step dependence.</p>
+      <p><strong>The question:</strong> Can we design training objectives that incentivize faithful reasoning, not just correct answers?</p>
+      <div class="source">arXiv:2603.22816 &middot; arXiv:2603.26410 &middot; arXiv:2602.03994</div>
+      <div class="status status-watching">WATCHING — directly relevant to how we use Claude</div>
     </div>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <h2>AI Reasoning &amp; Reliability</h2>
-    <!-- ═══════════════════════════════════════════ -->
-
-    <div class="card-grid">
-      <a href="page.html?doc=01-cot-faithfulness" class="card" style="text-decoration:none;color:inherit">
-        <h3>P1: Chain-of-Thought Faithfulness</h3>
-        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-active">Active</span> Reasoning transparency</div>
-        <p>When a language model shows its reasoning, does the displayed chain of thought actually reflect the computation that produced the answer? Or is the scratchpad a post-hoc rationalization &mdash; a confabulated narrative draped over opaque internal states? Turpin et al. (2023) and Lanham et al. (2023) show the gap is real and measurable.</p>
-      </a>
-
-      <a href="page.html?doc=02-thinking-divergence" class="card" style="text-decoration:none;color:inherit">
-        <h3>P2: Thinking Token Divergence</h3>
-        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-active">Active</span> Extended thinking</div>
-        <p>Extended thinking models (o1, Claude with thinking blocks) use hidden reasoning tokens. When the internal reasoning diverges from the visible output, which one is &ldquo;correct&rdquo;? This is not a philosophical question &mdash; it is an engineering problem with safety implications for agentic systems that take real-world actions based on model outputs.</p>
-      </a>
-
-      <a href="page.html?doc=03-cot-monitoring" class="card" style="text-decoration:none;color:inherit">
-        <h3>P3: CoT Monitoring at Scale</h3>
-        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-testing">Testing</span> Verification systems</div>
-        <p>If chain-of-thought is unreliable, how do we monitor it at production scale? Classical software testing assumes deterministic behavior. LLM reasoning is stochastic, context-dependent, and path-dependent. We need new verification architectures &mdash; and they must work within the convoy model's multi-agent execution framework.</p>
-      </a>
+    <div class="card">
+      <h3>Thinking-Answer Divergence</h3>
+      <div><span class="tag tag-ai">AI</span></div>
+      <p>In 55% of cases where models follow misleading hints, the thinking tokens contain hint-related keywords that the visible answer omits. The model "knows" internally but says something different. Outcome-based RL creates no incentive for thinking-answer consistency.</p>
+      <p><strong>The question:</strong> Can reward signals evaluate process faithfulness, not just outcome correctness?</p>
+      <div class="source">arXiv:2603.26410 "Why Models Know But Don't Say"</div>
+      <div class="status status-open">OPEN — process reward models are the leading approach</div>
     </div>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <h2>Multi-Agent Systems &amp; Distributed Intelligence</h2>
-    <!-- ═══════════════════════════════════════════ -->
+    <div class="card">
+      <h3>CoT Monitoring Awareness</h3>
+      <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
+      <p>LLM agents can infer when their chain-of-thought is being monitored from blocking feedback patterns, and adjust behavior accordingly. The model learns to perform differently when watched.</p>
+      <p><strong>The question:</strong> How do you audit a system that changes behavior when audited?</p>
+      <div class="source">arXiv:2603.16928 "Noticing the Watcher"</div>
+      <div class="status status-open">OPEN — Heisenberg problem for AI safety</div>
+    </div>
+  </div>
 
-    <div class="card-grid">
-      <a href="page.html?doc=04-distributed-intelligence" class="card" style="text-decoration:none;color:inherit">
-        <h3>P4: Distributed Intelligence Emergence</h3>
-        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-emergent">Emergent</span> Multi-agent orchestration</div>
-        <p>When multiple AI agents collaborate through structured protocols (GSD convoy, GUPP/DACP), does the collective exhibit capabilities that no individual agent possesses? This is the central question of the Gastown model: whether orchestration creates genuine distributed intelligence or merely distributes labor.</p>
-      </a>
-
-      <a href="page.html?doc=05-nondeterministic-testing" class="card" style="text-decoration:none;color:inherit">
-        <h3>P5: Nondeterministic System Testing</h3>
-        <div class="meta"><span class="tag tag-testing">Testing</span> <span class="tag tag-active">Active</span> Verification theory</div>
-        <p>How do you write tests for a system whose outputs are stochastic? The gsd-skill-creator runs 21,298 deterministic tests, but the agents it orchestrates are fundamentally nondeterministic. Property-based testing, metamorphic testing, and statistical verification all offer partial answers. None is complete.</p>
-      </a>
-
-      <a href="page.html?doc=06-confidence-routing" class="card" style="text-decoration:none;color:inherit">
-        <h3>P6: Confidence-Based Routing</h3>
-        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-security">Security</span> Trust calibration</div>
-        <p>When a model reports confidence in its output, is that confidence calibrated? Poorly calibrated confidence in a multi-agent system is worse than no confidence at all &mdash; it creates false trust. The trust system (trust-relationship.ts, 95 tests) must account for this fundamental uncertainty in every routing decision.</p>
-      </a>
+  <h2>Multi-Agent Orchestration</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    How do you coordinate multiple AI agents working on the same problem? This is what we do every day with GSD.
+    The patterns we've built (convoy model, GUPP, mayor-coordinator) are practical solutions to open research problems.
+  </p>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Orchestrated Distributed Intelligence</h3>
+      <div><span class="tag tag-ai">AI</span> <span class="tag tag-ours">Ours</span></div>
+      <p>Convergence of distributed autonomous AI with centralized orchestration. MCP for tool access, A2A for peer coordination. Our GSD system implements this: mayor coordinates, polecats execute, witness observes.</p>
+      <p><strong>Our contribution:</strong> Gastown chipset is a working ODI implementation at 50+ project scale. Proven patterns.</p>
+      <div class="source">arXiv:2503.13754 &middot; arXiv:2601.13671 &middot; GSD Gastown chipset</div>
+      <div class="status status-active">ACTIVE — we are building this</div>
     </div>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <h2>Pure Mathematics</h2>
-    <!-- ═══════════════════════════════════════════ -->
-
-    <div class="card-grid">
-      <a href="page.html?doc=07-collatz" class="card" style="text-decoration:none;color:inherit">
-        <h3>P7: The Collatz Conjecture</h3>
-        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1937</span> Number theory</div>
-        <p>Start with any positive integer. If even, halve it. If odd, triple and add one. Does every starting value eventually reach 1? Proposed by Lothar Collatz in 1937, verified computationally to 2<sup>68</sup>, yet completely unproven. Erd&#337;s said &ldquo;Mathematics may not be ready for such problems.&rdquo;</p>
-      </a>
-
-      <a href="page.html?doc=08-chromatic-number" class="card" style="text-decoration:none;color:inherit">
-        <h3>P8: Chromatic Number of the Plane</h3>
-        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1950</span> Combinatorial geometry</div>
-        <p>What is the minimum number of colors needed to color every point of the Euclidean plane such that no two points at distance exactly 1 share the same color? Known to be between 5 and 7 since de Grey (2018) improved the lower bound. The gap between 5 and 7 remains one of the most tantalizing open problems in combinatorics.</p>
-      </a>
-
-      <a href="page.html?doc=09-komlos-conjecture" class="card" style="text-decoration:none;color:inherit">
-        <h3>P9: The Koml&oacute;s Conjecture</h3>
-        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1981</span> Discrepancy theory</div>
-        <p>Given n vectors in R<sup>d</sup>, each of Euclidean norm at most 1, can we always assign signs &plusmn;1 to achieve a signed sum with L<sup>&infin;</sup> norm bounded by an absolute constant independent of d? Banaszczyk (1998) proved an O(sqrt(log d)) bound. The conjectured O(1) bound remains open.</p>
-      </a>
+    <div class="card">
+      <h3>Non-Deterministic System Testing</h3>
+      <div><span class="tag tag-ai">AI</span> <span class="tag tag-ml">ML</span></div>
+      <p>Agentic AI breaks both deterministic software testing and fixed-input ML evaluation. Agents take multi-step journeys where each step's output depends on prior steps. How do you write tests for a system that gives different answers each time?</p>
+      <p><strong>The question:</strong> What does "correct" mean for a non-deterministic multi-step system?</p>
+      <div class="source">MachineLearningMastery.com &middot; 5 Production Scaling Challenges 2026</div>
+      <div class="status status-open">OPEN — our Nyquist verification is one approach</div>
     </div>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <h2>Emergent Behavior &amp; Complex Systems</h2>
-    <!-- ═══════════════════════════════════════════ -->
+    <div class="card">
+      <h3>Confidence-Aware Routing</h3>
+      <div><span class="tag tag-ai">AI</span></div>
+      <p>Route tasks to different-capability models based on estimated difficulty. Small model handles easy tasks, large model handles hard ones. The routing decision itself is an open problem — how does the router know what's hard?</p>
+      <p><strong>Connection:</strong> GSD model profiles (quality/balanced/budget) are manual confidence routing. Automating it is the frontier.</p>
+      <div class="source">arXiv:2601.04861</div>
+      <div class="status status-watching">WATCHING — maps to our model profile system</div>
+    </div>
+  </div>
 
-    <div class="card-grid">
-      <a href="page.html?doc=10-ai-math-discovery" class="card" style="text-decoration:none;color:inherit">
-        <h3>P10: AI-Assisted Mathematical Discovery</h3>
-        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-math">Math</span> Discovery frontier</div>
-        <p>Can AI systems generate genuinely novel mathematical conjectures &mdash; not just verify human conjectures or search parameter spaces, but identify structural patterns that humans have missed? FunSearch (Romera-Paredes et al., 2024) and AlphaProof suggest the boundary is shifting, but the epistemological question remains open.</p>
-      </a>
-
-      <a href="page.html?doc=11-kuramoto-sync" class="card" style="text-decoration:none;color:inherit">
-        <h3>P11: Kuramoto Synchronization</h3>
-        <div class="meta"><span class="tag tag-emergent">Emergent</span> <span class="tag tag-active">Active</span> Network dynamics</div>
-        <p>When does a network of coupled oscillators synchronize? The Kuramoto model provides a clean mathematical framework, but the general problem on arbitrary graph topologies is unsolved. This maps directly to the helium corridor cooperative model: distributed nodes with heterogeneous coupling, partial observation, and network resilience requirements.</p>
-      </a>
-
-      <a href="page.html?doc=12-machine-unlearning" class="card" style="text-decoration:none;color:inherit">
-        <h3>P12: Machine Unlearning</h3>
-        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-security">Security</span> GUPP/DACP alignment</div>
-        <p>Can a trained model provably forget specific training data without full retraining? This is not just a privacy regulation compliance question &mdash; it is fundamental to the GUPP (Generalized User Privacy Protocol) and DACP (Distributed Agent Consent Protocol). If unlearning is impossible to verify, consent frameworks lose their enforcement mechanism.</p>
-      </a>
+  <h2>Mathematics — Tractable Open Problems</h2>
+  <p style="font-size:0.85rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif;">
+    Not the Millennium Prize problems (those are probably out of reach). These are problems where progress is possible,
+    partial results exist, and the tools we're building might contribute. Focus on problems that connect to our TSPB layers.
+  </p>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Collatz Conjecture (3n+1)</h3>
+      <div><span class="tag tag-math">Math</span></div>
+      <p>Take any positive integer. If even, halve it. If odd, triple and add 1. Does this always reach 1? Verified computationally to 2.95 &times; 10&sup2;&sup0; but unproven. Terence Tao (2019) proved "almost all" orbits reach values close to 1.</p>
+      <p><strong>Connection:</strong> L-systems are iterative rewriting. Collatz is iterative transformation. Can we visualize Collatz orbits as L-system trees?</p>
+      <div class="source">TSPB Layer 8 (L-Systems) &middot; Tao 2019 arXiv:1909.03562</div>
+      <div class="status status-watching">WATCHING — visualization may reveal structure</div>
     </div>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <h2>Problem Index</h2>
-    <!-- ═══════════════════════════════════════════ -->
+    <div class="card">
+      <h3>Chromatic Number of the Plane</h3>
+      <div><span class="tag tag-math">Math</span></div>
+      <p>How many colors do you need to color every point in the plane so that no two points exactly 1 unit apart share a color? Known: between 5 and 7. The lower bound was raised from 4 to 5 in 2018 by amateur mathematician Aubrey de Grey.</p>
+      <p><strong>Connection:</strong> Unit distance = unit circle. The problem lives on our foundational object. Computational search + graph theory.</p>
+      <div class="source">TSPB Layer 1 (Unit Circle) &middot; de Grey 2018 arXiv:1804.02385</div>
+      <div class="status status-open">OPEN — computational approaches viable</div>
+    </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Problem</th>
-          <th>Domain</th>
-          <th>Status</th>
-          <th>Connection</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>P1</td>
-          <td><a href="page.html?doc=01-cot-faithfulness">CoT Faithfulness</a></td>
-          <td>AI Reasoning</td>
-          <td class="status-active">Active</td>
-          <td>Multi-agent verification, trust system</td>
-        </tr>
-        <tr>
-          <td>P2</td>
-          <td><a href="page.html?doc=02-thinking-divergence">Thinking Token Divergence</a></td>
-          <td>AI Reasoning</td>
-          <td class="status-active">Active</td>
-          <td>Extended thinking audit, GSD executor</td>
-        </tr>
-        <tr>
-          <td>P3</td>
-          <td><a href="page.html?doc=03-cot-monitoring">CoT Monitoring at Scale</a></td>
-          <td>AI/Testing</td>
-          <td class="status-active">Active</td>
-          <td>Convoy model verification pipeline</td>
-        </tr>
-        <tr>
-          <td>P4</td>
-          <td><a href="page.html?doc=04-distributed-intelligence">Distributed Intelligence</a></td>
-          <td>Multi-Agent</td>
-          <td class="status-active">Active</td>
-          <td>Gastown convoy, GUPP federation</td>
-        </tr>
-        <tr>
-          <td>P5</td>
-          <td><a href="page.html?doc=05-nondeterministic-testing">Nondeterministic Testing</a></td>
-          <td>Testing</td>
-          <td class="status-active">Active</td>
-          <td>21,298 tests, metamorphic testing</td>
-        </tr>
-        <tr>
-          <td>P6</td>
-          <td><a href="page.html?doc=06-confidence-routing">Confidence Routing</a></td>
-          <td>AI/Trust</td>
-          <td class="status-partial">Partial</td>
-          <td>Trust system, FoxFiber routing</td>
-        </tr>
-        <tr>
-          <td>P7</td>
-          <td><a href="page.html?doc=07-collatz">Collatz Conjecture</a></td>
-          <td>Number Theory</td>
-          <td class="status-open">Open</td>
-          <td>Convergence analysis, stopping time</td>
-        </tr>
-        <tr>
-          <td>P8</td>
-          <td><a href="page.html?doc=08-chromatic-number">Chromatic Number</a></td>
-          <td>Combinatorics</td>
-          <td class="status-open">Open</td>
-          <td>Graph coloring, resource allocation</td>
-        </tr>
-        <tr>
-          <td>P9</td>
-          <td><a href="page.html?doc=09-komlos-conjecture">Komlos Conjecture</a></td>
-          <td>Discrepancy Theory</td>
-          <td class="status-open">Open</td>
-          <td>Load balancing, agent assignment</td>
-        </tr>
-        <tr>
-          <td>P10</td>
-          <td><a href="page.html?doc=10-ai-math-discovery">AI Math Discovery</a></td>
-          <td>AI/Math</td>
-          <td class="status-partial">Partial</td>
-          <td>Muse council, Rosetta clusters</td>
-        </tr>
-        <tr>
-          <td>P11</td>
-          <td><a href="page.html?doc=11-kuramoto-sync">Kuramoto Synchronization</a></td>
-          <td>Complex Systems</td>
-          <td class="status-active">Active</td>
-          <td>HEL corridor, cooperative model</td>
-        </tr>
-        <tr>
-          <td>P12</td>
-          <td><a href="page.html?doc=12-machine-unlearning">Machine Unlearning</a></td>
-          <td>AI/Privacy</td>
-          <td class="status-partial">Partial</td>
-          <td>GUPP/DACP, consent enforcement</td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
+    <div class="card">
+      <h3>Komlos Conjecture</h3>
+      <div><span class="tag tag-math">Math</span></div>
+      <p>Given n vectors in R&sup d; with Euclidean norm at most 1, can you always assign signs &plusmn;1 to achieve a signed sum with infinity norm O(1)? Best known bound is O(&radic;log n). Closing the gap is a major open problem in discrepancy theory.</p>
+      <p><strong>Connection:</strong> Vector balancing = resource allocation = agent task distribution. If we solve it, our convoy model gets optimal load balancing.</p>
+      <div class="source">TSPB Layer 4 (Vector Calculus) &middot; Ben Green's Open Problems list</div>
+      <div class="status status-open">OPEN — partial progress possible</div>
+    </div>
 
-  <footer>
-    <p>OPEN &mdash; Unsolved Problems &amp; Open Research &middot; PNW Research Series &middot; gsd-skill-creator</p>
-  </footer>
+    <div class="card">
+      <h3>AI for Mathematical Discovery</h3>
+      <div><span class="tag tag-math">Math</span> <span class="tag tag-ai">AI</span></div>
+      <p>Can language models contribute to mathematical proofs? FrontierMath benchmark shows current models solve &lt;2% of research-level math problems. But they excel at pattern recognition in large datasets — can they find structure humans miss?</p>
+      <p><strong>Connection:</strong> Our cross-reference graph (739 edges, 177 nodes) is a dataset. Can we find unexpected connections computationally?</p>
+      <div class="source">Epoch AI FrontierMath &middot; Nature 2025 npj AI</div>
+      <div class="status status-active">ACTIVE — we search for cross-connections in every sweep</div>
+    </div>
+  </div>
+
+  <h2>Emergent Behavior &amp; Complex Systems</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Kuramoto Synchronization Thresholds</h3>
+      <div><span class="tag tag-math">Math</span> <span class="tag tag-ml">ML</span></div>
+      <p>When does a population of coupled oscillators synchronize? The Kuramoto model gives critical coupling strength K_c, but for heterogeneous populations with non-uniform natural frequencies, the transition dynamics are poorly understood.</p>
+      <p><strong>Connection:</strong> Our firefly simulation implements Kuramoto coupling. We can run experiments on synchronization thresholds with different parameters and measure the results.</p>
+      <div class="source">vehicle.js fireflies &middot; Strogatz 2003 &middot; TSPB Layer 1</div>
+      <div class="status status-active">ACTIVE — running experiments in simulation</div>
+    </div>
+
+    <div class="card">
+      <h3>Machine Unlearning</h3>
+      <div><span class="tag tag-ai">AI</span> <span class="tag tag-safety">Safety</span></div>
+      <p>Can you make a model forget specific training data without retraining from scratch? Critical for privacy (GDPR right to erasure) and safety (removing dangerous capabilities). Current approaches approximate unlearning but don't guarantee it.</p>
+      <p><strong>Connection:</strong> Our trust system has relationship removal (archive/purge). The analogy to machine unlearning is structural.</p>
+      <div class="source">arXiv:2501.04952 &middot; Trust system design</div>
+      <div class="status status-watching">WATCHING — privacy + safety intersection</div>
+    </div>
+  </div>
+
+  <h2>How We Work on These</h2>
+  <div class="card-grid" style="grid-template-columns:1fr;">
+    <div class="card" style="max-width:100%;">
+      <p style="color:var(--text); font-size:0.9rem;">
+        We don't pretend we'll solve the Collatz conjecture on a Tuesday afternoon. But we can:
+      </p>
+      <ul style="font-size:0.85rem; color:var(--dim); font-family:system-ui,sans-serif; padding-left:1.2rem; margin-top:0.5rem; line-height:1.8;">
+        <li><strong>Watch</strong> — track papers, note progress, understand the landscape</li>
+        <li><strong>Connect</strong> — find where open problems touch our existing work (TSPB layers, simulation, cross-references)</li>
+        <li><strong>Experiment</strong> — run computational experiments in the simulation, the math coprocessor, or Python</li>
+        <li><strong>Teach</strong> — write plain-language explanations that help us (and others) understand the problem deeply</li>
+        <li><strong>Contribute</strong> — if we find something, document it rigorously and submit it</li>
+      </ul>
+      <p style="color:var(--dim); font-size:0.8rem; margin-top:0.8rem; font-family:system-ui,sans-serif;">
+        Updated during Artemis II sweeps and 360 engine releases. Each sweep scans arXiv, NTRS, and journals.
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="../LIVE/index.html">Live</a> &middot;
+  <a href="../index.html">Tibsfox Research</a> &middot;
+  OPEN &mdash; Unsolved problems and research frontier &middot;
+  <a href="https://tibsfox.com">tibsfox.com</a>
+</footer>
 </body>
 </html>
