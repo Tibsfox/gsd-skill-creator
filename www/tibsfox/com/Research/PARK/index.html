@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PARK — Parks &amp; Trails, Puget Sound Region</title>
+<style>
+:root { --bg:#060a10; --panel:#0a1018; --border:rgba(255,255,255,0.06); --text:#c8d0e0; --dim:rgba(255,255,255,0.35); --green:#2e7d32; --green-l:#66bb6a; --gold:#C4A35A; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,serif; line-height:1.6; }
+a { color:var(--gold); text-decoration:none; } a:hover { color:#e0cc80; }
+header { background:linear-gradient(135deg,#060a10 0%,#0a1e14 40%,var(--green) 100%); padding:2rem; text-align:center; border-bottom:2px solid var(--green-l); }
+header h1 { font-size:1.8rem; color:#fff; font-weight:400; }
+header .subtitle { color:var(--green-l); font-size:0.9rem; font-style:italic; margin-top:0.3rem; }
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.82rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.6rem; } header nav a:hover { color:#fff; }
+main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+h2 { font-size:1rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.1em; margin:2rem 0 1rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); font-family:system-ui,sans-serif; }
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1rem; }
+.card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1.2rem; }
+.card:hover { border-color:rgba(46,125,50,0.3); }
+.card h3 { font-size:1rem; color:#fff; margin-bottom:0.3rem; }
+.card p { font-size:0.82rem; color:var(--dim); line-height:1.5; font-family:system-ui,sans-serif; margin-top:0.3rem; }
+.tag { display:inline-block; padding:0.1rem 0.4rem; border-radius:3px; font-size:0.6rem; font-family:system-ui,sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; margin-right:0.2rem; border:1px solid; }
+.tag-snohomish { background:rgba(46,125,50,0.12); color:var(--green-l); border-color:rgba(46,125,50,0.3); }
+.tag-king { background:rgba(21,101,192,0.12); color:#64b5f6; border-color:rgba(21,101,192,0.3); }
+.tag-mukilteo { background:rgba(196,163,90,0.12); color:var(--gold); border-color:rgba(196,163,90,0.3); }
+.tag-everett { background:rgba(46,125,50,0.12); color:var(--green-l); border-color:rgba(46,125,50,0.3); }
+.tag-edmonds { background:rgba(100,181,246,0.12); color:#90caf9; border-color:rgba(100,181,246,0.3); }
+.tag-seattle { background:rgba(21,101,192,0.12); color:#64b5f6; border-color:rgba(21,101,192,0.3); }
+.tag-ballard { background:rgba(21,101,192,0.12); color:#64b5f6; border-color:rgba(21,101,192,0.3); }
+.tag-kirkland { background:rgba(21,101,192,0.12); color:#64b5f6; border-color:rgba(21,101,192,0.3); }
+.tag-renton { background:rgba(21,101,192,0.12); color:#64b5f6; border-color:rgba(21,101,192,0.3); }
+footer { max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center; font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif; }
+@media(max-width:640px) { .card-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Parks &amp; Trails</h1>
+  <div class="subtitle">Puget Sound region &mdash; Snohomish County to King County</div>
+  <nav><a href="../LIVE/index.html">Live</a> <a href="../MUK/index.html">MUK</a> <a href="../BEACH/index.html">Beaches</a> <a href="../index.html">Research</a></nav>
+</header>
+<main>
+
+  <h2>Snohomish County — Waterfront</h2>
+  <div class="card-grid">
+    <div class="card"><h3>Kayak Point County Park</h3><div><span class="tag tag-snohomish">Snohomish Co</span></div><p>300-ft fishing pier, boat launch, camping, beach. Best crabbing pier in the county. 15 mi north of Mukilteo on Marine View Dr.</p></div>
+    <div class="card"><h3>Mukilteo Lighthouse Park</h3><div><span class="tag tag-mukilteo">Mukilteo</span></div><p>Historic 1906 lighthouse, accessible beach, boat launch, picnic area. Adjacent to ferry terminal and new fishing pier.</p></div>
+    <div class="card"><h3>Picnic Point Park</h3><div><span class="tag tag-snohomish">Snohomish Co</span></div><p>700 ft shoreline, beach at low tide, ravine trail to water. Quieter alternative to Mukilteo. 3 mi south.</p></div>
+    <div class="card"><h3>Meadowdale Beach Park</h3><div><span class="tag tag-snohomish">Snohomish Co</span></div><p>1.25-mile trail through old-growth to beach. Loons Creek estuary. No vehicle access to beach. Best beachcombing south of Mukilteo.</p></div>
+    <div class="card"><h3>Howarth Park</h3><div><span class="tag tag-everett">Everett</span></div><p>City park with beach access, playground, trail through ravine, railroad crossing to shoreline. Views of Whidbey Island.</p></div>
+    <div class="card"><h3>Jetty Island</h3><div><span class="tag tag-everett">Everett</span></div><p>Free summer ferry from Marine Park. 2-mile sandy beach, warm shallow water, bird watching. July-Sept only.</p></div>
+    <div class="card"><h3>Langus Riverfront Park</h3><div><span class="tag tag-everett">Everett</span></div><p>Snohomish River estuary trails, bird watching, boat launch to river. Spencer Island wildlife area adjacent.</p></div>
+  </div>
+
+  <h2>South Snohomish / North King — Waterfront</h2>
+  <div class="card-grid">
+    <div class="card"><h3>Edmonds Waterfront Park</h3><div><span class="tag tag-edmonds">Edmonds</span></div><p>Fishing pier, Brackett's Landing underwater dive park, marina, beach. Marine sanctuary. Ferry terminal adjacent.</p></div>
+    <div class="card"><h3>Richmond Beach Saltwater Park</h3><div><span class="tag tag-king">King Co</span> <span class="tag tag-seattle">Shoreline</span></div><p>Beach access, railroad crossing, picnic shelters. Views south toward Seattle skyline and Olympics.</p></div>
+    <div class="card"><h3>Carkeek Park</h3><div><span class="tag tag-seattle">Seattle</span></div><p>220 acres. Beach via pedestrian bridge over tracks. Piper's Creek salmon spawning (Nov-Dec). Tide pools at low tide. Forest trails.</p></div>
+    <div class="card"><h3>Golden Gardens Park</h3><div><span class="tag tag-ballard">Ballard</span></div><p>Largest beach in north Seattle. Boat launch, fire pits, off-leash dog area. Sunset views of Olympic Mountains. Wetland loop trail.</p></div>
+  </div>
+
+  <h2>Seattle — Lake Washington &amp; Ship Canal</h2>
+  <div class="card-grid">
+    <div class="card"><h3>Magnuson Park (Sand Point)</h3><div><span class="tag tag-seattle">Seattle</span></div><p>350 acres. Public boat launch on Lake Washington, beach, fishing, sports fields, community gardens, art walk. Former Naval Air Station.</p></div>
+    <div class="card"><h3>Seward Park</h3><div><span class="tag tag-seattle">Seattle</span></div><p>300 acres on Bailey Peninsula. Old-growth forest, 2.4-mile loop trail, fishing pier, swimming beach, amphitheater. Eagle nesting.</p></div>
+    <div class="card"><h3>Gas Works Park</h3><div><span class="tag tag-seattle">Seattle</span></div><p>Lake Union waterfront. Former gasification plant. Kite hill with skyline views. Kayak/paddleboard launch. No fishing.</p></div>
+    <div class="card"><h3>Carl S. English Jr. Botanical Garden</h3><div><span class="tag tag-ballard">Ballard</span></div><p>At the Ballard Locks. 7 acres, 500+ species, free admission. Adjacent to fish ladder and lock viewing.</p></div>
+  </div>
+
+  <h2>East Side — Kirkland, Mercer Island, Renton</h2>
+  <div class="card-grid">
+    <div class="card"><h3>Marina Park (Kirkland)</h3><div><span class="tag tag-kirkland">Kirkland</span></div><p>Waterfront park, fishing pier, swimming beach, public dock. Downtown Kirkland walking distance. Lake Washington access.</p></div>
+    <div class="card"><h3>Luther Burbank Park</h3><div><span class="tag tag-king">Mercer Island</span></div><p>North end of Mercer Island. Fishing dock, swimming, off-leash dog park, amphitheater. Lake Washington views.</p></div>
+    <div class="card"><h3>Gene Coulon Memorial Park</h3><div><span class="tag tag-renton">Renton</span></div><p>South end of Lake Washington. Boat launch, fishing pier, swimming, 0.5-mile boardwalk, restaurants. Large public park.</p></div>
+    <div class="card"><h3>Kenmore Boat Launch</h3><div><span class="tag tag-king">Kenmore</span></div><p>North end of Lake Washington. Public ramp, access to Sammamish River. Burke-Gilman Trail passes through. Log Boom Park adjacent.</p></div>
+  </div>
+
+  <h2>Inland Trails</h2>
+  <div class="card-grid">
+    <div class="card"><h3>Interurban Trail</h3><div><span class="tag tag-snohomish">Snohomish Co</span></div><p>Everett to Seattle on former electric railway. Flat, paved, good for cycling. Connects to Burke-Gilman at county line.</p></div>
+    <div class="card"><h3>Burke-Gilman Trail</h3><div><span class="tag tag-king">King Co</span></div><p>27 miles. Ballard to Kenmore along Ship Canal and Lake Washington north shore. Connects to Sammamish River Trail east.</p></div>
+    <div class="card"><h3>Centennial Trail</h3><div><span class="tag tag-snohomish">Snohomish Co</span></div><p>30 miles. Snohomish to Arlington along the Stillaguamish River. Flat, paved, good for cycling and running.</p></div>
+  </div>
+
+</main>
+<footer><a href="../LIVE/index.html">Live</a> &middot; <a href="../MUK/index.html">MUK</a> &middot; <a href="../BEACH/index.html">Beaches</a> &middot; <a href="../index.html">Research</a> &middot; PARK &mdash; Puget Sound Parks &amp; Trails</footer>
+</body>
+</html>
