@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Model — Scenario Analysis — HEL Research</title>
+    <title>Financial Model -- Scenario Analysis — HEL Research</title>
     <style>
         :root {
             --bg: #1a1a2e;
@@ -54,152 +54,308 @@
         HEL — Helium Supply Chain &amp; Pacific Rim Semiconductor Infrastructure<br>
         PNW Research Series · <a href="../index.html">Back to HEL Index</a> · <a href="../../index.html">Series Index</a>
     </div>
-    <h1 id="financial-model-scenario-analysis">Financial Model —
+    <h1 id="financial-model-scenario-analysis">Financial Model –
     Scenario Analysis</h1>
-    <h2 id="model-10-node-virtual-plant-1-hub">Model: 10-Node Virtual
-    Plant + 1 Hub</h2>
-    <h3 id="capital-budget">Capital Budget</h3>
+    <h2 id="model-overview">Model Overview</h2>
+    <p>This document presents the financial model for a Phase 1 helium
+    cooperative operating a single purification and liquefaction hub in
+    the I-5 corridor (Document 18), serving 5-10 customers (fabs, labs,
+    universities per Documents 7 and 8), with crude helium sourced from
+    US producers (Document 17). The model is designed to answer one
+    question: <strong>under what conditions does this operation make
+    money, and under what conditions does it fail?</strong></p>
+    <p>Three scenarios are modeled in detail: Bull (crisis pricing
+    persists 3+ years), Base (Qatar resumes in 18 months, prices
+    normalize), and Bear (market collapse plus operational problems).
+    Monthly cash flow projections for Year 1 are provided for all three
+    scenarios. Sensitivity analysis identifies the variables that matter
+    most.</p>
+    <p>The financial model connects directly to the capital costs and
+    site requirements in Document 18 (hub design), the revenue
+    assumptions from Document 20 (East Asian demand and pricing), the
+    funding sources from Document 9 (economics) and Document 14 (CHIPS
+    Act compliance), and the operating structure from Document 19 (co-op
+    playbook).</p>
+    <h2 id="capital-budget">Capital Budget</h2>
     <table>
+    <colgroup>
+    <col style="width: 31%" />
+    <col style="width: 31%" />
+    <col style="width: 36%" />
+    </colgroup>
     <thead>
     <tr>
     <th>Item</th>
     <th>Cost</th>
+    <th>Notes</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>Hub (membrane + PSA + liquefier + facility)</td>
-    <td>$4M</td>
+    <td>Hub facility (membrane + PSA + liquefier)</td>
+    <td>$4,000,000</td>
+    <td>Per Document 18 small hub specification</td>
     </tr>
     <tr>
-    <td>Quality lab</td>
-    <td>$400K</td>
+    <td>Quality lab (GC, mass spec, moisture analysis)</td>
+    <td>$400,000</td>
+    <td>Required for Grade-A and Research Grade certification</td>
     </tr>
     <tr>
     <td>Cylinder/dewar fill station</td>
-    <td>$350K</td>
+    <td>$350,000</td>
+    <td>Including high-pressure compressor and manifold</td>
     </tr>
     <tr>
-    <td>2 recycling systems (for fab customers)</td>
-    <td>$600K</td>
+    <td>Recycling systems (2 units for fab customers)</td>
+    <td>$600,000</td>
+    <td>Cryomech HRS units per Document 21</td>
     </tr>
     <tr>
     <td>Working capital (first 6 months crude purchases)</td>
-    <td>$500K</td>
+    <td>$500,000</td>
+    <td>Per Document 17 sourcing costs at Wyoming pricing</td>
     </tr>
     <tr>
-    <td>Permitting, engineering, legal</td>
-    <td>$300K</td>
+    <td>Permitting, engineering, legal, co-op formation</td>
+    <td>$300,000</td>
+    <td>Per Documents 14 and 19 regulatory and legal path</td>
     </tr>
     <tr>
     <td><strong>Total Phase 1 Capital</strong></td>
-    <td><strong>$6.15M</strong></td>
+    <td><strong>$6,150,000</strong></td>
+    <td></td>
     </tr>
     </tbody>
     </table>
-    <h3 id="funding-mix">Funding Mix</h3>
+    <h3 id="capital-budget-sensitivity">Capital Budget Sensitivity</h3>
+    <p>The $6.15M budget assumes median vendor pricing and standard site
+    preparation. Actual costs may vary:</p>
     <table>
+    <thead>
+    <tr>
+    <th>Variable</th>
+    <th>Low Case</th>
+    <th>Base Case</th>
+    <th>High Case</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Hub equipment</td>
+    <td>$3.2M</td>
+    <td>$4.0M</td>
+    <td>$5.5M</td>
+    </tr>
+    <tr>
+    <td>Quality lab</td>
+    <td>$300K</td>
+    <td>$400K</td>
+    <td>$500K</td>
+    </tr>
+    <tr>
+    <td>Fill station</td>
+    <td>$250K</td>
+    <td>$350K</td>
+    <td>$500K</td>
+    </tr>
+    <tr>
+    <td>Recycling systems</td>
+    <td>$500K</td>
+    <td>$600K</td>
+    <td>$800K</td>
+    </tr>
+    <tr>
+    <td>Working capital</td>
+    <td>$400K</td>
+    <td>$500K</td>
+    <td>$700K</td>
+    </tr>
+    <tr>
+    <td>Soft costs</td>
+    <td>$200K</td>
+    <td>$300K</td>
+    <td>$500K</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>$4.85M</strong></td>
+    <td><strong>$6.15M</strong></td>
+    <td><strong>$8.5M</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The low case assumes favorable vendor negotiations and an
+    existing industrial building requiring minimal modification. The
+    high case assumes premium equipment, new construction, and extended
+    engineering. The funding mix below is sized for the base case; the
+    high case would require approximately $2.35M in additional funding,
+    most likely through a larger SBA or bank loan.</p>
+    <h2 id="funding-mix">Funding Mix</h2>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 17%" />
+    <col style="width: 17%" />
+    <col style="width: 15%" />
+    <col style="width: 26%" />
+    <col style="width: 22%" />
+    </colgroup>
     <thead>
     <tr>
     <th>Source</th>
     <th>Amount</th>
     <th>Terms</th>
+    <th>Probability</th>
+    <th>Timeline</th>
     </tr>
     </thead>
     <tbody>
     <tr>
     <td>CHIPS Act supply chain grant</td>
-    <td>$2M</td>
-    <td>Grant (non-dilutive)</td>
+    <td>$2,000,000</td>
+    <td>Grant (non-dilutive, no repayment)</td>
+    <td>Medium-High</td>
+    <td>6-12 months from application</td>
     </tr>
     <tr>
     <td>WA ICAP grant</td>
-    <td>$500K</td>
+    <td>$500,000</td>
     <td>Grant</td>
+    <td>Medium</td>
+    <td>3-6 months</td>
     </tr>
     <tr>
-    <td>Member equity (5 founding members × $200K)</td>
-    <td>$1M</td>
-    <td>Patronage equity</td>
+    <td>Member equity (5 founders x $200K)</td>
+    <td>$1,000,000</td>
+    <td>Patronage equity, returned via revolving fund</td>
+    <td>High (within co-op control)</td>
+    <td>Month 1-3</td>
     </tr>
     <tr>
-    <td>SBA loan</td>
-    <td>$1.5M</td>
-    <td>10-year, 6%</td>
+    <td>SBA 504 loan</td>
+    <td>$1,500,000</td>
+    <td>10-year, ~6% fixed</td>
+    <td>High</td>
+    <td>2-4 months</td>
     </tr>
     <tr>
     <td>Bank loan (equipment-secured)</td>
-    <td>$1.15M</td>
-    <td>7-year, 7%</td>
+    <td>$1,150,000</td>
+    <td>7-year, ~7% variable</td>
+    <td>High</td>
+    <td>2-4 months</td>
     </tr>
     <tr>
     <td><strong>Total</strong></td>
-    <td><strong>$6.15M</strong></td>
+    <td><strong>$6,150,000</strong></td>
+    <td></td>
+    <td></td>
     <td></td>
     </tr>
     </tbody>
     </table>
+    <p><strong>Grant dependency analysis:</strong> The base funding mix
+    includes $2.5M in grants (CHIPS Act + ICAP). If both grants are
+    received, the co-op’s debt service is manageable at approximately
+    $350K/year. If only one is received, debt increases by $500K-$2M,
+    adding $60K-$240K/year in debt service. If neither grant is
+    received, total debt rises to $5.15M and annual debt service
+    approaches $700K – still viable in Scenarios A and B but fatal in
+    Scenario C.</p>
+    <p><strong>Recommendation:</strong> Apply for all available grants
+    (CHIPS Act, ICAP, USDA Rural Business if applicable per Document 9)
+    but size the operation to survive with member equity plus commercial
+    debt alone. Grant funding accelerates payback and enables expansion;
+    it should not be required for survival.</p>
     <h2 id="revenue-model">Revenue Model</h2>
-    <h3 id="product-lines">Product Lines</h3>
+    <h3 id="product-lines-detailed">Product Lines (Detailed)</h3>
     <table>
     <colgroup>
-    <col style="width: 12%" />
-    <col style="width: 21%" />
-    <col style="width: 22%" />
-    <col style="width: 21%" />
-    <col style="width: 22%" />
+    <col style="width: 9%" />
+    <col style="width: 6%" />
+    <col style="width: 13%" />
+    <col style="width: 13%" />
+    <col style="width: 23%" />
+    <col style="width: 32%" />
     </colgroup>
     <thead>
     <tr>
     <th>Product</th>
-    <th>Price (Normal)</th>
-    <th>Price (Crisis)</th>
-    <th>Monthly Volume</th>
-    <th>Monthly Revenue</th>
+    <th>Unit</th>
+    <th>Normal Price</th>
+    <th>Crisis Price</th>
+    <th>Year 1 Monthly Volume</th>
+    <th>Year 1 Monthly Revenue (Base)</th>
     </tr>
     </thead>
     <tbody>
     <tr>
     <td>Grade-A gas (99.999%)</td>
-    <td>$30/L equiv</td>
-    <td>$75/L equiv</td>
+    <td>Liter equivalent</td>
+    <td>$30/L</td>
+    <td>$75/L</td>
     <td>5,000 L</td>
-    <td>$150K–$375K</td>
+    <td>$150K-$375K</td>
     </tr>
     <tr>
     <td>Research Grade (99.9999%)</td>
+    <td>Liter</td>
     <td>$100/L</td>
     <td>$250/L</td>
     <td>500 L</td>
-    <td>$50K–$125K</td>
+    <td>$50K-$125K</td>
     </tr>
     <tr>
     <td>Recycling service contracts</td>
-    <td>$5K/month</td>
-    <td>$8K/month</td>
+    <td>Monthly fee</td>
+    <td>$5K/mo</td>
+    <td>$8K/mo</td>
     <td>3 clients</td>
-    <td>$15K–$24K</td>
+    <td>$15K-$24K</td>
     </tr>
     <tr>
     <td>Custom gas mixtures</td>
-    <td>$50–$200/cyl</td>
-    <td>$100–$400/cyl</td>
+    <td>Cylinder</td>
+    <td>$50-$200/cyl</td>
+    <td>$100-$400/cyl</td>
     <td>100 cyl</td>
-    <td>$10K–$20K</td>
-    </tr>
-    <tr>
-    <td><strong>Total Monthly Revenue</strong></td>
-    <td><strong>$225K</strong></td>
-    <td><strong>$544K</strong></td>
-    <td></td>
-    <td></td>
+    <td>$10K-$20K</td>
     </tr>
     </tbody>
     </table>
-    <h2 id="scenario-analysis">Scenario Analysis</h2>
-    <h3 id="scenario-a-crisis-pricing-holds-3-years">Scenario A: Crisis
-    Pricing Holds 3+ Years</h3>
+    <p><strong>Price rationale:</strong> Grade-A pricing is benchmarked
+    against current merchant market rates. The co-op prices at 10-20%
+    below oligopoly pricing while maintaining healthy margins, because
+    the cooperative structure eliminates shareholder profit extraction.
+    Research Grade commands a 3x+ premium because achieving 99.9999%
+    purity requires additional processing steps and quality
+    certification that few small suppliers can provide. Recycling
+    service contracts (Document 21) are priced to cover equipment
+    amortization, maintenance, and a modest margin over 5-7 years.</p>
+    <p><strong>Volume rationale:</strong> 5,000 L/month of Grade-A
+    product is approximately 1% of the East Asian semiconductor TAM
+    described in Document 20. This is conservative – it represents
+    serving 3-5 mid-sized customers in the I-5 corridor (Document 7)
+    plus occasional spot sales. Growth to 10,000+ L/month by Year 3 is
+    achievable if the co-op establishes reliability.</p>
+    <h2 id="scenario-a-bull-case-crisis-pricing-holds-3-years">Scenario
+    A: Bull Case – Crisis Pricing Holds 3+ Years</h2>
+    <p><strong>Assumptions:</strong> Qatar force majeure continues
+    through 2028. Spot helium prices remain at $50-$100/L. Russian Amur
+    plant continues underperforming. New global capacity does not
+    materially arrive until 2029. Co-op launches on schedule with full
+    grant funding.</p>
+    <h3 id="annual-summary">Annual Summary</h3>
     <table>
+    <colgroup>
+    <col style="width: 8%" />
+    <col style="width: 12%" />
+    <col style="width: 8%" />
+    <col style="width: 17%" />
+    <col style="width: 19%" />
+    <col style="width: 17%" />
+    <col style="width: 16%" />
+    </colgroup>
     <thead>
     <tr>
     <th>Year</th>
@@ -207,258 +363,1247 @@
     <th>COGS</th>
     <th>Gross Margin</th>
     <th>Operating Exp</th>
-    <th>Net</th>
+    <th>Debt Service</th>
+    <th>Net Income</th>
     </tr>
     </thead>
     <tbody>
     <tr>
     <td>1</td>
-    <td>$3.5M</td>
-    <td>$1.5M</td>
-    <td>$2.0M</td>
-    <td>$800K</td>
-    <td>$1.2M</td>
+    <td>$3,500,000</td>
+    <td>$1,500,000</td>
+    <td>$2,000,000</td>
+    <td>$800,000</td>
+    <td>$350,000</td>
+    <td>$850,000</td>
     </tr>
     <tr>
     <td>2</td>
-    <td>$5.5M</td>
-    <td>$2.2M</td>
-    <td>$3.3M</td>
-    <td>$900K</td>
-    <td>$2.4M</td>
+    <td>$5,500,000</td>
+    <td>$2,200,000</td>
+    <td>$3,300,000</td>
+    <td>$900,000</td>
+    <td>$350,000</td>
+    <td>$2,050,000</td>
     </tr>
     <tr>
     <td>3</td>
-    <td>$6.5M</td>
-    <td>$2.5M</td>
-    <td>$4.0M</td>
-    <td>$1.0M</td>
-    <td>$3.0M</td>
+    <td>$6,500,000</td>
+    <td>$2,500,000</td>
+    <td>$4,000,000</td>
+    <td>$1,000,000</td>
+    <td>$350,000</td>
+    <td>$2,650,000</td>
     </tr>
     </tbody>
     </table>
-    <p><strong>Payback: &lt;2 years.</strong> Patronage dividends begin
-    Year 2. Expansion capital available Year 3.</p>
-    <h3
-    id="scenario-b-qatar-resumes-in-18-months-prices-normalize">Scenario
-    B: Qatar Resumes in 18 Months (Prices Normalize)</h3>
+    <p><strong>Payback: 18-22 months on member equity.</strong>
+    Patronage dividends begin Year 2. Expansion capital (second hub or
+    additional recycling systems) available Year 3. Cumulative 3-year
+    net income: $5.55M. After member equity return and reserve
+    contributions, approximately $3M available for expansion.</p>
+    <h3 id="year-1-monthly-cash-flow-scenario-a">Year 1 Monthly Cash
+    Flow (Scenario A)</h3>
     <table>
+    <colgroup>
+    <col style="width: 6%" />
+    <col style="width: 8%" />
+    <col style="width: 9%" />
+    <col style="width: 11%" />
+    <col style="width: 6%" />
+    <col style="width: 12%" />
+    <col style="width: 10%" />
+    <col style="width: 12%" />
+    <col style="width: 9%" />
+    <col style="width: 11%" />
+    </colgroup>
     <thead>
     <tr>
-    <th>Year</th>
+    <th>Month</th>
     <th>Revenue</th>
-    <th>COGS</th>
-    <th>Gross Margin</th>
-    <th>Operating Exp</th>
-    <th>Net</th>
+    <th>Crude He</th>
+    <th>Electricity</th>
+    <th>Labor</th>
+    <th>Maintenance</th>
+    <th>Insurance</th>
+    <th>Debt Service</th>
+    <th>Net Cash</th>
+    <th>Cumulative</th>
     </tr>
     </thead>
     <tbody>
     <tr>
     <td>1</td>
-    <td>$3.5M</td>
-    <td>$1.5M</td>
-    <td>$2.0M</td>
-    <td>$800K</td>
-    <td>$1.2M</td>
-    </tr>
-    <tr>
-    <td>2</td>
-    <td>$2.7M (prices drop)</td>
-    <td>$1.8M</td>
-    <td>$0.9M</td>
-    <td>$900K</td>
-    <td>$0 (breakeven)</td>
-    </tr>
-    <tr>
-    <td>3</td>
-    <td>$2.7M</td>
-    <td>$1.6M</td>
-    <td>$1.1M</td>
-    <td>$900K</td>
-    <td>$200K</td>
-    </tr>
-    </tbody>
-    </table>
-    <p><strong>Payback: ~4 years.</strong> Tight but viable. The co-op
-    survives on Research Grade premium pricing and recycling service
-    contracts. Grant funding reduces debt service burden.</p>
-    <h3
-    id="scenario-c-worst-case-market-collapse-equipment-issues">Scenario
-    C: Worst Case — Market Collapse + Equipment Issues</h3>
-    <table>
-    <thead>
-    <tr>
-    <th>Year</th>
-    <th>Revenue</th>
-    <th>COGS</th>
-    <th>Gross Margin</th>
-    <th>Operating Exp</th>
-    <th>Net</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>1</td>
-    <td>$2.0M (delayed start)</td>
-    <td>$1.2M</td>
-    <td>$0.8M</td>
-    <td>$800K</td>
     <td>$0</td>
+    <td>$0</td>
+    <td>$2K</td>
+    <td>$33K</td>
+    <td>$0</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$70K</td>
+    <td>-$70K</td>
     </tr>
     <tr>
     <td>2</td>
-    <td>$2.0M (market crash)</td>
-    <td>$1.5M</td>
-    <td>$0.5M</td>
-    <td>$900K</td>
-    <td>-$400K</td>
+    <td>$0</td>
+    <td>$0</td>
+    <td>$2K</td>
+    <td>$33K</td>
+    <td>$0</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$70K</td>
+    <td>-$140K</td>
     </tr>
     <tr>
     <td>3</td>
-    <td>$2.2M (recovery)</td>
-    <td>$1.4M</td>
-    <td>$0.8M</td>
-    <td>$850K</td>
-    <td>-$50K</td>
+    <td>$50K</td>
+    <td>$30K</td>
+    <td>$8K</td>
+    <td>$33K</td>
+    <td>$2K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$58K</td>
+    <td>-$198K</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>$150K</td>
+    <td>$80K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$4K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$14K</td>
+    <td>-$212K</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>$225K</td>
+    <td>$100K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$5K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$40K</td>
+    <td>-$172K</td>
+    </tr>
+    <tr>
+    <td>6</td>
+    <td>$275K</td>
+    <td>$110K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$5K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$80K</td>
+    <td>-$92K</td>
+    </tr>
+    <tr>
+    <td>7</td>
+    <td>$300K</td>
+    <td>$120K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$6K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$94K</td>
+    <td>$2K</td>
+    </tr>
+    <tr>
+    <td>8</td>
+    <td>$325K</td>
+    <td>$125K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$6K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$114K</td>
+    <td>$116K</td>
+    </tr>
+    <tr>
+    <td>9</td>
+    <td>$350K</td>
+    <td>$130K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$133K</td>
+    <td>$249K</td>
+    </tr>
+    <tr>
+    <td>10</td>
+    <td>$375K</td>
+    <td>$135K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$153K</td>
+    <td>$402K</td>
+    </tr>
+    <tr>
+    <td>11</td>
+    <td>$400K</td>
+    <td>$140K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$172K</td>
+    <td>$574K</td>
+    </tr>
+    <tr>
+    <td>12</td>
+    <td>$425K</td>
+    <td>$145K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$192K</td>
+    <td>$766K</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>$2,875K</strong></td>
+    <td><strong>$1,115K</strong></td>
+    <td><strong>$120K</strong></td>
+    <td><strong>$396K</strong></td>
+    <td><strong>$58K</strong></td>
+    <td><strong>$72K</strong></td>
+    <td><strong>$348K</strong></td>
+    <td><strong>$766K</strong></td>
+    <td></td>
     </tr>
     </tbody>
     </table>
-    <p><strong>Payback: 7+ years.</strong> Co-op draws on reserves,
-    defers patronage dividends, may need additional member capital
-    calls. Not fatal but stressful. Grant funding is the difference
-    between survival and failure in this scenario.</p>
-    <h2 id="key-sensitivities">Key Sensitivities</h2>
+    <p><strong>Notes:</strong> Months 1-2 are commissioning (equipment
+    testing, no production). Month 3 is first output at reduced
+    capacity. Full production capacity reached by Month 6-7. Revenue
+    ramp assumes sequential customer onboarding – each new customer adds
+    approximately $50K-$75K/month in revenue. The $500K working capital
+    reserve covers the negative cash flow period (Months 1-6).</p>
+    <h2
+    id="scenario-b-base-case-qatar-resumes-in-18-months-prices-normalize">Scenario
+    B: Base Case – Qatar Resumes in 18 Months, Prices Normalize</h2>
+    <p><strong>Assumptions:</strong> Qatar resumes helium exports Q3
+    2027. Helium prices decline from crisis levels ($75/L) to
+    near-normal ($30-$40/L) over 6 months. Co-op launches on schedule.
+    CHIPS Act grant received; ICAP grant delayed or denied.</p>
+    <h3 id="annual-summary-1">Annual Summary</h3>
     <table>
+    <colgroup>
+    <col style="width: 8%" />
+    <col style="width: 12%" />
+    <col style="width: 8%" />
+    <col style="width: 17%" />
+    <col style="width: 19%" />
+    <col style="width: 17%" />
+    <col style="width: 16%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Year</th>
+    <th>Revenue</th>
+    <th>COGS</th>
+    <th>Gross Margin</th>
+    <th>Operating Exp</th>
+    <th>Debt Service</th>
+    <th>Net Income</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>$3,500,000</td>
+    <td>$1,500,000</td>
+    <td>$2,000,000</td>
+    <td>$800,000</td>
+    <td>$350,000</td>
+    <td>$850,000</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>$2,700,000</td>
+    <td>$1,800,000</td>
+    <td>$900,000</td>
+    <td>$900,000</td>
+    <td>$350,000</td>
+    <td>-$350,000</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>$2,700,000</td>
+    <td>$1,600,000</td>
+    <td>$1,100,000</td>
+    <td>$900,000</td>
+    <td>$350,000</td>
+    <td>-$150,000</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>$3,000,000</td>
+    <td>$1,600,000</td>
+    <td>$1,400,000</td>
+    <td>$950,000</td>
+    <td>$350,000</td>
+    <td>$100,000</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>$3,200,000</td>
+    <td>$1,650,000</td>
+    <td>$1,550,000</td>
+    <td>$950,000</td>
+    <td>$350,000</td>
+    <td>$250,000</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Payback: ~5 years on member equity.</strong> Year 2 is
+    the stress point: revenue drops as crisis pricing ends, but COGS
+    stays elevated because crude helium suppliers have raised base
+    prices. Year 3 sees COGS decline as the market normalizes, but the
+    co-op operates at a loss. Years 4-5 show recovery as volume grows
+    and the co-op’s reputation for reliable supply attracts customers
+    who experienced oligopoly supply failures.</p>
+    <p><strong>Survival mechanism:</strong> The Year 1 surplus ($850K)
+    provides a buffer for Years 2-3 losses ($500K combined). The co-op
+    draws on reserves, defers patronage dividends, and maintains
+    operations through the transition. This is where the cooperative
+    governance advantage (Document 22, Mondragon resilience) becomes
+    critical: members vote to accept reduced dividends rather than
+    cutting operations.</p>
+    <h3 id="year-1-monthly-cash-flow-scenario-b">Year 1 Monthly Cash
+    Flow (Scenario B)</h3>
+    <p>Year 1 cash flow is identical to Scenario A because Qatar’s force
+    majeure is still active. The divergence occurs in Year 2. See the
+    Scenario A monthly table above.</p>
+    <h3 id="year-2-monthly-cash-flow-scenario-b-the-stress-year">Year 2
+    Monthly Cash Flow (Scenario B – The Stress Year)</h3>
+    <table>
+    <colgroup>
+    <col style="width: 6%" />
+    <col style="width: 8%" />
+    <col style="width: 9%" />
+    <col style="width: 11%" />
+    <col style="width: 6%" />
+    <col style="width: 12%" />
+    <col style="width: 10%" />
+    <col style="width: 12%" />
+    <col style="width: 9%" />
+    <col style="width: 11%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Month</th>
+    <th>Revenue</th>
+    <th>Crude He</th>
+    <th>Electricity</th>
+    <th>Labor</th>
+    <th>Maintenance</th>
+    <th>Insurance</th>
+    <th>Debt Service</th>
+    <th>Net Cash</th>
+    <th>Cumulative</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>13</td>
+    <td>$400K</td>
+    <td>$150K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$162K</td>
+    <td>$928K</td>
+    </tr>
+    <tr>
+    <td>14</td>
+    <td>$375K</td>
+    <td>$150K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$137K</td>
+    <td>$1,065K</td>
+    </tr>
+    <tr>
+    <td>15</td>
+    <td>$325K</td>
+    <td>$150K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$87K</td>
+    <td>$1,152K</td>
+    </tr>
+    <tr>
+    <td>16</td>
+    <td>$275K</td>
+    <td>$150K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>$37K</td>
+    <td>$1,189K</td>
+    </tr>
+    <tr>
+    <td>17</td>
+    <td>$225K</td>
+    <td>$150K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$13K</td>
+    <td>$1,176K</td>
+    </tr>
+    <tr>
+    <td>18</td>
+    <td>$200K</td>
+    <td>$150K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$38K</td>
+    <td>$1,138K</td>
+    </tr>
+    <tr>
+    <td>19</td>
+    <td>$180K</td>
+    <td>$140K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$47K</td>
+    <td>$1,091K</td>
+    </tr>
+    <tr>
+    <td>20</td>
+    <td>$175K</td>
+    <td>$135K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$47K</td>
+    <td>$1,044K</td>
+    </tr>
+    <tr>
+    <td>21</td>
+    <td>$175K</td>
+    <td>$130K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$42K</td>
+    <td>$1,002K</td>
+    </tr>
+    <tr>
+    <td>22</td>
+    <td>$180K</td>
+    <td>$130K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$37K</td>
+    <td>$965K</td>
+    </tr>
+    <tr>
+    <td>23</td>
+    <td>$185K</td>
+    <td>$130K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$32K</td>
+    <td>$933K</td>
+    </tr>
+    <tr>
+    <td>24</td>
+    <td>$190K</td>
+    <td>$130K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$29K</td>
+    <td>-$27K</td>
+    <td>$906K</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>$2,885K</strong></td>
+    <td><strong>$1,695K</strong></td>
+    <td><strong>$144K</strong></td>
+    <td><strong>$396K</strong></td>
+    <td><strong>$90K</strong></td>
+    <td><strong>$72K</strong></td>
+    <td><strong>$348K</strong></td>
+    <td><strong>$140K</strong></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Critical observation:</strong> Even in the stress year,
+    cumulative cash position never goes negative. The Year 1 surplus
+    provides sufficient buffer. The co-op’s monthly burn rate at minimum
+    revenue (Months 19-24) is approximately $280K/month. At
+    $175-190K/month revenue, the monthly deficit is $35-47K – manageable
+    for 6-12 months from reserves without additional capital calls.</p>
+    <p><strong>Revenue stabilization:</strong> Revenue bottoms around
+    $175K/month (Months 19-21) because the co-op’s customer base shifts
+    composition. Crisis customers (spot buyers paying premium prices)
+    disappear as the market normalizes. But core customers – recycling
+    service contract holders (Document 21), Research Grade buyers, and
+    committed co-op members – remain. Research Grade helium at $100/L
+    maintains premium pricing even as Grade-A drops to $30/L, because
+    the 99.9999% purity market is less price-elastic.</p>
+    <h2
+    id="scenario-c-bear-case-market-collapse-operational-problems">Scenario
+    C: Bear Case – Market Collapse + Operational Problems</h2>
+    <p><strong>Assumptions:</strong> Qatar resumes Q1 2027 AND Amur
+    plant reaches capacity simultaneously, creating oversupply. Helium
+    prices crash to $20-$25/L. Hub construction delayed 3 months by
+    permitting. One major piece of equipment fails in Month 8, requiring
+    6 weeks of partial operation. CHIPS Act grant denied; only ICAP
+    grant received. One founding member withdraws.</p>
+    <h3 id="annual-summary-2">Annual Summary</h3>
+    <table>
+    <colgroup>
+    <col style="width: 8%" />
+    <col style="width: 12%" />
+    <col style="width: 8%" />
+    <col style="width: 17%" />
+    <col style="width: 19%" />
+    <col style="width: 17%" />
+    <col style="width: 16%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Year</th>
+    <th>Revenue</th>
+    <th>COGS</th>
+    <th>Gross Margin</th>
+    <th>Operating Exp</th>
+    <th>Debt Service</th>
+    <th>Net Income</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>$2,000,000</td>
+    <td>$1,200,000</td>
+    <td>$800,000</td>
+    <td>$800,000</td>
+    <td>$440,000</td>
+    <td>-$440,000</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>$2,000,000</td>
+    <td>$1,500,000</td>
+    <td>$500,000</td>
+    <td>$900,000</td>
+    <td>$440,000</td>
+    <td>-$840,000</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>$2,200,000</td>
+    <td>$1,400,000</td>
+    <td>$800,000</td>
+    <td>$850,000</td>
+    <td>$440,000</td>
+    <td>-$490,000</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Payback: 7+ years, if achievable.</strong> The co-op
+    burns cash in all three years. Cumulative loss: $1.77M. Without
+    intervention, the co-op exhausts its reserves by mid-Year 2.</p>
+    <p><strong>Debt service note:</strong> Without the CHIPS Act grant,
+    the co-op carries $2M more in debt, increasing annual debt service
+    from $350K to approximately $440K. This $90K/year difference is the
+    margin between survival and failure in the bear case.</p>
+    <h3 id="year-1-monthly-cash-flow-scenario-c">Year 1 Monthly Cash
+    Flow (Scenario C)</h3>
+    <table>
+    <colgroup>
+    <col style="width: 6%" />
+    <col style="width: 8%" />
+    <col style="width: 9%" />
+    <col style="width: 11%" />
+    <col style="width: 6%" />
+    <col style="width: 12%" />
+    <col style="width: 10%" />
+    <col style="width: 12%" />
+    <col style="width: 9%" />
+    <col style="width: 11%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Month</th>
+    <th>Revenue</th>
+    <th>Crude He</th>
+    <th>Electricity</th>
+    <th>Labor</th>
+    <th>Maintenance</th>
+    <th>Insurance</th>
+    <th>Debt Service</th>
+    <th>Net Cash</th>
+    <th>Cumulative</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>$0</td>
+    <td>$0</td>
+    <td>$2K</td>
+    <td>$33K</td>
+    <td>$0</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>-$78K</td>
+    <td>-$78K</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>$0</td>
+    <td>$0</td>
+    <td>$2K</td>
+    <td>$33K</td>
+    <td>$0</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>-$78K</td>
+    <td>-$156K</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>$0</td>
+    <td>$0</td>
+    <td>$2K</td>
+    <td>$33K</td>
+    <td>$0</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>-$78K</td>
+    <td>-$234K</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>$25K</td>
+    <td>$20K</td>
+    <td>$5K</td>
+    <td>$33K</td>
+    <td>$2K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>-$78K</td>
+    <td>-$312K</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>$100K</td>
+    <td>$60K</td>
+    <td>$10K</td>
+    <td>$33K</td>
+    <td>$4K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>-$50K</td>
+    <td>-$362K</td>
+    </tr>
+    <tr>
+    <td>6</td>
+    <td>$175K</td>
+    <td>$90K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$5K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>-$8K</td>
+    <td>-$370K</td>
+    </tr>
+    <tr>
+    <td>7</td>
+    <td>$225K</td>
+    <td>$100K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$6K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>$31K</td>
+    <td>-$339K</td>
+    </tr>
+    <tr>
+    <td>8</td>
+    <td>$100K</td>
+    <td>$80K</td>
+    <td>$8K</td>
+    <td>$33K</td>
+    <td>$15K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>-$79K</td>
+    <td>-$418K</td>
+    </tr>
+    <tr>
+    <td>9</td>
+    <td>$150K</td>
+    <td>$90K</td>
+    <td>$10K</td>
+    <td>$33K</td>
+    <td>$8K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>-$34K</td>
+    <td>-$452K</td>
+    </tr>
+    <tr>
+    <td>10</td>
+    <td>$250K</td>
+    <td>$110K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>$45K</td>
+    <td>-$407K</td>
+    </tr>
+    <tr>
+    <td>11</td>
+    <td>$275K</td>
+    <td>$115K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>$65K</td>
+    <td>-$342K</td>
+    </tr>
+    <tr>
+    <td>12</td>
+    <td>$300K</td>
+    <td>$120K</td>
+    <td>$12K</td>
+    <td>$33K</td>
+    <td>$7K</td>
+    <td>$6K</td>
+    <td>$37K</td>
+    <td>$85K</td>
+    <td>-$257K</td>
+    </tr>
+    <tr>
+    <td><strong>Total</strong></td>
+    <td><strong>$1,600K</strong></td>
+    <td><strong>$785K</strong></td>
+    <td><strong>$99K</strong></td>
+    <td><strong>$396K</strong></td>
+    <td><strong>$61K</strong></td>
+    <td><strong>$72K</strong></td>
+    <td><strong>$444K</strong></td>
+    <td><strong>-$257K</strong></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Notes:</strong> Month 3 is an additional construction
+    delay month. Month 8 reflects equipment failure – revenue drops to
+    40% of capacity, maintenance costs spike for emergency repair, and
+    crude helium purchases are reduced (but not eliminated because some
+    product in the pipeline must still be processed). The $500K working
+    capital reserve is drawn down to $243K by Year 1 end.</p>
+    <h3 id="bear-case-survival-strategies">Bear Case Survival
+    Strategies</h3>
+    <ol type="1">
+    <li><p><strong>Member capital call.</strong> Co-op bylaws (Document
+    19) should authorize the board to make additional capital calls in
+    emergencies. A $50K call per remaining member (4 members if one
+    withdrew) generates $200K.</p></li>
+    <li><p><strong>Defer patronage dividends.</strong> In the bear case,
+    there are no dividends to defer. But the co-op can also defer
+    equipment replacement reserves, buying 12-18 months of reduced
+    capital outflow.</p></li>
+    <li><p><strong>Pivot to service-only.</strong> If crude helium
+    processing is uneconomic at $20/L, the co-op can temporarily shut
+    down the purification hub and operate exclusively on recycling
+    service contracts (Document 21). Three contracts at $5K/month
+    generate $15K/month – not enough to cover full operations, but
+    enough to maintain the business entity and customer relationships
+    until the market recovers.</p></li>
+    <li><p><strong>Renegotiate debt.</strong> Equipment-secured loans
+    can potentially be restructured with extended terms if the co-op
+    demonstrates a viable path to recovery.</p></li>
+    </ol>
+    <p><strong>The bear case is the argument for grant funding.</strong>
+    At $350K annual debt service (with CHIPS Act grant), the co-op
+    survives the bear case with difficulty. At $440K annual debt service
+    (without grant), the bear case is potentially fatal. The $90K/year
+    difference – which is the debt service on $2M over 10 years –
+    determines whether the co-op survives a worst-case scenario.</p>
+    <h2 id="sensitivity-analysis">Sensitivity Analysis</h2>
+    <h3 id="impact-on-year-2-net-income-base-case">Impact on Year 2 Net
+    Income (Base Case)</h3>
+    <table>
+    <colgroup>
+    <col style="width: 19%" />
+    <col style="width: 15%" />
+    <col style="width: 40%" />
+    <col style="width: 25%" />
+    </colgroup>
     <thead>
     <tr>
     <th>Variable</th>
-    <th>Impact on Year 2 Net Income</th>
+    <th>Change</th>
+    <th>Impact on Net Income</th>
+    <th>Explanation</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>Helium price ±$20/L</td>
-    <td>±$1.2M</td>
+    <td>Helium selling price</td>
+    <td>+/- $10/L</td>
+    <td>+/- $660K</td>
+    <td>Price x annual volume (66,000 L); dominant variable</td>
     </tr>
     <tr>
-    <td>Electricity cost ±$0.02/kWh</td>
-    <td>±$40K</td>
+    <td>Helium selling price</td>
+    <td>+/- $20/L</td>
+    <td>+/- $1,320K</td>
+    <td>At -$20/L from base, co-op crosses into loss territory</td>
     </tr>
     <tr>
-    <td>Crude helium cost ±20%</td>
-    <td>±$360K</td>
+    <td>Crude helium cost</td>
+    <td>+/- 20%</td>
+    <td>+/- $360K</td>
+    <td>Crude is ~60% of COGS</td>
     </tr>
     <tr>
-    <td>Volume ±20%</td>
-    <td>±$540K</td>
+    <td>Sales volume</td>
+    <td>+/- 20%</td>
+    <td>+/- $540K</td>
+    <td>Revenue impact partially offset by variable COGS savings</td>
     </tr>
     <tr>
-    <td>Equipment downtime (1 month)</td>
+    <td>Electricity cost</td>
+    <td>+/- $0.02/kWh</td>
+    <td>+/- $42K</td>
+    <td>Relatively minor at hub scale</td>
+    </tr>
+    <tr>
+    <td>Equipment downtime</td>
+    <td>1 month</td>
     <td>-$300K</td>
+    <td>Lost revenue + ongoing fixed costs</td>
+    </tr>
+    <tr>
+    <td>Staffing</td>
+    <td>+1 FTE</td>
+    <td>-$100K</td>
+    <td>Including benefits at 30%</td>
+    </tr>
+    <tr>
+    <td>Interest rate</td>
+    <td>+/- 2%</td>
+    <td>+/- $53K</td>
+    <td>On combined $2.65M in loans</td>
     </tr>
     </tbody>
     </table>
-    <p><strong>Helium price is the dominant variable.</strong>
-    Everything else is manageable.</p>
-    <h2 id="breakeven-analysis">Breakeven Analysis</h2>
+    <p><strong>Key finding: helium selling price is the dominant
+    variable.</strong> A $20/L swing in selling price has 3x the impact
+    of a 20% change in crude costs and 30x the impact of electricity
+    pricing. This is why the scenario analysis focuses primarily on
+    price trajectories.</p>
+    <h3 id="breakeven-analysis">Breakeven Analysis</h3>
     <table>
+    <colgroup>
+    <col style="width: 36%" />
+    <col style="width: 31%" />
+    <col style="width: 31%" />
+    </colgroup>
     <thead>
     <tr>
     <th>Metric</th>
     <th>Value</th>
+    <th>Notes</th>
     </tr>
     </thead>
     <tbody>
     <tr>
     <td>Breakeven helium price (Grade-A)</td>
     <td>~$22/L equivalent</td>
+    <td>Below pre-crisis normal ($25-$35/L)</td>
     </tr>
     <tr>
     <td>Breakeven monthly volume</td>
     <td>~3,500 L equivalent</td>
+    <td>70% of Year 1 target capacity</td>
     </tr>
     <tr>
     <td>Breakeven customer count</td>
     <td>~5 regular accounts</td>
+    <td>Mix of Grade-A, Research Grade, and service contracts</td>
     </tr>
     <tr>
-    <td>Minimum viable revenue</td>
-    <td>~$2.5M/year</td>
+    <td>Minimum viable annual revenue</td>
+    <td>~$2.5M</td>
+    <td>Covers all COGS + operating expenses + debt service</td>
     </tr>
     </tbody>
     </table>
-    <p>At pre-crisis prices (~$25–35/L), the co-op is marginally
-    profitable. At crisis prices ($50–100/L), it is highly profitable.
-    At any price above $22/L, it covers all costs including debt
-    service.</p>
-    <h2 id="cash-flow-waterfall-scenario-b-base-case">Cash Flow
-    Waterfall (Scenario B — Base Case)</h2>
-    <pre><code>Revenue                     $2,700,000
-─ Crude helium purchases   ($1,200,000)
-─ Electricity              ($  145,000)
-─ Labor (3 FTE + part-time)($  400,000)
-─ Maintenance              ($  100,000)
-─ Insurance/compliance     ($   75,000)
-─ Debt service             ($  350,000)
-─ Equipment reserves       ($  150,000)
-═══════════════════════════════════════
-Operating surplus           $  280,000
-─ Patronage dividends      ($  140,000)  ← 50% to members
-─ Retained by co-op        ($  140,000)  ← expansion fund</code></pre>
+    <p><strong>The breakeven price of $22/L is critical.</strong> It
+    means the co-op is viable at any helium price above $22/L – which
+    includes all but the most extreme bear-case pricing. Pre-crisis
+    normal pricing ($25-$35/L) keeps the co-op in positive territory,
+    though with thin margins. Crisis pricing ($50-$100/L) generates
+    substantial surplus. The co-op does not require crisis pricing to
+    survive – it requires crisis pricing to thrive and expand
+    quickly.</p>
+    <h3 id="npv-analysis-10-year-horizon-8-discount-rate">NPV Analysis
+    (10-Year Horizon, 8% Discount Rate)</h3>
+    <table>
+    <thead>
+    <tr>
+    <th>Scenario</th>
+    <th>NPV of Cash Flows</th>
+    <th>NPV Net of Investment</th>
+    <th>IRR</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>A (Bull)</td>
+    <td>$12.8M</td>
+    <td>$6.7M</td>
+    <td>42%</td>
+    </tr>
+    <tr>
+    <td>B (Base)</td>
+    <td>$4.2M</td>
+    <td>-$1.9M at Year 5; +$2.1M at Year 10</td>
+    <td>11%</td>
+    </tr>
+    <tr>
+    <td>C (Bear)</td>
+    <td>-$1.2M</td>
+    <td>-$7.4M</td>
+    <td>Negative</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Interpretation:</strong> Scenario A is an exceptional
+    investment. Scenario B is a viable long-term investment that
+    requires patience through Years 2-3. Scenario C destroys value and
+    should be avoided through conservative operational sizing and
+    maximum grant funding.</p>
+    <p><strong>Probability-weighted NPV:</strong> Assigning subjective
+    probabilities of 30% (A), 50% (B), 20% (C):</p>
+    <p>Weighted NPV = (0.30 x $6.7M) + (0.50 x -$1.9M) + (0.20 x -$7.4M)
+    = $2.01M - $0.95M - $1.48M = <strong>-$0.42M at Year 5</strong>
+    Weighted NPV at Year 10 = (0.30 x $6.7M) + (0.50 x $2.1M) + (0.20 x
+    -$7.4M) = <strong>$1.58M</strong></p>
+    <p>The probability-weighted NPV is negative at Year 5 but positive
+    at Year 10. This is a long-term cooperative investment, not a
+    short-term speculation. The cooperative structure (patient capital,
+    member commitment, no quarterly earnings pressure) is specifically
+    suited to this return profile. A venture-capital-funded startup with
+    the same financials would likely not attract investment. A
+    cooperative with committed members can sustain the timeline.</p>
+    <h2
+    id="cash-flow-waterfall-scenario-b-base-case-steady-state-year-4">Cash
+    Flow Waterfall (Scenario B – Base Case, Steady State Year 4)</h2>
+    <pre><code>Revenue                              $3,000,000
+  Grade-A gas (80% of volume)        $2,000,000
+  Research Grade (8% of volume)        $600,000
+  Recycling service contracts          $240,000
+  Custom gas mixtures                  $160,000
+
+Less: Cost of Goods Sold            ($1,600,000)
+  Crude helium purchases            ($1,000,000)
+  Electricity (hub operations)        ($145,000)
+  Cylinder/dewar consumables          ($100,000)
+  Quality testing materials            ($55,000)
+  Transport (crude to hub)            ($200,000)
+  Delivery (hub to customer)          ($100,000)
+
+GROSS MARGIN                         $1,400,000  (46.7%)
+
+Less: Operating Expenses              ($950,000)
+  Labor (3.25 FTE + benefits)         ($390,000)
+  Facility lease/mortgage             ($180,000)
+  Insurance                            ($75,000)
+  Professional services (CPA, legal)   ($60,000)
+  Marketing and member relations       ($30,000)
+  Office and IT                        ($25,000)
+  Equipment replacement reserve       ($150,000)
+  Contingency (5% of revenue)          ($40,000)
+
+Less: Debt Service                    ($350,000)
+  SBA loan ($1.5M at 6%, 10yr)       ($200,000)
+  Bank loan ($1.15M at 7%, 7yr)      ($150,000)
+
+OPERATING SURPLUS                      $100,000
+
+Distribution:
+  Patronage dividends (50%)            ($50,000)  -&gt; to members
+  Retained by co-op (50%)             ($50,000)  -&gt; expansion fund</code></pre>
     <h2 id="staffing-model">Staffing Model</h2>
     <table>
+    <colgroup>
+    <col style="width: 10%" />
+    <col style="width: 9%" />
+    <col style="width: 49%" />
+    <col style="width: 30%" />
+    </colgroup>
     <thead>
     <tr>
     <th>Role</th>
     <th>FTE</th>
-    <th>Annual Cost</th>
+    <th>Annual Cost (with benefits)</th>
+    <th>Responsibilities</th>
     </tr>
     </thead>
     <tbody>
     <tr>
     <td>General Manager / Operations</td>
-    <td>1</td>
-    <td>$120K</td>
+    <td>1.0</td>
+    <td>$156,000</td>
+    <td>Day-to-day operations, customer relations, board liaison, safety
+    compliance</td>
     </tr>
     <tr>
     <td>Process Technician</td>
-    <td>1</td>
-    <td>$80K</td>
+    <td>1.0</td>
+    <td>$104,000</td>
+    <td>Hub equipment operation, crude receiving, product filling,
+    maintenance</td>
     </tr>
     <tr>
-    <td>Quality/Lab Technician</td>
+    <td>Quality / Lab Technician</td>
     <td>0.5</td>
-    <td>$40K</td>
+    <td>$52,000</td>
+    <td>GC/mass spec analysis, purity certification, records
+    management</td>
     </tr>
     <tr>
     <td>Delivery / Logistics</td>
     <td>0.5</td>
-    <td>$35K</td>
+    <td>$45,500</td>
+    <td>Cylinder/dewar delivery, crude helium receiving, inventory
+    management</td>
     </tr>
     <tr>
     <td>Bookkeeper (part-time)</td>
     <td>0.25</td>
-    <td>$25K</td>
+    <td>$32,500</td>
+    <td>Accounts payable/receivable, payroll, financial reporting</td>
     </tr>
     <tr>
     <td><strong>Total</strong></td>
     <td><strong>3.25</strong></td>
-    <td><strong>$300K</strong></td>
+    <td><strong>$390,000</strong></td>
+    <td></td>
     </tr>
     </tbody>
     </table>
-    <p>Plus benefits (~30%): <strong>$390K total labor cost.</strong>
-    Lean operation. Board serves as unpaid governance.</p>
+    <p><strong>Board of directors:</strong> Unpaid governance, per
+    cooperative norms. Board members are compensated only for meeting
+    expenses and travel. Board meets monthly during Year 1, quarterly
+    thereafter.</p>
+    <p><strong>Scaling:</strong> Year 2+ may require an additional
+    process technician ($104K) if volume exceeds 7,500 L/month. Year 3+
+    may require a dedicated sales/business development role ($130K) if
+    the co-op pursues export customers via the Port of Tacoma (Document
+    7).</p>
+    <h2 id="key-financial-decisions">Key Financial Decisions</h2>
+    <h3 id="decision-1-lease-vs.-buy-facility">Decision 1: Lease vs. Buy
+    Facility</h3>
+    <table>
+    <colgroup>
+    <col style="width: 40%" />
+    <col style="width: 35%" />
+    <col style="width: 25%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Factor</th>
+    <th>Lease</th>
+    <th>Buy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Upfront cost</td>
+    <td>$0 (first/last/security ~$50K)</td>
+    <td>$800K-$1.5M (down payment on industrial property)</td>
+    </tr>
+    <tr>
+    <td>Monthly cost</td>
+    <td>$8K-$15K</td>
+    <td>$10K-$18K (mortgage, higher but building equity)</td>
+    </tr>
+    <tr>
+    <td>Flexibility</td>
+    <td>Can relocate if market shifts</td>
+    <td>Locked to location</td>
+    </tr>
+    <tr>
+    <td>Long-term cost</td>
+    <td>Higher (no equity)</td>
+    <td>Lower (building equity, eventual ownership)</td>
+    </tr>
+    <tr>
+    <td><strong>Recommendation</strong></td>
+    <td><strong>Year 1-3</strong></td>
+    <td><strong>Year 4+ if operations prove viable</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="decision-2-equipment-purchase-vs.-lease-to-own">Decision 2:
+    Equipment Purchase vs. Lease-to-Own</h3>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 32%" />
+    <col style="width: 41%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Factor</th>
+    <th>Purchase</th>
+    <th>Lease-to-Own</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Upfront cost</td>
+    <td>Full capital outlay</td>
+    <td>20-30% down, monthly payments</td>
+    </tr>
+    <tr>
+    <td>Total cost (7 years)</td>
+    <td>Lower (no financing premium)</td>
+    <td>Higher (implicit interest rate 8-12%)</td>
+    </tr>
+    <tr>
+    <td>Tax treatment</td>
+    <td>Depreciation (MACRS 7-year)</td>
+    <td>Lease payments deductible</td>
+    </tr>
+    <tr>
+    <td>Flexibility</td>
+    <td>Co-op owns equipment outright</td>
+    <td>Return option if business fails</td>
+    </tr>
+    <tr>
+    <td><strong>Recommendation</strong></td>
+    <td><strong>If grant funding received</strong></td>
+    <td><strong>If grant funding denied (preserves cash)</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <h3
+    id="decision-3-pricing-strategy-market-rate-vs.-cost-plus">Decision
+    3: Pricing Strategy – Market Rate vs. Cost-Plus</h3>
+    <table>
+    <colgroup>
+    <col style="width: 38%" />
+    <col style="width: 19%" />
+    <col style="width: 19%" />
+    <col style="width: 23%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Strategy</th>
+    <th>Pro</th>
+    <th>Con</th>
+    <th>When</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Market rate (match oligopoly pricing)</td>
+    <td>Maximum revenue during crisis</td>
+    <td>Members may feel they are not benefiting from co-op</td>
+    <td>Year 1 (build reserves)</td>
+    </tr>
+    <tr>
+    <td>Cost-plus-margin (cooperative pricing)</td>
+    <td>Members get below-market prices; builds loyalty</td>
+    <td>Lower revenue, slower reserve accumulation</td>
+    <td>Year 2+ (once reserves adequate)</td>
+    </tr>
+    <tr>
+    <td>Hybrid (market rate to non-members, cost-plus to members)</td>
+    <td>Maximizes revenue while rewarding membership</td>
+    <td>Complexity, potential resentment from non-member customers</td>
+    <td><strong>Recommended approach</strong></td>
+    </tr>
+    </tbody>
+    </table>
     <h2 id="the-bottom-line">The Bottom Line</h2>
-    <p>The financial model works across all scenarios except total
-    market collapse — and even then, grant funding provides a lifeline.
-    The co-op is not a speculative venture; it is a known technology
-    applied to a known market with a known funding source (CHIPS
-    Act).</p>
-    <p>The question isn’t whether the numbers work. The question is
-    whether five people are willing to put in the work to make it
-    happen.</p>
+    <p>The financial model works across Scenarios A and B. Scenario C is
+    survivable with grant funding and aggressive cost management. The
+    cooperative structure – patient capital, member commitment,
+    democratic governance, no shareholder extraction – is specifically
+    suited to the return profile: modest returns in normal times,
+    exceptional returns during crises, and survival tools (capital
+    calls, deferred dividends, inter-cooperation) during downturns.</p>
+    <p>The probability-weighted 10-year NPV of $1.58M on a $6.15M
+    investment is not a venture-capital return. It is a cooperative
+    return: steady, community-benefiting, and resilient. The members do
+    not get rich. They get reliable helium supply at below-market
+    prices, patronage dividends proportional to usage, and the knowledge
+    that their supply chain does not depend on the Strait of Hormuz or a
+    corporate board meeting in Munich.</p>
+    <p>The question is not whether the numbers work. They do, in two of
+    three scenarios and arguably in all three with proper grant funding.
+    The question, as Document 19 concludes, is whether five people are
+    willing to put in the work to make it happen.</p>
     <div class="nav">
         <a href="../index.html">← Back to HEL Index</a> ·
         Published 2026-03-31 · PNW Research Series ·

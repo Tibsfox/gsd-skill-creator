@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PSA Equipment &amp; Vendor Landscape — What to Buy, From
-Whom — HEL Research</title>
+Whom, and in What Order — HEL Research</title>
     <style>
         :root {
             --bg: #1a1a2e;
@@ -55,244 +55,642 @@ Whom — HEL Research</title>
         HEL — Helium Supply Chain &amp; Pacific Rim Semiconductor Infrastructure<br>
         PNW Research Series · <a href="../index.html">Back to HEL Index</a> · <a href="../../index.html">Series Index</a>
     </div>
-    <h1 id="psa-equipment-vendor-landscape-what-to-buy-from-whom">PSA
-    Equipment &amp; Vendor Landscape — What to Buy, From Whom</h1>
-    <h2 id="the-architecture">The Architecture</h2>
-    <p>A small-scale helium extraction system typically combines two
-    technologies in series: a <strong>membrane front-end</strong> for
-    bulk separation (enriching 0.5–5% feed gas to 50–80% helium)
-    followed by a <strong>PSA polishing unit</strong> achieving 99.999%
-    (Grade 5N) purity. This two-stage approach is more practical and
-    cheaper than either technology alone.</p>
-    <h2 id="vendors-by-category">Vendors by Category</h2>
-    <h3 id="psa-systems-purification-to-99.999">PSA Systems
-    (Purification to 99.999%)</h3>
-    <p><strong>Chart Industries</strong> (dominant at small-to-mid
-    scale) - <strong>TITAN Helium line:</strong> Skid-mounted PSA.
-    50–5,000 SCFH feed gas capacity. - Small units (50–500 SCFH):
-    <strong>$150K–$500K</strong> - Large skids (1,000–5,000 SCFH):
-    <strong>$1M–$3M</strong> - Technology: Carbon molecular sieve (CMS)
-    and zeolite beds, 2-bed or 4-bed configuration - Recovery rate:
-    85–95% depending on feed composition - Lead time (early 2026):
-    <strong>24–36 weeks</strong> (extended from pre-crisis 12–20
-    weeks)</p>
-    <p><strong>Guild Associates</strong> (Dublin, OH) - Small PSA
-    systems for specialty gas purification including helium - 10–500
-    SCFM capacity - <strong>$100K–$500K</strong> - Worth contacting
-    directly — strong experience at this scale</p>
-    <p><strong>Parker Hannifin</strong> (formerly Balston/domnick
-    hunter) - Small membrane and PSA modules for lab/pilot scale -
-    <strong>$50K–$200K</strong> - Entry-level option for proving
-    concepts</p>
-    <h3 id="membrane-systems-bulk-separation-front-end">Membrane Systems
-    (Bulk Separation Front-End)</h3>
-    <p><strong>Air Liquide Advanced Separations (MEDAL)</strong> - MEDAL
-    He-Sep hollow-fiber polyimide membrane modules - Standard 4-inch and
-    8-inch diameter housings - Single 8-inch module: 50–200 SCFM feed
-    gas (150–600 psig operating) - Complete multi-stage skid:
-    <strong>$200K–$800K</strong> - Advantage: no moving parts in the
-    membrane stage - Limitation: rarely achieves 5N purity alone — best
-    as front-end to PSA</p>
-    <p><strong>Evonik (SEPURAN Noble)</strong> - Polyimide hollow-fiber
-    membranes specifically optimized for helium - Licensed to system
-    integrators - Per-module: <strong>$5K–$20K</strong> - Complete
-    system (housing, piping, controls): <strong>$100K–$400K</strong></p>
-    <p><strong>Generon</strong> (Houston) - Membrane systems for gas
-    separation, helium-specific work - <strong>$150K–$600K</strong> for
-    packaged skids</p>
-    <h3 id="helium-liquefiers">Helium Liquefiers</h3>
-    <p><strong>Chart Industries (PHPK Engineering)</strong> - 15 L/hr to
-    250+ L/hr capacity - Lab-scale: ~<strong>$500K</strong> -
-    Production-scale: <strong>$2M–$5M+</strong></p>
-    <h3 id="recoveryrecycling-systems-for-fab-sites">Recovery/Recycling
-    Systems (For Fab Sites)</h3>
-    <p><strong>Cryomech</strong> (Syracuse, NY) — leading manufacturer -
-    <strong>LHeP-60:</strong> 60 L/day reliquefier, 11 kW,
-    <strong>$250K–$350K</strong> - <strong>LHeP-120:</strong> 120 L/day,
-    19 kW, <strong>$350K–$450K</strong> - <strong>HRS (Helium Recovery
-    System):</strong> Complete gas bag + compressor + reliquefier,
-    <strong>$300K–$600K installed</strong></p>
-    <p><strong>Quantum Design</strong> - <strong>ATL160:</strong> 22
-    L/day liquefier, <strong>$350K–$500K</strong> -
-    <strong>ATL260:</strong> 40 L/day, <strong>$450K–$600K</strong> -
-    Laboratory-scale recovery, not extraction</p>
-    <h3 id="large-scale-reference-only-above-co-op-scale">Large-Scale
-    (Reference Only — Above Co-op Scale)</h3>
-    <p><strong>Linde Engineering</strong> — Helium Cold Box (cryogenic
-    distillation + PSA hybrid). Minimum 50 MMSCFD feed gas.
-    <strong>$20M–$100M+</strong>. Custom EPC projects.</p>
-    <h2 id="recommended-architecture-for-a-co-op-hub">Recommended
-    Architecture for a Co-op Hub</h2>
-    <pre><code>FEED GAS (0.5-5% He)
-       │
-       ▼
-  MEMBRANE FRONT-END          $200K-$400K
-  (Evonik SEPURAN or MEDAL)
-  Enriches to 50-80% He
-       │
-       ▼
-  PSA POLISHING UNIT           $300K-$1M
-  (Chart TITAN or Guild)
-  Purifies to 99.999%
-       │
-       ▼
-  LIQUEFIER (optional)         $500K-$5M
-  (Chart or Cryomech)
-  Cools to -269°C for storage/transport</code></pre>
-    <p><strong>Total system cost: $1M–$6M</strong> depending on capacity
-    and whether liquefaction is included.</p>
-    <h2 id="power-consumption">Power Consumption</h2>
+    <h1
+    id="psa-equipment-vendor-landscape-what-to-buy-from-whom-and-in-what-order">PSA
+    Equipment &amp; Vendor Landscape — What to Buy, From Whom, and in
+    What Order</h1>
+    <h2 id="the-architecture-two-stages-in-series">The Architecture: Two
+    Stages in Series</h2>
+    <p>A small-scale helium extraction system combines two technologies
+    in series: a <strong>membrane front-end</strong> for bulk separation
+    (enriching 0.5-5% feed gas to 50-80% helium) followed by a
+    <strong>PSA polishing unit</strong> achieving 99.999% (Grade 5N)
+    purity. This two-stage approach is more practical and cheaper than
+    either technology alone. Attempting to reach 5N purity with
+    membranes alone requires excessive staging and loses too much helium
+    in the reject stream. Attempting to handle low-concentration feed
+    gas with PSA alone requires oversized beds and dramatically higher
+    capital costs. The membrane does the heavy lifting on volume; the
+    PSA does the precision work on purity.</p>
+    <p>Understanding why this matters: the feed gas arriving at a co-op
+    hub (see Document 17 for sourcing and transport) is 50-70% helium if
+    sourced from primary producers, or as low as 0.5-5% if processing
+    raw well gas at an extraction node. The equipment selection depends
+    entirely on which part of the supply chain you are building.</p>
+    <h2 id="step-by-step-equipment-selection-pathway">Step-by-Step
+    Equipment Selection Pathway</h2>
+    <h3 id="step-1-define-your-feed-gas-profile-week-1-2">Step 1: Define
+    Your Feed Gas Profile (Week 1-2)</h3>
+    <p>Before contacting any vendor, you need three numbers:</p>
+    <ol type="1">
+    <li><strong>Feed gas helium concentration</strong> (% by volume).
+    Get this from the crude helium supplier’s certificate of analysis,
+    or from well gas assays if you are building an extraction node. See
+    Document 4 for active producers who can provide this data.</li>
+    <li><strong>Feed gas flow rate</strong> (SCFM or Nm3/hr). This
+    determines equipment sizing. A 10-node co-op hub typically processes
+    100-500 SCFM of feed gas.</li>
+    <li><strong>Contaminant profile</strong> (nitrogen, methane, CO2,
+    moisture, hydrogen sulfide). Some contaminants poison membranes or
+    foul PSA adsorbent beds. Hydrogen sulfide above 10 ppm requires
+    upstream scrubbing before either technology.</li>
+    </ol>
+    <p><strong>Decision tree:</strong> - If feed gas is already 50-70%
+    helium (purchased crude from a primary producer): skip the membrane
+    stage. Go directly to PSA polishing. This saves $200K-$400K and
+    simplifies operations. - If feed gas is 5-50% helium (partially
+    enriched or high-grade well gas): a single membrane stage followed
+    by PSA is the standard architecture. - If feed gas is 0.5-5% helium
+    (raw well gas or byproduct gas): you need a multi-stage membrane
+    front-end before PSA. Capital costs increase significantly. Evaluate
+    whether it is more economical to purchase crude helium at 50-70%
+    than to build extraction equipment. See Document 23 for the
+    financial model behind this decision. - If feed gas is below 0.3%
+    helium: not economically viable for extraction at any scale. See
+    Document 16 for why PNW geology falls into this category.</p>
+    <h3 id="step-2-select-the-membrane-system-if-needed-week-2-4">Step
+    2: Select the Membrane System (If Needed) (Week 2-4)</h3>
+    <p>The membrane front-end is the first process stage. Hollow-fiber
+    polyimide membranes exploit helium’s small molecular size and high
+    diffusivity to separate it from nitrogen, methane, and other bulk
+    gases. Helium permeates through the membrane wall; bulk gases are
+    rejected.</p>
+    <p><strong>Vendor options, ranked by relevance to co-op
+    scale:</strong></p>
+    <p><strong>Evonik (SEPURAN Noble)</strong> – The leading membrane
+    specifically optimized for helium separation. - Product line:
+    SEPURAN Noble hollow-fiber polyimide modules - Available in standard
+    4-inch and 8-inch diameter housings - Per-module cost:
+    $5,000-$20,000 - Complete skid-mounted system (housing,
+    interconnecting piping, instrumentation, controls):
+    $100,000-$400,000 - Operating pressure: 150-600 psig feed - Helium
+    recovery per stage: 60-80% - Advantage: modules are available
+    through licensed system integrators, allowing competitive bidding on
+    the skid fabrication - Limitation: Evonik sells modules, not
+    complete systems. You need a system integrator (see Step 5) to
+    design and build the skid. - Website: evonik.com/sepuran</p>
+    <p><strong>Air Liquide Advanced Separations (MEDAL)</strong> – The
+    incumbent in industrial membrane gas separation. - Product line:
+    MEDAL He-Sep hollow-fiber polyimide modules - Standard 4-inch and
+    8-inch diameter housings - Single 8-inch module handles 50-200 SCFM
+    feed gas at 150-600 psig - Complete multi-stage skid:
+    $200,000-$800,000 - Advantage: Air Liquide can provide turnkey
+    systems including engineering, installation, and commissioning. They
+    have deployed hundreds of membrane systems globally. - Limitation:
+    Air Liquide is also a helium competitor (they sell helium). Their
+    membrane division operates independently, but some co-op members may
+    prefer a vendor without a conflict of interest. - Note: MEDAL
+    membranes alone rarely achieve better than 90-95% helium. For 5N
+    purity, PSA polishing is still required downstream.</p>
+    <p><strong>Generon (Houston, TX)</strong> – A second-tier option
+    with solid industrial gas membrane experience. - Membrane systems
+    for helium-specific gas separation - Complete packaged skids:
+    $150,000-$600,000 - Strength in Gulf Coast and midcontinent
+    installations - Worth requesting a quote as a competitive benchmark
+    against Evonik and MEDAL</p>
+    <p><strong>Key membrane system specifications to request in your
+    RFQ:</strong> - Helium recovery rate at specified feed composition
+    and pressure - Number of stages required to reach target enrichment
+    (50-80%) - Pressure drop across each stage - Membrane replacement
+    interval and cost - Compressor requirements (feed gas must be
+    compressed to membrane operating pressure) - Utility requirements
+    (power, cooling water) - Footprint and weight (for building planning
+    – see Document 18)</p>
+    <h3
+    id="step-3-select-the-psa-system-week-2-4-parallel-with-step-2">Step
+    3: Select the PSA System (Week 2-4, Parallel with Step 2)</h3>
+    <p>Pressure Swing Adsorption is the polishing step that takes
+    enriched helium (50-80% from membranes, or 50-70% from purchased
+    crude) and purifies it to 99.999% (Grade-A) or 99.9999% (Research
+    Grade). PSA works by pressurizing a bed of adsorbent material
+    (carbon molecular sieve or zeolite) that preferentially adsorbs
+    nitrogen, oxygen, and other impurities while allowing helium to pass
+    through. When the bed is saturated, pressure is released (the
+    “swing”), regenerating the adsorbent and releasing impurities to
+    exhaust.</p>
+    <p><strong>Vendor options, ranked by relevance:</strong></p>
+    <p><strong>Chart Industries</strong> – The dominant vendor at
+    small-to-mid scale. This is the first call for most co-op
+    configurations. - Product line: TITAN Helium PSA systems -
+    Skid-mounted, factory-tested, designed for remote or semi-attended
+    operation - Capacity range: 50-5,000 SCFH feed gas - Small units
+    (50-500 SCFH): $150,000-$500,000 - Large skids (1,000-5,000 SCFH):
+    $1,000,000-$3,000,000 - Technology: Carbon molecular sieve (CMS) and
+    zeolite beds in 2-bed or 4-bed configurations - Recovery rate:
+    85-95% depending on feed composition and bed configuration - Purity:
+    99.999% standard, 99.9999% available with additional polishing -
+    Lead time (early 2026): 24-36 weeks. Extended from pre-crisis 12-20
+    weeks due to demand surge. - Chart also manufactures helium
+    liquefiers (see Step 4), allowing a single-vendor solution for PSA +
+    liquefaction. - Website: chartindustries.com</p>
+    <p><strong>Guild Associates (Dublin, OH)</strong> – A smaller,
+    specialized vendor with deep expertise at co-op scale. - Small PSA
+    systems for specialty gas purification including helium - Capacity:
+    10-500 SCFM - Price: $100,000-$500,000 - Strength: Guild has decades
+    of experience with unusual feed gas compositions and non-standard
+    applications. If your feed gas has an unusual contaminant profile,
+    Guild is likely to have seen it before. - Worth contacting directly
+    alongside Chart for competitive bidding - Website:
+    guildassociates.com</p>
+    <p><strong>Parker Hannifin (formerly Balston/domnick
+    hunter)</strong> – Entry-level option for proving concepts. - Small
+    membrane and PSA modules for lab and pilot scale - Price:
+    $50,000-$200,000 - Best for: a proof-of-concept installation or a
+    small research lab that wants to purify helium in-house - Not
+    recommended for production-scale co-op hub operations - Website:
+    parker.com/gas-separation</p>
+    <p><strong>Decision tree for PSA vendor selection:</strong> - If
+    your budget for the PSA stage alone is under $500K: Guild Associates
+    or Parker (smaller systems, faster delivery, lower capital
+    commitment) - If your budget is $500K-$3M and you want a
+    production-ready turnkey system: Chart Industries TITAN line - If
+    you need both PSA and liquefaction: Chart Industries (single vendor
+    reduces integration risk) - If your feed gas has unusual
+    contaminants (H2S, high CO2, trace hydrocarbons): Contact Guild
+    first. Their custom engineering for non-standard applications is
+    their primary competitive advantage.</p>
+    <h3 id="step-4-decide-on-liquefaction-week-4-6">Step 4: Decide on
+    Liquefaction (Week 4-6)</h3>
+    <p>Liquefaction is optional but transformative. Gaseous helium at
+    high pressure is adequate for local cylinder delivery. Liquid helium
+    at -269C (-452F) is required for long-distance transport, export to
+    East Asia (see Document 20), MRI/NMR customers, and premium pricing.
+    Liquefaction adds $500K-$5M to the capital budget but opens the
+    highest-value market segments.</p>
+    <p><strong>Decision tree:</strong> - If your primary market is local
+    cylinder delivery to fabs and labs within 100 miles: liquefaction
+    may not be justified in Phase 1. Start with gas-phase operations and
+    add liquefaction later when revenue supports it. - If you plan to
+    export liquid helium via ISO container to East Asia: liquefaction is
+    essential from day one. See Document 20 for the demand analysis and
+    Document 23 for the revenue model. - If you plan to serve MRI/NMR
+    facilities: these customers require liquid helium. Liquefaction is
+    necessary for this market segment. - If your co-op hub is Phase 1 of
+    a multi-phase buildout (see Document 23, Scenario B): consider
+    ordering the liquefier during Phase 1 construction even if it will
+    not be commissioned until Phase 2. Lead times of 20-40 weeks mean
+    the liquefier ordered today arrives when you need it.</p>
+    <p><strong>Vendors:</strong></p>
+    <p><strong>Chart Industries (PHPK Engineering division)</strong> –
+    Production-scale liquefiers. - Capacity: 15 L/hr to 250+ L/hr -
+    Lab-scale (15 L/hr): approximately $500,000 - Production-scale
+    (60-250 L/hr): $2,000,000-$5,000,000+ - Advantage: Chart builds both
+    PSA and liquefier systems, simplifying integration - Lead time:
+    20-40 weeks (early 2026)</p>
+    <p><strong>Cryomech (Syracuse, NY)</strong> – The leading
+    manufacturer of small reliquefiers and recovery systems.
+    Particularly relevant for the recycling service business line (see
+    Document 21). - LHeP-60: 60 L/day reliquefier, 11 kW input,
+    $250,000-$350,000 - LHeP-120: 120 L/day, 19 kW, $350,000-$450,000 -
+    HRS (Helium Recovery System): Complete gas bag + compressor +
+    reliquefier package, $300,000-$600,000 installed - Best for:
+    recovery/recycling installations at customer sites (the FoxSilicon
+    model of install-operate-maintain) - Also suitable as a small-scale
+    liquefier at the hub for modest liquid production - Website:
+    cryomech.com</p>
+    <p><strong>Quantum Design</strong> – Laboratory-scale liquefiers. -
+    ATL160: 22 L/day, $350,000-$500,000 - ATL260: 40 L/day,
+    $450,000-$600,000 - Best for: research institutions and small labs
+    wanting in-house liquefaction - Not recommended for production-scale
+    hub operations</p>
+    <p><strong>For reference only (above co-op scale):</strong> Linde
+    Engineering builds Helium Cold Box systems (cryogenic distillation +
+    PSA hybrid) for major gas processing plants. Minimum 50 MMSCFD feed
+    gas. $20M-$100M+ per installation. These are custom EPC
+    (engineering, procurement, construction) projects requiring 3-5
+    years from contract to commissioning. This is what Linde and Air
+    Liquide build for themselves – it is not the co-op’s competitive
+    space.</p>
+    <h3 id="step-5-engage-a-system-integrator-week-4-8">Step 5: Engage a
+    System Integrator (Week 4-8)</h3>
+    <p>Unless you are buying a complete turnkey system from Chart, you
+    will need a system integrator to design the interconnections between
+    membrane, PSA, liquefier, storage, and fill station. The system
+    integrator handles:</p>
+    <ul>
+    <li>Process flow design (P&amp;IDs – piping and instrumentation
+    diagrams)</li>
+    <li>Control system integration (PLC/SCADA linking all
+    subsystems)</li>
+    <li>Utility connections (power, water, compressed air)</li>
+    <li>Safety system design (oxygen depletion monitoring, pressure
+    relief, emergency shutdown)</li>
+    <li>Commissioning and start-up support</li>
+    </ul>
+    <p><strong>Where to find system integrators:</strong> - Chart
+    Industries can serve as integrator for their own equipment -
+    Specialty gas engineering firms: Waukesha-Pearce Industries, Air Gas
+    Products, GENERON IGS - Ask each equipment vendor for their
+    recommended integrators – they maintain lists of qualified firms -
+    PNW-specific: consult PNNL’s industry liaison office for referrals
+    to cryogenic engineering firms in the region</p>
+    <p><strong>Budget for system integration:</strong> $100,000-$300,000
+    for engineering, not including equipment. This covers process
+    design, control system programming, installation supervision, and
+    commissioning support. Do not skip this step. Equipment vendors sell
+    equipment; they do not guarantee that their equipment works together
+    with another vendor’s equipment. The system integrator is the
+    insurance policy.</p>
+    <h3 id="step-6-place-orders-and-manage-lead-times-week-6-12">Step 6:
+    Place Orders and Manage Lead Times (Week 6-12)</h3>
+    <p><strong>Critical path items and current lead times (early
+    2026):</strong></p>
     <table>
     <colgroup>
-    <col style="width: 30%" />
+    <col style="width: 11%" />
     <col style="width: 26%" />
-    <col style="width: 42%" />
+    <col style="width: 36%" />
+    <col style="width: 26%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>System</th>
+    <th>Standard Lead Time</th>
+    <th>Crisis-Extended Lead Time</th>
+    <th>Pre-Crisis Baseline</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>PSA skids (standard catalog)</td>
+    <td>16-24 weeks</td>
+    <td>24-36 weeks</td>
+    <td>12-20 weeks</td>
+    </tr>
+    <tr>
+    <td>PSA skids (custom configuration)</td>
+    <td>24-36 weeks</td>
+    <td>36-52 weeks</td>
+    <td>20-30 weeks</td>
+    </tr>
+    <tr>
+    <td>Membrane modules</td>
+    <td>8-12 weeks</td>
+    <td>12-16 weeks</td>
+    <td>6-12 weeks</td>
+    </tr>
+    <tr>
+    <td>Membrane skid (complete)</td>
+    <td>12-20 weeks</td>
+    <td>16-24 weeks</td>
+    <td>10-16 weeks</td>
+    </tr>
+    <tr>
+    <td>Cryogenic liquefiers</td>
+    <td>16-24 weeks</td>
+    <td>24-40 weeks</td>
+    <td>16-24 weeks</td>
+    </tr>
+    <tr>
+    <td>Chart TITAN HPUs</td>
+    <td>20-30 weeks</td>
+    <td>28-40 weeks</td>
+    <td>16-24 weeks</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Lead times are extended across the board due to crisis-driven
+    demand. Every producer referenced in Document 4 is ordering
+    equipment simultaneously, creating a supply chain bottleneck for the
+    equipment manufacturers themselves.</p>
+    <p><strong>Risk mitigation for lead times:</strong> - Place orders
+    before completing site preparation. Equipment lead time is longer
+    than building construction in most cases. Order the PSA and
+    liquefier the same month you sign the site lease (see Document 18
+    for the parallel timeline). - Negotiate progress payments, not
+    lump-sum prepayment. Standard terms: 30% at order, 30% at
+    fabrication milestones, 30% at shipment, 10% retained until
+    commissioning. - Get firm delivery dates in writing with liquidated
+    damages for delays exceeding 4 weeks. In the current seller’s market
+    this may be difficult to negotiate, but it establishes expectations.
+    - Identify backup vendors for each major component. If Chart cannot
+    deliver a PSA skid in time, can Guild deliver an equivalent? If
+    MEDAL membranes are backordered, can Evonik SEPURAN modules
+    substitute?</p>
+    <h2 id="recommended-architecture-for-a-co-op-hub">Recommended
+    Architecture for a Co-op Hub</h2>
+    <pre><code>FEED GAS (0.5-5% He from extraction node,
+          or 50-70% He from purchased crude)
+       |
+       v
+  COMPRESSOR                      $50K-$150K
+  (if feed pressure &lt; membrane operating pressure)
+       |
+       v
+  MEMBRANE FRONT-END              $200K-$400K
+  (Evonik SEPURAN or MEDAL)
+  Enriches to 50-80% He
+  [Skip this stage if feed is already 50-70%]
+       |
+       v
+  PSA POLISHING UNIT              $300K-$1M
+  (Chart TITAN or Guild)
+  Purifies to 99.999%
+       |
+       v
+  LIQUEFIER (optional)            $500K-$5M
+  (Chart PHPK or Cryomech)
+  Cools to -269C for storage/transport
+       |
+       v
+  STORAGE + FILL STATION          $250K-$700K
+  (High-pressure tube bank + cylinder/dewar fill)</code></pre>
+    <p><strong>Total system cost: $1M-$6M</strong> depending on
+    capacity, feed gas concentration, and whether liquefaction is
+    included. See Document 23 for the financial model that sizes this
+    investment against projected revenue.</p>
+    <h2 id="power-consumption-and-operating-costs">Power Consumption and
+    Operating Costs</h2>
+    <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 14%" />
+    <col style="width: 22%" />
+    <col style="width: 40%" />
+    <col style="width: 8%" />
     </colgroup>
     <thead>
     <tr>
     <th>System</th>
     <th>Scale</th>
     <th>Power Draw</th>
+    <th>Monthly kWh (24/7)</th>
+    <th>Monthly Cost at $0.07/kWh</th>
     </tr>
     </thead>
     <tbody>
     <tr>
+    <td>Feed compressor (100 SCFM)</td>
+    <td>Compression</td>
+    <td>20-40 kW</td>
+    <td>14,400-28,800</td>
+    <td>$1,008-$2,016</td>
+    </tr>
+    <tr>
     <td>Membrane skid (100 SCFM)</td>
     <td>Bulk separation</td>
-    <td>15–30 kW (compressor)</td>
+    <td>15-30 kW</td>
+    <td>10,800-21,600</td>
+    <td>$756-$1,512</td>
     </tr>
     <tr>
     <td>PSA (500 SCFH product)</td>
     <td>Polishing to 5N</td>
-    <td>5–15 kW</td>
-    </tr>
-    <tr>
-    <td>Combined membrane+PSA (pilot)</td>
-    <td>0.5–2% He feed, 100 SCFM</td>
-    <td>30–60 kW total</td>
+    <td>5-15 kW</td>
+    <td>3,600-10,800</td>
+    <td>$252-$756</td>
     </tr>
     <tr>
     <td>Cryomech LHeP-60 reliquefier</td>
     <td>60 L/day</td>
     <td>11 kW</td>
+    <td>7,920</td>
+    <td>$554</td>
     </tr>
     <tr>
-    <td>Chart small liquefier</td>
-    <td>Production scale</td>
-    <td>50–200 kW</td>
+    <td>Chart production liquefier</td>
+    <td>100-500 L/day</td>
+    <td>100-200 kW</td>
+    <td>72,000-144,000</td>
+    <td>$5,040-$10,080</td>
+    </tr>
+    <tr>
+    <td>Combined pilot system (no liquefier)</td>
+    <td>Membrane + PSA</td>
+    <td>40-85 kW</td>
+    <td>28,800-61,200</td>
+    <td>$2,016-$4,284</td>
+    </tr>
+    <tr>
+    <td>Combined full system (with liquefier)</td>
+    <td>All stages</td>
+    <td>150-300 kW</td>
+    <td>108,000-216,000</td>
+    <td>$7,560-$15,120</td>
     </tr>
     </tbody>
     </table>
-    <p>At PNW electricity rates ($0.06–$0.08/kWh), a complete
-    membrane+PSA+liquefier system running 24/7 costs roughly
-    <strong>$2,000–$12,000/month</strong> in electricity.</p>
-    <h2 id="maintenance-requirements">Maintenance Requirements</h2>
+    <p>At PNW electricity rates ($0.06-$0.08/kWh), a complete membrane +
+    PSA + liquefier system running 24/7 costs roughly
+    $7,500-$15,000/month in electricity. At Southwest rates
+    ($0.10-$0.12/kWh), the same system costs $11,000-$22,000/month. See
+    Document 24 for the full environmental impact analysis including
+    grid carbon intensity, and Document 18 for how power requirements
+    factor into site selection.</p>
+    <h2 id="maintenance-schedule-and-lifecycle-costs">Maintenance
+    Schedule and Lifecycle Costs</h2>
     <table>
+    <colgroup>
+    <col style="width: 22%" />
+    <col style="width: 20%" />
+    <col style="width: 30%" />
+    <col style="width: 28%" />
+    </colgroup>
     <thead>
     <tr>
     <th>Component</th>
     <th>Interval</th>
-    <th>Cost</th>
+    <th>Cost per Event</th>
+    <th>Annual Budget</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>PSA adsorbent beds</td>
-    <td>Replace every 5–8 years</td>
-    <td>$10K–$50K per change</td>
+    <td>PSA adsorbent beds (CMS/zeolite)</td>
+    <td>Replace every 5-8 years</td>
+    <td>$10,000-$50,000 per bed change</td>
+    <td>$2,000-$10,000 (amortized)</td>
     </tr>
     <tr>
-    <td>PSA valves</td>
-    <td>Overhaul every 2–3 years</td>
-    <td>$5K–$15K</td>
+    <td>PSA switching valves</td>
+    <td>Overhaul every 2-3 years</td>
+    <td>$5,000-$15,000</td>
+    <td>$2,500-$7,500 (amortized)</td>
     </tr>
     <tr>
     <td>Membrane modules</td>
-    <td>Replace every 5–10 years</td>
-    <td>$5K–$20K per module</td>
+    <td>Replace every 5-10 years</td>
+    <td>$5,000-$20,000 per module</td>
+    <td>$1,000-$4,000 (amortized)</td>
     </tr>
     <tr>
-    <td>Pre-treatment filters</td>
+    <td>Pre-treatment filters (coalescing, particulate)</td>
     <td>Quarterly</td>
-    <td>$500–$2K per change</td>
+    <td>$500-$2,000 per change</td>
+    <td>$2,000-$8,000</td>
     </tr>
     <tr>
-    <td>Compressor oil/service</td>
-    <td>Every 2,000–4,000 hours</td>
-    <td>$1K–$3K</td>
+    <td>Feed compressor oil/filters</td>
+    <td>Every 2,000-4,000 operating hours</td>
+    <td>$1,000-$3,000</td>
+    <td>$3,000-$9,000</td>
     </tr>
     <tr>
-    <td>Compressor major overhaul</td>
-    <td>20,000–40,000 hours</td>
-    <td>$15K–$30K</td>
+    <td>Feed compressor major overhaul</td>
+    <td>20,000-40,000 operating hours</td>
+    <td>$15,000-$30,000</td>
+    <td>$4,000-$8,000 (amortized)</td>
     </tr>
     <tr>
-    <td>Cryogenic cold head</td>
-    <td>Annual service</td>
-    <td>$5K–$10K</td>
+    <td>Cryogenic cold head (Gifford-McMahon cycle)</td>
+    <td>Annual preventive maintenance</td>
+    <td>$5,000-$10,000</td>
+    <td>$5,000-$10,000</td>
     </tr>
     <tr>
-    <td>Instruments</td>
+    <td>Analytical instruments (GC, moisture analyzer)</td>
     <td>Annual calibration</td>
-    <td>$2K–$5K</td>
+    <td>$2,000-$5,000</td>
+    <td>$2,000-$5,000</td>
+    </tr>
+    <tr>
+    <td>Control system software/PLC</td>
+    <td>As needed (patches, upgrades)</td>
+    <td>$1,000-$3,000</td>
+    <td>$1,000-$3,000</td>
+    </tr>
+    <tr>
+    <td><strong>Total annual maintenance budget</strong></td>
+    <td></td>
+    <td></td>
+    <td><strong>$22,500-$64,500</strong></td>
     </tr>
     </tbody>
     </table>
-    <h2 id="lead-times-early-2026">Lead Times (Early 2026)</h2>
+    <p>Budget approximately <strong>$50,000/year</strong> for
+    maintenance on a full membrane + PSA + liquefier system. This is
+    included in the operating expense projections in Document 23.
+    Maintenance costs are modest relative to crude helium purchase costs
+    ($1.2M-$2.2M/year) and labor ($390K/year).</p>
+    <h2 id="risk-analysis">Risk Analysis</h2>
     <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 30%" />
+    <col style="width: 22%" />
+    <col style="width: 30%" />
+    </colgroup>
     <thead>
     <tr>
-    <th>System</th>
-    <th>Lead Time</th>
-    <th>Pre-Crisis Baseline</th>
+    <th>Risk</th>
+    <th>Likelihood</th>
+    <th>Impact</th>
+    <th>Mitigation</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>PSA skids (standard)</td>
-    <td>16–30 weeks</td>
-    <td>12–20 weeks</td>
+    <td>Equipment delivery delay (4+ weeks beyond contracted date)</td>
+    <td>High in current market</td>
+    <td>Delays first revenue. Each month of delay costs approximately
+    $40K-$80K in fixed costs without revenue.</td>
+    <td>Order early. Identify backup vendors. Negotiate liquidated
+    damages. See lead time discussion above.</td>
     </tr>
     <tr>
-    <td>PSA skids (custom)</td>
-    <td>30–52 weeks</td>
-    <td>20–30 weeks</td>
+    <td>Feed gas contamination (H2S, heavy hydrocarbons)</td>
+    <td>Medium</td>
+    <td>Poisons PSA adsorbent (permanent damage) or fouls membranes
+    (accelerated degradation). Adsorbent replacement: $10K-$50K
+    unplanned.</td>
+    <td>Require certificate of analysis from every crude helium
+    delivery. Install inline H2S and hydrocarbon analyzers upstream of
+    membrane stage. Reject non-conforming loads.</td>
     </tr>
     <tr>
-    <td>Membrane modules</td>
-    <td>8–16 weeks</td>
-    <td>6–12 weeks</td>
+    <td>Single-vendor dependency</td>
+    <td>Medium</td>
+    <td>If Chart is sole supplier for PSA + liquefier and experiences
+    production issues, entire project timeline shifts.</td>
+    <td>Qualify at least two vendors for each major subsystem during the
+    RFQ phase (Step 3). Guild as backup for Chart PSA. Cryomech as
+    backup for Chart liquefier.</td>
     </tr>
     <tr>
-    <td>Cryogenic liquefiers</td>
-    <td>20–40 weeks</td>
-    <td>16–24 weeks</td>
+    <td>Purity failure (product does not meet 99.999%)</td>
+    <td>Low</td>
+    <td>Cannot sell to semiconductor customers. Revenue stops until
+    resolved.</td>
+    <td>Inline purity analyzers (GC) with automatic product diversion.
+    Off-spec gas is recycled to the front-end, not sold. Build the
+    quality lab (see Document 18) and test every batch before
+    release.</td>
     </tr>
     <tr>
-    <td>Chart HPUs</td>
-    <td>24–36 weeks</td>
-    <td>16–24 weeks</td>
+    <td>Power interruption</td>
+    <td>Low in PNW (hydro grid is reliable)</td>
+    <td>Liquefier and PSA shut down. Liquid helium begins warming.
+    Recovery takes hours.</td>
+    <td>UPS for control systems. Emergency generator for critical loads
+    (PSA valves, safety systems). Liquid storage dewar has 24-48 hour
+    hold time without active cooling.</td>
+    </tr>
+    <tr>
+    <td>Technology obsolescence</td>
+    <td>Very low over 10-year horizon</td>
+    <td>New separation technology displaces PSA or membranes.</td>
+    <td>PSA and membrane technology are mature (40+ years commercial).
+    Evolutionary improvements are incremental, not disruptive. The risk
+    is minimal.</td>
     </tr>
     </tbody>
     </table>
-    <p>Lead times are extended across the board due to crisis-driven
-    demand.</p>
-    <h2 id="first-call-list">First Call List</h2>
-    <p>For someone starting today with $1M–$5M to deploy:</p>
+    <h2 id="first-call-list-sequence-of-vendor-contacts">First Call
+    List: Sequence of Vendor Contacts</h2>
+    <p>For someone starting today with $1M-$5M to deploy:</p>
     <ol type="1">
-    <li><strong>Chart Industries</strong> — TITAN Helium PSA, liquefiers
-    (largest product range at this scale)</li>
-    <li><strong>Guild Associates</strong> — PSA systems, strong
-    small-scale expertise</li>
-    <li><strong>Evonik</strong> — SEPURAN Noble membrane modules (for
-    front-end)</li>
-    <li><strong>Cryomech</strong> — recovery/recycling systems (if
-    serving fab customers)</li>
-    <li><strong>Air Liquide MEDAL</strong> — membrane separation
-    (alternative to Evonik)</li>
+    <li><p><strong>Chart Industries</strong> – Contact TITAN Helium PSA
+    sales and PHPK Engineering (liquefiers). Request budgetary quotes
+    for both PSA and liquefier at your target capacity. Chart has the
+    broadest product range at co-op scale and can offer integrated
+    solutions. Ask for reference installations at similar
+    scale.</p></li>
+    <li><p><strong>Guild Associates</strong> – Contact for competitive
+    PSA quotes, especially if your feed gas has non-standard
+    composition. Guild’s engineering team will review your gas analysis
+    and recommend a configuration. Use Guild’s quote as a benchmark
+    against Chart.</p></li>
+    <li><p><strong>Evonik</strong> – Contact SEPURAN Noble membrane
+    module sales for front-end pricing. Ask for their list of licensed
+    system integrators in North America who can build the complete
+    membrane skid.</p></li>
+    <li><p><strong>Cryomech</strong> – Contact for reliquefier and
+    recovery system pricing. Essential if the co-op plans to offer
+    recycling installation services to fab customers (the fastest path
+    to revenue per Document 21). Also useful as a small-scale liquefier
+    for the hub.</p></li>
+    <li><p><strong>Air Liquide MEDAL</strong> – Contact as an
+    alternative membrane supplier. Request pricing and delivery timeline
+    for He-Sep modules and complete skid systems.</p></li>
+    <li><p><strong>System integrator</strong> – Contact after receiving
+    budgetary quotes from equipment vendors. The integrator needs to
+    know what equipment you are buying before they can design the
+    interconnections.</p></li>
     </ol>
-    <p>Contact Chart and Guild first. They have the most experience at
-    the $1M–$5M scale that a co-op would operate at.</p>
+    <p><strong>Timeline from first vendor contact to equipment
+    on-site:</strong> 9-15 months. This runs in parallel with site
+    selection, permitting, and building preparation (see Document 18 for
+    the coordinated timeline). The equipment procurement path and the
+    site preparation path should start simultaneously – neither should
+    wait for the other.</p>
+    <h2 id="cross-reference-map">Cross-Reference Map</h2>
+    <ul>
+    <li><strong>Document 4</strong> (Global Production): Identifies the
+    crude helium producers whose product will feed this equipment</li>
+    <li><strong>Document 9</strong> (Economics): ROI analysis for
+    extraction nodes and hub configurations</li>
+    <li><strong>Document 14</strong> (Regulatory Landscape): Permits
+    required for equipment installation and operation</li>
+    <li><strong>Document 17</strong> (Crude Sourcing): How the feed gas
+    gets from source to hub</li>
+    <li><strong>Document 18</strong> (Hub Design): How this equipment
+    fits into the physical facility</li>
+    <li><strong>Document 21</strong> (Recycling Deep Dive): Equipment
+    for customer-site recycling installations</li>
+    <li><strong>Document 23</strong> (Financial Model): Capital budget
+    allocation and revenue projections that size the equipment
+    investment</li>
+    </ul>
     <div class="nav">
         <a href="../index.html">← Back to HEL Index</a> ·
         Published 2026-03-31 · PNW Research Series ·
