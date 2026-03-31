@@ -1,0 +1,319 @@
+* Segment 51 — Landing Bag Deploy Indicator Circuit
+* =========================================================================
+* NASA Mission Series v1.21
+* Mercury-Atlas 6 / Friendship 7 — John Glenn, February 20, 1962
+* First American to orbit Earth
+*
+* This circuit nearly changed the outcome of the mission. During
+* Glenn's second orbit, Segment 51 of the Mercury telemetry system
+* showed an indication that the landing bag had deployed. If true,
+* the heat shield was no longer locked in place — and reentry would
+* be fatal.
+*
+* Mission Control made the call: keep the retropack strapped on
+* during reentry (normally jettisoned) to hold the heat shield in
+* place mechanically. Glenn saw flaming chunks of retropack fly
+* past his window and didn't know if it was the retros or his
+* heat shield disintegrating.
+*
+* The landing bag had NOT deployed. It was a faulty switch.
+*
+* Circuit description:
+*   The Mercury capsule used a telemetry commutator — a mechanical
+*   rotary switch that sequentially sampled dozens of sensor channels.
+*   Segment 51 was the landing bag deploy indicator:
+*
+*   1. Microswitch (SPST) on the landing bag mechanism
+*      - Open = stowed (heat shield locked), reads high voltage
+*      - Closed = deployed (heat shield free), reads low voltage
+*   2. Switch connects to a voltage divider in the telemetry input
+*   3. Buffer amplifier conditions the signal
+*   4. FM subcarrier oscillator encodes the voltage as a frequency
+*   5. Frequency is transmitted to ground via the telemetry link
+*
+* Fault model:
+*   The microswitch had intermittent contact resistance — sometimes
+*   making partial contact (0-10K ohms randomly). This produced a
+*   signal that looked like "deployed" to the ground station decoder,
+*   but was actually a noisy, ambiguous voltage level.
+*
+* Run: ngspice -b segment51-indicator.cir
+* =========================================================================
+
+.title Friendship 7 — Segment 51 Landing Bag Deploy Indicator
+
+*--------------------------------------------------------------
+* POWER SUPPLY — MERCURY CAPSULE TELEMETRY BUS
+*--------------------------------------------------------------
+* Mercury used a 28V main bus, with a regulated 6V for telemetry
+V_bus  vcc  0  DC 6
+
+*--------------------------------------------------------------
+* SCENARIO A: NORMAL OPERATION — SWITCH FULLY OPEN (STOWED)
+*--------------------------------------------------------------
+* When the landing bag is stowed, the microswitch is open.
+* The voltage divider reads full voltage (high = stowed/safe).
+* This is the "all clear" state that controllers expect.
+
+* Voltage divider: R_upper from bus to sense point, R_lower to ground
+R_upper  vcc  sense_norm  10k
+R_lower  sense_norm  0  10k
+
+* With switch open: V(sense_norm) = 6V * 10k/(10k+10k) = 3.0V
+* Ground reads 3.0V → "landing bag stowed" → heat shield locked
+
+*--------------------------------------------------------------
+* SCENARIO B: NORMAL OPERATION — SWITCH FULLY CLOSED (DEPLOYED)
+*--------------------------------------------------------------
+* When the landing bag deploys, the microswitch closes.
+* The switch shorts the lower resistor, pulling the sense
+* voltage to near zero.
+
+R_upper_d  vcc  sense_deploy  10k
+R_lower_d  sense_deploy  sw_deploy  10k
+* Closed switch: 0.01 ohms (clean mechanical contact)
+R_sw_closed  sw_deploy  0  0.01
+
+* V(sense_deploy) = 6V * (10k||0.01) / (10k + 10k||0.01) ≈ 0.006V
+* Ground reads ~0V → "landing bag deployed" → heat shield free
+
+*--------------------------------------------------------------
+* SCENARIO C: FAULT — INTERMITTENT SWITCH CONTACT
+*--------------------------------------------------------------
+* This is what actually happened on Friendship 7. The switch
+* bounced between open and partially closed states, producing
+* a voltage that wandered between the two valid readings.
+*
+* Modeled with a piecewise linear voltage source driving a
+* behavioral current source that simulates variable contact
+* resistance from fully open (infinite) to partial contact
+* (hundreds of ohms to several kilohms).
+
+R_upper_f  vcc  sense_fault  10k
+R_lower_f  sense_fault  sw_fault  10k
+
+* Fault switch model:
+* PWL envelope represents the contact resistance varying over time.
+* 0V = open (no contact), 1V = closed (partial contact)
+* The pattern simulates a bouncing, dirty switch:
+*   0-1ms:   open (stowed indication)
+*   1-1.5ms: brief partial contact (noise)
+*   1.5-3ms: open again
+*   3-4ms:   sustained partial contact (false deploy reading)
+*   4-5ms:   open/closed bouncing
+*   5-7ms:   partial contact with varying resistance
+*   7-8ms:   open (returns to stowed indication)
+*   8-10ms:  intermittent fluttering
+
+V_fault_env  fault_env  0  PWL(
++ 0      0
++ 1m     0
++ 1.1m   0.7
++ 1.3m   0.3
++ 1.5m   0
++ 3m     0
++ 3.2m   0.9
++ 3.8m   0.85
++ 4m     0.1
++ 4.2m   0.8
++ 4.4m   0.2
++ 4.6m   0.6
++ 5m     0.95
++ 5.5m   0.7
++ 6m     0.9
++ 6.5m   0.5
++ 7m     0.1
++ 7.5m   0
++ 8m     0
++ 8.3m   0.4
++ 8.5m   0
++ 8.7m   0.6
++ 8.9m   0.1
++ 9.2m   0.5
++ 9.5m   0
++ 10m    0)
+
+* Behavioral resistor: contact resistance varies from 100K (open)
+* to 500 ohms (partial contact). Full close would be <1 ohm but
+* the faulty switch never made clean contact.
+*
+* R_contact = 100K * (1 - 0.998 * env) + 500 * env
+* At env=0: 100K ohms (effectively open)
+* At env=1: 500 ohms (partial contact, pulling voltage down)
+B_fault_sw  sw_fault  0  I = V(sw_fault) / (100e3 * (1 - 0.998 * V(fault_env)) + 500 * V(fault_env))
+
+*--------------------------------------------------------------
+* BUFFER AMPLIFIER — TELEMETRY SIGNAL CONDITIONING
+*--------------------------------------------------------------
+* Unity-gain buffer isolates the sensor from the commutator.
+* Uses a simple op-amp model (behavioral source).
+* In the real Mercury capsule this was a vacuum tube amplifier.
+
+* Buffer for normal stowed signal
+B_buf_norm  buf_norm  0  V = V(sense_norm)
+
+* Buffer for normal deployed signal
+B_buf_deploy  buf_deploy  0  V = V(sense_deploy)
+
+* Buffer for fault signal — includes slight bandwidth limiting
+* (low-pass at ~10 kHz to model amplifier response)
+R_buf_in  sense_fault  buf_fault_in  1k
+C_buf_filt  buf_fault_in  0  15n
+B_buf_fault  buf_fault  0  V = V(buf_fault_in)
+
+*--------------------------------------------------------------
+* FM SUBCARRIER OSCILLATOR (SIMPLIFIED)
+*--------------------------------------------------------------
+* The Mercury telemetry system used FM/FM encoding:
+*   Each sensor channel modulated the frequency of an
+*   FM subcarrier oscillator. The subcarrier frequency
+*   was proportional to the input voltage:
+*     V_in = 0V → lower frequency limit (deployed)
+*     V_in = 3V → center frequency (stowed)
+*
+* Modeled as a behavioral VCO (voltage-controlled oscillator):
+*   f_out = f_center + K * (V_in - V_center)
+*   f_center = 7.35 kHz (IRIG Channel 7, 7.35 kHz ±7.5%)
+*   K = 184 Hz/V (frequency deviation per volt)
+*
+* Output is a sine wave whose frequency tracks the input voltage.
+
+* Normal stowed: steady frequency at center
+B_vco_norm  vco_norm  0  V = sin(2 * 3.14159 * (7350 + 184 * (V(buf_norm) - 3.0)) * TIME)
+
+* Normal deployed: frequency shifted to lower limit
+B_vco_deploy  vco_deploy  0  V = sin(2 * 3.14159 * (7350 + 184 * (V(buf_deploy) - 3.0)) * TIME)
+
+* Fault: frequency jitters as the input voltage bounces around
+B_vco_fault  vco_fault  0  V = sin(2 * 3.14159 * (7350 + 184 * (V(buf_fault) - 3.0)) * TIME)
+
+*--------------------------------------------------------------
+* GROUND STATION DECODER (THRESHOLD DETECTOR)
+*--------------------------------------------------------------
+* On the ground, each subcarrier channel was demodulated
+* and compared against thresholds to determine state.
+*
+* Decision threshold: 1.5V (midpoint between 0V and 3V)
+*   Above 1.5V → "stowed" (safe)
+*   Below 1.5V → "deployed" (danger!)
+*
+* The problem: with the intermittent switch, the voltage
+* wandered around the threshold, producing ambiguous readings.
+* Controllers saw the indicator flickering — sometimes stowed,
+* sometimes deployed. With Glenn's life on the line, they
+* couldn't ignore it.
+
+V_thresh  threshold  0  DC 1.5
+
+* Comparator output for each scenario
+* Output = 5V means "stowed" (safe), 0V means "deployed" (danger)
+B_decode_norm  decode_norm  0  V = 5.0 * (1.0 / (1.0 + exp(-50 * (V(buf_norm) - V(threshold)))))
+B_decode_deploy  decode_deploy  0  V = 5.0 * (1.0 / (1.0 + exp(-50 * (V(buf_deploy) - V(threshold)))))
+B_decode_fault  decode_fault  0  V = 5.0 * (1.0 / (1.0 + exp(-50 * (V(buf_fault) - V(threshold)))))
+
+*--------------------------------------------------------------
+* SIMULATION
+*--------------------------------------------------------------
+* 10ms transient with 1us timestep
+* Shows all three scenarios simultaneously
+.tran 0 10m 0 1u
+
+*--------------------------------------------------------------
+* OUTPUT
+*--------------------------------------------------------------
+.control
+  run
+
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  * Plot 1: Raw sensor voltages — the three scenarios
+  hardcopy seg51_sensor.png v(sense_norm) v(sense_deploy) v(sense_fault)
+  + title 'Segment 51 — Raw Sensor Voltage (3 Scenarios)'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 2: Buffered signals going to telemetry
+  hardcopy seg51_buffered.png v(buf_norm) v(buf_deploy) v(buf_fault)
+  + title 'Buffered Telemetry Signals — Normal vs Fault'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 3: VCO outputs — frequency modulation
+  hardcopy seg51_vco.png v(vco_norm) v(vco_fault)
+  + title 'FM Subcarrier — Stowed (steady) vs Fault (jittering)'
+  + xlabel 'Time (s)' ylabel 'Amplitude (V)'
+
+  * Plot 4: Ground decoder output — the decision that mattered
+  hardcopy seg51_decode.png v(decode_norm) v(decode_deploy) v(decode_fault) v(threshold)
+  + title 'Ground Station Decoder: Stowed/Deployed Decision'
+  + xlabel 'Time (s)' ylabel 'State (5V=Stowed, 0V=Deployed)'
+
+  * Plot 5: Fault detail — sensor voltage vs threshold
+  hardcopy seg51_fault_detail.png v(sense_fault) v(threshold)
+  + title 'Segment 51 Fault — Voltage Wandering Around Decision Threshold'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Measurements
+  echo ""
+  echo "========================================================"
+  echo "  SEGMENT 51 — LANDING BAG DEPLOY INDICATOR ANALYSIS"
+  echo "  Mercury-Atlas 6 / Friendship 7 — February 20, 1962"
+  echo "========================================================"
+  echo ""
+
+  echo "--- Scenario A: Normal Stowed (switch open) ---"
+  meas tran v_stowed AVG v(sense_norm) from=0 to=10m
+  meas tran decode_stowed AVG v(decode_norm) from=0 to=10m
+  echo "  Expected: sensor ~3.0V, decoder = 5V (STOWED/SAFE)"
+
+  echo ""
+  echo "--- Scenario B: Normal Deployed (switch closed) ---"
+  meas tran v_deployed AVG v(sense_deploy) from=0 to=10m
+  meas tran decode_deployed AVG v(decode_deploy) from=0 to=10m
+  echo "  Expected: sensor ~0V, decoder = 0V (DEPLOYED)"
+
+  echo ""
+  echo "--- Scenario C: FAULT — Intermittent Switch ---"
+  meas tran v_fault_avg AVG v(sense_fault) from=0 to=10m
+  meas tran v_fault_max MAX v(sense_fault) from=0 to=10m
+  meas tran v_fault_min MIN v(sense_fault) from=3m to=6m
+  echo "  Sensor voltage wanders between stowed and deployed levels"
+  echo "  Decoder output flickers — neither clearly safe nor clearly danger"
+
+  echo ""
+  echo "--- Time spent in each state during fault ---"
+  meas tran fault_high AVG v(decode_fault) from=0 to=2m
+  meas tran fault_mid AVG v(decode_fault) from=3m to=6m
+  meas tran fault_low AVG v(decode_fault) from=8m to=10m
+
+  echo ""
+  echo "========================================================"
+  echo "  HISTORICAL ANALYSIS"
+  echo "========================================================"
+  echo ""
+  echo "The Segment 51 indicator showed intermittent DEPLOYED readings"
+  echo "during Glenn's second and third orbits. Flight Director Chris"
+  echo "Kraft and his team faced an impossible decision:"
+  echo ""
+  echo "  IF the heat shield was loose:"
+  echo "    - Keeping the retropack on might hold it in place"
+  echo "    - But the burning retros could damage the shield"
+  echo ""
+  echo "  IF the indicator was false:"
+  echo "    - Normal retropack jettison was the safe procedure"
+  echo "    - Keeping it on added risk from burning debris"
+  echo ""
+  echo "They chose to keep the retropack on. The decision was correct"
+  echo "— the heat shield was fine, the switch was faulty. But Glenn"
+  echo "watched flaming chunks of retropack fly past his window during"
+  echo "reentry, not knowing if his heat shield was failing."
+  echo ""
+  echo "Post-flight analysis: a single microswitch with intermittent"
+  echo "contact resistance — a failure mode worth perhaps $0.50 in"
+  echo "parts — nearly caused the mission to be aborted and subjected"
+  echo "the astronaut to unnecessary psychological stress during the"
+  echo "most dangerous phase of spaceflight."
+
+  quit
+.endc
+
+.end

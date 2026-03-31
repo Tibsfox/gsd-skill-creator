@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friendship 7 — Orbital Flight Simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --space: #040508;
+    --orbital-blue: #1840A0;
+    --firefly-gold: #C89840;
+    --reentry-amber: #D08020;
+    --earth-green: #2A6040;
+    --atlantic-blue: #0A2848;
+    --salmon-copper: #C07040;
+    --salmon-silver: #C0C8D0;
+    --text: #E0E0E0;
+    --text-dim: #909090;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--space);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+  }
+  h1 {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: var(--salmon-silver);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 16px;
+    max-width: 1440px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sim-panel {
+    flex: 1;
+    min-width: 700px;
+    max-width: 900px;
+    background: #06080E;
+    border: 1px solid #141830;
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .info-panel {
+    flex: 0 0 300px;
+    background: #06080E;
+    border: 1px solid #141830;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 11px;
+    max-height: 740px;
+    overflow-y: auto;
+  }
+  .panel-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--orbital-blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #141830;
+  }
+  canvas { width: 100%; border-radius: 6px; background: var(--space); }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    padding: 5px 14px;
+    border: 1px solid #253050;
+    background: #0C1020;
+    color: var(--text-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .ctrl-btn:hover { border-color: var(--orbital-blue); color: var(--text); }
+  .ctrl-btn.active { border-color: var(--orbital-blue); color: var(--orbital-blue); background: rgba(24,64,160,0.12); }
+  .speed-control { display: flex; align-items: center; gap: 6px; }
+  .speed-control label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); }
+  .speed-control input[type=range] { width: 100px; accent-color: var(--orbital-blue); }
+  .speed-val { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--orbital-blue); min-width: 30px; }
+  .hud-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #0A0E18;
+  }
+  .hud-label { color: var(--text-dim); font-family: 'DM Mono', monospace; font-size: 10px; }
+  .hud-value { color: var(--text); font-family: 'DM Mono', monospace; font-size: 10px; }
+  .hud-value.highlight { color: var(--orbital-blue); }
+  .hud-value.warn { color: var(--reentry-amber); }
+  .hud-value.alert { color: #E04040; }
+  .event-log {
+    margin-top: 6px;
+    max-height: 180px;
+    overflow-y: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    padding: 6px;
+    background: #040610;
+    border-radius: 4px;
+  }
+  .event-log .ev { padding: 2px 0; border-bottom: 1px solid #0A0E18; }
+  .event-log .et { color: var(--orbital-blue); }
+  .event-log .em { color: var(--firefly-gold); }
+  .fact-block { margin-top: 8px; line-height: 1.7; color: var(--text-dim); font-size: 10px; }
+  .fact-block strong { color: var(--salmon-silver); }
+  .minimap-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    margin-top: 8px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Friendship 7</h1>
+<p class="subtitle">Mercury-Atlas 6 &mdash; John Glenn &mdash; February 20, 1962 &mdash; 3 Orbits</p>
+
+<div class="main-container">
+  <div class="sim-panel">
+    <div class="panel-title">Orbital Flight &mdash; Side View</div>
+    <canvas id="orbitCanvas" width="880" height="520"></canvas>
+    <p class="minimap-label">Ground Track</p>
+    <canvas id="mapCanvas" width="880" height="140"></canvas>
+    <div class="controls">
+      <button class="ctrl-btn active" id="btnPlay" onclick="togglePause()">PAUSE</button>
+      <button class="ctrl-btn" onclick="restart()">RESTART</button>
+      <div class="speed-control">
+        <label>SPEED</label>
+        <input type="range" id="speedSlider" min="1" max="100" value="20">
+        <span class="speed-val" id="speedVal">20x</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <div class="panel-title">Telemetry</div>
+    <div class="hud-row"><span class="hud-label">MET</span><span class="hud-value highlight" id="hMET">00:00:00</span></div>
+    <div class="hud-row"><span class="hud-label">ORBIT</span><span class="hud-value" id="hOrbit">---</span></div>
+    <div class="hud-row"><span class="hud-label">ALTITUDE</span><span class="hud-value" id="hAlt">0 km</span></div>
+    <div class="hud-row"><span class="hud-label">VELOCITY</span><span class="hud-value" id="hVel">0.00 km/s</span></div>
+    <div class="hud-row"><span class="hud-label">STATUS</span><span class="hud-value highlight" id="hStatus">PRE-LAUNCH</span></div>
+
+    <div class="panel-title" style="margin-top:14px">Event Log</div>
+    <div class="event-log" id="eventLog"></div>
+
+    <div class="panel-title" style="margin-top:14px">Mission Facts</div>
+    <div class="fact-block">
+      <strong>Spacecraft:</strong> Mercury No. 13<br>
+      <strong>Booster:</strong> Atlas LV-3B (109-D)<br>
+      <strong>Perigee:</strong> 161 km<br>
+      <strong>Apogee:</strong> 265 km<br>
+      <strong>Inclination:</strong> 32.5&deg;<br>
+      <strong>Duration:</strong> 4h 55m 23s<br>
+      <strong>Orbits:</strong> 3<br>
+      <strong>Recovery:</strong> USS Noa, Atlantic<br><br>
+      <strong>Key moments:</strong> Glenn observed luminescent
+      "fireflies" &mdash; later identified as ice particles
+      sublimating in sunlight. During orbit 2, Segment 51
+      telemetry falsely indicated the landing bag had deployed.
+      Mission Control ordered Glenn to retain the retropack
+      through reentry as a heat shield backup. The retropack
+      burned away during reentry, trailing spectacular debris
+      past the capsule window.
+    </div>
+  </div>
+</div>
+
+<script>
+const OC = document.getElementById('orbitCanvas');
+const ctx = OC.getContext('2d');
+const MC = document.getElementById('mapCanvas');
+const mctx = MC.getContext('2d');
+
+const EARTH_R = 6371, PERIGEE = 161, APOGEE = 265;
+const SEMI_MAJOR = EARTH_R + (PERIGEE + APOGEE) / 2;
+const ECC = (APOGEE - PERIGEE) / (2 * EARTH_R + APOGEE + PERIGEE);
+const ORBIT_PERIOD = 88.5 * 60;
+const MISSION_DUR = 4 * 3600 + 55 * 60 + 23;
+const INCL = 32.5 * Math.PI / 180;
+const MU = 398600.4;
+
+let met = 0, paused = false, speed = 20, lastTS = 0;
+let fireflies = [], debris = [], events = [], fired = {}, done = false;
+let stars = null;
+
+const EVENTS = [
+  [0,     'T-0 LAUNCH \u2014 GODSPEED, JOHN GLENN',     'ASCENT'],
+  [302,   'BECO \u2014 BOOSTER ENGINE CUTOFF',           'ASCENT'],
+  [312,   'TOWER JETTISON',                              'ASCENT'],
+  [510,   'SECO \u2014 ORBIT INSERTION',                 'ORBIT 1 \u2014 DAY SIDE'],
+  [2100,  'ORBITAL DAWN \u2014 FIRST SUNRISE',           'ORBIT 1 \u2014 SUNRISE'],
+  [3200,  'NIGHT SIDE \u2014 FIREFLIES OBSERVED',        'ORBIT 1 \u2014 FIREFLIES'],
+  [5330,  'ORBIT 2 BEGIN',                               'ORBIT 2 \u2014 DAY SIDE'],
+  [7200,  'YAW DRIFT \u2014 SWITCHING TO MANUAL',        'ORBIT 2 \u2014 MANUAL CONTROL'],
+  [9800,  '\u26A0 SEGMENT 51 \u2014 HEAT SHIELD INDICATOR', 'ORBIT 2 \u2014 CAUTION'],
+  [10660, 'ORBIT 3 BEGIN',                               'ORBIT 3 \u2014 DAY SIDE'],
+  [13800, 'RETROFIRE \u2014 3 RETROS NOMINAL',           'RETROFIRE'],
+  [14400, 'RETAIN RETROPACK \u2014 MC ORDER',            'REENTRY PREP'],
+  [15200, 'REENTRY \u2014 RETROPACK BURNING AWAY',       'REENTRY'],
+  [15600, 'COMMUNICATIONS BLACKOUT',                     'BLACKOUT'],
+  [16200, 'DROGUE CHUTE DEPLOYED',                       'DESCENT'],
+  [16500, 'MAIN CHUTE DEPLOYED \u2014 10.7 km',          'DESCENT'],
+  [17723, 'SPLASHDOWN \u2014 MISSION COMPLETE',           'SPLASHDOWN']
+];
+
+function fmtTime(t) {
+  const h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = Math.floor(t % 60);
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function logEvent(t, text) {
+  events.unshift({ ts: fmtTime(t), text });
+  if (events.length > 40) events.pop();
+  document.getElementById('eventLog').innerHTML = events.map(e =>
+    `<div class="ev"><span class="et">${e.ts}</span> <span class="em">${e.text}</span></div>`
+  ).join('');
+}
+
+function trueAnomaly(t) {
+  const M = (2 * Math.PI * (t % ORBIT_PERIOD)) / ORBIT_PERIOD;
+  let E = M;
+  for (let i = 0; i < 10; i++) E = M + ECC * Math.sin(E);
+  const cv = (Math.cos(E) - ECC) / (1 - ECC * Math.cos(E));
+  const sv = Math.sqrt(1 - ECC * ECC) * Math.sin(E) / (1 - ECC * Math.cos(E));
+  return Math.atan2(sv, cv);
+}
+
+function altAtV(v) { return SEMI_MAJOR * (1 - ECC * ECC) / (1 + ECC * Math.cos(v)) - EARTH_R; }
+function velAtAlt(a) { return Math.sqrt(MU * (2 / (EARTH_R + a) - 1 / SEMI_MAJOR)); }
+function orbitNum() { return met < 510 ? 0 : Math.min(3, Math.floor((met - 510) / ORBIT_PERIOD) + 1); }
+function phase() { return met < 510 ? 'asc' : met < 15200 ? 'orb' : met < 17723 ? 're' : 'end'; }
+
+function isNight(v) {
+  let d = ((v % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+  return d > Math.PI * 0.55 && d < Math.PI * 1.45;
+}
+
+function spawnFireflies(x, y) {
+  while (fireflies.length < 30) {
+    fireflies.push({
+      x: x + (Math.random() - 0.5) * 60, y: y + (Math.random() - 0.5) * 40,
+      vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+      life: 1, sz: Math.random() * 2 + 0.5, ph: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function spawnDebris(x, y) {
+  for (let i = 0; i < 6; i++) {
+    debris.push({
+      x: x + (Math.random() - 0.5) * 20, y: y + (Math.random() - 0.5) * 20,
+      vx: (Math.random() - 0.5) * 3 - 1, vy: (Math.random() - 0.5) * 3 + 1,
+      life: 1, sz: Math.random() * 3 + 1
+    });
+  }
+}
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 200; i++) {
+    stars.push({ x: Math.random() * OC.width, y: Math.random() * OC.height,
+      b: Math.random() * 0.5 + 0.2, s: Math.random() * 1.2 + 0.3 });
+  }
+}
+
+function drawOrbit() {
+  const W = OC.width, H = OC.height;
+  ctx.clearRect(0, 0, W, H);
+  if (!stars) initStars();
+
+  for (const s of stars) {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.s, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,210,230,${s.b})`;
+    ctx.fill();
+  }
+
+  const cx = W * 0.42, cy = H * 0.55, eR = 150;
+  const scale = eR / EARTH_R;
+  const termX = cx + Math.sin(met * 0.0001) * eR * 0.3;
+
+  // Earth: night side
+  ctx.beginPath(); ctx.arc(cx, cy, eR, 0, Math.PI * 2);
+  ctx.fillStyle = '#060C18'; ctx.fill();
+
+  // Earth: day side (clip right of terminator)
+  ctx.save();
+  ctx.beginPath(); ctx.rect(termX, cy - eR - 2, eR + 10, eR * 2 + 4); ctx.clip();
+  ctx.beginPath(); ctx.arc(cx, cy, eR, 0, Math.PI * 2);
+  const dg = ctx.createRadialGradient(cx + 30, cy - 20, 10, cx, cy, eR);
+  dg.addColorStop(0, '#2A7050'); dg.addColorStop(0.4, '#1A5040');
+  dg.addColorStop(0.8, '#0A3828'); dg.addColorStop(1, '#082820');
+  ctx.fillStyle = dg; ctx.fill();
+  ctx.restore();
+
+  // Continents (subtle hints inside earth clip)
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx, cy, eR, 0, Math.PI * 2); ctx.clip();
+  ctx.fillStyle = 'rgba(42,96,64,0.25)';
+  ctx.beginPath(); ctx.ellipse(cx + 40, cy - 10, 25, 45, 0.2, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(cx - 60, cy - 20, 20, 55, -0.1, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+
+  // Atmosphere
+  for (let i = 3; i >= 0; i--) {
+    ctx.beginPath(); ctx.arc(cx, cy, eR + 4 + i * 6, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(24,64,160,${0.12 - i * 0.025})`; ctx.lineWidth = 3; ctx.stroke();
+  }
+
+  // Terminator line
+  ctx.beginPath(); ctx.moveTo(termX, cy - eR); ctx.lineTo(termX, cy + eR);
+  ctx.strokeStyle = 'rgba(24,64,160,0.2)'; ctx.lineWidth = 1; ctx.stroke();
+
+  // Orbital path
+  const oA = (EARTH_R + APOGEE) * scale, oB = (EARTH_R + PERIGEE) * scale;
+  const oCx = cx - (oA - oB) * 0.5;
+  ctx.beginPath(); ctx.ellipse(oCx, cy, oA, oB, 0, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(24,64,160,0.25)'; ctx.lineWidth = 1;
+  ctx.setLineDash([4, 6]); ctx.stroke(); ctx.setLineDash([]);
+
+  // Capsule position
+  let capX, capY, alt = 0, vel = 0;
+  const p = phase();
+
+  if (p === 'asc') {
+    const t = Math.min(1, met / 510);
+    const ang = -Math.PI / 2 + t * Math.PI * 0.3;
+    const r = eR + t * PERIGEE * scale;
+    capX = cx + Math.cos(ang) * r;
+    capY = cy + Math.sin(ang) * r;
+    alt = t * PERIGEE; vel = t * velAtAlt(PERIGEE);
+  } else if (p === 'orb') {
+    const ot = met - 510;
+    const v = trueAnomaly(ot);
+    alt = altAtV(v); vel = velAtAlt(alt);
+    const r = (EARTH_R + alt) * scale;
+    const da = v - Math.PI / 2;
+    capX = oCx + Math.cos(da) * (r * oA / oB);
+    capY = cy + Math.sin(da) * r;
+    if (isNight(v) && orbitNum() >= 1) spawnFireflies(capX, capY);
+  } else if (p === 're') {
+    const t = Math.min(1, (met - 15200) / 2523);
+    const ang = Math.PI * 0.25 + t * Math.PI * 0.2;
+    const r = eR + (1 - t) * PERIGEE * scale * 0.8;
+    capX = cx + Math.cos(ang) * r; capY = cy + Math.sin(ang) * r;
+    alt = (1 - t) * PERIGEE; vel = (1 - t * 0.7) * velAtAlt(PERIGEE);
+    if (met < 16200) {
+      const pg = ctx.createRadialGradient(capX, capY, 2, capX, capY, 45);
+      pg.addColorStop(0, 'rgba(208,128,32,0.6)');
+      pg.addColorStop(0.5, 'rgba(208,80,20,0.25)');
+      pg.addColorStop(1, 'rgba(208,80,20,0)');
+      ctx.fillStyle = pg;
+      ctx.fillRect(capX - 50, capY - 50, 100, 100);
+      spawnDebris(capX - 10, capY);
+    }
+  } else {
+    capX = cx + 80; capY = cy + eR - 10; alt = 0; vel = 0;
+  }
+
+  // Update particles
+  const dt = speed / 60;
+  for (let i = fireflies.length - 1; i >= 0; i--) {
+    const f = fireflies[i];
+    f.x += f.vx; f.y += f.vy; f.life -= dt * 0.02; f.ph += dt * 3;
+    if (f.life <= 0) { fireflies.splice(i, 1); continue; }
+    const a = f.life * (0.5 + 0.5 * Math.sin(f.ph));
+    ctx.beginPath(); ctx.arc(f.x, f.y, f.sz, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,152,64,${a})`; ctx.fill();
+    ctx.beginPath(); ctx.arc(f.x, f.y, f.sz * 3, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,152,64,${a * 0.15})`; ctx.fill();
+  }
+  for (let i = debris.length - 1; i >= 0; i--) {
+    const d = debris[i];
+    d.x += d.vx; d.y += d.vy; d.life -= dt * 0.4;
+    if (d.life <= 0) { debris.splice(i, 1); continue; }
+    ctx.beginPath(); ctx.arc(d.x, d.y, d.sz, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(208,128,32,${d.life})`; ctx.fill();
+    ctx.beginPath(); ctx.arc(d.x, d.y, d.sz * 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(208,128,32,${d.life * 0.2})`; ctx.fill();
+  }
+
+  // Draw capsule
+  if (p !== 'end') {
+    ctx.save();
+    ctx.translate(capX, capY);
+    let rot = 0;
+    if (p === 'orb') rot = trueAnomaly(met - 510);
+    else if (p === 're') rot = Math.PI * 0.35;
+    else if (p === 'asc') rot = -Math.PI * 0.3;
+    ctx.rotate(rot);
+    ctx.beginPath();
+    ctx.moveTo(-4, -6); ctx.lineTo(4, -6); ctx.lineTo(6, 0);
+    ctx.lineTo(4, 6); ctx.lineTo(-4, 6); ctx.lineTo(-6, 0);
+    ctx.closePath();
+    ctx.fillStyle = '#C0C8D0'; ctx.fill();
+    ctx.strokeStyle = '#1840A0'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.beginPath(); ctx.arc(0, 0, 10, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(24,64,160,0.15)'; ctx.fill();
+    ctx.restore();
+  } else {
+    ctx.beginPath(); ctx.arc(capX, capY, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#C0C8D0'; ctx.fill();
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath(); ctx.arc(capX, capY, 10 + i * 8, 0, Math.PI);
+      ctx.strokeStyle = `rgba(10,40,72,${0.5 - i * 0.15})`; ctx.lineWidth = 1; ctx.stroke();
+    }
+  }
+
+  // Parachute in descent
+  if (met >= 16500 && met < 17723 && p === 're') {
+    ctx.beginPath();
+    ctx.moveTo(capX - 15, capY - 25);
+    ctx.quadraticCurveTo(capX, capY - 45, capX + 15, capY - 25);
+    ctx.strokeStyle = 'rgba(192,200,208,0.5)'; ctx.lineWidth = 1; ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(capX - 15, capY - 25); ctx.lineTo(capX, capY - 5);
+    ctx.lineTo(capX + 15, capY - 25);
+    ctx.strokeStyle = 'rgba(192,200,208,0.3)'; ctx.stroke();
+  }
+
+  // Blackout overlay
+  if (met >= 15600 && met < 16200) {
+    const t = (met - 15600) / 600;
+    const a = Math.sin(t * Math.PI) * 0.3;
+    ctx.fillStyle = `rgba(208,128,32,${a})`;
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '14px "DM Mono", monospace';
+    ctx.fillStyle = `rgba(208,128,32,${a + 0.3})`;
+    ctx.textAlign = 'center';
+    ctx.fillText('SIGNAL LOST', W / 2, 30);
+    ctx.textAlign = 'start';
+  }
+
+  // HUD updates
+  document.getElementById('hMET').textContent = fmtTime(met);
+  const on = orbitNum();
+  document.getElementById('hOrbit').textContent = on > 0 ? on : '---';
+  document.getElementById('hAlt').textContent = `${Math.round(alt)} km`;
+  document.getElementById('hVel').textContent = `${vel.toFixed(2)} km/s`;
+  const se = document.getElementById('hStatus');
+  se.className = 'hud-value' + (p === 're' ? ' warn' : ' highlight');
+}
+
+function drawMap() {
+  const W = MC.width, H = MC.height;
+  mctx.clearRect(0, 0, W, H);
+  mctx.fillStyle = '#0A1828'; mctx.fillRect(0, 0, W, H);
+
+  // Continents
+  mctx.fillStyle = 'rgba(42,96,64,0.2)'; mctx.strokeStyle = 'rgba(42,96,64,0.35)'; mctx.lineWidth = 0.8;
+  const shapes = [
+    [[0.08,0.15],[0.18,0.12],[0.24,0.18],[0.28,0.30],[0.25,0.38],[0.20,0.42],[0.18,0.38],[0.12,0.35],[0.06,0.25]],
+    [[0.22,0.48],[0.26,0.50],[0.27,0.60],[0.24,0.72],[0.21,0.78],[0.20,0.68],[0.19,0.55]],
+    [[0.45,0.30],[0.52,0.30],[0.54,0.42],[0.52,0.55],[0.50,0.65],[0.47,0.60],[0.44,0.45]],
+    [[0.45,0.18],[0.52,0.16],[0.54,0.22],[0.50,0.28],[0.45,0.28]],
+    [[0.54,0.12],[0.75,0.10],[0.82,0.20],[0.78,0.35],[0.70,0.38],[0.60,0.35],[0.55,0.25]],
+    [[0.78,0.58],[0.85,0.55],[0.87,0.62],[0.83,0.68],[0.78,0.65]]
+  ];
+  for (const pts of shapes) {
+    mctx.beginPath();
+    mctx.moveTo(pts[0][0] * W, pts[0][1] * H);
+    for (let i = 1; i < pts.length; i++) mctx.lineTo(pts[i][0] * W, pts[i][1] * H);
+    mctx.closePath(); mctx.fill(); mctx.stroke();
+  }
+
+  // Grid
+  mctx.strokeStyle = 'rgba(24,64,160,0.1)'; mctx.lineWidth = 0.5;
+  for (let i = 1; i < 6; i++) { mctx.beginPath(); mctx.moveTo(0, i*H/6); mctx.lineTo(W, i*H/6); mctx.stroke(); }
+  for (let i = 1; i < 12; i++) { mctx.beginPath(); mctx.moveTo(i*W/12, 0); mctx.lineTo(i*W/12, H); mctx.stroke(); }
+  mctx.strokeStyle = 'rgba(24,64,160,0.25)'; mctx.lineWidth = 1;
+  mctx.beginPath(); mctx.moveTo(0, H/2); mctx.lineTo(W, H/2); mctx.stroke();
+
+  // Ground track
+  if (met > 510) {
+    const ot = met - 510;
+    mctx.beginPath(); mctx.strokeStyle = 'rgba(200,152,64,0.4)'; mctx.lineWidth = 1;
+    let prevPx = -1;
+    const n = Math.min(2000, Math.floor(ot / 3));
+    for (let i = 0; i <= n; i++) {
+      const t = (i / n) * ot;
+      const lat = Math.asin(Math.sin(INCL) * Math.sin(2 * Math.PI * t / ORBIT_PERIOD)) * 180 / Math.PI;
+      const lon = ((-80 + (t / ORBIT_PERIOD) * 360 - t * (360 / 86400)) % 360 + 360) % 360 - 180;
+      const px = ((lon + 180) / 360) * W, py = ((90 - lat) / 180) * H;
+      if (i === 0 || Math.abs(px - prevPx) > W * 0.4) mctx.moveTo(px, py);
+      else mctx.lineTo(px, py);
+      prevPx = px;
+    }
+    mctx.stroke();
+
+    // Current pos
+    const lat = Math.asin(Math.sin(INCL) * Math.sin(2 * Math.PI * ot / ORBIT_PERIOD)) * 180 / Math.PI;
+    const lon = ((-80 + (ot / ORBIT_PERIOD) * 360 - ot * (360 / 86400)) % 360 + 360) % 360 - 180;
+    const px = ((lon + 180) / 360) * W, py = ((90 - lat) / 180) * H;
+    mctx.beginPath(); mctx.arc(px, py, 4, 0, Math.PI * 2);
+    mctx.fillStyle = '#C89840'; mctx.fill();
+    mctx.beginPath(); mctx.arc(px, py, 8, 0, Math.PI * 2);
+    mctx.fillStyle = 'rgba(200,152,64,0.2)'; mctx.fill();
+  }
+
+  // Cape Canaveral
+  const lcX = ((-80.6 + 180) / 360) * W, lcY = ((90 - 28.5) / 180) * H;
+  mctx.beginPath(); mctx.arc(lcX, lcY, 3, 0, Math.PI * 2);
+  mctx.fillStyle = '#C07040'; mctx.fill();
+  mctx.font = '8px "DM Mono", monospace';
+  mctx.fillStyle = '#909090'; mctx.fillText('CANAVERAL', lcX + 6, lcY + 3);
+}
+
+function processEvents() {
+  for (const [t, text, status] of EVENTS) {
+    if (met >= t && !fired[t]) {
+      fired[t] = true;
+      logEvent(met, text);
+      document.getElementById('hStatus').textContent = status;
+    }
+  }
+}
+
+function togglePause() {
+  paused = !paused;
+  const b = document.getElementById('btnPlay');
+  b.textContent = paused ? 'PLAY' : 'PAUSE';
+  b.classList.toggle('active', !paused);
+}
+
+function restart() {
+  met = 0; paused = false; fired = {}; events = [];
+  fireflies = []; debris = []; done = false;
+  document.getElementById('eventLog').innerHTML = '';
+  document.getElementById('hStatus').textContent = 'PRE-LAUNCH';
+  document.getElementById('btnPlay').textContent = 'PAUSE';
+  document.getElementById('btnPlay').classList.add('active');
+}
+
+document.getElementById('speedSlider').addEventListener('input', function() {
+  speed = parseInt(this.value);
+  document.getElementById('speedVal').textContent = speed + 'x';
+});
+
+function frame(ts) {
+  if (!lastTS) lastTS = ts;
+  const dt = (ts - lastTS) / 1000;
+  lastTS = ts;
+  if (!paused && !done) {
+    met += dt * speed;
+    if (met >= MISSION_DUR) { met = MISSION_DUR; done = true; }
+  }
+  processEvents();
+  drawOrbit();
+  drawMap();
+  requestAnimationFrame(frame);
+}
+
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

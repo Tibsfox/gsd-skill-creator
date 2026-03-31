@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: Orbital Mechanics of Friendship 7 | v1.21 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040610; --bio-mid: #081020;
+    --orbital-blue: #1840A0; --orbital-dim: #0C2050;
+    --firefly-gold: #C89840; --firefly-dim: #644C20;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --earth-green: #2A6040; --earth-dim: #153020;
+    --atlantic-blue: #0A2848; --space: #040508;
+    --salmon-copper: #C07040; --salmon-dim: #603820;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(200,152,64,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(24,64,160,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(208,128,32,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(42,96,64,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(192,112,64,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(200,152,64,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--firefly-gold); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--orbital-dim) 55%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--firefly-gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(200,152,64,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(200,152,64,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(200,152,64,0.12); border: 1px solid var(--firefly-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--firefly-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(200,152,64,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--firefly-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--reentry-amber); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--firefly-gold); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--reentry-amber); } em { color: var(--salmon-copper); }
+  code { color: var(--firefly-gold); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--firefly-gold); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  pre { background: rgba(4,6,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin: 1rem 0 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+  pre code { color: var(--text); font-size: inherit; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.85rem; }
+  th { background: rgba(208,128,32,0.1); color: var(--reentry-amber); font-weight: 600; text-align: left; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--reentry-dim); }
+  td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  tr:hover td { background: rgba(200,152,64,0.03); }
+  .nav-card { background: rgba(4,6,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--firefly-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: var(--reentry-amber); } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--firefly-gold); text-decoration: none; }
+  blockquote { border-left: 3px solid var(--orbital-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(4,6,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.21 Mercury-Atlas 6</a><span class="sep">/</span>
+  Track 3: TSPB Mathematics
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.21</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of Three Orbits</h1>
+    <p class="subtitle">Vis-viva equation, Keplerian motion, retrofire targeting, heat shield ablation, Katherine Johnson&rsquo;s hand calculations</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Layer:</span> 4 (Vector Calculus &mdash; Orbital Mechanics)</span>
+      <span><span class="label">Secondary:</span> 3 (Trigonometry &mdash; Reentry Corridor), 7 (Probability &mdash; Segment 51), 1 (Unit Circle)</span>
+      <span><span class="label">Format:</span> McNeese-Hoag Reference Standard (1959)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Deposit 1: Orbital Parameters and the Vis-Viva Equation</h2>
+
+    <h3>Parameter Table</h3>
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>MA-6 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>February 20, 1962, 14:47:39 UTC (09:47 EST)</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Atlas D (No. 109-D)</td></tr>
+      <tr><td>Operating agency</td><td>&mdash;</td><td>&mdash;</td><td>NASA / Space Task Group, Langley</td></tr>
+      <tr><td>Spacecraft</td><td>&mdash;</td><td>&mdash;</td><td>Mercury capsule #13 (Friendship 7)</td></tr>
+      <tr><td>Pilot</td><td>&mdash;</td><td>&mdash;</td><td>John Herschel Glenn Jr. (Lt. Col., USMC)</td></tr>
+      <tr><td>Engine (sustainer)</td><td>&mdash;</td><td>&mdash;</td><td>Rocketdyne MA-3 sustainer + 2 boosters</td></tr>
+      <tr><td>Sustainer thrust</td><td>F<sub>sus</sub></td><td>kN</td><td>~253 (56,000 lbf)</td></tr>
+      <tr><td>Booster thrust (each)</td><td>F<sub>boost</sub></td><td>kN</td><td>~668 (150,000 lbf each)</td></tr>
+      <tr><td>Total liftoff thrust</td><td>F<sub>total</sub></td><td>kN</td><td>~1,589 (357,000 lbf)</td></tr>
+      <tr><td>Specific impulse (sea level)</td><td>I<sub>sp,sl</sub></td><td>s</td><td>~282</td></tr>
+      <tr><td>Specific impulse (vacuum)</td><td>I<sub>sp,vac</sub></td><td>s</td><td>~309</td></tr>
+      <tr><td>Vehicle mass at ignition</td><td>m<sub>0</sub></td><td>kg</td><td>~117,000 (258,000 lb)</td></tr>
+      <tr><td>Capsule mass (orbital)</td><td>m<sub>cap</sub></td><td>kg</td><td>~1,355 (2,987 lb)</td></tr>
+      <tr><td>Planned orbits</td><td>&mdash;</td><td>&mdash;</td><td>3</td></tr>
+      <tr><td>Actual orbits</td><td>&mdash;</td><td>&mdash;</td><td>3</td></tr>
+      <tr><td>Perigee altitude</td><td>h<sub>p</sub></td><td>km</td><td>161 (100 statute miles)</td></tr>
+      <tr><td>Apogee altitude</td><td>h<sub>a</sub></td><td>km</td><td>265 (165 statute miles)</td></tr>
+      <tr><td>Semi-major axis</td><td>a</td><td>km</td><td>6,584</td></tr>
+      <tr><td>Eccentricity</td><td>e</td><td>&mdash;</td><td>0.0079</td></tr>
+      <tr><td>Orbital inclination</td><td>i</td><td>deg</td><td>32.5</td></tr>
+      <tr><td>Orbital period</td><td>T</td><td>min</td><td>88.5</td></tr>
+      <tr><td>Orbital velocity (perigee)</td><td>v<sub>p</sub></td><td>km/s</td><td>7.84</td></tr>
+      <tr><td>Orbital velocity (apogee)</td><td>v<sub>a</sub></td><td>km/s</td><td>7.71</td></tr>
+      <tr><td>Total &Delta;v to orbit</td><td>&Delta;v</td><td>km/s</td><td>~9.3 (including gravity and drag losses)</td></tr>
+      <tr><td>Reentry peak g-load</td><td>g<sub>max</sub></td><td>g</td><td>~7.7</td></tr>
+      <tr><td>Maximum velocity</td><td>v<sub>max</sub></td><td>km/s</td><td>~7.84 (at perigee)</td></tr>
+      <tr><td>Flight duration</td><td>t<sub>flight</sub></td><td>hr:min:s</td><td>4:55:23</td></tr>
+      <tr><td>Splashdown coordinates</td><td>&mdash;</td><td>&mdash;</td><td>21.35&deg; N, 68.70&deg; W (Atlantic, near Grand Turk)</td></tr>
+      <tr><td>Recovery ship</td><td>&mdash;</td><td>&mdash;</td><td>USS Noa (DD-841)</td></tr>
+      <tr><td>Recovery time</td><td>&mdash;</td><td>min</td><td>~17 (destroyer pickup)</td></tr>
+      <tr><td>Segment 51 signal</td><td>&mdash;</td><td>&mdash;</td><td>Telemetry indicated possible heat shield/landing bag separation</td></tr>
+      <tr><td>Result</td><td>&mdash;</td><td>&mdash;</td><td>SUCCESS &mdash; first American to orbit Earth</td></tr>
+      <tr><td>Significance</td><td>&mdash;</td><td>&mdash;</td><td>National triumph. Three orbits. Human observation validated. Proved Mercury-Atlas system for manned orbital flight.</td></tr>
+    </table>
+
+    <h3>The Vis-Viva Equation: Velocity at Every Point in Orbit</h3>
+
+    <p>Mercury-Atlas 6 was the flight that Enos qualified. MA-5 (mission 1.18) proved that a primate could orbit and return alive. MA-6 proved that a human could orbit, observe, report, and control. Glenn&rsquo;s orbit was the culmination of every Mercury mission that preceded it: the suborbital arcs of Shepard and Grissom, the orbital rehearsal of Enos, the unmanned Atlas tests that established the booster&rsquo;s reliability &mdash; each one feeding forward into this moment. February 20, 1962, after ten delays and a nation holding its breath, Atlas 109-D lit its three engines and climbed.</p>
+
+    <p>The orbit Glenn achieved &mdash; 161 km &times; 265 km &mdash; was slightly more elliptical than Enos&rsquo;s 161 km &times; 237 km. The perigee was identical (161 km, the lowest stable altitude above measurable atmospheric drag), but the apogee was 28 km higher. This difference came from the Atlas injection: a marginally higher velocity at engine cutoff placed Glenn on a wider ellipse. The difference was within tolerance. What mattered was that the orbit was stable for three revolutions and the perigee was high enough to avoid reentry from atmospheric drag over the mission duration.</p>
+
+    <p>The vis-viva equation governs the velocity at every point in an elliptical orbit. It is the fundamental equation of orbital mechanics &mdash; the energy balance between kinetic energy (velocity) and potential energy (altitude) for an object in gravitational orbit:</p>
+
+    <pre><code>VIS-VIVA EQUATION:
+
+  v&sup2; = GM &times; (2/r &minus; 1/a)
+
+  where:
+    v   = orbital velocity at distance r from Earth&rsquo;s center (m/s)
+    G   = gravitational constant (6.674 &times; 10&sup1;&sup1; m&sup3; kg&sup1; s&sup2;)
+    M   = mass of Earth (5.972 &times; 10&sup2;&sup4; kg)
+    GM  = standard gravitational parameter = 3.986 &times; 10&sup1;&sup4; m&sup3;/s&sup2;
+    r   = distance from Earth&rsquo;s center at the point of interest (m)
+    a   = semi-major axis of the orbit (m)
+
+  The semi-major axis is the average of the perigee and
+  apogee distances from Earth&rsquo;s center:
+
+    r_perigee = R_earth + h_p = 6,371 + 161 = 6,532 km
+    r_apogee  = R_earth + h_a = 6,371 + 265 = 6,636 km
+
+    a = (r_perigee + r_apogee) / 2
+      = (6,532 + 6,636) / 2
+      = 6,584 km = 6,584,000 m</code></pre>
+
+    <h3>Worked Example 1: Glenn&rsquo;s Velocity at Perigee</h3>
+
+    <p>At perigee, r = r_perigee = 6,532,000 m. The vis-viva equation gives:</p>
+
+    <pre><code>VELOCITY AT PERIGEE:
+
+  v_p&sup2; = GM &times; (2/r_p &minus; 1/a)
+       = 3.986 &times; 10&sup1;&sup4; &times; (2/6,532,000 &minus; 1/6,584,000)
+
+  Compute each term:
+    2/r_p = 2 / 6,532,000 = 3.0627 &times; 10&sup7;  m&sup1;
+    1/a   = 1 / 6,584,000 = 1.5189 &times; 10&sup7;  m&sup1;
+
+    (2/r_p &minus; 1/a) = 3.0627 &times; 10&sup7; &minus; 1.5189 &times; 10&sup7;
+                    = 1.5438 &times; 10&sup7;  m&sup1;
+
+  v_p&sup2; = 3.986 &times; 10&sup1;&sup4; &times; 1.5438 &times; 10&sup7;
+       = 6.1516 &times; 10&sup7;  m&sup2;/s&sup2;
+
+  v_p = &radic;(6.1516 &times; 10&sup7;)
+      = 7,843 m/s
+      = 7.84 km/s
+      = 28,235 km/h
+
+  This is Glenn&rsquo;s velocity at perigee: the fastest
+  point in his orbit, the lowest point, where the
+  capsule screams across the upper atmosphere at
+  7.84 km/s &mdash; twenty-three times the speed of sound
+  at sea level.</code></pre>
+
+    <h3>Worked Example 2: Glenn&rsquo;s Velocity at Apogee</h3>
+
+    <p>At apogee, r = r_apogee = 6,636,000 m:</p>
+
+    <pre><code>VELOCITY AT APOGEE:
+
+  v_a&sup2; = GM &times; (2/r_a &minus; 1/a)
+       = 3.986 &times; 10&sup1;&sup4; &times; (2/6,636,000 &minus; 1/6,584,000)
+
+  Compute each term:
+    2/r_a = 2 / 6,636,000 = 3.0140 &times; 10&sup7;  m&sup1;
+    1/a   = 1 / 6,584,000 = 1.5189 &times; 10&sup7;  m&sup1;
+
+    (2/r_a &minus; 1/a) = 3.0140 &times; 10&sup7; &minus; 1.5189 &times; 10&sup7;
+                    = 1.4951 &times; 10&sup7;  m&sup1;
+
+  v_a&sup2; = 3.986 &times; 10&sup1;&sup4; &times; 1.4951 &times; 10&sup7;
+       = 5.9575 &times; 10&sup7;  m&sup2;/s&sup2;
+
+  v_a = &radic;(5.9575 &times; 10&sup7;)
+      = 7,719 m/s
+      = 7.72 km/s
+      = 27,788 km/h
+
+  The velocity difference between perigee and apogee:
+    &Delta;v_orbit = v_p &minus; v_a
+               = 7,843 &minus; 7,719
+               = 124 m/s
+               = 0.124 km/s
+
+  Glenn was 124 m/s faster at perigee than at apogee.
+  This velocity variation comes from the exchange of
+  kinetic and potential energy as the capsule moves
+  around its elliptical path. At perigee (closest to
+  Earth, deeper in the gravity well), potential energy
+  is lower and kinetic energy is higher. At apogee
+  (farthest from Earth), the capsule has traded
+  velocity for altitude.</code></pre>
+
+    <h3>Debate Questions (Layer 4, Orbital Mechanics)</h3>
+
+    <ol>
+      <li><strong>Glenn&rsquo;s orbit was 161 km &times; 265 km &mdash; an eccentricity of 0.0079.</strong> A perfectly circular orbit at 213 km (the average altitude) would have had the same period but constant altitude and constant velocity. Why didn&rsquo;t NASA target a circular orbit? The answer involves Atlas injection accuracy: the guidance system could not reliably null out all velocity errors at insertion. The margin between &ldquo;slightly too fast&rdquo; (apogee too high) and &ldquo;slightly too slow&rdquo; (reentry on orbit 1) was about 40 m/s. What is the circular velocity at 213 km, and how much injection velocity error would it take to produce Glenn&rsquo;s eccentricity?</li>
+      <li><strong>The vis-viva equation treats the orbit as a two-body problem &mdash; Earth and capsule, nothing else.</strong> In reality, Glenn&rsquo;s orbit was perturbed by the Moon&rsquo;s gravity, the Sun&rsquo;s gravity, the oblateness of the Earth (J2 perturbation), solar radiation pressure, and atmospheric drag. For a 3-orbit, 5-hour mission, which of these perturbations actually mattered? J2 causes orbital plane precession of approximately 7 degrees per day for Glenn&rsquo;s inclination. Over 5 hours, that is about 1.5 degrees &mdash; detectable by ground tracking but irrelevant to mission safety. At what mission duration do perturbations begin to matter more than the two-body solution?</li>
+      <li><strong>The eccentricity of Glenn&rsquo;s orbit (0.0079) is small but not zero.</strong> Enos&rsquo;s orbit (MA-5, mission 1.18) had a perigee of 161 km and apogee of 237 km &mdash; eccentricity approximately 0.0058. Glenn&rsquo;s apogee was higher (265 km), giving a larger eccentricity. Both orbits had the same perigee. This means Glenn&rsquo;s Atlas achieved a slightly higher injection velocity than Enos&rsquo;s. Was this intentional (targeting a higher apogee for better orbital lifetime) or incidental (the Atlas happened to perform slightly better)? What would the perigee altitude have needed to be for a circular orbit at Glenn&rsquo;s injection velocity?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Deposit 2: Kepler&rsquo;s Third Law and the Orbital Period</h2>
+
+    <h3>Worked Example 3: Deriving Glenn&rsquo;s Orbital Period</h3>
+
+    <p>Glenn orbited the Earth three times in 4 hours 55 minutes 23 seconds. Each orbit took approximately 88.5 minutes. This period is not arbitrary &mdash; it is determined exactly by the semi-major axis of the orbit through Kepler&rsquo;s Third Law.</p>
+
+    <pre><code>KEPLER&rsquo;S THIRD LAW:
+
+  T&sup2; = (4 &times; &pi;&sup2; / GM) &times; a&sup3;
+
+  Solving for T:
+    T = 2 &times; &pi; &times; &radic;(a&sup3; / GM)
+
+  With Glenn&rsquo;s semi-major axis:
+    a = 6,584 km = 6,584,000 m
+
+  T = 2 &times; &pi; &times; &radic;((6,584,000)&sup3; / (3.986 &times; 10&sup1;&sup4;))
+
+  Compute a&sup3;:
+    a&sup3; = (6,584,000)&sup3;
+       = (6.584 &times; 10&sup6;)&sup3;
+       = 6.584&sup3; &times; 10&sup1;&sup8;
+       = 285.38 &times; 10&sup1;&sup8;
+       = 2.8538 &times; 10&sup2;&sup0;  m&sup3;
+
+  Compute a&sup3; / GM:
+    a&sup3; / GM = 2.8538 &times; 10&sup2;&sup0; / 3.986 &times; 10&sup1;&sup4;
+            = 7.1604 &times; 10&sup5;  s&sup2;
+
+  Compute &radic;:
+    &radic;(7.1604 &times; 10&sup5;) = 846.2  s
+
+  Compute T:
+    T = 2 &times; &pi; &times; 846.2
+      = 5,316 s
+      = 88.6 minutes
+
+  Glenn&rsquo;s measured orbital period was approximately
+  88.5 minutes. The calculation yields 88.6 minutes &mdash;
+  a discrepancy of 0.1 minutes (6 seconds), well within
+  the measurement uncertainty of the tracking network.
+
+  WHAT THIS MEANS:
+
+  Glenn saw three sunrises and three sunsets in under
+  5 hours. Each orbit carried him from Cape Canaveral
+  (28.5&deg; N latitude) across the Atlantic, over West
+  Africa, across the Indian Ocean, over the Pacific,
+  and back across the continental United States. At
+  perigee velocity (7.84 km/s), he crossed the width
+  of the contiguous United States (approximately
+  4,500 km) in about 9.5 minutes. He crossed the
+  Atlantic (approximately 5,500 km on his ground
+  track) in about 11.7 minutes. The world was
+  compressible at orbital velocity: distances that
+  took Lindbergh 33 hours to cross took Glenn
+  12 minutes.</code></pre>
+
+    <h3>Eccentricity and Its Physical Meaning</h3>
+
+    <p>The eccentricity of Glenn&rsquo;s orbit describes its departure from circularity:</p>
+
+    <pre><code>ECCENTRICITY:
+
+  e = (r_apogee &minus; r_perigee) / (r_apogee + r_perigee)
+    = (6,636 &minus; 6,532) / (6,636 + 6,532)
+    = 104 / 13,168
+    = 0.00790
+
+  Alternatively, from the altitude difference:
+    e = (h_a &minus; h_p) / (2 &times; R_earth + h_a + h_p)
+      = (265 &minus; 161) / (2 &times; 6,371 + 265 + 161)
+      = 104 / 13,168
+      = 0.00790
+
+  For comparison:
+    e = 0      &rarr; perfect circle
+    e = 0.0079 &rarr; Glenn&rsquo;s orbit (nearly circular)
+    e = 0.0167 &rarr; Earth&rsquo;s orbit around the Sun
+    e = 0.0549 &rarr; Moon&rsquo;s orbit around Earth
+    e = 0.2056 &rarr; Mercury&rsquo;s orbit around the Sun
+    e = 1.0    &rarr; parabolic escape trajectory
+
+  Glenn&rsquo;s orbit was more circular than the Earth&rsquo;s
+  orbit around the Sun. The difference between perigee
+  and apogee altitude (104 km) spread over a
+  circumference of approximately 41,375 km means the
+  orbit deviated from a perfect circle by less than
+  0.8% of its radius. From Glenn&rsquo;s perspective, he
+  could not see the difference. The altitude varied
+  from 161 km to 265 km &mdash; a spread of 104 km, or
+  roughly 1.6% of the orbital radius. This is the
+  width of a pencil line drawn on a circle two meters
+  in diameter.</code></pre>
+
+    <hr>
+
+    <h2>Deposit 3: Atlas Trajectory and the Rocket Equation</h2>
+
+    <h3>Getting Glenn to Orbit: The Tsiolkovsky Rocket Equation</h3>
+
+    <p>The Atlas D that launched Glenn was a stage-and-a-half vehicle &mdash; three engines at liftoff, two booster engines jettisoned at approximately 130 seconds (BECO, Booster Engine Cutoff), one sustainer engine continuing to orbital insertion at approximately 300 seconds (SECO, Sustainer Engine Cutoff). This staging architecture is critical to understanding why the Atlas could reach orbit while the Redstone could not.</p>
+
+    <p>The Tsiolkovsky rocket equation describes the relationship between propellant mass, exhaust velocity, and the velocity change a rocket can achieve:</p>
+
+    <pre><code>TSIOLKOVSKY ROCKET EQUATION:
+
+  &Delta;v = I_sp &times; g_0 &times; ln(m_0 / m_f)
+
+  where:
+    &Delta;v  = velocity change (m/s)
+    I_sp = specific impulse (seconds)
+    g_0  = standard gravity (9.80665 m/s&sup2;)
+    m_0  = initial mass (fueled)
+    m_f  = final mass (empty structure + payload)
+    ln   = natural logarithm
+
+  The product I_sp &times; g_0 gives the effective exhaust
+  velocity v_e in m/s:
+    v_e = I_sp &times; g_0
+
+  ATLAS D ENGINE PERFORMANCE:
+
+  BOOSTER ENGINES (2&times; Rocketdyne LR-89):
+    Thrust (each):     ~668 kN (150,000 lbf)
+    I_sp (sea level):  ~248 s
+    I_sp (vacuum):     ~282 s
+    Burn time:         ~130 s (to BECO)
+
+  SUSTAINER ENGINE (1&times; Rocketdyne LR-105):
+    Thrust:            ~253 kN (56,000 lbf)
+    I_sp (vacuum):     ~309 s
+    Burn time:         ~300 s (to SECO)
+
+  VERNIER ENGINES (2&times;):
+    Thrust (each):     ~4.5 kN (1,000 lbf)
+    Used for roll control and fine guidance
+
+  THE DELTA-V BUDGET:
+
+  To reach a 161 km &times; 265 km orbit from Cape Canaveral,
+  the total &Delta;v required is approximately 9.3 km/s,
+  broken down as:
+
+    Orbital velocity at insertion:  ~7.84 km/s
+    Gravity losses:                 ~1.0  km/s
+    Atmospheric drag losses:        ~0.1  km/s
+    Steering losses:                ~0.35 km/s
+    ----------------------------------------
+    Total &Delta;v requirement:          ~9.3  km/s
+
+  The Atlas achieved this by staging: the booster
+  engines provided the bulk of the thrust during the
+  first 130 seconds when the vehicle was heaviest and
+  fighting through the densest atmosphere, then were
+  jettisoned &mdash; dropping approximately 3,000 kg of
+  dead engine mass &mdash; while the sustainer continued
+  burning the remaining propellant at higher I_sp
+  (no atmosphere, so v_e is higher in vacuum).
+
+  WHY STAGING MATTERS:
+
+  Without staging, the Atlas would carry the booster
+  engine mass all the way to orbit. That dead mass
+  reduces the mass ratio m_0/m_f and therefore reduces
+  &Delta;v. Consider the difference:
+
+  STAGED (actual Atlas):
+    Booster phase: m_0 = 117,000 kg, jettisoned mass = ~3,000 kg
+    Sustainer phase: effectively starts with m_0 ~ 50,000 kg
+    (after booster propellant consumed and engines dropped)
+
+  UNSTAGED (hypothetical):
+    Same total propellant but carrying 3,000 kg of dead
+    booster engines to orbit
+    m_f increases by 3,000 kg
+    ln(m_0/m_f) decreases
+
+  For a rough estimate of the staging benefit:
+    Effective exhaust velocity (average): ~2,900 m/s
+    If m_f decreases by 3,000 kg (from ~12,000 to ~9,000):
+      ln(117,000/12,000) = ln(9.75) = 2.277
+      ln(117,000/9,000)  = ln(13.0) = 2.565
+      &Delta;v gain = 2,900 &times; (2.565 &minus; 2.277)
+                = 2,900 &times; 0.288
+                = 835 m/s
+
+  Staging bought approximately 835 m/s of additional
+  &Delta;v &mdash; nearly 9% of the total budget. Without
+  staging, the Atlas would have fallen short of orbital
+  velocity. Glenn would have achieved a very high
+  suborbital arc &mdash; perhaps reaching 800 km altitude
+  before falling back &mdash; but would not have orbited.
+  Staging is not an optimization; it is a requirement.</code></pre>
+
+    <hr>
+
+    <h2>Deposit 4: Heat Shield Thermal Analysis</h2>
+
+    <h3>Reentry Heating: The Physics of Coming Home</h3>
+
+    <p>Friendship 7&rsquo;s reentry was the most dramatic of any Mercury mission &mdash; not because of the physics, which were nominal, but because of a telemetry signal that suggested the heat shield might be loose. The &ldquo;Segment 51&rdquo; signal, a switch reading in the telemetry stream, indicated that the landing bag deploy switch had been triggered, which could mean the heat shield had separated from the capsule while still in orbit. If the heat shield were loose, reentry would be fatal: the shield would detach during deceleration, exposing the capsule&rsquo;s pressure vessel to the full reentry temperature.</p>
+
+    <p>The decision was made to have Glenn retain his retropackage (the three solid-fuel retrorockets strapped across the heat shield) during reentry, rather than jettisoning it after the retrofire burn as planned. The theory was that the retro straps would hold the heat shield in place even if the landing bag had deployed. The retro pack would burn off during reentry, but by then the deceleration forces would be pressing the heat shield against the capsule, holding it in place aerodynamically.</p>
+
+    <p>Glenn reentered with the retro pack on. Burning chunks of debris streamed past his window &mdash; the straps and retro rocket housings incinerating in the reentry plasma. He did not know whether the chunks were from the retro pack or from his heat shield. Mission Control did not tell him about the Segment 51 concern until after the mission. The heat shield was fine. The Segment 51 signal was a sensor error &mdash; the switch had malfunctioned, not the heat shield.</p>
+
+    <p>But the thermal analysis of what Glenn&rsquo;s heat shield actually experienced is real:</p>
+
+    <pre><code>STAGNATION POINT TEMPERATURE:
+
+  When a vehicle reenters the atmosphere at hypersonic
+  speed, the air ahead of it cannot move out of the
+  way fast enough. The air is compressed and heated
+  to extreme temperatures. The hottest point is the
+  stagnation point &mdash; the point on the heat shield
+  directly facing the flow, where the air velocity
+  relative to the surface is zero and all the kinetic
+  energy of the flow has been converted to thermal
+  energy.
+
+  The stagnation temperature for a perfect gas:
+
+    T_stag = T_inf &times; (1 + (&gamma; &minus; 1)/2 &times; M&sup2;)
+
+  where:
+    T_stag  = stagnation temperature (K)
+    T_inf   = freestream temperature (K)
+    &gamma;       = ratio of specific heats (1.4 for air at
+              moderate temperatures, decreasing toward
+              1.2 at very high temperatures due to
+              molecular dissociation)
+    M       = Mach number (v / v_sound)
+
+  GLENN&rsquo;S REENTRY CONDITIONS:
+
+  At the entry interface (120 km altitude):
+    v_entry  = ~7,800 m/s (orbital velocity minus retrofire &Delta;v)
+    T_inf    = ~240 K (&minus;33&deg;C) &mdash; ambient temperature at 120 km
+    v_sound  = ~300 m/s (approximate, varies with altitude)
+    M        = 7,800 / 300 = 26
+
+  At peak heating (approximately 60&ndash;70 km altitude):
+    v        = ~7,200 m/s (slightly decelerated)
+    T_inf    = ~250 K
+    v_sound  = ~310 m/s
+    M        = 7,200 / 310 = 23.2</code></pre>
+
+    <h3>Worked Example 4: Stagnation Temperature at Mach 23</h3>
+
+    <pre><code>STAGNATION TEMPERATURE CALCULATION:
+
+  Using &gamma; = 1.4 (ideal diatomic gas assumption):
+
+  T_stag = T_inf &times; (1 + (&gamma; &minus; 1)/2 &times; M&sup2;)
+         = 250 &times; (1 + (1.4 &minus; 1)/2 &times; 23.2&sup2;)
+         = 250 &times; (1 + 0.2 &times; 538.24)
+         = 250 &times; (1 + 107.65)
+         = 250 &times; 108.65
+         = 27,162 K
+
+  THIS NUMBER IS MISLEADINGLY HIGH. The perfect gas
+  assumption breaks down catastrophically at these
+  temperatures. At temperatures above approximately
+  2,000 K, molecular nitrogen and oxygen begin to
+  dissociate (break apart into atoms). At temperatures
+  above 4,000 K, the atoms begin to ionize. These
+  processes absorb enormous energy, limiting the
+  actual gas temperature.
+
+  REAL GAS CORRECTION:
+
+  The actual stagnation temperature accounting for
+  dissociation and ionization is approximately:
+
+    T_stag_real &asymp; 5,000 &ndash; 8,000 K
+
+  depending on the altitude (density determines the
+  rate of dissociation). At the peak heating altitude
+  of approximately 60 km:
+
+    T_stag_real &asymp; 6,000 &ndash; 7,000 K (~6,000 &ndash; 7,000&deg;C)
+
+  However, the heat shield surface temperature is NOT
+  the stagnation temperature. The boundary layer &mdash;
+  the thin layer of air immediately adjacent to the
+  heat shield surface &mdash; provides thermal resistance.
+  Radiation from the hot gas also carries energy away.
+  The actual heat shield surface temperature for
+  Mercury at peak heating was approximately:
+
+    T_surface &asymp; 1,650&deg;C (1,923 K) at the stagnation point
+    T_surface &asymp; 1,100&deg;C (1,373 K) at the shield periphery
+
+  This is why the perfect gas stagnation formula is
+  educational but not operational: real reentry
+  analysis requires computational fluid dynamics with
+  real gas effects, surface catalysis models, ablation
+  chemistry, and radiative heat transfer.</code></pre>
+
+    <h3>Mercury Heat Shield: Ablative Protection</h3>
+
+    <pre><code>ABLATIVE HEAT SHIELD MECHANISM:
+
+  The Friendship 7 heat shield was a blunt-body
+  ablative design: a dish-shaped fiberglass structure
+  filled with a phenolic resin compound. The shield
+  worked by controlled destruction:
+
+  1. CHARRING: The resin absorbs heat and pyrolyzes
+     (decomposes) at approximately 300&ndash;500&deg;C, forming
+     a char layer on the surface.
+
+  2. OUTGASSING: The decomposition produces gases
+     (H&sub2;O, CO&sub2;, light hydrocarbons) that flow outward
+     through the char layer, carrying thermal energy
+     with them.
+
+  3. BOUNDARY LAYER BLOWING: The outgassing products
+     inject mass into the boundary layer, thickening
+     it and reducing convective heat transfer to the
+     surface &mdash; a phenomenon called &ldquo;blowing reduction.&rdquo;
+
+  4. RADIATION: The char surface radiates energy back
+     into the flow. At 1,650&deg;C, radiation is significant:
+
+       q_rad = &epsilon; &times; &sigma; &times; T&#8308;
+             = 0.9 &times; 5.67 &times; 10&#8315;&#8312; &times; (1923)&#8308;
+             = 0.9 &times; 5.67 &times; 10&#8315;&#8312; &times; 1.368 &times; 10&sup1;&sup3;
+             = 698 kW/m&sup2;
+
+     The shield radiates approximately 700 kW/m&sup2;
+     at peak temperature &mdash; a substantial fraction
+     of the incoming heat flux.
+
+  5. ABLATION: The char layer itself is eroded by the
+     flow, carrying thermal energy away with the
+     departing material. The total mass loss of the
+     Mercury heat shield during reentry was approximately
+     2&ndash;3 kg &mdash; a small fraction of the shield&rsquo;s total
+     mass of approximately 60 kg.
+
+  ENERGY BUDGET:
+
+  The total kinetic energy that must be dissipated
+  during Glenn&rsquo;s reentry:
+
+    KE = (1/2) &times; m &times; v&sup2;
+       = (1/2) &times; 1,355 &times; (7,800)&sup2;
+       = (1/2) &times; 1,355 &times; 6.084 &times; 10&sup7;
+       = 4.122 &times; 10&sup1;&sup0; J
+       = 41.2 GJ
+
+  41.2 gigajoules is the energy of approximately
+  10 tonnes of TNT. This energy must go somewhere:
+  into heating the air (the majority), into the heat
+  shield (charring, ablation, conduction), and into
+  radiation. The heat shield&rsquo;s job is not to absorb
+  all this energy &mdash; that would be impossible. Its job
+  is to ensure that only a survivable fraction reaches
+  the spacecraft structure and its occupant. The blunt
+  body shape deflects most of the heated air away from
+  the vehicle, creating a strong bow shock that pushes
+  the hottest gas outboard. The ablative shield handles
+  the remainder.
+
+  Glenn experienced approximately 7.7g during peak
+  deceleration &mdash; pressing him into his contour couch
+  with a force of 7.7 times his body weight. The
+  deceleration lasted approximately 2 minutes. During
+  this time, burning fragments of the retro pack
+  streamed past his window, and he reported: &ldquo;That&rsquo;s
+  a real fireball outside.&rdquo; He did not know if his
+  heat shield was intact.
+
+  It was.</code></pre>
+
+    <h3>Debate Questions (Layer 3, Thermal Analysis)</h3>
+
+    <ol>
+      <li><strong>The perfect gas stagnation temperature formula gives ~27,000 K for Glenn&rsquo;s reentry, while the actual gas temperature was ~6,000&ndash;7,000 K.</strong> The discrepancy is a factor of 4, caused by molecular dissociation and ionization absorbing energy that would otherwise go into gas temperature. This &ldquo;real gas effect&rdquo; is not a correction &mdash; it is the dominant physics. At what Mach number does the perfect gas model become useless for temperature prediction? For Mercury&rsquo;s subsonic wind tunnel tests (M &lt; 0.3), the perfect gas model is excellent. For its supersonic wind tunnel tests (M ~ 2&ndash;5), it introduces errors of a few percent. Somewhere between Mach 5 and Mach 25, the model transitions from &ldquo;useful approximation&rdquo; to &ldquo;wrong by a factor of 4.&rdquo; Where is the transition, and what determines it?</li>
+      <li><strong>The heat shield surface reached approximately 1,650&deg;C at the stagnation point.</strong> Structural steel melts at approximately 1,370&ndash;1,530&deg;C. The heat shield surface was hotter than the melting point of steel. Yet the heat shield survived because it was designed to ablate, not to remain intact. Is there a conceptual analogy between ablative thermal protection and biological wound healing? The skin burns, chars, and sloughs off, but the organism underneath survives. Ablation is controlled sacrifice: destroying the surface to save the structure. Where else in engineering or biology does this principle appear?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Deposit 5: Retrofire and Orbital Decay</h2>
+
+    <h3>Worked Example 5: The Retrofire &Delta;v</h3>
+
+    <p>To return from orbit, Glenn fired three solid-fuel retrorockets, one at a time, spaced 5 seconds apart. Each retrorocket produced approximately 4.5 kN of thrust for approximately 10 seconds. The retrofire burn reduced Glenn&rsquo;s orbital velocity enough to lower the perigee below the effective atmosphere (below approximately 80 km), ensuring reentry.</p>
+
+    <pre><code>RETROFIRE ANALYSIS:
+
+  Mercury retropackage: 3 &times; Thiokol TE-316 solid rockets
+  Thrust per motor:     ~4.5 kN (1,000 lbf)
+  Burn time per motor:  ~10 s
+  Firing sequence:      sequential, 5 s apart
+  Total retrofire time: ~20 s (first ignition to last burnout)
+
+  Impulse per motor:
+    J = F &times; t = 4,500 &times; 10 = 45,000 N&middot;s
+
+  Total impulse:
+    J_total = 3 &times; 45,000 = 135,000 N&middot;s
+
+  &Delta;v from retrofire:
+    &Delta;v_retro = J_total / m_capsule
+              = 135,000 / 1,355
+              = 99.6 m/s
+              &asymp; 100 m/s
+
+  Glenn&rsquo;s orbital velocity before retrofire: ~7,800 m/s
+  Glenn&rsquo;s velocity after retrofire: ~7,700 m/s
+
+  This 100 m/s reduction is only 1.3% of the orbital
+  velocity. But it is enough: the reduced velocity
+  lowers the perigee of the new orbit below the
+  atmosphere. On the next pass through perigee, instead
+  of skimming through the thin upper atmosphere at
+  161 km, the capsule descends into the denser
+  atmosphere below 80 km, where drag decelerates it
+  from 7,700 m/s to zero over approximately 5 minutes.
+
+  WHERE TO FIRE THE RETROS:
+
+  Retrofire must occur at the correct point in the orbit.
+  Fire too early, and the capsule lands short of the
+  recovery fleet. Fire too late, and it lands long.
+  At orbital velocity, a 1-minute error in retrofire
+  timing translates to approximately:
+
+    Position error = v &times; t_error
+                   = 7,800 &times; 60
+                   = 468,000 m
+                   = 468 km
+
+  The recovery fleet could cover a footprint of
+  approximately 200 km &times; 50 km. A timing error of
+  more than about 25 seconds would place the capsule
+  outside the primary recovery zone. Glenn&rsquo;s retrofire
+  was initiated automatically by the capsule&rsquo;s
+  sequencer, with the pilot confirming the timing
+  against his ground-elapsed-time clock. The retros
+  fired on schedule at 4 hours, 33 minutes, and 9
+  seconds into the mission, over the Pacific Ocean
+  near California, targeting a splashdown in the
+  Atlantic near Grand Turk Island.
+
+  The capsule traveled halfway around the world after
+  retrofire, decelerating the entire way. The reentry
+  trajectory was a depressed ellipse: after retrofire
+  over the Pacific, the capsule descended through the
+  atmosphere over the continental United States and
+  splashed down in the Atlantic approximately 22 minutes
+  after retrofire initiation. During those 22 minutes,
+  Glenn crossed 13,000 km of ground track &mdash; and
+  decelerated from 7,700 m/s to approximately 9 m/s
+  (his parachute descent rate).</code></pre>
+
+    <h3>Atmospheric Drag and Orbital Decay</h3>
+
+    <p>Glenn&rsquo;s orbit at 161 km perigee was subject to atmospheric drag at the lowest point of each orbit. Even without retrofire, the orbit would have eventually decayed as drag removed energy at each perigee pass. For a 3-orbit mission, this effect was negligible, but the physics is worth understanding:</p>
+
+    <pre><code>ATMOSPHERIC DRAG:
+
+  F_drag = (1/2) &times; &rho; &times; v&sup2; &times; C_D &times; A
+
+  where:
+    &rho;     = atmospheric density at altitude (kg/m&sup3;)
+    v     = orbital velocity (m/s)
+    C_D   = drag coefficient (~1.0&ndash;1.5 for Mercury capsule
+            in free molecular flow at orbital altitude)
+    A     = cross-sectional area (~2.8 m&sup2; for Mercury
+            capsule, diameter ~1.89 m)
+
+  At 161 km altitude:
+    &rho; &asymp; 1 &times; 10&#8315;&sup1;&sup0; kg/m&sup3;
+    (extremely thin &mdash; sea level density is 1.225 kg/m&sup3;,
+     so this is ~10&sup1;&sup0; times less dense)
+
+    v   = 7,843 m/s
+    C_D = 1.2 (approximate for blunt body in free molecular flow)
+    A   = 2.8 m&sup2;
+
+  F_drag = (1/2) &times; 1 &times; 10&#8315;&sup1;&sup0; &times; (7,843)&sup2; &times; 1.2 &times; 2.8
+         = (1/2) &times; 1 &times; 10&#8315;&sup1;&sup0; &times; 6.15 &times; 10&sup7; &times; 3.36
+         = 1.03 &times; 10&#8315;&sup2; N
+         = 0.0103 N
+
+  This is approximately 10 millinewtons &mdash; about the
+  weight of a paper clip. But it acts continuously at
+  each perigee pass. Over one orbit, the capsule spends
+  approximately 3&ndash;5 minutes near perigee (within the
+  altitude band where drag is non-negligible). The
+  velocity change per orbit from drag:
+
+    &Delta;v_drag = (F_drag / m) &times; t_drag
+             &asymp; (0.01 / 1,355) &times; 240
+             &asymp; 0.0018 m/s per orbit
+
+  Over 3 orbits: ~0.005 m/s of velocity loss to drag.
+
+  This is utterly insignificant compared to the 100 m/s
+  retrofire &Delta;v. Glenn&rsquo;s orbit would have remained
+  stable for hundreds of orbits at this drag rate.
+  Natural orbital decay from 161 km perigee would take
+  weeks to months, depending on solar activity (which
+  affects upper atmosphere density through heating and
+  expansion).
+
+  For comparison, the International Space Station at
+  ~400 km altitude experiences approximately 2 km of
+  altitude loss per month and requires periodic reboosts.
+  Glenn&rsquo;s lower perigee would have caused faster decay,
+  but the 3-orbit mission duration was far too short
+  for drag to matter.</code></pre>
+
+    <hr>
+
+    <h2>Deposit 6: TSPB Layer Synthesis</h2>
+
+    <h3>Observation (Layer 1)</h3>
+
+    <p>Glenn was the first American to observe the Earth from orbit. His observations were not incidental &mdash; they were a mission objective. Mercury-Atlas 6 was designed to answer the question: can a human pilot observe, report, and control from orbit in ways that instruments cannot? Glenn&rsquo;s observations proved the answer was yes.</p>
+
+    <p>He observed the African continent crossing beneath him at sunset on his first orbit and reported distinct color bands in the Earth&rsquo;s atmosphere at the terminator &mdash; the line between day and night. He observed thunderstorms over the Indian Ocean, describing the lightning flashes as &ldquo;like looking down at a field of fireflies.&rdquo; He observed the city lights of Perth, Australia, whose citizens had turned on their lights en masse as a greeting. He observed and reported the famous &ldquo;fireflies&rdquo; &mdash; luminescent particles streaming past his window at each sunrise, later identified by Scott Carpenter on MA-7 as frozen sublimated coolant droplets from the capsule&rsquo;s exterior surface, illuminated by sunlight against the black background of space.</p>
+
+    <p>The tracking network measured his position, velocity, and orbital elements. The ground controllers computed his trajectory. But Glenn provided something the instruments could not: pattern recognition, anomaly detection, and contextual judgment. When the Segment 51 telemetry suggested a heat shield problem, the ground controllers debated for two orbits before deciding on the retro-pack-on procedure. Glenn, unaware of the specific concern, had already noticed unusual banging and oscillation from his capsule&rsquo;s automatic attitude control system (the 1-pound hydrogen peroxide thrusters were consuming excessive fuel). He switched to manual fly-by-wire control and managed the attitude himself &mdash; a decision that instruments could detect but not initiate.</p>
+
+    <h3>Theory (Layer 4)</h3>
+
+    <p>The mathematical framework underlying Glenn&rsquo;s mission spans four centuries of celestial mechanics. The vis-viva equation derives from conservation of energy in a gravitational field &mdash; a principle established by Newton in 1687 and refined by Euler and Lagrange in the 18th century. Kepler&rsquo;s Third Law dates to 1619 &mdash; a purely empirical observation that Newton later proved from first principles. The rocket equation was derived by Tsiolkovsky in 1903 &mdash; 59 years before Glenn&rsquo;s flight. The reentry corridor geometry was computed by researchers at NACA Langley and the Ballistic Missile Division at Patrick Air Force Base in the late 1950s, building on warhead reentry research from the ICBM programs.</p>
+
+    <p>Every equation used to plan Glenn&rsquo;s mission was established before the Space Age began. The mathematical infrastructure was complete. What was missing was the engineering to execute it: the Atlas booster reliable enough to trust with a human payload, the capsule survivable enough to withstand reentry heating, the heat shield ablative enough to protect the pilot, the tracking network global enough to monitor three orbits, and the human brave enough to sit atop an Atlas D &mdash; a vehicle that had a 30% failure rate through 1961 &mdash; and trust the mathematics.</p>
+
+    <h3>Application (Layer 4b)</h3>
+
+    <p>The practical application of orbital mechanics to MA-6 required translating textbook equations into operational procedures:</p>
+
+    <ul>
+      <li>The vis-viva equation became the go/no-go velocity check at SECO. If the sustainer engine cut off with velocity below 7,750 m/s, the orbit would be too low (perigee below 140 km, unacceptable drag). If the velocity exceeded 7,900 m/s, the apogee would be too high (above 300 km, outside tracking network coverage for some passes). The acceptable velocity window at insertion was approximately 150 m/s wide.</li>
+      <li>Kepler&rsquo;s Third Law became the ground track prediction. Each tracking station needed to know when the capsule would appear above its horizon, within a window of approximately 30 seconds. The orbital period determined the timing, and the inclination determined the ground track.</li>
+      <li>The rocket equation became the propellant loading calculation. The Atlas carried approximately 109,000 kg of propellant (RP-1 kerosene and liquid oxygen). Too little, and it would not reach orbital velocity. Too much, and the vehicle was overweight at liftoff, increasing the structural loads during max-q (maximum dynamic pressure). The propellant load was calculated to provide the required &Delta;v with a margin of approximately 2%.</li>
+      <li>The reentry corridor became the retrofire timing window. The retrorockets had to fire within a 30-second window to land within the primary recovery zone.</li>
+    </ul>
+
+    <h3>Synthesis (Layer 6)</h3>
+
+    <p>Glenn&rsquo;s three orbits connected the theoretical and the empirical. The vis-viva equation predicted velocities of 7.84 km/s at perigee and 7.72 km/s at apogee; the tracking network confirmed these to within the measurement uncertainty. Kepler&rsquo;s Third Law predicted an 88.5-minute period; the mission timer measured 88.5 minutes. The rocket equation predicted a total &Delta;v requirement of 9.3 km/s; the Atlas delivered it. The thermal analysis predicted heat shield surface temperatures of approximately 1,650&deg;C; postflight inspection confirmed charring consistent with that temperature.</p>
+
+    <p>But the Segment 51 anomaly broke the clean narrative. The telemetry said the heat shield was loose. The mathematics said it should not be &mdash; there was no mechanism for separation in orbital flight. The engineers had to choose: trust the telemetry (a single switch reading, known to be susceptible to sensor errors) or trust the physics (no plausible failure mode). They chose a compromise: trust the physics enough to proceed with the mission, but hedge by retaining the retro pack. This is the engineer&rsquo;s synthesis: not pure theory, not pure measurement, but judgment applied at the intersection.</p>
+
+    <h3>Debate (Layer 7)</h3>
+
+    <p>The Segment 51 decision reveals the fundamental tension between data and model. The telemetry was data: a sensor reading, a bit, a 1 where a 0 was expected. The physics was model: the equations that described what was possible and what was not. When data contradicts model, which do you believe? The answer depends on the relative reliability of each. A sensor can fail. A physical law cannot. But the model includes more than physical laws &mdash; it includes the engineering assumptions about the heat shield attachment, the manufacturing quality, the loads environment. Any of those assumptions could be wrong. The data is unreliable. The model is uncertain. The decision must be made anyway.</p>
+
+    <hr>
+
+    <h2>Mercury Orbital Parameters &mdash; Rosetta Reference Table</h2>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Value</th><th>Unit</th><th>Derivation</th></tr>
+      <tr><td>Semi-major axis</td><td>a</td><td>6,584</td><td>km</td><td>(r_p + r_a) / 2</td></tr>
+      <tr><td>Eccentricity</td><td>e</td><td>0.0079</td><td>&mdash;</td><td>(r_a &minus; r_p) / (r_a + r_p)</td></tr>
+      <tr><td>Perigee altitude</td><td>h<sub>p</sub></td><td>161</td><td>km</td><td>measured at insertion</td></tr>
+      <tr><td>Apogee altitude</td><td>h<sub>a</sub></td><td>265</td><td>km</td><td>measured at insertion</td></tr>
+      <tr><td>Perigee radius</td><td>r<sub>p</sub></td><td>6,532</td><td>km</td><td>R_earth + h_p</td></tr>
+      <tr><td>Apogee radius</td><td>r<sub>a</sub></td><td>6,636</td><td>km</td><td>R_earth + h_a</td></tr>
+      <tr><td>Inclination</td><td>i</td><td>32.5</td><td>degrees</td><td>launch azimuth from Cape Canaveral</td></tr>
+      <tr><td>Period</td><td>T</td><td>88.5</td><td>minutes</td><td>2&pi;&radic;(a&sup3;/GM)</td></tr>
+      <tr><td>Orbital velocity (perigee)</td><td>v<sub>p</sub></td><td>7.84</td><td>km/s</td><td>&radic;(GM&times;(2/r_p &minus; 1/a))</td></tr>
+      <tr><td>Orbital velocity (apogee)</td><td>v<sub>a</sub></td><td>7.72</td><td>km/s</td><td>&radic;(GM&times;(2/r_a &minus; 1/a))</td></tr>
+      <tr><td>Total &Delta;v to orbit</td><td>&Delta;v</td><td>9.3</td><td>km/s</td><td>orbital v + losses</td></tr>
+      <tr><td>Retrofire &Delta;v</td><td>&Delta;v_retro</td><td>0.10</td><td>km/s</td><td>J_total / m_capsule</td></tr>
+      <tr><td>Reentry velocity</td><td>v_entry</td><td>7.70</td><td>km/s</td><td>v_orbit &minus; &Delta;v_retro</td></tr>
+      <tr><td>Reentry Mach number</td><td>M</td><td>~23</td><td>&mdash;</td><td>v_entry / v_sound</td></tr>
+      <tr><td>Heat shield peak temperature</td><td>T_shield</td><td>1,650</td><td>&deg;C</td><td>ablative thermal analysis</td></tr>
+      <tr><td>Peak deceleration</td><td>g<sub>max</sub></td><td>7.7</td><td>g</td><td>reentry phase</td></tr>
+      <tr><td>Flight duration</td><td>t<sub>total</sub></td><td>4:55:23</td><td>hr:min:s</td><td>3 complete orbits</td></tr>
+      <tr><td>Capsule mass</td><td>m<sub>cap</sub></td><td>1,355</td><td>kg</td><td>at orbital insertion</td></tr>
+    </table>
+
+    <h3>Cross-Mission Rosetta Table</h3>
+
+    <table>
+      <tr><th>Concept</th><th>MA-6 Application</th><th>Prior Mission Reference</th></tr>
+      <tr><td>Vis-viva equation</td><td>v&sup2; = GM&times;(2/r &minus; 1/a); v_p = 7.84 km/s</td><td>MA-5 (1.18): v_p = 7.82 km/s, same equation</td></tr>
+      <tr><td>Kepler&rsquo;s Third Law</td><td>T = 88.5 min from a = 6,584 km</td><td>MA-5 (1.18): T = 88.3 min from a = 6,570 km</td></tr>
+      <tr><td>Rocket equation</td><td>&Delta;v = 9.3 km/s, Atlas stage-and-a-half</td><td>MA-5 (1.18): same Atlas, same equation</td></tr>
+      <tr><td>Reentry corridor</td><td>&minus;1&deg; to &minus;7.5&deg; entry angle, retro pack retained</td><td>MA-5 (1.18): &minus;1&deg; to &minus;7.5&deg;, nominal retro jettison</td></tr>
+      <tr><td>Stagnation heating</td><td>T_stag_real ~ 6,000&ndash;7,000 K; T_shield ~ 1,650&deg;C</td><td>MR-3 (1.19): no orbital reentry heating (suborbital)</td></tr>
+      <tr><td>Retrofire targeting</td><td>468 km per minute of timing error</td><td>MA-5 (1.18): same targeting math</td></tr>
+      <tr><td>Telemetry ambiguity</td><td>Segment 51 false positive; retro pack compromise</td><td>MA-5 (1.18): thruster malfunction, mission curtailed to 2 orbits</td></tr>
+      <tr><td>Manual piloting</td><td>Glenn switched to fly-by-wire for attitude control</td><td>MR-3 (1.19): Shepard demonstrated manual attitude control suborbital</td></tr>
+    </table>
+
+    <hr>
+
+    <h2>Final Debate Questions</h2>
+
+    <ol>
+      <li><strong>Why couldn&rsquo;t Mercury use a circular orbit?</strong> A circular orbit at 213 km (the average of Glenn&rsquo;s perigee and apogee) would have required an injection velocity of exactly 7,783 m/s at exactly 213 km altitude, with zero radial velocity component. The Atlas guidance system could control velocity to approximately &plusmn;20 m/s and altitude to approximately &plusmn;5 km. Any error in either parameter produces an ellipse. What injection accuracy (in m/s and km) would be needed to achieve an orbit with eccentricity below 0.001? Below 0.0001? Is a perfectly circular orbit even theoretically achievable with chemical rockets, or is it a mathematical abstraction that real hardware can only approximate?</li>
+      <li><strong>If the heat shield HAD been loose, what thermal failure mode would have killed Glenn?</strong> The most likely scenario: the heat shield separates during peak deceleration (approximately 7.7g). Without the shield, the capsule&rsquo;s titanium pressure vessel is exposed to the full stagnation environment. Titanium 6Al-4V has a melting point of approximately 1,660&deg;C &mdash; coincidentally close to the heat shield surface temperature. The pressure vessel would begin to soften and deform within seconds, then breach. Cabin depressurization at 7.7g and 1,600&deg;C would be instantly fatal. But would the heat shield actually separate during deceleration? The deceleration pushes the shield against the capsule &mdash; aerodynamic pressure holds it in place. The dangerous phase would be before reentry, when the capsule is in zero-g and the shield is held only by its mechanical attachments. What force would be required to separate a loose shield during zero-g maneuvering?</li>
+      <li><strong>Why did NASA choose a 32.5-degree orbital inclination?</strong> The inclination is determined by the launch azimuth from Cape Canaveral (latitude 28.5&deg; N). A due-east launch (azimuth 90&deg;) produces the minimum inclination of 28.5&deg; &mdash; equal to the launch site latitude &mdash; and provides the maximum benefit from Earth&rsquo;s rotational velocity (~410 m/s at Cape Canaveral). Glenn&rsquo;s 32.5&deg; inclination corresponds to a launch azimuth of approximately 72&deg; (slightly north of due east). Why not launch due east for maximum performance? The answer involves range safety: the Atlas trajectory had to avoid overflying populated areas during ascent. A due-east launch from Cape Canaveral would have sent the booster directly over the Bahamas. The 72&deg; azimuth angled the ground track slightly southward, keeping the ascent path over open water. What was the &Delta;v cost of this range safety constraint? At launch, Earth&rsquo;s rotational velocity contributes v_rot &times; cos(azimuth &minus; 90&deg;) to the eastward velocity; the 18&deg; offset from due east reduced this contribution by approximately 1 &minus; cos(18&deg;) = 0.049, or about 20 m/s. This is trivial &mdash; less than 0.3% of the total &Delta;v budget &mdash; but it illustrates that engineering constraints shape orbits as much as physics does.</li>
+      <li><strong>Glenn reported &ldquo;fireflies&rdquo; &mdash; luminescent particles streaming past his window at orbital sunrise on each of his three orbits.</strong> Scott Carpenter on MA-7 later identified these as frozen particles of condensate or sublimated coolant from the capsule&rsquo;s exterior surfaces, illuminated by direct sunlight against the black background of space. The sublimation process is governed by the Clausius-Clapeyron equation: dP/dT = L/(T &times; &Delta;v), where L is the latent heat of sublimation and &Delta;v is the specific volume change. In the vacuum of space, any volatile material on the capsule&rsquo;s exterior (water condensate, residual coolant, even outgassed sealant) sublimes directly from solid/liquid to vapor and immediately freezes into microscopic ice crystals. These crystals drift away from the capsule at very low relative velocity (the sublimation impulse is tiny), forming a cloud that orbits along with the capsule. At each sunrise, sunlight illuminates the cloud. What determined the particle size distribution? What determined the cloud&rsquo;s persistence? And why did Glenn see them only at sunrise &mdash; was it purely illumination geometry, or did the thermal cycling between orbital day and night drive the sublimation rate?</li>
+      <li><strong>Glenn&rsquo;s mission was originally scheduled for December 20, 1961, but was delayed ten times over two months.</strong> Each delay had a technical reason: weather, hardware issues, scheduling. But the delays had a mathematical consequence: Earth&rsquo;s axial tilt and orbital position changed. In December, the Sun is at approximately &minus;23.4&deg; declination (southern hemisphere summer solstice). By February 20, the Sun had moved to approximately &minus;11.5&deg; declination. This changed the orbital lighting conditions &mdash; the fraction of each orbit spent in sunlight vs. shadow, the thermal environment, and the ground track illumination at the tracking stations. If Glenn had launched in December as originally planned, how would the different solar geometry have affected the mission? Would the fireflies have been visible with different sun angles? Would the thermal environment have been measurably different? The orbit does not care about the calendar, but the environment the orbit passes through changes with the seasons.</li>
+    </ol>
+
+    <hr>
+
+    <blockquote>&ldquo;Katherine Johnson computed the orbital trajectory by hand. This is the part of the story that everyone knows now, and it is true, and it matters. Before Glenn would agree to fly, he asked the engineers at the Space Task Group to &lsquo;get the girl to check the numbers&rsquo; &mdash; meaning Johnson, the mathematician at Langley who had been computing trajectories since the NACA days, who understood the vis-viva equation not as a formula to be plugged into but as a relationship to be interrogated. The IBM 7090 at Goddard had computed the trajectory. Johnson verified it on her desktop mechanical calculator &mdash; the same equations, the same constants, the same orbital elements, ground through by hand to confirm that the machine had not made an error. The machine had not. The numbers matched. Glenn trusted the mathematician more than the machine, and he was right to: not because the machine was unreliable, but because the mathematician understood what the numbers meant. The machine computed the orbit. Johnson understood the orbit. The distinction matters, and it mattered on February 20, 1962, when the Segment 51 signal lit up and the engineers had to decide whether a switch reading or a physical model was telling the truth. A machine would have flagged the anomaly and recommended abort. The humans &mdash; the engineers who understood the heat shield, the managers who understood the risk, the mathematician who understood the trajectory &mdash; chose to fly through it, hedging with the retro pack, trusting the physics over a single bit of telemetry. Glenn reentered with chunks of burning retro pack streaming past his window, not knowing whether his heat shield was intact, and the mathematics held. The vis-viva equation does not care about telemetry glitches. Kepler&rsquo;s Third Law does not care about sensor failures. The equations describe what is, not what a faulty switch reports. Glenn orbited three times, saw three sunrises, crossed every ocean, and came home to a nation that needed a hero and got one &mdash; a Marine test pilot who trusted a mathematician&rsquo;s hand calculations over a mainframe computer, who flew a capsule that weighed less than a pickup truck at a velocity that would cross the continental United States in nine minutes, and who, when asked what he thought about while sitting on top of the Atlas waiting for launch, replied: &lsquo;I felt exactly how you would feel if you were getting ready to launch and knew you were sitting on top of two million parts &mdash; all built by the lowest bidder on a government contract.&rsquo; The mathematics was perfect. The hardware was built by the lowest bidder. Glenn flew anyway. Three orbits. Four hours, fifty-five minutes, and twenty-three seconds. The equations that Katherine Johnson checked by hand brought him home.&rdquo;</blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="organism.html">&larr; Track 2: Organism</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">v1.21 Overview</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="curriculum.html">Track 4: Curriculum &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.21 Track 3: TSPB Mathematics &mdash; Mercury-Atlas 6 / Friendship 7 &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,2860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation: Orbit, Return, Navigate, Create | v1.21 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040610; --bio-mid: #081020;
+    --orbital-blue: #1840A0; --orbital-dim: #0C2050;
+    --firefly-gold: #C89840; --firefly-dim: #644C20;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --earth-green: #2A6040; --earth-dim: #153020;
+    --atlantic-blue: #0A2848; --space: #040508;
+    --salmon-copper: #C07040; --salmon-dim: #603820;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(200,152,64,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(24,64,160,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(208,128,32,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(42,96,64,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(192,112,64,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(200,152,64,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--firefly-gold); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--orbital-dim) 55%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--firefly-gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(200,152,64,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(200,152,64,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(200,152,64,0.12); border: 1px solid var(--firefly-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--firefly-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(200,152,64,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--firefly-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--reentry-amber); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--firefly-gold); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--reentry-amber); } em { color: var(--salmon-copper); }
+  code { color: var(--firefly-gold); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--firefly-gold); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  pre { background: rgba(4,6,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; overflow-x: auto; margin: 1rem 0 1.5rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+  blockquote { border-left: 3px solid var(--orbital-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(4,6,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .sim-card { background: rgba(24,64,160,0.06); border: 1px solid var(--orbital-blue); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .sim-card h3 { margin-top: 0; color: var(--reentry-amber); }
+  .sim-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .art-card { background: rgba(192,112,64,0.04); border: 1px solid var(--salmon-dim); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .art-card h3 { margin-top: 0; color: var(--salmon-copper); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; }
+  th { background: rgba(24,64,160,0.15); color: var(--firefly-gold); font-weight: 600; text-align: left; padding: 0.6rem 0.8rem; border: 1px solid var(--border); }
+  td { padding: 0.5rem 0.8rem; border: 1px solid var(--border); color: var(--text); }
+  tr:nth-child(even) td { background: rgba(4,6,16,0.3); }
+  .nav-card { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--firefly-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: var(--reentry-amber); } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--firefly-gold); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.21 Mercury-Atlas 6</a><span class="sep">/</span>
+  Track 5: Simulation
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.21</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulation Specifications</h1>
+    <p class="subtitle">Orbit, Return, Navigate, Create &mdash; what to build, train, visualize, and compose</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti, 60GB RAM, i7-6700K</span>
+      <span><span class="label">Organism:</span> <em>Oncorhynchus tshawytscha</em></span>
+      <span><span class="label">Mission:</span> Friendship 7</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Friendship 7: First American Orbital Flight</h2>
+
+    <p><strong>Mission:</strong> Mercury-Atlas 6 / Friendship 7<br>
+    <strong>Date:</strong> February 20, 1962<br>
+    <strong>Simulation Focus:</strong> Orbital mechanics, reentry dynamics, thermal protection, salmon migration<br>
+    <strong>Platforms:</strong> Python (numpy/scipy/matplotlib), SPICE (ngspice), Web (HTML/JS/Canvas), CUDA, GLSL</p>
+
+    <hr>
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <div class="sim-card">
+      <h3>A1. Python: Orbital Ground Track</h3>
+      <p class="sim-meta"><strong>Libraries:</strong> numpy, matplotlib, cartopy (optional) &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate &nbsp;|&nbsp; <strong>Duration:</strong> 3&ndash;4 hours</p>
+
+      <p><strong>What it is:</strong> A Python simulation that reconstructs John Glenn&rsquo;s three-orbit ground track as seen from above &mdash; three sinusoidal curves sweeping across a Mercator projection of Earth, each shifted westward by approximately 22.5 degrees as Earth rotates beneath the orbiting capsule. The student inputs the orbital elements derived from the actual Friendship 7 trajectory and watches the ground track unfold orbit by orbit, with the worldwide Mercury tracking network marked at each station location. The simulation reveals the geometry of orbital flight: the capsule does not fly &ldquo;over&rdquo; the Earth in the way an airplane does. It falls around the Earth in a fixed orbital plane while the planet rotates beneath it, and the ground track is the record of where the capsule&rsquo;s nadir &mdash; the point directly below it &mdash; traces across the rotating surface.</p>
+
+      <p><strong>Why it matters:</strong> Glenn&rsquo;s flight was the first time an American experienced what Gagarin and Titov had already seen: the Earth turning beneath a fixed orbital path. The ground track is the most intuitive way to understand this geometry. Each orbit traces a sinusoidal curve because the orbital plane is tilted 32.5 degrees relative to the equator, and the intersection of a tilted plane with a rotating sphere produces a sinusoid on a Mercator projection. The westward shift between orbits is purely due to Earth&rsquo;s rotation &mdash; the capsule&rsquo;s orbital plane does not move (neglecting precession), but the Earth beneath it does. The student who plots this ground track understands, at a visceral level, that orbital mechanics is geometry: the capsule is not steered, it falls, and the planet turns beneath it.</p>
+
+      <pre><code># ma6_ground_track.py
+# Friendship 7 orbital ground track simulation
+#
+# Process:
+#   1. Define orbital elements from Friendship 7 trajectory
+#   2. Propagate the orbit through 3 complete revolutions
+#   3. Account for Earth rotation (sidereal rate)
+#   4. Project the subsatellite point onto Mercator coordinates
+#   5. Plot ground tracks with tracking stations and key events
+#
+# Orbital Elements (Friendship 7, post-insertion):
+#   semi_major_axis_km: 6584 (mean altitude ~162 km above
+#     Earth's mean radius of 6371 km, giving a = 6371 + 213
+#     = 6584 km, where 213 km is the mean of 161 and 265)
+#   eccentricity: 0.0079 (slightly elliptical)
+#   inclination_deg: 32.5 (orbital plane tilt from equator)
+#   raan_deg: variable (Right Ascension of Ascending Node,
+#     determines where the ground track starts in longitude)
+#   arg_perigee_deg: variable (argument of perigee,
+#     determines where in the orbit perigee occurs)
+#   true_anomaly_deg: 0 (start at perigee)
+#
+# Derived parameters:
+#   orbital_period_s: 2*pi*sqrt(a^3/mu) where mu = 398600.4
+#     km^3/s^2 (Earth's gravitational parameter)
+#     = 2*pi*sqrt(6584^3/398600.4)
+#     = 2*pi*sqrt(2.854e11/398600.4)
+#     = 2*pi*sqrt(715927)
+#     = 2*pi*846.1
+#     = 5316 s ~ 88.6 minutes
+#   earth_rotation_per_orbit_deg: (orbital_period_s / 86164)
+#     * 360 ~ (5316/86164)*360 ~ 22.2 degrees
+#     (86164 s = sidereal day)
+#   total_flight_time_s: 4*3600 + 55*60 + 23 = 17723 s
+#     (4 h 55 m 23 s)
+#   number_of_orbits: 3 (2.98 complete orbits)
+#
+# Parameters (user-adjustable):
+#   n_orbits: 1-5 (default 3, actual mission)
+#   inclination_deg: 20-60 (default 32.5, actual)
+#   altitude_perigee_km: 100-400 (default 161, actual)
+#   altitude_apogee_km: 100-400 (default 265, actual)
+#   launch_longitude_deg: -100 to -60 (default -80.6,
+#     Cape Canaveral)
+#   launch_latitude_deg: 20-40 (default 28.5,
+#     Cape Canaveral)
+#   earth_texture: "coastlines" or "filled" (default
+#     "coastlines" -- uses matplotlib basemap or cartopy
+#     if available, falls back to simple coastline data)
+#
+# Preset scenarios:
+#   "Friendship 7 (actual)": all defaults, 3 orbits
+#   "Single orbit": n_orbits=1 (see one sinusoid)
+#   "Higher inclination": inclination=51.6 (ISS-like)
+#   "Equatorial": inclination=0 (ground track is a line)
+#   "Polar": inclination=90 (ground track covers all latitudes)
+#   "Custom": user-set parameters
+#
+# Tracking Stations (Mercury Worldwide Network):
+#   The Mercury tracking network consisted of 18 stations
+#   around the globe, positioned to provide near-continuous
+#   communication with the orbiting capsule. Each station
+#   had radar tracking, telemetry reception, and voice
+#   communication equipment.
+#
+#   stations = {
+#     "Cape Canaveral": (28.5, -80.6),   # Launch site, primary control
+#     "Bermuda": (32.4, -64.7),           # First acquisition after launch
+#     "Canary Islands": (28.1, -15.4),    # Atlantic crossing
+#     "Kano": (12.0, 8.5),               # Nigeria, equatorial coverage
+#     "Zanzibar": (-6.2, 39.2),          # East Africa
+#     "Muchea": (-31.6, 116.0),          # Western Australia
+#     "Woomera": (-31.2, 136.8),         # South Australia
+#     "Canton Island": (-2.8, -171.7),   # Central Pacific
+#     "Hawaii": (19.5, -155.5),          # Pacific, pre-US coverage
+#     "Guaymas": (27.9, -110.9),         # Mexico, California pass
+#     "Point Arguello": (34.6, -120.6),  # California coast
+#     "White Sands": (32.4, -106.5),     # New Mexico
+#     "Corpus Christi": (27.6, -97.4),   # Texas
+#     "Eglin AFB": (30.5, -86.5),        # Florida panhandle
+#     "Cape Canaveral Ship": (30.0, -75.0), # Atlantic ship
+#     "Indian Ocean Ship": (-10.0, 60.0),# Indian Ocean
+#     "Pacific Ship": (0.0, -150.0),     # Pacific Ocean
+#   }
+#
+# Visualization:
+#   - Plot 1: Mercator ground track (main plot)
+#     Full world map (Mercator projection, -180 to 180 lon,
+#       -60 to 60 lat)
+#     Background: ocean blue (#0A2848), land green (#2A6040),
+#       coastlines white
+#     Three ground tracks, each a different color:
+#       Orbit 1: gold (#C89840)
+#       Orbit 2: amber (#D08020)
+#       Orbit 3: copper (#B86830)
+#     Each ground track is a sinusoidal curve spanning
+#       +/-32.5 degrees latitude (determined by inclination)
+#     The sinusoids shift westward by ~22.2 degrees per orbit
+#     Tracking stations: white diamonds with labels
+#     Launch site: green star marker
+#     Splashdown point: red star marker at approximately
+#       (21.2, -68.7) -- north of Grand Turk Island
+#     Direction arrows on each track (showing west-to-east
+#       orbital motion at low latitudes, east-to-west
+#       apparent motion at high latitudes on Mercator)
+#
+#     Key annotations:
+#       "RAAN precession: ~0.1 deg/orbit (negligible for 3 orbits)"
+#       "Earth rotation: 22.2 deg/orbit westward shift"
+#       "Orbital period: 88.6 minutes"
+#
+#   - Plot 2: Altitude vs. time (orbital profile)
+#     X-axis: elapsed time (0 to 17,723 seconds, or 0 to
+#       ~295 minutes)
+#     Y-axis: altitude above Earth's surface (150 to 280 km)
+#     Blue sinusoidal curve showing altitude variation:
+#       perigee at 161 km, apogee at 265 km
+#     Three complete cycles visible
+#     Horizontal dashed lines at perigee and apogee
+#     Vertical dashed lines at each perigee passage
+#     Annotations:
+#       "Perigee: 161 km (88 miles)"
+#       "Apogee: 265 km (165 miles)"
+#       "Eccentricity: 0.0079 (nearly circular)"
+#       At retrofire point: "Retrofire: T+4:33:04"
+#       At reentry point: "Reentry interface: 120 km"
+#
+#   - Plot 3: Velocity vs. time
+#     X-axis: elapsed time
+#     Y-axis: orbital velocity (7.7 to 7.9 km/s)
+#     The velocity curve is the inverse of the altitude
+#       curve: fastest at perigee, slowest at apogee
+#       (vis-viva equation: v = sqrt(mu*(2/r - 1/a)))
+#     Annotations:
+#       "Perigee velocity: 7.84 km/s (17,540 mph)"
+#       "Apogee velocity: 7.73 km/s (17,290 mph)"
+#       "Orbital velocity at circular equivalent: 7.79 km/s"
+#     At retrofire: vertical line with "Delta-V: -103 m/s"
+#       (the retrorockets removed ~103 m/s of orbital velocity)
+#     Post-retrofire: velocity drops, altitude drops,
+#       trajectory terminates at reentry interface
+#
+#   - Plot 4: Ground track detail -- single orbit
+#     Zoomed view of Orbit 1 only, showing the capsule
+#     position at 5-minute intervals as dots along the track
+#     Each dot labeled with elapsed time (T+00:05, T+00:10, etc.)
+#     Tracking station coverage arcs shown as circles
+#       (radius = horizon distance at orbital altitude,
+#       approximately 1,500 km for 200 km altitude)
+#     Shows which stations could track the capsule at each
+#       point -- reveals the gaps in coverage where Glenn
+#       was out of contact
+#     Annotation:
+#       "Coverage gaps: the capsule spent approximately
+#       15% of each orbit out of contact with any
+#       ground station"
+#
+# Libraries: numpy, matplotlib, cartopy (optional, for
+#   proper map projections; falls back to simple lon/lat
+#   grid if not installed)
+# Difficulty: Intermediate
+# Duration: 3-4 hours</code></pre>
+
+      <p><strong>Key learning moments:</strong></p>
+      <ol>
+        <li>Plot 1 reveals the geometry of orbital flight in a single image: three sinusoidal curves, each shifted westward, together forming the characteristic &ldquo;ground track wallpaper&rdquo; that every orbital mission produces. The student sees that Glenn did not fly over specific countries by choice &mdash; the capsule&rsquo;s orbital plane was fixed at insertion, and the Earth rotated beneath it. The tracking stations were positioned to catch the capsule as it passed overhead, not because the capsule was aimed at them.</li>
+        <li>Plot 4 shows the coverage gaps. During a significant fraction of each orbit, Friendship 7 was beyond the radio horizon of every tracking station. Glenn was alone &mdash; no voice contact, no telemetry, no way for the ground to know what was happening inside the capsule. The ASCS yaw malfunction that consumed much of the mission&rsquo;s attention was diagnosed and managed partly during these communication blackouts, when Glenn had to make engineering decisions without ground support.</li>
+      </ol>
+    </div>
+
+    <hr>
+
+    <div class="sim-card">
+      <h3>A2. Python: Reentry Thermal Analysis</h3>
+      <p class="sim-meta"><strong>Libraries:</strong> numpy, scipy (optional), matplotlib &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate-Advanced &nbsp;|&nbsp; <strong>Duration:</strong> 4&ndash;6 hours</p>
+
+      <p><strong>What it is:</strong> A Python simulation that models the thermal history of Friendship 7&rsquo;s heat shield during the reentry from orbit &mdash; from the moment the capsule first encounters the upper atmosphere at 120 km altitude through peak heating, peak deceleration, and parachute deployment. The simulation solves the one-dimensional heat conduction equation through the ablative heat shield material, tracking the surface temperature, the ablation front position, and the temperature at the back face of the shield (the side facing the astronaut). The student adjusts entry parameters &mdash; velocity, entry angle, capsule mass &mdash; and watches the thermal protection system fight against 1,650 degrees Celsius of stagnation point heating.</p>
+
+      <p><strong>Why it matters:</strong> The Mercury heat shield was a beryllium heat sink design for the suborbital missions (MR-3, MR-4) but Friendship 7 used an ablative shield for the higher energy of orbital reentry. Ablation works by sacrificing material: the shield surface heats until the material decomposes, absorbing enormous energy in the phase change and carrying the hot material away in the airstream. The simulation makes this process quantitative. The student sees that the surface temperature hits 1,650 degrees C while the back face temperature &mdash; just centimeters away &mdash; stays below 65 degrees C. The ablative shield does not resist heat; it absorbs it, transforms it, and ejects it. The shield gets thinner as it protects. Protection is destruction.</p>
+
+      <p>The Segment 51 scare &mdash; where mission control received a telemetry indication that the heat shield might be loose &mdash; adds dramatic weight. If the heat shield had actually been loose, nothing else in this simulation matters. The numbers are only meaningful if the shield stays attached. Glenn reentered not knowing whether the shield would hold. The simulation shows what &ldquo;hold&rdquo; means: centimeters of ablative material standing between a human being and temperatures that would vaporize steel.</p>
+
+      <pre><code># ma6_reentry_thermal.py
+# Friendship 7 reentry heat shield thermal analysis
+#
+# Process:
+#   1. Define the reentry trajectory (altitude vs. time)
+#   2. Compute aerodynamic heating at each altitude using
+#      the Sutton-Graves stagnation point correlation
+#   3. Solve 1D heat conduction through the ablative shield
+#      with surface ablation (moving boundary)
+#   4. Track surface temperature, ablation depth, back face
+#      temperature, and deceleration g-load
+#   5. Plot the complete thermal history of the reentry
+#
+# Reentry Parameters (Friendship 7):
+#   entry_velocity_km_s: 7.8 (orbital velocity minus
+#     retro delta-V of 103 m/s, so approximately 7.7 km/s
+#     at entry interface; increases slightly due to
+#     gravitational acceleration during descent)
+#   entry_angle_deg: -1.5 (shallow entry, typical for
+#     Mercury ballistic reentry; negative = descending)
+#   capsule_mass_kg: 1360 (reentry mass, after retro
+#     jettison if it had been jettisoned -- but Friendship 7
+#     retained the retropack through reentry, adding ~60 kg
+#     so actual reentry mass ~ 1420 kg)
+#   shield_diameter_m: 1.89 (Mercury heat shield base diameter)
+#   shield_thickness_m: 0.038 (1.5 inches, ablative material)
+#   shield_density_kg_m3: 1500 (phenolic-fiberglass ablator)
+#   shield_thermal_conductivity_W_mK: 0.2 (low conductivity,
+#     the shield is a poor conductor -- this is by design)
+#   shield_specific_heat_J_kgK: 1200
+#   ablation_temperature_K: 2500 (the temperature at which
+#     the shield material begins to decompose and ablate)
+#   ablation_energy_J_kg: 10e6 (10 MJ/kg, the energy absorbed
+#     per kg of material ablated -- this is the shield's
+#     primary protection mechanism: phase change absorbs
+#     enormous energy)
+#   nose_radius_m: 0.9 (effective nose radius for stagnation
+#     point heating calculation -- the heat shield is a
+#     spherical segment with this curvature)
+#
+# Parameters (user-adjustable):
+#   entry_velocity_km_s: 5-12 (default 7.8)
+#   entry_angle_deg: -0.5 to -5 (default -1.5)
+#   capsule_mass_kg: 1000-2000 (default 1360)
+#   shield_thickness_m: 0.02-0.06 (default 0.038)
+#   retropack_attached: True/False (default True,
+#     Friendship 7 kept the retropack -- adds mass and
+#     creates asymmetric heating from retropack burnoff)
+#
+# Atmospheric Model (exponential atmosphere):
+#   rho(h) = rho_0 * exp(-h / H)
+#   where:
+#     rho_0 = 1.225 kg/m^3 (sea level density)
+#     H = 7.5 km (scale height for Earth's atmosphere)
+#     h = altitude in km
+#
+#   This is a simplification -- the real atmosphere has
+#   multiple scale heights for different altitude regions.
+#   For reentry from 120 km, the exponential model is
+#   accurate to within ~20% for the heating calculation,
+#   which is sufficient for educational purposes.
+#
+# Heating Model (Sutton-Graves stagnation point):
+#   q = C * sqrt(rho / r_n) * V^3
+#   where:
+#     q = stagnation point heat flux (W/m^2)
+#     C = 1.7415e-4 (Sutton-Graves constant for air,
+#       SI units: kg^0.5 / m)
+#     rho = freestream density (kg/m^3), from atm model
+#     r_n = nose radius (m), 0.9 for Mercury
+#     V = velocity (m/s)
+#
+#   The V^3 dependence is critical: heating increases as
+#   the CUBE of velocity. At 7.8 km/s, even thin atmosphere
+#   produces enormous heating because V^3 = 4.7e11 m^3/s^3.
+#
+# Deceleration Model:
+#   a = (0.5 * rho * V^2 * Cd * A) / m
+#   where:
+#     Cd = 1.2 (Mercury capsule drag coefficient, blunt body)
+#     A = pi * (d/2)^2 = pi * 0.945^2 = 2.806 m^2
+#     m = capsule mass
+#
+#   Peak deceleration for Friendship 7: approximately 7.7 g
+#   (Glenn reported "about 8 g's" in debriefing)
+#
+# 1D Heat Conduction Solver:
+#   The heat shield is discretized into N layers (default 50)
+#   across the shield thickness. At each timestep:
+#     1. Apply heat flux q to the surface (x=0)
+#     2. If surface temperature &gt; ablation temperature:
+#        a. Compute mass ablated = (q - q_radiated) / ablation_energy
+#        b. Remove the ablated layer (moving boundary)
+#        c. Surface temperature is clamped at ablation temp
+#     3. Conduct heat through remaining layers:
+#        dT/dt = k / (rho * cp) * d2T/dx2
+#        (explicit finite difference, stable with CFL condition)
+#     4. Back face (x = thickness): insulated boundary
+#        (dT/dx = 0, no heat flows into the capsule
+#        structure -- simplified assumption)
+#     5. Radiation from surface: q_rad = epsilon * sigma * T^4
+#        where epsilon = 0.8 (ablator emissivity)
+#        sigma = 5.67e-8 W/m^2/K^4 (Stefan-Boltzmann)
+#
+# Retropack Burnoff (Friendship 7 specific):
+#   Because the retropack was retained through reentry
+#   (ground command due to Segment 51 heat shield concern),
+#   the straps holding it burned through during reentry.
+#   Glenn reported seeing "flaming chunks" going past
+#   the window. The simulation marks the retropack burnoff
+#   point -- approximately 45 seconds after reentry
+#   interface, when surface temperature first exceeds
+#   1000 K. The retropack does NOT significantly affect
+#   the heat shield thermal analysis (it sits on top of
+#   the shield, not behind it), but it adds a dramatic
+#   visual and psychological element: Glenn was watching
+#   pieces of his spacecraft burn away past his window
+#   while uncertain whether the heat shield was intact.
+#
+# Visualization:
+#   - Plot 1: Surface temperature vs. time (the main drama plot)
+#     X-axis: time from entry interface (0-500 seconds)
+#     Y-axis: temperature (200-2000 K)
+#     Red curve: surface temperature
+#     Blue dashed line: ablation onset temperature (2500 K)
+#     Green dashed line: structural limit for capsule
+#       wall behind shield (400 K / 127 C)
+#     Green curve: back face temperature (stays low)
+#     Annotations:
+#       Peak surface temperature: ~1920 K (1650 C)
+#       at T+180 seconds (3 minutes after entry interface)
+#       "Retropack burnoff begins": T+45 s, ~1000 K
+#       "Peak heating": T+180 s
+#       "Plasma blackout begins": T+60 s (ionized air
+#         blocks radio communication)
+#       "Plasma blackout ends": T+270 s
+#       "Back face peak: 338 K (65 C) -- survivable"
+#       The gap between the red curve and the green curve
+#       is the shield doing its job: 1600 degrees of
+#       temperature drop across 3.8 cm of ablative material
+#
+#   - Plot 2: Ablation depth vs. time
+#     X-axis: time from entry interface (0-500 seconds)
+#     Y-axis: ablation depth (0-20 mm, with total shield
+#       thickness 38 mm shown as horizontal line)
+#     Blue curve: cumulative material removed by ablation
+#     Shows that the shield loses approximately 5-8 mm
+#       of material during reentry (13-21% of total thickness)
+#     Annotation:
+#       "Material ablated: ~7 mm (18% of shield)"
+#       "Shield margin remaining: 31 mm (82%)"
+#       "Design margin: the shield was designed for
+#       significantly worse conditions than this"
+#
+#   - Plot 3: Deceleration (g-load) vs. time
+#     X-axis: time from entry interface (0-500 seconds)
+#     Y-axis: deceleration (0-10 g)
+#     Red curve: g-load experienced by the capsule
+#       (and Glenn's body)
+#     Peak at approximately 7.7 g at T+210 seconds
+#     Horizontal dashed lines at:
+#       1 g: "Normal gravity"
+#       3 g: "Centrifuge training threshold"
+#       7.7 g: "Friendship 7 peak (Glenn reported ~8 g)"
+#       11 g: "Mercury design limit"
+#     Annotations:
+#       "Duration above 6g: approximately 45 seconds"
+#       "Glenn's vision: graying at peak g but remained
+#       conscious and lucid throughout"
+#       "Peak g-load occurs AFTER peak heating -- the
+#       capsule is decelerating most rapidly when it is
+#       deepest in the atmosphere"
+#
+#   - Plot 4: Heating rate vs. altitude (the physics plot)
+#     X-axis: altitude (0-120 km)
+#     Y-axis: stagnation point heat flux (0-1.5 MW/m^2)
+#     Red curve: heating rate during descent
+#     The curve peaks at approximately 40-50 km altitude,
+#       where the product rho^0.5 * V^3 is maximized
+#       (at higher altitudes, V is high but rho is too low;
+#       at lower altitudes, rho is high but V has decreased
+#       due to deceleration)
+#     Annotation:
+#       "Peak heating altitude: ~45 km"
+#       "Peak heat flux: ~1.2 MW/m^2"
+#       "This is 1.2 million watts per square meter --
+#       equivalent to 1,200 one-kilowatt heaters focused
+#       on each square meter of the heat shield"
+#       "The V^3 term dominates: halving the velocity
+#       reduces heating by 8x"
+#
+# Libraries: numpy, scipy (for ODE integration, optional),
+#   matplotlib
+# Difficulty: Intermediate-Advanced
+# Duration: 4-6 hours</code></pre>
+
+      <p><strong>Key learning moments:</strong></p>
+      <ol>
+        <li>Plot 1 shows the thermal miracle: 1,650 degrees C on one side of 3.8 centimeters of material, 65 degrees C on the other. The ablative shield does not block heat &mdash; it absorbs it through phase change and ejects the hot products into the airstream. The student sees protection-through-destruction: the shield protects by consuming itself. Every gram of ablated material carries away enormous energy. When the material runs out, so does the protection. Plot 2 shows that Friendship 7 used only 18% of the available shield material &mdash; there was substantial margin. But Glenn, watching retropack debris fly past his window, did not know that. He knew only that something was burning and that mission control had told him to keep the retropack attached &ldquo;for any reason,&rdquo; which meant they were worried about the shield.</li>
+        <li>Plot 4 reveals the physics governing when and where peak heating occurs. It is not at the top of the atmosphere (too little air) and not at the surface (too little velocity). It is in the middle, where the product of atmospheric density and the cube of velocity reaches its maximum. This is a universal truth of atmospheric entry: the heating peak always occurs in the same altitude band, regardless of entry vehicle, because the atmosphere&rsquo;s density profile and the vehicle&rsquo;s deceleration profile conspire to create a heating maximum at a predictable altitude.</li>
+      </ol>
+    </div>
+
+    <hr>
+
+    <div class="sim-card">
+      <h3>A3. Web: &ldquo;Friendship 7 Orbital View&rdquo;</h3>
+      <p class="sim-meta"><strong>Technology:</strong> HTML5 Canvas + JavaScript &nbsp;|&nbsp; <strong>Target:</strong> 1920&times;1080 &nbsp;|&nbsp; <strong>&lt;1500 lines</strong></p>
+
+      <p><strong>What it is:</strong> A browser-based real-time orbital simulation of Friendship 7&rsquo;s three-orbit mission. The student watches the capsule orbit a 2D representation of Earth, with the day-night terminator sweeping across the planet, the &ldquo;fireflies&rdquo; particle effect appearing on the night side (the luminescent particles Glenn observed outside his window during the dark-side passes), and a mini-map showing the ground track building up over time. Controls allow time warping, orbit selection, and toggling the Segment 51 scenario (reentry with or without retropack jettison). The simulation culminates in the reentry sequence: retrofire, retropack jettison (or retention), plasma blackout, and parachute deployment.</p>
+
+      <p><strong>Why it matters:</strong> Friendship 7 was a mission of firsts for America: first orbital sunrise, first orbital sunset, first crossing of the terminator from day into night at 28,000 km/h. Glenn&rsquo;s famous &ldquo;fireflies&rdquo; observation &mdash; luminescent particles drifting past the window during the night-side passes &mdash; sparked scientific curiosity and public wonder. Later identified as ice crystals sublimating from the capsule exterior, they became one of the iconic images of the Mercury program. This simulation lets the student experience the orbital geometry: the capsule moving through day and night zones, the tracking station coverage appearing and disappearing, the ground track building up orbit by orbit, and the critical reentry decision that defined the mission &mdash; whether to jettison the retropack and trust the heat shield, or keep it attached as a mechanical backup.</p>
+
+      <pre><code>WEB APPLICATION: "Friendship 7 Orbital View"
+=============================================
+
+Technology: HTML5 Canvas + JavaScript (no frameworks)
+Target: Modern browser, 1920x1080
+
+CONCEPT:
+  The student observes Friendship 7's mission from a
+  perspective above the north pole, looking down at the
+  Earth. The orbital plane is tilted 32.5 degrees, so
+  the capsule traces an elliptical path that extends
+  from 32.5 deg N to 32.5 deg S latitude. Earth rotates slowly
+  beneath the orbit. The day-night terminator sweeps
+  across the planet. The capsule passes through both
+  the sunlit and dark hemispheres on each orbit.
+
+  This is not a game -- it is an observatory. The student
+  watches, adjusts the time rate, and learns by observing
+  the geometry unfold.
+
+DISPLAY LAYOUT:
+  Main view (75% of screen):
+    Earth rendered as a blue circle with simplified
+    continent outlines (green polygons)
+    Day-night terminator: a smooth gradient edge
+      dividing the sunlit and dark hemispheres
+    Night side: dark blue-black with faint continent
+      outlines
+    Day side: bright blue ocean, green land
+    Orbital path: gold ellipse (#C89840), tilted
+      at 32.5 degrees from the horizontal
+    Capsule: small bright dot on the orbit, with a
+      trailing "tail" showing the last 30 seconds of
+      path (fading to transparent)
+    Tracking stations: white dots on Earth's surface,
+      with coverage circles (dashed white lines showing
+      radio horizon from each station)
+    Active station: highlighted in yellow when the
+      capsule is within its coverage arc
+
+  Mini-map (top right, 20% of screen):
+    Mercator projection ground track (identical
+    format to the Python simulation A1)
+    Ground track builds up in real-time as the
+    capsule orbits
+    Three colors for three orbits: gold, amber, copper
+    Current subsatellite point: blinking dot
+
+  Info panel (right side, 20% of screen):
+    Altitude: XXX km
+    Velocity: X.XX km/s
+    Elapsed time: HH:MM:SS (mission elapsed time)
+    Orbit number: 1, 2, or 3
+    Day/Night: "DAY SIDE" or "NIGHT SIDE"
+    Tracking: "IN CONTACT: [station name]" or
+      "NO CONTACT -- between stations"
+    Phase: "ORBIT" or "REENTRY"
+
+CONTROLS:
+  Time warp slider: 1x, 10x, 100x, 1000x real-time
+    At 1x: the 4h 55m mission plays in real time
+    At 100x: approximately 3 minutes
+    At 1000x: approximately 18 seconds (fast overview)
+  Orbit selector: jump to start of Orbit 1, 2, or 3
+  "Fireflies" toggle: show/hide the luminescent particle
+    effect during night-side passes
+  "Segment 51" toggle: choose reentry scenario
+    Option A: "Retropack jettisoned" (standard procedure)
+    Option B: "Retropack retained" (actual Friendship 7)
+
+FIREFLIES EFFECT:
+  During night-side passes, when the capsule is in
+  Earth's shadow, small bright particles appear around
+  the capsule's position:
+  - 20-40 particles at any time
+  - Each particle: gold-white (#C89840 to #FFFFFF),
+    2-4 pixels diameter
+  - Motion: slowly drifting away from the capsule in
+    random directions, as if sublimating from the
+    capsule's surface
+  - Lifetime: 2-5 seconds per particle (appear, drift,
+    fade out)
+  - The effect is subtle and beautiful -- meant to
+    evoke Glenn's description: "I am in a big mass of
+    some very small particles that are brilliantly lit
+    up like they are luminescent"
+  - The particles appear ONLY during the night-side pass
+  - When the capsule crosses the terminator back into
+    sunlight, the particles vanish immediately (they
+    were backlit by the capsule's glow against the
+    darkness; in sunlight, they become invisible)
+
+REENTRY SEQUENCE (triggered at T+4:33:04):
+  The reentry sequence begins with retrofire. The
+  simulation transitions from orbital view to a
+  dedicated reentry display:
+
+  Phase 1: RETROFIRE (T+4:33:04 to T+4:33:26)
+    Three retrorockets fire in sequence (5 seconds each,
+      with 5-second intervals)
+    Visual: three bright exhaust flares from the
+      capsule, each one briefly illuminating the capsule
+      in orange light
+    Delta-V removed: -103 m/s total (-34.3 m/s each)
+    The capsule's orbital velocity drops from 7.79 km/s
+      to 7.69 km/s -- barely noticeable in the display,
+      but enough to lower the perigee into the atmosphere
+
+  Phase 2: RETROPACK DECISION (T+4:33:30)
+    If "Retropack jettisoned" selected:
+      Visual: retropack separates, drifts away, capsule
+      continues clean
+    If "Retropack retained" selected (actual):
+      Visual: retropack stays attached. Text appears:
+      "SEGMENT 51: Ground has indicated possible loose
+      heat shield. Retaining retropack as mechanical
+      restraint. Glenn is not told why."
+
+  Phase 3: REENTRY (T+4:38:00 to T+4:49:00)
+    Altitude decreases from 120 km to sea level
+    Visual transitions:
+    - 120 km: faint glow appears around capsule (first
+      atmospheric friction)
+    - 80 km: orange glow intensifies, capsule outlined
+      in amber light
+    - 60 km: PLASMA BLACKOUT begins. Communication
+      indicator goes red: "NO SIGNAL -- PLASMA BLACKOUT"
+      The capsule is enveloped in ionized air that blocks
+      all radio transmission. Mission control cannot
+      contact Glenn. Glenn cannot contact mission control.
+      This lasts approximately 4 minutes and 20 seconds.
+      If retropack retained: "Flaming chunks visible
+      past window -- retropack straps burning through"
+    - 40 km: Peak heating. The capsule glow is white-hot.
+      "Peak heating: ~1650 deg C surface temperature"
+    - 30 km: Plasma blackout ends. Communication
+      indicator goes green: "SIGNAL REACQUIRED"
+      First words from Glenn: "My condition is good,
+      but that was a real fireball, boy."
+    - 12 km: Drogue parachute deploys (visual: small
+      canopy above capsule)
+    - 3 km: Main parachute deploys (visual: large
+      orange-and-white canopy)
+
+  Phase 4: SPLASHDOWN
+    Capsule descends on parachute to the ocean surface
+    Text: "Splashdown: T+4:55:23"
+    "Location: 21.2 deg N, 68.7 deg W -- North Atlantic"
+    "Friendship 7 mission complete"
+    "John Glenn: first American to orbit the Earth"
+
+COLOR PALETTE:
+  orbital_blue: #1840A0 (orbit path highlight)
+  firefly_gold: #C89840 (particles, orbit track)
+  reentry_amber: #D08020 (reentry glow)
+  earth_green: #2A6040 (continents)
+  atlantic_blue: #0A2848 (deep ocean, space background)
+  plasma_white: #FFFFFF (peak heating glow)
+  night_side: #050A14 (Earth's dark hemisphere)
+
+Deliverables:
+  - Single HTML file, self-contained
+  - &lt; 1500 lines total
+  - 60 fps animation
+  - Accurate orbital geometry (period, altitude, ground track)
+  - Smooth day/night terminator
+  - Fireflies particle system
+  - Complete reentry sequence
+  - Responsive layout (desktop)</code></pre>
+
+      <p><strong>Key learning moment:</strong> The moment the plasma blackout begins. The communication indicator goes red. The info panel reads &ldquo;NO SIGNAL.&rdquo; For four minutes and twenty seconds, mission control watches a blank screen and listens to static. They do not know if the heat shield held. They do not know if Glenn is alive. When the signal returns and Glenn&rsquo;s voice comes through &mdash; &ldquo;My condition is good, but that was a real fireball, boy&rdquo; &mdash; the student understands what it meant to be the first American to reenter from orbit: four minutes of absolute silence while a man fell through fire.</p>
+    </div>
+
+    <hr>
+
+    <div class="sim-card">
+      <h3>A4. Web: &ldquo;Salmon Migration&rdquo;</h3>
+      <p class="sim-meta"><strong>Technology:</strong> HTML5 Canvas + JavaScript &nbsp;|&nbsp; <strong>Target:</strong> 1920&times;1080 &nbsp;|&nbsp; <strong>&lt;1500 lines</strong></p>
+
+      <p><strong>What it is:</strong> A browser-based particle simulation of Chinook salmon (<em>Oncorhynchus tshawytscha</em>) migration in the Pacific Northwest. Thousands of salmon particles navigate from the open Pacific Ocean through coastal waters and up river systems &mdash; the Columbia, the Fraser, the Sacramento &mdash; guided by two biological navigation systems: the Earth&rsquo;s magnetic field (for ocean navigation) and olfactory chemical gradients (for river homing). The student can visualize the magnetic field lines overlaid on the Pacific, toggle the chemical gradient display in the rivers, and watch the salmon lifecycle unfold from ocean feeding grounds to spawning reaches in the tributaries.</p>
+
+      <p><strong>Why it matters:</strong> The Chinook salmon is the largest Pacific salmon species, with individuals exceeding 50 kg (110 lbs) in the Columbia River system. Their migration is one of the most remarkable navigational feats in biology: a salmon hatched in a tributary of the Snake River, tributary of the Columbia, will spend 2&ndash;7 years in the open Pacific and then return to the EXACT tributary where it was born &mdash; navigating thousands of kilometers of featureless ocean and then discriminating between chemically similar rivers to find its natal stream. The navigational challenge is comparable in some ways to orbital navigation: both involve traversing a vast, featureless medium (ocean/space) using physical reference frames (magnetic field/stars) and then executing a precise terminal approach (river entry/reentry corridor). Glenn navigated using the Mercury horizon scanners and star trackers. The salmon navigates using magnetoreception and olfaction.</p>
+
+      <pre><code>WEB APPLICATION: "Chinook Salmon Migration"
+============================================
+
+Technology: HTML5 Canvas + JavaScript (no frameworks)
+Target: Modern browser, 1920x1080
+
+CONCEPT:
+  The student observes the annual Chinook salmon run
+  from a map-scale view of the northeastern Pacific
+  Ocean and western North American coast. Salmon
+  particles (dots) begin scattered across the ocean
+  feeding grounds, then converge on the coastline,
+  enter river mouths, and navigate upstream through
+  river networks to spawning habitat.
+
+  Two navigation systems are visualized:
+  1. Magnetic field: shown as field lines (curves
+     from Earth's magnetic south pole to north pole),
+     with the local declination and inclination values
+     displayed for the salmon's current position. The
+     salmon uses the total field intensity and
+     inclination angle as a "magnetic map" to determine
+     its approximate latitude and longitude in the ocean.
+  2. Chemical gradient: shown as color intensity in
+     river systems. Each river has a unique "scent"
+     (represented as a unique hue). As the salmon
+     approaches the coast, the river plumes extend
+     into the ocean, and the salmon follows the
+     chemical gradient toward its natal river.
+
+DISPLAY LAYOUT:
+  Map view (80% of screen):
+    Pacific Ocean: deep blue (#0A2848)
+    Land: green (#2A6040) with simplified coastline
+    Geographic extent:
+      Latitude: 40 deg N to 60 deg N
+      Longitude: 170 deg W to 115 deg W
+    Major river systems (simplified to main stems):
+      Columbia River: mouth at (46.2 deg N, 124.1 deg W),
+        extending inland ~600 km with major tributaries
+        (Snake River, Willamette, Deschutes)
+      Fraser River: mouth at (49.1 deg N, 123.2 deg W),
+        extending inland ~400 km
+      Sacramento River: mouth at (38.5 deg N, 121.8 deg W),
+        extending inland ~300 km
+    Rivers rendered as blue-green lines on the land mass,
+      width proportional to flow volume
+    Salmon particles: red-orange dots (2-4 pixels each)
+    Total particles: 500-2000 (adjustable via slider)
+
+  Info panel (right side, 20% of screen):
+    Season: displays current month (January through
+      December, cycling)
+    Run status: "Ocean feeding" / "Coastal approach" /
+      "River entry" / "Upstream migration" / "Spawning"
+    Total salmon: XXXX
+    At river: XXX (Columbia: XX, Fraser: XX, Sacramento: XX)
+    Spawning: XX
+    Energy remaining: XX% (average across all salmon)
+    Distance traveled: XXXX km (average)
+    Current magnetic field:
+      Declination: XX.X deg
+      Inclination: XX.X deg
+      Total intensity: XXXXX nT
+
+  Lifecycle panel (bottom, 10% of screen):
+    Timeline showing the salmon lifecycle:
+    [Egg] -&gt; [Alevin] -&gt; [Fry] -&gt; [Smolt] -&gt; [OCEAN] -&gt;
+    [Coastal] -&gt; [River] -&gt; [Spawning] -&gt; [Death]
+    Current phase highlighted
+    Time markers: years in ocean (2-7), migration
+      duration (weeks to months)
+
+CONTROLS:
+  Time rate: 1 day/second, 1 week/second, 1 month/second
+  Season slider: jump to any month
+  "Magnetic field" toggle: show/hide field line overlay
+  "Scent trails" toggle: show/hide chemical gradient
+    overlay in the rivers and coastal waters
+  "Population" slider: 500-2000 particles
+  River selector: highlight a specific river system
+    (dims others, shows detailed tributary network)
+
+SALMON BEHAVIOR:
+
+  Ocean phase (September-March):
+    Salmon are distributed across the North Pacific
+    feeding grounds between 45 deg N-55 deg N, 170 deg W-140 deg W
+    Movement: random walk with drift (simulating
+      foraging behavior), speed ~30 km/day
+    No directional preference -- salmon are feeding
+    and growing, not navigating
+
+  Coastal approach (April-May):
+    Triggered by: increasing day length (photoperiod
+      cue) and hormonal changes (not simulated, but
+      the timing is)
+    Salmon begin directed movement toward the coast
+    Navigation: magnetic field. The salmon compares
+      its current magnetic field values (inclination
+      and intensity) against an internal "magnetic map"
+      learned during its outward smolt migration
+    Direction: eastward, with latitude maintained by
+      magnetic inclination sensing
+    Speed increases to ~50 km/day
+
+  River entry (May-July):
+    When the salmon reaches within 50 km of the coast,
+    the chemical gradient becomes detectable
+    Each river mouth emits a plume of "scent" that
+      extends 20-50 km offshore (variable with current
+      and wind)
+    The scent plume is visualized as a colored gradient:
+      Columbia: orange (#D08020)
+      Fraser: teal (#208070)
+      Sacramento: gold (#C89840)
+    The salmon follows the gradient (moves toward
+      increasing concentration) until it reaches the
+      river mouth
+    If the salmon encounters the wrong river's plume,
+      it ignores it (the olfactory match is species-
+      and population-specific)
+
+  Upstream migration (June-September):
+    Once in the river, the salmon navigates upstream
+    Speed: 30-50 km/day (fighting current)
+    Energy depletes: the salmon does not eat during
+      freshwater migration. It is living on stored
+      body fat. Energy decreases linearly with distance
+      traveled, modified by river gradient (steeper =
+      more energy per km)
+    At each fork: the salmon follows the chemical
+      gradient toward its natal tributary
+    Color change: salmon dots transition from red-orange
+      to dark red (simulating the body color change
+      from ocean silver to spawning red)
+
+  Spawning (August-October):
+    When the salmon reaches its target tributary
+      (determined at particle creation -- each salmon
+      is assigned a natal stream), it stops migrating
+    The particle flashes briefly (spawning), then fades
+      to gray (death)
+    Death is universal: all Pacific salmon die after
+      spawning (semelparous lifecycle). The nutrients
+      from the decomposing body feed the stream
+      ecosystem, including the next generation of
+      salmon fry
+
+POST-SIMULATION DISPLAY:
+  "Chinook Salmon (Oncorhynchus tshawytscha)
+  The largest Pacific salmon. Ocean-type Chinook may
+  spend 5+ years at sea before returning to spawn.
+  They navigate using the Earth's magnetic field for
+  oceanic orientation and olfactory (chemical) cues
+  for river homing.
+
+  Friendship 7 orbited at 7.8 km/s, guided by
+  horizon scanners, star trackers, and ground radar.
+  Glenn's spacecraft flew 121,794 km in 3 orbits.
+
+  A Columbia River Chinook salmon migrates approximately
+  3,000 km from the North Pacific to its spawning
+  tributary. It navigates without instruments, without
+  ground control, without a map -- using only the
+  magnetic field written into the planet and the
+  chemical signature of the water where it was born.
+
+  Both are navigation problems. Both require crossing
+  a vast, featureless medium. Both end with a precise
+  arrival at a specific location. Glenn had a spacecraft
+  and mission control. The salmon has a brain the size
+  of a pea and 100 million years of evolution."
+
+Deliverables:
+  - Single HTML file, self-contained
+  - &lt; 1500 lines total
+  - 60 fps animation with particle system
+  - Simplified but geographically accurate Pacific coast
+  - Magnetic field visualization (field lines)
+  - Chemical gradient visualization (colored plumes)
+  - Complete lifecycle from ocean to spawning
+  - Responsive layout (desktop)</code></pre>
+
+      <p><strong>Key learning moment:</strong> The moment the salmon particles converge on the river mouths and the colored scent plumes become visible. The student sees that the ocean is not featureless after all &mdash; from the salmon&rsquo;s perspective, the rivers broadcast their identity into the Pacific through chemical signatures that extend tens of kilometers offshore. The salmon has been &ldquo;smelling&rdquo; its way home for weeks before it reaches the river mouth. Navigation is not a single system; it is a stack. The salmon uses the magnetic field for coarse positioning (which ocean basin, what latitude), photoperiod for timing (when to begin migrating), and olfaction for terminal guidance (which river, which tributary, which reach). Glenn&rsquo;s Mercury spacecraft used the same layered approach: ASCS attitude control for orientation, star trackers for calibration, ground radar for orbit determination, and visual landmarks for final approach confirmation. Navigation is always a stack.</p>
+    </div>
+
+    <hr>
+
+    <div class="sim-card">
+      <h3>A5. SPICE: Segment 51 Indicator Circuit</h3>
+      <p class="sim-meta"><strong>Tool:</strong> ngspice &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate</p>
+
+      <p><strong>What it is:</strong> A SPICE netlist modeling the telemetry circuit that produced the Segment 51 scare during Friendship 7&rsquo;s reentry. Segment 51 was a telemetry channel that indicated the position of the landing bag &mdash; specifically, whether the heat shield&rsquo;s landing bag had deployed from its stowed position behind the shield. A &ldquo;deployed&rdquo; reading meant the heat shield might have come loose. During Glenn&rsquo;s flight, Segment 51 showed an erratic signal that suggested the landing bag might be deployed, which would mean the heat shield was no longer latched to the capsule. This triggered the ground decision to retain the retropack through reentry (normally it would be jettisoned after retrofire) as a mechanical restraint to hold the shield in place. The actual cause was a faulty switch &mdash; the landing bag was not deployed, and the heat shield was secure. This circuit models how a switch fault produces a false telemetry reading.</p>
+
+      <p><strong>Why it matters:</strong> The Segment 51 incident is a case study in sensor ambiguity: a single telemetry bit &mdash; deploy/stow &mdash; drove a mission-critical decision (retain retropack) that potentially increased risk (retropack debris during reentry) in order to mitigate a perceived greater risk (heat shield separation). The circuit reveals the mechanism: a microswitch with intermittent contact resistance produces a voltage that hovers between the &ldquo;deployed&rdquo; and &ldquo;stowed&rdquo; thresholds, causing the telemetry encoder to report erratic readings. The fix is engineering: either make the switch more reliable, add a redundant sensor, or design the telemetry system to distinguish between &ldquo;deployed,&rdquo; &ldquo;stowed,&rdquo; and &ldquo;uncertain.&rdquo; Friendship 7 had only two states in its telemetry. The switch existed in a third state. The circuit had no way to say &ldquo;I don&rsquo;t know.&rdquo;</p>
+
+      <pre><code>* Segment 51 Landing Bag Deploy Indicator Circuit
+* =================================================
+*
+* Mercury capsule Segment 51 telemetry circuit.
+* The landing bag is stowed behind the heat shield,
+* held by a mechanical latch. A microswitch detects
+* the latch position:
+*   - Latch closed (bag stowed): switch closed -&gt; 0V on
+*     telemetry line -&gt; Segment 51 reads "stowed"
+*   - Latch open (bag deployed): switch open -&gt; +5V on
+*     telemetry line (pulled up) -&gt; Segment 51 reads
+*     "deployed"
+*
+* Normal circuit:
+*
+*       +5V (telemetry supply)
+*        |
+*       R_pullup (10k, pulls line HIGH when switch open)
+*        |
+*        +----&gt; TELEMETRY LINE (Segment 51)
+*        |      (goes to telemetry encoder -&gt; RF transmitter
+*        |       -&gt; ground station -&gt; mission control)
+*        |
+*       SW1 (microswitch, normally closed when latched)
+*        |
+*       GND
+*
+* Normal operation:
+*   Latch closed -&gt; SW1 closed -&gt; telemetry line = 0V
+*     -&gt; "stowed" (correct)
+*   Latch open -&gt; SW1 open -&gt; telemetry line = 5V
+*     -&gt; "deployed" (correct)
+*
+* Fault condition (Friendship 7):
+*   The microswitch developed an intermittent contact.
+*   The switch was mechanically closed (latch was engaged,
+*   bag was stowed), but the electrical contact was not
+*   reliable. Contact resistance varied between:
+*     - 0 ohm (good contact, correct reading)
+*     - 100-10k ohm (partial contact, ambiguous voltage)
+*     - Open (no contact, false "deployed" reading)
+*
+*   With a contact resistance of 10k ohm (equal to the
+*   pullup resistor), the telemetry line voltage becomes:
+*     V = 5 * R_contact / (R_pullup + R_contact)
+*     = 5 * 10k / (10k + 10k)
+*     = 2.5V
+*   This is exactly between the "stowed" (0V) and
+*   "deployed" (5V) thresholds. The telemetry encoder
+*   uses a comparator with a threshold at ~2.5V:
+*     V &lt; 2.5V -&gt; "stowed"
+*     V &gt; 2.5V -&gt; "deployed"
+*   At exactly 2.5V, the reading is indeterminate --
+*   noise, vibration, and temperature fluctuations push
+*   it above and below the threshold, producing erratic
+*   readings.
+*
+* This analysis shows that:
+*   1. A single-point contact failure (one switch) can
+*      produce an ambiguous telemetry reading
+*   2. The circuit has no "uncertain" state -- it can
+*      only report "stowed" or "deployed"
+*   3. The intermittent contact makes the reading
+*      WORSE than a clean failure (which would at least
+*      be consistent). The erratic toggling between
+*      "stowed" and "deployed" is the most confusing
+*      possible failure mode -- it prevents mission
+*      control from confidently dismissing the reading
+*
+* SPICE netlist:
+*
+.title Segment_51_Indicator_Circuit
+*
+* Power supply (telemetry reference)
+V_telem VCC 0 DC 5
+*
+* Pullup resistor
+R_pullup VCC SEG51 10k
+*
+* === Normal operation (uncomment for baseline) ===
+* R_switch SEG51 0 0.01
+* (closed switch = 0.01 ohm = SEG51 reads ~0V)
+*
+* === Fault condition: intermittent contact ===
+* Model the intermittent contact as a time-varying
+* resistance. The switch contact resistance fluctuates
+* between 0.01 ohm (good contact) and open circuit (1MEG)
+* with random dwell times.
+*
+* Simplified model: PWL waveform controlling a
+* voltage-controlled resistance (behavioral source)
+*
+* Contact resistance profile over 10 seconds:
+* (simulating vibration-induced contact bounce)
+V_contact_ctrl CTRL 0 PWL(
++  0.0  0     ; good contact
++  0.5  0     ; still good
++  0.51 1     ; contact breaks (vibration)
++  0.8  1     ; open
++  0.81 0     ; contact remakes
++  1.2  0     ; good contact
++  1.21 0.5   ; partial contact
++  1.8  0.5   ; hovering at mid-resistance
++  1.81 1     ; open again
++  2.3  1     ; open
++  2.31 0     ; remakes
++  3.0  0     ; good contact
++  3.01 0.7   ; partial
++  3.5  0.7   ; partial
++  3.51 1     ; open
++  4.0  1     ; open -- sustained false reading
++  4.5  1     ; still open
++  4.51 0     ; remakes
++  5.0  0     ; good
++  5.5  0     ;
++  5.51 0.3   ; slight degradation
++  6.0  0.3   ;
++  6.01 1     ; open
++  6.5  1     ;
++  6.51 0     ; remakes
++  7.0  0     ;
++  7.01 0.5   ; hovering
++  7.5  0.5   ;
++  7.51 0     ;
++  8.0  0     ;
++  8.5  0     ;
++  8.51 1     ; open
++  9.0  1     ;
++  9.01 0     ;
++  10.0 0     )
+*
+* Behavioral resistor: R = 0.01 + 999999 * V(CTRL)
+* When V(CTRL) = 0: R = 0.01 ohm (closed)
+* When V(CTRL) = 1: R = 1 MEG ohm (open)
+* When V(CTRL) = 0.5: R = 500k ohm (partial, ~5V reading)
+B_contact SEG51 0 I=V(SEG51) / (0.01 + 999999*V(CTRL))
+*
+* === Telemetry encoder threshold ===
+* Comparator: if V(SEG51) &gt; 2.5V, output goes HIGH
+* (indicating "deployed")
+.subckt COMP INP INM OUT VCC VEE
+  Rin INP INM 10MEG
+  Egain MID 0 INP INM 100000
+  Rout MID OUT 100
+  D1 OUT VCC DCLAMP
+  D2 VEE OUT DCLAMP
+  .model DCLAMP D(IS=1e-14 N=1)
+.ends
+*
+V_ref VREF 0 DC 2.5
+X_comp SEG51 VREF TELEM_OUT VCC 0 COMP
+*
+* Noise source (thermal noise in the circuit)
+* Simulates the small voltage fluctuations that push
+* the reading across the threshold when contact
+* resistance is near the critical value
+V_noise NOISE_NODE 0 SIN(0 0.1 120 0 0 0)
+R_noise NOISE_NODE SEG51 100k
+*
+* Analysis
+.tran 0.01 10 UIC
+*
+.control
+  run
+  * Plot the contact resistance control signal
+  plot V(CTRL) title "Contact Resistance State (0=closed, 1=open)"
+  * Plot Segment 51 telemetry line voltage
+  plot V(SEG51) title "Segment 51 Voltage (0V=stowed, 5V=deployed)"
+  * Plot the telemetry encoder output
+  plot V(TELEM_OUT) title "Telemetry Output (stowed/deployed)"
+  *
+  * The critical observation:
+  * V(SEG51) should be either 0V (stowed) or 5V (deployed).
+  * Instead, the faulty contact produces voltages between
+  * 0V and 5V, and the telemetry encoder comparator
+  * produces erratic toggling between "stowed" and
+  * "deployed" states.
+  *
+  * This is what mission control saw on February 20, 1962:
+  * Segment 51 toggling between "stowed" and "deployed"
+  * in a pattern consistent with an intermittent switch,
+  * but indistinguishable (from telemetry alone) from an
+  * actual intermittent latch failure.
+  *
+  * The ground decision: assume the worst case (shield
+  * loose), retain the retropack as mechanical backup,
+  * and hope the switch is the failure, not the latch.
+  * The switch was the failure. The shield was fine.
+  * But in February 1962, with a man's life depending
+  * on the answer, "hope" was not an engineering method.
+  *
+  wrdata segment51_indicator.dat V(CTRL) V(SEG51) V(TELEM_OUT)
+.endc
+*
+.end</code></pre>
+    </div>
+
+    <hr>
+
+    <div class="sim-card">
+      <h3>A6. SPICE: Beat Frequency Oscillator &mdash; Progressive Radio Circuit #21</h3>
+      <p class="sim-meta"><strong>Tool:</strong> ngspice &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate</p>
+
+      <p><strong>What it is:</strong> A SPICE netlist for a Beat Frequency Oscillator (BFO), the twenty-first circuit in the progressive radio series. The BFO is essential for receiving CW (continuous wave / Morse code) and SSB (single-sideband) signals. In a standard AM receiver, CW signals produce no audio &mdash; the carrier is present or absent, but there is no modulated audio content to detect. The BFO injects a locally generated signal at a frequency offset from the incoming carrier. The mixer (or product detector) combines the BFO signal with the received signal, producing an audio beat note at the difference frequency. A 1 kHz offset produces a 1 kHz tone that the operator hears as the Morse code dit-dah pattern.</p>
+
+      <p><strong>Why it matters:</strong> Mercury used UHF voice communication, but the ground stations also transmitted CW as a backup mode. The BFO is the circuit that makes CW audible. Without a BFO, a CW signal is silence &mdash; the receiver&rsquo;s AGC sees the carrier and adjusts, but no audio emerges because there is no modulation. The BFO is also essential for SSB reception, which became standard for long-range communication after Mercury. This circuit builds on the product detector (v1.18) and the audio CW filter (v1.19) to complete the CW reception chain: BFO generates the local signal, the product detector mixes it with the incoming CW, and the CW filter narrows the audio bandwidth to pass only the beat note.</p>
+
+      <pre><code>* Beat Frequency Oscillator -- Progressive Radio Circuit #21
+* ==========================================================
+*
+* Progressive Radio Series Circuit #21
+*
+* The BFO generates a continuous local oscillator signal
+* at a frequency close to (but not equal to) the receiver's
+* IF (intermediate frequency). When mixed with an incoming
+* CW or SSB signal in the product detector (v1.18), the
+* BFO produces an audible beat note at the difference
+* frequency.
+*
+* Radio Series Progress:
+*   v1.2  -- Transmitter (oscillator to antenna)
+*   v1.3  -- Receiver (antenna to detector to audio)
+*   v1.4  -- Mixer (RF + LO to IF)
+*   v1.5  -- IF Amplifier (IF to amplified, filtered IF)
+*   v1.6  -- AM Detector/Demodulator
+*   v1.7  -- Audio Amplifier + Speaker Driver
+*   v1.8  -- Noise Blanker / Impulse Filter
+*   v1.9  -- AGC (Automatic Gain Control)
+*   v1.10 -- S-Meter (signal strength indicator)
+*   v1.11 -- BFO (Beat Frequency Oscillator for CW/SSB)
+*   v1.12 -- Antenna Tuner (L-network impedance matching)
+*   v1.13 -- RF Preamplifier (low-noise front end)
+*   v1.14 -- Bandpass Filter (LC tuned selectivity)
+*   v1.15 -- Crystal Filter (quartz extreme selectivity)
+*   v1.16 -- AGC Time Constant (attack/release control)
+*   v1.17 -- Noise Blanker (pulse noise suppression)
+*   v1.18 -- Product Detector (SSB/CW synchronous demod)
+*   v1.19 -- Audio CW Filter (active bandpass for Morse)
+*   v1.20 -- Squelch (carrier-operated audio muting)
+*   v1.21 -- BFO (Colpitts pair + mixer, complete) &lt;- THIS CIRCUIT
+*
+* Note on v1.11 vs v1.21:
+*   v1.11 introduced the BFO concept as a single oscillator.
+*   v1.21 presents the COMPLETE BFO system: two Colpitts
+*   oscillators (one fixed, one variable), a diode ring
+*   mixer, and an audio output filter. This is the
+*   production-ready BFO that integrates into the full
+*   receiver chain.
+*
+* Architecture:
+*
+*   FIXED OSCILLATOR (Colpitts, 455.0 kHz)
+*       |
+*       +---------&gt; DIODE MIXER &lt;-------+
+*       |               |               |
+*       |          AUDIO OUTPUT         |
+*       |          (1 kHz beat)         |
+*       |               |               |
+*   VARIABLE OSCILLATOR (Colpitts, 454.0-456.0 kHz)
+*       (tuned by variable capacitor / varactor)
+*
+*   The fixed oscillator runs at the receiver's IF
+*   frequency (455.0 kHz for a standard receiver).
+*   The variable oscillator runs at IF +/- offset, where
+*   the offset determines the audio beat frequency.
+*   For a 1 kHz CW tone: variable = 454.0 kHz or 456.0 kHz
+*   (the mixer produces the absolute difference).
+*
+*   The operator adjusts the variable oscillator to
+*   set the beat note pitch to a comfortable listening
+*   frequency (typically 600-1000 Hz for Morse code).
+*
+* SPICE netlist:
+*
+.title BFO_Progressive_Radio_21
+*
+* Power supply
+Vcc VCC 0 DC 12
+*
+* ============================================
+* FIXED OSCILLATOR: Colpitts at 455.0 kHz
+* ============================================
+*
+* Colpitts topology:
+*   The inductor (L1) and two capacitors (C1a, C1b)
+*   form the resonant tank. The transistor (Q1) provides
+*   gain to sustain oscillation. The capacitive voltage
+*   divider (C1a/C1b) provides the feedback.
+*
+*   Oscillation frequency:
+*     f = 1 / (2*pi*sqrt(L * C_series))
+*     where C_series = C1a * C1b / (C1a + C1b)
+*
+*   For f = 455.0 kHz:
+*     Choose L1 = 100 uH
+*     C_series = 1 / ((2*pi*f)^2 * L)
+*             = 1 / ((2*pi*455000)^2 * 100e-6)
+*             = 1 / (8.172e12 * 1e-4)
+*             = 1 / (8.172e8)
+*             = 1.224 nF
+*     Choose C1a = C1b = 2*C_series = 2.448 nF ~ 2.4 nF
+*     (Equal capacitors: C_series = C/2 = 1.2 nF -&gt; f ~ 455 kHz)
+*
+* Transistor (NPN, general purpose)
+.model QNPN NPN(BF=200 IS=1e-14 CJC=5p CJE=10p TF=0.3n)
+*
+* Fixed oscillator tank
+L1 VCC TANK1 100u
+C1a TANK1 FB1 2.4n
+C1b FB1 0 2.4n
+*
+* Transistor Q1 (fixed oscillator)
+Q1 TANK1 FB1 E1 QNPN
+R_E1 E1 0 1k
+R_bias1a VCC FB1 47k
+R_bias1b FB1 0 10k
+*
+* DC blocking / coupling to mixer
+C_couple1 TANK1 MIX_IN1 100p
+*
+* ============================================
+* VARIABLE OSCILLATOR: Colpitts at 454.0 kHz
+* ============================================
+*
+* Same topology as fixed oscillator, but with a
+* variable capacitor (modeled as a fixed capacitor
+* with a different value to produce 454.0 kHz,
+* yielding a 1.0 kHz beat note).
+*
+*   For f = 454.0 kHz with L2 = 100 uH:
+*     C_series = 1 / ((2*pi*454000)^2 * 100e-6)
+*             = 1 / ((2.852e6)^2 * 1e-4)
+*             = 1 / (8.134e12 * 1e-4)
+*             = 1 / (8.134e8)
+*             = 1.229 nF
+*     C2a = C2b = 2 * 1.229 = 2.459 nF ~ 2.46 nF
+*
+* Variable oscillator tank
+L2 VCC TANK2 100u
+C2a TANK2 FB2 2.46n
+C2b FB2 0 2.46n
+*
+* Transistor Q2 (variable oscillator)
+Q2 TANK2 FB2 E2 QNPN
+R_E2 E2 0 1k
+R_bias2a VCC FB2 47k
+R_bias2b FB2 0 10k
+*
+* DC blocking / coupling to mixer
+C_couple2 TANK2 MIX_IN2 100p
+*
+* ============================================
+* DIODE RING MIXER
+* ============================================
+*
+* The diode mixer combines the two oscillator signals.
+* The output contains frequencies at:
+*   f1 + f2 = 909 kHz (sum, filtered out)
+*   |f1 - f2| = 1.0 kHz (difference = beat note)
+*   f1 = 455 kHz (carrier, filtered out)
+*   f2 = 454 kHz (carrier, filtered out)
+*
+* Simple single-diode mixer (simplified from a ring
+* for netlist clarity):
+.model DMIX D(IS=1e-12 N=1.05 RS=10 CJO=2p)
+*
+* Combine the two oscillator signals at the mixer input
+R_mix1 MIX_IN1 MIX_NODE 1k
+R_mix2 MIX_IN2 MIX_NODE 1k
+*
+* Diode detector (acts as mixer/multiplier for
+* small signals, producing sum and difference)
+D_mix MIX_NODE MIX_OUT DMIX
+R_mix_load MIX_OUT 0 10k
+*
+* ============================================
+* AUDIO OUTPUT FILTER
+* ============================================
+*
+* Low-pass filter to remove the RF components (455 kHz
+* and 909 kHz) and pass only the audio beat note (1 kHz).
+*
+* 2nd-order RC low-pass, cutoff at ~5 kHz:
+*   f_c = 1 / (2*pi*R*C) = 1 / (2*pi*3.3k*10n)
+*       = 1 / (2.07e-4) ~ 4.8 kHz
+*
+R_lpf1 MIX_OUT LPF1 3.3k
+C_lpf1 LPF1 0 10n
+R_lpf2 LPF1 LPF2 3.3k
+C_lpf2 LPF2 0 10n
+*
+* Audio output
+* V(AUDIO_OUT) is the 1 kHz beat note
+R_audio AUDIO_OUT 0 10k
+C_audio_couple LPF2 AUDIO_OUT 1u
+*
+* ============================================
+* ANALYSIS
+* ============================================
+*
+* Transient: run for 10 ms to see several cycles
+* of the 1 kHz beat note (period = 1 ms)
+.tran 0.1u 10m UIC
+*
+.control
+  run
+  * Plot fixed oscillator output (455 kHz)
+  plot V(TANK1) title "Fixed Oscillator (455.0 kHz)"
+  * Plot variable oscillator output (454 kHz)
+  plot V(TANK2) title "Variable Oscillator (454.0 kHz)"
+  * Plot mixer input (combined signal)
+  plot V(MIX_NODE) title "Mixer Input (Combined Oscillators)"
+  * Plot audio output (1 kHz beat note)
+  plot V(AUDIO_OUT) title "Audio Beat Note (1.0 kHz)"
+  *
+  * The key observation:
+  * V(TANK1) and V(TANK2) are both RF signals at ~455 kHz,
+  * nearly identical to the eye. But their 1 kHz frequency
+  * difference, extracted by the mixer and low-pass filter,
+  * produces V(AUDIO_OUT): a clean 1 kHz sine wave.
+  *
+  * This is the beat note that the operator hears when
+  * receiving CW. Each Morse dit produces a burst of
+  * 1 kHz tone; each dah produces a longer burst. The
+  * spacing between tones encodes the message.
+  *
+  * In the Mercury ground station receiver chain:
+  *   Antenna -&gt; RF Preamp (v1.13) -&gt; Mixer (v1.4) -&gt;
+  *   IF Amp (v1.5) -&gt; Product Detector (v1.18) &lt;-
+  *   BFO (THIS CIRCUIT) -&gt; CW Filter (v1.19) -&gt;
+  *   Audio Amp (v1.7) -&gt; Squelch (v1.20) -&gt; Speaker
+  *
+  * Without the BFO, the CW signal arrives at the
+  * product detector as a pure carrier -- no audio
+  * content, just RF energy appearing and disappearing
+  * with the key. The BFO converts "carrier present/absent"
+  * into "audio tone present/absent." It is the circuit
+  * that turns electromagnetic presence into human-audible
+  * information.
+  *
+  * During Friendship 7, Glenn's voice was the primary
+  * communication mode. But if voice failed -- if the
+  * modulator broke, if the mic died, if noise overwhelmed
+  * the audio -- the ground stations could still receive
+  * Glenn's CW key transmissions. The BFO at each ground
+  * station would convert those keyed carrier bursts into
+  * audible Morse. The BFO is the last-resort listener:
+  * the circuit that can hear a signal that has lost its
+  * voice.
+  *
+  wrdata bfo_output.dat V(TANK1) V(TANK2) V(AUDIO_OUT)
+.endc
+*
+.end</code></pre>
+    </div>
+
+    <hr>
+
+    <h2>B. CUDA/GPU Specification</h2>
+
+    <div class="sim-card">
+      <h3>B1. CUDA: N-Body Orbital Perturbation Simulation</h3>
+      <p class="sim-meta"><strong>Target:</strong> NVIDIA RTX 4060 Ti (8GB VRAM) &nbsp;|&nbsp; <strong>Language:</strong> CUDA C++ (or Python with cupy/numba) &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate-Advanced &nbsp;|&nbsp; <strong>Duration:</strong> 4&ndash;6 hours</p>
+
+      <p><strong>What it is:</strong> A GPU-accelerated simulation of Friendship 7&rsquo;s orbital trajectory incorporating perturbation forces that a simple Keplerian model ignores. The simulation computes the capsule&rsquo;s position and velocity at each timestep under the influence of: Earth&rsquo;s J2 gravitational oblateness (the equatorial bulge), atmospheric drag at orbital altitude, and solar radiation pressure. By comparing the perturbed trajectory to the ideal Keplerian ellipse, the student sees how much the actual orbit deviates from the textbook solution over three revolutions, and which perturbation dominates at Friendship 7&rsquo;s altitude.</p>
+
+      <p><strong>Why it matters:</strong> The Mercury orbital tracking network solved the orbit determination problem by radar measurement and ground computation &mdash; they did not predict the orbit forward from first principles, they measured it in real time. But the perturbations are real, and they matter: J2 oblateness causes the orbital plane to precess (the RAAN rotates), atmospheric drag causes the orbit to decay (the semi-major axis shrinks), and solar radiation pressure causes a tiny secular drift. Over three orbits these effects are small but measurable. Over hundreds of orbits (as for later orbital missions), they are mission-critical. This simulation uses the GPU to compute the trajectory at high time resolution, showing the student that Kepler&rsquo;s laws are a beautiful approximation and reality is messier.</p>
+
+      <pre><code>CUDA SPECIFICATION: N-Body Orbital Perturbation
+================================================
+
+Target: NVIDIA RTX 4060 Ti (8GB VRAM)
+Language: CUDA C++ (or Python with cupy/numba)
+
+PHYSICS MODEL:
+
+  The capsule's state vector [x, y, z, vx, vy, vz] is
+  integrated forward using a 4th-order Runge-Kutta (RK4)
+  integrator. At each timestep, the acceleration is
+  computed as the sum of:
+
+  1. Central gravity:
+     a_grav = -mu * r / |r|^3
+     where mu = 398600.4418 km^3/s^2 (Earth GM)
+     r = position vector from Earth center
+     This is the Keplerian term -- produces a perfect ellipse.
+
+  2. J2 oblateness:
+     The Earth is not a perfect sphere -- it bulges at the
+     equator by approximately 21 km. This creates a
+     gravitational perturbation:
+     a_J2 = -(3/2) * J2 * mu * R_E^2 / |r|^5 *
+       [ x * (1 - 5*z^2/|r|^2),
+         y * (1 - 5*z^2/|r|^2),
+         z * (3 - 5*z^2/|r|^2) ]
+     where J2 = 1.08263e-3 (Earth J2 coefficient)
+     R_E = 6371 km (Earth mean radius)
+
+     Effect: precesses the orbital plane. RAAN drifts
+     approximately -7.5 deg/day for Friendship 7's orbit
+     (32.5 deg inclination, ~200 km altitude). Over 3 orbits
+     (~4.4 hours), this is approximately -1.4 degrees.
+     Small, but measurable by ground tracking.
+
+  3. Atmospheric drag:
+     a_drag = -(1/2) * rho * |v_rel|^2 * Cd * A / m * v_hat
+     where:
+       rho = atmospheric density at orbital altitude
+         (from exponential model: rho = 1.225*exp(-h/7.5)
+         for h in km -- at 200 km, rho ~ 2.5e-10 kg/m^3)
+       v_rel = velocity relative to rotating atmosphere
+       Cd = 2.2 (drag coefficient for blunt capsule at
+         hypersonic Mach numbers)
+       A = 2.806 m^2 (cross-sectional area)
+       m = 1360 kg (capsule mass)
+       v_hat = unit vector in velocity direction
+
+     Effect: decreases orbital energy, lowering the orbit.
+     At 200 km altitude, drag causes approximately 1-2 m
+     of altitude loss per orbit for the Mercury capsule.
+     Over 3 orbits: ~5 m -- negligible for the mission,
+     but over days or weeks the orbit would decay noticeably.
+
+  4. Solar radiation pressure:
+     a_srp = -(P_sun / c) * (A_srp / m) * (1 + rho_refl) * s_hat
+     where:
+       P_sun = 1361 W/m^2 (solar constant)
+       c = 3e8 m/s (speed of light)
+       A_srp = effective area (varies with sun angle, ~2 m^2)
+       rho_refl = 0.3 (reflectivity, rough estimate)
+       s_hat = unit vector from capsule to sun
+
+     Effect: extremely small for Mercury's orbit. Included
+     for completeness and to show the student that it is
+     negligible compared to J2 and drag.
+
+GPU PARALLELIZATION:
+  The simulation is parallelized over the timestep
+  subdivision: the total trajectory is divided into
+  segments, and each GPU thread computes one segment's
+  RK4 integration. For this educational simulation,
+  the parallelization is straightforward:
+
+  Option A: Parameter sweep
+    Launch N threads, each computing the full 3-orbit
+    trajectory with a different set of perturbation
+    parameters (e.g., different drag coefficients,
+    different atmospheric models, different J2 values).
+    This produces N trajectories that can be compared
+    to the baseline Keplerian orbit.
+
+  Option B: Ensemble
+    Launch N threads, each computing a trajectory with
+    slightly perturbed initial conditions (within the
+    orbit determination uncertainty). This produces
+    an ensemble of trajectories that shows how
+    sensitive the prediction is to initial state
+    uncertainty.
+
+  Option C: High-resolution single trajectory
+    Use the GPU to compute a single trajectory at
+    extremely high time resolution (dt = 0.01 seconds,
+    total = 18,000 seconds, = 1.8 million timesteps).
+    This is too many steps for a CPU to compute
+    interactively but trivial for a GPU.
+
+OUTPUT:
+  - Position vectors at each timestep (x, y, z)
+    stored to a binary file for post-processing
+  - Comparison data:
+    delta_r(t) = |r_perturbed(t) - r_keplerian(t)|
+    This is the position error if you used Kepler's
+    equations instead of the perturbed model.
+  - Summary statistics:
+    Total delta-r after 3 orbits
+    Maximum delta-r during the trajectory
+    Breakdown by perturbation source:
+      delta-r from J2 only
+      delta-r from drag only
+      delta-r from SRP only
+    (Computed by running separate simulations with
+    each perturbation enabled individually)
+
+VISUALIZATION (post-processing, matplotlib):
+  - Plot 1: delta-r vs. time
+    X-axis: elapsed time (0-18000 seconds)
+    Y-axis: |r_perturbed - r_keplerian| in meters
+    Three curves:
+      Blue: J2 only (dominant, ~2 km after 3 orbits)
+      Green: drag only (~5 m after 3 orbits)
+      Red: SRP only (~0.1 m after 3 orbits)
+    Shows clearly that J2 dominates by orders of magnitude
+
+  - Plot 2: Orbital element evolution
+    Six subplots showing the classical orbital elements
+    over 3 orbits:
+      a (semi-major axis): slight decrease from drag
+      e (eccentricity): slight change from J2
+      i (inclination): nearly constant
+      RAAN: secular drift from J2 (-1.4 deg over 3 orbits)
+      omega (arg perigee): secular drift from J2
+      true anomaly: progressing as expected
+
+  - Plot 3: 3D trajectory comparison
+    The perturbed and Keplerian orbits plotted in 3D
+    (mplot3d). The difference is too small to see at
+    orbit scale, so include an INSET showing a zoomed
+    section where the trajectories diverge.
+
+Expected results:
+  J2 effect after 3 orbits: ~2 km deviation
+  Drag effect after 3 orbits: ~5 m deviation
+  SRP effect after 3 orbits: ~0.1 m deviation
+  Total deviation: ~2 km (J2-dominated)
+
+  The takeaway: for a 3-orbit Mercury mission, Kepler
+  is good enough for approximate navigation but the
+  tracking network's continuous radar updates were
+  essential for precise orbit determination. The
+  perturbations accumulate linearly (drag) and
+  quadratically (J2 precession) with time, so longer
+  missions require increasingly sophisticated models.
+
+Libraries: CUDA toolkit (nvcc), Python+matplotlib
+  for post-processing (or cupy for all-GPU)
+GPU requirement: any CUDA-capable GPU (the computation
+  is modest -- millions of RK4 steps is trivial for
+  modern GPUs)
+Difficulty: Intermediate-Advanced
+Duration: 4-6 hours</code></pre>
+    </div>
+
+    <hr>
+
+    <h2>C. GLSL Shader Specification</h2>
+
+    <div class="sim-card">
+      <h3>C1. GLSL: &ldquo;Friendship 7 Screensaver&rdquo;</h3>
+      <p class="sim-meta"><strong>Target:</strong> OpenGL 3.3+ / GLSL 330 &nbsp;|&nbsp; <strong>Expected length:</strong> 400&ndash;600 lines GLSL &nbsp;|&nbsp; <strong>60 fps on RTX 4060 Ti at 1920&times;1080</strong></p>
+
+      <p><strong>What it is:</strong> A GLSL fragment shader that cycles through four visual modes, each depicting a key phase of the Friendship 7 mission: orbital dawn with Glenn&rsquo;s luminescent &ldquo;fireflies,&rdquo; the three-orbit ground track as sinusoidal curves on Earth&rsquo;s surface, the violent reentry with plasma flow and burning retropack debris, and the final splashdown in the Atlantic. The shader runs as a continuous screensaver, cycling through modes on a timer, with smooth cross-fade transitions between each phase.</p>
+
+      <p><strong>Why it matters:</strong> The Mercury missions were the first American spaceflights to be extensively broadcast. The images that defined these missions &mdash; the fiery reentry, the capsule on its parachute, the astronaut being hoisted from the water &mdash; became part of the American visual vocabulary. This shader recreates those images as procedural art: no textures, no photographs, only mathematics. Every curve, every glow, every particle is generated from equations. The result is not photorealism but something closer to memory: the way these events live in the collective imagination, reduced to light, color, and motion.</p>
+
+      <pre><code>// friendship7_screensaver.frag
+// =============================
+//
+// Friendship 7 mission screensaver -- 4 cycling modes
+//
+// Uniforms:
+//   uniform float iTime;        // elapsed time in seconds
+//   uniform vec2  iResolution;  // viewport resolution
+//   uniform int   iFrame;       // frame counter
+//   uniform vec4  iMouse;       // mouse position (xy=current, zw=click)
+//
+// Color palette:
+//   orbital_blue:   vec3(0.094, 0.251, 0.627)  // #1840A0
+//   firefly_gold:   vec3(0.784, 0.596, 0.251)  // #C89840
+//   reentry_amber:  vec3(0.816, 0.502, 0.125)  // #D08020
+//   earth_green:    vec3(0.165, 0.376, 0.251)  // #2A6040
+//   atlantic_blue:  vec3(0.039, 0.157, 0.282)  // #0A2848
+//
+// Build validation:
+//   Must pass: glslangValidator friendship7_screensaver.frag
+//   Target: OpenGL 3.3+ / GLSL 330
+//   Shadertoy-compatible with uniform naming convention
+//
+// MODE CYCLING:
+//   Each mode runs for 20 seconds, with a 2-second
+//   cross-fade transition between modes.
+//   Total cycle: 4 x 22 = 88 seconds, then repeats.
+//
+//   Mode selection:
+//     float cycle = mod(iTime, 88.0);
+//     int mode = int(cycle / 22.0);
+//     float modeTime = mod(cycle, 22.0);
+//     float fade = smoothstep(0.0, 2.0, modeTime) *
+//                  (1.0 - smoothstep(20.0, 22.0, modeTime));
+//
+// ============================================
+// MODE 1: "ORBITAL DAWN" (0-22 seconds)
+// ============================================
+//
+// The view from Friendship 7's window as the capsule
+// crosses the terminator from night into day. The Earth's
+// limb (edge of the planet as seen from orbit) curves
+// across the lower portion of the screen. Above the limb:
+// the deep black of space with stars. Below: the dark
+// surface of the sleeping Earth. At the limb edge: a
+// thin band of atmospheric glow -- the layered colors
+// of orbital sunrise.
+//
+// Layers (bottom to top):
+//
+//   1. Dark Earth surface:
+//      Below the limb line (a gentle curve across the
+//      lower 30% of the screen).
+//      Color: very dark blue-black (#050A14)
+//      Subtle texture: noise-based "cloud" pattern
+//        that slowly moves, simulating cloud tops
+//        barely visible in the pre-dawn darkness
+//      City lights: tiny scattered bright dots on the
+//        dark surface (pseudo-random positions, warm
+//        white color, slowly twinkling)
+//
+//   2. Atmospheric limb glow:
+//      A thin band (5-8% of screen height) along the
+//      limb line, containing the atmospheric color layers
+//      of orbital sunrise:
+//        Bottom: dark blue (#0A1830) -- troposphere
+//        Middle: deep teal (#104040) -- stratosphere
+//        Upper: warm orange (#D08020) -- mesosphere
+//          (sunlight scattered through the atmosphere
+//          at grazing angles produces the orange/amber
+//          color that defines orbital sunrise)
+//        Top edge: bright yellow-white (#FFE080) --
+//          the sun about to appear
+//      Implementation: vertical gradient with color stops
+//        mapped to distance above the limb line.
+//        The gradient shifts upward slowly with modeTime,
+//        simulating the sun rising -- the orange band
+//        gets wider and brighter over the 20-second mode.
+//
+//   3. Stars:
+//      Above the limb, the background is space-black with
+//      stars. Stars are procedurally generated:
+//        Position: hash-based pseudo-random in screen space
+//        Brightness: random, 0.3 to 1.0
+//        Color: white to slight blue-white
+//        Twinkle: brightness modulated by sin(iTime * rate)
+//          where rate is unique per star
+//      Approximately 200 visible stars in the upper 70%
+//      of the screen.
+//
+//   4. Fireflies:
+//      Glenn's luminescent particles, appearing against
+//      the dark Earth background.
+//      Position: clustered in the region just above the
+//        dark Earth surface and just below the limb glow
+//      Each firefly:
+//        - Small bright point (2-5 pixel glow radius)
+//        - Color: firefly_gold (#C89840) with white center
+//        - Motion: slow drift upward and to the right
+//          (simulating particles sublimating from the capsule
+//          surface and drifting in the orbital wake)
+//        - Lifetime: 3-6 seconds, fade in -&gt; hold -&gt; fade out
+//        - 15-25 active at any time
+//      Implementation: each firefly is a hash-seeded particle
+//        with birth time, velocity, and lifetime. At each
+//        frame, compute position = birth_pos + velocity * age,
+//        brightness = smoothstep fade envelope.
+//      The fireflies are the centerpiece of this mode.
+//      They should be subtle, beautiful, and physically
+//      plausible: tiny bright specks drifting slowly against
+//      the dark Earth, exactly as Glenn described them.
+//
+//   5. Sun emergence (final 5 seconds of mode):
+//      In the last 5 seconds, the sun begins to appear
+//      above the limb:
+//        A bright white-yellow point source rises from
+//        behind the atmospheric glow
+//        Lens flare effect: radial rays extending from
+//          the sun point (4-6 rays, additive blending)
+//        The atmospheric glow intensifies dramatically
+//        The fireflies fade out (overwhelmed by sunlight)
+//        The dark Earth surface begins to brighten
+//          (dawn spreading across the surface)
+//
+// ============================================
+// MODE 2: "THREE ORBITS" (22-44 seconds)
+// ============================================
+//
+// A view looking down at the Earth from above, showing
+// the three ground tracks of Friendship 7 as sinusoidal
+// curves drawn on the planet's surface. The Earth fills
+// the screen as a full circle, continents visible as
+// green-on-blue shapes. The ground tracks are drawn
+// progressively -- the first orbit's track draws during
+// the first 7 seconds, the second during seconds 7-14,
+// the third during seconds 14-20.
+//
+// Layers:
+//
+//   1. Earth disk:
+//      Circle centered on screen, radius ~45% of
+//        min(resolution.x, resolution.y)
+//      Ocean: atlantic_blue (#0A2848) with subtle
+//        noise texture (procedural cloud/water pattern)
+//      Continents: earth_green (#2A6040), defined as
+//        simple polygon approximations using SDF
+//        (signed distance fields) for major landmasses:
+//        - Africa (central, distinctive shape)
+//        - Europe (upper left of Africa)
+//        - Asia (right of Europe, large mass)
+//        - Americas (left side of globe)
+//        - Australia (lower right)
+//      The continent shapes do not need to be precise --
+//        recognizable silhouettes are sufficient.
+//      The globe slowly rotates (matching Earth's rotation
+//        rate relative to the orbital period).
+//
+//   2. Ground tracks:
+//      Three sinusoidal curves on the Earth's surface:
+//        Orbit 1: gold (#C89840)
+//        Orbit 2: amber (#D08020)
+//        Orbit 3: copper (#B86830)
+//      Each curve:
+//        Amplitude: +/-32.5 deg latitude (determined by
+//          orbital inclination)
+//        Period: full 360 deg of longitude (one orbit)
+//        Phase shift: -22.2 deg per orbit (Earth rotation)
+//      The curves are drawn progressively: a bright dot
+//        traces along each curve as it draws, leaving a
+//        fading trail behind it. The drawing speed matches
+//        the mode timing (one orbit per ~7 seconds).
+//      Implementation: parametric curve on sphere surface,
+//        projected to screen coordinates. The curve is
+//        rendered as a glowing line (distance field from
+//        curve, with Gaussian falloff).
+//
+//   3. Tracking stations:
+//      Small bright dots at the positions of the Mercury
+//        tracking network stations
+//      White with a subtle pulse (brightness oscillates)
+//      Connected to the capsule by a thin line when the
+//        capsule is within range (line appears and disappears
+//        as the capsule moves in and out of coverage)
+//
+//   4. Capsule position:
+//      A bright point (larger than tracking stations)
+//        that moves along the current ground track
+//      Small trailing glow (orbit path behind capsule)
+//      The point is the brightest element on screen
+//
+//   5. Text overlay (if shader supports text):
+//      "ORBIT 1" / "ORBIT 2" / "ORBIT 3" displayed
+//        in the upper corner as each orbit traces
+//      If text rendering is not available, use simple
+//        geometric markers (1 dot, 2 dots, 3 dots)
+//
+// ============================================
+// MODE 3: "REENTRY" (44-66 seconds)
+// ============================================
+//
+// The view from behind Friendship 7 as it reenters the
+// atmosphere. The capsule's heat shield faces away from
+// the viewer (toward the direction of travel). Plasma
+// flows around the heat shield, enveloping the capsule
+// in orange-white fire. Pieces of the retropack burn
+// away, trailing sparks and ember-like debris that
+// streak past the viewer's perspective.
+//
+// Layers:
+//
+//   1. Space background:
+//      Upper portion of screen: black with stars (same
+//        star field as Mode 1, for continuity)
+//      The stars gradually fade out as the atmospheric
+//        glow intensifies (the plasma envelopes the
+//        viewport)
+//
+//   2. Capsule silhouette:
+//      Center-bottom of screen: the Mercury capsule seen
+//        from behind, rendered as a dark conical shape
+//        (wide at the heat shield base, narrow at the
+//        nose/antenna end)
+//      The capsule is a SILHOUETTE -- black against the
+//        bright plasma. The viewer is behind the capsule,
+//        looking forward into the direction of travel.
+//
+//   3. Plasma flow:
+//      The main visual effect. Hot ionized air flowing
+//      around the heat shield:
+//        Color gradient from center to edge:
+//          Shield center: white (#FFFFFF) -- hottest point
+//          Inner flow: bright amber (#FFB030) -- 1500+ K
+//          Outer flow: reentry_amber (#D08020) -- cooling
+//          Flow edge: dark red (#601010) -- cooled plasma
+//        Motion: the plasma flows OUTWARD from the heat
+//          shield center, curving around the capsule's
+//          sides. This is a radial flow pattern centered
+//          on the heat shield.
+//        Implementation: noise-based flow field with
+//          radial base velocity from the shield center.
+//          Multiple octaves of simplex noise displaced
+//          by the flow velocity create the turbulent,
+//          flickering appearance of plasma.
+//        Intensity increases over the first 10 seconds
+//          of the mode (simulating descent into denser
+//          atmosphere), peaks at seconds 10-15, then
+//          decreases (post-peak-heating deceleration).
+//
+//   4. Retropack debris:
+//      Starting at modeTime = 3 seconds (retropack straps
+//      begin burning through):
+//        3-8 debris particles at any time
+//        Each particle: bright orange/yellow point
+//        Trajectory: originating from the capsule surface,
+//          streaming TOWARD the viewer (the debris passes
+//          behind the capsule, toward the camera)
+//        The particles grow larger as they approach
+//          (perspective depth effect), then pass off-screen
+//        Each particle has a small trailing streak
+//          (motion blur, 5-10 pixel trail)
+//        Color: starts bright yellow-white, transitions
+//          to orange, then dark red as it cools
+//        This is what Glenn saw: "big flaming chunks"
+//          going past his window. In the shader, these
+//          chunks fly TOWARD the viewer because the
+//          viewer's camera is behind the capsule.
+//
+//   5. Atmospheric glow:
+//      The edges of the screen develop a warm orange
+//        glow that intensifies with the plasma (additive
+//        blend of reentry_amber at screen edges)
+//      Simulates the capsule being enveloped in fire
+//
+//   6. Shock wave:
+//      A subtle bright arc in front of the heat shield
+//        (between the capsule and the viewer) representing
+//        the bow shock. This is a curved line, slightly
+//        brighter than the surrounding plasma, where the
+//        hypersonic shock compression occurs.
+//      The shock standoff distance increases slightly over
+//        time (as the capsule decelerates, the shock moves
+//        forward relative to the shield)
+//
+// ============================================
+// MODE 4: "SPLASHDOWN" (66-88 seconds)
+// ============================================
+//
+// The capsule descends on its main parachute toward
+// the Atlantic Ocean. The view is from a nearby ship
+// or aircraft: we see the ocean surface (waves), the
+// large orange-and-white parachute canopy above, and
+// the small capsule hanging below on risers. The
+// descent is slow and peaceful after the violence of
+// reentry.
+//
+// Layers:
+//
+//   1. Sky:
+//      Upper 60% of screen: clear blue sky
+//        Color: gradient from medium blue (#3060C0) at
+//          horizon to lighter blue (#80B0E0) overhead
+//      A few cumulus clouds: white, soft-edged shapes
+//        (procedural noise-based, positioned randomly)
+//      The sky slowly scrolls upward as the capsule
+//        descends (the viewpoint tilts upward to track
+//        the descending parachute)
+//
+//   2. Ocean surface:
+//      Lower 40% of screen: Atlantic Ocean
+//        Base color: atlantic_blue (#0A2848)
+//        Wave pattern: sinusoidal displacement with
+//          multiple frequencies (3-4 sine waves at
+//          different periods and amplitudes, creating
+//          realistic ocean surface motion)
+//        Sun glints: bright specular highlights on
+//          wave peaks (small bright spots that move
+//          with the wave pattern)
+//        The ocean surface is reflective and alive --
+//          not flat, not static
+//      Horizon line: where ocean meets sky, softened
+//        by atmospheric haze (thin white-gray gradient)
+//
+//   3. Parachute:
+//      Above the capsule: the main parachute canopy
+//        Shape: roughly semicircular (seen from the side),
+//          billowing slightly with wind
+//        Color: alternating orange (#E06020) and white
+//          (#F0F0F0) gore panels (vertical stripes on
+//          the canopy, 6-8 stripes)
+//        Size: large relative to the capsule (the Mercury
+//          main parachute was 63 feet / 19 meters diameter)
+//        Motion: gentle swaying (+/-5 deg oscillation at ~0.2 Hz)
+//        Risers: thin lines from parachute edge to capsule
+//          (4-6 lines, slight curve due to aerodynamic loading)
+//
+//   4. Capsule:
+//      Below the parachute, hanging from the risers
+//        Shape: small conical silhouette (wider at bottom/
+//          heat shield, narrower at top/antenna)
+//        Color: black silhouette against the sky/ocean
+//        Scale: much smaller than the parachute (the
+//          capsule is 1.89 m diameter; the parachute is
+//          19 m diameter -- a 10:1 ratio)
+//        Descending slowly: the capsule-parachute system
+//          moves downward on screen over the 20-second mode,
+//          approaching the ocean surface
+//
+//   5. Splashdown impact (final 3 seconds):
+//      The capsule reaches the ocean surface
+//        Impact: white spray pattern radiating outward
+//          from the impact point (particle effect or
+//          noise-based splash shape)
+//        The parachute deflates and settles to one side
+//          (canopy collapses, drifts right)
+//        Wave pattern around the capsule: concentric
+//          ripples expanding outward from the impact point
+//        The capsule bobs in the water -- partially
+//          submerged, listing to one side
+//        Text (or geometric symbol): "F7" or a small
+//          "7" inscribed near the floating capsule
+//
+// ============================================
+// CROSS-FADE TRANSITIONS
+// ============================================
+//
+// Between each mode, a 2-second cross-fade blends the
+// outgoing mode's final frame with the incoming mode's
+// first frame:
+//   color = mix(outgoing_color, incoming_color, fade_factor)
+//   where fade_factor ramps from 0.0 to 1.0 over 2 seconds
+//
+// The transitions are:
+//   Mode 1 -&gt; 2: Orbital dawn -&gt; Earth view (natural zoom-out)
+//   Mode 2 -&gt; 3: Earth view -&gt; Reentry (shift to close-up)
+//   Mode 3 -&gt; 4: Reentry -&gt; Splashdown (fire fades to sky)
+//   Mode 4 -&gt; 1: Splashdown -&gt; Orbital dawn (cycle restart)
+//
+// ============================================
+// SHADER STRUCTURE (pseudocode)
+// ============================================
+//
+// void mainImage(out vec4 fragColor, in vec2 fragCoord) {
+//     vec2 uv = fragCoord / iResolution.xy;
+//     float cycle = mod(iTime, 88.0);
+//     int mode = int(cycle / 22.0);
+//     float t = mod(cycle, 22.0);
+//     float fade = smoothstep(0.0, 2.0, t) *
+//                  (1.0 - smoothstep(20.0, 22.0, t));
+//
+//     vec3 col = vec3(0.0);
+//     if (mode == 0) col = orbitalDawn(uv, t);
+//     else if (mode == 1) col = threeOrbits(uv, t);
+//     else if (mode == 2) col = reentry(uv, t);
+//     else col = splashdown(uv, t);
+//
+//     // Apply cross-fade with adjacent mode
+//     // (blend outgoing/incoming at transitions)
+//     ...
+//
+//     fragColor = vec4(col, 1.0);
+// }
+//
+// Each mode function returns a vec3 RGB color for the
+// given UV coordinate and mode-local time.
+//
+// Helper functions:
+//   float hash(vec2 p)          -- pseudo-random [0,1]
+//   float noise(vec2 p)         -- value noise
+//   float fbm(vec2 p)           -- fractal Brownian motion
+//   float sdCircle(vec2 p, float r) -- signed distance, circle
+//   float sdLine(vec2 a, vec2 b, vec2 p) -- signed distance, line
+//   vec3 palette(float t)       -- color palette interpolation
+//
+// Total expected shader length: 400-600 lines GLSL
+// Must compile with glslangValidator
+// Must run at 60 fps on RTX 4060 Ti at 1920x1080</code></pre>
+    </div>
+
+    <hr>
+
+    <h2>D. Machine Learning &mdash; What to Train</h2>
+
+    <div class="sim-card">
+      <h3>D1. Orbital Anomaly Detection from Attitude Telemetry</h3>
+      <p class="sim-meta"><strong>Libraries:</strong> torch or tensorflow, numpy, matplotlib &nbsp;|&nbsp; <strong>GPU:</strong> Optional &nbsp;|&nbsp; <strong>Difficulty:</strong> Intermediate &nbsp;|&nbsp; <strong>Duration:</strong> 3&ndash;4 hours</p>
+
+      <p><strong>What it is:</strong> A machine learning model that classifies Mercury capsule attitude control behavior from simulated telemetry data. The ASCS (Automatic Stabilization and Control System) on Friendship 7 developed a yaw malfunction during the first orbit &mdash; the attitude jets fired erratically to correct a perceived yaw error that may not have existed (a sensor fault rather than an actual attitude error). Glenn switched to manual fly-by-wire control for portions of the flight. This model learns to distinguish between normal ASCS operation, sensor-induced false corrections, and genuine attitude drift from labeled training data.</p>
+
+      <pre><code>Model: Sequence classifier (LSTM or 1D CNN)
+
+Input:
+  - Time series of attitude and jet firing data
+  - Window size: 30 seconds at 10 Hz = 300 samples
+  - Features per sample:
+    - yaw_angle_deg: continuous (-180 to +180)
+    - pitch_angle_deg: continuous (-90 to +90)
+    - roll_angle_deg: continuous (-180 to +180)
+    - yaw_rate_deg_s: continuous (-5 to +5)
+    - pitch_rate_deg_s: continuous (-5 to +5)
+    - roll_rate_deg_s: continuous (-5 to +5)
+    - jet_yaw_left: binary (0 or 1, thruster firing)
+    - jet_yaw_right: binary (0 or 1)
+    - jet_pitch_up: binary (0 or 1)
+    - jet_pitch_down: binary (0 or 1)
+    - jet_roll_cw: binary (0 or 1)
+    - jet_roll_ccw: binary (0 or 1)
+    - hydrogen_peroxide_remaining_pct: continuous (0-100)
+
+Output:
+  - P(normal): ASCS operating correctly, jets firing only
+    when needed, fuel consumption nominal
+  - P(sensor_fault): ASCS responding to erroneous sensor
+    readings, jets firing to correct errors that don't exist,
+    fuel consumption elevated
+  - P(attitude_drift): genuine attitude error (external
+    torque), jets firing correctly but unable to maintain
+    attitude, increasing error over time
+  - P(manual_control): astronaut has taken over, jet
+    firings correlated with manual input, ASCS disconnected
+  - Confidence: max(probabilities)
+
+Training data:
+  Simulated 30-second windows from:
+  - Normal ASCS: attitude stable (+/-2 deg deadband), jets fire
+    briefly to correct drift, then silence. Fuel consumption
+    ~0.5 lb/hour. Jet firings are infrequent and short.
+  - Sensor fault: attitude appears to drift in yaw (sensor
+    output wanders), ASCS fires yaw jets to correct, attitude
+    oscillates around the drifting sensor value. Fuel
+    consumption elevated to ~2 lb/hour. The signature is:
+    jets fire -&gt; apparent yaw corrects -&gt; sensor drifts again -&gt;
+    jets fire again. A limit cycle driven by the sensor error.
+  - Attitude drift: genuine external torque (e.g., asymmetric
+    venting, solar radiation pressure torque). Attitude drifts
+    steadily in one direction. Jets fire to correct but the
+    drift returns. Unlike sensor fault, the drift is real
+    and monotonic, not oscillatory.
+  - Manual control: jet firings correlate with human input
+    patterns -- longer burns, less precise timing, occasional
+    overcorrections followed by corrections in the other
+    direction. The human signature: pulse-pause-pulse, not
+    the machine's bang-bang limit cycle.
+  - 5,000 windows per class
+
+Architecture:
+  LSTM: 2 layers, 64 hidden units each
+    Input: 300 x 13 (30s x 10Hz x 13 features)
+    Output: FC(128) -&gt; FC(4) -&gt; softmax
+
+  Or 1D CNN: Conv1D(32, k=7) -&gt; Conv1D(64, k=5) -&gt;
+    Conv1D(128, k=3) -&gt; GlobalAvgPool -&gt; FC(64) -&gt; FC(4)
+
+Expected results:
+  - Normal vs. sensor_fault: ~85% accuracy (the jet firing
+    patterns differ -- sensor fault produces oscillatory
+    corrections, normal produces sparse corrections)
+  - Normal vs. attitude_drift: ~90% accuracy (drift is
+    monotonic and persistent, normal is bounded)
+  - Sensor_fault vs. attitude_drift: ~75% accuracy (both
+    produce elevated jet firings, but the oscillation
+    signature of sensor fault is distinguishable from
+    the monotonic drift)
+  - Manual_control: &gt;95% accuracy (human input patterns are
+    distinctively different from automated control)
+  - Hydrogen peroxide consumption rate is the strongest
+    single feature for detecting anomalous ASCS behavior:
+    normal = 0.5 lb/hr, sensor fault = 2+ lb/hr
+
+Libraries: torch or tensorflow, numpy, matplotlib
+GPU: Optional (small model, trainable on CPU in minutes)
+Difficulty: Intermediate
+Duration: 3-4 hours</code></pre>
+
+      <p><strong>Key insight:</strong> The hydrogen peroxide consumption rate &mdash; the fuel gauge for the attitude jets &mdash; was the first indicator that something was wrong with Friendship 7&rsquo;s ASCS. The jets were firing too often, consuming fuel at an unsustainable rate. Glenn noticed this and switched to fly-by-wire to conserve fuel. The model&rsquo;s strongest feature for anomaly detection is the same metric Glenn used: fuel consumption rate. The machine learning model rediscovers the astronaut&rsquo;s diagnostic insight. The best sensor for detecting a malfunctioning control system is not any single attitude measurement &mdash; it is the resource consumption. A control system that is fighting a phantom error consumes resources faster than one that is operating correctly. Glenn knew this intuitively. The model learns it from data.</p>
+    </div>
+
+    <hr>
+
+    <h2>E. Computer Science &mdash; Sensor Ambiguity and Voting Systems</h2>
+
+    <div class="sim-card">
+      <h3>E1. Sensor Redundancy and the Segment 51 Problem</h3>
+
+      <p>The Segment 51 incident is a textbook example of sensor ambiguity: a single sensor (one microswitch) produced a reading that could not be confirmed or denied by any other sensor. Mission control had to make a life-or-death decision (retain retropack or jettison) based on a reading they could not trust. A redundant sensor architecture &mdash; multiple independent sensors measuring the same physical quantity &mdash; would have resolved the ambiguity. This section explores the engineering of sensor redundancy, voting systems, and fault-tolerant measurement.</p>
+
+      <pre><code>CONCEPT: Sensor Redundancy and Voting
+
+THE PROBLEM:
+  Segment 51 provided ONE measurement of the landing bag
+  deploy status. That measurement was erratic. Mission
+  control could not determine whether:
+    A) The landing bag had actually deployed (shield loose)
+    B) The sensor had failed (shield secure, switch faulty)
+
+  With one sensor, there is no way to distinguish between
+  "the thing being measured has changed" and "the sensor
+  has failed." Both produce the same output: an unexpected
+  reading.
+
+THE SOLUTION: REDUNDANCY
+  If you have THREE sensors measuring the same quantity,
+  you can vote:
+    - If all three agree: high confidence in the reading
+    - If two agree and one disagrees: the disagreeing
+      sensor is likely faulty (majority vote)
+    - If all three disagree: the measurement system has
+      failed; declare "unknown"
+
+  This is called Triple Modular Redundancy (TMR), and it
+  is the foundation of fault-tolerant computing in aerospace,
+  nuclear power, and medical devices.
+
+  For Friendship 7:
+  Scenario: Three independent landing bag switches
+    Switch A: stowed
+    Switch B: erratic (the actual faulty switch)
+    Switch C: stowed
+    TMR vote: 2-1 in favor of "stowed" -&gt; HIGH CONFIDENCE
+    that the shield is secure. The erratic switch is
+    identified as the fault, not the shield.
+
+VOTING ALGORITHMS:
+  1. Simple majority vote:
+     Output = the value that appears most often
+     Requires: at least 3 sensors (2 cannot vote)
+     Tolerates: 1 faulty sensor in 3 (or k faulty in 2k+1)
+
+  2. Weighted majority vote:
+     Each sensor has a trust weight based on its
+     historical reliability. A sensor with a track record
+     of correct readings gets a higher weight. A sensor
+     that has been erratic gets a lower weight.
+     Output = weighted sum of sensor readings, thresholded
+
+  3. Median voter:
+     For continuous (analog) measurements, take the
+     median of all sensor readings. The median is
+     robust to outliers: if one sensor fails high or
+     low, the median excludes it.
+
+  4. Byzantine fault tolerance:
+     For the worst case: sensors that fail in arbitrary
+     ways (not just stuck-high or stuck-low, but
+     producing plausible false readings). BFT requires
+     at least 3f+1 sensors to tolerate f Byzantine faults.
+     For f=1: 4 sensors minimum.
+     This is the standard used in aircraft fly-by-wire
+     systems (Airbus A320: 3 flight computers + diverse
+     software). Mercury used 0 redundant heat shield
+     sensors.
+
+IMPLEMENTATION EXERCISE:
+
+  Build a simple TMR voter in any language:
+
+  class TMRVoter:
+    def __init__(self):
+      self.sensors = [SensorA(), SensorB(), SensorC()]
+
+    def read(self):
+      readings = [s.read() for s in self.sensors]
+      # For binary sensors (deployed/stowed):
+      if readings.count("stowed") &gt;= 2:
+        return "stowed", "HIGH", readings
+      elif readings.count("deployed") &gt;= 2:
+        return "deployed", "HIGH", readings
+      else:
+        return "unknown", "LOW", readings
+
+  Simulate 10,000 readings with one faulty sensor.
+  Count:
+    - How many times does the TMR give the correct answer
+      when one sensor is faulty? (Expected: ~100%)
+    - How many times does the single-sensor system give
+      the correct answer with the same fault? (Expected: ~50%)
+    - What is the false alarm rate for each system?
+
+  The results demonstrate that TMR converts a 50/50
+  ambiguous reading into a near-certain correct reading,
+  at the cost of two additional sensors. For a heat
+  shield that cost millions of dollars and protected a
+  human life, two extra microswitches (cost: approximately
+  $5 each) would have resolved the ambiguity that consumed
+  most of mission control's attention during Friendship 7's
+  reentry.
+
+SOFTWARE APPLICATION:
+  Replace "heat shield sensor" with any critical boolean
+  check in software:
+    - "Is the database connection alive?"
+    - "Is the payment gateway responding?"
+    - "Is the API rate limit exceeded?"
+
+  A single health check can give a false positive or false
+  negative. Three independent health checks, voted, produce
+  a reliable answer. The cost of redundancy (3x the health
+  checks) is trivial compared to the cost of acting on a
+  false reading (unnecessary failover, missed payment,
+  service degradation).
+
+  Friendship 7's lesson: one sensor is not a measurement.
+  One sensor is a hope. A measurement requires redundancy.</code></pre>
+    </div>
+
+    <hr>
+
+    <h2>F. Creative Arts &mdash; What to Compose, Write, and Render</h2>
+
+    <div class="art-card">
+      <h3>F1. Short Story: &ldquo;The Fireflies&rdquo;</h3>
+
+      <p>A creative nonfiction account of Glenn&rsquo;s night-side passes during Friendship 7, focusing on the moment he first observed the luminescent particles outside his window and the chain of scientific reasoning that followed &mdash; from wonder to hypothesis to ground communication to eventual explanation. The story is told from Glenn&rsquo;s perspective, in the precise, observational voice of a Marine fighter pilot who is also a methodical observer.</p>
+
+      <pre><code>STORY SPECIFICATION: "The Fireflies"
+
+Perspective: First person, Glenn's voice. Present tense
+  during the orbital sequences. Past tense for context
+  and reflection. The voice is disciplined and observational
+  but capable of wonder. Glenn was not cold -- he was
+  controlled. There is a difference. A cold man would not
+  have noticed the fireflies. A controlled man notices
+  everything and reports it clearly.
+
+Tone: Precise observation layered with suppressed awe.
+  Glenn was trained to report what he saw, not what he
+  felt. But the fireflies broke through. His actual
+  words -- "I am in a big mass of some very small
+  particles that are brilliantly lit up like they are
+  luminescent" -- are the words of a man who is describing
+  something beautiful while trying to sound professional.
+
+Structure:
+  Each section is keyed to an orbital event:
+
+  1. FIRST NIGHT PASS -- ORBIT 1
+     The capsule crosses the terminator from day into night.
+     The transition is abrupt -- not a sunset that takes
+     minutes, but an orbital sunset that takes seconds.
+     One moment the Earth is sunlit blue and cloud-white;
+     the next, it is black with scattered city lights.
+     The window goes from bright to dark. My eyes adjust.
+     The stars appear -- more stars than any ground
+     observer has ever seen, because there is no
+     atmosphere to scatter the light. The Milky Way
+     is not a faint band; it is a river.
+
+  2. THE FIREFLIES -- ORBIT 1, NIGHT SIDE
+     And then: particles. Small, luminous, drifting past
+     the window. Not fast -- not like the speed of the
+     capsule, which is 17,500 miles per hour. These
+     particles are moving slowly, lazily, as if they
+     are floating in still air. But there is no air.
+     They are golden, or yellow-green, and they glow.
+     They are not stars -- they are close, within feet
+     of the capsule window. They drift and tumble.
+     I report: "I am in a big mass of some very small
+     particles..." Capcom acknowledges. They want more
+     description. I give it: size, color, motion, density.
+     I count them. I estimate distance. I am a test pilot.
+     I report the data.
+
+  3. SUNRISE -- ORBIT 1
+     The capsule crosses the terminator back into daylight.
+     The fireflies vanish instantly. Not gradually -- they
+     are there, and then they are not. The sun fills the
+     window and they disappear. Were they real? The data
+     says yes. The eyes say maybe. The sun says: I am
+     brighter than whatever that was.
+
+  4. SECOND NIGHT PASS -- ORBIT 2
+     They return. Same location: the night side, just
+     after the terminator crossing. Same behavior: lazy,
+     luminous, drifting. This time I am ready. I tap the
+     capsule wall. The cloud intensifies -- more particles
+     appear when I disturb the capsule. They are COMING
+     FROM the capsule. They are not ambient. They are
+     attached to the exterior and breaking free.
+
+  5. HYPOTHESIS
+     I report the wall-tap observation. Ground discusses.
+     Possibilities: ice crystals from the life support
+     system venting through the capsule skin. Frost
+     sublimating from the capsule's cold-soaked exterior
+     surfaces. Paint flakes illuminated by earthshine.
+     Thruster exhaust residue.
+     The ice crystal hypothesis makes sense: the capsule's
+     exterior is at approximately -100 C on the shadow side
+     (radiative cooling to space). Water vapor from the
+     life support system, vented overboard, freezes on the
+     capsule surface. When the surface warms slightly (from
+     attitude jet firings, or from the slow thermal cycling
+     of the structure), the ice sublimes and breaks free.
+     In the vacuum of space, with no air resistance, the
+     released ice crystals drift along with the capsule,
+     slowly separating. They are illuminated by the
+     capsule's own residual heat glow or by earthshine
+     (sunlight reflected from the Earth below).
+     They look like fireflies.
+
+  6. THIRD NIGHT PASS -- ORBIT 3
+     For the third time: the fireflies. Now I know what
+     they are, probably. Ice crystals. Frost. The residue
+     of my own breathing, frozen on the outside of the
+     machine, breaking free in the darkness. But knowing
+     what they are does not make them less beautiful.
+     A sunset is photons scattered by atmospheric molecules.
+     Knowing the physics does not diminish the beauty.
+     The fireflies are ice crystals. They are also the
+     most beautiful thing I have seen in space. Both
+     statements are true. Neither diminishes the other.
+
+  7. AFTER
+     Scott Carpenter, on Mercury-Atlas 7 four months later,
+     confirmed the fireflies and identified their source
+     definitively: he banged on the capsule hull and watched
+     the particle cloud intensify. Ice crystals from the
+     capsule exterior. The mystery was solved by the second
+     American to orbit.
+
+     But the fireflies belong to this flight, to this
+     window, to this darkness. Carpenter confirmed them.
+     I discovered them. There is a difference between
+     confirming and discovering. Confirming requires a
+     hypothesis to test. Discovering requires only eyes
+     and the courage to report what they see.
+
+     I reported what I saw. Golden particles, drifting,
+     luminous, inexplicable for those first minutes.
+     The word I used on the radio was "luminescent."
+     The word I think now, years later, is "beautiful."
+     They were beautiful. The ice crystals of my own
+     respiration, frozen on the skin of my spacecraft,
+     released into the void, illuminated by the reflected
+     light of my own planet -- they were beautiful. And
+     I said so, in the language of a test pilot, which
+     is the language of precision, which is the only
+     language I know.
+
+Length: 2,500-3,500 words
+
+Provide as: HTML + LaTeX
+
+HTML version:
+  Self-contained HTML file with styled prose.
+  Font: serif (Georgia or system serif)
+  Max width: 700px, centered
+  Title page: "The Fireflies" with date and mission name
+  Each section as a chapter with orbital event title
+  Dark mode option (background: #0A0A14, text: #C0C0D0,
+    -- because the story takes place in darkness, and
+    reading it in darkness is appropriate)
+  Print-friendly CSS
+
+LaTeX version:
+  article class, 12pt
+  Title: "The Fireflies"
+  Subtitle: "Mercury-Atlas 6 / Friendship 7 -- February 20, 1962"
+  Author: "NASA Mission Series v1.21"
+  Sections numbered by orbital event
+  Typeset for A4 or letter paper</code></pre>
+    </div>
+
+    <hr>
+
+    <div class="art-card">
+      <h3>F2. FAUST Synth: &ldquo;Orbital Sunrise&rdquo;</h3>
+
+      <p>A FAUST DSP program that synthesizes the soundscape of an orbital sunrise as experienced from Friendship 7: the transition from the deep silence of the night side (represented by sub-bass drones and the faint patter of micrometeorite impacts on the hull) through the terminator crossing (a crescendo of broadband harmonic content as the solar wind pressure changes and the capsule&rsquo;s thermal expansion produces structural pops and creaks) to the full orbital day (bright, sustained tones representing solar illumination on the capsule&rsquo;s skin).</p>
+
+      <pre><code>FAUST SPECIFICATION: "Orbital Sunrise"
+
+Output: Stereo audio, 48 kHz, 120 seconds duration
+Tempo: Real-time
+
+Synthesis chain:
+  1. Night side (T+0:00 to T+0:40):
+     - Deep ambient: sub-bass drone at 25-35 Hz
+       (the vibration of the capsule structure in the
+       thermal contraction of the cold shadow side)
+     - Slow pitch drift downward over the 40-second
+       section (representing cooling and contraction)
+     - Amplitude: low, felt more than heard
+     - Micrometeorite impacts: very short clicks
+       (&lt; 2 ms duration) at random intervals (1-3 per
+       second). Each click is a short burst of noise
+       filtered through a tight bandpass at 3-5 kHz,
+       representing the microscopic impact of space
+       dust on the capsule hull. The clicks are quiet --
+       barely audible against the drone -- but persistent.
+       This is the sound of emptiness that is not empty.
+     - Firefly ambience: very faint, high-frequency
+       shimmer (12-16 kHz, extremely low amplitude).
+       A wash of gentle sparkle. Not a sound the
+       astronaut would hear -- but a synesthetic
+       representation of the fireflies drifting past
+       the window. If the listener notices it at all,
+       it adds a sense of wonder to the darkness.
+     - Attitude jet firing: occasional brief burst
+       of white noise (50 ms duration, 500-2000 Hz
+       bandpass) representing a hydrogen peroxide
+       thruster firing. 1-2 per 10 seconds. Each burst
+       is followed by a low thunk (the thruster mount
+       transmitting the reaction force through the
+       capsule structure: a 200 Hz damped sinusoid,
+       50 ms duration).
+
+  2. Terminator crossing (T+0:40 to T+0:55):
+     - The drone begins to rise in pitch (25 Hz -&gt; 60 Hz)
+       as the capsule's exterior surfaces begin to warm
+       in the approaching sunlight
+     - Thermal expansion pops: random metallic clicks
+       and tinks at 1-4 kHz, increasing in rate from
+       0.5/second to 5/second over the 15-second crossing.
+       These are the sounds of metal expanding as
+       temperature gradients sweep across the hull.
+       Each pop: short impulse through a high-Q bandpass
+       (metallic resonance), decay time 50-100 ms.
+     - Broadband crescendo: noise floor rises gradually,
+       filtered through a rising lowpass (cutoff starts
+       at 200 Hz, rises to 2 kHz over the crossing).
+       This is the structural "wake up" -- the capsule's
+       entire thermal state is changing, and every joint,
+       every rivet, every panel responds.
+     - The sub-bass drone crossfades into a mid-bass
+       sustain (60 Hz, more present, more "alive")
+
+  3. Orbital day (T+0:55 to T+2:00):
+     - Sustained harmonic: 60 Hz fundamental with
+       harmonics at 120, 180, 240 Hz (like a power hum,
+       but organic -- slightly detuned harmonics that
+       slowly wander in pitch, +/-0.5 Hz). This is the
+       sound of a warm capsule, solar panels illuminated,
+       systems running, the astronaut in the sunlight.
+     - Solar wind: very faint broadband noise (pink
+       spectrum, extremely low amplitude) representing
+       the constant pressure of the solar wind on the
+       capsule exterior. Not really audible -- more of
+       a felt presence.
+     - Communication chatter: periodic bursts of
+       filtered noise simulating ground communication
+       (squelch break, brief "transmission," squelch
+       close). Every 10-15 seconds, lasting 2-3 seconds
+       each. The noise is NOT speech -- it is the
+       envelope of speech, the rhythm of communication
+       without the content.
+     - Slow fade: over the final 30 seconds, the
+       volume gradually decreases to silence, as if
+       the listener is drifting away from the capsule
+       into the silent void of space.
+
+Parameters:
+  - night_drone_hz: 20-40 (default 30)
+  - click_rate: 0.5-5 (default 2, micrometeorites/s)
+  - crossing_duration_s: 10-20 (default 15)
+  - day_fundamental_hz: 40-80 (default 60)
+  - comm_interval_s: 8-20 (default 12)
+  - duration_s: 90-180 (default 120)</code></pre>
+    </div>
+
+    <hr>
+
+    <div class="art-card">
+      <h3>F3. FAUST Synth: &ldquo;Chinook Run&rdquo;</h3>
+
+      <p>A FAUST DSP program that synthesizes the soundscape of a Chinook salmon spawning run in a Pacific Northwest river: the deep flow of the main river channel, the splash and surge of salmon leaping at falls, the riffling of gravel as fish dig redds (spawning nests), and the ambient forest sounds of the riparian zone &mdash; cedar and hemlock canopy, rain, birdsong. The synthesis follows the salmon upstream over 90 seconds, from the wide lower river to the narrow tributary spawning reach.</p>
+
+      <pre><code>FAUST SPECIFICATION: "Chinook Run"
+
+Output: Stereo audio, 48 kHz, 90 seconds duration
+Tempo: Real-time
+
+Synthesis chain:
+  1. Lower river (T+0:00 to T+0:30):
+     - Deep water flow: low-frequency noise (pink
+       spectrum, center frequency 100-300 Hz) with slow
+       amplitude modulation (0.1 Hz LFO, simulating
+       tidal influence and large-scale turbulence)
+     - Volume: moderate (this is a large river --
+       the Columbia near its mouth is over a kilometer
+       wide and 15+ meters deep)
+     - Stereo field: wide (the river fills the
+       soundscape from left to right)
+     - Occasional salmon splash: a brief transient
+       (50-100 ms) of broadband noise followed by a
+       low "plunk" (100-200 Hz damped sine, 100 ms).
+       Rate: 1-2 per 5 seconds. These are individual
+       fish surfacing or tail-slapping as they navigate
+       the lower river.
+     - Background: very distant bird calls (2-4 kHz,
+       narrow filtered noise pulses, 200 ms each,
+       2-3 per 10 seconds). Barely audible -- the river
+       dominates.
+
+  2. Mid-river rapids (T+0:30 to T+0:60):
+     - The center frequency rises (300 Hz -&gt; 800 Hz)
+       as the river narrows and steepens
+     - Amplitude increases: more turbulence, more energy
+     - Rapid splashing: multiple short noise bursts
+       (20-50 ms) at 5-10 per second (this is the
+       characteristic sound of rapids -- continuous
+       small splashes blending into a sustained roar)
+     - Salmon leaps: every 3-5 seconds, a dramatic
+       splash event: a rising-pitch transient (200 Hz -&gt;
+       1 kHz over 200 ms, representing a salmon
+       launching from the water at the base of a falls),
+       followed by a silence (100 ms, the fish is airborne),
+       followed by a heavy splash (broadband noise burst,
+       200 ms, the fish reentering the water above the
+       falls). The "launch-silence-splash" signature is
+       distinctive and unmistakable.
+     - Rain: at T+0:40, a gentle rain begins. Light
+       rain on water: very high-frequency broadband
+       noise (5-15 kHz), extremely low amplitude,
+       continuous. This is the background patter that
+       defines a PNW fall day.
+     - Forest ambience: cedar and hemlock canopy
+       rustling in the breeze (filtered noise at
+       2-6 kHz, modulated by a slow random LFO at
+       0.05-0.2 Hz). Barely perceptible -- a subtle
+       presence that places the listener among trees.
+
+  3. Spawning tributary (T+0:60 to T+1:30):
+     - The river sound narrows: center frequency at
+       1-2 kHz (small stream, shallow, fast-flowing
+       over gravel)
+     - Stereo field narrows: the stream is 3-5 meters
+       wide, the sound comes from a focused center
+     - Volume decreases: less total energy (small stream)
+       but the character is more intimate -- the listener
+       is close to the water
+     - Gravel riffling: a distinctive sound of salmon
+       digging redds (nests in the gravel). The female
+       turns on her side and beats her tail against the
+       streambed, displacing gravel. Sound: a rhythmic
+       "thff-thff-thff" at 2-3 Hz, each pulse a
+       200 ms burst of filtered noise at 500-1500 Hz
+       with a percussive attack. Repeats in bursts
+       of 5-10, then silence for 3-5 seconds, then
+       another burst.
+     - Salmon presence: the splashing becomes more
+       frequent and closer -- multiple fish in the
+       same reach, tails and dorsal fins breaking the
+       surface constantly. Rate: 3-5 splashes per second
+       (continuous murmur of fish activity).
+     - Rain intensifies slightly (higher amplitude on
+       the high-frequency broadband)
+     - A single bird call: clear, musical, 2 notes
+       descending (1800 Hz -&gt; 1200 Hz, 500 ms total).
+       A Pacific Wren or Winter Wren. One call, once,
+       at about T+1:15. The listener may or may not
+       notice it. But it is there: the forest is
+       listening to the salmon as much as the salmon
+       is listening to the river.
+
+  4. Final fade (T+1:25 to T+1:30):
+     - All elements gradually decrease to silence
+     - The last sound to fade is the gravel riffling --
+       the salmon are still building nests as the
+       listener withdraws
+     - The final element: one last rain patter, then
+       silence
+
+Parameters:
+  - river_base_freq_hz: 50-200 (default 100)
+  - splash_rate: 0.2-5 (default 1, splashes/second)
+  - leap_interval_s: 2-10 (default 4)
+  - rain_onset_s: 30-50 (default 40)
+  - redd_dig_rate_hz: 1-4 (default 2.5)
+  - duration_s: 60-120 (default 90)</code></pre>
+    </div>
+
+    <hr>
+
+    <h2>G. Problem-Solving Methodology &mdash; Decision Under Uncertainty</h2>
+
+    <div class="sim-card">
+      <h3>G1. The Segment 51 Decision Framework</h3>
+
+      <p>The most consequential decision during Friendship 7 was not an engineering decision but a decision-under-uncertainty: should mission control tell Glenn to retain the retropack through reentry (mitigating a potential heat shield problem but adding the risk of retropack debris during reentry), or should they follow standard procedure and jettison it (optimal if the heat shield is secure but catastrophic if it is not)? The decision was made with incomplete information, under time pressure, with a human life at stake. This is a case study in rational decision-making when the data is ambiguous.</p>
+
+      <pre><code>METHODOLOGY: Decision Under Uncertainty
+(The Segment 51 Framework)
+
+THE SITUATION:
+  Mission control has two hypotheses:
+    H1: Heat shield is loose (Segment 51 is telling the truth)
+    H2: Switch is faulty (Segment 51 is lying)
+
+  Two possible actions:
+    A1: Retain retropack through reentry (restrains shield if loose)
+    A2: Jettison retropack (standard procedure)
+
+  Four outcomes:
+    H1+A1: Shield loose, retropack retained -&gt; retropack
+      holds shield in place (partially). Debris during
+      reentry but the shield stays. Glenn probably survives.
+      Some additional risk from debris.
+    H1+A2: Shield loose, retropack jettisoned -&gt; shield
+      separates during reentry. Glenn dies.
+    H2+A1: Switch faulty, retropack retained -&gt; unnecessary
+      debris during reentry (burning retropack straps create
+      "flaming chunks" past the window), psychological stress
+      on Glenn, but otherwise nominal reentry.
+    H2+A2: Switch faulty, retropack jettisoned -&gt; completely
+      nominal reentry. No issues.
+
+  The PAYOFF MATRIX:
+
+           |  A1 (retain)         | A2 (jettison)
+  ---------+----------------------+------------------
+  H1 (loose) | SURVIVE (some risk) | FATAL
+  H2 (faulty)| SURVIVE (debris)    | NOMINAL
+
+  The decision is asymmetric:
+    - If the shield IS loose, A1 saves Glenn's life.
+      A2 kills him.
+    - If the switch IS faulty, A1 adds moderate risk
+      (debris), A2 is optimal.
+
+  The worst case for A1 (retropack debris, minor risk)
+  is immeasurably better than the worst case for A2
+  (astronaut death).
+
+  This is a MINIMAX decision: choose the action that
+  minimizes the maximum possible loss. A1 minimizes
+  the maximum loss because its worst case (debris during
+  reentry) is survivable, while A2's worst case (heat
+  shield loss) is not.
+
+THE BAYESIAN PERSPECTIVE:
+  What is P(H1) -- the probability that the shield is
+  actually loose?
+
+  Prior information:
+    - The heat shield has never failed on any previous
+      Mercury flight (MR-3, MR-4, MA-4, MA-5)
+    - The shield is mechanically latched with redundant
+      mechanisms
+    - Segment 51 is a single sensor with no redundancy
+    - The reading is erratic (toggling), not sustained
+      (which would be more consistent with an actual
+      deployment)
+    - Engineers at the Cape are confident in the shield
+      design
+
+  Reasonable prior: P(H1) = 0.05 (5% probability
+    that the shield is actually loose)
+  P(H2) = 0.95 (95% probability that the switch is
+    faulty)
+
+  Expected values:
+    E(A1) = P(H1)*utility(survive_with_debris) +
+            P(H2)*utility(survive_with_debris)
+          = 0.05 * 0.9 + 0.95 * 0.95
+          = 0.045 + 0.9025
+          = 0.9475
+
+    E(A2) = P(H1)*utility(fatal) + P(H2)*utility(nominal)
+          = 0.05 * 0.0 + 0.95 * 1.0
+          = 0.95
+
+  The expected utility of A1 (0.9475) and A2 (0.95) are
+  nearly identical! But this analysis is misleading because
+  it treats survival utilities as comparable. The actual
+  decision criterion is not expected utility but MAXIMUM
+  REGRET:
+
+  If we choose A2 and H1 is true: infinite regret (death)
+  If we choose A1 and H2 is true: minor regret (debris)
+
+  No finite probability threshold justifies accepting the
+  risk of infinite regret. Even at P(H1) = 0.01, the
+  minimax decision is A1 (retain the retropack) because
+  the cost of being wrong with A2 is unbounded.
+
+  This is why mission control chose A1. Not because they
+  believed the shield was loose. Because the COST OF BEING
+  WRONG about a loose shield was unacceptable, regardless
+  of how unlikely they judged it to be.
+
+SOFTWARE APPLICATION:
+  The Segment 51 framework applies to any decision where:
+    1. You have incomplete or ambiguous data
+    2. The outcomes are asymmetric (one bad outcome is
+       catastrophically worse than the other)
+    3. You must decide NOW (there is no time to gather
+       more information)
+
+  Examples:
+    - "The database backup might be corrupted. Do we
+      proceed with the migration or wait?"
+      If the backup IS corrupted and we proceed:
+        data loss (catastrophic)
+      If the backup IS fine and we wait:
+        delay (minor)
+      Decision: wait (minimax)
+
+    - "The deploy might have a regression. Do we
+      roll back or monitor?"
+      If there IS a regression and we monitor:
+        user impact (bad)
+      If there is NO regression and we roll back:
+        unnecessary rollback (minor)
+      Decision: roll back (minimax)
+
+    - "The security alert might be a false positive.
+      Do we rotate credentials or investigate?"
+      If it IS real and we investigate:
+        extended breach (catastrophic)
+      If it IS false and we rotate:
+        minor disruption (annoying)
+      Decision: rotate (minimax)
+
+  In each case, the minimax decision is the one that
+  avoids the catastrophic outcome, even at the cost of
+  the minor outcome. The Segment 51 lesson: when the
+  data is ambiguous and the stakes are asymmetric,
+  protect against the worst case. You can always
+  optimize later. You cannot un-die.</code></pre>
+    </div>
+
+    <hr>
+
+    <h2>H. GSD Improvements &mdash; What to Build for gsd-skill-creator</h2>
+
+    <div class="sim-card">
+      <h3>H1. Ambiguity Resolution Chipset</h3>
+
+      <p>The Segment 51 incident demonstrates the cost of acting on ambiguous data without a framework for resolving the ambiguity. An ambiguity resolution chipset for gsd-skill-creator would detect when an agent&rsquo;s decision data is ambiguous, flag the ambiguity, and apply a structured resolution process before the agent acts.</p>
+
+      <pre><code>CHIPSET: Ambiguity Resolution
+
+Purpose: Detect, flag, and resolve ambiguous inputs to
+  agent decision-making BEFORE the agent commits to an
+  action. Prevent agents from acting on data that they
+  cannot interpret with confidence.
+
+Chips:
+  1. ambiguity-detector: Before an agent acts on input
+     data (a test result, a file state, a dependency
+     version, a user requirement), check whether the
+     data is unambiguous. Ambiguity indicators:
+     - Contradictory signals (test passes but output
+       is wrong -- contradicts the pass)
+     - Missing context (file exists but is empty --
+       does "exists" mean "ready"?)
+     - Erratic values (intermittent test failure --
+       is the test flaky or the code buggy?)
+     Generate an ambiguity score: 0 (clear) to 1
+     (completely ambiguous). If score &gt; threshold,
+     flag the agent to STOP and invoke resolution.
+
+  2. voting-resolver: When ambiguity is detected,
+     gather additional data sources (redundant sensors).
+     For an ambiguous test result: re-run the test 3 times
+     and vote on the outcome. For an ambiguous file state:
+     check with multiple methods (stat, read, hash).
+     For an ambiguous dependency: check multiple package
+     registries. Apply TMR voting to resolve the ambiguity.
+     Return: resolved value + confidence level.
+
+  3. minimax-advisor: When ambiguity cannot be resolved
+     by voting (the data is genuinely uncertain), apply
+     the Segment 51 framework: enumerate the possible
+     states, enumerate the possible actions, compute the
+     worst-case outcome for each action, and recommend
+     the action that minimizes the maximum loss.
+     This is the decision of last resort: when you
+     cannot resolve the ambiguity, protect against the
+     worst case.
+
+  4. uncertainty-communicator: When an agent cannot
+     resolve ambiguity and must escalate, communicate
+     the uncertainty clearly to the coordinator or human:
+     - "Segment 51 is erratic. Possible causes: A, B, C."
+     - "Recommended action: A1 (minimax). Cost of being
+       wrong: [description]."
+     - "Additional information needed to resolve: [list]."
+     Never present ambiguous data as certain. The circuit
+     had only "deployed" and "stowed." The chipset has a
+     third state: "uncertain."
+
+Application:
+  - Friendship 7's lesson: the system that cannot say
+    "I don't know" forces the decision-maker to guess.
+    The telemetry circuit that lacked an "uncertain" state
+    forced mission control to choose between "the shield
+    is fine" and "the shield is loose" -- when the truth
+    was "we cannot tell." The ambiguity resolution chipset
+    gives agents the ability to say "I don't know" and
+    then to do something about it: gather more data,
+    vote, or apply minimax reasoning.
+  - The cost of ambiguity resolution: seconds of
+    additional computation. The cost of acting on
+    ambiguous data: potentially catastrophic outcomes.</code></pre>
+    </div>
+
+    <div class="sim-card">
+      <h3>H2. Salmon Navigation Pattern (Layered Homing)</h3>
+
+      <p>The Chinook salmon&rsquo;s layered navigation system &mdash; magnetic field for coarse positioning, olfaction for terminal guidance &mdash; is a proven biological pattern for navigating through uncertain environments. A layered homing pattern for gsd-skill-creator agents would provide a hierarchical approach to finding and acting on the right information: broad search first (magnetic field), then narrowing (chemical gradient), then precise action (spawning site).</p>
+
+      <pre><code>CHIPSET: Salmon Navigation (Layered Homing)
+
+Purpose: Provide agents with a hierarchical navigation
+  strategy for finding information, making decisions, and
+  completing tasks in large, uncertain codebases.
+
+Chips:
+  1. magnetic-map: The coarse positioning system. Before
+     an agent begins a task, it orients itself using broad
+     cues: the project structure (what directories exist),
+     the recent commit history (what has changed recently),
+     the test status (what is passing), and the dependency
+     graph (what connects to what). These broad signals --
+     analogous to the magnetic field -- give the agent a
+     general sense of where it is and where it needs to go.
+     Output: a "you are here" context map with directional
+     recommendations.
+
+  2. scent-trail: The medium-range guidance system. Once
+     the agent knows the general area (which module, which
+     directory, which subsystem), it follows more specific
+     signals: import chains (who imports the target module),
+     test files (which tests exercise the target function),
+     documentation references (which docs mention the target
+     concept). These signals -- analogous to the river plume --
+     are unique to the target and get stronger as the agent
+     approaches the right code.
+     Output: a ranked list of files/functions that are
+     increasingly likely to be the agent's target.
+
+  3. natal-stream: The terminal guidance system. When the
+     agent is near the target (the right file, the right
+     function), it uses precise matching: exact function
+     signatures, exact variable names, exact line numbers.
+     This is the olfactory match -- the natal stream's unique
+     chemical signature. No two functions have the same
+     signature. The agent has arrived.
+     Output: exact location (file:line) and confidence
+     that this is the correct target.
+
+  4. energy-budget: The salmon does not eat during its
+     migration. It has a fixed energy budget. The agent
+     has a fixed context budget (tokens). The energy-budget
+     chip tracks how much context the agent has consumed
+     and warns when the budget is getting low. If the agent
+     is wasting energy on wrong turns (searching in the
+     wrong directories, reading irrelevant files), the
+     energy-budget chip redirects it: "You are using 40%
+     of your context budget on files that are unlikely to
+     be relevant. Reconsider your search strategy."
+     This prevents the agent equivalent of a salmon swimming
+     up the wrong river: wasting energy on a path that will
+     not lead to the spawning ground.
+
+Application:
+  - The salmon navigates 3,000 km of featureless ocean and
+    finds a 5-meter-wide tributary. The agent navigates
+    a 500-file codebase and finds a 10-line function. The
+    scale is different. The strategy is the same: broad
+    orientation, medium guidance, precise homing.
+  - The salmon's navigation stack (magnetic -&gt; olfactory)
+    is robust because it is layered: if the magnetic map
+    is slightly off, the olfactory system corrects. If the
+    agent's broad search is slightly off, the scent-trail
+    system corrects. Layered navigation tolerates errors
+    at each level because the next level provides correction.</code></pre>
+    </div>
+
+    <hr>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="curriculum.html">&larr; Track 4: Curriculum</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">v1.21 Overview</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.21 Track 5: Simulation &mdash; Mercury-Atlas 6 / Friendship 7 &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

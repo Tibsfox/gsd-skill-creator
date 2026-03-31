@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chinook Salmon — Pacific Migration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --space: #040508;
+    --orbital-blue: #1840A0;
+    --firefly-gold: #C89840;
+    --reentry-amber: #D08020;
+    --earth-green: #2A6040;
+    --atlantic-blue: #0A2848;
+    --salmon-copper: #C07040;
+    --salmon-silver: #C0C8D0;
+    --text: #E0E0E0;
+    --text-dim: #909090;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--space);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+  }
+  h1 {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: var(--salmon-silver);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 16px;
+    max-width: 1440px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sim-panel {
+    flex: 1;
+    min-width: 700px;
+    max-width: 900px;
+    background: #06080E;
+    border: 1px solid #141830;
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .info-panel {
+    flex: 0 0 300px;
+    background: #06080E;
+    border: 1px solid #141830;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 11px;
+    max-height: 700px;
+    overflow-y: auto;
+  }
+  .panel-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--salmon-copper);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #141830;
+  }
+  canvas { width: 100%; border-radius: 6px; background: var(--atlantic-blue); }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    padding: 5px 14px;
+    border: 1px solid #253050;
+    background: #0C1020;
+    color: var(--text-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .ctrl-btn:hover { border-color: var(--salmon-copper); color: var(--text); }
+  .ctrl-btn.active { border-color: var(--salmon-copper); color: var(--salmon-copper); background: rgba(192,112,64,0.12); }
+  .speed-control { display: flex; align-items: center; gap: 6px; }
+  .speed-control label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); }
+  .speed-control input[type=range] { width: 100px; accent-color: var(--salmon-copper); }
+  .speed-val { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--salmon-copper); min-width: 30px; }
+  .check-control { display: flex; align-items: center; gap: 5px; }
+  .check-control label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); cursor: pointer; }
+  .check-control input { accent-color: var(--salmon-copper); cursor: pointer; }
+  .hud-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #0A0E18;
+  }
+  .hud-label { color: var(--text-dim); font-family: 'DM Mono', monospace; font-size: 10px; }
+  .hud-value { color: var(--text); font-family: 'DM Mono', monospace; font-size: 10px; }
+  .hud-value.copper { color: var(--salmon-copper); }
+  .hud-value.gold { color: var(--firefly-gold); }
+  .fact-block { margin-top: 8px; line-height: 1.7; color: var(--text-dim); font-size: 10px; }
+  .fact-block strong { color: var(--salmon-silver); }
+  .phase-indicator {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  .legend { margin-top: 10px; font-size: 9px; line-height: 2; font-family: 'DM Mono', monospace; }
+  .legend .dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<h1>Chinook Salmon</h1>
+<p class="subtitle">Oncorhynchus tshawytscha &mdash; Pacific Migration Cycle</p>
+
+<div class="main-container">
+  <div class="sim-panel">
+    <div class="panel-title">Pacific Northwest &mdash; Migration Map</div>
+    <canvas id="simCanvas" width="880" height="620"></canvas>
+    <div class="controls">
+      <button class="ctrl-btn active" id="btnPlay" onclick="togglePause()">PAUSE</button>
+      <button class="ctrl-btn" onclick="restart()">RESTART</button>
+      <div class="speed-control">
+        <label>SPEED</label>
+        <input type="range" id="speedSlider" min="1" max="50" value="10">
+        <span class="speed-val" id="speedVal">10x</span>
+      </div>
+      <div class="check-control">
+        <input type="checkbox" id="chkMag">
+        <label for="chkMag">MAGNETIC FIELD</label>
+      </div>
+      <div class="check-control">
+        <input type="checkbox" id="chkScent" checked>
+        <label for="chkScent">SCENT GRADIENT</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <div class="panel-title">Migration Status</div>
+    <div class="hud-row"><span class="hud-label">SEASON</span><span class="hud-value gold" id="hSeason">SPRING</span></div>
+    <div class="hud-row"><span class="hud-label">MONTH</span><span class="hud-value" id="hMonth">March</span></div>
+    <div class="hud-row"><span class="hud-label">POPULATION</span><span class="hud-value copper" id="hPop">0</span></div>
+    <div class="hud-row"><span class="hud-label">OCEAN</span><span class="hud-value" id="hOcean">0</span></div>
+    <div class="hud-row"><span class="hud-label">HOMING</span><span class="hud-value" id="hHoming">0</span></div>
+    <div class="hud-row"><span class="hud-label">RIVER</span><span class="hud-value" id="hRiver">0</span></div>
+    <div class="hud-row"><span class="hud-label">SPAWNED</span><span class="hud-value" id="hSpawned">0</span></div>
+    <div class="hud-row"><span class="hud-label">PHASE</span><span class="hud-value copper" id="hPhase">SMOLT RELEASE</span></div>
+
+    <div class="panel-title" style="margin-top:14px">Legend</div>
+    <div class="legend">
+      <span class="dot" style="background:#C0C8D0"></span>SMOLT / OCEAN (silver)<br>
+      <span class="dot" style="background:#C89840"></span>HOMING (gold-copper transition)<br>
+      <span class="dot" style="background:#C07040"></span>RIVER RUN (copper)<br>
+      <span class="dot" style="background:#A03020"></span>SPAWNING (deep red)<br>
+    </div>
+
+    <div class="panel-title" style="margin-top:14px">Chinook Facts</div>
+    <div class="fact-block">
+      <strong>Common name:</strong> King Salmon<br>
+      <strong>Scientific:</strong> Oncorhynchus tshawytscha<br>
+      <strong>Max size:</strong> 150 cm, 61 kg<br>
+      <strong>Lifespan:</strong> 3-7 years<br>
+      <strong>Range:</strong> Alaska to California<br>
+      <strong>Status:</strong> Threatened (many runs)<br><br>
+      <strong>Navigation:</strong> Chinook salmon use Earth's
+      magnetic field as a map during ocean migration, then
+      switch to olfactory (scent) homing to find their natal
+      river. They can detect their home stream's unique chemical
+      signature at parts per billion. Smolts imprint on their
+      river's scent during downstream migration. Adults travel
+      up to 3,000 km through the Pacific before returning to
+      spawn in the exact gravel bed where they hatched.<br><br>
+      <strong>Columbia River:</strong> Once supported runs of
+      10-16 million salmon annually. The river's 1,243-mile
+      length and extensive tributary system made it the greatest
+      salmon-producing river system on Earth.
+    </div>
+  </div>
+</div>
+
+<script>
+const C = document.getElementById('simCanvas');
+const ctx = C.getContext('2d');
+const W = C.width, H = C.height;
+
+let paused = false, speed = 10, lastTS = 0;
+let simTime = 0; // 0-12 = months (March start)
+let salmon = [], spawned = 0, totalSpawned = 0;
+const MONTHS = ['March','April','May','June','July','August','September','October','November','December','January','February'];
+const SEASONS = ['SPRING','SPRING','SPRING','SUMMER','SUMMER','SUMMER','FALL','FALL','FALL','WINTER','WINTER','WINTER'];
+
+// Map coordinates (canvas space) — simplified PNW
+// The map shows roughly from Alaska (top) to Oregon (bottom), coast on right
+const MAP = {
+  // River mouths (where rivers meet the ocean)
+  columbiaM: { x: 680, y: 420 },   // Columbia River mouth
+  fraserM:   { x: 710, y: 240 },   // Fraser River mouth
+  pugetM:    { x: 720, y: 310 },   // Puget Sound entrance
+
+  // Upstream spawning grounds
+  columbiaUp: { x: 500, y: 460 },
+  fraserUp:   { x: 580, y: 180 },
+  pugetUp:    { x: 650, y: 280 },
+
+  // Ocean waypoints
+  oceanDeep:  { x: 200, y: 350 },
+  oceanNorth: { x: 150, y: 150 },
+  oceanSouth: { x: 250, y: 500 },
+};
+
+// Coastline points (simplified PNW)
+const COAST = [
+  [750, 50],  [760, 80],  [740, 110], [755, 140], // Alaska panhandle
+  [730, 170], [720, 200], [715, 220], // BC coast
+  [710, 240], [720, 260], [725, 280], // Vancouver area
+  [720, 310], [730, 330], [735, 350], // Puget Sound
+  [720, 380], [700, 400], [680, 420], // Washington coast
+  [670, 440], [660, 460], [650, 480], // Oregon coast
+  [640, 510], [635, 540], [630, 570], // Southern Oregon
+  [625, 600]
+];
+
+// Rivers as path segments
+const RIVERS = {
+  columbia: [
+    [680, 420], [660, 430], [630, 435], [600, 440], [570, 445], [540, 450], [500, 460]
+  ],
+  fraser: [
+    [710, 240], [695, 230], [670, 220], [650, 210], [620, 195], [580, 180]
+  ],
+  puget: [
+    [720, 310], [710, 300], [695, 290], [670, 285], [650, 280]
+  ]
+};
+
+// Spawning areas (gravel beds)
+const SPAWNING = [
+  { x: 500, y: 460, r: 15, river: 'columbia' },
+  { x: 580, y: 180, r: 12, river: 'fraser' },
+  { x: 650, y: 280, r: 10, river: 'puget' }
+];
+
+function createSalmon(n) {
+  for (let i = 0; i < n; i++) {
+    const river = ['columbia', 'fraser', 'puget'][Math.floor(Math.random() * 3)];
+    const sp = SPAWNING.find(s => s.river === river);
+    salmon.push({
+      x: sp.x + (Math.random() - 0.5) * sp.r,
+      y: sp.y + (Math.random() - 0.5) * sp.r,
+      vx: 0, vy: 0,
+      phase: 'smolt',   // smolt -> ocean -> homing -> river -> spawn
+      river: river,
+      size: 2,
+      targetIdx: 0,     // river path index for upstream travel
+      age: 0,
+      color: [192, 200, 208],  // silver
+      alpha: 1,
+      smoltProgress: 0  // 0-1 progress downstream
+    });
+  }
+}
+
+function riverPath(name) { return RIVERS[name]; }
+function riverMouth(name) {
+  if (name === 'columbia') return MAP.columbiaM;
+  if (name === 'fraser') return MAP.fraserM;
+  return MAP.pugetM;
+}
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+function dist(x1, y1, x2, y2) { return Math.sqrt((x2-x1)**2 + (y2-y1)**2); }
+function normalize(vx, vy) {
+  const m = Math.sqrt(vx*vx + vy*vy) || 1;
+  return [vx/m, vy/m];
+}
+
+function steer(sx, sy, tx, ty, strength) {
+  const dx = tx - sx, dy = ty - sy;
+  const [nx, ny] = normalize(dx, dy);
+  return [nx * strength, ny * strength];
+}
+
+function updateSalmon(dt) {
+  const month = Math.floor(simTime % 12);
+  const season = SEASONS[month];
+
+  for (let i = salmon.length - 1; i >= 0; i--) {
+    const s = salmon[i];
+    s.age += dt;
+
+    if (s.phase === 'smolt') {
+      // Smolts travel downstream to river mouth
+      const rp = riverPath(s.river);
+      s.smoltProgress += dt * 0.15;
+      if (s.smoltProgress >= 1) {
+        s.phase = 'ocean';
+        const m = riverMouth(s.river);
+        s.x = m.x; s.y = m.y;
+        s.vx = -1 + Math.random() * 0.5;
+        s.vy = (Math.random() - 0.5) * 0.5;
+      } else {
+        // Interpolate along river path reversed (upstream to mouth)
+        const t = s.smoltProgress;
+        const idx = Math.min(Math.floor(t * (rp.length - 1)), rp.length - 2);
+        const lt = (t * (rp.length - 1)) - idx;
+        s.x = lerp(rp[rp.length - 1 - idx][0], rp[rp.length - 2 - Math.min(idx, rp.length - 2)][0], lt);
+        s.y = lerp(rp[rp.length - 1 - idx][1], rp[rp.length - 2 - Math.min(idx, rp.length - 2)][1], lt);
+        s.size = 2;
+        s.color = [192, 200, 208];
+      }
+      continue;
+    }
+
+    if (s.phase === 'ocean') {
+      // Random wandering in open ocean, growing
+      s.size = Math.min(6, s.size + dt * 0.03);
+      const wander = [(Math.random() - 0.5) * 0.8, (Math.random() - 0.5) * 0.8];
+      // Gentle pull toward ocean center
+      const [cx, cy] = steer(s.x, s.y, 250 + Math.random() * 200, 300 + Math.random() * 100, 0.05);
+      s.vx = s.vx * 0.95 + (wander[0] + cx) * 0.3;
+      s.vy = s.vy * 0.95 + (wander[1] + cy) * 0.3;
+      // Keep in ocean (left of coast)
+      if (s.x > 620) s.vx -= 0.3;
+      if (s.x < 50) s.vx += 0.3;
+      if (s.y < 30) s.vy += 0.2;
+      if (s.y > H - 30) s.vy -= 0.2;
+      s.x += s.vx; s.y += s.vy;
+      s.color = [192, 200, 208]; // silver
+
+      // Transition to homing when season is right and fish is mature
+      if (s.age > 3 && (month >= 5 && month <= 9)) {
+        s.phase = 'homing';
+      }
+    }
+
+    if (s.phase === 'homing') {
+      // Navigate toward river mouth using magnetic + scent
+      const m = riverMouth(s.river);
+      const d = dist(s.x, s.y, m.x, m.y);
+      const [sx2, sy2] = steer(s.x, s.y, m.x, m.y, 0.4);
+      s.vx = s.vx * 0.9 + sx2;
+      s.vy = s.vy * 0.9 + sy2;
+      const spd = Math.sqrt(s.vx*s.vx + s.vy*s.vy);
+      if (spd > 2.5) { s.vx *= 2.5/spd; s.vy *= 2.5/spd; }
+      s.x += s.vx; s.y += s.vy;
+      // Transition color: silver -> gold -> copper
+      const t = Math.min(1, 1 - d / 500);
+      s.color = [
+        Math.round(lerp(192, 192, t)),
+        Math.round(lerp(200, 152, t)),
+        Math.round(lerp(208, 64, t))
+      ];
+      if (d < 15) {
+        s.phase = 'river';
+        s.targetIdx = 0;
+      }
+    }
+
+    if (s.phase === 'river') {
+      // Follow river path upstream
+      const rp = riverPath(s.river);
+      if (s.targetIdx < rp.length) {
+        const tp = rp[s.targetIdx];
+        const d = dist(s.x, s.y, tp[0], tp[1]);
+        const [sx2, sy2] = steer(s.x, s.y, tp[0], tp[1], 0.6);
+        s.vx = s.vx * 0.85 + sx2;
+        s.vy = s.vy * 0.85 + sy2;
+        const spd = Math.sqrt(s.vx*s.vx + s.vy*s.vy);
+        if (spd > 1.8) { s.vx *= 1.8/spd; s.vy *= 1.8/spd; }
+        s.x += s.vx; s.y += s.vy;
+        if (d < 12) s.targetIdx++;
+      }
+      s.color = [192, 112, 64]; // copper
+      // Reached spawning ground
+      if (s.targetIdx >= riverPath(s.river).length) {
+        s.phase = 'spawn';
+        s.spawnTimer = 0;
+      }
+    }
+
+    if (s.phase === 'spawn') {
+      s.spawnTimer += dt;
+      s.color = [160, 48, 32]; // deep red
+      s.vx *= 0.9; s.vy *= 0.9;
+      s.x += (Math.random() - 0.5) * 0.3;
+      s.y += (Math.random() - 0.5) * 0.3;
+      if (s.spawnTimer > 2) {
+        s.alpha -= dt * 0.3;
+        if (s.alpha <= 0) {
+          salmon.splice(i, 1);
+          totalSpawned++;
+          spawned++;
+        }
+      }
+    }
+  }
+}
+
+// Release new smolts periodically in spring
+let nextSmoltRelease = 0;
+function maybeReleaseSmolts() {
+  const month = Math.floor(simTime % 12);
+  if (month >= 0 && month <= 2 && simTime > nextSmoltRelease && salmon.length < 80) {
+    createSalmon(Math.floor(Math.random() * 5) + 3);
+    nextSmoltRelease = simTime + 0.3;
+  }
+}
+
+function drawCoastline() {
+  // Ocean gradient
+  const bg = ctx.createLinearGradient(0, 0, W, 0);
+  bg.addColorStop(0, '#061828');
+  bg.addColorStop(0.6, '#0A2040');
+  bg.addColorStop(0.85, '#0C2848');
+  bg.addColorStop(1, '#0A2040');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Land mass (right side of coastline)
+  ctx.beginPath();
+  ctx.moveTo(COAST[0][0], COAST[0][1]);
+  for (let i = 1; i < COAST.length; i++) {
+    ctx.lineTo(COAST[i][0], COAST[i][1]);
+  }
+  ctx.lineTo(W, H); ctx.lineTo(W, 0); ctx.lineTo(COAST[0][0], COAST[0][1]);
+  ctx.closePath();
+  ctx.fillStyle = '#1A3828';
+  ctx.fill();
+
+  // Coast outline
+  ctx.beginPath();
+  ctx.moveTo(COAST[0][0], COAST[0][1]);
+  for (let i = 1; i < COAST.length; i++) ctx.lineTo(COAST[i][0], COAST[i][1]);
+  ctx.strokeStyle = '#2A6040';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Rivers
+  ctx.lineWidth = 2;
+  for (const [name, pts] of Object.entries(RIVERS)) {
+    ctx.beginPath();
+    ctx.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+    ctx.strokeStyle = 'rgba(10,40,72,0.8)';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(24,64,160,0.4)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  }
+
+  // River labels
+  ctx.font = '9px "DM Mono", monospace';
+  ctx.fillStyle = '#4A7060';
+  ctx.fillText('Columbia R.', 580, 468);
+  ctx.fillText('Fraser R.', 610, 195);
+  ctx.fillText('Puget Sound', 660, 298);
+
+  // Location labels
+  ctx.fillStyle = '#556060';
+  ctx.fillText('ALASKA', 740, 70);
+  ctx.fillText('BC', 735, 210);
+  ctx.fillText('WA', 735, 370);
+  ctx.fillText('OR', 660, 500);
+  ctx.fillText('PACIFIC OCEAN', 180, 300);
+
+  // Spawning grounds (stippled)
+  for (const sp of SPAWNING) {
+    for (let j = 0; j < 12; j++) {
+      const sx = sp.x + (Math.random() - 0.5) * sp.r * 2;
+      const sy = sp.y + (Math.random() - 0.5) * sp.r * 2;
+      ctx.beginPath();
+      ctx.arc(sx, sy, 1, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(160,48,32,0.3)';
+      ctx.fill();
+    }
+  }
+
+  // Current flow arrows in rivers
+  for (const [name, pts] of Object.entries(RIVERS)) {
+    for (let i = 0; i < pts.length - 1; i++) {
+      const mx = (pts[i][0] + pts[i+1][0]) / 2;
+      const my = (pts[i][1] + pts[i+1][1]) / 2;
+      const dx = pts[i][0] - pts[i+1][0];
+      const dy = pts[i][1] - pts[i+1][1];
+      const ang = Math.atan2(dy, dx);
+      ctx.save();
+      ctx.translate(mx, my);
+      ctx.rotate(ang);
+      ctx.beginPath();
+      ctx.moveTo(5, 0); ctx.lineTo(-2, -3); ctx.lineTo(-2, 3); ctx.closePath();
+      ctx.fillStyle = 'rgba(24,64,160,0.3)';
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+}
+
+function drawMagneticField() {
+  if (!document.getElementById('chkMag').checked) return;
+  ctx.strokeStyle = 'rgba(24,64,160,0.12)';
+  ctx.lineWidth = 0.8;
+  for (let i = 0; i < 8; i++) {
+    ctx.beginPath();
+    const baseY = 50 + i * 75;
+    const curve = 30 + i * 8;
+    ctx.moveTo(20, baseY);
+    for (let x = 20; x < 650; x += 5) {
+      const t = (x - 20) / 630;
+      const y = baseY + Math.sin(t * Math.PI * 0.8 + i * 0.3) * curve;
+      ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    // Arrow at midpoint
+    const mx = 340, my = baseY + Math.sin(0.5 * Math.PI * 0.8 + i * 0.3) * curve;
+    ctx.beginPath();
+    ctx.moveTo(mx + 6, my); ctx.lineTo(mx - 2, my - 3); ctx.lineTo(mx - 2, my + 3);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(24,64,160,0.15)';
+    ctx.fill();
+  }
+}
+
+function drawScentGradient() {
+  if (!document.getElementById('chkScent').checked) return;
+  for (const [name, pts] of Object.entries(RIVERS)) {
+    const mouth = pts[0];
+    const grad = ctx.createRadialGradient(mouth[0], mouth[1], 5, mouth[0] - 80, mouth[1], 180);
+    grad.addColorStop(0, 'rgba(192,112,64,0.12)');
+    grad.addColorStop(0.3, 'rgba(192,112,64,0.06)');
+    grad.addColorStop(0.7, 'rgba(192,112,64,0.02)');
+    grad.addColorStop(1, 'rgba(192,112,64,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(mouth[0] - 40, mouth[1], 180, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function drawSalmon() {
+  for (const s of salmon) {
+    if (s.phase === 'smolt' && s.smoltProgress < 0.01) continue;
+    ctx.save();
+    ctx.translate(s.x, s.y);
+    const ang = Math.atan2(s.vy || 0.01, s.vx || 0.01);
+    ctx.rotate(ang);
+    ctx.globalAlpha = s.alpha;
+
+    // Body (elongated ellipse)
+    const sz = s.size;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, sz * 1.8, sz * 0.6, 0, 0, Math.PI * 2);
+    ctx.fillStyle = `rgb(${s.color[0]},${s.color[1]},${s.color[2]})`;
+    ctx.fill();
+
+    // Tail
+    ctx.beginPath();
+    ctx.moveTo(-sz * 1.6, 0);
+    ctx.lineTo(-sz * 2.5, -sz * 0.5);
+    ctx.lineTo(-sz * 2.5, sz * 0.5);
+    ctx.closePath();
+    ctx.fillStyle = `rgba(${s.color[0]},${s.color[1]},${s.color[2]},0.7)`;
+    ctx.fill();
+
+    ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+}
+
+function updateHUD() {
+  const month = Math.floor(simTime % 12);
+  document.getElementById('hSeason').textContent = SEASONS[month];
+  document.getElementById('hMonth').textContent = MONTHS[month];
+  document.getElementById('hPop').textContent = salmon.length;
+
+  let ocean = 0, homing = 0, river = 0, smolt = 0, spw = 0;
+  for (const s of salmon) {
+    if (s.phase === 'ocean') ocean++;
+    else if (s.phase === 'homing') homing++;
+    else if (s.phase === 'river') river++;
+    else if (s.phase === 'smolt') smolt++;
+    else if (s.phase === 'spawn') spw++;
+  }
+  document.getElementById('hOcean').textContent = ocean + smolt;
+  document.getElementById('hHoming').textContent = homing;
+  document.getElementById('hRiver').textContent = river;
+  document.getElementById('hSpawned').textContent = totalSpawned;
+
+  let phaseText = 'SMOLT RELEASE';
+  const m = Math.floor(simTime % 12);
+  if (m >= 0 && m <= 2) phaseText = 'SPRING \u2014 SMOLT OUTMIGRATION';
+  else if (m >= 3 && m <= 5) phaseText = 'SUMMER \u2014 OCEAN FEEDING';
+  else if (m >= 6 && m <= 8) phaseText = 'FALL \u2014 ADULT RETURN';
+  else phaseText = 'WINTER \u2014 OCEAN PHASE';
+  document.getElementById('hPhase').textContent = phaseText;
+}
+
+function togglePause() {
+  paused = !paused;
+  const b = document.getElementById('btnPlay');
+  b.textContent = paused ? 'PLAY' : 'PAUSE';
+  b.classList.toggle('active', !paused);
+}
+
+function restart() {
+  simTime = 0; paused = false; salmon = []; spawned = 0; totalSpawned = 0;
+  nextSmoltRelease = 0;
+  document.getElementById('btnPlay').textContent = 'PAUSE';
+  document.getElementById('btnPlay').classList.add('active');
+  createSalmon(30);
+}
+
+document.getElementById('speedSlider').addEventListener('input', function() {
+  speed = parseInt(this.value);
+  document.getElementById('speedVal').textContent = speed + 'x';
+});
+
+function frame(ts) {
+  if (!lastTS) lastTS = ts;
+  const dt = (ts - lastTS) / 1000;
+  lastTS = ts;
+
+  if (!paused) {
+    const scaledDt = dt * speed * 0.05;
+    simTime += scaledDt;
+    updateSalmon(scaledDt);
+    maybeReleaseSmolts();
+  }
+
+  ctx.clearRect(0, 0, W, H);
+  drawCoastline();
+  drawMagneticField();
+  drawScentGradient();
+  drawSalmon();
+  updateHUD();
+  requestAnimationFrame(frame);
+}
+
+// Initialize
+createSalmon(40);
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
