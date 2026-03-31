@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics of Luminescence | v1.22 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #020810; --bio-mid: #041020;
+    --aurora-green: #20A060; --aurora-dim: #105030;
+    --gfp-green: #40D080; --gfp-dim: #206840;
+    --biolum-blue: #2040C0; --biolum-dim: #102060;
+    --jellyfish-teal: #208888; --jellyfish-dim: #104444;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --space: #020408;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+    --accent: var(--biolum-blue);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(32,160,96,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(32,64,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(64,208,128,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(32,136,136,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(208,128,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(32,160,96,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--aurora-green); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--biolum-dim) 55%, var(--aurora-dim) 100%); border-bottom: 3px solid var(--accent); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(32,64,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(32,64,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(32,64,192,0.12); border: 1px solid var(--accent); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(32,64,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--accent); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--accent); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--jellyfish-teal); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--accent); }
+  em { color: var(--reentry-amber); }
+  code { color: var(--biolum-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--jellyfish-teal); text-decoration: none; }
+  a:hover { color: #fff; }
+  blockquote { border-left: 3px solid var(--biolum-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(2,4,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  pre { background: rgba(2,4,8,0.6); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.7; color: var(--text); }
+  .nav-card { background: rgba(2,4,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--aurora-green); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--gfp-green); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--aurora-green); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.22 Mercury-Atlas 7</a><span class="sep">/</span>
+  Mathematics
+</div>
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.22</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>Mathematics of Luminescence</h1>
+    <p class="subtitle">Ballistic dispersion, fluorescence quantum mechanics, and diving physics</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> May 24, 1962</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Malcolm Scott Carpenter (LCDR, USN)</span>
+      <span><span class="label">Dedication:</span> Bob Dylan</span>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="content">
+
+    <h2>Deposit 1: Ballistic Reentry Dispersion (Layer 4, Section 4.22a)</h2>
+
+    <h3>The Overshoot as Sensitivity Analysis</h3>
+
+    <p>Scott Carpenter landed 402 km beyond the planned splashdown point. This was the largest miss distance in the Mercury program, and it turned a routine recovery into a 39-minute search. The overshoot was not a single error &mdash; it was the compounding of three separate error sources, each quantifiable, each propagating through the same ballistic sensitivity chain.</p>
+
+    <p>The three errors: a 25-degree yaw attitude error at retrofire, a 3-second delay in retrofire initiation, and a roughly 3% reduction in total retrofire impulse due to one of the three retrorockets underperforming. Each error alone would have produced a manageable miss. Together, they added.</p>
+
+    <h3>Formulas</h3>
+
+    <p><strong>&Delta;V Vector Decomposition: Planned vs. Actual</strong></p>
+
+    <p>The Mercury retrofire system consisted of three solid-fuel retrorockets, each producing approximately 4.5 kN of thrust for 10 seconds, yielding a total impulse of approximately 45 kN-s per rocket. With a capsule mass of approximately 1,355 kg, the planned retrograde &Delta;V was:</p>
+
+<pre>PLANNED RETROFIRE:
+
+  Total impulse (3 rockets):
+    J_total = 3 * 45,000 N-s = 135,000 N-s
+
+  Planned &Delta;V:
+    &Delta;V_planned = J_total / m_capsule
+               = 135,000 / 1,355
+               = 99.6 m/s
+               &asymp; 100 m/s (retrograde)
+
+  This &Delta;V was designed to lower the perigee into
+  the atmosphere for reentry, targeting a specific
+  splashdown point in the Atlantic recovery zone.</pre>
+
+    <p>At retrofire, Carpenter&rsquo;s capsule was yawed approximately 25 degrees from the correct retrograde attitude. This meant the &Delta;V vector was not aligned with the velocity vector. The effective retrograde component and the wasted lateral component decompose as:</p>
+
+<pre>YAW ERROR DECOMPOSITION:
+
+  Capsule yaw error: &theta; = 25&deg;
+
+  Effective retrograde component:
+    &Delta;V_retro = &Delta;V * cos(&theta;)
+             = 100 * cos(25&deg;)
+             = 100 * 0.9063
+             = 90.6 m/s
+
+  Lateral (wasted) component:
+    &Delta;V_lateral = &Delta;V * sin(&theta;)
+               = 100 * sin(25&deg;)
+               = 100 * 0.4226
+               = 42.3 m/s
+
+  Retrograde shortfall from yaw alone:
+    &Delta;V_lost_yaw = &Delta;V - &Delta;V_retro
+                = 100 - 90.6
+                = 9.4 m/s
+
+  This 9.4 m/s was not applied retrograde. It was
+  applied laterally &mdash; perpendicular to the velocity
+  vector &mdash; where it changed the orbital plane slightly
+  but did almost nothing to lower the perigee.</pre>
+
+    <p><strong>Sensitivity Coefficient and Total Overshoot</strong></p>
+
+    <p>For Mercury orbital reentry, the downrange sensitivity to retrofire &Delta;V deficit was approximately 25 km per m/s of missing retrograde impulse. This coefficient comes from the orbital mechanics: a smaller retrograde &Delta;V produces a shallower reentry angle, which means the capsule flies farther through the atmosphere before decelerating to subsonic speed.</p>
+
+<pre>OVERSHOOT CALCULATION:
+
+  Sensitivity coefficient:
+    &delta;x/&delta;&Delta;v &asymp; 25 km per m/s
+
+  Error Source 1 &mdash; Yaw attitude (25&deg;):
+    &Delta;V deficit = 9.4 m/s
+    Overshoot contribution = 9.4 * 25 = 235 km
+
+  Error Source 2 &mdash; Late retrofire (3 seconds):
+    At orbital velocity of 7.8 km/s, a 3-second
+    delay means retrofire occurs 23.4 km further
+    along the orbit. But the sensitivity is not
+    1:1 &mdash; the late fire also changes the reentry
+    geometry. Empirical sensitivity for Mercury:
+    approximately 28 km of overshoot per second
+    of late retrofire.
+
+    Overshoot contribution = 3 * 28 = 84 km
+
+  Error Source 3 &mdash; Low retro impulse (~3% deficit):
+    One retrorocket underperformed, reducing total
+    impulse by approximately 3%.
+    &Delta;V deficit = 0.03 * 100 = 3.0 m/s
+    Overshoot contribution = 3.0 * 25 = 75 km
+
+  TOTAL OVERSHOOT:
+    235 + 84 + 75 = 394 km
+
+  Measured overshoot: 402 km
+
+  The discrepancy of 8 km (2%) is within the
+  uncertainty of the individual error estimates.
+  The three errors were essentially independent
+  and additive in their effect on downrange
+  landing position.
+
+  THIS IS THE KEY INSIGHT: In a deterministic
+  ballistic system, errors do not cancel. They
+  compound. Each error pushes the landing point
+  in the same direction &mdash; downrange &mdash; because
+  every error mode reduces the effective retrograde
+  &Delta;V. There is no error that makes you land short.
+  The system is asymmetrically sensitive.</pre>
+
+    <hr>
+
+    <h2>Deposit 2: Sublimation Thermodynamics (Layer 4, Section 4.22b)</h2>
+
+    <h3>The Fireflies Explained</h3>
+
+    <p>On MA-7, Carpenter identified Glenn&rsquo;s &ldquo;fireflies&rdquo; from MA-6. By tapping the capsule hull, he observed particles streaming off the exterior surface &mdash; frozen condensate and coolant residue, sublimating in vacuum, then refreezing into microscopic ice crystals. The physics governing this process is the Clausius-Clapeyron equation, which describes the pressure-temperature relationship along a phase boundary.</p>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Clausius-Clapeyron Equation for Ice Sublimation</strong></p>
+
+<pre>CLAUSIUS-CLAPEYRON EQUATION:
+
+  dP/dT = L / (T * &Delta;v)
+
+  In the integrated form for sublimation:
+
+    ln(P2/P1) = (L_sub / R) * (1/T1 - 1/T2)
+
+  where:
+    P     = vapor pressure (Pa)
+    T     = temperature (K)
+    L_sub = latent heat of sublimation of water
+          = 2,830 kJ/kg = 51.1 kJ/mol
+    R     = gas constant = 8.314 J/(mol*K)
+    &Delta;v    = specific volume change (&asymp; vapor volume
+            in vacuum, since v_gas &gt;&gt; v_solid)</pre>
+
+    <p><strong>Triple Point and Phase Diagram</strong></p>
+
+    <p>The triple point of water &mdash; where solid, liquid, and gas coexist in equilibrium &mdash; is the anchor for the phase diagram:</p>
+
+<pre>TRIPLE POINT OF WATER:
+
+  P_triple = 611.73 Pa (0.00604 atm)
+  T_triple = 273.16 K (0.01&deg;C)
+
+  MERCURY CAPSULE OPERATING CONDITIONS:
+
+  Orbital vacuum:
+    P_exterior &asymp; 10^-7 Pa (at 260 km altitude)
+
+  Hull temperature cycling:
+    Sunlit side:   T &asymp; 393 K (+120&deg;C)
+    Shadow side:   T &asymp; 123 K (-150&deg;C)
+    Orbital dawn:  T &asymp; 200-250 K (transition)
+
+  At P = 10^-7 Pa, liquid water cannot exist at
+  ANY temperature. The phase diagram shows that
+  below 611.73 Pa, water transitions directly
+  between solid and gas &mdash; sublimation. There is
+  no liquid phase in orbital vacuum.
+
+  PHASE DIAGRAM OVERLAY:
+    Capsule sunlit:  (393 K, 10^-7 Pa) &rarr; gas phase
+    Capsule shadow:  (123 K, 10^-7 Pa) &rarr; solid phase
+    Orbital dawn:    (200 K, 10^-7 Pa) &rarr; sublimation
+                                          boundary</pre>
+
+    <p><strong>Sublimation Rate at Orbital Dawn</strong></p>
+
+<pre>SUBLIMATION RATE CALCULATION:
+
+  At orbital dawn, the hull temperature rises from
+  ~123 K toward ~393 K as sunlight hits the surface.
+  At T = 200 K, the equilibrium vapor pressure of
+  ice is:
+
+  Using the integrated Clausius-Clapeyron with
+  reference at the triple point:
+
+    ln(P/611.73) = (51,100 / 8.314) * (1/273.16 - 1/200)
+
+    (51,100 / 8.314) = 6,146 K
+
+    (1/273.16 - 1/200) = 0.003661 - 0.005000
+                       = -0.001339 K^-1
+
+    ln(P/611.73) = 6,146 * (-0.001339)
+                 = -8.228
+
+    P/611.73 = e^(-8.228) = 2.66 x 10^-4
+
+    P = 611.73 * 2.66 x 10^-4
+      = 0.163 Pa
+
+  The equilibrium vapor pressure at 200 K is
+  0.163 Pa &mdash; still vastly higher than the ambient
+  orbital vacuum (10^-7 Pa). This means sublimation
+  proceeds freely. Every ice crystal on the hull
+  surface is sublimating as fast as molecules can
+  escape the surface.
+
+  The sublimation mass flux (Hertz-Knudsen):
+
+    J = P_eq / sqrt(2 * &pi; * M * R * T)
+
+  where M = 0.018 kg/mol (water):
+
+    J = 0.163 / sqrt(2 * &pi; * 0.018 * 8.314 * 200)
+      = 0.163 / sqrt(189.9)
+      = 0.163 / 13.78
+      = 0.0118 kg/(m^2*s)
+      = 11.8 g/(m^2*s)
+
+  A 1 cm^2 patch of ice on the hull sublimes at
+  approximately 1.18 mg/s at 200 K. A thin frost
+  layer (0.1 mm thick, density 917 kg/m^3) on that
+  patch contains about 9.17 mg of ice and would
+  vanish in approximately 7.8 seconds.
+
+  This is why Carpenter saw the particles at dawn:
+  the thermal transition drove rapid sublimation,
+  launching molecules off the hull. In the vacuum,
+  the water vapor immediately re-froze into
+  microscopic ice crystals (the gas expanded and
+  cooled adiabatically), forming a slowly dispersing
+  cloud illuminated by the rising sun.</pre>
+
+    <hr>
+
+    <h2>Deposit 3: GFP Fluorescence &mdash; Quantum Mechanics of the Chromophore (Layer 3, Section 3.22)</h2>
+
+    <h3>From Jellyfish to Nobel Prize</h3>
+
+    <p><em>Aequorea victoria</em> &mdash; the crystal jellyfish found in Puget Sound waters &mdash; produces green fluorescent protein (GFP), the molecule that would eventually earn Osamu Shimomura, Martin Chalfie, and Roger Tsien the 2008 Nobel Prize in Chemistry. The mathematics of fluorescence connects quantum mechanics to biology through a chain of photon energies, absorption spectra, and quantum yields.</p>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Photon Energy at Absorption and Emission Wavelengths</strong></p>
+
+<pre>GFP CHROMOPHORE PHOTON ENERGIES:
+
+  Planck&rsquo;s equation: E = hf = hc/&lambda;
+
+  Constants:
+    h = 6.626 x 10^-34 J*s  (Planck&rsquo;s constant)
+    c = 2.998 x 10^8 m/s    (speed of light)
+    hc = 1.989 x 10^-25 J*m
+
+  ABSORPTION (excitation peak):
+    &lambda;_abs = 395 nm = 395 x 10^-9 m
+
+    E_abs = hc / &lambda;_abs
+          = 1.989 x 10^-25 / (395 x 10^-9)
+          = 5.035 x 10^-19 J
+          = 3.14 eV
+
+  EMISSION (fluorescence peak):
+    &lambda;_em = 509 nm = 509 x 10^-9 m
+
+    E_em = hc / &lambda;_em
+         = 1.989 x 10^-25 / (509 x 10^-9)
+         = 3.908 x 10^-19 J
+         = 2.44 eV
+
+  STOKES SHIFT:
+    &Delta;E = E_abs - E_em
+       = 5.035 x 10^-19 - 3.908 x 10^-19
+       = 1.127 x 10^-19 J
+       = 0.70 eV
+
+    &Delta;&lambda; = &lambda;_em - &lambda;_abs = 509 - 395 = 114 nm
+
+  The Stokes shift of 0.70 eV represents energy
+  lost between absorption and emission. This energy
+  is dissipated as vibrational relaxation within the
+  chromophore and its protein scaffold &mdash; the
+  molecule absorbs a violet photon, its internal
+  bonds vibrate and shed heat to the surrounding
+  protein, and then it emits a lower-energy green
+  photon. The 114 nm wavelength gap between
+  absorption and emission is what makes GFP useful:
+  you can illuminate a sample with violet/UV light
+  and detect only the green emission, with no
+  confusion between excitation and fluorescence.</pre>
+
+    <p><strong>Quantum Yield</strong></p>
+
+<pre>GFP QUANTUM YIELD:
+
+  &phi; = (photons emitted) / (photons absorbed)
+
+  For wild-type Aequorea GFP:
+    &phi; = 0.79
+
+  This is remarkably high. For every 100 photons
+  absorbed at 395 nm, 79 green photons are emitted
+  at 509 nm. The remaining 21 photons&rsquo; energy is
+  dissipated non-radiatively &mdash; as heat, through
+  internal conversion or intersystem crossing.
+
+  Radiative efficiency:
+    &eta; = &phi; * (E_em / E_abs)
+      = 0.79 * (2.44 / 3.14)
+      = 0.79 * 0.777
+      = 0.614
+
+  Only 61.4% of the absorbed photon energy emerges
+  as fluorescence. The rest becomes molecular heat.
+  But 79% of the PHOTONS survive &mdash; this is what
+  makes GFP detectable at low concentrations.</pre>
+
+    <p><strong>Beer-Lambert Law: Detection Limits</strong></p>
+
+<pre>BEER-LAMBERT LAW:
+
+  A = &epsilon; * c * l
+
+  where:
+    A = absorbance (dimensionless, log base 10)
+    &epsilon; = molar extinction coefficient (M^-1 cm^-1)
+    c = concentration (mol/L = M)
+    l = path length (cm)
+
+  For GFP at 395 nm:
+    &epsilon; = 21,000 M^-1 cm^-1
+
+  For a 1 cm path length, the minimum detectable
+  absorbance is approximately A = 0.001 (modern
+  spectrophotometer sensitivity):
+
+    c_min = A / (&epsilon; * l)
+          = 0.001 / (21,000 * 1)
+          = 4.76 x 10^-8 M
+          = 47.6 nM
+
+  At the molecular level:
+    molecules per liter = c * N_A
+                        = 4.76 x 10^-8 * 6.022 x 10^23
+                        = 2.87 x 10^16 molecules/L
+
+  In a typical fluorescence microscopy sample
+  volume of 1 pL (10^-12 L):
+    molecules = 2.87 x 10^16 * 10^-12
+              = 2.87 x 10^4
+              &asymp; 29,000 molecules
+
+  With fluorescence detection (far more sensitive
+  than absorbance), single-molecule GFP detection
+  is achievable. This is why GFP revolutionized
+  cell biology: you can tag a single protein with
+  GFP and watch it move inside a living cell.</pre>
+
+    <hr>
+
+    <h2>Deposit 4: Diving Physics of the Rhinoceros Auklet (Layer 4, Section 4.22d)</h2>
+
+    <h3>Buoyancy, Pressure, and the Cost of Depth</h3>
+
+    <p>The rhinoceros auklet (<em>Cerorhinca monocerata</em>) is a pursuit-diving seabird of the Pacific Northwest that routinely dives to 57 meters. At that depth, the physics working against the bird are hydrostatic pressure, buoyancy, and drag &mdash; each quantifiable from first principles.</p>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Hydrostatic Pressure at Depth</strong></p>
+
+<pre>PRESSURE AT 57 METERS:
+
+  P = &rho; * g * h + P_atm
+
+  where:
+    &rho;     = density of seawater = 1,025 kg/m^3
+    g     = 9.81 m/s^2
+    h     = 57 m (maximum dive depth)
+    P_atm = 101,325 Pa (1 atm)
+
+  P = 1,025 * 9.81 * 57 + 101,325
+    = 573,290 + 101,325
+    = 674,615 Pa
+    = 6.66 atm
+
+  The auklet experiences 6.66 atmospheres of
+  pressure at maximum depth &mdash; its body is
+  compressed by 6.66 times the surface pressure.
+  The bird&rsquo;s air spaces (lungs, air sacs, plumage
+  trapped air) are crushed to 1/6.66 = 15.0% of
+  their surface volume by Boyle&rsquo;s law.</pre>
+
+    <p><strong>Buoyancy Force</strong></p>
+
+<pre>BUOYANCY ON A 500g AUKLET:
+
+  The auklet&rsquo;s body volume (approximately):
+    V_body &asymp; m / &rho;_bird
+
+  Bird density is approximately 900 kg/m^3
+  (less than water due to air spaces and feathers):
+    V_body &asymp; 0.500 / 900 = 5.56 x 10^-4 m^3
+           = 556 cm^3
+
+  Buoyancy force at surface:
+    F_b = &rho;_water * g * V_body
+        = 1,025 * 9.81 * 5.56 x 10^-4
+        = 5.59 N
+
+  Weight of the auklet:
+    W = m * g = 0.500 * 9.81 = 4.91 N
+
+  Net buoyancy at surface:
+    F_net = F_b - W = 5.59 - 4.91 = 0.68 N (upward)
+
+  The bird floats with a net upward force of
+  0.68 N. To dive, it must overcome this buoyancy
+  by swimming downward &mdash; every stroke fights
+  against the water pushing it back to the surface.</pre>
+
+    <p><strong>Boyle&rsquo;s Law: Air Volume at Depth</strong></p>
+
+<pre>BOYLE&rsquo;S LAW &mdash; PLUMAGE AIR AT DEPTH:
+
+  P1 * V1 = P2 * V2
+
+  Trapped air in plumage at surface:
+    V1 &asymp; 80 cm^3 (estimated for auklet-sized bird)
+    P1 = 1 atm
+
+  At 57 m depth:
+    P2 = 6.66 atm
+
+    V2 = P1 * V1 / P2
+       = 1 * 80 / 6.66
+       = 12.0 cm^3
+
+  The plumage air compresses from 80 cm^3 to
+  12.0 cm^3 &mdash; a reduction of 68 cm^3.
+
+  This compression reduces the bird&rsquo;s total volume:
+    V_body_depth = 556 - 68 = 488 cm^3
+
+  New buoyancy at 57 m:
+    F_b_depth = 1,025 * 9.81 * 4.88 x 10^-4
+              = 4.91 N
+
+  Net buoyancy at depth:
+    F_net_depth = 4.91 - 4.91 = 0.00 N
+
+  At approximately 57 meters, the auklet reaches
+  neutral buoyancy. The compressed air volume
+  reduces the buoyancy force until it equals the
+  bird&rsquo;s weight. Below this depth, the bird is
+  NEGATIVELY buoyant &mdash; it sinks without effort.
+  Above this depth, it must swim downward against
+  positive buoyancy. This is the buoyancy inversion
+  point: what helps you float hinders your dive,
+  but only until you reach the crossover depth.</pre>
+
+    <p><strong>Energy Cost per Dive</strong></p>
+
+<pre>ENERGY COST &mdash; WORK AGAINST BUOYANCY:
+
+  The average net buoyancy over the descent from
+  0 to 57 m is approximately:
+    F_avg &asymp; (0.68 + 0.00) / 2 = 0.34 N
+
+  Work against buoyancy:
+    W_buoyancy = F_avg * d = 0.34 * 57 = 19.4 J
+
+  Drag force (estimated for a streamlined body
+  at ~1.5 m/s dive speed):
+    F_drag = 0.5 * &rho; * v^2 * C_d * A
+           = 0.5 * 1,025 * (1.5)^2 * 0.05 * 0.003
+           = 0.173 N
+
+  Work against drag (descent only):
+    W_drag = F_drag * d = 0.173 * 57 = 9.9 J
+
+  Total mechanical work per dive:
+    W_total = 19.4 + 9.9 &asymp; 29.3 J
+
+  At a metabolic efficiency of ~25%:
+    E_metabolic = 29.3 / 0.25 = 117 J per dive
+
+  A single sand lance (primary prey) yields
+  approximately 12,000 J. The auklet spends
+  roughly 1% of a prey item&rsquo;s energy to catch it.
+  This is an excellent return on investment &mdash;
+  provided the dive is successful.</pre>
+
+    <hr>
+
+    <h2>Deposit 5: Attitude Control Fuel Budgeting (Layer 4, Section 4.22e)</h2>
+
+    <h3>Why Carpenter Ran Out</h3>
+
+    <p>Mercury capsules used hydrogen peroxide (H<sub>2</sub>O<sub>2</sub>) monopropellant thrusters for attitude control. The fuel supply was finite and non-renewable. Every maneuver &mdash; every pitch, yaw, or roll correction &mdash; spent irreplaceable propellant from a fixed budget. Carpenter consumed his attitude fuel faster than any Mercury pilot before him, and the mathematics of why are unforgiving.</p>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Angular Impulse and Thruster Performance</strong></p>
+
+<pre>MERCURY ATTITUDE CONTROL SYSTEM:
+
+  Propellant: 90% hydrogen peroxide (H2O2)
+  Decomposition: 2 H2O2 &rarr; 2 H2O + O2 (catalytic)
+  Specific impulse: I_sp = 140 s
+  Exhaust velocity: v_e = I_sp * g_0
+                        = 140 * 9.81
+                        = 1,373 m/s
+
+  Thruster arrangement:
+    18 thrusters total (6 per axis: pitch, yaw, roll)
+    2 thrust levels: high (24 lbf / 107 N)
+                     low  (1 lbf / 4.5 N)
+    High for large maneuvers, low for fine control
+
+  Total H2O2 supply: approximately 27 kg (60 lb)
+    Manual system: ~13.5 kg
+    Automatic system: ~13.5 kg
+
+  Total available impulse:
+    J_total = m_fuel * v_e
+            = 27 * 1,373
+            = 37,071 N*s
+
+  Capsule moment of inertia (approximate, pitch axis):
+    I_pitch &asymp; 120 kg*m^2</pre>
+
+    <p><strong>Mass per Maneuver</strong></p>
+
+<pre>ANGULAR IMPULSE:
+
+  L = I * &omega;
+
+  For a typical attitude correction of 5 degrees
+  (0.087 rad) in 2 seconds:
+
+    &omega; = &theta; / t = 0.087 / 2 = 0.0436 rad/s
+
+    Angular impulse required:
+      L = I * &omega; = 120 * 0.0436 = 5.23 N*m*s
+
+    But the capsule must also be stopped (decelerated)
+    after the rotation, requiring equal impulse:
+      L_total = 2 * 5.23 = 10.46 N*m*s
+
+  For a thruster arm of 0.6 m from center of mass:
+    F * t = L_total / r = 10.46 / 0.6 = 17.4 N*s
+
+  Propellant mass per 5-degree maneuver:
+    &Delta;m = F * t / v_e
+       = 17.4 / 1,373
+       = 0.0127 kg
+       = 12.7 g
+
+  With 27 kg total fuel:
+    Maximum 5-degree maneuvers = 27 / 0.0127
+                                = 2,126 maneuvers</pre>
+
+    <p><strong>Fuel Budget: Nominal vs. Carpenter&rsquo;s Consumption</strong></p>
+
+<pre>NOMINAL FUEL BUDGET (3-orbit mission, ~4.5 hours):
+
+  Planned consumption:
+    Automatic attitude hold: ~0.04 kg/min
+      (continuous small corrections to hold orientation)
+    3 orbits * 88.5 min/orbit = 265.5 minutes
+    Automatic hold total: 265.5 * 0.04 = 10.6 kg
+
+    Retrofire attitude maneuver: ~1.0 kg
+    Reentry attitude control: ~2.0 kg
+    Pilot maneuvers (planned): ~3.0 kg
+    Reserve: ~10.4 kg
+
+    Total budget: 10.6 + 1.0 + 2.0 + 3.0 + 10.4 = 27.0 kg
+
+  CARPENTER&rsquo;S ACTUAL CONSUMPTION:
+
+  Carpenter&rsquo;s horizon scanner malfunctioned early
+  in the flight, causing the automatic attitude
+  control system to hunt &mdash; firing thrusters
+  repeatedly as it tried to lock onto a reference
+  that kept drifting. This consumed automatic fuel
+  at approximately 0.08 kg/min &mdash; double the
+  nominal rate.
+
+  Additional unplanned maneuvers:
+    Scientific observations (photographing horizon,
+    tracking balloon, studying fireflies): estimated
+    ~4.0 kg additional over planned allocation
+
+    Manual attitude experiments: ~2.0 kg additional
+
+  By retrofire, Carpenter&rsquo;s fuel state:
+    Automatic system: nearly depleted
+    Manual system: approximately 20% remaining
+
+  Fuel remaining at retrofire:
+    Manual: ~2.7 kg (20% of 13.5 kg)
+    Automatic: ~0.5 kg (nearly empty)
+    Total: ~3.2 kg
+
+  Fuel needed for retrofire + reentry: ~3.0 kg
+
+  MARGIN: 0.2 kg &mdash; essentially zero.
+
+  This is why the yaw error existed at retrofire:
+  Carpenter could not afford the fuel to make fine
+  attitude corrections. He had to accept a 25-degree
+  yaw error because correcting it would have left
+  insufficient fuel for reentry attitude control.
+  The 402 km overshoot was the price of the fuel
+  already spent.</pre>
+
+    <p><strong>The Cost of Each Unscheduled Maneuver</strong></p>
+
+<pre>FUEL AS TIME:
+
+  Each unscheduled 5-degree maneuver cost 12.7 g.
+  The reserve was 10,400 g.
+  That is 819 unscheduled maneuvers &mdash; which sounds
+  like plenty, until you realize the automatic
+  system was consuming fuel at 80 g/min instead of
+  40 g/min.
+
+  The horizon scanner malfunction alone consumed:
+    Extra automatic fuel = (0.08 - 0.04) * 265.5
+                         = 0.04 * 265.5
+                         = 10.6 kg
+
+  This is equal to the ENTIRE planned automatic
+  fuel budget. The malfunction doubled the automatic
+  consumption, and since the automatic and manual
+  systems drew from separate tanks, Carpenter
+  could not simply redirect fuel. The automatic
+  tank drained at twice the planned rate. By the
+  time Carpenter switched to manual-only control
+  to conserve the automatic supply, the damage
+  was done.
+
+  EVERY MANEUVER SPENDS IRREPLACEABLE FUTURE
+  OPTIONS. Each gram of H2O2 burned for a
+  scientific observation was a gram unavailable
+  for retrofire attitude alignment. The fuel
+  budget is a time budget: once spent, the future
+  narrows.</pre>
+
+    <hr>
+
+    <h2>TSPB Deposits &mdash; Synthesis</h2>
+
+    <h3>Deposit 1: The Stokes Shift as Universal Principle</h3>
+
+    <p>Energy is always lost in translation. When GFP absorbs a violet photon and emits a green one, the difference &mdash; 0.70 eV, the Stokes shift &mdash; is dissipated as molecular vibration. No fluorescent system emits at higher energy than it absorbs. This is not a peculiarity of GFP; it is a consequence of the second law of thermodynamics applied at the molecular scale. Every transformation incurs a tax. The photon that enters is not the photon that leaves. The signal that is received is not the signal that was sent. In engineering, in communication, in every system that converts one form of energy to another, the Stokes shift appears: the output is always degraded relative to the input. The question is never whether energy is lost, but how much, and whether what remains is still useful.</p>
+
+    <h3>Deposit 2: Ballistic Sensitivity</h3>
+
+    <p>Small errors propagate large in deterministic systems. Carpenter&rsquo;s 25-degree yaw error, 3-second timing delay, and 3% impulse deficit were individually minor &mdash; each within the range of normal human and mechanical imprecision. But the ballistic equations are linear in their sensitivity: 9.4 m/s of missing retrograde &Delta;V maps to 235 km of overshoot with no damping, no feedback, no correction. Once the retrorockets fire, the capsule is on a ballistic trajectory. There is no second chance. Deterministic systems amplify errors because they have no mechanism to absorb them. Feedback systems (guided reentry, GPS-steered parachutes) exist precisely to break this sensitivity chain &mdash; to make the output insensitive to the input errors. The Mercury program flew without feedback. Every error propagated to splashdown at full amplitude.</p>
+
+    <h3>Deposit 3: Sublimation in Vacuum</h3>
+
+    <p>Familiar phenomena become unrecognizable in new environments. Water ice on Earth is stable &mdash; it melts, it does not vanish. In orbital vacuum, at pressures seven orders of magnitude below the triple point, ice cannot melt. It can only sublimate. The phase diagram forbids liquid water. The same molecule, the same crystal structure, but in a different pressure regime, and the behavior is qualitatively different. Glenn&rsquo;s fireflies were water doing what water must do in vacuum: bypassing the liquid phase entirely, leaping from solid to gas. The mathematics (Clausius-Clapeyron) predicted this; the observation confirmed it. But the emotional experience &mdash; luminous particles streaming past the window at sunrise &mdash; bore no resemblance to the equation. The phenomenon was familiar (evaporation). The context made it alien.</p>
+
+    <h3>Deposit 4: Buoyancy Inversion</h3>
+
+    <p>What helps you float hinders your dive. The rhinoceros auklet&rsquo;s plumage traps air that provides buoyancy at the surface &mdash; essential for a seabird that must rest on water. But that same air creates the force the bird must overcome to dive. As depth increases, Boyle&rsquo;s law compresses the air, reducing buoyancy, until at approximately 57 meters the bird reaches neutral buoyancy. Below that depth, the bird sinks without effort. The same physical property (trapped air) is an asset at the surface and a liability during descent, and the crossover point is calculable from first principles. Many systems exhibit this inversion: the feature that provides stability in one regime becomes the obstacle in another. The auklet does not change its plumage between floating and diving. It accepts the tradeoff.</p>
+
+    <h3>Deposit 5: Fuel as Time</h3>
+
+    <p>Every maneuver spends irreplaceable future options. Carpenter&rsquo;s attitude fuel was a fixed endowment &mdash; 27 kg of H<sub>2</sub>O<sub>2</sub> that could never be replenished. Each thruster firing was a withdrawal from a non-renewable account. The horizon scanner malfunction was an unplanned tax, draining the account at double the expected rate. The scientific observations were discretionary spending against a shrinking balance. By retrofire, the account was nearly empty, and the 25-degree yaw error was the consequence of insufficient funds to pay for precision. Fuel is not just propellant. It is optionality. It is the ability to make future corrections, to respond to surprises, to recover from errors. When the fuel is gone, the future is fixed. Every unrecoverable resource &mdash; fuel, time, trust, attention &mdash; follows this same arithmetic: each expenditure narrows the space of possible futures. The question is never whether to spend, but whether what you are buying is worth more than what you are foreclosing.</p>
+
+    <hr>
+
+    <h2>Debate Questions</h2>
+
+    <ol>
+      <li><strong>Was Carpenter&rsquo;s fuel consumption reckless, or was the horizon scanner malfunction the primary cause?</strong> The horizon scanner malfunction doubled the automatic fuel consumption rate from 0.04 kg/min to 0.08 kg/min, consuming 10.6 kg of unplanned fuel over the mission. Carpenter&rsquo;s scientific observations consumed an estimated 6 kg beyond the planned allocation. The malfunction was not Carpenter&rsquo;s fault; the observations were his choice. But without the malfunction, his extra observations would have been affordable &mdash; 6 kg against a 10.4 kg reserve leaves 4.4 kg, adequate for retrofire. The malfunction consumed the margin that would have made his curiosity consequence-free. Which was the proximate cause: the hardware failure that ate the margin, or the pilot&rsquo;s decision to spend fuel that the margin was designed to protect?</li>
+      <li><strong>Should the Mercury flight plan have allocated fuel for unscheduled scientific observations?</strong> Glenn on MA-6 had also made unplanned observations, but his attitude system functioned nominally, and his fuel margin was sufficient. The lesson from MA-7 is that margins exist for failures, not for opportunities. But if margins are never available for opportunities, then every flight is a rigid execution of a predetermined plan, and the value of having a human pilot &mdash; the ability to respond to the unexpected, to observe, to experiment &mdash; is wasted. The Mercury flight plan was designed for a test pilot, not a scientist. Was this the right tradeoff, or should the fuel budget have included a line item for exploration?</li>
+      <li><strong>Is GFP&rsquo;s importance an argument for basic research funding, or is it survivorship bias?</strong> Shimomura began studying <em>Aequorea</em> bioluminescence in 1961, the year before Carpenter&rsquo;s flight. He was not trying to create a biological tool. He was trying to understand how a jellyfish glows. The practical applications of GFP did not emerge until the 1990s, thirty years later. For every GFP &mdash; a basic research discovery that transformed an entire field &mdash; there are thousands of research programs that produced understanding but no transformative application. Does the magnitude of GFP&rsquo;s eventual impact justify the investment in thousands of programs with no practical payoff? Or is this reasoning backward &mdash; selecting the winner after the race and calling the bet obvious?</li>
+      <li><strong>Does the auklet&rsquo;s flexible foraging strategy outperform a specialist strategy?</strong> Rhinoceros auklets forage across a wide depth range, taking prey from near-surface to 57 meters. A specialist strategy &mdash; diving to a fixed depth where prey density is known to be high &mdash; would minimize search time but fail when prey distribution shifts. The generalist strategy incurs higher average energy cost per prey item (many dives to sub-optimal depths) but is robust to environmental variability. In stable environments, the specialist wins. In variable environments, the generalist survives. The North Pacific is highly variable. Is the auklet&rsquo;s flexible depth range an adaptation to uncertainty, or is it simply the consequence of limited information &mdash; the bird dives everywhere because it does not know where the fish are?</li>
+      <li><strong>At what point does sensitivity to initial conditions make ballistic reentry impractical?</strong> Carpenter&rsquo;s 402 km overshoot came from errors totaling approximately 12 m/s of &Delta;V deficit and 3 seconds of timing error. For Mercury, this was recoverable &mdash; the capsule landed in the ocean, and search aircraft found it within 39 minutes. But for a return from the Moon (Apollo) or from Mars, the velocity is higher, the distances are greater, and the sensitivity coefficients are larger. Apollo solved this with a guided reentry &mdash; the capsule could adjust its lift vector during atmospheric entry to correct for trajectory errors. The transition from ballistic to guided reentry was not optional; it was forced by the mathematics of sensitivity. What is the limiting mission profile for ballistic reentry? At what entry velocity does the sensitivity coefficient become so large that no achievable retrofire accuracy can guarantee landing within a recovery zone?</li>
+    </ol>
+
+  </div>
+  <div class="nav-card">
+    <div><div class="nav-label">&larr; Back</div><a href="index.html">Mission 1.22</a></div>
+    <div style="text-align:right;"><div class="nav-label">Series &rarr;</div><a href="../index.html">All Missions</a></div>
+  </div>
+</main>
+<footer>
+  <p>Mission 1.22 &bull; Mercury-Atlas 7 / Aurora 7 &bull; <a href="../index.html">NASA Mission Series</a></p>
+</footer>
+</body>
+</html>

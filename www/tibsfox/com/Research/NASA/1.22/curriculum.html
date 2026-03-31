@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College of Knowledge: Luminescence | v1.22 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #020810; --bio-mid: #041020;
+    --aurora-green: #20A060; --aurora-dim: #105030;
+    --gfp-green: #40D080; --gfp-dim: #206840;
+    --biolum-blue: #2040C0; --biolum-dim: #102060;
+    --jellyfish-teal: #208888; --jellyfish-dim: #104444;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --space: #020408;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+    --accent: var(--aurora-green);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(32,160,96,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(32,64,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(64,208,128,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(32,136,136,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(208,128,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(32,160,96,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--aurora-green); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--biolum-dim) 55%, var(--aurora-dim) 100%); border-bottom: 3px solid var(--accent); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(32,160,96,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(32,160,96,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(32,160,96,0.12); border: 1px solid var(--accent); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(32,160,96,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--accent); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--accent); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--jellyfish-teal); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--accent); }
+  em { color: var(--reentry-amber); }
+  code { color: var(--biolum-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--jellyfish-teal); text-decoration: none; }
+  a:hover { color: #fff; }
+  blockquote { border-left: 3px solid var(--biolum-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(2,4,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  pre { background: rgba(2,4,8,0.6); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1.5rem 0; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.7; color: var(--text); }
+  .session-meta { background: rgba(32,160,96,0.06); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.8; }
+  .session-meta strong { color: var(--aurora-green); }
+  .nav-card { background: rgba(2,4,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--aurora-green); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--gfp-green); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--aurora-green); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.22 Mercury-Atlas 7</a><span class="sep">/</span>
+  Curriculum
+</div>
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.22</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge: Luminescence</h1>
+    <p class="subtitle">TRY sessions, DIY projects, and Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> May 24, 1962</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Malcolm Scott Carpenter (LCDR, USN)</span>
+      <span><span class="label">Dedication:</span> Bob Dylan</span>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="content">
+
+    <h2>Department Mappings</h2>
+
+    <h3>Physics</h3>
+
+    <p><strong>Wing:</strong> Fluorescence, Quantum Mechanics of Chromophores, Orbital Mechanics, Reentry Dynamics</p>
+
+    <p><strong>Concept:</strong> The physics of light absorption and re-emission at longer wavelengths &mdash; the Stokes shift &mdash; connects the quantum behavior of electrons in chromophore molecules to the observable phenomenon of things glowing under UV light. This is the same physics that makes green fluorescent protein useful as a biological tag, and it is the same physics that governs the color of the Aurora Borealis that Scott Carpenter named his capsule after.</p>
+
+    <p><strong>Deposit:</strong> When a photon strikes a fluorescent molecule, one of its electrons absorbs the photon&rsquo;s energy and jumps to a higher energy state. This excited electron is unstable. Within nanoseconds, it loses some energy to molecular vibrations (heat) and then drops back down, emitting a new photon. Because some energy was lost to vibration, the emitted photon has less energy than the absorbed one. Less energy means longer wavelength. Shorter wavelength in, longer wavelength out. Ultraviolet in, visible green out. This is the Stokes shift, named after George Gabriel Stokes, who described it in 1852, more than a century before Osamu Shimomura isolated the protein that would make it one of the most important tools in modern biology.</p>
+
+    <p>The orbital mechanics of MA-7 follow the same fundamental pattern as MA-6: a nearly circular orbit at approximately 260 km altitude, with an orbital velocity of 7.8 km/s. But the reentry dynamics were dramatically different. Carpenter&rsquo;s capsule entered the atmosphere with a 25-degree yaw error &mdash; the spacecraft was pointed 25 degrees off its intended heading when the retrorockets fired. This yaw error, combined with a 3-second late retrofire, produced a landing 402 km beyond the intended splashdown point. The physics is unforgiving: at 7.8 km/s, a 3-second delay translates to 23 km of additional distance, and the yaw error compounds the problem by directing the deceleration force partially sideways instead of fully retrograde.</p>
+
+    <h3>Marine Biology</h3>
+
+    <p><strong>Wing:</strong> Cnidarian Life Cycle, Bioluminescence, Seabird Ecology, Diving Physiology</p>
+
+    <p><strong>Concept:</strong> The life cycle of <em>Aequorea victoria</em> &mdash; from planula larva to polyp colony to free-swimming medusa &mdash; represents one of the most complex developmental programs in the animal kingdom. The jellyfish alternates between a sessile polyp form (attached to rocks, producing clones by budding) and a pelagic medusa form (the bell-shaped swimmer that produces the green fluorescence). This dual-phase existence mirrors the Rhinoceros Auklet&rsquo;s dual-medium life: a bird that flies through air to reach its nesting burrows on Protection Island and then dives through water to catch fish, using its wings for propulsion in both media.</p>
+
+    <p><strong>Deposit:</strong> <em>Aequorea victoria</em> is not bioluminescent in the way most people understand the term. It does not produce its own light through a chemical reaction the way a firefly does. Instead, it uses a two-step process. First, the calcium-activated photoprotein aequorin produces blue light when calcium ions bind to it. Second, the green fluorescent protein (GFP) absorbs that blue light and re-emits it as green light through fluorescence. The jellyfish glows green because of a protein that converts blue to green. Shimomura&rsquo;s achievement was not just isolating GFP &mdash; it was understanding this two-stage relay system, which required processing roughly 50,000 individual jellyfish collected from the waters around Friday Harbor in the San Juan Islands of Washington State.</p>
+
+    <p>The Rhinoceros Auklet (<em>Cerorhinca monocerata</em>) nests in burrows on offshore islands, most notably Protection Island in the Strait of Juan de Fuca. It is a pursuit diver, using its wings to fly underwater at depths of up to 57 meters. The physiological adaptations required for dual-medium locomotion are extraordinary: wings that must generate lift in air (density 1.2 kg/m&sup3;) and thrust in water (density 1,025 kg/m&sup3;) &mdash; a medium nearly a thousand times denser. The compromise is a wing that is adequate in both media but optimal in neither, which is why auklets are clumsy fliers and merely competent divers compared to specialists like albatrosses (flight) or penguins (diving).</p>
+
+    <h3>Aerospace Engineering</h3>
+
+    <p><strong>Wing:</strong> Attitude Control Systems, Fuel Management, Heat Shield Design, Retrofire Sequences</p>
+
+    <p><strong>Concept:</strong> The engineering story of MA-7 is a cautionary tale about resource management. Carpenter used 75% of his manual attitude control fuel by the midpoint of his second orbit, leaving inadequate reserves for the critical reentry phase. The attitude control system used hydrogen peroxide thrusters &mdash; H<sub>2</sub>O<sub>2</sub> decomposed over a silver catalyst to produce steam and oxygen, which provided thrust. Each squirt of the thrusters consumed a measured quantity of peroxide. Each unnecessary correction, each moment of manual experimentation, drained the finite supply.</p>
+
+    <p><strong>Deposit:</strong> Mercury&rsquo;s attitude control system operated in two modes: automatic (the ASCS, using horizon scanners and gyroscopes to maintain orientation) and manual (the astronaut using a hand controller). In automatic mode, the system was efficient but imprecise. In manual mode, it was responsive but profligate &mdash; every hand correction consumed fuel, and astronauts in the novelty of spaceflight tended to over-correct, chasing small errors with large inputs and then correcting those corrections. This is the classic proportional control problem: without rate damping, the system oscillates.</p>
+
+    <p>Carpenter&rsquo;s fuel management failure was compounded during reentry. The 25-degree yaw error at retrofire meant the three retrorockets did not fire exactly opposite to the direction of travel. The deceleration vector was misaligned, producing less effective velocity reduction and inducing a lateral component. Combined with the 3-second late initiation (caused by distraction and procedural confusion), the result was a landing 402 km downrange. The capsule and astronaut were perfectly fine &mdash; the heat shield performed as designed, the parachutes deployed correctly, and Carpenter floated in his life raft for three hours until recovery aircraft located him. But the overshoot made recovery difficult and caused forty minutes of genuine uncertainty about whether the astronaut had survived.</p>
+
+    <h3>Chemistry</h3>
+
+    <p><strong>Wing:</strong> GFP Biochemistry, Protein Folding, Aequorin Calcium Binding, H<sub>2</sub>O<sub>2</sub> Decomposition</p>
+
+    <p><strong>Concept:</strong> Green fluorescent protein is a 238-amino-acid barrel structure that self-catalyzes the formation of its own chromophore &mdash; the light-emitting chemical group at its center. No enzymes required, no cofactors needed. Just fold the protein correctly and three amino acids (Ser65-Tyr66-Gly67) spontaneously cyclize and oxidize to form the fluorescent chromophore. This autocatalytic property is what makes GFP so powerful as a biological tool: attach the GFP gene to any protein of interest, express it in any cell, and that protein now glows green under blue or UV light. No additional reagents, no fixation, no killing the cell. Living, real-time visualization.</p>
+
+    <p><strong>Deposit:</strong> The chemistry of Mercury&rsquo;s hydrogen peroxide thrusters connects directly to the chemistry of biological systems. H<sub>2</sub>O<sub>2</sub> decomposes exothermically when it contacts a catalyst: 2 H<sub>2</sub>O<sub>2</sub> &rarr; 2 H<sub>2</sub>O + O<sub>2</sub> + heat. In the Mercury spacecraft, the catalyst was a silver screen. In biology, the catalyst is the enzyme catalase, which is present in nearly every living cell on Earth because H<sub>2</sub>O<sub>2</sub> is a toxic byproduct of aerobic metabolism. The same chemical reaction that powered Carpenter&rsquo;s thrusters is happening inside your cells right now, billions of times per second, as catalase neutralizes the hydrogen peroxide produced by your mitochondria. The difference is one of scale and intent: the Mercury thrusters decomposed peroxide to produce thrust; your cells decompose peroxide to avoid being destroyed by it.</p>
+
+    <h3>Music</h3>
+
+    <p><strong>Wing:</strong> Jazz-Funk Structure, Improvisation as Exploration, Groove-Based Approach</p>
+
+    <p><strong>Concept:</strong> Foxy Apollo&rsquo;s groove-based approach to the Aurora 7 mission draws on the tradition of jazz-funk &mdash; music built on a repeating rhythmic foundation (the groove) over which improvisation occurs. This structure mirrors Carpenter&rsquo;s mission profile: the orbital mechanics provide the groove (predictable, repeating, 88-minute cycles), and the astronaut&rsquo;s scientific observations and manual experiments provide the improvisation. When improvisation stays within the groove, the result is transcendent. When it departs too far &mdash; when Carpenter spent too much fuel on manual experimentation, losing the rhythmic discipline of fuel conservation &mdash; the groove breaks down and the landing zone shifts 402 km downrange.</p>
+
+    <p><strong>Deposit:</strong> The musical structure works as a pedagogical frame because it makes the tension between exploration and discipline viscerally understandable. Jazz improvisation is not random &mdash; it occurs within harmonic and rhythmic constraints. The best solos never lose the groove even while pushing its boundaries. Carpenter&rsquo;s mission is a case study in pushing past the boundary: his scientific curiosity (a genuine virtue) overrode his procedural discipline (a genuine necessity), producing spectacular observations and a hair-raising reentry. The music captures both the beauty of the exploration and the consequences of losing the beat.</p>
+
+    <h3>Environmental Science</h3>
+
+    <p><strong>Wing:</strong> Friday Harbor Marine Ecosystem, Protection Island Seabird Colony, Puget Sound Health</p>
+
+    <p><strong>Concept:</strong> The waters around Friday Harbor in the San Juan Islands represent one of the richest marine ecosystems in the Pacific Northwest &mdash; the same waters where Shimomura collected his tens of thousands of <em>Aequorea victoria</em>. Protection Island, 130 km to the southeast in the Strait of Juan de Fuca, hosts the largest nesting colony of Rhinoceros Auklets in Washington State, with an estimated 36,000 nesting pairs. Both sites depend on the health of the Puget Sound ecosystem, which faces pressure from urban runoff, ocean acidification, shipping traffic, and warming waters.</p>
+
+    <p><strong>Deposit:</strong> The connection between GFP research and environmental science is direct: Shimomura&rsquo;s work at Friday Harbor Laboratories (operated by the University of Washington since 1904) was possible because <em>Aequorea victoria</em> was abundant and accessible in those waters. The jellyfish&rsquo;s presence in the San Juan Islands depends on water temperature, salinity, current patterns, and prey availability (small copepods and other zooplankton). Changes to any of these parameters &mdash; driven by climate change, nutrient loading, or altered ocean circulation &mdash; affect jellyfish populations and, by extension, the kind of research that can be conducted there. The biological tools that revolutionized cell biology emerged from a specific place with specific ecological conditions. If those conditions change, the next Shimomura may not find what they need.</p>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY Session 1: &ldquo;Make It Glow&rdquo;</h3>
+
+    <div class="session-meta">
+      <strong>Duration:</strong> 30 minutes<br>
+      <strong>Difficulty:</strong> Beginner<br>
+      <strong>Departments:</strong> Physics, Chemistry<br>
+      <strong>Ages:</strong> 10+<br>
+      <strong>Materials Cost:</strong> &lt; $15<br>
+      <strong>What You Need:</strong> A UV LED flashlight (available at hardware stores or online, $5-10), tonic water (one small bottle, must contain quinine), a yellow highlighter, white paper, vitamin B2 (riboflavin) tablet, a dark room, and four small clear cups or glasses.
+    </div>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> Why certain materials glow under ultraviolet light, what the Stokes shift is and why it matters, and how the same physical principle that makes tonic water glow blue-white under a blacklight is the mechanism that made GFP one of the most important tools in the history of biology. You will see fluorescence with your own eyes, measure the relative brightness of different fluorescent materials, and understand why the emitted light is always a longer wavelength (lower energy) than the exciting light.</p>
+
+    <p><strong>The Exercise:</strong></p>
+
+<pre>FLUORESCENCE: SEEING THE STOKES SHIFT
+
+Part 1: SETUP
+
+  Arrange your four materials in separate clear cups:
+    Cup 1: Tonic water (contains quinine, fluoresces blue)
+    Cup 2: Water with highlighter ink dissolved in it
+           (crack open a yellow highlighter, soak the
+           felt in water for 2 minutes, remove felt)
+    Cup 3: Water with a crushed vitamin B2 tablet
+           (riboflavin, fluoresces yellow-green)
+    Cup 4: Plain water (your control)
+
+  Darken the room as much as possible. Close blinds,
+  turn off all lights. The darker the better.
+
+Part 2: OBSERVE
+
+  Shine the UV flashlight on each cup from the side,
+  not from above. Observe from 90 degrees &mdash; look at
+  the cup from a direction perpendicular to the UV
+  beam. This geometry matters: you want to see the
+  fluorescent emission without the UV source shining
+  directly into your eyes.
+
+  Record what you see:
+    Cup 1 (tonic water): color = ___
+    Cup 2 (highlighter): color = ___
+    Cup 3 (vitamin B2):  color = ___
+    Cup 4 (plain water): color = ___
+
+  The plain water should show no glow &mdash; or very
+  faint glow from dissolved minerals. This is your
+  baseline. Everything brighter than Cup 4 is
+  fluorescence.
+
+Part 3: THE STOKES SHIFT
+
+  Your UV flashlight emits light at approximately
+  365-395 nm (nanometers). This is ultraviolet &mdash;
+  invisible or barely visible to human eyes as a
+  faint purple.
+
+  The fluorescent materials absorb this UV light
+  and re-emit it at longer wavelengths:
+    Quinine: emits at ~450 nm (blue)
+    Fluorescein (highlighter): emits at ~520 nm (green)
+    Riboflavin: emits at ~525 nm (yellow-green)
+
+  In every case: UV in (short wavelength, high
+  energy), visible light out (long wavelength,
+  lower energy). The difference in wavelength
+  between absorbed and emitted light is the
+  Stokes shift.
+
+  Where did the missing energy go? Into molecular
+  vibrations &mdash; heat. The molecule absorbs a
+  high-energy photon, rattles around for a few
+  nanoseconds (losing energy to vibration), and
+  then emits a lower-energy photon. Energy is
+  conserved. Nothing is free.
+
+Part 4: RANK THE BRIGHTNESS
+
+  Rank your four cups from brightest to dimmest
+  fluorescence:
+    1. ___
+    2. ___
+    3. ___
+    4. ___
+
+  The brightness depends on two things:
+    1. Quantum yield: what fraction of absorbed
+       photons result in emitted photons (vs. being
+       lost entirely to heat)
+    2. Concentration: how many fluorescent molecules
+       are in the solution
+
+  GFP has a quantum yield of approximately 0.79 &mdash;
+  meaning 79% of absorbed photons produce emitted
+  photons. This is remarkably high. Most fluorescent
+  molecules manage 10-40%. This is one reason GFP
+  is so useful: it is very bright for its size.
+
+Part 5: CONNECT TO GFP
+
+  Osamu Shimomura collected approximately 50,000
+  Aequorea victoria jellyfish from the waters
+  around Friday Harbor, Washington to isolate
+  enough GFP to study. The protein absorbs blue
+  light (395 nm and 475 nm) and emits green light
+  (509 nm). The Stokes shift you just observed in
+  your cups is the same phenomenon, just in a
+  biological context.
+
+  The power of GFP: because the gene for GFP can
+  be attached to any other gene, scientists can
+  make any protein in any cell glow green. Want to
+  see where a specific protein goes inside a living
+  cell? Fuse its gene with the GFP gene. The cell
+  makes a glowing version of the protein. No dyes,
+  no fixation, no killing the cell. Just light.
+
+  Shimomura, Martin Chalfie, and Roger Tsien shared
+  the 2008 Nobel Prize in Chemistry for this work.
+  The fluorescence you just saw in tonic water is
+  the same physics that earned a Nobel Prize.</pre>
+
+    <hr>
+
+    <h3>TRY Session 2: &ldquo;Reentry Accuracy&rdquo;</h3>
+
+    <div class="session-meta">
+      <strong>Duration:</strong> 45 minutes<br>
+      <strong>Difficulty:</strong> Intermediate<br>
+      <strong>Departments:</strong> Physics, Aerospace Engineering, Mathematics<br>
+      <strong>Ages:</strong> 12+<br>
+      <strong>Materials Cost:</strong> &lt; $10<br>
+      <strong>What You Need:</strong> A marble or small ball bearing, a ramp (a ruler propped on a book works well, or a piece of cardboard bent into a chute), a protractor or angle-measuring app, a tape measure or ruler, a target zone marked on the floor (tape a 10 cm square of paper down), a notebook, and a calculator.
+    </div>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> Why small errors in angle produce large errors in landing position, why Carpenter&rsquo;s 25-degree yaw error at retrofire resulted in a 402 km overshoot, and the mathematical relationship between angular error and linear displacement at range. This is the fundamental problem of ballistic reentry: by the time you can measure where you are going to land, it is too late to correct.</p>
+
+    <p><strong>The Exercise:</strong></p>
+
+<pre>REENTRY ACCURACY: SMALL ANGLES, BIG MISSES
+
+Part 1: BUILD YOUR LAUNCHER
+
+  Create a ramp that launches a marble at a
+  consistent speed. The simplest version: prop a
+  30 cm ruler on a book (about 5 cm thick) to
+  create a shallow ramp. Release the marble from
+  the same point on the ramp every time to get
+  consistent launch speed.
+
+  Place your target zone on the floor, approximately
+  1 meter from the base of the ramp. Launch the
+  marble a few times and adjust the ramp height or
+  distance until the marble consistently lands on
+  or near the target.
+
+Part 2: INTRODUCE YAW ERROR
+
+  Now rotate your ramp by small angles. Do NOT
+  change the ramp height or marble release point &mdash;
+  only change the horizontal direction the ramp
+  points.
+
+  Use a protractor to measure the angle. Record
+  the landing position for each angle:
+
+    Angle  |  Landing offset from target
+    -------+---------------------------
+     0 deg |  ___ cm (should be ~0)
+     5 deg |  ___ cm
+    10 deg |  ___ cm
+    15 deg |  ___ cm
+    20 deg |  ___ cm
+    25 deg |  ___ cm  &lt;-- Carpenter&rsquo;s yaw error
+
+Part 3: CALCULATE SENSITIVITY
+
+  For each angle, compute the ratio:
+    Sensitivity = offset (cm) / angle (degrees)
+
+  This tells you: for every degree of pointing
+  error, how far off-target does the marble land?
+
+  For small angles, the relationship is approximately
+  linear and follows the tangent function:
+    offset = distance * tan(angle)
+
+  At 1 meter distance and 25 degrees:
+    offset = 100 cm * tan(25 deg)
+           = 100 cm * 0.466
+           = 46.6 cm
+
+  Does your measured value match the prediction?
+
+Part 4: SCALE TO CARPENTER
+
+  Carpenter&rsquo;s retrorockets fired while the capsule
+  was at orbital velocity (7.8 km/s) at an altitude
+  of approximately 260 km. The retrofire was intended
+  to reduce velocity by approximately 100 m/s in the
+  exact retrograde direction (opposite to travel).
+
+  With a 25-degree yaw error, the retrograde
+  component of the deceleration was:
+    actual = intended * cos(25 deg)
+           = 100 * 0.906
+           = 90.6 m/s
+
+  So only 90.6% of the intended deceleration was
+  applied in the correct direction. The remaining
+  9.4% was wasted as a lateral force that changed
+  the orbital plane slightly but did not slow the
+  spacecraft for reentry.
+
+  The missing 9.4 m/s of deceleration meant the
+  spacecraft entered the atmosphere at a shallower
+  angle, traveling farther downrange before reaching
+  the surface. Combined with the 3-second late
+  retrofire (adding ~23 km at orbital velocity),
+  the total overshoot was 402 km.
+
+  Your marble experiment demonstrates the same
+  principle at tabletop scale: pointing error
+  translates directly to landing error, and the
+  conversion factor grows with distance.
+
+Part 5: DISCUSSION
+
+  Questions to consider:
+  - Why did Mercury have no way to correct course
+    after retrofire? (No remaining thrust capability
+    sufficient for course corrections during reentry)
+  - How do modern spacecraft handle this problem?
+    (GPS-guided lifting reentry, reaction control
+    thrusters for roll steering during descent)
+  - What is the equivalent problem in everyday life?
+    (Throwing a ball &mdash; a small error in release angle
+    produces a large error in landing point. The
+    farther the throw, the larger the miss.)</pre>
+
+    <hr>
+
+    <h3>TRY Session 3: &ldquo;Dual-Medium Flight&rdquo;</h3>
+
+    <div class="session-meta">
+      <strong>Duration:</strong> 30 minutes<br>
+      <strong>Difficulty:</strong> Beginner<br>
+      <strong>Departments:</strong> Marine Biology, Aerospace Engineering, Physics<br>
+      <strong>Ages:</strong> 8+<br>
+      <strong>Materials Cost:</strong> &lt; $5<br>
+      <strong>What You Need:</strong> Paper (several sheets for iteration), tape, paperclips, a bathtub or large basin of water, a towel, and optionally some wax (crayon or candle) for waterproofing.
+    </div>
+
+    <p><strong>What You&rsquo;ll Learn:</strong> Why it is fiendishly difficult to build something that works well in both air and water, why the Rhinoceros Auklet&rsquo;s wings are a compromise between flight and diving, and how this same dual-medium design challenge connects to Scott Carpenter&rsquo;s career transition from astronaut (moving through near-vacuum and atmosphere) to aquanaut (working underwater in the SEALAB program). Design tradeoffs are everywhere in engineering and biology.</p>
+
+    <p><strong>The Exercise:</strong></p>
+
+<pre>DUAL-MEDIUM FLIGHT: AIR AND WATER
+
+Part 1: THE DESIGN CHALLENGE
+
+  Build a small craft (from paper, tape, and
+  paperclips) that can:
+    1. Fly through the air (thrown like a paper
+       airplane) for at least 2 meters
+    2. Float on water without sinking for at
+       least 30 seconds
+    3. Move forward on water when blown on
+       (simulating swimming)
+
+  You will quickly discover that the features
+  that make a good paper airplane (thin, light,
+  large wing area, sharp leading edges) are
+  terrible for water (thin paper absorbs water,
+  light craft have no stability in waves, large
+  wings create drag).
+
+Part 2: BUILD AND TEST &mdash; ITERATION 1
+
+  Start with a standard paper airplane design.
+  Fly it. Measure the distance.
+  Now place it on water. What happens?
+
+  Most paper airplanes:
+    - Absorb water within seconds
+    - Tip over (no hull stability)
+    - Cannot move forward on water
+
+  Record:
+    Flight distance: ___ meters
+    Float time before sinking: ___ seconds
+    Water forward movement: ___ cm
+
+Part 3: MODIFY AND TEST &mdash; ITERATION 2
+
+  Now modify your design. Options:
+    - Wax the bottom for waterproofing (rub a
+      crayon or candle heavily on the underside)
+    - Add a wider base for water stability (fold
+      a hull shape into the bottom)
+    - Add paperclip ballast low on the hull for
+      stability
+
+  But each modification has a cost:
+    - Wax adds weight, reducing flight distance
+    - A hull shape adds drag in air
+    - Ballast changes the center of gravity
+
+  Fly it. Float it. Record the numbers.
+    Flight distance: ___ meters
+    Float time: ___ seconds
+    Water forward movement: ___ cm
+
+Part 4: THE AUKLET&rsquo;S COMPROMISE
+
+  The Rhinoceros Auklet faces exactly this
+  tradeoff, but with millions of years of
+  natural selection doing the optimization
+  instead of you and your paperclips.
+
+  In air: density = 1.2 kg/m^3
+    Wings need large area, lightweight structure,
+    high aspect ratio for efficient lift.
+    Optimal: long, narrow wings (like an albatross)
+
+  In water: density = 1,025 kg/m^3
+    Wings need small area, strong structure, low
+    aspect ratio for thrust without excessive drag.
+    Optimal: short, stiff flippers (like a penguin)
+
+  The auklet&rsquo;s wings are neither long and narrow
+  nor short and stubby. They are medium-sized,
+  medium-stiffness, medium-aspect-ratio wings
+  that work adequately in both media. The result:
+  auklets can fly (unlike penguins) and can dive
+  to 57 meters (unlike albatrosses). But they are
+  mediocre at both compared to specialists.
+
+Part 5: CONNECT TO CARPENTER
+
+  Scott Carpenter made the same transition as the
+  auklet &mdash; from air (spacecraft) to water (SEALAB).
+  After his Mercury flight, NASA did not assign him
+  to another mission (the fuel management issues on
+  MA-7 concerned flight directors). Carpenter
+  transitioned to the Navy&rsquo;s SEALAB program, where
+  he spent 30 days living and working on the
+  seafloor at 62 meters depth.
+
+  The spacecraft and the underwater habitat share
+  design challenges:
+    - Sealed atmosphere (life support)
+    - Pressure differential (vacuum outside a
+      spacecraft, water pressure outside SEALAB)
+    - Communication difficulty (radio in space,
+      helium-distorted voice underwater)
+    - Hostile exterior environment (radiation and
+      vacuum in space, pressure and cold underwater)
+
+  Carpenter&rsquo;s dual-medium career mirrors the
+  auklet&rsquo;s dual-medium wings: a generalist
+  approach that provided unique perspective at
+  the cost of specialization.</pre>
+
+    <hr>
+
+    <h2>DIY Projects</h2>
+
+    <h3>DIY 1: &ldquo;GFP Extraction Simulation&rdquo;</h3>
+
+    <div class="session-meta">
+      <strong>Duration:</strong> 1-2 hours<br>
+      <strong>Difficulty:</strong> Beginner<br>
+      <strong>Departments:</strong> Chemistry, Marine Biology<br>
+      <strong>What You Need:</strong> Unflavored gelatin (2-3 packets), green food coloring, jellyfish-shaped molds (or any small mold), cheesecloth or fine mesh strainer, warm water, bowls, and a refrigerator.
+    </div>
+
+    <p><strong>What You&rsquo;ll Build:</strong> A physical simulation of Shimomura&rsquo;s GFP extraction process, using green-dyed gelatin as a stand-in for jellyfish tissue containing fluorescent protein. You will make the &ldquo;jellyfish,&rdquo; extract the &ldquo;protein&rdquo; (green dye), and learn about the patience and scale required to do real protein biochemistry.</p>
+
+    <p><strong>The Build:</strong> Prepare the gelatin according to package directions but add green food coloring &mdash; enough to make it deeply green. Pour into molds and refrigerate until set. These are your jellyfish. Make at least 10 &mdash; Shimomura used 50,000, and you need to appreciate the absurdity of scale even at your reduced version.</p>
+
+    <p>Once set, squeeze and mash the gelatin through cheesecloth over a bowl. The green liquid that passes through is your &ldquo;extract&rdquo; &mdash; the analog of the crude protein solution Shimomura obtained by squeezing jellyfish tissue. Notice how much gelatin you started with versus how much green liquid you collected. The ratio is terrible. Most of the mass is structural (gelatin = collagen analog) and you are extracting a tiny fraction of dissolved colorant.</p>
+
+    <p>In Shimomura&rsquo;s real process, the next steps were ammonium sulfate precipitation (to concentrate the proteins), column chromatography (to separate GFP from the hundreds of other proteins in the extract), and extensive dialysis and re-purification. Each step loses some of the target protein. Starting with 50,000 jellyfish, Shimomura obtained a few milligrams of pure GFP. The ratio of input to output is staggering, and it is a testament to both the difficulty of protein biochemistry and the determination of the researcher.</p>
+
+    <p><strong>Connect:</strong> This project teaches the fundamental concept of purification yield &mdash; how much of your target molecule you recover from a complex mixture. It is the same concept that governs drug manufacturing, water treatment, and ore refining. Start with a lot, end with a little, but that little is precious.</p>
+
+    <hr>
+
+    <h3>DIY 2: &ldquo;Build an S-Meter&rdquo;</h3>
+
+    <div class="session-meta">
+      <strong>Duration:</strong> 2-3 hours<br>
+      <strong>Difficulty:</strong> Intermediate (requires basic soldering)<br>
+      <strong>Departments:</strong> Physics, Aerospace Engineering<br>
+      <strong>What You Need:</strong> An AM radio with an accessible circuit board (thrift store radios work well, $2-5), an LED bar graph module (10-segment, $2-3), a general-purpose NPN transistor (2N3904 or equivalent), two 10K resistors, a 100K potentiometer (trimmer), a small piece of perfboard, solder and soldering iron, wire, and a 9V battery with clip.
+    </div>
+
+    <p><strong>What You&rsquo;ll Build:</strong> A signal strength meter &mdash; the S-meter &mdash; that displays the strength of received AM radio signals as a bar graph. This is the radio circuit for this mission, connecting to the Mercury tracking network&rsquo;s continuous monitoring of signal strength between the capsule and ground stations.</p>
+
+    <p><strong>The Build:</strong> The key to this project is the AGC (Automatic Gain Control) voltage inside the AM radio. Every AM receiver has an AGC circuit that adjusts the amplifier gain based on signal strength: strong signals produce a high AGC voltage that reduces gain (preventing distortion), and weak signals produce a low AGC voltage that increases gain (boosting sensitivity). The AGC voltage is a direct, continuous measurement of signal strength.</p>
+
+    <p>Open the radio and find the AGC line. In most simple AM radios, it is a DC voltage (typically 0.5-3V) that feeds back to the RF or IF amplifier stages. Look for a filter capacitor (often 10 uF or larger) connected to the detector diode &mdash; the voltage across this capacitor is usually the AGC voltage. If you have a multimeter, tune to a strong station and measure DC voltages around the detector stage until you find one that varies with signal strength.</p>
+
+    <p>Connect the AGC tap point to the base of the NPN transistor through a 10K resistor. Connect the transistor&rsquo;s collector to the LED bar graph through current-limiting resistors. Adjust the 100K trimmer potentiometer to set the sensitivity so that a strong local station lights most of the LEDs and a weak distant station lights only one or two.</p>
+
+    <p>Now tune across the AM band. Watch the LED bar graph respond to each station&rsquo;s signal strength. Strong local stations light the full bar. Weak stations barely register. Between stations, the bar goes dark &mdash; just noise.</p>
+
+    <p><strong>Connect:</strong> During Mercury missions, ground stations around the world monitored signal strength continuously. As the spacecraft orbited, it would pass in and out of range of each station. The signal would rise as the capsule approached, peak at closest approach, and fade as it receded. Tracking network controllers used S-meters exactly like yours (but more sophisticated) to determine when they had a solid communication link and when they were about to lose contact. The forty minutes of silence after Carpenter&rsquo;s overshoot landing was an S-meter reading of zero from every station &mdash; no signal, no contact, no way to know if the astronaut was alive or dead.</p>
+
+    <hr>
+
+    <h3>DIY 3: &ldquo;Underwater Viewer&rdquo;</h3>
+
+    <div class="session-meta">
+      <strong>Duration:</strong> 1 hour<br>
+      <strong>Difficulty:</strong> Beginner<br>
+      <strong>Departments:</strong> Marine Biology, Environmental Science, Physics<br>
+      <strong>What You Need:</strong> A section of PVC pipe (10-15 cm diameter, 30-40 cm long, $3-5 from hardware store), a piece of clear acrylic or glass (slightly larger than the pipe diameter), waterproof silicone sealant ($4-6), sandpaper (medium grit), and optionally flat black spray paint for the interior.
+    </div>
+
+    <p><strong>What You&rsquo;ll Build:</strong> A simple underwater viewer that eliminates surface glare and allows clear observation of shallow marine and freshwater life. The same principle that makes this work &mdash; eliminating the air-water interface from your line of sight &mdash; is the same problem Carpenter faced when trying to observe Earth&rsquo;s surface through his spacecraft window: the window itself introduces reflections and distortions that compete with the view.</p>
+
+    <p><strong>The Build:</strong> Sand the inside of one end of the PVC pipe to roughen the surface. Apply waterproof silicone sealant around the sanded end and press the clear acrylic or glass firmly against it. Let it cure for 24 hours. This creates a watertight window at one end of the tube.</p>
+
+    <p>Optionally, paint the interior of the tube flat black (above the glass, on the dry side). This eliminates internal reflections, improving contrast and clarity &mdash; the same reason camera lens barrels are painted matte black.</p>
+
+    <p>To use: submerge the glass end in shallow water (tide pools, creek edges, lake shallows) and look through the open end. The glass-to-water interface eliminates the surface glare that normally obscures your view. Without the viewer, you see reflections of the sky and trees on the water surface. With the viewer, you see directly through to the bottom.</p>
+
+    <p>You will immediately notice how much more life exists in shallow water than you ever suspected. Small fish, invertebrates, algae patterns, sand ripple structures &mdash; all invisible from above the surface without this tool.</p>
+
+    <p><strong>Connect:</strong> Carpenter reported being captivated by the view from his spacecraft window &mdash; he could see ocean color variations, cloud structures, land features, and the airglow layer at the limb of the Earth. His window, like your underwater viewer, provided a clear view into a realm normally obscured by an interface (the atmosphere, in his case). The problem was the same in both cases: internal reflections from the window competed with external observations. Carpenter&rsquo;s window had an anti-reflective coating; your viewer uses geometry (the tube blocks ambient light from reaching your eyes) to solve the same problem.</p>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <h3>FoxCompute: GFP as a Computational Tool</h3>
+
+    <p>Green fluorescent protein transformed biology from a discipline of dead, fixed specimens to a discipline of living, dynamic observation. Before GFP, if you wanted to see where a protein was inside a cell, you had to kill the cell, fix it in formaldehyde, slice it thin, stain it with antibodies, and examine it under a microscope. You saw a snapshot of a dead moment. With GFP, you fuse the gene for your protein of interest with the GFP gene, and the cell manufactures a glowing version of the protein. You watch it move, accumulate, disperse, and interact with other proteins in real time, in a living cell.</p>
+
+    <p>This is fundamentally a computational problem: biological neural networks are too complex to model from fixed snapshots. You need dynamic data &mdash; where proteins go, when they get there, how long they stay. GFP provides that data stream. FoxCompute&rsquo;s interest is in the computational infrastructure required to process the terabytes of fluorescence microscopy data that modern biology generates daily. Each confocal microscopy stack is a 3D volume over time &mdash; a 4D dataset. Analyzing thousands of these datasets to understand protein trafficking, gene expression dynamics, or neural circuit activity requires exactly the kind of high-throughput computing that FoxCompute is designed to provide.</p>
+
+    <h3>FoxFiber: Fluorescence-Based Fiber Optic Sensors</h3>
+
+    <p>Fiber optics and fluorescence share a deep physical connection: both involve the controlled propagation and manipulation of light. FoxFiber&rsquo;s pathway from this mission follows the development of fluorescence-based fiber optic sensors for environmental monitoring. The concept: coat the tip of an optical fiber with a fluorescent material whose emission properties change in response to an environmental variable (pH, temperature, dissolved oxygen, heavy metal concentration). Send excitation light down the fiber, collect the fluorescent emission returning up the same fiber, and measure the spectral shift or intensity change.</p>
+
+    <p>GFP-inspired materials &mdash; synthetic fluorophores modeled on GFP&rsquo;s chromophore structure &mdash; offer advantages over traditional sensor dyes: they can be engineered for specific spectral responses, they are photostable (resistant to bleaching), and they can be tuned to respond to specific analytes. A network of these sensors deployed on fiber optic cables in Puget Sound could provide real-time, continuous water quality monitoring at a fraction of the cost of traditional sampling methods. Each sensor tip is a point measurement; the fiber network provides spatial coverage. The data flows back at the speed of light to a central FoxCompute node for processing and alerting.</p>
+
+    <h3>Fox CapComm: Signal Monitoring Across Distributed Networks</h3>
+
+    <p>The S-meter circuit in this mission&rsquo;s DIY project is a miniature version of what Fox CapComm does at scale: measure communication strength across distributed networks. During Mercury missions, the tracking network consisted of ground stations distributed around the Earth, each monitoring signal strength from the orbiting capsule. When the capsule was overhead, signal was strong. When it was over the horizon, signal was zero. The network of stations provided overlapping coverage so that at least one station could communicate with the capsule at any time &mdash; except during reentry blackout, when the plasma sheath around the capsule blocked all radio frequencies.</p>
+
+    <p>Fox CapComm&rsquo;s distributed network monitoring follows the same architecture: multiple measurement points, overlapping coverage areas, continuous signal strength assessment, and automated alerting when coverage gaps appear. The difference is medium &mdash; radio waves for Mercury, fiber optic and wireless protocols for CapComm &mdash; but the problem is identical: maintain continuous communication across a network of nodes in a changing environment. Carpenter&rsquo;s 40-minute communications blackout after his overshoot landing is the scenario Fox CapComm is designed to prevent: a node goes silent, and the network must determine whether the node has failed or merely moved out of range.</p>
+
+    <h3>FoxWorks: Sealed Habitat Engineering</h3>
+
+    <p>Carpenter&rsquo;s transition from Mercury astronaut to SEALAB aquanaut connects directly to FoxWorks&rsquo; interest in sealed habitat engineering. Both a spacecraft and an underwater habitat are pressure vessels containing a breathable atmosphere in an environment that would kill the occupants instantly if the seal failed. The engineering challenges are remarkably similar: atmospheric composition management (oxygen, CO<sub>2</sub> scrubbing, humidity), thermal regulation (the spacecraft faces extreme heat and cold; the underwater habitat faces constant cold), waste management, food storage, water recycling, and psychological design (small spaces, limited outside views, isolation from the natural environment).</p>
+
+    <p>FoxWorks&rsquo; pathway from SEALAB leads toward modular sealed habitat design that can be adapted for multiple hostile environments. The same life support module that maintains atmosphere in an underwater habitat could, with modified pressure specifications, maintain atmosphere in a space station module, a disaster relief shelter, or a clean room for semiconductor manufacturing. The seal is the hard part. Once you can maintain a pressure differential and control the atmosphere inside, the exterior environment is secondary. Carpenter understood this intuitively &mdash; his MA-7 capsule and his SEALAB berth were, from a life support perspective, the same engineering problem in different wrappers.</p>
+
+    <hr>
+
+    <h2>Rosetta Connections</h2>
+
+    <h3>Fluorescence: The Bridge Between Physics, Chemistry, and Biology</h3>
+
+    <p>Fluorescence is the rare phenomenon that lives equally in three departments without requiring translation. The physics department describes it as photon absorption and emission with a Stokes shift (quantum mechanics of electronic transitions in chromophore molecules). The chemistry department describes it as the behavior of specific molecular structures &mdash; conjugated pi-electron systems in aromatic rings &mdash; that absorb and emit at characteristic wavelengths determined by their electronic structure. The biology department describes it as a tool: fuse GFP to a protein of interest and watch where it goes in a living cell.</p>
+
+    <p>These are not three descriptions of three different things. They are three descriptions of one thing, at three levels of abstraction. The electron does not know whether it belongs to physics, chemistry, or biology. It absorbs a photon and emits another photon, indifferent to departmental boundaries. This is the Rosetta connection: fluorescence is a single phenomenon that, understood fully, requires all three departments simultaneously. A student who can explain GFP from the quantum level (why those specific wavelengths) through the chemical level (why that specific molecular structure) to the biological level (why this tool revolutionized cell biology) has achieved genuine cross-disciplinary understanding.</p>
+
+    <h3>Dual-Medium Locomotion: The Bridge Between Aerospace and Marine Biology</h3>
+
+    <p>The Rhinoceros Auklet flies through air and swims through water using the same wings. Scott Carpenter flew through space and worked underwater in the same career. The Mercury capsule survived vacuum and then ocean submersion. In each case, the challenge is the same: designing a system (biological or engineered) that functions in two media with vastly different physical properties.</p>
+
+    <p>The engineering constraints are directly transferable. Wing loading in air (mass per unit wing area) determines flight speed and maneuverability. Flipper loading in water (thrust per unit flipper area) determines dive depth and swimming efficiency. The auklet&rsquo;s wings represent a Pareto-optimal compromise on the tradeoff frontier between air performance and water performance. No design can be best in both &mdash; the physics of the two media are too different. But a design can be adequate in both, and adequacy in two environments beats excellence in one when your survival depends on both.</p>
+
+    <h3>Signal Strength Measurement: The Bridge Between Radio Engineering and Ecological Monitoring</h3>
+
+    <p>The S-meter measures signal strength. In radio engineering, the signal is electromagnetic radiation from a transmitter. In ecological monitoring, the signal might be the acoustic call of a species (detected by a hydrophone), the fluorescence intensity of a water sample (detected by a fiber optic sensor), or the population density of a species (detected by survey counts). In every case, the measurement problem is the same: extract a meaningful signal from noise, quantify its strength, track changes over time, and alert when the signal drops below a threshold.</p>
+
+    <p>The Mercury tracking network&rsquo;s S-meters and a modern marine acoustic monitoring network are solving the same problem with different sensors. Both need spatial coverage (multiple stations), temporal continuity (always monitoring), automated detection (recognizing signal from noise), and alert thresholds (when to notify a human). The Rosetta connection is the measurement framework itself &mdash; not the specific phenomenon being measured, but the architecture of distributed, continuous, threshold-based monitoring. Build it once, apply it to radio signals, whale calls, water fluorescence, or seabird populations. The architecture is the same.</p>
+
+  </div>
+  <div class="nav-card">
+    <div><div class="nav-label">&larr; Back</div><a href="index.html">Mission 1.22</a></div>
+    <div style="text-align:right;"><div class="nav-label">Series &rarr;</div><a href="../index.html">All Missions</a></div>
+  </div>
+</main>
+<footer>
+  <p>Mission 1.22 &bull; Mercury-Atlas 7 / Aurora 7 &bull; <a href="../index.html">NASA Mission Series</a></p>
+</footer>
+</body>
+</html>
