@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 56&deg; &mdash; Lemolo &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .gender-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #880E4F;
+      color: #F8BBD0;
+      border: 1px solid #AD1457;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>056 &mdash; Lemolo</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>12th Consecutive Folk-Adjacent &mdash; The Dream Haze &mdash; Gender Parity in Folk Zone</h3>
+      <p>
+        Lemolo at degree 56&deg; extends the folk-adjacent record to
+        <strong>twelve consecutive degrees</strong> (45&ndash;56). Dreampop/indie folk duo,
+        <strong>Capitol Hill</strong> &mdash; first triple neighborhood (41, 54, 56).
+        <strong>Meagan Grandall</strong> and <strong>Kendra Cox</strong> &mdash;
+        first all-female duo. Named after <strong>Lemolo Falls</strong> in Oregon
+        (Chinook Jargon: &ldquo;wild&rdquo;).
+        E=2 rises to 18. <strong>16th non-male artist</strong> (~28.1%).
+        Folk zone reaches <strong>50% gender parity</strong>.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">56&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Lemolo</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Indie Folk</span>
+          <span class="label-badge">Self / Tender Loving Empire</span>
+          <span class="neighborhood-badge">Capitol Hill (3rd)</span>
+          <span class="record-badge">12th Folk-Adjacent</span>
+          <span class="gender-badge">16th Non-Male</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- PNW Corridor Card -->
+        <div class="web-card">
+          <h4>The PNW Corridor: Portland &ndash; Seattle via Tender Loving Empire</h4>
+          <p>
+            <strong>Tender Loving Empire</strong> (Portland-based independent label)
+            released <em>Swirl</em> (2014). Named after <strong>Lemolo Falls</strong>
+            in Oregon&rsquo;s Umpqua National Forest &mdash; a Chinook Jargon word
+            meaning &ldquo;wild.&rdquo; The duo bridges Seattle and Portland through
+            the I-5 corridor: the PNW as a single creative market.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Dream in the Falls</h2>
+          <p>
+            <strong>Lemolo</strong> is a dreampop/indie folk duo based in
+            <strong>Seattle, Washington</strong>, in the <strong>Capitol Hill</strong>
+            neighborhood. The duo consists of <strong>Meagan Grandall</strong>
+            (vocals, guitar, keyboards) and <strong>Kendra Cox</strong>
+            (drums, percussion, vocals). Lemolo fuses folk songwriting foundations
+            with dreampop atmosphere: heavy reverb, layered vocals, shimmering
+            electronic textures, and a sense of vast sonic space.
+          </p>
+          <p>
+            Named after <strong>Lemolo Falls</strong> in Oregon&rsquo;s Umpqua
+            National Forest &mdash; the word derives from <strong>Chinook Jargon</strong>,
+            meaning &ldquo;wild&rdquo; or &ldquo;untamed.&rdquo; The name plants
+            the duo&rsquo;s identity in the Pacific Northwest landscape: waterfalls,
+            old-growth forests, and the natural reverb of falling water.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Kaleidoscope: The Debut (2012)</h2>
+          <p>
+            <strong><em>The Kaleidoscope</em></strong> (2012, self-released) &mdash;
+            folk songs refracted through dreampop production. A kaleidoscope refracts
+            a single image into overlapping patterns; Lemolo&rsquo;s sound refracts
+            the voice through reverb and layering into shimmering multiplicities.
+            Acoustic guitar anchors; electronic textures rotate.
+          </p>
+          <p>
+            Self-released via Bandcamp. No label, no distribution network.
+            The debut as self-birth: two people making an album and putting it
+            into the world themselves. <strong>KEXP</strong> sessions and
+            <strong>The Stranger</strong> coverage provided initial visibility.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Swirl: Tender Loving Empire (2014)</h2>
+          <p>
+            <strong><em>Swirl</em></strong> (2014, <strong>Tender Loving Empire</strong>)
+            deepened the dreampop production while maintaining the folk core. The
+            title suggests water motion &mdash; swirl, vortex, spiral. Water imagery
+            connects to the band name (Lemolo Falls), to the PNW landscape, and to
+            the production aesthetic: the swirl of reverb around the voice.
+          </p>
+          <p>
+            Coverage from <strong>KEXP</strong>, <strong>The Stranger</strong>,
+            <strong>Seattle Weekly</strong>. The Portland label extended reach
+            along the I-5 corridor &mdash; the PNW as a single creative market.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Today, I Am Well (2018)</h2>
+          <p>
+            <strong><em>Today, I Am Well</em></strong> (2018, self-released) &mdash;
+            a return to independence after the Tender Loving Empire partnership.
+            The title is present-tense affirmation: not &ldquo;I was well&rdquo;
+            or &ldquo;I will be well&rdquo; but <em>today</em>, specifically,
+            in this moment. The comma isolates the temporal marker. The declaration
+            must be renewed each day.
+          </p>
+          <blockquote>
+            Three albums across seven years &mdash; identical arc to
+            Shelby Earl (degree 55): three albums, seven years, widening
+            intervals. Two consecutive folk-adjacent degrees with
+            mirrored discographic structures.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Dream Haze</h4>
+              <div class="level advanced">Advanced &mdash; 57th Acoustic Element</div>
+              <p>
+                Reverb-drenched layered vocals over folk-rooted instrumentation,
+                where the boundaries between voice, room, and electronic texture
+                dissolve into a single luminous field. Not the cathedral
+                harmony&rsquo;s precision (53) or the ember glow&rsquo;s
+                steady warmth (55) &mdash; the atmospheric dissolution where
+                two voices become weather the listener moves through rather
+                than listens to from outside.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Duo Collective</h4>
+              <div class="level advanced">Advanced &mdash; 57th Artist-City Pattern</div>
+              <p>
+                Two-person creative unit operating as a single organism.
+                Every decision negotiated between two, not a hierarchy of
+                one or a democracy of many. The constraint of two people
+                generates the aesthetic: the layered production exists because
+                two people want to sound like a waterfall. The duo IS the
+                creative practice.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Borrowed Landscape</h4>
+              <div class="level intermediate">Intermediate &mdash; 56th Deployment</div>
+              <p>
+                The ache of naming yourself after a place that is culturally
+                yours but geographically distant. Lemolo Falls is in Oregon;
+                the duo is in Seattle. The word &ldquo;Lemolo&rdquo; comes from
+                Chinook Jargon, a dead trade language. Three layers of borrowing:
+                word, waterfall, sound. The blue note resonates in each gap.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>12th Consecutive Folk-Adjacent</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 37</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48), Folk Punk (49),
+                Indie Folk (50), Indie Folk (51), Folk/Rock (52), Indie Folk (53),
+                Folk (54), Singer-Songwriter (55), Indie Folk (56). Twelve degrees.
+                Indie Folk returns &mdash; fifth use in the streak.
+                The folk-adjacent duodecad.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>The Kaleidoscope</h4>
+              <div class="disco-years">2012 &middot; Self-released</div>
+              <p>
+                Debut. Folk songs refracted through dreampop.
+                Reverb, layered vocals, electronic shimmer.
+                Bandcamp distribution. KEXP sessions.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Swirl</h4>
+              <div class="disco-years">2014 &middot; Tender Loving Empire</div>
+              <p>
+                Portland label. PNW corridor. Refined
+                dreampop-folk production. Water imagery.
+                KEXP, The Stranger, Seattle Weekly.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Today, I Am Well</h4>
+              <div class="disco-years">2018 &middot; Self-released</div>
+              <p>
+                Return to independence. Present-tense
+                affirmation. Four-year gap. The duo in
+                full command of their atmosphere.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">55&deg;</span>
+              <strong>Shelby Earl</strong> &mdash; Consecutive E=2 folk-adjacent.
+              First back-to-back E=2 in the folk zone. Ember glow (55) yields
+              to dream haze (56). Both non-male. Both three albums across
+              seven years. The quiet register whispers twice.
+            </li>
+            <li>
+              <span class="ref-degree">54&deg;</span>
+              <strong>Ivan &amp; Alyosha</strong> &mdash; Capitol Hill duo mirror.
+              Same neighborhood, same format (duo), different everything else:
+              male-fronted vs. all-female, E=3 vs. E=2, fraternal jangle vs.
+              dream haze. Capitol Hill sustains both.
+            </li>
+            <li>
+              <span class="ref-degree">53&deg;</span>
+              <strong>Fleet Foxes</strong> &mdash; Atmospheric folk lineage.
+              Both Indie Folk. Both build immersive environments.
+              Fleet Foxes: vocal arrangement as architecture.
+              Lemolo: electronic processing as weather.
+            </li>
+            <li>
+              <span class="ref-degree">50&deg;</span>
+              <strong>Mirah</strong> &mdash; Electronic elements in folk.
+              Both Indie Folk, both E=2, both non-male. Mirah&rsquo;s
+              intimate architecture adds spatial depth; Lemolo&rsquo;s
+              dream haze adds atmospheric depth.
+            </li>
+            <li>
+              <span class="ref-degree">45&deg;</span>
+              <strong>Damien Jurado</strong> &mdash; Folk zone origin.
+              The murmur (45) to the dream haze (56): twelve degrees from
+              lo-fi whisper to reverb-saturated haze. Both E=2.
+              The folk zone&rsquo;s expanding production palette.
+            </li>
+            <li>
+              <span class="ref-degree">0&deg;</span>
+              <strong>Quincy Jones</strong> &mdash; Mercury orchestras to
+              dreampop duo atmosphere. Fifty-seven degrees of evolution.
+              At degree 56: two people, a guitar, drums, and a universe
+              of reverb.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">56&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">37</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2011&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>The Duo</h4>
+          <div class="stat-row">
+            <span class="stat-label">Meagan Grandall</span>
+            <span class="stat-value">Vocals, guitar, keys</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kendra Cox</span>
+            <span class="stat-value">Drums, vocals</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Self / TLE</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Folk-Adjacent Duodecad</h4>
+          <div class="stat-row">
+            <span class="stat-label">45&deg;</span>
+            <span class="stat-value">Jurado (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">46&deg;</span>
+            <span class="stat-value">Votolato (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">47&deg;</span>
+            <span class="stat-value">Pedro (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">48&deg;</span>
+            <span class="stat-value">Cahoone (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">49&deg;</span>
+            <span class="stat-value">Dawson (Folk Punk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">50&deg;</span>
+            <span class="stat-value">Mirah (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">51&deg;</span>
+            <span class="stat-value">Grand Arch. (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">52&deg;</span>
+            <span class="stat-value">Carlile (Folk/Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">53&deg;</span>
+            <span class="stat-value">Fleet Foxes (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">54&deg;</span>
+            <span class="stat-value">Ivan &amp; Alyosha (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">55&deg;</span>
+            <span class="stat-value">Earl (Singer-Songwriter)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">56&deg;</span>
+            <span class="stat-value">Lemolo (Indie Folk)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">18</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#57</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#57</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#56</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Gender Tracking</h4>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">16</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Male</span>
+            <span class="stat-value">41</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ratio</span>
+            <span class="stat-value">~28.1%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk Zone</span>
+            <span class="stat-value">6/12 = 50%</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Capitol Hill Triple</h4>
+          <div class="stat-row">
+            <span class="stat-label">41&deg;</span>
+            <span class="stat-value">Shawn Smith</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">54&deg;</span>
+            <span class="stat-value">Ivan &amp; Alyosha</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">56&deg;</span>
+            <span class="stat-value">Lemolo</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        Degree 56&deg; &mdash; Lemolo &mdash; Seattle 360 Engine &mdash; v1.49.192
+        <br>
+        Twelve consecutive folk-adjacent degrees. The dream haze. Named after
+        a waterfall in Oregon. Chinook Jargon for &ldquo;wild.&rdquo;
+        Two voices, one atmosphere. Today, they are well.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
