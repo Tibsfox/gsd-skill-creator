@@ -640,7 +640,7 @@ function draw() {
   }
 
   // === HUD — weather + celestial data ===
-  fill(255, 255, 255, 16); noStroke(); textSize(8); textFont('monospace'); textAlign(LEFT);
+  fill(200, 210, 220, 120); noStroke(); textSize(10); textFont('monospace'); textAlign(LEFT);
   var wxLine = wx.stationName + '  ' + wx.temp.toFixed(0) + '°C  ' + wx.description;
   var windLine = 'Wind ' + wx.windDir.toFixed(0) + '° ' + wx.windSpeed.toFixed(0) + 'km/h';
   var skyLine = (sky.isDay ? 'Sun ' + sky.sunAlt.toFixed(0) + '°' : 'Moon ' + sky.moonAlt.toFixed(0) + '° ph' + (sky.moonPhase * 100).toFixed(0) + '%');
