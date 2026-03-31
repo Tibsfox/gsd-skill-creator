@@ -1,0 +1,194 @@
+{
+  "degree": 54,
+  "species": "Red-breasted Sapsucker",
+  "scientific_name": "Sphyrapicus ruber",
+  "slug": "054-red-breasted-sapsucker",
+  "sound_type": "mewing cat-like call + irregular drumming",
+  "energy": 3,
+  "ecosystem": "mixed conifer / riparian forest",
+  "season": "resident with some altitudinal migration (year-round in PNW)",
+  "family": "Picidae",
+  "order": "Piciformes",
+  "csv_substitution": {
+    "original_species": "Clouded Salamander",
+    "original_scientific_name": "Aneides ferreus",
+    "reason": "SPS Part B engine is birds-and-mammals only. Red-breasted Sapsucker replaces Clouded Salamander, preserving the original old-growth forest habitat association. The Clouded Salamander is a lungless salamander of old-growth conifer forests, found beneath bark and in canopy crevices of standing and fallen trees. The Red-breasted Sapsucker occupies the same old-growth and mature conifer forests, drilling sap wells in living trees. Both species are intimately associated with old-growth forest structure and are year-round residents. Tenth consecutive CSV substitution replacing an amphibian-class species (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53, Clouded Salamander at 54). The engine reaches into the lungless salamander zone of the original CSV's amphibian belt.",
+    "preserved": ["old-growth / mature forest habitat", "year-round resident status"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Red-breasted Sapsuckers are year-round residents of mixed conifer and riparian forests throughout western Washington, from lowland alder stands to montane old-growth. Present in the Cascades, Olympics, and throughout the Puget Sound lowlands wherever suitable forest exists. Particularly common in riparian alder stands. Some altitudinal movement downslope in winter."
+  },
+  "taxonomy_note": {
+    "description": "Red-breasted Sapsucker is the 3rd PICIDAE in the engine -- the family returns after a 32-degree absence (last: degree 22, Northern Flicker). NEW GENUS Sphyrapicus enters (vs Colaptes for flickers). Sphyrapicus from Greek sphyra (hammer) + Latin picus (woodpecker) = 'hammer woodpecker.' ruber = Latin 'red,' referring to the entirely red head and breast. Formerly lumped with Yellow-bellied and Red-naped Sapsuckers as a single species; split in 1983. Two subspecies: S. r. ruber (northern, darker) and S. r. daggetti (southern, paler). PASSERIFORMES STREAK BROKEN at 16 -- first Piciformes since degree 22, first non-Passeriformes since degree 37 (Calliope Hummingbird, Apodiformes).",
+    "current_family": "Picidae",
+    "new_family": false,
+    "family_count_in_engine": 21,
+    "picidae_count_in_engine": 3,
+    "name_etymology": "Sphyrapicus = Ancient Greek sphyra (hammer) + Latin picus (woodpecker). The genus contains four North American species: S. ruber (Red-breasted), S. nuchalis (Red-naped), S. varius (Yellow-bellied), and S. thyroideus (Williamson's). ruber = Latin 'red,' the simplest possible descriptor for the bird's most striking feature. Full translation: 'Red hammer-woodpecker.' Gmelin described the species in 1788.",
+    "genus_note": "Sphyrapicus is new to the engine at degree 54. Previous Picidae entries were genus Colaptes (Northern Flicker, degrees 21-22). Sphyrapicus represents a fundamentally different woodpecker strategy: sap-extraction specialist vs. ground-foraging ant-eater. The two Picidae genera in the engine could not be more different in foraging ecology. Sphyrapicus may appear again if Williamson's Sapsucker or Red-naped Sapsucker enters later.",
+    "order_note": "Piciformes returns at degree 54, breaking the 16-degree Passeriformes streak (38-53). First Piciformes since degree 22. First non-Passeriformes since degree 37 (Apodiformes). After degree 54: 6 orders represented (Passeriformes, Piciformes, Apodiformes, Strigiformes, Pelecaniformes [herons reclassified], and now Piciformes confirmed returning). 47 of 55 entries (85.5%) are still Passeriformes.",
+    "family_position": "Picidae rises from 2 to 3 members at degree 54, tying with Trochilidae and Paridae. The 32-degree gap between Picidae entries (22 to 54) is the longest gap for any returning family in the engine. The new genus Sphyrapicus adds a new taxonomic dimension within the family."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "500-8,000 (across mewing call and broadband drumming percussion)",
+    "peak_energy_band_hz": "2,000-3,500 (mewing call peak energy)",
+    "song_frequency_hz": "Mew call: 1.5-4.0 kHz, peak energy 2.0-3.5 kHz. Squeal/wail call: 2.0-5.0 kHz. Irregular drumming: broadband percussion 500 Hz-8 kHz, shaped by substrate resonance.",
+    "song_duration_s": "Individual mew notes ~300-600 ms. Drumming bouts ~1-3 s. Drumming starts fast, slows, then accelerates -- the defining temporal pattern.",
+    "note_structure": "MEWING CALL + IRREGULAR DRUMMING: The Red-breasted Sapsucker's acoustic identity is defined by two sounds: (1) a mewing, cat-like, nasal descending call that sounds nothing like a typical woodpecker, and (2) an irregular drumming pattern that starts fast, decelerates, and then accelerates again, violating the metronomic regularity of other woodpeckers' drums.",
+    "note_types": "TWO primary acoustic modes: (1) MEW CALL -- nasal, descending, cat-like. The primary vocalization. (2) IRREGULAR DRUMMING -- starts fast, slows, accelerates. Species-diagnostic rhythm. Additional: squeal/wail call (agitation), soft chatter (close-range pair contact).",
+    "phrase_structure": "Mew calls given as single notes or loosely spaced series. Drumming bouts are discrete 1-3 second sequences with the characteristic tempo variation. Not rapid-fire like the Steller's Jay alarm or metronomic like the flicker drum.",
+    "timbre": "MEW CALL: nasal, buzzy, descending. Reminiscent of a cat's mew. DRUMMING: percussive, broadband, softer than larger woodpeckers. The drumming timbre varies with substrate -- softer on living wood, sharper on dead snags.",
+    "amplitude": "E=3 -- moderate energy. The mewing call carries a moderate distance through forest. The drumming is audible but not the overwhelming percussion of the Northern Flicker. Step down from E=4 (degree 53, Steller's Jay).",
+    "tempo": "Mew call: slow, spaced, contemplative. Drumming: the defining feature -- starts fast (~10-15 strikes/sec), decelerates (~5-8 strikes/sec), then accelerates again (~10-15 strikes/sec). This fast-slow-fast pattern is unique among PNW woodpeckers.",
+    "context": "Mew call given year-round by both sexes for contact and general communication. Drumming used for territorial proclamation and mate attraction, primarily in breeding season (March-June). Well-drilling sounds (distinct from drumming) are steady, quiet tapping associated with sap extraction, not territorial signaling.",
+    "regional_variation": "Two subspecies (ruber and daggetti) may show slight vocal differences, but this is not well-documented. The irregular drumming pattern appears consistent across the range.",
+    "key_property": "THE SAP-WELL RHYTHM -- the 55th acoustic element (species side). An irregular, stuttering drumming pattern (fast-slow-fast) combined with a mewing, cat-like call. Named 'the sap-well rhythm' for three resonances: (1) the physical rhythm -- the irregular drumming that violates metronomic expectation; (2) the ecological rhythm -- the patient cycle of drilling, leaving, returning, maintaining wells; (3) the community rhythm -- the sap wells pulse with life on the sapsucker's schedule, feeding dozens of species. The sap-well rhythm is arrhythmic percussion -- the jazz drummer of the engine."
+  },
+  "plumage": {
+    "overall": "Medium-sized woodpecker with entirely red head and breast, yellow belly, black-and-white barred back. The most colorful woodpecker in PNW forests. Clean three-zone color pattern: red head, black-and-white back, yellow belly.",
+    "diagnostic_mark": "ENTIRELY RED HEAD AND BREAST -- the Red-breasted Sapsucker's most recognizable field mark. No other PNW woodpecker has an entirely red head. The red covers the crown, nape, throat, and upper breast in a smooth, unbroken crimson field.",
+    "upperparts": "Back is black with white barring and white to yellowish-white spots forming 'braces' pattern. Wings black with white barring and prominent white wing patch.",
+    "underparts": "Upper breast red (continuous with head). Lower breast transitioning to yellow belly. Yellow extends through lower belly.",
+    "head": "Entirely red -- deep, rich crimson covering crown, nape, face, throat, and upper breast. Dark brown eyes. In nominate ruber (PNW populations), the red is uniform and deep; in daggetti (southern), paler with possible whitish mottling.",
+    "bill": "Straight, chisel-like, dark gray to black. A precision drilling tool adapted for both percussive drumming and systematic sap-well excavation.",
+    "tail": "Black with white barring on outer feathers. Stiff tail feathers serve as a prop during vertical climbing, braced against the trunk.",
+    "undertail_coverts": "Whitish to pale yellow.",
+    "wing_edges": "Black flight feathers with white barring. Prominent white wing patch visible at rest and in flight.",
+    "field_id": "Unmistakable in the Pacific Northwest. Medium size (20-22 cm), entirely red head and upper breast, yellow belly, black-and-white barred back, white wing patch, straight chisel bill. The only PNW woodpecker with a completely red head. Mewing cat-like call and irregular drumming confirm identification. Neat rows of sap wells on tree trunks are a behavioral field mark."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The sap-well rhythm -- the 55th acoustic element (species side): an irregular, stuttering drumming pattern that starts fast, slows, and accelerates again, combined with a mewing, cat-like call. Named 'the sap-well rhythm' for three resonances: (1) the physical rhythm -- the irregular drumming that violates the metronomic expectation set by other woodpeckers in the engine (the hammer at degree 21, resonant percussion at degree 22, both regular and powerful); (2) the ecological rhythm -- the patient cycle of drilling wells, leaving, returning, feeding, maintaining, a recurring rhythm of engineering and harvest; (3) the community rhythm -- the sap wells pulse with life on the sapsucker's schedule, creating a heartbeat for dozens of dependent species. The sap-well rhythm does not command the forest (corvid alarm, degree 53) or compete with the river (torrent-song, degree 52). It disrupts expectation through arrhythmia.",
+      "level": "foundational",
+      "department": "music-theory/song-form",
+      "college_path": ".college/music/theory/song-form/sap-well-rhythm/",
+      "examples": [
+        "Irregular drumming: starts at ~10-15 strikes/second, decelerates to ~5-8, then accelerates back to ~10-15. This fast-slow-fast pattern is unique among PNW woodpeckers and immediately separates the sapsucker from any other drummer in the forest.",
+        "Contrast with the hammer (degree 21) and resonant percussion (degree 22): the Northern Flicker drums at a steady 25 beats per second -- metronomic, overwhelming, a jackhammer. The sapsucker's drum stutters and lurches. The hammer is a metronome. The sap-well rhythm is rubato.",
+        "Contrast with the corvid alarm (degree 53): the alarm is cognitive vocalization -- contextual, learned, mimicked. The sap-well rhythm is arrhythmic percussion -- a tempo pattern that defies prediction. Cognition vs. rhythm as organizing principles.",
+        "The mewing call adds a vocal dimension unlike any previous Picidae entry. Where the flicker's wick-wick-wick was percussive and emphatic, the sapsucker's mew is nasal, soft, cat-like. A woodpecker that sounds like a kitten.",
+        "At degree 54, the engine's Picidae vocabulary expands from two elements (the hammer, resonant percussion) to three (plus the sap-well rhythm). The family now has rhythmic diversity: steady beat, groove reset, and rubato."
+      ],
+      "music_theory_parallel": "Rubato -- the expressive technique where the performer deliberately varies the tempo, speeding up and slowing down against the underlying pulse. Chopin's nocturnes are famous for rubato: the right hand floats freely while the left hand keeps time. The Red-breasted Sapsucker's drumming is rubato in the forest: where every other woodpecker plays in strict time (the flicker's metronomic 25 bps), the sapsucker pushes and pulls against the tempo. It starts fast, stretches the beats apart, then compresses them back together. The sap-well rhythm is the first rubato in the engine -- the first species whose percussive element is defined by tempo variation rather than tempo regularity."
+    },
+    {
+      "concept": "Picidae returns after 32 degrees -- the longest return gap for any family in the engine. Woodpeckers last appeared at degree 22 (Northern Flicker). The 32-degree absence makes the Red-breasted Sapsucker's entry a significant structural event. But this is not the same kind of woodpecker. The flicker was genus Colaptes -- a ground-foraging, ant-eating bird that drums on resonant dead wood for territorial proclamation. The sapsucker is genus Sphyrapicus -- a sap-extraction specialist that drills living trees for sustenance. Same family, entirely different ecological strategy. The engine's Picidae vocabulary was built on raw percussion (degrees 21-22). At degree 54, it adds sap engineering and irregular rhythm.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/picidae-returns/",
+      "examples": [
+        "32-degree gap between Picidae entries (22 to 54). The longest return gap for any family. Compare Parulidae's 18-degree gap (20 to 38) or Paridae's 41-degree gap (9 to 50).",
+        "Picidae rises from 2 to 3 members, tying with Trochilidae (3 hummingbirds) and Paridae (3 chickadees). Three families now have exactly 3 members each.",
+        "New genus Sphyrapicus vs. existing Colaptes. Two genera within the same family, two radically different foraging strategies: ground-foraging ant-eater vs. arboreal sap specialist.",
+        "The Passeriformes streak (16 consecutive, degrees 38-53) is broken by Piciformes. First non-Passeriformes since degree 37 (Apodiformes). The order diversity improves.",
+        "The engine now has the full Picidae spectrum from raw power (Pileated Woodpecker implied through the hammer) through percussion (Northern Flicker) to subtle engineering (Red-breasted Sapsucker)."
+      ],
+      "music_theory_parallel": "The percussion section expanding -- the engine already had the timpani (the hammer, degree 21) and the snare drum (resonant percussion, degree 22). Now it adds the brush kit -- a drummer playing with brushes instead of sticks, producing a softer, more textured, more rhythmically flexible sound. The sapsucker's irregular drum is the brush pattern that jazz drummers use behind ballads: not the crash and boom of the rock kit but the whisper and swish of the brush against the snare head. Same percussion section, entirely different voice."
+    },
+    {
+      "concept": "Keystone ecosystem engineering through sap wells -- the Red-breasted Sapsucker is the engine's first species whose primary ecological role is the physical creation of shared infrastructure. The sap wells are a keystone resource: a resource created by one species that dozens of other species depend upon. Hummingbirds feed on the sap. Warblers drink from the wells and catch attracted insects. Squirrels lick the sap. Insects aggregate at the wells. The abandoned nest cavities house bluebirds, flying squirrels, and other cavity nesters. The sapsucker physically modifies its environment in ways that create resources for the entire forest community.",
+      "level": "foundational",
+      "department": "ecology/mutualism",
+      "college_path": ".college/ecology/mutualism/sap-well-engineering/",
+      "examples": [
+        "Rufous Hummingbird (degree 35) closely associated: nests near active sap well trees, follows sapsuckers on maintenance rounds, defends well trees as territory. Critical early-spring sugar source before flowers bloom.",
+        "Anna's Hummingbird (degree 36) also visits sap wells. Other hummingbirds present in territory exploit the resource.",
+        "Warblers, squirrels, other woodpeckers, bees, wasps, flies, beetles, bats -- the sap wells create a micro-habitat that concentrates food for dozens of species.",
+        "Abandoned nest cavities used by Mountain Bluebirds, Northern Flying Squirrels, small owls, chickadees, and other secondary cavity nesters. The sapsucker's engineering extends from food to shelter.",
+        "Compare the Steller's Jay (degree 53): the jay is a sentinel -- providing information through alarm calls. The sapsucker is an engineer -- providing physical infrastructure through drilled wells. Information vs. infrastructure as ecosystem services."
+      ],
+      "music_theory_parallel": "The ostinato bass line -- a repeating musical figure in the lower register that other instruments build upon. The ostinato does not change; it provides the foundation. The melody, the harmony, the counterpoint -- all depend on the bass line being there, being consistent, being reliable. The sapsucker's sap wells are the ostinato: a steady, reliable, maintained resource that the entire forest community builds its activity around. The hummingbird's melody, the warbler's harmony, the squirrel's counterpoint -- all depend on the sapsucker's bass line. Remove the ostinato and the music collapses."
+    },
+    {
+      "concept": "The Rufous Hummingbird connection -- degree 35 and degree 54 linked by sap well dependency. The Rufous Hummingbird ('the thrum,' degree 35) and the Red-breasted Sapsucker ('the sap-well rhythm,' degree 54) are separated by 19 degrees in the engine but bound by one of the tightest ecological associations in Pacific Northwest forests. The hummingbird depends on sapsucker wells for early-spring sugar before flowers bloom. The hummingbird nests near sap well trees, follows sapsuckers on maintenance rounds, and defends wells as territory. The connection was implicit at degree 35 and becomes explicit at degree 54.",
+      "level": "foundational",
+      "department": "ecology/mutualism",
+      "college_path": ".college/ecology/mutualism/hummingbird-sapsucker-association/",
+      "examples": [
+        "Rufous Hummingbird arrival in PNW coincides with sapsucker's early-season well drilling. Not coincidence -- co-evolved timing. The hummingbird's migration schedule aligns with sap flow.",
+        "Hummingbirds place nests near active sap well trees -- proximity ensures access to the critical sugar resource during the energy-intensive nesting period.",
+        "Hummingbirds follow sapsuckers on maintenance rounds, visiting freshly drilled wells immediately after the sapsucker moves on. The sapsucker opens the well; the hummingbird harvests the overflow.",
+        "Hummingbirds defend sap well trees against other hummingbirds, treating the wells as part of their feeding territory. The three-gram bird defends the woodpecker's infrastructure.",
+        "The connection creates a hidden thread through the engine: degree 35 (thrum) to degree 54 (sap-well rhythm), separated by 19 degrees. The engine reveals the dependency only when both species are present."
+      ],
+      "music_theory_parallel": "The callback -- a musical passage later in a composition that references and reinterprets a theme from earlier. When Beethoven brings back the 'Ode to Joy' theme in the finale of the Ninth Symphony, the callback transforms the earlier statement by placing it in a new context. The Red-breasted Sapsucker is the callback to the Rufous Hummingbird: the hummingbird's entry (degree 35) established the thrum as a stand-alone phenomenon. The sapsucker's entry (degree 54) recontextualizes the thrum by revealing what sustains it -- the wells, the sap, the infrastructure. The callback changes the meaning of what came before."
+    },
+    {
+      "concept": "The most colorful woodpecker in PNW forests -- the Red-breasted Sapsucker's entirely red head and breast, yellow belly, and black-and-white barred back make it the most visually striking woodpecker in the Pacific Northwest. Where most woodpeckers wear red as an accent (a stripe, a patch, a crown streak), the sapsucker wears red as its primary identity. The red head is not a detail but a declaration -- a field of crimson that covers the entire head, nape, throat, and upper breast in unbroken color. The three-zone pattern (red/black-white/yellow) is unique among PNW woodpeckers and instantly diagnostic.",
+      "level": "intermediate",
+      "department": "ecology/identification",
+      "college_path": ".college/ecology/identification/sapsucker-plumage/",
+      "examples": [
+        "Entirely red head -- no other PNW woodpecker has this. The Pileated Woodpecker has a red crest; the flicker has a red mustache. The sapsucker's entire head is red.",
+        "Three-zone color pattern: red head, black-and-white barred back, yellow belly. A visual field mark visible at any angle.",
+        "Formerly lumped with Yellow-bellied and Red-naped Sapsuckers until 1983 split. Head pattern was a key criterion: Red-breasted has uniformly red head; Red-naped has red crown + black-bordered red throat + white face stripes.",
+        "Two subspecies: nominate ruber (PNW, deeper red, more uniform) and daggetti (southern, paler, possible whitish mottling). PNW birds are the deepest-red form.",
+        "The structural coloration of the Steller's Jay (degree 53) is blue from light scattering. The sapsucker's red is pigmentary -- carotenoid-based, not structural. Two different optical mechanisms producing two of the most vivid colors in PNW forests."
+      ],
+      "music_theory_parallel": "The key signature -- the set of sharps or flats that defines the tonal center of a piece. A key signature is a declaration at the beginning of the score: 'This piece is in this key.' The Red-breasted Sapsucker's red head is the key signature: a declaration at the top of the bird that says 'This is a sapsucker.' Not a detail buried in the score. Not an accidental. A key signature -- bold, prominent, defining. You see it before you hear anything."
+    },
+    {
+      "concept": "Irregular drumming as species identity -- the Red-breasted Sapsucker's drumming pattern (fast-slow-fast) is species-diagnostic and immediately separates it from all other PNW woodpeckers. Where the Northern Flicker (degree 22) drums in a steady, metronomic burst and the Downy Woodpecker drums in an even roll, the sapsucker's drum stutters and lurches. This arrhythmic pattern is not a deficiency -- it is a deliberate, species-specific temporal signature that carries the same identity information as a song. The sapsucker does not need to sing. Its drum identifies it.",
+      "level": "intermediate",
+      "department": "music-theory/rhythm",
+      "college_path": ".college/music/theory/rhythm/irregular-drumming/",
+      "examples": [
+        "The fast-slow-fast pattern: approximately 10-15 strikes/sec accelerating from start, decelerating to 5-8 strikes/sec in the middle, accelerating back to 10-15 strikes/sec at the end. A tempo arc within a single 1-3 second bout.",
+        "Species-diagnostic: if you hear irregular drumming in a PNW forest, it is almost certainly a sapsucker. The pattern is that distinctive.",
+        "Contrast with the Northern Flicker's steady 25 bps metronomic drumming. The flicker is a metronome; the sapsucker is rubato. Both are Picidae. Both drum on resonant substrates. The temporal pattern is what separates them.",
+        "The irregularity may serve as a more effective territorial signal than regular drumming, because irregular patterns are harder to habituate to. A steady beat becomes background noise; an irregular beat commands attention precisely because it is unpredictable.",
+        "The engine now has three types of Picidae rhythm: the hammer (powerful single-note impact, degree 21), the groove (steady metronomic roll, degree 22), and the rubato (irregular fast-slow-fast, degree 54). A complete rhythmic palette within one family."
+      ],
+      "music_theory_parallel": "Syncopation -- the displacement of expected rhythmic accents. In jazz and funk, syncopation is what makes the groove feel alive: the drummer hits between the beats, before the beats, after the beats -- anywhere except exactly on the beats. The Red-breasted Sapsucker's irregular drumming is syncopated percussion: accents falling where you do not expect them, tempo changing when you have just settled into the pattern. Syncopation is what separates a drum machine from a human drummer. The sapsucker drums like a human."
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-053",
+      "species": "Steller's Jay",
+      "relationship": "CONSECUTIVE DEGREES, DESCENDING ENERGY. The corvid alarm (degree 53, Corvidae, E=4, cognitive vocalization) yields to the sap-well rhythm (degree 54, Picidae, E=3, arrhythmic percussion). Both are non-Passerellidae families. E=4 to E=3. Cognition to engineering. The jay commands; the sapsucker builds. The Passeriformes streak (16 consecutive) ends as Piciformes returns."
+    },
+    {
+      "target": "SPS-022",
+      "species": "Northern Flicker (Red-shafted)",
+      "relationship": "PICIDAE REUNITED AFTER 32 DEGREES. The Northern Flicker (degree 22, Colaptes auratus, 'resonant percussion / groove reset') was the last woodpecker. The Red-breasted Sapsucker (degree 54, Sphyrapicus ruber, 'the sap-well rhythm') returns the family after a 32-degree absence. Different genus, different foraging strategy, different rhythm. The flicker drums at a steady 25 bps -- metronomic. The sapsucker drums fast-slow-fast -- rubato. Same percussion section, opposite rhythmic identities."
+    },
+    {
+      "target": "SPS-021",
+      "species": "Northern Flicker (Pileated aspect)",
+      "relationship": "THREE PICIDAE NOW IN THE ENGINE. The hammer (degree 21), resonant percussion (degree 22), and now the sap-well rhythm (degree 54). The family's acoustic vocabulary expands from two regular-percussion elements to include one irregular-percussion element. The Picidae now have full rhythmic diversity: power (21), groove (22), and rubato (54)."
+    },
+    {
+      "target": "SPS-035",
+      "species": "Rufous Hummingbird",
+      "relationship": "THE HIDDEN THREAD -- SAP WELL DEPENDENCY. The Rufous Hummingbird (degree 35, 'the thrum') depends on Red-breasted Sapsucker wells for early-spring sugar before flowers bloom. Hummingbirds nest near active sap well trees, follow sapsuckers on maintenance rounds, and defend well trees as territory. Separated by 19 degrees but bound by one of the tightest ecological associations in PNW forests. The sapsucker creates the resource; the hummingbird exploits it. The connection reveals itself only when both species are present in the engine."
+    },
+    {
+      "target": "SPS-036",
+      "species": "Anna's Hummingbird",
+      "relationship": "SECONDARY SAP WELL VISITOR. Anna's Hummingbird (degree 36, 'the sonic boom') also visits sapsucker wells for sugar-rich sap, though the association is less tight than the Rufous Hummingbird's because Anna's is more resident and less dependent on early-spring sap as a bridge resource."
+    },
+    {
+      "target": "SPS-051",
+      "species": "Brown Creeper",
+      "relationship": "TWO BARK SPECIALISTS, TWO STRATEGIES. The Brown Creeper (degree 51, Certhiidae, 'the bark-spiral') spirals up tree trunks probing bark crevices for hidden insects -- a passive reader of the bark surface. The Red-breasted Sapsucker (degree 54, Picidae, 'the sap-well rhythm') drills into the bark to create sap wells -- an active modifier of the bark surface. One reads the tree. The other writes on it."
+    },
+    {
+      "target": "SPS-052",
+      "species": "American Dipper",
+      "relationship": "TWO RESOURCE SPECIALISTS, TWO MEDIA. The American Dipper (degree 52, 'the torrent-song') dives into rushing water to extract aquatic insects -- the stream is the medium. The Red-breasted Sapsucker (degree 54, 'the sap-well rhythm') drills into living trees to extract sap -- the tree is the medium. Both species physically enter their medium (water, wood) to extract food. Both are specialists adapted to a specific substrate."
+    },
+    {
+      "target": "AVI",
+      "species": "Wings of the Pacific Northwest",
+      "relationship": "Red-breasted Sapsucker documented across western Washington and British Columbia. Year-round resident of mixed conifer and riparian forests. Common in lowland alder stands, mature Douglas fir and hemlock forests, and throughout the Cascades and Olympics. The most colorful woodpecker in PNW forests."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Keystone ecosystem engineering. Sap wells as shared infrastructure for dozens of species. Hummingbird-sapsucker mutualism. Cavity creation for secondary nesters. Old-growth forest indicator. The Red-breasted Sapsucker physically modifies its environment in ways that sustain the broader forest community."
+    }
+  ]
+}

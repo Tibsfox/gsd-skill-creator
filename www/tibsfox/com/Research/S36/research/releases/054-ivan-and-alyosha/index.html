@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 54&deg; &mdash; Ivan &amp; Alyosha &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3E2723);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .warning-card {
+      background: #FFF8E1;
+      border: 1px solid #FFB300;
+      border-left: 4px solid #FF8F00;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .warning-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #E65100;
+      font-family: system-ui, sans-serif;
+    }
+    .warning-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #5D4037;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>054 &mdash; Ivan &amp; Alyosha</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>10th Consecutive Folk-Adjacent &mdash; Double Digits &mdash; The Fraternal Jangle</h3>
+      <p>
+        Ivan &amp; Alyosha at degree 54&deg; extends the folk-adjacent record to
+        <strong>ten consecutive degrees</strong> (45&ndash;54). Tim Wilson and Ryan Carbary
+        &mdash; formed 2007 in <strong>Capitol Hill, Seattle</strong>. Named after
+        Dostoevsky&rsquo;s <em>Brothers Karamazov</em> &mdash; the first
+        <strong>literary-named band</strong> in the engine. Jangly guitars, layered
+        harmonies, upbeat folk-pop. <strong>Benaroya Hall</strong> with the
+        <strong>Seattle Symphony</strong> (2022). Five became two.
+        E=3 <strong>ties</strong> E=4 at 13 each.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">54&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Ivan &amp; Alyosha</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Dualtone / Nettwerk</span>
+          <span class="neighborhood-badge">Capitol Hill</span>
+          <span class="record-badge">10th Folk-Adjacent &mdash; Double Digits</span>
+          <span class="first-badge">1st Literary-Named Band</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Data Discrepancy Warning -->
+        <div class="warning-card">
+          <h4>Data Discrepancy: Label Correction</h4>
+          <p>
+            The engine&rsquo;s CSV data lists <strong>Tender Loving Empire</strong> (TLE)
+            as the label for Ivan &amp; Alyosha. This is <strong>incorrect</strong>. TLE is a
+            Portland, Oregon-based gift shop and record label with no documented connection
+            to Ivan &amp; Alyosha. Actual labels: <strong>Dualtone Records</strong> (Nashville)
+            and <strong>Nettwerk Music Group</strong> (Vancouver).
+          </p>
+        </div>
+
+        <section>
+          <h2>The Brothers Karamazov in Capitol Hill</h2>
+          <p>
+            <strong>Tim Wilson</strong> (vocals, guitar) and <strong>Ryan Carbary</strong>
+            (guitar, vocals) formed <strong>Ivan &amp; Alyosha</strong> in <strong>2007</strong>
+            in <strong>Seattle, Washington</strong>, based in the <strong>Capitol Hill</strong>
+            neighborhood. The name came from producer <strong>Eli Thomson</strong>, who
+            suggested naming the band after characters from Dostoevsky&rsquo;s
+            <em>The Brothers Karamazov</em> (1880) &mdash; <strong>Ivan</strong> (the intellectual
+            skeptic) and <strong>Alyosha</strong> (the spiritual believer). The first
+            literary-named band in the engine.
+          </p>
+          <p>
+            The five-piece lineup: Tim Wilson, Carbary, <strong>Pete Wilson</strong>
+            (Tim&rsquo;s brother, bass, vocals), <strong>Tim Kim</strong> (guitar, vocals),
+            and <strong>Cole Mauro</strong> (drums). The sibling bond &mdash; Tim and Pete
+            Wilson as actual brothers &mdash; deepens the Dostoevsky resonance: a band
+            named for fictional brothers, containing real brothers.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Dualtone Era: National Distribution</h2>
+          <p>
+            After self-released EPs &mdash; <strong><em>The Verse, The Chorus</em></strong>
+            (2009, produced by Eli Thomson in LA) and <strong><em>Fathers Be Kind</em></strong>
+            (2011) &mdash; Ivan &amp; Alyosha signed with <strong>Dualtone Records</strong>,
+            a Nashville-based independent label also home to <strong>The Lumineers</strong>.
+          </p>
+          <p>
+            <strong><em>All the Times We Had</em></strong> (2013, Dualtone) &mdash; first
+            full-length. Five-piece at full strength: jangly electric and acoustic guitars,
+            multi-voice harmonies, propulsive drums. Bright, optimistic, hook-driven folk-pop.
+            &ldquo;Running for Cover.&rdquo; &ldquo;Don&rsquo;t Wanna Die.&rdquo;
+          </p>
+          <p>
+            <strong><em>It&rsquo;s All Just Pretend</em></strong> (2015, Dualtone) &mdash;
+            the philosophical turn. The title echoes Ivan Karamazov&rsquo;s doubt: if
+            it&rsquo;s all just pretend, what grounds the faith? Slightly darker
+            undertone beneath the jangle.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Benaroya Hall: The Symphony Collaboration</h2>
+          <p>
+            <strong><em>Live at Benaroya Hall</em></strong> (2022) was recorded with the
+            <strong>Seattle Symphony</strong>, arranged by <strong>Lee Mills</strong> and
+            <strong>Andrew Joslyn</strong>. Joslyn &mdash; arranger for
+            <strong>Macklemore</strong> and <strong>Mary Lambert</strong> &mdash; expanded
+            Ivan &amp; Alyosha&rsquo;s folk-pop to orchestral scale in a 2,500-seat
+            concert hall.
+          </p>
+          <p>
+            The collaboration demonstrates that the band&rsquo;s harmonic vocabulary is
+            rich enough to sustain symphonic treatment. Not all folk-pop translates to
+            orchestra; Ivan &amp; Alyosha&rsquo;s layered harmonies provide natural
+            anchor points for string, brass, and woodwind arrangements.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>All We Ever Had: The Return as Duo</h2>
+          <p>
+            <strong><em>All We Ever Had</em></strong> (2023, <strong>Nettwerk Music Group</strong>)
+            marked Ivan &amp; Alyosha&rsquo;s return as a <strong>two-piece</strong>: Wilson
+            and Carbary, the founding duo, stripped to essence. The title echoes and
+            transforms the 2013 debut: <em>All the Times We Had</em> becomes
+            <em>All We Ever Had</em>. The times became everything. Five became two.
+          </p>
+          <p>
+            The Nettwerk signing moved the band from Nashville (Dualtone) to Vancouver
+            (Nettwerk) &mdash; from the American South&rsquo;s indie infrastructure to
+            the Pacific Northwest&rsquo;s broader independent ecosystem. Nettwerk&rsquo;s
+            roster includes Passenger, Old Crow Medicine Show, and Angus &amp; Julia Stone.
+          </p>
+          <blockquote>
+            The cathedral harmony is five people building a structure of sound.
+            The fraternal jangle is two people remembering why they started.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Fraternal Jangle</h4>
+              <div class="level advanced">Advanced &mdash; 55th Acoustic Element</div>
+              <p>
+                Bright, ringing, optimistic harmonic texture from two voices and
+                two guitars &mdash; simple in form, complex in emotional resonance.
+                Not the cathedral&rsquo;s overwhelming density (53) but the warmth of
+                intimately familiar voices: brothers, lifelong collaborators.
+                The jangle is the guitar&rsquo;s contribution; the fraternal is the
+                relationship&rsquo;s. Trust expressed as music.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Neighborhood Anchor</h4>
+              <div class="level advanced">Advanced &mdash; 55th Artist-City Pattern</div>
+              <p>
+                The artist rooted not just in a city but in a specific neighborhood
+                whose density, culture, and venues form the creative context.
+                Capitol Hill: Seattle&rsquo;s indie music center, LGBTQ+ history,
+                venue cluster (Neumos, Barboza, the Comet). Ivan &amp; Alyosha are
+                a Capitol Hill band, not just a Seattle band.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Borrowed Name</h4>
+              <div class="level intermediate">Intermediate &mdash; 54th Deployment</div>
+              <p>
+                The blue note from carrying a literary identity that exceeds the carrier.
+                Dostoevsky&rsquo;s 900-page meditation on faith and doubt versus
+                bright three-minute folk-pop. The weight difference between the name
+                and the music is the ache. Eli Thomson gave them the name &mdash;
+                a gift that comes with obligations.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>10th Consecutive Folk-Adjacent</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 35</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48), Folk Punk (49),
+                Indie Folk (50), Indie Folk (51), Folk/Rock (52), Indie Folk (53),
+                Folk (54). Ten degrees, ten production paradigms. The folk-adjacent decad.
+                Double digits. Longest genre-family streak in engine history.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>The Verse, The Chorus</h4>
+              <div class="disco-years">2009 &middot; Self-released</div>
+              <p>
+                Debut EP. Produced by Eli Thomson in LA.
+                Thomson suggested the Dostoevsky band name.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>All the Times We Had</h4>
+              <div class="disco-years">2013 &middot; Dualtone</div>
+              <p>
+                First full-length. Five-piece. Jangly folk-pop.
+                &ldquo;Running for Cover.&rdquo; Nashville indie distribution.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>It&rsquo;s All Just Pretend</h4>
+              <div class="disco-years">2015 &middot; Dualtone</div>
+              <p>
+                The philosophical turn. Ivan Karamazov&rsquo;s doubt
+                surfaces in the title.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Live at Benaroya Hall</h4>
+              <div class="disco-years">2022 &middot; Seattle Symphony</div>
+              <p>
+                Orchestral collaboration. Lee Mills &amp; Andrew Joslyn.
+                Folk-pop at symphonic scale.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>All We Ever Had</h4>
+              <div class="disco-years">2023 &middot; Nettwerk</div>
+              <p>
+                Return as duo (Wilson + Carbary). Title echoes and
+                transforms 2013 debut. Vancouver label.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">53&deg;</span>
+              <strong>Fleet Foxes</strong> &mdash; Consecutive folk-adjacent degrees.
+              Cathedral harmony (53, five voices building architecture) versus
+              fraternal jangle (54, two voices building warmth). Both literary:
+              Bruegel versus Dostoevsky.
+            </li>
+            <li>
+              <span class="ref-degree">52&deg;</span>
+              <strong>Brandi Carlile</strong> &mdash; Bear Creek Studios to
+              Benaroya Hall. Both connect to Seattle&rsquo;s institutional
+              infrastructure at the highest level. Testimony roar versus
+              fraternal jangle.
+            </li>
+            <li>
+              <span class="ref-degree">51&deg;</span>
+              <strong>Grand Archives</strong> &mdash; Communal harmony
+              (full band as organism) versus fraternal jangle (duo as intimacy).
+              Both folk-adjacent, both E=3.
+            </li>
+            <li>
+              <span class="ref-degree">46&deg;</span>
+              <strong>Rocky Votolato</strong> &mdash; Brothers in Seattle music.
+              Rocky and Cody Votolato (Waxwing); Tim and Pete Wilson
+              (Ivan &amp; Alyosha). Sibling bonds as creative foundation.
+            </li>
+            <li>
+              <span class="ref-degree">41&deg;</span>
+              <strong>Shawn Smith</strong> &mdash; Capitol Hill returns.
+              Second appearance of the neighborhood. Thirteen degrees apart.
+            </li>
+            <li>
+              <span class="ref-degree">0&deg;</span>
+              <strong>Quincy Jones</strong> &mdash; Mercury orchestras to
+              symphony hall folk-pop. Fifty-five degrees of American music
+              infrastructure evolution.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">54&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">35</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">2007&ndash;present</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Discography</h4>
+          <div class="stat-row">
+            <span class="stat-label">Studio Albums</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">EPs</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Live Albums</span>
+            <span class="stat-value">1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Labels</span>
+            <span class="stat-value">Dualtone / Nettwerk</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Folk-Adjacent Decad</h4>
+          <div class="stat-row">
+            <span class="stat-label">45&deg;</span>
+            <span class="stat-value">Jurado (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">46&deg;</span>
+            <span class="stat-value">Votolato (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">47&deg;</span>
+            <span class="stat-value">Pedro (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">48&deg;</span>
+            <span class="stat-value">Cahoone (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">49&deg;</span>
+            <span class="stat-value">Dawson (Folk Punk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">50&deg;</span>
+            <span class="stat-value">Mirah (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">51&deg;</span>
+            <span class="stat-value">Grand Arch. (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">52&deg;</span>
+            <span class="stat-value">Carlile (Folk/Rock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">53&deg;</span>
+            <span class="stat-value">Fleet Foxes (Indie Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">54&deg;</span>
+            <span class="stat-value">Ivan &amp; Alyosha (Folk)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">16</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">13</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#55</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#55</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#54</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Gender Tracking</h4>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">14</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Male</span>
+            <span class="stat-value">41</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ratio</span>
+            <span class="stat-value">~25.5%</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        Degree 54&deg; &mdash; Ivan &amp; Alyosha &mdash; Seattle 360 Engine &mdash; v1.49.190
+        <br>
+        Ten consecutive folk-adjacent degrees. Double digits. The fraternal jangle.
+        Named after Dostoevsky. The verse, the chorus.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
