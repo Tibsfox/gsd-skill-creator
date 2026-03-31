@@ -37,7 +37,292 @@
       color: #ffffff;
       text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 1px 2px rgba(0,0,0,0.4);
     }
-    .header-text .subtitle {
+    .hero .subtitle {
+      color: var(--text-quiet);
+      font-size: 0.95rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-style: italic;
+      margin-top: 0.4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══ Celestial cards — moon left, sun right ═══ */
+    .hero-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-center { text-align: center; }
+    .celestial-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-edge);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      min-width: 160px;
+      max-width: 200px;
+      font-family: system-ui, sans-serif;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      z-index: 1;
+      transition: box-shadow 0.3s;
+    }
+    .celestial-card:hover { box-shadow: var(--card-shadow-hover); }
+    .celestial-card a { color: var(--link); }
+    .celestial-card a:hover { color: var(--link-hover); }
+    .cel-label {
+      font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--text-faint); margin-bottom: 0.4rem;
+    }
+    .cel-value {
+      font-size: 1.1rem; font-weight: 600; color: var(--text);
+      line-height: 1.3;
+    }
+    .cel-detail {
+      font-size: 0.72rem; color: var(--text-quiet); margin-top: 0.2rem;
+      line-height: 1.4;
+    }
+    .cel-moon-icon {
+      display: inline-block; width: 28px; height: 28px; border-radius: 50%;
+      vertical-align: middle; margin-right: 0.4rem;
+      background: radial-gradient(circle at 35% 40%, #d4d8dc 0%, #8a9098 55%, #4a5058 100%);
+      box-shadow: 0 0 8px rgba(180,190,200,0.15);
+    }
+    .cel-sun-icon {
+      display: inline-block; width: 28px; height: 28px; border-radius: 50%;
+      vertical-align: middle; margin-right: 0.4rem;
+      background: radial-gradient(circle at 40% 35%, #ffe088 0%, #e8a838 50%, #c07820 100%);
+      box-shadow: 0 0 10px rgba(232,168,56,0.25);
+    }
+    @media (max-width: 900px) {
+      .hero-row { flex-direction: column; gap: 1rem; }
+      .celestial-card { max-width: 280px; width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .celestial-card { min-width: unset; padding: 0.6rem 0.8rem; }
+      .cel-value { font-size: 0.95rem; }
+    }
+
+    /* ═══ Stats — ink-framed watercolor badges ═══ */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .stat {
+      text-align: center;
+      padding: 0.8rem 1.2rem;
+      border-radius: 8px;
+      min-width: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+    .stat:nth-child(1)::before { background: radial-gradient(ellipse at 50% 50%, rgba(199,91,58,0.15), transparent 70%); }
+    .stat:nth-child(2)::before { background: radial-gradient(ellipse at 50% 50%, rgba(142,36,170,0.12), transparent 70%); }
+    .stat:nth-child(3)::before { background: radial-gradient(ellipse at 50% 50%, rgba(45,90,58,0.12), transparent 70%); }
+    .stat:nth-child(4)::before { background: radial-gradient(ellipse at 50% 50%, rgba(30,108,160,0.12), transparent 70%); }
+    .stat:hover::before { opacity: 1; }
+    .stat-value {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      color: var(--stat-fill);
+      position: relative;
+      z-index: 1;
+    }
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: system-ui, sans-serif;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══ Nav — watercolor pill buttons ═══ */
+    .nav-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0 2rem 2.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-link {
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-family: system-ui, sans-serif;
+      border: 1.5px solid rgba(199,91,58,0.25);
+      color: var(--fox);
+      transition: all 0.25s;
+      background: rgba(255,255,255,0.5);
+    }
+    .nav-link:hover {
+      color: #fff;
+      border-color: var(--fox);
+      background: var(--fox);
+      box-shadow: 0 2px 12px rgba(199,91,58,0.3);
+    }
+
+    /* ═══ Main ═══ */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    /* ═══ Featured Series — 2x2 grid with watercolor washes ═══ */
+    .series-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 768px) { .series-grid { grid-template-columns: 1fr; } }
+
+    .series-card {
+      display: block;
+      padding: 1.8rem 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--surface-edge);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .series-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+      border-radius: 12px;
+    }
+    .series-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    .series-card:hover::before { opacity: 1; }
+
+    /* Each series card gets a unique watercolor wash */
+    .series-pnw::before {
+      background:
+        radial-gradient(ellipse 60% 70% at 10% 90%, rgba(45,90,58,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 20%, rgba(76,175,80,0.12) 0%, transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,0.9), rgba(245,240,230,0.85));
+    }
+    .series-nasa::before {
+      background:
+        radial-gradient(ellipse 60% 70% at 85% 15%, rgba(30,108,160,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 15% 80%, rgba(142,36,170,0.12) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(255,255,255,0.9), rgba(245,240,230,0.85));
+    }
+    .series-s36::before {
+      background:
+        radial-gradient(ellipse 55% 65% at 20% 30%, rgba(199,91,58,0.2) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 80% 75%, rgba(232,152,72,0.15) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(255,255,255,0.9), rgba(245,240,230,0.85));
+    }
+    .series-sps::before {
+      background:
+        radial-gradient(ellipse 55% 65% at 75% 25%, rgba(0,105,92,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 25% 80%, rgba(30,108,160,0.14) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(255,255,255,0.9), rgba(245,240,230,0.85));
+    }
+
+    .series-card h2 {
+      color: var(--text);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      position: relative;
+      z-index: 1;
+      font-family: system-ui, sans-serif;
+    }
+    .series-card .desc {
+      color: var(--text-mid);
+      font-size: 0.9rem;
+      position: relative;
+      z-index: 1;
+    }
+    .series-card .meta {
+      color: var(--text-quiet);
+      font-size: 0.78rem;
+      font-family: system-ui, sans-serif;
+      margin-top: 0.6rem;
+      position: relative;
+      z-index: 1;
+    }
+    /* Colored accent dots before series titles */
+    .series-pnw h2::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #4CAF50; margin-right: 8px; vertical-align: middle; box-shadow: 0 0 6px rgba(76,175,80,0.4); }
+    .series-nasa h2::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #1E88E5; margin-right: 8px; vertical-align: middle; box-shadow: 0 0 6px rgba(30,136,229,0.4); }
+    .series-s36 h2::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #c75b3a; margin-right: 8px; vertical-align: middle; box-shadow: 0 0 6px rgba(199,91,58,0.4); }
+    .series-sps h2::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #00897B; margin-right: 8px; vertical-align: middle; box-shadow: 0 0 6px rgba(0,137,123,0.4); }
+
+    /* ═══ Knowledge Graph cards ═══ */
+    .explore-label {
+      color: var(--text-faint);
+      font-size: 0.7rem;
+      font-family: system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 2rem 0 1rem;
+      padding-left: 0.25rem;
+    }
+
+    .explore-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 768px) { .explore-grid { grid-template-columns: 1fr; } }
+
+    .explore-card {
+      display: block;
+      padding: 1.4rem 1.6rem;
+      border-radius: 10px;
+      border: 1px solid var(--surface-edge);
+      background: var(--surface);
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .explore-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 10px 10px 0 0;
+    }
+    .explore-2d::before { background: linear-gradient(90deg, #c75b3a, #e89848, #4CAF50, #1e6ca0); }
+    .explore-3d::before { background: linear-gradient(90deg, #8e24aa, #EC407A, #1E88E5, #00897B); }
+    .explore-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-hover);
+    }
+    .explore-card h3 {
+      color: var(--text);
       font-size: 1.05rem;
       color: #fff8e8;
       margin-top: 0.3rem;
@@ -206,61 +491,27 @@
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-row">
-      <a href="SOL/index.html" class="cel-orb cel-moon">
-        <div class="cel-orb-label">Moon</div>
-        <div class="cel-orb-value" id="cel-moon-phase">--</div>
-        <div class="cel-orb-detail" id="cel-moon-illum">--</div>
+  <div class="hero">
+    <div class="hero-row">
+      <a href="SOL/index.html" class="celestial-card" id="moon-card">
+        <div class="cel-label"><span class="cel-moon-icon"></span> Moon</div>
+        <div class="cel-value" id="cel-moon-phase">Waxing Gibbous</div>
+        <div class="cel-detail" id="cel-moon-illum">98% illuminated</div>
+        <div class="cel-detail" id="cel-moon-rise">Rise 6:33 PM &middot; Set 6:12 AM</div>
+        <div class="cel-detail" id="cel-moon-full">Full Moon Apr 1 &rarr;</div>
       </a>
-      <div class="header-center">
-        <div class="header-inner">
-          <img src="images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
-          <div class="header-text">
-            <h1>Tibsfox Research</h1>
-            <div class="subtitle">Pacific Northwest bioregion mapping, space research, visual art science, and 190+ projects of open-source craft</div>
-            <nav>
-              <a href="PNW/index.html">PNW Series</a>
-              <a href="NASA/index.html">NASA Missions</a>
-              <a href="NASA/artemis-ii/index.html">Artemis II</a>
-              <a href="SOL/index.html">Sun &amp; Moon</a>
-              <a href="MUK/index.html">Mukilteo</a>
-              <a href="constellation.html">Constellation</a>
-              <a href="LIVE/index.html">Live</a>
-              <a href="../index.html">tibsfox.com</a>
-            </nav>
-          </div>
-        </div>
+      <div class="hero-center">
+        <img src="../images/tibsfox.png" alt="Tibsfox — watercolor fox" class="hero-logo">
+        <h1>Tibsfox Research</h1>
+        <div class="subtitle">From Pacific Northwest ecology to the edge of the solar system</div>
       </div>
-      <a href="SOL/index.html" class="cel-orb cel-sun">
-        <div class="cel-orb-label">Sun</div>
-        <div class="cel-orb-value" id="cel-sun-day">--</div>
-        <div class="cel-orb-detail">6:49a / 7:39p</div>
+      <a href="SOL/index.html" class="celestial-card" id="sun-card">
+        <div class="cel-label"><span class="cel-sun-icon"></span> Sun</div>
+        <div class="cel-value" id="cel-sun-daylight">12h 52m daylight</div>
+        <div class="cel-detail" id="cel-sun-rise">Rise 6:49 AM &middot; Set 7:39 PM</div>
+        <div class="cel-detail" id="cel-sun-progress">+3m 12s/day (gaining)</div>
+        <div class="cel-detail" id="cel-sun-kp">Kp 2.0 &middot; G0 quiet &rarr;</div>
       </a>
-    </div>
-  </header>
-
-  <!-- === DATA BAR: two rows — time+mission, weather+detail === -->
-  <div class="data-bar">
-    <div class="data-bar-inner">
-      <div class="db-row">
-        <div class="db-cell"><div class="db-label">Zulu (UTC)</div><div class="db-value" id="lb-utc">--</div></div>
-        <div class="db-cell"><div class="db-label">Pacific (PDT)</div><div class="db-value" id="lb-pdt">--</div></div>
-        <div class="db-cell"><div class="db-label">Temp (KPAE)</div><div class="db-value" id="lb-temp">--</div></div>
-        <div class="db-cell"><div class="db-label">Wind</div><div class="db-value" id="lb-wind">--</div></div>
-        <div class="db-cell"><div class="db-label">Pressure</div><div class="db-value" id="lb-pres">--</div></div>
-        <div class="db-cell"><div class="db-label">Artemis II</div><div class="db-value db-hot" id="lb-artemis">T---</div></div>
-        <div class="db-cell"><div class="db-label">Kp Index</div><div class="db-value" id="lb-kp">--</div></div>
-      </div>
-      <div class="db-row db-row-detail">
-        <div class="db-cell"><div class="db-label">Dewpoint</div><div class="db-value" id="lb-dew">--</div></div>
-        <div class="db-cell"><div class="db-label">Humidity</div><div class="db-value" id="lb-hum">--</div></div>
-        <div class="db-cell"><div class="db-label">Visibility</div><div class="db-value" id="lb-vis">--</div></div>
-        <div class="db-cell"><div class="db-label">Conditions</div><div class="db-value" id="lb-cond">--</div></div>
-        <div class="db-cell"><div class="db-label">Spread</div><div class="db-value" id="lb-spread">--</div></div>
-        <div class="db-cell"><div class="db-label">River (cfs)</div><div class="db-value" id="lb-river">--</div></div>
-        <div class="db-cell"><div class="db-label">Sweep</div><div class="db-value">v1.1.13</div></div>
-      </div>
     </div>
   </div>
 
@@ -488,83 +739,64 @@
   </footer>
 
 <script>
-// === LIVE DATA FOR HEADER + STATUS BAR ===
-var LAUNCH = new Date('2026-04-01T22:24:00Z');
-
-var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-function fmtDate(d) { return MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear(); }
-
-function updateClocks() {
+// Live celestial data for moon/sun cards
+(function() {
+  // Moon phase from synodic month
   var now = new Date();
-  var uDate = fmtDate(now);
-  var uTime = now.toISOString().slice(11,19);
-  var p = new Date(now.getTime() - 7*3600000);
-  var pDate = fmtDate(p);
-  var pTime = String(p.getUTCHours()).padStart(2,'0') + ':' + String(p.getUTCMinutes()).padStart(2,'0') + ':' + String(p.getUTCSeconds()).padStart(2,'0');
-  document.getElementById('lb-utc').textContent = uDate + ' ' + uTime + ' Z';
-  document.getElementById('lb-pdt').textContent = pDate + ' ' + pTime;
+  var JD = now.getTime() / 86400000 + 2440587.5;
+  var refNewMoon = 2451550.1;
+  var synodicMonth = 29.53059;
+  var phase = ((JD - refNewMoon) % synodicMonth) / synodicMonth;
+  if (phase < 0) phase += 1;
+  var illum = (1 - Math.cos(phase * 2 * Math.PI)) / 2;
+  var names = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
+  var idx = Math.floor(phase * 8) % 8;
 
-  // Artemis countdown
-  var diff = (LAUNCH - now) / 1000;
-  if (diff > 0) {
-    var d = Math.floor(diff/86400), h = Math.floor((diff%86400)/3600), m = Math.floor((diff%3600)/60);
-    document.getElementById('lb-artemis').textContent = 'T-' + (d>0?d+'d ':'') + h + 'h ' + m + 'm';
-  } else {
-    document.getElementById('lb-artemis').textContent = 'LAUNCHED';
+  var moonPhaseEl = document.getElementById('cel-moon-phase');
+  var moonIllumEl = document.getElementById('cel-moon-illum');
+  if (moonPhaseEl) moonPhaseEl.textContent = names[idx];
+  if (moonIllumEl) moonIllumEl.textContent = (illum * 100).toFixed(0) + '% illuminated';
+
+  // Moon distance
+  var daysSinceJ2000 = (now.getTime() / 86400000) - 10957.5;
+  var anomalisticPeriod = 27.55455;
+  var meanAnomaly = ((daysSinceJ2000 / anomalisticPeriod) % 1) * 2 * Math.PI;
+  var e = 0.0549;
+  var E = meanAnomaly + e * Math.sin(meanAnomaly);
+  var moonDist = 384400 * (1 - e * Math.cos(E));
+
+  // Sun day progress
+  var pdt = new Date(now.getTime() - 7 * 3600000);
+  var hrs = pdt.getUTCHours() + pdt.getUTCMinutes() / 60;
+  var sunriseH = 6 + 49/60; // 6:49 AM
+  var sunsetH = 19 + 39/60; // 7:39 PM
+  var dayLen = sunsetH - sunriseH;
+  var progressEl = document.getElementById('cel-sun-progress');
+  if (progressEl) {
+    if (hrs < sunriseH) {
+      progressEl.textContent = 'Pre-dawn \u00b7 +3m 12s/day';
+    } else if (hrs > sunsetH) {
+      progressEl.textContent = 'After sunset \u00b7 +3m 12s/day';
+    } else {
+      var pct = ((hrs - sunriseH) / dayLen * 100).toFixed(0);
+      progressEl.textContent = pct + '% through daylight \u00b7 +3m/day';
+    }
   }
-}
 
-// Moon phase
-var JD = new Date().getTime() / 86400000 + 2440587.5;
-var phase = ((JD - 2451550.1) % 29.53059) / 29.53059;
-if (phase < 0) phase += 1;
-var illum = (1 - Math.cos(phase * 2 * Math.PI)) / 2;
-var names = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
-document.getElementById('cel-moon-phase').textContent = names[Math.floor(phase*8)%8];
-document.getElementById('cel-moon-illum').textContent = (illum*100).toFixed(0) + '%';
-
-// Sun day progress
-var pdt = new Date(new Date().getTime() - 7*3600000);
-var hrs = pdt.getUTCHours() + pdt.getUTCMinutes()/60;
-var dayPct = Math.max(0, Math.min(100, ((hrs - 6.82) / (19.65 - 6.82)) * 100));
-document.getElementById('cel-sun-day').textContent = hrs < 6.82 ? 'Pre-dawn' : hrs > 19.65 ? 'After sunset' : Math.round(dayPct) + '% day';
-
-// Fetch live Kp — careful with JSON format (array of arrays, header row first)
-fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json')
-  .then(function(r){return r.json()})
-  .then(function(d){
-    if(d && d.length > 2){
-      var last = d[d.length-1];
-      var kpVal = parseFloat(last[1]);
-      if (!isNaN(kpVal)) {
-        var g = kpVal < 4 ? 'G0' : kpVal < 5 ? 'G1' : 'G' + Math.min(5, Math.floor(kpVal)-3);
-        document.getElementById('cel-sun-kp').textContent = 'Kp ' + kpVal.toFixed(1);
-        document.getElementById('lb-kp').textContent = kpVal.toFixed(1) + ' ' + g;
+  // Fetch live Kp
+  fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json')
+    .then(function(r){return r.json()})
+    .then(function(data){
+      if (data && data.length > 1) {
+        var last = data[data.length - 1];
+        var kp = parseFloat(last[1]);
+        var gScale = kp < 4 ? 'G0 quiet' : kp < 5 ? 'G1 minor' : 'G' + Math.min(5, Math.floor(kp) - 3);
+        var kpEl = document.getElementById('cel-sun-kp');
+        if (kpEl) kpEl.textContent = 'Kp ' + kp.toFixed(1) + ' \u00b7 ' + gScale + ' \u2192';
       }
-    }
-  }).catch(function(){ document.getElementById('lb-kp').textContent = '--'; });
-
-// Fetch KPAE data from status.json
-fetch('NASA/artemis-ii/status.json')
-  .then(function(r){return r.json()})
-  .then(function(d){
-    if(d && d.weather && d.weather.kpae){
-      var w = d.weather.kpae;
-      var el = function(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; };
-      el('lb-temp', w.temp_c + '\u00b0C');
-      el('lb-wind', w.wind_dir + '\u00b0 ' + w.wind_kmh + ' km/h');
-      el('lb-pres', w.pressure_hpa + ' hPa');
-      el('lb-cond', w.conditions || '--');
-      if(w.dewpoint_c != null) el('lb-dew', w.dewpoint_c + '\u00b0C');
-      if(w.humidity != null) el('lb-hum', w.humidity + '%');
-      if(w.visibility_m != null) el('lb-vis', (w.visibility_m/1000).toFixed(1) + ' km');
-      if(w.spread_c != null) el('lb-spread', w.spread_c + '\u00b0C');
-    }
-    if(d && d.river) el('lb-river', d.river.flow_cfs ? d.river.flow_cfs.toLocaleString() : '--');
-  }).catch(function(){});
-
-updateClocks();
-setInterval(updateClocks, 1000);
+    })
+    .catch(function(){});
+})();
 </script>
 </body>
 </html>
