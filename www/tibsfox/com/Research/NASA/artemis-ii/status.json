@@ -1,17 +1,20 @@
 {
-  "updated": "2026-03-31T11:35:00Z",
-  "source": "sweep-v1.0.3",
+  "updated": "2026-03-31T12:00:00Z",
+  "source": "sweep-v1.0.5",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:24:00Z",
     "phase": "prelaunch",
-    "status": "Launch countdown — T-17h — all systems GO",
+    "status": "Launch countdown — T-34h — all systems GO",
     "go_probability": 80
   },
   "weather": {
-    "kpae": {"temp_c": 3, "dewpoint_c": -1, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1014.2, "visibility_m": 16093, "conditions": "Clear", "spread_c": 4},
-    "kxmr": {"temp_c": 20.4, "wind_dir": 120, "wind_kmh": 14.8, "humidity": 80, "conditions": "Clear"}
+    "kpae": {"temp_c": 3.3, "dewpoint_c": -1.1, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1014.3, "visibility_m": 16093, "conditions": "Clear", "spread_c": 4.4},
+    "ksea": {"temp_c": 3.9, "dewpoint_c": 0, "wind_dir": 10, "wind_kmh": 16.7, "humidity": 50, "pressure_hpa": 1013.5, "conditions": "BKN170"},
+    "open_meteo": {"temp_c": 3.6, "dewpoint_c": 0.6, "wind_dir": 7, "wind_kmh": 8.7, "humidity": 81, "pressure_hpa": 1013.4, "conditions": "Overcast (WMO 3)"},
+    "nws": {"temp_c": 3, "dewpoint_c": -1, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1013.2, "conditions": "Clear"},
+    "kxmr": {"temp_c": 20.4, "dewpoint_c": 16.6, "wind_dir": 130, "wind_kmh": 11.1, "humidity": 78, "pressure_hpa": 1023.7, "conditions": "Clear"}
   },
   "tides_everett": [
     {"time": "04:51", "height_m": 3.37, "type": "high"},
@@ -19,10 +22,23 @@
     {"time": "17:04", "height_m": 3.01, "type": "high"},
     {"time": "22:57", "height_m": 0.72, "type": "low"}
   ],
+  "river": {
+    "site": "Snohomish River near Monroe",
+    "flow_cfs": 11600,
+    "timestamp": "2026-03-31T04:15:00-07:00"
+  },
   "space_weather": {
     "kp_index": 2.33,
     "g_scale": "G0",
     "aurora_risk": "none"
+  },
+  "scoring": {
+    "sample_count": 2,
+    "leaders": {
+      "temp_accuracy": "NWS + Open-Meteo tied (0.3°C error)",
+      "wind_accuracy": "NWS (0 km/h error — matched calm)",
+      "overall": "NWS improving, Open-Meteo consistent on temp"
+    }
   },
   "telemetry": null,
   "pages_deployed": {
@@ -30,12 +46,14 @@
     "open": "/Research/OPEN/",
     "muk": "/Research/MUK/",
     "trips": "/Research/MUK/trips.html",
+    "radio": "/Research/MUK/radio.html",
     "park": "/Research/PARK/",
     "beach": "/Research/BEACH/",
     "tracker": "/Research/NASA/artemis-ii/",
     "forest": "/Research/forest/"
   },
   "announcements": [
+    {"time": "2026-03-31T12:00:00Z", "text": "v1.0.5: T-34h. 5am sweep — NWS matches calm wind, all sources converge on 3-4°C. KSC clear 20°C."},
     {"time": "2026-03-31T11:35:00Z", "text": "v1.0.3: T-17h. LIVE hub, OPEN problems, PARK, BEACH, MUK trips deployed."},
     {"time": "2026-03-31T11:01:00Z", "text": "v1.0.1: T-18h, all GO, 3 new papers, TSPB deposits, ground cover"},
     {"time": "2026-03-30T22:13:00Z", "text": "Launch countdown begins at KSC"},
