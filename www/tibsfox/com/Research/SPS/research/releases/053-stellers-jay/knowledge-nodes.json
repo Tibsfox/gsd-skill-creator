@@ -1,0 +1,209 @@
+{
+  "degree": 53,
+  "species": "Steller's Jay",
+  "scientific_name": "Cyanocitta stelleri",
+  "slug": "053-stellers-jay",
+  "sound_type": "harsh shack-shack-shack alarm + Red-tailed Hawk mimic",
+  "energy": 4,
+  "ecosystem": "mountain conifer / mixed forest",
+  "season": "resident (year-round)",
+  "family": "Corvidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Olympic Torrent Salamander",
+    "original_scientific_name": "Rhyacotriton olympicus",
+    "reason": "SPS Part B engine is birds-and-mammals only. Steller's Jay replaces Olympic Torrent Salamander, preserving the original E=4 energy level and mountain conifer habitat. The Olympic Torrent Salamander is an endemic amphibian of the Olympic Peninsula, restricted to cold, clear headwater streams in old-growth forest. Steller's Jay occupies the same mountain conifer forests at the landscape level, though it ranges far more broadly. Both species are year-round residents of Pacific Northwest mountain forests. Ninth consecutive CSV substitution replacing an amphibian-class species (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53). The engine remains deep in the amphibian belt of the original CSV.",
+    "preserved": ["E=4 energy level", "mountain conifer / forest habitat", "year-round resident status"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Steller's Jays are year-round residents of coniferous and mixed forests throughout western Washington, from sea level to near timberline. Common in the Cascades, Olympics, and throughout the Puget Sound lowlands wherever conifers are present. Regular at backyard feeders, campgrounds, and picnic areas. Some altitudinal migration in winter from high-elevation forests to lowland neighborhoods."
+  },
+  "taxonomy_note": {
+    "description": "Steller's Jay is the FIRST CORVID in the engine -- the 22nd family. Corvidae is the most intelligent passerine family on Earth: tool use, facial recognition, future planning, play behavior, cultural transmission. This is the single most anticipated family entry in the engine's history, flagged in retrospectives since degree 30+. The Steller's Jay enters as the corvid ambassador for the Pacific Northwest mountain forest. Cyanocitta from Ancient Greek kyanos (dark blue) + kitta (jay); stelleri honoring Georg Wilhelm Steller (1709-1746), the German-born naturalist on Bering's 1741 expedition to Alaska who recognized America by its birds. Full translation: 'Steller's dark-blue jay.' THREE CONSECUTIVE NEW FAMILIES: Certhiidae at 51, Cinclidae at 52, Corvidae at 53 -- the longest new-family streak in the engine.",
+    "current_family": "Corvidae",
+    "new_family": true,
+    "family_count_in_engine": 22,
+    "corvidae_count_in_engine": 1,
+    "name_etymology": "Cyanocitta = Ancient Greek kyanos (dark blue) + kitta (jay). The genus contains exactly two species: C. stelleri (Steller's Jay, western N.A.) and C. cristata (Blue Jay, eastern N.A.). stelleri = honoring Georg Wilhelm Steller (1709-1746), German naturalist on Bering's 1741 Second Kamchatka Expedition. He collected the type specimen on Kayak Island, Alaska, on July 20, 1741, during approximately ten hours ashore. Johann Friedrich Gmelin formally described the species in 1788.",
+    "genus_note": "Cyanocitta is represented once in the engine at degree 53. The genus contains only two species worldwide -- Steller's Jay and Blue Jay. Their ranges barely overlap. The Blue Jay is unlikely to enter the engine (eastern species). Cyanocitta stelleri will likely be the only representative of its genus for the full 360 degrees, but Corvidae as a family will grow: American Crow, Common Raven, Gray Jay (Canada Jay), Clark's Nutcracker, and Black-billed Magpie are all potential future entries.",
+    "order_note": "Passeriformes continues from degree 52. SIXTEENTH consecutive Passeriformes (38-53). 46 of 54 entries (85.2%) are Passeriformes. However, Corvidae is the most cognitively complex family in the order -- this is not your grandmother's perching bird. The order streak continues in taxonomy, but the cognitive dimension has shifted dramatically.",
+    "family_position": "Corvidae enters as the 22nd family with 1 member at degree 53. Third consecutive new-family event (Certhiidae at 51, Cinclidae at 52, Corvidae at 53) -- the longest new-family streak in the engine. The 20-degree drought between new families (31 to 51) has been decisively broken by three in a row.",
+    "steller_connection": "Georg Wilhelm Steller (1709-1746) was the naturalist on Vitus Bering's Second Kamchatka Expedition. On July 20, 1741, Steller was granted approximately ten hours on Kayak Island, Alaska. He collected the jay that would bear his name and recognized it as a relative of the Blue Jay described by Mark Catesby -- proof that the expedition had reached America. A jay proved a continent. Steller died in 1746, aged 37, on the return journey. Six species still bear his name."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1,000-6,000 (across all call types and song)",
+    "peak_energy_band_hz": "2,000-4,000 (shack call peak energy)",
+    "song_frequency_hz": "Shack alarm call: 1.5-5.0 kHz, peak energy 2.0-4.0 kHz. Wah call: 1.0-3.5 kHz. Rattle call (female): 2.0-5.0 kHz. Gleep call (male): 3.0-6.0 kHz. Creak call (male): 2.0-4.5 kHz. Hoodle whistle: 1.5-3.5 kHz. Song (soft warble): 1.0-6.0 kHz, extended bouts. Red-tailed Hawk mimic: 2.0-4.0 kHz, matching hawk call structure.",
+    "song_duration_s": "Individual shack notes ~100-200 ms in series of 3-8+. Song bouts 30 s to several minutes (private, rarely heard). Extended alarm bouts can continue for minutes as the bird mobs a predator.",
+    "note_structure": "HARSH REPETITIVE ALARM SERIES + COMPLEX MIMICRY REPERTOIRE: The Steller's Jay's acoustic identity is defined by its harsh, rapidly repeated shack-shack-shack alarm call -- a loud, penetrating, rhythmic series that dominates the conifer forest soundscape. Overlaid on this is one of the most diverse vocal repertoires of any North American passerine: at least 8 distinct call types, plus a wide range of mimicked sounds including raptor calls, other bird species, squirrel alarm calls, and mechanical sounds.",
+    "note_types": "EIGHT+ primary call categories plus mimicry: (1) SHACK CALL -- harsh, loud alarm, the defining sound. (2) WAH CALL -- nasal, lower, general-purpose. (3) RATTLE CALL -- female-specific rapid trill. (4) GLEEP CALL -- male-specific high-pitched. (5) CREAK CALL -- male-specific muted whistle with pop. (6) HOODLE WHISTLE -- soft, breathy, close-range. (7) PUMP-HANDLE CALL -- metallic rhythmic skreeka. (8) SONG -- soft warble, rarely heard. (9+) MIMICRY -- Red-tailed Hawk, Northern Goshawk, Cooper's Hawk, Osprey, woodpeckers, nuthatches, chickadees, squirrels, mechanical sounds.",
+    "phrase_structure": "Highly variable and context-dependent. Alarm calls are rapid, repetitive, and stereotyped within a bout but vary in intensity and rate between bouts. Song is complex, varied, and improvisatory. Mimicry is learned and integrated into the broader vocal repertoire. The phrase structure reflects corvid cognitive flexibility -- calls are not fixed action patterns but modifiable communication signals.",
+    "timbre": "HARSH, LOUD, PENETRATING. The shack call has a rough, raspy quality that cuts through forest canopy. The hoodle whistle is breathy and soft. The raptor mimic matches the timbre of the target species. The range of timbres within a single species' repertoire is the widest in the engine -- from the harshest alarm to the softest whistle to a convincing hawk scream.",
+    "amplitude": "E=4 -- high energy. The shack call is one of the loudest passerine vocalizations in the PNW forest, designed to carry through dense conifer canopy and alert the entire biotic community. The step from E=3 (degree 52, American Dipper) to E=4 (degree 53, Steller's Jay) continues the upward energy trajectory from the bark-spiral's E=1 at degree 51.",
+    "tempo": "Shack call: rapid, rhythmic, ~3-5 notes per second in intense alarm. Song: variable, moderate. The alarm tempo conveys urgency -- faster and more sustained for greater threats.",
+    "context": "Calls are given year-round by both sexes, though some calls are sex-specific (rattle = female, gleep and creak = male). Alarm calls are given in response to predators, humans, competing birds, and novel disturbances. Song is given primarily during the breeding season at low volume near the mate. Hawk mimicry is most common during the early breeding season in the presence of the mate, not in the presence of predators or competitors (Carlson et al. 2017).",
+    "regional_variation": "Subspecies show slight vocal differences corresponding to geographic range. The 18 subspecies spanning Alaska to Nicaragua likely exhibit regional dialects, though this is less studied than in some species. Mimicry repertoires vary locally based on what other species and sounds are available to learn from.",
+    "key_property": "THE CORVID ALARM -- the 54th acoustic element (species side). A harsh, loud, rapidly repeated shack call combined with an arsenal of mimicked raptor screams and a diverse repertoire of context-dependent calls. Named 'the corvid alarm' for three resonances: (1) the alarm itself -- the shack call is the primary alarm system of the PNW conifer forest, warning the entire biotic community; (2) the corvid intelligence -- the alarm is context-dependent, modulated, and reflects cognitive assessment rather than reflex; (3) the corvid alarm as herald of a new cognitive dimension -- the first species in the engine whose vocalizations reflect demonstrable intelligence, vocal learning, and cognitive flexibility beyond basic territorial and reproductive signaling. The corvid alarm does not compete with the environment (like the torrent-song) -- it COMMANDS the environment."
+  },
+  "plumage": {
+    "overall": "Large, crested, boldly two-toned. Blackish-brown to black head and upper body transitions sharply to rich blue lower body, wings, and tail. The only crested jay west of the Rocky Mountains. Prominent triangular crest stands nearly straight up from the head.",
+    "diagnostic_mark": "PROMINENT UPRIGHT CREST -- the triangular crest is the Steller's Jay's most recognizable field mark. No other western jay has a crest. Combined with the two-toned dark-head/blue-body pattern, the crest makes the species unmistakable in silhouette.",
+    "upperparts": "Head and upper back blackish-brown to charcoal. Transition to rich blue on lower back, rump, and upper tail coverts. In PNW populations (nominate stelleri and carbonacea), faint blue streaks on forehead rather than white streaks of interior populations.",
+    "underparts": "Deep blue from lower breast through belly and undertail coverts. The transition from dark upper body to blue lower body is relatively abrupt in Pacific Northwest populations.",
+    "head": "Black to blackish-brown with prominent upright crest. Dark brown eyes. Faint blue streaks on forehead in coastal populations; white streaks in interior populations.",
+    "bill": "Black, straight, robust. A general-purpose corvid bill strong enough to crack acorns, manipulate tools, excavate bark, and carry cached food.",
+    "tail": "Long, rich blue with darker blue to black barring. Often slightly rounded. Flicked and fanned expressively during social interactions.",
+    "undertail_coverts": "Blue, matching belly and lower body.",
+    "wing_edges": "Rich blue flight feathers with darker blue to black barring. Blue is structural coloration (Rayleigh scattering), not pigmentary -- the underlying pigment is brown. In bright sunlight the wings are brilliant blue; in deep shade they appear almost black.",
+    "field_id": "Unmistakable in the Pacific Northwest. Large (30-34 cm), prominent upright crest, blackish head and upper body, rich blue lower body, wings, and tail, loud harsh calls, bold conspicuous behavior. The only crested jay west of the Rockies. The blue flash in dark conifers that every PNW hiker knows."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The corvid alarm -- the 54th acoustic element (species side): a harsh, loud, rapidly repeated shack-shack-shack call combined with mimicked raptor screams and a diverse repertoire of context-dependent calls. Named 'the corvid alarm' for three resonances: (1) the alarm itself -- the shack call is the primary alarm system of the PNW conifer forest; (2) the corvid intelligence -- the alarm is context-dependent, modulated, and reflects cognitive assessment; (3) the corvid alarm as herald of a new cognitive dimension -- the first species whose vocalizations reflect demonstrable intelligence, vocal learning, and cognitive flexibility. The corvid alarm does not compete with the environment (torrent-song, degree 52) -- it COMMANDS the environment. The shack call silences the forest. When the jay screams, every bird freezes.",
+      "level": "foundational",
+      "department": "music-theory/song-form",
+      "college_path": ".college/music/theory/song-form/corvid-alarm/",
+      "examples": [
+        "Shack call peak energy at 2.0-4.0 kHz carries through dense conifer canopy. The jay's alarm frequency occupies the band that penetrates forest structure most effectively.",
+        "Contrast with the torrent-song (degree 52): the torrent-song competes with rushing water through sustained loudness. The corvid alarm controls the forest through authority -- when the jay screams, other species respond. The torrent-song fights the river; the corvid alarm commands the forest.",
+        "Context-dependent modulation: different alarm intensities for different threats. This is not a fixed reflex but a cognitive assessment communicated through vocal variation.",
+        "Eight+ distinct call types plus open-ended mimicry repertoire. The widest vocal range of any species in the engine. No previous species has had this many functionally distinct vocalizations.",
+        "At degree 53, the engine's first cognitively-driven acoustic element. All 53 previous elements were primarily innate or culturally transmitted in limited ways. The corvid alarm introduces intelligence as an acoustic variable."
+      ],
+      "music_theory_parallel": "The conductor's call to attention -- the sharp rap of the baton on the music stand before the first note. The conductor does not compete with the orchestra. The conductor commands it. One sharp sound, and every instrument falls silent, waiting. The Steller's Jay is the conductor of the forest ensemble: one shack call, and every bird in the canopy stops what it is doing and pays attention. The corvid alarm is not part of the music -- it controls when the music starts and stops."
+    },
+    {
+      "concept": "First Corvidae -- the 22nd family in the engine. The Steller's Jay is the first corvid in the engine, entering the most intelligent passerine family after 53 degrees of absence. Corvidae: tool use, facial recognition, future planning, play, funerals, cultural transmission. This is the family that thinks. The most anticipated family entry in the engine's history, flagged in retrospectives since degree 30+. Third consecutive new family (Certhiidae 51, Cinclidae 52, Corvidae 53) -- the longest new-family streak in the engine. Unlike Certhiidae and Cinclidae (monotypic singletons), Corvidae is a large family -- American Crow, Common Raven, Gray Jay, Clark's Nutcracker, and Black-billed Magpie are all future candidates. This is the beachhead, not the endpoint.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/new-family-corvidae/",
+      "examples": [
+        "22nd family in 54 entries. Third consecutive new family event -- the longest streak. Previous new-family events: Certhiidae (51), Cinclidae (52), and now Corvidae (53).",
+        "Corvidae is the first LARGE family to enter since Parulidae expanded through the warbler run (degrees 14-20, 38-42). Parulidae has 10 members; Corvidae will grow.",
+        "The most intelligent passerine family on Earth. Corvid cognition rivals that of great apes in some tasks: tool manufacture, mirror self-recognition, future planning.",
+        "Gmelin (1788) described C. stelleri from Steller's specimens collected on Kayak Island, Alaska, July 20, 1741.",
+        "Unlike Cinclidae (monotypic, one species forever), Corvidae will have multiple future entries. The American Crow and Common Raven are near-certainties."
+      ],
+      "music_theory_parallel": "The new section of the orchestra -- the entire brass section entering for the first time. When Certhiidae entered, it was a solo instrument (piccolo). When Cinclidae entered, it was another solo (hydraulophone). When Corvidae enters, it is not one instrument but a whole section: trumpets, trombones, French horns, tuba. The Steller's Jay is the first trumpet -- but the rest of the brass is coming. Corvidae is not a singleton family. It is the beginning of a section."
+    },
+    {
+      "concept": "Vocal mimicry as cognitive flexibility -- the Steller's Jay is the first species in the engine whose vocal repertoire includes demonstrable mimicry of other species' vocalizations. The Red-tailed Hawk imitation is so accurate that experienced birders are fooled. The jay also mimics Northern Goshawk, Cooper's Hawk, Osprey, other bird species, squirrels, and mechanical sounds. Mimicry is learned during a juvenile critical period through exposure and practice -- cultural transmission of vocal behavior. Carlson et al. (2017) found that hawk mimicry occurs most often during early breeding season in front of mates, not near predators or competitors -- possibly mate-quality signaling rather than competitor deterrence.",
+      "level": "foundational",
+      "department": "ecology/behavior",
+      "college_path": ".college/ecology/behavior/vocal-mimicry/",
+      "examples": [
+        "Red-tailed Hawk mimic: so accurate that the frequency structure (2.0-4.0 kHz) closely matches the actual hawk call. Other forest birds respond to the mimic as if a real hawk were present.",
+        "Mimicry is LEARNED, not innate. Young jays listen to adults and heterospecifics during a critical period, gradually incorporating sounds. This is cultural transmission -- the same mechanism that drives dialect formation in White-crowned Sparrows (degree 48) but applied to cross-species vocal learning.",
+        "Carlson et al. (2017): hawk mimicry is most common during early breeding season, with mate present, aggression absent. Function may be mate assessment -- vocal competence as fitness indicator.",
+        "The mimicry repertoire is open-ended: individual jays learn different sounds depending on their local acoustic environment. A jay near a construction site may learn power tool sounds; a jay in deep forest learns different raptor calls. The repertoire reflects the bird's life history.",
+        "At degree 53, mimicry introduces DECEPTION to the engine's acoustic palette. Previous species communicated honestly (song = territory, call = alarm). The Steller's Jay's hawk mimic may communicate dishonestly -- a jay pretending to be a hawk."
+      ],
+      "music_theory_parallel": "The quotation -- a passage in one composition that directly quotes the melody or theme of another. Composers quote other composers' work for effect: tribute, irony, commentary. Stravinsky quoted Pergolesi in Pulcinella. Berlioz quoted the Dies Irae in Symphonie fantastique. The Steller's Jay quotes the Red-tailed Hawk's scream in its own composition -- but the quotation is not tribute. It may be deception, display, or something more complex. The first quotation in the engine's musical score."
+    },
+    {
+      "concept": "Georg Wilhelm Steller and the proof of America -- the bird that proved a continent. On July 20, 1741, Steller collected a crested blue jay on Kayak Island, Alaska, during approximately ten hours ashore from Bering's expedition. He recognized it as a relative of the Blue Jay illustrated by Mark Catesby in Natural History of Carolina (1731) and deduced that the expedition had reached the New World. A single jay specimen proved a continental landfall. Steller died in 1746, aged 37, but six species still bear his name. The Steller's Jay carries one of the most consequential taxonomic stories in the engine.",
+      "level": "foundational",
+      "department": "ecology/conservation-history",
+      "college_path": ".college/ecology/conservation-history/steller-proof-of-america/",
+      "examples": [
+        "Ten hours on Kayak Island -- all the time Steller was granted. In those ten hours, he produced the first European scientific descriptions of multiple North American species.",
+        "The recognition: Steller saw the crested blue jay and compared it to Catesby's illustration of the Blue Jay. Same genus, different species, different continent. The jay was proof of America.",
+        "Six species bear Steller's name: Steller's Jay, Steller's Sea Eagle, Steller's Eider, Steller's Sea Lion, Steller's Sea Cow (extinct within 27 years of discovery), and Steller's Scoter.",
+        "Steller died at 37, on the return journey from Kamchatka. He never returned to Europe. His journals and specimens survived him.",
+        "Compare John Muir's dipper (degree 52): Muir loved the dipper for its character. Steller collected the jay as evidence for a scientific question. Both connections place birds at the intersection of natural history and human narrative."
+      ],
+      "music_theory_parallel": "The motif that identifies the key -- in tonal music, certain melodic fragments are diagnostic of a specific key. When you hear B-E-G#, you know you are in E major. Steller heard a crested blue jay and knew he was in America. The Steller's Jay is the key-identifying motif of the New World -- the melodic fragment that tells you which continent you are on. One bird, one recognition, one continent confirmed."
+    },
+    {
+      "concept": "The camp robber and corvid boldness -- Steller's Jays are among the boldest birds in the Pacific Northwest, regularly stealing food from picnic tables, backpacks, and unattended plates at campgrounds and trailheads. This behavior reflects corvid cognitive assessment: individual jays learn which human behaviors predict food availability, remember productive locations, and adjust their approach based on human attentiveness. The boldness varies between individuals -- personality differences that are consistent and measurable. The camp robber is not random opportunism; it is adaptive intelligence applied to a novel food source.",
+      "level": "intermediate",
+      "department": "ecology/behavior",
+      "college_path": ".college/ecology/behavior/corvid-boldness/",
+      "examples": [
+        "Individual jays recognize productive campsites and return to them. Spatial memory for human food sources parallels spatial memory for cached acorns.",
+        "Approach behavior varies with human attentiveness: jays approach more closely when humans are distracted, retreat when eye contact is made. Theory of mind in action -- the jay assesses what the human knows.",
+        "Personality variation: some jays are consistently bolder than others. Carlson et al. (2017) found that younger, larger, and bolder jays were most likely to perform hawk mimicry. Boldness is a stable personality trait.",
+        "The camp robber nickname is shared with the Gray Jay (Canada Jay). Both corvids have converged on the strategy of exploiting human food. Corvid intelligence applied to the novel problem of humans in the forest.",
+        "Compare American Dipper (degree 52): the dipper evolved physical adaptations for water. The Steller's Jay evolved cognitive adaptations for opportunity. Anatomy vs. behavior."
+      ],
+      "music_theory_parallel": "The improviser -- a jazz musician who hears what the rest of the ensemble is playing and inserts their own phrases into the gaps, responding in real time to a changing context. The camp robber does not follow a score. It reads the room, assesses the timing, and moves when the moment is right. Jazz improvisation requires the same cognitive toolkit: perception, memory, timing, and the willingness to take a risk. The Steller's Jay is the jazz musician of the forest -- bold, opportunistic, adaptive."
+    },
+    {
+      "concept": "Caching and forest ecology -- Steller's Jays cache thousands of acorns and conifer seeds each autumn, filling expandable throat pouches and transporting items to burial sites in soil, leaf litter, and bark crevices. The spatial memory required to relocate caches demonstrates corvid cognitive ability. Ecologically, unretrieved caches germinate, making Steller's Jays among the most important dispersal agents for oaks and pines in Pacific Northwest forests. The jay is an inadvertent forester -- an ecosystem engineer whose food-hoarding behavior shapes forest composition across generations.",
+      "level": "intermediate",
+      "department": "ecology/mutualism",
+      "college_path": ".college/ecology/mutualism/corvid-seed-dispersal/",
+      "examples": [
+        "A single jay may cache thousands of acorns per season. Spatial memory allows retrieval weeks or months later. Some caches are never retrieved and germinate.",
+        "Sublingual pouches allow transport of multiple food items per flight. The pouches expand to hold acorns, seeds, and other cacheable items.",
+        "Oak and pine dispersal: unretrieved caches are effectively planted by the jay. Forest composition in montane habitats is partly shaped by corvid caching patterns over centuries.",
+        "Cache pilfering demonstrates theory of mind: jays observe other birds caching and steal from those caches. Jays that have been observed caching re-cache their items when the observer leaves. They know what the other bird saw.",
+        "Compare the American Dipper (degree 52): the dipper is a passive indicator of water health. The Steller's Jay is an active shaper of forest composition. Indicator vs. engineer."
+      ],
+      "music_theory_parallel": "The seed motif -- a short musical idea planted early in a composition that grows, develops, and transforms throughout the work. Beethoven's four-note motif in the Fifth Symphony is a seed that grows into an entire symphony. The acorn is the Steller's Jay's seed motif -- a small unit planted in the ground that grows into an entire tree, which grows into an entire forest. The jay plants motifs that outlive it. The composition continues after the performer is gone."
+    },
+    {
+      "concept": "The sentinel network -- Steller's Jays function as the primary avian sentinels of the Pacific Northwest conifer forest. Their alarm calls carry specific information about predator type, location, movement, and threat severity. Other species (chickadees, nuthatches, creepers, and virtually every small forest bird) have evolved to recognize and respond to Steller's Jay alarms. The jay's vigilance is a public good: a single jay's alarm call benefits the entire biotic community. The sentinel network is an interspecific information system running on corvid intelligence.",
+      "level": "intermediate",
+      "department": "ecology/community",
+      "college_path": ".college/ecology/community/sentinel-network/",
+      "examples": [
+        "Black-capped Chickadees (degree 3), Red-breasted Nuthatches (degree 5), and Brown Creepers (degree 51) all respond to Steller's Jay alarm calls by freezing or diving for cover.",
+        "Alarm modulation: different intensities for hawks vs. terrestrial predators vs. novel disturbances. The information is graded, not binary.",
+        "Mobbing behavior: jays follow and harass predators while calling, providing real-time tracking information to the entire forest.",
+        "The sentinel function is analogous to the American Dipper's indicator function (degree 52): the dipper's presence indicates water health; the jay's alarm indicates current predator activity. Both species serve the community by providing actionable environmental information.",
+        "Interspecific eavesdropping: smaller species freeload on the jay's vigilance. The jay pays the cost of exposure (calling draws attention to itself); other species reap the benefit of the warning without bearing the risk."
+      ],
+      "music_theory_parallel": "The first violin's cue -- in an orchestra, the concertmaster (first violin) gives visual and audible cues that coordinate the entire ensemble. When the concertmaster signals, every musician responds. The Steller's Jay is the concertmaster of the forest ensemble: its alarm cue synchronizes the behavior of every species in the canopy. The alarm is not a solo performance -- it is a coordination signal for the entire community."
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-052",
+      "species": "American Dipper",
+      "relationship": "CONSECUTIVE DEGREES, ASCENDING ENERGY. The torrent-song (degree 52, Cinclidae, E=3, environmental competition) yields to the corvid alarm (degree 53, Corvidae, E=4, cognitive vocalization). Both are new families in consecutive degrees -- the second and third in a streak of three. The dipper fights the river; the jay commands the forest. E=3 to E=4. Water to canopy. Endurance to authority."
+    },
+    {
+      "target": "SPS-051",
+      "species": "Brown Creeper",
+      "relationship": "THREE CONSECUTIVE NEW FAMILIES. Certhiidae (51), Cinclidae (52), Corvidae (53). Three new families in three degrees. The bark-spiraler, the underwater walker, the canopy screamer. E=1 to E=3 to E=4. Crypsis to competition to command. The longest new-family streak in the engine, and the three degrees could not be more different in ecological strategy."
+    },
+    {
+      "target": "SPS-003",
+      "species": "Black-capped Chickadee",
+      "relationship": "SENTINEL AND CLIENT. The Black-capped Chickadee (degree 3) has its own alarm system (chick-a-dee-dee-dee with variable dee notes indicating threat severity). But chickadees also respond to Steller's Jay alarm calls. The two species form an interspecific alarm network in the PNW conifer forest. The jay is the loud, dominant sentinel; the chickadee is the nuanced, graded communicator. Both contribute to the forest's collective threat awareness."
+    },
+    {
+      "target": "SPS-048",
+      "species": "White-crowned Sparrow",
+      "relationship": "CULTURAL TRANSMISSION IN DIFFERENT FORMS. The White-crowned Sparrow (degree 48) transmits dialect through song learning -- geographic variants culturally maintained across generations. The Steller's Jay transmits mimicry through vocal learning -- individual jays learn hawk calls and other sounds from their acoustic environment. Both species demonstrate cultural transmission of vocal behavior, but the sparrow's transmission is conservative (preserving a dialect) while the jay's is expansive (acquiring new sounds from other species)."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Northern Spotted Owl",
+      "relationship": "PREDATOR AND PREY DYNAMIC. The Northern Spotted Owl (degree 4) is a nocturnal predator of the old-growth conifer forest. The Steller's Jay (degree 53) is a diurnal corvid of the same forest. Jays mob owls when they discover them roosting during the day -- the alarm call erupts, other birds join the mob, and the owl is forced to relocate. The owl that hooted in the night (degree 4) is now harassed by the jay that screams in the day (degree 53)."
+    },
+    {
+      "target": "SPS-043",
+      "species": "American Goldfinch",
+      "relationship": "STATE/PROVINCIAL BIRD PAIR. The American Goldfinch (degree 43) is the state bird of Washington. The Steller's Jay (degree 53) is the provincial bird of British Columbia. Both are in the engine. One represents each side of the international border. The goldfinch is E=4, yellow, open-country. The jay is E=4, blue, conifer forest. Two official birds, two jurisdictions, one bioregion."
+    },
+    {
+      "target": "SPS-000",
+      "species": "Great Blue Heron",
+      "relationship": "BOLDNESS AND PATIENCE. The Great Blue Heron (degree 0) stands motionless at the water's edge for hours, the embodiment of patience. The Steller's Jay (degree 53) screams, steals, mobs, and vanishes -- the embodiment of bold opportunism. Two survival strategies: wait for the food to come to you, or go take it. Patience vs. audacity."
+    },
+    {
+      "target": "AVI",
+      "species": "Wings of the Pacific Northwest",
+      "relationship": "Steller's Jay documented across Washington State and British Columbia. Year-round resident of coniferous and mixed forests. Common at all elevations where conifers are present. One of the most familiar and recognizable birds in the Pacific Northwest."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Mountain conifer forest ecology. Corvid seed dispersal -- caching behavior shapes oak and pine distribution over generations. Interspecific alarm networks. Nest predation on small passerines. The Steller's Jay is simultaneously a forest shaper (seed dispersal), a forest protector (sentinel alarms), and a forest threat (nest predator)."
+    }
+  ]
+}
