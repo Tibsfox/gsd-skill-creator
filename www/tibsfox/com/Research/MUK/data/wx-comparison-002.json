@@ -1,0 +1,19 @@
+{
+  "sample_id": 2,
+  "timestamp_utc": "2026-03-31T12:00:00Z",
+  "timestamp_pdt": "2026-03-31T05:00:00",
+  "sources": {
+    "kpae": {"temp_c": 3.3, "dewpoint_c": -1.1, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1014.3, "conditions": "Clear", "spread_c": 4.4},
+    "ksea": {"temp_c": 3.9, "dewpoint_c": 0.0, "wind_dir": 10, "wind_kmh": 16.7, "humidity": 50, "pressure_hpa": 1013.5, "conditions": "BKN170"},
+    "open_meteo": {"temp_c": 3.6, "dewpoint_c": 0.6, "wind_dir": 7, "wind_kmh": 8.7, "humidity": 81, "pressure_hpa": 1013.4, "conditions": "Overcast (WMO 3)"},
+    "nws": {"temp_c": 3.0, "dewpoint_c": -1.0, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1013.2, "conditions": "Clear"}
+  },
+  "scoring": {
+    "ground_truth": "kpae",
+    "ksea": {"temp_error_c": 0.6, "wind_error_kmh": 16.7, "precip_hit": true},
+    "open_meteo": {"temp_error_c": 0.3, "wind_error_kmh": 8.7, "precip_hit": true},
+    "nws": {"temp_error_c": 0.3, "wind_error_kmh": 0, "precip_hit": true}
+  },
+  "notes": "NWS nails wind (calm, matching KPAE). Open-Meteo best temp tie with NWS (0.3C). KSEA still windier due to Sea-Tac exposure. Open-Meteo says overcast again while KPAE/NWS both say clear — persistent cloud-cover disagreement. All sources converging on temperature (~3-4C range).",
+  "nws_grid": "SEW/129,82"
+}
