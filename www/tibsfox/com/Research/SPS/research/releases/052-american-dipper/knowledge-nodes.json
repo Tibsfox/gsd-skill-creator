@@ -1,0 +1,256 @@
+{
+  "degree": 52,
+  "species": "American Dipper",
+  "scientific_name": "Cinclus mexicanus",
+  "slug": "052-american-dipper",
+  "sound_type": "loud bubbling wren-like song over rushing water",
+  "energy": 3,
+  "ecosystem": "mountain stream / fast-flowing water",
+  "season": "resident (year-round)",
+  "family": "Cinclidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Long-toed Salamander",
+    "original_scientific_name": "Ambystoma macrodactylum",
+    "reason": "SPS Part B engine is birds-and-mammals only. American Dipper replaces Long-toed Salamander, preserving the original E=3 energy level and mountain stream habitat. The Long-toed Salamander is a cool, moist-habitat amphibian found near mountain lakes and slow streams in the Pacific Northwest; the American Dipper occupies the same mountain watersheds at the fast-flowing stream interface. Both species are indicators of aquatic ecosystem health -- the salamander through its permeable skin and sensitivity to water chemistry, the dipper through its dependence on clean, well-oxygenated streams with abundant EPT macroinvertebrate communities. Eighth consecutive CSV substitution replacing an amphibian-class species (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52). The engine remains deep in the amphibian belt of the original CSV.",
+    "preserved": ["E=3 energy level", "mountain stream / aquatic habitat", "aquatic ecosystem health indicator"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; American Dippers are year-round residents of fast-flowing mountain streams throughout western Washington, including the Cascades, Olympics, and foothills draining into the Puget Sound lowlands. Found on virtually every clear, cold, fast-flowing stream in the mountainous areas of the state. In western Washington, dippers nest on suitable rivers and streams down to sea level. Present on Cascade tributaries feeding Puget Sound: Snoqualmie, Skykomish, Sauk, Stillaguamish, Nooksack. Some altitudinal movement in winter from high-elevation breeding streams to lower-elevation wintering streams."
+  },
+  "taxonomy_note": {
+    "description": "American Dipper is the FIRST Cinclidae in the engine -- the 21st family. Cinclidae is monotypic in North America: Cinclus mexicanus is the only representative of the dipper family in the New World north of South America. The family contains five species worldwide, all in a single genus (Cinclus), distributed across Eurasia and the Americas. No other Cinclidae will enter the engine. One family, one species, one degree. Cinclus from Ancient Greek kinklos (a small tail-wagging waterside bird); mexicanus from Latin, meaning 'of Mexico' -- Swainson described the species in 1827 from a specimen collected in Mexico by William Bullock. Type locality: Temascaltepec de Gonzalez, State of Mexico. Full translation: 'The tail-wagging waterside bird of Mexico.'",
+    "current_family": "Cinclidae",
+    "new_family": true,
+    "family_count_in_engine": 21,
+    "cinclidae_count_in_engine": 1,
+    "name_etymology": "Cinclus = Ancient Greek kinklos, a small tail-wagging bird that lived near water. The exact identity is uncertain but likely a wagtail or similar water-associated species. mexicanus = Latin, 'of Mexico.' William Swainson described the species in 1827 based on a specimen collected in Mexico by William Bullock. The type locality is Temascaltepec de Gonzalez.",
+    "genus_note": "Cinclus is represented once in the engine. Monotypic family representation: one genus, one species, one family, one degree. Five species worldwide, all in genus Cinclus. Compare Certhiidae (degree 51): nine species worldwide, one in North America. Cinclidae: five species worldwide, one in North America. The American Dipper will be the only Cinclidae for the full 360 degrees.",
+    "order_note": "Passeriformes continues from degree 51. FIFTEENTH consecutive Passeriformes (38-52). 45 of 53 entries (84.9%) are Passeriformes. However, the Cinclidae is as far from a typical 'perching bird' as any Passeriformes can be -- an aquatic songbird that dives, swims, and walks underwater.",
+    "family_position": "Cinclidae enters as the 21st family with 1 member at degree 52. Second consecutive new-family event (Certhiidae at 51, Cinclidae at 52) -- the first back-to-back new-family entries since the engine's earliest degrees.",
+    "former_name": "Formerly called the water ouzel -- the name used by John Muir in The Mountains of California (1894). 'Ouzel' from Old English osle, originally referring to the Eurasian Blackbird (Turdus merula). The American Ornithologists' Union standardized 'American Dipper' in the 20th century."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-8,000 (across song and calls)",
+    "peak_energy_band_hz": "3,000-6,000 (song peak energy, above stream noise)",
+    "song_frequency_hz": "Song ranges 2,000-8,000 Hz broadly. Peak energy 3,000-6,000 Hz -- deliberately above the dominant frequencies of stream noise (which peaks below 1,000 Hz for most whitewater). Jik call: 4,000-5,500 Hz. Grawk call: 3,000-4,500 Hz.",
+    "song_duration_s": "60-600 (1-10 minutes per bout; confrontation songs > 5 minutes)",
+    "note_structure": "COMPLEX SUSTAINED BUBBLING SERIES: a mixture of high whistles, trills, buzzy notes, and melodious warbling phrases strung together in extended, varied sequences. No simple mnemonic captures it. The song is improvisatory and variable, more like a mockingbird's extended performance than a simple territorial signal. Among the longest sustained vocal performances in the engine.",
+    "note_types": "THREE main call categories plus song: (1) SONG -- the extended bubbling series, 1-10 minutes. (2) JIK CALL -- sharp, buzzy 'jik' or 'dzit', ~46 ms, 4.0-5.5 kHz, primary contact/alarm call given in flight. (3) GRAWK CALL -- lower, harsher 'grawk' or 'zreet', ~88 ms, 3.0-4.5 kHz, territorial confrontation. (4) WEEP CALL -- softer, 4.0-6.0 kHz, female at nest.",
+    "phrase_structure": "Highly variable and complex. Extended bouts of singing with mixed phrase types -- trills, buzzes, warbles, and whistles combined in sequence. More complex and sustained than any previous species in the engine. The dipper's song is the acoustic equivalent of the rushing stream it inhabits: continuous, varied, powerful.",
+    "timbre": "BRIGHT, BUBBLING, LOUD. Rich harmonic content with substantial mid-frequency energy. The brightest, most assertive timbre since the Purple Martin (degree 26). The antithesis of the Brown Creeper's thin, wispy bark-spiral (degree 51). Where the creeper's timbre vanishes into the forest, the dipper's timbre cuts through water noise.",
+    "amplitude": "E=3 -- moderate-high energy. The song must compete with rushing water. One of the loudest passerine songs relative to body size when measured against ambient noise level. The jump from E=1 (degree 51) to E=3 (degree 52) is the largest upward energy shift in two consecutive degrees since the early engine.",
+    "tempo": "Variable within song bouts. Trills are rapid; warbling phrases are more measured. The overall song has a tumbling, cascading quality -- phrases flow into one another like water flowing over rocks.",
+    "context": "Song given year-round by BOTH sexes -- unusual among passerines. Both males and females sing through winter, even while standing on ice-covered rocks. Territorial song given when intruders are detected, during close confrontation, and in defense of nest or roost. Dawn song documented. One of very few North American songbirds that sings through the coldest months.",
+    "regional_variation": "Song variation documented across the range but less studied than some species. The acoustic environment (louder streams vs. quieter pools) may influence song structure locally -- dippers on louder streams may sing louder or use different frequency emphases.",
+    "key_property": "THE TORRENT-SONG -- the 53rd acoustic element (species side). A loud, complex, sustained, bubbling series of trills and warbles that must compete with the roar of rushing water to be heard. Named 'the torrent-song' for three resonances: (1) the torrent itself -- the song must overpower the noise of fast-flowing mountain streams; (2) the torrent of notes -- up to 10 minutes of continuous, complex vocalization, a flood of sound matching the flood of water; (3) the torrent-song as water quality signal -- its presence indicates clean, well-oxygenated streams, its absence indicates degradation. The first acoustic element defined by ENVIRONMENTAL COMPETITION -- sound shaped by the need to overpower a natural noise source. The exact opposite of the bark-spiral (degree 51): the bark-spiral hides; the torrent-song fights."
+  },
+  "plumage": {
+    "overall": "Uniform slate-gray to dark brownish-gray. No wing bars, no streaking, no patches of contrasting color. The most uniformly colored bird in the engine. Compact, rotund body shape.",
+    "diagnostic_mark": "DIPPING MOTION -- not a plumage mark but a behavioral one. Constant bobbing at 40-60 dips per minute while perched on rocks. White nictitating membrane flash when blinking. No other bird behaves like this in this habitat.",
+    "upperparts": "Uniform slate-gray to dark brownish-gray. Slightly darker on wings. No streaking, no bars, no contrasting marks.",
+    "underparts": "Slightly paler gray than upperparts. No markings. Clean and uniform.",
+    "head": "Slightly darker brown tinge in some individuals, especially in fresh plumage. Dark brown eyes. White nictitating membrane conspicuous when blinking.",
+    "bill": "Short, straight, dark. Approximately 18-20 mm. General-purpose insectivore bill adapted for picking prey off underwater surfaces.",
+    "tail": "Short and stubby. Often cocked upward, wren-like. Dark gray matching body.",
+    "undertail_coverts": "Gray, matching body. No contrasting color.",
+    "wing_edges": "No wing bars or contrasting edges. Wings used for 'flying' underwater.",
+    "field_id": "Unmistakable in habitat. Compact, uniform gray bird perched on rocks in the middle of rushing mountain streams, constantly bobbing up and down, diving into fast water and surfacing moments later. The combination of habitat, behavior (dipping + diving), and uniform plumage is diagnostic. No other bird behaves like this. White eyelid flash visible at distance."
+  },
+  "aquatic_adaptations": {
+    "description": "The American Dipper is the ONLY songbird in North America that forages by walking, swimming, and diving in fast-flowing water. A suite of anatomical and physiological adaptations makes this unique lifestyle possible.",
+    "adaptations": [
+      "Nictitating membrane (third eyelid): highly developed translucent membrane protects eye while allowing underwater vision. Functions as built-in goggle.",
+      "Nasal flaps: movable, scaled flaps seal nostrils shut when diving, preventing water inhalation.",
+      "Extra-large preen (uropygial) gland: approximately 10x larger than similar-sized passerine. Copious oil waterproofs plumage. Trapped air layer provides insulation and silvery underwater sheen.",
+      "Higher hemoglobin concentration: increased oxygen-carrying capacity for sustained dives of 15-30 seconds.",
+      "Lower metabolic rate: helps maintain body temperature in cold mountain water.",
+      "Dense waterproof plumage: approximately 50% more feathers per unit area than terrestrial passerines of similar size.",
+      "Strong legs and feet: proportionally larger with strong curved claws for gripping wet, slippery rock surfaces.",
+      "Compact rotund body: minimizes surface-area-to-volume ratio, reducing heat loss in cold water."
+    ],
+    "foraging_method": "Wades into current, dives from rocks or surface, walks on stream bottom gripping rocks with strong toes, flips stones to find aquatic insect larvae. Can remain submerged 15-30 seconds. Surfaces and returns to mid-stream boulder to consume prey.",
+    "no_other_passerine": "No other passerine in the world outside the five species of Cinclidae walks on stream bottoms. The American Dipper has evolved convergently with no other songbird -- it occupies a niche that is otherwise empty in the passerine order."
+  },
+  "water_quality_indicator": {
+    "description": "The American Dipper is one of the most reliable biological indicators of stream health in western North America. Its presence and breeding success directly reflect the condition of the aquatic invertebrate community, which in turn reflects the condition of the stream.",
+    "mechanism": "Dippers feed on EPT taxa (Ephemeroptera/mayflies, Plecoptera/stoneflies, Trichoptera/caddisflies) -- aquatic insects that are themselves indicators of clean, well-oxygenated water. Dipper breeding density, territory size, and reproductive success correlate with water quality metrics.",
+    "research_applications": [
+      "Bioindicator for selenium contamination in coal mine-affected streams (Wayland et al. 2006)",
+      "Trace metal exposure monitoring in British Columbia streams (Morrissey et al. 2005)",
+      "Contaminant biotransport via salmon carcasses in Pacific Northwest watersheds (Morrissey et al. 2011)",
+      "Baseline indicator of stream and riparian health (Roaring Fork Conservancy 2014)"
+    ],
+    "acoustic_consequence": "The presence of the torrent-song is an acoustic certificate of water health. Where the song is heard, the stream is clean. Where it falls silent, the stream has been degraded. The American Dipper's song is not just a territorial signal -- it is an ecological report card."
+  },
+  "muir_connection": {
+    "description": "John Muir devoted an entire chapter (Chapter 13, 'The Water-Ouzel') of The Mountains of California (1894) to the American Dipper. It was his favorite bird.",
+    "key_quote": "He is the mountain streams' own darling, the humming-bird of blooming waters, loving rocky ripple-slopes and sheets of foam as a bee loves flowers, as a lark loves sunshine and meadows. Among all the mountain birds, none has cheered me so much in my lonely wanderings, -- none so unfailingly.",
+    "significance": "The Muir connection places the American Dipper at the intersection of ornithology and American conservation history. Muir's chapter on the water ouzel is among the most celebrated pieces of nature writing in the English language. The dipper symbolizes wilderness itself -- hardy, joyful, inseparable from wild water.",
+    "pnw_connection": "While Muir wrote primarily about Sierra Nevada dippers, the species ranges throughout the mountain streams of the Pacific Northwest. Every clear, cold stream in the Cascades, Olympics, and Coast Range supports dippers. The bird Muir loved in Yosemite is the same bird that sings on the Snoqualmie, the Skykomish, and every mountain tributary feeding Puget Sound."
+  },
+  "dome_nest": {
+    "description": "The American Dipper builds a distinctive globe-shaped or dome-shaped nest of living moss, approximately 30 cm in diameter, with a side entrance facing the water. Placed on rock ledges, bridge abutments, or cliff faces immediately over fast-flowing water -- sometimes behind waterfalls.",
+    "materials": "Outer shell: green, living moss (continues to grow after incorporation), 3-5 cm thick. Inner layers: coarse grasses, rootlets, leaves. The mossy shell absorbs spray while the water-resistant inner lining keeps eggs and chicks dry.",
+    "waterfall_nesting": "Some nest sites are placed directly behind waterfalls, requiring the bird to fly through falling water to access the nest. This provides near-complete protection from terrestrial predators.",
+    "eggs": "3-5, white, unmarked",
+    "incubation": "15-17 days, female only",
+    "nestling_period": "24-25 days -- long for a passerine of this size",
+    "comparison": "Where the Brown Creeper (degree 51) hides behind bark, the American Dipper hides behind water. Both use physical features of the environment as nest defense."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The torrent-song -- the 53rd acoustic element (species side): a loud, complex, sustained, bubbling series of trills and warbles that must compete with the roar of rushing water. The American Dipper's song ranges 2.0-8.0 kHz with peak energy at 3.0-6.0 kHz (above stream noise, which peaks below 1 kHz). Song bouts last 1-10 minutes. Named 'the torrent-song' because: (1) the torrent itself -- the song must overpower the noise of fast-flowing mountain streams; (2) the torrent of notes -- up to 10 minutes of continuous, complex vocalization, a flood of sound matching the flood of water; (3) the torrent-song as water quality signal -- its presence indicates clean streams, its absence indicates degradation. The first element defined by ENVIRONMENTAL COMPETITION -- sound shaped by the need to dominate a natural noise source. The exact opposite of the bark-spiral (degree 51): crypsis vs. dominance, hiding vs. fighting.",
+      "level": "foundational",
+      "department": "music-theory/song-form",
+      "college_path": ".college/music/theory/song-form/torrent-song/",
+      "examples": [
+        "Song peak energy at 3.0-6.0 kHz is deliberately above stream noise (peak below 1 kHz). The dipper's voice occupies the spectral window that stream noise leaves open -- evolutionary spectral partitioning with a non-biological noise source.",
+        "Contrast with the bark-spiral (degree 51): the bark-spiral is high, thin, easily missed -- E=1, cryptic frequency. The torrent-song is loud, complex, sustained -- E=3, environmental competition. The bark-spiral hides; the torrent-song fights.",
+        "Song bouts of 1-10 minutes are among the longest sustained vocal performances in the engine. The dipper sings longer than it dives.",
+        "Both sexes sing year-round, including through winter while standing on ice-covered rocks. The torrent-song never stops. The stream never stops. Bird and habitat are acoustically inseparable.",
+        "At degree 52, the engine's first aquatic acoustic element. All 52 previous elements were terrestrial: forest, meadow, marsh, shrub. The torrent-song introduces water as an acoustic environment."
+      ],
+      "music_theory_parallel": "The fortissimo obligato -- a solo line that must be played at maximum volume to be heard against a full orchestra. In a concerto, the soloist must project over the entire ensemble during tutti passages. The American Dipper is the soloist; the rushing stream is the orchestra. The torrent-song is the obligato that must cut through the torrent to be heard. The loudness is not optional -- it is structurally required by the acoustic environment."
+    },
+    {
+      "concept": "First Cinclidae -- the 21st family in the engine. The American Dipper is the only North American member of the dipper family Cinclidae. Monotypic family representation: one genus (Cinclus), one species (C. mexicanus), one degree (52). The family contains five species worldwide, all in genus Cinclus, distributed across Eurasia and the Americas. No other Cinclidae will enter the engine. Second consecutive new family entry (Certhiidae at 51, Cinclidae at 52) -- back-to-back monotypic family introductions. The only aquatic songbird family on Earth.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/new-family-cinclidae/",
+      "examples": [
+        "21st family in 53 entries. Previous new-family events include Certhiidae (51), Bombycillidae (31), Cardinalidae (23), Thraupidae (24), and now Cinclidae (52).",
+        "Second consecutive new family: Certhiidae at 51 (bark), Cinclidae at 52 (water). Two monotypic singletons in sequence. First back-to-back new families since early engine.",
+        "Cinclidae is unique among passerine families: the only family whose members are aquatic. All five species worldwide forage underwater, build dome nests near water, and share the dipping behavior.",
+        "Swainson (1827) described C. mexicanus from a specimen collected in Mexico by William Bullock. The type locality is Temascaltepec de Gonzalez.",
+        "Five species worldwide vs. Certhiidae's nine. Both are small, specialized families. Both are monotypic in North America. Both enter the engine as singletons."
+      ],
+      "music_theory_parallel": "The new instrument -- a hydraulophone entering the ensemble. A hydraulophone is a musical instrument played by water -- sound is produced by the interaction of fingers with water jets. No other instrument in the orchestra uses water as its medium. Cinclidae is the hydraulophone of the avian world: the only family that makes its living in water. When it enters the engine, it brings an entirely new timbral palette that no terrestrial family can produce."
+    },
+    {
+      "concept": "The only aquatic songbird in North America -- the American Dipper walks, swims, and dives in fast-flowing mountain streams, foraging on aquatic invertebrates on the stream bottom. No other passerine does this. Unique adaptations: nictitating membrane (third eyelid for underwater vision), nasal flaps (seal nostrils when diving), extra-large preen gland (10x normal for waterproofing), higher hemoglobin (increased oxygen-carrying capacity), dense plumage (50% more feathers than terrestrial passerines). The engine enters the water for the first time at degree 52.",
+      "level": "foundational",
+      "department": "ecology/adaptation",
+      "college_path": ".college/ecology/adaptation/aquatic-songbird/",
+      "examples": [
+        "Walks on stream bottoms gripping rocks with strong claws. Can remain submerged 15-30 seconds. 'Flies' underwater using wings to maintain position against current.",
+        "Nictitating membrane = built-in goggles. Nasal flaps = built-in nose plugs. Preen gland 10x normal = built-in wetsuit. The American Dipper is a songbird that evolved dive equipment.",
+        "The first 51 degrees were terrestrial: forest canopy, bark, meadow, marsh, shrub. Degree 52 enters the water. The engine's ecological frontier expands from land to water.",
+        "Higher hemoglobin concentration allows extended submersion. Low metabolic rate helps maintain body temperature in cold water. The entire physiology is tuned for aquatic life.",
+        "Compare with the Brown Creeper (degree 51): the creeper evolved for a substrate no other passerine uses (bark spiraling). The dipper evolved for a medium no other passerine enters (fast-flowing water). Two consecutive degrees, two impossible substrates."
+      ],
+      "music_theory_parallel": "The underwater microphone (hydrophone) -- a recording device designed to capture sound in a medium no other microphone can reach. Standard microphones record air-borne sound. Hydrophones record waterborne sound -- a completely different acoustic world with different physics, different propagation, different ambient noise. The American Dipper is the avian hydrophone: the only songbird that operates in the underwater acoustic environment."
+    },
+    {
+      "concept": "John Muir's favorite bird -- Muir devoted Chapter 13 of The Mountains of California (1894) to the American Dipper (then called the water ouzel). 'He is the mountain streams' own darling, the humming-bird of blooming waters.' Muir admired the dipper's year-round singing, its diving into icy torrents, its mossy dome nest behind waterfalls, and its unshakeable cheerfulness. The dipper stands at the intersection of ornithology and American conservation history -- the favorite bird of the father of the national parks.",
+      "level": "foundational",
+      "department": "ecology/conservation-history",
+      "college_path": ".college/ecology/conservation-history/muir-water-ouzel/",
+      "examples": [
+        "'Among all the mountain birds, none has cheered me so much in my lonely wanderings, -- none so unfailingly.' -- Muir, The Mountains of California, Chapter 13.",
+        "Muir's water ouzel chapter is among the most celebrated pieces of nature writing in the English language. The dipper is not just a bird; it is a symbol of wilderness itself.",
+        "The dipper that sings while icicles hang from frozen waterfalls embodied, for Muir, the essential character of the Sierra Nevada mountains.",
+        "The same species Muir loved in Yosemite sings on every clear, cold mountain stream draining into Puget Sound.",
+        "The Muir-dipper connection bridges ornithology and conservation politics. The man who convinced Theodore Roosevelt to protect Yosemite chose this bird as his favorite -- the bird that requires wild, undammed, unpolluted mountain streams."
+      ],
+      "music_theory_parallel": "The winter cadenza -- a solo performance when the orchestra has fallen silent. In a concerto, the cadenza is the moment when the orchestra drops out and the soloist plays alone, unaccompanied. Winter is the season when most birds fall silent. The American Dipper sings through winter, alone on an ice-rimmed rock, performing its cadenza while every other voice has stopped. Muir loved this most: the bird that keeps singing when the world goes quiet."
+    },
+    {
+      "concept": "Water quality indicator species -- the American Dipper's presence and breeding success correlate directly with stream health. Dippers feed on EPT taxa (mayflies, stoneflies, caddisflies) that are themselves indicators of clean water. Their density, territory size, and reproductive success reflect aquatic ecosystem condition. Used as bioindicators for selenium contamination, trace metals, and contaminant biotransport. The torrent-song is an acoustic report card: where it is heard, the water is clean; where it falls silent, the stream is degraded.",
+      "level": "foundational",
+      "department": "ecology/conservation",
+      "college_path": ".college/ecology/conservation/water-quality-indicator/",
+      "examples": [
+        "Dippers positively select EPT taxa for their diet. EPT presence is the standard rapid bioassessment metric used by EPA and state agencies. The dipper is a feathered EPT sampler.",
+        "On clean streams: smaller territories, more pairs per kilometer, higher reproductive output. On degraded streams: larger territories, fewer pairs, lower reproduction.",
+        "Selenium bioindicator: Wayland et al. (2006) documented selenium accumulation in dippers on coal mine-affected streams in Alberta.",
+        "Contaminant biotransport: Morrissey et al. (2011) showed dippers indicate salmon-borne contaminant transfer into stream food webs in the Pacific Northwest.",
+        "Compare with Northern Spotted Owl (degree 4): both are indicator species for ecosystem health. The owl indicates old-growth forest condition. The dipper indicates stream condition. Forest canopy and stream bottom -- two ecosystems, two sentinels."
+      ],
+      "music_theory_parallel": "The tuning fork -- an absolute reference standard against which the pitch (health) of an instrument (stream) is measured. A tuning fork vibrates at a fixed, known frequency. When you strike it next to a piano string, you can hear whether the string is in tune. The American Dipper is the tuning fork of the stream: its presence says the stream is in tune; its absence says the stream is out of tune. The torrent-song is A440 for water quality."
+    },
+    {
+      "concept": "The dome nest behind the waterfall -- the American Dipper builds a globe-shaped nest of living moss approximately 30 cm in diameter, with a side entrance facing the water, placed on rock ledges and cliff faces immediately over fast-flowing water. Some nests are placed directly behind waterfalls, requiring the bird to fly through falling water to access eggs. The most dramatic nest location of any species in the engine. Living moss continues to grow in the nest. Thick outer shell absorbs spray while water-resistant inner grasses keep eggs dry.",
+      "level": "intermediate",
+      "department": "ecology/nesting",
+      "college_path": ".college/ecology/nesting/dome-nest-waterfall/",
+      "examples": [
+        "Dome shape: approximately 30 cm diameter, 3-5 cm thick moss outer shell, side entrance. The nest absorbs water from spray while keeping the interior dry.",
+        "Behind-waterfall nesting: the bird must fly through curtain of falling water to reach eggs. Near-complete protection from terrestrial predators.",
+        "Living moss continues growing after incorporation into nest structure. The nest is a living, growing structure in a continuously wet environment.",
+        "Compare Brown Creeper (degree 51): hammock nest behind bark flap on dead trees. Both species use physical environmental features (bark, water) as nest concealment and defense.",
+        "The dome nest is architecturally unique among North American passerines. The combination of dome shape + living moss + spray-zone placement + behind-waterfall option makes it the most specialized nest in the engine."
+      ],
+      "music_theory_parallel": "The reverb chamber -- a performance space where the acoustics of the room shape the sound. Recording studios use live rooms with specific reverb characteristics; the dipper nests inside a natural reverb chamber where the constant sound of water is the room tone. The dome of moss is the acoustic shell; the waterfall is the reverb. Every sound inside the nest is heard against the background of falling water. The nest is a concert hall built inside a fountain."
+    },
+    {
+      "concept": "The dipping behavior -- the constant bobbing or curtsey-like motion performed while perched on rocks, at 40-60 dips per minute. The signature behavior that names the family Cinclidae. The white nictitating membrane flashes visibly with each blink, creating a conspicuous white flash. Function debated: territorial signaling, depth perception over moving water, or visual camouflage matching water motion over rocks. All five species of Cinclidae worldwide exhibit this behavior.",
+      "level": "intermediate",
+      "department": "ecology/behavior",
+      "college_path": ".college/ecology/behavior/dipping-motion/",
+      "examples": [
+        "40-60 dips per minute -- a rhythmic, persistent, involuntary-seeming motion. The bird bends its legs and lowers its body, then straightens. Like a curtsey or a nod.",
+        "White nictitating membrane flash: Sibley (2013) noted the conspicuous white eyelid flash may function as a visual signal, analogous to the Dark-eyed Junco's (degree 47) white tail-flash.",
+        "Function hypotheses: (1) territorial signal to conspecifics, (2) helps judge distances over moving water, (3) blends bird's silhouette with bobbing motion of water over rocks.",
+        "Universal within Cinclidae: all five species worldwide dip. The behavior predates the family's radiation across continents -- it is ancestral, not convergent.",
+        "The dipping motion is the visual analog of the torrent-song: constant, rhythmic, persistent. Sound and motion both repeat without stopping, matching the ceaseless flow of the stream."
+      ],
+      "music_theory_parallel": "The ostinato -- a rhythmic or melodic figure repeated persistently throughout a musical passage. In Ravel's Bolero, the snare drum plays the same rhythmic pattern for 17 minutes without variation. The dipper's dipping motion is the avian ostinato: a single rhythmic figure repeated 40-60 times per minute, all day, every day, for the bird's entire life. The dip is the beat. The stream is the tempo. The performance never stops."
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-051",
+      "species": "Brown Creeper",
+      "relationship": "CONSECUTIVE DEGREES, OPPOSITE ACOUSTIC STRATEGIES. The bark-spiral (degree 51, Certhiidae, E=1, crypsis) yields to the torrent-song (degree 52, Cinclidae, E=3, dominance). Both are monotypic family representatives in consecutive degrees. Back-to-back singleton families, diametrically opposed in acoustic strategy. The creeper whispers; the dipper shouts. Crypsis yields to environmental competition."
+    },
+    {
+      "target": "SPS-000",
+      "species": "Great Blue Heron",
+      "relationship": "WATER BIRDS BOOKENDING THE FIRST ARC. The Great Blue Heron (degree 0) stands in shallow water -- still, silent, patient. The American Dipper (degree 52) dives into rushing water -- active, loud, immersed. Degree 0 was at the water's edge. Degree 52 goes IN the water. The engine comes to water from both ends of its first arc."
+    },
+    {
+      "target": "SPS-001",
+      "species": "Pacific Wren",
+      "relationship": "WREN-LIKE SONG, STREAM ASSOCIATION. The Pacific Wren (degree 1) sings a complex, cascading song near forest streams. The American Dipper's song is described as 'wren-like' in its bubbling complexity but is louder and more sustained. Both are compact, short-tailed birds associated with water. The wren stays on the bank; the dipper goes in."
+    },
+    {
+      "target": "SPS-005",
+      "species": "Red-breasted Nuthatch",
+      "relationship": "SUBSTRATE SPECIALISTS IN DIFFERENT MEDIA. The nuthatch (degree 5) descends bark -- a specialized surface no other passerine uses the same way. The dipper (degree 52) walks on stream bottoms -- a medium no other passerine enters. Both grip surfaces with specialized feet. Both navigate terrain that other songbirds cannot. Bark vs. water: two impossible substrates, two specialized solutions."
+    },
+    {
+      "target": "SPS-018",
+      "species": "Swainson's Thrush",
+      "relationship": "RIPARIAN STREAM ASSOCIATES. Swainson's Thrush (degree 18) sings its spiraling ascending song from streamside alder and willow. The American Dipper sings from a rock in the middle of the same stream. Riparian habitat above and in the water. The thrush is streamside; the dipper is in-stream."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Northern Spotted Owl",
+      "relationship": "ECOSYSTEM INDICATOR SPECIES PAIR. The Spotted Owl (degree 4) indicates old-growth forest health. The American Dipper (degree 52) indicates stream health. Both are living metrics whose presence means the ecosystem is functioning and whose absence means something is broken. Forest canopy and stream bottom -- two indicator species, two ecosystems, one forest."
+    },
+    {
+      "target": "AVI",
+      "species": "Wings of the Pacific Northwest",
+      "relationship": "American Dipper documented across Washington State. Year-round resident of fast-flowing mountain streams from the Olympics to the eastern Cascades. The only aquatic songbird in the PNW avifauna. Found on virtually every clear, cold stream in the mountainous areas of the state."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Mountain stream ecology. Aquatic macroinvertebrate food webs. EPT taxa as water quality bioindicators. The American Dipper connects riparian forest ecology to aquatic ecosystem health. Stream sedimentation from logging. Water temperature increases from climate change. The bird that reads the health of the stream by eating what lives in it."
+    }
+  ],
+  "dipping_behavior": {
+    "description": "The constant bobbing or dipping motion performed while perched on rocks in or beside streams. The signature behavior that gives the family its name.",
+    "rate": "40-60 dips per minute",
+    "function_hypotheses": [
+      "Territorial signal to conspecifics",
+      "Depth perception aid over moving water",
+      "Visual camouflage matching water motion over rocks"
+    ],
+    "white_eyelid_flash": "The white nictitating membrane creates a conspicuous flash when the bird blinks during dipping. Sibley (2013) noted this may function as a visual signal, analogous to the Dark-eyed Junco's white tail-flash.",
+    "universal_in_cinclidae": "All five species of Cinclidae worldwide exhibit this behavior. Ancestral, not convergent."
+  }
+}
