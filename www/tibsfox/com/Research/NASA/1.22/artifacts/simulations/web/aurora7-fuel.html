@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora 7 — Fuel Monitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --space: #040508;
+    --aurora-green: #20A060;
+    --aurora-dim: #106030;
+    --phosphor: #30C070;
+    --amber: #D09020;
+    --red: #D03020;
+    --text: #E0E0E0;
+    --text-dim: #707070;
+    --panel-bg: #06080E;
+    --border: #102818;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--space);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+  }
+  h1 {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: var(--aurora-green);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 16px;
+    max-width: 1440px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sim-panel {
+    flex: 1;
+    min-width: 700px;
+    max-width: 960px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .info-panel {
+    flex: 0 0 280px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 11px;
+    max-height: 680px;
+    overflow-y: auto;
+  }
+  .panel-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--aurora-green);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--border);
+  }
+  canvas { width: 100%; border-radius: 6px; background: var(--space); }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    padding: 5px 14px;
+    border: 1px solid #1A3828;
+    background: #0C1810;
+    color: var(--text-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .ctrl-btn:hover { border-color: var(--aurora-green); color: var(--text); }
+  .ctrl-btn.active { border-color: var(--aurora-green); color: var(--aurora-green); background: rgba(32,160,96,0.1); }
+  .ctrl-btn.warn { border-color: var(--amber); color: var(--amber); }
+  .speed-control { display: flex; align-items: center; gap: 6px; }
+  .speed-control label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-dim); }
+  .speed-control input[type=range] { width: 100px; accent-color: var(--aurora-green); }
+  .speed-val { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--aurora-green); min-width: 30px; }
+  .hud-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px solid #080E10;
+  }
+  .hud-label { color: var(--text-dim); font-family: 'DM Mono', monospace; font-size: 10px; }
+  .hud-value { color: var(--text); font-family: 'DM Mono', monospace; font-size: 10px; }
+  .hud-value.ok { color: var(--aurora-green); }
+  .hud-value.warn { color: var(--amber); }
+  .hud-value.crit { color: var(--red); }
+  .event-log {
+    margin-top: 6px;
+    max-height: 150px;
+    overflow-y: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    padding: 6px;
+    background: #040610;
+    border-radius: 4px;
+  }
+  .event-log .ev { padding: 2px 0; border-bottom: 1px solid #080E10; }
+  .event-log .et { color: var(--aurora-green); }
+  .event-log .em { color: var(--amber); }
+  .fuel-warning {
+    display: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--red);
+    text-align: center;
+    padding: 6px;
+    margin-top: 6px;
+    border: 1px solid var(--red);
+    border-radius: 4px;
+    letter-spacing: 2px;
+    animation: blink 0.8s infinite;
+  }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .footer {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    margin-top: 16px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<h1>MA-7 Aurora 7 &mdash; Fuel Monitor</h1>
+<p class="subtitle">Mercury-Atlas 7 &mdash; Scott Carpenter &mdash; May 24, 1962 &mdash; 3 Orbits</p>
+
+<div class="main-container">
+  <div class="sim-panel">
+    <div class="panel-title">Attitude Control Fuel &mdash; Phosphor Display</div>
+    <canvas id="fuelCanvas" width="920" height="480"></canvas>
+    <div class="controls">
+      <button class="ctrl-btn active" id="btnPlay" onclick="togglePause()">PAUSE</button>
+      <button class="ctrl-btn" onclick="restart()">RESTART</button>
+      <button class="ctrl-btn" id="btnUnsched" onclick="toggleUnsched()">UNSCHED: ON</button>
+      <button class="ctrl-btn warn" onclick="addManeuver()">ADD MANEUVER</button>
+      <div class="speed-control">
+        <label>SPEED</label>
+        <input type="range" id="speedSlider" min="1" max="200" value="60">
+        <span class="speed-val" id="speedVal">60x</span>
+      </div>
+    </div>
+    <div class="fuel-warning" id="fuelWarn">FUEL CRITICAL &mdash; RETROFIRE MARGIN INSUFFICIENT</div>
+  </div>
+
+  <div class="info-panel">
+    <div class="panel-title">Telemetry</div>
+    <div class="hud-row"><span class="hud-label">MET</span><span class="hud-value ok" id="hMET">00:00:00</span></div>
+    <div class="hud-row"><span class="hud-label">ORBIT</span><span class="hud-value" id="hOrbit">---</span></div>
+    <div class="hud-row"><span class="hud-label">ALTITUDE</span><span class="hud-value" id="hAlt">0 km</span></div>
+    <div class="hud-row"><span class="hud-label">RSCS FUEL</span><span class="hud-value ok" id="hRSCS">100.0%</span></div>
+    <div class="hud-row"><span class="hud-label">ASCS FUEL</span><span class="hud-value ok" id="hASCS">100.0%</span></div>
+    <div class="hud-row"><span class="hud-label">STATUS</span><span class="hud-value ok" id="hStatus">PRE-LAUNCH</span></div>
+
+    <div class="panel-title" style="margin-top:14px">Event Log</div>
+    <div class="event-log" id="eventLog"></div>
+
+    <div class="panel-title" style="margin-top:14px">Mission Context</div>
+    <div style="font-size:10px;line-height:1.7;color:var(--text-dim)">
+      <strong style="color:var(--aurora-green)">Problem:</strong> Carpenter's manual attitude
+      maneuvers consumed far more fuel than planned. By orbit 3, manual fuel was
+      critically low. He entered retrofire with only ~24% manual and ~0% automatic
+      fuel, overshooting the landing zone by 250 nautical miles.<br><br>
+      <strong style="color:var(--aurora-green)">This simulation</strong> tracks both fuel
+      systems in real time. Toggle unscheduled maneuvers to see their impact.
+      Use ADD MANEUVER to simulate additional attitude corrections.
+    </div>
+  </div>
+</div>
+
+<p class="footer">Mission 1.22 &bull; NASA Mission Series &bull; tibsfox.com/Research/NASA/</p>
+
+<script>
+const C = document.getElementById('fuelCanvas');
+const ctx = C.getContext('2d');
+
+const MISSION_DUR = 4 * 3600 + 56 * 60;
+const ORBIT_PERIOD = 88.5 * 60;
+const ORBIT_START = 510;
+const PERIGEE = 161, APOGEE = 265;
+const RETRO_TIME = 4 * 3600 + 33 * 60;
+const CRITICAL_FUEL = 15;
+
+let met = 0, paused = false, speed = 60, lastTS = 0, done = false;
+let rscsFuel = 100, ascsFuel = 100;
+let showUnsched = true;
+let events = [], fired = {};
+let userManeuvers = [];
+let scanline = 0;
+let fuelHistory = [{ t: 0, r: 100, a: 100 }];
+let lastHistT = 0;
+const HIST_INTERVAL = MISSION_DUR / 400;
+
+const SCHEDULED = [
+  [510,   0.8, 0.5, 'Orbit insertion attitude hold'],
+  [1800,  0.5, 0.3, 'Orbit 1 yaw maneuver'],
+  [3600,  0.6, 0.4, 'Orbit 1 pitch experiment'],
+  [5400,  0.5, 0.3, 'Orbit 2 entry — attitude check'],
+  [7200,  0.4, 0.2, 'Orbit 2 mid-point trim'],
+  [9000,  0.5, 0.3, 'Orbit 2 sunset orientation'],
+  [10800, 0.5, 0.3, 'Orbit 3 entry — attitude check'],
+  [12600, 0.4, 0.2, 'Orbit 3 mid-point trim'],
+  [RETRO_TIME, 3.0, 0.0, 'Retrofire attitude hold'],
+];
+
+const UNSCHEDULED = [
+  [1200,  1.5, 0.0, 'Manual yaw exploration'],
+  [2400,  2.0, 0.0, 'Horizon scanner investigation'],
+  [3000,  1.8, 0.0, 'Firefly observation maneuver'],
+  [4200,  1.2, 0.0, 'Photography attitude adjust'],
+  [5800,  2.5, 0.0, 'Extended pitch maneuver'],
+  [6600,  3.0, 0.0, 'Balloon experiment tracking'],
+  [7800,  2.0, 0.0, 'Manual horizon alignment'],
+  [8400,  1.5, 0.0, 'Unplanned yaw correction'],
+  [9600,  2.8, 0.0, 'Star identification maneuver'],
+  [10200, 2.0, 0.0, 'Additional attitude experiment'],
+  [11400, 3.5, 0.0, 'Extended manual control'],
+  [12000, 2.5, 0.0, 'Pre-retrofire alignment attempts'],
+  [13200, 4.0, 0.0, 'Retrofire orientation struggle'],
+];
+
+const TIMELINE_EVENTS = [
+  [0,     'LAUNCH'],
+  [130,   'BECO'],
+  [310,   'SECO'],
+  [510,   'ORBIT 1'],
+  [3000,  'FIREFLY TAP'],
+  [5820,  'ORBIT 2'],
+  [11130, 'ORBIT 3'],
+  [RETRO_TIME, 'RETROFIRE'],
+  [16800, 'REENTRY'],
+  [MISSION_DUR, 'SPLASHDOWN'],
+];
+
+const LOG_EVENTS = [
+  [0,     'T-0 LAUNCH', 'ASCENT'],
+  [130,   'BECO — BOOSTER ENGINE CUTOFF', 'ASCENT'],
+  [310,   'SECO — SUSTAINER CUTOFF', 'ASCENT'],
+  [510,   'ORBIT INSERTION — 161 x 265 km', 'ORBIT 1'],
+  [3000,  'FIREFLY TAP — CARPENTER TAPS CAPSULE WALL', 'ORBIT 1'],
+  [5820,  'ORBIT 2 BEGIN', 'ORBIT 2'],
+  [7200,  'PITCH HORIZON SCANNER MALFUNCTION', 'ORBIT 2'],
+  [11130, 'ORBIT 3 BEGIN', 'ORBIT 3'],
+  [RETRO_TIME, 'RETROFIRE — 3s LATE, 25deg YAW ERROR', 'RETROFIRE'],
+  [16800, 'REENTRY — 250 NMI OVERSHOOT', 'REENTRY'],
+  [MISSION_DUR, 'SPLASHDOWN — MISSION COMPLETE', 'SPLASHDOWN'],
+];
+
+function fmtTime(t) {
+  const h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = Math.floor(t % 60);
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function fmtShort(t) {
+  const h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60);
+  return h > 0 ? `${h}h${String(m).padStart(2,'0')}m` : `${m}m`;
+}
+
+function logEvent(t, text) {
+  events.unshift({ ts: fmtTime(t), text });
+  if (events.length > 30) events.pop();
+  document.getElementById('eventLog').innerHTML = events.map(e =>
+    `<div class="ev"><span class="et">${e.ts}</span> <span class="em">${e.text}</span></div>`
+  ).join('');
+}
+
+function orbitNum() {
+  if (met < ORBIT_START) return 0;
+  return Math.min(3, Math.floor((met - ORBIT_START) / ORBIT_PERIOD) + 1);
+}
+
+function altitude() {
+  if (met < ORBIT_START) return (met / ORBIT_START) * PERIGEE;
+  if (met > RETRO_TIME) return Math.max(0, APOGEE * (1 - (met - RETRO_TIME) / (MISSION_DUR - RETRO_TIME)));
+  const t = (met - ORBIT_START) % ORBIT_PERIOD;
+  const f = t / ORBIT_PERIOD;
+  return PERIGEE + (APOGEE - PERIGEE) * (0.5 + 0.5 * Math.sin(f * Math.PI * 2 - Math.PI / 2));
+}
+
+function consumeFuel(dt) {
+  const dtSec = dt;
+  for (const [t, rDrop, aDrop, label] of SCHEDULED) {
+    if (met >= t && met < t + 60) {
+      rscsFuel = Math.max(0, rscsFuel - rDrop * dtSec / 60);
+      ascsFuel = Math.max(0, ascsFuel - aDrop * dtSec / 60);
+    }
+  }
+  if (showUnsched) {
+    for (const [t, rDrop, aDrop, label] of UNSCHEDULED) {
+      if (met >= t && met < t + 45) {
+        rscsFuel = Math.max(0, rscsFuel - rDrop * dtSec / 45);
+      }
+    }
+  }
+  for (const um of userManeuvers) {
+    if (met >= um.t && met < um.t + 30) {
+      rscsFuel = Math.max(0, rscsFuel - 2.0 * dtSec / 30);
+    }
+  }
+  // Slow background ASCS consumption
+  if (met > ORBIT_START && met < RETRO_TIME) {
+    ascsFuel = Math.max(0, ascsFuel - 0.003 * dtSec);
+  }
+  // Record history point
+  if (met - lastHistT >= HIST_INTERVAL) {
+    fuelHistory.push({ t: met, r: rscsFuel, a: ascsFuel });
+    lastHistT = met;
+  }
+}
+
+function processEvents() {
+  for (const [t, text, status] of LOG_EVENTS) {
+    if (met >= t && !fired[t]) {
+      fired[t] = true;
+      logEvent(met, text);
+      document.getElementById('hStatus').textContent = status;
+    }
+  }
+}
+
+function draw() {
+  const W = C.width, H = C.height;
+  ctx.clearRect(0, 0, W, H);
+
+  const pad = { l: 80, r: 30, t: 50, b: 70 };
+  const gW = W - pad.l - pad.r;
+  const gH = H - pad.t - pad.b;
+
+  // Phosphor background glow
+  const bg = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, W * 0.6);
+  bg.addColorStop(0, 'rgba(16,96,48,0.03)');
+  bg.addColorStop(1, 'rgba(4,5,8,0)');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // Scanline effect
+  scanline = (scanline + 1.5) % H;
+  ctx.fillStyle = 'rgba(32,160,96,0.015)';
+  ctx.fillRect(0, scanline - 1, W, 2);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(32,160,96,0.08)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i <= 10; i++) {
+    const y = pad.t + (i / 10) * gH;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l + gW, y); ctx.stroke();
+  }
+  for (let i = 0; i <= 20; i++) {
+    const x = pad.l + (i / 20) * gW;
+    ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + gH); ctx.stroke();
+  }
+
+  // Y-axis labels
+  ctx.font = '10px "DM Mono", monospace';
+  ctx.fillStyle = 'rgba(32,160,96,0.5)';
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= 10; i++) {
+    const pct = 100 - i * 10;
+    const y = pad.t + (i / 10) * gH;
+    ctx.fillText(pct + '%', pad.l - 8, y + 3);
+  }
+
+  // X-axis labels (timeline events)
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(32,160,96,0.4)';
+  ctx.font = '8px "DM Mono", monospace';
+  for (const [t, label] of TIMELINE_EVENTS) {
+    const x = pad.l + (t / MISSION_DUR) * gW;
+    ctx.fillText(label, x, pad.t + gH + 24);
+    ctx.strokeStyle = 'rgba(32,160,96,0.15)';
+    ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, pad.t + gH);
+    ctx.setLineDash([2, 4]); ctx.stroke(); ctx.setLineDash([]);
+    // Tick
+    ctx.beginPath(); ctx.moveTo(x, pad.t + gH); ctx.lineTo(x, pad.t + gH + 8);
+    ctx.strokeStyle = 'rgba(32,160,96,0.3)'; ctx.stroke();
+  }
+
+  // Time labels at bottom
+  ctx.fillStyle = 'rgba(32,160,96,0.3)';
+  ctx.font = '8px "DM Mono", monospace';
+  for (let h = 0; h <= 5; h++) {
+    const x = pad.l + (h * 3600 / MISSION_DUR) * gW;
+    ctx.fillText(h + 'h', x, pad.t + gH + 40);
+  }
+
+  // Critical threshold line
+  const critY = pad.t + ((100 - CRITICAL_FUEL) / 100) * gH;
+  ctx.strokeStyle = 'rgba(208,48,32,0.5)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([6, 4]);
+  ctx.beginPath(); ctx.moveTo(pad.l, critY); ctx.lineTo(pad.l + gW, critY); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(208,48,32,0.6)';
+  ctx.textAlign = 'left';
+  ctx.font = '9px "DM Mono", monospace';
+  ctx.fillText('CRITICAL: ' + CRITICAL_FUEL + '%', pad.l + 4, critY - 4);
+
+  // Warning zone backgrounds
+  const warn25Y = pad.t + ((100 - 25) / 100) * gH;
+  ctx.fillStyle = 'rgba(208,144,32,0.04)';
+  ctx.fillRect(pad.l, warn25Y, gW, critY - warn25Y);
+  ctx.fillStyle = 'rgba(208,48,32,0.04)';
+  ctx.fillRect(pad.l, critY, gW, pad.t + gH - critY);
+
+  // Draw RSCS fuel line from stored history (bright green phosphor)
+  const hist = fuelHistory;
+  if (hist.length > 1) {
+    ctx.beginPath();
+    ctx.strokeStyle = '#30C070';
+    ctx.lineWidth = 2;
+    ctx.shadowColor = '#30C070';
+    ctx.shadowBlur = 6;
+    for (let i = 0; i < hist.length; i++) {
+      const x = pad.l + (hist[i].t / MISSION_DUR) * gW;
+      const y = pad.t + ((100 - hist[i].r) / 100) * gH;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Draw ASCS fuel line (dimmer green, dashed)
+    ctx.beginPath();
+    ctx.strokeStyle = '#208050';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 3]);
+    ctx.shadowColor = '#208050';
+    ctx.shadowBlur = 3;
+    for (let i = 0; i < hist.length; i++) {
+      const x = pad.l + (hist[i].t / MISSION_DUR) * gW;
+      const y = pad.t + ((100 - hist[i].a) / 100) * gH;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.shadowBlur = 0;
+  }
+
+  // Scheduled maneuver markers
+  for (const [t, rD, aD, label] of SCHEDULED) {
+    if (t <= met) {
+      const x = pad.l + (t / MISSION_DUR) * gW;
+      ctx.fillStyle = 'rgba(32,160,96,0.4)';
+      ctx.fillRect(x - 1, pad.t, 2, gH);
+    }
+  }
+
+  // Unscheduled maneuver markers
+  if (showUnsched) {
+    for (const [t, rD, aD, label] of UNSCHEDULED) {
+      if (t <= met) {
+        const x = pad.l + (t / MISSION_DUR) * gW;
+        ctx.fillStyle = 'rgba(208,144,32,0.25)';
+        ctx.fillRect(x - 1, pad.t, 2, gH);
+      }
+    }
+  }
+
+  // User maneuver markers
+  for (const um of userManeuvers) {
+    if (um.t <= met) {
+      const x = pad.l + (um.t / MISSION_DUR) * gW;
+      ctx.fillStyle = 'rgba(208,48,32,0.3)';
+      ctx.fillRect(x - 1, pad.t, 2, gH);
+    }
+  }
+
+  // Firefly tap marker
+  const ffX = pad.l + (3000 / MISSION_DUR) * gW;
+  if (met >= 3000) {
+    ctx.save();
+    ctx.font = '16px "DM Mono", monospace';
+    ctx.fillStyle = 'rgba(200,152,64,0.6)';
+    ctx.textAlign = 'center';
+    ctx.fillText('*', ffX, pad.t - 6);
+    ctx.font = '7px "DM Mono", monospace';
+    ctx.fillStyle = 'rgba(200,152,64,0.4)';
+    ctx.fillText('FIREFLIES', ffX, pad.t - 16);
+    ctx.restore();
+  }
+
+  // Current time marker
+  const curX = pad.l + (met / MISSION_DUR) * gW;
+  ctx.strokeStyle = 'rgba(32,160,96,0.6)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(curX, pad.t); ctx.lineTo(curX, pad.t + gH); ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(curX - 4, pad.t - 2);
+  ctx.lineTo(curX + 4, pad.t - 2);
+  ctx.lineTo(curX, pad.t + 4);
+  ctx.closePath();
+  ctx.fillStyle = '#30C070';
+  ctx.fill();
+
+  // Legend
+  ctx.font = '10px "DM Mono", monospace';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#30C070';
+  ctx.fillRect(W - 180, 12, 12, 2);
+  ctx.fillText('RSCS (Manual)', W - 164, 16);
+  ctx.fillStyle = '#208050';
+  ctx.setLineDash([4, 3]);
+  ctx.strokeStyle = '#208050';
+  ctx.beginPath(); ctx.moveTo(W - 180, 30); ctx.lineTo(W - 168, 30); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#208050';
+  ctx.fillText('ASCS (Auto)', W - 164, 33);
+
+  // Orbit labels at top
+  ctx.font = '9px "DM Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(32,160,96,0.3)';
+  const o1x = pad.l + (ORBIT_START / MISSION_DUR) * gW;
+  const o2x = pad.l + (5820 / MISSION_DUR) * gW;
+  const o3x = pad.l + (11130 / MISSION_DUR) * gW;
+  const rx = pad.l + (RETRO_TIME / MISSION_DUR) * gW;
+  ctx.fillText('ORBIT 1', (o1x + o2x) / 2, pad.t - 8);
+  ctx.fillText('ORBIT 2', (o2x + o3x) / 2, pad.t - 8);
+  ctx.fillText('ORBIT 3', (o3x + rx) / 2, pad.t - 8);
+
+  // Fuel gauges (right side, compact vertical bars)
+  const gx = W - 50, gy = pad.t + 50, gh = gH - 60, gw = 14;
+  // RSCS
+  drawGauge(gx - 22, gy, gw, gh, rscsFuel, '#30C070', 'R');
+  // ASCS
+  drawGauge(gx + 4, gy, gw, gh, ascsFuel, '#208050', 'A');
+
+  // Update HUD
+  const rClass = rscsFuel < 10 ? 'crit' : rscsFuel < 25 ? 'warn' : 'ok';
+  const aClass = ascsFuel < 10 ? 'crit' : ascsFuel < 25 ? 'warn' : 'ok';
+  document.getElementById('hMET').textContent = fmtTime(met);
+  document.getElementById('hOrbit').textContent = orbitNum() || '---';
+  document.getElementById('hAlt').textContent = Math.round(altitude()) + ' km';
+  document.getElementById('hRSCS').textContent = rscsFuel.toFixed(1) + '%';
+  document.getElementById('hRSCS').className = 'hud-value ' + rClass;
+  document.getElementById('hASCS').textContent = ascsFuel.toFixed(1) + '%';
+  document.getElementById('hASCS').className = 'hud-value ' + aClass;
+
+  const warn = document.getElementById('fuelWarn');
+  warn.style.display = (rscsFuel < CRITICAL_FUEL && met > ORBIT_START) ? 'block' : 'none';
+}
+
+function drawGauge(x, y, w, h, pct, color, label) {
+  ctx.strokeStyle = 'rgba(32,160,96,0.2)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(x, y, w, h);
+
+  const fill = (pct / 100) * h;
+  const fillColor = pct < 10 ? '#D03020' : pct < 25 ? '#D09020' : color;
+  ctx.fillStyle = fillColor;
+  ctx.shadowColor = fillColor;
+  ctx.shadowBlur = 4;
+  ctx.fillRect(x + 1, y + h - fill, w - 2, fill);
+  ctx.shadowBlur = 0;
+
+  ctx.font = '8px "DM Mono", monospace';
+  ctx.fillStyle = 'rgba(32,160,96,0.5)';
+  ctx.textAlign = 'center';
+  ctx.fillText(label, x + w / 2, y + h + 12);
+  ctx.fillText(Math.round(pct) + '%', x + w / 2, y - 4);
+}
+
+function togglePause() {
+  paused = !paused;
+  const b = document.getElementById('btnPlay');
+  b.textContent = paused ? 'PLAY' : 'PAUSE';
+  b.classList.toggle('active', !paused);
+}
+
+function toggleUnsched() {
+  showUnsched = !showUnsched;
+  document.getElementById('btnUnsched').textContent = 'UNSCHED: ' + (showUnsched ? 'ON' : 'OFF');
+  document.getElementById('btnUnsched').classList.toggle('active', showUnsched);
+  // Recalculate fuel from scratch
+  recalcFuel();
+}
+
+function addManeuver() {
+  if (done || met < ORBIT_START) return;
+  userManeuvers.push({ t: met });
+  logEvent(met, 'USER MANEUVER — ATTITUDE CORRECTION');
+}
+
+function recalcFuel() {
+  rscsFuel = 100; ascsFuel = 100;
+  fuelHistory = [{ t: 0, r: 100, a: 100 }];
+  lastHistT = 0;
+  const dt = 1;
+  for (let t = 0; t <= met; t += dt) {
+    for (const [st, rD, aD] of SCHEDULED) {
+      if (t >= st && t < st + 60) {
+        rscsFuel = Math.max(0, rscsFuel - rD * dt / 60);
+        ascsFuel = Math.max(0, ascsFuel - aD * dt / 60);
+      }
+    }
+    if (showUnsched) {
+      for (const [st, rD] of UNSCHEDULED) {
+        if (t >= st && t < st + 45) {
+          rscsFuel = Math.max(0, rscsFuel - rD * dt / 45);
+        }
+      }
+    }
+    for (const um of userManeuvers) {
+      if (t >= um.t && t < um.t + 30) {
+        rscsFuel = Math.max(0, rscsFuel - 2.0 * dt / 30);
+      }
+    }
+    if (t > ORBIT_START && t < RETRO_TIME) {
+      ascsFuel = Math.max(0, ascsFuel - 0.003 * dt);
+    }
+    if (t - lastHistT >= HIST_INTERVAL) {
+      fuelHistory.push({ t, r: rscsFuel, a: ascsFuel });
+      lastHistT = t;
+    }
+  }
+}
+
+function restart() {
+  met = 0; paused = false; fired = {}; events = [];
+  done = false; rscsFuel = 100; ascsFuel = 100; userManeuvers = [];
+  fuelHistory = [{ t: 0, r: 100, a: 100 }]; lastHistT = 0;
+  showUnsched = true;
+  document.getElementById('eventLog').innerHTML = '';
+  document.getElementById('hStatus').textContent = 'PRE-LAUNCH';
+  document.getElementById('btnPlay').textContent = 'PAUSE';
+  document.getElementById('btnPlay').classList.add('active');
+  document.getElementById('btnUnsched').textContent = 'UNSCHED: ON';
+  document.getElementById('fuelWarn').style.display = 'none';
+}
+
+document.getElementById('speedSlider').addEventListener('input', function() {
+  speed = parseInt(this.value);
+  document.getElementById('speedVal').textContent = speed + 'x';
+});
+
+function frame(ts) {
+  if (!lastTS) lastTS = ts;
+  const dt = (ts - lastTS) / 1000;
+  lastTS = ts;
+  if (!paused && !done) {
+    const elapsed = dt * speed;
+    met += elapsed;
+    consumeFuel(elapsed);
+    if (met >= MISSION_DUR) { met = MISSION_DUR; done = true; }
+  }
+  processEvents();
+  draw();
+  requestAnimationFrame(frame);
+}
+
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>

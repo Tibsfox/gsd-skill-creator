@@ -1,0 +1,136 @@
+{
+  "mission": "1.22",
+  "title": "Mercury-Atlas 7 / Aurora 7",
+  "nodes": [
+    {
+      "id": "kn-122-01",
+      "concept": "Fluorescence and Phosphorescence",
+      "category": "quantum mechanics",
+      "depth": "intermediate",
+      "description": "The distinction between fluorescence (singlet-to-singlet transition, nanosecond timescale) and phosphorescence (triplet-to-singlet transition, millisecond to second timescale) is fundamental to understanding GFP, bioluminescence, and the visual appearance of ice crystals in sunlight. Both involve photon absorption and re-emission, but through different quantum mechanical pathways.",
+      "tspb_layers": {
+        "technical": "Fluorescence: S1 → S0 transition, Δt ~ 1-10 ns, spin-allowed. Phosphorescence: T1 → S0 transition, Δt ~ 1 ms - 10 s, spin-forbidden (requires intersystem crossing). GFP fluorescence quantum yield: 0.79 (remarkably high for a protein).",
+        "philosophical": "Both fluorescence and the ice crystal 'fireflies' are the same phenomenon at different scales — matter absorbing energy and re-emitting it in a form that the observer interprets as light. The difference between a solved mystery and an unsolved one is often just the observer's willingness to test the hypothesis.",
+        "bridging": "Carpenter solved the firefly mystery by performing an experiment — tapping the hull. Shimomura solved the GFP mystery by performing an experiment — squeezing jellyfish. Both discoveries required physical interaction with the luminous object, not passive observation."
+      },
+      "worked_example": "GFP absorbs at λ_abs = 395 nm. It emits at λ_em = 509 nm. The energy difference: ΔE = hc(1/λ_abs - 1/λ_em) = (6.626×10⁻³⁴)(3×10⁸)(1/395×10⁻⁹ - 1/509×10⁻⁹) = 1.13 × 10⁻¹⁹ J = 0.71 eV. This energy is dissipated as heat (vibrational relaxation) within the protein barrel. The Stokes shift of 114 nm represents a 22.4% loss in photon energy during the fluorescence process."
+    },
+    {
+      "id": "kn-122-02",
+      "concept": "Ballistic Dispersion and Reentry Sensitivity",
+      "category": "orbital mechanics",
+      "depth": "advanced",
+      "description": "The sensitivity of the landing point to retrofire burn accuracy determines the dispersion pattern for a ballistic reentry. Carpenter's 402 km overshoot resulted from a 3-second late retrofire and a 25-degree yaw error, demonstrating that small deviations in the retrofire sequence propagate into large landing errors.",
+      "tspb_layers": {
+        "technical": "Planned ΔV: 152 m/s retrograde. Actual ΔV: ~150 m/s, with a 25° yaw error reducing effective retrograde component to ΔV·cos(25°) ≈ 136 m/s. Missing ΔV: ~16 m/s. With sensitivity δx/δΔv ≈ 25 km per m/s, the yaw error alone accounts for ~400 km overshoot. The 3-second late initiation adds to this through orbital position error at retrofire.",
+        "philosophical": "The Mercury program operated at the edge of tolerance — every parameter had a narrow acceptable range, and the consequences of deviation were severe. Carpenter's overshoot was not recklessness; it was the natural result of operating a manually controlled vehicle at the limits of human precision.",
+        "bridging": "The same sensitivity analysis applies to salmon navigation: a 1-degree heading error over a 3,000 km Pacific crossing produces a 52 km position error at the coast — potentially the difference between the correct river mouth and the wrong one."
+      },
+      "worked_example": "Retrofire at orbital velocity v = 7,844 m/s. Planned deceleration: ΔV = 152 m/s purely retrograde. With 25° yaw: effective retrograde ΔV = 152 cos(25°) = 137.8 m/s. Lateral component: 152 sin(25°) = 64.2 m/s (wasted). Deficit: 152 - 137.8 = 14.2 m/s retrograde. At sensitivity 25 km/(m/s), overshoot ≈ 14.2 × 25 = 355 km. Combined with 3-second late initiation (v × t = 7,844 × 3 = 23.5 km ≈ 47 km effective with reentry geometry), total ≈ 402 km."
+    },
+    {
+      "id": "kn-122-03",
+      "concept": "Sublimation and Phase Transitions in Vacuum",
+      "category": "thermodynamics",
+      "depth": "intermediate",
+      "description": "The 'fireflies' were ice crystals that had sublimated from the spacecraft hull — water vapor from the life support system condensed on the cold hull during orbital night, froze, and sublimated (solid → gas → recrystallized particles) when sunlight struck the hull at orbital dawn. Understanding this requires the triple point of water and the behavior of phase transitions in the near-vacuum of low Earth orbit.",
+      "tspb_layers": {
+        "technical": "At orbital altitude (~260 km), ambient pressure is ~10⁻⁷ Pa — far below the triple point of water (611.73 Pa, 273.16 K). At these pressures, ice cannot melt; it can only sublimate directly to vapor. The spacecraft hull cycled between ~120°C (sunlit) and ~-150°C (shadow) every 90 minutes. Water vapor from the ECLSS condensed on the cold hull, froze, and sublimated at dawn.",
+        "philosophical": "The firefly mystery illustrates how unfamiliar environments make familiar phenomena unrecognizable. Ice sublimating in vacuum and catching sunlight is ordinary physics, but in the context of orbital spaceflight it became a 'mystery' because no one had experienced the environment before.",
+        "bridging": "Phase transitions are everywhere in this mission's resonance web: water changing phase on the spacecraft hull, salt concentration changing at the river mouth during salmon migration, helium-oxygen breathing mixture changing the physical properties of sound in SEALAB's pressurized habitat."
+      },
+      "worked_example": "Clausius-Clapeyron equation for sublimation: ln(P/P₀) = -(ΔH_sub/R)(1/T - 1/T₀). For ice: ΔH_sub = 51.06 kJ/mol, T₀ = 273.16 K, P₀ = 611.73 Pa. At T = 200 K (hull in shadow): P = 611.73 × exp(-(51060/8.314)(1/200 - 1/273.16)) = 611.73 × exp(-22.77) = 611.73 × 1.28×10⁻¹⁰ ≈ 7.8×10⁻⁸ Pa. Since ambient pressure at 260 km ≈ 10⁻⁷ Pa, the ice is near equilibrium in shadow but sublimes rapidly when solar heating raises the hull temperature."
+    },
+    {
+      "id": "kn-122-04",
+      "concept": "Green Fluorescent Protein Structure",
+      "category": "biochemistry",
+      "depth": "advanced",
+      "description": "GFP is an 11-strand β-barrel protein (238 amino acids, 27 kDa) that protects an internal chromophore formed by autocatalytic cyclization of the Ser65-Tyr66-Gly67 tripeptide. The barrel structure acts as a Faraday cage for photons — shielding the chromophore from solvent quenching and maintaining the precise electronic environment for efficient fluorescence.",
+      "tspb_layers": {
+        "technical": "β-barrel: 11 β-strands forming a cylinder ~4.2 nm tall, ~2.4 nm diameter. Chromophore forms via cyclization, dehydration, and oxidation of residues 65-67 (post-translational, autocatalytic, requires O₂). Quantum yield: 0.79. Extinction coefficient: ε₄₇₅ = 33,000 M⁻¹cm⁻¹. The barrel is remarkably thermostable (Tm ≈ 78°C for wild-type).",
+        "philosophical": "GFP is a protein that makes its own flashlight — no cofactors, no external substrates (after initial folding), just the protein and light. The fact that the chromophore forms spontaneously from the protein's own amino acids, requiring only oxygen and time, is one of the most elegant examples of molecular self-assembly in biology.",
+        "bridging": "The β-barrel is to the chromophore what the Mercury capsule was to the astronaut: a protective shell that maintains the internal conditions needed for the occupant to function. Remove the shell (denature the barrel, breach the capsule) and the function ceases immediately."
+      },
+      "worked_example": "Beer-Lambert law for GFP detection: A = εcl. To detect 1 μM GFP in a 1 cm cuvette at 475 nm: A = 33,000 × 10⁻⁶ × 1 = 0.033. This is easily measurable (above typical spectrophotometer noise floor of ~0.001). In a fluorescence microscope with 100× objective, detection limit reaches single-molecule sensitivity (~1 GFP molecule in a diffraction-limited spot)."
+    },
+    {
+      "id": "kn-122-05",
+      "concept": "Seawater Pressure and Diving Physiology",
+      "category": "fluid mechanics",
+      "depth": "intermediate",
+      "description": "Carpenter's transition from space (near-zero pressure) to SEALAB II (7 atmospheres at 62 m depth) represents the full range of human pressure tolerance. The Rhinoceros Auklet dives to 57+ meters, experiencing the same pressure regime, but is physiologically adapted for the transition in ways humans are not.",
+      "tspb_layers": {
+        "technical": "Hydrostatic pressure: P = ρgh + P_atm. At 62 m: P = 1025 × 9.81 × 62 + 101,325 = 624,000 + 101,325 = 725,325 Pa ≈ 7.16 atm. At 57 m (auklet dive depth): P ≈ 6.72 atm. SEALAB II used helium-oxygen (HeO₂) to avoid nitrogen narcosis. Helium's thermal conductivity (0.152 W/m·K vs nitrogen's 0.026) caused rapid body heat loss.",
+        "philosophical": "Space and the deep ocean are the same challenge inverted — one has too little pressure, the other too much. Both require sealed habitats, controlled atmospheres, and engineering solutions to keep humans alive. Carpenter experienced both extremes in the same decade.",
+        "bridging": "The auklet solves the pressure problem through physiology (collapsible lungs, oxygen-storing myoglobin, bradycardia reflex). Humans solve it through engineering (pressure vessels, breathing mixtures, decompression protocols). Both solutions work. The auklet's is more elegant."
+      },
+      "worked_example": "Auklet dive energetics: Buoyancy force at surface = ρ_water × V × g - m × g. For a 500g auklet with body volume ~550 cm³: F_buoy = 1.025 × 550×10⁻⁶ × 9.81 - 0.5 × 9.81 = 5.53 - 4.91 = 0.62 N upward. The auklet must generate >0.62 N downward thrust with its wings to descend. At depth, air in the plumage compresses (Boyle's law: V ∝ 1/P), reducing volume and buoyancy, making descent progressively easier but ascent progressively harder."
+    },
+    {
+      "id": "kn-122-06",
+      "concept": "Attitude Control and Fuel Management",
+      "category": "spacecraft systems",
+      "depth": "intermediate",
+      "description": "Mercury's attitude control system used hydrogen peroxide thrusters — 18 thrusters arranged in three axes, fed from two fuel supplies (automatic and manual). Carpenter's fuel consumption pattern during MA-7 became the defining systems engineering lesson of the Mercury program.",
+      "tspb_layers": {
+        "technical": "Mercury ASCS/RSCS: 18 thrusters, H₂O₂ monopropellant decomposed over silver catalyst (2H₂O₂ → 2H₂O + O₂, specific impulse ~140s). Two fuel supplies: automatic (ASCS, ~60 lbs H₂O₂) and manual (RSCS, ~40 lbs). Carpenter used ~75% of manual fuel by end of orbit 2, leaving ~10 lbs for retrofire attitude alignment and reentry.",
+        "philosophical": "Fuel is time. Fuel is options. Every unscheduled maneuver — every time Carpenter turned the capsule to photograph a sunset, observe the fireflies, or check a visual reference — spent fuel that could not be replaced. The engineering lesson: curiosity has a measurable cost in a closed system.",
+        "bridging": "The auklet faces the same fuel management problem during dives. Each wing-stroke costs metabolic energy (calories). Each second underwater depletes oxygen stores. The auklet must balance the curiosity to explore deeper (where larger prey may be available) against the cost of returning to the surface. Overshoot your oxygen budget and you drown. Overshoot your fuel budget and you overshoot the landing zone."
+      },
+      "worked_example": "Attitude maneuver cost: to rotate the capsule 90° around the yaw axis requires angular impulse L = Iω. Mercury capsule moment of inertia about yaw: I ≈ 120 kg·m². For a 90° (π/2 rad) rotation in 5 seconds: ω = π/10 rad/s, requiring thruster impulse of L = 120 × π/10 = 37.7 N·s. With thruster force ~4.5 N, burn time = 37.7/4.5 = 8.4 s, consuming m = F·t/(Isp·g) = 4.5×8.4/(140×9.81) = 0.028 kg H₂O₂. Each casual 90° yaw maneuver costs ~28 grams of irreplaceable fuel."
+    },
+    {
+      "id": "kn-122-07",
+      "concept": "Aequorin and Calcium Signaling",
+      "category": "biochemistry",
+      "depth": "advanced",
+      "description": "Aequorin, the bioluminescent protein from Aequorea victoria, emits blue light when it binds calcium ions — making it a natural calcium indicator. Before GFP, aequorin was itself a revolutionary tool for studying intracellular calcium signaling in muscle contraction, neural transmission, and cell division.",
+      "tspb_layers": {
+        "technical": "Aequorin is a 22 kDa photoprotein containing coelenterazine as a prosthetic group. Upon binding 3 Ca²⁺ ions (at EF-hand domains), it undergoes a conformational change that oxidizes coelenterazine to coelenteramide, releasing CO₂ and a blue photon (λ = 469 nm). The reaction is stoichiometric: each aequorin molecule produces exactly one photon, then is spent.",
+        "philosophical": "Aequorin is a single-use flashlight — it fires once and is done. Each molecule tells you about one calcium binding event. This is fundamentally different from GFP, which can be excited and re-emit indefinitely. The jellyfish uses both: aequorin for the initial signal, GFP for the amplification and wavelength conversion.",
+        "bridging": "Single-use systems vs reusable systems: Mercury capsules were single-use (one flight, then ocean recovery). SEALAB was reusable. The retrorockets were single-use (one burn). The distinction between aequorin (consumable) and GFP (recyclable) mirrors the distinction between expendable launch vehicles and the reusable ones that would come decades later."
+      },
+      "worked_example": "Calcium detection with aequorin: inject 10⁻¹² moles aequorin into a cell. At resting [Ca²⁺] = 100 nM, the aequorin consumption rate is negligible (~0.01%/hour). When the cell is stimulated and [Ca²⁺] rises to 1 μM, consumption rate increases 100-fold. The light output L ∝ [Ca²⁺]^n where n ≈ 2.5 (Hill coefficient for Ca²⁺ binding), giving a steep sigmoidal response that makes aequorin sensitive to physiological calcium transients."
+    },
+    {
+      "id": "kn-122-08",
+      "concept": "S-Meter and Signal Strength Measurement",
+      "category": "radio engineering",
+      "depth": "intermediate",
+      "description": "The S-meter (signal strength meter) is the radio circuit for this mission — a DC voltmeter connected to the AGC (automatic gain control) voltage of a receiver, providing a visual indication of received signal strength on a scale from S1 to S9+dB. Essential for the Mercury tracking network, where signal strength varied as the spacecraft traversed each ground station's coverage zone.",
+      "tspb_layers": {
+        "technical": "S-units: S1-S9 on a quasi-logarithmic scale. Each S-unit = 6 dB = factor of 4 in power. S9 = 50 μV at antenna terminals (for HF, IARU Region 2). Above S9, reported in dB over S9. AGC voltage from IF amplifier (from v1.21 BFO) drives the meter movement through a linearization network.",
+        "philosophical": "The S-meter is a luminescence detector for radio — it measures how bright the signal is. Glenn's tracking network used signal strength to confirm spacecraft position: as Friendship 7 passed over each station, the signal rose, peaked, and fell. The peak S-meter reading confirmed the orbital track. The S-meter makes the invisible (radio waves) visible (needle deflection) — exactly what GFP does for proteins in cells.",
+        "bridging": "Signal strength is distance made visible. The S-meter reading during a Mercury pass told the ground station how close the spacecraft was to overhead. Similarly, the auklet's hearing — which detects underwater sounds with intensity proportional to distance — is a biological S-meter for prey location."
+      },
+      "worked_example": "Spacecraft at 260 km altitude passing directly overhead. Transmitter: 230 MHz, 1W. Antenna gain: 0 dBi (omnidirectional). Ground station antenna: 10 dBi gain. Free-space path loss at 260 km: L = 20log₁₀(4π×260×10³/1.3) = 20log₁₀(2.51×10⁹) = 188 dB. Received power: P_r = 0 + 10 - 188 + 30 = -148 dBW = -118 dBm. With 50Ω input: V = √(P×R) = √(10⁻¹¹·⁸ × 50) = 0.89 μV ≈ S5. As the spacecraft moves to horizon (range ~1800 km), loss increases by 20log(1800/260) = 16.8 dB → S2. The S-meter sweeps from S2 to S5 and back during each pass."
+    },
+    {
+      "id": "kn-122-09",
+      "concept": "Helium-Oxygen Breathing Mixtures",
+      "category": "diving physiology",
+      "depth": "intermediate",
+      "description": "SEALAB II used helium-oxygen (heliox) breathing mixtures to avoid nitrogen narcosis at 62 m depth. The substitution of helium for nitrogen solves the narcosis problem but creates new challenges: voice distortion (Donald Duck effect), rapid heat loss, and high-pressure nervous syndrome.",
+      "tspb_layers": {
+        "technical": "At 7 atm, nitrogen partial pressure would be ~5.5 atm — well above narcosis threshold (~3-4 atm N₂). Heliox replaces N₂ with He (molecular weight 4 vs 28), eliminating narcosis. But He thermal conductivity is 5.8× nitrogen's (0.152 vs 0.026 W/m·K), causing rapid body heat loss. Sound velocity in He: 1,007 m/s vs 349 m/s in air, raising vocal formant frequencies ~2.7× and producing the 'Donald Duck' voice.",
+        "philosophical": "Every environmental adaptation creates new problems. The heliox solution to narcosis created the heat-loss and communication problems. The Mercury capsule's solution to vacuum (a sealed, pressurized container) created the condensation that produced the fireflies. Engineering is an infinite regression of problem-solving.",
+        "bridging": "The auklet's diving physiology is the biological heliox solution — instead of changing the breathing mixture, the auklet changes its metabolism. Bradycardia (heart rate drops from ~300 to ~100 bpm), peripheral vasoconstriction, and myoglobin oxygen storage allow the auklet to function at depth without breathing at all during the dive. No mixture change needed. No voice distortion. Evolution had 50 million years to optimize."
+      },
+      "worked_example": "Voice frequency shift in heliox: fundamental frequency stays the same (determined by vocal cord tension, which is unchanged). But formant frequencies (resonances of the vocal tract) scale with sound velocity: f_formant ∝ v_sound. In heliox at 7 atm: v ≈ 1,007 m/s. In air at 1 atm: v = 343 m/s. Ratio: 1007/343 = 2.94. First formant of vowel 'ah' (~730 Hz in air) shifts to ~2,145 Hz in heliox, moving it into the range normally occupied by the second and third formants. Result: speech is intelligible but distorted, requiring electronic unscramblers for clear communication."
+    },
+    {
+      "id": "kn-122-10",
+      "concept": "The Cnidarian Life Cycle",
+      "category": "marine biology",
+      "depth": "intermediate",
+      "description": "Aequorea victoria exhibits metagenesis — alternation between a sessile polyp generation (asexual) and a free-swimming medusa generation (sexual). This dual life-history strategy is the biological equivalent of Carpenter's dual-environment career (space and sea), and it connects to the auklet's dual-medium locomotion.",
+      "tspb_layers": {
+        "technical": "Polyp phase: ~1 mm, sessile, benthic, colonial. Reproduces asexually by budding. Under environmental triggers (temperature, food availability), polyps strobilate — producing tiny ephyrae (juvenile medusae) that detach and grow. Medusa phase: up to 17 cm diameter, pelagic, bioluminescent. Reproduces sexually (separate sexes), releasing gametes into the water column. Planula larvae settle and develop into new polyps, completing the cycle.",
+        "philosophical": "The same genome produces two radically different body plans — one fixed, one mobile; one asexual, one sexual; one microscopic, one macroscopic. The polyp and the medusa are the same organism in the same way that Carpenter the astronaut and Carpenter the aquanaut were the same person: same DNA, different expression.",
+        "bridging": "Metagenesis is a biological version of staging — the polyp 'stage' is jettisoned when the medusa 'stage' separates and becomes independent. The Atlas LV-3B staged by dropping its booster engines; Aequorea stages by releasing ephyrae from the polyp colony. Both transitions are irreversible. Both produce a mobile organism from a fixed platform."
+      },
+      "worked_example": "Reproductive output: a single Aequorea polyp colony can produce hundreds of ephyrae per season. If each ephyra has a 1% survival rate to reproductive medusa, and each medusa produces 10,000 eggs with 0.01% survival to settled polyp, then: colony → 200 ephyrae → 2 medusae → 20,000 eggs → 2 settled polyps. Net replacement ratio ≈ 1.0 per season — barely maintaining the population. This is typical of marine invertebrates: massive reproductive output, massive mortality, narrow survival margins."
+    }
+  ]
+}

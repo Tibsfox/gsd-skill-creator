@@ -1,0 +1,311 @@
+* S-Meter (Signal Strength Indicator) — Progressive Radio Series #22
+* =========================================================================
+* NASA Mission Series v1.22
+* Mercury-Atlas 7 / Aurora 7 — Scott Carpenter, May 24, 1962
+* Progressive Radio Series v1.22: S-Meter with Logarithmic Compression
+*
+* This is the progressive radio series continuation from v1.21 (BFO).
+* The S-meter reads the AGC (Automatic Gain Control) voltage from the
+* receiver's IF stage and drives a meter movement to indicate signal
+* strength. Unlike the v1.10 precision-rectifier S-meter, this circuit
+* uses a logarithmic amplifier to compress the wide dynamic range of
+* RF signals into a readable meter deflection.
+*
+* Mercury context: Carpenter's Aurora 7 was the most science-heavy
+* Mercury flight. He was so absorbed in experiments — observing
+* fireflies (ice particles), photographing weather systems, deploying
+* a balloon — that he fell behind on attitude checks and used too
+* much hydrogen peroxide thruster fuel. His retrofire was late by
+* 3 seconds and off-axis, causing a 250-mile overshoot of the
+* planned splashdown point. NASA lost contact with him for 40 minutes.
+*
+* The tracking network's S-meters were critical during those 40 minutes.
+* Ground stations swept their antennas trying to find Carpenter's
+* beacon signal. The S-meter told operators when they were aimed
+* at the capsule — without it, finding a tiny signal in the noise
+* would have been nearly impossible.
+*
+* Circuit description:
+*   1. Input: AGC voltage (0-6V DC, inversely proportional to signal)
+*   2. Voltage inverter: NPN common-emitter stage inverts the AGC
+*      so meter reading increases with stronger signals
+*   3. Logarithmic amplifier: exploits the BJT's exponential I-V
+*      relationship (V_BE = V_T * ln(I_C/I_S)) to compress dynamic
+*      range. 60 dB of input becomes a smooth meter sweep.
+*   4. Buffer/driver: emitter follower drives the meter movement
+*   5. Output: 100 uA meter (modeled as 1K resistor + ammeter)
+*   6. Calibration: trimmer for S9 reference point
+*
+* Run: ngspice -b s-meter-circuit.cir
+* =========================================================================
+
+.title Aurora 7 — S-Meter with Logarithmic Compression
+
+*--------------------------------------------------------------
+* POWER SUPPLY
+*--------------------------------------------------------------
+* 12V regulated supply — standard for ground station equipment
+Vcc  vcc  0  DC 12
+
+*--------------------------------------------------------------
+* TRANSISTOR MODELS
+*--------------------------------------------------------------
+* NPN silicon transistor — the logarithmic amplifier exploits
+* the precise exponential relationship between base-emitter
+* voltage and collector current:
+*   I_C = I_S * exp(V_BE / V_T)
+*   => V_BE = V_T * ln(I_C / I_S)
+* where V_T = kT/q ≈ 26 mV at room temperature, I_S ≈ 1e-14 A.
+* This is the heart of the logarithmic conversion.
+
+.model NPN NPN (BF=200 IS=1e-14 VAF=100 RB=10 RC=1
++ CJE=4p CJC=3p TF=400p TR=200n)
+
+*--------------------------------------------------------------
+* AGC INPUT SOURCE
+*--------------------------------------------------------------
+* AGC voltage: 0V = very strong signal, 6V = very weak signal
+* (typical AGC behavior — higher voltage = more gain needed)
+* DC source for parametric sweep; will be swept from 0 to 6V
+V_agc  agc_in  0  DC 3
+
+* =========================================================================
+* STAGE 1: AGC VOLTAGE INVERTER
+* =========================================================================
+* Common-emitter amplifier inverts the AGC voltage so that:
+*   AGC high (weak signal) → inverter output low → meter reads low
+*   AGC low (strong signal) → inverter output high → meter reads high
+*
+* This maps signal strength to meter deflection correctly:
+* strong signal = high meter reading = what the operator expects.
+*
+*               Vcc (12V)
+*                |
+*              R_C1 (4.7K)
+*                |
+*                +--- collector_1
+*                |
+*               [Q1]
+*            B---|
+*            |   E
+*           R_in  |
+*            |   R_E1
+*  agc_in ---+    |
+*                GND
+
+R_in   agc_in   base_1   10k
+R_B1   vcc      base_1   47k
+R_B2   base_1   0        22k
+Q1     coll_1   base_1   emit_1   NPN
+R_C1   vcc      coll_1   4.7k
+R_E1   emit_1   0        1k
+C_E1   emit_1   0        10u
+
+* =========================================================================
+* STAGE 2: LOGARITHMIC AMPLIFIER
+* =========================================================================
+* The log amp converts a linear voltage change into a logarithmic
+* output. This compresses the enormous dynamic range of RF signals
+* (60+ dB = 1000:1 voltage ratio) into a manageable meter swing.
+*
+* How it works:
+*   Q2 is connected as a log transistor — the collector voltage
+*   from Stage 1 drives current through R_log into Q2's collector.
+*   The base-emitter voltage of Q2 is:
+*     V_BE = V_T * ln(I_C / I_S)
+*          = 0.026 * ln(I_C / 1e-14)
+*
+*   For I_C = 10 uA:  V_BE = 0.026 * ln(1e-8) = 0.026 * (-18.42) ≈ 0.479V
+*   For I_C = 100 uA: V_BE = 0.026 * ln(1e-10) = 0.026 * (-23.03) ≈ 0.539V
+*   For I_C = 1 mA:   V_BE = 0.026 * ln(1e-11) = 0.026 * (-25.33) ≈ 0.599V
+*
+*   10:1 change in current (20 dB) produces only 60 mV change in V_BE.
+*   This is exactly the compression needed for an S-meter: each S-unit
+*   is 6 dB, so the voltage steps are nearly equal on the meter scale.
+
+R_log   coll_1   log_coll   10k
+Q2      log_coll log_base   0   NPN
+
+* Q2 is diode-connected: collector tied to base through R_sense.
+* The V_BE is the logarithmic output.
+R_sense log_coll log_base   100
+
+* Log output voltage is taken at the base of Q2
+* V(log_base) = V_T * ln(I_through_R_log / I_S)
+
+* =========================================================================
+* STAGE 3: BUFFER / METER DRIVER
+* =========================================================================
+* Emitter follower (Q3) provides current gain to drive the meter.
+* The meter is a 100 uA full-scale deflection movement with
+* approximately 1K internal resistance.
+*
+*               Vcc (12V)
+*                |
+*               [Q3]
+*  log_base -B---|
+*                E
+*                |
+*              R_cal --- meter_pos --- R_meter --- GND
+*
+* R_cal: calibration trimmer — adjusts full-scale for S9 reference
+* R_meter: models the meter movement (1K internal resistance)
+
+Q3     vcc    log_base   buf_out   NPN
+
+* Calibration network
+* R_cal sets the S9 reference point. In practice this is a trimmer
+* potentiometer adjusted so S9 = 50 uV at the antenna input.
+R_cal     buf_out    meter_pos   2.2k
+
+* S9 calibration divider — fine adjustment
+R_s9_hi   vcc        cal_ref     100k
+R_s9_lo   cal_ref    0           10k
+
+* Meter movement: 100 uA full-scale, 1K ohm internal resistance
+* Current through R_meter is the meter reading
+R_meter   meter_pos  0           1k
+
+*--------------------------------------------------------------
+* METER SHUNT — PROTECTION
+*--------------------------------------------------------------
+* Diodes across the meter prevent damage from transients
+* (back-to-back diodes clamp the voltage across the meter)
+D_prot1  meter_pos  0  DPROT
+D_prot2  0  meter_pos  DPROT
+.model DPROT D(IS=1e-14 N=1 BV=1.5)
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* DC sweep: S-meter response across full AGC range
+* AGC = 0V (strongest signal) to 6V (weakest signal)
+.dc V_agc 0 6 0.05
+
+* Transient: dynamic response to a changing AGC voltage
+* Simulates tuning across a signal — AGC ramps from weak to strong
+* and back over 200 ms
+.tran 0 200m 0 100u
+
+* Use a piecewise-linear source for transient analysis
+* Override V_agc for transient: signal appears, peaks, fades
+V_agc_dyn  agc_dyn  0  PWL(
++ 0      6
++ 10m    6
++ 30m    4
++ 50m    2
++ 70m    0.5
++ 90m    0.5
++ 110m   2
++ 130m   4
++ 150m   5.5
++ 200m   6)
+
+* Connect dynamic AGC through isolation resistor for transient
+R_dyn  agc_dyn  agc_in  100k
+
+* =========================================================================
+* OUTPUT AND MEASUREMENTS
+* =========================================================================
+.control
+  run
+
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  * Plot 1: S-Meter response curve — meter current vs AGC voltage
+  * This is the calibration curve that defines the S-meter scale
+  hardcopy smeter_response.png i(R_meter)
+  + title 'S-Meter Response: Meter Current vs AGC Voltage'
+  + xlabel 'AGC Voltage (V)' ylabel 'Meter Current (A)'
+
+  * Plot 2: Logarithmic compression — log amp V_BE vs input
+  hardcopy smeter_logamp.png v(log_base)
+  + title 'Logarithmic Amplifier Output (V_BE) vs AGC'
+  + xlabel 'AGC Voltage (V)' ylabel 'Log Output (V)'
+
+  * Plot 3: Inverter output — collector voltage of Q1
+  hardcopy smeter_inverter.png v(coll_1)
+  + title 'AGC Inverter: Collector Voltage vs AGC Input'
+  + xlabel 'AGC Voltage (V)' ylabel 'Voltage (V)'
+
+  * Plot 4: Transient — meter response to a passing signal
+  hardcopy smeter_transient.png v(meter_pos) v(agc_dyn)
+  + title 'S-Meter Dynamic Response — Signal Appears and Fades'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Measurements — S-unit calibration points
+  echo ""
+  echo "========================================================"
+  echo "  S-METER — SIGNAL STRENGTH INDICATOR"
+  echo "  Aurora 7 Progressive Radio Series v1.22"
+  echo "========================================================"
+  echo ""
+
+  echo "--- Logarithmic Compression ---"
+  echo "  The BJT log amp compresses 60 dB of dynamic range into"
+  echo "  ~120 mV of V_BE swing. Each S-unit (6 dB) maps to ~12 mV."
+  echo ""
+  echo "  V_BE = V_T * ln(I_C / I_S)"
+  echo "  V_T = kT/q = 26 mV at 25C"
+  echo "  I_S = 1e-14 A (transistor saturation current)"
+
+  echo ""
+  echo "--- S-Unit Scale ---"
+  echo "  S1:  -121 dBm   0.05 uV    (barely detectable)"
+  echo "  S2:  -115 dBm   0.10 uV"
+  echo "  S3:  -109 dBm   0.20 uV"
+  echo "  S4:  -103 dBm   0.40 uV"
+  echo "  S5:   -97 dBm   0.80 uV"
+  echo "  S6:   -91 dBm   1.6 uV"
+  echo "  S7:   -85 dBm   3.2 uV"
+  echo "  S8:   -79 dBm   6.3 uV"
+  echo "  S9:   -73 dBm  12.5 uV    (strong local signal)"
+  echo "  Each S-unit = 6 dB = 2x voltage = 4x power"
+
+  echo ""
+  echo "--- DC Operating Points ---"
+  meas dc v_inv_weak FIND v(coll_1) AT=5.5
+  meas dc v_inv_strong FIND v(coll_1) AT=0.5
+  echo "  Inverter output at AGC=5.5V (weak): $&v_inv_weak V"
+  echo "  Inverter output at AGC=0.5V (strong): $&v_inv_strong V"
+
+  meas dc v_log_weak FIND v(log_base) AT=5.5
+  meas dc v_log_strong FIND v(log_base) AT=0.5
+  echo "  Log amp output at AGC=5.5V (weak): $&v_log_weak V"
+  echo "  Log amp output at AGC=0.5V (strong): $&v_log_strong V"
+
+  meas dc i_meter_weak FIND i(R_meter) AT=5.5
+  meas dc i_meter_strong FIND i(R_meter) AT=0.5
+  echo "  Meter current at AGC=5.5V (weak): $&i_meter_weak A"
+  echo "  Meter current at AGC=0.5V (strong): $&i_meter_strong A"
+
+  echo ""
+  echo "========================================================"
+  echo "  AURORA 7 — CARPENTER'S OVERSHOOT"
+  echo "========================================================"
+  echo ""
+  echo "When Carpenter overshot by 250 miles, the tracking network"
+  echo "lost contact. Recovery aircraft swept their direction-finding"
+  echo "antennas across the ocean, watching S-meters for any flicker"
+  echo "of his SARAH beacon signal."
+  echo ""
+  echo "The logarithmic S-meter was essential: it compressed the"
+  echo "enormous dynamic range so operators could see weak signals"
+  echo "without the meter pegging on strong ones. A linear meter"
+  echo "would have been useless — either too sensitive (pegged by"
+  echo "noise) or too insensitive (missing the weak beacon)."
+  echo ""
+  echo "They found him after 40 minutes. He was sitting on his"
+  echo "life raft, eating a candy bar."
+  echo ""
+  echo "Progressive radio series:"
+  echo "  v1.21: BFO — beat frequency oscillator for CW/SSB"
+  echo "  v1.22: S-Meter — signal strength with log compression"
+  echo "  (next: TBD)"
+
+  quit
+.endc
+
+.end

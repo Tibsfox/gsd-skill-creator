@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.22 — Mercury-Atlas 7 / Aurora 7 + Aequorea victoria | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #020810; --bio-mid: #041020;
+    --aurora-green: #20A060; --aurora-dim: #105030;
+    --gfp-green: #40D080; --gfp-dim: #206840;
+    --biolum-blue: #2040C0; --biolum-dim: #102060;
+    --ocean-deep: #0A1828; --ocean-dim: #050C14;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --jellyfish-teal: #208888; --jellyfish-dim: #104444;
+    --space: #020408;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(32,160,96,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(32,64,192,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(64,208,128,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(32,136,136,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(208,128,32,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(10,24,40,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(2,4,8,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(32,160,96,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.04) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--biolum-dim) 55%, var(--aurora-dim) 100%);
+    border-bottom: 3px solid var(--aurora-green);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(32,160,96,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(32,160,96,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(32,160,96,0.12); border: 1px solid var(--aurora-green); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--aurora-green); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-success {
+    background: rgba(32,160,96,0.2); border: 1px solid var(--aurora-green);
+    color: var(--aurora-green); padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .status-anomaly {
+    background: rgba(208,128,32,0.2); border: 1px solid var(--reentry-amber);
+    color: var(--reentry-amber); padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-left: 0.5rem;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--aurora-green); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(2,4,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--gfp-green);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--gfp-green); }
+  .card em { color: var(--jellyfish-teal); }
+
+  .resonance-card { border-color: var(--aurora-green); background: rgba(32,160,96,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(32,160,96,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--aurora-green); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--aurora-green); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(2,4,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--aurora-green); background: rgba(32,160,96,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--gfp-green); }
+  .track-card.t2 .track-title { color: var(--jellyfish-teal); }
+  .track-card.t3 .track-title { color: var(--biolum-blue); }
+  .track-card.t4 .track-title { color: var(--gfp-green); }
+  .track-card.t5 .track-title { color: var(--aurora-green); }
+  .track-card.t6 .track-title { color: var(--reentry-amber); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(32,136,136,0.08); border: 1px solid var(--jellyfish-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--aurora-green); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--jellyfish-teal); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(2,4,8,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--gfp-green); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(32,160,96,0.06); border: 1px solid rgba(32,160,96,0.2);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--aurora-green); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--aurora-green); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(32,160,96,0.15); transition: color 0.2s; }
+  .data-links a:hover { color: var(--gfp-green); }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(2,4,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--aurora-green); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--gfp-green); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--aurora-green); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.22</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+      <span class="status-anomaly">ANOMALIES</span>
+    </div>
+    <h1>v1.22 &mdash; Mercury-Atlas 7 / Aurora 7 + <em>Aequorea victoria</em></h1>
+    <p class="subtitle">Luminescence &mdash; the cost of curiosity, the value of light</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> May 24, 1962</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Scott Carpenter</span>
+      <span><span class="label">Peak Alt:</span> 267 km</span>
+      <span><span class="label">Duration:</span> 4h 56m</span>
+      <span><span class="label">Orbits:</span> 3</span>
+      <span><span class="label">Overshoot:</span> 402 km</span>
+      <span><span class="label">Organism:</span> Crystal Jellyfish</span>
+      <span><span class="label">Bird:</span> Rhinoceros Auklet</span>
+      <span><span class="label">Dedication:</span> Bob Dylan</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On May 24, 1962, Scott Carpenter launched from Cape Canaveral&rsquo;s Launch Complex 14 aboard Aurora 7, the most poetically named capsule in the Mercury program. He was Glenn&rsquo;s backup &mdash; the man who had said <strong>&ldquo;Godspeed, John Glenn&rdquo;</strong> three months earlier. Now it was his turn. He orbited Earth three times in <strong>4 hours 56 minutes</strong>, and he flew the most scientifically ambitious and operationally troubled mission in the Mercury program.</p>
+      <p>Carpenter solved the mystery of Glenn&rsquo;s &ldquo;fireflies&rdquo; &mdash; the luminous particles that had drifted past Friendship 7&rsquo;s window at orbital dawn. He deliberately <strong>tapped the capsule hull</strong> and watched a shower of particles bloom from the contact point. <em>&ldquo;They are definitely emanating from the capsule.&rdquo;</em> The fireflies were ice crystals, sublimated from the hull, catching sunlight at the terminator. Mystery solved. But the solving cost fuel &mdash; every unscheduled maneuver to observe, photograph, and investigate consumed hydrogen peroxide from the attitude control system. By the end of orbit two, Carpenter had used approximately <strong>75% of his manual fuel</strong>.</p>
+      <p>The horizon scanner malfunctioned, forcing manual attitude control. The retrofire was <strong>3 seconds late</strong> with a <strong>25-degree yaw error</strong>. The combined effects sent Aurora 7 splashing down <strong>402 kilometers</strong> beyond the planned landing point. For forty minutes, Mercury Control did not know if Carpenter was alive. He was &mdash; sitting in a life raft, eating a candy bar, watching sharks. He waited three hours for recovery. Flight director Chris Kraft reportedly said: <em>&ldquo;That sonofabitch will never fly for me again.&rdquo;</em> Carpenter never did. He went to the ocean floor instead &mdash; SEALAB II, thirty days at 62 meters depth, the first person to live in both space and the deep sea. Both hostile. Both fascinating. Both requiring the same thing: <strong>curiosity that outweighs the cost</strong>.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">&ldquo;Luminescence&rdquo;</div>
+            <div class="track-desc">Carpenter&rsquo;s biography (Boulder, P2V Neptunes, the poet-astronaut), the Aurora, the flight, firefly solution, fuel controversy, 402 km overshoot, SEALAB, legacy</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">Shimomura 1962 aequorin paper, Chalfie 1994 GFP expression, reentry dispersion analysis, alcid diving physiology, modern optogenetics</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Aequorea victoria</em></div>
+            <div class="track-desc">Crystal jellyfish, GFP, bioluminescence, Friday Harbor, Shimomura&rsquo;s 50,000 jellyfish, the protein that changed biology, metagenesis</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">Mathematics of Luminescence</div>
+            <div class="track-desc">Ballistic dispersion, sublimation thermodynamics, GFP quantum mechanics, diving physics, attitude control fuel budgeting, 5 debate questions</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">UV fluorescence demo, reentry accuracy experiment, dual-medium flight challenge. DIY: GFP extraction sim, S-meter build, underwater viewer. Fox Companies pathways.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Simulations &amp; Creative</div>
+            <div class="track-desc">Retrofire dispersion analysis, GFP spectrum, S-meter SPICE, fluorescence detector, fuel monitor web sim, bioluminescence interactive, GLSL screensaver, FAUST synths</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <div class="axis-num">1</div>
+        <div class="axis-text">
+          <div class="axis-title">Luminescence</div>
+          Light that reveals &mdash; not the light itself, but what it illuminates. Carpenter solved the firefly mystery (ice crystals). Shimomura extracted GFP (biological flashlight). Dylan made feelings visible through lyrics. The auklet navigates by starlight. All four make the invisible luminous, and all four pay a cost for looking.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <div class="axis-num">2</div>
+        <div class="axis-text">
+          <div class="axis-title">The Cost of Curiosity</div>
+          Carpenter used fuel to investigate. Shimomura spent decades squeezing jellyfish. The auklet spends calories on exploratory dives. Every observation costs margin. Every discovery pays back in knowledge. The question: is the trade-off worth it? MA-7 says yes &mdash; the science outlasted the fuel controversy by sixty years.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <div class="axis-num">3</div>
+        <div class="axis-text">
+          <div class="axis-title">Two Worlds</div>
+          Carpenter lived in space and on the ocean floor &mdash; the first person in both environments. The auklet flies through air and swims underwater with the same wings. <em>Aequorea victoria</em> alternates between sessile polyp and pelagic medusa. Jazz-funk exists between jazz and funk. All occupy two worlds without fully belonging to either.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><a href="artifacts/stories/luminescence.html" style="color:var(--gfp-green)">Story: &ldquo;Luminescence&rdquo;</a> &mdash; three-part narrative (three orbits), literary fiction weaving the mission, jellyfish, auklet, and Dylan</li>
+        <li><a href="artifacts/audio/ma7-aurora7-synth.dsp" style="color:var(--aurora-green)">FAUST: Aurora 7 Orbital Sonification</a> &mdash; fuel level &rarr; filter cutoff, altitude &rarr; pitch, firefly burst, retrofire percussion</li>
+        <li><a href="artifacts/audio/crystal-jellyfish.dsp" style="color:var(--aurora-green)">FAUST: Crystal Jellyfish Bioluminescence</a> &mdash; bell pulsation LFO, calcium trigger, blue-to-green spectral shift</li>
+        <li><a href="artifacts/circuits/aurora-borealis-led.md" style="color:var(--reentry-amber)">Circuit: Aurora Borealis LED Display</a> &mdash; 555 + CD4017 sequential RGB fade</li>
+        <li><a href="artifacts/circuits/radio-s-meter.md" style="color:var(--reentry-amber)">Circuit: S-Meter (Progressive Radio #22)</a> &mdash; AGC voltage &rarr; logarithmic signal strength indicator</li>
+        <li><a href="artifacts/screensaver/ma7-screensaver.frag" style="color:var(--biolum-blue)">GLSL Shader</a> &mdash; 4 modes: orbital dawn, bioluminescence, reentry, aurora borealis</li>
+        <li><a href="artifacts/simulations/python/retrofire-dispersion.py" style="color:var(--jellyfish-teal)">Python: Retrofire Dispersion</a> &mdash; yaw error + timing error &rarr; landing overshoot contour plot</li>
+        <li><a href="artifacts/simulations/python/gfp-spectrum.py" style="color:var(--jellyfish-teal)">Python: GFP Fluorescence Spectrum</a> &mdash; excitation/emission spectra with Stokes shift</li>
+        <li><a href="artifacts/simulations/spice/s-meter-circuit.cir" style="color:var(--text-dim)">SPICE: S-Meter Circuit</a> &mdash; AGC-driven logarithmic signal strength meter</li>
+        <li><a href="artifacts/simulations/spice/fluorescence-detector.cir" style="color:var(--text-dim)">SPICE: Fluorescence Detector</a> &mdash; transimpedance amplifier for GFP detection</li>
+        <li><a href="artifacts/simulations/web/aurora7-fuel.html" style="color:var(--aurora-green)">Web: Aurora 7 Fuel Monitor</a> &mdash; interactive fuel consumption simulation</li>
+        <li><a href="artifacts/simulations/web/bioluminescence.html" style="color:var(--aurora-green)">Web: Bioluminescence Simulator</a> &mdash; click the jellyfish to trigger calcium-dependent fluorescence</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">&larr; Previous</div>
+        <a href="../1.21/index.html">v1.21 &mdash; Friendship 7</a>
+      </div>
+      <div style="text-align: center;">
+        <a href="../index.html">All Missions</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next &rarr;</div>
+        <a href="../1.23/index.html">v1.23 &mdash; Aurora 7 (TBD)</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <div class="sci-name">Aequorea victoria &mdash; Crystal Jellyfish</div>
+      <p style="font-size:0.85rem; color:var(--text); margin-bottom:0.75rem;">A transparent hydromedusa found in Puget Sound and the San Juan Islands. Its green fluorescent protein (GFP) &mdash; isolated by Shimomura at Friday Harbor in 1962, the same year as Carpenter&rsquo;s flight &mdash; became the most important visualization tool in modern biology. Nobel Prize 2008. The jellyfish that changed how we see cells.</p>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-value">17 cm</div><div class="stat-label">Bell Diameter</div></div>
+        <div class="stat"><div class="stat-value">509 nm</div><div class="stat-label">GFP Emission</div></div>
+        <div class="stat"><div class="stat-value">0.79</div><div class="stat-label">Quantum Yield</div></div>
+        <div class="stat"><div class="stat-value">238 aa</div><div class="stat-label">GFP Length</div></div>
+      </div>
+    </div>
+
+    <div class="organism-card" style="border-color:var(--aurora-dim); background:rgba(32,160,96,0.06);">
+      <h3>Bird (Degree 22)</h3>
+      <div class="sci-name">Cerorhinca monocerata &mdash; Rhinoceros Auklet</div>
+      <p style="font-size:0.85rem; color:var(--text); margin-bottom:0.75rem;">A seabird that flies through air and swims through water using the same wings. Largest colony in the world: 36,000 pairs on Protection Island, Strait of Juan de Fuca. Dives to 57+ meters. Nocturnal at breeding colonies. Returns to its burrow in darkness carrying fish crosswise in its bill &mdash; multitasking, like Carpenter, who tried to do too many things at once.</p>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-value">57+ m</div><div class="stat-label">Max Dive</div></div>
+        <div class="stat"><div class="stat-value">36K</div><div class="stat-label">PI Pairs</div></div>
+        <div class="stat"><div class="stat-value">520 g</div><div class="stat-label">Body Mass</div></div>
+        <div class="stat"><div class="stat-value">2</div><div class="stat-label">Media (air+water)</div></div>
+      </div>
+    </div>
+
+    <div class="organism-card" style="border-color:var(--reentry-dim); background:rgba(208,128,32,0.04);">
+      <h3>Dedication</h3>
+      <div class="sci-name">Bob Dylan &mdash; born May 24, 1941</div>
+      <p style="font-size:0.85rem; color:var(--text); margin-bottom:0.75rem;">Born on the exact calendar date of Carpenter&rsquo;s flight, twenty-one years earlier. Nobel Prize in Literature, 2016. Both Dylan and Carpenter expanded the boundaries of their medium by refusing to stay inside the expected lines. Dylan went electric. Carpenter did science. Both were criticized. Both were right about what mattered. &ldquo;The answer is blowin&rsquo; in the wind&rdquo; &mdash; and Carpenter&rsquo;s landing point was, literally, determined by the wind.</p>
+    </div>
+
+    <div class="organism-card" style="border-color:var(--biolum-dim); background:rgba(32,64,192,0.04);">
+      <h3>Seattle 360 (Degree 22)</h3>
+      <div class="sci-name">Foxy Apollo &mdash; Jazz/Funk</div>
+      <p style="font-size:0.85rem; color:var(--text); margin-bottom:0.75rem;">A contemporary Seattle jazz-funk project that privileges curiosity over precision. The name carries dual resonance: &ldquo;Foxy&rdquo; connects to the engine&rsquo;s creator, &ldquo;Apollo&rdquo; reaches forward to the program Mercury built toward. The music follows the interesting thing, even when following costs fuel. Carpenter&rsquo;s approach to spaceflight, made audible.</p>
+    </div>
+
+    <div class="data-links">
+      <h3>Mission Data</h3>
+      <a href="knowledge-nodes.json">Knowledge Nodes (10 concepts)</a>
+      <a href="data-sources.json">Data Sources (10 references)</a>
+      <a href="degree-sync.json">Degree Sync (360 Engine Bridge)</a>
+      <a href="research.md">Research (Markdown)</a>
+      <a href="organism.md">Organism (Markdown)</a>
+      <a href="mathematics.md">Mathematics (Markdown)</a>
+      <a href="papers.md">Papers (Markdown)</a>
+      <a href="curriculum.md">Curriculum (Markdown)</a>
+      <a href="simulation.md">Simulation (Markdown)</a>
+    </div>
+
+    <div class="card" style="border-color:var(--aurora-dim); background:rgba(32,160,96,0.03);">
+      <h2 style="color:var(--aurora-green); font-size:1rem;">Mission Stats</h2>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-value">3</div><div class="stat-label">Orbits</div></div>
+        <div class="stat"><div class="stat-value">4h 56m</div><div class="stat-label">Duration</div></div>
+        <div class="stat"><div class="stat-value">267 km</div><div class="stat-label">Apogee</div></div>
+        <div class="stat"><div class="stat-value">161 km</div><div class="stat-label">Perigee</div></div>
+        <div class="stat"><div class="stat-value">32.5&deg;</div><div class="stat-label">Inclination</div></div>
+        <div class="stat"><div class="stat-value">402 km</div><div class="stat-label">Overshoot</div></div>
+        <div class="stat"><div class="stat-value">25&deg;</div><div class="stat-label">Yaw Error</div></div>
+        <div class="stat"><div class="stat-value">~15%</div><div class="stat-label">Fuel at Retro</div></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p style="font-style:italic; color:var(--gfp-green); margin-bottom:0.5rem;">&ldquo;he tapped the dark hull / ice crystals caught the sunrise / curiosity costs&rdquo;</p>
+  <p>Mission 1.22 &bull; Mercury-Atlas 7 / Aurora 7 &bull; May 24, 1962</p>
+  <p>NASA Mission Series &bull; <a href="../index.html">tibsfox.com/Research/NASA/</a></p>
+  <p style="margin-top:0.5rem;">Dedicated to <strong>Bob Dylan</strong> (born May 24, 1941)</p>
+</footer>
+
+</body>
+</html>
