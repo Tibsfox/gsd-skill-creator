@@ -304,6 +304,63 @@
       );
     }
     .solar-cycle-graph p { font-size:0.85rem; color:rgba(255,255,255,0.6); line-height:1.6; }
+
+    /* ======== DEEP RESEARCH LINK GRID ======== */
+    .research-grid {
+      display:grid; grid-template-columns:1fr; gap:1rem; margin:1rem 0;
+    }
+    .research-link-card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1rem 1.2rem; transition:border-color 0.2s, transform 0.15s;
+    }
+    .research-link-card:hover {
+      border-color:rgba(224,168,48,0.2); transform:translateY(-1px);
+    }
+    .research-link-card h4 {
+      font-size:0.95rem; margin:0 0 0.25rem; font-family:Georgia,serif;
+    }
+    .research-link-card h4 a {
+      color:var(--solar-gold); text-decoration:none;
+    }
+    .research-link-card h4 a:hover {
+      color:#f0cc60; text-decoration:underline;
+    }
+    .research-link-card .link-desc {
+      font-size:0.8rem; color:rgba(255,255,255,0.5); line-height:1.5; margin:0;
+    }
+    .research-category {
+      font-size:0.65rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.12em;
+      font-weight:500; margin:1.5rem 0 0.6rem; padding-bottom:0.3rem;
+      border-bottom:1px solid var(--border);
+    }
+    .research-category:first-child { margin-top:0; }
+    .connection-note {
+      background:linear-gradient(135deg, rgba(224,168,48,0.04), rgba(184,200,216,0.04));
+      border:1px solid rgba(224,168,48,0.1); border-radius:6px;
+      padding:1rem 1.2rem; margin-top:1.5rem;
+      font-size:0.85rem; color:rgba(255,255,255,0.55); line-height:1.7;
+      font-style:italic; font-family:Georgia,serif;
+    }
+
+    /* Research grid responsive: 2-col at 1200px+ */
+    @media(min-width:1201px) {
+      .research-grid { grid-template-columns:repeat(2, 1fr); }
+    }
+    /* Research grid responsive: 3-col at 1920px+ */
+    @media(min-width:1920px) {
+      .research-grid { grid-template-columns:repeat(3, 1fr); gap:1.2rem; }
+      .research-link-card { padding:1.2rem 1.5rem; }
+      .research-link-card h4 { font-size:1.05rem; }
+      .research-link-card .link-desc { font-size:0.88rem; }
+      .research-category { font-size:0.72rem; margin:1.8rem 0 0.8rem; }
+      .connection-note { font-size:0.95rem; padding:1.2rem 1.5rem; }
+    }
+    @media(min-width:2560px) {
+      .research-link-card { padding:1.4rem 1.8rem; }
+      .research-link-card h4 { font-size:1.15rem; }
+      .research-link-card .link-desc { font-size:0.95rem; }
+      .connection-note { font-size:1rem; }
+    }
   </style>
 </head>
 <body>
@@ -663,6 +720,92 @@
       <tr><td>JPL Horizons</td><td>Moon distance, planetary ephemeris</td><td>On demand</td></tr>
       <tr><td>NOAA DSCOVR/EPIC</td><td>Earth imagery from L1</td><td>Hourly (when available)</td></tr>
     </table>
+  </div>
+
+  <!-- ==================== DEEP RESEARCH LINKS ==================== -->
+
+  <h2>Deep Research &mdash; Science &amp; Education Hub</h2>
+
+  <h3 class="research-category">Artemis II Mission</h3>
+  <div class="research-grid">
+    <div class="research-link-card">
+      <h4><a href="../NASA/artemis-ii/crew.html">Crew Biographies</a></h4>
+      <p class="link-desc">4 crew + 2 backup, mission firsts</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../NASA/artemis-ii/vehicle.html">Vehicle Systems</a></h4>
+      <p class="link-desc">SLS, Orion, ESM, AVCOAT deep dive</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../NASA/artemis-ii/science.html">Science Payloads</a></h4>
+      <p class="link-desc">O2O optical comms, AVATAR, ARCHAR</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../NASA/artemis-ii/math.html">Worked Mathematics</a></h4>
+      <p class="link-desc">Orbital mechanics, Tsiolkovsky, link budgets</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../NASA/artemis-ii/timeline.html">Mission Timeline</a></h4>
+      <p class="link-desc">53-year gap through splashdown</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../NASA/artemis-ii/index.html">Live Tracker</a></h4>
+      <p class="link-desc">Countdown, telemetry, trajectory</p>
+    </div>
+  </div>
+
+  <h3 class="research-category">Local Observatories</h3>
+  <div class="research-grid">
+    <div class="research-link-card">
+      <h4><a href="../MUK/index.html">Mukilteo Weather</a></h4>
+      <p class="link-desc">4-source accuracy comparison</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../MUK/food.html">PNW Food Heritage</a></h4>
+      <p class="link-desc">14 restaurants, 1908&ndash;present</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../PARK/index.html">Parks &amp; Trails</a></h4>
+      <p class="link-desc">20+ parks, ecology notes</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../MUK/radio.html">Radio Guide</a></h4>
+      <p class="link-desc">AM/FM/NOAA/VHF frequencies</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../BEACH/index.html">Beach &amp; Fishing</a></h4>
+      <p class="link-desc">Boat launches, Ballard Locks, ferries</p>
+    </div>
+  </div>
+
+  <h3 class="research-category">Knowledge Graph</h3>
+  <div class="research-grid">
+    <div class="research-link-card">
+      <h4><a href="../constellation.html">Constellation Map</a></h4>
+      <p class="link-desc">168 nodes, force-directed graph</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../constellation-3d.html">3D Sphere</a></h4>
+      <p class="link-desc">Riemann sphere projection</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../NASA/index.html">NASA Mission Series</a></h4>
+      <p class="link-desc">552 missions, 6 epochs</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../PNW/index.html">PNW Research</a></h4>
+      <p class="link-desc">Ecology, elevation bands, species</p>
+    </div>
+    <div class="research-link-card">
+      <h4><a href="../S36/index.html">Seattle 360</a></h4>
+      <p class="link-desc">Jazz, R&amp;B, soul</p>
+    </div>
+  </div>
+
+  <div class="connection-note">
+    SOL connects celestial mechanics to mission education. The same Moon tracked here is where Artemis II is going.
+    The same Sun drives the microclimate patterns measured at Mukilteo. The tides in Possession Sound are pulled by
+    lunar gravity. Everything connects.
   </div>
 
 </main>
