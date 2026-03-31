@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Creative Arts | v1.14 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --mylar-deep: #080810; --mylar-mid: #181828;
+    --mylar-silver: #C0C8D0; --mylar-dim: #606870;
+    --signal-blue: #2060CC; --signal-dim: #103068;
+    --iridescent: #8040CC; --iridescent-dim: #402060;
+    --ocean-blue: #1040AA; --ocean-dim: #082060;
+    --sky: #E0E8F0; --space: #060610;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2A40;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(192,200,208,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(128,64,204,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(192,200,208,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(128,64,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(192,200,208,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mylar-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--sky); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--mylar-deep) 25%, var(--mylar-mid) 50%, var(--mylar-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mylar-silver); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(192,200,208,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(192,200,208,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(192,200,208,0.12); border: 1px solid var(--mylar-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mylar-silver); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(192,200,208,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mylar-silver); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--sky); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mylar-silver); margin: 1.5rem 0 0.75rem; }
+
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--sky); }
+  em { color: var(--iridescent); }
+  a { color: var(--mylar-silver); text-decoration: none; }
+  a:hover { color: var(--sky); }
+
+  code { font-family: 'DM Mono', monospace; color: var(--mylar-silver); background: rgba(192,200,208,0.08); padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.88rem; }
+
+  pre {
+    background: rgba(8,8,16,0.6); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.25rem; overflow-x: auto; margin: 1rem 0 1.5rem;
+    font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--text);
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  blockquote {
+    border-left: 3px solid var(--mylar-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(8,8,16,0.4); border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  .sim-card {
+    background: rgba(8,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin: 1.5rem 0;
+  }
+  .sim-card h3 { margin-top: 0; }
+
+  .nav-card {
+    background: rgba(8,8,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mylar-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--sky); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mylar-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.14 Echo 1</a>
+  <span class="sep">/</span>
+  Track 5: Simulation &amp; Creative Arts
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.14</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts</h1>
+    <p class="subtitle">What to build, train, visualize, and create</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti</span>
+      <span><span class="label">Platforms:</span> Python, Web, SPICE, GMAT</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <div class="sim-card">
+      <h3>A1. Python: Bistatic Radar Equation for Passive Relay</h3>
+      <p><strong>What it is:</strong> A Python simulation that computes the complete bistatic link budget for Echo 1 as a function of geometry &mdash; the distances from transmitter to balloon and from balloon to receiver. The student adjusts transmitter power, antenna gains, balloon diameter, and frequency, and watches the received signal power respond. The simulation traces a typical Echo 1 pass from horizon to overhead to horizon, showing how the received signal strength rises and falls as the geometry changes.</p>
+      <p><strong>Why it matters:</strong> Echo 1&rsquo;s link budget is the radar equation applied to satellite communications &mdash; a framework that every radar engineer, satellite designer, and defense analyst still uses. The simulation makes the 1/(R<sub>t</sub>&sup2; &times; R<sub>r</sub>&sup2;) factor tangible: doubling the balloon&rsquo;s altitude quadruples both R<sub>t</sub> and R<sub>r</sub>, reducing the received power by a factor of 256 (24 dB). The student also sees the passive-versus-active comparison: adding a 2-watt transponder improves the received power by approximately 100 dB.</p>
+      <p><strong>Key learning moments:</strong></p>
+      <ol>
+        <li><strong>The double inverse-square penalty.</strong> The received power varies ~20&ndash;30 dB during a single pass: strongest overhead, weakest near the horizon.</li>
+        <li><strong>The active advantage.</strong> A 2-watt active transponder outperforms a 10,000-watt passive relay by ~100 dB &mdash; a factor of 10 billion. This gap is why Echo 1 was never repeated.</li>
+        <li><strong>The cross-section scaling.</strong> Doubling the diameter quadruples the cross-section (+6 dB), but a 2-watt amplifier gains 100 dB.</li>
+      </ol>
+      <p><strong>Libraries:</strong> numpy, matplotlib &middot; <strong>Difficulty:</strong> Beginner-Intermediate &middot; <strong>Duration:</strong> 2&ndash;3 hours</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A2. Python: Echo 1 Orbit with Solar Radiation Pressure Perturbation</h3>
+      <p><strong>What it is:</strong> A simulation that propagates Echo 1&rsquo;s orbit around Earth, including the perturbation from solar radiation pressure. The student watches the orbit evolve over weeks and months as the persistent force from sunlight slowly changes the eccentricity and lowers the altitude.</p>
+      <p><strong>Why it matters:</strong> Echo 1 was the first spacecraft where solar radiation pressure was a measurable orbital perturbation. The student discovers that the same Mylar skin that made Echo 1 a good reflector also made it a good solar sail, and that the balloon&rsquo;s wrinkling (modeled as a decrease in reflectivity) changed the radiation force over time.</p>
+      <p><strong>Key learning moments:</strong></p>
+      <ol>
+        <li><strong>The accumulation of small forces.</strong> Radiation pressure acceleration is 14 ppm of gravity &mdash; but over 5,000 orbits/year, the cumulative effect changes perigee by tens of kilometers.</li>
+        <li><strong>The area-to-mass ratio dominance.</strong> Echo 1&rsquo;s curve diverges wildly from a conventional satellite. Same physics, different engineering.</li>
+        <li><strong>The self-limiting wrinkling.</strong> As reflectivity drops, radiation force decreases. The balloon&rsquo;s degradation was self-preserving.</li>
+      </ol>
+      <p><strong>Libraries:</strong> numpy, matplotlib, scipy &middot; <strong>Difficulty:</strong> Intermediate &middot; <strong>Duration:</strong> 3&ndash;4 hours</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A3. Web: Interactive Reflection Simulator</h3>
+      <p><strong>What it is:</strong> An interactive web application that visualizes the Echo 1 communication geometry in real time. The student sees ground stations (Holmdel, NJ and Goldstone, CA) and the balloon overhead. Radio waves emanate from the transmitter, strike the balloon, and scatter in all directions. The student drags the balloon to different altitudes and positions, watching signal strength change in real time.</p>
+      <p><strong>Key learning moment:</strong> Dragging the balloon from 1,600 km down to 500 km, the received power increases ~20 dB. Up to 5,000 km, it drops ~20 dB. Echo 1&rsquo;s orbit was a compromise between short path lengths and simultaneous visibility from both stations.</p>
+      <p><strong>Technology:</strong> HTML5 Canvas + JavaScript &middot; Self-contained single HTML file &middot; &lt; 900 lines</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A4. Web: &ldquo;Can You See It?&rdquo; Satellite Brightness Calculator</h3>
+      <p><strong>What it is:</strong> An interactive calculator that computes the apparent magnitude of Echo 1 (and other satellites) as seen from the ground. Echo 1 reached magnitude -1 (brighter than Sirius) at perigee &mdash; and this visibility was as important for public engagement as the radio reflection was for engineering.</p>
+      <p><strong>Key learning moment:</strong> Switching between Echo 1 (D=30.5 m, albedo 0.92, mag ~-1, brilliant) and Starlink (D=3.4 m, albedo 0.05, mag ~+5&ndash;7, barely visible). SpaceX deliberately reduced Starlink&rsquo;s albedo to avoid light pollution. The contrast between &ldquo;make it visible&rdquo; (1960) and &ldquo;make it invisible&rdquo; (2020) tells the story of how satellite culture changed.</p>
+      <p><strong>Technology:</strong> HTML5 Canvas + JavaScript &middot; Self-contained single HTML file &middot; &lt; 700 lines</p>
+    </div>
+
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <div class="sim-card">
+      <h3>B1. Radar Cross-Section Prediction from Surface Shape</h3>
+      <p><strong>What it is:</strong> Train a model to predict the radar cross-section of a sphere as a function of surface roughness. The training data consists of simulated RCS values for spheres with various degrees of wrinkling (smooth = high RCS, wrinkled = lower, variable RCS).</p>
+      <p><strong>Architecture:</strong> Random forest (baseline), then small feedforward neural network (2 hidden layers, 64 units each), compare to Ruze equation: &sigma; = &sigma;<sub>smooth</sub> &times; exp(-(4&pi; &times; roughness/&lambda;)&sup2;). The student discovers that the neural network rediscovers the Ruze equation&rsquo;s exponential form. Echo 1&rsquo;s RCS degradation from ~730 to ~200&ndash;300 m&sup2; is consistent with surface roughness growing to approximately &lambda;/8 = 1.6 cm.</p>
+      <p><strong>Libraries:</strong> numpy, scikit-learn, torch (optional) &middot; <strong>Difficulty:</strong> Intermediate</p>
+    </div>
+
+    <h2>C. Computer Science &mdash; The Reflection Geometry Algorithm</h2>
+
+    <div class="sim-card">
+      <h3>C1. Specular Point Finding on a Sphere</h3>
+      <p><strong>The problem:</strong> Given positions of transmitter T, receiver R, and sphere center C with radius r, find the point P on the sphere surface where a ray from T, reflecting off the sphere, arrives at R. The specular condition: the surface normal at P bisects the angle between (T-P) and (R-P).</p>
+<pre>import numpy as np
+from scipy.optimize import brentq
+
+def specular_point(T, R, C, r):
+    """Find the specular reflection point on a sphere."""
+    u = (T - C) / np.linalg.norm(T - C)
+    v = (R - C) / np.linalg.norm(R - C)
+
+    v_perp = v - np.dot(u, v) * u
+    if np.linalg.norm(v_perp) &lt; 1e-10:
+        return C + r * u
+    v_perp = v_perp / np.linalg.norm(v_perp)
+
+    def cost(theta):
+        n = np.cos(theta) * u + np.sin(theta) * v_perp
+        P = C + r * n
+        to_T = (T - P) / np.linalg.norm(T - P)
+        to_R = (R - P) / np.linalg.norm(R - P)
+        return np.dot(n, to_T) - np.dot(n, to_R)
+
+    try:
+        theta_sol = brentq(cost, 0.01, np.pi - 0.01)
+        n_sol = np.cos(theta_sol) * u + np.sin(theta_sol) * v_perp
+        return C + r * n_sol
+    except ValueError:
+        return None</pre>
+      <p><strong>Extension:</strong> For a wrinkled balloon, model the surface as N flat facets, each tilted by a random angle. Sum contributions coherently (including path length differences for phase). The signal scintillates, reproducing the fluctuations observed in Echo 1&rsquo;s actual received signal after the balloon wrinkled.</p>
+    </div>
+
+    <h2>D. Game Theory &mdash; The Passive vs Active Decision</h2>
+
+    <div class="sim-card">
+      <h3>D1. The AT&amp;T Satellite Strategy Game</h3>
+      <p>In the early 1960s, AT&amp;T faced a strategic decision: invest in passive satellites (Echo, cheap, limited) or active satellites (Telstar, expensive, wideband). The government wanted satellite communications to be a public utility, not a private monopoly.</p>
+      <p><strong>Players:</strong> AT&amp;T (has technology), NASA (has launch vehicles), US Government (regulates communications)</p>
+      <p><strong>What actually happened:</strong> AT&amp;T developed Telstar privately ($50M). NASA launched it ($3M). The government created Comsat Corporation (1962). AT&amp;T was forced to license its technology. AT&amp;T never owned the satellites it invented. The technology became a public resource.</p>
+      <p><strong>Nash equilibrium:</strong> AT&amp;T licenses, NASA launches, government regulates through Comsat. Pareto-efficient but NOT AT&amp;T&rsquo;s preferred outcome.</p>
+      <p><strong>Echo 1&rsquo;s role:</strong> It provided the existence proof before AT&amp;T could establish a monopoly position with Telstar. The passive satellite &mdash; NASA&rsquo;s cheap, simple, publicly funded balloon &mdash; set the regulatory precedent that satellite communications were a public interest, not private property.</p>
+    </div>
+
+    <h2>E. Creative Arts &mdash; What to Create</h2>
+
+    <div class="sim-card">
+      <h3>E1. &ldquo;Hundred-Foot Mirror&rdquo; &mdash; The Balloon in Orbit</h3>
+      <p>A visual art piece depicting Echo 1 in orbit, seen from nearby. The balloon dominates the frame: a shimmering sphere of wrinkled aluminum-coated Mylar reflecting the blue Earth on one side and the black void on the other, the Sun&rsquo;s reflection creating a dazzling specular point. The Mylar is translucent at the edges where the aluminum coating has thinned. The sphere is enormous &mdash; 100 feet across, dwarfing the viewer&rsquo;s sense of scale in the void.</p>
+      <p><strong>Color palette:</strong> Chrome silver with warm gold specular highlight. Blue-white Earth with cloud patterns. Pure black space with white star points. Subtle shadow lines revealing thermal cycling creases.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>E2. &ldquo;Man O&rsquo; War and Mirror&rdquo; &mdash; Colonial Reflection</h3>
+      <p>A split-panel diptych. <strong>Top panel (&ldquo;The Colony&rdquo;):</strong> <em>Physalia physalis</em> from underwater, looking up &mdash; pneumatophore silhouetted against the surface, sun rays streaming through water, tentacles trailing into blue-black depth. <strong>Bottom panel (&ldquo;The Mirror&rdquo;):</strong> Echo 1 from the ground, looking up &mdash; bright point of light against twilight sky, radio wave lines emanating toward receiving antennas. Connecting strip: &ldquo;Both float. Both reflect. Both are colonies of one.&rdquo;</p>
+      <p><strong>Color palette:</strong> Ocean panel: blue-violet, golden sun rays, purple tentacles. Sky panel: dark blue-to-orange gradient, chrome satellite dot, golden radio wave lines.</p>
+    </div>
+
+    <h2>F. Problem Solving &mdash; Tracking a Fast-Moving Target</h2>
+
+    <div class="sim-card">
+      <h3>F1. Antenna Pointing for Echo 1</h3>
+      <p>Echo 1 orbited at ~7.5 km/s, crossing the sky in 10&ndash;15 minutes. The ground antennas had to track the balloon continuously, keeping the narrow beam (0.3 degrees beamwidth) aimed at the moving target. The servo system had to slew the dish fast enough to follow while maintaining ~0.1 degree pointing accuracy.</p>
+      <p><strong>Maximum angular rate:</strong> &omega;<sub>max</sub> = v/h = 7500/1,600,000 = 0.27 deg/s. Within the 3 deg/s slew capability, but with only 10:1 margin. The challenge is the acceleration near zenith: the &ldquo;keyhole&rdquo; problem, where azimuth can change by 180 degrees in seconds.</p>
+<pre>import numpy as np
+
+h = 1600e3   # altitude (m)
+v = 7500     # orbital velocity (m/s)
+t = np.linspace(-400, 400, 1000)
+
+x = v * t
+r = np.sqrt(h**2 + x**2)
+elev = np.degrees(np.arctan2(h, np.abs(x)))
+
+omega_max = v / h  # rad/s
+print(f"Max angular rate: {np.degrees(omega_max):.2f} deg/s")
+print(f"Beamwidth: 0.3 deg")
+print(f"Time to cross one beamwidth: {0.3/np.degrees(omega_max):.1f} s")
+print(f"Tracking update rate needed: > {np.degrees(omega_max)/0.1:.0f} Hz")</pre>
+    </div>
+
+    <h2>G. Interdisciplinary Connection &mdash; Schr&ouml;dinger&rsquo;s Wave Reflection</h2>
+
+    <div class="sim-card">
+      <h3>G1. The Universal Physics of Reflection</h3>
+      <p>Schr&ouml;dinger&rsquo;s wave equation and Maxwell&rsquo;s wave equation both predict the same phenomenon: when a wave encounters a boundary between two media with different properties, part of the wave reflects and part transmits. The reflection coefficient depends on the impedance mismatch:</p>
+      <p style="text-align: center; font-family: 'DM Mono', monospace; font-size: 1rem; color: var(--mylar-silver); margin: 1rem 0;">R = |(Z<sub>1</sub> - Z<sub>2</sub>) / (Z<sub>1</sub> + Z<sub>2</sub>)|&sup2;</p>
+      <ul>
+        <li><strong>Electromagnetic (Echo 1):</strong> Vacuum (Z<sub>0</sub> = 377 &Omega;) encounters aluminum (Z<sub>Al</sub> ~ 0.01 &Omega;). R &asymp; 0.99995. Near-perfect reflection.</li>
+        <li><strong>Quantum mechanical (Schr&ouml;dinger):</strong> Electron encounters potential step. R = |(k<sub>1</sub> - k<sub>2</sub>) / (k<sub>1</sub> + k<sub>2</sub>)|&sup2;. The electromagnetic field penetrates ~2 &mu;m into aluminum (skin depth) &mdash; the classical analog of quantum tunneling.</li>
+        <li><strong>Acoustic (<em>Physalia</em>):</strong> Water (Z<sub>water</sub> = 1.5 &times; 10<sup>6</sup> Pa&middot;s/m) encounters air-filled pneumatophore (Z<sub>air</sub> = 413 Pa&middot;s/m). R &asymp; 0.9989. This is why sonar can detect swim bladders.</li>
+      </ul>
+      <p>The mathematics is identical in all three cases. The formula does not care whether the wave is electromagnetic, quantum mechanical, or acoustic. Reflection is a universal property of waves encountering boundaries.</p>
+    </div>
+
+    <blockquote>
+      <p>&ldquo;The Portuguese man o&rsquo; war has no brain. No centralized nervous system, no decision-making organ. It is a colony of polyps, each following its own local rules &mdash; extend, contract, sting, digest, reproduce &mdash; and the emergent behavior is navigation, predation, and reproduction across thousands of kilometers. Echo 1 had no brain either. No computer, no logic, no decision-making capability. Its only instruction set was the laws of physics: reflect incoming electromagnetic energy according to Maxwell&rsquo;s equations, respond to gravity according to Newton&rsquo;s laws. Both accomplished remarkable things &mdash; transcontinental communication, transoceanic predation &mdash; without any intelligence whatsoever. They succeeded because their design was matched to their physics. The wave equation does not decide which way to reflect. It reflects according to the boundary conditions. The wavefunction is not intelligent. It is correct. Echo 1 and <em>Physalia physalis</em> are both wavefunctions obeying their boundary conditions &mdash; one electromagnetic, one biological &mdash; and both produce outcomes that look, from the outside, like engineering. The engineering is in the physics. The physics was there before the engineers arrived.&rdquo;</p>
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="curriculum.html">&larr; Curriculum</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Mission Hub</div>
+        <a href="index.html">v1.14 Mission Hub &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.14 Echo 1 + Physalia physalis &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

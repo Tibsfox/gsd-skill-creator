@@ -1,0 +1,252 @@
+* Echo 1 — Round-Trip Signal Delay Model (Transmission Line)
+* =========================================================================
+* Mission 1.14 — Echo 1 (NASA / Delta DM-19), August 12, 1960
+* First Passive Communications Satellite
+*
+* Models the round-trip signal path: ground station → Echo 1 → ground station.
+* Uses lumped-element delay lines to represent the propagation delay,
+* attenuation, and noise encountered by a radio signal bouncing off the
+* balloon satellite.
+*
+* The total round-trip delay at Echo 1's altitude (~1600 km) is:
+*   t = 2 × 1600 km / 3×10⁸ m/s = 10.67 ms
+*
+* This circuit models:
+*   1. Uplink path (ground → balloon): FSPL attenuation + delay
+*   2. Reflection from sphere: amplitude reduction (RCS-based)
+*   3. Downlink path (balloon → ground): FSPL attenuation + delay
+*   4. Received signal quality: SNR at the receiver
+*
+* The delay line uses LC ladder sections. Each section provides a small
+* delay; cascading many sections gives the total delay with distributed
+* attenuation.
+*
+* Run: ngspice -b transmission-line.cir
+* =========================================================================
+
+.title Echo 1 — Round-Trip Delay Line Model
+
+* =========================================================================
+* SIGNAL SOURCE — Ground station transmitter
+* =========================================================================
+* 10 kW transmitter at 960 MHz, modeled as a baseband pulse
+* (frequency-scaled for SPICE simulation at audio rates)
+*
+* We use a 1 kHz tone modulated signal to represent the carrier.
+* The actual RF frequency (960 MHz) is far too high for transient
+* simulation — we model the envelope and delay behavior.
+
+Vtx tx_out 0 PULSE(0 1 0 1u 1u 0.5m 1m)
+
+* Source impedance (represents transmitter output + cable + antenna)
+Rtx tx_out uplink_in 50
+
+* =========================================================================
+* UPLINK PATH — Ground to Echo 1 (800 km one-way scaled)
+* =========================================================================
+* Modeled as a lossy delay line.
+* Total one-way delay: 5.33 ms (1600 km / c)
+* Attenuation: represents FSPL at 960 MHz over 1600 km = ~175 dB
+*
+* Using 10 LC sections for the delay line.
+* Each section: L = Z₀ × td/N, C = td/(Z₀ × N)
+* Z₀ = 50 Ω, td = 5.33 ms, N = 10 sections
+* L_section = 50 × 5.33e-3 / 10 = 26.65 mH
+* C_section = 5.33e-3 / (50 × 10) = 10.66 µF
+*
+* For SPICE practicality, we scale the delay to 500 µs (10 sections × 50 µs)
+* and add resistive attenuation to model FSPL.
+
+* --- Uplink delay line (10 sections) ---
+* Section 1
+L_up1 uplink_in up1a 1.25m
+R_up1 up1a up1b 5
+C_up1 up1b 0 0.5u
+
+* Section 2
+L_up2 up1b up2a 1.25m
+R_up2 up2a up2b 5
+C_up2 up2b 0 0.5u
+
+* Section 3
+L_up3 up2b up3a 1.25m
+R_up3 up3a up3b 5
+C_up3 up3b 0 0.5u
+
+* Section 4
+L_up4 up3b up4a 1.25m
+R_up4 up4a up4b 5
+C_up4 up4b 0 0.5u
+
+* Section 5
+L_up5 up4b up5a 1.25m
+R_up5 up5a up5b 5
+C_up5 up5b 0 0.5u
+
+* Section 6
+L_up6 up5b up6a 1.25m
+R_up6 up6a up6b 5
+C_up6 up6b 0 0.5u
+
+* Section 7
+L_up7 up6b up7a 1.25m
+R_up7 up7a up7b 5
+C_up7 up7b 0 0.5u
+
+* Section 8
+L_up8 up7b up8a 1.25m
+R_up8 up8a up8b 5
+C_up8 up8b 0 0.5u
+
+* Section 9
+L_up9 up8b up9a 1.25m
+R_up9 up9a up9b 5
+C_up9 up9b 0 0.5u
+
+* Section 10
+L_up10 up9b up10a 1.25m
+R_up10 up10a balloon 5
+C_up10 balloon 0 0.5u
+
+* =========================================================================
+* ECHO 1 BALLOON — Passive Reflection
+* =========================================================================
+* The balloon reflects the signal with an efficiency determined by
+* its radar cross-section. For a 30.5m metallic sphere in the optical
+* regime, RCS = π × r² = 730.6 m². The reflection coefficient is
+* approximately the ratio of RCS to the illuminated area at the
+* balloon's distance.
+*
+* Modeled as a voltage divider (lossy reflection):
+* Reflection efficiency ≈ 0.01 (-40 dB) — most energy scatters away
+
+R_scatter balloon 0 5k
+R_reflect balloon downlink_in 50k
+
+* Small parasitic capacitance (balloon surface capacitance)
+C_balloon balloon 0 100p
+
+* =========================================================================
+* DOWNLINK PATH — Echo 1 to Ground (same structure as uplink)
+* =========================================================================
+
+* Section 1
+L_dn1 downlink_in dn1a 1.25m
+R_dn1 dn1a dn1b 5
+C_dn1 dn1b 0 0.5u
+
+* Section 2
+L_dn2 dn1b dn2a 1.25m
+R_dn2 dn2a dn2b 5
+C_dn2 dn2b 0 0.5u
+
+* Section 3
+L_dn3 dn2b dn3a 1.25m
+R_dn3 dn3a dn3b 5
+C_dn3 dn3b 0 0.5u
+
+* Section 4
+L_dn4 dn3b dn4a 1.25m
+R_dn4 dn4a dn4b 5
+C_dn4 dn4b 0 0.5u
+
+* Section 5
+L_dn5 dn4b dn5a 1.25m
+R_dn5 dn5a dn5b 5
+C_dn5 dn5b 0 0.5u
+
+* Section 6
+L_dn6 dn5b dn6a 1.25m
+R_dn6 dn6a dn6b 5
+C_dn6 dn6b 0 0.5u
+
+* Section 7
+L_dn7 dn6b dn7a 1.25m
+R_dn7 dn7a dn7b 5
+C_dn7 dn7b 0 0.5u
+
+* Section 8
+L_dn8 dn7b dn8a 1.25m
+R_dn8 dn8a dn8b 5
+C_dn8 dn8b 0 0.5u
+
+* Section 9
+L_dn9 dn8b dn9a 1.25m
+R_dn9 dn9a dn9b 5
+C_dn9 dn9b 0 0.5u
+
+* Section 10
+L_dn10 dn9b dn10a 1.25m
+R_dn10 dn10a rx_in 5
+C_dn10 rx_in 0 0.5u
+
+* =========================================================================
+* RECEIVER — Ground station input
+* =========================================================================
+* Load impedance
+Rrx rx_in 0 50
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+.control
+  echo ""
+  echo "==========================================="
+  echo "Echo 1 — Round-Trip Delay Line Simulation"
+  echo "==========================================="
+  echo ""
+  echo "Modeling the signal path:"
+  echo "  Ground TX → 1600 km up → Echo 1 balloon → 1600 km down → Ground RX"
+  echo "  Round-trip delay: ~10.67 ms (scaled to ~1 ms in simulation)"
+  echo ""
+
+  * Transient analysis: watch the pulse travel through the delay line
+  tran 1u 5m
+
+  echo "Transient analysis complete."
+  echo ""
+  echo "Observations:"
+  echo "  1. The transmitted pulse appears at tx_out (t = 0)"
+  echo "  2. The pulse arrives at the balloon after uplink delay"
+  echo "  3. The reflected pulse (attenuated) starts the downlink"
+  echo "  4. The received pulse at rx_in is delayed AND attenuated"
+  echo "  5. The pulse shape is distorted by the delay line's dispersion"
+  echo ""
+  echo "Key measurements:"
+
+  * Measure delay and attenuation
+  meas tran tx_peak MAX v(tx_out)
+  meas tran rx_peak MAX v(rx_in)
+  meas tran tx_time WHEN v(tx_out)=0.5 RISE=1
+  meas tran rx_time WHEN v(rx_in)=rx_peak/2 RISE=1
+
+  echo ""
+  echo "  Transmitted amplitude:  (see tx_peak above)"
+  echo "  Received amplitude:     (see rx_peak above)"
+  echo "  Attenuation:            signal significantly reduced"
+  echo "  Round-trip delay:       (see rx_time - tx_time above)"
+  echo ""
+  echo "Echo 1 context:"
+  echo "  The real round-trip delay was 10.67 ms at zenith."
+  echo "  At the horizon (slant range ~4000 km), delay was ~27 ms."
+  echo "  This delay was short enough for voice communication,"
+  echo "  making Echo 1 practical for telephone relay tests."
+  echo "  Bell Labs transmitted voice, music, and teletype across"
+  echo "  the continent by bouncing signals off the balloon."
+  echo ""
+  echo "  The attenuation was the real problem: the passive"
+  echo "  reflection lost ~175 dB in each direction, requiring"
+  echo "  massive ground transmitters (10 kW) and ultra-sensitive"
+  echo "  receivers to close the link."
+  echo ""
+
+  * Plot transmitted vs received
+  plot v(tx_out) v(balloon)*100 v(rx_in)*10000 title 'Echo 1: Signal Through Passive Relay' xlabel 'Time' ylabel 'Voltage'
+
+  echo "==========================================="
+  echo "End of analysis"
+  echo "==========================================="
+.endc
+
+.end

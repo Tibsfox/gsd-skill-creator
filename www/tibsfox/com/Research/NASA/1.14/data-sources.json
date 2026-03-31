@@ -1,0 +1,117 @@
+{
+  "mission": "1.14",
+  "title": "Echo 1 (Delta DM-19)",
+  "description": "Open datasets and source materials relevant to Echo 1 (1960), the first passive communications satellite, a 30.5-meter aluminized Mylar balloon in low Earth orbit (1,519 x 1,687 km), reflecting radio signals between ground stations, Physalia physalis (Portuguese man o' war), the Osprey (Pandion haliaetus), and the physics of passive satellite communication and wave reflection",
+  "sources": [
+    {
+      "id": "nssdc-echo-1",
+      "name": "NSSDC Master Catalog — Echo 1",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1960-009A",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for Echo 1. Documents the spacecraft launched August 12, 1960, on a Delta DM-19 launch vehicle from Cape Canaveral. COSPAR ID 1960-009A. Satellite mass 76 kg (after inflation). A 30.5-meter (100-foot) diameter sphere made of 12.7-micrometer aluminized Mylar film. Orbit: 1,519 x 1,687 km, inclination 47.3°, period 118.3 minutes. No onboard electronics, power, or attitude control — a purely passive reflector. Successfully used for transcontinental voice, music, and teletype transmission between Bell Labs (Holmdel, NJ) and JPL (Goldstone, CA). Visible to the naked eye at approximately magnitude -1. Decayed from orbit on May 24, 1968, after nearly 8 years.",
+      "mission_relevance": "Definitive source for Echo 1 mission parameters, orbital elements, physical specifications, and operational history. Confirms the satellite's dimensions, mass, orbit, and communication experiments. Essential for establishing the mission narrative and all link budget calculations."
+    },
+    {
+      "id": "bstj-echo",
+      "name": "Bell System Technical Journal — Project Echo",
+      "url": "https://archive.org/details/bstj",
+      "type": "primary-source",
+      "category": "telecommunications",
+      "format": "PDF",
+      "access": "open",
+      "description": "Bell System Technical Journal articles from 1961 documenting the Echo satellite communication experiments. The July 1961 issue contains the definitive technical papers by John R. Pierce, Rudolf Kompfner, and colleagues at Bell Labs describing the Holmdel horn antenna, the low-noise maser receivers, the link budget calculations, and the experimental results. Topics include: horn antenna design (20×20 foot aperture, 40+ dBi gain), parametric and maser amplifier development (noise temperature below 50 K), signal processing for extracting the weak reflected signal from noise, and comparison of passive (Echo) vs active (proposed Telstar) satellite relay performance. The BSTJ papers establish the engineering foundation for satellite communication and directly motivated the development of Telstar.",
+      "mission_relevance": "The authoritative engineering documentation for Echo 1's communication system. Contains the exact antenna specifications, receiver noise figures, transmitter power levels, and measured signal strengths that validate all link budget calculations. The Bell Labs horn antenna described in BSTJ later became famous for detecting the cosmic microwave background radiation (Penzias and Wilson, 1965). Essential for the radar equation analysis, bandpass filter context, and the passive vs active relay comparison."
+    },
+    {
+      "id": "nasa-langley-echo",
+      "name": "NASA Langley Research Center — Echo Balloon Satellite Program",
+      "url": "https://ntrs.nasa.gov/",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "PDF",
+      "access": "open",
+      "description": "NASA Technical Reports from Langley Research Center documenting the design, fabrication, inflation testing, and orbital performance of the Echo balloon satellite. Langley was the lead center for the Echo program. Reports detail: the material selection process (why Mylar over other films), the aluminum coating process (vacuum deposition), the folding and packing technique (compressing a 30.5m sphere into a 66cm launch container), the inflation system (sublimating anthraquinone and benzoic acid), structural dynamics (sphere oscillation modes, wrinkling patterns), and in-orbit performance degradation (micrometeorite impacts, UV-induced Mylar embrittlement, solar radiation pressure effects on orbit). The reports also cover Echo 2 (launched 1964, 41m diameter, rigidized structure).",
+      "mission_relevance": "Provides the engineering details of the balloon itself — the material that made Echo 1 possible. The Mylar properties (reflectivity, tensile strength, thermal behavior), inflation dynamics, and degradation mechanisms are essential for the solar radiation pressure simulation, the Mylar properties knowledge node, and understanding why passive satellites were ultimately impractical. The Langley reports also document the first measurements of solar radiation pressure on a spacecraft."
+    },
+    {
+      "id": "heavens-above",
+      "name": "Heavens-Above — Satellite Visibility Predictions",
+      "url": "https://www.heavens-above.com/",
+      "type": "reference",
+      "category": "observation",
+      "format": "HTML/API",
+      "access": "open",
+      "description": "Heavens-Above provides real-time satellite visibility predictions for any location on Earth. While Echo 1 re-entered in 1968, the site's methodology for calculating satellite visibility — apparent magnitude as a function of phase angle, range, size, and albedo — is directly applicable to understanding how and when Echo 1 was visible. The apparent magnitude calculation uses: m = m_sun - 2.5*log10(albedo * A * phi(alpha) / (4*pi*d^2)), where A is the cross-sectional area, phi is the phase function, alpha is the phase angle (Sun-satellite-observer), and d is the observer-satellite distance. For current ISS passes (cross-section ~2500 m^2 at ~420 km), magnitudes reach -5.9. Echo 1 (cross-section 730 m^2 at 1600 km) typically reached magnitude -1 to +1, comparable to the brightest stars.",
+      "mission_relevance": "Provides the mathematical framework and validation data for the brightness calculator simulation. The phase function, magnitude calculation, and observation geometry equations used by Heavens-Above are implemented in the brightness-calculator.html interactive. The ISS as a modern comparison point helps users understand Echo 1's brightness in context. Essential for the satellite visibility knowledge node."
+    },
+    {
+      "id": "inaturalist-physalia",
+      "name": "iNaturalist — Physalia physalis Observations",
+      "url": "https://www.inaturalist.org/taxa/48798-Physalia-physalis",
+      "type": "community-science",
+      "category": "ecology",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community science observations of Physalia physalis (Portuguese man o' war) from iNaturalist's global database. Observations include geolocated photographs showing the characteristic blue-purple gas-filled float (pneumatophore), trailing tentacles, and iridescent surface coloration. The float is 9-30 cm long, crested with a sail-like ridge that catches wind. The organism is not a jellyfish but a siphonophore — a colonial animal composed of specialized individual polyps (zooids) that function as an integrated whole. Distribution: tropical and subtropical open oceans worldwide, occasionally carried into temperate waters by warm currents and wind. On the US Pacific coast, strandings occur from California to Washington during warm-water (El Nino) events. The sting is intensely painful but rarely fatal to humans. Tentacles can retain their sting even after the organism has died and washed ashore.",
+      "mission_relevance": "Establishes the geographic, morphological, and behavioral context for the organism pairing. iNaturalist photographs document the iridescent float, the sail-like crest, and the translucent quality that make Physalia physalis the perfect analog for Echo 1: both are gas-filled balloons that ride an interface between two media, passively catching what their environment provides. The colonial nature of the siphonophore (many specialized units functioning as one organism) parallels the ground station network (many specialized stations functioning as one communication system). Essential for the organism resonance sections in all knowledge nodes and the GLSL screensaver man o' war mode."
+    },
+    {
+      "id": "radar-cross-section-db",
+      "name": "RCS Reference Data — IEEE / ACES Computational Electromagnetics",
+      "url": "https://ieeexplore.ieee.org/",
+      "type": "secondary-source",
+      "category": "electromagnetics",
+      "format": "PDF",
+      "access": "subscription",
+      "description": "IEEE publications on radar cross-section theory and computation, including analytical solutions for canonical shapes (spheres, cylinders, plates) and numerical methods for complex targets. The Mie theory solution for electromagnetic scattering from a sphere provides the exact RCS across all frequency regimes: Rayleigh (2*pi*a/lambda << 1), resonant/Mie (2*pi*a/lambda ~ 1), and optical (2*pi*a/lambda >> 1). For Echo 1 at 960 MHz, the size parameter 2*pi*a/lambda = 307, firmly in the optical regime where RCS = pi*a^2 = 730.6 m^2. The IEEE literature also covers bistatic RCS, which is essential for understanding Echo 1's performance as a relay — the bistatic RCS depends on both the transmitter and receiver angles relative to the sphere.",
+      "mission_relevance": "Provides the theoretical foundation for the radar cross-section knowledge node and the radar equation simulation. The Mie theory transition between regimes is visualized in the RCS vs frequency subplot. The bistatic RCS analysis is essential for understanding how Echo 1's relay performance varied with ground station geometry. IEEE publications validate the simplified optical-regime formula used in the Python simulation."
+    },
+    {
+      "id": "mylar-properties-dupont",
+      "name": "DuPont Teijin Films — Mylar Technical Data Sheets",
+      "url": "https://www.dupontteijinfilms.com/",
+      "type": "primary-source",
+      "category": "materials-science",
+      "format": "PDF",
+      "access": "open",
+      "description": "Technical data sheets for Mylar (BoPET) polyester film from DuPont Teijin Films. Properties documented include: tensile strength (200 MPa), elongation at break (120-170%), density (1.39 g/cm^3), thermal expansion coefficient (1.7 x 10^-5 /K), optical transmission (visible: 85-90% for uncoated film), reflectivity of aluminized Mylar (95% at visible and RF wavelengths), dielectric constant (3.0-3.3 at 1 MHz), operating temperature range (-70°C to +150°C for standard, up to +220°C for heat-stabilized grades). The 12.7-micrometer gauge used on Echo 1 is a standard production thickness. The aluminum coating (200 nm, applied by vacuum deposition) provides the reflectivity essential for both radio communication and optical visibility. Mylar's low outgassing rate and radiation resistance made it suitable for the space environment.",
+      "mission_relevance": "Provides the material properties essential for understanding Echo 1's design and performance. The reflectivity value (0.95) is used in both the radar equation and the brightness calculator. The mechanical properties (tensile strength, thermal behavior) explain how the balloon maintained its shape in orbit. The thickness (12.7 micrometers) and density give the mass calculation: surface area = 4*pi*15.25^2 = 2922 m^2, film mass = 2922 * 12.7e-6 * 1390 = 51.6 kg, plus aluminum coating and inflation hardware = 76 kg total. Essential for the Mylar properties and solar radiation pressure knowledge nodes."
+    },
+    {
+      "id": "itu-satellite-comm",
+      "name": "ITU Radio Regulations — Satellite Communication Standards",
+      "url": "https://www.itu.int/",
+      "type": "reference",
+      "category": "telecommunications",
+      "format": "PDF",
+      "access": "subscription",
+      "description": "International Telecommunication Union (ITU) Radio Regulations governing satellite communication frequency allocations, power flux density limits, and interference protection criteria. The ITU framework that governs modern satellite communication evolved directly from the Echo and Telstar experiments of the early 1960s. Echo 1 operated at 960 MHz and 2390 MHz — frequencies that were later formally allocated to satellite services under ITU Radio Regulations. Key regulatory concepts relevant to Echo 1: frequency allocation (ensuring satellite signals don't interfere with terrestrial services), power flux density limits (maximum signal strength at the Earth's surface), and coordination procedures (agreements between countries to share the electromagnetic spectrum). The ITU's World Radiocommunication Conference (WRC) process for allocating satellite frequencies began with WARC-63, directly motivated by the Echo and Telstar demonstrations.",
+      "mission_relevance": "Provides the regulatory context for satellite communication. Echo 1's experiments demonstrated both the potential and the challenges of sharing the radio spectrum between satellite and terrestrial services. The frequency allocation framework affects the bandpass filter design (operating frequency determines component values) and the link budget analysis (regulatory limits on transmitter power and antenna gain). Essential for understanding why specific frequencies were chosen and how they evolved into the modern satellite communication band plan."
+    },
+    {
+      "id": "heavens-above-iss",
+      "name": "Heavens-Above / ISS Visibility — Modern Comparison Reference",
+      "url": "https://spotthestation.nasa.gov/",
+      "type": "reference",
+      "category": "observation",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA's 'Spot the Station' website provides ISS visibility predictions, serving as a modern reference point for understanding Echo 1's visibility. The ISS has a cross-sectional area of approximately 2500 m^2 at an altitude of 420 km, reaching apparent magnitude -5.9 (brighter than Venus). Echo 1 had a cross-section of 730 m^2 at 1600 km altitude, reaching magnitude approximately -1 (as bright as Sirius). The comparison illustrates the relationship between cross-section, altitude, and brightness: the ISS is 3.4x larger and 3.8x closer, making it about 50x brighter. Both objects are visible because they reflect sunlight from the same basic mechanism — a large, reflective surface in low Earth orbit. The ISS is the modern equivalent of Echo 1 as a 'naked eye satellite' that generates public interest in space.",
+      "mission_relevance": "Provides a concrete, familiar comparison for Echo 1's brightness in the sky. Most users have seen the ISS; understanding that Echo 1 was visible but dimmer (by about 5 magnitudes) gives immediate intuitive context. Used in the brightness calculator for comparison data and in the satellite visibility knowledge node. The ISS comparison also illustrates how satellite visibility has evolved from Echo 1's passive reflection to the ISS's massive but still passive (at visible wavelengths) structure."
+    },
+    {
+      "id": "noaa-ocean-data",
+      "name": "NOAA National Ocean Service — Ocean Temperature, Currents, and Marine Life",
+      "url": "https://oceanservice.noaa.gov/",
+      "type": "primary-source",
+      "category": "ecology",
+      "format": "NetCDF/CSV",
+      "access": "open",
+      "description": "NOAA's National Ocean Service provides ocean temperature, current, and marine species data relevant to Physalia physalis distribution. Key datasets: sea surface temperature (SST) maps showing warm-water events that carry man o' war colonies into temperate waters, ocean current data (OSCAR — Ocean Surface Current Analysis Real-time) showing the wind-driven currents that transport Physalia, and marine biological survey data documenting siphonophore occurrence along the US Pacific coast. Physalia physalis strandings on PNW beaches correlate with warm-water anomalies and persistent onshore winds. NOAA also provides historical records of man o' war strandings in Washington and Oregon, typically during late summer/fall El Nino events. The ocean temperature data is essential for understanding why Physalia is primarily tropical but occasionally appears in temperate waters — it drifts wherever the wind takes it, like Echo 1 drifted wherever solar radiation pressure pushed it.",
+      "mission_relevance": "Provides the ecological and oceanographic context for the organism pairing. NOAA data explains the environmental conditions under which Physalia physalis reaches the Pacific Northwest — wind patterns and warm currents that carry the passive drifter beyond its typical range. This parallels Echo 1's orbital mechanics: solar radiation pressure and atmospheric drag gradually changed its orbit beyond the designed parameters. Both systems are passive objects pushed by their environment's forces. Essential for the organism location description and the PNW connection."
+    }
+  ]
+}

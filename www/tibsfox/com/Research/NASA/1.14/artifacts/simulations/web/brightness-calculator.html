@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echo 1 — Apparent Brightness Calculator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #sky-canvas { flex: 1; }
+  #panel {
+    width: 360px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 13px; color: #C0C8D0; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.8;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #C0C8D0; font-weight: bold; }
+  .box .bright { color: #E8D060; font-weight: bold; }
+  .box .dim { color: #666; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  .control-group input[type="range"] { width: 100%; accent-color: #C0C8D0; }
+  .marker { font-size: 8px; display: flex; justify-content: space-between; color: #666; }
+  .comparison-row {
+    display: flex; justify-content: space-between;
+    padding: 2px 0; border-bottom: 1px solid #1a1a30;
+  }
+  .comparison-row .name { color: #aaa; }
+  .comparison-row .mag { font-weight: bold; }
+  .instructions { font-size: 9px; color: #666; text-align: center; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sky-canvas"></canvas>
+  <div id="panel">
+    <h1>ECHO 1 BRIGHTNESS CALCULATOR</h1>
+    <h2>How Bright Was the First Comms Satellite?</h2>
+
+    <div class="box">
+      <div style="display:flex;justify-content:space-between"><span class="label">Apparent magnitude:</span> <span id="mag-val" class="bright">-1.0</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Visibility:</span> <span id="vis-val" class="value">Naked eye, very bright</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Phase angle:</span> <span id="phase-val" class="value">45&deg;</span></div>
+      <div style="display:flex;justify-content:space-between"><span class="label">Distance:</span> <span id="dist-val" class="value">1600 km</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Observer Elevation Angle (&deg;)</label>
+      <input type="range" id="elevation" min="5" max="90" value="45" step="1">
+      <div class="marker"><span>5&deg; (horizon)</span><span>90&deg; (zenith)</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Solar Phase Angle (&deg;)</label>
+      <input type="range" id="phase-angle" min="0" max="150" value="45" step="1">
+      <div class="marker"><span>0&deg; (full)</span><span>90&deg; (half)</span><span>150&deg; (crescent)</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Satellite Altitude (km)</label>
+      <input type="range" id="sat-alt" min="200" max="5000" value="1600" step="50">
+      <div class="marker"><span>200</span><span>1600</span><span>5000</span></div>
+    </div>
+
+    <div class="control-group">
+      <label>Balloon Diameter (m)</label>
+      <input type="range" id="balloon-dia" min="5" max="60" value="30.5" step="0.5">
+      <div class="marker"><span>5m</span><span>30.5m</span><span>60m</span></div>
+    </div>
+
+    <div class="box" style="border-color:#C0C8D0">
+      <div class="label" style="color:#C0C8D0;font-weight:bold">COMPARISON OBJECTS</div>
+      <div id="comparisons" style="margin-top:4px">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="label" style="color:#8040CC">MAGNITUDE SCALE</div>
+      <div style="margin-top:4px;font-size:9px;line-height:1.6">
+        Lower number = brighter. Each step of 1.0<br>
+        is a factor of 2.512 in brightness.<br>
+        5 magnitudes = 100&times; brightness difference.<br>
+        Negative magnitudes = very bright objects.<br><br>
+        Echo 1 was visible to the naked eye, often<br>
+        brighter than any star. Thousands of people<br>
+        watched it pass overhead in summer 1960.
+      </div>
+    </div>
+
+    <div class="instructions">
+      Adjust phase angle and elevation to see how<br>
+      Echo 1's brightness changed during a pass.<br>
+      The sky view shows Echo 1 and comparison objects.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sky-canvas');
+const ctx = canvas.getContext('2d');
+
+const elevSlider = document.getElementById('elevation');
+const phaseSlider = document.getElementById('phase-angle');
+const altSlider = document.getElementById('sat-alt');
+const diaSlider = document.getElementById('balloon-dia');
+
+const PI = Math.PI;
+const R_EARTH = 6371; // km
+
+// Reference objects: name, apparent magnitude
+const references = [
+  { name: 'Sun',           mag: -26.74, color: '#FFE060' },
+  { name: 'Full Moon',     mag: -12.74, color: '#E8E0C0' },
+  { name: 'Venus (max)',   mag: -4.6,   color: '#FFFFD0' },
+  { name: 'ISS (max)',     mag: -5.9,   color: '#E0E8F0' },
+  { name: 'Sirius',        mag: -1.46,  color: '#A0C0FF' },
+  { name: 'Vega',          mag: 0.03,   color: '#C0D0FF' },
+  { name: 'Polaris',       mag: 1.98,   color: '#FFE8C0' },
+  { name: 'Naked eye lim', mag: 6.0,    color: '#444' },
+  { name: 'Binocular lim', mag: 10.0,   color: '#333' },
+];
+
+// Echo 1 magnitude calculation
+// Based on: m = m_sun - 2.5*log10( albedo * (D/2)^2 * phi(alpha) / (4 * d^2) )
+// where d = distance in AU, D = diameter, alpha = phase angle
+// Simplified formula for a diffuse sphere:
+// m = m_sun - 2.5*log10( albedo * pi*r^2 * phi(alpha) / (pi * d^2) )
+// phi(alpha) = (1/pi)(sin(alpha) + (pi-alpha)*cos(alpha)) for Lambertian sphere
+
+function phaseFunction(alphaDeg) {
+  const a = alphaDeg * PI / 180;
+  if (alphaDeg < 1) return 1.0;
+  return (1/PI) * (Math.sin(a) + (PI - a) * Math.cos(a));
+}
+
+function slantRange(altKm, elevDeg) {
+  const el = elevDeg * PI / 180;
+  return -R_EARTH * Math.sin(el) + Math.sqrt(
+    Math.pow(R_EARTH * Math.sin(el), 2) + 2 * R_EARTH * altKm + altKm * altKm
+  );
+}
+
+function calcMagnitude(diamM, altKm, elevDeg, phaseDeg) {
+  const sRange = slantRange(altKm, elevDeg) * 1000; // meters
+  const radius = diamM / 2;
+  const crossSection = PI * radius * radius; // m^2
+  const albedo = 0.95; // aluminized Mylar reflectivity
+  const phi = phaseFunction(phaseDeg);
+
+  // Solar constant: 1361 W/m^2, absolute magnitude of Sun = -26.74
+  // Reflected flux at observer distance d:
+  // F_reflected = (Solar_flux * albedo * crossSection * phi) / (4 * pi * d^2)
+  // Magnitude: m = -26.74 - 2.5*log10(albedo * crossSection * phi / (4*pi*d^2))
+  // where d is in AU
+
+  const dAU = sRange / 1.496e11; // convert to AU
+  const flux_ratio = albedo * crossSection * phi / (4 * PI * sRange * sRange);
+  // Compare to solar flux at 1 AU: 1361 W/m^2
+  // The reflected flux as fraction of solar flux
+  const mag = -26.74 - 2.5 * Math.log10(flux_ratio * 1361);
+
+  return mag;
+}
+
+function resize() {
+  canvas.width = canvas.parentElement.clientWidth - 360;
+  canvas.height = canvas.parentElement.clientHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+let animTime = 0;
+
+function draw(timestamp) {
+  animTime = timestamp / 1000;
+  const W = canvas.width;
+  const H = canvas.height;
+
+  const elevation = parseFloat(elevSlider.value);
+  const phaseAngle = parseFloat(phaseSlider.value);
+  const altitude = parseFloat(altSlider.value);
+  const diameter = parseFloat(diaSlider.value);
+
+  const magnitude = calcMagnitude(diameter, altitude, elevation, phaseAngle);
+  const sRange = slantRange(altitude, elevation);
+
+  // Update display
+  document.getElementById('mag-val').textContent = magnitude.toFixed(1);
+  document.getElementById('phase-val').textContent = phaseAngle + '\u00B0';
+  document.getElementById('dist-val').textContent = sRange.toFixed(0) + ' km';
+
+  let visText = '';
+  if (magnitude < -4) visText = 'Brilliant, brighter than Venus';
+  else if (magnitude < -1) visText = 'Very bright, obvious naked eye';
+  else if (magnitude < 1) visText = 'Bright, like a bright star';
+  else if (magnitude < 3) visText = 'Visible, moderate star';
+  else if (magnitude < 6) visText = 'Faint, naked eye limit';
+  else visText = 'Invisible to naked eye';
+  document.getElementById('vis-val').textContent = visText;
+
+  // Update comparisons
+  const compDiv = document.getElementById('comparisons');
+  let compHTML = '';
+  const sorted = [...references, { name: 'ECHO 1', mag: magnitude, color: '#C0C8D0' }];
+  sorted.sort((a, b) => a.mag - b.mag);
+  for (const obj of sorted) {
+    const isEcho = obj.name === 'ECHO 1';
+    const style = isEcho ? 'color:#C0C8D0;font-weight:bold;background:#1a1a40;padding:2px 4px;border-radius:3px' : '';
+    const magColor = obj.mag < 0 ? '#E8D060' : obj.mag < 6 ? '#aaa' : '#555';
+    compHTML += `<div class="comparison-row" style="${style}">
+      <span class="name" style="color:${obj.color}">${obj.name}</span>
+      <span class="mag" style="color:${magColor}">${obj.mag.toFixed(1)}</span>
+    </div>`;
+  }
+  compDiv.innerHTML = compHTML;
+
+  // --- Draw sky view ---
+  // Dark sky gradient
+  const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
+  skyGrad.addColorStop(0, '#020218');
+  skyGrad.addColorStop(1, '#0a0a20');
+  ctx.fillStyle = skyGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Stars
+  for (let i = 0; i < 200; i++) {
+    const sx = ((Math.sin(i * 127.1) * 0.5 + 0.5) * W);
+    const sy = ((Math.cos(i * 311.7) * 0.5 + 0.5) * H);
+    const sb = 0.2 + 0.5 * ((Math.sin(i * 73.3 + animTime) + 1) * 0.5);
+    const smag = 1 + i * 0.03; // fake magnitude
+    const ssize = Math.max(0.5, 2 - smag * 0.15);
+    ctx.fillStyle = `rgba(200,210,230,${sb})`;
+    ctx.beginPath();
+    ctx.arc(sx, sy, ssize, 0, 2 * PI);
+    ctx.fill();
+  }
+
+  // Horizon line
+  const horizY = H * 0.85;
+  ctx.strokeStyle = 'rgba(50,80,120,0.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, horizY);
+  ctx.lineTo(W, horizY);
+  ctx.stroke();
+  ctx.fillStyle = '#888';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('HORIZON', 10, horizY + 12);
+
+  // Reference objects in sky
+  for (const ref of references) {
+    if (ref.mag > 6) continue;
+    // Place at arbitrary positions
+    const rx = W * (0.1 + 0.8 * ((Math.sin(ref.mag * 7.3) + 1) * 0.5));
+    const ry = H * (0.1 + 0.5 * ((Math.cos(ref.mag * 11.7) + 1) * 0.5));
+    const rsize = Math.max(1, 4 - ref.mag * 0.5);
+    const ralpha = Math.min(1, Math.max(0.2, 1 - ref.mag * 0.1));
+
+    ctx.beginPath();
+    ctx.arc(rx, ry, rsize, 0, 2 * PI);
+    ctx.fillStyle = ref.color;
+    ctx.globalAlpha = ralpha;
+    ctx.fill();
+
+    // Glow
+    if (ref.mag < 0) {
+      ctx.beginPath();
+      ctx.arc(rx, ry, rsize * 3, 0, 2 * PI);
+      const glow = ctx.createRadialGradient(rx, ry, rsize, rx, ry, rsize * 3);
+      glow.addColorStop(0, ref.color);
+      glow.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow;
+      ctx.globalAlpha = 0.15;
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = '#666';
+    ctx.font = '8px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(ref.name, rx, ry + rsize + 10);
+    ctx.fillText('(' + ref.mag.toFixed(1) + ')', rx, ry + rsize + 20);
+  }
+
+  // Echo 1 — positioned based on elevation
+  const echoX = W * 0.5 + Math.sin(animTime * 0.2) * W * 0.1;
+  const echoY = horizY - (elevation / 90) * (horizY - H * 0.1);
+
+  // Size based on magnitude (brighter = bigger glow)
+  const echoSize = Math.max(2, 8 - magnitude);
+  const echoAlpha = Math.min(1, Math.max(0.1, 1 - magnitude * 0.08));
+
+  // Echo 1 dot
+  ctx.beginPath();
+  ctx.arc(echoX, echoY, echoSize, 0, 2 * PI);
+  ctx.fillStyle = '#C0C8D0';
+  ctx.globalAlpha = echoAlpha;
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // Glow
+  ctx.beginPath();
+  ctx.arc(echoX, echoY, echoSize * 4, 0, 2 * PI);
+  const echoGlow = ctx.createRadialGradient(echoX, echoY, echoSize, echoX, echoY, echoSize * 4);
+  echoGlow.addColorStop(0, `rgba(192,200,208,${echoAlpha * 0.5})`);
+  echoGlow.addColorStop(1, 'transparent');
+  ctx.fillStyle = echoGlow;
+  ctx.fill();
+
+  // Label
+  ctx.fillStyle = '#C0C8D0';
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('ECHO 1', echoX, echoY - echoSize - 12);
+  ctx.font = '9px monospace';
+  ctx.fillText('mag ' + magnitude.toFixed(1), echoX, echoY - echoSize - 2);
+
+  // Motion trail
+  for (let i = 1; i <= 8; i++) {
+    const trailX = echoX - i * 8;
+    const trailY = echoY + i * 0.5;
+    const trailAlpha = (1 - i / 8) * 0.3;
+    ctx.beginPath();
+    ctx.arc(trailX, trailY, echoSize * (1 - i * 0.1), 0, 2 * PI);
+    ctx.fillStyle = `rgba(192,200,208,${trailAlpha})`;
+    ctx.fill();
+  }
+
+  // Title
+  ctx.fillStyle = '#C0C8D0';
+  ctx.font = '12px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('HOW BRIGHT IS ECHO 1?', W / 2, 25);
+  ctx.font = '9px monospace';
+  ctx.fillStyle = '#888';
+  ctx.fillText('A 30.5m balloon visible to the naked eye from 1600 km away', W / 2, 40);
+
+  requestAnimationFrame(draw);
+}
+
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>
