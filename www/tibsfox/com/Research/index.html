@@ -4,8 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Research — Tibsfox</title>
-  <link rel="stylesheet" href="../brand.css">
   <style>
+    /* Hardcoded light theme — no dark mode, no external CSS */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#f5f0e6; color:#2a2a2a; font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+    a { color:#c75b3a; text-decoration:none; }
+    a:hover { color:#d4823a; }
+    blockquote { border-left:4px solid #c75b3a; padding:1rem 1.5rem; margin:1.5rem 0; color:#5a5a5a; font-style:italic; background:rgba(199,91,58,0.04); border-radius:0 6px 6px 0; }
+    h2 { font-size:1.3rem; font-weight:400; color:#3d3d3d; margin:2rem 0 0.5rem; padding-bottom:0.3rem; border-bottom:1px solid #e8dcc8; }
+    .stats { display:flex; justify-content:center; gap:2rem; padding:1.5rem 0; flex-wrap:wrap; }
+    .stat { text-align:center; min-width:80px; }
+    .stat-value { display:block; font-size:1.6rem; font-weight:700; color:#c75b3a; font-family:system-ui,sans-serif; }
+    .stat-label { font-size:0.7rem; color:#8a8884; text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+    .card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-bottom:2rem; }
+    @media(max-width:768px) { .card-grid { grid-template-columns:1fr; } }
+    .card { display:block; background:#fff; border:1px solid rgba(42,42,42,0.08); border-radius:8px; padding:0; overflow:hidden; box-shadow:0 2px 8px rgba(42,42,42,0.06); transition:box-shadow 0.2s,transform 0.2s; text-decoration:none; color:#2a2a2a; }
+    .card:hover { box-shadow:0 8px 32px rgba(42,42,42,0.12); transform:translateY(-2px); text-decoration:none; }
+    .card h3 { color:#3d3d3d; font-size:1rem; margin:0.8rem 1.2rem 0.3rem; }
+    .card p { font-size:0.88rem; color:#5a5a5a; line-height:1.5; margin:0 1.2rem; padding-bottom:1rem; }
+    .card .meta { font-size:0.75rem; color:#8a8884; margin:0 1.2rem 0.4rem; }
+    .card .meta .tag { display:inline-block; background:rgba(199,91,58,0.08); color:#c75b3a; padding:0.1rem 0.5rem; border-radius:3px; font-size:0.7rem; font-family:system-ui,sans-serif; }
+    .accent-bar { height:4px; }
+    .section-intro { font-size:0.95rem; color:#5a5a5a; margin-bottom:1rem; font-family:system-ui,sans-serif; }
+    footer { max-width:64rem; margin:2rem auto 0; padding:1.5rem; text-align:center; font-size:0.8rem; color:#8a8884; border-top:1px solid #e8dcc8; font-family:system-ui,sans-serif; }
+    footer a { color:#c75b3a; }
     header {
       background: linear-gradient(135deg, var(--ink) 0%, var(--fox-deep) 20%, var(--fox) 45%, var(--fox-warm) 65%, var(--splatter) 85%, var(--parchment-deep) 100%);
       color: white;
