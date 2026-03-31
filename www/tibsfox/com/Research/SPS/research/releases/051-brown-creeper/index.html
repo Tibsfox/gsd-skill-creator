@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 51&deg; &mdash; Brown Creeper &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Bark-spiral element card */
+    .spiral-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .spiral-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* New family card */
+    .family-card {
+      background: linear-gradient(135deg, #E0F2F1 0%, #80CBC4 100%);
+      border: 2px solid #00695C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #004D40;
+    }
+
+    /* E=1 return card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Old-growth card */
+    .oldgrowth-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #81C784 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .oldgrowth-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Crypsis card */
+    .crypsis-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .crypsis-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #BCAAA4 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Bark dyad card */
+    .dyad-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFB74D 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .dyad-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.spiral { background: #4E342E; }
+    .theory-icon.family { background: #00695C; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-icon.oldgrowth { background: #2E7D32; }
+    .theory-icon.dyad { background: #E65100; }
+    .theory-icon.crypsis { background: #37474F; }
+    .theory-icon.phylo { background: #1565C0; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">51&deg;</div>
+      <div class="release-title-block">
+        <h2>Brown Creeper</h2>
+        <div class="scientific">Certhia americana</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      high thin see-see-see-see descending spiral song &mdash; the bark-spiral, 1st Certhiidae in the engine &mdash; 20th family, the ONLY North American treecreeper, E=1 RETURNS after 38 degrees of absence, old-growth forest indicator species, the bark specialist that traces a helix up every trunk, cryptic plumage &mdash; nearly invisible against bark, monotypic family representative, Passeriformes continues for a 14th consecutive entry
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Northwestern Salamander</strong> (<em>Ambystoma gracile</em>) at degree 51. Because the SPS Part B engine is birds-and-mammals only, Brown Creeper replaces it. The substitution preserves the original&rsquo;s <strong>E=1 energy level</strong> and <strong>old-growth forest habitat</strong>. Both species are quiet, cryptic, and old-growth associated. This is the <strong>seventh consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51) &mdash; the engine remains deep in the amphibian belt of the original CSV.</p>
+        </div>
+
+        <!-- New Family Card -->
+        <div class="family-card">
+          <h3>First Certhiidae &mdash; The 20th Family</h3>
+          <p>The Brown Creeper introduces the engine&rsquo;s <strong>20th family: Certhiidae</strong> (treecreepers). Monotypic in North America &mdash; <em>Certhia americana</em> is the only representative of the treecreeper family in the New World. The family contains nine species worldwide, all in a single genus (<em>Certhia</em>), distributed from western Europe to Japan. No other Certhiidae will enter the engine. One family, one species, one degree. The first genuinely new family since degree 31 (Cedar Waxwing, Bombycillidae) &mdash; 20 degrees between new-family events.</p>
+        </div>
+
+        <!-- E=1 Return Card -->
+        <div class="energy-card">
+          <h3>E=1 Returns After 38 Degrees of Absence</h3>
+          <p>The minimum energy level has not appeared since degree 12 (Pine Siskin) &mdash; <strong>38 consecutive degrees without E=1</strong>, the longest absence of any energy level. E=1 rises from 3 to 4 entries (7.7%). The lower registers (E=1 + E=2 + E=3) now hold <strong>28 of 52 degrees (53.8%)</strong>, breaking through 50% for the first time. The quiet end of the engine holds a majority.</p>
+        </div>
+
+        <!-- Bark-Spiral Element Card -->
+        <div class="spiral-card">
+          <h3>The 52nd Acoustic Element: The Bark-Spiral</h3>
+          <p>A <strong>high, thin, descending series of sibilant notes</strong> that spirals through frequency space the way the bird spirals up a tree trunk. The physical spiral goes up; the acoustic spiral comes down. Named &ldquo;the bark-spiral&rdquo; for three resonances: (1) the foraging spiral &mdash; the only North American bird that systematically spirals up tree trunks, the song&rsquo;s descending contour is the acoustic inverse; (2) the unit circle connection &mdash; the bird traces a helix around cylindrical trunks, the first literal physical spiral in the engine; (3) the cryptic principle &mdash; high, thin, easily missed, the acoustic expression of a bird whose existence is designed to be undetected.</p>
+          <p>The bark-spiral differs from the memory (degree 50) as fragility differs from precision. The memory says &ldquo;I know exactly where I am.&rdquo; The bark-spiral says &ldquo;you cannot see me, and you may not even hear me.&rdquo;</p>
+        </div>
+
+        <!-- Old-Growth Card -->
+        <div class="oldgrowth-card">
+          <h3>Old-Growth Indicator Species</h3>
+          <p>The Brown Creeper&rsquo;s presence and density correlate strongly with forest maturity. <strong>Twice as abundant in old-growth as in mature forest</strong> (northern Rocky Mountains). Absent from clearcuts and young stands. Nests exclusively behind loose bark flaps on dead trees &mdash; <strong>94% of nests in dead trees</strong>. Requires large snags (50.8&ndash;75.9 cm DBH) with 70%+ bark retention. Salvage logging removes the dead trees required for nesting &mdash; the trees that appear &ldquo;wasted&rdquo; to the timber economy are critical infrastructure for Brown Creeper reproduction.</p>
+        </div>
+
+        <!-- Bark Dyad Card -->
+        <div class="dyad-card">
+          <h3>Complementary Bark Foragers</h3>
+          <p>The Brown Creeper (ascending spiraler, degree 51) and the Red-breasted Nuthatch (descending head-first, degree 5) form a complete ecological dyad. One goes up, the other comes down. Together they cover every surface of the bark. Both species forage on the same trees simultaneously in PNW forests. Opposite in nearly every behavioral dimension: bold vs. cryptic, loud vs. quiet, straight bill vs. decurved, contrasting plumage vs. camouflaged. Degrees 5 and 51 &mdash; 46 degrees apart, inseparable on the tree.</p>
+        </div>
+
+        <!-- Crypsis Card -->
+        <div class="crypsis-card">
+          <h3>Four-Level Crypsis</h3>
+          <p>The most comprehensively cryptic species in the engine. <strong>Visual:</strong> bark-patterned plumage makes the bird invisible on trunks &mdash; presses flat and freezes when alarmed. <strong>Behavioral:</strong> slow, deliberate movement; stays on far side of trunk from threats. <strong>Acoustic:</strong> song and call at 6&ndash;8.5 kHz near the upper threshold of human hearing &mdash; many people over age 50 cannot detect them. <strong>Ecological:</strong> forest interior only, avoids edges and open habitats. Everything about the Brown Creeper is designed to be undetected.</p>
+        </div>
+
+        <h2>The Aristotle-Bird of America</h2>
+        <p><em>Certhia americana</em> &mdash; from Ancient Greek <em>kerthios</em>, a small insectivorous bird that lived in trees, mentioned by Aristotle, + Latin <em>americana</em>, &ldquo;of America.&rdquo; Charles Lucien Bonaparte described the species in 1838, separating it from the Eurasian Treecreeper (<em>Certhia familiaris</em>). Full translation: <strong>&ldquo;The Aristotle-bird of America&rdquo;</strong> &mdash; a name that connects an ancient Greek naturalist&rsquo;s observation of small bark-climbing birds to their sole New World descendant. The simplest, most geographically direct species epithet in the engine.</p>
+
+        <h3>The Four E=1 Naming Arcs</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Binomial</th><th>Translation</th><th>Philosophy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>8</td><td>Golden-crowned Kinglet</td><td><em>Regulus satrapa</em></td><td>&ldquo;The little king with the golden headband&rdquo;</td><td>Chromatic + Regal</td></tr>
+            <tr><td>10</td><td>Bushtit</td><td><em>Psaltriparus minimus</em></td><td>&ldquo;The smallest lute-playing bird&rdquo;</td><td>Musical + Diminutive</td></tr>
+            <tr><td>12</td><td>Pine Siskin</td><td><em>Spinus pinus</em></td><td>&ldquo;The thorn-bird of the pines&rdquo;</td><td>Botanical + Botanical</td></tr>
+            <tr><td><strong>51</strong></td><td><strong>Brown Creeper</strong></td><td><strong><em>Certhia americana</em></strong></td><td><strong>&ldquo;The Aristotle-bird of America&rdquo;</strong></td><td><strong>Classical + Geographic</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Four E=1 entries, four naming philosophies. The quietest birds in the engine carry the most diverse etymological strategies.</p>
+
+        <h2>The Sound: See-See-See-See</h2>
+        <p><strong>Song:</strong> 1.0&ndash;1.5 seconds, 3.0&ndash;8.5 kHz. Four to nine high-frequency sibilant notes descending in frequency. A thin, wispy, high-pitched series commonly rendered as <em>see-see-see-see</em> or <em>trees-trees-trees</em>. Among the highest-frequency songs in the engine. Western birds produce buzzier songs; eastern birds produce more liquid songs. Baptista &amp; Johnson (1982) identified 25 note types in West Coast populations alone.</p>
+        <p><strong>Call:</strong> A single very high-pitched, thin <em>see</em> or <em>tsee</em> at 6.0&ndash;8.5 kHz &mdash; even higher than the song. Often the first and only indication that a Brown Creeper is present. Many people over age 50 cannot hear it due to presbycusis (age-related high-frequency hearing loss).</p>
+
+        <h3>Frequency Analysis</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Vocalization</th><th>Frequency Range</th><th>Duration</th><th>Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Song (complete)</td><td>3.0&ndash;8.5 kHz</td><td>1.0&ndash;1.5 s</td><td>Territory, mate attraction</td></tr>
+            <tr><td>Song peak energy</td><td>4.0&ndash;7.5 kHz</td><td>&mdash;</td><td>Main audible band</td></tr>
+            <tr><td>Call type 1 (<em>see</em>)</td><td>6.0&ndash;8.5 kHz</td><td>0.05&ndash;0.1 s</td><td>Contact, alarm</td></tr>
+            <tr><td>Call type 2 (threat)</td><td>3.75&ndash;8.0 kHz</td><td>Series</td><td>Threat display</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Bark Spiraling: The Sole North American Strategy</h2>
+        <p>The Brown Creeper is the <strong>only North American bird</strong> that forages by systematically spiraling up tree trunks from base to crown. It starts near the base, spirals upward using its stiff tail as a prop and curved claws as hooks, reaches the upper trunk, then flies to the base of the next tree and begins again. It never descends head-first.</p>
+
+        <h3>Physical Adaptations</h3>
+        <ul>
+          <li><strong>Decurved bill</strong> (12&ndash;15 mm) &mdash; curved to match bark furrows, probes crevices for insects</li>
+          <li><strong>Stiff pointed tail</strong> &mdash; rectrices act as a prop against bark, convergent with woodpeckers (Picidae, degrees 21&ndash;22)</li>
+          <li><strong>Long curved claws</strong> &mdash; hook into bark crevices; both feet hop simultaneously</li>
+          <li><strong>Short legs</strong> &mdash; pressed close to bark surface for stability on vertical trunks</li>
+          <li><strong>Cryptic plumage</strong> &mdash; mottled brown-and-white upperparts match bark texture precisely</li>
+        </ul>
+
+        <h3>The Nuthatch Comparison</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Feature</th><th>Red-breasted Nuthatch (5)</th><th>Brown Creeper (51)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Foraging direction</td><td>Descends head-first</td><td><strong>Ascends spiraling</strong></td></tr>
+            <tr><td>Bill shape</td><td>Straight, chisel-like</td><td><strong>Decurved, probing</strong></td></tr>
+            <tr><td>Tail</td><td>Short, soft</td><td><strong>Long, stiff (prop)</strong></td></tr>
+            <tr><td>Plumage</td><td>Bold, contrasting</td><td><strong>Cryptic, bark-colored</strong></td></tr>
+            <tr><td>Voice</td><td>Nasal <em>yank-yank</em> (E=2)</td><td><strong>High thin <em>see</em> (E=1)</strong></td></tr>
+            <tr><td>Detection</td><td>Easily seen and heard</td><td><strong>Often overlooked</strong></td></tr>
+          </tbody>
+        </table>
+
+        <h2>The Nest Behind the Bark</h2>
+        <p>The Brown Creeper builds a <strong>hammock-shaped nest</strong> behind a loose bark flap on a dead or dying tree &mdash; a crescent of material suspended between bark and trunk. Materials include spider egg cases, wood fibers, cocoon silk, bark strips, feathers, moss, and lichens. The nest is invisible from outside &mdash; the bark flap conceals it completely. Cup up to 6.4 cm deep and 15 cm across. Like the plumage, the foraging strategy, and the voice, the nest is cryptic. The entire life of the Brown Creeper happens on and behind bark.</p>
+
+        <h2>The Literal Spiral and the Unit Circle</h2>
+        <p>At degree 51 of a 360-degree engine, the Brown Creeper contributes something no other species has: a <strong>literal physical spiral</strong>. The bird wraps around tree trunks in a helical path: x(t) = r&middot;cos(t), y(t) = r&middot;sin(t), z(t) = c&middot;t. A helix is the 3D extension of the unit circle. The Brown Creeper is the first species whose physical behavior IS the circle &mdash; spiraling around a circular cross-section, advancing continuously, resetting at the base, and beginning again.</p>
+
+        <h2>Subspecies and Cryptic Diversity</h2>
+        <p><strong>Six major phylogeographic clades</strong> identified by Manthey et al. (2011). A basal northern-southern divergence &mdash; likely cryptic species. The most complex population structure of any species in the engine (six clades vs. Mountain Chickadee&rsquo;s two, Fox Sparrow&rsquo;s four). PNW subspecies: <em>C. a. occidentalis</em> (western Washington), <em>C. a. montana</em> (eastern Washington), <em>C. a. zelotes</em> (Sierra Nevada / southern Oregon). Song variation between populations (25 note types on the West Coast alone) may ultimately support species-level splits. Sibley (2011): &ldquo;Regional differences in song may offer the strongest support for splitting Brown Creeper into multiple species, but remain virtually unstudied.&rdquo;</p>
+
+        <h2>Family Tracker After Degree 51</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+            <tr><td><strong>Certhiidae</strong></td><td><strong>51</strong></td><td><strong>1 (NEW &mdash; 20th family)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Twenty families across 52 entries. Certhiidae enters as a singleton &mdash; monotypic in North America. Fourteen consecutive Passeriformes (38&ndash;51). 44 of 52 entries (84.6%) are Passeriformes. Non-passerine urgently needed.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon spiral">B</div>
+            <div class="theory-content">
+              <h4>The Bark-Spiral <span class="theory-level foundational">foundational</span></h4>
+              <p>The 52nd acoustic element. A high, thin, descending sibilant series that spirals through frequency space. The acoustic inverse of the physical foraging spiral. The first element defined by cryptic frequency &mdash; sound designed to be undetected. Music-theory parallel: the ghost note.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon family">C</div>
+            <div class="theory-content">
+              <h4>First Certhiidae &mdash; 20th Family <span class="theory-level foundational">foundational</span></h4>
+              <p>Monotypic North American representative. One genus, one species, one degree. Nine species worldwide in <em>Certhia</em>, only <em>C. americana</em> in the New World. First genuinely new family since degree 31. Music-theory parallel: the solo instrument entry &mdash; a celesta entering the orchestra once.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>E=1 Returns After 38 Degrees <span class="theory-level foundational">foundational</span></h4>
+              <p>The longest drought of any energy level. E=1 last seen at degree 12. Four E=1 entries total: degrees 8, 10, 12, 51 &mdash; all small, high-frequency, easily overlooked. Lower registers now hold 53.8% majority. Music-theory parallel: the pianissimo return.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon oldgrowth">O</div>
+            <div class="theory-content">
+              <h4>Old-Growth Indicator <span class="theory-level foundational">foundational</span></h4>
+              <p>Twice as abundant in old-growth as in mature forest. 94% of nests in dead trees. Salvage logging removes the &ldquo;wasted&rdquo; trees that are critical nesting infrastructure. The Brown Creeper&rsquo;s absence defines where old-growth has been lost. Music-theory parallel: the sustain pedal.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon dyad">D</div>
+            <div class="theory-content">
+              <h4>Complementary Bark Dyad <span class="theory-level foundational">foundational</span></h4>
+              <p>Brown Creeper ascending (degree 51) + Red-breasted Nuthatch descending (degree 5). Complete bark coverage. Opposite in every dimension. 46 degrees apart, inseparable on the tree. Music-theory parallel: contrary motion in counterpoint.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon crypsis">X</div>
+            <div class="theory-content">
+              <h4>Cryptic Frequency <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Four-level crypsis: visual, behavioral, acoustic, ecological. The bark-spiral is the first acoustic element defined by invisibility. Sound at the upper edge of perception where the listener&rsquo;s biology fails. Music-theory parallel: the subharmonic &mdash; frequency at the boundary of hearing.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon phylo">P</div>
+            <div class="theory-content">
+              <h4>Six Phylogeographic Clades <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Most complex population structure in the engine. Northern-southern basal divergence &mdash; likely cryptic species. 25 note types on the West Coast. Song variation may support species-level splits. Music-theory parallel: the unlabeled variation set.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-005: Red-breasted Nuthatch</strong>
+            <p>COMPLEMENTARY BARK FORAGER. The ascending spiraler (degree 51) completes the ecological dyad with the descending head-first nuthatch (degree 5). One goes up, the other comes down. Together they cover every surface. Opposite in every dimension. 46 degrees apart, inseparable on the bark.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-008: Golden-crowned Kinglet</strong>
+            <p>E=1 GUILD MEMBERS. Both E=1, both high-frequency, both in conifer canopy/bark. The kinglet&rsquo;s ascending zee-zee-zee (the threshold) vs. the creeper&rsquo;s descending see-see-see (the bark-spiral). Both vanish from an aging birder&rsquo;s soundscape first.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-050: Mountain Chickadee</strong>
+            <p>SEQUENTIAL DEGREES AND ACOUSTIC CONTRAST. The memory (degree 50, Paridae, E=2) yields to the bark-spiral (degree 51, Certhiidae, E=1). Pure-toned precision yields to wispy, sibilant fragility. Similar contour, radically different timbre and energy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>OLD-GROWTH SPECIALISTS. Both are indicator species for old-growth forest health in the PNW. The Spotted Owl (Near Threatened) and the Brown Creeper both require mature forest with structural complexity. The owl dominates the night canopy; the creeper spirals the daytime bark.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-003: Black-capped Chickadee</strong>
+            <p>WINTER FLOCK COMPANION. Brown Creepers regularly join mixed-species winter flocks led by Black-capped Chickadees. Five of the engine&rsquo;s first thirteen entries travel together: degrees 3, 5, 8, 9, and 51.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-021: Northern Flicker</strong>
+            <p>CONVERGENT TAIL PROP. Both species use stiff tail feathers as a prop against bark surfaces. The flicker (Picidae) drums and excavates; the creeper (Certhiidae) probes and gleans. Different families, same biomechanical solution.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Brown Creeper documented across Washington State. Year-round resident in mature and old-growth coniferous forest. Two subspecies: C. a. occidentalis (western), C. a. montana (eastern). Old-growth indicator with conservation significance.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Old-growth forest ecology. Large-tree dependence, snag requirements, bark ecosystem. The Brown Creeper links forest structural complexity to species survival. Salvage logging as conservation threat.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Brown Creeper (<em>Certhia americana</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Brown Creeper. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Brown Creeper.</li>
+          <li>National Geographic &mdash; Brown Creeper.</li>
+          <li>Wikipedia &mdash; &ldquo;Brown creeper.&rdquo;</li>
+          <li>Baptista, L. F. &amp; Johnson, R. B. (1982). &ldquo;Song variation in insular and mainland California Brown Creepers.&rdquo; <em>Journal of Ornithology</em> 123: 131&ndash;144.</li>
+          <li>Audubon &mdash; Brown Creeper Field Guide.</li>
+          <li>Wikipedia &mdash; &ldquo;Certhia.&rdquo;</li>
+          <li>Manthey, J. D. et al. (2011). &ldquo;Cryptic diversity in a widespread North American songbird: Phylogeography of the Brown Creeper (<em>Certhia americana</em>).&rdquo; <em>Molecular Phylogenetics and Evolution</em> 58(3): 502&ndash;515.</li>
+          <li>Sibley Guides &mdash; &ldquo;Is the Brown Creeper more than one species?&rdquo; (2011).</li>
+          <li>Baptista, L. F. &amp; Krebs, R. (2000). &ldquo;Vocalizations and relationships of Brown Creepers <em>Certhia americana</em>: a taxonomic mystery.&rdquo; <em>Ibis</em> 142(3): 457&ndash;465.</li>
+          <li>Animal Diversity Web &mdash; <em>Certhia americana</em> (brown creeper).</li>
+          <li>Northern Woodlands &mdash; &ldquo;Brown Creepers: Denizens of the Bark.&rdquo;</li>
+          <li>California Partners in Flight &mdash; Brown Creeper account.</li>
+          <li>Cornell Lab &mdash; Brown Creeper breeding and nest site information.</li>
+          <li>U.S. Fish &amp; Wildlife Service &mdash; Brown Creeper species profile.</li>
+          <li>Earbirding &mdash; &ldquo;The Dawn Song of Brown Creeper.&rdquo;</li>
+          <li>Hear Birds Again &mdash; &ldquo;Hear For Yourself&rdquo; (high-frequency bird song and hearing loss).</li>
+          <li>Schlitz Audubon &mdash; &ldquo;Bird Profile: Brown Creeper.&rdquo;</li>
+          <li>Dimensions.com &mdash; Brown Creeper (<em>Certhia americana</em>) Dimensions &amp; Drawings.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">51&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Bark-Spiral</div>
+          <div class="stat-detail">#52 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 1</div>
+          <div class="stat-detail">Returns after 38-degree absence</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Certhiidae</div>
+          <div class="stat-detail">NEW &mdash; 20th family, monotypic in N.A.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Certhia</em></div>
+          <div class="stat-detail">1st of genus &mdash; only N.A. treecreeper</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Old-Growth Bark</div>
+          <div class="stat-detail">Mature conifer forest, sea level&ndash;2,000 m</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round in forested habitats</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">49 unique</div>
+          <div class="stat-detail">52 entries (0&ndash;51)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">20</div>
+          <div class="stat-detail">Certhiidae enters as 20th</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">14 consecutive Passeriformes (38&ndash;51)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~11 Million</div>
+          <div class="stat-detail">IUCN Least Concern; PNW focal species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">5.7&ndash;8.5 g</div>
+          <div class="stat-detail">Among the lightest birds in the engine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">Bark-Pattern Crypsis</div>
+          <div class="stat-detail">Vanishes when pressed flat against trunk</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Bark-Flap Hammock</div>
+          <div class="stat-detail">Behind loose bark on dead trees (94%)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Phylogeography</div>
+          <div class="stat-value">6 Clades</div>
+          <div class="stat-detail">Most complex structure in the engine</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 051</p>
+  </footer>
+</body>
+</html>

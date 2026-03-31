@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 51&deg; &mdash; Grand Archives &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: #BBDEFB;
+      border: 1px solid #1976D2;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4E342E;
+      color: #D7CCC8;
+      border: 1px solid #5D4037;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4E342E;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #EFEBE9;
+      font-style: italic;
+      color: #3E2723;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #3E2723);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .genealogy-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.85rem;
+    }
+    .genealogy-table th {
+      background: #1A237E;
+      color: #9FA8DA;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .genealogy-table td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid #E8EAF6;
+      color: #424242;
+    }
+    .genealogy-table tr:nth-child(even) { background: #F5F5F5; }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>051 &mdash; Grand Archives</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>7th Consecutive Folk-Adjacent &mdash; Carissa&rsquo;s Wierd Genealogy &mdash; The Serial Founder</h3>
+      <p>
+        Grand Archives at degree 51&deg; extends the folk-adjacent record to
+        <strong>seven consecutive degrees</strong> (45&ndash;51). Mat Brooke &mdash;
+        co-founder of <strong>Carissa&rsquo;s Wierd</strong> (with Sera Cahoone, degree 48),
+        guitarist for <strong>Band of Horses</strong>, founder of Grand Archives. Signed to
+        <strong>Sub Pop</strong> &mdash; third Sub Pop artist in the folk zone. NPR:
+        &ldquo;soft-rock redux&rdquo; &mdash; Beach Boys and CSNY harmonies filtered through
+        Pacific Northwest indie. Sunshine folk-pop from the man who walked away from Band of
+        Horses and built a bar from salvaged barn wood.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">51&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Grand Archives</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Indie Folk</span>
+          <span class="label-badge">Sub Pop</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">7th Folk-Adjacent &mdash; Record Extends</span>
+          <span class="first-badge">3rd Sub Pop</span>
+          <span class="first-badge">Carissa&rsquo;s Wierd Genealogy</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Serial Band-Maker Who Opened a Bar</h2>
+          <p>
+            <strong>Mat Brooke</strong> co-founded <strong>Carissa&rsquo;s Wierd</strong>
+            in Tucson, Arizona, in 1995 with Jenn Champion. The band relocated to Seattle,
+            added <strong>Ben Bridwell</strong> and <strong>Sera Cahoone</strong> (degree 48),
+            and released three albums of slowcore, chamber-inflected indie rock before
+            disbanding in 2003. Their final album, <em>Songs About Leaving</em> (2002),
+            is a cult classic. After the breakup, Bridwell formed <strong>Band of Horses</strong>
+            and invited Brooke to join. Brooke played guitar on <em>Everything All the Time</em>
+            (2006, Sub Pop) and wrote two tracks &mdash; but left before the band&rsquo;s
+            success fully materialized.
+          </p>
+          <blockquote>
+            &ldquo;I&rsquo;d never really given the commitment to be a formal member. It was
+            just a spur of the moment&hellip; and Everything All the Time took off really
+            fast&hellip; I still didn&rsquo;t feel quite committed.&rdquo; &mdash; Mat Brooke,
+            on leaving Band of Horses
+          </blockquote>
+          <p>
+            After leaving Band of Horses, Brooke took time off from music to
+            <strong>open a bar in Seattle</strong>. He and his partners gutted a Howell
+            Street laundromat, salvaged wood from a dilapidated barn in Fife, and built
+            <strong>The Redwood</strong> on Capitol Hill by hand. Then, in September 2006,
+            he formed <strong>Grand Archives</strong> with fellow Seattle musicians:
+            <strong>Curtis Hall</strong> (drums, the Jeunes),
+            <strong>Jeff Montano</strong> (bass, the New Mexicans),
+            <strong>Ron Lewis</strong> (keyboards/guitar, Ghost Stories), and
+            <strong>Thomas Wright</strong> (guitar). A five-piece with four-part
+            vocal harmonies at its core.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Sunshine Pop on Sub Pop</h2>
+          <p>
+            Grand Archives supported <strong>Modest Mouse</strong> on seven west-coast
+            tour dates, catching Sub Pop&rsquo;s attention. The self-titled debut,
+            <strong><em>The Grand Archives</em></strong>, was released
+            <strong>February 19, 2008</strong>, on Sub Pop. Where Carissa&rsquo;s Wierd
+            was dark and mournful, Grand Archives was <strong>deliberately bright</strong>.
+            Sub Pop described the album as &ldquo;full of illumination and warmth, responding
+            to turbulent times with hope, high spirits, and a sense of camaraderie.&rdquo;
+          </p>
+          <p>
+            NPR&rsquo;s World Cafe called the sound &ldquo;<strong>soft-rock redux</strong>&rdquo;
+            and compared the vocal harmonies to <strong>The Beach Boys</strong> and
+            <strong>Crosby, Stills, Nash &amp; Young</strong>. The sonic palette: acoustic
+            and electric guitars, pedal steel, trombone, flugelhorn, cello, accordion,
+            and the ever-present four-part harmonies. <strong>&ldquo;Miniature Birds&rdquo;</strong>
+            &mdash; cascading vocal lines over fingerpicked guitar &mdash; became the
+            band&rsquo;s signature track.
+          </p>
+          <p>
+            <strong>Pitchfork</strong> gave the debut <strong>7.5/10</strong>:
+            &ldquo;the way Grand Archives come forth with arms outstretched results in
+            a debut that likely exceeds most expectations.&rdquo;
+            <strong>Metacritic:</strong> 72/100 (generally favorable, 13 critics).
+            <strong>AllMusic:</strong> 3.5/5. <strong>Drowned In Sound:</strong>
+            &ldquo;an impressively alternative take on American indie.&rdquo;
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Keep in Mind Frankenstein &amp; the Fade</h2>
+          <p>
+            <strong>Ron Lewis</strong> departed in November 2008 to tour with
+            <strong>The Shins</strong> and rejoin <strong>The Fruit Bats</strong>. The
+            remaining four-piece recorded their second album at <strong>Paradise Sound
+            Studios</strong> in <strong>Index, Washington</strong> &mdash; a tiny town
+            in the Cascade foothills, population under 200. The band
+            <strong>discarded prepared material</strong> and wrote spontaneously in the
+            studio. Brooke: &ldquo;It sounded kind of&hellip; like guys who don&rsquo;t
+            really play rock music trying to rock out.&rdquo;
+          </p>
+          <p>
+            <strong><em>Keep in Mind Frankenstein</em></strong> (September 15, 2009, Sub Pop)
+            was darker and more ruminative than the debut. The sunshine dimmed toward the
+            melancholy of Brooke&rsquo;s Carissa&rsquo;s Wierd years. <strong>Exclaim!:</strong>
+            &ldquo;wallows in the same wonderful melancholy as Brooke used in his older band.&rdquo;
+            <strong>AllMusic:</strong> 3/5.
+          </p>
+          <p>
+            Demos for a third album, <strong><em>Villains</em></strong>, appeared as free
+            downloads in 2010 and 2011. The full album was never completed. The band never
+            officially disbanded &mdash; they simply stopped. Brooke turned to
+            <strong>The Redwood</strong> (Capitol Hill bar, closed 2017),
+            <strong>The Oak</strong> (2012), and eventually
+            <strong>The Spruce</strong> in Port Angeles, WA. The musician became a
+            restaurateur. In 2019, Brooke and Jenn Champion reunited for
+            <strong>Carissa&rsquo;s Wierd 20th anniversary shows</strong> &mdash;
+            stripped-down, intimate, temporary.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Carissa&rsquo;s Wierd Genealogy</h2>
+          <table class="genealogy-table">
+            <thead>
+              <tr>
+                <th>Attribute</th>
+                <th>Sera Cahoone (48&deg;)</th>
+                <th>Grand Archives (51&deg;)</th>
+                <th>Band of Horses (future?)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Role in Carissa&rsquo;s Wierd</td>
+                <td>Drummer</td>
+                <td>Co-founder, guitar, vocals</td>
+                <td>Drums, then guitar</td>
+              </tr>
+              <tr>
+                <td>Post-breakup</td>
+                <td>Solo folk (Sub Pop)</td>
+                <td>Sunshine folk-pop (Sub Pop)</td>
+                <td>Arena indie rock (Sub Pop &rarr; Columbia)</td>
+              </tr>
+              <tr>
+                <td>Energy</td>
+                <td>E=2</td>
+                <td>E=3</td>
+                <td>E=5 (projected)</td>
+              </tr>
+              <tr>
+                <td>Genre</td>
+                <td>Folk</td>
+                <td>Indie Folk</td>
+                <td>Indie Rock</td>
+              </tr>
+              <tr>
+                <td>Register</td>
+                <td>Quiet contemplation</td>
+                <td>Bright communal warmth</td>
+                <td>Anthemic melancholy</td>
+              </tr>
+              <tr>
+                <td>Pattern</td>
+                <td>#49 Slow Bloom</td>
+                <td>#52 Serial Founder</td>
+                <td>(TBD)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            Two members of the same band occupy degrees three apart in the engine.
+            Both ended up on Sub Pop. Both folk-adjacent. The drummer went quieter.
+            The singer went brighter. The other guitarist went louder.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Selected Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>The Grand Archives</h4>
+              <div class="disco-years">2008 &middot; Sub Pop</div>
+              <p>
+                Debut. Five-piece. Pitchfork 7.5/10. Metacritic 72.
+                AllMusic 3.5/5. &ldquo;Soft-rock redux&rdquo; &mdash;
+                Beach Boys harmonies meet PNW indie.
+                &ldquo;Miniature Birds&rdquo; is the signature.
+                Toured US and Europe.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Keep in Mind Frankenstein</h4>
+              <div class="disco-years">2009 &middot; Sub Pop</div>
+              <p>
+                Second album. Four-piece. Recorded at Paradise Sound
+                Studios, Index, WA. AllMusic 3/5. Spontaneously
+                composed in studio. Darker, more ruminative.
+                Toured US, Canada, Europe.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Villains Demos</h4>
+              <div class="disco-years">2010&ndash;2011 &middot; Free download</div>
+              <p>
+                Seven demo tracks for unreleased third album.
+                Four tracks October 2010, three tracks June 2011.
+                The album that never was. Band went silent.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Everything All the Time</h4>
+              <div class="disco-years">2006 &middot; Sub Pop (Band of Horses)</div>
+              <p>
+                Mat Brooke on guitar. Wrote &ldquo;I Go to the
+                Barn Because I Like the&rdquo; and &ldquo;St.
+                Augustine.&rdquo; Left the band shortly after
+                release.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Songs About Leaving</h4>
+              <div class="disco-years">2002 &middot; Sad Robot (Carissa&rsquo;s Wierd)</div>
+              <p>
+                Final Carissa&rsquo;s Wierd album. Cult classic.
+                Slowcore / chamber pop. Reissued by Hardly Art
+                (2010). Mat Brooke, Jenn Champion, Ben Bridwell,
+                Sera Cahoone.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Communal Harmony</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                52nd acoustic element. The sound that occurs when
+                multiple voices sing in arranged harmony &mdash;
+                creating a richness no single voice could produce.
+                Not unison but structured difference: each voice
+                at a different chord position, the combined sound
+                a single organism with multiple throats.
+                Grand Archives&rsquo; four-part harmonies are the
+                defining example. NPR compared them to Beach Boys
+                and CSNY. Extends the folk-acoustic taxonomy to
+                seven elements: murmur (45), confessional (46),
+                parable tone (47), held rest (48), lullaby
+                subversion (49), intimate architecture (50),
+                communal harmony (51).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Serial Founder</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                52nd artist-city pattern. The artist who repeatedly
+                creates new projects from scratch within a single
+                city, each with its own identity, each with a
+                defined lifespan. Brooke: Carissa&rsquo;s Wierd
+                (slowcore), Band of Horses (anthemic), Grand Archives
+                (sunshine), then The Redwood, The Oak, The Spruce.
+                Three bands and three businesses in twenty years.
+                Building is the constant. The specific thing changes.
+                Distinct from the Lifer, the Draw, and the incubator
+                graduate.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Afterglow</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                51st blue note deployment. The warmth that persists
+                after the light source departs. The awareness that
+                the bright moment is finite. Grand Archives&rsquo;
+                arc: bright debut, dimming second album, silence.
+                Within songs: major chords drifting toward suspended
+                territories, optimism shadowed by transience.
+                Brooke left Band of Horses as they ascended. He let
+                Grand Archives fade. The afterglow is the blue note
+                of the artist who builds beautiful things and walks
+                away. Seven consecutive folk-adjacent blue notes
+                (45&ndash;51).
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Seven Consecutive Folk-Adjacent &mdash; Record Extends</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                Folk (45), Folk (46), Indie Folk (47), Folk (48),
+                Folk Punk (49), Indie Folk (50), Indie Folk (51).
+                <strong>Seven consecutive folk-adjacent degrees</strong>
+                &mdash; extends the record broken at degree 50.
+                Seven production paradigms: fingerpicking, punk-folk,
+                concept-album, Americana-folk, anti-folk punk,
+                lo-fi intimate architecture, sunshine harmony-pop.
+                Genre Stage 32. The longest genre-family streak
+                in engine history grows by one.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=3 Rises to Eleven</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                11th E=3 deployment. Distribution: 2:16:11:12:10:2.
+                E=3 closes to within one of E=4. Grand Archives:
+                Sub Pop signed, Pitchfork reviewed, NPR featured,
+                US+Europe tours &mdash; but no breakout moment.
+                Visible within indie ecosystem, unknown outside.
+                Folk zone energy: 2-3-3-2-3-2-3. Seven consecutive
+                below E=4. Four at E=3, three at E=2.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">48&deg;</span> Sera Cahoone &mdash; <strong>The Carissa&rsquo;s Wierd connection.</strong> Cahoone was the drummer; Brooke was the co-founder and guitarist. Same band (1999&ndash;2003), two engine degrees, three apart. Both Sub Pop. Both folk-adjacent. The held rest (48) is the drummer&rsquo;s silence after she picks up a guitar. The communal harmony (51) is the singer&rsquo;s brightness after he sets down the grief.</li>
+            <li><span class="ref-degree">50&deg;</span> Mirah &mdash; <strong>Olympia to Seattle return.</strong> Consecutive Indie Folk degrees. Mirah&rsquo;s intimate architecture (50) = one voice in a deep room. Grand Archives&rsquo; communal harmony (51) = five voices in a sunlit field. K Records intimacy and Sub Pop brightness.</li>
+            <li><span class="ref-degree">49&deg;</span> Kimya Dawson &mdash; <strong>Folk zone continues.</strong> Both E=3. Both warm. Dawson&rsquo;s anti-folk = confrontational warmth disguised as children&rsquo;s music. Grand Archives = nostalgic warmth disguised as 1970s sunshine pop. Two modes of warmth as disguise.</li>
+            <li><span class="ref-degree">45&deg;</span> Damien Jurado &mdash; <strong>The Sub Pop bookend.</strong> Both Sub Pop. The murmur (45) and the communal harmony (51) are opposite poles of the folk-acoustic taxonomy &mdash; solitary whisper versus collective voice.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>The arc continues.</strong> Mercury orchestras (0) through Sub Pop sunshine folk-pop (51). Fifty-two degrees of infrastructure evolution. The orchestral ambition survives; the scale has shrunk from symphony to quintet.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Formed</span>
+            <span class="stat-value">Sep 2006, Seattle</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Inactive</span>
+            <span class="stat-value">~2011</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lifespan</span>
+            <span class="stat-value">~5 years</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Sub Pop</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albums</span>
+            <span class="stat-value">2 (+unreleased 3rd)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Members</span>
+            <span class="stat-value">5 (later 4)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">51 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">32</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#52 Serial Founder</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#52 Communal Harmony</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#51 Afterglow</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Mat Brooke&rsquo;s Bands</h4>
+          <div class="stat-row">
+            <span class="stat-label">Carissa&rsquo;s Wierd</span>
+            <span class="stat-value">1995&ndash;2003</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Band of Horses</span>
+            <span class="stat-value">2004&ndash;2006</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Grand Archives</span>
+            <span class="stat-value">2006&ndash;2011</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">CW Reunion</span>
+            <span class="stat-value">2019 (anniversary)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Critical Reception</h4>
+          <div class="stat-row">
+            <span class="stat-label">Debut (P4k)</span>
+            <span class="stat-value">7.5/10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Debut (MC)</span>
+            <span class="stat-value">72/100</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Debut (AM)</span>
+            <span class="stat-value">3.5/5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">KiMF (AM)</span>
+            <span class="stat-value">3/5</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Sub Pop in the Folk Zone</h4>
+          <div class="stat-row">
+            <span class="stat-label">45&deg;</span>
+            <span class="stat-value">Damien Jurado</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">48&deg;</span>
+            <span class="stat-value">Sera Cahoone</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">51&deg;</span>
+            <span class="stat-value">Grand Archives</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Interval</span>
+            <span class="stat-value">Every 3 degrees</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Members</h4>
+          <div class="stat-row">
+            <span class="stat-label">Mat Brooke</span>
+            <span class="stat-value">Vocals, guitar</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Curtis Hall</span>
+            <span class="stat-value">Drums, vocals</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jeff Montano</span>
+            <span class="stat-value">Bass, vocals</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Thomas Wright</span>
+            <span class="stat-value">Guitar, vocals</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Ron Lewis</span>
+            <span class="stat-value">Keys (to Nov 2008)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 51</span>
+            <span class="stat-value">2:16:11:12:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3 Mode</span>
+            <span class="stat-value">11th (within 1 of E=4)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Folk-adjacent</span>
+            <span class="stat-value">7 consec. (45&ndash;51)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Non-male</span>
+            <span class="stat-value">13 / 52 (~25.0%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 51 of 360 &mdash; Grand Archives &mdash;
+        Indie Folk &mdash; Sub Pop &mdash;
+        Seattle &mdash;
+        7th Consecutive Folk-Adjacent (Record Extends) &mdash; 3rd Sub Pop Artist &mdash;
+        Carissa&rsquo;s Wierd Genealogy &mdash; The Serial Founder
+      </p>
+      <p>
+        Territorial Acknowledgment: This research documents music mapped to the Seattle
+        metropolitan area and the broader Pacific Northwest. The Seattle 360 engine operates on
+        the ancestral territory of the Duwamish Tribal Organization (duwamishtribe.org), the
+        Muckleshoot Indian Tribe, and related Coast Salish and Southern Lushootseed-speaking
+        peoples. The Duwamish Tribe remains federally unrecognized despite continuous habitation
+        and cultural practice.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
