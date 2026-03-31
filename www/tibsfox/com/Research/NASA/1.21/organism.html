@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Chinook Salmon — King of the Pacific | v1.21 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040610; --bio-mid: #081020;
+    --orbital-blue: #1840A0; --orbital-dim: #0C2050;
+    --firefly-gold: #C89840; --firefly-dim: #644C20;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --earth-green: #2A6040; --earth-dim: #153020;
+    --atlantic-blue: #0A2848; --space: #040508;
+    --salmon-copper: #C07040; --salmon-dim: #603820;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(200,152,64,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(42,96,64,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(24,64,160,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(192,112,64,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(208,128,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(42,96,64,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--firefly-gold); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--atlantic-blue) 55%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--firefly-gold); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(200,152,64,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(200,152,64,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(200,152,64,0.12); border: 1px solid var(--firefly-gold); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--firefly-gold); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(200,152,64,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--firefly-gold); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--salmon-copper); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--firefly-gold); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--salmon-copper); }
+  em { color: var(--reentry-amber); }
+  code { color: var(--firefly-gold); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--firefly-gold); text-decoration: none; }
+  a:hover { color: #fff; }
+  blockquote { border-left: 3px solid var(--orbital-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(4,5,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .sources { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources h2 { margin-top: 0; }
+  .sources h3 { font-size: 1rem; color: var(--firefly-gold); margin-top: 1.5rem; }
+  .sources li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+  .nav-card { background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--firefly-gold); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--salmon-copper); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--firefly-gold); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.21 Mercury-Atlas 6</a>
+  <span class="sep">/</span>
+  Track 2: Organism Pairing
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.21</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 2</span>
+    </div>
+    <h1>Organism Pairing: <em>Oncorhynchus tshawytscha</em></h1>
+    <p class="subtitle">Chinook Salmon &mdash; King of the Pacific</p>
+    <div class="meta-row">
+      <span><span class="label">Family:</span> Salmonidae</span>
+      <span><span class="label">Range:</span> Columbia River, Puget Sound, Fraser River &mdash; California to Alaska</span>
+      <span><span class="label">Conservation:</span> Varies by run &mdash; some ESA Threatened/Endangered</span>
+      <span><span class="label">Mission:</span> 1.21 &mdash; Mercury-Atlas 6 / Friendship 7, February 20, 1962</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>The King</h2>
+
+    <p>There is a fish in the Pacific Northwest that people do not call by its name. They call it the King. Not as affectation, not as marketing &mdash; as acknowledgment. <em>Oncorhynchus tshawytscha</em> is the largest species of Pacific salmon, and in the rivers of the Pacific Northwest it has occupied a position so central, so structurally load-bearing, that every other organism in the watershed &mdash; from the Sitka spruce on the riverbank to the grizzly bear on the gravel bar to the nitrogen isotopes locked in the soil three hundred meters from the water &mdash; is, in some measurable way, a product of the salmon&rsquo;s existence. The King built this place. It is still building it. And it is dying.</p>
+
+    <p>A large Chinook salmon can exceed <strong>50 kilograms</strong>. The fish that the Columbia River commercial fishermen of the nineteenth century called &ldquo;June hogs&rdquo; &mdash; the massive, late-spring-run Chinook that ascended the river in numbers that darkened the water from bank to bank &mdash; were regularly landed at 30 to 40 kilograms, and fish exceeding 50 kilograms were documented often enough that they were not considered remarkable. The largest Chinook salmon on record, taken in a fish trap near Petersburg, Alaska, in 1949, weighed <strong>57.27 kilograms</strong> &mdash; 126 pounds. An individual fish that weighed more than most adult humans. The body is torpedo-shaped, deep-chested, muscular in the way that an animal is muscular when every gram of tissue has been optimized by millions of years of selection for sustained high-output swimming against river currents that would exhaust a human in minutes. The coloration in the ocean phase is steel blue to blue-green on the back, silver on the sides, with small irregular black spots on the upper half of the body and on both lobes of the tail fin &mdash; a detail that distinguishes Chinook from other Pacific salmon species in the field. In the spawning phase, the body undergoes a transformation so dramatic that the ocean fish and the spawning fish are barely recognizable as the same species: the silver fades, replaced by dark red, maroon, or olive-brown; the jaws elongate and develop hooked tips (the kype); the teeth enlarge; the body deepens and compresses laterally. The fish that was built for the ocean rebuilds itself for the river. It becomes something else entirely.</p>
+
+    <p>The cultural significance of Chinook salmon to Pacific Northwest Indigenous peoples is not metaphorical. It is caloric. For the peoples of the Columbia River Plateau &mdash; the Yakama, Nez Perce, Umatilla, Warm Springs, Wanapum, and others &mdash; and for the coastal and Puget Sound nations &mdash; the Tulalip, Muckleshoot, Puyallup, Nisqually, Lummi, Quinault, and others &mdash; Chinook salmon was the single most important food source for thousands of years. The annual return of the Chinook was the event around which the entire calendar organized itself. The First Salmon Ceremony &mdash; practiced in varying forms across dozens of nations &mdash; was not a celebration of abundance in the way that a harvest festival celebrates a good crop. It was a ritual of reciprocity, a formal acknowledgment that the salmon had chosen to return, that the return was a gift, and that the gift imposed obligations. The first salmon caught was prepared with specific protocols, its bones returned to the river so that its spirit could travel back to the ocean and tell the other salmon that the people had treated it with respect. The ceremony was a contract. The salmon would keep coming back. The people would keep honoring the return. The contract held for ten thousand years.</p>
+
+    <p>The scale of historical Chinook runs in the Columbia River system is difficult to comprehend from the vantage point of the present. Fisheries biologists estimate that the pre-dam, pre-commercial-fishing Columbia River system supported annual salmon runs of <strong>10 to 16 million fish</strong>, of which Chinook constituted the largest biomass component. The river was, in terms of anadromous fish production, one of the most productive river systems on Earth. Sixteen million salmon ascending a single river. The biological energy of that &mdash; the sheer tonnage of marine-derived protein and fat and nutrients moving upriver against gravity, driven by nothing but the fish&rsquo;s own muscle and the imperative to reproduce &mdash; was the engine that powered the entire watershed ecosystem. Every bear that fattened for winter, every eagle that nested along the banks, every tree that grew tall on the nitrogen carried upstream in the bodies of spawned-out fish, was running on salmon energy. The river was not a river with fish in it. It was a nutrient-delivery system that happened to flow downhill, and the fish were the vehicles.</p>
+
+    <hr>
+
+    <h2>Life Cycle</h2>
+
+    <p>The life of <em>Oncorhynchus tshawytscha</em> is a single arc from freshwater to saltwater and back, and the arc ends where it began, and the ending is death. There is no second run. There is no reproductive retirement. The salmon spawns once and dies. Every cell in its body, every physiological system, every behavioral drive is organized around a single goal: return to the stream where you were born, reproduce, and cease to exist. The biology is semelparous &mdash; one reproductive event per lifetime, all resources committed, nothing held in reserve.</p>
+
+    <p>The arc begins in freshwater. The female Chinook selects a site in the gravel bed of a cold, well-oxygenated stream &mdash; typically in the upper reaches of a river system, often hundreds or thousands of kilometers from the ocean. The site must meet specific criteria: gravel of the right size (2 to 10 centimeters in diameter), current velocity sufficient to provide oxygenated water flow through the gravel interstices, depth sufficient to prevent dewatering during low flows, and substrate free of fine sediment that would suffocate the eggs. The female excavates the redd &mdash; the nest &mdash; by turning on her side and using powerful undulations of her tail to displace the gravel, creating a depression in the streambed. The hydraulics of the excavation are precise: the female&rsquo;s tail movements create a localized vortex that lifts gravel from the downstream face of the depression and deposits it in a mound downstream, producing a bowl-shaped cavity with a downstream tailspill. The redd is not a hole. It is an engineered structure with specific hydrological properties.</p>
+
+    <p>The female deposits eggs into the redd in batches, and the attending male (or males &mdash; competition among males for spawning access is intense, and multiple males may fertilize portions of a single redd) releases milt over the eggs as they settle into the gravel interstices. A large female Chinook can produce <strong>5,000 to 14,000 eggs</strong>, depending on body size and run timing. After depositing a batch, the female moves slightly upstream and excavates again, covering the previously deposited eggs with the displaced gravel from the new excavation. The process repeats over several days, producing a series of egg pockets within the redd structure, each buried under 15 to 30 centimeters of gravel.</p>
+
+    <p>The eggs incubate in the gravel for <strong>90 to 150 days</strong>, depending on water temperature. During this period, the embryos develop within the egg casing, sustained by the yolk. Upon hatching, the alevins &mdash; larval fish with large yolk sacs still attached to their ventral surface &mdash; remain in the gravel interstices, absorbing the yolk over a period of weeks. They do not feed. They do not move far from the redd. They are immobile, vulnerable, and entirely dependent on the quality of the gravel environment that the female selected and constructed. If the gravel silts up with fine sediment, the alevins suffocate. If the flow drops and the redd dewaters, they die. If the temperature rises above tolerance, they die. The mother chose the site. The mother is dead. The survival of her offspring depends on the quality of a decision she made weeks or months before she died.</p>
+
+    <p>When the yolk sac is absorbed, the alevins emerge from the gravel as fry &mdash; small, actively swimming fish that begin feeding on aquatic invertebrates in the stream. Chinook fry exhibit two distinct life-history strategies that vary by population and geographic location. &ldquo;Ocean-type&rdquo; Chinook (most common in populations south of the Columbia River and in fall-run populations) migrate to the ocean within their first year, spending only weeks to months in freshwater as fry. &ldquo;Stream-type&rdquo; Chinook (most common in spring-run populations and in northern, interior populations) rear in freshwater for a full year or more before migrating, growing larger and entering the ocean at a more advanced stage. The two strategies represent a fundamental bet on where to invest growth: in the relative safety of freshwater (stream-type) or in the rich feeding grounds of the ocean (ocean-type). Both strategies work. Both have persisted for hundreds of thousands of years. The diversity of life-history strategies within a single species is one of the features that makes Chinook salmon extraordinarily resilient &mdash; or would, if the freshwater habitats that support both strategies had not been systematically dismantled.</p>
+
+    <p>Smoltification is the transformation that makes the ocean phase possible, and it is one of the most remarkable physiological feats in the vertebrate world. The freshwater fry must become a saltwater fish. This is not a trivial adjustment. Freshwater is hypotonic relative to the fish&rsquo;s body fluids &mdash; water tends to flow into the fish by osmosis, and the fish must actively excrete excess water through its kidneys while retaining salts. Saltwater is hypertonic &mdash; water tends to flow out of the fish, and the fish must actively drink seawater and excrete excess salts through specialized chloride cells in the gills. The two environments demand opposite osmoregulatory strategies. Smoltification reverses the polarity. The gill chloride cells restructure. The kidney function changes. The body silvering &mdash; a deposition of guanine and hypoxanthine crystals in the skin &mdash; transforms the cryptically colored freshwater fry into a reflective, countershaded oceanic fish. The behavior shifts from territorial stream-dwelling to schooling and downstream migration. The entire animal is rebuilt, organ system by organ system, for a new world. It is the biological equivalent of an astronaut training for space: a body evolved for one environment, systematically modified to survive in another.</p>
+
+    <p>The ocean phase lasts one to six years, depending on population and individual variation. During this time, the Chinook salmon ranges across vast distances of the North Pacific, feeding on herring, sand lance, squid, euphausiids, and other marine prey, growing from a smolt of perhaps 10 centimeters to a mature adult of 60 to 120 centimeters and 5 to 50 kilograms. The growth rate in the ocean is extraordinary &mdash; an animal that was a 10-gram fry becomes a 20-kilogram adult in three or four years, a five-thousand-fold increase in body mass. The ocean is where the salmon becomes the King. The rivers made it. The ocean grew it. And then, triggered by a combination of hormonal cascades, photoperiod cues, and internal clocks that biologists have identified but not fully decoded, the salmon turns around and goes home.</p>
+
+    <p>The homing migration is one of the great navigational feats in the animal kingdom, and it is the point where this fish and John Glenn&rsquo;s orbit share a structure. The salmon navigates thousands of kilometers of open ocean, crosses the continental shelf, enters the correct river mouth out of hundreds of possibilities, ascends the mainstem past tributary after tributary, and arrives at the specific stream reach &mdash; sometimes the specific gravel bar &mdash; where it was born years earlier. The precision is extraordinary. Homing fidelity in Chinook salmon populations is typically greater than <strong>95 percent</strong> &mdash; meaning that fewer than five percent of returning adults stray to non-natal streams. The fish finds its way back to a specific patch of gravel in a specific creek in a specific watershed, after spending years in the open Pacific. It does this without instruments, without maps, without ground control. It does this with magnetite and memory.</p>
+
+    <p>The spawning adults stop feeding when they enter freshwater. From the moment the Chinook salmon crosses from saltwater to fresh, it will not eat again. The energy required for the upstream migration &mdash; which can cover more than <strong>1,400 kilometers</strong> in the case of Snake River spring Chinook &mdash; comes entirely from stored body fat and muscle tissue. The fish metabolizes itself. The bright silver ocean fish darkens, reddens, distorts. The jaws elongate. The teeth grow. The body that was optimized for oceanic feeding is consumed from within as the fish powers itself upstream against the current, over rapids, through fish ladders, past dams, back to the place where it began. It arrives at the spawning ground transformed and dying. It spawns. And within days &mdash; sometimes hours &mdash; of completing the act, the salmon dies. The body drifts downstream or washes against the bank, and the carcass becomes the final gift: a package of marine-derived nutrients &mdash; nitrogen, phosphorus, carbon, trace elements accumulated over years of oceanic feeding &mdash; delivered to the freshwater and riparian ecosystem. The salmon carries the ocean into the forest. The forest is built on salmon.</p>
+
+    <hr>
+
+    <h2>Navigation</h2>
+
+    <p>John Glenn orbited the Earth three times in Friendship 7 on February 20, 1962, navigating by instruments, by radio contact with ground stations distributed across the tracking network, and &mdash; when the automatic attitude control system began to malfunction &mdash; by the stars themselves, sighting through the capsule window and using visual reference to the horizon and celestial bodies to maintain orientation. Glenn was a Marine aviator and test pilot. He knew how to navigate. But the key feature of his orbital navigation was this: he crossed a vast and featureless expanse (the void of space, the blue curve of the ocean far below) and returned to a precise point (the splashdown zone in the Atlantic, 40 kilometers from the recovery ship USS <em>Noa</em>). He left a known place, traveled an enormous distance through a hostile medium, and came back.</p>
+
+    <p>The Chinook salmon does the same thing, and the mechanisms it uses are, in their own way, as sophisticated as anything in the Mercury capsule.</p>
+
+    <p>The first mechanism is magnetic field detection. Chinook salmon possess magnetite crystals &mdash; biogenic magnetite, Fe<sub>3</sub>O<sub>4</sub> &mdash; in the tissue of the nasal region (the ethmoid bone and associated soft tissue). These crystals are organized in chains that function as a biological compass, detecting the intensity and inclination angle of Earth&rsquo;s magnetic field. Laboratory studies have demonstrated that salmon can detect and orient to magnetic fields, and that disruption of the magnetic sense (through exposure to strong artificial fields or physical interference with the magnetite-bearing tissue) disrupts navigational behavior. The Earth&rsquo;s magnetic field varies predictably with latitude and longitude, and a fish equipped with a magnetite-based compass can, in principle, determine its approximate position on the globe by measuring field intensity and inclination &mdash; a biological equivalent of the heading instruments in Glenn&rsquo;s capsule.</p>
+
+    <p>The second mechanism is olfactory imprinting. Chinook salmon memorize the chemical signature of their natal stream during the smolt stage &mdash; the specific combination of dissolved minerals, organic compounds, amino acids, and trace chemicals that gives each stream a unique olfactory fingerprint. This imprinting occurs during a critical developmental window associated with smoltification, and the memory persists for years. When the returning adult enters freshwater, it follows the olfactory gradient upstream, selecting the correct tributary at each confluence by detecting the remembered chemical signature. The precision is remarkable: salmon can discriminate between streams that are chemically similar to human instruments but olfactorily distinct to the fish. The nose finds the home stream. The magnetite found the ocean. Together, they navigate the fish across the Pacific and up the river to a specific patch of gravel.</p>
+
+    <p>There are additional navigational cues. Solar compass orientation &mdash; using the sun&rsquo;s position, corrected for time of day, to maintain a consistent heading &mdash; has been demonstrated in juvenile salmon during their downstream migration and is likely used by adults during the oceanic phase. Ocean current patterns provide directional information. Temperature and salinity gradients mark the transition from oceanic to coastal to estuarine to riverine environments. The salmon integrates multiple sensory channels into a navigational solution that covers thousands of kilometers with almost zero error. It is a redundant navigation system &mdash; if one channel degrades, others compensate. Glenn&rsquo;s navigation was the same: if the automatic attitude control failed (and it did, partially, during Friendship 7), the pilot could switch to manual, could navigate by stars, could use the horizon as a reference. Redundancy is the architecture of survival in both cases. The salmon has magnetic, olfactory, solar, and hydrographic channels. The Mercury capsule had automatic, manual, fly-by-wire, and visual channels. Both systems are built on the principle that no single sensor can be trusted absolutely and that the navigator who survives is the one with alternatives.</p>
+
+    <hr>
+
+    <h2>The Dam Problem</h2>
+
+    <p>The Columbia River was, within living memory, the greatest salmon river on Earth. It is <strong>1,954 kilometers</strong> long, drains a basin of <strong>668,000 square kilometers</strong> across seven U.S. states and one Canadian province, and before the construction of the federal dam system it supported annual salmon runs estimated at 10 to 16 million fish. Today, the wild salmon runs in the Columbia Basin are a fraction of their historical numbers. The spring Chinook run on the upper Columbia &mdash; the fish that biologists and tribal fisheries managers consider the most imperiled &mdash; returns in the low thousands in a bad year, the low tens of thousands in a good one. The decline is not mysterious. The cause has an address. It is concrete, and it stretches across the river.</p>
+
+    <p>Grand Coulee Dam, completed in 1942, is <strong>168 meters tall</strong>. It has no fish passage. When the Bureau of Reclamation closed the gates on Grand Coulee, it permanently and irrevocably blocked Chinook salmon from more than 1,600 kilometers of upstream habitat in the upper Columbia, the Spokane River, the Kettle River, and hundreds of tributary streams. No fish ladder was built because no fish ladder could be built &mdash; the dam was too tall, the engineering too extreme. The salmon that had spawned in the upper Columbia for ten thousand years were simply cut off. The populations above the dam went extinct. The habitat remains. The gravel is still there. The water still flows. The salmon cannot reach it. Grand Coulee is a wall, and behind the wall is a ghost landscape of empty streams where salmon once spawned by the millions.</p>
+
+    <p>Below Grand Coulee, the mainstem Columbia has four additional federal dams: Bonneville (1938), The Dalles (1957), John Day (1971), and McNary (1954). Each has fish ladders &mdash; engineered stairways that allow adult salmon to ascend past the dam by swimming up a series of stepped pools. The ladders work, imperfectly. Adult passage rates at each dam are typically 95 to 97 percent per dam, but the cumulative effect of passing four dams, each with a 3 to 5 percent mortality rate, plus the reservoir habitat behind each dam (which replaces the free-flowing river habitat that salmon evolved to navigate with slow, warm, predator-rich impoundments) reduces the total survival of fish migrating through the system significantly. A 95 percent passage rate at each of four dams yields a cumulative passage rate of approximately <strong>81 percent</strong> &mdash; meaning nearly one in five adults that enters the system at Bonneville dies before reaching the spawning grounds above McNary. For juvenile salmon migrating downstream, the mortality is worse. Smolts must pass through turbines, over spillways, or through bypass systems at each dam, and the reservoirs between dams expose them to elevated predation from pikeminnow, bass, and birds. The travel time through the reservoir system is longer than through the historical free-flowing river, and the delay disrupts the physiological timing of smoltification.</p>
+
+    <p>The Snake River, the Columbia&rsquo;s largest tributary, adds four more dams: Ice Harbor (1962), Lower Monumental (1969), Little Goose (1970), and Lower Granite (1975). Snake River spring/summer Chinook salmon are listed as Threatened under the Endangered Species Act. The wild population has declined from historical estimates of more than one million adults to recent returns of a few thousand. The fish that survive the eight-dam gauntlet (four Snake, four Columbia) to reach their spawning grounds in central Idaho &mdash; in the Salmon River, the Middle Fork, the upper reaches of the Clearwater &mdash; have traveled more than <strong>1,400 kilometers</strong> from the ocean and climbed more than <strong>2,000 meters</strong> in elevation. They are the most inland-migrating Chinook on the continent, and they are among the most imperiled.</p>
+
+    <p>Hatcheries were built as mitigation &mdash; the logic being that if dams reduced wild production, hatchery production could compensate. Tens of millions of juvenile Chinook are released from hatcheries throughout the Columbia Basin each year. The hatchery fish survive to adulthood at rates comparable to or slightly lower than wild fish, and they return to the rivers, and they spawn, and the total number of fish in the system appears to be maintained. But hatchery fish are not wild fish. Decades of hatchery propagation have reduced the genetic diversity of many Chinook populations, selected for traits that improve hatchery survival (docility, tolerance of crowding, rapid growth on artificial feed) at the expense of traits that improve wild survival (predator avoidance, migratory timing, habitat selection). Hatchery fish that spawn with wild fish produce offspring that are less fit for the wild environment. The hatchery system produces fish. It does not produce the fish that the river needs. The numbers look adequate. The genetics do not.</p>
+
+    <hr>
+
+    <h2>Cultural Significance</h2>
+
+    <p>The relationship between Pacific Northwest Indigenous peoples and Chinook salmon is not a relationship in the way that a modern American has a relationship with, say, beef cattle. It is a covenant. The salmon was not a resource to be exploited. It was a relative to be honored. The First Salmon Ceremony &mdash; practiced by the Yakama, Nez Perce, Warm Springs, Umatilla, Celilo, Tulalip, Nisqually, Puyallup, Quinault, and many other nations &mdash; was a formal act of respect that acknowledged the salmon&rsquo;s choice to return and obligated the people to treat the fish, the river, and the watershed with reciprocal care. The bones of the first fish were returned to the water. The spirit of the fish would carry word back to the salmon people in the ocean: the humans are keeping the contract. Come back next year.</p>
+
+    <p>The contract was broken, but not by the people who made it.</p>
+
+    <p>In 1855, Isaac Stevens, the first Governor of Washington Territory, negotiated a series of treaties with the tribes of the Pacific Northwest &mdash; the Treaty of Point Elliott, the Treaty of Medicine Creek, the Treaty of Point No Point, the Treaty of Neah Bay, and others. The treaties ceded vast territories to the United States, but in every treaty, the tribes reserved specific rights, and the most fiercely defended of those rights was the right to fish. &ldquo;The right of taking fish, at all usual and accustomed grounds and stations, is further secured to said Indians, in common with all citizens of the Territory.&rdquo; That language &mdash; &ldquo;at all usual and accustomed grounds and stations&rdquo; &mdash; was the line that the tribes drew. The land could be ceded. The fishing could not.</p>
+
+    <p>For more than a century, the State of Washington ignored the treaty fishing rights, arresting tribal fishermen, confiscating nets, and regulating tribal harvest while allowing commercial and sport fisheries to take the majority of the catch. The conflict came to a head in the 1960s and 1970s with the &ldquo;Fish Wars&rdquo; &mdash; direct-action protests by tribal fishermen, particularly on the Nisqually River, Puyallup River, and Frank&rsquo;s Landing, where Billy Frank Jr. and others were repeatedly arrested for exercising treaty rights that the federal government had guaranteed and the state government refused to honor.</p>
+
+    <p>In 1974, Federal Judge George Hugo Boldt issued his ruling in <em>United States v. Washington</em> &mdash; the Boldt Decision &mdash; holding that the treaties entitled the tribes to up to 50 percent of the harvestable salmon returning to their usual and accustomed fishing grounds. The ruling was explosive. Non-tribal commercial and sport fishermen were outraged. The State of Washington resisted enforcement. Boldt was hung in effigy. But the Ninth Circuit upheld the decision, and the Supreme Court declined to overturn it, and the Boldt Decision became the law. Billy Frank Jr., who had been arrested more than fifty times for fishing on the Nisqually River, lived to see the ruling that vindicated everything he had fought for. He continued to fight for salmon habitat and water quality until his death in 2014, understanding &mdash; as the treaty framers had understood &mdash; that the right to fish means nothing if the fish do not come back, and the fish do not come back if the rivers are dammed and the habitat is destroyed.</p>
+
+    <p>Chinook salmon are a keystone species in the strict ecological sense: their presence structures the ecosystem, and their absence restructures it. When spawning Chinook die in freshwater streams, their carcasses deliver marine-derived nutrients &mdash; nitrogen, phosphorus, carbon, and dozens of trace elements &mdash; to the riparian ecosystem. These nutrients are taken up by aquatic invertebrates, which are eaten by juvenile salmon (the next generation feeding on the decomposed bodies of the previous one). The nutrients are taken up by riparian vegetation. Studies using stable isotope analysis (nitrogen-15 and carbon-13 ratios) have demonstrated that trees growing within 100 meters of salmon-bearing streams contain measurably elevated levels of marine-derived nitrogen in their growth rings &mdash; nitrogen that originated in the ocean, was incorporated into the salmon&rsquo;s body during years of oceanic feeding, and was delivered to the forest floor when the salmon spawned and died and decomposed. The salmon feeds the trees. The trees shade the stream. The shade keeps the water cool. The cool water supports the next generation of salmon. The cycle is closed and self-reinforcing, and every element depends on every other element, and the fish is the vehicle that moves the energy.</p>
+
+    <p>Bears carry salmon carcasses into the forest, scattering marine-derived nutrients across the landscape. Eagles and ravens feed on carcasses along the banks. Aquatic insects colonize the decomposing tissue. The entire riparian ecosystem &mdash; from the microbial community in the streambed sediment to the canopy of the old-growth conifers &mdash; is calibrated to the annual pulse of salmon-derived nutrients. Remove the salmon, and the nutrient cycle breaks. The trees grow slower. The invertebrate community shifts. The stream warms because the trees that shaded it are less vigorous because the nitrogen that fed them stopped arriving because the salmon stopped coming because the dam blocked the river. The cascade is real, and it is measurable, and it is happening now in every watershed where salmon runs have declined.</p>
+
+    <hr>
+
+    <h2>Six Resonance Axes</h2>
+
+    <h3>1. Navigation Across Vast Distance</h3>
+    <p>John Glenn orbited the Earth three times in Friendship 7, circling the planet at 28,000 kilometers per hour, covering approximately 121,000 kilometers in four hours and fifty-five minutes. He navigated by instruments, by radio contact with tracking stations, and by the stars themselves when the automatic attitude control system degraded. The Chinook salmon navigates thousands of kilometers across the open Pacific Ocean, crossing featureless expanses of deep water using magnetic field detection, olfactory memory, solar compass orientation, and ocean current patterns. Both navigator and fish cross vast, hostile distances using multiple redundant sensory systems. Both face the problem of maintaining course through a medium that offers no landmarks &mdash; Glenn in the void above the atmosphere, the salmon in the void below the ocean surface. Both arrive at their destination with precision that belies the enormity of the journey. Glenn splashed down 40 kilometers from the recovery ship. The salmon finds the specific gravel bar where it was born. The navigation problem is the same: cross an immense, featureless space and arrive at a precise point. The tools differ. The precision does not.</p>
+
+    <h3>2. The Return Home</h3>
+    <p>Glenn&rsquo;s mission was, at its core, a mission of return. The orbital flight was the proof that an American could go to space and come back &mdash; that the human body could endure weightlessness and reentry, that the capsule could survive the heat of atmospheric friction, that the systems would hold long enough to bring the pilot home. The entire architecture of the Mercury program was built around the return. The salmon&rsquo;s entire life is built around the return. Years in the ocean, thousands of kilometers of travel, and then the turn homeward &mdash; back through the river mouth, up the mainstem, into the tributary, onto the gravel. The return is the point. Everything that happens in the ocean &mdash; the growth, the feeding, the accumulation of body mass and stored energy &mdash; is preparation for the return. Everything that happened in orbit &mdash; the observations, the experiments, the proof of human spaceflight capability &mdash; was preparation for the return. Glenn came home through fire. The salmon comes home through the river. Both returns are one-way gates: once committed, there is no going back.</p>
+
+    <h3>3. Physiological Transformation</h3>
+    <p>Glenn experienced weightlessness for four hours and fifty-five minutes &mdash; the first American to spend extended time in microgravity. His body adapted: fluid shifted headward, the vestibular system recalibrated, muscles began the early stages of unloading. The adaptation was incomplete (the flight was too short for significant physiological change), but the process had begun &mdash; the human body reshaping itself for an alien environment. The Chinook salmon undergoes smoltification &mdash; a complete restructuring of its osmoregulatory system, gill cell architecture, kidney function, skin pigmentation, and behavioral repertoire &mdash; to transform from a freshwater animal into a saltwater animal. The transformation is total: every organ system is modified, the entire physiological polarity is reversed. Glenn&rsquo;s body began to adapt to space. The salmon&rsquo;s body completely rebuilds itself for the ocean. Both transformations are responses to the same fundamental challenge: an organism evolved for one environment must survive in another. The astronaut and the fish both cross a boundary that their bodies were not originally built to cross, and both bodies change to meet the new conditions.</p>
+
+    <h3>4. The Heat Shield and the River</h3>
+    <p>The most harrowing moment of Glenn&rsquo;s flight was the reentry. Telemetry indicated that the heat shield &mdash; the blunt-face ablative shield that protected the capsule from the 1,600-degree-Celsius plasma of atmospheric reentry &mdash; might be loose. If the heat shield separated, the capsule would burn through and Glenn would die. Mission Control made the decision to leave the retropack (the retrorocket package, normally jettisoned after the deorbit burn) strapped over the heat shield, hoping the metal straps would hold the shield in place long enough for reentry heating to weld it in position. Glenn descended through a fireball of ionized gas, watching flaming chunks of the retropack tear away past his window, not knowing whether the heat shield was holding. It held. The telemetry had been wrong &mdash; the shield was secure. But Glenn did not know that during reentry. He survived a barrier of fire on uncertain information. The Chinook salmon faces its own barrier: the transition from saltwater to freshwater at the river mouth. The osmotic challenge is severe &mdash; the fish must reverse its entire fluid-balance strategy in a matter of hours, switching from salt excretion to salt retention, from water excretion to water absorption. Failure to make the transition kills the fish. The river mouth is the salmon&rsquo;s reentry corridor: a boundary between two environments that demands rapid physiological adaptation under conditions that do not permit error. Glenn survived fire. The salmon survives chemistry. Both barriers are absolute &mdash; there is no partial passage.</p>
+
+    <h3>5. One Shot</h3>
+    <p>Glenn had one shot. Mercury-Atlas 6 was the mission that would prove American orbital capability or fail to prove it. The Soviet Union had already orbited Yuri Gagarin (April 1961) and Gherman Titov (August 1961, 17 orbits). The United States had launched two suborbital flights (Shepard and Grissom) but had not yet reached orbit. Glenn&rsquo;s flight was the answer. If the Atlas booster failed, if the capsule malfunctioned, if the pilot could not maintain control, the American orbital program would be set back months or years. One launch. One pilot. One chance. The Chinook salmon gets one spawning run. The fish does not return to the ocean to feed and grow and try again next year. It ascends the river, it spawns, and it dies. The entire purpose of its life &mdash; every calorie consumed in the ocean, every kilometer of migration, every day of growth &mdash; is concentrated into a single reproductive act. One clutch of eggs in one redd in one stream. If the redd silts up, if the water temperature is wrong, if a flood scours the gravel, the investment is lost. There is no retry. Glenn&rsquo;s mission and the salmon&rsquo;s spawning run share the architecture of the irreversible commitment: everything depends on one performance, and the performance cannot be repeated.</p>
+
+    <h3>6. Magnetic Navigation</h3>
+    <p>Glenn navigated Friendship 7 using, among other instruments, a compass and an Earth-path indicator that tracked the capsule&rsquo;s position relative to the ground. When the automatic attitude control system began to malfunction during the second orbit, Glenn switched to manual fly-by-wire control, using the horizon and the stars as visual references to maintain proper capsule orientation. He navigated by instruments and by the physical cues of his environment &mdash; magnetic heading, star positions, horizon line. The Chinook salmon navigates using magnetite crystals in its nasal tissue &mdash; a biological compass that detects Earth&rsquo;s magnetic field intensity and inclination angle, providing positional information across the open ocean. The salmon also uses olfactory imprinting (the chemical memory of its natal stream), solar compass orientation, and ocean current patterns. Both Glenn and the salmon are navigators who use magnetic information as one channel in a multi-channel navigation system. Both supplement magnetic data with celestial and environmental cues. Both cross vast distances and arrive at precise coordinates. The instruments differ &mdash; silicon and steel in one case, magnetite and olfactory neurons in the other &mdash; but the navigational architecture is the same: multiple redundant channels, integrated in real time, producing a course solution that brings the navigator home.</p>
+
+    <hr>
+
+    <div class="sources">
+      <h2>Sources</h2>
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Quinn, Thomas P. &ldquo;The Behavior and Ecology of Pacific Salmon and Trout.&rdquo;</strong> University of Washington Press, Seattle, 2nd edition, 2018.</li>
+        <li><strong>Lichatowich, James A. &ldquo;Salmon Without Rivers: A History of the Pacific Salmon Crisis.&rdquo;</strong> Island Press, Washington, D.C., 1999.</li>
+        <li><strong>National Research Council. &ldquo;Upstream: Salmon and Society in the Pacific Northwest.&rdquo;</strong> National Academies Press, Washington, D.C., 1996.</li>
+      </ul>
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Taylor, Joseph E. III. &ldquo;Making Salmon: An Environmental History of the Northwest Fisheries Crisis.&rdquo;</strong> University of Washington Press, Seattle, 1999.</li>
+        <li><strong>Montgomery, David R. &ldquo;King of Fish: The Thousand-Year Run of Salmon.&rdquo;</strong> Westview Press, Boulder, Colorado, 2003.</li>
+        <li><strong>Cone, Joseph; and Ridlington, Sandy, eds. &ldquo;The Northwest Salmon Crisis: A Documentary History.&rdquo;</strong> Oregon State University Press, Corvallis, 1996.</li>
+        <li><strong>Wilkinson, Charles F. &ldquo;Messages from Frank&rsquo;s Landing: A Story of Salmon, Treaties, and the Indian Way.&rdquo;</strong> University of Washington Press, Seattle, 2000.</li>
+        <li><strong>Dittman, Andrew H.; and Quinn, Thomas P. &ldquo;Homing in Pacific Salmon: Mechanisms and Ecological Basis.&rdquo;</strong> Journal of Experimental Biology, Vol. 199, No. 1, 1996.</li>
+        <li><strong>Putman, Nathan F.; et al. &ldquo;An Inherited Magnetic Map Guides Ocean Navigation in Juvenile Pacific Salmon.&rdquo;</strong> Current Biology, Vol. 24, No. 4, 2014.</li>
+        <li><strong>Helfield, James M.; and Naiman, Robert J. &ldquo;Effects of Salmon-Derived Nitrogen on Riparian Forest Growth and Implications for Stream Productivity.&rdquo;</strong> Ecology, Vol. 82, No. 9, 2001.</li>
+        <li><strong>Cederholm, C. Jeff; et al. &ldquo;Pacific Salmon and Wildlife: Ecological Contexts, Relationships, and Implications for Management.&rdquo;</strong> Washington Department of Fish and Wildlife, Special Publication, 2000.</li>
+        <li><strong>Cohen, Fay G. &ldquo;Treaties on Trial: The Continuing Controversy over Northwest Indian Fishing Rights.&rdquo;</strong> University of Washington Press, Seattle, 1986.</li>
+      </ul>
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>Columbia River DART (Data Access in Real Time) &mdash; Adult Passage Counts, Columbia and Snake River Dams.</strong> Daily and annual counts of adult salmon and steelhead passing each dam on the Columbia and Snake rivers via fish ladders, maintained by the School of Aquatic and Fishery Sciences, University of Washington.</li>
+        <li><strong>StreamNet &mdash; Anadromous Fish Distribution and Abundance, Pacific Northwest.</strong> Regional fish data clearinghouse maintained by the Pacific States Marine Fisheries Commission, providing GIS-based distribution maps, spawning survey data, and historical run-size estimates for Chinook salmon across the Columbia Basin and coastal watersheds.</li>
+        <li><strong>NOAA Fisheries West Coast Region &mdash; ESA-Listed Salmon and Steelhead Population Data.</strong> Status reviews, population viability analyses, recovery plans, and critical habitat designations for ESA-listed Chinook salmon Evolutionarily Significant Units (ESUs) in Washington, Oregon, Idaho, and California.</li>
+        <li><strong>GBIF (Global Biodiversity Information Facility) &mdash; <em>Oncorhynchus tshawytscha</em> occurrence records.</strong> Global distribution data including verified occurrence records from Alaska to California and across the North Pacific, with geographic coordinates, date ranges, and collection metadata.</li>
+        <li><strong>Washington Department of Fish and Wildlife &mdash; Salmon and Steelhead Stock Inventory (SaSI).</strong> Stock-by-stock assessments of Washington State Chinook salmon populations, including run timing, spawning distribution, population trends, hatchery fraction, and conservation status for each identified stock.</li>
+        <li><strong>Bonneville Power Administration &mdash; Fish Passage Center Annual Reports.</strong> Juvenile and adult salmon passage data, smolt survival estimates, flow and spill data, and transportation (barging) records for the Federal Columbia River Power System dams.</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="research.html">&larr; Track 1a: Research</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">v1.21 Overview</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="mathematics.html">Track 3: Mathematics &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.21 Track 2: Organism Pairing &mdash; <em>Oncorhynchus tshawytscha</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

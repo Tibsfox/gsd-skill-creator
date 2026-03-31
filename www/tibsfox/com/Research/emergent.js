@@ -37,12 +37,12 @@ var PAL = {
 
 var mr = 0.02; // mutation rate
 
-// Species types with distinct behaviors
+// Species drawn from NASA mission organisms (PNW ecosystem)
 var SPECIES = [
-  { name: 'forager',   color: PAL.meadow,   size: 1.2, speed: 2.0, force: 0.05, foodAffinity: 1.0,  poisonFear: -1.0, social: 0.3,  trailLen: 12 },
-  { name: 'scout',     color: PAL.foxBright, size: 0.8, speed: 3.0, force: 0.08, foodAffinity: 0.5,  poisonFear: -0.5, social: 0.1,  trailLen: 20 },
-  { name: 'guardian',  color: PAL.river,     size: 1.8, speed: 1.5, force: 0.04, foodAffinity: 0.3,  poisonFear: -2.0, social: 0.8,  trailLen: 6  },
-  { name: 'mycelia',   color: PAL.gold,      size: 0.6, speed: 1.0, force: 0.03, foodAffinity: 0.8,  poisonFear: -0.3, social: 1.0,  trailLen: 30 },
+  { name: 'newt',       color: PAL.foxWarm,   size: 1.2, speed: 2.0, force: 0.05, foodAffinity: 1.0,  poisonFear: -1.0, social: 0.3,  trailLen: 12 }, // Taricha granulosa — rough-skinned newt (v1.17)
+  { name: 'octopus',    color: PAL.foxBright, size: 0.8, speed: 3.0, force: 0.08, foodAffinity: 0.5,  poisonFear: -0.5, social: 0.1,  trailLen: 20 }, // Enteroctopus dofleini — Giant Pacific octopus (v1.20)
+  { name: 'kelp',       color: PAL.forest,    size: 1.8, speed: 1.5, force: 0.04, foodAffinity: 0.3,  poisonFear: -2.0, social: 0.8,  trailLen: 6  }, // Nereocystis luetkeana — bull kelp (v1.18)
+  { name: 'armillaria', color: PAL.gold,      size: 0.6, speed: 1.0, force: 0.03, foodAffinity: 0.8,  poisonFear: -0.3, social: 1.0,  trailLen: 30 }, // Armillaria ostoyae — honey mushroom (v1.0)
 ];
 
 function Vehicle(x, y, dna, speciesIdx) {
@@ -219,14 +219,14 @@ function Vehicle(x, y, dna, speciesIdx) {
 
     // Species-specific shapes
     if (this.species === 0) {
-      // Forager: triangle (original)
+      // Newt: rounded triangle (amphibian body)
       beginShape();
       vertex(0, -this.r * 2.5);
       vertex(-this.r * 1.2, this.r * 2);
       vertex(this.r * 1.2, this.r * 2);
       endShape(CLOSE);
     } else if (this.species === 1) {
-      // Scout: dart (narrow, fast)
+      // Octopus: dart (fast, streamlined)
       beginShape();
       vertex(0, -this.r * 3);
       vertex(-this.r * 0.6, this.r * 1.5);
@@ -234,7 +234,7 @@ function Vehicle(x, y, dna, speciesIdx) {
       vertex(this.r * 0.6, this.r * 1.5);
       endShape(CLOSE);
     } else if (this.species === 2) {
-      // Guardian: diamond (wide, protective)
+      // Kelp: diamond (broad frond)
       beginShape();
       vertex(0, -this.r * 2);
       vertex(-this.r * 2, 0);
@@ -242,7 +242,7 @@ function Vehicle(x, y, dna, speciesIdx) {
       vertex(this.r * 2, 0);
       endShape(CLOSE);
     } else {
-      // Mycelia: circle (networked)
+      // Armillaria: circle (fungal network)
       ellipse(0, 0, this.r * 2.5, this.r * 2.5);
       // Network lines to nearby same-species
       if (this.dna[4] > 0.5) {
@@ -274,7 +274,7 @@ function setup() {
   cnv = createCanvas(380, 380);
   cnv.parent('sketch-holder');
 
-  // Initial population — mixed species
+  // Initial population — PNW ecosystem (newt, octopus, kelp, armillaria)
   for (var i = 0; i < 40; i++) {
     vehicles.push(new Vehicle(random(width), random(height)));
   }
@@ -352,7 +352,7 @@ function draw() {
     ellipse(poison[i].x, poison[i].y, 3.5, 3.5);
   }
 
-  // Draw mycelia network lines between nearby mycelia
+  // Draw armillaria network lines between nearby fungi
   stroke(PAL.gold[0], PAL.gold[1], PAL.gold[2], 15);
   strokeWeight(0.4);
   for (var i = 0; i < vehicles.length; i++) {

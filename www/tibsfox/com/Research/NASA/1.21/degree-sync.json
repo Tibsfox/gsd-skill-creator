@@ -1,0 +1,104 @@
+{
+  "degree": 21,
+  "version": "1.21",
+  "title": "Godspeed",
+  "sync_date": "2026-03-31",
+
+  "threads": {
+    "mission": {
+      "name": "Mercury-Atlas 6 / Friendship 7",
+      "date": "1962-02-20",
+      "program": "Mercury",
+      "type": "crewed-orbital",
+      "epoch": 1,
+      "crew": "John Herschel Glenn Jr.",
+      "significance": "First American to orbit Earth — three orbits, four hours fifty-five minutes, the payoff for everything the Mercury program had built. Enos the chimp (v1.18) qualified the capsule. Shepard (v1.19) proved humans could ride the rocket. Grissom (v1.20) proved it again. Glenn went around the world. The fireflies were ice crystals. The heat shield was fine. Segment 51 was a liar. And when he came home, America was no longer behind."
+    },
+    "artist": {
+      "name": "Polyrhythmics",
+      "degree": 21,
+      "genre": "Funk/Jazz/Afrobeat (instrumental)",
+      "era": "2008-present",
+      "born": "Formed in Seattle, Washington, 2008",
+      "died": null,
+      "seattle_connection": "Capitol Hill — formed in 2008 as a seven-piece instrumental ensemble blending deep funk, Afrobeat, psychedelic soul, and jazz improvisation. The band operates without a frontperson, without vocals, and without a single dominant voice — every instrument carries the melody at some point, every player leads at some point, and the groove is collective rather than hierarchical. Venues: The Crocodile, Neumos, The Triple Door, Showbox, Capitol Hill Block Party. Released on their own Flat Black Records. The most rhythmically complex band in the engine — polyrhythm as organizational principle, not decoration.",
+      "significance": "Seven musicians, no singer, no single leader. The music works because every part interlocks — remove any instrument and the groove collapses. This is the organizational model of Mission Control: eighteen tracking stations, dozens of flight controllers, one capsule, no single point of authority except the network itself. Polyrhythmics plays music the way NASA flew Glenn — as a distributed system where every node carries the mission."
+    },
+    "organism": {
+      "scientific_name": "Oncorhynchus tshawytscha",
+      "common_name": "Chinook Salmon (King Salmon)",
+      "kingdom": "Animalia",
+      "family": "Salmonidae",
+      "location": "Columbia River, Puget Sound, Fraser River, Bristol Bay — from California to Alaska, with the largest historical runs in the Pacific Northwest; anadromous, spawning in freshwater gravel beds and rearing in the open Pacific Ocean for 1-6 years before the return migration",
+      "significance": "The heroic return. A Chinook salmon leaves its natal stream as a fingerling, crosses the Pacific Ocean, grows from grams to kilograms, navigates by magnetic field and scent across thousands of kilometers of featureless water, and returns to the exact gravel bed where it was born — to spawn and die. Glenn left Earth, crossed the void, orbited three times, navigated through fire, and returned to the ocean. Both journeys are defined by the return. Both are one-way transformations — the salmon that enters the ocean is not the salmon that comes home, and the Glenn who launched from Pad 14 was not the Glenn who splashed down near Grand Turk Island."
+    },
+    "bird": {
+      "scientific_name": "Catharus ustulatus",
+      "common_name": "Swainson's Thrush",
+      "family": "Turdidae",
+      "pnw_status": "Breeding summer resident throughout Pacific Northwest forests — coniferous and mixed woodlands from sea level to subalpine, one of the most common forest songbirds in western Oregon, Washington, and British Columbia; long-distance migrant wintering in Central and South America",
+      "significance": "The spiraling song. Swainson's Thrush sings in ascending spirals — each phrase begins on a note and climbs upward through harmonic intervals, creating the impression of a voice spiraling toward the canopy. The song is the acoustic equivalent of an orbit — a path that goes up and around, returning to its starting register only to begin climbing again. Three phrases, three orbits. The thrush sings at dawn and dusk — the same liminal moments when Glenn saw his fireflies at the orbital terminator."
+    },
+    "dedication": {
+      "name": "Ansel Adams",
+      "born": "1902-02-20",
+      "died": "1984-04-22",
+      "birthplace": "San Francisco, California, United States",
+      "field": "Photography, environmentalism, artistic vision",
+      "connection": "Born February 20 — the exact calendar date of Glenn's flight, sixty years earlier. Adams showed Americans their own landscape from perspectives they had never imagined — Half Dome in moonlight, Hernandez under thunderclouds, the Tetons reflected in the Snake River. He did not invent the landscape; he invented the way we see it. Glenn did the same thing from two hundred kilometers up — he showed Americans their planet from a perspective no American had ever occupied. Adams worked in the zone system, controlling exposure across the full tonal range from deep shadow to bright highlight. Glenn worked in the reentry zone, surviving the full thermal range from the cold of space to the fire of atmospheric friction. Both found beauty in precision. Both changed how their country saw itself."
+    }
+  },
+
+  "resonance_matrix": {
+    "the_return": {
+      "theme": "Every thread is defined by the act of coming home — not the departure, not the journey, but the return through a barrier that transforms the traveler",
+      "mission": "Glenn's reentry was the defining moment of MA-6 — not the launch, not the orbits, but the return through the atmosphere. The heat shield scare made the return uncertain. The burning retropack debris made it visible. Glenn watched potential evidence of his own death streaming past the window and kept reporting. He came home through fire. The man who landed was not the man who launched — he was the most famous American alive, a national hero, a political figure who would never fly in space again (until 1998, at age 77). The return transformed him as completely as the reentry transformed his velocity into heat.",
+      "artist": "Polyrhythmics returns to the groove. Every improvised section, every solo departure, every rhythmic excursion away from the central pattern ends with a return to the collective groove — the one, the downbeat, the moment when all seven musicians lock back into the foundational pattern. The departures are interesting. The returns are satisfying. The band's genius is in the returns — the moments when individual expression dissolves back into collective rhythm. This is the musical equivalent of splashdown: the solo ends, the groove resumes, the mission is complete.",
+      "organism": "The Chinook salmon IS the return. Its entire life cycle exists to accomplish one act: the return to the natal stream. Years in the ocean, thousands of kilometers of migration, physiological transformation from saltwater to freshwater, exhaustion, predation, waterfalls, rapids, dams — all of it in service of returning to a specific gravel bed to spawn and die. The salmon's body even carries the return in its chemistry — marine-derived nutrients travel from the Pacific Ocean through the salmon's body into the forest soil, fertilizing the trees that shade the stream that nurtures the next generation. The return is not an event; it is a nutrient cycle.",
+      "bird": "Swainson's Thrush migrates from South America to the Pacific Northwest every spring — a journey of 5,000-8,000 kilometers, navigated by stars and magnetic field, ending at the same forest territory where the bird nested the previous year. The return is precise — not just to the same region, but to the same grove, often the same branch. And the song itself returns: each spiraling phrase ends and the next begins at the same base note, creating a pattern of departure and return, departure and return, the voice climbing toward the canopy and then resetting to climb again.",
+      "dedication": "Adams returned to the same landscapes throughout his career — Yosemite alone attracted him for over fifty years of repeat visits. He photographed Half Dome dozens of times, each time finding a new perspective on the same rock face. Moon and Half Dome was taken in 1960, two years before Glenn's flight, and it captures the same quality of familiar-made-strange that orbital photography achieves: a landscape you think you know, seen in a light that makes it new. Adams's returns to Yosemite were not repetitions — they were orbits, each pass revealing something the previous pass missed."
+    },
+    "distributed_intelligence": {
+      "theme": "No single entity controls the outcome — success depends on the coordinated function of a distributed network where every node is load-bearing",
+      "mission": "Glenn could not have orbited alone. The Mercury tracking network — 18 stations, hundreds of technicians, dozens of flight controllers, the IBM 7090 computer, Katherine Johnson's hand calculations — operated as a distributed intelligence system. No single station saw more than 10 minutes of any orbit. The flight directors at Cape Canaveral synthesized data from around the world, making decisions with incomplete information, trusting the network. The Segment 51 decision was made by this network, not by any individual — Chris Kraft made the final call, but he made it based on data streams from Bermuda, Australia, Hawaii, and the capsule itself. The decision was as distributed as the network that produced the data.",
+      "artist": "Seven musicians, no vocalist, no frontperson. Polyrhythmics is the musical embodiment of distributed intelligence — the groove emerges from the interaction of all seven parts, and no single part contains the groove by itself. The drummer plays a pattern that only makes sense against the bass pattern. The bass pattern only grooves against the guitar pattern. The horns interlock with the keyboards. Remove any instrument and the polyrhythm collapses into a simpler pattern. The complexity is in the network, not in any node.",
+      "organism": "The salmon run is a distributed phenomenon. No single fish knows the route — each fish navigates independently using its own magnetic sense and olfactory memory. But the run is a population-level event: thousands of fish converge on the same river at the same time, creating a pulse of biomass that feeds bears, eagles, trees, and the entire riparian ecosystem. The intelligence of the run is not in any individual salmon but in the aggregate — the species-level algorithm that ensures enough fish return to enough streams to sustain the population. It is a distributed system, and it is fragile: remove too many nodes (overfish, dam the rivers, destroy habitat) and the network fails.",
+      "bird": "Swainson's Thrush participates in the dawn chorus — the distributed concert of forest songbirds that begins approximately 30 minutes before sunrise. Each species has a characteristic song that occupies a specific frequency band and temporal pattern, minimizing interference with other species. The thrush's spiraling song occupies the 2-4 kHz range with ascending patterns that create frequency gaps for other species (warblers, sparrows, wrens) to fill. The dawn chorus is an emergent acoustic network — no bird coordinates the concert, but the result is a layered, efficient, and beautiful soundscape that communicates territory, fitness, and presence across the entire forest."
+    },
+    "the_narrow_passage": {
+      "theme": "Success requires passing through a precisely defined corridor — too wide and you miss it, too narrow and it destroys you",
+      "mission": "Glenn's reentry corridor was ±1-1.5° of flight path angle — a window of about 3° out of 360° of possible approach angles. Too shallow: skip-out, lost in orbit. Too steep: structural failure, thermal failure, death. The retrofire burn was calculated to place the capsule precisely in the center of this corridor. The math was done by Katherine Johnson and the IBM 7090. The execution was done by three retrorockets, each firing for exactly 10 seconds. The corridor was narrow. The aim was precise. Glenn came home.",
+      "artist": "The polyrhythmic groove exists in a narrow rhythmic corridor. If the bass is 2 milliseconds late, the pocket loosens. If the drummer rushes 5 BPM, the Afrobeat pattern collapses into generic funk. The genre itself occupies a narrow corridor between jazz (too harmonically complex), funk (too rhythmically simple), and Afrobeat (too culturally specific). Polyrhythmics threads this corridor with the same precision that Glenn threaded the reentry window — not by aiming for the edge, but by sitting in the center of the pocket and staying there.",
+      "organism": "The salmon's passage from ocean to river is a narrow corridor — literally. The river mouth is a geographic bottleneck, but the physiological corridor is narrower still. The salmon must undergo the osmotic reversal from saltwater to freshwater within hours of entering the river. If the transformation is too slow, the fish's cells swell with water (hypo-osmotic stress). If the hormonal cascade fails, the gill chloride cells cannot reverse their ion transport direction. And once in the river, the fish must navigate past dams (fish ladders are narrow corridors by design), through rapids (the navigable channel is narrow), and over waterfalls (the hydraulic jump is narrow). Every stage of the return is a passage through a narrow place.",
+      "dedication": "Adams's zone system divided the photographic tonal range into 10 zones from pure black (Zone 0) to pure white (Zone IX), with each zone representing one stop of exposure. The photographer's task was to place the subject in the correct zone — shadow detail in Zone III, middle gray in Zone V, highlight detail in Zone VII. The corridor between shadow detail and highlight detail was narrow: about 5-6 zones out of 10. Exceed it and you lose either shadow detail or highlights. Adams's genius was in previsualizing the final print and controlling the exposure to place every element in the correct zone. The zone system is a reentry corridor for light."
+    }
+  },
+
+  "theory_bridge": {
+    "music_to_math": {
+      "polyrhythm_to_orbital_mechanics": "Polyrhythm is the superposition of independent periodic cycles — a 7/4 pattern against a 4/4 pattern creates a composite cycle that repeats every 28 beats. Orbital mechanics is the superposition of independent periodic motions — the orbital period, Earth's rotation period, and the nodal regression period create a composite ground track that repeats every N orbits (where N depends on the commensurability of the periods). Glenn's 3-orbit mission was too short for the ground track to repeat, but a longer mission would show the same pattern of convergence and divergence that polyrhythmic music exhibits.",
+      "groove_to_kepler": "The groove's regularity — the repeating downbeat — is Kepler's equal-area law made audible. A planet sweeps equal areas in equal times; a groove sweeps equal rhythmic areas in equal measures. The swing or feel of the groove is the eccentricity of the orbit — a perfectly mechanical groove is a circular orbit, while a swung groove is an elliptical orbit where the timing speeds up and slows down within each measure."
+    },
+    "organism_to_math": {
+      "salmon_navigation_to_vector_fields": "Salmon navigate by following a gradient — the magnetic field provides a coarse-scale vector field covering the Pacific basin, while the olfactory scent trail provides a fine-scale gradient within the river system. Mathematically, the salmon is performing gradient ascent on a scalar field (scent concentration) while using a vector field (magnetic field) for coarse orientation. This is the same mathematical framework used for spacecraft navigation: the gravitational field provides coarse trajectory shaping, while precision tracking provides fine-scale course corrections.",
+      "smoltification_to_phase_transition": "Smoltification is a biological phase transition — the fish changes state from a freshwater organism to a saltwater organism. The transition is triggered by crossing a threshold (photoperiod exceeds a critical day length), involves a discontinuous change in physiological parameters (gill ion transport reverses polarity), and is accompanied by a change in external appearance (silvering). This is structurally identical to a thermodynamic phase transition: the order parameter (gill cell polarity) changes discontinuously at a critical point (photoperiod threshold), and the system's external properties (color, behavior) change simultaneously."
+    }
+  },
+
+  "creative_synthesis": {
+    "title": "Godspeed",
+    "narrative": "Seven musicians play without a leader. Eighteen tracking stations listen without seeing the whole orbit. A million salmon navigate without knowing the destination. A thrush sings in spirals without hearing the chorus it creates. One Marine orbits the Earth three times and sees fireflies that are ice crystals and a fireball that is salvation. One photographer sees a landscape sixty years before an astronaut sees the planet. The word is godspeed — god's speed, the speed at which the divine moves through the ordinary world. It is 7.84 kilometers per second. It is the speed of a salmon crossing the Pacific. It is the tempo of a groove that all seven musicians feel but none of them controls. It is the shutter speed that captures moonlight on granite. Everything returns. Everything comes home. The corridor is narrow but the aim is precise. Godspeed.",
+    "haiku": "fireflies of ice / the salmon knows the way home / three orbits, one word"
+  },
+
+  "cross_references": {
+    "s36_degree": "www/PNW/S36/degrees/21/",
+    "nasa_mission": "www/tibsfox/com/Research/NASA/1.21/",
+    "previous_degree": "www/tibsfox/com/Research/NASA/1.20/degree-sync.json",
+    "next_degree": "www/tibsfox/com/Research/NASA/1.22/degree-sync.json",
+    "artist_data": "www/PNW/S36/data/seattle-360.csv",
+    "organism_data": "www/tibsfox/com/Research/NASA/1.21/organism.md",
+    "bird_data": "www/PNW/S36/degrees/21/",
+    "dedication_note": "Ansel Adams (February 20, 1902 – April 22, 1984) — born on the same calendar date as Glenn's flight"
+  }
+}

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research: Mercury-Atlas 6 — Godspeed, John Glenn | v1.21 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040610; --bio-mid: #081020;
+    --orbital-blue: #1840A0; --orbital-dim: #0C2050;
+    --firefly-gold: #C89840; --firefly-dim: #644C20;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --earth-green: #2A6040; --earth-dim: #153020;
+    --atlantic-blue: #0A2848; --space: #040508;
+    --salmon-copper: #C07040; --salmon-dim: #603820;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--space);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(200,152,64,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(24,64,160,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(208,128,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(192,112,64,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(24,64,160,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(200,152,64,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px; margin: 0 auto; padding: 1rem 2rem;
+    font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  .breadcrumb a { color: var(--orbital-blue); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--orbital-dim) 55%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--firefly-gold);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(24,64,160,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(24,64,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(200,152,64,0.12); border: 1px solid var(--firefly-gold); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--firefly-gold); margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(200,152,64,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--firefly-gold); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+
+  h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--firefly-gold);
+    margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--salmon-copper);
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--firefly-gold); }
+  em { color: var(--reentry-amber); }
+  code { color: var(--orbital-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+
+  a { color: var(--salmon-copper); text-decoration: none; }
+  a:hover { color: #fff; }
+
+  blockquote {
+    border-left: 3px solid var(--orbital-blue); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(4,5,8,0.4); border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  .sources {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-top: 2rem;
+  }
+  .sources h2 { margin-top: 0; }
+  .sources h3 { font-size: 1rem; color: var(--salmon-copper); margin-top: 1.5rem; }
+  .sources li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--salmon-copper); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--firefly-gold); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--salmon-copper); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.21 Mercury-Atlas 6</a>
+  <span class="sep">/</span>
+  Track 1a: Deep Research
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.21</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 1a</span>
+    </div>
+    <h1>Deep Research: Godspeed, John Glenn</h1>
+    <p class="subtitle">Mercury-Atlas 6 / Friendship 7 &mdash; John Glenn, first American in orbit</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> February 20, 1962</span>
+      <span><span class="label">Program:</span> Mercury (NASA / McDonnell Aircraft / Space Task Group)</span>
+      <span><span class="label">Crew:</span> John Herschel Glenn Jr. (Colonel, USMC)</span>
+      <span><span class="label">Dedication:</span> Ansel Adams</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>The Marine from New Concord</h2>
+
+    <p>John Herschel Glenn Jr. was born on July 18, 1921, in Cambridge, Ohio &mdash; a small city in the rolling hills of Guernsey County, in the eastern part of the state where the Appalachian foothills begin their descent toward the Ohio River valley. His family moved to New Concord, Ohio, when he was two years old. New Concord was smaller than Cambridge &mdash; population approximately 1,200, a village built around Muskingum College, a Presbyterian institution whose campus occupied the center of town and whose values permeated every aspect of community life. His father, John Herschel Glenn Sr., was a plumber and steamfitter who also ran a plumbing business and later owned a Chevrolet dealership. His mother, Clara Sproat Glenn, was a homemaker. The family was Presbyterian, conservative, patriotic in the uncomplicated way that small-town Ohio was patriotic in the 1920s and 1930s &mdash; the flag was a statement of belief, not a political gesture. The boy grew up in a town where the college chapel bell rang on schedule, where neighbors knew each other by name, and where the values of hard work, religious faith, and civic duty were transmitted not through speeches but through daily conduct. New Concord was the kind of place that produces either a person who cannot wait to leave or a person who carries the town with him for the rest of his life. Glenn was the second kind. He carried New Concord to orbit.</p>
+
+    <p>Glenn attended New Concord High School, where he was an athlete, a student, and a member of the school band. He played trumpet. He was not a prodigy at anything, but he was good at everything &mdash; a pattern that would define his entire career. He enrolled at Muskingum College in 1939, studying engineering. He met Anna Margaret Castor &mdash; &ldquo;Annie&rdquo; &mdash; at New Concord High School. They had known each other since childhood. They married on April 6, 1943. The marriage lasted seventy-three years, until his death in 2016. Annie Glenn had a severe stutter that made public speaking agonizing for her. She endured it. She endured it through every press conference, every parade, every state dinner, every campaign. She eventually overcame the stutter through intensive therapy at the Communications Research Institute at Hollins College in Virginia, in her fifties. The fact that she endured decades of public life with a disability that made public life a torment, and that Glenn stood beside her through all of it without ever suggesting that her stutter was an inconvenience to his career, tells you something about the man that his flight record does not.</p>
+
+    <p>Glenn left Muskingum before graduating to enlist in the Naval Aviation Cadet Program in March 1942, three months after Pearl Harbor. He earned his wings in 1943 and was commissioned as a second lieutenant in the United States Marine Corps. He was assigned to Marine Fighter Squadron VMF-155, flying the Vought F4U Corsair in the Marshall Islands campaign in the Pacific Theater. The Corsair was a brute of a fighter &mdash; the most powerful single-engine fighter in the American inventory, with a 2,000-horsepower Pratt &amp; Whitney R-2800 Double Wasp radial engine and an inverted gull wing that gave it the look of a predatory bird in a dive. Glenn flew 59 combat missions in the Pacific, bombing and strafing Japanese positions on atolls where the runways were built on coral and the anti-aircraft fire came from positions that were invisible until they opened up. Fifty-nine missions. Each one a flight over defended territory in a single-engine aircraft where a single hit in the engine, the oil system, or the fuel lines meant a forced landing in the ocean or on a hostile island. Glenn completed all 59 without losing an aircraft. He earned two Distinguished Flying Crosses and ten Air Medals.</p>
+
+    <p>After the Pacific, Glenn transitioned to jets. In Korea, he flew 63 combat missions &mdash; first in the Grumman F9F Panther, a straight-wing jet fighter that was outclassed by the swept-wing MiG-15, and later, as an exchange pilot with the United States Air Force&rsquo;s 25th Fighter-Interceptor Squadron, in the North American F-86 Sabre. The exchange program sent Marine pilots to Air Force squadrons and vice versa, a cross-service arrangement that gave the best pilots from each branch the opportunity to fly the other service&rsquo;s aircraft in combat. Glenn was one of the Marines selected for the exchange. He went to the Yalu River, where the F-86 Sabres met the MiG-15s in the first sustained jet-versus-jet air combat in history. He shot down three MiGs in the last nine days of the war &mdash; July 1953, the final weeks before the armistice. Three kills in nine days. His wingman on some of those missions was Major John Glenn&rsquo;s friend from the exchange program &mdash; a young Air Force pilot and future baseball legend named Ted Williams, who was flying F9F Panthers with VMF-311. Williams and Glenn became friends over Korea. The combat relationship between the Marine colonel and the baseball player who had left the Red Sox to fly jets was one of the minor legends of the Korean War, and Glenn, characteristically, never traded on it.</p>
+
+    <p>After Korea, Glenn attended the Naval Test Pilot School at NAS Patuxent River, Maryland &mdash; &ldquo;Pax River,&rdquo; the Navy and Marine Corps equivalent of Edwards Air Force Base. He became a test pilot. He was good at it. Test piloting demands a specific combination of skills that combat does not: the ability to fly an aircraft to the precise edge of its performance envelope and describe what happens there in language that engineers can use. Combat demands courage and reflexes. Test piloting demands courage, reflexes, and articulation. Glenn had all three.</p>
+
+    <p>On July 16, 1957, Glenn made the first supersonic transcontinental flight across the United States, in a Vought F8U-1P Crusader &mdash; Project Bullet. He flew from Los Angeles to New York in 3 hours, 23 minutes, and 8.4 seconds, averaging supersonic speed across the continent, refueling three times from aerial tankers. The flight set a transcontinental speed record. More importantly, it made Glenn famous. He appeared on the television program &ldquo;Name That Tune&rdquo; (as a celebrity contestant, paired with a child named Eddie Hodges, and they won). He was on the cover of newspapers. He was articulate on camera. He was photogenic. He was the Marine test pilot who had broken a national record and could talk about it in complete sentences that civilians understood. This combination &mdash; the credential and the communicative ability &mdash; made Glenn the natural choice for a role that none of the seven Mercury astronauts fully understood they were auditioning for: the role of America&rsquo;s astronaut, the face of the space program, the man who could explain what he was doing and why it mattered in language that could be broadcast into living rooms.</p>
+
+    <p>Glenn was selected as one of the Mercury Seven on April 9, 1959. He was the oldest of the seven at thirty-seven. He was also the most public, the most visible, the most willing to engage with the press, and the most skilled at presenting the space program as a national endeavor rather than a personal adventure. The other astronauts noticed. Some of them &mdash; Shepard in particular &mdash; resented it. The dynamic within the astronaut office was competitive to the point of toxicity, and Glenn&rsquo;s public persona, his willingness to represent the group, his refusal to participate in the extracurricular activities (the drinking, the women, the fighter-pilot culture of after-hours indulgence) that several of the others pursued, created friction. Glenn was the Boy Scout. He was the one who lived his public image. The others found this either admirable or insufferable, depending on the day and the astronaut. When Glenn wrote a memo to the group suggesting that they should be more careful about their personal conduct because the press was watching, the reaction ranged from annoyance to fury. Shepard, who was the most competitive and the least tolerant of moral instruction from a peer, was incandescent. The memo became a source of lasting tension. Glenn had been right about the press. He had been wrong about the audience for his lecture. The Mercury Seven were test pilots, not Sunday school students, and they did not appreciate being treated as the latter by a man who was, in rank and selection, their equal and not their superior.</p>
+
+    <p>None of this mattered when the assignments came. Robert Gilruth, director of the Space Task Group, selected Shepard for MR-3 &mdash; the first American in space. Glenn was backup for MR-3 and was assigned to the first orbital mission, which would fly on an Atlas booster. The Atlas assignment was both a recognition of Glenn&rsquo;s ability and a sentence to wait. The Atlas was not ready. The Atlas kept failing. The Atlas was going to take time. Glenn watched Shepard fly. He watched Grissom fly. He waited. He trained. He waited more.</p>
+
+    <hr>
+
+    <h2>The Atlas Problem</h2>
+
+    <p>The Mercury-Redstone missions &mdash; Shepard&rsquo;s MR-3 and Grissom&rsquo;s MR-4 &mdash; were suborbital flights. The Redstone booster, a direct descendant of the V-2 rocket designed by Wernher von Braun&rsquo;s team at Peenemunde, was reliable but limited. It could loft a Mercury capsule to an altitude of approximately 187 kilometers and a speed of approximately 2,300 meters per second &mdash; enough for a ballistic arc that reached space and returned to the Atlantic Ocean 480 kilometers downrange, but not enough to achieve orbital velocity. Orbital velocity at Mercury&rsquo;s operational altitude required approximately 7,800 meters per second &mdash; more than three times the Redstone&rsquo;s capability. For orbit, NASA needed a fundamentally different booster. NASA needed the Atlas.</p>
+
+    <p>The Atlas was an intercontinental ballistic missile, designed and built by Convair (later General Dynamics Astronautics) in San Diego, California, for the United States Air Force as one leg of the nuclear triad. It was designed to carry a nuclear warhead from the continental United States to targets in the Soviet Union, a trajectory that required the rocket to achieve near-orbital velocities. The Atlas could reach the speeds necessary to put a Mercury capsule in orbit. It could also, with alarming regularity, explode.</p>
+
+    <p>The Atlas employed a structural concept called &ldquo;balloon tank&rdquo; or &ldquo;steel balloon&rdquo; construction. Unlike conventional rockets, which used rigid internal frameworks (stringers, longerons, ring frames) to bear the structural loads of flight, the Atlas used pressurized propellant tanks as its primary structure. The tank walls were made of stainless steel so thin &mdash; 0.01 inches, roughly the thickness of a dime &mdash; that the rocket could not support its own weight when unpressurized. An Atlas standing on the launch pad with its tanks depressurized would collapse like an aluminum can crushed underfoot. The structural integrity of the entire vehicle depended on internal pressurization. The tanks were pressurized with nitrogen during ground handling and with the propellants themselves &mdash; liquid oxygen and RP-1 kerosene &mdash; during fueling and flight. This design saved enormous weight. The Atlas was lighter than a conventionally structured rocket of equivalent performance. But it meant that any failure of pressurization &mdash; a leak, a valve malfunction, a structural puncture &mdash; was instantly catastrophic. The rocket would buckle and disintegrate.</p>
+
+    <p>The Atlas had another unusual feature: it used a &ldquo;stage-and-a-half&rdquo; configuration rather than true staging. At launch, the Atlas ignited three engines simultaneously &mdash; two booster engines and one sustainer engine, all fed from the same propellant tanks. The two booster engines, along with their thrust structure, were jettisoned approximately 130 seconds after launch (the &ldquo;booster engine cutoff&rdquo; or BECO event), shedding weight while the sustainer engine continued to burn using the same tanks. This was not staging in the conventional sense &mdash; there was no second-stage ignition, no separation of tank structures, no ignition of a separate upper-stage engine. The Atlas dropped its side engines and kept burning. The design was elegant in concept and terrifying in practice, because it meant that the entire mission depended on a single set of propellant tanks, a single pressurization system, and a continuous engine burn from launch to orbit insertion. There was no restart capability. There was no redundancy. If anything failed during the powered ascent, the mission was over.</p>
+
+    <p>The Atlas failure rate in its early test program was horrific. Between June 1957 and the end of 1959, the Atlas suffered a string of failures that included catastrophic explosions on the launch pad, structural breakups during ascent, engine failures, guidance failures, and range safety destructions. The Mercury-Atlas program began with MA-1 on July 29, 1960 &mdash; an unmanned test in which the Atlas broke apart 58 seconds after launch due to structural failure at the interface between the spacecraft adapter and the Atlas tank. The capsule was destroyed. MA-2, on February 21, 1961, was a successful suborbital test of the capsule&rsquo;s heat shield and escape system. MA-3, on April 25, 1961, failed when the Atlas guidance system malfunctioned 40 seconds after launch and the range safety officer sent the destruct command &mdash; but the capsule&rsquo;s escape tower fired successfully, pulling the capsule away from the disintegrating booster and delivering it to a parachute landing, proving that the astronaut escape system could save a crew member from an Atlas failure. MA-4, on September 13, 1961, achieved orbit with an unmanned capsule &mdash; the first successful Mercury-Atlas orbital flight. MA-5, on November 29, 1961, carried Enos the chimpanzee for two orbits &mdash; the mission documented in v1.18 of this series &mdash; qualifying the Atlas-spacecraft combination for human flight.</p>
+
+    <p>The qualification was statistical, not absolute. Two successful orbital flights &mdash; one unmanned, one with a chimpanzee &mdash; did not erase the Atlas&rsquo;s record of failures. The rocket had killed more test vehicles than any other booster in the American arsenal. Its steel-balloon construction meant that a failure mode that would be survivable on a conventionally built rocket &mdash; a small leak, a minor structural crack, a moment of under-pressurization &mdash; was lethal on the Atlas. Glenn was going to ride a pressurized balloon of dime-thick stainless steel to orbital velocity, trusting that the balloon would not fail during the four minutes and fifty-three seconds of powered flight required to reach orbit. The Atlas, for all its engineering elegance, was the most dangerous ride in the American space program. Glenn knew this. Every engineer at NASA knew this. The decision to fly Glenn on the Atlas was a calculated risk based on the available data, and the available data said that the Atlas worked most of the time but not all of the time, and &ldquo;most of the time&rdquo; is not a phrase that engineers use to describe a vehicle whose passenger cannot eject.</p>
+
+    <hr>
+
+    <h2>Ten Delays</h2>
+
+    <p>Glenn&rsquo;s orbital flight was originally targeted for late 1961. The mission was designated MA-6. Glenn had been training for it since his assignment, running simulations at the Mercury procedures trainer at Langley Research Center, flying in the centrifuge at the Naval Air Development Center in Johnsville, Pennsylvania, studying the Atlas systems, reviewing the flight plan, and spending time in the capsule mockups with the McDonnell Aircraft engineers who were building spacecraft number 13 &mdash; the capsule that would carry him to orbit.</p>
+
+    <p>The capsule&rsquo;s number was not lost on the superstitious. Spacecraft 13. Glenn was not superstitious. He was a Presbyterian from New Concord, Ohio, and his faith was in God and engineering, in that order, and neither of them recognized the number thirteen as significant. He named the capsule &ldquo;Friendship 7&rdquo; &mdash; the &ldquo;7&rdquo; for the seven Mercury astronauts, and &ldquo;Friendship&rdquo; for the values of New Concord, for the collaboration of the Mercury team, and for the message he wanted the flight to carry. Where Shepard had chosen &ldquo;Freedom&rdquo; (a Cold War declaration) and Grissom had chosen &ldquo;Liberty Bell&rdquo; (a piece of visual wit), Glenn chose a word that was neither competitive nor ironic. Friendship. He meant it. The name was Glenn at his most characteristic &mdash; earnest, undefended, willing to be sincere in a profession that rewarded cynicism.</p>
+
+    <p>The launch was scheduled, and then it was scrubbed. And then it was rescheduled, and scrubbed again. Between December 20, 1961, and February 20, 1962, Glenn&rsquo;s launch was postponed ten times. The reasons varied: weather (Cape Canaveral&rsquo;s winter weather patterns brought cloud cover, high winds, and rain systems that violated launch criteria), technical issues with the Atlas booster, technical issues with the spacecraft, range safety considerations, and the cascading scheduling impacts of each delay on recovery ship positioning, communications network readiness, and tracking station availability. A Mercury orbital mission required a worldwide network of tracking stations &mdash; ships, ground stations, and aircraft positioned along the orbital ground track to maintain communication with the spacecraft and relay telemetry to Mercury Control in Cape Canaveral. Repositioning this network after a scrub took time. Each delay pushed the next attempt further out.</p>
+
+    <p>Glenn endured the delays with the discipline of a Marine and the patience of a man who understood that weather and engineering do not respond to schedule pressure. He was awakened before dawn for each attempt. He ate the pre-flight meal. He suited up in the Mercury pressure suit &mdash; a modified Navy Mark IV full-pressure suit, custom-fitted, requiring approximately an hour to don properly with the assistance of suit technicians. He was driven to Launch Complex 14. He rode the gantry elevator to the capsule level. He was inserted into the capsule, a process that required him to be positioned on his custom-molded couch, connected to the life support system, wired to the biomedical sensors, and sealed inside the spacecraft. He lay on his back in the capsule, looking up at the instrument panel, while the countdown proceeded. And then the countdown stopped. Weather. Technical. Scrubbed. Glenn was extracted from the capsule, de-suited, returned to crew quarters, and told to try again tomorrow, or next week, or whenever the weather and the Atlas cooperated simultaneously.</p>
+
+    <p>Ten times. He did this ten times. The psychological burden of repeated preparation for a potentially fatal event, followed by anticlimax, is a specific kind of stress that has no analogue in combat flying. In combat, the mission flies or it does not, and if it does, the stress resolves in action. In a launch scrub, the stress builds to the point of launch and then dissipates without resolution, leaving the pilot with adrenaline and nowhere to put it. Glenn handled the scrubs the way he handled everything &mdash; publicly, calmly, without complaint, with statements to the press that acknowledged the delays, explained the reasons, and expressed confidence in the program. Privately, the strain was real. He was a forty-year-old Marine colonel who had been training for this flight for more than two years, who had watched two other astronauts fly before him, and who was now sitting in crew quarters at Cape Canaveral while the calendar turned from 1961 to 1962 and the Soviets&rsquo; lead in manned spaceflight grew larger with every scrubbed launch.</p>
+
+    <p>The Soviet pressure was immense. Yuri Gagarin had orbited the Earth on April 12, 1961 &mdash; a single orbit in Vostok 1. Gherman Titov had flown 17 orbits aboard Vostok 2 on August 6&ndash;7, 1961, spending more than 25 hours in space. America had launched two suborbital flights &mdash; Shepard and Grissom, fifteen minutes each. The Soviets had orbited. The Soviets had orbited for a full day. America had not orbited at all. The gap was not closing. Every delay widened it. The press kept count. The public grew impatient. Congress asked questions. President Kennedy, who had committed the nation to a Moon landing before the end of the decade, needed Glenn to fly. The entire political and psychological structure of the American space program rested on getting one man into orbit. That man was John Glenn. And John Glenn was sitting in crew quarters, waiting for the weather to clear and the Atlas to cooperate.</p>
+
+    <p>Scott Carpenter was Glenn&rsquo;s backup pilot. Carpenter trained alongside Glenn, ran the same simulations, wore the same suit, knew the same procedures. If Glenn could not fly &mdash; illness, injury, or a personal issue that disqualified him &mdash; Carpenter would take his place. The backup-pilot relationship in Mercury was a peculiar form of professional intimacy: two men who knew the same machine, the same flight plan, the same emergency procedures, one of whom would fly and one of whom would watch. Carpenter&rsquo;s role on launch day was to assist Glenn during capsule ingress, monitor the communications loop during the flight, and serve as the capsule communicator (CapCom) at the Cape. It was Carpenter who would say the words that became the most famous utterance of the Mercury program.</p>
+
+    <hr>
+
+    <h2>The Flight</h2>
+
+    <p>February 20, 1962. Cape Canaveral, Florida. Launch Complex 14.</p>
+
+    <p>Glenn was awakened at 2:20 AM Eastern Standard Time. He ate breakfast &mdash; the steak-and-eggs meal that had become the astronaut pre-flight ritual, a tradition rooted in the practical consideration that a high-protein, low-residue meal minimized gastrointestinal activity during a flight in which there was no bathroom. He showered. He was examined by the flight surgeon. He suited up. The Mercury pressure suit was applied in layers &mdash; the biomedical sensors first, then the undergarment, then the pressure suit itself, then the helmet, gloves, and boots. Each connection was checked. Each seal was verified. The process took time. Glenn was ready.</p>
+
+    <p>He was driven to Pad 14 in the transfer van. The Atlas LV-3B, serial number 109-D, stood on the pad under floodlights, venting liquid oxygen from its vent valve &mdash; the white cloud of boiling oxygen that gave the rocket the look of a living thing exhaling in the cold night air. The Atlas was 95 feet tall, 10 feet in diameter, and it was holding itself upright through the internal pressure of its propellant tanks. Glenn rode the elevator to the capsule level. He walked across the gantry platform. He looked at the rocket. He had been looking at this rocket for months. This time, it was going to fly.</p>
+
+    <p>Glenn was inserted into Friendship 7 at 6:03 AM. The insertion procedure was the same as every previous attempt &mdash; the same couch, the same connections, the same instrument panel six inches from his face, the same view upward through the window at the gantry structure and the Florida sky. But this time the countdown continued. There were holds &mdash; a broken bolt on the hatch required 40 minutes to replace, a fuel pump in the Atlas&rsquo;s propellant system malfunctioned and was corrected &mdash; but the holds resolved and the countdown continued. The weather cooperated. The Atlas cooperated. The worldwide tracking network reported ready. Mercury Control, under flight director Christopher Columbus Kraft Jr., reported go.</p>
+
+    <p>At T-zero, 9:47:39 AM Eastern Standard Time, the Atlas ignited. All three engines &mdash; the two boosters and the sustainer &mdash; lit simultaneously, producing 367,000 pounds of thrust. The hold-down clamps released. The Atlas rose from Pad 14. Glenn felt the vibration, felt the acceleration build, felt the g-forces push him into his couch. <em>&ldquo;Roger, the clock is operating. We&rsquo;re underway,&rdquo;</em> Glenn reported.</p>
+
+    <p>Scott Carpenter, at the CapCom console in Mercury Control, keyed his microphone. <em>&ldquo;Godspeed, John Glenn.&rdquo;</em></p>
+
+    <p>The words were unplanned. They were not in the flight plan, not in the communication protocol, not scripted or rehearsed. Carpenter said them because the moment required them &mdash; because his friend was riding a steel balloon into the sky and there was nothing else to say that was adequate to the occasion. &ldquo;Godspeed, John Glenn.&rdquo; Three words that became the most quoted utterance in the history of the American space program. Carpenter later said he had not thought about it in advance. It came out. The right words, at the right moment, from the right person. Carpenter was a man of faith and feeling, and when Glenn&rsquo;s Atlas lit, feeling spoke.</p>
+
+    <p>The Atlas climbed. The two booster engines burned for 130 seconds, then separated &mdash; the BECO event, when the booster package dropped away and the vehicle suddenly felt lighter, the acceleration increasing as the sustainer engine continued to push with the same thrust against a lighter vehicle. Glenn reported the staging. He reported the vibration, which was less than the simulations had predicted. He reported the noise, which was considerable but not disorienting. The Atlas was performing. The steel balloon held.</p>
+
+    <p>At five minutes and one second after launch, the sustainer engine cut off &mdash; the SECO event. Glenn was in orbit. Friendship 7 was traveling at approximately 7,844 meters per second &mdash; 28,234 kilometers per hour &mdash; at an altitude of approximately 161 kilometers, in an orbit that ranged from 161 kilometers at perigee to 265 kilometers at apogee, inclined 32.54 degrees to the equator. Glenn was the first American to orbit the Earth.</p>
+
+    <p>The sensation of orbital weightlessness was, Glenn reported, entirely natural. Objects floated. His checklist, attached to the instrument panel by a lanyard, drifted upward when he released it. Crumbs from a food tablet floated in the cabin. Glenn found the zero-gravity environment comfortable, even pleasant, confirming the reports from the Soviet cosmonauts and from Enos that weightlessness was not disorienting and did not impair a pilot&rsquo;s ability to function. He could see. He could reach the controls. He could read the instruments. The human body worked in zero gravity. The question that had haunted the medical community &mdash; whether a human being could function in sustained weightlessness, or whether the vestibular system, the cardiovascular system, the visual system would degrade in the absence of gravitational reference &mdash; was answered. The human body was fine.</p>
+
+    <p>Glenn looked out the window. What he saw, he described. And unlike Grissom, who had reported the optical performance of a window filter, Glenn described the Earth. He described the African coast &mdash; the desert sands of the Sahara visible through the window as a vast expanse of orange and brown, the line between desert and ocean sharp and unambiguous from orbital altitude. He described the cloud patterns &mdash; long parallel streaks over the Atlantic that he could trace for hundreds of miles, cumulus towers over the equatorial regions that cast shadows on the ocean surface visible from 260 kilometers up. He described the sunset, which came fast &mdash; in orbit, the sun sets in seconds as the spacecraft moves into the Earth&rsquo;s shadow at 7.8 kilometers per second. The colors compressed: the sun touched the horizon, the sky cycled through the visible spectrum &mdash; red, orange, yellow, and then the blue-black of orbital night &mdash; in a transition that lasted less than a minute. Glenn watched it with an observer&rsquo;s eye and a communicator&rsquo;s voice. He described what he saw so that the people listening on the ground could see it too. This was Glenn&rsquo;s gift: the ability to witness and to share. Grissom had been the better engineer. Glenn was the better witness.</p>
+
+    <p>And then, on the night side of the first orbit, Glenn saw the fireflies.</p>
+
+    <p>Small luminous particles surrounded the spacecraft, drifting past the window, glowing with a yellowish-green phosphorescence. Thousands of them. They moved slowly relative to the capsule, tumbling and sparkling in the earthlight, and they looked for all the world like fireflies &mdash; like a summer evening in Ohio, like the backyard of a house in New Concord. Glenn was enchanted. <em>&ldquo;I am in a big mass of some very small particles that are brilliantly lit up like they&rsquo;re luminescent,&rdquo;</em> he reported to the tracking station at Muchea, Australia. <em>&ldquo;I never saw anything like it. They round a little; they&rsquo;re coming by the capsule, and they look like little stars. A whole shower of them coming by.&rdquo;</em> The Muchea station relayed the report to Mercury Control. Houston was confused. Were the particles coming from the spacecraft? Were they something in the atmosphere? Were they a symptom of a system malfunction?</p>
+
+    <p>The fireflies appeared again on the second and third orbits, always on the dark side, always at orbital dawn &mdash; the moment when the spacecraft crossed from Earth&rsquo;s shadow into sunlight. The pattern was the clue. The particles were ice crystals &mdash; moisture from the spacecraft&rsquo;s cooling system that had sublimated and condensed on the exterior of the capsule during the cold of orbital night, then detached and sublimated again when the spacecraft entered sunlight and the exterior temperature rose. They were tiny particles of frozen water, tumbling in the spacecraft&rsquo;s wake, catching the first rays of orbital sunrise and glowing with reflected light. They were not fireflies. They were not mysterious. They were condensation. But they were beautiful, and Glenn&rsquo;s description of them &mdash; his willingness to be enchanted, his willingness to report wonder alongside engineering data &mdash; became one of the iconic moments of the Mercury program. The astronaut who saw fireflies in orbit.</p>
+
+    <p>During the second orbit, Glenn noticed that the automatic attitude control system &mdash; the ASCS, which maintained the capsule&rsquo;s orientation in space using horizon scanners and gyroscopes to drive the hydrogen peroxide thrusters &mdash; was malfunctioning. The capsule was drifting in yaw, rotating slowly around its vertical axis when it should have been holding a stable attitude. The yaw thruster was firing intermittently, using hydrogen peroxide propellant to correct a drift that the thruster&rsquo;s own malfunctioning was causing. Glenn switched to manual control &mdash; the fly-by-wire system that allowed him to command the thrusters directly through the hand controller. He corrected the yaw drift and held the capsule&rsquo;s attitude manually. The transition from automatic to manual control was seamless. Glenn was a pilot. The capsule was flyable. He flew it. He would fly the capsule manually, or in manual-augmented mode (manual commands supplemented by automatic damping), for the remainder of the mission, managing the attitude control to conserve the limited supply of hydrogen peroxide propellant in the manual fuel tanks. The ASCS malfunction was a systems failure that, on an unmanned flight, would have been a mission-limiting problem. On a crewed flight, it was an annoyance that the pilot corrected. This was the argument for putting a human being in the spacecraft. The machine failed. The human compensated. The mission continued.</p>
+
+    <hr>
+
+    <h2>Segment 51</h2>
+
+    <p>During the second orbit, a telemetry signal arrived at Mercury Control that changed the nature of the flight. The signal came from the spacecraft&rsquo;s instrumentation system, which transmitted dozens of data channels to the ground stations along the orbital track. One of those channels &mdash; designated Segment 51 &mdash; monitored the status of the heat shield landing bag deploy mechanism. The landing bag was a rubberized cushion stored between the heat shield and the capsule&rsquo;s pressure vessel. During a normal landing, after reentry, the landing bag would deploy &mdash; the heat shield would drop down approximately four inches on straps, and the bag would inflate between the heat shield and the capsule bottom, providing an air cushion to absorb the impact of ocean splashdown. The Segment 51 telemetry channel reported whether the landing bag was stowed or deployed.</p>
+
+    <p>Segment 51 was reading &ldquo;deployed.&rdquo;</p>
+
+    <p>If the landing bag had actually deployed, it meant the heat shield had separated from its locked position against the capsule&rsquo;s pressure vessel and dropped down on its straps. The heat shield was still attached &mdash; the straps held it &mdash; but it was no longer seated firmly against the capsule. During reentry, the heat shield had to absorb temperatures exceeding 3,000 degrees Fahrenheit as the capsule decelerated from orbital velocity in the upper atmosphere. The heat shield was made of a fiberglass-and-resin ablative material that absorbed heat by charring and vaporizing &mdash; a controlled destruction that carried heat away from the capsule. If the heat shield was loose &mdash; if it was hanging on straps four inches below its designed position &mdash; the aerodynamic forces of reentry could tear it away entirely. If the heat shield came off, the capsule&rsquo;s pressure vessel would be exposed to the full thermal load of reentry. The pressure vessel was made of titanium and beryllium shingles. It would melt. Glenn would burn.</p>
+
+    <p>The Segment 51 reading arrived at Mercury Control and was immediately flagged by the flight controllers. Chris Kraft, the flight director, convened a discussion among the flight control team. The question was binary: was the heat shield loose, or was the telemetry reading false? If the heat shield was actually loose, Glenn was in mortal danger and there was no way to fix the problem in orbit. There was no spacewalk capability. There was no way to inspect the heat shield from inside the capsule. There was no way to reseat the heat shield. If it was loose, the only variable under the controllers&rsquo; influence was the reentry procedure.</p>
+
+    <p>The retropack. Under normal procedures, after the three retrorockets fired to decelerate the capsule for reentry, the retropack &mdash; the assembly that held the three retrograde rockets against the heat shield with three metal straps &mdash; was jettisoned. The retropack had done its job. Its weight was now dead weight, and its straps, draped across the heat shield, could potentially entangle the capsule during the violent aerodynamic heating of reentry. Standard procedure was to jettison the retropack and let it burn up separately. But if the heat shield was loose, the retropack straps might be the only thing holding the heat shield in place. If you jettisoned the retropack, you removed the straps, and if the straps were the only restraint on a loose heat shield, you had just killed the pilot.</p>
+
+    <p>Kraft and the controllers made a decision: Glenn would retain the retropack through reentry. He would not jettison it. The retropack would burn up during reentry &mdash; it was not designed to survive those temperatures &mdash; but the straps, for the few critical seconds of peak heating, might hold the heat shield in position long enough for the deceleration forces to press the heat shield against the capsule aerodynamically, after which the heat shield&rsquo;s own weight and the air pressure beneath it would keep it in place.</p>
+
+    <p>The decision was made. Now came the harder question: what to tell Glenn.</p>
+
+    <p>Kraft and the controllers decided not to tell Glenn the full picture. They told Glenn to retain the retropack through reentry. They did not tell Glenn why. The communication was deliberate and incomplete: <em>&ldquo;We are not sure whether or not your landing bag has deployed. We feel it is possible to reenter with the retropackage on. We see no difficulty at this time in that type of reentry.&rdquo;</em> The phrasing was precise in its imprecision &mdash; &ldquo;we are not sure,&rdquo; &ldquo;we feel it is possible,&rdquo; &ldquo;we see no difficulty at this time.&rdquo; The controllers did not say: &ldquo;We think your heat shield might be loose and we are keeping the retropack on to hold it in place because if we jettison the retropack and the heat shield is loose you will burn to death during reentry.&rdquo; They did not say this because saying it would not help Glenn. There was nothing Glenn could do about a loose heat shield. Telling him the full situation would add psychological stress to a pilot who was about to fly a manual reentry with a malfunctioning attitude control system and a retropack that was not supposed to be there. Kraft made the call. It was a command decision. It was, depending on your perspective, either a reasonable act of information management or a failure to give the pilot the data he needed to make his own assessment of the risk. The debate has continued for sixty years.</p>
+
+    <p>Glenn knew something was wrong. He was a test pilot. Test pilots are trained to recognize when ground control is managing information &mdash; when the pauses are too long, when the questions are too careful, when the tone shifts from routine to deliberate. Glenn heard the instruction to retain the retropack and understood immediately that it was anomalous. The retropack was always jettisoned after retrofire. Retaining it was a departure from every simulation, every procedure, every flight plan he had studied. Glenn did not know why the retropack was being retained, but he knew that the reason was not trivial. He asked questions. The controllers&rsquo; answers were measured, noncommittal, and uninformative. Glenn, the Marine, complied with the instruction. He was trained to follow procedures and to trust his ground team. He retained the retropack. But he was not unaware that something was being managed, and the thing being managed might be his survival.</p>
+
+    <hr>
+
+    <h2>The Fireball</h2>
+
+    <p>The retrograde rockets fired at the end of the third orbit, decelerating Friendship 7 by approximately 100 meters per second &mdash; enough delta-v to lower the orbit&rsquo;s perigee into the atmosphere, beginning the reentry sequence. Glenn held the capsule&rsquo;s attitude manually during retrofire, pointing the blunt heat-shield end forward into the direction of travel. The retrorockets fired in sequence, one at a time, five seconds apart. Glenn reported each firing. The deceleration was smooth.</p>
+
+    <p>Then came reentry. The capsule entered the upper atmosphere at approximately 7.8 kilometers per second. The air ahead of the capsule compressed, heated, and began to ionize, creating a sheath of plasma around the spacecraft. The plasma blocked radio communications &mdash; the &ldquo;communications blackout&rdquo; that every Mercury, Gemini, and Apollo astronaut experienced during reentry. Glenn was alone. No voice from the ground. No telemetry out. Just the capsule, the pilot, and the atmosphere.</p>
+
+    <p>And then the retropack began to burn.</p>
+
+    <p>Glenn saw it through the window. Chunks of burning material streaming past the glass, trailing fire, tumbling away behind the capsule. Large pieces. Bright orange. The retropack was disintegrating in the reentry heating, as expected &mdash; but Glenn did not know that the retropack was what he was seeing. He did not know, with certainty, that the burning fragments were retropack debris and not heat shield debris. If the heat shield was breaking up, those burning pieces were the ablative material that was supposed to be protecting him from temperatures that would melt the capsule wall. If the heat shield was breaking up, the next thing to burn would be the capsule. The next thing after that would be Glenn.</p>
+
+    <p><em>&ldquo;That&rsquo;s a real fireball outside,&rdquo;</em> Glenn reported. The words were calm. The voice was controlled. The transmission was matter-of-fact. Glenn was watching what might have been evidence of his own death &mdash; burning debris streaming past his window during a communications blackout, with no way to confirm whether the heat shield was intact &mdash; and he was reporting it the way he would report an instrument reading. Pitch is nominal. Roll is nominal. There&rsquo;s a real fireball outside.</p>
+
+    <p>The communications blackout lasted approximately four minutes and twenty seconds. During those four minutes and twenty seconds, nobody at Mercury Control knew if Glenn was alive. The telemetry was gone. The voice was gone. The tracking data showed a decelerating object on the correct trajectory, but whether that object was a capsule with a living pilot or a capsule-shaped collection of disintegrating debris was unknowable from the ground. Kraft and the controllers waited. The room was silent. The trajectory plotters continued their work, tracing the predicted path of the capsule on the wall-sized displays. The consoles showed no data. The headsets carried no voice. The controllers stared at their screens and waited for the blackout to end.</p>
+
+    <p>The blackout ended. Glenn&rsquo;s voice came through, clear and controlled, reporting his status. The capsule was intact. The heat shield had held. The burning debris had been retropack fragments, exactly as the controllers had hoped. Segment 51 had been a false reading &mdash; a faulty switch in the landing bag deploy indicator circuit, an electrical anomaly that had reported a condition that did not exist. The heat shield had never been loose. Glenn had never been in danger from the heat shield. But neither Glenn nor the controllers had known that during the reentry. They had made their decisions &mdash; Kraft&rsquo;s decision to retain the retropack, Glenn&rsquo;s decision to comply without full information &mdash; in the presence of uncertainty that could not be resolved until the event was over. The engineering term for this is &ldquo;decision-making under uncertainty.&rdquo; The human term is courage.</p>
+
+    <hr>
+
+    <h2>Splashdown and Aftermath</h2>
+
+    <p>Friendship 7 splashed down in the Atlantic Ocean at 2:43:02 PM Eastern Standard Time, approximately 1,300 kilometers southeast of Cape Canaveral, near Grand Turk Island in the Turks and Caicos. The flight had lasted 4 hours, 55 minutes, and 23 seconds. Glenn had completed three orbits. The destroyer USS Noa spotted the capsule during its parachute descent and was alongside within seventeen minutes. Glenn, overheated and eager to exit the capsule, attempted to blow the explosive hatch from inside but found the cabin too hot to wait for the deck crew&rsquo;s normal recovery procedure. He hit the plunger &mdash; the same type of plunger that had been the subject of such controversy on Grissom&rsquo;s flight &mdash; and the hatch blew cleanly. Glenn crawled out onto the deck of the Noa. He was drenched in sweat. His suit was soaked. He had lost over five pounds of body weight in perspiration during the reentry and post-landing wait. But he was alive, he was lucid, and he was standing on the deck of a United States Navy destroyer, the first American to have orbited the Earth.</p>
+
+    <p>Glenn was transferred by helicopter to the carrier USS Randolph, where he underwent a medical examination and a preliminary debriefing. He was then flown to Grand Turk Island for a more extensive debriefing with the Mercury engineers and flight surgeons. The debriefing was thorough &mdash; Glenn&rsquo;s engineering training made him an exceptional debrief subject, capable of describing system behaviors, instrument readings, and subjective sensations with the precision that the engineers needed. His account of the fireflies, the ASCS malfunction, the manual attitude control, the retropack retention, and the fireball during reentry became part of the official mission record and part of the history of American spaceflight.</p>
+
+    <p>Then the public celebration began.</p>
+
+    <p>Glenn was flown to Washington, D.C., where President John F. Kennedy awarded him the NASA Distinguished Service Medal. He addressed a Joint Session of Congress. He received a ticker-tape parade in New York City &mdash; the largest such parade since the one for General Douglas MacArthur in 1951, with an estimated four million people lining the streets of lower Manhattan to cheer the astronaut who had orbited the Earth. Glenn rode through the confetti and the noise with Annie beside him, waving, smiling, the Marine from New Concord who had become the most famous American alive.</p>
+
+    <p>The fame was immediate, total, and permanent. Glenn was not merely a celebrity; he was a symbol. He was the answer to Gagarin. He was the proof that America could match the Soviets. He was the reassurance that American technology, American courage, American values were competitive with whatever the Soviet Union could produce. He was John Glenn, and his name became shorthand for the space program itself. For millions of Americans who could not name the other Mercury astronauts, who could not explain what an orbit was, who could not find Cape Canaveral on a map, John Glenn was the man who went around the Earth. He was the one they knew.</p>
+
+    <p>Kennedy recognized Glenn&rsquo;s symbolic value and acted on it with the ruthless pragmatism that characterized his administration. Kennedy personally intervened to prevent Glenn from flying again. The President told NASA administrator James Webb that Glenn was too valuable to risk on another flight. The political calculation was straightforward: if Glenn flew again and was killed, the political damage to the space program and to the Kennedy administration would be catastrophic. A dead Glenn was a disaster. A living Glenn was an asset &mdash; a permanent, reusable asset who could appear at events, give speeches, represent the program, and embody the national aspiration. Kennedy grounded Glenn not because Glenn was unfit to fly but because Glenn was too useful alive to risk dead. Glenn, who wanted to fly again, who had trained to fly again, who was a pilot and not a symbol, accepted the decision with the same discipline with which he had accepted the ten launch scrubs. He did not protest publicly. He was a Marine. He followed orders. But being grounded by presidential decree, being told that his career as a pilot was over because his career as an icon was more valuable, was a wound that Glenn carried for the rest of his life.</p>
+
+    <p>Glenn resigned from NASA in January 1964 and entered private business, briefly operating the Royal Crown Cola bottling franchise in the Columbus, Ohio, area. He ran for the United States Senate from Ohio in 1964 but withdrew after suffering a concussion from a fall in his bathroom. He ran again in 1970 and lost in the Democratic primary. He ran a third time in 1974 and won, defeating the Republican incumbent by a substantial margin. He served four consecutive terms in the Senate &mdash; twenty-four years, from 1974 to 1999, making him one of the longest-serving senators in Ohio history. He ran for the Democratic presidential nomination in 1984, winning several early primaries before losing to Walter Mondale. His Senate career was substantive but rarely spectacular &mdash; he served on the Foreign Relations Committee and the Armed Services Committee, became an expert on nuclear proliferation, and was generally regarded as a competent, hardworking, insufficiently charismatic senator who had been a far more compelling astronaut than politician. The fame from his flight never fully transferred to his political career. People voted for him because he was John Glenn. They did not always know what he stood for beyond having orbited the Earth.</p>
+
+    <p>In 1998, at the age of seventy-seven, Glenn flew in space again. He was a payload specialist aboard STS-95, a nine-day Space Shuttle mission aboard Discovery, launched on October 29, 1998. The mission included a series of experiments on the aging process in microgravity &mdash; NASA&rsquo;s scientific justification for flying a seventy-seven-year-old senator, which was also the political justification, and which was also, transparently, the country saying goodbye to a generation. Glenn floated in the Shuttle&rsquo;s middeck, thirty-six years after floating in Friendship 7, and the symbolism was inescapable: the man who had opened the orbital age was there for its maturity. He was the oldest person ever to fly in space. He remains so. He performed his duties, completed his experiments, and returned to Earth without incident. The flight was a farewell. Everyone knew it. Glenn knew it. He went anyway.</p>
+
+    <p>John Herschel Glenn Jr. died on December 8, 2016, at the Ohio State University Wexner Medical Center in Columbus, Ohio. He was ninety-five years old. Annie Glenn died on May 19, 2020, at the age of one hundred, of complications from COVID-19. They are buried together at Arlington National Cemetery, Section 35, near the Memorial Amphitheater. The Marine from New Concord, who carried his town to orbit and his country&rsquo;s hopes into the sky on a column of fire from a steel balloon, lies in the national cemetery where America buries its honored dead. The headstone identifies him as a Colonel, United States Marine Corps. It does not need to say anything else.</p>
+
+    <hr>
+
+    <h2>Legacy and Sources</h2>
+
+    <p>Glenn&rsquo;s flight changed the space race. Before MA-6, the United States was behind the Soviet Union in every measure of human spaceflight &mdash; the first human in space, the first orbit, the first extended-duration flight. After MA-6, the United States was still behind in duration &mdash; Titov&rsquo;s 17 orbits to Glenn&rsquo;s 3 &mdash; but the gap had narrowed from infinite to finite. America could orbit. America could compete. The psychological shift was enormous. The public, which had watched the Soviet firsts with a mixture of admiration and anxiety, could now watch the Mercury program with something that felt like momentum.</p>
+
+    <p>The Segment 51 incident became a case study in mission-control decision-making. Kraft&rsquo;s decision to retain the retropack was validated by the outcome &mdash; the heat shield was fine, the retropack straps were unnecessary &mdash; but the decision was not made with the benefit of that outcome. It was made with incomplete data, under time pressure, with a human life dependent on the result. The decision was correct, but it was correct for the wrong reason: Kraft retained the retropack because the heat shield might be loose, and the heat shield was not loose. If the heat shield had actually been loose, would the retropack straps have held it during reentry? The engineering analysis, conducted after the flight, suggested that they might have, but the confidence was not high. The straps were not designed for that load case. The retropack retention was a reasonable engineering hedge against an uncertain failure mode, and it worked because the failure mode did not exist. The lesson &mdash; that you cannot wait for certainty before making critical decisions, and that a reasonable decision made with incomplete information is better than no decision &mdash; became foundational to the culture of NASA flight operations.</p>
+
+    <p>The fireflies became one of the iconic images of Mercury, precisely because they were not important. They were ice crystals. They were condensation. They had no engineering significance. But Glenn&rsquo;s description of them &mdash; his willingness to report wonder, his capacity to be moved by beauty while simultaneously managing a malfunctioning attitude control system and preparing for a reentry that might kill him &mdash; captured something about the human experience of spaceflight that telemetry data could not. The astronaut saw fireflies. He told us about them. That was enough.</p>
+
+    <p>And Enos &mdash; the chimpanzee who had flown MA-5 sixteen weeks earlier, who had qualified the Atlas-Mercury combination for human flight, who had endured two orbits with a malfunctioning reward system that shocked him for correct responses, who had performed flawlessly and returned alive and angry &mdash; Enos is barely remembered. The chimp did the work. Glenn got the parade. This is how it goes. The qualifying flight is never as famous as the flight it qualifies. The test pilot is never as famous as the pilot who flies the production aircraft. Enos made Glenn&rsquo;s flight possible. Glenn made Enos&rsquo;s flight forgettable. The chimpanzee died of shigellosis on November 4, 1962, less than a year after his flight. He was approximately five years old.</p>
+
+    <hr>
+
+    <h2>The Ansel Adams Resonance</h2>
+
+    <p>Ansel Easton Adams was born on February 20, 1902, in San Francisco, California &mdash; the same calendar date, sixty years earlier, that John Glenn launched from Cape Canaveral aboard Friendship 7. Adams died on April 22, 1984, in Monterey, California, at the age of eighty-two. He died of cardiovascular disease, in his home, surrounded by the California landscape he had spent his life photographing.</p>
+
+    <p>The resonance between Glenn and Adams is not biographical in the conventional sense. Their careers occupied different domains entirely &mdash; one a Marine aviator and astronaut, the other a landscape photographer and environmental advocate. The resonance is optical. It concerns the relationship between a human observer and the thing observed, and the capacity to make other people see what the observer sees.</p>
+
+    <p>Adams is known for his photographs of the American West &mdash; Yosemite Valley, the Sierra Nevada, the desert Southwest, the national parks. His images are characterized by an extraordinary tonal range, from the deepest blacks to the purest whites, achieved through his mastery of exposure and development techniques that he codified as the &ldquo;Zone System&rdquo; &mdash; a method of visualization and control that allowed the photographer to previsualize the final print at the moment of exposure, to see the finished image before pressing the shutter. The Zone System was engineering applied to art. It was a technical framework for producing emotional results. Adams was a craftsman who happened to produce beauty, in the same way that Glenn was a pilot who happened to produce wonder.</p>
+
+    <p>Adams stood at Zabriskie Point in Death Valley, at Clearing Winter Storm in Yosemite, at Moonrise over Hernandez, New Mexico, and he saw what every tourist standing in the same location could see &mdash; but he saw it with a precision and an intensity that allowed him to capture it on film in a way that transmitted the experience to people who had never been there. He was not inventing beauty. He was witnessing it and communicating it. The craft was in the communication. The art was in making the viewer see what the photographer saw.</p>
+
+    <p>Glenn, orbiting the Earth at 28,000 kilometers per hour, looked out the window of Friendship 7 and saw the African coast, the cloud patterns over the Atlantic, the compressed sunset at orbital dawn, the fireflies. He saw what anyone in that position would have seen. But he described it &mdash; in real time, over a radio link, to a worldwide audience &mdash; in a way that transmitted the experience. His descriptions were not poetry. They were pilot reports. But they carried the same function as Adams&rsquo;s photographs: they made the audience see what the observer saw. Adams used silver halide on film. Glenn used words over a radio. Both were witnesses. Both were communicators. Both understood that the thing seen is not fully real until it is shared.</p>
+
+    <p>Adams&rsquo;s most famous photograph, &ldquo;Moonrise, Hernandez, New Mexico&rdquo; (1941), captures the moon rising over a small village in the Rio Grande valley, with a cemetery in the foreground and the Sangre de Cristo Mountains in the background, and the entire scene lit by the last light of a setting sun that produces a luminance on the clouds and the crosses in the cemetery that is simultaneously natural and impossible. Adams nearly missed the shot &mdash; he was driving, saw the light, pulled over, could not find his exposure meter, calculated the exposure from the known luminance of the moon (which he knew from memory), and made a single exposure before the light changed. The technical precision &mdash; calculating exposure from the lunar luminance &mdash; was the act of an engineer. The result &mdash; an image that has moved millions of people across eight decades &mdash; was the act of an artist. The distinction between engineer and artist, in Adams&rsquo;s work, does not exist. They are the same act.</p>
+
+    <p>Glenn, watching the fireflies at orbital dawn, made his own moonrise. He saw the light. He described it. The description was technically precise &mdash; &ldquo;they&rsquo;re luminescent,&rdquo; &ldquo;they round a little,&rdquo; &ldquo;a whole shower of them coming by&rdquo; &mdash; and it was also, inadvertently, beautiful. The engineer and the witness were the same person, performing the same act. Adams would have understood. The man with the camera and the man with the radio were doing the same work: making the invisible visible, sharing the seen with the unseen, bridging the gap between the person who is there and the persons who are not. Adams did it with light on silver. Glenn did it with voice on radio waves. Both were born on February 20. The coincidence is meaningless. The resonance is not.</p>
+
+    <hr>
+
+    <div class="sources">
+      <h2>Sources</h2>
+
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Swenson, Loyd S. Jr.; Grimwood, James M.; and Alexander, Charles C. &ldquo;This New Ocean: A History of Project Mercury.&rdquo; NASA Special Publication SP-4201, NASA History Office, 1966.</strong> The official NASA history of Project Mercury, covering the MA-6 mission in extensive detail, including Glenn&rsquo;s selection, the Atlas qualification program, the ten launch delays, the flight itself, the Segment 51 heat shield scare, the retropack retention decision, splashdown, and the national reaction.</li>
+        <li><strong>&ldquo;Results of the First United States Manned Orbital Space Flight, February 20, 1962.&rdquo; NASA Manned Spacecraft Center, 1962.</strong> The official MA-6 post-flight report, documenting Atlas LV-3B performance, spacecraft systems, the ASCS malfunction, the Segment 51 telemetry anomaly, retropack retention analysis, pilot performance, and medical findings. The primary engineering document for the flight.</li>
+        <li><strong>Grimwood, James M. &ldquo;Project Mercury: A Chronology.&rdquo; NASA Special Publication SP-4001, NASA History Office, 1963.</strong> Day-by-day documentation of MA-6 mission events, including the ten launch postponements, the Atlas qualification test series, capsule spacecraft #13 preparation, and the worldwide tracking network deployment.</li>
+      </ul>
+
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Glenn, John; and Taylor, Nick. &ldquo;John Glenn: A Memoir.&rdquo; Bantam Books, New York, 1999.</strong> Glenn&rsquo;s own account of his life, from New Concord through the Marine Corps, Korea, Project Bullet, Mercury, the Senate, and STS-95, including his description of the fireflies, the Segment 51 crisis, and his relationship with the other Mercury astronauts. The definitive first-person source.</li>
+        <li><strong>Wolfe, Tom. &ldquo;The Right Stuff.&rdquo; Farrar, Straus and Giroux, New York, 1979.</strong> Literary treatment of the Mercury program including Glenn&rsquo;s orbital flight, the astronaut-office dynamics, Glenn&rsquo;s public persona, and the competitive tension between Glenn and Shepard. Wolfe&rsquo;s portrayal of Glenn as the &ldquo;Presbyterian Pilot&rdquo; captures the cultural dimension of Glenn&rsquo;s fame with characteristic precision.</li>
+        <li><strong>Kraft, Chris. &ldquo;Flight: My Life in Mission Control.&rdquo; Dutton, New York, 2001.</strong> Kraft&rsquo;s account of the MA-6 flight from the flight director&rsquo;s console, including the Segment 51 decision-making process, the choice not to fully inform Glenn about the heat shield concern, and the four minutes of communications blackout during which Kraft did not know if Glenn was alive.</li>
+        <li><strong>Burgess, Colin. &ldquo;Friendship 7: The Epic Orbital Flight of John H. Glenn, Jr.&rdquo; Springer-Praxis, 2015.</strong> Comprehensive mission account covering the Atlas qualification program, the ten delays, the flight timeline, the Segment 51 incident, and the post-flight national reaction.</li>
+        <li><strong>Shepard, Alan; and Slayton, Deke. &ldquo;Moon Shot: The Inside Story of America&rsquo;s Race to the Moon.&rdquo; Turner Publishing, 1994.</strong> The astronaut-office perspective on Glenn&rsquo;s flight, including the competitive dynamics within the Mercury Seven and the political decision to ground Glenn after MA-6.</li>
+        <li><strong>Siddiqui, Asif A. &ldquo;Challenge to Apollo: The Soviet Union and the Space Race, 1945&ndash;1974.&rdquo; NASA Special Publication SP-2000-4408, 2000.</strong> Context for the competitive pressure driving the MA-6 mission, including the Vostok 1 and Vostok 2 flights and the Soviet space program&rsquo;s lead in human orbital flight.</li>
+      </ul>
+
+      <h3>Dedication Sources</h3>
+      <ul>
+        <li><strong>Adams, Ansel; and Alinder, Mary Street. &ldquo;Ansel Adams: An Autobiography.&rdquo; Little, Brown and Company, Boston, 1985.</strong> Adams&rsquo;s own account of his life and photographic philosophy, including the Zone System, the relationship between technical craft and artistic vision, and his approach to landscape photography as witness and communication.</li>
+        <li><strong>Adams, Ansel. &ldquo;The Camera.&rdquo; New York Graphic Society, Boston, 1980.</strong> The first volume of Adams&rsquo;s technical trilogy, covering the optics, mechanics, and exposure principles that formed the engineering foundation of his photographic practice.</li>
+        <li><strong>Adams, Ansel. &ldquo;The Negative.&rdquo; New York Graphic Society, Boston, 1981.</strong> The second volume, covering film exposure, development, and the Zone System &mdash; the technical framework for previsualization that made Adams&rsquo;s tonal range possible.</li>
+        <li><strong>Adams, Ansel. &ldquo;The Print.&rdquo; New York Graphic Society, Boston, 1983.</strong> The third volume, covering darkroom printing techniques that translated the negative into the final image &mdash; the communication step, where the photographer&rsquo;s vision became visible to others.</li>
+        <li><strong>Szarkowski, John. &ldquo;Ansel Adams at 100.&rdquo; Little, Brown and Company, Boston, 2001.</strong> Critical reassessment of Adams&rsquo;s work published for his centennial, examining the relationship between technical mastery and artistic expression in his landscape photography.</li>
+        <li><strong>Turnage, William A. &ldquo;Ansel Adams: The Role of the Artist in the Environmental Movement.&rdquo; The Wilderness Society, 1980.</strong> Documentation of Adams&rsquo;s environmental advocacy, connecting his photographic practice to his belief that making people see the natural world was a precondition for making them protect it.</li>
+      </ul>
+
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>NASA NSSDC Master Catalog &mdash; Mercury-Atlas 6 (MA-6 / Friendship 7).</strong> Mission identification (NSSDCA ID: 1962-003A), vehicle specifications (Atlas LV-3B serial 109-D, Spacecraft #13), launch date/time (1962-02-20 14:47:39 UTC), launch site (Cape Canaveral LC-14), orbital parameters (perigee 161 km, apogee 265 km, inclination 32.54 degrees, period 88.5 minutes), mission duration (4 hours 55 minutes 23 seconds), 3 orbits, and status (successful).</li>
+        <li><strong>NASA Kennedy Space Center Historical Archives &mdash; Launch Complex 14 Records.</strong> Pad operations logs for MA-6, Atlas LV-3B processing timelines, the ten launch postponements with documented causes, weather records, and recovery coordination with USS Noa and USS Randolph.</li>
+        <li><strong>JPL HORIZONS System (ssd.jpl.nasa.gov/horizons/).</strong> Orbital element verification for MA-6, including perigee/apogee altitudes, orbital period, inclination, and ground track data for the three-orbit mission.</li>
+        <li><strong>Jonathan McDowell&rsquo;s Launch Vehicle Database (planet4589.org).</strong> Atlas LV-3B booster serial numbers, flight performance data, Mercury-Atlas mission series records, and Atlas failure/success statistics for the 1957&ndash;1962 test and operational period.</li>
+        <li><strong>Smithsonian National Air and Space Museum &mdash; Friendship 7 Collection.</strong> The Mercury spacecraft #13 (Friendship 7) is on permanent display at the National Air and Space Museum in Washington, D.C. Artifact provenance, conservation records, and display history for the capsule that carried the first American to orbit.</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">&larr; v1.21 Overview</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="organism.html">Track 2: Organism &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; v1.21 Track 1a: Deep Research &mdash; Mercury-Atlas 6 / Friendship 7 &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

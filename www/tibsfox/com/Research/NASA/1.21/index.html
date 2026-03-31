@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.21 — Mercury-Atlas 6 / Friendship 7 + Chinook Salmon | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #040610; --bio-mid: #081020;
+    --orbital-blue: #1840A0; --orbital-dim: #0C2050;
+    --firefly-gold: #C89840; --firefly-dim: #644C20;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --earth-green: #2A6040; --earth-dim: #153020;
+    --atlantic-blue: #0A2848; --atlantic-dim: #051424;
+    --salmon-copper: #C07040; --salmon-dim: #603820;
+    --space: #040508;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(200,152,64,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(24,64,160,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(192,112,64,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(42,96,64,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(208,128,32,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(10,40,72,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(4,5,8,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(24,64,160,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--orbital-dim) 55%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--orbital-blue);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(24,64,160,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(24,64,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(24,64,160,0.12); border: 1px solid var(--orbital-blue); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--orbital-blue); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-success {
+    background: rgba(42,96,64,0.2); border: 1px solid var(--earth-green);
+    color: var(--earth-green); padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--orbital-blue); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--firefly-gold);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--firefly-gold); }
+  .card em { color: var(--salmon-copper); }
+
+  .resonance-card { border-color: var(--orbital-blue); background: rgba(24,64,160,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(24,64,160,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--firefly-gold); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--orbital-blue); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--orbital-blue); background: rgba(24,64,160,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--orbital-blue); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--firefly-gold); }
+  .track-card.t2 .track-title { color: var(--salmon-copper); }
+  .track-card.t3 .track-title { color: var(--orbital-blue); }
+  .track-card.t4 .track-title { color: var(--firefly-gold); }
+  .track-card.t5 .track-title { color: var(--orbital-blue); }
+  .track-card.t6 .track-title { color: var(--salmon-copper); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(42,96,64,0.08); border: 1px solid var(--salmon-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--orbital-blue); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--salmon-copper); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(4,5,8,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--firefly-gold); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(24,64,160,0.06); border: 1px solid rgba(24,64,160,0.2);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--orbital-blue); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--orbital-blue); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(24,64,160,0.15); transition: color 0.2s; }
+  .data-links a:hover { color: var(--firefly-gold); }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(4,5,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--orbital-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--firefly-gold); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--orbital-blue); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.21</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>v1.21 &mdash; Mercury-Atlas 6 / Friendship 7 + <em>Oncorhynchus tshawytscha</em></h1>
+    <p class="subtitle">Godspeed, John Glenn &mdash; First American in Orbit</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> February 20, 1962</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> John Glenn</span>
+      <span><span class="label">Peak Alt:</span> 265 km</span>
+      <span><span class="label">Max G:</span> 7.7</span>
+      <span><span class="label">Duration:</span> 4h 55m 23s</span>
+      <span><span class="label">Orbits:</span> 3</span>
+      <span><span class="label">Organism:</span> Chinook Salmon</span>
+      <span><span class="label">Bird:</span> Swainson&rsquo;s Thrush</span>
+      <span><span class="label">Dedication:</span> Ansel Adams</span>
+      <span><span class="label">Status:</span> SUCCESS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On February 20, 1962, John Glenn launched from Cape Canaveral&rsquo;s Launch Complex 14 atop an Atlas LV-3B &mdash; the most powerful and most structurally terrifying booster in the American arsenal, a pressurized steel balloon with walls thinner than a dime. Scott Carpenter&rsquo;s words at launch: <strong>&ldquo;Godspeed, John Glenn.&rdquo;</strong> Glenn orbited Earth three times in <strong>4 hours 55 minutes 23 seconds</strong>, reaching 265 km at apogee and traveling at 7.84 km/s &mdash; 28,234 km/h. He was the first American to orbit the planet. Gagarin had done it ten months earlier. Titov had done 17 orbits. But Glenn&rsquo;s flight changed the space race because it proved America could compete &mdash; and because the man who flew it could describe what he saw.</p>
+      <p>On the dark side of his first orbit, Glenn saw fireflies &mdash; thousands of luminescent particles drifting past his window, brilliantly lit, the most beautiful thing he had ever seen. They were ice crystals sublimating from the capsule&rsquo;s cooling system. During orbit 2, the Automatic Stabilization and Control System began drifting in yaw; Glenn switched to manual control. Then <strong>Segment 51</strong> &mdash; the telemetry indicator for the heat shield landing bag &mdash; showed &ldquo;deployed.&rdquo; If the heat shield was loose, Glenn would burn up during reentry. Chris Kraft decided to keep the retropack attached (normally jettisoned after retrofire) in case the straps were holding the shield in place. They told Glenn to keep the retropack. They didn&rsquo;t tell him why. During reentry, burning fragments of the retropack streaked past his window. Glenn reported: <em>&ldquo;That&rsquo;s a real fireball outside.&rdquo;</em> He didn&rsquo;t know if those were retropack pieces or heat shield pieces.</p>
+      <p>The heat shield was fine. Segment 51 was a faulty switch. Glenn splashed down near Grand Turk Island and was picked up by the destroyer <strong>USS <em>Noa</em></strong>. He became the most famous American of the 1960s &mdash; ticker-tape parade in New York (4 million people), address to Congress, personal meeting with JFK. He was deemed too valuable to risk again; JFK personally grounded him. Glenn left NASA in 1964, entered politics, served four terms as US Senator from Ohio. In 1998, at age 77, he flew again on Space Shuttle <em>Discovery</em> (STS-95) &mdash; the oldest person ever in space. He died on December 8, 2016, at 95. Everything that Enos proved (v1.18), everything that Shepard demonstrated (v1.19), everything that Grissom confirmed (v1.20) &mdash; it all led here. This was the payoff.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">&ldquo;Godspeed, John Glenn&rdquo;</div>
+            <div class="track-desc">Glenn&rsquo;s background (New Concord Ohio, WWII Marine, Korea, test pilot, Project Bullet), the Atlas problem, ten delays, the flight, fireflies, Segment 51, reentry, aftermath, legacy</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">NASA MA-6 official report, orbital computation (Katherine Johnson), ablative heat shield materials science, human factors in early spaceflight</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Oncorhynchus tshawytscha</em></div>
+            <div class="track-desc">Chinook salmon, king of the Pacific, anadromous heroic return, magnetic navigation, Columbia River dams, First Fish in the series</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">Orbital Mechanics</div>
+            <div class="track-desc">Vis-viva equation, Kepler&rsquo;s Third Law, Atlas trajectory (rocket equation), reentry thermal analysis (Sutton-Graves), reentry corridor, Rosetta orbital parameters table</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Three orbits (orbital mechanics for everyone), The salmon&rsquo;s return (navigation and homing), Heat shield (materials science). DIY: Mercury capsule model, salmon terrarium, crystal radio. Fox Companies pathways.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Orbit, Migrate, Reenter, Create</div>
+            <div class="track-desc">Orbital flight simulator, salmon migration, reentry thermal analysis, BFO oscillator, ground track plotter, Segment 51 indicator circuit, &ldquo;Friendship 7&rdquo; screensaver, &ldquo;The Fireflies&rdquo; story</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Navigation Across Vast Distance</div>
+          Glenn orbiting Earth at 28,234 km/h, the Chinook salmon crossing thousands of kilometers of open Pacific, the Swainson&rsquo;s Thrush migrating 8,000 km between boreal forest and South America. All three navigate featureless environments using internal instruments &mdash; stars, magnetite crystals, celestial cues. No signposts. No landmarks. Only the instruments they were born with or trained to read.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">The Return Home</div>
+          Glenn&rsquo;s reentry through a barrier of fire, the salmon&rsquo;s return to its natal stream through rapids and dams, the thrush returning to the same breeding territory year after year. The defining act is not the departure but the return through a barrier. Leaving is easy. Coming home requires threading the needle &mdash; reentry corridor, river mouth, territorial boundary.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Physiological Transformation</div>
+          Glenn adapting to microgravity &mdash; fluid shift, vestibular changes, spatial disorientation on the dark side. The salmon undergoing smoltification &mdash; a complete reversal of freshwater physiology to saltwater physiology, gill chemistry rewritten, osmoregulation inverted. Both cross a biological threshold that cannot be half-crossed. The body transforms or it dies.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">The Narrow Passage</div>
+          The reentry corridor: &plusmn;1.5&deg; flight path angle &mdash; too steep and the capsule burns, too shallow and it skips off the atmosphere into permanent orbit. The river mouth: a geographic bottleneck where the entire salmon run compresses into a single passage. Fish ladders at dams: engineered corridors that the fish must find and thread. Success in all three requires passing through a precise corridor with no margin for error.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Distributed Intelligence</div>
+          The Mercury tracking network &mdash; 18 ground stations spanning the globe, each with local autonomy, passing telemetry from one to the next as Friendship 7 passed overhead. The salmon run &mdash; population-level navigation where no single fish controls the route but the collective finds the river. The dawn chorus &mdash; a species-level acoustic network where the Swainson&rsquo;s Thrush spiraling song joins dozens of species in coordinated territorial broadcast. No single entity controls the outcome.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">6</span>
+        <div class="axis-text">
+          <div class="axis-title">One Chance</div>
+          Glenn&rsquo;s single orbital flight &mdash; grounded afterward by presidential order, never flew Mercury again. The Chinook salmon&rsquo;s single spawning run &mdash; semelparous, reproduce once, die. Both defined by the irreversibility of the journey. Glenn got one chance to orbit and made it count. The salmon gets one chance to spawn and makes it count. There is no second attempt. The journey is the life.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="background: rgba(200,152,64,0.04); border-color: var(--firefly-dim);">
+      <h2 style="color: var(--firefly-gold);">Dedication: Ansel Adams</h2>
+      <p><strong>Born February 20, 1902 &mdash; Died April 22, 1984</strong></p>
+      <p>Ansel Easton Adams was born on the exact calendar date, sixty years earlier, that John Glenn launched from Cape Canaveral. Both men made Americans see their country differently. Glenn showed them the Earth from orbit &mdash; the first American eyes to see the planet as a sphere, the terminator line, the luminous fireflies against the black. Adams showed them the West from the ground &mdash; Half Dome in moonrise, Hernandez under storm clouds, the Sierra Nevada in silver and black. Both worked in black and white before the world saw color. Both were craftsmen who understood that technique serves vision.</p>
+      <p>Adams developed the Zone System &mdash; a method for previsualization, for seeing the final print before the shutter opens. Glenn trained in the procedures trainer &mdash; a method for previsualization, for flying the mission before the rocket launches. Both believed that preparation is the art. Both believed that the moment of execution is the result of everything that came before it. Adams said: <em>&ldquo;You don&rsquo;t take a photograph, you make it.&rdquo;</em> Glenn didn&rsquo;t take an orbit. He made it &mdash; through ten delays, an Atlas that might explode, and a heat shield that might be loose.</p>
+      <p>Adams photographed Yosemite, the Tetons, the deserts of the Southwest. Glenn photographed the Earth from 265 km. Both saw landscapes that no one else could see the way they saw them. Both returned with images that changed how a nation understood its own territory.</p>
+      <p style="font-style: italic; color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; text-align: center;"><strong style="color: var(--firefly-gold); font-size: 1.3rem;">&ldquo;You don&rsquo;t take a photograph, you make it.&rdquo; Glenn made three orbits the same way Adams made a print &mdash; every variable controlled, every contingency anticipated, the result inevitable.</strong></p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.20/index.html">&larr; v1.20 Liberty Bell 7</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <span style="color: var(--text-dim); font-size: 0.9rem;">v1.22 &rarr;</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Oncorhynchus tshawytscha (Chinook Salmon / King Salmon)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">61.4 kg</div>
+          <div class="stat-label">Max Weight</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2&ndash;7 yr</div>
+          <div class="stat-label">Lifespan</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3,200 km</div>
+          <div class="stat-label">Migration</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1x</div>
+          <div class="stat-label">Semelparous</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        The largest Pacific salmon species, the king of the anadromous fishes, born in freshwater gravel, transformed by smoltification, ocean-crossing, magnetically navigating, olfactory-homing &mdash; returning to the exact stream of its birth to spawn and die. Record weight <strong style="color: var(--firefly-gold);">61.4 kg</strong> from the Kenai River, Alaska. Navigates using <strong style="color: var(--firefly-gold);">magnetite crystals</strong> in the skull and olfactory imprinting on natal stream chemistry. The first fish in the NASA Mission Series. Columbia River runs once numbered 10&ndash;16 million; dams reduced them by 90%. Some runs ESA Threatened or Endangered. Family <strong style="color: var(--firefly-gold);">Salmonidae</strong>.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(42,96,64,0.06); border-color: var(--earth-green);">
+      <h3 style="font-size: 0.9rem; color: var(--orbital-blue); margin-bottom: 0.5rem;">Bird: Swainson&rsquo;s Thrush</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em style="color: var(--salmon-copper);">Catharus ustulatus</em> (degree 21). A neotropical migrant breeding in the dense understory of Pacific Northwest coniferous forests, wintering in Central and South America. Migrates up to <strong style="color: var(--firefly-gold);">8,000 km</strong> each way, navigating by stellar cues and the Earth&rsquo;s magnetic field. Known for its spiraling, ascending flute-like song &mdash; one of the most ethereal sounds of the boreal forest at dusk. Like the salmon, it returns to the same territory year after year. Like Glenn, it navigates vast distances using instruments invisible to the human eye.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(24,64,160,0.06); border-color: var(--orbital-blue);">
+      <h3 style="font-size: 0.9rem; color: var(--orbital-blue); margin-bottom: 0.5rem;">Friendship 7 Orbital Data</h3>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">265 km</div>
+          <div class="stat-label">Apogee</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">7.84 km/s</div>
+          <div class="stat-label">Orbital Velocity</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">4h 55m 23s</div>
+          <div class="stat-label">Mission Duration</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">7.7g</div>
+          <div class="stat-label">Reentry G</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">3 orbits</div>
+          <div class="stat-label">Revolutions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Atlas LV-3B</div>
+          <div class="stat-label">Launch Vehicle</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">28,234</div>
+          <div class="stat-label">km/h</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">LC-14</div>
+          <div class="stat-label">Launch Complex</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--firefly-gold);">Perigee:</strong> 161 km. <strong style="color: var(--firefly-gold);">Inclination:</strong> 32.5&deg;. <strong style="color: var(--firefly-gold);">Period:</strong> 88.5 min. <strong style="color: var(--firefly-gold);">Recovery:</strong> USS <em>Noa</em>, near Grand Turk Island. <strong style="color: var(--firefly-gold);">Segment 51:</strong> Faulty switch (heat shield secure). <strong style="color: var(--firefly-gold);">Fireflies:</strong> Ice crystals from cooling system.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Data &amp; Files</h3>
+      <a href="knowledge-nodes.json">knowledge-nodes.json</a>
+      <a href="data-sources.json">data-sources.json</a>
+      <a href="degree-sync.json">degree-sync.json</a>
+      <a href="research.html">research.html</a>
+      <a href="organism.html">organism.html</a>
+      <a href="mathematics.html">mathematics.html</a>
+      <a href="papers.html">papers.html</a>
+      <a href="curriculum.html">curriculum.html</a>
+      <a href="simulation.html">simulation.html</a>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: MA-6 / Friendship 7</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS System</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://airandspace.si.edu/">Smithsonian Air &amp; Space Museum</a>
+      <a href="https://www.fisheries.noaa.gov/">NOAA Fisheries: Chinook Salmon</a>
+      <a href="https://www.inaturalist.org/">iNaturalist: O. tshawytscha</a>
+      <a href="https://www.gbif.org/">GBIF: O. tshawytscha Occurrence Records</a>
+      <a href="https://www.streamnet.org/">StreamNet: Columbia Basin Salmon Data</a>
+    </div>
+
+    <div class="card" style="background: rgba(200,152,64,0.06); border-color: var(--firefly-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--orbital-blue); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--firefly-gold);">Primary:</strong> Orbital Mechanics (Vis-Viva, Kepler&rsquo;s Laws, Reentry Corridor), Marine Biology (Chinook Salmon, Anadromous Life Cycle, Magnetoreception), Photography &amp; Visual Arts (Ansel Adams, Zone System)<br>
+        <strong style="color: var(--firefly-gold);">Secondary:</strong> Materials Science (Ablative Heat Shield), Navigation (Celestial, Magnetic, Olfactory), Ecology (Columbia River, Dam Impact, ESA Listings), Political History (Space Race, Kennedy, Cold War)
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(200,152,64,0.06); border-color: var(--firefly-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--orbital-blue); margin-bottom: 0.5rem;">TSPB Layers</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--firefly-gold);">Layer 2:</strong> Classical Mechanics &mdash; Vis-viva equation, Kepler orbital parameters, Atlas thrust-to-weight, reentry deceleration<br>
+        <strong style="color: var(--firefly-gold);">Layer 4:</strong> Thermodynamics &mdash; Ablative heat shield (Sutton-Graves correlation), reentry plasma temperature, convective vs radiative heating<br>
+        <strong style="color: var(--firefly-gold);">Layer 5:</strong> Navigation &mdash; Orbital ground track, retrofire timing, magnetite crystal orientation in salmon, stellar compass in thrush<br>
+        <strong style="color: var(--firefly-gold);">Layer 7:</strong> Information Theory &mdash; Mercury tracking network bandwidth, telemetry relay, Segment 51 false positive (signal vs noise)
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.21 Mercury-Atlas 6 / Friendship 7 + <em>Oncorhynchus tshawytscha</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

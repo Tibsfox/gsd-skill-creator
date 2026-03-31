@@ -1,0 +1,117 @@
+{
+  "mission": "1.21",
+  "name": "Mercury-Atlas 6 / Friendship 7",
+  "date": "1962-02-20",
+  "data_sources": [
+    {
+      "id": "ds-121-01",
+      "name": "NASA Technical Reports Server — MA-6 Mission Report",
+      "url": "https://ntrs.nasa.gov/",
+      "type": "government-archive",
+      "format": "PDF",
+      "description": "Results of the First United States Manned Orbital Space Flight, February 20, 1962. The official post-flight report containing flight data, telemetry, pilot report, medical findings, and engineering analysis including the Segment 51 heat shield indicator investigation.",
+      "relevance": "Primary source for all mission data, pilot observations, and the heat shield telemetry anomaly",
+      "access": "free",
+      "license": "Public Domain (US Government work)"
+    },
+    {
+      "id": "ds-121-02",
+      "name": "NASA Space Science Data Coordinated Archive — Mercury-Atlas 6",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1962-003A",
+      "type": "government-database",
+      "format": "HTML/API",
+      "description": "NSSDC master catalog entry for Friendship 7. Contains orbital parameters, spacecraft specifications, experiment descriptions, and links to archived telemetry data.",
+      "relevance": "Authoritative orbital element source: perigee 161 km, apogee 265 km, inclination 32.54°, period 88.48 min",
+      "access": "free",
+      "license": "Public Domain"
+    },
+    {
+      "id": "ds-121-03",
+      "name": "Project Mercury: A Chronology — NASA SP-4001",
+      "url": "https://history.nasa.gov/SP-4001/contents.htm",
+      "type": "government-publication",
+      "format": "HTML/PDF",
+      "description": "James M. Grimwood's day-by-day chronology of Project Mercury from conception through the final flight. The MA-6 entries document the ten launch delays, the flight timeline, and the Segment 51 investigation.",
+      "relevance": "Definitive chronological source for the ten delays and engineering decisions",
+      "access": "free",
+      "license": "Public Domain"
+    },
+    {
+      "id": "ds-121-04",
+      "name": "This New Ocean: A History of Project Mercury — NASA SP-4201",
+      "url": "https://history.nasa.gov/SP-4201/toc.htm",
+      "type": "government-publication",
+      "format": "HTML/PDF",
+      "description": "Swenson, Grimwood, and Alexander's comprehensive history of Project Mercury. Chapter 12 covers MA-6 in detail, including Chris Kraft's decision-making process during the Segment 51 crisis.",
+      "relevance": "Narrative engineering history with technical depth on flight control decisions",
+      "access": "free",
+      "license": "Public Domain"
+    },
+    {
+      "id": "ds-121-05",
+      "name": "StreamNet — Pacific Salmon Data",
+      "url": "https://www.streamnet.org/",
+      "type": "scientific-database",
+      "format": "CSV/API",
+      "description": "Coordinated database of Pacific salmon population data across the Columbia River Basin. Contains spawning escapement counts, hatchery returns, harvest data, and habitat indicators for Chinook salmon (Oncorhynchus tshawytscha) by run (spring, summer, fall).",
+      "relevance": "Quantitative population data for the organism pairing — historical and current Chinook run sizes",
+      "access": "free",
+      "license": "Open Data"
+    },
+    {
+      "id": "ds-121-06",
+      "name": "NOAA Fisheries — West Coast Chinook Salmon",
+      "url": "https://www.fisheries.noaa.gov/species/chinook-salmon",
+      "type": "government-database",
+      "format": "HTML/PDF",
+      "description": "NOAA's species profile for Chinook salmon including ESA listing status by Evolutionarily Significant Unit (ESU), critical habitat designations, recovery plans, and population viability assessments.",
+      "relevance": "Conservation status and ESA listing data for the organism pairing",
+      "access": "free",
+      "license": "Public Domain"
+    },
+    {
+      "id": "ds-121-07",
+      "name": "Katherine Johnson Papers — Langley Research Center",
+      "url": "https://crgis.ndc.nasa.gov/historic/Katherine_Johnson",
+      "type": "government-archive",
+      "format": "HTML/PDF",
+      "description": "Documentation of Katherine Johnson's computational work at NASA Langley, including her verification of the IBM 7090 orbital trajectory calculations for Glenn's MA-6 flight. Glenn personally requested that Johnson check the computer's numbers before he would fly.",
+      "relevance": "Human computation and verification of orbital mechanics — the math that made the flight possible",
+      "access": "free",
+      "license": "Public Domain"
+    },
+    {
+      "id": "ds-121-08",
+      "name": "Mercury Tracking Network Documentation",
+      "url": "https://history.nasa.gov/SP-4003/toc.htm",
+      "type": "government-publication",
+      "format": "HTML/PDF",
+      "description": "Technical documentation of the worldwide Mercury tracking network — 18 stations spanning the globe. Includes station coordinates, equipment specifications, communication links, and real-time data processing capabilities.",
+      "relevance": "Infrastructure data for the global tracking network that supported Glenn's orbital flight",
+      "access": "free",
+      "license": "Public Domain"
+    },
+    {
+      "id": "ds-121-09",
+      "name": "eBird — Swainson's Thrush Observations",
+      "url": "https://ebird.org/species/swathr",
+      "type": "citizen-science",
+      "format": "CSV/API",
+      "description": "Cornell Lab of Ornithology's global bird observation database. Swainson's Thrush (Catharus ustulatus) sighting data including migration timing, breeding range, abundance maps, and vocalization recordings for the Pacific Northwest.",
+      "relevance": "Distribution and behavioral data for the degree 21 bird pairing",
+      "access": "free",
+      "license": "CC BY-NC 4.0"
+    },
+    {
+      "id": "ds-121-10",
+      "name": "Ansel Adams Archive — Center for Creative Photography",
+      "url": "https://ccp.arizona.edu/artists/ansel-adams",
+      "type": "cultural-archive",
+      "format": "HTML/Digital Images",
+      "description": "The University of Arizona's Center for Creative Photography holds the Ansel Adams archive — over 2,500 fine prints, 40,000 negatives, and extensive correspondence. Adams was born February 20, 1902 — the same calendar date as Glenn's flight, 60 years apart.",
+      "relevance": "Dedication pairing — Adams showed America its landscape from new perspectives; Glenn showed America its planet from orbit",
+      "access": "partial-free",
+      "license": "Various (copyright held by The Ansel Adams Publishing Rights Trust)"
+    }
+  ]
+}
