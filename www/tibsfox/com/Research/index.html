@@ -4,30 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Research — Tibsfox</title>
+  <link rel="stylesheet" href="../brand.css">
   <style>
-    /* Hardcoded light theme — no dark mode, no external CSS */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { background:#f5f0e6; color:#2a2a2a; font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
-    a { color:#c75b3a; text-decoration:none; }
-    a:hover { color:#d4823a; }
-    blockquote { border-left:4px solid #c75b3a; padding:1rem 1.5rem; margin:1.5rem 0; color:#5a5a5a; font-style:italic; background:rgba(199,91,58,0.04); border-radius:0 6px 6px 0; }
-    h2 { font-size:1.3rem; font-weight:400; color:#3d3d3d; margin:2rem 0 0.5rem; padding-bottom:0.3rem; border-bottom:1px solid #e8dcc8; }
-    .stats { display:flex; justify-content:center; gap:2rem; padding:1.5rem 0; flex-wrap:wrap; }
-    .stat { text-align:center; min-width:80px; }
-    .stat-value { display:block; font-size:1.6rem; font-weight:700; color:#c75b3a; font-family:system-ui,sans-serif; }
-    .stat-label { font-size:0.7rem; color:#8a8884; text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
-    .card-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-bottom:2rem; }
-    @media(max-width:768px) { .card-grid { grid-template-columns:1fr; } }
-    .card { display:block; background:#fff; border:1px solid rgba(42,42,42,0.08); border-radius:8px; padding:0; overflow:hidden; box-shadow:0 2px 8px rgba(42,42,42,0.06); transition:box-shadow 0.2s,transform 0.2s; text-decoration:none; color:#2a2a2a; }
-    .card:hover { box-shadow:0 8px 32px rgba(42,42,42,0.12); transform:translateY(-2px); text-decoration:none; }
-    .card h3 { color:#3d3d3d; font-size:1rem; margin:0.8rem 1.2rem 0.3rem; }
-    .card p { font-size:0.88rem; color:#5a5a5a; line-height:1.5; margin:0 1.2rem; padding-bottom:1rem; }
-    .card .meta { font-size:0.75rem; color:#8a8884; margin:0 1.2rem 0.4rem; }
-    .card .meta .tag { display:inline-block; background:rgba(199,91,58,0.08); color:#c75b3a; padding:0.1rem 0.5rem; border-radius:3px; font-size:0.7rem; font-family:system-ui,sans-serif; }
-    .accent-bar { height:4px; }
-    .section-intro { font-size:0.95rem; color:#5a5a5a; margin-bottom:1rem; font-family:system-ui,sans-serif; }
-    footer { max-width:64rem; margin:2rem auto 0; padding:1.5rem; text-align:center; font-size:0.8rem; color:#8a8884; border-top:1px solid #e8dcc8; font-family:system-ui,sans-serif; }
-    footer a { color:#c75b3a; }
+    /* === Research page overrides — identical pattern to home page === */
     header {
       background: linear-gradient(135deg, var(--ink) 0%, var(--fox-deep) 20%, var(--fox) 45%, var(--fox-warm) 65%, var(--splatter) 85%, var(--parchment-deep) 100%);
       color: white;
@@ -38,7 +17,7 @@
       display: flex;
       align-items: center;
       gap: 2rem;
-      padding: 2rem;
+      padding: 2rem 2rem;
       max-width: 68rem;
       margin: 0 auto;
     }
@@ -77,15 +56,22 @@
     header nav a:hover {
       color: white;
       border-bottom-color: rgba(255,255,255,0.5);
+      text-decoration: none;
     }
     main {
       max-width: 64rem;
       margin: 0 auto;
       padding: 2rem 1.5rem 4rem;
     }
+    .section-intro {
+      font-size: 0.95rem;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+    }
+    .card:hover { text-decoration: none; }
+    .card h3 { color: var(--ink-soft); }
     .stat-value { color: var(--fox); }
-    h2 { color: var(--ink-soft, #3d3d3d); }
-    .section-intro { font-size: 0.95rem; color: var(--charcoal, #5a5a5a); margin-bottom: 1rem; }
+    footer { --content-width: 64rem; }
     @media (max-width: 640px) {
       .header-inner { flex-direction: column; text-align: center; padding: 1.5rem 1rem; gap: 1rem; }
       .brand-mark { width: 90px; height: 90px; }
@@ -98,10 +84,10 @@
 <body>
   <header>
     <div class="header-inner">
-      <img src="../images/tibsfox.png" alt="Tibsfox — watercolor fox" class="brand-mark">
+      <img src="../images/tibsfox.png" alt="Tibsfox — watercolor fox by Paintless Dog, 2016" class="brand-mark">
       <div class="header-text">
         <h1>Tibsfox Research</h1>
-        <div class="subtitle">Pacific Northwest bioregion mapping, visual art science, space research, and 190+ projects of open-source craft</div>
+        <div class="subtitle">Pacific Northwest bioregion mapping, space research, visual art science, and 190+ projects of open-source craft</div>
         <nav>
           <a href="PNW/index.html">PNW Series</a>
           <a href="NASA/index.html">NASA Missions</a>
@@ -128,12 +114,11 @@
     </blockquote>
 
     <div class="stats">
-      <div class="stat"><span class="stat-value">190+</span><span class="stat-label">Projects</span></div>
+      <div class="stat"><span class="stat-value">190+</span><span class="stat-label">Research Projects</span></div>
       <div class="stat"><span class="stat-value">13</span><span class="stat-label">Clusters</span></div>
       <div class="stat"><span class="stat-value">552</span><span class="stat-label">NASA Missions</span></div>
-      <div class="stat"><span class="stat-value">739</span><span class="stat-label">Cross-Refs</span></div>
-      <div class="stat"><span class="stat-value">16</span><span class="stat-label">Live Pages</span></div>
-      <div class="stat"><span class="stat-value">91</span><span class="stat-label">Businesses</span></div>
+      <div class="stat"><span class="stat-value">743K</span><span class="stat-label">Lines of Code</span></div>
+      <div class="stat"><span class="stat-value">30+</span><span class="stat-label">Live Pages</span></div>
     </div>
 
     <h2>Pacific Northwest Research Series</h2>
@@ -148,13 +133,13 @@
         <div class="accent-bar" style="background:linear-gradient(90deg, #00695c, #4db6ac)"></div>
         <h3>PNW Research Series</h3>
         <div class="meta"><span class="tag">18 ecology projects</span> 8 elevation bands &middot; 1,000+ species</div>
-        <p>The foundational research that anchors everything else. Rainforest to garden.</p>
+        <p>The foundational research that anchors everything else. Rainforest to garden &mdash; mapping the living systems of the PNW bioregion.</p>
       </a>
       <a href="NASA/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #0B3D91, #FC3D21)"></div>
         <h3>NASA Mission Series</h3>
         <div class="meta"><span class="tag">552 missions</span> 6 epochs &middot; 1958&ndash;2040s</div>
-        <p>Complete traversal of NASA's history. Each mission paired with a living organism, mathematics, and creative arts.</p>
+        <p>Complete traversal of NASA's history. Each mission paired with a living organism, mathematics, simulations, creative arts, and community business pathways.</p>
       </a>
       <a href="S36/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #c62828, #ef5350)"></div>
@@ -179,14 +164,14 @@
       <a href="NASA/artemis-ii/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #0B3D91, #C4A35A)"></div>
         <h3>Artemis II &mdash; Live Mission Tracker</h3>
-        <div class="meta"><span class="tag">T-32h</span> 4 crew &middot; 10-day mission</div>
-        <p>Live countdown, telemetry, trajectory viz, KSC weather, DSN status. Crew bios, vehicle systems, science payloads, worked math, and full timeline.</p>
+        <div class="meta"><span class="tag">T-27h</span> 4 crew &middot; 10-day mission</div>
+        <p>Live countdown, telemetry, trajectory visualization, KSC weather, DSN status. Crew bios, vehicle systems, science payloads, worked math, and full timeline.</p>
       </a>
       <a href="MUK/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #1a3a4a, #3a8a9a)"></div>
         <h3>Mukilteo Microclimate Observatory</h3>
-        <div class="meta"><span class="tag">4 sources</span> 3 sweeps &middot; scoring</div>
-        <p>Weather source accuracy comparison, tidal rhythms, ferry transit, and the marine convergence zone.</p>
+        <div class="meta"><span class="tag">4 sources</span> 8 sweeps &middot; scoring</div>
+        <p>Weather source accuracy comparison, tidal rhythms, ferry transit, and the marine convergence zone. NWS and Open-Meteo lead on accuracy.</p>
       </a>
       <a href="SOL/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #e0a830, #ff8844)"></div>
@@ -200,17 +185,41 @@
         <div class="meta"><span class="tag">14 restaurants</span> 4 counties &middot; 1908&ndash;present</div>
         <p>The Dog House, Dick's, Ivar's, Ezell's, Beth's, Totem Diner, and the ferry-landing history at Mukilteo since 1909.</p>
       </a>
+      <a href="MUK/whidbey.html" class="card">
+        <div class="accent-bar" style="background:linear-gradient(90deg, #1a3a4a, #4a7a9a)"></div>
+        <h3>Whidbey Island Guide</h3>
+        <div class="meta"><span class="tag">55 miles</span> Langley &middot; Deception Pass &middot; Ebey's</div>
+        <p>The other side of the ferry. Langley, Deception Pass, Ebey's Landing, NAS Whidbey, and the rain shadow ecology.</p>
+      </a>
+      <a href="MUK/salish-sea.html" class="card">
+        <div class="accent-bar" style="background:linear-gradient(90deg, #00695c, #26a69a)"></div>
+        <h3>Salish Sea Ecology</h3>
+        <div class="meta"><span class="tag">Marine</span> Orcas &middot; Salmon &middot; Tides</div>
+        <p>Southern Resident orcas, salmon runs, tidal ecology, eelgrass meadows, and water quality across 18,000 km&sup2; of inland sea.</p>
+      </a>
+      <a href="MUK/paine-field.html" class="card">
+        <div class="accent-bar" style="background:linear-gradient(90deg, #37474f, #78909c)"></div>
+        <h3>Paine Field &amp; Boeing Everett</h3>
+        <div class="meta"><span class="tag">KPAE</span> 747 &middot; 787 &middot; Dreamlifter</div>
+        <p>Our ground truth weather station, the world's largest building, Dreamlifter operations, and 80 years of aviation history.</p>
+      </a>
+      <a href="MUK/history.html" class="card">
+        <div class="accent-bar" style="background:linear-gradient(90deg, #5d4037, #8d6e63)"></div>
+        <h3>Snohomish County History</h3>
+        <div class="meta"><span class="tag">1855&ndash;present</span> Indigenous &middot; Industry &middot; Tech</div>
+        <p>From the Snohomish people through the Everett Massacre to Boeing and the Silicon Forest. The convergence zone and transportation corridors.</p>
+      </a>
+      <a href="MUK/weather-science.html" class="card">
+        <div class="accent-bar" style="background:linear-gradient(90deg, #1565c0, #42a5f5)"></div>
+        <h3>PNW Weather Science</h3>
+        <div class="meta"><span class="tag">Education</span> Why models disagree here</div>
+        <p>The Puget Sound Convergence Zone, Olympic rain shadow, marine layer, and what our scoring data reveals about forecast accuracy.</p>
+      </a>
       <a href="MUK/trips.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #1a3a4a, #2a5a6a)"></div>
         <h3>Trip Planner &amp; Business Guide</h3>
         <div class="meta"><span class="tag">91 businesses</span> 8 cities</div>
         <p>Local businesses, ferry schedules, tide-aware beach timing, and the Mukilteo&ndash;Whidbey corridor.</p>
-      </a>
-      <a href="LIVE/index.html" class="card">
-        <div class="accent-bar" style="background:linear-gradient(90deg, #2e7d32, #4CAF50)"></div>
-        <h3>LIVE &mdash; Real-Time Hub</h3>
-        <div class="meta"><span class="tag">10+ feeds</span> Updated continuously</div>
-        <p>Central hub for all live data: weather, tides, mission tracker, celestial, and forest simulation.</p>
       </a>
       <a href="PARK/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #2d5a3a, #4a7c3f)"></div>
@@ -227,8 +236,14 @@
       <a href="MUK/radio.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #5d4037, #8d6e63)"></div>
         <h3>PNW Radio Guide</h3>
-        <div class="meta"><span class="tag">AM/FM/NOAA/VHF</span> Emergency freqs</div>
+        <div class="meta"><span class="tag">AM/FM/NOAA/VHF</span></div>
         <p>Broadcast frequencies receivable from Mukilteo. Emergency, marine, weather, and music.</p>
+      </a>
+      <a href="LIVE/index.html" class="card">
+        <div class="accent-bar" style="background:linear-gradient(90deg, #2e7d32, #4CAF50)"></div>
+        <h3>LIVE &mdash; Real-Time Hub</h3>
+        <div class="meta"><span class="tag">10+ feeds</span></div>
+        <p>Central hub for all live data: weather, tides, mission tracker, celestial, and forest simulation.</p>
       </a>
       <a href="OPEN/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #8e24aa, #ba68c8)"></div>
@@ -238,9 +253,9 @@
       </a>
       <a href="forest/index.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #1b5e20, #388e3c)"></div>
-        <h3>Forest Simulation</h3>
+        <h3>Forest Ecosystem Simulation</h3>
         <div class="meta"><span class="tag">7 species</span> 55K simulation.js</div>
-        <p>Interactive PNW forest with birds, fireweed, circadian rhythms, barometric foraging, and firefly sync.</p>
+        <p>Interactive PNW forest with birds, fireweed, circadian rhythms, barometric foraging, fog, and firefly synchronization.</p>
       </a>
     </div>
 
@@ -250,7 +265,7 @@
         <div class="accent-bar" style="background:linear-gradient(90deg, #1a237e, #5c6bc0)"></div>
         <h3>Constellation Map (2D)</h3>
         <div class="meta">168 nodes &middot; 600+ edges &middot; 13 clusters</div>
-        <p>Force-directed graph of all projects. Drag, zoom, filter by cluster, search by name.</p>
+        <p>Force-directed graph of all projects. Drag, zoom, filter by cluster, search by name. Particle trails and minimap.</p>
       </a>
       <a href="constellation-3d.html" class="card">
         <div class="accent-bar" style="background:linear-gradient(90deg, #4a148c, #9c27b0)"></div>
