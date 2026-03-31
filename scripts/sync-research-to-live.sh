@@ -14,7 +14,8 @@ PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 LOCAL_BASE="$PROJECT_ROOT/www/tibsfox/com"
 REMOTE_SUBDIR=""
 
-# Load credentials
+# Load credentials — password contains leading ' and shell-hostile chars
+# NEVER source .env — always use python to parse
 ENV_FILE="$PROJECT_ROOT/.env"
 if [ ! -f "$ENV_FILE" ]; then
   ENV_FILE="/path/to/projectGSD/dev-tools/gsd-skill-creator/.env"
@@ -26,7 +27,18 @@ if [ ! -f "$ENV_FILE" ]; then
   exit 1
 fi
 
-source "$ENV_FILE"
+# Python-based .env parser (handles leading ' and special chars)
+eval "$(python3 -c "
+import sys
+for line in open('$ENV_FILE'):
+    line = line.strip()
+    if '=' in line and not line.startswith('#'):
+        k, v = line.split('=', 1)
+        # Shell-safe export using base64 to avoid any quoting issues
+        import base64
+        b64 = base64.b64encode(v.encode()).decode()
+        print(f'export {k}=\"\$(echo {b64} | base64 -d)\"')
+")"
 
 if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
   echo "Error: FTP credentials not set in .env"
@@ -79,19 +91,34 @@ echo ""
 # Exclude patterns (don't sync these)
 EXCLUDES="--exclude-glob .git/ --exclude-glob .planning/ --exclude-glob node_modules/ --exclude-glob .env"
 
-# Sync
+# Sync — use python to write lftp script file (password has leading ' and special chars)
 echo "Starting sync..."
-lftp -c "
-  set ssl:verify-certificate no;
-  set net:max-retries 3;
-  set net:reconnect-interval-base 5;
-  set mirror:use-pget-n 4;
-  open -u $FTP_USER,$FTP_PASS $FTP_HOST;
-  mirror --reverse --verbose --only-newer --no-perms $DRY_RUN \
-    $EXCLUDES \
-    '$LOCAL_DIR' '$REMOTE_DIR';
-  bye;
+LFTP_SCRIPT=$(mktemp /tmp/lftp-sync-XXXXXX)
+trap "rm -f '$LFTP_SCRIPT'" EXIT
+
+python3 -c "
+import sys
+env = {}
+for line in open('$ENV_FILE'):
+    line = line.strip()
+    if '=' in line and not line.startswith('#'):
+        k, v = line.split('=', 1)
+        env[k] = v
+
+with open('$LFTP_SCRIPT', 'w') as f:
+    f.write('set ssl:verify-certificate no\n')
+    f.write('set net:max-retries 3\n')
+    f.write('set net:reconnect-interval-base 5\n')
+    f.write('set mirror:use-pget-n 4\n')
+    f.write('open -u ' + env['FTP_USER'] + ',' + env['FTP_PASS'] + ' ' + env['FTP_HOST'] + '\n')
+    f.write('mirror --reverse --verbose --only-newer --no-perms $DRY_RUN $EXCLUDES \"$LOCAL_DIR\" \"$REMOTE_DIR\"\n')
+    f.write('bye\n')
 "
+
+# Substitute shell vars in the lftp script
+sed -i "s|\$DRY_RUN|$DRY_RUN|g; s|\$EXCLUDES|$EXCLUDES|g; s|\$LOCAL_DIR|$LOCAL_DIR|g; s|\$REMOTE_DIR|$REMOTE_DIR|g" "$LFTP_SCRIPT"
+
+lftp -f "$LFTP_SCRIPT"
 
 echo ""
 echo "=== Sync complete ==="
