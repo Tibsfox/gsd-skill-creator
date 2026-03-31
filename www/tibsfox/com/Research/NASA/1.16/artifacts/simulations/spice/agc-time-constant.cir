@@ -1,0 +1,120 @@
+* AGC Time Constant — Diode-Steered Attack/Release
+* =================================================
+* NASA Mission Series v1.16 — Mercury-Redstone 1
+*
+* Automatic Gain Control with asymmetric time constants:
+*   Fast attack (1 ms): responds quickly to strong signals
+*   Slow release (500 ms): prevents audio pumping on fading
+*
+* The diode steering creates separate charge/discharge paths:
+*   D1 (forward) → R_attack (1K) → C_agc: fast charge (strong signal)
+*   C_agc → R_release (470K) → D2: slow discharge (signal fades)
+*
+* Test signal: AM-modulated carrier with simulated fading (QSB)
+*
+* Run: ngspice -b agc-time-constant.cir
+
+*--------------------------------------------------------------
+* POWER SUPPLY
+*--------------------------------------------------------------
+Vcc    vcc   0   DC 12
+
+*--------------------------------------------------------------
+* AM SIGNAL SOURCE with FADING (QSB)
+*--------------------------------------------------------------
+* Carrier: 455 kHz (IF frequency)
+* Modulation: 1 kHz audio tone
+* Fading: slow amplitude variation (0.5 Hz)
+*
+* V_signal = A(t) * (1 + m * sin(2*pi*1000*t)) * sin(2*pi*455000*t)
+* where A(t) = 0.3 + 0.7 * (0.5 + 0.5 * sin(2*pi*0.5*t))  [fading]
+
+* Use behavioral source for AM with fading
+B_signal  sig_in  0  V = (0.3 + 0.7*(0.5 + 0.5*sin(2*3.14159*0.5*time)))
++                       * (1 + 0.5*sin(2*3.14159*1000*time))
++                       * sin(2*3.14159*455000*time) * 0.5
+
+*--------------------------------------------------------------
+* AGC DETECTOR (envelope detector)
+*--------------------------------------------------------------
+* Half-wave rectifier + low-pass filter extracts envelope
+D_det   sig_in   det_out   D1N4148
+R_det   det_out  0         10k
+C_det   det_out  0         10n
+
+*--------------------------------------------------------------
+* AGC TIME CONSTANT NETWORK (THIS IS THE MAIN CIRCUIT)
+*--------------------------------------------------------------
+* Fast attack path: D1 forward-biased when signal increases
+*   Charge path: det_out → D1 → R_attack → agc_out
+D_attack   det_out   att1     D1N4148
+R_attack   att1      agc_out  1k
+
+* AGC storage capacitor
+C_agc      agc_out   0        10u
+
+* Slow release path: R_release discharges C_agc when signal decreases
+*   Discharge path: agc_out → R_release → D2 → ground
+R_release  agc_out   rel1     470k
+D_release  rel1      0        D1N4148
+
+*--------------------------------------------------------------
+* GAIN-CONTROLLED AMPLIFIER (simplified)
+*--------------------------------------------------------------
+* Model AGC-controlled gain using behavioral source
+* Gain inversely proportional to AGC voltage
+* When AGC voltage is high (strong signal) → gain is low
+* When AGC voltage is low (weak signal) → gain is high
+
+B_output  audio_out  0  V = V(sig_in) * (1.0 / (0.1 + V(agc_out) * 5.0))
+
+*--------------------------------------------------------------
+* REFERENCE: NO AGC (for comparison)
+*--------------------------------------------------------------
+* Pass signal through with fixed gain
+B_noagc   no_agc_out  0  V = V(sig_in) * 2.0
+
+*--------------------------------------------------------------
+* DIODE MODEL
+*--------------------------------------------------------------
+.model D1N4148 D(IS=2.52e-9 RS=0.568 N=1.752 BV=100 IBV=100u
++  CJO=4p M=0.4 TT=20n)
+
+*--------------------------------------------------------------
+* ANALYSIS
+*--------------------------------------------------------------
+* Transient: 4 seconds to see multiple fading cycles
+.tran 1u 4s
+
+*--------------------------------------------------------------
+* MEASUREMENTS
+*--------------------------------------------------------------
+.measure TRAN agc_attack_time TRIG V(agc_out) VAL=0.1 RISE=1
++  TARG V(agc_out) VAL=0.4 RISE=1
+.measure TRAN agc_release_time TRIG V(agc_out) VAL=0.4 FALL=1
++  TARG V(agc_out) VAL=0.15 FALL=1
+
+*--------------------------------------------------------------
+* CONTROL (plotting)
+*--------------------------------------------------------------
+.control
+  run
+  set hcopydevtype = svg
+
+  * Plot 1: Input signal with fading
+  plot V(sig_in) title 'AM Signal with QSB Fading'
++   xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 2: AGC control voltage
+  plot V(agc_out) V(det_out) title 'AGC Control Voltage'
++   xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 3: Output comparison — with AGC vs without
+  plot V(audio_out) V(no_agc_out) title 'Output: AGC vs No AGC'
++   xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Print measurements
+  print agc_attack_time agc_release_time
+.endc
+
+.end

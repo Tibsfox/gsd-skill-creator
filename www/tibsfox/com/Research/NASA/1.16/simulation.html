@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Creative Arts | v1.16 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --pad-deep: #0A0808; --pad-mid: #1A1410;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --redstone-red: #CC4020; --redstone-dim: #662010;
+    --pad-gray: #606060; --pad-light: #909090;
+    --parachute-orange: #E88020; --abort-red: #FF0000;
+    --space: #080808; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2020;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(204,64,32,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(204,64,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(204,64,32,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--pad-deep) 25%, var(--pad-mid) 50%, var(--redstone-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--redstone-red); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(204,64,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,64,32,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(204,64,32,0.12); border: 1px solid var(--redstone-red); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--parachute-orange); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(204,64,32,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--parachute-orange); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--parachute-orange); }
+  em { color: var(--pad-light); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; }
+  a:hover { color: #fff; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  pre {
+    background: rgba(10,8,8,0.8); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.25rem; margin: 1.5rem 0; overflow-x: auto;
+    font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--mercury-silver);
+  }
+  blockquote {
+    border-left: 3px solid var(--redstone-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(8,8,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+  .sim-card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin: 1.5rem 0;
+  }
+  .sim-card h3 { margin-top: 0; }
+  .nav-card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.16 Mercury-Redstone 1</a>
+  <span class="sep">/</span>
+  Track 5: Simulation &amp; Creative Arts
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.16</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts</h1>
+    <p class="subtitle">What to Build, Train, Visualize, and Create</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware Target:</span> RTX 4060 Ti (8GB), 60GB RAM, i7-6700K</span>
+      <span><span class="label">Organism:</span> <em>Dictyostelium discoideum</em></span>
+      <span><span class="label">Bird:</span> <em>Buteo jamaicensis</em> (Red-tailed Hawk, degree 16)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <div class="sim-card">
+      <h3>A1. Python: Connector State Machine Simulator</h3>
+      <p>A Python simulation that models the MR-1 tail plug connector as a finite state machine with three binary variables (A, B, C). The student can trigger disconnections in any order and observe which states are valid, which are invalid, and which contain the sneak circuit. Visualizes the state machine as a directed graph, highlights the intended path versus all possible paths, and shows the Boolean expression for engine cutoff in each state.</p>
+      <p><strong>Key learning moments:</strong></p>
+      <ol>
+        <li>Click B first (simulating MR-1) and watch the state machine transition to state 4 (0,1,0). The sneak circuit term <code>(NOT A) AND B</code> evaluates to TRUE. Engine cutoff.</li>
+        <li>Try all 6 permutations: 5 red rows, 1 green row.</li>
+        <li>Probability plot shows factorial scaling: for 10 operations, P(correct) is effectively zero.</li>
+      </ol>
+      <p><em>Libraries: numpy, matplotlib, networkx | Difficulty: Beginner-Intermediate | Duration: 2&ndash;3 hours</em></p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A2. Python: Thrust Curve and Rise Height Calculator</h3>
+      <p>Computes the Mercury-Redstone vehicle&rsquo;s altitude, velocity, and acceleration as a function of time during the first 10 seconds of flight. Accounts for varying mass (propellant burn), atmospheric drag, and thrust buildup. The student can adjust vehicle mass, thrust, and drag coefficient and observe how parameters affect the rise rate &mdash; and specifically, the velocity at the 4-inch connector separation point.</p>
+      <p><strong>Key learning moments:</strong></p>
+      <ol>
+        <li>The altitude curve barely rises above zero before flattening &mdash; the engine cut off. The dashed &ldquo;would-have-been&rdquo; curve soars upward.</li>
+        <li>Parametric study: at T/W = 1.14 (MR-1), separation velocity is 0.53 m/s. At T/W = 1.25 (military Redstone), it is 0.70 m/s &mdash; 32% faster.</li>
+      </ol>
+      <p><em>Libraries: numpy, matplotlib, scipy | Difficulty: Beginner-Intermediate | Duration: 2&ndash;3 hours</em></p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A3. Web: Interactive Launch Sequence Game</h3>
+      <p>A browser-based game where the player must disconnect three virtual cables (A, B, C) in the correct order to launch a Mercury-Redstone rocket. Wrong order replicates MR-1&rsquo;s actual failure: the rocket rises 4 inches, the engine stops, the escape tower fires, parachutes deploy on the pad. Correct order: rocket launches with animation and sound.</p>
+      <p><strong>Difficulty modes:</strong> Easy (3 cables, 6 permutations) &rarr; Medium (4 cables, 24) &rarr; Hard (5 cables, 120) &rarr; Nightmare (6 cables, 720).</p>
+      <p><em>Technology: HTML5 Canvas + JavaScript | Difficulty: Intermediate | Duration: 4&ndash;6 hours</em></p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A4. Web: MR-1 Event Timeline</h3>
+      <p>An interactive second-by-second timeline of the MR-1 flight, from T-5 seconds through parachute deployment on the pad. Key events plotted on a horizontal timeline with precise timestamps. Zoomable to the critical 80-millisecond window where the sneak circuit formed. State machine panel synchronized with timeline position.</p>
+      <p><strong>Key learning moment:</strong> Zooming into T+0.420s to T+0.500s shows the sneak circuit forming in 20 ms: B disconnects at T+0.430, sneak circuit activates at T+0.432, A disconnects at T+0.460 &mdash; but the damage is done. The cause (20 ms) and the effect (engine shutdown at T+1.530) are separated by a factor of 50 in time.</p>
+      <p><em>Technology: HTML5 Canvas + JavaScript | Difficulty: Intermediate | Duration: 3&ndash;4 hours</em></p>
+    </div>
+
+    <hr>
+
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <div class="sim-card">
+      <h3>B1. Sequence Anomaly Detector</h3>
+      <p>Train an LSTM sequence classifier to detect out-of-order connector disconnection sequences. Input: sequences of 3&ndash;10 timestamped events with timing noise. Output: binary classification (nominal / anomalous) plus identification of which event is out of order.</p>
+      <p>Training data: 10,000 synthetic sequences per class. Timing noise: Gaussian, sigma = 5&ndash;50 ms. Expected accuracy: &gt;95% for well-separated events, degrades to ~80% when noise makes ordering ambiguous. Attention maps highlight the first out-of-order event.</p>
+      <p><em>Libraries: numpy, torch, matplotlib | GPU: Not needed | Difficulty: Intermediate</em></p>
+    </div>
+
+    <hr>
+
+    <h2>C. Computer Science &mdash; The Race Condition</h2>
+
+    <div class="sim-card">
+      <h3>C1. Race Conditions in Concurrent Programming</h3>
+      <p>MR-1&rsquo;s sneak circuit is a hardware race condition: two signals racing to change state, with system behavior depending on which arrives first.</p>
+      <pre># MR-1 race condition in Python pseudocode:
+ground_power_connected = True
+flight_control_active = False
+
+def disconnect_A():     # Pin A -- ground power
+    time.sleep(random.uniform(0.01, 0.05))
+    ground_power_connected = False
+
+def disconnect_B():     # Pin B -- control signals
+    time.sleep(random.uniform(0.01, 0.05))
+    flight_control_active = True
+
+# If B completes before A: SNEAK CIRCUIT! Engine cutoff.
+
+# Fix 1 (MR-1A): Simultaneous release -- atomic operation
+# Fix 2 (Software): Mutex lock
+# Fix 3 (Dictyostelium): Redundancy + majority voting</pre>
+      <p>The key insight: the race condition exists because the intermediate state (A connected, B disconnected) is reachable. Eliminating it requires making that state unreachable, safe, deterministic, or tolerable.</p>
+    </div>
+
+    <hr>
+
+    <h2>D. Game Theory &mdash; The Test Program Dilemma</h2>
+
+    <div class="sim-card">
+      <h3>D1. How Much to Test Before You Fly</h3>
+      <p>MR-1&rsquo;s failure could have been caught by testing at the actual separation speed. The test program tested at design-nominal speed. The failure was in the UNTESTED region of the test space. The game-theoretic optimum: distribute test points to maximize detection probability across the full envelope, with extra coverage near boundaries. MR-1&rsquo;s test program was not Bayesian &mdash; it tested where failure was expected rather than where failure was unknown.</p>
+    </div>
+
+    <hr>
+
+    <h2>E. Creative Arts &mdash; What to Compose, Write, and Render</h2>
+
+    <div class="sim-card">
+      <h3>E1. GLSL Shader: &ldquo;Four Inches&rdquo;</h3>
+      <p>A fragment shader rendering the MR-1 scene: Mercury-Redstone on the launch pad, engine firing, rising exactly 4 inches, settling back. Parachutes deploy and drape over the side. Escape tower arcs away. 16mm film grain aesthetic (1960s Kodachrome look). The shader captures the absurd beauty of a fully functional rocket sitting on the pad with parachutes hanging limply in the Florida sun.</p>
+      <p><em>Resolution: 1920x1080 | Palette: Photorealistic (Cape Canaveral, November afternoon)</em></p>
+    </div>
+
+    <div class="sim-card">
+      <h3>E2. Short Story: &ldquo;The Longest Four Inches&rdquo;</h3>
+      <p>Creative nonfiction from the blockhouse crew&rsquo;s perspective. Tone: technical precision mixed with dark comedy. Structure follows the countdown through ignition, the four-inch flight, the absurd aftermath (each recovery system activating in sequence on the pad), the 24-hour wait, the investigation, and the 28-day fix. Length: 2,000&ndash;3,000 words.</p>
+    </div>
+
+    <hr>
+
+    <h2>F. Problem-Solving Methodology &mdash; The Interface Audit</h2>
+
+    <div class="sim-card">
+      <h3>F1. Interface Hazard Analysis</h3>
+      <p>The five-step methodology born from MR-1:</p>
+      <ol>
+        <li><strong>Identify all interfaces</strong> &mdash; every physical connection between systems</li>
+        <li><strong>Enumerate signals/energy</strong> &mdash; what crosses the boundary, in what direction, when</li>
+        <li><strong>Identify sequencing requirements</strong> &mdash; must this signal change before/after another?</li>
+        <li><strong>Verify enforcement</strong> &mdash; how is the correct sequence enforced? What happens if enforcement fails? Has it been tested at actual operating conditions?</li>
+        <li><strong>Document and review</strong> &mdash; create an ICD with both sides of the interface present</li>
+      </ol>
+      <p>Now standard in aerospace (NASA NPR 7120.5) and adopted by automotive (ISO 26262), nuclear (10 CFR 50), and medical device (IEC 62304) industries.</p>
+    </div>
+
+    <hr>
+
+    <h2>G. GSD Improvements &mdash; Sequence Validation Chipset</h2>
+
+    <div class="sim-card">
+      <h3>G1. Sequence Validator Chipset</h3>
+      <p>Four chips for gsd-skill-creator: <strong>sequence-model</strong> (define expected ordering as a DAG), <strong>sequence-monitor</strong> (track actual execution order, compare to DAG), <strong>sneak-path-detector</strong> (enumerate all paths, identify bypasses), <strong>sequence-enforcer</strong> (block or warn on out-of-order operations). Hooks into the phase execution pipeline. MR-1&rsquo;s connector had an implicit sequence that was not explicitly validated. This chipset makes all sequence dependencies explicit and validated in real time.</p>
+    </div>
+
+    <hr>
+
+    <blockquote>
+      Voltaire died on May 30, 1778, in Paris, reportedly saying &ldquo;Now is not the time for making new enemies&rdquo; when asked to renounce Satan on his deathbed. He had spent 84 years making enemies of every institution that valued certainty over evidence. He would have understood MR-1 instantly. Not the engineering &mdash; he was a writer, not an engineer. But the epistemology. The tail plug connector was designed with certainty: the pins WILL disconnect in this order. Voltaire&rsquo;s entire career was spent dismantling exactly this kind of certainty. Pins have tolerances. Separation speeds vary. The world is not a mechanism that executes the designer&rsquo;s intent. It is a mechanism that executes physics, and physics does not read schematics. Pangloss would have explained MR-1 as necessary in the best of all possible space programs. This is retrospectively true. But it is not a reason to celebrate the failure. It is a reason to analyze it, document it, fix it, and fly again. <em>Il faut cultiver notre jardin.</em> The garden, in November 1960, was Cape Canaveral. The weeds were sneak circuits. The gardeners were engineers with 28 days and a redesigned connector. They cultivated. They flew. They succeeded. Voltaire would have approved.
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="curriculum.html">&larr; Curriculum</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Mission Hub</div>
+        <a href="index.html">v1.16 Mission Hub &rarr;</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.16 Mercury-Redstone 1 + <em>Dictyostelium discoideum</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a>
+</footer>
+
+</body>
+</html>

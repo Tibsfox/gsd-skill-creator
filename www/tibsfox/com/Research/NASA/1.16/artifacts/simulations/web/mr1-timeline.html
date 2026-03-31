@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR-1: Second by Second</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #CC4020;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .timeline-container {
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .timeline {
+    flex: 1;
+    min-width: 500px;
+    max-width: 900px;
+  }
+  .info-panel {
+    flex: 0 0 380px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .info-panel h3 {
+    font-size: 12px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .info-panel .detail-text {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #8898a8;
+  }
+  .info-panel .detail-text strong {
+    color: #c0c8d8;
+  }
+  .info-panel .engineering {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #1a2040;
+    font-size: 11px;
+    color: #667788;
+    line-height: 1.7;
+  }
+  .info-panel .engineering em {
+    color: #CC4020;
+    font-style: normal;
+  }
+
+  .event {
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    overflow: hidden;
+  }
+  .event:hover {
+    border-color: #2a3060;
+  }
+  .event.active {
+    border-color: #CC4020;
+  }
+  .event-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    gap: 12px;
+  }
+  .event-time {
+    font-size: 15px;
+    font-weight: bold;
+    color: #CC4020;
+    min-width: 60px;
+    text-align: right;
+  }
+  .event-time.pre { color: #4488cc; }
+  .event-time.fail { color: #ff4444; }
+  .event-time.aftermath { color: #E88020; }
+  .event-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #CC4020;
+    flex-shrink: 0;
+  }
+  .event-dot.pre { background: #4488cc; }
+  .event-dot.nominal { background: #44ff88; }
+  .event-dot.fail { background: #ff4444; }
+  .event-dot.aftermath { background: #E88020; }
+  .event-title {
+    font-size: 13px;
+    color: #c0c8d8;
+    flex: 1;
+  }
+  .event-expand {
+    font-size: 10px;
+    color: #334455;
+    transition: transform 0.2s;
+  }
+  .event.active .event-expand {
+    transform: rotate(90deg);
+  }
+  .event-body {
+    display: none;
+    padding: 0 15px 15px 90px;
+  }
+  .event.active .event-body {
+    display: block;
+  }
+  .event-body p {
+    font-size: 12px;
+    line-height: 1.7;
+    color: #8898a8;
+    margin-bottom: 8px;
+  }
+  .event-body .illustration {
+    background: #050810;
+    border: 1px solid #1a2040;
+    border-radius: 6px;
+    padding: 15px;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 24px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #334455;
+    letter-spacing: 4px;
+  }
+
+  .timeline-line {
+    position: relative;
+    padding-left: 30px;
+  }
+  .timeline-line::before {
+    content: '';
+    position: absolute;
+    left: 42px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, #4488cc, #CC4020, #ff4444, #E88020);
+  }
+
+  .phase-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 15px 8px 50px;
+    color: #334455;
+    border-left: 2px solid transparent;
+  }
+  .phase-label.prep { color: #4488cc; }
+  .phase-label.flight { color: #CC4020; }
+  .phase-label.failure { color: #ff4444; }
+  .phase-label.after { color: #E88020; }
+</style>
+</head>
+<body>
+
+<h1>MR-1: Second by Second</h1>
+<p class="subtitle">November 21, 1960 &mdash; Cape Canaveral LC-5 &mdash; The 4-Inch Launch</p>
+
+<div class="timeline-container">
+  <div class="timeline">
+    <div class="timeline-line">
+
+      <div class="phase-label prep">Pre-Launch</div>
+
+      <div class="event" onclick="toggleEvent(this, 0)">
+        <div class="event-header">
+          <span class="event-time pre">T-30m</span>
+          <span class="event-dot pre"></span>
+          <span class="event-title">Terminal countdown begins</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>The terminal countdown for MR-1 begins. The Mercury capsule has been mated to the Redstone booster for weeks. Weather is acceptable. Range is clear. Chris Kraft monitors from the blockhouse 300 feet from the pad.</p>
+          <div class="illustration">T - 30:00</div>
+          <p>Ground power feeds the vehicle through the tail plug umbilical. All systems nominal. The A-7 engine is cold — it will receive propellants only minutes before ignition.</p>
+        </div>
+      </div>
+
+      <div class="event" onclick="toggleEvent(this, 1)">
+        <div class="event-header">
+          <span class="event-time pre">T-5m</span>
+          <span class="event-dot pre"></span>
+          <span class="event-title">Propellant loading complete</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>LOX (liquid oxygen) and ethanol propellant loading complete. The Redstone sits fueled on the pad. Internal batteries are armed. The vehicle is now self-sufficient — except for the ground control signals still flowing through the tail plug.</p>
+          <div class="illustration">LOX -183&deg;C &bull; ETOH +20&deg;C</div>
+        </div>
+      </div>
+
+      <div class="phase-label flight">Ignition Sequence</div>
+
+      <div class="event" onclick="toggleEvent(this, 2)">
+        <div class="event-header">
+          <span class="event-time">T-0</span>
+          <span class="event-dot nominal"></span>
+          <span class="event-title">Ignition command</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>The ignition sequence fires. The A-7 engine's gas generator ignites, spinning the turbopump. Propellants flow into the combustion chamber. The engine builds thrust over approximately one second.</p>
+          <div class="illustration">[IGNITION]</div>
+          <p><strong>Engineering:</strong> The A-7 produces 78,000 lbf (347 kN) at rated thrust. The vehicle weighs 66,000 lbs (294 kN). Thrust-to-weight ratio: 1.18 at rated thrust. The engine must reach approximately 70,000 lbf before the holddown clamps release.</p>
+        </div>
+      </div>
+
+      <div class="event" onclick="toggleEvent(this, 3)">
+        <div class="event-header">
+          <span class="event-time">T+1.0s</span>
+          <span class="event-dot nominal"></span>
+          <span class="event-title">Thrust builds — holddown clamps release</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>Thrust exceeds vehicle weight. The four holddown clamps at the base of the rocket release. The rocket begins to rise — slowly at first, accelerating as thrust exceeds weight by an increasing margin.</p>
+          <div class="illustration">CLAMPS RELEASE &bull; NET FORCE POSITIVE</div>
+          <p><strong>Engineering:</strong> At this moment, the rocket has approximately 15% excess thrust. Acceleration is about 0.15g — very gentle. The tail plug connector is still fully mated.</p>
+        </div>
+      </div>
+
+      <div class="phase-label failure">The Four Inches</div>
+
+      <div class="event active" onclick="toggleEvent(this, 4)">
+        <div class="event-header">
+          <span class="event-time fail">T+1.6s</span>
+          <span class="event-dot fail"></span>
+          <span class="event-title">Tail plug separates at 4 inches — SNEAK CIRCUIT</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>The rocket has risen approximately 4 inches (10 cm). The tail plug connector at the base of the rocket pulls free. But the two sets of pins disconnect in the wrong order.</p>
+          <p><strong>The sneak circuit:</strong> The control-inhibit pins separate before the power pins. For a fraction of a second, ground power is still flowing through the connector while the inhibit circuit is open. This creates an unintended electrical path — a "sneak circuit" — that sends a shutdown command to the engine sequencer.</p>
+          <div class="illustration" style="color: #ff4444; font-size: 14px;">
+            CORRECT: Power(-) &rarr; Control(-) &rarr; FLIGHT<br>
+            ACTUAL:  Control(-) &rarr; Power(+) &rarr; SHUTDOWN
+          </div>
+          <p>The engine obeys the shutdown command. It was designed to obey shutdown commands instantly and without question — that is a safety feature. Thrust drops to zero in less than a second.</p>
+        </div>
+      </div>
+
+      <div class="event" onclick="toggleEvent(this, 5)">
+        <div class="event-header">
+          <span class="event-time fail">T+2s</span>
+          <span class="event-dot fail"></span>
+          <span class="event-title">Engine shutdown — rocket settles back on pad</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>With no thrust, the rocket decelerates and settles back onto the launch pad. It drops the 4 inches it gained and lands on its fins. The rocket is now sitting on the pad with full propellant tanks, a dead engine, and live pyrotechnics.</p>
+          <div class="illustration" style="font-size: 16px;">4 INCHES UP &bull; 4 INCHES DOWN</div>
+        </div>
+      </div>
+
+      <div class="event" onclick="toggleEvent(this, 6)">
+        <div class="event-header">
+          <span class="event-time fail">T+3s</span>
+          <span class="event-dot fail"></span>
+          <span class="event-title">Escape tower fires</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>The Mercury capsule's abort sensing system detects the sudden loss of thrust (acceleration drops below threshold). It does exactly what it was designed to do: fire the escape tower's solid rocket motor to pull the capsule away from a failing booster.</p>
+          <p>The escape tower ignites and arcs away from the pad trailing flame and smoke. It flies approximately 400 feet before impacting the beach 400 yards downrange.</p>
+          <div class="illustration" style="color: #E88020;">ESCAPE TOWER &rarr; 400 FT ALTITUDE &rarr; BEACH</div>
+          <p><strong>The absurdity:</strong> The escape tower is now gone. The capsule is sitting on top of a fully-fueled rocket with no escape system. Every subsequent event will make the situation worse.</p>
+        </div>
+      </div>
+
+      <div class="phase-label after">The Aftermath</div>
+
+      <div class="event" onclick="toggleEvent(this, 7)">
+        <div class="event-header">
+          <span class="event-time aftermath">T+6s</span>
+          <span class="event-dot aftermath"></span>
+          <span class="event-title">Drogue parachute deploys</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>With the escape tower gone, the capsule's baroswitch (barometric pressure switch) senses that altitude is at sea level. Its sequencer, following its programmed logic perfectly, deploys the drogue parachute. The small stabilization chute pops out of the top of the capsule and catches the Cape Canaveral breeze.</p>
+          <div class="illustration" style="color: #E88020; font-size: 14px;">DROGUE DEPLOYS AT SEA LEVEL</div>
+        </div>
+      </div>
+
+      <div class="event" onclick="toggleEvent(this, 8)">
+        <div class="event-header">
+          <span class="event-time aftermath">T+10s</span>
+          <span class="event-dot aftermath"></span>
+          <span class="event-title">Main parachute deploys on pad</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>The sequencer continues its programmed timeline. The main parachute — a large orange-and-white canopy designed to lower the capsule gently into the Atlantic Ocean — deploys. It billows out in the wind and drapes over the rocket like a tent.</p>
+          <p>The fully-fueled Mercury-Redstone is now sitting on the pad wearing its own parachute.</p>
+          <div class="illustration" style="color: #E88020; font-size: 18px; letter-spacing: 2px;">PARACHUTES ON PAD</div>
+        </div>
+      </div>
+
+      <div class="event" onclick="toggleEvent(this, 9)">
+        <div class="event-header">
+          <span class="event-time aftermath">T+24h</span>
+          <span class="event-dot aftermath"></span>
+          <span class="event-title">Batteries die — safe to approach</span>
+          <span class="event-expand">&#9654;</span>
+        </div>
+        <div class="event-body">
+          <p>Nobody can approach the rocket. It has live pyrotechnics (destruct charges, retrorocket igniters, parachute mortars that may not have fully fired). The propellant tanks are full. The batteries are still providing power to systems that might fire at any moment.</p>
+          <p><strong>The decision:</strong> Wait. Do nothing. Let the batteries run down over the next 24 hours until there is no electrical power left to trigger anything. Only then can the safing crew approach.</p>
+          <div class="illustration" style="color: #667788; font-size: 13px;">24 HOURS OF STARING AT A ROCKET IN A PARACHUTE</div>
+          <p>Engineers used this 24-hour wait to begin analyzing what happened. By the time they could touch the hardware, they already understood the sneak circuit. The fix was simple: make the power disconnect pin physically longer than the control pin, ensuring it always disconnects first regardless of rise height.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="info-panel" id="infoPanel">
+    <h3>Event Detail</h3>
+    <div class="detail-text" id="detailText">
+      <p>Click any event in the timeline to see detailed engineering analysis.</p>
+      <p style="margin-top: 15px;"><strong>MR-1 Summary:</strong> Every system on Mercury-Redstone 1 worked exactly as designed. The engine started correctly. The abort system detected a problem and responded correctly. The parachute deployment sequencer followed its logic flawlessly. The only failure was the disconnection order of two sets of pins in a connector — a race condition caused by a rise height of 4 inches instead of the expected several feet.</p>
+    </div>
+    <div class="engineering" id="engineeringDetail">
+      <p><em>Sneak Circuit:</em> An unintended electrical path through a circuit that exists only under specific conditions not anticipated by the designer. The term comes from the fact that the path "sneaks" through the circuit topology — it is not visible in the schematic under normal operating conditions. MR-1's sneak circuit existed only during the fraction of a second when the control pins had separated but the power pins had not.</p>
+      <p style="margin-top: 10px;"><em>Lesson:</em> Test the complete sequence, not just individual functions. Every system worked. The integration failed.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const details = [
+  {
+    title: 'Terminal Countdown',
+    text: 'The Mercury-Redstone countdown was adapted from the Redstone missile countdown, modified for the crewed capsule systems. The terminal count covered the final 30 minutes — propellant top-off, range safety arming, telemetry verification, and blockhouse polling.',
+    engineering: 'Ground power at 28V DC flows through the tail plug umbilical, keeping vehicle batteries off-load. All telemetry channels active. Environmental control unit cooling the capsule.'
+  },
+  {
+    title: 'Propellant Loading',
+    text: 'The Redstone used liquid oxygen (LOX) and a 75% ethanol / 25% water mixture as propellants. Total propellant mass approximately 24,000 kg. LOX boiloff requires continuous topping until T-60 seconds.',
+    engineering: 'LOX temperature: -183C. Ethanol at ambient (~20C). The temperature differential across the engine turbopump creates thermal stress similar to the Pioneer 0 bearing challenge — but the A-7 had years more engineering behind it.'
+  },
+  {
+    title: 'Ignition Command',
+    text: 'The A-7 engine ignition sequence: (1) Gas generator igniter fires, (2) Turbopump spins to operating speed, (3) Main propellant valves open, (4) Main chamber ignition, (5) Thrust buildup to rated level.',
+    engineering: 'The A-7 is a regeneratively-cooled, gas-generator cycle engine. Thrust: 347 kN (78,000 lbf). Specific impulse: 235 seconds at sea level. Chamber pressure: ~2.1 MPa (300 psi). Much more mature than the LR-79 that failed on Pioneer 0 — the Redstone had over 50 flights by this point.'
+  },
+  {
+    title: 'Holddown Release',
+    text: 'Four clamps at the base of the rocket hold it to the launch table until thrust is verified. When thrust exceeds a preset threshold (approximately 105% of vehicle weight), the clamps release and the rocket begins its ascent.',
+    engineering: 'At clamp release: Thrust ~350 kN, Weight ~294 kN, Net force ~56 kN, Acceleration ~1.9 m/s^2 (0.19g). This gentle initial acceleration means the rocket rises very slowly at first — just inches per second.'
+  },
+  {
+    title: 'THE SNEAK CIRCUIT',
+    text: 'This is the moment. The tail plug connector has two sets of pins: power pins (carrying ground power) and control pins (carrying the engine inhibit signal). The correct disconnection order requires power pins to separate first, breaking the ground power path before the inhibit is removed. At 4 inches, both pin sets separate, but the control pins (slightly shorter) separate first. Ground power flows through the now-uninhibited shutdown path.',
+    engineering: 'Sneak circuit analysis became a formal discipline after MR-1. The technique involves tracing ALL possible current paths through a circuit under ALL possible states of switches, relays, and connectors — including partially-mated states that the designer never intended. Boeing developed systematic sneak circuit analysis methods in the 1960s directly because of failures like MR-1.'
+  },
+  {
+    title: 'Engine Shutdown',
+    text: 'The A-7 engine receives the shutdown command and cuts off within 0.5 seconds. Propellant valves close, turbopump decelerates, combustion ceases. The rocket has approximately zero upward velocity. It drops 4 inches and lands back on its fins.',
+    engineering: 'The engine did exactly what it was told. Shutdown commands are safety-critical — the engine must obey them instantly. You cannot add "are you sure?" to a shutdown command on a rocket engine. The fault was in the signal, not the response.'
+  },
+  {
+    title: 'Escape Tower Fires',
+    text: 'The Mercury capsule abort sensing system monitors acceleration. When it detects thrust loss (acceleration drops below threshold), it fires the Launch Escape System (LES) solid rocket motor. The tower pulls the capsule away from the booster — except MR-1 never left the pad, so the tower just flies away leaving the capsule behind.',
+    engineering: 'The LES tower motor produces approximately 231 kN (52,000 lbf) for about 1 second. It was designed to pull the capsule clear of an exploding booster at any point during powered flight. On MR-1, it fired perfectly — there was just nothing to escape from. The capsule remained attached to the booster because the clamp ring had not received the separation command.'
+  },
+  {
+    title: 'Drogue Parachute',
+    text: 'The capsule sequencer, now running its reentry timeline, checks barometric altitude. Sea level detected — deploy drogue. The sequencer has no way to know that "sea level" means "still on the launch pad" rather than "descending through 10,000 feet."',
+    engineering: 'The baroswitch is a simple pressure sensor calibrated to deploy the drogue at approximately 21,000 feet (6,400 m) equivalent altitude. At Cape Canaveral, sea level pressure registers as "below deployment altitude." The logic is correct — the context is absurd.'
+  },
+  {
+    title: 'Main Parachute',
+    text: 'Following the drogue, the main parachute deploys. A large orange-and-white ringsail canopy billows out in the coastal wind and settles over the rocket and pad. Photographs of MR-1 draped in its own parachute became iconic images of the space program.',
+    engineering: 'The main parachute is a 63-foot (19.2 m) ringsail design. Deployed at near-zero altitude and zero descent rate, it simply inflates in the wind and drapes over the vehicle. The parachute mortar that deploys it contains a small explosive charge — one of the many live pyrotechnics that prevented approach.'
+  },
+  {
+    title: 'The 24-Hour Wait',
+    text: 'The rocket stands on the pad, fully fueled, draped in parachute fabric, with live pyrotechnics. The silver-zinc batteries will power the vehicle systems for approximately 24 hours. Until they die, any system could fire at any time. The safest action is no action.',
+    engineering: 'This decision — to wait rather than act — was itself an engineering lesson. The natural impulse after a failure is to rush in and fix things. But a fully-fueled rocket with live ordnance and unpredictable electrical state is not a problem that rewards urgency. The 24-hour wait was the correct engineering decision: minimize risk, let the system safe itself, then investigate. This became standard practice for pad aborts.'
+  }
+];
+
+function toggleEvent(el, index) {
+  const wasActive = el.classList.contains('active');
+
+  // Close all events
+  document.querySelectorAll('.event').forEach(e => e.classList.remove('active'));
+
+  // Open clicked event (if it wasn't already open)
+  if (!wasActive) {
+    el.classList.add('active');
+    updateInfoPanel(index);
+  }
+}
+
+function updateInfoPanel(index) {
+  const detail = details[index];
+  document.getElementById('detailText').innerHTML =
+    `<p><strong>${detail.title}</strong></p><p style="margin-top:10px;">${detail.text}</p>`;
+  document.getElementById('engineeringDetail').innerHTML =
+    `<p><em>Engineering Analysis:</em> ${detail.engineering}</p>`;
+}
+</script>
+</body>
+</html>

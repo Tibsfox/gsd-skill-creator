@@ -1,0 +1,132 @@
+{
+  "mission": "1.16",
+  "title": "Mercury-Redstone 1 (MR-1)",
+  "date": "1960-11-21",
+  "organism": "Dictyostelium discoideum",
+  "organism_common": "Social Amoeba (Cellular Slime Mold)",
+  "organism_location": "Temperate forest soils worldwide, feeds on bacteria in leaf litter and decaying organic matter",
+  "dedication": {
+    "name": "Voltaire",
+    "born": "1694-11-21",
+    "died": "1778-05-30",
+    "birthplace": "Paris, France",
+    "field": "Philosophy, literature, satire, Enlightenment thought",
+    "resonance": "Born November 21 — the exact date MR-1 launched and failed. Author of Candide, the great satire on optimism: 'This is the best of all possible worlds.' MR-1 was the best of all possible failures — every system worked correctly, producing the most absurd outcome imaginable. Voltaire would have understood perfectly."
+  },
+  "nodes": [
+    {
+      "id": "sneak-circuit",
+      "concept": "Sneak circuit — an unintended electrical path that exists only under unanticipated conditions",
+      "department": "electrical-engineering",
+      "level": "intermediate",
+      "tspb_layer": 4,
+      "tspb_section": "4.3",
+      "description": "A sneak circuit is an unintended current path through an electrical system that exists only under specific, unanticipated combinations of switch, relay, or connector states. The path is not visible in the schematic under normal operating conditions — it 'sneaks' through the topology. MR-1's sneak circuit existed only during the fraction of a second when the tail plug control pins had separated but the power pins had not. Ground power flowed through the uninhibited shutdown path and commanded engine cutoff. The path was invisible in any single-state analysis of the connector because it required a partially-mated state that the designers never considered. After MR-1, Boeing developed systematic sneak circuit analysis (SCA), a technique that exhaustively traces all possible current paths through all possible switch/connector states. SCA became a standard requirement for crewed spaceflight systems and remains in use today.",
+      "resonance": "Dictyostelium's cAMP signaling cascade is a biological sneak circuit. Under normal conditions (food available), cAMP is a simple intracellular messenger. But under starvation, cells begin pulsing cAMP extracellularly, creating an unintended (from the perspective of normal metabolism) signaling path that triggers multicellular aggregation. The starvation state reveals a pathway that is invisible during normal operation — a sneak circuit through the biochemistry.",
+      "worked_example": {
+        "description": "Enumerate sneak paths in a 3-pin connector",
+        "parameters": {"pins": 3, "states_per_pin": 2},
+        "formula": "total_states = 2^n; sneak_paths = states where control disconnected AND power connected",
+        "result": "2^3 = 8 total states; 2 states create sneak paths (25%)",
+        "python": "import itertools\npins = ['power', 'control', 'telemetry']\nstates = list(itertools.product([True, False], repeat=3))  # True=connected\nfor state in states:\n    p, c, t = state\n    sneak = not c and p  # Control disconnected, power still connected\n    print(f'P={p}, C={c}, T={t} -> {\"SNEAK\" if sneak else \"safe\"}')"
+      }
+    },
+    {
+      "id": "race-condition",
+      "concept": "Race condition — when system behavior depends on the relative timing of events that are not explicitly synchronized",
+      "department": "computer-science",
+      "level": "intermediate",
+      "tspb_layer": 7,
+      "tspb_section": "7.2",
+      "description": "A race condition occurs when the correctness of a system depends on the sequence or timing of events that are not deterministically controlled. MR-1's tail plug disconnection was a race: which set of pins separates first? The design assumed power pins would always separate first because they were physically longer. But this assumption failed at a 4-inch rise height because the length difference was smaller than the tolerance stack-up at that specific displacement. The race was determined by manufacturing tolerances, thermal expansion, and the exact angle of the rocket as it rose — none of which were controlled to the precision needed. In computing, race conditions occur when multiple threads access shared state without synchronization. The fix is the same in both domains: make the correct ordering deterministic, not probabilistic. MR-1's fix (longer power pins) made the ordering physically guaranteed.",
+      "resonance": "Dictyostelium aggregation involves a biological race condition: when starvation triggers cAMP signaling, which cell becomes the aggregation center? Multiple cells begin pulsing simultaneously. The 'winner' is the cell that pulses first with the highest amplitude — a race determined by local nutrient depletion, cell age, and stochastic gene expression. Unlike MR-1, the biological race condition is a feature: it ensures the aggregation center forms at the location of greatest need."
+    },
+    {
+      "id": "state-machine",
+      "concept": "Finite state machine — modeling sequential system behavior as discrete states and transitions",
+      "department": "computer-science",
+      "level": "beginner",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "A finite state machine (FSM) is a mathematical model of computation consisting of a finite set of states, a set of transitions between states triggered by inputs, and designated start and accept/reject states. The MR-1 tail plug disconnection can be modeled as an FSM with states representing the set of connected pins: {A,B,C} → {B,C} → {C} → {} (correct) or {A,B,C} → {A,C} → SHUTDOWN (sneak circuit). Each pin disconnection is an input that triggers a state transition. The FSM makes the sneak circuit visible: any state where B (control) is disconnected while A (power) is still connected leads to SHUTDOWN. The correct sequence removes A before B, ensuring the sneak path is never reachable. FSMs are used in rocket avionics, communications protocols, compiler design, elevator controllers, and vending machines. Any system with sequential logic is implicitly an FSM.",
+      "resonance": "Dictyostelium development follows a biological state machine: vegetative → starving → streaming → aggregated → slug → culmination → fruiting body. Each transition requires specific signals (cAMP concentration, cell density, extracellular matrix formation). Like MR-1's FSM, the wrong transition order produces failure — if cells attempt culmination before forming a proper slug, the fruiting body collapses."
+    },
+    {
+      "id": "connector-sequence",
+      "concept": "Connector sequencing — ensuring multi-pin connectors engage and disengage in a controlled order",
+      "department": "mechanical-engineering",
+      "level": "beginner",
+      "tspb_layer": 4,
+      "tspb_section": "4.1",
+      "description": "Multi-pin connectors that carry both power and signal must engage and disengage pins in a controlled sequence. The standard design principle: ground pins first-make/last-break (connect ground before power, disconnect power before ground). For MR-1's tail plug, the sequencing requirement was: power pins disconnect first (breaking the energy source) before control pins disconnect (removing the inhibit). This is achieved by differential pin length — longer pins engage first and disengage last. The principle extends to all connectors: USB uses differential pin length (ground pins are longer), PCIe connectors stagger power and signal contacts, and hot-swap backplanes have three contact lengths (ground, power, signal). MR-1's failure occurred because the pin length difference was insufficient for the actual disconnection scenario.",
+      "resonance": "Cell membrane receptors in Dictyostelium follow a similar sequencing principle. During aggregation, receptors must bind cAMP before activating the intracellular signaling cascade. If the downstream effectors activate before receptor binding (e.g., due to a constitutively active mutation), the cell responds to phantom signals — a biological equivalent of MR-1's sneak circuit, where the downstream system fired without proper upstream sequencing."
+    },
+    {
+      "id": "tail-plug-design",
+      "concept": "Umbilical connector design — the engineering of ground-to-vehicle interfaces that must survive launch",
+      "department": "systems-engineering",
+      "level": "intermediate",
+      "tspb_layer": 4,
+      "tspb_section": "4.6",
+      "description": "The tail plug (or umbilical connector) is the physical interface between ground support equipment and the launch vehicle. It carries ground power, control signals, propellant lines, and environmental conditioning until the moment of liftoff. The connector must release cleanly as the vehicle rises, without damaging either side, without creating electrical transients, and without leaving debris that could damage the engine. MR-1's tail plug was a multi-pin electrical connector at the base of the Redstone, designed to pull free as the vehicle rose. The design assumed separation at several feet of rise. The 4-inch separation exposed a failure mode that no ground test had revealed because ground tests disconnected the plug by pulling it horizontally, not by lifting it vertically at a specific rate. The redesigned plug used staggered pin lengths to guarantee sequence regardless of separation height or rate.",
+      "resonance": "The Dictyostelium slug has its own umbilical problem: the transition from slug to fruiting body requires the organism to detach from the substrate and lift itself. If the adhesion molecules release in the wrong sequence, the stalk collapses before the spore head forms. The organism solved this with differential adhesion — the stalk cells reduce substrate adhesion progressively from tip to base, ensuring the fruiting body lifts before the base releases. Same principle as staggered pin lengths: sequence the disconnection."
+    },
+    {
+      "id": "thrust-to-weight",
+      "concept": "Thrust-to-weight ratio — the fundamental constraint on whether a rocket can leave the ground",
+      "department": "physics",
+      "level": "beginner",
+      "tspb_layer": 4,
+      "tspb_section": "4.2",
+      "description": "A rocket lifts off when its engine thrust exceeds its weight: T/W > 1.0. The Mercury-Redstone had a T/W ratio of approximately 1.18 at liftoff (78,000 lbf thrust, 66,000 lbs weight). This excess of 18% above unity determines the initial acceleration: a = g * (T/W - 1) = 9.81 * 0.18 = 1.77 m/s^2. At this acceleration, the rocket rises slowly — it takes approximately 0.6 seconds to travel 4 inches from a standing start. The low initial acceleration is why MR-1 was still close to the pad when the tail plug separated. Higher T/W ratios (like Saturn V's 1.19 or Space Shuttle's 1.50) produce faster initial rise. The Falcon 9 at T/W ≈ 1.2 also rises slowly, clearing the tower in about 7 seconds. T/W is a dimensionless ratio that completely characterizes whether a vehicle can ascend.",
+      "resonance": "The Dictyostelium slug faces its own thrust-to-weight challenge during culmination. The stalk cells must push the spore mass upward against gravity. If the stalk is too thin (insufficient structural thrust) relative to the spore mass (payload weight), the fruiting body collapses. The ratio of stalk cross-section to spore mass determines maximum fruiting body height — a biological T/W constraint.",
+      "worked_example": {
+        "description": "Time to rise 4 inches at MR-1's initial acceleration",
+        "parameters": {"thrust_N": 347000, "mass_kg": 29937, "height_m": 0.102},
+        "formula": "a = T/m - g; t = sqrt(2*h/a)",
+        "result": "a = 11.59 - 9.81 = 1.78 m/s^2; t = sqrt(2*0.102/1.78) = 0.34 seconds",
+        "python": "import numpy as np\nT = 347000  # N\nm = 29937   # kg\ng = 9.81\nh = 0.102   # m (4 inches)\na = T/m - g\nt = np.sqrt(2*h/a)\nprint(f'Initial acceleration: {a:.2f} m/s^2 ({a/g:.2f} g)')\nprint(f'Time to rise 4 inches: {t:.3f} seconds')\nprint(f'Velocity at 4 inches: {a*t:.3f} m/s')"
+      }
+    },
+    {
+      "id": "escape-tower-sequence",
+      "concept": "Launch Escape System — the autonomous abort system that protects crew from booster failure",
+      "department": "systems-engineering",
+      "level": "intermediate",
+      "tspb_layer": 7,
+      "tspb_section": "7.3",
+      "description": "The Mercury Launch Escape System (LES) was a solid-rocket tower mounted above the capsule, producing 231 kN (52,000 lbf) for approximately 1 second — enough to pull the capsule clear of an exploding booster at any point during powered ascent. The LES was autonomous: its abort sensing system monitored booster acceleration, attitude rates, and electrical continuity. If any parameter exceeded limits, the LES fired without crew or ground intervention. On MR-1, the abort sensing system detected the thrust loss (acceleration below threshold) and fired the LES correctly. But because the capsule had not received a separation command (the clamp ring holding capsule to booster was still locked), the tower flew away alone. The capsule sequencer then ran its post-separation timeline: baroswitch check → altitude is sea level → deploy drogue → deploy main. Every autonomous system performed correctly. The integration assumption — that the LES would only fire during actual flight — was wrong.",
+      "resonance": "Dictyostelium has its own escape system: individual cells can defect from the aggregate if conditions deteriorate. 'Cheater' cells avoid becoming stalk cells (which die) and position themselves preferentially in the spore mass. This is an autonomous abort — individual cells detecting unfavorable conditions and escaping the collective sacrifice. Like the LES, the escape mechanism works perfectly; the question is whether it fires at the right time."
+    },
+    {
+      "id": "safe-to-approach",
+      "concept": "Safe-to-approach analysis — the engineering discipline of determining when a failed system can be accessed",
+      "department": "systems-engineering",
+      "level": "advanced",
+      "tspb_layer": 7,
+      "tspb_section": "7.5",
+      "description": "After MR-1 settled back on the pad, the vehicle was in an undefined state: propellants loaded, pyrotechnics partially fired, batteries active, systems in unknown configuration. The safe-to-approach analysis required enumerating all possible hazards (propellant explosion, pyrotechnic firing, structural collapse), assessing the probability and consequence of each, and determining the minimum conditions for safe access. For MR-1, the controlling hazard was battery life: as long as batteries provided power, any pyrotechnic could fire. The silver-zinc batteries had a known discharge curve; after approximately 24 hours they would be below the voltage needed to trigger any pyrotechnic device. The 24-hour wait was not an arbitrary decision — it was an engineering analysis based on battery chemistry. This approach — wait for the system to passivate itself — is standard practice for pad aborts and is used in EOD (explosive ordnance disposal), nuclear reactor shutdown, and chemical spill response.",
+      "resonance": "Dictyostelium sporulation involves a similar passivation: the stalk cells undergo programmed cell death, becoming metabolically inert. Only after the stalk has fully passivated (died) is the fruiting body structurally stable enough for spore dispersal. Premature spore release (before stalk passivation) results in structural collapse — the biological equivalent of approaching MR-1 before the batteries died."
+    },
+    {
+      "id": "agc-time-constant",
+      "concept": "AGC time constant — asymmetric attack and release timing for automatic gain control",
+      "department": "electronics",
+      "level": "intermediate",
+      "tspb_layer": 4,
+      "tspb_section": "4.4",
+      "description": "Automatic Gain Control (AGC) adjusts receiver gain to maintain constant output level despite varying input signal strength. The time constant determines how quickly AGC responds. Fast attack (short time constant, ~1 ms) allows rapid gain reduction when a strong signal appears, preventing amplifier overload and distortion. Slow release (long time constant, ~500 ms) prevents gain from recovering too quickly when a signal fades, which would cause audible 'pumping' — the gain rising between syllables of speech, amplifying noise. The asymmetry is achieved with diode-steered charge/discharge paths: a forward-biased diode provides a low-impedance charge path (fast attack), while the AGC capacitor discharges through a high-value resistor (slow release). Mercury spacecraft communication used AGC in ground station receivers to maintain signal quality as the rocket's signal strength changed with distance and aspect angle during ascent.",
+      "resonance": "Dictyostelium cAMP signaling uses a similar asymmetric time constant. cAMP pulses have fast rise times (~30 seconds, analogous to fast attack) driven by rapid enzyme activation, and slow decay times (~5 minutes, analogous to slow release) governed by phosphodiesterase degradation. This asymmetry creates the clean oscillating waves that guide cell streaming during aggregation. If the cAMP decay were as fast as the rise, the signal would be too noisy for directional chemotaxis — biological 'pumping.'"
+    },
+    {
+      "id": "camp-signaling-cascade",
+      "concept": "cAMP signaling cascade — how Dictyostelium uses cyclic AMP waves to organize multicellular behavior",
+      "department": "biology",
+      "level": "advanced",
+      "tspb_layer": 8,
+      "tspb_section": "8.3",
+      "description": "Dictyostelium discoideum is one of the best-studied model organisms for collective behavior. When starved, individual amoebae begin secreting cyclic AMP (cAMP) in pulses. Neighboring cells detect these pulses via surface receptors, amplify them by producing their own cAMP, and relay the signal outward. The result is concentric or spiral waves of cAMP radiating from aggregation centers. Cells move directionally up the cAMP gradient (chemotaxis) during the rising phase of each wave, then stop during the falling phase. Over hundreds of pulses, 10,000-100,000 cells stream toward the center and aggregate into a multicellular slug. The slug then migrates (up to several centimeters) to a suitable location, differentiates into stalk and spore cells, and forms a fruiting body approximately 1-2 mm tall. The entire process — from starvation signal to spore dispersal — takes approximately 24 hours. The signaling cascade uses the same second messenger (cAMP) found in human cells, making Dictyostelium a fundamental model for cell signaling research.",
+      "resonance": "The cAMP cascade is a biological launch sequence: individual cells (components) must coordinate through a shared signaling medium (the equivalent of the electrical bus) in a specific temporal sequence (pulse → relay → aggregate → differentiate) to achieve a collective outcome (fruiting body / launch). If the sequence is wrong — if cells differentiate before aggregating, or if the signaling medium is disrupted — the outcome fails. MR-1's sneak circuit disrupted the electrical signaling medium; a cAMP signaling mutation disrupts the chemical one. Both systems fail not because individual components are broken, but because the coordination sequence is wrong."
+    }
+  ]
+}
