@@ -1,0 +1,86 @@
+{
+  "mission": "1.22",
+  "title": "Mercury-Atlas 7 / Aurora 7",
+  "sources": [
+    {
+      "id": "ds-122-01",
+      "name": "NASA Technical Reports Server — MA-7 Mission Report",
+      "url": "https://ntrs.nasa.gov/",
+      "type": "government",
+      "format": "PDF",
+      "description": "Complete post-flight report for Mercury-Atlas 7, including trajectory data, systems performance, crew observations, and the detailed fuel consumption timeline that documented Carpenter's attitude control fuel depletion."
+    },
+    {
+      "id": "ds-122-02",
+      "name": "NSSDC Master Catalog — Mercury-Atlas 7",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1962-019A",
+      "type": "government",
+      "format": "HTML/API",
+      "description": "NASA Space Science Data Coordinated Archive entry for Aurora 7 spacecraft, including orbital parameters, mission timeline, and instrument manifest."
+    },
+    {
+      "id": "ds-122-03",
+      "name": "UniProt — GFP (Aequorea victoria)",
+      "url": "https://www.uniprot.org/uniprot/P42212",
+      "type": "database",
+      "format": "JSON/XML",
+      "description": "Complete protein sequence, structure references, functional annotations, and post-translational modification data for green fluorescent protein from Aequorea victoria."
+    },
+    {
+      "id": "ds-122-04",
+      "name": "RCSB Protein Data Bank — GFP Crystal Structure (1EMA)",
+      "url": "https://www.rcsb.org/structure/1EMA",
+      "type": "database",
+      "format": "PDB/mmCIF",
+      "description": "X-ray crystal structure of enhanced GFP at 1.9 Å resolution, showing the β-barrel architecture, chromophore positioning, and the water molecules that participate in the hydrogen bonding network around the chromophore."
+    },
+    {
+      "id": "ds-122-05",
+      "name": "FPbase — Fluorescent Protein Database",
+      "url": "https://www.fpbase.org/protein/avGFP/",
+      "type": "database",
+      "format": "JSON/HTML",
+      "description": "Comprehensive fluorescent protein reference: spectra, quantum yield, extinction coefficient, maturation time, and comparison data for wild-type avGFP and all engineered variants."
+    },
+    {
+      "id": "ds-122-06",
+      "name": "NOAA Fisheries — Rhinoceros Auklet Data",
+      "url": "https://www.fisheries.noaa.gov/",
+      "type": "government",
+      "format": "CSV/HTML",
+      "description": "Population surveys, colony data, and foraging ecology for Cerorhinca monocerata, including Protection Island colony census data and prey composition studies."
+    },
+    {
+      "id": "ds-122-07",
+      "name": "USGS Protection Island NWR — Seabird Monitoring",
+      "url": "https://www.fws.gov/refuge/protection-island",
+      "type": "government",
+      "format": "PDF/HTML",
+      "description": "Long-term seabird monitoring data from Protection Island National Wildlife Refuge, including Rhinoceros Auklet nesting success, chick growth rates, and prey delivery rates."
+    },
+    {
+      "id": "ds-122-08",
+      "name": "SEALAB Program Records — Naval History and Heritage Command",
+      "url": "https://www.history.navy.mil/",
+      "type": "government",
+      "format": "PDF/HTML",
+      "description": "Official records of the Navy's SEALAB I, II, and III programs, including Carpenter's participation in SEALAB II (1965), habitat specifications, and dive logs."
+    },
+    {
+      "id": "ds-122-09",
+      "name": "Shimomura Laboratory Publications",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/",
+      "type": "academic",
+      "format": "PDF",
+      "description": "Osamu Shimomura's publications on aequorin and GFP isolation and characterization, beginning with the seminal 1962 paper on aequorin extraction from Aequorea victoria at Friday Harbor."
+    },
+    {
+      "id": "ds-122-10",
+      "name": "Friday Harbor Laboratories — UW Marine Biology Station",
+      "url": "https://fhl.uw.edu/",
+      "type": "academic",
+      "format": "HTML",
+      "description": "University of Washington's marine biology research station on San Juan Island, where Shimomura collected Aequorea victoria specimens and where ongoing cnidarian research continues."
+    }
+  ]
+}

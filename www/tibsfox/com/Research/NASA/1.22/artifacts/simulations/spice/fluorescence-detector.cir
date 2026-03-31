@@ -1,0 +1,391 @@
+* Fluorescence Detector — Transimpedance Amplifier for GFP Detection
+* =========================================================================
+* NASA Mission Series v1.22
+* Mercury-Atlas 7 / Aurora 7 — Scott Carpenter, May 24, 1962
+*
+* Carpenter was the science astronaut. While Glenn focused on proving
+* the spacecraft systems and Shepard/Grissom validated the escape
+* trajectory, Carpenter's mission was loaded with experiments:
+*   - Photographing weather patterns and the airglow layer
+*   - Deploying a tethered balloon to measure atmospheric drag
+*   - Observing Glenn's "fireflies" (ice crystals from the capsule)
+*   - Testing liquid behavior in zero-g
+*
+* This fluorescence detector circuit represents the kind of
+* instrumentation that would later become standard for biological
+* experiments in space. Green Fluorescent Protein (GFP) detection
+* using UV excitation and filtered photodiode readout.
+*
+* The core challenge: the fluorescence signal is extremely weak.
+* A typical GFP sample excited by UV produces photodiode currents
+* in the range of 100 pA to 10 nA. Converting this tiny current
+* to a measurable voltage requires a transimpedance amplifier with
+* very high gain (R_F = 10 MOhm) and very low noise.
+*
+* Circuit description:
+*   1. UV LED driver: constant current source at 20 mA (V_F = 3.3V)
+*   2. Photodiode model: photocurrent source + junction capacitance
+*      + shunt resistance (reverse-biased PIN diode)
+*   3. Transimpedance amplifier: op-amp with R_F = 10 MOhm
+*      V_out = -I_photo * R_F (1 nA -> -10 mV)
+*   4. Bandpass filter: rejects UV excitation scatter, passes
+*      green emission (modeled as electrical bandpass)
+*   5. Second stage: gain + offset for signal conditioning
+*
+* Run: ngspice -b fluorescence-detector.cir
+* =========================================================================
+
+.title Aurora 7 — Fluorescence Detector (Transimpedance Amplifier)
+
+*--------------------------------------------------------------
+* POWER SUPPLY
+*--------------------------------------------------------------
+* Dual supply for op-amp operation
+* Low-noise regulated supply is critical — power supply ripple
+* at the nanoamp signal level would swamp the fluorescence signal
+V_pos  vp   0  DC 12
+V_neg  vn   0  DC -12
+
+* =========================================================================
+* OP-AMP SUBCIRCUIT
+* =========================================================================
+* Simple behavioral model: voltage-controlled voltage source
+* with finite gain, input impedance, and output resistance.
+* Gain = 100,000 (100 dB open-loop) — typical for a precision
+* op-amp like the OPA111 or AD549 (low-bias-current FET input).
+*
+* For a transimpedance amplifier handling picoamp signals, the
+* op-amp input bias current must be << signal current. FET-input
+* op-amps achieve bias currents of ~1 pA, suitable for our
+* 100 pA to 10 nA signal range.
+
+.subckt OPAMP inp inn out vp vn
+  R_in   inp  inn  1e12
+  E_gain mid  0    inp  inn  100000
+  R_out  mid  out  100
+  * Output rail clamping
+  D_hi   out  vp   DLIM
+  D_lo   vn   out  DLIM
+.ends OPAMP
+.model DLIM D(IS=1e-14 N=0.01)
+
+* =========================================================================
+* STAGE 1: UV LED CONSTANT-CURRENT DRIVER
+* =========================================================================
+* The UV LED excites the GFP fluorophore at ~395 nm (near-UV).
+* A constant current source provides stable, repeatable excitation
+* intensity — critical because fluorescence output is directly
+* proportional to excitation power.
+*
+*          Vp (12V)
+*           |
+*         R_set (390 ohm)
+*           |
+*         LED_UV (V_F = 3.3V at 20 mA)
+*           |
+*          [Q_drv] collector
+*       B---|
+*       |   E
+*     V_ref |
+*           R_sense (10 ohm)
+*           |
+*          GND
+*
+* I_LED = V_ref / R_sense
+* V_ref = 0.2V -> I_LED = 0.2V / 10 ohm = 20 mA
+
+V_ref   led_ref   0   DC 0.2
+
+* LED driver transistor
+.model NPN_DRV NPN (BF=200 IS=1e-14)
+Q_drv   led_top   led_ref   led_sense   NPN_DRV
+R_sense led_sense 0         10
+
+* Current-limiting resistor
+* V_drop = Vp - V_LED - V_CE_sat - V_sense
+*        = 12 - 3.3 - 0.3 - 0.2 = 8.2V
+* R_set = 8.2V / 20mA = 410 ohm -> use 390 ohm standard value
+R_set   vp   led_anode   390
+
+* UV LED model: forward voltage 3.3V at 20 mA
+* Modeled as a diode with appropriate parameters
+D_LED   led_anode   led_top   UV_LED
+.model UV_LED D(IS=1e-20 N=2.5 RS=5 BV=5)
+
+* =========================================================================
+* STAGE 2: PHOTODIODE MODEL
+* =========================================================================
+* The photodiode converts fluorescence photons to current.
+* Reverse-biased PIN diode model:
+*
+*   I_photo: photocurrent (proportional to fluorescence intensity)
+*   C_j:     junction capacitance (limits bandwidth)
+*   R_sh:    shunt resistance (dark current path)
+*   V_bias:  reverse bias voltage (increases speed, reduces capacitance)
+*
+* GFP emission: peak at 509 nm (green)
+* Silicon photodiode responsivity at 509 nm: ~0.25 A/W
+*
+* For a weak fluorescent sample:
+*   Excitation power at sample: ~1 mW
+*   Quantum yield of GFP: ~0.79
+*   Collection efficiency: ~0.01 (solid angle fraction)
+*   Filter transmission: ~0.5
+*   Fluorescence power at detector: ~4 uW
+*   Photocurrent: 0.25 A/W * 4 uW = 1 uA (strong sample)
+*   Weak sample: 1/1000 of this = 1 nA
+*   Very weak sample: 100 pA
+
+* Reverse bias for the photodiode
+V_bias  vp  pd_cathode  DC 5
+
+* Photocurrent source — swept for DC analysis
+* Positive current flows from cathode to anode (reverse bias convention)
+* Default 1 nA for transient analysis
+I_photo pd_cathode  pd_anode  DC 1n
+
+* Junction capacitance (typically 5-50 pF for a PIN diode)
+* Lower at higher reverse bias — 10 pF at 5V reverse
+C_j     pd_cathode  pd_anode  10p
+
+* Shunt resistance (defines dark current)
+* Dark current = V_bias / R_sh = 5V / 10G = 0.5 nA
+* This sets the noise floor — signal must exceed dark current
+R_sh    pd_cathode  pd_anode  10G
+
+* =========================================================================
+* STAGE 3: TRANSIMPEDANCE AMPLIFIER (TIA)
+* =========================================================================
+* The TIA converts photodiode current directly to voltage.
+* This is the critical stage — it must handle currents from
+* 100 pA to 10 uA (5 decades of dynamic range).
+*
+* V_out = -I_photo * R_F
+*
+*   I_photo = 100 pA  ->  V_out = -1 mV
+*   I_photo = 1 nA    ->  V_out = -10 mV
+*   I_photo = 10 nA   ->  V_out = -100 mV
+*   I_photo = 100 nA  ->  V_out = -1 V
+*   I_photo = 1 uA    ->  V_out = -10 V (near rail)
+*
+* Feedback capacitor C_F prevents oscillation due to the
+* photodiode capacitance interacting with R_F. The feedback
+* capacitor creates a pole at:
+*   f_p = 1 / (2 * pi * R_F * C_F)
+*       = 1 / (2 * pi * 10M * 0.2p) = 79.6 kHz
+*
+*                       R_F (10 MOhm)
+*                  +----/\/\/\----+
+*                  |              |
+*                  |    C_F       |
+*                  +----||--------+
+*                  |              |
+*  pd_anode ---+---|- [OPAMP] out-+--- tia_out
+*              |   |+ (grounded)  |
+*             GND  |              |
+*                 GND
+*
+* The inverting input is at virtual ground (V- ≈ V+ = 0V).
+* All photocurrent flows through R_F, producing the output voltage.
+
+X_TIA  0  pd_anode  tia_out  vp  vn  OPAMP
+
+* Feedback resistor — 10 MOhm transimpedance gain
+R_F    tia_out  pd_anode  10MEG
+
+* Feedback capacitor — stabilization
+* Prevents peaking/oscillation from the C_j/R_F interaction
+* f_3dB = 1/(2*pi*R_F*C_F) ≈ 80 kHz — adequate for fluorescence
+C_F    tia_out  pd_anode  0.2p
+
+* =========================================================================
+* STAGE 4: BANDPASS FILTER
+* =========================================================================
+* In a real fluorescence detector, optical filters (dichroic mirror
+* + emission filter) reject the UV excitation and pass only the
+* green fluorescence. Electrically, we model a bandpass that
+* rejects any residual excitation-frequency interference.
+*
+* Simple two-stage RC filter:
+*   High-pass: removes DC offset and low-frequency drift
+*   Low-pass: removes high-frequency noise
+*
+* For steady-state fluorescence (DC measurement), we use a
+* low-pass filter only to reduce noise bandwidth.
+* f_c = 1/(2*pi*R_filt*C_filt) = 1/(2*pi*100k*100p) ≈ 16 kHz
+
+R_filt  tia_out    filt_out   100k
+C_filt  filt_out   0          100p
+
+* =========================================================================
+* STAGE 5: SIGNAL CONDITIONING — GAIN AND OFFSET
+* =========================================================================
+* Second op-amp stage provides adjustable gain and DC offset.
+* Gain = 1 + R_G2/R_G1 = 1 + 100k/10k = 11
+* This amplifies the TIA output for weak fluorescence signals.
+*
+* Offset adjustment allows zeroing the output with no fluorescence
+* (dark current subtraction).
+
+X_GAIN  filt_ref  filt_out  sig_out  vp  vn  OPAMP
+
+* Gain-setting resistors
+R_G1   filt_out   filt_ref   10k
+R_G2   filt_ref   sig_out    100k
+
+* Offset voltage — adjustable to null dark current
+* Set to compensate the TIA output due to dark current alone
+V_offset  offset_node  0  DC 0
+R_off     offset_node  filt_ref  1MEG
+
+* Output load
+R_load  sig_out  0  10k
+
+* =========================================================================
+* ANALYSIS
+* =========================================================================
+
+* DC sweep: output voltage vs photocurrent
+* Sweep from 100 pA (very weak fluorescence) to 10 uA (strong sample)
+* Use logarithmic-like sweep by sweeping the current source
+.dc I_photo 100p 10u 10n
+
+* AC analysis: TIA bandwidth
+* Shows the transimpedance gain vs frequency
+* The -3 dB point reveals the measurement bandwidth
+.ac dec 50 1 10MEG
+
+* Transient: response to a pulsed fluorescence signal
+* Simulates a fluorescent bead passing through the detection volume
+.tran 0 2m 0 1u
+
+* Override photocurrent for transient: pulse simulates a bead
+* crossing the excitation beam (Gaussian approximation as trapezoid)
+I_pulse pd_cathode pd_anode PWL(
++ 0       0.5n
++ 0.2m    0.5n
++ 0.4m    2n
++ 0.6m    8n
++ 0.8m    10n
++ 1.0m    10n
++ 1.2m    8n
++ 1.4m    2n
++ 1.6m    0.5n
++ 2.0m    0.5n)
+
+* =========================================================================
+* OUTPUT AND MEASUREMENTS
+* =========================================================================
+.control
+  run
+
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  * Plot 1: TIA output vs photocurrent (DC sweep)
+  hardcopy fluor_dc_response.png v(tia_out)
+  + title 'Transimpedance Output vs Photocurrent'
+  + xlabel 'Photocurrent (A)' ylabel 'TIA Output (V)'
+
+  * Plot 2: Conditioned output vs photocurrent
+  hardcopy fluor_conditioned.png v(sig_out)
+  + title 'Conditioned Output vs Photocurrent (Gain = 11)'
+  + xlabel 'Photocurrent (A)' ylabel 'Output Voltage (V)'
+
+  * Plot 3: AC response — transimpedance bandwidth
+  hardcopy fluor_bandwidth.png vdb(tia_out)
+  + title 'Transimpedance Amplifier Frequency Response'
+  + xlabel 'Frequency (Hz)' ylabel 'Gain (dB)'
+
+  * Plot 4: Transient — fluorescent bead passing through beam
+  hardcopy fluor_transient.png v(tia_out) v(sig_out)
+  + title 'Fluorescence Pulse — Bead Crossing Detection Volume'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Measurements
+  echo ""
+  echo "========================================================"
+  echo "  FLUORESCENCE DETECTOR — TRANSIMPEDANCE AMPLIFIER"
+  echo "  Aurora 7 Mission Series v1.22"
+  echo "========================================================"
+  echo ""
+
+  echo "--- Transimpedance Gain ---"
+  echo "  R_F = 10 MOhm"
+  echo "  V_out = -I_photo * R_F"
+  echo ""
+  echo "  Expected output voltages:"
+  echo "    100 pA (very weak) ->   -1 mV"
+  echo "    1 nA   (weak)     ->  -10 mV"
+  echo "    10 nA  (moderate) -> -100 mV"
+  echo "    100 nA (good)     ->   -1 V"
+  echo "    1 uA   (strong)   ->  -10 V (rail-limited)"
+
+  echo ""
+  echo "--- Measured DC Response ---"
+  meas dc v_100pA FIND v(tia_out) AT=100p
+  meas dc v_1nA FIND v(tia_out) AT=1n
+  meas dc v_10nA FIND v(tia_out) AT=10n
+  meas dc v_100nA FIND v(tia_out) AT=100n
+  meas dc v_1uA FIND v(tia_out) AT=1u
+  echo "  TIA output at 100 pA: $&v_100pA V"
+  echo "  TIA output at 1 nA:   $&v_1nA V"
+  echo "  TIA output at 10 nA:  $&v_10nA V"
+  echo "  TIA output at 100 nA: $&v_100nA V"
+  echo "  TIA output at 1 uA:   $&v_1uA V"
+
+  echo ""
+  echo "--- Conditioned Output (x11 Gain) ---"
+  meas dc sig_1nA FIND v(sig_out) AT=1n
+  meas dc sig_10nA FIND v(sig_out) AT=10n
+  meas dc sig_100nA FIND v(sig_out) AT=100n
+
+  echo ""
+  echo "--- Bandwidth ---"
+  echo "  Feedback pole: f_p = 1/(2*pi*R_F*C_F)"
+  echo "                     = 1/(2*pi*10M*0.2p)"
+  echo "                     ≈ 80 kHz"
+  echo "  Noise filter:  f_c = 1/(2*pi*100k*100p)"
+  echo "                     ≈ 16 kHz"
+  echo "  Effective bandwidth limited by noise filter to ~16 kHz"
+
+  echo ""
+  echo "--- Noise Considerations ---"
+  echo "  Shot noise: i_n = sqrt(2*q*I_dark*BW)"
+  echo "    I_dark = 0.5 nA, BW = 16 kHz"
+  echo "    i_n = sqrt(2 * 1.6e-19 * 0.5e-9 * 16e3)"
+  echo "        = sqrt(2.56e-24)"
+  echo "        ≈ 50.6 fA RMS"
+  echo "  Johnson noise: i_n = sqrt(4*kT*BW/R_F)"
+  echo "    i_n = sqrt(4 * 4.14e-21 * 16e3 / 10e6)"
+  echo "        = sqrt(2.65e-23)"
+  echo "        ≈ 162 fA RMS"
+  echo "  Total noise current: ~170 fA RMS"
+  echo "  SNR at 1 nA signal: 1e-9 / 170e-15 ≈ 5900 (75 dB)"
+  echo "  Minimum detectable signal: ~500 fA (SNR=3)"
+
+  echo ""
+  echo "========================================================"
+  echo "  GFP AND SPACE BIOLOGY"
+  echo "========================================================"
+  echo ""
+  echo "Green Fluorescent Protein (GFP) was isolated from the"
+  echo "jellyfish Aequorea victoria in 1962 — the same year"
+  echo "Carpenter flew Aurora 7. It would take 30 more years"
+  echo "before Chalfie and Tsien turned GFP into the universal"
+  echo "biological marker that earned them the 2008 Nobel Prize."
+  echo ""
+  echo "Today, GFP fluorescence detectors fly on the ISS for"
+  echo "real-time monitoring of gene expression in microgravity."
+  echo "The transimpedance amplifier at their heart is unchanged"
+  echo "from this basic topology — V_out = -I_photo * R_F —"
+  echo "though modern op-amps achieve femtoamp bias currents"
+  echo "and the feedback network includes active guard rings."
+  echo ""
+  echo "Carpenter would have loved it. He was the Mercury"
+  echo "astronaut who wanted to DO science, not just survive."
+
+  quit
+.endc
+
+.end

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aequorea victoria — Crystal Jellyfish Bioluminescence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep: #020810;
+    --ocean: #041020;
+    --blue-flash: #2040C0;
+    --green-glow: #40D080;
+    --text: #C0D0E0;
+    --text-dim: #506070;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: linear-gradient(180deg, #020810 0%, #041828 40%, #061020 100%);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+    overflow-x: hidden;
+  }
+  h1 {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--green-glow);
+    margin-bottom: 3px;
+  }
+  .subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  canvas {
+    border-radius: 8px;
+    cursor: pointer;
+    max-width: 800px;
+    width: 100%;
+  }
+  .info-bar {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(4,16,32,0.8);
+    border: 1px solid #0A2040;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+  .info-bar em { color: var(--green-glow); font-style: normal; }
+  .info-bar .blue { color: var(--blue-flash); }
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    max-width: 800px;
+    width: 100%;
+  }
+  .ctrl-btn {
+    padding: 5px 14px;
+    border: 1px solid #0A2848;
+    background: #041020;
+    color: var(--text-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .ctrl-btn:hover { border-color: var(--green-glow); color: var(--text); }
+  .ctrl-btn.active { border-color: var(--green-glow); color: var(--green-glow); background: rgba(64,208,128,0.08); }
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(2,8,16,0.92);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .overlay.show { display: flex; }
+  .overlay-card {
+    background: #041828;
+    border: 1px solid #0A2848;
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 600px;
+    width: 100%;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .overlay-card h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--green-glow);
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+  .overlay-card p { margin-bottom: 10px; }
+  .overlay-card .close-btn {
+    margin-top: 12px;
+    padding: 6px 20px;
+    border: 1px solid var(--green-glow);
+    background: transparent;
+    color: var(--green-glow);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .overlay-card .close-btn:hover { background: rgba(64,208,128,0.1); }
+  .footer {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    margin-top: 16px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Aequorea victoria &mdash; Crystal Jellyfish Bioluminescence</h1>
+<p class="subtitle">Calcium-dependent fluorescence &mdash; Aequorin + GFP cascade</p>
+
+<canvas id="canvas" width="800" height="600"></canvas>
+
+<div class="controls">
+  <button class="ctrl-btn" id="btnGFP" onclick="toggleGFP()">WHAT IS GFP?</button>
+</div>
+
+<div class="info-bar">
+  Click the jellyfish to trigger calcium-dependent bioluminescence.
+  <span class="blue">Blue light</span> from <em>aequorin</em> is absorbed by
+  <em>GFP</em> and re-emitted as <em>green fluorescence</em>.
+</div>
+
+<p class="footer">Mission 1.22 &bull; NASA Mission Series &bull; tibsfox.com/Research/NASA/</p>
+
+<div class="overlay" id="gfpOverlay">
+  <div class="overlay-card">
+    <h2>What is GFP?</h2>
+    <p><strong>Green Fluorescent Protein (GFP)</strong> was first isolated from
+    <em>Aequorea victoria</em> by Osamu Shimomura in 1962 &mdash; the same year
+    as Scott Carpenter's Aurora 7 flight.</p>
+    <p>GFP absorbs blue light (from the chemiluminescent protein aequorin) and
+    re-emits it as bright green fluorescence at 509 nm. The protein contains a
+    chromophore formed autocatalytically from three amino acids (Ser65-Tyr66-Gly67).</p>
+    <p>In 2008, Shimomura, Martin Chalfie, and Roger Tsien shared the
+    <strong>Nobel Prize in Chemistry</strong> for the discovery and development
+    of GFP. It revolutionized biology by enabling researchers to tag and visualize
+    proteins, gene expression, and cellular processes in living organisms.</p>
+    <p>The connection to NASA: Carpenter's "fireflies" were ice crystals, but
+    the real bioluminescent mystery &mdash; how <em>Aequorea</em> glows &mdash;
+    was being solved that same year in the lab.</p>
+    <button class="close-btn" onclick="toggleGFP()">CLOSE</button>
+  </div>
+</div>
+
+<script>
+const C = document.getElementById('canvas');
+const ctx = C.getContext('2d');
+const W = C.width, H = C.height;
+
+let t = 0;
+let glowEvents = [];
+let particles = [];
+let mouseX = 0, mouseY = 0;
+
+// Jellyfish parameters
+const jx = W / 2, jy = H * 0.38;
+const bellW = 80, bellH = 60;
+const tentCount = 12;
+const tentLen = 140;
+
+// Floating particles (plankton / organic matter)
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.15 + 0.1,
+    sz: Math.random() * 2 + 0.5,
+    a: Math.random() * 0.3 + 0.1,
+    ph: Math.random() * Math.PI * 2,
+  });
+}
+
+function isInsideJellyfish(mx, my) {
+  const dx = (mx - jx) / (bellW * 1.3);
+  const dy = (my - jy) / (bellH + tentLen * 0.7);
+  return dx * dx + dy * dy < 1;
+}
+
+C.addEventListener('click', function(e) {
+  const rect = C.getBoundingClientRect();
+  const sx = W / rect.width, sy = H / rect.height;
+  const mx = (e.clientX - rect.left) * sx;
+  const my = (e.clientY - rect.top) * sy;
+  if (isInsideJellyfish(mx, my)) {
+    glowEvents.push({ start: t, phase: 0 });
+  }
+});
+
+C.addEventListener('mousemove', function(e) {
+  const rect = C.getBoundingClientRect();
+  mouseX = (e.clientX - rect.left) * (W / rect.width);
+  mouseY = (e.clientY - rect.top) * (H / rect.height);
+  C.style.cursor = isInsideJellyfish(mouseX, mouseY) ? 'pointer' : 'default';
+});
+
+function toggleGFP() {
+  const ov = document.getElementById('gfpOverlay');
+  ov.classList.toggle('show');
+  const btn = document.getElementById('btnGFP');
+  btn.classList.toggle('active');
+}
+
+function drawParticles() {
+  for (const p of particles) {
+    p.x += p.vx + Math.sin(t * 0.5 + p.ph) * 0.15;
+    p.y += p.vy;
+    if (p.y > H + 5) { p.y = -5; p.x = Math.random() * W; }
+    if (p.x < -5) p.x = W + 5;
+    if (p.x > W + 5) p.x = -5;
+
+    const flicker = 0.5 + 0.5 * Math.sin(t * 2 + p.ph);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.sz, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(120,160,180,${p.a * flicker})`;
+    ctx.fill();
+  }
+}
+
+function drawJellyfish() {
+  const pulse = Math.sin(t * Math.PI * 2) * 0.12;
+  const bw = bellW * (1 + pulse);
+  const bh = bellH * (1 - pulse * 0.3);
+
+  // Compute active glow
+  let blueGlow = 0, greenGlow = 0;
+  for (let i = glowEvents.length - 1; i >= 0; i--) {
+    const ev = glowEvents[i];
+    const age = t - ev.start;
+    if (age < 0.15) {
+      // Blue flash phase
+      blueGlow = Math.max(blueGlow, 1 - age / 0.15);
+    } else if (age < 0.65) {
+      // Blue-to-green transition
+      const tr = (age - 0.15) / 0.5;
+      blueGlow = Math.max(blueGlow, (1 - tr) * 0.3);
+      greenGlow = Math.max(greenGlow, tr);
+    } else if (age < 2.65) {
+      // Green glow fading
+      greenGlow = Math.max(greenGlow, 1 - (age - 0.65) / 2.0);
+    } else {
+      glowEvents.splice(i, 1);
+    }
+  }
+
+  // Bell body — semi-transparent layers
+  ctx.save();
+
+  // Outer glow when active
+  if (blueGlow > 0) {
+    const bg = ctx.createRadialGradient(jx, jy, bw * 0.3, jx, jy, bw * 2.5);
+    bg.addColorStop(0, `rgba(32,64,192,${blueGlow * 0.5})`);
+    bg.addColorStop(0.5, `rgba(32,64,192,${blueGlow * 0.15})`);
+    bg.addColorStop(1, 'rgba(32,64,192,0)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(jx - bw * 3, jy - bh * 3, bw * 6, bh * 6);
+  }
+  if (greenGlow > 0) {
+    const gg = ctx.createRadialGradient(jx, jy, bw * 0.3, jx, jy, bw * 2.5);
+    gg.addColorStop(0, `rgba(64,208,128,${greenGlow * 0.4})`);
+    gg.addColorStop(0.5, `rgba(64,208,128,${greenGlow * 0.1})`);
+    gg.addColorStop(1, 'rgba(64,208,128,0)');
+    ctx.fillStyle = gg;
+    ctx.fillRect(jx - bw * 3, jy - bh * 3, bw * 6, bh * 6);
+  }
+
+  // Bell shape
+  ctx.beginPath();
+  ctx.moveTo(jx - bw, jy + bh * 0.15);
+  ctx.quadraticCurveTo(jx - bw, jy - bh, jx, jy - bh * 1.1);
+  ctx.quadraticCurveTo(jx + bw, jy - bh, jx + bw, jy + bh * 0.15);
+  // Bottom edge — scalloped
+  const scallops = 16;
+  for (let i = 0; i <= scallops; i++) {
+    const frac = i / scallops;
+    const sx = jx - bw + frac * bw * 2;
+    const sy = jy + bh * 0.15 + Math.sin(frac * Math.PI * scallops) * 4;
+    ctx.lineTo(sx, sy);
+  }
+  ctx.closePath();
+
+  // Iridescent fill
+  const bellGrad = ctx.createRadialGradient(jx - bw * 0.2, jy - bh * 0.5, 5, jx, jy, bw);
+  const baseAlpha = 0.12;
+  bellGrad.addColorStop(0, `rgba(180,220,255,${baseAlpha + greenGlow * 0.15 + blueGlow * 0.2})`);
+  bellGrad.addColorStop(0.4, `rgba(140,200,240,${baseAlpha * 0.8 + greenGlow * 0.1})`);
+  bellGrad.addColorStop(0.7, `rgba(100,180,220,${baseAlpha * 0.5})`);
+  bellGrad.addColorStop(1, `rgba(60,120,180,${baseAlpha * 0.2})`);
+  ctx.fillStyle = bellGrad;
+  ctx.fill();
+
+  // Bell outline
+  ctx.strokeStyle = `rgba(140,200,240,${0.15 + greenGlow * 0.3 + blueGlow * 0.4})`;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Bell margin ring (where aequorin lives)
+  ctx.beginPath();
+  for (let i = 0; i <= scallops; i++) {
+    const frac = i / scallops;
+    const sx = jx - bw + frac * bw * 2;
+    const sy = jy + bh * 0.15 + Math.sin(frac * Math.PI * scallops) * 4;
+    if (i === 0) ctx.moveTo(sx, sy); else ctx.lineTo(sx, sy);
+  }
+  const marginR = blueGlow > 0 ? 0.2 + blueGlow * 0.6 : 0.08;
+  const marginG = greenGlow > 0 ? greenGlow * 0.8 : 0;
+  const marginColor = blueGlow > greenGlow
+    ? `rgba(32,64,192,${marginR})`
+    : `rgba(64,208,128,${Math.max(marginR, marginG)})`;
+  ctx.strokeStyle = marginColor;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // Inner radial canals
+  ctx.strokeStyle = `rgba(140,200,240,${0.06 + greenGlow * 0.08})`;
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i < 8; i++) {
+    const ang = -Math.PI / 2 + (i / 8) * Math.PI - Math.PI / 2;
+    const x1 = jx + Math.cos(ang) * bw * 0.15;
+    const y1 = jy + Math.sin(ang) * bh * 0.15 - bh * 0.3;
+    const x2 = jx + Math.cos(ang) * bw * 0.9;
+    const y2 = jy + Math.sin(ang) * bh * 0.3 + bh * 0.1;
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+  }
+
+  // Tentacles
+  for (let i = 0; i < tentCount; i++) {
+    const frac = (i + 0.5) / tentCount;
+    const baseX = jx - bw * 0.85 + frac * bw * 1.7;
+    const baseY = jy + bh * 0.15;
+    const segments = 20;
+
+    ctx.beginPath();
+    ctx.moveTo(baseX, baseY);
+    let cx = baseX, cy = baseY;
+    for (let s = 1; s <= segments; s++) {
+      const sf = s / segments;
+      const wave = Math.sin(t * 3 + i * 1.2 + sf * 4) * (8 + sf * 15);
+      const drift = Math.sin(t * 0.7 + i * 0.8) * sf * 6;
+      cx = baseX + wave + drift;
+      cy = baseY + sf * tentLen * (1 - pulse * 0.3);
+      ctx.lineTo(cx, cy);
+    }
+
+    const tentAlpha = 0.06 + greenGlow * 0.12;
+    ctx.strokeStyle = `rgba(140,200,240,${tentAlpha})`;
+    ctx.lineWidth = 1.2 - Math.random() * 0.3;
+    ctx.stroke();
+
+    // Glow dots along tentacle when active
+    if (greenGlow > 0 && i % 2 === 0) {
+      for (let s = 2; s < segments; s += 3) {
+        const sf = s / segments;
+        const wave = Math.sin(t * 3 + i * 1.2 + sf * 4) * (8 + sf * 15);
+        const drift = Math.sin(t * 0.7 + i * 0.8) * sf * 6;
+        const dx = baseX + wave + drift;
+        const dy = baseY + sf * tentLen * (1 - pulse * 0.3);
+        ctx.beginPath(); ctx.arc(dx, dy, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(64,208,128,${greenGlow * 0.4 * (1 - sf)})`;
+        ctx.fill();
+      }
+    }
+  }
+
+  // Central gonads (4 horseshoe shapes)
+  for (let q = 0; q < 4; q++) {
+    const ang = q * Math.PI / 2 - Math.PI / 4;
+    const gx = jx + Math.cos(ang) * bw * 0.35;
+    const gy = jy + Math.sin(ang) * bh * 0.2 - bh * 0.25;
+    ctx.beginPath();
+    ctx.arc(gx, gy, bw * 0.12, 0, Math.PI);
+    ctx.strokeStyle = `rgba(180,220,255,${0.1 + greenGlow * 0.15})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawCaustics() {
+  ctx.save();
+  ctx.globalAlpha = 0.02;
+  for (let i = 0; i < 5; i++) {
+    const x = W * 0.2 + Math.sin(t * 0.3 + i * 1.5) * W * 0.3;
+    const y = 20 + Math.sin(t * 0.2 + i * 2.1) * 30;
+    const w = 100 + Math.sin(t * 0.4 + i) * 40;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.quadraticCurveTo(x + w / 2, y + 15, x + w, y);
+    ctx.strokeStyle = 'rgba(80,160,200,1)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function frame(ts) {
+  t = ts / 1000;
+  ctx.clearRect(0, 0, W, H);
+
+  // Deep ocean gradient background
+  const bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, '#020810');
+  bg.addColorStop(0.3, '#041020');
+  bg.addColorStop(0.7, '#061828');
+  bg.addColorStop(1, '#041020');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  drawCaustics();
+  drawParticles();
+  drawJellyfish();
+
+  // Hint text when no events yet
+  if (glowEvents.length === 0 && t > 2) {
+    const hintAlpha = 0.3 + 0.2 * Math.sin(t * 2);
+    ctx.font = '11px "DM Mono", monospace';
+    ctx.fillStyle = `rgba(100,160,180,${hintAlpha})`;
+    ctx.textAlign = 'center';
+    ctx.fillText('click the jellyfish', W / 2, H - 40);
+    ctx.textAlign = 'start';
+  }
+
+  requestAnimationFrame(frame);
+}
+
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
