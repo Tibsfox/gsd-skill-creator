@@ -122,6 +122,7 @@
     { id: 'NWZ', name: 'Non-Western Zodiac', path: 'NWZ/index.html' },
     { id: 'OCN', name: 'Open Compute', path: 'OCN/index.html' },
     { id: 'OCT', name: 'OctaMED & Trackers', path: 'OCT/index.html' },
+    { id: 'OOPS', name: 'Ecosystem Alignment', path: 'OOPS/index.html' },
     { id: 'OPS', name: 'OpenStack Cloud', path: 'OPS/index.html' },
     { id: 'OSC', name: 'Orson Scott Card', path: 'OSC/index.html' },
     { id: 'OTM', name: 'Odyssey of the Mind', path: 'OTM/index.html' },
