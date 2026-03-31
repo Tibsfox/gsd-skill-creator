@@ -1,0 +1,61 @@
+{
+  "mission": "1.190",
+  "nodes": [
+    {
+      "concept": "Free-return trajectory",
+      "department": "orbital-mechanics",
+      "wing": "Trajectory Design",
+      "level": "advanced",
+      "description": "A trajectory that uses lunar gravity to curve the spacecraft's path and return it to Earth without additional propulsive burns. Safety net — if main engine fails, crew comes home."
+    },
+    {
+      "concept": "Optical deep space communications",
+      "department": "optical-communications",
+      "wing": "Photonics",
+      "level": "advanced",
+      "description": "O2O laser link achieving 260 Mbps at lunar distance (384,400 km). 100mm telescope with gimbals. 130x improvement over S-band radio. First crewed deep space test."
+    },
+    {
+      "concept": "Ablative thermal protection",
+      "department": "materials-science",
+      "wing": "Thermal Protection Systems",
+      "level": "intermediate",
+      "description": "AVCOAT ablative heat shield absorbs reentry heat by charring and ablating. Modified billet loading for Artemis II addresses Artemis I char loss. Direct entry replaces skip profile."
+    },
+    {
+      "concept": "High Earth orbit operations",
+      "department": "orbital-mechanics",
+      "wing": "Mission Operations",
+      "level": "intermediate",
+      "description": "23.5-hour orbit at 70,000 km apogee. Crew and vehicle checkout in the Van Allen radiation belts before committing to TLI. One orbit = one full systems check."
+    },
+    {
+      "concept": "Organ-on-chip in deep space",
+      "department": "aerospace-medicine",
+      "wing": "Space Physiology",
+      "level": "advanced",
+      "description": "AVATAR investigation: microfluidic chips mimicking astronaut organs. First test beyond LEO and Van Allen belts. Measures radiation + microgravity effects on human tissue."
+    },
+    {
+      "concept": "Elasticity theory (Sophie Germain)",
+      "department": "mathematics",
+      "wing": "Applied Mathematics",
+      "level": "intermediate",
+      "description": "Mathematical modeling of how elastic surfaces vibrate under stress. Germain's 1816 prize-winning work. Directly applicable to spacecraft structural analysis and heat shield behavior."
+    },
+    {
+      "concept": "Barometric pressure and animal behavior",
+      "department": "ecology",
+      "wing": "Behavioral Ecology",
+      "level": "beginner",
+      "description": "Falling barometric pressure triggers increased foraging activity in birds. The pressure change precedes the storm — animals predict weather from data humans need instruments to measure."
+    },
+    {
+      "concept": "Kuramoto coupled oscillators",
+      "department": "mathematics",
+      "wing": "Dynamical Systems",
+      "level": "advanced",
+      "description": "Model of synchronization in biological systems. Fireflies adjust flash timing toward neighbors, producing collective synchronization from individual phase coupling. Classic emergence."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "mission": "1.190",
+  "primary_layer": 4,
+  "secondary_layers": [7, 3, 1],
+  "deposits": [
+    {
+      "concept": "Free-return trajectory",
+      "layer": 4,
+      "section": "4.5",
+      "formula_latex": "\\vec{a} = -\\frac{\\mu_E}{r_E^3}\\vec{r}_E - \\frac{\\mu_M}{r_M^3}\\vec{r}_M",
+      "resonance": "The trajectory that brings you home without firing an engine — gravity does the work."
+    },
+    {
+      "concept": "Optical link budget at lunar distance",
+      "layer": 7,
+      "section": "7.4",
+      "formula_latex": "C = B \\log_2\\left(1 + \\frac{P_r}{N_0 B}\\right)",
+      "resonance": "260 Mbps across 384,400 km of vacuum — Shannon's theorem at the Moon."
+    },
+    {
+      "concept": "HEO orbital period",
+      "layer": 4,
+      "section": "4.2",
+      "formula_latex": "T = 2\\pi\\sqrt{\\frac{a^3}{\\mu}}",
+      "resonance": "23.5 hours to orbit Earth at 70,000 km — one day at the edge of the Van Allen belts."
+    }
+  ]
+}

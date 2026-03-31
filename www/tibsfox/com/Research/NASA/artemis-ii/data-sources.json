@@ -1,0 +1,16 @@
+{
+  "mission": "1.190",
+  "sources": [
+    {"name": "NOAA Weather (KPAE)", "url": "https://api.weather.gov/stations/KPAE/observations/latest", "type": "weather", "key_required": false, "update": "5 min", "status": "active"},
+    {"name": "NOAA Weather (KXMR)", "url": "https://api.weather.gov/stations/KXMR/observations/latest", "type": "weather", "key_required": false, "update": "5 min", "status": "active"},
+    {"name": "JPL Horizons (Orion)", "url": "https://ssd.jpl.nasa.gov/api/horizons.api", "type": "ephemeris", "key_required": false, "spacecraft_id": -1024, "status": "available post-launch"},
+    {"name": "JPL Horizons (Moon)", "url": "https://ssd.jpl.nasa.gov/api/horizons.api", "type": "ephemeris", "key_required": false, "body_id": 301, "status": "active"},
+    {"name": "NOAA Kp Index", "url": "https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json", "type": "space-weather", "key_required": false, "update": "3 hours", "status": "active"},
+    {"name": "NOAA G-Scale", "url": "https://services.swpc.noaa.gov/products/noaa-scales.json", "type": "space-weather", "key_required": false, "status": "active"},
+    {"name": "DSN Now", "url": "https://eyes.nasa.gov/dsn/data/dsn.xml", "type": "tracking", "key_required": false, "update": "5 sec", "status": "active (CORS blocked from browser)"},
+    {"name": "NOAA Tides", "url": "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter", "type": "tides", "key_required": false, "station": "9447130", "status": "planned"},
+    {"name": "USGS Snohomish River", "url": "https://waterservices.usgs.gov/nwis/iv/?sites=12150800", "type": "hydrology", "key_required": false, "status": "planned"},
+    {"name": "NASA NTRS", "url": "https://ntrs.nasa.gov/", "type": "papers", "key_required": false, "status": "manual search"},
+    {"name": "NASA Artemis Blog", "url": "https://www.nasa.gov/blogs/artemis/", "type": "mission-updates", "key_required": false, "status": "active"}
+  ]
+}
