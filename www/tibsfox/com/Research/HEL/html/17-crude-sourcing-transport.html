@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crude Helium Sourcing &amp; Transport
+Logistics — HEL Research</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --accent: #e94560;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4fc3f7;
+            --border: #2a2a4a;
+            --helium: #ffd700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--helium); font-size: 1.8rem; margin: 0 0 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.4rem; margin: 2.5rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.15rem; margin: 2rem 0 0.75rem; }
+        h4 { color: var(--helium); font-size: 1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--helium); }
+        em { color: var(--muted); font-style: italic; }
+        code { background: var(--surface); color: var(--helium); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+        pre { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+        pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th { background: var(--surface); color: var(--helium); padding: 0.6rem 0.8rem; text-align: left; border-bottom: 2px solid var(--border); font-size: 0.9rem; }
+        td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        tr:hover { background: rgba(79,195,247,0.05); }
+        ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.3rem; }
+        blockquote { border-left: 3px solid var(--helium); padding-left: 1rem; margin: 1rem 0; color: var(--muted); }
+        hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+        .nav { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+        .header-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="header-meta">
+        HEL — Helium Supply Chain &amp; Pacific Rim Semiconductor Infrastructure<br>
+        PNW Research Series · <a href="../index.html">Back to HEL Index</a> · <a href="../../index.html">Series Index</a>
+    </div>
+    <h1 id="crude-helium-sourcing-transport-logistics">Crude Helium
+    Sourcing &amp; Transport Logistics</h1>
+    <h2 id="the-supply-chain-spine">The Supply Chain Spine</h2>
+    <p>The corridor model requires crude helium (50–70% purity)
+    transported from US extraction sites to a PNW purification hub. This
+    document maps the specific routes, vehicles, costs, and
+    logistics.</p>
+    <h2 id="source-regions">Source Regions</h2>
+    <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 42%" />
+    <col style="width: 40%" />
+    <col style="width: 2%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Region</th>
+    <th>Distance to Portland</th>
+    <th>Distance to Seattle</th>
+    <th>Key Producers</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Colorado (Galactica project)</td>
+    <td>~1,250 mi</td>
+    <td>~1,350 mi</td>
+    <td>Blue Star Helium</td>
+    </tr>
+    <tr>
+    <td>Minnesota (Topaz project)</td>
+    <td>~1,750 mi</td>
+    <td>~1,650 mi</td>
+    <td>Pulsar Helium</td>
+    </tr>
+    <tr>
+    <td>Arizona (Holbrook Basin)</td>
+    <td>~1,350 mi</td>
+    <td>~1,450 mi</td>
+    <td>Altura Energy</td>
+    </tr>
+    <tr>
+    <td>New Mexico</td>
+    <td>~1,400 mi</td>
+    <td>~1,500 mi</td>
+    <td>Desert Mountain Energy</td>
+    </tr>
+    <tr>
+    <td>Saskatchewan</td>
+    <td>~1,200 mi</td>
+    <td>~1,100 mi</td>
+    <td>North American Helium</td>
+    </tr>
+    <tr>
+    <td>Wyoming (Riley Ridge)</td>
+    <td>~800 mi</td>
+    <td>~900 mi</td>
+    <td>ExxonMobil (existing)</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Closest sources:</strong> Wyoming (~800 mi) and
+    Saskatchewan (~1,100 mi). Colorado and Arizona are mid-range.
+    Minnesota is farthest.</p>
+    <h2 id="transport-vehicles">Transport Vehicles</h2>
+    <h3 id="high-pressure-tube-trailers-primary-method">High-Pressure
+    Tube Trailers (Primary Method)</h3>
+    <p>Standard for crude and purified gaseous helium transport: -
+    <strong>Capacity:</strong> 180,000–250,000 SCF per trailer
+    (~5,000–7,000 Nm³) - <strong>Pressure:</strong> 2,400–3,600 psig
+    (DOT 3AAX or 3T spec tubes) - <strong>Tractor-trailer
+    combination:</strong> Standard Class 8 truck - <strong>Hazmat
+    classification:</strong> DOT Division 2.2 (non-flammable gas) -
+    <strong>Speed:</strong> Highway speed, ~500 mi/day with single
+    driver, ~800 mi/day team drivers - <strong>Cost to
+    own/lease:</strong> $150K–$250K per trailer</p>
+    <h3 id="iso-containers-for-liquid-helium">ISO Containers (For Liquid
+    Helium)</h3>
+    <p>Used for long-distance and international transport: -
+    <strong>Capacity:</strong> ~11,000 gallons (~41,000 liters) liquid
+    helium per 40-ft ISO container - <strong>Holding time:</strong>
+    35–48 days before boil-off venting - <strong>Intermodal:</strong>
+    Truck, rail, or ship-compatible - <strong>Cost:</strong> $300K–$500K
+    per container (super-insulated vacuum-jacketed)</p>
+    <h3 id="rail">Rail</h3>
+    <ul>
+    <li><strong>Intermodal rail:</strong> ISO containers on flatcars.
+    BNSF and Union Pacific serve PNW from all source regions.</li>
+    <li><strong>Transit time:</strong> 3–5 days from Colorado/Wyoming to
+    Portland/Seattle</li>
+    <li><strong>Cost advantage:</strong> ~40–60% cheaper per ton-mile
+    than truck for distances &gt;500 miles</li>
+    <li><strong>Disadvantage:</strong> Less flexible scheduling,
+    terminal-to-terminal (requires truck for first/last mile)</li>
+    </ul>
+    <h2 id="route-analysis">Route Analysis</h2>
+    <h3 id="wyoming-pnw-shortest-most-practical">Wyoming → PNW
+    (Shortest, Most Practical)</h3>
+    <pre><code>Riley Ridge, WY → I-80 W → I-84 W → Portland, OR
+~800 miles, ~14 hours driving
+Or: I-15 N → I-90 W → Seattle, WA
+~900 miles, ~16 hours driving</code></pre>
+    <ul>
+    <li><strong>Truck cost estimate:</strong> $3,500–$5,000 per load
+    (fuel + driver + equipment amortization)</li>
+    <li><strong>Per-MCF transport cost:</strong> ~$0.015–$0.025/SCF (at
+    200,000 SCF/trailer)</li>
+    <li><strong>Frequency for 10-node co-op:</strong> ~2–4
+    loads/month</li>
+    </ul>
+    <h3 id="colorado-pnw">Colorado → PNW</h3>
+    <pre><code>Las Animas County, CO → I-25 N → I-80 W → I-84 W → Portland
+~1,250 miles, ~20 hours driving</code></pre>
+    <ul>
+    <li><strong>Truck cost:</strong> $5,000–$7,500 per load</li>
+    <li><strong>Per-MCF:</strong> ~$0.025–$0.035/SCF</li>
+    </ul>
+    <h3 id="saskatchewan-pnw">Saskatchewan → PNW</h3>
+    <pre><code>Swift Current, SK → I-15 S (Montana) → I-90 W → Seattle
+~1,100 miles, ~18 hours driving</code></pre>
+    <ul>
+    <li><strong>Additional consideration:</strong> Cross-border customs
+    (US-Canada). Helium is not controlled but requires customs
+    declaration.</li>
+    <li><strong>Truck cost:</strong> $5,000–$7,000 per load (plus
+    customs brokerage ~$200–$500)</li>
+    </ul>
+    <h2 id="cost-model-monthly-hub-feed">Cost Model: Monthly Hub
+    Feed</h2>
+    <p>Assuming a co-op hub processing 500,000 SCF/month of crude helium
+    (enough to produce ~350,000 SCF of Grade-A at 70% recovery):</p>
+    <table>
+    <colgroup>
+    <col style="width: 12%" />
+    <col style="width: 19%" />
+    <col style="width: 33%" />
+    <col style="width: 32%" />
+    <col style="width: 1%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Source</th>
+    <th>Loads/Month</th>
+    <th>Transport Cost/Month</th>
+    <th>Crude He Cost/Month</th>
+    <th>Total Feed Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Wyoming</td>
+    <td>2–3</td>
+    <td>$7K–$15K</td>
+    <td>$50K–$100K</td>
+    <td>$57K–$115K</td>
+    </tr>
+    <tr>
+    <td>Colorado</td>
+    <td>2–3</td>
+    <td>$10K–$22K</td>
+    <td>$50K–$100K</td>
+    <td>$60K–$122K</td>
+    </tr>
+    <tr>
+    <td>Saskatchewan</td>
+    <td>2–3</td>
+    <td>$10K–$21K</td>
+    <td>$50K–$100K</td>
+    <td>$60K–$121K</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Crude helium purchase price</strong> is the dominant cost
+    — transport adds 10–20% on top.</p>
+    <h2 id="carrier-requirements">Carrier Requirements</h2>
+    <p>Carriers transporting helium need: - <strong>DOT Hazmat
+    registration</strong> (Division 2.2 non-flammable gas) - <strong>CDL
+    with hazmat endorsement</strong> (driver) -
+    <strong>DOT-specification equipment</strong> (3AAX or 3T tube
+    trailers) - <strong>Shipping papers</strong> per 49 CFR 172 (UN 1046
+    for compressed, UN 1963 for liquid) - <strong>Placards:</strong>
+    Green diamond (non-flammable gas)</p>
+    <p>Existing hazmat carriers on these routes include specialty gas
+    haulers and general hazmat freight companies. The routes are
+    well-traveled for industrial gases — this is not pioneering
+    logistics.</p>
+    <h2 id="rail-alternative">Rail Alternative</h2>
+    <p>For regular, scheduled deliveries, rail is significantly
+    cheaper:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Route</th>
+    <th>Rail Transit</th>
+    <th>Truck Transit</th>
+    <th>Rail Cost Advantage</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Wyoming → Portland</td>
+    <td>3–4 days</td>
+    <td>14 hours</td>
+    <td>~50% cheaper per unit</td>
+    </tr>
+    <tr>
+    <td>Colorado → Portland</td>
+    <td>4–5 days</td>
+    <td>20 hours</td>
+    <td>~55% cheaper per unit</td>
+    </tr>
+    <tr>
+    <td>Saskatchewan → Seattle</td>
+    <td>3–4 days</td>
+    <td>18 hours</td>
+    <td>~45% cheaper per unit</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Trade-off:</strong> Rail is slower and less flexible but
+    substantially cheaper for regular bulk shipments. A mature co-op
+    would likely use rail for baseline supply and truck for
+    surge/emergency deliveries.</p>
+    <p>BNSF serves all source regions and has intermodal terminals in
+    Seattle/Tacoma and Portland. Union Pacific also connects through
+    Portland.</p>
+    <h2 id="first-steps">First Steps</h2>
+    <ol type="1">
+    <li><strong>Contact crude helium producers</strong> (Blue Star,
+    Pulsar, North American Helium, Desert Mountain) for pricing and
+    minimum order quantities</li>
+    <li><strong>Get freight quotes</strong> from hazmat carriers for
+    tube trailer loads on specific routes</li>
+    <li><strong>Evaluate rail intermodal</strong> through BNSF and UP
+    for regular scheduled service</li>
+    <li><strong>Negotiate supply agreements</strong> before building the
+    hub — secure feed stock first</li>
+    </ol>
+    <p>The transport logistics are solvable with standard industrial gas
+    infrastructure. Nothing here requires invention — it requires
+    execution.</p>
+    <div class="nav">
+        <a href="../index.html">← Back to HEL Index</a> ·
+        Published 2026-03-31 · PNW Research Series ·
+        <a href="https://tibsfox.com/Research/HEL/">tibsfox.com/Research/HEL</a>
+    </div>
+</body>
+</html>
