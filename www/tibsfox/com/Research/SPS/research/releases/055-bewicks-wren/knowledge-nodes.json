@@ -1,0 +1,189 @@
+{
+  "degree": 55,
+  "species": "Bewick's Wren",
+  "scientific_name": "Thryomanes bewickii",
+  "slug": "055-bewicks-wren",
+  "sound_type": "loud melodious variable song -- buzzes, trills, and whistles",
+  "energy": 3,
+  "ecosystem": "brushy habitats / suburban areas / open woodlands / hedgerows / thickets",
+  "season": "resident (year-round in PNW)",
+  "family": "Troglodytidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Oregon Slender Salamander",
+    "original_scientific_name": "Batrachoseps wrighti",
+    "reason": "SPS Part B engine is birds-and-mammals only. Bewick's Wren replaces Oregon Slender Salamander, preserving the original low-elevation brushy/understory habitat association. The Oregon Slender Salamander is a lungless salamander found in moist forest floor debris, leaf litter, and decaying logs in the Pacific Northwest. The Bewick's Wren occupies the brushy understory and edge habitats at low elevations, working through tangles, brush piles, and hedgerows. Both are year-round residents of Pacific Northwest lowland habitats. Eleventh consecutive CSV substitution replacing an amphibian-class species (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53, Clouded Salamander at 54, Oregon Slender Salamander at 55). The engine remains deep in the lungless salamander zone of the original CSV's amphibian belt.",
+    "preserved": ["low-elevation brushy/understory habitat", "year-round resident status"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Bewick's Wrens are year-round residents of brushy habitats, suburban yards, hedgerows, open woodlands, and thickets throughout western Washington, from sea level to mid-elevation. The yard bird -- common in gardens, parks, brush piles, and suburban landscapes across the Puget Sound lowlands. Breeds from southern BC through WA/OR west of Cascades."
+  },
+  "taxonomy_note": {
+    "description": "Bewick's Wren is the 2nd TROGLODYTIDAE in the engine -- the family returns after a 54-degree absence (last: degree 1, Pacific Wren). THE LONGEST FAMILY RETURN GAP IN ENGINE HISTORY. NEW GENUS Thryomanes enters (vs Troglodytes for Pacific Wren). Thryomanes from Greek thryon (reed) + manes (madness/passion) = 'reed madness.' bewickii = named by Audubon in 1827 for Thomas Bewick (1753-1828), English wood engraver and naturalist, author of A History of British Birds. Monotypic genus -- Bewick's Wren is the only species in Thryomanes. PASSERIFORMES RETURNS after one-degree Piciformes interruption at degree 54.",
+    "current_family": "Troglodytidae",
+    "new_family": false,
+    "family_count_in_engine": 22,
+    "troglodytidae_count_in_engine": 2,
+    "name_etymology": "Thryomanes = Ancient Greek thryon (reed) + manes (madness, passion, frenzy). Monotypic genus -- Bewick's Wren is its only species. bewickii = named by Audubon in 1827 for Thomas Bewick (1753-1828), English wood engraver and naturalist. Full translation: 'Bewick's reed-frenzy bird.' Audubon described the species in 1827.",
+    "genus_note": "Thryomanes is new to the engine at degree 55. Previous Troglodytidae entry was genus Troglodytes (Pacific Wren, degree 1). Thryomanes represents a fundamentally different wren strategy: bold suburban/edge habitat generalist vs. cryptic deep forest specialist. The two Troglodytidae genera in the engine could not be more different in habitat preference, vocal behavior, and human association. Thryomanes is monotypic -- this genus will not appear again.",
+    "order_note": "Passeriformes returns at degree 55 after the one-degree Piciformes interruption at degree 54 (Red-breasted Sapsucker). The Passeriformes streak that ran 38-53 (16 consecutive) was broken at 54, but the order immediately resumes. After degree 55: 48 of 56 entries (85.7%) are Passeriformes. Still overwhelmingly dominant.",
+    "family_position": "Troglodytidae rises from 1 to 2 members at degree 55. The 54-degree gap between entries (1 to 55) is the longest family return gap in the engine, surpassing Paridae's 41-degree gap (9 to 50) and Picidae's 32-degree gap (22 to 54). The new genus Thryomanes adds a fundamentally different wren archetype -- the suburban yard bird vs. the old-growth forest specialist."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,000-8,000",
+    "peak_energy_band_hz": "3,000-6,000",
+    "song_frequency_hz": "Primary song: 2.0-8.0 kHz, peak energy 3.0-6.0 kHz. Scold call: 2.5-6.0 kHz. Buzz/chatter: 3.0-7.0 kHz. Contact call: 3.0-5.0 kHz.",
+    "song_duration_s": "Individual songs ~2-4 seconds. Series of song types delivered sequentially from exposed perch.",
+    "note_structure": "MELODIOUS VARIABLE SONG: A string of short whistles, warbles, buzzes, and musical trills. Typically begins with 1-2 clear whistled notes, followed by a rapid trill or buzzy warble, ending with a short sharp flourish. Whistle-trill-finish three-part architecture, enormously variable in specific notes.",
+    "note_types": "MULTIPLE song types per individual male (9-22 distinct song types in repertoire). Each type a stereotyped pattern cycled through in succession. Types include: clear whistled openers, rapid trills, buzzy warbles, descending flourishes, ascending sweeps, and combinations thereof.",
+    "phrase_structure": "Songs delivered as discrete 2-4 second bouts from exposed perches. Male cycles through repertoire, delivering different song types in succession. Each song type follows the whistle-trill-finish template with different specific notes.",
+    "timbre": "Bright, clear, musical. Higher-pitched and thinner than Song Sparrow (degree 45). The buzzes and trills give texture that shifts from phrase to phrase. Louder and more melodious than Pacific Wren's compressed cascade. Open, ringing quality.",
+    "amplitude": "E=3 -- moderate-to-loud energy. Loud singer for its size. Song carries well across suburban landscape from exposed perches. Matches E=3 at degree 54 (Red-breasted Sapsucker). Two consecutive E=3 entries.",
+    "tempo": "Variable within and between songs. Whistled openers are measured; trills are rapid; terminal flourishes vary. The overall song pace is moderate -- neither the machine-gun cascade of the Pacific Wren nor the slow, spaced mewing of the sapsucker.",
+    "context": "Males sing primarily during breeding season (February-July in PNW) but also year-round on territory. Song functions: territory proclamation, mate attraction, territorial disputes. Scold calls given year-round in alarm contexts. Singing peaks in early morning.",
+    "regional_variation": "STRONG geographic dialects. Young males learn songs from neighboring territory holders, not from fathers. Songs change gradually across the landscape. Eastern vs. western populations showed significantly different song dialects before the eastern range contraction. Dialects documented across Washington, Oregon, and California.",
+    "key_property": "THE YARD SONG -- the 56th acoustic element (species side). A loud, melodious, variable song of whistles, warbles, buzzes, and trills, learned from neighboring territory holders and varying geographically through cultural transmission. Named 'the yard song' for three resonances: (1) the habitat -- the Bewick's Wren is the yard bird, singing from fence posts, brush piles, and hedgerows in the suburban edge; (2) the cultural landscape -- songs vary geographically because they are taught by neighbors, creating acoustic dialects that mirror physical neighborhoods; (3) the contrast -- against the Pacific Wren's deep-forest cascade at degree 1, the yard song is wrens leaving the old-growth and moving into the garden. The song opens up. The darkness lifts."
+  },
+  "plumage": {
+    "overall": "Small, active, long-tailed wren. Brown above, pale gray below. Bold white supercilium (eyebrow stripe) is the defining field mark. Long tail frequently cocked upward and flicked side to side. PNW form: richer brown above, grayer below.",
+    "diagnostic_mark": "BOLD WHITE SUPERCILIUM -- the Bewick's Wren's most recognizable field mark. A long, prominent white to buffy-white eyebrow stripe extending from the base of the bill back over and past the eye. Contrasts with a dark eye line below and brown crown above.",
+    "upperparts": "Brown with warm rufous tinge in PNW populations. Wings brown with faint darker barring.",
+    "underparts": "Pale gray to grayish-white. Clean, mostly unmarked. PNW form grayer below than eastern populations.",
+    "head": "Brown crown and nape. Bold white supercilium. Dark eye line through the eye. Pale cheek below eye line. Dark brown eyes. Slender, slightly decurved bill, dark above and paler below.",
+    "bill": "Slender, slightly decurved, dark above and paler below. A precision tool for probing crevices and extracting insects from bark, brush, and leaf litter.",
+    "tail": "Long for a wren, brown with fine dark barring. Frequently held cocked upward and flicked side to side -- a characteristic behavioral field mark. Narrow whitish tips and dark subterminal bars visible when spread.",
+    "undertail_coverts": "Buffy to whitish.",
+    "wing_edges": "Brown flight feathers with faint darker barring.",
+    "field_id": "Small (13-14 cm, 8-12 g), active, long-tailed wren with a bold white supercilium. Brown above, pale gray below. Long tail frequently cocked and flicked. Loud, melodious, variable song from exposed perches. Found in brushy/suburban habitats -- gardens, hedgerows, brush piles, thickets. The yard bird. Separated from House Wren by bold supercilium; from Pacific Wren by larger size, longer tail, suburban habitat; from Marsh Wren by upland brush habitat (not cattail marsh)."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The yard song -- the 56th acoustic element (species side): a loud, melodious, variable song of whistles, warbles, buzzes, and trills, learned from neighboring territory holders and varying geographically through cultural transmission. Named 'the yard song' for three resonances: (1) the habitat -- the Bewick's Wren is the yard bird, the wren of suburban gardens, brush piles, hedgerows, and backyard sheds, singing from fence posts and rooftops; (2) the cultural landscape -- the song varies geographically because it is taught by neighbors rather than inherited from parents, creating acoustic dialects that mirror the physical landscape of neighborhoods and territories; (3) the contrast -- against the Pacific Wren's deep-forest cascade at degree 1, the Bewick's Wren's yard song is the wren family's answer to what happens when wrens leave old-growth and move into the garden. The yard song does not overwhelm through density (100+ notes per cascade). It communicates through diversity (9-22 distinct song types per male, learned, variable, culturally transmitted).",
+      "level": "foundational",
+      "department": "music-theory/song-form",
+      "college_path": ".college/music/theory/song-form/yard-song/",
+      "examples": [
+        "Song structure: whistle-trill-finish three-part architecture. 1-2 clear whistled notes, a rapid trill or buzzy warble, a sharp terminal flourish. The template is consistent; the specific notes vary enormously between song types, between individuals, and between regions.",
+        "Contrast with the cascade (degree 1): the Pacific Wren compresses 100+ notes into a 5-10 second cascade -- density as strategy. The Bewick's Wren spreads 9-22 distinct song types across its repertoire -- diversity as strategy. One wren overwhelms with complexity per phrase. The other overwhelms with variety across phrases.",
+        "Contrast with the sap-well rhythm (degree 54): the sapsucker's acoustic identity is percussive and arrhythmic -- a drumming pattern that defies regularity. The yard song is melodic and culturally acquired -- a vocal performance that varies because it is socially learned. Percussion vs. melody. Inherited vs. learned.",
+        "The cultural transmission dimension: young males learn from neighbors, not parents. This is horizontal cultural transmission -- the same mechanism that produces human linguistic dialects. The Bewick's Wren does not just sing. It speaks a local dialect.",
+        "At degree 55, the engine's Troglodytidae vocabulary expands from one element (the cascade) to two (plus the yard song). The family now has vocal diversity: innate complexity (1) and cultural diversity (55)."
+      ],
+      "music_theory_parallel": "Theme and variations -- a musical form where a melodic theme is stated, then repeated with modifications in rhythm, key, harmony, tempo, or ornamentation. Each variation preserves the underlying theme while transforming it. The Bewick's Wren's repertoire of 9-22 song types is a set of variations on the wren theme: each song type follows the whistle-trill-finish template (the theme) but fills it with different notes, different trills, different flourishes (the variations). And because the songs are learned from neighbors, the variations themselves vary geographically -- each neighborhood has its own set of variations on the theme. It is theme and variations at two scales: within the individual bird's repertoire (song type 1, song type 2, ... song type 22) and across the geographic landscape (Seattle variations, Portland variations, Medford variations)."
+    },
+    {
+      "concept": "Troglodytidae returns after 54 degrees -- the longest family return gap in the engine's history. Wrens last appeared at degree 1 (Pacific Wren). The 54-degree absence makes the Bewick's Wren's entry a landmark structural event. But this is not the same kind of wren. The Pacific Wren was genus Troglodytes -- a cryptic, tiny, deep-forest specialist that pours out 100+ notes from inside old-growth understory. The Bewick's Wren is genus Thryomanes -- a bold, conspicuous, suburban generalist that sings 9-22 distinct song types from exposed perches in gardens and hedgerows. Same family, entirely different habitat strategy. Same body mass (8-12 g), entirely different relationship with human landscapes. The forest wren and the yard bird. The engine's Troglodytidae vocabulary was built on innate complexity (degree 1). At degree 55, it adds cultural diversity and suburban adaptation.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/troglodytidae-returns/",
+      "examples": [
+        "54-degree gap between Troglodytidae entries (1 to 55). The longest family return gap in the engine, surpassing Paridae's 41-degree gap (9 to 50) and Picidae's 32-degree gap (22 to 54).",
+        "Troglodytidae rises from 1 to 2 members. Still behind the major families (Parulidae 10, Passerellidae 5, etc.) but now represented by two fundamentally different wren archetypes.",
+        "New genus Thryomanes vs. existing Troglodytes. Monotypic genus -- Bewick's Wren is the only species in Thryomanes. The genus name ('reed madness') emphasizes behavioral frenzy; the Pacific Wren's genus name ('cave diver') emphasizes habitat preference.",
+        "The two wrens bracket the entire engine to date: degree 1 (Pacific Wren, Troglodytes) and degree 55 (Bewick's Wren, Thryomanes). The wrens are the bookends. The forest interior at the beginning; the suburban edge at the current frontier.",
+        "Passeriformes returns immediately after the one-degree Piciformes interruption. The wren is Passeriformes. The order's dominance continues."
+      ],
+      "music_theory_parallel": "The recapitulation -- in sonata form, the moment when the main theme returns in the home key after the development section has explored it through modulation, fragmentation, and transformation. The recapitulation is never a simple repetition -- the theme comes back changed by everything the music went through in the development. Troglodytidae returning at degree 55 is the recapitulation: the wren theme stated at degree 1 (the cascade, the forest, the innate complexity) returns in a new key (the yard song, the suburb, the cultural learning). The wren theme is recognizable -- small bird, enormous vocal energy, relentless foraging behavior -- but it has been transformed by 54 degrees of development."
+    },
+    {
+      "concept": "Cultural vocal learning and geographic dialects -- the Bewick's Wren is the engine's clearest example of a species whose acoustic identity is shaped primarily by social learning rather than genetic inheritance. Young males do not learn their songs from their fathers. They learn from the males already holding neighboring territories. This horizontal transmission produces geographic dialects that change gradually across the landscape -- Seattle songs differ from Portland songs differ from Medford songs. The dialects are genuinely cultural: they exist because of learned tradition, not because of genetic differences between populations.",
+      "level": "foundational",
+      "department": "music-theory/cultural-transmission",
+      "college_path": ".college/music/theory/cultural-transmission/vocal-learning/",
+      "examples": [
+        "Repertoire size: 9-22 distinct song types per individual male. Each type is a stereotyped, repeatable pattern. The male cycles through his repertoire during singing bouts.",
+        "Neighbor learning: the young male settles on a territory and memorizes the songs of adjacent territory holders. He copies their songs, not his father's songs. This is like a musician learning the local repertoire by listening to the established players in a new city.",
+        "Geographic dialects: because each male learns from neighbors, and neighbors learned from their neighbors, songs change gradually over distance. The result is a continuously shifting acoustic landscape where no sharp boundaries exist but cumulative differences grow with distance.",
+        "Contrast with the White-crowned Sparrow dialect (degree 48, 'the dialect'): the White-crowned Sparrow also shows geographic song variation, but its dialect structure involves sharper boundaries between dialect populations. The Bewick's Wren's variation is more gradual -- a continuous gradient rather than discrete dialect zones.",
+        "The eastern vs. western song difference was significant before the eastern range contraction, reflecting long geographic separation. The loss of the eastern populations is also the loss of an entire cultural tradition of song."
+      ],
+      "music_theory_parallel": "The folk tradition -- music that exists not because a composer wrote it down but because singers learned it from other singers, who learned it from other singers, across generations and geography. Folk songs mutate gradually as they pass from singer to singer, region to region. The 'same' song sounds different in Appalachia than in the British Isles, not because the notes were rewritten but because each singer added their inflection, their accent, their local color. The Bewick's Wren's song dialects are a folk tradition: no composer, no score, no fixed version -- just a living, changing, culturally transmitted repertoire that drifts across the landscape like a folk song drifts across centuries."
+    },
+    {
+      "concept": "The eastern range contraction -- dramatic competitive displacement -- the Bewick's Wren has almost completely disappeared from eastern North America over the past century, driven primarily by competition with the expanding House Wren (Troglodytes aedon). This is the opposite of the Lesser Goldfinch's range expansion documented at degree 44. The engine now contains both vectors: a species gaining ground and a species losing it. The PNW is the Bewick's Wren's stronghold.",
+      "level": "foundational",
+      "department": "ecology/conservation",
+      "college_path": ".college/ecology/conservation/range-contraction/",
+      "examples": [
+        "Historical eastern range: Pennsylvania to Virginia to Missouri to Kansas, south to the Gulf Coast. Currently: essentially extirpated from nearly all former eastern range. Remnant Ozark and Appalachian populations only.",
+        "Primary driver: competitive displacement by House Wren (Troglodytes aedon). House Wrens are aggressive cavity competitors -- they enter Bewick's Wren nests, destroy eggs, and usurp nest sites. The House Wren expanded as the Bewick's Wren collapsed.",
+        "Contrast with Lesser Goldfinch (degree 44, 'the mosaic'): the Lesser Goldfinch is expanding northward into the PNW, gaining territory. The Bewick's Wren lost territory in the East. Range expansion vs. range contraction. The engine has both stories.",
+        "Western stability: in the PNW and along the Pacific Coast from BC to Baja California, the Bewick's Wren remains common and stable. The western stronghold persists even as the eastern populations vanished.",
+        "The loss is also cultural: the eastern song dialects -- an entire tradition of culturally transmitted vocal patterns -- were lost when the eastern populations disappeared. You cannot recover cultural traditions from genetic material."
+      ],
+      "music_theory_parallel": "The lost school -- when a regional musical tradition dies because the community that sustained it disperses or is replaced. The eastern Bewick's Wren song dialects were a musical school -- a body of culturally transmitted acoustic patterns passed from neighbor to neighbor across the Appalachians, the Midwest, the Gulf Coast. When the eastern populations vanished under House Wren competition, those song traditions died with them. No recording preserves the exact dialect of the last Bewick's Wren in Virginia. No student learned the songs of the last territory holder in Ohio. The school closed. In the West, the school is still open -- the folk tradition continues, the dialects persist, the neighbor-to-neighbor teaching carries on. But the eastern branch is silent."
+    },
+    {
+      "concept": "Two wrens, two worlds -- the Pacific Wren (degree 1) and the Bewick's Wren (degree 55) represent the two fundamental wren strategies in the Pacific Northwest: forest interior specialist vs. edge/suburban generalist. Both are Troglodytidae. Both weigh 8-12 grams. Both are year-round residents. But their habitats, songs, visibility, and relationships with human landscapes are opposite. The Pacific Wren hides in old-growth understory and pours out an innately structured cascade. The Bewick's Wren perches on a fence post and delivers a culturally learned repertoire of variable songs. The forest and the yard. The cave diver and the reed-frenzy bird.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/wren-duality/",
+      "examples": [
+        "Same mass (8-12 g), different tail length. The Bewick's Wren's longer tail is frequently cocked and flicked -- a behavioral signal of alertness and territory. The Pacific Wren's short tail is held upright but less conspicuously.",
+        "Different song strategies: the Pacific Wren compresses 100+ notes into a single cascade bout (5-10 seconds). The Bewick's Wren spreads 9-22 distinct song types across a repertoire, each type 2-4 seconds. Density vs. diversity.",
+        "Different visibility: the Pacific Wren sings from inside cover -- you hear the cascade but rarely see the singer. The Bewick's Wren sings from exposed perches -- fence posts, brush tops, rooftops. Hidden vs. displayed.",
+        "Different human relationships: the Pacific Wren avoids human-modified landscapes and depends on intact old-growth. The Bewick's Wren thrives in suburbs, gardens, and disturbed brush. Wilderness indicator vs. suburban companion.",
+        "The wrens bracket the engine: degree 1 and degree 55. The first wren sang from the deepest interior. The second sings from the nearest edge. The engine's wren story moves from wilderness to domesticity."
+      ],
+      "music_theory_parallel": "The double concerto -- a concerto for two solo instruments with orchestra, where the soloists represent contrasting voices in dialogue. Bach's Double Violin Concerto, Brahms' Double Concerto for violin and cello. The two soloists share the same form (concerto), the same ensemble (orchestra), the same key -- but they speak with different voices, different timbres, different registers. The Pacific Wren and the Bewick's Wren are the double concerto of the Troglodytidae: two soloists from the same family, sharing the same body plan and the same restless energy, but speaking with utterly different voices from utterly different positions in the landscape."
+    },
+    {
+      "concept": "The bold white supercilium as field mark identity -- the Bewick's Wren's most diagnostic visual feature is its bold white eyebrow stripe (supercilium), which extends from the base of the bill back over and past the eye. This is the visual mark that separates it from the House Wren (no supercilium), the Pacific Wren (faint supercilium), and most other small brown birds in PNW brushy habitats. The supercilium is a declaration of identity -- visible at a glance, consistent across the range, and immediately diagnostic.",
+      "level": "intermediate",
+      "department": "ecology/identification",
+      "college_path": ".college/ecology/identification/bewicks-wren-plumage/",
+      "examples": [
+        "Bold white supercilium -- the key field mark. Long, prominent, extending from bill base past the eye. Contrasts with dark eye line below and brown crown above.",
+        "Long tail frequently cocked upward and flicked side to side -- a behavioral field mark. The tail wagging is a nervous, restless motion that draws the eye.",
+        "PNW form: richer brown above, grayer below. Western populations are warmer-toned than the now-vanished eastern populations.",
+        "Confusion species separated by supercilium: House Wren has a plainer face without the bold white eyebrow. Pacific Wren is smaller, darker, shorter-tailed, and lives in deep forest. Marsh Wren has a supercilium but lives in cattail marshes, not upland brush.",
+        "After the Red-breasted Sapsucker's entirely red head (degree 54), the Bewick's Wren brings a subtler visual identity -- not vivid color but a precise structural mark. A stripe rather than a field of color."
+      ],
+      "music_theory_parallel": "The motif -- a short, distinctive musical figure that identifies a theme or character throughout a composition. Wagner's leitmotifs are the most famous example: a few notes that instantly signal a character, an idea, a place. The Bewick's Wren's white supercilium is the visual leitmotif of the species: a single, distinctive mark that appears whenever the bird appears, consistent across all individuals, immediately identifying. You do not need to see the whole bird. You need to see the stripe."
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-054",
+      "species": "Red-breasted Sapsucker",
+      "relationship": "CONSECUTIVE DEGREES, SAME ENERGY. The sap-well rhythm (degree 54, Picidae, E=3, arrhythmic percussion) yields to the yard song (degree 55, Troglodytidae, E=3, cultural vocal learning). Both E=3. Percussion to melody. Engineering to culture. Piciformes to Passeriformes -- the order switch back. The sapsucker builds infrastructure in the forest; the Bewick's Wren builds cultural traditions in the suburb."
+    },
+    {
+      "target": "SPS-001",
+      "species": "Pacific Wren",
+      "relationship": "TROGLODYTIDAE REUNITED AFTER 54 DEGREES -- THE LONGEST FAMILY RETURN GAP IN ENGINE HISTORY. The Pacific Wren (degree 1, Troglodytes pacificus, 'the cascade') was the only wren until now. The Bewick's Wren (degree 55, Thryomanes bewickii, 'the yard song') returns the family after a 54-degree absence. Different genus, different habitat, different song strategy. Troglodytes = cave diver (deep forest). Thryomanes = reed madness (suburban brush). The cascade = 100+ notes of innate complexity. The yard song = 9-22 learned song types of cultural diversity. Two wrens, two worlds. Same body mass (8-12 g)."
+    },
+    {
+      "target": "SPS-048",
+      "species": "White-crowned Sparrow",
+      "relationship": "TWO DIALECT SPECIES. The White-crowned Sparrow (degree 48, 'the dialect') shows geographic song variation with relatively sharp dialect boundaries. The Bewick's Wren (degree 55, 'the yard song') shows geographic song variation with gradual, continuous dialect gradients. Both are cultural learners. Both show neighbor-influenced vocal traditions. Different dialect architectures: discrete zones (sparrow) vs. continuous gradient (wren)."
+    },
+    {
+      "target": "SPS-044",
+      "species": "Lesser Goldfinch",
+      "relationship": "OPPOSITE RANGE VECTORS. The Lesser Goldfinch (degree 44, 'the mosaic') is expanding its range northward into the PNW -- a species gaining ground. The Bewick's Wren (degree 55, 'the yard song') has almost completely disappeared from eastern North America -- a species losing ground. Range expansion vs. range contraction. The engine now has both stories."
+    },
+    {
+      "target": "SPS-045",
+      "species": "Song Sparrow",
+      "relationship": "TWO SUBURBAN SINGERS. The Song Sparrow (degree 45, 'the preamble') sings from cattail edges and suburban shrubs. The Bewick's Wren (degree 55, 'the yard song') sings from fence posts and hedgerows. Both are common suburban birds in the PNW. Both are loud, melodious singers. Different song architectures: the sparrow begins with a clear preamble before the phrase breaks open. The wren delivers a variable repertoire of whistle-trill-finish patterns."
+    },
+    {
+      "target": "SPS-053",
+      "species": "Steller's Jay",
+      "relationship": "NEST DESTROYER AND PREY RISK. Steller's Jays (degree 53) are known nest predators that may raid Bewick's Wren nests for eggs and nestlings. The wren's scold call is often directed at jays. The corvid alarm (degree 53) and the yard song (degree 55) share suburban habitat but are predator and prey."
+    },
+    {
+      "target": "AVI",
+      "species": "Wings of the Pacific Northwest",
+      "relationship": "Bewick's Wren documented across western Washington and British Columbia. Year-round resident of brushy habitats, suburban areas, hedgerows, and open woodlands. One of the most common yard birds in western Washington."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Edge habitat ecology. Suburban adaptation. Cultural vocal transmission and geographic dialects. Competitive displacement by House Wrens in eastern North America. The Bewick's Wren represents the ecological interface between wildness and domesticity in Pacific Northwest landscapes."
+    }
+  ]
+}
