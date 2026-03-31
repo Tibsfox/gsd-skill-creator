@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEL — Helium Supply Chain & Pacific Rim Semiconductor Infrastructure</title>
+    <style>
+        :root {
+            --bg: #1a1a2e;
+            --surface: #16213e;
+            --accent: #e94560;
+            --text: #eee;
+            --muted: #a0a0b0;
+            --link: #4fc3f7;
+            --border: #2a2a4a;
+            --helium: #ffd700;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        h1 { color: var(--helium); font-size: 1.8rem; margin-bottom: 0.5rem; }
+        h2 { color: var(--accent); font-size: 1.3rem; margin: 2rem 0 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        h3 { color: var(--link); font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+        p { margin-bottom: 1rem; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            transition: border-color 0.2s;
+        }
+        .card:hover { border-color: var(--helium); }
+        .card h4 { color: var(--helium); margin-bottom: 0.5rem; font-size: 1rem; }
+        .card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .tag { display: inline-block; background: var(--border); color: var(--muted); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 4px; }
+        .stats { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.8rem; font-weight: bold; color: var(--helium); }
+        .stat-label { font-size: 0.8rem; color: var(--muted); }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.5rem 0.8rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        th { color: var(--helium); }
+        .nav { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.85rem; }
+        .crisis { background: rgba(233,69,96,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+        .crisis h4 { color: var(--accent); }
+    </style>
+</head>
+<body>
+    <h1>HEL — Helium Supply Chain & Pacific Rim Semiconductor Infrastructure</h1>
+    <p class="subtitle">
+        Deep research into helium production, the March 2026 supply crisis, semiconductor fabrication dependencies,
+        and the Pacific Ring of Fire trading network that connects them all.<br>
+        <span class="tag">Energy</span>
+        <span class="tag">Infrastructure</span>
+        <span class="tag">Science</span>
+        <span class="tag">Business</span>
+        Published 2026-03-31 · PNW Research Series · <a href="../index.html">Series Index</a>
+    </p>
+
+    <div class="crisis">
+        <h4>Context: March 2026 Helium Crisis</h4>
+        <p>On March 2, 2026, Qatar Energy declared force majeure due to Strait of Hormuz disruptions, halting approximately one-third of global helium supply. This research was initiated during the crisis to understand the full supply chain, identify vulnerabilities, and explore distributed production models that could prevent future single-point failures.</p>
+    </div>
+
+    <div class="stats">
+        <div class="stat"><div class="stat-value">10</div><div class="stat-label">Research Documents</div></div>
+        <div class="stat"><div class="stat-value">33%</div><div class="stat-label">Global Supply Lost</div></div>
+        <div class="stat"><div class="stat-value">33</div><div class="stat-label">Tools Using agentskills.io</div></div>
+        <div class="stat"><div class="stat-value">15-25</div><div class="stat-label">Days PNW → East Asia</div></div>
+    </div>
+
+    <h2>Research Documents</h2>
+
+    <div class="card-grid">
+        <div class="card">
+            <h4>01 — Helium Fundamentals</h4>
+            <p>Formation from radioactive decay, cryogenic distillation, PSA purification, and the path from crude gas to Grade-A 99.999% purity.</p>
+            <a href="research/01-helium-fundamentals.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>02 — Hanford Site Analysis</h4>
+            <p>Why a decommissioned nuclear complex managing 56 million gallons of radioactive waste is not viable for helium production, despite the historical reactor coolant connection.</p>
+            <a href="research/02-hanford-analysis.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>03 — PNW Distribution Network</h4>
+            <p>Current commercial helium suppliers along the I-5 corridor — Central Welding Supply, Airgas, Industrial Source, OXARC, and Linde.</p>
+            <a href="research/03-pnw-distribution.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>04 — Global Production Fast-Track</h4>
+            <p>New primary helium projects in Colorado, Minnesota, Arizona, New Mexico, and Australia's Amadeus Basin — the race to replace Qatar.</p>
+            <a href="research/04-global-production.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>05 — March 2026 Market Crisis</h4>
+            <p>Qatar force majeure, Federal Helium Reserve privatization, Riley Ridge concentration risk, and the cascading impact on semiconductor fabrication worldwide.</p>
+            <a href="research/05-market-crisis.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>06 — Virtual Helium Plant Model</h4>
+            <p>Decentralized production architecture inspired by Virtual Power Plants — modular PSA nodes aggregated through hub-and-spoke purification with digital orchestration.</p>
+            <a href="research/06-virtual-plant.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>07 — I-5 Corridor Potential</h4>
+            <p>The PNW I-5 corridor as a helium refinement and distribution zone — geographic advantages, existing infrastructure, and the co-operative model.</p>
+            <a href="research/07-i5-corridor.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>08 — Semiconductor Fabrication</h4>
+            <p>What fabs need, what they cost, the CHIPS Act funding landscape, and why the gas supply layer matters as much as the silicon.</p>
+            <a href="research/08-semiconductor-fabs.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>09 — Economics of Modular Helium</h4>
+            <p>Cost-benefit analysis of PSA extraction nodes, closed-loop recycling at fab sites, and the crisis-pricing window that makes small-scale production immediately profitable.</p>
+            <a href="research/09-economics.md">Read →</a>
+        </div>
+        <div class="card">
+            <h4>10 — Ring of Fire Trading Network</h4>
+            <p>The Pacific Rim as an interconnected trading system — from Alaska to Australia, from Cascadia to Taiwan — and why mutual dependence is strength, not weakness.</p>
+            <a href="research/10-ring-of-fire.md">Read →</a>
+        </div>
+    </div>
+
+    <h2>Key Findings</h2>
+
+    <table>
+        <tr><th>Finding</th><th>Significance</th></tr>
+        <tr><td>Modular PSA units viable at 0.3% concentration</td><td>Dramatically lowers the threshold for economical helium extraction</td></tr>
+        <tr><td>PNW electricity $0.06-$0.08/kWh</td><td>Significant cost advantage for energy-intensive liquefaction</td></tr>
+        <tr><td>Closed-loop recycling recovers 90-95%</td><td>Reduces virgin helium requirement to a fraction at fab sites</td></tr>
+        <tr><td>15-25 day PNW→East Asia shipping</td><td>Well within 35-48 day liquid helium holding window</td></tr>
+        <tr><td>Crisis pricing IRR >50-100%</td><td>Small modular operations immediately profitable at current spot prices</td></tr>
+        <tr><td>CHIPS Act includes gas supply chain</td><td>Federal funding explicitly covers the chemical/gas layers of semiconductor stack</td></tr>
+        <tr><td>Australia 8-14 days to East Asia</td><td>Fastest alternative to Qatar, with Amadeus Basin resources of ~44 Bcf</td></tr>
+        <tr><td>Ring of Fire = complete supply loop</td><td>Resources, refinement, fabrication, and consumption all circle the Pacific</td></tr>
+    </table>
+
+    <h2>Rosetta Cross-References</h2>
+    <p>This project spans four Rosetta clusters:</p>
+    <table>
+        <tr><th>Cluster</th><th>Connection</th></tr>
+        <tr><td>Energy (THE)</td><td>Helium extraction, cryogenic processes, SMR integration</td></tr>
+        <tr><td>Infrastructure (SYS)</td><td>Supply chain architecture, I-5 corridor logistics, port operations</td></tr>
+        <tr><td>Science (BHK)</td><td>Helium chemistry, radioactive decay, cryogenic physics</td></tr>
+        <tr><td>Business (BCM)</td><td>Co-operative models, CHIPS Act funding, international trade</td></tr>
+    </table>
+
+    <div class="nav">
+        <a href="../index.html">← Back to Series Index</a> ·
+        Series: PNW Research Series · Cluster: Energy (hub: THE) ·
+        Published: 2026-03-31
+    </div>
+</body>
+</html>
