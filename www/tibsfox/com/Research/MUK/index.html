@@ -32,6 +32,7 @@
       padding: 2.5rem 2rem 2rem;
       border-bottom: 3px solid var(--sand);
       position: relative; overflow: hidden;
+      text-align: center;
     }
     header::before {
       content:''; position:absolute; inset:0;
@@ -40,7 +41,7 @@
     header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
     header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
     header .coords { color:rgba(255,255,255,0.3); font-size:0.75rem; font-family:monospace; margin-top:0.5rem; position:relative; }
-    header nav { margin-top:1rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
     header nav a {
       color:rgba(255,255,255,0.7); margin-right:1.2rem; font-family:system-ui,sans-serif;
       font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
