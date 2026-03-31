@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Salish Sea — Marine Ecology of Puget Sound</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin:0 0.6rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+    blockquote {
+      font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light);
+      padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+    }
+
+    h2 {
+      font-size:1.2rem; font-weight:400; color:var(--sand); margin:2.5rem 0 0.5rem;
+      padding-bottom:0.3rem; border-bottom:1px solid var(--border);
+    }
+    h2:first-of-type { margin-top:0; }
+
+    .panel {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; margin-bottom:1.5rem;
+    }
+    .panel h3 { font-size:1rem; color:#fff; margin-bottom:0.5rem; }
+    .panel p { font-size:0.88rem; color:rgba(255,255,255,0.6); margin-bottom:0.5rem; }
+    .panel p:last-child { margin-bottom:0; }
+    .panel ul { list-style:none; padding:0; margin:0.5rem 0; }
+    .panel li { font-size:0.88rem; color:rgba(255,255,255,0.6); padding:0.2rem 0 0.2rem 1rem; position:relative; }
+    .panel li::before { content:'\2022'; position:absolute; left:0; color:var(--marine); }
+
+    .callout {
+      background:rgba(58,138,154,0.08); border:1px solid rgba(58,138,154,0.15);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0; font-size:0.85rem; color:var(--marine);
+    }
+    .callout strong { color:var(--sand); }
+
+    .callout-warn {
+      background:rgba(196,176,144,0.08); border:1px solid rgba(196,176,144,0.15);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0; font-size:0.85rem; color:var(--sand);
+    }
+
+    .data-table { width:100%; border-collapse:collapse; font-size:0.82rem; margin:0.8rem 0; }
+    .data-table th {
+      text-align:left; font-size:0.65rem; color:rgba(255,255,255,0.35); text-transform:uppercase;
+      letter-spacing:0.08em; font-family:system-ui,sans-serif; padding:0.4rem 0.6rem;
+      border-bottom:1px solid var(--border);
+    }
+    .data-table td { padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); color:var(--text); }
+    .data-table tr:hover td { background:rgba(58,138,154,0.04); }
+    .data-table .num { font-family:monospace; text-align:right; }
+
+    .stats {
+      display:flex; flex-wrap:wrap; gap:1.5rem; margin:1.5rem 0 2.5rem;
+      padding:1rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .stat { text-align:center; min-width:80px; }
+    .stat-value { display:block; font-size:1.5rem; font-weight:400; color:var(--marine); font-family:monospace; }
+    .stat-label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+
+    .species-tag {
+      display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+      font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:500;
+      border:1px solid; margin-right:0.3rem; margin-bottom:0.2rem;
+    }
+    .tag-endangered { background:rgba(200,80,80,0.1); color:#d08080; border-color:rgba(200,80,80,0.3); }
+    .tag-resident { background:rgba(58,138,154,0.1); color:var(--marine); border-color:rgba(58,138,154,0.3); }
+    .tag-seasonal { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+    .tag-recovering { background:rgba(42,74,48,0.2); color:#6a9a70; border-color:rgba(42,74,48,0.4); }
+
+    footer {
+      max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+      font-size:0.75rem; color:rgba(255,255,255,0.35); border-top:1px solid var(--border);
+      font-family:system-ui,sans-serif;
+    }
+
+    @media(max-width:640px) {
+      header h1 { font-size:1.4rem; }
+      main { padding:1rem; }
+      .stats { gap:1rem; }
+      .stat { min-width:70px; }
+      .stat-value { font-size:1.2rem; }
+      .data-table { font-size:0.75rem; }
+      .data-table th, .data-table td { padding:0.3rem 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>The Salish Sea</h1>
+  <div class="subtitle">Marine ecology of Puget Sound, the straits, and the inland waters</div>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="trips.html">Trip Planner</a>
+    <a href="food.html">Food Heritage</a>
+    <a href="whidbey.html">Whidbey</a>
+    <a href="weather-science.html">Weather Science</a>
+    <a href="salish-sea.html" class="active">Salish Sea</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <blockquote>
+    The water in front of Mukilteo is not just "Puget Sound." It is part of the Salish Sea &mdash;
+    an interconnected inland sea shared between the United States and Canada, where orcas follow
+    salmon, tides shape shorelines, and stormwater carries the fingerprint of every road and roof
+    in the watershed.
+  </blockquote>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-value">~18,000</span>
+      <span class="stat-label">km&sup2; total area</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">365m</span>
+      <span class="stat-label">max depth</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">~73</span>
+      <span class="stat-label">southern resident orcas</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">5</span>
+      <span class="stat-label">salmon species</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">2009</span>
+      <span class="stat-label">officially named</span>
+    </div>
+  </div>
+
+  <!-- ========== Section 1: The Salish Sea ========== -->
+  <h2>1. The Salish Sea</h2>
+
+  <div class="panel">
+    <h3>Definition and Geography</h3>
+    <p>The Salish Sea is defined as the interconnected body of water comprising <strong style="color:var(--sand)">Puget Sound</strong>, the <strong style="color:var(--sand)">Strait of Juan de Fuca</strong>, the <strong style="color:var(--sand)">Strait of Georgia</strong>, and the waterways surrounding the <strong style="color:var(--sand)">San Juan Islands</strong>. It was jointly named in 2009 by the U.S. Board on Geographic Names and the Geographical Names Board of Canada, honoring the Salish peoples who have lived along these shores for millennia.</p>
+    <p>The name does not replace existing names &mdash; Puget Sound is still Puget Sound. "Salish Sea" describes the whole system as a single ecological and hydrological unit, which is how the water actually behaves.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Physical Dimensions</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Area</th>
+          <th>Max Depth</th>
+          <th>Character</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Puget Sound</td>
+          <td class="num">2,632 km&sup2;</td>
+          <td class="num">283 m</td>
+          <td>Deep fjord-like basins, glacially carved</td>
+        </tr>
+        <tr>
+          <td>Strait of Georgia</td>
+          <td class="num">6,900 km&sup2;</td>
+          <td class="num">365 m</td>
+          <td>Broad basin between Vancouver Island and mainland BC</td>
+        </tr>
+        <tr>
+          <td>Strait of Juan de Fuca</td>
+          <td class="num">3,540 km&sup2;</td>
+          <td class="num">250 m</td>
+          <td>Pacific gateway, strong tidal exchange</td>
+        </tr>
+        <tr>
+          <td>San Juan / Gulf Islands</td>
+          <td class="num">~4,900 km&sup2;</td>
+          <td class="num">varies</td>
+          <td>Archipelago with complex channels and passes</td>
+        </tr>
+        <tr>
+          <td style="color:var(--sand); font-weight:bold;">Total Salish Sea</td>
+          <td class="num" style="color:var(--sand);">~18,000 km&sup2;</td>
+          <td class="num" style="color:var(--sand);">365 m</td>
+          <td style="color:var(--sand);">6,900 sq mi of inland sea</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>Tidal Exchange with the Pacific</h3>
+    <p>The entire Salish Sea breathes through a single opening: the Strait of Juan de Fuca. Twice daily, billions of gallons of Pacific water enter and leave through this channel, driven by mixed semidiurnal tides. The narrow passes between the San Juan Islands create some of the strongest tidal currents in the world &mdash; Deception Pass runs up to 8 knots.</p>
+    <div class="callout">
+      <strong>Connection to our data:</strong> NOAA tide station 9447659 (Mukilteo) measures these tides in real time. The mixed semidiurnal pattern &mdash; two highs and two lows of unequal height each day &mdash; is characteristic of the Salish Sea's complex geometry.
+    </div>
+  </div>
+
+  <!-- ========== Section 2: Southern Resident Orcas ========== -->
+  <h2>2. Southern Resident Orcas (J, K, L Pods)</h2>
+
+  <div class="panel">
+    <h3>Population Status</h3>
+    <span class="species-tag tag-endangered">Critically Endangered</span>
+    <span class="species-tag tag-resident">Year-round Resident (J Pod)</span>
+    <span class="species-tag tag-seasonal">Seasonal (K &amp; L Pods)</span>
+    <p style="margin-top:0.5rem;">The Southern Resident Killer Whales are a genetically distinct population of approximately <strong style="color:#d08080">73 individuals</strong>, listed as endangered under both the U.S. Endangered Species Act (2005) and Canada's Species at Risk Act. They are divided into three family groups:</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Pod</th>
+          <th>Approx. Size</th>
+          <th>Range Pattern</th>
+          <th>Key Traits</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>J Pod</td>
+          <td class="num">~24</td>
+          <td>Year-round in Puget Sound / Salish Sea</td>
+          <td>Most frequently sighted, tightest family bonds</td>
+        </tr>
+        <tr>
+          <td>K Pod</td>
+          <td class="num">~16</td>
+          <td>Seasonal; oceanic in winter, inland in summer</td>
+          <td>Often travels with L Pod offshore</td>
+        </tr>
+        <tr>
+          <td>L Pod</td>
+          <td class="num">~33</td>
+          <td>Most oceanic; returns to inland waters May&ndash;October</td>
+          <td>Largest pod, ranges to northern California</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>Diet: Salmon Specialists</h3>
+    <p>Unlike transient (Bigg's) orcas that hunt marine mammals, Southern Residents are <strong style="color:var(--sand)">salmon specialists</strong>. Chinook salmon make up approximately 80% of their diet during summer months. This extreme dietary specialization is the root of their vulnerability &mdash; as Chinook populations decline, the orcas decline with them.</p>
+    <p>The orcas use echolocation to hunt individual salmon, often at depth. Vessel noise directly competes with their sonar, reducing foraging efficiency by an estimated 25% in heavy traffic.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Threats</h3>
+    <ul>
+      <li><strong style="color:var(--sand)">Prey depletion:</strong> Chinook salmon runs across the Pacific Northwest are at historic lows. No prey recovery = no orca recovery.</li>
+      <li><strong style="color:var(--sand)">Vessel noise and disturbance:</strong> Commercial shipping, whale-watching boats, and recreational vessels create acoustic interference with foraging echolocation.</li>
+      <li><strong style="color:var(--sand)">Contaminants:</strong> PCBs, PBDEs, and other persistent organic pollutants bioaccumulate in blubber. When orcas metabolize fat during food-scarce periods, toxins re-enter their bloodstream.</li>
+      <li><strong style="color:var(--sand)">Declining Chinook runs:</strong> Habitat loss, dams, and warming ocean conditions continue to reduce the salmon stocks these orcas depend on.</li>
+    </ul>
+    <div class="callout">
+      <strong>Mukilteo connection:</strong> Orcas transit Possession Sound following salmon runs heading toward the Snohomish River estuary. J Pod has been documented in the waters directly off Mukilteo, pursuing Chinook salmon moving between the main basin of Puget Sound and the river system we monitor at USGS gauge 12150800.
+    </div>
+  </div>
+
+  <!-- ========== Section 3: Salmon Runs ========== -->
+  <h2>3. Salmon Runs</h2>
+
+  <div class="panel">
+    <h3>Five Species of Pacific Salmon in the Salish Sea</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Species</th>
+          <th>Scientific Name</th>
+          <th>Run Timing</th>
+          <th>Significance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--sand)">Chinook (King)</strong></td>
+          <td style="font-style:italic; color:var(--dim);">O. tshawytscha</td>
+          <td>Year-round (peak Aug&ndash;Oct)</td>
+          <td>Primary orca prey; largest species; ESA threatened</td>
+        </tr>
+        <tr>
+          <td>Coho (Silver)</td>
+          <td style="font-style:italic; color:var(--dim);">O. kisutch</td>
+          <td>Sep&ndash;Nov</td>
+          <td>Popular sport fish; vulnerable to 6PPD-quinone</td>
+        </tr>
+        <tr>
+          <td>Pink (Humpy)</td>
+          <td style="font-style:italic; color:var(--dim);">O. gorbuscha</td>
+          <td>Aug&ndash;Oct (odd years)</td>
+          <td>Most abundant; strict two-year lifecycle</td>
+        </tr>
+        <tr>
+          <td>Chum (Dog)</td>
+          <td style="font-style:italic; color:var(--dim);">O. keta</td>
+          <td>Oct&ndash;Dec</td>
+          <td>Late-season spawner; important marine nutrient transport</td>
+        </tr>
+        <tr>
+          <td>Sockeye (Red)</td>
+          <td style="font-style:italic; color:var(--dim);">O. nerka</td>
+          <td>Jun&ndash;Aug</td>
+          <td>Lake-rearing juvenile phase; highly valued commercially</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>The Snohomish River System</h3>
+    <p>The Snohomish River watershed is one of the most productive salmon systems in Puget Sound. Its two major tributaries &mdash; the Skykomish and the Snoqualmie &mdash; drain the western Cascades, collecting snowmelt and rain that sustains salmon from egg to ocean and back.</p>
+    <p>The river we track via <strong style="color:var(--marine)">USGS gauge 12150800</strong> (Snohomish River near Monroe) carries all five salmon species from the mountains to the Sound. Flow conditions directly affect migration success:</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Flow Condition</th>
+          <th>Range (cfs)</th>
+          <th>Impact on Salmon</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:#d08080;">Very Low</td>
+          <td class="num">&lt; 2,000</td>
+          <td>Thermal stress, low dissolved oxygen, migration barriers at shallow riffles</td>
+        </tr>
+        <tr>
+          <td style="color:var(--sand);">Low</td>
+          <td class="num">2,000&ndash;5,000</td>
+          <td>Marginal passage; adults may hold in deep pools</td>
+        </tr>
+        <tr>
+          <td style="color:#6a9a70;">Optimal</td>
+          <td class="num">5,000&ndash;20,000</td>
+          <td>Good migration conditions; adequate depth and dissolved oxygen</td>
+        </tr>
+        <tr>
+          <td style="color:var(--marine);">High</td>
+          <td class="num">20,000&ndash;50,000</td>
+          <td>Strong migration trigger; freshets attract adults from the Sound</td>
+        </tr>
+        <tr>
+          <td style="color:var(--fog);">Flood</td>
+          <td class="num">&gt; 50,000</td>
+          <td>Redd scour risk; eggs and juveniles displaced; debris hazard</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong>Why river flow matters:</strong> High flow = good migration conditions. Low flow = stress. Our weather data directly predicts flow conditions &mdash; heavy rain in the Cascades drives the freshets that trigger salmon runs.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Hatcheries and Restoration</h3>
+    <p>Two major hatchery systems supplement wild salmon runs in the Snohomish watershed:</p>
+    <ul>
+      <li><strong style="color:var(--sand)">Tulalip Tribes hatcheries:</strong> Co-manage salmon recovery under treaty rights; operate hatcheries on the Skykomish River system. Tribal harvest management is governed by the Boldt Decision (1974).</li>
+      <li><strong style="color:var(--sand)">WDFW (Washington Department of Fish and Wildlife):</strong> Operates state hatcheries focusing on Chinook and Coho supplementation, working to maintain genetic diversity while boosting run sizes.</li>
+    </ul>
+    <p>The tension between hatchery production and wild stock recovery is one of the central debates in Pacific salmon management. Hatchery fish can compete with and dilute the genetic fitness of wild populations, but without supplementation, some runs might disappear entirely.</p>
+  </div>
+
+  <!-- ========== Section 4: Marine Mammals ========== -->
+  <h2>4. Marine Mammals</h2>
+
+  <div class="panel">
+    <h3>Residents and Visitors of Puget Sound</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Species</th>
+          <th>Status</th>
+          <th>When</th>
+          <th>Where to Look from Mukilteo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Harbor Seal</td>
+          <td><span class="species-tag tag-resident">Resident</span></td>
+          <td>Year-round</td>
+          <td>Jetty Island haul-outs; marina docks; ferry terminal rocks</td>
+        </tr>
+        <tr>
+          <td>Steller Sea Lion</td>
+          <td><span class="species-tag tag-seasonal">Winter Visitor</span></td>
+          <td>Oct&ndash;Apr</td>
+          <td>Occasionally on navigational buoys in Possession Sound</td>
+        </tr>
+        <tr>
+          <td>Gray Whale</td>
+          <td><span class="species-tag tag-seasonal">Spring Migration</span></td>
+          <td>Mar&ndash;May</td>
+          <td>Occasionally enters Puget Sound; more common in outer straits</td>
+        </tr>
+        <tr>
+          <td>Humpback Whale</td>
+          <td><span class="species-tag tag-recovering">Recovering</span></td>
+          <td>Increasing presence</td>
+          <td>More frequent since population recovery; seen in main basin</td>
+        </tr>
+        <tr>
+          <td>Harbor Porpoise</td>
+          <td><span class="species-tag tag-resident">Resident</span></td>
+          <td>Year-round</td>
+          <td>Small, shy, low profile; rarely seen but always present</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>Harbor Seals: The Locals</h3>
+    <p>Harbor seals (<em>Phoca vitulina</em>) are the most common marine mammal in the Salish Sea, with an estimated population of 14,000+ in Washington waters. They haul out on Jetty Island &mdash; the sandbar directly across from Mukilteo's waterfront &mdash; to rest, thermoregulate, and nurse pups.</p>
+    <p>Pupping season runs from June through September. During this time, apparently "abandoned" pups on shore are almost always waiting for their mothers to return from foraging. The standard guidance: observe from 100+ feet, never touch.</p>
+  </div>
+
+  <div class="panel">
+    <h3>The Return of Humpbacks</h3>
+    <p>Humpback whales were hunted to near-extinction in the North Pacific. Since the moratorium on commercial whaling (1966 for humpbacks), populations have recovered dramatically. Their increasing presence in the Salish Sea &mdash; rare before 2010, now seen regularly &mdash; is one of the clearest marine conservation success stories in the region.</p>
+    <p>However, their return creates new challenges: humpbacks feeding in the same waters as heavy commercial shipping face entanglement and strike risks. The recovery of one species reveals the complexity of managing an ecosystem, not just individual populations.</p>
+  </div>
+
+  <!-- ========== Section 5: Tidal Ecology ========== -->
+  <h2>5. Tidal Ecology</h2>
+
+  <div class="panel">
+    <h3>Mixed Semidiurnal Tides</h3>
+    <p>The Salish Sea experiences <strong style="color:var(--sand)">mixed semidiurnal tides</strong> &mdash; two high tides and two low tides each day, but with unequal heights. This is exactly what our NOAA station 9447659 measures at Mukilteo. The "mixed" part comes from the declination of the moon: when the moon is north or south of the equator, the two daily highs (and two lows) differ in height.</p>
+    <p>Typical tidal range at Mukilteo: 2.5&ndash;4.0 meters (8&ndash;13 feet). Extreme tides during king tides can exceed 4.5 meters.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Intertidal Zones</h3>
+    <p>The intertidal zone &mdash; the strip of shore exposed and submerged by tides &mdash; is organized into bands defined by how much air exposure each level tolerates:</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Zone</th>
+          <th>Exposure</th>
+          <th>Key Species</th>
+          <th>Character</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Splash Zone</td>
+          <td>Above highest tide</td>
+          <td>Lichens, periwinkles, limpets</td>
+          <td>Salt spray only; extreme desiccation tolerance</td>
+        </tr>
+        <tr>
+          <td>High Intertidal</td>
+          <td>Submerged only at high tide</td>
+          <td>Barnacles, shore crabs, rockweed</td>
+          <td>Hours of air exposure daily</td>
+        </tr>
+        <tr>
+          <td>Mid Intertidal</td>
+          <td>Regularly covered and exposed</td>
+          <td>Mussels, anemones, ochre sea stars</td>
+          <td>Highest biodiversity zone</td>
+        </tr>
+        <tr>
+          <td>Low Intertidal</td>
+          <td>Exposed only at low tide</td>
+          <td>Sea urchins, bull kelp, eelgrass, nudibranchs</td>
+          <td>Nearly marine; richest habitat</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>Eelgrass Meadows: The Underwater Nurseries</h3>
+    <p>Eelgrass (<em>Zostera marina</em>) is not a seaweed &mdash; it is a true flowering plant that grows underwater, forming dense meadows in shallow, protected waters. These meadows are <strong style="color:var(--sand)">critical nursery habitat</strong> for juvenile salmon, herring, and hundreds of invertebrate species.</p>
+    <p>Eelgrass provides structure (hiding places from predators), food (epiphytic algae on the blades), and oxygen (photosynthesis). It also stabilizes sediment, reducing erosion. The Snohomish River estuary supports some of the most extensive eelgrass beds in Puget Sound.</p>
+    <div class="callout">
+      <strong>Why this connects to everything:</strong> Juvenile Chinook salmon shelter in eelgrass meadows before heading to open water. Those Chinook grow into the adults that Southern Resident orcas depend on. Eelgrass health is, indirectly, orca health.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Sea Star Wasting Disease</h3>
+    <p>Between 2013 and 2016, a devastating epidemic called Sea Star Wasting Syndrome (SSWS) swept the Pacific coast from Alaska to Baja California. Affected sea stars developed lesions, lost limbs, and disintegrated within days. The ochre sea star (<em>Pisaster ochraceus</em>) &mdash; a keystone predator that controls mussel populations &mdash; was especially hard hit.</p>
+    <p>Puget Sound populations were devastated. The cause was identified as a densovirus (Sea Star-associated Densovirus, SSaDV), potentially triggered or amplified by warming water temperatures. Recovery has been slow and uneven. The loss of sea stars allows mussels to dominate, squeezing out other intertidal species &mdash; a textbook demonstration of keystone predator effects.</p>
+  </div>
+
+  <!-- ========== Section 6: Water Quality ========== -->
+  <h2>6. Water Quality</h2>
+
+  <div class="panel">
+    <h3>The State of Puget Sound</h3>
+    <p>The <strong style="color:var(--sand)">Puget Sound Partnership</strong>, established in 2007, is the state-led effort to recover the health of Puget Sound by 2050. The partnership coordinates across hundreds of agencies, tribes, and organizations to track and address the ecological indicators that define Sound health: orca population, salmon returns, water quality, habitat extent, and human well-being.</p>
+    <p>The uncomfortable reality: despite decades of effort and billions in investment, most indicators are flat or declining. The Sound is not getting healthier at the pace needed.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Pollution Sources</h3>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Rank</th>
+          <th>Key Pollutants</th>
+          <th>Pathway</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--sand); font-weight:bold;">Stormwater Runoff</td>
+          <td class="num">#1</td>
+          <td>Heavy metals, petroleum, microplastics, 6PPD-quinone</td>
+          <td>Rain washes roads, roofs, parking lots into streams and Sound</td>
+        </tr>
+        <tr>
+          <td>Wastewater</td>
+          <td class="num">#2</td>
+          <td>Nutrients (N, P), pharmaceuticals, microplastics</td>
+          <td>Treatment plant outfalls and combined sewer overflows</td>
+        </tr>
+        <tr>
+          <td>Agricultural Runoff</td>
+          <td class="num">#3</td>
+          <td>Nutrients, pesticides, fecal coliform</td>
+          <td>Field drainage to rivers to Sound (Skagit, Snohomish valleys)</td>
+        </tr>
+        <tr>
+          <td>Industrial Legacy</td>
+          <td class="num">#4</td>
+          <td>PCBs, PAHs, heavy metals</td>
+          <td>Contaminated sediments from historical industrial activity</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel">
+    <h3>6PPD-quinone: The Tire Chemical Killing Coho</h3>
+    <p>In 2020, researchers at the University of Washington identified <strong style="color:#d08080">6PPD-quinone</strong> &mdash; a chemical produced when the common tire preservative 6PPD reacts with ozone &mdash; as the cause of decades of unexplained Coho salmon die-offs in urban streams.</p>
+    <p>The discovery is remarkable for several reasons:</p>
+    <ul>
+      <li>6PPD has been in tires since the 1960s. Nobody thought to look at tire wear particles as a specific toxicant.</li>
+      <li>6PPD-quinone is lethal to Coho salmon at concentrations as low as 0.8 micrograms per liter &mdash; levels easily reached in stormwater.</li>
+      <li>Chinook salmon appear more resistant, but sublethal effects are still being studied.</li>
+      <li>The chemical forms on road surfaces and washes into waterways with every rainstorm.</li>
+    </ul>
+    <div class="callout-warn">
+      <strong>Connection to our weather data:</strong> Rain intensity directly predicts stormwater pollution events. A heavy rainstorm after a dry spell produces the worst first-flush effect &mdash; maximum accumulated pollutant load washed into streams. Our precipitation data from the Mukilteo observatory isn't just about weather; it's a proxy for pollution timing.
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Shellfish Growing Areas</h3>
+    <p>Water quality in the Salish Sea directly determines whether shellfish can be safely harvested. The Washington State Department of Health classifies shellfish growing areas based on fecal coliform bacteria levels &mdash; the standard indicator of human health risk from contaminated water.</p>
+    <p>When rain events overwhelm stormwater systems or trigger combined sewer overflows, shellfish beds are closed. These closures are the most immediate, visible connection between land use, weather, and marine ecosystem health. Every impervious surface in the watershed &mdash; every road, roof, and parking lot &mdash; contributes to the runoff that closes the beds.</p>
+  </div>
+
+  <!-- ========== Synthesis ========== -->
+  <h2>Why This Matters for Mukilteo Observatory</h2>
+
+  <div class="panel">
+    <p>Every data stream we collect at the Mukilteo Observatory connects to the Salish Sea ecosystem:</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Our Data</th>
+          <th>Source</th>
+          <th>Ecological Connection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tide levels</td>
+          <td>NOAA 9447659</td>
+          <td>Intertidal habitat exposure; eelgrass light availability</td>
+        </tr>
+        <tr>
+          <td>River flow</td>
+          <td>USGS 12150800</td>
+          <td>Salmon migration conditions; freshwater input to Sound</td>
+        </tr>
+        <tr>
+          <td>Precipitation</td>
+          <td>Weather models + KPAE</td>
+          <td>Stormwater pollution timing; 6PPD-quinone flush events</td>
+        </tr>
+        <tr>
+          <td>Temperature</td>
+          <td>Weather models + KPAE</td>
+          <td>Marine heat stress; dissolved oxygen levels in rivers</td>
+        </tr>
+        <tr>
+          <td>Wind</td>
+          <td>Weather models + KPAE</td>
+          <td>Surface mixing; vessel traffic safety; whale-watch conditions</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:0.5rem;">A microclimate observatory is not just a weather station. It is a lens into the health of the ecosystem where atmosphere, freshwater, and ocean meet. Understanding the Salish Sea gives every data point we collect its ecological context.</p>
+  </div>
+
+</main>
+
+<footer>
+  Part of the <a href="../index.html">PNW Research Series</a> &middot;
+  <a href="index.html">Mukilteo Observatory</a> &middot;
+  <a href="../NASA/artemis-ii/index.html">Artemis II Tracker</a>
+</footer>
+
+</body>
+</html>
