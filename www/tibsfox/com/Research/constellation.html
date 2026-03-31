@@ -24,43 +24,28 @@ canvas:active{cursor:grabbing}
 .cl{all:unset;cursor:pointer;padding:2px 7px;border-radius:3px;font-size:10px;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.06);transition:all .15s;pointer-events:auto;white-space:nowrap}
 .cl:hover{color:#fff;border-color:var(--c);background:rgba(255,255,255,.04)}
 .cl.on{color:#fff;background:var(--c);border-color:var(--c)}
-#tooltip{position:absolute;pointer-events:none;background:rgba(15,15,35,.94);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:10px 14px;font-size:12px;display:none;z-index:20;max-width:380px;box-shadow:0 4px 20px rgba(0,0,0,.5)}
-#tooltip .tt-id{color:rgba(255,255,255,.4);font-size:10px;font-family:monospace}
-#tooltip .tt-name{color:#fff;font-weight:600;font-size:14px;margin:2px 0}
-#tooltip .tt-sci{color:rgba(255,255,255,.5);font-style:italic;font-size:11px}
-#tooltip .tt-cluster{font-size:10px;margin-top:2px}
-#tooltip .tt-detail{font-size:10px;margin-top:6px;padding-top:5px;border-top:1px solid rgba(255,255,255,.08);line-height:1.6}
-#tooltip .tt-detail .pair-label{color:rgba(255,255,255,.35);font-size:9px;text-transform:uppercase;letter-spacing:.5px}
-#tooltip .tt-detail .pair-artist{color:#93c5fd;font-weight:500}
-#tooltip .tt-detail .pair-species{color:#86efac;font-weight:500}
-#tooltip .tt-detail .pair-info{color:rgba(255,255,255,.55)}
-#tooltip .tt-energy{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px;vertical-align:middle}
-#tooltip .tt-xrefs{font-size:9px;color:rgba(255,255,255,.4);margin-top:4px;max-height:60px;overflow-y:auto;line-height:1.4}
-#filterbar{display:flex;align-items:center;padding:4px 12px;gap:6px;flex-wrap:wrap;pointer-events:auto;background:rgba(10,10,26,.75);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.04)}
-#filterbar label{font-size:10px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.5px}
-.energy-btn{all:unset;cursor:pointer;width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.1);font-size:9px;text-align:center;line-height:22px;color:rgba(255,255,255,.5);pointer-events:auto;transition:all .15s}
-.energy-btn:hover{border-color:var(--ec);color:#fff}
-.energy-btn.on{background:var(--ec);border-color:var(--ec);color:#fff;box-shadow:0 0 8px var(--ec)}
-.filter-select{all:unset;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:2px 8px;color:rgba(255,255,255,.6);font-size:11px;pointer-events:auto;cursor:pointer}
-.filter-select:hover{border-color:rgba(255,255,255,.2);color:#fff}
-.filter-select option{background:#1a1a2e;color:#fff}
-#stats{position:absolute;bottom:8px;left:12px;right:12px;font-size:10px;color:rgba(255,255,255,.3);pointer-events:none;z-index:10;display:flex;justify-content:space-between}
-#stats .stats-left{}
-#stats .stats-right{text-align:right}
-#legend{position:absolute;bottom:30px;right:12px;pointer-events:auto;z-index:10}
-#legend-toggle{all:unset;cursor:pointer;padding:4px 10px;border-radius:4px;font-size:10px;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08);background:rgba(10,10,26,.7);backdrop-filter:blur(6px)}
-#legend-toggle:hover{color:#fff;border-color:rgba(255,255,255,.2)}
-#legend-panel{display:none;background:rgba(10,10,26,.92);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 14px;margin-bottom:6px;font-size:10px;max-height:400px;overflow-y:auto;min-width:200px}
-#legend-panel.open{display:block}
-#legend-panel h4{color:rgba(255,255,255,.5);font-size:9px;text-transform:uppercase;letter-spacing:.6px;margin:8px 0 4px;font-weight:600}
-#legend-panel h4:first-child{margin-top:0}
-.legend-row{display:flex;align-items:center;gap:6px;padding:1px 0}
-.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.legend-ring{width:10px;height:10px;border-radius:50%;flex-shrink:0;border:2px solid;background:transparent}
-.legend-text{color:rgba(255,255,255,.55)}
-.legend-size{display:flex;align-items:center;gap:4px;padding:2px 0}
-.legend-circle{border-radius:50%;background:rgba(255,255,255,.3);flex-shrink:0}
-@media(max-width:640px){#search{width:100%;order:20}#clusters{order:19}#filterbar{padding:4px 8px;gap:4px}}
+#tooltip{position:absolute;pointer-events:none;background:rgba(10,12,28,.94);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:10px 14px;font-size:12px;display:none;z-index:20;max-width:280px;box-shadow:0 4px 24px rgba(0,0,0,.5);line-height:1.5}
+#tooltip .tt-id{color:rgba(255,255,255,.35);font-size:10px;font-family:monospace;letter-spacing:0.5px}
+#tooltip .tt-name{color:#fff;font-weight:600;font-size:14px;margin:2px 0 4px}
+#tooltip .tt-cluster{font-size:11px;margin-bottom:6px}
+#tooltip .tt-metrics{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;font-size:10px;color:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.08);padding-top:6px;margin-top:4px}
+#tooltip .tt-metrics .val{color:rgba(255,255,255,.85);font-weight:500;font-variant-numeric:tabular-nums}
+#tooltip .tt-hub{font-size:10px;color:#f0c070;margin-top:4px;border-top:1px solid rgba(255,255,255,.06);padding-top:4px}
+#tooltip .tt-edges{font-size:10px;color:rgba(255,255,255,.45);margin-top:3px}
+#stats{position:absolute;bottom:8px;left:170px;font-size:10px;color:rgba(255,255,255,.3);pointer-events:none;z-index:10;line-height:1.6;font-variant-numeric:tabular-nums}
+#legend{position:absolute;bottom:8px;right:12px;font-size:10px;color:rgba(255,255,255,.35);pointer-events:none;z-index:10;text-align:right;line-height:1.6}
+#minimap{position:absolute;bottom:8px;left:12px;width:150px;height:100px;background:rgba(10,10,26,.8);border:1px solid rgba(255,255,255,.1);border-radius:4px;z-index:10;pointer-events:none;overflow:hidden}
+.nav-link{color:#93c5fd;text-decoration:none;font-size:12px;white-space:nowrap;opacity:.6;transition:opacity .15s}
+.nav-link:hover{opacity:1;color:#bfdbfe}
+.nav-sep{color:rgba(255,255,255,.1);font-size:11px;margin:0 1px}
+#clusterDropdown{display:none;all:unset;cursor:pointer;padding:3px 10px;border-radius:3px;font-size:11px;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.08);pointer-events:auto;transition:all .15s;white-space:nowrap;position:relative}
+#clusterDropdown:hover{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.06)}
+#clusterMenu{display:none;position:absolute;top:100%;left:0;background:rgba(10,10,26,.95);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:4px 0;z-index:30;min-width:140px;max-height:300px;overflow-y:auto}
+#clusterMenu.open{display:block}
+#clusterMenu .cl{display:block;width:100%;text-align:left;padding:5px 12px;border:none;border-radius:0;font-size:11px}
+#clusterMenu .cl:hover{background:rgba(255,255,255,.06)}
+@media(max-width:768px){#clusters{display:none!important}#clusterDropdown{display:inline-block}#search{width:100px}#search:focus{width:140px}}
+@media(max-width:640px){#search{width:100%;order:20}#clusterDropdown{order:19}}
 </style>
 </head>
 <body>
@@ -68,62 +53,23 @@ canvas:active{cursor:grabbing}
 <div id="ui">
   <div id="topbar">
     <a href="index.html">Research Index</a>
+    <span class="nav-sep">|</span>
+    <a href="../SOL/" class="nav-link">SOL</a>
+    <span class="nav-sep">|</span>
+    <a href="NASA/artemis-ii/" class="nav-link">Artemis II</a>
+    <span class="nav-sep">|</span>
+    <a href="MUK/" class="nav-link">Mukilteo</a>
+    <span class="nav-sep">|</span>
+    <a href="LIVE/" class="nav-link">Live</a>
     <span class="sep">/</span>
     <span id="title">Constellation Map</span>
     <div id="clusters"></div>
-    <input type="text" id="search" placeholder="Search projects, artists, species...">
-    <button id="resetBtn">Reset</button>
-  </div>
-  <div id="filterbar">
-    <label>Energy</label>
-    <button class="energy-btn" data-energy="1" style="--ec:#60a5fa" title="E1 - Cool Blue">1</button>
-    <button class="energy-btn" data-energy="2" style="--ec:#4ade80" title="E2 - Green">2</button>
-    <button class="energy-btn" data-energy="3" style="--ec:#fbbf24" title="E3 - Amber">3</button>
-    <button class="energy-btn" data-energy="4" style="--ec:#fb923c" title="E4 - Orange">4</button>
-    <button class="energy-btn" data-energy="5" style="--ec:#ef4444" title="E5 - Red">5</button>
-    <button class="energy-btn" data-energy="6" style="--ec:#a78bfa" title="E6 - Purple">6</button>
-    <span class="sep">|</span>
-    <label>Order</label>
-    <select class="filter-select" id="orderFilter">
-      <option value="">All Orders</option>
-      <option value="Anseriformes">Anseriformes</option>
-      <option value="Apodiformes">Apodiformes</option>
-      <option value="Carnivora">Carnivora</option>
-      <option value="Columbiformes">Columbiformes</option>
-      <option value="Coraciiformes">Coraciiformes</option>
-      <option value="Passeriformes">Passeriformes</option>
-      <option value="Pelecaniformes">Pelecaniformes</option>
-      <option value="Piciformes">Piciformes</option>
-      <option value="Podicipediformes">Podicipediformes</option>
-      <option value="Rodentia">Rodentia</option>
-      <option value="Strigiformes">Strigiformes</option>
-    </select>
-    <span class="sep">|</span>
-    <label>Genre</label>
-    <select class="filter-select" id="genreFilter">
-      <option value="">All Genres</option>
-      <option value="Blues">Blues</option>
-      <option value="Blues Rock">Blues Rock</option>
-      <option value="Comedy">Comedy</option>
-      <option value="Electronic">Electronic</option>
-      <option value="Film">Film</option>
-      <option value="Folk">Folk</option>
-      <option value="Folk Punk">Folk Punk</option>
-      <option value="Funk">Funk</option>
-      <option value="Gospel">Gospel</option>
-      <option value="Indie">Indie</option>
-      <option value="Indie Folk">Indie Folk</option>
-      <option value="Indie Rock">Indie Rock</option>
-      <option value="Jazz">Jazz</option>
-      <option value="Jazz Fusion">Jazz Fusion</option>
-      <option value="Neo-Soul">Neo-Soul</option>
-      <option value="Pop">Pop</option>
-      <option value="R&B">R&B</option>
-      <option value="Rock">Rock</option>
-      <option value="Singer-Songwriter">Singer-Songwriter</option>
-      <option value="Soft Rock">Soft Rock</option>
-      <option value="Soul">Soul</option>
-    </select>
+    <div id="clusterDropdown">Clusters <span style="font-size:9px">&#9660;</span><div id="clusterMenu"></div></div>
+    <input type="text" id="search" placeholder="Search projects...">
+    <button class="topbtn" id="sizeMode" title="Toggle node sizing">Size: Degree</button>
+    <button class="topbtn" id="edgeToggle" title="Toggle edge type colors">Edges: Blend</button>
+    <button class="topbtn" id="resetBtn">Reset</button>
+    <a href="constellation-sphere.html" class="topbtn" style="text-decoration:none">3D Sphere</a>
   </div>
 </div>
 <div id="tooltip"><div class="tt-id"></div><div class="tt-name"></div><div class="tt-sci"></div><div class="tt-cluster"></div><div class="tt-detail"></div><div class="tt-xrefs"></div></div>
@@ -143,6 +89,9 @@ canvas:active{cursor:grabbing}
   </div>
   <button id="legend-toggle">Legend</button>
 </div>
+<div id="minimap"><canvas id="mm"></canvas></div>
+<div id="stats"></div>
+<div id="legend"></div>
 <script>
 // === DATA ===
 var CLUSTERS=[
@@ -520,8 +469,8 @@ PROJECTS.forEach(function(p,i){
 });
 
 (function runForce(){
-  var repulsion=1200,attraction=0.004,damping=0.82,centerPull=0.001,clusterPull=0.006;
-  for(var iter=0;iter<250;iter++){
+  var repulsion=2400,attraction=0.006,damping=0.86,centerPull=0.001,clusterPull=0.003;
+  for(var iter=0;iter<200;iter++){
     var cx={},cy={},cc={};
     CLUSTERS.forEach(function(c){cx[c.name]=0;cy[c.name]=0;cc[c.name]=0});
     for(var i=0;i<N;i++){var cn=clusterOf[PROJECTS[i].id].name;cx[cn]+=px[i];cy[cn]+=py[i];cc[cn]++}
@@ -563,11 +512,43 @@ var canvas=document.getElementById('c');
 var ctx=canvas.getContext('2d');
 var dpr=Math.min(window.devicePixelRatio||1,2);
 
-function resize(){canvas.width=canvas.clientWidth*dpr;canvas.height=canvas.clientHeight*dpr}
+function resize(){
+  canvas.width=canvas.clientWidth*dpr;canvas.height=canvas.clientHeight*dpr;
+  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+}
 resize();
 window.addEventListener('resize',resize);
 
-// Camera
+// === PARTICLE SYSTEM ===
+var particles=[];
+var MAX_PARTICLES=20;
+function spawnParticle(){
+  if(particles.length>=MAX_PARTICLES)return;
+  var ei=Math.floor(Math.random()*edgeIdx.length);
+  var e=edgeIdx[ei];
+  var a=e[0],b=e[1];
+  if(nodeAlpha[a]<0.15||nodeAlpha[b]<0.15)return;
+  particles.push({a:a,b:b,t:0,speed:0.003+Math.random()*0.004,col:clusterRgb[colorOf[PROJECTS[a].id]]||[150,150,150]});
+}
+function updateParticles(){
+  for(var i=particles.length-1;i>=0;i--){
+    particles[i].t+=particles[i].speed;
+    if(particles[i].t>=1)particles.splice(i,1);
+  }
+  if(particles.length<MAX_PARTICLES&&Math.random()<0.3)spawnParticle();
+}
+
+// === MINIMAP ===
+var mmCanvas=document.getElementById('mm');
+var mmCtx=mmCanvas.getContext('2d');
+mmCanvas.width=150;mmCanvas.height=100;
+
+// === FPS COUNTER ===
+var fpsFrames=0,fpsLast=performance.now(),fpsVal=60;
+
+// === SEARCH PULSE ===
+var searchPulseTime=0;
+
 var camX=0,camY=0,camZoom=1;
 var targetCamX=0,targetCamY=0,targetZoom=1;
 var minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
@@ -656,11 +637,14 @@ canvas.addEventListener('pointerup',function(e){
 canvas.addEventListener('wheel',function(e){
   e.preventDefault();lastInteract=performance.now();
   var factor=e.deltaY>0?0.9:1.1;
-  targetZoom=Math.max(0.3,Math.min(25,targetZoom*factor));
+  targetZoom=Math.max(0.15,Math.min(50,targetZoom*factor));
   var wp=screenToWorld(e.clientX*dpr,e.clientY*dpr);
   targetCamX+=(wp[0]-targetCamX)*(1-1/factor)*0.3;
   targetCamY+=(wp[1]-targetCamY)*(1-1/factor)*0.3;
 },{passive:false});
+var lastTouchDist=0;
+canvas.addEventListener('touchstart',function(e){if(e.touches.length===2){var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;lastTouchDist=Math.sqrt(dx*dx+dy*dy)}},{passive:true});
+canvas.addEventListener('touchmove',function(e){if(e.touches.length===2){var dx=e.touches[0].clientX-e.touches[1].clientX,dy=e.touches[0].clientY-e.touches[1].clientY;var dist=Math.sqrt(dx*dx+dy*dy);if(lastTouchDist>0)targetZoom=Math.max(0.15,Math.min(50,targetZoom*(dist/lastTouchDist)));lastTouchDist=dist;lastInteract=performance.now()}},{passive:true});
 
 // Touch pinch
 var lastTouchDist=0;
@@ -853,55 +837,70 @@ document.getElementById('resetBtn').addEventListener('click',function(){
   updateVisibility();lastInteract=performance.now();
 });
 
+// Cluster dropdown (responsive <768px)
+var clDropdown=document.getElementById('clusterDropdown');
+var clMenu=document.getElementById('clusterMenu');
+CLUSTERS.forEach(function(c){
+  var btn=document.createElement('button');
+  btn.className='cl';btn.textContent=c.name;
+  btn.style.setProperty('--c',c.color);
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    clMenu.classList.remove('open');
+    if(activeCluster===c){activeCluster=null;document.querySelectorAll('.cl').forEach(function(b){b.classList.remove('on')})}
+    else{
+      document.querySelectorAll('.cl').forEach(function(b){b.classList.remove('on')});
+      activeCluster=c;
+      // Activate both desktop and dropdown buttons
+      document.querySelectorAll('.cl').forEach(function(b){if(b.textContent===c.name)b.classList.add('on')});
+      var cx2=0,cy2=0,cn2=0;
+      PROJECTS.forEach(function(p,j){if(clusterOf[p.id]===c){cx2+=px[j];cy2+=py[j];cn2++}});
+      if(cn2){targetCamX=cx2/cn2;targetCamY=cy2/cn2;targetZoom=Math.max(camZoom,3.0)}
+    }
+    updateVisibility();lastInteract=performance.now();
+  });
+  clMenu.appendChild(btn);
+});
+clDropdown.addEventListener('click',function(e){
+  e.stopPropagation();
+  clMenu.classList.toggle('open');
+});
+document.addEventListener('click',function(){clMenu.classList.remove('open')});
+
+var searchMatchSet=null;
 function updateVisibility(){
-  var matchSet=null;
+  searchMatchSet=null;
   if(searchTerm){
-    matchSet=new Set();
+    searchMatchSet=new Set();
     PROJECTS.forEach(function(p,i){
-      var pid=p.id,t=nodeType(pid);
-      if(p.name&&p.name.toLowerCase().indexOf(searchTerm)!==-1)matchSet.add(i);
-      if(pid.toLowerCase().indexOf(searchTerm)!==-1)matchSet.add(i);
-      if(t==='artist'){var d=nodeDeg(pid);var ad=ARTIST_DATA[d];if(ad.a.toLowerCase().indexOf(searchTerm)!==-1||ad.g.toLowerCase().indexOf(searchTerm)!==-1)matchSet.add(i)}
-      if(t==='species'){var d=nodeDeg(pid);var sd=SPECIES_DATA[d];if(sd.s.toLowerCase().indexOf(searchTerm)!==-1||sd.n.toLowerCase().indexOf(searchTerm)!==-1||sd.f.toLowerCase().indexOf(searchTerm)!==-1||sd.o.toLowerCase().indexOf(searchTerm)!==-1)matchSet.add(i)}
+      if(p.name.toLowerCase().indexOf(searchTerm)!==-1||p.id.toLowerCase().indexOf(searchTerm)!==-1)searchMatchSet.add(i);
     });
-    PAIRINGS.forEach(function(pair){
-      if(pair.artist.toLowerCase().indexOf(searchTerm)!==-1||pair.species.toLowerCase().indexOf(searchTerm)!==-1||
-         pair.family.toLowerCase().indexOf(searchTerm)!==-1||pair.order.toLowerCase().indexOf(searchTerm)!==-1||
-         pair.genre.toLowerCase().indexOf(searchTerm)!==-1){
-        if(s36Idx!==undefined)matchSet.add(s36Idx);
-        if(spsIdx!==undefined)matchSet.add(spsIdx);
-      }
-    });
+    searchPulseTime=performance.now();
   }
   for(var i=0;i<N;i++){
-    var visible=true;var pid=PROJECTS[i].id,t=nodeType(pid);
-    if(activeCluster&&clusterOf[pid]!==activeCluster)visible=false;
-    if(matchSet&&!matchSet.has(i))visible=false;
-    if(activeEnergy){
-      var ne=getNodeEnergy(pid);
-      if(ne>0&&ne!==activeEnergy)visible=false;
-      if(ne===0&&pid!=='S36'&&pid!=='SPS'){}// project nodes unaffected
-    }
-    if(activeOrder){
-      if(t==='species'){var d=nodeDeg(pid);if(SPECIES_DATA[d].o!==activeOrder)visible=false}
-      else if(t==='artist'){var d=nodeDeg(pid);if(SPECIES_DATA[d].o!==activeOrder)visible=false}
-      else if(pid==='SPS'||pid==='S36')visible=true;
-    }
-    if(activeGenre){
-      if(t==='artist'){var d=nodeDeg(pid);if(ARTIST_DATA[d].g.indexOf(activeGenre)===-1)visible=false}
-      else if(t==='species'){var d=nodeDeg(pid);if(ARTIST_DATA[d].g.indexOf(activeGenre)===-1)visible=false}
-      else if(pid==='S36'||pid==='SPS')visible=true;
-    }
-    nodeAlpha[i]=visible?1.0:0.06;
+    var visible=true;
+    if(activeCluster&&clusterOf[PROJECTS[i].id]!==activeCluster)visible=false;
+    if(searchMatchSet&&!searchMatchSet.has(i))visible=false;
+    nodeAlpha[i]=visible?1.0:(searchMatchSet?0.15:0.06);
   }
 }
 updateVisibility();
 
-// === STATS ===
-var uniqueFamilies=new Set(),uniqueOrders=new Set();
-SPECIES_DATA.forEach(function(s){if(s.f)uniqueFamilies.add(s.f);if(s.o)uniqueOrders.add(s.o)});
-document.querySelector('#stats .stats-left').textContent=N+' nodes \u00b7 '+edgeIdx.length+' edges \u00b7 '+CLUSTERS.length+' clusters';
-document.querySelector('#stats .stats-right').textContent='64 artists \u00b7 64 species \u00b7 21 NASA missions \u00b7 '+uniqueFamilies.size+' families \u00b7 '+uniqueOrders.size+' orders';
+// Stats (now updated dynamically in render loop)
+var totalLines=0,totalFiles=0;
+PROJECTS.forEach(function(p){var m=METRICS[p.id];if(m){totalLines+=m.l;totalFiles+=m.f}});
+var statsEl=document.getElementById('stats');
+function updateStats(){
+  var visCount=0;
+  for(var i=0;i<N;i++){if(nodeAlpha[i]>0.5)visCount++}
+  var zoomPct=Math.round(camZoom*100);
+  var lines=[
+    N+' nodes / '+edgeIdx.length+' edges'+(visCount<N?' ('+visCount+' visible)':''),
+    fmtNum(totalLines)+' lines / '+totalFiles+' files / '+CLUSTERS.length+' clusters',
+    'Zoom: '+zoomPct+'% / '+fpsVal+' FPS'
+  ];
+  statsEl.innerHTML=lines.join('<br>');
+}
 
 // === LEGEND ===
 var legendToggle=document.getElementById('legend-toggle');
@@ -1010,6 +1009,7 @@ function frame(t){
   }
 
   // Draw edges
+  var hoverCol=hoverIdx>=0?(clusterRgb[colorOf[PROJECTS[hoverIdx].id]]||[150,150,150]):null;
   for(var i=0;i<edgeIdx.length;i++){
     var a=edgeIdx[i][0],b=edgeIdx[i][1];
     var alphaA=nodeAlpha[a],alphaB=nodeAlpha[b];
@@ -1017,26 +1017,40 @@ function frame(t){
     var isHoverEdge=(hoverIdx>=0&&(a===hoverIdx||b===hoverIdx));
     if(isHoverEdge)ea=Math.min(alphaA,alphaB)*0.6;
 
-    // Gold pairing edge
-    var isPairingHL=false;
-    if(hoverIdx>=0&&(hoverType==='artist'||hoverType==='species')){
-      if(pairingEdgeSet.has(a+','+b)&&(a===hoverIdx||b===hoverIdx||a===hoverPartnerIdx||b===hoverPartnerIdx)){
-        isPairingHL=true;ea=0.9;
-      }
+    var isHoverEdge=hoverIdx>=0&&(a===hoverIdx||b===hoverIdx);
+    if(isHoverEdge)ea=Math.min(alphaA,alphaB)*0.7;
+
+    var colR,colG,colB;
+    if(isHoverEdge&&hoverCol){
+      // Glow with hovered node's cluster color
+      colR=hoverCol[0];colG=hoverCol[1];colB=hoverCol[2];
+    } else if(edgeMode===1){
+      var et=EDGE_TYPES[eIdx]||'c';
+      var etc=edgeTypeColors[et];
+      colR=etc[0];colG=etc[1];colB=etc[2];
+    } else {
+      var colA=clusterRgb[colorOf[PROJECTS[a].id]]||[150,150,150];
+      var colBc=clusterRgb[colorOf[PROJECTS[b].id]]||[150,150,150];
+      colR=Math.round((colA[0]+colBc[0])/2);
+      colG=Math.round((colA[1]+colBc[1])/2);
+      colB=Math.round((colA[2]+colBc[2])/2);
     }
     if(ea<0.008)continue;
     var sa=worldToScreen(px[a],py[a]),sb=worldToScreen(px[b],py[b]);
     if(!isFinite(sa[0])||!isFinite(sb[0]))continue;
     if((sa[0]<-50&&sb[0]<-50)||(sa[0]>w+50&&sb[0]>w+50)||(sa[1]<-50&&sb[1]<-50)||(sa[1]>h+50&&sb[1]>h+50))continue;
 
-    if(isPairingHL){
-      ctx.strokeStyle='rgba(255,215,0,'+ea.toFixed(2)+')';ctx.lineWidth=2.5;
-    } else {
-      var colA=getNodeColorRgb(PROJECTS[a].id),colB=getNodeColorRgb(PROJECTS[b].id);
-      var mr=(colA[0]+colB[0])>>1,mg=(colA[1]+colB[1])>>1,mb=(colA[2]+colB[2])>>1;
-      ctx.strokeStyle='rgba('+mr+','+mg+','+mb+','+ea.toFixed(2)+')';
-      ctx.lineWidth=isHoverEdge?2:0.8;
+    // Edge glow for hovered node's connections
+    if(isHoverEdge){
+      ctx.save();
+      ctx.lineWidth=6;
+      ctx.strokeStyle='rgba('+colR+','+colG+','+colB+','+(ea*0.2).toFixed(3)+')';
+      ctx.beginPath();ctx.moveTo(sa[0],sa[1]);ctx.lineTo(sb[0],sb[1]);ctx.stroke();
+      ctx.restore();
     }
+
+    ctx.lineWidth=isHoverEdge?2.5:1.5;
+    ctx.strokeStyle='rgba('+colR+','+colG+','+colB+','+ea.toFixed(2)+')';
     ctx.beginPath();ctx.moveTo(sa[0],sa[1]);ctx.lineTo(sb[0],sb[1]);ctx.stroke();
   }
 
@@ -1091,47 +1105,25 @@ function frame(t){
       ctx.beginPath();ctx.arc(sp[0],sp[1],r+14,0,Math.PI*2);ctx.fill();
     }
 
-    // NASA mission glow
-    if(t==='nasa'&&pid!=='NART'&&alpha>0.3){
-      ctx.fillStyle='rgba(11,61,145,'+(alpha*0.1).toFixed(2)+')';
-      ctx.beginPath();ctx.arc(sp[0],sp[1],r*2,0,Math.PI*2);ctx.fill();
+    // Search pulse glow for matching nodes
+    if(searchMatchSet&&searchMatchSet.has(i)&&alpha>0.5){
+      var pulseAge=(t-searchPulseTime)/1000;
+      var pulseA=0.15+0.15*Math.sin(pulseAge*3);
+      var pulseR=r*(2.5+0.5*Math.sin(pulseAge*3));
+      ctx.fillStyle='rgba('+col[0]+','+col[1]+','+col[2]+','+pulseA.toFixed(3)+')';
+      ctx.beginPath();ctx.arc(sp[0],sp[1],pulseR,0,Math.PI*2);ctx.fill();
     }
 
-    // Core node
-    var bright=isHovered?80:(isNeighborOfHover||isPairedHL?40:50);
-    ctx.fillStyle='rgba('+Math.min(255,col[0]+bright)+','+Math.min(255,col[1]+bright)+','+Math.min(255,col[2]+bright)+','+alpha.toFixed(2)+')';
+    // Core
+    ctx.fillStyle='rgba('+Math.min(255,col[0]+60)+','+Math.min(255,col[1]+60)+','+Math.min(255,col[2]+60)+','+alpha.toFixed(2)+')';
+    ctx.beginPath();ctx.arc(sp[0],sp[1],r,0,Math.PI*2);ctx.fill();
 
-    // Diamond shape for artist/species when zoomed in
-    if((t==='artist'||t==='species')&&camZoom>1.5){
-      ctx.beginPath();
-      ctx.moveTo(sp[0],sp[1]-r);ctx.lineTo(sp[0]+r,sp[1]);ctx.lineTo(sp[0],sp[1]+r);ctx.lineTo(sp[0]-r,sp[1]);
-      ctx.closePath();ctx.fill();
-    } else {
-      ctx.beginPath();ctx.arc(sp[0],sp[1],r,0,Math.PI*2);ctx.fill();
-    }
-
-    // Labels
-    var showLabel=false,showSublabel=false;
-    if(isHovered||isPairedHL||isNeighborOfHover)showLabel=true;
-    else if(t==='project'&&(camZoom>1.5||degreeCount[i]>6))showLabel=true;
-    else if((t==='artist'||t==='species')&&camZoom>2.0)showLabel=true;
-    if(camZoom>4.0)showSublabel=true;
-
-    if(showLabel){
-      var fontSize=Math.max(8,Math.min(13,10*camZoom/2));
-      ctx.font=(isHovered||isPairedHL?'bold ':'')+fontSize+'px system-ui';
-      ctx.textAlign='left';
-      var labelText='',sublabelText='';
-      if(t==='artist'){var d=nodeDeg(pid);labelText=ARTIST_DATA[d].a;sublabelText=ARTIST_DATA[d].g.split('(')[0].trim()}
-      else if(t==='species'){var d=nodeDeg(pid);labelText=SPECIES_DATA[d].s;sublabelText=SPECIES_DATA[d].f}
-      else{labelText=pid;if(pid==='S36')sublabelText='64 Artists';else if(pid==='SPS')sublabelText='64 Species'}
-      ctx.fillStyle='rgba(255,255,255,'+(alpha*(isHovered||isPairedHL?1.0:0.75)).toFixed(2)+')';
-      ctx.fillText(labelText,sp[0]+r+3,sp[1]+fontSize*0.35);
-      if(showSublabel&&sublabelText){
-        ctx.font=(fontSize*0.7)+'px system-ui';
-        ctx.fillStyle='rgba(255,255,255,'+(alpha*0.4).toFixed(2)+')';
-        ctx.fillText(sublabelText,sp[0]+r+3,sp[1]+fontSize*0.35+fontSize*0.85);
-      }
+    // Label
+    if(camZoom>0.7||degree[i]>4||i===hoverIdx||m.bc>0.2){
+      var fontSize=Math.max(8,Math.min(14,10*camZoom/1.5));
+      ctx.font=fontSize+'px system-ui';
+      ctx.fillStyle='rgba(255,255,255,'+(alpha*0.8).toFixed(2)+')';
+      ctx.fillText(PROJECTS[i].id,sp[0]+r+3,sp[1]+fontSize*0.35);
     }
   }
 
@@ -1151,7 +1143,62 @@ function frame(t){
     });
     ctx.textAlign='left';
   }
+
+  // === PARTICLE TRAILS ===
+  updateParticles();
+  for(var pi=0;pi<particles.length;pi++){
+    var part=particles[pi];
+    var pxA=px[part.a],pyA=py[part.a],pxB=px[part.b],pyB=py[part.b];
+    var ptX=pxA+(pxB-pxA)*part.t;
+    var ptY=pyA+(pyB-pyA)*part.t;
+    var pScreen=worldToScreen(ptX,ptY);
+    if(pScreen[0]<0||pScreen[0]>w||pScreen[1]<0||pScreen[1]>h)continue;
+    var pc=part.col;
+    var pAlpha=0.12*Math.sin(part.t*Math.PI);
+    ctx.fillStyle='rgba('+Math.min(255,pc[0]+80)+','+Math.min(255,pc[1]+80)+','+Math.min(255,pc[2]+80)+','+pAlpha.toFixed(3)+')';
+    ctx.beginPath();ctx.arc(pScreen[0],pScreen[1],1*dpr,0,Math.PI*2);ctx.fill();
+  }
+
+  // === MINIMAP ===
+  mmCtx.fillStyle='rgba(10,10,26,0.9)';
+  mmCtx.fillRect(0,0,150,100);
+  var mmPad=8;
+  var mmScaleX=(150-mmPad*2)/(rangeX||1);
+  var mmScaleY=(100-mmPad*2)/(rangeY||1);
+  var mmScale=Math.min(mmScaleX,mmScaleY);
+  var mmOffX=(150-(rangeX*mmScale))/2;
+  var mmOffY=(100-(rangeY*mmScale))/2;
+  for(var mi=0;mi<N;mi++){
+    if(nodeAlpha[mi]<0.15)continue;
+    var mc=clusterRgb[colorOf[PROJECTS[mi].id]]||[150,150,150];
+    mmCtx.fillStyle='rgba('+mc[0]+','+mc[1]+','+mc[2]+','+(nodeAlpha[mi]*0.8).toFixed(2)+')';
+    var mx2=(px[mi]-minX)*mmScale+mmOffX;
+    var my2=(maxY-py[mi])*mmScale+mmOffY;
+    mmCtx.fillRect(mx2-0.5,my2-0.5,1.5,1.5);
+  }
+  // Viewport rectangle
+  var vpTL=screenToWorld(0,0);
+  var vpBR=screenToWorld(w,h);
+  var vrX1=(vpTL[0]-minX)*mmScale+mmOffX;
+  var vrY1=(maxY-vpTL[1])*mmScale+mmOffY;
+  var vrX2=(vpBR[0]-minX)*mmScale+mmOffX;
+  var vrY2=(maxY-vpBR[1])*mmScale+mmOffY;
+  var vrLeft=Math.min(vrX1,vrX2),vrTop=Math.min(vrY1,vrY2);
+  var vrW=Math.abs(vrX2-vrX1),vrH=Math.abs(vrY2-vrY1);
+  mmCtx.strokeStyle='rgba(147,197,253,0.5)';
+  mmCtx.lineWidth=1;
+  mmCtx.strokeRect(Math.max(0,vrLeft),Math.max(0,vrTop),Math.min(150,vrW),Math.min(100,vrH));
+
+  // === FPS ===
+  fpsFrames++;
+  var fpsNow=performance.now();
+  if(fpsNow-fpsLast>=1000){fpsVal=fpsFrames;fpsFrames=0;fpsLast=fpsNow;updateStats()}
+
+  // Update legend
+  document.getElementById('legend').innerHTML='Node size: '+sizeModeLabels[sizeMode]+' &middot; Hub glow = centrality<br>'+
+    (edgeMode===1?'<span style="color:#6488c8">&#9644;</span> cites &middot; <span style="color:#50c878">&#9644;</span> extends &middot; <span style="color:#c8a050">&#9644;</span> references':'Bridge ring = <span style="color:#f0c070">&#9675;</span> cross-cluster');
 }
+updateStats();
 requestAnimationFrame(frame);
 </script>
 </body>
