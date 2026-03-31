@@ -1,0 +1,316 @@
+{
+  "degree": 47,
+  "species": "Dark-eyed Junco",
+  "scientific_name": "Junco hyemalis",
+  "slug": "047-dark-eyed-junco",
+  "sound_type": "simple musical trill + sharp tik call",
+  "energy": 3,
+  "ecosystem": "forest floor / mixed woodland edge",
+  "season": "resident (Oregon form year-round in PNW)",
+  "family": "Passerellidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Red-legged Frog",
+    "original_scientific_name": "Rana aurora",
+    "reason": "SPS Part B engine is birds-and-mammals only. Dark-eyed Junco replaces Red-legged Frog, preserving the original E=3 energy level and forest floor habitat. Third consecutive CSV substitution replacing an amphibian (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47). The engine is passing through the amphibian belt of the original CSV.",
+    "preserved": ["E=3 energy level", "forest floor habitat"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Oregon form is the most common Dark-eyed Junco in the PNW. Year-round resident in western Washington forests, suburban yards, parks, and trailhead margins. Breeds in moist conifer and mixed forests with dense understory from sea level to subalpine zones. The most familiar winter feeder bird in the Seattle area. Altitudinal migrant -- breeds at higher elevations, descends to lowlands in winter. Multiple subspecies present in Washington: oreganus (western, dominant), shufeldti, and Slate-colored migrants in winter."
+  },
+  "taxonomy_note": {
+    "description": "Dark-eyed Junco is the THIRD Passerellidae (New World Sparrows) in the engine, forming an unprecedented three-degree consecutive streak with Song Sparrow (degree 45) and Spotted Towhee (degree 46). Junco hyemalis: 'the winter rush-bird' -- Junco from Spanish/Latin juncus (rush plant), hyemalis from Latin hiemalis (of winter). Named by Carl Linnaeus in 1758 because juncos appeared in Sweden only in winter. The species complex contains approximately 15 subspecies in 5 groups, formerly classified as 5 separate species before the AOU lumped them in 1973. The 1973 lump remains contested -- molecular studies show significant genetic divergence, and a future revision may re-split some forms. TAXONOMIC RECURSION: the Dark-eyed Junco at degree 47 CONTAINS the Oregon Junco from degree 11 as one of its subspecies groups.",
+    "current_family": "Passerellidae",
+    "new_family": false,
+    "family_count_in_engine": 19,
+    "passerellidae_count_in_engine": 3,
+    "name_etymology": "Junco = Spanish junco (rush plant), from Latin juncus (rush, reed). Refers to the bird's association with dense ground cover and rush-like habitats. Hyemalis = Latin hiemalis (of winter, belonging to winter). Named by Linnaeus in 1758 because the species appeared in Sweden only during winter months. Full translation: 'The winter rush-bird' -- named for seasonal timing and habitat, not for vocalization. The first Passerellidae in the engine whose binomial contains no acoustic reference. Compare: Melospiza melodia (pure acoustics), Pipilo maculatus (acoustic + visual), Junco hyemalis (ecological + temporal).",
+    "genus_note": "Junco has TWO entries in the engine: degree 11 (Oregon Junco, J. h. oreganus group) and degree 47 (Dark-eyed Junco, J. hyemalis species complex). Degree 47 contains degree 11 taxonomically. The genus Junco contains 3-5 species depending on taxonomic authority: Dark-eyed Junco (J. hyemalis), Yellow-eyed Junco (J. phaeonotus), Volcano Junco (J. vulcani), Guadalupe Junco (J. insularis, sometimes lumped with Dark-eyed), and Baird's Junco (J. bairdi, sometimes lumped).",
+    "order_note": "Passeriformes continues from degree 46. TENTH consecutive Passeriformes (38-47). 40 of 48 entries (83.3%) are Passeriformes.",
+    "family_position": "Passerellidae now has 3 members at degrees 45-46-47. Three-degree consecutive streak. Only the second family to achieve this (after Trochilidae at 35-36-37). Song Sparrow (melodic generalist) + Spotted Towhee (textural specialist) + Dark-eyed Junco (elemental minimalist).",
+    "subspecies_note": "Approximately 15 subspecies in 5 groups: Oregon (6 subspecies), Slate-colored (~4 subspecies), Pink-sided (1), Gray-headed (1), Red-backed (1). Groups were formerly separate species, lumped by AOU in 1973. Oregon group is the most diverse and widespread, covering the Pacific coast from Alaska to Baja California. PNW form J. h. oreganus is the darkest and most distinctive Oregon subspecies.",
+    "lump_note": "Lumped from 5+ species into one by AOU in 1973, based on hybridization in overlap zones. The lump is the taxonomic opposite of the Spotted Towhee's 1995 split (degree 46). Molecular evidence (Mila et al. 2007, Friis et al. 2016) supports significant divergence between groups. Hybrid zones are narrow and stable. The Passerellidae run at degrees 45-47 contains both a split (46) and a lump (47).",
+    "vocal_learning_note": "Dark-eyed Juncos are vocal learners -- songs are acquired through imitation during the first summer of life. Song variation exists both within and between populations. Urban populations (e.g., UCSD campus) have measurably shifted song frequency in less than 20 years, though a 2022 Royal Society Open Science study found no repeated pattern of song divergence across multiple urban vs. non-urban populations in Southern California."
+  },
+  "taxonomic_recursion": {
+    "description": "DEGREE 47 CONTAINS DEGREE 11. The Dark-eyed Junco (Junco hyemalis) at degree 47 is the species-level taxon that includes the Oregon Junco (J. h. oreganus group) from degree 11 as one of its subspecies groups. This is the engine's first case of taxonomic nesting -- a later entry enclosing an earlier one. The Oregon Junco is a PART of the Dark-eyed Junco; degree 11 is a subset of degree 47.",
+    "degree_11_entry": "Oregon Junco (Junco hyemalis oreganus group)",
+    "degree_47_entry": "Dark-eyed Junco (Junco hyemalis) -- the full species complex",
+    "relationship": "degree 47 contains degree 11",
+    "structural_significance": "First taxonomic recursion in the engine. Forces distinction between the PART (degree 11: one subspecies group, one plumage form, one region) and the WHOLE (degree 47: five groups, fifteen subspecies, continent-wide). The same genus appears at two levels of the taxonomic hierarchy at different points in the sequence."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "2,400-8,200 (across all vocalizations)",
+    "peak_energy_band_hz": "3,000-6,000 (song trill energy concentration)",
+    "song_frequency_hz": "2,400-8,200 (full range); most energy 3,000-6,000",
+    "song_duration_s": "1.3-2.0 (per individual song, Long Range Song)",
+    "note_structure": "SIMPLE SINGLE-SYLLABLE TRILL: one syllable type repeated 7-23 times at constant pitch. No introductory notes, no structural variation within the song, no multi-part composition. The simplest song in the three-degree Passerellidae run. Each repetition is a clean, tonal note -- less buzzy than the Spotted Towhee's rasp, more musical. The entire song is a single event: one note, one pitch, repeated.",
+    "note_types": "THREE vocalization categories: (1) LONG-RANGE SONG (LRS) -- the musical trill, 1-2 seconds, one syllable repeated 7-23 times. The primary territorial and mate-attraction signal. (2) TIK CALL -- a sharp, hard, metallic chip note, 0.02-0.05 seconds. The most common Dark-eyed Junco vocalization and one of the most common woodland sounds in the PNW. Year-round contact and alarm call. Shared identically across all 5 subspecies groups. (3) SOFT SONG (low-amplitude song) -- a quiet version of the LRS used in close-range aggressive encounters and mate-guarding contexts (Reichard et al. 2013).",
+    "phrase_structure": "The simplest in the Passerellidae run. One syllable type, one pitch, one rate, repeated. No preamble (cf. Song Sparrow, degree 45), no introductory notes before the trill (cf. Spotted Towhee, degree 46 -- which sometimes has them). The junco's song is a single gesture with no internal structure beyond repetition.",
+    "timbre": "CLEAN, MUSICAL, METALLIC. Less buzzy and rough than the Spotted Towhee's rasp. More tonal and ringing than the Song Sparrow's complex mixture of tones and buzzes. The individual note is a clean, bright, slightly metallic tone -- the sound of a small silver bell struck rapidly. The metallic quality comes from strong harmonic content in the upper partials.",
+    "amplitude": "E=3 -- moderate volume, audible at 100+ meters in open forest. Louder than the Song Sparrow's E=2 preamble but not a rooftop broadcaster. Sings from higher perches (3-10 m) than the towhee but with a thinner, less penetrating signal. E=3 captures the mid-range: louder than conversational, quieter than commanding.",
+    "tempo": "Trill rate varies by population and song type: approximately 5-18 notes per second across the species complex. Some song types are slow enough to hear individual notes (a rattle). Others are fast enough to fuse into a continuous-sounding buzz (above the ~15 notes/s fusion threshold documented at degree 11). The species-wide repertoire spans the discrete-to-continuous perceptual boundary.",
+    "context": "Song given primarily during breeding season (March-July in PNW). Unmated males sing more LRS than mated males -- the LRS serves dual territorial and mate-attraction functions. Males sing from perches at 3-10 m, typically at forest edges or in prominent positions on small trees. Tik call given year-round, all day, by both sexes. Soft song given in close-range aggressive and courtship contexts.",
+    "key_property": "THE SNOWBIRD -- the 48th acoustic element (species side). A simple, musical, single-pitch trill defined by elemental reduction. Named 'the snowbird' for three resonances: (1) the bird's cultural identity as the harbinger of winter, colloquially called 'the snowbird' across North America; (2) the simplicity -- one note repeated is all a junco needs, the way one crystal repeated makes a snowfall; (3) the ubiquity -- ~630 million individuals making this one of the most commonly heard bird sounds on the continent. The first acoustic element defined by elemental reduction -- radical simplicity as strategy. After the preamble's complexity (45) and the rasp's intensity (46), the snowbird strips song to its minimum."
+  },
+  "plumage": {
+    "overall": "STRONG GEOGRAPHIC VARIATION across the 5 subspecies groups. Oregon form (PNW): dark hood, rusty back, pink-brown flanks, white belly, white outer tail feathers, pale pink bill. Sexual dimorphism present -- males have blacker hoods, females grayer.",
+    "adult_male_oregon": "Dark slate to blackish hood sharply contrasting with warm rusty-brown back. Pink-brown to rufous flanks. White belly. White outer tail feathers that flash conspicuously in flight. Pale pinkish bill.",
+    "adult_female_oregon": "Similar pattern to male but with paler, grayer hood and less contrast. Rusty-brown back, pinkish flanks, white belly, white outer tail feathers, pale pink bill.",
+    "pnw_form": "Subspecies oreganus -- the darkest Oregon form, with the most strongly contrasting dark hood against the rusty back. Follows Gloger's rule: wet, shaded PNW habitats select for darker plumage. Compare with Spotted Towhee's dark oregonus (degree 46) and Song Sparrow's dark morphna (degree 45) -- three consecutive Passerellidae all showing dark PNW forms.",
+    "white_tail_flash": "Diagnostic junco field mark. White outer rectrices flash conspicuously when the bird flushes. Proposed functions: predator confusion (flash-and-freeze), flock alarm signal, pursuit deterrent, species recognition. White amount varies geographically -- UCSD campus juncos show reduced white compared to their mountain source population, suggesting rapid evolution of this signal trait.",
+    "subspecies_variation": "Oregon (dark hood, rusty back, PNW), Slate-colored (uniform dark slate, eastern), Pink-sided (gray hood, broad pink flanks, Rockies), Gray-headed (gray head, rusty back patch, Southwest), Red-backed (gray head, bright rufous back, AZ/NM). Five visual forms that were once five species.",
+    "juvenile": "Similar to adult female but with fine streaking on breast and less distinct head pattern.",
+    "field_id": "Small sparrow with dark hood (male) or gray hood (female), pale pinkish bill, white outer tail feathers that flash in flight. Oregon form: rusty-brown back and pink-brown flanks distinguish from Slate-colored form. Distinguished from Spotted Towhee by much smaller size, lack of rufous flanks, and different body shape. Distinguished from Song Sparrow by dark hood, lack of breast streaking, and different proportions."
+  },
+  "forest_floor_ecology": {
+    "definition": "Forest floor / mixed woodland edge -- the open ground layer beneath conifer and mixed forests, from sea level to subalpine. More open than the Spotted Towhee's dense understory, broader in elevation range, and extending into suburban and urban environments. The junco's habitat versatility is key to its abundance.",
+    "habitat_types": [
+      "Moist conifer forests with open understory (Douglas fir, western hemlock, western red cedar)",
+      "Mixed conifer-deciduous woodland edges",
+      "Second-growth forest with moderate understory density",
+      "Forest clearings and meadow margins at all elevations",
+      "Suburban yards, parks, and gardens (most common winter feeder bird in Seattle)",
+      "Trailhead parking lots and picnic areas",
+      "Logged clearings with residual canopy",
+      "Subalpine meadow edges at the tree line",
+      "Ponderosa pine woodlands in eastern Washington"
+    ],
+    "vertical_position": "0-3 m (foraging), 3-10 m (singing). Forages on the ground, hopping and scratching in leaf litter and on bare soil. Males sing from elevated perches at 3-10 m -- higher than the Spotted Towhee (1-4 m) but lower than most canopy species. Nests on the ground.",
+    "pnw_distribution": [
+      "Western Washington -- common year-round resident from sea level to subalpine",
+      "Puget Sound lowlands -- abundant winter feeder bird, less common in summer (altitudinal migrants move upslope)",
+      "Eastern Washington -- common breeder in forest habitats, partial migrant",
+      "Olympic Peninsula -- year-round in lowland forests",
+      "Cascade Range -- breeds at all forested elevations, descends in winter",
+      "Urban Seattle -- one of the most commonly encountered birds in backyards and parks"
+    ],
+    "altitudinal_migration": "Many PNW individuals perform altitudinal migration -- breeding in mountain forests and descending to lowland towns, parks, and feeders in winter. Males winter farther north and at higher elevations than females (differential migration, documented by Ketterson and Nolan). The 'snowbird' behavior: juncos arrive at lowland feeders in October and depart for the mountains in April.",
+    "three_passerellidae_habitats": "Three Passerellidae, three habitat bands. Song Sparrow (45) = wetland edge (where water meets land). Spotted Towhee (46) = dense understory (where shrub meets forest). Dark-eyed Junco (47) = forest floor (where forest floor meets opening). Three species, three habitat textures, same vertical zone."
+  },
+  "ketterson_research": {
+    "researcher": "Ellen D. Ketterson, Distinguished Professor of Biology, Indiana University Bloomington",
+    "collaborator": "Val Nolan Jr. (longtime research partner, Mountain Lake Biological Station, Virginia)",
+    "duration": "Since the 1970s -- over five decades of continuous Dark-eyed Junco research",
+    "method": "Phenotypic engineering -- experimental manipulation of hormone levels (primarily testosterone) in free-living birds to reveal life-history trade-offs",
+    "key_findings": [
+      "Testosterone increases aggression and singing in males",
+      "Testosterone reduces paternal care -- implanted males feed nestlings less",
+      "These effects create life-history trade-offs -- cannot maximize all traits simultaneously",
+      "The junco became the premier model organism for studying hormonal control of behavior"
+    ],
+    "awards": [
+      "AOS Elliott Coues Award (1996)",
+      "Wilson Ornithological Society Margaret Morse Nice Medal (1998, jointly with Val Nolan Jr.)",
+      "Cooper Ornithological Society Alden Miller Award (2014)"
+    ],
+    "significance": "The Margaret Morse Nice Medal -- named for the researcher who studied Song Sparrow (degree 45) -- awarded to Ketterson for junco research (degree 47). Two Passerellidae, one medal. The engine's two most studied songbirds, connected through the medal that honors research on both."
+  },
+  "ucsd_evolution": {
+    "event": "Dark-eyed Juncos (Oregon form, J. h. thurberi) colonized the UC San Diego campus in the early 1980s",
+    "population": "~70 breeding pairs by the late 1990s",
+    "researchers": "Trevor Price and Pamela Yeh (1997 onward; Yeh now associate professor at UCLA)",
+    "changes_in_20_years": [
+      "Shorter wings and tails (reduced migration)",
+      "Reduced white tail flash (relaxed sexual selection or predator pressure)",
+      "Reduced aggression (less territorial)",
+      "Increased comfort around humans (reduced flight initiation distance)",
+      "Higher-pitched songs (possible adaptation to urban noise)",
+      "Extended breeding season (up to 4 clutches over 7 months vs. 1-2 in mountain populations)",
+      "Changed nest sites (buildings and trees instead of ground)",
+      "Increased monogamy (more paternal care)"
+    ],
+    "genetic_basis": "Confirmed -- morphological differences are partly heritable, indicating a major role for selection (not just plasticity)",
+    "significance": "One of the fastest documented cases of evolution in a wild vertebrate. Demonstrates that the Dark-eyed Junco is an evolutionarily dynamic species, actively adapting to novel environments in real time."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The snowbird -- the 48th acoustic element (species side): a simple, musical, single-pitch trill defined by elemental reduction. The Dark-eyed Junco's Long-Range Song is one syllable type repeated 7-23 times over 1-2 seconds at a constant pitch. This is the simplest song structure in the three-degree Passerellidae run: the Song Sparrow (degree 45) composes multi-part songs with elaborate preambles and complex bodies; the Spotted Towhee (degree 46) concentrates its song into a buzzy, vibrating trill; the Dark-eyed Junco (degree 47) reduces song to a single repeated note. The arc from complexity to texture to simplicity is complete. Named 'the snowbird' for three resonances: (1) the bird's identity as the 'snowbird' of North America, arriving at feeders with the first winter storms; (2) the simplicity -- one note repeated is all a junco needs, the way one crystal repeated makes a snowfall; (3) the ubiquity -- ~630 million individuals making this one of the most commonly heard bird sounds on the continent. The first acoustic element defined by elemental reduction.",
+      "level": "foundational",
+      "department": "music-theory/simplicity",
+      "college_path": ".college/music/theory/simplicity/snowbird/",
+      "examples": [
+        "The trill: 7-23 notes of one syllable type, 1-2 seconds, constant pitch. The simplest territorial broadcast in the engine's Passerellidae run.",
+        "Contrast with the preamble (degree 45): the preamble opens a complex passage with clear introductory notes before the elaborate body. The snowbird HAS no body. The trill IS the entire message.",
+        "Contrast with the rasp (degree 46): the rasp is defined by textural concentration -- buzzy, vibrating, rough. The snowbird is cleaner, more musical -- individual notes are tonal, not buzzy. The rasp fills the thicket with rough texture; the snowbird rings through the forest floor with metallic clarity.",
+        "Contrast with trill/tremolo (degree 11): degree 11 named the perceptual phenomenon of discrete-to-continuous fusion. The snowbird at degree 47 names the strategic phenomenon of elemental reduction. Different conceptual frames for the same bird's song.",
+        "The minimalist principle: in music, minimalism reduces composition to repeated patterns (Steve Reich, Philip Glass, Terry Riley). The junco's song IS minimalism: one note, one pitch, one rate, repeated. Maximum efficiency from minimum material."
+      ],
+      "music_theory_parallel": "Minimalism -- the compositional philosophy that reduces music to its most elemental components: a single repeated figure, a steady pulse, a drone, a slowly shifting pattern. Steve Reich's 'Music for 18 Musicians' builds an entire hour-long work from short repeated modules. Philip Glass's early works reduce melody to arpeggiated patterns repeated hundreds of times. The Dark-eyed Junco's song is biological minimalism: one tonal note, repeated at a steady rate, for one to two seconds. The Song Sparrow is a romantic symphonist (elaboration, thematic development). The Spotted Towhee is a texture artist (concentrated rough sound). The Dark-eyed Junco is a minimalist (one element, repeated). The Passerellidae run traverses three compositional philosophies in three degrees."
+    },
+    {
+      "concept": "Taxonomic recursion -- degree 47 contains degree 11. The Dark-eyed Junco species complex at degree 47 includes the Oregon Junco subspecies group that entered the engine at degree 11. This is the engine's first case of taxonomic nesting: a later entry enclosing an earlier one. The Oregon Junco (degree 11) is a PART of the Dark-eyed Junco (degree 47). The container arrives 36 degrees after its contents. This forces the engine to distinguish between the part (one subspecies group, one plumage form, one region, one acoustic character) and the whole (five groups, fifteen subspecies, continent-wide distribution, variable acoustics). The recursion also highlights the 1973 lump -- the taxonomic decision that made degree 11 a subset of degree 47 instead of a standalone species.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/taxonomic-recursion/",
+      "examples": [
+        "Degree 11: Oregon Junco (J. h. oreganus group) -- the PNW form with its dark hood, rusty back, and rapid metallic trill. Entered as the 'trill/tremolo' acoustic element.",
+        "Degree 47: Dark-eyed Junco (J. hyemalis) -- the full species complex containing Oregon, Slate-colored, Pink-sided, Gray-headed, and Red-backed forms. Entered as 'the snowbird' acoustic element.",
+        "The nesting: if the 1973 lump is reversed (as molecular evidence might support), degree 11 becomes a standalone species again and the recursion dissolves. The recursion is contingent on a taxonomic committee decision.",
+        "Mathematical parallel: set theory. Degree 47 is the set {Oregon, Slate-colored, Pink-sided, Gray-headed, Red-backed}. Degree 11 is the element 'Oregon.' The element entered the engine before the set that contains it.",
+        "Musical parallel: a theme appearing in a single instrument (degree 11 -- the Oregon form's trill) and then reappearing as part of a full orchestral tutti (degree 47 -- the entire species complex singing across the continent)."
+      ],
+      "music_theory_parallel": "The theme and variations form -- a compositional structure where a simple theme is presented first, then the full work unfolds as a set of variations that contain and transform the original theme. The Oregon Junco's trill (degree 11) is the theme. The Dark-eyed Junco's species-wide vocal repertoire (degree 47) is the set of variations -- five subspecies groups each singing their own version of the same basic trill, all containing the original theme but varying it geographically and culturally. Degree 47 is the complete set of variations that includes degree 11's theme as one member."
+    },
+    {
+      "concept": "Third consecutive Passerellidae -- the unprecedented three-degree family streak at degrees 45-46-47. Song Sparrow, Spotted Towhee, Dark-eyed Junco. Three genera (Melospiza, Pipilo, Junco), three habitats (wetland edge, dense understory, forest floor), three song strategies (complex, textural, simple). Only the second three-degree family streak in the engine (after Trochilidae at 35-36-37). The streak creates a complete ground-level transect from water margin to forest floor, and a complete compositional arc from elaboration to concentration to reduction.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/passerellidae-streak/",
+      "examples": [
+        "Three-degree streaks: Trochilidae (35-36-37) = Rufous Hummingbird + Anna's Hummingbird + Calliope Hummingbird. Passerellidae (45-46-47) = Song Sparrow + Spotted Towhee + Dark-eyed Junco. Both streaks explore three genera within one family.",
+        "Habitat transect: wetland edge (45) -> dense understory (46) -> forest floor (47). The Passerellidae run walks from water to canopy base.",
+        "Song gradient: complex (45) -> textural (46) -> simple (47). The compositional arc completes in three degrees.",
+        "Size gradient: medium (45, ~25-28 g) -> large (46, ~37-40 g) -> small (47, ~19-20 g). The three Passerellidae cover the family's size range.",
+        "Conservation gradient: stable/increasing (45, Song Sparrow) -> stable/increasing (46, Spotted Towhee) -> declining (47, Dark-eyed Junco, -31% since 1966). The streak ends on a declining species."
+      ],
+      "music_theory_parallel": "A three-movement suite -- a compositional form where three contrasting movements create a complete arc. The first movement (Song Sparrow) is an allegro -- complex, elaborate, energetic. The second movement (Spotted Towhee) is a scherzo -- rhythmic, textural, concentrated. The third movement (Dark-eyed Junco) is an andante -- simple, clean, elemental. Three movements in the same key (Passerellidae), each with its own character, together forming a complete work."
+    },
+    {
+      "concept": "The 1973 lump as counterpoint to the 1995 split -- the Passerellidae run contains both directions of taxonomic revision. At degree 46, the engine documented the 1995 SPLIT of the Rufous-sided Towhee into Spotted Towhee and Eastern Towhee. At degree 47, the engine documents the 1973 LUMP of five junco species into the Dark-eyed Junco. Splitting and lumping are opposite operations: splitting creates species from subspecies, lumping creates subspecies from species. The same family, in two consecutive degrees, demonstrates both. The Passerellidae run is a tutorial in taxonomic decision-making.",
+      "level": "intermediate",
+      "department": "ecology/speciation",
+      "college_path": ".college/ecology/speciation/lump-split/",
+      "examples": [
+        "The 1995 towhee split: one species (Rufous-sided Towhee) -> two species (Spotted + Eastern). Based on plumage, song, genetics.",
+        "The 1973 junco lump: five species (Oregon + Slate-colored + White-winged + Pink-sided + Gray-headed) -> one species (Dark-eyed Junco). Based on hybridization.",
+        "Opposite criteria: the towhee split used vocal divergence as evidence FOR separation. The junco lump used hybridization as evidence AGAINST separation. The same family demonstrates both criteria leading to opposite conclusions.",
+        "The contested lump: molecular studies (Mila et al. 2007, Friis et al. 2016) support re-splitting at least some junco forms. The Oregon Junco may become a full species again. If so, degree 11 retroactively becomes a standalone species instead of a part of degree 47.",
+        "Connection to Red Crossbill (degree 34): crossbills have 10+ call types that may represent incipient species -- a case of divergence in progress. The junco lump compressed five forms into one -- a case of divergence reversed by committee decision."
+      ],
+      "music_theory_parallel": "Arrangement vs. decomposition -- opposite musical operations. Arrangement takes separate instruments or parts and combines them into a single work (lumping). Decomposition takes a single work and separates it into constituent parts for analysis or performance (splitting). The towhee split decomposed one species into two distinct performances. The junco lump arranged five separate performances into one ensemble piece. The Passerellidae run demonstrates both operations."
+    },
+    {
+      "concept": "E=3 continues -- second consecutive E=3 at degree 47, achieving dynamic range equilibrium. E=2 + E=3 together now hold 21 degrees (43.8%), exactly matching E=4's 21 degrees (43.8%). This is the first time in the engine's history that the combined lower-middle registers equal the upper-middle register. The dynamic range decompression that began at degree 45 (E=2 restoration after 31 degrees) and continued at degree 46 (E=3 restoration after 25 degrees) reaches equilibrium at degree 47. Three consecutive Passerellidae, all at E=2-3, establish the family as a lower-middle-register family.",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/energy-equilibrium/",
+      "examples": [
+        "Energy distribution at degree 47: E=1 (3 degrees, 6.3%), E=2 (12 degrees, 25.0%), E=3 (9 degrees, 18.8%), E=4 (21 degrees, 43.8%), E=5 (3 degrees, 6.3%).",
+        "Equilibrium: E=2 + E=3 = 21 degrees = E=4. The lower registers caught up. 43.8% = 43.8%.",
+        "The Passerellidae energy band: Song Sparrow (E=2), Spotted Towhee (E=3), Dark-eyed Junco (E=3). The family operates at E=2-3. No Passerellidae at E=4 or E=5. Sparrows are quiet birds.",
+        "Contrast with Trochilidae (35-36-37): Rufous Hummingbird (E=5), Anna's Hummingbird (E=5), Calliope Hummingbird (E=5). The other three-degree streak was all E=5. The Passerellidae streak is E=2-3. Two three-degree streaks at opposite dynamic extremes.",
+        "E=1 remains absent for 35 degrees (since degree 12, Pine Siskin). E=1 is the only energy level still in severe deficit."
+      ],
+      "music_theory_parallel": "Dynamic equilibrium -- the balance point in a musical work where the loud passages and quiet passages have equal cumulative weight. In a symphony, this is the moment when the total time spent in forte roughly equals the total time spent in piano, and the work's dynamic center of gravity sits at mezzo. The engine reaches this equilibrium at degree 47: the cumulative energy below the midpoint (E=2 + E=3) equals the cumulative energy above the midpoint (E=4). The Sound of Puget Sound has found its dynamic center."
+    },
+    {
+      "concept": "The Dark-eyed Junco as premier model organism -- the most intensively studied wild songbird in the world, with 1,000+ scientific papers. Ellen Ketterson's five-decade phenotypic engineering program at Indiana University. The UCSD campus rapid evolution case study. The junco as a model for behavioral ecology, neuroendocrinology, speciation, and urban evolution. The Margaret Morse Nice Medal (named for the researcher who studied Song Sparrow, degree 45) awarded to Ketterson for junco research (degree 47). The engine's two most studied songbirds are consecutive Passerellidae.",
+      "level": "intermediate",
+      "department": "ecology/behavioral-ecology",
+      "college_path": ".college/ecology/behavioral-ecology/model-organism/",
+      "examples": [
+        "Ketterson's phenotypic engineering: testosterone implants in free-living males reveal that increased aggression trades off against reduced paternal care. The junco demonstrates that organisms cannot maximize all traits simultaneously.",
+        "The UCSD campus evolution: Dark-eyed Juncos colonized the UC San Diego campus in the early 1980s and evolved measurably in ~20 years -- shorter wings, reduced tail flash, higher-pitched songs, changed nest sites. One of the fastest documented evolution cases in a wild vertebrate.",
+        "The Margaret Morse Nice connection: Nice studied Song Sparrow (degree 45) in Columbus, Ohio, establishing the model for detailed life-history studies of individual birds. Ketterson extended this approach to the junco (degree 47) with experimental manipulation. The medal honoring Nice's approach was awarded for its application to the junco.",
+        "The song divergence question: a 2022 Royal Society Open Science study found no consistent pattern of song divergence across multiple urban vs. non-urban junco populations in Southern California, complicating the narrative that urbanization reliably drives vocal evolution.",
+        "Population decline despite abundance: ~630 million individuals, yet declining at 0.7% per year since 1966. A cumulative loss of ~31% (168 million birds). Climate change projected to compress breeding range northward and upslope."
+      ],
+      "music_theory_parallel": "The masterclass -- a detailed, in-depth study of a single work or performer that reveals principles applicable to the entire art form. The Dark-eyed Junco is ornithology's masterclass subject: one species studied so thoroughly that it has revealed principles of life-history trade-offs, hormonal control of behavior, rapid evolution, vocal learning, and speciation that apply across all songbirds. The Song Sparrow (degree 45, via Margaret Morse Nice) was the original masterclass subject. The Dark-eyed Junco (degree 47, via Ketterson) is the modern masterclass. Two Passerellidae, two masterclasses, spanning nearly a century of ornithological research."
+    },
+    {
+      "concept": "Forest floor habitat -- the third Passerellidae habitat band. After wetland edge (Song Sparrow, degree 45) and dense understory (Spotted Towhee, degree 46), the Dark-eyed Junco occupies the forest floor and mixed woodland edge. More open than the towhee's thickets, broader in elevation range (sea level to subalpine), and extending into suburban and urban environments. The three Passerellidae partition the ground-level habitat: water margin (45), shrub interior (46), forest floor (47). Three species, three habitat textures, same vertical zone.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/forest-floor/",
+      "examples": [
+        "Three Passerellidae habitats: wetland edge (open, wet), dense understory (closed, dry), forest floor (open to moderate, variable).",
+        "Vertical position overlap: all three Passerellidae forage at 0-3 m, but in different horizontal habitats. They partition the landscape by habitat structure, not by height.",
+        "Singing height difference: Song Sparrow 1-3 m, Spotted Towhee 1-4 m, Dark-eyed Junco 3-10 m. The junco sings from the highest perches of the three, despite foraging on the ground.",
+        "Habitat breadth: the junco occupies the broadest habitat range of the three Passerellidae -- from deep conifer forest to suburban yards to subalpine meadow edges. This breadth partly explains its enormous population.",
+        "Altitudinal range: the junco is the only Passerellidae in the engine that performs significant altitudinal migration -- breeding in mountain forests and wintering in lowland towns. The Song Sparrow and Spotted Towhee are lowland residents."
+      ],
+      "music_theory_parallel": "The three performance venues. The Song Sparrow (degree 45) performs in the waterside amphitheater -- open, reflective, carrying sound easily across still water. The Spotted Towhee (degree 46) performs in the underground club -- dense, muffled, requiring a rough buzzy sound to cut through the acoustic clutter. The Dark-eyed Junco (degree 47) performs in the forest cathedral -- open enough for a clean tone to travel, tall enough for the sound to ring, but enclosed by canopy above and floor below. Three Passerellidae, three venues, three acoustic environments."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-011",
+      "title": "Oregon Junco (Degree 11)",
+      "connection": "TAXONOMIC RECURSION. The Oregon Junco at degree 11 is a subspecies group WITHIN the Dark-eyed Junco at degree 47. Degree 47 CONTAINS degree 11. The engine's first nested taxonomic relationship -- container and contents at different positions in the sequence. The Oregon Junco's 'trill/tremolo' (degree 11) is enclosed within the Dark-eyed Junco's 'snowbird' (degree 47). Degree 11 was about the perceptual phenomenon of fusion; degree 47 is about the strategic phenomenon of simplicity."
+    },
+    {
+      "project": "SPS-046",
+      "title": "Spotted Towhee (Degree 46)",
+      "connection": "PASSERELLIDAE CONSECUTIVE (46-47). Third member of the three-degree streak. The rasp (textural intensity) meets the snowbird (elemental reduction). Also: LUMP VS. SPLIT -- the 1995 towhee split and the 1973 junco lump. Two opposite taxonomic operations within one family in two degrees. Both are dark PNW subspecies following Gloger's rule."
+    },
+    {
+      "project": "SPS-045",
+      "title": "Song Sparrow (Degree 45)",
+      "connection": "PASSERELLIDAE RUN ANCHOR. Song Sparrow began the three-degree streak. Complex preamble (45) to buzzy rasp (46) to simple snowbird (47). Three genera, three strategies, one family. Margaret Morse Nice studied the Song Sparrow; the medal named for Nice was awarded to Ketterson for junco research. The engine's two most studied songbirds in consecutive Passerellidae entries."
+    },
+    {
+      "project": "SPS-025",
+      "title": "American Robin (Degree 25)",
+      "connection": "POPULATION RIVALS. Dark-eyed Junco (~630 million) and American Robin are the two most abundant birds in North America. The two most common species in the engine. Both year-round PNW residents. Both ground-foragers. Both declining (junco -31% since 1966, robin with its own population pressures)."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "SPECIATION MODELS. Red Crossbill has 10+ call types that may represent incipient species -- divergence in progress. The junco complex has 5 former species lumped as one -- divergence compressed by committee decision. Both are ongoing speciation cases with uncertain taxonomic futures."
+    },
+    {
+      "project": "SPS-002",
+      "title": "Varied Thrush (Degree 2)",
+      "connection": "TRILL CONTRAST (via degree 11). The Varied Thrush holds a genuinely sustained tone -- continuous from start to finish. The junco's trill is structurally discrete notes perceived as continuous. Same perceptual result, opposite acoustic architectures. This contrast, established at degree 11, remains the engine's foundational lesson in sustained vs. pulsed sound."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Dark-eyed Junco documented as common year-round resident throughout Washington state. Oregon form dominant in western WA. Multiple subspecies present. One of the most frequently encountered birds in PNW field surveys. Altitudinal migrant with differential migration between sexes."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Forest floor ecology. Altitudinal migration patterns in PNW mountain forests. Ground-nesting adaptation. Dietary shift from insects (summer) to seeds (winter). Geographic variation following Gloger's rule. Conifer and mixed forest habitat from sea level to subalpine zone."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 45,
+    "total_entries": 48,
+    "families_represented": 19,
+    "largest_families": {
+      "Parulidae": 10,
+      "Fringillidae": 5,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Passerellidae": 3,
+      "Trochilidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13, 45],
+      "E3": [14, 15, 16, 17, 18, 19, 20, 46, 47],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=3 CONTINUES -- second consecutive E=3 (degrees 46-47). E=2 + E=3 together hold 21 degrees (43.8%), EXACTLY MATCHING E=4's 21 degrees (43.8%). Dynamic range equilibrium achieved for the first time in the engine's history. E=1 remains absent for 35 degrees (since degree 12).",
+    "passerellidae_streak_note": "THREE CONSECUTIVE PASSERELLIDAE at degrees 45-46-47. Only the second three-degree family streak (after Trochilidae 35-36-37). Three genera (Melospiza, Pipilo, Junco), three habitats, three song strategies. The streak creates a ground-level transect and a compositional arc from complex to simple.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer"],
+    "ecosystem_note": "Forest floor / mixed woodland edge -- the third Passerellidae habitat band. After wetland edge (45) and dense understory (46), the junco occupies the open ground layer beneath the canopy. Broadest habitat range of the three Passerellidae: sea level to subalpine, deep forest to suburban yard.",
+    "acoustic_element_48": "THE SNOWBIRD -- a simple, musical, single-pitch trill defined by elemental reduction. The first element in the 'elemental reduction' category. The Passerellidae arc: preamble (complex) -> rasp (textural) -> snowbird (elemental).",
+    "csv_substitution_note": "Red-legged Frog (Rana aurora) replaced by Dark-eyed Junco (Junco hyemalis) because SPS Part B is birds-and-mammals only. E=3 and forest floor habitat preserved from original CSV. THIRD consecutive CSV substitution replacing an amphibian (45-46-47). The engine is passing through the amphibian belt of the original CSV.",
+    "taxonomic_recursion_note": "DEGREE 47 CONTAINS DEGREE 11. The Dark-eyed Junco (degree 47) includes the Oregon Junco (degree 11) as a subspecies group. First taxonomic nesting in the engine.",
+    "conservation_note": "LEAST CONCERN (IUCN). Population estimates vary: ~220 million (PIF breeding) to ~630 million (highest estimate). Continental Concern Score 8/20. BBS trend -0.7% per year (1966-2019), cumulative decline ~31% (~168 million individuals lost). Declining despite enormous population. Climate change projected to compress breeding range northward and upslope. Contrasts with Spotted Towhee (degree 46), which is stable or increasing in western WA.",
+    "critical_gaps": [
+      "No marine/shoreline species in 47 degrees of 'The Sound of Puget Sound' -- 47 DEGREES OVERDUE -- EXISTENTIAL CRISIS (CRITICAL)",
+      "No corvid (Steller's Jay, crow, raven) -- 47 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 47 degrees -- URGENT",
+      "No nocturnal species since degree 4 (43 degrees ago) -- OVERDUE",
+      "No E=1 since degree 12 (35 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 47 DEGREES OF A PROJECT NAMED FOR PUGET SOUND",
+      "Only 5 orders in 48 entries -- a new order is strongly needed",
+      "TEN consecutive Passeriformes (38-47) -- non-passerine needed URGENTLY",
+      "Third consecutive CSV substitution replacing a frog (45-46-47) -- the amphibian belt highlights the birds-and-mammals-only constraint",
+      "Three consecutive Passerellidae (45-46-47) -- same-family dominance reaching saturation"
+    ]
+  }
+}

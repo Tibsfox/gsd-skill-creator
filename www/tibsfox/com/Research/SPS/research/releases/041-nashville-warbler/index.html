@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 41&deg; &mdash; Nashville Warbler &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Partition highlight card */
+    .partition-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .partition-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Genus shift card */
+    .genus-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFA726 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Misnomer card */
+    .misnomer-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #455A64;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .misnomer-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* Parulidae record card */
+    .parulidae-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .parulidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Hidden crown card */
+    .crown-card {
+      background: linear-gradient(135deg, #FFFDE7 0%, #FDD835 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .crown-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Brush habitat card */
+    .brush-card {
+      background: linear-gradient(135deg, #F1F8E9 0%, #AED581 100%);
+      border: 2px solid #558B2F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .brush-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #33691E;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #5D4037;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.partition { background: #2E7D32; }
+    .theory-icon.quartet { background: #1565C0; }
+    .theory-icon.crown { background: #E65100; }
+    .theory-icon.misnomer { background: #455A64; }
+    .theory-icon.brush { background: #558B2F; }
+    .theory-icon.energy { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">41&deg;</div>
+      <div class="release-title-block">
+        <h2>Nashville Warbler</h2>
+        <div class="scientific">Leiothlypis ruficapilla</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      see-bit see-bit teedle-teedle &mdash; the partition, 9th Parulidae (extending record), FOURTH consecutive warbler (unprecedented), NEW GENUS <em>Leiothlypis</em> breaks the <em>Setophaga</em> streak &mdash; a misnomer species named for a place it merely passes through
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Partition Element Card -->
+        <div class="partition-card">
+          <h3>The 42nd Acoustic Element: The Partition</h3>
+          <p>A two-part song: <em>see-bit see-bit</em> (rhythmic staccato, measured, crisp) then <em>teedle-teedle</em> (rapid trill, tumbling, blurred). The transition is <strong>abrupt</strong> &mdash; the song flips between two modes as if a switch is thrown. Named &ldquo;the partition&rdquo; for five simultaneous divisions: (1)&nbsp;the song&rsquo;s internal staccato/trill split, (2)&nbsp;the genus partition from <em>Setophaga</em> to <em>Leiothlypis</em>, (3)&nbsp;the habitat partition from canopy to brush, (4)&nbsp;the naming partition between Nashville (misnomer) and its real home (western mountains), (5)&nbsp;the successional partition between old-growth and post-disturbance scrub.</p>
+          <p><strong>The first acoustic element named for song ARCHITECTURE</strong> &mdash; how a song is organized, not what it sounds like.</p>
+        </div>
+
+        <!-- Genus Shift Card -->
+        <div class="genus-card">
+          <h3>New Genus: <em>Leiothlypis</em> Breaks the <em>Setophaga</em> Streak</h3>
+          <p>Degrees 38&ndash;40 were all <em>Setophaga</em> &mdash; the displacement trio. Degree 41 shifts to <em>Leiothlypis</em> (&ldquo;smooth-feathered&rdquo;), the genus of the Orange-crowned Warbler (degree 20). <strong>The genus returns after 21 degrees.</strong> Both <em>Leiothlypis</em> species serve as closers: Orange-crowned closed the quintet, Nashville closes the quartet. The quiet bookend.</p>
+          <p><strong>From bold to smooth:</strong> <em>Setophaga</em> = bold patterns, wing bars, high contrast. <em>Leiothlypis</em> = smooth plumage, no wing bars, hidden crown patches. The genus shift at degree 41 is a shift from display to subtlety.</p>
+        </div>
+
+        <!-- Misnomer Card -->
+        <div class="misnomer-card">
+          <h3>The Misnomer: Named for a Rest Stop</h3>
+          <p>Alexander Wilson collected this bird near Nashville, Tennessee, in <strong>1811</strong>, during spring migration. The bird was passing through. It does not breed in Nashville. It does not winter in Nashville. <strong>The name is a permanent record of a brief encounter</strong> &mdash; one of ornithology&rsquo;s most famous naming errors. Compare with Hermit Warbler (<em>occidentalis</em> = &ldquo;western&rdquo; &mdash; accurate). The engine&rsquo;s first misnomer species.</p>
+        </div>
+
+        <h2>The Smooth-Feathered Red-Cap</h2>
+        <p><em>Leiothlypis ruficapilla</em> &mdash; &ldquo;Smooth-feathered red-cap.&rdquo; <em>Leiothlypis</em> = Greek <em>leios</em> (smooth) + <em>thlypis</em> (finch). <em>Ruficapilla</em> = Latin <em>rufus</em> (red) + <em>capillus</em> (cap) = &ldquo;red-capped.&rdquo; The species is named for a <strong>hidden rufous crown patch</strong> beneath gray feathers &mdash; a feature almost never visible in the field. Formerly <em>Vermivora ruficapilla</em>; split into <em>Leiothlypis</em> by Sangster (2008) based on molecular phylogenetics.</p>
+
+        <h2>The Sound: Two-Part Song</h2>
+        <p><em>See-bit see-bit teedle-teedle</em> &mdash; 2&ndash;4 staccato couplets at ~5,000&ndash;8,500 Hz followed by a rapid, lower trill at ~4,000&ndash;7,000 Hz [NEEDS VERIFICATION]. Total duration ~1.5&ndash;2.5 s. The first half is measured and crisp; the second half is rapid and blurred. <strong>The engine&rsquo;s first truly partitioned song</strong> &mdash; two distinct textures joined at the hip.</p>
+
+        <h3>All Nine Parulidae Songs</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Song Type</th><th>Parts</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>14</td><td>MacGillivray&rsquo;s</td><td><em>Geothlypis</em></td><td>Rolling + sweet</td><td>~2 (blended)</td></tr>
+            <tr><td>15</td><td>Wilson&rsquo;s</td><td><em>Cardellina</em></td><td>Accelerating chatter</td><td>1</td></tr>
+            <tr><td>16</td><td>Yellow</td><td><em>Setophaga</em></td><td>Ascending phrases</td><td>1</td></tr>
+            <tr><td>17</td><td>Yellowthroat</td><td><em>Geothlypis</em></td><td>Repeating triplet</td><td>1</td></tr>
+            <tr><td>20</td><td>Orange-crowned</td><td><em>Leiothlypis</em></td><td>Descending trill</td><td>1</td></tr>
+            <tr><td>38</td><td>BTG</td><td><em>Setophaga</em></td><td>Flat buzzy drawl</td><td>1</td></tr>
+            <tr><td>39</td><td>Townsend&rsquo;s</td><td><em>Setophaga</em></td><td>Ascending buzz</td><td>1</td></tr>
+            <tr><td>40</td><td>Hermit</td><td><em>Setophaga</em></td><td>Variable thin buzz</td><td>1</td></tr>
+            <tr><td><strong>41</strong></td><td><strong>Nashville</strong></td><td><strong><em>Leiothlypis</em></strong></td><td><strong>Staccato + trill</strong></td><td><strong>2 (partitioned)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Nashville introduces the engine&rsquo;s first clean binary song. Previous warblers sang in one continuous texture. Nashville divides its song into two halves of different character &mdash; announcement (staccato) followed by release (trill).</p>
+
+        <!-- Parulidae Record Card -->
+        <div class="parulidae-card">
+          <h3>Parulidae &mdash; 9 Members (Extending Record)</h3>
+          <p><strong>Ninth Parulidae.</strong> Leads Hirundinidae and Turdidae (5 each) by <strong>four</strong>. FOUR consecutive Parulidae (38&ndash;41) &mdash; unprecedented. Three arcs plus coda:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>Quintet (14&ndash;20):</strong> Five species, five genera, five song endings. All E=3.</li>
+            <li><strong>Trio (38&ndash;40):</strong> Three <em>Setophaga</em>, displacement cascade. All E=4.</li>
+            <li><strong>Coda (41):</strong> <em>Leiothlypis</em> returns &mdash; genus shift, habitat descent to brush.</li>
+            <li><strong>Overarching:</strong> Acoustic catalog &rarr; ecological drama &rarr; successional gradient.</li>
+          </ul>
+          <p>9 of ~115 North American Parulidae &asymp; 8%.</p>
+        </div>
+
+        <!-- Hidden Crown Card -->
+        <div class="crown-card">
+          <h3>The Hidden Crown &mdash; A <em>Leiothlypis</em> Signature</h3>
+          <p><strong>Two <em>Leiothlypis</em> species. Two hidden crown patches.</strong> Orange-crowned (degree 20) = orange crown hidden under olive (<em>celata</em> = &ldquo;hidden&rdquo;). Nashville (degree 41) = rufous crown hidden under gray (<em>ruficapilla</em> = &ldquo;red-capped&rdquo;). Both named for features almost never seen in the field. The genus hides its colors.</p>
+          <p><strong>Contrast with <em>Setophaga</em>:</strong> The quartet (16, 38&ndash;40) wore bold patterns on display. The <em>Leiothlypis</em> pair conceals its most distinctive features. Billboard vs. whisper.</p>
+        </div>
+
+        <!-- Brush Habitat Card -->
+        <div class="brush-card">
+          <h3>Brush &mdash; A New Ecosystem</h3>
+          <p><strong>Brush: low, dense, scrubby vegetation in early successional habitat.</strong> A new ecosystem for the engine. The Nashville Warbler is disturbance-dependent &mdash; it breeds in regenerating clearcuts (5&ndash;15 years post-logging), post-fire scrub, montane ceanothus/manzanita, and east-slope Cascades openings. It needs habitat created by destruction.</p>
+          <p><strong>The disturbance paradox:</strong> Hermit Warbler (degree 40) needs old-growth mountain conifer. Nashville Warbler (degree 41) needs post-disturbance brush. Consecutive degrees, <strong>opposite successional requirements</strong>. Preserving old-growth reduces brush. Creating brush destroys old-growth. Cannot optimize both.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=4 Continues &mdash; 18th Degree, 21 Without E&le;3</h3>
+          <p>E=4 now at <strong>18 degrees</strong> (43.9%). E=3 absent for <strong>21 consecutive degrees</strong> (since degree 20) &mdash; surpassing the 20-degree milestone. E=2 absent for 28 degrees. E=1 absent for 29 degrees. Four consecutive E=4 from the same family. <strong>The lower three-fifths of the energy spectrum is absent from degrees 21&ndash;41.</strong></p>
+        </div>
+
+        <h2>Western Subspecies in the PNW</h2>
+        <p>The PNW Nashville Warbler is <em>L. r. ridgwayi</em> &mdash; the western subspecies, with brighter yellow underparts and a bolder eye-ring than eastern birds [NEEDS VERIFICATION]. Breeds on the <strong>eastern Cascades slopes, Okanogan Highlands, Blue Mountains</strong>, and scattered locations in western Washington in disturbed habitats. Strict long-distance migrant &mdash; winters in highland scrub of Mexico and Central America. No PNW winter presence.</p>
+
+        <h2>Ground Nesting</h2>
+        <p>The Nashville Warbler nests <strong>on the ground</strong> &mdash; concealed under brush, grass, or ferns. One of the few warblers in the engine to nest at ground level. The nesting descent mirrors the singing descent: the <em>Setophaga</em> trio nests high (3&ndash;40 m) and sings high. Nashville nests on the ground and sings from 1&ndash;3 m brush tops. Four consecutive Parulidae, from mountain canopy crown to ground level.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon partition">P</div>
+            <div class="theory-content">
+              <h4>The Partition <span class="theory-level foundational">foundational</span></h4>
+              <p>The 42nd acoustic element. Two-part song: staccato couplets + rapid trill. After the thinning&rsquo;s attenuation (40), the partition introduces structural duality. Five simultaneous divisions: song structure, genus boundary, habitat shift, naming disconnect, successional gradient. First element named for song ARCHITECTURE.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon quartet">4</div>
+            <div class="theory-content">
+              <h4>Four-Consecutive Parulidae <span class="theory-level foundational">foundational</span></h4>
+              <p>Unprecedented. Degrees 38&ndash;41 across two genera (<em>Setophaga</em> + <em>Leiothlypis</em>), three ecosystems, two stories (displacement + successional gradient). The longest same-family run in the engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon crown">C</div>
+            <div class="theory-content">
+              <h4>The Hidden Crown <span class="theory-level foundational">foundational</span></h4>
+              <p>Two <em>Leiothlypis</em> species, two hidden crown patches (orange at 20, rufous at 41). Both named for invisible features. The genus conceals its most distinctive ornament. A <em>Leiothlypis</em> signature.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon misnomer">N</div>
+            <div class="theory-content">
+              <h4>The Misnomer <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Named for Nashville, Tennessee &mdash; a place the bird merely passes through during migration. Alexander Wilson, 1811. One of ornithology&rsquo;s most famous naming errors. The engine&rsquo;s first misnomer species. The name is a permanent record of a brief encounter.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon brush">B</div>
+            <div class="theory-content">
+              <h4>Brush &amp; Disturbance-Dependence <span class="theory-level intermediate">intermediate</span></h4>
+              <p>New ecosystem. The Nashville Warbler needs disturbance &mdash; fire, logging, storms &mdash; to create its brush habitat. Opposite of Hermit Warbler&rsquo;s old-growth requirement. The four-warbler run maps a full successional gradient: climax forest to pioneer scrub.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">4</div>
+            <div class="theory-content">
+              <h4>E=4 &mdash; 21 Degrees Without E&le;3 <span class="theory-level intermediate">intermediate</span></h4>
+              <p>18th degree at E=4 (43.9%). Twenty-one-degree milestone for E=3 absence. Four consecutive E=4 from same family. Lower three-fifths of spectrum absent since degree 21.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-040: Hermit Warbler</strong>
+            <p>CONSECUTIVE PARULIDAE, OPPOSITE ECOLOGY. Hermit needs old-growth mountain conifer. Nashville needs post-disturbance brush. Same family, opposite successional requirements. Degrees 40&ndash;41 map from climax forest to pioneer scrub.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-039: Townsend&rsquo;s Warbler</strong>
+            <p>SETOPHAGA TRIO MEMBER. Nashville at degree 41 breaks the Setophaga streak (38&ndash;40) with Leiothlypis. The genus shift partitions the four-consecutive Parulidae into two genus groups.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-038: Black-throated Gray Warbler</strong>
+            <p>QUARTET START. BTG began the four-consecutive Parulidae. Nashville closes it. BTG = Setophaga in oak-pine canopy. Nashville = Leiothlypis in post-disturbance brush. Maximum contrast within one family run.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-020: Orange-crowned Warbler</strong>
+            <p>LEIOTHLYPIS GENUS PAIR. Both Leiothlypis. Both with hidden crown patches. Both closers: Orange-crowned closed the quintet (20), Nashville closes the quartet (41). The quiet bookend genus.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-016: Yellow Warbler</strong>
+            <p>SETOPHAGA vs. LEIOTHLYPIS. Maximum yellow, bold pattern (Setophaga) vs. understated olive-yellow, smooth plumage (Leiothlypis). Two genus aesthetics within the same warbler family.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-014: MacGillivray&rsquo;s Warbler</strong>
+            <p>TWO-PART SONG PRECURSOR. MacGillivray&rsquo;s (14) hinted at two-part structure but blended the transition. Nashville (41) makes the partition explicit and abrupt. The engine&rsquo;s first clean binary song.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-033: Cassin&rsquo;s Finch</strong>
+            <p>MOUNTAIN vs. BRUSH. Cassin&rsquo;s at high-elevation snag tops. Nashville in the brushy clearings below. Both occupy the same mountain landscape but at different successional stages.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Nashville Warbler documented as breeder in brushy clearings and regenerating logged areas. Western subspecies ridgwayi. Disturbance-dependent habitat association.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Brush and early successional ecology. Fire-dependent habitat dynamics. Disturbance as ecological driver. Successional gradient from old-growth to pioneer scrub.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Nashville Warbler (<em>Leiothlypis ruficapilla</em>). Cornell Lab of Ornithology.</li>
+          <li>Sibley, D. A. <em>The Sibley Guide to Birds</em>, 2nd edition.</li>
+          <li>Pyle, P. <em>Identification Guide to North American Birds</em>, Part 1.</li>
+          <li>Dunn, J. L., &amp; Garrett, K. L. <em>A Field Guide to Warblers of North America</em>.</li>
+          <li>Williams, J. M. (1996). Nashville Warbler (<em>Vermivora ruficapilla</em>). In <em>The Birds of North America</em>, No. 205.</li>
+          <li>Sangster, G. (2008). A revision of <em>Vermivora</em> (Aves: Parulidae). Zootaxa.</li>
+          <li>Wahl, T. R., Tweit, B., &amp; Mlodinow, S. G., eds. <em>Birds of Washington: Status and Distribution</em>.</li>
+          <li>Marshall, D. B., Hunter, M. G., &amp; Contreras, A. L. <em>Birds of Oregon: A General Reference</em>.</li>
+          <li>Xeno-canto. Nashville Warbler recordings. xeno-canto.org.</li>
+          <li>Lovette, I. J., et al. (2010). A comprehensive multilocus phylogeny for the wood-warblers. <em>Mol. Phylogenet. Evol.</em> 57(2), 753&ndash;770.</li>
+          <li>Breeding Bird Survey data for Nashville Warbler. USGS.</li>
+          <li>eBird. Nashville Warbler occurrence data. ebird.org.</li>
+          <li>Wilson, A. (1811). <em>American Ornithology</em>, Vol. 3.</li>
+          <li>Ridgway, R. (1902). <em>The Birds of North and Middle America</em>, Part 2.</li>
+          <li>Ralph, C. J., et al. (1993). Handbook of field methods for monitoring landbirds. USDA Forest Service.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">41&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Partition</div>
+          <div class="stat-detail">#42 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">18th degree at E=4 (43.9%)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Parulidae</div>
+          <div class="stat-detail">9th member &mdash; record extended, leads by 4</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Leiothlypis</em></div>
+          <div class="stat-detail">2nd appearance (20, 41) &mdash; breaks <em>Setophaga</em> streak</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Brush</div>
+          <div class="stat-detail">NEW &mdash; post-disturbance scrub</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Summer</div>
+          <div class="stat-detail">Strict migrant (May&ndash;Sep)</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">40 unique</div>
+          <div class="stat-detail">42 entries (0&ndash;41)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Parulidae leads with 9</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">No new order at degree 41</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Consecutive Family</div>
+          <div class="stat-value">4 Parulidae</div>
+          <div class="stat-detail">Degrees 38&ndash;41 (unprecedented)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value"><em>ridgwayi</em></div>
+          <div class="stat-detail">Western subspecies (PNW breeder)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">IUCN Status</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">Pop. ~45M [NV]</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 041</p>
+  </footer>
+</body>
+</html>

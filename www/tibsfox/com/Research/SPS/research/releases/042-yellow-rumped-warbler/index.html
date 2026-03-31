@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 42&deg; &mdash; Yellow-rumped Warbler &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Shimmer highlight card */
+    .shimmer-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F9A825;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .shimmer-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Setophaga return card */
+    .genus-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .genus-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* Wax adaptation card */
+    .wax-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .wax-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Parulidae record card */
+    .parulidae-card {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F48FB1 100%);
+      border: 2px solid #C62828;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .parulidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #B71C1C;
+    }
+
+    /* Crown visible card */
+    .crown-card {
+      background: linear-gradient(135deg, #FFFDE7 0%, #FDD835 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .crown-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Conifer edge card */
+    .edge-card {
+      background: linear-gradient(135deg, #E8F5E9 0%, #81C784 100%);
+      border: 2px solid #2E7D32;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .edge-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1B5E20;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #5D4037;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.shimmer { background: #F9A825; }
+    .theory-icon.quintet { background: #C62828; }
+    .theory-icon.crown { background: #E65100; }
+    .theory-icon.wax { background: #7B1FA2; }
+    .theory-icon.edge { background: #2E7D32; }
+    .theory-icon.energy { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">42&deg;</div>
+      <div class="release-title-block">
+        <h2>Yellow-rumped Warbler</h2>
+        <div class="scientific">Setophaga coronata</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      loose trill varied song &mdash; the shimmer, 10th Parulidae (extending record), FIFTH consecutive warbler (absolutely unprecedented), <em>Setophaga</em> returns after <em>Leiothlypis</em> break &mdash; the most abundant warbler in North America, the one that stayed, the crowned moth-eater, the butter butt
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Shimmer Element Card -->
+        <div class="shimmer-card">
+          <h3>The 43rd Acoustic Element: The Shimmer</h3>
+          <p>A loose, erratic shivering trill: <em>tuwee-tuwee-tuwee-tuwee</em>, thin and bell-like, with the terminal pitch direction <strong>unpredictable</strong> &mdash; sometimes rising, sometimes falling. Notes are vaguely doubled, giving the trill its characteristic wavering texture. Named &ldquo;the shimmer&rdquo; for five kinds of variability: (1)&nbsp;the song&rsquo;s internal pitch and direction shifts, (2)&nbsp;the taxonomic shimmer between Audubon&rsquo;s and Myrtle (split/lumped/debated), (3)&nbsp;the seasonal shimmer between resident and migratory, (4)&nbsp;five yellow patches that flash like gold through dark foliage, (5)&nbsp;the generalist shimmer across all habitats.</p>
+          <p><strong>The first acoustic element named for inconsistency as a defining trait</strong> &mdash; variability and unpredictability as named characteristics.</p>
+        </div>
+
+        <!-- Setophaga Return Card -->
+        <div class="genus-card">
+          <h3><em>Setophaga</em> Returns &mdash; With the Generalist</h3>
+          <p>After the Nashville Warbler&rsquo;s <em>Leiothlypis</em> break at degree 41, the genus <em>Setophaga</em> returns &mdash; but not with another specialist. <strong><em>Setophaga coronata</em> is the generalist:</strong> the most abundant warbler in North America (~170 million), the only warbler that can digest wax, the one that overwinters in the PNW. Five <em>Setophaga</em> in the engine (16, 38, 39, 40, 42) &mdash; the largest genus representation in any family.</p>
+          <p><strong>Specialist to generalist:</strong> The trio (38&ndash;40) were niche specialists in crisis. Degree 42 is the species that refused to specialize &mdash; and thrived.</p>
+        </div>
+
+        <!-- Wax Adaptation Card -->
+        <div class="wax-card">
+          <h3>The Wax Adaptation: Why This Warbler Stayed</h3>
+          <p>The Yellow-rumped Warbler produces <strong>elevated bile salts</strong> that dissolve waxy coatings on bayberry, wax myrtle, juniper, and poison ivy berries &mdash; an adaptation <strong>unique among New World warblers</strong>. When insects vanish in winter, other warblers flee to the tropics. The Yellow-rumped switches to wax-coated berries and <strong>stays</strong>. The only warbler in the engine&rsquo;s five-degree run that overwinters in the PNW.</p>
+          <p><strong>170 million breeding adults.</strong> The wax-digestion adaptation is the foundation of the species&rsquo; dominance.</p>
+        </div>
+
+        <h2>The Crowned Moth-Eater</h2>
+        <p><em>Setophaga coronata</em> &mdash; &ldquo;Crowned moth-eater.&rdquo; <em>Setophaga</em> = Greek <em>ses</em> (moth) + <em>phagein</em> (to eat). <em>Coronata</em> = Latin <em>coronatus</em> (crowned). Named by Linnaeus in 1766. Referring to the <strong>visible yellow crown patch</strong> &mdash; one of five yellow points on the bird (crown, rump, two flanks, throat in Audubon&rsquo;s form). After two <em>Leiothlypis</em> with hidden crowns (20, 41), the engine gets a <em>Setophaga</em> whose crown is <strong>displayed</strong>.</p>
+
+        <h2>The Sound: Loose Shivering Trill</h2>
+        <p><em>Tuwee-tuwee-tuwee-tuwee</em> &mdash; 7&ndash;21 notes (mean ~12), duration ~1.0&ndash;2.8 s. Thin, bell-like timbre, not buzzy like the <em>Setophaga</em> trio. Notes are vaguely doubled, giving the trill its characteristic &ldquo;loose&rdquo; feel. Terminal pitch direction varies: sometimes rising, sometimes falling. Males have at least two song types. The song <strong>shimmers</strong> &mdash; it refuses to be the same thing twice.</p>
+
+        <h3>All Ten Parulidae Songs</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Song Type</th><th>Character</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>14</td><td>MacGillivray&rsquo;s</td><td><em>Geothlypis</em></td><td>Rolling + sweet</td><td>Narrative</td></tr>
+            <tr><td>15</td><td>Wilson&rsquo;s</td><td><em>Cardellina</em></td><td>Accelerating chatter</td><td>Urgent</td></tr>
+            <tr><td>16</td><td>Yellow</td><td><em>Setophaga</em></td><td>Ascending phrases</td><td>Bright</td></tr>
+            <tr><td>17</td><td>Yellowthroat</td><td><em>Geothlypis</em></td><td>Repeating triplet</td><td>Catchy</td></tr>
+            <tr><td>20</td><td>Orange-crowned</td><td><em>Leiothlypis</em></td><td>Descending trill</td><td>Evaporating</td></tr>
+            <tr><td>38</td><td>BTG</td><td><em>Setophaga</em></td><td>Flat buzzy drawl</td><td>Drawling</td></tr>
+            <tr><td>39</td><td>Townsend&rsquo;s</td><td><em>Setophaga</em></td><td>Ascending buzz</td><td>Buzzing</td></tr>
+            <tr><td>40</td><td>Hermit</td><td><em>Setophaga</em></td><td>Variable thin buzz</td><td>Thinning</td></tr>
+            <tr><td>41</td><td>Nashville</td><td><em>Leiothlypis</em></td><td>Staccato + trill</td><td>Partitioned</td></tr>
+            <tr><td><strong>42</strong></td><td><strong>Yellow-rumped</strong></td><td><strong><em>Setophaga</em></strong></td><td><strong>Loose shivering trill</strong></td><td><strong>Shimmering</strong></td></tr>
+          </tbody>
+        </table>
+        <p>The Yellow-rumped introduces the engine&rsquo;s first <strong>tonally variable song</strong> &mdash; a song defined by its inconsistency. Previous warblers had fixed terminal patterns. The Yellow-rumped shimmers between rising and falling endings, between song types, within a single individual.</p>
+
+        <!-- Parulidae Record Card -->
+        <div class="parulidae-card">
+          <h3>Parulidae &mdash; 10 Members (Extending Record)</h3>
+          <p><strong>Tenth Parulidae.</strong> Leads Hirundinidae and Turdidae (5 each) by <strong>five</strong>. FIVE consecutive Parulidae (38&ndash;42) &mdash; absolutely unprecedented. Four arcs plus exclamation point:</p>
+          <ul style="font-size: 0.92rem; margin: 0.5rem 0;">
+            <li><strong>Quintet (14&ndash;20):</strong> Five species, five genera, five song endings. All E=3.</li>
+            <li><strong>Trio (38&ndash;40):</strong> Three <em>Setophaga</em>, displacement cascade. All E=4.</li>
+            <li><strong>Coda (41):</strong> <em>Leiothlypis</em> returns &mdash; genus shift, habitat descent to brush.</li>
+            <li><strong>Exclamation point (42):</strong> <em>Setophaga</em> returns with the generalist &mdash; the survivor, the one that stays.</li>
+            <li><strong>Overarching:</strong> Acoustic catalog &rarr; ecological drama &rarr; disturbance &rarr; generalist triumph.</li>
+          </ul>
+          <p>10 of ~115 North American Parulidae &asymp; 9%.</p>
+        </div>
+
+        <!-- Crown Visible Card -->
+        <div class="crown-card">
+          <h3>The Visible Crown &mdash; After Hidden Crowns</h3>
+          <p><strong>Three crown species in the engine:</strong> Orange-crowned (20) = orange hidden under olive. Nashville (41) = rufous hidden under gray. <strong>Yellow-rumped (42) = yellow, displayed.</strong> After two <em>Leiothlypis</em> with hidden crowns, the <em>Setophaga</em> puts its gold on show. <em>Coronata</em> = &ldquo;crowned.&rdquo; Five yellow patches &mdash; crown, rump, two flanks, throat &mdash; all visible, all flashing.</p>
+          <p><strong><em>Leiothlypis</em> conceals. <em>Setophaga</em> displays.</strong> The genus return at degree 42 is a return to maximum ornamentation.</p>
+        </div>
+
+        <!-- Conifer Edge Card -->
+        <div class="edge-card">
+          <h3>Conifer Edge &mdash; The Habitat Between Worlds</h3>
+          <p><strong>Not deep forest. Not open brush. The edge.</strong> Where conifer forest meets meadow, clearcut, stream, or mixed woodland. The Yellow-rumped prefers <strong>open stands and edges</strong> in coniferous forest. In western Washington, it selects canopy gaps, bog edges, and meadow margins. The edge is the generalist&rsquo;s habitat &mdash; where two worlds overlap, offering resources from both.</p>
+          <p><strong>Audubon&rsquo;s form (<em>S. c. auduboni</em>):</strong> Breeds in coniferous forests throughout the PNW. Some overwinter in lowlands. The main winter warbler in the region.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=4 Continues &mdash; 19th Degree, 22 Without E&le;3</h3>
+          <p>E=4 now at <strong>19 degrees</strong> (44.2%). E=3 absent for <strong>22 consecutive degrees</strong> (since degree 20). E=2 absent for 29 degrees. E=1 absent for 30 degrees. Five consecutive E=4 from the same family. <strong>The lower three-fifths of the energy spectrum is absent from degrees 21&ndash;42.</strong></p>
+        </div>
+
+        <h2>The Audubon&rsquo;s/Myrtle Complex</h2>
+        <p>One of ornithology&rsquo;s great taxonomic puzzles. <strong>Before 1973:</strong> two species &mdash; Myrtle Warbler (eastern) and Audubon&rsquo;s Warbler (western). <strong>1973:</strong> lumped into Yellow-rumped Warbler based on hybridization in the Canadian Rockies (Hubbard, 1969). <strong>2011:</strong> genus changed from <em>Dendroica</em> to <em>Setophaga</em>. <strong>Ongoing:</strong> genomic studies suggest they may be re-split. The IOC already treats them as separate species. The taxonomy <strong>shimmers</strong> &mdash; the species boundary itself is uncertain.</p>
+
+        <h2>Five-Consecutive Warbler Arc</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Genus</th><th>Ecosystem</th><th>Element</th><th>Strategy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>38</td><td>Black-throated Gray</td><td><em>Setophaga</em></td><td>Oak-pine</td><td>The Drawl</td><td>Specialist</td></tr>
+            <tr><td>39</td><td>Townsend&rsquo;s</td><td><em>Setophaga</em></td><td>Conifer canopy</td><td>The Canopy Buzz</td><td>Aggressor</td></tr>
+            <tr><td>40</td><td>Hermit</td><td><em>Setophaga</em></td><td>Mountain conifer</td><td>The Thinning</td><td>Specialist</td></tr>
+            <tr><td>41</td><td>Nashville</td><td><em>Leiothlypis</em></td><td>Brush</td><td>The Partition</td><td>Specialist</td></tr>
+            <tr><td><strong>42</strong></td><td><strong>Yellow-rumped</strong></td><td><strong><em>Setophaga</em></strong></td><td><strong>Conifer edge</strong></td><td><strong>The Shimmer</strong></td><td><strong>Generalist</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Four specialists and one generalist. The generalist has <strong>170 million individuals</strong> and is increasing. The five-degree warbler arc is a lesson in evolutionary strategy: specialize narrowly and face displacement. Generalize broadly and thrive.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon shimmer">S</div>
+            <div class="theory-content">
+              <h4>The Shimmer <span class="theory-level foundational">foundational</span></h4>
+              <p>The 43rd acoustic element. A loose shivering trill with variable terminal pitch. After the partition&rsquo;s structural duality (41), the shimmer introduces tonal variability &mdash; a song defined by its refusal to be the same thing twice. First element named for inconsistency as a defining trait.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon quintet">5</div>
+            <div class="theory-content">
+              <h4>Five-Consecutive Parulidae <span class="theory-level foundational">foundational</span></h4>
+              <p>Absolutely unprecedented. Degrees 38&ndash;42 across three genera (<em>Setophaga</em> + <em>Leiothlypis</em> + <em>Setophaga</em> return), four ecosystems, three stories (displacement + disturbance + generalist triumph). Matches swallow quintet at 5 consecutive but with greater taxonomic diversity.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon crown">C</div>
+            <div class="theory-content">
+              <h4>The Visible Crown <span class="theory-level foundational">foundational</span></h4>
+              <p>After two <em>Leiothlypis</em> with hidden crowns (20, 41), the <em>Setophaga</em> displays its yellow crown openly. <em>Coronata</em> = &ldquo;crowned.&rdquo; Five yellow patches all visible. The genus return is a return to display after concealment.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon wax">W</div>
+            <div class="theory-content">
+              <h4>The Wax Adaptation <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Unique among New World warblers. Elevated bile salts dissolve waxy berry coatings. The physiological key to overwintering in temperate zones. The foundation of 170 million individuals. The evolutionary lesson: eat what others cannot.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon edge">E</div>
+            <div class="theory-content">
+              <h4>Conifer Edge &amp; the Generalist Niche <span class="theory-level intermediate">intermediate</span></h4>
+              <p>The edge between forest and opening. The generalist&rsquo;s habitat &mdash; where two worlds overlap. After deep-forest specialists (38&ndash;40) and a disturbance specialist (41), the Yellow-rumped shimmers across all habitats, committed to none.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">4</div>
+            <div class="theory-content">
+              <h4>E=4 &mdash; 22 Degrees Without E&le;3 <span class="theory-level intermediate">intermediate</span></h4>
+              <p>19th degree at E=4 (44.2%). Twenty-two-degree milestone for E=3 absence. Five consecutive E=4 from same family. Dynamic range compression at its most severe.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-041: Nashville Warbler</strong>
+            <p>CONSECUTIVE PARULIDAE, GENUS BRACKET. Nashville (Leiothlypis, degree 41) broke the Setophaga streak. Yellow-rumped (Setophaga, degree 42) returns to the genus. The Leiothlypis interlude was one degree. Setophaga bookends the quintet&rsquo;s outer edges.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-040: Hermit Warbler</strong>
+            <p>SETOPHAGA CONTRAST. Hermit = old-growth specialist, declining. Yellow-rumped = generalist, thriving (170M). Same genus, opposite strategies, opposite outcomes. The thinning vs. the shimmer.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-039: Townsend&rsquo;s Warbler</strong>
+            <p>SETOPHAGA AGGRESSOR vs. GENERALIST. Townsend&rsquo;s displaces specialists through competition. Yellow-rumped succeeds through adaptation. Both Setophaga. Different strategies for dominance.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-038: Black-throated Gray Warbler</strong>
+            <p>QUINTET START. BTG began the five-consecutive Parulidae. Yellow-rumped closes it. BTG = dry-forest specialist. Yellow-rumped = conifer-edge generalist. Drawl to shimmer.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-020: Orange-crowned Warbler</strong>
+            <p>LEIOTHLYPIS vs. SETOPHAGA CROWN. Orange-crowned hid its crown (celata = hidden). Yellow-rumped displays its crown (coronata = crowned). Two genera, two strategies: conceal vs. display.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-016: Yellow Warbler</strong>
+            <p>SETOPHAGA BRIGHTNESS. Both Setophaga. Both yellow-dominated. Yellow Warbler = riparian sweet song. Yellow-rumped = conifer-edge shivering trill. The genus spans from sweet to shimmering.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-031: Cedar Waxwing</strong>
+            <p>WAX AND BERRIES. Cedar Waxwing consumes berries with waxy coatings. Yellow-rumped Warbler can DIGEST the wax. Both species link to waxy fruit ecology. Different digestive solutions to the same food source.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Yellow-rumped Warbler documented as common breeder and winter resident throughout PNW coniferous forests. Audubon&rsquo;s subspecies auduboni. The most abundant warbler in the region.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Conifer edge ecology. Forest-meadow transition zones. Ecotone dynamics. Edge effects as ecological principle. Berry-producing shrub communities in forest openings.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Yellow-rumped Warbler (<em>Setophaga coronata</em>). Cornell Lab of Ornithology.</li>
+          <li>Sibley, D. A. <em>The Sibley Guide to Birds</em>, 2nd edition.</li>
+          <li>Smithsonian&rsquo;s National Zoo. Yellow-rumped Warbler species profile.</li>
+          <li>Audubon. &ldquo;10 Fun Facts About the Yellow-rumped Warbler.&rdquo;</li>
+          <li>Hunt, P. D., &amp; Flaspohler, D. J. (1998). Yellow-rumped Warbler. <em>The Birds of North America</em>, No. 376.</li>
+          <li>Lovette, I. J., et al. (2010). Multilocus phylogeny for wood-warblers. <em>Mol. Phylogenet. Evol.</em> 57(2), 753&ndash;770.</li>
+          <li>Wahl, T. R., Tweit, B., &amp; Mlodinow, S. G., eds. <em>Birds of Washington: Status and Distribution</em>.</li>
+          <li>Marshall, D. B., et al. <em>Birds of Oregon: A General Reference</em>.</li>
+          <li>Xeno-canto. Yellow-rumped Warbler recordings. xeno-canto.org.</li>
+          <li>Chesser, R. T., et al. (2011). 52nd supplement to AOU Check-list. <em>The Auk</em> 128(3), 600&ndash;613.</li>
+          <li>Partners in Flight. Population estimates. Breeding Bird Survey data. USGS.</li>
+          <li>eBird. Yellow-rumped Warbler occurrence data. ebird.org.</li>
+          <li>Linnaeus, C. (1766). <em>Systema Naturae</em>, 12th edition.</li>
+          <li>Hubbard, J. P. (1969). Relationships and evolution of <em>D. coronata</em> complex. <em>The Auk</em> 86, 393&ndash;432.</li>
+          <li>All About Birds. Yellow-rumped Warbler. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon). Yellow-rumped Warbler. birdweb.org.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">42&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Shimmer</div>
+          <div class="stat-detail">#43 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">19th degree at E=4 (44.2%)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Parulidae</div>
+          <div class="stat-detail">10th member &mdash; record extended, leads by 5</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Setophaga</em></div>
+          <div class="stat-detail">5th appearance (16, 38-40, 42) &mdash; returns after <em>Leiothlypis</em></div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Conifer Edge</div>
+          <div class="stat-detail">Open stands, forest-meadow transition</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident/Summer</div>
+          <div class="stat-detail">Overwinters in PNW &mdash; unique among engine warblers</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">41 unique</div>
+          <div class="stat-detail">43 entries (0&ndash;42)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">18</div>
+          <div class="stat-detail">Parulidae leads with 10</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">No new order at degree 42</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Consecutive Family</div>
+          <div class="stat-value">5 Parulidae</div>
+          <div class="stat-detail">Degrees 38&ndash;42 (unprecedented)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Subspecies</div>
+          <div class="stat-value"><em>auduboni</em></div>
+          <div class="stat-detail">Audubon&rsquo;s Warbler (PNW form)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~170 Million</div>
+          <div class="stat-detail">Most abundant warbler in N. America</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">IUCN Status</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">BBS trend: stable to increasing</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 042</p>
+  </footer>
+</body>
+</html>

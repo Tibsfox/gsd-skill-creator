@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 49&deg; &mdash; Fox Sparrow &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Ballad element card */
+    .ballad-card {
+      background: linear-gradient(135deg, #FBE9E7 0%, #FF8A65 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .ballad-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Fox-Tibsfox card */
+    .fox-card {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFCC80 100%);
+      border: 2px solid #E65100;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .fox-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BF360C;
+    }
+
+    /* Family streak card */
+    .streak-card {
+      background: linear-gradient(135deg, #E3F2FD 0%, #64B5F6 100%);
+      border: 2px solid #1565C0;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .streak-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #0D47A1;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #BCAAA4 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* Energy card */
+    .energy-card {
+      background: linear-gradient(135deg, #F3E5F5 0%, #CE93D8 100%);
+      border: 2px solid #7B1FA2;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .energy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #4A148C;
+    }
+
+    /* Taxonomy debate card */
+    .taxonomy-card {
+      background: linear-gradient(135deg, #E0F7FA 0%, #4DD0E1 100%);
+      border: 2px solid #00838F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .taxonomy-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #006064;
+    }
+
+    /* Double-scratch card */
+    .scratch-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F9A825;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .scratch-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.ballad { background: #BF360C; }
+    .theory-icon.fox { background: #E65100; }
+    .theory-icon.streak { background: #1565C0; }
+    .theory-icon.energy { background: #7B1FA2; }
+    .theory-icon.taxonomy { background: #00838F; }
+    .theory-icon.scratch { background: #F9A825; color: #333; }
+    .theory-icon.habitat { background: #00695C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">49&deg;</div>
+      <div class="release-title-block">
+        <h2>Fox Sparrow</h2>
+        <div class="scientific">Passerella iliaca</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      rich melodious whistled song &mdash; the ballad, 5th consecutive Passerellidae (45&ndash;46&ndash;47&ndash;48&ndash;49), TIES Parulidae quintet AND Hirundinidae quintet for the longest same-family streak in the engine, THREE families at five-consecutive, five genera in five degrees, the fox in the sparrow &mdash; name resonance with Tibsfox, the largest sparrow in the engine, four potential species in one, double-scratch foraging connects to Spotted Towhee (degree 46), E=3
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Western Toad</strong> (<em>Anaxyrus boreas</em>) at degree 49. Because the SPS Part B engine is birds-and-mammals only, Fox Sparrow replaces it. The substitution preserves the original&rsquo;s <strong>E=3 energy level</strong> and <strong>dense thicket habitat</strong>. This is the <strong>fifth consecutive amphibian replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49) &mdash; the engine continues deep into the amphibian belt of the original CSV.</p>
+        </div>
+
+        <!-- Fox-Tibsfox Card -->
+        <div class="fox-card">
+          <h3>The Fox in the Sparrow</h3>
+          <p>The common name &ldquo;Fox Sparrow&rdquo; refers to the rufous, fox-colored plumage of the Red subspecies group &mdash; the same warm foxy coloring that gives the <strong>Tibsfox</strong> brand its name. The &ldquo;fox&rdquo; in the sparrow is the same fox that appears throughout this project: the fox of the Pacific Northwest, the fox whose colors run through forest and field alike. A structural coincidence surfaced by the CSV substitution process &mdash; unplanned but resonant. <em>Passerella iliaca</em> = &ldquo;the little sparrow of the foxy flanks.&rdquo;</p>
+        </div>
+
+        <!-- Ballad Element Card -->
+        <div class="ballad-card">
+          <h3>The 50th Acoustic Element: The Ballad</h3>
+          <p>The Fox Sparrow sings what David Sibley calls <strong>&ldquo;the richest and most melodious of all sparrow songs&rdquo;</strong> &mdash; a sequence of 8&ndash;12 clear, rich whistled notes, 2&ndash;3 seconds, 2&ndash;6 kHz. Named &ldquo;the ballad&rdquo; because this is a complete, self-contained melodious statement: unhurried, warm, beautiful simply because the voice is rich. <strong>The 50th acoustic element and the quintet&rsquo;s closing statement.</strong></p>
+          <p>After the preamble&rsquo;s structural complexity (45), the rasp&rsquo;s textural intensity (46), the snowbird&rsquo;s elemental reduction (47), the dialect&rsquo;s cultural transmission (48), and the ballad&rsquo;s melodious completeness (49) &mdash; the Passerellidae quintet has traversed <strong>five fundamentally different organizing principles for birdsong</strong>.</p>
+        </div>
+
+        <!-- Family Streak Card -->
+        <div class="streak-card">
+          <h3>FIVE Consecutive Passerellidae &mdash; Degrees 45&ndash;49</h3>
+          <p><strong>Song Sparrow (45) + Spotted Towhee (46) + Dark-eyed Junco (47) + White-crowned Sparrow (48) + Fox Sparrow (49)</strong> &mdash; five consecutive entries from the same family. Five genera (<em>Melospiza</em>, <em>Pipilo</em>, <em>Junco</em>, <em>Zonotrichia</em>, <em>Passerella</em>). Five song strategies (complex, textural, simple, dialectal, melodious). Five habitats (wetland edge, dense understory, forest floor, mountain meadow, dense thicket). <strong>TIES the Hirundinidae quintet (26&ndash;30) AND the Parulidae quintet (38&ndash;42)</strong> for the longest same-family streak in the engine. THREE families have now achieved five consecutive. No family has exceeded it.</p>
+        </div>
+
+        <!-- Taxonomy Debate Card -->
+        <div class="taxonomy-card">
+          <h3>One Species or Four? &mdash; The Great Taxonomic Debate</h3>
+          <p>The Fox Sparrow is divided into <strong>four subspecies groups</strong> &mdash; Red, Sooty, Slate-colored, Thick-billed &mdash; that look different, sound different, live in different places, and are genetically distinct. <strong>IOC and BirdLife</strong> treat them as four separate species. <strong>AOS and eBird</strong> keep them as one. A 2003 AOU proposal to split was <strong>rejected on a split vote</strong>. The PNW form is the <strong>Sooty Fox Sparrow</strong> (<em>P. i. unalaschcensis</em> group) &mdash; the darkest form, dark sooty brown with minimal rufous. If the split is ever accepted, it would become its own species: <em>Passerella unalaschcensis</em>.</p>
+        </div>
+
+        <!-- Double-Scratch Card -->
+        <div class="scratch-card">
+          <h3>The Double-Scratch &mdash; Towhee-Style Foraging</h3>
+          <p>Fox Sparrows forage using a vigorous <strong>double-scratch</strong> &mdash; a forward hop followed by an immediate backward hop while raking both feet through leaf litter. The same technique used by the <strong>Spotted Towhee</strong> (degree 46), but MORE vigorous: the heavier Fox Sparrow generates enough force to be heard from several meters away. Two double-scratchers bookend the quintet&rsquo;s middle &mdash; Spotted Towhee at degree 46, Fox Sparrow at degree 49.</p>
+        </div>
+
+        <!-- Energy Card -->
+        <div class="energy-card">
+          <h3>E=3 &mdash; Lower Registers Continue to Dominate</h3>
+          <p>E=3 at degree 49 continues the lower-register dominance. E=2 + E=3 together now hold <strong>23 degrees (46.0%)</strong>, widening the gap over E=4&rsquo;s 21 degrees (42.0%). The Passerellidae quintet&rsquo;s five entries at E=2&ndash;3 have definitively shifted the engine&rsquo;s dynamic center downward. Quintet energy pattern: <strong>2, 3, 3, 2, 3</strong>.</p>
+        </div>
+
+        <h2>The Little Sparrow of the Foxy Flanks</h2>
+        <p><em>Passerella iliaca</em> &mdash; from Latin <em>passer</em> (&ldquo;sparrow&rdquo;) + diminutive <em>-ella</em> (&ldquo;little&rdquo;) + <em>ilia</em> (&ldquo;flanks&rdquo;) + <em>-ica</em>. &ldquo;The little sparrow of the flanks&rdquo; &mdash; named for its anatomical feature: the rufous-brown streaking on the bird&rsquo;s sides. The genus <em>Passerella</em> is <strong>monotypic</strong> &mdash; the Fox Sparrow is its ONLY member. Every other Passerellidae quintet genus has multiple species; <em>Passerella</em> stands alone.</p>
+
+        <h3>The Quintet&rsquo;s Naming Arc</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Binomial</th><th>Translation</th><th>Philosophy</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>45</td><td>Song Sparrow</td><td><em>Melospiza melodia</em></td><td>&ldquo;Melody song-finch&rdquo;</td><td>Musical + Musical</td></tr>
+            <tr><td>46</td><td>Spotted Towhee</td><td><em>Pipilo maculatus</em></td><td>&ldquo;The spotted chirper&rdquo;</td><td>Acoustic + Visual</td></tr>
+            <tr><td>47</td><td>Dark-eyed Junco</td><td><em>Junco hyemalis</em></td><td>&ldquo;The winter rush-bird&rdquo;</td><td>Ecological + Temporal</td></tr>
+            <tr><td>48</td><td>White-crowned Sparrow</td><td><em>Zonotrichia leucophrys</em></td><td>&ldquo;The white-browed banded-hair bird&rdquo;</td><td>Visual + Visual</td></tr>
+            <tr><td><strong>49</strong></td><td><strong>Fox Sparrow</strong></td><td><strong><em>Passerella iliaca</em></strong></td><td><strong>&ldquo;The little sparrow of the flanks&rdquo;</strong></td><td><strong>Anatomical + Diminutive</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Five naming philosophies across the quintet. Begins with pure sound (&ldquo;melody song-finch&rdquo;), ends with pure anatomy (&ldquo;little sparrow of the flanks&rdquo;). The names progressively abandon acoustic content.</p>
+
+        <h2>The Sound: Rich Whistles from the Thicket</h2>
+        <p><strong>Song:</strong> 2&ndash;3 seconds, 2&ndash;6 kHz. A sequence of 8&ndash;12 rich, clear, whistled notes delivered at a slow, measured tempo. Widely considered the finest song of any North American sparrow. The Sooty form (PNW) sings 3&ndash;4 song types per individual, more types than eastern Red Fox Sparrows (1&ndash;2 types) but with less tonal purity &mdash; more burry, less sweet.</p>
+        <p><strong>Call note:</strong> A sharp &ldquo;tsik&rdquo; or smacking &ldquo;tchk&rdquo; &mdash; loud, penetrating from inside dense cover. The call that alerts PNW birders to a Fox Sparrow&rsquo;s presence in the brush.</p>
+        <p><strong>Double-scratch sound:</strong> A loud rustling in leaf litter &mdash; audible from several meters. Often the first sign of a Fox Sparrow in winter thickets.</p>
+
+        <h3>The Passerellidae Song Quintet</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Feature</th><th>Song Sparrow (45)</th><th>Spotted Towhee (46)</th><th>Dark-eyed Junco (47)</th><th>White-crowned Sparrow (48)</th><th>Fox Sparrow (49)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Acoustic element</td><td>The Preamble</td><td>The Rasp</td><td>The Snowbird</td><td>The Dialect</td><td><strong>The Ballad</strong></td></tr>
+            <tr><td>Song structure</td><td>Multi-part (complex)</td><td>1&ndash;2 part (textured)</td><td>1 part (simple trill)</td><td>4&ndash;5 part (structured)</td><td><strong>8&ndash;12 notes (melodious)</strong></td></tr>
+            <tr><td>Duration</td><td>2&ndash;4 seconds</td><td>~1.5 seconds</td><td>1&ndash;2 seconds</td><td>2&ndash;3 seconds</td><td><strong>2&ndash;3 seconds</strong></td></tr>
+            <tr><td>Organizing principle</td><td>Individual improvisation</td><td>Textural concentration</td><td>Elemental reduction</td><td>Cultural transmission</td><td><strong>Melodious completeness</strong></td></tr>
+            <tr><td>Energy</td><td>E=2</td><td>E=3</td><td>E=3</td><td>E=2</td><td><strong>E=3</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Five organizing principles in five degrees: improvisation, concentration, reduction, transmission, completeness. The Passerellidae quintet is a complete curriculum in how birds organize sound.</p>
+
+        <h2>Four Subspecies Groups</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Group</th><th>Range</th><th>Plumage</th><th>Song Types</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Sooty (<em>unalaschcensis</em>)</strong></td><td><strong>Pacific coast, Aleutians to NW WA</strong></td><td><strong>Dark sooty brown</strong></td><td><strong>3&ndash;4 per male</strong></td></tr>
+            <tr><td>Red (<em>iliaca</em>)</td><td>Eastern boreal, Alaska</td><td>Bright rufous, fox-red</td><td>1&ndash;2 per male</td></tr>
+            <tr><td>Slate-colored (<em>schistacea</em>)</td><td>Interior western mountains</td><td>Gray head, rusty wings</td><td>Intermediate</td></tr>
+            <tr><td>Thick-billed (<em>megarhyncha</em>)</td><td>California mountains</td><td>Gray head, olive back</td><td>Intermediate</td></tr>
+          </tbody>
+        </table>
+        <p>The PNW form, the <strong>Sooty Fox Sparrow</strong>, is the darkest of the four groups &mdash; the &ldquo;fox&rdquo; coloring barely visible. IOC/BirdLife split these into four species; AOS/eBird keep them as one. The most taxonomically debated sparrow complex in North America.</p>
+
+        <h2>Three Family Quintets</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Genera</th><th>Energy</th><th>Stratum</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Hirundinidae (Swallows)</td><td>26&ndash;30</td><td>5</td><td>All E=4</td><td>Air</td></tr>
+            <tr><td>Parulidae (Warblers)</td><td>38&ndash;42</td><td>4</td><td>E=3&ndash;4</td><td>Canopy</td></tr>
+            <tr><td><strong>Passerellidae (Sparrows)</strong></td><td><strong>45&ndash;49</strong></td><td><strong>5</strong></td><td><strong>E=2&ndash;3</strong></td><td><strong>Ground</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Three quintets, three strata: air (swallows), canopy (warblers), ground (sparrows). Three energy bands. Three complete surveys of a single family. The engine&rsquo;s family streaks map the vertical structure of the PNW forest.</p>
+
+        <h2>Family Tracker After Degree 49</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td><strong>Passerellidae</strong></td><td><strong>45, 46, 47, 48, 49</strong></td><td><strong>5 (FIVE-DEGREE STREAK)</strong></td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Paridae</td><td>3, 9</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+          </tbody>
+        </table>
+        <p>Passerellidae rises to 5 members, tying Hirundinidae, Fringillidae, and Turdidae for second place behind Parulidae (10). Five-degree streak TIES the engine record. Twelve consecutive Passeriformes (38&ndash;49). Non-passerine needed urgently.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon ballad">B</div>
+            <div class="theory-content">
+              <h4>The Ballad <span class="theory-level foundational">foundational</span></h4>
+              <p>The 50th acoustic element. A rich, melodious, complete whistled statement. The quintet&rsquo;s closing form: after complexity (preamble), texture (rasp), simplicity (snowbird), and culture (dialect), the ballad delivers pure melodious completeness. Five principles in five degrees.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon fox">F</div>
+            <div class="theory-content">
+              <h4>The Fox-Tibsfox Resonance <span class="theory-level foundational">foundational</span></h4>
+              <p>The &ldquo;fox&rdquo; in Fox Sparrow refers to rufous, fox-colored plumage &mdash; the same warm foxy coloring that grounds the Tibsfox brand. <em>Passerella iliaca</em> = &ldquo;the little sparrow of the foxy flanks.&rdquo; A name connection surfaced by the CSV substitution, not engineered but resonant.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon streak">5</div>
+            <div class="theory-content">
+              <h4>Passerellidae Five-Degree Streak <span class="theory-level foundational">foundational</span></h4>
+              <p>Five consecutive Passerellidae (45&ndash;49). Five genera, five habitats, five song strategies. TIES the Hirundinidae quintet (26&ndash;30) AND the Parulidae quintet (38&ndash;42). Three families at the five-consecutive mark. The engine&rsquo;s most genus-diverse family streak.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon taxonomy">T</div>
+            <div class="theory-content">
+              <h4>The Four-Way Split Debate <span class="theory-level foundational">foundational</span></h4>
+              <p>Fox Sparrow may be one species or four. IOC/BirdLife split; AOS/eBird lump. Zink &amp; Weckstein (2003) confirmed four genetically distinct lineages. AOU 2003 split proposal rejected on a split vote. The engine&rsquo;s most taxonomically volatile species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon energy">E</div>
+            <div class="theory-content">
+              <h4>E=3 &mdash; Lower Registers Widen Lead <span class="theory-level foundational">foundational</span></h4>
+              <p>E=3 at degree 49. E=2 + E=3 = 23 degrees (46.0%) vs. E=4 = 21 degrees (42.0%). The gap widens. Quintet energy pattern: 2, 3, 3, 2, 3 &mdash; center of gravity at 2.6, the lowest of any family quintet.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon scratch">S</div>
+            <div class="theory-content">
+              <h4>The Double-Scratch &mdash; Towhee Connection <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Fox Sparrow and Spotted Towhee (degree 46) both use the double-scratch foraging technique. Two double-scratchers in one quintet, bookending degrees 46 and 49. A shared Passerellidae behavior linking the second and fifth members of the streak.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon habitat">H</div>
+            <div class="theory-content">
+              <h4>Dense Thicket / Forest Understory <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Fifth Passerellidae habitat band: dense thicket and heavy forest understory. The quintet&rsquo;s habitat transect now extends from open water (45) through forest (46&ndash;47) to mountain (48) to the densest brush (49). From pond to impenetrable thicket.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-048: White-crowned Sparrow</strong>
+            <p>PASSERELLIDAE CONSECUTIVE (48&ndash;49). The dialect meets the ballad. Cultural transmission followed by melodious completeness. Both are learned singers: the White-crowned Sparrow learns one dialect strictly; the Fox Sparrow learns 3&ndash;4 song types. Marler&rsquo;s bird (48) meets the fox&rsquo;s bird (49).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-046: Spotted Towhee</strong>
+            <p>DOUBLE-SCRATCH CONNECTION. Both use the same backward-hopping, leaf-raking foraging technique. The Fox Sparrow scratches MORE vigorously than the towhee &mdash; the larger bird generates more force. Two double-scratchers bookend the quintet&rsquo;s middle (degrees 46 and 49).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-045: Song Sparrow</strong>
+            <p>PASSERELLIDAE QUINTET ANCHOR. The preamble (complex improvisation) meets the ballad (melodious completeness). Both sing rich songs, but the Song Sparrow elaborates freely while the Fox Sparrow delivers a measured, complete statement. Similar population sizes (~34M vs ~35M).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-047: Dark-eyed Junco</strong>
+            <p>PASSERELLIDAE QUINTET SIZE CONTRAST. The smallest member (19 g) vs. the largest (~32 g). The snowbird&rsquo;s elemental reduction vs. the ballad&rsquo;s melodious richness. Extremes of the quintet&rsquo;s size and complexity gradients.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-034: Red Crossbill</strong>
+            <p>TAXONOMIC DEBATE PARALLEL. Red Crossbill has 10+ call types that may represent separate species. Fox Sparrow has 4 subspecies groups that some authorities already split. Two species with deep intraspecific variation and unresolved taxonomy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-007: Hermit Thrush</strong>
+            <p>RICH MELODIOUS SONG PARALLEL. The Hermit Thrush&rsquo;s harmonic spiral (degree 7, E=2) is the other &ldquo;finest singer&rdquo; in the engine. Both are skulking ground-level birds that produce songs of extraordinary melodic beauty from dense cover. Two candidates for &ldquo;most beautiful song in the PNW forest.&rdquo;</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Fox Sparrow documented across Washington state. Sooty form breeds in limited coastal/island sites in WA; abundant winter resident in western WA lowlands. Common in backyard thickets and brushy parks throughout the Puget Sound region October&ndash;March.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Dense forest understory ecology. Salal, blackberry, and sword fern as key cover species. Leaf-litter invertebrate community as Fox Sparrow food web. Successional dynamics &mdash; Fox Sparrow thrives in second-growth and disturbed habitats with heavy shrub regeneration.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Fox Sparrow (<em>Passerella iliaca</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Fox Sparrow. Cornell Lab of Ornithology.</li>
+          <li>Audubon &mdash; Fox Sparrow Field Guide.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Fox Sparrow.</li>
+          <li>Wikipedia &mdash; &ldquo;Fox sparrow.&rdquo;</li>
+          <li>Animalia.bio &mdash; Fox Sparrow.</li>
+          <li>Animal Diversity Web &mdash; Passerella iliaca.</li>
+          <li>Sibley, D. A. &mdash; Fox Sparrow subspecies identification. sibleyguides.com.</li>
+          <li>Zink, R. M. and Weckstein, J. D. (2003). &ldquo;Recent Evolutionary History of the Fox Sparrows (Genus: Passerella).&rdquo; <em>The Auk</em> 120(2): 522&ndash;527.</li>
+          <li>Cornell Lab of Ornithology &mdash; Fox Sparrow Sounds.</li>
+          <li>Pandolfino, E. R. et al. (2023). &ldquo;Fox Sparrow Taxonomy.&rdquo; <em>Western Birds</em> 54(2): 117&ndash;132.</li>
+          <li>eBird &mdash; Fox Sparrow (<em>Passerella iliaca</em>).</li>
+          <li>iNaturalist &mdash; Sooty Fox Sparrow subspecies.</li>
+          <li>AOU Classification Committee &mdash; 2003 Fox Sparrow species split proposal.</li>
+          <li>Eastside Audubon Society &mdash; Fox Sparrow species profile.</li>
+          <li>Montana Field Guide &mdash; Fox Sparrow.</li>
+          <li>Partners in Flight &mdash; Fox Sparrow population estimates.</li>
+          <li>BirdLife International &mdash; Passerella iliaca factsheet.</li>
+          <li>NatureServe &mdash; Passerella iliaca species record.</li>
+          <li>Birding Magazine (ABA) &mdash; Fox Sparrow identification across subspecies groups (2012).</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">49&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Ballad</div>
+          <div class="stat-detail">#50 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">E=2+E=3 = 23 (46.0%) > E=4 = 21</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Passerellidae</div>
+          <div class="stat-detail">5th member &mdash; TIES engine record</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Passerella</em></div>
+          <div class="stat-detail">New genus &mdash; monotypic (only member)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Dense Thicket</div>
+          <div class="stat-detail">Forest understory / heavy brush</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Winter Visitor</div>
+          <div class="stat-detail">Oct&ndash;Mar in PNW lowlands</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">47 unique</div>
+          <div class="stat-detail">50 entries (0&ndash;49)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">19</div>
+          <div class="stat-detail">Passerellidae at 5 members (tied 2nd)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">12 consecutive Passeriformes (38&ndash;49)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~35 Million</div>
+          <div class="stat-detail">Stable (PIF); BBS ~stable overall</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">26&ndash;49 g</div>
+          <div class="stat-detail">Largest sparrow in the engine (~32 g avg)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Subspecies Groups</div>
+          <div class="stat-value">4</div>
+          <div class="stat-detail">Potential 4-way species split</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Song Types</div>
+          <div class="stat-value">3&ndash;4</div>
+          <div class="stat-detail">Per male (Sooty/PNW form)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Name Resonance</div>
+          <div class="stat-value">Fox = Fox</div>
+          <div class="stat-detail">Fox Sparrow &harr; Tibsfox</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 049</p>
+  </footer>
+</body>
+</html>

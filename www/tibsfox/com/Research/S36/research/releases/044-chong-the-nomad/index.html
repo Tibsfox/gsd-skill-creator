@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 44&deg; &mdash; Chong the Nomad &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: white;
+      border: 1px solid #EF6C00;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00838F;
+      color: #E0F7FA;
+      border: 1px solid #0097A7;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .digital-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00838F;
+      color: #E0F7FA;
+      border: 1px solid #0097A7;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #00838F;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #E0F7FA;
+      font-style: italic;
+      color: #006064;
+    }
+
+    .first-banner {
+      background: linear-gradient(135deg, #00695C, #00838F);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .first-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .first-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>044 &mdash; Chong the Nomad</span>
+    </nav>
+
+    <!-- First Electronic-Primary Banner -->
+    <div class="first-banner">
+      <h3>First Electronic-Primary Genre &mdash; The Engine Enters the Digital Age</h3>
+      <p>
+        Electronic/R&amp;B at degree 44&deg; is the engine&rsquo;s first electronic-primary genre stage
+        (Genre Stage 25). First self-released artist. First Asian-American artist. Tenth woman.
+        <strong>Alda Agustiano</strong> &mdash; Indonesian-American producer, DJ, and vocalist.
+        Cornish College of the Arts (same institution as Ann Wilson, fifty years later).
+        Co-producer on Marvel&rsquo;s <em>Shang-Chi</em> soundtrack. Gamelan meets the DAW.
+        The bedroom as studio. The laptop as instrument.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">44&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Chong the Nomad</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Electronic/R&amp;B</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="first-badge">First Electronic-Primary</span>
+          <span class="first-badge">First Self-Released</span>
+          <span class="digital-badge">First Asian-American</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Laptop as Instrument</h2>
+          <p>
+            Chong the Nomad is <strong>Alda Agustiano</strong> &mdash; an Indonesian-American
+            producer, DJ, and vocalist who grew up in the <strong>Renton/Kent area</strong> of
+            the Seattle metro, the daughter of Indonesian immigrants who led a worship group
+            at their church and ran the <strong>Bumbu Truck</strong> (Indonesian street food).
+            She began making beats at age <strong>14</strong> on <strong>FruityLoops</strong>,
+            studied music composition and <strong>gamelan ensemble</strong> at
+            <strong>Cornish College of the Arts</strong>, and built a career entirely outside
+            the traditional label system &mdash; self-releasing music on Bandcamp while
+            licensing to Apple, Nike, Singapore Airlines, and Marvel Studios.
+          </p>
+          <p>
+            Her debut EP <strong><em>Love Memo</em></strong> (Valentine&rsquo;s Day 2018)
+            earned &ldquo;Top Album&rdquo; recognition from <strong>The Seattle Times,
+            Seattle Weekly, The Stranger, and KEXP</strong>. She opened for
+            <strong>ODESZA</strong> and <strong>Death Cab for Cutie</strong>, co-produced
+            &ldquo;Lazy Susan&rdquo; on the <strong>Marvel <em>Shang-Chi</em> soundtrack</strong>
+            (featuring 21 Savage, Rich Brian, Warren Hue), and released her debut LP
+            <strong><em>Do We Make of This?</em></strong> in June 2024 &mdash; called
+            &ldquo;one of the greatest local records of the year&rdquo; by WASH Magazine.
+          </p>
+          <blockquote>
+            &ldquo;This is awesome! Like there&rsquo;s not a thing about this I don&rsquo;t like.&rdquo;
+            &mdash; Anthony Fantano (The Needle Drop)
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Love Memo</h4>
+              <div class="disco-years">2018 &middot; Self-released (EP)</div>
+              <p>
+                Debut EP. Released Valentine&rsquo;s Day. 7 tracks. &ldquo;Top Album&rdquo;
+                from Seattle Times, Stranger, KEXP. Split vinyl via Crane City Music
+                (750 numbered copies).
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Pompelo</h4>
+              <div class="disco-years">2018 &middot; Single</div>
+              <p>
+                The artistic breakthrough. Equal parts club hit and Merrie Melodies
+                cartoon. The moment the sound clicked after seven years of learning.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Take Two (ft. Hollis)</h4>
+              <div class="disco-years">2020 &middot; Single</div>
+              <p>
+                Collaboration with Grammy-nominated Hollis Wong-Wear. Produced with
+                Rog&eacute;t Chahayed. KEXP Song of the Day.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Lazy Susan</h4>
+              <div class="disco-years">2021 &middot; 88rising / Interscope</div>
+              <p>
+                Co-production on Marvel&rsquo;s <em>Shang-Chi</em> lead single.
+                Ft. 21 Savage, Rich Brian, Warren Hue, Masiwei. Beat switch section.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Wrote A Lil Song</h4>
+              <div class="disco-years">2022 &middot; Hardly Art (Sub Pop)</div>
+              <p>
+                Collaboration with Maiah Manser. Released on Sub Pop&rsquo;s
+                subsidiary label. Ethereal electronic textures.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Do We Make of This?</h4>
+              <div class="disco-years">2024 &middot; Self-released (LP)</div>
+              <p>
+                <strong>Debut album.</strong> 11 tracks, 33 min. Dense, structurally
+                complex. Compared to Radiohead&rsquo;s <em>Kid A</em>.
+                &ldquo;One of the greatest local records of the year.&rdquo;
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Gamelan Bridge</h2>
+          <p>
+            Agustiano studied <strong>gamelan ensemble</strong> at Cornish &mdash; the
+            traditional Indonesian bronze percussion orchestra that operates outside Western
+            musical theory. Gamelan uses non-tempered tuning systems (<strong>slendro</strong>
+            and <strong>pelog</strong>), cyclical rhythmic structures (<strong>gongan</strong>),
+            and interlocking melodic patterns (<strong>kotekan</strong>) where composite melodies
+            emerge from the combination of individual parts. She intentionally translates these
+            structures into her electronic productions. Indonesian friends report recognizing
+            gamelan textures in her beats.
+          </p>
+          <p>
+            This is the engine&rsquo;s <strong>first non-Western musical tradition</strong>
+            embedded in the production DNA of an artist. Forty-four degrees of jazz, soul, blues,
+            gospel, and rock &mdash; all Western traditions &mdash; and now gamelan enters
+            through an Indonesian-American producer who studied it at Cornish and carries it
+            into FruityLoops.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Grain</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                45th acoustic element. The sonic phenomenon produced when sound is
+                decomposed into microscopic grains, individually processed, and
+                reassembled into a texture that shimmers between recognition and
+                abstraction. The chopped vocal samples, stuttering noise fragments,
+                and layered synthesizer textures of Chong the Nomad&rsquo;s
+                productions are grain events. First digital-production-physics
+                acoustic element.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Bedroom Architect</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                45th artist-city pattern. The artist who builds an entire sonic world
+                from a bedroom or home studio, without institutional scaffolding.
+                The city provides cultural context (KEXP, Capitol Hill, Crane City);
+                the creative work happens in private with a laptop and headphones.
+                First technology-mediated city pattern.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Chopped Bend</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                44th blue note deployment. The blue note captured in a vocal sample,
+                sliced into fragments, pitch-shifted, and embedded in an electronic
+                beat so that the emotional content of the blues bend persists even
+                though the original vocal is unrecognizable. First digitally mediated
+                blue note.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 25: Electronic/R&amp;B</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                First electronic-primary genre stage. The engine enters the digital
+                production age. The R&amp;B qualifier maps the emotional substrate
+                &mdash; love and loss conveyed through beats, not ballads. FruityLoops
+                as primary instrument.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=5 Double Digits</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                10th E=5 deployment &mdash; first energy level to reach double digits
+                in raw count behind E=2 (13) and E=4 (12). Distribution:
+                2:13:7:12:10:2. Marvel soundtrack, Apple/Nike sync, KEXP acclaim,
+                ODESZA and Death Cab support slots.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">43&deg;</span> Ann Wilson &mdash; <strong>Cornish College bridge.</strong> Both attended Cornish, ~50 years apart. Radiance (analog) to grain (digital). Rock/Soul to Electronic/R&amp;B &mdash; the engine&rsquo;s largest single-degree genre leap. Consecutive women.</li>
+            <li><span class="ref-degree">42&deg;</span> Erica Campbell &mdash; <strong>Three consecutive women (42-43-44).</strong> Both E=5. Church vocal training (Campbell) and gamelan ensemble (Agustiano) &mdash; parallel non-Western-pop musical educations absorbed into American music.</li>
+            <li><span class="ref-degree">41&deg;</span> Shawn Smith &mdash; <strong>Scene native vs bedroom architect.</strong> Both Capitol Hill. Smith played live instruments in rooms; Agustiano produces electronically in headphones. Opposite paradigms, same neighborhood.</li>
+            <li><span class="ref-degree">17&deg;</span> Reggie Watts &mdash; <strong>The uncategorizable.</strong> Watts blends beatboxing, loops, comedy; Agustiano blends electronic, R&amp;B, hip-hop, gamelan. Both Seattle. Both genre-defiant.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>Producer bookend.</strong> Engine begins with a producer (Jones, analog studio) and arrives at a producer (Agustiano, laptop). The tools changed; the role persists. Mercury Records to Bandcamp.</li>
+            <li><span class="ref-degree">36&deg;</span> Jimi Hendrix &mdash; <strong>Instrument transformation.</strong> Hendrix redefined the electric guitar; Agustiano treats the DAW as an instrument. Both from the Seattle metro. Both created sounds that didn&rsquo;t exist before them.</li>
+            <li><span class="ref-degree">22&deg;</span> Foxy Apollo &mdash; <strong>Eastside/suburban origin.</strong> Both raised outside Seattle proper (Bellevue, Renton/Kent) and entered the city&rsquo;s music scene. Suburban geography feeding the urban core.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Real Name</span>
+            <span class="stat-value">Alda Agustiano</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">c. 1996</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Renton/Kent, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Heritage</span>
+            <span class="stat-value">Indonesian-American</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Education</span>
+            <span class="stat-value">Cornish College</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Instruments</span>
+            <span class="stat-value">6 (piano, guitar, uke&hellip;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">DAW</span>
+            <span class="stat-value">FL Studio</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">44 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Electronic/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">25</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#45 Bedroom Architect</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#45 Grain</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#44 Chopped Bend</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Key Releases</h4>
+          <div class="stat-row">
+            <span class="stat-label">2018</span>
+            <span class="stat-value">Love Memo (EP)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2021</span>
+            <span class="stat-value">Lazy Susan (Shang-Chi)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2022</span>
+            <span class="stat-value">Wrote A Lil Song</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2024</span>
+            <span class="stat-value">Do We Make of This?</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Live &amp; Sync</h4>
+          <div class="stat-row">
+            <span class="stat-label">ODESZA</span>
+            <span class="stat-value">Opening act</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Death Cab</span>
+            <span class="stat-value">Opening act</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The 1975</span>
+            <span class="stat-value">Shared stage</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Apple</span>
+            <span class="stat-value">Sync placement</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Nike</span>
+            <span class="stat-value">Sync placement</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Singapore Air</span>
+            <span class="stat-value">Sync placement</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Collaborators</h4>
+          <div class="stat-row">
+            <span class="stat-label">Rog&eacute;t Chahayed</span>
+            <span class="stat-value">Mentor / producer</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Hollis Wong-Wear</span>
+            <span class="stat-value">Take Two (2020)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Stas THEE Boss</span>
+            <span class="stat-value">Split LP / scene</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">21 Savage</span>
+            <span class="stat-value">Lazy Susan</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Rich Brian</span>
+            <span class="stat-value">Lazy Susan</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Production Tools</h4>
+          <div class="stat-row">
+            <span class="stat-label">DAW</span>
+            <span class="stat-value">FL Studio</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sampler</span>
+            <span class="stat-value">Roland SP-404A</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Lead Sound</span>
+            <span class="stat-value">Sawtooth synth</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Bass</span>
+            <span class="stat-value">808 elements</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Capture</span>
+            <span class="stat-value">iPhone voice memo</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Influences</h4>
+          <div class="stat-row">
+            <span class="stat-label">North Star</span>
+            <span class="stat-value">Sophie Xeon</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sampling</span>
+            <span class="stat-value">J Dilla</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Electronic</span>
+            <span class="stat-value">Daft Punk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Traditional</span>
+            <span class="stat-value">Javanese Gamelan</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 44</span>
+            <span class="stat-value">2:13:7:12:10:2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5 Mode</span>
+            <span class="stat-value">10th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Women</span>
+            <span class="stat-value">10 / 45 (~22.2%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 44 of 360 &mdash; Chong the Nomad &mdash;
+        v1.49.180 &mdash; Electronic/R&amp;B &mdash; Self-Released &mdash; Seattle &mdash;
+        First Electronic-Primary &mdash; First Self-Released &mdash; First Asian-American &mdash;
+        Tenth Woman
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to the
+        Seattle metropolitan area, on the ancestral territory of the Duwamish Tribal Organization
+        (duwamishtribe.org), the Muckleshoot Indian Tribe, and related Coast Salish and
+        Southern Lushootseed-speaking peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
