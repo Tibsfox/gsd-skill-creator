@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semiconductor Fabrication — Requirements, Funding, and the
+    <title>Semiconductor Fabrication -- Requirements, Funding, and the
 Gas Supply Layer — HEL Research</title>
     <style>
         :root {
@@ -57,220 +57,572 @@ Gas Supply Layer — HEL Research</title>
     </div>
     <h1
     id="semiconductor-fabrication-requirements-funding-and-the-gas-supply-layer">Semiconductor
-    Fabrication — Requirements, Funding, and the Gas Supply Layer</h1>
-    <h2 id="what-a-fab-needs">What a Fab Needs</h2>
-    <p>A modern leading-edge semiconductor fabrication facility costs
-    approximately $10–$20 billion and requires extreme precision in
-    every aspect of its design and operation.</p>
+    Fabrication – Requirements, Funding, and the Gas Supply Layer</h1>
+    <h2 id="what-a-fab-requires">What a Fab Requires</h2>
+    <p>A modern leading-edge semiconductor fabrication facility is among
+    the most complex and expensive structures ever built. Intel’s Fab 52
+    and Fab 62 in Chandler, Arizona – announced in 2021 with a $20
+    billion budget that has since grown – represent the current scale of
+    investment. TSMC’s first Arizona fab (Fab 21, Phase 1) carries a
+    reported $12 billion price tag for a single facility producing
+    4nm-class chips. Samsung’s Taylor, Texas fab is budgeted at $17
+    billion. These are not outliers; they are the new baseline.</p>
     <h3 id="infrastructure-requirements">Infrastructure
     Requirements</h3>
+    <p>A leading-edge fab requires simultaneous mastery of at least six
+    infrastructure domains, any one of which can delay or halt
+    production if compromised.</p>
+    <p><strong>Water.</strong> A large fab consumes 2-4 million gallons
+    of ultrapure water (UPW) per day. UPW must meet ASTM D5127 Type
+    E-1.2 specifications: resistivity of 18.2 megohm-cm, total organic
+    carbon below 1 ppb, dissolved oxygen below 1 ppb, particle count
+    below 1 per liter at 0.05 microns. The water treatment plant that
+    produces UPW is itself a major capital investment, typically
+    $100-$200 million. Intel’s Hillsboro operations draw from the Joint
+    Water Commission, which sources from the Tualatin River watershed.
+    Water supply reliability is a site-selection criterion that shapes
+    the geography of semiconductor manufacturing.</p>
+    <p><strong>Power.</strong> A leading-edge fab consumes 100-150 MW of
+    continuous electrical power – equivalent to a small city. TSMC’s
+    Arizona fab is expected to draw approximately 130 MW at full
+    production. This power must be uninterrupted; even momentary voltage
+    sags can destroy entire wafer lots worth millions of dollars. Fabs
+    require dedicated substation connections with redundant feeds. The
+    PNW’s BPA-backed grid, fed by the Columbia River hydroelectric
+    system, provides both the reliability and the cost structure that
+    fabs require (see Document 07 for electricity rate comparisons).</p>
+    <p><strong>Gases.</strong> This is where helium enters the picture,
+    but helium is one of dozens of gases a fab requires. The full gas
+    inventory of a modern fab includes:</p>
     <table>
     <colgroup>
-    <col style="width: 61%" />
-    <col style="width: 38%" />
+    <col style="width: 21%" />
+    <col style="width: 34%" />
+    <col style="width: 43%" />
     </colgroup>
     <thead>
     <tr>
-    <th>Requirement</th>
-    <th>Detail</th>
+    <th>Gas</th>
+    <th>Purity</th>
+    <th>Function</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>Water</td>
-    <td>Massive volumes for ultrapure water (UPW) systems — cooling,
-    cleaning, chemical dilution</td>
+    <td>Helium (He)</td>
+    <td>99.999%-99.9999%</td>
+    <td>Wafer cooling, leak detection, carrier gas, EUV lithography
+    purge</td>
     </tr>
     <tr>
-    <td>Power</td>
-    <td>Reliable, high-capacity grid connection; fabs are enormous
-    electricity consumers</td>
+    <td>Nitrogen (N2)</td>
+    <td>99.9999%</td>
+    <td>Inert blanketing, purging, wafer transfer</td>
     </tr>
     <tr>
-    <td>Gases</td>
-    <td>Ultra-high purity He, H2, CO2, N2, Ar, and dozens of specialty
-    process gases</td>
+    <td>Argon (Ar)</td>
+    <td>99.9999%</td>
+    <td>Plasma etch sputtering gas</td>
     </tr>
     <tr>
-    <td>Vibration isolation</td>
-    <td>Sites must be away from airports, rail lines, and fault lines —
-    lithography operates at atomic scales</td>
+    <td>Hydrogen (H2)</td>
+    <td>99.9999%</td>
+    <td>Annealing, epitaxial growth</td>
     </tr>
     <tr>
-    <td>Cleanroom</td>
-    <td>ISO Class 1 cleanrooms with multi-level sub-fab for piping,
-    wiring, and chemical delivery</td>
+    <td>Oxygen (O2)</td>
+    <td>99.9999%</td>
+    <td>Thermal oxidation, plasma ashing</td>
     </tr>
     <tr>
-    <td>Tooling</td>
-    <td>Approximately 1,200 multimillion-dollar precision tools per
-    fab</td>
+    <td>Silane (SiH4)</td>
+    <td>Electronic grade</td>
+    <td>Chemical vapor deposition of silicon</td>
+    </tr>
+    <tr>
+    <td>Tungsten hexafluoride (WF6)</td>
+    <td>Electronic grade</td>
+    <td>Tungsten metal deposition</td>
+    </tr>
+    <tr>
+    <td>Boron trichloride (BCl3)</td>
+    <td>Electronic grade</td>
+    <td>Plasma etch of aluminum</td>
+    </tr>
+    <tr>
+    <td>Carbon tetrafluoride (CF4)</td>
+    <td>Electronic grade</td>
+    <td>Plasma etch of silicon dioxide</td>
+    </tr>
+    <tr>
+    <td>Chlorine (Cl2)</td>
+    <td>Electronic grade</td>
+    <td>Plasma etch of polysilicon</td>
     </tr>
     </tbody>
     </table>
+    <p>A major fab may use 30-50 different gases, each requiring
+    dedicated supply lines, storage, delivery systems, and abatement
+    (scrubbing of toxic exhaust). The gas infrastructure for a single
+    fab – piping, storage, valve manifolds, flow controllers, monitoring
+    systems – represents a $50-$100 million investment. Air Liquide’s
+    2024 announcement of a $60 million investment in Phoenix
+    specifically for gas supply infrastructure to semiconductor
+    customers illustrates the scale. That investment was for augmenting
+    supply to existing fabs, not building from scratch.</p>
+    <p><strong>Vibration isolation.</strong> EUV lithography at the 3nm
+    node operates at feature sizes of approximately 13.5nm half-pitch.
+    At this scale, vibrations from passing trucks, nearby construction,
+    or even foot traffic in adjacent rooms can blur patterns and destroy
+    yields. Fabs are built on massive concrete plinths with active
+    vibration isolation systems. Site selection eliminates proximity to
+    airports, rail marshaling yards, quarries, and major highways.
+    Intel’s Hillsboro campus was selected in part because the Tualatin
+    Valley’s agricultural character provided a naturally low-vibration
+    environment – an advantage that increasing urbanization now
+    threatens.</p>
+    <p><strong>Cleanroom.</strong> A leading-edge fab operates ISO Class
+    1 cleanrooms (fewer than 10 particles per cubic meter at 0.1
+    microns). For reference, the ambient air in a typical office
+    contains approximately 35 million particles per cubic meter at that
+    size. Maintaining ISO Class 1 requires constant positive-pressure
+    filtered airflow, personnel gowning protocols (bunny suits, gloves,
+    face masks), material airlocks, and multi-level sub-fab
+    infrastructure for routing pipes, cables, and chemical delivery
+    systems below the production floor. Cleanroom construction costs
+    $3,000-$5,000 per square foot.</p>
+    <p><strong>Tooling.</strong> A leading-edge fab contains
+    approximately 1,000-1,500 major process tools. An ASML Twinscan
+    NXE:3800E EUV lithography system costs approximately $380 million
+    per unit and weighs 180 tons. A fab may require 10-20 EUV scanners.
+    Applied Materials, Lam Research, Tokyo Electron, and KLA supply the
+    etch, deposition, and inspection tools that fill the remaining floor
+    space. Total tooling cost for a leading-edge fab runs $5-$8 billion
+    – roughly half the total project budget.</p>
     <h3 id="timeline">Timeline</h3>
-    <ul>
-    <li><strong>Design and construction:</strong> 3–5 years in the US
-    (38-month average vs. 20 months in Taiwan)</li>
-    <li><strong>Tooling and ramping:</strong> Additional 9–12 months to
-    install and qualify production equipment</li>
-    <li><strong>Gas infrastructure alone:</strong> Air Liquide recently
-    invested $60 million in Phoenix just for gas supply — and that’s for
-    an existing fab, not a new one</li>
-    </ul>
-    <h2 id="chips-and-science-act-active-as-of-march-2026">CHIPS and
-    Science Act (Active as of March 2026)</h2>
-    <p>The CHIPS Act represents the largest US government investment in
-    semiconductor manufacturing since the industry’s origin.</p>
+    <p>The time from groundbreaking to volume production for a US fab
+    averages 38-48 months – significantly longer than the 18-24 months
+    typical in Taiwan or South Korea. The differential reflects US
+    permitting timelines (NEPA reviews, state environmental assessments,
+    construction permits), labor availability (semiconductor-grade
+    cleanroom construction requires specialized crews), and supply chain
+    logistics for tool installation. Tooling and qualification add
+    another 9-12 months after construction completes. A fab announced
+    today will not produce revenue chips until 2029-2030.</p>
+    <p>This timeline matters for helium infrastructure planning. A
+    regional helium supply capability built now will be operational in
+    12-18 months (see Document 09 for deployment timelines) – well
+    before any new fab announced under the CHIPS Act reaches production.
+    Building helium infrastructure ahead of fab demand, rather than
+    after it, is the strategic play.</p>
+    <h2
+    id="chips-and-science-act-the-funding-landscape-active-as-of-march-2026">CHIPS
+    and Science Act – The Funding Landscape (Active as of March
+    2026)</h2>
+    <p>The CHIPS and Science Act of 2022 (P.L. 117-167) represents the
+    largest US government investment in semiconductor manufacturing
+    since the Defense Production Act of 1950. Its scale and scope are
+    frequently misunderstood. The Act is not a single grant program; it
+    is a multi-layered funding architecture.</p>
+    <h3 id="funding-streams">Funding Streams</h3>
     <table>
     <colgroup>
-    <col style="width: 48%" />
-    <col style="width: 25%" />
-    <col style="width: 25%" />
+    <col style="width: 16%" />
+    <col style="width: 16%" />
+    <col style="width: 22%" />
+    <col style="width: 43%" />
     </colgroup>
     <thead>
     <tr>
-    <th>Funding Stream</th>
+    <th>Stream</th>
     <th>Amount</th>
-    <th>Status</th>
+    <th>Mechanism</th>
+    <th>Status (March 2026)</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>Manufacturing grants</td>
-    <td>$33B+ allocated</td>
-    <td>Active — application cycles ongoing</td>
+    <td>Section 9902 Manufacturing Incentives</td>
+    <td>$39B</td>
+    <td>Grants + loans</td>
+    <td>Active – major awards to Intel ($8.5B), TSMC ($6.6B), Samsung
+    ($6.4B), Micron ($6.1B), GlobalFoundries ($1.5B) announced</td>
     </tr>
     <tr>
-    <td>Loans</td>
-    <td>$7B</td>
-    <td>Active</td>
+    <td>Section 9906 R&amp;D Programs</td>
+    <td>$11B</td>
+    <td>NIST programs</td>
+    <td>NAPMP (prototyping), NIMC (metrology) launched</td>
     </tr>
     <tr>
-    <td>R&amp;D and workforce</td>
-    <td>Additional billions</td>
-    <td>NSF programs running through 2027</td>
+    <td>Section 9903 Workforce</td>
+    <td>$500M+</td>
+    <td>NSF + DoL</td>
+    <td>Training programs active through 2027</td>
+    </tr>
+    <tr>
+    <td>CHIPS for America Fund (loans)</td>
+    <td>$7.5B</td>
+    <td>Direct lending</td>
+    <td>Active for qualifying projects</td>
     </tr>
     <tr>
     <td>Texas Semiconductor Innovation Fund</td>
-    <td>$948M appropriated</td>
-    <td>Active (since June 2025)</td>
+    <td>$948M</td>
+    <td>State appropriation</td>
+    <td>Active since June 2025</td>
+    </tr>
+    <tr>
+    <td>Oregon CHIPS Act (SB 4)</td>
+    <td>$190M</td>
+    <td>State incentives</td>
+    <td>Active, focused on workforce and site readiness</td>
     </tr>
     </tbody>
     </table>
-    <h3 id="critical-detail-gas-supply-is-explicitly-funded">Critical
-    Detail: Gas Supply Is Explicitly Funded</h3>
-    <p>The CHIPS Act includes specific funding for the “chemical and
-    gas” layers of the semiconductor stack. This means projects that
-    strengthen the supply of helium, hydrogen, nitrogen, and specialty
-    gases to US fabs are eligible for federal funding. The Act
-    recognizes that you cannot build chip independence without gas
-    independence.</p>
-    <h2 id="the-manufacturing-ecosystem">The Manufacturing
-    Ecosystem</h2>
-    <p>A fab cannot operate in isolation. It requires a surrounding
-    “cluster” of suppliers for:</p>
-    <ul>
-    <li><strong>Process chemicals:</strong> Acids, solvents,
-    photoresists, etchants</li>
-    <li><strong>Specialty gases:</strong> Ultra-high purity mixtures for
-    specific process steps</li>
-    <li><strong>Materials:</strong> Silicon wafers, photomasks, target
-    materials for deposition</li>
-    <li><strong>Equipment maintenance:</strong> Highly specialized
-    technicians for lithography, etch, and deposition tools</li>
-    <li><strong>Waste handling:</strong> Chemical waste treatment,
-    recycling, and disposal</li>
-    </ul>
-    <p>Companies like MGC Pure Chemicals America and Sunlit Chemical are
-    building new plants in Texas and Arizona to provide these materials
-    domestically. The cluster effect means that as fabs concentrate in a
-    region, the supporting supply chain follows.</p>
-    <h2 id="heliums-role-in-semiconductor-fabrication">Helium’s Role in
-    Semiconductor Fabrication</h2>
-    <p>Helium serves several critical functions in chip
-    manufacturing:</p>
+    <h3 id="the-gas-supply-provision-why-this-matters">The Gas Supply
+    Provision – Why This Matters</h3>
+    <p>Section 9902(a)(2)(B) of the CHIPS Act explicitly includes
+    “construction, expansion, or modernization of facilities and
+    equipment” for “the semiconductor supply chain” among eligible uses
+    of manufacturing incentive funds. The Commerce Department’s
+    implementing regulations (15 CFR Part 231, published February 2024)
+    further specify that “materials and gas supply” are within
+    scope.</p>
+    <p>This is not a theoretical eligibility argument. In its published
+    guidance for CHIPS funding applications, the Commerce Department
+    identifies “specialty chemicals and gases” as a priority area for
+    supply chain resilience investments. A CHIPS Act application for a
+    regional helium purification and distribution hub would be evaluated
+    under the supply chain resilience criteria, which include:</p>
     <ol type="1">
-    <li><strong>Wafer cooling:</strong> Helium’s thermal conductivity
-    (the highest of any gas) makes it ideal for backside wafer cooling
-    during plasma etch and ion implantation</li>
-    <li><strong>Leak detection:</strong> Helium’s small atomic size
-    allows it to penetrate the tiniest leaks in vacuum systems —
-    essential for maintaining process integrity</li>
-    <li><strong>Carrier gas:</strong> Used to transport process
-    chemicals in the gas phase</li>
-    <li><strong>Lithography:</strong> EUV (extreme ultraviolet)
-    lithography systems use helium-purged environments to prevent light
-    absorption</li>
-    <li><strong>Cryogenic cooling:</strong> Specialized cooling for
-    superconducting components and quantum computing research</li>
+    <li><strong>Domestic sourcing</strong> – Does the project reduce
+    dependence on foreign supply?</li>
+    <li><strong>Redundancy</strong> – Does the project create
+    alternative supply pathways?</li>
+    <li><strong>Proximity</strong> – Does the project serve domestic
+    fabs directly?</li>
+    <li><strong>Speed</strong> – Can the project be operational within
+    24 months?</li>
+    <li><strong>Workforce</strong> – Does the project create skilled
+    technical jobs?</li>
     </ol>
-    <p>A single large fab can consume thousands of liters of liquid
-    helium per month. At crisis prices of $50–$100 per liter, this
-    represents a significant and growing cost pressure.</p>
+    <p>A PNW helium cooperative (Document 19 for formation playbook,
+    Document 07 for corridor geography) scores well on all five
+    criteria. It reduces dependence on Qatari helium (currently offline
+    per Document 05), creates a redundant supply node, serves Intel’s
+    D1X complex directly, can deploy modular equipment within 12-18
+    months, and creates cryogenic technician positions – a workforce
+    category the Act specifically targets.</p>
+    <p>The practical step is to contact the CHIPS Program Office
+    (chipsgrants@nist.gov) to confirm eligibility before investing in a
+    full application. The application itself requires a detailed
+    financial plan (Document 23), workforce development commitment,
+    environmental justice assessment (Document 24), and national
+    security compliance (no expansion in countries of concern for 10
+    years per Section 9902(a)(5)(C)).</p>
+    <h2
+    id="heliums-role-in-semiconductor-fabrication-specific-use-cases">Helium’s
+    Role in Semiconductor Fabrication – Specific Use Cases</h2>
+    <p>Helium serves four distinct functions in modern chip
+    manufacturing, each tied to specific process steps and toolsets.</p>
+    <h3 id="euv-lithography-purge-gas">1. EUV Lithography Purge Gas</h3>
+    <p>Extreme ultraviolet lithography operates at a wavelength of
+    13.5nm. At this wavelength, virtually all gases – including nitrogen
+    and oxygen – absorb the photons before they reach the wafer. The
+    optical path from the EUV source (a tin-droplet laser-produced
+    plasma) through the mirror optics to the wafer surface must be
+    maintained in a helium environment because helium has the lowest EUV
+    absorption of any practical gas. The ASML NXE:3800E purges its
+    entire optical column with ultra-high purity helium (99.9999% or
+    better).</p>
+    <p>Each EUV scanner consumes approximately 1,000-2,000 standard
+    cubic feet of helium per day during operation. A fab with 15 EUV
+    scanners running 24/7 consumes 15,000-30,000 SCF per day –
+    approximately 450,000-900,000 SCF per month – for EUV alone. At
+    crisis pricing of $450-$3,000 per Mcf (Document 05), this single
+    application can cost $200,000-$2.7 million per month per fab. The
+    economic incentive to implement helium recycling at EUV tools is
+    overwhelming (see Document 21 for recycling system design).</p>
+    <h3 id="backside-wafer-cooling">2. Backside Wafer Cooling</h3>
+    <p>During plasma etch and ion implantation, wafers are clamped to
+    electrostatic chucks and bombarded with energetic ions. Without
+    active cooling, wafer temperatures would rise to levels that destroy
+    photoresist patterns and cause uncontrolled diffusion of dopant
+    atoms. Helium is pumped into the microscopic gap between the wafer
+    backside and the chuck surface at pressures of 5-15 Torr. Because
+    helium has the highest thermal conductivity of any gas (0.152 W/m-K
+    at 300K – six times higher than nitrogen), it efficiently transfers
+    heat from the wafer to the actively cooled chuck.</p>
+    <p>Every etch chamber and ion implanter in the fab uses helium
+    backside cooling. A leading-edge fab may contain 200-300 etch
+    chambers and 50-100 ion implanters. Helium consumption for cooling
+    is lower per tool than for EUV purge, but the tool count makes
+    aggregate consumption significant – estimated at 100,000-200,000 SCF
+    per month for a large fab.</p>
+    <h3 id="leak-detection">3. Leak Detection</h3>
+    <p>Helium mass spectrometer leak detection (HMSLD) exploits helium’s
+    combination of small atomic radius (31 pm), chemical inertness, and
+    extremely low background concentration in ambient air (5.2 ppm).
+    Vacuum systems throughout the fab – deposition chambers, etch tools,
+    transfer modules – must maintain base pressures of 10^-7 to 10^-9
+    Torr. Even microscopic leaks compromise process integrity.</p>
+    <p>HMSLD works by spraying helium around external joints and
+    connections while a mass spectrometer tuned to mass 4 monitors the
+    system interior. Minimum detectable leak rates reach 10^-12
+    atm-cc/sec – sensitive enough to detect a single atomic-scale crack.
+    No alternative gas provides this combination of sensitivity,
+    inertness, and low background. Helium consumption for leak testing
+    is modest per event but continuous, as every tool undergoes periodic
+    leak qualification.</p>
+    <h3 id="carrier-gas">4. Carrier Gas</h3>
+    <p>Helium serves as a carrier gas for chemical vapor deposition
+    (CVD) and atomic layer deposition (ALD) processes, transporting
+    precursor chemicals from bubblers and vapor delivery systems to the
+    deposition chamber. Its chemical inertness prevents unwanted
+    reactions with precursors, and its low mass produces favorable gas
+    dynamics in the delivery system.</p>
     <h2 id="closed-loop-helium-recycling">Closed-Loop Helium
     Recycling</h2>
-    <p>Modern helium recovery systems can capture 90–95% of helium that
-    would otherwise be vented during fab operations:</p>
-    <ul>
-    <li><strong>Technology:</strong> Cryocoolers recapture boil-off gas
-    and re-liquefy it on-site</li>
-    <li><strong>System cost:</strong> $1.5M–$3.5M for a mid-to-large
-    scale fab</li>
-    <li><strong>ROI at crisis prices:</strong> Under 12 months</li>
-    <li><strong>Impact:</strong> Reduces external helium purchases to a
-    small “top-off” fraction</li>
-    </ul>
-    <p>Every major fab should have closed-loop recycling. The economics
-    have been favorable for years; at crisis prices, the case is
-    overwhelming. The technology exists — the barrier is implementation,
-    not invention.</p>
-    <h2 id="pnw-fab-landscape">PNW Fab Landscape</h2>
+    <p>The technology to recover and re-purify helium from fab exhaust
+    streams exists and is proven. Companies including Linde Engineering,
+    Air Liquide, Quantum Technology (a Chart Industries brand), and
+    Cryomech manufacture on-site helium recovery systems.</p>
+    <h3 id="system-architecture">System Architecture</h3>
+    <p>A closed-loop recycling system captures helium-rich exhaust from
+    process tools, compresses it, removes contaminants (moisture,
+    hydrocarbons, nitrogen) through molecular sieve and activated carbon
+    beds, re-purifies to electronic grade via PSA or membrane
+    separation, and returns it to the gas distribution manifold.
+    Advanced systems include a cryocooler stage that re-liquefies
+    recovered helium for storage.</p>
+    <h3 id="economics">Economics</h3>
     <table>
     <colgroup>
-    <col style="width: 30%" />
-    <col style="width: 30%" />
-    <col style="width: 39%" />
+    <col style="width: 7%" />
+    <col style="width: 27%" />
+    <col style="width: 14%" />
+    <col style="width: 29%" />
+    <col style="width: 10%" />
+    <col style="width: 11%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Scenario</th>
+    <th>Monthly Helium Purchase (no recycling)</th>
+    <th>System Capital Cost</th>
+    <th>Monthly Purchase (with 90% recycling)</th>
+    <th>Annual Savings</th>
+    <th>Payback Period</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Large fab, crisis pricing ($75/L)</td>
+    <td>$750,000</td>
+    <td>$3.5M</td>
+    <td>$75,000</td>
+    <td>$8.1M</td>
+    <td>5 months</td>
+    </tr>
+    <tr>
+    <td>Large fab, normalized pricing ($20/L)</td>
+    <td>$200,000</td>
+    <td>$3.5M</td>
+    <td>$20,000</td>
+    <td>$2.16M</td>
+    <td>19 months</td>
+    </tr>
+    <tr>
+    <td>Medium fab, crisis pricing</td>
+    <td>$300,000</td>
+    <td>$2.0M</td>
+    <td>$30,000</td>
+    <td>$3.24M</td>
+    <td>7 months</td>
+    </tr>
+    <tr>
+    <td>Medium fab, normalized pricing</td>
+    <td>$80,000</td>
+    <td>$2.0M</td>
+    <td>$8,000</td>
+    <td>$864,000</td>
+    <td>28 months</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>At crisis pricing, the payback period for a recycling system is
+    measured in months. At normalized pricing, it is still under three
+    years – well within the capital planning horizon of any
+    semiconductor manufacturer. The March 2026 crisis (Document 05) has
+    turned a “should-do” into an “emergency procurement” for fabs that
+    lack recycling capability.</p>
+    <p>Document 21 provides a detailed engineering analysis of recycling
+    system design, vendor options, and integration with fab gas
+    distribution systems.</p>
+    <h2 id="the-pnw-fab-landscape">The PNW Fab Landscape</h2>
+    <h3 id="intel-the-anchor-customer">Intel – The Anchor Customer</h3>
+    <p>Intel’s Oregon operations are not merely large; they are
+    strategically unique. Hillsboro is where Intel develops its
+    manufacturing processes. The D1X fab – opened in phases with Mod 1
+    (2013), Mod 2 (2015), and Mod 3 (approximately 2021) – is where
+    Intel 4, Intel 3, and Intel 20A/18A process nodes are brought from
+    R&amp;D to pilot production before being transferred to high-volume
+    manufacturing sites in Chandler (Arizona), Leixlip (Ireland), and
+    Kiryat Gat (Israel).</p>
+    <p>This development role means Oregon’s helium needs are skewed
+    toward the highest purity specifications. Research-grade (6N,
+    99.9999%) helium commands a significant premium over
+    industrial-grade (5N, 99.999%) and is harder to source during
+    shortages because fewer purification facilities can achieve 6N
+    consistently. A regional hub capable of producing 6N helium would
+    serve Intel’s most demanding need.</p>
+    <p>Intel received up to $8.5 billion in CHIPS Act funding (announced
+    March 2024), the largest single award. While the bulk of this
+    funding targets the Ohio mega-fab complex (Fabs 52 and 62), Intel’s
+    Oregon operations benefit from the company’s overall supply chain
+    investment, and Oregon-specific CHIPS Act state incentives (Oregon
+    SB 4, $190 million) further support the ecosystem.</p>
+    <h3 id="the-broader-cluster">The Broader Cluster</h3>
+    <table>
+    <colgroup>
+    <col style="width: 27%" />
+    <col style="width: 27%" />
+    <col style="width: 45%" />
     </colgroup>
     <thead>
     <tr>
     <th>Facility</th>
     <th>Location</th>
-    <th>Significance</th>
+    <th>Helium Relevance</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>Intel D1X Complex</td>
+    <td>Intel D1X</td>
     <td>Hillsboro, OR</td>
-    <td>Largest PNW fab — leading-edge process development</td>
+    <td>Primary consumer – EUV development, highest purity needs</td>
+    </tr>
+    <tr>
+    <td>Lattice Semiconductor</td>
+    <td>Hillsboro, OR (HQ)</td>
+    <td>FPGA design – fabless, but tests on-site</td>
     </tr>
     <tr>
     <td>Microchip Technology</td>
-    <td>Regional presence</td>
-    <td>Specialty analog and embedded chips</td>
-    </tr>
-    <tr>
-    <td>Various smaller fabs</td>
     <td>Portland metro</td>
-    <td>Supporting ecosystem for testing, prototyping</td>
+    <td>Specialty analog and embedded – some process helium use</td>
     </tr>
     <tr>
-    <td>OHSU / PSU / OSU</td>
-    <td>Portland / Corvallis</td>
-    <td>Research-grade helium consumers</td>
+    <td>Siemens EDA</td>
+    <td>Wilsonville, OR</td>
+    <td>EDA software – no direct helium consumption</td>
+    </tr>
+    <tr>
+    <td>Applied Materials</td>
+    <td>Portland area</td>
+    <td>Equipment provider – helium in demo/service tools</td>
+    </tr>
+    <tr>
+    <td>Lam Research</td>
+    <td>Tualatin, OR</td>
+    <td>Equipment provider – helium in etch tool demos</td>
+    </tr>
+    <tr>
+    <td>OHSU</td>
+    <td>Portland</td>
+    <td>MRI, cryogenics – medical helium consumer</td>
+    </tr>
+    <tr>
+    <td>Oregon State</td>
+    <td>Corvallis</td>
+    <td>Materials research – cryogenic helium consumer</td>
     </tr>
     </tbody>
     </table>
-    <h2 id="the-gap">The Gap</h2>
-    <p>The PNW has fabs, research institutions, and a distribution
-    network. What it does not have is <strong>local helium purification
-    and recycling infrastructure</strong>. All helium currently arrives
-    from out-of-region sources through national distributors. A regional
-    processing capability — even at modest scale — would reduce supply
-    chain risk, lower costs through avoided transportation, and position
-    the corridor for growth as semiconductor fabrication continues to
-    expand domestically.</p>
+    <p>See Document 13 for the comprehensive Silicon Forest ecosystem
+    analysis.</p>
+    <h2 id="the-gap-and-what-to-do-about-it">The Gap – And What to Do
+    About It</h2>
+    <p>The PNW semiconductor ecosystem has every layer except upstream
+    helium infrastructure.</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Layer</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>World-class fabs</td>
+    <td>Present (Intel D1X)</td>
+    </tr>
+    <tr>
+    <td>Equipment ecosystem</td>
+    <td>Present (Applied Materials, Lam, ASML service)</td>
+    </tr>
+    <tr>
+    <td>Academic pipeline</td>
+    <td>Present (OSU, PSU, OIT)</td>
+    </tr>
+    <tr>
+    <td>Distribution network</td>
+    <td>Present (Airgas, Linde, Central Welding)</td>
+    </tr>
+    <tr>
+    <td>CHIPS Act funding</td>
+    <td>Available (explicit supply chain provisions)</td>
+    </tr>
+    <tr>
+    <td>Local helium purification</td>
+    <td><strong>Missing</strong></td>
+    </tr>
+    <tr>
+    <td>Closed-loop helium recycling</td>
+    <td><strong>Missing</strong> (at fab level)</td>
+    </tr>
+    <tr>
+    <td>Regional helium storage/buffer</td>
+    <td><strong>Missing</strong></td>
+    </tr>
+    <tr>
+    <td>R&amp;D-grade gas blending</td>
+    <td><strong>Missing</strong></td>
+    </tr>
+    <tr>
+    <td>Supply chain redundancy</td>
+    <td><strong>Missing</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Filling these gaps requires a specific sequence of actions:</p>
+    <ol type="1">
+    <li><p><strong>Immediate (0-6 months):</strong> Deploy closed-loop
+    recycling systems at Intel D1X and any other fab with significant
+    helium consumption. The ROI at crisis pricing makes this an
+    emergency measure. Document 21 provides the technical specification;
+    Document 15 identifies the vendors.</p></li>
+    <li><p><strong>Near-term (6-18 months):</strong> Establish a
+    regional purification hub, likely in the Portland-Hillsboro corridor
+    or the Centralia-Chehalis industrial zone (Document 07 for siting
+    analysis). Begin with a membrane + PSA system capable of producing
+    5N helium from crude feedstock purchased from US primary producers
+    (Document 17 for crude sourcing and transport).</p></li>
+    <li><p><strong>Medium-term (18-36 months):</strong> Add liquefaction
+    capability to the hub (Document 18 for liquefaction hub design).
+    Begin export operations through NWSA. Expand to 6N research-grade
+    production.</p></li>
+    <li><p><strong>Ongoing:</strong> Apply for CHIPS Act supply chain
+    resilience funding. Form a cooperative structure to share capital
+    and risk (Document 19). Integrate with the broader I-5 corridor
+    distribution network (Document 07).</p></li>
+    </ol>
+    <p>The semiconductor industry has spent the past five years learning
+    that concentrated supply chains are fragile. The March 2026 helium
+    crisis is teaching the same lesson about gases. The PNW has the
+    customers, the infrastructure, and the funding pathways. What it
+    lacks is someone willing to build the upstream.</p>
     <div class="nav">
         <a href="../index.html">← Back to HEL Index</a> ·
         Published 2026-03-31 · PNW Research Series ·
