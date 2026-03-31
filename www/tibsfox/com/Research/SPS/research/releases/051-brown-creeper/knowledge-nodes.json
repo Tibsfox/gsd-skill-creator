@@ -1,0 +1,253 @@
+{
+  "degree": 51,
+  "species": "Brown Creeper",
+  "scientific_name": "Certhia americana",
+  "slug": "051-brown-creeper",
+  "sound_type": "high thin see-see-see-see descending spiral song",
+  "energy": 1,
+  "ecosystem": "old-growth bark / mature forest",
+  "season": "resident (year-round)",
+  "family": "Certhiidae",
+  "order": "Passeriformes",
+  "csv_substitution": {
+    "original_species": "Northwestern Salamander",
+    "original_scientific_name": "Ambystoma gracile",
+    "reason": "SPS Part B engine is birds-and-mammals only. Brown Creeper replaces Northwestern Salamander, preserving the original E=1 energy level and old-growth forest habitat. The Northwestern Salamander is a quiet, secretive forest-floor inhabitant rarely detected by sound; the Brown Creeper is similarly cryptic, with a high-pitched song near the upper threshold of human hearing. Both species are old-growth associates whose presence signals forest maturity. Seventh consecutive CSV substitution replacing an amphibian-class species (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51). The engine remains deep in the amphibian belt of the original CSV.",
+    "preserved": ["E=1 energy level", "old-growth forest habitat", "cryptic/quiet character"]
+  },
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; Brown Creepers are year-round residents of mature and old-growth coniferous and mixed forests throughout western Washington, including the Cascades, Olympics, and Puget Sound lowlands. Present in Seattle-area parks with large conifers (Discovery Park, Seward Park, Washington Park Arboretum). More common in old-growth than in younger forest at every study site. Also found in montane conifer forest of the eastern Cascades and Blue Mountains. PNW subspecies: C. a. occidentalis (western Washington), C. a. montana (eastern Washington)."
+  },
+  "taxonomy_note": {
+    "description": "Brown Creeper is the FIRST Certhiidae in the engine -- the 20th family. Certhiidae is monotypic in North America: Certhia americana is the only representative of the treecreeper family in the New World. The family contains nine species worldwide, all in a single genus (Certhia), distributed from western Europe to Japan and India. No other Certhiidae will enter the engine. One family, one species, one degree. Certhia from Ancient Greek kerthios (a small tree-dwelling insectivorous bird mentioned by Aristotle); americana from Latin, meaning 'of America.' Bonaparte described the species in 1838, separating it from the Eurasian Treecreeper (C. familiaris). Full translation: 'The Aristotle-bird of America.'",
+    "current_family": "Certhiidae",
+    "new_family": true,
+    "family_count_in_engine": 20,
+    "certhiidae_count_in_engine": 1,
+    "name_etymology": "Certhia = Ancient Greek kerthios, a small insectivorous bird that lived in trees, mentioned by Aristotle. The exact identity of Aristotle's kerthios is uncertain but likely a treecreeper or similar bark-climbing species. americana = Latin, simply 'of America.' Charles Lucien Bonaparte described the species in 1838, separating it from the Eurasian Treecreeper (Certhia familiaris). The simplest, most geographically direct species epithet in the engine.",
+    "genus_note": "Certhia is represented once in the engine. Monotypic family representation: one genus, one species, one family, one degree. Compare Paridae: 3 members, 1 genus (Poecile). Certhiidae: 1 member, 1 genus (Certhia). The Brown Creeper will be the only Certhiidae for the full 360 degrees.",
+    "order_note": "Passeriformes continues from degree 50. FOURTEENTH consecutive Passeriformes (38-51). 44 of 52 entries (84.6%) are Passeriformes.",
+    "family_position": "Certhiidae enters as the 20th family with 1 member at degree 51. The first genuinely new family since degree 31 (Cedar Waxwing, Bombycillidae) -- 20 degrees between new-family events.",
+    "phylogeographic_note": "Six major phylogeographic clades identified by Manthey et al. (2011, Molecular Phylogenetics and Evolution): a northern lineage and a southern lineage form the basal divergence -- likely cryptic species. Sympatry prevalent between clades in western North America. Up to 13 recognized subspecies. PNW subspecies: C. a. occidentalis (Pacific coastal, western Washington), C. a. montana (interior mountain, eastern Washington), C. a. zelotes (Sierra Nevada, possibly southern Oregon). Song variation between populations may ultimately support splitting into multiple species (Sibley 2011). The most complex population structure of any species yet entered in the engine: six clades vs. Mountain Chickadee's two and Fox Sparrow's four groups.",
+    "cryptic_diversity_note": "David Sibley (2011): 'Regional differences in song may offer the strongest support for splitting Brown Creeper into multiple species, but remain virtually unstudied.' Baptista & Johnson (1982) identified 25 different note types across West Coast populations. Eastern and western calls differ in quality (eastern: relaxed, liquid; western: buzzier). The Brown Creeper's taxonomic mystery remains one of the most significant unresolved questions in North American ornithology."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "3,000-8,500 (across song and calls)",
+    "peak_energy_band_hz": "4,000-7,500 (song peak energy concentration)",
+    "song_frequency_hz": "Individual notes range 3,000-8,500 Hz. Song overall descends from high to low within this band. Call note: 6,000-8,500 Hz (higher than song).",
+    "song_duration_s": "1.0-1.5 (per complete song, 4-9 syllables; San Bernardino populations up to 13 syllables in same timeframe)",
+    "note_structure": "HIGH THIN DESCENDING SIBILANT SERIES: 4-9 wispy, high-frequency notes descending overall in frequency. Each note is a thin, rising or falling whistle. Song generally starts with one or two high-level 'sreeh' elements and descends. Much higher in frequency and thinner in quality than the Mountain Chickadee's pure-toned fee-bee-bay (degree 50). Among the highest-frequency songs in the engine.",
+    "note_types": "TWO main vocalization categories: (1) SONG -- the descending series of high thin sibilant notes, 1.0-1.5 seconds. (2) CALL -- single very high-pitched, thin 'see' or 'tsee', 6-8.5 kHz, the contact note given year-round. Call type 2 (threat): a series of notes ranging 3.75-8 kHz, given during threat display and in response to conspecific playback.",
+    "phrase_structure": "A jumble of high, thin notes -- less precisely structured than the Mountain Chickadee's clean descending staircase (degree 50) but higher in frequency and more complex in syllable morphology. Described as 'a tiny, whistled song' or 'trees-trees-trees.' Commonly described mnemonic: 'pee pee willow wee.'",
+    "timbre": "THIN, SIBILANT, WISPY. High-frequency energy with minimal low-harmonic content. The thinnest timbre in the engine -- thinner even than the Golden-crowned Kinglet's ultra-high zee-zee-zee (degree 8). The Brown Creeper's song has a breathy, whispery quality that matches its cryptic lifestyle.",
+    "amplitude": "E=1 -- the minimum energy level. The quietest song in the engine alongside the Golden-crowned Kinglet (degree 8), Bushtit (degree 10), and Pine Siskin (degree 12). E=1 RETURNS after 38 degrees of absence (degrees 13-50). Many observers over age 50 cannot detect the Brown Creeper's call due to presbycusis (age-related high-frequency hearing loss).",
+    "tempo": "Moderate. Notes delivered in quick succession within the 1.0-1.5 second song. Individual notes are brief (0.1-0.3 s) with minimal gaps between them. Faster and more compressed than the Mountain Chickadee's deliberate, sustained fee-bee-bay.",
+    "context": "Song given primarily during breeding season (males, March-June). Call note given year-round by both sexes -- often the first and only indication that a Brown Creeper is present, since the bird is nearly invisible on bark. Dawn song documented (Earbirding): extended singing bouts at first light.",
+    "regional_variation": "Considerable and taxonomically significant. Western birds produce buzzier songs; eastern birds produce more liquid songs. Baptista & Johnson (1982) identified 25 note types in West Coast populations. Songs from different mountain ranges are noticeably different (Priest Lake ID vs. Sierra Nevada CA vs. Olympia WA). Insular populations have simpler songs with fewer note types. Song variation may support future species-level splits.",
+    "key_property": "THE BARK-SPIRAL -- the 52nd acoustic element (species side). A high, thin, descending series of sibilant notes that spirals through frequency space. Named 'the bark-spiral' for three resonances: (1) the foraging spiral -- the only North American bird that systematically spirals up tree trunks, the song's descending contour is the acoustic inverse of the physical spiral; (2) the unit circle connection -- the bird literally traces a helix around a cylindrical surface, the first physical spiral in the engine; (3) the cryptic principle -- the bark-spiral is high, thin, easily missed, from an invisible bird in a dark forest. The acoustic expression of crypsis."
+  },
+  "plumage": {
+    "overall": "Mottled brown and white upperparts precisely matching tree bark. White underparts. Among the most effectively camouflaged birds in North America. Essentially vanishes when pressed flat against a trunk.",
+    "diagnostic_mark": "BARK-PATTERN CRYPSIS -- not a single bold mark but an entire plumage pattern evolved to match the texture of tree bark. Brown streaked with white and buff above, clean white below. Pale buffy supercilium less prominent than Mountain Chickadee's bold white eyebrow (degree 50).",
+    "upperparts": "Brown with complex pattern of white and buff streaking. Darker central feather shafts with lighter edges create a bark-like stippled effect.",
+    "underparts": "White to pale grayish-white. Clean and unmarked. Pressed against trunk, only brown upperparts visible.",
+    "head": "Brown with pale buffy or whitish supercilium (eyebrow). Less prominent than Mountain Chickadee's bold white eyebrow.",
+    "bill": "Thin, slender, decurved (curved downward). Dark above, paler below. Approximately 12-15 mm. The curve matches bark furrow curvature.",
+    "tail": "Brown with stiffened, pointed central rectrices. Bare shafts extend beyond vanes. Functions as a prop against bark -- like woodpecker tails (Picidae, degrees 21-22).",
+    "undertail_coverts": "Buffy -- warm tone visible only in flight or from below.",
+    "wing_edges": "Two pale wing bars, less conspicuous than many warbler wing bars.",
+    "field_id": "Tiny brown bark-patterned bird spiraling up tree trunks. Distinguished from nuthatches by ascending-only foraging, decurved bill, stiff tail, and cryptic plumage. Distinguished from woodpeckers by much smaller size, thinner bill, and lack of drumming. Most often detected by voice -- the high thin 'see' call note. Easily overlooked."
+  },
+  "foraging_behavior": {
+    "description": "The Brown Creeper is the ONLY North American bird that systematically spirals up tree trunks from base to crown, probing bark crevices with its decurved bill, then flies to the base of the next tree and begins again. This is the defining foraging behavior of the Certhiidae worldwide.",
+    "spiral_pattern": "Starts at or near the base of a tree trunk. Spirals upward in a helical or zigzag pattern, probing bark crevices with its thin decurved bill. Reaches within 1-3 m of the top. Flies in a swooping drop to the base of a nearby tree. Begins again. Never descends head-first.",
+    "complementary_nuthatch": "The Brown Creeper (ascending, degree 51) and the Red-breasted Nuthatch (descending, degree 5) form a complementary ecological dyad. One goes up; the other comes down. Together they cover every surface of the bark. Both species frequently forage on the same trees simultaneously in the PNW.",
+    "physical_adaptations": [
+      "Decurved bill (12-15 mm) for probing bark crevices",
+      "Stiff pointed tail rectrices as prop against bark (convergent with woodpeckers)",
+      "Long curved claws hooking into bark crevices",
+      "Short legs pressed close to bark surface",
+      "Both feet hop simultaneously, creating characteristic head-ducking motion"
+    ],
+    "unit_circle_connection": "The Brown Creeper traces a helix around tree trunks: x(t) = r*cos(t), y(t) = r*sin(t), z(t) = c*t. A helix is the 3D extension of the unit circle. At degree 51 of a 360-degree engine, the Brown Creeper is the first species whose physical behavior IS the circle. The bird literally spirals around a circular cross-section, advancing continuously, resetting at the base, and beginning again."
+  },
+  "old_growth_indicator": {
+    "description": "The Brown Creeper is one of the most reliable old-growth indicator species in the Pacific Northwest. Its presence and density correlate strongly with forest maturity, structural complexity, and the availability of large trees with deeply furrowed bark.",
+    "density_comparisons": [
+      "Twice as abundant in old-growth as in mature forest (northern Rocky Mountains)",
+      "Rare in young forest, partial-cut, pole-sapling stands",
+      "Absent from seed-tree plots and recent clearcuts",
+      "More abundant in unlogged conditions in PNW conifer forests"
+    ],
+    "habitat_requirements": [
+      "Large trees (>50 cm DBH) with deeply furrowed bark for foraging",
+      "Standing dead trees (snags) with loose bark for nesting (94% of nests in dead trees)",
+      "Forest interior conditions -- avoids edges, requires continuous canopy",
+      "Large snags: 50.8-75.9 cm DBH preferred, 70%+ bark retention, unbroken tops"
+    ],
+    "nest_type": "Hammock-shaped nest built behind a loose bark flap on a dead or dying tree. The nest is invisible from outside -- the bark flap conceals it. Cup up to 6.4 cm deep and 15 cm across. Materials: spider egg cases, wood fibers, cocoon silk, bark strips, feathers, moss, lichens. The defining architectural innovation of the Certhiidae.",
+    "conservation_threat": "Salvage logging removes the dead and dying trees required for nesting. The trees that appear 'wasted' to the timber economy are critical infrastructure for Brown Creeper reproduction. Forest fragmentation reduces interior habitat quality."
+  },
+  "crypsis": {
+    "description": "The Brown Creeper is the most comprehensively cryptic species in the engine. Crypsis operates on four levels: visual (bark-patterned plumage), behavioral (slow movement, freezing against bark), acoustic (high-pitched easily-missed vocalizations), and ecological (forest interior only, avoids edges).",
+    "visual": "Mottled brown-and-white upperparts match tree bark precisely. When alarmed, presses flat against trunk and freezes -- becomes invisible.",
+    "behavioral": "Moves slowly and deliberately. Stays on far side of trunk from perceived threats. No rapid jerky movements that would attract attention.",
+    "acoustic": "Song and call so high-pitched (6-8.5 kHz for calls) that many people cannot hear them. Low survey detection rate attributable partly to high-frequency, easily-missed vocalizations.",
+    "ecological": "Avoids forest edges and open habitats. Stays in forest interior, on bark, in shadow. Requires continuous canopy cover."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The bark-spiral -- the 52nd acoustic element (species side): a high, thin, descending series of sibilant notes that spirals through frequency space the way the bird spirals up a tree trunk. The Brown Creeper's song is 4-9 high-frequency notes (3.0-8.5 kHz) descending overall in a wispy, thin cascade. Named 'the bark-spiral' because: (1) the foraging spiral -- the only North American bird that systematically spirals up tree trunks from base to crown, the song's descending frequency contour is the acoustic inverse of the physical ascending spiral; (2) the unit circle connection -- the bird traces a helix (3D unit circle extension) around cylindrical trunks, the first literal physical spiral in the engine; (3) the cryptic principle -- the bark-spiral is high, thin, easily missed, the acoustic expression of a bird whose entire existence is designed to be undetected.",
+      "level": "foundational",
+      "department": "music-theory/song-form",
+      "college_path": ".college/music/theory/song-form/bark-spiral/",
+      "examples": [
+        "The song descends through high frequencies (starting ~6-8 kHz, descending to ~3-4 kHz) in thin sibilant notes. The physical spiral goes up the trunk; the acoustic spiral comes down through frequency space. Inverse images.",
+        "Contrast with the memory (degree 50): the memory is defined by precision -- clean, pure-toned whistles at exact intervals. The bark-spiral is defined by fragility -- thin, wispy, sibilant, at the edge of hearing.",
+        "Contrast with the threshold (degree 8): the threshold pushes upward toward the edge of audibility (ascending zee-zee-zee). The bark-spiral starts near that edge and spirals down into the forest.",
+        "The cryptic principle: the bark-spiral is hard to detect because it is high-frequency, low-amplitude, and thin. The bird is hard to detect because it matches bark. Sound and sight are both designed for invisibility.",
+        "At degree 51 of a 360-degree unit circle engine, the Brown Creeper is the first species whose physical behavior literally traces the circle (helix around trunk = unit circle extended into 3D)."
+      ],
+      "music_theory_parallel": "The ghost note -- a musical note so lightly played that it is barely audible, felt more than heard. In funk and jazz drumming, ghost notes on the snare drum create texture without asserting themselves. The Brown Creeper's song is a ghost note in the forest: present, functional, carrying information -- but so quiet and so high that it exists at the threshold of perception. The bark-spiral is the engine's first ghost-note element."
+    },
+    {
+      "concept": "First Certhiidae -- the 20th family in the engine. The Brown Creeper is the only North American member of the treecreeper family Certhiidae. Monotypic family representation: one genus (Certhia), one species (C. americana), one degree (51). The family contains nine species worldwide, all in genus Certhia, distributed from western Europe to Japan. No other Certhiidae will enter the engine. The first genuinely new family since degree 31 (Cedar Waxwing, Bombycillidae) -- 20 degrees between new-family events.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/new-family-certhiidae/",
+      "examples": [
+        "20th family in 52 entries. Previous new families: Strigidae (4), Sittidae (5), Tyrannidae (6), Regulidae (8), Aegithalidae (10), Vireonidae (13), Cardinalidae (23), Thraupidae (24), Bombycillidae (31), and now Certhiidae (51).",
+        "Monotypic North American representative. Compare: Paridae has 3 engine members (all Poecile). Certhiidae will only ever have 1.",
+        "The family Certhiidae contains nine species globally in a single genus. All are bark-climbing specialists with stiff tails, decurved bills, and cryptic plumage. The Brown Creeper is the New World representative of an otherwise Old World family.",
+        "Bonaparte (1838) separated C. americana from the Eurasian Treecreeper (C. familiaris). The split is supported by vocal, morphological, and molecular data.",
+        "20 degrees between new-family events (Bombycillidae at 31, Certhiidae at 51). The engine adds families at a slower rate as the most common families fill first."
+      ],
+      "music_theory_parallel": "The solo instrument entry. When an orchestra has been playing with strings, woodwinds, brass, and percussion, and then a celesta enters for the first time -- a new timbre that the ensemble has never included. The Certhiidae is the celesta: small, distinctive, entering once and only once, contributing a timbral quality (the thin, high, bark-spiral sound) that no other instrument in the ensemble can produce."
+    },
+    {
+      "concept": "E=1 returns after 38 degrees of absence -- the longest drought of any energy level in the engine. E=1 was last seen at degree 12 (Pine Siskin). Degrees 13-50 had no E=1 entries. The Brown Creeper at degree 51 restores the minimum energy level. E=1 rises from 3 to 4 entries. The lower registers (E=1 + E=2 + E=3) break through 50% for the first time: 28 of 52 degrees (53.8%). The quiet end of the engine now holds a majority.",
+      "level": "foundational",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e1-returns/",
+      "examples": [
+        "E=1 drought: 38 consecutive degrees (13-50) without E=1. The longest absence of any energy level in the engine.",
+        "Four E=1 entries total: Golden-crowned Kinglet (8), Bushtit (10), Pine Siskin (12), Brown Creeper (51). All small birds (5-14 g). All high-frequency. All easily overlooked.",
+        "E=1 + E=2 + E=3 = 28 degrees (53.8%) > E=4 + E=5 = 24 degrees (46.2%). First time the lower registers hold a majority.",
+        "The E=1 guild is the invisible choir: the smallest, quietest, highest-pitched voices in the forest, the ones that vanish first as a listener ages.",
+        "The return of E=1 at degree 51 is structurally significant because it restores energy-level coverage. All five levels are now 'active' in the sense of having had a recent entry within the last 20 degrees -- except E=5 (last at degree 36, 15 degrees ago)."
+      ],
+      "music_theory_parallel": "The pianissimo return. In a symphonic work, when the orchestra has been building through mezzo-piano, mezzo-forte, forte, and fortissimo passages for an extended span, and then -- suddenly or gradually -- a solo instrument enters at pianissimo. The shock of quiet after sustained volume. The Brown Creeper is the pianissimo return after 38 degrees dominated by E=2 through E=5. The minimum dynamic level re-enters the texture."
+    },
+    {
+      "concept": "Old-growth indicator species -- the Brown Creeper's presence and density correlate strongly with forest maturity and structural complexity. Twice as abundant in old-growth as in mature forest. Absent from clearcuts and young stands. Nests exclusively behind loose bark flaps on dead trees (94% of nests). A living metric of forest health. The Brown Creeper does not merely inhabit old-growth forest -- its absence defines where old-growth has been lost.",
+      "level": "foundational",
+      "department": "ecology/conservation",
+      "college_path": ".college/ecology/conservation/old-growth-indicator/",
+      "examples": [
+        "Twice as abundant in old-growth as in mature forest (northern Rocky Mountains surveys).",
+        "Absent from clearcuts, seed-tree plots, and recent disturbance. Rare in young forest and partial-cut stands.",
+        "94% of nests in dead trees. Requires large snags (50.8-75.9 cm DBH) with 70%+ bark retention.",
+        "Partners in Flight focal species in PNW westside conifer forests and eastern Cascades due to logging impacts.",
+        "Salvage logging removes the dead trees required for nesting. The trees timber operations consider 'waste' are essential infrastructure for Brown Creeper reproduction."
+      ],
+      "music_theory_parallel": "The sustain pedal indicator. On a piano, the sustain pedal determines how long notes ring. In an old-growth forest, the 'sustain' is the time allowed for trees to grow large, develop deep bark, die standing, and retain loose bark. The Brown Creeper requires maximum sustain -- centuries of uninterrupted forest development. When the sustain pedal is lifted (forest cut, snags removed), the creeper's notes stop."
+    },
+    {
+      "concept": "Complementary bark foragers -- the Brown Creeper (ascending spiraler, degree 51) and the Red-breasted Nuthatch (descending head-first, degree 5) form a complete ecological dyad. One goes up, the other comes down. Together they cover every surface of the bark. Both species forage on the same trees simultaneously in PNW forests. Degrees 5 and 51 -- 46 degrees apart in the engine, inseparable on the tree.",
+      "level": "foundational",
+      "department": "ecology/niche-partition",
+      "college_path": ".college/ecology/niche-partition/bark-dyad/",
+      "examples": [
+        "Red-breasted Nuthatch (degree 5): descends head-first, straight chisel bill, bold contrasting plumage, nasal yank-yank call (E=2).",
+        "Brown Creeper (degree 51): ascends spiraling, decurved probing bill, cryptic bark-patterned plumage, high thin see call (E=1).",
+        "Together: complete bark coverage. Each finds prey items the other's approach direction misses.",
+        "Both species frequently forage on the same trees in PNW winter mixed flocks, alongside chickadees (degrees 3, 9) and kinglets (degree 8).",
+        "Opposite in nearly every behavioral dimension: bold vs. cryptic, loud vs. quiet, contrasting vs. camouflaged, descending vs. ascending. Ecological complementarity expressed as behavioral polarity."
+      ],
+      "music_theory_parallel": "Contrary motion -- two voices moving in opposite directions simultaneously. In counterpoint, contrary motion creates maximum independence between voices. The nuthatch descends while the creeper ascends. Two melodic lines on the same staff (the bark), moving in opposite directions, creating a contrapuntal texture that covers more musical (ecological) space than either voice alone."
+    },
+    {
+      "concept": "Cryptic frequency -- the Brown Creeper is the most comprehensively cryptic species in the engine. Crypsis operates on four levels: visual (bark-patterned plumage makes the bird invisible on trunks), behavioral (slow movement, freezing against bark, staying on far side of trunk), acoustic (song and call at 6-8.5 kHz are near the upper threshold of human hearing, many people cannot detect them), and ecological (forest interior only, avoids edges and open habitats). The bark-spiral acoustic element is the first in the engine defined by cryptic frequency -- sound designed to be undetected.",
+      "level": "intermediate",
+      "department": "ecology/adaptation",
+      "college_path": ".college/ecology/adaptation/crypsis/",
+      "examples": [
+        "Visual: mottled brown-and-white upperparts match tree bark. Presses flat and freezes when alarmed.",
+        "Behavioral: slow, deliberate movement. No rapid jerky motions. Stays on far side of trunk from threats.",
+        "Acoustic: call note at 6-8.5 kHz. Many people over age 50 cannot hear it (presbycusis). Low survey detection rate.",
+        "Ecological: avoids edges, requires continuous canopy, forest interior specialist.",
+        "Four-level crypsis is unique in the engine. No other species combines visual, behavioral, acoustic, and ecological invisibility to this degree."
+      ],
+      "music_theory_parallel": "The subharmonic -- a frequency below the fundamental that is felt rather than heard. In organ music, 32-foot stops produce frequencies at the lower edge of human hearing. The Brown Creeper operates at the opposite extreme: the upper edge. Both subharmonics and the Brown Creeper's call exist at the boundaries of perception, where sound transitions into silence. The creeper's crypsis is not about being quiet -- it is about being at a frequency where the listener's biology fails."
+    },
+    {
+      "concept": "Six phylogeographic clades -- the Brown Creeper has the most complex population structure of any species in the engine. Manthey et al. (2011) identified six well-supported geographically-structured clades with a basal divergence separating northern and southern lineages -- likely cryptic species. Sympatry between clades in western North America. Up to 13 recognized subspecies. Song variation (25 note types in West Coast alone, eastern vs. western quality differences) may offer the strongest support for future species splits. Sibley (2011): 'a taxonomic mystery.'",
+      "level": "intermediate",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/cryptic-species/",
+      "examples": [
+        "Six clades vs. Mountain Chickadee's two (degree 50) and Fox Sparrow's four groups (degree 49). The most complex population structure in the engine.",
+        "Northern-southern basal divergence: likely cryptic species level differentiation.",
+        "PNW subspecies: C. a. occidentalis (western Washington), C. a. montana (eastern Washington), C. a. zelotes (Sierra Nevada/southern Oregon).",
+        "Baptista & Johnson (1982): 25 note types in West Coast populations. Eastern calls 'relaxed, liquid'; western calls 'buzzier.'",
+        "Sibley (2011): 'Regional differences in song may offer the strongest support for splitting Brown Creeper into multiple species, but remain virtually unstudied.'"
+      ],
+      "music_theory_parallel": "The unlabeled variation set. A composer writes a theme and variations, but some of the variations are so different from the theme that they appear to be separate pieces -- 'cryptic variations' hiding within a nominally unified work. The Brown Creeper's six clades are like six variations on the Certhia americana theme, some so divergent they may be separate compositions entirely. The unity of the species name conceals a variation set that has never been fully catalogued."
+    }
+  ],
+  "cross_references": [
+    {
+      "target": "SPS-005",
+      "species": "Red-breasted Nuthatch",
+      "relationship": "COMPLEMENTARY BARK FORAGER. The ascending spiraler (degree 51) completes the ecological dyad with the descending head-first nuthatch (degree 5). One goes up, the other comes down. Together they cover every surface. Both forage on the same trees simultaneously. Opposite in every behavioral dimension: bold vs. cryptic, loud vs. quiet, straight bill vs. decurved. 46 degrees apart, inseparable on the bark."
+    },
+    {
+      "target": "SPS-008",
+      "species": "Golden-crowned Kinglet",
+      "relationship": "E=1 GUILD MEMBERS. Both E=1, both high-frequency, both in conifer canopy/bark. The kinglet's ascending zee-zee-zee (the threshold) vs. the creeper's descending see-see-see (the bark-spiral). Both at or near the upper limit of human hearing. Both vanish from an aging birder's soundscape first. Regular companions in winter mixed flocks."
+    },
+    {
+      "target": "SPS-050",
+      "species": "Mountain Chickadee",
+      "relationship": "SEQUENTIAL DEGREES AND ACOUSTIC CONTRAST. The memory (degree 50, Paridae, E=2) yields to the bark-spiral (degree 51, Certhiidae, E=1). Pure-toned precision yields to wispy, sibilant fragility. The Mountain Chickadee sings clean descending whistles; the Brown Creeper produces thin descending wisps. Similar contour, radically different timbre and energy."
+    },
+    {
+      "target": "SPS-004",
+      "species": "Northern Spotted Owl",
+      "relationship": "OLD-GROWTH SPECIALISTS. Both are indicator species for old-growth forest health in the PNW. The Spotted Owl (Near Threatened) and the Brown Creeper (Least Concern but declining locally) both require mature forest with structural complexity. Both suffer from logging and fragmentation. The owl dominates the night canopy; the creeper spirals the daytime bark."
+    },
+    {
+      "target": "SPS-003",
+      "species": "Black-capped Chickadee",
+      "relationship": "WINTER FLOCK COMPANION. Brown Creepers regularly join mixed-species winter flocks led by Black-capped Chickadees. Five of the engine's first thirteen entries travel together: degrees 3, 5, 8, 9, and 51. The bark-spiraler joins a guild the engine has been building since its earliest degrees."
+    },
+    {
+      "target": "SPS-021",
+      "species": "Northern Flicker",
+      "relationship": "CONVERGENT TAIL PROP. Both species use stiff tail feathers as a prop against bark surfaces. The flicker (Picidae) drums and excavates; the creeper (Certhiidae) probes and gleans. Different families, same biomechanical solution. The stiff-tail convergence spans degrees 21 and 51."
+    },
+    {
+      "target": "AVI",
+      "species": "Wings of the Pacific Northwest",
+      "relationship": "Brown Creeper documented across Washington State. Year-round resident in mature and old-growth coniferous forest from sea level to ~2,000 m. Two subspecies in the state: C. a. occidentalis (western), C. a. montana (eastern). Old-growth indicator with conservation significance."
+    },
+    {
+      "target": "ECO",
+      "species": "Living Systems of the PNW",
+      "relationship": "Old-growth forest ecology. Large-tree dependence, snag requirements, bark ecosystem. The Brown Creeper links forest structural complexity to species survival. Salvage logging as conservation threat. The bird that reads the health of the forest by reading its bark."
+    }
+  ],
+  "winter_flock_guild": {
+    "description": "The Brown Creeper regularly joins mixed-species winter foraging flocks in PNW forests. Five of the engine's first thirteen entries are typical flock companions.",
+    "members": [
+      "Black-capped Chickadee (degree 3, Paridae, E=2)",
+      "Red-breasted Nuthatch (degree 5, Sittidae, E=2)",
+      "Golden-crowned Kinglet (degree 8, Regulidae, E=1)",
+      "Chestnut-backed Chickadee (degree 9, Paridae, E=2)",
+      "Brown Creeper (degree 51, Certhiidae, E=1)"
+    ],
+    "ecological_benefit": "Increased predator detection and foraging efficiency. Chickadees and kinglets flush insects that the creeper catches; the creeper's bark-probing flushes insects that the chickadees catch. Multi-species vigilance reduces per-individual predation risk."
+  }
+}
