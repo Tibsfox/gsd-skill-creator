@@ -1,17 +1,17 @@
 {
-  "updated": "2026-03-31T11:01:00Z",
-  "source": "sweep-v1.0.1",
+  "updated": "2026-03-31T11:35:00Z",
+  "source": "sweep-v1.0.3",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:24:00Z",
     "phase": "prelaunch",
-    "status": "Launch countdown — T-18h — all systems GO",
+    "status": "Launch countdown — T-17h — all systems GO",
     "go_probability": 80
   },
   "weather": {
     "kpae": {"temp_c": 3, "dewpoint_c": -1, "wind_dir": 0, "wind_kmh": 0, "humidity": 75, "pressure_hpa": 1014.2, "visibility_m": 16093, "conditions": "Clear", "spread_c": 4},
-    "kxmr": {"temp_c": 20.4, "dewpoint_c": null, "wind_dir": 120, "wind_kmh": 14.8, "humidity": 80, "conditions": "Clear"}
+    "kxmr": {"temp_c": 20.4, "wind_dir": 120, "wind_kmh": 14.8, "humidity": 80, "conditions": "Clear"}
   },
   "tides_everett": [
     {"time": "04:51", "height_m": 3.37, "type": "high"},
@@ -25,11 +25,20 @@
     "aurora_risk": "none"
   },
   "telemetry": null,
+  "pages_deployed": {
+    "live": "/Research/LIVE/",
+    "open": "/Research/OPEN/",
+    "muk": "/Research/MUK/",
+    "trips": "/Research/MUK/trips.html",
+    "park": "/Research/PARK/",
+    "beach": "/Research/BEACH/",
+    "tracker": "/Research/NASA/artemis-ii/",
+    "forest": "/Research/forest/"
+  },
   "announcements": [
-    {"time": "2026-03-31T11:01:00Z", "text": "Sweep v1.0.1: T-18h, all GO, KPAE 3C calm clear, KSC 20C clear, Kp=2.3"},
-    {"time": "2026-03-31T09:45:00Z", "text": "Sweep: T-37h, all GO, Kp=2.3, KSC clear 20C, KPAE clear 3C"},
+    {"time": "2026-03-31T11:35:00Z", "text": "v1.0.3: T-17h. LIVE hub, OPEN problems, PARK, BEACH, MUK trips deployed."},
+    {"time": "2026-03-31T11:01:00Z", "text": "v1.0.1: T-18h, all GO, 3 new papers, TSPB deposits, ground cover"},
     {"time": "2026-03-30T22:13:00Z", "text": "Launch countdown begins at KSC"},
-    {"time": "2026-03-30T14:56:00Z", "text": "Weather forecast: 80% favorable for April 1 launch"},
     {"time": "2026-03-27T20:10:00Z", "text": "Crew arrives at Kennedy Space Center"}
   ]
 }
