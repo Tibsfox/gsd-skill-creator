@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 42&deg; &mdash; Erica Campbell &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #1565C0;
+      color: white;
+      border: 1px solid #0D47A1;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .first-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #E65100;
+      color: #FFF3E0;
+      border: 1px solid #EF6C00;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .first-banner {
+      background: linear-gradient(135deg, #E65100, #EF6C00);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .first-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .first-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>042 &mdash; Erica Campbell</span>
+    </nav>
+
+    <!-- First Gospel Banner -->
+    <div class="first-banner">
+      <h3>First Gospel Artist &mdash; The Source Enters the Engine</h3>
+      <p>
+        Forty-two degrees of jazz, soul, R&amp;B, blues, funk, neo-soul, blues rock &mdash; every
+        downstream genre from the Black American tradition. At degree 42, the engine maps the
+        <strong>headwater</strong>: gospel itself. E=5 returns after one degree of E=4
+        recalibration. Tacoma returns for the third time. The river meets its source.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">42&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Erica Campbell</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 5</span>
+          <span class="genre-badge">Gospel/R&amp;B</span>
+          <span class="label-badge">Columbia / eOne / My Block</span>
+          <span class="neighborhood-badge">Tacoma</span>
+          <span class="first-badge">First Gospel</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <section>
+          <h2>The Gospel Powerhouse Who Redefined a Genre</h2>
+          <p>
+            Erica Campbell is one half of <strong>Mary Mary</strong>, the Grammy-winning gospel duo
+            that brought sacred music into the mainstream with a force no gospel act had achieved
+            since the crossover experiments of the 1990s. Born <strong>Erica Monique Atkins</strong>
+            on April 29, 1973, in <strong>Inglewood, California</strong>, she grew up in a family of
+            nine children rooted in the <strong>Church of God in Christ</strong>. Her mother
+            Thomasina was an evangelist and choir director; her father Eddie a youth minister. The
+            church was not something the family attended &mdash; it was the infrastructure of daily life.
+          </p>
+          <p>
+            With her sister <strong>Tina</strong>, Campbell formed Mary Mary in <strong>1998</strong>.
+            Their debut single <strong>&ldquo;Shackles (Praise You)&rdquo;</strong> (2000) reached
+            <strong>#28 on the Billboard Hot 100</strong> and <strong>#5 on the R&amp;B chart</strong>
+            &mdash; the first gospel song in five years to crack the R&amp;B top ten. Columbia Records
+            spent <strong>$600,000</strong> on the music video. MTV played it in heavy rotation.
+            Gospel had entered every room.
+          </p>
+          <blockquote>
+            &ldquo;This is what kids are singing and saying over and over. I figured, you&rsquo;re
+            my people so, let me get with my folks!&rdquo; &mdash; Erica Campbell, on creating
+            &ldquo;I Luh God&rdquo; as a gospel response to trap music
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Mary Mary: The Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Thankful</h4>
+              <div class="disco-years">2000 &middot; Columbia</div>
+              <p>
+                Debut. &ldquo;Shackles (Praise You)&rdquo; crossover hit. #1 Gospel,
+                #59 Top 200. <strong>Grammy: Best Contemporary Soul Gospel Album.</strong>
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Incredible</h4>
+              <div class="disco-years">2002 &middot; Columbia</div>
+              <p>
+                &ldquo;Heaven&rdquo; #1 Gospel Radio for 9 weeks. Sampled Honey Cone&rsquo;s
+                &ldquo;Want Ads.&rdquo; Sales impacted by label transition and piracy.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Mary Mary</h4>
+              <div class="disco-years">2005 &middot; Columbia</div>
+              <p>
+                #8 Top 200. Return after motherhood hiatus. White House performance.
+                Multiple #1 gospel hits. Two <strong>American Music Awards</strong>.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>The Sound</h4>
+              <div class="disco-years">2008 &middot; Columbia</div>
+              <p>
+                <strong>#7 Top 200</strong> &mdash; highest-charting album. &ldquo;God in
+                Me&rdquo; broke R&amp;B chart longevity record (64 weeks).
+                Two Grammys.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Something Big</h4>
+              <div class="disco-years">2011 &middot; Columbia</div>
+              <p>
+                Originally titled &ldquo;OMG.&rdquo; Continued the duo&rsquo;s
+                decade-plus run of gospel-R&amp;B fusion.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Go Get It</h4>
+              <div class="disco-years">2012 &middot; Columbia</div>
+              <p>
+                Compilation. Title track won <strong>Grammy: Best Gospel Song (2013)</strong>.
+                Accompanied by 10-city U.S. tour.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Solo Career: Help, Gospel Trap, and Radio</h2>
+          <p>
+            Campbell&rsquo;s solo debut <strong><em>Help</em></strong> (2014, Entertainment One)
+            debuted at <strong>#1 Gospel</strong> and <strong>#6 Billboard 200</strong> with
+            23,000 first-week copies &mdash; the <strong>highest first-week chart position for a
+            female solo gospel artist</strong>. It won the <strong>Grammy for Best Gospel Album
+            (2015)</strong>.
+          </p>
+          <p>
+            The reissue <em>Help 2.0</em> (2015) included the controversial gospel trap anthem
+            <strong>&ldquo;I Luh God&rdquo;</strong> &mdash; a direct response to O.T. Genasis&rsquo;s
+            &ldquo;CoCo.&rdquo; Campbell rapped over a trap beat in a sideways cap and gold chain.
+            Critics split; the song reached <strong>#1 Gospel</strong> and
+            <strong>11+ million YouTube views</strong>. Gospel in trap packaging, following the
+            tradition of Thomas Dorsey borrowing blues forms in 1932.
+          </p>
+          <p>
+            Since <strong>May 2016</strong>, Campbell has hosted <strong><em>Get Up! Mornings
+            with Erica Campbell</em></strong> &mdash; a nationally syndicated radio show on
+            Reach Media reaching <strong>12 million listeners weekly</strong>. Second solo album
+            <em>I Love You</em> released in 2023 on My Block Inc.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Altar Call</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                43rd acoustic element. The vocal shift from performance to invitation,
+                from proclamation to summoning. The moment when the song stops being a
+                song and becomes a directive: <em>come forward, come now, respond</em>.
+                Gospel&rsquo;s defining acoustic technology &mdash; the voice that demands
+                participation.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Circuit Rider</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                43rd artist-city pattern. Connection to a city through the gospel touring
+                circuit rather than residency. Named for the itinerant Methodist preachers
+                who served circuits of churches. The engine&rsquo;s first pattern defined
+                by religious touring infrastructure.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Sanctified Bend</h4>
+              <div class="level intermediate">Intermediate</div>
+              <p>
+                42nd blue note deployment. The blue note that bends <em>upward</em> rather
+                than downward &mdash; from tension into release, from petition into praise.
+                Gospel&rsquo;s theological proposition made acoustic: suffering is real but
+                not final.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>E=5 Return Mode</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                9th E=5 deployment. Returns after one degree of E=4 recalibration (41).
+                The nine-degree streak (32&ndash;40) paused, not collapsed. Distribution:
+                2:13:7:12:9:1. E=5 now tied with E=4 at the center of the distribution.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Genre Stage 23: Gospel/R&amp;B</h4>
+              <div class="level advanced">Advanced</div>
+              <p>
+                First gospel genre stage in the engine. Gospel is the upstream source of
+                soul, R&amp;B, funk, and blues &mdash; every genre documented in degrees
+                0&ndash;41. At degree 42, the engine maps the headwater. The R&amp;B qualifier
+                acknowledges the fusion production.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Tacoma &amp; the Gospel Touring Circuit</h2>
+          <p>
+            Campbell is a Los Angeles artist. The Tacoma assignment maps the <strong>gospel
+            touring circuit</strong> &mdash; the network of church conferences, gospel festivals,
+            and congregational bookings that brings artists like Campbell into Pacific Northwest
+            cities with a regularity that constitutes presence. The <strong>Church of God in
+            Christ</strong> (Campbell&rsquo;s denomination) has congregations throughout the
+            Seattle-Tacoma corridor. Gospel artists move through these <strong>congregational
+            networks</strong>, performing at church anniversaries, revival meetings, and
+            conferences. The circuit rider pattern maps this invisible geography.
+          </p>
+          <p>
+            The Pacific Northwest has its own gospel history: the <strong>Total Experience
+            Gospel Choir</strong> (1973, Pat Wright) drew members from Seattle, Everett, Auburn,
+            and Tacoma. <strong>Quincy Jones</strong> (degree 0&deg;) sang in the Challengers
+            gospel group in Bremerton during the WWII era. Gospel&rsquo;s roots in the region
+            predate the jazz tradition the engine has documented.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Warryn Campbell: The Bridge Between Worlds</h2>
+          <p>
+            <strong>Warryn Stafford Campbell Jr.</strong> (b. 1975, South Central LA) is both
+            Erica&rsquo;s husband and her primary producer. His credits span gospel (Mary Mary,
+            Yolanda Adams), hip-hop (<strong>Kanye West</strong> &mdash; <em>Late Registration</em>
+            and <em>Graduation</em>, both Grammy: Best Rap Album), and R&amp;B (Alicia Keys,
+            Brandy, Missy Elliott). Five Grammy wins, fifteen nominations. The same ears that
+            shaped &ldquo;Shackles&rdquo; produced tracks on <em>Late Registration</em>.
+            He started as a session musician for <strong>DJ Quik</strong> and on
+            <strong>Death Row Records</strong> projects. Gospel and hip-hop are not separate
+            worlds in his practice &mdash; they are different applications of the same musical
+            knowledge.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li><span class="ref-degree">41&deg;</span> Shawn Smith &mdash; <strong>Soul/Blues to Gospel/R&amp;B.</strong> E=4 to E=5 &mdash; recalibration complete. Whiskey falsetto (intimate, interior) followed by altar call (communal, summoning). Opposite vocal orientations, consecutive degrees.</li>
+            <li><span class="ref-degree">40&deg;</span> Alice Smith &mdash; <strong>Consecutive women.</strong> Both genre-crossers, both on Sony-distributed labels. Shelved frequency (40) vs altar call (42): the suppressed voice and the summoning voice, two degrees apart.</li>
+            <li><span class="ref-degree">30&deg;</span> Ray Charles &mdash; <strong>Mirror crossing.</strong> Charles secularized gospel into soul; Campbell brought R&amp;B production into gospel. Same crossing, opposite directions.</li>
+            <li><span class="ref-degree">0&deg;</span> Quincy Jones &mdash; <strong>Gospel origin.</strong> Jones sang in the Challengers gospel group in Bremerton. Campbell raised in COGIC. Both started in gospel. Jones left it; Campbell stayed.</li>
+            <li><span class="ref-degree">33&deg;</span> Larry English &mdash; <strong>Tacoma thread.</strong> First Tacoma degree. English&rsquo;s Tacoma through residency; Campbell through circuit.</li>
+            <li><span class="ref-degree">34&deg;</span> The Tempos &mdash; <strong>Tacoma thread.</strong> Second Tacoma degree. Group residency pattern; Campbell solo circuit rider pattern.</li>
+            <li><span class="ref-degree">38&deg;</span> Booker T. Jones &mdash; <strong>E=5 parallel.</strong> Both brought their genre to audiences who would not have sought it. Booker T. brought R&amp;B/soul to rock audiences; Campbell brought gospel to R&amp;B audiences.</li>
+            <li><span class="ref-degree">26&deg;</span> The Dynamics &mdash; <strong>Congregation acoustic element (27th).</strong> The engine&rsquo;s prior map of the congregation as listeners; Campbell adds the altar call that summons them.</li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Quick Facts</h4>
+          <div class="stat-row">
+            <span class="stat-label">Born</span>
+            <span class="stat-value">Apr 29, 1973</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">Inglewood, CA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Home</span>
+            <span class="stat-value">Los Angeles, CA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Spouse</span>
+            <span class="stat-value">Warryn Campbell</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Children</span>
+            <span class="stat-value">Krista, Warryn III, Zaya</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Church</span>
+            <span class="stat-value">COGIC / CWC</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">42 / 360</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 5</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Gospel/R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">23</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#43 Circuit Rider</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#43 Altar Call</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#42 Sanctified Bend</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Grammy Awards</h4>
+          <div class="stat-row">
+            <span class="stat-label">Total Wins</span>
+            <span class="stat-value">6 of 18 noms</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2001</span>
+            <span class="stat-value">Thankful</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2009</span>
+            <span class="stat-value">Get Up</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2010</span>
+            <span class="stat-value">God in Me</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2013</span>
+            <span class="stat-value">Go Get It</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2015</span>
+            <span class="stat-value">Help (solo)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2025</span>
+            <span class="stat-value">One Hallelujah</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Chart Records</h4>
+          <div class="stat-row">
+            <span class="stat-label">Shackles</span>
+            <span class="stat-value">#28 Hot 100</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">God in Me</span>
+            <span class="stat-value">64 wks R&amp;B</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Help</span>
+            <span class="stat-value">#6 Billboard 200</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">The Sound</span>
+            <span class="stat-value">#7 Billboard 200</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">I Luh God</span>
+            <span class="stat-value">#1 Gospel</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Mary Mary</h4>
+          <div class="stat-row">
+            <span class="stat-label">Formed</span>
+            <span class="stat-value">1998</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Albums</span>
+            <span class="stat-value">6 studio + 1 comp</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">WE tv</span>
+            <span class="stat-value">6 seasons</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">AMA Wins</span>
+            <span class="stat-value">2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">BET Awards</span>
+            <span class="stat-value">3</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Solo Albums</h4>
+          <div class="stat-row">
+            <span class="stat-label">2014</span>
+            <span class="stat-value">Help</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2015</span>
+            <span class="stat-value">Help 2.0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">2023</span>
+            <span class="stat-value">I Love You</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Media &amp; Ministry</h4>
+          <div class="stat-row">
+            <span class="stat-label">Radio</span>
+            <span class="stat-value">Get Up! Mornings</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Reach</span>
+            <span class="stat-value">12M weekly</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Church</span>
+            <span class="stat-value">CWC San Fernando</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Congregation</span>
+            <span class="stat-value">~700 members</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">After 42</span>
+            <span class="stat-value">2:13:7:12:9:1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5 Mode</span>
+            <span class="stat-value">9th deployment</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Women</span>
+            <span class="stat-value">8 / 43 (~18.6%)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #E8EAF6; font-size: 0.82rem; color: #757575; font-family: system-ui, sans-serif;">
+      <p>
+        <strong>Seattle 360</strong> &mdash; Degree 42 of 360 &mdash; Erica Campbell &mdash;
+        v1.49.178 &mdash; Gospel/R&amp;B &mdash; Columbia / eOne / My Block &mdash; Tacoma &mdash;
+        First Gospel Artist
+      </p>
+      <p>
+        Duwamish Territorial Acknowledgment: This research documents music mapped to the
+        Seattle-Tacoma area, on the ancestral territory of the Duwamish Tribal Organization
+        (duwamishtribe.org), the Muckleshoot Indian Tribe, the Puyallup Tribe of Indians
+        (puyalluptribe-nsn.gov), and related Coast Salish and Southern Lushootseed-speaking peoples.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

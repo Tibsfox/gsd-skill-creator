@@ -1,0 +1,253 @@
+{
+  "degree": 41,
+  "species": "Nashville Warbler",
+  "scientific_name": "Leiothlypis ruficapilla",
+  "slug": "041-nashville-warbler",
+  "sound_type": "see-bit see-bit teedle-teedle",
+  "energy": 4,
+  "ecosystem": "brush",
+  "season": "summer",
+  "family": "Parulidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.608,
+    "lon": -122.297,
+    "description": "Seattle reference; breeds in brushy clearings and regenerating logged areas on the eastern Cascades slopes, Okanogan Highlands, and scattered locations in western Washington. The western subspecies (ridgwayi) occupies the PNW. Primary breeding habitat is early successional brush: regenerating clearcuts, post-fire scrub, montane ceanothus/manzanita, and chaparral-like scrub in the eastern Cascades transition zone."
+  },
+  "taxonomy_note": {
+    "description": "Nashville Warbler is the NINTH Parulidae in the engine -- extending the family's lead to FOUR over Hirundinidae and Turdidae (5 each). It is the FOURTH CONSECUTIVE Parulidae (after BTG at 38, Townsend's at 39, and Hermit at 40), an unprecedented run. But it breaks the Setophaga streak: Nashville is Leiothlypis, not Setophaga. The genus shift matters -- it partitions the four-consecutive Parulidae run into a Setophaga trio (38-40) and a Leiothlypis coda (41). A MISNOMER SPECIES: named for Nashville, Tennessee, where Alexander Wilson collected it during migration in 1811. The bird does not breed in Nashville. It does not winter in Nashville. It merely passed through.",
+    "current_family": "Parulidae",
+    "new_family": false,
+    "family_count_in_engine": 18,
+    "parulidae_count_in_engine": 9,
+    "name_etymology": "Leiothlypis = Ancient Greek leios (smooth) + thlypis (a kind of finch) = 'smooth-feathered.' Ruficapilla = Latin rufus (red/rufous) + capillus (hair/cap) = 'red-capped.' Full translation: 'Smooth-feathered red-cap.' Named for a hidden rufous crown patch -- a feature you almost never see. The genus name captures the plain, smooth plumage that distinguishes Leiothlypis from the patterned Setophaga.",
+    "genus_note": "Leiothlypis now has TWO members in the engine (20, 41). The genus appeared at degree 20 (Orange-crowned Warbler) to close the warbler quintet, and returns at degree 41 to close the four-consecutive Parulidae run. Both times, Leiothlypis serves as the closing genus -- the quiet bookend after the dramatic center. Formerly Vermivora; split into Leiothlypis by Sangster (2008) based on molecular phylogenetics [NEEDS VERIFICATION].",
+    "order_note": "Passeriformes continues from degree 40. Fourth consecutive Passeriformes in the warbler quartet.",
+    "warbler_quartet_note": "Degrees 38-39-40-41 form the engine's first four-consecutive same-family run (surpassing the swallow quintet's 5-consecutive for diversity). The quartet spans TWO genera (Setophaga at 38-40, Leiothlypis at 41), THREE ecosystems (oak-pine, conifer canopy/mountain conifer, brush), and maps both a displacement cascade AND a successional gradient from old-growth canopy to post-disturbance brush.",
+    "vermivora_note": "Formerly placed in genus Vermivora. The 2008 Sangster revision split Vermivora into two genera: Leiothlypis (smooth-plumaged species including Orange-crowned, Nashville, Tennessee, Virginia's, Colima, Lucy's) and true Vermivora (wing-barred species: Golden-winged, Blue-winged) based on molecular data [NEEDS VERIFICATION].",
+    "family_lead": "With 9 members, Parulidae now LEADS all families by FOUR over Hirundinidae and Turdidae (5 each). Nine of ~115 North American Parulidae is about 8%. The family has THREE structural arcs plus a coda: quintet (14-17, 20), trio (38-40, displacement cascade), coda (41, genus shift + habitat descent), and the overarching narrative.",
+    "misnomer_note": "Alexander Wilson collected the Nashville Warbler near Nashville, Tennessee, in 1811 during spring migration. The bird was passing through -- Nashville is on the migration route, not in the breeding or wintering range. One of ornithology's most famous naming errors. The engine's first misnomer species.",
+    "hidden_crown_note": "The Nashville Warbler has a rufous crown patch hidden under gray feathers (ruficapilla = 'red-capped'). The Orange-crowned Warbler (degree 20) has an orange crown patch hidden under olive feathers (celata = 'hidden'). Two Leiothlypis species, both named for invisible crown patches. Hidden crowns are a Leiothlypis signature in the engine.",
+    "displacement_note": "Nashville Warbler is NOT part of the Setophaga displacement cascade (38-39-40). It is a separate ecological story: a disturbance-dependent species that needs the brush habitat that grows after forest destruction. The Hermit Warbler (40) needs old-growth mountain conifer. The Nashville Warbler (41) needs the opposite: recently disturbed brush. Consecutive degrees, opposite successional requirements."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "4,000-8,500 (across both parts of the two-part song) [NEEDS VERIFICATION]",
+    "peak_energy_band_hz": "5,000-7,500 (primary song energy, spanning both halves) [NEEDS VERIFICATION]",
+    "song_duration_s": "1.5-2.5 (staccato half ~0.6-1.0 s + trill half ~0.5-1.0 s)",
+    "note_structure": "TWO-PART SONG: (1) First half -- 2-4 sharp staccato couplets (see-bit see-bit), evenly spaced, rhythmic, measured. Each couplet is a quick upslur-downslur pair. (2) Second half -- a rapid, lower-pitched trill (teedle-teedle-teedle), faster and more blurred than the first half. The transition is abrupt -- the song flips from staccato to trill as if a switch is thrown.",
+    "note_types": "THREE sound categories: (1) STACCATO COUPLETS -- the see-bit phrases, sharp, crisp, higher-pitched, rhythmic. (2) RAPID TRILL -- the teedle-teedle phrases, lower, faster, blurred. (3) CALL NOTE -- a sharp tsik or pink, higher and sharper than Setophaga call notes.",
+    "phrase_structure": "Binary. The song divides cleanly into two halves of different character: measured staccato followed by tumbling trill. This two-part structure is the Nashville Warbler's acoustic signature. No gradual transition -- the partition between halves is abrupt.",
+    "timbre": "DUAL -- the first half is bright, crisp, sharp-edged (each see-bit clean and distinct). The second half is softer, more blurred (individual trill notes smearing together). Two textures in one song. Neither half is buzzy in the Setophaga sense -- the Nashville Warbler's tone is cleaner than the buzzy Setophaga trio.",
+    "amplitude": "E=4 -- moderate volume from low perches in open brush habitat. Carries well in open vegetation. The song is audible but not powerful. The two-part structure provides rhythmic interest without volume escalation.",
+    "tempo": "ACCELERATING -- the first half is moderate (~3-4 couplets per second). The second half doubles the tempo (~8-12 notes per second in the trill) [NEEDS VERIFICATION]. The acceleration across the partition is a defining feature.",
+    "context": "Males sing from exposed perches at the tops of low shrubs and saplings (1-3 m) during breeding season (May-July). The singing perch is the highest point in the brush -- not the canopy of a tall tree but the tip of a 2-meter snowbrush or willow. The vertical descent from the Setophaga trio's canopy-top singing (15-50 m) to the Nashville's brush-top singing (1-3 m) is dramatic.",
+    "key_property": "THE PARTITION -- the 42nd acoustic element. A two-part song with a rhythmic staccato first half and a rapid trill second half. After the thinning's attenuation (degree 40), the partition introduces STRUCTURAL DUALITY -- a song that is explicitly two things rather than one continuous thing. Named 'the partition' because it captures multiple divisions: (1) the song's internal division into staccato and trill, (2) the genus partition between Setophaga (38-40) and Leiothlypis (41), (3) the habitat partition from canopy to brush, (4) the naming partition between what the species is called and where it actually lives. The first acoustic element named for internal song STRUCTURE rather than quality, process, or effect."
+  },
+  "plumage": {
+    "overall": "A small, compact warbler with a gray head, bold white eye-ring, bright yellow underparts, and olive-green back. No wing bars. No tail spots. Clean and understated after three degrees of bold Setophaga patterns. The plumage embodies the Leiothlypis genus name: smooth-feathered.",
+    "head": "Blue-gray crown and nape with a conspicuous bold white eye-ring -- the eye-ring is the most prominent head feature and the primary field mark. Western subspecies (ridgwayi) has a bolder, more complete eye-ring than eastern birds [NEEDS VERIFICATION].",
+    "crown_patch": "A small rufous (chestnut-red) crown patch HIDDEN beneath gray crown feathers. The feature the species is named for (ruficapilla = 'red-capped') is almost never visible. Exposed during aggressive displays or when wind ruffles the head feathers. This is the engine's SECOND hidden crown after Orange-crowned Warbler (degree 20). A Leiothlypis signature.",
+    "throat_breast": "Bright yellow from chin through belly in adult males. The yellow underparts are the bird's most visible feature -- vivid, saturated, extensive. The yellow contrasts with the gray head and olive back.",
+    "back": "Olive-green, plain. No streaking, no wing bars, no tail spots. The smooth, unmarked back that defines Leiothlypis. Compare with Setophaga: BTG had white wing bars, Townsend's had white wing bars, Hermit had white wing bars. Nashville has none.",
+    "field_id": "Bold white eye-ring on gray head + bright yellow underparts + olive back + NO wing bars. The eye-ring is the clincher. In the field, Nashville Warbler is the small yellow-bellied warbler with the staring white eye-ring in the brush.",
+    "leiothlypis_comparison": "Orange-crowned (20) = dull olive-yellow overall, no eye-ring, faint streaking. Nashville (41) = brighter yellow underparts, bold white eye-ring, gray head contrast. The Nashville is the 'dressed-up' Leiothlypis -- still plain compared to Setophaga, but more contrasting than the Orange-crowned. Two Leiothlypis, two levels of subtlety.",
+    "hidden_crown_parallel": "Orange-crowned Warbler (degree 20): orange crown hidden under olive. Nashville Warbler (degree 41): rufous crown hidden under gray. Two Leiothlypis species in the engine, both named for invisible crown ornaments. The genus hides its colors."
+  },
+  "brush_ecology": {
+    "definition": "Brush -- low, dense, scrubby vegetation in early successional or disturbance-maintained habitat. A NEW ecosystem for the engine. Distinguished from all previous warbler ecosystems (understory thicket, riparian willow, freshwater marsh, shrubby slope, oak-pine, conifer canopy, mountain conifer) by its association with DISTURBANCE: brush exists because something was destroyed -- fire, logging, windfall. The Nashville Warbler is a disturbance-dependent species.",
+    "habitat_types": [
+      "Regenerating clearcuts (5-15 years post-logging) -- dense shrub growth before canopy closure",
+      "Post-fire brush -- burned forest areas colonized by shrubs before conifer regeneration",
+      "Mountain shrub zones -- ceanothus, manzanita, snowbrush at forest-meadow transitions",
+      "East-slope Cascades openings -- dry, brushy habitat in ponderosa pine and Douglas fir gaps",
+      "Chaparral-like scrub -- dense, low vegetation in rain-shadow areas"
+    ],
+    "vertical_position": "Low brush tops (1-3 m singing perch) and ground level (nest). The Nashville Warbler sings from the highest point in the brush -- but the brush is only 1-3 m tall. A dramatic vertical descent from the Setophaga trio's canopy (15-50 m) to the brush tops. The engine descends from the tallest trees to the lowest scrub in four degrees.",
+    "pnw_distribution": [
+      "Eastern Cascades slopes -- core breeding habitat in brush and openings",
+      "Okanogan Highlands -- brushy clearings and post-fire habitat",
+      "Blue Mountains -- montane shrub and early successional forest",
+      "Siskiyou Mountains -- chaparral edges and brushy clearings",
+      "West side of Cascades -- scattered, in disturbed habitats and regenerating clearcuts [NEEDS VERIFICATION]"
+    ],
+    "significance": "Brush is transient habitat. It exists in the gap between destruction and forest regrowth. The Nashville Warbler needs disturbance -- fire, logging, storms -- to create its breeding habitat. This is the ecological opposite of the Hermit Warbler (degree 40), which needs ancient, undisturbed mountain conifer. Consecutive degrees, opposite successional requirements. The four-consecutive Parulidae run maps a full successional gradient: old-growth canopy (Setophaga trio at 38-40) to post-disturbance brush (Leiothlypis at 41)."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The partition -- the 42nd acoustic element: a two-part song with a rhythmic staccato first half (see-bit see-bit) and a rapid trill second half (teedle-teedle). After the thinning's attenuation and ecological mourning (degree 40), the partition introduces STRUCTURAL DUALITY -- a song explicitly divided into two halves of different character. Named 'the partition' for five simultaneous divisions: (1) the song's internal partition into staccato and trill -- two tempos, two textures, two pitch bands; (2) the genus partition from Setophaga (38-40) to Leiothlypis (41); (3) the habitat partition from canopy to brush; (4) the naming partition between what the species is called (Nashville) and where it lives (western mountains); (5) the successional partition between old-growth forest and post-disturbance scrub. The first acoustic element named for internal song STRUCTURE rather than quality, process, or effect.",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/partition/",
+      "examples": [
+        "Nashville Warbler song: see-bit see-bit teedle-teedle. The first half (see-bit) is measured, rhythmic, staccato -- each couplet clean and distinct. The second half (teedle-teedle) is rapid, tumbling, blurred -- a trill that dissolves the staccato structure. The transition is abrupt. No gradual shift. The song flips between two modes.",
+        "Thinning to partition transition: the thinning (40, continuous attenuation, one texture fading) -> the partition (41, two textures juxtaposed, a song that is explicitly two things). After a song that was becoming less, a song that is overtly divided. Different structural principle entirely.",
+        "Structural novelty: no previous acoustic element was named for song architecture. Silence (0) was a baseline. Cascade (1) was a pattern. Thinning (40) was a process. The partition is a FORM -- a way of organizing sound rather than a quality of the sound itself. The element category expands.",
+        "MacGillivray's Warbler (degree 14) had a hint of two-part structure (churry-churry + sweet ending) but blended the transition. The Nashville's partition is explicit and abrupt. The engine's first clean binary song.",
+        "Binary form in music: the partition maps to binary form (AB) -- a composition in two distinct sections. The staccato half is A (rhythmic, ordered, higher). The trill half is B (rapid, organic, lower). The Nashville Warbler sings a miniature binary composition every time it opens its bill."
+      ],
+      "music_theory_parallel": "Binary form (AB) is one of the oldest structures in Western music -- a composition divided into two contrasting sections. The Nashville Warbler's song is a natural binary form: Section A (staccato couplets, rhythmic, measured, like a march rhythm) and Section B (rapid trill, tumbling, like a cadential run). The transition is a hard cut, not a modulation -- as if the conductor drops the baton and the ensemble shifts genre mid-measure. In classical form, binary compositions often have the A section establishing order and the B section releasing it. See-bit see-bit (order) teedle-teedle (release). The bird composes in AB form without knowing the name."
+    },
+    {
+      "concept": "The four-consecutive Parulidae run -- degrees 38-39-40-41 as the engine's longest same-family consecutive sequence. Four warbler species across two genera (Setophaga for 38-40, Leiothlypis for 41), three ecosystems (oak-pine to conifer to brush), and two ecological stories (displacement cascade + successional gradient). The run is unprecedented: no family has appeared four times consecutively before. The warbler quartet surpasses the swallow quintet (degrees 26-30, 5 consecutive Hirundinidae) in genus diversity (2 genera vs. 5 genera -- but the swallows had 5 unique species in 5 consecutive, while the warblers have 4 in 4).",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/warbler-quartet-consecutive/",
+      "examples": [
+        "Four degrees: BTG (38, Setophaga, oak-pine, drawl), Townsend's (39, Setophaga, conifer canopy, canopy buzz), Hermit (40, Setophaga, mountain conifer, thinning), Nashville (41, Leiothlypis, brush, partition). Same family. Two genera. Three ecosystems. Two acoustic categories (continuous buzz at 38-40 vs. partitioned song at 41).",
+        "The genus break at degree 41 partitions the run into Setophaga (38-40) and Leiothlypis (41). The Setophaga trio was a displacement cascade. The Leiothlypis coda is a habitat shift. Same family, different story.",
+        "Swallow comparison: the swallow quintet (26-30) was 5 consecutive Hirundinidae across 5 genera -- a family survey in aerial habitat. The warbler quartet (38-41) is 4 consecutive Parulidae across 2 genera -- a story arc from old-growth canopy to post-disturbance brush. The swallows surveyed. The warblers narrated.",
+        "Warbler fatigue: 9 of 42 entries (21.4%) from one family. FOUR consecutive. The engine is deep in warbler territory. Maximum taxonomic distance is now URGENT at degree 42.",
+        "Structural arcs complete: Quintet (14-17, 20) = acoustic catalog. Trio (38-40) = displacement cascade. Coda (41) = genus shift and habitat descent. The warbler family's engine story has three acts and an epilogue."
+      ],
+      "music_theory_parallel": "A sonata with three movements and a coda. The quintet (14-17, 20) is the first movement -- exposition, presenting the warbler themes across five species. The trio (38-40) is the development -- taking the Setophaga theme and running it through a dramatic displacement narrative. The coda (41) is the closing gesture -- a quiet return to Leiothlypis (the genus that closed the first movement), in a new key (brush instead of shrubby slope), with a new form (partition instead of trill). The coda does not resolve the drama. It steps aside."
+    },
+    {
+      "concept": "The hidden crown -- two Leiothlypis species with concealed crown patches forming the engine's first genus-level plumage signature. Orange-crowned (degree 20) has an orange crown patch hidden under olive feathers (celata = 'hidden'). Nashville (degree 41) has a rufous crown patch hidden under gray feathers (ruficapilla = 'red-capped'). Both named for features you almost never see. The genus Leiothlypis ('smooth-feathered') hides its colors under smooth plumage. This is the engine's second hidden-color instance after degree 20.",
+      "level": "foundational",
+      "department": "ecology/plumage",
+      "college_path": ".college/ecology/plumage/hidden-crown/",
+      "examples": [
+        "Two hidden crowns: Orange-crowned (celata = hidden, orange crown under olive) and Nashville (ruficapilla = red-capped, rufous crown under gray). Both Leiothlypis. Both named for their invisible ornaments. The genus hides its colors.",
+        "Contrast with Setophaga: the Setophaga quartet wears its identity on display -- vivid yellow (16), black-and-white ink (38), bold yellow-and-black face (39), yellow beacon (40). The Leiothlypis pair hides its most distinctive features. Bold vs. subtle. Display vs. concealment.",
+        "The naming irony: Orange-crowned is named 'celata' (hidden) -- acknowledging the invisibility. Nashville is named 'ruficapilla' (red-capped) -- describing the feature as if it were visible, when it is not. Two naming approaches to the same hidden reality.",
+        "Field birding implication: Nashville Warbler is identified by its EYE-RING, not its crown patch. The feature the bird is named for is invisible. The feature it is identified by is not in its name. The bird's identity is partitioned between its name and its appearance.",
+        "Crown patches as signals: the hidden crown patches are exposed during aggressive encounters -- male-male territorial disputes. The rufous crown is a signal for other Nashville Warblers, not for observers. The hidden color has a social function that does not require constant display."
+      ],
+      "music_theory_parallel": "A musical instrument with a hidden register. The harpsichord has a lute stop -- a mechanism that changes the timbre by pressing leather pads against the strings. When engaged, the sound transforms. When not engaged, the listener does not know the capability exists. The Nashville Warbler's hidden crown is its lute stop: a color shift that is available but almost never deployed, hidden behind the default smooth gray register. The bird plays in open position almost always. The hidden register exists for moments of confrontation."
+    },
+    {
+      "concept": "The misnomer -- Nashville Warbler as the engine's first species named for a geographic accident rather than a geographic range. Alexander Wilson collected the bird near Nashville, Tennessee, in 1811 during spring migration. The bird was passing through. It does not breed in Nashville. It does not winter in Nashville. The name is a permanent record of a brief encounter. This is distinct from Setophaga occidentalis (degree 40, 'western,' describing the actual range) and S. townsendi (degree 39, named for a person in a place). The Nashville Warbler is named for a rest stop.",
+      "level": "intermediate",
+      "department": "ecology/nomenclature",
+      "college_path": ".college/ecology/nomenclature/misnomer/",
+      "examples": [
+        "Wilson's 1811 expedition: Alexander Wilson traveled through the southeastern United States collecting specimens. He named the Nashville Warbler (collected near Nashville, TN) and the Tennessee Warbler (collected in Tennessee) based on where he found them during migration. Both names are misnomers -- neither species has a meaningful association with their namesake states.",
+        "Compare with Hermit Warbler (occidentalis = 'western'): the Hermit Warbler IS western. The name is accurate. Nashville Warbler is named for a place it barely visits. Two consecutive degrees -- one accurately named, one misnamed.",
+        "The Cape May Warbler parallel: another Wilson-era misnomer, named for Cape May, New Jersey, where a specimen was collected during migration. The pattern: 19th-century ornithologists naming birds for collection sites rather than ecological associations.",
+        "Naming partition: the Nashville Warbler's name is partitioned from its identity. It is called Nashville but lives in western mountains. It is named ruficapilla (red-capped) but the cap is hidden. The species carries two layers of nominal disconnect.",
+        "Modern ornithological naming: the AOS has been revisiting eponymous and problematic bird names. The Nashville Warbler's misnomer is geographic rather than eponymous, but it illustrates the broader problem of names that do not describe the species' actual biology."
+      ],
+      "music_theory_parallel": "A musical key signature that does not match the actual key of the piece. A composition written in C major but marked as G major at the top of the page -- the notes tell you one thing, the label tells you another. The Nashville Warbler carries the key signature of Tennessee but plays in the key of western mountain brush. The label is wrong. The music is right. Every field guide repeats the misnomer. The bird keeps singing in the brush."
+    },
+    {
+      "concept": "Brush ecosystem and the disturbance-dependence paradox -- the Nashville Warbler needs habitat created by destruction (fire, logging, storms) while its predecessor (Hermit Warbler, degree 40) needs habitat preserved from destruction (old-growth mountain conifer). Consecutive degrees, opposite successional requirements. The four-consecutive Parulidae run maps a full successional gradient: ancient forest canopy (Setophaga trio) to post-disturbance brush (Leiothlypis coda). Conservation for one inherently reduces habitat for the other.",
+      "level": "intermediate",
+      "department": "ecology/habitat",
+      "college_path": ".college/ecology/habitat/brush-disturbance/",
+      "examples": [
+        "Hermit (40) needs old-growth conifer. Nashville (41) needs post-disturbance brush. Preserving old-growth reduces brush. Creating brush (logging, fire) destroys old-growth. The two species cannot be simultaneously optimized in the same landscape.",
+        "Fire suppression paradox: decades of fire suppression have reduced early successional brush habitat. The Nashville Warbler may have been MORE common historically when fire was more frequent. Fire suppression protects old-growth conifer (good for Hermit Warbler) but eliminates brush (bad for Nashville Warbler).",
+        "Regenerating clearcuts as Nashville Warbler habitat: 5-15 years after logging, dense brush growth provides breeding habitat. When conifers regenerate and close the canopy, the Nashville Warblers leave. Logging creates temporary warbler habitat -- a conservation fact that resists simple narratives.",
+        "The successional gradient in the quartet: BTG (38, mature oak-pine), Townsend's (39, mature conifer), Hermit (40, old-growth mountain conifer), Nashville (41, post-disturbance brush). The four degrees map from climax forest to pioneer scrub. The full forest life cycle in four warblers.",
+        "Brush is transient: it exists in the gap between destruction and regrowth. The Nashville Warbler is adapted to impermanence -- its habitat will become forest if left alone. The bird is a specialist of the temporary."
+      ],
+      "music_theory_parallel": "A piece composed for an instrument that is being detuned. The brush habitat is like a piano that has just been dropped -- the strings are slack, the hammers displaced, the frame bent. But in that brief moment of disarray, before the tuner arrives to restore order, the piano makes sounds it could never make in tune. The Nashville Warbler composes for the dropped piano. The Hermit Warbler requires the concert grand. Both are valid music. Both are valid ecology. You cannot have both on the same stage at the same time."
+    },
+    {
+      "concept": "E=4 continues at 18 degrees (43.9%) -- the energy compression deepens further. E=3 absent for 21 consecutive degrees, E=2 for 28, E=1 for 29. The entire lower half of the energy spectrum has been absent for over two-thirds of the engine. The Nashville Warbler's E=4 is its FOURTH consecutive degree at that level (38-39-40-41 all E=4). Dynamic range compression now extends to an unprecedented run of four identical energy values.",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e4-twenty-one-degrees/",
+      "examples": [
+        "E=4 dominance: 18 of 42 entries (43.9%). Has appeared in 18 of the last 21 degrees. The modal energy level by a wide margin.",
+        "E=3 absence: 21 consecutive degrees without E=3. Breaking past the 20-degree milestone set one degree ago. The quintet's E=3 is now 21 degrees in the past.",
+        "E=2 absence: 28 degrees since the last E=2 (degree 13, Hutton's Vireo). Over two-thirds of the engine without the default quiet register.",
+        "E=1 absence: 29 degrees since the last E=1 (degree 12, Pine Siskin). The minimum energy level is a distant memory.",
+        "Four consecutive E=4: degrees 38-39-40-41 all E=4 from two genera of the same family. The energy monotony is now entrenched across a family sequence. The engine is URGENTLY overdue for a low-energy species."
+      ],
+      "music_theory_parallel": "An orchestra that has been playing mezzo-forte for twenty-one bars. The composer has written 'mf' at bar 22 and never rescored it. The warbler quartet is four more bars of mezzo-forte from the same instrument section (woodwinds). The audience has forgotten what pianissimo sounds like. The conductor is locked in a single dynamic with no relief in sight. The score needs a subito piano -- not a gradual decrease, but a sudden drop. A marine species at E=2 would be that sudden silence."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-040",
+      "title": "Hermit Warbler (Degree 40)",
+      "connection": "PREDECESSOR -- CONSECUTIVE PARULIDAE. The Hermit Warbler (degree 40) and Nashville Warbler (degree 41) form degrees 3 and 4 of the unprecedented four-consecutive Parulidae run. But they tell OPPOSITE ecological stories: Hermit needs old-growth mountain conifer, Nashville needs post-disturbance brush. Same family. Opposite successional requirements. The four-degree warbler run maps from climax forest to pioneer scrub."
+    },
+    {
+      "project": "SPS-039",
+      "title": "Townsend's Warbler (Degree 39)",
+      "connection": "SETOPHAGA TRIO MEMBER. Townsend's at degree 39 was the middle of the Setophaga trio. Nashville at degree 41 breaks the Setophaga streak with Leiothlypis. The genus shift at degree 41 partitions the four-consecutive Parulidae into two genus groups."
+    },
+    {
+      "project": "SPS-038",
+      "title": "Black-throated Gray Warbler (Degree 38)",
+      "connection": "QUARTET START. BTG began the four-consecutive Parulidae run. Nashville closes it. BTG is Setophaga in oak-pine canopy. Nashville is Leiothlypis in post-disturbance brush. Maximum habitat contrast within the same family run."
+    },
+    {
+      "project": "SPS-020",
+      "title": "Orange-crowned Warbler (Degree 20)",
+      "connection": "LEIOTHLYPIS GENUS PAIR. Both Leiothlypis. Both with hidden crown patches (orange and rufous). Both serve as closers: Orange-crowned closed the quintet (degree 20), Nashville closes the quartet (degree 41). The genus returns after 21 degrees. Hidden crowns are a Leiothlypis signature."
+    },
+    {
+      "project": "SPS-016",
+      "title": "Yellow Warbler (Degree 16)",
+      "connection": "SETOPHAGA CONTRAST. Yellow Warbler = maximum yellow, riparian, E=3, clear ascending song. Nashville = understated olive-yellow, brush, E=4, partitioned song. Two warbler genera, two aesthetic strategies: Setophaga boldness vs. Leiothlypis subtlety."
+    },
+    {
+      "project": "SPS-014",
+      "title": "MacGillivray's Warbler (Degree 14)",
+      "connection": "TWO-PART SONG COMPARISON. MacGillivray's (degree 14) had a hint of two-part structure (rolling churry + sweet ending) but blended the transition. Nashville (degree 41) has an explicit, abrupt partition between staccato and trill. The engine's first clean binary song after degree 14's suggestion."
+    },
+    {
+      "project": "SPS-033",
+      "title": "Cassin's Finch (Degree 33)",
+      "connection": "MOUNTAIN CONIFER vs. BRUSH. Cassin's Finch at degree 33 shares the high-elevation mountain habitat zone but sings from exposed snag tops. Nashville Warbler occupies the lower brushy openings that often exist within the same landscape -- post-fire clearings in mountain forests."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Nashville Warbler documented as breeder in brushy clearings and regenerating logged areas of the eastern Cascades slopes and associated mountain ranges. Western subspecies ridgwayi. Disturbance-dependent habitat association."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Brush and early successional ecology. Fire-dependent habitat dynamics. Disturbance as ecological driver. The Nashville Warbler as indicator of early successional forest health. Successional gradient from old-growth to pioneer scrub."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 40,
+    "total_entries": 42,
+    "families_represented": 18,
+    "largest_families": {
+      "Parulidae": 9,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Trochilidae": 3,
+      "Fringillidae": 3,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=4 continues. Now at 18 degrees (43.9%). E=3 absent for 21 DEGREES (since degree 20) -- surpassing the 20-degree milestone. E=5 at 3 degrees (7.1%). Dynamic range compression at its most severe: degrees 21-41 exclusively E=4 and E=5. NO E=3, E=2, or E=1 in 21 degrees. The lower three-fifths of the energy spectrum is absent from the entire range since degree 21.",
+    "consecutive_quartet": "Degrees 38-39-40-41 form the engine's first four-consecutive same-family run (Parulidae). The quartet spans TWO genera (Setophaga for 38-40, Leiothlypis for 41) and maps from displacement cascade to habitat descent. All four E=4.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive"],
+    "ecosystem_note": "Brush -- a NEW ecosystem for the engine. Low, dense, scrubby vegetation in early successional or disturbance-maintained habitat. The Nashville Warbler is disturbance-dependent: it needs brush that grows after fire, logging, or storms. This is the ecological opposite of the Hermit Warbler's old-growth mountain conifer (degree 40). Two consecutive species, opposite successional requirements.",
+    "acoustic_element_42": "THE PARTITION -- a two-part song with a rhythmic staccato first half (see-bit see-bit) and a rapid trill second half (teedle-teedle). After the thinning's attenuation (40), the partition introduces structural duality -- a song explicitly divided into two halves. Named for multiple simultaneous divisions: song structure, genus boundary, habitat shift, naming disconnect. The first acoustic element named for song ARCHITECTURE.",
+    "parulidae_note": "NINTH PARULIDAE -- engine record extended further. Leads by FOUR over Hirundinidae and Turdidae (5 each). Fourth consecutive Parulidae (unprecedented). Three arcs plus coda: quintet (14-17, 20), trio (38-40, displacement), coda (41, genus shift + habitat descent), and the overarching narrative. 9 of ~115 North American Parulidae = ~8%.",
+    "leiothlypis_note": "SECOND Leiothlypis in the engine (after Orange-crowned at degree 20). The genus returns after 21 degrees. Both Leiothlypis species serve as closers: Orange-crowned closed the quintet, Nashville closes the quartet. Both have hidden crown patches. The genus is the quiet bookend.",
+    "hybridization_note": "Nashville Warbler is NOT part of the Setophaga displacement cascade. It is a separate ecological story: disturbance-dependence rather than interspecific competition. The four-consecutive Parulidae run maps TWO stories: displacement (38-40) and successional ecology (41).",
+    "conservation_note": "LEAST CONCERN (IUCN). Population stable to slightly declining [NEEDS VERIFICATION]. Disturbance-dependent: needs fire/logging/storms to create brush habitat. Fire suppression may reduce available habitat. The disturbance paradox: preserving old-growth (good for Hermit) reduces brush (bad for Nashville). Cannot optimize both.",
+    "critical_gaps": [
+      "No marine/shoreline species in 41 degrees of 'The Sound of Puget Sound' -- 41 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 41 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 41 degrees -- URGENT",
+      "No nocturnal species since degree 4 (37 degrees ago) -- OVERDUE",
+      "E=3 not used since degree 20 (21 degrees ago) -- BREAKING PAST 20-DEGREE MILESTONE -- CRITICAL",
+      "No E=2 since degree 13 (28 degrees ago) -- LOW ENERGY ABSENT",
+      "No E=1 since degree 12 (29 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "FOUR consecutive Parulidae / same family -- warbler fatigue at UNPRECEDENTED level",
+      "No marine species remains the engine's defining structural deficit -- 41 DEGREES OF A PROJECT NAMED FOR PUGET SOUND"
+    ]
+  }
+}

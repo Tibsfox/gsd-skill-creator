@@ -1,0 +1,71 @@
+# Tibsfox Research
+> 172+ deep research projects across 13 domain clusters, organized through a Rosetta Stone cross-reference framework
+
+## Site Structure
+- /Research/ — main index (this directory)
+- /Research/constellation.html — force-directed 2D knowledge graph (168 nodes, 739 edges, 13 clusters)
+- /Research/series.js — client-side project loader (168 entries)
+- /Research/PNW/ — Pacific Northwest ecology series hub (18 projects)
+
+## Research Series (Active)
+
+### Seattle 360 Engine (S36)
+> 360 Seattle-area musicians, one per degree of a unit circle. Deep research with biography, theory nodes, cross-references.
+- Path: /Research/S36/
+- Releases: /Research/S36/research/releases/NNN-slug/ (42 degrees complete, 000-041)
+- Each release: research.md, index.html, knowledge-nodes.json, retrospective.md
+- Data: /Research/S36/research/data/seattle_360_geo.csv (360 artists with degree, genre, energy, era, neighborhood, label, lat/lon)
+
+### Sound of Puget Sound (SPS)
+> 360 PNW species paired with S36 artists. Avian ecology, vocalization analysis, taxonomy.
+- Path: /Research/SPS/
+- Releases: /Research/SPS/research/releases/NNN-slug/ (42 degrees complete, 000-041)
+- Each release: research.md, index.html, knowledge-nodes.json, retrospective.md
+- Data: /Research/SPS/research/data/pnw_360_species.csv (360 species with degree, name, sound_type, energy, ecosystem, season, family, lat/lon)
+
+### PNW Ecology (18 projects)
+> Mapping the living systems of the Pacific Northwest bioregion from Tahoma's summit to the Salish Sea floor
+- Hub: /Research/PNW/index.html
+- Projects: COL (Columbia), CAS (Cascades), ECO (Ecology), GDN (Garden), AVI (Avian), MAM (Mammals), AWF (Air Water Food), SAL (Salmon), CRV (Corvids), PLT (Plants), AGR (Agriculture), LFR (Old Growth), PPM (Pollution), BHM (Biogeochemistry), SSM (Soil Science), CDS (Citizen Data Science), SFC (Surface Water), MWC (Marine/Watershed)
+
+## Domain Clusters (13)
+| Cluster | Count | Hub | Sample Projects |
+|---------|-------|-----|-----------------|
+| Music | 30 | WAL | WAL (Weird Al), S36 (Seattle 360), SPS (Sound of Puget Sound), GRV (Groove), DDA (DDA) |
+| Infrastructure | 27 | SYS | SYS (Systems Admin), K8S (Kubernetes), DNS, TCP, RFC |
+| Broadcasting | 19 | RBH | RBH (Radio), KPZ, C89, MIX, CBC |
+| Ecology | 18 | ECO | COL, CAS, ECO, GDN, AVI, MAM |
+| Creative | 15 | FFA | FFA (Furry Fandom Arts), BRC (Burning Man), TIBS, ARC |
+| Electronics | 10 | LED | LED, T55 (555 Timer), BPS (Bio-Physics Sensors), SHE (Smart Home) |
+| Science | 7 | BHK | BHK (Black Holes), LGW (Gravitational Waves), SET (SETI) |
+| Space | 7 | CYG | CYG (Cygnus), SMB (Supermassive), GRB (Gamma Ray Bursts) |
+| Vision | 6 | NND | ROF, SPA, NWC, SMF |
+| Business | 5 | BCM | ACC, WSB, BCM, BLA, FCC |
+| AI & Computation | 5 | SST | SST (States Symbols Tape), LLM, AIH (AI Horizon) |
+| Energy | 3 | THE | THE (Thermodynamics), HGE, NND |
+| Graphics | 3 | NEH | NEH, VKD (Vulkan), VKS |
+
+## File Format Per Project
+Each project at /Research/CODE/ contains:
+- index.html — browsable overview with stats, navigation, cross-references
+- page.html — markdown renderer for mission-pack documents
+- mission.html — mission pack browser
+- style.css — project-specific styling
+- mission-pack/ — detailed research documents (markdown)
+- research/ — data files, releases, analysis
+
+## Cross-Reference System
+- /Research/cross-references.json — 739 edges connecting 177 nodes across 13 clusters
+- Rosetta Stone framework: concepts translate across domain boundaries
+- Each project's knowledge-nodes.json contains theory nodes with cross-references to other projects
+
+## Brand
+- /brand.css — shared design system (fox/parchment/PNW palette, dual light/dark mode)
+- Georgia serif for body text, system-ui for labels
+- Color palette derived from fox watercolor painting: warm amber/orange accents, parchment ground, ink structure
+
+## Technical
+- Static HTML + client-side markdown rendering
+- No build step required
+- Hosted via FTP sync to tibsfox.com
+- Source: github.com/Tibsfox/gsd-skill-creator (www/tibsfox/com/Research/)

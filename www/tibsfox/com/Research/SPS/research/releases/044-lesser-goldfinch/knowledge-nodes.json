@@ -1,0 +1,281 @@
+{
+  "degree": 44,
+  "species": "Lesser Goldfinch",
+  "scientific_name": "Spinus psaltria",
+  "slug": "044-lesser-goldfinch",
+  "sound_type": "high thin tsee-ee-ee",
+  "energy": 4,
+  "ecosystem": "weedy shrub",
+  "season": "summer",
+  "family": "Fringillidae",
+  "order": "Passeriformes",
+  "coordinates": {
+    "lat": 47.606,
+    "lon": -122.332,
+    "description": "Seattle reference; historically rare in Washington, now expanding northward through the Willamette Valley and into southern Puget Sound lowlands. First Washington breeding record 1975. Core Washington range in Klickitat County (Columbia River Gorge). Vagrant records increasing in Puget Sound region. Population in Washington increased 110.5% between 2012 and 2022. In Oregon, common breeder in Rogue Valley and southern Willamette Valley, scattered and increasing northward. Range expansion driven by warming temperatures, river proximity, urban development, and increased precipitation."
+  },
+  "taxonomy_note": {
+    "description": "Lesser Goldfinch is the FIFTH Fringillidae and THIRD Spinus in the engine -- the first genus to place three members. Consecutive goldfinch pair with degree 43 (American Goldfinch). Spinus psaltria: 'female lute player of the thorn bush' -- the only species in the engine whose scientific name explicitly references a musical instrument and a human performer. The smallest North American Spinus at ~9.7 grams. Remarkable mimic: 39+ avian species copied, 70-105 phrase types per individual, approximately 50% of song is interspecific mimicry. Range expanding northward into the PNW in real time.",
+    "current_family": "Fringillidae",
+    "new_family": false,
+    "family_count_in_engine": 18,
+    "fringillidae_count_in_engine": 5,
+    "name_etymology": "Spinus = Latin spinus (thorn bush, blackthorn). Psaltria = Ancient Greek psaltria (female harpist, female lute player), from psallo (to pluck a stringed instrument, to play the lyre). Full translation: 'Female lute player of the thorn bush.' Named by Thomas Say in 1822 for the plucked-string quality of the bird's descending call note. The genus names the habitat (thorny, weedy plants). The species names the sound as music (a stringed instrument). Three Spinus naming philosophies: ecological-ecological (pinus), ecological-emotional (tristis), ecological-musical (psaltria).",
+    "genus_note": "Spinus now has THREE members in the engine (12, 43, 44) -- the FIRST genus with three entries. No other genus has more than two distinct species in the engine. Pine Siskin (Spinus pinus, degree 12, E=1, irruptive, electronic zhreee), American Goldfinch (Spinus tristis, degree 43, E=4, summer, per-chick-o-ree + canary song), Lesser Goldfinch (Spinus psaltria, degree 44, E=4, summer, tsee-ee-ee + mimicry mosaic). Three strategies: noise, melody, mosaic.",
+    "order_note": "Passeriformes continues from degree 43. Eighth consecutive Passeriformes (37-44, starting from Calliope Hummingbird... correction: Apodiformes at 35-37, then Passeriformes at 38-44 = seventh consecutive). 37 of 45 entries (82.2%) are Passeriformes.",
+    "consecutive_pair_note": "Consecutive goldfinch pair: American Goldfinch (degree 43) then Lesser Goldfinch (degree 44). The engine's third consecutive same-genus pair after Northern Flicker (21-22) and Cedar/Bohemian Waxwing (31-32). Common species first, less common second -- matching the waxwing pair pattern.",
+    "family_position": "Fringillidae now has 5 members (12, 33, 34, 43, 44) -- tied with Hirundinidae (26-30) and Turdidae (2, 7, 18, 19, 25) as the engine's second-most represented family behind Parulidae (10). Spinus alone has 3 entries, more than most entire families.",
+    "range_expansion_note": "The engine's first species defined primarily by active, ongoing range expansion into the PNW. First Washington breeding record 1975. Klickitat County core. Washington population +110.5% (2012-2022). Drivers: warming temperatures, river proximity, urban development, increased precipitation. Once colonized, areas remain occupied. Vagrant records increasing in Puget Sound. A bird arriving in real time.",
+    "mimicry_note": "The most extensive vocal mimic among Spinus species and one of the most remarkable among all North American passerines. Coutlee (1971) documented mimicry of 39 avian species + 1 mammal at one Arizona site. Individual repertoires of 70-105 unique phrase types. Approximately 50% of song phrases are mimicry. Copied species vary geographically, tracking local bird community composition. Lifelong vocal learning. The song is an acoustic census of the neighborhood.",
+    "subspecies_note": "PNW birds are subspecies hesperophilus ('western-loving') -- the green-backed goldfinch. Males have olive-green backs, black caps, bright yellow underparts. Eastern birds (subspecies psaltria) have entirely black backs. Variation is clinal rather than sharp boundary. Does NOT molt twice yearly like the American Goldfinch -- plumage relatively stable across seasons."
+  },
+  "song_metrics": {
+    "fundamental_frequency_range_hz": "1,600-7,000 (across all vocalizations)",
+    "peak_energy_band_hz": "5,000-7,000 (contact call peak), 2,000-6,000 (song range)",
+    "contact_call_frequency_hz": "~5,000-7,000 (tsee-ee, high thin descending whistle)",
+    "contact_call_duration_s": "0.2-0.5 (1-2 notes per phrase)",
+    "song_duration_s": "10-16+ (extended medley of twittering and mimicry)",
+    "note_structure": "TWO VOCALIZATION MODES: (1) CONTACT CALL (tsee-ee / tee-yee) -- 1-2 high, thin, descending whistled notes at ~5-7 kHz. More whistled than Pine Siskin's buzzy tee-u. The plucked-string call that earned the name psaltria. Year-round. (2) SONG -- extended medley of twittering, buzzing, and whistled notes, 1.6-6.7 kHz, 10-16+ seconds. Approximately 50% original Spinus twittering, 50% mimicry of other species' songs and calls. 70-105 unique phrase types per individual. Breeding season from exposed perch.",
+    "note_types": "FOUR vocalization categories: (1) CONTACT CALL (tsee-ee / tee-yee) -- high thin descending whistle, 1-2 notes, ~5-7 kHz. Diagnostic field call. (2) SONG -- extended medley, multiple phrase types, ~50% original + ~50% mimicry. Up to 39+ species copied. (3) COURTSHIP CALL (tee-yer) -- descending call given by male to female. (4) CHATTER CALL -- rapid twittering during flock interactions and feeding.",
+    "phrase_structure": "Song: continuous medley alternating original Spinus twittering phrases with recognizable fragments of other species' vocalizations. Individual mimicry fragments typically 0.3-1.0 seconds. The overall song structure is a rapid channel-surf through the local bird community -- House Finch, Bewick's Wren, Black Phoebe, goldfinch twittering, another species, more twittering. Lifelong learning; repertoire may expand throughout adulthood.",
+    "timbre": "Contact call: HIGH, THIN, CLEAN WHISTLE -- brighter and thinner than American Goldfinch, cleaner than Pine Siskin. Song: VARIABLE, MULTITIMBRAL -- because ~50% of phrases are mimicry, the song shifts timbre continuously, cycling through the timbral signatures of whatever species are being copied. The most timbral diversity in any single engine species' song.",
+    "amplitude": "E=4 -- moderate volume from exposed perches in weedy shrub habitat. Contact call thin but carries across open habitat. Song delivered from tops of shrubs and small trees.",
+    "tempo": "Contact call: brief, 1-2 notes. Song: rapid, continuous, variable tempo as phrase types change. Mimicry fragments are delivered at approximately the tempo of the source species. The song shifts tempo as it shifts between original and borrowed material.",
+    "context": "Contact call given year-round during flight and perching. Song given during breeding season from exposed perches and during display flight. Courtship call during pair formation. Chatter during flock feeding.",
+    "key_property": "THE MOSAIC -- the 45th acoustic element (species side). A song assembled from fragments of dozens of other species' vocalizations woven with original twittering. 39+ avian species mimicked. 70-105 phrase types per individual. ~50% borrowed, ~50% original. Each fragment is a copy; the arrangement is unique. Named 'the mosaic' for four resonances: (1) the song structure (fragments of many species arranged like tiles), (2) geographic variation (each bird's mosaic reflects local soundscape), (3) the range expansion (new PNW species incorporated as range pushes north), (4) the Spinus trilogy completion (noise, melody, mosaic). The first acoustic element defined by interspecific vocal appropriation."
+  },
+  "plumage": {
+    "overall": "MODERATE SEXUAL DIMORPHISM, MINIMAL SEASONAL DIMORPHISM. Geographic variation between green-backed (western, hesperophilus) and black-backed (eastern, psaltria) males. Females olive-drab across range. Does NOT molt twice yearly -- plumage relatively stable across seasons, unlike American Goldfinch's dramatic seasonal transformation.",
+    "breeding_male_western": "Olive-green to yellowish-green back. Black cap extending to nape. Bright yellow underparts. Dark wings with bold white patches (wing bars and primary/secondary edging). Dark tail with white inner webs. Small dark conical bill. The green-backed goldfinch -- the PNW form (S. p. hesperophilus).",
+    "breeding_male_eastern": "Entirely black back, head, and nape. Bright yellow underparts. Bold white wing patches. The black-backed goldfinch (S. p. psaltria). Does not occur in PNW.",
+    "female": "Olive-green above, dull yellowish below. Dark wings with faint wing bars. Lacks black cap. Minimal geographic variation across range. Similar to non-breeding American Goldfinch female but smaller, darker-backed, with less contrast.",
+    "juvenile": "Similar to female, dull olive-green, with buffy wing bars.",
+    "molt_cycle": "SINGLE annual molt (prebasic, complete). Does NOT molt twice yearly like the American Goldfinch. Plumage relatively stable across seasons -- male's green/black back and yellow underparts persist year-round, dimming slightly in winter. The visual stability contrasts with the American Goldfinch's dramatic seasonal undulation between drab and brilliant states.",
+    "field_id": "Small (noticeably smaller than American Goldfinch), dark-backed (green or black), yellow below, dark wings with white patches, black cap on male. Distinguished from American Goldfinch by darker back, lack of dramatic seasonal transformation, smaller size, and different call (thin tsee-ee vs. per-chick-o-ree). Distinguished from Pine Siskin by yellow (not streaked), smaller size, cleaner call.",
+    "spinus_contrast": "THREE Spinus plumage strategies: Pine Siskin = cryptic streaked (hides), American Goldfinch = dramatic seasonal transformation (undulates between olive and gold), Lesser Goldfinch = stable dark-backed green/yellow (holds steady). The smallest bird has the most stable plumage and the most borrowed voice."
+  },
+  "mimicry_ecology": {
+    "mimicry_scale": "The most extensive vocal mimic among North American Spinus species. Coutlee (1971): 39 avian species + 1 mammal (rock squirrel) mimicked at one Arizona breeding site in one season. Individual repertoire sizes: 70-105 unique phrase types (minimum estimates for 7 individuals). Approximately 50% of all song phrases are mimicry.",
+    "species_copied_arizona": "Bewick's Wren, Verdin, House Finch, Pine Siskin, Canyon Towhee, Black Phoebe, American Robin, Gila Woodpecker, American Kestrel, and 30+ others",
+    "species_copied_california": "House Sparrow, House Finch, Song Sparrow, California Quail, American Kestrel, and others",
+    "species_copied_texas": "Eastern Phoebe (replacing Black Phoebe), plus regionally appropriate species",
+    "geographic_variation": "Copied species vary with locality, tracking the local bird community. The song is a geographic acoustic census -- a record of which species share the bird's habitat. As the Lesser Goldfinch expands into the PNW, its mimicry palette would shift to include PNW species.",
+    "learning_period": "Probably learned during an extended sensitive period in the first year, but vocal learning may continue throughout adulthood. Birds add to repertoires during winter roaming. Lifelong accumulation of acoustic experience.",
+    "original_vs_copied": "Approximately 50% original Spinus twittering (the bird's own voice, recognizable as a goldfinch) + 50% mimicry fragments (0.3-1.0 s each, identifiable as other species). Original phrases provide structural framework; mimicry provides content variety.",
+    "significance": "The Lesser Goldfinch's song is a living acoustic census of its neighborhood. As a range expansion species pushing into the PNW, its song would incorporate engine species like Pine Siskin, American Robin, Song Sparrow, and House Finch. The bird sings the soundscape."
+  },
+  "weedy_shrub_ecology": {
+    "definition": "Weedy shrub -- open to semi-open areas with a mix of shrubs, low trees, and seed-producing forbs. Similar to the American Goldfinch's weedy field (degree 43) but with a stronger shrub component. The Lesser Goldfinch uses shrubs and small trees more extensively for nesting and singing perches.",
+    "habitat_types": [
+      "Riparian scrub along rivers and streams (expansion corridors)",
+      "Oak woodland edges with understory shrubs",
+      "Suburban gardens with seed-bearing plants and shrubby borders",
+      "Vineyard and orchard margins with weedy understory",
+      "Roadside brush with composite plants",
+      "Post-disturbance shrub communities"
+    ],
+    "vertical_position": "0-10 m above ground. Slightly higher average than American Goldfinch (0-5 m) because of greater shrub use. Nests in vertical fork of shrub or tree, 5-30 ft. Singing perch at top of tallest available shrub or small tree.",
+    "pnw_distribution": [
+      "Klickitat County, WA -- core Washington range, uncommon and local permanent residents",
+      "Rogue Valley, southern Oregon -- common breeder, greatest Oregon abundance",
+      "Umpqua Valley, Oregon -- fairly common",
+      "Southern Willamette Valley, Oregon -- fairly common breeder along western fringe",
+      "North Willamette Valley / Portland area -- scattered and local, increasing",
+      "Puget Sound region -- vagrant records increasing, not yet regular breeder"
+    ],
+    "expansion_corridors": "River valleys serve as expansion pathways -- riparian corridors provide continuous weedy shrub habitat through otherwise forested landscapes. The Columbia River Gorge was the gateway to Washington. The Willamette Valley is the corridor through Oregon.",
+    "significance": "Weedy shrub is the engine's second consecutive open-habitat ecosystem (after weedy field at degree 43). The goldfinch pair shares habitat type but differs in shrub density. The Lesser Goldfinch's habitat requirements are slightly more structured than the American Goldfinch's pure open-field preference."
+  },
+  "range_expansion": {
+    "historical_core": "Southwestern United States, Mexico, Central America, northern South America",
+    "first_wa_breeding": "1975",
+    "wa_core_range": "Klickitat County (Columbia River Gorge area) -- warmest, most arid part of Washington",
+    "wa_population_change": "+110.5% (2012-2022)",
+    "id_population_change": "+66.3% (2012-2022)",
+    "or_population_change": "+16.9% (2012-2022)",
+    "northward_shift_km": "~437 km (3.94 decimal degrees latitude) in occupancy 2002-2022",
+    "drivers": [
+      "Warming temperatures -- climate change opens previously unsuitable habitat",
+      "River proximity -- riparian corridors as expansion pathways",
+      "Urban development -- suburban landscapes provide stable food access",
+      "Increased precipitation -- wetter conditions increase seed plant productivity"
+    ],
+    "permanence": "Once colonized, areas tend to remain occupied -- expansion is likely permanent",
+    "study_reference": "Ornithology (2025), Oxford Academic. 'Climate and landscape modification facilitate range expansion in Spinus psaltria across the Pacific Northwest.' Researchers: Washington State University + Cornell Lab of Ornithology. Data: eBird + Project FeederWatch, 25 years.",
+    "significance": "First engine species defined by active range expansion. A bird that was absent from Washington 50 years ago, rare 20 years ago, and increasingly common today. The Sound of Puget Sound captures a soundscape in motion."
+  },
+  "theory_nodes": [
+    {
+      "concept": "The mosaic -- the 45th acoustic element (species side): a song assembled from fragments of dozens of other species' vocalizations woven with the bird's own original twittering. Individual Lesser Goldfinch males maintain repertoires of 70-105 unique phrase types, with approximately 50% being mimicry of other species' songs and calls. Coutlee (1971) documented mimicry of 39 avian species plus one mammal at a single Arizona breeding site. The song sounds like a rapid channel-surf through the local bird community -- a half-second of House Finch, a phrase of Bewick's Wren, original twittering, a snatch of Black Phoebe. Each fragment is a copy; the arrangement is unique. Named 'the mosaic' for four resonances: (1) song structure as fragment-tile assembly, (2) geographic variation reflecting local soundscape, (3) range expansion incorporating new PNW species, (4) Spinus trilogy completion (noise, melody, mosaic). The first acoustic element defined by interspecific vocal appropriation.",
+      "level": "foundational",
+      "department": "music-theory/composition",
+      "college_path": ".college/music/theory/composition/mosaic/",
+      "examples": [
+        "Song composition: ~50% original Spinus twittering + ~50% mimicry fragments. 70-105 unique phrase types per individual. Each performance assembles the same repertoire in a different order, creating a song that is simultaneously derivative (each fragment borrowed) and original (the arrangement unique).",
+        "Geographic mimicry variation: Arizona birds copy Verdin, Gila Woodpecker, Canyon Towhee. California birds copy California Quail, Song Sparrow. Texas birds copy Eastern Phoebe. PNW birds would copy Pine Siskin, American Robin, House Finch -- engine species. The mosaic is a local acoustic census.",
+        "Contrast with other Fringillidae: Pine Siskin (12) = no significant mimicry, original electronic noise. Red Crossbill (34) = population-specific dialect, species-internal learning. American Goldfinch (43) = original canary warble, minimal mimicry. Cassin's Finch (33) = moderate mimicry. Lesser Goldfinch (44) = EXTENSIVE mimicry, 39+ species, systematic lifelong accumulation.",
+        "The Spinus acoustic trilogy: noise (Pine Siskin, sawtooth sweep) -> melody (American Goldfinch, undulation) -> mosaic (Lesser Goldfinch, interspecific collage). Three strategies in one genus. The mosaic is the synthesis that contains pieces of everything.",
+        "Lifelong learning: Lesser Goldfinch vocal learning probably extends throughout adulthood. Birds add phrases during winter roaming, accumulating acoustic experience from multiple locations and years. The older the bird, the richer the mosaic."
+      ],
+      "music_theory_parallel": "The sample-based composition -- a musical work built from fragments of existing recordings, reassembled into something new. Hip-hop, plunderphonics, musique concrete. The DJ who takes a bar of James Brown, a phrase of Kraftwerk, a vocal from Aretha Franklin, and builds a new track from these borrowed elements. The Lesser Goldfinch is the DJ of the weedy shrub: sampling from the local soundscape, remembering phrases from dozens of species, and assembling them into a continuous performance that sounds like nothing else because it sounds like everything else. The mosaic is the mixtape."
+    },
+    {
+      "concept": "The consecutive goldfinch pair -- American Goldfinch (degree 43) and Lesser Goldfinch (degree 44), same genus (Spinus), consecutive degrees. The engine's third consecutive same-genus pair after the Northern Flicker (21-22) and the Cedar/Bohemian Waxwing (31-32). The common species enters first, the less common follows. The larger species first, the smaller second. The original vocalist first, the mimic second. The resident first, the range expander second. The pattern is confirmed: when the engine pairs congeners, it presents the established species first and the arriving species second.",
+      "level": "foundational",
+      "department": "music-theory/form",
+      "college_path": ".college/music/theory/form/consecutive-goldfinch-pair/",
+      "examples": [
+        "Consecutive pair history: Northern Flicker (21-22, same species, voice vs. drumming), Cedar/Bohemian Waxwing (31-32, same genus, common vs. rare), American/Lesser Goldfinch (43-44, same genus, resident vs. expander). Three pairs in 45 entries. Pattern: the familiar first, the less familiar second.",
+        "The goldfinch pair contrasts: American Goldfinch = larger (~13g), original canary warble, twice-yearly molt, dramatic seasonal transformation, state bird, established resident. Lesser Goldfinch = smaller (~10g), mimicry mosaic, single molt, stable plumage, range expander, arriving.",
+        "Acoustic contrast: the undulation (43, locomotion-coupled original call) vs. the mosaic (44, interspecific mimicry collage). The American Goldfinch sings its own song while flying in sine waves. The Lesser Goldfinch sings everyone else's song from a shrub top. Same genus, opposite vocal philosophies.",
+        "Habitat overlap: both species use weedy, composite-plant-rich lowland habitats. Where they co-occur, they can be found at the same feeders and in the same patches. The habitat similarity is why the engine places them consecutively -- they share a stage.",
+        "Size gradient: Pine Siskin (12-18g) -> American Goldfinch (11-20g) -> Lesser Goldfinch (8-11.5g). The Spinus genus gets smaller as its acoustic strategy gets more complex. The smallest bird has the most borrowed voices."
+      ],
+      "music_theory_parallel": "The double concerto -- two solo instruments, same family (e.g., two violins, or violin and viola), performing in sequence. The first soloist plays an original theme. The second soloist enters with a variation that incorporates fragments of the first soloist's theme plus elements borrowed from the orchestra. Bach's Double Violin Concerto: the second violin answers the first not with imitation but with elaboration. The goldfinch pair: the American Goldfinch plays its own song, and the Lesser Goldfinch answers with a mosaic that might include a fragment of that very song."
+    },
+    {
+      "concept": "The Spinus trilogy -- three species from a single genus in the engine, the first genus to achieve this. Pine Siskin (degree 12, E=1, irruptive, electronic zhreee), American Goldfinch (degree 43, E=4, summer, undulating canary warble), Lesser Goldfinch (degree 44, E=4, summer, mimicry mosaic). Three naming philosophies: ecological-ecological (pinus), ecological-emotional (tristis), ecological-musical (psaltria). Three acoustic strategies: noise, melody, mosaic. Three range patterns: nomadic irruptive, established resident, active expander. The genus spans the engine's full energy range (E=1 to E=4) and the full spectrum from original composition to borrowed anthology.",
+      "level": "foundational",
+      "department": "ecology/taxonomy",
+      "college_path": ".college/ecology/taxonomy/spinus-trilogy/",
+      "examples": [
+        "Energy span: E=1 (Pine Siskin, degree 12) to E=4 (American Goldfinch degree 43, Lesser Goldfinch degree 44). The widest within-genus energy range in the engine. The genus brackets the lower four-fifths of the energy spectrum.",
+        "Acoustic span: electronic sawtooth (12) -> locomotion-coupled canary warble (43) -> interspecific mimicry collage (44). From noise to melody to mosaic. The genus contains three fundamentally different approaches to sound production and song composition.",
+        "Naming span: pinus (a plant), tristis (a mood), psaltria (a musician). The genus Spinus provides the ecological anchor (thorn bush). The species epithets provide the character: the pine tree, the sadness, the lute player.",
+        "Size span: Pine Siskin (12-18g, small), American Goldfinch (11-20g, medium-small), Lesser Goldfinch (8-11.5g, smallest). The genus gets smaller. The smallest member has the most complex borrowed repertoire.",
+        "Range pattern span: irruptive nomad (Pine Siskin), established resident (American Goldfinch), active range expander (Lesser Goldfinch). Three modes of geographic presence in one genus."
+      ],
+      "music_theory_parallel": "The triptych -- a three-panel artwork where each panel shows the same subject from a different angle, or three aspects of a single theme. Bosch's Garden of Earthly Delights: left panel (creation/innocence), center (worldly pleasure), right (damnation/consequence). The Spinus triptych: left (noise/chaos), center (melody/order), right (mosaic/synthesis). The third panel incorporates elements of both previous panels -- the Lesser Goldfinch's mosaic contains noise (it might copy a Pine Siskin's zhreee) and melody (it might copy an American Goldfinch's per-chick-o-ree). The synthesis panel."
+    },
+    {
+      "concept": "Range expansion as acoustic event -- the Lesser Goldfinch is the engine's first species defined by active, ongoing range expansion into the PNW. Washington's first breeding record was 1975. Population increased 110.5% in Washington between 2012 and 2022. The northward shift covers approximately 437 km in two decades. Drivers: warming climate, riparian corridors, urban development, increased precipitation. Once colonized, areas remain occupied. The Sound of Puget Sound captures a soundscape in motion -- and the Lesser Goldfinch is the leading edge of that motion.",
+      "level": "foundational",
+      "department": "ecology/biogeography",
+      "college_path": ".college/ecology/biogeography/range-expansion/",
+      "examples": [
+        "Washington timeline: absent pre-1975, first breeding 1975, rare and local 1975-2010 (Klickitat County), population +110.5% 2012-2022, vagrant records increasing in Puget Sound.",
+        "Oregon gradient: common in Rogue Valley (south), fairly common in Willamette Valley (central), scattered in Portland area (north), increasing throughout.",
+        "Expansion corridors: river valleys (especially Columbia River Gorge) provide continuous weedy shrub habitat through forested landscapes. Rivers are highways for range expansion.",
+        "Climate connection: warming temperatures open previously unsuitable habitat. The Lesser Goldfinch's expansion tracks isotherms moving north. The bird follows the warmth.",
+        "Acoustic implication: as the Lesser Goldfinch colonizes new PNW territory, it incorporates local species into its mimicry mosaic. The range expansion is literally audible -- the bird's song changes as it enters a new soundscape. A PNW Lesser Goldfinch sings PNW birds."
+      ],
+      "music_theory_parallel": "The traveling musician -- a performer who moves from town to town, learning local songs at each stop, incorporating them into an expanding repertoire. The tradition of the wandering minstrel, the troubadour, the itinerant folk musician who carries songs from one region to another. The Lesser Goldfinch is a traveling musician pushing north -- learning PNW songs as it arrives, weaving them into a repertoire that already contains Southwest melodies, California rhythms, and Oregon phrases. The mosaic grows as the range grows."
+    },
+    {
+      "concept": "Fringillidae at five -- the family rises to second place (tied with Hirundinidae and Turdidae at 5 members each) behind Parulidae (10). Five entries at degrees 12, 33, 34, 43, 44. The consecutive goldfinch pair at 43-44 is the family's first consecutive pair. Spinus alone has 3 entries -- more than most entire families. Fringillidae now spans 4 genera (Spinus x3, Haemorhous x1, Loxia x1), the full energy range E=1 to E=4, two irruptive species and three summer residents, and the most diverse acoustic palette of any family in the engine except Parulidae.",
+      "level": "intermediate",
+      "department": "music-theory/orchestration",
+      "college_path": ".college/music/theory/orchestration/fringillidae-five/",
+      "examples": [
+        "Family growth trajectory: 1 member at degree 12, 2 at degree 33, 3 at degree 34, 4 at degree 43, 5 at degree 44. Three new Fringillidae in 11 degrees (34-44). The family is accelerating.",
+        "Genus distribution: Spinus x3 (12, 43, 44), Haemorhous x1 (33), Loxia x1 (34). One genus dominates. The Spinus subfamily is a structural presence within the family's structural presence.",
+        "Acoustic palette: sawtooth sweep (12), cadenza (33), dialect (34), undulation (43), mosaic (44). Five acoustic elements from one family. Electronic noise, virtuosic solo, tribal identity, locomotion coupling, mimicry collage. More acoustic diversity than any family except Parulidae.",
+        "The consecutive pair bump: Fringillidae jumped from 4 to 5 with consecutive degrees 43-44, like Hirundinidae jumped from 4 to 5 with degree 30 (completing the swallow quintet). Both families reached 5 members with their final consecutive-degree entry.",
+        "Family comparison at 5 members: Hirundinidae = 5 consecutive (26-30), all swallows. Turdidae = 5 scattered (2, 7, 18, 19, 25). Fringillidae = 5 with internal structure (singleton at 12, pair at 33-34, pair at 43-44). The finch family has the most varied entry pattern."
+      ],
+      "music_theory_parallel": "The quintet -- five instruments, each with a distinct voice, capable of richer harmonies and more complex counterpoint than a trio or quartet. The Fringillidae quintet: bass (Pine Siskin, E=1, the electronic foundation), two tenors (Red Crossbill and Cassin's Finch, the tribal and virtuosic voices), alto (American Goldfinch, the melodic center), and soprano (Lesser Goldfinch, the highest and smallest voice that borrows from everyone else). The quintet can now play five-part harmony."
+    },
+    {
+      "concept": "E=4 continues at 21 degrees (46.7%) -- the energy compression deepens to its most severe. E=3 absent for 24 consecutive degrees, E=2 for 31, E=1 for 32. SEVEN consecutive E=4 across two families (38-44, Parulidae then Fringillidae). The goldfinch pair maintains the same energy level as the warbler quintet that preceded the American Goldfinch. The Spinus energy bracket holds: E=1 at degree 12 (Pine Siskin), E=4 at degree 43 (American Goldfinch) and degree 44 (Lesser Goldfinch).",
+      "level": "intermediate",
+      "department": "music-theory/dynamics",
+      "college_path": ".college/music/theory/dynamics/e4-twenty-four-degrees/",
+      "examples": [
+        "E=4 dominance: 21 of 45 entries (46.7%). Has appeared in 21 of the last 25 degrees. Nearly half the engine at a single dynamic level.",
+        "E=3 absence: 24 consecutive degrees without E=3. Deepening past the 23-degree milestone set at degree 43.",
+        "Seven consecutive E=4: degrees 38-44, spanning Parulidae (38-42) and Fringillidae (43-44). Three families represented within the streak (counting the transition). The dynamic level did not change when the family changed twice.",
+        "The Spinus energy bracket: E=1 (degree 12, Pine Siskin) to E=4 (degrees 43-44, American and Lesser Goldfinch). The genus spans from the engine's minimum passerine energy to its second-highest level. But only one end of the bracket has been activated recently -- E=4 for 32 degrees since the last E=1.",
+        "Dynamic range compression: The lower three energy levels (E=1, E=2, E=3) have not appeared in the engine for 24-32 degrees. The engine is operating in a compressed dynamic range of E=4 and E=5 only."
+      ],
+      "music_theory_parallel": "Seven bars of mezzo-forte in a row. The piece has now played at the same dynamic level for seven consecutive degrees across two families. The instruments changed (warblers to goldfinches to lesser goldfinches), the timbres changed (shimmer to undulation to mosaic), but the volume remains identical. A listener can hear that something is different but cannot feel it in the dynamic contour. The piece needs a subito piano -- a sudden, dramatic drop to a quieter level -- to restore dynamic range and perceptual contrast."
+    }
+  ],
+  "cross_references": [
+    {
+      "project": "SPS-043",
+      "title": "American Goldfinch (Degree 43)",
+      "connection": "CONSECUTIVE GOLDFINCH PAIR. Same genus (Spinus), consecutive degrees (43-44). The engine's third consecutive same-genus pair. American Goldfinch = larger, original canary warble (the undulation), twice-yearly molt, state bird, established resident. Lesser Goldfinch = smaller, mimicry mosaic, single molt, range expander. The common species first, the less common second. The original vocalist first, the mimic second."
+    },
+    {
+      "project": "SPS-012",
+      "title": "Pine Siskin (Degree 12)",
+      "connection": "SPINUS TRILOGY -- FIRST MEMBER. Three Spinus at degrees 12, 43, 44 -- the first genus with three entries. Pine Siskin = noise (E=1, electronic zhreee, sawtooth sweep, irruptive nomad). Lesser Goldfinch = mosaic (E=4, mimicry collage, range expander). The genus brackets from minimum energy electronic noise to moderate-high energy interspecific mimicry. 32 degrees between entries."
+    },
+    {
+      "project": "SPS-033",
+      "title": "Cassin's Finch (Degree 33)",
+      "connection": "FRINGILLIDAE MIMICRY GRADIENT. Cassin's Finch = moderate mimic (some borrowed phrases woven into its cadenza). Lesser Goldfinch = extensive mimic (39+ species, 50% of song, lifelong learning). Both are Fringillidae summer breeders. The mimicry scales from occasional mountain borrowing to systematic lowland collage."
+    },
+    {
+      "project": "SPS-034",
+      "title": "Red Crossbill (Degree 34)",
+      "connection": "FRINGILLIDAE VOCAL LEARNING CONTRAST. Red Crossbill = population-specific dialect (vocal types learned within species, 10+ call types across North America). Lesser Goldfinch = interspecific mosaic (vocal types learned from other species, 39+ species copied). Both represent vocal learning in Fringillidae; different sources of learned material."
+    },
+    {
+      "project": "SPS-031",
+      "title": "Cedar Waxwing (Degree 31)",
+      "connection": "CONSECUTIVE PAIR PARALLEL. Cedar Waxwing (31) + Bohemian Waxwing (32) = consecutive same-genus pair. American Goldfinch (43) + Lesser Goldfinch (44) = consecutive same-genus pair. Both: common species first, less common second. The engine's pair-making pattern confirmed across two genera."
+    },
+    {
+      "project": "SPS-042",
+      "title": "Yellow-rumped Warbler (Degree 42)",
+      "connection": "E=4 STREAK EXTENSION. Yellow-rumped (42) was the fifth consecutive E=4 in the Parulidae run. American Goldfinch (43) made it six. Lesser Goldfinch (44) makes it SEVEN consecutive E=4 across two families. The dynamic level holds despite two family transitions."
+    },
+    {
+      "project": "AVI",
+      "title": "Wings of the Pacific Northwest",
+      "connection": "Lesser Goldfinch documented as range expander in PNW. First Washington breeding 1975. Klickitat County core. Increasing in Willamette Valley, southern Washington, Puget Sound vagrants. Population +110.5% in Washington 2012-2022."
+    },
+    {
+      "project": "ECO",
+      "title": "Living Systems of the PNW",
+      "connection": "Weedy shrub ecology. Climate-driven range expansion biogeography. Composite-plant seed communities. Riparian corridors as expansion pathways. Urban facilitation of range expansion. The ecology of a species arriving as the climate changes."
+    }
+  ],
+  "engine_state": {
+    "unique_species": 43,
+    "total_entries": 45,
+    "families_represented": 18,
+    "largest_families": {
+      "Parulidae": 10,
+      "Fringillidae": 5,
+      "Hirundinidae": 5,
+      "Turdidae": 5,
+      "Trochilidae": 4,
+      "Bombycillidae": 2,
+      "Paridae": 2,
+      "Picidae": 2,
+      "Cardinalidae": 1
+    },
+    "energy_history": {
+      "E1": [8, 10, 12],
+      "E2": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 13],
+      "E3": [14, 15, 16, 17, 18, 19, 20],
+      "E4": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44],
+      "E5": [32, 35, 36]
+    },
+    "energy_note": "E=4 continues. Now at 21 degrees (46.7%). E=3 absent for 24 DEGREES (since degree 20). SEVEN consecutive E=4 across two families (38-44, Parulidae then Fringillidae). Dynamic range compression at its most severe. The Spinus energy bracket: E=1 at degree 12, E=4 at degrees 43 and 44.",
+    "consecutive_pair_note": "Consecutive goldfinch pair at degrees 43-44. Third consecutive same-genus pair in the engine (after flickers 21-22, waxwings 31-32). Common species first, less common second.",
+    "spinus_trilogy_note": "Three Spinus in the engine: Pine Siskin (12), American Goldfinch (43), Lesser Goldfinch (44). FIRST GENUS WITH THREE MEMBERS. Three strategies: noise, melody, mosaic. Energy span E=1 to E=4.",
+    "orders_represented": ["Pelecaniformes", "Passeriformes", "Strigiformes", "Piciformes", "Apodiformes"],
+    "order_count": 5,
+    "seasonal_categories": ["resident", "migrant", "partial migrant", "summer", "spring", "irruptive", "resident/summer"],
+    "ecosystem_note": "Weedy shrub -- open to semi-open with shrubs, low trees, and composite plants. The engine's second consecutive open-habitat ecosystem (after weedy field at degree 43). The goldfinch pair shares weedy, composite-rich lowland habitat.",
+    "acoustic_element_45": "THE MOSAIC -- interspecific mimicry collage. A song assembled from fragments of 39+ species woven with original twittering. 70-105 phrase types per individual. ~50% borrowed, ~50% original. First element defined by interspecific vocal appropriation. After the undulation (locomotion coupling), the mosaic (borrowed voices).",
+    "range_expansion_note": "FIRST species in the engine defined by active range expansion. Washington population +110.5% (2012-2022). First WA breeding 1975. Climate-driven northward advance. The soundscape is changing in real time.",
+    "fringillidae_note": "FIFTH Fringillidae. Family tied for second (with Hirundinidae and Turdidae at 5) behind Parulidae (10). Spinus alone has 3 entries. Consecutive pair at 43-44.",
+    "conservation_note": "LEAST CONCERN (IUCN). Population approximately 15 million (Partners in Flight). Continental Concern Score 7/20. BBS trends stable 1966-2019. Range EXPANDING -- one of few North American passerines whose range is growing. Protected under Migratory Bird Treaty Act.",
+    "critical_gaps": [
+      "No marine/shoreline species in 44 degrees of 'The Sound of Puget Sound' -- 44 DEGREES OVERDUE -- EXISTENTIAL CRISIS (WORSENING)",
+      "No corvid (Steller's Jay, crow, raven) -- 44 degrees -- URGENT",
+      "No raptor (Accipitridae, Falconidae) -- 44 degrees -- URGENT",
+      "No nocturnal species since degree 4 (40 degrees ago) -- OVERDUE",
+      "E=3 not used since degree 20 (24 degrees ago) -- CRITICAL",
+      "No E=2 since degree 13 (31 degrees ago) -- LOW ENERGY ABSENT",
+      "No E=1 since degree 12 (32 degrees ago) -- MINIMUM ENERGY ABSENT",
+      "No marine species remains the engine's defining structural deficit -- 44 DEGREES OF A PROJECT NAMED FOR PUGET SOUND",
+      "Only 5 orders in 45 entries -- a new order is strongly needed",
+      "Two consecutive same-family same-genus entries (43-44) -- recommend maximum taxonomic distance at degree 45"
+    ]
+  }
+}
