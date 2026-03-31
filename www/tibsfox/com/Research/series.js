@@ -79,6 +79,7 @@
     { id: 'GSD2', name: 'GSD-2 Arch.', path: 'GSD2/index.html' },
     { id: 'HFE', name: 'Audio Engineering', path: 'HFE/index.html' },
     { id: 'HFR', name: 'Hi-Fi Audio', path: 'HFR/index.html' },
+    { id: 'HEL', name: 'Helium Supply Chain', path: 'HEL/index.html' },
     { id: 'HEN', name: 'Jim Henson', path: 'HEN/index.html' },
     { id: 'HGE', name: 'Hydro-Geothermal', path: 'HGE/index.html' },
     { id: 'HJX', name: 'Hendrix & Joplin', path: 'HJX/index.html' },
