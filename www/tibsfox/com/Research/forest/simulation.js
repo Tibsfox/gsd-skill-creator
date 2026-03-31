@@ -12,6 +12,9 @@ var spores = [];
 var plants = [];
 var seeds = [];
 var raindrops = [];
+var fireflies = [];
+var stars = [];
+var shootingStars = [];
 
 var debug;
 var cnv;
@@ -49,6 +52,45 @@ var sky = {
 // Paine Field coordinates
 var LAT = 47.9063;
 var LON = -122.2816;
+
+// === FOG STATE ===
+var fog = { density: 0, spread: 10 };
+
+// === AURORA STATE ===
+var aurora = { kp: 0, active: false, lastFetch: 0 };
+
+// === CIRCADIAN ACTIVITY MULTIPLIER ===
+// Returns activity level (0-2) for a species based on sun altitude and activity pattern
+// Dawn chorus: birds sing most at civil twilight (sun alt -6 to +3)
+// Musical harmonic: activity follows a sinusoidal curve, period matched to species energy level
+function circadianMultiplier(speciesData) {
+  var sunAlt = sky.sunAlt;
+  var pattern = speciesData.active || 'diurnal';
+  var base, dawn;
+
+  if (pattern === 'diurnal') {
+    // Active during day, quiet at night. Dawn boost = ii-V-I approach (tension → resolve)
+    base = constrain(map(sunAlt, -12, 20, 0.05, 1.0), 0.05, 1.0);
+    // Dawn chorus boost (sun alt -6 to +6 = the "V chord" — peak tension before the day resolves)
+    dawn = (sunAlt > -8 && sunAlt < 8) ? speciesData.dawnBoost || 1.0 : 1.0;
+  } else if (pattern === 'nocturnal') {
+    // Active at night, rest during day. Tritone substitution: inverted diurnal
+    base = constrain(map(sunAlt, -6, 15, 1.0, 0.05), 0.05, 1.0);
+    dawn = 1.0;
+  } else if (pattern === 'crepuscular') {
+    // Peak at twilight (dawn + dusk). Polyrhythmic: two peaks per cycle
+    var twilight = abs(sunAlt) < 10 ? constrain(map(abs(sunAlt), 10, 0, 0.5, 1.5), 0.5, 1.5) : 0.3;
+    base = twilight;
+    dawn = speciesData.dawnBoost || 1.5;
+  } else {
+    // 'always' — constant (mycelia)
+    base = 1.0; dawn = 1.0;
+  }
+
+  // Energy level modulates amplitude (E=5 → more dynamic range, E=1 → steady)
+  var energyMod = 0.7 + (speciesData.energy || 3) * 0.06;
+  return base * dawn * energyMod;
+}
 
 // === DEPTH PERSPECTIVE ===
 function depthScale(y) { var t = y / height; return 0.15 + 0.85 * t * t; }
@@ -148,7 +190,10 @@ function fetchWeather() {
         if (p.windDirection && p.windDirection.value !== null) wx.windDir = p.windDirection.value;
         if (p.windGust && p.windGust.value !== null) wx.windGust = p.windGust.value;
         if (p.relativeHumidity && p.relativeHumidity.value !== null) wx.humidity = p.relativeHumidity.value;
-        if (p.barometricPressure && p.barometricPressure.value !== null) wx.pressure = p.barometricPressure.value / 100;
+        if (p.barometricPressure && p.barometricPressure.value !== null) {
+          wx._prevPressure = wx.pressure; // track delta for behavioral prediction
+          wx.pressure = p.barometricPressure.value / 100;
+        }
         if (p.dewpoint && p.dewpoint.value !== null) wx.dewpoint = p.dewpoint.value;
         if (p.visibility && p.visibility.value !== null) wx.visibility = p.visibility.value;
         if (p.precipitationLastHour && p.precipitationLastHour.value !== null) wx.precip = p.precipitationLastHour.value;
@@ -173,11 +218,15 @@ var PAL = {
 };
 
 // === L-SYSTEM PLANTS ===
+// Types informed by NASA organism pairings and PNW ecology research
 var PLANT_TYPES = [
-  { name:'fern',   col:[45,90,58],   angle:25, shrink:0.72, maxDepth:5, width:1.5, rules:'F[+F]F[-F]F' },
-  { name:'cedar',  col:[26,58,42],   angle:20, shrink:0.78, maxDepth:6, width:2.0, rules:'FF+[+F-F-F]-[-F+F+F]' },
-  { name:'moss',   col:[76,175,80],  angle:35, shrink:0.6,  maxDepth:4, width:0.8, rules:'F[+F][-F]' },
-  { name:'alder',  col:[74,124,63],  angle:22, shrink:0.75, maxDepth:5, width:1.2, rules:'F[+F]F[-F][F]' },
+  { name:'fern',     col:[45,90,58],   angle:25, shrink:0.72, maxDepth:5, width:1.5, rules:'F[+F]F[-F]F',             shade:true,  pioneer:false }, // Polystichum munitum (v1.2)
+  { name:'cedar',    col:[26,58,42],   angle:20, shrink:0.78, maxDepth:6, width:2.0, rules:'FF+[+F-F-F]-[-F+F+F]',    shade:true,  pioneer:false }, // Thuja plicata — hub tree
+  { name:'moss',     col:[76,175,80],  angle:35, shrink:0.6,  maxDepth:4, width:0.8, rules:'F[+F][-F]',               shade:true,  pioneer:false }, // Hylocomium splendens
+  { name:'alder',    col:[74,124,63],  angle:22, shrink:0.75, maxDepth:5, width:1.2, rules:'F[+F]F[-F][F]',           shade:false, pioneer:true  }, // Alnus rubra — nitrogen fixer
+  { name:'fireweed', col:[60,100,50],  angle:12, shrink:0.85, maxDepth:7, width:0.7, rules:'FF[+F][-F]',              shade:false, pioneer:true, bloom:true }, // Chamerion angustifolium (v1.1)
+  // Fireweed: 80K seeds/plant, 0.3 m/s terminal velocity, progressive bottom-to-top bloom,
+  // pioneer colonizer on disturbed ground, obligate sun, 0.5-3m tall, magenta raceme flowers
 ];
 
 function Plant(x, y, typeIdx, parentDna) {
@@ -297,8 +346,9 @@ function Plant(x, y, typeIdx, parentDna) {
     var cs = this.dna.colShift;
     var da = depthAlpha(this.y);
     var baseAlpha = (0.3 + this.growth * 0.6) * da;
-    // Darken at night
-    var nightDim = sky.isDay ? 1.0 : 0.35;
+    // Darken at night — but keep visible with moonlight
+    var moonGlow = sky.moonAlt > 0 ? constrain(map(sky.moonAlt, 0, 40, 0.15, 0.35), 0, 0.35) : 0;
+    var nightDim = sky.isDay ? 1.0 : (0.45 + moonGlow);
 
     for (var i = 0; i < this.segments.length; i++) {
       var s = this.segments[i];
@@ -312,14 +362,56 @@ function Plant(x, y, typeIdx, parentDna) {
     if (this.growth > 0.3) {
       noStroke();
       var maxD = max(2, floor(this.pt.maxDepth * depthScale(this.y)));
+      var isFireweed = this.pt.bloom === true;
+
       for (var i = 0; i < this.segments.length; i++) {
         var s = this.segments[i];
         if (s.depth >= maxD - 2) {
-          var leafA = (0.08 + season * 0.15) * this.growth * da * nightDim;
-          var leafSz = (1.2 + this.growth) * depthScale(s.y2);
-          fill(constrain(c[0]+cs[0]+30,0,255), min(255,constrain(c[1]+cs[1]+40,0,255)), constrain(c[2]+cs[2],0,255), leafA*255);
-          ellipse(s.x2, s.y2, leafSz, leafSz);
+          if (isFireweed && this.growth > 0.5) {
+            // Fireweed progressive bloom — magenta flowers open bottom-to-top
+            // The bloom fraction progresses upward as the plant matures
+            var segFrac = i / this.segments.length; // 0=base, 1=tip
+            var bloomFront = this.growth * 1.2; // how far up the bloom has reached
+            if (segFrac < bloomFront) {
+              // Open flower — vivid magenta-pink (Chamerion angustifolium)
+              var flowerA = (0.25 + this.growth * 0.5) * da * nightDim;
+              var flowerSz = (1.8 + this.growth * 1.5) * depthScale(s.y2);
+              // Magenta petals with slight variation
+              fill(200 + cs[0], 50 + cs[1]*0.3, 120 + cs[2]*0.5, flowerA * 255);
+              ellipse(s.x2, s.y2, flowerSz, flowerSz * 0.8);
+            } else {
+              // Bud — small green at tip (not yet bloomed)
+              var budA = 0.12 * da * nightDim;
+              fill(80, 120, 60, budA * 255);
+              ellipse(s.x2, s.y2, 1.5 * depthScale(s.y2), 2 * depthScale(s.y2));
+            }
+          } else {
+            // Standard leaf rendering for non-fireweed plants
+            var leafA = (0.08 + season * 0.15) * this.growth * da * nightDim;
+            var leafSz = (1.2 + this.growth) * depthScale(s.y2);
+            fill(constrain(c[0]+cs[0]+30,0,255), min(255,constrain(c[1]+cs[1]+40,0,255)), constrain(c[2]+cs[2],0,255), leafA*255);
+            ellipse(s.x2, s.y2, leafSz, leafSz);
+          }
         }
+      }
+      // Fireweed seed explosion — when fully grown, massive seed release with pappus
+      if (isFireweed && this.growth > 0.9 && this.seedTimer > 400 && random(1) < 0.003 && seeds.length < 80) {
+        // 80,000 seeds per plant IRL — we release a burst of 5-10 at once
+        var burstSize = floor(random(5, 10));
+        for (var b = 0; b < burstSize; b++) {
+          var windRad2 = radians(wx.windDir);
+          var windStr2 = wx.windSpeed / 5;
+          seeds.push({
+            x: this.x + random(-5, 5), y: this.y - this.baseLen * this.growth * 0.5,
+            vx: cos(windRad2) * windStr2 * random(0.2, 1.2) + random(-0.8, 0.8),
+            vy: -random(0.3, 0.8), // pappus lifts initially, terminal velocity ~0.3 m/s
+            type: this.type, dna: this.dna,
+            life: 600 + floor(random(500)), // fireweed seeds travel far
+            grounded: false,
+          });
+        }
+        this.seedTimer = 0;
+        this.hasSeedlings++;
       }
     }
   };
@@ -327,13 +419,33 @@ function Plant(x, y, typeIdx, parentDna) {
   this.computeSegments();
 }
 
-// === VEHICLE AGENTS ===
+// === PNW BIRD SPECIES (from Seattle 360 Engine + AVI taxonomy) ===
+// Each species from a documented S36 degree with real ecological behavior
+// Energy levels (E=1-5) from the 360 engine musical energy assignments
+// Activity patterns: diurnal, nocturnal, crepuscular, always
 var mr = 0.02;
 var SPECIES = [
-  { name:'forager',  col:PAL.fern,  sz:1.3, spd:2.2, frc:0.06, food:1.0, flee:-1.2, social:0.3, trail:14, shape:'tri' },
-  { name:'scout',    col:PAL.amber, sz:0.9, spd:3.2, frc:0.09, food:0.4, flee:-0.4, social:0.1, trail:22, shape:'dart' },
-  { name:'guardian', col:PAL.river,  sz:2.0, spd:1.4, frc:0.04, food:0.2, flee:-2.0, social:0.9, trail:5,  shape:'diamond' },
-  { name:'mycelia',  col:PAL.gold,   sz:0.7, spd:0.9, frc:0.03, food:0.7, flee:-0.2, social:1.2, trail:35, shape:'circle' },
+  // deg 49: Fox Sparrow — ground scratcher, seed eater, thick underbrush, folk-punk E=3
+  { name:'Fox Sparrow',             col:[139,90,60],  sz:1.3, spd:2.0, frc:0.06, food:1.0, flee:-1.0, social:0.4, trail:12, shape:'tri',
+    energy:3, active:'diurnal', dawnBoost:1.3, latin:'Passerella iliaca' },
+  // deg 27: Violet-green Swallow — aerial insectivore, fast, colonial, social
+  { name:'Violet-green Swallow',    col:[40,130,90],  sz:0.8, spd:3.5, frc:0.10, food:0.5, flee:-0.3, social:0.8, trail:25, shape:'dart',
+    energy:4, active:'diurnal', dawnBoost:1.0, latin:'Tachycineta thalassina' },
+  // deg 4: Spotted Owl — nocturnal apex, territorial, old-growth specialist
+  { name:'Spotted Owl',             col:[80,65,50],   sz:2.2, spd:1.8, frc:0.05, food:0.3, flee:-2.5, social:0.1, trail:4,  shape:'diamond',
+    energy:2, active:'nocturnal', dawnBoost:0.3, latin:'Strix occidentalis' },
+  // Mycorrhizal network — Armillaria ostoyae (NASA v1.0), underground fungal network
+  { name:'Mycelia',                 col:PAL.gold,     sz:0.7, spd:0.9, frc:0.03, food:0.7, flee:-0.2, social:1.2, trail:35, shape:'circle',
+    energy:1, active:'always', dawnBoost:1.0, latin:'Armillaria ostoyae' },
+  // deg 2: Varied Thrush — forest floor, haunting single-note song, crepuscular
+  { name:'Varied Thrush',           col:[200,120,40], sz:1.5, spd:1.6, frc:0.05, food:0.9, flee:-1.5, social:0.5, trail:8,  shape:'tri',
+    energy:2, active:'crepuscular', dawnBoost:2.0, latin:'Ixoreus naevius' },
+  // deg 36: Anna's Hummingbird — tiny, territorial, fastest bird, nectar, year-round PNW
+  { name:'Annas Hummingbird',       col:[180,40,80],  sz:0.5, spd:4.2, frc:0.12, food:0.6, flee:-0.1, social:0.0, trail:30, shape:'dart',
+    energy:5, active:'diurnal', dawnBoost:1.5, latin:'Calypte anna' },
+  // deg 51: Brown Creeper — bark gleaner, spirals up trunks, tiny, camouflaged
+  { name:'Brown Creeper',           col:[110,85,60],  sz:0.6, spd:1.5, frc:0.05, food:0.8, flee:-0.8, social:0.2, trail:18, shape:'tri',
+    energy:2, active:'diurnal', dawnBoost:1.2, latin:'Certhia americana' },
 ];
 
 function Vehicle(x, y, dna, speciesIdx) {
@@ -354,11 +466,19 @@ function Vehicle(x, y, dna, speciesIdx) {
   this.update = function() {
     this.health -= 0.004 + this.age * 0.000008;
     this.age++;
+    // Circadian rhythm — activity level from sun position + species pattern
+    var sp = SPECIES[this.species];
+    var circadian = circadianMultiplier(sp);
+    this.currentActivity = circadian; // store for display alpha
+    // Barometric pressure effect — falling pressure = more active foraging (storm approaching)
+    var pressureDelta = wx.pressure - (wx._prevPressure || wx.pressure);
+    var pressureMod = pressureDelta < -0.5 ? 1.3 : pressureDelta > 0.5 ? 0.85 : 1.0;
     // Wind affects movement
     var windRad = radians(wx.windDir);
     var windF = wx.windSpeed / 200;
     this.acceleration.add(createVector(cos(windRad)*windF, sin(windRad)*windF));
-    this.velocity.add(this.acceleration); this.velocity.limit(this.maxspeed);
+    var effectiveSpeed = this.maxspeed * circadian * pressureMod;
+    this.velocity.add(this.acceleration); this.velocity.limit(effectiveSpeed);
     this.position.add(this.velocity); this.acceleration.mult(0);
     if (frameNum%2===0){this.trail.push({x:this.position.x,y:this.position.y});if(this.trail.length>SPECIES[this.species].trail)this.trail.shift()}
   };
@@ -369,7 +489,11 @@ function Vehicle(x, y, dna, speciesIdx) {
     if(this.dna[4]>0.1){var s=this.flock(others);s.mult(this.dna[4]*0.08);this.applyForce(s)}
   };
   this.flock = function(others){var sum=createVector(0,0),c=0,p=this.dna[5];for(var i=0;i<others.length;i++){if(others[i]===this)continue;var d=this.position.dist(others[i].position);if(d<p&&others[i].species===this.species){sum.add(others[i].position);c++}}if(c>0){sum.div(c);return this.seek(sum)}return createVector(0,0)};
-  this.eat = function(list,nut,perc){var rec=Infinity,cl=null;for(var i=list.length-1;i>=0;i--){var d=this.position.dist(list[i]);if(d<this.maxspeed+2){list.splice(i,1);this.health+=nut;this.health=min(this.health,2.5);if(nut>0)pheromones.push({x:this.position.x,y:this.position.y,life:150,species:this.species})}else if(d<rec&&d<perc){rec=d;cl=list[i]}}if(cl!==null)return this.seek(cl);return createVector(0,0)};
+  this.eat = function(list,nut,perc){
+    // Fog reduces perception radius — birds can't see as far
+    var fogMod = constrain(1.0 - fog.density * 0.6, 0.3, 1.0);
+    var effPerc = perc * fogMod;
+    var rec=Infinity,cl=null;for(var i=list.length-1;i>=0;i--){var d=this.position.dist(list[i]);if(d<this.maxspeed+2){list.splice(i,1);this.health+=nut;this.health=min(this.health,2.5);if(nut>0)pheromones.push({x:this.position.x,y:this.position.y,life:150,species:this.species})}else if(d<rec&&d<effPerc){rec=d;cl=list[i]}}if(cl!==null)return this.seek(cl);return createVector(0,0)};
   this.seek = function(t){var d=p5.Vector.sub(t,this.position);d.setMag(this.maxspeed);var s=p5.Vector.sub(d,this.velocity);s.limit(this.maxforce);return s};
   this.clone = function(){if(random(1)<0.002&&this.health>0.8&&vehicles.length<250)return new Vehicle(this.position.x+random(-4,4),this.position.y+random(-4,4),this.dna,this.species);return null};
   this.dead = function(){return this.health<0};
@@ -378,7 +502,7 @@ function Vehicle(x, y, dna, speciesIdx) {
     var sp=SPECIES[this.species],angle=this.velocity.heading()+PI/2;
     var h2=constrain(this.health,0,2),bright=map(h2,0,2,0.25,1.0);
     var c=sp.col,ds=depthScale(this.position.y),da=depthAlpha(this.position.y);
-    var nightDim = sky.isDay ? 1.0 : 0.4;
+    var nightDim = sky.isDay ? 1.0 : (0.5 + (sky.moonAlt > 0 ? 0.2 : 0));
     if(this.trail.length>1){noFill();for(var t=0;t<this.trail.length-1;t++){var ta=(t/this.trail.length)*0.1*da*nightDim;stroke(c[0],c[1],c[2],ta*255);strokeWeight(0.4*ds);line(this.trail[t].x,this.trail[t].y,this.trail[t+1].x,this.trail[t+1].y)}}
     push();translate(this.position.x,this.position.y);rotate(angle);scale(ds);
     fill(c[0]*bright,c[1]*bright,c[2]*bright,da*nightDim*255);stroke(c[0],c[1],c[2],60*da*nightDim);strokeWeight(0.4);
@@ -423,6 +547,19 @@ function setup() {
   // Try server state (merges with local)
   loadFromServer();
 
+  // Generate star field (persistent positions, vary only twinkle)
+  stars = [];
+  for (var i = 0; i < 200; i++) {
+    stars.push({
+      x: random(width), y: random(height * 0.45),
+      sz: random(0.5, 2.2),
+      base: random(0.3, 1.0),    // base brightness
+      rate: random(0.005, 0.03), // twinkle speed
+      phase: random(TWO_PI),     // twinkle phase offset
+      col: random(1) < 0.1 ? [200,180,140] : random(1) < 0.15 ? [140,160,220] : [220,220,230], // warm/cool/white
+    });
+  }
+
   // A few pioneer food sources
   for (var i = 0; i < 30; i++) {
     food.push(createVector(10 + random(width - 20), random(height * 0.4, height)));
@@ -456,17 +593,109 @@ function draw() {
   if (frameNum % 18000 === 0) fetchWeather();
   if (frameNum % 1800 === 0) updateCelestial();
 
+  // Fog: forms when temp-dewpoint spread < 2.5°C (PNW radiation fog)
+  fog.spread = wx.temp - wx.dewpoint;
+  fog.density = constrain(map(fog.spread, 0, 5, 0.8, 0.0), 0, 0.8);
+  // Calm + clear + night = radiation fog. Windy = no fog.
+  fog.density *= constrain(map(wx.windSpeed, 0, 15, 1.0, 0.1), 0.1, 1.0);
+
+  // Fetch aurora Kp every 30 minutes
+  if (frameNum % 54000 === 1 || (aurora.lastFetch === 0 && frameNum > 60)) {
+    aurora.lastFetch = frameNum;
+    fetch('https://services.swpc.noaa.gov/products/noaa-planetary-k-index.json')
+      .then(function(r){return r.json()})
+      .then(function(d){
+        if (d && d.length > 1) {
+          var last = d[d.length - 1];
+          aurora.kp = parseFloat(last[1]) || 0;
+          aurora.active = aurora.kp >= 4 && !sky.isDay;
+        }
+      }).catch(function(){});
+  }
+
   // === SKY RENDERING ===
-  // Day/night gradient based on real sun altitude
   var dayR, dayG, dayB;
   if (sky.isDay) {
-    dayR = lerp(12, 8, sky.skyBright);
-    dayG = lerp(15, 12, sky.skyBright);
-    dayB = lerp(22, 18, sky.skyBright);
+    dayR = lerp(15, 45, sky.skyBright);
+    dayG = lerp(18, 75, sky.skyBright);
+    dayB = lerp(28, 120, sky.skyBright);
   } else {
-    dayR = 4; dayG = 5; dayB = 10;
+    dayR = 6; dayG = 8; dayB = 18;
   }
   background(dayR, dayG, dayB);
+
+  // Night sky gradient — deep blue near zenith, lighter at horizon
+  if (!sky.isDay) {
+    noStroke();
+    for (var row = 0; row < height * 0.45; row++) {
+      var t = row / (height * 0.45);
+      fill(8 + t*12, 10 + t*15, 22 + t*18, 30);
+      rect(0, row, width, 1);
+    }
+  }
+
+  // === STARS (night only, fade during twilight) ===
+  var starVis = constrain(map(sky.sunAlt, -18, -2, 1.0, 0.0), 0, 1);
+  if (starVis > 0.01) {
+    noStroke();
+    for (var i = 0; i < stars.length; i++) {
+      var st = stars[i];
+      var twinkle = st.base + sin(frameNum * st.rate + st.phase) * 0.35;
+      twinkle = constrain(twinkle, 0.05, 1.0) * starVis;
+      // Brighter stars near zenith, dimmer near horizon
+      var horizFade = constrain(1.0 - (st.y / (height * 0.45)), 0.2, 1.0);
+      var a = twinkle * horizFade;
+      fill(st.col[0], st.col[1], st.col[2], a * 255);
+      var sz = st.sz * (0.8 + sin(frameNum * st.rate * 0.7 + st.phase) * 0.2);
+      ellipse(st.x, st.y, sz, sz);
+      // Bright stars get a subtle cross-spike
+      if (st.sz > 1.6 && a > 0.5) {
+        stroke(st.col[0], st.col[1], st.col[2], a * 40);
+        strokeWeight(0.3);
+        line(st.x - 3, st.y, st.x + 3, st.y);
+        line(st.x, st.y - 3, st.x, st.y + 3);
+        noStroke();
+      }
+    }
+  }
+
+  // === SHOOTING STARS (occasional) ===
+  if (!sky.isDay && random(1) < 0.002 && shootingStars.length < 2) {
+    var sx = random(width * 0.1, width * 0.9);
+    var sy = random(5, height * 0.2);
+    var ang = random(PI * 0.5, PI * 0.8);
+    shootingStars.push({x:sx, y:sy, vx:cos(ang)*random(8,14), vy:sin(ang)*random(3,7), life:random(15,35), trail:[]});
+  }
+  for (var i = shootingStars.length - 1; i >= 0; i--) {
+    var ss = shootingStars[i];
+    ss.trail.push({x:ss.x, y:ss.y});
+    ss.x += ss.vx; ss.y += ss.vy; ss.life--;
+    if (ss.trail.length > 12) ss.trail.shift();
+    // Draw trail
+    for (var t = 0; t < ss.trail.length; t++) {
+      var ta = (t / ss.trail.length) * (ss.life / 35) * 0.8;
+      fill(255, 250, 230, ta * 255); noStroke();
+      ellipse(ss.trail[t].x, ss.trail[t].y, 1.5 - t*0.1, 1.5 - t*0.1);
+    }
+    // Bright head
+    fill(255, 255, 240, min(1, ss.life/10) * 255);
+    ellipse(ss.x, ss.y, 2, 2);
+    if (ss.life <= 0) shootingStars.splice(i, 1);
+  }
+
+  // === GROUND GRADIENT — forest floor ===
+  noStroke();
+  var groundStart = height * 0.65;
+  for (var row = 0; row < height - groundStart; row++) {
+    var t = row / (height - groundStart);
+    var gAlpha = t * t * 0.12;
+    if (sky.isDay) {
+      fill(20 + t*15, 35 + t*20, 18 + t*10, gAlpha * 255);
+    } else {
+      fill(8 + t*8, 15 + t*12, 10 + t*6, gAlpha * 255);
+    }
+    rect(0, groundStart + row, width, 1);
+  }
 
   // Horizon fog (visibility-based)
   var fogDensity = constrain(map(wx.visibility, 1000, 16000, 0.08, 0.02), 0.01, 0.1);
@@ -483,13 +712,15 @@ function draw() {
     var sunY = map(sky.sunAlt, -5, 70, height * 0.25, 10);
     sunY = constrain(sunY, 5, height * 0.3);
     var sunBright = constrain(map(sky.sunAlt, -2, 30, 0.1, 1.0), 0, 1);
-    // Glow
-    fill(255, 220, 140, sunBright * 12);
-    ellipse(sunX, sunY, 60, 60);
-    fill(255, 230, 160, sunBright * 30);
+    // Outer glow
+    fill(255, 200, 100, sunBright * 6);
+    ellipse(sunX, sunY, 100, 100);
+    fill(255, 220, 140, sunBright * 15);
+    ellipse(sunX, sunY, 55, 55);
+    fill(255, 230, 160, sunBright * 40);
     ellipse(sunX, sunY, 25, 25);
-    fill(255, 245, 200, sunBright * 80);
-    ellipse(sunX, sunY, 8, 8);
+    fill(255, 245, 200, sunBright * 100);
+    ellipse(sunX, sunY, 10, 10);
   }
 
   // Moon (if above horizon)
@@ -497,15 +728,128 @@ function draw() {
     var moonX = map(sky.moonAz, 0, 360, width * 0.1, width * 0.9);
     var moonY = map(sky.moonAlt, 0, 70, height * 0.25, 10);
     moonY = constrain(moonY, 5, height * 0.3);
-    var moonBright = constrain(map(sky.moonAlt, 0, 40, 0.2, 1.0), 0, 1);
-    // Phase illumination (0=new=dark, 0.5=full=bright)
-    var phaseBright = sin(sky.moonPhase * PI); // 0 at new/full boundary, peaks at quarter
+    var moonBright = constrain(map(sky.moonAlt, 0, 40, 0.3, 1.0), 0, 1);
     var illum = sky.moonPhase < 0.5 ? sky.moonPhase * 2 : (1 - sky.moonPhase) * 2;
-    illum = constrain(illum, 0.05, 1.0);
-    fill(180, 190, 210, moonBright * illum * 15);
-    ellipse(moonX, moonY, 35, 35);
-    fill(200, 210, 230, moonBright * illum * 40);
+    illum = constrain(illum, 0.08, 1.0);
+    var mb = moonBright * illum;
+    // Atmospheric halo
+    fill(120, 140, 180, mb * 5);
+    ellipse(moonX, moonY, 90, 90);
+    fill(150, 165, 200, mb * 10);
+    ellipse(moonX, moonY, 55, 55);
+    // Moon disc
+    fill(180, 190, 210, mb * 25);
+    ellipse(moonX, moonY, 28, 28);
+    fill(210, 215, 230, mb * 60);
+    ellipse(moonX, moonY, 18, 18);
+    fill(235, 238, 245, mb * 100);
     ellipse(moonX, moonY, 12, 12);
+    // Moonlight on ground — subtle wash
+    if (mb > 0.2) {
+      fill(100, 120, 160, mb * 3);
+      rect(0, height * 0.5, width, height * 0.5);
+    }
+  }
+
+  // === FIREFLIES (night only, emerge near plants) ===
+  if (!sky.isDay && plants.length > 2) {
+    // Spawn fireflies near mature plants
+    if (random(1) < 0.04 && fireflies.length < 40) {
+      var srcPlant = plants[floor(random(plants.length))];
+      if (srcPlant.growth > 0.3) {
+        fireflies.push({
+          x: srcPlant.x + random(-30, 30),
+          y: srcPlant.y + random(-40, -5),
+          vx: random(-0.3, 0.3), vy: random(-0.2, 0.1),
+          phase: random(TWO_PI), rate: random(0.03, 0.08),
+          life: floor(random(200, 600)),
+          sz: random(1.5, 3.0),
+        });
+      }
+    }
+  }
+  for (var i = fireflies.length - 1; i >= 0; i--) {
+    var ff = fireflies[i];
+    ff.x += ff.vx + sin(frameNum * 0.02 + ff.phase) * 0.3;
+    ff.y += ff.vy + cos(frameNum * 0.015 + ff.phase * 1.3) * 0.2;
+    ff.vx += random(-0.02, 0.02); ff.vy += random(-0.02, 0.02);
+    ff.vx = constrain(ff.vx, -0.5, 0.5); ff.vy = constrain(ff.vy, -0.4, 0.3);
+    ff.life--;
+    if (ff.life <= 0 || ff.y < 0 || ff.x < -10 || ff.x > width + 10) { fireflies.splice(i, 1); continue; }
+    // Pulse glow
+    var pulse = (sin(frameNum * ff.rate + ff.phase) + 1) * 0.5;
+    pulse = pulse * pulse; // sharper on/off
+    var fa = pulse * 0.9 * (ff.life > 30 ? 1.0 : ff.life / 30);
+    if (fa > 0.05) {
+      noStroke();
+      fill(180, 220, 80, fa * 30);
+      ellipse(ff.x, ff.y, ff.sz * 5, ff.sz * 5);
+      fill(200, 240, 100, fa * 80);
+      ellipse(ff.x, ff.y, ff.sz * 2.5, ff.sz * 2.5);
+      fill(230, 255, 140, fa * 200);
+      ellipse(ff.x, ff.y, ff.sz, ff.sz);
+    }
+  }
+  // Firefly synchronization — Kuramoto coupled oscillators
+  // Each firefly adjusts its phase toward nearby flashing neighbors
+  // Simple rule → collective synchronization (Strogatz 2003)
+  if (!sky.isDay) {
+    var couplingStrength = 0.015; // K in Kuramoto model
+    for (var i = 0; i < fireflies.length; i++) {
+      var fi = fireflies[i];
+      for (var j = i + 1; j < fireflies.length; j++) {
+        var fj = fireflies[j];
+        var dx = fi.x - fj.x, dy = fi.y - fj.y;
+        var distSq = dx*dx + dy*dy;
+        if (distSq < 3600) { // within 60px
+          // Phase coupling: each shifts toward the other
+          var phaseDiff = sin(fj.phase - fi.phase);
+          fi.phase += couplingStrength * phaseDiff;
+          fj.phase -= couplingStrength * phaseDiff;
+        }
+      }
+    }
+  }
+  // Clear fireflies during day
+  if (sky.isDay && fireflies.length > 0) fireflies = [];
+
+  // === FOG RENDERING (temp-dewpoint spread < 2.5°C) ===
+  if (fog.density > 0.02) {
+    noStroke();
+    // Ground-hugging fog layers — denser at bottom, PNW radiation fog
+    for (var row = 0; row < height * 0.5; row++) {
+      var fy = height - row;
+      var layerDense = fog.density * (row < height * 0.15 ? 1.0 : map(row, height*0.15, height*0.5, 0.8, 0.0));
+      // Drift with wind
+      var drift = sin((fy * 0.01) + frameNum * 0.003 + cos(radians(wx.windDir)) * 0.5) * 0.15;
+      var fogAlpha = (layerDense + drift) * 0.06;
+      if (fogAlpha > 0.003) {
+        fill(180, 195, 210, fogAlpha * 255);
+        rect(0, fy, width, 1);
+      }
+    }
+  }
+
+  // === AURORA BOREALIS (Kp >= 4, nighttime, from NOAA Space Weather) ===
+  if (aurora.active && aurora.kp >= 4 && !sky.isDay) {
+    noStroke();
+    var aIntensity = constrain(map(aurora.kp, 4, 8, 0.3, 1.0), 0, 1);
+    // Green curtains in the northern sky (top of canvas)
+    for (var x = 0; x < width; x += 3) {
+      var n1 = noise(x * 0.008, frameNum * 0.003);
+      var n2 = noise(x * 0.015 + 100, frameNum * 0.005);
+      var curtainH = n1 * height * 0.25 * aIntensity;
+      var cx = x + sin(frameNum * 0.01 + x * 0.02) * 5;
+      // Green (557.7nm oxygen emission)
+      var ga = n2 * aIntensity * 0.15;
+      fill(80, 255, 120, ga * 255);
+      rect(cx, 0, 3, curtainH);
+      // Purple/red fringe at higher altitude (630nm)
+      if (aurora.kp >= 6) {
+        fill(160, 60, 180, ga * 0.5 * 255);
+        rect(cx, 0, 3, curtainH * 0.3);
+      }
+    }
   }
 
   // === RAIN ===
@@ -608,7 +952,7 @@ function draw() {
 
   // Food & poison (depth-scaled)
   var fSize = map(season, 0, 1, 1.0, 2.5);
-  var nightDim = sky.isDay ? 1.0 : 0.3;
+  var nightDim = sky.isDay ? 1.0 : 0.5;
   for (var i = 0; i < food.length; i++) {
     fill(PAL.moss[0], PAL.moss[1], PAL.moss[2], 110*depthAlpha(food[i].y)*nightDim);
     noStroke(); ellipse(food[i].x, food[i].y, fSize*depthScale(food[i].y), fSize*depthScale(food[i].y));
@@ -622,8 +966,9 @@ function draw() {
   if (plants.length > 3 && vehicles.length < 5 && frameNum % 120 === 0) {
     vehicles.push(new Vehicle(random(width), random(height * 0.5, height)));
   }
-  // Mycelia network
-  stroke(PAL.gold[0], PAL.gold[1], PAL.gold[2], 8*nightDim); strokeWeight(0.3);
+  // Mycelia network — bioluminescent at night
+  var myceliaGlow = sky.isDay ? 8 : 18;
+  stroke(PAL.gold[0], PAL.gold[1], PAL.gold[2], myceliaGlow); strokeWeight(sky.isDay ? 0.3 : 0.6);
   for (var i = 0; i < vehicles.length; i++) { if(vehicles[i].species!==3)continue;
     for (var j = i+1; j < vehicles.length; j++) { if(vehicles[j].species!==3)continue;
       if(vehicles[i].position.dist(vehicles[j].position)<55) line(vehicles[i].position.x,vehicles[i].position.y,vehicles[j].position.x,vehicles[j].position.y);
@@ -648,7 +993,18 @@ function draw() {
   // Update DOM status bar if it exists (forest/index.html), else draw on canvas
   var wxLine = wx.stationName + ' ' + wx.temp.toFixed(0) + '°C ' + wx.description + ' Wind ' + wx.windDir.toFixed(0) + '° ' + wx.windSpeed.toFixed(0) + 'km/h';
   var skyLine = (sky.isDay ? 'Sun ' + sky.sunAlt.toFixed(0) + '°' : 'Moon ' + sky.moonAlt.toFixed(0) + '° ph' + (sky.moonPhase*100).toFixed(0) + '%');
-  var ecoLine = plants.length + ' plants  ' + seeds.length + ' seeds  ' + vehicles.length + ' agents';
+  // Count species for HUD
+  var speciesCounts = {};
+  for (var i = 0; i < vehicles.length; i++) {
+    var sn = SPECIES[vehicles[i].species].name;
+    speciesCounts[sn] = (speciesCounts[sn] || 0) + 1;
+  }
+  var speciesStr = '';
+  for (var s in speciesCounts) { if (speciesCounts[s] > 0) speciesStr += speciesCounts[s] + ' ' + s + '  '; }
+  var ecoLine = plants.length + ' plants  ' + seeds.length + ' seeds  ' + speciesStr.trim();
+  var fogLine = fog.density > 0.05 ? '  Fog' : '';
+  var auroraLine = aurora.active ? '  Aurora Kp=' + aurora.kp : '';
+  ecoLine += fogLine + auroraLine;
 
   var wxEl = document.getElementById('wx-status');
   var ecoEl = document.getElementById('eco-status');
