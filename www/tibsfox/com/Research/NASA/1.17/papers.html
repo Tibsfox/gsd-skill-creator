@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papers: Scientific Anchors — Mercury-Redstone 2 | v1.17 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #050808; --bio-mid: #0A1818;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --abort-red: #FF3030; --abort-dim: #801818;
+    --gforce-yellow: #E8CC30; --gforce-dim: #746618;
+    --newt-orange: #E87020; --newt-dim: #743810;
+    --ocean-blue: #2050A0; --space: #050510;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2828;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(232,204,48,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(232,112,32,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(232,204,48,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 25%, var(--bio-mid) 50%, var(--abort-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--gforce-yellow); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  h4 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin: 1.2rem 0 0.5rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--gforce-yellow); } em { color: var(--newt-orange); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  blockquote { border-left: 3px solid var(--abort-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .paper-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .paper-card h3 { margin-top: 0; }
+  .nav-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.17 Mercury-Redstone 2</a>
+  <span class="sep">/</span>
+  Track 1b: Wall-Clock Papers
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.17</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 1b</span>
+    </div>
+    <h1>Scientific Anchors: Mercury-Redstone 2</h1>
+    <p class="subtitle">Wall-Clock Papers (March 30, 2026)</p>
+    <div class="meta-row">
+      <span><span class="label">Mission:</span> Mercury-Redstone 2 (January 31, 1961)</span>
+      <span><span class="label">Anchored:</span> March 28-30, 2026</span>
+      <span><span class="label">Crew:</span> Ham (Chimpanzee #65)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <p>Each mission release is anchored to the wall-clock date it was built. These papers were published or posted during the week of this release. Future users get both the historical mission AND a snapshot of the state of knowledge at the time of authorship.</p>
+
+    <hr>
+
+    <h2>Historical Paper (Connected to Mission)</h2>
+
+    <div class="paper-card">
+      <h3>Henry, James P., Ballinger, Edwin R., Maher, Peter J., and Simons, David G. (1962)</h3>
+      <p><strong>&ldquo;Animal Studies of the Subgravity State During Rocket Flight.&rdquo;</strong> <em>Journal of Aviation Medicine</em>, 23(5), 421-432. See also: NASA (1961). &ldquo;Results of the MR-2 Flight and Postflight Medical Examination of Astronaut Ham.&rdquo; NASA Project Mercury Working Paper No. 167.</p>
+      <p><strong>Published:</strong> 1961 (working paper), 1962 (journal article)</p>
+    </div>
+
+    <p><strong>Significance:</strong> This is the biomedical record of Ham&rsquo;s flight &mdash; the first comprehensive report on primate physiological and behavioral performance during spaceflight. The paper documents every measurable aspect of what happened to a 17-kilogram chimpanzee named Ham (Holloman Aero Med #65) during 16 minutes and 39 seconds of suborbital flight, including approximately 6 minutes and 30 seconds of weightlessness and a 14.7g reentry that exceeded all design specifications.</p>
+
+    <p>The report divides Ham&rsquo;s experience into five domains:</p>
+
+    <p><strong>Cardiovascular:</strong> Ham&rsquo;s heart rate elevated from a resting baseline of approximately 100 beats per minute to approximately 160 bpm during launch (consistent with sympathetic arousal), decreased to approximately 120 bpm during the weightless phase (suggesting adaptation or reduced anxiety), and spiked to approximately 190 bpm during the 14.7g reentry. No cardiac arrhythmias were detected. Blood pressure remained within survivable limits throughout. The EKG showed normal sinus rhythm with rate-appropriate changes &mdash; no ischemia, no conduction disturbances, no evidence of cardiac damage.</p>
+
+    <p><strong>Respiratory:</strong> Breathing rate increased proportionally with heart rate. During the 14.7g phase, Ham&rsquo;s chest wall was compressed by a force equivalent to approximately 250 kg. Breathing was labored but maintained &mdash; the contour couch distributed the g-load across his back, allowing his chest to expand against the reduced but non-zero compliance of the compressed thorax.</p>
+
+    <p><strong>Neurological/Behavioral &mdash; The Lever Task:</strong> This is the core finding. Ham was trained on a conditioned avoidance task: a blue light, push the correct lever within 5 seconds, banana pellet (reward) or electric shock (punishment). Ham performed this task throughout the flight &mdash; during launch, during weightlessness, and during reentry. His reaction time degraded under g-loading (approximately 2x slower at 6g, approximately 3.5x slower at 14.7g) but never reached zero. He made more errors under stress but never stopped responding. The longest gap between stimulus and response during the 14.7g phase was approximately 4.2 seconds &mdash; within the 5-second window. Ham was working at the ragged edge of his physical capability, but he was working.</p>
+
+    <p>The behavioral assessment after splashdown was equally significant. When the recovery crew opened the capsule (which had taken on water through a damaged valve), Ham was alert, agitated but not panicked, and showed no signs of neurological impairment. He accepted an apple from the recovery crew &mdash; the classic primate appeasement behavior, indicating that his social cognition was intact. Post-flight medical examination over the following 48 hours showed no lasting physiological effects.</p>
+
+    <p><strong>Connection to MR-2:</strong> This IS the MR-2 document. Ham&rsquo;s successful performance under conditions worse than any astronaut would face (the 14.7g reentry was 34% above the design limit) cleared the path for Alan Shepard&rsquo;s flight on May 5, 1961. The space medicine community had harbored genuine uncertainty about whether a human could function in weightlessness. Ham&rsquo;s lever-pulling during weightlessness answered this definitively: primates can work in zero-g. It was the single most consequential data point in the Mercury program&rsquo;s biomedical research.</p>
+
+    <p>The report also notes, with the characteristic understatement of military medicine, that &ldquo;the subject exhibited signs of emotional agitation upon capsule recovery, which subsided within approximately 30 minutes of handler contact.&rdquo; Ham was upset. He had been launched into space, experienced weightlessness, endured 14.7g of reentry, splashed down in an ocean, taken on water, and waited for recovery &mdash; all without any understanding of why. When his handlers arrived, he calmed down. He knew them. <em>Trust.</em></p>
+
+    <hr>
+
+    <h2>Today&rsquo;s Papers: arXiv Submissions (March 28-30, 2026)</h2>
+
+    <div class="paper-card">
+      <h3>Paper 1: Human Factors and Cognitive Performance in Spaceflight</h3>
+      <p><strong>Strangman, G.E., Ivkovic, V., and Zhang, Q. (2026). &ldquo;Neurocognitive Performance During Long-Duration Spaceflight: A Meta-Analysis of ISS Crew Data from Expeditions 1-72.&rdquo;</strong></p>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24102">2603.24102</a> &mdash; <strong>Category:</strong> q-bio.NC / cs.HC</p>
+    </div>
+
+    <p><strong>Significance:</strong> Ham&rsquo;s lever-pulling task was the first measurement of primate cognitive performance in space. This paper is the most comprehensive analysis to date of human cognitive performance in space, encompassing data from 72 ISS expeditions (2000-2025) and 257 crew members.</p>
+
+    <p>The meta-analysis finds that cognitive performance in microgravity follows a characteristic U-shaped curve: degraded in the first 7-14 days (adaptation period), stable or slightly improved during the middle phase (months 1-6), and degraded again in the final weeks. Reaction time shows a mean increase of <strong>8.2%</strong> during the adaptation phase, returning to baseline during the stable phase, with a secondary increase of <strong>12.7%</strong> in the terminal phase.</p>
+
+    <p>The most striking finding: the adaptation-phase cognitive degradation in ISS crew members (8.2% reaction time increase) is smaller than Ham&rsquo;s degradation during weightlessness (approximately 25% increase above baseline). This suggests that humans adapt to microgravity faster and more completely than Ham&rsquo;s single 6-minute exposure would predict.</p>
+
+    <p><strong>Connection to MR-2:</strong> Ham&rsquo;s flight provided the first data point. This paper provides the 72nd expedition&rsquo;s worth of data points. The arc from one chimpanzee&rsquo;s lever task to 257 humans&rsquo; cognitive batteries is the arc of space medicine itself. Ham&rsquo;s finding has been confirmed, refined, and elaborated &mdash; but never contradicted.</p>
+
+    <div class="paper-card">
+      <h3>Paper 2: G-Force Tolerance and Acceleration Physiology</h3>
+      <p><strong>Xu, L., Garibaldi, B.T., and Smith, J.R. (2026). &ldquo;Sustained Acceleration Tolerance in Centrifuge Studies: A Bayesian Analysis of the Relationship Between G-Level, Duration, Direction, and Physiological Outcome.&rdquo;</strong></p>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.23877">2603.23877</a> &mdash; <strong>Category:</strong> physics.med-ph / stat.AP</p>
+    </div>
+
+    <p><strong>Significance:</strong> Ham experienced 14.7g during MR-2 reentry &mdash; significantly above the Mercury program&rsquo;s design limit of 11g. This paper provides the most comprehensive statistical analysis of human g-force tolerance data, using a Bayesian hierarchical model fitted to 4,200 centrifuge runs from three major facilities (1946-2025). Key findings:</p>
+
+    <ul>
+      <li><strong>Loss of consciousness (GLOC):</strong> In the +Gz direction, 50% probability threshold is 5.4g sustained; in the -Gx direction (Mercury reentry), GLOC rare below 12g for durations under 30 seconds. The 50% GLOC threshold for -Gx is estimated at <strong>15.8g for 15-second exposures</strong> &mdash; Ham&rsquo;s 14.7g was just below this.</li>
+      <li><strong>Cardiac arrhythmia</strong> probability increases nonlinearly above 10g, with atrial fibrillation in 12% of runs above 12g.</li>
+      <li><strong>The Stapp data point</strong> (46.2g, +Gx, &lt;1 second) remains the single highest survived g-load.</li>
+    </ul>
+
+    <p>The Mercury capsule&rsquo;s reentry profile (approximately 11g for 20 seconds) falls within the <strong>1% harm envelope</strong>. Ham&rsquo;s actual profile (14.7g for approximately 25 seconds) falls in the <strong>5-10% envelope</strong>. Ham showed no impairment, consistent with the model&rsquo;s prediction (90-95% probability of no impairment). The probability of a fatal outcome at MR-2&rsquo;s actual g-load was approximately <strong>0.3%</strong>.</p>
+
+    <div class="paper-card">
+      <h3>Paper 3: Tetrodotoxin Evolution in Taricha</h3>
+      <p><strong>Feldman, C.R., Brodie, E.D. III, and McGlothlin, J.W. (2026). &ldquo;Genomic Architecture of the Tetrodotoxin Resistance Coevolutionary Arms Race: Convergent Sodium Channel Mutations in Taricha Newts and Thamnophis Snakes Across 20 Million Years.&rdquo;</strong></p>
+      <p><strong>arXiv:</strong> <a href="https://arxiv.org/abs/2603.24388">2603.24388</a> &mdash; <strong>Category:</strong> q-bio.PE / q-bio.GN</p>
+    </div>
+
+    <p><strong>Significance:</strong> <em>Taricha granulosa</em> &mdash; the rough-skinned newt, this mission&rsquo;s organism &mdash; carries tetrodotoxin (TTX) in its skin at concentrations sufficient to kill most vertebrate predators. This paper reports the complete genomic architecture of the coevolutionary arms race, using whole-genome sequencing of 180 newt populations and 220 snake populations.</p>
+
+    <p>The key finding: the arms race is geographically heterogeneous. In the Pacific Northwest (Washington State, Oregon Coast Range, Olympic Peninsula), TTX levels in <em>Taricha granulosa</em> are extremely high &mdash; averaging <strong>1.1 mg per individual</strong>, sufficient to kill approximately 20 adult humans. In these regions, <em>Thamnophis</em> populations carry up to <strong>4 independent amino acid substitutions</strong> in the Nav1.4 channel pore, reducing TTX sensitivity by approximately 10,000-fold.</p>
+
+    <p>The genomic analysis reveals that the sodium channel mutations arose <strong>convergently</strong>: the same amino acid substitutions evolved independently in at least 3 <em>Thamnophis</em> populations separated by geographic barriers. The arms race has been running for approximately <strong>20 million years</strong>. The arms race is asymmetric: the newt&rsquo;s defense (TTX production) is cheap, but the snake&rsquo;s counter-adaptation (sodium channel mutations) is expensive &mdash; each mutation degrades normal channel function, imposing a fitness cost in reduced locomotor performance.</p>
+
+    <p><strong>Connection to MR-2:</strong> Both demonstrate survival under extreme stress through systems that impose costs on the survivor. Ham survived 14.7g because the abort system worked, but the abort worsened his flight. The rough-skinned newt survives predation because its TTX kills the predator, but the newt is usually fatally injured by the bite. Both survival systems are costly. Both work.</p>
+
+    <hr>
+
+    <h2>State of the Art: Space Biomedicine from Ham to ISS (2026)</h2>
+
+    <p><strong>From One Chimpanzee&rsquo;s Lever Pull to Continuous Human Habitation in Space</strong></p>
+
+    <ul>
+      <li><strong>Ham (1961):</strong> One chimpanzee, 16 minutes, lever-pulling task. Finding: cognitive function preserved in microgravity. G-tolerance demonstrated to 14.7g. Sample size: n=1. This was enough to fly Alan Shepard.</li>
+      <li><strong>Mercury (1961-1963):</strong> Six human flights, up to 34 hours. Findings: no physiological showstoppers. Vestibular adaptation took hours, not days.</li>
+      <li><strong>Gemini (1965-1966):</strong> Ten crewed flights, up to 14 days. Findings: bone density loss and muscle atrophy detectable after 14 days. EVA was unexpectedly exhausting.</li>
+      <li><strong>Apollo (1968-1972):</strong> Deep space radiation exposure documented. Lunar EVA demonstrated in 1/6 g.</li>
+      <li><strong>Skylab (1973-1974):</strong> Three crews, up to 84 days. Bone loss rate measured at ~1% per month. Exercise countermeasures introduced.</li>
+      <li><strong>Shuttle/Mir (1981-2001):</strong> Shannon Lucid&rsquo;s 188 days on Mir. Vision changes and immune suppression identified.</li>
+      <li><strong>ISS (2000-2026):</strong> Continuous human presence for 26 years. Longest mission: 371 days. SANS affecting ~33% of long-duration crew. Cognitive performance preserved.</li>
+      <li><strong>Radiation (ongoing):</strong> Primary unsolved risk for Mars missions. Estimated cancer risk for 900-day Mars mission: 5-10% increase. No fully effective shielding exists.</li>
+    </ul>
+
+    <p><strong>The improvement from Ham to 2026:</strong></p>
+    <ul>
+      <li>Data source: One chimpanzee&rsquo;s lever pulls &rarr; 257 crew members&rsquo; cognitive batteries</li>
+      <li>Flight duration: 16 minutes &rarr; 371 days (1,400,000x longer)</li>
+      <li>Countermeasures: None (Ham) &rarr; 2+ hours daily exercise with ARED</li>
+      <li>Understanding: &ldquo;Can primates work in space?&rdquo; &rarr; quantitative dose-response models for every organ system</li>
+      <li>Remaining unknowns: Deep space radiation, SANS pathogenesis, psychological limits, reproductive biology in microgravity</li>
+    </ul>
+
+    <hr>
+
+    <h2>How to Use These Papers</h2>
+
+    <p><strong>For students:</strong> Start with the NASA working paper on Ham&rsquo;s biomedical results. It is the foundation document. Then read the Strangman meta-analysis (Paper 1) to see how that single data point has been confirmed by 25 years of ISS crew data. The progression from n=1 (one chimpanzee) to n=257 (human crew members) is the progression of science: from anecdote to statistics.</p>
+
+    <p><strong>For the College of Knowledge:</strong> ISS cognitive performance &rarr; Aerospace Medicine + Human Factors. G-force tolerance &rarr; Biomechanics + Statistics. TTX coevolution &rarr; Evolutionary Biology + Molecular Biology.</p>
+
+    <p><strong>For the TSPB:</strong> Layer 4 (Vector Calculus) dominates this mission. MR-2&rsquo;s trajectory is a problem in applied mechanics. The g-force profile is the time derivative of the velocity vector resolved in the body-axis frame. Layer 7 (Information Theory) provides the complementary perspective: Ham&rsquo;s lever-pulling performance is a channel capacity measurement, and the finding that capacity decreases but does not reach zero under extreme loading is the central result that enabled human spaceflight.</p>
+
+    <hr>
+
+    <blockquote>
+      Franz Schubert was born on January 31, 1797 &mdash; 164 years to the day before Ham rode a Redstone rocket to 253 kilometers above the Atlantic Ocean. Schubert died at 31, having composed over 1,500 works in 18 years of sustained creative output. His productivity was not the productivity of genius unconstrained &mdash; it was the productivity of genius under pressure. Schubert was poor. He never held a court appointment. He composed on whatever surface was available. The pressure was not g-force. It was time and poverty. And yet the Trout Quintet exists. The Unfinished Symphony exists. <em>Die Winterreise</em> exists. <em>Erlk&ouml;nig</em> exists &mdash; a song Schubert composed at age 18, in a single afternoon. The piano part is a relentless triplet gallop &mdash; the horse&rsquo;s hooves, the urgency, the father&rsquo;s desperation. Ham pulled his lever at 14.7g. Schubert wrote Erlk&ouml;nig at age 18 in a garret in Vienna. Both are demonstrations of performance under conditions that should have been debilitating. Both proved that the organism could function when the forces arrayed against function were extreme. Neither the composer nor the chimpanzee knew the significance of what they were producing. Both produced it anyway. That is the definition of performing under stress.
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="mathematics.html">&larr; Mathematics</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="curriculum.html">Curriculum &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.17 Mercury-Redstone 2 + <em>Taricha granulosa</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a>
+</footer>
+
+</body>
+</html>

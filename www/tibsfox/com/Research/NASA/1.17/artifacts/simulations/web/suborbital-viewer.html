@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MR-2 Suborbital Flight Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #FF3030;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .viewer-panel {
+    flex: 1;
+    min-width: 600px;
+    max-width: 900px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .data-panel {
+    flex: 0 0 340px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .panel-title {
+    font-size: 12px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #1a2040;
+  }
+  canvas {
+    width: 100%;
+    border-radius: 4px;
+    background: #050510;
+  }
+  .controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .ctrl-btn {
+    background: #1a2040;
+    border: 1px solid #2a3060;
+    color: #c0c8d8;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .ctrl-btn:hover { background: #2a3060; }
+  .ctrl-btn.active { border-color: #4488cc; color: #4488cc; }
+  .ctrl-btn.abort-active { border-color: #FF3030; color: #FF3030; }
+  .slider-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #556677;
+  }
+  .slider-group input[type="range"] {
+    width: 120px;
+    accent-color: #4488cc;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #0d1225;
+    font-size: 11px;
+  }
+  .stat-label { color: #556677; }
+  .stat-value { color: #c0c8d8; font-weight: bold; }
+  .stat-value.danger { color: #FF3030; }
+  .stat-value.safe { color: #30CC30; }
+  .stat-value.warning { color: #E8CC30; }
+  .phase-indicator {
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  .event-log {
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 10px;
+    line-height: 1.6;
+    color: #445566;
+  }
+  .event-log .event {
+    padding: 2px 0;
+    border-bottom: 1px solid #0a0e1a;
+  }
+  .event-log .event.abort { color: #FF3030; }
+  .event-log .event.milestone { color: #E8CC30; }
+  .g-bar {
+    height: 12px;
+    background: #060810;
+    border-radius: 3px;
+    margin-top: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .g-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.1s, background 0.1s;
+  }
+  .legend {
+    display: flex;
+    gap: 15px;
+    margin-top: 8px;
+    font-size: 10px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .legend-swatch {
+    width: 12px;
+    height: 3px;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<h1>MR-2 Suborbital Flight Viewer</h1>
+<p class="subtitle">Mercury-Redstone 2 &mdash; Ham's Trajectory &mdash; v1.17</p>
+
+<div class="main-container">
+  <div class="viewer-panel">
+    <div class="panel-title">Trajectory View (Side Profile)</div>
+    <canvas id="flightCanvas" width="860" height="500"></canvas>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-swatch" style="background: #2050A0;"></div>
+        <span style="color:#556677;">Nominal trajectory</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background: #FF3030;"></div>
+        <span style="color:#556677;">Abort trajectory (actual)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch" style="background: #E8CC30;"></div>
+        <span style="color:#556677;">Capsule position</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btnPlay" onclick="togglePlay()">Play</button>
+      <button class="ctrl-btn" id="btnReset" onclick="resetSim()">Reset</button>
+      <button class="ctrl-btn" id="btnNominal" onclick="toggleTrajectory('nominal')">Nominal</button>
+      <button class="ctrl-btn abort-active" id="btnAbort" onclick="toggleTrajectory('abort')">Abort (Actual)</button>
+      <div class="slider-group">
+        <span>Speed:</span>
+        <input type="range" id="speedSlider" min="1" max="20" value="5">
+        <span id="speedLabel">5x</span>
+      </div>
+      <div class="slider-group">
+        <span>T+</span>
+        <input type="range" id="timeSlider" min="0" max="1000" value="0" style="width:180px;">
+        <span id="timeLabel">0s</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="data-panel">
+    <div class="panel-title">Flight Data</div>
+
+    <div class="stat-row">
+      <span class="stat-label">Mission Time:</span>
+      <span class="stat-value" id="dTime">T+0s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Altitude:</span>
+      <span class="stat-value" id="dAlt">0 km</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Velocity:</span>
+      <span class="stat-value" id="dVel">0 m/s</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Downrange:</span>
+      <span class="stat-value" id="dRange">0 km</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">G-Force:</span>
+      <span class="stat-value" id="dGforce">1.0g</span>
+    </div>
+
+    <div class="g-bar">
+      <div class="g-bar-fill" id="gBar" style="width:7%; background:#30CC30;"></div>
+    </div>
+    <div style="display:flex; justify-content:space-between; font-size:9px; color:#334; margin-top:2px;">
+      <span>0g</span><span>5g</span><span>10g</span><span>15g</span>
+    </div>
+
+    <div class="phase-indicator" id="phaseIndicator" style="background:#1a2040; color:#556677;">
+      PRE-LAUNCH
+    </div>
+
+    <div class="panel-title" style="margin-top:15px;">Peak Values</div>
+    <div class="stat-row">
+      <span class="stat-label">Peak Altitude:</span>
+      <span class="stat-value" id="peakAlt">---</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Peak Velocity:</span>
+      <span class="stat-value" id="peakVel">---</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Peak G-Force:</span>
+      <span class="stat-value" id="peakG">---</span>
+    </div>
+
+    <div class="panel-title" style="margin-top:15px;">Event Log</div>
+    <div class="event-log" id="eventLog"></div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('flightCanvas');
+const ctx = canvas.getContext('2d');
+
+// Flight data (simplified trajectories)
+// Format: { t: seconds, alt: km, range: km, vel: m/s, g: g-force }
+function generateTrajectory(abort) {
+  const points = [];
+  const dt = 1; // 1-second intervals
+  const totalTime = abort ? 999 : 900;
+
+  for (let t = 0; t <= totalTime; t += dt) {
+    let alt, range, vel, g;
+    const tf = t / totalTime;
+
+    if (abort) {
+      // MR-2 actual trajectory (with abort at T+137)
+      if (t < 137) {
+        // Powered ascent
+        const frac = t / 137;
+        alt = 120 * frac * frac;  // Quadratic rise
+        range = 80 * frac;
+        vel = 1800 * frac;
+        g = 1.0 + 5.0 * frac;
+      } else if (t < 145) {
+        // Abort firing — extra thrust
+        const frac = (t - 137) / 8;
+        alt = 120 + 30 * frac;
+        range = 80 + 30 * frac;
+        vel = 1800 + 600 * frac;
+        g = 8.0 + 1.0 * Math.sin(frac * Math.PI);
+      } else if (t < 520) {
+        // Coast to apogee (253 km)
+        const frac = (t - 145) / (520 - 145);
+        const sinFrac = Math.sin(frac * Math.PI / 2);
+        alt = 150 + 103 * sinFrac;
+        range = 110 + 230 * frac;
+        vel = 2400 * (1 - frac * 0.8);
+        g = Math.max(0, 0.3 * (1 - frac * 2));
+      } else if (t < 720) {
+        // Descent + reentry
+        const frac = (t - 520) / (720 - 520);
+        alt = 253 * (1 - frac * frac);
+        range = 340 + 280 * frac;
+        vel = 500 + 2000 * frac;
+        // G-force builds to 14.7 peak
+        g = 0.5 + 14.2 * Math.pow(frac, 2) * Math.exp(-Math.pow((frac - 0.85) * 5, 2));
+        if (frac > 0.7 && frac < 0.95) g = Math.min(14.7, 3 + 11.7 * Math.sin((frac - 0.7) / 0.25 * Math.PI / 2));
+      } else {
+        // Chutes + recovery
+        const frac = Math.min(1, (t - 720) / (999 - 720));
+        alt = Math.max(0, 30 * (1 - frac));
+        range = 620 + 59 * frac;
+        vel = 2500 * Math.max(0, 1 - frac * 1.2);
+        g = 1.0 + 2.0 * Math.exp(-frac * 5);
+      }
+    } else {
+      // Nominal trajectory (without abort)
+      if (t < 142) {
+        const frac = t / 142;
+        alt = 100 * frac * frac;
+        range = 70 * frac;
+        vel = 1800 * frac;
+        g = 1.0 + 5.0 * frac;
+      } else if (t < 420) {
+        const frac = (t - 142) / (420 - 142);
+        const sinFrac = Math.sin(frac * Math.PI / 2);
+        alt = 100 + 85 * sinFrac;
+        range = 70 + 200 * frac;
+        vel = 1800 * (1 - frac * 0.7);
+        g = Math.max(0, 0.2 * (1 - frac * 2));
+      } else if (t < 650) {
+        const frac = (t - 420) / (650 - 420);
+        alt = 185 * (1 - frac * frac);
+        range = 270 + 160 * frac;
+        vel = 600 + 1600 * frac;
+        g = 0.5 + 10.5 * Math.pow(frac, 2) * Math.exp(-Math.pow((frac - 0.85) * 5, 2));
+        if (frac > 0.7 && frac < 0.95) g = Math.min(11, 2 + 9 * Math.sin((frac - 0.7) / 0.25 * Math.PI / 2));
+      } else {
+        const frac = Math.min(1, (t - 650) / (900 - 650));
+        alt = Math.max(0, 25 * (1 - frac));
+        range = 430 + 36 * frac;
+        vel = 2200 * Math.max(0, 1 - frac * 1.2);
+        g = 1.0 + 2.0 * Math.exp(-frac * 5);
+      }
+    }
+
+    points.push({ t, alt: Math.max(0, alt), range: Math.max(0, range),
+                   vel: Math.max(0, vel), g: Math.max(0, g) });
+  }
+  return points;
+}
+
+const nominalTraj = generateTrajectory(false);
+const abortTraj = generateTrajectory(true);
+
+let showNominal = true;
+let showAbort = true;
+let playing = false;
+let currentTime = 0;
+let lastFrameTime = 0;
+let peakAlt = 0, peakVel = 0, peakG = 0;
+let loggedEvents = {};
+
+function getPoint(traj, t) {
+  const idx = Math.min(Math.floor(t), traj.length - 1);
+  return traj[Math.max(0, idx)];
+}
+
+function getPhase(t) {
+  if (t < 5) return { text: 'PRE-LAUNCH', bg: '#1a2040', fg: '#556677' };
+  if (t < 137) return { text: 'POWERED ASCENT', bg: '#1a3020', fg: '#30CC30' };
+  if (t < 145) return { text: 'ABORT ACTIVATED', bg: '#401010', fg: '#FF3030' };
+  if (t < 520) return { text: 'COAST / WEIGHTLESS', bg: '#102040', fg: '#4488CC' };
+  if (t < 720) return { text: 'REENTRY', bg: '#402010', fg: '#E87020' };
+  if (t < 860) return { text: 'CHUTES DEPLOYED', bg: '#1a2040', fg: '#B0B8C0' };
+  return { text: 'SPLASHDOWN / RECOVERY', bg: '#102030', fg: '#2050A0' };
+}
+
+function logEvent(t, text, cls) {
+  const key = text;
+  if (loggedEvents[key]) return;
+  loggedEvents[key] = true;
+  const log = document.getElementById('eventLog');
+  const div = document.createElement('div');
+  div.className = 'event ' + (cls || '');
+  div.textContent = 'T+' + Math.round(t) + 's: ' + text;
+  log.insertBefore(div, log.firstChild);
+}
+
+function draw() {
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  // Background gradient (space)
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, '#050510');
+  grad.addColorStop(0.7, '#0a0e1a');
+  grad.addColorStop(1, '#101828');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, w, h);
+
+  // Stars
+  ctx.fillStyle = 'rgba(200,210,230,0.4)';
+  for (let i = 0; i < 60; i++) {
+    const sx = ((i * 127 + 43) % w);
+    const sy = ((i * 89 + 17) % (h * 0.6));
+    ctx.fillRect(sx, sy, 1, 1);
+  }
+
+  // Earth curvature
+  const earthCenterY = h + 300;
+  const earthRadius = 380;
+  ctx.beginPath();
+  ctx.arc(w / 2, earthCenterY, earthRadius, 0, Math.PI * 2);
+  ctx.fillStyle = '#0a1530';
+  ctx.fill();
+
+  // Atmosphere glow
+  ctx.beginPath();
+  ctx.arc(w / 2, earthCenterY, earthRadius + 8, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(50,100,200,0.3)';
+  ctx.lineWidth = 8;
+  ctx.stroke();
+
+  // Ocean surface
+  ctx.beginPath();
+  ctx.arc(w / 2, earthCenterY, earthRadius, Math.PI, 0);
+  ctx.fillStyle = '#0a1530';
+  ctx.fill();
+
+  // Coordinate mapping
+  const maxRange = 700; // km
+  const maxAlt = 280;   // km
+  const margin = { left: 60, right: 30, top: 30, bottom: 50 };
+  const plotW = w - margin.left - margin.right;
+  const plotH = h - margin.top - margin.bottom;
+
+  function toScreen(range, alt) {
+    return {
+      x: margin.left + (range / maxRange) * plotW,
+      y: h - margin.bottom - (alt / maxAlt) * plotH
+    };
+  }
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(40,60,100,0.3)';
+  ctx.lineWidth = 0.5;
+  ctx.setLineDash([4, 4]);
+  for (let a = 0; a <= maxAlt; a += 50) {
+    const y = h - margin.bottom - (a / maxAlt) * plotH;
+    ctx.beginPath();
+    ctx.moveTo(margin.left, y);
+    ctx.lineTo(w - margin.right, y);
+    ctx.stroke();
+    ctx.fillStyle = '#334466';
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText(a + ' km', margin.left - 5, y + 3);
+  }
+  for (let r = 0; r <= maxRange; r += 100) {
+    const x = margin.left + (r / maxRange) * plotW;
+    ctx.beginPath();
+    ctx.moveTo(x, margin.top);
+    ctx.lineTo(x, h - margin.bottom);
+    ctx.stroke();
+    ctx.fillStyle = '#334466';
+    ctx.textAlign = 'center';
+    ctx.fillText(r + ' km', x, h - margin.bottom + 15);
+  }
+  ctx.setLineDash([]);
+
+  // Karman line (100 km)
+  const karmanY = h - margin.bottom - (100 / maxAlt) * plotH;
+  ctx.strokeStyle = 'rgba(100,100,100,0.4)';
+  ctx.setLineDash([6, 3]);
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(margin.left, karmanY);
+  ctx.lineTo(w - margin.right, karmanY);
+  ctx.stroke();
+  ctx.fillStyle = '#556677';
+  ctx.textAlign = 'left';
+  ctx.fillText('Karman line (100 km)', margin.left + 5, karmanY - 5);
+  ctx.setLineDash([]);
+
+  // Draw trajectories
+  function drawTraj(traj, color, maxT) {
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    let first = true;
+    for (let i = 0; i < Math.min(maxT, traj.length); i++) {
+      const p = toScreen(traj[i].range, traj[i].alt);
+      if (first) { ctx.moveTo(p.x, p.y); first = false; }
+      else ctx.lineTo(p.x, p.y);
+    }
+    ctx.stroke();
+  }
+
+  // Draw full trajectories (faded) then current progress (bright)
+  if (showNominal) {
+    drawTraj(nominalTraj, 'rgba(32,80,160,0.2)', nominalTraj.length);
+    drawTraj(nominalTraj, '#2050A0', Math.floor(currentTime));
+  }
+  if (showAbort) {
+    drawTraj(abortTraj, 'rgba(255,48,48,0.2)', abortTraj.length);
+    drawTraj(abortTraj, '#FF3030', Math.floor(currentTime));
+  }
+
+  // Capsule marker (on abort trajectory by default)
+  const activeTraj = showAbort ? abortTraj : nominalTraj;
+  const cp = getPoint(activeTraj, currentTime);
+  const sp = toScreen(cp.range, cp.alt);
+
+  // Capsule glow
+  const glowRadius = 8 + cp.g * 0.5;
+  const glowGrad = ctx.createRadialGradient(sp.x, sp.y, 2, sp.x, sp.y, glowRadius);
+  const gColor = cp.g > 10 ? '#FF3030' : cp.g > 6 ? '#E8CC30' : '#E8CC30';
+  glowGrad.addColorStop(0, gColor);
+  glowGrad.addColorStop(1, 'transparent');
+  ctx.fillStyle = glowGrad;
+  ctx.fillRect(sp.x - glowRadius, sp.y - glowRadius, glowRadius * 2, glowRadius * 2);
+
+  // Capsule dot
+  ctx.beginPath();
+  ctx.arc(sp.x, sp.y, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#E8CC30';
+  ctx.fill();
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Reentry heating effect
+  if (currentTime > 550 && currentTime < 750 && showAbort) {
+    const heatIntensity = Math.sin((currentTime - 550) / 200 * Math.PI);
+    ctx.beginPath();
+    ctx.arc(sp.x, sp.y, 12 + heatIntensity * 10, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,100,30,${heatIntensity * 0.2})`;
+    ctx.fill();
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#556677';
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Downrange Distance (km)', w / 2, h - 5);
+  ctx.save();
+  ctx.translate(12, h / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('Altitude (km)', 0, 0);
+  ctx.restore();
+}
+
+function updateData() {
+  const traj = showAbort ? abortTraj : nominalTraj;
+  const pt = getPoint(traj, currentTime);
+
+  document.getElementById('dTime').textContent = 'T+' + Math.round(currentTime) + 's';
+  document.getElementById('dAlt').textContent = pt.alt.toFixed(1) + ' km';
+  document.getElementById('dVel').textContent = Math.round(pt.vel) + ' m/s';
+  document.getElementById('dRange').textContent = pt.range.toFixed(1) + ' km';
+
+  const gEl = document.getElementById('dGforce');
+  gEl.textContent = pt.g.toFixed(1) + 'g';
+  gEl.className = 'stat-value ' + (pt.g > 10 ? 'danger' : pt.g > 6 ? 'warning' : 'safe');
+
+  // G-bar
+  const gBar = document.getElementById('gBar');
+  const gPct = Math.min(100, (pt.g / 15) * 100);
+  gBar.style.width = gPct + '%';
+  gBar.style.background = pt.g > 10 ? '#FF3030' : pt.g > 6 ? '#E8CC30' : '#30CC30';
+
+  // Phase
+  const phase = getPhase(currentTime);
+  const phaseEl = document.getElementById('phaseIndicator');
+  phaseEl.textContent = phase.text;
+  phaseEl.style.background = phase.bg;
+  phaseEl.style.color = phase.fg;
+
+  // Peaks
+  if (pt.alt > peakAlt) peakAlt = pt.alt;
+  if (pt.vel > peakVel) peakVel = pt.vel;
+  if (pt.g > peakG) peakG = pt.g;
+  document.getElementById('peakAlt').textContent = peakAlt.toFixed(1) + ' km';
+  document.getElementById('peakVel').textContent = Math.round(peakVel) + ' m/s';
+  const peakGEl = document.getElementById('peakG');
+  peakGEl.textContent = peakG.toFixed(1) + 'g';
+  peakGEl.className = 'stat-value ' + (peakG > 10 ? 'danger' : 'warning');
+
+  // Events
+  if (currentTime > 1 && currentTime < 3) logEvent(0, 'Liftoff — engine ignition', 'milestone');
+  if (currentTime > 137 && currentTime < 139) logEvent(137, 'ABORT SYSTEM ACTIVATED', 'abort');
+  if (currentTime > 142 && currentTime < 144) logEvent(142, 'Booster engine cutoff (BECO)', '');
+  if (currentTime > 250 && currentTime < 252) logEvent(250, 'Crossed Karman line (100 km)', 'milestone');
+  if (currentTime > 520 && currentTime < 522) logEvent(520, 'Apogee: 253 km', 'milestone');
+  if (currentTime > 640 && currentTime < 642) logEvent(640, 'Reentry begins — atmospheric contact', '');
+  if (currentTime > 720 && currentTime < 722) logEvent(720, 'Peak reentry: 14.7g', 'abort');
+  if (currentTime > 820 && currentTime < 822) logEvent(820, 'Drogue chute deployed', '');
+  if (currentTime > 840 && currentTime < 842) logEvent(840, 'Main chute deployed', 'milestone');
+  if (currentTime > 995 && currentTime < 997) logEvent(999, 'Splashdown — recovery by USS Donner', 'milestone');
+
+  // Time slider
+  document.getElementById('timeSlider').value = Math.round(currentTime);
+  document.getElementById('timeLabel').textContent = Math.round(currentTime) + 's';
+}
+
+function animate(timestamp) {
+  if (!lastFrameTime) lastFrameTime = timestamp;
+  const dt = (timestamp - lastFrameTime) / 1000;
+  lastFrameTime = timestamp;
+
+  if (playing) {
+    const speed = parseInt(document.getElementById('speedSlider').value);
+    document.getElementById('speedLabel').textContent = speed + 'x';
+    currentTime += dt * speed;
+    const maxTime = showAbort ? 999 : 900;
+    if (currentTime >= maxTime) {
+      currentTime = maxTime;
+      playing = false;
+      document.getElementById('btnPlay').textContent = 'Play';
+    }
+  }
+
+  draw();
+  updateData();
+  requestAnimationFrame(animate);
+}
+
+function togglePlay() {
+  playing = !playing;
+  document.getElementById('btnPlay').textContent = playing ? 'Pause' : 'Play';
+  if (playing && currentTime >= (showAbort ? 999 : 900)) {
+    resetSim();
+    playing = true;
+    document.getElementById('btnPlay').textContent = 'Pause';
+  }
+}
+
+function resetSim() {
+  currentTime = 0;
+  playing = false;
+  peakAlt = 0; peakVel = 0; peakG = 0;
+  loggedEvents = {};
+  document.getElementById('eventLog').innerHTML = '';
+  document.getElementById('btnPlay').textContent = 'Play';
+  document.getElementById('peakAlt').textContent = '---';
+  document.getElementById('peakVel').textContent = '---';
+  document.getElementById('peakG').textContent = '---';
+}
+
+function toggleTrajectory(which) {
+  if (which === 'nominal') {
+    showNominal = !showNominal;
+    document.getElementById('btnNominal').classList.toggle('active', showNominal);
+  } else {
+    showAbort = !showAbort;
+    document.getElementById('btnAbort').classList.toggle('abort-active', showAbort);
+  }
+}
+
+// Time slider manual control
+document.getElementById('timeSlider').addEventListener('input', function() {
+  currentTime = parseInt(this.value);
+  playing = false;
+  document.getElementById('btnPlay').textContent = 'Play';
+});
+
+// Start
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>
