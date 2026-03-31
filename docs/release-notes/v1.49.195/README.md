@@ -22,6 +22,7 @@ This release covers helium supply chain infrastructure from geological fundament
 | **New Skills** | 6 | research-engine, fleet-mission, publish-pipeline, data-fidelity, issue-triage-pr-review, ecosystem-alignment |
 | **New Agents** | 5 | research-fleet-commander, fact-checker, market-researcher, document-builder, issue-fixer |
 | **Ecosystem Alignment** | v1.49.193 | Dynamic base branch, skill description compliance, upstream alignment |
+| **Hook Fixes** | 8 fixes | 4 dead references removed, 4 ESM→CJS conversions (hooks now actually execute) |
 | **Build Pipeline** | pandoc + xelatex | Automated markdown → HTML + PDF with branded templates |
 
 <details>
