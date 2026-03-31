@@ -4,6 +4,32 @@ Papers found during the mission window, connected to mission themes.
 
 ---
 
+## 2026-03-31 04:01 PDT (T-18h) — Sweep v1.0.1
+
+### Solar Risk
+
+8. **"Artemis 2 moon mission shouldn't launch until late 2026, new analysis of solar superflares suggests"**
+   - Source: Space.com / Journal of Geophysical Research: Space Physics, Feb 13, 2026
+   - URL: https://www.space.com/space-exploration/artemis/artemis-2-moon-mission-shouldnt-launch-until-late-2026-new-analysis-of-solar-superflares-suggests
+   - Connection: Argues launch timing conflicts with Solar Cycle 25 peak superflare probability
+   - Track: Crew safety, Challenger Rule — published DURING countdown, contrarian to GO decision
+
+### Organ-on-Chip (AVATAR Payload)
+
+9. **"Modeling the Effects of Protracted Cosmic Radiation in a Human Organ-on-Chip Platform"**
+   - Source: Tavakol et al., Advanced Science, 2024 (foundational for AVATAR)
+   - URL: https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202401415
+   - Connection: Multi-organ platform (bone marrow, heart, liver) — exact tech flying on Artemis II tomorrow
+   - Key finding: Protracted neutron radiation causes greater tissue deviation than same cumulative dose delivered acutely
+   - Track: AVATAR payload validation
+
+### Trajectory
+
+10. **"High-fidelity lunar free-return trajectory optimization via neural networks"**
+    - Source: Journal of Physics, Oct 2025
+    - Connection: ML-based trajectory optimization — could validate our telemetry model in Track 6
+    - Track: Predicted vs actual
+
 ## 2026-03-31 (T-37h)
 
 ### Radiation

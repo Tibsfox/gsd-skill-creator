@@ -15,6 +15,10 @@ var raindrops = [];
 var fireflies = [];
 var stars = [];
 var shootingStars = [];
+var grasses = [];
+var groundMoisture = 0; // 0=dry, 1=saturated
+var puddles = [];
+var leafLitter = [];
 
 var debug;
 var cnv;
@@ -93,8 +97,8 @@ function circadianMultiplier(speciesData) {
 }
 
 // === DEPTH PERSPECTIVE ===
-function depthScale(y) { var t = y / height; return 0.15 + 0.85 * t * t; }
-function depthAlpha(y) { return 0.2 + 0.8 * (y / height) * (y / height); }
+function depthScale(y) { var t = y / height; return 0.2 + 0.8 * t * t; }
+function depthAlpha(y) { return 0.35 + 0.65 * (y / height); }
 
 // === ASTRONOMY — Sun & Moon position ===
 function computeSunPosition(date) {
@@ -345,10 +349,10 @@ function Plant(x, y, typeIdx, parentDna) {
     var c = this.pt.col;
     var cs = this.dna.colShift;
     var da = depthAlpha(this.y);
-    var baseAlpha = (0.3 + this.growth * 0.6) * da;
-    // Darken at night — but keep visible with moonlight
-    var moonGlow = sky.moonAlt > 0 ? constrain(map(sky.moonAlt, 0, 40, 0.15, 0.35), 0, 0.35) : 0;
-    var nightDim = sky.isDay ? 1.0 : (0.45 + moonGlow);
+    var baseAlpha = (0.45 + this.growth * 0.5) * da;
+    // Darken at night — moonlight keeps plants visible
+    var moonGlow = sky.moonAlt > 0 ? constrain(map(sky.moonAlt, 0, 40, 0.2, 0.4), 0, 0.4) : 0;
+    var nightDim = sky.isDay ? 1.0 : (0.55 + moonGlow);
 
     for (var i = 0; i < this.segments.length; i++) {
       var s = this.segments[i];
@@ -519,8 +523,7 @@ function Vehicle(x, y, dna, speciesIdx) {
 function setup() {
   var holder = document.getElementById('sketch-holder');
   var w = holder && holder.offsetWidth > 50 ? holder.offsetWidth : windowWidth;
-  w = min(w, 1400);
-  var h = min(floor(w * 0.75), 800);
+  var h = holder && holder.offsetHeight > 50 ? holder.offsetHeight : windowHeight;
   cnv = createCanvas(w, h);
   cnv.parent('sketch-holder');
 
@@ -546,6 +549,22 @@ function setup() {
   }
   // Try server state (merges with local)
   loadFromServer();
+
+  // Generate ground cover — grass blades rooted to the terrain
+  grasses = [];
+  for (var i = 0; i < 400; i++) {
+    var gx = random(width);
+    var gy = random(height * 0.45, height); // lower 55% of canvas
+    var ds = depthScale(gy);
+    grasses.push({
+      x: gx, y: gy,
+      len: random(4, 18) * ds,            // blade length scales with depth
+      width: random(0.3, 1.0) * ds,
+      hue: floor(random(3)),               // 0=green, 1=yellow-green, 2=brown
+      phase: random(TWO_PI),               // wind sway phase offset
+      stiffness: random(0.3, 1.0),         // how much it resists wind
+    });
+  }
 
   // Generate star field (persistent positions, vary only twinkle)
   stars = [];
@@ -573,8 +592,8 @@ function setup() {
 function windowResized() {
   var holder = document.getElementById('sketch-holder');
   var w = holder && holder.offsetWidth > 50 ? holder.offsetWidth : windowWidth;
-  w = min(w, 1400);
-  resizeCanvas(w, min(floor(w * 0.75), 800));
+  var h = holder && holder.offsetHeight > 50 ? holder.offsetHeight : windowHeight;
+  resizeCanvas(w, h);
 }
 
 function mouseDragged() {
@@ -935,6 +954,131 @@ function draw() {
 
   if (food.length > 300) food.splice(0, food.length - 300);
   if (poison.length > 20) poison.splice(0, poison.length - 20);
+
+  // === GROUND MOISTURE — accumulates from rain, evaporates in sun ===
+  if (wx.isRaining || wx.humidity > 90) {
+    groundMoisture = min(groundMoisture + 0.0008, 1.0);
+  } else {
+    var evapRate = sky.isDay ? 0.0003 * (1 + wx.temp / 30) : 0.0001;
+    groundMoisture = max(groundMoisture - evapRate, 0);
+  }
+
+  // === PUDDLES — form when ground is saturated ===
+  if (groundMoisture > 0.6 && random(1) < 0.01 && puddles.length < 15) {
+    puddles.push({
+      x: random(width * 0.05, width * 0.95),
+      y: random(height * 0.6, height - 5),
+      w: random(8, 30) * depthScale(random(height * 0.6, height)),
+      h: random(2, 6),
+      life: floor(random(500, 2000)),
+    });
+  }
+  // Draw puddles — subtle reflective ellipses
+  for (var i = puddles.length - 1; i >= 0; i--) {
+    var pd = puddles[i];
+    if (!wx.isRaining && groundMoisture < 0.3) pd.life -= 3; else pd.life--;
+    if (pd.life <= 0) { puddles.splice(i, 1); continue; }
+    var pa = min(1, pd.life / 200) * 0.12 * depthAlpha(pd.y);
+    var nightDimP = sky.isDay ? 1.0 : 0.6;
+    // Puddle body — dark reflective
+    fill(15, 25, 40, pa * nightDimP * 255);
+    noStroke();
+    ellipse(pd.x, pd.y, pd.w, pd.h);
+    // Sky reflection highlight
+    if (sky.isDay) {
+      fill(60, 90, 120, pa * 0.4 * 255);
+    } else if (sky.moonAlt > 0) {
+      fill(80, 90, 110, pa * 0.25 * 255);
+    }
+    ellipse(pd.x - pd.w * 0.15, pd.y - pd.h * 0.1, pd.w * 0.4, pd.h * 0.5);
+  }
+
+  // === GRASS BLADES — sway with real wind, color with season + moisture ===
+  var windSway = wx.windSpeed / 8; // stronger wind = more sway
+  var windAngle = radians(wx.windDir);
+  var nightDimG = sky.isDay ? 1.0 : (0.5 + (sky.moonAlt > 0 ? 0.25 : 0));
+
+  for (var i = 0; i < grasses.length; i++) {
+    var g = grasses[i];
+    var da = depthAlpha(g.y);
+    // Wind displacement — each blade sways independently
+    var sway = sin(frameNum * 0.025 + g.phase) * windSway * (1 - g.stiffness * 0.6);
+    sway += cos(frameNum * 0.01 + g.phase * 2.3) * windSway * 0.3; // secondary harmonic
+    var tipX = g.x + sway * g.len * 0.15;
+    var tipY = g.y - g.len;
+
+    // Color — shifts with season, moisture, and individual variation
+    var gr, gg, gb;
+    if (g.hue === 0) {
+      // Green — dominant
+      gr = 30 + season * 15 + groundMoisture * 10;
+      gg = 55 + season * 25 + groundMoisture * 20;
+      gb = 25 + groundMoisture * 8;
+    } else if (g.hue === 1) {
+      // Yellow-green — autumn tint
+      gr = 50 + season * 40;
+      gg = 60 + season * 20;
+      gb = 15;
+    } else {
+      // Brown — dead/dormant
+      gr = 55 + season * 10;
+      gg = 40 + season * 5;
+      gb = 25;
+    }
+    var ga = (0.25 + groundMoisture * 0.15) * da * nightDimG;
+
+    stroke(gr, gg, gb, ga * 255);
+    strokeWeight(g.width);
+    // Curved blade — quadratic from root to tip
+    noFill();
+    beginShape();
+    vertex(g.x, g.y);
+    quadraticVertex(g.x + sway * g.len * 0.08, g.y - g.len * 0.5, tipX, tipY);
+    endShape();
+  }
+
+  // === LEAF LITTER — drops from mature plants, accumulates on ground ===
+  // Spawn from plants
+  if (random(1) < 0.003 * (0.5 + season)) {
+    for (var p = 0; p < plants.length; p++) {
+      if (plants[p].growth > 0.6 && random(1) < 0.02 && leafLitter.length < 200) {
+        var lx = plants[p].x + random(-15, 15);
+        var ly = plants[p].y + random(-3, 3);
+        var c = plants[p].pt.col;
+        leafLitter.push({
+          x: lx, y: ly,
+          sz: random(1, 3) * depthScale(ly),
+          r: constrain(c[0] + random(-15, 40), 20, 180),
+          g: constrain(c[1] + random(-20, 10), 15, 120),
+          b: constrain(c[2] + random(-10, 10), 10, 60),
+          rot: random(TWO_PI),
+          life: floor(random(2000, 8000)), // decomposes over time
+        });
+      }
+    }
+  }
+  // Draw and decay
+  noStroke();
+  for (var i = leafLitter.length - 1; i >= 0; i--) {
+    var lf = leafLitter[i];
+    lf.life--;
+    // Wind pushes litter slightly
+    lf.x += cos(windAngle) * windSway * 0.01;
+    lf.rot += windSway * 0.001;
+    if (lf.life <= 0) { leafLitter.splice(i, 1); continue; }
+    var la = min(1, lf.life / 500) * 0.2 * depthAlpha(lf.y) * nightDimG;
+    // Darken as it decomposes — browns and grays
+    var decomp = max(0, 1 - lf.life / 4000);
+    var lr = lerp(lf.r, 45, decomp);
+    var lg = lerp(lf.g, 30, decomp);
+    var lb = lerp(lf.b, 20, decomp);
+    fill(lr, lg, lb, la * 255);
+    push();
+    translate(lf.x, lf.y);
+    rotate(lf.rot);
+    ellipse(0, 0, lf.sz, lf.sz * 0.6);
+    pop();
+  }
 
   // Sort plants by depth
   plants.sort(function(a, b) { return a.y - b.y; });

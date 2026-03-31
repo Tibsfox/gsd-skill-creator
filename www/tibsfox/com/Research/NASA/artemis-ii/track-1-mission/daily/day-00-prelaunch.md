@@ -55,6 +55,20 @@
 - Added Kuramoto coupled oscillator firefly synchronization
 - Deployed to tibsfox.com/Research/forest/
 
+## Local Transit (Mukilteo)
+
+### Ferries
+- **Mukilteo-Clinton:** Spring 2026 schedule active (Mar 22-Jun 13). Daily 5:05 AM-11:30 PM. Vessels: MV Kitsap, MV Tokitae. No alerts.
+- **Edmonds-Kingston:** Normal operations. Daily 5:35 AM-11:45 PM. No cancellations scheduled.
+
+### Light Rail
+- **Sound Transit 2 Line Crosslake Connection OPENED March 28** — Lynnwood to Downtown Redmond via Lake Washington. 25 stations, 33 miles. First cross-lake light rail service.
+- **Maintenance:** Buses replaced trains Lynnwood-Northgate Mar 3-5 (complete). Downtown tunnel work Mar 21-22 (complete).
+- Lynnwood City Center station is nearest to Mukilteo via Community Transit bus connection.
+
+### Tides (Everett 9447659)
+- High 3.37m at 04:51, Low 0.77m at 10:59, High 3.01m at 17:04, Low 0.72m at 22:57
+
 ## tibsfox.com Updates
 
 - Research/index.html — added Live Missions section with Artemis II card

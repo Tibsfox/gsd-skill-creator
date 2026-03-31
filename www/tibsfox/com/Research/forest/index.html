@@ -6,12 +6,15 @@
 <title>PNW Forest — Distributed Ecosystem Simulation</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:#040810; color:#c8d0e0; font-family:system-ui,sans-serif; overflow-x:hidden; }
-#forest-container { width:100%; position:relative; }
+html, body { height:100%; overflow:hidden; }
+body { background:#040810; color:#c8d0e0; font-family:system-ui,sans-serif; }
+#forest-container { width:100%; height:100vh; position:relative; overflow:hidden; }
+#sketch-holder { width:100%; height:100%; }
+#sketch-holder canvas { display:block; width:100% !important; height:100% !important; }
 #status-bar {
-  position:absolute; bottom:0; left:0; right:0; z-index:10;
-  padding:6px 12px; font-size:10px; font-family:monospace;
-  color:rgba(200,210,220,0.6); background:rgba(4,8,16,0.7);
+  position:fixed; bottom:0; left:0; right:0; z-index:99;
+  padding:4px 12px; font-size:10px; font-family:monospace;
+  color:rgba(200,210,220,0.5); background:rgba(4,8,16,0.75);
   display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;
 }
 #status-bar .bright { color:rgba(200,210,220,0.9); }
@@ -21,6 +24,24 @@ body { background:#040810; color:#c8d0e0; font-family:system-ui,sans-serif; over
 .sync-dot.connected { background:#4CAF50; }
 .sync-dot.local { background:#FFB300; }
 .sync-dot.offline { background:#777; }
+#controls {
+  position:fixed; bottom:28px; left:50%; transform:translateX(-50%); z-index:100;
+  display:flex; gap:6px; padding:5px 12px;
+  background:rgba(4,8,16,0.8); border:1px solid rgba(255,255,255,0.1);
+  border-radius:4px;
+}
+#controls button {
+  background:rgba(10,14,24,0.75); color:rgba(200,210,220,0.6);
+  border:1px solid rgba(255,255,255,0.08); border-radius:3px;
+  font-family:monospace; font-size:9px; padding:3px 10px;
+  cursor:pointer; text-transform:uppercase; letter-spacing:0.08em;
+  transition:color 0.2s, border-color 0.2s, background 0.2s;
+}
+#controls button:hover {
+  color:rgba(200,210,220,0.9); border-color:rgba(196,163,90,0.3);
+  background:rgba(10,14,24,0.9);
+}
+#controls button.caution:hover { border-color:rgba(252,61,33,0.3); color:rgba(252,61,33,0.7); }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
@@ -29,6 +50,13 @@ body { background:#040810; color:#c8d0e0; font-family:system-ui,sans-serif; over
 <div id="forest-container">
   <div id="sketch-holder"></div>
   <div id="check-box" style="display:none"></div>
+  <div id="controls">
+    <button onclick="addSeeds()">+ Seeds</button>
+    <button onclick="addAgent()">+ Agent</button>
+    <button onclick="togglePause()">Pause</button>
+    <button onclick="resetForest()">New Forest</button>
+    <button class="caution" onclick="clearAll()">Clear All</button>
+  </div>
   <div id="status-bar">
     <span id="wx-status">Loading weather...</span>
     <span id="eco-status">Initializing...</span>
@@ -39,6 +67,64 @@ body { background:#040810; color:#c8d0e0; font-family:system-ui,sans-serif; over
 <script>
 // Override API base for the forest directory
 var FOREST_API = 'api/forest.php';
+var paused = false;
+
+function addSeeds() {
+  for (var i = 0; i < 8; i++) {
+    seeds.push({
+      x: random(width * 0.1, width * 0.9),
+      y: random(-10, height * 0.2),
+      vx: random(-0.5, 0.5), vy: random(0.2, 0.6),
+      type: floor(random(PLANT_TYPES.length)),
+      dna: null,
+      life: 500 + floor(random(500)),
+      grounded: false,
+    });
+  }
+}
+
+function addAgent() {
+  if (typeof Vehicle !== 'undefined' && typeof SPECIES !== 'undefined') {
+    vehicles.push(new Vehicle(random(width), random(height * 0.4, height)));
+  }
+}
+
+function togglePause() {
+  paused = !paused;
+  if (paused) { noLoop(); } else { loop(); }
+  var btn = document.querySelectorAll('#controls button')[2];
+  if (btn) btn.textContent = paused ? 'Resume' : 'Pause';
+}
+
+function resetForest() {
+  plants = []; seeds = []; vehicles = []; food = []; poison = [];
+  pheromones = []; spores = []; raindrops = [];
+  if (typeof fireflies !== 'undefined') fireflies = [];
+  if (typeof leafLitter !== 'undefined') leafLitter = [];
+  if (typeof puddles !== 'undefined') puddles = [];
+  groundMoisture = 0;
+  localStorage.removeItem('pnw-forest-state');
+  // Fresh seeds from wind
+  for (var i = 0; i < floor(width / 40); i++) {
+    seeds.push({
+      x: random(width), y: random(-20, height * 0.3),
+      vx: random(-1, 1), vy: random(0.2, 0.8),
+      type: floor(random(PLANT_TYPES.length)),
+      dna: null, life: 500 + floor(random(500)), grounded: false,
+    });
+  }
+  for (var i = 0; i < 30; i++) food.push(createVector(10 + random(width - 20), random(height * 0.4, height)));
+}
+
+function clearAll() {
+  plants = []; seeds = []; vehicles = []; food = []; poison = [];
+  pheromones = []; spores = []; raindrops = [];
+  if (typeof fireflies !== 'undefined') fireflies = [];
+  if (typeof leafLitter !== 'undefined') leafLitter = [];
+  if (typeof puddles !== 'undefined') puddles = [];
+  groundMoisture = 0;
+  localStorage.removeItem('pnw-forest-state');
+}
 </script>
 <script src="simulation.js"></script>
 </body>
