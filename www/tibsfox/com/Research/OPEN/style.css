@@ -1,0 +1,179 @@
+/* OPEN -- Unsolved Problems / Open Research
+   Chalkboard green / theorem gold / proof white
+   Brand foundation loaded from brand.css */
+
+/* ===================================================
+   1. COLOR PALETTE & SEMANTIC OVERRIDES
+   =================================================== */
+
+:root {
+  --chalk-green: #1B5E20;
+  --chalk-green-light: #E8F5E9;
+  --chalk-green-mid: #2E7D32;
+  --chalk-green-dark: #0D3311;
+  --theorem-gold: #F9A825;
+  --theorem-gold-light: #FFF8E1;
+  --theorem-gold-mid: #FBC02D;
+  --proof-white: #FAFAFA;
+  --slate: #37474F;
+  --slate-light: #ECEFF1;
+
+  /* Semantic overrides */
+  --page-bg: #FAFAFA;
+  --page-text: #212121;
+  --page-text-light: #757575;
+  --link: var(--chalk-green);
+  --link-hover: var(--theorem-gold);
+  --accent: var(--chalk-green);
+  --accent-light: var(--chalk-green-light);
+  --accent-dark: var(--chalk-green-dark);
+  --card-bg: white;
+  --card-border: #C8E6C9;
+  --card-shadow: rgba(27,94,32,0.12);
+  --border: #C8E6C9;
+  --parchment: var(--slate-light);
+}
+
+/* ===================================================
+   2. HEADER -- chalkboard / theorem gradient
+   =================================================== */
+
+header {
+  background: linear-gradient(135deg, #0D3311 0%, #1B5E20 40%, #263238 100%);
+  border-bottom: 4px solid var(--theorem-gold);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(249,168,37,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(27,94,32,0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ===================================================
+   3. NAVIGATION TABS
+   =================================================== */
+
+header nav a.active {
+  color: var(--theorem-gold) !important;
+  border-bottom: 2px solid var(--theorem-gold);
+}
+header nav a:hover {
+  color: var(--theorem-gold-mid) !important;
+}
+
+/* ===================================================
+   4. CARDS -- problem category tags
+   =================================================== */
+
+.card {
+  border-left: 4px solid var(--chalk-green);
+  transition: border-left-color 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  border-left-color: var(--theorem-gold);
+  box-shadow: 0 4px 16px var(--card-shadow);
+}
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-right: 4px; font-weight: 600; }
+.tag-ai { background: #E3F2FD; color: #1565C0; }
+.tag-math { background: #FFF3E0; color: #E65100; }
+.tag-emergent { background: #F3E5F5; color: #6A1B9A; }
+.tag-testing { background: #E8F5E9; color: #2E7D32; }
+.tag-security { background: #FFEBEE; color: #C62828; }
+.tag-active { background: var(--theorem-gold-light); color: #F57F17; border: 1px solid var(--theorem-gold); }
+.tag-open { background: var(--chalk-green-light); color: var(--chalk-green); border: 1px solid var(--chalk-green); }
+
+/* ===================================================
+   5. PROBLEM STATUS INDICATORS
+   =================================================== */
+
+.status-open { color: var(--chalk-green); font-weight: 600; }
+.status-active { color: var(--theorem-gold); font-weight: 600; }
+.status-partial { color: #E65100; font-weight: 600; }
+
+/* ===================================================
+   6. MATH NOTATION STYLING
+   =================================================== */
+
+.md-content code {
+  background: var(--chalk-green-light);
+  color: var(--chalk-green-dark);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.md-content pre {
+  background: #263238;
+  color: #ECEFF1;
+  padding: 1.2rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  border-left: 4px solid var(--theorem-gold);
+}
+
+.md-content blockquote {
+  border-left: 4px solid var(--theorem-gold);
+  background: var(--theorem-gold-light);
+  padding: 0.8rem 1.2rem;
+  margin: 1rem 0;
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+}
+
+.md-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.md-content th {
+  background: var(--chalk-green);
+  color: white;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.md-content td {
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+
+.md-content tr:hover td {
+  background: var(--chalk-green-light);
+}
+
+/* ===================================================
+   7. STATS BAR
+   =================================================== */
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.stat { text-align: center; }
+.stat-value { display: block; font-size: 2rem; font-weight: bold; color: var(--chalk-green); }
+.stat-label { font-size: 0.78rem; color: var(--page-text-light); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ===================================================
+   8. RESPONSIVE
+   =================================================== */
+
+@media (max-width: 768px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .stats { gap: 1rem; }
+  .stat-value { font-size: 1.5rem; }
+}

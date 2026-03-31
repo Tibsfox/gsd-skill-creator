@@ -53,7 +53,7 @@ While the Hanford Site itself is categorically unsuitable for helium production,
 
 ### Pacific Northwest National Laboratory (PNNL)
 
-PNNL is a U.S. Department of Energy national laboratory operated by Battelle Memorial Institute, located in Richland, Washington, adjacent to (but administratively distinct from) the Hanford cleanup site. PNNL employs approximately 5,800 staff scientists and engineers with an annual research budget exceeding $1.5 billion.
+PNNL is a U.S. Department of Energy national laboratory operated by Battelle Memorial Institute, located in Richland, Washington, adjacent to (but administratively distinct from) the Hanford cleanup site. PNNL employs approximately 6,000 staff (including scientists, engineers, and support personnel) with an annual research budget exceeding $1.5 billion.
 
 PNNL's capabilities directly relevant to helium technology include:
 

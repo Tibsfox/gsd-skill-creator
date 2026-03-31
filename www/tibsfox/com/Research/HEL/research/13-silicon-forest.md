@@ -34,23 +34,23 @@ Intel's Oregon presence grew steadily from the Jones Farm campus through a serie
 | D1D fab | ~2003 | ~$2B | 300mm development fab |
 | D1X fab, Mod 1 | 2013 | ~$3B | First phase of current leading-edge development fab |
 | D1X fab, Mod 2 | 2015 | ~$3B | Expansion of D1X |
-| D1X fab, Mod 3 | ~2021 | ~$3B | Latest D1X expansion |
+| D1X fab, Mod 3 | April 2022 | ~$3B (adding 270,000 sq ft of cleanroom) | Latest D1X expansion |
 | Cumulative Oregon investment | 1974-2026 | **$52+ billion** | Total including all facilities, equipment, infrastructure |
 
-The D1X fab complex is where Intel develops its leading-edge manufacturing processes. Intel 4 (formerly 7nm), Intel 3, and Intel 20A/18A (incorporating Gate All Around and backside power delivery) were all pioneered at D1X before being transferred to high-volume manufacturing sites in Chandler (Arizona), Leixlip (Ireland), and Kiryat Gat (Israel).
+The D1X fab complex is where Intel develops its leading-edge manufacturing processes. Intel 4 (formerly 7nm), Intel 3, and Intel 20A/18A (incorporating Gate All Around and backside power delivery) were all pioneered at D1X before being transferred to high-volume manufacturing sites in Chandler (Arizona), Leixlip (Ireland), and Kiryat Gat (Israel). Intel 18A powered on in January 2026, with high-volume manufacturing targeted at Fab 52 in Chandler, AZ.
 
 This development role has a specific implication for helium: Oregon's helium needs are disproportionately weighted toward the highest purity specifications. Process development requires 6N (99.9999%) research-grade helium for experiments where even parts-per-million contaminants can confound results. High-volume manufacturing can often use 5N (99.999%) industrial-grade helium. A regional processing hub capable of producing 6N helium (Document 18 for hub design specifications) would serve Intel's most demanding and highest-value need.
 
 ### CHIPS Act Impact on Intel Oregon
 
-Intel received up to $8.5 billion in CHIPS Act preliminary funding (announced March 2024), the largest single award under the Act. While the primary target of this funding is Intel's Ohio mega-fab complex (Fabs 52 and 62 in New Albany/Licking County), Intel's Oregon operations benefit in several ways:
+Intel received $7.86 billion in direct CHIPS Act funding (finalized late 2025), the largest single award under the Act. While the primary target of this funding is Intel's Ohio mega-fab complex (Fabs 52 and 62 in New Albany/Licking County), Intel's Oregon operations benefit in several ways:
 
 - Process technology developed at D1X is the foundation for Ohio production
 - Oregon workforce training programs receive CHIPS Act workforce development funding
 - Oregon's supply chain infrastructure (including gas supply) supports the broader Intel manufacturing network
-- Oregon-specific state incentives under SB 4 ($190 million) complement federal funding
+- Oregon-specific state incentives ($115 million from the Oregon CHIPS program) complement federal funding
 
-Intel's Oregon workforce peaked at approximately 22,000-23,000 employees (pre-2024 layoffs; the company announced significant workforce reductions in 2024 as part of a cost restructuring, with Oregon headcount reduced by an estimated 10-15%). Even at reduced levels, Intel remains the largest single-site employer in Oregon.
+Intel's Oregon workforce peaked at approximately 22,000 employees but has been reduced to approximately 17,000-18,000 after 2024-2026 restructuring waves totaling ~4,500+ Oregon layoffs. Even at reduced levels, Intel remains the largest single-site employer in Oregon.
 
 ## The Semiconductor Cluster: Beyond Intel
 
@@ -60,9 +60,9 @@ Intel anchors the Silicon Forest, but the ecosystem extends well beyond a single
 
 | Company | HQ/Major Location | Founded/Arrived | Specialty | Scale |
 |---------|-------------------|-----------------|-----------|-------|
-| **Intel** | Hillsboro | 1974 (Oregon) | Leading-edge process development + manufacturing | 18,000-22,000 employees (Oregon) |
-| **Lattice Semiconductor** | Hillsboro (global HQ) | 1983 (Portland) | Low-power FPGAs, programmable logic | ~800-1,000 employees |
-| **Microchip Technology** | Portland metro (design center) | Acquired Microsemi (2018) | Microcontrollers, analog, embedded | Design operations |
+| **Intel** | Hillsboro | 1974 (Oregon) | Leading-edge process development + manufacturing | ~17,000-18,000 employees (Oregon, down from ~22,000 peak after 2024-2026 restructuring) |
+| **Lattice Semiconductor** | Hillsboro (global HQ) | 1983 (Portland) | Low-power FPGAs, programmable logic | 1,110 employees (January 2026); named 2025 Top Workplace in Oregon |
+| **Microchip Technology** | Gresham, OR (design + fab) | Acquired Microsemi (2018) | Microcontrollers, analog, embedded | $72M CHIPS Act grant to double capacity, ~600 new jobs expected |
 | **ON Semiconductor (onsemi)** | Portland area | Via Fairchild acquisition (2016) | Power semiconductors, image sensors | Design operations |
 | **Qorvo** | Portland area | 2015 (RFMD + TriQuint merger) | RF semiconductors, 5G, defense | Portland design center |
 | **Mentor Graphics / Siemens EDA** | Wilsonville (founded 1981) | 1981 | IC design automation (EDA) | 1,000+ employees (Oregon) |
@@ -116,7 +116,7 @@ The Portland metro semiconductor industry supports an estimated 35,000-40,000 di
 
 | Category | Estimated Direct Jobs | Key Employers |
 |----------|----------------------|---------------|
-| Fabrication + process development | 18,000-22,000 | Intel (dominant), Microchip, Qorvo |
+| Fabrication + process development | 17,000-20,000 | Intel (dominant), Microchip, Qorvo |
 | Equipment + materials | 5,000-8,000 | Lam Research, Applied Materials, ASML, KLA, BASF |
 | EDA + design services | 3,000-5,000 | Siemens EDA, Synopsys, Cadence, Lattice |
 | Test + measurement | 2,000-3,000 | Tektronix, Keysight (partial) |
@@ -165,7 +165,7 @@ The Silicon Forest has everything except upstream helium infrastructure.
 | Complete equipment ecosystem (ASML, Applied Materials, Lam, KLA) | Closed-loop helium recycling (no installed base at Oregon fabs) |
 | Deep academic pipeline (OSU, PSU, OIT, UO) | Regional helium storage/buffer (no strategic inventory) |
 | Mature distribution network (Airgas, Linde, Air Products, Central Welding) | R&D-grade (6N) gas blending capability |
-| Active CHIPS Act funding (federal + Oregon SB 4) | Supply chain redundancy (100% out-of-region sourcing) |
+| Active CHIPS Act funding (federal + $115M Oregon CHIPS program) | Supply chain redundancy (100% out-of-region sourcing) |
 
 The actionable steps, in priority order:
 

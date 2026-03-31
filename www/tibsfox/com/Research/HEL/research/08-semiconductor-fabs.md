@@ -49,12 +49,12 @@ The CHIPS and Science Act of 2022 (P.L. 117-167) represents the largest US gover
 
 | Stream | Amount | Mechanism | Status (March 2026) |
 |--------|--------|-----------|---------------------|
-| Section 9902 Manufacturing Incentives | $39B | Grants + loans | Active -- major awards to Intel ($8.5B), TSMC ($6.6B), Samsung ($6.4B), Micron ($6.1B), GlobalFoundries ($1.5B) announced |
+| Section 9902 Manufacturing Incentives | $39B | Grants + loans | Active -- major awards to Intel ($7.86B finalized late 2025), TSMC (up to $6.6B), Samsung (up to $6.4B), Micron (up to $6.1B), GlobalFoundries ($1.5B), Microchip Technology ($72M for Gresham, OR capacity doubling) announced |
 | Section 9906 R&D Programs | $11B | NIST programs | NAPMP (prototyping), NIMC (metrology) launched |
 | Section 9903 Workforce | $500M+ | NSF + DoL | Training programs active through 2027 |
 | CHIPS for America Fund (loans) | $7.5B | Direct lending | Active for qualifying projects |
 | Texas Semiconductor Innovation Fund | $948M | State appropriation | Active since June 2025 |
-| Oregon CHIPS Act (SB 4) | $190M | State incentives | Active, focused on workforce and site readiness |
+| Oregon CHIPS Act (SB 4) | $115M | State incentives (Oregon CHIPS program) | Active, focused on workforce and site readiness |
 
 ### The Gas Supply Provision -- Why This Matters
 
@@ -127,7 +127,7 @@ Intel's Oregon operations are not merely large; they are strategically unique. H
 
 This development role means Oregon's helium needs are skewed toward the highest purity specifications. Research-grade (6N, 99.9999%) helium commands a significant premium over industrial-grade (5N, 99.999%) and is harder to source during shortages because fewer purification facilities can achieve 6N consistently. A regional hub capable of producing 6N helium would serve Intel's most demanding need.
 
-Intel received up to $8.5 billion in CHIPS Act funding (announced March 2024), the largest single award. While the bulk of this funding targets the Ohio mega-fab complex (Fabs 52 and 62), Intel's Oregon operations benefit from the company's overall supply chain investment, and Oregon-specific CHIPS Act state incentives (Oregon SB 4, $190 million) further support the ecosystem.
+Intel received $7.86 billion in direct CHIPS Act funding (finalized late 2025), the largest single award. While the bulk of this funding targets the Ohio mega-fab complex (Fabs 52 and 62), Intel's Oregon operations benefit from the company's overall supply chain investment, and Oregon-specific state incentives ($115 million from the Oregon CHIPS program) further support the ecosystem.
 
 ### The Broader Cluster
 
@@ -135,7 +135,7 @@ Intel received up to $8.5 billion in CHIPS Act funding (announced March 2024), t
 |----------|----------|-----------------|
 | Intel D1X | Hillsboro, OR | Primary consumer -- EUV development, highest purity needs |
 | Lattice Semiconductor | Hillsboro, OR (HQ) | FPGA design -- fabless, but tests on-site |
-| Microchip Technology | Portland metro | Specialty analog and embedded -- some process helium use |
+| Microchip Technology | Gresham, OR | Specialty analog and embedded -- $72M CHIPS Act grant to double chip capacity, ~600 new jobs expected |
 | Siemens EDA | Wilsonville, OR | EDA software -- no direct helium consumption |
 | Applied Materials | Portland area | Equipment provider -- helium in demo/service tools |
 | Lam Research | Tualatin, OR | Equipment provider -- helium in etch tool demos |

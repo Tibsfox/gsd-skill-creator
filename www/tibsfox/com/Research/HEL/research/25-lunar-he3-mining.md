@@ -93,9 +93,10 @@ At current launch costs of $50,000-$100,000 per kg to lunar surface (Starship-cl
 The most advanced private lunar He-3 company. Founded 2022 by Rob Meyerson (former Blue Origin president) and Gary Lai (former New Shepard chief architect). Headquarters: Seattle.
 
 **Funding and contracts (as of early 2026):**
-- $18 million raised to date
-- $300+ million supply agreement with Bluefors (September 2025) -- up to 10,000 liters He-3 annually, 2028-2037. This is the largest purchase agreement for an extraterrestrial resource ever signed.
-- U.S. Air Force SBIR Direct-to-Phase II contract ($1.25M, November 2025) -- developing technology to separate He-3 from domestic helium to increase near-term supply while lunar infrastructure is built
+- ~$20 million total equity funding plus government contracts (~28 employees)
+- $300M+ supply agreement with Bluefors (September 2025) -- up to 10,000 liters He-3 annually, 2028-2037. This is the largest purchase agreement for an extraterrestrial resource ever signed.
+- DOE has agreed to purchase 3 liters of lunar He-3 no later than April 2029
+- $1.25 million AFWERX Direct-to-Phase II SBIR contract (November 2025) -- developing cryogenic He-3 separation technology to increase near-term supply while lunar infrastructure is built
 - NASA STTR Phase I contract ($150K, 2026) -- the SILT (Scalable Implement for Lunar Trenching) excavator project with Colorado School of Mines
 
 **Technology milestones:**
@@ -108,7 +109,7 @@ The most advanced private lunar He-3 company. Founded 2022 by Rob Meyerson (form
 - 2029: Pilot plant on the Moon
 - 2028-2037: Bluefors deliveries (implies operational extraction by ~2028-2029)
 
-**Honest assessment:** The 2028 delivery commitment to Bluefors is aggressive. It requires a successful demonstration mission in 2027, rapid scale-up in 2028, and cryogenic separation capability on the lunar surface -- all within a $18M funding base that will need to grow by at least 100x. The Bluefors agreement is structured as a purchase commitment, not a prepayment -- it validates market demand but does not fully fund the infrastructure. Additional funding rounds of $500M+ will be necessary. The team (Blue Origin alumni, Vermeer partnership, NASA/DOD contracts) is credible. The timeline is aspirational.
+**Honest assessment:** The 2028 delivery commitment to Bluefors is aggressive. It requires a successful demonstration mission in 2027, rapid scale-up in 2028, and cryogenic separation capability on the lunar surface -- all within a ~$20M funding base that will need to grow by at least 100x. The Bluefors agreement is structured as a purchase commitment, not a prepayment -- it validates market demand but does not fully fund the infrastructure. Additional funding rounds of $500M+ will be necessary. The team (Blue Origin alumni, Vermeer partnership, NASA/DOD contracts) is credible. The timeline is aspirational.
 
 ### China's Chang'e Program
 
@@ -168,7 +169,7 @@ The Bluefors contract (10,000 liters/year = ~1.34 kg/year) at approximately $30M
 
 D-He3 fusion requires approximately 600-800 million degrees Celsius (50-70 keV ion temperature) -- six times hotter than D-T fusion. No facility has demonstrated net energy from D-He3. The reaction rate peaks at ~200 keV, but useful reaction rates occur in the 50-70 keV range.
 
-**Helion Energy** (Everett, WA -- another PNW company) is the most prominent D-He3 fusion developer. Their 7th-generation Polaris prototype achieved 150 million degrees Celsius in January 2026 and demonstrated measurable D-T fusion -- a necessary stepping stone to D-He3. Helion's approach is field-reversed configuration (FRC) with pulsed magnetic compression and direct electricity extraction from expanding plasma. They have a power purchase agreement with Microsoft for 2028 delivery from their Orion commercial machine (under construction in Malaga, WA). However, Polaris has not yet demonstrated net electricity production, and the 150M degree C achievement is still a factor of 4-5x below D-He3 requirements.
+**Helion Energy** (Everett, WA -- another PNW company) is the most prominent D-He3 fusion developer. Their 7th-generation Polaris prototype reached 150 million degrees C in February 2026, making it the first privately funded machine to achieve this temperature -- a necessary stepping stone to D-He3. Helion's approach is field-reversed configuration (FRC) with pulsed magnetic compression and direct electricity extraction from expanding plasma. They have a power purchase agreement with Microsoft. Orion commercial plant construction began July 2025 in Malaga, WA, targeting 50+ MW by 2028 under the PPA with Microsoft. However, Polaris has not yet demonstrated net electricity production, and the 150M degree C achievement is still a factor of 4-5x below D-He3 requirements.
 
 **Honest assessment of D-He3 fusion timeline:** D-T fusion (the easier reaction) has not yet achieved sustained commercial power generation despite 70 years of research and $50B+ cumulative investment. D-He3 fusion is at least one generation behind -- plausibly 20-30 years from a pilot plant, 30-50 years from commercial deployment, if ever. The physics is not guaranteed to close.
 
@@ -206,7 +207,7 @@ The Pacific Northwest is uniquely positioned in the lunar He-3 value chain:
 
 **Interlune headquarters: Seattle.** The company developing the extraction technology, employing cryogenic engineers, space systems engineers, and mining engineers drawn from the PNW's aerospace workforce (Blue Origin in Kent, SpaceX satellite office in Redmond, UW aerospace engineering).
 
-**Helion Energy: Everett, WA.** The company building the D-He3 fusion reactor that would be the largest He-3 consumer if successful. Helion's Orion commercial machine is under construction in Malaga, WA (eastern Washington). A functioning Helion reactor would transform He-3 from a niche cryogenic commodity into a primary energy fuel.
+**Helion Energy: Everett, WA.** The company building the D-He3 fusion reactor that would be the largest He-3 consumer if successful. Helion's Orion commercial plant began construction in July 2025 in Malaga, WA (eastern Washington), targeting 50+ MW by 2028. A functioning Helion reactor would transform He-3 from a niche cryogenic commodity into a primary energy fuel.
 
 **PNNL: Richland, WA.** The national laboratory with the most expertise in He-3 neutron detection, He-3 alternatives, and isotope handling. PNNL's gas separation and cryogenic capabilities are directly relevant to processing lunar-derived He-3. If lunar He-3 arrives at a PNW port, PNNL is the natural partner for quality assurance, isotope verification, and distribution logistics.
 
