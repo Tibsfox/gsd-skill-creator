@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Aequorea victoria — Crystal Jellyfish | v1.22 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #020810; --bio-mid: #041020;
+    --aurora-green: #20A060; --aurora-dim: #105030;
+    --gfp-green: #40D080; --gfp-dim: #206840;
+    --biolum-blue: #2040C0; --biolum-dim: #102060;
+    --jellyfish-teal: #208888; --jellyfish-dim: #104444;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --space: #020408;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+    --accent: var(--jellyfish-teal);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(32,160,96,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(32,64,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(64,208,128,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(32,136,136,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(208,128,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(32,160,96,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--aurora-green); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--jellyfish-dim) 55%, var(--aurora-dim) 100%); border-bottom: 3px solid var(--accent); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(32,136,136,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(32,136,136,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(32,136,136,0.12); border: 1px solid var(--accent); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(32,136,136,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--accent); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--accent); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--jellyfish-teal); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--accent); }
+  em { color: var(--reentry-amber); }
+  code { color: var(--biolum-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--jellyfish-teal); text-decoration: none; }
+  a:hover { color: #fff; }
+  blockquote { border-left: 3px solid var(--biolum-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(2,4,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .taxonomy { background: rgba(32,136,136,0.08); border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; font-size: 0.9rem; line-height: 1.8; }
+  .taxonomy strong { color: var(--jellyfish-teal); }
+  .nav-card { background: rgba(2,4,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--aurora-green); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--gfp-green); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--aurora-green); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.22 Mercury-Atlas 7</a><span class="sep">/</span>
+  Organism
+</div>
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.22</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 2</span>
+    </div>
+    <h1>Organism: <em>Aequorea victoria</em> &mdash; Crystal Jellyfish</h1>
+    <p class="subtitle">Bioluminescence, GFP, and the light in the water</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> May 24, 1962</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Malcolm Scott Carpenter (LCDR, USN)</span>
+      <span><span class="label">Dedication:</span> Bob Dylan</span>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="content">
+
+    <h2><em>Aequorea victoria</em> &mdash; Crystal Jellyfish</h2>
+
+    <div class="taxonomy">
+      <strong>Mission Pairing:</strong> Mercury-Atlas 7 / Aurora 7 (v1.22)<br>
+      <strong>Kingdom:</strong> Animalia<br>
+      <strong>Phylum:</strong> Cnidaria<br>
+      <strong>Class:</strong> Hydrozoa<br>
+      <strong>Order:</strong> Leptothecata<br>
+      <strong>Family:</strong> Aequoreidae<br>
+      <strong>Genus:</strong> <em>Aequorea</em><br>
+      <strong>Species:</strong> <em>A. victoria</em><br>
+      <strong>PNW Distribution:</strong> Puget Sound, Strait of Juan de Fuca, San Juan Islands, Pacific coast from Alaska to southern California<br>
+      <strong>Conservation Status:</strong> Not evaluated (IUCN) &mdash; common in PNW waters but population dynamics poorly understood
+    </div>
+
+    <hr>
+
+    <h2>The Light in the Water</h2>
+
+    <p>There is a jellyfish in the waters of Puget Sound that is almost impossible to see. <em>Aequorea victoria</em> &mdash; the crystal jellyfish &mdash; is a hydromedusa of such extraordinary transparency that it vanishes against the water column the way a pane of clean glass vanishes against the sky. The bell is circular, flattened, up to 17 centimeters in diameter in large specimens but more commonly 7 to 10, with a texture that is less like tissue and more like a lens: firm, gelatinous, refracting the light that passes through it rather than reflecting it. The mesoglea &mdash; the thick, acellular jelly that constitutes the bulk of the bell &mdash; is more than 95 percent water, and the water is so structurally integrated with the protein matrix that the animal achieves a refractive index nearly identical to the surrounding sea. It does not camouflage itself. It does not need to. It is, optically, almost not there.</p>
+
+    <p>The tentacles trail from the bell margin in numbers ranging from a few dozen in juveniles to more than 150 in fully grown adults, fine as threads, transparent as the bell itself, each one armed with cnidocytes &mdash; the stinging cells that are the phylum&rsquo;s defining weapon &mdash; though in <em>Aequorea</em> the sting is so mild that a human handling the animal bare-handed would feel nothing. This is not a dangerous jellyfish. It is not a large jellyfish. It is not, by any of the usual metrics of charismatic marine fauna, a remarkable jellyfish. Except that it glows. And the mechanism by which it glows changed the course of biological science more profoundly than any single discovery since the structure of DNA.</p>
+
+    <p>The crystal jellyfish is found throughout the northeastern Pacific, from the Bering Sea to southern California, but it is particularly abundant in the inland waters of Washington State &mdash; the San Juan Islands, the Strait of Juan de Fuca, Admiralty Inlet, the passages and channels of the archipelago where tidal mixing brings nutrient-rich water to the surface and supports the planktonic food webs on which <em>Aequorea</em> feeds. In summer months, the jellyfish congregate in these waters in numbers that can turn a nighttime kayak paddle into a display of cold green light, each animal pulsing its bell in the slow, rhythmic contraction that is the cnidarian mode of locomotion &mdash; two or three beats per second, tentacles trailing, the body drifting more than swimming, the animal less an active predator and more a living net cast into the current. The bioluminescence is triggered by mechanical disturbance. Touch the bell, jostle the tentacles, send a pressure wave through the water, and the jellyfish responds with a flash of green light that rings the margin of the bell where the gonads and the radial canals meet. The light is brief, intense, and unmistakably green &mdash; not the blue-white flash of most marine bioluminescence but a specific, saturated green at 509 nanometers. That wavelength, that precise shade of green, would become the most important color in modern biology.</p>
+
+    <hr>
+
+    <h2>Green Fluorescent Protein</h2>
+
+    <p>In the summer of 1961, a Japanese organic chemist named Osamu Shimomura arrived at Friday Harbor Laboratories on San Juan Island. He was thirty-three years old, born in Fukuchiyama in 1928, raised in Sasebo and Isahaya on the island of Kyushu. He had been sixteen years old and living in Isahaya when the atomic bomb was dropped on Nagasaki, twenty kilometers away. The flash bleached the sky. The rain that fell afterward was black. He would later say that the bomb was what drew him to luminescence &mdash; the most destructive light in human history leading a young man toward the study of the gentlest light in the natural world. He earned his degree in pharmacy at Nagasaki University, then moved to organic chemistry at Nagoya University, where he began working on bioluminescence under Yoshimasa Hirata.</p>
+
+    <p>At Nagoya and then at Princeton, Shimomura worked on the bioluminescence of the sea firefly <em>Cypridina hilgendorfii</em>, a tiny ostracod crustacean whose luminescent compound he had successfully crystallized &mdash; a feat that had taken Frank Johnson at Princeton by surprise, since Johnson had been trying to do the same thing for years and had not succeeded. Shimomura was invited to Princeton on the strength of that work, and it was Johnson who directed him toward <em>Aequorea</em>. The jellyfish was abundant at Friday Harbor. Its bioluminescence was known but not understood. The light-producing system had not been isolated. Shimomura went to Friday Harbor to solve the problem.</p>
+
+    <p>The problem resisted solution in the way that biochemical problems often do: by refusing to behave as expected. The prevailing model of bioluminescence at the time was the luciferin-luciferase system, in which a small-molecule substrate (luciferin) is oxidized by an enzyme (luciferase) in the presence of oxygen, producing light. This was the mechanism in fireflies, in <em>Cypridina</em>, in luminous bacteria. Shimomura expected to find the same system in <em>Aequorea</em>. He did not.</p>
+
+    <p>What he found, after a summer of collecting jellyfish &mdash; wading into the shallows around the Friday Harbor docks, scooping the transparent bells from the water with hand nets, cutting the luminescent ring from the margin of each bell with scissors, squeezing the tissue through cheesecloth, collecting the luminescent extract in jars &mdash; was something entirely different. The light-producing substance in <em>Aequorea</em> was not a luciferin-luciferase pair. It was a single protein that emitted light in response to calcium ions. He called it aequorin.</p>
+
+    <p>The isolation of aequorin was reported in 1962 &mdash; the same year that Scott Carpenter orbited the Earth three times in Aurora 7. Shimomura and his colleagues published the result in the <em>Journal of Cellular and Comparative Physiology</em>: a protein, extracted from the ring canal of <em>Aequorea victoria</em>, that produced blue light (emission peak at 470 nanometers) when exposed to trace amounts of calcium. No luciferin. No luciferase in the traditional sense. No oxygen requirement for the light-emitting reaction itself (the protein consumed oxygen during its initial activation but the calcium-triggered luminescence was oxygen-independent). Aequorin was a photoprotein &mdash; a pre-charged molecule, primed and ready to fire, waiting only for the calcium signal to release its energy as light. The system was elegant and immediate: calcium binds to the protein, the protein changes conformation, the stored chemical energy is released as a photon. One calcium event, one flash. The speed of the system meant that aequorin would later become one of the most important calcium indicators in cell biology, used to measure intracellular calcium transients in muscle cells, neurons, and fertilized eggs, but that application lay years in the future.</p>
+
+    <p>The puzzle that Shimomura noticed immediately was the color. Aequorin produced blue light at 470 nanometers. But the jellyfish glowed green at 509 nanometers. Something was converting the blue light to green. In the same extracts, Shimomura found a second protein &mdash; smaller, intensely fluorescent, glowing bright green under ultraviolet illumination. He noted its existence. He characterized it partially. He called it the green protein, and later it acquired the name that would make it famous: green fluorescent protein, GFP.</p>
+
+    <p>But in 1962, GFP was a curiosity, a companion to the main discovery of aequorin, a secondary finding in a paper about bioluminescence. Shimomura studied it over the following decades &mdash; he determined that GFP absorbed the blue light from aequorin and re-emitted it as green light through F&ouml;rster resonance energy transfer, a nonradiative dipole-dipole coupling between the two proteins when they were in close physical proximity. The jellyfish&rsquo;s bioluminescent system was a two-stage process: aequorin produced blue light, and GFP converted it to green. The conversion was efficient, the color shift was large, and the mechanism was beautiful. But no one outside the bioluminescence community cared.</p>
+
+    <p>GFP is a protein of 238 amino acids arranged in a structure that crystallographers would later call a beta-barrel &mdash; eleven antiparallel beta-sheets arranged in a cylindrical geometry, forming a can-shaped structure approximately 4.2 nanometers tall and 2.4 nanometers in diameter, with short alpha-helical segments threading through the center of the barrel. The chromophore &mdash; the part of the molecule that absorbs and emits light &mdash; is formed from three amino acids in the interior of the barrel: serine at position 65, tyrosine at position 66, and glycine at position 67. After the protein folds, these three residues undergo a spontaneous, autocatalytic cyclization reaction &mdash; the backbone nitrogen of glycine 67 attacks the carbonyl carbon of serine 65, forming a five-membered heterocyclic ring, followed by dehydration and oxidation of the tyrosine side chain to extend the conjugated pi-electron system.</p>
+
+    <p>The chromophore forms without any enzyme, without any cofactor, without any cellular machinery other than molecular oxygen. The protein folds, the chromophore forms, and the molecule becomes fluorescent. This autocatalytic formation is the key to everything that followed: GFP makes its own light-absorbing center. Put the gene into any cell &mdash; bacterium, yeast, worm, fly, mouse, human &mdash; and the protein will fold and the chromophore will form and the cell will glow green. No substrate to inject. No cofactor to supply. Just the gene, oxygen, and time.</p>
+
+    <p>The photophysics are remarkable. GFP has two excitation peaks: a major peak at 395 nanometers (near-ultraviolet) and a minor peak at 475 nanometers (blue), corresponding to neutral and anionic states of the chromophore&rsquo;s tyrosine hydroxyl group. The emission peak is at 509 nanometers regardless of excitation wavelength &mdash; the same green that Shimomura saw in the jellyfish, the same green that lights up the bell margin when you touch the animal in the dark water off San Juan Island. The quantum yield is 0.79 &mdash; meaning that 79 percent of absorbed photons are re-emitted as fluorescence, an efficiency that most synthetic dyes cannot match. The Stokes shift &mdash; the difference between the absorption maximum and the emission maximum &mdash; is 114 nanometers for excitation at 395 nanometers, a large shift that dissipates the excess energy as vibrational relaxation within the barrel structure. The beta-barrel acts as a protective sheath, enclosing the chromophore in a rigid environment that prevents quenching by solvent molecules and restricts the conformational flexibility that would otherwise dissipate excited-state energy as heat rather than light. The barrel is a shield. The chromophore is the payload. The architecture of GFP is, in miniature, the architecture of a spacecraft: an outer structure that protects an inner system from a hostile environment, allowing it to function in conditions that would destroy it if it were exposed.</p>
+
+    <hr>
+
+    <h2>The Revolution</h2>
+
+    <p>For thirty-two years after Shimomura&rsquo;s discovery, GFP remained a subject of specialized interest in the bioluminescence community. Shimomura continued to study it. Douglas Prasher at Woods Hole Oceanographic Institution cloned the GFP gene in 1992, determining the DNA sequence that encoded the 238-amino-acid protein and making it possible, in principle, to express the protein in any organism with standard molecular biology tools. Prasher&rsquo;s cloning was essential &mdash; without the gene sequence, GFP could not leave the jellyfish &mdash; but Prasher&rsquo;s funding ran out before he could demonstrate what the gene could do in a foreign organism. He sent the cloned gene to two other scientists who had asked for it: Martin Chalfie at Columbia University and Roger Tsien at the University of California, San Diego.</p>
+
+    <p>In 1994, Chalfie published the paper that detonated the revolution. He expressed GFP in the touch-receptor neurons of the nematode <em>Caenorhabditis elegans</em>. The neurons glowed green. No substrate was injected. No cofactor was added. The worm&rsquo;s own cellular machinery folded the protein, the chromophore formed autocatalytically, and the specific neurons that expressed the gene became visible as bright green points of light in the transparent body of the worm under ultraviolet illumination. For the first time in the history of biology, a specific protein in a specific cell in a living organism could be seen, in real time, without killing the organism or adding any reagent. The implications were staggering. Every gene in every genome could, in principle, be fused to GFP, and the resulting fusion protein could be tracked in living cells &mdash; where it was made, where it went, when it appeared, when it disappeared, how it moved, which compartments it entered, which other proteins it associated with. Cell biology had been a science of fixed, stained, dead specimens. GFP made it a science of living, glowing, visible processes.</p>
+
+    <p>Roger Tsien understood that the wild-type GFP from <em>Aequorea</em> was only the beginning. The protein had limitations: the dual excitation peaks were inconvenient, the folding was slow at 37 degrees Celsius (the temperature of mammalian cells), and there was only one color. Tsien&rsquo;s laboratory systematically engineered the protein, mutating amino acids in and around the chromophore to alter its spectral properties. The S65T mutation &mdash; serine 65 replaced by threonine &mdash; produced enhanced GFP (EGFP), which had a single excitation peak at 488 nanometers (perfect for the argon-ion lasers used in fluorescence microscopy), brighter fluorescence, and faster folding at mammalian body temperature.</p>
+
+    <p>From EGFP, Tsien&rsquo;s group created an entire palette of fluorescent proteins: enhanced cyan fluorescent protein (ECFP, emission at 476 nanometers), enhanced yellow fluorescent protein (EYFP, emission at 527 nanometers), and eventually, by reaching beyond <em>Aequorea</em> to other marine organisms, red fluorescent proteins &mdash; mCherry, mTomato, tdTomato &mdash; derived from the coral <em>Discosoma striata</em>. The palette grew to encompass the visible spectrum. Any two proteins in a cell could be labeled with different colors and tracked simultaneously. Protein-protein interactions could be measured by F&ouml;rster resonance energy transfer between CFP and YFP fused to interacting partners. Photoactivatable variants were created that could be switched on with a pulse of violet light, allowing researchers to mark a specific subset of molecules at a specific moment and track their fate. The entire dynamic architecture of the living cell became visible, and the tools for making it visible all descended from the green light in a jellyfish drifting in the waters off San Juan Island.</p>
+
+    <p>In 2008, the Nobel Prize in Chemistry was awarded to Osamu Shimomura, Martin Chalfie, and Roger Tsien for the discovery and development of green fluorescent protein. Shimomura for finding it, Chalfie for demonstrating that it worked as a universal biological marker, Tsien for engineering it into a toolkit. The Nobel committee&rsquo;s citation noted that GFP had &ldquo;become one of the most important tools used in contemporary bioscience.&rdquo; The understatement was characteristic.</p>
+
+    <p>GFP did not become an important tool. It became <em>the</em> tool &mdash; the one technology without which modern cell biology, developmental biology, neuroscience, and molecular medicine would be unrecognizable. Every fluorescence microscopy image of a labeled protein in a living cell, every brainbow map of neural circuits rendered in a mosaic of genetically encoded colors &mdash; brainbow itself being a technique in which random recombination of genes encoding multiple fluorescent proteins produces a unique color in each neuron, allowing individual cells to be distinguished in dense neural tissue &mdash; every real-time movie of a dividing cell with its chromosomes tagged in green and its cytoskeleton tagged in red, traces back to a Japanese chemist standing in waist-deep water off the dock at Friday Harbor, cutting the glowing margin from a jellyfish with a pair of scissors. The 2014 Nobel Prize in Chemistry, awarded for super-resolution fluorescence microscopy, was built on GFP. The tools that won the second Nobel could not have existed without the protein that won the first. The jellyfish&rsquo;s light propagated through science the way it propagates through the bell margin &mdash; from one discovery to the next, each flash triggering another.</p>
+
+    <p>Douglas Prasher, who cloned the gene that made everything possible, was not included in the Nobel Prize. By 2008 he had left science, unable to secure continued funding, and was working as a courtesy shuttle driver for a car dealership in Huntsville, Alabama. Chalfie and Tsien both acknowledged his essential contribution. Shimomura credited him publicly. The Nobel Foundation&rsquo;s rules limit each prize to three recipients. Prasher&rsquo;s story is a reminder that the history of science is not always a history of justice.</p>
+
+    <hr>
+
+    <h2>Biology of the Organism</h2>
+
+    <p><em>Aequorea victoria</em> is a hydrozoan, which places it in a different class from the more familiar scyphozoan jellyfish &mdash; the moon jellies, the lion&rsquo;s manes, the sea nettles &mdash; that most people think of when they hear the word jellyfish. Hydrozoans are generally smaller, more delicate, and structurally simpler than scyphozoans, and their life cycle includes a feature that scyphozoans share but that is more prominent in hydrozoans: metagenesis, the alternation between a sessile polyp stage and a free-swimming medusa stage.</p>
+
+    <p>The polyp form of <em>Aequorea</em> is tiny &mdash; a few millimeters tall, colonial, attached to hard substrate on the sea floor in the subtidal zone. The colonies are stolonate, meaning they consist of individual polyps connected by a network of horizontal tubes (stolons) that creep across the substrate surface. Each polyp is encased in a transparent perisarc &mdash; a chitinous exoskeleton characteristic of the order Leptothecata &mdash; and feeds on microscopic zooplankton using its ring of tentacles. The polyp colonies are inconspicuous, easily overlooked on the undersides of rocks, on shells, on dock pilings, and their biology is far less studied than the medusa stage. Medusae are produced by lateral budding from the polyp colony, typically in spring and early summer in the San Juan Islands, and the newly released medusae are tiny &mdash; a few millimeters in bell diameter &mdash; growing over weeks to their full adult size as they feed and drift in the plankton.</p>
+
+    <p>The medusa is the form that people see: the transparent bell, the trailing tentacles, the animal pulsing through the water column with the slow, rhythmic contractions that look more like breathing than swimming. The bell&rsquo;s radial canals &mdash; typically 60 to over 100 in mature specimens &mdash; branch dichotomously from the central stomach toward the bell margin, giving the underside of the bell a pattern that resembles the spokes of a wheel when viewed from below with a light source behind it. The number of radial canals increases as the animal grows, a feature that distinguishes <em>Aequorea</em> from many other hydromedusae and that gives large specimens their characteristic sunburst pattern. Between the radial canals, the gonads develop as linear bands of reproductive tissue, visible in mature animals as slightly opaque whitish streaks against the otherwise transparent bell.</p>
+
+    <p>The medusa feeds on small planktonic organisms &mdash; copepods, larvaceans, other small hydromedusae, ctenophores, and the larvae of various invertebrates. The tentacles are deployed as a drifting net, trailing behind and below the bell as the animal pulses gently through the water. Prey items that contact the tentacles are immobilized by the cnidocytes &mdash; each one a single-use weapon, a microscopic harpoon fired by osmotic pressure at accelerations exceeding 5 million g, one of the fastest cellular processes in biology &mdash; and transported to the manubrium, the tubular structure that hangs from the center of the bell&rsquo;s underside and functions as both mouth and stomach. Digestion is partly extracellular (in the gastrovascular cavity) and partly intracellular (nutrients absorbed by gastrodermal cells and digested within vacuoles). The gastrovascular system extends from the central stomach through a network of radial canals that branch across the underside of the bell, distributing nutrients throughout the body.</p>
+
+    <p>There is no circulatory system. There is no respiratory system. There is no central nervous system in the vertebrate sense &mdash; instead, a diffuse nerve net coordinates the bell contractions, and a nerve ring at the bell margin integrates sensory input from statocysts (gravity receptors) and ocelli (simple light-sensing organs). Gas exchange occurs by diffusion across the body surfaces. The animal is so thin, so permeable, so thoroughly integrated with the water it inhabits, that it needs no specialized transport machinery. The water is its blood. The simplicity is deceptive. Cnidarians were among the first animals to evolve true tissues, true nerve cells, true muscle-like contractile fibers &mdash; the basic toolkit of animal physiology, deployed in a body plan that has persisted for more than 500 million years. <em>Aequorea</em> is not primitive. It is ancient, which is not the same thing. It has had half a billion years to optimize its design for the planktonic life, and the optimization has been thorough.</p>
+
+    <p>Reproduction in the medusa is sexual. The gonads develop along the radial canals as the medusa matures, producing eggs or sperm that are released into the water column for external fertilization. The fertilized egg develops through a planula larva stage &mdash; a ciliated, free-swimming, oblong larva that settles onto hard substrate after a period of days to weeks in the plankton and metamorphoses into the polyp form, closing the life cycle. The transformation from free-swimming planula to sessile polyp to budded medusa is one of the characteristic features of hydrozoan biology, and it means that the crystal jellyfish exists in two fundamentally different forms during its life: a tiny, attached, colonial form that feeds and buds, and a larger, free-swimming, solitary form that feeds, reproduces sexually, and dies. The medusa is the dispersal stage and the genetic recombination stage. The polyp is the persistence stage and the asexual proliferation stage. Between them, the two forms give the species both genetic diversity and ecological resilience &mdash; a bet-hedging strategy that has served the Cnidaria well across geological time.</p>
+
+    <p>The bioluminescent system sits in the ring canal and along the bell margin, concentrated in the tissue where the radial canals meet the circular canal at the edge of the bell. This is where the photocytes are &mdash; the specialized cells that contain aequorin and GFP in close proximity, the two proteins positioned within nanometers of each other to permit the F&ouml;rster resonance energy transfer that converts blue light to green. When a mechanical stimulus &mdash; a wave, a predator&rsquo;s touch, a collision with another organism &mdash; triggers calcium release from intracellular stores within the photocytes, the calcium binds to aequorin, aequorin emits blue light, the blue light is absorbed by GFP, and GFP emits green light. The entire process takes milliseconds. The flash propagates around the bell margin as a luminescent wave, each photocyte firing in sequence as the mechanical stimulus travels along the ring canal, producing a ring of green light that sweeps around the edge of the bell like a neon sign coming to life.</p>
+
+    <p>The ecological function of the bioluminescence is not definitively established, but the leading hypothesis is that it serves as a startle response &mdash; a burglar alarm in the dark ocean, a flash of light that surprises or confuses a predator long enough for the jellyfish to pulse away into the darkness. Alternative hypotheses include prey attraction and intraspecific signaling, but the startle response is the most consistent with the observation that the light is produced only in response to physical disturbance and not constitutively. The wavelength itself may be significant: 509 nanometers is near the peak sensitivity of most marine visual systems, meaning the flash is maximally visible to any predator with eyes. Whether the purpose is to startle the immediate predator or to attract a larger predator that will eat the attacker &mdash; the &ldquo;burglar alarm&rdquo; hypothesis &mdash; remains an open question in cnidarian bioluminescence ecology.</p>
+
+    <p><em>Aequorea</em> has few defenses beyond transparency and bioluminescence. Its predators include the leatherback sea turtle (<em>Dermochelys coriacea</em>), which feeds extensively on gelatinous zooplankton and can consume enormous quantities of jellyfish during its pelagic migrations, and the ocean sunfish (<em>Mola mola</em>), the heaviest known bony fish, which feeds on jellyfish, salps, and ctenophores with a dedication that seems disproportionate to the nutritional content of its prey. <em>Aequorea</em> is also consumed by other cnidarians &mdash; larger jellyfish and siphonophores &mdash; and by various species of nudibranch sea slugs, some of which are capable of sequestering the cnidocytes from consumed jellyfish tissue and deploying them in their own cerata for defense.</p>
+
+    <p>The crystal jellyfish is, in the trophic web of the northeastern Pacific, a middle-tier organism: it consumes plankton, and it is consumed by specialists that have adapted to extract nutrition from an animal that is 95 percent water. Its ecological significance is real but diffuse, and its population dynamics are poorly characterized because gelatinous zooplankton are notoriously difficult to survey &mdash; they pass through nets, they disintegrate in trawls, they are missed by sonar, and they exist in a boom-and-bust cycle driven by temperature, food availability, and predation pressure that defies easy modeling. In the Salish Sea, <em>Aequorea</em> populations appear to follow multi-year cycles that correlate loosely with ocean temperature indices like the Pacific Decadal Oscillation, but the data are sparse and the relationships are speculative. What is clear is that in good years the jellyfish can be extraordinarily abundant &mdash; clouds of transparent bells drifting in the currents around the San Juan Islands, so dense that a kayaker&rsquo;s paddle blade will hit several with each stroke &mdash; and in poor years they can be nearly absent. The taxonomy itself remains unsettled: some systematists have questioned whether the Friday Harbor populations that Shimomura collected are truly <em>A. victoria</em> or a closely related cryptic species, and molecular phylogenetic studies have suggested that the genus <em>Aequorea</em> may contain several species previously lumped under the <em>victoria</em> name. The jellyfish that gave biology its most important tool may not even have been correctly identified to species.</p>
+
+    <hr>
+
+    <h2>The Friday Harbor Connection</h2>
+
+    <p>Friday Harbor Laboratories sits on the western shore of San Juan Island, facing the Haro Strait and the distant profile of Vancouver Island. It is a marine biological station operated by the University of Washington, established in 1904, and it occupies a position in Pacific Northwest marine biology analogous to the position that Woods Hole Oceanographic Institution occupies on the Atlantic coast &mdash; a place where the proximity of extraordinary marine habitat to a research institution has produced a continuous stream of foundational science for more than a century. The waters around the San Juan Islands are among the richest in the eastern Pacific. The complex topography of the archipelago &mdash; narrow channels, deep basins, tidal rapids, rocky reefs, kelp forests, eelgrass meadows &mdash; creates a diversity of marine habitats within a few kilometers that would require hundreds of kilometers of coastline to replicate elsewhere. The tidal currents are strong, the mixing is vigorous, and the productivity is high. It is an ideal place to study marine organisms, and it was an ideal place for Shimomura to find <em>Aequorea victoria</em> in quantity.</p>
+
+    <p>Shimomura&rsquo;s collecting method was direct and laborious. He waded into the shallows near the laboratory dock and the surrounding shoreline, scooping jellyfish from the surface with hand nets. He collected from boats when the jellyfish were farther offshore. The work was seasonal &mdash; <em>Aequorea</em> are most abundant in the San Juan Islands in late spring and summer &mdash; and the yield per animal was minuscule. From each jellyfish, Shimomura cut the bell margin &mdash; a narrow strip of tissue, perhaps a centimeter wide, that contains the radial canal terminations, the ring canal, and the photocytes where aequorin and GFP are concentrated. The rest of the animal &mdash; the bulk of the bell, which is biologically inert mesoglea with no luminescent activity &mdash; was discarded.</p>
+
+    <p>The excised margins were squeezed through cheesecloth to release the cellular contents, and the resulting extract was processed through a series of biochemical purification steps: ammonium sulfate precipitation, column chromatography, gel filtration. On a productive day, Shimomura might collect and process several hundred jellyfish. The mechanical work was repetitive and physically demanding &mdash; hours of wading in cold water, bending over the collecting nets, working with scissors and cheesecloth in a makeshift field laboratory, then transitioning to the precision work of protein purification in the bench laboratory. His wife, Akemi Shimomura, assisted with the collecting. The work had a rhythm to it that was more like farming than like the stereotypical image of laboratory science &mdash; seasonal, weather-dependent, governed by the tides and the jellyfish&rsquo;s own unpredictable abundance cycles.</p>
+
+    <p>The effort required to produce usable quantities of purified protein was immense. Shimomura estimated that over the course of his career, he processed approximately 50,000 individual <em>Aequorea victoria</em> jellyfish. Fifty thousand animals, collected by hand, one at a time, their bell margins excised with scissors, squeezed through cloth, extracted in cold buffer, purified through column after column, to yield milligram quantities of aequorin and GFP. The scale of the effort is difficult to appreciate from the vantage point of modern molecular biology, where the gene for GFP can be cloned, inserted into a bacterial expression vector, and the protein produced in gram quantities from a one-liter culture of <em>E. coli</em> in an overnight incubation. Shimomura&rsquo;s 50,000 jellyfish yielded what a graduate student can now produce in an afternoon. But the graduate student&rsquo;s afternoon is possible only because Shimomura spent decades doing it the hard way.</p>
+
+    <p>The patience of the work resonates with the patience that Scott Carpenter brought to Mercury-Atlas 7. Carpenter&rsquo;s scientific agenda for Aurora 7 &mdash; the liquid-behavior experiments, the balloon-drag measurements, the careful observations of the luminous particles that Glenn had seen through the window of Friendship 7 &mdash; required sustained, focused attention during a flight that lasted only four hours and fifty-six minutes. Carpenter had one pass over each experiment. One chance to deploy the balloon, one chance to observe the particles, one chance to photograph the airglow layer. He was methodical where the mission profile demanded speed, and his methodical approach contributed to the fuel consumption that would later generate controversy. But the observations he made &mdash; particularly his identification of the luminous particles as ice crystals sublimating from the spacecraft&rsquo;s exterior surface &mdash; were genuine scientific contributions, achieved through the same combination of patience, close observation, and willingness to pursue a question that characterized Shimomura&rsquo;s decades of work at Friday Harbor. Both men were, at their core, naturalists: observers who looked carefully at things that glowed and asked why.</p>
+
+    <hr>
+
+    <h2>Resonance with Aurora 7</h2>
+
+    <p>Scott Carpenter orbited the Earth on May 24, 1962. He was the fourth American in space, the second to orbit, and the first Mercury astronaut whose primary mission was scientific observation rather than engineering validation. His flight in Aurora 7 was explicitly designed as a science mission &mdash; the spacecraft carried experiments, and the pilot was expected to function as a scientific observer. Carpenter took this mandate seriously. During his three orbits, he spent significant time observing and photographing the phenomena that John Glenn had reported during the previous orbital flight &mdash; the luminous particles that appeared around the spacecraft at orbital dawn, drifting past the window like fireflies, glowing in the first light of the sun. Glenn had not been able to determine what they were. Carpenter was tasked with finding out.</p>
+
+    <p>He did. By tapping on the hull of the spacecraft and observing that the impacts produced new showers of particles, Carpenter established that the luminous particles originated from the spacecraft itself &mdash; they were ice crystals, formed from water vapor (from the spacecraft&rsquo;s life-support system and environmental control venting) that had condensed and frozen on the exterior surface in the cold of orbital shadow, then sublimated and drifted free as the spacecraft entered sunlight. The particles were not a phenomenon of space. They were a phenomenon of the spacecraft in space &mdash; a mundane answer to what had seemed like a mysterious question, but an answer that required careful observation, hypothesis formation, and experimental testing (the hull-tapping), all conducted in real time during an orbital flight with a dozen other tasks competing for the pilot&rsquo;s attention.</p>
+
+    <p>Carpenter named them &ldquo;fireflies,&rdquo; a word that carried accidental resonance with bioluminescence even though the mechanism was purely physical &mdash; sunlight scattering off ice crystals, not photons generated by chemistry. But the parallel is there: both fireflies and GFP produce light that seems to come from nowhere, that appears suddenly in darkness, that draws the eye and demands explanation. Carpenter solved the mystery of the luminous particles in space the same year that Shimomura solved the mystery of the luminous particles in the ocean.</p>
+
+    <p>The parallel runs deeper than chronology. Both discoveries were, for years, overshadowed by narratives that had nothing to do with their scientific content. Carpenter&rsquo;s flight became defined by the fuel controversy &mdash; he used more attitude-control fuel than planned during his scientific observations, which contributed to an overshoot of the intended splashdown point by 402 kilometers. The overshoot created a period of uncertainty during which NASA did not know whether Carpenter had survived reentry. He had, and was recovered safely by helicopter from a life raft in the Caribbean, but the operational narrative &mdash; pilot error, fuel mismanagement, overshoot &mdash; overwhelmed the scientific narrative for decades.</p>
+
+    <p>Chris Kraft, the flight director, was reported to have said that Carpenter would never fly again, and he did not, though the reasons were complex and not reducible to a single flight&rsquo;s fuel budget &mdash; a shoulder injury, reassignment to the Navy&rsquo;s SEALAB program, the passage of time. The point is that Carpenter&rsquo;s genuine scientific contributions &mdash; the particle identification, the liquid-behavior observations, the systematic documentation of orbital phenomena &mdash; were invisible for years behind the story of the overshoot. The man who solved the firefly problem was remembered as the man who missed the landing zone.</p>
+
+    <p>Shimomura&rsquo;s GFP suffered a parallel eclipse. For thirty-two years, the protein was a footnote in a specialized field. The bioluminescence community knew about it. Cell biologists did not. The significance of a protein that could make any cell in any organism glow green without any added substrate was not recognized until Chalfie demonstrated it in 1994, and even then it took years for the full implications to penetrate every subdiscipline of biology. The delay was not because the discovery was obscure &mdash; it was published, it was cited, it was available. The delay was because the scientific community was not ready to see what it meant. The protein was hiding in plain sight, exactly like the jellyfish that produced it &mdash; transparent, present, overlooked.</p>
+
+    <p>The crystal jellyfish is almost invisible in water until it luminesces. It drifts through the water column, transparent, fragile, a few centimeters of organized water in an ocean of unorganized water, indistinguishable from its medium until the moment it is disturbed and the bell margin rings with green light. Then it is unmistakable. Then it is the most visible thing in the darkness. Carpenter&rsquo;s scientific achievements followed the same trajectory: invisible behind the operational narrative until historians and biographers re-examined the mission and found that the pilot who was criticized for his fuel management had, in those same fuel-consuming minutes, conducted the first systematic scientific investigation of an orbital phenomenon and solved a problem that his predecessor had identified but could not explain. The light was always there. It took decades to see it.</p>
+
+    <p>Both the jellyfish and the astronaut operated in hostile environments where the light they carried was the most interesting thing about them. The crystal jellyfish is 95 percent water, fragile, without skeleton or shell or venom worth mentioning, drifting in an ocean full of predators that are faster, stronger, and better armed. Its bioluminescence is the single feature that distinguishes it from the water it inhabits &mdash; the one capacity that makes it, biologically and historically, extraordinary. Carpenter was a naval aviator and test pilot, physically capable and professionally competent, but the Mercury astronauts were all physically capable and professionally competent. What distinguished Carpenter was the quality of his observation &mdash; the attention he paid to the luminous particles, the systematic way he tested hypotheses about their origin, the scientific temperament he brought to a mission that the engineering culture of NASA regarded primarily as an operations test.</p>
+
+    <p>The light he carried was curiosity. The light the jellyfish carries is GFP. Both lights were undervalued at the time. Both changed how we see. Carpenter named his spacecraft Aurora 7 &mdash; the dawn light, the light that appears at the boundary between darkness and day. The crystal jellyfish flashes its green ring at the boundary between stillness and disturbance. Both names and both lights belong to the threshold, to the edge, to the moment when what was invisible becomes unmistakably, permanently visible. From a jellyfish in Friday Harbor to every biology laboratory on Earth. From an astronaut&rsquo;s hull-tap to the understanding that the fireflies were ice. The light was always there. In 1962, two observers &mdash; one in orbit, one knee-deep in the San Juan Islands &mdash; found it.</p>
+
+    <hr>
+
+    <h2>Sources</h2>
+
+    <h3>Primary Sources</h3>
+
+    <ul>
+      <li><strong>Shimomura, Osamu; Johnson, Frank H.; and Saiga, Yo. &ldquo;Extraction, Purification and Properties of Aequorin, a Bioluminescent Protein from the Luminous Hydromedusan, <em>Aequorea</em>.&rdquo; <em>Journal of Cellular and Comparative Physiology</em>, Vol. 59, No. 3, 1962.</strong> The original isolation and characterization of aequorin and the first description of the companion green fluorescent protein from <em>Aequorea victoria</em> collected at Friday Harbor Laboratories.</li>
+      <li><strong>Chalfie, Martin; Tu, Yuan; Euskirchen, Ghia; Ward, William W.; and Prasher, Douglas C. &ldquo;Green Fluorescent Protein as a Marker for Gene Expression.&rdquo; <em>Science</em>, Vol. 263, No. 5148, 1994.</strong> The landmark paper demonstrating functional GFP expression in <em>Escherichia coli</em> and <em>Caenorhabditis elegans</em> neurons, establishing GFP as a universal biological marker.</li>
+      <li><strong>Tsien, Roger Y. &ldquo;The Green Fluorescent Protein.&rdquo; <em>Annual Review of Biochemistry</em>, Vol. 67, 1998.</strong> Comprehensive review of GFP structure, chromophore chemistry, spectral variants, and applications, written by the scientist who engineered the fluorescent protein palette.</li>
+    </ul>
+
+    <h3>Secondary Sources</h3>
+
+    <ul>
+      <li><strong>Shimomura, Osamu. &ldquo;Bioluminescence: Chemical Principles and Methods.&rdquo; World Scientific Publishing, Singapore, Revised Edition, 2012.</strong> Shimomura&rsquo;s own comprehensive treatise on bioluminescence biochemistry, including detailed accounts of his decades of work on aequorin and GFP at Friday Harbor and Woods Hole.</li>
+      <li><strong>Prasher, Douglas C.; Eckenrode, Virginia K.; Ward, William W.; Prendergast, Frank G.; and Cormier, Milton J. &ldquo;Primary Structure of the <em>Aequorea victoria</em> Green-Fluorescent Protein.&rdquo; <em>Gene</em>, Vol. 111, No. 2, 1992.</strong> The cloning and sequencing of the GFP gene that made all subsequent expression experiments possible.</li>
+      <li><strong>Orm&ouml;, Mats; Cubitt, Andrew B.; Kallio, Karen; Gross, Larry A.; Tsien, Roger Y.; and Remington, S. James. &ldquo;Crystal Structure of the <em>Aequorea victoria</em> Green Fluorescent Protein.&rdquo; <em>Science</em>, Vol. 273, No. 5280, 1996.</strong> The first high-resolution crystal structure of GFP, revealing the eleven-strand beta-barrel architecture and the autocatalytic chromophore.</li>
+      <li><strong>Haddock, Steven H. D.; Moline, Mark A.; and Case, James F. &ldquo;Bioluminescence in the Sea.&rdquo; <em>Annual Review of Marine Science</em>, Vol. 2, 2010.</strong> Review of marine bioluminescence ecology, distribution, and biochemistry, with discussion of <em>Aequorea</em> and the ecological function of cnidarian bioluminescence.</li>
+      <li><strong>Mills, Claudia E. &ldquo;Medusae, Siphonophores, and Ctenophores as Planktivorous Predators in Changing Global Ecosystems.&rdquo; <em>ICES Journal of Marine Science</em>, Vol. 52, No. 3-4, 1995.</strong> Analysis of the ecological role of gelatinous zooplankton including <em>Aequorea</em> in northeastern Pacific food webs.</li>
+      <li><strong>Zimmer, Marc. &ldquo;Glowing Genes: A Revolution in Biotechnology.&rdquo; Prometheus Books, Amherst, New York, 2005.</strong> Popular science account of the discovery and development of GFP and other fluorescent proteins, including biographical material on Shimomura, Chalfie, Tsien, and Prasher.</li>
+    </ul>
+
+    <h3>Datasets</h3>
+
+    <ul>
+      <li><strong>GBIF (Global Biodiversity Information Facility) &mdash; <em>Aequorea victoria</em> occurrence records.</strong> Global distribution data including verified occurrence records from the northeastern Pacific, with geographic coordinates, collection dates, and depth records.</li>
+      <li><strong>Friday Harbor Laboratories Specimen Database &mdash; University of Washington.</strong> Collection records for marine invertebrates at the San Juan Island research station, including historical sampling data for hydromedusae.</li>
+      <li><strong>FPbase &mdash; The Fluorescent Protein Database.</strong> Curated database of fluorescent protein properties including excitation and emission spectra, quantum yields, extinction coefficients, maturation times, and oligomeric states for GFP, EGFP, and all engineered variants.</li>
+      <li><strong>NOAA Northwest Fisheries Science Center &mdash; Puget Sound Zooplankton Monitoring.</strong> Long-term monitoring data for gelatinous and crustacean zooplankton in Puget Sound and the Strait of Juan de Fuca, including <em>Aequorea</em> abundance estimates.</li>
+    </ul>
+
+  </div>
+  <div class="nav-card">
+    <div><div class="nav-label">&larr; Back</div><a href="index.html">Mission 1.22</a></div>
+    <div style="text-align:right;"><div class="nav-label">Series &rarr;</div><a href="../index.html">All Missions</a></div>
+  </div>
+</main>
+<footer>
+  <p>Mission 1.22 &bull; Mercury-Atlas 7 / Aurora 7 &bull; <a href="../index.html">NASA Mission Series</a></p>
+</footer>
+</body>
+</html>
