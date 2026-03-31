@@ -18,7 +18,7 @@
       align-items: center;
       gap: 2rem;
       padding: 2rem 2rem;
-      max-width: 68rem;
+      max-width: 90rem;
       margin: 0 auto;
     }
     .brand-mark {
@@ -62,9 +62,9 @@
       text-decoration: none;
     }
     main {
-      max-width: 64rem;
+      max-width: 90rem;
       margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
+      padding: 2rem 2.5rem 4rem;
     }
 
     /* === Force light mode — override any dark-mode variables === */
@@ -89,9 +89,12 @@
     h2 { color: #3d3d3d !important; font-size: 1.3rem !important; font-weight: 400 !important; border-bottom: 1px solid #e8dcc8 !important; padding-bottom: 0.3rem !important; margin: 2rem 0 0.5rem !important; }
     .section-intro { font-size: 0.95rem !important; color: #5a5a5a !important; margin-bottom: 1rem !important; }
     .card-grid {
-      display: grid !important; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+      display: grid !important; grid-template-columns: repeat(4, 1fr) !important;
       gap: 1.2rem !important; margin: 1.5rem 0 !important;
     }
+    @media (max-width: 1200px) { .card-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+    @media (max-width: 900px) { .card-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+    @media (max-width: 600px) { .card-grid { grid-template-columns: 1fr !important; } }
     .card {
       background: #ffffff !important; border: 1px solid #e8dcc8 !important;
       border-radius: 8px !important; padding: 1.5rem !important;
@@ -105,13 +108,13 @@
     .card .meta .tag { display: inline-block; background: rgba(199,91,58,0.08); color: #c75b3a; padding: 0.1rem 0.5rem; border-radius: 3px; font-size: 0.72rem; font-family: system-ui, sans-serif; }
     .card p { font-size: 0.92rem !important; color: #5a5a5a !important; margin: 0 !important; }
     .accent-bar { height: 4px !important; border-radius: 2px !important; margin-bottom: 1rem !important; }
-    footer { color: #8a8884 !important; border-top: 1px solid #e8dcc8 !important; }
+    footer { color: #8a8884 !important; border-top: 1px solid #e8dcc8 !important; max-width: 90rem !important; margin: 0 auto !important; }
     footer a { color: #c75b3a !important; }
 
     /* === Moon/Sun info cards in header === */
     .header-row {
       display: flex; align-items: center; justify-content: center;
-      max-width: 68rem; margin: 0 auto; padding: 0 1rem; gap: 1rem;
+      max-width: 90rem; margin: 0 auto; padding: 0 1rem; gap: 1rem;
     }
     .cel-info {
       flex-shrink: 0; width: 140px; padding: 0.6rem 0.8rem;
@@ -131,7 +134,7 @@
       border-bottom: 2px solid rgba(199,91,58,0.2);
     }
     .data-bar-inner {
-      max-width: 68rem; margin: 0 auto;
+      max-width: 90rem; margin: 0 auto;
       display: flex; align-items: stretch;
     }
     .db-cell {
@@ -151,7 +154,7 @@
       padding: 0.4rem 0;
     }
     .tracks-inner {
-      max-width: 68rem; margin: 0 auto;
+      max-width: 90rem; margin: 0 auto;
       display: flex; align-items: center; justify-content: center;
       gap: 0.5rem; flex-wrap: wrap; padding: 0 1rem;
     }
