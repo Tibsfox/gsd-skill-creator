@@ -10,9 +10,9 @@ The Pacific Northwest's helium demand is driven by several sectors: semiconducto
 
 ### Central Welding Supply
 
-Central Welding Supply is the largest regional independent industrial gas distributor in the Pacific Northwest, family-owned and operated since its founding in 1974 in Bellevue, Washington. The company has grown to over 30 locations across Washington, Oregon, and Alaska, making it a dominant regional player in specialty gas distribution.
+Central Welding Supply is the largest regional independent industrial gas distributor in the Pacific Northwest, family-owned and operated since its founding in 1974 in Bellevue, Washington. The company has grown to 35 locations across Washington (21), Oregon (4), and Alaska (4), plus repair facilities, making it a dominant regional player in specialty gas distribution.
 
-Their flagship facility — a 10,000 square-foot fill plant in Smokey Point, Washington (Arlington area, approximately 50 miles north of Seattle on I-5) — serves as the central hub for high-purity and specialty gas distribution throughout the region. This facility performs cylinder filling, gas blending, and quality testing. It is the largest non-national-chain fill plant in the Pacific Northwest and handles a significant share of regional helium cylinder distribution.
+Their flagship facility — a 10,000 square-foot fill plant in Smokey Point, Washington (Arlington area, approximately 50 miles north of Seattle on I-5) — serves as the central hub for high-purity and specialty gas distribution throughout the region. This facility performs cylinder filling, gas blending, and quality testing, processing 40,000-50,000 cylinders per month. It is the largest non-national-chain fill plant in the Pacific Northwest and handles a significant share of regional helium cylinder distribution.
 
 - **Seattle area:** 5401 4th Avenue South, Seattle (SODO district — near Port of Seattle)
 - **Portland area:** 2313 NE Martin Luther King Jr Blvd, Portland
@@ -23,7 +23,7 @@ Their flagship facility — a 10,000 square-foot fill plant in Smokey Point, Was
 
 ### Airgas (Air Liquide subsidiary)
 
-Airgas, acquired by Air Liquide in 2016 for $13.4 billion, is the largest U.S. distributor of industrial, medical, and specialty gases. Air Liquide is the world's second-largest industrial gas company by revenue (after Linde), with 2024 revenues of approximately 27.1 billion euros. The combined entity brings global sourcing capability and deep technical expertise to the PNW market.
+Airgas, acquired by Air Liquide in 2016 for $13.4 billion, is the largest U.S. distributor of industrial, medical, and specialty gases. Air Liquide is the world's second-largest industrial gas company by revenue (after Linde), with 2024 revenues of approximately 25.1 billion euros. The combined entity brings global sourcing capability and deep technical expertise to the PNW market.
 
 - **Seattle area:** 4401 Airport Way South, Seattle (Georgetown district)
 - **Portland area:** 7232 SE 82nd Avenue, Portland
