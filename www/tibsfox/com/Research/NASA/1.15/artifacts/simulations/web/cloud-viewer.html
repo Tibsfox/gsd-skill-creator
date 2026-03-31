@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIROS-1 — Cloud Camera Viewer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #050510;
+    color: #e0e0e0;
+    font-family: 'Courier New', monospace;
+    overflow-x: hidden;
+  }
+  #container {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+  canvas { display: block; }
+  #sim-canvas { flex: 1; }
+  #panel {
+    width: 340px;
+    background: #0a0a15;
+    border-left: 1px solid #333;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+  }
+  h1 { font-size: 13px; color: #E8E8F0; text-align: center; }
+  h2 { font-size: 10px; color: #888; text-align: center; font-weight: normal; margin-bottom: 4px; }
+  .box {
+    background: #0d0d20;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .box .label { color: #888; }
+  .box .value { color: #E8E8F0; font-weight: bold; }
+  .box .cloud { color: #4080CC; font-weight: bold; }
+  .box .storm { color: #CC6040; font-weight: bold; }
+  .box .good { color: #8AAA70; font-weight: bold; }
+  .control-group { display: flex; flex-direction: column; gap: 3px; }
+  .control-group label { font-size: 10px; color: #aaa; }
+  input[type=range] { width: 100%; }
+  button {
+    padding: 6px 12px;
+    background: #1a2040;
+    color: #aaa;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 10px;
+    font-family: inherit;
+  }
+  button:hover { background: #2a3060; color: #ddd; }
+  button.active { background: #4080CC; color: #fff; border-color: #4080CC; }
+  .btn-row { display: flex; gap: 4px; }
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="sim-canvas"></canvas>
+  <div id="panel">
+    <h1>TIROS-1 Cloud Camera</h1>
+    <h2>Mission 1.15 &mdash; First Weather Satellite</h2>
+
+    <div class="box">
+      <span class="label">Orbit: </span><span class="value" id="v-alt">724 km</span><br>
+      <span class="label">Spin Rate: </span><span class="value" id="v-spin">12.0 RPM</span><br>
+      <span class="label">Camera: </span><span class="value" id="v-cam">Wide-angle (104&deg;)</span><br>
+      <span class="label">Rotation: </span><span class="value" id="v-rot">0&deg;</span><br>
+      <span class="label">Earth Visible: </span><span class="cloud" id="v-visible">YES</span>
+    </div>
+
+    <div class="box">
+      <span class="label">Cloud Coverage: </span><span class="cloud" id="v-cloud">0%</span><br>
+      <span class="label">Storm Systems: </span><span class="storm" id="v-storm">0</span><br>
+      <span class="label">Photos This Orbit: </span><span class="value" id="v-photos">0</span><br>
+      <span class="label">Total Photos: </span><span class="good" id="v-total">0</span>
+    </div>
+
+    <div class="control-group">
+      <label>Cloud Density</label>
+      <input type="range" id="cloud-density" min="0" max="100" value="50">
+    </div>
+
+    <div class="control-group">
+      <label>Storm Intensity</label>
+      <input type="range" id="storm-intensity" min="0" max="100" value="30">
+    </div>
+
+    <div class="control-group">
+      <label>Simulation Speed</label>
+      <input type="range" id="sim-speed" min="1" max="20" value="5">
+    </div>
+
+    <div class="btn-row">
+      <button id="btn-wide" class="active">Wide-Angle</button>
+      <button id="btn-narrow">Narrow-Angle</button>
+    </div>
+
+    <div class="btn-row">
+      <button id="btn-pause">Pause</button>
+      <button id="btn-snapshot">Snapshot</button>
+    </div>
+
+    <div class="box" style="margin-top:8px;">
+      <span class="label">TIROS-1 Facts:</span><br>
+      April 1, 1960. Two vidicon cameras.<br>
+      22,952 photos in 78 days.<br>
+      120 kg drum, spin-stabilized.<br>
+      693 &times; 756 km orbit, 48.4&deg; incl.<br>
+      First typhoon observed from space.
+    </div>
+
+    <div class="box">
+      <span class="label">Controls:</span><br>
+      Cloud/Storm sliders change weather.<br>
+      Speed slider controls spin rate.<br>
+      Camera sees Earth only during<br>
+      ~30% of each rotation (shaded arc).<br>
+      Snapshot freezes current view.
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('sim-canvas');
+const ctx = canvas.getContext('2d');
+
+// State
+let paused = false;
+let time = 0;
+let totalPhotos = 0;
+let orbitPhotos = 0;
+let useWideAngle = true;
+let snapshotMode = false;
+let snapshotTime = 0;
+
+// Noise functions
+function hash(x, y) {
+  let n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
+  return n - Math.floor(n);
+}
+
+function noise2D(x, y) {
+  const ix = Math.floor(x), iy = Math.floor(y);
+  const fx = x - ix, fy = y - iy;
+  const sx = fx * fx * (3 - 2 * fx);
+  const sy = fy * fy * (3 - 2 * fy);
+  const a = hash(ix, iy), b = hash(ix + 1, iy);
+  const c = hash(ix, iy + 1), d = hash(ix + 1, iy + 1);
+  return a + (b - a) * sx + (c - a) * sy + (a - b - c + d) * sx * sy;
+}
+
+function fbm(x, y, octaves) {
+  let v = 0, a = 0.5;
+  for (let i = 0; i < octaves; i++) {
+    v += a * noise2D(x, y);
+    x *= 2; y *= 2; a *= 0.5;
+  }
+  return v;
+}
+
+function resize() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width - 340;
+  canvas.height = rect.height;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// Earth rendering
+function drawEarth(cx, cy, radius, t) {
+  const cloudDensity = document.getElementById('cloud-density').value / 100;
+  const stormInt = document.getElementById('storm-intensity').value / 100;
+
+  // Earth disc
+  for (let py = -radius; py <= radius; py += 2) {
+    const halfWidth = Math.sqrt(radius * radius - py * py);
+    for (let px = -halfWidth; px <= halfWidth; px += 2) {
+      const dist = Math.sqrt(px * px + py * py);
+      if (dist > radius) continue;
+
+      // Spherical mapping
+      const nx = px / radius;
+      const ny = py / radius;
+      const nz = Math.sqrt(Math.max(0, 1 - nx * nx - ny * ny));
+
+      // UV mapping for textures
+      const u = nx * 2 + t * 0.005;
+      const v = ny * 2;
+
+      // Ocean/land
+      const land = fbm(u * 1.5 + 3, v * 1.5 + 1, 4);
+      let r, g, b;
+      if (land > 0.52) {
+        r = 30; g = 60; b = 25; // land
+      } else {
+        r = 8; g = 24; b = 50; // ocean
+      }
+
+      // Clouds
+      const cloud1 = fbm(u * 2 + t * 0.003, v * 2 - t * 0.001, 5);
+      const cloud2 = fbm(u * 3 + 5 + t * 0.002, v * 3 + 3, 4);
+      const cloudVal = Math.max(cloud1, cloud2 * 0.8);
+
+      // Storm vortex
+      const vx = nx - 0.3, vy = ny + 0.1;
+      const vr = Math.sqrt(vx * vx + vy * vy);
+      const va = Math.atan2(vy, vx) + 4 * Math.exp(-vr * 5) + t * 0.01;
+      const spiral = fbm(va * 1.5, vr * 6, 4);
+      const vortex = spiral * Math.max(0, 1 - vr * 3) * stormInt;
+
+      const totalCloud = Math.max(cloudVal * cloudDensity, vortex);
+      const cloudMask = Math.min(1, Math.max(0, (totalCloud - 0.3) / 0.4));
+
+      // Apply clouds
+      const cloudBright = 180 + totalCloud * 60;
+      r = r * (1 - cloudMask) + cloudBright * cloudMask;
+      g = g * (1 - cloudMask) + cloudBright * cloudMask;
+      b = b * (1 - cloudMask) + (cloudBright + 15) * cloudMask;
+
+      // Limb darkening
+      const limb = Math.pow(nz, 0.5);
+      r *= 0.3 + 0.7 * limb;
+      g *= 0.3 + 0.7 * limb;
+      b *= 0.3 + 0.7 * limb;
+
+      ctx.fillStyle = `rgb(${r|0},${g|0},${b|0})`;
+      ctx.fillRect(cx + px, cy + py, 2, 2);
+    }
+  }
+
+  // Atmosphere glow
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius + 4, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(64,128,204,0.3)';
+  ctx.lineWidth = 8;
+  ctx.stroke();
+}
+
+// Camera viewport
+function drawCameraView(cx, cy, w, h, t, spinAngle) {
+  const cloudDensity = document.getElementById('cloud-density').value / 100;
+  const stormInt = document.getElementById('storm-intensity').value / 100;
+  const fov = useWideAngle ? 104 : 12;
+
+  // Camera frame
+  ctx.strokeStyle = '#4080CC';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(cx - w/2, cy - h/2, w, h);
+
+  // Label
+  ctx.fillStyle = '#4080CC';
+  ctx.font = '10px monospace';
+  ctx.fillText(`CAMERA: ${useWideAngle ? 'WIDE' : 'NARROW'} (${fov} deg)`, cx - w/2 + 4, cy - h/2 - 4);
+
+  // Earth visible check
+  const earthVisible = (spinAngle % 360) < 108; // ~30% of rotation
+
+  if (!earthVisible) {
+    ctx.fillStyle = '#0a0a15';
+    ctx.fillRect(cx - w/2 + 1, cy - h/2 + 1, w - 2, h - 2);
+    ctx.fillStyle = '#606878';
+    ctx.font = '14px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('CAMERA FACING SPACE', cx, cy - 5);
+    ctx.fillText('(waiting for Earth view)', cx, cy + 15);
+    ctx.textAlign = 'left';
+    document.getElementById('v-visible').textContent = 'NO';
+    document.getElementById('v-visible').style.color = '#CC6040';
+    return;
+  }
+
+  document.getElementById('v-visible').textContent = 'YES';
+  document.getElementById('v-visible').style.color = '#4080CC';
+
+  // Draw what the camera sees (cloud pattern)
+  const scale = useWideAngle ? 1.0 : 8.67;
+  let cloudPixels = 0;
+  let totalPixels = 0;
+
+  for (let py = 0; py < h - 2; py += 3) {
+    for (let px = 0; px < w - 2; px += 3) {
+      const u = (px / w - 0.5) * 2 / scale + t * 0.003;
+      const v = (py / h - 0.5) * 2 / scale;
+
+      const cloud1 = fbm(u * 3, v * 3, 5);
+      const cloud2 = fbm(u * 4 + 5, v * 4 + 3, 4);
+      const totalCloud = Math.max(cloud1, cloud2 * 0.8) * cloudDensity;
+
+      // Vortex
+      const vx = u - 0.2, vy = v + 0.1;
+      const vr = Math.sqrt(vx * vx + vy * vy);
+      const va = Math.atan2(vy, vx) + 4 * Math.exp(-vr * 3) + t * 0.01;
+      const spiral = fbm(va * 1.5, vr * 5, 4);
+      const vortex = spiral * Math.max(0, 1 - vr * 2) * stormInt;
+
+      const brightness = Math.max(totalCloud, vortex);
+      totalPixels++;
+      if (brightness > 0.35) cloudPixels++;
+
+      // Render as cloud imagery
+      const r = 20 + brightness * 200;
+      const g = 30 + brightness * 200;
+      const b = 50 + brightness * 195;
+
+      ctx.fillStyle = `rgb(${r|0},${g|0},${b|0})`;
+      ctx.fillRect(cx - w/2 + 1 + px, cy - h/2 + 1 + py, 3, 3);
+    }
+  }
+
+  // Scan line effect
+  const scanY = ((t * 100) % h);
+  ctx.fillStyle = 'rgba(232,232,240,0.15)';
+  ctx.fillRect(cx - w/2 + 1, cy - h/2 + 1 + scanY, w - 2, 2);
+
+  // Update cloud coverage
+  document.getElementById('v-cloud').textContent = Math.round(cloudPixels / totalPixels * 100) + '%';
+}
+
+// Main loop
+function draw() {
+  if (!paused) time += 0.016 * document.getElementById('sim-speed').value;
+
+  const W = canvas.width;
+  const H = canvas.height;
+  ctx.fillStyle = '#050510';
+  ctx.fillRect(0, 0, W, H);
+
+  // Stars
+  for (let i = 0; i < 100; i++) {
+    const sx = hash(i, 1) * W;
+    const sy = hash(1, i) * H;
+    const bright = hash(i, i) * 0.5 + 0.2;
+    const twinkle = 0.7 + 0.3 * Math.sin(time * (1 + hash(i, 3) * 2) + i);
+    ctx.fillStyle = `rgba(200,210,220,${bright * twinkle})`;
+    ctx.fillRect(sx, sy, 1.5, 1.5);
+  }
+
+  // Spin angle
+  const spinRate = 12; // RPM
+  const spinAngle = (time * spinRate * 6) % 360;
+
+  // Earth (upper left quadrant)
+  const earthR = Math.min(W, H) * 0.28;
+  const earthX = W * 0.3;
+  const earthY = H * 0.38;
+  drawEarth(earthX, earthY, earthR, time);
+
+  // TIROS-1 satellite (small drum shape indicator)
+  const satX = W * 0.3;
+  const satY = H * 0.38 - earthR - 50;
+
+  // Drum body
+  ctx.save();
+  ctx.translate(satX, satY);
+  ctx.rotate(spinAngle * Math.PI / 180 * 0.1);
+  ctx.fillStyle = '#606878';
+  ctx.fillRect(-15, -8, 30, 16);
+  ctx.strokeStyle = '#888';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(-15, -8, 30, 16);
+  // Camera lens
+  const camAngle = (spinAngle % 360) * Math.PI / 180;
+  ctx.fillStyle = (spinAngle % 360) < 108 ? '#4080CC' : '#333';
+  ctx.beginPath();
+  ctx.arc(Math.cos(camAngle) * 12, Math.sin(camAngle) * 5, 3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Camera viewport (right side)
+  const camW = W * 0.45;
+  const camH = H * 0.5;
+  const camX = W * 0.7;
+  const camY = H * 0.35;
+  drawCameraView(camX, camY, camW, camH, time, spinAngle);
+
+  // Spin indicator arc
+  const arcX = W * 0.3;
+  const arcY = H * 0.82;
+  const arcR = 40;
+  ctx.beginPath();
+  ctx.arc(arcX, arcY, arcR, 0, Math.PI * 2);
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Earth-facing arc (30%)
+  ctx.beginPath();
+  ctx.arc(arcX, arcY, arcR, -Math.PI * 0.3, Math.PI * 0.3);
+  ctx.strokeStyle = '#4080CC';
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  // Spin hand
+  const handAngle = spinAngle * Math.PI / 180;
+  ctx.beginPath();
+  ctx.moveTo(arcX, arcY);
+  ctx.lineTo(arcX + Math.cos(handAngle) * arcR * 0.8, arcY + Math.sin(handAngle) * arcR * 0.8);
+  ctx.strokeStyle = '#E8E8F0';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.fillStyle = '#888';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('SPIN', arcX, arcY + arcR + 15);
+  ctx.textAlign = 'left';
+
+  // Photo counter
+  if ((spinAngle % 360) < 108 && ((spinAngle - 2) % 360) >= 108) {
+    orbitPhotos++;
+    totalPhotos++;
+  }
+
+  // Update panel
+  document.getElementById('v-rot').textContent = Math.round(spinAngle) + '\u00B0';
+  document.getElementById('v-spin').textContent = spinRate.toFixed(1) + ' RPM';
+  document.getElementById('v-cam').textContent = useWideAngle ? 'Wide-angle (104\u00B0)' : 'Narrow-angle (12\u00B0)';
+  document.getElementById('v-photos').textContent = orbitPhotos;
+  document.getElementById('v-total').textContent = totalPhotos;
+
+  // Storm count (rough estimate from intensity)
+  const stormInt = document.getElementById('storm-intensity').value / 100;
+  document.getElementById('v-storm').textContent = stormInt > 0.6 ? '2' : stormInt > 0.3 ? '1' : '0';
+
+  requestAnimationFrame(draw);
+}
+
+// Controls
+document.getElementById('btn-wide').addEventListener('click', () => {
+  useWideAngle = true;
+  document.getElementById('btn-wide').classList.add('active');
+  document.getElementById('btn-narrow').classList.remove('active');
+});
+document.getElementById('btn-narrow').addEventListener('click', () => {
+  useWideAngle = false;
+  document.getElementById('btn-narrow').classList.add('active');
+  document.getElementById('btn-wide').classList.remove('active');
+});
+document.getElementById('btn-pause').addEventListener('click', function() {
+  paused = !paused;
+  this.textContent = paused ? 'Resume' : 'Pause';
+  this.classList.toggle('active', paused);
+});
+document.getElementById('btn-snapshot').addEventListener('click', () => {
+  snapshotMode = !snapshotMode;
+});
+
+draw();
+</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+{
+  "mission": "1.15",
+  "title": "TIROS-1",
+  "description": "Open datasets and source materials relevant to TIROS-1 (1960), the first weather satellite, a 120 kg drum-shaped spacecraft carrying two vidicon TV cameras in a 693 x 756 km orbit at 48.4 degrees inclination, Aurelia aurita (moon jellyfish), the Marbled Murrelet (Brachyramphus marmoratus), and the physics of orbital weather observation, image geometry, and crystal oscillator technology",
+  "sources": [
+    {
+      "id": "nssdc-tiros1",
+      "name": "NSSDC Master Catalog — TIROS-1",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1960-002B",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NASA Space Science Data Coordinated Archive entry for TIROS-1. Documents the spacecraft launched April 1, 1960, on a Thor-Able launch vehicle from Cape Canaveral. COSPAR ID 1960-002B. Satellite mass 120 kg (270 lb). Drum-shaped body 107 cm (42 in) diameter, 48 cm (19 in) height. Covered in 9,200 solar cells providing ~20W power. Two vidicon TV cameras: wide-angle (104 degree FOV) and narrow-angle (12 degree FOV). Orbit: 693 x 756 km, inclination 48.4 degrees, period 99.2 minutes. Spin-stabilized at approximately 12 RPM. Transmitted 22,952 photographs in 78 days of operation. First operational weather satellite, proving the concept of satellite meteorology.",
+      "mission_relevance": "Definitive source for TIROS-1 mission parameters, orbital elements, physical specifications, and operational history. Confirms satellite dimensions, mass, orbit, camera specifications, and mission duration. Essential for all orbital mechanics calculations, camera geometry analysis, and coverage simulations."
+    },
+    {
+      "id": "noaa-tiros-history",
+      "name": "NOAA Satellite and Information Service — TIROS History",
+      "url": "https://www.nesdis.noaa.gov/",
+      "type": "primary-source",
+      "category": "mission-data",
+      "format": "HTML",
+      "access": "open",
+      "description": "NOAA's National Environmental Satellite, Data, and Information Service maintains the historical record of the TIROS satellite program and its successors. Includes the full history from TIROS-1 (1960) through TIROS-10 (1965) and the transition to operational satellites (ESSA, ITOS, NOAA series, GOES). Documents the evolution of satellite meteorology from TIROS-1's experimental demonstration to the operational global observation system. Contains historical imagery from TIROS-1 including the first cloud photographs, the first images of organized weather systems from space, and the landmark tropical cyclone observations. The NOAA archive represents the institutional continuity from TIROS-1 to modern weather satellites — a direct lineage spanning 65+ years.",
+      "mission_relevance": "Provides the institutional and historical context for TIROS-1's impact on meteorology. The historical imagery collection includes some of the original TIROS-1 photographs referenced in the story. The operational succession from TIROS to modern GOES and JPSS satellites demonstrates the direct legacy of TIROS-1's proof of concept. Essential for understanding the weather observation narrative and the 'paradigm shift' described in the atmospheric observation knowledge node."
+    },
+    {
+      "id": "nws-history",
+      "name": "National Weather Service History — Early Satellite Meteorology",
+      "url": "https://www.weather.gov/timeline",
+      "type": "secondary-source",
+      "category": "meteorology",
+      "format": "HTML",
+      "access": "open",
+      "description": "The National Weather Service maintains a historical timeline of weather forecasting in the United States, with detailed entries on the introduction of satellite data into operational weather forecasting. Documents the transition from pre-satellite forecasting (relying on surface observations, radiosonde data, and pilot reports) to satellite-augmented forecasting after TIROS-1. Key entries cover the Weather Bureau's initial reception of TIROS-1 imagery, the rapid integration of satellite data into daily forecast operations, and the establishment of the National Environmental Satellite Center (1965) to manage operational satellite programs. The NWS history captures the human impact of TIROS-1 — how individual forecasters experienced the transformation from point measurements to global imagery.",
+      "mission_relevance": "Provides the forecaster's perspective that drives the story 'The Weather Eye.' The NWS historical records document the actual reactions of Weather Bureau personnel to the first TIROS-1 images — the shock of seeing weather systems from above for the first time. Essential for authenticating the narrative voice and the emotional impact described in the story. Also validates the technical claims about pre-satellite forecasting limitations."
+    },
+    {
+      "id": "nasa-giss-imagery",
+      "name": "NASA Goddard Institute for Space Studies — Historical Satellite Imagery",
+      "url": "https://www.giss.nasa.gov/",
+      "type": "primary-source",
+      "category": "imagery",
+      "format": "JPEG/TIFF",
+      "access": "open",
+      "description": "NASA GISS archives historical satellite imagery including early TIROS images. The Goddard Institute's collection includes digitized versions of original TIROS-1 photographs showing the first cloud images from space, organized weather systems, and the progressive improvement in image quality across the TIROS series. The archive also contains contemporary analysis of early satellite images — the interpretive notes written by meteorologists who were seeing these cloud patterns from above for the first time. These annotations provide invaluable insight into how satellite meteorology concepts developed. GISS also maintains modern climate observation datasets that trace their lineage to the observational paradigm TIROS-1 established.",
+      "mission_relevance": "Primary source for authentic TIROS-1 imagery and the original interpretive context. The annotated images show how meteorologists learned to read cloud patterns from space — a skill that had to be developed from scratch because no one had ever seen weather from above before. Essential for the vidicon camera knowledge node and the cloud classification analysis. The GISS modern climate datasets demonstrate TIROS-1's lasting impact on atmospheric science."
+    },
+    {
+      "id": "inaturalist-aurelia",
+      "name": "iNaturalist — Aurelia aurita Observations",
+      "url": "https://www.inaturalist.org/taxa/51515-Aurelia-aurita",
+      "type": "community-science",
+      "category": "ecology",
+      "format": "JSON/API",
+      "access": "open",
+      "description": "Community science observations of Aurelia aurita (moon jellyfish) from iNaturalist's global database. Observations include geolocated photographs showing the characteristic translucent bell with four horseshoe-shaped gonads, trailing oral arms, and the bell pulsing cycle. Aurelia aurita is one of the most widely distributed jellyfish species, found in all ocean basins. In the Pacific Northwest, large blooms occur in Puget Sound, Hood Canal, and coastal embayments during summer months, driven by warm water temperatures and plankton availability. The bell diameter ranges from 5 to 40 cm; the translucent bell margin bears short tentacles and eight rhopalia (sensory structures). The four-lobed gonad pattern is visible through the bell and is the most reliable field identification feature. The pulsing frequency (0.5-2 Hz) varies with temperature and body size.",
+      "mission_relevance": "Establishes the geographic, morphological, and behavioral context for the organism pairing. iNaturalist photographs document the drum-shaped bell, the rhythmic pulsing, and the translucent quality that make Aurelia aurita the perfect analog for TIROS-1: both are drum-shaped, both pulse rhythmically, both are translucent to radiation, both are carried by currents, and both sense their environment through simple photoreceptive systems. The PNW occurrence data connects the organism to the project's geographic context. Essential for the organism resonance sections in all knowledge nodes and the GLSL screensaver jellyfish mode."
+    },
+    {
+      "id": "ssec-wisconsin",
+      "name": "SSEC University of Wisconsin — Satellite Meteorology Archive",
+      "url": "https://www.ssec.wisc.edu/",
+      "type": "primary-source",
+      "category": "meteorology",
+      "format": "Various",
+      "access": "open",
+      "description": "The Space Science and Engineering Center at the University of Wisconsin-Madison is one of the world's leading centers for satellite meteorology research. Founded in 1965 by Verner Suomi (the 'father of satellite meteorology'), SSEC developed many of the techniques for analyzing satellite weather imagery that are still used today. The SSEC archive includes historical and current satellite imagery, analysis tools, and educational resources. Suomi was instrumental in the development of the spin-scan camera concept used in later weather satellites and in the geostationary meteorological satellite program (GOES). SSEC's real-time satellite imagery portal provides modern comparison data for understanding how TIROS-1's crude images evolved into today's high-resolution, multi-spectral, continuous global coverage.",
+      "mission_relevance": "Provides the academic and research context for satellite meteorology. SSEC's tools and imagery demonstrate the direct intellectual lineage from TIROS-1 to modern satellite analysis. The Suomi connection places TIROS-1 in the personal history of the scientists who developed the field. SSEC's educational resources on image interpretation, cloud pattern analysis, and orbital mechanics are directly relevant to the knowledge nodes on cloud classification, weather systems, and atmospheric observation."
+    },
+    {
+      "id": "eumetsat-archive",
+      "name": "EUMETSAT — European Meteorological Satellite Archive",
+      "url": "https://www.eumetsat.int/",
+      "type": "secondary-source",
+      "category": "meteorology",
+      "format": "HDF5/NetCDF",
+      "access": "open",
+      "description": "The European Organisation for the Exploitation of Meteorological Satellites maintains an extensive archive of satellite weather imagery from the Meteosat geostationary and MetOp polar-orbiting satellite series. While EUMETSAT's data begins in 1977 (Meteosat-1), the archive provides a continuous modern reference for the weather observation concepts TIROS-1 pioneered. EUMETSAT's imagery products include visible, infrared, and water vapor channels — the multi-spectral evolution of TIROS-1's single visible-light cameras. The archive also contains cloud analysis products (cloud type, cloud top height, cloud motion vectors) that automate the visual interpretation that early TIROS-1 meteorologists performed by eye.",
+      "mission_relevance": "Provides the modern satellite meteorology comparison that contextualizes TIROS-1's contribution. EUMETSAT's multi-spectral imagery shows what weather observation has become — the sophisticated descendant of TIROS-1's grainy black-and-white photographs. The automated cloud analysis products demonstrate the maturation of techniques that began with human visual interpretation of TIROS-1 images. Essential for understanding the 'before and after' of satellite meteorology."
+    },
+    {
+      "id": "wmo-observation",
+      "name": "World Meteorological Organization — Observing Systems and Data",
+      "url": "https://www.wmo.int/",
+      "type": "reference",
+      "category": "meteorology",
+      "format": "HTML/PDF",
+      "access": "open",
+      "description": "The World Meteorological Organization coordinates the global weather observation network, including the space-based component that TIROS-1 inaugurated. WMO's Global Observing System (GOS) integrates satellite observations from multiple agencies into a unified global dataset. WMO publications document the observation requirements for weather forecasting — spatial resolution, temporal frequency, spectral coverage, accuracy — and how these requirements have evolved from the pre-satellite era through TIROS-1 to the modern constellation. WMO's Integrated Global Observing Strategy (WIGOS) framework explicitly traces the role of satellite data in extending forecast skill from 1-2 days (pre-satellite) to 7-10 days (modern). The WMO observation standards used today were directly influenced by the capabilities and limitations discovered during the TIROS program.",
+      "mission_relevance": "Provides the international framework that contextualizes TIROS-1's impact on global meteorology. WMO's observation requirements quantify what TIROS-1 contributed — global coverage over oceans, tropical cyclone monitoring, cloud pattern analysis — and how these capabilities were formalized into the international weather observation system. Essential for the atmospheric observation knowledge node and the quantitative claims about forecast skill improvement."
+    },
+    {
+      "id": "rca-historical",
+      "name": "RCA Historical Archives — Vidicon Camera Technology",
+      "url": "https://www.hagley.org/",
+      "type": "primary-source",
+      "category": "technology",
+      "format": "PDF/Microfilm",
+      "access": "restricted",
+      "description": "RCA (Radio Corporation of America) designed and manufactured the vidicon camera tubes used in TIROS-1. Historical records from RCA's Astro-Electronics Division (later acquired by Lockheed Martin) document the development of space-qualified vidicon cameras, including the modifications needed for orbital operation: radiation hardening of the antimony trisulfide target, thermal management for the wide temperature swings in orbit, and the electronic interface to the spacecraft's tape recorder and transmitter. RCA's engineers adapted broadcast television technology for space — the vidicon tube was originally designed for live TV cameras, and its adaptation for satellite use required solving problems of target persistence, dark current stability, and sensitivity at low light levels. The RCA archives are held at the Hagley Museum and Library in Wilmington, Delaware.",
+      "mission_relevance": "Provides the engineering details of the vidicon camera system — the core technology that made TIROS-1 possible. The RCA documentation explains how broadcast TV technology was adapted for space, the performance limitations of the vidicon tube (persistence, resolution, sensitivity), and the tradeoffs between wide-angle and narrow-angle camera configurations. Essential for the vidicon camera knowledge node, the SPICE simulation of the camera signal chain, and understanding why TIROS-1's images had the specific characteristics (scan lines, ghost images, noise) visible in the original photographs."
+    },
+    {
+      "id": "goes-data",
+      "name": "GOES Satellite Imagery — Modern Weather Observation Comparison",
+      "url": "https://www.star.nesdis.noaa.gov/GOES/",
+      "type": "reference",
+      "category": "meteorology",
+      "format": "NetCDF/JPEG",
+      "access": "open",
+      "description": "The Geostationary Operational Environmental Satellite (GOES) system provides continuous weather observation of the Western Hemisphere from geostationary orbit (35,786 km altitude). GOES-16 and GOES-17 (launched 2016/2018) carry the Advanced Baseline Imager (ABI) with 16 spectral bands, 500m-2km resolution, full-disk imagery every 10 minutes, and continuous 24/7 coverage. Comparison with TIROS-1: resolution improved 10-100x, spectral coverage expanded from 1 band (visible) to 16 bands (visible through thermal infrared), temporal coverage improved from intermittent (camera only sees Earth part of each rotation) to continuous, and coverage expanded from a narrow latitude band to full hemisphere. Yet the fundamental principle is identical: look down from above to see the weather. GOES data products include derived cloud properties (type, height, phase, optical depth) — automated versions of the visual cloud classification that TIROS-1 meteorologists pioneered.",
+      "mission_relevance": "Provides the modern benchmark against which TIROS-1's capabilities are measured. The contrast between TIROS-1's 500-line, black-and-white, intermittent images and GOES-16's 16-channel, sub-kilometer, continuous imagery illustrates 60 years of progress — all traceable to TIROS-1's proof of concept. Essential for the atmospheric observation knowledge node and for contextualizing the 'paradigm shift' that TIROS-1 initiated. The GOES imagery is also used in the web simulations as a reference for realistic cloud patterns."
+    }
+  ]
+}

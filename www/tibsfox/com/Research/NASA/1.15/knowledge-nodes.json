@@ -1,0 +1,134 @@
+{
+  "mission": "1.15",
+  "title": "TIROS-1",
+  "date": "1960-04-01",
+  "status": "SUCCESS",
+  "primary_achievement": "First weather satellite. A 120 kg drum-shaped spacecraft carrying two vidicon TV cameras in a 693 x 756 km orbit at 48.4 degrees inclination. Spin-stabilized at approximately 12 RPM. In 78 days of operation, TIROS-1 transmitted 22,952 photographs of Earth's cloud patterns, proving that weather observation from space was practical and transforming meteorology from a point-measurement science to a global observational science. The wide-angle camera (104 degree FOV) and narrow-angle camera (12 degree FOV) provided complementary views of cloud systems at different scales.",
+  "organism": "Aurelia aurita",
+  "organism_common": "Moon jellyfish",
+  "organism_location": "Found in all ocean basins, in coastal waters from the surface to moderate depths. Common in Puget Sound, the San Juan Islands, and along the entire Pacific Northwest coastline. Aurelia aurita is a scyphozoan medusa with a translucent, saucer-shaped bell 5-40 cm in diameter. The bell pulses rhythmically at 0.5-2 Hz for locomotion — a muscular contraction cycle analogous to TIROS-1's spin cycle. Four horseshoe-shaped gonads visible through the translucent bell create the characteristic four-lobed pattern. Feeds on plankton captured by trailing oral arms and bell margin tentacles. The bell is drum-shaped — nearly identical in proportions to TIROS-1's spacecraft bus. Both are translucent (the jellyfish to light, the satellite's cameras to electromagnetic radiation), both are carried by currents (ocean currents / orbital mechanics), both sense light through simple photoreceptive systems (the jellyfish's rhopalia / the satellite's vidicon tubes). Moon jellyfish aggregate in large blooms driven by temperature and current — the biological equivalent of cloud systems aggregating in weather patterns driven by temperature and atmospheric currents. TIROS-1 observed both phenomena from above.",
+  "bird": "Brachyramphus marmoratus",
+  "bird_common": "Marbled Murrelet",
+  "dedication": {
+    "name": "Sergei Rachmaninoff",
+    "born": "1873-04-01",
+    "died": "1943-03-28",
+    "birthplace": "Semyonovo, Novgorod Governorate, Russian Empire",
+    "field": "Classical piano, orchestral composition, conducting",
+    "resonance": "Sergei Rachmaninoff was born on April 1, 1873 — exactly 87 years to the day before TIROS-1's launch on April 1, 1960. Rachmaninoff's music is weather made audible: the slow building of a theme from a whisper to a roar, the layering of voices and textures into overwhelming orchestral masses, the sudden resolution into crystalline clarity. His Piano Concerto No. 2 begins with slowly tolling chords — like a barometric pressure dropping, drawing the atmosphere toward a center. The first movement builds through development into a climactic recapitulation that is not a crash but an arrival — the way a mature cyclone achieves its maximum intensity and then, in the eye, becomes perfectly still. TIROS-1 saw weather as Rachmaninoff heard it: as a system of interacting forces building toward resolution. The storm photograph that changed meteorology was, in a sense, a Rachmaninoff concerto rendered visible — the spiral arms reaching outward like phrases building toward a cadence, the eye at the center where everything resolves. Rachmaninoff died in Beverly Hills, California, in 1943, seventeen years before TIROS-1 would photograph the storms he had already composed."
+  },
+  "nodes": [
+    {
+      "id": "vidicon-camera",
+      "concept": "Vidicon camera tube — photoconductive image capture",
+      "department": "imaging",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.1",
+      "description": "The vidicon is a camera tube that uses a photoconductive target to convert an optical image into an electrical signal. Light from the scene passes through a lens and is focused onto a thin layer of photoconductive material (antimony trisulfide, Sb2S3, in TIROS-1). This material has high resistance in the dark and low resistance when illuminated. An electron beam scans the target in a raster pattern (500 horizontal lines for TIROS-1), reading out the charge stored at each point. Where the target was illuminated, the beam current flows through the reduced resistance, producing a signal proportional to the scene brightness. The signal is then amplified and either stored on magnetic tape or transmitted directly to ground. TIROS-1 used two vidicon cameras: a wide-angle (104 degree FOV, 1.27 mm focal length) and a narrow-angle (12 degree FOV, 58 mm focal length), both with 0.5-inch (12.7 mm) format vidicon tubes. The wide-angle camera covered approximately 1500 km on the ground; the narrow-angle covered approximately 150 km at higher resolution.",
+      "resonance": "The moon jellyfish's rhopalia — sensory structures at the bell margin — are biological vidicon cameras. Each rhopalium contains a simple eye (ocellus) with photoreceptive cells that convert light into neural signals. The jellyfish does not form images in the way a vertebrate eye does, but it detects light direction and intensity — the same fundamental measurement as the vidicon tube. The jellyfish's entire bell margin acts as a distributed imaging system, sampling light from multiple directions simultaneously. TIROS-1's two cameras were a similar distributed system, sampling the scene from different angular scales.",
+      "worked_example": {
+        "description": "Calculate the signal current for a fully illuminated vidicon target",
+        "parameters": {
+          "beam_current_uA": 2.0,
+          "dark_resistance_MOhm": 10,
+          "illuminated_resistance_MOhm": 0.1,
+          "target_voltage_V": 20
+        },
+        "formula": "I_signal = V_target / R_illuminated - V_target / R_dark",
+        "result": "I_signal = 20V / 0.1 MOhm - 20V / 10 MOhm = 200 uA - 2 uA = 198 uA signal current (dynamic range ~40 dB)",
+        "python": "import numpy as np\n\nV_target = 20  # volts\nR_dark = 10e6  # 10 MOhm\nR_illum = 0.1e6  # 100 kOhm\n\nI_dark = V_target / R_dark\nI_illum = V_target / R_illum\nI_signal = I_illum - I_dark\n\nprint(f'Vidicon Signal Analysis')\nprint(f'  Dark current: {I_dark*1e6:.1f} uA')\nprint(f'  Illuminated current: {I_illum*1e6:.1f} uA')\nprint(f'  Signal current: {I_signal*1e6:.1f} uA')\nprint(f'  Dynamic range: {20*np.log10(I_illum/I_dark):.1f} dB')"
+      }
+    },
+    {
+      "id": "orbital-swath",
+      "concept": "Orbital swath width — ground coverage from orbital altitude",
+      "department": "orbital-mechanics",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.1",
+      "description": "The swath width is the width of the strip of ground observed by a satellite's camera as it passes overhead. For a camera pointing at nadir (straight down) with a field of view (FOV) angle theta, the swath width on a flat Earth is W = 2 * h * tan(theta/2), where h is the orbital altitude. On a curved Earth, the swath is larger because the Earth's surface curves away from the satellite. TIROS-1's wide-angle camera (FOV = 104 degrees) at 724 km altitude had a swath width of approximately 1500 km. The narrow-angle camera (FOV = 12 degrees) had a swath width of approximately 150 km. The swath width determines how many orbits are needed to cover the entire observable area — wider swaths mean faster coverage but lower resolution.",
+      "resonance": "A moon jellyfish bloom drifting through a sound or strait has a 'swath' of feeding coverage — the width of ocean filtered by the bloom as it moves with the current. A dense bloom of Aurelia in Puget Sound might be 500 meters wide and several kilometers long, filtering plankton from the water column as it drifts. The bloom's 'swath' determines how much of the plankton population it encounters per unit time — the biological equivalent of TIROS-1's swath determining how much cloud coverage it photographs per orbit."
+    },
+    {
+      "id": "image-resolution",
+      "concept": "Image resolution — spatial detail captured by a sensor",
+      "department": "imaging",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.2",
+      "description": "Image resolution is the smallest spatial feature that a sensor can distinguish. For TIROS-1's vidicon cameras, the resolution was determined by the number of scan lines (500), the camera FOV, and the orbital altitude. The instantaneous field of view (IFOV) — the angular resolution per pixel — is IFOV = FOV / number_of_lines. For the wide-angle camera: IFOV = 104 degrees / 500 = 0.208 degrees = 3.63 mrad. At 724 km altitude, the nadir pixel size is h * IFOV = 724 * 0.00363 = 2.63 km. The wide-angle camera resolved features approximately 3 km across at nadir. The narrow-angle camera: IFOV = 12/500 = 0.024 degrees = 0.419 mrad, nadir pixel = 0.30 km = 300 m. At off-nadir angles, resolution degrades as 1/cos(theta) due to the oblique viewing geometry. TIROS-1's resolution was sufficient to identify major cloud systems (cyclones, fronts, cloud bands) but could not resolve individual convective cells (typically 1-10 km).",
+      "resonance": "A jellyfish's visual acuity — the resolution of its rhopalia — is extremely low compared to vertebrate eyes. Aurelia's ocelli can detect light vs dark and general direction, with an angular resolution estimated at roughly 10-20 degrees — comparable to TIROS-1's wide-angle camera seeing 3 km features rather than individual trees. Both TIROS-1 and the jellyfish see the world at low resolution but at a scale that reveals large-scale patterns: the satellite sees weather systems, the jellyfish sees light gradients that indicate surface vs depth."
+    },
+    {
+      "id": "tv-bandwidth",
+      "concept": "Television bandwidth — the information rate of a video signal",
+      "department": "signal-processing",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.2",
+      "description": "Television bandwidth is the frequency range required to transmit a video image. For a system with N scan lines, F frames per second, and aspect ratio A, the video bandwidth is approximately B = N^2 * A * F / 2. TIROS-1 operated at approximately 500 lines, 2 frames per second (much slower than broadcast TV's 30 fps), with a 1:1 aspect ratio: B = 500^2 * 1 * 2 / 2 = 250,000 Hz = 250 kHz. This is much less than standard broadcast TV (4.2 MHz for NTSC) because of the slower frame rate. The lower bandwidth meant TIROS-1 could transmit over a narrower radio channel, allowing the use of modest transmitter power (2W) and still achieving adequate signal-to-noise ratio at the ground station. The magnetic tape recorder stored images at the camera's recording rate and played them back at the transmission rate — effectively a bandwidth adapter between the camera and the transmitter.",
+      "resonance": "Neural bandwidth in the jellyfish's nerve net is similarly constrained. The simple nerve ring around the bell margin transmits signals at a few meters per second (compared to 100 m/s in vertebrate nerves), limiting the information rate. The jellyfish compensates by processing less information: instead of high-resolution images, it processes simple light/dark signals and pulsing rhythms. TIROS-1 compensated for low bandwidth by operating at 2 fps instead of 30 — accepting fewer frames in exchange for the ability to transmit from orbit with limited power."
+    },
+    {
+      "id": "ground-track",
+      "concept": "Ground track — the path of the sub-satellite point on Earth's surface",
+      "department": "orbital-mechanics",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.3",
+      "description": "The ground track is the path traced on Earth's surface by the point directly below a satellite (the sub-satellite point or nadir point). For TIROS-1 at 48.4 degrees inclination, the ground track oscillates between 48.4 degrees north and 48.4 degrees south latitude in a sinusoidal pattern. Because Earth rotates beneath the satellite's orbital plane, each successive orbit's ground track is shifted westward by approximately 360 * (T_orbit / T_earth) = 360 * (99.2 / 1440) = 24.8 degrees of longitude. After one day (~14.5 orbits), the ground tracks form a mesh that covers most of the observable latitude band. After several days, the mesh fills in and near-complete coverage is achieved. The ground track's inclination determines which latitudes the satellite can observe — TIROS-1 could not see above 48.4 degrees north or below 48.4 degrees south.",
+      "resonance": "Moon jellyfish in Puget Sound trace ground tracks through the water driven by tidal currents. The daily tidal cycle oscillates the jellyfish's position north and south (or east and west depending on the channel geometry), and the net drift from wind and residual currents shifts each day's track relative to the previous one — filling in coverage of the feeding grounds over time. Oceanographers studying jellyfish distribution map these tracks to understand bloom dynamics, just as meteorologists mapped TIROS-1's ground tracks to understand coverage patterns."
+    },
+    {
+      "id": "weather-systems",
+      "concept": "Synoptic weather systems — large-scale atmospheric patterns",
+      "department": "atmospheric-science",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.4",
+      "description": "Synoptic weather systems are atmospheric patterns large enough to be resolved by a network of weather stations spaced hundreds of kilometers apart — or by a satellite camera from orbital altitude. TIROS-1 revealed the visual structure of these systems for the first time: cyclones (low-pressure systems with spiral cloud bands), anticyclones (high-pressure systems with clear centers and peripheral clouds), fronts (linear boundaries between air masses, visible as cloud lines), and tropical systems (organized convection with eye structures). Before TIROS-1, these features were inferred from point measurements (pressure, temperature, wind). After TIROS-1, they could be directly observed. The satellite's images showed that the theoretical models developed from surface observations were largely correct — the spiral structure of cyclones, the cloud-free zones of subsidence, the linear frontal bands — but also revealed features that had not been predicted: mesoscale convective complexes, cloud streets, von Karman vortex trails behind islands.",
+      "resonance": "The four-lobed gonad pattern of Aurelia aurita is itself a synoptic structure — a large-scale organization visible from above (or through the translucent bell from any angle). Just as TIROS-1 revealed that weather has structure at scales too large to see from the ground, dissecting a moon jellyfish reveals that its internal organization has structure at scales too large to see from any single section. Both systems require a comprehensive view — from orbit for weather, from above for the jellyfish — to perceive the organizing pattern."
+    },
+    {
+      "id": "spin-stabilization",
+      "concept": "Spin stabilization — passive attitude control through angular momentum",
+      "department": "spacecraft-engineering",
+      "level": "intermediate",
+      "tspb_layer": 3,
+      "tspb_section": "3.3",
+      "description": "Spin stabilization uses the gyroscopic effect to maintain a spacecraft's orientation in space. A spinning body resists changes to its angular momentum vector — the faster it spins, the more it resists. TIROS-1 spun at approximately 12 RPM (0.2 Hz, period 5 seconds) around its symmetry axis (the drum axis). This kept the spin axis fixed in inertial space, providing a stable platform for the cameras. The tradeoff: the cameras could only view Earth during the portion of each rotation when they faced downward — approximately 100 degrees out of 360 degrees, or about 28% of each revolution. During the remaining 72%, the cameras faced space. This duty-cycle limitation was acceptable because the slow frame rate (2 fps) meant the camera needed only a fraction of a second to capture each image. Spin stabilization requires no active control hardware (no reaction wheels, no thrusters, no control computers), making it lightweight and reliable. TIROS-1's spin axis orientation was set at launch and maintained passively for the entire mission — a testament to the elegance of the approach.",
+      "resonance": "Aurelia aurita's pulsing cycle is biological spin stabilization. The rhythmic contraction of the bell (0.5-2 Hz, comparable to TIROS-1's 0.2 Hz spin rate) provides both propulsion and stability — the periodic contraction generates a consistent axis of symmetry in the jellyfish's motion, resisting tumbling by external currents. Like TIROS-1, the jellyfish 'samples' its environment intermittently: during the power stroke (bell contraction), the oral arms are pulled inward, concentrating captured food; during the recovery stroke (bell relaxation), the oral arms extend outward, sampling new water. The duty cycle of feeding mirrors the duty cycle of TIROS-1's camera — brief sampling windows alternating with repositioning phases."
+    },
+    {
+      "id": "cloud-classification",
+      "concept": "Cloud classification — categorizing clouds by type and altitude",
+      "department": "atmospheric-science",
+      "level": "beginner",
+      "tspb_layer": 1,
+      "tspb_section": "1.1",
+      "description": "Cloud classification organizes clouds into types based on their altitude, shape, and the physical processes that form them. The basic categories (established by Luke Howard in 1802): cirrus (high, thin, ice crystal), stratus (layered, horizontal extent), cumulus (convective, vertical development), and nimbus (precipitation-producing). From the ground, cloud classification uses appearance and estimated altitude. From TIROS-1's orbital perspective, a new classification dimension emerged: the plan-view pattern. Cyclonic spirals, cellular convection, cloud streets (linear rolls), frontal bands, and isolated cumulonimbus towers all have distinctive signatures when viewed from above. TIROS-1 effectively added a second classification system — the satellite view — to the existing ground-based system. Modern cloud classification uses both perspectives. The World Meteorological Organization's International Cloud Atlas now includes satellite imagery as a standard reference, a direct legacy of TIROS-1.",
+      "resonance": "Moon jellyfish blooms have their own classification system based on density and distribution pattern — analogous to cloud classification. Dispersed blooms (comparable to scattered cumulus), dense aggregations (comparable to stratocumulus sheets), and tidal convergence lines (comparable to frontal cloud bands) are recognized patterns in Aurelia populations. Both classification systems describe how organisms (water droplets / jellyfish) aggregate in a fluid medium (atmosphere / ocean) under the influence of temperature gradients, currents, and boundary conditions."
+    },
+    {
+      "id": "crystal-oscillator",
+      "concept": "Crystal oscillator — quartz frequency reference for communications",
+      "department": "electronics",
+      "level": "beginner",
+      "tspb_layer": 2,
+      "tspb_section": "2.5",
+      "description": "A crystal oscillator uses the piezoelectric resonance of a quartz crystal to generate a highly stable frequency reference. Quartz is piezoelectric: mechanical stress produces voltage, and applied voltage produces mechanical deformation. A properly cut quartz wafer vibrates at a precise natural frequency determined by its dimensions and the crystallographic orientation of the cut. Quality factors of 10,000-100,000 make crystal oscillators stable to parts per million — orders of magnitude better than LC oscillators. TIROS-1 used crystal-controlled oscillators for its telemetry transmitters (108 MHz and 235 MHz) to ensure frequency stability sufficient for the ground stations to lock onto the signal. The progressive radio's crystal ladder filter uses the same principle from the receiver's perspective: crystals as frequency-selective elements rather than frequency-generating elements. The crystal's narrow resonance creates an extremely selective bandpass filter (3 kHz bandwidth at 455 kHz) — impossible with LC circuits alone.",
+      "resonance": "Quartz crystals vibrate at frequencies determined by their physical dimensions — a mechanical resonance encoded in the crystal's geometry. The moon jellyfish's pulsing frequency is similarly determined by the physical dimensions and elasticity of its bell — a biological resonance encoded in the organism's body plan. Both are oscillators whose frequency is set by their structure. The crystal's stability (parts per million over temperature) is extraordinary for a passive element; the jellyfish's pulsing frequency is similarly stable over its lifetime, varying primarily with temperature — both are temperature-sensitive oscillators with remarkably consistent natural frequencies."
+    },
+    {
+      "id": "atmospheric-observation",
+      "concept": "Atmospheric observation from space — the satellite meteorology revolution",
+      "department": "atmospheric-science",
+      "level": "beginner",
+      "tspb_layer": 1,
+      "tspb_section": "1.2",
+      "description": "Atmospheric observation from space uses satellite-mounted sensors to measure the Earth's atmosphere globally and continuously. Before TIROS-1, weather observation was limited to point measurements from weather stations (averaging one per 300 km on land, far less over oceans), weather balloons (launched twice daily from ~900 stations), aircraft reports, and ship observations. These measurements covered less than 30% of Earth's surface and were biased toward populated land areas. TIROS-1 demonstrated that a single satellite could photograph cloud patterns over the entire visible hemisphere in a few hours, providing weather information over oceans and remote areas where no observations existed. This was not an incremental improvement — it was a paradigm shift. Within a decade of TIROS-1, the global meteorological satellite network (TIROS, Nimbus, ESSA, ITOS, GOES) provided continuous global coverage that transformed weather forecasting from a 12-24 hour art to a 5-7 day science. Modern numerical weather prediction depends on satellite data for initial conditions — without satellites, forecast skill drops to zero beyond 2-3 days.",
+      "resonance": "The transition from point measurements to global observation that TIROS-1 enabled has a biological parallel in the evolution of vision. Simple photoreceptors (like the jellyfish's rhopalia) provide point measurements — light or dark at a single location. The evolution of the camera-type eye (vertebrates) provided spatial resolution — the ability to see patterns rather than just intensity. TIROS-1 was the atmospheric science community's evolution from 'point measurement photoreceptors' (weather stations) to 'camera-type eyes' (imaging satellites). The jellyfish still works with photoreceptors. The atmospheric science community upgraded to cameras — and the cameras happened to be mounted on a drum-shaped, spinning spacecraft that pulsed like a jellyfish."
+    }
+  ]
+}

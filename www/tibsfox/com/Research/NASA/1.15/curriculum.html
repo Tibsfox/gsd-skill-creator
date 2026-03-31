@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.15 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --atmo-deep: #060810; --atmo-mid: #101828;
+    --cloud-white: #E8E8F0; --cloud-dim: #808890;
+    --sky-blue: #4080CC; --sky-dim: #204068;
+    --storm-gray: #606878; --storm-dark: #303840;
+    --jelly-clear: #C0D0E0; --jelly-dim: #607080;
+    --ocean-dark: #081828; --space: #060810;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A3040;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(64,128,204,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(192,208,224,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(64,128,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,120,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(192,208,224,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(64,128,204,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--sky-blue); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--cloud-white); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--atmo-deep) 25%, var(--atmo-mid) 50%, var(--sky-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--sky-blue); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(64,128,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,204,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(64,128,204,0.12); border: 1px solid var(--sky-blue); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--sky-blue); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(64,128,204,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--sky-blue); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--cloud-white); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--sky-blue); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--cloud-white); }
+  em { color: var(--jelly-clear); }
+  code { color: var(--sky-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--sky-blue); text-decoration: none; }
+  a:hover { color: var(--cloud-white); }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  pre { background: rgba(6,8,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin: 1.5rem 0; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--jelly-clear); }
+  blockquote { border-left: 3px solid var(--sky-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(6,8,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .dept-card { background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .dept-card h3 { margin-top: 0; }
+  .dept-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .dept-meta .label { color: var(--sky-blue); font-weight: 500; }
+  .try-card { background: rgba(64,128,204,0.04); border: 1px solid var(--sky-dim); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .try-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; }
+  .try-meta span .label { color: var(--sky-blue); font-weight: 500; }
+  .nav-card { background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--sky-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--cloud-white); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--sky-blue); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.15 TIROS-1</a>
+  <span class="sep">/</span>
+  Track 4: Curriculum
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.15</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department mappings, TRY sessions, DIY projects, Fox Companies pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary:</span> Meteorology, Photography, Orbital Mechanics</span>
+      <span><span class="label">Organism:</span> Moon jellyfish</span>
+      <span><span class="label">Bird:</span> Marbled Murrelet</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Department Deposits</h2>
+
+    <div class="dept-card">
+      <h3>Meteorology (Primary)</h3>
+      <div class="dept-meta"><span class="label">Wing:</span> Satellite Meteorology, Synoptic Observation, Cloud Pattern Recognition</div>
+      <p>Before TIROS-1, meteorologists mapped the atmosphere from below. Weather stations measured temperature, pressure, humidity, and wind at single points. Radiosondes measured the vertical column twice daily at approximately 800 stations worldwide. From these scattered points, meteorologists interpolated the three-dimensional state of the atmosphere and drew weather maps by hand. The fundamental limitation was perspective: a surface observer sees weather locally. TIROS-1 inverted this: instead of inferring the pattern from the points, it photographed the pattern directly.</p>
+      <p>The first useful images captured: <strong>Comma clouds</strong> &mdash; the signature of mid-latitude cyclones, confirming the Norwegian cyclone model. <strong>Vortex streets</strong> &mdash; Von Karman vortex streets at atmospheric scale for the first time. <strong>The Intertropical Convergence Zone (ITCZ)</strong> &mdash; a visible, photographable structure circling the equator. <strong>Cloud-free zones</strong> &mdash; the subtropical high-pressure zones with knife-edge precision.</p>
+      <p>The Marbled Murrelet (<em>Brachyramphus marmoratus</em>, degree 15) is a small seabird that nests in old-growth forests but feeds at sea. For over a century, ornithologists knew it existed but could not find its nest &mdash; because the nest was 45 meters up in old-growth conifers, above the searchers&rsquo; perspective. TIROS-1 did the same for meteorology: the patterns were not hidden; they were above the observers&rsquo; perspective.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Photography/Imaging (Primary)</h3>
+      <div class="dept-meta"><span class="label">Wing:</span> Vidicon Camera Technology, Television from Orbit, Analog Image Capture</div>
+      <p>TIROS-1&rsquo;s cameras were RCA vidicon tubes. A vidicon tube works by the photoconductive effect: a thin film of antimony trisulfide (Sb<sub>2</sub>S<sub>3</sub>) on a transparent faceplate. Light strikes the photoconductive film; where bright, the film discharges; where dim, it retains charge. An electron beam scans across in a raster pattern (500 lines), and the resulting current is proportional to the light at each point.</p>
+      <p><strong>Wide-angle camera:</strong> 104-degree FOV, f/1.5, 6.9 mm focal length. Covered ~1,800 &times; 1,800 km. Resolution: ~3.6 km/line. <strong>Narrow-angle camera:</strong> 12-degree FOV, f/1.5, 59 mm focal length. Covered ~150 &times; 150 km. Resolution: ~300 m/line.</p>
+      <p>The choice of television over film was not obvious in 1960. Film had superior resolution (50 m vs. 3.6 km) but could not be transmitted electronically. Wexler&rsquo;s insight: weather forecasting requires timeliness, not resolution. A cloud image delivered 4 hours after capture is vastly more valuable than a high-resolution film returned 3 days later. Television provided real-time data. The 3.6-km resolution was adequate because clouds are large.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Orbital Mechanics (Primary)</h3>
+      <div class="dept-meta"><span class="label">Wing:</span> Low Earth Orbit Ground Track, Spin-Stabilization, J2 Perturbation</div>
+      <p>TIROS-1&rsquo;s orbit was determined by the Thor-Able launch vehicle and Cape Canaveral (28.5&deg;N). Launching due east exploited Earth&rsquo;s rotational velocity (~410 m/s). The resulting 48.4&deg; inclination meant the satellite could never see the poles.</p>
+      <p>Orbital parameters: perigee 693 km, apogee 756 km, period 99.2 min, nearly circular (e = 0.0044). Spin-stabilization at ~12 RPM kept cameras pointing toward Earth for only ~25% of each orbit. The duty cycle was further reduced by the 32-frame tape recorder limit. Despite wasting 75% of observing time, spin-stabilization was the right choice: it required no moving parts, no fuel, no sensors, and it worked for 78 days without a single pointing failure.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Marine Biology (Secondary)</h3>
+      <div class="dept-meta"><span class="label">Wing:</span> Scyphozoa &mdash; <em>Aurelia aurita</em> Life Cycle, Jellyfish Blooms, Planktonic Ecology</div>
+      <p><em>Aurelia aurita</em> has a two-stage life cycle connecting the ocean floor to the surface. <strong>Polyp stage:</strong> small (2-5 mm), sessile, attached to hard substrates, persists for years. <strong>Strobilation:</strong> in spring, polyps segment into stacks of ephyrae. <strong>Medusa stage:</strong> translucent bell 10-40 cm, feeds on zooplankton by mucus entrapment, pulsates at 1-5 cm/s. The connection to TIROS-1 is through observation and drift: Aurelia drifts with currents as TIROS-1 drifted in orbit &mdash; both passive travelers carried by forces they cannot control, both biological and electronic sensors of the same system.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Information Theory (Secondary)</h3>
+      <div class="dept-meta"><span class="label">Wing:</span> Shannon Entropy, Image Compression, Channel Capacity</div>
+      <p>TIROS-1 transmitted analog television images over an FM radio link. Raw data per image: ~1.5 Mbit. Shannon entropy per image: ~375 kbit (spatial redundancy reduces content by 4:1). Channel capacity of the FM link: ~666 kbps. Effective data rate: ~300-500 kbps. TIROS-1 operated at approximately 50-75% of the Shannon limit. A trained meteorologist extracted perhaps 500-1000 bits of actionable information per image &mdash; a compression ratio of ~375:1 from Shannon entropy to meteorological intelligence.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Music/Composition (Secondary)</h3>
+      <div class="dept-meta"><span class="label">Wing:</span> Rachmaninoff &mdash; Symphonic Weather, Musical Dynamics as Atmospheric Dynamics</div>
+      <p>Rachmaninoff was born April 1, 1873 &mdash; 87 years to the day before TIROS-1 launched. His music &mdash; the Piano Concertos, the Rhapsody on a Theme of Paganini, the Symphonic Dances &mdash; is characterized by sweeping melodic lines, massive orchestral climaxes, and harmonic tension that builds and releases like weather systems. A mid-latitude cyclone follows a life cycle: genesis, intensification, climax, occlusion. Rachmaninoff&rsquo;s Piano Concerto No. 2 follows a parallel arc: opening chords building like warm air rising along a front, the eruption of the first theme like a cyclone reaching maturity, the resolution like clearing skies. The physicist calls it instability. The meteorologist calls it a cyclone. The composer calls it a concerto.</p>
+    </div>
+
+    <h2>TRY Sessions</h2>
+
+    <div class="try-card">
+      <h3>TRY 1: Time-Lapse Cloud Photography</h3>
+      <div class="try-meta">
+        <span><span class="label">Duration:</span> 4-8 hours</span>
+        <span><span class="label">Difficulty:</span> Beginner</span>
+        <span><span class="label">Cost:</span> $0 (phone camera)</span>
+        <span><span class="label">Department:</span> Meteorology / Photography</span>
+      </div>
+      <p>Photograph the sky from a fixed location at regular intervals (every 1-5 minutes) over a full day. Assemble into a time-lapse. Look for: cloud growth (convection), motion (wind shear between layers), cloud streets (parallel rows aligned with wind), and anvils (deep convection reaching the tropopause). Your time-lapse shows weather from below; TIROS-1 showed weather from above. Same physics, different perspective. Compare your time-lapse to current GOES satellite imagery for the same day at <a href="https://www.star.nesdis.noaa.gov/GOES/">star.nesdis.noaa.gov/GOES/</a>.</p>
+    </div>
+
+    <div class="try-card">
+      <h3>TRY 2: <em>Aurelia aurita</em> Observation</h3>
+      <div class="try-meta">
+        <span><span class="label">Duration:</span> 1-2 hours</span>
+        <span><span class="label">Difficulty:</span> Beginner (OBSERVE ONLY)</span>
+        <span><span class="label">Cost:</span> $0 (beach) or aquarium admission</span>
+        <span><span class="label">Department:</span> Marine Biology</span>
+      </div>
+      <p>Identify <em>Aurelia aurita</em> by its four horseshoe-shaped gonads visible through the translucent bell. Count the pulsation rate (typically 10-20 beats/min in adults). Observe feeding: prey contacting oral arms, mucus strands, particles transported toward the central mouth. Note response to light: negative or positive phototaxis depending on conditions. Both <em>Aurelia</em> and clouds are water in different states of visibility &mdash; one condensed and visible, the other liquid and nearly invisible in its medium.</p>
+      <p style="color: var(--cloud-white); font-weight: 500;">Safety: Do not touch wild jellyfish. <em>Aurelia</em>&rsquo;s sting is mild but individual sensitivity varies. Misidentification with more dangerous species is possible. Observe from a distance. Leave no trace.</p>
+    </div>
+
+    <h2>DIY Projects</h2>
+
+    <div class="try-card">
+      <h3>DIY 1: Satellite Ground Station &mdash; Receive NOAA APT Images</h3>
+      <div class="try-meta">
+        <span><span class="label">Duration:</span> 4-8 hours</span>
+        <span><span class="label">Difficulty:</span> Intermediate</span>
+        <span><span class="label">Cost:</span> $30-50</span>
+        <span><span class="label">Department:</span> Communications Engineering / Meteorology</span>
+      </div>
+      <p>Build a ground station that receives real-time weather satellite images from NOAA polar-orbiting satellites (NOAA-15, -18, -19) using an RTL-SDR dongle (~$25-35) and a V-dipole antenna (built from wire, ~$5). The satellites transmit APT images at 137 MHz &mdash; a system operational since TIROS-8 in 1963, using nearly identical principles to TIROS-1&rsquo;s transmission.</p>
+      <p><strong>Antenna:</strong> Two copper wires, each 53.4 cm long (1/4 wavelength at 137 MHz), at 120&deg; apart. <strong>SDR Software:</strong> SDR# (Windows), GQRX (Linux), CubicSDR (Mac). <strong>Frequencies:</strong> NOAA-15: 137.620 MHz, NOAA-18: 137.9125 MHz, NOAA-19: 137.100 MHz. <strong>Tracking:</strong> Heavens-Above, N2YO, or Gpredict. A good pass is above 30&deg; elevation, lasting 10-15 minutes.</p>
+      <p>The decoded image shows two channels side by side: visible (clouds white, ocean dark) and infrared (warm surfaces dark, cold clouds bright). You are doing what NASA&rsquo;s ground stations did in 1960 &mdash; receiving weather data directly from space.</p>
+    </div>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <div class="dept-card">
+      <h3>FoxFiber Alignment</h3>
+      <p>TIROS-1&rsquo;s Automatic Picture Transmission concept (implemented on TIROS-8) is a model for FoxFiber&rsquo;s data distribution architecture. APT was designed so that any ground station with a simple antenna could receive data in real time &mdash; no centralized infrastructure required, no special access. The satellite broadcast continuously; anyone who could receive was welcome. This is the mesh networking philosophy: open access to data does not reduce its value; it multiplies it. APT has operated for 63 years on this model.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>SolarFox Alignment</h3>
+      <p>TIROS-1 was the first satellite designed to monitor Earth&rsquo;s energy balance. SolarFox&rsquo;s monitoring of photovoltaic systems tracks the same energy balance at smaller scale. TIROS-1&rsquo;s legacy systems (GOES, NOAA) now provide the solar irradiance data that SolarFox systems use for performance prediction: satellite-derived insolation maps, cloud cover forecasts, and aerosol optical depth measurements are inputs to solar energy production models.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Fox CapComm Alignment</h3>
+      <p><em>Aurelia aurita</em>&rsquo;s polyp-medusa life cycle maps to Fox CapComm&rsquo;s persistent-agent and ephemeral-agent architecture. The polyp is the persistent agent: attached, long-lived, producing new workers when conditions are favorable. The medusa is the ephemeral agent: mobile, task-focused, temporary. <em>Aurelia</em>&rsquo;s success over 500 million years suggests that the persistent-ephemeral architecture is robust across vastly different environments.</p>
+    </div>
+
+    <blockquote>&ldquo;Rachmaninoff composed the Piano Concerto No. 2 in 1901, emerging from a creative crisis so severe that he required hypnotherapy to regain the ability to compose. The concerto opens with eight slow chords &mdash; F minor, building &mdash; each chord adding a note, like the atmosphere accumulating moisture before a storm. By the time the orchestra enters, the potential energy is enormous. The first theme erupts like a cold front breaking through a warm boundary. The development section is the storm&rsquo;s mature phase: full orchestral forces, the piano churning sixteenth notes like convective cells cycling through updraft and downdraft. And then the recapitulation arrives, and the second theme in C major expands into the full orchestra, and the storm breaks, and the sky clears, and the concerto ends in a blaze of C major that sounds like every weather system in the history of the atmosphere resolving into blue sky at once. TIROS-1 watched this process 22,952 times in 78 days. Rachmaninoff scored it once, in C minor, and it has been performed continuously for 125 years. Both are the same observation: energy builds, transforms, releases, and the system returns to equilibrium. The atmosphere does it with water vapor and heat. The orchestra does it with dissonance and resolution. The physics is identical. Only the medium changes.&rdquo;</blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="papers.html">&larr; Papers</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Next Track</div>
+        <a href="simulation.html">Simulation &rarr;</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Mission Hub</div>
+        <a href="index.html">v1.15 TIROS-1</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.15 TIROS-1 + Aurelia aurita &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

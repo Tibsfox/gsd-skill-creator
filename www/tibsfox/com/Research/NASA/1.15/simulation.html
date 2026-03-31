@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Creative Arts | v1.15 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --atmo-deep: #060810; --atmo-mid: #101828;
+    --cloud-white: #E8E8F0; --cloud-dim: #808890;
+    --sky-blue: #4080CC; --sky-dim: #204068;
+    --storm-gray: #606878; --storm-dark: #303840;
+    --jelly-clear: #C0D0E0; --jelly-dim: #607080;
+    --ocean-dark: #081828; --space: #060810;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A3040;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(64,128,204,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(192,208,224,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(64,128,204,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,120,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(192,208,224,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(64,128,204,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--sky-blue); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--cloud-white); }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--atmo-deep) 25%, var(--atmo-mid) 50%, var(--sky-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--sky-blue); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(64,128,204,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,204,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(64,128,204,0.12); border: 1px solid var(--sky-blue); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--sky-blue); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(64,128,204,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--cloud-white); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--sky-blue); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--cloud-white); }
+  em { color: var(--jelly-clear); }
+  code { color: var(--sky-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--sky-blue); text-decoration: none; }
+  a:hover { color: var(--cloud-white); }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  pre { background: rgba(6,8,16,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem; margin: 1.5rem 0; overflow-x: auto; font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--jelly-clear); }
+  blockquote { border-left: 3px solid var(--sky-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(6,8,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  .sim-card { background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+  .sim-card h3 { margin-top: 0; }
+  .sim-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .sim-meta .label { color: var(--sky-blue); font-weight: 500; }
+  .nav-card { background: rgba(6,8,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--sky-blue); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--cloud-white); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--sky-blue); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.15 TIROS-1</a>
+  <span class="sep">/</span>
+  Track 5: Simulation &amp; Creative Arts
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.15</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts</h1>
+    <p class="subtitle">Build, train, visualize, and create &mdash; simulations, ML, shaders, fiction, and music</p>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <div class="sim-card">
+      <h3>A1. Python: TIROS-1 Image Geometry Calculator</h3>
+      <div class="sim-meta">
+        <span><span class="label">Difficulty:</span> Beginner-Intermediate</span>
+        <span><span class="label">Duration:</span> 2-3 hours</span>
+        <span><span class="label">Libraries:</span> numpy, matplotlib, cartopy (optional)</span>
+      </div>
+      <p>Computes the ground footprint of TIROS-1&rsquo;s cameras as a function of altitude, FOV, and viewing geometry. The student adjusts parameters and watches the ground footprint change in shape, size, and resolution. Four plots: ground footprint map, resolution vs altitude, spin-stabilization duty cycle, and coverage buildup over one day.</p>
+      <p><strong>Key learning moments:</strong> (1) The resolution-coverage tradeoff &mdash; wide-angle at 3.6 km covers 65&times; more area than narrow-angle at 300 m. (2) The spin-stabilization penalty &mdash; 71% of each rotation wasted pointing at space. (3) The latitude limitation &mdash; blank zones above 48.4&deg;N and below 48.4&deg;S.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A2. Python: Ground Track and Coverage Map</h3>
+      <div class="sim-meta">
+        <span><span class="label">Difficulty:</span> Intermediate</span>
+        <span><span class="label">Duration:</span> 3-4 hours</span>
+        <span><span class="label">Libraries:</span> numpy, matplotlib, cartopy (optional)</span>
+      </div>
+      <p>Propagates TIROS-1&rsquo;s orbit and plots the ground track on a world map, showing how Earth&rsquo;s rotation shifts each successive track westward and how coverage builds up over the 78-day mission. Four panels: single orbit, 24-hour (14.5 orbits), 78-day cumulative, and comparison of TIROS-1 vs sun-synchronous vs TIROS-9 orbits.</p>
+      <p><strong>Key learning moments:</strong> (1) Ground track regression &mdash; consecutive tracks shift 24.9&deg; westward. (2) Inclination determines everything &mdash; the contrast between 48.4&deg; and 97.8&deg; is stark. (3) The J2 effect &mdash; RAAN drifting at -3.3&deg;/day, a nuisance for TIROS-1 but deliberately exploited for sun-synchronous orbits.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A3. Web: Cloud Pattern Viewer (Simulated Vidicon Camera)</h3>
+      <div class="sim-meta">
+        <span><span class="label">Technology:</span> HTML5 Canvas + JavaScript</span>
+        <span><span class="label">Target:</span> Modern browser, 1920&times;1080</span>
+      </div>
+      <p>Interactive web application simulating the view from TIROS-1&rsquo;s vidicon camera. The image builds up line by line, mimicking the raster scan. The viewport rotates with 29% duty cycle (71% pointing at space). Procedural cloud generation using layered Perlin noise: cyclone comma patterns, cloud streets, ITCZ band, subtropical clear zones. Vidicon noise, vignetting, and raster scan lines for authenticity. The student experiences the frustration of spin-stabilization firsthand.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A4. Web: Orbital Coverage Calculator</h3>
+      <div class="sim-meta">
+        <span><span class="label">Technology:</span> HTML5 Canvas + JavaScript</span>
+        <span><span class="label">Target:</span> Modern browser, 1920&times;1080</span>
+      </div>
+      <p>Interactive calculator computing coverage statistics for any circular orbit. Presets: TIROS-1 (725 km, 48.4&deg;, 104&deg;, 1 sat), NOAA Polar (850 km, 98.7&deg;, 2 sats), GOES (35,786 km, 0&deg;, 2 sats), Starlink (550 km, 53&deg;, 1,584 sats), Full Coverage (auto-compute minimum constellation). Animated coverage accumulation with J2-perturbed ground tracks.</p>
+    </div>
+
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <div class="sim-card">
+      <h3>B1. Cloud Type Classification from Simulated Satellite Imagery</h3>
+      <div class="sim-meta">
+        <span><span class="label">Difficulty:</span> Intermediate</span>
+        <span><span class="label">Libraries:</span> numpy, torch, torchvision, matplotlib</span>
+        <span><span class="label">GPU:</span> Optional (small model trains on CPU)</span>
+      </div>
+      <p>Train a CNN to classify cloud types in simulated TIROS-1-resolution imagery. Training data: 50,000 labeled patches from GOES-16 archive downsampled to 3.6 km/pixel. Six classes: cumulonimbus, stratocumulus, cirrus, cumulus, stratus, clear sky. Expected accuracy: ~80-85%, confirming the 1960 design choice that 3.6-km resolution was sufficient for broad cloud classification.</p>
+    </div>
+
+    <h2>C. Computer Science &mdash; The Raster Scan Algorithm</h2>
+
+    <div class="sim-card">
+      <h3>C1. Vidicon Camera Raster Scan Simulation</h3>
+      <p>The vidicon tube produces an image by scanning an electron beam across a photoconductive target in a raster pattern &mdash; the same scan pattern used in broadcast television, CRT monitors, and laser printers. The algorithm converts a 2D image to a 1D signal (<code>V(t) = I(x, y)</code>) by sweeping left-to-right, top-to-bottom. The receiver reverses the scan to reconstruct the 2D image. TIROS-1&rsquo;s implementation: 500 lines, ~500 samples/line, 2-second frame time, 250 lines/s, ~125,000 samples/s.</p>
+      <p>The raster scan is a space-filling curve: it maps the 2D plane to a 1D line. The discontinuity at line boundaries (first sample of each line is far from last sample of previous line in the image) is why raster-scanned images compress better with 2D methods (JPEG) than with 1D methods (run-length encoding).</p>
+    </div>
+
+    <h2>D. Game Theory &mdash; Satellite Tasking</h2>
+
+    <div class="sim-card">
+      <h3>D1. The Weather Observation Resource Allocation Problem</h3>
+      <p>TIROS-1 had 32 tape recorder slots per orbit. Ground controllers decided: which 32 images to capture from hundreds of potential targets? This is an explore-exploit tradeoff:</p>
+      <ul>
+        <li><strong>Exploitation (~20 frames):</strong> Image known weather systems for updates. Value: moderate (incremental improvement).</li>
+        <li><strong>Exploration (~10 frames):</strong> Scan unobserved regions for new systems. Value: potentially high (early cyclone detection) or zero (clear skies).</li>
+        <li><strong>Calibration (~2 frames):</strong> Known features (coastlines) to verify pointing and quality.</li>
+      </ul>
+      <p>The allocation shifts with forecast confidence: high confidence favors exploration; low confidence favors exploitation. Modern satellites automate this with scheduling algorithms optimizing a utility function. TIROS-1&rsquo;s controllers did it by expert judgment.</p>
+    </div>
+
+    <h2>E. Creative Arts</h2>
+
+    <div class="sim-card">
+      <h3>E1. GLSL Shader: &ldquo;Cyclone from Orbit&rdquo;</h3>
+      <p>Fragment shader rendering a view of Earth from 700 km altitude with a procedurally generated cyclone system. TIROS-1 aesthetic: grayscale, slight grain, vidicon vignetting, visible raster scan lines. Layers: Earth surface (ocean dark gray, land medium gray), cloud field (logarithmic spiral bands, mesoscale streets, convective cells), camera effects (circular viewport, 500-line scan, noise). Animation: slow cyclone rotation, raster scan sweep every 2 seconds, occasional line noise artifacts.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>E2. Short Fiction: &ldquo;Twenty-Two Thousand, Nine Hundred Fifty-Two&rdquo;</h3>
+      <p>An 800-1200 word story told from the perspective of a meteorologist at the Weather Bureau in Suitland, Maryland, receiving the first TIROS-1 images on April 1, 1960. Twenty years of drawing weather maps by hand from surface reports and radiosonde data. The first image arrives by facsimile. The comma cloud they have been drawing from theory: it looks exactly like their maps &mdash; and nothing like their maps. The scale is wrong (bigger). The detail is wrong (more structure). The beauty is wrong (it&rsquo;s not supposed to be beautiful). The story ends with the image pinned to the wall next to two decades of hand-drawn maps.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>E3. Musical Connection: Rachmaninoff&rsquo;s Second Concerto as Weather Dynamics</h3>
+      <p>A structured listening guide mapping the three movements to the life cycle of a mid-latitude cyclone:</p>
+      <ul>
+        <li><strong>Movement I (Moderato, C minor):</strong> Genesis and intensification. Opening chords accumulate like warm air rising. First theme erupts like cyclone maturity. Development is the storm&rsquo;s passage.</li>
+        <li><strong>Movement II (Adagio sostenuto, E major):</strong> The warm sector. Overcast but gentle. The slow melody is the stratus deck &mdash; featureless but enveloping.</li>
+        <li><strong>Movement III (Allegro scherzando, C minor &rarr; C major):</strong> Cold front passage and clearing. Tempo quickens. Key shifts from minor to major as sky clears. Final C major chords: post-frontal high pressure, blue sky.</li>
+      </ul>
+    </div>
+
+    <h2>F. Problem-Solving &amp; GSD Improvements</h2>
+
+    <div class="sim-card">
+      <h3>F1. The Perspective Shift</h3>
+      <p>TIROS-1&rsquo;s lesson: the same system looked completely different from below vs. above. Surface observations revealed local conditions. Satellite observations revealed global patterns. Neither was wrong; each was incomplete. The general principle: <strong>when a problem seems intractable, change the observation point.</strong> Debugging a distributed system? Look at the aggregate, not individual logs. Analyzing a complex algorithm? Look at the statistical distribution, not individual traces. TIROS-1 didn&rsquo;t add new instruments. It measured the same thing &mdash; clouds &mdash; from a new perspective. The vortex streets were always there. Nobody could see them because nobody had climbed high enough to look.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>G1-G2. GSD Improvements</h3>
+      <p><strong>Observation Window Scheduling:</strong> TIROS-1&rsquo;s camera duty cycle problem (29% viewing, 32-frame tape limit) maps to agent scheduling with limited observation windows. A bandit-based allocation strategy (UCB, Thompson sampling) provides provably efficient solutions.</p>
+      <p><strong>Spin-Stabilization as Periodic Context:</strong> Agents operating in periodic-context environments receive context for a fraction of the time and must operate in the dark the rest. Skills that persist state across dark periods and rapidly orient during light periods improve agent performance in bursty, intermittent workflows.</p>
+    </div>
+
+    <blockquote>&ldquo;The Marbled Murrelet weighs 220 grams. It flies 80 km from the coast to reach its nesting tree. It carries a single fish in its bill for the entire flight, arriving before dawn to avoid corvids. TIROS-1, spinning twelve times per minute at 725 kilometers, could not have seen the Murrelet&rsquo;s nest. The resolution was 3.6 kilometers per line &mdash; the entire old-growth forest is smaller than one pixel. But TIROS-1 could see the weather that shapes the forest: the Pacific frontal systems that bring 250 cm of rain per year to the Olympic Peninsula, the stratus decks that keep the forest floor cool through summer, the marine layer that modulates coastal fog. The satellite sees the cause. The Murrelet lives the effect. The 22,952 images TIROS-1 captured in 78 days include the weather that waters the forest that grows the tree that holds the branch that hides the chick that eats the fish that swims the sea that the satellite photographs from orbit. It is all one system, seen from different altitudes.&rdquo;</blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="curriculum.html">&larr; Curriculum</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Mission Hub</div>
+        <a href="index.html">v1.15 Mission Hub &rarr;</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.16/index.html">v1.16 &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.15 TIROS-1 + Aurelia aurita &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>
