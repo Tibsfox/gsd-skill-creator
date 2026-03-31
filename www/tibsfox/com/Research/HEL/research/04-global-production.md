@@ -103,7 +103,7 @@ Three technological and commercial strategies are compressing the traditional ti
 
 ### 1. Modular Processing Plants
 
-The shift from custom-built, site-specific processing facilities to pre-fabricated, standardized modular units is the single most important enabler of fast-track helium development. Companies like Chart Industries (now part of Howden), Air Liquide Engineering, and Linde Engineering manufacture modular PSA and membrane separation systems that are:
+The shift from custom-built, site-specific processing facilities to pre-fabricated, standardized modular units is the single most important enabler of fast-track helium development. Companies like Chart Industries (which acquired Howden in 2023), Air Liquide Engineering, and Linde Engineering manufacture modular PSA and membrane separation systems that are:
 
 - **Pre-engineered:** Designed as standard products with well-characterized performance envelopes, eliminating 12-18 months of custom engineering.
 - **Factory-built:** Assembled and tested in controlled factory conditions, then shipped as complete skid-mounted units. This eliminates on-site construction risk and accelerates the schedule.

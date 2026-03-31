@@ -119,7 +119,7 @@ Japan is rebuilding its semiconductor manufacturing capability after decades of 
 ### Adjacent Market: Helium-Filled Hard Drives
 
 Seagate and Western Digital use helium-filled hard drives (helium's lower density vs. air reduces internal turbulence, enabling more platters per drive):
-- Single drive: approximately 5 liters of helium
+- Single drive: approximately 0.3-0.5 liters of helium
 - Global HDD helium consumption: approximately 10-15 million liters per year
 - Approximately 60% of helium HDD manufacturing is in Thailand, China, and Malaysia (not in the three primary target countries)
 - The remaining 40% is in the target region (Japan HDD operations) and the US
