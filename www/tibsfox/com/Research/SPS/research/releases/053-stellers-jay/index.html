@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 53&deg; &mdash; Steller&rsquo;s Jay &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Corvid alarm element card */
+    .corvid-card {
+      background: linear-gradient(135deg, #1A237E 0%, #3949AB 100%);
+      border: 2px solid #0D47A1;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .corvid-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C5CAE9;
+    }
+    .corvid-card p {
+      color: #E8EAF6;
+    }
+    .corvid-card strong {
+      color: #BBDEFB;
+    }
+
+    /* First corvid family card */
+    .family-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+      border: 2px solid #002171;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .family-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .family-card p {
+      color: #E3F2FD;
+    }
+    .family-card strong {
+      color: #90CAF9;
+    }
+
+    /* Mimicry card */
+    .mimicry-card {
+      background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .mimicry-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .mimicry-card p {
+      color: #F3E5F5;
+    }
+    .mimicry-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Steller history card */
+    .steller-card {
+      background: linear-gradient(135deg, #FFF8E1 0%, #FFD54F 100%);
+      border: 2px solid #F57F17;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .steller-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #E65100;
+    }
+
+    /* Intelligence card */
+    .intelligence-card {
+      background: linear-gradient(135deg, #E8EAF6 0%, #7986CB 100%);
+      border: 2px solid #283593;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .intelligence-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #1A237E;
+    }
+
+    /* Camp robber card */
+    .camper-card {
+      background: linear-gradient(135deg, #EFEBE9 0%, #A1887F 100%);
+      border: 2px solid #4E342E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .camper-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #3E2723;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.alarm { background: #1A237E; }
+    .theory-icon.family { background: #0D47A1; }
+    .theory-icon.mimicry { background: #4A148C; }
+    .theory-icon.steller { background: #E65100; }
+    .theory-icon.boldness { background: #4E342E; }
+    .theory-icon.caching { background: #2E7D32; }
+    .theory-icon.sentinel { background: #B71C1C; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">53&deg;</div>
+      <div class="release-title-block">
+        <h2>Steller&rsquo;s Jay</h2>
+        <div class="scientific">Cyanocitta stelleri</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      harsh shack-shack-shack alarm + Red-tailed Hawk mimic &mdash; the corvid alarm, FIRST CORVID IN THE ENGINE &mdash; 22nd family, Corvidae enters at last, the most anticipated arrival, the most intelligent passerine family on Earth, camp robber, exceptional vocal mimic, provincial bird of British Columbia, E=4, mountain conifer / mixed forest, ninth consecutive CSV substitution, Passeriformes continues for a 16th consecutive entry, THREE consecutive new families (51&ndash;53)
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Olympic Torrent Salamander</strong> (<em>Rhyacotriton olympicus</em>) at degree 53. Because the SPS Part B engine is birds-and-mammals only, Steller&rsquo;s Jay replaces it. The substitution preserves the original&rsquo;s <strong>E=4 energy level</strong> and <strong>mountain conifer habitat</strong>. Both species are year-round residents of Pacific Northwest mountain forests. This is the <strong>ninth consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53) &mdash; the engine remains deep in the amphibian belt of the original CSV.</p>
+        </div>
+
+        <!-- First Corvid Family Card -->
+        <div class="family-card">
+          <h3>FIRST CORVID &mdash; The 22nd Family &mdash; The Most Anticipated Arrival</h3>
+          <p>The Steller&rsquo;s Jay introduces <strong>Corvidae</strong> &mdash; the most intelligent passerine family on Earth. Tool use, facial recognition, future planning, play behavior, cultural transmission. Flagged as absent in retrospectives since degree 30+. Fifty-three degrees without a crow, a raven, or a jay. That silence ends now. <strong>Third consecutive new family</strong> (Certhiidae at 51, Cinclidae at 52, Corvidae at 53) &mdash; the longest new-family streak in the engine. Unlike Certhiidae and Cinclidae (monotypic singletons), Corvidae is a <strong>large family</strong>: American Crow, Common Raven, Gray Jay, Clark&rsquo;s Nutcracker are all future candidates. This is the beachhead.</p>
+        </div>
+
+        <!-- Corvid Alarm Element Card -->
+        <div class="corvid-card">
+          <h3>The 54th Acoustic Element: The Corvid Alarm</h3>
+          <p>A <strong>harsh, loud, rapidly repeated shack-shack-shack</strong> combined with an arsenal of mimicked raptor screams and a diverse repertoire of context-dependent calls. Named &ldquo;the corvid alarm&rdquo; for three resonances: (1) the alarm itself &mdash; the shack call is the primary alarm system of the PNW conifer forest; (2) the corvid intelligence &mdash; the alarm is context-dependent, modulated, and reflects cognitive assessment rather than reflex; (3) the corvid alarm as herald of a new cognitive dimension &mdash; the first species whose vocalizations reflect vocal learning, cognitive flexibility, and cross-species mimicry.</p>
+          <p>The corvid alarm does not compete with the environment (like the torrent-song, degree 52). It <strong>COMMANDS</strong> the environment. When the jay screams, every bird in the canopy freezes.</p>
+        </div>
+
+        <!-- Mimicry Card -->
+        <div class="mimicry-card">
+          <h3>The Mimic: Stealing the Hawk&rsquo;s Scream</h3>
+          <p>The Steller&rsquo;s Jay is an <strong>exceptional vocal mimic</strong> &mdash; its most famous imitation is the <strong>Red-tailed Hawk scream</strong>, so accurate that experienced birders are fooled. Also mimics Northern Goshawk, Cooper&rsquo;s Hawk, Osprey, woodpeckers, squirrels, and mechanical sounds. Mimicry is <strong>learned</strong> during a juvenile critical period &mdash; cultural transmission of vocal behavior. Carlson et al. (2017) found hawk mimicry occurs most often during early breeding season with mates present, not near predators or competitors &mdash; function may be <strong>mate-quality signaling</strong> rather than competitor deterrence. The first species in the engine whose vocal repertoire includes demonstrable cross-species mimicry.</p>
+        </div>
+
+        <!-- Steller History Card -->
+        <div class="steller-card">
+          <h3>Georg Wilhelm Steller &mdash; The Bird That Proved America</h3>
+          <p>On <strong>July 20, 1741</strong>, German naturalist Georg Wilhelm Steller was granted approximately <strong>ten hours</strong> on Kayak Island, Alaska, during Vitus Bering&rsquo;s Second Kamchatka Expedition. He collected a bold, crested blue jay and recognized it as a relative of the Blue Jay illustrated by Mark Catesby &mdash; proof that the expedition had reached the <strong>New World</strong>. A single jay proved a continental landfall. Steller died in 1746, aged 37, on the return journey. Six species still bear his name: Steller&rsquo;s Jay, Steller&rsquo;s Sea Eagle, Steller&rsquo;s Eider, Steller&rsquo;s Sea Lion, Steller&rsquo;s Sea Cow (extinct), and one additional. Johann Friedrich Gmelin formally described <em>Cyanocitta stelleri</em> in 1788.</p>
+        </div>
+
+        <!-- Intelligence Card -->
+        <div class="intelligence-card">
+          <h3>Corvid Intelligence: The Family That Thinks</h3>
+          <p>Corvidae demonstrates cognitive abilities rivaling great apes: <strong>tool use and manufacture</strong>, <strong>facial recognition</strong> of individual humans (remembered for years), <strong>future planning</strong> (caching food for tomorrow, not today), <strong>play behavior</strong> (ravens sliding down snowy rooftops), <strong>funeral behavior</strong> (crows gathering around dead conspecifics), and <strong>cultural transmission</strong> of learned behaviors across generations. The Steller&rsquo;s Jay specifically: context-dependent alarm calls, vocal mimicry requiring perceptual analysis and motor reproduction, caching and cache-pilfering demonstrating spatial memory and theory of mind, and measurable individual personality variation in boldness.</p>
+        </div>
+
+        <!-- Camp Robber Card -->
+        <div class="camper-card">
+          <h3>The Camp Robber</h3>
+          <p>Steller&rsquo;s Jays are <strong>famous for boldness around humans</strong> &mdash; stealing food from picnic tables, backpacks, and unattended plates at campgrounds across the Pacific Northwest. Not random theft but <strong>adaptive intelligence</strong>: individual jays learn productive campsites, remember feeding stations, and adjust approach based on human attentiveness (approaching when distracted, retreating when eye contact is made). The &ldquo;camp robber&rdquo; is a cognitively sophisticated bird exploiting a novel food source through observation, memory, and timing.</p>
+        </div>
+
+        <h2>Steller&rsquo;s Dark-Blue Jay</h2>
+        <p><em>Cyanocitta stelleri</em> &mdash; from Ancient Greek <em>kyanos</em> (&ldquo;dark blue&rdquo;) + <em>kitta</em> (&ldquo;jay&rdquo;) + <em>stelleri</em> honoring Georg Wilhelm Steller. Full translation: <strong>&ldquo;Steller&rsquo;s dark-blue jay.&rdquo;</strong> The genus <em>Cyanocitta</em> contains exactly two species: Steller&rsquo;s Jay (western N.A.) and Blue Jay (eastern N.A.) &mdash; the only two crested jays in North America, with barely overlapping ranges. Approximately <strong>18 subspecies</strong> from Alaska to Nicaragua. Pacific Northwest populations: nominate <em>stelleri</em> (darker, blue forehead streaks) and <em>carbonacea</em>. The <em>carlottae</em> subspecies of Haida Gwaii is almost entirely black above &mdash; the darkest form.</p>
+
+        <h2>The Sound: Screams, Rattles, and Stolen Calls</h2>
+        <p><strong>Shack call (alarm):</strong> Loud, harsh, rapidly repeated <em>shack-shack-shack-shack</em>. The defining sound. Frequency ~1.5&ndash;5.0 kHz, peak energy 2.0&ndash;4.0 kHz. Series of 3&ndash;8+ notes. Functions as general alarm, territorial declaration, and mobbing call &mdash; the entire forest pays attention.</p>
+        <p><strong>Other calls:</strong> <em>Wah</em> (nasal, 1.0&ndash;3.5 kHz, general purpose). <em>Rattle</em> (female-specific rapid trill, 2.0&ndash;5.0 kHz, pair interaction/nest defense). <em>Gleep</em> (male-specific, 3.0&ndash;6.0 kHz, courtship). <em>Creak</em> (male, muted whistle ending in pop). <em>Hoodle</em> (soft, breathy whistle, pair bond). <em>Pump-handle</em> (metallic rhythmic <em>skreeka</em>). <em>Song</em> (soft warble, rarely heard &mdash; the private music of a bird whose public voice is a scream).</p>
+        <p><strong>Mimicry:</strong> Red-tailed Hawk, Northern Goshawk, Cooper&rsquo;s Hawk, Osprey, other birds, squirrels, mechanical sounds. Learned during juvenile critical period. Open-ended repertoire that varies by individual and acoustic environment.</p>
+
+        <h3>Frequency Analysis</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Vocalization</th><th>Frequency Range</th><th>Duration</th><th>Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Shack call (alarm)</td><td>1.5&ndash;5.0 kHz (peak 2.0&ndash;4.0)</td><td>~100&ndash;200 ms/note</td><td>Alarm, territory, mobbing</td></tr>
+            <tr><td>Wah call</td><td>1.0&ndash;3.5 kHz</td><td>~150&ndash;300 ms</td><td>Contact, mild alarm</td></tr>
+            <tr><td>Rattle (female)</td><td>2.0&ndash;5.0 kHz</td><td>0.5&ndash;2.0 s</td><td>Pair interaction, nest defense</td></tr>
+            <tr><td>Gleep (male)</td><td>3.0&ndash;6.0 kHz</td><td>~80&ndash;150 ms</td><td>Courtship, pair bond</td></tr>
+            <tr><td>Hoodle whistle</td><td>1.5&ndash;3.5 kHz</td><td>~300&ndash;600 ms</td><td>Close-range contact</td></tr>
+            <tr><td>Song (soft warble)</td><td>1.0&ndash;6.0 kHz</td><td>30 s&ndash;several min</td><td>Pair bond, private</td></tr>
+            <tr><td>Red-tailed Hawk mimic</td><td>2.0&ndash;4.0 kHz</td><td>~1.5&ndash;3.0 s</td><td>Possible mate assessment</td></tr>
+          </tbody>
+        </table>
+
+        <h2>The Blue Flash: Plumage and Field ID</h2>
+        <p>The <strong>only crested jay west of the Rocky Mountains</strong>. Length 30&ndash;34 cm. Wingspan 45&ndash;48 cm. Weight <strong>100&ndash;140 g</strong> &mdash; the heaviest songbird in the engine since the Spotted Owl (degree 4). Prominent triangular crest stands straight up from the head. Head and upper body blackish-brown to charcoal; lower body, wings, and tail rich blue with darker barring. The blue is <strong>structural coloration</strong> (Rayleigh scattering), not pigment &mdash; crush a feather and the blue disappears. In PNW populations, faint blue streaks on forehead (not white like interior birds). Unmistakable: the combination of crest, size, two-toned dark/blue pattern, and raucous calls identifies it instantly.</p>
+
+        <h2>Sentinel of the Canopy</h2>
+        <p>The Steller&rsquo;s Jay functions as the <strong>primary avian sentinel</strong> of the PNW conifer forest. Its alarm calls carry information about predator type, location, movement, and threat severity. Other forest birds &mdash; chickadees (degree 3), nuthatches (degree 5), creepers (degree 51) &mdash; respond to jay alarms by freezing or diving for cover. The jay&rsquo;s vigilance is a <strong>public information service</strong>: one bird&rsquo;s alarm benefits the entire biotic community. Different alarm patterns for hawks vs. terrestrial predators vs. novel disturbances.</p>
+
+        <h2>Caching: The Inadvertent Forester</h2>
+        <p>Steller&rsquo;s Jays cache <strong>thousands of acorns and seeds</strong> each autumn using expandable throat pouches. Spatial memory allows retrieval weeks or months later. Unretrieved caches germinate &mdash; making jays among the most important <strong>dispersal agents for oaks and pines</strong> in Pacific Northwest forests. The jay is an ecosystem engineer whose food-hoarding behavior shapes forest composition across generations. Cache-pilfering behavior demonstrates theory of mind: jays that have been observed caching re-cache when the observer leaves.</p>
+
+        <h2>Family Tracker After Degree 53</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Picidae</td><td>21, 22</td><td>2</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td><strong>Corvidae</strong></td><td><strong>53</strong></td><td><strong>1 (NEW &mdash; 22nd family)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-two families across 54 entries. Three consecutive new families (51&ndash;53) &mdash; the longest streak. Corvidae enters as the most cognitively complex family in the engine. Sixteen consecutive Passeriformes (38&ndash;53), but the kind of passerine has shifted from 6-gram warblers to a 140-gram, hawk-mimicking cognitive heavyweight. 46 of 54 entries (85.2%) are Passeriformes.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon alarm">A</div>
+            <div class="theory-content">
+              <h4>The Corvid Alarm <span class="theory-level foundational">foundational</span></h4>
+              <p>The 54th acoustic element. A harsh shack-shack-shack combined with mimicked raptor screams. The first element defined by cognitive vocalization &mdash; calls reflecting intelligence, learning, and context-dependent modulation. Commands the forest rather than competing with it. Music-theory parallel: the conductor&rsquo;s call to attention.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon family">C</div>
+            <div class="theory-content">
+              <h4>First Corvidae &mdash; 22nd Family <span class="theory-level foundational">foundational</span></h4>
+              <p>The most anticipated family entry. Third consecutive new family (51&ndash;53). The most intelligent passerine family enters the engine. Unlike monotypic Certhiidae and Cinclidae, Corvidae is large and will grow. This is the beachhead. Music-theory parallel: the entire brass section entering the orchestra.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mimicry">M</div>
+            <div class="theory-content">
+              <h4>Vocal Mimicry as Cognitive Flexibility <span class="theory-level foundational">foundational</span></h4>
+              <p>Red-tailed Hawk mimic so accurate birders are fooled. Learned during juvenile critical period. Carlson et al. (2017): mimicry most common during breeding season with mate present, not near predators. First cross-species mimicry in the engine. Music-theory parallel: the quotation &mdash; one composition quoting another.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon steller">S</div>
+            <div class="theory-content">
+              <h4>Steller and the Proof of America <span class="theory-level foundational">foundational</span></h4>
+              <p>July 20, 1741: ten hours on Kayak Island, Alaska. Steller collected the jay, recognized it as a Blue Jay relative, and deduced the expedition had reached America. A jay proved a continent. Steller died at 37; six species bear his name. Music-theory parallel: the motif that identifies the key.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon boldness">B</div>
+            <div class="theory-content">
+              <h4>The Camp Robber <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Bold campsite thief exploiting human food through observation, memory, and timing. Individual personality variation in boldness. Approach varies with human attentiveness. Adaptive intelligence applied to a novel food source. Music-theory parallel: the jazz improviser &mdash; reading the room, acting in real time.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon caching">K</div>
+            <div class="theory-content">
+              <h4>Caching and Forest Ecology <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Thousands of acorns cached per season. Spatial memory for retrieval. Unretrieved caches germinate &mdash; the jay as inadvertent forester shaping forest composition. Cache-pilfering demonstrates theory of mind. Music-theory parallel: the seed motif &mdash; a small musical idea planted early that grows into the whole work.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon sentinel">N</div>
+            <div class="theory-content">
+              <h4>The Sentinel Network <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Primary avian sentinel of PNW conifer forest. Alarm calls carry information about predator type, location, and severity. Chickadees, nuthatches, and creepers respond. A public information service powered by corvid vigilance. Music-theory parallel: the concertmaster&rsquo;s cue &mdash; synchronizing the entire ensemble.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-052: American Dipper</strong>
+            <p>CONSECUTIVE DEGREES, ASCENDING ENERGY. The torrent-song (degree 52, E=3, environmental competition) yields to the corvid alarm (degree 53, E=4, cognitive vocalization). Both new families in consecutive degrees. The dipper fights the river; the jay commands the forest. Water to canopy. Endurance to authority.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-051: Brown Creeper</strong>
+            <p>THREE CONSECUTIVE NEW FAMILIES. Certhiidae (51), Cinclidae (52), Corvidae (53). The bark-spiraler, the underwater walker, the canopy screamer. E=1 to E=3 to E=4. Crypsis to competition to command. The longest new-family streak in the engine.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-003: Black-capped Chickadee</strong>
+            <p>SENTINEL AND CLIENT. The chickadee (degree 3) has its own graded alarm system (variable dee notes). But chickadees also respond to Steller&rsquo;s Jay alarms. Two species forming an interspecific alarm network. The jay is the loud sentinel; the chickadee the nuanced communicator.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-048: White-crowned Sparrow</strong>
+            <p>CULTURAL TRANSMISSION IN DIFFERENT FORMS. The sparrow (degree 48) transmits dialect through conservative song learning. The jay transmits mimicry through expansive vocal learning &mdash; acquiring new sounds from other species. Both demonstrate cultural transmission; the sparrow preserves, the jay expands.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>PREDATOR AND PREY DYNAMIC. The owl (degree 4) is a nocturnal predator of old-growth forest. The jay (degree 53) discovers roosting owls during the day and mobs them with alarm calls until they relocate. The owl that hooted in the night is harassed by the jay that screams in the day.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-043: American Goldfinch</strong>
+            <p>STATE/PROVINCIAL BIRD PAIR. The goldfinch (degree 43) is Washington&rsquo;s state bird. The Steller&rsquo;s Jay (degree 53) is British Columbia&rsquo;s provincial bird. Both E=4. One side of the border each. Yellow and open-country vs. blue and conifer forest. Two official birds, one bioregion.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-000: Great Blue Heron</strong>
+            <p>BOLDNESS AND PATIENCE. The heron (degree 0) stands motionless for hours &mdash; the embodiment of patience. The jay (degree 53) screams, steals, mobs, and vanishes &mdash; the embodiment of audacity. Wait for food to come, or go take it.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Steller&rsquo;s Jay documented across Washington and British Columbia. Year-round resident of coniferous and mixed forests. Common at all elevations where conifers are present. One of the most familiar and recognizable PNW birds.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Mountain conifer forest ecology. Corvid seed dispersal shaping oak and pine distribution. Interspecific alarm networks. Nest predation on small passerines. Simultaneously a forest shaper, forest protector, and forest threat.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Steller&rsquo;s Jay (<em>Cyanocitta stelleri</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Steller&rsquo;s Jay. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Steller&rsquo;s Jay.</li>
+          <li>National Geographic &mdash; Steller&rsquo;s Jay.</li>
+          <li>Wikipedia &mdash; &ldquo;Steller&rsquo;s jay.&rdquo;</li>
+          <li>Fite, K. R. &mdash; cited in BotW vocal behavior section for Steller&rsquo;s Jay call types.</li>
+          <li>Audubon &mdash; Steller&rsquo;s Jay Field Guide.</li>
+          <li>Wikipedia &mdash; &ldquo;Corvidae.&rdquo;</li>
+          <li>Carlson, N. V. et al. (2017). &ldquo;Propensity of Predator Mimicry in Steller&rsquo;s Jays.&rdquo; <em>Biology</em> 5(1):12. MDPI.</li>
+          <li>Carlson, N. V. et al. &mdash; reported in corvidresearch.blog.</li>
+          <li>BotW &mdash; Sounds and Vocal Behavior: Steller&rsquo;s Jay.</li>
+          <li>Emery, N. J. and Clayton, N. S. (2004). &ldquo;The mentality of crows.&rdquo; <em>Science</em> 306(5703): 1903&ndash;1907.</li>
+          <li>THE RATTLE CALL: A FEMALE-SPECIFIC VOCALIZATION IN STELLER&rsquo;S JAYS. Humboldt State University thesis.</li>
+          <li>Wikipedia &mdash; &ldquo;Georg Wilhelm Steller.&rdquo;</li>
+          <li>The People Behind the Birds Named for People: Georg Wilhelm Steller. Cornell Lab / Living Bird.</li>
+          <li>Steller, G. W. <em>Journal of a Voyage with Bering, 1741&ndash;1742.</em> Ed. O. W. Frost.</li>
+          <li>Buckerfields &mdash; &ldquo;Steller&rsquo;s Jay: The Provincial Bird of British Columbia.&rdquo;</li>
+          <li>Animal Diversity Web &mdash; <em>Cyanocitta stelleri</em>.</li>
+          <li>Sibley, D. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed.</li>
+          <li>Marzluff, J. M. and Angell, T. (2005). <em>In the Company of Crows and Ravens</em>. Yale University Press.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">53&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Corvid Alarm</div>
+          <div class="stat-detail">#54 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Harsh alarm, forest-commanding</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Corvidae</div>
+          <div class="stat-detail">NEW &mdash; 22nd family, FIRST CORVID</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Cyanocitta</em></div>
+          <div class="stat-detail">1st of genus &mdash; only western crested jay</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mountain Conifer</div>
+          <div class="stat-detail">Mixed forest, sea level&ndash;timberline</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round; some altitudinal migration</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">51 unique</div>
+          <div class="stat-detail">54 entries (0&ndash;53)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">22</div>
+          <div class="stat-detail">Corvidae enters as 22nd &mdash; 3rd consecutive</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">5</div>
+          <div class="stat-detail">16 consecutive Passeriformes (38&ndash;53)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Population</div>
+          <div class="stat-value">~3 million breeding</div>
+          <div class="stat-detail">IUCN Least Concern; CCS 10/20</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">100&ndash;140 g</div>
+          <div class="stat-detail">Heaviest songbird since degree 4</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">Upright Crest</div>
+          <div class="stat-detail">Only crested jay west of the Rockies</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Twig &amp; Mud Cup</div>
+          <div class="stat-detail">In conifers, 3&ndash;30 m, mud-cemented</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Key Adaptation</div>
+          <div class="stat-value">Vocal Mimicry</div>
+          <div class="stat-detail">Hawk mimic + 8+ call types</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Provincial Bird</div>
+          <div class="stat-value">British Columbia</div>
+          <div class="stat-detail">Paired with WA&rsquo;s American Goldfinch</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 053</p>
+  </footer>
+</body>
+</html>
