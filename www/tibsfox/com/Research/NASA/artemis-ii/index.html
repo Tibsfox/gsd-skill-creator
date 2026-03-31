@@ -164,16 +164,86 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   border-top: 1px solid var(--border);
 }
 
-@media(max-width:768px) {
-  .mission-header h1 { font-size:1.3rem; }
-  .clock-row { font-size:2.2rem; }
-  .telemetry-section { grid-template-columns: repeat(3, 1fr); }
-  .telem-value { font-size:1.1rem; }
-  .info-grid { grid-template-columns:1fr; }
+/* === LOD VISIBILITY CLASSES === */
+.lod-high { display: none; }
+.lod-medium { display: none; }
+@media (min-width: 1200px) { .lod-medium { display: block; } }
+@media (min-width: 1920px) { .lod-high { display: block; } }
+
+/* === CELESTIAL SUMMARY BAR === */
+.celestial-bar {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
 }
-@media(max-width:480px) {
+.celestial-cell {
+  background: var(--panel); padding: 0.7rem 1rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.celestial-icon { font-size: 1.3rem; flex-shrink: 0; opacity: 0.7; }
+.celestial-info { flex: 1; min-width: 0; }
+.celestial-label {
+  font-size: 0.6rem; color: var(--dim); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 0.15rem;
+}
+.celestial-value { font-size: 0.9rem; color: #fff; font-weight: 400; }
+.celestial-sub { font-size: 0.65rem; color: var(--dim); margin-top: 0.1rem; }
+.sun-progress-track {
+  width: 100%; height: 4px; background: rgba(255,255,255,0.06);
+  border-radius: 2px; margin-top: 0.3rem; overflow: hidden;
+}
+.sun-progress-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, #c4a35a, #e8c840);
+  transition: width 60s linear;
+}
+
+/* === RESPONSIVE BREAKPOINTS === */
+
+/* Large desktop (1920px+) */
+@media (min-width: 1920px) {
+  .telem-value { font-size: 1.8rem; }
+  .telem-cell { padding: 1.3rem 1rem; }
+  .info-grid { grid-template-columns: repeat(3, 1fr); gap: 1px; }
+  .info-grid.deep-dive { grid-template-columns: repeat(4, 1fr); }
+  .info-card { padding: 1.5rem; }
+  .celestial-cell { padding: 0.9rem 1.2rem; }
+  .celestial-value { font-size: 1rem; }
+}
+
+/* Ultra-wide (2560px+) */
+@media (min-width: 2560px) {
+  body { max-width: 1600px; margin: 0 auto; }
+  .clock-row { font-size: 4.5rem; }
+  .clock-row .sep { font-size: 3.2rem; }
+  .telem-value { font-size: 2rem; }
+  .telem-cell { padding: 1.5rem 1.2rem; }
+}
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+  .mission-header h1 { font-size: 1.3rem; }
+  .clock-row { font-size: 2.5rem; }
+  .clock-row .sep { font-size: 1.8rem; }
+  .telemetry-section { grid-template-columns: repeat(3, 1fr); }
+  .telem-value { font-size: 1.1rem; }
+  .info-grid { grid-template-columns: 1fr; }
+  .feeds-section { grid-template-columns: 1fr; }
+  .celestial-bar { grid-template-columns: 1fr; }
+  .celestial-cell { padding: 0.6rem 1rem; }
+}
+
+/* Phone (480px and below) */
+@media (max-width: 480px) {
   .telemetry-section { grid-template-columns: repeat(2, 1fr); }
-  .clock-row { font-size:1.8rem; }
+  .clock-row { font-size: 2rem; }
+  .clock-row .sep { font-size: 1.4rem; }
+  .clock-sub { font-size: 0.7rem; }
+  .clock-sub span { margin: 0 0.3rem; }
+  .feeds-section { grid-template-columns: 1fr; }
+  .celestial-bar { grid-template-columns: 1fr; }
+  .celestial-value { font-size: 0.85rem; }
+  .info-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -249,6 +319,37 @@ a:hover { color: #e0cc80; text-decoration:underline; }
     <div class="telem-label">Acceleration</div>
     <div class="telem-value red" id="t-gforce">0.0</div>
     <div class="telem-unit">g</div>
+  </div>
+</div>
+
+<!-- === CELESTIAL SUMMARY === -->
+<div class="celestial-bar" id="celestial-bar">
+  <div class="celestial-cell">
+    <div class="celestial-icon" aria-hidden="true" id="moon-icon">&#x1F311;</div>
+    <div class="celestial-info">
+      <div class="celestial-label">Moon Phase</div>
+      <div class="celestial-value" id="cel-moon-phase">--</div>
+      <div class="celestial-sub" id="cel-moon-illum">-- illumination</div>
+    </div>
+  </div>
+  <div class="celestial-cell">
+    <div class="celestial-icon" aria-hidden="true">&#x2600;</div>
+    <div class="celestial-info">
+      <div class="celestial-label">Sun Cycle (Mukilteo PDT)</div>
+      <div class="celestial-value" id="cel-sun-status">--</div>
+      <div class="sun-progress-track">
+        <div class="sun-progress-fill" id="cel-sun-fill" style="width:0%"></div>
+      </div>
+      <div class="celestial-sub" id="cel-sun-times">Rise 6:49 AM / Set 7:39 PM</div>
+    </div>
+  </div>
+  <div class="celestial-cell">
+    <div class="celestial-icon" aria-hidden="true">&#x1F4E1;</div>
+    <div class="celestial-info">
+      <div class="celestial-label">Light Delay to Moon</div>
+      <div class="celestial-value" id="cel-light-moon">--</div>
+      <div class="celestial-sub">one-way at c = 299,792 km/s</div>
+    </div>
   </div>
 </div>
 
@@ -374,7 +475,7 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 </div>
 
 <!-- === DEEP DIVE RESEARCH === -->
-<div class="info-grid" style="margin-top:1px;">
+<div class="info-grid deep-dive" style="margin-top:1px;">
   <div class="info-cell">
     <div class="info-title">Deep Dive</div>
     <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
@@ -403,6 +504,12 @@ a:hover { color: #e0cc80; text-decoration:underline; }
       <span style="color:var(--dim);">12:50 PM EDT</span> &mdash; Official broadcast<br>
       <span style="color:var(--dim);">Platforms:</span> NASA+, YouTube, Prime<br>
       <span style="color:var(--dim);">Full Moon on launch day</span>
+    </div>
+  </div>
+  <div class="info-cell lod-high" id="muk-weather-cell">
+    <div class="info-title">Mukilteo Weather</div>
+    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;" id="muk-weather-content">
+      <div style="color:var(--dim);">Loading from status.json...</div>
     </div>
   </div>
 </div>
@@ -751,6 +858,8 @@ function fetchMissionData() {
       }
       // Update source bar
       document.getElementById('source-bar').textContent = 'Telemetry: LIVE via tibsfox.com \u00B7 Last update: ' + (data.updated || 'now');
+      // Update Mukilteo weather panel if data available
+      updateMukWeather();
     })
     .catch(function(){
       document.getElementById('data-dot').className = 'feed-dot standby';
@@ -840,7 +949,8 @@ function drawTrajectory() {
   var ctx = canvas.getContext('2d');
   var W = canvas.parentElement.offsetWidth;
   var dpr = window.devicePixelRatio || 1;
-  var h = Math.floor(W * 0.38);
+  var ratio = W >= 2560 ? 0.5 : W >= 1920 ? 0.45 : 0.38;
+  var h = Math.floor(W * ratio);
   canvas.width = W * dpr;
   canvas.height = h * dpr;
   canvas.style.height = h + 'px';
@@ -1065,10 +1175,104 @@ function drawTrajectory() {
   }
 }
 
+// === CELESTIAL SUMMARY BAR ===
+function updateCelestialBar() {
+  var now = new Date();
+
+  // Moon phase — reuse synodic calculation from updateMoon
+  var JD = now.getTime() / 86400000 + 2440587.5;
+  var refNewMoon = 2451550.1;
+  var synodicMonth = 29.53059;
+  var phase = ((JD - refNewMoon) % synodicMonth) / synodicMonth;
+  if (phase < 0) phase += 1;
+  var illum = (1 - Math.cos(phase * 2 * Math.PI)) / 2;
+  var names = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
+  var idx = Math.floor(phase * 8) % 8;
+  // Moon emoji per phase
+  var moonEmojis = ['\uD83C\uDF11','\uD83C\uDF12','\uD83C\uDF13','\uD83C\uDF14','\uD83C\uDF15','\uD83C\uDF16','\uD83C\uDF17','\uD83C\uDF18'];
+  var moonIconEl = document.getElementById('moon-icon');
+  if (moonIconEl) moonIconEl.textContent = moonEmojis[idx];
+  document.getElementById('cel-moon-phase').textContent = names[idx];
+  document.getElementById('cel-moon-illum').textContent = (illum * 100).toFixed(1) + '% illumination';
+
+  // Sun progress — Mukilteo PDT, sunrise 6:49 AM, sunset 7:39 PM
+  // Convert current time to PDT (UTC-7)
+  var pdtMs = now.getTime() - 7 * 3600000;
+  var pdtDate = new Date(pdtMs);
+  var pdtHour = pdtDate.getUTCHours();
+  var pdtMin = pdtDate.getUTCMinutes();
+  var pdtDecimal = pdtHour + pdtMin / 60; // hours as decimal
+
+  var sunriseH = 6 + 49 / 60;   // 6:49 AM = 6.817
+  var sunsetH = 19 + 39 / 60;   // 7:39 PM = 19.65
+  var dayLength = sunsetH - sunriseH; // hours of daylight
+
+  var sunEl = document.getElementById('cel-sun-status');
+  var sunFill = document.getElementById('cel-sun-fill');
+  var sunTimes = document.getElementById('cel-sun-times');
+
+  if (pdtDecimal < sunriseH) {
+    // Before sunrise
+    var minsToRise = Math.floor((sunriseH - pdtDecimal) * 60);
+    sunEl.textContent = 'Before sunrise (' + minsToRise + ' min)';
+    sunFill.style.width = '0%';
+    sunFill.style.background = 'rgba(255,255,255,0.1)';
+  } else if (pdtDecimal > sunsetH) {
+    // After sunset
+    var minsSinceSet = Math.floor((pdtDecimal - sunsetH) * 60);
+    sunEl.textContent = 'After sunset (' + minsSinceSet + ' min ago)';
+    sunFill.style.width = '100%';
+    sunFill.style.background = 'rgba(100,100,140,0.3)';
+  } else {
+    // Daytime — calculate progress
+    var pct = ((pdtDecimal - sunriseH) / dayLength) * 100;
+    var hNow = Math.floor(pdtDecimal);
+    var mNow = Math.floor((pdtDecimal - hNow) * 60);
+    var ampm = hNow >= 12 ? 'PM' : 'AM';
+    var h12 = hNow > 12 ? hNow - 12 : (hNow === 0 ? 12 : hNow);
+    sunEl.textContent = h12 + ':' + String(mNow).padStart(2, '0') + ' ' + ampm + ' \u2014 ' + pct.toFixed(0) + '% of daylight';
+    sunFill.style.width = pct.toFixed(1) + '%';
+    sunFill.style.background = pct < 15 || pct > 85
+      ? 'linear-gradient(90deg, #c4713a, #e8a040)' // golden hour
+      : 'linear-gradient(90deg, #c4a35a, #e8c840)';
+  }
+  sunTimes.textContent = 'Rise 6:49 AM / Set 7:39 PM PDT \u00B7 ' + dayLength.toFixed(1) + 'h daylight';
+
+  // Light delay to Moon
+  var dist = moonDistKm();
+  var lightSec = dist / SPEED_OF_LIGHT;
+  document.getElementById('cel-light-moon').textContent = lightSec.toFixed(3) + ' s (' + (lightSec / 60).toFixed(2) + ' min)';
+}
+
+// === MUKILTEO WEATHER (from status.json liveData) ===
+function updateMukWeather() {
+  var el = document.getElementById('muk-weather-content');
+  if (!el) return;
+  if (!liveData || !liveData.mukilteo_weather) {
+    // Fallback: show link to observatory
+    el.innerHTML =
+      '<div style="color:var(--dim); margin-bottom:0.3rem;">Live data from status.json</div>' +
+      '<div class="feed-row"><span class="fk">Status</span><span class="fv" style="color:var(--dim);">Awaiting data feed</span></div>' +
+      '<div style="margin-top:0.5rem;"><a href="../../MUK/index.html">Mukilteo Observatory &rarr;</a></div>';
+    return;
+  }
+  var mw = liveData.mukilteo_weather;
+  var rows = '';
+  if (mw.temperature != null) rows += '<div class="feed-row"><span class="fk">Temp</span><span class="fv">' + mw.temperature + '</span></div>';
+  if (mw.conditions) rows += '<div class="feed-row"><span class="fk">Conditions</span><span class="fv">' + mw.conditions + '</span></div>';
+  if (mw.wind) rows += '<div class="feed-row"><span class="fk">Wind</span><span class="fv">' + mw.wind + '</span></div>';
+  if (mw.humidity != null) rows += '<div class="feed-row"><span class="fk">Humidity</span><span class="fv">' + mw.humidity + '</span></div>';
+  if (mw.visibility) rows += '<div class="feed-row"><span class="fk">Visibility</span><span class="fv">' + mw.visibility + '</span></div>';
+  if (mw.score != null) rows += '<div class="feed-row"><span class="fk">Weather Score</span><span class="fv" style="color:var(--artemis-gold);">' + mw.score + '/100</span></div>';
+  rows += '<div style="margin-top:0.4rem;"><a href="../../MUK/index.html">Full Observatory &rarr;</a></div>';
+  el.innerHTML = rows;
+}
+
 // === INIT ===
 updateClock();
 updateTelemetry();
 updateMoon();
+updateCelestialBar();
 fetchWeather();
 fetchDSN();
 fetchMissionData();
@@ -1080,9 +1284,11 @@ setInterval(updateClock, 1000);
 setInterval(updateTelemetry, 1000);
 setInterval(renderTimeline, 30000);
 setInterval(updateMoon, 60000);
-setInterval(fetchWeather, 300000);    // 5 min
-setInterval(fetchDSN, 60000);         // 1 min
-setInterval(fetchMissionData, 30000); // 30 sec
+setInterval(updateCelestialBar, 60000);  // 1 min
+setInterval(fetchWeather, 300000);       // 5 min
+setInterval(fetchDSN, 60000);            // 1 min
+setInterval(fetchMissionData, 30000);    // 30 sec
+setInterval(function(){ updateMukWeather(); }, 30000); // after mission data
 setInterval(drawTrajectory, 2000);
 window.addEventListener('resize', drawTrajectory);
 </script>
