@@ -1,0 +1,12 @@
+{
+  "mission": "1.190",
+  "title": "Free-Return Trajectory Simulator",
+  "department": "orbital-mechanics",
+  "wing": "Trajectory Design",
+  "difficulty": "intermediate",
+  "estimated_cost_usd": 0,
+  "materials": ["Python 3", "poliastro library", "matplotlib", "numpy"],
+  "data_source": "Artemis II mission parameters (mass, delta-v, orbital elements)",
+  "builds_toward": "Aerospace consulting, STEM education, mission planning tools",
+  "description": "Simulate a free-return lunar trajectory using real Artemis II parameters. Vary TLI burn delta-v and observe how the trajectory changes — does it still come home? Plot Earth, Moon, and spacecraft positions. Compare your result to NASA's published trajectory."
+}

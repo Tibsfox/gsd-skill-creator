@@ -1,0 +1,54 @@
+{
+  "source": "Seattle 360 Engine — Music Theory Knowledge Nodes",
+  "application": "Agent behavior mathematical functions in vehicle.js",
+  "functions": [
+    {
+      "concept": "ii-V-I progression",
+      "s36_degree": 0,
+      "s36_artist": "Quincy Jones",
+      "math": "Three-phase cycle: approach (ii, tension building), dominant (V, peak tension), tonic (I, resolution)",
+      "application": "Agent foraging cycle: scan → pursue → consume. Modeled as sinusoidal with 3-phase envelope.",
+      "formula": "activity(t) = sin(2πt/T) where T varies by energy level"
+    },
+    {
+      "concept": "Tritone substitution",
+      "s36_degree": 0,
+      "s36_artist": "Quincy Jones",
+      "math": "Replace expected chord with chord a tritone (√2 frequency ratio) away — same tritone interval, different root",
+      "application": "Behavioral inversion: occasionally swap seek/flee weights. Agent pursues what it normally avoids.",
+      "formula": "P(inversion) = 0.002 per frame, duration = energy × 60 frames"
+    },
+    {
+      "concept": "Polyrhythm",
+      "s36_degree": 21,
+      "s36_artist": "Polyrhythmics",
+      "math": "Multiple simultaneous rhythms with incommensurate periods create patterns that never exactly repeat",
+      "application": "Agent activity cycles: solar (24h) + tidal (12.4h) + lunar (29.5d) + seasonal (365d). Each species has its own period offset.",
+      "formula": "activity = Π sin(2πt/T_i + φ_i) for each cycle i"
+    },
+    {
+      "concept": "Anti-folk / Pioneer break",
+      "s36_degree": 49,
+      "s36_artist": "Kimya Dawson",
+      "math": "Rule-breaking as generative principle — pioneer species colonize spaces where established rules don't apply",
+      "application": "Fireweed and alder plants germinate on bare ground where other plants won't. Agents with pioneer flag ignore normal territory constraints.",
+      "formula": "germination_prob = base × (1 + bare_ground_bonus × 3)"
+    },
+    {
+      "concept": "Energy levels E=1-5",
+      "s36_degree": "all",
+      "s36_artist": "all",
+      "math": "Amplitude modulation of behavioral dynamics. E=1 is steady state, E=5 is maximum dynamic range.",
+      "application": "Maps to agent speed multiplier, perception radius, reproduction rate. Higher energy = more volatile behavior.",
+      "formula": "speed_mod = 0.7 + E × 0.06, perception_mod = 0.8 + E × 0.04"
+    },
+    {
+      "concept": "Dawn chorus (circadian harmonic)",
+      "s36_degree": "diurnal species",
+      "s36_artist": "multiple",
+      "math": "Sinusoidal activity envelope keyed to sun altitude. Peak at civil twilight (-6° to +3°).",
+      "application": "Diurnal agents surge at dawn, nocturnal agents surge at dusk (tritone inversion of diurnal pattern).",
+      "formula": "circadian = clamp(map(sunAlt, -12, 20, 0.05, 1.0)) × dawn_boost"
+    }
+  ]
+}

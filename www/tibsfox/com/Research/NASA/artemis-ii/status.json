@@ -1,26 +1,31 @@
 {
-  "updated": "2026-03-31T00:00:00Z",
-  "source": "manual",
+  "updated": "2026-03-31T09:45:00Z",
+  "source": "sweep",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:24:00Z",
     "phase": "prelaunch",
-    "status": "Launch countdown in progress — T-46 hours",
+    "status": "Launch countdown — T-37 hours — all systems GO",
     "go_probability": 80
   },
-  "telemetry": null,
-  "dsn": {
-    "active": false,
-    "dishes": [],
-    "data_rate_bps": 0
+  "weather": {
+    "kpae": {"temp_c": 3, "dewpoint_c": -1, "wind_dir": 10, "wind_kmh": 7.4, "humidity": 75, "pressure_hpa": 1014.9, "visibility_m": 16093, "conditions": "Clear", "spread_c": 4},
+    "kxmr": {"temp_c": 20.4, "dewpoint_c": 16.8, "wind_dir": 120, "wind_kmh": 14.8, "humidity": 80, "conditions": "Clear"}
   },
+  "space_weather": {
+    "kp_index": 2.33,
+    "g_scale": "G0",
+    "s_scale": "S0",
+    "r_scale": "R0",
+    "aurora_risk": "none"
+  },
+  "telemetry": null,
   "announcements": [
+    {"time": "2026-03-31T09:45:00Z", "text": "Sweep: T-37h, all GO, Kp=2.3, KSC clear 20C, KPAE clear 3C"},
     {"time": "2026-03-30T22:13:00Z", "text": "Launch countdown begins at KSC"},
     {"time": "2026-03-30T14:56:00Z", "text": "Weather forecast: 80% favorable for April 1 launch"},
-    {"time": "2026-03-29T14:49:00Z", "text": "Final preparations underway for Moon mission"},
     {"time": "2026-03-27T20:10:00Z", "text": "Crew arrives at Kennedy Space Center"},
-    {"time": "2026-03-25T21:11:00Z", "text": "Teams continue preparations at Launch Pad 39B"},
     {"time": "2026-03-20T15:28:00Z", "text": "SLS arrives at Pad 39B after 11-hour rollout"}
   ]
 }

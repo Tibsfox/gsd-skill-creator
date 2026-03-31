@@ -1,0 +1,76 @@
+{
+  "mission": "1.190",
+  "collected_during": "2026-03-31 to 2026-04-11",
+  "papers": [
+    {
+      "id": 1,
+      "title": "Radiation risk mitigation in human space exploration",
+      "source": "European Physical Journal Plus",
+      "year": 2025,
+      "url": "https://link.springer.com/article/10.1140/epjp/s13360-025-07199-8",
+      "type": "journal",
+      "track": "radiation",
+      "connection": "GCR + SPE beyond Van Allen belts — Artemis II crew exposure"
+    },
+    {
+      "id": 2,
+      "title": "Deep Space Radiation Measurements and Crew Radiation Protection for the NASA Artemis Program",
+      "source": "NASA NTRS",
+      "year": 2025,
+      "url": "https://ntrs.nasa.gov/citations/20250002757",
+      "type": "nasa-official",
+      "track": "radiation",
+      "connection": "Artemis I radiation data informing Artemis II crew protection"
+    },
+    {
+      "id": 3,
+      "title": "The astronaut health experiments of Artemis II",
+      "source": "The Planetary Society, Planetary Radio",
+      "year": 2026,
+      "url": "https://www.planetary.org/planetary-radio/2026-astronaut-health-experiments-artemis-ii",
+      "type": "media",
+      "track": "crew-health",
+      "connection": "AVATAR + ARCHAR payload details"
+    },
+    {
+      "id": 4,
+      "title": "Free-Space Laser Communications XXXVIII",
+      "source": "SPIE Volume 13885",
+      "year": 2026,
+      "url": "https://spie.org/Publications/Proceedings/Volume/13885",
+      "type": "proceedings",
+      "track": "optical-comms",
+      "connection": "GPU receivers, DSOC results from Psyche at 3 AU, ground terminals"
+    },
+    {
+      "id": 5,
+      "title": "Advancing Laser Communication for Mars Orbital Missions",
+      "source": "AIAA",
+      "year": 2025,
+      "url": "https://arc.aiaa.org/doi/pdf/10.2514/6.2025-99519",
+      "type": "conference",
+      "track": "optical-comms",
+      "connection": "Next-gen optical comms beyond O2O"
+    },
+    {
+      "id": 6,
+      "title": "Heat shield safety concerns raise stakes for NASA's Artemis II moon mission",
+      "source": "phys.org / The Conversation",
+      "year": 2026,
+      "url": "https://phys.org/news/2026-03-shield-safety-stakes-nasa-artemis.html",
+      "type": "media",
+      "track": "heat-shield",
+      "connection": "AVCOAT char loss, skip-to-direct reentry change"
+    },
+    {
+      "id": 7,
+      "title": "Artemis II Is Not Safe to Fly",
+      "source": "Idle Words",
+      "year": 2026,
+      "url": "https://idlewords.com/2026/03/artemis_ii_is_not_safe_to_fly.htm",
+      "type": "analysis",
+      "track": "heat-shield",
+      "connection": "Independent critique — Challenger Rule: safety concerns get escalation"
+    }
+  ]
+}
