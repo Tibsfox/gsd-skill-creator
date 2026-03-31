@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curriculum: College of Knowledge | v1.16 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --pad-deep: #0A0808; --pad-mid: #1A1410;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --redstone-red: #CC4020; --redstone-dim: #662010;
+    --pad-gray: #606060; --pad-light: #909090;
+    --parachute-orange: #E88020; --abort-red: #FF0000;
+    --space: #080808; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2020;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(204,64,32,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(204,64,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(204,64,32,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--pad-deep) 25%, var(--pad-mid) 50%, var(--redstone-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--redstone-red); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(204,64,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,64,32,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(204,64,32,0.12); border: 1px solid var(--redstone-red); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--parachute-orange); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(204,64,32,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--parachute-orange); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  h4 { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--mercury-silver); margin: 1.25rem 0 0.5rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--parachute-orange); }
+  em { color: var(--pad-light); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; }
+  a:hover { color: #fff; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  pre {
+    background: rgba(10,8,8,0.8); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.25rem; margin: 1.5rem 0; overflow-x: auto;
+    font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--mercury-silver);
+  }
+  blockquote {
+    border-left: 3px solid var(--redstone-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(8,8,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+  .dept-card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin: 1.5rem 0;
+  }
+  .dept-card h3 { margin-top: 0; }
+  .nav-card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.16 Mercury-Redstone 1</a>
+  <span class="sep">/</span>
+  Track 4: Curriculum
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.16</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 4</span>
+    </div>
+    <h1>College of Knowledge Curriculum</h1>
+    <p class="subtitle">Department Mappings, TRY Sessions, DIY Projects, Fox Companies Pathways</p>
+    <div class="meta-row">
+      <span><span class="label">Primary Departments:</span> Electrical Engineering, Systems Engineering, Failure Analysis</span>
+      <span><span class="label">Secondary:</span> Biology/Developmental, Mathematics, Literature/Satire</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Department Deposits</h2>
+
+    <div class="dept-card">
+      <h3>Electrical Engineering (Primary)</h3>
+      <p><strong>Wing:</strong> Connector Design, Sneak Circuits, Interface Integrity</p>
+      <p>The tail plug connector on Mercury-Redstone 1 was not a high-technology item. It was a multi-pin electrical connector &mdash; the same kind of component used in every industrial application from telephone switchboards to factory machinery. Its failure was an interface failure. The connector sat at the boundary between two organizations (NASA&rsquo;s Space Task Group and ABMA) and between two engineering traditions (manned spaceflight, which was new, and ballistic missiles, which were established). Neither organization independently verified that the connector would work correctly with the capsule&rsquo;s weight on top of the booster. The interface was assumed, not analyzed.</p>
+      <p>This is the most common source of system failures in engineering: not component failures but interface failures &mdash; the components don&rsquo;t work correctly together because the assumptions at the interface are inconsistent. MR-1 is the textbook example.</p>
+      <p>The Red-tailed Hawk (<em>Buteo jamaicensis</em>, degree 16) &mdash; hunting technique is precisely sequenced: perch, scan, identify prey, launch, dive, extend talons, strike, grip. If the hawk&rsquo;s dive is too slow (analogous to MR-1&rsquo;s slow rise rate), the talons may not engage properly. Young hawks learning to hunt experience poorly timed strikes frequently. The learning process is calibrating the connector to actual operating conditions.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Systems Engineering (Primary)</h3>
+      <p><strong>Wing:</strong> Failure Analysis, Root Cause Investigation, Corrective Action</p>
+      <p>The MR-1 failure investigation followed what would become the standard NASA failure analysis methodology:</p>
+      <ol>
+        <li><strong>Contain the failure:</strong> Secure the hardware. MR-1 was safed, propellants drained, batteries disconnected, pyrotechnics disarmed.</li>
+        <li><strong>Observe the evidence:</strong> The escape tower was found 400 yards away. Parachutes draped over the vehicle. Dye marker activated. SOFAR bomb fired. Every post-landing recovery system had operated perfectly &mdash; on the launch pad.</li>
+        <li><strong>Reconstruct the event timeline:</strong> Using telemetry, the investigators reconstructed the sequence millisecond by millisecond. The gap between control line disconnect and power line disconnect &mdash; approximately 20&ndash;30 ms &mdash; was the window in which the sneak circuit operated.</li>
+        <li><strong>Identify the root cause:</strong> The connector was designed for a separation speed that did not occur because the vehicle mass had increased, and no one re-analyzed the connector behavior at the new, slower separation speed.</li>
+        <li><strong>Implement corrective action:</strong> Redesign with simultaneous-release mechanism. Completed, tested, installed in 28 days.</li>
+        <li><strong>Verify the fix:</strong> MR-1A&rsquo;s telemetry confirmed clean connector separation with no transient signals on the engine cutoff bus.</li>
+      </ol>
+      <p>This six-step methodology &mdash; contain, observe, reconstruct, root-cause, correct, verify &mdash; became the template for every NASA failure investigation that followed. It was formalized in NASA Procedural Requirements (NPR) 8621.1 and is still the standard procedure in 2026.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Failure Analysis (Primary)</h3>
+      <p><strong>Wing:</strong> Sneak Circuit Analysis, Interface Hazard Analysis, Systematic Enumeration</p>
+      <p>Before MR-1, there was no formal methodology for detecting sneak circuits. After MR-1, NASA commissioned Boeing to develop Sneak Circuit Analysis (SCA), which: constructs a topological network of actual wiring (not the schematic); identifies all possible current paths; categorizes each path as intended or unintended; evaluates each sneak path for potential hazards; and recommends corrective actions.</p>
+      <p>Boeing&rsquo;s SCA identified over 200 potential sneak circuits in the Apollo spacecraft wiring &mdash; paths that existed in the physical harness but were not shown on any schematic. SCA became a contractual requirement for all NASA manned spacecraft beginning with Gemini. It remains a requirement today. All of this traces back to one connector, three pins, wrong order, four inches.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Biology/Developmental (Secondary)</h3>
+      <p><strong>Wing:</strong> <em>Dictyostelium discoideum</em> &mdash; cAMP Signaling, Collective Behavior</p>
+      <p><em>Dictyostelium discoideum</em> is one of the most remarkable organisms in biology. When food runs out, up to 100,000 individual amoebae stream together into a mound that elongates into a slug, which eventually erects a fruiting body. The aggregation sequence is precisely timed through cAMP pulses at approximately 6-minute intervals. The connection to MR-1 is through sequence criticality. If the cAMP relay is too fast, cells desensitize. Too slow, and the gradient dissipates. <em>Dictyostelium</em>&rsquo;s cAMP relay has been in service for 600 million years, and it still makes timing errors 8&ndash;12% of the time &mdash; but the system is robust enough to tolerate them.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Mathematics (Secondary)</h3>
+      <p><strong>Wing:</strong> Combinatorics, Permutations, State Space Enumeration</p>
+      <p>Three pins, six possible orderings. Manageable. But the Shuttle&rsquo;s launch sequence had approximately 2,000 discrete steps. If even 20 are sequence-dependent, the orderings number 20! = 2,432,902,008,176,640,000. The engineering response is hierarchy: decompose into independent subsequences. MR-1&rsquo;s fix was the most radical solution: eliminate the sequence entirely. Simultaneous disconnection reduces n! to 1.</p>
+    </div>
+
+    <div class="dept-card">
+      <h3>Literature/Satire (Secondary)</h3>
+      <p><strong>Wing:</strong> Voltaire &mdash; <em>Candide</em>, Satire of Optimism, the Lisbon Earthquake</p>
+      <p>Voltaire published <em>Candide</em> in 1759, exactly 201 years before MR-1. The satire works because the misfortunes are sequenced &mdash; each disaster follows from the previous in a chain that Pangloss interprets as optimized but Voltaire presents as arbitrary. MR-1&rsquo;s engineers rejected Panglossian reasoning. They did not argue that the four-inch flight was for the best. They identified the fault, redesigned the connector, and flew again in 28 days. Candide&rsquo;s conclusion &mdash; &ldquo;<em>il faut cultiver notre jardin</em>&rdquo; &mdash; is the engineer&rsquo;s conclusion: fix the connector.</p>
+    </div>
+
+    <hr>
+
+    <h2>TRY Sessions</h2>
+
+    <h3>TRY 1: Build a Sequence Tester</h3>
+    <p><strong>Duration:</strong> 4&ndash;6 hours | <strong>Difficulty:</strong> Intermediate | <strong>Department:</strong> Electrical Engineering / Systems Engineering</p>
+    <p><strong>What You Need:</strong> An Arduino Uno (~$15&ndash;25), 3 momentary push buttons (~$3), 3 LEDs (red, yellow, green) (~$2), 3 220-ohm resistors, a breadboard, jumper wires, and a piezo buzzer (~$2). Total cost: $25&ndash;35.</p>
+    <p><strong>What You&rsquo;ll Learn:</strong> How to build a physical device that demonstrates sequence-dependent failure. The three buttons must be pressed in the correct order (A, B, C) for &ldquo;launch&rdquo; to succeed. Any other order activates the &ldquo;sneak circuit&rdquo; (red LED + buzzer).</p>
+
+    <pre>MR-1 SEQUENCE TESTER -- Arduino Sketch:
+
+  const int BTN_A = 2, BTN_B = 3, BTN_C = 4;
+  const int LED_GREEN = 8, LED_YELLOW = 9, LED_RED = 10;
+  const int BUZZER = 11;
+  int state = 0;  // 0=ready, 1=A pressed, 2=A+B, 3=success, -1=fail
+
+  void setup() {
+    pinMode(BTN_A, INPUT); pinMode(BTN_B, INPUT); pinMode(BTN_C, INPUT);
+    pinMode(LED_GREEN, OUTPUT); pinMode(LED_YELLOW, OUTPUT);
+    pinMode(LED_RED, OUTPUT); pinMode(BUZZER, OUTPUT);
+    digitalWrite(LED_YELLOW, HIGH);
+    Serial.begin(9600);
+    Serial.println("MR-1 Sequence Tester: Press A -&gt; B -&gt; C");
+  }
+
+  void loop() {
+    if (state == 3 || state == -1) {
+      if (!digitalRead(BTN_A) &amp;&amp; !digitalRead(BTN_B) &amp;&amp; !digitalRead(BTN_C))
+        { delay(1000); reset(); }
+      return;
+    }
+    if (digitalRead(BTN_A)) {
+      if (state == 0) { state = 1; Serial.println("A disconnected (correct)"); }
+      else if (state != 1) fail("A pressed out of sequence!");
+    }
+    if (digitalRead(BTN_B)) {
+      if (state == 1) { state = 2; Serial.println("B disconnected (correct)"); }
+      else if (state == 0) fail("SNEAK CIRCUIT! B before A!");
+      else if (state != 2 &amp;&amp; state != 3) fail("B out of sequence!");
+    }
+    if (digitalRead(BTN_C)) {
+      if (state == 2) success();
+      else fail("C pressed out of sequence!");
+    }
+  }
+
+  TEST ALL 6 SEQUENCES:
+  A -&gt; B -&gt; C  (should be GREEN -- the only success)
+  A -&gt; C -&gt; B  (should be RED)
+  B -&gt; A -&gt; C  (should be RED -- this is MR-1's failure)
+  B -&gt; C -&gt; A  (should be RED)
+  C -&gt; A -&gt; B  (should be RED)
+  C -&gt; B -&gt; A  (should be RED)</pre>
+
+    <h3>TRY 2: <em>Dictyostelium</em> Observation</h3>
+    <p><strong>Duration:</strong> 2&ndash;4 hours (observation) / 2&ndash;7 days (culture) | <strong>Difficulty:</strong> Beginner to Intermediate | <strong>Department:</strong> Biology</p>
+    <p><strong>What You Need:</strong> Access to a biology laboratory with a microscope and <em>Dictyostelium</em> cultures, OR access to time-lapse videos from dictyBase.org. Cultures available from Carolina Biological Supply (~$15&ndash;20).</p>
+    <p>Observe the six-stage aggregation sequence: Solitary (0&ndash;2 hr) &rarr; Pulsing (2&ndash;4 hr) &rarr; Streaming (4&ndash;8 hr) &rarr; Mound (8&ndash;10 hr) &rarr; Slug (10&ndash;14 hr) &rarr; Fruiting body (14&ndash;24 hr). Each transition depends on the previous one completing. This is MR-1&rsquo;s lesson in biological form: the sequence matters.</p>
+
+    <hr>
+
+    <h2>DIY Projects</h2>
+
+    <h3>DIY 1: Sneak Circuit Detective &mdash; Analyze Household Wiring</h3>
+    <p><strong>Duration:</strong> 2&ndash;4 hours | <strong>Difficulty:</strong> Intermediate | <strong>Cost:</strong> $25&ndash;45</p>
+    <p><strong>What You Need:</strong> A digital multimeter ($15&ndash;30), a non-contact voltage tester ($10&ndash;15), access to your own residential electrical panel, a notebook, and a flashlight. <strong>MEASUREMENT ONLY &mdash; never modify or touch wiring.</strong></p>
+    <p>Map your home&rsquo;s electrical circuits. Check for bootleg grounds (neutral bonded to ground at receptacle), shared neutrals (two circuits sharing a return conductor), and GFCI interactions. These are household sneak circuits &mdash; current paths the electrician did not intend. NASA developed formal Sneak Circuit Analysis because of MR-1. Your home wiring has never been subjected to SCA. You just performed a simplified version.</p>
+
+    <hr>
+
+    <h2>Fox Companies Pathways</h2>
+
+    <h3>FoxFiber Alignment</h3>
+    <p>MR-1&rsquo;s failure was an interface failure. FoxFiber&rsquo;s mesh network architecture faces the same challenge at every node interface. The lesson: use simultaneous handshakes (both sides confirm readiness before data flows) rather than sequential ones. Where sequence is unavoidable, use explicit acknowledgment at each step (the STPA-Seq approach).</p>
+
+    <h3>FoxCompute Alignment</h3>
+    <p>Sneak circuits in software = execution paths between containers sharing resources (shared volumes, shared network namespaces, shared IPC channels). FoxCompute&rsquo;s orchestration should include formal analysis of shared resources, analogous to Boeing&rsquo;s SCA methodology. The GNN-based SCA tools from Paper 1 could be adapted for container dependency graphs.</p>
+
+    <h3>Fox CapComm Alignment</h3>
+    <p><em>Dictyostelium</em>&rsquo;s cAMP relay network is a natural model for Fox CapComm&rsquo;s agent communication protocol. Agents relay coordination signals through redundant paths; the system accepts the majority signal when individuals disagree. The refractory period prevents signal loops &mdash; agents should implement cooldowns to prevent message storms.</p>
+
+    <hr>
+
+    <blockquote>
+      The Red-tailed Hawk perches on a dead snag at the edge of a clearcut, scanning the field below with eyes that resolve 8x finer detail than human vision. The hunting sequence: observe, identify, commit, dive, extend, strike, grip. Seven states, one path, zero tolerance for wrong ordering. A premature talon extension wastes the dive energy. A premature strike misses the target. The hawk has practiced this sequence thousands of times since it fledged, and it still misses approximately 40% of its attempts &mdash; not because the sequence fails, but because the target evades. The connector works. The prey is unpredictable. MR-1&rsquo;s connector failed at 4 inches. The hawk&rsquo;s connector works at 40 meters per second. The difference: 600 million years of testing for the hawk&rsquo;s nervous system, versus 5 years of testing for the Redstone&rsquo;s tail plug.
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="papers.html">&larr; Papers</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="simulation.html">Simulation &rarr;</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.16 Mercury-Redstone 1 + <em>Dictyostelium discoideum</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a>
+</footer>
+
+</body>
+</html>

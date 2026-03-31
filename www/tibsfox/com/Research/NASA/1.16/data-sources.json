@@ -1,0 +1,107 @@
+{
+  "mission": "1.16",
+  "title": "Mercury-Redstone 1 (MR-1)",
+  "description": "Open datasets and source materials relevant to Mercury-Redstone 1 (1960), Mercury program, sneak circuit analysis, Redstone booster, Dictyostelium discoideum, and Voltaire",
+  "sources": [
+    {
+      "id": "nssdc-mr1",
+      "name": "NSSDC Master Catalog — Mercury-Redstone 1",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=MERRM1",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "NASA Space Science Data Coordinated Archive entry for MR-1. Mission profile, spacecraft description, launch vehicle details, outcome classification. The canonical NASA record of the mission.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-sp-4201",
+      "name": "This New Ocean: A History of Project Mercury (NASA SP-4201)",
+      "url": "https://history.nasa.gov/SP-4201/toc.htm",
+      "type": "primary-source",
+      "category": "program-history",
+      "description": "Loyd Swenson, James Grimwood, and Charles Alexander's comprehensive history of Project Mercury. Chapter 12 covers MR-1 in detail: the launch attempt, the sneak circuit analysis, the 24-hour wait, and the MR-1A success. Primary source for the engineering narrative of what went wrong and how it was fixed.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "kraft-flight",
+      "name": "Flight: My Life in Mission Control — Chris Kraft autobiography",
+      "url": "https://www.penguinrandomhouse.com/books/288755/flight-by-chris-kraft/",
+      "type": "primary-source",
+      "category": "memoir",
+      "description": "Chris Kraft's autobiography includes his first-person account of the MR-1 failure. Kraft made the decision to wait 24 hours for batteries to die before approaching the rocket. His account provides the human perspective on the engineering decisions made in real time during the pad abort.",
+      "format": "Book",
+      "access": "library"
+    },
+    {
+      "id": "sneak-circuit-analysis",
+      "name": "Sneak Circuit Analysis: A Means of Verifying Design Integrity (Boeing/NASA)",
+      "url": "https://ntrs.nasa.gov/",
+      "type": "primary-source",
+      "category": "engineering-analysis",
+      "description": "Boeing developed systematic sneak circuit analysis methods in the 1960s, directly influenced by failures like MR-1. These methods exhaustively trace all possible current paths through all possible states of switches, relays, and connectors. The technique became a standard requirement for crewed spaceflight systems and is documented in NASA technical reports available through NTRS.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "mercury-history-nasa",
+      "name": "NASA Mercury Program History Collection",
+      "url": "https://history.nasa.gov/mercury.html",
+      "type": "primary-source",
+      "category": "mission-history",
+      "description": "NASA History Division's Mercury program page. Links to SP-4201, mission chronologies, spacecraft specifications, and photographic archives. Includes the iconic photographs of MR-1 on the pad draped in its own parachute.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "inaturalist-dictyostelium",
+      "name": "iNaturalist — Dictyostelium discoideum Observations",
+      "url": "https://www.inaturalist.org/taxa/126703-Dictyostelium-discoideum",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Community-submitted observations of Dictyostelium discoideum in the wild. Distribution maps, photographs of fruiting bodies, habitat notes. Dictyostelium is found in temperate forest soils worldwide, particularly in leaf litter where it feeds on bacteria.",
+      "format": "HTML/JSON",
+      "access": "open"
+    },
+    {
+      "id": "dictybase",
+      "name": "DictyBase — Dictyostelium Genomics Resource",
+      "url": "https://dictybase.org/",
+      "type": "primary-source",
+      "category": "genomics",
+      "description": "The central resource for Dictyostelium discoideum genomics, including the complete genome sequence, gene annotations, phenotype data, and strain information. Dictyostelium was one of the first eukaryotes to have its genome fully sequenced (2005, Nature 435:43-57). The genome has approximately 12,500 genes on 6 chromosomes — comparable in complexity to yeast but with multicellular developmental capabilities.",
+      "format": "HTML/Database",
+      "access": "open"
+    },
+    {
+      "id": "voltaire-archives",
+      "name": "Voltaire Foundation — University of Oxford",
+      "url": "https://www.voltaire.ox.ac.uk/",
+      "type": "secondary-source",
+      "category": "dedication",
+      "description": "The Voltaire Foundation at the University of Oxford publishes the definitive edition of Voltaire's complete works (Oeuvres completes de Voltaire). Candide, ou l'Optimisme (1759) is Voltaire's satirical novella whose conclusion — 'Il faut cultiver notre jardin' (We must cultivate our garden) — resonates with MR-1's lesson: after the absurdity, tend to what's in front of you.",
+      "format": "HTML/Print",
+      "access": "restricted-partial"
+    },
+    {
+      "id": "redstone-specs",
+      "name": "Astronautix — Redstone / Mercury-Redstone",
+      "url": "http://www.astronautix.com/m/mercury-redstone.html",
+      "type": "secondary-source",
+      "category": "launch-vehicle",
+      "description": "Specifications for the Mercury-Redstone launch vehicle: Rocketdyne A-7 engine thrust (78,000 lbf), specific impulse (235 s at sea level), vehicle dimensions (83.3 ft total height), propellant masses (LOX + 75% ethanol). Includes Mercury-Redstone flight history and configuration differences from the military Redstone missile.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "mercury-capsule-docs",
+      "name": "NASA Technical Reports — Mercury Spacecraft",
+      "url": "https://ntrs.nasa.gov/search?q=mercury%20spacecraft&center=ALL&status=Published",
+      "type": "primary-source",
+      "category": "spacecraft",
+      "description": "NASA Technical Reports Server collection of Mercury spacecraft documentation. Includes spacecraft familiarization manuals, systems descriptions, abort sensing system specifications, and Launch Escape System performance data. The abort sensing system documentation describes the acceleration thresholds and response times that caused the LES to fire on MR-1.",
+      "format": "PDF",
+      "access": "open"
+    }
+  ]
+}

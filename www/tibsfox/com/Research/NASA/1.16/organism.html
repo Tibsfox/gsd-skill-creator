@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Dictyostelium discoideum — The False Start | v1.16 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --pad-deep: #0A0808; --pad-mid: #1A1410;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --redstone-red: #CC4020; --redstone-dim: #662010;
+    --pad-gray: #606060; --pad-light: #909090;
+    --parachute-orange: #E88020; --abort-red: #FF0000;
+    --space: #080808; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2020;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(204,64,32,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(204,64,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(204,64,32,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--pad-deep) 25%, var(--pad-mid) 50%, var(--redstone-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--redstone-red); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(204,64,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,64,32,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(204,64,32,0.12); border: 1px solid var(--redstone-red); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--parachute-orange); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(204,64,32,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--parachute-orange); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--parachute-orange); }
+  em { color: var(--pad-light); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; }
+  a:hover { color: #fff; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  .sources { background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources h2 { margin-top: 0; }
+  .sources h3 { font-size: 1rem; color: var(--mercury-silver); margin-top: 1.5rem; }
+  .sources li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+  .nav-card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.16 Mercury-Redstone 1</a>
+  <span class="sep">/</span>
+  Track 2: Organism Pairing
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.16</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 2</span>
+    </div>
+    <h1><em>Dictyostelium discoideum</em> (Social Amoeba)</h1>
+    <p class="subtitle">The false start</p>
+    <div class="meta-row">
+      <span><span class="label">Scientific Name:</span> <em>Dictyostelium discoideum</em> Raper</span>
+      <span><span class="label">Family:</span> Dictyosteliaceae</span>
+      <span><span class="label">Common Names:</span> Social amoeba, cellular slime mold, Dicty</span>
+      <span><span class="label">PNW Status:</span> Cosmopolitan &mdash; forest soils worldwide</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>The Invisible Kingdom Underfoot</h2>
+
+    <p>If you walk through a second-growth Douglas fir forest in the western Cascades on a rainy afternoon in October, your boots sinking slightly into the duff with each step, the mat of decomposing needles and alder leaves compressing under your weight and releasing the sharp, clean scent of tannins and humus, you are walking through a kingdom. Beneath the surface of the soil, in the thin film of moisture that coats every particle of decaying organic matter, in the air spaces between grains of mineral soil and fragments of rotting wood, there are amoebae. Billions of them. They are approximately ten to twenty micrometers in diameter &mdash; one-fiftieth to one-hundredth of a millimeter &mdash; and they are invisible to the naked eye. They are single-celled organisms, each one a complete, autonomous, self-sustaining unit of life. Each one has a nucleus containing a full genome. Each one moves by extending pseudopods &mdash; temporary projections of its cell membrane that reach forward, grip the substrate, and pull the cell body behind them, a mode of locomotion so fundamental that it predates the evolution of muscles, nerves, bones, and every other structure that multicellular animals use to move. Each one feeds by engulfing bacteria, surrounding a bacterial cell with its pseudopods and drawing it into the cell body in a membrane-bound vesicle called a phagosome, where enzymes digest the bacterium and extract its nutrients. Each one divides by binary fission &mdash; pinching itself in half, each half receiving a copy of the genome, each half becoming a new, complete, independent amoeba.</p>
+
+    <p>This is <em>Dictyostelium discoideum</em> in its vegetative phase. It is, in this state, one of the simplest organisms that can reasonably be called an organism. It is a single cell. It eats. It moves. It divides. It does not communicate with other cells. It does not cooperate. It does not form structures or build anything or organize itself into anything larger than what it already is &mdash; a single, solitary, microscopic predator crawling through the soil, eating bacteria, dividing when it has eaten enough, existing as an individual in the most complete and literal sense of that word.</p>
+
+    <p>And then the food runs out.</p>
+
+    <hr>
+
+    <h2>The Signal</h2>
+
+    <p>When the bacteria in a patch of soil are consumed &mdash; when the local food supply is exhausted and the amoebae begin to starve &mdash; something extraordinary happens. The starving amoebae begin to produce a chemical signal: cyclic adenosine monophosphate, abbreviated cAMP. The cAMP diffuses outward from the signaling cell through the soil moisture, spreading in all directions, weakening with distance. Nearby amoebae detect the cAMP through receptors on their cell surfaces. When an amoeba detects cAMP above a threshold concentration, it does two things. First, it moves toward the source of the signal &mdash; it crawls up the concentration gradient, following the scent of starvation toward the cell that produced it. Second, it produces and releases its own pulse of cAMP, amplifying the original signal and extending it further, attracting amoebae that were too far away to detect the original pulse.</p>
+
+    <p>This is a relay system. Each cell that detects the signal retransmits it. The signal propagates outward from the original source as a wave, each cell that receives it adding its own contribution, the wave growing stronger and reaching further with each retransmission. The wave pattern is visible under a microscope: concentric rings of cAMP concentration radiating outward from a central point, each ring representing a pulse of signal, each pulse separated by a refractory period during which the cells cannot respond to or retransmit the signal. The pattern looks like the ripples from a stone dropped in still water, or like the circular waves that emanate from a radio transmitter, or like the concentric wavefronts of a sonar ping. It is a broadcast, and the medium is the soil moisture, and the frequency is approximately one pulse every six minutes, and the message is simple: come here. Starve together. Do something none of us can do alone.</p>
+
+    <p>The cAMP relay is a countdown signal. It initiates a sequence of events that, once begun, proceeds through a series of stages that transform thousands of independent, single-celled organisms into a single, multicellular structure capable of behavior that no individual cell could perform. The countdown is irreversible past a certain point &mdash; once the aggregation proceeds beyond a threshold, the cells are committed to the multicellular program and cannot return to independent existence without starting over. The signal says: the countdown has begun. The clock is running. The sequence has started.</p>
+
+    <p>On November 21, 1960, at Launch Complex 5, a different countdown reached T-0. The Rocketdyne A-7 engine ignited. The signal &mdash; the flame, the thrust, the rising of the vehicle from the pad &mdash; initiated a sequence of events that, according to the programmed logic of the onboard sequencer, would proceed through a series of stages: liftoff, ascent, tower jettison, engine cutoff, capsule separation, reentry, drogue deployment, main chute, splashdown. The countdown was, in the sequencer&rsquo;s model, irreversible past liftoff. Once the rocket rose, the clock was running, and the subsequent events would follow the prescribed timing regardless of what the rocket was actually doing. The cAMP pulse says: aggregate. The ignition signal says: fly. Both initiate cascades. Both assume that the initiation will be followed by completion. Both can fail.</p>
+
+    <hr>
+
+    <h2>The Slug</h2>
+
+    <p>As the cAMP waves propagate outward and the amoebae converge on the signal source, they stream toward the center in radial lines &mdash; long, thin columns of cells, each one following the cAMP gradient, each one pressing against its neighbors, the columns merging as they approach the aggregation center. Over the course of approximately eight to twelve hours, tens of thousands of individual amoebae &mdash; sometimes as many as a hundred thousand &mdash; converge into a single mass at the center of the aggregation. The mass is roughly hemispherical at first, a mound of cells piled on the surface of the substrate, each cell adhering to its neighbors through cell-surface adhesion molecules that are expressed only during the aggregation phase. The cells that were, hours earlier, independent organisms crawling through the soil in pursuit of bacteria are now stuck together in a cohesive lump, a collective entity made of individual parts, a society that did not exist until starvation forced it into being.</p>
+
+    <p>The mound reorganizes. The cells sort themselves by type &mdash; pre-stalk cells migrate to the front, pre-spore cells settle in the rear, and the mass elongates into a cigar-shaped structure approximately one to two millimeters long and a fraction of a millimeter in diameter. This structure has a name. It is called a slug, or more formally, a grex. The grex is, by any reasonable definition, a multicellular organism. It has a front and a back. It has differentiated cell types. It responds to environmental stimuli &mdash; it crawls toward light and warmth, navigating through the soil by phototaxis and thermotaxis. It moves as a unit, the cells at the front secreting a slime sheath that the slug crawls through, the whole mass gliding across the substrate like a tiny, eyeless worm.</p>
+
+    <p>The slug crawls toward conditions favorable for spore dispersal &mdash; typically the soil surface, where airborne dispersal of spores is possible, or the tip of a grass blade or twig, where elevation above the substrate increases the chance that wind or passing insects will carry the spores to a new location. The slug&rsquo;s navigation is not random. It integrates information from multiple sensory inputs &mdash; the direction of light, the gradient of temperature, the slope of the substrate &mdash; and moves toward the combination of conditions most likely to result in successful spore dispersal. This integration is remarkable because the slug has no brain, no nervous system, no centralized processing organ of any kind. The integration is distributed across the cells of the slug, each cell responding to local conditions and transmitting signals to its neighbors, the aggregate behavior emerging from the collective responses of thousands of individual cells, none of which has any awareness of the slug&rsquo;s overall trajectory or destination.</p>
+
+    <p>The slug is, in a sense, a false start made permanent. The individual amoebae initiate a transition from solitary to collective existence, and if the transition succeeds, they become something greater than what they were. But the transition does not always succeed. Slugs can stall. Under unfavorable conditions &mdash; insufficient cell density, wrong temperature, wrong humidity, wrong light levels &mdash; the slug may stop moving, fail to complete its migration, and disaggregate. The cells separate, return to their individual state, and resume solitary existence, crawling through the soil and eating bacteria as if the aggregation had never happened. The collective effort initiates, rises briefly into organized behavior, and then collapses back into its constituent parts.</p>
+
+    <p>This is the false start. The biological parallel to Mercury-Redstone 1 is exact. MR-1 initiated a complex, multi-stage sequence. The rocket ignited, rose four inches off the pad, and settled back. The sequencer continued to execute the flight sequence from a rocket sitting on the ground, deploying parachutes at zero altitude. The mission initiated, rose briefly, and collapsed back to its starting conditions. The slug initiates, begins to migrate, and under unfavorable conditions, collapses back into individual amoebae. Both are systems that begin a complex transition and fail to complete it &mdash; systems that start the countdown but do not reach orbit, that aggregate but do not fruit, that lift off but do not fly.</p>
+
+    <hr>
+
+    <h2>The Fruiting Body</h2>
+
+    <p>When the slug does complete its migration &mdash; when conditions are favorable and the cell density is sufficient and the environmental cues align &mdash; it performs its most remarkable act. The slug stops moving. The cells at the front of the slug, the pre-stalk cells, begin to die. They vacuolate &mdash; their interiors fill with large, fluid-filled vesicles &mdash; and they secrete cellulose, building a rigid tube around themselves. As the pre-stalk cells die and construct the tube, the pre-spore cells in the rear of the slug climb upward through and around the tube, carried by their own motility and by the physical structure of the growing stalk. The stalk elongates, rising vertically from the substrate, and the mass of pre-spore cells ascends with it, climbing to the tip of the stalk like passengers riding an elevator made of dead bodies.</p>
+
+    <p>At the top of the stalk, the pre-spore cells differentiate into spores &mdash; dormant, resistant, encapsulated cells that can survive desiccation, temperature extremes, and long periods without food. The spores are contained in a spherical mass called the sorus, a ball of reproductive potential perched at the tip of a stalk made of sacrificed cells. The complete structure &mdash; stalk, sorus, and the basal disc that anchors the stalk to the substrate &mdash; is the fruiting body. It is typically one to three millimeters tall, visible to the naked eye as a tiny white pin sticking up from the surface of the soil or the rotting wood on which the slug settled.</p>
+
+    <p>The economics of the fruiting body are stark. The pre-stalk cells die. They contribute their bodies to a physical structure &mdash; the stalk &mdash; that they will never use. They build a platform for the pre-spore cells to disperse from, and they receive nothing in return. They do not reproduce. Their genes are not transmitted to the next generation through the spores, because the spores are formed by the pre-spore cells, not the pre-stalk cells. The stalk cells&rsquo; contribution to the future is structural, not genetic. They are the scaffolding. They are the launch pad.</p>
+
+    <p>This is altruistic cell death, and it is one of the most studied phenomena in evolutionary biology because it presents a fundamental challenge to the logic of natural selection. Natural selection favors individuals that maximize their own reproductive success. A cell that sacrifices itself to help other cells reproduce is, by definition, not maximizing its own reproductive success. How does the gene for stalk-cell behavior persist in the population, if stalk cells never reproduce?</p>
+
+    <p>The answers are multiple and the debate is ongoing. Kin selection provides one explanation: if the cells in a slug are genetically related (which they often are, since aggregation frequently involves clonemates descended from the same founding amoeba), then helping relatives reproduce can be favored by natural selection even if the helper itself does not reproduce, because the relatives carry copies of the helper&rsquo;s genes. Policing mechanisms provide another: there is evidence that <em>Dictyostelium</em> cells can detect and suppress cheaters &mdash; cells that attempt to avoid the stalk-cell fate and preferentially become spores &mdash; maintaining the cooperative system through enforcement rather than pure altruism. The stalk-cell sacrifice is not uncontested. It is maintained by a combination of relatedness, enforcement, and the stark arithmetic of the alternative: if nobody forms the stalk, nobody disperses, and everybody dies.</p>
+
+    <p>The launch pad on which Mercury-Redstone 1 sat was, like the <em>Dictyostelium</em> stalk, a structure built to elevate something else. Launch Complex 5 at Cape Canaveral was a physical platform &mdash; concrete, steel, plumbing, electrical systems, flame deflectors, propellant lines &mdash; designed and built to support the rocket during its brief time on the ground and to serve as the base from which it would ascend. The pad remained on the ground. The rocket was supposed to go up. The pad&rsquo;s contribution was structural, not kinetic. It was scaffolding. And on November 21, 1960, the rocket sat on the scaffolding and went nowhere, the way a slug sometimes sits on the substrate and fails to fruit, the potential for ascent present in every component but the sequence unable to complete.</p>
+
+    <hr>
+
+    <h2>Sequence Sensitivity</h2>
+
+    <p>The aggregation of <em>Dictyostelium</em> is a sequence-dependent process. Each stage depends on the successful completion of the previous stage, and each stage is triggered by specific chemical signals produced at specific concentrations at specific times. The initial cAMP pulses must occur at the correct frequency &mdash; approximately one pulse every six minutes during early aggregation. If the pulse frequency is too fast, the cells cannot reset their cAMP receptors between pulses and become desensitized, unable to detect the signal. If the frequency is too slow, the concentration gradient decays between pulses, and the directional information is lost &mdash; the cells cannot determine which direction to crawl because the signal has faded before they can follow it. The frequency must be within a narrow window, and the window shifts as the aggregation progresses, the optimal pulse period shortening as the cells approach the aggregation center and the spatial scale decreases.</p>
+
+    <p>After aggregation, the transition from mound to slug requires a different set of signals: DIF-1 (differentiation-inducing factor), which directs cells toward the stalk-cell fate, and PST-specific signals that promote the spore-cell fate. The balance between these signals determines the ratio of stalk cells to spore cells in the completed fruiting body, and the ratio matters &mdash; too many stalk cells and there are not enough spores to make dispersal worthwhile; too few stalk cells and the stalk is too short or too weak to elevate the sorus above the substrate. The balance is maintained by intercellular signaling &mdash; the cells communicate with each other, adjusting the relative proportions of stalk and spore precursors through a feedback loop that monitors the ratio and corrects deviations.</p>
+
+    <p>The slug&rsquo;s migration requires still other signals: phototaxis signals that orient the slug toward light, thermotaxis signals that orient it toward warmth, and ammonia gradients that the slug uses to sense distance from the soil surface (ammonia concentration decreases with distance from the soil, where decomposing organic matter produces it). Each of these signals must be detected, processed, and integrated into a coherent directional command, and the integration must occur continuously as the slug moves through its environment.</p>
+
+    <p>Finally, the culmination &mdash; the transformation of slug into fruiting body &mdash; requires a terminal signal that triggers the differentiation of pre-stalk cells into stalk cells and pre-spore cells into spores. The culmination signal involves a complex cascade of gene expression, protein production, and cellular remodeling that transforms the living cells of the slug into the dead cells of the stalk and the dormant cells of the spores.</p>
+
+    <p>Every stage in this sequence is dependent on the correct execution of the previous stage. If aggregation fails, there is no slug. If slug migration fails, there is no culmination. If the signal balance is wrong at any stage, the process stalls or produces a malformed fruiting body. The sensitivity to sequence is absolute. The system has no capacity to skip stages, to compensate for a missed step, to improvise an alternative pathway when the prescribed pathway is blocked. It is a linear cascade, and it fails if any link in the chain is broken.</p>
+
+    <p>Mercury-Redstone 1 was a linear cascade. Ignition, liftoff, ascent, tower jettison, engine cutoff, capsule separation, reentry, drogue, main, reserve, splashdown. Each stage depended on the successful completion of the previous stage. The failure occurred at the second link in the chain &mdash; liftoff &mdash; and every subsequent stage executed in a context for which it was not designed. The sequencer could not skip ahead, could not compensate, could not recognize that the chain was broken. It followed the sequence. <em>Dictyostelium</em> follows its sequence. Both are cascade systems. Both are vulnerable to sequence disruption. Both fail when the ordering is wrong &mdash; when the connectors separate in the wrong order, when the cAMP pulses arrive at the wrong frequency, when the signal that means &ldquo;proceed&rdquo; is received by a system that is not in a state to proceed.</p>
+
+    <hr>
+
+    <h2>The Model Organism</h2>
+
+    <p><em>Dictyostelium discoideum</em> is one of the most studied organisms in biology. Its genome was fully sequenced in 2005 &mdash; approximately 34 million base pairs encoding roughly 12,500 genes, distributed across six chromosomes. It is a model organism for the study of cell signaling, cell motility, chemotaxis, development, and the evolution of multicellularity. Laboratories around the world maintain stocks of <em>Dictyostelium</em>, grow it on bacterial lawns in petri dishes, starve it to induce aggregation, and study the resulting developmental sequence with the tools of molecular biology, genetics, microscopy, and computational modeling.</p>
+
+    <p>The reason <em>Dictyostelium</em> is such a valuable model organism is precisely the feature that makes it resonant with MR-1: the transition from individual to collective. <em>Dictyostelium</em> straddles the boundary between unicellular and multicellular life. For most of its life cycle, it is a single-celled organism, as solitary and independent as any bacterium. But when conditions demand it, it becomes multicellular &mdash; it aggregates, it differentiates, it builds a structure with specialized cell types performing specialized functions. The transition is not permanent. It is facultative. The organism can go either way &mdash; solitary or collective &mdash; depending on circumstances. This makes it uniquely useful for studying the fundamental question of how multicellularity evolved: how did individual cells, each pursuing its own reproductive interests, come to cooperate in the construction of a collective organism? How was the transition from individual to collective maintained against the ever-present temptation to cheat &mdash; to avoid the costly stalk-cell fate and free-ride on the cooperation of others?</p>
+
+    <p>MR-1 became a model failure. It is studied in aerospace engineering courses not because it was the most dramatic failure in space history &mdash; it was not &mdash; but because it illustrates, with exceptional clarity, a class of failure that is common in complex systems: the failure of integration. Every component of MR-1 worked. The engine ignited. The sequencer sequenced. The escape tower jettisoned. The parachutes deployed. Each component, tested individually, performed its function. The failure was not in the parts but in their interaction &mdash; in the specific way that two connectors, each individually functional, separated in an order that produced an unintended result. The failure was in the interface, in the gap between components, in the space where individual parts must become a collective system.</p>
+
+    <p><em>Dictyostelium</em> is studied because it is a model for the transition from individual to collective. MR-1 is studied because it is a model for the failure of that transition. Both illuminate the same question from opposite directions: what makes individual components work together as a system? <em>Dictyostelium</em> answers by showing how the transition succeeds. MR-1 answers by showing how the transition fails. The organism aggregates when the signals are right. The rocket flies when the connectors separate in the right order. The organism stalls when the signals are wrong. The rocket sits on the pad when the connectors separate in the wrong order. Both are studies in the mechanics of collective function, and both are studied because their simplicity makes the underlying principles visible. <em>Dictyostelium</em> is simpler than a human embryo. MR-1 is simpler than a Saturn V. Both are simple enough to understand completely, and both are complex enough to fail in instructive ways.</p>
+
+    <hr>
+
+    <h2>The Forest Floor</h2>
+
+    <p>In the Pacific Northwest, <em>Dictyostelium discoideum</em> lives in the soil beneath the trees that define the region&rsquo;s identity. It is found in the humus layer of Douglas fir forests, in the decomposing needle litter that carpets the ground in a mat several centimeters thick, in the rotting logs that lie across the forest floor and slowly return their carbon and nutrients to the soil over decades of decomposition. It is found in the leaf mold under red alder stands, where the nitrogen-fixing symbionts in the alder roots enrich the soil and support a dense bacterial community that provides abundant food for the amoebae. It is found in the dark, moist soil of ravines where sword ferns grow in dense thickets and the air is always cool and humid, the conditions that <em>Dictyostelium</em> prefers &mdash; moist, dark, rich in bacteria, undisturbed.</p>
+
+    <p>The organism is cosmopolitan. It is found on every continent except Antarctica, in forest soils from the tropics to the boreal zone, in habitats ranging from rainforest to temperate woodland to urban park. Its distribution is so wide and so uniform that it is essentially a background organism &mdash; always present, never noticed, a permanent member of the soil community that goes about its business of eating bacteria and occasionally aggregating into fruiting bodies without attracting the attention of anyone who is not specifically looking for it. The fruiting bodies, when they form, are tiny &mdash; one to three millimeters tall, white or yellowish, visible only if you get down on your hands and knees and examine the soil surface with a hand lens or low-power microscope. They look like miniature pins stuck in the soil, or like tiny mushrooms with spherical caps on straight stalks, or like nothing at all if you are not looking for them.</p>
+
+    <p>Kenneth Raper described <em>Dictyostelium discoideum</em> in 1935, isolating it from soil samples collected in a North Carolina forest. The genus name <em>Dictyostelium</em> derives from the Greek <em>diktyon</em> (net) and <em>stele</em> (pillar), referring to the net-like pattern of the cellulose sheath that surrounds the stalk of the fruiting body. The specific epithet <em>discoideum</em> refers to the disc-shaped basal structure that anchors the fruiting body to the substrate. Raper was one of the pioneers of the study of cellular slime molds, and his isolation and description of <em>D. discoideum</em> established it as the species that would become, over the following decades, one of the most important model organisms in developmental biology.</p>
+
+    <p>The name &ldquo;slime mold&rdquo; is a misnomer that persists through habit and convenience. <em>Dictyostelium</em> is not a mold. Molds are fungi &mdash; members of a different kingdom of life, with different cellular architecture, different metabolic pathways, different evolutionary history. <em>Dictyostelium</em> is an amoeba &mdash; a member of the kingdom Amoebozoa, which is more closely related to animals and fungi than it is to plants or bacteria, but which represents its own distinct branch of the eukaryotic tree of life. The &ldquo;slime&rdquo; part of the name refers to the slime sheath secreted by the slug during its migration, a trail of mucilaginous material that the slug leaves behind it as it crawls, like a snail&rsquo;s trail but composed of cellulose and glycoproteins rather than mucus. The slime is functional &mdash; it lubricates the slug&rsquo;s path and provides a structural tube that helps maintain the slug&rsquo;s shape during migration &mdash; but it is also the feature that gave the organism its common name, and the common name is misleading enough that biologists have largely abandoned &ldquo;slime mold&rdquo; in favor of &ldquo;social amoeba,&rdquo; which captures the organism&rsquo;s most distinctive feature: its sociality.</p>
+
+    <hr>
+
+    <h2>Resonance Axes</h2>
+
+    <h3>1. False Start</h3>
+    <p>The <em>Dictyostelium</em> slug begins to form but can stall and collapse back to individual amoebae under unfavorable conditions. The aggregation initiates, the cells stream toward the center, the mound forms, and then &mdash; if the conditions are wrong &mdash; the process reverses, the cells separate, and the individuals resume their solitary existence. Mercury-Redstone 1 ignited, rose four inches, shut down, and settled back onto the pad. Both initiate a complex, multi-stage transition from one state to another and fail to complete it. The slug stalls on the substrate. The rocket stalls on the pad. Both are false starts &mdash; beginnings that do not reach their intended ends, sequences that initiate and abort, transitions that reverse.</p>
+
+    <h3>2. Sequence Sensitivity</h3>
+    <p><em>Dictyostelium</em> aggregation depends on precisely timed cAMP pulses at the correct frequency. Too fast, and the receptors desensitize. Too slow, and the gradient dissipates. Each stage of the developmental sequence depends on the correct execution of the previous stage in the correct order. Mercury-Redstone 1 failed because the tail plug connectors separated in the wrong order &mdash; power before control, a sequence error measured in milliseconds and fractions of an inch. Both are systems in which the timing and ordering of events is critical, in which the correct outcome depends not just on whether the right things happen but on whether they happen in the right sequence at the right time.</p>
+
+    <h3>3. Individual-to-Collective Transition</h3>
+    <p>Individual <em>Dictyostelium</em> amoebae aggregate into a multicellular slug &mdash; a transition from independent organisms to a collective entity with differentiated cell types and coordinated behavior. A rocket is a collection of individual components &mdash; engine, tanks, guidance, structure, capsule &mdash; that must function as a collective system. Both involve the transition from parts to whole, from independent elements to an integrated system. <em>Dictyostelium</em> achieves this transition through chemical signaling. The rocket achieves it through electrical connections. Both fail when the integration mechanism &mdash; the signal, the connector &mdash; does not function correctly.</p>
+
+    <h3>4. Signal Cascade</h3>
+    <p>The <em>Dictyostelium</em> developmental sequence is a multi-stage cascade: cAMP signal, aggregation, mound formation, slug migration, culmination, fruiting body. Each stage triggers the next. The Mercury mission profile is a multi-stage cascade: ignition, liftoff, ascent, tower jettison, engine cutoff, separation, reentry, parachutes, splashdown. Each stage triggers the next. Both cascades fail if any stage is disrupted, and neither cascade has the capacity to skip stages or recover from a disruption mid-sequence. The cAMP cascade and the flight sequence are both linear, irreversible (past a threshold), and vulnerable to disruption at any point.</p>
+
+    <h3>5. Model Organism / Model Failure</h3>
+    <p><em>Dictyostelium discoideum</em> is one of the most studied organisms in biology &mdash; THE model for understanding aggregation, multicellularity, altruism, and developmental signaling. Mercury-Redstone 1 is one of the most studied failures in aerospace engineering &mdash; THE model for understanding sneak circuits, connector design, sequencer logic, and the gap between specification and reality. Both are studied not for what they achieved in a conventional sense but for what they revealed. <em>Dictyostelium</em> reveals the mechanisms of collective behavior. MR-1 reveals the failure modes of collective behavior. Both are studied more than they &ldquo;accomplished,&rdquo; and both are valuable precisely because their simplicity makes the underlying principles visible and generalizable.</p>
+
+    <div class="sources">
+      <h2>Sources</h2>
+
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Raper, Kenneth B. &ldquo;Dictyostelium discoideum, a New Species of Slime Mold from Decaying Forest Leaves.&rdquo;</strong> Journal of Agricultural Research, Vol. 50, No. 2, 1935. The original species description, isolating <em>D. discoideum</em> from forest soil in North Carolina and documenting its morphology, life cycle, and aggregation behavior.</li>
+        <li><strong>Bonner, John Tyler. &ldquo;The Cellular Slime Molds.&rdquo;</strong> Princeton University Press, Princeton, NJ, 1967. (2nd edition.) The foundational monograph on <em>Dictyostelium</em> biology by the researcher who did more than anyone else to establish the organism as a model for studying development and multicellularity.</li>
+        <li><strong>Eichinger, Ludwig; Pachebat, Justin A.; Glockner, Gernot; et al. &ldquo;The Genome of the Social Amoeba Dictyostelium discoideum.&rdquo;</strong> Nature, Vol. 435, 2005. The complete genome sequence of <em>D. discoideum</em>, revealing approximately 12,500 genes in 34 million base pairs across six chromosomes.</li>
+      </ul>
+
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Kessin, Richard H. &ldquo;Dictyostelium: Evolution, Cell Biology, and the Development of Multicellularity.&rdquo;</strong> Cambridge University Press, Cambridge, UK, 2001. Comprehensive reference covering all aspects of <em>Dictyostelium</em> biology.</li>
+        <li><strong>Strassmann, Joan E.; Zhu, Yong; and Queller, David C. &ldquo;Altruism and Social Cheating in the Social Amoeba Dictyostelium discoideum.&rdquo;</strong> Nature, Vol. 408, 2000. Landmark study demonstrating that <em>D. discoideum</em> aggregations can contain genetically distinct clones, creating conditions for social conflict and cheating.</li>
+        <li><strong>Devreotes, Peter N. &ldquo;Dictyostelium discoideum: A Model System for Cell-Cell Interactions in Development.&rdquo;</strong> Science, Vol. 245, No. 4922, 1989. Review article establishing <em>D. discoideum</em> as a leading model for studying the molecular mechanisms of chemotaxis and intercellular signaling.</li>
+        <li><strong>Raper, Kenneth B. &ldquo;The Dictyostelids.&rdquo;</strong> Princeton University Press, Princeton, NJ, 1984. Comprehensive taxonomic treatment of all known dictyostelid species.</li>
+        <li><strong>Bonner, John Tyler. &ldquo;First Signals: The Evolution of Multicellular Development.&rdquo;</strong> Princeton University Press, 2000. Bonner&rsquo;s synthesis of the evolutionary origin of multicellularity, drawing heavily on <em>Dictyostelium</em> as a model.</li>
+        <li><strong>Li, Shaulsky. &ldquo;The Social Amoeba Dictyostelium discoideum.&rdquo;</strong> In &ldquo;Sociobiology of Communication,&rdquo; Oxford University Press, 2008. Chapter reviewing the communication systems of <em>D. discoideum</em>.</li>
+        <li><strong>Loomis, William F. &ldquo;Dictyostelium discoideum: A Developmental System.&rdquo;</strong> Academic Press, New York, 1975. Early comprehensive review of <em>D. discoideum</em> development.</li>
+        <li><strong>Schaap, Pauline. &ldquo;Evolutionary Crossroads in Developmental Biology: Dictyostelium discoideum.&rdquo;</strong> Development, Vol. 138, No. 3, 2011. Review placing <em>D. discoideum</em> at the intersection of unicellular and multicellular evolution.</li>
+      </ul>
+
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>dictyBase (dictybase.org) &mdash; Dictyostelium discoideum genome database.</strong> Central repository for <em>D. discoideum</em> genomic data, gene annotations, mutant phenotypes, and research community resources.</li>
+        <li><strong>GBIF (Global Biodiversity Information Facility) &mdash; Dictyostelium discoideum occurrence records.</strong> Global distribution data including confirmed records from Pacific Northwest forest soils.</li>
+        <li><strong>NCBI GenBank &mdash; Dictyostelium discoideum genome assembly (GCA_000004695).</strong> Complete genome sequence, gene predictions, and protein sequences.</li>
+        <li><strong>iNaturalist &mdash; Dictyostelium observations, Pacific Northwest region.</strong> Community science occurrence records with photographs of fruiting bodies.</li>
+        <li><strong>USDA Forest Service &mdash; Forest Inventory and Analysis (FIA) Database.</strong> Forest soil composition, litter depth, and stand type data for Pacific Northwest forests, providing habitat context for understanding <em>Dictyostelium</em> distribution.</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="research.html">&larr; Research</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="mathematics.html">Mathematics &rarr;</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.16 Mercury-Redstone 1 + <em>Dictyostelium discoideum</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a>
+</footer>
+
+</body>
+</html>

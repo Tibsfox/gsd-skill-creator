@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mercury Launch Sequence Game — MR-1</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #CC4020;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sequence-panel {
+    flex: 1;
+    min-width: 400px;
+    max-width: 600px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .panel-title {
+    font-size: 12px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a2040;
+  }
+  .buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .seq-button {
+    background: #1a2040;
+    border: 2px solid #2a3060;
+    border-radius: 8px;
+    padding: 20px 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .seq-button:hover {
+    border-color: #4488cc;
+    background: #1e2850;
+  }
+  .seq-button:active {
+    transform: scale(0.97);
+  }
+  .seq-button.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .seq-button .btn-letter {
+    font-size: 28px;
+    font-weight: bold;
+    color: #B0B8C0;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .seq-button .btn-label {
+    font-size: 10px;
+    color: #667788;
+    letter-spacing: 1px;
+  }
+  .seq-button.correct {
+    border-color: #44ff88;
+    background: rgba(68, 255, 136, 0.1);
+  }
+  .seq-button.correct .btn-letter { color: #44ff88; }
+  .seq-button.wrong {
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    animation: wrongPulse 0.5s ease;
+  }
+  .seq-button.wrong .btn-letter { color: #ff4444; }
+  @keyframes wrongPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .sequence-display {
+    background: #050810;
+    border: 1px solid #1a2040;
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .seq-step {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .seq-step.ok { background: rgba(68, 255, 136, 0.15); color: #44ff88; }
+  .seq-step.bad { background: rgba(255, 68, 68, 0.15); color: #ff4444; }
+  .seq-arrow {
+    color: #334455;
+    font-size: 16px;
+  }
+  .status-bar {
+    background: #050810;
+    border: 1px solid #1a2040;
+    border-radius: 6px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .status-bar.success {
+    border-color: #44ff88;
+    color: #44ff88;
+  }
+  .status-bar.failure {
+    border-color: #ff4444;
+    color: #ff4444;
+  }
+  .status-bar .status-text {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  .status-bar .status-detail {
+    font-size: 11px;
+    color: #667788;
+    margin-top: 5px;
+  }
+  .failure-animation {
+    border-color: #ff4444;
+  }
+  .reset-btn {
+    background: #1a2040;
+    border: 1px solid #2a3060;
+    border-radius: 6px;
+    padding: 10px 25px;
+    color: #4488cc;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+    display: block;
+    margin: 0 auto;
+  }
+  .reset-btn:hover {
+    border-color: #4488cc;
+    background: #1e2850;
+  }
+  .rocket-canvas {
+    width: 100%;
+    height: 300px;
+    background: #050810;
+    border: 1px solid #1a2040;
+    border-radius: 6px;
+    margin-bottom: 15px;
+  }
+  .score-panel {
+    flex: 0 0 300px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .score-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 13px;
+    border-bottom: 1px solid #0d1225;
+  }
+  .score-row .label { color: #667788; }
+  .score-row .value { font-weight: bold; }
+  .score-row .value.good { color: #44ff88; }
+  .score-row .value.bad { color: #ff4444; }
+  .hint-text {
+    font-size: 10px;
+    color: #445566;
+    margin-top: 15px;
+    line-height: 1.6;
+    padding-top: 10px;
+    border-top: 1px solid #1a2040;
+  }
+</style>
+</head>
+<body>
+
+<h1>Mercury Launch Sequence Game</h1>
+<p class="subtitle">NASA Mission Series v1.16 &mdash; Mercury-Redstone 1</p>
+
+<div class="main-container">
+  <div class="sequence-panel">
+    <div class="panel-title">Launch Sequence</div>
+
+    <div class="buttons-grid" id="buttons">
+      <div class="seq-button" data-pin="A" onclick="pressButton('A')">
+        <span class="btn-letter">A</span>
+        <span class="btn-label">Pad Power</span>
+      </div>
+      <div class="seq-button" data-pin="B" onclick="pressButton('B')">
+        <span class="btn-letter">B</span>
+        <span class="btn-label">Control Bus</span>
+      </div>
+      <div class="seq-button" data-pin="C" onclick="pressButton('C')">
+        <span class="btn-letter">C</span>
+        <span class="btn-label">Telemetry</span>
+      </div>
+      <div class="seq-button" data-pin="D" onclick="pressButton('D')">
+        <span class="btn-letter">D</span>
+        <span class="btn-label">Umbilical</span>
+      </div>
+    </div>
+
+    <div class="panel-title">Sequence</div>
+    <div class="sequence-display" id="seqDisplay">
+      <span style="color: #445566; font-size: 11px;">Press buttons in launch order...</span>
+    </div>
+
+    <div class="status-bar" id="statusBar">
+      <div class="status-text">AWAITING SEQUENCE</div>
+      <div class="status-detail">Disconnect connectors in the correct order to launch</div>
+    </div>
+
+    <canvas class="rocket-canvas" id="rocketCanvas"></canvas>
+
+    <button class="reset-btn" onclick="resetGame()">Reset Sequence</button>
+  </div>
+
+  <div class="score-panel">
+    <div class="panel-title">Mission Log</div>
+    <div class="score-row">
+      <span class="label">Attempts</span>
+      <span class="value" id="attempts">0</span>
+    </div>
+    <div class="score-row">
+      <span class="label">Successful Launches</span>
+      <span class="value good" id="successes">0</span>
+    </div>
+    <div class="score-row">
+      <span class="label">Sneak Circuits</span>
+      <span class="value bad" id="failures">0</span>
+    </div>
+    <div class="score-row">
+      <span class="label">Success Rate</span>
+      <span class="value" id="rate">--%</span>
+    </div>
+    <div class="score-row">
+      <span class="label">Correct Sequence</span>
+      <span class="value" id="correctSeq" style="color: #445566;">? ? ? ?</span>
+    </div>
+    <div class="score-row">
+      <span class="label">Probability (random)</span>
+      <span class="value" style="color: #E88020;">4.2% (1/24)</span>
+    </div>
+
+    <div class="hint-text">
+      <strong style="color: #CC4020;">MR-1 History:</strong> On November 21, 1960,
+      the Mercury-Redstone 1 rocket rose exactly four inches off the pad before
+      its engine shut down. The tail plug connector pins separated in the wrong
+      order, creating a sneak circuit that sent a spurious shutdown signal.
+      <br><br>
+      The escape tower then fired and arced away. The capsule, sitting on a dead
+      rocket, deployed its parachutes on the pad. Engineers had to wait 24 hours
+      for batteries to die before anyone could approach.
+      <br><br>
+      <strong style="color: #4488cc;">Your mission:</strong> Find the correct
+      disconnection sequence. There is exactly one correct order out of 24
+      possible permutations.
+    </div>
+  </div>
+</div>
+
+<script>
+const CORRECT = ['A', 'B', 'C', 'D'];
+const LABELS = { A: 'Pad Power', B: 'Control Bus', C: 'Telemetry', D: 'Umbilical' };
+
+let sequence = [];
+let gameOver = false;
+let stats = { attempts: 0, successes: 0, failures: 0 };
+let animFrame = null;
+let revealed = false;
+
+function pressButton(pin) {
+  if (gameOver) return;
+  if (sequence.includes(pin)) return;
+
+  const btn = document.querySelector(`[data-pin="${pin}"]`);
+  sequence.push(pin);
+
+  // Check if this step is correct
+  const idx = sequence.length - 1;
+  const isCorrect = sequence[idx] === CORRECT[idx];
+
+  // Update button appearance
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  btn.classList.add('disabled');
+
+  // Update sequence display
+  updateSequenceDisplay();
+
+  if (!isCorrect) {
+    // SNEAK CIRCUIT - FAILURE
+    gameOver = true;
+    stats.attempts++;
+    stats.failures++;
+    updateStats();
+
+    const status = document.getElementById('statusBar');
+    status.className = 'status-bar failure';
+    status.querySelector('.status-text').textContent = 'SNEAK CIRCUIT — ENGINE SHUTDOWN';
+    status.querySelector('.status-detail').textContent =
+      `Expected: ${CORRECT[idx]} (${LABELS[CORRECT[idx]]}) — Got: ${pin} (${LABELS[pin]})`;
+
+    // Animate the MR-1 failure
+    animateMR1Failure();
+  } else if (sequence.length === 4) {
+    // ALL CORRECT - LAUNCH!
+    gameOver = true;
+    stats.attempts++;
+    stats.successes++;
+    updateStats();
+
+    const status = document.getElementById('statusBar');
+    status.className = 'status-bar success';
+    status.querySelector('.status-text').textContent = 'LAUNCH SUCCESSFUL';
+    status.querySelector('.status-detail').textContent =
+      'All connectors disconnected in correct order — nominal ascent';
+
+    animateLaunch();
+  }
+}
+
+function updateSequenceDisplay() {
+  const display = document.getElementById('seqDisplay');
+  display.innerHTML = '';
+
+  sequence.forEach((pin, i) => {
+    if (i > 0) {
+      const arrow = document.createElement('span');
+      arrow.className = 'seq-arrow';
+      arrow.textContent = '\u2192';
+      display.appendChild(arrow);
+    }
+
+    const step = document.createElement('span');
+    const isOk = pin === CORRECT[i];
+    step.className = `seq-step ${isOk ? 'ok' : 'bad'}`;
+    step.textContent = `${pin} ${LABELS[pin]}`;
+    display.appendChild(step);
+  });
+}
+
+function updateStats() {
+  document.getElementById('attempts').textContent = stats.attempts;
+  document.getElementById('successes').textContent = stats.successes;
+  document.getElementById('failures').textContent = stats.failures;
+
+  const rate = stats.attempts > 0
+    ? Math.round(stats.successes / stats.attempts * 100) : 0;
+  document.getElementById('rate').textContent = rate + '%';
+
+  // Reveal correct sequence after 5 failed attempts
+  if (stats.failures >= 5 && !revealed) {
+    revealed = true;
+    document.getElementById('correctSeq').textContent = CORRECT.join(' \u2192 ');
+    document.getElementById('correctSeq').style.color = '#44ff88';
+  }
+}
+
+function resetGame() {
+  sequence = [];
+  gameOver = false;
+  if (animFrame) cancelAnimationFrame(animFrame);
+
+  // Reset buttons
+  document.querySelectorAll('.seq-button').forEach(btn => {
+    btn.className = 'seq-button';
+  });
+
+  // Reset display
+  document.getElementById('seqDisplay').innerHTML =
+    '<span style="color: #445566; font-size: 11px;">Press buttons in launch order...</span>';
+
+  const status = document.getElementById('statusBar');
+  status.className = 'status-bar';
+  status.querySelector('.status-text').textContent = 'AWAITING SEQUENCE';
+  status.querySelector('.status-detail').textContent =
+    'Disconnect connectors in the correct order to launch';
+
+  // Clear canvas
+  const canvas = document.getElementById('rocketCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawRocketStatic(ctx, canvas);
+}
+
+// ============================================================
+// ROCKET ANIMATION
+// ============================================================
+
+function initCanvas() {
+  const canvas = document.getElementById('rocketCanvas');
+  canvas.width = canvas.offsetWidth * 2;
+  canvas.height = canvas.offsetHeight * 2;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(2, 2);
+  drawRocketStatic(ctx, canvas);
+}
+
+function drawRocketStatic(ctx, canvas) {
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  ctx.fillStyle = '#050810';
+  ctx.fillRect(0, 0, w, h);
+
+  // Pad
+  ctx.fillStyle = '#606060';
+  ctx.fillRect(w/2 - 40, h - 30, 80, 30);
+
+  // Rocket body
+  const rx = w/2;
+  const ry = h - 30;
+  drawRocket(ctx, rx, ry, 1.0);
+}
+
+function drawRocket(ctx, x, baseY, opacity) {
+  ctx.globalAlpha = opacity;
+
+  // Body
+  ctx.fillStyle = '#B0B8C0';
+  ctx.fillRect(x - 8, baseY - 100, 16, 70);
+
+  // Redstone stripes
+  ctx.fillStyle = '#CC4020';
+  ctx.fillRect(x - 8, baseY - 50, 16, 20);
+
+  // Capsule
+  ctx.fillStyle = '#606060';
+  ctx.beginPath();
+  ctx.moveTo(x - 8, baseY - 100);
+  ctx.lineTo(x, baseY - 120);
+  ctx.lineTo(x + 8, baseY - 100);
+  ctx.fill();
+
+  // Escape tower
+  ctx.strokeStyle = '#888';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(x, baseY - 120);
+  ctx.lineTo(x, baseY - 140);
+  ctx.stroke();
+
+  ctx.globalAlpha = 1.0;
+}
+
+function animateMR1Failure() {
+  const canvas = document.getElementById('rocketCanvas');
+  const ctx = canvas.getContext('2d');
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  const startTime = performance.now();
+  const duration = 8000; // 8 seconds
+
+  const parachutes = [];
+  for (let i = 0; i < 8; i++) {
+    parachutes.push({
+      x: w/2 + (Math.random() - 0.5) * 30,
+      startY: h - 170,
+      speed: 0.3 + Math.random() * 0.2,
+      drift: (Math.random() - 0.5) * 0.5,
+      delay: 4000 + i * 200
+    });
+  }
+
+  function frame(now) {
+    const elapsed = now - startTime;
+    const t = elapsed / duration;
+
+    ctx.fillStyle = '#050810';
+    ctx.fillRect(0, 0, w, h);
+
+    // Pad
+    ctx.fillStyle = '#606060';
+    ctx.fillRect(w/2 - 40, h - 30, 80, 30);
+
+    // Rocket rise (4 inches = tiny amount)
+    let rocketY = h - 30;
+    if (t > 0.05 && t < 0.25) {
+      const riseFrac = Math.sin((t - 0.05) / 0.2 * Math.PI);
+      rocketY -= riseFrac * 5; // 5 pixels = "4 inches"
+    }
+
+    drawRocket(ctx, w/2, rocketY, 1.0);
+
+    // Engine flame (brief)
+    if (t > 0.02 && t < 0.20) {
+      const flameAlpha = t < 0.1 ? (t - 0.02) / 0.08 : Math.max(0, (0.20 - t) / 0.10);
+      ctx.globalAlpha = flameAlpha;
+      ctx.fillStyle = '#FF6600';
+      ctx.beginPath();
+      ctx.moveTo(w/2 - 6, rocketY);
+      ctx.lineTo(w/2, rocketY + 15 + Math.random() * 5);
+      ctx.lineTo(w/2 + 6, rocketY);
+      ctx.fill();
+      ctx.globalAlpha = 1.0;
+    }
+
+    // Escape tower fires and arcs away (t = 0.3 to 0.6)
+    if (t > 0.3 && t < 0.8) {
+      const towerT = (t - 0.3) / 0.5;
+      const towerX = w/2 + towerT * 100;
+      const towerY = (h - 170) - towerT * 150 + towerT * towerT * 200;
+      const alpha = Math.max(0, 1.0 - towerT);
+
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#CC4020';
+      ctx.beginPath();
+      ctx.arc(towerX, towerY, 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Tower exhaust
+      ctx.fillStyle = '#FF4400';
+      ctx.beginPath();
+      ctx.arc(towerX - 5, towerY + 3, 2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1.0;
+    }
+
+    // Parachutes deploy and drape
+    for (const chute of parachutes) {
+      if (elapsed > chute.delay) {
+        const chuteT = (elapsed - chute.delay) / 3000;
+        const chuteY = chute.startY + Math.min(chuteT, 1.0) * (rocketY - 50 - chute.startY);
+        const chuteX = chute.x + Math.sin(chuteT * 5 + chute.x) * 3;
+
+        ctx.fillStyle = '#E88020';
+        ctx.globalAlpha = Math.min(1.0, chuteT * 2);
+        ctx.beginPath();
+        ctx.moveTo(chuteX - 5, chuteY);
+        ctx.quadraticCurveTo(chuteX, chuteY - 8, chuteX + 5, chuteY);
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+      }
+    }
+
+    // Status text
+    ctx.fillStyle = '#ff4444';
+    ctx.font = '11px monospace';
+    ctx.textAlign = 'center';
+    if (t < 0.05) {
+      ctx.fillText('IGNITION', w/2, 20);
+    } else if (t < 0.20) {
+      ctx.fillText('LIFTOFF... 4 INCHES', w/2, 20);
+    } else if (t < 0.30) {
+      ctx.fillText('ENGINE SHUTDOWN — SNEAK CIRCUIT', w/2, 20);
+    } else if (t < 0.50) {
+      ctx.fillStyle = '#E88020';
+      ctx.fillText('ESCAPE TOWER FIRES', w/2, 20);
+    } else if (t < 0.70) {
+      ctx.fillStyle = '#E88020';
+      ctx.fillText('PARACHUTES DEPLOYING ON PAD', w/2, 20);
+    } else {
+      ctx.fillStyle = '#667788';
+      ctx.fillText('WAITING 24 HOURS FOR BATTERIES TO DIE...', w/2, 20);
+    }
+
+    if (t < 1.0) {
+      animFrame = requestAnimationFrame(frame);
+    }
+  }
+
+  animFrame = requestAnimationFrame(frame);
+}
+
+function animateLaunch() {
+  const canvas = document.getElementById('rocketCanvas');
+  const ctx = canvas.getContext('2d');
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  const startTime = performance.now();
+  const duration = 5000;
+
+  function frame(now) {
+    const elapsed = now - startTime;
+    const t = elapsed / duration;
+
+    ctx.fillStyle = '#050810';
+    ctx.fillRect(0, 0, w, h);
+
+    // Pad
+    ctx.fillStyle = '#606060';
+    ctx.fillRect(w/2 - 40, h - 30, 80, 30);
+
+    // Rocket rises and accelerates away
+    const rocketY = (h - 30) - t * t * h * 2;
+    if (rocketY > -150) {
+      drawRocket(ctx, w/2, rocketY, 1.0);
+
+      // Engine flame
+      ctx.fillStyle = '#FF6600';
+      ctx.globalAlpha = 0.8;
+      const flameLen = 20 + t * 40;
+      ctx.beginPath();
+      ctx.moveTo(w/2 - 8, rocketY);
+      ctx.lineTo(w/2, rocketY + flameLen + Math.random() * 10);
+      ctx.lineTo(w/2 + 8, rocketY);
+      ctx.fill();
+      ctx.globalAlpha = 1.0;
+    }
+
+    ctx.fillStyle = '#44ff88';
+    ctx.font = '12px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('NOMINAL ASCENT', w/2, 20);
+
+    if (t < 1.0) {
+      animFrame = requestAnimationFrame(frame);
+    }
+  }
+
+  animFrame = requestAnimationFrame(frame);
+}
+
+// Initialize
+window.addEventListener('load', initCanvas);
+window.addEventListener('resize', () => {
+  initCanvas();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.16 — Mercury-Redstone 1 + Dictyostelium discoideum | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --pad-deep: #0A0808; --pad-mid: #1A1410;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --redstone-red: #CC4020; --redstone-dim: #662010;
+    --pad-gray: #606060; --pad-light: #909090;
+    --parachute-orange: #E88020; --abort-red: #FF0000;
+    --space: #080808; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2020;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(204,64,32,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(204,64,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(96,104,112,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(204,64,32,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(8,8,8,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(204,64,32,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--pad-deep) 20%, var(--pad-mid) 40%, var(--redstone-dim) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--redstone-red);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(204,64,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,64,32,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(204,64,32,0.12); border: 1px solid var(--redstone-red); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--parachute-orange); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-failed {
+    background: rgba(255,0,0,0.2); border: 1px solid var(--abort-red);
+    color: var(--abort-red); padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--parachute-orange);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--parachute-orange); }
+  .card em { color: var(--pad-light); }
+
+  .resonance-card { border-color: var(--redstone-dim); background: rgba(204,64,32,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(204,64,32,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--redstone-red); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--mercury-silver); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--redstone-red); background: rgba(204,64,32,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--parachute-orange); }
+  .track-card.t2 .track-title { color: var(--mercury-silver); }
+  .track-card.t3 .track-title { color: var(--mercury-silver); }
+  .track-card.t4 .track-title { color: var(--parachute-orange); }
+  .track-card.t5 .track-title { color: var(--mercury-silver); }
+  .track-card.t6 .track-title { color: var(--parachute-orange); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(204,64,32,0.08); border: 1px solid var(--redstone-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--pad-light); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(8,8,8,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--parachute-orange); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(204,64,32,0.12); border: 1px solid rgba(204,64,32,0.3);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--mercury-silver); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(204,64,32,0.2); transition: color 0.2s; }
+  .data-links a:hover { color: #fff; }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.16</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-failed">MISSION FAILED</span>
+    </div>
+    <h1>v1.16 &mdash; Mercury-Redstone 1 + <em>Dictyostelium discoideum</em></h1>
+    <p class="subtitle">Four Inches &mdash; The Most Embarrassing Launch in Mercury History</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> November 21, 1960</span>
+      <span><span class="label">Program:</span> Mercury (NASA / McDonnell / ABMA)</span>
+      <span><span class="label">Vehicle:</span> Mercury-Redstone (MRLV-1)</span>
+      <span><span class="label">Altitude:</span> 4 inches (10.2 cm)</span>
+      <span><span class="label">Organism:</span> Social amoeba</span>
+      <span><span class="label">Bird:</span> Red-tailed Hawk</span>
+      <span><span class="label">Dedication:</span> Voltaire</span>
+      <span><span class="label">Status:</span> FAILURE &mdash; sneak circuit, engine shutdown at 4 inches</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On November 21, 1960, Mercury-Redstone 1 ignited at Launch Complex 5, Cape Canaveral. The Rocketdyne A-7 engine produced 78,000 pounds of thrust. The rocket rose approximately four inches off the launch pedestal. Then the engine shut down. <strong>The entire flight lasted four inches.</strong></p>
+      <p>The onboard sequencer, detecting liftoff (the rocket had, after all, risen four inches), initiated the post-flight sequence: escape tower jettison, drogue parachute, main parachute, reserve parachute. All deployed perfectly &mdash; from a capsule sitting motionless on the launch pad. The parachutes draped over the fully fueled, still-pressurized Redstone booster in a tangle of nylon that would have been comical if it had not been genuinely terrifying.</p>
+      <p>The cause: a sneak circuit in the tail plug connector. The connectors separated in the wrong order (control before power, instead of power before control), creating an unintended current path that the engine controller interpreted as a shutdown command. The fix: redesign the connector for simultaneous disconnection. MR-1A launched 28 days later and flew a perfect suborbital trajectory. The fix cost millimeters. The failure cost a month the Mercury program could not afford.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">Four Inches</div>
+            <div class="track-desc">The most famous 4-inch flight in history. Sneak circuits, the dangerous aftermath, the fix, the sequencer&rsquo;s logic, Voltaire&rsquo;s garden</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">NASA TN D-1210 failure analysis, GNN sneak circuit detection, STPA-Seq sequence hazards, <em>Dictyostelium</em> cAMP timing failures</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Dictyostelium discoideum</em></div>
+            <div class="track-desc">Social amoeba &mdash; the false start, cAMP relay, slug formation, fruiting body, sequence sensitivity, 600 million years of debugging</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Sequence</div>
+            <div class="track-desc">State machines, race conditions, Boolean sneak circuit analysis, n! permutations, thrust-to-weight kinematics, the physics of four inches</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">EE, Systems, Failure Analysis, Biology, Math, Literature. Arduino sequence tester TRY. Household sneak circuit DIY. Fox Companies.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Train, Visualize, Create</div>
+            <div class="track-desc">State machine simulator, thrust calculator, launch sequence game, event timeline, sequence anomaly detector, &ldquo;Four Inches&rdquo; shader</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">False Start</div>
+          The slug begins to form but can stall and collapse back to individual amoebae. MR-1 ignited, rose four inches, shut down, and settled back. Both initiate a complex multi-stage transition and fail to complete it.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Sequence Sensitivity</div>
+          <em>Dictyostelium</em> aggregation depends on precisely timed cAMP pulses. MR-1 failed because connectors separated in the wrong order. Both are systems where timing and ordering determine success or failure.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Individual-to-Collective Transition</div>
+          Individual amoebae aggregate into a multicellular slug. Individual rocket components must function as a collective system. Both fail when the integration mechanism &mdash; the signal, the connector &mdash; does not function correctly.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Signal Cascade</div>
+          The cAMP cascade and the flight sequence are both linear, irreversible past a threshold, and vulnerable to disruption at any point. Neither can skip stages or recover mid-sequence.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Model Organism / Model Failure</div>
+          <em>Dictyostelium</em> is THE model for understanding aggregation and multicellularity. MR-1 is THE model for understanding sneak circuits and sequence-dependent failure. Both are studied more than they &ldquo;accomplished.&rdquo;
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><strong>Shader: &ldquo;Four Inches&rdquo;</strong> &mdash; GLSL fragment shader, Mercury-Redstone on the pad with parachutes in the Florida sun</li>
+        <li><strong>Story: &ldquo;The Longest Four Inches&rdquo;</strong> &mdash; Creative nonfiction from the blockhouse crew&rsquo;s perspective</li>
+        <li><strong>Arduino: MR-1 Sequence Tester</strong> &mdash; Physical device demonstrating sequence-dependent failure</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><strong>Python: Connector State Machine Simulator</strong> &mdash; All 8 states, 6 permutations, sneak circuit visualization</li>
+        <li><strong>Python: Thrust Curve and Rise Height Calculator</strong> &mdash; T/W ratio, velocity at 4 inches, parametric study</li>
+        <li><strong>Web: Interactive Launch Sequence Game</strong> &mdash; Disconnect cables in order, reproduce MR-1&rsquo;s failure</li>
+        <li><strong>Web: MR-1 Event Timeline</strong> &mdash; Second-by-second timeline, zoomable to the 80-ms sneak circuit window</li>
+        <li><strong>ML: Sequence Anomaly Detector</strong> &mdash; LSTM classifier for out-of-order disconnection sequences</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: var(--mercury-silver);">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(204,64,32,0.04); border-color: var(--redstone-dim);">
+      <h2 style="color: var(--parachute-orange);">Dedication: Voltaire</h2>
+      <p><strong>Born November 21, 1694 &mdash; Died May 30, 1778</strong></p>
+      <p>Francois-Marie Arouet was born on the same calendar date, 266 years before Mercury-Redstone 1 sat on its pad draped in parachutes. His <em>Candide</em> (1759) is a sustained demolition of Leibnizian optimism &mdash; the proposition that this is the best of all possible worlds. MR-1 is a Voltairean parable: the optimism collapsed not under the weight of catastrophe but under the weight of absurdity. The escape tower flying away from a mission that needed no escape. The parachutes deploying at sea level. The sequencer executing a flawless post-flight sequence for a flight that had not occurred.</p>
+      <p>And then the engineers did what Candide did. They tended their garden. They found the sneak circuit. They redesigned the connector. They lengthened one pin by a few millimeters. They launched MR-1A twenty-eight days later and it worked.</p>
+      <p style="font-style: italic; color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; text-align: center;"><strong style="color: var(--parachute-orange); font-size: 1.3rem;">Il faut cultiver notre jardin.</strong></p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.15/index.html">&larr; v1.15 TIROS-1</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.17/index.html">v1.17 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Dictyostelium discoideum (Social Amoeba)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">~100K</div>
+          <div class="stat-label">Cells/Slug</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">6 min</div>
+          <div class="stat-label">cAMP Pulse</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">12,500</div>
+          <div class="stat-label">Genes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">1&ndash;3 mm</div>
+          <div class="stat-label">Fruiting Body</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        A single-celled amoeba that becomes multicellular when starved. Up to 100,000 individuals aggregate through cAMP relay signals, forming a slug that crawls toward light and erects a fruiting body. Found in PNW forest soils &mdash; under the cedars and hemlocks, invisible, eating bacteria, occasionally becoming something greater than itself.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(204,64,32,0.06); border-color: var(--redstone-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Bird: Red-tailed Hawk</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em>Buteo jamaicensis</em> (degree 16). The most common raptor in North America. Hunting sequence: perch, scan, identify, launch, dive, extend talons, strike, grip. Seven states, one path, zero tolerance for wrong ordering. Misses ~40% of attempts &mdash; not because the sequence fails, but because the prey evades. 600 million years of debugging vs. 5 years for the Redstone tail plug.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: MR-1</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS System</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://airandspace.si.edu/">Smithsonian Air &amp; Space Museum</a>
+      <a href="https://dictybase.org/">dictyBase: D. discoideum</a>
+      <a href="https://www.gbif.org/">GBIF: D. discoideum Records</a>
+      <a href="https://www.ncbi.nlm.nih.gov/genbank/">NCBI GenBank</a>
+      <a href="https://www.inaturalist.org/">iNaturalist: PNW Observations</a>
+    </div>
+
+    <div class="card" style="background: rgba(204,64,32,0.08); border-color: rgba(204,64,32,0.3);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--parachute-orange);">Primary:</strong> Electrical Engineering (Connector Design, Sneak Circuits), Systems Engineering (Failure Analysis), Failure Analysis (SCA Methodology)<br>
+        <strong style="color: var(--parachute-orange);">Secondary:</strong> Biology (cAMP Signaling, Collective Behavior), Mathematics (Combinatorics, State Space), Literature (Voltaire, Satire of Optimism)
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(204,64,32,0.08); border-color: rgba(204,64,32,0.3);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">TSPB Layers</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--parachute-orange);">Layer 5:</strong> Set Theory &mdash; Sequence logic, permutations, state machine enumeration<br>
+        <strong style="color: var(--parachute-orange);">Layer 7:</strong> Information Theory &mdash; Sneak circuit analysis, race conditions, channel coding<br>
+        <strong style="color: var(--parachute-orange);">Layer 4:</strong> Vector Calculus &mdash; Thrust vs. weight at 4 inches<br>
+        <strong style="color: var(--parachute-orange);">Layer 1:</strong> Unit Circle &mdash; Timing sequences, clock synchronization
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.16 Mercury-Redstone 1 + <em>Dictyostelium discoideum</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a>
+</footer>
+
+</body>
+</html>

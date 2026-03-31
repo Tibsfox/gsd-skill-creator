@@ -1,0 +1,127 @@
+* Mercury-Redstone 1 — Tail Plug Sneak Circuit Model
+* ==================================================
+* NASA Mission Series v1.16
+*
+* Models the MR-1 tail plug connector with two disconnection
+* sequences to demonstrate the sneak circuit failure.
+*
+* The tail plug had a multi-pin connector. When the rocket rose,
+* pins separated in sequence based on physical pin length. The
+* correct sequence (power first, then control) breaks the shutdown
+* command path before the inhibit circuit opens. The wrong sequence
+* (control first, then power) creates a transient path that sends
+* a spurious shutdown signal to the engine.
+*
+* Circuit model (simplified):
+*   - Power bus (V_power): ground power to vehicle
+*   - Control inhibit (SW_control): normally-closed, inhibits shutdown
+*   - Shutdown relay coil (R_coil): triggers engine cutoff when energized
+*   - Sneak path: parasitic coupling through partially-connected plug
+*
+* Two simulations:
+*   1. Correct sequence: power disconnects at T=1s, control at T=2s
+*   2. Wrong sequence (MR-1): control disconnects at T=1s, power at T=2s
+*
+* Run: ngspice -b sneak-circuit.cir
+
+*--------------------------------------------------------------
+* POWER SUPPLIES
+*--------------------------------------------------------------
+V_vehicle_batt   v_batt    0   DC 28       ; Vehicle internal battery (28V DC)
+V_ground_power   v_gnd_pwr 0   DC 28       ; Ground power through tail plug
+
+*--------------------------------------------------------------
+* SIMULATION 1: CORRECT SEQUENCE (Power first, then Control)
+*--------------------------------------------------------------
+* This subcircuit demonstrates the SAFE disconnection order.
+
+.subckt CORRECT_SEQ  shutdown_out  gnd
+  * Ground power through tail plug (disconnects at T=1.0s)
+  V_pwr    pwr_bus   gnd   DC 28
+  S_power  pwr_bus   pwr_out  pwr_ctrl  gnd  SW_OPEN
+  V_pwr_ctrl  pwr_ctrl  gnd  PWL(0 0  0.99 0  1.0 5  10 5)
+
+  * Control inhibit through tail plug (disconnects at T=2.0s)
+  * When closed: inhibits shutdown. When open: allows shutdown.
+  R_inhibit  pwr_out  inhib_node  1k
+  S_control  inhib_node  gnd  ctrl_ctrl  gnd  SW_OPEN
+  V_ctrl_ctrl  ctrl_ctrl  gnd  PWL(0 0  1.99 0  2.0 5  10 5)
+
+  * Shutdown relay coil
+  * Only fires if voltage appears across it while control is open
+  * AND power is still available
+  R_coil     inhib_node  coil_out  500
+  C_coil     coil_out    gnd       1u    ; Relay coil inductance (simplified)
+  R_load     coil_out    gnd       10k   ; Coil return path
+
+  * Shutdown detection (voltage across coil)
+  B_detect   shutdown_out  gnd  V = abs(V(coil_out)) > 5 ? 5 : 0
+.ends
+
+X_correct  correct_shutdown  0  CORRECT_SEQ
+
+*--------------------------------------------------------------
+* SIMULATION 2: WRONG SEQUENCE — MR-1 ACTUAL (Control first)
+*--------------------------------------------------------------
+* This subcircuit demonstrates the SNEAK CIRCUIT failure.
+
+.subckt WRONG_SEQ  shutdown_out  gnd
+  * Ground power through tail plug (disconnects at T=2.0s — LATE)
+  V_pwr    pwr_bus   gnd   DC 28
+  S_power  pwr_bus   pwr_out  pwr_ctrl  gnd  SW_OPEN
+  V_pwr_ctrl  pwr_ctrl  gnd  PWL(0 0  1.99 0  2.0 5  10 5)
+
+  * Control inhibit through tail plug (disconnects at T=1.0s — EARLY)
+  R_inhibit  pwr_out  inhib_node  1k
+  S_control  inhib_node  gnd  ctrl_ctrl  gnd  SW_OPEN
+  V_ctrl_ctrl  ctrl_ctrl  gnd  PWL(0 0  0.99 0  1.0 5  10 5)
+
+  * Shutdown relay coil (same as correct sequence)
+  R_coil     inhib_node  coil_out  500
+  C_coil     coil_out    gnd       1u
+  R_load     coil_out    gnd       10k
+
+  * Sneak path: parasitic coupling through partially-connected plug
+  * This resistance represents the unintended path through the
+  * connector housing that exists only when pins are partially mated
+  R_sneak    pwr_out   inhib_node  2k  ; Parasitic sneak path
+
+  * Shutdown detection
+  B_detect   shutdown_out  gnd  V = abs(V(coil_out)) > 5 ? 5 : 0
+.ends
+
+X_wrong  wrong_shutdown  0  WRONG_SEQ
+
+*--------------------------------------------------------------
+* SWITCH MODEL
+*--------------------------------------------------------------
+* Normally closed switch that opens when control voltage > 2.5V
+.model SW_OPEN SW(RON=0.1 ROFF=1MEG VT=2.5 VH=0.1)
+
+*--------------------------------------------------------------
+* ANALYSIS
+*--------------------------------------------------------------
+.tran 10u 5s
+
+*--------------------------------------------------------------
+* CONTROL
+*--------------------------------------------------------------
+.control
+  run
+  set hcopydevtype = svg
+
+  * Plot 1: Correct sequence — no spurious shutdown
+  plot V(correct_shutdown) title 'Correct Sequence: Power First'
++   xlabel 'Time (s)' ylabel 'Shutdown Signal (V)'
+
+  * Plot 2: Wrong sequence — sneak circuit triggers shutdown
+  plot V(wrong_shutdown) title 'Wrong Sequence (MR-1): Control First — SNEAK CIRCUIT'
++   xlabel 'Time (s)' ylabel 'Shutdown Signal (V)'
+
+  * Plot 3: Both overlaid for comparison
+  plot V(correct_shutdown) V(wrong_shutdown)
++   title 'Tail Plug Disconnection: Correct vs MR-1 Actual'
++   xlabel 'Time (s)' ylabel 'Shutdown Signal (V)'
+.endc
+
+.end

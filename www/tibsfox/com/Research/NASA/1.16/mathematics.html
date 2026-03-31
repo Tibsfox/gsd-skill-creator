@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: The Mathematics of Sequence | v1.16 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --pad-deep: #0A0808; --pad-mid: #1A1410;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --redstone-red: #CC4020; --redstone-dim: #662010;
+    --pad-gray: #606060; --pad-light: #909090;
+    --parachute-orange: #E88020; --abort-red: #FF0000;
+    --space: #080808; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #2A2020;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(204,64,32,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(204,64,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(204,64,32,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--pad-deep) 25%, var(--pad-mid) 50%, var(--redstone-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--redstone-red); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(204,64,32,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(204,64,32,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(204,64,32,0.12); border: 1px solid var(--redstone-red); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--parachute-orange); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(204,64,32,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--parachute-orange); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--parachute-orange); }
+  em { color: var(--pad-light); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; }
+  a:hover { color: #fff; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  pre {
+    background: rgba(10,8,8,0.8); border: 1px solid var(--border); border-radius: 6px;
+    padding: 1.25rem; margin: 1.5rem 0; overflow-x: auto;
+    font-family: 'DM Mono', monospace; font-size: 0.82rem; line-height: 1.6; color: var(--mercury-silver);
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+  th { background: rgba(176,184,192,0.08); color: var(--mercury-silver); font-weight: 600; text-align: left; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--border); }
+  td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--text); }
+
+  blockquote {
+    border-left: 3px solid var(--redstone-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(8,8,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  .nav-card {
+    background: rgba(8,8,8,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.16 Mercury-Redstone 1</a>
+  <span class="sep">/</span>
+  Track 3: TSPB Mathematics
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.16</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of Sequence</h1>
+    <p class="subtitle">Mercury-Redstone 1 &mdash; sequence logic, state machines, connector ordering, sneak circuits, the physics of four inches</p>
+    <div class="meta-row">
+      <span><span class="label">Primary TSPB Layer:</span> 5 (Set Theory)</span>
+      <span><span class="label">Secondary:</span> 7 (Information Theory), 4 (Vector Calculus), 1 (Unit Circle)</span>
+      <span><span class="label">Format:</span> McNeese-Hoag (1959)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Deposit 1: Sequence Logic and Race Conditions (Layer 5, Section 5.16)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>MR-1 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>November 21, 1960, 14:00 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Mercury-Redstone (MRLV-1)</td></tr>
+      <tr><td>Operating agency</td><td>&mdash;</td><td>&mdash;</td><td>NASA / Space Task Group, Langley</td></tr>
+      <tr><td>Spacecraft</td><td>&mdash;</td><td>&mdash;</td><td>Mercury capsule #2 (unmanned)</td></tr>
+      <tr><td>Engine</td><td>&mdash;</td><td>&mdash;</td><td>Rocketdyne A-7 (modified Redstone)</td></tr>
+      <tr><td>Thrust (sea level)</td><td>F</td><td>lbf</td><td>~75,000 (~333,617 N)</td></tr>
+      <tr><td>Vehicle mass at ignition</td><td>m</td><td>kg</td><td>~30,000 (66,000 lb)</td></tr>
+      <tr><td>Maximum altitude achieved</td><td>h<sub>max</sub></td><td>inches</td><td>~4 (~10.2 cm)</td></tr>
+      <tr><td>Flight duration</td><td>t<sub>flight</sub></td><td>seconds</td><td>~2</td></tr>
+      <tr><td>Tail plug connector pins</td><td>&mdash;</td><td>&mdash;</td><td>Multiple, sequenced disconnect</td></tr>
+      <tr><td>Escape tower jettison altitude</td><td>&mdash;</td><td>&mdash;</td><td>0 (on pad)</td></tr>
+      <tr><td>Parachute deployment altitude</td><td>&mdash;</td><td>&mdash;</td><td>0 (on pad)</td></tr>
+      <tr><td>Result</td><td>&mdash;</td><td>&mdash;</td><td>FAILURE &mdash; engine shutdown by sneak circuit</td></tr>
+      <tr><td>Fix applied</td><td>&mdash;</td><td>&mdash;</td><td>Connector sequence redesign</td></tr>
+      <tr><td>Next attempt</td><td>&mdash;</td><td>&mdash;</td><td>MR-1A, December 19, 1960 (SUCCESS)</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>Sequence Logic: Why Order Matters</strong></p>
+
+    <p>Mercury-Redstone 1 is the most important failure in the Mercury program. Not because anything was destroyed &mdash; the vehicle was recovered nearly intact &mdash; but because it revealed a category of error that no amount of component testing could have caught. The failure was in the sequence. Every individual part worked correctly. The order in which they operated was wrong.</p>
+
+    <p>The tail plug connector at the base of the Mercury-Redstone was a multi-pin umbilical that carried power, control signals, and ground support connections between the launch pad and the vehicle. At liftoff, as the rocket rose, the tail plug was designed to separate cleanly, disconnecting all pins in a specific order.</p>
+
+    <pre>INTENDED DISCONNECTION SEQUENCE:
+
+  Pin Group A: Ground power supply lines
+    - Disconnect FIRST
+    - Vehicle switches to internal battery power
+    - Time: t = 0 (moment of liftoff)
+
+  Pin Group B: Control signal lines
+    - Disconnect SECOND
+    - Vehicle's flight sequencer takes over from ground control
+    - Time: t = 0 + delta_1 (milliseconds after A)
+
+  Pin Group C: Engine cutoff inhibit line
+    - Disconnect LAST
+    - This line carries a "keep running" signal from ground
+    - While connected: engine cutoff is INHIBITED (blocked)
+    - When disconnected: vehicle's own flight computer controls
+      engine cutoff based on guidance and trajectory
+    - Time: t = 0 + delta_1 + delta_2
+
+  The intended sequence: A -&gt; B -&gt; C
+  Each group disconnects as the rocket rises and the
+  connector physically separates, with pin lengths and
+  positions designed so A breaks first, then B, then C.
+
+  delta_1 and delta_2 are fractions of a second --
+  determined by the physical geometry of the connector
+  pins (longer pins disconnect later) and the rise rate
+  of the vehicle.</pre>
+
+    <p>What actually happened on November 21, 1960:</p>
+
+    <pre>ACTUAL DISCONNECTION SEQUENCE (MR-1):
+
+  The Redstone engine ignited normally. Thrust built up.
+  The vehicle began to rise. At approximately 4 inches
+  (10.2 cm) of vertical travel, the tail plug connector
+  began to separate.
+
+  But the rise rate was not what the connector designers
+  had assumed. The Redstone's thrust-to-weight ratio at
+  ignition was approximately 1.13:1 -- barely above unity.
+  The vehicle accelerated slowly. The connector pins,
+  designed for a faster separation, experienced a SLOW
+  pull rather than a FAST one.
+
+  At slow separation speed, the mechanical tolerances
+  in the connector pins changed the disconnection order.
+  Instead of A -&gt; B -&gt; C, the pins disconnected:
+
+  B -&gt; A -&gt; C  (control lines BEFORE power lines)
+
+  This created a transient state that should never have
+  existed: the vehicle's control system had switched from
+  ground control to flight control (B disconnected), but
+  the ground power was still connected (A still connected).
+
+  In this transient state, a SNEAK CIRCUIT formed.</pre>
+
+    <p><strong>The State Machine Formalization:</strong></p>
+
+    <p>The correct way to analyze connector sequence failures is as a finite state machine. Each configuration of connected/disconnected pins defines a state. The transitions between states are the pin disconnections. Some states are valid (designed for); others are invalid (unintended).</p>
+
+    <pre>STATE MACHINE: Tail Plug Connector
+
+  States defined by (A, B, C) where each is 0 (connected)
+  or 1 (disconnected):
+
+  State 0: (0, 0, 0) -- All connected, vehicle on pad
+    This is the INITIAL STATE. Ground power, ground control,
+    engine cutoff inhibited by ground.
+    VALID.
+
+  State 1: (1, 0, 0) -- A disconnected, B and C connected
+    Vehicle on internal power. Ground control still active.
+    Engine cutoff still inhibited by ground.
+    INTENDED first transition.
+    VALID.
+
+  State 2: (1, 1, 0) -- A and B disconnected, C connected
+    Vehicle on internal power. Flight control active.
+    Engine cutoff still inhibited by ground.
+    INTENDED second transition.
+    VALID.
+
+  State 3: (1, 1, 1) -- All disconnected
+    Vehicle fully autonomous. Flight control active.
+    Engine cutoff under vehicle control.
+    INTENDED final state.
+    VALID.
+
+  State 4: (0, 1, 0) -- B disconnected, A and C connected
+    *** THIS IS THE MR-1 STATE ***
+    Ground power STILL CONNECTED.
+    Flight control active (switched from ground).
+    Engine cutoff still inhibited by ground.
+    UNINTENDED. Not designed for. Not tested.
+    THIS STATE CONTAINS THE SNEAK CIRCUIT.
+    INVALID.
+
+  State 5: (0, 0, 1) -- Only C disconnected
+    UNINTENDED. INVALID.
+
+  State 6: (0, 1, 1) -- A connected, B and C disconnected
+    UNINTENDED. INVALID.
+
+  State 7: (1, 0, 1) -- B connected, A and C disconnected
+    UNINTENDED. INVALID.
+
+  Total states: 2^3 = 8
+  Valid states: 4 (States 0, 1, 2, 3)
+  Invalid states: 4 (States 4, 5, 6, 7)
+  The system was designed for exactly ONE path through
+  the state space: 0 -&gt; 1 -&gt; 2 -&gt; 3
+  Any other path traverses at least one invalid state.</pre>
+
+    <p>This is a <strong>race condition</strong> &mdash; the same concept that plagues digital logic circuits, concurrent software, and database transactions. A race condition occurs when the correct behavior of a system depends on the relative timing of events, and the timing is not guaranteed.</p>
+
+    <p><strong>The General Principle (Set Theory):</strong></p>
+
+    <p>For any system with n sequenced operations, the number of possible orderings is n! (n factorial). For MR-1&rsquo;s three pin groups:</p>
+
+    <pre>PERMUTATIONS OF 3 OPERATIONS:
+
+  3! = 6 possible orderings:
+
+  A -&gt; B -&gt; C   (INTENDED -- the only valid sequence)
+  A -&gt; C -&gt; B
+  B -&gt; A -&gt; C   (MR-1 ACTUAL -- produced sneak circuit)
+  B -&gt; C -&gt; A
+  C -&gt; A -&gt; B
+  C -&gt; B -&gt; A
+
+  Probability of correct sequence (if order is random):
+    P(correct) = 1/3! = 1/6 = 16.7%
+
+  The connector design MUST guarantee the correct
+  ordering with probability 1.0, not 1/6.</pre>
+
+    <p>For a system with n sequenced operations, the probability of the correct sequence occurring by chance is 1/n!. As n grows, this probability drops catastrophically:</p>
+
+    <table>
+      <tr><th>n</th><th>n!</th><th>P(correct)</th></tr>
+      <tr><td>2</td><td>2</td><td>50.0%</td></tr>
+      <tr><td>3</td><td>6</td><td>16.7%</td></tr>
+      <tr><td>4</td><td>24</td><td>4.2%</td></tr>
+      <tr><td>5</td><td>120</td><td>0.83%</td></tr>
+      <tr><td>6</td><td>720</td><td>0.14%</td></tr>
+      <tr><td>10</td><td>3,628,800</td><td>0.0000276%</td></tr>
+    </table>
+
+    <p>A modern launch vehicle has dozens or hundreds of sequenced separation events. The connector design problem scales as a factorial, and the cost of getting any single transition wrong can be total mission loss. MR-1 taught this lesson with three pins and a four-inch flight.</p>
+
+    <h3>Debate Questions (Layer 5)</h3>
+
+    <ol>
+      <li><strong>Is a connector sequence failure a hardware bug or a design bug?</strong> Every individual component in MR-1&rsquo;s tail plug worked correctly. The pins disconnected. The signals propagated. The circuits responded as designed. The failure was in the ordering &mdash; a property of the system, not of any component. If you tested each pin individually, you would find no fault. The fault exists only in the interaction. How do you test for faults that no component exhibits in isolation?</li>
+      <li><strong>Should all possible states be designed for, or only the intended path?</strong> MR-1 had 8 possible states but only 4 were considered valid. An alternative design philosophy: make every reachable state safe, even unintended ones. This is the principle of &ldquo;fail-safe design.&rdquo; What is the cost of designing for all 2<sup>n</sup> states versus only the intended path?</li>
+      <li><strong><em>Dictyostelium discoideum</em> &mdash; the social amoeba &mdash; aggregates by following cAMP signals in a specific temporal sequence.</strong> If the timing of cAMP pulses is disrupted (a chemical &ldquo;race condition&rdquo;), aggregation fails and the organism cannot form its multicellular fruiting body. Is biological development a sequence-critical system in the same way as a rocket connector? What is the biological equivalent of a &ldquo;sneak circuit&rdquo;?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Deposit 2: Sneak Circuit Analysis (Layer 7, Section 7.16)</h2>
+
+    <h3>Formulas</h3>
+
+    <p><strong>What Is a Sneak Circuit?</strong></p>
+
+    <p>A sneak circuit is an unintended electrical path that exists in the wiring of a system but was not designed, not intended, and not shown on the schematic &mdash; yet is physically present because of how the wires are actually connected.</p>
+
+    <pre>SNEAK CIRCUIT IN MR-1:
+
+  The normal circuit (intended state 2: A and B disconnected):
+
+    Vehicle battery --&gt; Flight computer --&gt; Engine controller
+                                              |
+                                        [Normal cutoff
+                                         logic active]
+
+  The sneak circuit (actual state 4: only B disconnected):
+
+    Ground power (A) --- still connected ---&gt; Vehicle bus
+                                                |
+    Flight computer --&gt; Engine controller ------+
+                            |
+                      [Cutoff signal
+                       PATH THROUGH
+                       GROUND POWER
+                       RETURN LINE]
+
+  When pin group B disconnected before pin group A,
+  the flight computer attempted to take control, but
+  the ground power line was still providing a reference
+  voltage. The engine controller saw this ground power
+  reference as a valid control signal -- specifically,
+  it interpreted the presence of ground power on the bus
+  as an engine cutoff command.
+
+  The sneak path:
+    Ground power supply (pad) -&gt; Pin A (still connected)
+    -&gt; Vehicle power bus -&gt; Engine controller cutoff input
+    -&gt; Engine SHUTDOWN</pre>
+
+    <p><strong>Shannon-Style Circuit Analysis:</strong></p>
+
+    <p>Claude Shannon&rsquo;s 1937 master&rsquo;s thesis showed that any switching circuit can be analyzed using Boolean algebra. The sneak circuit in MR-1 can be formalized as a Boolean expression:</p>
+
+    <pre>BOOLEAN ANALYSIS OF MR-1 CUTOFF LOGIC:
+
+  Define:
+    A = 1 if Pin Group A is DISCONNECTED
+    A = 0 if Pin Group A is CONNECTED
+    B = 1 if Pin Group B is DISCONNECTED
+    B = 0 if Pin Group B is CONNECTED
+    C = 1 if Pin Group C is DISCONNECTED
+    C = 0 if Pin Group C is CONNECTED
+
+  INTENDED cutoff behavior:
+    Engine_cutoff = C AND flight_computer_command
+
+  ACTUAL cutoff behavior (with sneak circuit):
+    Engine_cutoff = C AND flight_computer_command
+                    OR
+                    (NOT A) AND B
+
+  The unintended term: (NOT A) AND B
+    This is TRUE when A=0, B=1 -- exactly MR-1's state 4.
+
+  In the intended sequence (A before B):
+    The system transitions 00 -&gt; 10 -&gt; 11
+    (NOT A) AND B is never true at any valid state
+    The sneak term is always FALSE along the intended path.
+
+  In the MR-1 sequence (B before A):
+    The system transitions 00 -&gt; State 4 (A=0, B=1)
+    (NOT 0) AND 1 = 1 AND 1 = 1
+    The sneak term is TRUE. Engine shuts down.</pre>
+
+    <p>The lesson is profound: a circuit&rsquo;s behavior depends not only on its static topology (what is connected to what) but on its dynamic trajectory through state space (what order things change in). Shannon&rsquo;s Boolean algebra describes the static truth table. Sequence analysis describes the dynamic path. MR-1 failed because the static analysis was correct (every valid state was safe) but the dynamic path passed through an invalid state that no one had analyzed.</p>
+
+    <p><strong>Information-Theoretic Interpretation:</strong></p>
+
+    <p>From an information theory perspective, the MR-1 failure was a channel coding error. The connector was a communication channel between the pad and the vehicle, transmitting the message &ldquo;you are now flying&rdquo; through a sequence of physical disconnections.</p>
+
+    <pre>CHANNEL MODEL:
+
+  Source:     Physical liftoff event
+  Encoder:    Connector pin geometry (pin lengths, positions)
+  Channel:    Mechanical separation (speed, vibration, tolerances)
+  Decoder:    Vehicle electrical system (interprets pin states)
+  Receiver:   Engine controller
+
+  Intended message:   A -&gt; B -&gt; C  (smooth transition to flight)
+  Received message:   B -&gt; A -&gt; C  (sneak circuit, engine cutoff)
+
+  Bit error rate: 1 event out of 1 (100% failure rate)
+  The channel was operating outside its design bandwidth.
+
+  Fix (MR-1A): Redesign the encoder (connector) so that
+  the correct sequence is maintained across ALL separation
+  speeds. This is equivalent to adding error correction coding.</pre>
+
+    <h3>Debate Questions (Layer 7)</h3>
+
+    <ol>
+      <li><strong>How do you find a sneak circuit before it finds you?</strong> By definition, a sneak circuit is not on the schematic &mdash; it is an emergent property of the physical wiring. NASA developed formal Sneak Circuit Analysis (SCA) methods after MR-1: systematic enumeration of all possible current paths. Is complete enumeration practical for a system as complex as a modern launch vehicle?</li>
+      <li><strong>Is the sneak circuit concept applicable to software?</strong> A software &ldquo;sneak path&rdquo; is an execution path that exists in the code but was not intended by the developer. Race conditions in concurrent programs are the direct analog. Buffer overflows, use-after-free bugs, and TOCTOU vulnerabilities are all sneak paths through state space. Is formal verification worth its cost?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Deposit 3: Thrust-to-Weight at Ignition (Layer 4, Section 4.16)</h2>
+
+    <h3>Formulas</h3>
+
+    <p><strong>The Physics of Four Inches</strong></p>
+
+    <p>Mercury-Redstone 1 rose four inches and stopped. Those four inches contain the entire story. The thrust-to-weight ratio at ignition determines the initial acceleration, the initial acceleration determines the rise rate, the rise rate determines the connector separation speed, and the connector separation speed determines the pin disconnection order.</p>
+
+    <pre>THRUST-TO-WEIGHT CALCULATION:
+
+  Engine: Rocketdyne A-7 (modified for Mercury-Redstone)
+  Sea-level thrust: F = 75,000 lbf = 333,617 N
+
+  Vehicle mass at ignition:
+  Mercury capsule:          ~1,360 kg (3,000 lb)
+  Escape tower:             ~500 kg (1,100 lb)
+  Redstone booster (fueled): ~28,000 kg (61,700 lb)
+  --------------------------------------------------
+  Total:                    ~29,860 kg (~65,800 lb)
+
+  Weight at ignition:
+  W = m * g = 29,860 * 9.807 = 292,837 N
+
+  Thrust-to-weight ratio:
+  T/W = F / W = 333,617 / 292,837 = 1.139
+
+  Net force at ignition:
+  F_net = F - W = 333,617 - 292,837 = 40,780 N
+
+  Initial acceleration:
+  a = F_net / m = 40,780 / 29,860 = 1.366 m/s^2
+    = 0.139 g
+
+  This is gentle. Very gentle. The vehicle rises slowly.</pre>
+
+    <p><strong>Rise Height as a Function of Time:</strong></p>
+
+    <pre>KINEMATICS OF THE FIRST SECONDS:
+
+  Net upward acceleration:
+  a = (F - mg) / m = (F/m) - g
+    = (333,617 / 29,860) - 9.807
+    = 11.173 - 9.807
+    = 1.366 m/s^2
+
+  Rise height as function of time:
+  h(t) = (1/2) * a * t^2
+       = 0.683 * t^2  (meters, with t in seconds)
+
+  Rise rate (velocity):
+  v(t) = a * t = 1.366 * t  (m/s)
+
+  To reach 4 inches (0.1016 m):
+  t_4inch = sqrt(2 * h / a)
+           = sqrt(2 * 0.1016 / 1.366)
+           = sqrt(0.1488)
+           = 0.386 seconds
+
+  Velocity at 4 inches:
+  v_4inch = a * t_4inch
+           = 1.366 * 0.386
+           = 0.527 m/s
+           = 1.94 ft/s
+
+  The connector had to separate cleanly at a relative
+  velocity of approximately 0.5 m/s (1.6 ft/s).
+  This is WALKING SPEED.</pre>
+
+    <h3>Worked Example</h3>
+
+    <pre>import numpy as np
+import matplotlib.pyplot as plt
+
+print("MERCURY-REDSTONE 1: THE PHYSICS OF FOUR INCHES")
+print("=" * 60)
+
+# Engine and vehicle parameters
+F_thrust_N = 333617.0      # A-7 engine thrust (N)
+m_capsule = 1360.0          # Mercury capsule (kg)
+m_tower = 500.0             # Escape tower (kg)
+m_booster = 28000.0         # Redstone booster fueled (kg)
+m_total = m_capsule + m_tower + m_booster
+g = 9.807                   # gravitational acceleration (m/s^2)
+burn_rate = 110.0           # propellant consumption (kg/s)
+
+print(f"\nVehicle parameters:")
+print(f"  Total mass: {m_total:,.0f} kg ({m_total * 2.205:,.0f} lb)")
+print(f"  Thrust: {F_thrust_N:,.0f} N ({F_thrust_N / 4.448:,.0f} lbf)")
+
+# Thrust-to-weight
+W = m_total * g
+TW_ratio = F_thrust_N / W
+print(f"\nThrust-to-weight ratio: {TW_ratio:.3f}")
+print(f"  Weight: {W:,.0f} N")
+print(f"  Net force: {F_thrust_N - W:,.0f} N")
+
+# Initial acceleration
+a_net = (F_thrust_N - W) / m_total
+print(f"  Net acceleration: {a_net:.3f} m/s^2 ({a_net/g:.3f} g)")
+
+# Time to reach 4 inches
+h_4inch = 4 * 0.0254  # convert inches to meters
+t_4inch = np.sqrt(2 * h_4inch / a_net)
+v_4inch = a_net * t_4inch
+print(f"\nAt 4 inches ({h_4inch*100:.1f} cm):")
+print(f"  Time: {t_4inch:.3f} seconds")
+print(f"  Velocity: {v_4inch:.3f} m/s ({v_4inch * 3.281:.2f} ft/s)")
+print(f"  This is WALKING SPEED")
+
+# State machine analysis
+print(f"\nSTATE MACHINE: CONNECTOR SEQUENCE")
+print(f"  Total possible states: 2^3 = 8")
+print(f"  Valid states (intended path): 4")
+print(f"  Invalid states: 4")
+print(f"  Possible orderings of 3 pins: 3! = 6")
+print(f"  Probability of correct sequence (random): 16.7%")
+
+# Factorial growth for general case
+print(f"\n  For n sequenced operations:")
+for n in range(2, 11):
+    fact = 1
+    for i in range(1, n+1):
+        fact *= i
+    print(f"    n={n:2d}: {n}! = {fact:&gt;10,d} orderings, "
+          f"P(correct) = {1/fact:.6%}")</pre>
+
+    <h3>Debate Questions (Layer 4)</h3>
+
+    <ol>
+      <li><strong>Does a T/W ratio of 1.14 leave adequate margin for connector separation?</strong> The Redstone had flown many times as a ballistic missile with a similar T/W ratio, and the connectors worked. The difference: Mercury-Redstone was heavier than the military Redstone, reducing the T/W ratio and therefore the separation speed. The same connector design was used without re-analysis. Is this a failure of analysis, or a failure of institutional communication?</li>
+      <li><strong>The social amoeba <em>Dictyostelium discoideum</em> aggregates when individual cells release cAMP in synchronized pulses.</strong> If the delay is too long or too short &mdash; if the sequence timing drifts &mdash; aggregation fails. Is the cAMP relay a biological state machine with its own &ldquo;sneak circuits&rdquo;?</li>
+      <li><strong>The Red-tailed Hawk (<em>Buteo jamaicensis</em>, degree 16) hunts from a perch or soar, diving at prey in a precisely sequenced attack: locate, track, dive, strike, grip.</strong> Each phase must complete before the next begins. How is the hawk&rsquo;s sequence integrity maintained? Is it learned (trained by practice) or innate (hard-wired)?</li>
+    </ol>
+
+    <hr>
+
+    <blockquote>
+      <em>Dictyostelium discoideum</em> spends most of its life as a solitary amoeba, crawling through forest soil, engulfing bacteria, dividing by fission &mdash; independent, autonomous, complete. It is an animal that is also a cell. A cell that is also an animal. But when the bacteria run out &mdash; when starvation sets in &mdash; the solitary cells begin to aggregate. One cell, the founder, begins to pulse cAMP. The cAMP pulse propagates outward like a ripple in a pond. The relay is sequential: detect, move, pulse, wait. The timing must be precise &mdash; each cell must wait for the previous pulse to pass before relaying the next, or the wavefront collapses into noise. This is a biological state machine. The sequence matters. If a cell pulses too early, it creates a spurious signal &mdash; a sneak circuit in the chemical network. <em>Dictyostelium</em> has been running this protocol for at least 600 million years &mdash; longer than any rocket program, longer than any engineering organization. It has debugged its connector sequence through 600 million years of natural selection. Mercury-Redstone 1 failed its connector sequence on the first attempt. <em>Dictyostelium</em> fails occasionally, too &mdash; but its test program has been running for a billion launches, and the sneak circuits have been engineered out by the only debugger patient enough: extinction.
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="organism.html">&larr; Organism</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="papers.html">Papers &rarr;</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.16 Mercury-Redstone 1 + <em>Dictyostelium discoideum</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a>
+</footer>
+
+</body>
+</html>
