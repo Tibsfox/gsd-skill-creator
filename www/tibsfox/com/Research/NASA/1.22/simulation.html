@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulations &amp; Creative Arts | v1.22 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #020810; --bio-mid: #041020;
+    --aurora-green: #20A060; --aurora-dim: #105030;
+    --gfp-green: #40D080; --gfp-dim: #206840;
+    --biolum-blue: #2040C0; --biolum-dim: #102060;
+    --jellyfish-teal: #208888; --jellyfish-dim: #104444;
+    --reentry-amber: #D08020; --reentry-dim: #684010;
+    --space: #020408;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2030;
+    --accent: var(--aurora-green);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(32,160,96,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(32,64,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(64,208,128,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(32,136,136,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(208,128,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(32,160,96,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--aurora-green); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--bio-deep) 0%, var(--bio-mid) 25%, var(--biolum-dim) 55%, var(--aurora-dim) 100%); border-bottom: 3px solid var(--accent); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(32,160,96,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(32,160,96,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(64,208,128,0.12); border: 1px solid var(--accent); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--accent); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(64,208,128,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--accent); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--accent); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--jellyfish-teal); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--accent); }
+  em { color: var(--reentry-amber); }
+  code { color: var(--biolum-blue); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--jellyfish-teal); text-decoration: none; }
+  a:hover { color: #fff; }
+  blockquote { border-left: 3px solid var(--biolum-blue); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(2,4,8,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .code-block { background: rgba(2,4,8,0.6); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.5rem; margin: 1rem 0; overflow-x: auto; }
+  .code-block pre { margin: 0; font-family: 'DM Mono', monospace; font-size: 0.85rem; line-height: 1.5; color: var(--aurora-green); white-space: pre-wrap; }
+  .nav-card { background: rgba(2,4,8,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--aurora-green); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--gfp-green); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--aurora-green); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span>
+  <a href="index.html">v1.22 Mercury-Atlas 7</a><span class="sep">/</span>
+  Simulations
+</div>
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.22</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulations &amp; Creative Arts</h1>
+    <p class="subtitle">Python, SPICE, Web, GLSL, FAUST, and platform specifications</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> May 24, 1962</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Malcolm Scott Carpenter (LCDR, USN)</span>
+      <span><span class="label">Dedication:</span> Bob Dylan</span>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="content">
+
+    <h2>Simulations: Aurora 7</h2>
+
+    <p><strong>Mission:</strong> Mercury-Atlas 7 / Aurora 7 (v1.22)</p>
+    <p><strong>Platforms:</strong> Python, SPICE, Web (HTML/JS/Canvas), GLSL, FAUST, Minecraft, Blender, Arduino, GMAT</p>
+
+    <hr>
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <h3>A1. Python: Retrofire Dispersion Analysis</h3>
+
+    <p><strong>What it is:</strong> A Python simulation that maps the relationship between retrofire execution errors and landing point displacement for Aurora 7 &mdash; the mission where Scott Carpenter overshot the planned splashdown point by 402 kilometers because his retrorockets fired 3 seconds late and at a 25-degree yaw error from the planned retrograde attitude. The simulation takes the actual orbital parameters of MA-7 (161 x 267 km, 32.5-degree inclination), the planned retrograde delta-V of 152 m/s, and sweeps through a matrix of yaw errors (0 to 30 degrees) and timing errors (0 to 10 seconds). For each combination, it calculates the effective retrograde delta-V component, propagates the resulting deorbit trajectory to atmospheric interface, and computes the landing point error relative to the planned recovery zone. The output is a 2D dispersion plot: a heat map with yaw error on one axis, timing error on the other, and landing displacement in kilometers as the color field. Carpenter&rsquo;s actual parameters &mdash; 25 degrees of yaw, 3 seconds late &mdash; are highlighted on the plot, and the student can see exactly where his point falls on the dispersion surface.</p>
+
+    <p><strong>Why it matters:</strong> Aurora 7 is the mission that taught NASA the cost of attitude errors at retrofire. The Mercury retrorockets each produced about 50.7 m/s of delta-V, firing sequentially over 10 seconds to deliver a total of approximately 152 m/s of retrograde velocity reduction. But delta-V is a vector, not a scalar. If the capsule is yawed 25 degrees away from the retrograde direction when the rockets fire, the effective retrograde component drops to 152 * cos(25 degrees) = 137.8 m/s &mdash; a loss of 14.2 m/s of retrograde braking. That 14.2 m/s deficit means the capsule stays in a higher, longer-period orbit for a fractionally longer time before atmospheric drag captures it, and the accumulated along-track error over the descent translates to a 402 km overshoot. The simulation makes this chain of causality visible. The student adjusts the yaw error slider and watches the landing point migrate downrange. They see that small yaw errors produce small overshoots, but the relationship is nonlinear &mdash; cosine losses accelerate as yaw angle increases. At 30 degrees of yaw error, the overshoot exceeds 500 km. At zero yaw error, the landing point error is dominated by the timing error alone, which contributes roughly 28 km per second of late firing. Carpenter&rsquo;s 3-second timing error added approximately 84 km to his overshoot; the yaw error added the remaining 318 km. The dispersion plot makes it viscerally clear that attitude control at retrofire is not optional &mdash; it is the single most critical maneuver in the entire mission.</p>
+
+    <p><strong>Specification:</strong></p>
+
+    <div class="code-block"><pre># retrofire-dispersion.py
+# Aurora 7 retrofire dispersion analysis
+#
+# Process:
+#   1. Define MA-7 orbital elements at retrofire point
+#   2. For each (yaw_error, timing_error) pair:
+#      a. Compute effective retrograde &Delta;V = 152 * cos(yaw_error)
+#      b. Compute cross-track &Delta;V = 152 * sin(yaw_error)
+#      c. Adjust retrofire epoch by timing_error seconds
+#      d. Propagate deorbit trajectory to 80 km altitude
+#      e. Calculate landing point displacement from target
+#   3. Build 2D dispersion map
+#   4. Mark Carpenter&rsquo;s actual point (25&deg; yaw, 3s late)
+#
+# Orbital Elements (MA-7 at retrofire, orbit 3):
+#   altitude_perigee_km: 161
+#   altitude_apogee_km: 267
+#   semi_major_axis_km: 6585 (mean altitude 214 km)
+#   eccentricity: 0.0079
+#   inclination_deg: 32.5
+#   orbital_velocity_at_retrofire_km_s: 7.79
+#   orbital_period_s: 5318 (88.6 minutes)
+#
+# Retrofire Parameters:
+#   planned_delta_v_m_s: 152 (total from 3 retrorockets)
+#   retro_1_delta_v: 50.7 m/s, fires at T+0
+#   retro_2_delta_v: 50.7 m/s, fires at T+5s
+#   retro_3_delta_v: 50.7 m/s, fires at T+10s
+#   total_burn_duration_s: 10
+#   planned_retrofire_time: 04:32:40 GET
+#   actual_retrofire_time: 04:32:43 GET (3s late)
+#
+# Sweep Parameters:
+#   yaw_error_range_deg: 0 to 30 (step 1)
+#   timing_error_range_s: 0 to 10 (step 0.5)
+#   grid_size: 31 x 21 = 651 trajectory calculations
+#
+# Dispersion Model:
+#   For a capsule in a ~90-minute orbit at ~7.79 km/s:
+#     Along-track sensitivity to &Delta;V deficit:
+#       1 m/s retrograde deficit &asymp; 22 km overshoot
+#       (derived from orbital mechanics: the deficit
+#       keeps the capsule in a marginally higher orbit
+#       for marginally longer, accumulating downrange error)
+#     Along-track sensitivity to timing error:
+#       1 s late &asymp; 28 km overshoot
+#       (the capsule travels 7.79 km/s, so each second of
+#       late firing shifts the reentry point by ~7.79 km,
+#       amplified by the longer descent trajectory to ~28 km
+#       surface displacement)
+#     Cross-track displacement from yaw error:
+#       Lateral &Delta;V = 152 * sin(yaw_error) m/s
+#       Cross-track landing error &asymp; lateral_&Delta;V * 6 km/(m/s)
+#
+# Visualization:
+#   - Main plot: 2D heat map (pcolormesh)
+#     X-axis: yaw error (degrees), 0-30
+#     Y-axis: timing error (seconds), 0-10
+#     Color: total landing displacement (km), 0-600
+#     Colormap: coolwarm (blue=on-target, red=large miss)
+#     Contour lines at 100, 200, 300, 400, 500 km
+#     Carpenter&rsquo;s actual point: gold star at (25, 3)
+#       with annotation &ldquo;Carpenter actual: 402 km overshoot&rdquo;
+#     Planned point: green star at (0, 0)
+#       with annotation &ldquo;Nominal: 0 km error&rdquo;
+#
+#   - Inset plot: 1D yaw sensitivity (timing=0)
+#     X-axis: yaw error (degrees)
+#     Y-axis: overshoot (km)
+#     Shows the cosine-driven nonlinearity
+#
+#   - Inset plot: 1D timing sensitivity (yaw=0)
+#     X-axis: timing error (seconds)
+#     Y-axis: overshoot (km)
+#     Shows the linear timing relationship
+#
+# Libraries: numpy, matplotlib
+# Difficulty: Intermediate
+# Duration: 2-3 hours</pre></div>
+
+    <p><strong>Key learning moments:</strong></p>
+    <ol>
+      <li>The dispersion plot reveals that attitude control and timing are not independent failure modes &mdash; they compound. Carpenter&rsquo;s 402 km overshoot was not caused by either the yaw error or the timing error alone; it was the sum of both. The heat map shows a saddle-shaped surface where the worst outcomes cluster in the upper-right corner (high yaw + late timing), and the student sees that mission planners must set tolerances on both parameters simultaneously.</li>
+      <li>The cosine relationship between yaw error and effective delta-V is not intuitive until plotted. At 10 degrees of yaw, you lose only 2.3% of your braking &mdash; barely noticeable. At 25 degrees, you lose 9.4%. The curve bends slowly at first, then accelerates. This is why Carpenter&rsquo;s 25-degree error was so costly: he was past the knee of the cosine curve.</li>
+    </ol>
+
+    <hr>
+
+    <h3>A2. Python: GFP Fluorescence Spectrum</h3>
+
+    <p><strong>What it is:</strong> A Python simulation that models the excitation and emission spectra of Green Fluorescent Protein (GFP), the bioluminescent molecule that makes the crystal jellyfish <em>Aequorea victoria</em> glow green &mdash; and the molecule that would eventually revolutionize biology when Osamu Shimomura, Martin Chalfie, and Roger Tsien shared the 2008 Nobel Prize in Chemistry for its discovery and development. The simulation fits Gaussian curves to the known spectral data for wild-type GFP: the dual excitation peaks at 395 nm (major) and 475 nm (minor), the single emission peak at 509 nm, and the Stokes shift of 34 nm between the 475 nm excitation peak and the 509 nm emission. The student adjusts excitation wavelength and watches the emission intensity respond according to the excitation spectrum profile, building intuition for how fluorescence works as a wavelength-converting process.</p>
+
+    <p><strong>Why it matters:</strong> Scott Carpenter reported seeing luminous particles outside Aurora 7 during orbital dawn &mdash; the same &ldquo;fireflies&rdquo; that John Glenn had reported during Friendship 7. Carpenter, more scientifically inclined than the mission demanded, spent significant time observing and experimenting with these particles, tapping the capsule hull to dislodge more of them, confirming they were ice crystals from the capsule&rsquo;s life support system rather than organisms. But the bioluminescence connection runs deeper than fireflies. <em>Aequorea victoria</em>, the crystal jellyfish of the Pacific Northwest, carries a two-stage bioluminescence system: the protein aequorin produces blue light (469 nm) when triggered by calcium ions, and GFP absorbs that blue light and re-emits it as green (509 nm) through fluorescence. This blue-to-green energy transfer is one of the most elegant optical systems in nature, and GFP&rsquo;s spectral properties &mdash; the dual excitation peaks, the Stokes shift, the high quantum yield of 0.79 &mdash; are now among the most precisely characterized of any protein. The simulation lets the student explore these properties quantitatively: plotting absorption and emission spectra, calculating energy conversion efficiency from wavelength ratios, and understanding why the Stokes shift exists (the emitted photon always has less energy than the absorbed photon, because some energy is lost to vibrational relaxation in the protein matrix).</p>
+
+    <p><strong>Specification:</strong></p>
+
+    <div class="code-block"><pre># gfp-spectrum.py
+# GFP fluorescence spectrum simulation
+#
+# Process:
+#   1. Define GFP spectral parameters from literature
+#   2. Build excitation spectrum as sum of two Gaussians
+#   3. Build emission spectrum as single Gaussian
+#   4. Calculate quantum yield and energy efficiency
+#   5. Plot overlaid spectra with Stokes shift annotation
+#
+# GFP Spectral Parameters (wild-type):
+#   Excitation peak 1 (major): 395 nm, FWHM ~30 nm
+#     (protonated chromophore, neutral form)
+#   Excitation peak 2 (minor): 475 nm, FWHM ~25 nm
+#     (anionic chromophore, charged form)
+#   Peak ratio: 395 nm peak is ~3x intensity of 475 nm peak
+#   Emission peak: 509 nm, FWHM ~35 nm
+#     (same emission regardless of excitation wavelength)
+#   Stokes shift: 34 nm (from 475 nm excitation to 509 nm emission)
+#   Quantum yield: 0.79 (79% of absorbed photons re-emitted)
+#   Molar extinction coefficient: 21,000 M&sup1;cm&sup1;
+#
+# Gaussian Model:
+#   Each spectral band modeled as:
+#     I(&lambda;) = A * exp(-0.5 * ((&lambda; - &lambda;_center) / &sigma;)&sup2;)
+#   where &sigma; = FWHM / (2 * sqrt(2 * ln(2))) &asymp; FWHM / 2.355
+#
+#   Excitation spectrum:
+#     I_ex(&lambda;) = 1.0 * G(&lambda;, 395, 30) + 0.33 * G(&lambda;, 475, 25)
+#   Emission spectrum:
+#     I_em(&lambda;) = 0.79 * G(&lambda;, 509, 35)
+#     (scaled by quantum yield)
+#
+# Energy Calculations:
+#   Photon energy: E = hc/&lambda;
+#     h = 6.626e-34 J&middot;s (Planck&rsquo;s constant)
+#     c = 3.0e8 m/s (speed of light)
+#   Energy at 475 nm: E_ex = 4.18e-19 J (2.61 eV)
+#   Energy at 509 nm: E_em = 3.90e-19 J (2.44 eV)
+#   Energy efficiency: &eta; = (E_em / E_ex) * quantum_yield
+#     = (509/475)&sup1; * 0.79
+#     = 0.933 * 0.79
+#     = 0.737 (73.7% energy conversion)
+#   Stokes loss: 6.7% per photon (vibrational relaxation)
+#   Quantum loss: 21% of photons not re-emitted
+#     (non-radiative decay pathways)
+#
+# Visualization:
+#   - Plot 1: Overlaid spectra
+#     X-axis: wavelength (300-650 nm)
+#     Y-axis: relative intensity (0-1)
+#     Excitation spectrum: blue fill (&alpha;=0.3) with blue line
+#     Emission spectrum: green fill (&alpha;=0.3) with green line
+#     Stokes shift annotated: double-headed arrow from
+#       475 to 509 nm with &ldquo;Stokes shift: 34 nm&rdquo; label
+#     Vertical dashed lines at 395, 475, 509 nm
+#     Background color gradient: UV violet (300 nm) through
+#       visible spectrum to red (650 nm), very faint (&alpha;=0.1)
+#
+#   - Plot 2: Energy level diagram
+#     Jablonski-style diagram showing:
+#       S&#8320; (ground state) at bottom
+#       S&#8321; (excited state) at top
+#       Absorption arrow (blue, upward) labeled &ldquo;395 or 475 nm&rdquo;
+#       Vibrational relaxation (wavy red arrow, downward)
+#         labeled &ldquo;heat loss&rdquo;
+#       Fluorescence arrow (green, downward) labeled &ldquo;509 nm&rdquo;
+#       Non-radiative decay (dashed arrow) labeled &ldquo;21% loss&rdquo;
+#
+#   - Plot 3: Excitation efficiency curve
+#     X-axis: excitation wavelength (300-550 nm)
+#     Y-axis: relative emission intensity at 509 nm
+#     Shows that emission intensity tracks the excitation
+#       spectrum &mdash; illuminate at 395 nm for maximum
+#       fluorescence, 475 nm for moderate, and the minimum
+#       between the peaks (~430 nm) gives very little emission
+#
+# Libraries: numpy, matplotlib, scipy (for curve fitting)
+# Difficulty: Intermediate
+# Duration: 2-3 hours</pre></div>
+
+    <p><strong>Key learning moments:</strong></p>
+    <ol>
+      <li>The dual excitation peaks reveal that GFP&rsquo;s chromophore exists in two forms: protonated (395 nm) and anionic (475 nm). Both forms emit at 509 nm because the excited protonated form undergoes excited-state proton transfer (ESPT) to reach the same emitting state. The student sees that two different inputs produce the same output &mdash; a biological multiplexer.</li>
+      <li>The Stokes shift is thermodynamics made visible. The emitted photon is always redder (lower energy) than the absorbed photon because some energy is dissipated as heat during vibrational relaxation. The protein matrix acts as a thermal sink, absorbing the energy difference. This is why fluorescent materials glow at a different color than the light that excites them &mdash; the second law of thermodynamics written in wavelengths.</li>
+    </ol>
+
+    <hr>
+
+    <h2>B. SPICE Netlists &mdash; What to Simulate in a Circuit Simulator</h2>
+
+    <h3>B1. S-Meter Circuit (Progressive Radio Series #22)</h3>
+
+    <p><strong>What it is:</strong> A SPICE netlist for a signal strength meter circuit &mdash; the S-meter that sits on the front panel of every communications receiver and tells the operator how strong the incoming signal is. This is progressive radio series #22, building on the BFO (beat frequency oscillator) from v1.21 by adding a metering circuit that reads the AGC (Automatic Gain Control) voltage from the IF amplifier stage. The AGC voltage is a DC level that varies inversely with signal strength: strong signals produce a large negative AGC voltage (which reduces IF gain to prevent overload), and weak signals produce a small AGC voltage (which allows maximum gain). The S-meter circuit takes this AGC voltage, processes it through a DC amplifier with logarithmic compression, and drives a microammeter movement whose needle deflection corresponds to the signal strength on the standard S-unit scale.</p>
+
+    <p><strong>Why it matters:</strong> Aurora 7 maintained voice communication with the Mercury tracking network through a Collins-designed UHF transceiver operating at 296.9 and 259.7 MHz. Signal strength monitoring was critical for maintaining contact as the capsule passed over each ground station &mdash; the signal rose as the capsule approached, peaked at closest approach, and faded as it receded. The S-meter quantifies this process. But the S-meter also teaches logarithmic scaling: each S-unit represents a 6 dB increase in signal voltage, which means a factor of 2 in voltage or a factor of 4 in power. The full scale from S1 to S9 spans a voltage range of 256:1 (2^8), or a power range of 65,536:1 (4^8). No linear meter could span that range. The logarithmic compression built into the S-meter circuit is the same mathematical transformation that the human ear uses to perceive loudness &mdash; and the same transformation that decibels express. The student who builds this circuit learns that nature and engineering converge on logarithmic scaling whenever the dynamic range of a phenomenon exceeds what linear perception can handle.</p>
+
+    <p><strong>Specification:</strong></p>
+
+    <div class="code-block"><pre>* s-meter-circuit.cir
+* Progressive radio series #22: signal strength meter
+* Builds on v1.21 BFO &mdash; reads AGC voltage from IF amplifier
+*
+* Circuit topology:
+*   1. AGC voltage input (0 to -8V DC, from IF amplifier)
+*   2. Voltage follower (Q1, BC547) &mdash; high-impedance buffer
+*   3. Logarithmic amplifier (Q2, BC547) &mdash; exploits V_BE
+*      logarithmic relationship with collector current
+*   4. Meter driver (Q3, BC547) &mdash; current amplifier
+*   5. Meter movement: 100 &mu;A full-scale deflection
+*      (modeled as 1.2 k&Omega; resistor + ammeter)
+*
+* S-Meter Scale (IARU standard):
+*   S1 = 0.2 &mu;V at antenna (-119 dBm at 50&Omega;)
+*   S2 = 0.4 &mu;V (-113 dBm)
+*   S3 = 0.8 &mu;V (-107 dBm)
+*   S4 = 1.6 &mu;V (-101 dBm)
+*   S5 = 3.2 &mu;V (-95 dBm)
+*   S6 = 6.3 &mu;V (-89 dBm)
+*   S7 = 12.6 &mu;V (-83 dBm)
+*   S8 = 25 &mu;V (-77 dBm)
+*   S9 = 50 &mu;V (-71 dBm)
+*   Each S-unit = 6 dB voltage (factor of 2)
+*
+* AGC Voltage Mapping:
+*   The IF amplifier&rsquo;s AGC loop produces a DC voltage
+*   that is approximately logarithmic with signal level:
+*   S1 &rarr; -0.5V AGC
+*   S5 &rarr; -2.5V AGC
+*   S9 &rarr; -5.0V AGC
+*   S9+20 &rarr; -7.0V AGC
+*   S9+40 &rarr; -8.0V AGC
+*   (This mapping comes from the previous IF amplifier
+*    circuit in the progressive series &mdash; the AGC voltage
+*    is already partially logarithmic)
+*
+* The logarithmic amplifier exploits the Ebers-Moll
+* equation: I_C = I_S * exp(V_BE / V_T), which means
+* V_BE = V_T * ln(I_C / I_S). By forcing a current
+* proportional to the AGC voltage through Q2&rsquo;s collector,
+* the base-emitter voltage becomes logarithmic with that
+* current, giving us the compression we need for the
+* S-meter scale.
+*
+* Supply: +12V
+* Components: 3x BC547, 8 resistors, 2 capacitors
+*   (filter caps on AGC input and meter output)
+
+.title S-Meter Circuit &mdash; Progressive Radio #22
+
+* Power supply
+VCC VCC 0 DC 12
+
+* AGC voltage input (swept for characterization)
+VAGC AGC_IN 0 DC -2.5
+
+* Input buffer &mdash; voltage follower
+R1 VCC Q1C 4.7k
+R2 Q1B AGC_IN 100k
+R3 Q1E 0 2.2k
+C1 AGC_IN Q1B 1u
+Q1 Q1C Q1B Q1E BC547
+
+* Logarithmic amplifier
+R4 Q1E Q2C 10k
+R5 VCC Q2C 22k
+R6 Q2E 0 470
+Q2 Q2C Q2B Q2E BC547
+R7 Q2B VCC 47k
+R8 Q2B 0 10k
+
+* Meter driver
+Q3 Q3C Q2C Q3E BC547
+R9 Q3E 0 100
+RMETER Q3C VCC 1.2k
+
+* Meter filter capacitor
+C2 Q3C VCC 10u
+
+* Transistor model
+.model BC547 NPN(IS=1.8e-14 BF=400 VAF=100 RB=20
++  RC=0.1 RE=0.1 CJE=12p CJC=5p TF=0.5n)
+
+* DC sweep to characterize S-meter response
+.dc VAGC -8 0 0.1
+
+* Measure meter current vs AGC voltage
+.print DC I(RMETER)
+.control
+run
+plot -I(RMETER)
+.endc
+
+.end</pre></div>
+
+    <hr>
+
+    <h3>B2. Fluorescence Detector Circuit</h3>
+
+    <p><strong>What it is:</strong> A SPICE netlist for a transimpedance amplifier circuit that detects fluorescent light &mdash; the electronic equivalent of watching a jellyfish glow. The circuit drives a UV LED at 395 nm (the major excitation wavelength of GFP), illuminating a fluorescent sample. A photodiode positioned at 90 degrees to the excitation beam detects the emitted fluorescent light at 509 nm. Between the excitation source and the detector sits the core electronic challenge: the emitted fluorescence is orders of magnitude weaker than the excitation light, so the circuit must reject scattered excitation light while amplifying the tiny photocurrent produced by the fluorescent emission. A transimpedance amplifier converts the photodiode&rsquo;s photocurrent (nanoamps to microamps) into a measurable voltage, and a bandpass filter centered on the emission wavelength rejects out-of-band signals.</p>
+
+    <p><strong>Why it matters:</strong> This circuit bridges the gap between Shimomura&rsquo;s biochemistry and modern instrumentation. Every fluorescence microscope, every flow cytometer, every plate reader used in modern biology contains a version of this circuit: a light source, an excitation filter, a sample, an emission filter, and a photodetector feeding a transimpedance amplifier. The student who builds this circuit in SPICE understands that fluorescence detection is not photography &mdash; it is current measurement. The photodiode does not &ldquo;see&rdquo; the green glow; it generates a photocurrent proportional to the optical power incident on its junction, and the transimpedance amplifier converts that current to a voltage with a gain set by a single feedback resistor. The challenge is noise: at nanoamp signal levels, the amplifier&rsquo;s input noise current, the photodiode&rsquo;s dark current, and the shot noise of the photocurrent itself all compete with the signal. The student learns that fluorescence detection is ultimately a signal-to-noise problem, and that the optical filters (which reject excitation light) matter more than the amplifier gain.</p>
+
+    <p><strong>Specification:</strong></p>
+
+    <div class="code-block"><pre>* fluorescence-detector.cir
+* Transimpedance amplifier for fluorescent light detection
+* UV excitation (395 nm) &rarr; GFP emission (509 nm) detection
+*
+* Circuit topology:
+*   1. UV LED driver (395 nm, pulsed for lock-in detection)
+*   2. Photodiode (sensitivity peak near 509 nm)
+*   3. Transimpedance amplifier (OPA380 model)
+*   4. Bandpass filter (centered ~509 nm equivalent signal)
+*   5. Output stage with gain adjustment
+*
+* The photodiode is modeled as a current source in
+* parallel with a junction capacitance and shunt
+* resistance. The photocurrent is proportional to the
+* incident optical power:
+*   I_photo = R_&lambda; * P_optical
+*   where R_&lambda; = responsivity at wavelength &lambda; (A/W)
+*   Typical silicon photodiode at 509 nm: R &asymp; 0.25 A/W
+*
+* For a fluorescent sample with:
+*   Excitation power: 1 mW (UV LED at 395 nm)
+*   Sample absorption: 10% (thin sample, low concentration)
+*   Quantum yield: 0.79
+*   Collection efficiency: 1% (solid angle of detector)
+*   Optical filter transmission: 80%
+*   Detected power: 1e-3 * 0.1 * 0.79 * 0.01 * 0.8
+*     = 6.32e-7 W = 632 nW
+*   Photocurrent: 632e-9 * 0.25 = 158 nA
+*
+* Transimpedance gain:
+*   R_feedback = 1 M&Omega; &rarr; V_out = I_photo * R_f
+*   V_out = 158e-9 * 1e6 = 158 mV (easily measurable)
+*   Bandwidth limited by C_feedback = 1 pF
+*     f_3dB = 1 / (2&pi; * R_f * C_f) = 159 kHz
+*
+* Supply: &plusmn;5V (dual supply for op-amp)
+* Components: OPA380 (or equivalent), 1 photodiode model,
+*   1 UV LED model, 10 resistors, 5 capacitors
+
+.title Fluorescence Detector &mdash; GFP Emission
+
+* Power supplies
+VCC VCC 0 DC 5
+VEE VEE 0 DC -5
+
+* UV LED driver (395 nm, pulsed at 1 kHz for lock-in)
+VLED_DRIVE LED_CTRL 0 PULSE(0 3.3 0 1u 1u 0.5m 1m)
+R_LED VCC LED_A 100
+D_UV LED_A LED_CTRL UVLED
+.model UVLED D(IS=1e-20 N=2.5 RS=5 BV=5)
+
+* Photodiode model (reverse biased for speed)
+* Modeled as voltage-controlled current source
+* driven by LED state (simplified optical coupling)
+VBIAS BIAS_P 0 DC 2
+I_DARK PD_A 0 DC 0.5n
+I_PHOTO PD_A 0 DC 158n
+C_PD PD_A 0 15p
+R_SHUNT PD_A 0 100MEG
+
+* Transimpedance amplifier (OPA380 simplified model)
+* Non-inverting input to ground (virtual ground)
+* Inverting input receives photodiode current
+.subckt OPA380 INP INM OUT VCC VEE
+E1 INT 0 INP INM 200000
+R_OUT INT OUT 50
+C_COMP INT 0 5p
+.ends
+
+X_TIA 0 PD_A TIA_OUT VCC VEE OPA380
+R_FEEDBACK PD_A TIA_OUT 1MEG
+C_FEEDBACK PD_A TIA_OUT 1p
+
+* Output bandpass filter (10 Hz - 10 kHz)
+* Removes DC offset and high-frequency noise
+* Two-stage RC filter
+R_HP TIA_OUT FILT1 15.9k
+C_HP FILT1 0 1u
+R_LP FILT1 FILT2 15.9k
+C_LP FILT2 0 1n
+
+* Output buffer and gain stage
+R_GAIN1 FILT2 AMP_IN 10k
+R_GAIN2 AMP_IN AMP_OUT 100k
+.subckt BUFFER INP INM OUT VCC VEE
+E1 INT 0 INP INM 100000
+R_OUT INT OUT 50
+.ends
+X_BUF 0 AMP_IN AMP_OUT VCC VEE BUFFER
+
+* Transient analysis (2 full LED pulses)
+.tran 1u 2m
+
+.control
+run
+plot V(TIA_OUT) V(AMP_OUT) V(LED_CTRL)
+.endc
+
+.end</pre></div>
+
+    <hr>
+
+    <h2>C. Web Interactive &mdash; What to Experience in a Browser</h2>
+
+    <h3>C1. Aurora 7 Fuel Monitor</h3>
+
+    <p><strong>What it is:</strong> An HTML5 Canvas application that simulates the fuel consumption timeline of Scott Carpenter&rsquo;s Aurora 7 flight in real-time. The display shows a fuel gauge &mdash; or rather two fuel gauges, one for manual and one for automatic attitude control propellant &mdash; that drain across three orbits as Carpenter performs scheduled attitude maneuvers, scientific observations, and the unscheduled thruster activations that ultimately depleted his reserves to a dangerously low level by retrofire. The user interface presents the flight timeline as a horizontal strip along the bottom of the screen, with the current mission elapsed time advancing automatically or under user control. Above the timeline, two vertical bar gauges show manual and automatic fuel remaining as percentages. Each maneuver appears as a labeled event on the timeline, and when the playback reaches that event, the fuel gauge drops by the appropriate amount. The user can click on the timeline to add or remove hypothetical maneuvers, watching the fuel margin at retrofire change in response.</p>
+
+    <p><strong>Why it matters:</strong> Aurora 7 is the Mercury mission that proved fuel management could be a life-or-death issue. Carpenter used attitude control propellant at a rate far exceeding the flight plan, partly for legitimate scientific observations (turning the capsule to photograph orbital dawn, experimenting with the &ldquo;fireflies,&rdquo; aligning for the dim-light photography experiment) and partly due to a malfunctioning autopilot pitch horizon scanner that caused continuous thruster corrections. By the time retrofire approached, Carpenter had consumed so much propellant that his manual fuel was at 20% and his automatic fuel was below 5%. He had to manually control the capsule&rsquo;s attitude during retrofire with dangerously low fuel margins, contributing to the 25-degree yaw error that caused the 402 km overshoot. The interactive fuel monitor lets the student replay this scenario and ask &ldquo;what if?&rdquo; questions: what if Carpenter had skipped the dim-light photography? What if the pitch horizon scanner had worked correctly? What if he had switched to fly-by-wire earlier, conserving automatic fuel? Each hypothetical scenario changes the fuel curve, and the student can see exactly where the margin disappears.</p>
+
+    <p><strong>Specification:</strong></p>
+
+    <div class="code-block"><pre>aurora7-fuel.html
+
+Display: 960 x 640 canvas (responsive, scales to viewport)
+Aesthetic: period-authentic Mission Control display
+  Background: dark green (#0A1A0A)
+  Text: bright green phosphor (#33FF33), monospace font
+  Grid lines: dim green (#1A3A1A)
+  Fuel bars: green when &gt;50%, amber when 20-50%, red when &lt;20%
+  Timeline: horizontal bar along bottom, 120px height
+  Scanlines: subtle horizontal lines (2px spacing, &alpha;=0.03)
+    to simulate CRT phosphor display
+
+Layout:
+  Top section (400px): dual fuel gauges
+    Left gauge: &ldquo;MANUAL&rdquo; fuel (0-100%)
+    Right gauge: &ldquo;AUTO&rdquo; fuel (0-100%)
+    Each gauge: vertical bar, 80px wide, with tick marks
+      every 10%, numeric readout at top
+    Between gauges: mission clock (HH:MM:SS GET)
+    Below gauges: current fuel rate (lb/min) and status text
+
+  Bottom section (240px): mission timeline
+    Horizontal axis: 0 to 4:56:00 GET (full mission)
+    Vertical axis: fuel level (0-100%, both overlaid)
+    Manual fuel curve: solid green line
+    Auto fuel curve: dashed amber line
+    Event markers: vertical lines at each maneuver
+    Red zone: shaded region below 15% fuel
+    Current time: bright vertical cursor line
+
+Mission Events (historical timeline):
+  T+00:00:00  Launch (manual: 100%, auto: 100%)
+  T+00:05:12  Orbit insertion, ASCS engaged
+  T+00:10:00  Capsule turnaround maneuver (-2% auto)
+  T+00:15:00  Systems check attitude maneuvers (-1% manual)
+  T+00:25:00  First yaw scan (scientific observation) (-3% manual)
+  T+00:45:00  Orbital dawn photography (-4% manual)
+  T+01:00:00  Pitch horizon scanner malfunction begins
+                (continuous auto fuel drain: -0.5%/min)
+  T+01:15:00  &ldquo;Firefly&rdquo; experiments (tapping hull) (-2% manual)
+  T+01:28:00  End of orbit 1 (manual: ~78%, auto: ~72%)
+  T+01:33:00  Dim-light photography experiment (-5% manual)
+  T+01:50:00  Balloon deploy attempt (-3% manual)
+  T+02:15:00  More firefly observations (-2% manual)
+  T+02:30:00  Carpenter switches to manual control more
+                (reducing auto drain, increasing manual)
+  T+02:56:00  End of orbit 2 (manual: ~45%, auto: ~42%)
+  T+03:10:00  Continued attitude experiments (-4% manual)
+  T+03:30:00  Pre-retrofire checklist begins
+  T+04:00:00  Fuel warning from mission control
+  T+04:20:00  Retrofire attitude setup (-5% manual)
+  T+04:32:43  RETROFIRE (manual: ~20%, auto: ~5%)
+  T+04:56:00  Splashdown
+
+User Interaction:
+  - Click on timeline to add custom maneuver (dialog: name,
+    fuel cost in %, which system)
+  - Right-click on existing event to remove it
+  - Playback controls: play/pause, speed (1x, 10x, 60x)
+  - Reset button to restore historical timeline
+  - &ldquo;What-if&rdquo; presets:
+    &ldquo;No firefly experiments&rdquo;: removes firefly events
+    &ldquo;Working pitch scanner&rdquo;: removes continuous auto drain
+    &ldquo;Conservative pilot&rdquo;: halves all manual maneuver costs
+    &ldquo;Historical (actual)&rdquo;: restores actual timeline
+
+Technologies: HTML5 Canvas, vanilla JavaScript
+No external dependencies</pre></div>
+
+    <hr>
+
+    <h3>C2. Bioluminescence Simulator</h3>
+
+    <p><strong>What it is:</strong> An HTML5 Canvas application that simulates the bioluminescence of <em>Aequorea victoria</em>, the crystal jellyfish of the Pacific Northwest. The jellyfish floats in dark water, pulsing its bell in a slow rhythmic contraction. When the user clicks or taps on the jellyfish&rsquo;s body, a calcium wave triggers the aequorin protein, which produces a blue flash (469 nm) that cascades through the bell margin. The blue light is immediately absorbed by GFP molecules embedded in the same photocytes, and the green fluorescent emission (509 nm) blooms outward from the trigger point in a radial wave. The entire sequence &mdash; calcium trigger, blue aequorin flash, green GFP re-emission &mdash; plays out over approximately 500 milliseconds, mimicking the actual photophysics at a timescale the eye can follow. After the flash fades, the jellyfish continues pulsing, waiting for the next trigger.</p>
+
+    <p><strong>Why it matters:</strong> <em>Aequorea victoria</em> lives in the cold waters of the Pacific Northwest, from Puget Sound to the coast of British Columbia. Its bioluminescence system is a two-protein cascade that separates light production from light emission: aequorin is the chemiluminescent trigger (converting chemical energy to blue photons), and GFP is the fluorescent converter (absorbing blue photons and re-emitting green ones). This separation is the key insight that made GFP useful for biology: GFP does not need aequorin, calcium, or any cofactor to fluoresce. It is a standalone fluorescent label that can be genetically attached to any protein in any organism. But in the jellyfish, the two-protein system exists for a reason: the blue-to-green conversion shifts the emission to a wavelength that propagates better through seawater, making the jellyfish more visible to predators and prey at distance. Evolution optimized the spectral output for the medium. The simulation makes this two-stage process visible by separating the blue flash from the green emission, showing the student that bioluminescence is not a single event but a cascade.</p>
+
+    <p><strong>Specification:</strong></p>
+
+    <div class="code-block"><pre>bioluminescence.html
+
+Display: fullscreen canvas (responsive, fills viewport)
+Aesthetic: deep ocean at night
+
+Background:
+  Gradient: dark navy (#010108) at top to black (#000000) at bottom
+  Subtle caustic light patterns on upper portion (animated,
+    very dim &mdash; simulating moonlight filtering through surface)
+  Particle system: 50-80 small particles drifting upward
+    (marine snow / plankton), white, &alpha;=0.1-0.3, 1-3px diameter,
+    drift speed 0.1-0.5 px/frame, random horizontal wobble
+
+Jellyfish Model:
+  Bell: semi-transparent dome, radius ~120px
+    Fill: radial gradient from rgba(180,200,220,0.08) center
+      to rgba(100,140,180,0.03) edge
+    Stroke: rgba(150,180,210,0.15), 1px
+    Bell pulsation: sinusoidal radius change (&plusmn;15px)
+      at 0.3 Hz (one pulse every ~3.3 seconds)
+    During contraction: bell flattens slightly (aspect ratio
+      shifts from 1.0 to 0.85)
+
+  Tentacles: 12-16 trailing curves, each 200-400px long
+    Bezier curves with 3 control points
+    Each tentacle has independent sinusoidal sway
+      (frequency 0.1-0.2 Hz, amplitude 20-60px)
+    Fill: none
+    Stroke: rgba(150,180,210,0.06), 1px
+    Tentacle bases follow bell margin during pulsation
+
+  Bell margin ring: thin ring at the bell&rsquo;s outer edge
+    This is where the photocytes (light-producing cells) live
+    Rendered as a series of 24-32 small dots around the
+      bell perimeter, rgba(100,140,160,0.1), 2-3px
+
+Bioluminescence Trigger (on click/tap):
+  Phase 1 &mdash; Calcium wave (0-100ms):
+    A ring of brightening spreads outward from the click
+      point along the bell margin
+    Color: white-blue (#8888FF &rarr; #4444CC)
+    Speed: traverses the full bell margin in 100ms
+    Individual photocyte dots along the margin brighten
+      sequentially as the wave passes
+
+  Phase 2 &mdash; Aequorin blue flash (100-250ms):
+    The activated photocytes emit a blue glow
+    Color: bright blue (#3366FF), mimicking 469 nm
+    Intensity: rises to peak over 50ms, holds for 50ms
+    Glow radius: 8-12px per photocyte, overlapping to form
+      a continuous ring of blue light
+    Additive blending (globalCompositeOperation = &ldquo;lighter&rdquo;)
+
+  Phase 3 &mdash; GFP green emission (200-500ms):
+    Beginning while the blue flash is still fading, green
+      fluorescence blooms from each photocyte
+    Color: vivid green (#33FF66), mimicking 509 nm
+    The green glow is brighter and longer-lasting than the
+      blue flash (higher quantum yield, longer lifetime)
+    Glow radius: 15-25px per photocyte
+    Fades over 300ms following an exponential decay
+      (&tau; &asymp; 100ms, matching GFP fluorescence lifetime of ~3 ns
+       scaled to visual timescale)
+
+  Phase 4 &mdash; Afterglow (500-1000ms):
+    Residual dim green glow on the bell margin
+    Color: dark green (#115522), &alpha; fading from 0.2 to 0
+    The surrounding water briefly shows green-tinted
+      scattered light particles (5-10 particles, green,
+      drifting outward)
+
+  The jellyfish continues pulsing throughout the flash
+    sequence &mdash; bioluminescence does not interrupt locomotion
+
+  Multiple rapid clicks should stack flashes (each trigger
+    starts its own 1-second animation cycle)
+
+  On mobile: tap anywhere on the jellyfish bell to trigger
+
+Information overlay (toggle with &lsquo;i&rsquo; key):
+  Top-left: &ldquo;Aequorea victoria &mdash; Crystal Jellyfish&rdquo;
+  Below: &ldquo;Click/tap the bell to trigger bioluminescence&rdquo;
+  During flash sequence:
+    &ldquo;Ca&sup2;&#8314; &rarr; Aequorin &rarr; Blue (469 nm) &rarr; GFP &rarr; Green (509 nm)&rdquo;
+  Small spectral diagram showing the wavelength conversion
+
+Technologies: HTML5 Canvas, vanilla JavaScript, requestAnimationFrame
+No external dependencies</pre></div>
+
+    <hr>
+
+    <h2>D. GLSL Shader &mdash; Four-Mode Screensaver</h2>
+
+    <p><strong>What it is:</strong> A single GLSL fragment shader file with four visual modes, cycled automatically or toggled manually, each drawing from the Aurora 7 mission&rsquo;s themes: orbital dawn, bioluminescence, reentry, and the aurora borealis. The shader runs in a fullscreen quad and receives <code>uniform float u_time</code> and <code>uniform vec2 u_resolution</code> as inputs. Each mode runs for 30 seconds before crossfading to the next over 3 seconds.</p>
+
+    <h3>Mode 1: Orbital Dawn</h3>
+
+    <p>The moment when Aurora 7 crossed from the night side to the day side of Earth and sunlight hit the capsule hull. Ice crystals sublimating from the capsule&rsquo;s skin caught the first light and became Glenn&rsquo;s &ldquo;fireflies&rdquo; &mdash; tiny points of light drifting away from the capsule against the black of space. The shader renders a horizon line across the lower third of the screen: below the line, the dark limb of Earth with a faint blue atmospheric glow at the edge. Above the line, the black of space transitioning to a brilliant orange-gold sunrise band along the horizon. The firefly particles emerge from random points across the screen, drifting slowly upward and away from the viewer (scaling down), each one a small bright point with a warm glow halo. The particles catch the sunlight directionally &mdash; those on the sun side glow gold, those in shadow are dim blue. As the mode progresses, the sunrise band widens and intensifies, flooding the scene with warm light.</p>
+
+    <div class="code-block"><pre>Mode 1 parameters:
+  horizon_y: 0.3 (30% from bottom)
+  earth_color: vec3(0.01, 0.02, 0.04) &mdash; near black
+  atmosphere_glow: vec3(0.1, 0.3, 0.8) &mdash; thin blue arc
+  sunrise_band: gradient from vec3(1.0, 0.3, 0.05) at horizon
+    to vec3(1.0, 0.8, 0.4) above, width expanding with time
+  space_color: vec3(0.0, 0.0, 0.02) &mdash; almost pure black
+  particle_count: 40-60 (procedural, hash-based positions)
+  particle_drift: upward at 0.01 units/second, slight random lateral
+  particle_glow_radius: 0.003-0.008 (varies per particle)
+  particle_color: mix between gold vec3(1.0, 0.85, 0.4) and
+    blue vec3(0.3, 0.5, 0.8) based on sun angle</pre></div>
+
+    <h3>Mode 2: Bioluminescence</h3>
+
+    <p>An underwater scene viewed from above, looking down into dark water. Jellyfish drift slowly across the field, each one a translucent dome trailing tentacles. Periodically, a jellyfish flashes &mdash; first a brief blue pulse at its bell margin, then a longer green glow that radiates outward through the water. The flashes are staggered so that at any moment, one or two jellyfish are at different stages of their bioluminescence cycle. The water itself carries a faint blue-green ambient glow from scattered bioluminescent plankton, rendered as a slowly evolving noise field with occasional bright point flickers. The overall effect is a dark field punctuated by organic, rhythmic green pulses &mdash; the deep ocean rendered in photons.</p>
+
+    <div class="code-block"><pre>Mode 2 parameters:
+  water_background: vec3(0.0, 0.02, 0.04) &mdash; deep dark blue-black
+  plankton_noise: fractal Brownian motion, 4 octaves,
+    amplitude vec3(0.0, 0.03, 0.05), slowly evolving
+  jellyfish_count: 5-8 (procedural placement)
+  jellyfish_bell_radius: 0.04-0.08 screen units
+  jellyfish_transparency: 0.05-0.15
+  jellyfish_drift: 0.005-0.02 units/second, random directions
+  flash_cycle: 8-15 seconds per jellyfish (randomized)
+  flash_blue: vec3(0.2, 0.3, 1.0), duration 0.2s, radius 1.2x bell
+  flash_green: vec3(0.1, 1.0, 0.3), duration 0.8s, radius 2.5x bell
+  tentacle_count: 6-10 per jellyfish, sine wave perturbation</pre></div>
+
+    <h3>Mode 3: Reentry</h3>
+
+    <p>Aurora 7 reentering the atmosphere with the retropack still attached. The capsule is a dark silhouette at the center of the screen, surrounded by the growing fireball of reentry plasma. The retropack straps glow, then burn through and the pack separates &mdash; fragments trailing away behind the capsule, each one burning individually. The plasma sheath grows from a faint orange glow to a blinding white-hot envelope as the capsule descends. Chunks of ablative heat shield material flake away, glowing briefly before being swept into the wake. The color progression follows the actual heating curve: dull red at first contact with the atmosphere, through orange and yellow to white at peak heating, then gradually cooling back through orange to darkness as the capsule decelerates. Plasma streaks trail behind the capsule like a comet tail.</p>
+
+    <div class="code-block"><pre>Mode 3 parameters:
+  capsule_silhouette: dark shape at screen center (0.5, 0.5),
+    conical-trapezoidal outline, radius 0.05
+  plasma_color_start: vec3(0.6, 0.15, 0.0) &mdash; dull red
+  plasma_color_peak: vec3(1.0, 0.95, 0.8) &mdash; white-hot
+  plasma_color_cool: vec3(0.8, 0.3, 0.0) &mdash; cooling orange
+  plasma_radius: grows from 0.08 to 0.25 over 10s, then shrinks
+  shock_layer: bright leading edge, 2px, white
+  wake_trail: conical expansion behind capsule, 60&deg; half-angle
+  ablation_particles: 10-20, emitted randomly from capsule surface
+    each glowing orange, decelerating and fading over 2s
+  retropack_separation: at t=5s into mode, 3 fragments separate
+    backward at 0.03 units/second, each with own fire trail
+  background: black, with faint star field above the capsule
+    stars disappear behind the plasma glow
+  heating_cycle: 0-5s ramp up, 5-15s peak, 15-25s cool down</pre></div>
+
+    <h3>Mode 4: Aurora Borealis</h3>
+
+    <p>The northern lights &mdash; the phenomenon that gave the capsule its name. Carpenter named his capsule &ldquo;Aurora 7&rdquo; for the dawn and the northern lights, both of which he saw from orbit. The shader renders curtains of light rippling across a dark sky, the classic green-dominant aurora with occasional red upper borders and blue-violet lower edges. The curtains are vertical sheets of light that undulate horizontally, each one semi-transparent and layered behind the others. The movement is slow and organic, with occasional rapid brightening events (&ldquo;auroral breakups&rdquo;) where a section of the curtain suddenly intensifies and fragments into rapid ray structures. Below the aurora, a dark landscape silhouette (mountains or horizon line) grounds the scene. Stars are visible through the thinner parts of the auroral curtains.</p>
+
+    <div class="code-block"><pre>Mode 4 parameters:
+  sky_background: vec3(0.0, 0.0, 0.02) &mdash; near black
+  curtain_count: 3-5 overlapping sheets
+  curtain_color_core: vec3(0.1, 0.9, 0.3) &mdash; dominant green (557.7 nm)
+  curtain_color_upper: vec3(0.7, 0.1, 0.15) &mdash; red upper border (630 nm)
+  curtain_color_lower: vec3(0.2, 0.1, 0.5) &mdash; blue-violet lower edge
+  curtain_y_range: 0.3 to 0.85 (occupies upper portion of screen)
+  curtain_motion: horizontal sine waves, 3-5 harmonics superimposed
+    primary period: 8-12 seconds
+    secondary period: 2-4 seconds (faster ripples)
+  curtain_transparency: 0.1-0.6 (varies along height and time)
+  ray_structures: vertical bright lines within curtains
+    appear during breakup events (every 15-20s)
+    density increases from 5 to 30 rays over 2 seconds
+    each ray is a vertical gradient, brightest at center
+  mountain_silhouette: jagged horizon line at y=0.15
+    color: vec3(0.01, 0.01, 0.02) &mdash; near black
+    generated from layered sine waves (3 frequencies)
+  star_field: 100-200 points, dimmed where aurora is bright
+  breakup_event: every 15-20s, random section of one curtain
+    brightens 3x for 3 seconds, then gradually fades back</pre></div>
+
+    <hr>
+
+    <h2>E. FAUST Synths &mdash; What to Hear</h2>
+
+    <h3>E1. Aurora 7 Orbital Sonification</h3>
+
+    <p><strong>What it is:</strong> A FAUST digital synthesizer that maps Aurora 7 mission telemetry to audio synthesis parameters, turning three orbits of spaceflight data into a continuous evolving soundscape. Fuel level controls the filter cutoff frequency: full tanks produce a bright, open sound, and as fuel depletes, the sound closes down and darkens, becoming increasingly muffled and constrained &mdash; the audible equivalent of running out of options. Altitude modulates pitch: the capsule oscillates between 161 km perigee and 267 km apogee every 88.6 minutes, producing a slow, deep pitch oscillation that the listener perceives as a breathing rhythm. Heart rate data drives the rhythmic pulse of the synthesis: Carpenter&rsquo;s heart rate rose from a resting 60 bpm during calm orbital segments to 120+ bpm during retrofire, and the synth&rsquo;s rhythmic density tracks this escalation.</p>
+
+    <p><strong>Specification:</strong></p>
+
+    <div class="code-block"><pre>aurora7-orbital-sonification.dsp
+
+Architecture: 3 synthesis layers + master filter + effects
+
+Layer 1: Orbital Drone (altitude &rarr; pitch)
+  Oscillator: sawtooth wave, detuned pair (&plusmn;2 cents)
+  Base frequency: 55 Hz (A1)
+  Pitch modulation: altitude mapped 161-267 km &rarr; 0-12 semitones
+    (perigee = A1 = 55 Hz, apogee = A2 = 110 Hz)
+  Modulation rate: 1 cycle per 5318 seconds (one orbit)
+    Scaled to 1 cycle per 30 seconds for real-time playback
+  Waveshaping: soft saturation (tanh) for warmth
+  Output level: -12 dB
+
+Layer 2: Heartbeat Pulse (heart rate &rarr; rhythm)
+  Source: filtered impulse train
+  Rate: maps to BPM parameter (60-160 range)
+  Impulse &rarr; resonant bandpass filter at 80 Hz (thud)
+  Envelope: exponential decay, &tau; = 0.05s (fast decay, percussive)
+  Double-pulse pattern: lub-dub with 0.15s gap
+  Output level: -18 dB
+  At low heart rates: sparse, calm
+  At high heart rates: dense, urgent, anxious
+
+Layer 3: Thruster Noise (fuel events &rarr; transients)
+  Source: white noise burst
+  Triggered at each fuel consumption event
+  Envelope: attack 2ms, sustain 50ms, decay 200ms
+  Bandpass filter: 2-8 kHz (hiss character)
+  Stereo placement: random L/R per event
+  Intensity scales with fuel cost of maneuver
+  Output level: -15 dB
+
+Master Filter (fuel level &rarr; brightness):
+  Type: 4th-order resonant lowpass (Moog-style ladder)
+  Cutoff frequency: fuel_level mapped 0-100% &rarr; 200-8000 Hz
+    Full fuel (100%): cutoff at 8 kHz (bright, full spectrum)
+    Half fuel (50%): cutoff at 2 kHz (muffled, filtered)
+    Empty (0%): cutoff at 200 Hz (dark, closed, suffocating)
+  Resonance: 0.3 (moderate, adds character without self-oscillation)
+
+Effects:
+  Reverb: large hall (decay 4s, damping 0.5, mix 0.3)
+    Simulates the emptiness of orbital space
+  Delay: ping-pong, 0.4s, feedback 0.3, mix 0.15
+    Simulates radio communication echoes
+
+Parameters (FAUST UI sliders):
+  altitude_km: 161-267 (default 214)
+  fuel_percent: 0-100 (default 100)
+  heart_rate_bpm: 40-180 (default 72)
+  thruster_trigger: button (fires a thruster transient)
+  playback_speed: 0.1-10.0 (default 1.0)
+  master_volume: -60 to 0 dB (default -6)</pre></div>
+
+    <hr>
+
+    <h3>E2. Crystal Jellyfish Bioluminescence</h3>
+
+    <p><strong>What it is:</strong> A FAUST synthesizer that translates the photophysics of jellyfish bioluminescence into sound. The calcium trigger is a sharp transient &mdash; a click or pop that represents the sudden influx of Ca2+ ions into the photocyte. This trigger initiates a blue-register tone (high frequency, cold timbre) representing the aequorin chemiluminescent flash, which immediately sweeps downward in frequency toward a green-register tone (lower, warmer) as the energy transfers from aequorin to GFP. The bell pulsation of the jellyfish drives a slow LFO that modulates amplitude and filter position, giving the entire sound a breathing, organic character. The result is a meditative ambient synthesizer: slow pulses of tone that bloom from bright clicks into warm drones, mimicking the visual rhythm of bioluminescence in sound.</p>
+
+    <p><strong>Specification:</strong></p>
+
+    <div class="code-block"><pre>crystal-jellyfish-bioluminescence.dsp
+
+Architecture: trigger &rarr; spectral sweep &rarr; LFO modulation &rarr; output
+
+Trigger (calcium flash):
+  Input: button or MIDI note-on
+  Sound: filtered click (white noise burst, 1ms duration)
+  Bandpass filter: 4 kHz center, Q=10 (sharp, crystalline click)
+  Represents: Ca&sup2;&#8314; binding to aequorin coelenterazine
+
+Spectral Sweep (blue &rarr; green energy transfer):
+  Oscillator: sine wave with 4 harmonics (additive synthesis)
+  Start frequency: 1760 Hz (A6, &ldquo;blue&rdquo; register)
+  End frequency: 659 Hz (E5, &ldquo;green&rdquo; register)
+    Frequency ratio: 1760/659 = 2.67
+    Wavelength ratio: 509/469 = 1.085
+    (Exaggerated musically &mdash; actual wavelength shift is subtle,
+     but the musical mapping uses a wider interval to make the
+     blue-to-green transition audible)
+  Sweep duration: 500ms (matching visual flash duration)
+  Sweep curve: exponential decay (fast initial drop, slow tail)
+  Timbre shift: bright harmonics (3rd, 5th) fade during sweep
+    (the &ldquo;green&rdquo; tone is purer, more sinusoidal than the &ldquo;blue&rdquo;)
+
+Envelope:
+  Attack: 5ms (near-instantaneous, triggered by calcium click)
+  Decay: 200ms (to sustained level)
+  Sustain: 0.4 (-8 dB below peak)
+  Release: 800ms (long fluorescence tail)
+  Total event duration: ~1.5 seconds
+
+Bell Pulsation LFO:
+  Shape: rounded triangle wave (sinusoidal-ish, organic)
+  Rate: 0.3 Hz (one pulse every 3.3 seconds, matching
+    Aequorea victoria&rsquo;s natural bell contraction rate)
+  Amplitude modulation depth: 6 dB (noticeable but gentle)
+  Filter modulation: &plusmn;200 Hz on the main oscillator&rsquo;s
+    lowpass filter cutoff
+  The LFO runs continuously, independent of triggers
+  Represents: the rhythmic contraction of the jellyfish bell
+
+Water Ambience (background layer):
+  Source: filtered noise (pink spectrum)
+  Bandpass: 100-400 Hz, very low level (-30 dB)
+  Slow random modulation of filter center (0.05 Hz drift)
+  Simulates: deep ocean ambient sound
+  Always present, beneath everything else
+
+Output Processing:
+  Lowpass filter: 2nd-order, cutoff 3 kHz (warmth)
+  Reverb: medium hall (decay 2.5s, damping 0.6, mix 0.4)
+    Simulates: underwater acoustic environment
+    (sound travels ~4.5x faster in water, longer reverb tails)
+  Stereo width: 0.7 (moderately wide)
+
+Parameters (FAUST UI):
+  trigger: button (fires one bioluminescence event)
+  auto_trigger: checkbox (fires automatically every 5-8 seconds,
+    randomized interval)
+  bell_rate_hz: 0.1-1.0 (default 0.3)
+  sweep_time_ms: 100-2000 (default 500)
+  blue_frequency_hz: 880-3520 (default 1760)
+  green_frequency_hz: 220-1320 (default 659)
+  water_level_db: -60 to -12 (default -30)
+  reverb_mix: 0-1.0 (default 0.4)
+  master_volume: -60 to 0 dB (default -6)</pre></div>
+
+    <hr>
+
+    <h2>F. Other Platforms &mdash; Specifications Only</h2>
+
+    <h3>F1. Minecraft: Aurora 7 Capsule with Bioluminescence</h3>
+
+    <p>Build the Aurora 7 capsule at 4:1 scale (the actual capsule was 2.9m long x 1.9m diameter, so the build is approximately 12 blocks long x 8 blocks diameter). The capsule sits on a platform over a dark ocean biome. Interior detail includes the instrument panel (buttons and levers), the periscope viewport (glass pane), the contour couch (wool blocks shaped to the astronaut position), and the hand controller. The heat shield at the base is made of netherite blocks (darkest, toughest material &mdash; appropriate for ablative shielding). The exterior has the &ldquo;Aurora 7&rdquo; name painted in white concrete powder letters. Below the platform, underwater, build a jellyfish field using sea lanterns and green stained glass to create bioluminescent jellyfish shapes &mdash; each jellyfish is a dome of green stained glass (5-7 blocks across) with a sea lantern core and glass pane tentacles extending downward. Place 8-12 jellyfish at varying depths, connected by waterlogged glass panes. Use daylight detectors to make the jellyfish glow only at night, linking to redstone lamps behind the sea lanterns.</p>
+
+    <h3>F2. Blender: Jellyfish Volumetric Bioluminescence</h3>
+
+    <p>Model an <em>Aequorea victoria</em> jellyfish with anatomically accurate bell geometry (oblate hemisphere, 10-20 cm diameter), oral arms, and marginal tentacles. The bell material uses a Principled BSDF with subsurface scattering (scale 0.05, blue-tinted) and high transmission (0.95). The bioluminescence effect is achieved through an emission shader mixed into the bell margin region, keyframed to pulse: blue emission (hex #3366FF, strength 2.0) for 6 frames, crossfading to green emission (hex #33FF66, strength 5.0) for 18 frames, then fading to zero over 12 frames. The environment is an underwater scene with volumetric absorption (blue-green, density 0.02) and a plane of caustic light patterns projected from above using a noise texture on a spotlight. Particle system generates marine snow (small icospheres, 1-3mm, white, &alpha;=0.1, turbulence=0.5, gravity=-0.01). Render at 1920x1080, 30fps, Cycles engine with volumetric sampling.</p>
+
+    <h3>F3. Arduino: UV Fluorescence Detector</h3>
+
+    <p>Hardware implementation of the SPICE fluorescence detector circuit (B2). Components: Arduino Uno, UV LED (395 nm, 20mA), current-limiting resistor (150 ohm for 5V supply), silicon photodiode (BPW34 or similar, good sensitivity at 509 nm), transimpedance amplifier (OPA380 breakout or equivalent using LM358 with 1M feedback resistor), emission filter (green theatrical gel or 500nm longpass filter to block UV). The Arduino reads the transimpedance amplifier output through an analog pin (A0), samples at 100 Hz, applies a moving average filter (window=10), and outputs the fluorescence intensity to the serial monitor and an OLED display (128x64, SSD1306). The UV LED pulses at 10 Hz (50ms on, 50ms off) using a digital pin, and the Arduino performs synchronous detection: it reads the photodiode voltage during LED-on and LED-off periods, subtracting the dark reading from the illuminated reading to reject ambient light. Display shows: real-time fluorescence intensity bar graph, peak hold value, and a scrolling time-series plot of the last 30 seconds.</p>
+
+    <h3>F4. GMAT: MA-7 Orbit Propagation with Retrofire Analysis</h3>
+
+    <p>Propagate the Mercury-Atlas 7 orbit using NASA&rsquo;s General Mission Analysis Tool (GMAT). Initial state: epoch 1962-05-24T12:45:16 UTC, Keplerian elements (a=6585 km, e=0.0079, i=32.5 deg, RAAN from epoch, AOP and TA from insertion state vector). Propagate using the JGM-2 gravity model (8x8), MSISE-90 drag model (Cd=2.2, area=2.81 m^2, mass=1355 kg), and solar radiation pressure. At the planned retrofire point (orbit 3, over the Pacific), apply an impulsive burn: planned scenario (152 m/s retrograde, on-time, on-attitude) versus actual scenario (137.8 m/s effective retrograde due to 25-deg yaw error, 3s late). Propagate both post-retrofire trajectories to 80 km altitude and compare landing points. Report the planned vs actual splashdown coordinates, the overshoot distance, and the trajectory difference in altitude, velocity, and ground track. Generate plots: altitude vs time for both trajectories, ground track comparison on Mercator projection, and velocity vs time showing the divergence point at retrofire.</p>
+
+  </div>
+  <div class="nav-card">
+    <div><div class="nav-label">&larr; Back</div><a href="index.html">Mission 1.22</a></div>
+    <div style="text-align:right;"><div class="nav-label">Series &rarr;</div><a href="../index.html">All Missions</a></div>
+  </div>
+</main>
+<footer>
+  <p>Mission 1.22 &bull; Mercury-Atlas 7 / Aurora 7 &bull; <a href="../index.html">NASA Mission Series</a></p>
+</footer>
+</body>
+</html>
