@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 56&deg; &mdash; Band-tailed Pigeon &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Forest coo element card */
+    .forestcoo-card {
+      background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
+      border: 2px solid #0D3B0F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .forestcoo-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .forestcoo-card p {
+      color: #E8F5E9;
+    }
+    .forestcoo-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Columbidae enters card */
+    .columbidae-card {
+      background: linear-gradient(135deg, #4527A0 0%, #5E35B1 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #EDE7F6;
+    }
+    .columbidae-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #D1C4E9;
+    }
+    .columbidae-card p {
+      color: #EDE7F6;
+    }
+    .columbidae-card strong {
+      color: #B39DDB;
+    }
+
+    /* Passenger pigeon card */
+    .passenger-card {
+      background: linear-gradient(135deg, #37474F 0%, #546E7A 100%);
+      border: 2px solid #263238;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #ECEFF1;
+    }
+    .passenger-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CFD8DC;
+    }
+    .passenger-card p {
+      color: #ECEFF1;
+    }
+    .passenger-card strong {
+      color: #B0BEC5;
+    }
+
+    /* E=1 bass card */
+    .bass-card {
+      background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+      border: 2px solid #0A3680;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E3F2FD;
+    }
+    .bass-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #BBDEFB;
+    }
+    .bass-card p {
+      color: #E3F2FD;
+    }
+    .bass-card strong {
+      color: #90CAF9;
+    }
+
+    /* CSV substitution card */
+    .csv-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #90A4AE 100%);
+      border: 2px solid #37474F;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .csv-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #263238;
+    }
+
+    /* Conservation card */
+    .conservation-card {
+      background: linear-gradient(135deg, #BF360C 0%, #E64A19 100%);
+      border: 2px solid #8D2B0B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FBE9E7;
+    }
+    .conservation-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFCCBC;
+    }
+    .conservation-card p {
+      color: #FBE9E7;
+    }
+    .conservation-card strong {
+      color: #FFAB91;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.forestcoo { background: #1B5E20; }
+    .theory-icon.columbidae { background: #4527A0; }
+    .theory-icon.passenger { background: #37474F; }
+    .theory-icon.bass { background: #0D47A1; }
+    .theory-icon.native { background: #004D40; }
+    .theory-icon.mineral { background: #5D4037; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">56&deg;</div>
+      <div class="release-title-block">
+        <h2>Band-tailed Pigeon</h2>
+        <div class="scientific">Patagioenas fasciata</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      soft owl-like cooing &mdash; deep, low, resonant &ldquo;whooo-whooo&rdquo; from the canopy &mdash; the forest coo, COLUMBIDAE ENTERS ENGINE as 23rd family and 6th order (Columbiformes), first pigeon or dove, largest native pigeon in western North America, white nape crescent with iridescent bronze-green hindneck, Passenger Pigeon conservation legacy, E=1, mature mixed conifer and hardwood forest, twelfth consecutive CSV substitution
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- CSV Substitution Card -->
+        <div class="csv-card">
+          <h3>CSV Substitution</h3>
+          <p>The original CSV had <strong>Ensatina</strong> (<em>Ensatina eschscholtzii</em>) at degree 56. Because the SPS Part B engine is birds-and-mammals only, Band-tailed Pigeon replaces it. The substitution preserves the original&rsquo;s <strong>moist forest habitat</strong> and <strong>E=1 quiet energy</strong>. The Ensatina is a lungless salamander of the moist forest floor &mdash; secretive, with a soft squeak if handled (E=1). The Band-tailed Pigeon occupies the canopy of the same mature mixed forests with a deep, soft, owl-like cooing (E=1). Both are year-round residents. This is the <strong>twelfth consecutive amphibian-class replacement</strong> (Pacific Chorus Frog at 45, Columbia Spotted Frog at 46, Red-legged Frog at 47, Tailed Frog at 48, Western Toad at 49, Rough-skinned Newt at 50, Northwestern Salamander at 51, Long-toed Salamander at 52, Olympic Torrent Salamander at 53, Clouded Salamander at 54, Oregon Slender Salamander at 55, Ensatina at 56) &mdash; the engine continues through the plethodontid heartland of the original CSV&rsquo;s amphibian belt.</p>
+        </div>
+
+        <!-- Columbidae Enters Card -->
+        <div class="columbidae-card">
+          <h3>COLUMBIDAE ENTERS ENGINE &mdash; 23rd Family, 6th Order</h3>
+          <p>The Band-tailed Pigeon brings <strong>Columbidae</strong> (pigeons and doves) into the engine as the <strong>23rd family</strong> and the first representative of <strong>order Columbiformes</strong> &mdash; the engine&rsquo;s <strong>6th order</strong>. First new order since Apodiformes at degree 35 &mdash; a <strong>21-degree gap</strong> without a new order, now broken. No pigeon. No dove. No cooing. For 56 degrees, every sound in the engine was produced by a passerine, hummingbird, owl, woodpecker, or heron. The engine has never heard a coo &mdash; until now. <strong>Passeriformes interrupted AGAIN</strong> &mdash; second time in three degrees (54 Piciformes, 55 Passeriformes, 56 Columbiformes). The Passeriformes lock is loosening.</p>
+        </div>
+
+        <!-- Forest Coo Element Card -->
+        <div class="forestcoo-card">
+          <h3>The 57th Acoustic Element: The Forest Coo</h3>
+          <p>A <strong>deep, soft, owl-like cooing</strong> in the 400&ndash;600 Hz fundamental range, resonating from inside the canopy of mature mixed forest &mdash; <strong>the lowest-frequency vocalization in the engine</strong> by a wide margin. Named &ldquo;the forest coo&rdquo; for three resonances: (1) the <strong>habitat</strong> &mdash; this pigeon coos from inside the forest canopy, not from a wire or rooftop; (2) the <strong>acoustic novelty</strong> &mdash; a coo is a fundamentally new vocalization type. Not a song, not a call, not a drum. The Columbidae signature; (3) the <strong>frequency register</strong> &mdash; the engine&rsquo;s acoustic palette now extends into the bass register, spanning over four octaves from 400 Hz (pigeon) to 10,000+ Hz (kinglet).</p>
+          <p>The forest coo communicates through <strong>bass-register resonance</strong> rather than melodic complexity or volume. A large bird, softly cooing. The pedal point beneath the songbird chorus.</p>
+        </div>
+
+        <!-- E=1 Bass Card -->
+        <div class="bass-card">
+          <h3>E=1 Via a Different Path: Large Bird, Soft Voice</h3>
+          <p>The Band-tailed Pigeon is <strong>E=1</strong> &mdash; the same energy level as the Golden-crowned Kinglet (degree 8), Bushtit (degree 10), Pine Siskin (degree 12), and Brown Creeper (degree 51). But the pigeon reaches E=1 by an <strong>entirely different mechanism</strong>. Previous E=1 species are tiny birds (5&ndash;18 g) whose soft sounds exist at the edge of perception because of small body mass and high-pitched vocalizations. The Band-tailed Pigeon is a <strong>large bird (240&ndash;390 g)</strong> whose soft sound exists because <strong>cooing is inherently a soft vocalization</strong>. Quiet not because it is small, but because its voice type is inherently quiet. E=1 rises from 4 to <strong>5 entries</strong> (8.8%).</p>
+        </div>
+
+        <!-- Passenger Pigeon Card -->
+        <div class="passenger-card">
+          <h3>The Ghost of the Passenger Pigeon</h3>
+          <p>The Band-tailed Pigeon carries the conservation legacy of the <strong>most famous bird extinction in North American history</strong>. The Passenger Pigeon (<em>Ectopistes migratorius</em>) went from billions to zero between the 1870s and 1914. The Band-tailed Pigeon followed the same trajectory &mdash; abundant, heavily hunted, population crashing &mdash; but was saved by the <strong>Migratory Bird Treaty Act of 1918</strong>, the direct legislative response to the Passenger Pigeon&rsquo;s extinction. Recovery has been <strong>slow</strong>: only 1 egg per clutch, 1&ndash;2 broods per year. The single-egg strategy is both the pigeon&rsquo;s evolutionary gamble and its Achilles&rsquo; heel.</p>
+        </div>
+
+        <!-- Conservation Card -->
+        <div class="conservation-card">
+          <h3>Conservation: Declining Populations, Ongoing Concern</h3>
+          <p>Despite over a century of legal protection, Band-tailed Pigeon populations remain <strong>below historical levels</strong>. Breeding Bird Survey data shows <strong>long-term declines</strong> in parts of the Pacific Northwest and California. The species is designated a <strong>game bird of conservation concern</strong> by the U.S. Fish and Wildlife Service. Threats include habitat loss (logging of mature forest), continued regulated hunting, climate change effects on mast crops, and competition with invasive Eurasian Collared-Dove. Washington State monitors populations through harvest surveys and <strong>mineral spring counts</strong>.</p>
+        </div>
+
+        <h2>The Banded Clattering-Pigeon</h2>
+        <p><em>Patagioenas fasciata</em> &mdash; from Ancient Greek <em>patageo</em> (&ldquo;to clatter, to crash, to make a noise&rdquo;) + <em>oinas</em> (&ldquo;pigeon, dove&rdquo;) + Latin <em>fasciata</em> (&ldquo;banded,&rdquo; from <em>fascia</em> = band, stripe). Full translation: <strong>&ldquo;Banded clattering-pigeon.&rdquo;</strong> Named by Thomas Say in 1823. Genus <em>Patagioenas</em> elevated by Reichenbach (1853), containing approximately 17 New World pigeon species. The genus was formerly placed within <em>Columba</em> (Old World pigeons) but split based on molecular phylogenetics. Compare the Bewick&rsquo;s Wren&rsquo;s <em>Thryomanes bewickii</em> (&ldquo;Bewick&rsquo;s reed-frenzy bird&rdquo;) at degree 55: the reed-frenzy bird burns with restless energy; the clattering-pigeon announces itself with wingclaps and settles into a soft, deep coo.</p>
+
+        <h2>The Sound: Deep, Soft, Owl-Like Cooing</h2>
+        <p><strong>Primary coo:</strong> A low, resonant <strong>&ldquo;whooo-whooo&rdquo;</strong> or <strong>&ldquo;coo-coo-coo&rdquo;</strong> &mdash; two to three deep, breathy notes in a slow, measured cadence from the canopy of mature forest. Frequency ~300&ndash;800 Hz, fundamental 400&ndash;600 Hz. Duration ~0.5&ndash;1.0 seconds per note. Quality: <strong>deep, soft, hollow, resonant, breathy</strong>. Woodwind quality &mdash; closer to a blown bottle or soft bassoon than to passerine song. First-time hearers frequently mistake it for an owl.</p>
+        <p><strong>Vocalizations are innate</strong> &mdash; no cultural learning, no geographic dialects. Dramatically simpler repertoire than any passerine in the engine. The pigeon has one coo type. It repeats it. That is enough.</p>
+
+        <h3>Frequency Analysis</h3>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Vocalization</th><th>Frequency Range</th><th>Duration</th><th>Function</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primary coo</td><td>300&ndash;800 Hz (fund. 400&ndash;600)</td><td>~0.5&ndash;1.0 s</td><td>Contact, territory</td></tr>
+            <tr><td>Coo series</td><td>300&ndash;800 Hz</td><td>~3&ndash;10 s (2&ndash;6 reps)</td><td>Advertising, pair bond</td></tr>
+            <tr><td>Wing clap</td><td>Broadband impulse</td><td>~50&ndash;100 ms</td><td>Alarm, display</td></tr>
+            <tr><td>Distress call</td><td>500&ndash;2,000 Hz</td><td>~200&ndash;500 ms</td><td>Alarm, threat</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Plumage: The White Crescent and the Iridescent Nape</h2>
+        <p><strong>White nape crescent</strong> &mdash; a narrow white band crossing the back of the neck, the primary field mark. Below it, <strong>iridescent bronze-green to bronze-purple</strong> structural coloration that shifts with the light. <strong>Blue-gray to purple-gray</strong> overall, with a wine-pink wash on the breast. <strong>Yellow bill with dark tip</strong> &mdash; brighter in breeding condition. <strong>Pale gray terminal tail band</strong> &mdash; the &ldquo;band&rdquo; of Band-tailed Pigeon, visible in flight. Pale yellow to gold eyes with narrow red orbital ring. Large: 33&ndash;40 cm, <strong>240&ndash;390 g</strong> &mdash; roughly 25&ndash;35 times heavier than the wrens at degrees 1 and 55. The largest body mass of any species in the engine since the Great Blue Heron at degree 0.</p>
+
+        <h2>Habitat: The Canopy Pigeon of Mature Forest</h2>
+        <p>Breeds in <strong>mature mixed conifer and hardwood forests</strong>: Douglas fir, western hemlock, western red cedar, bigleaf maple, red alder, Garry oak. Feeds on <strong>acorns, berries, seeds, and buds</strong> in the canopy. Strong affinity for <strong>mineral springs</strong> and salt licks &mdash; congregations of hundreds at known springs in western Washington. The only <strong>native pigeon</strong> in most PNW forests &mdash; not the urban Rock Pigeon, not the invasive Eurasian Collared-Dove. Year-round in western Washington with some altitudinal migration.</p>
+
+        <h2>Nesting: The Single-Egg Strategy</h2>
+        <p>Flimsy twig platform on a horizontal branch in the canopy. <strong>One egg per clutch</strong> &mdash; the lowest clutch size in the engine. 18&ndash;20 day incubation (shared by both parents). 25&ndash;30 day nestling period. Both parents feed <strong>crop milk</strong> (pigeon milk) for the first week &mdash; a trait shared only with flamingos and some penguins. 1&ndash;2 broods per season. The single-egg clutch is the species&rsquo; Achilles&rsquo; heel: slow reproduction means slow recovery from population declines.</p>
+
+        <h2>Family Tracker After Degree 56</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td><strong>Columbidae</strong></td><td><strong>56</strong></td><td><strong>1 (NEW &mdash; 23rd family, 6th order)</strong></td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-three families across 57 entries. <strong>Columbidae is the 23rd family</strong> &mdash; the first pigeon or dove. <strong>Columbiformes is the 6th order</strong> &mdash; first new order since Apodiformes at degree 35. 49 of 57 entries (86.0%) are Passeriformes, but the engine is diversifying at the order level: two non-passerine orders in three degrees.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon forestcoo">F</div>
+            <div class="theory-content">
+              <h4>The Forest Coo <span class="theory-level foundational">foundational</span></h4>
+              <p>The 57th acoustic element. Deep, soft, owl-like cooing at 400&ndash;600 Hz fundamental &mdash; the lowest frequency in the engine. A fundamentally new vocalization type: the coo. The Columbidae signature. Opens the bass register. Music-theory parallel: the pedal point &mdash; a sustained bass note held beneath changing harmonies above, anchoring the music to a tonal center.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon columbidae">C</div>
+            <div class="theory-content">
+              <h4>Columbidae Enters &mdash; 23rd Family, 6th Order <span class="theory-level foundational">foundational</span></h4>
+              <p>First pigeon/dove in 56 degrees. New order Columbiformes. First new order since Apodiformes at degree 35. Brings cooing vocalizations, crop milk, large-bodied frugivore ecology, single-egg clutches. Music-theory parallel: the new instrument &mdash; an instrument silent for the entire piece suddenly enters, both surprising and inevitable.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon passenger">P</div>
+            <div class="theory-content">
+              <h4>The Passenger Pigeon&rsquo;s Shadow <span class="theory-level foundational">foundational</span></h4>
+              <p>The Band-tailed Pigeon carries the legacy of the most famous bird extinction. Overhunted, crashed, saved by laws that the Passenger Pigeon&rsquo;s death created. Slow recovery &mdash; single-egg clutch. The ghost of <em>Ectopistes</em> haunts every <em>Patagioenas</em>. Music-theory parallel: the elegy &mdash; a composition expressing grief for the dead. The forest coo as memorial.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon bass">E</div>
+            <div class="theory-content">
+              <h4>E=1 Via a Different Path <span class="theory-level foundational">foundational</span></h4>
+              <p>Previous E=1 species are tiny birds with high-thin sounds. The pigeon is E=1 because cooing is inherently soft &mdash; a large bird, quietly cooing. Violin pianissimo (previous E=1) vs. tuba pianissimo (this E=1). Same dynamic level, different timbral universe. Music-theory parallel: pianissimo by different means.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon native">N</div>
+            <div class="theory-content">
+              <h4>The Only Native Pigeon <span class="theory-level intermediate">intermediate</span></h4>
+              <p>In a landscape dominated by introduced Rock Pigeon and invasive Eurasian Collared-Dove, the Band-tailed Pigeon is the only native pigeon in PNW forests. The forest pigeon. The one that was here before the cities. Music-theory parallel: the authentic voice &mdash; a tradition performed in its native context, not transplanted.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mineral">M</div>
+            <div class="theory-content">
+              <h4>Mineral Spring Congregations <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Strong affinity for mineral springs and salt licks. Hundreds congregate at known springs. Mineral intake helps neutralize plant toxins in frugivorous diet. No other species in the engine shows this behavior. Music-theory parallel: the gathering &mdash; musicians converge at traditional sites to play together.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-055: Bewick&rsquo;s Wren</strong>
+            <p>CONSECUTIVE DEGREES, MAXIMUM CONTRAST. The yard song (degree 55, E=3, 3,000&ndash;6,000 Hz, learned, suburban) yields to the forest coo (degree 56, E=1, 400&ndash;600 Hz, innate, canopy). Every dimension reversed. Maximum acoustic contrast in a single degree step.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>TWO LOW-FREQUENCY FOREST VOICES. The owl (~500&ndash;800 Hz, E=2, nocturnal hoot) and the pigeon (400&ndash;600 Hz, E=1, diurnal coo) are the engine&rsquo;s only entries below 1,000 Hz. The owl commands. The pigeon murmurs. Day coo and night hoot.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-001: Pacific Wren</strong>
+            <p>SAME FOREST, OPPOSITE FREQUENCIES. The wren (3,000&ndash;8,000 Hz, E=2, cascade from understory) and the pigeon (400&ndash;600 Hz, E=1, coo from canopy) occupy the same forest at opposite frequency extremes. Treble and bass in the same cathedral.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-051: Brown Creeper</strong>
+            <p>TWO E=1 FOREST SPECIES. The creeper (E=1, 6,000&ndash;10,000 Hz, high-thin descent) and the pigeon (E=1, 400&ndash;600 Hz, deep coo). Both E=1, both in mature forest, opposite frequency extremes. Two paths to E=1.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-008: Golden-crowned Kinglet</strong>
+            <p>FREQUENCY EXTREMES OF THE ENGINE. The kinglet (7,000&ndash;10,000+ Hz, highest, E=1) and the pigeon (400&ndash;600 Hz, lowest, E=1). Both E=1. More than four octaves apart. The full span of the engine&rsquo;s acoustic palette.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-054: Red-breasted Sapsucker</strong>
+            <p>MATURE FOREST GUILD. The sapsucker drills sap wells in living trees. The pigeon feeds on acorns and fruit in the canopy. Both depend on forests that have had time to grow. Part of the mature-forest species guild.</p>
+          </div>
+          <div class="xref-card">
+            <strong>AVI: Wings of the Pacific Northwest</strong>
+            <p>Band-tailed Pigeon documented across western Washington and British Columbia. Year-round resident of mature mixed forests. The only native pigeon in most PNW forests. Concentrated near food sources and mineral springs.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Mature forest ecology. Frugivore and seed disperser role. Mineral spring congregations. Conservation history linked to Passenger Pigeon extinction. Single-egg reproductive strategy and slow population recovery.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>Birds of the World (BotW) &mdash; Band-tailed Pigeon (<em>Patagioenas fasciata</em>). Cornell Lab of Ornithology.</li>
+          <li>All About Birds &mdash; Band-tailed Pigeon. Cornell Lab of Ornithology.</li>
+          <li>BirdWeb (Seattle Audubon / Birds Connect Seattle) &mdash; Band-tailed Pigeon.</li>
+          <li>National Geographic &mdash; Band-tailed Pigeon.</li>
+          <li>Wikipedia &mdash; &ldquo;Band-tailed pigeon.&rdquo;</li>
+          <li>Wikipedia &mdash; &ldquo;Patagioenas.&rdquo;</li>
+          <li>Audubon &mdash; Band-tailed Pigeon Field Guide.</li>
+          <li>Wikipedia &mdash; &ldquo;Passenger pigeon.&rdquo; Historical context on <em>Ectopistes migratorius</em> extinction.</li>
+          <li>Keppie, D. M. and Braun, C. E. &mdash; Band-tailed Pigeon in Birds of the World.</li>
+          <li>Sanders, T. A. &mdash; Band-tailed Pigeon mineral spring studies.</li>
+          <li>Sibley, D. (2014). <em>The Sibley Guide to Birds</em>, 2nd ed. Alfred A. Knopf.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">56&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">The Forest Coo</div>
+          <div class="stat-detail">#57 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 1</div>
+          <div class="stat-detail">Very quiet: deep, soft cooing</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Columbidae</div>
+          <div class="stat-detail">NEW &mdash; 23rd family. First pigeon/dove.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Genus</div>
+          <div class="stat-value"><em>Patagioenas</em></div>
+          <div class="stat-detail">NEW genus &mdash; &ldquo;clattering pigeon&rdquo;</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Columbiformes</div>
+          <div class="stat-detail">NEW &mdash; 6th order. First since deg. 35.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Mature Mixed Forest</div>
+          <div class="stat-detail">Conifer + hardwood canopy, oaks, mineral springs</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Resident</div>
+          <div class="stat-detail">Year-round; some altitudinal migration</div>
+        </div>
+
+        <h3>Engine Totals</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">54 unique</div>
+          <div class="stat-detail">57 entries (0&ndash;56)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Families</div>
+          <div class="stat-value">23</div>
+          <div class="stat-detail">Columbidae is NEW &mdash; 23rd family</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Orders</div>
+          <div class="stat-value">6</div>
+          <div class="stat-detail">Columbiformes NEW &mdash; 6th order</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Body Mass</div>
+          <div class="stat-value">240&ndash;390 g</div>
+          <div class="stat-detail">Largest since Great Blue Heron (deg. 0)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Diagnostic Mark</div>
+          <div class="stat-value">White Nape Crescent</div>
+          <div class="stat-detail">+ iridescent bronze-green hindneck</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Nest Type</div>
+          <div class="stat-value">Twig Platform</div>
+          <div class="stat-detail">1 egg per clutch &mdash; lowest in engine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Key Adaptation</div>
+          <div class="stat-value">Crop Milk</div>
+          <div class="stat-detail">Shared only with flamingos + some penguins</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Conservation</div>
+          <div class="stat-value">Least Concern</div>
+          <div class="stat-detail">IUCN; declining, game bird of concern</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div class="stat-value">400&ndash;600 Hz</div>
+          <div class="stat-detail">Lowest in engine &mdash; bass register</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 tibsfox.com &mdash; The Sound of Puget Sound, Release 056</p>
+  </footer>
+</body>
+</html>
