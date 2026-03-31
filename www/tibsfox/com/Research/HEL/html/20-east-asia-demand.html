@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>East Asian Semiconductor Helium Demand —
-Quantified — HEL Research</title>
+    <title>East Asian Semiconductor Helium Demand — Quantified Market
+Analysis — HEL Research</title>
     <style>
         :root {
             --bg: #1a1a2e;
@@ -55,156 +55,504 @@ Quantified — HEL Research</title>
         HEL — Helium Supply Chain &amp; Pacific Rim Semiconductor Infrastructure<br>
         PNW Research Series · <a href="../index.html">Back to HEL Index</a> · <a href="../../index.html">Series Index</a>
     </div>
-    <h1 id="east-asian-semiconductor-helium-demand-quantified">East
-    Asian Semiconductor Helium Demand — Quantified</h1>
+    <h1
+    id="east-asian-semiconductor-helium-demand-quantified-market-analysis">East
+    Asian Semiconductor Helium Demand — Quantified Market Analysis</h1>
+    <h2 id="what-this-document-establishes">What This Document
+    Establishes</h2>
+    <p>This document quantifies the helium consumption of the East Asian
+    semiconductor industry (Taiwan, South Korea, Japan), projects demand
+    growth through 2030, and calculates the addressable market for a PNW
+    cooperative helium supplier. It provides the demand-side foundation
+    for the financial model in Document 23 and the justification for
+    including liquefaction and port access in the hub design (Document
+    18).</p>
     <p><strong>Caveat:</strong> Fab-level helium consumption is
-    proprietary. Numbers below are estimates from industry analysts, gas
-    supplier disclosures, and conference presentations. Ranges reflect
-    genuine uncertainty.</p>
-    <h2 id="per-fab-consumption">Per-Fab Consumption</h2>
-    <p>A single leading-edge fab (3nm/2nm node) consumes approximately:
-    - <strong>200,000–400,000 liters</strong> liquid helium equivalent
-    per year - <strong>~17,000–33,000 liters/month</strong> -
-    <strong>~50–100 Mcf/month</strong> (thousand cubic feet of gas)</p>
-    <p>The wide range reflects fab capacity utilization, number of EUV
-    layers, and logic vs. memory production.</p>
-    <h2 id="use-breakdown">Use Breakdown</h2>
+    proprietary. TSMC, Samsung, and SK Hynix do not publish helium usage
+    figures. Numbers below are estimates synthesized from industry
+    analyst reports (Kornbluth Helium Consulting, Edison Investment
+    Research), gas supplier disclosures in annual reports and investor
+    presentations, SEMI industry data, and conference presentations at
+    Gasworld and CryoGas conferences. Ranges reflect genuine
+    uncertainty, not imprecision. Where a single-point estimate would be
+    misleading, we provide ranges.</p>
+    <h2 id="how-semiconductor-fabs-consume-helium">How Semiconductor
+    Fabs Consume Helium</h2>
+    <h3 id="per-fab-consumption-at-leading-edge">Per-Fab Consumption at
+    Leading Edge</h3>
+    <p>A single leading-edge fab operating at the 3nm or 2nm process
+    node consumes approximately:</p>
+    <ul>
+    <li><strong>200,000-400,000 liters</strong> liquid helium equivalent
+    per year</li>
+    <li><strong>17,000-33,000 liters per month</strong></li>
+    <li><strong>50-100 Mcf per month</strong> (thousand cubic feet of
+    gaseous helium)</li>
+    </ul>
+    <p>The wide range reflects three variables: fab capacity utilization
+    (a fully loaded fab at 90%+ utilization consumes more than one
+    ramping at 50%), number of EUV lithography layers in the process
+    flow (more EUV layers means more helium per wafer), and whether the
+    fab produces logic or memory (logic fabs at leading edge use more
+    EUV layers than most memory fabs, though EUV DRAM is closing this
+    gap).</p>
+    <h3 id="use-breakdown-by-application">Use Breakdown by
+    Application</h3>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 19%" />
+    <col style="width: 38%" />
+    <col style="width: 32%" />
+    <col style="width: 10%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Application</th>
+    <th>Share of Total Fab Helium</th>
+    <th>Technical Explanation</th>
+    <th>Trend</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>EUV lithography purging and cooling</strong></td>
+    <td>35-45%</td>
+    <td>EUV systems operate in vacuum with helium-purged optical paths.
+    The EUV source (laser-produced plasma from tin droplets) requires
+    helium for debris mitigation and optics cooling. Each EUV exposure
+    tool (ASML NXE:3600D or newer) consumes helium continuously during
+    operation.</td>
+    <td>Growing. Each node adds EUV layers: ~14 at 5nm, ~20 at 3nm,
+    potentially 25+ at 2nm. High-NA EUV (ASML EXE:5000 series, deploying
+    2025-2027) may increase per-tool consumption further.</td>
+    </tr>
+    <tr>
+    <td><strong>Carrier gas (CVD/PVD/etch)</strong></td>
+    <td>20-30%</td>
+    <td>Helium serves as an inert carrier gas in chemical vapor
+    deposition, physical vapor deposition, and plasma etch chambers. It
+    transports precursor chemicals without participating in
+    reactions.</td>
+    <td>Stable. Mature application, incremental growth with fab
+    capacity.</td>
+    </tr>
+    <tr>
+    <td><strong>Leak detection</strong></td>
+    <td>10-15%</td>
+    <td>Helium mass spectrometry is the standard method for detecting
+    vacuum leaks in process chambers, gas delivery systems, and load
+    locks. Helium’s small atomic radius allows it to permeate through
+    the smallest cracks.</td>
+    <td>Stable. Essential for process integrity at every node.</td>
+    </tr>
+    <tr>
+    <td><strong>Wafer/chuck cooling</strong></td>
+    <td>10-15%</td>
+    <td>During plasma etch and ion implantation, wafers are clamped to
+    an electrostatic chuck. Helium is introduced between the wafer
+    backside and the chuck surface to conduct heat away from the wafer.
+    Helium’s thermal conductivity (the highest of any gas) makes it
+    uniquely suitable.</td>
+    <td>Stable to growing. Higher-power processes at advanced nodes
+    increase cooling demand.</td>
+    </tr>
+    <tr>
+    <td><strong>Other (metrology, line purging)</strong></td>
+    <td>5-10%</td>
+    <td>Gas delivery line purging, analytical instrument carrier gas,
+    cleanroom tool purging between maintenance cycles.</td>
+    <td>Stable.</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>The critical insight:</strong> EUV lithography is driving
+    helium demand growth in semiconductors. Every node shrink adds EUV
+    layers. The transition from DUV to EUV multiplied per-wafer helium
+    consumption; the transition from standard EUV to High-NA EUV will
+    increase it further. A 2nm fab with 25+ EUV layers uses
+    substantially more helium than a 5nm fab with 14 EUV layers – even
+    at identical wafer throughput.</p>
+    <h2 id="east-asian-fab-count-and-capacity-2025-2026">East Asian Fab
+    Count and Capacity (2025-2026)</h2>
+    <h3 id="taiwan-12-15-leading-edge-fabs-7nm-and-below">Taiwan (~12-15
+    Leading-Edge Fabs, 7nm and Below)</h3>
+    <p><strong>TSMC</strong> dominates Taiwan’s leading-edge capacity.
+    TSMC operates approximately 8-10 leading-edge fabs (7nm and below)
+    across three campuses:</p>
     <table>
     <colgroup>
-    <col style="width: 48%" />
+    <col style="width: 21%" />
+    <col style="width: 21%" />
+    <col style="width: 12%" />
+    <col style="width: 44%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Facility</th>
+    <th>Location</th>
+    <th>Node</th>
+    <th>Status (March 2026)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Fab 18, Phases 1-6</td>
+    <td>Tainan Science Park</td>
+    <td>5nm / 3nm</td>
+    <td>Production (Phases 1-4 at 5nm, Phases 5-6 at 3nm)</td>
+    </tr>
+    <tr>
+    <td>Fab 20</td>
+    <td>Hsinchu Science Park</td>
+    <td>2nm (N2)</td>
+    <td>Construction / early ramp, pilot production 2025-2026</td>
+    </tr>
+    <tr>
+    <td>Fab 22</td>
+    <td>Kaohsiung Science Park</td>
+    <td>2nm (N2)</td>
+    <td>Under construction</td>
+    </tr>
+    <tr>
+    <td>Existing logic fabs</td>
+    <td>Hsinchu, Taichung</td>
+    <td>7nm / 5nm</td>
+    <td>Production</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>TSMC has publicly disclosed helium recovery programs achieving
+    over 80% recovery at some Fab 18 phases. This reduces but does not
+    eliminate their need for external helium supply. Even with 80%
+    recovery, a large fab complex consuming 2-4 million liters annually
+    still needs 400,000-800,000 liters of fresh supply to replace the
+    unrecovered fraction plus growth.</p>
+    <p><strong>UMC and other Taiwan fabs:</strong> UMC operates
+    trailing-edge and mid-range fabs (28nm and above) that consume less
+    helium per wafer but still represent meaningful aggregate demand.
+    Powerchip, Vanguard, and PSMC add additional capacity.</p>
+    <h3 id="south-korea-8-10-leading-edge-fabs">South Korea (~8-10
+    Leading-Edge Fabs)</h3>
+    <p><strong>Samsung Semiconductor</strong> operates the largest
+    integrated semiconductor complex in the world at Pyeongtaek:</p>
+    <table>
+    <thead>
+    <tr>
+    <th>Facility</th>
+    <th>Location</th>
+    <th>Products</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Pyeongtaek P1</td>
+    <td>Pyeongtaek, Gyeonggi</td>
+    <td>NAND, DRAM</td>
+    <td>Production</td>
+    </tr>
+    <tr>
+    <td>Pyeongtaek P2</td>
+    <td>Pyeongtaek</td>
+    <td>Logic foundry (3nm GAA)</td>
+    <td>Production</td>
+    </tr>
+    <tr>
+    <td>Pyeongtaek P3</td>
+    <td>Pyeongtaek</td>
+    <td>Advanced logic + memory</td>
+    <td>Ramping</td>
+    </tr>
+    <tr>
+    <td>Pyeongtaek P4</td>
+    <td>Pyeongtaek</td>
+    <td>Next-generation</td>
+    <td>Under construction</td>
+    </tr>
+    <tr>
+    <td>Hwaseong</td>
+    <td>Hwaseong, Gyeonggi</td>
+    <td>Logic foundry, DRAM</td>
+    <td>Production</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Samsung has recovery programs operational at the Pyeongtaek
+    campus, though recovery rates have not been publicly disclosed.</p>
+    <p><strong>SK Hynix</strong> is Korea’s second semiconductor
+    manufacturer, focused on memory:</p>
+    <table>
+    <colgroup>
+    <col style="width: 26%" />
+    <col style="width: 26%" />
+    <col style="width: 26%" />
+    <col style="width: 21%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Facility</th>
+    <th>Location</th>
+    <th>Products</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Icheon M16</td>
+    <td>Icheon, Gyeonggi</td>
+    <td>DRAM (DDR5, HBM3E)</td>
+    <td>Production</td>
+    </tr>
+    <tr>
+    <td>Cheongju M15</td>
+    <td>Cheongju, Chungbuk</td>
+    <td>NAND, DRAM packaging</td>
+    <td>Production</td>
+    </tr>
+    <tr>
+    <td>Yongin</td>
+    <td>Yongin, Gyeonggi</td>
+    <td>Next-generation DRAM</td>
+    <td>Under construction</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>EUV DRAM is a helium demand accelerator.</strong> SK
+    Hynix’s transition to EUV-based DRAM (essential for DDR5 and
+    HBM3E/HBM4) means memory fabs now consume helium at rates
+    approaching logic fab levels. HBM (High Bandwidth Memory) for AI
+    accelerators is particularly helium-intensive: each HBM stack uses
+    EUV DRAM dies, and global HBM production is scaling aggressively to
+    meet AI chip demand (NVIDIA H100/H200/B100 all use HBM).</p>
+    <h3 id="japan-2-3-leading-edge-growing">Japan (~2-3 Leading-Edge,
+    Growing)</h3>
+    <p>Japan is rebuilding its semiconductor manufacturing capability
+    after decades of decline:</p>
+    <table>
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 29%" />
+    <col style="width: 17%" />
+    <col style="width: 23%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Facility</th>
+    <th>Location</th>
+    <th>Node</th>
+    <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>TSMC JASM Fab 1</td>
+    <td>Kumamoto</td>
+    <td>12nm / 6nm</td>
+    <td>Operational (production started 2024)</td>
+    </tr>
+    <tr>
+    <td>TSMC JASM Fab 2</td>
+    <td>Kumamoto</td>
+    <td>6nm / advanced</td>
+    <td>Under construction</td>
+    </tr>
+    <tr>
+    <td>Rapidus</td>
+    <td>Chitose, Hokkaido</td>
+    <td>2nm</td>
+    <td>Targeting 2027 pilot production</td>
+    </tr>
+    <tr>
+    <td>Kioxia/WD Yokkaichi</td>
+    <td>Yokkaichi, Mie</td>
+    <td>NAND</td>
+    <td>Production</td>
+    </tr>
+    <tr>
+    <td>Kioxia/WD Kitakami</td>
+    <td>Kitakami, Iwate</td>
+    <td>NAND</td>
+    <td>Production / expanding</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Rapidus</strong> is the most significant new entrant. A
+    joint venture backed by the Japanese government (METI committed 920
+    billion yen / ~$6 billion), Toyota, Sony, NTT, and others, Rapidus
+    aims to produce 2nm chips by 2027. If successful, Rapidus will be a
+    major new helium consumer in the region.</p>
+    <p><strong>Kioxia/Western Digital</strong> NAND operations are
+    significant helium consumers (NAND uses helium in etch processes),
+    though per-wafer consumption is lower than leading-edge logic.</p>
+    <p><strong>Total across three countries: approximately 25-30
+    leading-edge fabs operating or under construction, plus 15-20
+    trailing-edge and memory fabs with significant helium
+    consumption.</strong></p>
+    <h2 id="company-level-demand-estimates">Company-Level Demand
+    Estimates</h2>
+    <h3 id="tsmc">TSMC</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 40%" />
+    <col style="width: 28%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Estimate</th>
+    <th>Basis</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Leading-edge fabs (7nm and below)</td>
+    <td>8-10</td>
+    <td>Public fab announcements and production disclosures</td>
+    </tr>
+    <tr>
+    <td>Estimated annual helium consumption</td>
+    <td>2,000,000-4,000,000 liters LHe equivalent</td>
+    <td>200K-400K L/fab/year x 8-10 fabs, partially offset by
+    recovery</td>
+    </tr>
+    <tr>
+    <td>Recovery rate (where deployed)</td>
+    <td>80%+ at some Fab 18 phases</td>
+    <td>TSMC ESG report disclosure</td>
+    </tr>
+    <tr>
+    <td>Net external supply requirement</td>
+    <td>400,000-1,200,000 L/year</td>
+    <td>After recovery; depends on how many fabs have recovery
+    installed</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="samsung">Samsung</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 40%" />
+    <col style="width: 28%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Estimate</th>
+    <th>Basis</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Leading-edge fabs (logic + memory)</td>
+    <td>6-8</td>
+    <td>Pyeongtaek + Hwaseong campuses</td>
+    </tr>
+    <tr>
+    <td>Estimated annual helium consumption</td>
+    <td>1,500,000-3,000,000 liters LHe equivalent</td>
+    <td>Includes both logic foundry and DRAM/NAND operations</td>
+    </tr>
+    <tr>
+    <td>Net external supply requirement</td>
+    <td>600,000-1,500,000 L/year</td>
+    <td>Less aggressive recovery deployment than TSMC based on available
+    disclosures</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="sk-hynix">SK Hynix</h3>
+    <table>
+    <colgroup>
+    <col style="width: 32%" />
+    <col style="width: 40%" />
+    <col style="width: 28%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Metric</th>
+    <th>Estimate</th>
+    <th>Basis</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Fabs (memory, EUV-enabled)</td>
+    <td>3-5</td>
+    <td>Icheon + Cheongju + Yongin (construction)</td>
+    </tr>
+    <tr>
+    <td>Estimated annual helium consumption</td>
+    <td>500,000-1,500,000 liters LHe equivalent</td>
+    <td>Growing rapidly due to EUV DRAM and HBM scaling</td>
+    </tr>
+    <tr>
+    <td>Net external supply requirement</td>
+    <td>300,000-900,000 L/year</td>
+    <td>Recovery programs in early deployment</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="adjacent-market-helium-filled-hard-drives">Adjacent Market:
+    Helium-Filled Hard Drives</h3>
+    <p>Seagate and Western Digital use helium-filled hard drives
+    (helium’s lower density vs. air reduces internal turbulence,
+    enabling more platters per drive): - Single drive: approximately 5
+    liters of helium - Global HDD helium consumption: approximately
+    10-15 million liters per year - Approximately 60% of helium HDD
+    manufacturing is in Thailand, China, and Malaysia (not in the three
+    primary target countries) - The remaining 40% is in the target
+    region (Japan HDD operations) and the US</p>
+    <p>This is an adjacent market that a PNW corridor could partially
+    serve, but it is not the primary target. HDD demand is declining
+    long-term as solid-state drives replace hard drives in enterprise
+    storage. Semiconductor helium demand is growing. The co-op should
+    focus on the growing market.</p>
+    <h2 id="total-addressable-market-tam">Total Addressable Market
+    (TAM)</h2>
+    <h3
+    id="semiconductor-helium-only-taiwan-south-korea-japan">Semiconductor
+    Helium Only (Taiwan + South Korea + Japan)</h3>
+    <table>
+    <colgroup>
+    <col style="width: 18%" />
+    <col style="width: 30%" />
     <col style="width: 25%" />
     <col style="width: 25%" />
     </colgroup>
     <thead>
     <tr>
-    <th>Application</th>
-    <th>Share</th>
-    <th>Notes</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td><strong>EUV lithography purging/cooling</strong></td>
-    <td>35–45%</td>
-    <td>Biggest single consumer. EUV sources and optics require
-    ultra-pure helium.</td>
-    </tr>
-    <tr>
-    <td><strong>Carrier gas (CVD/PVD/etch)</strong></td>
-    <td>20–30%</td>
-    <td>Inert carrier in deposition and etch chambers</td>
-    </tr>
-    <tr>
-    <td><strong>Leak detection</strong></td>
-    <td>10–15%</td>
-    <td>Helium mass spectrometry across vacuum systems</td>
-    </tr>
-    <tr>
-    <td><strong>Wafer/chuck cooling</strong></td>
-    <td>10–15%</td>
-    <td>Backside helium cooling during etch and implant</td>
-    </tr>
-    <tr>
-    <td><strong>Other (metrology, purging)</strong></td>
-    <td>5–10%</td>
-    <td>Gas lines, tool purging, analytical instruments</td>
-    </tr>
-    </tbody>
-    </table>
-    <p><strong>Key trend:</strong> EUV’s share grows with each node
-    shrink. A 2nm fab with 20+ EUV layers uses substantially more helium
-    than a 5nm fab with ~14 layers.</p>
-    <h2 id="east-asian-fab-count-20252026">East Asian Fab Count
-    (2025–2026)</h2>
-    <h3 id="taiwan-1215-leading-edge-fabs-7nm-and-below">Taiwan (~12–15
-    leading-edge fabs, 7nm and below)</h3>
-    <ul>
-    <li><strong>TSMC Fab 18</strong> (Tainan): Phases 1–6, 5nm/3nm
-    production</li>
-    <li><strong>TSMC Fab 20/22</strong> (Hsinchu/Kaohsiung): 2nm ramping
-    2025–2026</li>
-    <li>Several more under construction</li>
-    <li>TSMC dominates: ~8–10 leading-edge fabs in Taiwan alone</li>
-    </ul>
-    <h3 id="south-korea-810-leading-edge-fabs">South Korea (~8–10
-    leading-edge fabs)</h3>
-    <ul>
-    <li><strong>Samsung Pyeongtaek</strong> campus: P1/P2/P3
-    operational, P4 under construction</li>
-    <li><strong>Samsung Hwaseong</strong>: Logic and foundry</li>
-    <li><strong>SK Hynix Icheon and Cheongju</strong>: DRAM (EUV DRAM
-    counts as leading-edge)</li>
-    </ul>
-    <h3 id="japan-23-leading-edge-growing">Japan (~2–3 leading-edge,
-    growing)</h3>
-    <ul>
-    <li><strong>Rapidus Chitose</strong>: 2nm, targeting 2027 pilot</li>
-    <li><strong>TSMC JASM Kumamoto</strong>: Fab 1 operational (12/6nm),
-    Fab 2 under construction</li>
-    <li><strong>Kioxia/WD Yokkaichi and Kitakami</strong>: NAND
-    (significant helium consumer)</li>
-    </ul>
-    <p><strong>Total: approximately 25–30 leading-edge fabs operating or
-    under construction across the three countries.</strong></p>
-    <h2 id="company-level-estimates">Company-Level Estimates</h2>
-    <h3 id="tsmc">TSMC</h3>
-    <ul>
-    <li>Leading-edge fabs (~8–10): account for ~70% of helium
-    consumption despite ~40% of wafer starts</li>
-    <li><strong>Estimated total: 2–4 million liters LHe
-    equivalent/year</strong></li>
-    <li>TSMC has disclosed helium recovery programs: <strong>&gt;80%
-    recovery</strong> at some Fab 18 phases</li>
-    </ul>
-    <h3 id="samsung">Samsung</h3>
-    <ul>
-    <li>Logic foundry + DRAM + NAND: vertically integrated
-    production</li>
-    <li><strong>Estimated total: 1.5–3 million liters LHe
-    equivalent/year</strong></li>
-    <li>Recovery programs at Pyeongtaek campus</li>
-    </ul>
-    <h3 id="sk-hynix">SK Hynix</h3>
-    <ul>
-    <li>DRAM (DDR5, HBM3E), NAND</li>
-    <li>EUV DRAM adoption increasing demand</li>
-    <li><strong>Estimated total: 0.5–1.5 million liters LHe
-    equivalent/year</strong></li>
-    </ul>
-    <h3 id="helium-filled-hard-drives-adjacent-market">Helium-Filled
-    Hard Drives (Adjacent Market)</h3>
-    <p>Seagate and Western Digital use helium-filled drives (reduced air
-    resistance enables more platters per drive). Single drive: ~5 liters
-    He. Global HDD helium consumption: ~10–15 million liters/year. ~60%
-    manufactured in Thailand/China/Malaysia rather than the three target
-    countries.</p>
-    <h2 id="total-addressable-market">Total Addressable Market</h2>
-    <h3 id="semiconductor-helium-taiwan-south-korea-japan">Semiconductor
-    Helium (Taiwan + South Korea + Japan)</h3>
-    <table>
-    <thead>
-    <tr>
     <th>Metric</th>
-    <th>Value</th>
+    <th>Conservative</th>
+    <th>Mid-Range</th>
+    <th>Aggressive</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>Annual volume</td>
-    <td>~6–10 million liters LHe equivalent</td>
+    <td>Annual volume (liters LHe equiv)</td>
+    <td>6,000,000</td>
+    <td>8,000,000</td>
+    <td>10,000,000</td>
     </tr>
     <tr>
-    <td>Value at contract prices ($25–35/L)</td>
-    <td><strong>~$150–350 million/year</strong></td>
+    <td>Value at normal contract prices ($25-35/L)</td>
+    <td>$150,000,000</td>
+    <td>$240,000,000</td>
+    <td>$350,000,000</td>
     </tr>
     <tr>
-    <td>Value at crisis prices ($50–100/L)</td>
-    <td><strong>~$300–1,000 million/year</strong></td>
+    <td>Value at crisis prices ($50-100/L)</td>
+    <td>$300,000,000</td>
+    <td>$600,000,000</td>
+    <td>$1,000,000,000</td>
     </tr>
     </tbody>
     </table>
-    <h3 id="including-hdd-broader-east-asia">Including HDD (Broader East
-    Asia)</h3>
+    <h3
+    id="including-hdd-and-broader-industrial-broader-east-asia">Including
+    HDD and Broader Industrial (Broader East Asia)</h3>
     <table>
     <colgroup>
     <col style="width: 53%" />
@@ -219,69 +567,405 @@ Quantified — HEL Research</title>
     <tbody>
     <tr>
     <td>Additional HDD volume</td>
-    <td>~10–15 million liters/year</td>
+    <td>10,000,000-15,000,000 L/year</td>
     </tr>
     <tr>
     <td>Additional HDD value</td>
-    <td>~$100–150 million/year</td>
+    <td>$100,000,000-$150,000,000/year at normal prices</td>
     </tr>
     <tr>
-    <td><strong>Combined TAM</strong></td>
-    <td><strong>$250–500 million/year</strong> (normal) /
-    <strong>$400–1,150 million/year</strong> (crisis)</td>
+    <td>Broader industrial (quantum computing, research labs,
+    medical)</td>
+    <td>$50,000,000-$100,000,000/year</td>
+    </tr>
+    <tr>
+    <td><strong>Combined TAM (normal pricing)</strong></td>
+    <td><strong>$300,000,000-$600,000,000/year</strong></td>
+    </tr>
+    <tr>
+    <td><strong>Combined TAM (crisis pricing)</strong></td>
+    <td><strong>$450,000,000-$1,250,000,000/year</strong></td>
     </tr>
     </tbody>
     </table>
-    <h3 id="context">Context</h3>
-    <p>Global helium consumption: ~6 Bcf/year (~170 million liquid liter
-    equivalent). East Asian semiconductor + HDD represents roughly
-    <strong>10–15% of global demand</strong> — and growing faster than
-    the overall market.</p>
-    <h2 id="demand-growth-projection">Demand Growth Projection</h2>
-    <p>Industry consensus (Kornbluth Helium Consulting, Edison
-    Investment Research, SEMI):</p>
-    <p><strong>Semiconductor-grade helium: 8–12% CAGR through
-    2030</strong>, driven by: - EUV layer counts increasing per node (N2
-    may have 25+ EUV layers) - New fab construction across all three
-    countries plus US/Europe - HBM (High Bandwidth Memory) production
-    scaling — each HBM stack uses EUV DRAM - Quantum computing facility
-    buildout</p>
-    <p>This outpaces overall helium market growth of ~3–4% CAGR, meaning
-    semiconductors are taking an <strong>increasing share</strong> of
-    global supply.</p>
-    <h2 id="what-a-pnw-corridor-could-capture">What a PNW Corridor Could
-    Capture</h2>
-    <p>Realistic market capture for a new, small-scale supplier:</p>
+    <h3 id="global-context">Global Context</h3>
+    <p>Global helium consumption is approximately 6 billion cubic feet
+    per year (roughly 170 million liquid liter equivalent). East Asian
+    semiconductor + HDD + industrial represents roughly 10-15% of global
+    demand – and growing faster than the overall market. The
+    semiconductor fraction alone is growing at 8-12% CAGR while the
+    overall helium market grows at 3-4% CAGR. Semiconductors are taking
+    an increasing share of global helium supply.</p>
+    <h2 id="demand-growth-projection-through-2030">Demand Growth
+    Projection Through 2030</h2>
+    <p>Industry consensus sources: Kornbluth Helium Consulting (Phil
+    Kornbluth is the most cited independent helium analyst), Edison
+    Investment Research (publishes periodic helium market reports), SEMI
+    (semiconductor industry association quarterly reports), and company
+    disclosures in earnings calls and investor presentations.</p>
+    <p><strong>Semiconductor-grade helium CAGR: 8-12% through
+    2030</strong>, driven by:</p>
+    <ol type="1">
+    <li><p><strong>EUV layer count increase per node.</strong> N3 (TSMC
+    3nm): ~20 EUV layers. N2 (2nm): potentially 25+ EUV layers. A20
+    (Samsung 2nm GAA): similar. Each additional EUV layer adds helium
+    consumption per wafer pass.</p></li>
+    <li><p><strong>High-NA EUV deployment (2025-2028).</strong> ASML’s
+    EXE:5000 series uses a 0.55 NA optics system that may change helium
+    consumption patterns. Per-tool consumption data is not yet public.
+    If per-tool consumption increases, this accelerates demand; if
+    High-NA reduces the number of multipatterning passes needed, the net
+    effect on helium demand depends on the balance between per-pass and
+    total-passes changes.</p></li>
+    <li><p><strong>New fab construction.</strong> TSMC is building in
+    Arizona (2 fabs), Japan (2 fabs), and Germany (1 fab). Samsung is
+    expanding in Taylor, TX (1-2 fabs). Intel is building in Ohio,
+    Arizona, and Germany. Each new fab adds 200,000-400,000 L/year of
+    helium demand regardless of location.</p></li>
+    <li><p><strong>HBM production scaling.</strong> AI chip demand
+    (NVIDIA, AMD, custom silicon for hyperscalers) is driving explosive
+    growth in High Bandwidth Memory. SK Hynix, Samsung, and Micron are
+    all expanding HBM capacity. Each HBM stack uses multiple EUV DRAM
+    dies. SK Hynix’s Yongin fab (under construction) is dedicated to
+    next-generation HBM.</p></li>
+    <li><p><strong>Quantum computing facility buildout.</strong>
+    Dilution refrigerators for superconducting quantum computers (IBM,
+    Google, Rigetti) use Helium-3 and Helium-4. While the total volume
+    is small compared to semiconductor fabs, the price premium for
+    research-grade and He-3 helium is extreme. A co-op producing
+    Research Grade (99.9999%) helium can serve this niche at high
+    margins.</p></li>
+    </ol>
+    <p><strong>Projection:</strong></p>
     <table>
+    <colgroup>
+    <col style="width: 7%" />
+    <col style="width: 69%" />
+    <col style="width: 22%" />
+    </colgroup>
     <thead>
     <tr>
-    <th>Scenario</th>
-    <th>Annual Volume</th>
-    <th>Annual Revenue</th>
+    <th>Year</th>
+    <th>East Asia Semiconductor Helium Demand (L LHe equiv)</th>
+    <th>Growth from 2025</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>0.5% of East Asian semiconductor TAM</td>
-    <td>30–50K liters</td>
-    <td>$750K–$1.75M</td>
+    <td>2025</td>
+    <td>~8,000,000</td>
+    <td>Baseline</td>
     </tr>
     <tr>
-    <td>1% of TAM</td>
-    <td>60–100K liters</td>
-    <td>$1.5M–$3.5M</td>
+    <td>2026</td>
+    <td>~9,000,000</td>
+    <td>+12% (crisis acceleration of recovery investments, but new fabs
+    ramping)</td>
     </tr>
     <tr>
-    <td>2% of TAM</td>
-    <td>120–200K liters</td>
-    <td>$3M–$7M</td>
+    <td>2027</td>
+    <td>~10,000,000</td>
+    <td>+25% (Rapidus pilot, TSMC N2 volume, HBM expansion)</td>
+    </tr>
+    <tr>
+    <td>2028</td>
+    <td>~11,500,000</td>
+    <td>+44% (High-NA EUV deployment, Yongin ramp)</td>
+    </tr>
+    <tr>
+    <td>2029</td>
+    <td>~13,000,000</td>
+    <td>+63% (all major fabs at or near capacity)</td>
+    </tr>
+    <tr>
+    <td>2030</td>
+    <td>~14,500,000</td>
+    <td>+81% (next node cycle begins, quantum computing growth)</td>
     </tr>
     </tbody>
     </table>
-    <p>Even 0.5% of the market represents a viable business for a
-    cooperative operating at the scale described in the hub design
-    document. The goal is not to replace Air Liquide — it’s to provide a
-    reliable, redundant alternative source.</p>
+    <p>These projections assume no major supply disruption beyond the
+    current crisis and no fundamental technology change that eliminates
+    helium use in semiconductors. Both are reasonable assumptions
+    through 2030.</p>
+    <h2 id="what-a-pnw-corridor-could-realistically-capture">What a PNW
+    Corridor Could Realistically Capture</h2>
+    <p>A new, small-scale cooperative supplier will not displace Linde,
+    Air Liquide, or Air Products. Those companies have decades-long
+    relationships, on-site gas supply agreements, and massive
+    infrastructure. The co-op’s market position is different: <strong>a
+    reliable, diversified, redundant alternative source</strong> for
+    customers who just learned the hard way that depending on a single
+    supply chain is catastrophic.</p>
+    <h3 id="market-entry-strategy">Market Entry Strategy</h3>
+    <p><strong>Step 1: Domestic PNW customers (Year 1-2).</strong> Serve
+    Intel D1X (Hillsboro), OHSU, OSU, PSU, and other PNW research
+    institutions and small fabs. These are within 100 miles of candidate
+    hub locations (see Document 18). Delivery is by truck, no export
+    logistics required. This is the revenue base during hub ramp-up.</p>
+    <p><strong>Step 2: US West Coast expansion (Year 2-3).</strong>
+    Serve semiconductor and research customers in the San Francisco Bay
+    Area, Sacramento, and Southern California via truck or rail from the
+    PNW hub. The I-5 corridor extends the co-op’s reach south.</p>
+    <p><strong>Step 3: East Asian export (Year 2-4).</strong> Ship
+    liquid helium via ISO container from Port of Tacoma/NWSA to East
+    Asian ports. Transit time: 15-25 days (well within the 35-48 day ISO
+    container holding window). Target customers: TSMC supply chain
+    managers looking for supply diversification, Samsung procurement
+    (which has publicly stated interest in supply chain resilience),
+    Japanese fabs (Rapidus, JASM) with emerging demand and limited local
+    supply (Australia’s Darwin plant closed in 2023).</p>
+    <h3 id="realistic-market-capture-scenarios">Realistic Market Capture
+    Scenarios</h3>
+    <table>
+    <colgroup>
+    <col style="width: 24%" />
+    <col style="width: 31%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    <col style="width: 14%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Scenario</th>
+    <th>Annual Volume</th>
+    <th>Annual Revenue (Normal Pricing)</th>
+    <th>Annual Revenue (Crisis Pricing)</th>
+    <th>What It Requires</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>0.5% of East Asian semiconductor TAM</strong></td>
+    <td>40,000-50,000 L</td>
+    <td>$1,000,000-$1,750,000</td>
+    <td>$2,000,000-$5,000,000</td>
+    <td>1-2 contract customers, small hub, gas-phase delivery</td>
+    </tr>
+    <tr>
+    <td><strong>1% of TAM</strong></td>
+    <td>80,000-100,000 L</td>
+    <td>$2,000,000-$3,500,000</td>
+    <td>$4,000,000-$10,000,000</td>
+    <td>3-5 contract customers, hub with liquefaction, ISO container
+    export</td>
+    </tr>
+    <tr>
+    <td><strong>2% of TAM</strong></td>
+    <td>160,000-200,000 L</td>
+    <td>$4,000,000-$7,000,000</td>
+    <td>$8,000,000-$20,000,000</td>
+    <td>5-10 contract customers, expanded hub capacity, dedicated export
+    logistics</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Even 0.5% of the East Asian semiconductor market represents a
+    viable business for a cooperative operating at the scale described
+    in Documents 18 and 23. The co-op does not need to be big. It needs
+    to be reliable, high-quality, and present when the alternatives are
+    not.</p>
+    <h3 id="competitive-positioning">Competitive Positioning</h3>
+    <table>
+    <colgroup>
+    <col style="width: 22%" />
+    <col style="width: 77%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Advantage</th>
+    <th>Why It Matters to East Asian Buyers</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>Supply diversification</strong></td>
+    <td>After the March 2026 crisis, every major fab procurement team is
+    under mandate to diversify helium sources. A PNW co-op is
+    geographically and geopolitically independent from Qatar, Russia,
+    and the Midcontinent oligopoly.</td>
+    </tr>
+    <tr>
+    <td><strong>West Coast port access</strong></td>
+    <td>Port of Tacoma to Kaohsiung: 15-20 days. Port of Tacoma to
+    Busan: 12-16 days. Port of Tacoma to Tokyo/Yokohama: 10-14 days.
+    These are competitive transit times. See Document 7 for port
+    details.</td>
+    </tr>
+    <tr>
+    <td><strong>Quality certification</strong></td>
+    <td>Semiconductor fabs require Grade-A (99.999%) with documented
+    purity verification. The co-op’s quality lab (Document 18) provides
+    batch-level certificates of analysis. This is table stakes, not a
+    differentiator – but the absence of quality certification is an
+    absolute disqualifier.</td>
+    </tr>
+    <tr>
+    <td><strong>Reliability of cooperative structure</strong></td>
+    <td>A co-op does not have shareholder pressure to maximize
+    short-term margins. It can offer stable, predictable pricing to
+    long-term customers. For a fab procurement manager, price stability
+    is worth more than price minimization.</td>
+    </tr>
+    <tr>
+    <td><strong>PNW clean energy</strong></td>
+    <td>Helium purified with hydroelectric power has a lower carbon
+    footprint than helium processed with fossil fuel electricity (see
+    Document 24). For ESG-conscious companies (TSMC, Samsung, and SK
+    Hynix all publish sustainability reports), this is a meaningful
+    procurement consideration.</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="risks-to-market-entry">Risks to Market Entry</h3>
+    <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 30%" />
+    <col style="width: 22%" />
+    <col style="width: 30%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Risk</th>
+    <th>Likelihood</th>
+    <th>Impact</th>
+    <th>Mitigation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Incumbent gas suppliers lock customers into long-term
+    exclusivity</td>
+    <td>Medium</td>
+    <td>Cannot access major fab customers</td>
+    <td>Target fab customers with expiring contracts or no current
+    long-term agreement. Offer trial volumes. Position as
+    supplementary/emergency supply, not primary replacement.</td>
+    </tr>
+    <tr>
+    <td>Crisis resolves quickly (Qatar resumes within 12 months)</td>
+    <td>Low-Medium</td>
+    <td>Pricing normalizes, urgency to diversify fades</td>
+    <td>The co-op’s financial model (Document 23, Scenario B) shows
+    viability at normalized prices. Customer relationships built during
+    the crisis persist after it. Structural vulnerability does not go
+    away when the immediate crisis ends.</td>
+    </tr>
+    <tr>
+    <td>Australian production scales and captures East Asian market</td>
+    <td>Medium (3-5 year horizon)</td>
+    <td>Australian helium is closer to East Asian customers than PNW
+    helium</td>
+    <td>Australia has massive potential reserves (Amadeus Basin, see
+    Document 4) but development timelines are 3-5+ years. The PNW
+    co-op’s advantage is speed to market. Establish customer
+    relationships before Australian supply scales.</td>
+    </tr>
+    <tr>
+    <td>Quality failure damages co-op reputation</td>
+    <td>Low</td>
+    <td>Loss of customer confidence, potentially permanent</td>
+    <td>Invest in quality lab from day one (Document 18). Implement
+    batch testing before release. Carry product liability insurance. See
+    Document 15 for inline purity monitoring.</td>
+    </tr>
+    <tr>
+    <td>Shipping logistics failure (ISO container breach, boil-off
+    loss)</td>
+    <td>Low</td>
+    <td>Financial loss on one shipment, potential customer impact</td>
+    <td>Use experienced cryogenic logistics providers. Insure each
+    shipment. Maintain buffer inventory at the hub. Ship with adequate
+    margin before holding time expiration.</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="decision-framework-for-export-timing">Decision Framework for
+    Export Timing</h2>
+    <p><strong>Should the co-op build export capability in Phase 1 or
+    Phase 2?</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 41%" />
+    <col style="width: 41%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Factor</th>
+    <th>Phase 1 (Build Now)</th>
+    <th>Phase 2 (Add Later)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Capital cost</td>
+    <td>Higher ($500K-$2M for liquefier)</td>
+    <td>Deferred, funded by Phase 1 revenue</td>
+    </tr>
+    <tr>
+    <td>Revenue opportunity</td>
+    <td>Access to $150M-$350M East Asian TAM from day one</td>
+    <td>Domestic-only market ($5M-$20M PNW TAM) in Phase 1</td>
+    </tr>
+    <tr>
+    <td>Complexity</td>
+    <td>Liquefaction + ISO container logistics + customs</td>
+    <td>Gas-phase operations only</td>
+    </tr>
+    <tr>
+    <td>Risk</td>
+    <td>More capital at risk before proving domestic market</td>
+    <td>Misses export window if crisis resolves before Phase 2</td>
+    </tr>
+    <tr>
+    <td>Hub design implication</td>
+    <td>Must include liquefier space, dewar storage, ISO loading in
+    initial design (Document 18)</td>
+    <td>Can retrofit, but retrofitting is 20-40% more expensive than
+    building it in</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Recommendation based on the financial model (Document
+    23):</strong> If the co-op secures CHIPS Act funding ($2M+), build
+    liquefaction in Phase 1. The grant reduces the capital risk, and the
+    export market is the co-op’s strongest long-term revenue source. If
+    the co-op proceeds without grant funding (member equity + debt
+    only), defer liquefaction to Phase 2 and focus Phase 1 on domestic
+    gas-phase sales to build revenue. Even without liquefaction, the hub
+    can sell compressed gas to PNW customers and generate sufficient
+    revenue for Phase 2 investment (Document 23, Scenario B).</p>
+    <h2 id="cross-reference-map">Cross-Reference Map</h2>
+    <ul>
+    <li><strong>Document 4</strong> (Global Production): Where helium
+    comes from globally, including Australian projects that could
+    compete for East Asian market share</li>
+    <li><strong>Document 5</strong> (Market Crisis): The demand shock
+    driving East Asian procurement diversification</li>
+    <li><strong>Document 7</strong> (I-5 Corridor): Port of Tacoma
+    access and shipping routes to East Asia</li>
+    <li><strong>Document 8</strong> (Semiconductor Fabs): How fabs use
+    helium, why consumption is growing</li>
+    <li><strong>Document 9</strong> (Economics): ROI at various price
+    levels and market capture rates</li>
+    <li><strong>Document 15</strong> (PSA Equipment): Equipment that
+    produces the Grade-A helium required by semiconductor customers</li>
+    <li><strong>Document 17</strong> (Crude Sourcing): How the PNW hub
+    gets its feed stock (independent of the East Asian market it
+    serves)</li>
+    <li><strong>Document 18</strong> (Hub Design): Facility
+    specifications including liquefaction and ISO container loading</li>
+    <li><strong>Document 21</strong> (Recycling Deep Dive): Recycling as
+    a service offering to East Asian fabs (install-operate-maintain
+    model)</li>
+    <li><strong>Document 23</strong> (Financial Model): How East Asian
+    export revenue flows into the financial projections and scenario
+    analysis</li>
+    <li><strong>Document 24</strong> (Environmental Impact): Clean
+    energy advantage for ESG-conscious East Asian customers</li>
+    </ul>
     <div class="nav">
         <a href="../index.html">← Back to HEL Index</a> ·
         Published 2026-03-31 · PNW Research Series ·

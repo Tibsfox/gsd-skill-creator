@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liquefaction Hub Design — Site Selection and
-Specifications — HEL Research</title>
+    <title>Liquefaction Hub Design — Site Selection, Facility
+Specifications, and Build Sequence — HEL Research</title>
     <style>
         :root {
             --bg: #1a1a2e;
@@ -56,354 +56,1055 @@ Specifications — HEL Research</title>
         PNW Research Series · <a href="../index.html">Back to HEL Index</a> · <a href="../../index.html">Series Index</a>
     </div>
     <h1
-    id="liquefaction-hub-design-site-selection-and-specifications">Liquefaction
-    Hub Design — Site Selection and Specifications</h1>
+    id="liquefaction-hub-design-site-selection-facility-specifications-and-build-sequence">Liquefaction
+    Hub Design — Site Selection, Facility Specifications, and Build
+    Sequence</h1>
     <h2 id="what-the-hub-does">What the Hub Does</h2>
-    <p>The central hub receives crude helium (50–70% purity) from
-    distributed sources, purifies it to Grade-A (99.999%) or Research
-    Grade (99.9999%), optionally liquefies it to -269°C, and distributes
-    it to customers via cylinder, dewar, or ISO container.</p>
-    <h2 id="facility-layout">Facility Layout</h2>
-    <pre><code>┌─────────────────────────────────────────────────────┐
-│                  CO-OP HELIUM HUB                    │
-│                                                      │
-│  RECEIVING          PROCESSING         STORAGE       │
-│  ┌──────────┐      ┌──────────────┐   ┌──────────┐  │
-│  │ Tube     │      │ Membrane     │   │ High-P   │  │
-│  │ trailer  │─────►│ separation   │──►│ gas      │  │
-│  │ bay      │      │ (50→80% He)  │   │ storage  │  │
-│  │ (2 bays) │      └──────┬───────┘   └──────────┘  │
-│  └──────────┘             │                          │
-│                    ┌──────▼───────┐   ┌──────────┐  │
-│                    │ PSA          │   │ Liquid   │  │
-│  QUALITY LAB       │ purification │──►│ He      │  │
-│  ┌──────────┐      │ (80→99.999%) │   │ storage  │  │
-│  │ GC/MS    │      └──────┬───────┘   │ (dewar)  │  │
-│  │ analysis │             │           └──────────┘  │
-│  └──────────┘      ┌──────▼───────┐                 │
-│                    │ Liquefier    │   DISPATCH       │
-│  UTILITIES         │ (-269°C)    │   ┌──────────┐  │
-│  ┌──────────┐      └──────┬───────┘   │ Cylinder │  │
-│  │ Power    │             │           │ fill     │  │
-│  │ Water    │             └──────────►│ station  │  │
-│  │ Cooling  │                         │ Loading  │  │
-│  └──────────┘                         └──────────┘  │
-│                                                      │
-│  Footprint: 5,000-15,000 sq ft indoor               │
-│  Lot: 1-3 acres (truck access, trailer parking)     │
-└─────────────────────────────────────────────────────┘</code></pre>
-    <h2 id="capital-costs">Capital Costs</h2>
-    <h3 id="small-hub-100-lday-liquid-output">Small Hub (100 L/day
-    liquid output)</h3>
-    <table>
-    <thead>
-    <tr>
-    <th>Component</th>
-    <th>Cost</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Membrane separation system</td>
-    <td>$200K–$400K</td>
-    </tr>
-    <tr>
-    <td>PSA purification (99.999%)</td>
-    <td>$300K–$1M</td>
-    </tr>
-    <tr>
-    <td>Liquefier (Chart/Cryomech)</td>
-    <td>$500K–$2M</td>
-    </tr>
-    <tr>
-    <td>High-pressure gas storage (tube bank)</td>
-    <td>$100K–$200K</td>
-    </tr>
-    <tr>
-    <td>Liquid helium storage dewar (5,000L)</td>
-    <td>$150K–$300K</td>
-    </tr>
-    <tr>
-    <td>Cylinder/dewar fill station</td>
-    <td>$200K–$500K</td>
-    </tr>
-    <tr>
-    <td>Quality lab (GC, mass spec, moisture)</td>
-    <td>$300K–$500K</td>
-    </tr>
-    <tr>
-    <td>Building/site improvements</td>
-    <td>$500K–$1.5M</td>
-    </tr>
-    <tr>
-    <td>Utilities (electrical, water, cooling)</td>
-    <td>$200K–$500K</td>
-    </tr>
-    <tr>
-    <td>Permitting and engineering</td>
-    <td>$200K–$400K</td>
-    </tr>
-    <tr>
-    <td><strong>Total</strong></td>
-    <td><strong>$2.7M–$7.3M</strong></td>
-    </tr>
-    </tbody>
-    </table>
-    <h3 id="medium-hub-500-lday-liquid-output">Medium Hub (500 L/day
-    liquid output)</h3>
-    <p>Scale up processing equipment, add redundancy, larger storage: -
-    <strong>Total: $6M–$15M</strong></p>
-    <h2 id="site-requirements">Site Requirements</h2>
+    <p>The central hub receives crude helium (50-70% purity) from
+    distributed sources via tube trailer (see Document 17 for sourcing
+    and transport logistics), purifies it to Grade-A (99.999%) or
+    Research Grade (99.9999%) using membrane and PSA technology (see
+    Document 15 for equipment selection), optionally liquefies it to
+    -269C (-452F), and distributes it to customers via cylinder, dewar,
+    or ISO container. The hub is the physical heart of the co-op – the
+    shared infrastructure that no single member could afford alone but
+    that all members benefit from collectively (see Document 19 for
+    co-op governance and Document 22 for precedent models).</p>
+    <p>This document covers everything needed to go from “we have
+    decided to build a hub” to “the hub is producing purified helium.”
+    It is written for three audiences: the engineer designing the
+    facility, the banker evaluating the capital request, and the co-op
+    board making site and budget decisions.</p>
+    <h2 id="step-by-step-build-sequence">Step-by-Step Build
+    Sequence</h2>
+    <h3 id="phase-0-pre-decision-analysis-month-0-2">Phase 0:
+    Pre-Decision Analysis (Month 0-2)</h3>
+    <p>Before committing to a site or placing equipment orders, complete
+    these prerequisites:</p>
+    <ol type="1">
+    <li><p><strong>Secure at least one crude helium supply
+    agreement</strong> (see Document 17, Step 4). Do not build a hub
+    without confirmed feed stock. A signed letter of intent (LOI) with a
+    crude supplier is the minimum; a signed supply agreement is
+    preferred.</p></li>
+    <li><p><strong>Obtain budgetary equipment quotes</strong> from at
+    least two vendors for PSA and liquefier systems (see Document 15,
+    Steps 2-4). You need firm pricing to build the capital
+    budget.</p></li>
+    <li><p><strong>Confirm funding sources.</strong> The financial model
+    in Document 23 assumes a specific funding mix: CHIPS Act grant
+    ($2M), WA ICAP grant ($500K), member equity ($1M), SBA loan ($1.5M),
+    bank loan ($1.15M). At minimum, you need the grant applications
+    submitted and a term sheet from a lender before committing to a site
+    lease.</p></li>
+    <li><p><strong>Engage a process engineer</strong> (or system
+    integrator – see Document 15, Step 5) to develop a preliminary
+    process flow diagram (PFD) and utility requirements. This defines
+    the building’s power, water, and space requirements before you
+    search for a site.</p></li>
+    </ol>
+    <h3 id="phase-1-site-selection-and-lease-month-2-4">Phase 1: Site
+    Selection and Lease (Month 2-4)</h3>
+    <h4 id="site-requirements">Site Requirements</h4>
     <table>
     <colgroup>
-    <col style="width: 48%" />
-    <col style="width: 51%" />
+    <col style="width: 30%" />
+    <col style="width: 33%" />
+    <col style="width: 35%" />
     </colgroup>
     <thead>
     <tr>
     <th>Requirement</th>
     <th>Specification</th>
+    <th>Why It Matters</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td><strong>Power</strong></td>
-    <td>200–500 kW connected load (liquefier is the primary draw)</td>
+    <td>Power</td>
+    <td>200-500 kW connected load (3-phase, 480V)</td>
+    <td>Liquefier draws 100-200 kW alone. Inadequate power supply is the
+    most common disqualifier for candidate sites. Upgrading utility
+    service can cost $50K-$200K and add 3-6 months. Verify power
+    availability BEFORE signing a lease.</td>
     </tr>
     <tr>
-    <td><strong>Water</strong></td>
-    <td>Cooling water for compressors, ~5–20 GPM (closed-loop cooling
-    tower preferred)</td>
+    <td>Water</td>
+    <td>5-20 GPM cooling water (closed-loop cooling tower
+    preferred)</td>
+    <td>Compressors and liquefier require cooling. Closed-loop system
+    minimizes water consumption (see Document 24 for environmental
+    impact: net consumption under 500 gallons/day).</td>
     </tr>
     <tr>
-    <td><strong>Zoning</strong></td>
-    <td>Industrial (I-1 or I-2 in most jurisdictions). Hazmat storage
-    requires setbacks.</td>
+    <td>Zoning</td>
+    <td>Industrial (I-1, I-2, M-1, or equivalent in local
+    jurisdiction)</td>
+    <td>Hazmat storage requires setbacks from property lines and
+    occupied buildings per fire code. Residential or commercial zones
+    will not permit this use. Verify zoning before any other
+    evaluation.</td>
     </tr>
     <tr>
-    <td><strong>Road access</strong></td>
-    <td>Must accommodate tractor-trailers (tube trailers in,
-    cylinders/dewars out)</td>
+    <td>Road access</td>
+    <td>Must accommodate tractor-trailers (53-foot tube trailers in,
+    smaller delivery vehicles out)</td>
+    <td>Tube trailers require 75+ foot turning radius. The access road
+    must be rated for 80,000 lb gross vehicle weight. Verify with a
+    truck turning template on the site plan.</td>
     </tr>
     <tr>
-    <td><strong>Proximity to I-5</strong></td>
-    <td>Within 10 miles for efficient corridor distribution</td>
+    <td>Proximity to I-5</td>
+    <td>Within 10 miles</td>
+    <td>Efficient corridor distribution to customers in both directions
+    (north to Seattle, south to Portland). Every mile off I-5 adds
+    delivery cost.</td>
     </tr>
     <tr>
-    <td><strong>Port proximity</strong></td>
-    <td>Within 30 miles of Tacoma/Seattle ports for export
-    containers</td>
+    <td>Port proximity</td>
+    <td>Within 30 miles of Tacoma/Seattle ports</td>
+    <td>For export via ISO container to East Asia (see Document 20). Not
+    critical if Phase 1 is domestic-only.</td>
     </tr>
     <tr>
-    <td><strong>Lot size</strong></td>
-    <td>1–3 acres minimum (building + truck access + trailer
-    staging)</td>
+    <td>Lot size</td>
+    <td>1-3 acres minimum</td>
+    <td>Building (5,000-15,000 sq ft) plus truck access drive, tube
+    trailer staging area (space for 2-3 trailers), cylinder/dewar
+    loading dock, employee parking, and setbacks.</td>
     </tr>
     <tr>
-    <td><strong>Building</strong></td>
-    <td>5,000–15,000 sq ft, high-bay for equipment, concrete floor rated
-    for heavy loads</td>
+    <td>Building</td>
+    <td>5,000-15,000 sq ft, high-bay (minimum 20 ft clear height for
+    equipment), concrete floor rated for heavy loads (250+ psf),
+    adequate ventilation</td>
+    <td>Existing industrial building is preferred over new construction
+    (faster, cheaper). Metal-frame industrial buildings are readily
+    available along the I-5 corridor.</td>
+    </tr>
+    <tr>
+    <td>Seismic</td>
+    <td>Standard industrial construction per IBC seismic design
+    category</td>
+    <td>The PNW is seismically active. Equipment anchorage and piping
+    flexibility must accommodate seismic loading. This is standard
+    engineering practice for the region, not an unusual
+    requirement.</td>
     </tr>
     </tbody>
     </table>
-    <h2 id="candidate-locations-along-i-5">Candidate Locations Along
-    I-5</h2>
+    <h4 id="candidate-locations-along-i-5">Candidate Locations Along
+    I-5</h4>
+    <p>Evaluate these locations against the requirements above. Listed
+    roughly north to south:</p>
     <table>
     <colgroup>
-    <col style="width: 27%" />
-    <col style="width: 30%" />
-    <col style="width: 41%" />
+    <col style="width: 12%" />
+    <col style="width: 14%" />
+    <col style="width: 19%" />
+    <col style="width: 53%" />
     </colgroup>
     <thead>
     <tr>
     <th>Location</th>
     <th>Advantages</th>
     <th>Considerations</th>
+    <th>Approximate Lease Rate (Industrial, 2026)</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td><strong>Smokey Point, WA</strong></td>
-    <td>Central Welding fill plant already there; industrial zoning; I-5
-    access</td>
-    <td>North of Seattle — adds distance to Portland customers</td>
+    <td><strong>Smokey Point / Marysville, WA</strong></td>
+    <td>Central Welding fill plant already located here (industry
+    cluster). Industrial zoning. Direct I-5 access. Snohomish County
+    economic development support.</td>
+    <td>North of Seattle – adds distance to Portland/Hillsboro
+    customers. Farther from Port of Tacoma.</td>
+    <td>$0.65-$0.85/sq ft/month NNN</td>
     </tr>
     <tr>
-    <td><strong>Kent/Auburn, WA</strong></td>
-    <td>Heavy industrial zoning; close to Port of Tacoma; rail access
-    (BNSF)</td>
-    <td>Higher land costs</td>
+    <td><strong>Kent / Auburn, WA</strong></td>
+    <td>Heavy industrial zoning. Close to Port of Tacoma (15 mi). BNSF
+    rail access (Kent intermodal). Large industrial labor pool.</td>
+    <td>Higher land costs. Traffic congestion on SR-167 and I-5 through
+    south King County.</td>
+    <td>$0.90-$1.20/sq ft/month NNN</td>
     </tr>
     <tr>
-    <td><strong>Tumwater/Olympia, WA</strong></td>
-    <td>Mid-corridor; industrial land available; state capital
-    (grants)</td>
-    <td>Smaller labor pool</td>
+    <td><strong>Tumwater / Olympia, WA</strong></td>
+    <td>Mid-corridor position. Industrial land available and affordable.
+    State capital (proximity to Dept of Commerce for grant programs,
+    Dept of Ecology for permitting).</td>
+    <td>Smaller industrial labor pool than Seattle metro. Farther from
+    both Seattle and Portland customer clusters.</td>
+    <td>$0.55-$0.75/sq ft/month NNN</td>
     </tr>
     <tr>
-    <td><strong>Portland industrial district</strong></td>
-    <td>Close to Silicon Forest (Hillsboro ~25 mi); rail access; large
-    industrial market</td>
-    <td>Oregon vs. WA regulatory differences</td>
+    <td><strong>Centralia / Chehalis, WA</strong></td>
+    <td>Lowest land costs on the corridor. I-5 access. Equidistant
+    between Seattle and Portland (~85 mi each). Industrial zoning
+    available. Lewis County actively recruiting industrial tenants.</td>
+    <td>Small town. Limited labor pool for specialized positions. May
+    need to recruit technicians from Tacoma or Portland metro.</td>
+    <td>$0.40-$0.60/sq ft/month NNN</td>
     </tr>
     <tr>
-    <td><strong>Hillsboro/Beaverton, OR</strong></td>
-    <td>Directly adjacent to Intel D1X; maximum customer proximity</td>
-    <td>Land costs near Intel campus are premium</td>
+    <td><strong>Portland industrial district (NW/NE Portland),
+    OR</strong></td>
+    <td>Close to Silicon Forest (Hillsboro ~25 mi). Rail access (UP and
+    BNSF). Large industrial market and labor pool. Proximity to OHSU and
+    PSU research customers.</td>
+    <td>Oregon vs. Washington regulatory differences (Oregon DEQ vs. WA
+    Ecology). Portland commercial tax environment.</td>
+    <td>$0.85-$1.15/sq ft/month NNN</td>
+    </tr>
+    <tr>
+    <td><strong>Hillsboro / Beaverton, OR</strong></td>
+    <td>Directly adjacent to Intel D1X – maximum customer proximity.
+    Technology cluster workforce. Washington County economic
+    development.</td>
+    <td>Land costs near Intel campus are premium. Industrial-zoned land
+    is scarce; most has been absorbed by semiconductor and technology
+    companies.</td>
+    <td>$1.00-$1.40/sq ft/month NNN</td>
     </tr>
     <tr>
     <td><strong>Wilsonville, OR</strong></td>
-    <td>I-5 access; industrial zoning; between Portland and Salem</td>
-    <td>Good balance of access and cost</td>
+    <td>I-5 access. Industrial zoning available. Midpoint between
+    Portland and Salem. Good balance of access and cost. Existing
+    industrial base (Mentor Graphics/Siemens, Xerox).</td>
+    <td>Smaller than Portland but well-connected.</td>
+    <td>$0.75-$0.95/sq ft/month NNN</td>
     </tr>
     </tbody>
     </table>
-    <h2 id="power-requirements-detail">Power Requirements Detail</h2>
+    <p><strong>Decision tree for site selection:</strong> - If the
+    primary market is Intel D1X and Silicon Forest fabs: Hillsboro or
+    Wilsonville. Proximity to the anchor customer reduces delivery cost
+    and response time. - If the primary market is export to East Asia:
+    Kent/Auburn. Closest to Port of Tacoma. - If minimizing capital cost
+    is the priority: Centralia/Chehalis or Tumwater. Lowest lease rates
+    and land costs. - If balancing domestic distribution and export:
+    Kent/Auburn or Tumwater. Mid-corridor with port access. - If the
+    co-op is based in Washington and wants WA state grant eligibility:
+    any WA location. Oregon locations may not qualify for WA ICAP
+    grants.</p>
+    <h4 id="site-evaluation-checklist">Site Evaluation Checklist</h4>
+    <p>Visit each candidate site with the process engineer and
+    verify:</p>
+    <ul>
+    <li>Electrical service: confirm available capacity with the local
+    utility (Puget Sound Energy, Tacoma Power, PGE, Pacific Power).
+    Request a letter of service confirming they can deliver 200-500 kW
+    at 480V 3-phase to the site within the project timeline.</li>
+    <li>Water service: confirm municipal water supply adequate for
+    cooling tower makeup (1-5 GPM net). Most industrial sites have
+    adequate water.</li>
+    <li>Sewer: confirm connection or verify that cooling tower blowdown
+    (small volume, non-hazardous) is acceptable to the local sewer
+    authority.</li>
+    <li>Truck access: drive a tractor-trailer around the site (or
+    simulate with a turning template). Verify ingress, egress, trailer
+    staging, and loading dock access.</li>
+    <li>Zoning confirmation: obtain a written zoning verification from
+    the local planning department confirming that helium purification
+    and gas cylinder filling are permitted uses. Do not rely on verbal
+    confirmation.</li>
+    <li>Environmental baseline: review the site’s environmental history
+    (Phase I ESA). Industrial sites may have pre-existing contamination
+    that could complicate permitting or create liability. Budget
+    $3,000-$5,000 for a Phase I ESA.</li>
+    <li>Seismic: verify the site is not in a liquefaction zone or
+    landslide hazard area (available from WA DNR or DOGAMI for
+    Oregon).</li>
+    </ul>
+    <h3
+    id="phase-2-permitting-month-3-8-overlapping-with-equipment-procurement">Phase
+    2: Permitting (Month 3-8, Overlapping with Equipment
+    Procurement)</h3>
+    <p>The regulatory path for a helium processing facility is
+    straightforward. Helium is inert, non-toxic, non-flammable. The
+    primary safety concern is oxygen displacement in enclosed spaces – a
+    standard industrial gas hazard with well-established protocols and
+    engineering controls. See Document 14 for the complete regulatory
+    landscape and Document 24 for the environmental impact
+    assessment.</p>
+    <h4 id="permit-sequence-washington-state">Permit Sequence
+    (Washington State)</h4>
     <table>
     <colgroup>
-    <col style="width: 14%" />
-    <col style="width: 14%" />
     <col style="width: 20%" />
+    <col style="width: 20%" />
+    <col style="width: 25%" />
+    <col style="width: 15%" />
     <col style="width: 17%" />
-    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Permit</th>
+    <th>Agency</th>
+    <th>Timeline</th>
+    <th>Cost</th>
+    <th>Notes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td><strong>SEPA Environmental Checklist</strong></td>
+    <td>Local lead agency (city or county)</td>
+    <td>30-60 days</td>
+    <td>$500-$2,000 (filing fee)</td>
+    <td>Expected determination: DNS (Determination of Non-Significance).
+    See Document 24 for anticipated checklist answers.</td>
+    </tr>
+    <tr>
+    <td><strong>Building permit</strong></td>
+    <td>Local building department</td>
+    <td>4-12 weeks (plan review + issuance)</td>
+    <td>$5,000-$20,000 (based on project valuation)</td>
+    <td>Includes structural, electrical, mechanical, plumbing plan
+    review. High-pressure gas storage requires fire marshal review.</td>
+    </tr>
+    <tr>
+    <td><strong>Fire marshal review</strong></td>
+    <td>Local fire marshal / fire district</td>
+    <td>Concurrent with building permit</td>
+    <td>Included in building permit</td>
+    <td>Review of compressed gas storage quantities, setbacks, emergency
+    shutoff, oxygen monitoring, ventilation. Reference NFPA 55
+    (Compressed Gases and Cryogenic Fluids Storage).</td>
+    </tr>
+    <tr>
+    <td><strong>Air quality registration</strong></td>
+    <td>WA Dept of Ecology or local clean air agency (PSCAA, NWCAA,
+    SWCAA depending on location)</td>
+    <td>30-60 days</td>
+    <td>$500-$2,000</td>
+    <td>Helium processing has no significant air emissions. May qualify
+    for registration rather than full permit. De minimis emissions
+    (cooling tower drift, emergency generator if diesel).</td>
+    </tr>
+    <tr>
+    <td><strong>Pressure vessel installation</strong></td>
+    <td>WA L&amp;I (WAC 296-104)</td>
+    <td>30-45 days</td>
+    <td>$200-$500 per vessel</td>
+    <td>All pressure vessels (tube banks, PSA vessels, storage tanks)
+    require L&amp;I inspection and registration.</td>
+    </tr>
+    <tr>
+    <td><strong>Business license</strong></td>
+    <td>State + local</td>
+    <td>1-2 weeks</td>
+    <td>$100-$500</td>
+    <td>Standard business license plus any local business tax
+    registration.</td>
+    </tr>
+    <tr>
+    <td><strong>DOT registration</strong></td>
+    <td>FMCSA (if operating transport vehicles)</td>
+    <td>2-4 weeks</td>
+    <td>~$300</td>
+    <td>Only if the co-op operates its own delivery trucks. Not required
+    if using third-party carriers.</td>
+    </tr>
+    </tbody>
+    </table>
+    <h4 id="permit-sequence-oregon">Permit Sequence (Oregon)</h4>
+    <table>
+    <colgroup>
+    <col style="width: 25%" />
+    <col style="width: 25%" />
+    <col style="width: 31%" />
+    <col style="width: 18%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Permit</th>
+    <th>Agency</th>
+    <th>Timeline</th>
+    <th>Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Land use review</td>
+    <td>Local planning department</td>
+    <td>30-90 days</td>
+    <td>$1,000-$5,000</td>
+    </tr>
+    <tr>
+    <td>Building permit</td>
+    <td>Local building department</td>
+    <td>6-16 weeks</td>
+    <td>$5,000-$25,000</td>
+    </tr>
+    <tr>
+    <td>Air quality</td>
+    <td>Oregon DEQ (OAR 340-200 through 340-268)</td>
+    <td>30-60 days</td>
+    <td>$500-$3,000</td>
+    </tr>
+    <tr>
+    <td>Pressure vessel</td>
+    <td>Oregon OSHA / DCBS</td>
+    <td>30-45 days</td>
+    <td>Per-vessel fee</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Total permitting timeline: 3-6 months</strong> for a
+    standard industrial gas processing facility. No federal permits are
+    required for a processing-only facility (not extracting from the
+    ground). This is a significant advantage of the corridor model – the
+    extraction permits (BLM, state oil and gas commissions) are the
+    producers’ responsibility, not the co-op’s.</p>
+    <p><strong>Risk: permit delays.</strong> Local permitting timelines
+    are estimates. Some jurisdictions have significant backlogs.
+    Mitigate by: - Pre-application meetings with the planning department
+    and fire marshal before filing - Hiring a local permit expediter who
+    knows the jurisdiction’s process - Filing SEPA checklist and
+    building permit application simultaneously (SEPA can be processed
+    concurrently with plan review in most jurisdictions)</p>
+    <h3
+    id="phase-3-equipment-procurement-month-2-8-parallel-with-permitting">Phase
+    3: Equipment Procurement (Month 2-8, Parallel with Permitting)</h3>
+    <p><strong>Order equipment at the same time you begin
+    permitting.</strong> Equipment lead times (24-40 weeks for PSA and
+    liquefier per Document 15) are longer than the permitting timeline
+    (3-6 months). If you wait for permits before ordering equipment, you
+    add 6-10 months to the project.</p>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 18%" />
+    <col style="width: 24%" />
+    <col style="width: 18%" />
+    <col style="width: 27%" />
+    <col style="width: 10%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Equipment</th>
+    <th>When to Order</th>
+    <th>Lead Time</th>
+    <th>When It Arrives</th>
+    <th>Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Membrane separation system</td>
+    <td>Month 2-3</td>
+    <td>12-16 weeks</td>
+    <td>Month 5-7</td>
+    <td>$200,000-$400,000</td>
+    </tr>
+    <tr>
+    <td>PSA purification system</td>
+    <td>Month 2-3</td>
+    <td>24-36 weeks</td>
+    <td>Month 8-12</td>
+    <td>$300,000-$1,000,000</td>
+    </tr>
+    <tr>
+    <td>Liquefier</td>
+    <td>Month 2-3</td>
+    <td>24-40 weeks</td>
+    <td>Month 8-13</td>
+    <td>$500,000-$2,000,000</td>
+    </tr>
+    <tr>
+    <td>High-pressure gas storage (tube bank)</td>
+    <td>Month 4-5</td>
+    <td>8-12 weeks</td>
+    <td>Month 6-8</td>
+    <td>$100,000-$200,000</td>
+    </tr>
+    <tr>
+    <td>Liquid helium storage dewar (5,000 L)</td>
+    <td>Month 4-5</td>
+    <td>12-16 weeks</td>
+    <td>Month 7-9</td>
+    <td>$150,000-$300,000</td>
+    </tr>
+    <tr>
+    <td>Cylinder/dewar fill station</td>
+    <td>Month 5-6</td>
+    <td>8-12 weeks</td>
+    <td>Month 7-9</td>
+    <td>$200,000-$500,000</td>
+    </tr>
+    <tr>
+    <td>Quality lab equipment (GC, mass spec, moisture)</td>
+    <td>Month 6-7</td>
+    <td>4-8 weeks</td>
+    <td>Month 7-9</td>
+    <td>$300,000-$500,000</td>
+    </tr>
+    <tr>
+    <td>Control system (PLC/SCADA)</td>
+    <td>Month 4-6</td>
+    <td>8-12 weeks</td>
+    <td>Month 6-8</td>
+    <td>$50,000-$150,000</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>See Document 15 for detailed vendor selection and specifications
+    for each item.</p>
+    <h3 id="phase-4-building-preparation-month-5-10">Phase 4: Building
+    Preparation (Month 5-10)</h3>
+    <p>Once permits are issued and the site is secured, prepare the
+    building:</p>
+    <table>
+    <colgroup>
+    <col style="width: 23%" />
+    <col style="width: 23%" />
+    <col style="width: 14%" />
+    <col style="width: 38%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Activity</th>
+    <th>Duration</th>
+    <th>Cost</th>
+    <th>Contractor Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Demolition / clearing (if existing building requires
+    modification)</td>
+    <td>2-4 weeks</td>
+    <td>$20,000-$80,000</td>
+    <td>General contractor</td>
+    </tr>
+    <tr>
+    <td>Concrete work (equipment pads, reinforced floors, truck
+    apron)</td>
+    <td>3-6 weeks</td>
+    <td>$50,000-$150,000</td>
+    <td>Concrete contractor</td>
+    </tr>
+    <tr>
+    <td>Electrical upgrade (480V 3-phase service, distribution panel,
+    conduit runs to equipment locations)</td>
+    <td>4-8 weeks</td>
+    <td>$75,000-$200,000</td>
+    <td>Licensed electrical contractor</td>
+    </tr>
+    <tr>
+    <td>Plumbing / water service (cooling tower piping, domestic water,
+    drain)</td>
+    <td>2-4 weeks</td>
+    <td>$30,000-$75,000</td>
+    <td>Mechanical contractor</td>
+    </tr>
+    <tr>
+    <td>HVAC / ventilation (process area ventilation, oxygen monitoring
+    system, lab HVAC)</td>
+    <td>3-6 weeks</td>
+    <td>$50,000-$125,000</td>
+    <td>HVAC contractor</td>
+    </tr>
+    <tr>
+    <td>Fire protection (sprinklers if required, gas detection,
+    emergency shutoff)</td>
+    <td>2-4 weeks</td>
+    <td>$30,000-$75,000</td>
+    <td>Fire protection contractor</td>
+    </tr>
+    <tr>
+    <td>Process piping (high-pressure stainless steel between equipment
+    skids)</td>
+    <td>4-8 weeks</td>
+    <td>$75,000-$200,000</td>
+    <td>Certified pipe fitter / process piping contractor</td>
+    </tr>
+    <tr>
+    <td>Truck access / paving / grading</td>
+    <td>2-4 weeks</td>
+    <td>$30,000-$100,000</td>
+    <td>Paving contractor</td>
+    </tr>
+    <tr>
+    <td><strong>Total building preparation</strong></td>
+    <td><strong>3-5 months</strong> (activities overlap)</td>
+    <td><strong>$360,000-$1,005,000</strong></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Note on building preparation cost:</strong> The range
+    above assumes modifying an existing industrial building. New
+    construction (steel building on slab) costs $100-$150 per square
+    foot, or $500,000-$2,250,000 for a 5,000-15,000 sq ft building.
+    Using an existing building saves $200,000-$1,000,000+ and 3-6 months
+    of construction time.</p>
+    <h3
+    id="phase-5-equipment-installation-and-commissioning-month-8-14">Phase
+    5: Equipment Installation and Commissioning (Month 8-14)</h3>
+    <table>
+    <colgroup>
+    <col style="width: 29%" />
+    <col style="width: 29%" />
+    <col style="width: 41%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Activity</th>
+    <th>Duration</th>
+    <th>Key Personnel</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Equipment receiving and placement (crane/forklift)</td>
+    <td>1-2 weeks per major skid</td>
+    <td>Rigging contractor, equipment vendor field service</td>
+    </tr>
+    <tr>
+    <td>Mechanical connections (process piping between skids)</td>
+    <td>3-6 weeks</td>
+    <td>Process piping contractor, system integrator</td>
+    </tr>
+    <tr>
+    <td>Electrical connections (power to each skid, control wiring)</td>
+    <td>2-4 weeks</td>
+    <td>Electrical contractor, control system integrator</td>
+    </tr>
+    <tr>
+    <td>Control system integration (PLC programming, SCADA
+    configuration, alarm setup)</td>
+    <td>2-4 weeks</td>
+    <td>Control system integrator</td>
+    </tr>
+    <tr>
+    <td>Pressure testing (hydrostatic test of all piping systems per
+    ASME B31.3)</td>
+    <td>1-2 weeks</td>
+    <td>Process piping contractor, L&amp;I inspector</td>
+    </tr>
+    <tr>
+    <td>Leak testing (helium leak test of the entire system – using the
+    product gas as the test medium)</td>
+    <td>1 week</td>
+    <td>System integrator</td>
+    </tr>
+    <tr>
+    <td>Utility startup (cooling tower, compressed air,
+    ventilation)</td>
+    <td>1 week</td>
+    <td>Facility staff + contractors</td>
+    </tr>
+    <tr>
+    <td>Process commissioning (introduce feed gas, verify purity at each
+    stage, tune PSA cycle times)</td>
+    <td>2-4 weeks</td>
+    <td>Equipment vendor field service + system integrator</td>
+    </tr>
+    <tr>
+    <td>Quality lab setup and calibration</td>
+    <td>1-2 weeks</td>
+    <td>Lab equipment vendor, quality technician</td>
+    </tr>
+    <tr>
+    <td>Safety system verification (oxygen monitors, emergency shutoffs,
+    fire detection)</td>
+    <td>1 week</td>
+    <td>Fire marshal, safety engineer</td>
+    </tr>
+    <tr>
+    <td><strong>Total installation and commissioning</strong></td>
+    <td><strong>3-5 months</strong></td>
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Critical milestone: first purified helium.</strong> When
+    the PSA system produces its first batch of 99.999% helium verified
+    by the quality lab, the hub is operational. The liquefier may
+    commission 2-4 weeks later (it has a longer startup procedure).
+    Gas-phase product can be sold before the liquefier is
+    operational.</p>
+    <h3 id="phase-6-steady-state-operations-month-12-24-onward">Phase 6:
+    Steady-State Operations (Month 12-24 Onward)</h3>
+    <p>The hub is now producing purified helium. Ongoing operations
+    require:</p>
+    <p><strong>Staffing</strong> (see Document 23 for the full staffing
+    model): - General Manager / Operations: 1 FTE - Process Technician:
+    1 FTE - Quality / Lab Technician: 0.5 FTE - Delivery / Logistics:
+    0.5 FTE - Bookkeeper: 0.25 FTE (part-time) - Total: 3.25 FTE,
+    approximately $390,000/year including benefits</p>
+    <p><strong>Ongoing costs</strong> (monthly):</p>
+    <table>
+    <colgroup>
+    <col style="width: 28%" />
+    <col style="width: 37%" />
+    <col style="width: 34%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Category</th>
+    <th>Monthly Cost</th>
+    <th>Annual Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Crude helium purchases</td>
+    <td>$80,000-$120,000</td>
+    <td>$960,000-$1,440,000</td>
+    </tr>
+    <tr>
+    <td>Electricity</td>
+    <td>$8,000-$15,000</td>
+    <td>$96,000-$180,000</td>
+    </tr>
+    <tr>
+    <td>Labor</td>
+    <td>$32,500</td>
+    <td>$390,000</td>
+    </tr>
+    <tr>
+    <td>Maintenance (amortized)</td>
+    <td>$4,000-$5,500</td>
+    <td>$48,000-$66,000</td>
+    </tr>
+    <tr>
+    <td>Insurance (general liability + property + environmental)</td>
+    <td>$3,000-$5,000</td>
+    <td>$36,000-$60,000</td>
+    </tr>
+    <tr>
+    <td>Debt service (SBA + bank loan)</td>
+    <td>$25,000-$30,000</td>
+    <td>$300,000-$360,000</td>
+    </tr>
+    <tr>
+    <td>Miscellaneous (consumables, travel, professional services)</td>
+    <td>$3,000-$5,000</td>
+    <td>$36,000-$60,000</td>
+    </tr>
+    <tr>
+    <td><strong>Total monthly operating cost</strong></td>
+    <td><strong>$155,500-$213,000</strong></td>
+    <td><strong>$1,866,000-$2,556,000</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>See Document 23 for the full revenue model and scenario analysis
+    showing profitability at both crisis and normalized helium
+    prices.</p>
+    <h2 id="facility-layout">Facility Layout</h2>
+    <pre><code>+-------------------------------------------------------------+
+|                    CO-OP HELIUM HUB                          |
+|                                                              |
+|  RECEIVING             PROCESSING            STORAGE         |
+|  +------------+       +----------------+    +-----------+    |
+|  | Tube       |       | Membrane       |    | High-P    |    |
+|  | trailer    |------&gt;| separation     |---&gt;| gas       |    |
+|  | bay        |       | (50-&gt;80% He)   |    | storage   |    |
+|  | (2 bays,   |       +-------+--------+    | (tube     |    |
+|  |  drive-    |               |             | bank)     |    |
+|  |  through)  |       +-------v--------+    +-----------+    |
+|  +------------+       | PSA            |                     |
+|                       | purification   |    +-----------+    |
+|  QUALITY LAB          | (80-&gt;99.999%)  |---&gt;| Liquid    |    |
+|  +------------+       +-------+--------+    | He        |    |
+|  | GC/MS      |               |             | storage   |    |
+|  | Moisture   |       +-------v--------+    | (5,000L   |    |
+|  | O2 analyzer|       | Liquefier      |    |  dewar)   |    |
+|  | Purity     |       | (-269C)        |    +-----------+    |
+|  | testing    |       +-------+--------+                     |
+|  +------------+               |             DISPATCH         |
+|                               |             +-----------+    |
+|  UTILITIES                    +------------&gt;| Cylinder  |    |
+|  +------------+                             | fill      |    |
+|  | 480V main  |                             | station   |    |
+|  | Cooling    |                             | Loading   |    |
+|  | tower      |                             | dock      |    |
+|  | Comp air   |                             +-----------+    |
+|  +------------+                                              |
+|                                                              |
+|  OFFICE / CONTROL ROOM        EMPLOYEE AREA                  |
+|  +------------+               +-----------+                  |
+|  | SCADA      |               | Breakroom |                  |
+|  | Monitoring |               | Lockers   |                  |
+|  | Records    |               | Parking   |                  |
+|  +------------+               +-----------+                  |
+|                                                              |
+|  Footprint: 5,000-15,000 sq ft indoor                       |
+|  Lot: 1-3 acres (building + truck access + trailer staging)  |
++-------------------------------------------------------------+</code></pre>
+    <h2 id="capital-cost-summary">Capital Cost Summary</h2>
+    <h3
+    id="small-hub-100-lday-liquid-output-3000-scfday-grade-a-gas-equivalent">Small
+    Hub (100 L/day liquid output, ~3,000 SCF/day Grade-A gas
+    equivalent)</h3>
+    <table>
+    <colgroup>
+    <col style="width: 37%" />
+    <col style="width: 37%" />
+    <col style="width: 24%" />
     </colgroup>
     <thead>
     <tr>
     <th>Component</th>
-    <th>Power Draw</th>
-    <th>Running Hours</th>
-    <th>Monthly kWh</th>
-    <th>Monthly Cost ($0.07/kWh)</th>
+    <th>Cost Range</th>
+    <th>Notes</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>Membrane compressor</td>
-    <td>30 kW</td>
-    <td>24/7</td>
-    <td>21,600</td>
-    <td>$1,512</td>
+    <td>Membrane separation system</td>
+    <td>$200,000-$400,000</td>
+    <td>Evonik SEPURAN or MEDAL modules + skid</td>
     </tr>
     <tr>
-    <td>PSA system</td>
-    <td>15 kW</td>
-    <td>24/7</td>
-    <td>10,800</td>
-    <td>$756</td>
+    <td>PSA purification (99.999%)</td>
+    <td>$300,000-$1,000,000</td>
+    <td>Chart TITAN or Guild Associates</td>
     </tr>
     <tr>
     <td>Liquefier</td>
-    <td>100–200 kW</td>
-    <td>24/7</td>
-    <td>108,000</td>
-    <td>$7,560</td>
+    <td>$500,000-$2,000,000</td>
+    <td>Chart PHPK or Cryomech</td>
     </tr>
     <tr>
-    <td>Fill station compressor</td>
-    <td>30 kW</td>
-    <td>8 hrs/day</td>
-    <td>7,200</td>
-    <td>$504</td>
+    <td>High-pressure gas storage (tube bank)</td>
+    <td>$100,000-$200,000</td>
+    <td>4-8 tube bundles, buffer capacity</td>
     </tr>
     <tr>
-    <td>Cooling tower/chillers</td>
-    <td>20 kW</td>
-    <td>24/7</td>
-    <td>14,400</td>
-    <td>$1,008</td>
+    <td>Liquid helium storage dewar (5,000 L)</td>
+    <td>$150,000-$300,000</td>
+    <td>Vacuum-jacketed, low boil-off</td>
     </tr>
     <tr>
-    <td>Facility (lighting, HVAC, lab)</td>
-    <td>15 kW</td>
-    <td>24/7</td>
-    <td>10,800</td>
-    <td>$756</td>
+    <td>Cylinder/dewar fill station</td>
+    <td>$200,000-$500,000</td>
+    <td>High-pressure cylinder fill + LHe transfer</td>
     </tr>
     <tr>
-    <td><strong>Total</strong></td>
-    <td><strong>210–310 kW</strong></td>
+    <td>Quality lab (GC, mass spec, moisture analyzer)</td>
+    <td>$300,000-$500,000</td>
+    <td>Grade-A and Research Grade certification</td>
+    </tr>
+    <tr>
+    <td>Building/site improvements</td>
+    <td>$360,000-$1,005,000</td>
+    <td>Per Phase 4 estimate above</td>
+    </tr>
+    <tr>
+    <td>Utilities (electrical service upgrade, cooling tower)</td>
+    <td>$100,000-$275,000</td>
+    <td>Depends on existing site infrastructure</td>
+    </tr>
+    <tr>
+    <td>Permitting, engineering, system integration</td>
+    <td>$200,000-$450,000</td>
+    <td>Per Phase 2 and Document 15 Step 5</td>
+    </tr>
+    <tr>
+    <td>Working capital (6 months crude helium + operating)</td>
+    <td>$500,000-$750,000</td>
+    <td>Per Document 23</td>
+    </tr>
+    <tr>
+    <td>Contingency (10%)</td>
+    <td>$290,000-$730,000</td>
+    <td>Standard for industrial construction</td>
+    </tr>
+    <tr>
+    <td><strong>Total Phase 1 Capital</strong></td>
+    <td><strong>$3,200,000-$8,110,000</strong></td>
     <td></td>
-    <td><strong>~173,000</strong></td>
-    <td><strong>~$12,100</strong></td>
     </tr>
     </tbody>
     </table>
-    <p>At PNW rates, <strong>electricity is ~$12K/month</strong> for a
-    small hub. At Southwest rates ($0.10/kWh), the same facility would
-    cost ~$17K/month. The PNW advantage is real but not overwhelming at
-    this scale — it matters more as the operation scales up.</p>
-    <h2 id="timeline-site-selection-to-first-output">Timeline: Site
-    Selection to First Output</h2>
+    <h3 id="medium-hub-500-lday-liquid-output">Medium Hub (500 L/day
+    liquid output)</h3>
+    <p>Scale up processing equipment, add redundancy (second PSA train
+    for maintenance without shutdown), larger storage, more fill station
+    capacity: - <strong>Total: $8,000,000-$18,000,000</strong> -
+    Unlikely for Phase 1. A co-op would build small, prove the model,
+    then expand.</p>
+    <p><strong>Decision tree for hub sizing:</strong> - If total
+    available capital is $3M-$5M: build a small hub without
+    liquefaction. Gas-phase operations only. Add liquefier in Phase 2
+    when revenue supports it. This reduces capital requirements by
+    $500K-$2M. - If total available capital is $5M-$8M: build a small
+    hub with liquefaction from day one. This is the recommended
+    configuration in Document 23. - If total available capital exceeds
+    $8M: consider a medium hub, but only if customer demand is
+    confirmed. Overcapacity is worse than under-capacity – the co-op can
+    expand faster than it can shrink.</p>
+    <h2 id="risk-analysis">Risk Analysis</h2>
     <table>
     <colgroup>
-    <col style="width: 25%" />
+    <col style="width: 16%" />
+    <col style="width: 30%" />
+    <col style="width: 22%" />
+    <col style="width: 30%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Risk</th>
+    <th>Likelihood</th>
+    <th>Impact</th>
+    <th>Mitigation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Equipment delivery delay</td>
+    <td>High (crisis-driven demand)</td>
+    <td>2-6 month schedule extension. Each month of delay costs
+    $40K-$80K in fixed costs without revenue.</td>
+    <td>Order equipment early (Month 2-3). Identify backup vendors.
+    Include liquidated damages in purchase orders.</td>
+    </tr>
+    <tr>
+    <td>Construction cost overrun</td>
+    <td>Medium</td>
+    <td>10-20% overrun is common for first-of-kind industrial
+    installations</td>
+    <td>Include 10% contingency in budget. Use fixed-price contracts
+    where possible. Hire experienced industrial construction
+    manager.</td>
+    </tr>
+    <tr>
+    <td>Permitting delay</td>
+    <td>Low-Medium</td>
+    <td>1-3 month delay. Mostly affects building preparation timeline,
+    not equipment procurement.</td>
+    <td>Pre-application meetings. Hire local permit expediter. File
+    early.</td>
+    </tr>
+    <tr>
+    <td>Power supply inadequate</td>
+    <td>Low (if verified during site selection)</td>
+    <td>Cannot operate liquefier at rated capacity</td>
+    <td>Verify power availability in writing from utility BEFORE signing
+    lease. Budget for utility service upgrade if needed.</td>
+    </tr>
+    <tr>
+    <td>Customer demand does not materialize</td>
+    <td>Low (during crisis)</td>
+    <td>Hub operates below capacity. Revenue shortfall
+    vs. projections.</td>
+    <td>Secure customer LOIs before or during construction. The crisis
+    creates demand urgency – fabs need supply NOW. See Document 20 for
+    demand quantification.</td>
+    </tr>
+    <tr>
+    <td>Equipment malfunction during commissioning</td>
+    <td>Medium</td>
+    <td>2-8 week delay while vendor resolves</td>
+    <td>Include vendor field service during commissioning (standard with
+    most equipment purchases). Budget for 2 weeks of contingency in
+    commissioning schedule.</td>
+    </tr>
+    <tr>
+    <td>Interest rate increase on variable-rate debt</td>
+    <td>Low-Medium</td>
+    <td>Increases monthly debt service</td>
+    <td>Use fixed-rate loans where possible. SBA loans are typically
+    fixed rate.</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="timeline-summary-site-selection-to-first-output">Timeline
+    Summary: Site Selection to First Output</h2>
+    <table>
+    <colgroup>
+    <col style="width: 17%" />
+    <col style="width: 17%" />
+    <col style="width: 28%" />
     <col style="width: 35%" />
-    <col style="width: 39%" />
     </colgroup>
     <thead>
     <tr>
     <th>Phase</th>
-    <th>Duration</th>
+    <th>Month</th>
     <th>Activities</th>
+    <th>Key Milestone</th>
     </tr>
     </thead>
     <tbody>
     <tr>
-    <td>Site selection &amp; lease</td>
-    <td>2–4 months</td>
-    <td>Evaluate candidates, negotiate terms</td>
+    <td>0</td>
+    <td>0-2</td>
+    <td>Supply agreements, equipment quotes, funding confirmation</td>
+    <td>Go/no-go decision</td>
     </tr>
     <tr>
-    <td>Permitting (SEPA, building, hazmat)</td>
-    <td>3–6 months</td>
-    <td>Environmental review, building permits, fire marshal</td>
+    <td>1</td>
+    <td>2-4</td>
+    <td>Site selection, lease negotiation, site evaluation</td>
+    <td>Lease signed</td>
     </tr>
     <tr>
-    <td>Equipment order</td>
-    <td>0 months (order during permitting)</td>
-    <td>Chart PSA, membrane modules, liquefier</td>
+    <td>2</td>
+    <td>3-8</td>
+    <td>Permitting (SEPA, building, fire, air)</td>
+    <td>Building permit issued</td>
     </tr>
     <tr>
-    <td>Building preparation</td>
-    <td>2–4 months</td>
-    <td>Concrete, electrical, water, ventilation</td>
+    <td>3</td>
+    <td>2-8</td>
+    <td>Equipment procurement (orders placed Month 2-3)</td>
+    <td>Equipment shipped</td>
     </tr>
     <tr>
-    <td>Equipment delivery &amp; install</td>
-    <td>4–8 months (from order)</td>
-    <td>Equipment arrives, mechanical/electrical installation</td>
+    <td>4</td>
+    <td>5-10</td>
+    <td>Building preparation (concrete, electrical, piping, HVAC)</td>
+    <td>Building ready for equipment</td>
     </tr>
     <tr>
-    <td>Commissioning &amp; testing</td>
-    <td>1–2 months</td>
-    <td>System integration, purity verification, safety checks</td>
+    <td>5</td>
+    <td>8-14</td>
+    <td>Equipment installation and commissioning</td>
+    <td>First purified helium produced</td>
     </tr>
     <tr>
-    <td><strong>Total</strong></td>
-    <td><strong>12–24 months</strong></td>
-    <td>From decision to first liquid helium output</td>
+    <td>6</td>
+    <td>12-14+</td>
+    <td>Steady-state operations</td>
+    <td>First customer delivery</td>
     </tr>
     </tbody>
     </table>
-    <h2 id="regulatory-path">Regulatory Path</h2>
-    <ol type="1">
-    <li><strong>SEPA review</strong> (WA) or <strong>land use
-    review</strong> (OR) for new industrial facility</li>
-    <li><strong>Building permit</strong> from local jurisdiction</li>
-    <li><strong>Air quality permit</strong> from Ecology (WA) or DEQ
-    (OR) — emissions are minimal for helium processing</li>
-    <li><strong>Fire marshal review</strong> for compressed/cryogenic
-    gas storage</li>
-    <li><strong>DOT registration</strong> if operating transport
-    vehicles</li>
-    <li><strong>No federal permits required</strong> for a
-    processing-only facility (not extracting from the ground)</li>
-    </ol>
-    <p>The regulatory path is straightforward for a gas processing
-    facility. This is not a chemical plant or refinery — helium is
-    inert, non-toxic, non-flammable. The primary safety concern is
-    oxygen displacement in enclosed spaces (standard industrial gas
-    hazard with well-established protocols).</p>
+    <p><strong>Overall timeline: 12-18 months from go-decision to first
+    purified helium output.</strong> This assumes parallel execution of
+    permitting, equipment procurement, and building preparation.
+    Sequential execution (waiting for each phase to complete before
+    starting the next) would extend the timeline to 24-30 months.</p>
+    <h2 id="cross-reference-map">Cross-Reference Map</h2>
+    <ul>
+    <li><strong>Document 7</strong> (I-5 Corridor): Strategic context
+    for hub location along the corridor</li>
+    <li><strong>Document 9</strong> (Economics): ROI analysis at various
+    scales</li>
+    <li><strong>Document 14</strong> (Regulatory Landscape): Complete
+    regulatory framework for permitting</li>
+    <li><strong>Document 15</strong> (PSA Equipment): Detailed equipment
+    specifications, vendors, and procurement</li>
+    <li><strong>Document 17</strong> (Crude Sourcing): How feed stock
+    reaches the hub</li>
+    <li><strong>Document 19</strong> (Co-op Playbook): How the hub is
+    governed as shared cooperative infrastructure</li>
+    <li><strong>Document 20</strong> (East Asia Demand): Export market
+    that justifies liquefaction and port proximity</li>
+    <li><strong>Document 21</strong> (Recycling Deep Dive):
+    Customer-site recycling as a complementary revenue stream</li>
+    <li><strong>Document 23</strong> (Financial Model): Capital budget,
+    revenue projections, and scenario analysis</li>
+    <li><strong>Document 24</strong> (Environmental Impact): SEPA
+    checklist answers and community benefit analysis</li>
+    </ul>
     <div class="nav">
         <a href="../index.html">← Back to HEL Index</a> ·
         Published 2026-03-31 · PNW Research Series ·
