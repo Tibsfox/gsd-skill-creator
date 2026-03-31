@@ -23,24 +23,26 @@ Space solves some problems but creates others:
 | **Thermal management** | Critical | No convective cooling in vacuum — only radiative cooling. A single EUV source generates ~40 kW. Large radiator panels required. |
 | **Radiation** | Significant | Outside magnetosphere, radiation introduces crystal defects and damages electronics. LEO provides partial shielding. |
 | **Power generation** | Significant | Solar at 1 AU: ~1.36 kW/m² before losses. At 30% conversion: ~400 W/m². A single EUV tool needs ~1 MW = 2,500 m² of panels. |
-| **Mass to orbit** | Reducing | SpaceX Starship target: $10–50/kg to LEO. Current: $2,000–5,000/kg on Falcon 9. |
+| **Mass to orbit** | Reducing | SpaceX Starship: 11 launches through October 2025 (6 successful). Current expendable ~$250-600/kg to LEO. Projected with reusability: $78-94/kg at 6 flights, $13-32/kg at 20-70 flights. Current Falcon 9: $2,000–5,000/kg. |
 | **Maintenance** | Significant | Semiconductor equipment requires frequent adjustment. Telerobotic operation needed. |
 
 ## Current State of Space Manufacturing
 
 ### Operating Systems
 
-**Redwire (formerly Made In Space)** — Manufacturing ZBLAN fluoride glass optical fiber on ISS since 2017. ZBLAN fiber made in microgravity avoids crystallization defects that limit terrestrial production, producing fiber potentially worth $100K–$1M+/km for specialty infrared sensing and medical laser applications. This is the closest thing to an actual space-manufactured product with terrestrial market value. Still in pilot quantities but proving the concept.
+**Redwire / Flawless Photonics** — Manufacturing ZBLAN fluoride glass optical fiber on ISS since 2017. ZBLAN fiber made in microgravity avoids crystallization defects that limit terrestrial production. Flawless Photonics manufactured nearly 12 km of ZBLAN fiber on ISS in a single campaign (Feb-Mar 2024), with seven draws exceeding 700 meters. Pricing: $1,000/meter. This is the closest thing to an actual space-manufactured product with terrestrial market value, now scaling beyond pilot quantities.
 
-**Varda Space Industries** (El Segundo, CA, founded 2020) — Flew W-1 capsule in 2023, successfully manufacturing ritonavir pharmaceutical crystals in orbit and returning them to Earth. W-2 mission completed 2024. Their platform is a small reentry capsule (~100 kg payload) on a Rocket Lab Photon bus. Pharmaceuticals, not semiconductors — but their orbital manufacturing and reentry infrastructure is directly applicable.
+**Varda Space Industries** (El Segundo, CA, founded 2020) — 6 missions launched (W-1 through W-6), with $329 million total raised including a Series C of $187M closed July 2025. Successfully manufactured ritonavir pharmaceutical crystals in orbit and returned them to Earth. In October 2025, Varda announced a JDA with United Semiconductors LLC for high-throughput semiconductor production in microgravity. Their platform is a small reentry capsule (~100 kg payload) on a Rocket Lab Photon bus. Pharmaceuticals and now semiconductors — their orbital manufacturing and reentry infrastructure is directly applicable.
 
 ### Pre-Demonstration
 
-**Space Forge** (Cardiff, Wales, founded 2018) — Explicitly targeting semiconductor materials manufacturing in orbit. Their ForgeStar platform is a small reentry vehicle designed to manufacture SiC and GaN substrates in microgravity, then return them to Earth. First launch attempted 2022 on Virgin Orbit — failed due to launch vehicle failure. Subsequent attempts on alternative launchers planned. Raised ~£12M+. Still pre-revenue, pre-demonstration. The concept is serious; the execution is unproven.
+**Space Forge** (Cardiff, Wales, founded 2018) — Explicitly targeting semiconductor materials manufacturing in orbit. Their ForgeStar platform is a small reentry vehicle designed to manufacture SiC and GaN substrates in microgravity, then return them to Earth. ForgeStar-1 reached orbit and generated plasma at 1,000 degrees C in December 2025 — the first free-flying commercial semiconductor manufacturing tool operated in space. Funded by a NATO Innovation Fund-led Series A of 22.6M GBP (~$30M). ForgeStar-2 is now funded and in development — it will produce the first actual batch of made-in-space semiconductors.
 
 ### Research Programs
 
-Multiple ISS experiments since the 1990s (SUBSA, CLYC, CETSOL, JAXA Hicari campaigns) have demonstrated improved semiconductor and optical crystal growth in microgravity. Results are real but limited to centimeter-scale crystals, not production wafers. China's Tiangong station includes materials science facilities with semiconductor crystal growth experiments.
+Multiple ISS experiments since the 1990s (SUBSA, CLYC, CETSOL, JAXA Hicari campaigns) have demonstrated improved semiconductor and optical crystal growth in microgravity. Results are real but limited to centimeter-scale crystals, not production wafers. Axiom Space's Hab One module is on schedule for ISS attachment in 2026, expanding commercial research capacity.
+
+China's Tiangong station includes materials science facilities with semiconductor crystal growth experiments. In 2025, Tiangong achieved 3,100 degrees C via containerless laser heating in microgravity and has returned 83.92 kg of space science samples including semiconductor materials.
 
 ## The Modular Orbital Factory Concept
 
