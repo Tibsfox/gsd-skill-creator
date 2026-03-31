@@ -10,7 +10,7 @@ The corridor's relevance to helium is not that it produces helium -- it does not
 
 Helium liquefaction is the most energy-intensive step in the helium value chain. Cooling helium gas to its boiling point of -268.93 degrees Celsius (4.22 K) requires approximately 700-800 kWh per metric ton of liquid helium produced in a modern Collins-cycle liquefier. For a facility processing 50,000 liters per month -- a modest regional hub -- annual electricity consumption for liquefaction alone approaches 500,000 kWh, with additional energy required for PSA purification, compression, and facility operations.
 
-The PNW electricity cost advantage is structural, not cyclical. It derives from the Columbia River hydroelectric system -- 31 federally operated dams managed by the Bonneville Power Administration (BPA), supplemented by state and utility-owned dams. BPA's priority firm power rate for industrial customers averaged $38.20 per MWh ($0.038/kWh) in fiscal year 2025, with industrial retail rates in Washington and Oregon typically ranging from $0.05 to $0.08/kWh depending on the utility and rate class.
+The PNW electricity cost advantage is structural, not cyclical. It derives from the Columbia River hydroelectric system -- 31 federally operated dams managed by the Bonneville Power Administration (BPA), supplemented by state and utility-owned dams. BPA's FY2026 Priority Firm rate is $40.16/MWh ($0.040/kWh wholesale); industrial retail rates in Washington and Oregon typically range from $0.06 to $0.08/kWh after distribution markup, depending on the utility and rate class.
 
 | Region | Industrial Rate ($/kWh) | Annual Liquefaction Cost (500,000 kWh) | Premium vs. PNW |
 |--------|------------------------|---------------------------------------|-----------------|
@@ -24,7 +24,7 @@ Over a 20-year facility life, the PNW electricity advantage compounds to $600,00
 
 ## Port Access and Pacific Rim Trade
 
-The Northwest Seaport Alliance (NWSA), jointly operated by the ports of Tacoma and Seattle, is the fourth-largest container gateway in North America. In 2024, NWSA handled approximately 3.4 million TEUs (twenty-foot equivalent units). The port complex includes marine terminals in Tacoma, Seattle, and the surrounding area, with direct liner service to every major East Asian port.
+The Northwest Seaport Alliance (NWSA), jointly operated by the ports of Tacoma and Seattle, is the fourth-largest container gateway in North America. In 2024, NWSA handled 3,340,733 TEUs (twenty-foot equivalent units), up 12.3% year-over-year, representing $76 billion in waterborne trade. The port complex includes marine terminals in Tacoma, Seattle, and the surrounding area, with direct liner service to every major East Asian port.
 
 For helium, the relevant shipping parameters are:
 

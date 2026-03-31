@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OPEN &mdash; Unsolved Problems &amp; Open Research</title>
+  <link rel="stylesheet" href="../../brand.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="../series.js" defer></script>
+</head>
+<body class="project-open">
+  <header>
+    <h1>OPEN &mdash; Unsolved Problems &amp; Open Research</h1>
+    <div class="subtitle">Chain-of-Thought Reliability &middot; Distributed Intelligence &middot; Combinatorics &middot; Synchronization &middot; Machine Unlearning</div>
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="page.html?doc=01-cot-faithfulness">CoT Faithfulness</a>
+      <a href="page.html?doc=04-distributed-intelligence">Distributed Intelligence</a>
+      <a href="page.html?doc=07-collatz">Collatz</a>
+      <a href="page.html?doc=11-kuramoto-sync">Kuramoto Sync</a>
+      <a href="page.html?doc=12-machine-unlearning">Unlearning</a>
+    </nav>
+  </header>
+
+  <main>
+    <blockquote>
+      Every unsolved problem is a boundary between what we know and what we pretend to know.
+      These twelve problems span AI reliability, pure mathematics, and emergent behavior in
+      complex systems. They are not idle curiosities &mdash; each one intersects with live work
+      in the gsd-skill-creator ecosystem, from multi-agent orchestration to trust verification
+      to the physics of cooperative networks. We track them not because we expect to solve them,
+      but because the attempt to solve them makes everything else we build more rigorous.
+    </blockquote>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-value">12</span><span class="stat-label">Open Problems</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Pure Math</span></div>
+      <div class="stat"><span class="stat-value">6</span><span class="stat-label">AI / ML</span></div>
+      <div class="stat"><span class="stat-value">3</span><span class="stat-label">Emergent Systems</span></div>
+      <div class="stat"><span class="stat-value">150+</span><span class="stat-label">References</span></div>
+      <div class="stat"><span class="stat-value">4</span><span class="stat-label">Active Tracks</span></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <h2>AI Reasoning &amp; Reliability</h2>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <div class="card-grid">
+      <a href="page.html?doc=01-cot-faithfulness" class="card" style="text-decoration:none;color:inherit">
+        <h3>P1: Chain-of-Thought Faithfulness</h3>
+        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-active">Active</span> Reasoning transparency</div>
+        <p>When a language model shows its reasoning, does the displayed chain of thought actually reflect the computation that produced the answer? Or is the scratchpad a post-hoc rationalization &mdash; a confabulated narrative draped over opaque internal states? Turpin et al. (2023) and Lanham et al. (2023) show the gap is real and measurable.</p>
+      </a>
+
+      <a href="page.html?doc=02-thinking-divergence" class="card" style="text-decoration:none;color:inherit">
+        <h3>P2: Thinking Token Divergence</h3>
+        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-active">Active</span> Extended thinking</div>
+        <p>Extended thinking models (o1, Claude with thinking blocks) use hidden reasoning tokens. When the internal reasoning diverges from the visible output, which one is &ldquo;correct&rdquo;? This is not a philosophical question &mdash; it is an engineering problem with safety implications for agentic systems that take real-world actions based on model outputs.</p>
+      </a>
+
+      <a href="page.html?doc=03-cot-monitoring" class="card" style="text-decoration:none;color:inherit">
+        <h3>P3: CoT Monitoring at Scale</h3>
+        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-testing">Testing</span> Verification systems</div>
+        <p>If chain-of-thought is unreliable, how do we monitor it at production scale? Classical software testing assumes deterministic behavior. LLM reasoning is stochastic, context-dependent, and path-dependent. We need new verification architectures &mdash; and they must work within the convoy model's multi-agent execution framework.</p>
+      </a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <h2>Multi-Agent Systems &amp; Distributed Intelligence</h2>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <div class="card-grid">
+      <a href="page.html?doc=04-distributed-intelligence" class="card" style="text-decoration:none;color:inherit">
+        <h3>P4: Distributed Intelligence Emergence</h3>
+        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-emergent">Emergent</span> Multi-agent orchestration</div>
+        <p>When multiple AI agents collaborate through structured protocols (GSD convoy, GUPP/DACP), does the collective exhibit capabilities that no individual agent possesses? This is the central question of the Gastown model: whether orchestration creates genuine distributed intelligence or merely distributes labor.</p>
+      </a>
+
+      <a href="page.html?doc=05-nondeterministic-testing" class="card" style="text-decoration:none;color:inherit">
+        <h3>P5: Nondeterministic System Testing</h3>
+        <div class="meta"><span class="tag tag-testing">Testing</span> <span class="tag tag-active">Active</span> Verification theory</div>
+        <p>How do you write tests for a system whose outputs are stochastic? The gsd-skill-creator runs 21,298 deterministic tests, but the agents it orchestrates are fundamentally nondeterministic. Property-based testing, metamorphic testing, and statistical verification all offer partial answers. None is complete.</p>
+      </a>
+
+      <a href="page.html?doc=06-confidence-routing" class="card" style="text-decoration:none;color:inherit">
+        <h3>P6: Confidence-Based Routing</h3>
+        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-security">Security</span> Trust calibration</div>
+        <p>When a model reports confidence in its output, is that confidence calibrated? Poorly calibrated confidence in a multi-agent system is worse than no confidence at all &mdash; it creates false trust. The trust system (trust-relationship.ts, 95 tests) must account for this fundamental uncertainty in every routing decision.</p>
+      </a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <h2>Pure Mathematics</h2>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <div class="card-grid">
+      <a href="page.html?doc=07-collatz" class="card" style="text-decoration:none;color:inherit">
+        <h3>P7: The Collatz Conjecture</h3>
+        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1937</span> Number theory</div>
+        <p>Start with any positive integer. If even, halve it. If odd, triple and add one. Does every starting value eventually reach 1? Proposed by Lothar Collatz in 1937, verified computationally to 2<sup>68</sup>, yet completely unproven. Erd&#337;s said &ldquo;Mathematics may not be ready for such problems.&rdquo;</p>
+      </a>
+
+      <a href="page.html?doc=08-chromatic-number" class="card" style="text-decoration:none;color:inherit">
+        <h3>P8: Chromatic Number of the Plane</h3>
+        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1950</span> Combinatorial geometry</div>
+        <p>What is the minimum number of colors needed to color every point of the Euclidean plane such that no two points at distance exactly 1 share the same color? Known to be between 5 and 7 since de Grey (2018) improved the lower bound. The gap between 5 and 7 remains one of the most tantalizing open problems in combinatorics.</p>
+      </a>
+
+      <a href="page.html?doc=09-komlos-conjecture" class="card" style="text-decoration:none;color:inherit">
+        <h3>P9: The Koml&oacute;s Conjecture</h3>
+        <div class="meta"><span class="tag tag-math">Math</span> <span class="tag tag-open">Open since 1981</span> Discrepancy theory</div>
+        <p>Given n vectors in R<sup>d</sup>, each of Euclidean norm at most 1, can we always assign signs &plusmn;1 to achieve a signed sum with L<sup>&infin;</sup> norm bounded by an absolute constant independent of d? Banaszczyk (1998) proved an O(sqrt(log d)) bound. The conjectured O(1) bound remains open.</p>
+      </a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <h2>Emergent Behavior &amp; Complex Systems</h2>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <div class="card-grid">
+      <a href="page.html?doc=10-ai-math-discovery" class="card" style="text-decoration:none;color:inherit">
+        <h3>P10: AI-Assisted Mathematical Discovery</h3>
+        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-math">Math</span> Discovery frontier</div>
+        <p>Can AI systems generate genuinely novel mathematical conjectures &mdash; not just verify human conjectures or search parameter spaces, but identify structural patterns that humans have missed? FunSearch (Romera-Paredes et al., 2024) and AlphaProof suggest the boundary is shifting, but the epistemological question remains open.</p>
+      </a>
+
+      <a href="page.html?doc=11-kuramoto-sync" class="card" style="text-decoration:none;color:inherit">
+        <h3>P11: Kuramoto Synchronization</h3>
+        <div class="meta"><span class="tag tag-emergent">Emergent</span> <span class="tag tag-active">Active</span> Network dynamics</div>
+        <p>When does a network of coupled oscillators synchronize? The Kuramoto model provides a clean mathematical framework, but the general problem on arbitrary graph topologies is unsolved. This maps directly to the helium corridor cooperative model: distributed nodes with heterogeneous coupling, partial observation, and network resilience requirements.</p>
+      </a>
+
+      <a href="page.html?doc=12-machine-unlearning" class="card" style="text-decoration:none;color:inherit">
+        <h3>P12: Machine Unlearning</h3>
+        <div class="meta"><span class="tag tag-ai">AI</span> <span class="tag tag-security">Security</span> GUPP/DACP alignment</div>
+        <p>Can a trained model provably forget specific training data without full retraining? This is not just a privacy regulation compliance question &mdash; it is fundamental to the GUPP (Generalized User Privacy Protocol) and DACP (Distributed Agent Consent Protocol). If unlearning is impossible to verify, consent frameworks lose their enforcement mechanism.</p>
+      </a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <h2>Problem Index</h2>
+    <!-- ═══════════════════════════════════════════ -->
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Problem</th>
+          <th>Domain</th>
+          <th>Status</th>
+          <th>Connection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P1</td>
+          <td><a href="page.html?doc=01-cot-faithfulness">CoT Faithfulness</a></td>
+          <td>AI Reasoning</td>
+          <td class="status-active">Active</td>
+          <td>Multi-agent verification, trust system</td>
+        </tr>
+        <tr>
+          <td>P2</td>
+          <td><a href="page.html?doc=02-thinking-divergence">Thinking Token Divergence</a></td>
+          <td>AI Reasoning</td>
+          <td class="status-active">Active</td>
+          <td>Extended thinking audit, GSD executor</td>
+        </tr>
+        <tr>
+          <td>P3</td>
+          <td><a href="page.html?doc=03-cot-monitoring">CoT Monitoring at Scale</a></td>
+          <td>AI/Testing</td>
+          <td class="status-active">Active</td>
+          <td>Convoy model verification pipeline</td>
+        </tr>
+        <tr>
+          <td>P4</td>
+          <td><a href="page.html?doc=04-distributed-intelligence">Distributed Intelligence</a></td>
+          <td>Multi-Agent</td>
+          <td class="status-active">Active</td>
+          <td>Gastown convoy, GUPP federation</td>
+        </tr>
+        <tr>
+          <td>P5</td>
+          <td><a href="page.html?doc=05-nondeterministic-testing">Nondeterministic Testing</a></td>
+          <td>Testing</td>
+          <td class="status-active">Active</td>
+          <td>21,298 tests, metamorphic testing</td>
+        </tr>
+        <tr>
+          <td>P6</td>
+          <td><a href="page.html?doc=06-confidence-routing">Confidence Routing</a></td>
+          <td>AI/Trust</td>
+          <td class="status-partial">Partial</td>
+          <td>Trust system, FoxFiber routing</td>
+        </tr>
+        <tr>
+          <td>P7</td>
+          <td><a href="page.html?doc=07-collatz">Collatz Conjecture</a></td>
+          <td>Number Theory</td>
+          <td class="status-open">Open</td>
+          <td>Convergence analysis, stopping time</td>
+        </tr>
+        <tr>
+          <td>P8</td>
+          <td><a href="page.html?doc=08-chromatic-number">Chromatic Number</a></td>
+          <td>Combinatorics</td>
+          <td class="status-open">Open</td>
+          <td>Graph coloring, resource allocation</td>
+        </tr>
+        <tr>
+          <td>P9</td>
+          <td><a href="page.html?doc=09-komlos-conjecture">Komlos Conjecture</a></td>
+          <td>Discrepancy Theory</td>
+          <td class="status-open">Open</td>
+          <td>Load balancing, agent assignment</td>
+        </tr>
+        <tr>
+          <td>P10</td>
+          <td><a href="page.html?doc=10-ai-math-discovery">AI Math Discovery</a></td>
+          <td>AI/Math</td>
+          <td class="status-partial">Partial</td>
+          <td>Muse council, Rosetta clusters</td>
+        </tr>
+        <tr>
+          <td>P11</td>
+          <td><a href="page.html?doc=11-kuramoto-sync">Kuramoto Synchronization</a></td>
+          <td>Complex Systems</td>
+          <td class="status-active">Active</td>
+          <td>HEL corridor, cooperative model</td>
+        </tr>
+        <tr>
+          <td>P12</td>
+          <td><a href="page.html?doc=12-machine-unlearning">Machine Unlearning</a></td>
+          <td>AI/Privacy</td>
+          <td class="status-partial">Partial</td>
+          <td>GUPP/DACP, consent enforcement</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <footer>
+    <p>OPEN &mdash; Unsolved Problems &amp; Open Research &middot; PNW Research Series &middot; gsd-skill-creator</p>
+  </footer>
+</body>
+</html>

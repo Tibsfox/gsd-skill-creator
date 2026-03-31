@@ -189,7 +189,7 @@ A new, small-scale cooperative supplier will not displace Linde, Air Liquide, or
 
 **Step 2: US West Coast expansion (Year 2-3).** Serve semiconductor and research customers in the San Francisco Bay Area, Sacramento, and Southern California via truck or rail from the PNW hub. The I-5 corridor extends the co-op's reach south.
 
-**Step 3: East Asian export (Year 2-4).** Ship liquid helium via ISO container from Port of Tacoma/NWSA to East Asian ports. Transit time: 15-25 days (well within the 35-48 day ISO container holding window). Target customers: TSMC supply chain managers looking for supply diversification, Samsung procurement (which has publicly stated interest in supply chain resilience), Japanese fabs (Rapidus, JASM) with emerging demand and limited local supply (Australia's Darwin plant closed in 2023).
+**Step 3: East Asian export (Year 2-4).** Ship liquid helium via ISO container from Port of Tacoma/NWSA to East Asian ports. NWSA handled 3,340,733 TEUs in 2024 (+12.3% YoY), representing $76 billion in waterborne trade. Transit time: 15-25 days (well within the 35-48 day ISO container holding window). Current container rates on Asia-US West Coast routes: $1,460-$2,100 per FEU (February 2026), on a falling trend due to overcapacity. Target customers: TSMC supply chain managers looking for supply diversification, Samsung procurement (which has publicly stated interest in supply chain resilience), Japanese fabs (Rapidus, JASM) with emerging demand and limited local supply (Australia's Darwin plant closed in 2023).
 
 ### Realistic Market Capture Scenarios
 
