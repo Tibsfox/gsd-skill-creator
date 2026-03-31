@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulation &amp; Arts: Build, Fly, Visualize, Create | v1.19 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --bio-deep: #050808; --bio-mid: #0A1418; --mercury-silver: #B0B8C0; --mercury-dim: #606870; --freedom-blue: #2870C0; --freedom-dim: #143860; --falcon-gold: #C8A028; --falcon-dim: #644E14; --salamander-brown: #886830; --salamander-dim: #443418; --stream-teal: #308078; --space: #050510; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2428; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(200,160,40,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(136,104,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(200,160,40,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 25%, var(--bio-mid) 50%, var(--freedom-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 960px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--falcon-gold); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--falcon-gold); } em { color: var(--salamander-brown); }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  .sim-card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem;
+  }
+  .sim-card h3 { margin-top: 0; color: var(--falcon-gold); }
+  .sim-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem; }
+  .sim-meta .tag {
+    display: inline-block; background: rgba(200,160,40,0.12); border: 1px solid var(--falcon-dim);
+    border-radius: 4px; padding: 0.1rem 0.5rem; font-size: 0.75rem; color: var(--falcon-gold);
+    font-family: 'DM Mono', monospace; margin-right: 0.5rem;
+  }
+  .sim-meta .tag-teal { background: rgba(48,128,120,0.12); border-color: var(--stream-teal); color: var(--stream-teal); }
+  .sim-meta .tag-brown { background: rgba(136,104,48,0.12); border-color: var(--salamander-dim); color: var(--salamander-brown); }
+
+  .key-moment {
+    background: rgba(200,160,40,0.06); border-left: 3px solid var(--falcon-gold);
+    padding: 0.75rem 1rem; margin: 1rem 0; border-radius: 0 6px 6px 0;
+    font-size: 0.9rem; color: var(--text-dim);
+  }
+
+  blockquote { border-left: 3px solid var(--freedom-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+
+  .nav-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: #fff; } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span><a href="index.html">v1.19 Mercury-Redstone 3</a><span class="sep">/</span>Track 5: Simulation &amp; Arts
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.19</span><span>NASA Mission Series</span><span>&middot;</span><span class="track-badge">Track 5</span>
+    </div>
+    <h1>Simulation &amp; Creative Arts</h1>
+    <p class="subtitle">What to Build, Train, Visualize, and Create</p>
+    <div class="meta-row">
+      <span><span class="label">Hardware:</span> RTX 4060 Ti (8GB), 60GB RAM, i7-6700K</span>
+      <span><span class="label">Mission:</span> MR-3 / Freedom 7</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>A. Simulations &mdash; What to Build Locally</h2>
+
+    <div class="sim-card">
+      <h3>A1. Python: Suborbital Trajectory Comparator (Shepard vs Ham vs Gagarin)</h3>
+      <div class="sim-meta">
+        <span class="tag">Python</span> <span class="tag">numpy + matplotlib</span> <span class="tag-brown">Beginner-Intermediate</span> <span>2&ndash;3 hours</span>
+      </div>
+      <p>Computes and visualizes the complete suborbital trajectories of Freedom 7 (Shepard), MR-2 (Ham), and Vostok 1 (Gagarin) on the same diagram. User adjusts launch parameters (burnout velocity, flight path angle, burnout altitude) and watches how the trajectory changes.</p>
+      <ul>
+        <li><strong>Plot 1:</strong> Earth-centered trajectory view &mdash; trajectories are TINY compared to Earth; inset zooms the two suborbital arcs</li>
+        <li><strong>Plot 2:</strong> Altitude vs time &mdash; parabolic arcs vs Gagarin&rsquo;s constant-altitude orbit</li>
+        <li><strong>Plot 3:</strong> Velocity vs time &mdash; &ldquo;Orbital velocity (7800 m/s) is 3.4x Freedom 7&rsquo;s max, but requires 11.6x more energy (v&sup2; scaling)&rdquo;</li>
+        <li><strong>Plot 4:</strong> G-force vs time &mdash; Shepard&rsquo;s clean symmetric profile vs Ham&rsquo;s rougher abort-induced curve</li>
+      </ul>
+      <div class="key-moment">The humbling scale: both suborbital trajectories are barely visible arcs against Earth&rsquo;s curvature, while Gagarin&rsquo;s orbit wraps around the entire planet.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A2. Python: Manual Control Bandwidth Calculator</h3>
+      <div class="sim-meta">
+        <span class="tag">Python</span> <span class="tag">numpy + matplotlib + scipy</span> <span class="tag-brown">Intermediate</span> <span>2&ndash;3 hours</span>
+      </div>
+      <p>Models the human-in-the-loop control bandwidth for Mercury manual attitude control. Inputs: human reaction time, thruster characteristics, capsule inertia. Outputs: control loop frequency, Shannon information rate, fuel consumption rate. Side-by-side comparison of Shepard&rsquo;s proportional control vs the ASCS bang-bang control.</p>
+      <ul>
+        <li><strong>Plot 1:</strong> Attitude vs time &mdash; human (smooth) vs ASCS (sawtooth)</li>
+        <li><strong>Plot 2:</strong> Cumulative fuel consumption &mdash; human uses 20&ndash;40% less fuel</li>
+        <li><strong>Plot 3:</strong> Thruster firing pattern &mdash; human looks purposeful; ASCS looks like noise</li>
+        <li><strong>Plot 4:</strong> Information rate bar chart &mdash; &ldquo;Higher bandwidth does not always mean better control&rdquo;</li>
+      </ul>
+      <div class="key-moment">The ASCS has higher bandwidth (more bits/s) but lower efficiency (more fuel per degree). The human has lower bandwidth but higher semantic content per bit.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A3. Web: &ldquo;Can You Fly Freedom 7?&rdquo; &mdash; Manual Attitude Control Game</h3>
+      <div class="sim-meta">
+        <span class="tag">HTML5 Canvas + JS</span> <span class="tag-teal">Self-contained</span> <span class="tag-brown">All levels</span>
+      </div>
+      <p>Browser-based manual attitude control simulator. Fire H2O2 thrusters with keyboard (W/S/A/D/Q/E) to maintain Mercury capsule attitude during the five-minute weightless phase. <strong>No damping</strong> &mdash; the capsule rotates until you fire the opposing thruster. Four phases: orientation, hold, maneuver sequence (Shepard&rsquo;s actual test), and reentry attitude. Performance compared to Shepard&rsquo;s actual data.</p>
+      <ul>
+        <li>3D attitude ball with horizon, pitch ladder, roll indicator, target attitude ghost</li>
+        <li>Simulated periscope view of Earth rotating with capsule attitude</li>
+        <li>Telemetry panel: pitch/yaw/roll, angular rates, fuel remaining</li>
+        <li>Scoring: &ldquo;Shepard&rdquo; rank = &lt;2&deg; avg deviation, &gt;60% fuel remaining</li>
+      </ul>
+      <div class="key-moment">The first time the player fires a thruster and the capsule <em>keeps rotating</em> after they release the key. In space, there is NO damping. You have to stop it yourself.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A4. Web: Peregrine Falcon Stoop Physics Simulator</h3>
+      <div class="sim-meta">
+        <span class="tag">HTML5 Canvas + JS</span> <span class="tag-teal">Self-contained</span> <span class="tag-brown">All levels</span>
+      </div>
+      <p>Interactive stoop from 1000 meters altitude onto a pigeon at 200 meters. Control wing tuck angle (mouse Y-axis) and bank angle (mouse X-axis). Real-time velocity, g-force, and intercept geometry. Standard atmosphere drag model. Goal: maximum speed at intercept while keeping pullout g below 25g.</p>
+      <ul>
+        <li>Side view with altitude/distance axes, falcon silhouette, trajectory trail color-coded by speed</li>
+        <li>Physics panel: gravity, drag, net force, terminal velocity at current tuck</li>
+        <li>G-force meter (0&ndash;30g): green/yellow/red/black zones</li>
+        <li>Compare mode: falcon stoop alongside Freedom 7 trajectory at same time scale</li>
+      </ul>
+      <div class="key-moment">Maximum stoop speed (~390 km/h) produces 24g at pullout. The falcon does this <em>every time it hunts</em>. Shepard experienced 11.6g once and became a hero.</div>
+    </div>
+
+    <div class="sim-card">
+      <h3>A5. SPICE: AGC Circuit for Mercury Rate Gyro Signal Conditioning</h3>
+      <div class="sim-meta">
+        <span class="tag">ngspice</span> <span class="tag-brown">Intermediate</span>
+      </div>
+      <p>Op-amp AGC with JFET-controlled gain, compressing 74 dB gyro dynamic range to ~20 dB for the ASCS relay-logic bang-bang switching. Uses 741 op-amp model, 2N5457 JFET, peak detector for control voltage. The same AGC principle used in AM/shortwave receivers (v1.9, v1.16) applied to spacecraft instrumentation.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>A6. SPICE: Audio CW Filter &mdash; Progressive Radio Circuit #19</h3>
+      <div class="sim-meta">
+        <span class="tag">ngspice</span> <span class="tag-brown">Beginner-Intermediate</span>
+      </div>
+      <p>Active audio bandpass filter using twin-T notch topology in op-amp negative feedback. Center frequency ~700 Hz (CW tone), bandwidth ~200&ndash;400 Hz. Rejects adjacent signals, SSB bleed, and power line hum. <strong>9.5 dB SNR improvement</strong> from narrowing 2700 Hz to 300 Hz bandwidth. Design equations: f<sub>0</sub> = 1 / (2&pi;RC), R = 22k, C = 10 nF.</p>
+      <p><em>Mercury connection:</em> Ground stations used similar narrowband filters to separate biomedical subcarrier tones. Shepard&rsquo;s heart rate was telemetered on a 1.3 kHz subcarrier.</p>
+    </div>
+
+    <hr>
+
+    <h2>B. Machine Learning &mdash; What to Train</h2>
+
+    <div class="sim-card">
+      <h3>B1. Manual Control Style Classifier</h3>
+      <div class="sim-meta">
+        <span class="tag">PyTorch / TensorFlow</span> <span class="tag-brown">Intermediate</span>
+      </div>
+      <p>Binary classifier (1D CNN or LSTM) distinguishing &ldquo;proportional&rdquo; (Shepard-like) from &ldquo;bang-bang&rdquo; (ASCS-like) control strategies. Input: 30-second thruster firing time series at 10 Hz (300 samples, 7 features per sample). Expected accuracy &gt;95% for clean patterns, ~85% for fatigued-human vs ASCS. Most discriminative feature: pulse duration variability.</p>
+    </div>
+
+    <hr>
+
+    <h2>C. Computer Science &mdash; The Human-in-the-Loop Problem</h2>
+
+    <div class="sim-card">
+      <h3>C1. Supervisory Control Architecture</h3>
+      <div class="sim-meta">
+        <span class="tag">Architecture</span> <span class="tag-teal">Design Pattern</span>
+      </div>
+      <p>The Mercury control hierarchy as a software architecture pattern:</p>
+      <ul>
+        <li><strong>Level 0:</strong> Physics / Infrastructure &mdash; the environment, not controlled</li>
+        <li><strong>Level 1:</strong> Actuators / Service mesh &mdash; execute commands, do not decide</li>
+        <li><strong>Level 2:</strong> ASCS / Automated agents &mdash; closed-loop automatic, ~2&ndash;5 Hz, bang-bang</li>
+        <li><strong>Level 3:</strong> Manual (Shepard) / Human operator &mdash; closed-loop human, ~0.77 Hz, proportional</li>
+        <li><strong>Level 4:</strong> Mission Control / Management &mdash; strategic, ~0.01 Hz</li>
+      </ul>
+      <p><strong>The Shepard lesson:</strong> Level 3 should always be able to override Level 2. The override capability costs little and provides enormous value when the automatic system encounters an unplanned situation.</p>
+    </div>
+
+    <hr>
+
+    <h2>D. Creative Arts &mdash; What to Compose, Write, and Render</h2>
+
+    <div class="sim-card">
+      <h3>D1. GLSL Shader: &ldquo;Freedom&rdquo;</h3>
+      <div class="sim-meta">
+        <span class="tag">GLSL</span> <span class="tag">1920x1080</span>
+      </div>
+      <p>View from Freedom 7&rsquo;s periscope at apogee &mdash; 187.5 km above the Atlantic. Circular periscope viewport with crosshair overlay and degree markings. Through the lens: the blue Atlantic, white cloud formations, the Bahamas as turquoise patches, Cape Canaveral at the edge of the field, the curve of the Earth at the horizon, and the impossibly thin blue line of atmosphere transitioning to black space. Slow drift simulates attitude motion; periodic corrections simulate thruster firings.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>D2. Short Story: &ldquo;Fifteen Minutes&rdquo;</h3>
+      <div class="sim-meta">
+        <span class="tag">HTML + LaTeX</span> <span class="tag">3,000&ndash;4,000 words</span>
+      </div>
+      <p>Creative nonfiction following Shepard&rsquo;s sensory experience from T-0 to helicopter recovery. Third-person limited, present tense during flight. 13 sections keyed to mission elapsed time: ignition, tower clear, max-Q, engine cutoff, tower jettison, manual control, the view, retro-sequence, retro jettison, reentry (11.6g), drogue chute, main chute, splashdown. The prose matches the flight&rsquo;s pace: rapid during launch, contemplative during weightlessness, violent during reentry.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>D3. FAUST Synth: MR-3 Launch Sequence</h3>
+      <div class="sim-meta">
+        <span class="tag">Faust DSP</span> <span class="tag">48 kHz stereo, 150 s</span>
+      </div>
+      <p>Physically motivated synthesis: broadband engine noise (80&ndash;150 Hz resonant bandpass), structural vibration (20&ndash;40 Hz, peak at max-Q), atmospheric wind (proportional to dynamic pressure), Doppler shift as the rocket recedes (~1 octave drop by cutoff), and the dramatic silence of engine cutoff &mdash; from 78,000 lbs thrust to zero in 100 ms.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>D4. FAUST Synth: Peregrine Falcon Stoop</h3>
+      <div class="sim-meta">
+        <span class="tag">Faust DSP</span> <span class="tag">48 kHz stereo, 12 s</span>
+      </div>
+      <p>The stoop from the falcon&rsquo;s perspective: wind over folded feathers (pink noise, rising pitch with speed), feather flutter at high velocity (narrow-band 200&ndash;800 Hz), the sub-bass thump of wing deployment at 24g pullout, the sharp transient of the strike, and the sudden quiet after &mdash; mirroring Freedom 7&rsquo;s post-cutoff silence.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>D5. Circuit: LED G-Force Indicator</h3>
+      <div class="sim-meta">
+        <span class="tag">Hardware</span> <span class="tag-teal">LM3914</span> <span class="tag-brown">Beginner, ~$8</span>
+      </div>
+      <p>10-LED bar display driven by LM3914 dot/bar display driver IC. Potentiometer simulates the capsule&rsquo;s accelerometer. Color-coded: green (1&ndash;3g), yellow (4&ndash;6g), orange (7&ndash;9g), red (10g+). Rotate the pot to trace Freedom 7&rsquo;s g-profile: 1g on pad, ramp to 6.3g at burnout, drop to 0g in weightlessness, spike to 11.6g during reentry, settle to 1g under parachute.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>D6. Circuit: Analog Attitude Controller</h3>
+      <div class="sim-meta">
+        <span class="tag">Hardware</span> <span class="tag-teal">LM358 + SG90 Servo</span> <span class="tag-brown">Beginner-Intermediate, ~$15</span>
+      </div>
+      <p>Single-axis attitude controller: potentiometer (hand controller) drives an op-amp integrator (capsule dynamics), which drives a servo motor (attitude display). Push the pot &rarr; servo rotates at ~1&deg;/s. Release &rarr; servo <strong>holds position</strong> (no damping in space). Push the other way to stop. The student learns exactly why Shepard&rsquo;s manual control test was not trivial.</p>
+    </div>
+
+    <hr>
+
+    <h2>E. Problem-Solving &mdash; The Qualification Test</h2>
+
+    <div class="sim-card">
+      <h3>E1. Qualification vs Survival</h3>
+      <div class="sim-meta">
+        <span class="tag">Methodology</span>
+      </div>
+      <p><strong>Survival:</strong> The system encounters conditions beyond its design envelope and does not fail. Ham&rsquo;s MR-2 survived 14.7g (design limit: 12g). This demonstrates <em>robustness</em>.</p>
+      <p><strong>Qualification:</strong> The system encounters conditions within its design envelope and performs as predicted. Shepard&rsquo;s MR-3 matched every prediction within engineering tolerance. This demonstrates <em>control</em>.</p>
+      <p>NASA required <strong>qualification</strong>, not survival, before flying Glenn. A stress test demonstrates robustness. A qualification test demonstrates control. Both are valuable. Neither substitutes for the other. Ship after qualification, not after survival.</p>
+      <p><strong>The Mercury Ladder:</strong> MR-1 (failure&rarr;learning) &rarr; MR-1A (success) &rarr; MR-2 (survival) &rarr; MR-BD (fix) &rarr; <strong>MR-3 (qualification)</strong> &rarr; MR-4 (repeat qualification) &rarr; MA-4 (success) &rarr; MA-5 (qualification) &rarr; MA-6 (operational).</p>
+    </div>
+
+    <hr>
+
+    <h2>F. GSD Improvements</h2>
+
+    <div class="sim-card">
+      <h3>F1. Human-in-the-Loop Override Chipset</h3>
+      <div class="sim-meta">
+        <span class="tag">Chipset Design</span>
+      </div>
+      <p>Four chips: <strong>override-switch</strong> (state machine: AUTOMATIC &rarr; HANDOFF &rarr; MANUAL &rarr; RELEASE &rarr; AUTOMATIC), <strong>proportional-input</strong> (nuanced &ldquo;do this much&rdquo; inputs vs binary do/don&rsquo;t-do), <strong>efficiency-monitor</strong> (flag if human intervention is using more resources than automatic), and <strong>context-capture</strong> (snapshot full agent state for seamless resume). The human does not replace the automatic system. The human complements it.</p>
+    </div>
+
+    <div class="sim-card">
+      <h3>F2. Qualification Test Pattern</h3>
+      <div class="sim-meta">
+        <span class="tag">Chipset Design</span>
+      </div>
+      <p>Four chips: <strong>spec-oracle</strong> (verify predicted performance, not just non-failure), <strong>tolerance-band</strong> (define acceptable ranges &mdash; &ldquo;survived&rdquo; is not &ldquo;qualified&rdquo;), <strong>regression-guard</strong> (detect drift toward survival mode), and <strong>qualification-ladder</strong> (unit &rarr; integration &rarr; system &rarr; qualification &rarr; operational). Only advance when the current level qualifies.</p>
+    </div>
+
+    <blockquote>
+      Three organisms, three time scales: 15 milliseconds, 10 seconds, 928 seconds. Three leaps: the lunge, the stoop, the launch. Three commitments that cannot be unmade once they begin. Kierkegaard, born this day 148 years before the launch, knew that the hardest thing about a leap is not the landing but the leaving &mdash; the instant when both feet are off the ground and the only thing holding you up is the trajectory you chose and the physics you trusted. Shepard jumped. Fifteen minutes later, America was in space, and the question was no longer &ldquo;can we?&rdquo; but &ldquo;how far?&rdquo;
+    </blockquote>
+
+    <div class="nav-card">
+      <div><div class="nav-label">Previous Track</div><a href="curriculum.html">&larr; Track 4: Curriculum</a></div>
+      <div style="text-align: center;"><div class="nav-label">Landing Page</div><a href="index.html">v1.19 Overview</a></div>
+      <div style="text-align: right;"><div class="nav-label">Next Mission</div><a href="../1.20/index.html">v1.20 &rarr;</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.19 Track 5: Simulation &amp; Arts &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organism: Dicamptodon tenebrosus — Pacific Giant Salamander | v1.19 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --bio-deep: #050808; --bio-mid: #0A1418; --mercury-silver: #B0B8C0; --mercury-dim: #606870; --freedom-blue: #2870C0; --freedom-dim: #143860; --falcon-gold: #C8A028; --falcon-dim: #644E14; --salamander-brown: #886830; --salamander-dim: #443418; --stream-teal: #308078; --space: #050510; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2428; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(48,128,120,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(136,104,48,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(48,128,120,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(136,104,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(48,128,120,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 25%, var(--bio-mid) 50%, var(--freedom-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--stream-teal); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(48,128,120,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(48,128,120,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(48,128,120,0.12); border: 1px solid var(--stream-teal); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--stream-teal); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(48,128,120,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--stream-teal); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--falcon-gold); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--falcon-gold); } em { color: var(--salamander-brown); }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .sources { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-top: 2rem; }
+  .sources h2 { margin-top: 0; } .sources h3 { font-size: 1rem; color: var(--mercury-silver); margin-top: 1.5rem; } .sources li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+  .nav-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: #fff; } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span><a href="index.html">v1.19 Mercury-Redstone 3</a><span class="sep">/</span>Track 2: Organism Pairing
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.19</span><span>NASA Mission Series</span><span>&middot;</span><span class="track-badge">Track 2</span>
+    </div>
+    <h1>Organism Pairing: <em>Dicamptodon tenebrosus</em></h1>
+    <p class="subtitle">The Giant Beneath the Falls &mdash; Pacific Giant Salamander</p>
+    <div class="meta-row">
+      <span><span class="label">Family:</span> Dicamptodontidae</span>
+      <span><span class="label">Range:</span> PNW Endemic (BC to N. California)</span>
+      <span><span class="label">Mission:</span> Mercury-Redstone 3 / Freedom 7</span>
+      <span><span class="label">Bird:</span> <em>Falco peregrinus</em> (Peregrine Falcon)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>The Voice</h2>
+
+    <p>The first thing to know about <em>Dicamptodon tenebrosus</em> is the thing that should be impossible: <strong>it speaks</strong>.</p>
+
+    <p>Salamanders are silent animals. This is not a generalization with exceptions &mdash; it is a defining feature of the order Caudata with <em>one</em> exception, and the exception is standing in a cold mountain stream in the Cascade foothills, opening its mouth, and producing a sound. A bark. A low-pitched, raspy yelp that carries through the wet air of the forest understory like a distress call from something that should not be able to make one. The Pacific giant salamander is the <strong>only salamander in North America that vocalizes</strong>.</p>
+
+    <p>Alan Shepard was the first American voice from space. <em>&ldquo;Roger, liftoff, and the clock is started.&rdquo;</em> Before Shepard, no American had spoken from above the atmosphere. Before <em>Dicamptodon</em>, no North American salamander had spoken at all. Both broke a silence. Both produced a sound that their context said was impossible.</p>
+
+    <hr>
+
+    <h2>The Body</h2>
+
+    <p><em>Dicamptodon tenebrosus</em> is the <strong>largest terrestrial salamander in North America</strong>. Adults reach lengths of 30 to 35 centimeters &mdash; fourteen inches from snout to tail tip &mdash; and exceptional individuals have been measured at nearly 38 centimeters. The body is stout, muscular, broad-headed, and built with a density that distinguishes it immediately from the slender salamanders most people know. The Pacific giant salamander does not look fragile. It looks like something that could bite you, and it can, and it will.</p>
+
+    <p>The coloration is a mottled pattern of tan, brown, copper, and black &mdash; a marbled camouflage that blends seamlessly with wet rocks and mossy substrates. The head is broad and flat, with powerful jaw muscles that make <em>Dicamptodon</em> the only North American salamander capable of inflicting a genuinely painful bite on a human hand. The tail is laterally compressed and constitutes approximately half the animal&rsquo;s total body length, serving as both propulsion surface and fat storage organ.</p>
+
+    <hr>
+
+    <h2>The Boundary</h2>
+
+    <p>The most extraordinary feature of <em>Dicamptodon tenebrosus</em> is its <strong>dual life strategy</strong> &mdash; a phenomenon called <strong>facultative neoteny</strong> that divides the species into two entirely different organisms living two entirely different lives.</p>
+
+    <p>In most amphibian species, metamorphosis is obligate &mdash; every surviving individual transforms from aquatic larva to terrestrial adult. In <em>Dicamptodon</em>, metamorphosis is <em>facultative</em>. Some individuals metamorphose: absorb their gills, develop lungs, remodel their skulls, and emerge as terrestrial adults. Other individuals, from the same population, the same stream, sometimes the same egg clutch, <strong>do not metamorphose</strong>. They retain their larval form &mdash; external gills, aquatic body plan, finned tail &mdash; and remain in the stream for their entire lives. They grow to adult size in the larval form. They become sexually mature in the larval form. They reproduce in the larval form.</p>
+
+    <p>The triggers appear to involve a combination of environmental factors (water temperature, stream flow, habitat quality, population density) and individual genetic variation in thyroid hormone sensitivity. In cold, high-elevation streams, neoteny rates are higher. In warmer, lower-elevation streams, metamorphosis rates are higher. The environment influences the decision, but the decision is made at the individual level.</p>
+
+    <p>Shepard crossed a boundary. He went from ground to space and came back. And then Shepard experienced his own version of neoteny: Meni&egrave;re&rsquo;s disease grounded him for five years while his colleagues metamorphosed into Gemini and Apollo astronauts. The surgery that cured him was his metamorphosis. He walked on the Moon.</p>
+
+    <hr>
+
+    <h2>The Predator</h2>
+
+    <p><em>Dicamptodon tenebrosus</em> is the <strong>apex predator</strong> of Pacific Northwest stream invertebrate communities. The diet of terrestrial adults includes insects, spiders, centipedes, slugs, smaller salamanders, small snakes, and <strong>small rodents</strong> &mdash; deer mice and voles, warm-blooded mammals significantly larger than the typical prey of any salamander.</p>
+
+    <p>The predatory confidence is unmistakable. The animal does not retreat when exposed. It faces the disturbance. It opens its mouth. It barks. It bites. This is not recklessness &mdash; the animal is large enough and muscular enough to make its bite meaningful. Shepard was not gentle. He was not retiring. He was the most competitive of the Mercury Seven, the one who responded to hours of launch delays not with patience but with <em>&ldquo;light this candle.&rdquo;</em></p>
+
+    <hr>
+
+    <h2>The Stream</h2>
+
+    <p><em>Dicamptodon</em> requires cold, clear, fast-flowing mountain streams with intact forested riparian zones. The animal&rsquo;s skin respiration requires dissolved oxygen levels found only in cold, turbulent water. Its eggs require constant water flow during incubation. Its larval development requires stream temperatures below approximately 18&deg;C.</p>
+
+    <p>The range follows the old-growth forests of the Pacific Northwest: from southwestern British Columbia south through western Washington and Oregon to the coastal mountains of northern California. It is found west of the Cascade crest, in the wet forests where rainfall exceeds 150 cm per year. It lives where the old growth lives. Where the old growth has been cut, the salamander declines.</p>
+
+    <p>This makes <em>Dicamptodon</em> an <strong>indicator species</strong>. A stream that supports a healthy population has cold water, stable banks, intact canopy, low sedimentation, and a functioning food web. A stream where the salamander has disappeared is a stream where one or more of those conditions has been degraded. The Mercury capsule was the same kind of honest indicator: Freedom 7 worked because every system was within specification.</p>
+
+    <hr>
+
+    <h2>Coast Salish Significance</h2>
+
+    <p>The Pacific giant salamander occupies a specific position in Coast Salish ecological knowledge. It is a water quality sentinel &mdash; its presence in a stream indicates that the water is clean, cold, and flowing from healthy headwaters under intact forest canopy. A stream that supported <em>Dicamptodon</em> was a stream that supported the cold-water salmonids that formed the foundation of Coast Salish subsistence and ceremonial life.</p>
+
+    <p>The salamander&rsquo;s position as a boundary creature &mdash; aquatic and terrestrial, larval and adult, silent and vocal &mdash; would have resonated with Coast Salish understanding of the natural world as a system of interconnected domains. Water and land are connected by the stream, by the salmon, by the bear that carries the salmon into the forest. The salamander that lives in both domains embodies this connection.</p>
+
+    <hr>
+
+    <h2>Six Resonance Axes</h2>
+
+    <h3>1. Voice &mdash; First to Speak</h3>
+    <p>The Pacific giant salamander is the only North American salamander that vocalizes. Alan Shepard was the first American to speak from space. Both broke a silence that defined their category.</p>
+
+    <h3>2. Boundary Crossing &mdash; Aquatic to Terrestrial / Ground to Space</h3>
+    <p>The metamorphosis from aquatic larva with gills to terrestrial adult with lungs is a boundary crossing between fundamentally different environments. Shepard&rsquo;s flight was the same kind of crossing: from atmosphere to space, from aerodynamic flight to ballistic trajectory.</p>
+
+    <h3>3. Dual Strategy &mdash; Neotenic vs. Metamorphosed / Grounded Then Moon-Walking</h3>
+    <p><em>Dicamptodon</em> maintains two simultaneous life strategies within the same species. Shepard lived two careers separated by five years of grounding. The surgery was his metamorphosis.</p>
+
+    <h3>4. Predator Confidence &mdash; Apex Predator / Test Pilot Competitive Drive</h3>
+    <p>The salamander does not retreat. It faces threats, opens its mouth, vocalizes, and bites. Shepard said <em>&ldquo;light this candle.&rdquo;</em> Both are defined by functional confidence, not performative confidence.</p>
+
+    <h3>5. Cold Water Requirement &mdash; Pristine Conditions / Pristine Engineering</h3>
+    <p><em>Dicamptodon</em> requires cold, clear, well-oxygenated water. Mercury required pristine engineering. Both are intolerant of degraded conditions and honest tests of quality.</p>
+
+    <h3>6. Size Belies Habitat &mdash; Largest Salamander in Small Streams / 15-Minute Flight Changed History</h3>
+    <p>The largest terrestrial salamander in North America lives in small headwater streams barely a meter wide. The largest consequences in the American space program came from the shortest crewed flight.</p>
+
+    <div class="sources">
+      <h2>Sources</h2>
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Nussbaum, Ronald A. &ldquo;Geographic Variation and Systematics of Salamanders of the Genus Dicamptodon.&rdquo;</strong> Misc. Pub., Museum of Zoology, University of Michigan, No. 149, 1976.</li>
+        <li><strong>Jones, Leonard; Olson, Deanna H. (eds.). &ldquo;Amphibians of the Pacific Northwest.&rdquo;</strong> Seattle Audubon Society, 2005.</li>
+        <li><strong>Petranka, James W. &ldquo;Salamanders of the United States and Canada.&rdquo;</strong> Smithsonian Institution Press, 1998.</li>
+      </ul>
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Welsh, Hartwell H. Jr.; and Ollivier, Lisa M. &ldquo;Stream Amphibians as Indicators of Ecosystem Stress.&rdquo;</strong> Ecological Applications, Vol. 8, No. 4, 1998.</li>
+        <li><strong>Parker, Michael S. &ldquo;Feeding Ecology of Stream-Dwelling Pacific Giant Salamander Larvae.&rdquo;</strong> Copeia, Vol. 1994, No. 3, 1994.</li>
+        <li><strong>Leuthold, Natasha et al. &ldquo;Vocalization in the Pacific Giant Salamander Dicamptodon tenebrosus.&rdquo;</strong> Herpetologica, Vol. 57, No. 4, 2001.</li>
+        <li><strong>Turner, Nancy J. &ldquo;The Earth&rsquo;s Blanket: Traditional Teachings for Sustainable Living.&rdquo;</strong> Douglas &amp; McIntyre, Vancouver, 2005.</li>
+      </ul>
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>GBIF &mdash; <em>Dicamptodon tenebrosus</em> occurrence records.</strong> 4,500+ confirmed records from BC to northern California.</li>
+        <li><strong>iNaturalist &mdash; <em>Dicamptodon tenebrosus</em> observations.</strong> 6,000+ verified observations with photographs of both terrestrial and neotenic forms.</li>
+        <li><strong>USDA Forest Service, Pacific Northwest Research Station.</strong> Long-term stream amphibian monitoring data.</li>
+        <li><strong>Washington Department of Fish and Wildlife.</strong> Conservation status assessments and management recommendations.</li>
+        <li><strong>USGS NWIS.</strong> Water temperature, discharge, and dissolved oxygen data for PNW streams.</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div><div class="nav-label">Previous Track</div><a href="research.html">&larr; Track 1a: Research</a></div>
+      <div style="text-align: center;"><div class="nav-label">Landing Page</div><a href="index.html">v1.19 Overview</a></div>
+      <div style="text-align: right;"><div class="nav-label">Next Track</div><a href="mathematics.html">Track 3: Mathematics &rarr;</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.19 Track 2: Organism Pairing &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

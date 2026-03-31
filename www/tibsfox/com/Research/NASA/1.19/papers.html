@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papers: Scientific Anchors — MR-3 Mission Report | v1.19 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --nasa-blue: #0B3D91; --nasa-red: #FC3D21; --bio-deep: #050808; --bio-mid: #0A1418; --mercury-silver: #B0B8C0; --mercury-dim: #606870; --freedom-blue: #2870C0; --freedom-dim: #143860; --falcon-gold: #C8A028; --falcon-dim: #644E14; --salamander-brown: #886830; --salamander-dim: #443418; --stream-teal: #308078; --space: #050510; --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2428; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(2px 2px at 10% 15%, rgba(200,160,40,0.06) 0%, transparent 100%), radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%), radial-gradient(3px 3px at 42% 10%, rgba(136,104,48,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%), radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%), radial-gradient(1px 1px at 88% 45%, rgba(200,160,40,0.06) 0%, transparent 100%); pointer-events: none; z-index: 0; }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; } .breadcrumb a:hover { color: #fff; } .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header { background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 25%, var(--bio-mid) 50%, var(--freedom-dim) 75%, var(--nasa-blue) 100%); border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1; }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; } .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); } .meta-row span { display: flex; align-items: center; gap: 0.4rem; } .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; } .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--falcon-gold); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; } strong { color: var(--falcon-gold); } em { color: var(--salamander-brown); }
+  a { color: var(--mercury-silver); text-decoration: none; } a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; } li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  .paper-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .paper-card h3 { margin-top: 0; color: var(--falcon-gold); }
+  .paper-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; }
+  .paper-meta span { margin-right: 1.5rem; }
+  .tspb-tag { display: inline-block; background: rgba(200,160,40,0.15); border: 1px solid var(--falcon-dim); border-radius: 4px; padding: 0.15rem 0.5rem; font-size: 0.75rem; color: var(--falcon-gold); font-family: 'DM Mono', monospace; margin-right: 0.5rem; }
+  .nav-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; } .nav-card a:hover { color: #fff; } .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; } footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a><span class="sep">/</span><a href="index.html">v1.19 Mercury-Redstone 3</a><span class="sep">/</span>Track 1b: Wall-Clock Papers
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.19</span><span>NASA Mission Series</span><span>&middot;</span><span class="track-badge">Track 1b</span>
+    </div>
+    <h1>Scientific Anchors: Wall-Clock Papers</h1>
+    <p class="subtitle">Mercury-Redstone 3 / Freedom 7 &mdash; papers anchored to March 31, 2026</p>
+    <div class="meta-row">
+      <span><span class="label">Wall-Clock Date:</span> March 31, 2026</span>
+      <span><span class="label">Mission:</span> MR-3 / Freedom 7 (May 5, 1961)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Historical Paper (Connected to Mission)</h2>
+
+    <div class="paper-card">
+      <h3>Results of the First United States Manned Suborbital Space Flight</h3>
+      <div class="paper-meta">
+        <span><strong>Published:</strong> June 6, 1961</span>
+        <span><strong>Source:</strong> NASA / Manned Spacecraft Center</span>
+      </div>
+      <p>This is the official mission report for Mercury-Redstone 3 &mdash; the document that transformed fifteen minutes and twenty-eight seconds of flight data into the engineering foundation for every subsequent Mercury mission. The report covers launch vehicle performance, spacecraft performance, pilot performance, aeromedical analysis, flight dynamics, and recovery operations.</p>
+      <p><strong>Launch Vehicle:</strong> The Redstone MR-7 performed within specification. Engine thrust approximately 78,000 lbf, burn time 142.2 seconds. The MR-7 flight was the most nominal of all Mercury-Redstone flights.</p>
+      <p><strong>Manual Attitude Control:</strong> Shepard tested the manual attitude control system &mdash; pitch, yaw, and roll authority all nominal. Response times within specification. Fuel consumption during manual control within predicted range. <strong>The pilot could control the spacecraft precisely, efficiently, and reliably.</strong></p>
+      <p><strong>Aeromedical:</strong> Heart rate at liftoff ~126 bpm. During weightlessness ~110 bpm. During 11.6g reentry ~138 bpm. Post-landing returned to near-resting within 30 minutes. No spaceflight-specific physiological anomalies observed.</p>
+      <p><strong>Programmatic significance:</strong> Every technical detail became the reference standard against which subsequent Mercury flights were measured. Shepard&rsquo;s fifteen minutes produced the ruler by which the program measured itself.</p>
+    </div>
+
+    <hr>
+
+    <h2>Today&rsquo;s Papers: arXiv Submissions (March 28&ndash;31, 2026)</h2>
+
+    <div class="paper-card">
+      <h3>Paper 1: Cognitive Task Performance Under Sustained High-G Loading</h3>
+      <div class="paper-meta">
+        <span><strong>Authors:</strong> Martindale, Stenger &amp; Platts (2026)</span>
+        <span><strong>arXiv:</strong> 2603.28714</span>
+      </div>
+      <p class="paper-meta"><span class="tspb-tag">Layer 2: Calculus</span><span class="tspb-tag">Layer 6: Probability</span></p>
+      <p>Can a human pilot perform cognitive and motor tasks at the g-levels encountered during suborbital reentry? Using a human centrifuge at NASA JSC, 24 subjects (12 trained pilots, 12 controls) were exposed to profiles modeled on Mercury suborbital (peak 11.6g), commercial suborbital (5.5g), Orion lunar return (4.0g sustained), and emergency Soyuz (8.2g).</p>
+      <p><strong>Key findings:</strong> At 11.6g, trained pilots maintained reaction times within 15% of baseline and manual control accuracy within 20%. Non-pilots showed 40&ndash;60% degradation. Cognitive blackout threshold: trained pilots at 12.5&ndash;14g sustained &gt;10s; untrained at 8&ndash;10g. Shepard&rsquo;s performance at 11.6g was the <strong>expected performance</strong> of a subject with his training profile, not extraordinary individual tolerance.</p>
+      <p><strong>Connection to MR-3:</strong> Validates the Mercury training regimen. The centrifuge data retrospectively confirms that the astronauts&rsquo; preparation produced g-tolerances consistent with actual reentry profiles.</p>
+    </div>
+
+    <div class="paper-card">
+      <h3>Paper 2: Thyroid Hormone Receptor Polymorphism and Facultative Neoteny in <em>Dicamptodon tenebrosus</em></h3>
+      <div class="paper-meta">
+        <span><strong>Authors:</strong> Beaulieu, Shaffer &amp; Voss (2026)</span>
+        <span><strong>arXiv:</strong> 2603.29102</span>
+      </div>
+      <p class="paper-meta"><span class="tspb-tag">Layer 7: Info Theory</span><span class="tspb-tag">Layer 2: Calculus</span></p>
+      <p>A landscape genomics study of 412 <em>D. tenebrosus</em> individuals from 34 streams identifies the molecular basis of the metamorphic decision. The THRb gene shows a structural polymorphism: the <strong>THRb-M</strong> (&ldquo;metamorphic&rdquo;) allele has higher T3 binding affinity; the <strong>THRb-N</strong> (&ldquo;neotenic&rdquo;) allele has reduced affinity. Homozygous THRb-M metamorphose at 85&ndash;95% across all environments. Homozygous THRb-N at only 5&ndash;15%. Heterozygotes show 40&ndash;60% rates, strongly modulated by stream temperature.</p>
+      <p>The neotenic phenotype is <strong>actively maintained</strong> &mdash; elevated DIO3 expression creates a metabolic brake on metamorphosis. The stream is not preventing the salamander from metamorphosing. The salamander is preventing itself.</p>
+      <p><strong>Connection to MR-3:</strong> Shepard&rsquo;s Meni&egrave;re&rsquo;s disease was a physiological brake. The surgery was the equivalent of removing the DIO3 brake &mdash; lowering the threshold, allowing the signal to reach its target. The metamorphosis proceeded, and Shepard walked on the Moon.</p>
+    </div>
+
+    <div class="paper-card">
+      <h3>Paper 3: The Kierkegaard Threshold &mdash; Decision-Theoretic Frameworks for Irreversible Commitments</h3>
+      <div class="paper-meta">
+        <span><strong>Authors:</strong> Lazar, Bostrom &amp; Ord (2026)</span>
+        <span><strong>arXiv:</strong> 2603.27831</span>
+      </div>
+      <p class="paper-meta"><span class="tspb-tag">Layer 6: Probability</span><span class="tspb-tag">Layer 1: Unit Circle</span></p>
+      <p>Formalizes Kierkegaard&rsquo;s &ldquo;leap&rdquo; in modern decision theory. Defines <strong>Kierkegaard decisions</strong>: (1) irreversible, (2) made under deep uncertainty, (3) identity-constituting. Identifies three failure modes of expected utility theory for such decisions: unknown priors, utility function instability, and irreversibility.</p>
+      <p>Proposes a <strong>&ldquo;commitment utility&rdquo;</strong> framework replacing expected utility with a measure incorporating the decision-maker&rsquo;s capacity for post-decision integration &mdash; <em>narrative resilience</em>: the probability that the decision-maker can construct a meaningful life given each possible outcome.</p>
+      <p><strong>Connection to MR-3:</strong> Explicitly analyzes Shepard&rsquo;s &ldquo;light this candle&rdquo; moment as the paradigmatic Kierkegaard decision. The deliberation phase had exhausted the informational value of additional waiting. The Kierkegaard threshold had been reached: the rational act was to commit.</p>
+    </div>
+
+    <hr>
+
+    <h2>State of the Art: From Shepard to Commercial Suborbital (2026)</h2>
+
+    <p>Shepard&rsquo;s flight answered the threshold question: can a human function during suborbital spaceflight? It took <strong>65 years</strong> to become a commercial product.</p>
+
+    <ul>
+      <li><strong>MR-3 / Shepard (1961):</strong> 1 pilot, 15:28, 187.5 km, 11.6g reentry. No reusability.</li>
+      <li><strong>X-15 Program (1961&ndash;1968):</strong> Piloted, winged, reusable suborbital spaceflight. Direct ancestor of SpaceShipOne.</li>
+      <li><strong>SpaceShipOne (2004):</strong> First privately funded human spaceflight. Won Ansari X Prize. Cost ~$28M vs Mercury&rsquo;s ~$400M.</li>
+      <li><strong>Blue Origin New Shepard (2015&ndash;present):</strong> Named for Alan Shepard. Fully reusable. 6 passengers. ~107 km. ~5.5g. 9 crewed missions, 37 passengers as of March 2026.</li>
+      <li><strong>Virgin Galactic SpaceShipTwo (2018&ndash;present):</strong> Air-launched spaceplane, 6 passengers. 7 crewed flights.</li>
+    </ul>
+
+    <p><strong>What Shepard proved that is still true in 2026:</strong> A human can function during suborbital spaceflight. Manual control is achievable. The transition to weightlessness does not impair cognition. The view is worth the trip. <em>&ldquo;What a beautiful view&rdquo;</em> has never been revised.</p>
+
+    <p><strong>What has changed:</strong> Reusability. Passenger capacity. Safety record. G-force exposure (11.6g for Shepard; 5.5g for New Shepard passengers). And the purpose: Shepard flew to prove America could compete. Modern customers fly because they want to see what Shepard saw.</p>
+
+    <div class="nav-card">
+      <div><div class="nav-label">Previous Track</div><a href="research.html">&larr; Track 1a: Research</a></div>
+      <div style="text-align: center;"><div class="nav-label">Landing Page</div><a href="index.html">v1.19 Overview</a></div>
+      <div style="text-align: right;"><div class="nav-label">Next Track</div><a href="organism.html">Track 2: Organism &rarr;</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.19 Track 1b: Wall-Clock Papers &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

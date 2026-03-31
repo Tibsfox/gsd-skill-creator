@@ -1,0 +1,230 @@
+* Mercury Attitude Thruster Control Circuit — Freedom 7 Manual Control
+* ====================================================================
+* NASA Mission Series v1.19
+*
+* Models the attitude control thruster driver circuit for Mercury's
+* manual control mode, as used by Alan Shepard during Freedom 7.
+*
+* When Shepard moved the hand controller, it closed a switch that
+* energized a solenoid valve, allowing hydrogen peroxide (H2O2) to
+* flow to a catalyst bed (silver mesh), where it decomposed into
+* steam and oxygen, producing thrust.
+*
+* This circuit models:
+*   1. Hand controller switch input (simulated as pulse source)
+*   2. 555 timer minimum pulse width circuit (prevents too-short firings
+*      that waste fuel without producing useful thrust)
+*   3. MOSFET solenoid driver (switches the valve)
+*   4. Solenoid coil with flyback protection
+*   5. Rate gyro feedback (simulated as voltage proportional to angular rate)
+*   6. Comparator that inhibits firing when angular rate exceeds limit
+*      (prevents over-rotation — the rate damping function)
+*
+* Mercury had two control modes:
+*   - ASCS (Automatic Stabilization and Control System): rate gyros
+*     directly commanded thrusters via electronics. No pilot input.
+*   - Manual: pilot's hand controller commanded thrusters directly.
+*     The 555 timer ensured minimum pulse width for efficiency.
+*   - Fly-by-wire: pilot's inputs were processed through ASCS electronics.
+*     Shepard tested all three modes during his 5 minutes of weightlessness.
+*
+* Run: ngspice -b attitude-thruster.cir
+
+*--------------------------------------------------------------
+* POWER SUPPLY — Mercury used 24V DC bus
+*--------------------------------------------------------------
+V_bus  vcc  0  DC 24
+
+*--------------------------------------------------------------
+* HAND CONTROLLER INPUT
+*--------------------------------------------------------------
+* Shepard's manual control inputs: deliberate, measured pulses.
+* Pitch command: short press for small correction, hold for larger.
+* Simulated as several pulses of varying width.
+*
+* Pulse 1: 100ms (small pitch correction)
+* Pulse 2: 300ms (medium yaw correction)
+* Pulse 3: 50ms (too short — 555 extends to minimum)
+* Pulse 4: 500ms (sustained roll test)
+
+V_hand_ctrl  hand_in  0  PWL(
++ 0     0
++ 0.5   0
++ 0.5   24
++ 0.6   24
++ 0.6   0
++ 1.2   0
++ 1.2   24
++ 1.5   24
++ 1.5   0
++ 2.0   0
++ 2.0   24
++ 2.05  24
++ 2.05  0
++ 2.8   0
++ 2.8   24
++ 3.3   24
++ 3.3   0
++ 4.0   0)
+
+*--------------------------------------------------------------
+* 555 TIMER — MINIMUM PULSE WIDTH GENERATOR
+*--------------------------------------------------------------
+* Ensures every thruster firing lasts at least 80ms, even if the
+* hand controller switch is released sooner. This prevents
+* fuel-wasting micro-pulses that produce negligible thrust.
+*
+* Configuration: monostable (one-shot)
+* Minimum pulse width: T = 1.1 × R_timing × C_timing
+*   = 1.1 × 68K × 1µF = 74.8ms ≈ 80ms
+*
+* NE555 modeled as behavioral blocks:
+
+* Trigger detector: fires when input goes high
+* (In real 555, trigger is active-low; we invert for clarity)
+R_trig_in  hand_in  trig_point  10k
+C_trig  trig_point  0  10n
+
+* Timing network
+R_timing  vcc  timing_cap_top  68k
+C_timing  timing_cap_top  0  1u IC=0
+
+* Discharge transistor (models 555 internal discharge)
+* When output is LOW: capacitor is held discharged
+* When triggered: capacitor charges through R_timing
+B_discharge  timing_cap_top  0  I = V(timer_output) < 12 ? V(timing_cap_top)/100 : 0
+
+* Threshold comparator: output goes LOW when cap reaches 2/3 VCC (16V)
+* Set-Reset behavior modeled as behavioral source
+B_timer  timer_output  0  V = (V(hand_in) > 12 | V(timing_cap_top) < 16) ? 24 : 0
+
+* The actual output: OR of hand controller and 555 minimum pulse
+B_thruster_cmd  thruster_cmd  0  V = (V(hand_in) > 12 | (V(timer_output) > 12 & V(timing_cap_top) < 16)) ? 24 : 0
+
+*--------------------------------------------------------------
+* RATE GYRO FEEDBACK
+*--------------------------------------------------------------
+* Simulates angular rate sensing.
+* When the capsule is rotating too fast (>2 deg/s), the rate
+* limiter inhibits further thruster firing in that direction.
+*
+* Rate signal: simulated as slowly varying voltage representing
+* the capsule's angular rate response to thruster firings.
+* Each firing adds angular momentum; damping is near zero in space.
+
+* Simple integrator: thruster impulse → angular rate
+R_rate_sense  thruster_cmd  rate_node  100k
+C_rate_int    rate_node     0  10u IC=0
+R_rate_decay  rate_node     0  1Meg  ; Very slow natural decay (no air in space)
+
+* Rate limit comparator
+* Inhibit firing if angular rate exceeds limit (simulated as voltage threshold)
+V_rate_limit  rate_threshold  0  DC 8   ; Corresponds to ~2 deg/s rate limit
+
+B_rate_ok  rate_ok  0  V = V(rate_node) < V(rate_threshold) ? 24 : 0
+
+*--------------------------------------------------------------
+* SOLENOID DRIVER — MOSFET SWITCH
+*--------------------------------------------------------------
+* The final stage: MOSFET drives the solenoid valve.
+* Only fires if both thruster command is active AND rate limit not exceeded.
+
+* AND gate: thruster_cmd AND rate_ok
+B_fire_cmd  fire_cmd  0  V = (V(thruster_cmd) > 12 & V(rate_ok) > 12) ? 24 : 0
+
+* Gate drive resistor
+R_gate_drive  fire_cmd  mosfet_gate  100
+
+* N-channel power MOSFET
+M_driver  sol_drain  mosfet_gate  0  0  NMOS_POWER
+
+* Solenoid coil (H2O2 valve actuator)
+* Typical solenoid: 50 ohm coil, 10mH inductance
+R_coil  vcc  sol_drain  50
+L_coil  sol_drain  sol_coil_mid  10m
+
+* Flyback diode (protects MOSFET from inductive voltage spike)
+D_flyback  0  sol_coil_mid  D_FLYBACK
+
+* Current sense resistor (for monitoring)
+R_sense  sol_coil_mid  0  1
+
+*--------------------------------------------------------------
+* THRUSTER ACTIVITY LED
+*--------------------------------------------------------------
+* Visual indicator of thruster firing
+R_led  vcc  led_anode  1k
+D_led  led_anode  sol_drain  D_LED
+
+*--------------------------------------------------------------
+* MODELS
+*--------------------------------------------------------------
+.model NMOS_POWER NMOS(VTO=3 KP=2.0 LAMBDA=0.01)
+.model D_FLYBACK D(IS=1e-14 N=1 BV=200 RS=0.5)
+.model D_LED D(IS=1e-20 N=2 BV=5 RS=5)
+
+*--------------------------------------------------------------
+* SIMULATION
+*--------------------------------------------------------------
+.tran 0.1m 4.5
+
+*--------------------------------------------------------------
+* OUTPUT
+*--------------------------------------------------------------
+.control
+  run
+
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  * Plot 1: Hand controller vs thruster command (showing 555 extension)
+  hardcopy thruster_timing.png v(hand_in) v(thruster_cmd) v(fire_cmd)
+  + title 'Attitude Thruster Timing: Hand Controller → 555 Min Pulse → Fire Command'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 2: Solenoid current (actual thruster activity)
+  hardcopy thruster_current.png v(sol_drain) v(0,sol_coil_mid)
+  + title 'Solenoid Valve Drive: Voltage and Current'
+  + xlabel 'Time (s)' ylabel 'V / A'
+
+  * Plot 3: Rate gyro feedback
+  hardcopy rate_feedback.png v(rate_node) v(rate_threshold) v(rate_ok)
+  + title 'Angular Rate Feedback — Rate Limiter'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 4: 555 timer capacitor (minimum pulse generation)
+  hardcopy timer_cap.png v(timing_cap_top) v(timer_output)
+  + title '555 Timer: Capacitor Charge and Output'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Measurements
+  echo ""
+  echo "=== FREEDOM 7 ATTITUDE THRUSTER ANALYSIS ==="
+  echo ""
+  echo "Hand controller pulse widths:"
+  echo "  Pulse 1: 100ms (pitch)"
+  echo "  Pulse 2: 300ms (yaw)"
+  echo "  Pulse 3: 50ms (too short — 555 extends to ~80ms)"
+  echo "  Pulse 4: 500ms (sustained roll)"
+  echo ""
+  echo "555 minimum pulse: 1.1 × 68KΩ × 1µF = 74.8ms"
+  echo ""
+  echo "Solenoid current during firing:"
+  meas tran i_fire1 MAX i(R_sense) from=0.5 to=0.6
+  meas tran i_fire2 MAX i(R_sense) from=1.2 to=1.5
+  echo ""
+  echo "Rate buildup after firings:"
+  meas tran rate_after_1 FIND v(rate_node) AT=0.7
+  meas tran rate_after_2 FIND v(rate_node) AT=1.6
+  meas tran rate_after_3 FIND v(rate_node) AT=2.2
+  meas tran rate_after_4 FIND v(rate_node) AT=3.5
+  echo ""
+  echo "Shepard tested all three control modes during his"
+  echo "5 minutes of weightlessness: manual, fly-by-wire, and ASCS."
+  echo "Manual control worked. The hand controller produced"
+  echo "the expected attitude changes. The human could fly."
+
+  quit
+.endc
+
+.end

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research: Mercury-Redstone 3 — The Leap | v1.19 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #050808; --bio-mid: #0A1418;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --freedom-blue: #2870C0; --freedom-dim: #143860;
+    --falcon-gold: #C8A028; --falcon-dim: #644E14;
+    --salamander-brown: #886830; --salamander-dim: #443418;
+    --stream-teal: #308078; --space: #050510;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2428;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--space);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(200,160,40,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(136,104,48,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(200,160,40,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .breadcrumb {
+    max-width: 1400px; margin: 0 auto; padding: 1rem 2rem;
+    font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 25%, var(--bio-mid) 50%, var(--freedom-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mercury-silver);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem;
+  }
+
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+
+  h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--falcon-gold);
+    margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver);
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--falcon-gold); }
+  em { color: var(--salamander-brown); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+
+  a { color: var(--mercury-silver); text-decoration: none; }
+  a:hover { color: #fff; }
+
+  blockquote {
+    border-left: 3px solid var(--freedom-dim); padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(5,5,16,0.4); border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-dim); line-height: 1.8;
+  }
+
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  .sources {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-top: 2rem;
+  }
+  .sources h2 { margin-top: 0; }
+  .sources h3 { font-size: 1rem; color: var(--mercury-silver); margin-top: 1.5rem; }
+  .sources li { font-size: 0.85rem; line-height: 1.6; margin-bottom: 0.6rem; color: var(--text-dim); }
+
+  .nav-card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.19 Mercury-Redstone 3</a>
+  <span class="sep">/</span>
+  Track 1a: Deep Research
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.19</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 1a</span>
+    </div>
+    <h1>Deep Research: The Leap</h1>
+    <p class="subtitle">Mercury-Redstone 3 / Freedom 7 &mdash; Alan Shepard, first American in space</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> May 5, 1961</span>
+      <span><span class="label">Program:</span> Mercury (NASA / McDonnell Aircraft / Space Task Group)</span>
+      <span><span class="label">Crew:</span> Alan Bartlett Shepard Jr.</span>
+      <span><span class="label">Dedication:</span> S&oslash;ren Kierkegaard</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>The Selection</h2>
+
+    <p>In late 1958 and early 1959, seven military test pilots were selected for Project Mercury &mdash; the United States&rsquo; first human spaceflight program. They were Scott Carpenter, Gordon Cooper, John Glenn, Gus Grissom, Wally Schirra, Alan Shepard, and Deke Slayton. The Mercury Seven. The press called them astronauts. They called themselves pilots. They had been chosen from a pool of 508 candidates, winnowed through medical examinations that were as inventive as they were invasive, psychological evaluations that bordered on harassment, and engineering interviews that sought a specific and paradoxical combination: a man calm enough to sit in a capsule while someone else flew it, and aggressive enough to take control if nobody else could.</p>
+
+    <p>The question of who would fly first was not decided at selection. It was decided later, quietly, by Robert R. Gilruth, director of NASA&rsquo;s Space Task Group at Langley Research Center in Hampton, Virginia. Gilruth was a methodical man &mdash; an aeronautical engineer by training, a wind tunnel researcher by career, a manager by necessity. He had been given the task of putting a human being into space before the Soviets, and the question of who that human being would be was, in his assessment, a question of engineering and temperament, not politics or seniority or the preferences of the press.</p>
+
+    <p>By early 1961, the field had narrowed to three: Shepard, Glenn, and Grissom. <strong>John Glenn</strong> was the most publicly visible &mdash; a decorated Marine pilot, a combat veteran, a man who had set a transcontinental speed record in 1957, a natural in front of cameras. Glenn was the obvious choice if the choice were being made by the public affairs office. He was also, by several accounts, the choice that the other astronauts least expected Gilruth to make.</p>
+
+    <p><strong>Gus Grissom</strong> was the quietest of the three. A mechanical engineering graduate from Purdue, a veteran of 100 combat missions in Korea flying F-86 Sabres, Grissom was technically gifted, laconic, and uninterested in the public relations dimension of the astronaut role. If the choice were being made by the engineering staff, Grissom would have been a strong candidate.</p>
+
+    <p><strong>Alan Bartlett Shepard Jr.</strong> was neither the most public nor the most quiet. He was the most competitive. A Navy test pilot out of Pax River &mdash; the Navy&rsquo;s equivalent of Edwards Air Force Base &mdash; Shepard had logged over 8,000 hours of flight time, much of it in experimental aircraft. He was intensely intelligent, intensely ambitious, intensely aware of his own skills, and intensely interested in being first. He was also difficult. Where Glenn was warm to strangers and prickly to peers, Shepard was cool to everyone and warm to almost no one. He had a sharp tongue, a competitive edge that other pilots found exhausting, and an ice-water confidence that could read as arrogance. He was, by most internal assessments, the best pilot of the seven. He was also the one most likely to tell you so.</p>
+
+    <p>On January 19, 1961, Gilruth called the three finalists into his office and told them the order: <strong>Shepard first, Grissom second, Glenn third</strong>. The selection was not announced publicly. The logic of the secrecy was partly security &mdash; if the flight failed, the press would not have spent weeks profiling the man who died &mdash; and partly political, allowing NASA flexibility to change the order. The secrecy held for months. Shepard knew he was first, Glenn knew he was third, and the space between those facts was a silence that both men carried differently.</p>
+
+    <hr>
+
+    <h2>The Delays</h2>
+
+    <p>The Redstone booster and Mercury capsule had been through a development test series that included its own catalog of problems &mdash; MR-1, launched on November 21, 1960, had risen <strong>four inches</strong> off the pad before the engine cut off and the capsule settled back down, in what became known as the &ldquo;four-inch flight.&rdquo; The escape tower fired. The capsule stayed on the rocket. The drogue chute deployed from the capsule on the pad. The main chute followed. It was a perfect sequence of pyrotechnic events triggered by a premature shutdown caused by a small electrical plug disconnecting in the wrong order.</p>
+
+    <p>MR-1A corrected the problem and flew successfully. MR-2 followed on January 31, 1961, carrying Ham the chimpanzee. Ham&rsquo;s flight was successful but not smooth &mdash; the Redstone over-performed, giving Ham a peak g-force of 14.7 instead of the expected 11. Mercury-Redstone Booster Development (MR-BD) launched March 24, 1961 and flew nominal. The path to a crewed launch was clear.</p>
+
+    <p>Then, on April 12, 1961, <strong>Yuri Alexeyevich Gagarin</strong> launched from Baikonur aboard Vostok 1 and orbited the Earth. One orbit. 108 minutes. The first human being in space. The United States was second.</p>
+
+    <p>NASA pushed MR-3 forward. May 2: scrubbed, weather. May 4: scrubbed again. Shepard had been through the entire suit-up and insertion process twice, had lain on his back in the capsule for hours waiting for a countdown that never reached zero. The launch was rescheduled for May 5.</p>
+
+    <hr>
+
+    <h2>Light This Candle</h2>
+
+    <p>May 5, 1961. Cape Canaveral, Florida. Launch Complex 5. Alan Shepard had been awake since 1:10 AM. He ate a breakfast of steak, eggs, and orange juice &mdash; the traditional test pilot breakfast. He was sealed inside Freedom 7 at 5:15 AM. The countdown held. And held again. Power supply inverter replacement. Weather observations. The countdown clock stopped and started and stopped.</p>
+
+    <p>Shepard had been in the capsule for over three hours. The Mercury capsule had no provision for urination. Nobody had planned for a three-hour-plus wait before a fifteen-minute flight. Shepard needed to urinate. He told Mercury Control. Mercury Control told him to hold it. He said he could not. The medical team decided to power down the biosensors briefly. Shepard urinated in his suit. The sensors were powered back up. <em>The first American in space launched wet.</em></p>
+
+    <p>Another hold was called. Shepard, who had been in the capsule for over four hours, who had urinated in his pressure suit, who had been through two prior launch scrubs, who had watched Gagarin fly three weeks earlier &mdash; Shepard keyed his microphone and said: <strong>&ldquo;Why don&rsquo;t you fix your little problem and light this candle?&rdquo;</strong></p>
+
+    <p>At 9:34 AM Eastern Standard Time, the Redstone&rsquo;s A-7 engine ignited. <em>&ldquo;Roger, liftoff, and the clock is started,&rdquo;</em> Shepard reported. America&rsquo;s first manned spaceflight had begun.</p>
+
+    <hr>
+
+    <h2>Fifteen Minutes and Twenty-Eight Seconds</h2>
+
+    <p>The A-7 engine burned for 142 seconds, accelerating the capsule to <strong>2,294 m/s</strong> &mdash; Mach 6.8. The capsule followed a ballistic arc to a peak altitude of <strong>187.5 km</strong>. The flight was suborbital. Freedom 7 would not circle the Earth. It would rise, arc over, and fall back into the Atlantic Ocean approximately 486 km downrange.</p>
+
+    <p>Shepard had approximately five minutes of weightlessness. He used them. He tested the <strong>manual attitude control system</strong> &mdash; pitch, yaw, roll. Each axis responded correctly. The hydrogen peroxide thrusters fired when he commanded them. This was the primary test objective: could a human pilot manually control a spacecraft in the space environment? The answer was yes.</p>
+
+    <p>He looked through the periscope. <em>&ldquo;What a beautiful view,&rdquo;</em> he reported. He could see the coast of Florida, the Bahamas, Lake Okeechobee.</p>
+
+    <p>The retrorockets fired. Freedom 7 turned heat-shield-forward and dropped into the atmosphere. Shepard experienced a maximum of <strong>11.6g</strong> during reentry. His vision narrowed. His chest compressed. He continued to report instrument readings. At 11.6g, he was still flying the spacecraft.</p>
+
+    <p>The main parachute deployed at approximately 3,000 meters. Freedom 7 splashed down at 9:49 AM, approximately 8 km from the USS Lake Champlain. A helicopter reached the capsule within minutes. Shepard was standing on the carrier deck at 9:57 AM &mdash; eight minutes after splashdown. He was smiling. He was wet. He was the first American in space.</p>
+
+    <hr>
+
+    <h2>The Nation Watches</h2>
+
+    <p><strong>Forty-five million Americans</strong> watched the launch live on television. Unlike Gagarin&rsquo;s flight &mdash; announced by the Soviet Union only after he had landed &mdash; Shepard&rsquo;s flight was broadcast in real time. If the rocket exploded, forty-five million people would watch it explode. NASA and the Kennedy administration made the deliberate decision to launch in the open.</p>
+
+    <p>Twenty days after Shepard&rsquo;s flight, on May 25, 1961, <strong>President Kennedy</strong> addressed a joint session of Congress: <em>&ldquo;I believe that this nation should commit itself to achieving the goal, before this decade is out, of landing a man on the Moon and returning him safely to the Earth.&rdquo;</em> Kennedy made the speech twenty days after a fifteen-minute suborbital hop. Shepard&rsquo;s fifteen minutes were worth twenty billion Apollo dollars.</p>
+
+    <hr>
+
+    <h2>Freedom 7</h2>
+
+    <p>Shepard named his capsule <strong>Freedom 7</strong>. The Mercury astronauts were permitted to name their spacecraft, and each who flew chose a name with a &ldquo;7&rdquo; suffix &mdash; honoring all seven members of the Mercury team. The name &ldquo;Freedom&rdquo; was not casual. The Cold War was not a metaphor. Gagarin flew for the Soviet Union. Shepard flew for the United States. The capsule&rsquo;s name was a statement about what the United States represented in the competition.</p>
+
+    <p>The word also carried a personal meaning. Freedom, for a test pilot, is the condition of flight &mdash; the moment when the wheels leave the runway and the pilot is operating in an environment where competence matters more than rank, where the machine either works or it doesn&rsquo;t and the pilot either flies it or he doesn&rsquo;t.</p>
+
+    <hr>
+
+    <h2>The Long Grounding</h2>
+
+    <p>In 1963, Shepard was diagnosed with <strong>Meni&egrave;re&rsquo;s disease</strong> &mdash; a condition of the inner ear causing vertigo, hearing loss, and tinnitus. For a pilot, it is disqualifying. Shepard was grounded. He spent five years watching other astronauts fly the missions he had expected to fly.</p>
+
+    <p>In 1968, he underwent an experimental surgical procedure &mdash; an endolymphatic shunt, performed by Dr. William House under the alias &ldquo;Victor Poulos&rdquo; &mdash; to keep it out of the press until he knew whether it worked. It worked. In May 1969, Shepard was restored to full flight status at age forty-six.</p>
+
+    <hr>
+
+    <h2>Apollo 14</h2>
+
+    <p>Shepard lobbied for and received command of <strong>Apollo 14</strong> &mdash; the third lunar landing, launched January 31, 1971. Ten years after his fifteen-minute suborbital flight, Shepard stood on the surface of the Moon. He and Edgar Mitchell spent 33 hours on the lunar surface, conducting two EVAs totaling 9 hours and 17 minutes. They collected 42.8 kg of lunar samples.</p>
+
+    <p>And then Shepard hit golf balls. He had brought a modified six-iron head and two golf balls. On live television, standing on the Moon, he hit two golf balls. It was the most Shepard act in the history of the space program.</p>
+
+    <p>Shepard was the <strong>only Mercury astronaut to walk on the Moon</strong>. The distance between Freedom 7 and Apollo 14 &mdash; technically, philosophically, and biographically &mdash; is the distance between the first step and the destination. Shepard took both.</p>
+
+    <p>Alan Bartlett Shepard Jr. died on July 21, 1998, in Monterey, California, at the age of 74. His ashes were spread into the Pacific Ocean.</p>
+
+    <hr>
+
+    <h2>The Kierkegaard Resonance</h2>
+
+    <p>S&oslash;ren Aabye Kierkegaard was born on <strong>May 5, 1813</strong>, in Copenhagen &mdash; the same calendar date, 148 years earlier, that Shepard launched. He is generally regarded as the first existentialist philosopher.</p>
+
+    <p>Kierkegaard&rsquo;s central concern was the nature of individual choice under uncertainty. The &ldquo;leap of faith&rdquo; is the paradigmatic case: the decision to commit to a path that cannot be guaranteed, to act when the outcome is unknown. Shepard&rsquo;s flight was a leap in Kierkegaard&rsquo;s sense. He did not know the rocket would work. He believed it would work. He chose to act on that belief. The gap between evidence and action was fifteen minutes and twenty-eight seconds wide, and Shepard crossed it at Mach 6.8.</p>
+
+    <p>Kierkegaard called anxiety <em>&ldquo;the dizziness of freedom&rdquo;</em> &mdash; the awareness of possibility itself, the vertigo from realizing you could jump, that you are free to jump, that nothing prevents you except your own choice. Shepard, lying on his back during the four-hour wait, was at the boundary. Multiple futures were real. The dizziness of freedom is the condition of the astronaut on the pad before ignition.</p>
+
+    <p><strong>&ldquo;Light this candle&rdquo;</strong> is the colloquial form of Kierkegaard&rsquo;s leap. Enough analysis, enough delay, enough waiting for certainty that will never arrive. Ignite the engine. Accept the outcome. Go.</p>
+
+    <div class="sources">
+      <h2>Sources</h2>
+
+      <h3>Primary Sources</h3>
+      <ul>
+        <li><strong>Swenson, Loyd S. Jr.; Grimwood, James M.; and Alexander, Charles C. &ldquo;This New Ocean: A History of Project Mercury.&rdquo;</strong> NASA SP-4201, 1966. The official NASA history of Project Mercury.</li>
+        <li><strong>&ldquo;Results of the First United States Manned Suborbital Space Flight.&rdquo;</strong> NASA / Manned Spacecraft Center, June 6, 1961. The primary MR-3 mission report with complete flight data.</li>
+        <li><strong>Grimwood, James M. &ldquo;Project Mercury: A Chronology.&rdquo;</strong> NASA SP-4001, 1963. Day-by-day chronology documenting MR-3 events.</li>
+      </ul>
+
+      <h3>Secondary Sources</h3>
+      <ul>
+        <li><strong>Shepard, Alan; and Slayton, Deke. &ldquo;Moon Shot: The Inside Story of America&rsquo;s Race to the Moon.&rdquo;</strong> Turner Publishing, 1994.</li>
+        <li><strong>Wolfe, Tom. &ldquo;The Right Stuff.&rdquo;</strong> Farrar, Straus and Giroux, 1979.</li>
+        <li><strong>Thompson, Neal. &ldquo;Light This Candle: The Life and Times of Alan Shepard.&rdquo;</strong> Crown Publishers, 2004.</li>
+        <li><strong>Kraft, Chris. &ldquo;Flight: My Life in Mission Control.&rdquo;</strong> Dutton, 2001.</li>
+        <li><strong>Siddiqui, Asif A. &ldquo;Challenge to Apollo.&rdquo;</strong> NASA SP-2000-4408, 2000.</li>
+      </ul>
+
+      <h3>Dedication Sources</h3>
+      <ul>
+        <li><strong>Kierkegaard, S&oslash;ren. &ldquo;The Concept of Anxiety.&rdquo;</strong> Reitzel, Copenhagen, 1844.</li>
+        <li><strong>Kierkegaard, S&oslash;ren. &ldquo;Either/Or.&rdquo;</strong> Reitzel, Copenhagen, 1843.</li>
+        <li><strong>Kierkegaard, S&oslash;ren. &ldquo;Fear and Trembling.&rdquo;</strong> Reitzel, Copenhagen, 1843.</li>
+        <li><strong>Hannay, Alastair. &ldquo;Kierkegaard: A Biography.&rdquo;</strong> Cambridge University Press, 2001.</li>
+      </ul>
+
+      <h3>Datasets</h3>
+      <ul>
+        <li><strong>NASA NSSDC Master Catalog &mdash; Mercury-Redstone 3.</strong> NSSDCA ID: 1961-012A. Mission parameters, trajectory data, vehicle specifications.</li>
+        <li><strong>JPL HORIZONS System.</strong> Trajectory verification for the MR-3 ballistic arc.</li>
+        <li><strong>Jonathan McDowell&rsquo;s Launch Vehicle Database.</strong> Redstone booster serial numbers and flight performance data.</li>
+        <li><strong>Smithsonian National Air and Space Museum.</strong> Freedom 7 archival records and post-flight inspection data.</li>
+      </ul>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Landing Page</div>
+        <a href="index.html">&larr; v1.19 Overview</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="organism.html">Track 2: Organism &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.19 Track 1a: Deep Research &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

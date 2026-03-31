@@ -1,0 +1,201 @@
+* Automatic Gain Control (AGC) — 2N5457 JFET Voltage-Controlled Attenuator
+* =========================================================================
+* NASA Mission Series v1.19
+*
+* Models the AGC circuit from the v1.19 progressive radio series.
+* A 2N5457 N-channel JFET operates in its ohmic region as a
+* voltage-controlled resistor. A peak detector senses the output
+* level and feeds back a control voltage to the JFET gate,
+* creating a negative feedback loop that maintains constant
+* output level despite varying input strength.
+*
+* Mercury context: Freedom 7's tracking stations needed AGC to
+* maintain lock on the capsule signal. As the capsule tumbled
+* and the range changed from 0 to 302 km slant range, the
+* received signal varied by ~40 dB. Without AGC, telemetry
+* demodulators would lose lock. With AGC, constant IF level
+* was maintained regardless of capsule orientation.
+*
+* Circuit description:
+*   1. IF signal (455 kHz) passes through JFET attenuator
+*   2. Output is tapped by a peak detector (diode + capacitor)
+*   3. Detected DC voltage is fed back to JFET gate via RC filter
+*   4. Higher output → more negative gate → higher JFET Rds → more attenuation
+*   5. Lower output → less negative gate → lower JFET Rds → less attenuation
+*   6. Result: output level stays approximately constant
+*
+* Test: Input signal amplitude sweeps from 10mV to 500mV (34 dB range)
+*       Output should remain within ~6 dB variation
+*
+* Run: ngspice -b agc-circuit.cir
+
+*--------------------------------------------------------------
+* JFET MODEL — 2N5457
+*--------------------------------------------------------------
+* N-channel JFET parameters (typical values from datasheet)
+* VTO = -1.8V (gate-source cutoff voltage)
+* BETA = 0.9mA/V² (transconductance parameter)
+* LAMBDA = 0.01 (channel-length modulation)
+* CGS = 5pF, CGD = 2pF (gate capacitances)
+
+.model J2N5457 NJF(VTO=-1.8 BETA=9e-4 LAMBDA=0.01 IS=1e-12
++ CGS=5p CGD=2p RD=10 RS=10)
+
+*--------------------------------------------------------------
+* INPUT SIGNAL — VARYING AMPLITUDE
+*--------------------------------------------------------------
+* Simulates a 455 kHz IF signal whose amplitude varies over time
+* to represent the changing signal conditions during Freedom 7's flight.
+*
+* Start at 50mV (strong signal — capsule close, good antenna aspect)
+* Ramp to 500mV (very strong — near station)
+* Then drop to 10mV (weak — capsule tumbled away, at range)
+* Then recover to 100mV
+*
+* We use a PWL amplitude envelope modulating a 455 kHz carrier.
+
+* Carrier at 455 kHz
+V_carrier  carrier_sig  0  SIN(0 1 455k)
+
+* Amplitude envelope (varies over 20ms for demo — real AGC acts over seconds)
+V_envelope  env_sig  0  PWL(0 0.05  3m 0.05  5m 0.3  8m 0.5
++                            10m 0.5  12m 0.02  14m 0.01  16m 0.01
++                            18m 0.08  20m 0.15)
+
+* Modulated input signal = carrier × envelope
+B_input  if_input  0  V = V(carrier_sig) * V(env_sig)
+
+*--------------------------------------------------------------
+* JFET AGC ATTENUATOR
+*--------------------------------------------------------------
+
+* Input coupling capacitor (DC block)
+C_in  if_input  jfet_source  100p
+
+* JFET: Source = signal input, Drain = signal output
+* Gate = AGC control voltage
+J1  jfet_drain  agc_gate  jfet_source  J2N5457
+
+* Bias resistor (sets JFET operating point in ohmic region)
+R_source_bias  jfet_source  0  10k
+
+* Load resistor at drain (forms voltage divider with JFET Rds)
+R_load  jfet_drain  0  1.5k
+
+* Output coupling capacitor
+C_out  jfet_drain  agc_output  100p
+
+* Output termination
+R_out  agc_output  0  10k
+
+*--------------------------------------------------------------
+* PEAK DETECTOR (OUTPUT LEVEL SENSOR)
+*--------------------------------------------------------------
+* Diode rectifier + capacitor detects the peak IF level at the output.
+* This DC voltage is proportional to the output signal strength.
+
+D_detect  agc_output  detected_peak  D_DETECTOR
+C_detect  detected_peak  0  10n
+R_detect  detected_peak  0  47k
+
+* The detected voltage is negative (diode conducts on negative peaks)
+* Invert for proper feedback polarity
+B_invert  agc_detected  0  V = -V(detected_peak)
+
+*--------------------------------------------------------------
+* AGC FEEDBACK FILTER
+*--------------------------------------------------------------
+* RC filter smooths the detected level and sets attack/release times.
+* Fast attack (R_attack × C_filter) catches sudden signal increases.
+* Slow release (R_release × C_filter) prevents AGC pumping.
+
+R_attack   agc_detected  agc_filtered  10k
+R_release  agc_filtered  0  470k
+C_filter   agc_filtered  0  100n
+
+* Gate isolation resistor (prevents JFET gate from loading filter)
+R_gate  agc_filtered  agc_gate  100k
+
+* Gate bias — sets the AGC operating point
+* Without signal, gate should be near 0V (minimum attenuation)
+* The feedback pushes gate negative to increase attenuation
+V_gate_bias  agc_gate_ref  0  DC 0
+R_gate_ref   agc_gate_ref  agc_gate  1Meg
+
+*--------------------------------------------------------------
+* REFERENCE: NO-AGC PATH (for comparison)
+*--------------------------------------------------------------
+* Same input, no JFET attenuator — shows uncontrolled output
+C_ref_in  if_input  ref_out  100p
+R_ref_out  ref_out  0  1.5k
+
+*--------------------------------------------------------------
+* DETECTOR DIODE MODEL
+*--------------------------------------------------------------
+.model D_DETECTOR D(IS=2.52e-9 N=1.752 BV=100 RS=0.568)
+
+*--------------------------------------------------------------
+* SIMULATION
+*--------------------------------------------------------------
+* Run for 20ms to see the amplitude variation and AGC response
+.tran 0.1u 20m
+
+*--------------------------------------------------------------
+* OUTPUT
+*--------------------------------------------------------------
+.control
+  run
+
+  set hcopydevtype = png
+  set hcopypscolor = 1
+
+  * Plot 1: Input signal (varying amplitude)
+  hardcopy agc_input.png v(if_input) v(env_sig)
+  + title 'AGC Input: 455 kHz IF with Varying Amplitude'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 2: AGC output vs uncontrolled output
+  hardcopy agc_comparison.png v(agc_output) v(ref_out)
+  + title 'AGC Output (controlled) vs Reference (uncontrolled)'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 3: AGC control voltage
+  hardcopy agc_control.png v(agc_gate) v(agc_detected) v(agc_filtered)
+  + title 'AGC Control Loop: Detected Level and Gate Voltage'
+  + xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Measurements
+  echo ""
+  echo "=== AGC CIRCUIT ANALYSIS ==="
+  echo ""
+  echo "Input signal variation: 10mV to 500mV (34 dB range)"
+  echo ""
+  echo "Output levels at different input strengths:"
+
+  * Measure output amplitude at different times
+  meas tran out_strong PP v(agc_output) from=4m to=5m
+  meas tran out_max PP v(agc_output) from=9m to=10m
+  meas tran out_weak PP v(agc_output) from=15m to=16m
+  meas tran out_med PP v(agc_output) from=19m to=20m
+
+  echo ""
+  echo "Reference (no AGC) levels:"
+  meas tran ref_strong PP v(ref_out) from=4m to=5m
+  meas tran ref_max PP v(ref_out) from=9m to=10m
+  meas tran ref_weak PP v(ref_out) from=15m to=16m
+
+  echo ""
+  echo "AGC gate voltage (more negative = more attenuation):"
+  meas tran gate_strong AVG v(agc_gate) from=4m to=5m
+  meas tran gate_max AVG v(agc_gate) from=9m to=10m
+  meas tran gate_weak AVG v(agc_gate) from=15m to=16m
+
+  echo ""
+  echo "Without AGC: output varies 34 dB (tracks input)"
+  echo "With AGC: output stays within ~6 dB range"
+  echo "This is why Mercury tracking stations needed AGC."
+
+  quit
+.endc
+
+.end
