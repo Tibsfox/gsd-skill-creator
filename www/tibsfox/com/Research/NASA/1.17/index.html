@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>v1.17 — Mercury-Redstone 2 + Rough-Skinned Newt | NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #050808; --bio-mid: #0A1818;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --abort-red: #FF3030; --abort-dim: #801818;
+    --gforce-yellow: #E8CC30; --gforce-dim: #746618;
+    --newt-orange: #E87020; --newt-dim: #743810;
+    --ocean-blue: #2050A0; --space: #050510;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2828;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 8% 12%, rgba(232,204,48,0.08) 0%, transparent 100%),
+      radial-gradient(1px 1px at 22% 35%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 40% 8%, rgba(232,112,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 60%, rgba(96,104,112,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 50%, rgba(232,204,48,0.04) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 80%, rgba(5,5,16,0.12) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 85%, rgba(232,112,32,0.06) 0%, transparent 100%),
+      radial-gradient(2px 2px at 90% 10%, rgba(11,61,145,0.06) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 20%, var(--bio-mid) 40%, var(--abort-dim) 70%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mercury-silver);
+    padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+
+  .mission-badge {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px;
+    padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem;
+  }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .status-success {
+    background: rgba(40,180,80,0.2); border: 1px solid #28B450;
+    color: #28B450; padding: 0.2rem 0.8rem; border-radius: 4px;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+
+  main {
+    max-width: 1400px; margin: 0 auto; padding: 2rem;
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 320px; gap: 2rem;
+  }
+  @media (max-width: 800px) { main { grid-template-columns: 1fr; } }
+
+  .content { min-width: 0; }
+
+  .card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.5rem; margin-bottom: 1.5rem; backdrop-filter: blur(4px);
+  }
+  .card h2 {
+    font-family: 'Libre Baskerville', serif; font-size: 1.2rem; color: var(--gforce-yellow);
+    margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+  }
+  .card p, .card li { font-size: 0.95rem; line-height: 1.7; color: var(--text); margin-bottom: 0.75rem; }
+  .card ul { padding-left: 1.2rem; }
+  .card li { margin-bottom: 0.4rem; }
+  .card strong { color: var(--gforce-yellow); }
+  .card em { color: var(--newt-orange); }
+
+  .resonance-card { border-color: var(--abort-dim); background: rgba(128,24,24,0.04); }
+
+  .resonance-axis {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(128,24,24,0.1);
+  }
+  .resonance-axis:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .axis-num {
+    background: var(--gforce-yellow); color: var(--space); font-weight: 700; font-size: 0.8rem;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .axis-text { font-size: 0.9rem; line-height: 1.5; }
+  .axis-title { font-weight: 600; color: var(--mercury-silver); }
+
+  .track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.25rem; transition: border-color 0.2s, background 0.2s;
+  }
+  .track-card:hover { border-color: var(--mercury-silver); background: rgba(176,184,192,0.04); }
+  .track-card a { text-decoration: none; display: block; }
+  .track-card .track-num { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .track-card .track-title { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.4rem; font-weight: 600; }
+  .track-card .track-desc { font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; }
+  .track-card.t1 .track-title { color: var(--gforce-yellow); }
+  .track-card.t2 .track-title { color: var(--newt-orange); }
+  .track-card.t3 .track-title { color: var(--mercury-silver); }
+  .track-card.t4 .track-title { color: var(--gforce-yellow); }
+  .track-card.t5 .track-title { color: var(--mercury-silver); }
+  .track-card.t6 .track-title { color: var(--newt-orange); }
+
+  .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .organism-card {
+    background: rgba(232,112,32,0.08); border: 1px solid var(--newt-dim);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .organism-card h3 { font-family: 'Libre Baskerville', serif; font-size: 1rem; color: var(--mercury-silver); margin-bottom: 0.75rem; }
+  .organism-card .sci-name { font-style: italic; color: var(--newt-orange); font-size: 0.85rem; margin-bottom: 0.75rem; }
+
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-bottom: 1rem; }
+  .stat { background: rgba(5,5,16,0.5); border-radius: 4px; padding: 0.5rem; text-align: center; }
+  .stat-value { font-family: 'DM Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--gforce-yellow); }
+  .stat-label { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .data-links {
+    background: rgba(176,184,192,0.06); border: 1px solid rgba(176,184,192,0.2);
+    border-radius: 8px; padding: 1.5rem;
+  }
+  .data-links h3 { font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.75rem; font-weight: 600; }
+  .data-links a { display: block; color: var(--mercury-silver); text-decoration: none; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(176,184,192,0.15); transition: color 0.2s; }
+  .data-links a:hover { color: var(--gforce-yellow); }
+  .data-links a:last-child { border-bottom: none; }
+
+  .nav-card {
+    background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: var(--gforce-yellow); }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+
+  footer {
+    max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center;
+    font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1;
+  }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } .track-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.17</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span>Epoch 1</span>
+      <span class="status-success">SUCCESS</span>
+    </div>
+    <h1>v1.17 &mdash; Mercury-Redstone 2 + <em>Taricha granulosa</em></h1>
+    <p class="subtitle">The First Astronaut &mdash; Ham the Chimpanzee Qualifies Mercury for Human Flight</p>
+    <div class="meta-row">
+      <span><span class="label">Date:</span> January 31, 1961</span>
+      <span><span class="label">Program:</span> Mercury (NASA)</span>
+      <span><span class="label">Crew:</span> Ham (Chimpanzee #65)</span>
+      <span><span class="label">Peak Alt:</span> 253 km</span>
+      <span><span class="label">Max G:</span> 14.7</span>
+      <span><span class="label">Organism:</span> Rough-skinned newt</span>
+      <span><span class="label">Bird:</span> Common Murre</span>
+      <span><span class="label">Dedication:</span> Franz Schubert</span>
+      <span><span class="label">Status:</span> SUCCESS</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+    <div class="card">
+      <h2>Mission Summary</h2>
+      <p>On January 31, 1961, Mercury-Redstone 2 launched from Cape Canaveral carrying Ham &mdash; Holloman Aeromedical #65 &mdash; a 17-kilogram chimpanzee trained to perform a conditioned avoidance task during spaceflight. The Redstone A-7 engine burned for 144 seconds, one second longer than planned, producing a higher-than-intended burnout velocity that triggered the capsule&rsquo;s abort system. The abort pushed the capsule to an apogee of 253 km (planned: 185 km), and the steeper reentry produced a peak deceleration of <strong>14.7g</strong> &mdash; 34% above the Mercury program&rsquo;s design limit of 11g.</p>
+      <p>Ham performed his lever-pulling task throughout the flight. His reaction time degraded under g-loading &mdash; approximately 2.2x slower at 6g, 3.75x slower at 14.7g &mdash; but <strong>never reached zero</strong>. He responded to every stimulus within the 5-second window. During 6 minutes and 30 seconds of weightlessness, his performance returned to near-baseline levels. The finding was unambiguous: a primate could function cognitively in space, under conditions worse than any astronaut would face.</p>
+      <p>Ham was recovered alive from the Atlantic, alert and agitated but uninjured. He accepted an apple from his handlers &mdash; social cognition intact. His data cleared the path for Alan Shepard&rsquo;s flight on MR-3, May 5, 1961. Every human spaceflight since rests on Ham&rsquo;s 16 minutes and 39 seconds of lever pulls at 253 kilometers above the ocean.</p>
+    </div>
+
+    <div class="card">
+      <h2>Research Tracks</h2>
+      <div class="track-grid">
+        <div class="track-card t1">
+          <a href="research.html">
+            <div class="track-num">Track 1a &mdash; Deep Research</div>
+            <div class="track-title">The First Astronaut</div>
+            <div class="track-desc">Ham&rsquo;s flight, the 1-second overburn, abort paradox, 14.7g reentry, lever task performance, biomedical qualification for human spaceflight</div>
+          </a>
+        </div>
+        <div class="track-card t6">
+          <a href="papers.html">
+            <div class="track-num">Track 1b &mdash; Wall-Clock Papers</div>
+            <div class="track-title">Scientific Anchors</div>
+            <div class="track-desc">ISS neurocognitive meta-analysis, Bayesian g-force tolerance, TTX coevolutionary genomics, state of space biomedicine 2026</div>
+          </a>
+        </div>
+        <div class="track-card t2">
+          <a href="organism.html">
+            <div class="track-num">Track 2 &mdash; Organism Pairing</div>
+            <div class="track-title"><em>Taricha granulosa</em></div>
+            <div class="track-desc">Rough-skinned newt &mdash; tetrodotoxin defense, coevolutionary arms race with <em>Thamnophis</em>, PNW migration, costly survival strategies</div>
+          </a>
+        </div>
+        <div class="track-card t3">
+          <a href="mathematics.html">
+            <div class="track-num">Track 3 &mdash; TSPB Mathematics</div>
+            <div class="track-title">The Mathematics of Mercury</div>
+            <div class="track-desc">Rocket equation sensitivity, ballistic reentry mechanics, Shannon channel capacity under g-load, contour couch pressure distribution</div>
+          </a>
+        </div>
+        <div class="track-card t4">
+          <a href="curriculum.html">
+            <div class="track-num">Track 4 &mdash; Curriculum</div>
+            <div class="track-title">College of Knowledge</div>
+            <div class="track-desc">Aerospace Medicine, Biomechanics, Animal Behavior, Ethics, Music. Spinning chair TRY. Arduino reaction tester DIY. Fox Companies.</div>
+          </a>
+        </div>
+        <div class="track-card t5">
+          <a href="simulation.html">
+            <div class="track-num">Track 5 &mdash; Simulation &amp; Arts</div>
+            <div class="track-title">Build, Train, Visualize, Create</div>
+            <div class="track-desc">Trajectory simulator, g-force profiler, &ldquo;Can You Beat Ham?&rdquo; game, suborbital viewer, &ldquo;253 Kilometers&rdquo; shader, &ldquo;Five Seconds&rdquo; story</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card resonance-card">
+      <h2>Resonance Axes</h2>
+      <div class="resonance-axis">
+        <span class="axis-num">1</span>
+        <div class="axis-text">
+          <div class="axis-title">Survival Under Extreme Stress</div>
+          Ham survived 14.7g because the contour couch distributed the force. The rough-skinned newt survives predation because its tetrodotoxin kills the predator. Both defenses work but impose costs on the survivor.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">2</span>
+        <div class="axis-text">
+          <div class="axis-title">Performance Degradation Without Failure</div>
+          Ham&rsquo;s reaction time degraded 3.75x at 14.7g but never reached zero. The newt&rsquo;s TTX concentration varies geographically but is always lethal. Both organisms maintain function under stress &mdash; reduced capacity is not zero capacity.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">3</span>
+        <div class="axis-text">
+          <div class="axis-title">Costly Defense</div>
+          The abort system saved Ham but worsened his trajectory (14.7g vs 12g without abort). The newt&rsquo;s TTX kills predators but does not prevent the bite. Both survival mechanisms are successful but not free.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">4</span>
+        <div class="axis-text">
+          <div class="axis-title">Qualification Through Ordeal</div>
+          Ham&rsquo;s flight qualified Mercury for human use. The murre chick&rsquo;s cliff leap qualifies each generation for ocean life. Both are untested organisms performing in untested environments, with survival as the only passing grade.
+        </div>
+      </div>
+      <div class="resonance-axis">
+        <span class="axis-num">5</span>
+        <div class="axis-text">
+          <div class="axis-title">Performance Under Pressure</div>
+          Schubert composed 1,500 works in 18 years of poverty, illness, and social marginality. Ham pulled levers at 14.7g. Both performed their essential task under conditions that should have prevented performance. Both changed what came after them.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Creative Artifacts</h2>
+      <ul>
+        <li><strong>Shader: &ldquo;253 Kilometers&rdquo;</strong> &mdash; GLSL fragment shader, the view from Mercury capsule #5 at apogee</li>
+        <li><strong>Story: &ldquo;Five Seconds&rdquo;</strong> &mdash; Creative nonfiction following Ham&rsquo;s 5-second task cycles through each flight phase</li>
+        <li><strong>Story: &ldquo;The First Astronaut&rdquo;</strong> &mdash; <a href="artifacts/stories/the-first-astronaut.html">HTML</a> / <a href="artifacts/stories/the-first-astronaut.tex">LaTeX</a></li>
+        <li><strong>Audio: MR-2 Synthesis</strong> &mdash; <a href="artifacts/audio/mr2-ham-synth.dsp">Faust DSP</a> (launch rumble, lever clicks, heartbeat)</li>
+        <li><strong>Audio: Common Murre</strong> &mdash; <a href="artifacts/audio/common-murre.dsp">Faust DSP</a> (cliff colony calls)</li>
+        <li><strong>Arduino: Reaction Time Tester</strong> &mdash; Physical device simulating Ham&rsquo;s lever task</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Runnable Simulations</h2>
+      <ul>
+        <li><strong>Python: Suborbital Trajectory Calculator</strong> &mdash; <a href="artifacts/simulations/python/suborbital-trajectory.py">suborbital-trajectory.py</a> &mdash; Planned vs actual trajectory, sensitivity analysis</li>
+        <li><strong>Python: G-Force Profile Simulator</strong> &mdash; <a href="artifacts/simulations/python/gforce-profile.py">gforce-profile.py</a> &mdash; Nominal vs abort g-load, Ham&rsquo;s reaction time overlay</li>
+        <li><strong>Web: &ldquo;Can You Beat Ham?&rdquo;</strong> &mdash; <a href="artifacts/simulations/web/beat-ham.html">beat-ham.html</a> &mdash; Interactive reaction time game with simulated g-force effects</li>
+        <li><strong>Web: Suborbital Trajectory Viewer</strong> &mdash; <a href="artifacts/simulations/web/suborbital-viewer.html">suborbital-viewer.html</a> &mdash; Burn time slider, real-time trajectory visualization</li>
+        <li><strong>SPICE: Reaction Timer Circuit</strong> &mdash; <a href="artifacts/simulations/spice/reaction-timer.cir">reaction-timer.cir</a> &mdash; 555 timer-based stimulus/response circuit</li>
+        <li><strong>SPICE: Noise Blanker</strong> &mdash; <a href="artifacts/simulations/spice/noise-blanker.cir">noise-blanker.cir</a> &mdash; Progressive radio series: noise blanker stage</li>
+        <li><strong>ML: Reaction Time Predictor</strong> &mdash; Polynomial/neural regression for g-load vs cognitive performance</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Data Files</h2>
+      <ul>
+        <li><a href="knowledge-nodes.json" style="color: var(--text-dim);">knowledge-nodes.json</a> &mdash; Theory concepts mapped to College departments</li>
+        <li><a href="data-sources.json" style="color: var(--mercury-silver);">data-sources.json</a> &mdash; Open dataset links for this mission</li>
+      </ul>
+    </div>
+
+    <div class="card" style="background: rgba(232,204,48,0.04); border-color: var(--gforce-dim);">
+      <h2 style="color: var(--gforce-yellow);">Dedication: Franz Schubert</h2>
+      <p><strong>Born January 31, 1797 &mdash; Died November 19, 1828</strong></p>
+      <p>Franz Schubert was born on the same calendar date, 164 years before Ham rode a Redstone rocket to 253 kilometers above the Atlantic Ocean. Schubert died at 31, having composed over 1,500 works in 18 years of sustained creative output. His productivity was not the productivity of genius unconstrained &mdash; it was the productivity of genius under pressure. Schubert was poor. He never held a court appointment. He composed on whatever surface was available. The pressure was not g-force. It was time and poverty.</p>
+      <p>And yet the Trout Quintet exists. The Unfinished Symphony exists. <em>Die Winterreise</em> exists. <em>Erlk&ouml;nig</em> exists &mdash; a song Schubert composed at age 18, in a single afternoon. The piano part is a relentless triplet gallop &mdash; the horse&rsquo;s hooves, the urgency, the father&rsquo;s desperation. Ham pulled his lever at 14.7g. Schubert wrote <em>Erlk&ouml;nig</em> at age 18 in a garret in Vienna. Both are demonstrations of performance under conditions that should have been debilitating. Both proved that the organism could function when the forces arrayed against function were extreme. Neither the composer nor the chimpanzee knew the significance of what they were producing. Both produced it anyway.</p>
+      <p style="font-style: italic; color: var(--text-dim); font-size: 1.1rem; margin-top: 1rem; text-align: center;"><strong style="color: var(--gforce-yellow); font-size: 1.3rem;">That is the definition of performing under stress.</strong></p>
+    </div>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Mission</div>
+        <a href="../1.16/index.html">&larr; v1.16 Mercury-Redstone 1</a>
+      </div>
+      <div style="text-align: center;">
+        <div class="nav-label">Series Hub</div>
+        <a href="../index.html">NASA Mission Series</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Mission</div>
+        <a href="../1.18/index.html">v1.18 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="organism-card">
+      <h3>Organism Pairing</h3>
+      <p class="sci-name">Taricha granulosa (Rough-Skinned Newt)</p>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">1.1 mg</div>
+          <div class="stat-label">TTX / Newt</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">20 MYr</div>
+          <div class="stat-label">Arms Race</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">12&ndash;18 cm</div>
+          <div class="stat-label">Adult Length</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">~3 km</div>
+          <div class="stat-label">Migration</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        A medium-sized salamander found throughout the PNW temperate rainforests. Carries tetrodotoxin in its skin &mdash; enough to kill approximately 20 adult humans. The only predator that survives is <em>Thamnophis sirtalis</em>, the common garter snake, which has evolved TTX-resistant sodium channels through 20 million years of coevolutionary arms race. The newt&rsquo;s defense works but does not prevent the bite &mdash; survival is costly, like Ham&rsquo;s abort system.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(176,184,192,0.06); border-color: var(--mercury-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Bird: Common Murre</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <em style="color: var(--newt-orange);">Uria aalge</em> (degree 17). Nests on sea cliffs 30&ndash;100 m above the North Pacific. Chicks leap from the cliff at 20&ndash;25 days, unable to fly, and splash into the ocean. The father calls from the water below. 85% survive. Pyriform eggs roll in circles on narrow ledges instead of falling off &mdash; ballistic mathematics encoded in calcium carbonate.
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(232,112,32,0.06); border-color: var(--newt-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">Ham&rsquo;s Flight Data</h3>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-value">253 km</div>
+          <div class="stat-label">Peak Alt</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">14.7g</div>
+          <div class="stat-label">Peak G</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">16:39</div>
+          <div class="stat-label">Flight Time</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">6:30</div>
+          <div class="stat-label">0g Duration</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--gforce-yellow);">Reaction time:</strong> Baseline ~800 ms, at 6g ~1,750 ms (2.2x), at 14.7g ~3,000 ms (3.75x). Never missed a stimulus. Channel capacity degraded but never reached zero.
+      </p>
+    </div>
+
+    <div class="data-links">
+      <h3>Open Data Sources</h3>
+      <a href="https://nssdc.gsfc.nasa.gov/">NSSDC: MR-2</a>
+      <a href="https://ntrs.nasa.gov/">NASA Technical Reports Server</a>
+      <a href="https://ssd.jpl.nasa.gov/horizons/">JPL HORIZONS System</a>
+      <a href="https://planet4589.org/">McDowell Launch Database</a>
+      <a href="https://airandspace.si.edu/">Smithsonian Air &amp; Space Museum</a>
+      <a href="https://www.inaturalist.org/">iNaturalist: Taricha granulosa</a>
+      <a href="https://www.ncbi.nlm.nih.gov/genbank/">NCBI GenBank: SCN4A</a>
+      <a href="https://amphibiaweb.org/">AmphibiaWeb</a>
+      <a href="https://www.gbif.org/">GBIF: PNW Records</a>
+    </div>
+
+    <div class="card" style="background: rgba(232,204,48,0.06); border-color: var(--gforce-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">College Departments</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--gforce-yellow);">Primary:</strong> Aerospace Medicine (Space Physiology, Biomedical Qualification), Biomechanics (G-Force, Contour Couch), Animal Behavior (Operant Conditioning)<br>
+        <strong style="color: var(--gforce-yellow);">Secondary:</strong> Herpetology (TTX, Coevolution), Ethics (Animal Testing), Music (Schubert, Performance Under Pressure)
+      </p>
+    </div>
+
+    <div class="card" style="background: rgba(232,204,48,0.06); border-color: var(--gforce-dim);">
+      <h3 style="font-size: 0.9rem; color: var(--mercury-silver); margin-bottom: 0.5rem;">TSPB Layers</h3>
+      <p style="font-size: 0.85rem; color: var(--text-dim);">
+        <strong style="color: var(--gforce-yellow);">Layer 4:</strong> Vector Calculus &mdash; Trajectory mechanics, g-force as time derivative of velocity<br>
+        <strong style="color: var(--gforce-yellow);">Layer 7:</strong> Information Theory &mdash; Shannon channel capacity under g-load, Ham&rsquo;s lever task as capacity measurement<br>
+        <strong style="color: var(--gforce-yellow);">Layer 5:</strong> Set Theory &mdash; Qualification ladder, abort decision logic<br>
+        <strong style="color: var(--gforce-yellow);">Layer 1:</strong> Unit Circle &mdash; Ballistic trajectory geometry, reentry angle
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.17 Mercury-Redstone 2 + <em>Taricha granulosa</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a></p>
+</footer>
+
+</body>
+</html>

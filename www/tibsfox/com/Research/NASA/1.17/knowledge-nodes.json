@@ -1,0 +1,139 @@
+{
+  "mission": "1.17",
+  "title": "Mercury-Redstone 2 (MR-2)",
+  "date": "1961-01-31",
+  "organism": "Taricha granulosa",
+  "organism_common": "Rough-skinned Newt",
+  "organism_location": "Pacific Northwest coastal forests, moist coniferous and mixed woodlands from southern Alaska to central California, under logs, rocks, and leaf litter near streams",
+  "dedication": {
+    "name": "Franz Schubert",
+    "born": "1797-01-31",
+    "died": "1828-11-19",
+    "birthplace": "Himmelpfortgrund, Vienna, Austria",
+    "field": "Classical composition, lieder, symphonies, chamber music",
+    "resonance": "Born January 31 — the exact date MR-2 launched. Died at 31 with the Unfinished Symphony (No. 8 in B minor) — two movements of a planned four, yet so complete in itself that the absence becomes part of the work. Ham's flight was also unfinished in this sense: a prelude that existed so others could complete the symphony. Schubert composed over 1,500 works in his short life; Ham performed one flight that made all subsequent flights possible."
+  },
+  "nodes": [
+    {
+      "id": "suborbital-trajectory",
+      "concept": "Suborbital trajectory — a ballistic arc that reaches space but does not achieve orbital velocity",
+      "department": "physics",
+      "level": "intermediate",
+      "tspb_layer": 4,
+      "tspb_section": "4.2",
+      "description": "A suborbital trajectory is a ballistic path where the vehicle reaches an altitude above the Karman line (100 km) but has insufficient horizontal velocity to maintain orbit. The vehicle follows a parabolic arc: powered ascent, coast to apogee, then atmospheric reentry and descent. MR-2 was planned for 185 km apogee but the abort system pushed it to 253 km. The key physics: orbital velocity at 200 km altitude is ~7.8 km/s. MR-2's maximum velocity was ~2.3 km/s — only 30% of orbital speed. This meant a steep ballistic return rather than multiple orbits. The trajectory is completely determined by burnout velocity, altitude, and flight path angle. Any deviation from planned thrust (like the abort adding extra impulse) cascades through the entire trajectory: higher velocity → higher apogee → steeper return → higher reentry g-forces.",
+      "resonance": "The rough-skinned newt's tetrodotoxin (TTX) follows a suborbital pharmacokinetics curve in predators. After ingestion, TTX concentration rises rapidly (powered ascent), peaks in target tissues (apogee), then decays through excretion (reentry). The dose-response curve is ballistic — once ingested, the trajectory is determined by the initial dose. Like MR-2's abort increasing the peak altitude, a higher TTX dose doesn't change the shape of the curve, just the peak concentration.",
+      "worked_example": {
+        "description": "Calculate MR-2's apogee from burnout conditions",
+        "parameters": {"v_burnout_ms": 2300, "alt_burnout_km": 130, "gamma_deg": 45},
+        "formula": "h_max = h_burnout + v^2 * sin^2(gamma) / (2*g)",
+        "result": "h_max = 130 + (2300^2 × sin^2(45°)) / (2 × 9.81 × 1000) ≈ 265 km (close to actual 253 km)",
+        "python": "import numpy as np\nv = 2300  # m/s burnout velocity\nh0 = 130_000  # m burnout altitude\ngamma = np.radians(45)  # flight path angle\ng = 9.81\nh_max = h0 + (v * np.sin(gamma))**2 / (2 * g)\nprint(f'Apogee: {h_max/1000:.1f} km')"
+      }
+    },
+    {
+      "id": "gforce-tolerance",
+      "concept": "G-force tolerance — the limits of biological function under sustained acceleration",
+      "department": "biology",
+      "level": "intermediate",
+      "tspb_layer": 8,
+      "tspb_section": "8.2",
+      "description": "G-force tolerance is the ability of a biological organism to maintain function under sustained acceleration. The primary limiting factor is blood circulation: under positive gz (eyeballs-down, seated upright), blood pools in the lower body, reducing cerebral perfusion. At ~5g sustained, peripheral vision narrows (grayout). At ~6-7g, complete loss of peripheral vision (tunneling) or blackout (G-LOC). At ~9g, even trained pilots with g-suits lose consciousness within seconds. Ham experienced 14.7g during MR-2 reentry — a peak that lasted approximately 30 seconds. His supine position (lying on his back, eyeballs-in) was critical: in this orientation, blood distribution is transverse rather than longitudinal, and the heart doesn't have to pump against a 14.7g gradient. Trained fighter pilots in supine position can tolerate 12-15g for brief periods. Ham's continued lever performance at these g-levels proved that cognitive function could be maintained under forces that would incapacitate an upright human.",
+      "resonance": "The rough-skinned newt's unken reflex — curling backward to expose the orange belly — is itself a postural response to stress. The curl changes the newt's body orientation relative to the threat, similar to how Ham's supine position changed his body orientation relative to the g-force vector. Both organisms adopt specific body positions that improve survival under stress: the newt's curl exposes warning coloration, Ham's supine position distributes g-forces across the body's transverse axis rather than the longitudinal axis."
+    },
+    {
+      "id": "reaction-time-measurement",
+      "concept": "Reaction time measurement — quantifying the delay between stimulus and voluntary response",
+      "department": "psychology",
+      "level": "beginner",
+      "tspb_layer": 7,
+      "tspb_section": "7.1",
+      "description": "Reaction time (RT) is the interval between the onset of a stimulus and the initiation of a voluntary response. For simple RT tasks (one stimulus, one response), human baseline is 200-250 ms. Ham's task was more complex: discriminate the blue light from other stimuli, then pull a specific lever — a choice RT task with baseline ~400 ms. Factors that increase RT: increased g-force (vestibular disruption, reduced cerebral perfusion), vibration (motor control disruption), stress (cortisol effects on prefrontal cortex), and hypoxia (reduced oxygen to neural tissue). Ham's in-flight RT of ~500 ms represented a 25% degradation from baseline — remarkably small given the extreme environment. This 100 ms increase is consistent with the combined effects of vibration and mild g-loading during powered flight. The key finding was that RT did not catastrophically increase — there was no point during flight where Ham stopped responding.",
+      "resonance": "The rough-skinned newt's unken reflex has its own reaction time: approximately 0.5-2 seconds from threat detection to full belly display. Like Ham's lever pull, the unken reflex is a trained motor response to a specific stimulus (predator approach). The newt's RT is slower than Ham's because the display doesn't need to be fast — the toxin is always present. Speed of display matters less than certainty of display.",
+      "worked_example": {
+        "description": "Calculate RT degradation under g-force",
+        "parameters": {"baseline_ms": 400, "gforce": 6.0},
+        "formula": "RT_degraded ≈ RT_baseline × (1 + k × (g - 1)); k ≈ 0.05 for moderate g",
+        "result": "RT = 400 × (1 + 0.05 × 5) = 400 × 1.25 = 500 ms",
+        "python": "baseline = 400  # ms\ng = 6.0\nk = 0.05  # degradation coefficient\nrt = baseline * (1 + k * (g - 1))\nprint(f'Baseline: {baseline} ms')\nprint(f'At {g}g: {rt:.0f} ms (+{(rt-baseline)/baseline*100:.0f}%)')"
+      }
+    },
+    {
+      "id": "abort-trajectory",
+      "concept": "Abort trajectory — the cascading consequences of an in-flight abort on trajectory parameters",
+      "department": "systems-engineering",
+      "level": "advanced",
+      "tspb_layer": 7,
+      "tspb_section": "7.3",
+      "description": "When MR-2's abort system activated at T+137 seconds, the escape rocket added approximately 5 seconds of additional thrust at 231 kN (52,000 lbf). This increased the capsule's velocity by approximately 200-300 m/s beyond the planned burnout velocity. The cascade: 15% more velocity → 37% higher apogee (253 vs 185 km) → 25% longer flight time → steeper reentry angle → 34% higher peak g-force (14.7 vs 11g). Each parameter feeds the next. The abort was triggered by two anomalies: higher-than-expected propellant consumption (the engine ran slightly fuel-rich) and a cabin pressure regulator malfunction. Neither anomaly was dangerous per se, but the abort sensing system interpreted the combination as a potential booster failure. The abort system worked exactly as designed — it detected parameters outside normal bounds and added safety margin. The cost of that safety margin was a harder ride.",
+      "resonance": "Tetrodotoxin's mechanism in the rough-skinned newt is an abort system of its own. When a predator bites the newt, TTX blocks voltage-gated sodium channels in the predator's nervous system — an abort of neural signaling. The cascade: sodium channels blocked → action potentials fail → muscles paralyze → respiration stops. Each stage follows from the previous with the same inevitability as MR-2's abort cascade. The newt's abort system, like Mercury's, works exactly as designed. The cost is the predator's life."
+    },
+    {
+      "id": "primate-physiology",
+      "concept": "Primate physiology in spaceflight — using non-human primates as human analogs for space qualification",
+      "department": "biology",
+      "level": "intermediate",
+      "tspb_layer": 8,
+      "tspb_section": "8.1",
+      "description": "Ham (Holloman Aerospace Medical Center, chimpanzee #65) was selected because chimpanzees share approximately 98.7% of human DNA and have similar cardiovascular, respiratory, and neurological systems. Critical for spaceflight qualification: similar blood pressure regulation (relevant for g-tolerance), similar visual acuity (relevant for instrument reading), similar fine motor control (relevant for switch operation), and similar cognitive capacity for learned task performance. Ham was trained at Holloman Air Force Base in New Mexico using operant conditioning: correct lever responses to light stimuli were rewarded with banana pellets; incorrect or late responses produced mild foot shock. The training took 18 months. On MR-2, Ham performed 50 lever-pull responses during the flight. His error rate was comparable to ground baseline. This data directly supported the decision to proceed with Alan Shepard's MR-3 flight 10 weeks later.",
+      "resonance": "The rough-skinned newt and the chimpanzee represent opposite strategies for survival under stress. The chimp uses learned behavior — complex, flexible, trained response to novel environments. The newt uses innate defense — tetrodotoxin that requires no learning, no training, no cognitive processing. Ham had to learn the lever. The newt was born knowing the poison. Both strategies work. The question is which one works in space."
+    },
+    {
+      "id": "capsule-qualification",
+      "concept": "Capsule qualification — the systematic process of proving a spacecraft is safe for human occupancy",
+      "department": "systems-engineering",
+      "level": "advanced",
+      "tspb_layer": 7,
+      "tspb_section": "7.4",
+      "description": "Spacecraft qualification is the process of demonstrating, through analysis and test, that every system functions correctly under all expected (and some unexpected) flight conditions. MR-2 was the final qualification flight before human occupancy. The qualification sequence for Mercury: MR-1 (unmanned, failed but informative), MR-1A (unmanned, successful), MR-2 (primate, successful with abort), then MR-BD (booster development, added after MR-2's abort to requalify the booster), then MR-3 (Shepard, first American in space). Each flight qualified specific systems: structural integrity under launch loads, thermal protection under reentry heating, life support under vacuum/temperature extremes, abort system under actual flight conditions. MR-2 qualified the most critical unknown: biological function. Until Ham flew, nobody knew whether a primate could operate controls during spaceflight.",
+      "resonance": "The rough-skinned newt's tetrodotoxin is the product of a different kind of qualification process: evolutionary arms race qualification. Over millions of years, the newt and its primary predator (Thamnophis sirtalis, the common garter snake) have co-evolved in a toxicity/resistance arms race. Each generation of snakes that survives slightly higher TTX concentrations selects for newts with slightly higher TTX production. The qualification is continuous and lethal — every generation is a flight test."
+    },
+    {
+      "id": "ballistic-range",
+      "concept": "Ballistic range — the horizontal distance traveled by a projectile following a ballistic trajectory",
+      "department": "physics",
+      "level": "beginner",
+      "tspb_layer": 4,
+      "tspb_section": "4.2",
+      "description": "Ballistic range is the horizontal distance from launch to impact for an unpowered projectile. For a flat Earth approximation: R = v^2 × sin(2θ) / g, maximized at 45 degrees launch angle. For actual suborbital flights, the spherical Earth must be considered: the curvature means the 'ground' drops away from the trajectory, extending the range. MR-2 was planned for 466 km range but actually achieved 679 km — 46% further — because the abort added velocity. The extended range required the recovery fleet to reposition, and the capsule floated for several hours before recovery because the USS Donner had to steam to the new splashdown point. During this wait, the capsule began taking on water through a leaking valve, and Ham was found sitting in several inches of seawater when the hatch was opened.",
+      "resonance": "The rough-skinned newt's TTX dispersal follows ballistic pharmacokinetics in the predator's body. After oral ingestion, TTX is absorbed through the gut lining and distributes through the bloodstream. The 'range' of the toxin — how far from the gut it reaches — depends on the initial dose (velocity) and the predator's body mass (resistance). A small predator with a large dose: the toxin's 'range' covers the entire body (lethal). A large predator with a small dose: the toxin's range is limited to local numbness (sublethal).",
+      "worked_example": {
+        "description": "Calculate ballistic range for MR-2's actual parameters",
+        "parameters": {"v_ms": 2300, "angle_deg": 42, "g": 9.81},
+        "formula": "R = v^2 × sin(2θ) / g (flat Earth approximation)",
+        "result": "R = 2300^2 × sin(84°) / 9.81 = 535 km (flat Earth); actual ~679 km (spherical correction)",
+        "python": "import numpy as np\nv = 2300  # m/s\ntheta = np.radians(42)\ng = 9.81\nR_flat = v**2 * np.sin(2*theta) / g / 1000\nprint(f'Flat Earth range: {R_flat:.0f} km')\nprint(f'Actual (with spherical correction): ~679 km')\nprint(f'Difference: spherical Earth adds ~{679-R_flat:.0f} km')"
+      }
+    },
+    {
+      "id": "noise-blanking",
+      "concept": "Noise blanking — time-domain suppression of impulse noise by detecting and gating transient spikes",
+      "department": "electronics",
+      "level": "intermediate",
+      "tspb_layer": 4,
+      "tspb_section": "4.4",
+      "description": "Noise blanking is a signal processing technique that suppresses impulse noise (short-duration, high-amplitude transients) by detecting the pulse and momentarily gating the signal path. Unlike frequency-domain filtering (which removes energy at specific frequencies), noise blanking operates in the time domain: detect the spike, mute for 0.5-5 ms, resume. The technique works because impulse noise occupies a very short time window but contains energy across all frequencies — no bandpass filter can remove it without also removing the signal. The human ear doesn't notice gaps shorter than ~5 ms in audio. Noise blankers were essential in Mercury telemetry receivers because rocket launches generate massive impulse interference: engine ignition transients, pyrotechnic firing, relay switching, and radio frequency interference from the engine exhaust plume (which is partially ionized and acts as a broadband noise source).",
+      "resonance": "Tetrodotoxin is a biological noise blanker. TTX blocks voltage-gated sodium channels — the mechanism by which neurons fire action potentials. A nerve impulse (the 'signal') is a precisely-timed voltage spike propagating along an axon. TTX doesn't destroy the neuron; it gates the sodium channel closed, preventing the spike from propagating. When the TTX concentration drops below the blocking threshold, the channel reopens and neural signaling resumes. The toxin blanks the nerve's signal path for the duration of its presence — time-domain suppression of neural impulse transmission."
+    },
+    {
+      "id": "tetrodotoxin",
+      "concept": "Tetrodotoxin (TTX) — a potent neurotoxin that blocks voltage-gated sodium channels",
+      "department": "biology",
+      "level": "advanced",
+      "tspb_layer": 8,
+      "tspb_section": "8.4",
+      "description": "Tetrodotoxin (TTX, C11H17N3O8) is one of the most potent non-protein toxins known, with an LD50 of approximately 8 μg/kg in mice. It binds to the outer pore of voltage-gated sodium channels (Nav1.x family), physically blocking sodium ion flow and preventing action potential generation. The rough-skinned newt (Taricha granulosa) produces TTX in skin glands — a single adult newt contains enough TTX to kill multiple adult humans. The toxin is not produced by the newt itself but by symbiotic bacteria (Pseudomonas, Pseudoalteromonas, Vibrio) that colonize the skin glands. The newt sequesters the bacterially-produced TTX and has evolved TTX-resistant sodium channels through specific amino acid substitutions in the channel pore region. This allows the newt to carry lethal doses without self-poisoning. The evolutionary arms race between Taricha and its predator Thamnophis sirtalis (common garter snake) is one of the best-studied examples of coevolution — snakes evolve resistance, newts evolve higher TTX production, in an escalating cycle.",
+      "resonance": "TTX's mechanism of action — blocking a single molecular channel to prevent signal propagation — is the biological equivalent of MR-2's abort system. The abort system detected an anomaly (signal) and blocked the normal flight sequence (channel), preventing the booster from continuing its planned trajectory. TTX detects a predator's sodium channels and blocks them, preventing the predator's nervous system from continuing its planned function. Both are targeted interventions that stop a specific process at a specific molecular/mechanical level."
+    },
+    {
+      "id": "aposematic-signaling",
+      "concept": "Aposematic signaling — warning coloration that advertises an organism's toxicity or danger",
+      "department": "biology",
+      "level": "beginner",
+      "tspb_layer": 8,
+      "tspb_section": "8.1",
+      "description": "Aposematism is the use of bright, conspicuous coloration to warn predators of an organism's unprofitability (toxicity, venomosity, or bad taste). The rough-skinned newt's bright orange ventral surface is classic aposematic coloration: orange and black are the most effective warning color combination in nature because they provide maximum contrast in forest-floor light conditions. The unken reflex — curling backward to expose the orange belly — is the behavioral component: the toxin is always present, but the warning display is only deployed when a threat is detected. This is energetically efficient: the newt doesn't waste energy on permanent display (like a monarch butterfly's wings) but only signals when a predator is actually present. The signal is honest — the newt really is toxic, so predators that heed the warning and retreat benefit from the information. Dishonest aposematism (Batesian mimicry) also exists: harmless organisms that copy warning colors without possessing the toxin.",
+      "resonance": "MR-2's abort system activation was an aposematic signal to the engineering team: the trajectory deviation, the higher g-forces, the extended range — all were warning displays indicating that the booster's behavior was outside nominal parameters. Like the newt's orange belly, the abort data said: 'something is wrong, pay attention, do not proceed without investigation.' The engineering response was the MR-BD (booster development) flight — an additional test inserted into the schedule because the abort signal demanded investigation before putting a human in the capsule. The signal was honest: there really was a propellant consumption anomaly."
+    }
+  ]
+}

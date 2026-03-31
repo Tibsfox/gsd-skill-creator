@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematics: The Mathematics of Survival | v1.17 NASA Mission Series</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nasa-blue: #0B3D91; --nasa-red: #FC3D21;
+    --bio-deep: #050808; --bio-mid: #0A1818;
+    --mercury-silver: #B0B8C0; --mercury-dim: #606870;
+    --abort-red: #FF3030; --abort-dim: #801818;
+    --gforce-yellow: #E8CC30; --gforce-dim: #746618;
+    --newt-orange: #E87020; --newt-dim: #743810;
+    --ocean-blue: #2050A0; --space: #050510;
+    --text: #E8E8E8; --text-dim: #A0A0A0; --border: #1A2828;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--space); min-height: 100vh; line-height: 1.6; }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 10% 15%, rgba(232,204,48,0.06) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(176,184,192,0.05) 0%, transparent 100%),
+      radial-gradient(3px 3px at 42% 10%, rgba(232,112,32,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 58% 55%, rgba(96,104,112,0.05) 0%, transparent 100%),
+      radial-gradient(2px 2px at 73% 20%, rgba(176,184,192,0.04) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(232,204,48,0.06) 0%, transparent 100%);
+    pointer-events: none; z-index: 0;
+  }
+  .breadcrumb { max-width: 1400px; margin: 0 auto; padding: 1rem 2rem; font-size: 0.85rem; color: var(--text-dim); position: relative; z-index: 1; }
+  .breadcrumb a { color: var(--mercury-silver); text-decoration: none; }
+  .breadcrumb a:hover { color: #fff; }
+  .breadcrumb .sep { margin: 0 0.5rem; color: var(--border); }
+  header {
+    background: linear-gradient(160deg, var(--space) 0%, var(--bio-deep) 25%, var(--bio-mid) 50%, var(--abort-dim) 75%, var(--nasa-blue) 100%);
+    border-bottom: 3px solid var(--mercury-silver); padding: 0; position: relative; overflow: hidden; z-index: 1;
+  }
+  header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(176,184,192,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(176,184,192,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+  .header-content { max-width: 1400px; margin: 0 auto; padding: 2.5rem 2rem 2rem; position: relative; }
+  .mission-badge { display: inline-flex; align-items: center; gap: 0.75rem; background: rgba(176,184,192,0.12); border: 1px solid var(--mercury-silver); border-radius: 6px; padding: 0.4rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.85rem; color: var(--mercury-silver); margin-bottom: 1rem; }
+  .version-number { font-weight: 700; font-size: 1.1rem; color: #fff; }
+  .track-badge { background: rgba(176,184,192,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; }
+  h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .subtitle { font-size: 1.1rem; color: var(--text-dim); font-style: italic; font-family: 'Libre Baskerville', serif; margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; color: var(--text-dim); }
+  .meta-row span { display: flex; align-items: center; gap: 0.4rem; }
+  .meta-row .label { color: var(--mercury-silver); font-weight: 500; }
+  main { max-width: 1400px; margin: 0 auto; padding: 2rem; position: relative; z-index: 1; }
+  .content { max-width: 900px; }
+  h2 { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: var(--gforce-yellow); margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--mercury-silver); margin: 1.5rem 0 0.75rem; }
+  p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; }
+  strong { color: var(--gforce-yellow); }
+  em { color: var(--newt-orange); }
+  code { color: var(--mercury-silver); font-family: 'DM Mono', monospace; font-size: 0.9em; }
+  a { color: var(--mercury-silver); text-decoration: none; }
+  a:hover { color: #fff; }
+  ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  li { font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.4rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
+  th { background: rgba(176,184,192,0.08); color: var(--mercury-silver); text-align: left; padding: 0.6rem 0.8rem; border-bottom: 2px solid var(--border); font-weight: 600; }
+  td { padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--text); }
+  td:first-child { color: var(--text-dim); }
+
+  pre {
+    background: rgba(5,5,16,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--mercury-silver);
+  }
+
+  blockquote { border-left: 3px solid var(--abort-dim); padding: 1rem 1.5rem; margin: 1.5rem 0; background: rgba(5,5,16,0.4); border-radius: 0 6px 6px 0; font-style: italic; color: var(--text-dim); line-height: 1.8; }
+
+  .nav-card { background: rgba(5,5,16,0.5); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .nav-card a { color: var(--mercury-silver); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+  .nav-card a:hover { color: #fff; }
+  .nav-card .nav-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+  footer { max-width: 1400px; margin: 0 auto; padding: 2rem; text-align: center; font-size: 0.8rem; color: var(--text-dim); position: relative; z-index: 1; }
+  footer a { color: var(--mercury-silver); text-decoration: none; }
+  @media (max-width: 800px) { h1 { font-size: 1.6rem; } main { padding: 1rem; } .header-content { padding: 1.5rem 1rem; } pre { font-size: 0.75rem; } }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../index.html">NASA Mission Series</a>
+  <span class="sep">/</span>
+  <a href="index.html">v1.17 Mercury-Redstone 2</a>
+  <span class="sep">/</span>
+  Track 3: Mathematics
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="mission-badge">
+      <span class="version-number">v1.17</span>
+      <span>NASA Mission Series</span>
+      <span>&middot;</span>
+      <span class="track-badge">Track 3</span>
+    </div>
+    <h1>The Mathematics of Survival</h1>
+    <p class="subtitle">TSPB Mathematics &mdash; McNeese-Hoag Format</p>
+    <div class="meta-row">
+      <span><span class="label">Mission:</span> Mercury-Redstone 2 (January 31, 1961)</span>
+      <span><span class="label">Primary Layer:</span> 4 (Vector Calculus)</span>
+      <span><span class="label">Secondary:</span> 2, 7, 3</span>
+      <span><span class="label">Format:</span> McNeese-Hoag Reference Standard (1959)</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="content">
+
+    <h2>Deposit 1: Suborbital Ballistic Trajectory (Layer 4, Section 4.17)</h2>
+
+    <h3>Table</h3>
+
+    <table>
+      <tr><th>Parameter</th><th>Symbol</th><th>Units</th><th>MR-2 Value</th></tr>
+      <tr><td>Launch date</td><td>&mdash;</td><td>&mdash;</td><td>January 31, 1961, 16:55 UTC</td></tr>
+      <tr><td>Launch vehicle</td><td>&mdash;</td><td>&mdash;</td><td>Mercury-Redstone (MRLV-2)</td></tr>
+      <tr><td>Operating agency</td><td>&mdash;</td><td>&mdash;</td><td>NASA / Space Task Group, Langley</td></tr>
+      <tr><td>Spacecraft</td><td>&mdash;</td><td>&mdash;</td><td>Mercury capsule #5 (biological payload)</td></tr>
+      <tr><td>Passenger</td><td>&mdash;</td><td>&mdash;</td><td>Ham (chimpanzee #65, Cameroon-born)</td></tr>
+      <tr><td>Engine</td><td>&mdash;</td><td>&mdash;</td><td>Rocketdyne A-7 (modified Redstone)</td></tr>
+      <tr><td>Thrust (sea level)</td><td>F</td><td>lbf</td><td>~78,000 (~346,944 N)</td></tr>
+      <tr><td>Vehicle mass at ignition</td><td>m</td><td>kg</td><td>~30,000 (66,000 lb)</td></tr>
+      <tr><td>Planned peak altitude</td><td>h_planned</td><td>km</td><td>185 (115 statute miles)</td></tr>
+      <tr><td>Actual peak altitude</td><td>h_actual</td><td>km</td><td>253 (157 statute miles)</td></tr>
+      <tr><td>Planned range</td><td>R_planned</td><td>km</td><td>~480</td></tr>
+      <tr><td>Actual range</td><td>R_actual</td><td>km</td><td>~679</td></tr>
+      <tr><td>Flight duration</td><td>t_flight</td><td>min:sec</td><td>16:39</td></tr>
+      <tr><td>Max velocity</td><td>v_max</td><td>m/s</td><td>~2,292 (8,250 km/h)</td></tr>
+      <tr><td>Engine burn time (planned)</td><td>t_burn_plan</td><td>s</td><td>~143</td></tr>
+      <tr><td>Engine burn time (actual)</td><td>t_burn_act</td><td>s</td><td>~144 (burned ~1 s too long)</td></tr>
+      <tr><td>Max g-force (launch)</td><td>g_launch</td><td>g</td><td>~6.0</td></tr>
+      <tr><td>Max g-force (reentry)</td><td>g_reentry</td><td>g</td><td>~14.7</td></tr>
+      <tr><td>Weightlessness duration</td><td>t_0g</td><td>min:sec</td><td>~6:30</td></tr>
+      <tr><td>Splashdown coordinates</td><td>&mdash;</td><td>&mdash;</td><td>27.23 N, 75.88 W (Atlantic)</td></tr>
+      <tr><td>Recovery ship</td><td>&mdash;</td><td>&mdash;</td><td>USS Donner (LSD-20)</td></tr>
+      <tr><td>Result</td><td>&mdash;</td><td>&mdash;</td><td>SUCCESS &mdash; biological payload recovered alive</td></tr>
+      <tr><td>Significance</td><td>&mdash;</td><td>&mdash;</td><td>Qualified capsule for human flight (Shepard, May 5, 1961)</td></tr>
+    </table>
+
+    <h3>Formulas</h3>
+
+    <p><strong>The Suborbital Arc: Vis-Viva for a One-Way Trip</strong></p>
+
+    <p>A suborbital trajectory is the simplest spaceflight trajectory: go up, come back down. There is no orbital insertion, no circularization burn, no rendezvous. The vehicle follows a ballistic arc &mdash; the same parabolic path as a thrown ball, but scaled up to the point where the curvature of the Earth matters. Mercury-Redstone 2 was a ballistic trajectory with a chimpanzee on top.</p>
+
+<pre>VIS-VIVA EQUATION:
+
+  v^2 = GM * (2/r - 1/a)
+
+  where:
+    v   = velocity at radius r (m/s)
+    G   = gravitational constant (6.674 x 10^-11 m^3 kg^-1 s^-2)
+    M   = mass of Earth (5.972 x 10^24 kg)
+    GM  = standard gravitational parameter = 3.986 x 10^14 m^3/s^2
+    r   = distance from Earth's center (m)
+    a   = semi-major axis of the orbit (m)
+
+  For a suborbital trajectory, the "orbit" is an ellipse
+  whose perigee is below the Earth's surface. The vehicle
+  follows the portion of this ellipse that is above the
+  surface -- the ballistic arc from launch to splashdown.
+
+  The semi-major axis a is determined by the burnout
+  conditions: velocity v_bo and altitude h_bo at engine
+  cutoff.</pre>
+
+    <p>For MR-2, the engine burned approximately 1 second longer than planned. That single second changed everything:</p>
+
+<pre>EFFECT OF 1 EXTRA SECOND OF BURN:
+
+  Redstone A-7 engine thrust: F = 346,944 N
+  Vehicle mass at burnout: m_bo ~ 12,500 kg
+    (after burning ~17,500 kg of propellant)
+  Acceleration near burnout: a = F/m_bo = 27.8 m/s^2
+    = 2.83 g
+
+  Extra velocity from 1 extra second:
+    delta_v = a * delta_t = 27.8 * 1.0 = 27.8 m/s
+            = 100 km/h
+
+  This 27.8 m/s excess velocity at burnout raised
+  the peak altitude from the planned 185 km to the
+  actual 253 km -- an increase of 37%.
+
+  Why does 27.8 m/s (~1.2% of total velocity) produce
+  a 37% increase in altitude? Because the trajectory
+  is near the boundary between suborbital and orbital.
+  At these velocities, small changes in v produce large
+  changes in apogee. The sensitivity is:
+
+    dh_apogee/dv &asymp; 2 * v * a^2 / (GM)
+
+  Near suborbital velocities (~2,300 m/s at burnout
+  altitude), this derivative is approximately:
+    dh/dv &asymp; 2 * 2300 * (6.6e6)^2 / (3.986e14)
+          &asymp; 2.45 km per m/s
+
+  So 27.8 m/s extra produces:
+    delta_h &asymp; 27.8 * 2.45 &asymp; 68 km
+
+  Actual delta_h = 253 - 185 = 68 km. The linear
+  approximation works because the excess is small.
+
+  The lesson: at suborbital speeds, every meter per
+  second matters. A 1-second overburn translates to
+  68 km of additional altitude and a correspondingly
+  steeper, hotter reentry.</pre>
+
+    <p><strong>Ballistic Range and the Flat Earth Approximation:</strong></p>
+
+<pre>FLAT EARTH RANGE:
+
+  R = (v_bo^2 * sin(2*gamma)) / g
+
+  where:
+    v_bo  = burnout velocity (m/s)
+    gamma = flight path angle at burnout (degrees from horizontal)
+    g     = gravitational acceleration (m/s^2)
+
+  For MR-2 planned trajectory:
+    v_bo = 2,264 m/s
+    gamma &asymp; 40 degrees
+    R = (2264^2 * sin(80)) / 9.807
+      = (5,125,696 * 0.9848) / 9.807
+      = 514,700 m &asymp; 515 km
+
+  For MR-2 actual trajectory (1s overburn):
+    v_bo = 2,292 m/s (27.8 m/s excess)
+    gamma &asymp; 41 degrees (slightly steeper due to longer burn)
+    R = (2292^2 * sin(82)) / 9.807
+      = (5,253,264 * 0.9903) / 9.807
+      = 530,400 m &asymp; 530 km
+
+  But the actual range was ~679 km. The flat-Earth
+  approximation underestimates because it ignores
+  Earth's curvature. For trajectories with apogee
+  above ~100 km, the round-Earth correction is
+  essential.</pre>
+
+    <h3>Debate Questions (Layer 4)</h3>
+    <ol>
+      <li><strong>Is a 1-second overburn an acceptable error for a human-rated system?</strong> MR-2&rsquo;s 1-second excess burn produced a 37% altitude overshoot and a 14.7g reentry (versus the planned ~11g). For a chimpanzee, this was survivable. For a human, 14.7g for the duration Ham experienced would be at the edge of consciousness. NASA&rsquo;s response was to not fly a human on the next available Redstone; instead, they flew MR-BD (booster development), a repeat unmanned test, before committing Alan Shepard to MR-3 on May 5, 1961. Was this conservatism justified, or did it hand the Soviets the propaganda victory of Gagarin&rsquo;s flight (April 12, 1961)?</li>
+      <li><strong>How does <em>Taricha granulosa</em> navigate ballistic trajectories in its own domain?</strong> When a predator strikes, the rough-skinned newt can leap &mdash; a ballistic arc measured in centimeters rather than kilometers, but governed by the same physics. The newt&rsquo;s trajectory is determined by its launch velocity and angle, just as MR-2&rsquo;s was determined by burnout velocity and flight path angle.</li>
+      <li><strong>The Common Murre (<em>Uria aalge</em>, degree 17) nests on cliff ledges so narrow that its single egg is shaped like a pointed top</strong> &mdash; a pyriform egg that rolls in a tight circle instead of rolling off the edge. The egg&rsquo;s shape is a ballistic calculation: the center of mass is offset from the geometric center, producing a curved trajectory when disturbed. Is the murre&rsquo;s egg a suborbital trajectory problem in miniature?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Deposit 2: G-Force Profiles and Biological Tolerance (Layer 4, Section 4.17b)</h2>
+
+    <p><strong>What Ham Experienced</strong></p>
+
+    <p>G-force is not a force &mdash; it is a measure of acceleration experienced by a body, expressed as a multiple of gravitational acceleration (<code>g = 9.807 m/s^2</code>). At 1g, you are standing on Earth. At 0g, you are in freefall. At 14.7g, you weigh 14.7 times your normal weight, your blood is being driven away from your brain at 14.7 times the normal rate, and the structural load on your skeleton is 14.7 times what evolution designed it for.</p>
+
+<pre>G-FORCE PROFILE: MR-2 FLIGHT
+
+Phase 1: LAUNCH (t = 0 to t = 144 s)
+  At ignition:
+    m = 30,000 kg, F = 346,944 N
+    g_load = F / (m * g_0) = 1.18 g (barely above 1g)
+
+  At burnout (t &asymp; 144 s):
+    m = 12,500 kg (17,500 kg of propellant consumed)
+    g_load = 346,944 / (12,500 * 9.807) = 2.83 g
+
+  Peak launch g-load: approximately 6.0 g
+  Duration of &gt;3g: approximately 60 seconds
+  Direction: primarily +Gx ("eyeballs in")
+
+Phase 2: COAST / WEIGHTLESSNESS (t = 144 s to t &asymp; 540 s)
+  After engine cutoff, the capsule is in freefall: 0g.
+  Duration: approximately 6 minutes 30 seconds.
+  Ham floated against his restraints. His lever-pulling
+  task continued during this phase -- proving that a
+  primate could perform skilled tasks in weightlessness.
+
+Phase 3: REENTRY (t &asymp; 540 s to t &asymp; 660 s)
+  Planned peak reentry g-load: ~11 g
+  Actual peak reentry g-load: ~14.7 g
+
+  The relationship:
+    g_reentry &asymp; (v_entry^2) / (2 * H_scale * g_0)
+    where H_scale is the atmospheric scale height (~8.5 km)
+
+  Duration of &gt;10g: approximately 20-30 seconds
+  Duration of &gt;5g: approximately 60 seconds
+  Direction: primarily -Gx ("eyeballs out")
+
+  At 14.7g, Ham's effective weight was ~570 kg (1,256 lb).
+  His arm weighed approximately 25 kg (55 lb).
+  Ham performed the lever task through reentry.
+  This was the single most important data point
+  from the entire Mercury-Redstone program.
+
+Phase 4: PARACHUTE DESCENT (t &asymp; 660 s to t &asymp; 999 s)
+  G-load: approximately 1g with transient spikes
+  of 3-5g during parachute opening shock.</pre>
+
+    <p><strong>Human and Primate G-Force Tolerance:</strong></p>
+
+    <table>
+      <tr><th>Direction</th><th>Duration</th><th>Tolerable g</th><th>Effect</th></tr>
+      <tr><td>+Gx (eyes in)</td><td>Sustained</td><td>10-12 g</td><td>Chest compression, breathing difficulty</td></tr>
+      <tr><td>+Gx (eyes in)</td><td>Brief</td><td>25+ g</td><td>Structural limit of harness and seat</td></tr>
+      <tr><td>-Gx (eyes out)</td><td>Sustained</td><td>5-8 g</td><td>Retinal hemorrhage, loss of consciousness</td></tr>
+      <tr><td>-Gx (eyes out)</td><td>Brief</td><td>15-20 g</td><td>Extreme redout, potential brain injury</td></tr>
+      <tr><td>+Gz (head to foot)</td><td>Sustained</td><td>5-7 g</td><td>Loss of consciousness (GLOC) at ~5g</td></tr>
+      <tr><td>-Gz (foot to head)</td><td>Sustained</td><td>2-3 g</td><td>Redout, potential stroke</td></tr>
+    </table>
+
+    <p>Ham at MR-2 reentry: <strong>14.7 g in -Gx direction</strong>, duration ~20-30 seconds. This is above the sustained tolerance limit. Ham survived because the peak was brief, chimpanzees have slightly higher g-tolerance, the contour couch distributed the load, and he was young and healthy (3 years old, ~17 kg). For comparison: John Stapp (1954) survived 46.2 g on a rocket sled in the +Gx direction for less than 1 second.</p>
+
+    <h3>Debate Questions (Layer 4)</h3>
+    <ol>
+      <li><strong>Should MR-2 have triggered an abort at the overburn?</strong> The abort system activated because the engine burned too long. But the abort itself worsened the trajectory: the capsule was pushed higher and faster, leading to 14.7g instead of ~12g. This is the paradox of safety systems: sometimes the safety response is more dangerous than the anomaly.</li>
+      <li><strong>The rough-skinned newt carries tetrodotoxin in its skin</strong> &mdash; enough to kill most predators. When a common garter snake attempts to swallow a newt, the newt experiences compression forces analogous to g-loading. Is TTX the newt&rsquo;s &ldquo;abort system&rdquo; &mdash; a last-resort defense that activates under extreme loading, killing the predator but at the cost of the newt&rsquo;s life?</li>
+    </ol>
+
+    <hr>
+
+    <h2>Deposit 3: Reaction Time Under Stress (Layer 7, Section 7.17)</h2>
+
+    <p><strong>Ham&rsquo;s Lever-Pulling Performance</strong></p>
+
+<pre>REACTION TIME ANALYSIS:
+
+  Baseline (ground training, 1960):
+    Mean reaction time: ~0.8 seconds
+    Standard deviation: ~0.2 seconds
+    Error rate: &lt;5%
+    Throughput: ~20 correct responses per minute
+
+  Pre-flight (launch morning, January 31, 1961):
+    Mean: ~0.9 seconds (slightly elevated -- stress)
+    Error rate: ~5%
+
+  During launch (0-6g):
+    Reaction time: degraded to ~1.5-2.0 seconds
+    Error rate: ~10-15%
+    Key finding: task performance DID NOT CEASE.
+
+  During weightlessness (0g):
+    Reaction time: ~1.0 seconds (slightly above baseline)
+    Error rate: ~5-8%
+    Key finding: weightlessness did NOT significantly
+    impair cognitive function.
+
+  During reentry (14.7g):
+    Reaction time: degraded to ~2.5-3.5 seconds
+    Error rate: elevated
+    Key finding: Ham CONTINUED TO PERFORM THE TASK at 14.7g.
+    His arm weighed approximately 25 kg (55 lb).
+
+  Shannon's information throughput model:
+    C = log2(n+1) / t_reaction
+
+    For Ham's task: n = 2 (two levers, one correct)
+      C_baseline = log2(3) / 0.8 = 1.98 bits/s
+      C_0g       = log2(3) / 1.0 = 1.59 bits/s (80% of baseline)
+      C_6g       = log2(3) / 1.75 = 0.91 bits/s (46% of baseline)
+      C_14.7g    = log2(3) / 3.0 = 0.53 bits/s (27% of baseline)
+
+    The channel capacity drops with increasing g-load,
+    but it never reaches zero. At 14.7g, Ham could
+    still process approximately 0.5 bits per second --
+    enough to make binary decisions, albeit slowly.
+    This finding cleared the path for human spaceflight.
+
+  The Hick-Hyman Law predicts:
+    t_reaction = a + b * log2(n)
+    Under g-loading, b increases (each additional bit
+    takes longer to process), but the logarithmic
+    relationship is preserved. Stress degrades the rate,
+    not the capacity.</pre>
+
+    <h3>Worked Example</h3>
+
+<pre>import numpy as np
+import matplotlib.pyplot as plt
+
+print("MERCURY-REDSTONE 2: SUBORBITAL TRAJECTORY AND G-FORCE ANALYSIS")
+print("=" * 70)
+
+# === SECTION 1: Trajectory Comparison (Planned vs Actual) ===
+
+# Physical constants
+GM = 3.986e14          # Earth gravitational parameter (m^3/s^2)
+R_earth = 6.371e6      # Earth radius (m)
+g0 = 9.807             # surface gravity (m/s^2)
+
+# Engine parameters
+F_thrust = 346944.0    # Rocketdyne A-7 thrust (N)
+m_initial = 30000.0    # total vehicle mass at ignition (kg)
+burn_rate = 121.5      # propellant mass flow (kg/s)
+
+# Planned trajectory
+t_burn_planned = 143.0     # planned burn time (s)
+h_burnout = 96000.0        # burnout altitude (m)
+gamma_planned = 40.0       # planned flight path angle at burnout (deg)
+
+# Actual trajectory (1 second overburn)
+t_burn_actual = 144.0
+
+# Mass at burnout
+m_burnout_planned = m_initial - burn_rate * t_burn_planned
+m_burnout_actual = m_initial - burn_rate * t_burn_actual
+
+# Extra delta-v from 1-second overburn
+a_burnout_actual = F_thrust / m_burnout_actual
+delta_v = a_burnout_actual * 1.0  # 27.8 m/s = 100 km/h
+
+# Burnout velocities
+v_bo_planned = 2264.0     # m/s (from mission data)
+v_bo_actual = v_bo_planned + delta_v
+
+# === SECTION 2: G-Force Profile ===
+# Peak deceleration (Allen-Eggers model)
+H_scale = 8500.0  # atmospheric scale height (m)
+v_entry_planned = 2100.0   # m/s at entry interface
+v_entry_actual = 2200.0    # m/s (higher due to higher apogee)
+gamma_entry_planned = np.radians(3.5)
+gamma_entry_actual = np.radians(5.2)
+
+g_peak_planned = (v_entry_planned**2 * np.sin(abs(gamma_entry_planned))) / \
+                 (2 * np.e * H_scale * g0)
+g_peak_actual = (v_entry_actual**2 * np.sin(abs(gamma_entry_actual))) / \
+                (2 * np.e * H_scale * g0)
+
+# === SECTION 3: Reaction Time Analysis ===
+conditions = ['Baseline (ground)', 'Pre-flight (stressed)',
+              'Launch (6g)', 'Weightless (0g)', 'Reentry (14.7g)']
+rt_mean = [0.8, 0.9, 1.75, 1.0, 3.0]    # seconds
+n_alternatives = 2  # binary choice (two levers)
+
+print("\nShannon channel capacity (bits/second):")
+for i, cond in enumerate(conditions):
+    C = np.log2(n_alternatives + 1) / rt_mean[i]
+    print(f"  {cond:25s}: RT={rt_mean[i]:.2f}s, "
+          f"C={C:.2f} bits/s ({C/1.98*100:.0f}% of baseline)")
+
+# === SECTION 4: Sensitivity Analysis ===
+overburn_seconds = np.linspace(0, 5, 50)
+extra_v = a_burnout_actual * overburn_seconds
+v_burnout_range = v_bo_planned + extra_v
+g_peak_range = 11.0 * (v_burnout_range / v_bo_planned)**2.5
+
+print("\nOverburn (s) | Extra v (m/s) | Est. peak g | Status")
+for dt in [0, 0.5, 1.0, 1.5, 2.0, 3.0, 5.0]:
+    idx = np.argmin(np.abs(overburn_seconds - dt))
+    gp = g_peak_range[idx]
+    status = "NOMINAL" if gp &lt;= 11.5 else ("WARNING" if gp &lt;= 15 else "CRITICAL")
+    print(f"  {dt:5.1f}       | {extra_v[idx]:7.1f}       | {gp:7.1f}     | {status}")
+
+print("\n  The margin between 'primate survives' and 'primate dies'")
+print("  was approximately 1-2 seconds of engine burn.")</pre>
+
+    <h3>Debate Questions (Layer 7)</h3>
+    <ol>
+      <li><strong>Can reaction time under extreme stress serve as a proxy for cognitive function?</strong> Ham&rsquo;s lever-pulling performance was the only objective measure of primate cognitive function during spaceflight. But reaction time conflates motor ability (arm strength under g-load), sensory processing (can the subject see the stimulus), and decision-making (does the subject remember what to do). At 14.7g, the motor component dominated: Ham&rsquo;s arm weighed 55 lb. Was the slower reaction time evidence of cognitive degradation, or simply the physics of moving a heavy limb?</li>
+      <li><strong>The Common Murre (<em>Uria aalge</em>, degree 17) dives to depths exceeding 180 meters</strong>, experiencing pressure increases of 18 atmospheres &mdash; roughly equivalent to 18g of sustained hydrostatic loading on every cell in its body. The murre performs complex prey-capture tasks at these depths, with cognitive and motor function intact. How does the murre&rsquo;s pressure tolerance compare to Ham&rsquo;s g-force tolerance?</li>
+    </ol>
+
+    <hr>
+
+    <blockquote>
+      <em>Taricha granulosa</em> &mdash; the rough-skinned newt &mdash; crawls through the damp forests of the Pacific Northwest at a pace that makes even the most cautious rocket engineer seem reckless. It is a creature of the leaf litter, the rotting log, the rain-soaked moss beneath old-growth cedar and hemlock. It weighs perhaps 10 grams. It moves at perhaps 2 centimeters per second. It has been making this journey &mdash; from upland forest to breeding pond and back &mdash; for approximately 20 million years. It does not hurry. It does not need to. Its defense against the world is not speed or strength but chemistry: tetrodotoxin, one of the most potent neurotoxins known. The rough-skinned newt carries its abort system in its skin. Ham, strapped into Mercury capsule #5 on January 31, 1961, carried his abort system in the escape tower above his head. Both systems are last-resort defenses against lethal force. Both activate under conditions the organism was not designed to survive. The newt&rsquo;s TTX activates when a predator bites down. Ham&rsquo;s abort system activated when the Redstone burned 1 second too long. Neither abort system produces a good outcome. Both produce a survivable one &mdash; survivable enough to pass the information forward. The rough-skinned newt has been sending its message for 20 million years. Ham sent his once, on a January morning in Florida, 253 kilometers above an ocean he would never see again from that altitude. He pulled the lever at 14.7g. The newt releases its toxin at the moment of the bite. Both are acts of survival under forces that should have been lethal. Both succeed because the organism was tougher than the force.
+    </blockquote>
+
+    <div class="nav-card">
+      <div>
+        <div class="nav-label">Previous Track</div>
+        <a href="organism.html">&larr; Organism</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="nav-label">Next Track</div>
+        <a href="papers.html">Papers &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  NASA Mission Series &mdash; <a href="../index.html">Mission Catalog</a> &mdash; v1.17 Mercury-Redstone 2 + <em>Taricha granulosa</em> &mdash; <a href="https://tibsfox.com/Research/NASA/">tibsfox.com/Research/NASA/</a>
+</footer>
+
+</body>
+</html>

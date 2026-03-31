@@ -1,0 +1,107 @@
+{
+  "mission": "1.17",
+  "title": "Mercury-Redstone 2 (MR-2)",
+  "description": "Open datasets and source materials relevant to Mercury-Redstone 2 (1961), Ham the chimpanzee, Mercury program bioastronautics, Taricha granulosa, tetrodotoxin, and Franz Schubert",
+  "sources": [
+    {
+      "id": "nssdc-mr2",
+      "name": "NSSDC Master Catalog — Mercury-Redstone 2",
+      "url": "https://nssdc.gsfc.nasa.gov/nmc/spacecraft/display.action?id=1961-MR2",
+      "type": "primary-source",
+      "category": "mission-data",
+      "description": "NASA Space Science Data Coordinated Archive entry for MR-2. Mission profile, spacecraft description, launch vehicle details, outcome classification. Includes orbital parameters (suborbital), mission duration (16 min 39 sec), apogee (253 km), and recovery details. The canonical NASA record of Ham's flight.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "nasa-mercury-biomedical",
+      "name": "Results of the Project Mercury Ballistic and Orbital Chimpanzee Flights (NASA SP-39)",
+      "url": "https://ntrs.nasa.gov/citations/19640001858",
+      "type": "primary-source",
+      "category": "biomedical",
+      "description": "NASA Special Publication 39: comprehensive biomedical report on the chimpanzee flights (MR-2 with Ham and MA-5 with Enos). Contains detailed physiological data: heart rate, respiration, body temperature, lever-pull reaction times, error rates, and g-force tolerance measurements. This is the primary scientific record of primate performance during Mercury flights. Includes pre-flight training protocols, in-flight telemetry data, and post-flight medical examinations.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "holloman-chimp-program",
+      "name": "Holloman Aerospace Medical Center Chimpanzee Program",
+      "url": "https://history.nasa.gov/SP-4201/ch10-6.htm",
+      "type": "primary-source",
+      "category": "program-history",
+      "description": "Chapter from 'This New Ocean' (NASA SP-4201) covering the selection and training of chimpanzees at Holloman Air Force Base, New Mexico. Details the operant conditioning protocols, centrifuge training, vibration exposure, and the selection of Ham (#65) from a group of 40 chimpanzees. Describes the 18-month training program and the psychomotor test apparatus used during flight.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "aeromedical-gforce",
+      "name": "Aerospace Medicine and Human Performance — G-Force Tolerance Literature",
+      "url": "https://www.ingentaconnect.com/content/asma/amhp",
+      "type": "primary-source",
+      "category": "biomedical",
+      "description": "The journal Aerospace Medicine and Human Performance (formerly Aviation, Space, and Environmental Medicine) contains decades of research on human and primate g-force tolerance. Key papers cover: physiological effects of sustained acceleration, the relationship between body position and g-tolerance, cognitive performance degradation under g-loading, and the anti-g straining maneuver. MR-2's 14.7g peak is frequently cited in this literature as a benchmark for primate tolerance in supine position.",
+      "format": "Journal articles",
+      "access": "subscription"
+    },
+    {
+      "id": "inaturalist-taricha",
+      "name": "iNaturalist — Taricha granulosa Observations",
+      "url": "https://www.inaturalist.org/taxa/26710-Taricha-granulosa",
+      "type": "primary-source",
+      "category": "ecology",
+      "description": "Community-submitted observations of rough-skinned newts across their range from southern Alaska to central California. Distribution maps, photographs showing dorsal coloration and ventral orange warning display, habitat notes, and phenology data. Observations are concentrated in the Pacific Northwest — western Oregon, Washington, and British Columbia — where the species is most abundant in moist coniferous forests.",
+      "format": "HTML/JSON",
+      "access": "open"
+    },
+    {
+      "id": "smithsonian-ham",
+      "name": "Smithsonian National Air and Space Museum — Ham Exhibit",
+      "url": "https://airandspace.si.edu/collection-objects/ham-chimpanzee/nasm_A19840496000",
+      "type": "primary-source",
+      "category": "museum",
+      "description": "The Smithsonian's collection entry for artifacts related to Ham's flight. Includes the original Mercury capsule (spacecraft #5) flown on MR-2, Ham's flight couch, the psychomotor test apparatus (lever panel), and mission documentation. Ham lived at the National Zoo in Washington, D.C. from 1963 until his death in 1983, then at the North Carolina Zoo. His remains are at the International Space Hall of Fame in Alamogordo, New Mexico.",
+      "format": "HTML",
+      "access": "open"
+    },
+    {
+      "id": "gforce-research",
+      "name": "Stoll AM. Human Tolerance to Positive G as Determined by the Physiological Endpoints",
+      "url": "https://ntrs.nasa.gov/search?q=human%20g-force%20tolerance",
+      "type": "primary-source",
+      "category": "biomedical",
+      "description": "Foundational research on human g-force tolerance from the 1950s-1960s acceleration research programs at Naval Air Development Center (Johnsville centrifuge) and Wright-Patterson AFB. Key findings: upright seated tolerance ~5-7g sustained, supine tolerance ~12-15g sustained, with body position being the single most important factor. The Mercury spacecraft's supine couch design was directly informed by this research.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "mercury-capsule-specs",
+      "name": "Mercury Spacecraft Familiarization Manual (McDonnell)",
+      "url": "https://ntrs.nasa.gov/search?q=mercury%20spacecraft%20familiarization",
+      "type": "primary-source",
+      "category": "spacecraft",
+      "description": "McDonnell Aircraft Corporation's familiarization manual for the Mercury spacecraft. Details all capsule systems: environmental control, communications, electrical, instrumentation, abort sensing, parachute deployment sequence, and the psychomotor test apparatus installed for the chimpanzee flights. The manual describes the lever mechanism, light stimulus panel, reward/punishment system, and biomedical sensor suite.",
+      "format": "PDF",
+      "access": "open"
+    },
+    {
+      "id": "reaction-time-lit",
+      "name": "Reaction Time Under Stress: Literature Review (Human Factors)",
+      "url": "https://journals.sagepub.com/home/hfs",
+      "type": "secondary-source",
+      "category": "psychology",
+      "description": "Human Factors journal contains extensive literature on reaction time measurement under various stressors: acceleration, vibration, noise, hypoxia, thermal stress, and cognitive load. Baseline simple RT for humans is ~200-250 ms; choice RT (like Ham's task) is ~350-500 ms. Degradation under stress follows a roughly linear relationship up to threshold, then catastrophic failure. Ham's 25% degradation at flight conditions was within the linear regime — no catastrophic failure occurred.",
+      "format": "Journal articles",
+      "access": "subscription"
+    },
+    {
+      "id": "ttx-research",
+      "name": "Tetrodotoxin and the Arms Race: Taricha-Thamnophis Coevolution",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1691904/",
+      "type": "primary-source",
+      "category": "toxicology",
+      "description": "Brodie & Brodie (1999) and subsequent publications documenting the coevolutionary arms race between rough-skinned newts and garter snakes. Key findings: TTX concentrations in Taricha granulosa vary geographically and correlate with local garter snake TTX resistance. Some populations produce enough TTX to kill 25 adult humans. The resistance-toxicity arms race is one of the best-characterized examples of coevolution in vertebrates. Relevant papers available through PubMed Central.",
+      "format": "PDF/HTML",
+      "access": "open"
+    }
+  ]
+}

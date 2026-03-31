@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can You Beat Ham? — Reaction Time Challenge</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0c1020;
+    font-family: 'Courier New', monospace;
+    color: #c0c8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    user-select: none;
+  }
+  h1 {
+    font-size: 16px;
+    letter-spacing: 3px;
+    color: #FF3030;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .subtitle {
+    font-size: 11px;
+    color: #556677;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .main-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .game-panel {
+    flex: 1;
+    min-width: 400px;
+    max-width: 700px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .stats-panel {
+    flex: 0 0 320px;
+    background: #0a0e1a;
+    border: 1px solid #1a2040;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .panel-title {
+    font-size: 12px;
+    color: #4488cc;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1a2040;
+  }
+  .stimulus-area {
+    width: 100%;
+    height: 300px;
+    background: #060810;
+    border: 2px solid #1a2040;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.1s;
+  }
+  .stimulus-area:hover { border-color: #2a3060; }
+  .stimulus-area.active { border-color: #FF3030; }
+  .stimulus-dot {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #1a2040;
+    transition: background 0.05s;
+    position: relative;
+    z-index: 2;
+  }
+  .stimulus-dot.lit {
+    background: #E8CC30;
+    box-shadow: 0 0 40px #E8CC30, 0 0 80px rgba(232,204,48,0.3);
+  }
+  .stimulus-dot.too-early {
+    background: #FF3030;
+    box-shadow: 0 0 40px #FF3030;
+  }
+  .stimulus-dot.success {
+    background: #30CC30;
+    box-shadow: 0 0 40px #30CC30;
+  }
+  .status-text {
+    position: absolute;
+    bottom: 15px;
+    font-size: 13px;
+    color: #556677;
+    text-align: center;
+    width: 100%;
+  }
+  .result-text {
+    position: absolute;
+    top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+  }
+  .g-force-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(255,48,48,0.03) 3px,
+      rgba(255,48,48,0.03) 4px
+    );
+    z-index: 1;
+  }
+  .controls {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .ctrl-btn {
+    background: #1a2040;
+    border: 1px solid #2a3060;
+    color: #c0c8d8;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .ctrl-btn:hover { background: #2a3060; }
+  .ctrl-btn.active { border-color: #FF3030; color: #FF3030; }
+  .difficulty-label {
+    font-size: 11px;
+    color: #556677;
+    margin-top: 10px;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #0d1225;
+    font-size: 12px;
+  }
+  .stat-label { color: #556677; }
+  .stat-value { color: #c0c8d8; font-weight: bold; }
+  .stat-value.fast { color: #30CC30; }
+  .stat-value.slow { color: #FF3030; }
+  .stat-value.ham { color: #E8CC30; }
+  .leaderboard {
+    margin-top: 15px;
+  }
+  .lb-entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 11px;
+    border-bottom: 1px solid #0d1225;
+  }
+  .lb-rank { color: #556677; width: 25px; }
+  .lb-time { font-weight: bold; }
+  .lb-entry.ham-row { color: #E8CC30; }
+  .lb-entry.you-row { color: #30CC30; }
+  .bar-container {
+    margin-top: 10px;
+    background: #060810;
+    border-radius: 4px;
+    height: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+  }
+  .bar-marker {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: #E8CC30;
+  }
+  .bar-label {
+    position: absolute;
+    top: -15px;
+    font-size: 9px;
+    color: #E8CC30;
+    transform: translateX(-50%);
+  }
+  .info-box {
+    margin-top: 15px;
+    padding: 10px;
+    background: #060810;
+    border-radius: 4px;
+    font-size: 10px;
+    color: #445566;
+    line-height: 1.6;
+  }
+  @keyframes shake {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-3px, 1px); }
+    20% { transform: translate(2px, -2px); }
+    30% { transform: translate(-4px, 0); }
+    40% { transform: translate(1px, 3px); }
+    50% { transform: translate(-2px, -1px); }
+    60% { transform: translate(3px, 2px); }
+    70% { transform: translate(-1px, -3px); }
+    80% { transform: translate(4px, 1px); }
+    90% { transform: translate(-3px, -2px); }
+  }
+  .shaking {
+    animation: shake 0.1s infinite;
+  }
+</style>
+</head>
+<body>
+
+<h1>Can You Beat Ham?</h1>
+<p class="subtitle">Mercury-Redstone 2 &mdash; Reaction Time Challenge &mdash; v1.17</p>
+
+<div class="main-container">
+  <div class="game-panel">
+    <div class="panel-title">Stimulus Area &mdash; Click When the Light Turns Yellow</div>
+
+    <div class="stimulus-area" id="stimArea">
+      <div class="stimulus-dot" id="stimDot"></div>
+      <div class="g-force-overlay" id="gOverlay"></div>
+      <div class="result-text" id="resultText"></div>
+      <div class="status-text" id="statusText">Click anywhere to start a trial</div>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="btnNormal" onclick="setDifficulty('normal')">Normal</button>
+      <button class="ctrl-btn" id="btnGforce" onclick="setDifficulty('gforce')">Simulated G-Force</button>
+      <button class="ctrl-btn" id="btnExtreme" onclick="setDifficulty('extreme')">14.7g Reentry</button>
+      <button class="ctrl-btn" onclick="resetStats()">Reset Stats</button>
+    </div>
+    <div class="difficulty-label" id="diffLabel">
+      Normal mode: clean conditions (ground baseline)
+    </div>
+  </div>
+
+  <div class="stats-panel">
+    <div class="panel-title">Performance</div>
+
+    <div class="stat-row">
+      <span class="stat-label">Your last time:</span>
+      <span class="stat-value" id="lastTime">---</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Your best:</span>
+      <span class="stat-value" id="bestTime">---</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Your average:</span>
+      <span class="stat-value" id="avgTime">---</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Trials:</span>
+      <span class="stat-value" id="trialCount">0</span>
+    </div>
+
+    <div class="stat-row" style="margin-top: 10px; border-top: 1px solid #1a2040; padding-top: 10px;">
+      <span class="stat-label">Ham (ground):</span>
+      <span class="stat-value ham">400 ms</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Ham (in-flight):</span>
+      <span class="stat-value ham">500 ms</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Ham (14.7g reentry):</span>
+      <span class="stat-value ham">~500 ms</span>
+    </div>
+
+    <div class="panel-title" style="margin-top: 15px;">Your Time vs Ham</div>
+    <div class="bar-container" id="barContainer">
+      <div class="bar-fill" id="barFill" style="width: 0%; background: #2a3060;"></div>
+      <div class="bar-marker" id="hamGroundMarker" style="left: 40%;">
+        <span class="bar-label">400ms</span>
+      </div>
+      <div class="bar-marker" id="hamFlightMarker" style="left: 50%;">
+        <span class="bar-label">500ms</span>
+      </div>
+    </div>
+
+    <div class="panel-title" style="margin-top: 20px;">Leaderboard (This Session)</div>
+    <div class="leaderboard" id="leaderboard">
+      <div class="lb-entry ham-row">
+        <span class="lb-rank">--</span>
+        <span>Ham (ground baseline)</span>
+        <span class="lb-time">400 ms</span>
+      </div>
+      <div class="lb-entry ham-row">
+        <span class="lb-rank">--</span>
+        <span>Ham (in-flight)</span>
+        <span class="lb-time">500 ms</span>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <strong>About this test:</strong><br>
+      Ham was trained at Holloman AFB to pull a lever within
+      5 seconds of a blue light appearing. Correct responses
+      avoided a mild foot shock; incorrect or slow responses
+      triggered it. His baseline reaction time was ~400 ms.
+      During the MR-2 flight, despite forces up to 14.7g,
+      his reaction time degraded only to ~500 ms — a 25%
+      increase. This proved primates could perform cognitive
+      tasks in space, clearing the way for Glenn's orbital
+      flight 3 weeks later.
+    </div>
+  </div>
+</div>
+
+<script>
+const stimArea = document.getElementById('stimArea');
+const stimDot = document.getElementById('stimDot');
+const gOverlay = document.getElementById('gOverlay');
+const resultText = document.getElementById('resultText');
+const statusText = document.getElementById('statusText');
+
+let state = 'idle'; // idle, waiting, stimulus, responded, too-early
+let stimulusTime = 0;
+let waitTimeout = null;
+let difficulty = 'normal';
+let shakeInterval = null;
+let noiseCanvas = null;
+
+let trials = [];
+let bestTime = Infinity;
+
+function setDifficulty(d) {
+  difficulty = d;
+  document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+  const labels = {
+    'normal': 'Normal mode: clean conditions (ground baseline)',
+    'gforce': 'G-Force mode: screen shake + visual noise (6g ascent)',
+    'extreme': '14.7g Reentry: maximum shake + noise + red overlay'
+  };
+  document.getElementById('diffLabel').textContent = labels[d];
+  document.getElementById('btn' + d.charAt(0).toUpperCase() + d.slice(1))
+    .classList.add('active');
+  stopEffects();
+}
+
+function stopEffects() {
+  stimArea.classList.remove('shaking');
+  gOverlay.style.opacity = '0';
+  if (shakeInterval) {
+    clearInterval(shakeInterval);
+    shakeInterval = null;
+  }
+}
+
+function startEffects() {
+  if (difficulty === 'normal') return;
+
+  const intensity = difficulty === 'extreme' ? 1.0 : 0.5;
+  gOverlay.style.opacity = String(intensity * 0.4);
+  stimArea.classList.add('shaking');
+
+  if (difficulty === 'extreme') {
+    stimArea.style.animationDuration = '0.05s';
+  } else {
+    stimArea.style.animationDuration = '0.1s';
+  }
+}
+
+function startTrial() {
+  if (state === 'waiting' || state === 'stimulus') return;
+
+  state = 'waiting';
+  stimDot.className = 'stimulus-dot';
+  resultText.textContent = '';
+  statusText.textContent = 'Wait for the light...';
+  stimArea.classList.remove('active');
+
+  // Random delay: 1.5-4 seconds
+  const delay = 1500 + Math.random() * 2500;
+
+  // Start g-force effects during wait (simulating flight)
+  if (difficulty !== 'normal') {
+    setTimeout(() => {
+      if (state === 'waiting') startEffects();
+    }, 500);
+  }
+
+  waitTimeout = setTimeout(() => {
+    if (state !== 'waiting') return;
+    state = 'stimulus';
+    stimulusTime = performance.now();
+    stimDot.classList.add('lit');
+    stimArea.classList.add('active');
+    statusText.textContent = 'NOW! Click!';
+  }, delay);
+}
+
+function handleClick() {
+  if (state === 'idle' || state === 'responded' || state === 'too-early') {
+    startTrial();
+    return;
+  }
+
+  if (state === 'waiting') {
+    // Clicked too early
+    state = 'too-early';
+    clearTimeout(waitTimeout);
+    stopEffects();
+    stimDot.className = 'stimulus-dot too-early';
+    resultText.textContent = 'TOO EARLY!';
+    resultText.style.color = '#FF3030';
+    statusText.textContent = 'Click to try again';
+    return;
+  }
+
+  if (state === 'stimulus') {
+    const reactionTime = performance.now() - stimulusTime;
+    state = 'responded';
+    stopEffects();
+
+    const ms = Math.round(reactionTime);
+    trials.push(ms);
+    if (ms < bestTime) bestTime = ms;
+
+    stimDot.className = 'stimulus-dot success';
+    stimArea.classList.remove('active');
+
+    // Result text
+    let verdict = '';
+    let color = '#30CC30';
+    if (ms < 400) {
+      verdict = 'FASTER THAN HAM (ground)!';
+      color = '#30CC30';
+    } else if (ms < 500) {
+      verdict = 'Faster than Ham in flight!';
+      color = '#4488CC';
+    } else {
+      verdict = 'Ham was faster...';
+      color = '#FF3030';
+    }
+
+    resultText.textContent = ms + ' ms — ' + verdict;
+    resultText.style.color = color;
+    statusText.textContent = 'Click to try again';
+
+    updateStats(ms);
+  }
+}
+
+function updateStats(lastMs) {
+  // Last time
+  const lastEl = document.getElementById('lastTime');
+  lastEl.textContent = lastMs + ' ms';
+  lastEl.className = 'stat-value ' + (lastMs < 400 ? 'fast' : lastMs > 500 ? 'slow' : '');
+
+  // Best time
+  const bestEl = document.getElementById('bestTime');
+  bestEl.textContent = bestTime + ' ms';
+  bestEl.className = 'stat-value ' + (bestTime < 400 ? 'fast' : bestTime > 500 ? 'slow' : '');
+
+  // Average
+  const avg = Math.round(trials.reduce((a, b) => a + b, 0) / trials.length);
+  const avgEl = document.getElementById('avgTime');
+  avgEl.textContent = avg + ' ms';
+  avgEl.className = 'stat-value ' + (avg < 400 ? 'fast' : avg > 500 ? 'slow' : '');
+
+  // Trial count
+  document.getElementById('trialCount').textContent = trials.length;
+
+  // Bar chart (0-1000ms scale)
+  const barPct = Math.min(100, (lastMs / 1000) * 100);
+  const barFill = document.getElementById('barFill');
+  barFill.style.width = barPct + '%';
+  barFill.style.background = lastMs < 400 ? '#30CC30' : lastMs < 500 ? '#4488CC' : '#FF3030';
+
+  // Leaderboard
+  updateLeaderboard();
+}
+
+function updateLeaderboard() {
+  // Combine player trials with Ham's times
+  const entries = [];
+
+  // Ham entries
+  entries.push({ name: 'Ham (ground)', time: 400, isHam: true });
+  entries.push({ name: 'Ham (in-flight)', time: 500, isHam: true });
+
+  // Player's best 5 unique trials
+  const sorted = [...trials].sort((a, b) => a - b);
+  const unique = [...new Set(sorted)].slice(0, 5);
+  unique.forEach((t, i) => {
+    entries.push({ name: 'You (#' + (i + 1) + ')', time: t, isHam: false });
+  });
+
+  // Sort all entries
+  entries.sort((a, b) => a.time - b.time);
+
+  const lb = document.getElementById('leaderboard');
+  lb.innerHTML = '';
+  entries.forEach((e, i) => {
+    const div = document.createElement('div');
+    div.className = 'lb-entry' + (e.isHam ? ' ham-row' : ' you-row');
+    div.innerHTML = '<span class="lb-rank">' + (i + 1) + '.</span>' +
+                    '<span>' + e.name + '</span>' +
+                    '<span class="lb-time">' + e.time + ' ms</span>';
+    lb.appendChild(div);
+  });
+}
+
+function resetStats() {
+  trials = [];
+  bestTime = Infinity;
+  document.getElementById('lastTime').textContent = '---';
+  document.getElementById('lastTime').className = 'stat-value';
+  document.getElementById('bestTime').textContent = '---';
+  document.getElementById('bestTime').className = 'stat-value';
+  document.getElementById('avgTime').textContent = '---';
+  document.getElementById('avgTime').className = 'stat-value';
+  document.getElementById('trialCount').textContent = '0';
+  document.getElementById('barFill').style.width = '0%';
+  updateLeaderboard();
+}
+
+stimArea.addEventListener('click', handleClick);
+
+// Keyboard support (spacebar)
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') {
+    e.preventDefault();
+    handleClick();
+  }
+});
+
+// Initialize
+setDifficulty('normal');
+updateLeaderboard();
+</script>
+
+</body>
+</html>

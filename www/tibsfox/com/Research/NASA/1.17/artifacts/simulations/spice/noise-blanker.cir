@@ -1,0 +1,155 @@
+* Noise Blanker — Impulse Noise Detection and Gating
+* ===================================================
+* NASA Mission Series v1.17
+*
+* Models a noise blanker circuit that detects impulse noise
+* (car ignition, motor brush sparking, relay switching) and
+* gates the audio path to suppress the pulse. Demonstrates
+* before/after waveforms showing the noise suppression.
+*
+* Impulse noise is fundamentally different from thermal noise:
+* it's a burst of energy across all frequencies, lasting
+* microseconds. No frequency-domain filter can remove it
+* without also removing the signal. The noise blanker works
+* in the time domain: detect the pulse, mute for ~1 ms, resume.
+*
+* This is the v1.17 progressive radio circuit. Mercury ground
+* stations used noise blanking to prevent launch transients
+* from corrupting telemetry data.
+*
+* Circuit:
+*   1. Audio signal + impulse noise → input
+*   2. Wideband amplifier → peak detector → threshold comparator
+*   3. Comparator triggers monostable (1 ms blanking pulse)
+*   4. Blanking pulse controls a diode gate on the audio path
+*   5. Output: audio with impulse noise removed
+*
+* Run: ngspice -b noise-blanker.cir
+
+*--------------------------------------------------------------
+* INPUT SIGNALS
+*--------------------------------------------------------------
+* Audio signal: 1 kHz sine wave at 100 mV (typical IF detector output)
+V_audio  audio_in  0  SIN(0 0.1 1k)
+
+* Impulse noise: short pulses at irregular intervals
+* These represent ignition noise, relay switching, etc.
+* Pulse 1 at T=2ms, Pulse 2 at T=5ms, Pulse 3 at T=8.5ms
+V_noise1  noise_src  0  PULSE(0 0.8 2m 1u 1u 50u 100)
+R_noise_couple  noise_src  audio_in  100
+
+* Combined audio input point is at 'audio_in'
+
+*--------------------------------------------------------------
+* NOISE DETECTOR PATH
+*--------------------------------------------------------------
+* Taps the input and amplifies broadband to detect impulse spikes
+
+* AC coupling into noise detector
+C_couple  audio_in  detect_in  100p
+
+* Wideband amplifier (common-emitter, gain ~10)
+R_bias  detect_in  vcc  100k
+Q1  detect_out  detect_in  det_emitter  NPN_GENERIC
+R_collector  vcc  detect_out  1k
+R_emitter  det_emitter  0  100
+
+* Peak detector: fast attack, moderate decay
+D_peak  detect_out  peak_cap  D_SIGNAL
+C_peak  peak_cap  0  100p
+R_decay  peak_cap  0  10k
+
+*--------------------------------------------------------------
+* THRESHOLD COMPARATOR
+*--------------------------------------------------------------
+* When peak voltage exceeds threshold, trigger blanking
+
+* Adjustable threshold (voltage divider simulates potentiometer)
+R_th1  vcc  threshold  33k
+R_th2  threshold  0  10k
+
+* Comparator (behavioral — triggers when peak > threshold)
+* Outputs 5V blanking pulse that lasts ~1ms (monostable)
+B_compare  blank_raw  0  V = V(peak_cap) > V(threshold) ? 5 : 0
+
+* Monostable: stretch the comparator output to ~1 ms
+* RC network smooths and extends the blanking pulse
+R_mono  blank_raw  blank_cap  10k
+C_mono  blank_cap  0  0.1u
+* Time constant: 10k × 0.1µF = 1 ms
+
+* Clean up blanking signal with threshold
+B_blanking  blank_out  0  V = V(blank_cap) > 2.0 ? 5 : 0
+
+*--------------------------------------------------------------
+* AUDIO GATE
+*--------------------------------------------------------------
+* Diode gate controlled by blanking signal
+* When blank_out = 0V: diodes forward-biased, audio passes
+* When blank_out = 5V: diodes reverse-biased, audio blocked
+
+* Normal audio path (ungated — for comparison)
+R_direct  audio_in  unblanked_out  100
+C_out_direct  unblanked_out  0  10u
+
+* Gated audio path
+* Series diode gate controlled by blanking voltage
+R_in  audio_in  gate_in  100
+D_gate1  gate_in  gate_mid  D_SIGNAL
+D_gate2  gate_mid  gate_out_raw  D_SIGNAL
+R_gate_bias  gate_mid  0  10k
+
+* Gate control: blanking signal reverse-biases the diodes
+V_gate_bias  gate_bias_src  0  DC 0.7  ; Forward bias for normal operation
+R_gate_ctrl  gate_bias_src  gate_in  1k
+* When blanking is active, pull gate_mid to ground
+S_blank  gate_mid  0  blank_out  0  SW_BLANK
+R_out  gate_out_raw  blanked_out  100
+C_out_gate  blanked_out  0  10u
+
+*--------------------------------------------------------------
+* MODELS
+*--------------------------------------------------------------
+.model NPN_GENERIC NPN(BF=100 IS=1e-14 VAF=100)
+.model D_SIGNAL D(IS=1e-14 N=1.0 RS=10 BV=100)
+.model SW_BLANK SW(RON=10 ROFF=1MEG VT=2.5 VH=0.5)
+
+*--------------------------------------------------------------
+* POWER SUPPLY
+*--------------------------------------------------------------
+V_supply  vcc  0  DC 12
+
+*--------------------------------------------------------------
+* ANALYSIS
+*--------------------------------------------------------------
+.tran 5u 15m
+
+*--------------------------------------------------------------
+* CONTROL
+*--------------------------------------------------------------
+.control
+  run
+  set hcopydevtype = svg
+
+  * Plot 1: Input — audio + impulse noise (before blanking)
+  plot V(audio_in)
++   title 'Input: Audio + Impulse Noise (Before Blanking)'
++   xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 2: Noise detector output + threshold
+  plot V(peak_cap) V(threshold)
++   title 'Noise Detection: Peak Detector vs Threshold'
++   xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 3: Blanking pulse
+  plot V(blank_out)
++   title 'Blanking Gate Control Signal (1 ms pulses)'
++   xlabel 'Time (s)' ylabel 'Voltage (V)'
+
+  * Plot 4: Output — before vs after blanking
+  plot V(unblanked_out) V(blanked_out)
++   title 'Noise Blanker Output: Unblanked (blue) vs Blanked (red)'
++   xlabel 'Time (s)' ylabel 'Voltage (V)'
+.endc
+
+.end
