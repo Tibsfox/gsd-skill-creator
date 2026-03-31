@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Vehicle Systems</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAVIGATION === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+
+/* === SECTION === */
+.section {
+  max-width:960px; margin:0 auto; padding:2rem 2rem 0;
+}
+.section h2 {
+  font-family:Georgia,serif; font-size:1.3rem; font-weight:400; color:#fff;
+  border-bottom:1px solid var(--border); padding-bottom:0.4rem; margin-bottom:1rem;
+  letter-spacing:0.04em;
+}
+.section h2 .accent { color: var(--artemis-gold); }
+.section h3 {
+  font-family:Georgia,serif; font-size:1rem; font-weight:400; color: var(--orion-silver);
+  margin: 1.4rem 0 0.6rem; letter-spacing:0.02em;
+}
+.section p {
+  font-size:0.85rem; color:rgba(255,255,255,0.7); margin-bottom:0.8rem; line-height:1.7;
+}
+
+/* === SPEC TABLES === */
+.spec-table {
+  width:100%; border-collapse:collapse; margin:0.8rem 0 1.2rem; font-size:0.8rem;
+}
+.spec-table th {
+  text-align:left; padding:0.5rem 0.8rem;
+  background:rgba(11,61,145,0.15); color:var(--orion-silver);
+  font-size:0.65rem; text-transform:uppercase; letter-spacing:0.1em;
+  font-weight:500; border-bottom:1px solid var(--border);
+}
+.spec-table td {
+  padding:0.4rem 0.8rem; border-bottom:1px solid var(--border);
+  color:#c8d0e0;
+}
+.spec-table tr:hover td { background:rgba(255,255,255,0.02); }
+.spec-table .label { color:var(--dim); font-size:0.75rem; }
+.spec-table .value { color:#fff; font-weight:500; }
+.spec-table .unit { color:var(--dim); font-size:0.7rem; margin-left:0.3rem; }
+.spec-table .gold { color:var(--artemis-gold); }
+.spec-table .red { color:var(--artemis-red); }
+.spec-table .silver { color:var(--orion-silver); }
+
+/* === CALLOUT === */
+.callout {
+  background:var(--panel); border-left:3px solid var(--artemis-gold);
+  padding:0.8rem 1rem; margin:1rem 0; font-size:0.8rem;
+  color:rgba(255,255,255,0.65);
+}
+.callout strong { color:var(--artemis-gold); }
+.callout.heritage {
+  border-left-color:var(--orion-silver);
+}
+.callout.heritage strong { color:var(--orion-silver); }
+.callout.warning {
+  border-left-color:var(--artemis-red);
+}
+.callout.warning strong { color:var(--artemis-red); }
+
+/* === ENGINE TABLE (for RS-25 serial numbers) === */
+.engine-grid {
+  display:grid; grid-template-columns: repeat(4, 1fr); gap:1px;
+  background:rgba(255,255,255,0.03); margin:0.8rem 0 1.2rem;
+}
+.engine-cell {
+  background:var(--panel); padding:0.8rem; text-align:center;
+}
+.engine-cell .engine-id { font-size:1rem; color:#fff; font-weight:500; }
+.engine-cell .engine-label { font-size:0.6rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.3rem; }
+.engine-cell .engine-note { font-size:0.7rem; color:var(--dim); margin-top:0.2rem; }
+
+/* === STACK DIAGRAM (text-based) === */
+.stack-diagram {
+  background:var(--panel); border:1px solid var(--border);
+  padding:1.2rem 1.5rem; margin:1rem 0 1.5rem;
+  font-size:0.75rem; line-height:1.8; text-align:center;
+  color:var(--dim);
+}
+.stack-diagram .layer {
+  padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.stack-diagram .layer:last-child { border-bottom:none; }
+.stack-diagram .layer-name { color:#fff; font-weight:500; }
+.stack-diagram .layer-dim { color:var(--dim); font-size:0.7rem; }
+.stack-diagram .layer-accent { color:var(--artemis-gold); }
+
+/* === PAGE NAV (prev/next style links within mission) === */
+.page-nav {
+  display:flex; justify-content:center; flex-wrap:wrap; gap:0.5rem 1.5rem;
+  padding:1.2rem 2rem; text-align:center; font-size:0.8rem;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+  margin-top:2rem;
+}
+.page-nav a { padding:0.3rem 0; }
+.page-nav .current { color:var(--orion-silver); border-bottom:1px solid var(--artemis-gold); }
+
+/* === FOOTER === */
+.data-source-bar {
+  padding:0.4rem 2rem; text-align:center; font-size:0.65rem;
+  color:rgba(255,255,255,0.15); background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+.page-footer {
+  padding:1.2rem 2rem; text-align:center;
+  font-size:0.7rem; color:rgba(255,255,255,0.2);
+  border-top:1px solid var(--border);
+}
+
+/* === RESPONSIVE === */
+@media(max-width:768px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .section { padding:1.2rem 1rem 0; }
+  .section h2 { font-size:1.1rem; }
+  .engine-grid { grid-template-columns: repeat(2, 1fr); }
+  .spec-table { font-size:0.75rem; }
+  .spec-table th, .spec-table td { padding:0.3rem 0.5rem; }
+}
+@media(max-width:480px) {
+  .engine-grid { grid-template-columns: 1fr 1fr; }
+  .page-nav { flex-direction:column; gap:0.3rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- === TOP NAVIGATION === -->
+<div class="nav-links">
+  <a href="../../index.html">Research</a> &middot;
+  <a href="../index.html">NASA Missions</a> &middot;
+  <a href="index.html">Tracker</a>
+</div>
+
+<div class="mission-header">
+  <h1>Vehicle Systems</h1>
+  <div class="subtitle">SLS Block 1 + Orion CM-003 &ldquo;Integrity&rdquo; + European Service Module 2</div>
+  <div class="catalog-id">Artemis II &middot; Mission 1.190 &middot; Technical Reference</div>
+</div>
+
+<!-- ================================================================
+     1. VEHICLE STACK OVERVIEW
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">01</span> Vehicle Stack Overview</h2>
+
+  <p>
+    The Artemis II launch stack stands 98 meters (322 feet) tall and masses
+    2,610,000 kg at liftoff &mdash; the most powerful rocket to carry humans since
+    Saturn V. The stack comprises four major elements: twin solid rocket boosters,
+    the SLS core stage, the Interim Cryogenic Propulsion Stage, and the Orion
+    spacecraft with its European Service Module.
+  </p>
+
+  <div class="stack-diagram">
+    <div class="layer">
+      <span class="layer-accent">LAS</span> &mdash; <span class="layer-name">Launch Abort System</span>
+      <div class="layer-dim">Tower + 3 solid motors &middot; Jettisoned after SRB sep</div>
+    </div>
+    <div class="layer">
+      <span class="layer-accent">CM</span> &mdash; <span class="layer-name">Orion Crew Module (CM-003)</span>
+      <div class="layer-dim">5.02 m diameter &middot; 10,400 kg &middot; 4 crew</div>
+    </div>
+    <div class="layer">
+      <span class="layer-accent">ESM</span> &mdash; <span class="layer-name">European Service Module (ESM-2)</span>
+      <div class="layer-dim">AJ10-190 engine &middot; Solar arrays &middot; Consumables</div>
+    </div>
+    <div class="layer">
+      <span class="layer-accent">SAA</span> &mdash; <span class="layer-name">Spacecraft Adapter Assembly</span>
+      <div class="layer-dim">Structural interface to ICPS</div>
+    </div>
+    <div class="layer">
+      <span class="layer-accent">ICPS</span> &mdash; <span class="layer-name">Interim Cryogenic Propulsion Stage</span>
+      <div class="layer-dim">1x RL10C-2 &middot; LH2/LOX &middot; Delta IV heritage</div>
+    </div>
+    <div class="layer">
+      <span class="layer-accent">CS</span> &mdash; <span class="layer-name">Core Stage</span>
+      <div class="layer-dim">4x RS-25D &middot; LH2/LOX &middot; 64.6 m tall &middot; 8.4 m diameter</div>
+    </div>
+    <div class="layer">
+      <span class="layer-accent">SRB</span> &mdash; <span class="layer-name">Solid Rocket Boosters (x2)</span>
+      <div class="layer-dim">5-segment &middot; PBAN propellant &middot; 54 m tall each</div>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">Integrated Vehicle Summary</th>
+    </tr>
+    <tr><td class="label">Total Height</td><td><span class="value">98 m</span><span class="unit">(322 ft)</span></td></tr>
+    <tr><td class="label">Liftoff Mass</td><td><span class="value">2,610,000 kg</span><span class="unit">(5,754,000 lb)</span></td></tr>
+    <tr><td class="label">Total Liftoff Thrust</td><td><span class="value gold">39 MN</span><span class="unit">(8.8 million lbf)</span></td></tr>
+    <tr><td class="label">Payload to Trans-Lunar Injection</td><td><span class="value">27,000+ kg</span></td></tr>
+    <tr><td class="label">Launch Pad</td><td><span class="value">LC-39B, Kennedy Space Center</span></td></tr>
+    <tr><td class="label">Vehicle Designation</td><td><span class="value">SLS-2</span></td></tr>
+  </table>
+
+  <div class="callout heritage">
+    <strong>Heritage note:</strong> Saturn V stood 110.6 m and massed 2,970,000 kg.
+    SLS Block 1 is shorter but delivers comparable thrust (39 MN vs. 35.1 MN)
+    through modern propellant chemistry and five-segment SRBs.
+  </div>
+</div>
+
+<!-- ================================================================
+     2. SPACE LAUNCH SYSTEM (SLS) BLOCK 1
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">02</span> Space Launch System &mdash; Core Stage</h2>
+
+  <p>
+    The SLS core stage is the largest rocket stage ever built for human spaceflight.
+    At 64.6 meters tall and 8.4 meters in diameter, it carries over 2.03 million
+    liters of liquid hydrogen and liquid oxygen propellant. Four RS-25D engines
+    at its base produce a combined 7.44 MN of vacuum thrust, burning for
+    approximately 480 seconds.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">Core Stage Specifications</th>
+    </tr>
+    <tr><td class="label">Length</td><td><span class="value">64.6 m</span><span class="unit">(212 ft)</span></td></tr>
+    <tr><td class="label">Diameter</td><td><span class="value">8.4 m</span><span class="unit">(27.6 ft)</span></td></tr>
+    <tr><td class="label">Propellant</td><td><span class="value">LH2 / LOX</span></td></tr>
+    <tr><td class="label">Propellant Mass</td><td><span class="value">~979,000 kg</span></td></tr>
+    <tr><td class="label">Engines</td><td><span class="value">4x RS-25D/E</span></td></tr>
+    <tr><td class="label">Thrust (vacuum, 4 engines)</td><td><span class="value gold">7.44 MN</span><span class="unit">(1.67M lbf)</span></td></tr>
+    <tr><td class="label">Burn Duration</td><td><span class="value">~480 s</span></td></tr>
+    <tr><td class="label">Stage Separation Altitude</td><td><span class="value">~185 km</span></td></tr>
+    <tr><td class="label">Manufacturer</td><td><span class="value">Boeing (Michoud Assembly Facility)</span></td></tr>
+  </table>
+
+  <h3>RS-25D Engines &mdash; Artemis II Serial Numbers</h3>
+
+  <p>
+    The RS-25, originally the Space Shuttle Main Engine (SSME), is the most
+    tested large rocket engine in history. Each engine has flown multiple Shuttle
+    missions before being refurbished for SLS. The RS-25D variant incorporates a
+    new engine controller and updated high-pressure turbopumps.
+  </p>
+
+  <div class="engine-grid">
+    <div class="engine-cell">
+      <div class="engine-label">Engine 1</div>
+      <div class="engine-id">E2047</div>
+      <div class="engine-note">Shuttle veteran</div>
+    </div>
+    <div class="engine-cell">
+      <div class="engine-label">Engine 2</div>
+      <div class="engine-id">E2059</div>
+      <div class="engine-note">Shuttle veteran</div>
+    </div>
+    <div class="engine-cell">
+      <div class="engine-label">Engine 3</div>
+      <div class="engine-id">E2062</div>
+      <div class="engine-note">Shuttle veteran</div>
+    </div>
+    <div class="engine-cell">
+      <div class="engine-label">Engine 4</div>
+      <div class="engine-id">E2061</div>
+      <div class="engine-note">Shuttle veteran</div>
+    </div>
+  </div>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">RS-25D Engine Specifications</th>
+    </tr>
+    <tr><td class="label">Propellant</td><td><span class="value">LH2 / LOX</span></td></tr>
+    <tr><td class="label">Thrust (vacuum, per engine)</td><td><span class="value">1.86 MN</span><span class="unit">(418,000 lbf)</span></td></tr>
+    <tr><td class="label">Specific Impulse (vacuum)</td><td><span class="value">452.3 s</span></td></tr>
+    <tr><td class="label">Chamber Pressure</td><td><span class="value">20.64 MPa</span><span class="unit">(2,994 psi)</span></td></tr>
+    <tr><td class="label">Mixture Ratio</td><td><span class="value">6.0:1</span><span class="unit">(LOX:LH2)</span></td></tr>
+    <tr><td class="label">Throttle Range</td><td><span class="value">67&ndash;109%</span><span class="unit">rated power level</span></td></tr>
+    <tr><td class="label">Nozzle Expansion Ratio</td><td><span class="value">69:1</span></td></tr>
+    <tr><td class="label">Engine Cycle</td><td><span class="value">Staged combustion (fuel-rich)</span></td></tr>
+    <tr><td class="label">Dry Mass</td><td><span class="value">~3,527 kg</span><span class="unit">(7,775 lb)</span></td></tr>
+    <tr><td class="label">Heritage</td><td><span class="value silver">Space Shuttle Main Engine</span></td></tr>
+    <tr><td class="label">Total Shuttle Flights</td><td><span class="value">135 missions (1981&ndash;2011)</span></td></tr>
+  </table>
+
+  <div class="callout heritage">
+    <strong>Flight heritage:</strong> The RS-25 is the only large liquid rocket engine
+    to achieve full reusability certification. Across 135 Shuttle missions, RS-25 engines
+    accumulated over 3,000 starts and more than 1 million seconds of hot-fire time.
+    For SLS, the engines are expendable &mdash; each flies once.
+  </div>
+</div>
+
+<!-- ================================================================
+     3. SOLID ROCKET BOOSTERS
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">03</span> Solid Rocket Boosters</h2>
+
+  <p>
+    Two five-segment solid rocket boosters (SRBs) provide the majority of
+    thrust at liftoff. Each booster is 54 meters tall and produces 14.6 MN
+    of sea-level thrust &mdash; together generating 29.2 MN, roughly 75% of
+    total liftoff thrust. They are the largest human-rated solid rockets ever flown.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">5-Segment SRB Specifications (each)</th>
+    </tr>
+    <tr><td class="label">Length</td><td><span class="value">54 m</span><span class="unit">(177 ft)</span></td></tr>
+    <tr><td class="label">Diameter</td><td><span class="value">3.71 m</span><span class="unit">(12.2 ft)</span></td></tr>
+    <tr><td class="label">Propellant Type</td><td><span class="value">PBAN (polybutadiene acrylonitrile)</span></td></tr>
+    <tr><td class="label">Propellant Mass (each)</td><td><span class="value">~628,000 kg</span></td></tr>
+    <tr><td class="label">Thrust (sea level, each)</td><td><span class="value red">14.6 MN</span><span class="unit">(3.28M lbf)</span></td></tr>
+    <tr><td class="label">Combined SRB Thrust</td><td><span class="value red">29.2 MN</span><span class="unit">(6.57M lbf)</span></td></tr>
+    <tr><td class="label">Burn Duration</td><td><span class="value">126 s</span></td></tr>
+    <tr><td class="label">Separation Velocity</td><td><span class="value">~3,100 mph</span><span class="unit">(~5,000 km/h)</span></td></tr>
+    <tr><td class="label">Separation Altitude</td><td><span class="value">~48 km</span><span class="unit">(~157,000 ft)</span></td></tr>
+    <tr><td class="label">Segments</td><td><span class="value">5</span><span class="unit">(4-segment on Shuttle)</span></td></tr>
+    <tr><td class="label">Manufacturer</td><td><span class="value">Northrop Grumman</span></td></tr>
+  </table>
+
+  <div class="callout heritage">
+    <strong>Shuttle comparison:</strong> The Shuttle SRBs used 4 segments. The SLS
+    5-segment design adds ~25% more propellant and thrust. Unlike Shuttle SRBs,
+    the SLS boosters are not recovered &mdash; they impact the Atlantic and sink.
+  </div>
+</div>
+
+<!-- ================================================================
+     4. INTERIM CRYOGENIC PROPULSION STAGE (ICPS)
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">04</span> Interim Cryogenic Propulsion Stage</h2>
+
+  <p>
+    The ICPS is a modified Delta Cryogenic Second Stage (DCSS) derived from
+    the Delta IV rocket. It provides the critical orbit insertion burn after core
+    stage separation, then executes the perigee-raise maneuver to place Orion
+    into a high Earth orbit (HEO) with an apogee of approximately 70,000 km.
+    On Artemis I it also performed the trans-lunar injection (TLI) burn, but
+    on Artemis II the ESM handles TLI from HEO.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">ICPS Specifications</th>
+    </tr>
+    <tr><td class="label">Engine</td><td><span class="value">1x RL10C-2</span></td></tr>
+    <tr><td class="label">Thrust</td><td><span class="value">110.1 kN</span><span class="unit">(24,750 lbf)</span></td></tr>
+    <tr><td class="label">Specific Impulse (vacuum)</td><td><span class="value">462 s</span></td></tr>
+    <tr><td class="label">Propellant</td><td><span class="value">LH2 / LOX</span></td></tr>
+    <tr><td class="label">Length</td><td><span class="value">13.7 m</span><span class="unit">(45 ft)</span></td></tr>
+    <tr><td class="label">Diameter</td><td><span class="value">5.1 m</span><span class="unit">(16.7 ft)</span></td></tr>
+    <tr><td class="label">Burns</td><td><span class="value">Orbit insertion + perigee raise</span></td></tr>
+    <tr><td class="label">Target Orbit</td><td><span class="value">HEO: ~200 km x 70,000 km</span></td></tr>
+    <tr><td class="label">Heritage</td><td><span class="value silver">Delta IV DCSS / Centaur lineage</span></td></tr>
+    <tr><td class="label">Manufacturer</td><td><span class="value">United Launch Alliance</span></td></tr>
+  </table>
+
+  <div class="callout heritage">
+    <strong>Heritage note:</strong> The RL10 engine family has been flying since 1963
+    (Centaur upper stage). With over 520 flights, it is the most reliable upper-stage
+    cryogenic engine in the Western world. The &ldquo;C-2&rdquo; variant is an updated
+    design with a carbon-carbon nozzle extension.
+  </div>
+</div>
+
+<!-- ================================================================
+     5. ORION SPACECRAFT CM-003 "INTEGRITY"
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">05</span> Orion Crew Module &mdash; CM-003 &ldquo;Integrity&rdquo;</h2>
+
+  <p>
+    The Orion crew module is the capsule that will carry four astronauts around
+    the Moon and back. Designated CM-003, it was named &ldquo;Integrity&rdquo; by the
+    crew. It is the most advanced human-rated spacecraft ever built, with
+    355,056 individual parts spanning 77,150 distinct part types.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">Crew Module Specifications</th>
+    </tr>
+    <tr><td class="label">Designation</td><td><span class="value">CM-003 &ldquo;Integrity&rdquo;</span></td></tr>
+    <tr><td class="label">Shape</td><td><span class="value">Truncated cone (frustum)</span></td></tr>
+    <tr><td class="label">Cone Half-Angle</td><td><span class="value">57.5&deg;</span></td></tr>
+    <tr><td class="label">Diameter</td><td><span class="value">5.02 m</span><span class="unit">(16.5 ft)</span></td></tr>
+    <tr><td class="label">Habitable Volume</td><td><span class="value gold">8.9 m&sup3;</span><span class="unit">(316 ft&sup3;)</span></td></tr>
+    <tr><td class="label">Launch Mass</td><td><span class="value">10,400 kg</span><span class="unit">(22,930 lb)</span></td></tr>
+    <tr><td class="label">Landing Mass</td><td><span class="value">9,300 kg</span><span class="unit">(20,500 lb)</span></td></tr>
+    <tr><td class="label">Crew Capacity</td><td><span class="value">4</span><span class="unit">(6 max design)</span></td></tr>
+    <tr><td class="label">Individual Parts</td><td><span class="value">355,056</span></td></tr>
+    <tr><td class="label">Distinct Part Types</td><td><span class="value">77,150</span></td></tr>
+    <tr><td class="label">Glass Cockpit</td><td><span class="value">3 displays, Boeing 787 derived</span></td></tr>
+    <tr><td class="label">Life Support</td><td><span class="value">21 days (nominal)</span></td></tr>
+    <tr><td class="label">Manufacturer</td><td><span class="value">Lockheed Martin</span></td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>Apollo comparison:</strong> The Apollo Command Module had a habitable volume
+    of 5.9 m&sup3; for three crew. Orion provides <strong>8.9 m&sup3; &mdash; 50% more
+    volume</strong> &mdash; while carrying four astronauts. Its 5.02 m diameter vs.
+    Apollo&rsquo;s 3.91 m gives substantially more shoulder room.
+  </div>
+
+  <h3>Crew Displays and Avionics</h3>
+
+  <p>
+    Orion features a glass cockpit derived from the Boeing 787 Dreamliner
+    display system. Three high-resolution multifunction displays replace the
+    hundreds of analog switches and gauges used on Apollo and Shuttle. The
+    flight software runs on redundant flight computers with radiation-hardened
+    processors. Crew can also monitor and command vehicle systems from
+    handheld tablets.
+  </p>
+</div>
+
+<!-- ================================================================
+     6. EUROPEAN SERVICE MODULE (ESM-2)
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">06</span> European Service Module &mdash; ESM-2</h2>
+
+  <p>
+    The European Service Module is built by Airbus Defence and Space in Bremen,
+    Germany, under contract to the European Space Agency (ESA). It provides
+    propulsion, power, thermal control, water, and air to the Orion crew module.
+    ESM-2 is the second unit built; ESM-1 flew on Artemis I.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">ESM-2 Specifications</th>
+    </tr>
+    <tr><td class="label">Main Engine</td><td><span class="value">AJ10-190 (OMS-E)</span></td></tr>
+    <tr><td class="label">Engine Isp</td><td><span class="value">316 s</span></td></tr>
+    <tr><td class="label">Main Engine Thrust</td><td><span class="value">26.7 kN</span><span class="unit">(6,000 lbf)</span></td></tr>
+    <tr><td class="label">Auxiliary Thrusters</td><td><span class="value">8x 490 N</span></td></tr>
+    <tr><td class="label">RCS Thrusters</td><td><span class="value">24x 220 N</span></td></tr>
+    <tr><td class="label">Total Delta-v Budget</td><td><span class="value gold">1,050 m/s</span></td></tr>
+    <tr><td class="label">Propellant</td><td><span class="value">MMH / MON-3 (hypergolic)</span></td></tr>
+    <tr><td class="label">Propellant Mass</td><td><span class="value">~8,600 kg</span></td></tr>
+    <tr><td class="label">Solar Arrays</td><td><span class="value">4 wings &times; 3 panels</span></td></tr>
+    <tr><td class="label">Power (BOL)</td><td><span class="value">11.1 kW</span></td></tr>
+    <tr><td class="label">Wingspan (deployed)</td><td><span class="value">19 m</span><span class="unit">(62.3 ft)</span></td></tr>
+    <tr><td class="label">Key Burns</td><td><span class="value">TLI (from HEO), mid-course corrections, return</span></td></tr>
+    <tr><td class="label">Builder</td><td><span class="value">Airbus Defence and Space (Bremen, Germany)</span></td></tr>
+    <tr><td class="label">Agency</td><td><span class="value silver">European Space Agency (ESA)</span></td></tr>
+  </table>
+
+  <div class="callout heritage">
+    <strong>Heritage note:</strong> The AJ10-190 engine was the Orbital Maneuvering
+    System (OMS) engine on the Space Shuttle, used for orbit insertion and
+    deorbit burns. It is a pressure-fed, hypergolic engine with a long history
+    of reliable restarts in space. The AJ10 family traces back to the Vanguard
+    rocket of 1957.
+  </div>
+
+  <h3>Role in Artemis II Trajectory</h3>
+
+  <p>
+    After the ICPS places Orion into a high Earth orbit, it is the ESM&rsquo;s
+    AJ10-190 that performs the trans-lunar injection burn from HEO &mdash; sending
+    the crew toward the Moon. The ESM then handles all subsequent propulsive
+    maneuvers: mid-course corrections, trajectory shaping, and the return-coast
+    attitude adjustments. With a total delta-v budget of 1,050 m/s, the ESM
+    must execute every burn with precision; there are no backup propulsion options
+    for TLI.
+  </p>
+</div>
+
+<!-- ================================================================
+     7. HEAT SHIELD — AVCOAT
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">07</span> Heat Shield &mdash; AVCOAT</h2>
+
+  <p>
+    Orion&rsquo;s heat shield is the largest ablative heat shield ever built for
+    human spaceflight, measuring 5.02 meters in diameter. It must protect the
+    crew during atmospheric reentry at approximately 40,000 km/h (Mach 32)
+    &mdash; the fastest any crewed vehicle has traveled since Apollo 17 in 1972.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">AVCOAT Heat Shield</th>
+    </tr>
+    <tr><td class="label">Material</td><td><span class="value">AVCOAT ablator</span></td></tr>
+    <tr><td class="label">Composition</td><td><span class="value">Silica fibers + epoxy-novalac resin</span></td></tr>
+    <tr><td class="label">Substrate</td><td><span class="value">Fiberglass-phenolic honeycomb</span></td></tr>
+    <tr><td class="label">Diameter</td><td><span class="value">5.02 m</span><span class="unit">(16.5 ft)</span></td></tr>
+    <tr><td class="label">Maximum Reentry Temperature</td><td><span class="value red">~2,760 &deg;C</span><span class="unit">(~5,000 &deg;F)</span></td></tr>
+    <tr><td class="label">Reentry Velocity</td><td><span class="value red">~40,000 km/h</span><span class="unit">(Mach 32)</span></td></tr>
+    <tr><td class="label">Heritage</td><td><span class="value silver">Apollo CM &middot; Shuttle tile program</span></td></tr>
+  </table>
+
+  <h3>Artemis I Heat Shield Investigation</h3>
+
+  <p>
+    During Artemis I (November 2022), the heat shield performed its primary
+    function &mdash; the crew module returned safely &mdash; but post-flight
+    inspection revealed unexpected charring patterns. The AVCOAT material
+    experienced greater char loss than models predicted, with evidence of
+    gas-trapped cracking within the ablator cells.
+  </p>
+
+  <div class="callout warning">
+    <strong>Artemis I finding:</strong> Unexpected char loss and gas-trapped cracking
+    in the AVCOAT ablator. The issue was attributed to the skip-entry trajectory
+    profile, which created thermal cycling not fully captured by ground test models.
+  </div>
+
+  <h3>Resolution for Artemis II</h3>
+
+  <p>
+    NASA convened an independent review board that concluded in December 2024.
+    The resolution: Artemis II will fly a <strong>steeper, direct reentry
+    trajectory</strong> instead of the skip-entry profile used on Artemis I. This
+    eliminates the thermal cycling that caused the unexpected char behavior.
+    Critically, the heat shield itself was <strong>not replaced</strong> &mdash; the
+    existing AVCOAT shield on CM-003 was determined to have adequate safety margins
+    for the revised trajectory.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th>Parameter</th>
+      <th>Artemis I (Skip Entry)</th>
+      <th>Artemis II (Direct Entry)</th>
+    </tr>
+    <tr>
+      <td class="label">Entry Profile</td>
+      <td><span class="value">Skip (two passes)</span></td>
+      <td><span class="value gold">Direct (single pass, steeper)</span></td>
+    </tr>
+    <tr>
+      <td class="label">Peak Heating</td>
+      <td><span class="value">Two peaks (cycling)</span></td>
+      <td><span class="value">One peak (sustained)</span></td>
+    </tr>
+    <tr>
+      <td class="label">Thermal Cycling</td>
+      <td><span class="value red">Present &mdash; caused char issues</span></td>
+      <td><span class="value" style="color:#4CAF50;">Eliminated</span></td>
+    </tr>
+    <tr>
+      <td class="label">Shield Hardware</td>
+      <td><span class="value">AVCOAT (CM-002)</span></td>
+      <td><span class="value">AVCOAT (CM-003) &mdash; not replaced</span></td>
+    </tr>
+    <tr>
+      <td class="label">Review</td>
+      <td><span class="value">&mdash;</span></td>
+      <td><span class="value">Independent review, Dec 2024: safe</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ================================================================
+     8. LAUNCH ESCAPE SYSTEM (LAS)
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">08</span> Launch Escape System</h2>
+
+  <p>
+    The Launch Abort System (LAS) is the crew&rsquo;s lifeline during the
+    most dangerous phase of flight: ascent through the atmosphere. Mounted atop
+    the Orion crew module on a tower structure, the LAS can pull the capsule
+    clear of a failing rocket at any point from the launch pad through SRB
+    separation.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">LAS Specifications</th>
+    </tr>
+    <tr><td class="label">Configuration</td><td><span class="value">Tower-mounted, 3 solid motors</span></td></tr>
+    <tr><td class="label">Abort Motor Thrust</td><td><span class="value red">1,800 kN</span><span class="unit">(400,000 lbf)</span></td></tr>
+    <tr><td class="label">Abort Motor Burn Time</td><td><span class="value">~3 s</span></td></tr>
+    <tr><td class="label">Attitude Control Motor</td><td><span class="value">Steers capsule away from booster</span></td></tr>
+    <tr><td class="label">Jettison Motor</td><td><span class="value">Separates LAS tower after use / after SRB sep</span></td></tr>
+    <tr><td class="label">Coverage</td><td><span class="value gold">Pad to SRB separation (~126 s, ~48 km)</span></td></tr>
+    <tr><td class="label">Activation</td><td><span class="value">Automatic (FTS) or crew-commanded</span></td></tr>
+    <tr><td class="label">Manufacturer</td><td><span class="value">Lockheed Martin / Northrop Grumman</span></td></tr>
+  </table>
+
+  <h3>Three Motors, One Mission</h3>
+
+  <p>
+    The <strong>abort motor</strong> is the primary escape engine. At 1,800 kN,
+    it produces more thrust than the RS-25 engines &mdash; for just 3 seconds. That
+    is enough to accelerate the crew module to a safe distance in under 2 seconds.
+    The <strong>attitude control motor</strong> (ACM) provides steering during the
+    abort to orient the capsule away from the launch vehicle. The <strong>jettison
+    motor</strong> fires either after a successful abort (to discard the tower before
+    parachute deployment) or during a nominal ascent to shed the LAS tower mass
+    after it is no longer needed (post-SRB separation).
+  </p>
+
+  <div class="callout">
+    <strong>Apollo comparison:</strong> The Apollo Launch Escape System used a single
+    solid motor producing 689 kN. Orion&rsquo;s abort motor at 1,800 kN is 2.6 times
+    more powerful, reflecting the heavier crew module (10,400 kg vs. Apollo&rsquo;s
+    5,806 kg).
+  </div>
+</div>
+
+<!-- ================================================================
+     9. RECOVERY SYSTEMS
+     ================================================================ -->
+<div class="section">
+  <h2><span class="accent">09</span> Recovery Systems</h2>
+
+  <p>
+    After surviving reentry, the Orion crew module decelerates through a
+    parachute sequence before splashing down in the Pacific Ocean near San Diego,
+    California. The recovery operation is conducted by the U.S. Navy in
+    partnership with NASA&rsquo;s Exploration Ground Systems.
+  </p>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">Parachute System</th>
+    </tr>
+    <tr><td class="label">Drogue Chutes</td><td><span class="value">2x conical ribbon</span></td></tr>
+    <tr><td class="label">Drogue Deploy Altitude</td><td><span class="value">~7,600 m</span><span class="unit">(25,000 ft)</span></td></tr>
+    <tr><td class="label">Pilot Chutes</td><td><span class="value">3x mortar-deployed</span></td></tr>
+    <tr><td class="label">Main Chutes</td><td><span class="value">3x ring-sail</span></td></tr>
+    <tr><td class="label">Main Chute Diameter</td><td><span class="value">35 m</span><span class="unit">(116 ft) each</span></td></tr>
+    <tr><td class="label">Canopy Material</td><td><span class="value">Nomex cloth</span></td></tr>
+    <tr><td class="label">Descent Rate (3 mains)</td><td><span class="value">~7.6 m/s</span><span class="unit">(~17 mph)</span></td></tr>
+    <tr><td class="label">Descent Rate (2 mains)</td><td><span class="value">~9.2 m/s</span><span class="unit">(safe with 1 failed)</span></td></tr>
+  </table>
+
+  <table class="spec-table">
+    <tr>
+      <th colspan="2">Recovery Operations</th>
+    </tr>
+    <tr><td class="label">Landing Zone</td><td><span class="value">Pacific Ocean, near San Diego, CA</span></td></tr>
+    <tr><td class="label">Recovery Vessel</td><td><span class="value gold">USS San Antonio-class LPD</span></td></tr>
+    <tr><td class="label">Recovery Method</td><td><span class="value">Well deck capture (capsule floated in)</span></td></tr>
+    <tr><td class="label">Uprighting System</td><td><span class="value">5 airbags on crew module</span></td></tr>
+    <tr><td class="label">Crew Egress</td><td><span class="value">Hatch opening on stable-1 orientation</span></td></tr>
+    <tr><td class="label">Backup</td><td><span class="value">Helicopter extraction if vessel unavailable</span></td></tr>
+  </table>
+
+  <div class="callout heritage">
+    <strong>Apollo comparison:</strong> Apollo splashed down in the Pacific and was recovered
+    by aircraft carrier with helicopter extraction. Orion&rsquo;s recovery uses a
+    San Antonio-class amphibious transport dock (LPD) with a flooded well deck
+    &mdash; the capsule is towed directly into the ship, providing a more
+    controlled and weather-tolerant recovery than helicopter hoisting.
+  </div>
+</div>
+
+<!-- ================================================================
+     MISSION PAGE NAVIGATION
+     ================================================================ -->
+<div class="page-nav">
+  <a href="index.html">Mission Tracker</a>
+  <a href="crew.html">Crew</a>
+  <span class="current">Vehicle Systems</span>
+  <a href="science.html">Science</a>
+  <a href="math.html">Mathematics</a>
+  <a href="timeline.html">Timeline</a>
+</div>
+
+<!-- === DATA SOURCE BAR === -->
+<div class="data-source-bar">
+  Sources: NASA SLS Reference Guide &middot; NASA Artemis II Press Kit &middot;
+  ESA Orion ESM Fact Sheet &middot; Aerojet Rocketdyne RS-25 Data &middot;
+  NASA OSMA Heat Shield Review (Dec 2024) &middot; ULA ICPS Data Sheet
+</div>
+
+<div class="page-footer">
+  Artemis II &middot; Mission 1.190 &middot; Vehicle Systems Reference &middot;
+  Data: NASA, ESA, CSA, Lockheed Martin, Boeing, Airbus, Northrop Grumman &middot;
+  <a href="RESEARCH.md">Research Baseline</a> &middot;
+  tibsfox.com/Research/NASA/artemis-ii/
+</div>
+
+</body>
+</html>

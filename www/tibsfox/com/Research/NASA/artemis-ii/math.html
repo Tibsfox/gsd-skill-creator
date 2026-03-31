@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Mathematics &amp; Physics</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.7; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAV === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+
+/* === CONTENT === */
+.content { max-width:860px; margin:0 auto; padding:2rem 1.5rem; }
+
+/* === SECTION === */
+.section {
+  margin-bottom:3rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.section-header {
+  padding:1rem 1.5rem;
+  border-bottom:1px solid var(--border);
+  background: linear-gradient(90deg, rgba(11,61,145,0.15) 0%, transparent 100%);
+}
+.section-header h2 {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+.section-header .section-num {
+  font-size: 0.65rem;
+  color: var(--artemis-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.2rem;
+}
+.section-body { padding: 1.5rem; }
+.section-body p { margin-bottom:1rem; }
+
+/* === SERIF EXPLANATION TEXT === */
+.explain {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #c8d0e0;
+}
+
+/* === DERIVATION BLOCKS === */
+.derivation {
+  background: #060a14;
+  border: 1px solid rgba(196,163,90,0.15);
+  border-left: 3px solid var(--artemis-gold);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.9;
+  overflow-x: auto;
+  color: #d8dce8;
+}
+.derivation .step-label {
+  color: var(--artemis-gold);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.3rem;
+  margin-top: 0.6rem;
+}
+.derivation .step-label:first-child { margin-top: 0; }
+.derivation .result {
+  color: #fff;
+  font-weight: 600;
+  background: rgba(196,163,90,0.08);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  display: inline-block;
+  margin-top: 0.2rem;
+}
+.derivation .comment { color: var(--dim); font-style: italic; }
+
+/* === WHY-IT-MATTERS CALLOUT === */
+.callout {
+  background: rgba(196,163,90,0.06);
+  border: 1px solid rgba(196,163,90,0.2);
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  margin: 1.2rem 0;
+}
+.callout-title {
+  font-family: Georgia, serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--artemis-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.callout p {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #b8c0cc;
+}
+
+/* === COMPARISON TABLE === */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.82rem;
+}
+.comp-table th {
+  text-align: left;
+  font-size: 0.65rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+.comp-table td {
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  color: #c8d0e0;
+}
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table .highlight { color: var(--artemis-gold); font-weight: 600; }
+
+/* === DEDICATION === */
+.dedication {
+  border: 1px solid rgba(196,163,90,0.25);
+  background: linear-gradient(135deg, rgba(196,163,90,0.06) 0%, rgba(11,61,145,0.06) 100%);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.dedication .section-header {
+  background: linear-gradient(90deg, rgba(196,163,90,0.15) 0%, transparent 100%);
+}
+.dedication-quote {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: var(--orion-silver);
+  font-size: 0.95rem;
+  border-left: 2px solid var(--artemis-gold);
+  padding: 0.6rem 1rem;
+  margin: 1rem 0;
+}
+
+/* === FOOTER === */
+.page-footer {
+  padding:1.2rem 2rem; text-align:center;
+  font-size:0.7rem; color:rgba(255,255,255,0.2);
+  border-top:1px solid var(--border);
+}
+
+/* === RESPONSIVE === */
+@media(max-width:768px) {
+  .mission-header h1 { font-size:1.3rem; }
+  .content { padding: 1rem; }
+  .section-body { padding: 1rem; }
+  .derivation { font-size: 0.78rem; padding: 0.8rem; }
+  .comp-table { font-size: 0.75rem; }
+  .comp-table th, .comp-table td { padding: 0.3rem 0.5rem; }
+}
+@media(max-width:480px) {
+  .nav-links { font-size: 0.7rem; padding: 0.5rem 1rem; }
+  .section-header h2 { font-size: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-links">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <strong style="color:var(--artemis-gold);">Math</strong> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="timeline.html">Timeline</a>
+</div>
+
+<div class="mission-header">
+  <h1>Mathematics &amp; Physics of Artemis II</h1>
+  <div class="subtitle">Every number has a derivation. Every equation tells a story.</div>
+  <div class="catalog-id">Track 3 &middot; Seven worked examples with real mission parameters</div>
+</div>
+
+<div class="content">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: ORBITAL PERIOD                                     -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 1</div>
+    <h2>Orbital Period &mdash; Why HEO Takes 23.5 Hours</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      Before Orion leaves for the Moon, it spends roughly a day in a highly elliptical orbit
+      (HEO) around Earth. The crew uses this orbit to check every system. But why does one
+      lap take almost a full day? The answer is Kepler's third law: the bigger the orbit,
+      the longer the period. A low orbit at 400 km altitude (like the ISS) circles Earth in
+      90 minutes. Stretch the high point out to 70,000 km and the period balloons to
+      nearly a day.
+    </p>
+
+    <p class="explain">
+      Kepler's third law says the square of the orbital period is proportional to the cube
+      of the semi-major axis. The semi-major axis is just the average of the closest point
+      (perigee) and farthest point (apogee), measured from Earth's center. With real
+      Artemis II numbers, here is the full derivation.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Given</span>
+      Apogee altitude  = 70,000 km      <span class="comment">/* highest point above Earth's surface */</span>
+      Perigee altitude =    200 km      <span class="comment">/* lowest point above Earth's surface */</span>
+      Earth radius R_E =  6,371 km
+      mu_Earth         = 398,600 km^3/s^2   <span class="comment">/* gravitational parameter */</span>
+
+      <span class="step-label">Step 1 &mdash; Convert altitudes to orbital radii</span>
+      r_apogee  = 70,000 + 6,371 = 76,371 km
+      r_perigee =    200 + 6,371 =  6,571 km
+
+      <span class="step-label">Step 2 &mdash; Semi-major axis</span>
+      a = (r_apogee + r_perigee) / 2
+      a = (76,371 + 6,571) / 2
+      a = 41,471 km
+
+      <span class="step-label">Step 3 &mdash; Kepler's third law</span>
+      T = 2 * pi * sqrt(a^3 / mu)
+      T = 2 * pi * sqrt(41,471^3 / 398,600)
+      T = 2 * pi * sqrt(7.130 x 10^13 / 398,600)
+      T = 2 * pi * sqrt(1.789 x 10^8)
+      T = 2 * pi * 13,374 s
+      <span class="result">T = 84,030 s = 1,400.5 min = 23.3 hours</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Why this matters</div>
+      <p>
+        The ISS orbits in 90 minutes because it is only 400 km up, giving a semi-major axis
+        of about 6,771 km. Orion's HEO has a semi-major axis six times larger. Since period
+        scales as the 3/2 power of the semi-major axis, the period ratio is roughly
+        6^1.5 = 14.7 times longer: 90 min &times; 14.7 &asymp; 22 hours. That extra time is a
+        feature, not a bug &mdash; it gives the crew a full day to verify spacecraft systems
+        before committing to the trans-lunar injection burn.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 2: LIGHT DELAY                                        -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 2</div>
+    <h2>Light Delay at Lunar Distance</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      When you talk to someone on the ISS, the delay is imperceptible &mdash; about 3 milliseconds
+      round trip. The signal travels 400 km up and 400 km back at the speed of light. But the
+      Moon is a thousand times farther away. For the first time in over 50 years, astronauts will
+      experience a noticeable communication delay with Earth.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Constants</span>
+      c = 299,792.458 km/s          <span class="comment">/* speed of light in vacuum */</span>
+      Mean Earth-Moon distance = 384,400 km
+
+      <span class="step-label">One-way delay at mean distance</span>
+      t = d / c
+      t = 384,400 / 299,792.458
+      <span class="result">t = 1.282 seconds</span>
+
+      <span class="step-label">At closest approach (behind the Moon)</span>
+      Distance = ~392,650 km        <span class="comment">/* actual flyby distance varies */</span>
+      t = 392,650 / 299,792.458
+      <span class="result">t = 1.310 seconds</span>
+
+      <span class="step-label">Round-trip delay</span>
+      Houston sends a message, it arrives 1.282 s later.
+      Crew replies, Houston hears it 1.282 s after that.
+      <span class="result">Round-trip = 2 * 1.282 = 2.564 seconds (mean)</span>
+      <span class="result">Round-trip at closest = 2 * 1.310 = 2.619 seconds</span>
+    </div>
+
+    <table class="comp-table">
+      <tr>
+        <th>Location</th>
+        <th>Distance</th>
+        <th>One-Way Delay</th>
+        <th>Round-Trip</th>
+      </tr>
+      <tr>
+        <td>ISS (LEO)</td>
+        <td>420 km</td>
+        <td>0.0014 s</td>
+        <td>0.003 s</td>
+      </tr>
+      <tr>
+        <td>Geostationary (GPS relay)</td>
+        <td>35,786 km</td>
+        <td>0.119 s</td>
+        <td>0.239 s</td>
+      </tr>
+      <tr>
+        <td class="highlight">Orion at the Moon</td>
+        <td class="highlight">384,400 km</td>
+        <td class="highlight">1.282 s</td>
+        <td class="highlight">2.564 s</td>
+      </tr>
+      <tr>
+        <td>Mars (closest)</td>
+        <td>55,700,000 km</td>
+        <td>3.1 min</td>
+        <td>6.2 min</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">Why this matters</div>
+      <p>
+        A 2.6-second round-trip delay makes real-time conversation awkward but possible &mdash;
+        like a bad video call. On the ISS, the delay is invisible. On Mars, you cannot have
+        a conversation at all &mdash; you send a message and wait minutes for a reply. Artemis II
+        sits at the boundary where human communication just barely works in real time, and the
+        crew will be the first people in half a century to feel that pause.
+      </p>
+      <p style="margin-top:0.6rem;">
+        When Orion passes behind the Moon, there is a complete communication blackout. No radio,
+        no laser, no contact with Earth. The crew is alone. This is why every contingency
+        procedure must be rehearsed before the flyby &mdash; once they are behind the Moon, they
+        are on their own.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 3: TLI BURN                                           -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 3</div>
+    <h2>Trans-Lunar Injection &mdash; The Tsiolkovsky Rocket Equation</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      The trans-lunar injection (TLI) burn is the moment Orion leaves Earth orbit and heads
+      for the Moon. One engine fires for several minutes, and the spacecraft accelerates from
+      an Earth orbit into a trajectory that reaches the Moon. The fundamental equation governing
+      this is the Tsiolkovsky rocket equation, published in 1903 &mdash; one of the most important
+      equations in all of spaceflight.
+    </p>
+
+    <p class="explain">
+      The equation says: your change in velocity (delta-v) depends on two things &mdash; how
+      efficient your engine is (specific impulse, or I<sub>sp</sub>), and what fraction of
+      your spacecraft is fuel versus structure and payload (the mass ratio).
+    </p>
+
+    <p class="explain">
+      <strong>What is I<sub>sp</sub>?</strong> Specific impulse measures engine efficiency.
+      It answers the question: if you have 1 kilogram of fuel, how many seconds can it
+      produce 1 kilogram of thrust? A higher number means a more efficient engine. The ESM
+      OMS engine (derived from the Space Shuttle's orbital maneuvering system) has an
+      I<sub>sp</sub> of 316 seconds &mdash; respectable for a storable-propellant engine.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Given</span>
+      ESM OMS engine I_sp  = 316 s
+      g_0 (standard gravity) = 9.80665 m/s^2
+      Orion + ESM mass (m_0) = 26,520 kg   <span class="comment">/* total mass before TLI */</span>
+      Required delta-v       =    900 m/s   <span class="comment">/* TLI from HEO */</span>
+
+      <span class="step-label">The Tsiolkovsky Rocket Equation</span>
+      delta_v = I_sp * g_0 * ln(m_0 / m_f)
+
+      where m_f = final mass (after burning fuel)
+            ln  = natural logarithm
+
+      <span class="step-label">Step 1 &mdash; Calculate effective exhaust velocity</span>
+      v_e = I_sp * g_0
+      v_e = 316 * 9.80665
+      <span class="result">v_e = 3,098.9 m/s</span>
+
+      <span class="step-label">Step 2 &mdash; Solve for mass ratio</span>
+      delta_v / v_e = ln(m_0 / m_f)
+      900 / 3,098.9 = ln(m_0 / m_f)
+      0.2904 = ln(m_0 / m_f)
+
+      m_0 / m_f = e^0.2904 = 1.337
+
+      <span class="step-label">Step 3 &mdash; Solve for fuel consumed</span>
+      m_f = m_0 / 1.337
+      m_f = 26,520 / 1.337
+      m_f = 19,836 kg
+
+      Propellant consumed = m_0 - m_f
+      <span class="result">Propellant consumed = 26,520 - 19,836 = 6,684 kg</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Why this matters</div>
+      <p>
+        Orion burns 6,684 kg of propellant &mdash; roughly 25% of its total mass &mdash; in a single
+        engine firing to reach the Moon. This is why mass is so precious in spaceflight.
+        Every kilogram of science equipment, food, or crew comfort means one less kilogram
+        of fuel.
+      </p>
+      <p style="margin-top:0.6rem;">
+        Starting from a high elliptical orbit (HEO) instead of low Earth orbit (LEO) saves
+        a huge amount of delta-v. From LEO at 200 km, the TLI delta-v would be about
+        3,100 m/s. From HEO, it is only about 900 m/s. This is because Orion is already
+        moving fast at the apogee of the HEO and is farther from Earth's gravity well.
+        The SLS rocket does the expensive work of getting Orion into HEO; the ESM engine
+        only needs to provide the final push.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 4: OPTICAL LINK BUDGET                                -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 4</div>
+    <h2>O2O Optical Link Budget &mdash; Laser Communications</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      Artemis II carries the O2O (Orion-to-Ground) optical communications terminal &mdash;
+      a laser link that can transmit data at 260 Mbps from lunar distance. Traditional radio
+      (S-band) tops out at a few Mbps over the same distance. How does a laser do it? The
+      answer is beam divergence. A laser beam spreads out far less than a radio beam, so
+      more of the transmitted power reaches the receiver.
+    </p>
+
+    <p class="explain">
+      The fundamental limit on how tightly you can focus a beam is set by diffraction. For
+      a circular aperture, the beam divergence angle is determined by the wavelength of light
+      and the diameter of the optic.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Diffraction-limited beam divergence</span>
+      theta = 1.22 * lambda / D
+
+      <span class="step-label">O2O Optical Terminal (1550 nm laser, 100 mm aperture)</span>
+      lambda = 1550 nm = 1.55 x 10^-6 m
+      D = 100 mm = 0.1 m
+
+      theta = 1.22 * (1.55 x 10^-6) / 0.1
+      <span class="result">theta = 18.91 x 10^-6 rad = 18.9 microrad</span>
+
+      <span class="step-label">Beam footprint at lunar distance</span>
+      Footprint diameter = 2 * distance * tan(theta/2) ~ distance * theta
+          <span class="comment">/* for small angles, tan(x) ~ x */</span>
+      Footprint = 384,400 km * 18.91 x 10^-6
+      <span class="result">Footprint = 7.27 km at the Moon</span>
+
+      <span class="step-label">S-band radio comparison (2.2 GHz, 3 m dish)</span>
+      lambda = c / f = 0.136 m
+      D = 3 m
+
+      theta = 1.22 * 0.136 / 3.0
+      theta = 0.0554 rad = 55,400 microrad
+
+      Footprint = 384,400 km * 0.0554
+      <span class="result">Footprint = 21,296 km at the Moon</span>
+
+      <span class="step-label">Comparison</span>
+      Optical footprint:  7.27 km
+      Radio footprint: 21,296 km
+      <span class="result">Ratio = 21,296 / 7.27 = 2,930x tighter beam</span>
+    </div>
+
+    <table class="comp-table">
+      <tr>
+        <th>Parameter</th>
+        <th>O2O Optical</th>
+        <th>S-Band Radio</th>
+      </tr>
+      <tr>
+        <td>Wavelength</td>
+        <td class="highlight">1,550 nm</td>
+        <td>136 mm</td>
+      </tr>
+      <tr>
+        <td>Aperture</td>
+        <td>100 mm</td>
+        <td>3,000 mm</td>
+      </tr>
+      <tr>
+        <td>Beam divergence</td>
+        <td class="highlight">18.9 &mu;rad</td>
+        <td>55,400 &mu;rad</td>
+      </tr>
+      <tr>
+        <td>Footprint at Moon</td>
+        <td class="highlight">7.27 km</td>
+        <td>21,296 km</td>
+      </tr>
+      <tr>
+        <td>Data rate</td>
+        <td class="highlight">260 Mbps</td>
+        <td>~2 Mbps</td>
+      </tr>
+      <tr>
+        <td>Transmit power</td>
+        <td class="highlight">~milliwatts</td>
+        <td>~watts</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">Why this matters</div>
+      <p>
+        The optical beam is 2,930 times tighter than the radio beam. That means almost all
+        the transmitted photons land on the ground receiver instead of spraying across a
+        21,000-km-wide cone. This concentration is why the laser can achieve 260 Mbps with
+        just milliwatts of power, while the radio struggles to reach 2 Mbps with watts.
+      </p>
+      <p style="margin-top:0.6rem;">
+        The catch: a 7 km footprint at lunar distance means the pointing system must track
+        a ground station (which is moving as Earth rotates) with extraordinary precision.
+        The O2O terminal uses a fine-steering mirror and a beacon laser from the ground
+        to maintain lock. If the spacecraft drifts even slightly, the beam misses entirely.
+        This is one of the key technology demonstrations of Artemis II.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 5: REENTRY PHYSICS                                    -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 5</div>
+    <h2>Reentry Physics &mdash; Mach 32 and 573 Billion Joules</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      When Orion returns from the Moon, it hits Earth's atmosphere at approximately
+      40,000 km/h &mdash; Mach 32. This is much faster than a return from the ISS (about 28,000 km/h,
+      Mach 23) because the spacecraft is falling from much farther away. All that speed must
+      be converted to heat and bled off before the parachutes can open.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Entry velocity</span>
+      v = 40,000 km/h = 11,111 m/s = 11.1 km/s
+
+      <span class="step-label">Kinetic energy of Orion crew module at entry</span>
+      Mass of Orion CM = 9,300 kg   <span class="comment">/* crew module only */</span>
+
+      KE = 0.5 * m * v^2
+      KE = 0.5 * 9,300 * (11,111)^2
+      KE = 0.5 * 9,300 * 123,454,321
+      <span class="result">KE = 574,062,592,650 J ~ 574 billion joules</span>
+
+      <span class="step-label">In equivalent terms</span>
+      1 ton of TNT = 4.184 x 10^9 J
+      574 x 10^9 / 4.184 x 10^9
+      <span class="result">= 137 tons of TNT equivalent</span>
+
+      <span class="step-label">Comparison: ISS return</span>
+      v_ISS = 28,000 km/h = 7,778 m/s
+      KE_ISS = 0.5 * 9,300 * (7,778)^2
+      KE_ISS = 281 billion joules = 67 tons TNT
+
+      <span class="result">Lunar return has 2.04x more energy than ISS return</span>
+    </div>
+
+    <p class="explain">
+      That enormous kinetic energy is dissipated by the atmosphere as heat. The temperature
+      on the heat shield surface reaches approximately 2,760 &deg;C (5,000 &deg;F). Orion uses
+      AVCOAT, an ablative heat shield material. <em>Ablation</em> means the material
+      deliberately chars, melts, and carries away heat as it vaporizes. The shield is
+      consumed during entry &mdash; it is designed to be destroyed so the crew isn't.
+    </p>
+
+    <table class="comp-table">
+      <tr>
+        <th>Parameter</th>
+        <th>Artemis II (Lunar)</th>
+        <th>ISS Return (LEO)</th>
+      </tr>
+      <tr>
+        <td>Entry velocity</td>
+        <td class="highlight">11.1 km/s (Mach 32)</td>
+        <td>7.8 km/s (Mach 23)</td>
+      </tr>
+      <tr>
+        <td>Kinetic energy</td>
+        <td class="highlight">574 GJ (137 tons TNT)</td>
+        <td>281 GJ (67 tons TNT)</td>
+      </tr>
+      <tr>
+        <td>Peak heat flux</td>
+        <td class="highlight">~300 W/cm&sup2;</td>
+        <td>~100 W/cm&sup2;</td>
+      </tr>
+      <tr>
+        <td>Peak deceleration</td>
+        <td class="highlight">~4g</td>
+        <td>~3.5g</td>
+      </tr>
+      <tr>
+        <td>Heat shield</td>
+        <td>AVCOAT (ablative)</td>
+        <td>PICA-X / Ablative</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <div class="callout-title">Why this matters</div>
+      <p>
+        Reentry from the Moon carries double the kinetic energy of an ISS return. The peak
+        deceleration is about 4g &mdash; lower than Apollo's typical 6&ndash;8g because Orion uses a
+        skip reentry: it dips into the upper atmosphere, slows down, skips back up briefly
+        (like a stone on water), then reenters for the final descent. This two-pass approach
+        spreads the deceleration over a longer time and also gives better control over the
+        landing point. Apollo came straight in on a single pass.
+      </p>
+      <p style="margin-top:0.6rem;">
+        The AVCOAT heat shield on Orion is 5 meters in diameter &mdash; the largest ever built
+        for a human spacecraft. Every square centimeter must survive 2,760 &deg;C. The Artemis I
+        uncrewed test flight validated the heat shield in 2022, but Artemis II is the first
+        time humans will be behind it during a lunar-velocity reentry.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 6: SOPHIE GERMAIN DEDICATION                          -->
+<!-- ============================================================ -->
+
+<div class="section dedication">
+  <div class="section-header">
+    <div class="section-num">Section 6 &mdash; Launch Day Dedication</div>
+    <h2>Sophie Germain &mdash; Born April 1, 1776</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      Artemis II launches on April 1, 2026. On that same date, 250 years earlier, Marie-Sophie
+      Germain was born in Paris. She became one of the most important mathematicians of the
+      early 19th century despite being barred from universities, denied formal education, and
+      ignored by the French academic establishment &mdash; because she was a woman.
+    </p>
+
+    <div class="dedication-quote">
+      "Algebra is but written geometry and geometry is but figured algebra."
+      &mdash; Sophie Germain
+    </div>
+
+    <p class="explain">
+      At age 13, locked in her family's house during the chaos of the French Revolution,
+      Germain found a book about Archimedes in her father's library. The story of his death
+      &mdash; killed by a Roman soldier while working on a geometry problem, so absorbed he
+      refused to stop &mdash; inspired her to teach herself mathematics. Her parents disapproved.
+      They confiscated her candles and let her fire go out in winter to force her to stop
+      studying. She wrapped herself in blankets and worked by the light of smuggled candles
+      until the ink froze in the well.
+    </p>
+
+    <p class="explain">
+      Unable to attend the Ecole Polytechnique (which admitted only men), she obtained lecture
+      notes under the pseudonym <em>Monsieur Antoine-August LeBlanc</em> &mdash; a former
+      student who had left Paris. She submitted coursework to Joseph-Louis Lagrange under this
+      name. Lagrange was so impressed by "LeBlanc's" solutions that he sought out the student.
+      When he discovered she was a woman, he became her mentor.
+    </p>
+
+    <p class="explain">
+      She later wrote to Carl Friedrich Gauss under the same pseudonym, sharing her work on
+      number theory. When Gauss learned her true identity &mdash; after she intervened to protect
+      him during Napoleon's invasion of Braunschweig &mdash; he wrote back with one of the most
+      remarkable letters in the history of mathematics:
+    </p>
+
+    <div class="dedication-quote">
+      "When a person of the sex which, according to our customs and prejudices, must encounter
+      infinitely more difficulties than men to familiarize herself with these thorny
+      researches, succeeds nevertheless in surmounting these obstacles and penetrating the
+      most obscure parts of them, then without doubt she must have the most noble courage,
+      quite extraordinary talents and a superior genius."
+      &mdash; Carl Friedrich Gauss, to Sophie Germain, 1807
+    </div>
+
+    <p class="explain" style="margin-top:1.2rem;">
+      <strong>Fermat's Last Theorem.</strong> Germain made the first substantial progress on
+      Fermat's Last Theorem in over a century. She proved that for any prime <em>p</em> where
+      2<em>p</em>+1 is also prime (now called a <em>Germain prime</em>), there are no
+      integer solutions to x<sup>p</sup> + y<sup>p</sup> = z<sup>p</sup> where <em>p</em>
+      does not divide any of <em>x</em>, <em>y</em>, or <em>z</em>. This was the first
+      general result on the theorem (previous proofs handled only individual cases). Germain
+      primes &mdash; 2, 3, 5, 11, 23, 29, 41, 53, 83, 89 ... &mdash; still bear her name.
+    </p>
+
+    <p class="explain">
+      <strong>Elasticity theory.</strong> Germain won the Paris Academy of Sciences prize for
+      her work on the vibration of elastic surfaces &mdash; the mathematics of how thin plates
+      bend and vibrate under stress. When Ernst Chladni demonstrated that sand on a vibrating
+      plate forms geometric patterns (Chladni figures), Napoleon challenged the Academy to
+      explain why. Germain was the only person who submitted a solution. Her work on the
+      biharmonic equation (&nabla;<sup>4</sup>w = 0) laid the groundwork for the entire
+      field of elasticity theory.
+    </p>
+
+    <div class="callout">
+      <div class="callout-title">The connection to Artemis II</div>
+      <p>
+        Orion's AVCOAT heat shield is a structure under extreme thermal and mechanical stress.
+        The analysis of how it deforms, ablates, and transfers heat uses the theory of elastic
+        plates and shells &mdash; a direct descendant of the mathematics Sophie Germain pioneered
+        two centuries ago. The biharmonic equation she developed for vibrating plates is a
+        special case of the partial differential equations used today in finite-element
+        structural analysis of spacecraft.
+      </p>
+      <p style="margin-top:0.6rem;">
+        She was denied a degree, denied membership in the Academy (she could only attend
+        sessions as the wife of a member, which she never was), and her contributions were
+        often credited to her male colleagues. She died of breast cancer in 1831 at age 55.
+        On her death certificate, her occupation was listed as <em>rentiere</em> (a woman
+        of property) &mdash; not mathematician. Gauss had arranged for her to receive an honorary
+        doctorate from the University of G&ouml;ttingen. She died before it could be awarded.
+      </p>
+      <p style="margin-top:0.6rem;">
+        The Artemis program is named for the twin sister of Apollo. 250 years to the day
+        after Sophie Germain was born, a spacecraft named for a goddess of the hunt and the
+        Moon will carry the first woman-eligible crew toward lunar distance. The mathematics
+        that keeps them alive descends from hers.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SECTION 7: FREE-RETURN TRAJECTORY                             -->
+<!-- ============================================================ -->
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 7</div>
+    <h2>Free-Return Trajectory &mdash; The Physics of Coming Home for Free</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      A free-return trajectory is a flight path designed so that if the engine fails after the
+      trans-lunar injection burn, the Moon's gravity will curve the spacecraft's path and send
+      it back to Earth without any additional propulsion. No backup burn needed. No rescue mission.
+      Gravity does all the work.
+    </p>
+
+    <p class="explain">
+      This concept was first developed for Apollo. After the Apollo 13 accident &mdash; when an
+      oxygen tank exploded on the way to the Moon and the main engine became unusable &mdash; the
+      free-return trajectory brought the crew home alive. Artemis II uses the same principle:
+      the trajectory is designed from the start so that the crew can always come home.
+    </p>
+
+    <p class="explain">
+      <strong>The patched conic approximation.</strong> In reality, Orion is influenced by
+      Earth's gravity, the Moon's gravity, and the Sun's gravity simultaneously. Solving the
+      exact equations for three gravitating bodies has no closed-form solution (this is the
+      famous three-body problem). Instead, we use a simplification: divide space into regions
+      where one body's gravity dominates, and solve each region separately, then "patch" the
+      solutions together at the boundaries.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Sphere of influence</span>
+      The boundary where Moon's gravity begins to dominate over Earth's gravity.
+
+      r_SOI = a_Moon * (M_Moon / M_Earth)^(2/5)
+
+      a_Moon = 384,400 km         <span class="comment">/* Earth-Moon distance */</span>
+      M_Moon / M_Earth = 1/81.3
+
+      r_SOI = 384,400 * (1/81.3)^(2/5)
+      r_SOI = 384,400 * (0.0123)^0.4
+      r_SOI = 384,400 * 0.1716
+      <span class="result">r_SOI = 66,000 km from the Moon's center</span>
+
+      <span class="step-label">Outside the sphere (Earth-centric conic)</span>
+      Orion follows an elliptical orbit around Earth.
+      Trajectory shaped by: TLI delta-v and timing.
+      The goal: arrive at the Moon's sphere of influence
+      with the right velocity and angle.
+
+      <span class="step-label">Inside the sphere (Moon-centric hyperbola)</span>
+      Once inside 66,000 km of the Moon, treat the Moon
+      as the central body. Orion follows a hyperbolic
+      trajectory around the Moon — it is moving too fast
+      to be captured, so it swings around and exits.
+
+      <span class="step-label">The "free" part</span>
+      If the flyby geometry is chosen correctly:
+      - Enter Moon's sphere of influence from the front
+      - Swing behind the Moon (closest approach ~8,900 km)
+      - Exit the sphere aimed back at Earth
+      - Re-enter Earth-centric trajectory → reentry
+
+      <span class="result">No propulsive burn required for the return leg.</span>
+      <span class="result">Gravitational deflection provides the course change.</span>
+    </div>
+
+    <p class="explain">
+      The key insight is that gravity is conservative &mdash; it gives back exactly as much energy
+      as it takes. As Orion falls toward the Moon, it speeds up. As it climbs away from the
+      Moon, it slows down by the same amount. The spacecraft exits the Moon's sphere of
+      influence at the same speed it entered &mdash; but pointed in a different direction. That
+      direction change is the free return. The Moon's gravity acts as a mirror, bending the
+      trajectory without adding or removing energy.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Artemis II free-return parameters</span>
+      Closest approach to Moon:  ~8,900 km above surface
+      Moon radius:                1,737 km
+      Flyby radius:             10,637 km from center
+      Entry speed (SOI boundary): ~0.8 km/s relative to Moon
+      Exit speed (SOI boundary):  ~0.8 km/s relative to Moon  <span class="comment">/* same! */</span>
+
+      <span class="step-label">Total mission without free-return</span>
+      Outbound TLI burn:  ~900 m/s
+      Lunar orbit insertion: ~800 m/s
+      Trans-Earth injection: ~800 m/s
+      Total delta-v: ~2,500 m/s
+
+      <span class="step-label">Total mission WITH free-return</span>
+      Outbound TLI burn: ~900 m/s
+      Return burns:         0 m/s   <span class="comment">/* gravity does it */</span>
+      Course corrections:  ~30 m/s  <span class="comment">/* small tweaks only */</span>
+      <span class="result">Total delta-v: ~930 m/s (saved ~1,600 m/s)</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Why this matters</div>
+      <p>
+        The free-return trajectory is the ultimate safety feature. After the TLI burn, even
+        if every engine on the spacecraft fails, the crew will return to Earth in approximately
+        10 days. The Moon's gravity provides the return trip for free. This is why Artemis II
+        is a free-return flyby rather than entering lunar orbit: it maximizes crew safety on
+        the first crewed flight of a new vehicle.
+      </p>
+      <p style="margin-top:0.6rem;">
+        Apollo 8 (the first crewed lunar mission) and Apollo 13 (the famous emergency) both
+        relied on free-return trajectories. The mathematics has not changed in 57 years. What
+        has changed is the precision of the navigation &mdash; modern star trackers, GPS (near
+        Earth), and deep-space network tracking allow course corrections of meters per second
+        rather than the tens of meters per second Apollo needed.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+</div><!-- end .content -->
+
+
+<div class="nav-links" style="border-top:1px solid var(--border);">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <strong style="color:var(--artemis-gold);">Math</strong> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="timeline.html">Timeline</a>
+</div>
+
+<div class="page-footer">
+  Artemis II Mathematics &amp; Physics &middot; tibsfox.com/Research &middot;
+  Track 3 TSPB Deposit &middot; All derivations use published NASA mission parameters
+</div>
+
+</body>
+</html>

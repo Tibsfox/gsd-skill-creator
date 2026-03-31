@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Mission Timeline &amp; Historical Context</title>
+<style>
+:root {
+  --artemis-blue: #0B3D91;
+  --artemis-red: #FC3D21;
+  --artemis-gold: #C4A35A;
+  --orion-silver: #B8C0CC;
+  --deep-space: #040810;
+  --void: #0a0e18;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --dim: rgba(255,255,255,0.35);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--deep-space); color: #c8d0e0; font-family: 'Menlo','SF Mono','Cascadia Mono','Consolas', monospace; line-height:1.6; }
+a { color: var(--artemis-gold); text-decoration:none; }
+a:hover { color: #e0cc80; text-decoration:underline; }
+
+/* === HEADER === */
+.mission-header {
+  background: linear-gradient(135deg, var(--artemis-blue) 0%, #061830 50%, var(--deep-space) 100%);
+  padding: 1.5rem 2rem 1.2rem; text-align:center;
+  border-bottom: 2px solid rgba(196,163,90,0.2);
+  position:relative; overflow:hidden;
+}
+.mission-header::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 80% at 70% 30%, rgba(252,61,33,0.06) 0%, transparent 70%);
+}
+.mission-header h1 { font-size:1.8rem; font-weight:400; letter-spacing:0.06em; color:#fff; position:relative; font-family:Georgia,serif; }
+.mission-header .subtitle { color: var(--artemis-gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; position:relative; font-family:Georgia,serif; }
+.mission-header .catalog-id { color:rgba(255,255,255,0.25); font-size:0.75rem; margin-top:0.4rem; position:relative; }
+
+/* === NAV === */
+.nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
+
+/* === SECTION HEADERS === */
+.section-header {
+  font-family: Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 2rem 0.5rem;
+  letter-spacing: 0.04em;
+}
+.section-subtitle {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--dim);
+  padding: 0 2rem 1.5rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* === VERTICAL TIMELINE === */
+.timeline-container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+  position: relative;
+}
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 40px, rgba(255,255,255,0.08) calc(100% - 40px), transparent);
+  transform: translateX(-1px);
+}
+
+/* Phase divider */
+.phase-divider {
+  position: relative;
+  text-align: center;
+  padding: 1.8rem 0 1rem;
+  z-index: 2;
+}
+.phase-divider .phase-label {
+  display: inline-block;
+  background: var(--deep-space);
+  padding: 0.3rem 1.2rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+}
+.phase-divider.historical .phase-label { color: var(--dim); border-color: rgba(255,255,255,0.08); }
+.phase-divider.development .phase-label { color: var(--artemis-blue); border-color: rgba(11,61,145,0.3); }
+.phase-divider.active .phase-label { color: var(--artemis-gold); border-color: rgba(196,163,90,0.3); }
+.phase-divider.launch .phase-label { color: var(--artemis-red); border-color: rgba(252,61,33,0.3); }
+.phase-divider.future .phase-label { color: var(--orion-silver); border-color: rgba(184,192,204,0.2); }
+
+/* Timeline item */
+.tl-item {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  margin-bottom: 0.6rem;
+  min-height: 2.6rem;
+}
+.tl-item.left { flex-direction: row-reverse; }
+.tl-item.right { flex-direction: row; }
+
+.tl-content {
+  width: calc(50% - 28px);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.7rem 1rem;
+  position: relative;
+  transition: border-color 0.3s, background 0.3s;
+}
+.tl-content:hover {
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(8,12,22,0.9);
+}
+
+/* Dot on the center line */
+.tl-dot {
+  position: absolute;
+  left: 50%;
+  top: 0.9rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, 0);
+  z-index: 3;
+  border: 2px solid rgba(255,255,255,0.15);
+  background: var(--deep-space);
+}
+
+/* Connector line from dot to card */
+.tl-connector {
+  position: absolute;
+  top: 1.3rem;
+  height: 1px;
+  width: 18px;
+  background: rgba(255,255,255,0.08);
+}
+.tl-item.left .tl-connector { right: calc(50% + 5px); }
+.tl-item.right .tl-connector { left: calc(50% + 5px); }
+
+/* Date label */
+.tl-date {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-bottom: 0.15rem;
+  font-weight: 500;
+}
+.tl-title {
+  font-size: 0.85rem;
+  color: #e0e4ec;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+}
+.tl-desc {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+}
+
+/* State-based dot styling */
+.tl-item.era-historical .tl-dot { border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); }
+.tl-item.era-historical .tl-content { opacity: 0.6; }
+.tl-item.era-historical .tl-title { color: rgba(255,255,255,0.55); }
+
+.tl-item.era-cancelled .tl-dot { border-color: rgba(252,61,33,0.3); background: rgba(252,61,33,0.1); }
+.tl-item.era-cancelled .tl-title { color: rgba(252,61,33,0.6); text-decoration: line-through; }
+.tl-item.era-cancelled .tl-content { opacity: 0.5; }
+
+.tl-item.era-milestone .tl-dot { border-color: var(--artemis-blue); background: rgba(11,61,145,0.3); }
+.tl-item.era-milestone .tl-title { color: #6a9fd8; }
+
+.tl-item.era-development .tl-dot { border-color: var(--orion-silver); background: rgba(184,192,204,0.15); }
+
+.tl-item.era-complete .tl-dot { border-color: #4CAF50; background: rgba(76,175,80,0.25); }
+.tl-item.era-complete .tl-title { color: #a5d6a7; }
+
+.tl-item.era-active .tl-dot { border-color: var(--artemis-gold); background: rgba(196,163,90,0.3); box-shadow: 0 0 10px rgba(196,163,90,0.3); }
+.tl-item.era-active .tl-title { color: var(--artemis-gold); }
+
+.tl-item.era-launch .tl-dot { border-color: var(--artemis-red); background: rgba(252,61,33,0.3); box-shadow: 0 0 12px rgba(252,61,33,0.3); animation: pulse-dot 2s infinite; }
+.tl-item.era-launch .tl-title { color: var(--artemis-red); font-weight: 600; }
+
+.tl-item.era-future .tl-dot { border-color: rgba(184,192,204,0.2); background: transparent; border-style: dashed; }
+.tl-item.era-future .tl-content { opacity: 0.5; border-style: dashed; }
+
+@keyframes pulse-dot { 0%,100%{ box-shadow: 0 0 8px rgba(252,61,33,0.3); } 50%{ box-shadow: 0 0 16px rgba(252,61,33,0.6); } }
+
+/* === GAP COUNTER === */
+.gap-counter {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: var(--void);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.gap-number {
+  font-size: 4rem;
+  font-weight: 300;
+  color: var(--artemis-gold);
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(196,163,90,0.15);
+}
+.gap-unit {
+  font-size: 0.85rem;
+  color: var(--dim);
+  margin-top: 0.3rem;
+}
+.gap-context {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 0.8rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* === MISSION FLIGHT PLAN === */
+.flight-plan {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+}
+.flight-phase {
+  margin-bottom: 1.5rem;
+}
+.flight-phase-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+.flight-phase-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.flight-phase-name {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 400;
+}
+.flight-phase-time {
+  font-size: 0.7rem;
+  color: var(--dim);
+  margin-left: auto;
+}
+.flight-event {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.35rem 0 0.35rem 1.4rem;
+  border-left: 2px solid rgba(255,255,255,0.04);
+  margin-left: 3px;
+}
+.flight-event-time {
+  font-size: 0.75rem;
+  color: var(--dim);
+  min-width: 100px;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+.flight-event-name {
+  font-size: 0.8rem;
+  color: #c8d0e0;
+}
+.flight-event-detail {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.35);
+  margin-left: 0.4rem;
+}
+
+/* === COVERAGE TABLE === */
+.coverage-section {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+}
+.coverage-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.coverage-table th {
+  text-align: left;
+  font-size: 0.65rem;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+}
+.coverage-table td {
+  padding: 0.5rem 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  color: #c8d0e0;
+}
+.coverage-table tr:hover td { background: rgba(255,255,255,0.02); }
+.platform-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 2px;
+  background: rgba(11,61,145,0.2);
+  color: #6a9fd8;
+  border: 1px solid rgba(11,61,145,0.25);
+}
+
+/* === WHAT COMES NEXT === */
+.next-missions {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 2rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+}
+.next-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.2rem;
+  transition: border-color 0.3s;
+}
+.next-card:hover { border-color: rgba(255,255,255,0.12); }
+.next-card-name {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+.next-card-desc {
+  font-size: 0.75rem;
+  color: var(--dim);
+  line-height: 1.6;
+}
+.next-card-year {
+  font-size: 0.65rem;
+  color: var(--artemis-gold);
+  margin-top: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* === FOOTER === */
+.page-footer {
+  padding: 1.2rem 2rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.2);
+  border-top: 1px solid var(--border);
+}
+.data-source-bar {
+  padding: 0.4rem 2rem;
+  text-align: center;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.15);
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .mission-header h1 { font-size: 1.3rem; }
+  .section-header { font-size: 1.1rem; }
+  .gap-number { font-size: 3rem; }
+  .timeline-container::before { left: 20px; }
+  .tl-item { flex-direction: row !important; }
+  .tl-item.left { flex-direction: row !important; }
+  .tl-content { width: calc(100% - 50px); margin-left: 50px !important; margin-right: 0 !important; }
+  .tl-dot { left: 20px !important; }
+  .tl-connector { left: 25px !important; right: auto !important; width: 18px; }
+  .flight-event { flex-direction: column; gap: 0.15rem; }
+  .flight-event-time { min-width: auto; }
+  .next-missions { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .gap-number { font-size: 2.2rem; }
+  .tl-content { padding: 0.5rem 0.7rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- === TOP NAV === -->
+<div class="nav-links">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="../../index.html">Research</a> &middot;
+  <a href="../index.html">NASA Missions</a>
+</div>
+
+<!-- === HEADER === -->
+<div class="mission-header">
+  <h1>Mission Timeline</h1>
+  <div class="subtitle">53 years of silence, broken by four voices</div>
+  <div class="catalog-id">Apollo 17 (Dec 1972) &rarr; Artemis II (Apr 2026) &middot; The longest gap in human deep-space exploration</div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 1: THE 53-YEAR GAP                   -->
+<!-- ============================================ -->
+
+<div class="gap-counter">
+  <div class="gap-number" id="gap-days">--</div>
+  <div class="gap-unit">days since humans last traveled beyond low Earth orbit</div>
+  <div class="gap-context">
+    Apollo 17 splashed down December 19, 1972. Since that day, every human spaceflight
+    has remained within 600 km of Earth's surface. Artemis II ends that streak.
+  </div>
+</div>
+
+<h2 class="section-header">The 53-Year Gap</h2>
+<p class="section-subtitle">
+  From the last Apollo moonwalk to Artemis, humanity confined itself to low Earth orbit.
+  This timeline traces every milestone in the long road back.
+</p>
+
+<div class="timeline-container">
+
+  <!-- APOLLO ERA -->
+  <div class="phase-divider historical">
+    <span class="phase-label">Apollo Era &mdash; End of an Age</span>
+  </div>
+
+  <div class="tl-item left era-historical">
+    <div class="tl-content">
+      <div class="tl-date">December 11&ndash;19, 1972</div>
+      <div class="tl-title">Apollo 17 &mdash; Last Humans Beyond LEO</div>
+      <div class="tl-desc">Gene Cernan and Harrison Schmitt spend 75 hours on the lunar surface at Taurus-Littrow valley. Cernan becomes the last person to walk on the Moon. Schmitt, a geologist, is the only scientist to visit another world.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-historical">
+    <div class="tl-content">
+      <div class="tl-date">July 15&ndash;24, 1975</div>
+      <div class="tl-title">Apollo-Soyuz Test Project</div>
+      <div class="tl-desc">Last flight of an Apollo spacecraft. American and Soviet crews dock in low Earth orbit &mdash; a Cold War handshake 222 km up. LEO only.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <!-- SHUTTLE ERA -->
+  <div class="phase-divider historical">
+    <span class="phase-label">Space Shuttle Era &mdash; LEO Only</span>
+  </div>
+
+  <div class="tl-item left era-historical">
+    <div class="tl-content">
+      <div class="tl-date">April 12, 1981 &ndash; July 21, 2011</div>
+      <div class="tl-title">Space Shuttle Program</div>
+      <div class="tl-desc">135 missions over 30 years. Launched Hubble, built the ISS, proved humans could work in orbit. Never left LEO. Maximum altitude: ~620 km (Hubble servicing).</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-historical">
+    <div class="tl-content">
+      <div class="tl-date">November 20, 1998 &ndash; present</div>
+      <div class="tl-title">International Space Station</div>
+      <div class="tl-desc">Continuous human presence in space since November 2000. Orbiting at ~400 km altitude &mdash; less than the distance from New York to Boston. An extraordinary achievement, firmly in LEO.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <!-- RETURN ATTEMPTS -->
+  <div class="phase-divider development">
+    <span class="phase-label">The Road Back &mdash; False Starts</span>
+  </div>
+
+  <div class="tl-item left era-milestone">
+    <div class="tl-content">
+      <div class="tl-date">January 14, 2004</div>
+      <div class="tl-title">Constellation Program Announced</div>
+      <div class="tl-desc">President Bush directs NASA to return to the Moon by 2020 with new vehicles: Ares I, Ares V, and the Orion crew capsule. An ambitious plan.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-cancelled">
+    <div class="tl-content">
+      <div class="tl-date">October 11, 2010</div>
+      <div class="tl-title">Constellation Cancelled</div>
+      <div class="tl-desc">The Augustine Commission finds Constellation over budget and behind schedule. President Obama cancels the program &mdash; but Orion and the heavy-lift concept survive, redirected.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item left era-milestone">
+    <div class="tl-content">
+      <div class="tl-date">September 14, 2011</div>
+      <div class="tl-title">SLS Officially Authorized</div>
+      <div class="tl-desc">NASA announces the Space Launch System, rising from Constellation's ashes. Shuttle-derived engines and boosters. The rocket that will eventually carry Artemis crews beyond Earth orbit.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-milestone">
+    <div class="tl-content">
+      <div class="tl-date">December 5, 2014</div>
+      <div class="tl-title">Orion EFT-1</div>
+      <div class="tl-desc">First flight of an Orion capsule. Uncrewed, launched on a Delta IV Heavy. Reaches 5,800 km altitude &mdash; farther than any human-rated spacecraft since Apollo. Heat shield tested at 80% lunar-return speed.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <!-- ARTEMIS -->
+  <div class="phase-divider active">
+    <span class="phase-label">Artemis Program &mdash; Return to Deep Space</span>
+  </div>
+
+  <div class="tl-item left era-complete">
+    <div class="tl-content">
+      <div class="tl-date">November 16 &ndash; December 11, 2022</div>
+      <div class="tl-title">Artemis I &mdash; First SLS Flight</div>
+      <div class="tl-desc">Uncrewed. SLS flies for the first time. Orion orbits the Moon for 25.5 days, traveling 2.25 million km. Returns at 40,000 km/h. Heat shield performs &mdash; but post-flight analysis reveals unexpected ablation patterns.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-launch">
+    <div class="tl-content">
+      <div class="tl-date">April 1, 2026</div>
+      <div class="tl-title">Artemis II &mdash; Humans Return Beyond LEO</div>
+      <div class="tl-desc">Four astronauts &mdash; Reid Wiseman, Victor Glover, Christina Koch, Jeremy Hansen &mdash; fly a 10-day free-return lunar flyby. First humans beyond LEO in 53 years. First woman and first Canadian in deep space.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 2: DEVELOPMENT TIMELINE              -->
+<!-- ============================================ -->
+
+<h2 class="section-header">Artemis II Development Timeline</h2>
+<p class="section-subtitle">
+  From its original 2023 target to the April 2026 launch window &mdash; delays, problems solved, and the long march to the pad.
+</p>
+
+<div class="timeline-container">
+
+  <div class="phase-divider development">
+    <span class="phase-label">Schedule Evolution</span>
+  </div>
+
+  <div class="tl-item left era-development">
+    <div class="tl-content">
+      <div class="tl-date">2019&ndash;2021</div>
+      <div class="tl-title">Originally Targeting 2023 Launch</div>
+      <div class="tl-desc">Early Artemis II planning targets a 2023 crewed flight, contingent on Artemis I success and vehicle readiness.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-development">
+    <div class="tl-content">
+      <div class="tl-date">January 2024</div>
+      <div class="tl-title">Slipped to September 2025</div>
+      <div class="tl-desc">NASA formally delays Artemis II to no earlier than September 2025. Artemis I heat shield analysis and life support system work drive the schedule.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item left era-development">
+    <div class="tl-content">
+      <div class="tl-date">October 2024</div>
+      <div class="tl-title">Inspector General Warning</div>
+      <div class="tl-desc">NASA's Office of Inspector General reports that the September 2025 date is unlikely, citing ongoing technical challenges with the Environmental Control and Life Support System (ECLSS).</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-development">
+    <div class="tl-content">
+      <div class="tl-date">December 2024</div>
+      <div class="tl-title">Delayed to April 2026</div>
+      <div class="tl-desc">NASA announces April 2026 launch window. Two driving issues: life support system maturation and resolution of unexpected heat shield charring discovered during Artemis I post-flight analysis.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="phase-divider active">
+    <span class="phase-label">Vehicle Integration &amp; Testing</span>
+  </div>
+
+  <div class="tl-item left era-complete">
+    <div class="tl-content">
+      <div class="tl-date">November 20, 2024</div>
+      <div class="tl-title">Rocket Stacking Begins</div>
+      <div class="tl-desc">SLS core stage and solid rocket boosters begin assembly in the Vehicle Assembly Building (VAB) at Kennedy Space Center.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-complete">
+    <div class="tl-content">
+      <div class="tl-date">October 20, 2025</div>
+      <div class="tl-title">Stacking Complete</div>
+      <div class="tl-desc">Full vehicle assembly &mdash; SLS with Orion and launch abort system &mdash; complete atop mobile launcher in the VAB. 11 months of integration.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="phase-divider active">
+    <span class="phase-label">Pad Operations &amp; Rehearsals</span>
+  </div>
+
+  <div class="tl-item left era-complete">
+    <div class="tl-content">
+      <div class="tl-date">January 18, 2026</div>
+      <div class="tl-title">Initial Rollout to LC-39B</div>
+      <div class="tl-desc">The full stack rolls out to Launch Complex 39B, the same pad that launched Apollo 10 and the final shuttle mission. 4-mile journey from VAB takes ~10 hours.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-complete">
+    <div class="tl-content">
+      <div class="tl-date">January 30, 2026</div>
+      <div class="tl-title">Winter Storm Delay</div>
+      <div class="tl-desc">Unusual cold weather at KSC forces a brief hold in pad operations. Vehicle remains safe on the mobile launcher.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item left era-complete">
+    <div class="tl-content">
+      <div class="tl-date">February 2, 2026</div>
+      <div class="tl-title">First Wet Dress Rehearsal</div>
+      <div class="tl-desc">Propellant loading test &mdash; liquid hydrogen and liquid oxygen flow into the core stage for the first time on the pad. Validates fueling procedures and ground systems.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-complete">
+    <div class="tl-content">
+      <div class="tl-date">February 19, 2026</div>
+      <div class="tl-title">Second WDR &mdash; Success</div>
+      <div class="tl-desc">Full wet dress rehearsal completes successfully. Countdown proceeds through terminal count. All systems nominal.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item left era-complete">
+    <div class="tl-content">
+      <div class="tl-date">February 21, 2026</div>
+      <div class="tl-title">Helium Flow Issue &rarr; Rollback</div>
+      <div class="tl-desc">Post-WDR inspections reveal a helium flow control issue requiring repair. Decision made to roll vehicle back to the VAB for maintenance in a controlled environment.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-complete">
+    <div name="tl-content" class="tl-content">
+      <div class="tl-date">February 25, 2026</div>
+      <div class="tl-title">Back in VAB</div>
+      <div class="tl-desc">Vehicle returns to VAB. Helium system repaired and tested. Final closeout inspections performed.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item left era-complete">
+    <div class="tl-content">
+      <div class="tl-date">March 12, 2026</div>
+      <div class="tl-title">Flight Readiness Review &mdash; GO</div>
+      <div class="tl-desc">FRR concludes: Artemis II is approved for launch. Seven launch windows identified, beginning April 1. All open work items closed.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="phase-divider launch">
+    <span class="phase-label">Final Countdown</span>
+  </div>
+
+  <div class="tl-item right era-complete">
+    <div class="tl-content">
+      <div class="tl-date">March 18&ndash;20, 2026</div>
+      <div class="tl-title">Rollout to Pad</div>
+      <div class="tl-desc">Final rollout to LC-39B. Originally planned for March 18, delayed two days due to high winds at the Cape. Arrives at the pad March 20.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item left era-active">
+    <div class="tl-content">
+      <div class="tl-date">March 27, 2026</div>
+      <div class="tl-title">Crew Arrives at KSC</div>
+      <div class="tl-desc">Commander Reid Wiseman, Pilot Victor Glover, Mission Specialists Christina Koch and Jeremy Hansen arrive at Kennedy Space Center for final launch preparations.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item right era-active">
+    <div class="tl-content">
+      <div class="tl-date">March 30, 2026</div>
+      <div class="tl-title">Countdown Begins</div>
+      <div class="tl-desc">The 48-hour countdown clock starts. Propellant loading, final vehicle checks, and crew timeline begins.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+  <div class="tl-item left era-launch">
+    <div class="tl-content">
+      <div class="tl-date">April 1, 2026 &mdash; 6:24 PM EDT</div>
+      <div class="tl-title">Launch Window Opens</div>
+      <div class="tl-desc">Instantaneous launch window. 8.8 million pounds of thrust. Four humans leave Earth orbit for the first time since 1972.</div>
+    </div>
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+  </div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 3: DETAILED MISSION FLIGHT PLAN      -->
+<!-- ============================================ -->
+
+<h2 class="section-header">10-Day Flight Plan</h2>
+<p class="section-subtitle">
+  From ignition to splashdown &mdash; every critical event in the Artemis II free-return lunar flyby.
+</p>
+
+<div class="flight-plan">
+
+  <!-- PRE-LAUNCH -->
+  <div class="flight-phase">
+    <div class="flight-phase-header">
+      <div class="flight-phase-dot" style="background: var(--artemis-blue);"></div>
+      <div class="flight-phase-name">Pre-Launch</div>
+      <div class="flight-phase-time">T-48h to T-0</div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T-48h</div>
+      <div class="flight-event-name">Countdown begins <span class="flight-event-detail">Launch team enters console positions</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T-24h</div>
+      <div class="flight-event-name">Crew health checks <span class="flight-event-detail">Final medical evaluations and suit fit checks</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T-6h</div>
+      <div class="flight-event-name">Crew ingress <span class="flight-event-detail">Astronauts board Orion via crew access arm</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T-2h</div>
+      <div class="flight-event-name">Hatch close &amp; leak check <span class="flight-event-detail">Cabin pressurized, seal verified</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T-10m</div>
+      <div class="flight-event-name">Terminal autosequence <span class="flight-event-detail">Automated countdown &mdash; computers in control</span></div>
+    </div>
+  </div>
+
+  <!-- LAUNCH & ASCENT -->
+  <div class="flight-phase">
+    <div class="flight-phase-header">
+      <div class="flight-phase-dot" style="background: var(--artemis-red);"></div>
+      <div class="flight-phase-name">Launch &amp; Ascent</div>
+      <div class="flight-phase-time">T-0 to T+18m</div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T-0</div>
+      <div class="flight-event-name">Liftoff <span class="flight-event-detail">39 MN thrust &mdash; 8.8 million lbs. RS-25 engines + twin SRBs</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T+1m</div>
+      <div class="flight-event-name">Max-Q <span class="flight-event-detail">Maximum aerodynamic pressure on the vehicle</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T+2m 06s</div>
+      <div class="flight-event-name">SRB separation <span class="flight-event-detail">3,100 mph, 30 mi altitude. Twin boosters jettisoned</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T+8m</div>
+      <div class="flight-event-name">Core stage MECO &amp; separation <span class="flight-event-detail">Main engine cutoff. Core stage falls to the Atlantic</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T+18m</div>
+      <div class="flight-event-name">ICPS orbit insertion <span class="flight-event-detail">Interim Cryogenic Propulsion Stage achieves 200 km parking orbit</span></div>
+    </div>
+  </div>
+
+  <!-- EARTH ORBIT -->
+  <div class="flight-phase">
+    <div class="flight-phase-header">
+      <div class="flight-phase-dot" style="background: #6a9fd8;"></div>
+      <div class="flight-phase-name">Earth Orbit &amp; TLI</div>
+      <div class="flight-phase-time">T+1.5h to Day 1+</div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">T+1.5h</div>
+      <div class="flight-event-name">ICPS perigee raise burn <span class="flight-event-detail">Raises orbit to HEO: 200 km x 70,000 km, 23.5-hour period</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 1</div>
+      <div class="flight-event-name">HEO systems checkout <span class="flight-event-detail">Life support validation, systems testing in high orbit. CubeSat deployment</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 1+</div>
+      <div class="flight-event-name">TLI burn &mdash; ESM OMS engine <span class="flight-event-detail">AJ10-190 fires. Orion reaches escape velocity. Leaves Earth orbit</span></div>
+    </div>
+  </div>
+
+  <!-- OUTBOUND -->
+  <div class="flight-phase">
+    <div class="flight-phase-header">
+      <div class="flight-phase-dot" style="background: var(--artemis-gold);"></div>
+      <div class="flight-phase-name">Outbound Coast</div>
+      <div class="flight-phase-time">Day 2 to Day 4</div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 2</div>
+      <div class="flight-event-name">Outbound coast begins <span class="flight-event-detail">Mid-course correction burn. Crew settles into deep-space routine</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 3</div>
+      <div class="flight-event-name">Approaching lunar sphere of influence <span class="flight-event-detail">Moon's gravity begins to dominate trajectory calculations</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 4</div>
+      <div class="flight-event-name">Lunar flyby <span class="flight-event-detail">Closest approach: 6,513 km from the far side surface. Crew sees the far side</span></div>
+    </div>
+  </div>
+
+  <!-- RETURN -->
+  <div class="flight-phase">
+    <div class="flight-phase-header">
+      <div class="flight-phase-dot" style="background: #4CAF50;"></div>
+      <div class="flight-phase-name">Return &amp; Entry</div>
+      <div class="flight-phase-time">Day 4+ to Splashdown</div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 4+</div>
+      <div class="flight-event-name">Free-return gravity assist <span class="flight-event-detail">7,600 km beyond Moon. Peak distance: 392,650 km from Earth</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 5&ndash;8</div>
+      <div class="flight-event-name">Return coast <span class="flight-event-detail">Trajectory refinement burns. Earth grows larger each day</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 9</div>
+      <div class="flight-event-name">Earth approach <span class="flight-event-detail">Final trajectory corrections. Entry corridor narrowing</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Day 9.5</div>
+      <div class="flight-event-name">Service module jettison <span class="flight-event-detail">ESM separated. Heat shield exposed for the first time since launch</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Entry</div>
+      <div class="flight-event-name">Atmospheric entry <span class="flight-event-detail">40,000 km/h (Mach 32). AVCOAT ablative heat shield. Peak 4g deceleration</span></div>
+    </div>
+    <div class="flight-event">
+      <div class="flight-event-time">Splashdown</div>
+      <div class="flight-event-name">Pacific Ocean, near San Diego <span class="flight-event-detail">Recovery by USS San Antonio-class amphibious transport dock</span></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:1rem 0; font-size:0.75rem; color:var(--dim);">
+    Backup launch windows: April 2&ndash;6 and April 30, 2026
+  </div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 4: LAUNCH DAY COVERAGE               -->
+<!-- ============================================ -->
+
+<h2 class="section-header">Launch Day Coverage</h2>
+<p class="section-subtitle">
+  Where and when to watch Artemis II launch on April 1, 2026.
+</p>
+
+<div class="coverage-section">
+  <table class="coverage-table">
+    <thead>
+      <tr>
+        <th>Time (EDT)</th>
+        <th>Feed</th>
+        <th>Platform</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>7:45 AM</td>
+        <td>Tanking operations coverage</td>
+        <td><span class="platform-tag">YouTube</span></td>
+      </tr>
+      <tr>
+        <td>12:50 PM</td>
+        <td>Official launch broadcast</td>
+        <td>
+          <span class="platform-tag">NASA+</span>
+          <span class="platform-tag">Prime Video</span>
+          <span class="platform-tag">YouTube</span>
+        </td>
+      </tr>
+      <tr>
+        <td>4:45 PM</td>
+        <td>Spanish-language broadcast</td>
+        <td><span class="platform-tag">NASA platforms</span></td>
+      </tr>
+      <tr>
+        <td>6:24 PM</td>
+        <td style="color: var(--artemis-red); font-weight:500;">Launch window opens</td>
+        <td>
+          <span class="platform-tag">All feeds</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:1rem; font-size:0.75rem; color:var(--dim); line-height:1.7;">
+    <strong style="color:#c8d0e0;">Where to watch:</strong>
+    <a href="https://plus.nasa.gov" target="_blank" rel="noopener">NASA+</a> (free, no account required) &middot;
+    YouTube <a href="https://youtube.com/@NASA" target="_blank" rel="noopener">@NASA</a> &middot;
+    Amazon Prime Video &middot;
+    <a href="https://www.nasa.gov/nasaapp/" target="_blank" rel="noopener">NASA App</a> (iOS &amp; Android)
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 5: WHAT COMES AFTER                  -->
+<!-- ============================================ -->
+
+<h2 class="section-header">What Comes After</h2>
+<p class="section-subtitle">
+  Artemis II is the beginning, not the destination. The program aims for sustained human presence at and around the Moon.
+</p>
+
+<div class="next-missions">
+  <div class="next-card">
+    <div class="next-card-name">Artemis III</div>
+    <div class="next-card-desc">First crewed lunar landing since Apollo 17. Two astronauts descend to the south pole using a SpaceX Starship Human Landing System. First woman on the Moon.</div>
+    <div class="next-card-year">Target: 2027+</div>
+  </div>
+  <div class="next-card">
+    <div class="next-card-name">Artemis IV</div>
+    <div class="next-card-desc">First mission to dock with the Gateway lunar space station. Crew arrives aboard Orion, transfers to the station in a near-rectilinear halo orbit around the Moon.</div>
+    <div class="next-card-year">Target: Late 2020s</div>
+  </div>
+  <div class="next-card">
+    <div class="next-card-name">Artemis V+</div>
+    <div class="next-card-desc">Sustained lunar presence. Regular rotations to Gateway, extended surface stays, in-situ resource utilization, and preparation for eventual Mars missions.</div>
+    <div class="next-card-year">2030s and beyond</div>
+  </div>
+</div>
+
+<!-- === BOTTOM NAV === -->
+<div class="nav-links" style="margin-top:2rem;">
+  <a href="index.html">Tracker</a> &middot;
+  <a href="crew.html">Crew</a> &middot;
+  <a href="vehicle.html">Vehicle</a> &middot;
+  <a href="science.html">Science</a> &middot;
+  <a href="math.html">Math</a> &middot;
+  <a href="../../index.html">Research</a> &middot;
+  <a href="../index.html">NASA Missions</a>
+</div>
+
+<!-- === FOOTER === -->
+<div class="data-source-bar">
+  Sources: NASA Artemis II Press Kit &middot; NASA OIG Reports &middot; Kennedy Space Center Media Center &middot; nasa.gov/artemis-ii
+</div>
+<div class="page-footer">
+  Artemis II Mission Timeline &mdash; tibsfox.com Research &middot; NASA Mission Series
+</div>
+
+<!-- === GAP COUNTER SCRIPT === -->
+<script>
+(function() {
+  // Apollo 17 splashdown: December 19, 1972, 19:24:59 UTC
+  var apollo17Splashdown = new Date(Date.UTC(1972, 11, 19, 19, 24, 59));
+
+  function updateGapCounter() {
+    var now = new Date();
+    var diff = now.getTime() - apollo17Splashdown.getTime();
+    var days = Math.floor(diff / 86400000);
+    document.getElementById('gap-days').textContent = days.toLocaleString();
+  }
+
+  updateGapCounter();
+  setInterval(updateGapCounter, 60000);
+})();
+</script>
+
+</body>
+</html>
