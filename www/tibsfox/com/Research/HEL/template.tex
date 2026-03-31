@@ -1,0 +1,100 @@
+\documentclass[11pt,a4paper]{article}
+
+% Fonts and encoding
+\usepackage{fontspec}
+\setmainfont{DejaVu Serif}[Scale=1.0]
+\setsansfont{DejaVu Sans}[Scale=0.95]
+\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+
+% Layout
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\setlength{\parskip}{0.5em}
+
+% Colors — brand palette derived from Paintless Dog fox watercolor
+\usepackage{xcolor}
+\definecolor{helgold}{HTML}{FFD700}
+\definecolor{helaccent}{HTML}{E94560}
+\definecolor{helbg}{HTML}{1A1A2E}
+\definecolor{hellink}{HTML}{4FC3F7}
+\definecolor{helmuted}{HTML}{808090}
+
+% Headers
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\sffamily\color{helaccent}}{}{0em}{}[\color{helmuted}\titlerule]
+\titleformat{\subsection}{\large\bfseries\sffamily\color{hellink}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\sffamily}{}{0em}{}
+
+% Tables
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{calc}
+\usepackage{multirow}
+
+% Links
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=helaccent,
+  urlcolor=hellink,
+  citecolor=hellink
+}
+
+% Code blocks
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+  commandchars=\\\{\},
+  fontsize=\small,
+  frame=single,
+  framesep=3mm
+}
+
+% Header/footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{helmuted}HEL — Helium Supply Chain Research}
+\fancyhead[R]{\small\sffamily\color{helmuted}tibsfox.com/Research/HEL}
+\fancyfoot[C]{\small\sffamily\color{helmuted}\thepage}
+\fancyfoot[R]{\small\sffamily\color{helmuted}PNW Research Series}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Title page customization
+\usepackage{titling}
+
+% Graphics
+\usepackage{graphicx}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{nosep, left=0pt}
+\setlist[enumerate]{nosep, left=0pt}
+
+% Pandoc compatibility
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Huge\bfseries\sffamily\color{helaccent} HEL\par}
+\vspace{0.5cm}
+{\LARGE\sffamily Helium Supply Chain \&\par Pacific Rim Semiconductor Infrastructure\par}
+\vspace{1cm}
+{\Large\sffamily\color{helmuted} $title$\par}
+\vspace{2cm}
+{\large\sffamily PNW Research Series\par}
+{\normalsize\sffamily tibsfox.com/Research/HEL\par}
+\vspace{1cm}
+{\normalsize\sffamily\color{helmuted} Published 2026-03-31\par}
+\vfill
+{\small\sffamily\color{helmuted} This research is published openly because the problem is everyone's problem.\par
+The ideas are free. The understanding should be too.\par}
+\end{titlepage}
+
+$body$
+
+\end{document}
