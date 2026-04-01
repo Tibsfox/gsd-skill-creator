@@ -90,7 +90,7 @@
     "s_scale_prob": 15
   },
   "scoring": {
-    "sample_count": 20,
+    "sample_count": 27,
     "leaders": {
       "temp_accuracy": "KSEA best at 1am (0.6C error). Open-Meteo 2.5C miss. KSEA perfect match at 11pm (10.6=10.6). Overall: KSEA converging with KPAE overnight.",
       "wind_accuracy": "Both models missed gusty winds at 1am \u2014 KPAE 27.8 km/h gusting 33.3, Open-Meteo predicted 13.0, KSEA only 7.4.",
@@ -101,7 +101,7 @@
   "announcements": [
     {
       "time": "2026-04-01T14:00:00Z",
-      "text": "v1.1.7: T-8h 7am. KPAE 7.0\u00b0C Calm, SCT080. KSC 21.0\u00b0C."
+      "text": "v1.1.7: T-8h 7am LAUNCH DAY. Full content update: 3 new papers (#22-24, cryogenic propellant, post-CME dose, direct entry params). KPAE 7.0°C calm SCT080, solar heating begins. Kp 2.0 recovering. G2 watch holds but improving. 24 papers total. LIVE dashboard updated with GO/NO-GO context. Aurora possible tonight at 55°N."
     },
     {
       "time": "2026-04-01T08:00:00Z",
