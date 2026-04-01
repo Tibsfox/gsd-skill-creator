@@ -1,0 +1,149 @@
+\documentclass[11pt,a4paper]{article}
+
+% Margins
+\usepackage[margin=1in]{geometry}
+
+% Encoding and fonts (XeLaTeX)
+\usepackage{fontspec}
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}[Scale=0.95]
+\setmonofont{DejaVu Sans Mono}[Scale=0.85]
+
+% Unicode math support
+\usepackage{unicode-math}
+\setmathfont{Latin Modern Math}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{nasablue}{HTML}{0B3D91}
+\definecolor{nasared}{HTML}{FC3D21}
+\definecolor{linkblue}{HTML}{1155CC}
+\definecolor{codebg}{HTML}{F5F5F5}
+\definecolor{rulegray}{HTML}{CCCCCC}
+
+% Typography
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{nasablue}{$title$}}
+\fancyhead[R]{\small\textcolor{nasablue}{\thepage}}
+\fancyfoot[C]{\small\textcolor{gray}{$author$}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+% Section styling with NASA blue
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{nasablue}}{\thesection}{1em}{}[\color{rulegray}\titlerule]
+\titleformat{\subsection}
+  {\large\bfseries\color{nasablue}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{nasablue}}{\thesubsubsection}{1em}{}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{calc}
+
+% Links
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=nasablue,
+  urlcolor=linkblue,
+  citecolor=nasablue,
+  pdftitle={$title$},
+  pdfauthor={$author$},
+}
+
+% Code blocks
+\usepackage{listings}
+\lstset{
+  basicstyle=\small\ttfamily,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{rulegray},
+  breaklines=true,
+  breakatwhitespace=false,
+  tabsize=2,
+  showstringspaces=false,
+  columns=flexible,
+  keepspaces=true,
+  xleftmargin=1em,
+  xrightmargin=1em,
+  framexleftmargin=0.5em,
+  framexrightmargin=0.5em,
+}
+
+% Graphics
+\usepackage{graphicx}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep, topsep=3pt}
+\setlist[enumerate]{noitemsep, topsep=3pt}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% CSLReferences environment for pandoc bibliography
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{CSLReferences}[2]{}{}
+
+% Table scaling
+\let\oldlongtable\longtable
+\let\endoldlongtable\endlongtable
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+{\color{nasablue}\rule{\textwidth}{2pt}}
+
+\vspace{1.5cm}
+
+{\Huge\bfseries\color{nasablue} $title$\par}
+
+\vspace{1cm}
+
+{\Large $author$\par}
+
+\vspace{0.5cm}
+
+{\large $date$\par}
+
+\vspace{1.5cm}
+
+{\color{nasablue}\rule{\textwidth}{2pt}}
+
+\vfill
+
+{\small\color{gray} Generated from research baseline documentation.\\
+Source control: git branch \texttt{artemis-ii}}
+
+\end{titlepage}
+
+% Table of contents
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+$body$
+
+\end{document}
