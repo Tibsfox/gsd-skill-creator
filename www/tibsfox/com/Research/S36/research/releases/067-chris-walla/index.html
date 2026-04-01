@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 67&deg; &mdash; Chris Walla &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>067 &mdash; Chris Walla</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Third Death Cab Member &mdash; The Producer as Artist &mdash; The Clean Room &mdash; The Departed Member</h3>
+      <p>
+        Chris Walla at degree 67&deg; is the <strong>third Death Cab for Cutie
+        member</strong> in the engine &mdash; Gibbard at 58 (band) and 60
+        (solo), now Walla at 67. Lead guitarist and producer of Death Cab
+        from 1997&ndash;2014, departing after seventeen years. Solo artist:
+        <em>Field Manual</em> (2008, Barsuk). Renowned producer &mdash;
+        The Decemberists, Tegan and Sara, Nada Surf, The Long Winters
+        (degree 59). <strong>Indie/Folk</strong> at Genre Stage 49 &mdash;
+        hybrid returns. <strong>E=3</strong> &mdash; middle energy, neither
+        the ache of Death Cab nor the bare wire of Gibbard solo.
+        <strong>Self-released</strong> &mdash; post-label, like Gibbard
+        solo (60). The clean room as the 68th acoustic element. The departed
+        member as the 68th artist-city pattern. The controlled variable as
+        the 67th blue note.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">67&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Chris Walla</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 3</span>
+          <span class="genre-badge">Indie/Folk</span>
+          <span class="label-badge">Self-Released</span>
+          <span class="neighborhood-badge">Seattle</span>
+          <span class="record-badge">Producer as Artist</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: Third Death Cab Member &middot; Producer as Artist &middot; E=3 Returns &middot; Cross-Degree Production</h4>
+          <p>
+            <strong>Chris Walla</strong> enters the engine as the third
+            Death Cab for Cutie member &mdash; after the band at degree 58
+            and Gibbard solo at degree 60. Lead guitarist and producer
+            1997&ndash;2014; departed 2014. Solo artist with
+            <em>Field Manual</em> (2008, Barsuk). The engine&rsquo;s first
+            <strong>producer-primary artist</strong> &mdash; known more for
+            the records he shaped than the ones he released.
+            <strong>Indie/Folk</strong> at Genre Stage 49 &mdash; hybrid
+            genre returns. <strong>E=3</strong> &mdash; middle energy.
+            Distribution after degree 67: E1:3, E2:21, E3:16, E4:17,
+            E5:10, E6:2. <strong>Self-released</strong> post-label work.
+            Cross-degree production credits: The Long Winters (59),
+            Death Cab (58). The clean room &mdash; 68th acoustic element.
+            The departed member &mdash; 68th artist-city pattern.
+            The controlled variable &mdash; 67th blue note.
+          </p>
+        </div>
+
+        <section>
+          <h2>The Producer as Artist: Behind Every Great Record</h2>
+          <p>
+            <strong>Chris Walla</strong> is a guitarist, songwriter,
+            and &mdash; above all &mdash; a producer. He was the lead
+            guitarist of <strong>Death Cab for Cutie</strong> from the
+            band&rsquo;s formation in Bellingham in 1997 through his
+            departure in 2014 &mdash; seventeen years as co-architect
+            of one of the most important indie rock bands in the Pacific
+            Northwest. But Walla&rsquo;s contribution to Death Cab was
+            never limited to guitar. He produced the first four Death Cab
+            albums: <em>Something About Airplanes</em> (1998),
+            <em>We Have the Facts and We&rsquo;re Voting Yes</em> (2000),
+            <em>The Photo Album</em> (2001), and
+            <em>Transatlanticism</em> (2003). The sound that defined
+            Death Cab &mdash; clean, dynamic, emotionally precise &mdash;
+            was Walla&rsquo;s production aesthetic as much as Gibbard&rsquo;s
+            songwriting.
+          </p>
+          <p>
+            As a solo artist, Walla released <em>Field Manual</em> in 2008
+            on Barsuk Records &mdash; the same label that launched Death
+            Cab. The album is quieter, more introspective, more folksong
+            than rock song. Where Death Cab&rsquo;s music aches at E=2,
+            and Gibbard&rsquo;s solo work exposes the bare wire at E=2,
+            Walla&rsquo;s solo work occupies the middle register at E=3
+            &mdash; neither the band&rsquo;s emotional weight nor the
+            solo artist&rsquo;s stripped vulnerability. The middle energy
+            of a craftsman who builds emotional spaces for others and,
+            on his own, builds something careful, considered, precise.
+          </p>
+          <blockquote>
+            The clean room is the acoustic element of a producer who has
+            shaped the sound of a generation of Pacific Northwest indie
+            music. Walla&rsquo;s production is not absence of character
+            &mdash; it is presence of control. Every frequency chosen,
+            every dynamic shift deliberate, every silence earned. The
+            clean room is where the music gets made right.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Death Cab Expanded Universe: Three Members, Three Degrees</h2>
+          <p>
+            Degree 67 marks the <strong>third Death Cab for Cutie member</strong>
+            in the engine. The band appeared at degree 58 &mdash; the full
+            ensemble, the collective identity. Ben Gibbard appeared solo at
+            degree 60 &mdash; the vocalist stripped bare, the songwriter
+            without the band. Now Chris Walla at degree 67 &mdash; the
+            guitarist and producer, the builder behind the scenes, the
+            departed member who left the band and became something else.
+          </p>
+          <p>
+            Three degrees, three perspectives on the same musical organism.
+            <strong>Degree 58</strong> is Death Cab as a band: the settling
+            sound, the ache, the Bellingham-to-Seattle migration, the Barsuk
+            years, the Atlantic years, the collective identity.
+            <strong>Degree 60</strong> is Gibbard alone: the bare wire, the
+            voice without the production, the songwriter as solitary figure.
+            <strong>Degree 67</strong> is Walla apart: the producer without
+            the band, the craftsman who shaped the sound but is now
+            self-released, the departed member finding his own frequency.
+          </p>
+          <p>
+            Walla&rsquo;s departure from Death Cab in 2014 was documented
+            in the degree 58 release notes. The departure was amicable but
+            definitive &mdash; after seventeen years, the co-architect
+            stepped away. The band continued with a different production
+            identity. Walla continued as a producer for other artists and
+            as a solo musician. The departure is not a rupture but a
+            divergence &mdash; two trajectories that shared seventeen years
+            and then separated. Degree 67 is the engine&rsquo;s study of
+            what the departed member becomes.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>Cross-Degree Production: The Web Behind the Records</h2>
+          <p>
+            Walla&rsquo;s production credits form a web across the engine.
+            He produced <strong>The Long Winters&rsquo;</strong>
+            <em>The Worst You Can Do Is Harm</em> (degree 59) &mdash;
+            John Roderick&rsquo;s debut, the ache at its source. He
+            produced the first four Death Cab albums (degree 58). His
+            production work extends beyond the engine to
+            <strong>The Decemberists</strong>,
+            <strong>Tegan and Sara</strong>,
+            <strong>Nada Surf</strong>,
+            <strong>Hot Hot Heat</strong>,
+            <strong>Ra Ra Riot</strong>, and many others.
+          </p>
+          <p>
+            The cross-degree production credits are a structural event:
+            an artist at one degree shaped the sound at other degrees.
+            Walla is the first artist in the engine whose primary
+            contribution is as a <strong>producer</strong> rather than
+            a performer. His fingerprints are on records across the
+            Pacific Northwest indie landscape. The clean, dynamic,
+            emotionally precise aesthetic that characterizes his work
+            can be heard in Death Cab&rsquo;s early catalog, in
+            The Long Winters&rsquo; debut, and across the broader
+            indie rock output of the 2000s. The producer as connective
+            tissue between otherwise separate artists and degrees.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Clean Room</h4>
+              <div class="level advanced">Advanced &mdash; 68th Acoustic Element</div>
+              <p>
+                The acoustic quality of a production aesthetic that is
+                clean, dynamic, and emotionally precise. Not sterile
+                &mdash; the clean room is full of feeling. But every
+                frequency is chosen, every dynamic shift is deliberate,
+                every silence is earned. Walla&rsquo;s production on
+                Death Cab&rsquo;s first four albums defined this
+                aesthetic: the sound that lets the emotion through
+                without letting the noise through. The clean room is
+                where the country thunder (66) gets controlled, where
+                the bare wire (60) gets insulated, where the ache (59)
+                gets its shape.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Departed Member</h4>
+              <div class="level advanced">Advanced &mdash; 68th Artist-City Pattern</div>
+              <p>
+                The pattern of a musician who leaves a band after years
+                of co-creation and becomes a different kind of artist.
+                Not the Export (leaves a city) or the wanderer
+                (accumulates cities). The departed member leaves a
+                <em>band</em> &mdash; a creative organism &mdash; and
+                must find or build an identity that is not defined by
+                the collective. Walla was Death Cab&rsquo;s producer
+                and guitarist for seventeen years. The departure reveals
+                the producer underneath the band member.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Controlled Variable</h4>
+              <div class="level intermediate">Intermediate &mdash; 67th Deployment</div>
+              <p>
+                The blue note that sounds when a producer&rsquo;s
+                precision encounters the uncontrollable element of
+                human emotion. The controlled variable is the moment
+                in a Walla production where everything is in place
+                &mdash; the frequencies, the dynamics, the arrangement
+                &mdash; and yet the emotion bleeds through the control.
+                The howl at the edge (66) erupts; the controlled
+                variable leaks. Different failures of containment.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Indie/Folk at Genre Stage 49</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 49</div>
+              <p>
+                Indie/Folk hybrid returns at degree 67. Walla&rsquo;s
+                solo work blends indie rock sensibility with folk
+                song structures &mdash; acoustic guitar, careful
+                arrangements, lyrics that observe rather than declaim.
+                The hybrid appeared earlier in the engine; its return
+                at 67 marks a different deployment: the producer&rsquo;s
+                folk, where every acoustic detail is a conscious
+                choice.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Key Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>Field Manual</h4>
+              <div class="disco-years">2008 &middot; Barsuk Records</div>
+              <p>
+                Walla&rsquo;s solo debut. Indie folk with the
+                producer&rsquo;s ear: clean, precise, carefully
+                layered. Songs like &ldquo;Everybody on&rdquo; and
+                &ldquo;It&rsquo;s Unsustainable&rdquo; reveal the
+                songwriter beneath the producer. Released while
+                still in Death Cab &mdash; the solo identity
+                emerging alongside the band identity.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Tape Loops</h4>
+              <div class="disco-years">2016 &middot; Self-Released</div>
+              <p>
+                Post-departure. Ambient and experimental tape loop
+                compositions &mdash; the producer exploring sound
+                itself, freed from song structure. The clean room
+                without walls. Music as texture, as architecture,
+                as the controlled variable pushed to its limit.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Death Cab (Producer)</h4>
+              <div class="disco-years">1998&ndash;2003 &middot; Barsuk</div>
+              <p>
+                Produced four albums: <em>Something About
+                Airplanes</em>, <em>We Have the Facts</em>,
+                <em>The Photo Album</em>,
+                <em>Transatlanticism</em>. The sound that defined
+                Death Cab &mdash; Walla&rsquo;s clean, dynamic
+                aesthetic shaping Gibbard&rsquo;s songs into the
+                settling sound.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Production Credits</h4>
+              <div class="disco-years">2000s&ndash;2010s &middot; Various</div>
+              <p>
+                The Decemberists (<em>The Crane Wife</em>,
+                <em>The King Is Dead</em>), Tegan and Sara
+                (<em>The Con</em>), Nada Surf, Hot Hot Heat,
+                The Long Winters (<em>The Worst You Can Do Is
+                Harm</em>, degree 59). A catalog of production
+                work that defines the PNW indie sound.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">58&deg;</span>
+              <strong>Death Cab for Cutie</strong> &mdash; Walla was
+              co-architect: lead guitarist and producer for seventeen
+              years (1997&ndash;2014). Produced the first four albums
+              that defined Death Cab&rsquo;s sound. The band vs. the
+              departed member. The settling sound was Walla&rsquo;s
+              clean room as much as Gibbard&rsquo;s songwriting.
+            </li>
+            <li>
+              <span class="ref-degree">60&deg;</span>
+              <strong>Ben Gibbard</strong> &mdash; Both Death Cab
+              members as solo artists. Gibbard: vocalist, bare wire,
+              E=2. Walla: guitarist/producer, clean room, E=3.
+              Different roles in the band, different solo identities.
+              Both self-released post-label solo work. Both at Barsuk
+              for initial solo releases.
+            </li>
+            <li>
+              <span class="ref-degree">59&deg;</span>
+              <strong>The Long Winters</strong> &mdash; Walla produced
+              <em>The Worst You Can Do Is Harm</em>. Producer-artist
+              cross-degree connection. Walla&rsquo;s clean room
+              aesthetic shaping Roderick&rsquo;s ache. The producer
+              as invisible collaborator.
+            </li>
+            <li>
+              <span class="ref-degree">64&deg;</span>
+              <strong>Jesse Sykes</strong> &mdash; Barsuk connection.
+              Walla&rsquo;s <em>Field Manual</em> on Barsuk, Sykes
+              connected to the Barsuk ecosystem. The label as
+              connective tissue across the engine&rsquo;s country-folk
+              and indie-folk territories.
+            </li>
+            <li>
+              <span class="ref-degree">55&deg;</span>
+              <strong>Shelby Earl</strong> &mdash; Producer network.
+              Roderick produced Earl, Walla produced Death Cab and
+              Long Winters. The PNW producer web &mdash; a network
+              of sonic architects shaping each other&rsquo;s work.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">67&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Indie/Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">49</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">Seattle</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">City</span>
+            <span class="stat-value">Seattle, WA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Band</span>
+            <span class="stat-value">Death Cab (1997&ndash;2014)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active (producer)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Self-released</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Departed Member</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Structural Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">49 (Indie/Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#68 (Clean Room)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">Departed Member</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#67 (Controlled Variable)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Death Cab Universe</h4>
+          <div class="stat-row">
+            <span class="stat-label">58&deg; Band</span>
+            <span class="stat-value">Death Cab for Cutie</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">60&deg; Vocalist</span>
+            <span class="stat-value">Ben Gibbard (solo)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">67&deg; Producer</span>
+            <span class="stat-value">Chris Walla (solo)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">21</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">16</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#68 (Clean Room)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#68 (Departed Member)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#67 (Controlled Var.)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Production Web</h4>
+          <div class="stat-row">
+            <span class="stat-label">Death Cab</span>
+            <span class="stat-value">4 albums (58&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Long Winters</span>
+            <span class="stat-value">debut (59&deg;)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Decemberists</span>
+            <span class="stat-value">2 albums</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Tegan &amp; Sara</span>
+            <span class="stat-value">The Con</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row">
+            <span class="stat-label">Death Cab</span>
+            <span class="stat-value">Co-architect (58)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gibbard</span>
+            <span class="stat-value">Bandmate/solo (60)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Long Winters</span>
+            <span class="stat-value">Producer (59)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Jesse Sykes</span>
+            <span class="stat-value">Barsuk orbit (64)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shelby Earl</span>
+            <span class="stat-value">Producer web (55)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../066-neko-case/" style="color: var(--seattle-navy);">&larr; 66&deg; Neko Case</a>
+        <a href="../068/" style="color: var(--seattle-navy);">68&deg; &rarr;</a>
+      </div>
+      <p>
+        Degree 67&deg; &mdash; Chris Walla &mdash; Seattle 360 Engine &mdash;
+        v1.49.198
+        <br>
+        Lead guitarist and producer of Death Cab for Cutie (1997&ndash;2014).
+        Third Death Cab member in the engine &mdash; band at 58, Gibbard
+        solo at 60, Walla solo at 67. Producer of the first four Death Cab
+        albums that defined the band&rsquo;s sound. Solo artist:
+        <em>Field Manual</em> (2008, Barsuk). Post-departure:
+        <em>Tape Loops</em> (2016, self-released). Renowned producer
+        &mdash; The Decemberists, Tegan and Sara, Nada Surf, The Long
+        Winters (degree 59). Indie/Folk at Genre Stage 49 &mdash; hybrid
+        returns. E=3 &mdash; middle energy. Distribution 3:21:16:17:10:2.
+        Self-released &mdash; post-label. The clean room &mdash; 68th
+        acoustic element &mdash; clean, dynamic, emotionally precise
+        production. The departed member &mdash; 68th artist-city pattern
+        &mdash; the musician who leaves a band and becomes a different
+        kind of artist. The controlled variable &mdash; 67th blue note
+        &mdash; precision meeting uncontrollable emotion. Cross-degree
+        production credits across degrees 58 and 59. The producer as
+        connective tissue. The builder behind the scenes.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
