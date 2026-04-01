@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PNW Weather Forecasting &mdash; The People, the Science, and Why It's So Hard Here</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:1.8rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin:0 0.6rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+    h2 { font-size:1.2rem; font-weight:400; color:var(--sand); margin:2.5rem 0 0.5rem; padding-bottom:0.3rem; border-bottom:1px solid var(--border); }
+    h3 { font-size:1rem; font-weight:400; color:#fff; margin:1.5rem 0 0.5rem; }
+    p { font-size:0.9rem; color:var(--text); margin-bottom:0.8rem; }
+
+    .panel { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1.2rem; margin-bottom:1.5rem; }
+    .panel h3 { margin-top:0; }
+    .panel p { font-size:0.88rem; color:rgba(255,255,255,0.6); margin-bottom:0.5rem; }
+    .panel p:last-child { margin-bottom:0; }
+
+    .person-card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; margin-bottom:1.5rem; position:relative;
+      border-left:3px solid var(--sea-light);
+    }
+    .person-card h3 { margin-top:0; color:var(--sand); font-size:1.05rem; }
+    .person-card .station { font-size:0.75rem; color:var(--marine); font-family:system-ui,sans-serif; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem; display:block; }
+    .person-card .years { font-size:0.75rem; color:var(--dim); font-family:monospace; margin-bottom:0.6rem; display:block; }
+    .person-card p { font-size:0.88rem; color:rgba(255,255,255,0.6); margin-bottom:0.5rem; }
+    .person-card p:last-child { margin-bottom:0; }
+    .person-card .highlight { color:var(--text); }
+
+    .callout {
+      background:rgba(58,138,154,0.08); border:1px solid rgba(58,138,154,0.15);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0;
+      font-size:0.85rem; color:var(--marine);
+    }
+    .callout strong { color:var(--sand); }
+
+    .phenomenon-box {
+      background:rgba(196,176,144,0.06); border:1px solid rgba(196,176,144,0.15);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0;
+    }
+    .phenomenon-box .label { font-size:0.75rem; color:var(--sand); font-family:monospace; text-transform:uppercase; letter-spacing:0.05em; }
+    .phenomenon-box p { font-size:0.85rem; color:var(--text); margin:0.3rem 0 0; }
+
+    .formula {
+      background:rgba(26,58,74,0.3); border:1px solid rgba(74,122,154,0.2);
+      border-radius:4px; padding:1rem 1.2rem; margin:0.8rem 0;
+      font-family:'Courier New', monospace; font-size:0.95rem; color:var(--sky);
+      text-align:center; letter-spacing:0.02em; line-height:2;
+    }
+    .formula .label { font-size:0.7rem; color:var(--dim); font-family:system-ui,sans-serif; display:block; margin-bottom:0.3rem; text-transform:uppercase; letter-spacing:0.1em; }
+
+    .data-table { width:100%; border-collapse:collapse; font-size:0.82rem; margin:0.8rem 0; }
+    .data-table th { text-align:left; font-size:0.65rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); }
+    .data-table td { padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); color:var(--text); }
+
+    blockquote { font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light); padding:0.8rem 1.2rem; margin:1.5rem 0; font-size:0.9rem; }
+
+    ul { margin:0.5rem 0 0.8rem 1.5rem; font-size:0.88rem; color:rgba(255,255,255,0.6); }
+    ul li { margin-bottom:0.3rem; }
+
+    .connections { background:rgba(42,74,48,0.15); border:1px solid rgba(42,74,48,0.3); border-radius:4px; padding:0.8rem 1rem; margin:1rem 0; font-size:0.85rem; }
+    .connections strong { color:var(--sand); }
+    .connections a { color:var(--marine); }
+
+    .phase-card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; margin-bottom:1rem;
+      border-left:3px solid var(--marine);
+    }
+    .phase-card h3 { margin-top:0; font-size:0.95rem; }
+    .phase-card .status {
+      display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+      font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:500;
+      margin-left:0.5rem;
+    }
+    .status-active { background:rgba(76,175,80,0.1); color:#6abf6e; border:1px solid rgba(76,175,80,0.3); }
+    .status-next { background:rgba(58,138,154,0.1); color:var(--marine); border:1px solid rgba(58,138,154,0.3); }
+    .status-future { background:rgba(196,176,144,0.1); color:var(--sand); border:1px solid rgba(196,176,144,0.3); }
+    .phase-card p { font-size:0.85rem; color:rgba(255,255,255,0.5); margin-bottom:0.4rem; }
+    .phase-card p:last-child { margin-bottom:0; }
+    .phase-card ul { margin:0.3rem 0 0.4rem 1.2rem; font-size:0.83rem; }
+
+    footer { max-width:900px; margin:0 auto; padding:1.5rem; text-align:center; font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border); font-family:system-ui,sans-serif; }
+    footer a { color:var(--fog); }
+
+    @media(max-width:640px) {
+      header h1 { font-size:1.4rem; }
+      main { padding:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>PNW Weather Forecasting</h1>
+  <div class="subtitle">The people, the science, and why it's so hard here</div>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="weather-math.html">Weather Math</a>
+    <a href="weather-science.html">Weather Science</a>
+    <a href="convergence-zone.html">Convergence Zone</a>
+    <a href="pnw-weather.html" class="active">PNW Weather</a>
+    <a href="../../LIVE/index.html">LIVE</a>
+    <a href="../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+
+  <blockquote>
+    If you want to understand why weather forecasting is so difficult, come to the Pacific Northwest.
+    Two mountain ranges, an inland sea, a 3,000-mile fetch of open ocean, volcanic peaks that scrape the jet stream,
+    and microclimates so tight that it can rain in Mukilteo while Everett sits under blue sky six miles away.
+    This page is a love letter to the people and science that have spent decades trying to get it right.
+  </blockquote>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: WHY PNW WEATHER IS SO HARD TO PREDICT             -->
+  <!-- ============================================================ -->
+
+  <h2>1. Why PNW Weather Is So Hard to Predict</h2>
+
+  <p>The Pacific Northwest is one of the most meteorologically complex regions in North America. Every operational weather model &mdash; from the GFS to the ECMWF to the NAM &mdash; struggles here. Not because the models are bad, but because the terrain forces the atmosphere into behaviors that are extraordinarily difficult to simulate at the resolutions most models operate at.</p>
+
+  <div class="panel">
+    <h3>The Olympic Mountains Split Airflow</h3>
+    <p>When Pacific air flows eastward toward Puget Sound, the Olympic Mountains &mdash; rising to nearly 8,000 feet &mdash; stand directly in the way. The low-level flow is forced to split: one branch channels through the Strait of Juan de Fuca to the north, the other wraps around the southern flank through the Chehalis Gap. When these two branches reconverge over central Puget Sound, they create the Puget Sound Convergence Zone &mdash; a narrow band of clouds and precipitation that can appear seemingly out of nowhere between north Seattle and Everett. This is the single biggest source of forecast error in our region.</p>
+    <p>See our <a href="convergence-zone.html">deep dive on the Convergence Zone</a> for the full physics.</p>
+  </div>
+
+  <div class="panel">
+    <h3>The Cascade Rain Shadow</h3>
+    <p>The Cascade Range runs north-south, forcing Pacific moisture upward on its western slopes through orographic lift. The western Cascades receive 80 to 150 inches of precipitation annually. Cross the crest and drop into Ellensburg, and you get 8 to 9 inches. That is a precipitation gradient of more than 10:1 in less than 50 miles &mdash; one of the steepest in the world.</p>
+    <p>The Olympics create their own rain shadow too. Sequim, on the northeast flank of the Olympics, sits in one of the driest spots in western Washington &mdash; roughly 16 inches a year &mdash; while the Hoh Rainforest on the opposite side of the same mountains averages over 140 inches. Same mountain range, same weather system, completely different outcomes.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Marine Influence</h3>
+    <p>The Pacific Ocean is a massive thermal buffer. Sea surface temperatures off Washington rarely exceed 13&deg;C (55&deg;F) even in summer, which keeps coastal areas cool and foggy while locations just 30 miles inland can be 15-20&deg;F warmer. The marine layer &mdash; a shallow layer of cool, moist air trapped beneath a temperature inversion &mdash; can surge inland during onshore flow events, dropping temperatures and bringing drizzle to areas that were sunny hours before.</p>
+    <p>This marine influence is what gives Seattle its mild winters (average January low: 36&deg;F) and cool summers (average August high: 76&deg;F). But it also makes temperature forecasting unreliable: a 5-mph difference in onshore wind speed can mean a 10&deg;F difference in afternoon temperature at Mukilteo.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Jet Stream Interaction</h3>
+    <p>The Pacific jet stream &mdash; a river of fast-moving air at 30,000 feet &mdash; steers weather systems from the open Pacific into the PNW. But its position varies enormously. When the jet dips south (a trough pattern), we get active weather with fronts every few days. When it ridges north, we get extended dry spells. The jet can also split around a blocking high, sending storms alternately into British Columbia and Oregon while Seattle sits in a "no man's land" between storm tracks.</p>
+    <p>During La Nina years, the jet typically aims storms directly at Washington. During El Nino, it curves south, delivering rain to California while the PNW stays drier and milder. These oscillations operate on timescales of months &mdash; exactly the range where weather models transition to climate models, and neither does it particularly well.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Pineapple Express (Atmospheric Rivers)</h3>
+    <p>An atmospheric river is a narrow corridor of concentrated moisture in the atmosphere &mdash; sometimes 300 miles wide and 1,500 miles long &mdash; that transports tropical water vapor toward the poles. When one of these rivers originates near Hawaii, it earns the nickname "Pineapple Express."</p>
+    <p>These events bring prodigious rainfall: 3 to 6 inches in 24 hours is common, with orographic enhancement pushing totals above 10 inches in the Cascades. They account for 30-50% of annual precipitation in the PNW and are responsible for most of the region's major flooding events. The November 2006 atmospheric river caused mudslides and flooding across Washington, with eleven counties declared federal disaster areas.</p>
+    <p>Atmospheric rivers are responsible for roughly 80% of all flood damage on the West Coast, totaling about $1 billion in damages per year. Forecasting their exact landfall location and moisture content remains one of the hardest problems in operational meteorology.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Fraser Outflow Events</h3>
+    <p>When a cold Arctic air mass settles over the interior of British Columbia, high surface pressure builds under the cold air. The resulting pressure gradient forces dense, frigid air through the Fraser River Valley &mdash; a natural channel that cuts through the Coast Mountains &mdash; and out across the Strait of Georgia toward the San Juan Islands and northern Puget Sound.</p>
+    <p>These outflow winds can reach 40-60 mph in the Fraser Valley, driving wind chills to -20&deg;C or lower. When this Arctic air undercuts warmer Pacific moisture, the result can be freezing rain, ice storms, or rare lowland snow events that paralyze the entire Seattle metro. The timing and strength of Fraser outflows are notoriously difficult to forecast because they depend on the exact temperature of the interior air mass, the depth of the cold pool, and small differences in the pressure gradient.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Microclimate Chaos</h3>
+    <p>All of the above &mdash; convergence zones, rain shadows, marine layers, orographic lift, and outflow dynamics &mdash; combine to create a patchwork of microclimates that can vary dramatically over just a few miles. It can rain in Mukilteo while Everett is dry, six miles apart. Lynnwood can be 45&deg;F while Marysville is 32&deg;F. Seattle's Capitol Hill can be socked in fog while Beacon Hill a mile south sits in sunshine.</p>
+    <p>This is why no single weather source gets PNW weather right consistently, and why we built a scoring system that tracks six independent sources against actual METAR observations. The microclimate variability isn't a bug &mdash; it's the fundamental nature of this landscape.</p>
+  </div>
+
+  <div class="connections">
+    <strong>Connection to our observatory:</strong> This microclimate complexity is exactly why we need six weather sources and a statistical scoring system. No single model can capture the interaction of terrain, marine air, and convergence dynamics at Mukilteo's specific location. See <a href="weather-math.html">Weather Math</a> for the scoring methodology and <a href="weather-science.html">Weather Science</a> for how models diverge here.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: THE WEATHER PEOPLE                                -->
+  <!-- ============================================================ -->
+
+  <h2>2. The Weather People &mdash; PNW Broadcasting Legends</h2>
+
+  <p>In the Pacific Northwest, your weather forecaster isn't just someone who reads the teleprompter. They're a trusted companion through nine months of grey skies, the voice that tells you whether it's safe to drive over Snoqualmie Pass, the person who decides whether your outdoor wedding will be rained on. These broadcasters become part of the family. PNW residents develop fierce loyalties to their weather person, and many of these people have given decades of their lives to helping us understand what's happening outside our windows.</p>
+
+  <div class="person-card">
+    <h3>Steve Pool</h3>
+    <span class="station">KOMO 4 &mdash; Chief Weather Forecaster</span>
+    <span class="years">1977 &ndash; 2019 &bull; 42 years</span>
+    <p class="highlight">Steve Pool was, for many of us, the face of Seattle weather. He started at KOMO 4 as an intern while studying at the University of Washington in the mid-1970s and was hired full-time after graduating in 1978. He covered sports and hard news before becoming chief weather forecaster in 1984 &mdash; a position he held for 35 years.</p>
+    <p>Steve was a pioneer. He was one of the first African American chief meteorologists in the country, and for years, the only one from the Great Plains to the Pacific Ocean. "There were a couple of guys, once you go to the Rust Belt and the Atlantic coast," he once said. "But I was the only one from the plains to the Pacific Ocean, and I was very much aware of it."</p>
+    <p>Over his career he won eight Emmy Awards and was invited to fill in on ABC's Good Morning America more than 70 times. But what people remember most is the warmth. Steve was the kind of person who made you feel like he was talking directly to you &mdash; telling you to grab a jacket, or that the sun might peek through by afternoon.</p>
+    <p>He retired in 2019 and continued contributing to KOMO, conceiving the documentary <em>How Seattle Changed The World</em> which premiered in 2023. Steve passed away on November 22, 2023, at age 70, after battling early-onset Alzheimer's disease. The University of Washington honored him on the screen at Husky Stadium before the Apple Cup. He deserved every tribute.</p>
+  </div>
+
+  <div class="person-card">
+    <h3>Cliff Mass</h3>
+    <span class="station">University of Washington &mdash; Professor of Atmospheric Sciences</span>
+    <span class="years">1981 &ndash; present &bull; 45+ years</span>
+    <p class="highlight">Cliff Mass is not a TV meteorologist, but he may be the most important weather voice in the Pacific Northwest. A professor of atmospheric sciences at the University of Washington, he leads the UW Mesoscale Analysis and Forecasting Group and serves as chief scientist of the Northwest Modeling Consortium.</p>
+    <p>Mass earned a B.S. in physics from Cornell University in 1974, where he worked with Carl Sagan on Martian weather research and with climatologist Stephen Schneider on climate conditions. His PhD in atmospheric sciences came from UW in 1978, studying the role of African wave disturbances in the Sahel region. After a stint at the University of Maryland (1978-1981), he joined UW's faculty and never left.</p>
+    <p>His weather blog (<a href="https://cliffmass.blogspot.com/">cliffmass.blogspot.com</a>) is the gold standard for PNW weather analysis. When a major storm is approaching or the convergence zone is acting up, thousands of Northwesterners check Cliff's blog before they check the TV news. He publishes detailed, accessible analyses of PNW weather events with the kind of scientific rigor that other blogs can only aspire to. He also hosts a weekly weather podcast.</p>
+    <p>His book, <em>The Weather of the Pacific Northwest</em> (first published 2008, second edition 2021, UW Press), is the definitive reference on our regional meteorology. The second edition added chapters on wildfire impacts on air quality, the meteorology of British Columbia, "The Blob" ocean warming event, and recent storms including the 2018 Port Orchard tornado that damaged 250 homes.</p>
+    <p>Mass has published over 120 peer-reviewed papers and is a Fellow of the American Meteorological Society. He is sometimes controversial &mdash; his opinions on homelessness, climate communication, and local politics have drawn criticism &mdash; but his weather analysis is consistently brilliant. More than anyone else, Cliff Mass taught the PNW public to understand <em>why</em> their weather happens, not just what it will be.</p>
+  </div>
+
+  <div class="person-card">
+    <h3>Jeff Renner</h3>
+    <span class="station">KING 5 &mdash; Chief Meteorologist</span>
+    <span class="years">1977 &ndash; 2016 &bull; 39 years</span>
+    <p class="highlight">Jeff Renner brought scientific credibility to Seattle TV weather at a time when most weather presenters were still drawing on chalkboards. He joined KING 5 in 1977 as a science reporter, was named weather anchor and science editor in 1980, and held the post for nearly four decades.</p>
+    <p>He started with a journalism degree from the University of Wisconsin (1975), but his passion for understanding the atmosphere led him back to school for a B.S. in atmospheric sciences from UW in 1988 &mdash; making him unique among lead Seattle forecasters in having a meteorology degree. A UW study rated him Seattle's most accurate weather forecaster.</p>
+    <p>In 1980, Renner was KING 5's chief reporter on the eruption of Mount St. Helens &mdash; one of the defining events in PNW broadcast history. His volcanic ash coverage was gripping, authoritative television. He earned the American Meteorological Society's Seal of Approval and was named "1994 Person of the Year" by the Puget Sound Chapter of the American Marketing Association.</p>
+    <p>Beyond broadcasting, Renner is a commercial pilot (land and seaplanes), former certified flight instructor, avid mountaineer, scuba diver, and member of The Mountaineers. He wrote about mountain weather from direct experience &mdash; something that gave his forecasts an authenticity you could feel. He retired from KING 5 in 2016.</p>
+  </div>
+
+  <div class="person-card">
+    <h3>Harry Wappler</h3>
+    <span class="station">KIRO 7</span>
+    <span class="years">1969 &ndash; 2002 &bull; 33 years</span>
+    <p class="highlight">"Harry's forecast" was a Seattle institution. Harry Wappler appeared on Seattle TV screens longer than any other local weathercaster &mdash; from 1969 to 2002, with only a three-year break for a stint at WNBC-TV in New York.</p>
+    <p>Wappler's path to weather was delightfully unconventional. A graduate of Northwestern University, he earned a graduate degree at Yale Divinity School and was an ordained Episcopal priest. He came to KIRO in 1969 to write editorials for station head Lloyd Cooney, but ended up in front of the weather map by happy accident, with no formal meteorological training.</p>
+    <p>What Harry had was wit, charm, and an extraordinary ability to ad-lib on live television. He didn't pretend to be a scientist &mdash; he was an entertainer who happened to talk about the weather, and Seattle loved him for it. He considered his favorite moments to be the ones when he made people laugh. His influence ran deep: a young Shannon O'Donnell was inspired to pursue meteorology after Harry visited her Bellevue elementary school.</p>
+    <p>Harry passed away in April 2010 at age 73 after complications from a 25-year battle with Crohn's disease. His son Andy followed him into KIRO 7, carrying on the Wappler weather legacy.</p>
+  </div>
+
+  <div class="person-card">
+    <h3>M.J. McDermott</h3>
+    <span class="station">Q13 Fox &mdash; Morning Meteorologist</span>
+    <span class="years">2002 &ndash; 2021 &bull; 19 years</span>
+    <p class="highlight">M.J. McDermott brought energy, warmth, and genuine scientific chops to Seattle's morning weather. For nearly two decades on Q13 Fox's morning show, she was the first voice many Seattleites heard when deciding what to wear and whether to carry an umbrella.</p>
+    <p>Her path to meteorology was anything but linear. She holds a degree in theatre arts from the University of Maryland, worked as an actress in New York City, moved to Seattle, and in the early 1990s co-hosted a children's TV show on KSTW with Rosco T. Raccoon &mdash; winning an Emmy. Then she enrolled at North Seattle College for prerequisites, went on to earn a B.S. in atmospheric sciences from UW, and became the first woman and broadcast meteorologist to win UW's annual forecasting competition.</p>
+    <p>That combination &mdash; performer's instincts plus real scientific training &mdash; made her forecasts both accessible and reliable. She earned several Emmy nominations during her Q13 tenure. After retiring in October 2021, she turned to writing, publishing two novels with a third in progress. The morning commute hasn't been quite the same without her.</p>
+  </div>
+
+  <div class="person-card">
+    <h3>Shannon O'Donnell</h3>
+    <span class="station">KOMO 4 &mdash; Chief Meteorologist</span>
+    <span class="years">2009 &ndash; present</span>
+    <p class="highlight">Shannon O'Donnell carries the KOMO 4 weather tradition forward with the same blend of local knowledge and professional rigor that defined the Steve Pool era. A Redmond High School graduate and UW atmospheric sciences alumna, she is a Seattle-area native whose love of weather started at age seven when Harry Wappler visited her Bellevue elementary school.</p>
+    <p>Before returning to Seattle, Shannon spent seven years as morning meteorologist at KNTV (NBC San Francisco), where she won "Best Meteorologist" from the Golden Gate Chapter of American Women in Radio and Television in 2005 and 2006. She guest-anchored on MSNBC, Early Today, and alongside the Today Show's Al Roker.</p>
+    <p>At KOMO, she earned the AMS Seal of Approval and in 2023 led the team to an Emmy for coverage of a winter ice storm that gripped Puget Sound. In 2020, she developed and launched a "Media &amp; Meteorology" class at the University of Washington, and teaches Atmospheric Sciences 101 in summer sessions &mdash; training the next generation of forecasters who will wrestle with convergence zones and Fraser outflows.</p>
+  </div>
+
+  <div class="person-card">
+    <h3>Rich Marriott</h3>
+    <span class="station">KING 5 &mdash; Senior Meteorologist</span>
+    <span class="years">1987 &ndash; 2022 &bull; 35 years</span>
+    <p class="highlight">Rich Marriott understood PNW weather from the mountains down. Before joining KING 5, he spent 15 years as a meteorologist with the U.S. Forest Service and the Northwest Avalanche Center (NWAC), including 12 years stationed in the National Weather Service office in Seattle. He provided mountain weather and avalanche forecasts, checked snowpack stability, taught avalanche courses, and installed some of the first remotely telemetered mountain weather stations in the Northwest.</p>
+    <p>That background gave his KING 5 forecasts an authority that went beyond reading model output. When Rich talked about a Cascade snowstorm, he had stood in those conditions, measured that snow, and understood the terrain at a level most broadcast meteorologists never achieve. He covered historic snowstorms, floods, heat waves, and major climate events over 35 years, earning an Emmy for his climate change reporting.</p>
+    <p>He retired in December 2022 after a career that spanned the transition from hand-drawn weather maps to high-resolution numerical models. Few people have watched that evolution more closely or explained it more clearly to the public.</p>
+  </div>
+
+  <div class="person-card">
+    <h3>Walter Kelley</h3>
+    <span class="station">Q13 Fox &mdash; Chief Meteorologist</span>
+    <span class="years">1997 &ndash; 2020 &bull; 23 years at Q13 (48 years in broadcasting)</span>
+    <p class="highlight">Walter Kelley was with Q13 Fox from the very beginning of its news operation, joining in 1997 when the station launched newscasts. Over 23 years, he became a bedrock presence on Seattle's evening weather &mdash; steady, professional, and deeply familiar with the quirks of western Washington's microclimates.</p>
+    <p>Kelley's broadcasting career spanned 48 years in total. He left Q13 in June 2020 to be closer to family in Arizona, closing out a career that represented nearly half a century of talking to people about the sky. His final forecast was a quiet, graceful goodbye from someone who understood that weather broadcasting is ultimately an act of public service.</p>
+  </div>
+
+  <div class="person-card">
+    <h3>Bob Hale</h3>
+    <span class="station">KING-TV &mdash; The Cartooning Weatherman</span>
+    <span class="years">1955 &ndash; 1963, returned to KIRO-TV 1968</span>
+    <p class="highlight">Bob Hale was the first television weather reporter in the Pacific Northwest, and he was unlike anyone before or since. A commercial artist from Bellingham, Hale began doing illustrated weather forecasts for KING-TV in 1955, boosting the station's ratings by drawing wildly comic cartoons live on air while delivering the forecast.</p>
+    <p>His characters &mdash; Sammy the Seagull and Samantha among them &mdash; became beloved figures in Seattle households. Viewers of all ages tuned in not just for the weather, but for the show. Hale won an Emmy, a Golden Mike, and other awards for his unique format.</p>
+    <p>His influence went far beyond broadcasting: by 1962 he had founded Bob Hale's Cartoon College, a school with five full-time cartoonists at its peak and a 24-lesson mail-order correspondence course. After leaving KING in 1963, he worked in TV elsewhere before returning to Seattle at KIRO-TV in 1968. He passed away in 1983, but he established a tradition: in Seattle, weather broadcasting could be both informative and joyful. Every PNW weather personality who has cracked a joke on camera owes something to Bob Hale.</p>
+  </div>
+
+  <div class="callout">
+    <strong>A note about these people:</strong> PNW weather forecasters aren't celebrities in the Hollywood sense. They're more like neighbors &mdash; the ones who've been on your TV so long that their voice is part of the rhythm of your day. Steve Pool told you to bring an umbrella. Cliff Mass explained why the convergence zone missed you by two miles. Jeff Renner made you feel like you understood Mount St. Helens. Harry made you laugh on a grey Tuesday in February. These are relationships measured in decades, and they matter.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: THE SCIENCE INSTITUTIONS                          -->
+  <!-- ============================================================ -->
+
+  <h2>3. The Science Institutions</h2>
+
+  <p>The Pacific Northwest is home to some of the best atmospheric science institutions in the world. The challenging terrain and complex weather patterns that make forecasting so difficult here also make the region a natural laboratory for meteorological research.</p>
+
+  <div class="panel">
+    <h3>UW Department of Atmospheric Sciences</h3>
+    <p>The University of Washington's Department of Atmospheric Sciences (recently renamed the Department of Atmospheric and Climate Science) is, by multiple measures, the best atmospheric science program in the world. It ranked #1 globally on the Academic Ranking of World Universities (Shanghai Ranking) for atmospheric sciences in 2023.</p>
+    <p>The department was founded in 1947, growing out of the Geography Department when research tensions prompted the creation of a dedicated meteorology program. Bob Fleagle, hired in 1948, was the founding father who established the collegial, research-intensive culture that endures today. The department has produced generations of operational forecasters, climate scientists, and atmospheric modelers &mdash; many of whom stayed in the PNW, creating an unusually deep bench of local expertise.</p>
+    <p>Nearly every TV meteorologist profiled on this page earned a degree from UW Atmospheric Sciences. That isn't a coincidence &mdash; the program is a pipeline between cutting-edge research and public communication, and the PNW benefits enormously from that connection.</p>
+  </div>
+
+  <div class="panel">
+    <h3>The Northwest Modeling Consortium &amp; UW WRF Runs</h3>
+    <p>Cliff Mass leads the Northwest Modeling Consortium, which runs the Weather Research and Forecasting (WRF) model at resolutions far higher than the national models. While the GFS runs at roughly 13km resolution and the NAM at 3km, the UW WRF runs reach 1.3km for the Pacific Northwest &mdash; fine enough to begin resolving individual convergence zone events and terrain-forced precipitation patterns.</p>
+    <p>These high-resolution runs are freely available and heavily used by NWS forecasters, local media meteorologists, and weather enthusiasts across the region. They represent some of the best operational mesoscale forecasting anywhere in the country, and they exist because a university professor decided that national models weren't good enough for PNW terrain.</p>
+  </div>
+
+  <div class="panel">
+    <h3>NWS Seattle (SEW) Forecast Office</h3>
+    <p>The National Weather Service Seattle office (WFO SEW), located at Sand Point in northeast Seattle, is responsible for forecasts covering all of western Washington &mdash; from the Pacific coast to the Cascade crest, from the Canadian border to Centralia. That forecast area encompasses the Olympic rain shadow, the Puget Sound convergence zone, Cascade volcanic peaks, coastal fog, and everything in between.</p>
+    <p>The forecasters at SEW write some of the most complex Area Forecast Discussions (AFDs) in the country, regularly grappling with competing model solutions for convergence zone placement, snow level variations across short horizontal distances, and the interaction of marine air with terrain. Their discussions are a masterclass in applied meteorology &mdash; and a window into just how hard PNW forecasting really is.</p>
+  </div>
+
+  <div class="panel">
+    <h3>NOAA Western Region &amp; PMEL</h3>
+    <p>NOAA's Western Regional Headquarters and the Pacific Marine Environmental Laboratory (PMEL) in Seattle contribute to understanding the ocean-atmosphere interactions that drive PNW weather. PMEL's research on ocean temperatures, El Nino/La Nina cycles, and marine heat waves (like "The Blob" of 2013-2015) directly informs regional forecasting.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Pacific Northwest Seismic Network (PNSN)</h3>
+    <p>While not a weather institution per se, the PNSN &mdash; operated jointly by UW and the USGS &mdash; monitors the volcanic peaks that define PNW weather geography. Mount Rainier (14,411'), Mount Baker (10,781'), and Glacier Peak (10,541') are both weather makers (orographic precipitation, wind acceleration) and potential weather disruptors (volcanic ash). PNSN's seismic monitoring is part of the broader earth science context that makes PNW atmospheric research so interdisciplinary.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4: UNIQUE PNW WEATHER PHENOMENA                      -->
+  <!-- ============================================================ -->
+
+  <h2>4. The Unique PNW Weather Phenomena</h2>
+
+  <p>These are the weather events that define life in the Pacific Northwest &mdash; the phenomena that locals learn to recognize, forecasters struggle to predict, and newcomers find completely bewildering.</p>
+
+  <div class="phenomenon-box">
+    <span class="label">Puget Sound Convergence Zone (PSCZ)</span>
+    <p>The signature PNW weather phenomenon. When westerly or northwesterly flow off the Pacific splits around the Olympic Mountains, the two branches reconverge over Puget Sound, typically between north Seattle and Everett. The converging air has nowhere to go but up, creating a narrow band of enhanced clouds and precipitation &mdash; sometimes just 5-10 miles wide &mdash; that can dump rain or snow on one neighborhood while the next sits dry.</p>
+    <p>The PSCZ is most active after cold fronts (when northwest flow is strongest) and during unstable air masses. It can pulse on and off throughout a day, making forecasts of "scattered showers" feel uselessly vague. Mukilteo sits right in the convergence zone's preferred territory, which is why our observatory exists. <a href="convergence-zone.html">Full PSCZ analysis</a>.</p>
+  </div>
+
+  <div class="phenomenon-box">
+    <span class="label">Atmospheric Rivers &amp; Pineapple Express</span>
+    <p>Atmospheric rivers are long, narrow corridors of moisture that flow through the atmosphere from the tropics to the mid-latitudes. When one originates near Hawaii, it's called a Pineapple Express. These events deliver 30-50% of the PNW's annual precipitation and are responsible for most major flooding events.</p>
+    <p>The strongest atmospheric rivers can transport moisture equivalent to 7-15 times the average flow of the Mississippi River through the atmosphere. When that moisture hits the Cascades and Olympics, orographic lift wrings it out &mdash; producing rainfall totals that strain infrastructure. The USDA estimates atmospheric rivers cause roughly 80% of all flood damage on the West Coast.</p>
+  </div>
+
+  <div class="phenomenon-box">
+    <span class="label">Fraser Outflow &amp; Arctic Blasts</span>
+    <p>When cold Arctic air pools over interior British Columbia, the pressure gradient drives it through the Fraser River Valley toward the coast. These outflow events bring the coldest temperatures the PNW experiences: windchills can drop to -20&deg;C to -30&deg;C at the coast, and the dense cold air can remain trapped in Puget Sound's low elevations for days.</p>
+    <p>Fraser outflows are particularly dangerous because they can create freezing rain &mdash; warm Pacific moisture overriding a shallow layer of sub-freezing air &mdash; which is arguably the most destructive winter weather type in western Washington. They occur one to three times per winter on average, with each event capable of lasting a week or more.</p>
+  </div>
+
+  <div class="phenomenon-box">
+    <span class="label">Rain Shadow Effects</span>
+    <p>The PNW has two major rain shadows: the Olympic rain shadow (protecting Sequim, the San Juan Islands, and parts of Whidbey Island) and the Cascade rain shadow (creating the semi-arid climate of central and eastern Washington). But there are also micro-rain-shadows created by smaller terrain features: the hills south of Everett, the ridgeline west of the Sammamish Plateau, the bluffs along Possession Sound.</p>
+    <p>Our weather scoring captures these effects. A source forecasting rain for "the Seattle area" may be perfectly correct for Tacoma but completely wrong for Mukilteo if a convergence zone or rain shadow boundary falls between them.</p>
+  </div>
+
+  <div class="phenomenon-box">
+    <span class="label">Marine Push / Onshore Flow</span>
+    <p>A marine push occurs when cool, dense marine air from the Pacific surges inland through the Strait of Juan de Fuca, spreading south into Puget Sound. Temperatures can drop 15-20&deg;F in a few hours, skies go from clear to overcast, and low clouds and drizzle settle in. These events are most common in summer, when inland heating creates a thermal low that draws marine air through the gaps in the coastal mountains.</p>
+    <p>Marine pushes are one of the most predictable PNW weather events (they follow a clear pressure-gradient pattern), but their timing and strength are hard to get right. A push that arrives at 2pm vs. 6pm is the difference between a warm sunny afternoon and a cool grey one.</p>
+  </div>
+
+  <div class="phenomenon-box">
+    <span class="label">Seattle Snow Events</span>
+    <p>Seattle averages only about 5 inches of snow per year, which means the city has minimal snow-removal infrastructure &mdash; few dedicated plows, limited salt reserves, and a population that treats any accumulation as an emergency. The city's steep hills (Queen Anne, Capitol Hill, Beacon Hill, West Seattle) become impassable with even 2 inches of snow.</p>
+    <p>The February 2019 "Snowpocalypse" dumped 17.5 inches over four days, making it the snowiest February on record. The 2021 post-Christmas snowstorm activated the city's emergency operations center. In both events, the convergence zone played a role, concentrating snowfall in narrow bands while areas just miles away received little accumulation. Snow forecasting in Seattle is an extreme sport &mdash; the difference between 1 inch (annoyance) and 6 inches (citywide shutdown) often comes down to whether the snow level drops below 300 feet or stays at 500 feet.</p>
+  </div>
+
+  <div class="phenomenon-box">
+    <span class="label">Volcanic Ash Threat</span>
+    <p>Mount Rainier, Mount Baker, and Glacier Peak are all active volcanic peaks within 100 miles of Seattle. An eruption of any of these volcanoes could deposit ash across the Puget Sound region, depending on prevailing winds. The 1980 eruption of Mount St. Helens (180 miles south of Seattle) deposited measurable ash across eastern Washington and demonstrated the devastating regional impact of volcanic events. Ash forecasting combines volcanology with atmospheric dispersion modeling &mdash; another intersection of earth science and meteorology unique to the PNW.</p>
+  </div>
+
+  <div class="phenomenon-box">
+    <span class="label">Wildfire Smoke Seasons</span>
+    <p>August and September have become PNW wildfire smoke season. Fires in eastern Washington, Oregon, British Columbia, and California can fill the Puget Sound basin with hazardous smoke for days or weeks, driven by upper-level wind patterns that trap particulates in the marine layer. The September 2020 smoke event turned Seattle's skies apocalyptic orange and pushed AQI readings above 300 &mdash; "hazardous" territory. Smoke forecasting depends on fire behavior modeling, atmospheric transport models, and terrain-channeling effects that funnel smoke through mountain passes.</p>
+  </div>
+
+  <div class="phenomenon-box">
+    <span class="label">"The Big Dark" &mdash; November Through February</span>
+    <p>The Pacific Northwest's defining psychological weather event isn't a storm &mdash; it's the relentless overcast. From November through February, Seattle averages only about 25% possible sunshine. Days can pass without seeing the sun. The cloud deck sits at 1,000-3,000 feet, and the marine influence keeps temperatures mild enough that precipitation falls as rain rather than snow, denying residents even the aesthetic consolation of a white winter.</p>
+    <p>This isn't just culture &mdash; it's meteorology. The persistent overcast is caused by the Pacific's thermal stability: the ocean is warm enough to prevent deep cold but cool enough to maintain a low-level inversion that traps clouds below the mountain tops. Breaking this pattern requires either a strong high-pressure ridge (which pushes the jet stream north and delivers rare winter sunshine) or a vigorous storm system (which clears the old cloud deck before establishing new clouds of its own).</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: THE MATHEMATICS OF PNW FORECASTING                -->
+  <!-- ============================================================ -->
+
+  <h2>5. The Mathematics of PNW Forecasting</h2>
+
+  <p>PNW weather isn't just anecdotally hard to forecast &mdash; it's mathematically hard. The terrain creates nonlinear dynamics that defeat the simplifying assumptions most weather models depend on. Here's why the math matters.</p>
+
+  <div class="panel">
+    <h3>Why Ensemble Models Matter Here More Than Anywhere</h3>
+    <p>Ensemble forecasting runs a model many times with slightly different initial conditions to capture the range of possible outcomes. In flat terrain, ensemble members tend to cluster tightly &mdash; small differences in initial conditions produce small differences in forecasts. In the PNW, ensemble members diverge wildly because tiny changes in wind direction, temperature, or moisture can determine whether the convergence zone forms 5 miles north or south of its expected position &mdash; the difference between rain and no rain at a specific location.</p>
+    <p>This is why probabilistic forecasts (e.g., "60% chance of rain") are more honest than deterministic forecasts here. A 60% chance of rain in Kansas means it will probably rain. A 60% chance of rain in Mukilteo means the convergence zone will probably form near you, but it might form two miles north and miss you entirely.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Mesoscale Modeling: Why 3km Resolution Isn't Enough</h3>
+    <p>The Puget Sound Convergence Zone is typically 5-15km wide. The NAM model runs at ~3km resolution, which means the PSCZ is represented by just 2-5 grid points across its width. That is not enough to capture the internal structure of the convergence &mdash; the updraft core, the rain bands, the boundary between precipitation and clear air.</p>
+
+    <div class="formula">
+      <span class="label">Nyquist sampling theorem applied to weather</span>
+      &Delta;x &le; &lambda;<sub>min</sub> / 2
+    </div>
+
+    <p>To properly resolve a 5km-wide convergence zone, you need grid spacing of at most 2.5km &mdash; and practically, 4-8 grid points across the feature, meaning 600m-1.2km resolution. Cliff Mass's UW WRF runs at 1.3km begin to resolve these features, which is why they outperform national models for PSCZ events.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Orographic Precipitation</h3>
+    <p>When moist air encounters a mountain, it is forced upward. Rising air cools adiabatically, water vapor condenses, and precipitation forms. The physics are well understood, but the devil is in the details:</p>
+    <ul>
+      <li><strong>Slope steepness</strong> determines the rate of ascent and the intensity of precipitation</li>
+      <li><strong>Wind speed</strong> controls how much moisture is carried upslope vs. deflected around</li>
+      <li><strong>Atmospheric stability</strong> determines whether air rises freely (unstable) or is blocked (stable)</li>
+      <li><strong>Freezing level</strong> determines whether precipitation falls as rain or snow, which affects accumulation rates and mountain hydrology</li>
+    </ul>
+
+    <div class="formula">
+      <span class="label">Simplified orographic precipitation rate</span>
+      P = &rho; &middot; q &middot; V &middot; tan(&alpha;)
+    </div>
+
+    <p>Where &rho; is air density, <em>q</em> is specific humidity, <em>V</em> is horizontal wind speed, and &alpha; is the slope angle. This equation shows why steep mountains (high tan &alpha;) in warm, moist airstreams (high q) with strong winds (high V) produce extreme precipitation &mdash; exactly the conditions during PNW atmospheric river events.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Kelvin-Helmholtz Instability in Marine Layers</h3>
+    <p>The PNW marine layer &mdash; the boundary between cool marine air and warmer air above &mdash; is a shear zone where wind speed and direction change rapidly with height. When the shear is strong enough relative to the stability of the interface, Kelvin-Helmholtz (KH) instability develops, creating rolling wave-like structures that mix the two air masses.</p>
+    <p>KH instability at the marine layer top is what causes the "stratus breakup" events that turn a grey morning into a sunny afternoon. Models struggle with this because the instability develops at scales of hundreds of meters &mdash; far below the grid resolution of operational models &mdash; and must be parameterized rather than explicitly resolved.</p>
+  </div>
+
+  <div class="connections">
+    <strong>Mathematical connections:</strong> The scoring mathematics behind our observatory are detailed in <a href="weather-math.html">Weather Math</a>. For the tidal mathematics that interact with storm surge during atmospheric river events, see <a href="tides-math.html">Tides Math</a>. The convergence zone physics are explored in <a href="convergence-zone.html">Convergence Zone</a>.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6: OUR WEATHER SCORING SYSTEM                        -->
+  <!-- ============================================================ -->
+
+  <h2>6. Our Weather Scoring System</h2>
+
+  <p>All of the complexity described on this page &mdash; the terrain, the convergence zones, the marine influence, the microclimates &mdash; is why we built the Mukilteo Observatory's weather scoring system. No single forecast source gets PNW weather right consistently. So we measure all of them.</p>
+
+  <div class="panel">
+    <h3>Why We Built It</h3>
+    <p>After years of checking weather apps that said "rain" when it was sunny in Mukilteo, or "clear" when the convergence zone was dumping rain overhead, we decided to stop complaining and start measuring. The scoring system tracks six independent weather sources against actual METAR observations from KPAE (Paine Field), calculating Mean Absolute Error for temperature, wind accuracy scores, and precipitation F1 scores on a rolling basis.</p>
+    <p>See <a href="weather-math.html">Weather Math</a> for the complete statistical framework: MAE, Brier scores, F1, circular wind error, and the scoring window methodology.</p>
+  </div>
+
+  <div class="panel">
+    <h3>What We've Learned from 48+ Samples</h3>
+    <p>Even with a limited dataset, clear patterns are emerging:</p>
+    <ul>
+      <li>No source is best at everything &mdash; temperature accuracy and precipitation accuracy don't correlate</li>
+      <li>All sources struggle during PSCZ events &mdash; the convergence zone is the great equalizer</li>
+      <li>Marine push events create systematic warm bias in most sources (they forecast inland temperatures for a coastal location)</li>
+      <li>Pressure tendency tracking has been surprisingly informative &mdash; rapid pressure drops correlate with increased model divergence</li>
+      <li>Morning forecasts are generally more accurate than afternoon forecasts for our location, likely because marine layer dynamics are more stable in the morning</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>Future Plans</h3>
+    <p>As our dataset grows, we'll expand to more METAR stations (KSEA, KBFI, KOLM) to capture the spatial gradients that make PNW weather so variable. Longer baselines will let us score seasonal accuracy and identify which sources handle different weather regimes best. The goal is not to declare a "winner" but to build a composite picture of forecast reliability that accounts for the unique challenges of this landscape.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7: BUILDING OUR OWN FORECASTS                        -->
+  <!-- ============================================================ -->
+
+  <h2>7. Building Our Own Forecasts</h2>
+
+  <div class="callout">
+    <strong>Every weather sweep isn't just monitoring &mdash; it's training data for our own forecasting system.</strong>
+  </div>
+
+  <p>The Mukilteo Observatory isn't just scoring other people's forecasts. We're building toward generating our own. Every sample in our database &mdash; temperature, dewpoint, pressure, wind speed, wind direction, precipitation &mdash; is a training example for progressively more sophisticated prediction models. Here's the roadmap.</p>
+
+  <div class="phase-card">
+    <h3>Phase 1: Statistical Baseline <span class="status status-active">ACTIVE</span></h3>
+    <p>Start with the simplest possible forecasts and see how hard they are to beat:</p>
+    <ul>
+      <li><strong>Persistence forecast:</strong> tomorrow's high = today's high. Surprisingly hard to beat &mdash; persistence outperforms many model forecasts on stable weather days</li>
+      <li><strong>Climatological baseline:</strong> average temperature for this date &plusmn; standard deviation. This is the "null model" that any real forecast must improve upon</li>
+      <li>Our scoring system already measures how hard each day is to predict &mdash; high-disagreement days (when sources diverge) are the days where our own models need to do best</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <h3>Phase 2: Regression Models <span class="status status-next">NEXT</span></h3>
+    <p>Correlate KPAE temperature with features we already track:</p>
+    <ul>
+      <li>Time of day, season, and day length</li>
+      <li>Pressure tendency (we track this in every sweep &mdash; rapid drops signal incoming weather)</li>
+      <li>Wind direction (onshore flow = cooler; offshore flow = warmer)</li>
+      <li>Dewpoint spread (indicator of cloud cover and fog potential)</li>
+    </ul>
+    <p>Start with simple linear regression, then move to gradient boosted trees. Our Postgres dataset (48+ samples and growing) provides the training data. Every hour adds to the training set.</p>
+  </div>
+
+  <div class="phase-card">
+    <h3>Phase 3: PSCZ Detection <span class="status status-future">PLANNED</span></h3>
+    <p>The convergence zone is the #1 source of forecast error at our location. Detecting it early changes everything.</p>
+    <ul>
+      <li><strong>Signal:</strong> wind direction divergence between KPAE (north) and KSEA (south)</li>
+      <li>When KPAE shows northerly and KSEA shows southerly &rarr; PSCZ is forming between them</li>
+      <li>Build a binary classifier: PSCZ active/inactive based on multi-station wind patterns</li>
+      <li>Even a simple detection model would outperform national models that can't resolve the zone</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <h3>Phase 4: Fog Prediction <span class="status status-future">PLANNED</span></h3>
+    <p>We already have the physics. Radiation fog forms when:</p>
+    <ul>
+      <li>Dewpoint spread &lt; 2.5&deg;C</li>
+      <li>Calm wind (&lt; 5 kt)</li>
+      <li>Clear or mostly clear sky (allows radiative cooling)</li>
+    </ul>
+    <p>All of these variables are in our wx_samples table. Track dewpoint spread in real time and build alerts: "fog likely by 6am" when evening spread narrows below threshold. Mukilteo's waterfront location makes fog prediction both challenging and high-value.</p>
+  </div>
+
+  <div class="phase-card">
+    <h3>Phase 5: Ensemble Blending <span class="status status-future">PLANNED</span></h3>
+    <p>This is the product &mdash; hyperlocal accuracy tuned by continuous measurement.</p>
+    <ul>
+      <li>Weight our six sources by rolling accuracy from the scoring system</li>
+      <li>Source with best recent MAE gets highest weight; poorly-performing sources get downweighted</li>
+      <li>Produce a blended "MUK Forecast" &mdash; our own prediction for Mukilteo</li>
+      <li>Adaptive: weights shift automatically as source accuracy changes with seasons and weather regimes</li>
+    </ul>
+  </div>
+
+  <div class="phase-card">
+    <h3>Phase 6: Numerical Weather Prediction <span class="status status-future">FUTURE</span></h3>
+    <p>The ambitious endgame: run our own WRF (Weather Research and Forecasting) model at ultra-high resolution.</p>
+    <ul>
+      <li>Cliff Mass runs WRF at 1.3km for the PNW &mdash; good, but not enough for convergence zone microstructure</li>
+      <li><strong>Goal:</strong> run WRF at 500m resolution for just the Mukilteo-Everett corridor on RTX 4060 Ti</li>
+      <li>A domain this small is computationally tractable on consumer GPU hardware</li>
+      <li>Would produce the highest-resolution operational forecast in the area</li>
+      <li>Potential for publishable research and hyperlocal products for marine users, aviation, and local businesses</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3>What We Need</h3>
+    <ul>
+      <li><strong>More data:</strong> every hour adds to our training set. Seasonal coverage is critical &mdash; we started in spring and need summer, fall, and winter patterns to build robust models</li>
+      <li><strong>More stations:</strong> expand the METAR network we pull from to capture spatial gradients (KSEA, KBFI, KOLM, KPWT)</li>
+      <li><strong>Verification methodology:</strong> how to score our own forecasts fairly &mdash; against persistence, climatology, and the best available source, not just against observations</li>
+      <li><strong>Compute time:</strong> WRF at 500m on a single GPU is feasible for a small domain but requires careful optimization of physics parameterizations and boundary conditions</li>
+    </ul>
+  </div>
+
+  <div class="connections">
+    <strong>The pipeline:</strong> Weather sweeps (data collection) &rarr; <a href="weather-math.html">scoring system</a> (source evaluation) &rarr; statistical models (our own predictions) &rarr; <a href="convergence-zone.html">PSCZ detection</a> (highest-value target) &rarr; WRF (numerical prediction). Each phase builds on the one before it. Every sample we collect makes the later phases more achievable.
+  </div>
+
+</main>
+
+<footer>
+  <a href="index.html">MUK Dashboard</a> &middot;
+  <a href="weather-math.html">Weather Math</a> &middot;
+  <a href="weather-science.html">Weather Science</a> &middot;
+  <a href="convergence-zone.html">Convergence Zone</a> &middot;
+  <a href="../../LIVE/index.html">LIVE Observatory</a> &middot;
+  <a href="../index.html">Research Index</a>
+  <br>Last updated: 2026-04-01T02:00Z (v1.0.19)
+</footer>
+
+</body>
+</html>
