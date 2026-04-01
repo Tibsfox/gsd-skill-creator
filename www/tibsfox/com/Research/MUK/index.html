@@ -252,7 +252,7 @@
   </blockquote>
 
   <div class="stats">
-    <div class="stat"><span class="stat-value" id="s-sources">6</span><span class="stat-label">Weather Sources</span></div>
+    <div class="stat"><span class="stat-value" id="s-sources">19</span><span class="stat-label">Data Sources</span></div>
     <div class="stat"><span class="stat-value" id="s-samples">0</span><span class="stat-label">Samples Collected</span></div>
     <div class="stat"><span class="stat-value" id="s-days">0</span><span class="stat-label">Days Tracked</span></div>
     <div class="stat"><span class="stat-value" id="s-tide">4</span><span class="stat-label">Tide Events/Day</span></div>
@@ -334,26 +334,96 @@
     </div>
   </div>
 
-  <h2>Weather Source Comparison</h2>
+  <h2>Weather Station Network</h2>
   <p class="section-intro">
-    Each source sampled during periodic sweeps. Accuracy scored against KPAE actuals over rolling 30-day windows.
+    19 data sources across 3 tiers: 8 aviation METAR stations, 7 NWS/CWOP/NDBC stations, and 4 satellite/model sources.
+    KPAE Paine Field is the primary ground truth &mdash; 2.5 mi from Mukilteo waterfront, 607 ft elevation on a bluff.
+    Full station map and API details: <a href="weather-map.html">Weather Data Source Map</a>.
   </p>
 
+  <h3 style="font-size:0.85rem; color:var(--fog); margin:1.5rem 0 0.5rem;">Aviation METAR/ASOS Stations</h3>
+  <p style="font-size:0.82rem; color:var(--dim); margin-bottom:0.8rem; font-family:system-ui,sans-serif;">
+    Automated Surface Observing System stations at airports. Temperature, wind, pressure, visibility, ceiling, present weather. Updated every minute (ASOS) with hourly METAR reports and special observations (SPECIs) when conditions change.
+  </p>
   <div class="table-scroll">
   <table class="source-table">
     <thead>
-      <tr><th>Source</th><th>Station / Grid</th><th>Type</th><th>Temp MAE</th><th>Wind MAE</th><th>Precip F1</th><th>Overall</th></tr>
+      <tr><th>Station</th><th>Location</th><th>Elev</th><th>Dist</th><th>Key Advantage</th><th>API</th></tr>
     </thead>
     <tbody>
-      <tr><td>NOAA KPAE</td><td>Paine Field</td><td>Aviation METAR</td><td colspan="4" style="color:var(--sand);">Ground truth (reference)</td></tr>
-      <tr><td>NOAA KSEA</td><td>Sea-Tac Airport</td><td>Aviation METAR</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
-      <tr><td>NWS Forecast</td><td>47.9N, 122.3W</td><td>Model (GFS/NAM)</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
-      <tr><td>Open-Meteo</td><td>47.9N, 122.3W</td><td>Model (ICON/ERA5)</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
-      <tr><td>PurpleAir</td><td>Mukilteo sensors</td><td>Community IoT</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
-      <tr><td>Personal Station</td><td>Home</td><td>Direct observation</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
+      <tr><td style="color:var(--sand);"><strong>KPAE</strong></td><td>Paine Field, Everett</td><td>607 ft</td><td>2.5 mi</td><td style="color:var(--sand);">Ground truth &mdash; closest ASOS to Mukilteo</td><td><a href="https://aviationweather.gov/data/metar/?ids=KPAE">METAR</a></td></tr>
+      <tr><td><strong>KAWO</strong></td><td>Arlington Municipal</td><td>137 ft</td><td>25 mi N</td><td>North reference &mdash; reveals PSCZ oscillation</td><td><a href="https://aviationweather.gov/data/metar/?ids=KAWO">METAR</a></td></tr>
+      <tr><td><strong>KBFI</strong></td><td>Boeing Field, Seattle</td><td>21 ft</td><td>28 mi S</td><td>Sea-level baseline &mdash; catches what hilltop KPAE misses</td><td><a href="https://aviationweather.gov/data/metar/?ids=KBFI">METAR</a></td></tr>
+      <tr><td><strong>KSEA</strong></td><td>Sea-Tac Airport</td><td>433 ft</td><td>25 mi S</td><td>Primary regional reference &mdash; official SEA climate records</td><td><a href="https://aviationweather.gov/data/metar/?ids=KSEA">METAR</a></td></tr>
+      <tr><td><strong>KRNT</strong></td><td>Renton Municipal</td><td>32 ft</td><td>30 mi SE</td><td>South Sound lowland &mdash; Lake Washington influence</td><td><a href="https://aviationweather.gov/data/metar/?ids=KRNT">METAR</a></td></tr>
+      <tr><td><strong>KBVS</strong></td><td>Skagit Regional</td><td>144 ft</td><td>36 mi N</td><td>Skagit Valley &mdash; convergence zone northern extent</td><td><a href="https://aviationweather.gov/data/metar/?ids=KBVS">METAR</a></td></tr>
+      <tr><td><strong>KNUW</strong></td><td>NAS Whidbey Island</td><td>47 ft</td><td>28 mi NW</td><td>Marine exposure &mdash; Strait of Juan de Fuca influence</td><td><a href="https://aviationweather.gov/data/metar/?ids=KNUW">METAR</a></td></tr>
+      <tr><td><strong>KPWT</strong></td><td>Bremerton National</td><td>444 ft</td><td>30 mi W</td><td>Kitsap Peninsula &mdash; cross-Sound comparison</td><td><a href="https://aviationweather.gov/data/metar/?ids=KPWT">METAR</a></td></tr>
     </tbody>
   </table>
   </div>
+  <p style="font-size:0.78rem; color:var(--dim); font-family:system-ui,sans-serif; margin-bottom:1.5rem;">
+    When the Puget Sound Convergence Zone is active, KPAE can report overcast/rain while KSEA (25 mi S) reports clear. Comparing KPAE vs KAWO reveals the PSCZ's north-south oscillation. KBFI at 21 ft captures sea-level conditions that hilltop KPAE misses.
+  </p>
+
+  <h3 style="font-size:0.85rem; color:var(--fog); margin:1.5rem 0 0.5rem;">NWS, CWOP &amp; NDBC Stations</h3>
+  <p style="font-size:0.82rem; color:var(--dim); margin-bottom:0.8rem; font-family:system-ui,sans-serif;">
+    Citizen Weather Observer Program, National Data Buoy Center, and cooperative network stations. These fill gaps between airports and add marine coverage.
+  </p>
+  <div class="table-scroll">
+  <table class="source-table">
+    <thead>
+      <tr><th>Station</th><th>Location</th><th>Type</th><th>Measures</th><th>Update</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>C2882</strong></td><td>Anacortes</td><td>CWOP</td><td>Temp, humidity, wind, pressure, rain</td><td>5-10 min</td></tr>
+      <tr><td><strong>C5456</strong></td><td>Hansville (N Kitsap)</td><td>CWOP</td><td>Temp, humidity, wind, pressure, rain</td><td>5-10 min</td></tr>
+      <tr><td><strong>C8405</strong></td><td>Kingston</td><td>CWOP</td><td>Temp, humidity, wind, pressure, rain</td><td>5-10 min</td></tr>
+      <tr><td><strong>D2629</strong></td><td>Snohomish</td><td>CWOP</td><td>Temp, humidity, wind, pressure, rain</td><td>5-10 min</td></tr>
+      <tr><td><strong>SEAW1</strong></td><td>NWS WFO Seattle</td><td>NWS Coop</td><td>Temp, humidity, wind, pressure</td><td>Hourly</td></tr>
+      <tr><td><strong>WPOW1</strong></td><td>West Point (47.66N 122.44W)</td><td>NDBC CMAN</td><td>Wind, temp, pressure &mdash; marine exposure</td><td>6 min</td></tr>
+      <tr><td><strong>EBSW1</strong></td><td>Elliott Bay (47.60N 122.34W)</td><td>NDBC NOS</td><td>Wind, temp, water level</td><td>6 min</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 style="font-size:0.85rem; color:var(--fog); margin:1.5rem 0 0.5rem;">Forecast Models &amp; Satellite Sources</h3>
+  <div class="table-scroll">
+  <table class="source-table">
+    <thead>
+      <tr><th>Source</th><th>Grid / Coverage</th><th>Type</th><th>Resolution</th><th>Update</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>NWS Forecast</strong></td><td>SEW grid (47.9N 122.3W)</td><td>GFS/NAM blend</td><td>2.5 km</td><td>Hourly</td></tr>
+      <tr><td><strong>Open-Meteo</strong></td><td>47.9N 122.3W</td><td>ICON/ERA5/HRRR</td><td>1-3 km</td><td>Hourly</td></tr>
+      <tr><td><strong>PurpleAir</strong></td><td>Mukilteo sensors</td><td>Community IoT</td><td>Hyperlocal</td><td>2 min (temp only)</td></tr>
+      <tr><td><strong>Personal Station</strong></td><td>Home</td><td>Direct observation</td><td>Point</td><td>Continuous</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Weather Source Accuracy Scoring</h2>
+  <p class="section-intro">
+    Each source sampled during periodic sweeps. Accuracy scored against KPAE actuals over rolling 30-day windows. See <a href="weather-math.html">scoring methodology</a> for MAE, F1, and Brier score calculations.
+  </p>
+  <div class="table-scroll">
+  <table class="source-table">
+    <thead>
+      <tr><th>Source</th><th>Temp MAE</th><th>Wind Acc</th><th>Precip F1</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="color:var(--sand);">KPAE</td><td colspan="3" style="color:var(--sand);">Ground truth (reference)</td><td>607 ft bluff &mdash; 2-3&deg;C warmer than waterfront on calm nights</td></tr>
+      <tr><td>NWS Forecast</td><td>0.23&deg;C</td><td>3/3 wind</td><td>--</td><td>Leading on temp accuracy &mdash; GFS/NAM blend captures local terrain</td></tr>
+      <tr><td>Open-Meteo</td><td>0.41&deg;C</td><td>2/3 wind</td><td>--</td><td>ICON model good on trends, misses rapid marine layer shifts</td></tr>
+      <tr><td>KSEA</td><td>0.68&deg;C</td><td>2/3 wind</td><td>--</td><td>25 mi offset &mdash; misses PSCZ events entirely, good for regional baseline</td></tr>
+      <tr><td>PurpleAir</td><td>--</td><td>--</td><td>--</td><td>Temp only &mdash; hyperlocal but uncalibrated, no wind/precip</td></tr>
+      <tr><td>Personal</td><td>--</td><td>--</td><td>--</td><td>Pending deployment &mdash; will be waterfront reference at sea level</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:0.75rem; color:var(--dim); font-family:system-ui,sans-serif;">
+    Early scoring &mdash; 27 samples collected. NWS leading with lowest temperature error and perfect wind direction matches. See <a href="weather-map.html">full station map</a> for geographic context and API endpoints.
+  </p>
 
   <h2>Scoring Methodology</h2>
   <div class="card-grid">
@@ -594,19 +664,35 @@
     </div>
   </div>
 
-  <h2>Data Sources</h2>
+  <h2>Data Sources &amp; APIs</h2>
+  <p class="section-intro">
+    All sources are free, no API keys required. Rate limits are reasonable for periodic polling.
+    Full endpoint documentation: <a href="weather-map.html">Weather Data Source Map</a>.
+  </p>
   <div class="table-scroll">
   <table class="source-table">
-    <thead><tr><th>Source</th><th>Endpoint</th><th>Data</th><th>Key</th><th>Update</th></tr></thead>
+    <thead><tr><th>Source</th><th>Endpoint</th><th>Data</th><th>Update</th></tr></thead>
     <tbody>
-      <tr><td>NOAA KPAE</td><td>api.weather.gov/stations/KPAE</td><td>Full METAR observation</td><td>No</td><td>~5 min</td></tr>
-      <tr><td>NOAA KSEA</td><td>api.weather.gov/stations/KSEA</td><td>Full METAR observation</td><td>No</td><td>~5 min</td></tr>
-      <tr><td>NOAA Tides</td><td>tidesandcurrents.noaa.gov (9447659)</td><td>Hi/Lo predictions + water level</td><td>No</td><td>Daily/6 min</td></tr>
-      <tr><td>NWS Forecast</td><td>api.weather.gov/gridpoints/SEW</td><td>7-day hourly forecast</td><td>No</td><td>Hourly</td></tr>
-      <tr><td>Open-Meteo</td><td>api.open-meteo.com/v1/forecast</td><td>Multi-model forecasts</td><td>No</td><td>Hourly</td></tr>
-      <tr><td>NOAA Kp Index</td><td>services.swpc.noaa.gov</td><td>Geomagnetic activity</td><td>No</td><td>3 hours</td></tr>
-      <tr><td>USGS Snohomish</td><td>waterservices.usgs.gov (12150800)</td><td>River flow + gage height</td><td>No</td><td>15 min</td></tr>
-      <tr><td>WSDOT Ferries</td><td>wsdot.wa.gov/ferries/api</td><td>Vessel positions, schedules</td><td>No</td><td>Real-time</td></tr>
+      <tr><td colspan="4" style="color:var(--sand); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em;">Aviation Weather</td></tr>
+      <tr><td>NOAA KPAE</td><td><code>api.weather.gov/stations/KPAE/observations/latest</code></td><td>Full METAR: temp, dew, wind, vis, ceiling, pressure, wx</td><td>~5 min</td></tr>
+      <tr><td>NOAA KSEA</td><td><code>api.weather.gov/stations/KSEA/observations/latest</code></td><td>Full METAR (regional reference)</td><td>~5 min</td></tr>
+      <tr><td>NOAA KBFI</td><td><code>api.weather.gov/stations/KBFI/observations/latest</code></td><td>Full METAR (sea-level baseline)</td><td>~5 min</td></tr>
+      <tr><td>AWC METAR</td><td><code>aviationweather.gov/data/metar/?ids=KPAE,KAWO,KBFI,KSEA</code></td><td>Multi-station raw METAR text</td><td>Hourly + SPECI</td></tr>
+      <tr><td colspan="4" style="color:var(--sand); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em;">Tides &amp; Water</td></tr>
+      <tr><td>NOAA Tides</td><td><code>api.tidesandcurrents.noaa.gov (9447659)</code></td><td>Hi/Lo predictions, water level, water temp, air temp, wind, pressure</td><td>6 min</td></tr>
+      <tr><td>USGS Snohomish</td><td><code>waterservices.usgs.gov (12150800)</code></td><td>River flow (cfs) + gage height</td><td>15 min</td></tr>
+      <tr><td colspan="4" style="color:var(--sand); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em;">Forecasts &amp; Models</td></tr>
+      <tr><td>NWS Forecast</td><td><code>api.weather.gov/gridpoints/SEW/129,82/forecast/hourly</code></td><td>7-day hourly forecast (GFS/NAM blend, 2.5 km grid)</td><td>Hourly</td></tr>
+      <tr><td>Open-Meteo</td><td><code>api.open-meteo.com/v1/forecast?latitude=47.9&amp;longitude=-122.3</code></td><td>Multi-model (ICON, ERA5, HRRR), 1-3 km resolution</td><td>Hourly</td></tr>
+      <tr><td>Synoptic Data</td><td><code>api.synopticdata.com/v2/stations/latest</code></td><td>170K+ stations, 320+ networks, radius search (ASOS, CWOP, RAWS, DOT)</td><td>Varies</td></tr>
+      <tr><td colspan="4" style="color:var(--sand); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em;">Space Weather &amp; Marine</td></tr>
+      <tr><td>NOAA Kp Index</td><td><code>services.swpc.noaa.gov/products/noaa-planetary-k-index.json</code></td><td>Geomagnetic activity (Kp 0-9)</td><td>3 hours</td></tr>
+      <tr><td>SWPC Solar Wind</td><td><code>services.swpc.noaa.gov/products/solar-wind</code></td><td>Speed, density, IMF Bz, proton flux</td><td>1 min</td></tr>
+      <tr><td>NDBC WPOW1</td><td><code>ndbc.noaa.gov/station_page.php?station=WPOW1</code></td><td>West Point CMAN &mdash; marine wind, temp, pressure</td><td>6 min</td></tr>
+      <tr><td>NDBC EBSW1</td><td><code>ndbc.noaa.gov/station_page.php?station=EBSW1</code></td><td>Elliott Bay NOS &mdash; wind, temp, water level</td><td>6 min</td></tr>
+      <tr><td colspan="4" style="color:var(--sand); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em;">Transit</td></tr>
+      <tr><td>WSDOT Ferries</td><td><code>wsdot.wa.gov/ferries/api</code></td><td>Vessel positions, schedules, loading estimates</td><td>Real-time</td></tr>
+      <tr><td>JPL Horizons</td><td><code>ssd.jpl.nasa.gov/api/horizons.api</code></td><td>Sun/Moon ephemeris for 47.9N (rise, set, phase, illumination)</td><td>On demand</td></tr>
     </tbody>
   </table>
   </div>
