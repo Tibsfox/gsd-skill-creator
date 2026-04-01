@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artemis II — Wall-Clock Papers</title>
+<style>
+:root {
+  --bg: #04060c;
+  --panel: #080c16;
+  --border: rgba(255,255,255,0.06);
+  --text: #c8d0e0;
+  --dim: rgba(255,255,255,0.35);
+  --gold: #C4A35A;
+  --blue: #0B3D91;
+  --red: #FC3D21;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+a { color:var(--gold); text-decoration:none; }
+a:hover { color:#e0cc80; text-decoration:underline; }
+
+header {
+  background:linear-gradient(135deg, var(--blue) 0%, #061830 50%, var(--bg) 100%);
+  padding:1.5rem 2rem; text-align:center;
+  border-bottom:2px solid rgba(196,163,90,0.2);
+}
+header h1 { font-size:1.6rem; font-weight:400; color:#fff; letter-spacing:0.04em; }
+header .subtitle { color:var(--gold); font-size:0.85rem; font-style:italic; margin-top:0.2rem; }
+header nav { margin-top:0.8rem; font-family:system-ui,sans-serif; font-size:0.8rem; }
+header nav a { color:rgba(255,255,255,0.5); margin:0 0.5rem; }
+
+main { max-width:900px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+.stats-bar {
+  display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+  padding:1rem 0; margin-bottom:1.5rem;
+  font-family:monospace; font-size:0.85rem; color:var(--dim);
+  border-bottom:1px solid var(--border);
+}
+.stats-bar strong { color:#fff; }
+
+.sweep-header {
+  font-size:0.75rem; color:var(--dim); text-transform:uppercase;
+  letter-spacing:0.1em; margin:2.5rem 0 1rem; padding-bottom:0.3rem;
+  border-bottom:1px solid var(--border); font-family:system-ui,sans-serif;
+}
+
+.paper {
+  background:var(--panel); border:1px solid var(--border); border-radius:6px;
+  padding:1.5rem; margin-bottom:1.2rem;
+}
+.paper:hover { border-color:rgba(196,163,90,0.2); }
+.paper h3 { font-size:1rem; color:#fff; margin-bottom:0.3rem; }
+.paper .source { font-size:0.75rem; color:var(--dim); font-family:system-ui,sans-serif; margin-bottom:0.6rem; }
+.paper .source a { font-size:0.75rem; }
+.paper .why { font-size:0.88rem; color:var(--text); margin:0.5rem 0; }
+.paper .why strong { color:var(--gold); }
+.paper .science { font-size:0.85rem; color:rgba(255,255,255,0.55); margin:0.5rem 0; line-height:1.6; }
+.paper .tspb { font-size:0.8rem; color:rgba(255,255,255,0.4); margin-top:0.6rem; padding:0.8rem; background:rgba(255,255,255,0.02); border-radius:4px; border:1px solid rgba(255,255,255,0.04); }
+.paper .tspb code { font-family:monospace; font-size:0.78rem; display:block; white-space:pre-wrap; margin:0.4rem 0; color:rgba(255,255,255,0.5); }
+.paper .lesson { font-size:0.85rem; color:var(--gold); font-style:italic; margin-top:0.6rem; }
+.paper-num { color:var(--dim); font-size:0.8rem; font-family:monospace; margin-right:0.4rem; }
+.alert-paper { border-color:rgba(252,61,33,0.3); }
+.alert-paper:hover { border-color:rgba(252,61,33,0.5); }
+
+footer {
+  max-width:900px; margin:0 auto; padding:1.5rem; text-align:center;
+  font-size:0.7rem; color:var(--dim); border-top:1px solid var(--border);
+  font-family:system-ui,sans-serif;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Wall-Clock Papers</h1>
+  <div class="subtitle">Papers found during active missions, connected to mission science</div>
+  <nav>
+    <a href="index.html">Mission Tracker</a>
+    <a href="science.html">Science</a>
+    <a href="math.html">Math</a>
+    <a href="../../LIVE/index.html">LIVE</a>
+    <a href="../../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <div class="stats-bar">
+    <span><strong>13</strong> papers cataloged</span>
+    <span><strong>3</strong> sweeps</span>
+    <span>Sources: arXiv, NTRS, AGU, SPIE, Nature, Planetary Society</span>
+    <span>Last update: v1.0.17 (T-22h)</span>
+  </div>
+
+  <div class="sweep-header">v1.0.17 — March 31, 5:00 PM PDT (T-22h) &mdash; SPACE WEATHER ALERT</div>
+
+  <div class="paper alert-paper">
+    <h3><span class="paper-num">#13</span> CME Propagation — G2 Watch for Launch Day</h3>
+    <div class="source">NOAA SWPC Alert, March 31, 2026 &middot; <a href="https://www.swpc.noaa.gov/news/g2-g1-watches-mar-31-apr-02-utc-day">SWPC Alert</a></div>
+    <div class="why"><strong>Mission critical:</strong> X1.5 flare from AR4405 launched CME at ~1845 km/s. G2 Moderate storm watch for April 1 (launch day). Kp forecast rising to 6. Crew radiation exposure during Van Allen belt transits directly affected.</div>
+    <div class="science">CME transit: 1.5&times;10<sup>8</sup> km / 1845 km/s &asymp; 22.6 hours. For G2 storm: aurora visible at ~55&deg; geomagnetic latitude (Pacific NW!), enhanced radiation belts, spacecraft surface charging. The CubeSats (K-RadCube, SHMS) are designed to measure exactly this scenario.</div>
+    <div class="lesson">The CME is both risk and opportunity. Real science happens when nature sends a test case during your experiment.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#11</span> Wasserstein Transformer for Kp Prediction</h3>
+    <div class="source">arXiv:2503.23102, March 29, 2025 &middot; <a href="https://arxiv.org/abs/2503.23102">arXiv</a></div>
+    <div class="why"><strong>Why it matters:</strong> Multimodal ML framework predicting 3-5 day Kp index by fusing satellite measurements, solar images, and time series. Uses Wasserstein distance to align probability distributions across data modalities. Directly relevant to the G2 storm forecast accuracy.</div>
+    <div class="tspb">TSPB Layer 7 (Information Theory):<code>W(P, Q) = inf ∫ |x - y| dγ(x, y)
+Wasserstein measures geometric distance between distributions.
+Unlike KL-divergence, it satisfies the triangle inequality — a proper metric.</code></div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#12</span> A New Phase for Space Weather</h3>
+    <div class="source">AGU Space Weather, 2026 (10.1029/2026SW005068) &middot; <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2026SW005068">AGU</a></div>
+    <div class="why"><strong>Why it matters:</strong> Reviews the transition from research to operational space weather forecasting. Describes the exact SWPC infrastructure monitoring space weather for Artemis II — the APIs we're polling, the G-scale watches, the ML models improving forecast accuracy.</div>
+  </div>
+
+  <div class="sweep-header">v1.0.1 — March 31, 4:01 AM PDT (T-18h) &mdash; First Sweep</div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#1</span> Solar Superflare Risk</h3>
+    <div class="source">Space.com / JGR: Space Physics, Feb 13, 2026 &middot; <a href="https://www.space.com/space-exploration/artemis/artemis-2-moon-mission-shouldnt-launch-until-late-2026-new-analysis-of-solar-superflares-suggests">Space.com</a></div>
+    <div class="why"><strong>Why it matters:</strong> Solar Cycle 25 near peak. Paper argues launching beyond Van Allen belts during solar max exposes crew to unacceptable superflare risk. Published <em>during the countdown</em> — a Challenger Rule moment.</div>
+    <div class="tspb">TSPB Layer 1 (Unit Circle):<code>P(flare in 10-day window) = 1 - (1 - p_daily)^10
+At solar max with p_daily = 0.02: P = 18.3%</code></div>
+    <div class="lesson">Risk is probability &times; consequence. Low probability doesn't mean safe.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#2</span> AVATAR Organ-on-Chip Radiation Study</h3>
+    <div class="source">Tavakol et al., Advanced Science, 2024 &middot; <a href="https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202401415">Wiley</a></div>
+    <div class="why"><strong>Why it matters:</strong> Protracted radiation causes <em>greater</em> tissue damage than acute dose — body's repair mechanisms can't keep up. This is the exact technology flying as AVATAR payload tomorrow.</div>
+    <div class="tspb">TSPB Layer 8 (L-Systems):<code>F → F[+F][-F]F  — organ chip microfluidics mirror vascular L-systems
+Same branching grammar at every biological scale.</code></div>
+    <div class="lesson">Dose rate matters as much as total dose. Time is a variable in the damage function.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#3</span> Deep Space Radiation Measurements</h3>
+    <div class="source">NASA NTRS, 2025 (20250002757) &middot; <a href="https://ntrs.nasa.gov/citations/20250002757">NTRS</a></div>
+    <div class="why"><strong>Why it matters:</strong> Actual radiation measurements from Artemis I trajectory and Biosentinel CubeSat. Ground truth — not models. The data informs crew protection strategies for Artemis II.</div>
+    <div class="tspb">TSPB Layer 4 (Vector Calculus):<code>Dose = ∫ Φ(E) × S(E) / ρ × dE
+Orion hull (~4 g/cm²): GCR reduction ~20-30%, SPE reduction ~80-95%</code></div>
+    <div class="lesson">You model the physics, verify with measurement, correct the model. Science works by prediction → measurement → correction → repeat.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#4</span> Free-Space Laser Communications XXXVIII</h3>
+    <div class="source">SPIE Vol. 13885, 2026 &middot; <a href="https://spie.org/Publications/Proceedings/Volume/13885">SPIE</a></div>
+    <div class="why"><strong>Why it matters:</strong> DSOC results from Psyche at 3 AU. Artemis II tests O2O laser at lunar distance — 260 Mbps, 130&times; faster than S-band radio. If it works, every future mission gets broadband.</div>
+    <div class="tspb">TSPB Layer 7 (Information Theory):<code>O2O beam divergence: θ = 1.22 × 1550nm / 0.1m = 18.9 μrad
+Footprint at Moon: 7.27 km (vs 21,142 km for S-band radio)
+Optical beam is 2,900× tighter. Shannon: C = B × log₂(1 + SNR)</code></div>
+    <div class="lesson">Bandwidth isn't about power — it's about concentration. A flashlight at the Moon outperforms a radio tower.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#5</span> Heat Shield Concerns — AVCOAT Ablation</h3>
+    <div class="source">phys.org / The Conversation, March 2026 &middot; <a href="https://phys.org/news/2026-03-shield-safety-stakes-nasa-artemis.html">phys.org</a></div>
+    <div class="why"><strong>Why it matters:</strong> Artemis I heat shield lost material unevenly during skip reentry. Fix: direct entry (no bounce). The decision to fly same design with modified trajectory is the most consequential engineering judgment of the mission.</div>
+    <div class="tspb">TSPB Layer 4 (Vector Calculus):<code>q̇_conv ∝ ρ^0.5 × V^3.15  (Chapman's formula)
+Skip entry: two heating peaks with internal gas trapping
+Direct entry: one continuous peak, more predictable ablation</code></div>
+    <div class="lesson">Same energy delivered differently produces different outcomes. Rate matters. Sophie Germain studied this for vibrating plates.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#6</span> "Artemis II Is Not Safe to Fly"</h3>
+    <div class="source">Idle Words, March 2026 &middot; <a href="https://idlewords.com/2026/03/artemis_ii_is_not_safe_to_fly.htm">Idle Words</a></div>
+    <div class="why"><strong>Why it matters:</strong> Independent safety critique applying CAIB framework. Argues modified trajectory doesn't address root cause of char loss. The Challenger Rule in real time — safety concerns raised during countdown.</div>
+    <div class="tspb">TSPB Layer 5 (Set Theory):<code>decision = GO if risk_score &lt; threshold, else NO-GO
+Challenger lesson: schedule_pressure is NOT a valid risk input.
+Columbia lesson: "probably okay" is not an engineering assessment.</code></div>
+    <div class="lesson">Every safety system is a classification problem. The question is where you draw the boundary.</div>
+  </div>
+
+  <div class="sweep-header">v1.0.0 — March 31 (T-37h) &mdash; Baseline Sweep</div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#7</span> Radiation Risk Primer</h3>
+    <div class="source">European Physical Journal Plus, 2025 &middot; <a href="https://link.springer.com/article/10.1140/epjp/s13360-025-07199-8">Springer</a></div>
+    <div class="why"><strong>Why it matters:</strong> Comprehensive review: GCR composition, SPE characteristics, shielding physics, biological endpoints. The reference primer for understanding crew radiation exposure.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#8</span> Artemis II Crew Health Experiments</h3>
+    <div class="source">Planetary Society, Planetary Radio, 2026 &middot; <a href="https://www.planetary.org/planetary-radio/2026-astronaut-health-experiments-artemis-ii">Planetary Society</a></div>
+    <div class="why"><strong>Why it matters:</strong> Details all five crew health investigations: AVATAR, ARCHAR, radiation monitoring, circadian disruption, immune function.</div>
+    <div class="tspb">TSPB Layer 3 (Trigonometry):<code>Circadian rhythm: sin(2πt/24.2) drifting against mission clock sin(2πt/24.0)
+In deep space, no sunrise/sunset zeitgeber — free-running oscillator</code></div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#9</span> Laser Comms for Mars</h3>
+    <div class="source">AIAA, 2025 &middot; <a href="https://arc.aiaa.org/doi/pdf/10.2514/6.2025-99519">AIAA</a></div>
+    <div class="why"><strong>Why it matters:</strong> Extends DSOC architecture to Mars distances (0.5-2.5 AU). At Mars, received power is 3&times;10<sup>-6</sup> of lunar distance — the inverse-square distance ladder.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#10</span> Neural Network Trajectory Optimization</h3>
+    <div class="source">Journal of Physics, Oct 2025</div>
+    <div class="why"><strong>Why it matters:</strong> Neural networks learn the functor from initial conditions to trajectories. Near-optimal free-return solutions in milliseconds instead of minutes. Category theory: a structure-preserving map between mathematical worlds.</div>
+  </div>
+
+</main>
+
+<footer>
+  <a href="index.html">Artemis II Tracker</a> &middot;
+  Wall-Clock Papers &middot; 13 cataloged &middot;
+  <a href="../../index.html">Tibsfox Research</a>
+</footer>
+
+</body>
+</html>

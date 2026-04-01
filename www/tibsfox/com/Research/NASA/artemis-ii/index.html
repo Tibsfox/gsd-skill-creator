@@ -151,6 +151,14 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 .timeline-time { font-size:0.75rem; color:var(--dim); min-width:80px; }
 .timeline-desc { font-size:0.8rem; color:rgba(255,255,255,0.6); }
 
+/* === INFO CELLS (deep dive grid) === */
+.info-cell { background: var(--panel); padding: 1.2rem; }
+.info-title {
+  font-size: 0.65rem; color: var(--dim); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 0.4rem; font-weight: 500;
+  border-bottom: 1px solid var(--border); padding-bottom: 0.3rem;
+}
+
 /* === FOOTER === */
 .nav-links { padding:0.6rem 2rem; text-align:center; font-size:0.8rem; background:rgba(255,255,255,0.02); }
 .page-footer {
@@ -258,6 +266,8 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   <a href="math.html">Math</a> &middot;
   <a href="timeline.html">Timeline</a> &middot;
   <a href="watch.html">Watch</a> &middot;
+  <a href="papers.html">Papers</a> &middot;
+  <a href="navigation.html">Nav</a> &middot;
   <a href="../../SOL/index.html">Sun &amp; Moon</a> &middot;
   <a href="../../MUK/index.html">Mukilteo</a>
 </div>
@@ -286,6 +296,53 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   <div id="phase-badge" class="phase-badge phase-prelaunch">Pre-Launch</div>
   <div class="clock-sub" style="margin-top:0.3rem;">
     <span id="phase-desc" style="color:var(--orion-silver);">Launch countdown in progress</span>
+  </div>
+</div>
+
+<!-- === QUICK NAV: DEEP DIVE + OBSERVATORIES + WATCH + WEATHER === -->
+<div class="data-source-bar" style="border-bottom:1px solid var(--border);">
+  Telemetry: <span style="color:#4CAF50;">LIVE</span> via tibsfox.com &middot; Last update: <span id="source-update-time">now</span>
+</div>
+<div class="info-grid deep-dive" style="margin-top:1px;">
+  <div class="info-cell">
+    <div class="info-title">Deep Dive</div>
+    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
+      <a href="crew.html">Crew Biographies &amp; Mission Firsts</a><br>
+      <a href="vehicle.html">SLS + Orion Vehicle Systems</a><br>
+      <a href="science.html">Science Payloads &amp; O2O Optical Comms</a><br>
+      <a href="math.html">Worked Math &mdash; Real Mission Numbers</a><br>
+      <a href="timeline.html">Full Timeline &amp; Historical Context</a><br>
+      <a href="papers.html">Wall-Clock Papers (13)</a><br>
+      <a href="navigation.html">Deep Space Navigation</a><br>
+      <a href="dedication.html">Sophie Germain Dedication</a>
+    </div>
+  </div>
+  <div class="info-cell">
+    <div class="info-title">Connected Observatories</div>
+    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
+      <a href="../../SOL/index.html">SOL &mdash; Sun, Moon &amp; Celestial</a><br>
+      <a href="../../MUK/index.html">Mukilteo Microclimate Observatory</a><br>
+      <a href="../../MUK/food.html">PNW Food Heritage (14 restaurants)</a><br>
+      <a href="../../PARK/index.html">Parks &amp; Trails Guide</a><br>
+      <a href="../../forest/index.html">Forest Ecosystem Simulation</a>
+    </div>
+  </div>
+  <div class="info-cell">
+    <div class="info-title"><a href="watch.html" style="color:inherit;">Watch Launch</a></div>
+    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
+      <strong style="color:var(--artemis-gold);">April 1 &mdash; 3:24 PM PDT</strong><br>
+      <span style="color:var(--dim);">7:45 AM EDT</span> &mdash; Tanking ops (YouTube)<br>
+      <span style="color:var(--dim);">12:50 PM EDT</span> &mdash; Official broadcast<br>
+      <span style="color:var(--dim);">Platforms:</span> NASA+, YouTube, Prime<br>
+      <span style="color:var(--dim);">Full Moon on launch day</span><br>
+      <a href="watch.html" style="font-size:0.75rem;">Full viewing guide &rarr;</a>
+    </div>
+  </div>
+  <div class="info-cell" id="muk-weather-cell">
+    <div class="info-title">Mukilteo Weather</div>
+    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;" id="muk-weather-content">
+      <div style="color:var(--dim);">Loading from status.json...</div>
+    </div>
   </div>
 </div>
 
@@ -473,47 +530,6 @@ a:hover { color: #e0cc80; text-decoration:underline; }
 <!-- === DATA SOURCE BAR === -->
 <div class="data-source-bar" id="source-bar">
   Telemetry: trajectory model (computed) &middot; Weather: NOAA api.weather.gov &middot; Moon: synodic calculation &middot; DSN: eyes.nasa.gov/dsn/ &middot; Horizons: JPL -1024
-</div>
-
-<!-- === DEEP DIVE RESEARCH === -->
-<div class="info-grid deep-dive" style="margin-top:1px;">
-  <div class="info-cell">
-    <div class="info-title">Deep Dive</div>
-    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
-      <a href="crew.html">Crew Biographies &amp; Mission Firsts</a><br>
-      <a href="vehicle.html">SLS + Orion Vehicle Systems</a><br>
-      <a href="science.html">Science Payloads &amp; O2O Optical Comms</a><br>
-      <a href="math.html">Worked Math &mdash; Real Mission Numbers</a><br>
-      <a href="timeline.html">Full Timeline &amp; Historical Context</a>
-    </div>
-  </div>
-  <div class="info-cell">
-    <div class="info-title">Connected Observatories</div>
-    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
-      <a href="../../SOL/index.html">SOL &mdash; Sun, Moon &amp; Celestial</a><br>
-      <a href="../../MUK/index.html">Mukilteo Microclimate Observatory</a><br>
-      <a href="../../MUK/food.html">PNW Food Heritage (14 restaurants)</a><br>
-      <a href="../../PARK/index.html">Parks &amp; Trails Guide</a><br>
-      <a href="../../forest/index.html">Forest Ecosystem Simulation</a>
-    </div>
-  </div>
-  <div class="info-cell">
-    <div class="info-title"><a href="watch.html" style="color:inherit;">Watch Launch</a></div>
-    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;">
-      <strong style="color:var(--artemis-gold);">April 1 &mdash; 3:24 PM PDT</strong><br>
-      <span style="color:var(--dim);">7:45 AM EDT</span> &mdash; Tanking ops (YouTube)<br>
-      <span style="color:var(--dim);">12:50 PM EDT</span> &mdash; Official broadcast<br>
-      <span style="color:var(--dim);">Platforms:</span> NASA+, YouTube, Prime<br>
-      <span style="color:var(--dim);">Full Moon on launch day</span><br>
-      <a href="watch.html" style="font-size:0.75rem;">Full viewing guide &rarr;</a>
-    </div>
-  </div>
-  <div class="info-cell lod-high" id="muk-weather-cell">
-    <div class="info-title">Mukilteo Weather</div>
-    <div style="font-size:0.82rem; line-height:1.8; padding:0.3rem 0;" id="muk-weather-content">
-      <div style="color:var(--dim);">Loading from status.json...</div>
-    </div>
-  </div>
 </div>
 
 <div class="page-footer">

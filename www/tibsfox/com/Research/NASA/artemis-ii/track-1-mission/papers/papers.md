@@ -263,4 +263,78 @@ Source: Journal of Physics, Oct 2025
 
 ---
 
+## 2026-03-31 17:00 PDT (T-22h) — Sweep v1.0.17
+
+### 11. Wasserstein Transformer for Kp Prediction
+
+**"The geomagnetic storm and Kp prediction using Wasserstein transformer"**
+Source: arXiv:2503.23102, March 29, 2025
+URL: https://arxiv.org/abs/2503.23102
+
+**What the paper says:** A multimodal Transformer framework for predicting the 3-day and 5-day planetary Kp index by integrating satellite measurements, solar images, and Kp time series. Incorporates the Wasserstein distance into the transformer architecture and loss function to align probability distributions across modalities.
+
+**Why it matters:** The Kp index drives radiation exposure decisions for Artemis II. With a G2 Moderate geomagnetic storm watch for launch day (April 1), and a CME from X1.5 flare AR4405 approaching at ~1845 km/s, accurate Kp prediction is directly mission-critical. This paper's approach — combining multiple data modalities — is exactly what mission planners need for crew safety decisions.
+
+**The science, simply:** The Kp index (0-9) measures how disturbed Earth's magnetic field is. A Kp of 0-1 is quiet (like now, 1.33). A Kp of 5+ means a geomagnetic storm. The challenge: predicting Kp days in advance requires combining solar images (what the Sun looks like), satellite measurements (what's actually hitting the magnetosphere), and historical patterns (what happened before under similar conditions). Each data source has a different statistical distribution. The Wasserstein distance — also called the "earth mover's distance" — measures how much work it takes to reshape one distribution into another. Using this as the alignment metric teaches the transformer to translate between data modalities while preserving their information content.
+
+**TSPB Layer 7 (Information Theory) deposit:**
+The Wasserstein distance is an optimal transport problem:
+
+```
+W(P, Q) = inf_{γ ∈ Γ(P,Q)} ∫ |x - y| dγ(x, y)
+
+where P, Q = two probability distributions
+      Γ(P,Q) = all joint distributions with marginals P and Q
+      γ = the "transport plan"
+
+Unlike KL-divergence (which measures information loss), Wasserstein
+measures the geometric distance between distributions. It's a metric
+on the space of probability measures — it satisfies the triangle
+inequality, which KL-divergence does not. This makes it a proper
+distance function for aligning modalities.
+```
+
+**What we learned:** Predicting space weather requires fusing heterogeneous data. The mathematical framework for doing this — optimal transport — is the same framework that appears in generative models (GANs use Wasserstein distance) and in logistics optimization (the original earth mover's problem). The unit circle connects: rotation in distribution space is measured by how much mass you need to move, not how different the shapes look.
+
+---
+
+### 12. A New Phase for Space Weather
+
+**"A New Phase for Space Weather"**
+Source: AGU Space Weather, 2026 (doi: 10.1029/2026SW005068)
+URL: https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2026SW005068
+
+**What the paper says:** Reviews the transition of space weather from research to operational forecasting. Covers advances in real-time solar wind monitoring, magnetospheric models, and the integration of ML methods into operational forecasting pipelines at NOAA/SWPC.
+
+**Why it matters:** This paper describes the exact infrastructure that's monitoring space weather for Artemis II right now — the SWPC APIs we're pulling from, the G-scale watches being issued, and the ML models being deployed to improve forecast accuracy. Understanding the operational pipeline helps us interpret the G2 watch for launch day.
+
+---
+
+### 13. CME Propagation and Arrival Prediction
+
+**NOAA SWPC Alert: G2-G1 Watches for March 31 — April 2**
+Source: NOAA Space Weather Prediction Center, March 31, 2026
+URL: https://www.swpc.noaa.gov/news/g2-g1-watches-mar-31-apr-02-utc-day
+
+**What it says:** X1.5 flare from active region AR4405 on March 30 produced a CME traveling at approximately 1,845 km/s. G2 (Moderate) geomagnetic storm watch for April 1 (launch day), G1 (Minor) for April 2. CME arrival expected late March 31 through April 1.
+
+**Why it matters for Artemis II:** This is the real-time test of everything the Kp prediction papers describe. A G2 storm means Kp 6 is possible. For crew beyond the Van Allen belts, this directly affects radiation exposure calculations. The storm may actually help teach us something: the CubeSat payloads (K-RadCube, SHMS) are designed to measure exactly this kind of event, and they'll be deployed during or shortly after the storm passage.
+
+**The science, simply:** A coronal mass ejection is a cloud of magnetized plasma ejected from the Sun. At 1,845 km/s, it covers the 150 million km to Earth in about 22.5 hours. When it hits Earth's magnetosphere, the magnetic field embedded in the CME can connect to Earth's field (if the CME's Bz component is southward, negative). This connection opens the magnetosphere and allows solar wind energy to pour into the radiation belts. The Kp index jumps. If Artemis II launches during this disturbance, the crew passes through enhanced radiation belts during their initial high Earth orbits before TLI.
+
+```
+CME transit time: d / v = 1.5e8 km / 1845 km/s ≈ 81,300 s ≈ 22.6 hours
+Arrival window: March 30 + 22.6h = March 31 evening UTC
+
+For G2 storm (Kp 6):
+  Power grid: possible voltage alarms at high latitudes
+  Spacecraft: surface charging, drag effects on LEO satellites  
+  Aurora: visible at ~55° geomagnetic latitude (Pacific NW!)
+  Radiation belts: enhanced proton/electron flux
+```
+
+**What we learned:** The CME is both a risk and an opportunity. It's a risk because it enhances radiation during the crew's most vulnerable phase (Van Allen belt transits). It's an opportunity because the CubeSats and radiation sensors are designed for exactly this scenario. Real science happens when nature sends a test case during your experiment.
+
+---
+
 *Each sweep deepens these explanations. The papers build the textbook.*
