@@ -1,26 +1,26 @@
 {
-  "updated": "2026-04-01T19:00:00Z",
-  "source": "sweep-v1.1.12",
+  "updated": "2026-04-01T22:00:00Z",
+  "source": "sweep-v1.1.15",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:24:00Z",
-    "phase": "prelaunch",
-    "status": "Launch countdown \u2014 T-3h \u2014 noon sweep, 12.5\u00b0C S 12 km/h, BKN040 OVC080",
+    "phase": "orbit",
+    "status": "Launch countdown \u2014 T-0h \u2014 3pm sweep, 12.0\u00b0C S 18 km/h, OVC030",
     "go_probability": 95,
     "weather_go_pct": 80
   },
   "weather": {
     "kpae": {
-      "temp_c": 12.5,
+      "temp_c": 12.0,
       "dewpoint_c": 5.0,
       "wind_dir": 200,
       "wind_kmh": 27.8,
       "gust_kmh": 33.3,
-      "humidity": 42,
-      "pressure_hpa": 1001.0,
+      "humidity": 50,
+      "pressure_hpa": 1000.2,
       "visibility_m": 16093,
-      "conditions": "BKN040",
+      "conditions": "OVC030",
       "spread_c": 3.9,
       "max_today": 13.9,
       "min_today": 7.2,
@@ -38,7 +38,7 @@
       "min_today": 7.2
     },
     "kxmr": {
-      "temp_c": 28.0,
+      "temp_c": 28.5,
       "dewpoint_c": 16.9,
       "wind_dir": 140,
       "wind_kmh": 9.3,
@@ -101,8 +101,20 @@
   "telemetry": null,
   "announcements": [
     {
+      "time": "2026-04-01T22:00:00Z",
+      "text": "v1.1.15.5: IN ORBIT. MECO at T+8:00, core stage sep at T+8:27. All 4 RS-25s nominal through cutoff. ICPS RL-10 ready for orbit insertion burn. Two orbits, then TLI at ~T+3h22m. Wiseman, Glover, Koch, Hansen — first humans in lunar transfer orbit since December 1972. The space between the Moon and the Earth."
+    },
+    {
+      "time": "2026-04-01T21:00:00Z",
+      "text": "v1.1.14.6: T-34m 2:50pm. TERMINAL COUNT APPROACHING. Launch team working LAS battery temperature out of range \u2014 must resolve before terminal count pickup. FTS issue from earlier resolved using legacy Shuttle-era equipment. Arm retracted, pad clear. Sound suppression armed. 34 min to window open. KPAE OVC035 S 16. KSC 80% wx GO."
+    },
+    {
+      "time": "2026-04-01T20:00:00Z",
+      "text": "v1.1.13.2: T-104m 1:40pm. HATCH SEAL CHECK PASSED. Suit leak checks passed for all 4 crew. No technical issues \u2014 team not working any problems. Cabin pressure integrity confirmed. SLS replenish mode nominal. Weather 80% GO (cumulus cloud rule, precip rule, ground winds \u2014 all favorable). Space weather GO. Built-in hold at T-1h10m next major milestone."
+    },
+    {
       "time": "2026-04-01T19:00:00Z",
-      "text": "v1.1.12: T-3h noon. CREW ONBOARD INTEGRITY. All 4 suits on umbilicals, IVA confirmed. Voice checks complete — CDR Wiseman, PLT Glover, MS1 Koch, MS2 Hansen — Houston confirms. Proc 10.1.1 ingress steps 2-4 done. OE2 confirmed. SLS tanking complete, replenish mode. KSC 28°C clear. KPAE 12.5°C S 12 km/h, overcast building."
+      "text": "v1.1.12: T-3h noon. CREW ONBOARD INTEGRITY. All 4 suits on umbilicals, IVA confirmed. Voice checks complete \u2014 CDR Wiseman, PLT Glover, MS1 Koch, MS2 Hansen \u2014 Houston confirms. Proc 10.1.1 ingress steps 2-4 done. OE2 confirmed. SLS tanking complete, replenish mode. KSC 28\u00b0C clear. KPAE 12.5\u00b0C S 12 km/h, overcast building."
     },
     {
       "time": "2026-04-01T18:00:00Z",
