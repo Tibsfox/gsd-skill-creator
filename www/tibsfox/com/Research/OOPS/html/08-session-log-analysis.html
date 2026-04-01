@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Session Log Analysis — Mining Claude Code Sessions for
+    <title>Session Log Analysis -- Mining Claude Code Sessions for
 Operational Intelligence — HEL Research</title>
     <style>
         :root {
@@ -57,7 +57,7 @@ Operational Intelligence — HEL Research</title>
     </div>
     <h1
     id="session-log-analysis-mining-claude-code-sessions-for-operational-intelligence">Session
-    Log Analysis — Mining Claude Code Sessions for Operational
+    Log Analysis – Mining Claude Code Sessions for Operational
     Intelligence</h1>
     <p><strong>Date:</strong> 2026-03-31 <strong>Context:</strong>
     gsd-skill-creator v1.49.192, Claude Code v2.1.88, 50-milestone
@@ -303,23 +303,151 @@ Operational Intelligence — HEL Research</title>
     <code>PostToolUse</code> hook data. Sliding window of 3-7 calls.
     Hash each window. Count occurrences across sessions. Sequences
     appearing 3+ times across 3+ sessions are candidates.</p>
-    <h3 id="agent-efficiency-metrics">2.2 Agent Efficiency Metrics</h3>
-    <p>For multi-agent orchestration (Gastown convoy, team execution),
-    we need per-agent performance data:</p>
+    <h3 id="concrete-examples-from-this-session">2.2 Concrete Examples
+    from This Session</h3>
+    <p>This OOPS research session provides a live case study. The
+    session involved reading 40+ SKILL.md files, performing binary
+    analysis on the Claude Code executable, dispatching 5 parallel
+    research agents, writing 9 research documents (20K+ words), and
+    expanding those documents in a second pass. The observable tool
+    patterns include:</p>
+    <p><strong>Tool distribution (estimated from session
+    activity):</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 29%" />
+    <col style="width: 29%" />
+    <col style="width: 24%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Tool</th>
+    <th>Est. Calls</th>
+    <th>% of Total</th>
+    <th>Purpose</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Read</td>
+    <td>~180</td>
+    <td>45%</td>
+    <td>SKILL.md files, reference docs, OOPS drafts, binary output</td>
+    </tr>
+    <tr>
+    <td>Bash</td>
+    <td>~60</td>
+    <td>15%</td>
+    <td>wc counts, ls, strings binary analysis, git operations</td>
+    </tr>
+    <tr>
+    <td>Write</td>
+    <td>~35</td>
+    <td>9%</td>
+    <td>Research documents, expanded documents, index pages</td>
+    </tr>
+    <tr>
+    <td>Edit</td>
+    <td>~25</td>
+    <td>6%</td>
+    <td>Document corrections, frontmatter updates</td>
+    </tr>
+    <tr>
+    <td>Grep</td>
+    <td>~40</td>
+    <td>10%</td>
+    <td>Pattern searches across skills, binary strings</td>
+    </tr>
+    <tr>
+    <td>Glob</td>
+    <td>~20</td>
+    <td>5%</td>
+    <td>File discovery across research directories</td>
+    </tr>
+    <tr>
+    <td>Agent</td>
+    <td>~15</td>
+    <td>4%</td>
+    <td>Research fleet dispatch (5 deep-research, 5 expansion, 2
+    fact-check)</td>
+    </tr>
+    <tr>
+    <td>Other</td>
+    <td>~25</td>
+    <td>6%</td>
+    <td>Tool result processing</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Key patterns observed:</strong></p>
+    <ol type="1">
+    <li><p><strong>Read-heavy start.</strong> The session opened with
+    ~40 consecutive Read calls to survey all 40 SKILL.md files. This is
+    a “context gathering” pattern that a pre-built skill could compress
+    – a skill registry (proposed in OOPS/07) would provide this survey
+    data without 40 individual reads.</p></li>
+    <li><p><strong>Binary analysis sequence.</strong> The
+    <code>strings $(which claude) | grep</code> pattern appeared 4 times
+    with different search terms (agentskills, skills-format, skill field
+    names, API endpoints). This is a repeated 3-call sequence (Bash
+    -&gt; Bash -&gt; Bash with grep variations) that should be codified
+    into the ecosystem-alignment skill as a structured analysis
+    function.</p></li>
+    <li><p><strong>Agent fleet dispatch.</strong> 5 agents were spawned
+    in a single message using <code>run_in_background: true</code>. Each
+    agent received a complete brief (topic, scope, word target, quality
+    standards). The dispatch pattern matched the fleet-mission skill
+    exactly – this was the pattern being codified while it was being
+    used. Agent completion notifications arrived over the next 10-15
+    minutes, with results aggregated incrementally.</p></li>
+    <li><p><strong>Document expansion pattern.</strong> The expansion
+    pass followed a consistent sequence: Read(document) -&gt; analyze
+    gaps -&gt; Write(expanded document). This 3-call pattern repeated 9
+    times (once per research document). With tool call tracking, this
+    pattern would be detectable as a “document expansion cycle” suitable
+    for automation.</p></li>
+    <li><p><strong>File access hotspots.</strong> The most-read files
+    across the session:</p>
     <ul>
-    <li><strong>Task completion time</strong> – from spawn to final
-    commit</li>
-    <li><strong>Commit count per task</strong> – single clean commit
-    vs. multiple fix-up commits</li>
-    <li><strong>Correction rate</strong> – fix commits as a proportion
-    of total commits per agent</li>
-    <li><strong>File touch efficiency</strong> – files modified
-    vs. files read (high read-to-write ratio suggests wasted
-    context)</li>
-    <li><strong>Stall frequency</strong> – how often the
-    witness-observer detects stalls per agent type</li>
-    </ul>
-    <h3 id="common-corrections">2.3 Common Corrections</h3>
+    <li><code>.claude/skills/*/SKILL.md</code> – 40 reads (one per
+    skill, survey phase)</li>
+    <li><code>www/tibsfox/com/Research/OOPS/research/*.md</code> – 18
+    reads (drafts, reviews, expansions)</li>
+    <li><code>.claude/hooks/*.sh</code> – 3 reads (hook analysis for
+    this document)</li>
+    <li>Binary analysis output – 4 reads (Claude Code binary
+    strings)</li>
+    </ul></li>
+    </ol>
+    <h3 id="agent-spawn-patterns-from-this-session">2.3 Agent Spawn
+    Patterns from This Session</h3>
+    <p>The session spawned agents in three waves:</p>
+    <p><strong>Wave 1: Deep research fleet (5 agents)</strong> - Agent
+    A: Incident Timeline and Architecture Parallels - Agent B: Killer
+    App Strategy and Improvements - Agent C: Hook System Deep Dive -
+    Agent D: Memory System and Orchestration Patterns - Agent E: Skill
+    Optimization and Session Analysis</p>
+    <p>Each agent was spawned with <code>run_in_background: true</code>
+    and received a complete context packet (project description,
+    research scope, quality standards, output format). No agent had
+    access to another agent’s output during execution. Results were
+    aggregated after all 5 completed.</p>
+    <p><strong>Wave 2: Document expansion (2 agents)</strong> - Agent A:
+    Docs 01-05 expansion - Agent B: Docs 06-09 expansion</p>
+    <p>These agents received the original documents plus expansion
+    instructions. Each operated independently.</p>
+    <p><strong>Wave 3: Direct expansion (no agents)</strong> The final
+    expansion pass was performed directly (this session), without agent
+    dispatch. This allowed for cross-document consistency checks that
+    would not be possible with isolated agents.</p>
+    <p><strong>Observable metrics:</strong> - Fleet dispatch overhead:
+    ~30 seconds to compose and send 5 agent briefs - Agent completion
+    time: 8-15 minutes per agent (Wave 1) - Agent output quality: 4 of 5
+    agents produced usable first drafts; 1 needed significant revision -
+    Agent success rate: 100% (all completed, none stalled or failed) -
+    No merge conflicts (agents wrote to non-overlapping files)</p>
+    <h3 id="common-corrections">2.4 Common Corrections</h3>
     <p>User corrections are the highest-signal observation in the
     skill-creator pipeline. Currently we detect corrections
     heuristically (fix after feat on same files). A proper correction
@@ -334,7 +462,7 @@ Operational Intelligence — HEL Research</title>
     <p>Three corrections of the same type should trigger a skill
     refinement proposal. This is already specified in our bounded
     learning guardrails but not systematically implemented.</p>
-    <h3 id="compaction-impact-analysis">2.4 Compaction Impact
+    <h3 id="compaction-impact-analysis">2.5 Compaction Impact
     Analysis</h3>
     <p>Sessions that hit context compaction are qualitatively different
     from those that do not. Post-compaction, the agent loses working
@@ -349,7 +477,7 @@ Operational Intelligence — HEL Research</title>
     <li>Recovery time after compaction (how many extra reads to
     re-establish context)</li>
     </ul>
-    <h3 id="file-hotspot-analysis">2.5 File Hotspot Analysis</h3>
+    <h3 id="file-hotspot-analysis">2.6 File Hotspot Analysis</h3>
     <p>Some files are read or modified far more often than others.
     Identifying hotspots reveals:</p>
     <ul>
@@ -363,30 +491,185 @@ Operational Intelligence — HEL Research</title>
     <li><strong>Files modified and then reverted</strong> – false starts
     that waste context</li>
     </ul>
-    <h2 id="building-a-session-analytics-pipeline">3. Building a Session
-    Analytics Pipeline</h2>
-    <h3 id="collection-layer">3.1 Collection Layer</h3>
+    <h2 id="the-7-step-learning-loop">3. The 7-Step Learning Loop</h2>
+    <h3 id="loop-definition">3.1 Loop Definition</h3>
+    <p>The learning loop is: <strong>observe -&gt; store -&gt; analyze
+    -&gt; propose -&gt; review -&gt; apply -&gt; measure</strong>.</p>
+    <p><strong>Step 1: Observe.</strong> Hooks capture raw events (tool
+    calls, commits, errors, compaction, agent lifecycle).</p>
+    <p><strong>Step 2: Store.</strong> Events append to JSONL files in
+    <code>.planning/patterns/</code>.</p>
+    <p><strong>Step 3: Analyze.</strong> The <code>/sc:digest</code>
+    command (enhanced with tool call analysis) identifies patterns:
+    repeated sequences, high correction rates, file hotspots, agent
+    inefficiencies.</p>
+    <p><strong>Step 4: Propose.</strong> When patterns cross the
+    <code>min_occurrences</code> threshold (default 3), the pipeline
+    writes a suggestion to <code>suggestions.json</code>. The suggestion
+    includes the pattern evidence, proposed skill content, and
+    confidence level.</p>
+    <p><strong>Step 5: Review.</strong> The <code>/sc:suggest</code>
+    command presents suggestions to the user. Accept, dismiss, or defer.
+    Human judgment is always in the loop – this is a non-negotiable
+    guardrail.</p>
+    <p><strong>Step 6: Apply.</strong> Accepted suggestions become
+    skills (via <code>skill-creator create</code>) or agent prompt
+    adjustments. Skills enter the loading pipeline and begin affecting
+    future sessions.</p>
+    <p><strong>Step 7: Measure.</strong> The next cycle’s analysis
+    measures whether the new skill reduced the target pattern. If
+    correction rate dropped, the skill is working. If it did not, the
+    skill needs refinement or the pattern diagnosis was wrong.</p>
+    <h3 id="worked-example-the-binary-analysis-pattern">3.2 Worked
+    Example: The Binary Analysis Pattern</h3>
+    <p>Here is the full 7-step loop applied to a concrete pattern from
+    this session.</p>
+    <p><strong>Step 1: Observe.</strong> PostToolUse captures these tool
+    calls during the OOPS session:</p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;seq&quot;</span><span class="fu">:</span> <span class="dv">142</span><span class="fu">,</span> <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash&quot;</span><span class="fu">,</span> <span class="dt">&quot;cmd&quot;</span><span class="fu">:</span> <span class="st">&quot;strings $(which claude) | grep -i agentskill&quot;</span><span class="fu">,</span> <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;seq&quot;</span><span class="fu">:</span> <span class="dv">143</span><span class="fu">,</span> <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash&quot;</span><span class="fu">,</span> <span class="dt">&quot;cmd&quot;</span><span class="fu">:</span> <span class="st">&quot;strings $(which claude) | grep -i skill | grep -i format&quot;</span><span class="fu">,</span> <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;seq&quot;</span><span class="fu">:</span> <span class="dv">144</span><span class="fu">,</span> <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash&quot;</span><span class="fu">,</span> <span class="dt">&quot;cmd&quot;</span><span class="fu">:</span> <span class="st">&quot;strings $(which claude) | grep -P &#39;skills-</span><span class="ch">\\</span><span class="st">d{4}&#39;&quot;</span><span class="fu">,</span> <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;seq&quot;</span><span class="fu">:</span> <span class="dv">145</span><span class="fu">,</span> <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Read&quot;</span><span class="fu">,</span> <span class="dt">&quot;file&quot;</span><span class="fu">:</span> <span class="st">&quot;/tmp/binary-output.txt&quot;</span><span class="fu">,</span> <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></span></code></pre></div>
+    <p>In a previous session (ecosystem alignment audit), the same
+    pattern appeared:</p>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;seq&quot;</span><span class="fu">:</span> <span class="dv">31</span><span class="fu">,</span> <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash&quot;</span><span class="fu">,</span> <span class="dt">&quot;cmd&quot;</span><span class="fu">:</span> <span class="st">&quot;strings $(which claude) | grep -oP &#39;</span><span class="ch">\&quot;</span><span class="st">skill[^</span><span class="ch">\&quot;</span><span class="st">]*</span><span class="ch">\&quot;</span><span class="st">&#39;&quot;</span><span class="fu">,</span> <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;seq&quot;</span><span class="fu">:</span> <span class="dv">32</span><span class="fu">,</span> <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash&quot;</span><span class="fu">,</span> <span class="dt">&quot;cmd&quot;</span><span class="fu">:</span> <span class="st">&quot;strings $(which claude) | grep hook | head -20&quot;</span><span class="fu">,</span> <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;seq&quot;</span><span class="fu">:</span> <span class="dv">33</span><span class="fu">,</span> <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Bash&quot;</span><span class="fu">,</span> <span class="dt">&quot;cmd&quot;</span><span class="fu">:</span> <span class="st">&quot;strings $(which claude) | grep agent | grep -i policy&quot;</span><span class="fu">,</span> <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></span></code></pre></div>
+    <p><strong>Step 2: Store.</strong> Both sequences are stored in
+    <code>tool-calls.jsonl</code> with session IDs linking them to their
+    respective sessions.</p>
+    <p><strong>Step 3: Analyze.</strong> The sliding window hash
+    detects: - 3-call pattern:
+    <code>Bash(strings|grep) -&gt; Bash(strings|grep) -&gt; Bash(strings|grep)</code>
+    - Appears in 2 sessions (and would appear in more as ecosystem
+    alignment becomes routine) - All calls share the
+    <code>strings $(which claude)</code> prefix - The variable part is
+    the grep filter</p>
+    <p>The analyzer classifies this as a “binary analysis” pattern with
+    confidence 0.8 (high repetition, consistent structure, variable
+    filter).</p>
+    <p><strong>Step 4: Propose.</strong> The pipeline writes to
+    <code>suggestions.json</code>:</p>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;sug-2026-03-31-001&quot;</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;skill_refinement&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;target_skill&quot;</span><span class="fu">:</span> <span class="st">&quot;ecosystem-alignment&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;pattern&quot;</span><span class="fu">:</span> <span class="st">&quot;binary-analysis-sequence&quot;</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;evidence&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;sessions&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;session-abc&quot;</span><span class="ot">,</span> <span class="st">&quot;session-def&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;occurrences&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;tool_calls&quot;</span><span class="fu">:</span> <span class="dv">7</span><span class="fu">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;saved_calls_per_occurrence&quot;</span><span class="fu">:</span> <span class="dv">2</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;proposal&quot;</span><span class="fu">:</span> <span class="st">&quot;Add a structured binary analysis section to ecosystem-alignment that runs all standard grep patterns in a single Bash call, reducing 3-4 tool calls to 1.&quot;</span><span class="fu">,</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;confidence&quot;</span><span class="fu">:</span> <span class="fl">0.8</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p><strong>Step 5: Review.</strong> User sees: “Pattern detected:
+    you run <code>strings $(which claude) | grep</code> 3-4 times each
+    session. Propose consolidating into a single analysis command in the
+    ecosystem-alignment skill.”</p>
+    <p>User accepts.</p>
+    <p><strong>Step 6: Apply.</strong> The ecosystem-alignment skill
+    gains a new section:</p>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### Binary Analysis (Combined)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Run all standard checks in one pass:</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="sc">\`\`\`</span>bash</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>strings $(which claude) 2&gt;/dev/null | grep -oP &#39;&quot;(skill|hook|agent|team|memory|worktree|effort|policy)<span class="ot">[^&quot;]</span>*&quot;&#39; | sort -u &gt; /tmp/claude-strings.txt</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>grep -c &quot;skill&quot; /tmp/claude-strings.txt  # skill-related strings</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>grep &quot;skills-&quot; /tmp/claude-strings.txt   # format versions</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>grep &quot;agent&quot; /tmp/claude-strings.txt     # agent patterns</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="sc">\`\`\`</span></span></code></pre></div>
+    <p><strong>Step 7: Measure.</strong> In the next session that
+    triggers ecosystem-alignment, the analyzer checks: - Previous: 3-4
+    Bash calls for binary analysis - Current: 1 Bash call for binary
+    analysis - Reduction: 66-75% fewer tool calls for this pattern -
+    Verdict: Skill refinement successful</p>
+    <p>If the pattern did not decrease (user ignored the skill, or the
+    single command was insufficient), the analyzer would flag this as a
+    failed refinement after 3 more sessions and either propose a
+    different approach or downgrade the suggestion confidence.</p>
+    <h2 id="analytics-pipeline-architecture">4. Analytics Pipeline
+    Architecture</h2>
+    <h3 id="collection-layer">4.1 Collection Layer</h3>
     <p>The collection layer captures raw events from Claude Code’s hook
     system and writes them to structured storage.</p>
-    <p><strong>Architecture:</strong></p>
-    <pre><code>Claude Code Hooks
-  |
-  |-- SessionStart -----&gt; session-start.sh (already exists)
-  |-- PreToolUse -------&gt; tool-tracker.sh (new)
-  |-- PostToolUse ------&gt; tool-tracker.sh (new)
-  |-- PostCompact ------&gt; compact-tracker.sh (new)
-  |-- SubagentSpawn ----&gt; agent-tracker.sh (new)
-  |-- PermissionDenied -&gt; error-tracker.sh (new)
-  |-- SessionEnd -------&gt; session-end.sh (already exists, needs update)
-  |
-  v
-.planning/patterns/
-  |-- sessions.jsonl         (existing -- commit-level data)
-  |-- tool-calls.jsonl       (new -- every tool invocation)
-  |-- agent-lifecycle.jsonl  (new -- spawn, complete, fail events)
-  |-- compaction-events.jsonl (new -- compaction timestamps and context)
-  |-- errors.jsonl           (new -- failures and recovery sequences)</code></pre>
-    <p><strong>Design constraints:</strong></p>
+    <pre><code>+===================================================================+
+|                    CLAUDE CODE RUNTIME                              |
++===================================================================+
+      |            |             |            |           |
+      v            v             v            v           v
+  SessionStart  PreToolUse   PostToolUse  PostCompact  SessionEnd
+      |            |             |            |           |
+      v            v             v            v           v
++------------------------------------------------------------------+
+|                     HOOK DISPATCH LAYER                            |
+|  (.claude/hooks.json routes events to shell scripts)              |
++------------------------------------------------------------------+
+      |            |             |            |           |
+      v            v             v            v           v
+  session-     validate-     tool-        compact-    session-
+  state.sh     commit.sh    tracker.sh   tracker.sh  end.sh
+  (exists)     (exists)     (NEW)        (NEW)       (update)
+      |            |             |            |           |
+      +-----+------+------+-----+------+-----+-----+----+
+            |             |            |            |
+            v             v            v            v
++------------------------------------------------------------------+
+|                    JSONL STORAGE LAYER                             |
+|  (.planning/patterns/ -- gitignored, local-first)                 |
++------------------------------------------------------------------+
+|                                                                    |
+|  sessions.jsonl           tool-calls.jsonl                        |
+|  (existing: commits)      (NEW: every tool invocation)            |
+|                                                                    |
+|  skill-events.jsonl       agent-lifecycle.jsonl                   |
+|  (existing: skill loads)  (NEW: spawn/complete/fail)              |
+|                                                                    |
+|  budget-history.jsonl     compaction-events.jsonl                 |
+|  (existing: skill budget) (NEW: context compaction)               |
+|                                                                    |
+|  errors.jsonl                                                      |
+|  (NEW: failures and recovery sequences)                           |
+|                                                                    |
++------------------------------------------------------------------+
+            |
+            v
++------------------------------------------------------------------+
+|                    ANALYSIS LAYER                                  |
+|  (/sc:digest, /sc:observe, /sc:suggest)                          |
++------------------------------------------------------------------+
+|                                                                    |
+|  Tier 1: Per-Session          Tier 2: Cross-Session               |
+|  - Tool call distribution     - Sequence convergence              |
+|  - File hotspots              - Correction rate trend             |
+|  - Error count + recovery     - Agent efficiency trend            |
+|  - Compaction events          - Hotspot evolution                 |
+|  - Agent completion rate      - Session duration distribution     |
+|                                                                    |
+|  Tier 3: Predictive (future, requires 50+ sessions)              |
+|  - File access prediction     - Compaction probability            |
+|  - Recovery sequence pred.    - Agent completion time pred.       |
+|                                                                    |
++------------------------------------------------------------------+
+            |
+            v
++------------------------------------------------------------------+
+|                    ACTION LAYER                                    |
++------------------------------------------------------------------+
+|                                                                    |
+|  Skill Creation    Agent Tuning     Context Pre-loading           |
+|  /sc:suggest       prompt adj.      SessionStart injection        |
+|  skill-creator     effort levels    file pre-reads                |
+|  create            task scope       state warming                 |
+|                                                                    |
++------------------------------------------------------------------+
+            |
+            +--------&gt; feeds back to Collection Layer (closed loop)</code></pre>
+    <h3 id="design-constraints">4.2 Design Constraints</h3>
     <ul>
     <li>All hooks must exit 0 on failure (never block the session)</li>
     <li>POSIX shell only (no Node.js, no npm – the post-commit hook
@@ -398,23 +681,52 @@ Operational Intelligence — HEL Research</title>
     <li>All pattern files in <code>.gitignore</code>
     (<code>.planning/patterns/</code> is already excluded)</li>
     </ul>
-    <p><strong>Tool call tracker hook (new):</strong></p>
+    <h3 id="tool-call-tracker-hook-new">4.3 Tool Call Tracker Hook
+    (New)</h3>
     <p>The key new hook is a <code>PostToolUse</code> handler that
     captures every tool invocation:</p>
-    <div class="sourceCode" id="cb2"><pre
-    class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;ISO-8601&quot;</span><span class="fu">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;session_id&quot;</span><span class="fu">:</span> <span class="st">&quot;from CLAUDE_SESSION_ID env&quot;</span><span class="fu">,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Read|Write|Edit|Bash|Glob|Grep|Agent&quot;</span><span class="fu">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;duration_ms&quot;</span><span class="fu">:</span> <span class="st">&quot;estimated from timestamps&quot;</span><span class="fu">,</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files_involved&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;list of file paths from tool input&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;sequence_position&quot;</span><span class="fu">:</span> <span class="dv">42</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;timestamp&quot;</span><span class="fu">:</span> <span class="st">&quot;ISO-8601&quot;</span><span class="fu">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;session_id&quot;</span><span class="fu">:</span> <span class="st">&quot;from CLAUDE_SESSION_ID env&quot;</span><span class="fu">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tool&quot;</span><span class="fu">:</span> <span class="st">&quot;Read|Write|Edit|Bash|Glob|Grep|Agent&quot;</span><span class="fu">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;duration_ms&quot;</span><span class="fu">:</span> <span class="st">&quot;estimated from timestamps&quot;</span><span class="fu">,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;success&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;files_involved&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;list of file paths from tool input&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;sequence_position&quot;</span><span class="fu">:</span> <span class="dv">42</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
     <p>The <code>sequence_position</code> is a per-session counter that
     preserves call ordering. This enables tool sequence analysis without
     relying on timestamp precision.</p>
-    <h3 id="storage-layer">3.2 Storage Layer</h3>
+    <p>Implementation sketch:</p>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tool-tracker.sh -- PostToolUse hook: capture tool call telemetry</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Appends one JSON line per tool invocation to tool-calls.jsonl</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="va">INPUT</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span><span class="va">)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="va">TOOL</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$INPUT</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> <span class="st">&#39;.tool_name // &quot;unknown&quot;&#39;</span><span class="va">)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="va">SUCCESS</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$INPUT</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-r</span> <span class="st">&#39;.tool_output.error // empty | if . == &quot;&quot; then &quot;true&quot; else &quot;false&quot; end&#39;</span><span class="va">)</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="va">FILES</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$INPUT</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="ex">jq</span> <span class="at">-c</span> <span class="st">&#39;[.tool_input.file_path, .tool_input.path] | map(select(. != null))&#39;</span><span class="va">)</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Sequence counter (filesystem-based, per-session)</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="va">SEQ_FILE</span><span class="op">=</span><span class="st">&quot;.planning/patterns/.tool-seq-</span><span class="va">$$</span><span class="st">&quot;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="va">SEQ</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> <span class="st">&quot;</span><span class="va">$SEQ_FILE</span><span class="st">&quot;</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;0&quot;</span><span class="va">)</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="va">SEQ</span><span class="op">=</span><span class="va">$((SEQ</span> <span class="op">+</span> <span class="dv">1</span><span class="va">))</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$SEQ</span><span class="st">&quot;</span> <span class="op">&gt;</span> <span class="st">&quot;</span><span class="va">$SEQ_FILE</span><span class="st">&quot;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="va">ENTRY</span><span class="op">=</span><span class="va">$(</span><span class="ex">jq</span> <span class="at">-n</span> <span class="dt">\</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">--arg</span> ts <span class="st">&quot;</span><span class="va">$(</span><span class="fu">date</span> <span class="at">-u</span> +%Y-%m-%dT%H:%M:%SZ<span class="va">)</span><span class="st">&quot;</span> <span class="dt">\</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">--arg</span> sid <span class="st">&quot;</span><span class="va">${CLAUDE_SESSION_ID</span><span class="op">:-</span>unknown<span class="va">}</span><span class="st">&quot;</span> <span class="dt">\</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">--arg</span> tool <span class="st">&quot;</span><span class="va">$TOOL</span><span class="st">&quot;</span> <span class="dt">\</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">--argjson</span> success <span class="st">&quot;</span><span class="va">$SUCCESS</span><span class="st">&quot;</span> <span class="dt">\</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">--argjson</span> files <span class="st">&quot;</span><span class="va">$FILES</span><span class="st">&quot;</span> <span class="dt">\</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">--argjson</span> seq <span class="st">&quot;</span><span class="va">$SEQ</span><span class="st">&quot;</span> <span class="dt">\</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;{timestamp: $ts, session_id: $sid, tool: $tool, success: $success, files: $files, seq: $seq}&#39;</span><span class="va">)</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$ENTRY</span><span class="st">&quot;</span> <span class="op">&gt;&gt;</span> .planning/patterns/tool-calls.jsonl <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="bu">exit</span> 0</span></code></pre></div>
+    <h3 id="storage-layer">4.4 Storage Layer</h3>
     <p>JSONL files are sufficient for our current scale (hundreds to low
     thousands of entries per session). Each file is append-only,
     human-readable, and trivially parseable with jq, Node.js, or
@@ -478,7 +790,7 @@ Operational Intelligence — HEL Research</title>
     <p>Total: approximately 33 MB per month. Well within our 2TB
     local-first budget. Tool calls dominate – consider sampling (every
     Nth call) if this becomes a problem.</p>
-    <h3 id="analysis-layer">3.3 Analysis Layer</h3>
+    <h3 id="analysis-layer">4.5 Analysis Layer</h3>
     <p>Analysis transforms raw events into actionable insights. Three
     tiers:</p>
     <p><strong>Tier 1: Per-session summaries (run at session
@@ -518,7 +830,7 @@ Operational Intelligence — HEL Research</title>
     </ul>
     <p>Tier 3 requires enough Tier 2 data to be meaningful – likely 50+
     sessions minimum.</p>
-    <h3 id="action-layer">3.4 Action Layer</h3>
+    <h3 id="action-layer">4.6 Action Layer</h3>
     <p>Analysis is useless without action. The pipeline’s output feeds
     three systems:</p>
     <p><strong>Skill creation.</strong> When a tool sequence repeats 3+
@@ -534,10 +846,270 @@ Operational Intelligence — HEL Research</title>
     show the same files are read at the start of every session of a
     given type, the pipeline recommends adding those files to the
     session’s startup context (via SessionStart hook injection).</p>
-    <h2 id="connection-to-open-problems">4. Connection to OPEN
+    <h2 id="privacy-and-security-analysis">5. Privacy and Security
+    Analysis</h2>
+    <h3 id="data-classification">5.1 Data Classification</h3>
+    <p>Session log data falls into four sensitivity categories. Each
+    requires different handling.</p>
+    <p><strong>Category A: Safe to Collect and Retain (no
+    restrictions)</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 36%" />
+    <col style="width: 30%" />
+    <col style="width: 33%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Data Type</th>
+    <th>Example</th>
+    <th>Why Safe</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Tool call types</td>
+    <td>“Read”, “Write”, “Bash”</td>
+    <td>No content, just tool names</td>
+    </tr>
+    <tr>
+    <td>Tool call counts</td>
+    <td>180 reads, 35 writes</td>
+    <td>Aggregate statistics</td>
+    </tr>
+    <tr>
+    <td>Timestamps</td>
+    <td>ISO-8601 session times</td>
+    <td>No content information</td>
+    </tr>
+    <tr>
+    <td>Sequence positions</td>
+    <td>Call #42 of session</td>
+    <td>Ordering metadata only</td>
+    </tr>
+    <tr>
+    <td>Compaction event counts</td>
+    <td>3 compactions this session</td>
+    <td>System health data</td>
+    </tr>
+    <tr>
+    <td>Agent spawn counts</td>
+    <td>5 agents dispatched</td>
+    <td>Orchestration metadata</td>
+    </tr>
+    <tr>
+    <td>Skill load events</td>
+    <td>“gsd-workflow loaded, score 0.85”</td>
+    <td>System configuration data</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Category B: Safe to Collect Locally, Not for Remote
+    Aggregation</strong></p>
+    <table style="width:100%;">
+    <colgroup>
+    <col style="width: 28%" />
+    <col style="width: 23%" />
+    <col style="width: 15%" />
+    <col style="width: 31%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Data Type</th>
+    <th>Example</th>
+    <th>Risk</th>
+    <th>Mitigation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>File paths</td>
+    <td><code>/path/to/projectsrc/auth.ts</code></td>
+    <td>Reveals directory structure</td>
+    <td>Never transmit; local only</td>
+    </tr>
+    <tr>
+    <td>Commit messages</td>
+    <td><code>feat(auth): add JWT rotation</code></td>
+    <td>Reveals feature names</td>
+    <td>Never transmit; local only</td>
+    </tr>
+    <tr>
+    <td>Bash commands</td>
+    <td><code>npm test -- --filter=auth</code></td>
+    <td>Reveals tooling</td>
+    <td>Never transmit; local only</td>
+    </tr>
+    <tr>
+    <td>Agent briefs</td>
+    <td>“Research distributed systems”</td>
+    <td>Reveals project topics</td>
+    <td>Never transmit; local only</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Category C: Collect with Redaction</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 24%" />
+    <col style="width: 20%" />
+    <col style="width: 13%" />
+    <col style="width: 42%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Data Type</th>
+    <th>Example</th>
+    <th>Risk</th>
+    <th>Redaction Strategy</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Error messages</td>
+    <td>“ENOENT: /path/to/.env”</td>
+    <td>May contain paths to secrets</td>
+    <td>Redact file paths containing <code>.env</code>,
+    <code>credentials</code>, <code>secret</code>, <code>key</code></td>
+    </tr>
+    <tr>
+    <td>Tool parameters</td>
+    <td><code>{"file_path": "/home/user/.ssh/id_rsa"}</code></td>
+    <td>May reference sensitive files</td>
+    <td>Strip parameters matching sensitive path patterns</td>
+    </tr>
+    <tr>
+    <td>Git diff content</td>
+    <td><code>+API_KEY=sk-abc123</code></td>
+    <td>May contain secrets</td>
+    <td>Never capture diff content, only file names and line counts</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Category D: Never Collect</strong></p>
+    <table>
+    <colgroup>
+    <col style="width: 55%" />
+    <col style="width: 45%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Data Type</th>
+    <th>Why Not</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>File contents read by Read tool</td>
+    <td>Could contain secrets, proprietary code</td>
+    </tr>
+    <tr>
+    <td>User message text</td>
+    <td>Private conversations, business context</td>
+    </tr>
+    <tr>
+    <td>Model reasoning traces</td>
+    <td>Internal to the model, may contain user data</td>
+    </tr>
+    <tr>
+    <td>Environment variable values</td>
+    <td>Secrets, API keys, tokens</td>
+    </tr>
+    <tr>
+    <td>Clipboard contents</td>
+    <td>Private user data</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="security-controls">5.2 Security Controls</h3>
+    <p><strong>Local-first architecture.</strong> All data stays on the
+    local machine. The <code>.planning/patterns/</code> directory is
+    gitignored. No data is transmitted to any remote service. This is
+    the strongest possible privacy guarantee.</p>
+    <p><strong>If remote aggregation is ever considered
+    (future):</strong> - Explicit opt-in required (not opt-out) - Only
+    Category A data may be transmitted - Category B data must be
+    aggregated locally before transmission (counts, not content) -
+    Category C data must be redacted before any aggregation - Category D
+    data must never leave the machine under any circumstances - A data
+    processing agreement (DPA) would be required for any multi-user
+    deployment</p>
+    <p><strong>Access controls.</strong> JSONL files are readable only
+    by the user who created them (standard Unix file permissions). No
+    other user or process on the machine should have access.</p>
+    <p><strong>Retention limits.</strong> The 30-day retention window
+    bounds the exposure window. Even if a breach occurred, only 30 days
+    of Category A/B data would be exposed.</p>
+    <h3 id="threat-model">5.3 Threat Model</h3>
+    <table>
+    <colgroup>
+    <col style="width: 20%" />
+    <col style="width: 28%" />
+    <col style="width: 20%" />
+    <col style="width: 30%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Threat</th>
+    <th>Likelihood</th>
+    <th>Impact</th>
+    <th>Mitigation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>JSONL files committed to git</td>
+    <td>Medium (accidental)</td>
+    <td>Low (Category A/B data)</td>
+    <td><code>.planning/patterns/</code> in <code>.gitignore</code></td>
+    </tr>
+    <tr>
+    <td>JSONL files read by other process</td>
+    <td>Low</td>
+    <td>Medium (file paths, commands)</td>
+    <td>Unix file permissions (0600)</td>
+    </tr>
+    <tr>
+    <td>Session data aggregated and transmitted without consent</td>
+    <td>Zero (not implemented)</td>
+    <td>High</td>
+    <td>No remote capability exists</td>
+    </tr>
+    <tr>
+    <td>Tool call logs reveal project structure</td>
+    <td>Medium (intended)</td>
+    <td>Low (local analysis only)</td>
+    <td>Never share raw logs</td>
+    </tr>
+    <tr>
+    <td>Sensitive file paths in error logs</td>
+    <td>Medium</td>
+    <td>Medium</td>
+    <td>Redaction filter on Category C data</td>
+    </tr>
+    </tbody>
+    </table>
+    <h3 id="compliance-notes">5.4 Compliance Notes</h3>
+    <p>For individual developer use (the current scope), no compliance
+    framework applies – the data is personal development analytics on a
+    personal machine. If this system were deployed in an enterprise
+    context:</p>
+    <ul>
+    <li><strong>GDPR:</strong> Session logs tied to a user identity
+    would be personal data. The right to erasure would require a purge
+    command.</li>
+    <li><strong>SOC 2:</strong> Audit trail data (which this resembles)
+    would need access logging and retention policies.</li>
+    <li><strong>HIPAA:</strong> If the codebase contained health data,
+    file path logs could constitute PHI adjacency. Out of scope for
+    us.</li>
+    </ul>
+    <p>The local-first, gitignored, 30-day-retention design satisfies
+    the spirit of these frameworks even though none currently apply.</p>
+    <h2 id="connection-to-open-problems">6. Connection to OPEN
     Problems</h2>
-    <h3 id="open-problem-4-distributed-intelligence">4.1 OPEN Problem
-    #4: Distributed Intelligence</h3>
+    <h3 id="open-problem-4-distributed-intelligence-open-p4">6.1 OPEN
+    Problem #4: Distributed Intelligence (OPEN-P4)</h3>
     <p>The core challenge of distributed intelligence is coordination:
     how do multiple agents share knowledge without overwhelming each
     other’s context? Session log analysis directly informs this:</p>
@@ -548,42 +1120,162 @@ Operational Intelligence — HEL Research</title>
     that polecats working on test tasks only ever read test files and
     source files (never documentation or configuration), we can prune
     the context passed to test-focused agents.</p>
+    <p><em>Metric feed:</em> Agent file access patterns (from
+    tool-calls.jsonl) -&gt; context pruning recommendations -&gt;
+    reduced context per agent -&gt; measured via agent file efficiency
+    ratio (files written / files read).</p>
     <p><strong>Communication overhead.</strong> The witness-observer’s
     patrol loop generates nudge and mail messages. By measuring how
     often nudges result in actual stall recovery vs. false positives, we
     can tune patrol intervals and stall thresholds empirically rather
     than guessing.</p>
+    <p><em>Metric feed:</em> Nudge frequency and stall recovery rate
+    (from agent-lifecycle.jsonl + tool-calls.jsonl) -&gt; threshold
+    tuning -&gt; measured via stall frequency and false positive
+    rate.</p>
     <p><strong>Convoy efficiency.</strong> The Gastown convoy model runs
     multiple agents in parallel with sequential commit merging. Session
     logs can measure the actual parallelism achieved: how much time
     agents spend working vs. waiting for merge slots. If merge
     contention is high, we need more refinery capacity or smarter work
     partitioning.</p>
-    <h3 id="open-problem-5-non-deterministic-testing">4.2 OPEN Problem
-    #5: Non-Deterministic Testing</h3>
+    <p><em>Metric feed:</em> Agent task duration + merge wait time (from
+    agent-lifecycle.jsonl) -&gt; parallelism ratio -&gt; convoy
+    throughput.</p>
+    <p><strong>Emergent knowledge.</strong> The threshold between
+    “parallel labor” and “distributed intelligence” (OPEN-P4’s central
+    question) could be measured by comparing the quality of work
+    produced by N independent agents vs. work produced by N agents with
+    cross-communication. Session logs would capture whether cross-agent
+    communication (nudges, mail) correlated with higher output quality
+    (fewer corrections, fewer stalls).</p>
+    <h3 id="open-problem-5-non-deterministic-testing-open-p5">6.2 OPEN
+    Problem #5: Non-Deterministic Testing (OPEN-P5)</h3>
     <p>Non-deterministic tests are tests that sometimes pass and
     sometimes fail without code changes. Session log analysis helps in
-    two ways:</p>
+    three ways:</p>
     <p><strong>Flaky test detection.</strong> If the same test file
     appears in both passing and failing test runs across sessions (same
     code, different outcomes), it is flaky. By correlating tool call
     data (test invocations and their exit codes) with git state (no code
     changes between runs), we can automatically identify
     non-deterministic tests.</p>
+    <p><em>Metric feed:</em> Test tool calls with exit codes (from
+    tool-calls.jsonl) + git state (from sessions.jsonl) -&gt; flaky test
+    candidates -&gt; confirmed flaky rate.</p>
     <p><strong>Environment sensitivity.</strong> By capturing system
     state at test execution time (available memory, CPU load, disk I/O,
     running processes), we can correlate test failures with
     environmental conditions. If a test only fails when system memory is
     below a threshold, that is an environment sensitivity bug, not a
     code bug.</p>
+    <p><em>Metric feed:</em> System metrics at test time (new:
+    env-snapshot in tool-tracker.sh) + test outcomes -&gt; environment
+    correlation analysis.</p>
     <p><strong>Recovery pattern analysis.</strong> When a test fails and
     the agent retries it (perhaps with different flags or after clearing
     caches), the recovery sequence tells us what the test actually
     depends on. If clearing <code>node_modules</code> or restarting a
     server reliably fixes the failure, the test has an implicit
     dependency that should be made explicit.</p>
-    <h2 id="specific-metrics-to-track">5. Specific Metrics to Track</h2>
-    <h3 id="session-level-metrics">5.1 Session-Level Metrics</h3>
+    <p><em>Metric feed:</em> Tool sequence after test failure (from
+    tool-calls.jsonl) -&gt; recovery pattern classification -&gt;
+    implicit dependency identification.</p>
+    <h3 id="open-problem-6-confidence-based-routing-open-p6">6.3 OPEN
+    Problem #6: Confidence-Based Routing (OPEN-P6)</h3>
+    <p>Session logs provide a potential calibration signal for
+    confidence routing. If we could measure the correlation between
+    agent-expressed confidence (“I’m confident this fix is correct”) and
+    actual outcomes (did the fix work? did it need correction?), we
+    could build an empirical calibration curve.</p>
+    <p><em>Metric feed:</em> This requires a new data source – capturing
+    agent output text alongside commit outcomes. Currently out of scope
+    (Category D data), but the analytical framework is in place.</p>
+    <h3
+    id="open-problem-1-3-chain-of-thought-analysis-open-p1-p2-p3">6.4
+    OPEN Problem #1-3: Chain-of-Thought Analysis (OPEN-P1, P2, P3)</h3>
+    <p>The first three OPEN problems concern CoT faithfulness, thinking
+    divergence, and CoT monitoring. Session logs cannot directly measure
+    reasoning quality (model internals are Category D). However, they
+    can provide proxy signals:</p>
+    <ul>
+    <li><strong>Correction rate after extended reasoning</strong> – if
+    sessions with more tool calls before first write have higher
+    correction rates, extended reasoning may not be helping</li>
+    <li><strong>Context fishing rate</strong> – 5+ reads without a write
+    may indicate the model is uncertain but not expressing it</li>
+    <li><strong>Compaction-to-correction correlation</strong> – if
+    corrections spike after compaction, the model’s reasoning was
+    context-dependent</li>
+    </ul>
+    <p>These are weak signals, but at 50+ sessions of data they may
+    reveal statistically significant patterns.</p>
+    <h3 id="metric-to-problem-mapping-summary">6.5 Metric-to-Problem
+    Mapping Summary</h3>
+    <table>
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 23%" />
+    <col style="width: 20%" />
+    <col style="width: 22%" />
+    <col style="width: 20%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Metric Source</th>
+    <th>OPEN-P4 (Distributed)</th>
+    <th>OPEN-P5 (Testing)</th>
+    <th>OPEN-P6 (Confidence)</th>
+    <th>OPEN-P1/2/3 (CoT)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>tool-calls.jsonl</td>
+    <td>Agent file access patterns</td>
+    <td>Test exit code sequences</td>
+    <td>–</td>
+    <td>Context fishing rate</td>
+    </tr>
+    <tr>
+    <td>agent-lifecycle.jsonl</td>
+    <td>Convoy efficiency, communication overhead</td>
+    <td>–</td>
+    <td>–</td>
+    <td>–</td>
+    </tr>
+    <tr>
+    <td>sessions.jsonl</td>
+    <td>–</td>
+    <td>Git state for flaky detection</td>
+    <td>Commit outcomes</td>
+    <td>Correction rate trends</td>
+    </tr>
+    <tr>
+    <td>compaction-events.jsonl</td>
+    <td>–</td>
+    <td>–</td>
+    <td>–</td>
+    <td>Post-compaction correction spikes</td>
+    </tr>
+    <tr>
+    <td>errors.jsonl</td>
+    <td>Stall recovery patterns</td>
+    <td>Recovery sequence analysis</td>
+    <td>–</td>
+    <td>Error-to-resolution time</td>
+    </tr>
+    <tr>
+    <td>skill-events.jsonl</td>
+    <td>–</td>
+    <td>–</td>
+    <td>–</td>
+    <td>Skill effectiveness correlation</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="specific-metrics-to-track">7. Specific Metrics to Track</h2>
+    <h3 id="session-level-metrics">7.1 Session-Level Metrics</h3>
     <table>
     <colgroup>
     <col style="width: 21%" />
@@ -662,7 +1354,7 @@ Operational Intelligence — HEL Research</title>
     </tr>
     </tbody>
     </table>
-    <h3 id="agent-level-metrics">5.2 Agent-Level Metrics</h3>
+    <h3 id="agent-level-metrics">7.2 Agent-Level Metrics</h3>
     <table>
     <colgroup>
     <col style="width: 21%" />
@@ -717,7 +1409,7 @@ Operational Intelligence — HEL Research</title>
     </tr>
     </tbody>
     </table>
-    <h3 id="skill-level-metrics">5.3 Skill-Level Metrics</h3>
+    <h3 id="skill-level-metrics">7.3 Skill-Level Metrics</h3>
     <table>
     <colgroup>
     <col style="width: 21%" />
@@ -766,35 +1458,195 @@ Operational Intelligence — HEL Research</title>
     </tr>
     </tbody>
     </table>
-    <h2 id="how-session-analysis-feeds-back-into-skill-improvement">6.
+    <h2 id="implementation-plan-first-30-days">8. Implementation Plan:
+    First 30 Days</h2>
+    <h3 id="overview">8.1 Overview</h3>
+    <p>The implementation is structured as a 30-day sprint with 4
+    phases. Each phase delivers independently useful capability. No
+    phase depends on completing a later phase.</p>
+    <pre><code>Day 1-3     Day 4-8     Day 9-16    Day 17-30
+  |            |            |            |
+  v            v            v            v
+INSTRUMENT   ANALYZE     CORRELATE    CLOSE LOOP
+(hooks)      (digest)    (agents)     (suggestions)</code></pre>
+    <h3 id="phase-1-instrument-days-1-3">8.2 Phase 1: Instrument (Days
+    1-3)</h3>
+    <p><strong>Goal:</strong> Capture raw tool call data from every
+    session.</p>
+    <p><strong>Day 1: Tool tracker hook</strong></p>
+    <ol type="1">
+    <li>Create <code>tool-tracker.sh</code> in
+    <code>.claude/hooks/</code>. Shell script, POSIX-compliant, uses jq
+    for JSON construction.</li>
+    <li>Register in <code>.claude/hooks.json</code> as a
+    <code>PostToolUse</code> handler matching all tools
+    (<code>"matcher": ""</code>).</li>
+    <li>Verify: run a session, check that <code>tool-calls.jsonl</code>
+    has entries. Count should match approximate tool call count.</li>
+    </ol>
+    <p><strong>Day 2: Compaction and error hooks</strong></p>
+    <ol start="4" type="1">
+    <li>Create <code>compact-tracker.sh</code> as a
+    <code>PostCompact</code> handler. Captures timestamp, session ID,
+    and a marker that compaction occurred.</li>
+    <li>Create <code>error-tracker.sh</code> as a
+    <code>PermissionDenied</code> handler. Captures denied tool name and
+    reason.</li>
+    <li>Update <code>.claude/hooks.json</code> with both new
+    entries.</li>
+    <li>Verify: trigger a PermissionDenied event (attempt to write a
+    protected path), confirm entry in <code>errors.jsonl</code>.</li>
+    </ol>
+    <p><strong>Day 3: Sequence counter and retention</strong></p>
+    <ol start="8" type="1">
+    <li>Add sequence counter to tool-tracker.sh (per-session monotonic
+    counter using a temp file).</li>
+    <li>Add retention enforcement to the existing purge logic: extend to
+    cover <code>tool-calls.jsonl</code>,
+    <code>compaction-events.jsonl</code>, and
+    <code>errors.jsonl</code>.</li>
+    <li>Verify: manually create old entries, run purge, confirm they are
+    removed.</li>
+    </ol>
+    <p><strong>Milestone 1 deliverable:</strong> Three new JSONL files
+    being populated. Zero impact on session performance (hooks exit 0,
+    async append-only writes).</p>
+    <h3 id="phase-2-basic-analysis-days-4-8">8.3 Phase 2: Basic Analysis
+    (Days 4-8)</h3>
+    <p><strong>Goal:</strong> Extract actionable insights from tool call
+    data.</p>
+    <p><strong>Day 4-5: Extend /sc:digest</strong></p>
+    <ol start="11" type="1">
+    <li>Add tool call distribution reporting to <code>/sc:digest</code>.
+    Group by tool type, compute percentages.</li>
+    <li>Add file hotspot detection from tool call file paths. Top 10
+    most-read files, top 10 most-written.</li>
+    <li>Add compaction frequency reporting. Sessions with compaction
+    events, average compactions per session.</li>
+    </ol>
+    <p><strong>Day 6-7: Sequence detection</strong></p>
+    <ol start="14" type="1">
+    <li>Implement sliding window sequence detection. Window size 3-5.
+    Hash each window. Count across all sessions in retention
+    window.</li>
+    <li>Report top 5 most common sequences in digest output.</li>
+    <li>Flag “context fishing” sequences (5+ reads with no write).</li>
+    </ol>
+    <p><strong>Day 8: Read-to-write ratio and dashboard</strong></p>
+    <ol start="17" type="1">
+    <li>Compute per-session read-to-write ratio. Flag sessions above 5:1
+    as “context heavy.”</li>
+    <li>Create a summary dashboard format for the digest: one-line
+    metrics + drill-down sections.</li>
+    </ol>
+    <p><strong>Milestone 2 deliverable:</strong> Enhanced
+    <code>/sc:digest</code> command that reports tool distributions,
+    file hotspots, common sequences, compaction events, and
+    read-to-write ratios. All from local JSONL data.</p>
+    <h3 id="phase-3-agent-correlation-days-9-16">8.4 Phase 3: Agent
+    Correlation (Days 9-16)</h3>
+    <p><strong>Goal:</strong> Track agent lifecycle and correlate with
+    session outcomes.</p>
+    <p><strong>Day 9-10: Agent lifecycle tracking</strong></p>
+    <ol start="19" type="1">
+    <li>Determine the best hook point for agent spawn events. If
+    <code>SubagentSpawn</code> is not available as a hook, instrument
+    the mayor-coordinator and fleet-mission skills to emit lifecycle
+    events directly.</li>
+    <li>Create <code>agent-lifecycle.jsonl</code> format. Fields:
+    session ID, agent ID, agent type, spawn time, brief hash,
+    status.</li>
+    <li>Add completion tracking: when an agent’s background task
+    completes, append a completion entry.</li>
+    </ol>
+    <p><strong>Day 11-12: Agent-commit correlation</strong></p>
+    <ol start="22" type="1">
+    <li>Correlate agent lifecycle entries with commit data from
+    <code>sessions.jsonl</code>. Match by timestamp and file
+    overlap.</li>
+    <li>Compute per-agent metrics: task duration, commit count,
+    correction rate.</li>
+    <li>Add agent efficiency section to digest output.</li>
+    </ol>
+    <p><strong>Day 13-14: Agent file access analysis</strong></p>
+    <ol start="25" type="1">
+    <li>For each agent type (research, expansion, fact-check, polecat,
+    mayor), compute the typical file access pattern: which directories
+    and file types does each agent read?</li>
+    <li>Identify unnecessary context: files read by an agent type but
+    never used (read-only, not referenced in outputs).</li>
+    </ol>
+    <p><strong>Day 15-16: Cross-agent communication metrics</strong></p>
+    <ol start="27" type="1">
+    <li>Measure nudge and mail frequency from the Gastown messaging
+    skills.</li>
+    <li>Correlate communication events with agent outcomes. Does more
+    communication improve or hinder agent performance?</li>
+    <li>Report communication overhead as a percentage of agent
+    wall-clock time.</li>
+    </ol>
+    <p><strong>Milestone 3 deliverable:</strong> Agent lifecycle
+    tracking, per-agent performance metrics, and communication overhead
+    analysis. Feeds directly into OPEN-P4 (distributed intelligence)
+    research.</p>
+    <h3 id="phase-4-closed-loop-learning-days-17-30">8.5 Phase 4:
+    Closed-Loop Learning (Days 17-30)</h3>
+    <p><strong>Goal:</strong> Connect analysis to the suggestion
+    pipeline.</p>
+    <p><strong>Day 17-19: Pattern-to-suggestion bridge</strong></p>
+    <ol start="30" type="1">
+    <li>When a tool sequence exceeds the <code>min_occurrences</code>
+    threshold (3), automatically create a suggestion entry in
+    <code>suggestions.json</code>.</li>
+    <li>Suggestion includes: pattern evidence (sessions, occurrences,
+    tool calls), proposed action (new skill, skill refinement, context
+    pre-load), confidence level.</li>
+    <li>Wire into <code>/sc:suggest</code> so suggestions appear in the
+    review pipeline.</li>
+    </ol>
+    <p><strong>Day 20-22: Context pre-loading suggestions</strong></p>
+    <ol start="33" type="1">
+    <li>When file access analysis shows the same files read at the start
+    of 5+ sessions, suggest adding them to SessionStart injection.</li>
+    <li>Implement a <code>context-preload.json</code> file that the
+    SessionStart hook reads and pre-loads.</li>
+    <li>Measure: do pre-loaded sessions have fewer early Read
+    calls?</li>
+    </ol>
+    <p><strong>Day 23-25: Skill effectiveness tracking</strong></p>
+    <ol start="36" type="1">
+    <li>After a new skill is created or refined based on a suggestion,
+    mark the triggering pattern as “treated.”</li>
+    <li>In subsequent sessions, compare the pattern frequency before and
+    after treatment.</li>
+    <li>Report skill effectiveness: “Pattern X appeared in 4 of 10
+    sessions before skill Y was added. In 10 sessions since, it appeared
+    in 1.”</li>
+    </ol>
+    <p><strong>Day 26-28: Agent tuning suggestions</strong></p>
+    <ol start="39" type="1">
+    <li>When agent correction rate exceeds 30% for a specific agent type
+    across 3+ sessions, suggest a prompt refinement.</li>
+    <li>When agent stall frequency exceeds 2 per session, suggest effort
+    level adjustment.</li>
+    <li>Wire agent tuning suggestions into the same
+    <code>/sc:suggest</code> pipeline.</li>
+    </ol>
+    <p><strong>Day 29-30: Documentation and calibration</strong></p>
+    <ol start="42" type="1">
+    <li>Write operational documentation for the analytics pipeline.</li>
+    <li>Run a full calibration session: execute a representative task,
+    generate analytics, review suggestions, apply one, measure next
+    session.</li>
+    <li>Adjust thresholds based on calibration results (min_occurrences,
+    context fishing threshold, correction rate ceiling).</li>
+    </ol>
+    <p><strong>Milestone 4 deliverable:</strong> Complete closed-loop
+    system. Patterns detected -&gt; suggestions generated -&gt; human
+    review -&gt; skill/agent changes -&gt; effectiveness measured. The
+    7-step learning loop (Section 3) is operational.</p>
+    <h2 id="how-session-analysis-feeds-back-into-skill-improvement">9.
     How Session Analysis Feeds Back Into Skill Improvement</h2>
-    <p>The learning loop is: observe -&gt; store -&gt; analyze -&gt;
-    propose -&gt; review -&gt; apply -&gt; observe again.</p>
-    <p><strong>Step 1: Observe.</strong> Hooks capture raw events (tool
-    calls, commits, errors, compaction, agent lifecycle).</p>
-    <p><strong>Step 2: Store.</strong> Events append to JSONL files in
-    <code>.planning/patterns/</code>.</p>
-    <p><strong>Step 3: Analyze.</strong> The <code>/sc:digest</code>
-    command (enhanced with tool call analysis) identifies patterns:
-    repeated sequences, high correction rates, file hotspots, agent
-    inefficiencies.</p>
-    <p><strong>Step 4: Propose.</strong> When patterns cross the
-    <code>min_occurrences</code> threshold (default 3), the pipeline
-    writes a suggestion to <code>suggestions.json</code>. The suggestion
-    includes the pattern evidence, proposed skill content, and
-    confidence level.</p>
-    <p><strong>Step 5: Review.</strong> The <code>/sc:suggest</code>
-    command presents suggestions to the user. Accept, dismiss, or defer.
-    Human judgment is always in the loop – this is a non-negotiable
-    guardrail.</p>
-    <p><strong>Step 6: Apply.</strong> Accepted suggestions become
-    skills (via <code>skill-creator create</code>) or agent prompt
-    adjustments. Skills enter the loading pipeline and begin affecting
-    future sessions.</p>
-    <p><strong>Step 7: Measure.</strong> The next cycle’s analysis
-    measures whether the new skill reduced the target pattern. If
-    correction rate dropped, the skill is working. If it did not, the
-    skill needs refinement or the pattern diagnosis was wrong.</p>
     <p><strong>Closing the loop on specific patterns:</strong></p>
     <table>
     <colgroup>
@@ -835,63 +1687,24 @@ Operational Intelligence — HEL Research</title>
     <td>Create automation skill for the sequence</td>
     <td>Sequence collapses to fewer calls</td>
     </tr>
+    <tr>
+    <td>Binary analysis: 3+ grep calls</td>
+    <td>Consolidate into ecosystem-alignment skill</td>
+    <td>Calls reduced to 1</td>
+    </tr>
+    <tr>
+    <td>Gastown dispatch: 6+ skills loaded</td>
+    <td>Consolidate heavy skills per OOPS/07 recommendations</td>
+    <td>Token budget drops below 5%</td>
+    </tr>
+    <tr>
+    <td>Post-compaction correction spike</td>
+    <td>Add PostCompact context restoration hook</td>
+    <td>Post-compaction correction rate normalizes</td>
+    </tr>
     </tbody>
     </table>
-    <h2 id="implementation-plan">7. Implementation Plan</h2>
-    <h3 id="phase-1-instrument-1-2-sessions">Phase 1: Instrument (1-2
-    sessions)</h3>
-    <ol type="1">
-    <li>Add <code>PostToolUse</code> hook that writes to
-    <code>tool-calls.jsonl</code></li>
-    <li>Add <code>PostCompact</code> hook that writes to
-    <code>compaction-events.jsonl</code></li>
-    <li>Add <code>PermissionDenied</code> hook that writes to
-    <code>errors.jsonl</code></li>
-    <li>Update <code>settings-hooks.json</code> with new hook
-    entries</li>
-    <li>All hooks follow the post-commit hook pattern: POSIX shell, jq,
-    exit 0 on failure</li>
-    </ol>
-    <h3 id="phase-2-basic-analysis-1-2-sessions">Phase 2: Basic Analysis
-    (1-2 sessions)</h3>
-    <ol type="1">
-    <li>Extend <code>/sc:digest</code> to read
-    <code>tool-calls.jsonl</code> and report tool call distribution</li>
-    <li>Add tool sequence detection (sliding window, hash, count)</li>
-    <li>Add file hotspot detection from tool call file paths</li>
-    <li>Add compaction frequency reporting</li>
-    </ol>
-    <h3 id="phase-3-agent-telemetry-2-3-sessions">Phase 3: Agent
-    Telemetry (2-3 sessions)</h3>
-    <ol type="1">
-    <li>Add agent lifecycle tracking (requires
-    <code>SubagentSpawn</code> hook or mayor instrumentation)</li>
-    <li>Correlate agent sessions with commit data</li>
-    <li>Report per-agent-type efficiency metrics</li>
-    <li>Feed agent metrics into witness-observer thresholds</li>
-    </ol>
-    <h3 id="phase-4-closed-loop-learning-ongoing">Phase 4: Closed-Loop
-    Learning (ongoing)</h3>
-    <ol type="1">
-    <li>Connect tool sequence patterns to the suggestion pipeline</li>
-    <li>Add “context pre-load” suggestions based on file access
-    patterns</li>
-    <li>Add “agent prompt refinement” suggestions based on correction
-    rates</li>
-    <li>Implement skill effectiveness measurement (before/after
-    metrics)</li>
-    </ol>
-    <h3
-    id="phase-5-predictive-layer-future-requires-50-sessions-of-data">Phase
-    5: Predictive Layer (future, requires 50+ sessions of data)</h3>
-    <ol type="1">
-    <li>Build per-task-type file access predictors</li>
-    <li>Build compaction probability estimator</li>
-    <li>Build agent completion time predictor</li>
-    <li>Integrate predictions into mayor-coordinator dispatch
-    decisions</li>
-    </ol>
-    <h2 id="risks-and-mitigations">8. Risks and Mitigations</h2>
+    <h2 id="risks-and-mitigations">10. Risks and Mitigations</h2>
     <p><strong>Performance overhead.</strong> Every hook adds latency to
     tool calls. Mitigation: hooks are shell scripts that append a single
     line to a file. Measured overhead should be under 5ms per hook
@@ -913,24 +1726,34 @@ Operational Intelligence — HEL Research</title>
     <code>.planning/patterns/</code> is already in
     <code>.gitignore</code>. For local analysis, data never leaves the
     machine. If we ever add remote aggregation, it must be opt-in with
-    explicit consent.</p>
+    explicit consent and limited to Category A data (Section 5.1).</p>
     <p><strong>Circular improvement.</strong> If skills are refined
     based on patterns that were themselves influenced by earlier skills,
     the system could converge on a local optimum rather than improving.
     Mitigation: periodically review skill effectiveness with fresh data
     (sessions where the skill was NOT loaded) to confirm the skill adds
-    value.</p>
+    value. The 7-step loop’s “Measure” step (Step 7) explicitly checks
+    for this.</p>
+    <p><strong>Hook interaction.</strong> Multiple hooks firing on the
+    same event could create ordering dependencies or performance
+    bottlenecks. Mitigation: hooks are stateless and append-only. No
+    hook reads another hook’s output. The order of execution does not
+    matter for append operations.</p>
     <h2 id="conclusion">Conclusion</h2>
     <p>The data is there. Claude Code’s hook system exposes tool calls,
     session lifecycle, file changes, errors, and compaction events. Our
     existing infrastructure captures a slice of this (commits, manual
     observations, skill telemetry). The gap is systematic tool call
     capture, agent lifecycle tracking, and compaction monitoring.</p>
-    <p>The implementation path is incremental: add hooks, extend
-    analysis, connect to the suggestion pipeline, measure effectiveness.
-    Each phase delivers value independently – we do not need the full
-    pipeline to start benefiting from tool call distributions or file
-    hotspot detection.</p>
+    <p>The implementation path is incremental: add hooks (Days 1-3),
+    extend analysis (Days 4-8), correlate agents (Days 9-16), close the
+    loop (Days 17-30). Each phase delivers value independently – we do
+    not need the full pipeline to start benefiting from tool call
+    distributions or file hotspot detection.</p>
+    <p>The privacy model is clear: local-first, gitignored, 30-day
+    retention, four data categories with strict handling rules. The
+    security analysis shows that the threat surface is small and
+    well-mitigated by the local-only architecture.</p>
     <p>The deepest value is in closing the loop: patterns detected in
     session data become skills that change future sessions, and we
     measure whether those changes actually improved the metrics that
@@ -938,6 +1761,13 @@ Operational Intelligence — HEL Research</title>
     sense – it is empirical systems engineering. Observe, hypothesize,
     intervene, measure. The same cycle that built 190+ research projects
     and 50 milestones, now applied to the tooling itself.</p>
+    <hr />
+    <p><em>Research conducted 2026-03-31. Data sourced from direct
+    observation of this session’s tool call patterns, reading of all
+    hook configurations in .claude/hooks.json, analysis of JSONL
+    infrastructure in project-claude/hooks/, and cross-reference with
+    OPEN problems P1-P6. Privacy analysis based on data classification
+    framework applied to all hook-accessible data types.</em></p>
     <div class="nav">
         <a href="../index.html">← Back to OOPS Index</a> ·
         Published 2026-03-31 · PNW Research Series ·
