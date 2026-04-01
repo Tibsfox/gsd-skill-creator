@@ -1,26 +1,26 @@
 {
-  "updated": "2026-04-01T22:00:00Z",
-  "source": "sweep-v1.1.15",
+  "updated": "2026-04-02T00:44:00Z",
+  "source": "sweep-v1.1.17.2",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
-    "launch_utc": "2026-04-01T22:24:00Z",
+    "launch_utc": "2026-04-01T22:35:12Z",
     "phase": "orbit",
-    "status": "Launch countdown \u2014 T-0h \u2014 3pm sweep, 12.0\u00b0C S 18 km/h, OVC030",
-    "go_probability": 95,
-    "weather_go_pct": 80
+    "status": "IN ORBIT \u2014 L+2h09m \u2014 PRM COMPLETE (RL10 burn nominal). Brief comms loss post-PRM, resolved. Apogee raise burn next \u2014 will boost to 43,730 mi (70,378 km), 23.5h checkout in high Earth orbit. ICPS sep + TLI on Flight Day 2. Press conf 8 PM EDT.",
+    "go_probability": 99,
+    "weather_go_pct": 100
   },
   "weather": {
     "kpae": {
-      "temp_c": 12.0,
+      "temp_c": 11.5,
       "dewpoint_c": 5.0,
       "wind_dir": 200,
       "wind_kmh": 27.8,
       "gust_kmh": 33.3,
-      "humidity": 50,
-      "pressure_hpa": 1000.2,
+      "humidity": 55,
+      "pressure_hpa": 1000.0,
       "visibility_m": 16093,
-      "conditions": "OVC030",
+      "conditions": "OVC025",
       "spread_c": 3.9,
       "max_today": 13.9,
       "min_today": 7.2,
@@ -38,7 +38,7 @@
       "min_today": 7.2
     },
     "kxmr": {
-      "temp_c": 28.5,
+      "temp_c": 27.5,
       "dewpoint_c": 16.9,
       "wind_dir": 140,
       "wind_kmh": 9.3,
@@ -101,8 +101,16 @@
   "telemetry": null,
   "announcements": [
     {
+      "time": "2026-04-02T00:10:00Z",
+      "text": "v1.1.17.2: L+2h09m 5:44pm. PRM COMPLETE \u2014 RL10 burn nominal, perigee raised to 115 mi. Brief comms loss post-burn, resolved. Apogee raise burn next: target 43,730 mi (70,378 km) altitude for 23.5h high-orbit checkout. ICPS sep + TLI on Flight Day 2. Press conference 8 PM EDT. Research: Attention Residuals (Kimi), BitNet (Microsoft), TurboQuant (Google ICLR 2026). FoxField Android sensor node architecture designed."
+    },
+    {
+      "time": "2026-04-01T23:00:00Z",
+      "text": "v1.1.16: L+45m 4pm. IN ORBIT. Parking orbit ~267×2005 km, period 90 min. Two orbits then TLI burn at ~L+3h22m. Math Sections 8-10 published: live telemetry orbital mechanics, O2O Shannon link budget, circadian beat frequency. KPAE rain arrived (-RA OVC025, S 15 km/h, 1000.0 hPa). PNW weather prediction confirmed."
+    },
+    {
       "time": "2026-04-01T22:00:00Z",
-      "text": "v1.1.15.5: IN ORBIT. MECO at T+8:00, core stage sep at T+8:27. All 4 RS-25s nominal through cutoff. ICPS RL-10 ready for orbit insertion burn. Two orbits, then TLI at ~T+3h22m. Wiseman, Glover, Koch, Hansen — first humans in lunar transfer orbit since December 1972. The space between the Moon and the Earth."
+      "text": "v1.1.15.5: IN ORBIT. MECO at T+8:00, core stage sep at T+8:27. All 4 RS-25s nominal through cutoff. ICPS RL-10 ready for orbit insertion burn. Two orbits, then TLI at ~T+3h22m. Wiseman, Glover, Koch, Hansen \u2014 first humans in lunar transfer orbit since December 1972. The space between the Moon and the Earth."
     },
     {
       "time": "2026-04-01T21:00:00Z",
