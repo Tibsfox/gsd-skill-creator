@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kp Index — Real-Time Geomagnetic Activity</title>
+    <style>
+        :root {
+            --bg: #0a0e18;
+            --surface: #111827;
+            --accent: #22d3ee;
+            --warn: #f59e0b;
+            --danger: #ef4444;
+            --text: #e5e7eb;
+            --muted: #6b7280;
+            --border: #1f2937;
+            --quiet: #10b981;
+            --storm: #ef4444;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'JetBrains Mono', 'Fira Code', monospace; background: var(--bg); color: var(--text); padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        h1 { color: var(--accent); font-size: 1.5rem; margin-bottom: 0.25rem; }
+        .subtitle { color: var(--muted); font-size: 0.8rem; margin-bottom: 1.5rem; }
+        .current { display: flex; gap: 2rem; align-items: center; margin: 1.5rem 0; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; }
+        .kp-big { font-size: 4rem; font-weight: bold; line-height: 1; }
+        .kp-label { font-size: 0.8rem; color: var(--muted); }
+        .kp-desc { font-size: 1rem; margin-top: 0.25rem; }
+        .kp-time { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; }
+        .chart-container { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin: 1rem 0; }
+        canvas { width: 100%; height: 200px; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.4rem 0.6rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.8rem; }
+        th { color: var(--accent); }
+        .scale { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; margin: 1rem 0; }
+        .scale-block { padding: 0.5rem; text-align: center; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .kp-0, .kp-1, .kp-2, .kp-3 { background: #064e3b; color: #6ee7b7; }
+        .kp-4 { background: #78350f; color: #fbbf24; }
+        .kp-5 { background: #7c2d12; color: #fb923c; }
+        .kp-6 { background: #7f1d1d; color: #fca5a5; }
+        .kp-7 { background: #991b1b; color: #fca5a5; }
+        .kp-8 { background: #b91c1c; color: #fee2e2; }
+        .kp-9 { background: #dc2626; color: #fff; }
+        .active-block { outline: 3px solid #fff; outline-offset: 2px; }
+        .connections { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .conn-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+        .conn-card h3 { color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .conn-card p { color: var(--muted); font-size: 0.8rem; }
+        .status { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
+        .status-quiet { background: #064e3b; color: #6ee7b7; }
+        .status-unsettled { background: #78350f; color: #fbbf24; }
+        .status-storm { background: #7f1d1d; color: #fca5a5; }
+        .nav { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--muted); }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        #error { color: var(--danger); padding: 1rem; display: none; }
+        .loading { color: var(--muted); font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Kp Index — Real-Time Geomagnetic Activity</h1>
+    <p class="subtitle">
+        Source: <a href="https://www.swpc.noaa.gov/products/planetary-k-index">NOAA Space Weather Prediction Center</a> · Updates every 60 seconds · PNW SYS Infrastructure
+    </p>
+
+    <div class="current">
+        <div>
+            <div class="kp-label">CURRENT Kp</div>
+            <div class="kp-big" id="kp-value"><span class="loading">...</span></div>
+        </div>
+        <div>
+            <div class="kp-label">ESTIMATED</div>
+            <div class="kp-desc" id="kp-estimated"><span class="loading">loading</span></div>
+            <div class="kp-label" style="margin-top:0.5rem;">STATUS</div>
+            <div id="kp-status"><span class="loading">loading</span></div>
+            <div class="kp-time" id="kp-time"></div>
+        </div>
+        <div>
+            <div class="kp-label">DESCRIPTION</div>
+            <div class="kp-desc" id="kp-description"><span class="loading">loading</span></div>
+        </div>
+    </div>
+
+    <div class="kp-label">GEOMAGNETIC SCALE</div>
+    <div class="scale">
+        <div class="scale-block kp-0" id="scale-0">0<br>Quiet</div>
+        <div class="scale-block kp-1" id="scale-1">1<br>Quiet</div>
+        <div class="scale-block kp-2" id="scale-2">2<br>Quiet</div>
+        <div class="scale-block kp-3" id="scale-3">3<br>Quiet</div>
+        <div class="scale-block kp-4" id="scale-4">4<br>Unsettled</div>
+        <div class="scale-block kp-5" id="scale-5">5<br>G1 Storm</div>
+        <div class="scale-block kp-6" id="scale-6">6<br>G2 Storm</div>
+        <div class="scale-block kp-7" id="scale-7">7<br>G3 Storm</div>
+        <div class="scale-block kp-8" id="scale-8">8<br>G4 Storm</div>
+        <div class="scale-block kp-9" id="scale-9">9<br>G5 Storm</div>
+    </div>
+
+    <div class="chart-container">
+        <div class="kp-label">24-HOUR HISTORY</div>
+        <canvas id="kp-chart" height="200"></canvas>
+    </div>
+
+    <div id="error"></div>
+
+    <h2 style="color:#22d3ee; font-size:1.1rem; margin:1.5rem 0 0.5rem; border-bottom:1px solid #1f2937; padding-bottom:0.5rem;">Research Connections</h2>
+
+    <div class="connections">
+        <div class="conn-card">
+            <h3>Solar Wind → Lunar He-3</h3>
+            <p>Solar wind carries He-3 at ~300x atmospheric ratio. Higher Kp = more solar wind interaction = more He-3 implantation on the Moon. See <a href="../../../Research/HEL/html/11-helium-3.html">HEL Doc 11</a>.</p>
+        </div>
+        <div class="conn-card">
+            <h3>Geomagnetic Storms → Semiconductor Fabs</h3>
+            <p>Kp ≥ 5 (G1+) can induce ground currents affecting power grids and sensitive electronics. EUV lithography at Intel D1X is sensitive to charged particle events. See <a href="../../../Research/HEL/html/13-silicon-forest.html">HEL Doc 13</a>.</p>
+        </div>
+        <div class="conn-card">
+            <h3>Space Weather → Orbital Manufacturing</h3>
+            <p>Kp ≥ 7 (G3+) increases radiation flux in LEO, affecting space-based semiconductor crystal growth. See <a href="../../../Research/HEL/html/28-space-fabrication.html">HEL Doc 28</a>.</p>
+        </div>
+        <div class="conn-card">
+            <h3>Aurora → PNW Visibility</h3>
+            <p>Kp ≥ 7 brings aurora visible from Washington/Oregon. Same solar wind that creates the light show deposits He-3 on the Moon and drives the helium economy.</p>
+        </div>
+    </div>
+
+    <h2 style="color:#22d3ee; font-size:1.1rem; margin:1.5rem 0 0.5rem; border-bottom:1px solid #1f2937; padding-bottom:0.5rem;">Data Sources</h2>
+
+    <table>
+        <tr><th>Source</th><th>Endpoint</th><th>Rate</th><th>Format</th></tr>
+        <tr><td>NOAA SWPC (1-min)</td><td><code>services.swpc.noaa.gov/json/planetary_k_index_1m.json</code></td><td>60s</td><td>JSON</td></tr>
+        <tr><td>NOAA SWPC (3-hour)</td><td><code>services.swpc.noaa.gov/products/noaa-planetary-k-index.json</code></td><td>3hr</td><td>JSON</td></tr>
+        <tr><td>GFZ Potsdam</td><td><code>kp.gfz.de/en/</code></td><td>3hr</td><td>JSON/CSV/API</td></tr>
+        <tr><td>NOAA NCEI (historical)</td><td><code>ncei.noaa.gov/products/geomagnetic-indices</code></td><td>Archival</td><td>Various</td></tr>
+    </table>
+
+    <div class="nav">
+        <a href="../../index.html">← PNW</a> ·
+        <a href="../../../Research/HEL/index.html">HEL Research</a> ·
+        <a href="../../../Research/OOPS/index.html">OOPS Research</a> ·
+        <a href="../../../Research/index.html">Series Index</a> ·
+        PNW SYS Infrastructure · Live data from NOAA SWPC
+    </div>
+
+    <script>
+    const FEED_URL = 'https://services.swpc.noaa.gov/json/planetary_k_index_1m.json';
+    const DESCRIPTIONS = {
+        0: 'Inactive — no geomagnetic disturbance',
+        1: 'Quiet — minimal geomagnetic activity',
+        2: 'Quiet — low geomagnetic activity',
+        3: 'Unsettled — minor geomagnetic fluctuations',
+        4: 'Active — moderate geomagnetic disturbance',
+        5: 'G1 Minor Storm — weak power grid fluctuations, minor satellite impact',
+        6: 'G2 Moderate Storm — high-latitude power systems affected, HF radio fadeouts',
+        7: 'G3 Strong Storm — voltage irregularities, GPS degradation, aurora at mid-latitudes',
+        8: 'G4 Severe Storm — widespread voltage control problems, satellite charging',
+        9: 'G5 Extreme Storm — grid collapse risk, satellite damage, aurora at low latitudes'
+    };
+
+    let chartData = [];
+
+    function getKpColor(kp) {
+        if (kp <= 3) return '#10b981';
+        if (kp === 4) return '#f59e0b';
+        if (kp === 5) return '#f97316';
+        if (kp <= 7) return '#ef4444';
+        return '#dc2626';
+    }
+
+    function getStatusClass(kp) {
+        if (kp <= 3) return 'status-quiet';
+        if (kp === 4) return 'status-unsettled';
+        return 'status-storm';
+    }
+
+    function getStatusText(kp) {
+        if (kp <= 3) return 'QUIET';
+        if (kp === 4) return 'UNSETTLED';
+        if (kp === 5) return 'G1 STORM';
+        if (kp === 6) return 'G2 STORM';
+        if (kp === 7) return 'G3 STORM';
+        if (kp === 8) return 'G4 STORM';
+        return 'G5 EXTREME';
+    }
+
+    function drawChart(data) {
+        const canvas = document.getElementById('kp-chart');
+        const ctx = canvas.getContext('2d');
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * 2;
+        canvas.height = 200 * 2;
+        ctx.scale(2, 2);
+        const w = rect.width;
+        const h = 200;
+        const pad = { top: 20, right: 10, bottom: 25, left: 30 };
+
+        ctx.fillStyle = '#111827';
+        ctx.fillRect(0, 0, w, h);
+
+        // Grid lines for Kp levels
+        for (let i = 0; i <= 9; i++) {
+            const y = pad.top + (h - pad.top - pad.bottom) * (1 - i / 9);
+            ctx.strokeStyle = i === 5 ? '#7f1d1d' : '#1f2937';
+            ctx.lineWidth = i === 5 ? 1 : 0.5;
+            ctx.beginPath();
+            ctx.moveTo(pad.left, y);
+            ctx.lineTo(w - pad.right, y);
+            ctx.stroke();
+            ctx.fillStyle = '#6b7280';
+            ctx.font = '10px monospace';
+            ctx.fillText(i, 5, y + 3);
+        }
+
+        if (data.length < 2) return;
+
+        // Storm threshold label
+        const stormY = pad.top + (h - pad.top - pad.bottom) * (1 - 5 / 9);
+        ctx.fillStyle = '#7f1d1d';
+        ctx.font = '9px monospace';
+        ctx.fillText('G1 STORM', w - pad.right - 55, stormY - 3);
+
+        // Plot data
+        const plotW = w - pad.left - pad.right;
+        const plotH = h - pad.top - pad.bottom;
+        const step = plotW / (data.length - 1);
+
+        ctx.beginPath();
+        data.forEach((d, i) => {
+            const x = pad.left + i * step;
+            const y = pad.top + plotH * (1 - d.estimated_kp / 9);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.strokeStyle = '#22d3ee';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Fill under
+        ctx.lineTo(pad.left + (data.length - 1) * step, pad.top + plotH);
+        ctx.lineTo(pad.left, pad.top + plotH);
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(34, 211, 238, 0.1)';
+        ctx.fill();
+
+        // Time labels
+        ctx.fillStyle = '#6b7280';
+        ctx.font = '9px monospace';
+        const first = new Date(data[0].time_tag);
+        const last = new Date(data[data.length - 1].time_tag);
+        ctx.fillText(first.toUTCString().slice(17, 22) + ' UTC', pad.left, h - 5);
+        ctx.fillText(last.toUTCString().slice(17, 22) + ' UTC', w - pad.right - 45, h - 5);
+    }
+
+    async function fetchKp() {
+        try {
+            const resp = await fetch(FEED_URL);
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
+            const data = await resp.json();
+
+            // Latest reading
+            const latest = data[data.length - 1];
+            const kp = latest.kp_index;
+            const est = latest.estimated_kp;
+
+            document.getElementById('kp-value').textContent = kp;
+            document.getElementById('kp-value').style.color = getKpColor(kp);
+            document.getElementById('kp-estimated').textContent = est.toFixed(2);
+            document.getElementById('kp-status').innerHTML = '<span class="status ' + getStatusClass(kp) + '">' + getStatusText(kp) + '</span>';
+            document.getElementById('kp-description').textContent = DESCRIPTIONS[kp] || 'Unknown';
+            document.getElementById('kp-time').textContent = 'Updated: ' + latest.time_tag + ' UTC';
+
+            // Highlight scale
+            document.querySelectorAll('.scale-block').forEach(el => el.classList.remove('active-block'));
+            const block = document.getElementById('scale-' + kp);
+            if (block) block.classList.add('active-block');
+
+            // Draw chart (last 1440 points = 24 hours at 1/min)
+            const chartPoints = data.slice(-1440);
+            drawChart(chartPoints);
+
+            document.getElementById('error').style.display = 'none';
+        } catch (e) {
+            document.getElementById('error').textContent = 'Feed error: ' + e.message + '. Retrying in 60s.';
+            document.getElementById('error').style.display = 'block';
+        }
+    }
+
+    // Initial fetch and 60-second refresh
+    fetchKp();
+    setInterval(fetchKp, 60000);
+    </script>
+</body>
+</html>
