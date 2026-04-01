@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 69&deg; &mdash; Striped Skunk &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Mephitidae streak-break card */
+    .mephitidae-card {
+      background: linear-gradient(135deg, #1A1A2E 0%, #16213E 40%, #0F3460 80%, #533483 100%);
+      border: 3px solid #1A1A2E;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #E8E8F0;
+    }
+    .mephitidae-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #BB86FC;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .mephitidae-card p {
+      color: #E8E8F0;
+    }
+    .mephitidae-card strong {
+      color: #CE93D8;
+    }
+
+    /* Warning foot-stamp acoustic card */
+    .stamp-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+      border: 2px solid #38006B;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .stamp-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .stamp-card p {
+      color: #F3E5F5;
+    }
+    .stamp-card strong {
+      color: #E1BEE7;
+    }
+
+    /* Woodland edge habitat card */
+    .edge-card {
+      background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 60%, #66BB6A 100%);
+      border: 2px solid #1B5E20;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8F5E9;
+    }
+    .edge-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #C8E6C9;
+    }
+    .edge-card p {
+      color: #E8F5E9;
+    }
+    .edge-card strong {
+      color: #A5D6A7;
+    }
+
+    /* Chemical defense card */
+    .chemical-card {
+      background: linear-gradient(135deg, #BF360C 0%, #E65100 60%, #FF6D00 100%);
+      border: 2px solid #BF360C;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FFF3E0;
+    }
+    .chemical-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #FFE0B2;
+    }
+    .chemical-card p {
+      color: #FFF3E0;
+    }
+    .chemical-card strong {
+      color: #FFCC80;
+    }
+
+    /* Kris Orlowski parallel card */
+    .orlowski-card {
+      background: linear-gradient(135deg, #1A237E 0%, #283593 100%);
+      border: 2px solid #0D1642;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #E8EAF6;
+    }
+    .orlowski-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #9FA8DA;
+    }
+    .orlowski-card p {
+      color: #E8EAF6;
+    }
+    .orlowski-card strong {
+      color: #7986CB;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.mephitidae { background: #533483; }
+    .theory-icon.stamp { background: #6A1B9A; }
+    .theory-icon.edge { background: #2E7D32; }
+    .theory-icon.chemical { background: #E65100; }
+    .theory-icon.orlowski { background: #283593; }
+    .theory-icon.carnivore { background: #B71C1C; }
+    .theory-icon.mammal { background: #5D4037; }
+    .theory-icon.csv { background: #37474F; }
+    .theory-icon.weasel-link { background: #4E342E; }
+    .theory-icon.ltw-link { background: #455A64; }
+    .theory-icon.otter-link { background: #01579B; }
+    .theory-icon.robin-link { background: #1B5E20; }
+    .theory-icon.mallard-link { background: #0D47A1; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">69&deg;</div>
+      <div class="release-title-block">
+        <h2>Striped Skunk</h2>
+        <div class="scientific">Mephitis mephitis</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      warning foot-stamp / hiss &mdash; woodland edge chemical defender, NEW FAMILY Mephitidae (29th family), THE MUSTELIDAE SEXTET BREAKS (after 6 consecutive Mustelidae 63&ndash;68), eighth carnivore, tenth mammalian entry, eighth mammalian species, first multi-modal warning display (visual + acoustic + chemical), E=3, year-round resident, woodland edge
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Mephitidae Streak-Break Card -->
+        <div class="mephitidae-card">
+          <h3>The Mustelidae Sextet Breaks &mdash; Mephitidae Arrives (29th Family)</h3>
+          <p>After SIX consecutive Mustelidae (degrees 63&ndash;68) &mdash; the longest family streak in engine history &mdash; degree 69 brings a <strong>different family</strong>. Mephitidae. The skunks. The 29th family in the engine. But the break is a paradox: skunks WERE classified in Mustelidae until molecular phylogenetics placed them in their own family. <strong>Mephitidae is Mustelidae&rsquo;s closest sister group</strong> &mdash; the nearest non-Mustelidae relatives of the weasel family. The &ldquo;new&rdquo; family is the old family&rsquo;s closest neighbor. The streak breaks, but only barely &mdash; and only because taxonomy caught up with molecular evidence.</p>
+        </div>
+
+        <!-- Warning Foot-Stamp Acoustic Card -->
+        <div class="stamp-card">
+          <h3>The 70th Acoustic Element: Warning Foot-Stamp / Hiss</h3>
+          <p>NOT a vocalization in the traditional sense. The Striped Skunk&rsquo;s warning is a <strong>multi-modal display</strong>: the skunk stamps its front feet rapidly against the ground, hisses, and raises its tail &mdash; a three-part warning sequence before the chemical spray. E=3. The first species in the engine whose &ldquo;sound&rdquo; is primarily <strong>physical percussion</strong> (foot-stamping) combined with <strong>respiratory threat</strong> (hissing). Visual + acoustic + chemical &mdash; the most complex warning display in 70 degrees.</p>
+        </div>
+
+        <!-- Chemical Defense Card -->
+        <div class="chemical-card">
+          <h3>Chemical Defense &mdash; The Only Chemical Weapon in the Engine</h3>
+          <p>The Striped Skunk is the <strong>only species in the engine with a chemical weapon</strong>. The spray &mdash; n-butyl mercaptan (butanethiol) &mdash; is produced by paired anal glands and can be directed with precision at targets up to 3&ndash;5 meters away. The odor can be detected <strong>1.5 km downwind</strong>. The chemical defense is so effective that the skunk&rsquo;s warning display is itself a deterrent: most predators learn to avoid the black-and-white pattern after a single encounter. The spray is a last resort, not a first response &mdash; the foot-stamp and hiss are the escalation ladder.</p>
+        </div>
+
+        <!-- Woodland Edge Habitat Card -->
+        <div class="edge-card">
+          <h3>Woodland Edge &mdash; Same Ecotone as the Short-tailed Weasel</h3>
+          <p>Woodland edge: the boundary between forest and open land, where trees thin and meadow begins. The Striped Skunk shares this <strong>ecotone habitat with the Short-tailed Weasel</strong> (degree 67) &mdash; the second edge specialist in the engine. But their strategies could not be more different: the weasel is a tiny, explosive predator that pursues prey into burrows. The skunk is a slow, deliberate omnivore whose defense is so potent that it barely needs to run. <strong>Edge habitat, opposite survival strategies.</strong></p>
+        </div>
+
+        <!-- Kris Orlowski Parallel Card -->
+        <div class="orlowski-card">
+          <h3>The Kris Orlowski Parallel</h3>
+          <p>Degree 69 pairs Striped Skunk with <strong>Kris Orlowski</strong> in Part A &mdash; Singer-Songwriter, E=2, Seattle. Both are <strong>unassuming until provoked</strong>. The skunk does not look for trouble but will stand its ground absolutely. Orlowski&rsquo;s music is gentle but direct &mdash; quiet community musicianship, no flash, no aggression, but an unmistakable presence. The skunk walks slowly because nothing chases it. Orlowski plays softly because the song does not need volume. Both carry quiet authority.</p>
+        </div>
+
+        <h2>The Sound: Warning Foot-Stamp / Hiss (70th Acoustic Element)</h2>
+        <p><strong>The warning sequence:</strong> The Striped Skunk&rsquo;s acoustic element is a multi-stage warning display rather than a single vocalization. First, the skunk <strong>stamps its front feet</strong> rapidly against the ground &mdash; a sharp, percussive sound that signals agitation. Then it <strong>hisses</strong> &mdash; a sustained, breathy exhalation through the teeth, the standard mammalian threat vocalization. Simultaneously, the tail raises high, exposing the white dorsal stripe &mdash; the visual warning. The entire sequence is a <strong>three-channel threat</strong>: auditory (stamp + hiss), visual (tail raise + aposematic coloring), and chemical (the implicit promise of spray).</p>
+        <p><strong>The foot-stamp:</strong> Rapid percussive impacts of the front feet against hard substrate. The sound is sharp, repetitive, and attention-getting. Unlike any previous acoustic element in the engine &mdash; this is physical percussion, not vocalization. The closest analog is woodpecker drumming (degrees 21&ndash;22, 54), but the skunk&rsquo;s stamping serves a warning function rather than a territorial or foraging function.</p>
+        <p><strong>The hiss:</strong> A sustained, forceful exhalation through the teeth and nostrils. Low-pitched relative to the mustelid vocalizations in the sextet (degrees 63&ndash;68). The hiss carries a different emotional register than the weasels&rsquo; chattering aggression &mdash; it is a defensive warning, not an offensive threat. The skunk hisses to say &ldquo;leave me alone,&rdquo; not &ldquo;I am hunting you.&rdquo;</p>
+        <p><strong>Why E=3:</strong> Common but not abundant. Everyone has smelled a Striped Skunk. Not everyone has seen the warning display. The skunk is familiar (culturally ubiquitous, unmistakable odor) but not always visually encountered &mdash; it is primarily nocturnal and crepuscular. E=3 reflects this paradox: extremely well-known, moderately encountered.</p>
+
+        <h2>The Skunk Paradox: Taxonomic Reclassification</h2>
+        <p><strong>The reclassification:</strong> Skunks were classified in Mustelidae (the weasel family) for over a century. Molecular phylogenetic analysis in the early 2000s revealed that skunks form a distinct lineage warranting their own family: <strong>Mephitidae</strong> [1, 2, 5]. The reclassification was based on mitochondrial DNA and nuclear gene sequences showing that skunks diverged from Mustelidae approximately 30&ndash;40 million years ago &mdash; a deep split that traditional morphological taxonomy had failed to detect.</p>
+        <p><strong>The paradox:</strong> Mephitidae is Mustelidae&rsquo;s <strong>closest sister group</strong>. The skunk is the nearest non-Mustelidae relative of the weasel family. So the Mustelidae sextet (63&ndash;68) is followed by the Mustelidae sister family at degree 69. The &ldquo;break&rdquo; is real taxonomically but minimal phylogenetically. If the skunks had never been reclassified, degree 69 would extend the Mustelidae run to SEVEN consecutive &mdash; the retrospective&rsquo;s worst fear realized. Instead, the reclassification provides a structural boundary that is genuine but paper-thin.</p>
+        <p><strong>Taxonomy:</strong> <em>Mephitis mephitis</em>. From Latin <em>mephitis</em>, meaning &ldquo;noxious vapor&rdquo; or &ldquo;pestilential exhalation&rdquo; &mdash; the genus and species are the same word, doubled. The name literally means &ldquo;noxious vapor noxious vapor.&rdquo; A tautonym &mdash; the species name repeats the genus name, emphasizing the defining characteristic so emphatically that taxonomy says it twice.</p>
+
+        <h2>Physical Description: The Aposematic Omnivore</h2>
+        <p><strong>Size:</strong> 520&ndash;770 mm total length (including tail), 1.8&ndash;4.5 kg. Substantially larger than both weasels (Short-tailed 150&ndash;350 g, Long-tailed 200&ndash;450 g). Comparable in mass to the Marten (0.5&ndash;1.2 kg) and approaching the Mink (0.5&ndash;1.5 kg). Stocky and low-slung &mdash; the opposite of the weasels&rsquo; elongated tubular bauplan. Built for slow, deliberate movement rather than burrow pursuit.</p>
+        <p><strong>Coloration:</strong> Black with a prominent white dorsal stripe that splits into a V at the nape and runs along both flanks of the back to the tail. A thin white facial stripe runs from the forehead to the nose. The pattern is <strong>aposematic</strong> &mdash; warning coloration advertising the chemical defense. High-contrast black-and-white in a nocturnal mammal: visible at night, unmistakable, evolved to be remembered after a single encounter.</p>
+        <p><strong>Tail:</strong> Large, bushy, black with variable white intermixed. Raised high during the warning display, exposing maximum white surface area. The tail raise is the visual component of the multi-modal warning &mdash; it says &ldquo;you can see what I am&rdquo; before the spray says &ldquo;you should have listened.&rdquo;</p>
+        <p><strong>Feet:</strong> Forefeet have long, curved claws adapted for digging &mdash; grubs, insects, and root-level food sources. The feet are the tools of an omnivore, not a hypercarnivore. The same front feet that dig for food are the feet that stamp the ground in warning.</p>
+        <p><strong>Body form:</strong> Stocky, plantigrade (walks on the soles of the feet, like a bear or a human). Short legs, broad body. Moves with a deliberate, unhurried waddle. The skunk walks slowly because almost nothing attacks it &mdash; the chemical defense buys freedom from the urgency that drives weasels.</p>
+
+        <h2>Chemical Defense: The Spray</h2>
+        <p><strong>The weapon:</strong> Paired anal glands produce a sulfur-containing compound (n-butyl mercaptan / butanethiol) that the skunk can spray with remarkable accuracy at targets 3&ndash;5 meters away. The spray can be delivered as a fine mist or a directed stream. Each gland holds approximately 15 ml &mdash; enough for 5&ndash;6 sprays before requiring several days to replenish [1, 2, 3].</p>
+        <p><strong>Detection range:</strong> The odor can be smelled by humans at distances up to 1.5 km downwind. The compound is detectable at concentrations of 10 parts per billion &mdash; one of the most potent natural odorants in North America [1, 2, 3].</p>
+        <p><strong>The escalation ladder:</strong> The skunk sprays reluctantly. The warning sequence is elaborate precisely because the spray is a finite resource: (1) facing the threat, (2) foot-stamping, (3) hissing, (4) tail raising, (5) body arching into a U-shape (facing the threat while aiming the glands backward), and (6) spray. Most encounters end at stage 2 or 3. The foot-stamp / hiss is the acoustic element because it IS the sound of the skunk &mdash; the spray is silent.</p>
+        <p><strong>Unique in the engine:</strong> No other species in 70 degrees has a chemical weapon. The Otter&rsquo;s scent marking (degree 63), the Mink&rsquo;s musk (degree 64), and the weasels&rsquo; anal gland secretions (degrees 67&ndash;68) are related structures &mdash; all musteloids have anal scent glands. But only the skunk has weaponized the secretion into a directed defensive spray. The chemical defense is a Mephitidae innovation, one of the reasons the family was separated from Mustelidae.</p>
+
+        <h2>Woodland Edge Habitat</h2>
+        <p><strong>Habitat preference:</strong> Woodland edge &mdash; the transitional zone between forest and open land. Also found in brushy areas, agricultural margins, suburban neighborhoods, and mixed habitats with good ground-level cover and access to open foraging areas. The Striped Skunk is a habitat generalist with a preference for edge environments [1, 2, 3, 6].</p>
+        <p><strong>Shared ecotone with the Short-tailed Weasel (degree 67):</strong> Both the Striped Skunk and the Short-tailed Weasel inhabit woodland edge &mdash; the second pair of species sharing a primary habitat in the mammalian era. But their strategies diverge completely: the weasel is a specialist predator that uses the edge as a hunting corridor between dense cover and open meadow. The skunk is an omnivore that uses the edge as a foraging zone where insects, grubs, fruit, and small vertebrates are all accessible. Predator vs. omnivore. Speed vs. chemical defense. The same habitat, opposite survival strategies.</p>
+        <p><strong>Nocturnal ecology:</strong> Primarily nocturnal and crepuscular. Active from dusk through dawn. The aposematic coloring (high-contrast black and white) is visible even in low light &mdash; evolved for nighttime warning display. The skunk&rsquo;s deliberate, slow movement is possible BECAUSE of the chemical defense: where weasels must be fast (metabolism demands constant hunting), the skunk can be slow (the spray means few predators will pursue).</p>
+
+        <h2>Diet: The Omnivore After Seven Carnivores</h2>
+        <p><strong>The shift:</strong> After seven consecutive Carnivora entries that were all predators (Otter 63, Mink 64, Marten 65, Fisher 66, Short-tailed Weasel 67, Long-tailed Weasel 68), degree 69 introduces an <strong>omnivore</strong>. The Striped Skunk is classified in Carnivora but is functionally omnivorous &mdash; insects, grubs, small rodents, eggs, fruit, berries, corn, garbage, and carrion. The Carnivora designation reflects evolutionary ancestry, not current dietary specialization [1, 2, 3].</p>
+        <p><strong>Primary diet:</strong> Insects and grubs (especially beetle larvae, grasshoppers, crickets) dominate the diet in warm months. Small mammals (mice, voles), eggs, fruit, and berries supplement. In winter, the diet shifts toward small mammals and carrion. The Striped Skunk is an opportunistic generalist &mdash; it eats whatever is available, whenever it is available.</p>
+        <p><strong>Digging forager:</strong> The long-clawed forefeet are adapted for digging. The skunk excavates grubs and insects from soil and rotting wood &mdash; a foraging strategy more similar to a raccoon or an armadillo than to any mustelid in the sextet. The diet breadth and the digging foraging mode are Mephitidae traits, further distinguishing the skunk from the hypercarnivorous weasels.</p>
+
+        <h2>Conservation: Common and Familiar</h2>
+        <p><strong>Status:</strong> Least Concern (IUCN). Common and widespread throughout North America, from southern Canada to northern Mexico. One of the most familiar wild mammals in the Pacific Northwest and across the continent [1, 2, 3].</p>
+        <p><strong>Human coexistence:</strong> The Striped Skunk thrives in suburban and urban-adjacent habitats. It dens under buildings, forages in gardens and trash, and is one of the most commonly encountered wild mammals in residential areas. The chemical defense makes it largely immune to predation in these settings &mdash; even dogs learn quickly.</p>
+        <p><strong>Cultural familiarity:</strong> Everyone has smelled a skunk. The odor is one of the most universally recognized wild animal scents in North America. The skunk is culturally ubiquitous &mdash; the &ldquo;default&rdquo; nocturnal mammal, much as the Mallard (degree 59) is the &ldquo;default&rdquo; duck. E=3 reflects this: extremely familiar, but not seen as commonly as smelled.</p>
+
+        <h2>The Mustelidae Sextet + Mephitidae: Seven Degrees of Musteloidea</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Family</th><th>Habitat</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>63</td><td>River Otter</td><td>Mustelidae</td><td>River/estuary</td><td>Social chuff (6 types)</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Mustelidae</td><td>Creek bank</td><td>Shrill chitter alarm</td></tr>
+            <tr><td>65</td><td>American Marten</td><td>Mustelidae</td><td>Old-growth canopy</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Mustelidae</td><td>Dense forest</td><td>Loud scream (rare)</td></tr>
+            <tr><td>67</td><td>Short-tailed Weasel</td><td>Mustelidae</td><td>Meadow-forest edge</td><td>Shrill bark / chitter</td></tr>
+            <tr><td>68</td><td>Long-tailed Weasel</td><td>Mustelidae</td><td>Open woodland</td><td>Rapid chattering chirp</td></tr>
+            <tr><td><strong>69</strong></td><td><strong>Striped Skunk</strong></td><td><strong>Mephitidae</strong></td><td><strong>Woodland edge</strong></td><td><strong>Warning foot-stamp / hiss</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Seven consecutive musteloid degrees (63&ndash;69). Six Mustelidae, then one Mephitidae &mdash; the sister family. The Mustelidae sextet is followed by its closest relative. Seven species, seven sounds, two families, one superfamily. The streak breaks in name but continues in lineage.</p>
+
+        <h2>Family Tracker After Degree 69</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td><strong>Mustelidae</strong></td><td>63, 64, 65, 66, 67, 68</td><td><strong>6 (sextet complete)</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td>Castoridae</td><td>61, 62</td><td>2 (species-pair)</td></tr>
+            <tr><td>Podicipedidae</td><td>60</td><td>1</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td><strong>Mephitidae</strong></td><td><strong>69</strong></td><td><strong>1 (NEW &mdash; 29th family)</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-nine families across 70 entries. <strong>Mephitidae is the 29th family</strong> &mdash; the first new family since Mustelidae at degree 63. 49 of 70 entries (70.0%) are Passeriformes. 10 of 70 entries (14.3%) are Mammalia. The mammalian era extends to nine consecutive degrees (61&ndash;69).</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon mephitidae">M</div>
+            <div class="theory-content">
+              <h4>Mustelidae Sextet Breaks &mdash; Mephitidae (29th Family) <span class="theory-level landmark">landmark</span></h4>
+              <p>After six consecutive Mustelidae (63&ndash;68), the streak breaks with the sister family Mephitidae. The 29th family. Skunks WERE Mustelidae until reclassified. The break is real but phylogenetically minimal &mdash; the closest non-Mustelidae relatives.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon stamp">S</div>
+            <div class="theory-content">
+              <h4>Warning Foot-Stamp / Hiss &mdash; 70th Acoustic Element <span class="theory-level landmark">landmark</span></h4>
+              <p>The first multi-modal warning display: foot-stamping (physical percussion) + hissing (respiratory threat) + tail raise (visual). E=3. Not a vocalization in the traditional sense. The most complex warning display in the engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon chemical">C</div>
+            <div class="theory-content">
+              <h4>Chemical Defense &mdash; Only Chemical Weapon in the Engine <span class="theory-level landmark">landmark</span></h4>
+              <p>N-butyl mercaptan spray, detectable 1.5 km downwind, directed at targets 3&ndash;5 meters. The only species in 70 degrees with a chemical weapon. A Mephitidae innovation that contributed to the family&rsquo;s separation from Mustelidae.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon edge">E</div>
+            <div class="theory-content">
+              <h4>Woodland Edge &mdash; Shared Ecotone with Short-tailed Weasel <span class="theory-level foundational">foundational</span></h4>
+              <p>Same ecotone as degree 67. Both woodland-edge species. But opposite strategies: the weasel is a tiny explosive predator, the skunk is a slow chemical defender. Edge habitat, opposite survival modes.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon orlowski">O</div>
+            <div class="theory-content">
+              <h4>Kris Orlowski Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both unassuming until provoked. The quiet Seattle singer-songwriter (E=2) and the slow-walking chemical defender (E=3). Both carry quiet authority. Neither looks for trouble. Both will stand their ground.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon carnivore">8</div>
+            <div class="theory-content">
+              <h4>Eighth Carnivore &mdash; First Non-Mustelidae <span class="theory-level foundational">foundational</span></h4>
+              <p>Carnivora grows to eight entries. The first non-Mustelidae Carnivora entry. Seven Mustelidae + one Mephitidae. The order&rsquo;s representation finally extends beyond a single family.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon csv">9</div>
+            <div class="theory-content">
+              <h4>Ninth Consecutive Original CSV <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Degrees 61&ndash;69: nine consecutive originals. The longest original-CSV streak extends again. Every mammalian entry is an original CSV species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mammal">10</div>
+            <div class="theory-content">
+              <h4>Tenth Mammalian Entry, Eighth Species <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Eight mammalian species across ten entries (61&ndash;69). Mammalian representation rises to 14.3% (10 of 70). Two orders, four families, eight species. The mammalian era is now nine degrees deep.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon weasel-link">W</div>
+            <div class="theory-content">
+              <h4>Short-tailed Weasel Connection (SPS-067) <span class="theory-level foundational">foundational</span></h4>
+              <p>Both woodland-edge species. Predator vs. chemical defender. Speed vs. deterrence. The weasel hunts at the edge; the skunk forages at the edge. Same habitat, opposite strategies.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon ltw-link">L</div>
+            <div class="theory-content">
+              <h4>Long-tailed Weasel Connection (SPS-068) <span class="theory-level foundational">foundational</span></h4>
+              <p>The Mustelidae sextet ends one degree before the sister family arrives. The last Mustelidae and the first Mephitidae &mdash; the closest taxonomic transition possible without staying in the same family.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon otter-link">R</div>
+            <div class="theory-content">
+              <h4>River Otter Connection (SPS-063) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>The sextet bookend. Mustelidae opened at 63, sister family Mephitidae at 69. Seven musteloid degrees. The superfamily Musteloidea now spans seven consecutive entries.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon robin-link">A</div>
+            <div class="theory-content">
+              <h4>American Robin Connection (SPS-025) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both ubiquitous, both familiar. Everyone has encountered both species &mdash; the robin by sight and song, the skunk by smell. Two of the most universally recognized species in the PNW.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mallard-link">D</div>
+            <div class="theory-content">
+              <h4>Mallard Connection (SPS-059) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both &ldquo;the default&rdquo; of their groups. Mallard = default duck. Striped Skunk = default nocturnal mammal. Both are the first species that comes to mind when their category is mentioned.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-067: Short-tailed Weasel</strong>
+            <p>BOTH WOODLAND-EDGE SPECIES. Predator vs. chemical defender. Speed vs. deterrence. Same ecotone habitat, opposite survival strategies. The weasel pursues prey into burrows; the skunk walks slowly because nothing chases it.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-068: Long-tailed Weasel</strong>
+            <p>THE MUSTELIDAE SEXTET ENDS, THE SISTER FAMILY ARRIVES. The last Mustelidae (68) followed by the first Mephitidae (69). The closest possible taxonomic transition. The sextet&rsquo;s final member and its sister family&rsquo;s first.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-063: River Otter</strong>
+            <p>MUSTELOIDEA BOOKENDS. Mustelidae opened at 63, sister family Mephitidae at 69. Seven consecutive musteloid degrees. The superfamily spans water (Otter) to woodland edge (Skunk).</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-025: American Robin</strong>
+            <p>BOTH UBIQUITOUS. Both universally recognized. Everyone has encountered both species. The robin by sight and song; the skunk by smell. The most familiar bird and the most familiar nocturnal mammal.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-059: Mallard</strong>
+            <p>BOTH &ldquo;THE DEFAULT.&rdquo; Mallard = default duck. Skunk = default nocturnal mammal. Both are the first species that comes to mind. Both are culturally omnipresent, both E=3 or higher.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM: Mammals of the Pacific Northwest</strong>
+            <p>Tenth mammalian entry. Eighth mammalian species. Eighth Carnivora, first Mephitidae. Mammalian representation rises to 14.3% (10 of 70). Two orders, four families, eight species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Woodland edge habitat. Chemical defense as ecological strategy. Omnivorous diet (insects, grubs, fruit, small vertebrates). Second edge specialist after the Short-tailed Weasel. Aposematic coloration.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>NatureServe / IUCN &mdash; Striped Skunk (<em>Mephitis mephitis</em>) species account.</li>
+          <li>Wikipedia &mdash; &ldquo;Striped Skunk.&rdquo;</li>
+          <li>Wade-Smith, J. and Verts, B.J. (1982). &ldquo;<em>Mephitis mephitis</em>.&rdquo; <em>Mammalian Species</em> 173: 1&ndash;7.</li>
+          <li>Dragoo, J.W. and Honeycutt, R.L. (1997). &ldquo;Systematics of mustelid-like carnivores.&rdquo; <em>Journal of Mammalogy</em> 78(2): 426&ndash;443.</li>
+          <li>Flynn, J.J. et al. (2005). &ldquo;Molecular phylogeny of the Carnivora (Mammalia): assessing the impact of increased sampling on resolving enigmatic relationships.&rdquo; <em>Systematic Biology</em> 54(2): 317&ndash;337.</li>
+          <li>Rosatte, R.C. (1987). &ldquo;Striped, spotted, hooded, and hog-nosed skunk.&rdquo; In <em>Wild Furbearer Management and Conservation in North America</em>, pp. 598&ndash;613.</li>
+          <li>Washington Department of Fish and Wildlife &mdash; Living with Wildlife: Skunks.</li>
+          <li>Greenwood, R.J. et al. (1999). &ldquo;Population and movement characteristics of radio-collared striped skunks in North Dakota during an epizootic of rabies.&rdquo; <em>Journal of Wildlife Diseases</em> 35(2): 226&ndash;232.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">69&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">Warning Foot-Stamp / Hiss</div>
+          <div class="stat-detail">#70 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 3</div>
+          <div class="stat-detail">Common but not abundant</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Mammalia</div>
+          <div class="stat-detail">10th mammalian entry, 8th species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Mephitidae</div>
+          <div class="stat-detail">NEW &mdash; 29th family</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Carnivora</div>
+          <div class="stat-detail">8th entry (first non-Mustelidae)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Foot-stamp + hiss</div>
+          <div class="stat-detail">Multi-modal warning display</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Woodland Edge</div>
+          <div class="stat-detail">Same ecotone as SPS-067</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Resident throughout Washington</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">1.8&ndash;4.5 kg</div>
+          <div class="stat-detail">Larger than both weasels</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">No</div>
+          <div class="stat-detail">9th consecutive original CSV</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Edge Habitat</div>
+          <div class="stat-value">SPS-067</div>
+          <div class="stat-detail">Short-tailed Weasel &mdash; same ecotone</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sextet Ends</div>
+          <div class="stat-value">SPS-068</div>
+          <div class="stat-detail">Long-tailed Weasel &mdash; sister family follows</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Musteloidea Bookend</div>
+          <div class="stat-value">SPS-063</div>
+          <div class="stat-detail">River Otter &mdash; 7 musteloid degrees</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 69 of 360</p>
+  </footer>
+</body>
+</html>
