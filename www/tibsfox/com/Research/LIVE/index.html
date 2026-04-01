@@ -204,7 +204,8 @@ footer a { color:rgba(255,255,255,0.3); }
 <footer>
   <a href="../index.html">Tibsfox Research</a> &middot;
   LIVE &mdash; Real-time research and monitoring &middot;
-  <a href="https://tibsfox.com">tibsfox.com</a>
+  <a href="https://tibsfox.com">tibsfox.com</a><br>
+  <span id="last-updated" style="font-size:0.65rem;">Last updated: <span id="update-ts">--</span></span>
 </footer>
 
 <script>
@@ -220,6 +221,8 @@ function updateClocks() {
 }
 updateClocks();
 setInterval(updateClocks, 1000);
+// Set page load timestamp
+document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.0.18)';
 </script>
 </body>
 </html>
