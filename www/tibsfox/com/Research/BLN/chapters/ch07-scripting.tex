@@ -1,0 +1,2482 @@
+%% ═══════════════════════════════════════════════════════════════════════════
+%% CHAPTER 7: PYTHON SCRIPTING & PIPELINE
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\chapter{Python Scripting, Add-on Development \& Pipeline}
+\label{ch:scripting}
+
+\begin{quotebox}
+\itshape ``Every action you perform in Blender's GUI is backed by a Python operator that can be called from scripts.''
+
+\upshape --- Blender Foundation, Python API Documentation
+\end{quotebox}
+
+\vspace{1em}
+Blender is not just a 3D application --- it is a scriptable platform. Every button click, every slider drag, every menu selection is a Python operator under the hood. This means that anything you can do by hand, you can automate. Anything you can automate, you can scale. And when you can scale, you can build pipelines that transform a single artist's workflow into a studio-grade production system.
+
+This chapter covers the entire scripting and pipeline stack: from your first one-liner in the Python Console to multi-file add-ons with custom UIs, from batch export scripts to render farm orchestration with Flamenco. We will build six complete, production-ready scripts along the way, and we will connect Blender to the broader production ecosystem through USD, FBX, glTF, and production management tools like Kitsu and ShotGrid.
+
+If you have never written a line of Python, do not panic. The Info editor will write your first hundred lines for you --- every GUI action is logged as executable Python. Your job is to learn to read those lines, modify them, and eventually compose them into something more powerful than any manual workflow.
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Blender's Embedded Python Interpreter}
+\label{sec:scripting-interpreter}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Overview}
+
+Blender ships with a complete \textbf{CPython interpreter} embedded within the application. This Python environment has full access to Blender's data, operators, and UI through the \texttt{bpy} module. As of Blender 4.4, the embedded interpreter is \textbf{Python 3.11}. Blender's Python environment is isolated from any system Python installation --- it uses its own bundled Python binary and standard library.
+
+This isolation is deliberate: it prevents version conflicts between Blender's dependencies and whatever you have installed on your system. If you need additional Python packages (NumPy, Pillow, etc.), install them using Blender's bundled \texttt{pip}:
+
+\begin{lstlisting}
+# From the system command line:
+/path/to/blender/4.4/python/bin/python3.11 -m pip install numpy
+\end{lstlisting}
+
+\begin{historynote}
+Blender's Python API has undergone several major overhauls. The earliest scriptable versions (Blender 2.3x, circa 2004) used a completely different module structure. The 2.5x rewrite (2009--2011) introduced the modern \texttt{bpy} module architecture that persists today. The 2.80 release (2019) brought sweeping changes to collections, the viewport, and the property system. The 3.x and 4.x series have been more evolutionary --- the \texttt{bpy} module structure you learn today will serve you well across future versions. The most significant recent change is the replacement of the legacy dictionary-based context override system with \texttt{bpy.context.temp\_override()} in Blender 4.0.
+\end{historynote}
+
+\subsection{Where Python Runs in Blender}
+
+Python code executes in eight distinct contexts within Blender. Understanding these contexts is essential, because operators behave differently depending on where they are called from.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Context} & \tableheader{Description} \\
+\midrule
+Python Console & Interactive REPL in the Python Console editor (for testing one-liners) \\
+Text Editor & Multi-line scripts run via the Run Script button or \textbf{Alt+P} \\
+Startup Scripts & Scripts in Blender's \texttt{scripts/startup/} directory run on launch \\
+Add-ons & Installed via Preferences > Add-ons; registered on enable \\
+Drivers & Python expressions evaluated per-frame for driven properties \\
+Application Handlers & Callback functions registered for events (frame change, render, file load) \\
+Command Line & \texttt{blender --python script.py} runs scripts without user interaction \\
+Modal Operators & Long-running operators that update every frame or input event \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Python Console Quick Reference}
+
+Open the Python Console editor and type commands directly. This is the fastest way to explore Blender's API:
+
+\begin{lstlisting}
+# List all objects in the scene
+for obj in bpy.data.objects:
+    print(obj.name, obj.type)
+
+# Get the active object
+obj = bpy.context.active_object
+print(obj.location)
+
+# Move the active object
+bpy.context.active_object.location.x += 2.0
+
+# Add a cube
+bpy.ops.mesh.primitive_cube_add(location=(0, 0, 3))
+\end{lstlisting}
+
+\subsection{The Tooltip and Info Editor Workflow}
+
+Two built-in tools make the API discoverable without reading documentation:
+
+\textbf{Tooltips:} Hovering over any UI element and pressing \textbf{Ctrl+C} copies the Python path for that property. The tooltip itself shows the Python identifier. This is how you discover that the ``Roughness'' slider on the Principled BSDF corresponds to \texttt{bpy.data.materials["MyMat"].node\_tree.nodes["Principled BSDF"].inputs["Roughness"].default\_value}.
+
+\textbf{Info Editor:} Every operation you perform in Blender is logged as a Python command in the Info editor. This is the fastest way to discover the Python equivalent of a GUI action. Move an object, and the Info editor shows the \texttt{bpy.ops.transform.translate()} call with the exact parameters. This is how most scripts begin: do it by hand once, copy the Python from the Info editor, and generalize it.
+
+\begin{shortcutbox}
+\textbf{Key shortcuts for the Python workflow:}\\
+\textbf{Ctrl+C} over any UI element --- copy Python data path\\
+\textbf{Ctrl+Shift+C} over any UI element --- copy full Python path with driver prefix\\
+\textbf{F3} (or \textbf{Edit > Menu Search}) --- search for operators by name
+\end{shortcutbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{The bpy Module}
+\label{sec:scripting-bpy}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+The \texttt{bpy} module is the gateway to everything in Blender. It is organized into seven primary submodules, each serving a distinct purpose. Mastering these submodules is the foundation of all Blender scripting.
+
+\subsection{bpy.data --- The Data Layer}
+
+\texttt{bpy.data} provides access to \textbf{all data blocks} in the current \texttt{.blend} file. This is the gateway to every mesh, material, texture, image, armature, camera, light, scene, and world in the file. Data blocks are Blender's fundamental storage units --- every piece of content in a \texttt{.blend} file is a data block.
+
+\begin{lstlisting}
+import bpy
+
+# Access all meshes
+for mesh in bpy.data.meshes:
+    print(mesh.name, len(mesh.vertices), "verts")
+
+# Access a specific object by name
+cube = bpy.data.objects["Cube"]
+print(cube.location)
+
+# Access materials
+for mat in bpy.data.materials:
+    print(mat.name)
+
+# Create a new material
+mat = bpy.data.materials.new(name="MyMaterial")
+mat.use_nodes = True
+
+# Remove an object (unlink first, then remove data)
+bpy.data.objects.remove(bpy.data.objects["Cube"], do_unlink=True)
+\end{lstlisting}
+
+The following table lists the most commonly used \texttt{bpy.data} collections. Each collection behaves like a dictionary --- you can access items by name (\texttt{bpy.data.objects["Cube"]}) or iterate over all items.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Collection} & \tableheader{Data Type} \\
+\midrule
+\texttt{bpy.data.objects} & All objects (mesh, empty, camera, light, armature, etc.) \\
+\texttt{bpy.data.meshes} & Mesh data blocks \\
+\texttt{bpy.data.materials} & Materials \\
+\texttt{bpy.data.textures} & Textures \\
+\texttt{bpy.data.images} & Images \\
+\texttt{bpy.data.cameras} & Camera data \\
+\texttt{bpy.data.lights} & Light data \\
+\texttt{bpy.data.armatures} & Armature data \\
+\texttt{bpy.data.actions} & Animation actions \\
+\texttt{bpy.data.scenes} & Scenes \\
+\texttt{bpy.data.worlds} & World environments \\
+\texttt{bpy.data.node\_groups} & Shader/Geometry Node groups \\
+\texttt{bpy.data.collections} & Scene collections \\
+\texttt{bpy.data.curves} & Curve data \\
+\texttt{bpy.data.fonts} & Font data \\
+\texttt{bpy.data.particles} & Particle system settings \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+When possible, manipulate data through \texttt{bpy.data} rather than \texttt{bpy.ops}. Direct data access is faster, does not require specific editor contexts, and avoids the overhead of operator polling. Reserve \texttt{bpy.ops} for operations that have no \texttt{bpy.data} equivalent (such as complex mesh operations or file I/O).
+\end{tipbox}
+
+\subsection{bpy.ops --- The Operator Layer}
+
+\texttt{bpy.ops} contains \textbf{operators} --- callable functions that perform actions. Every button, menu item, and tool in Blender maps to an operator. Operators are organized by category: \texttt{bpy.ops.object}, \texttt{bpy.ops.mesh}, \texttt{bpy.ops.render}, \texttt{bpy.ops.export\_scene}, and so on.
+
+\begin{lstlisting}
+import bpy
+
+# Add a UV sphere
+bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, location=(0, 0, 0))
+
+# Select all objects
+bpy.ops.object.select_all(action='SELECT')
+
+# Delete selected objects
+bpy.ops.object.delete()
+
+# Switch to edit mode
+bpy.ops.object.mode_set(mode='EDIT')
+
+# Export as FBX
+bpy.ops.export_scene.fbx(filepath="/tmp/output.fbx")
+
+# Render an image
+bpy.ops.render.render(write_still=True)
+\end{lstlisting}
+
+\textbf{Context requirements:} Operators require specific contexts. An operator designed for Edit Mode will fail if called in Object Mode. In Blender 4.0+, use \texttt{temp\_override()} to provide the correct context:
+
+\begin{lstlisting}
+# Context override example (Blender 4.0+ style)
+with bpy.context.temp_override(area=area, region=region):
+    bpy.ops.mesh.subdivide(number_cuts=2)
+\end{lstlisting}
+
+\begin{warningbox}
+The older dictionary-based context override syntax (\texttt{bpy.ops.mesh.subdivide(\{"area": area\}, number\_cuts=2)}) was removed in Blender 4.0. If you are porting scripts from Blender 3.x or earlier, replace all dictionary context overrides with \texttt{bpy.context.temp\_override()}.
+\end{warningbox}
+
+\textbf{Operator return values} tell you what happened:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Return Value} & \tableheader{Meaning} \\
+\midrule
+\texttt{\{'FINISHED'\}} & Operation completed successfully \\
+\texttt{\{'CANCELLED'\}} & Operation was cancelled \\
+\texttt{\{'RUNNING\_MODAL'\}} & Operator entered modal state (continues running) \\
+\texttt{\{'PASS\_THROUGH'\}} & Event was not handled, pass to other handlers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{bpy.context --- The State Layer}
+
+\texttt{bpy.context} provides \textbf{read-only access} to the current state of Blender --- what is selected, what mode is active, what the active object is, and so on. You cannot set values through \texttt{bpy.context} directly; you must use \texttt{bpy.data} or operators to change state.
+
+\begin{lstlisting}
+import bpy
+
+# Current mode
+print(bpy.context.mode)  # 'OBJECT', 'EDIT_MESH', 'POSE', etc.
+
+# Active object
+obj = bpy.context.active_object
+print(obj.name)
+
+# Selected objects
+for obj in bpy.context.selected_objects:
+    print(obj.name)
+
+# Current scene
+scene = bpy.context.scene
+print(scene.frame_current)
+
+# View layer
+vl = bpy.context.view_layer
+print(vl.name)
+\end{lstlisting}
+
+\subsection{bpy.props --- The Property System}
+
+\texttt{bpy.props} defines \textbf{custom properties} for operators, panels, and add-on classes. These create UI-visible, serializable properties that integrate with Blender's undo system, can be animated, and appear automatically in operator redo panels.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property Type} & \tableheader{Python Type} & \tableheader{UI Widget} \\
+\midrule
+\texttt{BoolProperty} & bool & Checkbox \\
+\texttt{BoolVectorProperty} & tuple of bool & Multiple checkboxes \\
+\texttt{IntProperty} & int & Number field / slider \\
+\texttt{IntVectorProperty} & tuple of int & Multiple number fields \\
+\texttt{FloatProperty} & float & Number field / slider \\
+\texttt{FloatVectorProperty} & tuple of float & Number fields / color picker \\
+\texttt{StringProperty} & str & Text field \\
+\texttt{EnumProperty} & str (identifier) & Dropdown / radio buttons \\
+\texttt{PointerProperty} & reference & Data-block selector \\
+\texttt{CollectionProperty} & list & Expandable list \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Here is how properties are declared on an operator class:
+
+\begin{lstlisting}
+import bpy
+from bpy.props import FloatProperty, EnumProperty, StringProperty
+
+class MyOperator(bpy.types.Operator):
+    bl_idname = "object.my_operator"
+    bl_label = "My Operator"
+
+    scale: FloatProperty(
+        name="Scale",
+        description="Scale factor",
+        default=1.0,
+        min=0.01,
+        max=100.0,
+    )
+
+    mode: EnumProperty(
+        name="Mode",
+        items=[
+            ('FAST', "Fast", "Quick processing"),
+            ('QUALITY', "Quality", "High quality processing"),
+        ],
+        default='FAST',
+    )
+
+    def execute(self, context):
+        print(f"Scale: {self.scale}, Mode: {self.mode}")
+        return {'FINISHED'}
+\end{lstlisting}
+
+\subsection{bpy.types --- The Type System}
+
+\texttt{bpy.types} contains \textbf{all Blender type definitions} --- every class that represents a Blender data structure. Custom operators, panels, menus, and node types inherit from \texttt{bpy.types} base classes.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Class} & \tableheader{Purpose} \\
+\midrule
+\texttt{bpy.types.Operator} & Base for custom operators \\
+\texttt{bpy.types.Panel} & Base for UI panels \\
+\texttt{bpy.types.Menu} & Base for dropdown menus \\
+\texttt{bpy.types.Header} & Base for editor headers \\
+\texttt{bpy.types.UIList} & Base for scrollable lists in the UI \\
+\texttt{bpy.types.PropertyGroup} & Base for custom grouped properties \\
+\texttt{bpy.types.AddonPreferences} & Base for add-on preference panels \\
+\texttt{bpy.types.NodeTree} & Base for custom node trees \\
+\texttt{bpy.types.Node} & Base for custom nodes \\
+\texttt{bpy.types.RenderEngine} & Base for custom render engines \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{bpy.app --- Application Information and Handlers}
+
+\texttt{bpy.app} provides \textbf{application-level information and event handlers}. The handlers system is especially powerful --- it lets you register callback functions that fire on specific events like frame changes, renders, file loads, and undo operations.
+
+\begin{lstlisting}
+import bpy
+
+# Blender version
+print(bpy.app.version)          # (4, 4, 0)
+print(bpy.app.version_string)   # "4.4.0"
+
+# File path
+print(bpy.app.binary_path)      # Path to blender executable
+
+# Application handlers (callbacks)
+def on_frame_change(scene):
+    print(f"Frame: {scene.frame_current}")
+
+bpy.app.handlers.frame_change_post.append(on_frame_change)
+\end{lstlisting}
+
+The complete set of available handlers:
+
+\begin{itemize}[leftmargin=2em]
+  \item \texttt{frame\_change\_pre}, \texttt{frame\_change\_post} --- before and after frame changes
+  \item \texttt{render\_pre}, \texttt{render\_post}, \texttt{render\_complete}, \texttt{render\_cancel} --- render lifecycle
+  \item \texttt{load\_pre}, \texttt{load\_post} --- file load events
+  \item \texttt{save\_pre}, \texttt{save\_post} --- file save events
+  \item \texttt{depsgraph\_update\_pre}, \texttt{depsgraph\_update\_post} --- dependency graph updates
+  \item \texttt{undo\_pre}, \texttt{undo\_post} --- undo/redo events
+\end{itemize}
+
+\begin{tipbox}
+Application handlers are persistent across file loads if you decorate them with \texttt{@bpy.app.handlers.persistent}. Without this decorator, handlers are cleared when a new file is loaded. Always use the persistent decorator for handlers registered by add-ons.
+\end{tipbox}
+
+\subsection{bpy.path --- File Path Utilities}
+
+\texttt{bpy.path} provides \textbf{file path utilities} specific to Blender's path conventions. Blender uses \texttt{//} as a prefix to denote paths relative to the current \texttt{.blend} file:
+
+\begin{lstlisting}
+import bpy
+
+# Resolve a Blender-relative path to absolute
+abs_path = bpy.path.abspath("//textures/diffuse.png")
+
+# Make a path relative to the .blend file
+rel_path = bpy.path.relpath("/home/user/project/textures/diffuse.png")
+
+# Clean up a file path (sanitize for use as filename)
+clean = bpy.path.clean_name("My Object: Version 2")  # "My_Object__Version_2"
+\end{lstlisting}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{mathutils: Vectors, Matrices, and Rotations}
+\label{sec:scripting-mathutils}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+The \texttt{mathutils} module provides mathematical types for 3D transformations. It is tightly integrated with Blender's data structures --- object locations, rotations, and scales are all \texttt{mathutils} types. If you are working with geometry, transforms, or animation in scripts, you will use \texttt{mathutils} constantly.
+
+\subsection{Vector}
+
+Vectors represent positions, directions, and displacements in 2D, 3D, or 4D space:
+
+\begin{lstlisting}
+from mathutils import Vector
+
+# Create vectors
+v1 = Vector((1.0, 2.0, 3.0))
+v2 = Vector((4.0, 5.0, 6.0))
+
+# Operations
+v3 = v1 + v2              # Vector addition
+v4 = v1 - v2              # Vector subtraction
+v5 = v1 * 2.0             # Scalar multiplication
+v6 = v1.cross(v2)         # Cross product
+dot = v1.dot(v2)          # Dot product
+length = v1.length        # Magnitude
+normalized = v1.normalized()  # Unit vector
+
+# Component access
+x, y, z = v1.x, v1.y, v1.z
+v1.xy                     # 2D slice (Vector((1.0, 2.0)))
+
+# Distance between points
+dist = (v1 - v2).length
+
+# Linear interpolation
+v_mid = v1.lerp(v2, 0.5)  # Midpoint
+\end{lstlisting}
+
+\subsection{Matrix}
+
+Matrices represent transformations --- translation, rotation, scale, and arbitrary combinations thereof. Blender uses 4$\times$4 matrices for 3D transforms (the fourth row/column enables translation via homogeneous coordinates).
+
+\begin{lstlisting}
+from mathutils import Matrix, Vector
+import math
+
+# Identity matrix
+m = Matrix.Identity(4)
+
+# Translation matrix
+m_translate = Matrix.Translation(Vector((1.0, 2.0, 3.0)))
+
+# Rotation matrix (angle in radians, axis)
+m_rotate = Matrix.Rotation(math.radians(45), 4, 'Z')
+
+# Scale matrix
+m_scale = Matrix.Diagonal(Vector((2.0, 2.0, 2.0, 1.0)))
+
+# Combine transforms (matrix multiplication, order matters!)
+# Scale first, then rotate, then translate:
+m_combined = m_translate @ m_rotate @ m_scale
+
+# Apply to a vector
+v = Vector((1.0, 0.0, 0.0))
+v_transformed = m_combined @ v
+
+# Invert a matrix
+m_inv = m_combined.inverted()
+
+# Decompose into components
+loc, rot, scale = m_combined.decompose()
+# loc = Vector, rot = Quaternion, scale = Vector
+\end{lstlisting}
+
+\begin{warningbox}
+Matrix multiplication order matters. In Blender (and standard linear algebra convention), \texttt{m\_translate @ m\_rotate @ m\_scale} applies scale \textit{first}, then rotation, then translation. If you reverse the order, you get a completely different result. Remember: the rightmost matrix is applied first.
+\end{warningbox}
+
+\subsection{Quaternion}
+
+Quaternions represent rotations without gimbal lock and interpolate smoothly. They are the preferred rotation representation for animation (see Chapter~\ref{ch:animation} for why gimbal lock matters).
+
+\begin{lstlisting}
+from mathutils import Quaternion, Vector, Euler
+import math
+
+# Create from axis-angle
+q = Quaternion(Vector((0, 0, 1)), math.radians(90))  # 90 deg around Z
+
+# Create from Euler
+euler = Euler((math.radians(45), 0, 0), 'XYZ')
+q = euler.to_quaternion()
+
+# Multiply quaternions (combines rotations)
+q1 = Quaternion(Vector((1, 0, 0)), math.radians(45))
+q2 = Quaternion(Vector((0, 1, 0)), math.radians(30))
+q_combined = q1 @ q2
+
+# Spherical interpolation (slerp)
+q_mid = q1.slerp(q2, 0.5)
+
+# Rotate a vector
+v = Vector((1, 0, 0))
+v_rotated = q @ v
+
+# Convert to matrix
+m = q.to_matrix().to_4x4()
+
+# Conjugate and inverse
+q_conj = q.conjugated()
+q_inv = q.inverted()
+\end{lstlisting}
+
+\subsection{Euler}
+
+Euler angles represent rotations as three sequential rotations around coordinate axes. They are intuitive for artists but suffer from gimbal lock:
+
+\begin{lstlisting}
+from mathutils import Euler
+import math
+
+# Create Euler angles (radians, rotation order)
+e = Euler((math.radians(45), math.radians(30), math.radians(60)), 'XYZ')
+
+# Access components
+print(e.x, e.y, e.z)       # In radians
+print(e.order)              # 'XYZ'
+
+# Rotate around an axis
+e.rotate_axis('Z', math.radians(15))
+
+# Convert to other representations
+q = e.to_quaternion()
+m = e.to_matrix()
+
+# Available rotation orders:
+# 'XYZ', 'XZY', 'YXZ', 'YZX', 'ZXY', 'ZYX'
+\end{lstlisting}
+
+\begin{tipbox}
+Use Quaternions for programmatic rotation and interpolation. Use Euler angles when you need human-readable rotation values or when interfacing with Blender's UI (which displays Euler angles in the Properties panel). Convert between them freely using \texttt{.to\_quaternion()} and \texttt{.to\_euler()}.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{The Scripting Workspace and Text Editor}
+\label{sec:scripting-workspace}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Scripting Workspace Layout}
+
+Blender's \textbf{Scripting} workspace is a pre-configured layout designed for script development:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Panel} & \tableheader{Purpose} \\
+\midrule
+3D Viewport & See results of script operations \\
+Text Editor & Write and run Python scripts \\
+Python Console & Interactive testing \\
+Info Editor & View Python log of GUI operations \\
+Properties & Standard properties panel \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Text Editor Features and Shortcuts}
+
+The Text Editor is Blender's built-in code editor. It lacks the sophistication of VS Code or PyCharm, but it is sufficient for quick scripts and prototyping:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Feature} & \tableheader{Shortcut} & \tableheader{Description} \\
+\midrule
+Run Script & \textbf{Alt+P} & Execute the active text block \\
+Line Numbers & (toggle in header) & Show line numbers \\
+Syntax Highlighting & (automatic for .py) & Python syntax coloring \\
+Word Wrap & (toggle in header) & Wrap long lines \\
+Find & \textbf{Ctrl+F} & Search within the script \\
+Replace & \textbf{Ctrl+H} & Find and replace \\
+Comment & \textbf{Ctrl+/} & Toggle comment on selected lines \\
+Autocomplete & \textbf{Ctrl+Space} & Basic code completion \\
+Register & (checkbox in header) & Registers the script on file load \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{shortcutbox}
+\textbf{Alt+P} is the single most important shortcut in this chapter. It runs the current script in the Text Editor. You will press it hundreds of times as you develop and test scripts. The script executes in Blender's main thread, so the UI will freeze during long operations --- this is normal.
+\end{shortcutbox}
+
+\subsection{External Editor Integration}
+
+For serious development, use an external IDE. The workflow is:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Save scripts as external \texttt{.py} files
+  \item Open them in VS Code, PyCharm, or any editor
+  \item Install the \textbf{fake-bpy-module} package for autocomplete: \texttt{pip install fake-bpy-module-4.4}
+  \item In Blender's Text Editor, use \textbf{Text > Open} to reference the external file
+  \item After editing externally, use \textbf{Text > Reload} or \textbf{Alt+R} to refresh
+\end{enumerate}
+
+The \texttt{fake-bpy-module} package provides type stubs for \texttt{bpy}, \texttt{mathutils}, and other Blender modules. This gives your IDE full autocomplete, type checking, and documentation tooltips even though Blender's actual Python modules are only available inside the running application.
+
+\begin{tipbox}
+For large add-on projects, use VS Code with the Python extension and \texttt{fake-bpy-module}. Set up a \texttt{.vscode/settings.json} with the path to Blender's Python interpreter for the best development experience. You can also use \texttt{debugpy} to attach VS Code's debugger to a running Blender instance for breakpoint debugging.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Writing Operators}
+\label{sec:scripting-operators}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Operators are the fundamental unit of action in Blender. Every tool, every menu command, every button click invokes an operator. When you write a custom operator, you are creating a first-class citizen in Blender's action system --- it can appear in menus, be bound to hotkeys, support undo, and show up in the operator search (\textbf{F3}).
+
+\subsection{Operator Anatomy}
+
+An operator is a Python class that inherits from \texttt{bpy.types.Operator}:
+
+\begin{lstlisting}
+import bpy
+
+class OBJECT_OT_simple_example(bpy.types.Operator):
+    """Tooltip: This operator does something useful"""
+
+    bl_idname = "object.simple_example"    # Unique identifier
+    bl_label = "Simple Example Operator"    # Display name
+    bl_description = "Performs the example operation"  # Tooltip
+    bl_options = {'REGISTER', 'UNDO'}       # Options set
+
+    def execute(self, context):
+        """Called when the operator runs."""
+        self.report({'INFO'}, "Operation completed!")
+        return {'FINISHED'}
+\end{lstlisting}
+
+\subsection{bl\_idname Naming Convention}
+
+The \texttt{bl\_idname} follows the pattern \texttt{CATEGORY.operator\_name}:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Category} & \tableheader{Use For} \\
+\midrule
+\texttt{object} & Object-level operations \\
+\texttt{mesh} & Mesh editing operations \\
+\texttt{view3d} & 3D Viewport operations \\
+\texttt{render} & Rendering operations \\
+\texttt{wm} & Window manager (dialogs, file browsers) \\
+\texttt{import\_scene} & File import \\
+\texttt{export\_scene} & File export \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Rules: lowercase only, words separated by underscores, single dot separator. The class name must follow the pattern \texttt{CATEGORY\_OT\_name} (where \texttt{OT} stands for Operator Type).
+
+\subsection{bl\_options Flags}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Flag} & \tableheader{Meaning} \\
+\midrule
+\texttt{'REGISTER'} & Operator appears in the Info editor log and can be repeated with F3 \\
+\texttt{'UNDO'} & Operation supports Ctrl+Z undo \\
+\texttt{'BLOCKING'} & Operator blocks the UI while running \\
+\texttt{'INTERNAL'} & Hidden from search and menus; only callable from other scripts \\
+\texttt{'PRESET'} & Enables the preset system in the operator's redo panel \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Operator Methods}
+
+Each method in an operator class serves a specific role in the operator lifecycle:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.2cm}X L{3cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Method} & \tableheader{When Called} & \tableheader{Must Return} \\
+\midrule
+\texttt{execute} & When the operator runs directly & \texttt{\{'FINISHED'\}}, \texttt{\{'CANCELLED'\}} \\
+\texttt{invoke} & When called from the UI (allows user input first) & \texttt{\{'FINISHED'\}}, \texttt{\{'CANCELLED'\}}, \texttt{\{'RUNNING\_MODAL'\}} \\
+\texttt{modal} & Called repeatedly for modal operators (every input event / timer) & \texttt{\{'RUNNING\_MODAL'\}}, \texttt{\{'FINISHED'\}}, \texttt{\{'CANCELLED'\}}, \texttt{\{'PASS\_THROUGH'\}} \\
+\texttt{draw} & Draws the redo panel / popup UI & None \\
+\texttt{poll} & Class method to check if operator can run & True/False \\
+\texttt{cancel} & Called when a modal operator is cancelled & None \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{The poll() Method}
+
+\texttt{poll()} is a \texttt{@classmethod} that Blender calls to determine whether the operator's button should be active (enabled) in the UI. If \texttt{poll()} returns \texttt{False}, the button is grayed out:
+
+\begin{lstlisting}
+@classmethod
+def poll(cls, context):
+    # Only enable if there is an active object and it's a mesh
+    return (context.active_object is not None and
+            context.active_object.type == 'MESH')
+\end{lstlisting}
+
+\subsection{invoke() for User Interaction}
+
+\texttt{invoke()} is called when the user activates the operator through the UI. It can open dialogs, file browsers, or enter modal state:
+
+\begin{lstlisting}
+def invoke(self, context, event):
+    # Open a popup dialog with operator properties
+    return context.window_manager.invoke_props_dialog(self)
+
+# Or open a file browser
+def invoke(self, context, event):
+    context.window_manager.fileselect_add(self)
+    return {'RUNNING_MODAL'}
+\end{lstlisting}
+
+\subsection{Modal Operators}
+
+Modal operators run continuously, receiving input events until they finish or are cancelled. They are used for interactive tools, viewport drawing, progress tracking, and any operation that needs to respond to user input over time:
+
+\begin{lstlisting}
+class OBJECT_OT_modal_timer(bpy.types.Operator):
+    bl_idname = "object.modal_timer"
+    bl_label = "Modal Timer Operator"
+
+    _timer = None
+
+    def modal(self, context, event):
+        if event.type == 'TIMER':
+            # Do periodic work
+            print("Timer tick")
+        elif event.type == 'ESC':
+            self.cancel(context)
+            return {'CANCELLED'}
+        return {'RUNNING_MODAL'}
+
+    def invoke(self, context, event):
+        self._timer = context.window_manager.event_timer_add(
+            0.1, window=context.window
+        )
+        context.window_manager.modal_handler_add(self)
+        return {'RUNNING_MODAL'}
+
+    def cancel(self, context):
+        context.window_manager.event_timer_remove(self._timer)
+\end{lstlisting}
+
+\begin{furrybox}
+Modal operators are essential for \textbf{interactive furry grooming tools}. A modal operator that listens for mouse events can provide real-time brush strokes for particle hair styling, with immediate visual feedback in the viewport. The timer pattern shown above can drive animated previews of hair physics while the artist adjusts groom parameters.
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Writing Panels}
+\label{sec:scripting-panels}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Panels create UI sections in Blender's Properties editor, sidebar (N-panel), or other editor regions. They are how you give your operators a home in the interface.
+
+\subsection{Panel Anatomy}
+
+\begin{lstlisting}
+import bpy
+
+class VIEW3D_PT_my_panel(bpy.types.Panel):
+    bl_label = "My Custom Panel"
+    bl_idname = "VIEW3D_PT_my_panel"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = "My Tools"      # Tab name in the sidebar
+
+    def draw(self, context):
+        layout = self.layout
+        obj = context.active_object
+
+        if obj:
+            layout.label(text=f"Active: {obj.name}")
+            layout.prop(obj, "location")
+            layout.prop(obj, "rotation_euler")
+            layout.prop(obj, "scale")
+            layout.operator("object.simple_example")
+        else:
+            layout.label(text="No active object")
+\end{lstlisting}
+
+\subsection{Panel Placement}
+
+The \texttt{bl\_space\_type} and \texttt{bl\_region\_type} attributes determine where the panel appears:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.8cm}L{2.8cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{bl\_space\_type} & \tableheader{bl\_region\_type} & \tableheader{Location} \\
+\midrule
+\texttt{'VIEW\_3D'} & \texttt{'UI'} & 3D Viewport Sidebar (N-panel) \\
+\texttt{'VIEW\_3D'} & \texttt{'TOOLS'} & 3D Viewport Tool Shelf (T-panel) \\
+\texttt{'PROPERTIES'} & \texttt{'WINDOW'} & Properties Editor (requires \texttt{bl\_context}) \\
+\texttt{'NODE\_EDITOR'} & \texttt{'UI'} & Node Editor Sidebar \\
+\texttt{'IMAGE\_EDITOR'} & \texttt{'UI'} & Image Editor Sidebar \\
+\texttt{'DOPESHEET\_EDITOR'} & \texttt{'UI'} & Dope Sheet Sidebar \\
+\texttt{'SEQUENCE\_EDITOR'} & \texttt{'UI'} & VSE Sidebar \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+For Properties panels, set \texttt{bl\_context} to one of: \texttt{"object"}, \texttt{"modifier"}, \texttt{"particle"}, \texttt{"physics"}, \texttt{"constraint"}, \texttt{"data"}, \texttt{"material"}, \texttt{"texture"}, \texttt{"render"}, \texttt{"output"}, \texttt{"scene"}, \texttt{"world"}.
+
+\subsection{Layout Methods}
+
+The layout system provides composable building blocks for creating UI:
+
+\begin{lstlisting}
+def draw(self, context):
+    layout = self.layout
+
+    # Row (horizontal)
+    row = layout.row()
+    row.prop(obj, "location", text="X")
+    row.prop(obj, "scale", text="S")
+
+    # Column (vertical)
+    col = layout.column()
+    col.prop(obj, "name")
+    col.prop(obj, "location")
+
+    # Box (bordered group)
+    box = layout.box()
+    box.label(text="Settings")
+    box.prop(obj, "show_name")
+
+    # Split (proportional columns)
+    split = layout.split(factor=0.3)
+    split.label(text="Label:")
+    split.prop(obj, "name", text="")
+
+    # Separator
+    layout.separator()
+
+    # Operator button
+    layout.operator("object.simple_example", text="Run", icon='PLAY')
+
+    # Enabled/disabled state
+    row = layout.row()
+    row.enabled = (context.active_object is not None)
+    row.operator("object.delete")
+
+    # Alert styling
+    row = layout.row()
+    row.alert = True
+    row.label(text="Warning!", icon='ERROR')
+\end{lstlisting}
+
+\subsection{Sub-Panels}
+
+Create collapsible sub-sections using \texttt{bl\_parent\_id}:
+
+\begin{lstlisting}
+class VIEW3D_PT_my_panel_sub(bpy.types.Panel):
+    bl_label = "Advanced Settings"
+    bl_idname = "VIEW3D_PT_my_panel_sub"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = "My Tools"
+    bl_parent_id = "VIEW3D_PT_my_panel"
+    bl_options = {'DEFAULT_CLOSED'}
+
+    def draw(self, context):
+        self.layout.label(text="Advanced content here")
+\end{lstlisting}
+
+\begin{furrybox}
+\textbf{Custom panel for fursuit color testing:} Build a panel in the 3D Viewport sidebar that exposes your character's material color properties directly. Use \texttt{FloatVectorProperty} with \texttt{subtype='COLOR'} to create color swatches, and add operator buttons that swap between predefined color palettes. This lets you rapidly test different fur color schemes without navigating to the Shader Editor --- invaluable when a commissioner says ``can I see it in arctic fox white instead?''
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Writing Menus and Pie Menus}
+\label{sec:scripting-menus}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Standard Menus}
+
+Menus are dropdown lists of operators. You can create new menus or append items to existing ones:
+
+\begin{lstlisting}
+import bpy
+
+class VIEW3D_MT_my_menu(bpy.types.Menu):
+    bl_idname = "VIEW3D_MT_my_menu"
+    bl_label = "My Custom Menu"
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator("mesh.primitive_cube_add",
+                        text="Add Cube", icon='MESH_CUBE')
+        layout.operator("mesh.primitive_uv_sphere_add",
+                        text="Add Sphere", icon='MESH_UVSPHERE')
+        layout.separator()
+        layout.operator("object.delete",
+                        text="Delete Selected", icon='X')
+
+# Append to an existing menu
+def draw_menu_item(self, context):
+    self.layout.menu("VIEW3D_MT_my_menu")
+
+bpy.types.VIEW3D_MT_add.append(draw_menu_item)
+\end{lstlisting}
+
+\subsection{Pie Menus}
+
+Pie menus are radial menus activated by a keyboard shortcut. Items are placed in compass order: West, East, South, North, Northwest, Northeast, Southwest, Southeast (up to 8 items):
+
+\begin{lstlisting}
+import bpy
+
+class VIEW3D_MT_PIE_my_pie(bpy.types.Menu):
+    bl_idname = "VIEW3D_MT_PIE_my_pie"
+    bl_label = "My Pie Menu"
+
+    def draw(self, context):
+        layout = self.layout
+        pie = layout.menu_pie()
+
+        # Items placed in compass order: W, E, S, N, NW, NE, SW, SE
+        pie.operator("mesh.primitive_cube_add",
+                     text="Cube", icon='MESH_CUBE')
+        pie.operator("mesh.primitive_uv_sphere_add",
+                     text="Sphere", icon='MESH_UVSPHERE')
+        pie.operator("mesh.primitive_cylinder_add",
+                     text="Cylinder", icon='MESH_CYLINDER')
+        pie.operator("mesh.primitive_cone_add",
+                     text="Cone", icon='MESH_CONE')
+        pie.operator("mesh.primitive_torus_add",
+                     text="Torus", icon='MESH_TORUS')
+        pie.operator("mesh.primitive_plane_add",
+                     text="Plane", icon='MESH_PLANE')
+        pie.operator("mesh.primitive_ico_sphere_add",
+                     text="Ico Sphere", icon='MESH_ICOSPHERE')
+        pie.operator("mesh.primitive_grid_add",
+                     text="Grid", icon='MESH_GRID')
+\end{lstlisting}
+
+\subsection{Registering Hotkeys}
+
+Menus and operators can be bound to keyboard shortcuts through Blender's keymap system:
+
+\begin{lstlisting}
+addon_keymaps = []
+
+def register():
+    bpy.utils.register_class(VIEW3D_MT_PIE_my_pie)
+
+    wm = bpy.context.window_manager
+    kc = wm.keyconfigs.addon
+    if kc:
+        km = kc.keymaps.new(name='3D View', space_type='VIEW_3D')
+        kmi = km.keymap_items.new(
+            'wm.call_menu_pie', 'A', 'PRESS',
+            shift=True, ctrl=True
+        )
+        kmi.properties.name = "VIEW3D_MT_PIE_my_pie"
+        addon_keymaps.append((km, kmi))
+
+def unregister():
+    for km, kmi in addon_keymaps:
+        km.keymap_items.remove(kmi)
+    addon_keymaps.clear()
+    bpy.utils.unregister_class(VIEW3D_MT_PIE_my_pie)
+\end{lstlisting}
+
+\begin{warningbox}
+Always clean up keymaps in \texttt{unregister()}. If you forget, hotkeys from disabled add-ons will persist until Blender is restarted. Store keymap items in a module-level list (like \texttt{addon\_keymaps} above) so they can be reliably removed.
+\end{warningbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Add-on Structure}
+\label{sec:scripting-addons}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Add-ons are the packaging mechanism for distributing reusable Blender functionality. They range from single-file scripts to complex multi-module packages with their own preferences, keymaps, and UI.
+
+\subsection{Single-File Add-on}
+
+The simplest add-on is a single \texttt{.py} file with three required components: \texttt{bl\_info}, \texttt{register()}, and \texttt{unregister()}:
+
+\begin{lstlisting}
+bl_info = {
+    "name": "My Simple Add-on",
+    "author": "Your Name",
+    "version": (1, 0, 0),
+    "blender": (4, 4, 0),
+    "location": "View3D > Sidebar > My Tools",
+    "description": "A simple example add-on",
+    "warning": "",
+    "doc_url": "https://example.com/docs",
+    "tracker_url": "https://example.com/issues",
+    "category": "Object",
+}
+
+import bpy
+
+class OBJECT_OT_my_addon_operator(bpy.types.Operator):
+    bl_idname = "object.my_addon_operator"
+    bl_label = "My Add-on Operator"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    def execute(self, context):
+        self.report({'INFO'}, "Add-on operator executed!")
+        return {'FINISHED'}
+
+class VIEW3D_PT_my_addon_panel(bpy.types.Panel):
+    bl_label = "My Add-on"
+    bl_idname = "VIEW3D_PT_my_addon_panel"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = "My Tools"
+
+    def draw(self, context):
+        self.layout.operator("object.my_addon_operator")
+
+classes = (
+    OBJECT_OT_my_addon_operator,
+    VIEW3D_PT_my_addon_panel,
+)
+
+def register():
+    for cls in classes:
+        bpy.utils.register_class(cls)
+
+def unregister():
+    for cls in reversed(classes):
+        bpy.utils.unregister_class(cls)
+
+if __name__ == "__main__":
+    register()
+\end{lstlisting}
+
+\subsection{bl\_info Dictionary}
+
+The \texttt{bl\_info} dictionary is read by Blender's add-on system to display metadata in Preferences:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Key} & \tableheader{Type} & \tableheader{Description} \\
+\midrule
+\texttt{"name"} & str & Display name in Preferences \\
+\texttt{"author"} & str & Author name(s) \\
+\texttt{"version"} & tuple & Add-on version (major, minor, patch) \\
+\texttt{"blender"} & tuple & Minimum Blender version required \\
+\texttt{"location"} & str & Where to find the add-on in the UI \\
+\texttt{"description"} & str & Short description (shown in Preferences) \\
+\texttt{"warning"} & str & Warning text (shown in red) \\
+\texttt{"doc\_url"} & str & Documentation URL \\
+\texttt{"tracker\_url"} & str & Bug tracker URL \\
+\texttt{"category"} & str & Category (Object, Mesh, Animation, Render, etc.) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Multi-File Add-on Package}
+
+For larger add-ons, use a package (directory with \texttt{\_\_init\_\_.py}):
+
+\begin{codebox}
+\begin{verbatim}
+my_addon/
+    __init__.py         # bl_info, register(), unregister()
+    operators.py        # Operator classes
+    panels.py           # Panel classes
+    properties.py       # PropertyGroup classes
+    preferences.py      # AddonPreferences class
+    utils.py            # Helper functions
+\end{verbatim}
+\end{codebox}
+
+The \texttt{\_\_init\_\_.py} must handle module reloading for the \textbf{F3 > Reload Scripts} workflow:
+
+\begin{lstlisting}
+bl_info = {
+    "name": "My Multi-File Add-on",
+    "blender": (4, 4, 0),
+    "category": "Object",
+    "version": (2, 0, 0),
+    "author": "Your Name",
+    "description": "A multi-file add-on example",
+}
+
+import importlib
+
+if "bpy" in locals():
+    importlib.reload(operators)
+    importlib.reload(panels)
+    importlib.reload(properties)
+else:
+    from . import operators
+    from . import panels
+    from . import properties
+
+import bpy
+
+def register():
+    properties.register()
+    operators.register()
+    panels.register()
+
+def unregister():
+    panels.unregister()
+    operators.unregister()
+    properties.unregister()
+\end{lstlisting}
+
+The \texttt{if "bpy" in locals()} pattern is critical: it detects whether this module has been imported before. On first import, the submodules are imported normally. On subsequent imports (triggered by script reloading), \texttt{importlib.reload()} is used to refresh them. Without this pattern, code changes in submodules are not picked up when you reload scripts.
+
+\subsection{Installation}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{User install:} Preferences > Add-ons > Install > select \texttt{.py} file or \texttt{.zip} of package
+  \item \textbf{Script path:} Files go to \texttt{BLENDER\_USER\_SCRIPTS/addons/} (or the default user scripts directory)
+  \item \textbf{Enable:} Search for the add-on name in Preferences > Add-ons and check the enable box
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Add-on Preferences and User Properties}
+\label{sec:scripting-preferences}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{AddonPreferences}
+
+Add-on preferences create a settings panel visible in Preferences > Add-ons > (your add-on). These are stored in the user preferences file and persist across sessions:
+
+\begin{lstlisting}
+class MyAddonPreferences(bpy.types.AddonPreferences):
+    bl_idname = __name__  # Must match the add-on module name
+
+    output_path: bpy.props.StringProperty(
+        name="Output Path",
+        description="Default output directory",
+        default="//output/",
+        subtype='DIR_PATH',
+    )
+
+    quality: bpy.props.EnumProperty(
+        name="Quality",
+        items=[
+            ('LOW', "Low", "Fast but low quality"),
+            ('MEDIUM', "Medium", "Balanced"),
+            ('HIGH', "High", "Slow but high quality"),
+        ],
+        default='MEDIUM',
+    )
+
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "output_path")
+        layout.prop(self, "quality")
+\end{lstlisting}
+
+\textbf{Accessing preferences from operator code:}
+
+\begin{lstlisting}
+def execute(self, context):
+    prefs = context.preferences.addons[__name__].preferences
+    output = prefs.output_path
+    quality = prefs.quality
+    # ... use settings
+\end{lstlisting}
+
+\subsection{Scene-Level Custom Properties}
+
+For settings that vary per-scene or per-object, use \texttt{PropertyGroup}s registered on the appropriate Blender type:
+
+\begin{lstlisting}
+class MySceneProperties(bpy.types.PropertyGroup):
+    my_float: bpy.props.FloatProperty(name="My Float", default=1.0)
+    my_bool: bpy.props.BoolProperty(name="My Bool", default=False)
+    my_string: bpy.props.StringProperty(name="My String", default="hello")
+
+def register():
+    bpy.utils.register_class(MySceneProperties)
+    bpy.types.Scene.my_props = bpy.props.PointerProperty(
+        type=MySceneProperties
+    )
+
+def unregister():
+    del bpy.types.Scene.my_props
+    bpy.utils.unregister_class(MySceneProperties)
+
+# Access in operator or panel:
+# context.scene.my_props.my_float
+\end{lstlisting}
+
+\begin{tipbox}
+Use \texttt{AddonPreferences} for settings that are the same across all files (output paths, quality defaults, API keys). Use scene-level \texttt{PropertyGroup}s for settings that should be saved per-file (project-specific parameters, per-scene configurations). Use object-level properties (registered on \texttt{bpy.types.Object}) for per-object data.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Complete Script Examples}
+\label{sec:scripting-examples}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+This section presents six complete, production-ready scripts. Each is tested and ready to use --- copy them into Blender's Text Editor and run with \textbf{Alt+P}, or save as external files. These scripts demonstrate increasing complexity: from simple data manipulation to full add-on operators.
+
+\subsection{Script 1: Batch Renaming Objects by Pattern}
+
+Renames all selected objects using a prefix with zero-padded index numbering. This is a common production task when organizing scenes with many similar objects.
+
+\begin{lstlisting}
+"""
+Batch Rename Objects by Pattern
+Renames all selected objects using a pattern with index numbering.
+Run in Blender's Text Editor with objects selected.
+"""
+import bpy
+
+def batch_rename(prefix="Object", start_index=1, padding=3):
+    """Rename all selected objects with a prefix and
+    zero-padded index.
+
+    Args:
+        prefix: Name prefix for all objects.
+        start_index: Starting index number.
+        padding: Zero-padding width for the index.
+    """
+    selected = bpy.context.selected_objects
+
+    if not selected:
+        print("No objects selected.")
+        return
+
+    # Sort by name for deterministic ordering
+    selected.sort(key=lambda obj: obj.name)
+
+    for i, obj in enumerate(selected, start=start_index):
+        old_name = obj.name
+        new_name = f"{prefix}_{str(i).zfill(padding)}"
+        obj.name = new_name
+        print(f"Renamed: {old_name} -> {new_name}")
+
+    print(f"\nRenamed {len(selected)} objects with prefix "
+          f"'{prefix}'.")
+
+
+# Run the script
+batch_rename(prefix="Chair", start_index=1, padding=3)
+# Result: Chair_001, Chair_002, Chair_003, ...
+\end{lstlisting}
+
+\subsection{Script 2: Mass Export Selected Objects to FBX/glTF}
+
+Exports each selected object as an individual file. This is essential for game asset pipelines where each object needs to be a separate file.
+
+\begin{lstlisting}
+"""
+Mass Export Selected Objects to Individual FBX or glTF Files
+Each selected object is exported as a separate file.
+Run in Blender's Text Editor.
+"""
+import bpy
+import os
+
+def mass_export(
+    output_dir="/tmp/exports",
+    file_format="FBX",  # "FBX" or "GLTF"
+    apply_modifiers=True,
+):
+    """Export each selected object as an individual file."""
+    os.makedirs(output_dir, exist_ok=True)
+
+    selected = bpy.context.selected_objects
+    if not selected:
+        print("No objects selected.")
+        return
+
+    # Store original selection
+    original_active = bpy.context.active_object
+
+    for obj in selected:
+        # Deselect all, select only this object
+        bpy.ops.object.select_all(action='DESELECT')
+        obj.select_set(True)
+        bpy.context.view_layer.objects.active = obj
+
+        # Build file path
+        safe_name = bpy.path.clean_name(obj.name)
+
+        if file_format == "FBX":
+            filepath = os.path.join(output_dir,
+                                    f"{safe_name}.fbx")
+            bpy.ops.export_scene.fbx(
+                filepath=filepath,
+                use_selection=True,
+                apply_scale_options='FBX_SCALE_ALL',
+                use_mesh_modifiers=apply_modifiers,
+                mesh_smooth_type='FACE',
+                add_leaf_bones=False,
+            )
+        elif file_format == "GLTF":
+            filepath = os.path.join(output_dir,
+                                    f"{safe_name}.glb")
+            bpy.ops.export_scene.gltf(
+                filepath=filepath,
+                use_selection=True,
+                export_apply=apply_modifiers,
+                export_format='GLB',
+            )
+
+        print(f"Exported: {obj.name} -> {filepath}")
+
+    # Restore original selection
+    bpy.ops.object.select_all(action='DESELECT')
+    for obj in selected:
+        obj.select_set(True)
+    bpy.context.view_layer.objects.active = original_active
+
+    print(f"\nExported {len(selected)} objects to {output_dir}")
+
+
+# Run the script
+mass_export(output_dir="/tmp/my_exports", file_format="GLTF")
+\end{lstlisting}
+
+\begin{furrybox}
+\textbf{Batch export for VRChat avatar variants:} The mass export script above is the foundation for a VRChat avatar workflow. If you have a base character with multiple outfit or color variants stored as separate objects or collections, modify this script to iterate over collections instead of objects. Export each variant as a separate \texttt{.fbx} file with the correct Unity scale settings (\texttt{apply\_scale\_options='FBX\_SCALE\_ALL'}), and you have a one-click pipeline for updating all your avatar variants simultaneously. See Chapter~\ref{ch:furryarts} for the complete VRChat avatar workflow.
+\end{furrybox}
+
+\subsection{Script 3: Procedural Scene Generation from CSV Data}
+
+Reads a CSV file and generates a 3D bar chart in the scene. This demonstrates how to create geometry, materials, and text objects programmatically.
+
+\begin{lstlisting}
+"""
+Procedural 3D Bar Chart from CSV Data
+Reads a CSV file and generates a 3D bar chart in the scene.
+Run in Blender's Text Editor.
+"""
+import bpy
+import csv
+import os
+
+def create_bar_chart(
+    csv_path="/tmp/data.csv",
+    bar_width=0.8,
+    bar_gap=0.3,
+    height_scale=1.0,
+    color=(0.2, 0.5, 1.0, 1.0),
+):
+    """Generate a 3D bar chart from CSV data.
+
+    Expected CSV format:
+        Label,Value
+        January,150
+        February,230
+    """
+    # Read CSV data
+    data = []
+    if os.path.exists(csv_path):
+        with open(csv_path, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                label = row.get('Label', row.get('label', ''))
+                value = float(
+                    row.get('Value', row.get('value', 0))
+                )
+                data.append((label, value))
+    else:
+        # Demo data if no CSV file exists
+        data = [
+            ("Q1", 120), ("Q2", 180), ("Q3", 95),
+            ("Q4", 210), ("Q5", 160), ("Q6", 240),
+        ]
+        print(f"CSV not found. Using demo data.")
+
+    if not data:
+        print("No data to chart.")
+        return
+
+    # Create a collection for the chart
+    chart_collection = bpy.data.collections.new("Bar Chart")
+    bpy.context.scene.collection.children.link(chart_collection)
+
+    # Create bar material
+    mat = bpy.data.materials.new(name="BarMaterial")
+    mat.use_nodes = True
+    bsdf = mat.node_tree.nodes["Principled BSDF"]
+    bsdf.inputs["Base Color"].default_value = color
+    bsdf.inputs["Roughness"].default_value = 0.4
+
+    # Create bars
+    step = bar_width + bar_gap
+    max_value = max(v for _, v in data)
+
+    for i, (label, value) in enumerate(data):
+        height = value * height_scale
+
+        # Create bar (cube scaled to size)
+        bpy.ops.mesh.primitive_cube_add(
+            size=1.0,
+            location=(i * step, 0, height / 2),
+        )
+        bar = bpy.context.active_object
+        bar.name = f"Bar_{label}"
+        bar.scale = (bar_width, bar_width, height)
+
+        # Assign material
+        bar.data.materials.append(mat)
+
+        # Move to chart collection
+        for coll in bar.users_collection:
+            coll.objects.unlink(bar)
+        chart_collection.objects.link(bar)
+
+        # Add text label
+        bpy.ops.object.text_add(
+            location=(i * step, -1.0, 0)
+        )
+        text_obj = bpy.context.active_object
+        text_obj.data.body = label
+        text_obj.data.size = 0.3
+        text_obj.data.align_x = 'CENTER'
+        text_obj.rotation_euler.x = 1.5708  # 90 degrees
+        text_obj.name = f"Label_{label}"
+
+        for coll in text_obj.users_collection:
+            coll.objects.unlink(text_obj)
+        chart_collection.objects.link(text_obj)
+
+    # Add ground plane
+    total_width = len(data) * step
+    bpy.ops.mesh.primitive_plane_add(
+        size=total_width * 1.5,
+        location=(total_width / 2 - step / 2, 0, -0.01),
+    )
+    ground = bpy.context.active_object
+    ground.name = "Chart_Ground"
+    for coll in ground.users_collection:
+        coll.objects.unlink(ground)
+    chart_collection.objects.link(ground)
+
+    print(f"Created bar chart with {len(data)} bars.")
+
+
+# Run the script
+create_bar_chart()
+\end{lstlisting}
+
+\subsection{Script 4: Automated Render Queue with Camera Switching}
+
+Renders the scene from every camera in the scene, saving output per-camera. This is useful for architectural visualization (where you set up multiple viewpoints) and for generating marketing material from multiple angles.
+
+\begin{lstlisting}
+"""
+Automated Render Queue with Camera Switching
+Renders the scene from each camera, saving output per-camera.
+Run in Blender's Text Editor.
+"""
+import bpy
+import os
+
+def render_queue(
+    output_dir="/tmp/renders",
+    resolution_x=1920,
+    resolution_y=1080,
+    samples=128,
+    file_format='PNG',
+):
+    """Render the scene from every camera and save
+    individually."""
+    os.makedirs(output_dir, exist_ok=True)
+
+    scene = bpy.context.scene
+
+    # Configure render settings
+    scene.render.resolution_x = resolution_x
+    scene.render.resolution_y = resolution_y
+    scene.render.image_settings.file_format = file_format
+
+    if scene.render.engine == 'CYCLES':
+        scene.cycles.samples = samples
+
+    # Find all cameras
+    cameras = [obj for obj in bpy.data.objects
+               if obj.type == 'CAMERA']
+
+    if not cameras:
+        print("No cameras found in the scene.")
+        return
+
+    # Store original camera
+    original_camera = scene.camera
+
+    print(f"Found {len(cameras)} cameras. "
+          f"Starting render queue...")
+
+    for i, cam in enumerate(cameras, 1):
+        # Set active camera
+        scene.camera = cam
+
+        # Build output path
+        safe_name = bpy.path.clean_name(cam.name)
+        ext = {'PNG': '.png', 'JPEG': '.jpg',
+               'OPEN_EXR': '.exr'}.get(file_format, '.png')
+        scene.render.filepath = os.path.join(
+            output_dir, f"{safe_name}{ext}"
+        )
+
+        print(f"[{i}/{len(cameras)}] Rendering from "
+              f"camera: {cam.name}")
+
+        # Render
+        bpy.ops.render.render(write_still=True)
+
+        print(f"  Saved: {scene.render.filepath}")
+
+    # Restore original camera
+    scene.camera = original_camera
+
+    print(f"\nRender queue complete. {len(cameras)} images "
+          f"saved to {output_dir}")
+
+
+# Run the script
+render_queue(output_dir="/tmp/camera_renders", samples=64)
+\end{lstlisting}
+
+\subsection{Script 5: Custom Operator --- One-Click Character Turntable Render}
+
+A complete add-on that creates a camera orbit around the selected object and renders a full 360-degree turntable animation. This demonstrates the full operator lifecycle: \texttt{bl\_info}, properties, \texttt{poll()}, \texttt{execute()}, \texttt{invoke()}, keyframing, and a companion panel.
+
+\begin{lstlisting}
+"""
+One-Click Character Turntable Render Operator
+Creates a camera orbit around the selected object and renders
+a full 360-degree turntable animation.
+Install as a Blender add-on or run from the Text Editor.
+"""
+import bpy
+import math
+
+bl_info = {
+    "name": "Turntable Render",
+    "author": "BLN Research",
+    "version": (1, 0, 0),
+    "blender": (4, 4, 0),
+    "location": "View3D > Sidebar > Turntable",
+    "description": "One-click turntable render of selected object",
+    "category": "Render",
+}
+
+
+class RENDER_OT_turntable(bpy.types.Operator):
+    """Create a turntable camera orbit and render animation"""
+
+    bl_idname = "render.turntable"
+    bl_label = "Turntable Render"
+    bl_options = {'REGISTER', 'UNDO'}
+
+    frames: bpy.props.IntProperty(
+        name="Frames",
+        description="Number of frames for full rotation",
+        default=120, min=24, max=1000,
+    )
+
+    camera_distance: bpy.props.FloatProperty(
+        name="Camera Distance",
+        description="Distance from object center to camera",
+        default=5.0, min=0.5, max=100.0,
+    )
+
+    camera_height: bpy.props.FloatProperty(
+        name="Camera Height",
+        description="Camera height above object center",
+        default=1.0, min=-10.0, max=20.0,
+    )
+
+    output_path: bpy.props.StringProperty(
+        name="Output Path",
+        description="Directory for rendered frames",
+        default="/tmp/turntable/",
+        subtype='DIR_PATH',
+    )
+
+    @classmethod
+    def poll(cls, context):
+        return context.active_object is not None
+
+    def execute(self, context):
+        obj = context.active_object
+        scene = context.scene
+
+        # Create empty at object center for camera parent
+        bpy.ops.object.empty_add(
+            type='PLAIN_AXES', location=obj.location,
+        )
+        pivot = context.active_object
+        pivot.name = "Turntable_Pivot"
+
+        # Create camera
+        cam_data = bpy.data.cameras.new("Turntable_Camera")
+        cam_obj = bpy.data.objects.new(
+            "Turntable_Camera", cam_data
+        )
+        context.collection.objects.link(cam_obj)
+
+        # Position camera
+        cam_obj.location = (
+            obj.location.x + self.camera_distance,
+            obj.location.y,
+            obj.location.z + self.camera_height,
+        )
+
+        # Parent camera to pivot
+        cam_obj.parent = pivot
+
+        # Add Track To constraint
+        track = cam_obj.constraints.new('TRACK_TO')
+        track.target = obj
+        track.track_axis = 'TRACK_NEGATIVE_Z'
+        track.up_axis = 'UP_Y'
+
+        # Set as scene camera
+        scene.camera = cam_obj
+
+        # Animate rotation
+        scene.frame_start = 1
+        scene.frame_end = self.frames
+
+        # Keyframe rotation at start
+        pivot.rotation_euler = (0, 0, 0)
+        pivot.keyframe_insert(
+            data_path="rotation_euler", frame=1
+        )
+
+        # Keyframe rotation at end (full 360)
+        pivot.rotation_euler = (0, 0, math.radians(360))
+        pivot.keyframe_insert(
+            data_path="rotation_euler",
+            frame=self.frames + 1
+        )
+
+        # Set linear interpolation for constant speed
+        if pivot.animation_data and pivot.animation_data.action:
+            for fcurve in pivot.animation_data.action.fcurves:
+                for kf in fcurve.keyframe_points:
+                    kf.interpolation = 'LINEAR'
+
+        # Configure output
+        scene.render.filepath = self.output_path
+        scene.render.image_settings.file_format = 'PNG'
+
+        # Render animation
+        self.report({'INFO'},
+                    f"Rendering {self.frames} frames...")
+        bpy.ops.render.render(animation=True)
+
+        self.report({'INFO'},
+                    f"Turntable render complete: "
+                    f"{self.output_path}")
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        return context.window_manager.invoke_props_dialog(self)
+
+
+class VIEW3D_PT_turntable(bpy.types.Panel):
+    bl_label = "Turntable Render"
+    bl_idname = "VIEW3D_PT_turntable"
+    bl_space_type = 'VIEW_3D'
+    bl_region_type = 'UI'
+    bl_category = "Turntable"
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator("render.turntable",
+                        icon='RENDER_ANIMATION')
+
+
+classes = (RENDER_OT_turntable, VIEW3D_PT_turntable)
+
+def register():
+    for cls in classes:
+        bpy.utils.register_class(cls)
+
+def unregister():
+    for cls in reversed(classes):
+        bpy.utils.unregister_class(cls)
+
+if __name__ == "__main__":
+    register()
+\end{lstlisting}
+
+\begin{furrybox}
+\textbf{Automated turntable render for commissions:} This turntable operator is a commission workflow essential. When you finish a character model for a client, run the turntable operator to generate a smooth 360-degree rotation. Set the camera distance to frame the full character (including tail!), adjust the height to a slightly elevated angle, and render at 120 frames for a 5-second loop at 24fps. The resulting image sequence can be converted to a GIF or MP4 for client review. Many furry artists include turntable renders as a standard deliverable --- this script makes it a one-click operation.
+\end{furrybox}
+
+\subsection{Script 6: Asset Library Management}
+
+Scans a directory of \texttt{.blend} files, catalogs their contents to JSON, and provides batch append operations. This is the foundation for studio-scale asset management (see also Section~\ref{sec:scripting-assets}).
+
+\begin{lstlisting}
+"""
+Asset Library Management Script
+Scans .blend files, catalogs contents, and provides
+batch operations for asset management.
+Run in Blender's Text Editor.
+"""
+import bpy
+import os
+import json
+
+def catalog_asset_library(
+    library_path="/home/user/blender_assets",
+    output_json="/tmp/asset_catalog.json",
+):
+    """Scan .blend files and catalog all data blocks."""
+    catalog = {
+        "library_path": library_path,
+        "files": [],
+        "summary": {
+            "total_files": 0,
+            "total_objects": 0,
+            "total_materials": 0,
+            "total_collections": 0,
+        },
+    }
+
+    if not os.path.exists(library_path):
+        print(f"Library path does not exist: {library_path}")
+        return
+
+    # Find all .blend files
+    blend_files = []
+    for root, dirs, files in os.walk(library_path):
+        for f in files:
+            if f.endswith('.blend'):
+                blend_files.append(os.path.join(root, f))
+
+    print(f"Found {len(blend_files)} .blend files "
+          f"in {library_path}")
+
+    for filepath in sorted(blend_files):
+        rel_path = os.path.relpath(filepath, library_path)
+        file_entry = {
+            "path": rel_path,
+            "objects": [],
+            "materials": [],
+            "collections": [],
+        }
+
+        # Use Blender's library reading to inspect the file
+        with bpy.data.libraries.load(filepath,
+                                     link=False) as (
+            data_from, data_to
+        ):
+            file_entry["objects"] = list(data_from.objects)
+            file_entry["materials"] = list(
+                data_from.materials
+            )
+            file_entry["collections"] = list(
+                data_from.collections
+            )
+
+        catalog["files"].append(file_entry)
+        catalog["summary"]["total_objects"] += len(
+            file_entry["objects"]
+        )
+        catalog["summary"]["total_materials"] += len(
+            file_entry["materials"]
+        )
+        catalog["summary"]["total_collections"] += len(
+            file_entry["collections"]
+        )
+
+        print(f"  {rel_path}: "
+              f"{len(file_entry['objects'])} objects, "
+              f"{len(file_entry['materials'])} materials")
+
+    catalog["summary"]["total_files"] = len(blend_files)
+
+    # Save catalog
+    with open(output_json, 'w') as f:
+        json.dump(catalog, f, indent=2)
+
+    print(f"\nCatalog saved to {output_json}")
+    print(f"Summary: {catalog['summary']}")
+    return catalog
+
+
+def batch_append_from_library(
+    source_blend="/path/to/assets/hero.blend",
+    data_type="objects",
+    names=None,
+):
+    """Append specific data blocks from a .blend file
+    into the current scene.
+
+    Args:
+        source_blend: Path to the source .blend file.
+        data_type: "objects", "materials", or "collections".
+        names: List of names to append. None = append all.
+    """
+    with bpy.data.libraries.load(source_blend,
+                                 link=False) as (
+        data_from, data_to
+    ):
+        available = getattr(data_from, data_type)
+        if names is None:
+            names = list(available)
+        setattr(data_to, data_type,
+                [n for n in names if n in available])
+
+    # Link appended objects to scene
+    if data_type == "objects":
+        for obj in getattr(data_to, data_type):
+            if obj is not None:
+                bpy.context.collection.objects.link(obj)
+                print(f"Appended object: {obj.name}")
+    elif data_type == "collections":
+        for coll in getattr(data_to, data_type):
+            if coll is not None:
+                bpy.context.scene.collection.children.link(
+                    coll
+                )
+                print(f"Appended collection: {coll.name}")
+
+    print(f"Batch append complete from {source_blend}")
+
+
+# Example usage:
+# catalog_asset_library("/home/user/blender_assets")
+# batch_append_from_library(
+#     "/path/to/file.blend", "objects", ["Hero_Character"]
+# )
+\end{lstlisting}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Pipeline Integration}
+\label{sec:scripting-pipeline}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+A 3D pipeline is the chain of tools and formats that connects modeling, texturing, rigging, animation, lighting, rendering, and compositing. Blender supports the three most important interchange formats in production today: USD, FBX, and glTF. Each serves different targets, and choosing the right one depends on where your assets are going.
+
+\subsection{USD (Universal Scene Description)}
+
+\textbf{USD} is Pixar's open-source scene description format designed for large-scale production pipelines. It supports layered composition, variant sets, and referencing --- making it the preferred format for feature film and high-end VFX work. Blender supports both import and export.
+
+\textbf{Export:}
+\begin{lstlisting}
+bpy.ops.wm.usd_export(
+    filepath="/path/to/scene.usdc",
+    selected_objects_only=False,
+    export_animation=True,
+    export_hair=True,
+    export_uvmaps=True,
+    export_normals=True,
+    export_materials=True,
+    generate_preview_surface=True,  # MaterialX preview
+)
+\end{lstlisting}
+
+\textbf{Import:}
+\begin{lstlisting}
+bpy.ops.wm.usd_import(
+    filepath="/path/to/scene.usdc",
+    import_cameras=True,
+    import_curves=True,
+    import_lights=True,
+    import_materials=True,
+    import_meshes=True,
+    import_volumes=True,
+    read_mesh_uvs=True,
+    read_mesh_colors=True,
+)
+\end{lstlisting}
+
+\textbf{USD format variants:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Extension} & \tableheader{Format} & \tableheader{Use Case} \\
+\midrule
+\texttt{.usda} & ASCII (human-readable) & Debugging, hand-editing \\
+\texttt{.usdc} & Binary (Crate) & Production (fast, compact) \\
+\texttt{.usdz} & Zipped package (usdc + textures) & AR/web delivery (Apple AR, Android) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{FBX Workflows}
+
+FBX (Filmbox) is the most common interchange format for game engines and DCC tools. Despite being a proprietary Autodesk format, it has become the \textit{de facto} standard for game engine import:
+
+\begin{lstlisting}
+# Export with game-engine-ready settings
+bpy.ops.export_scene.fbx(
+    filepath="/path/to/model.fbx",
+    use_selection=True,
+    apply_scale_options='FBX_SCALE_ALL',
+    use_mesh_modifiers=True,
+    mesh_smooth_type='FACE',
+    use_mesh_edges=False,
+    add_leaf_bones=False,       # No extra bones for games
+    primary_bone_axis='Y',      # Match Unity/Unreal
+    secondary_bone_axis='X',
+    bake_anim=True,
+    bake_anim_use_all_bones=True,
+    bake_anim_use_nla_strips=False,
+    bake_anim_use_all_actions=True,
+    bake_anim_simplify_factor=1.0,
+)
+\end{lstlisting}
+
+\begin{warningbox}
+\textbf{Common FBX gotchas:}
+\begin{itemize}[leftmargin=1em]
+  \item \textbf{Scale issues:} Blender uses meters; some engines use centimeters. Use \texttt{apply\_scale\_options='FBX\_SCALE\_ALL'} to handle conversion automatically.
+  \item \textbf{Bone orientation:} Blender bones point along Y; Unity and Unreal expect different conventions. Set \texttt{primary\_bone\_axis} and \texttt{secondary\_bone\_axis} to match your target engine.
+  \item \textbf{Leaf bones:} Disable \texttt{add\_leaf\_bones} for game engine export --- they add unwanted extra bones at the end of every chain.
+\end{itemize}
+\end{warningbox}
+
+\subsection{glTF for Web and Real-Time}
+
+\textbf{glTF 2.0} (GL Transmission Format) is the ``JPEG of 3D'' --- optimized for web and real-time applications. It is an open standard from the Khronos Group with native support in Three.js, Babylon.js, and other web 3D frameworks:
+
+\begin{lstlisting}
+# Export as binary glTF (.glb) - single file with textures
+bpy.ops.export_scene.gltf(
+    filepath="/path/to/model.glb",
+    export_format='GLB',       # GLB, GLTF_SEPARATE, GLTF_EMBEDDED
+    use_selection=True,
+    export_apply=True,         # Apply modifiers
+    export_animations=True,
+    export_skins=True,         # Armature skinning
+    export_morph=True,         # Shape keys
+    export_lights=True,
+    export_cameras=True,
+    export_extras=True,        # Custom properties
+    export_draco_mesh_compression_enable=True,  # Draco
+)
+\end{lstlisting}
+
+\subsection{Format Comparison}
+
+Choosing the right format depends on your target platform:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Target} & \tableheader{Recommended} & \tableheader{Reason} \\
+\midrule
+Web (Three.js, Babylon.js) & glTF/GLB & Native web support, smallest file size \\
+Unity & FBX or glTF & Both supported; FBX more established \\
+Unreal Engine & FBX & Primary import format \\
+AR (Apple/Android) & USDZ / glTF & Platform-specific \\
+Other DCC tools & USD or FBX & Widest compatibility \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Cross-reference: for detailed shader and material workflows that ensure compatibility across these formats, see Chapter~\ref{ch:shading}. For modeling best practices that produce clean exports, see Chapter~\ref{ch:modeling}.
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Production Management Integration}
+\label{sec:scripting-production}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Production management tools track the status of shots, tasks, assets, and revisions across a team. Blender integrates with two major systems.
+
+\subsection{Kitsu (CG-Wire)}
+
+\textbf{Kitsu} is an open-source production management tool for animation studios. Blender integrates with Kitsu via the \textbf{Blender Kitsu} add-on, which communicates with the Kitsu server via its REST API:
+
+\begin{itemize}[leftmargin=2em]
+  \item Track shots, tasks, and revisions
+  \item Publish renders and playblasts directly from Blender
+  \item Receive task assignments and download the latest approved assets
+  \item Comment on shots and receive feedback within Blender
+\end{itemize}
+
+Kitsu is the recommended choice for independent studios and open-source-oriented pipelines. The \textit{Blender Studio} (formerly Blender Animation Studio, creators of \textit{Sprite Fright} and \textit{Charge}) uses Kitsu in production.
+
+\subsection{ShotGrid (formerly Shotgun)}
+
+\textbf{ShotGrid} (Autodesk) is a widely-used production tracking platform in larger studios. Integration with Blender is typically achieved through the ShotGrid Toolkit (sgtk), Autodesk's pipeline framework, or custom Python scripts using the ShotGrid Python API:
+
+\begin{lstlisting}
+# Example: Publish render to ShotGrid (conceptual)
+import shotgun_api3
+
+sg = shotgun_api3.Shotgun(
+    "https://your-studio.shotgrid.autodesk.com",
+    script_name="blender_publish",
+    api_key="your-api-key",
+)
+
+# Create a Version (published render)
+version = sg.create("Version", {
+    "project": {"type": "Project", "id": 123},
+    "entity": {"type": "Shot", "id": 456},
+    "code": "shot_010_comp_v003",
+    "sg_path_to_movie": "/renders/shot_010_comp_v003.mp4",
+})
+\end{lstlisting}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Asset Libraries and Linking}
+\label{sec:scripting-assets}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Asset management is critical for any project larger than a single file. Blender provides three mechanisms: linking, appending, and the Asset Browser.
+
+\subsection{Linking and Appending}
+
+\textbf{Linking} loads data from another \texttt{.blend} file as a reference. Changes in the source propagate to all files that link to it:
+
+\begin{lstlisting}
+# Link a collection from another file
+bpy.ops.wm.link(
+    filepath="/path/to/assets.blend/Collection/Props",
+    directory="/path/to/assets.blend/Collection/",
+    filename="Props",
+)
+\end{lstlisting}
+
+\textbf{Appending} copies data from another file into the current file as an independent copy:
+
+\begin{lstlisting}
+# Append a material from another file
+bpy.ops.wm.append(
+    filepath="/path/to/materials.blend/Material/MetalRough",
+    directory="/path/to/materials.blend/Material/",
+    filename="MetalRough",
+)
+\end{lstlisting}
+
+\subsection{Library Overrides}
+
+When assets are \textbf{linked} from external files, they cannot be edited directly. \textbf{Library Overrides} (which replaced the legacy Proxy system in Blender 3.0) allow specific properties to be overridden locally while keeping the link intact:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Link a collection containing a character rig
+  \item Select the linked armature
+  \item \textbf{Object > Library Override > Make}
+  \item The armature can now be posed and animated locally
+  \item Changes to the original asset file still propagate (except for overridden properties)
+\end{enumerate}
+
+This is how professional studios work with shared characters: a rigging department publishes the rig as a linked asset, and animators create library overrides to pose and animate it without modifying the original file.
+
+\subsection{Blender Asset Browser}
+
+Blender 3.0+ includes a built-in \textbf{Asset Browser} for managing reusable assets:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Mark as Asset:} Right-click any data block > Mark as Asset
+  \item \textbf{Catalog:} Organize assets into hierarchical catalogs
+  \item \textbf{Library paths:} Configure in Preferences > File Paths > Asset Libraries
+  \item \textbf{Drag and drop:} Assets can be dragged from the Asset Browser into the scene
+  \item \textbf{Metadata:} Each asset stores author, description, tags, and preview images
+\end{itemize}
+
+\subsection{Asset Library Best Practices}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Practice} & \tableheader{Reason} \\
+\midrule
+One asset per \texttt{.blend} file & Clean organization, avoids loading unnecessary data \\
+Use collections as top-level assets & Groups all related objects together \\
+Standardize naming conventions & \texttt{CATEGORY\_AssetName\_v001} for searchability \\
+Generate previews & Asset Browser uses previews for visual browsing \\
+Use catalogs for taxonomy & Hierarchical organization (Characters > Heroes > Human) \\
+Version assets in the filename & Enables rollback without version control complexity \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Flamenco Render Farm}
+\label{sec:scripting-flamenco}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\textbf{Flamenco} is Blender's open-source render farm orchestration system, developed by the Blender Foundation. It distributes render jobs across multiple machines, handling task assignment, failure recovery, and output assembly.
+
+\subsection{Architecture}
+
+Flamenco uses a three-tier architecture:
+
+\begin{codebox}
+\begin{verbatim}
++------------------+
+|  Blender Client  |  (Add-on submits jobs)
++--------+---------+
+         |
+         v
++--------+---------+
+| Flamenco Manager |  (Central coordinator)
++--------+---------+
+         |
+    +----+----+
+    |    |    |
+    v    v    v
++----+ +----+ +----+
+| W1 | | W2 | | W3 |  (Workers: render nodes)
++----+ +----+ +----+
+         |
+         v
++--------+---------+
+|  Shared Storage  |  (NAS/NFS/SMB: .blend + output)
++------------------+
+\end{verbatim}
+\end{codebox}
+
+The \textbf{Manager} runs on a central machine (can be one of the workers). \textbf{Workers} auto-discover the Manager on the LAN or can be configured manually. \textbf{Shared Storage} (NAS, NFS mount, SMB share) must be accessible by all machines.
+
+\subsection{Setup}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Install Flamenco Manager on a central machine
+  \item Configure shared storage accessible by all machines
+  \item Install Flamenco Worker on each render node
+  \item Install the Flamenco Add-on in Blender on artist workstations
+  \item Workers auto-discover the Manager on the LAN (or configure manually)
+\end{enumerate}
+
+\subsection{Job Types}
+
+Flamenco includes two built-in job types:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Job Type} & \tableheader{Description} \\
+\midrule
+Simple Blender Render & Renders a range of frames from a \texttt{.blend} file, optionally creates a preview video with FFmpeg \\
+Single Image Render & Splits a single frame into tiles, renders each on different workers, and merges the result \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Custom job types can be created using JavaScript scripts that run on the Manager.
+
+\subsection{Worker Configuration}
+
+Workers are configured via \texttt{flamenco-worker.yaml}:
+
+\begin{lstlisting}[language={}]
+# flamenco-worker.yaml
+manager_url: http://flamenco-manager:8080/
+
+# Task types this worker can handle
+task_types:
+  - blender
+  - ffmpeg
+  - file-management
+
+# Platform-specific Blender path
+blender_path_linux: /opt/blender/blender
+blender_path_windows: C:\Blender\blender.exe
+blender_path_darwin: /Applications/Blender.app/Contents/MacOS/Blender
+\end{lstlisting}
+
+\subsection{Submitting Jobs}
+
+From Blender (with the Flamenco add-on installed):
+
+\begin{enumerate}[leftmargin=2em]
+  \item Open the Flamenco panel in the Properties sidebar
+  \item Configure the job: frame range, chunk size (frames per task --- smaller chunks give better parallelism), priority, output format
+  \item Click \textbf{Submit Job}
+\end{enumerate}
+
+The Manager divides the frame range into chunks, assigns chunks to available workers, monitors progress, handles failures and retries, and reassembles the output.
+
+\begin{tipbox}
+For optimal render farm performance, set the chunk size based on the number of workers and the per-frame render time. If each frame takes 5 minutes and you have 10 workers, chunks of 5--10 frames keep all workers busy without excessive task-switching overhead. For very fast frames (under 30 seconds), use larger chunks to amortize Blender's startup time.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Running Blender Headlessly}
+\label{sec:scripting-headless}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Blender can run without a GUI, making it suitable for automated pipelines, CI/CD systems, render farms, and batch processing. This capability transforms Blender from an interactive application into a scriptable 3D processing engine.
+
+\subsection{Command-Line Basics}
+
+The \texttt{-b} / \texttt{--background} flag launches Blender without a GUI:
+
+\begin{lstlisting}[language=bash]
+# Render a single frame
+blender --background scene.blend --render-frame 1
+
+# Render an animation (all frames)
+blender --background scene.blend --render-anim
+
+# Render frames 10-50
+blender --background scene.blend \
+    --frame-start 10 --frame-end 50 --render-anim
+
+# Run a Python script
+blender --background scene.blend --python script.py
+
+# Run a Python expression
+blender --background \
+    --python-expr "import bpy; print(bpy.app.version)"
+
+# Run without loading a file
+blender --background --python script.py
+\end{lstlisting}
+
+\subsection{Argument Ordering}
+
+\textbf{Order matters.} Blender processes arguments left-to-right. The \texttt{.blend} file must come before \texttt{--python} so the scene is loaded before the script runs:
+
+\begin{lstlisting}[language=bash]
+# CORRECT: Load file first, then run script
+blender --background scene.blend --python script.py
+
+# WRONG: Script runs before file loads
+blender --background --python script.py scene.blend
+\end{lstlisting}
+
+\begin{warningbox}
+This is one of the most common mistakes in Blender command-line scripting. If your script references \texttt{bpy.data.objects["MyCharacter"]} but Blender has not yet loaded the \texttt{.blend} file containing that object, you will get a \texttt{KeyError}. Always place the \texttt{.blend} file path before any \texttt{--python} arguments.
+\end{warningbox}
+
+\subsection{Passing Custom Arguments}
+
+Use \texttt{--} to separate Blender arguments from script arguments:
+
+\begin{lstlisting}[language=bash]
+blender --background scene.blend --python render_script.py -- \
+    --output /tmp/renders/ \
+    --quality high \
+    --camera Camera.001
+\end{lstlisting}
+
+In the Python script, parse arguments after the \texttt{--} separator:
+
+\begin{lstlisting}
+import sys
+import argparse
+
+# Get arguments after '--'
+argv = sys.argv
+if "--" in argv:
+    argv = argv[argv.index("--") + 1:]
+else:
+    argv = []
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--output", required=True)
+parser.add_argument("--quality", default="medium")
+parser.add_argument("--camera", default=None)
+args = parser.parse_args(argv)
+
+# Use args in your script
+print(f"Output: {args.output}")
+\end{lstlisting}
+
+\subsection{Common Command-Line Flags}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Flag} & \tableheader{Description} \\
+\midrule
+\texttt{-b} / \texttt{--background} & Run without GUI \\
+\texttt{-P} / \texttt{--python} & Run a Python script \\
+\texttt{--python-expr} & Run a Python expression \\
+\texttt{-F} / \texttt{--render-format} & Set output format (PNG, JPEG, EXR, etc.) \\
+\texttt{-o} / \texttt{--render-output} & Set output path \\
+\texttt{-f} / \texttt{--render-frame} & Render a specific frame \\
+\texttt{-a} / \texttt{--render-anim} & Render full animation \\
+\texttt{-s} / \texttt{--frame-start} & Set start frame \\
+\texttt{-e} / \texttt{--frame-end} & Set end frame \\
+\texttt{-E} / \texttt{--engine} & Set render engine (CYCLES, BLENDER\_EEVEE\_NEXT) \\
+\texttt{-t} / \texttt{--threads} & Set thread count \\
+\texttt{--factory-startup} & Ignore user preferences and startup file \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Environment Variables and Script Paths}
+
+The \texttt{BLENDER\_USER\_SCRIPTS} environment variable overrides the default user scripts directory. This is essential for CI/CD pipelines, Docker containers, and shared studio setups:
+
+\begin{lstlisting}[language=bash]
+export BLENDER_USER_SCRIPTS=/studio/pipeline/blender_scripts
+blender --background scene.blend --python render.py
+\end{lstlisting}
+
+The directory structure under \texttt{BLENDER\_USER\_SCRIPTS} mirrors the standard layout:
+
+\begin{codebox}
+\begin{verbatim}
+$BLENDER_USER_SCRIPTS/
+    addons/          # Add-on modules
+    modules/         # Python modules importable by scripts
+    presets/         # User presets
+    startup/         # Scripts that run on startup
+    templates_py/    # Script templates
+\end{verbatim}
+\end{codebox}
+
+\subsection{Headless Rendering in Docker}
+
+For fully reproducible render environments, run Blender in a Docker container:
+
+\begin{lstlisting}[language={}]
+FROM ubuntu:22.04
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    wget libgl1-mesa-glx libxi6 libxrender1 libxkbcommon0
+
+# Download and install Blender
+RUN wget https://download.blender.org/release/Blender4.4/\
+blender-4.4.0-linux-x64.tar.xz \
+    && tar xf blender-4.4.0-linux-x64.tar.xz \
+    && mv blender-4.4.0-linux-x64 /opt/blender
+
+ENV PATH="/opt/blender:${PATH}"
+
+WORKDIR /renders
+ENTRYPOINT ["blender", "--background"]
+\end{lstlisting}
+
+\begin{tipbox}
+Docker-based rendering is ideal for cloud render farms (AWS, GCP, Azure). You can spin up GPU instances with NVIDIA Container Toolkit for Cycles GPU rendering, or use CPU instances for EEVEE. Pair this with a CI/CD pipeline (GitHub Actions, GitLab CI) to automatically render scenes on every commit to a production branch.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Common Pitfalls and Practical Tips}
+\label{sec:scripting-pitfalls}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Python Scripting Pitfalls}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pitfall} & \tableheader{Cause} & \tableheader{Solution} \\
+\midrule
+\texttt{RuntimeError}: Operator context is incorrect & Operator called in wrong mode or context & Check poll conditions; use \texttt{temp\_override()} \\
+Properties not saving & Custom properties not registered on a Blender type & Use \texttt{bpy.props} and register via \texttt{PointerProperty} \\
+Script works in Text Editor but not as add-on & Missing \texttt{bl\_info}, \texttt{register()}, or \texttt{unregister()} & Ensure all three are present \\
+Import errors in multi-file add-on & Relative imports failing & Use \texttt{from . import module} and ensure \texttt{\_\_init\_\_.py} exists \\
+\texttt{AttributeError} after script reload & Stale class references & Use the \texttt{importlib.reload()} pattern \\
+Undo breaks custom properties & Properties not serialized & Use \texttt{bpy.props} (not plain Python attributes) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Pipeline Pitfalls}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pitfall} & \tableheader{Cause} & \tableheader{Solution} \\
+\midrule
+FBX scale mismatch & Blender meters vs. engine centimeters & Use \texttt{apply\_scale\_options= 'FBX\_SCALE\_ALL'} \\
+Missing textures in export & Textures not packed or paths not relative & Pack textures or use GLB format \\
+Lost animation on FBX export & NLA strips not baked & Enable \texttt{bake\_anim} and NLA baking \\
+USD material mismatch & Blender-specific shader nodes not translatable & Use Principled BSDF for USD compatibility \\
+Linked assets break on file move & Absolute paths in library links & Use relative paths (\texttt{//} prefix) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Performance Tips for Scripts}
+
+Writing performant scripts requires understanding Blender's internal architecture. The single biggest optimization is to avoid operators in tight loops:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Avoid calling operators in loops} --- use direct data manipulation (\texttt{bpy.data}) instead of \texttt{bpy.ops} when possible. Each operator call carries polling, undo, and context overhead.
+  \item \textbf{Batch mesh operations} --- use the \texttt{bmesh} module for complex mesh editing; commit changes once at the end.
+  \item \textbf{Use \texttt{foreach\_get} / \texttt{foreach\_set}} for fast array access on mesh data:
+\end{itemize}
+
+\begin{lstlisting}
+# Fast: read all vertex positions at once with numpy
+import numpy as np
+mesh = bpy.data.meshes["MyMesh"]
+verts = np.zeros(len(mesh.vertices) * 3)
+mesh.vertices.foreach_get("co", verts)
+# verts is now a flat array: [x0, y0, z0, x1, y1, z1, ...]
+\end{lstlisting}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Profile with \texttt{cProfile}} to find bottlenecks:
+\end{itemize}
+
+\begin{lstlisting}
+import cProfile
+cProfile.run('my_function()', sort='cumulative')
+\end{lstlisting}
+
+\subsection{Debugging Tips}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Print to console:} \texttt{print()} output goes to the system console (Window > Toggle System Console on Windows; launch from terminal on Linux/macOS)
+  \item \textbf{Use \texttt{self.report()}} in operators to show messages in the status bar
+  \item \textbf{Inspect data interactively:} Use the Python Console editor with autocomplete (\textbf{Tab})
+  \item \textbf{Check the Info editor:} Every action is logged as a Python command
+  \item \textbf{Use breakpoints:} External IDEs can attach to Blender's Python with \texttt{debugpy}:
+\end{itemize}
+
+\begin{lstlisting}
+import debugpy
+debugpy.listen(5678)
+debugpy.wait_for_client()
+# Set breakpoints in VS Code, then connect to port 5678
+\end{lstlisting}
+
+\begin{tipbox}
+The combination of the Info editor (to discover the Python equivalent of GUI actions), the Python Console (to test one-liners interactively), and the Text Editor (to develop multi-line scripts) is the Blender scripting workflow. Master these three editors and you can automate anything Blender can do.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Chapter Summary}
+\label{sec:scripting-summary}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+This chapter has covered the complete Python scripting and pipeline stack for Blender:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{The embedded interpreter} --- Python 3.11, eight execution contexts, and the tooltip/Info editor discovery workflow
+  \item \textbf{The bpy module} --- seven submodules (\texttt{bpy.data}, \texttt{bpy.ops}, \texttt{bpy.context}, \texttt{bpy.props}, \texttt{bpy.types}, \texttt{bpy.app}, \texttt{bpy.path}) that provide complete programmatic access to Blender
+  \item \textbf{mathutils} --- Vector, Matrix, Quaternion, and Euler types for 3D math
+  \item \textbf{The Scripting workspace} --- Text Editor shortcuts, external IDE integration, and \texttt{fake-bpy-module}
+  \item \textbf{Operators} --- anatomy, naming, \texttt{bl\_options}, lifecycle methods, poll, invoke, and modal operators
+  \item \textbf{Panels} --- placement, layout methods, and sub-panels for custom UI
+  \item \textbf{Menus and pie menus} --- standard menus, radial pie menus, and hotkey registration
+  \item \textbf{Add-on structure} --- single-file and multi-file packages, \texttt{bl\_info}, register/unregister, and the reload pattern
+  \item \textbf{Preferences and properties} --- AddonPreferences for global settings, PropertyGroups for per-scene data
+  \item \textbf{Six complete scripts} --- batch rename, mass export, CSV-to-3D, render queue, turntable operator, and asset library management
+  \item \textbf{Pipeline formats} --- USD, FBX, and glTF with Python API examples and a format comparison table
+  \item \textbf{Production management} --- Kitsu and ShotGrid integration
+  \item \textbf{Asset management} --- linking, appending, library overrides, and the Asset Browser
+  \item \textbf{Flamenco} --- render farm architecture, setup, job types, and worker configuration
+  \item \textbf{Headless operation} --- CLI flags, argument ordering, custom arguments, environment variables, and Docker
+  \item \textbf{Pitfalls and tips} --- common scripting and pipeline errors, performance optimization, and debugging techniques
+\end{itemize}
+
+The scripts in this chapter are not toys --- they are production patterns. The batch export script runs in studios. The turntable operator saves hours of manual camera setup. The asset library manager scales to thousands of files. Scripting is not a power-user luxury; it is the difference between doing something once and doing it every time you need it.
+
+In Chapter~\ref{ch:furryarts}, we will apply these scripting techniques to furry arts-specific workflows: automated fur color testing, batch character variant export, and custom grooming tools built with the modal operator pattern introduced here.

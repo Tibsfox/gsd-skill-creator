@@ -1,0 +1,1838 @@
+%% ═══════════════════════════════════════════════════════════════════════════
+%% CHAPTER 3: MODELING, SCULPTING & GEOMETRY NODES
+%% Thicc Splines Save Lives — A Comprehensive Blender User Manual
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\chapter{Modeling, Sculpting \& Geometry Nodes}
+\label{ch:modeling}
+
+\begin{quotebox}
+\itshape ``Every 3D model starts the same way: someone adds a primitive and starts pushing vertices. The art is knowing which vertices to push, and when to let the computer push them for you.''
+\end{quotebox}
+
+\vspace{1em}
+
+This chapter covers the three pillars of content creation in Blender: direct mesh editing in Edit Mode, organic sculpting in Sculpt Mode, and procedural generation with Geometry Nodes. Together, these systems handle everything from hard-surface mechanical parts to organic characters to procedurally scattered forests. We also cover the complete modifier stack, UV unwrapping, and supporting object types (curves, surfaces, text).
+
+By the end of this chapter you will understand every mesh operation, every modifier, every sculpt brush, and the full Geometry Nodes architecture well enough to build production geometry for film, games, 3D printing, or any pipeline you choose.
+
+\begin{historynote}
+The polygon mesh --- vertices connected by edges, forming faces --- is the dominant representation in entertainment 3D, but it was not always so. CAD and industrial design used NURBS (Non-Uniform Rational B-Splines) exclusively for decades because NURBS can represent mathematically perfect curved surfaces with infinite resolution. The shift to polygon meshes in film and games happened because polygons are faster to render, easier to texture, and more flexible for organic shapes. Blender supports both, but polygon modeling is the primary focus of this chapter.
+
+Subdivision surfaces, invented by Ed Catmull and Jim Clark in 1978, bridge the gap: you model a low-poly control mesh, and the subdivision algorithm generates a smooth, high-resolution surface. This is Blender's Subdivision Surface modifier, and it remains one of the most important inventions in the history of 3D modeling. Catmull-Clark subdivision (named for Ed Catmull and Jim Clark) is the default in Blender and in virtually every other 3D application.
+\end{historynote}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 1: EDIT MODE FUNDAMENTALS
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Edit Mode: The Foundation}
+\label{sec:editmode}
+
+Edit Mode is where direct mesh manipulation happens. Select a mesh object in Object Mode and press \textbf{Tab} to enter Edit Mode, or use \textbf{Ctrl+Tab} to open the mode pie menu. Edit Mode reveals the underlying geometry --- vertices, edges, and faces --- and provides tools to modify them.
+
+Only one object can be in Edit Mode at a time in normal workflow. However, Blender supports \textbf{multi-object editing}: select multiple mesh objects in Object Mode, then press Tab to enter Edit Mode for all of them simultaneously. Each object's geometry remains separate, but you can select and operate on vertices across all objects in the same session.
+
+The header bar in Edit Mode shows the selection mode buttons and provides access to the \textbf{Mesh}, \textbf{Vertex}, \textbf{Edge}, and \textbf{Face} menus. The Tool Shelf on the left provides quick access to frequently used tools.
+
+\subsection{Selection Modes}
+\label{sec:selectionmodes}
+
+Blender provides three primary selection modes, switchable via the header buttons or keyboard shortcuts:
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mode} & \tableheader{Shortcut} & \tableheader{Selects} \\
+\midrule
+Vertex & 1 & Individual vertices (points) \\
+Edge & 2 & Edges (connections between two vertices) \\
+Face & 3 & Faces (polygons bounded by edges) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+Multiple modes can be active simultaneously by holding \textbf{Shift} while clicking mode buttons. This allows selecting vertices, edges, and faces in a mixed selection --- useful for operations that need to work on multiple element types at once.
+
+\subsection{Selection Methods}
+\label{sec:selectionmethods}
+
+\subsubsection{Basic Selection}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Method} & \tableheader{Shortcut} & \tableheader{Use Case} \\
+\midrule
+Select single & Left Click & Point-and-click selection \\
+Add/Remove from selection & Shift + Left Click & Building a selection incrementally \\
+Select All & A & Select everything \\
+Deselect All & Alt + A & Clear selection \\
+Invert Selection & Ctrl + I & Flip selected/unselected \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\subsubsection{Region Selection}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Method} & \tableheader{Shortcut} & \tableheader{Description} \\
+\midrule
+Box Select & B & Rectangular selection region \\
+Circle Select & C & Paint-style selection; scroll wheel to resize radius; Right Click or Esc to exit \\
+Lasso Select & Ctrl + Left Click drag & Freeform selection boundary \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\subsubsection{Topological Selection}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4.5cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Method} & \tableheader{Shortcut} & \tableheader{Description} \\
+\midrule
+Select Linked (hover) & L & All geometry connected to element under cursor \\
+Select Linked (selection) & Ctrl + L & All geometry connected to current selection \\
+Select Edge Loop & Alt + Left Click (edge) & Continuous loop following topology flow \\
+Select Edge Ring & Ctrl + Alt + Left Click & Parallel edges perpendicular to edge flow \\
+Grow Selection & Ctrl + Numpad + & Expand selection by one ring \\
+Shrink Selection & Ctrl + Numpad -- & Contract selection by one ring \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\subsubsection{Advanced Selection}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Select > Checker Deselect} --- Deselects every other element in the current selection, creating a checkered pattern. Useful for creating alternating patterns for Poke Faces or Tris to Quads.
+  \item \textbf{Select > Select All by Trait} --- Sub-options to select by vertex count, face sides, perimeter, area, and in Blender 4.4, by \textbf{pole count} (vertices connected to more or fewer than 4 edges).
+  \item \textbf{Select > Select Similar} --- Selects elements similar to the current selection based on properties such as normal direction, face area, edge length, or vertex group weight.
+  \item \textbf{Select > Select Loops > Select Loop Inner Region} --- Fills the region inside a selected edge loop.
+  \item \textbf{Select > Select Sharp Edges} --- Selects edges where the angle between adjacent faces exceeds a threshold.
+  \item \textbf{Select > Select All by Trait > Non-Manifold} --- Identifies problem geometry: edges shared by more than two faces, faces with zero area, or loose vertices.
+\end{itemize}
+
+\subsection{Selection Mode Interaction}
+\label{sec:selectioninteraction}
+
+When switching between selection modes, Blender preserves and converts selections intelligently:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Vertex to Edge}: Edges where \textit{both} vertices are selected become selected.
+  \item \textbf{Vertex to Face}: Faces where \textit{all} vertices are selected become selected.
+  \item \textbf{Edge to Vertex}: All vertices of selected edges become selected.
+  \item \textbf{Face to Edge}: All edges of selected faces become selected.
+  \item \textbf{Face to Vertex}: All vertices of selected faces become selected.
+\end{itemize}
+
+This conversion behavior means that selecting two adjacent faces and switching to Edge mode shows the shared edge as selected --- useful for operations that require edge selections derived from face selections.
+
+\begin{tipbox}
+Use selection mode conversion strategically: select faces to define a region, switch to Edge mode to grab the boundary edges, then apply operations like Mark Seam or Bevel to just those boundary edges. This is far faster than manually selecting edges one by one.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 2: MESH OPERATIONS
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Mesh Operations}
+\label{sec:meshops}
+
+\subsection{Extrude}
+\label{sec:extrude}
+
+Extrusion is the most fundamental mesh-building operation. It duplicates selected geometry and immediately moves it, connected to the original by new faces.
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Variant} & \tableheader{Shortcut} & \tableheader{Behavior} \\
+\midrule
+Extrude Region & E & Moves along average normal of selection \\
+Extrude Along Normals & Alt + E $\rightarrow$ Along Normals & Each face follows its own normal \\
+Extrude Individual & Alt + E $\rightarrow$ Individual & Each face extrudes independently \\
+Extrude to Cursor & Ctrl + RMB (vertex mode) & Creates new vertex at cursor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\textbf{Extrude Region (E)} is the default. Select faces (or edges, or vertices) and press E. New geometry is created and constrained to move along the average normal of the selection. Move the mouse to adjust distance, then Left Click or Enter to confirm. Right Click or Escape to cancel.
+
+\textbf{Extrude Along Normals} extrudes each face along its individual normal rather than the average normal. This produces more uniform results on curved surfaces where faces point in different directions.
+
+\textbf{Extrude Individual} extrudes each selected face independently, each along its own normal. Creates separated extruded blocks --- useful for city-block-style geometry or panel effects.
+
+\begin{warningbox}
+If you press E and then immediately cancel with Right Click, the extruded geometry still exists at zero offset --- it sits directly on top of the original faces, creating \textbf{double geometry}. This is invisible but causes rendering artifacts, shading errors, and export problems. Always \textbf{Undo (Ctrl+Z)} after a cancelled extrude rather than relying on Right Click to cancel cleanly.
+\end{warningbox}
+
+\subsection{Loop Cut}
+\label{sec:loopcut}
+
+Loop Cut (\textbf{Ctrl+R}) inserts a new edge loop that follows the existing topology flow. It is one of the most frequently used operations for adding resolution to specific areas of a mesh.
+
+\begin{enumerate}[leftmargin=2em]
+  \item Press \textbf{Ctrl+R}.
+  \item Move the mouse over the mesh. A yellow preview line shows where the loop will be placed.
+  \item \textbf{Scroll the mouse wheel} to add multiple parallel cuts (or press a number key).
+  \item \textbf{Left Click} to confirm placement. The loop enters Slide mode.
+  \item \textbf{Left Click} again to confirm position, or \textbf{Right Click} to center evenly.
+\end{enumerate}
+
+\textbf{Key Properties} (F9 / Adjust Last Operation):
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Number of Cuts}: How many parallel loops to insert
+  \item \textit{Smoothness}: How much the new loop follows surface curvature
+  \item \textit{Falloff}: Curve shape for multi-cut spacing (Smooth, Sphere, Root, Sharp, Linear, Inverse Square)
+  \item \textit{Factor}: Precise positioning between $-1.0$ and $1.0$
+  \item \textit{Even}: Distribute cuts evenly
+  \item \textit{Flipped}: Mirror the distribution direction
+\end{itemize}
+
+\begin{tipbox}
+Loop cuts respect the topology flow and \textbf{cannot cross poles} (vertices with more or fewer than 4 connecting edges). If a loop cut preview does not appear where expected, the topology likely contains poles or triangles that interrupt the loop. This is one of the primary reasons to maintain quad-based topology.
+\end{tipbox}
+
+\subsection{Bevel}
+\label{sec:bevel}
+
+Bevel replaces a sharp edge or vertex with a chamfered or rounded profile. It is essential for creating realistic hard-surface models, as real-world objects almost never have perfectly sharp 90-degree edges.
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Variant} & \tableheader{Shortcut} & \tableheader{Behavior} \\
+\midrule
+Edge Bevel & Ctrl + B & Bevel selected edges; scroll for segments \\
+Vertex Bevel & Ctrl + Shift + B & Faceted cut around each vertex \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\textbf{Key Properties} (F9):
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Width}: Size of the bevel
+  \item \textit{Segments}: Number of subdivisions (1 = simple chamfer, higher = rounder)
+  \item \textit{Profile}: Shape of the bevel curve (0.5 = circular arc, $<$0.5 = concave, $>$0.5 = convex)
+  \item \textit{Miter Type}: How the bevel handles corners (Sharp, Patch, Arc)
+  \item \textit{Clamp Overlap}: Prevents bevels from overlapping on adjacent edges
+  \item \textit{Harden Normals}: Adjusts custom normals to maintain a hard-surface appearance even with high segment counts
+  \item \textit{Mark Seam / Mark Sharp}: Automatically marks UV seams or sharp edges along the bevel boundary
+\end{itemize}
+
+\begin{tipbox}
+Bevel with \textbf{Harden Normals} enabled is a key technique for game-ready hard-surface modeling: it creates the appearance of rounded edges while using minimal geometry. This technique lets you keep poly counts low while achieving smooth-looking edges that catch light realistically.
+\end{tipbox}
+
+\subsection{Inset Faces}
+\label{sec:inset}
+
+Inset (\textbf{I}) creates a smaller duplicate of selected faces inset within their boundaries, connected by new faces around the perimeter. Commonly used to create windows, panels, or areas for subsequent extrusion.
+
+\begin{enumerate}[leftmargin=2em]
+  \item Select faces.
+  \item Press \textbf{I}.
+  \item Move the mouse to adjust inset depth.
+  \item \textbf{Left Click} to confirm.
+\end{enumerate}
+
+\textbf{Key Modifiers During Operation}:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{O} (during inset): Toggle Outset mode (extrude outward instead of inset)
+  \item \textbf{I} (press again): Toggle Individual mode (each face insets independently)
+  \item \textbf{Ctrl} (during inset): Toggle depth (push the inset faces in or out simultaneously)
+\end{itemize}
+
+\textbf{Key Properties} (F9):
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Thickness}: Width of the inset border
+  \item \textit{Depth}: Perpendicular offset of the inset faces
+  \item \textit{Individual}: Inset each face separately
+  \item \textit{Outset}: Inset outward instead of inward
+  \item \textit{Boundary}: Whether to inset boundary edges
+  \item \textit{Even Offset}: Maintain uniform width regardless of face angle
+  \item \textit{Edge Rail}: Inset follows edge slide behavior
+  \item \textit{Interpolate}: Interpolate data on new faces (UVs, vertex colors)
+\end{itemize}
+
+\subsection{Knife Tool}
+\label{sec:knife}
+
+The Knife tool (\textbf{K}) cuts new edges into existing geometry along a freehand path. Unlike Loop Cut, which follows topology flow, the Knife tool allows arbitrary cuts.
+
+\begin{enumerate}[leftmargin=2em]
+  \item Press \textbf{K} to activate.
+  \item Click to place cut points. Each click creates a new vertex where the knife intersects the surface.
+  \item Press \textbf{Enter} or \textbf{Spacebar} to confirm. Press \textbf{Escape} or \textbf{Right Click} to cancel.
+\end{enumerate}
+
+\textbf{Key Modifiers During Operation}:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{C}: Constrain cut to 45-degree angles
+  \item \textbf{Z}: Cut Through --- the knife cuts through all visible geometry, not just the front-facing surface
+  \item \textbf{E}: Start a new cut line without confirming the previous one
+  \item \textbf{Shift}: Snap to midpoints of edges
+\end{itemize}
+
+\textbf{Knife Project} (Edit Mode $\rightarrow$ Mesh $\rightarrow$ Knife Project) projects the outline of another object onto the selected mesh, cutting edges where the projection intersects the surface. The cutting object must be selected first (the mesh to be cut is the active object). Useful for cutting shapes like logos or window frames onto curved surfaces.
+
+\subsection{Merge}
+\label{sec:merge}
+
+Merge (\textbf{M}) collapses selected vertices into a single vertex:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Option} & \tableheader{Behavior} \\
+\midrule
+At Center & Merges to the average position of all selected vertices \\
+At Cursor & Merges to the 3D Cursor position \\
+Collapse & Merges each connected group to their respective centers \\
+At First & Merges to the position of the first selected vertex \\
+At Last & Merges to the position of the last selected vertex (the active vertex) \\
+By Distance & Merges vertices within a specified distance threshold (the ``Remove Doubles'' operation) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{warningbox}
+\textbf{Merge by Distance} (M $\rightarrow$ By Distance) is particularly important for cleaning up meshes. It removes overlapping vertices caused by cancelled extrusions, imported geometry with coincident vertices, or Boolean operations. The default threshold of 0.0001 is usually appropriate; increase it cautiously for meshes with larger tolerance needs.
+\end{warningbox}
+
+\subsection{Subdivide}
+\label{sec:subdivide}
+
+Subdivide splits selected faces into smaller faces by adding vertices at edge midpoints and face centers. Access via Right-click $\rightarrow$ Subdivide or Mesh $\rightarrow$ Face $\rightarrow$ Subdivide.
+
+\textbf{Key Properties} (F9):
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Number of Cuts}: How many times to subdivide (1 = each quad becomes 4 quads)
+  \item \textit{Smoothness}: Interpolation smoothing (0 = flat, 1 = smooth)
+  \item \textit{Fractal}: Random offset for rough, rocky surfaces
+  \item \textit{Along Normal}: Fractal offset constrained to face normals
+\end{itemize}
+
+For controlled subdivision with smoothing, the \textbf{Subdivision Surface modifier} is preferred because it is non-destructive and adjustable (see Section~\ref{sec:modifierstack}).
+
+\subsection{Bridge Edge Loops}
+\label{sec:bridge}
+
+Bridge Edge Loops connects two edge loops with new faces, creating a surface between them. It is one of the most powerful topology-building tools.
+
+\begin{enumerate}[leftmargin=2em]
+  \item Select two edge loops (they should have the same number of vertices, though Blender will attempt interpolation).
+  \item Edge menu (\textbf{Ctrl+E}) $\rightarrow$ Bridge Edge Loops.
+\end{enumerate}
+
+\textbf{Key Properties} (F9):
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Type}: Open Loop (tube) or Closed Loop (capped)
+  \item \textit{Number of Cuts}: Additional loops between the bridged ends
+  \item \textit{Interpolation}: Linear or Blend Surface smoothing
+  \item \textit{Smoothness}: Curvature of intermediate loops
+  \item \textit{Profile Factor and Profile Shape}: Control the cross-section shape of the bridge
+\end{itemize}
+
+Bridge Edge Loops is commonly used for connecting separate mesh islands (e.g., two halves of a character), creating tubes and tunnels between openings, building topology bridges between complex shapes, and joining limbs to body meshes.
+
+\begin{furrybox}
+\textbf{Limb-to-body connections:} When modeling anthro characters, Bridge Edge Loops is your primary tool for connecting arms, legs, tails, and ears to the body mesh. Ensure the edge loops on both the body opening and the limb end have the \textit{same vertex count} for clean bridging. Use 8 or 16 vertices for cylindrical limbs (multiples of 4 maintain quad flow). After bridging, use the intermediate cuts to shape the joint transition and provide edge loops for deformation. The shoulder and hip bridges are especially critical for animation quality --- see Chapter~\ref{ch:furryarts} for detailed topology guides.
+\end{furrybox}
+
+\subsection{Fill and Grid Fill}
+\label{sec:fill}
+
+\textbf{Fill (F)} creates a face from selected vertices or edges that form a closed boundary. Simple fill creates a single n-gon face. \textbf{Alt+F} performs a ``Beauty Fill'' that triangulates the region, attempting to create uniform triangles.
+
+\textbf{Grid Fill} fills a closed edge loop with a grid of quads, producing clean topology ideal for subdivision surface modeling. The selected boundary must have an \textit{even number of vertices}. Access from the Face menu (Ctrl+F $\rightarrow$ Grid Fill).
+
+\textbf{Key Properties}:
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Span}: Number of rows of faces in one direction
+  \item \textit{Offset}: Rotates the grid orientation around the boundary
+\end{itemize}
+
+Grid Fill is particularly valuable for closing the tops of cylinders, filling holes in quad-based meshes, and creating clean pole-free patches in organic models.
+
+\subsection{Dissolve}
+\label{sec:dissolve}
+
+Dissolve removes geometry while \textbf{preserving the overall surface shape}, unlike Delete which removes geometry and leaves holes.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Operation} & \tableheader{Shortcut} & \tableheader{Behavior} \\
+\midrule
+Dissolve Vertices & Ctrl + X (vertices) & Removes vertices, merging connected edges \\
+Dissolve Edges & Ctrl + X (edges) & Removes edges, merging connected faces \\
+Dissolve Faces & Ctrl + X (faces) & Removes internal edges between selected faces \\
+Limited Dissolve & Mesh $\rightarrow$ Clean Up & Removes edges/vertices below an angle threshold \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+\textbf{Limited Dissolve} is especially useful for cleaning up imported CAD geometry or high-poly meshes, reducing polygon count in flat areas while preserving curvature. It is also excellent for cleaning up geometry from photogrammetry scans.
+\end{tipbox}
+
+\subsection{Spin and Screw}
+\label{sec:spin}
+
+\textbf{Spin} (Mesh $\rightarrow$ Spin) rotates a profile around an axis to create rotational geometry --- like turning a shape on a lathe. Select the profile edges, set the axis direction via the 3D Cursor position and orientation, and execute Spin.
+
+\textbf{Key Properties} (F9):
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Steps}: Number of segments in the revolution
+  \item \textit{Angle}: Total angle of revolution (360 for a full circle)
+  \item \textit{Auto Merge}: Merge the first and last vertices if they overlap
+  \item \textit{Axis}: X, Y, or Z orientation
+\end{itemize}
+
+\textbf{Screw} (Mesh $\rightarrow$ Screw) is similar to Spin but adds a linear offset along the spin axis with each revolution, creating helical geometry like screws, springs, and spiral staircases.
+
+\subsection{Additional Mesh Operations}
+\label{sec:additionalops}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}C{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Operation} & \tableheader{Shortcut} & \tableheader{Description} \\
+\midrule
+Split & Y & Separate faces from surrounding geometry, same object \\
+Rip & V & Tear vertices apart, creating a seam \\
+Rip Fill & Alt + V & Rip and fill the hole left behind \\
+Edge Slide & G, G (edge) & Slide edges along connected face loops \\
+Vertex Slide & G, G (vertex) & Slide vertex along connected edges \\
+Smooth Vertices & Clean Up menu & Relax vertex positions toward neighbors \\
+Poke Faces & Face menu & Split each face into triangles at face center \\
+Triangulate & Ctrl + T & Convert all selected faces to triangles \\
+Tris to Quads & Alt + J & Convert triangle pairs back to quads \\
+Flip Normals & Normals menu & Reverse face normal direction \\
+Recalculate Outside & Shift + N & Unify normals to point outward \\
+Mark Sharp & Ctrl + E & Mark edges as sharp for auto-smooth \\
+Edge Crease & Shift + E & Set crease weight for SubSurf (0 = smooth, 1 = sharp) \\
+Offset Edge Slide & Ctrl + Shift + R & Slide loop maintaining equidistant spacing \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+\textbf{Tris to Quads} was improved in Blender 4.4 to better favor quad topology. If you are working with imported triangulated meshes (common from game rips, photogrammetry, or CAD conversions), try Tris to Quads first before reaching for a remesher.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 3: PROPORTIONAL EDITING
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Proportional Editing}
+\label{sec:proportional}
+
+Proportional Editing (\textbf{O} to toggle) creates a soft-selection falloff around the selected elements, causing nearby unselected geometry to be affected by transformations to a decreasing degree. This is essential for organic modeling, terrain shaping, and any situation where abrupt transitions are undesirable.
+
+When Proportional Editing is active, a \textbf{gray circle} appears during transformations (G, R, S) showing the falloff radius. Scroll the mouse wheel during the transformation to adjust the radius.
+
+\subsection{Falloff Types}
+
+Cycle through falloff types with \textbf{Shift+O} or select from the header dropdown:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Falloff} & \tableheader{Shape} & \tableheader{Best For} \\
+\midrule
+Smooth & Gaussian-like bell curve & General organic deformation \\
+Sphere & Circular cross-section & Even, dome-like deformations \\
+Root & Steep near center, flat at edges & Sharp deformations with gentle fade \\
+Inverse Square & Very steep near center & Concentrated effect with wide fade \\
+Sharp & Steep with linear decay & Quick falloff, more localized \\
+Linear & Straight diagonal & Even, predictable falloff \\
+Constant & Flat (all affected equally) & Uniform effect within radius \\
+Random & Noisy random & Organic surface roughening \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Proportional Editing Modes}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Disable} (default): No proportional effect
+  \item \textbf{Enable}: Affects all vertices within the falloff radius, including those on other objects (in multi-object editing) and those occluded behind the mesh
+  \item \textbf{Connected Only}: Only affects vertices connected to the selection through edges. This prevents deformations from ``leaking'' to nearby but topologically separate geometry --- \textit{critical for character faces} where eyelids, lips, and ears are close in 3D space but topologically distinct
+  \item \textbf{Projected (2D)}: Uses screen-space distance for falloff rather than 3D distance
+\end{itemize}
+
+\begin{furrybox}
+\textbf{Proportional editing for character shaping:} When shaping an anthro character's muzzle, ears, or tail, always use \textbf{Connected Only} mode. Standard Proportional Editing would affect the interior of the mouth when you move the snout, or deform both ears when you adjust one. Connected Only restricts the falloff to topologically connected geometry only, which is essential for anatomical features that are spatially close but structurally separate.
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 4: THE MODIFIER STACK
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{The Modifier Stack}
+\label{sec:modifierstack}
+
+Modifiers are non-destructive operations that automatically process an object's geometry without permanently changing the underlying mesh data. They are stacked in the \textbf{Modifier Properties panel} (blue wrench icon) and evaluated top-to-bottom. The order of modifiers matters: a Subdivision Surface applied before a Boolean produces different results than the same modifier applied after.
+
+\subsection{Modifier Stack Controls}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Viewport / Render toggles}: Control whether a modifier is active in the viewport, in renders, in Edit Mode, and in Edit Mode cage display.
+  \item \textbf{Reorder}: Drag modifiers up or down to change evaluation order.
+  \item \textbf{Apply} (Ctrl+A on the modifier): Permanently bakes the modifier's effect into the mesh data. This is irreversible (undo excluded).
+  \item \textbf{Duplicate}: Creates a copy of the modifier in the stack.
+  \item \textbf{Move to First / Move to Last}: Quickly repositions a modifier.
+\end{itemize}
+
+Blender organizes modifiers into four categories: \textbf{Generate}, \textbf{Deform}, \textbf{Modify}, and \textbf{Physics}.
+
+\subsection{Generate Modifiers}
+\label{sec:generatemod}
+
+Generate modifiers create new geometry or fundamentally alter the topology.
+
+\subsubsection{Subdivision Surface}
+\label{sec:subdiv}
+
+The single most commonly used modifier in Blender. Subdivides each face and smooths the result using \textbf{Catmull-Clark} or \textbf{Simple} subdivision algorithms.
+
+\begin{historynote}
+Catmull-Clark subdivision was published by Edwin Catmull and Jim Clark in 1978 in the paper ``Recursively Generated B-Spline Surfaces on Arbitrary Topological Meshes.'' The algorithm takes any polygon mesh and iteratively refines it toward a smooth limit surface. Catmull went on to co-found Pixar; Clark went on to found Silicon Graphics (see Chapter~\ref{ch:history}). Their subdivision scheme remains the industry standard nearly fifty years later. Every major 3D application --- Maya, 3ds Max, Cinema 4D, Houdini, and Blender --- uses Catmull-Clark subdivision as its primary smoothing algorithm.
+\end{historynote}
+
+\textbf{Controls}:
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Levels Viewport / Render}: Number of subdivision iterations. Each level \textbf{quadruples} face count. A mesh with 1,000 faces at level 0 has 4,000 at level 1, 16,000 at level 2, and 64,000 at level 3. Keep viewport levels low (1--2) for interactive performance; render levels can be higher (2--4).
+  \item \textit{UV Smooth}: How UVs are interpolated (None, Keep Corners, All)
+  \item \textit{Boundary Smooth}: How mesh boundaries are smoothed (All, Keep Corners)
+  \item \textit{Quality}: Number of OpenSubdiv evaluations
+  \item \textit{Optimal Display}: Only shows new edges in wireframe overlay, dramatically reducing visual clutter
+  \item \textit{Use Creases}: Respects edge crease weights (\textbf{Shift+E} in Edit Mode) for local sharpness control
+  \item \textit{Limit Surface}: \textbf{New in 4.4} --- evaluates the mathematical limit of infinite subdivision, producing a perfectly smooth surface
+\end{itemize}
+
+\begin{tipbox}
+\textbf{Edge creases vs.\ support loops:} There are two approaches to controlling sharpness with Subdivision Surface. \textit{Support loops} (extra edge loops placed near sharp edges) are the traditional method --- robust and universally supported across applications. \textit{Edge creases} (Shift+E, values from 0 to 1) are faster to set up but may not transfer correctly to other software. For production work that stays in Blender, creases are fine. For cross-application pipelines, use support loops.
+\end{tipbox}
+
+\subsubsection{Mirror}
+\label{sec:mirror}
+
+Mirrors geometry across one or more axes (X, Y, Z), creating symmetric models while only editing one half.
+
+\textbf{Key Options}:
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Axis}: X, Y, Z, or combinations for multi-axis mirroring
+  \item \textit{Bisect}: Cuts geometry at the mirror plane
+  \item \textit{Flip}: Reverses which side is source and which is mirror
+  \item \textit{Mirror Object}: Use another object's origin as the mirror center
+  \item \textit{Clipping}: \textbf{Essential} --- prevents vertices from crossing the mirror plane, ensuring a seamless center-line
+  \item \textit{Merge}: Automatically merges vertices within a threshold of the mirror plane
+  \item \textit{Mirror U / Mirror V}: Flips UV coordinates for the mirrored half
+\end{itemize}
+
+\begin{warningbox}
+\textbf{Mirror before Subdivision Surface.} Placing a Mirror modifier \textit{after} a Subdivision Surface causes the mirror seam to fail: the subdivided vertices no longer align with the mirror plane, so the merge threshold cannot find matching vertices. Always place Mirror \textit{before} Subdivision Surface in the stack.
+\end{warningbox}
+
+\subsubsection{Array}
+\label{sec:array}
+
+Creates linear, radial, or path-based arrays of the object's geometry.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Constant Offset}: Fixed distance between copies
+  \item \textit{Relative Offset}: Distance as a multiple of the object's bounding box
+  \item \textit{Object Offset}: Each copy is offset by the transform of a reference object (rotation on the reference produces \textbf{radial arrays})
+  \item \textit{Fit Type}: Fixed Count, Fit Length, or Fit Curve
+  \item \textit{Merge}: Fuse overlapping vertices between copies
+  \item \textit{Caps}: Attach a different object as the first and/or last element
+\end{itemize}
+
+\begin{tipbox}
+For \textbf{radial arrays} (wheels, gears, flower petals): Add an Empty at the center of rotation. Set its rotation to $360\degree / \text{count}$ on the appropriate axis. In the Array modifier, set Object Offset to this Empty and Count to the desired number of copies. For a 12-element radial array, set the Empty's Z rotation to $30\degree$.
+\end{tipbox}
+
+\subsubsection{Boolean}
+\label{sec:boolean}
+
+Combines the mesh with a target object using set operations:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Intersect}: Keeps only the volume shared by both meshes
+  \item \textit{Union}: Combines both volumes into one
+  \item \textit{Difference}: Subtracts the target volume from the modified mesh
+  \item \textit{Solver}: Fast (faster, less robust) or Exact (slower, handles complex intersections and coplanar faces correctly)
+  \item \textit{Self Intersection}: Handle self-overlapping geometry
+\end{itemize}
+
+\begin{warningbox}
+Boolean operations often leave messy topology with n-gons, non-planar faces, and zero-area faces. After applying a Boolean, clean up with \textbf{Limited Dissolve}, \textbf{Merge by Distance}, and manual edge loop insertion. For game assets, consider using the Boolean result as a base and retopologizing over it.
+\end{warningbox}
+
+\subsubsection{Solidify}
+
+Adds thickness to surfaces by duplicating and offsetting geometry.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Thickness}: Wall thickness
+  \item \textit{Offset}: Direction ($-1$ = inward, $0$ = centered, $1$ = outward)
+  \item \textit{Even Thickness}: Compensates for angle-based thickness variation
+  \item \textit{Fill Rim}: Creates faces along open edges to close the shell
+  \item \textit{Material Offset}: Assign a different material to inner/outer/rim faces
+\end{itemize}
+
+\subsubsection{Remaining Generate Modifiers}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Modifier} & \tableheader{Description} \\
+\midrule
+Build & Animates geometry appearing face by face, creating a construction animation effect \\
+Decimate & Reduces polygon count: Collapse (ratio-based), Un-Subdivide (reverses subdivision), Planar (dissolves near-coplanar faces) \\
+Edge Split & Splits edges by angle or mark for sharp shading. Largely superseded by Auto Smooth and custom normals \\
+Geometry Nodes & Attaches a GN node tree as a modifier (see Section~\ref{sec:geonodes}) \\
+Mask & Hides geometry based on vertex group membership or armature bone selection \\
+Multiresolution & Like SubSurf but stores displacement at each level, enabling multi-resolution sculpting (see Section~\ref{sec:multires}) \\
+Remesh & Regenerates mesh with uniform topology: Voxel (best for organic sculpts), Blocks, Smooth, or Sharp quad-remeshing \\
+Screw & Non-destructive rotational geometry from a profile \\
+Skin & Generates a mesh skin around a wireframe skeleton of vertices and edges \\
+Weld & Non-destructive Merge by Distance \\
+Wireframe & Creates wireframe mesh from object edges, replacing each edge with a tube \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Deform Modifiers}
+\label{sec:deformmod}
+
+Deform modifiers change the shape of geometry without altering topology.
+
+\subsubsection{Armature}
+
+Deforms the mesh based on bone transforms in an armature. The primary modifier for character animation rigging. Vertex Groups or Bone Envelopes determine which vertices each bone affects. See Chapter~\ref{ch:animation} for full rigging coverage.
+
+\subsubsection{Displace}
+
+Offsets vertices along their normals based on a texture or image:
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Texture}: Procedural or image texture driving displacement
+  \item \textit{Strength}: Amplitude of displacement
+  \item \textit{Direction}: Normal, X, Y, Z, or custom
+  \item \textit{Midlevel}: Texture value producing zero displacement (0.5 for a 0--1 range)
+  \item \textit{Texture Coordinates}: Object, Global, UV, or Generated
+\end{itemize}
+
+\subsubsection{Complete Deform Modifier Reference}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Modifier} & \tableheader{Description} \\
+\midrule
+Armature & Bone-driven deformation for character rigging \\
+Cast & Projects vertices toward a sphere, cylinder, or cuboid \\
+Curve & Deforms mesh along a curve path (roads, cables) \\
+Displace & Offsets vertices by texture values along normals \\
+Hook & Binds vertices to an external object (usually an Empty) for direct manipulation \\
+Laplacian Deform & Preserves surface detail during anchor-point deformation \\
+Lattice & Deforms mesh via lattice cage control points for broad shape adjustment \\
+Mesh Deform & Like Lattice but uses an arbitrary mesh as the deformation cage \\
+Shrinkwrap & Projects vertices onto target surface (Nearest Surface, Project, Nearest Vertex, Target Normal) \\
+Simple Deform & Twist, Bend, Taper, or Stretch along an axis \\
+Smooth & Smooths vertex positions by averaging with neighbors \\
+Corrective Smooth & Preserves detail during deformation; used after Armature to reduce joint pinching \\
+Laplacian Smooth & Volume-preserving smoothing that maintains curvature \\
+Surface Deform & Binds mesh to target surface; when target deforms, bound mesh follows (clothing, accessories) \\
+Warp & Warps geometry based on transform difference between two objects \\
+Wave & Animated wave deformation with speed, height, width, and damping \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{furrybox}
+\textbf{Corrective Smooth for anthro joints:} Furry characters with digitigrade legs suffer from severe mesh pinching at the ankle and knee during bending. Add a \textbf{Corrective Smooth} modifier \textit{after} the Armature modifier to smooth out deformation artifacts at joints. Set it to use a vertex group to restrict its effect to the problem joints only, preventing it from softening details elsewhere on the body.
+\end{furrybox}
+
+\subsection{Modify Modifiers}
+\label{sec:modifymod}
+
+Modify modifiers alter object data (normals, vertex groups, UVs) without changing geometry:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Modifier} & \tableheader{Description} \\
+\midrule
+Data Transfer & Transfers vertex groups, custom normals, UV maps, vertex colors from a source object \\
+Mesh Cache & Loads external mesh animation data (MDD or PC2 format) \\
+Mesh Sequence Cache & Loads Alembic (.abc) or USD cached geometry sequences \\
+Normal Edit & Overrides mesh normals based on target object direction \\
+UV Project & Projects UV coordinates from projector objects \\
+UV Warp & Warps UVs based on two objects' relative transforms \\
+Vertex Weight Edit & Procedurally modifies vertex group weights based on curves \\
+Vertex Weight Mix & Mixes vertex group weights between groups \\
+Vertex Weight Proximity & Modifies weights based on distance to target objects \\
+Weighted Normal & Recalculates custom normals based on face area, angle, or both \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+\textbf{Weighted Normal} produces better shading on hard-surface models than standard auto-smooth, particularly for surfaces with mixed large and small faces. If you are getting dark shading patches on hard-surface models, try adding a Weighted Normal modifier at the bottom of the stack.
+\end{tipbox}
+
+\subsection{Physics Modifiers}
+\label{sec:physicsmod}
+
+Physics modifiers are typically added through the \textbf{Physics Properties panel} rather than the Modifier panel directly. They appear in the modifier stack for ordering purposes:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Modifier} & \tableheader{Description} \\
+\midrule
+Cloth & Fabric simulation (structural stiffness, bending, air resistance, collision, self-collision) \\
+Collision & Makes the object a collision boundary for cloth, soft body, and particle simulations \\
+Dynamic Paint & Vertex color or displacement driven by contact with brush objects \\
+Explode & Shatters mesh into pieces based on a particle system \\
+Fluid & Mantaflow-based liquid and gas simulation (Domain, Flow, Effector types) \\
+Ocean & Animated ocean surface using FFT-based wave simulation \\
+Particle Instance & Creates geometry instances at particle locations \\
+Particle System & Hair and emitter particles with physics, rendering, and children settings \\
+Soft Body & Elastic body simulation (mass, spring stiffness, damping, goal) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Modifier Stack Order and Best Practices}
+\label{sec:modifierorder}
+
+The order of modifiers determines the final result. Follow these general guidelines:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Generate modifiers first} (Mirror, Array): Define the fundamental shape and repetition before other operations process the geometry.
+  \item \textbf{Topology-altering modifiers next} (Boolean, Remesh): These change mesh structure and should operate on the fully-generated base.
+  \item \textbf{Subdivision Surface}: Position before deform modifiers so deformations work on the smooth surface. Position \textit{after} Booleans so the Boolean cut edges are smoothed.
+  \item \textbf{Deform modifiers after generation} (Armature, Shrinkwrap, Lattice): These bend and reshape the already-generated geometry.
+  \item \textbf{Modify modifiers} (Weighted Normal, Data Transfer): Apply normal corrections and data transfers last, as they depend on the final geometry state.
+  \item \textbf{Physics modifiers} typically go at the bottom of the stack.
+\end{enumerate}
+
+\begin{codebox}
+\texttt{Typical Hard-Surface Stack:}\\[0.3em]
+\texttt{1. Mirror}\\
+\texttt{2. Array (if needed)}\\
+\texttt{3. Boolean}\\
+\texttt{4. Solidify}\\
+\texttt{5. Subdivision Surface}\\
+\texttt{6. Weighted Normal}\\[0.6em]
+\texttt{Typical Character Stack:}\\[0.3em]
+\texttt{1. Mirror (until asymmetric changes needed)}\\
+\texttt{2. Subdivision Surface}\\
+\texttt{3. Armature}\\
+\texttt{4. Corrective Smooth (restricted by vertex group)}\\
+\texttt{5. Surface Deform (for clothing)}\\
+\end{codebox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 5: UV UNWRAPPING
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{UV Unwrapping}
+\label{sec:uv}
+
+\subsection{UV Mapping Concepts}
+\label{sec:uvconcepts}
+
+UV mapping assigns 2D texture coordinates (U and V axes) to every vertex of a 3D mesh. These coordinates determine how a 2D image texture wraps around the 3D surface. UV space is normalized from 0.0 to 1.0 in both axes; coordinates can extend beyond this range for tiling, but the 0--1 range represents one full copy of the texture.
+
+UV mapping is essential for:
+\begin{itemize}[leftmargin=2em]
+  \item Applying image textures (photographs, painted textures, baked maps)
+  \item Texture painting (painting directly onto the 3D surface)
+  \item Baking (transferring lighting, normal, or ambient occlusion data to textures)
+  \item Game engine integration (all real-time rendering requires explicit UVs)
+\end{itemize}
+
+\begin{warningbox}
+\textbf{Apply scale before UV unwrapping.} Non-uniform object scale distorts UV unwrapping results. Always apply scale (\textbf{Ctrl+A $\rightarrow$ Scale}) before unwrapping. This is one of the most common beginner mistakes and produces results that look correct in the UV editor but stretched on the 3D model.
+\end{warningbox}
+
+\subsection{Seam Marking}
+\label{sec:seams}
+
+UV seams define where the mesh surface is ``cut'' to unfold into 2D. Good seam placement produces low-distortion UVs with minimal stretching.
+
+\textbf{Marking Seams}:
+\begin{enumerate}[leftmargin=2em]
+  \item Enter Edit Mode, switch to Edge selection mode (\textbf{2}).
+  \item Select edges where you want seams.
+  \item UV menu (\textbf{U}) $\rightarrow$ Mark Seam, or Edge menu (\textbf{Ctrl+E}) $\rightarrow$ Mark Seam.
+  \item Seams appear as \textcolor{furry}{red lines} on the mesh.
+\end{enumerate}
+
+\textbf{Clearing Seams}: Select seam edges, then U $\rightarrow$ Clear Seam or Ctrl+E $\rightarrow$ Clear Seam.
+
+\textbf{Seam Placement Guidelines}:
+\begin{itemize}[leftmargin=2em]
+  \item Place seams along edges that will be \textit{hidden} (backs of characters, undersides of objects, material boundaries)
+  \item Place seams at sharp edges where texture stretching would be most visible
+  \item Minimize the number of UV islands --- each seam creates a separate island
+  \item Ensure each island is a reasonable shape that can flatten without excessive distortion
+  \item For organic models: center back, around ears, along inner limbs, at scalp hairline
+  \item For hard-surface models: along sharp edges where material changes direction
+\end{itemize}
+
+\begin{furrybox}
+\textbf{UV seam strategy for furry characters:} Place seams along natural boundaries --- the centerline of the back, under the chin, inside the legs, around the base of the ears and tail. These are areas where seam distortion will be hidden by the character's fur particle system. \textbf{Avoid seams across the face}; even subtle UV seam artifacts become obvious on a character's expressive muzzle.
+
+For \textbf{VRChat avatars}, you will often need to fit your entire character into a single texture atlas (1024$\times$1024 for Quest, 2048$\times$2048 for PC). Plan your UV layout for efficient atlas packing from the start. Use \textbf{Texel Density Checker} add-on or a checker pattern texture to verify uniform pixel density across the character.
+\end{furrybox}
+
+\subsection{Unwrapping Methods}
+\label{sec:unwrapmethods}
+
+Access unwrapping methods via \textbf{U} (UV Mapping menu) in Edit Mode:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Method} & \tableheader{Description} \\
+\midrule
+Unwrap & Primary method. Uses marked seams to unfold with minimal distortion. Method options: Angle Based (ABF, for most cases) and Conformal (preserves angles) \\
+Smart UV Project & Automatic cutting based on face angle thresholds. Good for mechanical objects and architecture \\
+Lightmap Pack & Packs each face individually for maximum UV coverage. Designed for light map baking \\
+Cube Projection & Projects from six orthogonal directions. Good for box-shaped objects \\
+Cylinder Projection & Wraps UVs around a cylindrical projection. Good for tubes, bottles, trunks \\
+Sphere Projection & Wraps UVs onto a spherical projection. Good for globes, eyeballs \\
+Project from View & Projects UVs from the current viewport angle. Good for decals and single-view objects \\
+Follow Active Quads & Unwraps by following active face's UV proportions through quad topology. Produces grid-aligned UVs ideal for tiled textures \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{UV Editor Tools}
+\label{sec:uveditor}
+
+The UV Editor provides tools for manipulating the 2D UV layout:
+
+\textbf{Transform Tools}: Move (\textbf{G}), Rotate (\textbf{R}), Scale (\textbf{S}) work on UV vertices/edges/faces, just as in the 3D Viewport.
+
+\textbf{Key UV Operations}:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Pack Islands} (UV $\rightarrow$ Pack Islands): Automatically arranges all UV islands within the 0--1 space. Options for margin, shape method (Concave, Bounding Box), and rotation.
+  \item \textbf{Average Islands Scale}: Normalizes island sizes so texel density is uniform.
+  \item \textbf{Minimize Stretch}: Relaxes UV positions to reduce angular distortion.
+  \item \textbf{Stitch} (V): Joins UV vertices split by seams.
+  \item \textbf{Weld} (M): Merges selected UV vertices.
+  \item \textbf{Pin} (P): Pins UV vertices in place during relax/unwrap operations.
+  \item \textbf{Live Unwrap}: Moving pinned vertices causes the rest of the layout to update in real-time.
+\end{itemize}
+
+\textbf{UV Sync Selection}: When enabled (button in the UV Editor header), selecting geometry in the 3D Viewport automatically selects corresponding UVs and vice versa.
+
+\begin{tipbox}
+Use a \textbf{checkerboard texture} as the UV Editor background to visualize stretching and distortion. Squares that are uniformly sized and shaped across the 3D model indicate good UVs; stretched or compressed squares indicate areas that need better seam placement or relaxation.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 6: SCULPT MODE
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Sculpt Mode}
+\label{sec:sculpt}
+
+Sculpt Mode transforms the 3D Viewport into a digital sculpting environment where geometry is deformed using brush-based tools, similar to working with digital clay. Enter Sculpt Mode via the mode selector or the \textbf{Ctrl+Tab} pie menu.
+
+\begin{historynote}
+Digital sculpting revolutionized 3D character creation in the early 2000s. Before sculpting, characters were modeled entirely by hand-placing vertices --- a painstaking process that required both artistic skill and deep technical knowledge of topology. Pixologic's \textbf{ZBrush} (1999, with sculpting features arriving by 2002--2003) changed everything by allowing artists to work at millions of polygons with an experience analogous to sculpting physical clay. Suddenly, traditional sculptors and concept artists could create detailed 3D characters without learning edge-loop topology first.
+
+Blender's sculpting capabilities have grown dramatically, with the 2.8+ era bringing it into competitive range with ZBrush for many workflows. The introduction of the \textbf{Brush Asset Shelf} in Blender 4.x and the continuous performance work on multithreaded sculpting have made Blender a viable primary sculpting tool for character artists.
+\end{historynote}
+
+\subsection{Sculpt Mode Fundamentals}
+\label{sec:sculptfundamentals}
+
+Sculpt Mode operates directly on mesh vertices. The resolution of your mesh determines the level of detail you can sculpt --- more vertices allow finer detail. Three strategies exist for managing sculpt resolution:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Dyntopo (Dynamic Topology)}: Automatically adds and removes vertices as you sculpt. Toggle with \textbf{Ctrl+D} or from the header.
+  \item \textbf{Multiresolution Modifier}: Subdivides the entire mesh uniformly, allowing sculpting at different resolution levels. Add via the Modifier Properties panel.
+  \item \textbf{Voxel Remesh}: Rebuilds the entire mesh with uniform voxel-based topology. Access via \textbf{Ctrl+R} in Sculpt Mode.
+\end{enumerate}
+
+The \textbf{Brush Asset Shelf} at the bottom of the viewport displays all available brushes. Blender 4.4 ships with the Essentials library containing approximately \textbf{130 brush assets}. Access the brush shelf popup anytime with \textbf{Shift+Spacebar}. Type a brush name to filter.
+
+\subsection{Universal Brush Controls}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shortcut} & \tableheader{Action} \\
+\midrule
+F & Adjust brush radius \\
+Shift + F & Adjust brush strength \\
+Ctrl (hold while sculpting) & Invert brush direction (e.g., Draw pushes inward) \\
+Shift (hold while sculpting) & Smooth brush override (temporarily activates Smooth regardless of active brush) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\subsection{Draw Brushes}
+\label{sec:drawbrushes}
+
+Draw brushes push vertices inward or outward and form the foundation of sculpting work.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Brush} & \tableheader{Description} \\
+\midrule
+Draw & Standard brush. Pushes vertices outward along the surface normal. The most versatile brush for building and refining forms. Adjustable falloff, stroke method, and texture mask. \\
+Draw Sharp & Sharper falloff profile, creating more defined ridges and creases. Ideal for wrinkles, cuts, and hard-edged features. \\
+Clay & Adds volume with a flattening tendency. Builds material up to a flat plane rather than along the normal. Good for building broad forms. \\
+Clay Strips & More aggressive than Clay, with a square (strip-like) falloff. The standard workhorse for building rough volumes quickly. Strip shape allows directional strokes. \\
+Clay Thumb & Deforms as though pressing a thumb into clay. Produces a dragging, smearing effect. \\
+Layer & Adds a uniform layer of height. Creates a flat-topped plateau at the brush strength --- subsequent strokes do not build higher until you release the mouse. \\
+Inflate & Pushes each vertex along its own normal, causing the surface to expand or contract uniformly. Effective for swelling or shrinking forms. \\
+Blob & Similar to Inflate but with a more spherical, bulging effect. \\
+Crease & Pinches geometry together while pushing inward, creating sharp fold lines. Essential for clothing folds, skin wrinkles, and sharp creases. \\
+Multi-plane Scrape & Scrapes the surface from two angled planes, creating clean defined edges. Excellent for hard-surface sculpting: panel edges, armor plates, mechanical forms. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Flatten and Contrast Brushes}
+\label{sec:flattenbrushes}
+
+These brushes modify the surface height distribution. They appear with red thumbnails in the brush shelf.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Brush} & \tableheader{Description} \\
+\midrule
+Smooth & The most frequently used brush. Averages vertex positions with neighbors, reducing noise and softening forms. Almost always used via the Shift shortcut. \\
+Flatten & Pushes vertices toward a plane defined by the average height within brush radius. High points go down, low points go up. \\
+Fill & Upward-only Flatten. Only pushes vertices \textit{up} toward the reference plane. \\
+Scrape & Downward-only Flatten. Only pushes vertices \textit{down} toward the reference plane. \\
+Plane & \textbf{New in 4.4.} Generalization of Flatten, Fill, and Scrape. Provides controls for reference plane stabilization and range of influence. Can replicate and extend all three specialized brushes. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Move Brushes}
+\label{sec:movebrushes}
+
+Move brushes translate, pinch, and magnify geometry. They appear with yellow icons in the brush shelf.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Brush} & \tableheader{Description} \\
+\midrule
+Grab & Moves vertices with the mouse, as though grabbing and pulling the surface. Essential for building shapes and adjusting proportions. \\
+Elastic Deform & Like Grab but preserves volume through elastic energy minimization. More natural deformations. \\
+Snake Hook & Pulls vertices along with the stroke, creating long trailing forms. Ideal for tentacles, horns, hair strands, organic tendrils. \\
+Thumb & Similar to Grab but only moves the initial area. Smearing, thumbprint-like effect. \\
+Pose & Rotates mesh regions around auto-detected pivot points, simulating limb posing without bones. \\
+Nudge & Pushes vertices in the stroke direction without lifting them from the surface. Like smearing paint. \\
+Rotate & Rotates the mesh region around the brush center. \\
+Slide Relax & Slides vertices along the surface while maintaining shape, redistributing mesh density. \\
+Boundary & Deforms mesh boundary edges: bend, expand, and inflate modes for open edge manipulation. \\
+Pinch & Pulls vertices toward the brush center, narrowing features and sharpening forms. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{furrybox}
+\textbf{Sculpting anthro heads:} The \textbf{Snake Hook} brush is indispensable for pulling out ears, muzzle shapes, and horns from a base head mesh. Start with a sphere, use Grab and Elastic Deform to establish the overall skull proportions, then use Snake Hook to pull out ear shapes. Once the basic silhouette is established, switch to Clay Strips to build up the muzzle volume, and Crease to define the eye orbits and mouth line. For digitigrade feet, the Pose brush can quickly bend a cylindrical base into the correct ankle angle without manual vertex pushing.
+\end{furrybox}
+
+\subsection{Specialized Sculpt Brushes}
+\label{sec:specialbrushes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Brush} & \tableheader{Description} \\
+\midrule
+Cloth & Simulates cloth-like deformation: folds, wrinkles, draping effects without full simulation. Modes: Drag, Push, Pinch Point, Inflate, Grab, Expand. \\
+Simplify & Reduces geometry in the sculpted area (Dyntopo only). Removes unnecessary vertices in flat areas. \\
+Mask (M) & Paints masking weight (0--1) onto the surface. Masked areas (dark) are protected from sculpting. \\
+Draw Face Sets & Paints face set assignments. Face sets partition the mesh into named regions for visibility control and isolated operations. \\
+Multires Displacement Eraser & Erases multires displacement, reverting to lower-resolution shape. \\
+Multires Displacement Smear & Smears displacement data, blending detail. \\
+Paint (Color) & Paints vertex colors or color attributes directly in Sculpt Mode. Blue thumbnails. \\
+Smear (Color) & Smears existing vertex colors, blending them. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Masking and Face Sets}
+\label{sec:masking}
+
+\subsubsection{Masking Operations}
+
+Masking operations are accessed via the Mask menu or \textbf{Alt+M}:
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Operation} & \tableheader{Shortcut} & \tableheader{Description} \\
+\midrule
+Invert Mask & Ctrl + I & Swap masked and unmasked \\
+Clear Mask & Alt + M & Remove all masking \\
+Box Mask & B & Draw a box to mask a region \\
+Lasso Mask & Shift + Ctrl + LMB & Freeform lasso masking \\
+Mask by Normal & Menu & Mask based on normal direction \\
+Mask by Cavity & Menu & Mask concavities or convexities \\
+Grow/Shrink Mask & Menu & Expand or contract masked region \\
+Sharpen/Smooth Mask & Menu & Adjust mask edge sharpness \\
+Mask Extract & Menu & Create new mesh from masked region \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\subsubsection{Face Sets}
+
+Face Sets provide a more structured alternative to masking:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Draw Face Sets} brush assigns faces to color-coded groups
+  \item \textbf{Ctrl+Click} on a face hides all other face sets (isolates one set)
+  \item \textbf{Shift+Click} on a hidden face set reveals it
+  \item \textbf{Alt+H} reveals all hidden face sets
+  \item Face sets can be created from masking, loose parts, material slots, or sharp edges
+  \item The Smooth brush \textbf{does not cross face set boundaries by default}, which is useful for maintaining sharp edges between regions
+\end{itemize}
+
+\subsection{Dyntopo, Multires, and Remesh}
+\label{sec:multires}
+
+\subsubsection{Dyntopo (Dynamic Topology)}
+
+Toggle with \textbf{Ctrl+D}. Dynamically subdivides and decimates the mesh as you sculpt.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Detail Type}: Relative (brush-relative resolution), Constant (fixed triangle size), Brush (adapts to brush radius), Manual (no automatic tessellation)
+  \item \textit{Detail Size}: Resolution of generated triangles
+  \item \textit{Refine Method}: Subdivide Edges, Collapse Edges, or both
+  \item \textit{Symmetrize}: Mirror the sculpt across an axis
+\end{itemize}
+
+\begin{warningbox}
+\textbf{Dyntopo destroys UV maps, vertex groups, and shape keys.} Use it for initial sculpting passes where you are blocking out forms. Dyntopo generates \textbf{triangulated topology}, which is not suitable for subdivision surface workflows. Sculpts created with Dyntopo typically need remeshing before they can be used in production.
+
+Additionally, Dyntopo can break perfect symmetry over time. Periodically use Mesh $\rightarrow$ Symmetrize to restore mirror symmetry.
+\end{warningbox}
+
+\subsubsection{Multiresolution Modifier}
+
+Adds subdivision levels to the mesh and stores displacement data at each level. Sculpting at a high level adds detail without affecting the low-resolution base mesh.
+
+\textbf{Key Operations}:
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Subdivide}: Add a new resolution level
+  \item \textit{Unsubdivide}: Remove the lowest level
+  \item \textit{Delete Higher}: Remove levels above the current sculpt level
+  \item \textit{Reshape}: Transfer the sculpted shape to the base mesh
+  \item \textit{Apply Base}: Move the base mesh to match the current sculpt
+\end{itemize}
+
+\begin{tipbox}
+\textbf{Sculpting workflow:} Start with Dyntopo to freely explore the form without worrying about resolution. Once the basic shape is established, use \textbf{Voxel Remesh} to generate clean, uniform topology. Then add a \textbf{Multiresolution modifier} to sculpt detail at multiple levels while preserving UVs and vertex groups. This two-phase approach gives you the freedom of Dyntopo for exploration and the structure of Multires for production.
+\end{tipbox}
+
+\subsubsection{Voxel Remesh}
+
+Rebuild the mesh with \textbf{Ctrl+R} in Sculpt Mode. Uses a voxel-based algorithm that generates uniform quad-dominant topology. Essential for cleaning up Boolean operations, merging separate mesh regions, and preparing Dyntopo sculpts for further work.
+
+\subsection{Mesh Filters}
+\label{sec:meshfilters}
+
+Mesh Filters apply an effect uniformly to the entire visible (unmasked) mesh. Access from the Mesh Filter menu. Hold the mouse button and move up/down to adjust strength:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Filter} & \tableheader{Effect} \\
+\midrule
+Smooth & Smooths entire surface \\
+Scale & Scales positions along normals \\
+Inflate & Inflates entire mesh along normals \\
+Sphere & Morphs toward a spherical shape \\
+Random & Random displacement on all vertices \\
+Relax & Relaxes topology without changing shape \\
+Surface Smooth & Laplacian-based smoothing, preserving volume \\
+Relax Face Sets & Smooths face set boundaries \\
+Sharpen & Enhances detail by amplifying curvature \\
+Enhance Details & Sharpens high-frequency detail \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Complete Sculpt Mode Shortcut Reference}
+\label{sec:sculptshortcuts}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shortcut} & \tableheader{Action} \\
+\midrule
+F & Resize brush radius \\
+Shift + F & Adjust brush strength \\
+Ctrl (hold) & Invert brush (subtract instead of add) \\
+Shift (hold) & Smooth brush override \\
+Ctrl + D & Toggle Dyntopo \\
+Ctrl + R & Voxel Remesh \\
+M & Mask brush \\
+Alt + M & Clear Mask \\
+Ctrl + I & Invert Mask \\
+B (in mask mode) & Box Mask \\
+H & Hide Face Set \\
+Shift + H & Isolate Face Set \\
+Alt + H & Show All \\
+Shift + Space & Brush popup shelf \\
+X & Mirror toggle (X axis) \\
+Y & Mirror toggle (Y axis) \\
+Z & Mirror toggle (Z axis) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 7: GEOMETRY NODES
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Geometry Nodes}
+\label{sec:geonodes}
+
+\begin{historynote}
+Geometry Nodes, introduced in Blender 2.92 (February 2021) and substantially redesigned in Blender 3.0 with the field-based workflow, brought Houdini-style procedural thinking to Blender. Side Effects Software pioneered the idea that geometry operations should be composable nodes in a graph rather than one-off tools applied sequentially. Houdini's procedural approach has been the industry standard in VFX for decades, but at \$4,495 for an FX license, it was inaccessible to most independent artists. Blender's Geometry Nodes makes this approach available to anyone, for free.
+
+The field system, introduced in Blender 3.0, was a fundamental architectural shift. Earlier versions of Geometry Nodes operated on concrete data --- you had to explicitly loop over elements. The field system introduced lazy evaluation: a ``Position'' node does not return a position, it returns a \textit{function} that can evaluate position for any element. This made Geometry Nodes dramatically more powerful and more intuitive.
+\end{historynote}
+
+\subsection{Architecture and Concepts}
+\label{sec:gnarch}
+
+A Geometry Nodes tree is attached to an object via the \textbf{Geometry Nodes modifier}. The node tree receives the object's geometry as input (via the Group Input node) and outputs modified or entirely new geometry (via the Group Output node). The entire process is non-destructive --- the original geometry is never altered.
+
+Geometry Nodes operates on several geometry types:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Mesh}: Vertices, edges, faces
+  \item \textbf{Curve}: Control points and spline segments
+  \item \textbf{Point Cloud}: Unconnected points
+  \item \textbf{Volume}: OpenVDB grids
+  \item \textbf{Instances}: References to other geometry (lightweight copies that share data)
+\end{itemize}
+
+\subsection{Socket Types and Visual Language}
+\label{sec:gnsockets}
+
+Nodes communicate through sockets --- input connectors on the left, output connectors on the right. Socket colors indicate data types:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Socket Color} & \tableheader{Data Type} & \tableheader{Description} \\
+\midrule
+Green & Geometry & Mesh, curve, point cloud, volume, or instances \\
+Gray & Float & Single decimal number \\
+Purple & Vector & Three-component (x, y, z) for positions, directions, scales \\
+Yellow & Color & RGBA four-component color value \\
+Pink/Rose & Boolean & True/False value \\
+Teal/Cyan & Integer & Whole number \\
+Orange & String & Text data \\
+White & Object & Reference to a scene object \\
+White & Collection & Reference to a collection \\
+Brown & Material & Reference to a material \\
+Brown & Image & Reference to an image data-block \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Connection Rules}: Only compatible socket types can be connected. Blender automatically inserts conversion nodes for some compatible type pairs (e.g., Integer to Float). Incompatible connections are rejected.
+
+\textbf{Noodle Styles}: Solid lines indicate direct data flow. \textit{Dashed lines} indicate field connections --- the data is not a single value but a function that will be evaluated per-element.
+
+\subsection{Fields and Attributes}
+\label{sec:gnfields}
+
+The field system is the conceptual heart of modern Geometry Nodes.
+
+\textbf{A field is a function that produces different values for each element} (vertex, edge, face, spline point, instance) of a geometry. For example, the Position node outputs a field. When connected to a Set Position node, it does not output a single position --- it outputs a function that, when evaluated, returns the position of each individual vertex. The Set Position node evaluates this field for every vertex.
+
+\textbf{Attributes} are named data stored on geometry elements:
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Built-in Attributes}: Position, Normal, Index, ID, Radius (curves), Handle Position (Bezier curves)
+  \item \textbf{Custom Attributes}: User-defined data attached via the Store Named Attribute node or Geometry Nodes outputs
+  \item \textbf{Attribute Domains}: The element type an attribute is stored on --- Point (vertex), Edge, Face, Face Corner, Spline, or Instance
+\end{itemize}
+
+\textbf{The Spreadsheet Editor} displays attribute data in tabular form, showing every attribute for every element. It is essential for debugging Geometry Nodes setups. Access it from the Geometry Nodes workspace or change any editor to Spreadsheet type.
+
+\begin{tipbox}
+\textbf{Debugging with the Spreadsheet:} When a Geometry Nodes setup produces unexpected results, add the Spreadsheet editor to your layout and click on different nodes to inspect their output. The Spreadsheet shows you exactly what values each attribute has at each element, which is invaluable for finding domain mismatches, unexpected field evaluations, or missing data.
+\end{tipbox}
+
+\subsection{Key Node Categories}
+\label{sec:gnnodes}
+
+Geometry Nodes organizes nodes into categories accessible from the \textbf{Add menu (Shift+A)} in the Geometry Node Editor.
+
+\subsubsection{Attribute Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Store Named Attribute & Save a field value as a named attribute on the geometry \\
+Capture Attribute & Evaluate a field and store the result, freezing it for downstream use \\
+Remove Named Attribute & Delete a named attribute \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Input Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Group Input & Exposes parameters to the modifier panel (user-adjustable) \\
+Collection Info & Access objects within a collection \\
+Object Info & Access transform, geometry, or name of a referenced object \\
+Value / Integer / Boolean / Vector / Color / String & Constant value inputs \\
+Index & Returns element index (0, 1, 2, \ldots) as a field \\
+Position & Returns the position of each element as a field \\
+Normal & Returns normal direction of each element \\
+ID & Returns the element ID \\
+Scene Time & Returns current frame number and seconds \\
+Random Value & Generates random numbers per element \\
+Named Attribute & Reads a named attribute from geometry \\
+Self Object & Returns reference to the modifier's object \\
+Collection (new in 4.4) & Direct collection data-block selection \\
+Object (new in 4.4) & Direct object data-block selection \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Geometry Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Join Geometry & Combine multiple geometry inputs into one \\
+Transform Geometry & Apply translation, rotation, scale \\
+Set Position & Move vertices/points based on a field \\
+Set Material & Assign a material to geometry \\
+Bounding Box & Output the axis-aligned bounding box \\
+Convex Hull & Create smallest convex mesh enclosing geometry \\
+Separate Geometry & Split geometry based on a boolean field (selection) \\
+Delete Geometry & Remove elements based on a boolean field \\
+Duplicate Elements & Duplicate elements a specified number of times \\
+Geometry to Instance & Convert geometry to a single instance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Mesh Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Mesh Boolean & Union, Intersect, or Difference between meshes \\
+Mesh to Curve & Extract edge loops as curves \\
+Subdivide Mesh & Subdivide faces \\
+Subdivision Surface & Catmull-Clark or Simple subdivision \\
+Triangulate & Convert faces to triangles (30--100$\times$ faster in 4.4) \\
+Dual Mesh & Create topological dual (faces $\leftrightarrow$ vertices) \\
+Extrude Mesh & Extrude vertices, edges, or faces \\
+Flip Faces & Reverse face normal direction \\
+Scale Elements & Scale individual faces, edges, or vertices \\
+Split Edges & Split edges based on selection \\
+Sort Elements & Reorder elements (50\% faster in 4.4) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Curve Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Curve to Mesh & Generate mesh tube along a curve with a profile shape \\
+Curve to Points & Sample points along a curve \\
+Fill Curve & Create a face from a closed curve \\
+Fillet Curve & Round curve corners \\
+Resample Curve & Resample at uniform spacing \\
+Reverse Curve & Reverse spline direction \\
+Trim Curve & Cut a curve to a specified range \\
+Set Curve Radius & Control per-point radius \\
+Set Handle Type & Change Bezier handle types \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Point and Instance Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Distribute Points on Faces & Randomly or uniformly distribute points on mesh surfaces \\
+Points to Vertices & Convert point cloud points to mesh vertices \\
+Set Point Radius & Adjust point cloud display radius \\
+Instance on Points & Create instances at point positions \\
+Realize Instances & Convert instances to real geometry \\
+Rotate Instances & Rotate each instance \\
+Scale Instances & Scale each instance \\
+Translate Instances & Move each instance \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Volume and Material Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Mesh to Volume & Convert mesh to OpenVDB volume \\
+Volume to Mesh & Extract isosurface mesh from volume \\
+Set Material & Assign material to all geometry \\
+Set Material Index & Set per-face material index \\
+Material Selection & Boolean field for faces with a specific material \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Utility Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Math & Arithmetic: Add, Subtract, Multiply, Divide, Power, Sine, Cosine, etc. \\
+Vector Math & Vector operations: Add, Cross Product, Dot Product, Normalize, etc. \\
+Boolean Math & AND, OR, NOT, NAND, NOR, XOR \\
+Compare & Greater Than, Less Than, Equal, etc. \\
+Map Range & Remap a value from one range to another \\
+Clamp & Constrain a value between min and max \\
+Mix & Blend between two values based on a factor \\
+Switch & Select between two inputs based on a boolean \\
+Accumulate Field & Running accumulation of field values \\
+Repeat Zone & Loop a section of nodes a specified number of times \\
+Simulation Zone & Maintain state across frames for simulation effects \\
+Find in String (new in 4.4) & Search for substring, return position \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Essential Node Patterns}
+\label{sec:gnpatterns}
+
+The following node combinations form the foundation of most Geometry Nodes setups.
+
+\subsubsection{Scatter System (Vegetation, Rocks, Debris)}
+
+\begin{codebox}
+\texttt{Group Input --> Distribute Points on Faces --> Instance on Points --> Group Output}\\
+\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \^{}}\\
+\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (Collection Info for instances)}
+\end{codebox}
+
+This is the most common Geometry Nodes pattern. Distribute Points on Faces scatters points across the input mesh surface. Instance on Points places object copies (from a Collection Info or Object Info node) at each point. Use Random Value nodes to vary scale, rotation, and instance selection. Weight Paint a vertex group on the source mesh to control density.
+
+\subsubsection{Procedural Curve Mesh (Cables, Pipes, Fences)}
+
+\begin{codebox}
+\texttt{Group Input --> Curve to Mesh --> Group Output}\\
+\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \^{}}\\
+\texttt{\ \ \ \ \ \ \ \ \ \ (Curve Circle or custom profile for cross-section)}
+\end{codebox}
+
+\subsubsection{Parametric Deformation}
+
+\begin{codebox}
+\texttt{Group Input --> Set Position --> Group Output}\\
+\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \^{}}\\
+\texttt{\ \ \ \ \ (Position + Math/Vector Math = computed offset)}
+\end{codebox}
+
+\subsubsection{Selection-Based Operations}
+
+\begin{codebox}
+\texttt{Group Input --> Separate Geometry --> [process each branch]}\\
+\texttt{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \^{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ --> Join Geometry --> Group Output}\\
+\texttt{\ \ \ \ \ \ \ \ \ (Compare/Boolean Math field)}
+\end{codebox}
+
+\subsection{Common Use Cases}
+\label{sec:gnusecases}
+
+\subsubsection{Scatter Systems}
+
+Distribute Points on Faces combined with Instance on Points creates vegetation distribution, rock placement, building facades, and any scenario requiring many copies of objects across a surface. Use Random Value nodes to vary scale, rotation, and instance selection. Weight Paint a vertex group on the source mesh to control density by connecting it to the Density input.
+
+\subsubsection{Procedural Terrain}
+
+Use \textbf{Noise Texture}, \textbf{Voronoi Texture}, or other procedural textures as fields in a Set Position node to displace a subdivided plane. Combine multiple noise octaves with Math nodes for realistic terrain. Use Separate Geometry based on height to assign different materials to water, grass, rock, and snow regions. See Chapter~\ref{ch:shading} for material setup.
+
+\subsubsection{Parametric Modeling}
+
+Expose dimensions, counts, and profiles as Group Input parameters. Build furniture, architectural elements, or mechanical parts that update instantly when parameters change. The \textbf{Repeat Zone} node (added in Blender 4.0) enables iterative constructions like spiral staircases and gear teeth.
+
+\subsubsection{Animation and Simulation}
+
+The \textbf{Simulation Zone} maintains state between frames, enabling particle-like simulations, growth effects, and accumulating phenomena within Geometry Nodes. Scene Time provides the current frame for time-dependent effects. See Chapter~\ref{ch:animation} for integration with the animation system.
+
+\subsubsection{Array and Pattern Generation}
+
+Combine Mesh Line or Curve Resample with Instance on Points for regular arrays. Use Transform and Math nodes to create radial patterns, hexagonal grids, or custom distributions.
+
+\begin{furrybox}
+\textbf{Geometry Nodes for fur and hair:} As of Blender 4.x, Geometry Nodes can generate hair curves directly, offering a procedural alternative to the particle hair system. This is powerful for \textbf{stylized fur} --- you can control strand length, curl, density, and color variation entirely through nodes, making it easy to iterate on a character's fur pattern without manual grooming. The traditional particle system remains better for production-quality realistic fur with grooming tools, but GN-generated fur is excellent for stylized and toony characters.
+
+For \textbf{VRChat optimization}, Geometry Nodes can generate LOD (level of detail) versions of fur by exposing a strand count parameter. Drop the count for the Quest build, keep it high for the PC build --- from a single node tree.
+\end{furrybox}
+
+\subsection{Blender 4.4 Geometry Nodes Changes}
+\label{sec:gn44}
+
+Blender 4.4 delivers significant improvements to the Geometry Nodes system:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Triangulate Node Performance}: Ported from BMesh to Mesh internally, yielding \textbf{30$\times$ to 100$\times$ faster execution}. Dramatically benefits procedural workflows generating triangulated geometry for real-time applications or physics simulations.
+  \item \textbf{Sort Elements Node Performance}: Approximately \textbf{50\% faster} in common scenarios.
+  \item \textbf{New Find in String Node}: Searches for a substring within a string and returns the position, enabling text processing workflows.
+  \item \textbf{New Input Nodes}: Collection and Object input nodes allow selecting data-blocks directly from the node editor.
+  \item \textbf{Limit Surface Option}: The Subdivision Surface node now exposes a Limit Surface option that evaluates to the mathematical limit of infinite subdivision.
+  \item \textbf{Over 70 Bug Fixes}: The Winter of Quality initiative resolved over 70 Geometry Nodes bugs during January 2025 alone.
+\end{itemize}
+
+\begin{warningbox}
+\textbf{Common Geometry Nodes pitfalls:}
+\begin{itemize}[leftmargin=1em]
+  \item \textbf{Realizing instances too early}: Realize Instances converts lightweight instances into full geometry, dramatically increasing memory and processing time. Keep instances as instances until you need to modify them individually.
+  \item \textbf{Domain mismatches}: Connecting a face-domain field to a point-domain input causes automatic interpolation, which may produce unexpected results. Verify domains in the Spreadsheet editor.
+  \item \textbf{Missing random seed variation}: If Random Value nodes across different parts of a tree use the same seed, they produce identical ``random'' values. Always vary the Seed input.
+\end{itemize}
+\end{warningbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 8: CURVES, SURFACES, AND TEXT
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Curves, Surfaces, and Text}
+\label{sec:curves}
+
+\subsection{Curve Objects}
+\label{sec:curveobjects}
+
+Curve objects are mathematically defined paths manipulated through control points rather than vertices. Blender supports two curve types:
+
+\subsubsection{Bezier Curves}
+
+Each control point has a position and two handles that control tangent direction and curvature.
+
+\begin{historynote}
+The Bezier curves you drag in Blender descend directly from Pierre B\'{e}zier's work at Renault in 1962, where he needed a mathematical way to describe smooth automobile body panels. Paul de Casteljau at Citro\"{e}n independently developed equivalent mathematics. B\'{e}zier published first, so the curves bear his name, but de Casteljau's algorithm for evaluating them is the standard computational method used in every graphics application today. See Chapter~\ref{ch:history} for the full history.
+\end{historynote}
+
+\textbf{Handle Types}:
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Auto}: Handles calculated automatically for smooth curvature
+  \item \textit{Vector}: Handles point toward adjacent control points, creating straight segments
+  \item \textit{Aligned}: Handles locked collinear (smooth) but with independent lengths
+  \item \textit{Free}: Handles are independent (can break smoothness)
+\end{itemize}
+
+\subsubsection{NURBS Curves}
+
+\begin{historynote}
+NURBS (Non-Uniform Rational B-Splines) are the generalization of B\'{e}zier curves to higher-order polynomial basis functions. They dominated CAD software for decades because they can represent mathematically perfect curved surfaces with infinite resolution. Industrial design tools like Rhino 3D and CATIA are built entirely around NURBS. Blender supports NURBS but polygon mesh modeling has largely supplanted NURBS in entertainment workflows, where flexibility and rendering speed matter more than mathematical precision.
+\end{historynote}
+
+NURBS curves are defined by control points with weights. The curve does not pass through control points; instead, control points attract the curve. Order (complexity of the polynomial basis) and weight per control point provide fine control.
+
+\subsubsection{Curve Properties}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textit{2D/3D toggle}: 2D curves are constrained to a plane (useful for logo extrusion)
+  \item \textit{Resolution Preview/Render}: Number of intermediate points between control points
+  \item \textit{Twist Method}: How the curve normal rotates (Minimum, Z-Up, Tangent)
+  \item \textit{Fill Mode}: Full, Back, Front, or None (for closed 2D curves)
+\end{itemize}
+
+\subsubsection{Curve Geometry (Bevel)}
+
+Curves can generate 3D geometry through beveling:
+\begin{itemize}[leftmargin=2em]
+  \item \textit{Depth}: Adds a circular cross-section, turning the curve into a tube
+  \item \textit{Resolution}: Smoothness of the circular cross-section
+  \item \textit{Extrude}: Extends the 2D curve profile into a ribbon
+  \item \textit{Bevel Object}: Uses another curve as the cross-section profile
+  \item \textit{Taper Object}: Uses another curve to control radius along the path length
+\end{itemize}
+
+\textbf{Common Uses}: Animation paths (Follow Path constraint), cable/pipe modeling, text on curve, Geometry Nodes input (Curve to Mesh), particle guide paths.
+
+\subsection{Surface Objects}
+\label{sec:surfaces}
+
+NURBS Surface objects are 2D grids of control points defining smooth mathematical surfaces, extending NURBS curves into two dimensions (U and V).
+
+Blender provides surface primitives: Surface Curve, Surface Circle, Surface Surface, Surface Cylinder, Surface Sphere, and Surface Torus.
+
+Surface objects are less commonly used in modern Blender because Subdivision Surface on mesh objects provides similar results with more intuitive editing, Geometry Nodes offers more flexible procedural generation, and most import/export formats do not preserve NURBS surfaces. Surfaces remain useful for mathematically precise forms and CAD interoperability.
+
+\subsection{Text Objects}
+\label{sec:text}
+
+Text objects (\textbf{Shift+A $\rightarrow$ Text}) create 3D text that can be styled, extruded, and animated.
+
+\textbf{Editing Text}: Enter Edit Mode (\textbf{Tab}) to type and edit content. Standard text editing shortcuts work (arrow keys, Home/End, Ctrl+A, Ctrl+C/V).
+
+\textbf{Font Properties}:
+\begin{itemize}[leftmargin=2em]
+  \item Font Family (any system font or loaded font file)
+  \item Bold / Italic / Bold Italic variants
+  \item Size, Shear (italic angle for fonts without italic variants)
+\end{itemize}
+
+\textbf{Geometry Properties}:
+\begin{itemize}[leftmargin=2em]
+  \item Extrude: Depth of the 3D text
+  \item Offset: Expand or contract the text outline
+  \item Bevel Depth and Resolution: Rounded edges on extruded text
+  \item Taper Object: Varies depth along a curve
+\end{itemize}
+
+\textbf{Layout Properties}:
+\begin{itemize}[leftmargin=2em]
+  \item Horizontal / Center / Right / Justify / Flush alignment
+  \item Character Spacing, Word Spacing, Line Spacing
+  \item Text on Curve: Flow text along a curve object
+  \item Text Boxes: Multiple text regions with overflow behavior
+\end{itemize}
+
+\textbf{Conversion}: Text objects can be converted to meshes (Object $\rightarrow$ Convert $\rightarrow$ Mesh) or curves (Object $\rightarrow$ Convert $\rightarrow$ Curve) for further editing. This is commonly done when the text shape needs modification beyond what text properties allow.
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 9: WORKED EXAMPLES
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Worked Examples}
+\label{sec:workedexamples}
+
+\subsection{Example 1: Modeling a Coffee Cup with Modifiers}
+\label{sec:cupexample}
+
+This step-by-step walkthrough demonstrates the modifier-based modeling workflow by creating a coffee cup from a cylinder.
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Add a Cylinder} (Shift+A $\rightarrow$ Mesh $\rightarrow$ Cylinder). Set vertices to 32, depth to 2.0, and radius to 0.5.
+
+  \item \textbf{Enter Edit Mode} (Tab). Select the top face (Face mode, 3). Delete it (X $\rightarrow$ Faces) to create an open top.
+
+  \item \textbf{Add wall thickness} with a \textbf{Solidify modifier}: Thickness 0.05, Offset $-1$ (inward). Enable Fill Rim so the top lip is closed.
+
+  \item \textbf{Shape the profile}: In Edit Mode, use Loop Cut (Ctrl+R) to add 3 edge loops along the height. Use Proportional Editing (O, Smooth falloff) to gently taper the bottom inward and flare the top slightly.
+
+  \item \textbf{Create the handle}: Add a Bezier Curve (Shift+A $\rightarrow$ Curve $\rightarrow$ Bezier). Shape it into a handle arc in the side view. Set Bevel Depth to 0.03 and Resolution to 4 in the curve's Object Data Properties.
+
+  \item \textbf{Convert and join}: Convert the curve to a mesh (Object $\rightarrow$ Convert $\rightarrow$ Mesh). Select both the handle mesh and the cup, press Ctrl+J to join them.
+
+  \item \textbf{Smooth the cup}: Add a \textbf{Subdivision Surface modifier} at level 2 viewport, level 3 render. Enable Optimal Display.
+
+  \item \textbf{Add support loops}: In Edit Mode, add tight Loop Cuts (Ctrl+R) near the top lip and bottom edge to keep them sharp under subdivision. Two loops 1--2mm apart around the rim, two at the base.
+
+  \item \textbf{UV unwrap}: Mark seams along the inside of the handle and a vertical line on the back of the cup. Select all (A), then U $\rightarrow$ Unwrap.
+\end{enumerate}
+
+\begin{tipbox}
+This cup could also be created entirely with the Screw modifier applied to a profile curve --- model half the cross-section of the cup as a series of vertices, then use Screw with 360-degree angle and 32 steps. The handle would still need separate modeling. Both approaches are valid; the Screw approach is faster for radially symmetric objects.
+\end{tipbox}
+
+\subsection{Example 2: Sculpting a Character Head}
+\label{sec:headexample}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Start with a sphere} (Shift+A $\rightarrow$ Mesh $\rightarrow$ UV Sphere, 32 segments). Apply scale (Ctrl+A $\rightarrow$ Scale).
+
+  \item \textbf{Enter Sculpt Mode} (Ctrl+Tab $\rightarrow$ Sculpt Mode). Enable \textbf{X-axis symmetry} (press X in Sculpt Mode header or enable in the Symmetry panel).
+
+  \item \textbf{Enable Dyntopo} (Ctrl+D) with Relative detail and medium resolution.
+
+  \item \textbf{Block out the skull}: Use \textbf{Grab} brush to flatten the sides and establish the oval skull shape. Pull the front forward for the face plane.
+
+  \item \textbf{Define the eye sockets}: Use \textbf{Clay Strips} with Ctrl held (subtractive) to carve the eye socket volumes. Keep them symmetrical using the mirror.
+
+  \item \textbf{Build the nose/brow ridge}: Use \textbf{Clay} brush to build up the brow ridge and nose bridge. Switch to \textbf{Smooth} (Shift) frequently to clean up.
+
+  \item \textbf{Define the mouth}: Use \textbf{Crease} brush to mark the mouth line. Use \textbf{Pinch} to sharpen the lip edges.
+
+  \item \textbf{Refine with Smooth and Flatten}: Alternate between sculpting detail and smoothing/flattening to maintain clean forms.
+
+  \item \textbf{Remesh for production}: When the form is established, use Voxel Remesh (Ctrl+R) at an appropriate voxel size (0.01--0.02 for a head). Then add a \textbf{Multiresolution modifier} for multi-level detail sculpting.
+\end{enumerate}
+
+\begin{furrybox}
+\textbf{Adapting for anthro heads:} After step 4, use \textbf{Snake Hook} to pull out the muzzle from the front of the skull. Establish the muzzle length and width with Grab. Then use Clay Strips to build the nose pad at the tip of the muzzle. For canine or feline characters, the muzzle should taper; for ursine characters, it stays broader. Pull the ears up with Snake Hook early --- they are easier to shape when they have length to work with. The ear-to-skull transition should be addressed with Clay and Smooth to create a natural base.
+\end{furrybox}
+
+\subsection{Example 3: Procedural Landscape with Geometry Nodes}
+\label{sec:landscapeexample}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Create a subdivided plane}: Add a Plane (Shift+A $\rightarrow$ Mesh $\rightarrow$ Plane). Scale it to 100m. Add a Subdivision Surface modifier at level 6 and Apply it (this creates a dense grid).
+
+  \item \textbf{Add a Geometry Nodes modifier}: In the Modifier Properties, add a Geometry Nodes modifier. Click ``New'' to create a new node tree.
+
+  \item \textbf{Build the terrain displacement}:
+  \begin{itemize}[leftmargin=2em]
+    \item Add a \textbf{Noise Texture} node (Shift+A $\rightarrow$ Texture $\rightarrow$ Noise Texture). Set Scale to 3.0, Detail to 8.
+    \item Add a \textbf{Set Position} node. Connect the Group Input geometry to it.
+    \item Connect the Noise Texture Fac output through a \textbf{Math} node (Multiply, factor 10.0) to create the displacement offset.
+    \item Use a \textbf{Combine XYZ} node to put the displacement on the Z axis only.
+    \item Connect the Combine XYZ output to the Offset input of Set Position.
+  \end{itemize}
+
+  \item \textbf{Add material zones}: Use a \textbf{Separate XYZ} node on Position to extract the Z height. Use \textbf{Compare} nodes to create boolean fields for height zones: water ($<$ 0.5), grass (0.5--3.0), rock (3.0--7.0), snow ($>$ 7.0). Use these with \textbf{Set Material} nodes.
+
+  \item \textbf{Scatter vegetation}: Add a \textbf{Distribute Points on Faces} node connected to the grass zone output. Feed it into \textbf{Instance on Points} with a collection of tree objects. Use Random Value to vary scale (0.8--1.2) and rotation (0--360 on Z).
+
+  \item \textbf{Expose parameters}: Drag the Noise Texture Scale and the scatter density values to the Group Input node to make them adjustable from the modifier panel without opening the node editor.
+\end{enumerate}
+
+\begin{tipbox}
+For more realistic terrain, \textbf{layer multiple noise textures at different scales} (a technique called fractal Brownian motion). Use a large-scale noise for the major mountain shapes, a medium-scale noise for hills and valleys, and a small-scale noise for surface roughness. Add them together with Math nodes, scaling each smaller octave to a lower amplitude.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 10: PRACTICAL TIPS AND COMMON PITFALLS
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Practical Tips and Common Pitfalls}
+\label{sec:pitfalls}
+
+\subsection{Modeling Pitfalls}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{N-gons in subdivision surfaces}: Faces with more than 4 vertices produce artifacts under Subdivision Surface. The smoothing algorithm handles quads best, tolerates triangles in some positions, but creates shading anomalies with n-gons. \textit{Strive for all-quad topology on surfaces that will be subdivided.}
+
+  \item \textbf{Non-manifold geometry}: Edges shared by more than two faces, faces with zero area, or loose vertices cause problems with modifiers (Boolean, Solidify), physics simulations, and 3D printing. Use Select $\rightarrow$ Select All by Trait $\rightarrow$ Non-Manifold to identify problem areas.
+
+  \item \textbf{Forgotten Mirror modifier before applying}: If you model with a Mirror modifier and apply it too early, you lose the ability to work on one half. Apply Mirror only when you need asymmetric changes. Keep it non-destructive as long as possible.
+
+  \item \textbf{Boolean cleanup}: Boolean operations leave messy topology. Clean up with Limited Dissolve, Merge by Distance, and manual edge loop insertion.
+
+  \item \textbf{Scale not applied}: Non-uniform object scale distorts UV unwrapping, physics simulations, and modifier behavior. Always apply scale (\textbf{Ctrl+A $\rightarrow$ Scale}) before UVs and before adding physics.
+\end{enumerate}
+
+\subsection{Sculpt Pitfalls}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Sculpting low-poly meshes}: If there are too few vertices, the result is faceted and blocky. Ensure adequate resolution before sculpting via Dyntopo, Multiresolution, or pre-subdivision.
+
+  \item \textbf{Dyntopo and symmetry}: Dyntopo can break perfect symmetry over time. Periodically use Mesh $\rightarrow$ Symmetrize to restore mirror symmetry.
+
+  \item \textbf{Performance at high poly counts}: Very high-poly meshes (10M+ vertices) can cause viewport lag. Use Multires to sculpt at an appropriate level. Mask and hide regions you are not actively working on to improve performance.
+\end{enumerate}
+
+\subsection{Geometry Nodes Pitfalls}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Realizing instances too early}: Realize Instances converts lightweight instances into full geometry, dramatically increasing memory usage. Keep instances as instances until you need individual modification.
+
+  \item \textbf{Domain mismatches}: Connecting a face-domain field to a point-domain input causes automatic domain interpolation, which may produce unexpected results. Use the Spreadsheet editor to verify domains.
+
+  \item \textbf{Missing random seed variation}: Random Value nodes with the same seed produce identical values. Vary the Seed input for independent randomization.
+\end{enumerate}
+
+\begin{furrybox}
+\textbf{Topology pitfalls for furry characters:} The most common mistake in anthro character modeling is using triangles or n-gons in deformation zones. The muzzle, eye orbits, ear bases, and all joint areas \textit{must} use quad topology for clean deformation. Plan your edge flow before you start extruding.
+
+For \textbf{digitigrade legs}, the ankle and knee joints each need at least 3--4 edge loops to deform without pinching. The paw pads are especially tricky --- use Inset to create pad shapes, and ensure the edge loops flow smoothly from the toes up through the ankle joint.
+
+For \textbf{VRChat optimization targets}: Quest avatars should aim for 7,500 polygons (Excellent), 10,000 (Good), or 15,000 (Medium). PC avatars can be higher but should stay under 32,000 for Good rating. Use the Decimate modifier to test poly-count reductions, but for final optimization, manual retopology with strategic edge dissolution produces far better results than automatic decimation.
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+%% SECTION 11: COMPLETE EDIT MODE SHORTCUT REFERENCE
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\section{Complete Edit Mode Shortcut Reference}
+\label{sec:editshortcuts}
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shortcut} & \tableheader{Action} \\
+\midrule
+Tab & Toggle Edit Mode \\
+1 / 2 / 3 & Vertex / Edge / Face select mode \\
+A & Select All \\
+Alt + A & Deselect All \\
+Ctrl + I & Invert Selection \\
+B & Box Select \\
+C & Circle Select \\
+L (hover) & Select Linked \\
+Ctrl + L & Select Linked (from selection) \\
+Alt + Click (edge) & Select Edge Loop \\
+Ctrl + Alt + Click & Select Edge Ring \\
+Ctrl + Numpad +/-- & Grow/Shrink Selection \\
+\midrule
+E & Extrude Region \\
+Ctrl + R & Loop Cut \\
+Ctrl + B & Bevel Edge \\
+Ctrl + Shift + B & Bevel Vertex \\
+I & Inset Faces \\
+K & Knife Tool \\
+M & Merge menu \\
+F & Fill / Create Face \\
+Alt + F & Beauty Fill \\
+Y & Split \\
+V & Rip \\
+Alt + V & Rip Fill \\
+\midrule
+G, G & Edge/Vertex Slide \\
+Ctrl + T & Triangulate \\
+Alt + J & Tris to Quads \\
+Ctrl + X & Dissolve \\
+Shift + N & Recalculate Normals Outside \\
+Ctrl + E & Edge menu (Mark Seam, Mark Sharp, etc.) \\
+Shift + E & Edge Crease \\
+Ctrl + Shift + R & Offset Edge Slide \\
+\midrule
+O & Toggle Proportional Editing \\
+Shift + O & Cycle Proportional Falloff \\
+U & UV Mapping menu \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\vspace{2em}
+
+\begin{quotebox}
+\itshape This chapter covered the three core content-creation systems in Blender: direct mesh editing, organic sculpting, and procedural generation with Geometry Nodes. With the modifier stack as the connective tissue between them, these tools handle everything from precision hard-surface modeling to free-form organic sculpting to algorithmically generated worlds.
+
+\upshape Next, Chapter~\ref{ch:shading} covers how to make this geometry \textit{look like something} --- materials, textures, lighting, and rendering.
+\end{quotebox}

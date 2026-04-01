@@ -1,0 +1,2058 @@
+%% ═══════════════════════════════════════════════════════════════════════════
+%% CHAPTER 5: ANIMATION, RIGGING & SIMULATION
+%% Expanded from research/04-animation-rigging-simulation.md (10,559 words)
+%% Target: 35-45 pages
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\chapter{Animation, Rigging \& Simulation}
+\label{ch:animation}
+
+\begin{quotebox}
+\itshape ``Animation is not the art of drawings that move, but the art of movements that are drawn.''
+
+\upshape --- Norman McLaren, National Film Board of Canada
+\end{quotebox}
+
+\vspace{1em}
+Everything you built in Chapter~\ref{ch:modeling} was static geometry. Everything you shaded in Chapter~\ref{ch:shading} was a still frame. This chapter makes it move. Animation is the soul of 3D --- the difference between a sculpture and a performance, between a material study and a living character. Blender provides a complete animation pipeline: keyframe interpolation, skeletal deformation, procedural physics, and non-linear editing. By the end of this chapter you will understand how to rig a character from scratch, animate a walk cycle, simulate cloth and fluid, and groom fur that responds to wind and gravity.
+
+We begin where all animation begins --- with the keyframe.
+
+\begin{historynote}
+\textbf{The 12 Principles of Animation}\index{12 Principles of Animation} were codified by Disney animators Ollie Johnston and Frank Thomas in their 1981 book \textit{The Illusion of Life: Disney Animation}. These principles --- Squash and Stretch, Anticipation, Staging, Straight Ahead Action vs.\ Pose to Pose, Follow Through and Overlapping Action, Slow In and Slow Out, Arcs, Secondary Action, Timing, Exaggeration, Solid Drawing, and Appeal --- were developed for hand-drawn 2D animation on paper, but they translate directly into 3D. Blender's F-Curve interpolation modes exist so you can implement Slow In and Slow Out. The NLA Editor exists so you can layer Secondary Actions. Physics simulations implement Follow Through automatically. Every tool in this chapter connects back to at least one of these principles, and we will call them out as we go.
+\end{historynote}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Animation Fundamentals}
+\label{sec:anim-fundamentals}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Keyframes}
+\label{subsec:keyframes}
+
+Animation in Blender works by \textbf{interpolating}\index{interpolation} property values between user-defined \textbf{keyframes}\index{keyframe}. A keyframe stores a specific value for a property --- location, rotation, scale, color, influence, or any animatable property --- at a specific frame number. Blender computes all intermediate values automatically using F-Curves.
+
+To insert a keyframe, select an object and press \textbf{I} to open the Insert Keyframe menu. You can keyframe individual channels (Location X only, for example) or groups of channels (Location, Rotation, Scale, or the entire ``Whole Character'' keying set on an armature).
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Action} & \tableheader{Shortcut} & \tableheader{Notes} \\
+\midrule
+Insert Keyframe & \textbf{I} & Context-sensitive menu \\
+Delete Keyframe & \textbf{Alt+I} & At current frame \\
+Clear All Keyframes & \textbf{Shift+Alt+I} & Removes all keyframes on selected \\
+Next Frame & \textbf{Right Arrow} & Single frame step \\
+Previous Frame & \textbf{Left Arrow} & Single frame step \\
+Next Keyframe & \textbf{Up Arrow} & Jumps to next keyed frame \\
+Previous Keyframe & \textbf{Down Arrow} & Jumps to previous keyed frame \\
+Jump to Start & \textbf{Shift+Left} & First frame of playback range \\
+Jump to End & \textbf{Shift+Right} & Last frame of playback range \\
+Play / Pause & \textbf{Spacebar} & Toggle playback \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+Keyframed properties display with a \textbf{yellow background}\index{keyframe!color indicators} in the Properties panel when the current frame is on a keyframe, and a \textbf{green background} when between keyframes. A \textbf{purple background} indicates a Driver (Section~\ref{sec:drivers}).
+
+\subsection{F-Curves}
+\label{subsec:fcurves}
+
+An \textbf{F-Curve}\index{F-Curve} (function curve) is the mathematical function that defines how a property value changes over time between keyframes. Each animated property has its own F-Curve. F-Curves are composed of keyframe \textbf{control points} connected by \textbf{segments}, and each segment uses an interpolation method to compute intermediate values.
+
+F-Curves have three core properties:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Interpolation mode} --- determines how values are computed between keyframes
+  \item \textbf{Handle type} --- controls the shape of Bezier curve handles at each keyframe
+  \item \textbf{Extrapolation mode} --- determines behavior before the first keyframe and after the last
+\end{itemize}
+
+Understanding F-Curves is the single most important skill for animation polishing. The Graph Editor (Section~\ref{subsec:graph-editor}) is where you will spend most of your time refining motion quality.
+
+\subsection{Interpolation Types}
+\label{subsec:interpolation}
+
+Blender provides three categories of interpolation, selectable per-keyframe via \textbf{T} in the Graph Editor.\index{interpolation!types}
+
+\subsubsection{Standard Interpolation}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Behavior} & \tableheader{Use Case} \\
+\midrule
+\textbf{Constant} & Holds the value of the previous keyframe with no transition. Creates a staircase-shaped curve. & Blocking passes, on/off switches, visibility toggles \\
+\textbf{Linear} & Straight line between keyframes. Constant velocity. & Mechanical motion, conveyor belts, clock hands \\
+\textbf{Bezier} & Smooth curve with adjustable tangent handles. Default mode. & Most character animation, natural motion, organic movement \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Easing Interpolation (Robert Penner Equations)}
+
+These preset easing functions were added in Blender 2.71 and provide physically-inspired motion curves without manual handle adjustment. They are based on Robert Penner's widely-adopted easing equations:\index{easing functions}\index{Robert Penner equations}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Behavior} & \tableheader{Typical Application} \\
+\midrule
+\textbf{Sinusoidal} & Weakest easing, nearly linear with subtle curvature at endpoints & Gentle starts and stops \\
+\textbf{Quadratic} & Moderate acceleration/deceleration following a parabolic curve & General-purpose easing \\
+\textbf{Cubic} & Stronger acceleration than quadratic & Snappier motion \\
+\textbf{Quartic} & Even stronger acceleration & Emphatic starts/stops \\
+\textbf{Quintic} & Strongest polynomial easing & Very dramatic acceleration \\
+\textbf{Exponential} & Exponential growth/decay curve & Rapid acceleration from standstill \\
+\textbf{Circular} & Quarter-circle-based curve & Smooth but defined transitions \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Dynamic Easing}
+
+Dynamic easing types produce physically-inspired motion that goes beyond simple acceleration curves:\index{easing functions!dynamic}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Behavior} & \tableheader{Typical Application} \\
+\midrule
+\textbf{Back} & Cubic easing with overshoot and settle-back. The \texttt{Back} property controls overshoot amplitude. & Anticipation (windup), settle/overshoot, springy UI elements \\
+\textbf{Bounce} & Exponentially decaying parabolic bounce, simulating collision rebound & Bouncing balls, objects hitting surfaces, comedic impacts \\
+\textbf{Elastic} & Exponentially decaying sine wave, like a vibrating elastic band & Wobbly motion, jelly, rubber-band snaps, springy deformations \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Each easing type supports an \textbf{Easing Mode}\index{easing functions!modes} that controls which end of the segment is affected:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Ease In} --- effect builds toward the second keyframe (acceleration)
+  \item \textbf{Ease Out} --- effect fades from the first keyframe (deceleration, physics-like)
+  \item \textbf{Ease In-Out} --- effect on both ends (smooth start and stop)
+\end{itemize}
+
+\begin{tipbox}
+The Elastic and Bounce easing types can replace several keyframes of manual overshoot animation. Instead of hand-keying a landing bounce with six keyframes, set a single keyframe pair with Bounce interpolation and Ease Out mode. This saves time during blocking and produces physically-consistent motion automatically.
+\end{tipbox}
+
+\subsection{Handle Types}
+\label{subsec:handle-types}
+
+Bezier interpolation uses handles at each keyframe to control curve shape. Handle types are changed with \textbf{V} in the Graph Editor:\index{handle types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Handle Type} & \tableheader{Behavior} \\
+\midrule
+\textbf{Automatic} & Blender computes smooth tangents. Handles adjust to maintain smooth flow. \\
+\textbf{Auto Clamped} & Like Automatic, but prevents overshoot by clamping handles when the keyframe is a local extremum. \\
+\textbf{Vector} & Handles point directly at adjacent keyframes. Creates sharp corners. \\
+\textbf{Aligned} & Both handles move together, maintaining a straight line through the keyframe. Manual control. \\
+\textbf{Free} & Each handle moves independently. Maximum control, but can create discontinuities. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{warningbox}
+\textbf{Interpolation overshoot:} When using Automatic handles, Bezier curves can overshoot keyframe values --- a rotation keyframed at 0 and 45 degrees might briefly hit 50 degrees mid-transition. This is especially problematic for rotation channels where overshoot causes visible joint popping. Switch to \textbf{Auto Clamped} handles to prevent this, or add intermediate keyframes at the extremes.
+\end{warningbox}
+
+\subsection{Extrapolation Modes}
+\label{subsec:extrapolation}
+
+Extrapolation\index{extrapolation} determines what happens \textit{outside} the keyframed range --- before the first keyframe and after the last. Set via \textbf{Shift+E} in the Graph Editor:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mode} & \tableheader{Behavior} \\
+\midrule
+\textbf{Constant} (default) & Holds the value of the nearest keyframe \\
+\textbf{Linear} & Extends the curve using the slope of the nearest segment \\
+\textbf{Make Cyclic} (F-Curve Modifier) & Repeats the entire curve. Options: Repeat, Repeat with Offset, Repeat Mirrored \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The \textbf{Make Cyclic}\index{cyclic animation} option is essential for looping animations like walk cycles, breathing, and idle motions. ``Repeat with Offset'' is particularly useful for walk cycles where the character needs to move forward: the position F-Curve increases by the stride length each cycle rather than snapping back to zero.
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Animation Editors}
+\label{sec:anim-editors}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Blender provides four primary animation editors, each serving a distinct role in the animation workflow. Understanding when to use each editor is as important as understanding how to use them.\index{animation editors}
+
+\subsection{Timeline}
+\label{subsec:timeline}
+
+The \textbf{Timeline}\index{Timeline editor} is the simplest animation editor and serves as the primary playback control. It displays a horizontal bar with frame numbers, a playhead (current frame indicator), and basic playback controls.
+
+\textbf{Purpose:} Preview animation playback, navigate frames, insert and delete keyframes at the most basic level.
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Action} & \tableheader{Shortcut} & \tableheader{Notes} \\
+\midrule
+Play / Pause & \textbf{Space} & Toggle animation playback \\
+Jump to Start & \textbf{Shift+Left} & First frame of range \\
+Jump to End & \textbf{Shift+Right} & Last frame of range \\
+Add Marker & \textbf{M} & Named reference point \\
+Rename Marker & \textbf{Ctrl+M} & Label markers for shot structure \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+The Timeline shows keyframe diamonds for the active object but offers limited editing capability. For detailed keyframe manipulation, use the Dope Sheet.
+
+\subsection{Dope Sheet}
+\label{subsec:dope-sheet}
+
+The \textbf{Dope Sheet}\index{Dope Sheet} is the primary keyframe manipulation editor. It extends the Timeline with a channel list on the left, showing all animated properties organized by object, bone, or data-block. Each channel displays its keyframes as diamonds on the timeline.
+
+\textbf{Purpose:} Retiming animation, selecting/moving/scaling groups of keyframes, managing channels, blocking passes.
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Action} & \tableheader{Shortcut} & \tableheader{Notes} \\
+\midrule
+Grab (move) keyframes & \textbf{G} & Retime selected keys \\
+Scale keyframes & \textbf{S} & Scale from cursor position \\
+Box Select & \textbf{B} & Rectangle selection \\
+Delete keyframes & \textbf{X / Delete} & Remove selected \\
+Duplicate keyframes & \textbf{Shift+D} & Copy at same time, then move \\
+Set interpolation type & \textbf{T} & Per-keyframe interpolation \\
+Set handle type & \textbf{Ctrl+T} & Per-keyframe handle \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+The Dope Sheet has several \textbf{modes} accessible from its header dropdown:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Dope Sheet} --- shows all object animation
+  \item \textbf{Action Editor} --- shows the active Action for the active object
+  \item \textbf{Shape Key Editor} --- shows shape key channels
+  \item \textbf{Grease Pencil} --- shows Grease Pencil keyframes
+  \item \textbf{Cache File} --- shows Alembic cache data
+\end{itemize}
+
+The Dope Sheet is considered the most important tool for character animation in Blender. Most keyframe editing --- retiming, blocking, offset --- happens here rather than in the Graph Editor.
+
+\begin{tipbox}
+For the \textbf{pose-to-pose workflow}\index{pose-to-pose workflow}, set all keyframes to Constant interpolation during blocking. This lets you see clean pose-to-pose transitions without Blender's interpolation muddying your timing judgment. Once poses and timing are locked, switch to Bezier in the Graph Editor for polish.
+\end{tipbox}
+
+\subsection{Graph Editor}
+\label{subsec:graph-editor}
+
+The \textbf{Graph Editor}\index{Graph Editor} displays F-Curves as 2D graphs where the X-axis is time (frames) and the Y-axis is the property value. This is the only editor where you can see and manipulate the actual interpolation curves and handles.
+
+\textbf{Purpose:} Fine-tuning interpolation, adjusting easing, polishing motion arcs, adding F-Curve modifiers.
+
+\begin{shortcutbox}
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}C{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Action} & \tableheader{Shortcut} & \tableheader{Notes} \\
+\midrule
+Set interpolation type & \textbf{T} & For selected keyframes \\
+Set handle type & \textbf{V} & For selected keyframes \\
+Set extrapolation & \textbf{Shift+E} & Constant, Linear, or Cyclic \\
+Properties panel & \textbf{N} & Shows exact numeric values \\
+Add F-Curve Modifier & \textbf{Ctrl+Shift+M} & Procedural effects stack \\
+View All & \textbf{Home} & Fit all curves in view \\
+View Selected & \textbf{Numpad .} & Focus on selection \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\textbf{F-Curve Modifiers}\index{F-Curve modifiers} can be stacked on curves to add procedural effects without additional keyframes:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Generator} --- adds a polynomial function to the curve
+  \item \textbf{Built-In Function} --- sine, cosine, tangent, square root, natural log
+  \item \textbf{Envelope} --- defines a value range envelope that scales the curve
+  \item \textbf{Cycles} --- repeats the curve (alternative to cyclic extrapolation, with more control)
+  \item \textbf{Noise} --- adds random variation (excellent for camera shake, subtle breathing, idle fidgets)
+  \item \textbf{Limits} --- clamps values to a minimum/maximum range
+  \item \textbf{Stepped} --- quantizes values to discrete steps (useful for limited animation, stop-motion looks, frame-rate reduction effects)
+\end{itemize}
+
+\subsection{Comparison of Animation Editors}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{1.8cm}C{1.8cm}C{2cm}C{1.8cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Feature} & \tableheader{Timeline} & \tableheader{Dope Sheet} & \tableheader{Graph Editor} & \tableheader{NLA Editor} \\
+\midrule
+View keyframe timing & Yes & Yes & Yes & Strips only \\
+Move/scale keyframes & Limited & Yes & Yes & Strip-level \\
+Edit interpolation curves & No & No & Yes & No \\
+Channel filtering & No & Yes & Yes & Track-based \\
+Action management & No & Yes & No & Yes \\
+Playback controls & Yes & Inherited & Inherited & Inherited \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Non-Linear Animation (NLA) Editor}
+\label{sec:nla}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Overview}
+
+The \textbf{Non-Linear Animation (NLA) Editor}\index{NLA Editor} operates at a higher level than the other animation editors. Instead of working with individual keyframes, the NLA Editor works with \textbf{Action Strips}\index{Action Strip} --- self-contained, reusable chunks of animation that can be layered, blended, and mixed like tracks in a music sequencer or layers in an image editor.
+
+\begin{historynote}
+\textbf{Non-linear editing} originated in film and video post-production. Before digital NLE systems, film editors physically cut and spliced strips of celluloid. The metaphor of ``strips'' and ``tracks'' in Blender's NLA Editor directly descends from this tradition. The same concept revolutionized audio production (multi-track recording, pioneered by Les Paul in the 1940s and made standard by Ampex tape machines) and video editing (Avid, Premiere, Final Cut). Applying non-linear editing to \textit{animation} --- mixing reusable motion clips on a timeline --- was pioneered by systems like Softimage and later adopted across the industry.
+\end{historynote}
+
+\subsection{Core Concepts}
+
+\textbf{Actions:}\index{Action (animation)} Named, reusable animation data blocks. An Action contains a set of F-Curves for specific properties. Actions are created in the Action Editor (a Dope Sheet mode) and can be ``stashed'' or ``pushed down'' to the NLA stack.
+
+\textbf{Tracks:} Horizontal lanes in the NLA Editor. Each track can hold one or more strips. Tracks layer like image editor layers --- the bottom track evaluates first, and higher tracks override or blend with lower ones.
+
+\textbf{Strips:} There are three strip types:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Strip Type} & \tableheader{Purpose} \\
+\midrule
+\textbf{Action Strip} & An instance of an Action. The primary strip type. \\
+\textbf{Transition Strip} & Automatically blends between two adjacent Action Strips on the same track. \\
+\textbf{Meta Strip} & Groups multiple strips into a single manageable unit (like grouping layers). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Strip Properties}
+
+Each Action Strip has configurable properties that control its behavior:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Action} --- which Action data block to use
+  \item \textbf{Slot} --- which Slot within the Action (Blender 4.4+; see Section~\ref{sec:action-slots})
+  \item \textbf{Animated Influence} --- a 0.0--1.0 value controlling how much this strip affects the result (can be keyframed for fades)
+  \item \textbf{Animated Strip Time} --- remaps the internal time of the strip (for speed changes, time-stretching)
+  \item \textbf{Blending Mode} --- how this strip combines with strips below it:
+  \begin{itemize}[leftmargin=1.5em]
+    \item \textbf{Replace} (default) --- overwrites lower strips according to influence
+    \item \textbf{Combine} --- intelligently combines with lower strips
+    \item \textbf{Add} --- adds values on top of lower strips
+    \item \textbf{Subtract} --- subtracts values from lower strips
+    \item \textbf{Multiply} --- multiplies with lower strip values
+  \end{itemize}
+  \item \textbf{Auto Blend In/Out} --- smoothly fades the strip's influence at its start and end
+\end{itemize}
+
+\subsection{Workflow: Building a Character Performance}
+
+The NLA Editor's power becomes clear when you build a complex performance from reusable parts:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Animate a \textbf{walk cycle} as an Action in the Action Editor
+  \item Push it down to the NLA stack (Stash or Push Down button)
+  \item Animate a \textbf{wave gesture} as a separate Action
+  \item Push it down to a higher NLA track
+  \item Use \textbf{Blending Mode: Add} on the wave strip so it layers on top of the walk
+  \item Adjust \textbf{Influence} to control how strongly the wave shows through
+  \item Add \textbf{Transition Strips} between actions for smooth blending
+  \item Scale and repeat strips as needed
+\end{enumerate}
+
+This non-destructive workflow means the original walk cycle and wave gesture Actions remain unmodified. All timing, blending, and layering adjustments happen in the NLA Editor.
+
+\subsection{Reusing and Instancing Animations}
+
+When an Action is used in multiple NLA strips, those strips are \textbf{instances} of the same Action. Editing the original Action (by entering ``tweak mode'' on any strip) updates all instances simultaneously. This is powerful for:
+
+\begin{itemize}[leftmargin=2em]
+  \item Applying the same walk cycle to multiple characters
+  \item Reusing animation libraries across projects
+  \item Creating animation variation through different blending and timing without duplicating data
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Action Slots (Blender 4.4)}
+\label{sec:action-slots}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{What Changed}
+
+Blender 4.4 introduced a fundamental restructuring of the Action system called \textbf{Slotted Actions}\index{Action Slots}\index{Slotted Actions} (also referred to as \textbf{Action Slots}). This is one of the most significant animation architecture changes in Blender's history.
+
+Previously, each Action could only animate a single data-block type --- one object, one armature, one material. In Blender 4.4, Actions can contain \textbf{multiple Slots}, where each Slot represents a distinct ``target'' for animation data. Multiple data-blocks can share the same Action by subscribing to different Slots within it.
+
+\subsection{How Slots Work}
+
+Each Action now contains a set of Slots. Every piece of animation data (F-Curve, keyframe) within an Action is assigned to one specific Slot. When a data-block is animated, it subscribes to both an Action \textit{and} a specific Slot within that Action.
+
+\textbf{Key concepts:}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Slot} --- a named target within an Action. Has a type restriction (Object, Armature, Material, etc.)
+  \item \textbf{Action assignment} --- data-blocks are assigned to an Action and a Slot simultaneously
+  \item \textbf{Auto-assignment} --- when you assign an Action to a data-block, Blender automatically selects an appropriate Slot based on name and type matching. If no suitable Slot exists, the Slot selector remains empty
+  \item \textbf{Type restrictions} --- since a single Action can animate multiple data-block types, type restrictions moved from the Action level to the individual Slot level
+\end{itemize}
+
+\subsection{Practical Implications}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Scenario} & \tableheader{Before 4.4} & \tableheader{After 4.4 (with Slots)} \\
+\midrule
+Animate object + its material & Two separate Actions & One Action with two Slots \\
+Character with multiple meshes & Separate Action per mesh & Single Action with a Slot per mesh \\
+Animation library organization & Many small, single-target Actions & Fewer, more organized multi-Slot Actions \\
+NLA strip assignment & Strip references Action & Strip references Action + Slot \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{NLA and Constraints with Slots}
+
+NLA strips and Action Constraints have been updated to support the Slot system. When assigning an Action to an NLA strip or Action Constraint, the Slot is auto-assigned just as with normal Action assignment.
+
+\subsection{Upgrading to 4.4}
+
+Files created in earlier Blender versions are automatically upgraded. Each legacy Action receives a single Slot corresponding to its original target. The upgrade process is seamless and documented in the Blender 4.4 release notes.
+
+\subsection{Why Action Slots Matter}
+
+Action Slots address a long-standing organizational problem in Blender animation. Complex characters often have animation spread across dozens of Actions (one per material, one per mesh, one per armature). Slots allow all of a character's animation to live in a single Action, making it easier to keep animation organized, reuse and share animations across characters, manage NLA stacks with fewer strips, and build animation libraries that are more intuitive to browse.
+
+\subsection{Layered Actions (Blender 4.4+)}
+
+Alongside Slots, Blender 4.4 introduced a \textbf{Layered Actions}\index{Layered Actions} system that allows animation to be organized into layers \textit{within} a single Action, similar to how NLA strips layer but at the Action level:
+
+\begin{itemize}[leftmargin=2em]
+  \item Each Action can contain multiple \textbf{Layers}
+  \item Layers stack with configurable blending modes
+  \item Animators can work on body mechanics on one layer and facial animation on another
+  \item Layers within an Action are more lightweight than NLA strips for iterative animation work
+  \item This is designed for the ``pose-to-pose then layer refinement'' workflow common in production animation
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Rigging Foundations}
+\label{sec:rigging}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Armatures}
+\label{subsec:armatures}
+
+An \textbf{Armature}\index{armature} is a skeleton structure used to deform meshes. It is a special object type in Blender (Add $\rightarrow$ Armature). An Armature contains \textbf{Bones}\index{bone}, which are arranged in parent-child hierarchies to form kinematic chains.
+
+Armatures have three interaction modes:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mode} & \tableheader{Purpose} \\
+\midrule
+\textbf{Object Mode} & Transform the entire armature as a single object \\
+\textbf{Edit Mode} & Add, delete, and position bones; define hierarchy \\
+\textbf{Pose Mode} & Animate bones; apply constraints; adjust pose \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Bones}
+\label{subsec:bones}
+
+Each bone has three fundamental geometric properties:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Head} (root)\index{bone!head} --- the thick end of the bone, the point closest to the parent
+  \item \textbf{Tail} (tip)\index{bone!tail} --- the thin end of the bone, the point farthest from the parent
+  \item \textbf{Roll}\index{bone!roll} --- the rotation of the bone around its own axis (head-to-tail axis). Roll determines the bone's local X and Z axes, which affects how constraints and rotation channels behave
+\end{itemize}
+
+\textbf{Bone properties in Edit Mode:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Meaning} \\
+\midrule
+\textbf{Connected} & Bone's head is locked to its parent's tail. Moving the parent's tail moves this bone's head. Defines bone chains. \\
+\textbf{Parent} & The parent bone in the hierarchy. Children inherit transforms from parents. \\
+\textbf{Inherit Rotation} & Whether the bone rotates with its parent (default: on) \\
+\textbf{Inherit Scale} & How scale is inherited: Full, Fix Shear, Aligned, Average, None, None (Legacy) \\
+\textbf{Local Location} & Whether location offsets are in parent space or local space \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Bone Types in a Rig}
+\label{subsec:bone-types}
+
+Professional rigs organize bones into functional categories:\index{bone!types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Bone Type} & \tableheader{Purpose} & \tableheader{Typically Visible} \\
+\midrule
+\textbf{Deform bones} & Actually deform the mesh via vertex groups & Hidden from animators \\
+\textbf{Control bones} & Visible bones that animators manipulate & Yes --- with custom shapes \\
+\textbf{Mechanism bones} & Intermediate bones that transfer motion (IK targets, pole targets, helpers) & Hidden from animators \\
+\textbf{Root bone} & Top-level parent; moves the entire character & Yes \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Custom Bone Shapes}
+\label{subsec:custom-shapes}
+
+Any mesh object can be used as a bone's display shape in Pose Mode.\index{bone!custom shapes} This replaces the default octahedral or stick display with a recognizable widget --- circles for FK controls, boxes for IK targets, arrows for pole targets, diamonds for root bones. Set via Properties $\rightarrow$ Bone $\rightarrow$ Viewport Display $\rightarrow$ Custom Object.
+
+\subsection{Armature Display Types}
+\label{subsec:armature-display}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Display Type} & \tableheader{Appearance} & \tableheader{Use Case} \\
+\midrule
+\textbf{Octahedral} & Diamond shapes & General purpose (default) \\
+\textbf{Stick} & Thin lines with dots & Dense rigs where octahedral is cluttered \\
+\textbf{B-Bone} & Shows bendy bone curvature & Rigs using B-Bones \\
+\textbf{Envelope} & Spheres showing influence radius & Envelope-based skinning visualization \\
+\textbf{Wire} & Minimal wireframe & Overlay on top of custom shapes \\
+\textbf{Custom} & Uses the bone's Custom Object & Production rigs with artist-friendly widgets \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Bone Collections}
+\label{sec:bone-collections}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Replacing Bone Layers}
+
+Blender 4.0 replaced the legacy 32-slot numbered bone layer system with \textbf{Bone Collections}\index{Bone Collections} --- named, nestable groups of bones with no fixed limit on the number of collections.
+
+\subsection{Working with Bone Collections}
+
+Bone Collections are managed from the Armature Properties panel (the green bone icon). You can:
+
+\begin{itemize}[leftmargin=2em]
+  \item Create, rename, and delete collections
+  \item Assign bones to collections (select bones, press \textbf{M} in Edit or Pose mode)
+  \item Assign a bone to \textbf{multiple collections} (\textbf{Shift+M})
+  \item Toggle visibility per-collection using the \textbf{eye icon}
+  \item Toggle selectability per-collection using the \textbf{cursor icon}
+  \item Drag-and-drop collections to reorder them
+\end{itemize}
+
+\subsection{Nested Bone Collections (Blender 4.1+)}
+
+Blender 4.1 introduced \textbf{nested (hierarchical) bone collections}\index{Bone Collections!nested}. You can drag any collection onto another to make it a child. This provides multi-level organization:
+
+\begin{codebox}
+Armature\\
+~~+-- Face Controls\\
+~~|~~~~+-- Eyes\\
+~~|~~~~+-- Mouth\\
+~~|~~~~+-- Brows\\
+~~+-- Body Controls\\
+~~|~~~~+-- Spine\\
+~~|~~~~+-- Arms\\
+~~|~~~~+-- Legs\\
+~~+-- Deform Bones (hidden)\\
+~~+-- Mechanism (hidden)
+\end{codebox}
+
+Toggling visibility on a parent collection affects all children. This makes it trivial to hide all face controls at once, for example.
+
+\subsection{Bone Collections in Rigify}
+
+Rigify was updated alongside Bone Collections. Generated rigs now use Bone Collections instead of the old 32-layer system, with automatically named collections for each body region. Rigify's UI panels let you toggle collection visibility from within the 3D Viewport's sidebar (N panel).
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Weight Painting}
+\label{sec:weight-painting}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Overview}
+
+\textbf{Weight Painting}\index{weight painting} is the process of defining how much influence each bone has over each vertex of a mesh. Weights are stored in \textbf{Vertex Groups}\index{vertex group} that share names with the deform bones in the armature. A weight of 0.0 means no influence (displayed as \textcolor{blue}{blue}), and 1.0 means full influence (displayed as \textcolor{red}{red}).
+
+\subsection{Automatic Weights}
+
+When you parent a mesh to an armature with \textbf{Ctrl+P $\rightarrow$ Armature Deform $\rightarrow$ With Automatic Weights}, Blender uses a heat-diffusion algorithm\index{heat-diffusion algorithm} to compute initial weights based on bone proximity and mesh topology. This provides a reasonable starting point for most humanoid characters but rarely produces production-quality results without manual refinement.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parenting Option} & \tableheader{Behavior} \\
+\midrule
+\textbf{With Automatic Weights} & Computes weights using bone proximity (heat map algorithm) \\
+\textbf{With Empty Groups} & Creates vertex groups for each deform bone but assigns no weights \\
+\textbf{With Envelope Weights} & Uses bone envelope sizes to determine influence \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Entering Weight Paint Mode}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Select the mesh
+  \item \textbf{Ctrl+Tab} or select Weight Paint from the mode dropdown
+  \item To see which bone you are painting for, also select the armature and enter Pose Mode (\textbf{Ctrl+click} the armature while in Weight Paint on the mesh)
+\end{enumerate}
+
+\subsection{Weight Paint Tools and Brushes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tool} & \tableheader{Shortcut} & \tableheader{Purpose} \\
+\midrule
+\textbf{Draw} & (default brush) & Paints weight value directly \\
+\textbf{Blur} & & Smooths weight transitions between vertices \\
+\textbf{Average} & & Sets vertices to the average weight in the brush radius \\
+\textbf{Smear} & & Smears existing weights in brush stroke direction \\
+\textbf{Gradient} & & Applies a linear or radial weight gradient \\
+\textbf{Sample Weight} & \textbf{Ctrl+Click} & Picks the weight value under the cursor \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Brush settings:}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Weight} --- the target weight value (0.0 to 1.0)
+  \item \textbf{Radius} --- brush size in pixels
+  \item \textbf{Strength} --- how strongly the brush applies per stroke
+  \item \textbf{Falloff} --- curve controlling brush intensity from center to edge
+\end{itemize}
+
+\subsection{Auto Normalize}
+
+\textbf{Auto Normalize}\index{Auto Normalize} (found in the Tool Settings header) ensures that the total weight of all vertex groups on each vertex always sums to 1.0. When you increase weight for one bone, other bones' weights on those same vertices automatically decrease. This is critical for deformation quality --- if weights do not sum to 1.0, vertices may appear to ``float'' or distort incorrectly.
+
+\begin{warningbox}
+\textbf{Floating vertices:} If a vertex has weights that sum to less than 1.0, part of its position is determined by the armature's Object origin rather than any bone. This causes vertices to ``float'' away from the mesh during animation. Always enable Auto Normalize and check for unweighted vertices with the ``Deform'' display mode in Mesh Properties.
+\end{warningbox}
+
+\subsection{Common Weight Painting Workflow}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Parent mesh to armature with Automatic Weights
+  \item Enter Pose Mode and test deformations by rotating bones
+  \item Identify problem areas (stretching, tearing, volume loss)
+  \item Enter Weight Paint Mode (with armature in Pose Mode)
+  \item Select problem bone, paint corrections
+  \item Use Blur brush to smooth transitions at joint boundaries
+  \item Enable Auto Normalize to maintain weight balance
+  \item Repeat testing and painting until deformation is clean
+\end{enumerate}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Rigify}
+\label{sec:rigify}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{What is Rigify?}
+
+\textbf{Rigify}\index{Rigify} is Blender's built-in automated rigging add-on. It generates complete, production-ready rigs from simple \textbf{meta-rigs} --- template skeletons that define bone positions without the complexity of the final rig. Rigify handles all IK/FK switching, control bone creation, custom widget shapes, and UI panel generation automatically.
+
+Enable Rigify: Edit $\rightarrow$ Preferences $\rightarrow$ Add-ons $\rightarrow$ search ``Rigify'' $\rightarrow$ enable the checkbox.
+
+\subsection{The Meta-Rig}
+
+A meta-rig is an assembly of \textbf{rig samples}\index{rig sample} --- predefined bone chain templates (spine, limb, face, etc.) connected together. Each bone chain is identified by the \texttt{Connected} attribute and a \textbf{rig type} property that tells Rigify what kind of control rig to generate for that chain.
+
+To start: \textbf{Add $\rightarrow$ Armature $\rightarrow$ Human (Meta-Rig)}. This creates a standard biped skeleton.
+
+\subsection{Available Meta-Rig Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Meta-Rig} & \tableheader{Description} \\
+\midrule
+\textbf{Human} & Standard biped with face, spine, arms, legs, hands, feet \\
+\textbf{Basic Human} & Simplified biped without face rig \\
+\textbf{Wolf} & Quadruped with digitigrade legs, tail, ears \\
+\textbf{Cat} & Quadruped variation \\
+\textbf{Horse} & Quadruped with hooves \\
+\textbf{Shark} & Aquatic creature \\
+\textbf{Bird} & Avian with wings, digitigrade legs \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{furrybox}
+\textbf{Meta-rig selection for furry characters:} The Wolf meta-rig is the best starting point for canine and feline anthro characters because it already includes digitigrade leg chains, a tail chain, and ear bones. For bipedal anthro characters, start with the Human meta-rig and add digitigrade leg modifications, a tail spine chain (4--8 bones), and ear bones (2--3 per ear). You can mix rig samples from different templates --- for example, human torso with wolf-type legs. See Section~\ref{sec:digitigrade} for the complete digitigrade setup.
+\end{furrybox}
+
+\subsection{Rigify Workflow}
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Add meta-rig} --- Add $\rightarrow$ Armature $\rightarrow$ choose template
+  \item \textbf{Fit to character} --- In Edit Mode, position meta-rig bones to match character mesh proportions. Only the bone positions matter; the final rig is generated from these.
+  \item \textbf{Configure rig types} --- In Pose Mode, select bones and check the Properties $\rightarrow$ Bone $\rightarrow$ Rigify Type panel to see and adjust the rig type for each bone chain
+  \item \textbf{Generate rig} --- In the Armature Properties panel, click \textbf{Generate Rig}. Rigify creates a new armature with all control bones, mechanism bones, deform bones, constraints, drivers, and UI panels
+  \item \textbf{Parent mesh} --- Select mesh, then Shift-click the generated rig, press \textbf{Ctrl+P $\rightarrow$ Armature Deform $\rightarrow$ With Automatic Weights}
+  \item \textbf{Refine weights} --- Enter Weight Paint mode and clean up automatic weights
+\end{enumerate}
+
+\subsection{Rigify Rig Features}
+
+A generated Rigify rig includes:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{IK/FK switching}\index{IK/FK switching} per limb with seamless snapping
+  \item \textbf{Rubber hose} (bendy bone) limb options for cartoony deformation
+  \item \textbf{Face rig} with individual controls for eyes, eyelids, brows, jaw, lips, cheeks, nose
+  \item \textbf{Finger controls} with curl operators
+  \item \textbf{Pivot control} on the torso for hip-based vs.\ chest-based movement
+  \item \textbf{Custom shape widgets} on all control bones
+  \item \textbf{Bone Collection organization} (4.0+) with UI visibility toggles
+  \item \textbf{Properties panel} in the 3D Viewport sidebar (N panel) with IK/FK sliders and snap buttons
+\end{itemize}
+
+\subsection{Customizing Rigify}
+
+Advanced users can extend Rigify significantly:
+
+\begin{itemize}[leftmargin=2em]
+  \item Create \textbf{custom rig types} by writing Python scripts that follow the Rigify API
+  \item Add custom \textbf{rig samples} to the Rigify sample library
+  \item Modify the \textbf{UI script} that Rigify generates (stored as a text data-block in the .blend file)
+  \item Combine rig samples from different meta-rigs (e.g., human torso with animal legs)
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Constraints}
+\label{sec:constraints}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Constraints\index{constraints} are rules applied to bones or objects that limit or control their transforms based on other objects, bones, or mathematical expressions. Constraints evaluate in stack order (top to bottom) in the Constraint Properties panel. All constraints have an \textbf{Influence} slider (0.0--1.0) that can be keyframed, allowing you to animate constraints on and off.
+
+\subsection{Motion Tracking Constraints}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Constraint} & \tableheader{Purpose} & \tableheader{Key Properties} \\
+\midrule
+\textbf{IK Solver} & Makes a chain of bones rotate to reach a target. Solver works backwards from tip bone. & Chain Length, Target, Pole Target, Pole Angle, Iterations \\
+\textbf{Damped Track} & Rotates bone to point at target using shortest rotation path. Numerically stable. & Target, Track Axis \\
+\textbf{Track To} & Points one axis at target, aligns another to ``up.'' More control than Damped Track but can gimbal lock. & Target, Track Axis, Up Axis \\
+\textbf{Stretch To} & Points at target AND scales bone to reach it. Creates stretchy limbs. & Target, Rest Length, Volume Preservation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Transform Constraints}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Constraint} & \tableheader{Purpose} & \tableheader{Key Properties} \\
+\midrule
+\textbf{Copy Location} & Copies all or individual axes of the target's position & Target, Axes (X/Y/Z), Space, Influence \\
+\textbf{Copy Rotation} & Copies all or individual axes of the target's rotation & Target, Axes, Mix Mode, Space \\
+\textbf{Copy Scale} & Copies the target's scale & Target, Axes, Power, Additive \\
+\textbf{Copy Transforms} & Copies location, rotation, and scale simultaneously & Target, Mix Mode, Space \\
+\textbf{Transformation} & Maps source transform channels to destination channels with configurable ranges & Source/Dest ranges, Map From/To \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Limit Constraints}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Constraint} & \tableheader{Purpose} \\
+\midrule
+\textbf{Limit Location} & Restricts movement to a min/max range per axis \\
+\textbf{Limit Rotation} & Restricts rotation to a min/max range per axis \\
+\textbf{Limit Scale} & Restricts scale to a min/max range per axis \\
+\textbf{Limit Distance} & Keeps the bone within, outside, or on a specified distance from the target \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Relationship Constraints}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Constraint} & \tableheader{Purpose} & \tableheader{Key Properties} \\
+\midrule
+\textbf{Child Of} & Dynamically parents bone to a target. Can be keyframed on/off. & Target, Bone, Set/Clear Inverse \\
+\textbf{Floor} & Prevents bone from passing below (or above) a target surface. Ground contact. & Target, Sticky, Offset, Floor Direction \\
+\textbf{Action} & Drives an entire Action's animation based on a transform channel. & Target, Action, Transform Channel, Start/End Frame \\
+\textbf{Armature} & Allows bone to be influenced by multiple armature targets simultaneously. & Multiple targets with individual weights \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{IK Solver Deep Dive}
+\label{subsec:ik-solver}
+
+Inverse Kinematics\index{Inverse Kinematics (IK)} is one of the most important rigging concepts. Rather than rotating each bone in a chain manually (Forward Kinematics), you place a target and the solver computes all the rotations needed for the chain to reach it.
+
+\begin{historynote}
+\textbf{The history of Inverse Kinematics} begins in robotics, not animation. IK was developed in the 1960s and 1970s for controlling industrial robot arms --- if you know where you want the robot's end effector (hand) to be, the IK solver computes the joint angles needed to reach it. The Jacobian transpose and Jacobian pseudo-inverse methods were the foundational algorithms. The CCD (Cyclic Coordinate Descent) and FABRIK (Forward And Backward Reaching Inverse Kinematics) algorithms came later and are computationally cheaper. Blender uses the iTaSC (instantaneous Task Specification using Constraints) solver by default, developed at KU Leuven in Belgium, which supports weighted, multi-target IK chains.
+\end{historynote}
+
+Blender provides two IK solvers:
+
+\textbf{Standard (iTaSC) IK:}
+\begin{itemize}[leftmargin=2em]
+  \item Default solver for most rigs
+  \item Set chain length to define how many bones in the chain are affected (0 = all ancestors)
+  \item Use a \textbf{Pole Target}\index{pole target} to control the plane of the IK chain (which direction the elbow or knee points)
+  \item \textbf{Pole Angle} adjusts the twist of the chain around the target axis
+  \item \textbf{Iterations} controls solver accuracy (higher = more accurate, slower)
+\end{itemize}
+
+\textbf{iTaSC Full Solver:}
+\begin{itemize}[leftmargin=2em]
+  \item Advanced solver with support for multiple IK targets per chain
+  \item Simulation mode for physically-based IK
+  \item Rarely needed for standard character animation
+\end{itemize}
+
+\textbf{Common IK setup pattern:}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Create an IK target bone (not connected to the chain, positioned at the wrist or ankle)
+  \item Create a pole target bone (positioned in front of the elbow or knee)
+  \item Add IK Solver constraint to the last bone of the chain
+  \item Set Target to the IK target bone
+  \item Set Pole Target to the pole target bone
+  \item Adjust Pole Angle until the chain points correctly (typically requires $-90^\circ$ or $90^\circ$ adjustment)
+\end{enumerate}
+
+\begin{warningbox}
+\textbf{IK flip:} The most common IK problem is the chain ``flipping'' --- the knee or elbow suddenly snapping to the wrong side during animation. This almost always means the pole target is too close to the chain or the pole angle is incorrect. Position pole targets well in front of knees and behind elbows, at least one bone-length away from the chain. If flipping persists, adjust the pole angle by $\pm 90^\circ$ increments.
+\end{warningbox}
+
+\subsection{Bendy Bones}
+\label{subsec:bendy-bones}
+
+\textbf{Bendy Bones}\index{Bendy Bones} (B-Bones) subdivide a single bone into multiple curved segments, providing smooth deformation without adding extra bones to the hierarchy:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Purpose} \\
+\midrule
+\textbf{Segments} & Number of subdivisions (2--32; more = smoother curve) \\
+\textbf{Curve In X/Y} & Curvature at the bone's head \\
+\textbf{Curve Out X/Y} & Curvature at the bone's tail \\
+\textbf{Roll In/Out} & Twist at each end \\
+\textbf{Scale In/Out} & Taper at each end \\
+\textbf{Ease In/Out} & Controls curvature distribution (0=even, 1=concentrated at end) \\
+\textbf{Custom Handle} & Use specific bones as curve handles (Bezier-like control) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Bendy Bones are used for rubber hose limbs (cartoony arm/leg deformation), flexible spines and tails, tongue rigs, smooth neck deformation, and simplified facial muscle simulation.
+
+\begin{furrybox}
+\textbf{Bendy bones for tails:} Tail rigs benefit enormously from Bendy Bones. A tail chain of 4--6 FK bones, each with 4--8 B-Bone segments, produces smooth, flowing tail motion without the dozens of individual bones that would otherwise be needed. Add Curve In/Out handles on the first and last tail bones for S-curve and whip motions. This is the foundation for expressive tail animation --- see Section~\ref{sec:walk-cycle} for how tail follow-through works in practice.
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Shape Keys}
+\label{sec:shape-keys}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Overview}
+
+\textbf{Shape Keys}\index{shape keys} store alternative vertex positions for a mesh. They allow morph-target-based deformation --- the mesh smoothly interpolates between its basis shape and any number of deformed shapes. Shape Keys are essential for facial animation, corrective shapes, and muscle deformation.
+
+Shape Keys are found in the Mesh Properties panel (green triangle icon) under Shape Keys.
+
+\subsection{Types of Shape Keys}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Description} \\
+\midrule
+\textbf{Basis} & The default shape. All other shape keys define deltas (offsets) relative to this. Always created first. \\
+\textbf{Relative} (default) & Each shape key is an offset from the Basis, controlled by an independent Value slider (0.0--1.0). Multiple relative shape keys can be active simultaneously. \\
+\textbf{Absolute} & Shape keys are played back in sequence based on an Evaluation Time value. Used for predetermined shape animations like a flower opening. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Creating Shape Keys}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Add a \textbf{Basis} shape key (this saves the current mesh shape)
+  \item Add additional shape keys (click the \textbf{+} button)
+  \item Select a non-Basis shape key and enter Edit Mode
+  \item Modify the mesh vertices
+  \item Exit Edit Mode --- the modifications are stored as the shape key's deformation
+  \item Adjust the \textbf{Value} slider to blend between Basis and the modified shape
+\end{enumerate}
+
+\subsection{Shape Keys for Facial Animation (FACS)}
+\label{subsec:facs}
+
+Common facial shape keys based on the \textbf{Facial Action Coding System}\index{FACS} (FACS):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shape Key Name} & \tableheader{Deformation} \\
+\midrule
+\textbf{brow\_raise\_L / R} & Raise left/right eyebrow \\
+\textbf{brow\_lower\_L / R} & Lower/furrow brows \\
+\textbf{eye\_blink\_L / R} & Close eyelids \\
+\textbf{eye\_wide\_L / R} & Open eyes wide \\
+\textbf{mouth\_open} & Open jaw \\
+\textbf{mouth\_smile\_L / R} & Raise lip corners \\
+\textbf{mouth\_frown\_L / R} & Lower lip corners \\
+\textbf{mouth\_pucker} & Pucker/kiss lips \\
+\textbf{cheek\_puff\_L / R} & Inflate cheeks \\
+\textbf{nose\_wrinkle} & Scrunch nose \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{furrybox}
+\textbf{Furry-specific shape keys:} Anthro character faces require additional shape keys beyond the standard FACS set. Add shape keys for \textbf{ear rotation} (forward, back, flat), \textbf{muzzle scrunch} (snarl/growl), \textbf{nose twitch}, \textbf{whisker fan} (if applicable), and \textbf{lip curl} (showing teeth). These expressions are critical for conveying emotion in characters with non-human facial geometry. For VRChat avatars, shape keys are the primary animation method since bone-based facial rigs add significant performance overhead in real-time.
+\end{furrybox}
+
+\subsection{Corrective Shape Keys}
+\label{subsec:corrective-shapes}
+
+Corrective shape keys\index{corrective shape keys} fix deformation problems that occur at extreme bone rotations. For example, when an elbow bends past $90^\circ$, the mesh might collapse or lose volume. A corrective shape key restores proper volume at that rotation, driven by the bone's rotation angle via a Driver (Section~\ref{sec:drivers}).
+
+This technique is used extensively in production rigs for shoulders, hips, knees, elbows, and --- for anthro characters --- digitigrade ankle joints where the extreme flexion angle can cause severe mesh collapse.
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Drivers and Expressions}
+\label{sec:drivers}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{What are Drivers?}
+
+\textbf{Drivers}\index{drivers} connect one property to another through a mathematical relationship. Instead of keyframing a property directly, you define a rule: ``this property's value depends on that other property.'' Drivers enable \textbf{procedural animation}\index{procedural animation} --- animation that responds dynamically to changes rather than following a fixed timeline.
+
+A driven property displays with a \textbf{purple background} in the UI (as opposed to the yellow/green of keyframed properties).
+
+\subsection{Adding a Driver}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Right-click} a property $\rightarrow$ \textbf{Add Driver}
+  \item \textbf{Ctrl+D} over a property to add a single driver
+  \item \textbf{Ctrl+D} then drag to another property for a quick copy-driver relationship
+\end{itemize}
+
+\subsection{Driver Types}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Driver Type} & \tableheader{Description} \\
+\midrule
+\textbf{Averaged Value} & Averages the values of all input variables \\
+\textbf{Sum Values} & Sums all input variables \\
+\textbf{Scripted Expression} & Evaluates a Python expression using variables as inputs \\
+\textbf{Minimum Value} & Takes the minimum of all input variables \\
+\textbf{Maximum Value} & Takes the maximum of all input variables \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Scripted Expressions}
+
+Scripted Expressions evaluate Python code to compute the driven value. Variables are defined in the Driver editor and referenced by name in the expression.
+
+\textbf{Available functions in expressions:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Function} & \tableheader{Purpose} \\
+\midrule
+\texttt{sin(x)}, \texttt{cos(x)}, \texttt{tan(x)} & Trigonometric functions \\
+\texttt{asin(x)}, \texttt{acos(x)}, \texttt{atan(x)}, \texttt{atan2(y, x)} & Inverse trigonometric \\
+\texttt{sqrt(x)}, \texttt{pow(x, y)} & Power functions \\
+\texttt{abs(x)}, \texttt{min(x, y)}, \texttt{max(x, y)} & Value functions \\
+\texttt{clamp(x, min, max)} & Clamps x to range \\
+\texttt{lerp(a, b, t)} & Linear interpolation \\
+\texttt{log(x)}, \texttt{exp(x)} & Logarithmic/exponential \\
+\texttt{radians(x)}, \texttt{degrees(x)} & Angle conversion \\
+\texttt{noise.random()} & Random value (0--1) \\
+\texttt{frame} & Current frame number \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Example expressions:}
+
+\begin{codebox}
+\# Oscillating motion\\
+sin(frame * 0.1) * 2.0\\
+\\
+\# Clamped bone rotation to shape key\\
+clamp(var * 2.0, 0.0, 1.0)\\
+\\
+\# Conditional (if bone X > 0, drive Y)\\
+var if var > 0 else 0\\
+\\
+\# Breathing cycle\\
+(sin(frame * 0.15) + 1) * 0.5
+\end{codebox}
+
+\subsection{Common Driver Patterns}
+
+\textbf{Shape key driven by bone rotation:}
+\begin{enumerate}[leftmargin=2em]
+  \item Add driver to shape key Value
+  \item Add a variable, set to Transform Channel
+  \item Set target to armature, specific bone, Rotation channel
+  \item Set expression: \texttt{clamp(var * -1.5, 0.0, 1.0)} (negative because rotation direction may be inverted)
+\end{enumerate}
+
+\textbf{Procedural eye blink:}
+\begin{enumerate}[leftmargin=2em]
+  \item Add driver to eye blink shape key
+  \item Use expression: \texttt{1.0 if (frame \% 72 < 3) else 0.0}
+  \item Result: blink for 3 frames every 72 frames (at 24fps = blink every 3 seconds)
+\end{enumerate}
+
+\textbf{Scale-compensated stretch:}
+\begin{enumerate}[leftmargin=2em]
+  \item Drive bone scale based on distance to target
+  \item Expression: \texttt{(var / rest\_length)} where \texttt{var} is the current distance
+\end{enumerate}
+
+\begin{tipbox}
+Drivers are the secret weapon of production riggers. Every corrective shape key, every automatic squash-and-stretch, every procedural secondary motion is driven by Drivers. Master the Driver editor early --- it will save you hundreds of keyframes across every project.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Walk Cycle Tutorial}
+\label{sec:walk-cycle}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+The walk cycle is the fundamental test of any character rig and the most common animation exercise. This section provides a complete, frame-by-frame walkthrough.\index{walk cycle}
+
+\begin{historynote}
+Richard Williams' \textit{The Animator's Survival Kit}\index{The Animator's Survival Kit} (2001) remains the definitive reference for walk cycle mechanics. Williams broke down walks into four key poses per step --- Contact, Down, Passing, and Up --- with specific timing relationships that produce convincing locomotion. This breakdown, developed for hand-drawn animation on paper, maps directly to 3D keyframe animation. The frame timings in this section follow Williams' standard 24-frame-per-step convention.
+\end{historynote}
+
+\subsection{The Four Key Poses}
+
+A walk cycle contains four key poses that repeat in a mirrored pattern. In a standard 24-frame cycle at 24fps (one second per full cycle, two steps):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}C{1.5cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pose} & \tableheader{Frames} & \tableheader{Body Position} & \tableheader{Weight} \\
+\midrule
+\textbf{Contact} & 1 and 13 & Front foot heel strikes ground, back foot toe pushes off. Legs at widest spread. Arms at widest swing (opposite to legs). & Balanced between both feet \\
+\textbf{Down} & 4 and 16 & Body at lowest point. Front knee bends to absorb weight. Back foot lifts off. & Shifting to front leg \\
+\textbf{Passing} & 7 and 19 & Body rises. Back leg swings forward past planted leg (knees close). Planted leg straight. & Single leg (planted) \\
+\textbf{Up} & 10 and 22 & Body at highest point. Planted leg pushes body up. Swing leg reaches forward. & Planted leg pushes off \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Step-by-Step Procedure}
+
+\textbf{Setup:}
+\begin{enumerate}[leftmargin=2em]
+  \item Open a scene with a rigged character (Rigify rig recommended)
+  \item Set timeline to 24 frames
+  \item Enable \textbf{Cyclic} F-Curve modifier on all channels after completion
+\end{enumerate}
+
+\textbf{Contact Pose (Frame 1):}
+\begin{enumerate}[leftmargin=2em]
+  \item Position the left foot forward, heel touching ground, toes slightly up
+  \item Position the right foot behind, toes on ground, heel lifted
+  \item Tilt the hips slightly down on the left (forward) side
+  \item Rotate the spine slightly to the right
+  \item Swing the right arm forward, left arm back (counter to legs)
+  \item Tilt the head slightly forward
+  \item Key all bones (\textbf{A} to select all, \textbf{I} $\rightarrow$ Whole Character)
+\end{enumerate}
+
+\textbf{Down Pose (Frame 4):}
+\begin{enumerate}[leftmargin=2em]
+  \item Lower the hips (Y-axis down)
+  \item Bend the left (front) knee more to absorb impact
+  \item Begin lifting the right (back) foot
+  \item Arms pass through neutral
+  \item Head level
+  \item Key all bones
+\end{enumerate}
+
+\textbf{Passing Pose (Frame 7):}
+\begin{enumerate}[leftmargin=2em]
+  \item Raise hips back to neutral height
+  \item Straighten the left (planted) leg
+  \item Bring the right leg forward, knee bent, foot passing the planted leg
+  \item Arms near neutral, swinging through
+  \item Key all bones
+\end{enumerate}
+
+\textbf{Up Pose (Frame 10):}
+\begin{enumerate}[leftmargin=2em]
+  \item Raise hips to highest point
+  \item Left leg straight, pushing up on toes
+  \item Right leg reaching forward but not yet touching down
+  \item Arms at moderate swing (opposite to legs)
+  \item Key all bones
+\end{enumerate}
+
+\textbf{Mirror for Second Half (Frames 13--22):}
+Copy frames 1, 4, 7, 10 to frames 13, 16, 19, 22 but with left/right reversed. In Rigify, you can use \textbf{Ctrl+C} then \textbf{Ctrl+Shift+V} (Paste X-Flipped Pose) to mirror poses.
+
+\subsection{Polish Pass}
+
+After the four key poses are set:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Play back and check overall timing
+  \item Add \textbf{breakdowns} between keys for overlap and secondary motion
+  \item Offset arm swing slightly behind leg motion (drag, follow-through)
+  \item Add subtle head bob and torso twist
+  \item Add toe roll on the pushing foot
+  \item Apply \textbf{Cyclic} F-Curve modifiers (\textbf{Shift+E} $\rightarrow$ Make Cyclic in Graph Editor) for infinite looping
+\end{enumerate}
+
+\begin{furrybox}
+\textbf{Digitigrade walk cycles:}\index{digitigrade walk cycle} Digitigrade characters (foxes, wolves, cats, birds) have a distinctly different walk rhythm than plantigrade (human) characters. The key differences:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item The Contact pose involves \textbf{toe contact} rather than heel strike --- the metatarsal is elevated, and the toes touch down first
+  \item The Down pose is less pronounced because the spring-loaded metatarsal absorbs impact
+  \item The Up pose is higher because the extended metatarsal adds effective leg length
+  \item \textbf{Tail follow-through:} The tail should lag 2--4 frames behind the hip rotation, creating a natural wave motion. On direction changes, the tail continues in the old direction briefly before following --- this is Follow Through in action.
+  \item \textbf{Ear animation:} Ears should bounce slightly on the Down pose (secondary action) and track head direction with a 1--2 frame delay
+\end{itemize}
+
+See Section~\ref{sec:digitigrade} for the complete digitigrade rig setup.
+\end{furrybox}
+
+\begin{warningbox}
+\textbf{Cycle pop:} If the first and last frames of a walk cycle do not produce identical poses, you will see a visible ``pop'' when the cycle loops. Ensure the pose at frame 24 is identical to frame 0 (not frame 1 --- the cycle should be frames 1--24 with frame 25 matching frame 1). Use the Cyclic F-Curve modifier with Repeat mode rather than manually duplicating the first keyframe at the end.
+\end{warningbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Character Rigging Walkthrough with Rigify}
+\label{sec:rigging-walkthrough}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+This section provides a complete, step-by-step walkthrough for rigging a character using Rigify. The process applies to both human and anthro characters, with notes on furry-specific modifications.\index{character rigging}
+
+\subsection{Prerequisites}
+
+\begin{itemize}[leftmargin=2em]
+  \item Character mesh in T-pose or A-pose (see Chapter~\ref{ch:modeling} for topology requirements)
+  \item Mesh topology with proper edge loops at joints (elbows, knees, shoulders, hips, fingers, neck)
+  \item Rigify add-on enabled
+\end{itemize}
+
+\subsection{Step-by-Step Process}
+
+\textbf{Step 1: Add the Human Meta-Rig}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Add $\rightarrow$ Armature $\rightarrow$ Human (Meta-Rig)}
+  \item Scale and position the meta-rig to roughly match the character's proportions in Object Mode
+\end{itemize}
+
+\textbf{Step 2: Fit Bones to Character}
+\begin{itemize}[leftmargin=2em]
+  \item Enter Edit Mode on the meta-rig
+  \item Working from the \textbf{spine outward}, align each bone to the character mesh:
+  \begin{itemize}[leftmargin=1.5em]
+    \item Spine bones centered on the torso, following the curve of the back
+    \item Shoulder bones at the shoulder joint centers
+    \item Arm bones: upper arm, forearm, hand, centered on the respective mesh geometry
+    \item Finger bones centered inside each finger
+    \item Leg bones: thigh, shin, foot, toes centered on joints
+    \item Head and neck bones centered on the neck/head
+  \end{itemize}
+  \item \textbf{Critical:} Bone joint positions (heads and tails) must be at the \textbf{center of rotation} for each joint. The elbow bone joint should be at the point where the arm actually bends.
+\end{itemize}
+
+\textbf{Step 3: Adjust Bone Roll}
+\begin{itemize}[leftmargin=2em]
+  \item Select all bones (\textbf{A}) and recalculate roll: \textbf{Shift+N} $\rightarrow$ choose an appropriate method (Global +Z or Active Element)
+  \item Check bone rolls in the N-panel; incorrect roll causes IK flipping and rotation artifacts
+\end{itemize}
+
+\textbf{Step 4: Configure Rigify Options}
+\begin{itemize}[leftmargin=2em]
+  \item In Pose Mode, check bone properties for each chain to ensure correct rig types
+  \item Adjust options like limb rotation axis, IK stretch, FK hinge, rubber hose segments
+\end{itemize}
+
+\textbf{Step 5: Generate the Rig}
+\begin{itemize}[leftmargin=2em]
+  \item In Armature Properties, click \textbf{Generate Rig}
+  \item A new armature named ``rig'' is created with all controls, mechanisms, and a UI script
+\end{itemize}
+
+\textbf{Step 6: Parent the Mesh}
+\begin{itemize}[leftmargin=2em]
+  \item Select the mesh, then \textbf{Shift+Click} the generated rig
+  \item \textbf{Ctrl+P $\rightarrow$ Armature Deform $\rightarrow$ With Automatic Weights}
+\end{itemize}
+
+\textbf{Step 7: Refine Weights}
+\begin{itemize}[leftmargin=2em]
+  \item Test deformations in Pose Mode
+  \item Enter Weight Paint Mode to fix problem areas
+  \item Pay special attention to: shoulder deformation, hip creasing, knee/elbow bending, hand deformation
+\end{itemize}
+
+\textbf{Step 8: Add Shape Keys (Optional)}
+\begin{itemize}[leftmargin=2em]
+  \item Create corrective shape keys for extreme poses
+  \item Drive them with bone rotation drivers (Section~\ref{sec:drivers})
+  \item Add facial shape keys if using the face rig (Section~\ref{subsec:facs})
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Digitigrade Rigging}
+\label{sec:digitigrade}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{What is Digitigrade Locomotion?}
+
+\textbf{Digitigrade}\index{digitigrade} animals walk on their toes rather than the flat of their feet. This includes canines (wolves, dogs, foxes), felines (cats, lions), birds, and many dinosaurs. The visible ``backward-bending knee'' on these animals is actually the \textbf{ankle joint} --- the real knee is higher up, often hidden within the body mass.
+
+\begin{furrybox}
+\textbf{Why this matters for furry artists:} Digitigrade anatomy is the defining skeletal feature of the most popular furry species --- canines, felines, and avians. Getting the leg rig right is the difference between a character that moves like a human in a costume and one that moves like a living creature. The spring-loaded metatarsal, the toe-first ground contact, the wider range of ankle flexion --- all of these produce locomotion that \textit{feels} different from plantigrade walking. This section covers the rigging in detail; Chapter~\ref{ch:furryarts} covers the artistic application.
+\end{furrybox}
+
+\subsection{Bone Chain for Digitigrade Legs}
+
+A digitigrade leg requires a \textbf{three-segment} IK chain (compared to two segments for plantigrade/human legs):
+
+\begin{codebox}
+Hip Joint\\
+~~|\\
+~~+-- Upper Leg (femur) -- real knee bends FORWARD\\
+~~~~~~~~|\\
+~~~~~~~~+-- Lower Leg (tibia) -- real ankle bends BACKWARD\\
+~~~~~~~~~~~~~~|\\
+~~~~~~~~~~~~~~+-- Metatarsal (foot) -- elevated, connecting to toes\\
+~~~~~~~~~~~~~~~~~~~~|\\
+~~~~~~~~~~~~~~~~~~~~+-- Toes -- contact ground
+\end{codebox}
+
+\subsection{Rigify Digitigrade Setup}
+
+Rigify includes a dedicated \texttt{limbs.super\_limb}\index{Rigify!digitigrade} rig type with a digitigrade option:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Add a Human Meta-Rig or start from a Wolf/Cat meta-rig
+  \item In Edit Mode, add an extra bone segment to each leg chain (upper leg, lower leg, foot, toes = 4 bones instead of 3)
+  \item In Pose Mode, select the upper leg bone and set the Rigify Type to \texttt{limbs.super\_limb}
+  \item In the rig type options, set \textbf{Limb Type: Paw} (not Leg or Arm)
+  \item Generate the rig
+\end{enumerate}
+
+The generated rig includes:
+
+\begin{itemize}[leftmargin=2em]
+  \item IK target at the toe tip for ground-plane contact
+  \item Automatic toe roll control
+  \item Three-bone IK chain with proper joint angle management
+  \item FK/IK switching
+\end{itemize}
+
+\subsection{Reverse Foot Setup}
+
+The \textbf{reverse foot}\index{reverse foot} technique uses a chain of bones that evaluates in reverse order (from toe to heel to ankle) to provide intuitive ground-contact controls:
+
+\begin{codebox}
+IK Target (at toe)\\
+~~|\\
+~~+-- Heel Roll Bone (lifts from heel)\\
+~~~~~~~~|\\
+~~~~~~~~+-- Toe Roll Bone (lifts from toe)\\
+~~~~~~~~~~~~~~|\\
+~~~~~~~~~~~~~~+-- Ball Roll Bone (pivots on ball of foot)\\
+~~~~~~~~~~~~~~~~~~~~|\\
+~~~~~~~~~~~~~~~~~~~~+-- IK Target for leg chain
+\end{codebox}
+
+This setup allows the animator to:
+
+\begin{itemize}[leftmargin=2em]
+  \item Plant the foot and have it stick to the ground
+  \item Roll from heel to toe naturally during a walk
+  \item Lift the heel while keeping toes planted
+  \item Lift from the toe tip for push-off
+\end{itemize}
+
+\subsection{Practical Tips for Digitigrade Rigs}
+
+\begin{itemize}[leftmargin=2em]
+  \item Keep IK chain length to 3 (upper leg, lower leg, metatarsal)
+  \item Place the IK pole target in \textbf{front} of the knee (same as human legs)
+  \item Use corrective shape keys at the ankle joint to prevent mesh collapse during extreme flexion
+  \item For furry characters, ensure the metatarsal bone is long enough to account for fur volume
+  \item Test locomotion early --- digitigrade walk cycles have a distinctly different rhythm than plantigrade
+\end{itemize}
+
+\begin{furrybox}
+\textbf{Tail animation for emotion:}\index{tail animation} The tail is one of the most expressive features on furry characters, second only to the ears. Here are the key emotional states and their tail animations:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Happy/Excited:} Tail high, wagging side-to-side with 6--8 frame period. Use sine-wave driver on the root tail bone's Y rotation.
+  \item \textbf{Alert/Curious:} Tail horizontal, slight upward curve. Tip twitches with small, quick rotations.
+  \item \textbf{Nervous/Submissive:} Tail low, tucked partially between legs. Slow, small wag.
+  \item \textbf{Angry/Aggressive:} Tail puffed (scale shape key), held rigid and high. Slow, deliberate sweeps.
+  \item \textbf{Relaxed/Idle:} Tail at natural rest position, gentle sway matching breathing rhythm.
+\end{itemize}
+
+For all states, remember \textbf{follow-through}: the tail tip should always lag 2--4 frames behind the base. On direction changes, each segment of the tail reverses in sequence from base to tip, creating a natural wave. This is the single most important principle for convincing tail animation.
+\end{furrybox}
+
+\begin{furrybox}
+\textbf{Ear animation for expression:}\index{ear animation} Ears on anthro characters serve the same expressive role as eyebrows on human characters. Key positions:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Forward} = alert, interested, happy
+  \item \textbf{Back/flat} = scared, angry, defensive
+  \item \textbf{Drooping/sideways} = sad, tired, defeated
+  \item \textbf{One forward, one back} = confused, listening
+  \item \textbf{Rapid flicks} = startled, processing information
+\end{itemize}
+
+Use 2--3 bones per ear (base, mid, tip) with the tip bone lagging 1--2 frames behind the base for natural secondary motion. Drive idle ear twitches with a noise-based driver on the tip bone for ambient life.
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{The 12 Principles in Blender}
+\label{sec:12-principles}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+The 12 Principles of Animation\index{12 Principles of Animation!Blender implementation} are not abstract theory --- each one maps directly to specific Blender tools. This table serves as a practical reference for applying classical animation principles in a digital workflow:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Principle} & \tableheader{Blender Implementation} \\
+\midrule
+\textbf{Squash \& Stretch} & Scale keyframes on bones, Shape Keys for mesh deformation, Bendy Bones for hose-like stretching \\
+\textbf{Anticipation} & Extra keyframes before main action; Back easing interpolation for wind-up \\
+\textbf{Staging} & Camera placement, lighting, scene composition in Layout workspace \\
+\textbf{Straight Ahead / Pose to Pose} & Straight Ahead: frame-by-frame in Grease Pencil. Pose to Pose: block key poses, then in-between \\
+\textbf{Follow Through / Overlap} & Offset timing on secondary elements (hair, clothing, tail) in the Dope Sheet; delay secondary bones 2--4 frames behind primaries \\
+\textbf{Slow In / Slow Out} & Bezier interpolation handles; easing types (Sinusoidal, Quadratic, etc.) \\
+\textbf{Arcs} & Motion Paths (Pose $\rightarrow$ Motion Paths $\rightarrow$ Calculate); adjust in Graph Editor \\
+\textbf{Secondary Action} & NLA layering: base action on lower track, secondary (breathing, blinking) on higher tracks \\
+\textbf{Timing} & Dope Sheet retiming; keyframe spacing controls speed perception \\
+\textbf{Exaggeration} & Scale up motion arcs, extend poses past realistic limits, use Back easing for overshoot \\
+\textbf{Solid Drawing} & Proper mesh topology (Chapter~\ref{ch:modeling}), weight painting, correct bone roll for consistent volumes \\
+\textbf{Appeal} & Character design, silhouette clarity (Wireframe overlay), expressive shape key ranges \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Motion Paths and Pose Libraries}
+\label{sec:motion-paths}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Motion Paths}
+
+\textbf{Motion Paths}\index{Motion Paths} visualize the trajectory of bones or objects over time as lines in the 3D Viewport:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Select bones in Pose Mode
+  \item \textbf{Pose $\rightarrow$ Motion Paths $\rightarrow$ Calculate} (or \textbf{Object $\rightarrow$ Motion Paths $\rightarrow$ Calculate} for objects)
+  \item Colored dots show frame positions along the path
+  \item Verify arcs of motion --- clean arcs indicate smooth, natural movement
+  \item Erratic or jagged paths indicate problems to fix in the Graph Editor
+\end{enumerate}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Setting} & \tableheader{Purpose} \\
+\midrule
+\textbf{Frame Range} & Calculate for scene range or around current frame \\
+\textbf{Display Path} & Show path in 3D Viewport \\
+\textbf{Frame Numbers} & Display frame numbers along the path \\
+\textbf{Keyframes} & Highlight keyframe positions on the path \\
+\textbf{Keyframe Numbers} & Show keyframe numbers \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Pose Libraries}
+
+Blender's \textbf{Pose Library}\index{Pose Library} system (Asset Browser-based in 4.0+) allows animators to save and recall predefined poses:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Pose the character in Pose Mode
+  \item Select the bones you want to include
+  \item \textbf{Pose $\rightarrow$ Pose Library $\rightarrow$ Create Pose Asset}
+  \item The pose appears in the Asset Browser under the current file's library
+  \item To apply: select target bones, drag the pose from the Asset Browser, or right-click $\rightarrow$ Apply Pose
+\end{enumerate}
+
+Pose Libraries are invaluable for storing commonly-used facial expressions, building libraries of hand poses (fist, point, spread, grip, pinch), saving reference poses for animation blocking, and sharing poses across multiple shots and characters with similar rigs.
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Physics Simulations}
+\label{sec:physics}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Blender provides several physics simulation systems accessible from the Physics Properties panel. Each system computes physical behavior over a frame range and stores the results in a \textbf{cache}\index{simulation cache} that can be baked for deterministic playback.\index{physics simulations}
+
+\subsection{Mantaflow: Fluid, Smoke, and Fire}
+\label{subsec:mantaflow}
+
+\textbf{Mantaflow}\index{Mantaflow} is an open-source fluid simulation framework integrated into Blender for gas (smoke and fire) and liquid simulations.
+
+\textbf{Domain Setup:} Every Mantaflow simulation requires a \textbf{Domain} object --- a bounding box that defines the simulation space. The domain must be larger than all objects participating in the simulation.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Component} & \tableheader{Purpose} \\
+\midrule
+\textbf{Domain} & Bounding volume for the entire simulation. Contains resolution, timing, and cache settings. \\
+\textbf{Flow} & Objects that emit fluid, smoke, or fire into the domain. \\
+\textbf{Effector} & Objects that interact with the simulation (collision obstacles, guides). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Gas Simulations (Smoke and Fire):}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Setting} & \tableheader{Purpose} & \tableheader{Typical Values} \\
+\midrule
+\textbf{Resolution Divisions} & Voxel grid resolution. Higher = more detail, exponentially more memory/time. & 32--64 preview, 128--256+ final \\
+\textbf{Noise Method} & Wavelet noise for small-scale detail at render time & Wavelet \\
+\textbf{Time Scale} & Simulation speed multiplier & 1.0 = real time \\
+\textbf{Vorticity} & Amount of turbulent swirling & 0.0--1.0 \\
+\textbf{Dissolve} & Whether smoke/fire dissipates over time & Enable for most effects \\
+\textbf{Dissolve Time} & Frames until dissipation & 25--80 for typical smoke \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Liquid Simulations:} Liquid simulations have three independently bakeable components:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Liquid particles} --- the primary simulation
+  \item \textbf{Mesh} --- the surface mesh generated from particle data
+  \item \textbf{Secondary particles} --- Spray, Foam, and Bubble particles for surface detail
+\end{enumerate}
+
+\begin{warningbox}
+\textbf{Empty fluid simulation:} The most common Mantaflow problem is a simulation that produces no visible fluid. This almost always means the Flow object is \textit{outside} the Domain bounding box. Ensure all Flow objects are fully contained within the Domain. Also verify that the Flow type (Smoke, Fire, Liquid) matches the Domain type.
+\end{warningbox}
+
+\subsection{Rigid Body Physics}
+\label{subsec:rigid-body}
+
+The \textbf{Rigid Body}\index{Rigid Body} system (based on the Bullet physics engine) simulates solid objects that collide, stack, tumble, and bounce. Objects maintain their shape during simulation.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Object Type} & \tableheader{Behavior} \\
+\midrule
+\textbf{Active} & Fully simulated --- responds to gravity and collisions \\
+\textbf{Passive} & Acts as an immovable collision surface (ground planes, walls) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key properties:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Purpose} \\
+\midrule
+\textbf{Mass} & Weight of the object. Heavier objects push lighter ones. \\
+\textbf{Friction} & Surface friction coefficient (0 = ice, 1 = rubber) \\
+\textbf{Bounciness} (Restitution) & Energy preserved on collision (0 = dead stop, 1 = perfect bounce) \\
+\textbf{Collision Shape} & Simplified collision geometry: Convex Hull, Mesh, Box, Sphere, Capsule, Cylinder, Cone \\
+\textbf{Damping (Translation)} & Resistance to linear motion (air resistance) \\
+\textbf{Damping (Rotation)} & Resistance to rotational motion \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+\textbf{Worked example --- Bouncing Ball:}\index{bouncing ball} The bouncing ball is the classic physics animation test. Set up a sphere with Rigid Body (Active), Mass = 1.0, Bounciness = 0.8. Add a ground plane with Rigid Body (Passive). Press Play. For a more stylized bounce, \textit{disable} the Rigid Body and keyframe the ball by hand using Bounce easing interpolation --- this gives you artistic control over timing and squash-and-stretch that pure physics simulation cannot provide.
+\end{tipbox}
+
+\subsection{Soft Body Physics}
+\label{subsec:soft-body}
+
+\textbf{Soft Body}\index{Soft Body} simulation makes objects deform under forces while trying to maintain their shape. Used for jelly, rubber, cloth-like behavior, bouncing objects, and organic deformation.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Purpose} \\
+\midrule
+\textbf{Mass} & Object mass \\
+\textbf{Friction} & Surface friction \\
+\textbf{Goal (Stiffness)} & How strongly vertices try to return to original position (0 = fully simulated, 1 = pinned) \\
+\textbf{Edges (Springs)} & Use mesh edges as springs connecting vertices \\
+\textbf{Push / Pull} & Spring compression/extension stiffness \\
+\textbf{Damping} & Spring oscillation damping \\
+\textbf{Bending} & Resistance to bending between connected edges \\
+\textbf{Self Collision} & Prevents the soft body mesh from passing through itself \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Particle Systems}
+\label{subsec:particles}
+
+Blender's legacy particle system (Properties $\rightarrow$ Particles) supports two particle types:\index{particle systems}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Purpose} \\
+\midrule
+\textbf{Emitter} & Emits particles over time. Used for rain, sparks, dust, magic effects, snow. \\
+\textbf{Hair} & Grows strands from mesh surface. Used for hair, fur, grass, fibers. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Emitter particle settings:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Setting} & \tableheader{Purpose} \\
+\midrule
+\textbf{Number} & Total particles emitted \\
+\textbf{Lifetime} & Frames each particle exists \\
+\textbf{Emit From} & Vertices, Faces, or Volume \\
+\textbf{Velocity} & Initial particle velocity (Normal, Object, Random) \\
+\textbf{Physics Type} & Newtonian (standard), Keyed (follow path), Boids (flocking/swarming), Fluid \\
+\textbf{Force Field Weights} & Influence from wind, turbulence, vortex, and other force fields \\
+\textbf{Render As} & Halo, Object, Collection, Path (for hair) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Boids Physics}\index{Boids physics} deserves special mention for creature simulation --- it implements flocking behavior (birds, fish, insects) with rules for separation, alignment, cohesion, and goal-seeking.
+
+\subsection{Force Fields}
+\label{subsec:force-fields}
+
+Force fields\index{force fields} influence physics simulations. They are added as objects (Add $\rightarrow$ Force Field):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Force Field} & \tableheader{Effect} & \tableheader{Common Use} \\
+\midrule
+\textbf{Wind} & Constant directional force & Wind on cloth, hair, particles \\
+\textbf{Turbulence} & Random chaotic force & Natural variation in smoke, fire \\
+\textbf{Vortex} & Spinning force around axis & Tornado, whirlpool, spirals \\
+\textbf{Magnetic} & Attracts/repels based on charge & Stylized effects \\
+\textbf{Harmonic} & Spring-like restoring force & Keeping particles near a point \\
+\textbf{Charge} & Radial attraction/repulsion & Clustering, explosions \\
+\textbf{Lennard-Jones} & Molecular interaction force & Inter-particle collision \\
+\textbf{Texture} & Force derived from a texture & Terrain-driven wind \\
+\textbf{Curve Guide} & Forces particles along a curve & Channeled flow, defined paths \\
+\textbf{Boid} & AI-driven flocking forces & Bird flocks, fish schools \\
+\textbf{Drag} & Slows particle velocity & Air/water resistance \\
+\textbf{Fluid Flow} & Guides fluid simulation & Directing smoke and liquid \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Force fields share common properties: \textbf{Strength} (magnitude), \textbf{Flow} (directional bias from object rotation), \textbf{Noise} (randomness), \textbf{Falloff} (how force diminishes with distance --- Power, Linear, Inverse Square, Cone, Tube), and \textbf{Effector Group} (which simulations are affected).
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Cloth Simulation}
+\label{sec:cloth}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Overview}
+
+The \textbf{Cloth}\index{cloth simulation} simulation system models flexible fabric behavior. It computes how a mesh deforms under gravity, forces, and collisions with other objects and itself.
+
+\subsection{Physical Properties}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}L{4.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Purpose} & \tableheader{Typical Values} \\
+\midrule
+\textbf{Quality Steps} & Solver substeps per frame. Higher = more accurate. & 5 general, 10--15 fast cloth \\
+\textbf{Mass} & Fabric weight per area (kg/m$^2$) & 0.3 (silk) to 1.0 (denim) \\
+\textbf{Air Viscosity} & Air resistance/drag & 1.0 standard; higher for parachutes \\
+\textbf{Structural Stiffness} & Resistance to stretching along threads & 5--15 (silk) to 40--80 (canvas) \\
+\textbf{Shear Stiffness} & Resistance to diagonal distortion & Similar to structural \\
+\textbf{Bending Stiffness} & Resistance to folding/creasing & 0.01--0.5 (silk) to 5--50 (cardboard) \\
+\textbf{Spring Damping} & How quickly oscillations settle & 0--50; higher = less jiggle \\
+\textbf{Compression Damping} & Damping for compression forces & 0--50 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Fabric Presets}
+
+Blender includes presets that configure realistic values for common materials:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Preset} & \tableheader{Characteristics} \\
+\midrule
+\textbf{Cotton} & Medium stiffness, moderate draping \\
+\textbf{Denim} & High stiffness, minimal draping \\
+\textbf{Leather} & Very stiff, minimal flex \\
+\textbf{Rubber} & Elastic, bouncy \\
+\textbf{Silk} & Very low stiffness, flowing drape \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Collision Settings}
+
+\textbf{Object Collision} (cloth interacting with other objects):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Setting} & \tableheader{Purpose} \\
+\midrule
+\textbf{Quality} & Number of collision substeps \\
+\textbf{Distance} & Minimum distance between cloth and collision object (prevents penetration) \\
+\textbf{Impulse Clamping} & Limits collision force to prevent explosive corrections \\
+\textbf{Single Sided} & Only detect collision from one side \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Self-Collision} (cloth interacting with itself):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Setting} & \tableheader{Purpose} \\
+\midrule
+\textbf{Enable} & Toggle self-collision computation \\
+\textbf{Quality} & Solver quality (should be $\geq$ overall Quality) \\
+\textbf{Distance} & Minimum distance between cloth faces \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Pinning}
+
+Vertices can be \textbf{pinned}\index{cloth!pinning} (fixed in place) using a vertex group. The vertex group's weights control how strongly each vertex is pinned (1.0 = fully fixed, 0.0 = fully simulated). This is how you attach cloth to a character's shoulders, waist, or wrists while letting the rest flow freely.
+
+\subsection{Wind}
+
+Wind effects are created using \textbf{Force Fields} (Add $\rightarrow$ Force Field $\rightarrow$ Wind) rather than cloth simulation settings directly. The wind force field provides Strength, Flow, Noise, and Seed parameters.
+
+\subsection{Cloth Workflow}
+
+\begin{tipbox}
+\textbf{Worked example --- Cloth Draping:}\index{cloth draping} To drape a cloth over a character or object:
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Create a subdivided plane above the target object
+  \item Add Physics $\rightarrow$ Cloth to the plane
+  \item Add Physics $\rightarrow$ Collision to the target object
+  \item Set cloth preset to ``Silk'' or ``Cotton'' depending on desired look
+  \item Play the simulation --- the cloth will fall and drape under gravity
+  \item For character clothing: use a Pin Group vertex group to fix vertices at shoulders, waist, or attachment points
+  \item Enable Self-Collision for close-fitting garments (capes, skirts, loose sleeves)
+  \item Bake the simulation (Cache $\rightarrow$ Bake) before rendering for deterministic results
+\end{enumerate}
+
+\textbf{Performance tip:} Start with a low-polygon proxy mesh for simulation testing. Apply a Subdivision Surface modifier \textit{above} the Cloth modifier in the stack for smooth rendering without increasing simulation cost.
+\end{tipbox}
+
+\begin{warningbox}
+\textbf{Cloth explodes:} If your cloth simulation produces violent, explosive behavior, the most likely cause is that the timestep is too large for the collision geometry. Increase Quality Steps, decrease the simulation time step, or simplify the collision mesh. Also check that the collision Distance is not set to zero --- a small positive distance (0.001--0.015) prevents the cloth from starting in a penetrating state.
+\end{warningbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Hair Particles}
+\label{sec:hair}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Overview}
+
+Hair particles\index{hair particles} grow strands from a mesh surface. They are used for character hair, animal fur, grass, eyelashes, eyebrows, and any fibrous material. Hair particles do not emit over time --- they exist as a static set of strands that can optionally have dynamics.
+
+\subsection{Particle Hair Setup}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Select the mesh (typically the character's head or body)
+  \item Add a Particle System (Properties $\rightarrow$ Particles $\rightarrow$ \textbf{+})
+  \item Set Type to \textbf{Hair}
+  \item Set \textbf{Number} --- use as few parent strands as possible for control (500--2000 for a typical hairstyle)
+  \item Set \textbf{Hair Length} --- base strand length
+  \item Enter \textbf{Particle Edit Mode} to comb, cut, and style individual strands
+\end{enumerate}
+
+\subsection{Grooming Tools (Particle Edit Mode)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Tool} & \tableheader{Purpose} \\
+\midrule
+\textbf{Comb} & Push strands in the brush direction \\
+\textbf{Smooth} & Even out strand direction differences \\
+\textbf{Add} & Add new guide strands \\
+\textbf{Length} & Grow or shrink strands \\
+\textbf{Puff} & Lift strands away from the surface \\
+\textbf{Cut} & Trim strands at the brush position \\
+\textbf{Weight} & Paint soft-body weights on strands (for dynamics pinning) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Children Particles}
+
+\textbf{Children}\index{hair particles!children} multiply the visible strand count without increasing the number of manually-groomed parent strands. There are two interpolation methods:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Method} & \tableheader{Behavior} \\
+\midrule
+\textbf{Simple} & Children generated around each parent in a uniform pattern \\
+\textbf{Interpolated} & Children generated between parents, creating smoother density distribution \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Key child settings:}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Setting} & \tableheader{Purpose} \\
+\midrule
+\textbf{Display Amount} & Children visible in viewport (keep low for performance) \\
+\textbf{Render Amount} & Children rendered (set high for final quality) \\
+\textbf{Clump} & How much children bunch toward parent tips (negative = spread, positive = clump) \\
+\textbf{Roughness (Uniform)} & Random positional offset for natural variation \\
+\textbf{Roughness (Endpoint)} & Random offset at strand tips only \\
+\textbf{Roughness (Random)} & Per-strand random length/direction variation \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Hair Dynamics}
+
+Enabling \textbf{Hair Dynamics}\index{hair dynamics} (checkbox in the Particle Properties panel) allows hair to respond to physics --- gravity, wind, and motion:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Setting} & \tableheader{Purpose} \\
+\midrule
+\textbf{Mass} & Strand mass (heavier = less responsive to forces) \\
+\textbf{Stiffness} & How rigidly strands hold their groomed shape \\
+\textbf{Damping} & How quickly oscillations settle \\
+\textbf{Internal Friction} & Friction between hair strands \\
+\textbf{Collision} & Whether hair collides with other objects \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{warningbox}
+\textbf{Hair dynamics jitter:} If hair dynamics produce jittery, unstable motion, increase the simulation substeps, increase damping, and decrease mass. Hair dynamics are computationally expensive --- keep parent strand count low and rely on Children for visual density.
+\end{warningbox}
+
+\subsection{Hair Rendering: Principled Hair BSDF}
+
+Hair can be rendered in Cycles and EEVEE using the \textbf{Principled Hair BSDF}\index{Principled Hair BSDF} shader (see Chapter~\ref{ch:shading} for shader fundamentals), which provides physically-accurate hair rendering with:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Color / Melanin} --- hair color via direct color or melanin concentration
+  \item \textbf{Roughness} --- surface roughness of the strand cuticle
+  \item \textbf{Radial Roughness} --- roughness variation around the strand circumference
+  \item \textbf{Coat} --- clear coat layer for wet/glossy look
+  \item \textbf{IOR} --- index of refraction (1.55 is physically accurate for human hair)
+  \item \textbf{Random Color} --- per-strand color variation for natural look
+\end{itemize}
+
+\subsection{Geometry Nodes Hair (Blender 3.3+)}
+
+Blender 3.3 introduced a new \textbf{Curves}\index{Curves hair} object type and hair editing system based on \textbf{Geometry Nodes}. This newer system (accessed via Sculpt Mode on Curves objects) offers better viewport performance, procedural hair generation via node graphs, separation of hair data from particle systems, and more intuitive sculpting tools.
+
+The legacy particle hair system and the new Curves-based system coexist in Blender 4.4. The Curves system is the future direction.
+
+\begin{furrybox}
+\textbf{Complete fur workflow for furry characters:}\index{fur workflow}
+
+\begin{enumerate}[leftmargin=1.5em]
+  \item Create a particle system (type: Hair) on the body mesh
+  \item Use \textbf{vertex groups} to control hair length by body region (shorter on face and hands, longer on tail, chest ruff, and head)
+  \item Groom with Particle Edit mode: comb direction to follow natural fur flow, trim length, add density where needed
+  \item Set Children to \textbf{Interpolated} for realistic fur, \textbf{Simple} for stylized
+  \item Adjust \textbf{Clumping} (positive values for wet/matted look, zero for fluffy) and \textbf{Roughness} (uniform 0.01--0.05 for subtle natural variation)
+  \item Apply the \textbf{Principled Hair BSDF} material. Use Melanin for natural animal colors. Add Random Color (0.05--0.1) for strand variation.
+  \item For \textbf{Hair Dynamics}: enable on longer fur regions (tail, head, chest ruff). Pin roots with high stiffness. The fur should respond to character motion and wind force fields.
+\end{enumerate}
+
+\textbf{VRChat note:}\index{VRChat} For VRChat avatars, skip particle hair entirely --- it does not translate to real-time engines. Use textured mesh planes (``card hair'') or Geometry Nodes instances instead. VRChat's \textbf{PhysBones} system handles dynamic fur and hair movement in real-time using spring-bone physics on mesh-based hair/fur geometry.
+\end{furrybox}
+
+\begin{furrybox}
+\textbf{VRChat PhysBones for dance animations:}\index{VRChat!PhysBones} PhysBones are Unity components that add spring physics to bone chains, commonly used for ears, tails, hair, and clothing on VRChat avatars. For dance animations --- a popular category in VRChat --- PhysBones settings need careful tuning:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Pull} (return force): 0.1--0.3 for ears and tail during active dancing
+  \item \textbf{Spring} (oscillation): 0.5--0.8 for bouncy, energetic motion
+  \item \textbf{Stiffness}: Lower (0.1--0.2) for flowing tails, higher (0.4--0.6) for rigid ears
+  \item \textbf{Immobile}: Enable to reduce jitter from avatar movement
+  \item Test with your actual dance animations, not just idle --- fast movements expose PhysBones instability
+\end{itemize}
+
+All PhysBones configuration happens in Unity, not Blender, but understanding the physics principles in this chapter translates directly to PhysBones tuning.
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Common Pitfalls and Practical Tips}
+\label{sec:anim-pitfalls}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Animation Pitfalls}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pitfall} & \tableheader{Cause} & \tableheader{Solution} \\
+\midrule
+\textbf{Gimbal lock}\index{gimbal lock} & Euler rotation at $90^\circ$ extremes & Use Quaternion (WXYZ) rotation mode \\
+\textbf{Counter-animation} & Bone inherits parent rotation AND has its own keyframes & Check Inherit Rotation; use constraints correctly \\
+\textbf{Interpolation overshoot} & Bezier handles exceed min/max & Switch to Auto Clamped handles or add keyframes \\
+\textbf{Cycle pop} & First/last frames do not match & Use Cyclic F-Curve modifier with Repeat mode \\
+\textbf{NLA evaluation order} & Strips overriding unexpectedly & Check track order (lower = first); verify Blend Mode \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Rigging Pitfalls}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pitfall} & \tableheader{Cause} & \tableheader{Solution} \\
+\midrule
+\textbf{IK flip} & Pole target position or pole angle incorrect & Reposition pole target; adjust angle $\pm 90^\circ$ \\
+\textbf{Broken deformation} & Mesh parented to meta-rig, not generated rig & Re-parent mesh to the generated rig \\
+\textbf{Wrong vertex group} & Active bone/vertex group mismatch & Select bone first in Pose Mode before painting \\
+\textbf{Bone roll errors} & Incorrect roll causes twist artifacts & Recalculate (Shift+N in Edit Mode) \\
+\textbf{Scale inheritance} & Non-uniform parent scale propagates & Set Inherit Scale to ``Aligned'' or ``None'' \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Simulation Pitfalls}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Pitfall} & \tableheader{Cause} & \tableheader{Solution} \\
+\midrule
+\textbf{Cloth explodes} & Timestep too large & Increase Quality Steps; simplify collision mesh \\
+\textbf{Fluid is empty} & Flow object outside domain & Ensure flow objects inside domain box \\
+\textbf{Falls through floor} & Floor not Passive rigid body & Add Rigid Body $\rightarrow$ Passive to ground \\
+\textbf{Hair jitter} & Timestep too large, damping too low & Increase substeps and damping \\
+\textbf{Non-deterministic sim} & Cache not baked & Always bake (Cache $\rightarrow$ Bake) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Performance Tips}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Cloth:} Use a low-poly proxy for simulation, then apply Subdivision Surface above the Cloth modifier for smooth rendering
+  \item \textbf{Fluid:} Start at Resolution Divisions 32--64 for testing; only increase for final bake
+  \item \textbf{Hair:} Keep parent strand count low (500--2000); use Children for density
+  \item \textbf{Rigid Body:} Use simple collision shapes (Box, Sphere) instead of Mesh for complex objects
+  \item \textbf{General:} Bake simulations to disk (not memory) for large frame ranges
+  \item \textbf{Animation:} Use proxy armatures or Simplify (Render Properties $\rightarrow$ Simplify) during viewport playback for better FPS
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Motion Capture and Beyond}
+\label{sec:mocap}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\begin{historynote}
+\textbf{The evolution of motion capture:}\index{motion capture} Motion capture technology has transformed animation production over four decades. Early optical systems in the 1980s (developed at MIT and used in medical research) tracked reflective markers with specialized cameras. The entertainment industry adopted mocap in the 1990s --- the Vicon and OptiTrack systems that became standard on film sets used infrared cameras tracking retroreflective markers at 120--240 fps. \textit{The Lord of the Rings} (2001--2003) showcased Andy Serkis's Gollum performance, proving that mocap could convey nuanced emotional acting.
+
+Modern markerless motion capture using computer vision and machine learning (DeepMotion, Move.ai, Rokoko) has made mocap accessible to independent artists. Blender can import mocap data in BVH and FBX formats, retarget it to any armature, and blend it with hand-animated layers in the NLA Editor. The combination of captured base motion with hand-animated secondary action (ears, tail, facial expressions) is the production workflow for many furry content creators.
+\end{historynote}
+
+\vspace{2em}
+
+This chapter covered the complete animation pipeline in Blender: from individual keyframes and F-Curves through skeletal rigging with Rigify, procedural animation with Drivers, physics simulation with Mantaflow, cloth, and particles, and hair grooming for characters and creatures. The tools are deep --- mastering animation is a career-long pursuit. But the foundations are here: the 12 Principles give you the artistic framework, the editors give you the technical interface, and physics simulations give you natural motion for free.
+
+In Chapter~\ref{ch:furryarts}, we will apply everything from this chapter specifically to furry character creation, with dedicated walkthroughs for anthro character rigs, species-specific anatomy considerations, and community workflows for VRChat, virtual production, and commission work.
