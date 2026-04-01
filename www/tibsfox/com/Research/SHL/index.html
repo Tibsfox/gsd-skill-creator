@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHL — City of Shoreline</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .code { font-size:0.7rem; color:var(--marine); font-family:monospace; letter-spacing:0.2em; display:block; margin-bottom:0.3rem; position:relative; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header .coords { color:rgba(255,255,255,0.3); font-size:0.75rem; font-family:monospace; margin-top:0.5rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin-right:1.2rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+    blockquote {
+      font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light);
+      padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+    }
+
+    .stats {
+      display:flex; flex-wrap:wrap; gap:1.5rem; margin:1.5rem 0 2.5rem;
+      padding:1rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .stat { text-align:center; min-width:80px; }
+    .stat-value { display:block; font-size:1.5rem; font-weight:400; color:var(--marine); font-family:monospace; }
+    .stat-label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+
+    h2 {
+      font-size:1.1rem; font-weight:400; color:var(--sand); margin:2.5rem 0 1rem;
+      padding-bottom:0.3rem; border-bottom:1px solid var(--border);
+    }
+    .section-intro { font-size:0.9rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif; }
+
+    .card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1rem; }
+    .card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; transition:border-color 0.2s;
+    }
+    .card:hover { border-color:var(--sea-light); }
+    .card h3 { font-size:1rem; color:var(--text); margin-bottom:0.4rem; }
+    .card p { font-size:0.85rem; color:var(--dim); line-height:1.5; }
+    .card .meta { font-size:0.75rem; color:var(--fog); margin-bottom:0.5rem; }
+
+    .tag {
+      display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+      font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:500;
+      border:1px solid; margin-right:0.3rem;
+    }
+    .tag-park { background:rgba(42,74,48,0.2); color:#6a9a70; border-color:rgba(42,74,48,0.4); }
+    .tag-water { background:rgba(58,138,154,0.1); color:var(--marine); border-color:rgba(58,138,154,0.3); }
+    .tag-transit { background:rgba(74,122,154,0.1); color:var(--sky); border-color:rgba(74,122,154,0.3); }
+    .tag-culture { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+    .tag-rail { background:rgba(154,106,216,0.1); color:#a88ad8; border-color:rgba(154,106,216,0.3); }
+    .tag-trail { background:rgba(42,74,48,0.15); color:#6a9a70; border-color:rgba(42,74,48,0.3); }
+    .tag-beach { background:rgba(58,138,154,0.15); color:var(--marine); border-color:rgba(58,138,154,0.35); }
+
+    .timeline {
+      border-left:2px solid var(--border); margin:0.8rem 0 0.8rem 0.5rem; padding-left:1.2rem;
+    }
+    .timeline .event {
+      position:relative; margin-bottom:0.5rem; font-size:0.82rem; color:var(--fog);
+    }
+    .timeline .event::before {
+      content:''; position:absolute; left:-1.45rem; top:0.45rem;
+      width:8px; height:8px; border-radius:50%; background:var(--marine);
+      border:2px solid var(--bg);
+    }
+    .timeline .event .year { color:var(--sand); font-family:monospace; font-size:0.78rem; margin-right:0.3rem; }
+
+    .highlight {
+      background:rgba(58,138,154,0.06); border:1px solid rgba(58,138,154,0.15);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0; font-size:0.85rem;
+    }
+    .highlight strong { color:var(--marine); }
+
+    .transit-box {
+      background:var(--panel); border:1px solid rgba(74,122,154,0.3); border-radius:6px;
+      padding:1.5rem; margin:1rem 0;
+    }
+    .transit-box h3 { font-size:0.95rem; color:var(--sky); margin-bottom:0.6rem; }
+    .transit-box p { font-size:0.85rem; color:var(--dim); line-height:1.6; }
+    .transit-box .route { color:var(--marine); font-weight:500; }
+    .transit-box ul { list-style:none; padding:0; margin:0.5rem 0; }
+    .transit-box li { font-size:0.82rem; color:var(--fog); padding:0.2rem 0; padding-left:1rem; position:relative; }
+    .transit-box li::before { content:'\2192'; position:absolute; left:0; color:var(--marine); }
+
+    .nearby {
+      display:flex; flex-wrap:wrap; gap:0.5rem; margin:1rem 0;
+      font-family:system-ui,sans-serif; font-size:0.82rem;
+    }
+    .nearby a {
+      background:var(--panel); border:1px solid var(--border); border-radius:4px;
+      padding:0.3rem 0.7rem; color:var(--fog);
+    }
+    .nearby a:hover { border-color:var(--marine); color:var(--marine); }
+
+    footer {
+      max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+      font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+      font-family:system-ui,sans-serif;
+    }
+    footer a { color:var(--fog); }
+
+    @media(max-width:640px) {
+      header h1 { font-size:1.4rem; }
+      main { padding:1rem; }
+      .card-grid { grid-template-columns:1fr; }
+    }
+
+    @media(min-width:1920px) {
+      main { max-width:1300px; }
+      footer { max-width:1300px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <span class="code">SHL</span>
+  <h1>City of Shoreline</h1>
+  <div class="subtitle">Light rail arrived in 2024 &mdash; two stations, a saltwater beach, and an electric railway's ghost</div>
+  <div class="coords">47.7557&deg;N 122.3426&deg;W &middot; King County &middot; Elevation: 480 ft</div>
+  <nav>
+    <a href="../MUK/index.html">MUK</a>
+    <a href="../LYN/index.html">LYN</a>
+    <a href="../EDM/index.html">EDM</a>
+    <a href="../BTH/index.html">BTH</a>
+    <a href="index.html" class="active">SHL</a>
+    <a href="../../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <blockquote>
+    Shoreline was unincorporated King County until 1995 &mdash; a strip of neighborhoods between Seattle
+    and Edmonds that didn't even have its own name until the school district gave it one. Then light rail
+    arrived in 2024, and suddenly two new stations turned a quiet suburb into a transit destination. The
+    Interurban Trail remembers what Shoreline forgot: there was a railway here once before.
+  </blockquote>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value">~62,000</span><span class="stat-label">Population (2024)</span></div>
+    <div class="stat"><span class="stat-value">480 ft</span><span class="stat-label">Elevation</span></div>
+    <div class="stat"><span class="stat-value">1995</span><span class="stat-label">Incorporated</span></div>
+    <div class="stat"><span class="stat-value">11.7 mi&sup2;</span><span class="stat-label">Area</span></div>
+    <div class="stat"><span class="stat-value">47.76&deg;N</span><span class="stat-label">Latitude</span></div>
+    <div class="stat"><span class="stat-value">122.34&deg;W</span><span class="stat-label">Longitude</span></div>
+  </div>
+
+  <!-- ========== History ========== -->
+
+  <h2>Historical Timeline</h2>
+  <p class="section-intro">Named for a school district, incorporated by vote, transformed by light rail.</p>
+
+  <div class="timeline">
+    <div class="event"><span class="year">1906</span> Seattle-Everett Interurban electric railway begins service through the area</div>
+    <div class="event"><span class="year">1927</span> Shoreline School District established &mdash; the name that sticks</div>
+    <div class="event"><span class="year">1939</span> Interurban railway ceases operation; corridor later becomes a trail</div>
+    <div class="event"><span class="year">1964</span> Shoreline Community College founded</div>
+    <div class="event"><span class="year">1995</span> Incorporated as the City of Shoreline after voter approval</div>
+    <div class="event"><span class="year">2000s</span> Aurora Avenue (SR-99) corridor development and improvement</div>
+    <div class="event"><span class="year">2024</span> Shoreline South/148th and Shoreline North/185th Link stations open (Aug 30)</div>
+  </div>
+
+  <!-- ========== Parks ========== -->
+
+  <h2>Parks &amp; Green Spaces</h2>
+  <p class="section-intro">Saltwater beach access, neighborhood parks, and a historic trail corridor.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Richmond Beach Saltwater Park</h3>
+      <div class="meta"><span class="tag tag-beach">saltwater beach</span><span class="tag tag-park">40 acres</span></div>
+      <p>A 40-acre park descending through forest to a Puget Sound beach at the foot of the bluffs.
+      The beach offers views of the Olympic Mountains, passing ships, and spectacular sunsets.
+      Trails wind through second-growth forest with interpretive signs. One of the few public
+      saltwater beaches in King County north of Seattle. Restrooms and picnic facilities at the beach level.</p>
+      <p style="font-size:0.78rem;color:var(--dim);margin-top:0.4rem;">Access: NW 196th St, Richmond Beach neighborhood</p>
+    </div>
+
+    <div class="card">
+      <h3>Interurban Trail</h3>
+      <div class="meta"><span class="tag tag-trail">regional</span><span class="tag tag-trail">historic corridor</span></div>
+      <p>A paved multi-use trail following the corridor of the former Seattle-Everett Interurban electric
+      railway (1906&ndash;1939). The trail runs north-south through Shoreline, connecting to Lynnwood to the
+      north and Seattle to the south. A living memorial to the electric railway era &mdash; the original
+      light rail that connected the region a century before Link.</p>
+    </div>
+
+    <div class="card">
+      <h3>Hamlin Park</h3>
+      <div class="meta"><span class="tag tag-park">forest</span><span class="tag tag-park">trails</span></div>
+      <p>An 80-acre forested park with trails through mixed conifer and deciduous woodland. One of the
+      largest forested parks in Shoreline, providing habitat for owls, pileated woodpeckers, and
+      native songbirds. A quiet refuge in the city's eastern neighborhoods.</p>
+    </div>
+
+    <div class="card">
+      <h3>Shoreview Park</h3>
+      <div class="meta"><span class="tag tag-park">sports</span><span class="tag tag-park">playground</span></div>
+      <p>A community park with sports fields, playground, basketball courts, and picnic areas. The park
+      hosts youth sports leagues and community events. Located in central Shoreline with easy access
+      from residential neighborhoods.</p>
+    </div>
+
+    <div class="card">
+      <h3>Cromwell Park</h3>
+      <div class="meta"><span class="tag tag-park">neighborhood</span><span class="tag tag-park">playground</span></div>
+      <p>A neighborhood park with playground, open lawn, and walking paths. Part of Shoreline's network
+      of distributed neighborhood parks that provide local recreation access within walking distance
+      of most homes.</p>
+    </div>
+  </div>
+
+  <!-- ========== Lakes ========== -->
+
+  <h2>Lakes &amp; Water Features</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Echo Lake</h3>
+      <div class="meta"><span class="tag tag-water">lake</span><span class="tag tag-park">neighborhood</span></div>
+      <p>A small urban lake near Aurora Avenue surrounded by residential development. Echo Lake provides
+      a green respite along the SR-99 corridor. Limited public access but visible from surrounding streets
+      and the Aurora transit corridor.</p>
+    </div>
+
+    <div class="card">
+      <h3>Twin Ponds Park</h3>
+      <div class="meta"><span class="tag tag-water">ponds</span><span class="tag tag-park">playground</span></div>
+      <p>A park centered on two retention ponds with a playground, sports courts, and walking paths.
+      The ponds support urban wildlife including ducks, frogs, and dragonflies. A community gathering
+      space with covered picnic areas.</p>
+    </div>
+
+    <div class="card">
+      <h3>Ronald Bog</h3>
+      <div class="meta"><span class="tag tag-water">wetland</span><span class="tag tag-park">natural area</span></div>
+      <p>A preserved wetland area providing urban wildlife habitat and storm water management. The bog
+      supports a unique lowland wetland ecosystem within the developed suburban landscape. Trail access
+      around the perimeter.</p>
+    </div>
+  </div>
+
+  <!-- ========== Notable ========== -->
+
+  <h2>Notable Landmarks</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Link Light Rail Stations</h3>
+      <div class="meta"><span class="tag tag-rail">1 Line</span><span class="tag tag-transit">opened 2024</span></div>
+      <p>Two Link stations opened on August 30, 2024: <strong>Shoreline South/148th</strong> and
+      <strong>Shoreline North/185th</strong>. Both serve the 1 Line connecting Lynnwood to Angle Lake
+      (and eventually Federal Way). The stations are catalyzing major development &mdash; over 3,000 housing
+      units near 148th and 1,700 near 185th are completed or in the pipeline.</p>
+    </div>
+
+    <div class="card">
+      <h3>Shoreline Community College</h3>
+      <div class="meta"><span class="tag tag-culture">education</span><span class="tag tag-culture">est. 1964</span></div>
+      <p>A two-year community college serving approximately 10,000 students with transfer programs,
+      workforce training, and continuing education. The campus sits on a 83-acre wooded site in
+      central Shoreline. Programs include nursing, dental hygiene, automotive, and clean energy technology.</p>
+    </div>
+
+    <div class="card">
+      <h3>RapidRide E Line</h3>
+      <div class="meta"><span class="tag tag-transit">BRT</span><span class="tag tag-transit">Aurora Ave</span></div>
+      <p>King County Metro's RapidRide E Line runs along Aurora Avenue (SR-99) through Shoreline,
+      connecting Aurora Village in the north to downtown Seattle. The E Line is one of Metro's
+      highest-ridership BRT routes, providing frequent service 7 days a week.</p>
+    </div>
+  </div>
+
+  <!-- ========== Getting Here ========== -->
+
+  <h2>Getting Here from Mukilteo</h2>
+  <p class="section-intro">Shoreline sits between Lynnwood and Seattle &mdash; two Link stations make it easy to reach by rail.</p>
+
+  <div class="transit-box">
+    <h3>By Link Light Rail (via Lynnwood City Center Station)</h3>
+    <p><span class="route">Route 117</span> from Mukilteo Ferry to Lynnwood City Center Station (~32 min).
+    Then <span class="route">1 Line</span> south to Shoreline North/185th (1 stop, ~4 min) or
+    Shoreline South/148th (2 stops, ~7 min).</p>
+    <p>Total transit time: approximately 40&ndash;45 minutes to Shoreline North/185th.
+    Service runs 7 days a week, every 8&ndash;10 minutes peak, every 15 minutes off-peak.</p>
+  </div>
+
+  <div class="transit-box">
+    <h3>By RapidRide E Line</h3>
+    <p>From Lynnwood, connect to the <span class="route">RapidRide E Line</span> along Aurora Avenue.
+    Frequent service runs approximately every 10 minutes during peak hours.</p>
+  </div>
+
+  <div class="transit-box">
+    <h3>Key Destinations Reachable</h3>
+    <ul>
+      <li>Lynnwood City Center (via 1 Line, 4&ndash;7 min north)</li>
+      <li>Northgate Mall &amp; North Seattle College (via 1 Line, 5 min south)</li>
+      <li>University of Washington (via 1 Line, 12 min south)</li>
+      <li>Downtown Seattle / Westlake (via 1 Line, 20 min south)</li>
+      <li>Sea-Tac Airport (via 1 Line, 50 min south)</li>
+      <li>Aurora Village (via RapidRide E, 10 min north)</li>
+      <li>Richmond Beach (via local bus, 15 min west)</li>
+    </ul>
+  </div>
+
+  <!-- ========== Nearby ========== -->
+
+  <h2>Nearby Communities</h2>
+  <div class="nearby">
+    <a href="../MUK/index.html">MUK &middot; Mukilteo</a>
+    <a href="../LYN/index.html">LYN &middot; Lynnwood</a>
+    <a href="../EDM/index.html">EDM &middot; Edmonds</a>
+    <a href="../BTH/index.html">BTH &middot; Bothell</a>
+    <a href="../EVR/index.html">EVR &middot; Everett</a>
+  </div>
+
+</main>
+
+<footer>
+  Part of the <a href="../../index.html">PNW Research Series</a> &middot; Artemis II mission context &middot;
+  <a href="../MUK/index.html">Mukilteo Microclimate Observatory</a>
+  <br>Last updated: 2026-04-01T01:00Z
+</footer>
+
+</body>
+</html>

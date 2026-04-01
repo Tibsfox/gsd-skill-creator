@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYN — City of Lynnwood</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .code { font-size:0.7rem; color:var(--marine); font-family:monospace; letter-spacing:0.2em; display:block; margin-bottom:0.3rem; position:relative; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header .coords { color:rgba(255,255,255,0.3); font-size:0.75rem; font-family:monospace; margin-top:0.5rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin-right:1.2rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+    blockquote {
+      font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light);
+      padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+    }
+
+    .stats {
+      display:flex; flex-wrap:wrap; gap:1.5rem; margin:1.5rem 0 2.5rem;
+      padding:1rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .stat { text-align:center; min-width:80px; }
+    .stat-value { display:block; font-size:1.5rem; font-weight:400; color:var(--marine); font-family:monospace; }
+    .stat-label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+
+    h2 {
+      font-size:1.1rem; font-weight:400; color:var(--sand); margin:2.5rem 0 1rem;
+      padding-bottom:0.3rem; border-bottom:1px solid var(--border);
+    }
+    .section-intro { font-size:0.9rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif; }
+
+    .card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1rem; }
+    .card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; transition:border-color 0.2s;
+    }
+    .card:hover { border-color:var(--sea-light); }
+    .card h3 { font-size:1rem; color:var(--text); margin-bottom:0.4rem; }
+    .card p { font-size:0.85rem; color:var(--dim); line-height:1.5; }
+    .card .meta { font-size:0.75rem; color:var(--fog); margin-bottom:0.5rem; }
+
+    .tag {
+      display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+      font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:500;
+      border:1px solid; margin-right:0.3rem;
+    }
+    .tag-park { background:rgba(42,74,48,0.2); color:#6a9a70; border-color:rgba(42,74,48,0.4); }
+    .tag-water { background:rgba(58,138,154,0.1); color:var(--marine); border-color:rgba(58,138,154,0.3); }
+    .tag-transit { background:rgba(74,122,154,0.1); color:var(--sky); border-color:rgba(74,122,154,0.3); }
+    .tag-culture { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+    .tag-rail { background:rgba(154,106,216,0.1); color:#a88ad8; border-color:rgba(154,106,216,0.3); }
+
+    .timeline {
+      border-left:2px solid var(--border); margin:0.8rem 0 0.8rem 0.5rem; padding-left:1.2rem;
+    }
+    .timeline .event {
+      position:relative; margin-bottom:0.5rem; font-size:0.82rem; color:var(--fog);
+    }
+    .timeline .event::before {
+      content:''; position:absolute; left:-1.45rem; top:0.45rem;
+      width:8px; height:8px; border-radius:50%; background:var(--marine);
+      border:2px solid var(--bg);
+    }
+    .timeline .event .year { color:var(--sand); font-family:monospace; font-size:0.78rem; margin-right:0.3rem; }
+
+    .highlight {
+      background:rgba(58,138,154,0.06); border:1px solid rgba(58,138,154,0.15);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0; font-size:0.85rem;
+    }
+    .highlight strong { color:var(--marine); }
+
+    .transit-box {
+      background:var(--panel); border:1px solid rgba(74,122,154,0.3); border-radius:6px;
+      padding:1.5rem; margin:1rem 0;
+    }
+    .transit-box h3 { font-size:0.95rem; color:var(--sky); margin-bottom:0.6rem; }
+    .transit-box p { font-size:0.85rem; color:var(--dim); line-height:1.6; }
+    .transit-box .route { color:var(--marine); font-weight:500; }
+    .transit-box ul { list-style:none; padding:0; margin:0.5rem 0; }
+    .transit-box li { font-size:0.82rem; color:var(--fog); padding:0.2rem 0; padding-left:1rem; position:relative; }
+    .transit-box li::before { content:'\2192'; position:absolute; left:0; color:var(--marine); }
+
+    .hub-callout {
+      background:rgba(74,122,154,0.08); border:2px solid rgba(74,122,154,0.3); border-radius:6px;
+      padding:1.5rem; margin:1.5rem 0;
+    }
+    .hub-callout h3 { font-size:1.05rem; color:#fff; margin-bottom:0.5rem; }
+    .hub-callout .hub-label { font-size:0.7rem; color:var(--sky); text-transform:uppercase; letter-spacing:0.1em; font-family:monospace; margin-bottom:0.3rem; }
+    .hub-callout p { font-size:0.85rem; color:var(--dim); line-height:1.6; }
+
+    .nearby {
+      display:flex; flex-wrap:wrap; gap:0.5rem; margin:1rem 0;
+      font-family:system-ui,sans-serif; font-size:0.82rem;
+    }
+    .nearby a {
+      background:var(--panel); border:1px solid var(--border); border-radius:4px;
+      padding:0.3rem 0.7rem; color:var(--fog);
+    }
+    .nearby a:hover { border-color:var(--marine); color:var(--marine); }
+
+    footer {
+      max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+      font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+      font-family:system-ui,sans-serif;
+    }
+    footer a { color:var(--fog); }
+
+    @media(max-width:640px) {
+      header h1 { font-size:1.4rem; }
+      main { padding:1rem; }
+      .card-grid { grid-template-columns:1fr; }
+    }
+
+    @media(min-width:1920px) {
+      main { max-width:1300px; }
+      footer { max-width:1300px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <span class="code">LYN</span>
+  <h1>City of Lynnwood</h1>
+  <div class="subtitle">Bedroom community turned transit hub &mdash; where light rail meets Snohomish County</div>
+  <div class="coords">47.8209&deg;N 122.3151&deg;W &middot; Snohomish County &middot; Elevation: 400 ft</div>
+  <nav>
+    <a href="../MUK/index.html">MUK</a>
+    <a href="../EVR/index.html">EVR</a>
+    <a href="index.html" class="active">LYN</a>
+    <a href="../EDM/index.html">EDM</a>
+    <a href="../BTH/index.html">BTH</a>
+    <a href="../SHL/index.html">SHL</a>
+    <a href="../../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <blockquote>
+    For decades, Lynnwood was the place you drove through on I-5. Then in August 2024, light rail arrived
+    and everything changed. Lynnwood City Center Station is now the gateway between Snohomish County and
+    the entire Puget Sound rail network &mdash; and the city is transforming around it.
+  </blockquote>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value">42,390</span><span class="stat-label">Population (2024)</span></div>
+    <div class="stat"><span class="stat-value">400 ft</span><span class="stat-label">Elevation</span></div>
+    <div class="stat"><span class="stat-value">1959</span><span class="stat-label">Incorporated</span></div>
+    <div class="stat"><span class="stat-value">7.8 mi&sup2;</span><span class="stat-label">Area</span></div>
+    <div class="stat"><span class="stat-value">47.82&deg;N</span><span class="stat-label">Latitude</span></div>
+    <div class="stat"><span class="stat-value">122.32&deg;W</span><span class="stat-label">Longitude</span></div>
+  </div>
+
+  <!-- ========== History ========== -->
+
+  <h2>Historical Timeline</h2>
+  <p class="section-intro">From unincorporated timber country to a light rail terminus in 65 years.</p>
+
+  <div class="timeline">
+    <div class="event"><span class="year">1900s</span> Interurban electric railway runs through the area, connecting Seattle and Everett</div>
+    <div class="event"><span class="year">1937</span> Alderwood Manor established as a planned logging-to-farming community</div>
+    <div class="event"><span class="year">1959</span> Incorporated as the City of Lynnwood &mdash; rapid suburban growth follows I-5</div>
+    <div class="event"><span class="year">1979</span> Alderwood Mall opens, becoming a regional retail anchor</div>
+    <div class="event"><span class="year">2005</span> Lynnwood Convention Center opens on the city center campus</div>
+    <div class="event"><span class="year">2009</span> Lynnwood Transit Center becomes Community Transit's busiest hub</div>
+    <div class="event"><span class="year">2024</span> Link light rail opens to Lynnwood City Center &mdash; 1 Line and 2 Line terminus</div>
+  </div>
+
+  <!-- ========== Parks ========== -->
+
+  <h2>Parks &amp; Green Spaces</h2>
+  <p class="section-intro">Urban parks, lake boardwalks, and athletic fields in a densifying suburban core.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Lynnwood City Park</h3>
+      <div class="meta"><span class="tag tag-park">community</span><span class="tag tag-park">playground</span></div>
+      <p>A large municipal park with playground, sports fields, picnic shelters, and walking paths.
+      Hosts community events and summer programs. The park anchors a residential neighborhood
+      north of the city center with mature trees and open lawn areas.</p>
+    </div>
+
+    <div class="card">
+      <h3>Scriber Lake Park</h3>
+      <div class="meta"><span class="tag tag-water">boardwalk</span><span class="tag tag-park">wetland</span></div>
+      <p>A boardwalk trail loops around Scriber Lake through wetland habitat with interpretive signs
+      on local ecology. The elevated walkway passes through marshy areas with cattails, red-winged
+      blackbirds, and seasonal waterfowl. A peaceful retreat in the center of the city.</p>
+      <p style="font-size:0.78rem;color:var(--dim);margin-top:0.4rem;">Access: 52nd Ave W &amp; 198th St SW</p>
+    </div>
+
+    <div class="card">
+      <h3>Meadowdale Playfields</h3>
+      <div class="meta"><span class="tag tag-park">sports</span><span class="tag tag-park">fields</span></div>
+      <p>Multi-field athletic complex with baseball diamonds, soccer fields, and a covered play area.
+      Hosts youth sports leagues and community athletics. Adjacent to the Meadowdale neighborhood
+      in southwest Lynnwood.</p>
+    </div>
+
+    <div class="card">
+      <h3>Daleway Park</h3>
+      <div class="meta"><span class="tag tag-park">neighborhood</span><span class="tag tag-park">playground</span></div>
+      <p>A neighborhood green space with playground equipment, picnic areas, and open lawn. Provides
+      local recreation access for the residential communities in north-central Lynnwood.</p>
+    </div>
+
+    <div class="card">
+      <h3>Sprague's Pond</h3>
+      <div class="meta"><span class="tag tag-water">pond</span><span class="tag tag-park">natural area</span></div>
+      <p>A small natural area centered on a retention pond surrounded by native plantings. Walking paths
+      circle the pond, providing a short nature loop in the eastern part of the city. Storm water
+      management meets urban green space.</p>
+    </div>
+  </div>
+
+  <!-- ========== Lakes ========== -->
+
+  <h2>Lakes &amp; Waterways</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Scriber Lake</h3>
+      <div class="meta"><span class="tag tag-water">urban lake</span><span class="tag tag-park">boardwalk</span></div>
+      <p>A small urban lake in central Lynnwood, notable for its boardwalk trail and wetland ecology.
+      The lake and surrounding marsh support frogs, dragonflies, and migratory birds. Scriber Lake
+      Park provides the primary public access.</p>
+    </div>
+
+    <div class="card">
+      <h3>Martha Lake</h3>
+      <div class="meta"><span class="tag tag-water">lake</span><span class="tag tag-park">residential</span></div>
+      <p>A residential lake in the south Lynnwood / Martha Lake area. Primarily surrounded by private
+      homes with limited public access. The Martha Lake neighborhood is one of Lynnwood's most
+      established residential areas.</p>
+    </div>
+
+    <div class="card">
+      <h3>Lake Serene (nearby)</h3>
+      <div class="meta"><span class="tag tag-water">lake</span></div>
+      <p>A small lake near Lynnwood's eastern boundary, surrounded by residential development.
+      The Lake Serene community straddles the Lynnwood-Mountlake Terrace border area.</p>
+    </div>
+  </div>
+
+  <!-- ========== Notable ========== -->
+
+  <h2>Notable Landmarks</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Lynnwood Convention Center</h3>
+      <div class="meta"><span class="tag tag-culture">events</span><span class="tag tag-culture">conference</span></div>
+      <p>A 40,000-square-foot event facility hosting conferences, trade shows, and community gatherings.
+      Located on the city center campus near the transit center, making it accessible by light rail
+      from across the region.</p>
+    </div>
+
+    <div class="card">
+      <h3>Alderwood Mall Area</h3>
+      <div class="meta"><span class="tag tag-culture">retail</span><span class="tag tag-culture">dining</span></div>
+      <p>One of the largest shopping centers in the Pacific Northwest, anchored by major retailers
+      and surrounded by restaurants and entertainment. The Alderwood area is Lynnwood's primary
+      commercial district, generating significant retail tax revenue for the city.</p>
+    </div>
+  </div>
+
+  <!-- ========== Getting Here ========== -->
+
+  <h2>Getting Here from Mukilteo</h2>
+  <p class="section-intro">Lynnwood Transit Center is THE transfer point from Snohomish County to the light rail network.</p>
+
+  <div class="hub-callout">
+    <div class="hub-label">Major Multimodal Hub</div>
+    <h3>Lynnwood City Center Station</h3>
+    <p>The southern gateway for Snohomish County transit. Opened August 30, 2024, this station is the
+    northern terminus for both the Link 1 Line and 2 Line. A brand-new 1,670-stall parking garage
+    serves commuters. Community Transit buses, Sound Transit Express buses, and local routes all
+    converge here. From Lynnwood City Center, you can reach UW, Capitol Hill, downtown Seattle,
+    Sea-Tac Airport, Bellevue, and Redmond &mdash; all on one train, no transfers.</p>
+  </div>
+
+  <div class="transit-box">
+    <h3>From Mukilteo to Lynnwood</h3>
+    <p><span class="route">Route 117</span>: Mukilteo Ferry &rarr; Harbour Pointe &rarr; Lynnwood City Center Station</p>
+    <p>Direct bus service, approximately 32 minutes. Runs 7 days a week (reduced weekend frequency).
+    This is the primary connection from Mukilteo to the light rail network.</p>
+  </div>
+
+  <div class="transit-box">
+    <h3>Link Light Rail (from Lynnwood City Center Station)</h3>
+    <p><span class="route">1 Line</span>: Lynnwood &rarr; Mountlake Terrace &rarr; Shoreline &rarr; Northgate &rarr; U District &rarr;
+    Capitol Hill &rarr; Westlake &rarr; Pioneer Square &rarr; SODO &rarr; Rainier Beach &rarr; Sea-Tac Airport &rarr; Angle Lake</p>
+    <p><span class="route">2 Line</span>: Lynnwood &rarr; U District &rarr; Capitol Hill &rarr; Judkins Park &rarr; Mercer Island &rarr;
+    Bellevue &rarr; Spring District &rarr; Overlake &rarr; Redmond Technology Station</p>
+    <p>Trains run every 8&ndash;10 minutes during peak, every 15 minutes off-peak, 7 days a week.</p>
+  </div>
+
+  <div class="transit-box">
+    <h3>Key Destinations Reachable</h3>
+    <ul>
+      <li>University of Washington (via 1 Line, 25 min)</li>
+      <li>Downtown Seattle / Westlake (via 1 Line, 35 min)</li>
+      <li>Sea-Tac Airport (via 1 Line, 65 min)</li>
+      <li>Bellevue Downtown (via 2 Line, 40 min)</li>
+      <li>Redmond / Microsoft Campus (via 2 Line, 55 min)</li>
+      <li>Capitol Hill (via 1 or 2 Line, 30 min)</li>
+      <li>Mukilteo Ferry (via Route 117, 32 min)</li>
+      <li>Everett Station (via Community Transit, 30 min)</li>
+    </ul>
+  </div>
+
+  <!-- ========== Nearby ========== -->
+
+  <h2>Nearby Communities</h2>
+  <div class="nearby">
+    <a href="../MUK/index.html">MUK &middot; Mukilteo</a>
+    <a href="../EVR/index.html">EVR &middot; Everett</a>
+    <a href="../EDM/index.html">EDM &middot; Edmonds</a>
+    <a href="../SHL/index.html">SHL &middot; Shoreline</a>
+    <a href="../BTH/index.html">BTH &middot; Bothell</a>
+  </div>
+
+</main>
+
+<footer>
+  Part of the <a href="../../index.html">PNW Research Series</a> &middot; Artemis II mission context &middot;
+  <a href="../MUK/index.html">Mukilteo Microclimate Observatory</a>
+  <br>Last updated: 2026-04-01T01:00Z
+</footer>
+
+</body>
+</html>

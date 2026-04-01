@@ -75,6 +75,7 @@
       padding:1.2rem; transition:border-color 0.2s;
     }
     .card:hover { border-color:var(--sea-light); text-decoration:none; }
+    a.card { display:block; color:inherit; text-decoration:none; cursor:pointer; }
     .card h3 { font-size:1rem; color:var(--text); margin-bottom:0.4rem; }
     .card p { font-size:0.85rem; color:var(--dim); line-height:1.5; }
     .card .meta { font-size:0.75rem; margin-bottom:0.5rem; }
@@ -356,36 +357,36 @@
 
   <h2>Scoring Methodology</h2>
   <div class="card-grid">
-    <div class="card">
+    <a href="weather-math.html" class="card">
       <h3>Temperature MAE</h3>
       <div class="meta"><span class="tag tag-score">Accuracy</span></div>
       <p>Mean absolute error in &deg;C between predicted and actual temperature. Lower is better. Scored over rolling 30-day window. Accounts for microclimate variation between airport and waterfront.</p>
-    </div>
-    <div class="card">
+    </a>
+    <a href="weather-math.html" class="card">
       <h3>Wind Accuracy</h3>
       <div class="meta"><span class="tag tag-score">Accuracy</span></div>
       <p>Combined direction error (degrees) and speed ratio. Marine wind channeling up Possession Sound creates local patterns that regional models often miss.</p>
-    </div>
-    <div class="card">
+    </a>
+    <a href="weather-math.html" class="card">
       <h3>Precipitation F1</h3>
       <div class="meta"><span class="tag tag-score">Accuracy</span></div>
       <p>F1 score for binary rain prediction (did it rain when they said it would?). Puget Sound Convergence Zone makes this the hardest metric &mdash; rain can fall on Mukilteo while Everett stays dry.</p>
-    </div>
-    <div class="card">
+    </a>
+    <a href="weather-math.html" class="card">
       <h3>Fog Prediction</h3>
       <div class="meta"><span class="tag tag-score">Accuracy</span></div>
       <p>Dewpoint spread &lt; 2.5&deg;C predicts fog. Score: did fog actually form? Radiation fog on calm clear nights, advection fog off Possession Sound. Binary classification F1.</p>
-    </div>
-    <div class="card">
+    </a>
+    <a href="weather-math.html" class="card">
       <h3>Confidence Calibration</h3>
       <div class="meta"><span class="tag tag-score">Accuracy</span></div>
       <p>Brier score &mdash; when they say 80% chance of rain, does it rain 80% of the time? Measures whether probability forecasts are well-calibrated, not just whether they're right.</p>
-    </div>
-    <div class="card">
+    </a>
+    <a href="weather-math.html" class="card">
       <h3>Timing Accuracy</h3>
       <div class="meta"><span class="tag tag-score">Accuracy</span></div>
       <p>Hours off on front arrival. When the forecast says rain starts at 2 PM, does it? Convergence Zone events are notoriously hard to time &mdash; this metric reveals which models handle them.</p>
-    </div>
+    </a>
   </div>
 
   <h2>Local Transit</h2>
@@ -406,42 +407,42 @@
       <p>WSF route connecting Edmonds to Kingston (Kitsap Peninsula). 30-minute crossing. Edmonds is 8 miles south of Mukilteo along the waterfront.</p>
       <p style="margin-top:0.5rem;"><a href="https://wsdot.wa.gov/ferries/schedule/scheduledetailbyroute.aspx?route=ed-king">Schedule</a> &middot; <a href="https://wsdot.wa.gov/ferries/vesselwatch/">VesselWatch</a></p>
     </div>
-    <div class="card">
+    <a href="light-rail-history.html" class="card">
       <h3>Light Rail Connection</h3>
       <div class="meta"><span class="tag tag-transit">Sound Transit</span></div>
       <p>Lynnwood Link (Line 1) is the nearest light rail. Connects to University of Washington, Capitol Hill, downtown Seattle, Sea-Tac Airport. Bus connections from Mukilteo via Community Transit.</p>
-      <p style="margin-top:0.5rem;"><a href="https://www.soundtransit.org/ride-with-us/routes-schedules">Sound Transit</a> &middot; <a href="https://www.communitytransit.org/">Community Transit</a></p>
-    </div>
-    <div class="card">
+      <p style="margin-top:0.5rem;">Sound Transit &middot; Community Transit</p>
+    </a>
+    <a href="light-rail-history.html" class="card">
       <h3>Sounder Train</h3>
       <div class="meta"><span class="tag tag-transit">Sound Transit</span></div>
       <p>Sounder North line: Everett &mdash; Mukilteo &mdash; Edmonds &mdash; King Street Station (Seattle). Commuter rail along the waterfront. Limited schedule (peak hours).</p>
-      <p style="margin-top:0.5rem;"><a href="https://www.soundtransit.org/ride-with-us/routes-schedules/n-line">N Line Schedule</a></p>
-    </div>
+      <p style="margin-top:0.5rem;">N Line Schedule</p>
+    </a>
   </div>
 
   <h2>Microclimate Features</h2>
   <div class="card-grid">
-    <div class="card">
+    <a href="convergence-zone.html" class="card">
       <h3>Puget Sound Convergence Zone</h3>
       <div class="meta"><span class="tag tag-wx">Weather</span></div>
       <p>When marine air splits around the Olympic Mountains, the two streams converge over north King County / south Snohomish County. This creates a narrow band of heavy precipitation that can dump rain on Mukilteo while Everett stays dry. The PSCZ is the primary source of forecast error for this location.</p>
-    </div>
-    <div class="card">
+    </a>
+    <a href="marine-science.html" class="card">
       <h3>Possession Sound Marine Layer</h3>
       <div class="meta"><span class="tag tag-wx">Weather</span></div>
       <p>Cool marine air funnels up Possession Sound from the Strait of Juan de Fuca. Creates morning fog, moderates temperatures, and channels wind differently than inland stations report. KPAE sits at the airport, 2 miles from the waterfront &mdash; the microclimate differs.</p>
-    </div>
-    <div class="card">
+    </a>
+    <a href="convergence-zone.html" class="card">
       <h3>Cascade Rain Shadow Edge</h3>
       <div class="meta"><span class="tag tag-wx">Weather</span></div>
       <p>Mukilteo sits at the western edge of the Cascade rain shadow transition. Annual precipitation drops sharply east of the Cascades. The foothills to the east receive more orographic lift precipitation than the waterfront. Elevation matters at every scale.</p>
-    </div>
-    <div class="card">
+    </a>
+    <a href="tides-math.html" class="card">
       <h3>Tidal Influence on Air Temperature</h3>
       <div class="meta"><span class="tag tag-tide">Tide</span> <span class="tag tag-wx">Weather</span></div>
       <p>Large tidal exchanges in Possession Sound affect nearshore air temperature and humidity. Low tide exposes mudflats that warm differently than open water. The 12.4-hour tidal cycle overlays the 24-hour diurnal cycle, creating beat frequencies in temperature and fog formation.</p>
-    </div>
+    </a>
   </div>
 
   <h2>Waterfront Parks &amp; Beaches (North to South)</h2>

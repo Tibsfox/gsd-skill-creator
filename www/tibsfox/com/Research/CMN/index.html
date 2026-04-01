@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMN — Camano Island</title>
+  <style>
+    :root {
+      --sea: #1a3a4a;
+      --sea-light: #2a5a6a;
+      --marine: #3a8a9a;
+      --fog: #8aa0b0;
+      --sand: #c4b090;
+      --drift: #9a8a70;
+      --cedar: #2a4a30;
+      --sky: #4a7a9a;
+      --rain: #5a7a8a;
+      --ink: #1a1a2a;
+      --text: #d0d4da;
+      --dim: #7a8090;
+      --bg: #0a0e14;
+      --panel: #0e1420;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: Georgia, 'Times New Roman', serif; color: var(--text); background: var(--bg); line-height:1.7; }
+    a { color: var(--marine); text-decoration:none; }
+    a:hover { color: var(--sand); }
+
+    header {
+      background: linear-gradient(160deg, var(--ink) 0%, var(--sea) 30%, var(--sea-light) 60%, var(--marine) 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 3px solid var(--sand);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    header::before {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 60%, rgba(10,14,20,0.4) 100%);
+    }
+    header h1 { font-size:2rem; font-weight:400; color:#fff; position:relative; letter-spacing:0.03em; }
+    header .code { font-size:0.7rem; color:var(--marine); font-family:monospace; letter-spacing:0.2em; display:block; margin-bottom:0.3rem; position:relative; }
+    header .subtitle { color: var(--sand); font-size:0.95rem; font-style:italic; margin-top:0.2rem; position:relative; }
+    header .coords { color:rgba(255,255,255,0.3); font-size:0.75rem; font-family:monospace; margin-top:0.5rem; position:relative; }
+    header nav { margin-top:1rem; position:relative; display:flex; justify-content:center; flex-wrap:wrap; gap:0.2rem; }
+    header nav a {
+      color:rgba(255,255,255,0.7); margin-right:1.2rem; font-family:system-ui,sans-serif;
+      font-size:0.82rem; padding:0.2rem 0; border-bottom:2px solid transparent;
+    }
+    header nav a:hover, header nav a.active { color:#fff; border-bottom-color:var(--sand); }
+
+    main { max-width:1100px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+
+    blockquote {
+      font-style:italic; color:var(--fog); border-left:3px solid var(--sea-light);
+      padding:0.8rem 1.2rem; margin:0 0 2rem; font-size:0.95rem;
+    }
+
+    .stats {
+      display:flex; flex-wrap:wrap; gap:1.5rem; margin:1.5rem 0 2.5rem;
+      padding:1rem 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .stat { text-align:center; min-width:80px; }
+    .stat-value { display:block; font-size:1.5rem; font-weight:400; color:var(--marine); font-family:monospace; }
+    .stat-label { font-size:0.7rem; color:var(--dim); text-transform:uppercase; letter-spacing:0.08em; font-family:system-ui,sans-serif; }
+
+    h2 {
+      font-size:1.1rem; font-weight:400; color:var(--sand); margin:2.5rem 0 1rem;
+      padding-bottom:0.3rem; border-bottom:1px solid var(--border);
+    }
+    .section-intro { font-size:0.9rem; color:var(--dim); margin-bottom:1rem; font-family:system-ui,sans-serif; }
+
+    .card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1rem; }
+    .card {
+      background:var(--panel); border:1px solid var(--border); border-radius:6px;
+      padding:1.2rem; transition:border-color 0.2s;
+    }
+    .card:hover { border-color:var(--sea-light); }
+    .card h3 { font-size:1rem; color:var(--text); margin-bottom:0.4rem; }
+    .card p { font-size:0.85rem; color:var(--dim); line-height:1.5; }
+    .card .meta { font-size:0.75rem; color:var(--fog); margin-bottom:0.5rem; }
+
+    .tag {
+      display:inline-block; padding:0.1rem 0.5rem; border-radius:3px;
+      font-size:0.7rem; font-family:system-ui,sans-serif; font-weight:500;
+      border:1px solid; margin-right:0.3rem;
+    }
+    .tag-park { background:rgba(42,74,48,0.2); color:#6a9a70; border-color:rgba(42,74,48,0.4); }
+    .tag-water { background:rgba(58,138,154,0.1); color:var(--marine); border-color:rgba(58,138,154,0.3); }
+    .tag-wildlife { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+    .tag-culture { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
+    .tag-beach { background:rgba(58,138,154,0.15); color:var(--marine); border-color:rgba(58,138,154,0.35); }
+    .tag-historic { background:rgba(184,102,74,0.1); color:#b8664a; border-color:rgba(184,102,74,0.3); }
+
+    .timeline {
+      border-left:2px solid var(--border); margin:0.8rem 0 0.8rem 0.5rem; padding-left:1.2rem;
+    }
+    .timeline .event {
+      position:relative; margin-bottom:0.5rem; font-size:0.82rem; color:var(--fog);
+    }
+    .timeline .event::before {
+      content:''; position:absolute; left:-1.45rem; top:0.45rem;
+      width:8px; height:8px; border-radius:50%; background:var(--marine);
+      border:2px solid var(--bg);
+    }
+    .timeline .event .year { color:var(--sand); font-family:monospace; font-size:0.78rem; margin-right:0.3rem; }
+
+    .highlight {
+      background:rgba(58,138,154,0.06); border:1px solid rgba(58,138,154,0.15);
+      border-radius:4px; padding:0.8rem 1rem; margin:0.8rem 0; font-size:0.85rem;
+    }
+    .highlight strong { color:var(--marine); }
+
+    .transit-box {
+      background:var(--panel); border:1px solid rgba(74,122,154,0.3); border-radius:6px;
+      padding:1.5rem; margin:1rem 0;
+    }
+    .transit-box h3 { font-size:0.95rem; color:var(--sky); margin-bottom:0.6rem; }
+    .transit-box p { font-size:0.85rem; color:var(--dim); line-height:1.6; }
+    .transit-box .route { color:var(--marine); font-weight:500; }
+    .transit-box ul { list-style:none; padding:0; margin:0.5rem 0; }
+    .transit-box li { font-size:0.82rem; color:var(--fog); padding:0.2rem 0; padding-left:1rem; position:relative; }
+    .transit-box li::before { content:'\2192'; position:absolute; left:0; color:var(--marine); }
+
+    .nearby {
+      display:flex; flex-wrap:wrap; gap:0.5rem; margin:1rem 0;
+      font-family:system-ui,sans-serif; font-size:0.82rem;
+    }
+    .nearby a {
+      background:var(--panel); border:1px solid var(--border); border-radius:4px;
+      padding:0.3rem 0.7rem; color:var(--fog);
+    }
+    .nearby a:hover { border-color:var(--marine); color:var(--marine); }
+
+    footer {
+      max-width:1100px; margin:0 auto; padding:1.5rem; text-align:center;
+      font-size:0.75rem; color:var(--dim); border-top:1px solid var(--border);
+      font-family:system-ui,sans-serif;
+    }
+    footer a { color:var(--fog); }
+
+    @media(max-width:640px) {
+      header h1 { font-size:1.4rem; }
+      main { padding:1rem; }
+      .card-grid { grid-template-columns:1fr; }
+    }
+
+    @media(min-width:1920px) {
+      main { max-width:1300px; }
+      footer { max-width:1300px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <span class="code">CMN</span>
+  <h1>Camano Island</h1>
+  <div class="subtitle">No ferry needed &mdash; a bridge-connected island of eagles, beaches, and drift logs</div>
+  <div class="coords">48.2178&deg;N 122.4913&deg;W &middot; Island County &middot; Elevation: 0&ndash;572 ft</div>
+  <nav>
+    <a href="../MUK/index.html">MUK</a>
+    <a href="../STW/index.html">STW</a>
+    <a href="../MVL/index.html">MVL</a>
+    <a href="index.html" class="active">CMN</a>
+    <a href="../EVR/index.html">EVR</a>
+    <a href="../../index.html">Research</a>
+  </nav>
+</header>
+
+<main>
+  <blockquote>
+    Named for Jacinto Caama&ntilde;o, a Spanish naval officer who never set foot on its shores. Camano Island
+    sits in the rain shadow of the Olympics, connected to the mainland by a bridge through Stanwood.
+    No ferry ticket required &mdash; just a drive across the slough and you are on an island where bald eagles
+    outnumber traffic lights.
+  </blockquote>
+
+  <div class="stats">
+    <div class="stat"><span class="stat-value">~17,500</span><span class="stat-label">Population (2024)</span></div>
+    <div class="stat"><span class="stat-value">0&ndash;572 ft</span><span class="stat-label">Elevation Range</span></div>
+    <div class="stat"><span class="stat-value">40 mi&sup2;</span><span class="stat-label">Island Area</span></div>
+    <div class="stat"><span class="stat-value">52 mi</span><span class="stat-label">Shoreline</span></div>
+    <div class="stat"><span class="stat-value">48.22&deg;N</span><span class="stat-label">Latitude</span></div>
+    <div class="stat"><span class="stat-value">122.49&deg;W</span><span class="stat-label">Longitude</span></div>
+  </div>
+
+  <!-- ========== History ========== -->
+
+  <h2>Historical Timeline</h2>
+  <p class="section-intro">From Spanish charts to artists' studios &mdash; an island that stayed rural while the mainland urbanized.</p>
+
+  <div class="timeline">
+    <div class="event"><span class="year">time imm.</span> Kikialos (Stillaguamish) and other Coast Salish peoples use the island seasonally</div>
+    <div class="event"><span class="year">1790</span> Spanish explorer Jacinto Caama&ntilde;o charts the island; his name attaches</div>
+    <div class="event"><span class="year">1850s</span> Euro-American settlers arrive; logging and farming operations begin</div>
+    <div class="event"><span class="year">1909</span> First bridge connects Camano Island to the mainland via Stanwood</div>
+    <div class="event"><span class="year">1930s</span> Cama Beach Resort opens, drawing families for fishing vacations</div>
+    <div class="event"><span class="year">1949</span> Camano Island State Park established on the southwest shore</div>
+    <div class="event"><span class="year">2008</span> Cama Beach Historical State Park opens, preserving the resort cabins</div>
+    <div class="event"><span class="year">2024</span> Cama Beach cabins permanently closed due to coastal erosion; day-use continues</div>
+  </div>
+
+  <!-- ========== Parks & Beaches ========== -->
+
+  <h2>Parks &amp; Beaches</h2>
+  <p class="section-intro">Two state parks, preserved shoreline, and community green spaces on 52 miles of coastline.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h3>Camano Island State Park</h3>
+      <div class="meta"><span class="tag tag-park">134 acres</span><span class="tag tag-beach">6,700 ft shoreline</span></div>
+      <p>A 134-acre camping park on the southwest shore with 6,700 feet of rocky shoreline and beach.
+      87 campsites (including 26 with hookups), hiking trails through old-growth forest, picnic shelters,
+      and an amphitheater. The beach offers tide pool exploration, sunset views across Saratoga Passage
+      toward Whidbey Island, and some of the best eagle-watching on the island.</p>
+      <p style="font-size:0.78rem;color:var(--dim);margin-top:0.4rem;">Access: Lowell Point Rd, southwest Camano</p>
+    </div>
+
+    <div class="card">
+      <h3>Cama Beach Historical State Park</h3>
+      <div class="meta"><span class="tag tag-historic">433 acres</span><span class="tag tag-beach">beach</span></div>
+      <p>A 433-acre park preserving the legacy of the 1930s Cama Beach fishing resort. Historic waterfront
+      cabins (now closed to overnight use due to seawall and septic issues), the Center for Wooden Boats
+      Camano outpost, and a day-use beach with drift logs and views of Whidbey. The park hosts interpretive
+      programs on fishing heritage and Coast Salish history.</p>
+      <p style="font-size:0.78rem;color:var(--dim);margin-top:0.4rem;">Access: W Camano Dr, west Camano</p>
+    </div>
+
+    <div class="card">
+      <h3>Iverson Spit Preserve</h3>
+      <div class="meta"><span class="tag tag-wildlife">birds</span><span class="tag tag-beach">spit</span></div>
+      <p>A natural shoreline preserve on the east side of the island. The spit extends into Port Susan Bay,
+      providing critical habitat for shorebirds, herons, and migrating waterfowl. Walking trails lead
+      through native vegetation to the beach. A key bird-watching site, especially during fall migration.</p>
+    </div>
+
+    <div class="card">
+      <h3>English Boom Historical Park</h3>
+      <div class="meta"><span class="tag tag-historic">logging heritage</span><span class="tag tag-beach">beach</span></div>
+      <p>Named for a log boom that operated here during the timber era. The park preserves the logging
+      heritage of the island with interpretive signs and a beach with views of the mainland. A quiet
+      spot for beach walks and picnicking on the east shore.</p>
+    </div>
+  </div>
+
+  <!-- ========== Wildlife ========== -->
+
+  <h2>Wildlife</h2>
+  <p class="section-intro">An island where nature still has the upper hand.</p>
+
+  <div class="highlight">
+    <strong>Bald Eagles:</strong> Camano Island is one of the densest bald eagle habitats in the lower 48 states.
+    Nesting pairs are visible year-round along the shoreline and in the old-growth stands. Great blue herons
+    maintain rookeries on the island. Harbor seals haul out on rocky points. Orcas (Southern Resident and
+    transient pods) pass through Saratoga Passage seasonally, typically in summer and fall, pursuing salmon runs.
+    The island's relatively undeveloped shoreline makes it a critical corridor for marine mammals and shorebirds.
+  </div>
+
+  <!-- ========== Getting Here ========== -->
+
+  <h2>Getting Here from Mukilteo</h2>
+  <p class="section-intro">Camano Island is 35 miles north of Mukilteo. No ferry needed &mdash; bridge access via Stanwood.</p>
+
+  <div class="transit-box">
+    <h3>By Car (Primary Access)</h3>
+    <p>I-5 north from Mukilteo through Everett and Marysville to Stanwood (Exit 212), then west on SR-532
+    across the bridge to Camano Island. Approximately 40&ndash;50 minutes depending on traffic. The bridge
+    crosses Davis Slough and West Pass &mdash; no toll, no ferry.</p>
+  </div>
+
+  <div class="transit-box">
+    <h3>By Transit (Limited)</h3>
+    <p><span class="route">Snow Goose Transit</span>: A local minibus service connecting Stanwood and Camano Island.
+    From Mukilteo, first reach Stanwood via I-5 north (car or limited bus service through Everett/Marysville).
+    Island transit service is minimal &mdash; a car is strongly recommended for exploring Camano.</p>
+    <p>Weekend and evening service is extremely limited or nonexistent on the island.</p>
+  </div>
+
+  <div class="transit-box">
+    <h3>Key Destinations Reachable</h3>
+    <ul>
+      <li>Stanwood (via SR-532, 10 min)</li>
+      <li>Cama Beach State Park (from bridge, 20 min south on island)</li>
+      <li>Camano Island State Park (from bridge, 25 min south on island)</li>
+      <li>Everett Station (via I-5 south, 35 min)</li>
+      <li>Whidbey Island (via Deception Pass, 45 min north)</li>
+    </ul>
+  </div>
+
+  <!-- ========== Nearby ========== -->
+
+  <h2>Nearby Communities</h2>
+  <div class="nearby">
+    <a href="../MUK/index.html">MUK &middot; Mukilteo</a>
+    <a href="../STW/index.html">STW &middot; Stanwood</a>
+    <a href="../MVL/index.html">MVL &middot; Marysville</a>
+    <a href="../EVR/index.html">EVR &middot; Everett</a>
+    <a href="../LST/index.html">LST &middot; Lake Stevens</a>
+  </div>
+
+</main>
+
+<footer>
+  Part of the <a href="../../index.html">PNW Research Series</a> &middot; Artemis II mission context &middot;
+  <a href="../MUK/index.html">Mukilteo Microclimate Observatory</a>
+  <br>Last updated: 2026-04-01T01:00Z
+</footer>
+
+</body>
+</html>
