@@ -87,10 +87,54 @@ footer {
 
 <main>
   <div class="stats-bar">
-    <span><strong>24</strong> papers cataloged</span>
-    <span><strong>5</strong> sweeps</span>
-    <span>Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, Planetary Society</span>
+    <span><strong>30</strong> papers cataloged</span>
+    <span><strong>6</strong> sweeps</span>
+    <span>Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, Planetary Society, ESA, USU SmallSat, NASA Science</span>
     <span>Last update: v1.1.12 (T-3h)</span>
+  </div>
+
+  <div class="sweep-header">v1.1.12 — April 1, 12:00 PM PDT (T-3h) &mdash; CREW ONBOARD, TERMINAL COUNT APPROACH</div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#26</span> AVATAR: Organ-on-Chip Beyond the Van Allen Belts</h3>
+    <div class="source">NASA Science, Jan 2026 &middot; <a href="https://science.nasa.gov/biological-physical/investigations/avatar/">NASA Science</a></div>
+    <div class="why"><strong>Flying today:</strong> AVATAR organ chips contain bone marrow tissue developed from the actual Artemis II crew members' cells. First time organ-on-chip technology flies beyond the ISS and Van Allen belts. Will measure how deep-space radiation and microgravity affect blood cell production in real time &mdash; personalized medicine for each astronaut.</div>
+    <div class="tspb">TSPB Layer 8 (L-Systems):<code>Bone marrow: hematopoietic stem cells &rarr; red cells + white cells + platelets
+Radiation disrupts the branching differentiation tree.
+AVATAR measures WHERE in the tree the damage occurs.</code></div>
+    <div class="lesson">The experiment isn't studying "astronauts" — it's studying these specific four humans, using their own cells.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#27</span> ARCHeR: Circadian Disruption in Deep Space</h3>
+    <div class="source">NASA Artemis II Science &middot; <a href="https://www.nasa.gov/humans-in-space/artemis-ii-science/">NASA</a></div>
+    <div class="why"><strong>Flying today:</strong> Wristwatch-like actigraphy device tracking crew activity and sleep cycles. In deep space there is no sunrise/sunset zeitgeber &mdash; the circadian oscillator free-runs. ARCHeR measures how far crew rhythms drift from mission clock over the 10-day trajectory.</div>
+    <div class="tspb">TSPB Layer 3 (Trigonometry):<code>Circadian: sin(2&pi;t/24.2) vs mission clock: sin(2&pi;t/24.0)
+Beat frequency: |1/24.2 - 1/24.0| &asymp; 1/290 cycles/hour
+Full drift cycle: ~12 days &mdash; Artemis II is 10 days. Almost one full beat.</code></div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#28</span> Artemis II CubeSats: Four Nations Riding to the Moon</h3>
+    <div class="source">USU SmallSat Conference 2025 &middot; <a href="https://digitalcommons.usu.edu/smallsat/2025/E-S2-2025/1/">USU Digital Commons</a></div>
+    <div class="why"><strong>Secondary payloads:</strong> Four CubeSats deploy from the Orion Stage Adapter after separation: <strong>TACHELES</strong> (Germany, radiation effects on electronics), <strong>ATENEA</strong> (Argentina, radiation shielding + GPS), <strong>K-RadCube</strong> (South Korea, human-tissue-analog dosimeter + Samsung/SK Hynix chip radiation testing), <strong>Space Weather CubeSat-1</strong> (Saudi Arabia, high-orbit space weather). Four nations, four science objectives, one ride.</div>
+    <div class="lesson">The secondary payloads are as international as the crew. Science doesn't have borders.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#29</span> European Service Module 2: From Europe to the Moon</h3>
+    <div class="source">ESA Orion Blog, March 25, 2026 &middot; <a href="https://blogs.esa.int/orion/2026/03/25/from-europe-to-the-moon-esm-2s-journey/">ESA</a></div>
+    <div class="why"><strong>The engine room:</strong> Airbus-built ESM-2 provides propulsion (33 engines), power (4 solar wings, 11.2 kW), life support (90 kg O2, 240 kg water), and thermal control. Powers the O2O optical communications system. ESA's contribution makes Artemis a transatlantic partnership &mdash; European engines taking humans to the Moon.</div>
+    <div class="tspb">TSPB Layer 4 (Vector Calculus):<code>ESM main engine: 26.7 kN (Orbital Maneuvering System from Shuttle era)
+&Delta;v budget: ~1,340 m/s total for TLI assist + course corrections + entry
+Solar array: 4 &times; 7m wings = 62.4 m&sup2; collecting area</code></div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#30</span> Artemis II Nominal Trajectory Visualization</h3>
+    <div class="source">NASA SVS (Scientific Visualization Studio), 2026 &middot; <a href="https://svs.gsfc.nasa.gov/5610/">NASA SVS</a></div>
+    <div class="why"><strong>The flight path:</strong> Official NASA visualization of the reference trajectory. Free-return loop: TLI &rarr; 3-day coast to Moon &rarr; far-side flyby at 3,000-9,000 mi altitude &rarr; gravity assist return &rarr; direct entry at 11.0 km/s. Total distance: ~620,000 miles. The trajectory is designed so that if all propulsion fails after TLI, lunar gravity brings the crew home &mdash; the same safety principle as Apollo 13.</div>
+    <div class="lesson">A free-return trajectory is a bet that gravity is more reliable than engines. It's also a promise: we will bring them home.</div>
   </div>
 
   <div class="sweep-header">v1.1.7 — April 1, 7:00 AM PDT (T-8h) &mdash; LAUNCH DAY MORNING</div>
@@ -292,7 +336,7 @@ In deep space, no sunrise/sunset zeitgeber — free-running oscillator</code></d
 
 <footer>
   <a href="index.html">Artemis II Tracker</a> &middot;
-  Wall-Clock Papers &middot; 24 cataloged &middot;
+  Wall-Clock Papers &middot; 30 cataloged &middot;
   <a href="../../index.html">Tibsfox Research</a>
 </footer>
 
