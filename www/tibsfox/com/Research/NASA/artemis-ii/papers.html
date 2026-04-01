@@ -87,10 +87,10 @@ footer {
 
 <main>
   <div class="stats-bar">
-    <span><strong>13</strong> papers cataloged</span>
-    <span><strong>3</strong> sweeps</span>
-    <span>Sources: arXiv, NTRS, AGU, SPIE, Nature, Planetary Society</span>
-    <span>Last update: v1.0.17 (T-22h)</span>
+    <span><strong>21</strong> papers cataloged</span>
+    <span><strong>4</strong> sweeps</span>
+    <span>Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, Planetary Society</span>
+    <span>Last update: v1.0.17+ (T-22h)</span>
   </div>
 
   <div class="sweep-header">v1.0.17 — March 31, 5:00 PM PDT (T-22h) &mdash; SPACE WEATHER ALERT</div>
@@ -116,6 +116,57 @@ Unlike KL-divergence, it satisfies the triangle inequality — a proper metric.<
     <h3><span class="paper-num">#12</span> A New Phase for Space Weather</h3>
     <div class="source">AGU Space Weather, 2026 (10.1029/2026SW005068) &middot; <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2026SW005068">AGU</a></div>
     <div class="why"><strong>Why it matters:</strong> Reviews the transition from research to operational space weather forecasting. Describes the exact SWPC infrastructure monitoring space weather for Artemis II — the APIs we're polling, the G-scale watches, the ML models improving forecast accuracy.</div>
+  </div>
+
+  <div class="sweep-header">v1.0.17+ — Deep Catalog Expansion &mdash; 30 Papers Found</div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#14</span> Short-Duration Bone Loss in Spaceflight</h3>
+    <div class="source">Matheson et al., npj Microgravity 12:28, Feb 2026 &middot; <a href="https://www.nature.com/articles/s41526-026-00578-0">Nature</a></div>
+    <div class="why"><strong>Mission critical:</strong> First evidence that 3-5 day missions (Polaris Dawn, Fram2) cause measurable tibial bone density loss. Artemis II is ~10 days — what will the crew's bones look like after return?</div>
+    <div class="lesson">Even short flights damage bones. ARCHAR monitoring and post-flight rehab protocols are directly informed by this finding.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#15</span> O2O Architecture and Test Systems</h3>
+    <div class="source">NASA GSFC / MIT Lincoln Lab, NTRS 20250010065, Oct 2025 &middot; <a href="https://ntrs.nasa.gov/citations/20250010065">NTRS</a></div>
+    <div class="why"><strong>Why it matters:</strong> The definitive technical report on the O2O optical communications payload — 4-inch telescope, modem, controller, and ground segment at White Sands and Table Mountain. This is the system that will send 260 Mbps from lunar distance.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#16</span> The Category Mistake of Cislunar Time</h3>
+    <div class="source">arXiv:2602.18641, Feb 2026 &middot; <a href="https://arxiv.org/abs/2602.18641">arXiv</a></div>
+    <div class="why"><strong>Why it matters:</strong> NASA directed to establish Coordinated Lunar Time (LTC) by Dec 2026. This paper argues the concept is incoherent — general relativity means there is no single "lunar time." Artemis II's navigation uses Earth-referenced time; future surface operations will need this solved.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#17</span> First Multi-Constellation GNSS at the Moon</h3>
+    <div class="source">arXiv:2601.06081, Jan 2026 &middot; <a href="https://arxiv.org/html/2601.06081">arXiv</a></div>
+    <div class="why"><strong>Why it matters:</strong> First post-processing of L1/L5 IQ snapshots from navigation satellites in the lunar domain. Milestone for cislunar PNT that directly informs Artemis navigation accuracy.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#18</span> Uncertainty-Aware Solar Flare Regression</h3>
+    <div class="source">Hong et al., arXiv:2603.06712, Mar 5, 2026 &middot; <a href="https://arxiv.org/html/2603.06712">arXiv</a></div>
+    <div class="why"><strong>Why it matters:</strong> Conformal prediction + deep learning for solar flare intensity forecasting. Directly supports Artemis II radiation storm warnings — quantifies prediction uncertainty, which is what mission planners need for GO/NO-GO decisions.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#19</span> Cislunar State and Uncertainty Propagation</h3>
+    <div class="source">arXiv:2603.20110, Mar 2026 &middot; <a href="https://arxiv.org/html/2603.20110">arXiv</a></div>
+    <div class="why"><strong>Why it matters:</strong> Addresses nonlinear dynamics and uncertainty propagation in cislunar space using modified equinoctial elements. Critical for understanding trajectory error growth during Artemis II's free-return path.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#20</span> SEPNET: Multi-Task SEP Forecasting</h3>
+    <div class="source">arXiv:2512.12786, Dec 2025 &middot; <a href="https://arxiv.org/html/2512.12786">arXiv</a></div>
+    <div class="why"><strong>Why it matters:</strong> LSTM+Transformer network jointly predicting flares, CMEs, and solar energetic particles — the exact threat model for Artemis II crew radiation exposure. End-to-end prediction from solar observation to crew dose.</div>
+  </div>
+
+  <div class="paper">
+    <h3><span class="paper-num">#21</span> Star Tracker Misalignment Compensation</h3>
+    <div class="source">arXiv:2601.01130, Jan 2026 &middot; <a href="https://arxiv.org/html/2601.01130">arXiv</a></div>
+    <div class="why"><strong>Why it matters:</strong> Adaptive framework for star tracker calibration beyond Earth orbit. Orion's navigation relies on star trackers for attitude determination — this paper addresses the specific challenge of maintaining accuracy in the thermal/radiation environment beyond LEO.</div>
   </div>
 
   <div class="sweep-header">v1.0.1 — March 31, 4:01 AM PDT (T-18h) &mdash; First Sweep</div>
@@ -209,7 +260,7 @@ In deep space, no sunrise/sunset zeitgeber — free-running oscillator</code></d
 
 <footer>
   <a href="index.html">Artemis II Tracker</a> &middot;
-  Wall-Clock Papers &middot; 13 cataloged &middot;
+  Wall-Clock Papers &middot; 21 cataloged &middot;
   <a href="../../index.html">Tibsfox Research</a>
 </footer>
 
