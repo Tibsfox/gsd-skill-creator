@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 68&deg; &mdash; Sam Beam (Iron &amp; Wine) &mdash; Seattle 360</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    /* Release page overrides */
+    .release-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 800px) {
+      .release-layout { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 1.5rem;
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar .stat-card h4 {
+      margin: 0 0 0.8rem;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--seattle-navy);
+      font-family: system-ui, sans-serif;
+      border-bottom: 1px solid #E8EAF6;
+      padding-bottom: 0.4rem;
+    }
+    .sidebar .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sidebar .stat-row:last-child { border-bottom: none; }
+    .sidebar .stat-label { color: #757575; font-family: system-ui, sans-serif; }
+    .sidebar .stat-value { font-weight: 600; color: var(--seattle-navy); }
+
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A237E, #283593);
+      color: #9FA8DA;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: system-ui, sans-serif;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      box-shadow: 0 0 16px rgba(26, 35, 126, 0.4);
+    }
+
+    .energy-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #0D47A1;
+      color: #BBDEFB;
+      border: 1px solid #1565C0;
+    }
+
+    .genre-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #4A148C;
+      color: #E1BEE7;
+      border: 1px solid #6A1B9A;
+      margin-left: 0.3rem;
+    }
+
+    .label-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #37474F;
+      color: #B0BEC5;
+      border: 1px solid #455A64;
+      margin-left: 0.3rem;
+    }
+
+    .neighborhood-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #00695C;
+      color: #B2DFDB;
+      border: 1px solid #00897B;
+      margin-left: 0.3rem;
+    }
+
+    .record-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      background: #B71C1C;
+      color: #FFCDD2;
+      border: 1px solid #C62828;
+      margin-left: 0.3rem;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px solid #E8EAF6;
+      margin: 2.5rem 0;
+    }
+
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .theory-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-left: 4px solid #1A237E;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+    }
+    .theory-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .theory-card .level {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .theory-card .level.advanced { background: #E8EAF6; color: #283593; }
+    .theory-card .level.intermediate { background: #E0F2F1; color: #00695C; }
+
+    .theory-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: #424242;
+    }
+
+    .cross-ref-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .cross-ref-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #F3F4F6;
+      font-size: 0.9rem;
+    }
+    .cross-ref-list li:last-child { border-bottom: none; }
+    .cross-ref-list .ref-degree {
+      font-weight: 700;
+      color: var(--seattle-navy);
+      min-width: 3rem;
+      display: inline-block;
+    }
+
+    blockquote {
+      border-left: 3px solid #4A148C;
+      margin: 1.5rem 0;
+      padding: 0.8rem 1.2rem;
+      background: #F3E5F5;
+      font-style: italic;
+      color: #4A148C;
+    }
+
+    .triangle-banner {
+      background: linear-gradient(135deg, #1A237E, #283593, #4A148C);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 6px;
+      margin-bottom: 2rem;
+      font-family: system-ui, sans-serif;
+    }
+    .triangle-banner h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .triangle-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
+    .disco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .disco-card {
+      background: white;
+      border: 1px solid #9FA8DA;
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .disco-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: #1A237E;
+      font-family: system-ui, sans-serif;
+    }
+    .disco-card .disco-years {
+      font-size: 0.75rem;
+      color: #757575;
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .disco-card p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #424242;
+    }
+
+    .web-card {
+      background: #F3E5F5;
+      border: 1px solid #CE93D8;
+      border-left: 4px solid #4A148C;
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .web-card h4 {
+      margin: 0 0 0.3rem;
+      font-size: 0.9rem;
+      color: #4A148C;
+      font-family: system-ui, sans-serif;
+    }
+    .web-card p {
+      margin: 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #4A148C;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-container">
+    <!-- Breadcrumb -->
+    <nav style="font-size: 0.82rem; color: #757575; margin-bottom: 1.5rem; font-family: system-ui, sans-serif;">
+      <a href="../../" style="color: var(--seattle-navy);">Seattle 360</a> &rsaquo;
+      <a href="../" style="color: var(--seattle-navy);">Releases</a> &rsaquo;
+      <span>068 &mdash; Sam Beam (Iron &amp; Wine)</span>
+    </nav>
+
+    <!-- Triangle Banner -->
+    <div class="triangle-banner">
+      <h3>Sub Pop Enters &mdash; The Visiting Artist &mdash; Genre Stage 50 &mdash; The Hush</h3>
+      <p>
+        Sam Beam at degree 68&deg; is the singer-songwriter behind
+        <strong>Iron &amp; Wine</strong> &mdash; hushed, layered folk built
+        on whispery vocals and acoustic guitar. Not a Seattle native &mdash;
+        born in South Carolina, based in various US cities. He enters the
+        engine through his <strong>Sub Pop Records</strong> connection and
+        Seattle performances. <strong>Sub Pop enters the engine</strong>
+        &mdash; the legendary Seattle independent label that launched
+        Nirvana, Soundgarden, and Mudhoney. <strong>Folk</strong> at
+        Genre Stage 50 &mdash; the fiftieth genre stage, a milestone.
+        <strong>E=2</strong> &mdash; quiet, intimate, among the quietest
+        acts in indie folk. First artist whose connection to Seattle is
+        purely label-based &mdash; the visiting artist.
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header style="display: flex; align-items: center; margin-bottom: 2rem;">
+      <div class="degree-badge">68&deg;</div>
+      <div>
+        <h1 style="margin: 0; font-size: 1.6rem; color: var(--seattle-navy);">Sam Beam (Iron &amp; Wine)</h1>
+        <div style="margin-top: 0.3rem;">
+          <span class="energy-badge">E = 2</span>
+          <span class="genre-badge">Folk</span>
+          <span class="label-badge">Sub Pop Records</span>
+          <span class="neighborhood-badge">Visiting Artist</span>
+          <span class="record-badge">Sub Pop Enters</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="release-layout">
+      <!-- Main Content -->
+      <main>
+        <!-- Milestone Card -->
+        <div class="web-card">
+          <h4>Engine Events: Sub Pop Enters &middot; Genre Stage 50 &middot; Visiting Artist &middot; E=2 Returns</h4>
+          <p>
+            <strong>Sam Beam</strong> enters the engine as the
+            singer-songwriter behind <strong>Iron &amp; Wine</strong>.
+            Not a Seattle resident &mdash; connected through
+            <strong>Sub Pop Records</strong>, the legendary Seattle
+            independent label. First Sub Pop artist in the engine.
+            Sub Pop launched Nirvana, Soundgarden, Mudhoney &mdash; its
+            arrival at degree 68 is a structural event.
+            <strong>Folk</strong> at Genre Stage 50 &mdash; the fiftieth
+            genre stage, a milestone. <strong>E=2</strong> &mdash;
+            quiet, intimate. Distribution after degree 68: E1:3, E2:22,
+            E3:16, E4:17, E5:10, E6:2. The hush &mdash; 69th acoustic
+            element. The visiting artist &mdash; 69th artist-city
+            pattern. First artist connected purely through a label,
+            not residence.
+          </p>
+        </div>
+
+        <section>
+          <h2>Sub Pop Enters: The Label That Built Seattle</h2>
+          <p>
+            <strong>Sub Pop Records</strong> enters the Seattle 360
+            engine at degree 68. The significance cannot be overstated.
+            Sub Pop &mdash; founded by Bruce Pavitt and Jonathan Poneman
+            in 1986 &mdash; is the label that launched grunge, that
+            signed Nirvana before the world knew the name, that released
+            Soundgarden&rsquo;s early recordings, that gave Mudhoney its
+            platform. Sub Pop is synonymous with Seattle&rsquo;s identity
+            as a music city. And yet the engine has traveled sixty-eight
+            degrees before encountering it directly.
+          </p>
+          <p>
+            The label&rsquo;s appearance is through <strong>Sam Beam</strong>,
+            the singer-songwriter behind <strong>Iron &amp; Wine</strong>.
+            Beam is not from Seattle. He was born in South Carolina, has
+            been based in Florida, Austin, and Durham. His connection to
+            Seattle is the label: Sub Pop released several Iron &amp; Wine
+            albums &mdash; <em>The Creek Drank the Cradle</em> (2002),
+            <em>Our Endless Numbered Days</em> (2004),
+            <em>The Shepherd&rsquo;s Dog</em> (2007),
+            <em>Kiss Each Other Clean</em> (2011). The label brought
+            Beam&rsquo;s hushed folk into the Sub Pop catalog alongside
+            grunge, indie rock, and the broader Pacific Northwest sound.
+          </p>
+          <p>
+            Sub Pop has already been present in the engine &mdash;
+            <strong>Fleet Foxes</strong> (degree 53) are on Sub Pop.
+            But degree 68 is the first time the label itself becomes a
+            structural event. The visiting artist arrives through the
+            label&rsquo;s gravitational pull &mdash; Seattle as a city
+            that draws artists into its orbit through institutional
+            infrastructure, not just geography.
+          </p>
+          <blockquote>
+            Sub Pop is not just a label. It is the institution that made
+            Seattle&rsquo;s music matter to the world. Its arrival in
+            the engine at degree 68 &mdash; through a non-resident
+            artist whose connection is purely label-based &mdash;
+            reveals that Seattle&rsquo;s reach extends far beyond its
+            city limits. The label as gravitational field.
+          </blockquote>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Whisper Voice: Iron &amp; Wine&rsquo;s Hushed Folk</h2>
+          <p>
+            Iron &amp; Wine&rsquo;s sound is among the quietest in
+            recorded folk music. Sam Beam&rsquo;s vocals on early albums
+            are barely above a whisper &mdash; intimate, close, as
+            though recorded in a bedroom at 3 a.m. with the microphone
+            inches from his mouth. <em>The Creek Drank the Cradle</em>
+            (2002) was literally a home recording &mdash; Beam alone
+            with a four-track, layering whispered vocals, acoustic
+            guitar, and slide guitar into songs of startling fragility.
+          </p>
+          <p>
+            The sound evolved across albums. <em>Our Endless Numbered
+            Days</em> (2004) brought studio production and a fuller
+            band sound while retaining the hushed vocal center.
+            <em>The Shepherd&rsquo;s Dog</em> (2007) expanded into
+            world music textures, Afrobeat rhythms, and more
+            complex arrangements. <em>Kiss Each Other Clean</em> (2011)
+            pushed further into electric territory with synthesizers
+            and funk-inflected rhythms. <em>Beast Epic</em> (2017)
+            returned to acoustic intimacy. Through every transformation,
+            Beam&rsquo;s whisper remained the constant &mdash; the
+            center around which the arrangements rotate.
+          </p>
+          <p>
+            E=2 is precise for Iron &amp; Wine. The energy level matches
+            the whisper &mdash; quiet, intimate, never raising its voice
+            even when the arrangements grow complex. Beam&rsquo;s E=2
+            connects to the engine&rsquo;s other quiet folk voices &mdash;
+            <strong>Damien Jurado</strong> (degree 45, E=2), <strong>Ben
+            Gibbard</strong> solo (degree 60, E=2), <strong>Jesse Sykes</strong>
+            (degree 64, E=2). The quiet folk quadrant of the engine
+            deepens with each entry.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section>
+          <h2>The Visiting Artist: Connected by Label, Not Residence</h2>
+          <p>
+            Sam Beam is the first artist in the engine whose connection
+            to Seattle is <strong>purely label-based</strong>. Every
+            previous artist has had a residential or formative
+            connection to the Pacific Northwest &mdash; born here,
+            raised here, moved here, formed a band here, built a career
+            here. Beam has none of these. He is from South Carolina.
+            He has been based in Florida, in Austin, in Durham. His
+            connection to Seattle is Sub Pop Records &mdash; the label
+            that released his music, the institution that placed Iron
+            &amp; Wine within the Seattle music ecosystem.
+          </p>
+          <p>
+            The visiting artist pattern raises a question the engine
+            has not previously confronted: what does it mean for a city
+            to claim an artist? Is the claim geographic? Institutional?
+            Cultural? Beam&rsquo;s presence in the engine argues that
+            the institutional connection &mdash; the label, the
+            performances, the cultural association &mdash; is sufficient.
+            Sub Pop is Seattle. An artist on Sub Pop is, in some
+            meaningful sense, a Seattle artist &mdash; even if the
+            artist has never lived there.
+          </p>
+          <p>
+            This is different from the Export pattern (degrees 0, 36,
+            63) where artists leave Seattle. It is different from the
+            wanderer (degree 66, Case) who accumulates cities. The
+            visiting artist never arrives in the geographic sense
+            &mdash; the connection is institutional, cultural,
+            gravitational. Seattle reaches out through its labels and
+            venues and draws artists into its orbit.
+          </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Theory Nodes -->
+        <section>
+          <h2>Music Theory Contributions</h2>
+          <div class="theory-grid">
+            <div class="theory-card">
+              <h4>The Hush</h4>
+              <div class="level advanced">Advanced &mdash; 69th Acoustic Element</div>
+              <p>
+                The acoustic quality of a voice that operates below
+                normal vocal projection &mdash; not whispering as
+                technique but whispering as native register. Beam&rsquo;s
+                vocals on early Iron &amp; Wine recordings are barely
+                audible, intimate, as though the microphone is a
+                confidant rather than an audience. The hush is distinct
+                from the whisper (degree 31) &mdash; the whisper is a
+                technique; the hush is a condition. The voice that does
+                not know how to be loud. The clean room (67) made the
+                quiet possible; the hush fills the quiet with breath.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>The Visiting Artist</h4>
+              <div class="level advanced">Advanced &mdash; 69th Artist-City Pattern</div>
+              <p>
+                The pattern of an artist connected to a city through
+                institutional infrastructure &mdash; a label, a venue
+                circuit, a cultural association &mdash; rather than
+                residence. The visiting artist never moves to the city.
+                The city reaches out through its institutions and claims
+                the artist. Beam is Sub Pop&rsquo;s, and Sub Pop is
+                Seattle&rsquo;s, therefore Beam is Seattle&rsquo;s
+                &mdash; by one degree of institutional separation.
+                The first non-resident artist in the engine.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Blue Note: The Held Breath</h4>
+              <div class="level intermediate">Intermediate &mdash; 68th Deployment</div>
+              <p>
+                The blue note that sounds in the silence before a
+                whispered phrase &mdash; the intake of breath that
+                becomes part of the music. In Beam&rsquo;s recordings,
+                the space between phrases is not empty; it is filled
+                with the sound of breathing, of preparation, of the
+                voice gathering itself for the next whisper. The held
+                breath is the blue note of anticipation at the quietest
+                possible volume. The controlled variable (67) leaked;
+                the held breath waits.
+              </p>
+            </div>
+            <div class="theory-card">
+              <h4>Folk at Genre Stage 50</h4>
+              <div class="level advanced">Advanced &mdash; Genre Stage 50</div>
+              <p>
+                Folk returns at the fiftieth genre stage &mdash; a
+                milestone. The genre has appeared throughout the
+                engine&rsquo;s folk quadrant (Jurado 45, Votolato 46,
+                Cahoone 48, Ivan and Alyosha 54, Gibson 57, Gibbard 60,
+                Sykes 64). Its return at degree 68 through a non-resident
+                Sub Pop artist marks a new deployment: folk imported
+                through a label rather than grown in the city.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Discography -->
+        <section>
+          <h2>Key Discography</h2>
+          <div class="disco-grid">
+            <div class="disco-card">
+              <h4>The Creek Drank the Cradle</h4>
+              <div class="disco-years">2002 &middot; Sub Pop Records</div>
+              <p>
+                Iron &amp; Wine&rsquo;s debut. Home-recorded on a
+                four-track &mdash; whispered vocals, acoustic guitar,
+                slide guitar, intimate beyond intimacy. The album that
+                introduced the hush to the world. Lo-fi as aesthetic
+                rather than limitation.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Our Endless Numbered Days</h4>
+              <div class="disco-years">2004 &middot; Sub Pop Records</div>
+              <p>
+                Studio-produced but still hushed. Fuller arrangements
+                &mdash; band, strings, a wider palette &mdash; around
+                the same whispering center. Songs like &ldquo;Naked as
+                We Came&rdquo; and &ldquo;Each Coming Night&rdquo;
+                became Iron &amp; Wine&rsquo;s most recognizable work.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>The Shepherd&rsquo;s Dog</h4>
+              <div class="disco-years">2007 &middot; Sub Pop Records</div>
+              <p>
+                The expansion. Afrobeat rhythms, world music textures,
+                electric guitars, complex arrangements &mdash; the
+                whisper voice navigating a much larger sonic landscape.
+                Beam proving the hush can survive any arrangement.
+              </p>
+            </div>
+            <div class="disco-card">
+              <h4>Beast Epic</h4>
+              <div class="disco-years">2017 &middot; Sub Pop Records</div>
+              <p>
+                The return to acoustic intimacy after the electric
+                explorations of <em>Kiss Each Other Clean</em> and
+                <em>Ghost on Ghost</em>. The hush restored to its
+                original register &mdash; acoustic guitar, whispered
+                vocals, the bedroom as cathedral.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- Cross-References -->
+        <section>
+          <h2>Cross-References</h2>
+          <ul class="cross-ref-list">
+            <li>
+              <span class="ref-degree">45&deg;</span>
+              <strong>Damien Jurado</strong> &mdash; Folk, quiet, Sub
+              Pop-adjacent. The folk murmur (degree 45) and the hush
+              (degree 68) &mdash; two different aesthetics of quiet.
+              Jurado&rsquo;s murmur is conversational; Beam&rsquo;s
+              hush is confessional. Both E=2.
+            </li>
+            <li>
+              <span class="ref-degree">60&deg;</span>
+              <strong>Ben Gibbard</strong> &mdash; E=2 folk, intimate.
+              Gibbard&rsquo;s bare wire (degree 60) and Beam&rsquo;s
+              hush (degree 68) &mdash; both stripped, both quiet, but
+              Gibbard strips the band away while Beam was never in a
+              band in the traditional sense. Self-released vs. Sub Pop.
+            </li>
+            <li>
+              <span class="ref-degree">64&deg;</span>
+              <strong>Jesse Sykes</strong> &mdash; Dark folk vs. hushed
+              folk. Different quiet aesthetics. Sykes&rsquo;s dusk
+              (degree 64) is the voice at the threshold of audibility;
+              Beam&rsquo;s hush is the voice that chose to stay below
+              the threshold. Both E=2.
+            </li>
+            <li>
+              <span class="ref-degree">53&deg;</span>
+              <strong>Fleet Foxes</strong> &mdash; Sub Pop connection.
+              Fleet Foxes (degree 53) and Iron &amp; Wine (degree 68)
+              are both on Sub Pop. But Fleet Foxes are Seattle-resident;
+              Beam is a visiting artist. Two Sub Pop artists, two
+              different relationships to the city.
+            </li>
+            <li>
+              <span class="ref-degree">65&deg;</span>
+              <strong>Philip Aaberg</strong> &mdash; Both quiet. Aaberg
+              at E=1 (the open plain), Beam at E=2 (the hush). The
+              quiet end of the energy spectrum. Aaberg&rsquo;s quiet is
+              spatial &mdash; the open landscape. Beam&rsquo;s quiet is
+              intimate &mdash; the closed room, the whisper, the breath.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="stat-card">
+          <h4>Engine Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Degree</span>
+            <span class="stat-value">68&deg; / 360&deg;</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Energy</span>
+            <span class="stat-value">E = 2</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre</span>
+            <span class="stat-value">Folk</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">50</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Era</span>
+            <span class="stat-value">Sub Pop</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Identity</h4>
+          <div class="stat-row">
+            <span class="stat-label">Origin</span>
+            <span class="stat-value">South Carolina</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Connection</span>
+            <span class="stat-value">Sub Pop Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Status</span>
+            <span class="stat-value">Active</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Label</span>
+            <span class="stat-value">Sub Pop Records</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">Visiting Artist</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Structural Position</h4>
+          <div class="stat-row">
+            <span class="stat-label">Genre Stage</span>
+            <span class="stat-value">50 (Folk)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic Element</span>
+            <span class="stat-value">#69 (The Hush)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Artist-City</span>
+            <span class="stat-value">Visiting Artist</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#68 (Held Breath)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Sub Pop Catalog</h4>
+          <div class="stat-row">
+            <span class="stat-label">Creek Drank</span>
+            <span class="stat-value">2002</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Numbered Days</span>
+            <span class="stat-value">2004</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Shepherd&rsquo;s Dog</span>
+            <span class="stat-value">2007</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Kiss Each Other</span>
+            <span class="stat-value">2011</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Energy Distribution</h4>
+          <div class="stat-row">
+            <span class="stat-label">E=1</span>
+            <span class="stat-value">3</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=2</span>
+            <span class="stat-value">22</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=3</span>
+            <span class="stat-value">16</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=4</span>
+            <span class="stat-value">17</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=5</span>
+            <span class="stat-value">10</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">E=6</span>
+            <span class="stat-value">2</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Theory Elements</h4>
+          <div class="stat-row">
+            <span class="stat-label">Acoustic</span>
+            <span class="stat-value">#69 (The Hush)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Pattern</span>
+            <span class="stat-value">#69 (Visiting Artist)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Blue Note</span>
+            <span class="stat-value">#68 (Held Breath)</span>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Connections</h4>
+          <div class="stat-row">
+            <span class="stat-label">Jurado</span>
+            <span class="stat-value">Quiet folk (45)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Gibbard</span>
+            <span class="stat-value">E=2 folk (60)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Sykes</span>
+            <span class="stat-value">Dark folk (64)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Fleet Foxes</span>
+            <span class="stat-value">Sub Pop (53)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Aaberg</span>
+            <span class="stat-value">Quiet (65)</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Footer Nav -->
+    <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E8EAF6; font-size: 0.78rem; color: #757575; font-family: system-ui, sans-serif;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+        <a href="../067-chris-walla/" style="color: var(--seattle-navy);">&larr; 67&deg; Chris Walla</a>
+        <a href="../069-kris-orlowski/" style="color: var(--seattle-navy);">69&deg; Kris Orlowski &rarr;</a>
+      </div>
+      <p>
+        Degree 68&deg; &mdash; Sam Beam (Iron &amp; Wine) &mdash; Seattle 360
+        Engine &mdash; v1.49.199
+        <br>
+        Singer-songwriter behind Iron &amp; Wine. Born in South Carolina,
+        not a Seattle resident &mdash; connected through Sub Pop Records.
+        <strong>Sub Pop enters the engine</strong> &mdash; the legendary
+        Seattle independent label that launched Nirvana, Soundgarden,
+        Mudhoney. First Sub Pop artist in the engine. First visiting
+        artist &mdash; connected purely through label, not residence.
+        Folk at Genre Stage 50 &mdash; the fiftieth genre stage. E=2
+        &mdash; quiet, intimate. Distribution 3:22:16:17:10:2. Sub Pop
+        Records &mdash; <em>The Creek Drank the Cradle</em> (2002),
+        <em>Our Endless Numbered Days</em> (2004),
+        <em>The Shepherd&rsquo;s Dog</em> (2007),
+        <em>Kiss Each Other Clean</em> (2011),
+        <em>Beast Epic</em> (2017). The hush &mdash; 69th acoustic
+        element &mdash; the voice that operates below normal projection,
+        whispering as native register. The visiting artist &mdash; 69th
+        artist-city pattern &mdash; connected through institutional
+        infrastructure, not residence. The held breath &mdash; 68th
+        blue note &mdash; the silence before the whisper that becomes
+        part of the music. The whisper voice. The label as gravitational
+        field. Sub Pop as Seattle&rsquo;s reach beyond its city limits.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
