@@ -1,0 +1,2277 @@
+%% ═══════════════════════════════════════════════════════════════════════════
+%% CHAPTER 4: SHADING, MATERIALS & RENDERING
+%% Thicc Splines Save Lives — A Comprehensive Blender User Manual
+%% This file is \input{} from the main document. No preamble.
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\chapter{Shading, Materials \& Rendering}
+\label{ch:shading}
+
+\begin{quotebox}
+\itshape ``The rendering equation is simple. Everything else is
+approximations to solve it faster.''
+
+\upshape --- attributed to various graphics researchers,
+paraphrasing Jim Kajiya's 1986 SIGGRAPH paper
+\end{quotebox}
+
+\vspace{1em}
+Every object you model is invisible until it has a material.
+Materials describe how surfaces interact with light---how much is
+reflected, how much is absorbed, how much passes through, and what
+colors emerge on the other side. This chapter covers every layer of
+that process: the shader editor where materials are built, the
+Principled BSDF node that defines most surfaces, the procedural and
+image-based textures that drive them, the two render engines that
+evaluate them (EEVEE and Cycles), the lights that illuminate them,
+the cameras that capture them, the color management that maps them
+to your display, and the output settings that deliver the final
+pixels. Where earlier chapters built geometry
+(Chapter~\ref{ch:modeling}), this chapter makes it \emph{visible}.
+
+\begin{historynote}
+Every material in Blender is described by a \textbf{BSDF}---a
+Bidirectional Scattering Distribution Function. This mathematical
+framework describes how light interacts with a surface: how much is
+reflected, how much is absorbed, how much passes through. The
+Principled BSDF shader node implements a physically-based model
+descended from Disney's ``Principled'' shader (2012), which itself
+built on decades of rendering research from Cook--Torrance (1982)
+through the GGX microfacet model (Walter et al., 2007). When you
+adjust Roughness from 0 to 1, you are changing the statistical
+distribution of microscopic surface facets from perfectly aligned
+(mirror) to randomly oriented (matte). The rendering equation
+itself---formalized by Jim Kajiya in 1986---is the theoretical
+basis for all physically-based rendering, including the path
+tracing algorithm used by Cycles
+(see Chapter~\ref{ch:history}).
+\end{historynote}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{The Shader Editor}
+\label{sec:shading:editor}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Node-Based Materials}
+
+Blender uses a \textbf{node-based system} for material and shader
+creation. Instead of adjusting a fixed set of material parameters,
+you build shader networks by connecting nodes---each node performs a
+specific operation (mathematical function, texture lookup, color
+manipulation, or shading computation), and the connections between
+nodes determine how data flows from textures through processing to
+final surface appearance.
+
+This approach provides unlimited flexibility: any combination of
+textures, color operations, and shader types can be wired together
+to create materials ranging from simple solid colors to complex
+multi-layered surfaces with procedurally-driven variation.
+
+Every material consists of at least one shader node connected to the
+\textbf{Material Output} node. The Material Output has three inputs:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Surface}---Defines the surface appearance (color,
+        reflectivity, transparency)
+  \item \textbf{Volume}---Defines volumetric effects within the
+        object (fog, smoke, subsurface scattering media)
+  \item \textbf{Displacement}---Defines physical surface
+        displacement for rendering (Cycles only in most cases)
+\end{itemize}
+
+\subsection{Material Slots and Assignment}
+
+Objects can have multiple materials. The Material Properties panel
+(checkered sphere icon) contains the material slot list:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Adding materials}---Click the \texttt{+} button to
+        add a new slot, then create a new material or link an
+        existing one.
+  \item \textbf{Assigning to faces}---In Edit Mode, select faces,
+        choose the target material slot, and click ``Assign.''
+  \item \textbf{Material pass index}---Each material can have a pass
+        index for compositing identification.
+  \item \textbf{Viewport display color}---A separate simple color
+        displayed in Solid viewport shading mode (does not affect
+        rendering).
+\end{itemize}
+
+A single material can be shared across multiple objects. Changing
+the material affects all objects using it. To make an independent
+copy, click the number next to the material name (indicating how
+many users share it) to create a single-user copy.
+
+\subsection{Shader Editor Interface}
+
+The Shader Editor is accessed from the Shading workspace or by
+changing any editor type to ``Shader Editor.'' It displays the node
+tree of the selected object's active material.
+
+\begin{shortcutbox}
+\textbf{Shader Editor Shortcuts}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shortcut} & \tableheader{Action} \\
+\midrule
+Shift + A & Add node menu \\
+Ctrl + T (Principled BSDF selected) & Add Texture Coordinate, Mapping, and Image Texture nodes (Node Wrangler) \\
+Ctrl + Shift + Left Click & Preview node output in viewport (Node Wrangler) \\
+Ctrl + Right Click drag & Cut links (disconnect connections) \\
+M & Mute/unmute selected node \\
+H & Hide/collapse node \\
+Ctrl + G & Group selected nodes into a reusable node group \\
+Tab & Enter/exit a node group \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+\begin{tipbox}
+The \textbf{Node Wrangler} add-on (included with Blender, enable in
+Preferences $\rightarrow$ Add-ons) provides essential quality-of-life
+features and is considered nearly mandatory for shader work. Its
+Ctrl+Shift+T shortcut alone---which auto-connects an entire PBR
+texture set in seconds---justifies enabling it.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{The Principled BSDF Shader}
+\label{sec:shading:principled}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Overview and Design Philosophy}
+
+The Principled BSDF is Blender's primary physically-based shader,
+designed to handle the vast majority of real-world materials through
+a single unified node. It was originally based on the Disney
+Principled BSDF model and has been significantly extended in Blender
+4.0 and later versions.
+
+\begin{historynote}
+In 2012, Brent Burley at Walt Disney Animation Studios published
+``Physically Based Shading at Disney,'' describing a principled
+approach to material shading: a single shader with intuitive,
+artist-friendly parameters that remain physically plausible across
+their entire range. This ``Disney Principled BSDF'' became the
+foundation for material shading across the industry. Blender's
+implementation extends Disney's model with additional layers (coat,
+sheen, thin film) and energy-conserving layer composition. The
+underlying microfacet model uses the GGX distribution (Walter et
+al., 2007), a refinement of the Cook--Torrance model (1982) that
+produces more realistic specular highlights with longer ``tails''
+at grazing angles.
+\end{historynote}
+
+The shader is organized in layers, evaluated from bottom to top:
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Base layer}---Diffuse and metallic reflection
+        (Base Color, Metallic, Roughness)
+  \item \textbf{Subsurface scattering}---Light transport beneath
+        the surface
+  \item \textbf{Specular}---Dielectric (non-metallic) reflection
+        adjustment
+  \item \textbf{Transmission}---Glass-like transparency
+  \item \textbf{Coat}---Clear coat or lacquer layer
+  \item \textbf{Sheen}---Fuzzy cloth and dust layer (topmost)
+  \item \textbf{Emission}---Self-illumination (additive)
+\end{enumerate}
+
+This layered architecture means that increasing the Coat Weight, for
+example, physically occludes the base layer appropriately,
+maintaining energy conservation. The shader is
+\textbf{energy-conserving by design}---the total light leaving the
+surface never exceeds the light arriving.
+
+\subsection{Base Layer Parameters}
+\label{sec:shading:principled:base}
+
+\subsubsection{Base Color}
+\textbf{Type:} Color \quad \textbf{Default:} (0.8, 0.8, 0.8)
+
+The diffuse surface color for non-metallic materials, or the
+reflected specular color for metallic materials. For PBR workflows,
+connect an Albedo/Base Color texture map here.
+
+\begin{warningbox}
+Avoid pure black (0,0,0) or pure white (1,1,1) for Base Color.
+Real-world materials always have some color value between
+approximately 0.02 and 0.95. Using extremes breaks the physically-based model and produces materials that look artificial under
+varying lighting conditions.
+\end{warningbox}
+
+\subsubsection{Metallic}
+\textbf{Type:} Float \quad \textbf{Range:} 0.0--1.0 \quad
+\textbf{Default:} 0.0
+
+Blends between dielectric (non-metallic, 0.0) and metallic (1.0)
+shading models. At 0.0, the material uses Base Color for diffuse
+reflection and has white specular reflection. At 1.0, there is no
+diffuse component---Base Color determines the specular reflection
+color, matching real metal behavior. In PBR workflows, this should
+be either 0.0 or 1.0, with intermediate values used only for
+transition zones (worn paint over metal, oxidation edges).
+
+\subsubsection{Roughness}
+\textbf{Type:} Float \quad \textbf{Range:} 0.0--1.0 \quad
+\textbf{Default:} 0.5
+
+Controls microscopic surface roughness that determines how blurry or
+sharp reflections appear. At 0.0, the surface is perfectly smooth
+(mirror-like). At 1.0, reflections are completely diffused.
+
+\begin{tipbox}
+Common roughness values for reference: polished metal 0.05--0.2,
+brushed metal 0.3--0.5, plastic 0.3--0.6, rough wood 0.6--0.9.
+When in doubt, photograph a real sample of the material and compare
+the sharpness of reflections to calibrate your roughness value.
+\end{tipbox}
+
+\subsubsection{Index of Refraction (IOR)}
+\textbf{Type:} Float \quad \textbf{Default:} 1.5
+
+Controls the strength of dielectric specular reflection and the
+refraction angle for transmissive materials. Real-world IOR values:
+air 1.0, water 1.33, glass 1.5, diamond 2.42. The default of 1.5
+is a good approximation for most common materials including glass,
+plastic, and gemstones. In Blender 4.0+, this single parameter
+controls both specular reflection intensity and transmission
+refraction.
+
+\subsubsection{Alpha}
+\textbf{Type:} Float \quad \textbf{Range:} 0.0--1.0 \quad
+\textbf{Default:} 1.0
+
+Surface transparency for alpha blending or alpha clipping. At 1.0,
+fully opaque; at 0.0, fully transparent (invisible). Used for cutout
+effects (leaves, chain-link fences) via the Alpha Clip blend mode,
+or for gradual transparency via Alpha Blend or Alpha Hashed.
+
+\subsection{Subsurface Scattering Parameters}
+\label{sec:shading:principled:sss}
+
+Subsurface scattering (SSS) simulates light entering a translucent
+material, scattering beneath the surface, and exiting at a different
+point. Essential for organic materials like skin, wax, marble, milk,
+and plant leaves.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Default} & \tableheader{Description} \\
+\midrule
+Subsurface Weight & 0.0 & Blend between surface diffuse (0) and SSS (1). At 1.0, all diffuse light uses the SSS model. \\
+Subsurface Radius & (1.0, 0.2, 0.1) & RGB scattering distance. Red scatters farthest in skin (warm backlight glow on ears and fingers). \\
+Subsurface Scale & 0.05 & Global multiplier for radius. Increase for larger objects or more translucent materials. Added in Blender 4.0. \\
+Subsurface IOR & 1.4 & Refraction index for the subsurface medium. Default suits most organic materials. \\
+Subsurface Anisotropy & 0.0 & Directional bias: positive = forward scatter, negative = back-scatter. Skin uses 0.0--0.3. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{furrybox}
+\textbf{SSS for furry character skin:} Exposed skin areas on furry
+characters---paw pads, inner ears, noses, and muzzle skin---benefit
+enormously from subsurface scattering. A paw pad material might use
+Subsurface Weight 0.5--0.8 with a warm radius emphasizing red
+(1.0, 0.3, 0.15), giving the characteristic soft, fleshy
+appearance when backlit. Inner ear skin is thinner and more
+translucent: use Subsurface Scale 0.03--0.08 with a slightly
+pinker Base Color. These details sell the character even at a
+distance.
+\end{furrybox}
+
+\subsection{Specular Parameters}
+\label{sec:shading:principled:specular}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Default} & \tableheader{Description} \\
+\midrule
+Specular IOR Level & 0.5 & Multiplier on specular reflection intensity from IOR. At 0.5, matches physical IOR. At 0.0, no specular. At 1.0, doubled. \\
+Specular Tint & White & Tints dielectric specular reflection. Real materials have white specular; use for artistic coloring. \\
+Anisotropic & 0.0 & Elongation of specular highlights: 0 = circular, 1 = maximally stretched. Brushed metal, hair, satin. \\
+Anisotropic Rotation & 0.0 & Rotates the anisotropic stretch direction. 0.5 = 90-degree rotation. \\
+Tangent & (auto) & Reference direction for anisotropic reflections. Defaults to UV map tangent. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Transmission Parameters}
+\label{sec:shading:principled:transmission}
+
+\subsubsection{Transmission Weight}
+\textbf{Type:} Float \quad \textbf{Range:} 0.0--1.0 \quad
+\textbf{Default:} 0.0
+
+Blends between opaque (0.0) and transmissive/refractive (1.0)
+behavior. At 1.0 with Roughness 0.0, the material appears as clear
+glass. At 1.0 with higher roughness, frosted glass. Transmission
+interacts with IOR (refraction bending), Roughness (blur of
+transmitted light), Base Color (tints transmitted light for colored
+glass), and Alpha (overall surface visibility, separate from
+transmission).
+
+\begin{tipbox}
+\textbf{Quick glass setup:} Base Color white or tinted, Metallic
+0.0, Roughness 0.0, IOR 1.5, Transmission Weight 1.0. For frosted
+glass, increase Roughness to 0.1--0.3. For colored glass, set Base
+Color to the desired tint---or for physically accurate deep
+coloring, use a Volume Absorption node in the Material Output's
+Volume socket so that thicker sections appear darker.
+\end{tipbox}
+
+\subsection{Coat Parameters}
+\label{sec:shading:principled:coat}
+
+The Coat layer simulates a clear coating on top of the base
+material---clear lacquer on wood, automotive clearcoat, varnish on
+paintings, or the protective layer on electronics. It sits above the
+base material in the layer stack.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Default} & \tableheader{Description} \\
+\midrule
+Coat Weight & 0.0 & Intensity of the coat layer. 0 = no coat, 1 = full. \\
+Coat Roughness & 0.03 & Independent roughness. Low values = glossy clearcoat over rough base. \\
+Coat IOR & 1.5 & Coat layer refraction index. Default matches standard lacquer. \\
+Coat Tint & White & Colors the coat. Useful for tinted varnish or colored lacquer. \\
+Coat Normal & (auto) & Separate normal map for the coat (orange-peel texture, etc.). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{furrybox}
+\textbf{Wet fur and nose materials:} A wet furry character's nose
+is one of the most important detail materials. Set the base material
+to a dark, slightly rough surface, then add Coat Weight 0.8--1.0
+with Coat Roughness 0.01--0.05 for that characteristic wet-look
+shine. The same approach works for wet fur clumps: the base
+roughness stays high (the fur fiber itself is matte) while the coat
+layer provides the slick, water-coated specular highlight.
+\end{furrybox}
+
+\subsection{Sheen Parameters}
+\label{sec:shading:principled:sheen}
+
+Sheen simulates the soft, fuzzy reflection seen on cloth, velvet,
+and dusty surfaces. In Blender 4.0+, the sheen layer uses a
+microfiber shading model and sits at the top of the material layer
+stack.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}C{2.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Default} & \tableheader{Description} \\
+\midrule
+Sheen Weight & 0.0 & Intensity of sheen effect. \\
+Sheen Roughness & 0.5 & Low = tight edge highlight (silk). High = broad fuzz (felt, dust). \\
+Sheen Tint & White & Colors the sheen reflection. Fabrics often have a lighter sheen than their base. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Emission Parameters}
+\label{sec:shading:principled:emission}
+
+Emission makes the material self-luminous. It is additive---it does
+not replace the base material but adds light on top of it.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Emission Color} (Color, default: black/off)---The
+        color of emitted light. Black means no emission.
+  \item \textbf{Emission Strength} (Float, default: 1.0)---Multiplier
+        for emission intensity. In Cycles, sufficient strength
+        actually illuminates surrounding objects. In EEVEE, emission
+        contributes to bloom and can illuminate nearby surfaces
+        through screen-space effects. Values well above 1.0 are
+        common for practical light sources.
+\end{itemize}
+
+\begin{furrybox}
+\textbf{Glowing markings and bioluminescent accents:} Many furry
+character designs feature glowing markings, luminescent eyes, or
+energy patterns. Use Emission Color for the glow color and Emission
+Strength 5--50 (depending on scene brightness) for a visible glow.
+In EEVEE, enable Bloom (compositor in 4.2+) so the glow bleeds
+into surrounding pixels. In Cycles, the emission will naturally
+illuminate nearby surfaces. For animated ``breathing'' glow, keyframe
+the Emission Strength with a sinusoidal curve in the Graph Editor.
+\end{furrybox}
+
+\subsection{Normal and Displacement}
+\label{sec:shading:principled:normal}
+
+\subsubsection{Normal Input}
+
+The Normal input connects a Normal Map or Bump node to perturb
+surface normals, creating the illusion of surface detail without
+changing actual geometry. This is the most common method for adding
+fine detail---pores, scratches, fabric weave, stone texture---to
+materials.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Normal Map Node}---Takes a tangent-space normal map
+        texture (the characteristic blue/purple images) and converts it to
+        the format expected by the Principled BSDF. Set the Color
+        Space of the Image Texture node to \textbf{Non-Color}.
+  \item \textbf{Bump Node}---Converts a grayscale height map into
+        normal perturbation. Provides Strength and Distance inputs.
+        Can be chained with Normal Map nodes for combined detail.
+\end{itemize}
+
+\subsubsection{Displacement (via Material Output)}
+
+Physical displacement of the surface geometry during rendering,
+connected through the Material Output node (not the Principled
+BSDF):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Mode} & \tableheader{Behavior} \\
+\midrule
+Bump Only (default) & Normal perturbation only; no geometry change. Fast. \\
+Displacement Only & Physically moves vertices. Requires sufficient subdivision (Adaptive Subdivision in Cycles). \\
+Displacement and Bump & Large forms displaced + fine detail bumped. \textbf{Recommended for maximum quality.} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Connect a Displacement node to the Material Output's Displacement
+input. Set the method in Material Properties $\rightarrow$ Settings
+$\rightarrow$ Surface $\rightarrow$ Displacement Method.
+
+\subsection{Thin Film Parameters}
+\label{sec:shading:principled:thinfilm}
+
+Added in Blender 4.0, thin film interference simulates iridescent
+effects caused by thin transparent layers---soap bubbles, oil
+slicks, beetle shells, hummingbird feathers.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Thin Film Thickness} (Float, default: 0.0\,nm)---
+        Thickness in nanometers. Different thicknesses produce
+        different interference colors. Range: 100--1000\,nm typical.
+  \item \textbf{Thin Film IOR} (Float, default: 1.33)---Refraction
+        index for the film layer. Affects which wavelengths
+        constructively and destructively interfere.
+\end{itemize}
+
+\begin{furrybox}
+\textbf{Iridescent fur and feathers:} Characters with raven-like
+feathers, beetle-shell armor, or fantasy iridescent fur markings
+can use Thin Film to achieve physically-based color shifting. Set
+Thin Film Thickness to 300--600\,nm and animate or texture-drive
+the thickness for spatially varying iridescence. For full creative
+control over non-physical iridescent colors, consider instead
+driving Base Color with a Layer Weight (Facing) node through a
+ColorRamp---this gives you explicit control over the
+angle-dependent color gradient. See Chapter~\ref{ch:furryarts}
+for complete iridescent material walkthroughs.
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Mixing and Combining Shaders}
+\label{sec:shading:mixing}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Beyond the Principled BSDF, Blender provides specialized shader
+nodes and mixing capabilities for situations where a single
+Principled BSDF is insufficient.
+
+\subsection{Mix Shader and Add Shader}
+
+\textbf{Mix Shader} blends two shader outputs based on a factor
+(0.0 = first shader, 1.0 = second shader). Connect a texture to the
+Factor input for spatially-varying transitions---rust over metal,
+moss over stone, dry versus wet ground.
+
+\textbf{Add Shader} adds two shader outputs together without energy
+conservation. Primarily used for adding Emission to another shader,
+though the Principled BSDF's built-in emission has largely replaced
+this use case.
+
+\subsection{Specialized Shader Nodes}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Node} & \tableheader{Purpose} \\
+\midrule
+Diffuse BSDF & Pure Lambertian diffuse reflection (stylized/specialized use) \\
+Glossy BSDF & Pure specular reflection with roughness (GGX, Beckmann, Ashikhmin-Shirley) \\
+Glass BSDF & Combined reflection and refraction \\
+Refraction BSDF & Pure refraction without reflection \\
+Translucent BSDF & Light passes through without refraction (paper, leaves) \\
+Transparent BSDF & Perfectly transparent (alpha masking in custom setups) \\
+Subsurface Scattering & Standalone SSS node \\
+Emission & Pure emission shader \\
+Volume Absorption & Absorbs light within a volume (tinted glass, deep water) \\
+Volume Scatter & Scatters light within a volume (fog, smoke, clouds) \\
+Principled Volume & Combined absorption and scattering for volumetrics \\
+Hair BSDF / Principled Hair BSDF & Specialized strand-based hair rendering \\
+Toon BSDF & Non-photorealistic cartoon-style shading \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Shader to RGB (EEVEE Only)}
+
+The Shader to RGB node converts shader output to a color value,
+enabling post-processing of lighting results for NPR
+(non-photorealistic rendering) effects: cel shading, outline
+detection, custom ramp shading. This node is \textbf{not available
+in Cycles}---it requires the rasterization pipeline's ability to
+evaluate shading before final output.
+
+\begin{furrybox}
+\textbf{Toon shading for furry characters:} Connect any shader
+(even the Principled BSDF) through Shader to RGB, then pipe the
+result into a ColorRamp node with hard stops (Constant
+interpolation) to create crisp cel-shading bands. For a
+classic anime/cartoon look:
+\begin{enumerate}[leftmargin=2em]
+  \item Set up a Principled BSDF with your character's base color
+  \item Connect it to Shader to RGB
+  \item Connect the Color output to a ColorRamp
+  \item Set the ColorRamp to Constant interpolation
+  \item Create 2--3 color stops: shadow color, midtone, highlight
+  \item Connect the ColorRamp output to a new Principled BSDF's
+        Base Color (or directly to Material Output via an Emission
+        shader to bypass all further shading)
+\end{enumerate}
+This approach works for both fur body materials and skin areas.
+Combine with Freestyle or Grease Pencil line art for complete toon
+rendering. See Chapter~\ref{ch:furryarts} for the complete toon
+furry pipeline.
+\end{furrybox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Procedural Textures}
+\label{sec:shading:procedural}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Procedural textures are generated mathematically rather than loaded
+from image files. They have infinite resolution, no UV seam issues,
+and can be easily varied with mathematical operations. Blender 4.4
+provides the following procedural texture nodes.
+
+\subsection{Noise Texture}
+
+The workhorse of procedural texturing. Generates fractal Perlin
+noise---smooth, organic, cloud-like patterns used for surface
+variation, terrain displacement, rust patterns, and countless other
+effects.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Description} \\
+\midrule
+Scale & Frequency of the noise (higher = smaller features) \\
+Detail & Number of fractal octaves (more = finer detail layered on top) \\
+Roughness & Contribution ratio between octaves \\
+Lacunarity & Frequency multiplier between octaves \\
+Distortion & Warps noise coordinates for more organic patterns \\
+Dimensions & 1D, 2D, 3D, or 4D (4D adds animation via W coordinate) \\
+Type & fBM, Multifractal, Hybrid Multifractal, Ridged Multifractal, Hetero Terrain \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The Type options---formerly available only through the separate
+Musgrave Texture node---were merged into the Noise Texture in
+Blender 4.1. Each type produces distinct characteristics:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{fBM}---Standard fractional Brownian motion (classic noise)
+  \item \textbf{Multifractal}---Multiplied octaves with more varied amplitude
+  \item \textbf{Hybrid Multifractal}---Weighted additive/multiplicative combination
+  \item \textbf{Ridged Multifractal}---Absolute value creates ridge-like features (mountain ridges, veins)
+  \item \textbf{Hetero Terrain}---Erosion-like effects with plateaus and valleys
+\end{itemize}
+
+\textbf{Outputs:} Fac (grayscale, 0--1 range) and Color (colored pattern).
+
+\subsection{Voronoi Texture}
+
+Generates Worley noise (cell noise)---patterns based on distance to
+random feature points. Produces cellular, scale-like, cracked, or
+mosaic patterns.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Description} \\
+\midrule
+Scale & Density of cells \\
+Randomness & Cell distribution: 0 = regular grid, 1 = fully random \\
+Feature & F1 (nearest), F2 (second nearest), Smooth F1, Distance to Edge \\
+Distance & Euclidean, Manhattan, Chebychev, Minkowski (with Exponent) \\
+Dimensions & 1D, 2D, 3D, or 4D \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Outputs:} Distance (cell patterns), Color (random per-cell
+color), Position (feature point location), W. Common uses: reptile
+scales, cobblestones, cracked mud, cellular structures, stained
+glass, tile patterns.
+
+\begin{furrybox}
+\textbf{Reptile and dragon scales:} Voronoi F1 with Euclidean
+distance at moderate Scale creates excellent reptile scale patterns.
+Use the Distance output through a ColorRamp to control scale border
+sharpness, then feed the result into the Principled BSDF's
+Roughness (scales are smoother in their centers, rougher at edges)
+and Normal (via a Bump node for raised-scale geometry). For dragon
+or lizard characters, layer two Voronoi textures at different
+scales for large body scales with finer detail scales on top.
+\end{furrybox}
+
+\subsection{Wave Texture}
+
+Generates procedural bands or rings with optional noise distortion.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Description} \\
+\midrule
+Type & Bands (parallel stripes) or Rings (concentric circles) \\
+Direction & X, Y, Z, or Diagonal \\
+Wave Profile & Sine, Saw, Triangle \\
+Scale & Frequency of the wave pattern \\
+Distortion & Amount of noise-based distortion \\
+Detail / Scale / Roughness & Control the noise distortion characteristics \\
+Phase Offset & Shifts the wave pattern (useful for animation) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Common uses: wood grain (bands with noise distortion), water
+ripples (rings), fabric patterns, terrain layers.
+
+\subsection{Gradient Texture}
+
+Generates a smooth gradient based on position.
+
+\textbf{Types:} Linear, Quadratic, Easing, Diagonal, Spherical,
+Quadratic Sphere, Radial.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Linear}---Straight 0-to-1 gradient
+  \item \textbf{Quadratic}---Curved (squared falloff)
+  \item \textbf{Easing}---Smooth ease-in/ease-out
+  \item \textbf{Spherical}---Distance from center
+  \item \textbf{Radial}---Angle-based around center
+\end{itemize}
+
+Common uses: vignette effects, falloff masks for mixing materials by
+position, elevation-based blending (grass to rock to snow).
+
+\subsection{Magic Texture}
+
+Generates complex, colorful patterns through trigonometric function
+interference. Produces psychedelic, tie-dye-like patterns.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Depth}---Number of trigonometric iterations (higher = more complex)
+  \item \textbf{Scale}---Frequency of the base pattern
+  \item \textbf{Distortion}---Amount of displacement applied
+\end{itemize}
+
+Common uses: exotic alien surfaces, marble veining (when combined
+with color ramps), abstract textures, iridescent effects.
+
+\subsection{Checker Texture}
+
+Generates an alternating checkerboard pattern. Parameters: Color1,
+Color2, Scale. Common uses: reference textures for UV distortion
+checking, tile floors, fabric patterns.
+
+\subsection{Brick Texture}
+
+Generates a customizable brick wall pattern with separate controls
+for brick colors, mortar color, mortar size, mortar smoothness,
+brick dimensions, row offset, and offset frequency. Common uses:
+brick walls, tile patterns, stone masonry, parquet flooring.
+
+\subsection{White Noise Texture}
+
+Generates pure random values based on input coordinates. Unlike
+Noise Texture (smooth, coherent noise), White Noise produces
+completely uncorrelated random values at each point. Available in
+1D--4D. Common uses: random ID generation per instance, seed values
+for other procedural effects, completely random per-face or
+per-vertex values.
+
+\subsection{Gabor Texture}
+
+Generates noise characterized by random interleaved bands, visually
+resembling oriented wave patterns. Added in recent Blender versions.
+Parameters: Scale, Frequency, Anisotropy, Orientation. Common uses:
+fabric weave patterns, brushed surfaces, anisotropic material
+textures.
+
+\subsection{Musgrave Texture (Deprecated)}
+
+The Musgrave Texture node was merged into the Noise Texture node
+starting in Blender 4.1. The Musgrave types (fBM, Multifractal,
+Hybrid Multifractal, Ridged Multifractal, Hetero Terrain) are now
+accessible as Type options within the Noise Texture node. Existing
+\texttt{.blend} files that used the Musgrave node are automatically
+converted on load.
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Image Textures and UV Mapping}
+\label{sec:shading:images}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Image Texture Node}
+
+The Image Texture node loads and samples an external image file. It
+is the primary method for applying photographic textures, painted
+textures, and baked maps.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Description} \\
+\midrule
+Image & Image data-block (loaded from file or created internally) \\
+Color Space & sRGB (color textures), Non-Color (data textures: normal, roughness, metallic), Linear \\
+Interpolation & Linear, Closest (no filtering), Cubic, Smart \\
+Projection & Flat (UV-based), Box (triplanar), Sphere, Tube \\
+Extension & Repeat, Extend (clamp edges), Clip (transparent outside 0--1) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Box Projection} (triplanar mapping) projects the texture
+from six orthogonal directions, blending between projections based
+on face normal. This eliminates the need for UV unwrapping and
+avoids seam artifacts. The Blend parameter controls transition
+smoothness. Ideal for terrain, architectural surfaces, and any
+object where UV unwrapping is impractical.
+
+\subsection{Texture Coordinate Systems}
+
+The Texture Coordinate node provides different coordinate systems
+for sampling textures:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}L{5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Output} & \tableheader{Description} & \tableheader{Use Case} \\
+\midrule
+Generated & 0--1 range based on bounding box & Quick texturing without UVs \\
+Normal & Surface normal direction & Environment-sensitive effects \\
+UV & UV map coordinates & Standard image texture mapping \\
+Object & Object-space coordinates & Scale-independent procedural textures \\
+Camera & Camera-space coordinates & View-dependent effects \\
+Window & Screen-space coordinates & Overlay effects \\
+Reflection & Reflected view direction & Fake environment reflections \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+The \textbf{Mapping Node} is typically placed between Texture
+Coordinate and the texture node to transform coordinates: translate,
+rotate, and scale.
+
+\subsection{Texture Painting}
+
+Blender supports painting textures directly onto 3D surfaces in
+Texture Paint mode (enter from the mode selector or use the Texture
+Paint workspace):
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Brush types}---Draw, Soften, Smear, Clone, Fill, Mask
+  \item \textbf{Color source}---Foreground/Background picker, gradient, or texture
+  \item \textbf{Blending modes}---Mix, Darken, Multiply, Add, Subtract, Screen, Overlay, and more
+  \item \textbf{Stencil}---Overlay an image as a reference guide
+  \item \textbf{Texture Mask}---Control brush opacity with a texture
+  \item \textbf{Symmetry}---Paint symmetrically across X, Y, or Z axes
+  \item \textbf{Slots}---Paint to different texture slots (Base Color, Roughness, Normal) simultaneously
+\end{itemize}
+
+\begin{tipbox}
+For texture painting to work, the object must have UV coordinates
+and an image texture assigned to the material. Create a blank
+texture in the Image Editor (Image $\rightarrow$ New) and assign it
+to the relevant Image Texture node before entering Texture Paint
+mode.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{PBR Workflow}
+\label{sec:shading:pbr}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{PBR Fundamentals}
+
+Physically Based Rendering (PBR) is a material authoring paradigm
+that constrains shader parameters to physically plausible ranges.
+PBR materials look correct under any lighting condition because they
+follow two fundamental principles:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Energy conservation}---A surface cannot reflect more
+        light than it receives. High reflectivity means reduced diffuse.
+  \item \textbf{Fresnel effect}---All materials become more
+        reflective at grazing angles. At head-on angles, non-metals
+        reflect approximately 2--5\% of light; near-parallel angles
+        approach 100\%.
+\end{enumerate}
+
+The Principled BSDF automatically handles both. PBR workflows are
+about providing accurate \emph{input data} (textures) that describe
+the physical properties of the surface.
+
+\begin{historynote}
+The PBR revolution in real-time graphics began around 2012--2014,
+when game engines (Unreal Engine 4, Frostbite, Unity 5) and film
+studios simultaneously converged on the same material model. Before
+PBR, artists had to manually adjust materials for each lighting
+setup---a material that looked good in one scene would look wrong
+in another. PBR eliminated this by constraining inputs to physical
+ranges. Disney's 2012 Principled shader paper was the catalyst: it
+showed that a single, artist-friendly shader could replace dozens
+of specialized shaders. Blender adopted this approach with the
+Principled BSDF node in Blender 2.79 (2017), bringing film-quality
+material authoring to an open-source tool for the first time.
+\end{historynote}
+
+\subsection{Standard PBR Texture Maps}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.8cm}C{1.8cm}L{3.2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Map} & \tableheader{Color Space} & \tableheader{Connects To} & \tableheader{Description} \\
+\midrule
+Albedo / Base Color & sRGB & Base Color & Surface color without lighting. No shadows, no highlights. \\
+Roughness & Non-Color & Roughness & Black = glossy, White = matte. \\
+Metallic & Non-Color & Metallic & Black = dielectric, White = metal. Should be binary. \\
+Normal & Non-Color & Normal (via Normal Map) & Tangent-space normal map (blue/purple). Surface detail as directional perturbation. \\
+Height & Non-Color & Displacement (via Displacement node) & Gray = neutral, White = raised, Black = lowered. \\
+Ambient Occlusion & Non-Color & Multiply with Base Color & Contact shadows. Subtle detail enhancement. \\
+Emission & sRGB & Emission Color & Self-illuminated areas. \\
+Opacity / Alpha & Non-Color & Alpha & Transparency mask. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Metallic vs.\ Specular Workflow}
+
+\textbf{Metallic/Roughness Workflow} (Blender's default via
+Principled BSDF): Uses a binary Metallic map and a Roughness map.
+Simpler, fewer maps, industry standard for games (glTF, Unreal
+Engine, Unity). The Principled BSDF is designed around this workflow.
+
+\textbf{Specular/Glossiness Workflow} (alternative, used in some
+older pipelines): Uses a Specular Color map and a Glossiness map
+(inverse of Roughness). More flexible but harder to keep physically
+accurate. Supported in Blender through custom node setups.
+
+For most Blender work, Metallic/Roughness with the Principled BSDF
+is the correct approach.
+
+\subsection{Connecting PBR Maps in Blender}
+
+Standard PBR material setup:
+
+\begin{enumerate}[leftmargin=2em]
+  \item Add an Image Texture node (Shift+A $\rightarrow$ Texture
+        $\rightarrow$ Image Texture) for each map
+  \item Load each texture file
+  \item Set Color Space: Base Color = sRGB; all others = Non-Color
+  \item Connect:
+    \begin{itemize}[leftmargin=1.5em]
+      \item Base Color texture $\rightarrow$ Principled BSDF Base Color
+      \item Roughness texture $\rightarrow$ Principled BSDF Roughness
+      \item Metallic texture $\rightarrow$ Principled BSDF Metallic
+      \item Normal texture $\rightarrow$ Normal Map node $\rightarrow$ Principled BSDF Normal
+      \item Height texture $\rightarrow$ Bump node $\rightarrow$ Principled BSDF Normal
+    \end{itemize}
+  \item For AO: Multiply with Base Color using a MixRGB node
+  \item For displacement: Height $\rightarrow$ Displacement node
+        $\rightarrow$ Material Output
+\end{enumerate}
+
+\begin{shortcutbox}
+\textbf{Node Wrangler PBR Shortcut:} Select the Principled BSDF,
+press \textbf{Ctrl+Shift+T}, and select all texture files at once.
+Node Wrangler automatically creates Image Texture nodes, sets color
+spaces, adds Normal Map and Mapping nodes, and connects everything
+correctly. This single shortcut replaces 5--10 minutes of manual
+node setup.
+\end{shortcutbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Bump Mapping vs.\ True Displacement}
+\label{sec:shading:displacement}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+Both techniques add surface detail from height maps, but they work
+fundamentally differently:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Property} & \tableheader{Bump / Normal Mapping} & \tableheader{True Displacement} \\
+\midrule
+How it works & Perturbs surface normals & Physically moves vertices \\
+Geometry change & None (silhouette stays smooth) & Yes (silhouette and shadows change) \\
+Performance & Very fast (no extra geometry) & Expensive (more geometry, more memory) \\
+Quality limit & Artifacts at grazing angles and silhouette edges & No artifacts; true geometry \\
+Engine support & EEVEE and Cycles & Cycles only (EEVEE Next: limited) \\
+Best for & Fine detail (pores, scratches, fabric weave) & Large deformation (brick protrusion, cobblestones) \\
+Connection & Image Texture $\rightarrow$ Bump/Normal Map $\rightarrow$ Normal input & Image Texture $\rightarrow$ Displacement $\rightarrow$ Material Output \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{tipbox}
+\textbf{Best practice:} Use ``Displacement and Bump'' mode. Apply
+displacement for large-scale deformation and bump mapping for fine
+detail. This balances geometry cost with visual quality. In Cycles,
+enable Adaptive Subdivision (Render Properties $\rightarrow$
+Subdivision $\rightarrow$ Dicing Rate) for automatic mesh
+refinement during rendering.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Specialized Material Techniques}
+\label{sec:shading:specialized}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Subsurface Scattering Materials}
+
+SSS is essential for realistic rendering of organic and translucent
+materials. Light enters the surface, scatters internally, and exits
+at a different point, creating soft, glowing transitions.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}C{2.8cm}C{1.5cm}C{1.5cm}}
+\toprule
+\rowcolor{primary}
+\tableheader{Material} & \tableheader{SSS Weight} & \tableheader{SSS Radius (R,G,B)} & \tableheader{SSS Scale} & \tableheader{Roughness} \\
+\midrule
+Skin & 0.3--0.7 & (1.0, 0.2, 0.1) & 0.01--0.05 & 0.3--0.5 \\
+Wax & 0.8--1.0 & (1.0, 0.5, 0.3) & 0.05--0.2 & 0.4--0.6 \\
+Marble & 0.3--0.5 & (0.8, 0.6, 0.4) & 0.02--0.1 & 0.1--0.3 \\
+Milk & 1.0 & (1.0, 0.8, 0.6) & 0.1--0.3 & 0.5--0.8 \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Leaves:} Use a Mix Shader blending Principled BSDF (top
+side) with Translucent BSDF (bottom side). The Translucent BSDF
+allows light to pass through without refraction. Connect a leaf
+texture to both shaders. Use a Fresnel or Layer Weight node as the
+Mix factor for angle-dependent blending.
+
+\subsection{Glass, Water, and Transparent Materials}
+
+\subsubsection{Clear Glass}
+
+Base Color white (or slight tint), Metallic 0.0, Roughness 0.0
+(clear) or 0.1--0.3 (frosted), IOR 1.5 (standard) or 1.52 (crown)
+or 1.62 (flint), Transmission Weight 1.0. In EEVEE: set Blend Mode
+to Alpha Hashed or Alpha Blend; enable Screen Space Refraction.
+
+\subsubsection{Colored and Stained Glass}
+
+Same as clear glass with Base Color set to the desired tint. For
+deeply colored glass, use a Volume Absorption node in the Volume
+socket---thicker sections become darker, matching physical behavior.
+
+\subsubsection{Water}
+
+IOR 1.33, Transmission Weight 1.0, Roughness 0.0 (calm) or use
+Noise Texture on Normal for wave distortion. For a water body,
+model the surface as a thin shell and use Volume Absorption for
+depth coloring.
+
+\subsubsection{Thin Glass}
+
+Enable ``Thin Walled'' in the Principled BSDF settings. This
+disables refraction distortion while keeping reflections---appropriate
+for flat window panes where thickness is negligible.
+
+\subsubsection{Alpha-Based Transparency}
+
+For chain-link, lace, leaves: connect an alpha/mask texture to the
+Alpha input. Set Blend Mode to Alpha Clip (hard cutout) or Alpha
+Hashed (dithered). Match Shadow Mode to the Blend Mode.
+
+\subsection{Fur and Hair Rendering}
+\label{sec:shading:hair}
+
+Blender offers two approaches to hair/fur rendering, both critical
+for furry arts workflows.
+
+\subsubsection{Principled Hair BSDF}
+
+Used with Blender's Hair particle system or Hair Curves objects, the
+Principled Hair BSDF is specifically designed for cylindrical strand
+geometry.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Parameter} & \tableheader{Description} \\
+\midrule
+Color Mode & Direct Coloring, Melanin, or Absorption \\
+Melanin Concentration & Hair color from blonde (low) through brown to black (high) \\
+Melanin Redness & Shifts toward red/auburn tones \\
+Roughness & Longitudinal and azimuthal roughness \\
+Radial Roughness & Light scattering around the hair strand \\
+Coat & Adds a coat layer on strands \\
+IOR & Default 1.55 for human hair \\
+Random & Per-strand variation for Color and Roughness \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{furrybox}
+\textbf{Fur material strategies for furry characters:}
+
+\textbf{Option 1: Principled Hair BSDF} (recommended for realism).
+Use Melanin mode for natural fur colors: low melanin + high redness
+for fox-orange, high melanin for wolf-dark, very low melanin for
+arctic white. The Random parameter (0.1--0.3) adds critical
+per-strand color variation that prevents fur from looking like
+solid plastic.
+
+\textbf{Option 2: Principled BSDF on strands} (for artistic control).
+Use Hair Info $\rightarrow$ Intercept to create root-to-tip color
+gradients---many real furs are darker at the root and lighter at
+the tip (or vice versa for agouti patterns). Connect Hair Info
+$\rightarrow$ Random to a ColorRamp for per-strand color variation.
+
+\textbf{Option 3: Toon-shaded fur} (EEVEE only). Run either shader
+through Shader to RGB for cel-shaded fur with hard shadow bands.
+This is the dominant approach for anime-style furry art.
+
+\textbf{Rendering considerations:} Cycles renders hair as true
+curves with full light transport---best quality but slow. EEVEE
+renders hair as simplified strips---fast but with reduced
+transparency handling. EEVEE Next (4.2+) improved strand rendering
+significantly. For animation, preview in EEVEE and final-render in
+Cycles.
+\end{furrybox}
+
+\subsubsection{Hair Info Node}
+
+The Hair Info node provides per-strand data for material authoring:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Is Strand}---Boolean: true on hair geometry
+  \item \textbf{Intercept}---Position along strand (0 = root, 1 = tip)
+  \item \textbf{Length}---Total strand length
+  \item \textbf{Thickness}---Strand thickness at current point
+  \item \textbf{Tangent Normal}---Normal of the strand
+  \item \textbf{Random}---Per-strand random value (0--1)
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{EEVEE Render Engine}
+\label{sec:shading:eevee}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Architecture}
+
+EEVEE (Extra Easy Virtual Environment Engine) is Blender's real-time
+render engine. It uses \textbf{rasterization}---the same technique
+used by game engines---rather than ray tracing. Objects are drawn to
+the screen by projecting their triangles through a virtual camera,
+with lighting calculated per-pixel using screen-space
+approximations.
+
+\begin{historynote}
+EEVEE's rasterization approach descends directly from the OpenGL
+pipeline developed at SGI in the early 1990s (see
+Chapter~\ref{ch:history}). The fundamental technique---project
+triangles to screen space, shade per-pixel, use a depth buffer for
+visibility---has remained essentially unchanged for three decades.
+What has changed is the sophistication of the per-pixel shading:
+screen-space reflections, global illumination approximations,
+virtual shadow maps, and physically-based material models that
+would have been computationally unimaginable on the original SGI
+hardware.
+\end{historynote}
+
+EEVEE's speed makes it ideal for:
+\begin{itemize}[leftmargin=2em]
+  \item Real-time viewport previewing while building materials
+  \item Animation playback and previsualization
+  \item Stylized and non-photorealistic rendering
+  \item Projects where render time is a critical constraint
+  \item Game asset development and visualization
+\end{itemize}
+
+EEVEE's limitations relative to path tracing:
+\begin{itemize}[leftmargin=2em]
+  \item No true global illumination (approximated via screen-space
+        techniques and light probes)
+  \item No true reflections of objects not visible on screen
+  \item Limited transparency sorting (alpha blending order issues)
+  \item Approximated subsurface scattering
+  \item No true caustics
+\end{itemize}
+
+\subsection{EEVEE Next (Blender 4.2+)}
+
+Blender 4.2 LTS introduced EEVEE Next, a complete rewrite that
+addresses many long-standing limitations.
+
+\subsubsection{Virtual Shadow Maps}
+
+Shadows are now rendered using virtual shadow maps with dramatically
+higher resolution (4096 vs.\ previous 1024). Light visibility is
+computed using Shadow Map Ray Tracing, providing plausible soft
+shadows without jittering. This eliminates the need for careful
+per-light shadow map configuration.
+
+\subsubsection{Screen-Space Global Illumination (SSGI)}
+
+EEVEE Next traces rays in screen space for every BSDF, with no
+limitation on the number of BSDFs. Indirect light bounces off
+walls, floors, and objects, illuminating areas that would otherwise
+be in shadow. Not true global illumination, but a significant
+improvement over the previous probe-only approach.
+
+\subsubsection{Unlimited Lights}
+
+No longer a hard limit on scene lights (previously limited). Up to
+4,096 lights can be visible simultaneously.
+
+\subsubsection{Light Probes Overhaul}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Irradiance Volumes}---Capture diffuse indirect lighting
+        in a 3D grid (improved quality)
+  \item \textbf{Reflection Probes}---Replaced Reflection Cubemaps
+        with a more streamlined system
+  \item Screen-space ray tracing now handles most reflection cases,
+        reducing dependence on probes
+\end{itemize}
+
+\subsubsection{Other EEVEE Next Improvements}
+
+\begin{itemize}[leftmargin=2em]
+  \item Displacement mapping support (previously Cycles-only)
+  \item AO now part of SSGI rather than a separate effect
+  \item Bloom moved to compositor (removed from render settings)
+  \item New screen-space diffusion model for SSS
+  \item Volumetrics improvements
+  \item Better transparent surface rendering
+\end{itemize}
+
+\subsection{EEVEE-Specific Settings}
+
+Key render settings in the Render Properties panel:
+
+\subsubsection{Sampling}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Render Samples}---Temporal anti-aliasing samples.
+        64--256 typical.
+  \item \textbf{Viewport Samples}---16--64 typical for interactive work.
+\end{itemize}
+
+\subsubsection{Bloom (pre-4.2: Render Settings; 4.2+: Compositor)}
+Adds glow around bright areas. Threshold, Intensity, Radius, and
+Color Tint controls.
+
+\subsubsection{Screen Space Reflections}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Refraction}---Enable for refractive materials (glass)
+  \item \textbf{Half Resolution}---Trade quality for speed
+  \item \textbf{Trace Precision}---Ray marching step accuracy
+\end{itemize}
+
+\subsubsection{Volumetrics}
+Start/End distance, Tile Size (volume sampling resolution), Samples
+(lighting quality), and Distribution (exponential falloff).
+
+\subsubsection{Film}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Overscan}---Renders a larger area to reduce edge artifacts in screen-space effects
+  \item \textbf{Filter Size}---Anti-aliasing filter width
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Cycles Render Engine}
+\label{sec:shading:cycles}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Path Tracing Fundamentals}
+
+Cycles is Blender's physically-based path tracing render engine. It
+simulates light transport by tracing rays from the camera through
+each pixel into the scene, bouncing them off surfaces according to
+the material's BSDF, and accumulating lighting contributions from
+all paths that reach light sources.
+
+\begin{historynote}
+Path tracing was introduced by Jim Kajiya in 1986 as a Monte Carlo
+method for solving the rendering equation. The idea is elegant:
+simulate individual photon paths by random sampling, average the
+results, and the image converges to the physically correct solution.
+The trade-off is noise: each pixel samples a limited number of
+random paths, so the initial result is noisy. Turner Whitted's
+earlier ray tracing (1980) handled only perfect reflections and
+refractions; Kajiya's path tracing extended this to arbitrary BSDFs,
+enabling diffuse inter-reflection (color bleeding), soft shadows
+from area lights, and all the subtle light transport effects that
+make renders look ``real.'' Modern denoisers have made path tracing
+practical by allowing fewer samples while maintaining clean output.
+\end{historynote}
+
+Path tracing produces physically accurate results including:
+\begin{itemize}[leftmargin=2em]
+  \item True global illumination (color bleeding between surfaces)
+  \item Accurate reflections and refractions
+  \item Physically correct soft shadows from area lights
+  \item Caustics (focused light through refractive surfaces)
+  \item Subsurface scattering
+  \item Volumetric lighting (god rays, fog, smoke)
+\end{itemize}
+
+\subsection{Sampling and Adaptive Sampling}
+\label{sec:shading:cycles:sampling}
+
+\subsubsection{Render Samples}
+
+The maximum number of light paths traced per pixel. Higher values
+produce less noise but longer render times.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Quality Level} & \tableheader{Sample Range} \\
+\midrule
+Quick preview & 32--128 \\
+Draft quality & 128--512 \\
+Production quality & 512--2048 \\
+Complex interiors with caustics & 2048--4096+ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Adaptive Sampling}
+
+Blender's adaptive sampling detects when individual pixels have
+converged (noise below threshold) and stops tracing additional
+samples. This concentrates computation on noisy areas.
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Noise Threshold}---Convergence threshold. 0.01 is a
+        good starting point; 0.001 for very clean production renders.
+  \item \textbf{Min Samples}---Minimum samples before adaptive
+        sampling can stop a pixel. Prevents premature convergence.
+\end{itemize}
+
+With adaptive sampling, the Render Samples value acts as a maximum.
+Simple areas converge quickly while complex areas use more samples.
+This can reduce render time by 50\% or more compared to fixed
+sampling.
+
+\subsubsection{Scrambling Distance}
+
+A form of multi-resolution sampling that can improve convergence in
+scenes with many lights. Automatic mode handles most cases.
+
+\subsection{Denoising}
+\label{sec:shading:cycles:denoising}
+
+Denoising removes noise from rendered images using AI-trained
+algorithms.
+
+\subsubsection{OpenImageDenoise (OIDN)}
+
+Open-source, CPU-based (with GPU acceleration on supported
+hardware). Developed by Intel, integrated into Blender. Works with
+all GPU backends and CPU rendering. Produces clean results with
+minimal detail loss. \textbf{Recommended as the default denoiser.}
+
+\subsubsection{OptiX Denoiser}
+
+NVIDIA proprietary, GPU-accelerated using Tensor Cores on RTX GPUs.
+Very fast, near-instant for viewport denoising. Requires NVIDIA RTX
+GPU. Improved consistency in Blender 4.4. Excellent for interactive
+viewport preview.
+
+\subsubsection{Denoising Data Passes}
+
+Enable ``Denoising Data'' in View Layer Properties $\rightarrow$
+Passes to generate albedo, normal, and noise-level auxiliary passes.
+These help the denoiser produce better results and can feed external
+denoisers or custom compositing workflows.
+
+\subsubsection{Compositor Denoising}
+
+The Denoise node in the Compositor allows post-render denoising with
+full control. Connect the Noisy Image along with Denoising Normal
+and Denoising Albedo passes for optimal results. This approach
+allows rendering once and experimenting with denoising settings
+without re-rendering.
+
+\begin{tipbox}
+\textbf{The practical denoising workflow:} Render at 256--512
+samples with adaptive sampling (threshold 0.01) and apply OIDN
+denoising. This combination produces results nearly
+indistinguishable from thousands of samples at a fraction of the
+render time. For animation, this workflow is essentially mandatory---
+rendering 4096 samples per frame is prohibitively slow for most
+projects.
+\end{tipbox}
+
+\subsection{GPU Acceleration}
+\label{sec:shading:cycles:gpu}
+
+Cycles supports GPU rendering through multiple compute backends:
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}L{2cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Backend} & \tableheader{Vendor} & \tableheader{Requirements} & \tableheader{Notes} \\
+\midrule
+CUDA & NVIDIA & Compute Cap.\ 5.0+ (GTX 900+) & Full features, stable \\
+OptiX & NVIDIA & RTX GPUs (HW RT cores) & Fastest on RTX; AI denoising via Tensor Cores \\
+HIP & AMD & RDNA+ (RX 5000+) & Full features; HIP RT no longer experimental in 4.4 \\
+oneAPI & Intel & Arc GPUs (Alchemist+) & Full feature support \\
+Metal & Apple & M-series and AMD on macOS & Full features on Apple Silicon \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Configuration:} Edit $\rightarrow$ Preferences $\rightarrow$
+System $\rightarrow$ Cycles Render Devices. Select the compute
+backend and check GPUs to use. Multiple GPUs can render
+simultaneously. CPU+GPU hybrid rendering is also possible.
+
+\begin{warningbox}
+If GPU VRAM is insufficient, Cycles falls back to system RAM---this
+avoids crashes but is significantly slower. Strategies to reduce
+VRAM usage: lower texture resolution, disable unnecessary render
+passes, reduce geometry, use OptiX (lower VRAM than CUDA for the
+same scene), and close other GPU-intensive applications.
+\end{warningbox}
+
+\textbf{OptiX vs.\ CUDA:} OptiX leverages dedicated RT cores on RTX
+GPUs for hardware-accelerated ray-BVH intersection, typically
+providing 20--50\% faster rendering than CUDA on the same hardware.
+OptiX also benefits from Tensor Core denoising, making interactive
+viewport rendering significantly faster.
+
+\subsection{Light Paths and Bounces}
+\label{sec:shading:cycles:lightpaths}
+
+Light paths determine how many times light can bounce before a path
+is terminated (Render Properties $\rightarrow$ Light Paths):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2.5cm}C{1.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Type} & \tableheader{Default} & \tableheader{Description} \\
+\midrule
+Total & 12 & Absolute maximum bounces for any path \\
+Diffuse & 4 & Bounces off matte surfaces. Affects color bleeding and indirect illumination. \\
+Glossy & 4 & Bounces off reflective surfaces. Mirror reflections and metallic inter-reflections. \\
+Transmission & 12 & Through transmissive materials. High for nested glass. \\
+Volume & 0 & Within volumetric materials. Increase for complex fog/cloud lighting. \\
+Transparent & 8 & Through fully transparent surfaces. High for many transparent layers (foliage). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Clamping}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Clamp Direct}---Limits maximum brightness of direct
+        lighting samples. Reduces fireflies. Start at 10.0; 0 disables.
+  \item \textbf{Clamp Indirect}---Same for bounced lighting. More
+        commonly needed. Start at 10.0.
+\end{itemize}
+
+\subsubsection{Filter Glossy}
+
+Blurs glossy reflections after blurry bounces to reduce noise. A
+value of 1.0 is a good starting point. Trades slight inaccuracy for
+significantly reduced noise in glossy inter-reflections.
+
+\subsubsection{Light Tree}
+
+An acceleration structure that helps the renderer choose which
+lights to sample for each shading point. Enabled by default;
+improves performance in scenes with many lights.
+
+\subsection{Caustics}
+\label{sec:shading:cycles:caustics}
+
+Caustics are focused light patterns created when light passes
+through or reflects off curved transparent or reflective surfaces
+(pool floor patterns, magnifying glass focused spots).
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Reflective Caustics}---Focused light from curved
+        mirrors. Enabled by default.
+  \item \textbf{Refractive Caustics}---Focused light through glass
+        or water. \textbf{Disabled by default} because they require
+        many samples (2048+) and produce significant noise.
+\end{itemize}
+
+Enable in Render Properties $\rightarrow$ Light Paths $\rightarrow$
+Caustics.
+
+\begin{tipbox}
+For most production work, disable refractive caustics unless they
+are a key visual element. Alternatives: fake caustics with projected
+texture patterns (faster, artistic control), or use the dedicated
+caustic algorithm for specialized sampling when available.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{EEVEE vs.\ Cycles: Decision Matrix}
+\label{sec:shading:comparison}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3.8cm}XX}
+\toprule
+\rowcolor{primary}
+\tableheader{Criterion} & \tableheader{EEVEE} & \tableheader{Cycles} \\
+\midrule
+Rendering method & Rasterization (real-time) & Path tracing (offline) \\
+Render speed & Seconds to minutes & Minutes to hours \\
+Global illumination & Screen-space (SSGI in Next) & True path-traced GI \\
+Reflections & Screen-space + probes & True ray-traced \\
+Refractions & Screen-space approximation & True ray-traced \\
+Shadows & Virtual shadow maps (Next) & True ray-traced \\
+Subsurface scattering & Screen-space approximation & Physically accurate \\
+Caustics & Not supported & Supported (expensive) \\
+Volumetrics & Supported (approximated) & Physically accurate \\
+Hair/fur & Supported (simplified) & Full strand rendering \\
+Displacement & Supported in EEVEE Next & Full adaptive subdivision \\
+Motion blur & Post-process based & True ray-traced \\
+Depth of field & Post-process based & True ray-traced bokeh \\
+GPU memory & Low requirements & High for complex scenes \\
+Animation render & Fast (real-time per frame) & Slow (full render per frame) \\
+Material compatibility & Most Principled BSDF features & All shader features \\
+Light count & Up to 4,096 visible & Unlimited \\
+Toon shading & Shader to RGB node & Not supported natively \\
+Memory usage & Lower & Higher \\
+Denoising & Built-in & OptiX / OIDN \\
+Best for & Stylized, real-time, preview, animation & Photorealistic, VFX, product visualization \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{historynote}
+In 2024, the Latvian animated film \textit{Flow} won the Academy
+Award for Best Animated Feature. It was rendered entirely in EEVEE---
+a milestone that demonstrated real-time rasterization engines can
+produce film-quality output when used by skilled artists. Meanwhile,
+Cycles remains the industry standard for VFX, architectural
+visualization, and product renders where physical accuracy is
+non-negotiable. The two engines are complementary, not competitive.
+\end{historynote}
+
+\textbf{Practical decision guide:}
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Choose EEVEE} when speed matters more than absolute
+        accuracy, for animations with tight deadlines, for
+        stylized/NPR work, or when lighting is simple enough that
+        EEVEE's approximations are indistinguishable from path tracing.
+  \item \textbf{Choose Cycles} when physical accuracy is essential,
+        for complex indoor lighting, for product/architectural
+        visualization, or when caustics, true DOF, or complex
+        transparency are needed.
+  \item \textbf{Use both:} Model and preview in EEVEE (fast
+        iteration), final render in Cycles (maximum quality). They
+        share the same shader system, so materials mostly transfer---
+        with the exception of Shader to RGB (EEVEE only) and some
+        advanced Cycles-only features.
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Lighting}
+\label{sec:shading:lighting}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{HDRI Environment Lighting}
+
+HDRI (High Dynamic Range Image) environment lighting provides both
+illumination and a background in a single step. An HDRI is a
+360-degree panoramic photograph captured with a wide dynamic range,
+containing real-world lighting information.
+
+\subsubsection{Setup}
+
+\begin{enumerate}[leftmargin=2em]
+  \item Go to World Properties (globe icon)
+  \item Click ``Use Nodes'' (if not already enabled)
+  \item Add an Environment Texture node (Shift+A $\rightarrow$
+        Texture $\rightarrow$ Environment Texture)
+  \item Load an HDRI file (\texttt{.hdr} or \texttt{.exr} format)
+  \item Connect the Color output to the Background node's Color input
+  \item Adjust the Background Strength for overall brightness
+  \item Add a Mapping node between Texture Coordinate (Generated)
+        and Environment Texture to rotate the HDRI
+\end{enumerate}
+
+\begin{tipbox}
+\textbf{HDRI tips:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Resolution affects shadow sharpness and reflection detail.
+        4K minimum for production; 8K+ for close-up reflections.
+  \item Use a separate Sun lamp synchronized to the HDRI's sun
+        position for sharper sun shadows. EEVEE Next's sun
+        extraction feature can automate this.
+  \item For indoor scenes, HDRIs provide fill through windows, but
+        additional interior lights are usually needed.
+  \item Free libraries: Poly Haven (polyhaven.com), ambientCG---
+        CC0-licensed, production quality.
+\end{itemize}
+\end{tipbox}
+
+\subsection{Light Types}
+
+Blender provides four light object types:
+
+\subsubsection{Point Light}
+
+Emits light equally in all directions from a single point (bare
+bulb, candle flame). \textbf{Power} (Watts), \textbf{Radius}
+(physical size; larger = softer shadows; 0 = infinitely small
+point).
+
+\subsubsection{Sun Light}
+
+Parallel rays from an infinitely distant source. No distance
+falloff---intensity is identical everywhere (simulating the real
+sun). \textbf{Strength} (intensity), \textbf{Angle} (angular size;
+real sun $\approx$ 0.53\textdegree). Rotation determines direction;
+position does not matter.
+
+\subsubsection{Spot Light}
+
+Cone-shaped emission (stage light, flashlight, recessed ceiling
+light). \textbf{Power} (Watts), \textbf{Radius} (shadow softness),
+\textbf{Spot Size} (cone angle), \textbf{Blend} (edge softness:
+0 = sharp, 1 = fully soft), \textbf{Show Cone} (viewport display).
+
+\subsubsection{Area Light}
+
+Light emitted from a rectangular, square, elliptical, or disc-shaped
+surface. Produces the most natural soft shadows because it simulates
+actual surface-area sources (windows, softboxes, LED panels).
+\textbf{Shape} (Square, Rectangle, Disk, Ellipse), \textbf{Size}
+(physical dimensions), \textbf{Spread} (angular spread: 180\textdegree{}
+= full hemisphere, lower = more focused). Larger area lights produce
+softer shadows.
+
+\subsection{IES Profiles}
+
+IES (Illuminating Engineering Society) profiles are data files
+describing the photometric distribution of real-world light
+fixtures. Each profile defines exactly how light is emitted in each
+direction, producing the characteristic patterns of specific lights.
+
+\textbf{Setup (Cycles only):}
+\begin{enumerate}[leftmargin=2em]
+  \item Add a Point or Spot light
+  \item Open the Shader Editor with the light selected
+  \item Add an IES Texture node (Shift+A $\rightarrow$ Texture
+        $\rightarrow$ IES Texture)
+  \item Load the \texttt{.ies} file
+  \item Connect IES Texture Fac output to Emission Strength
+\end{enumerate}
+
+IES profiles are available from lighting manufacturers (Philips, GE,
+Lithonia) and online databases. Essential for architectural
+visualization where specific fixture appearances must be matched.
+
+\begin{warningbox}
+IES profiles work \textbf{only in Cycles}. EEVEE does not support
+them. For EEVEE, approximate the light pattern using Spot Light
+parameters or textured emission planes.
+\end{warningbox}
+
+\subsection{Three-Point Lighting}
+\label{sec:shading:lighting:threepoint}
+
+The classic three-point setup is the foundation of portrait,
+character, and product lighting:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Key Light}---The main source, positioned approximately
+        45\textdegree{} to one side and 45\textdegree{} above the subject.
+        Dominant light defining the primary shadow direction. Typically
+        the brightest. Use an Area Light for natural soft shadows,
+        positioned at roughly 2$\times$ the subject's height above the
+        ground.
+  \item \textbf{Fill Light}---Softer, dimmer, positioned opposite the
+        key. Reduces shadow contrast without eliminating shadows.
+        Typically 50--70\% of key intensity. Use a larger Area Light,
+        positioned slightly lower than the key.
+  \item \textbf{Back Light (Rim Light)}---Behind and above the
+        subject, pointing toward the camera. Creates a bright edge
+        highlight separating subject from background. Adjust intensity
+        for subtle rim or dramatic glow.
+\end{itemize}
+
+\begin{tipbox}
+HDRI environment lighting can serve as a global fill, reducing the
+number of explicit lights needed. A common setup: one key light,
+one rim light, and an HDRI for fill and reflections.
+\end{tipbox}
+
+\subsection{Studio and Product Lighting}
+
+\subsubsection{Infinite Background (Cyclorama)}
+
+Model a curved plane that transitions from floor to backdrop without
+a visible seam. Assign a neutral material (white or light gray,
+Roughness 0.8--1.0). This prevents hard floor-to-wall shadow lines.
+
+\subsubsection{Softbox Simulation}
+
+Create a plane with an Emission material (high Emission Strength,
+white color) and position it like a physical softbox. In Cycles,
+this works naturally as a light source. In EEVEE, mesh emission
+contributes to lighting through SSGI.
+
+\subsubsection{Light Tent / Diffusion}
+
+For high-reflectivity products (jewelry, cars), surround the object
+with large emission planes to create smooth, continuous reflections.
+Arrange three to five large emission planes in a rough sphere around
+the product, with gaps for the camera.
+
+\subsubsection{Gradient Backgrounds}
+
+Use a large plane behind the subject with a gradient material
+(Gradient Texture $\rightarrow$ ColorRamp $\rightarrow$ Emission)
+for smooth background gradients.
+
+\subsection{Mesh Emission Lighting}
+
+Any mesh can become a light source:
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Cycles}---Fully supported. The mesh emits and
+        bounces light naturally. Ideal for neon signs, screens,
+        lamp shades, decorative lighting.
+  \item \textbf{EEVEE}---Contributes to bloom and SSGI in EEVEE
+        Next. Does not produce hard shadows. Combine with actual
+        light objects for best results.
+  \item Emission Strength values above 1.0 produce practical
+        lighting. Typical range: 5--1000+ depending on brightness
+        and scene scale.
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Camera Settings}
+\label{sec:shading:camera}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Lens Types}
+
+\subsubsection{Perspective (Default)}
+
+Simulates a standard photographic lens. Controlled by Focal Length
+(mm) or Field of View (degrees):
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Focal Length} & \tableheader{Use Case} \\
+\midrule
+16--24\,mm & Wide angle: architecture, interiors, landscapes \\
+35--50\,mm & Standard: close to human vision \\
+85--135\,mm & Portrait: flattering proportions, background compression \\
+200\,mm+ & Telephoto: wildlife, extreme background compression \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Orthographic}
+
+No perspective distortion---parallel lines remain parallel. Objects
+maintain the same apparent size regardless of distance. Controlled
+by Orthographic Scale (meters). Used for: architectural drawings,
+isometric game art, technical illustrations, 2D animation
+backgrounds.
+
+\subsubsection{Panoramic (Cycles Only)}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Equirectangular}---360-degree spherical panorama
+        (for VR and HDRI creation)
+  \item \textbf{Fisheye}---Extreme wide-angle lens simulation
+        (Equidistant and Equisolid variants)
+  \item \textbf{Mirror Ball}---Simulates photographing a reflective
+        sphere
+\end{itemize}
+
+\subsection{Depth of Field}
+
+DOF simulates the selective focus of a camera lens, blurring objects
+not at the focus distance.
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Setting} & \tableheader{Description} \\
+\midrule
+Focus Object & Object whose position determines focus distance (trackable in animation) \\
+Focus Distance & Manual distance from camera to focal plane \\
+F-Stop & Aperture size: lower = more blur. f/1.4 = extreme shallow DOF, f/8--11 = deep, f/22+ = nearly everything in focus \\
+Blades & Bokeh shape: 0 = circular, 5+ = polygonal \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Cycles DOF:} True ray-traced, producing physically accurate
+bokeh with correct shapes, aberrations, and falloff.
+
+\textbf{EEVEE DOF:} Post-process based, applied after rendering.
+Faster but less accurate, with potential artifacts at high-contrast
+edges.
+
+\begin{furrybox}
+\textbf{Portrait DOF for furry characters:} Use f/2.8--f/4 with
+focus locked on the character's eyes (set the eye mesh or an Empty
+at eye level as the Focus Object). This keeps the face sharp while
+the ears and tail blur pleasantly into the background. For dramatic
+close-ups of faces or paws, drop to f/1.4--f/2.0. In Cycles, the
+true ray-traced bokeh will naturally render each out-of-focus fur
+strand as a soft disc, creating the characteristic ``creamy bokeh''
+look prized in portrait photography.
+\end{furrybox}
+
+\subsection{Motion Blur}
+
+Simulates the streak created by moving objects during exposure.
+
+\textbf{Cycles Motion Blur} (Render Properties):
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Position}---Start, Center, or End of frame
+  \item \textbf{Shutter}---Exposure time as fraction of frame
+        (1.0 = full frame)
+  \item \textbf{Rolling Shutter}---Simulates sequential scanline
+        exposure of CMOS sensors
+  \item True geometric motion blur---objects traced at sub-frame positions
+\end{itemize}
+
+\textbf{EEVEE Motion Blur:} Post-process using velocity vectors.
+Faster but limited to screen-space information.
+
+\subsection{Sensor and Framing}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Sensor Size}---Simulates physical sensor dimensions
+        (Full Frame 36\,mm, APS-C 23.6\,mm, Micro Four Thirds
+        17.3\,mm). Affects field of view for a given focal length.
+  \item \textbf{Clip Start / End}---Near and far clipping distances.
+        Default: 0.1\,m to 100\,m. Adjust for very small or very
+        large scenes.
+  \item \textbf{Safe Areas}---Title-safe and action-safe overlays
+        for broadcast.
+  \item \textbf{Passepartout}---Dark overlay outside the camera
+        frame. Adjustable alpha.
+\end{itemize}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Render Output}
+\label{sec:shading:output}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Resolution and Frame Settings}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Resolution X / Y}---Pixel dimensions. Common values:
+        1920$\times$1080 (Full HD), 3840$\times$2160 (4K UHD),
+        2560$\times$1440 (QHD).
+  \item \textbf{Resolution \%}---Scale factor (50\% or 25\% for
+        test renders).
+  \item \textbf{Aspect Ratio}---Pixel aspect ratio (1:1 for square
+        pixels; non-square for anamorphic).
+  \item \textbf{Frame Rate}---24 (film), 25 (PAL), 30 (NTSC),
+        60 (smooth video), or custom.
+  \item \textbf{Frame Range}---Start, End, Frame Step (every Nth
+        frame for previews).
+\end{itemize}
+
+\subsection{File Formats}
+
+\subsubsection{Image Formats}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{1.8cm}C{1.8cm}L{3.5cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Format} & \tableheader{Bit Depth} & \tableheader{Features} & \tableheader{Best For} \\
+\midrule
+PNG & 8/16-bit & Lossless, alpha channel & Web, UI, general purpose \\
+JPEG & 8-bit & Lossy, small files & Quick previews, web \\
+OpenEXR & 16/32-bit float & HDR, multi-layer, lossless & Compositing, VFX, professional pipeline \\
+TIFF & 8/16-bit & Lossless, industry standard & Print, archival \\
+BMP & 8-bit & Uncompressed & Legacy compatibility \\
+WebP & 8-bit & Lossy/lossless, small & Web delivery \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsubsection{Video Formats (via FFMPEG)}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}L{3cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Container} & \tableheader{Codec} & \tableheader{Notes} \\
+\midrule
+MP4 & H.264 & Universal compatibility \\
+MP4 & H.265/HEVC & Better compression (new in 4.4) \\
+MKV & Various & Flexible container \\
+AVI & Raw & Uncompressed, very large \\
+WebM & VP9 & Web-optimized \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{warningbox}
+\textbf{Never render animations directly to video files.} If
+Blender crashes mid-render, you lose the entire video. Instead,
+render individual frames as PNG or OpenEXR image sequences, then
+assemble them into a video using the Video Sequence Editor or
+external tools (FFmpeg). This also allows re-rendering individual
+broken frames without starting over.
+\end{warningbox}
+
+\subsection{Color Management}
+\label{sec:shading:colormanagement}
+
+Blender uses OpenColorIO (OCIO) for color management, ensuring
+consistent color throughout the pipeline.
+
+\subsubsection{View Transforms}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{2cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Transform} & \tableheader{Description and Use} \\
+\midrule
+\textbf{AgX} (default since 4.0) & Desaturates bright areas toward white, matching film response. Excellent saturated highlight handling without hue shifting. Named after silver halide (AgX) in photographic film. OCIOv2 config supporting sRGB, Display P3, BT.1886. \textbf{Use for all new projects.} \\
+Filmic (legacy) & Wide dynamic range with filmic tone mapping. Previous default before AgX. Tends to shift hues in overexposed areas. OCIOv1, sRGB only. \\
+Standard & sRGB display transfer, no tone mapping. Highlights clip harshly. Only for data visualization, texture baking. \\
+Raw & No color management. Linear data displayed directly. For inspecting raw data, debugging. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{historynote}
+AgX replaced Filmic as the default view transform in Blender 4.0.
+The name ``AgX'' comes from the chemical notation for silver halide
+compounds used in photographic film emulsion. Just as film stock
+naturally compresses highlights and desaturates overexposed areas,
+AgX does the same digitally. Filmic (developed by Troy Sobotka for
+Blender 2.79) was itself revolutionary---replacing the harsh
+``Standard'' transform that clipped highlights to white and
+oversaturated colors. AgX is the refinement: it handles saturated
+colored highlights more gracefully, preventing the magenta and
+cyan hue shifts that could occur in Filmic's extreme brightness
+range.
+\end{historynote}
+
+\subsubsection{Look Transforms}
+
+Additional contrast curves applied on top of the view transform:
+None (default), Very High / High / Medium High Contrast, Medium Low
+/ Low / Very Low Contrast, Punchy (AgX-specific).
+
+\subsubsection{Exposure and Gamma}
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Exposure}---Global adjustment in stops (1 stop =
+        2$\times$ brightness)
+  \item \textbf{Gamma}---Display gamma correction (default 1.0)
+\end{itemize}
+
+\begin{warningbox}
+\textbf{Never use ``Standard'' view transform for final renders.}
+It clips highlights and produces oversaturated colors. AgX (or
+Filmic for legacy projects) should be your default. Standard is
+only useful for viewing data passes (Normal, Depth, UV) where you
+need exact values without color transforms.
+\end{warningbox}
+
+\begin{tipbox}
+Ensure all non-color textures (Normal, Roughness, Metallic, Height)
+are set to Non-Color in their Image Texture nodes. Setting them to
+sRGB causes double-correction: the textures are gamma-encoded on
+input and then the color management system applies another curve on
+output, resulting in washed-out normals, exaggerated roughness, and
+incorrect metallic behavior.
+\end{tipbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Worked Examples}
+\label{sec:shading:examples}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Worked Example: Product Render Setup}
+
+Setting up a clean product render from scratch:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Scene setup}---Create a cyclorama (curved plane
+        background) with a white material (Roughness 0.9). Place the
+        product at the origin.
+  \item \textbf{Material}---Apply a Principled BSDF with PBR textures
+        (Base Color, Roughness, Normal, Metallic) using the
+        Ctrl+Shift+T Node Wrangler shortcut. Verify color spaces.
+  \item \textbf{Lighting}---Three-point setup: Key Area Light at
+        45\textdegree{} (500W, Size 1\,m), Fill Area Light opposite
+        (200W, Size 1.5\,m), Rim Light behind (300W, focused).
+        Optionally add an HDRI for ambient fill (Strength 0.3--0.5).
+  \item \textbf{Camera}---85\,mm focal length for natural product
+        proportions. Set DOF to f/4 with focus on the product.
+        Frame the product with comfortable negative space.
+  \item \textbf{Render settings}---Cycles, 512 samples, adaptive
+        sampling threshold 0.01, OIDN denoising. AgX color
+        management. Output: 3840$\times$2160 PNG (16-bit for maximum
+        quality) or OpenEXR for compositing.
+  \item \textbf{Test and refine}---Render at 25\% resolution first.
+        Adjust light positions and intensities. Check for unwanted
+        reflections. Final render at full resolution.
+\end{enumerate}
+
+\subsection{Worked Example: Toon Shader for Furry Characters}
+
+Creating a cel-shaded material for stylized furry art (EEVEE only):
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Base material}---Add a Principled BSDF with the
+        character's base color and moderate Roughness (0.5--0.7).
+  \item \textbf{Shader to RGB}---Connect the Principled BSDF output
+        to a Shader to RGB node (EEVEE only).
+  \item \textbf{Color ramp}---Connect the Color output to a
+        ColorRamp node. Set interpolation to \textbf{Constant}.
+  \item \textbf{Shadow bands}---Create 2--3 color stops:
+    \begin{itemize}[leftmargin=1.5em]
+      \item Dark stop (0.0--0.3): Shadow color (darker, slightly
+            desaturated version of base)
+      \item Mid stop (0.3--0.6): Base color
+      \item Light stop (0.6--1.0): Highlight color (lighter, slightly
+            warm-shifted)
+    \end{itemize}
+  \item \textbf{Output}---Connect the ColorRamp to an Emission
+        shader (to bypass further lighting) or to a second
+        Principled BSDF's Base Color (to preserve specular
+        highlights).
+  \item \textbf{Outline}---Add Freestyle or Grease Pencil line art
+        for ink outlines.
+  \item \textbf{Render}---EEVEE with moderate samples (64--128).
+        Enable Bloom in the compositor for emission glow effects.
+\end{enumerate}
+
+\subsection{Worked Example: Realistic Skin Material}
+
+Building a convincing skin material for character close-ups:
+
+\begin{enumerate}[leftmargin=2em]
+  \item \textbf{Principled BSDF base}---Connect a skin albedo texture
+        to Base Color (sRGB). Set Metallic to 0.0.
+  \item \textbf{Roughness}---Connect a skin roughness map (Non-Color).
+        Typical range: 0.3--0.5. Oilier areas (forehead, nose) are
+        smoother; drier areas (cheeks) are rougher.
+  \item \textbf{Subsurface scattering}---Set Subsurface Weight to
+        0.3--0.5. Subsurface Radius (1.0, 0.2, 0.1). Subsurface
+        Scale 0.02--0.05 depending on character scale. This adds the
+        warm translucency visible when skin is backlit.
+  \item \textbf{Normal detail}---Connect a skin normal map through
+        a Normal Map node to the Normal input. Adjust strength to
+        0.5--1.0 for pore visibility without over-exaggeration.
+  \item \textbf{Specular}---Leave Specular IOR Level at 0.5. Add
+        slight Coat Weight (0.1--0.2) with Coat Roughness 0.1--0.2
+        for the oily sheen on the T-zone.
+  \item \textbf{Micro-detail}---Layer a fine Noise Texture (Scale
+        200+, Detail 8) through a Bump node at very low strength
+        (0.05--0.1) for pore-level variation that breaks up the
+        uniformity of the texture map.
+  \item \textbf{Render}---Cycles recommended for accurate SSS.
+        Ensure sufficient diffuse bounces (4+). Denoising may
+        over-smooth SSS detail; increase samples if needed.
+\end{enumerate}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Common Pitfalls and Performance Tips}
+\label{sec:shading:pitfalls}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+\subsection{Material Pitfalls}
+
+\begin{warningbox}
+\textbf{Color space errors}---The single most common material
+mistake. Normal maps, roughness maps, metallic maps, and height
+maps \textbf{must} be set to Non-Color. Only albedo/base color and
+emission textures use sRGB. Incorrect color space produces
+washed-out normals, exaggerated roughness, and incorrect metallic
+behavior.
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Missing Normal Map node}---Connecting a normal map image
+texture directly to the Principled BSDF Normal input does not work
+correctly. Always insert a Normal Map node between the texture and
+the shader. The Normal Map node converts the tangent-space encoded
+RGB data into the vector format the shader expects.
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Alpha transparency not showing}---Enable the appropriate
+Blend Mode in Material Properties $\rightarrow$ Settings
+$\rightarrow$ Surface: Alpha Clip (hard cutout), Alpha Hashed
+(dithered), or Alpha Blend (smooth gradient). Also set Shadow Mode
+to match.
+\end{warningbox}
+
+\subsection{Rendering Pitfalls}
+
+\begin{warningbox}
+\textbf{Fireflies} (bright pixel speckles)---Caused by rare
+high-energy light paths (caustics, small bright reflections).
+Solutions: Clamp Indirect to 10.0, enable Filter Glossy at 1.0,
+increase samples, apply denoising. If fireflies persist, check for
+tiny, extremely bright light sources or reflective geometry acting
+as accidental concentrators.
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Cycles renders black}---GPU not selected in Preferences
+$\rightarrow$ System $\rightarrow$ Cycles Render Devices, or GPU
+driver is outdated. Also verify that Render Engine is set to Cycles
+(not Workbench).
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{EEVEE materials look flat}---Enable Screen Space
+Reflections for reflective materials. Use Light Probes (Irradiance
+Volume) to capture indirect lighting. In EEVEE Next (4.2+), SSGI
+handles much of this automatically.
+\end{warningbox}
+
+\begin{warningbox}
+\textbf{Indoor scenes too dark in Cycles}---Interior scenes need
+high bounce counts: Diffuse bounces 8+, Total bounces 12+. Area
+Light power should be 100--1000W for room-scale lighting.
+\end{warningbox}
+
+\subsection{Performance Tips}
+
+\begin{tipbox}
+\textbf{Reducing Cycles render time:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Use adaptive sampling (threshold 0.01)
+  \item Enable denoising (OIDN recommended)
+  \item Lower bounce counts for test renders
+  \item Use OptiX on NVIDIA GPUs (20--50\% faster than CUDA)
+  \item Render at lower resolution for previews
+  \item Disable refractive caustics unless needed
+\end{itemize}
+\end{tipbox}
+
+\begin{tipbox}
+\textbf{Reducing EEVEE artifacts:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Increase shadow map resolution
+  \item Increase SSR trace precision
+  \item Add light probes in complex indirect lighting areas
+  \item Enable Overscan to reduce edge artifacts
+\end{itemize}
+\end{tipbox}
+
+\begin{tipbox}
+\textbf{Render layers and passes:} Use View Layers to separate
+foreground, background, and effects. Render passes (Diffuse,
+Glossy, Emission, Shadow, AO) allow post-render compositing
+adjustments without re-rendering. Always render to OpenEXR
+(Multilayer) for professional compositing workflows---the 32-bit
+float HDR data preserves maximum flexibility for color grading in
+the Compositor or external tools (see
+Chapter~\ref{ch:compositing}).
+\end{tipbox}
+
+\begin{shortcutbox}
+\textbf{Quick Render Shortcuts}
+
+\begin{center}
+\rowcolors{2}{rowgray}{white}
+\begin{tabularx}{\textwidth}{L{4cm}X}
+\toprule
+\rowcolor{primary}
+\tableheader{Shortcut} & \tableheader{Action} \\
+\midrule
+F12 & Render single frame \\
+Ctrl + F12 & Render full animation \\
+Z $\rightarrow$ Rendered & Switch viewport to rendered preview \\
+Z $\rightarrow$ Material Preview & Switch to material preview (HDRI-lit) \\
+Numpad 0 & View through active camera \\
+Ctrl + Numpad 0 & Set selected object as active camera \\
+Ctrl + B & Set render region (in camera view) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{shortcutbox}
+
+
+%% ═══════════════════════════════════════════════════════════════════════════
+\section{Furry Arts: Material Recipes}
+\label{sec:shading:furryrecipes}
+%% ═══════════════════════════════════════════════════════════════════════════
+
+This section collects material recipes specific to furry character
+creation. For the complete furry arts pipeline---from concept art
+through modeling, rigging, and final render---see
+Chapter~\ref{ch:furryarts}.
+
+\begin{furrybox}
+\textbf{Eye materials:} Furry character eyes are the emotional
+anchor of the design. A typical setup uses two mesh layers:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Eyeball mesh}---Principled BSDF with an iris color
+        texture (or procedural iris pattern using Voronoi + Noise
+        + ColorRamp), Roughness 0.0--0.1 for wet cornea look,
+        slight Coat Weight (0.3) for an extra specular layer that
+        catches light beautifully.
+  \item \textbf{Cornea shell}---Separate slightly-larger sphere
+        mesh with Transmission Weight 1.0, IOR 1.376 (real cornea),
+        Roughness 0.0. This creates the glassy, refractive look and
+        adds a secondary specular highlight offset from the main one.
+\end{itemize}
+For toon-style eyes: paint or texture-project the entire eye
+appearance (pupil, iris, highlight spots) directly onto a flat or
+slightly convex surface, using emission for the highlight catch
+lights. No need for physical refraction in stylized work.
+\end{furrybox}
+
+\begin{furrybox}
+\textbf{Paw pad material:} Leathery, slightly translucent, with
+fine texture detail.
+\begin{itemize}[leftmargin=1.5em]
+  \item Base Color: Dark pink to dark gray-brown (species-dependent)
+  \item Roughness: 0.6--0.8 (matte but not perfectly rough)
+  \item Subsurface Weight: 0.4--0.6 with warm SSS radius
+  \item Normal: Fine bump from Noise Texture (Scale 50--100) at low
+        strength (0.1--0.2) for leathery micro-texture
+  \item Coat: 0.1--0.3 with Coat Roughness 0.2 for slight sheen
+        where light catches the pad surface
+\end{itemize}
+\end{furrybox}
+
+\begin{furrybox}
+\textbf{Emission markings and bioluminescence:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Create a mask texture (painted or procedural) that defines
+        where the markings appear
+  \item Mix two Principled BSDFs using the mask: the base fur/skin
+        material and a variant with Emission Color set to the glow
+        color and Emission Strength 5--50
+  \item In EEVEE, enable Bloom for the characteristic glow bleed
+  \item In Cycles, the emission will naturally illuminate nearby
+        surfaces and bounce off adjacent fur strands
+  \item Animate Emission Strength with a sinusoidal F-Curve for
+        pulsing, breathing-light effects
+        (see Chapter~\ref{ch:animation} for F-Curve editing)
+\end{itemize}
+\end{furrybox}
+
+\vspace{1em}
+\begin{center}
+\textcolor{bordergray}{\rule{0.6\textwidth}{0.4pt}}
+\end{center}
+\vspace{0.5em}
+
+This chapter covered the full material-to-pixel pipeline: the Shader
+Editor's node-based workflow, every parameter of the Principled BSDF,
+procedural and image-based textures, PBR authoring, specialized
+materials (glass, skin, hair, fur), both render engines in depth,
+lighting techniques from HDRIs to IES profiles, camera settings,
+color management, and output configuration. With these tools
+understood, you can make any geometry visible in any style---from
+physically accurate product renders to stylized toon-shaded
+character art. The next chapter (Chapter~\ref{ch:animation}) covers
+how to make it all \emph{move}.
