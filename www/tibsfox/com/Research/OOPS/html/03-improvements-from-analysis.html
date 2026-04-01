@@ -58,180 +58,1203 @@ Analysis — HEL Research</title>
     <h1 id="concrete-improvements-from-architecture-analysis">Concrete
     Improvements From Architecture Analysis</h1>
     <p><strong>Date:</strong> 2026-03-31</p>
+    <h2 id="overview">Overview</h2>
+    <p>The Claude Code v2.1.88 architecture analysis (OOPS docs 00-02)
+    revealed specific patterns we should adopt, gaps we should fill, and
+    alignment opportunities we should pursue. This document translates
+    those findings into 12 concrete improvements, ordered by priority,
+    with implementation details, effort estimates, dependency
+    relationships, and risk assessments.</p>
+    <p>Each improvement includes: what to build, how to build it, how
+    long it takes, what it depends on, and what happens if we do not do
+    it.</p>
+    <h2 id="priority-matrix">Priority Matrix</h2>
+    <table>
+    <colgroup>
+    <col style="width: 4%" />
+    <col style="width: 18%" />
+    <col style="width: 16%" />
+    <col style="width: 13%" />
+    <col style="width: 21%" />
+    <col style="width: 26%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>#</th>
+    <th>Improvement</th>
+    <th>Priority</th>
+    <th>Effort</th>
+    <th>Dependencies</th>
+    <th>Risk if Skipped</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>1</td>
+    <td>PostCompact Hook Handler</td>
+    <td><strong>P0 - Critical</strong></td>
+    <td>4 hours</td>
+    <td>None</td>
+    <td>Continued quality degradation in long sessions</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>FileChanged Event Handling</td>
+    <td><strong>P0 - Critical</strong></td>
+    <td>3 hours</td>
+    <td>None</td>
+    <td>Silent stale-state bugs from external edits</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>Dead Hook Cleanup</td>
+    <td><strong>P0 - Critical</strong></td>
+    <td>30 minutes</td>
+    <td>None</td>
+    <td>12ms wasted overhead per tool cycle, silent failures</td>
+    </tr>
+    <tr>
+    <td>4</td>
+    <td>Align Effort Levels with GSD Profiles</td>
+    <td><strong>P1 - High</strong></td>
+    <td>2 hours</td>
+    <td>None</td>
+    <td>Misaligned cost optimization; our profiles fight the
+    platform</td>
+    </tr>
+    <tr>
+    <td>5</td>
+    <td>Memory Survey Pattern</td>
+    <td><strong>P1 - High</strong></td>
+    <td>6 hours</td>
+    <td>None</td>
+    <td>2,500 tokens wasted per session loading irrelevant memories</td>
+    </tr>
+    <tr>
+    <td>6</td>
+    <td>Notification Type Standardization</td>
+    <td><strong>P1 - High</strong></td>
+    <td>4 hours</td>
+    <td>None</td>
+    <td>Missing event-driven intelligence opportunities</td>
+    </tr>
+    <tr>
+    <td>7</td>
+    <td>PermissionDenied Recovery</td>
+    <td><strong>P2 - Medium</strong></td>
+    <td>3 hours</td>
+    <td>None</td>
+    <td>Agents retry denied actions, wasting context</td>
+    </tr>
+    <tr>
+    <td>8</td>
+    <td>Agent Type Taxonomy Alignment</td>
+    <td><strong>P2 - Medium</strong></td>
+    <td>4 hours</td>
+    <td>#4 (effort levels)</td>
+    <td>Sub-optimal routing: complex tasks on cheap models</td>
+    </tr>
+    <tr>
+    <td>9</td>
+    <td>Worktree State Management</td>
+    <td><strong>P2 - Medium</strong></td>
+    <td>6 hours</td>
+    <td>None</td>
+    <td>Abandoned worktrees, orphaned agent state</td>
+    </tr>
+    <tr>
+    <td>10</td>
+    <td>Context-Packet Integration</td>
+    <td><strong>P3 - Low</strong></td>
+    <td>8 hours</td>
+    <td>#5 (memory survey)</td>
+    <td>No immediate risk; future-proofing for inter-agent context</td>
+    </tr>
+    <tr>
+    <td>11</td>
+    <td>Skill Lifecycle Management</td>
+    <td><strong>P3 - Low</strong></td>
+    <td>4 hours</td>
+    <td>None</td>
+    <td>No versioning; cannot deprecate skills safely</td>
+    </tr>
+    <tr>
+    <td>12</td>
+    <td>Memory as Active System</td>
+    <td><strong>P3 - Low</strong></td>
+    <td>12 hours</td>
+    <td>#5 (memory survey)</td>
+    <td>Memory remains passive; no automated consolidation</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Total estimated effort:</strong> 56.5 hours
+    (approximately 7 working days)</p>
+    <p><strong>Recommended execution order:</strong> 3 -&gt; 1 -&gt; 2
+    -&gt; 4 -&gt; 5 -&gt; 6 -&gt; 7 -&gt; 8 -&gt; 9 -&gt; 11 -&gt; 10
+    -&gt; 12</p>
+    <p>Start with dead hook cleanup (#3) because it is the fastest win
+    and removes noise from the system. Then PostCompact (#1) and
+    FileChanged (#2) because they address the two highest-impact quality
+    issues. Then the alignment improvements (#4-6) that compose with
+    platform features. Then the medium-priority improvements (#7-9) that
+    handle edge cases. Finally the long-term architectural improvements
+    (#10-12) that build toward the future.</p>
     <h2 id="immediate-actions-this-week">Immediate Actions (This
     Week)</h2>
     <h3 id="add-postcompact-hook-handler">1. Add PostCompact Hook
     Handler</h3>
-    <p>Claude Code compresses conversation context when approaching
-    limits. The <code>PostCompact</code> hook fires after this happens.
-    Currently we lose working state silently.</p>
-    <p><strong>Improvement:</strong> Add a PostCompact handler to the
-    session-awareness skill that: - Saves current task state to
-    <code>.planning/compact-state.json</code> - Records what files were
-    being worked on - Logs the compaction event with timestamp - On next
-    tool call, checks if compaction occurred and restores context</p>
-    <p><strong>Why this matters:</strong> Our long-running sessions
-    (like tonight’s HEL buildout) are exactly where compaction hits.
-    Losing context mid-session is the #1 cause of quality degradation in
-    extended work.</p>
+    <p><strong>Priority:</strong> P0 - Critical <strong>Effort:</strong>
+    4 hours (2 hours implementation, 1 hour testing, 1 hour integration)
+    <strong>Dependencies:</strong> None <strong>Blocks:</strong> #10
+    (context-packet integration benefits from compaction awareness)</p>
+    <p>Claude Code compresses conversation context when approaching the
+    context window limit. The <code>PostCompact</code> hook fires after
+    this happens. Currently, our only PostCompact handler is
+    <code>session-state.sh</code>, which outputs the same STATE.md
+    snippet as SessionStart – generic orientation, not
+    compaction-specific recovery.</p>
+    <p><strong>The problem:</strong> Compaction is the single biggest
+    cause of quality degradation in long sessions. After compaction, the
+    agent loses: - Which files it was actively editing (the edit history
+    is in the compacted conversation) - What task it was in the middle
+    of (the task context is compressed or dropped) - Which tests were
+    passing or failing (test output is compacted) - The user’s most
+    recent instructions (if they were many turns ago) - Working
+    assumptions about the codebase that were established earlier in the
+    session</p>
+    <p>Our long-running sessions – the 360 engine runs, the HEL research
+    buildouts, the NASA mission series – are exactly where compaction
+    hits. A typical autonomous session of 2+ hours will compact 2-3
+    times. Each compaction event degrades output quality measurably.</p>
+    <p><strong>Implementation:</strong></p>
+    <p>The solution is a PreCompact/PostCompact save/restore pair.
+    PreCompact saves critical state before compaction; PostCompact
+    injects it back into the conversation context after compaction.</p>
+    <p><strong>PreCompact handler
+    (<code>pre-compact-snapshot.js</code>):</strong></p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> os <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;os&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { execSync } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;child_process&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> sessionId <span class="op">=</span> data<span class="op">.</span><span class="at">session_id</span><span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>sessionId) <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> snapshotPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-precompact-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.json`</span>)<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> cwd <span class="op">=</span> data<span class="op">.</span><span class="at">cwd</span> <span class="op">||</span> <span class="bu">process</span><span class="op">.</span><span class="fu">cwd</span>()<span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Build snapshot of critical working state</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> snapshot <span class="op">=</span> {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">timestamp</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">session_id</span><span class="op">:</span> sessionId<span class="op">,</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      cwd<span class="op">,</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">compaction_count</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      <span class="dt">git</span><span class="op">:</span> {}<span class="op">,</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>      <span class="dt">recent_files</span><span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>      <span class="dt">gsd_state</span><span class="op">:</span> <span class="kw">null</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Increment compaction counter from previous snapshot</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(snapshotPath)) {</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>      <span class="cf">try</span> {</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> prev <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(fs<span class="op">.</span><span class="fu">readFileSync</span>(snapshotPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>))<span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        snapshot<span class="op">.</span><span class="at">compaction_count</span> <span class="op">=</span> (prev<span class="op">.</span><span class="at">compaction_count</span> <span class="op">||</span> <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">catch</span> {}</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Capture git state</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> {</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>      snapshot<span class="op">.</span><span class="at">git</span><span class="op">.</span><span class="at">branch</span> <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git branch --show-current&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>      snapshot<span class="op">.</span><span class="at">git</span><span class="op">.</span><span class="at">status</span> <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git status --short&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>      snapshot<span class="op">.</span><span class="at">git</span><span class="op">.</span><span class="at">lastCommit</span> <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git log --oneline -3&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">catch</span> {}</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read GSD state (first 30 lines)</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> statePath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(cwd<span class="op">,</span> <span class="st">&#39;.planning&#39;</span><span class="op">,</span> <span class="st">&#39;STATE.md&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(statePath)) {</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>      snapshot<span class="op">.</span><span class="at">gsd_state</span> <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(statePath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>)<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">30</span>)<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read file journal (last 20 entries)</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> journalPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-journal-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.jsonl`</span>)<span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(journalPath)) {</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> lines <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(journalPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>)<span class="op">.</span><span class="fu">trim</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>      snapshot<span class="op">.</span><span class="at">recent_files</span> <span class="op">=</span> lines<span class="op">.</span><span class="fu">slice</span>(<span class="op">-</span><span class="dv">20</span>)<span class="op">.</span><span class="fu">map</span>(l <span class="kw">=&gt;</span> {</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> { <span class="cf">return</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(l)<span class="op">;</span> } <span class="cf">catch</span> { <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> }</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>      })<span class="op">.</span><span class="fu">filter</span>(<span class="bu">Boolean</span>)<span class="op">;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">writeFileSync</span>(snapshotPath<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(snapshot<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span> <span class="co">// Silent failure -- never crash the session</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <p><strong>PostCompact handler
+    (<code>post-compact-recovery.js</code>):</strong></p>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> os <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;os&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { execSync } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;child_process&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> sessionId <span class="op">=</span> data<span class="op">.</span><span class="at">session_id</span><span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> cwd <span class="op">=</span> data<span class="op">.</span><span class="at">cwd</span> <span class="op">||</span> <span class="bu">process</span><span class="op">.</span><span class="fu">cwd</span>()<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> parts <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Load PreCompact snapshot if available</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> snapshotPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-precompact-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.json`</span>)<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> snapshot <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(snapshotPath)) {</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">try</span> { snapshot <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(fs<span class="op">.</span><span class="fu">readFileSync</span>(snapshotPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>))<span class="op">;</span> } <span class="cf">catch</span> {}</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (snapshot) {</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>      parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`Compaction #</span><span class="sc">${</span>snapshot<span class="op">.</span><span class="at">compaction_count</span> <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="vs"> in this session.`</span>)<span class="op">;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Current git state (may have changed since snapshot)</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> {</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> branch <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git branch --show-current&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> status <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git status --short&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> lastCommit <span class="op">=</span> <span class="fu">execSync</span>(<span class="st">&#39;git log --oneline -3&#39;</span><span class="op">,</span> { cwd<span class="op">,</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span> })<span class="op">.</span><span class="fu">trim</span>()<span class="op">;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>      parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`## Git State</span><span class="sc">\n</span><span class="vs">Branch: </span><span class="sc">${</span>branch<span class="sc">}\n</span><span class="vs">Recent commits:</span><span class="sc">\n${</span>lastCommit<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (status) parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`Modified files:</span><span class="sc">\n${</span>status<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">catch</span> {}</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. GSD project state</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> statePath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(cwd<span class="op">,</span> <span class="st">&#39;.planning&#39;</span><span class="op">,</span> <span class="st">&#39;STATE.md&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(statePath)) {</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> state <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(statePath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> first30 <span class="op">=</span> state<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">30</span>)<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>      parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`## GSD State</span><span class="sc">\n${</span>first30<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 4. Recently modified files from journal</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> journalPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-journal-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.jsonl`</span>)<span class="op">;</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(journalPath)) {</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> lines <span class="op">=</span> fs<span class="op">.</span><span class="fu">readFileSync</span>(journalPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>)<span class="op">.</span><span class="fu">trim</span>()<span class="op">.</span><span class="fu">split</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> recent <span class="op">=</span> lines<span class="op">.</span><span class="fu">slice</span>(<span class="op">-</span><span class="dv">10</span>)<span class="op">.</span><span class="fu">map</span>(l <span class="kw">=&gt;</span> {</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span> { <span class="kw">const</span> e <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(l)<span class="op">;</span> <span class="cf">return</span> <span class="vs">`  </span><span class="sc">${</span>e<span class="op">.</span><span class="at">tool</span><span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>e<span class="op">.</span><span class="at">file</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span> } <span class="cf">catch</span> { <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> }</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>      })<span class="op">.</span><span class="fu">filter</span>(<span class="bu">Boolean</span>)<span class="op">;</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (recent<span class="op">.</span><span class="at">length</span>) parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`## Recent File Operations</span><span class="sc">\n${</span>recent<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (parts<span class="op">.</span><span class="at">length</span>) {</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> output <span class="op">=</span> {</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        <span class="dt">hookSpecificOutput</span><span class="op">:</span> {</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>          <span class="dt">hookEventName</span><span class="op">:</span> <span class="st">&quot;PostCompact&quot;</span><span class="op">,</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>          <span class="dt">additionalContext</span><span class="op">:</span> <span class="st">&quot;CONTEXT RECOVERY (post-compaction):</span><span class="sc">\n\n</span><span class="st">&quot;</span> <span class="op">+</span> parts<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n\n</span><span class="st">&#39;</span>)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>      }<span class="op">;</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>      <span class="bu">process</span><span class="op">.</span><span class="at">stdout</span><span class="op">.</span><span class="fu">write</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(output))<span class="op">;</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <p><strong>settings.json changes:</strong></p>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;PreCompact&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;hooks&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;command&quot;</span><span class="fu">,</span> <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;node .claude/hooks/pre-compact-snapshot.js&quot;</span> <span class="fu">}</span><span class="ot">]</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;PostCompact&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;hooks&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;command&quot;</span><span class="fu">,</span> <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;node .claude/hooks/post-compact-recovery.js&quot;</span> <span class="fu">}</span><span class="ot">]</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> Long sessions
+    continue to degrade after compaction. The agent loses working
+    context every 1.5-2 hours, producing lower-quality output, repeating
+    work, and making errors that would not occur with context
+    preservation. For autonomous runs (360 engine, NASA missions), this
+    is the primary quality limiter. Estimated impact: 15-25% quality
+    reduction in sessions longer than 2 hours.</p>
     <h3 id="add-filechanged-event-handling">2. Add FileChanged Event
     Handling</h3>
+    <p><strong>Priority:</strong> P0 - Critical <strong>Effort:</strong>
+    3 hours (1.5 hours implementation, 1 hour testing, 0.5 hours
+    integration) <strong>Dependencies:</strong> None
+    <strong>Blocks:</strong> None (but complements #1 – external changes
+    during compaction are invisible without this)</p>
     <p>The <code>FileChanged</code> hook fires when files are modified
-    outside the conversation (linters, formatters, user edits, git
-    operations). Currently our skills don’t know about external
-    changes.</p>
-    <p><strong>Improvement:</strong> Add a FileChanged handler that: -
-    Re-reads modified skill files if a SKILL.md changed - Flags when a
-    file we’re working on was externally modified (prevents overwrite) -
-    Updates the session-awareness state when <code>.planning/</code>
-    files change</p>
-    <h3 id="align-effort-levels-with-gsd-profiles">3. Align Effort
+    outside the conversation – by linters, formatters, the user editing
+    in another window, git operations (checkout, merge, rebase), or
+    build tool outputs. Currently our skills have zero awareness of
+    external changes.</p>
+    <p><strong>The problem:</strong> External file changes create a
+    class of silent bugs: - If the user edits a file in VS Code while
+    Claude is working, Claude’s in-memory version is stale - If a linter
+    reformats a file Claude just wrote, Claude’s next edit may conflict
+    with the formatted version - If <code>git checkout</code> changes
+    branches, every file assumption is invalidated - If a
+    <code>.planning/STATE.md</code> is modified by another session, GSD
+    workflow decisions are based on stale state</p>
+    <p><strong>Implementation
+    (<code>external-change-tracker.js</code>):</strong></p>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> filePath <span class="op">=</span> data<span class="op">.</span><span class="at">file_path</span> <span class="op">||</span> data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">file_path</span> <span class="op">||</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> cwd <span class="op">=</span> data<span class="op">.</span><span class="at">cwd</span> <span class="op">||</span> <span class="bu">process</span><span class="op">.</span><span class="fu">cwd</span>()<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> messages <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 1: SKILL.md changed externally</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (filePath<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">&#39;SKILL.md&#39;</span>) <span class="op">&amp;&amp;</span> filePath<span class="op">.</span><span class="fu">includes</span>(<span class="st">&#39;.claude/skills&#39;</span>)) {</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> skillName <span class="op">=</span> path<span class="op">.</span><span class="fu">basename</span>(path<span class="op">.</span><span class="fu">dirname</span>(filePath))<span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>      messages<span class="op">.</span><span class="fu">push</span>(<span class="vs">`EXTERNAL CHANGE: Skill &quot;</span><span class="sc">${</span>skillName<span class="sc">}</span><span class="vs">&quot; was modified outside this session. `</span> <span class="op">+</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;If this skill is relevant to current work, re-read its SKILL.md.&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 2: .planning/ files changed externally</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (filePath<span class="op">.</span><span class="fu">includes</span>(<span class="st">&#39;.planning/&#39;</span>)) {</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> fileName <span class="op">=</span> path<span class="op">.</span><span class="fu">basename</span>(filePath)<span class="op">;</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>      messages<span class="op">.</span><span class="fu">push</span>(<span class="vs">`EXTERNAL CHANGE: GSD state file &quot;</span><span class="sc">${</span>fileName<span class="sc">}</span><span class="vs">&quot; was modified outside this session. `</span> <span class="op">+</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Your cached knowledge of project state may be outdated. Re-read before making workflow decisions.&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 3: settings.json changed (hook config may have changed)</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (filePath<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">&#39;settings.json&#39;</span>) <span class="op">&amp;&amp;</span> filePath<span class="op">.</span><span class="fu">includes</span>(<span class="st">&#39;.claude&#39;</span>)) {</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>      messages<span class="op">.</span><span class="fu">push</span>(<span class="st">&#39;EXTERNAL CHANGE: Hook configuration changed. New hooks may be active or existing hooks removed.&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 4: CLAUDE.md changed (project instructions may have changed)</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (filePath<span class="op">.</span><span class="fu">endsWith</span>(<span class="st">&#39;CLAUDE.md&#39;</span>) <span class="op">&amp;&amp;</span> path<span class="op">.</span><span class="fu">dirname</span>(filePath) <span class="op">===</span> cwd) {</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>      messages<span class="op">.</span><span class="fu">push</span>(<span class="st">&#39;EXTERNAL CHANGE: Project instructions (CLAUDE.md) were modified. Re-read for updated directives.&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Case 5: Source file in active work area</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (filePath<span class="op">.</span><span class="fu">startsWith</span>(path<span class="op">.</span><span class="fu">join</span>(cwd<span class="op">,</span> <span class="st">&#39;src/&#39;</span>)) <span class="op">||</span> filePath<span class="op">.</span><span class="fu">startsWith</span>(path<span class="op">.</span><span class="fu">join</span>(cwd<span class="op">,</span> <span class="st">&#39;desktop/&#39;</span>))) {</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>      messages<span class="op">.</span><span class="fu">push</span>(<span class="vs">`EXTERNAL CHANGE: Source file &quot;</span><span class="sc">${</span>path<span class="op">.</span><span class="fu">relative</span>(cwd<span class="op">,</span> filePath)<span class="sc">}</span><span class="vs">&quot; was modified outside this session. `</span> <span class="op">+</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;If you were editing this file, re-read it before making further changes to avoid conflicts.&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (messages<span class="op">.</span><span class="at">length</span>) {</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> output <span class="op">=</span> {</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        <span class="dt">hookSpecificOutput</span><span class="op">:</span> {</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>          <span class="dt">hookEventName</span><span class="op">:</span> <span class="st">&quot;FileChanged&quot;</span><span class="op">,</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>          <span class="dt">additionalContext</span><span class="op">:</span> messages<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n\n</span><span class="st">&#39;</span>)</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>      }<span class="op">;</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>      <span class="bu">process</span><span class="op">.</span><span class="at">stdout</span><span class="op">.</span><span class="fu">write</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(output))<span class="op">;</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <p><strong>settings.json addition:</strong></p>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;FileChanged&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;hooks&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;command&quot;</span><span class="fu">,</span> <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;node .claude/hooks/external-change-tracker.js&quot;</span> <span class="fu">}</span><span class="ot">]</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> Stale-state
+    bugs continue to occur silently. The agent overwrites user edits.
+    The agent makes decisions based on outdated <code>.planning/</code>
+    state. The agent’s in-memory model of the filesystem diverges from
+    reality after external operations. These bugs are hard to diagnose
+    because they manifest as “the agent did the wrong thing” rather than
+    an explicit error. Estimated frequency: 1-3 stale-state incidents
+    per extended session involving external edits.</p>
+    <h3 id="dead-hook-cleanup">3. Dead Hook Cleanup</h3>
+    <p><strong>Priority:</strong> P0 - Critical <strong>Effort:</strong>
+    30 minutes <strong>Dependencies:</strong> None
+    <strong>Blocks:</strong> None (but reduces noise for all subsequent
+    hook work)</p>
+    <p>Our <code>settings.json</code> references hooks that do not exist
+    on disk. These entries fail silently on every invocation, wasting
+    approximately 3ms per process spawn per dead hook. With 4 dead hooks
+    firing on common events (PostToolUse, SessionStart), this adds
+    approximately 12ms of overhead per tool cycle for nothing.</p>
+    <p><strong>The specific dead references (identified in OOPS doc
+    04):</strong></p>
+    <p>Our current settings.json has been cleaned up from the state
+    analyzed in doc 04, but we should verify and address any remaining
+    issues:</p>
+    <ol type="1">
+    <li>Any hook script referenced in settings.json that does not exist
+    in <code>.claude/hooks/</code></li>
+    <li>Any duplicate entries for the same event type</li>
+    <li>Any hooks using ESM <code>import</code> syntax in
+    <code>.js</code> files (should be CJS <code>require()</code> or
+    renamed to <code>.mjs</code>)</li>
+    </ol>
+    <p><strong>Implementation:</strong></p>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Audit: list all hook commands referenced in settings.json</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-oP</span> <span class="st">&#39;&quot;command&quot;:\s*&quot;[^&quot;]*&quot;&#39;</span> .claude/settings.json <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross-reference with actual files</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> .claude/hooks/</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove any settings.json entries that reference non-existent files</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert any ESM hooks to CJS</span></span></code></pre></div>
+    <p>For each dead reference: remove the entry from settings.json. For
+    each ESM hook: convert <code>import</code> to <code>require()</code>
+    or rename to <code>.mjs</code>. For each duplicate: remove the
+    redundant entry.</p>
+    <p><strong>What happens if we do NOT do this:</strong> Every tool
+    call pays a tax of wasted process spawns for hooks that fail
+    silently. Over a long session with hundreds of tool calls, this
+    compounds into seconds of wasted time and clutters process tables
+    with short-lived Node.js instances that do nothing. More
+    importantly, the dead references mask real issues – if every
+    SessionStart fires 6 hooks and 2 of them silently fail, we are
+    trained to expect a 33% failure rate and may miss genuine failures
+    in the remaining hooks.</p>
+    <h2 id="short-term-improvements-this-week-to-next-week">Short-Term
+    Improvements (This Week to Next Week)</h2>
+    <h3 id="align-effort-levels-with-gsd-profiles">4. Align Effort
     Levels with GSD Profiles</h3>
-    <p>Claude Code has an internal effort system
-    (<code>effort-level</code>). Our GSD profiles
-    (quality/balanced/budget/inherit) should map to these:</p>
+    <p><strong>Priority:</strong> P1 - High <strong>Effort:</strong> 2
+    hours <strong>Dependencies:</strong> None <strong>Blocks:</strong>
+    #8 (agent type taxonomy uses effort levels for routing
+    decisions)</p>
+    <p>Claude Code has an internal effort system that controls reasoning
+    depth and verification thoroughness. Our GSD profiles
+    (quality/balanced/budget/inherit) serve the same purpose but are not
+    aligned with the platform’s effort semantics.</p>
+    <p><strong>The alignment map:</strong></p>
     <table>
+    <colgroup>
+    <col style="width: 16%" />
+    <col style="width: 18%" />
+    <col style="width: 23%" />
+    <col style="width: 18%" />
+    <col style="width: 22%" />
+    </colgroup>
     <thead>
     <tr>
     <th>GSD Profile</th>
     <th>Effort Level</th>
-    <th>Reasoning Token Budget</th>
+    <th>Reasoning Budget</th>
+    <th>Verification</th>
+    <th>Model Selection</th>
     </tr>
     </thead>
     <tbody>
     <tr>
     <td>quality</td>
     <td>high</td>
-    <td>Maximum reasoning, all verification</td>
+    <td>Maximum reasoning depth, extended thinking</td>
+    <td>All verification steps, full test suite</td>
+    <td>Opus</td>
     </tr>
     <tr>
     <td>balanced</td>
     <td>medium</td>
-    <td>Standard reasoning, key verification</td>
+    <td>Standard reasoning, proportional thinking</td>
+    <td>Key verification, targeted tests</td>
+    <td>Sonnet</td>
     </tr>
     <tr>
     <td>budget</td>
     <td>low</td>
-    <td>Minimal reasoning, skip optional checks</td>
+    <td>Minimal reasoning, skip optional analysis</td>
+    <td>Skip optional checks, spot-check tests</td>
+    <td>Haiku</td>
     </tr>
     <tr>
     <td>inherit</td>
     <td>(parent’s level)</td>
     <td>Match the calling agent</td>
+    <td>Match the calling agent</td>
+    <td>Match parent</td>
     </tr>
     </tbody>
     </table>
-    <p><strong>Improvement:</strong> Update the
-    <code>gsd:set-profile</code> command to set effort alongside model
-    selection.</p>
-    <h3 id="implement-memory-survey-pattern">4. Implement Memory Survey
+    <p><strong>Implementation:</strong></p>
+    <p>Update the GSD profile system to set Claude Code’s effort level
+    alongside our own model selection:</p>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> GSDProfile {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  name<span class="op">:</span> <span class="st">&#39;quality&#39;</span> <span class="op">|</span> <span class="st">&#39;balanced&#39;</span> <span class="op">|</span> <span class="st">&#39;budget&#39;</span> <span class="op">|</span> <span class="st">&#39;inherit&#39;</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  effort<span class="op">:</span> <span class="st">&#39;high&#39;</span> <span class="op">|</span> <span class="st">&#39;medium&#39;</span> <span class="op">|</span> <span class="st">&#39;low&#39;</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  model<span class="op">:</span> <span class="st">&#39;opus&#39;</span> <span class="op">|</span> <span class="st">&#39;sonnet&#39;</span> <span class="op">|</span> <span class="st">&#39;haiku&#39;</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  verification<span class="op">:</span> <span class="st">&#39;full&#39;</span> <span class="op">|</span> <span class="st">&#39;targeted&#39;</span> <span class="op">|</span> <span class="st">&#39;spot-check&#39;</span><span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  reasoning<span class="op">:</span> <span class="st">&#39;extended&#39;</span> <span class="op">|</span> <span class="st">&#39;standard&#39;</span> <span class="op">|</span> <span class="st">&#39;minimal&#39;</span><span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> profiles<span class="op">:</span> <span class="bu">Record</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">,</span> GSDProfile<span class="op">&gt;</span> <span class="op">=</span> {</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  quality<span class="op">:</span>  { name<span class="op">:</span> <span class="st">&#39;quality&#39;</span><span class="op">,</span>  effort<span class="op">:</span> <span class="st">&#39;high&#39;</span><span class="op">,</span>   model<span class="op">:</span> <span class="st">&#39;opus&#39;</span><span class="op">,</span>   verification<span class="op">:</span> <span class="st">&#39;full&#39;</span><span class="op">,</span>       reasoning<span class="op">:</span> <span class="st">&#39;extended&#39;</span> }<span class="op">,</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  balanced<span class="op">:</span> { name<span class="op">:</span> <span class="st">&#39;balanced&#39;</span><span class="op">,</span> effort<span class="op">:</span> <span class="st">&#39;medium&#39;</span><span class="op">,</span> model<span class="op">:</span> <span class="st">&#39;sonnet&#39;</span><span class="op">,</span> verification<span class="op">:</span> <span class="st">&#39;targeted&#39;</span><span class="op">,</span>   reasoning<span class="op">:</span> <span class="st">&#39;standard&#39;</span> }<span class="op">,</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  budget<span class="op">:</span>   { name<span class="op">:</span> <span class="st">&#39;budget&#39;</span><span class="op">,</span>   effort<span class="op">:</span> <span class="st">&#39;low&#39;</span><span class="op">,</span>    model<span class="op">:</span> <span class="st">&#39;haiku&#39;</span><span class="op">,</span>  verification<span class="op">:</span> <span class="st">&#39;spot-check&#39;</span><span class="op">,</span> reasoning<span class="op">:</span> <span class="st">&#39;minimal&#39;</span> }<span class="op">,</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+    <p>When spawning an agent, set the effort parameter to match the
+    profile:</p>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// In agent spawn logic</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> profile <span class="op">=</span> <span class="fu">getActiveProfile</span>()<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> agentConfig <span class="op">=</span> {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  model<span class="op">:</span> profile<span class="op">.</span><span class="at">model</span><span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  effort<span class="op">:</span> profile<span class="op">.</span><span class="at">effort</span><span class="op">,</span>  <span class="co">// Passed to Claude Code&#39;s effort system</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... other config</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> Our profiles
+    and Claude Code’s effort system work independently. A “budget”
+    profile might spawn a Haiku agent, but the platform still applies
+    high-effort reasoning. Or a “quality” profile on Opus might have its
+    reasoning budget constrained by a low effort setting. The result is
+    unpredictable cost and quality: sometimes we pay for reasoning we do
+    not get, sometimes we get reasoning we did not pay for. Estimated
+    waste: 10-20% of token budget misallocated due to profile/effort
+    mismatch.</p>
+    <h3 id="implement-memory-survey-pattern">5. Implement Memory Survey
     Pattern</h3>
-    <p>The <code>memory_survey</code> string in the binary suggests
-    Claude Code scores memory relevance before loading. Currently our
-    MEMORY.md loads everything into context regardless of relevance.</p>
-    <p><strong>Improvement:</strong> Add a relevance scoring step to
-    memory loading: - Parse MEMORY.md index entries - Score each entry
-    against current task context (keywords, file paths, project domain)
-    - Load only entries above a relevance threshold - Log which memories
-    were loaded and why</p>
-    <p>This reduces token waste and keeps context focused.</p>
-    <h3 id="standardize-notification-types">5. Standardize Notification
+    <p><strong>Priority:</strong> P1 - High <strong>Effort:</strong> 6
+    hours (3 hours implementation, 2 hours testing, 1 hour memory
+    restructuring) <strong>Dependencies:</strong> None
+    <strong>Blocks:</strong> #10 (context-packet integration), #12
+    (active memory system)</p>
+    <p>Claude Code’s <code>memory_survey</code> string suggests the
+    platform scores memory relevance before loading content into
+    context. Our MEMORY.md currently loads everything in the HOT section
+    (~4,000 tokens) regardless of the current task. This is wasteful:
+    when working on hook implementations, the NASA mission catalog
+    details and Seattle 360 engine state are irrelevant context that
+    consumes tokens and potentially confuses the agent.</p>
+    <p><strong>The problem quantified:</strong> Our MEMORY.md HOT
+    section contains: - Trust system build plan (~400 tokens) - NASA
+    mission series state (~500 tokens) - Seattle 360 engine state (~400
+    tokens) - Key subsystems inventory (~600 tokens) - Fox Companies
+    standing instruction (~300 tokens) - Standing rules (~400 tokens) -
+    Muse team details (~300 tokens) - Various other entries (~1,100
+    tokens)</p>
+    <p>Total: approximately 4,000 tokens loaded on every session start.
+    For a hook implementation task, perhaps 800 of those tokens are
+    relevant (standing rules, key subsystems, tech stack). The remaining
+    3,200 tokens are wasted.</p>
+    <p><strong>Implementation:</strong></p>
+    <p>Add a relevance scoring step to memory loading. The scorer
+    examines the current task context (files being worked on, commands
+    being run, topics being discussed) and rates each memory entry.</p>
+    <div class="sourceCode" id="cb9"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> MemoryEntry {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  id<span class="op">:</span> <span class="dt">string</span><span class="op">;</span>           <span class="co">// e.g., &quot;trust-system&quot;, &quot;nasa-missions&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  section<span class="op">:</span> <span class="st">&#39;hot&#39;</span> <span class="op">|</span> <span class="st">&#39;warm&#39;</span> <span class="op">|</span> <span class="st">&#39;cold&#39;</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  keywords<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span>   <span class="co">// extracted from content</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  content<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  tokenCount<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> RelevanceScore {</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  entryId<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  score<span class="op">:</span> <span class="dt">number</span><span class="op">;</span>        <span class="co">// 0.0 to 1.0</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  reason<span class="op">:</span> <span class="dt">string</span><span class="op">;</span>       <span class="co">// why this score</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">scoreMemoryRelevance</span>(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  entries<span class="op">:</span> MemoryEntry[]<span class="op">,</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  taskContext<span class="op">:</span> { files<span class="op">:</span> <span class="dt">string</span>[]<span class="op">,</span> topics<span class="op">:</span> <span class="dt">string</span>[]<span class="op">,</span> commands<span class="op">:</span> <span class="dt">string</span>[] }</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>)<span class="op">:</span> RelevanceScore[] {</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> entries<span class="op">.</span><span class="fu">map</span>(entry <span class="kw">=&gt;</span> {</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> score <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> reasons<span class="op">:</span> <span class="dt">string</span>[] <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Keyword overlap with task context</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> contextWords <span class="op">=</span> [</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>      <span class="op">...</span>taskContext<span class="op">.</span><span class="at">files</span><span class="op">.</span><span class="fu">flatMap</span>(f <span class="kw">=&gt;</span> f<span class="op">.</span><span class="fu">split</span>(<span class="ss">/</span><span class="sc">[\/\-_.]</span><span class="ss">/</span>))<span class="op">,</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>      <span class="op">...</span>taskContext<span class="op">.</span><span class="at">topics</span><span class="op">,</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>      <span class="op">...</span>taskContext<span class="op">.</span><span class="at">commands</span><span class="op">.</span><span class="fu">flatMap</span>(c <span class="kw">=&gt;</span> c<span class="op">.</span><span class="fu">split</span>(<span class="ss">/</span><span class="sc">\s+</span><span class="ss">/</span>))</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    ]<span class="op">.</span><span class="fu">map</span>(w <span class="kw">=&gt;</span> w<span class="op">.</span><span class="fu">toLowerCase</span>())<span class="op">;</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> overlap <span class="op">=</span> entry<span class="op">.</span><span class="at">keywords</span><span class="op">.</span><span class="fu">filter</span>(k <span class="kw">=&gt;</span> contextWords<span class="op">.</span><span class="fu">includes</span>(k<span class="op">.</span><span class="fu">toLowerCase</span>()))<span class="op">;</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (overlap<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>      score <span class="op">+=</span> <span class="fl">0.3</span> <span class="op">*</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(overlap<span class="op">.</span><span class="at">length</span> <span class="op">/</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>      reasons<span class="op">.</span><span class="fu">push</span>(<span class="vs">`keyword overlap: </span><span class="sc">${</span>overlap<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;, &#39;</span>)<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Standing rules always load (they contain hard constraints)</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (entry<span class="op">.</span><span class="at">id</span> <span class="op">===</span> <span class="st">&#39;standing-rules&#39;</span>) {</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>      score <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>      reasons<span class="op">.</span><span class="fu">push</span>(<span class="st">&#39;standing rules: always relevant&#39;</span>)<span class="op">;</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Section boost: HOT entries get a base relevance boost</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (entry<span class="op">.</span><span class="at">section</span> <span class="op">===</span> <span class="st">&#39;hot&#39;</span>) score <span class="op">+=</span> <span class="fl">0.2</span><span class="op">;</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { entryId<span class="op">:</span> entry<span class="op">.</span><span class="at">id</span><span class="op">,</span> score<span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(score<span class="op">,</span> <span class="fl">1.0</span>)<span class="op">,</span> reason<span class="op">:</span> reasons<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;; &#39;</span>) }<span class="op">;</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <p>The loader applies a threshold (default: 0.3) and loads only
+    entries above it:</p>
+    <div class="sourceCode" id="cb10"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">loadRelevantMemories</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  entries<span class="op">:</span> MemoryEntry[]<span class="op">,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  taskContext<span class="op">:</span> TaskContext<span class="op">,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  threshold<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="fl">0.3</span><span class="op">,</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  tokenBudget<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">2000</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)<span class="op">:</span> MemoryEntry[] {</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> scores <span class="op">=</span> <span class="fu">scoreMemoryRelevance</span>(entries<span class="op">,</span> taskContext)<span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> relevant <span class="op">=</span> scores</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(s <span class="kw">=&gt;</span> s<span class="op">.</span><span class="at">score</span> <span class="op">&gt;=</span> threshold)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">score</span> <span class="op">-</span> a<span class="op">.</span><span class="at">score</span>)<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> loaded<span class="op">:</span> MemoryEntry[] <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> tokensUsed <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> score <span class="kw">of</span> relevant) {</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> entry <span class="op">=</span> entries<span class="op">.</span><span class="fu">find</span>(e <span class="kw">=&gt;</span> e<span class="op">.</span><span class="at">id</span> <span class="op">===</span> score<span class="op">.</span><span class="at">entryId</span>)<span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>entry) <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (tokensUsed <span class="op">+</span> entry<span class="op">.</span><span class="at">tokenCount</span> <span class="op">&gt;</span> tokenBudget) <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    loaded<span class="op">.</span><span class="fu">push</span>(entry)<span class="op">;</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    tokensUsed <span class="op">+=</span> entry<span class="op">.</span><span class="at">tokenCount</span><span class="op">;</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> loaded<span class="op">;</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> Every session
+    starts with 4,000 tokens of memory context, most of which is
+    irrelevant to the current task. This wastes approximately $0.06 per
+    session at Opus pricing (4K input tokens at $15/M), and more
+    importantly, it occupies context window space that could be used for
+    task-relevant information. Over 50 sessions, that is $3.00 in wasted
+    tokens and hundreds of thousands of context tokens that could have
+    been used for actual work. The waste compounds with session length:
+    in a 3-hour session with 2 compactions, the memory is re-loaded each
+    time, tripling the waste.</p>
+    <h3 id="standardize-notification-types">6. Standardize Notification
     Types</h3>
-    <p>Claude Code has 10+ notification types
+    <p><strong>Priority:</strong> P1 - High <strong>Effort:</strong> 4
+    hours (2 hours research/mapping, 2 hours implementation)
+    <strong>Dependencies:</strong> None <strong>Blocks:</strong>
+    None</p>
+    <p>Claude Code’s binary contains 567 references to the notification
+    system – more than any other hook type. The 10+ notification types
     (<code>NotificationType0</code> through
-    <code>NotificationType9</code>). Our hook system only uses a few
-    event types (PreToolUse, PostToolUse, SubagentSpawn).</p>
-    <p><strong>Improvement:</strong> Audit the full notification type
-    list and add handlers for any we’re missing. Each notification type
-    is an opportunity to inject intelligence into the platform’s
-    behavior.</p>
+    <code>NotificationType9</code>) represent a rich event model that we
+    are entirely ignoring.</p>
+    <p><strong>The problem:</strong> Each notification type is an
+    opportunity to inject intelligence into the platform’s behavior. We
+    are currently handling 6 of 14 known hook types. The notification
+    system alone contains more types than all other hooks combined. By
+    not subscribing to notifications, we are blind to system-level
+    events.</p>
+    <p><strong>Implementation:</strong></p>
+    <p>First, map the notification types by subscribing to the
+    Notification hook and logging what we receive:</p>
+    <div class="sourceCode" id="cb11"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">// notification-logger.js -- Phase 1: discovery</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> os <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;os&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> logPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-notifications-</span><span class="sc">${</span>data<span class="op">.</span><span class="at">session_id</span><span class="sc">}</span><span class="vs">.jsonl`</span>)<span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">appendFileSync</span>(logPath<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">ts</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">type</span><span class="op">:</span> data<span class="op">.</span><span class="at">notification_type</span> <span class="op">||</span> data<span class="op">.</span><span class="at">type</span><span class="op">,</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>      <span class="dt">data</span><span class="op">:</span> data</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    }) <span class="op">+</span> <span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>)<span class="op">;</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <p>After collecting notification data across several sessions, build
+    targeted handlers for the most useful types. Expected high-value
+    notification types:</p>
+    <table>
+    <colgroup>
+    <col style="width: 28%" />
+    <col style="width: 40%" />
+    <col style="width: 30%" />
+    </colgroup>
+    <thead>
+    <tr>
+    <th>Likely Type</th>
+    <th>Expected Content</th>
+    <th>Our Handler</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Context warning</td>
+    <td>Approaching context limit</td>
+    <td>Escalate the existing context-monitor with more precise
+    data</td>
+    </tr>
+    <tr>
+    <td>Update available</td>
+    <td>New Claude Code version</td>
+    <td>Log for session-awareness, warn if breaking changes
+    expected</td>
+    </tr>
+    <tr>
+    <td>Agent completion</td>
+    <td>Subagent finished work</td>
+    <td>Trigger convoy progress tracking in Gastown</td>
+    </tr>
+    <tr>
+    <td>Error notification</td>
+    <td>System-level error</td>
+    <td>Log for post-session analysis</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>settings.json addition:</strong></p>
+    <div class="sourceCode" id="cb12"><pre
+    class="sourceCode json"><code class="sourceCode json"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;Notification&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;hooks&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;command&quot;</span><span class="fu">,</span> <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;node .claude/hooks/notification-logger.js&quot;</span> <span class="fu">}</span><span class="ot">]</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> We remain
+    blind to the richest event stream in Claude Code’s architecture. The
+    567 binary references indicate the notification system is central to
+    internal operation. By not subscribing, we miss context warnings
+    (relying instead on our manual context-monitor polling), agent
+    lifecycle events (relying on filesystem observation), and system
+    events (relying on error detection after the fact). This is like
+    ignoring the Linux kernel’s netlink socket and polling
+    <code>/proc</code> instead – it works, but it is slower, less
+    reliable, and more expensive.</p>
     <h2 id="medium-term-improvements-next-2-4-weeks">Medium-Term
     Improvements (Next 2-4 Weeks)</h2>
-    <h3 id="permissiondenied-recovery">6. PermissionDenied Recovery</h3>
-    <p>When a tool call is denied, the <code>PermissionDenied</code>
-    hook fires. Currently we just get an error and retry or ask the
-    user.</p>
-    <p><strong>Improvement:</strong> Build a PermissionDenied handler in
-    the gsd-workflow skill that: - Logs the denied action and reason -
-    Suggests alternative approaches that don’t require the denied
-    permission - Learns from denials to avoid repeating them (save to
-    memory)</p>
-    <h3 id="agent-type-taxonomy-alignment">7. Agent Type Taxonomy
+    <h3 id="permissiondenied-recovery">7. PermissionDenied Recovery</h3>
+    <p><strong>Priority:</strong> P2 - Medium <strong>Effort:</strong> 3
+    hours <strong>Dependencies:</strong> None <strong>Blocks:</strong>
+    None</p>
+    <p>When a tool call is denied by the permission system (sandbox
+    restriction, user rejection, allowlist miss), the
+    <code>PermissionDenied</code> hook fires. Currently, the agent
+    simply sees an error in the conversation and tries to adapt. A hook
+    can provide structured guidance and prevent retry loops.</p>
+    <p><strong>The problem:</strong> Permission denials are not bugs –
+    they are boundary signals. But agents treat them like errors and
+    retry, sometimes repeatedly. Each retry wastes context tokens on an
+    action that will never succeed. In a multi-agent scenario, a denied
+    action can cascade: the polecat retries 3 times, each failure
+    consumes context, and the witness observes the stall but cannot
+    distinguish “denied” from “stuck.”</p>
+    <p><strong>Implementation
+    (<code>permission-recovery.js</code>):</strong></p>
+    <div class="sourceCode" id="cb13"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> os <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;os&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> tool <span class="op">=</span> data<span class="op">.</span><span class="at">tool_name</span><span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> sessionId <span class="op">=</span> data<span class="op">.</span><span class="at">session_id</span><span class="op">;</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Track denials to detect retry loops</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> denyPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-denied-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.json`</span>)<span class="op">;</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> denials <span class="op">=</span> {}<span class="op">;</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> { denials <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(fs<span class="op">.</span><span class="fu">readFileSync</span>(denyPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>))<span class="op">;</span> } <span class="cf">catch</span> {}</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> key <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>tool<span class="sc">}</span><span class="vs">:</span><span class="sc">${</span>(data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">command</span> <span class="op">||</span> data<span class="op">.</span><span class="at">tool_input</span><span class="op">?.</span><span class="at">file_path</span> <span class="op">||</span> <span class="st">&#39;&#39;</span>)<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">80</span>)<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    denials[key] <span class="op">=</span> (denials[key] <span class="op">||</span> <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">writeFileSync</span>(denyPath<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(denials))<span class="op">;</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> parts <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (denials[key] <span class="op">&gt;=</span> <span class="dv">2</span>) {</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>      parts<span class="op">.</span><span class="fu">push</span>(<span class="vs">`RETRY LOOP DETECTED: &quot;</span><span class="sc">${</span>key<span class="sc">}</span><span class="vs">&quot; has been denied </span><span class="sc">${</span>denials[key]<span class="sc">}</span><span class="vs"> times. `</span> <span class="op">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;Do NOT retry this action. Find an alternative approach or ask the user for permission.&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Tool-specific recovery guidance</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> guidance <span class="op">=</span> {</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Bash&#39;</span><span class="op">:</span> <span class="st">&#39;Shell command denied. Try: (1) use Read/Write/Grep tools instead of shell commands, &#39;</span> <span class="op">+</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>              <span class="st">&#39;(2) check if the command needs sudo, (3) verify the path is within the sandbox.&#39;</span><span class="op">,</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Write&#39;</span><span class="op">:</span> <span class="st">&#39;File write denied. Check: (1) is the path within the project directory? &#39;</span> <span class="op">+</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>               <span class="st">&#39;(2) is the file in a restricted location (.env, credentials)? (3) does the sandbox allow this path?&#39;</span><span class="op">,</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Edit&#39;</span><span class="op">:</span> <span class="st">&#39;File edit denied. Same as Write -- check path restrictions and sandbox rules.&#39;</span><span class="op">,</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Agent&#39;</span><span class="op">:</span> <span class="st">&#39;Agent spawn denied. Check: (1) is agent spawning allowed in current mode? &#39;</span> <span class="op">+</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>               <span class="st">&#39;(2) has the agent limit been reached? (3) does the agent name match an allowed pattern?&#39;</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (guidance[tool]) parts<span class="op">.</span><span class="fu">push</span>(guidance[tool])<span class="op">;</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (parts<span class="op">.</span><span class="at">length</span>) {</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> output <span class="op">=</span> {</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>        <span class="dt">hookSpecificOutput</span><span class="op">:</span> {</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>          <span class="dt">hookEventName</span><span class="op">:</span> <span class="st">&quot;PermissionDenied&quot;</span><span class="op">,</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>          <span class="dt">additionalContext</span><span class="op">:</span> parts<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;</span><span class="sc">\n\n</span><span class="st">&#39;</span>)</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>      }<span class="op">;</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>      <span class="bu">process</span><span class="op">.</span><span class="at">stdout</span><span class="op">.</span><span class="fu">write</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(output))<span class="op">;</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> Agents
+    continue to retry denied actions, burning 100-300 tokens per retry
+    on operations that will never succeed. In multi-agent scenarios,
+    this waste compounds: 4 polecats each hitting permission walls waste
+    400-1,200 tokens on retries before adapting. The witness observes
+    the stall but has no signal to distinguish “denied” from “stuck,” so
+    it sends nudges that do not help. Estimated waste: 200-500 tokens
+    per denial event, 3-5 denial events per complex session.</p>
+    <h3 id="agent-type-taxonomy-alignment">8. Agent Type Taxonomy
     Alignment</h3>
-    <p>The binary shows <code>agent:builtin</code> vs
-    <code>agent:custom</code> classification. Our 34+ agent types are
-    all “custom” from Claude Code’s perspective.</p>
-    <p><strong>Improvement:</strong> Tag our agent definitions with
-    compatibility metadata: - Which built-in agent type they extend -
-    What additional capabilities they add - Performance characteristics
-    (typical duration, token usage)</p>
-    <p>This enables better orchestration decisions — route simple tasks
-    to built-in agents, complex tasks to our specialized ones.</p>
-    <h3 id="worktree-state-management">8. Worktree State Management</h3>
-    <p>The <code>worktree-state</code> string suggests more
-    sophisticated worktree lifecycle management than we currently
-    use.</p>
-    <p><strong>Improvement:</strong> Enhance our worktree usage with: -
-    Pre-worktree state snapshot - Worktree health monitoring (detect
-    abandoned worktrees) - Automatic cleanup of merged worktrees -
-    Cross-worktree communication via our mail-async pattern</p>
-    <h3 id="context-packet-integration">9. Context-Packet
-    Integration</h3>
-    <p>If the <code>context-packet</code> pattern from gsd-build becomes
-    available, it would dramatically improve our inter-agent context
-    passing. Currently agents get full prompts; a DAG-resolved context
-    packet with token budgets would be more efficient.</p>
-    <p><strong>Improvement:</strong> Design our agent prompts to be
-    context-packet-compatible — structured sections that can be
-    independently resolved and budget-constrained.</p>
+    <p><strong>Priority:</strong> P2 - Medium <strong>Effort:</strong> 4
+    hours <strong>Dependencies:</strong> #4 (effort levels provide the
+    cost optimization foundation) <strong>Blocks:</strong> None</p>
+    <p>Claude Code classifies agents as <code>agent:builtin</code>
+    (platform-provided) vs <code>agent:custom</code> (user-defined). Our
+    34+ agent types are all “custom” from the platform’s perspective,
+    but they have dramatically different complexity requirements. A
+    simple file-reading task should use a builtin agent with low effort;
+    a complex orchestration task needs our custom mayor with high effort
+    and Opus-level reasoning.</p>
+    <p><strong>The problem:</strong> Without taxonomy alignment, we
+    cannot make optimal routing decisions. Today, we route based on the
+    task (if it needs orchestration, use a mayor; if it needs simple
+    execution, use a polecat). But we do not express to the platform
+    that the polecat needs less reasoning budget than the mayor. The
+    platform treats all custom agents the same.</p>
+    <p><strong>Implementation:</strong></p>
+    <p>Tag each agent definition with performance metadata:</p>
+    <div class="sourceCode" id="cb14"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># .claude/agents/gsd-executor.md frontmatter extension</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> gsd-executor</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> opus</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">isolation</span><span class="kw">:</span><span class="at"> worktree</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">effort</span><span class="kw">:</span><span class="at"> high</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">complexity</span><span class="kw">:</span><span class="at"> high</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">typical_duration</span><span class="kw">:</span><span class="at"> 300-600s</span><span class="co">    # 5-10 minutes</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">typical_tokens</span><span class="kw">:</span><span class="at"> 15000-30000</span><span class="co">   # input tokens per execution</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">extends</span><span class="kw">:</span><span class="at"> agent:custom</span><span class="co">         # explicit platform type mapping</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+    <p>Create a routing function that uses these tags:</p>
+    <div class="sourceCode" id="cb15"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">selectAgent</span>(task<span class="op">:</span> Task)<span class="op">:</span> AgentConfig {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (task<span class="op">.</span><span class="at">complexity</span> <span class="op">===</span> <span class="st">&#39;simple&#39;</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>task<span class="op">.</span><span class="at">requiresOrchestration</span>) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Simple tasks: use builtin agent behavior with low effort</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { type<span class="op">:</span> <span class="st">&#39;builtin&#39;</span><span class="op">,</span> effort<span class="op">:</span> <span class="st">&#39;low&#39;</span><span class="op">,</span> model<span class="op">:</span> <span class="st">&#39;haiku&#39;</span> }<span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (task<span class="op">.</span><span class="at">complexity</span> <span class="op">===</span> <span class="st">&#39;moderate&#39;</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>task<span class="op">.</span><span class="at">requiresOrchestration</span>) {</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Moderate tasks: use custom polecat with medium effort</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { type<span class="op">:</span> <span class="st">&#39;custom&#39;</span><span class="op">,</span> agent<span class="op">:</span> <span class="st">&#39;polecat-worker&#39;</span><span class="op">,</span> effort<span class="op">:</span> <span class="st">&#39;medium&#39;</span><span class="op">,</span> model<span class="op">:</span> <span class="st">&#39;sonnet&#39;</span> }<span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Complex tasks: use custom executor or mayor with high effort</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { type<span class="op">:</span> <span class="st">&#39;custom&#39;</span><span class="op">,</span> agent<span class="op">:</span> <span class="st">&#39;gsd-executor&#39;</span><span class="op">,</span> effort<span class="op">:</span> <span class="st">&#39;high&#39;</span><span class="op">,</span> model<span class="op">:</span> <span class="st">&#39;opus&#39;</span> }<span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> Every agent
+    runs at the same cost tier regardless of task complexity. Simple
+    file reads that could use Haiku at $0.25/M tokens instead use Opus
+    at $15/M tokens – a 60x cost difference. Across a convoy of 6 agents
+    where 2 are doing simple work and 4 are doing complex work,
+    misalignment wastes approximately 30% of the token budget on
+    over-provisioned simple agents.</p>
+    <h3 id="worktree-state-management">9. Worktree State Management</h3>
+    <p><strong>Priority:</strong> P2 - Medium <strong>Effort:</strong> 6
+    hours (3 hours implementation, 2 hours testing, 1 hour integration
+    with Gastown) <strong>Dependencies:</strong> None
+    <strong>Blocks:</strong> None</p>
+    <p>The <code>worktree-state</code> string in Claude Code’s binary
+    suggests more sophisticated worktree lifecycle management than we
+    currently use. Our agents use <code>isolation: worktree</code> in
+    their frontmatter, and Claude Code creates worktrees for them, but
+    we do not track worktree lifecycle – creation, health, cleanup,
+    cross-worktree communication.</p>
+    <p><strong>The problem:</strong> Abandoned worktrees accumulate.
+    After an agent crashes or a session ends abnormally, its worktree
+    persists on disk with uncommitted changes, stale state files, and a
+    detached HEAD. These zombie worktrees consume disk space (a typical
+    worktree is 50-200 MB) and can cause confusion when listing branches
+    or inspecting git state. In a project that runs multi-agent sessions
+    regularly, we can accumulate 10-20 zombie worktrees over a week.</p>
+    <p><strong>Implementation:</strong></p>
+    <p><strong>WorktreeCreate hook
+    (<code>worktree-init.js</code>):</strong></p>
+    <div class="sourceCode" id="cb16"><pre
+    class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fs <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> path <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;path&#39;</span>)<span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> os <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;os&#39;</span>)<span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> input <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">setEncoding</span>(<span class="st">&#39;utf8&#39;</span>)<span class="op">;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;data&#39;</span><span class="op">,</span> chunk <span class="kw">=&gt;</span> input <span class="op">+=</span> chunk)<span class="op">;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">process</span><span class="op">.</span><span class="at">stdin</span><span class="op">.</span><span class="fu">on</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> data <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(input)<span class="op">;</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> sessionId <span class="op">=</span> data<span class="op">.</span><span class="at">session_id</span><span class="op">;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> worktreePath <span class="op">=</span> data<span class="op">.</span><span class="at">worktree_path</span> <span class="op">||</span> data<span class="op">.</span><span class="at">cwd</span><span class="op">;</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Register worktree in session tracking</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> registryPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">tmpdir</span>()<span class="op">,</span> <span class="vs">`claude-worktrees-</span><span class="sc">${</span>sessionId<span class="sc">}</span><span class="vs">.json`</span>)<span class="op">;</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> registry <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> { registry <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">parse</span>(fs<span class="op">.</span><span class="fu">readFileSync</span>(registryPath<span class="op">,</span> <span class="st">&#39;utf8&#39;</span>))<span class="op">;</span> } <span class="cf">catch</span> {}</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    registry<span class="op">.</span><span class="fu">push</span>({</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>      <span class="dt">path</span><span class="op">:</span> worktreePath<span class="op">,</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>      <span class="dt">created</span><span class="op">:</span> <span class="bu">Date</span><span class="op">.</span><span class="fu">now</span>()<span class="op">,</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>      <span class="dt">session_id</span><span class="op">:</span> sessionId<span class="op">,</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>      <span class="dt">status</span><span class="op">:</span> <span class="st">&#39;active&#39;</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    fs<span class="op">.</span><span class="fu">writeFileSync</span>(registryPath<span class="op">,</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(registry<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> {</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">process</span><span class="op">.</span><span class="fu">exit</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+    <p><strong>Worktree cleanup script
+    (<code>worktree-cleanup.sh</code>):</strong></p>
+    <div class="sourceCode" id="cb17"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Run periodically or on SessionEnd to clean up abandoned worktrees</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="va">WORKTREE_DIR</span><span class="op">=</span><span class="st">&quot;.claude/worktrees&quot;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="va">MAX_AGE_HOURS</span><span class="op">=</span>24</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-d</span> <span class="st">&quot;</span><span class="va">$WORKTREE_DIR</span><span class="st">&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> wt <span class="kw">in</span> <span class="st">&quot;</span><span class="va">$WORKTREE_DIR</span><span class="st">&quot;</span>/<span class="pp">*</span>/<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if worktree has uncommitted changes</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">git</span> <span class="at">-C</span> <span class="st">&quot;</span><span class="va">$wt</span><span class="st">&quot;</span> status <span class="at">--short</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-q</span> <span class="st">&#39;^&#39;</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="st">&quot;WARN: Worktree </span><span class="va">$wt</span><span class="st"> has uncommitted changes -- skipping cleanup&quot;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>      <span class="cf">continue</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check age</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">find</span> <span class="st">&quot;</span><span class="va">$wt</span><span class="st">&quot;</span> <span class="at">-maxdepth</span> 0 <span class="at">-mmin</span> +<span class="va">$((MAX_AGE_HOURS</span> <span class="op">*</span> <span class="dv">60</span><span class="va">))</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-q</span> .<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="st">&quot;Cleaning up stale worktree: </span><span class="va">$wt</span><span class="st">&quot;</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">git</span> worktree remove <span class="st">&quot;</span><span class="va">$wt</span><span class="st">&quot;</span> <span class="at">--force</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">done</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> Zombie
+    worktrees accumulate at a rate of 2-5 per week during active
+    multi-agent development. Over a month, this is 8-20 abandoned
+    worktrees consuming 0.4-4 GB of disk space, each with a stale branch
+    that clutters <code>git branch</code> output. More critically,
+    orphaned worktrees with uncommitted changes represent lost work that
+    could have been recovered if the worktree was properly closed.</p>
     <h2 id="architectural-insights-for-long-term">Architectural Insights
     for Long-Term</h2>
-    <h3 id="the-skill-lifecycle">10. The Skill Lifecycle</h3>
+    <h3 id="context-packet-integration">10. Context-Packet
+    Integration</h3>
+    <p><strong>Priority:</strong> P3 - Low <strong>Effort:</strong> 8
+    hours <strong>Dependencies:</strong> #5 (memory survey provides the
+    relevance scoring foundation) <strong>Blocks:</strong> None</p>
+    <p>If the <code>context-packet</code> pattern (from gsd-build)
+    evolves, it would dramatically improve inter-agent context passing.
+    Currently, agents receive full prompts with all context included; a
+    DAG-resolved context packet with token budgets would allow
+    selective, budget-constrained context loading.</p>
+    <p><strong>Implementation:</strong></p>
+    <p>Design agent prompts to be context-packet-compatible – structured
+    sections that can be independently resolved and
+    budget-constrained:</p>
+    <div class="sourceCode" id="cb18"><pre
+    class="sourceCode typescript"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> ContextPacket {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  sections<span class="op">:</span> ContextSection[]<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  totalBudget<span class="op">:</span> <span class="dt">number</span><span class="op">;</span>          <span class="co">// max tokens for the entire packet</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  resolvedTokens<span class="op">:</span> <span class="dt">number</span><span class="op">;</span>       <span class="co">// tokens used after resolution</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> ContextSection {</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  id<span class="op">:</span> <span class="dt">string</span><span class="op">;</span>                   <span class="co">// e.g., &quot;project-state&quot;, &quot;task-definition&quot;, &quot;memory&quot;</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  priority<span class="op">:</span> <span class="dt">number</span><span class="op">;</span>             <span class="co">// higher = loaded first</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  content<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  tokenCount<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  dependencies<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span>       <span class="co">// sections that must load before this one</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  optional<span class="op">:</span> <span class="dt">boolean</span><span class="op">;</span>            <span class="co">// can be dropped if budget exceeded</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">resolveContextPacket</span>(sections<span class="op">:</span> ContextSection[]<span class="op">,</span> budget<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> ContextPacket {</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Topological sort by dependencies</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> sorted <span class="op">=</span> <span class="fu">topologicalSort</span>(sections)<span class="op">;</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> loaded<span class="op">:</span> ContextSection[] <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> used <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">const</span> section <span class="kw">of</span> sorted) {</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (used <span class="op">+</span> section<span class="op">.</span><span class="at">tokenCount</span> <span class="op">&gt;</span> budget <span class="op">&amp;&amp;</span> section<span class="op">.</span><span class="at">optional</span>) <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>    loaded<span class="op">.</span><span class="fu">push</span>(section)<span class="op">;</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>    used <span class="op">+=</span> section<span class="op">.</span><span class="at">tokenCount</span><span class="op">;</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { sections<span class="op">:</span> loaded<span class="op">,</span> totalBudget<span class="op">:</span> budget<span class="op">,</span> resolvedTokens<span class="op">:</span> used }<span class="op">;</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> No immediate
+    risk. This is future-proofing for a pattern that may or may not
+    become platform-supported. Current agent context passing works; it
+    is just less efficient than it could be. The memory survey (#5)
+    provides most of the benefit for single-agent scenarios. Context
+    packets would primarily help in multi-agent scenarios where agents
+    pass context between each other.</p>
+    <h3 id="skill-lifecycle-management">11. Skill Lifecycle
+    Management</h3>
+    <p><strong>Priority:</strong> P3 - Low <strong>Effort:</strong> 4
+    hours <strong>Dependencies:</strong> None <strong>Blocks:</strong>
+    None</p>
     <p>The binary references <code>skills-2025-10-02</code>, suggesting
-    skills have versioned activation dates. This implies: - Skills can
-    be time-gated (activate after a date) - Skills have a lifecycle
-    (created → active → deprecated → removed) - The platform may
-    eventually support skill versioning</p>
-    <p><strong>Our response:</strong> Add <code>version</code> and
-    <code>created</code> fields to our skill frontmatter (some already
-    have these from the agentskills.io extensions). Ensure all 34 skills
-    are versioned.</p>
-    <h3 id="team-architecture">11. Team Architecture</h3>
-    <p>The <code>teams</code> system with
-    <code>team_name is required for TeamCreate</code> suggests teams are
-    first-class entities, not just groupings. Teams may have: - Shared
-    context - Collective permissions - Team-level state</p>
-    <p><strong>Our response:</strong> Our sc-dev-team, uc-lab, and
-    mayor-coordinator patterns already implement team-like behavior.
-    Align our implementation with whatever the platform ships, so our
-    teams compose with built-in teams.</p>
-    <h3 id="memory-as-a-first-class-system">12. Memory as a First-Class
-    System</h3>
-    <p>The multiple memory-related strings (<code>memory-command</code>,
-    <code>memory-select</code>, <code>memory_survey</code>,
-    <code>memory_files_completed</code>,
-    <code>memory_files_started</code>, <code>memory_saved</code>) reveal
-    memory is a sophisticated subsystem, not just a file.</p>
-    <p><strong>Our response:</strong> Our memory system (MEMORY.md +
-    individual files) is well-structured but passive. The platform’s
-    memory appears to be active — tracking which memories are accessed,
-    surveying for relevance, and managing lifecycle. We should evolve
-    toward this.</p>
+    skills have versioned activation dates. This implies a lifecycle:
+    created -&gt; active -&gt; deprecated -&gt; removed.</p>
+    <p><strong>Implementation:</strong></p>
+    <p>Add lifecycle fields to skill frontmatter:</p>
+    <div class="sourceCode" id="cb19"><pre
+    class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> gupp-propulsion</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> Interrupt controller for proactive agent execution</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.2.0</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">created</span><span class="kw">:</span><span class="at"> 2026-02-15</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">status</span><span class="kw">:</span><span class="at"> active</span><span class="co">              # active | deprecated | experimental</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">deprecated_by</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span><span class="co">         # replacement skill name, if deprecated</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="fu">min_platform_version</span><span class="kw">:</span><span class="at"> </span><span class="fl">2.1.0</span><span class="co"> # minimum Claude Code version</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+    <p>Add a skill inventory command that reports lifecycle status:</p>
+    <div class="sourceCode" id="cb20"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># gsd skill-inventory</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Output:</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Active (32): gupp-propulsion@1.2.0, runtime-hal@1.1.0, ...</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Deprecated (1): old-dispatch@0.9.0 (replaced by sling-dispatch@1.0.0)</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Experimental (1): context-packet@0.1.0</span></span></code></pre></div>
+    <p><strong>What happens if we do NOT do this:</strong> Skills
+    accumulate without versioning or lifecycle management. We cannot
+    safely deprecate a skill because nothing tracks which other skills
+    or agents depend on it. We cannot safely upgrade because there is no
+    version to compare against. With 34 skills, this is manageable
+    through human memory. At 50+ skills, it becomes a maintenance
+    burden.</p>
+    <h3 id="memory-as-a-first-class-active-system">12. Memory as a
+    First-Class Active System</h3>
+    <p><strong>Priority:</strong> P3 - Low <strong>Effort:</strong> 12
+    hours (6 hours design, 4 hours implementation, 2 hours testing)
+    <strong>Dependencies:</strong> #5 (memory survey provides the
+    scoring foundation for active operations) <strong>Blocks:</strong>
+    None</p>
+    <p>Claude Code’s source reveals memory as a sophisticated subsystem:
+    <code>memory-command</code>, <code>memory-select</code>,
+    <code>memory_survey</code>, <code>memory_files_completed</code>,
+    <code>memory_files_started</code>, <code>memory_saved</code>. These
+    strings indicate memory is not just a file – it is an active system
+    that tracks access patterns, scores relevance, manages lifecycle,
+    and consolidates knowledge.</p>
+    <p>Our MEMORY.md is well-structured but passive. It is a file that
+    the session-start hook loads. It does not track which memories are
+    accessed during a session, it does not score relevance dynamically,
+    it does not consolidate observations into structured knowledge, and
+    it does not prune stale entries.</p>
+    <p><strong>Implementation (phased):</strong></p>
+    <p><strong>Phase A: Access tracking</strong> Track which memory
+    entries are referenced during a session. After SessionEnd, write
+    access counts to a metadata file. Entries that are never accessed
+    across 10+ sessions are candidates for demotion from HOT to WARM, or
+    WARM to COLD.</p>
+    <p><strong>Phase B: Dynamic relevance</strong> Combine the memory
+    survey (#5) with access tracking to score memories by both content
+    relevance and historical access frequency. A memory that is
+    content-relevant AND frequently accessed gets the highest score. A
+    memory that is content-relevant but never accessed may have poor
+    keywords (update the keywords). A memory that is frequently accessed
+    but not content-relevant may be too broadly tagged.</p>
+    <p><strong>Phase C: Consolidation (inspired by KAIROS
+    autoDream)</strong> At the end of each session, run a consolidation
+    pass: 1. Merge observations that say the same thing in different
+    words 2. Remove contradictions (newer overrides older) 3. Convert
+    raw observations (“we did X in session Y”) into structured facts (“X
+    is the established pattern”) 4. Promote frequently-referenced WARM
+    entries to HOT 5. Demote never-referenced HOT entries to WARM</p>
+    <p>This is the most ambitious improvement on the list. It moves our
+    memory system from a static document toward an active knowledge base
+    that improves with every session.</p>
+    <p><strong>What happens if we do NOT do this:</strong> Memory
+    remains a static document that grows monotonically. Every new
+    project, decision, and pattern gets added to MEMORY.md, and nothing
+    gets removed or consolidated. The token cost of memory loading
+    increases linearly with project history. At our current rate of
+    memory accumulation, MEMORY.md will double in size within 6 months,
+    from ~4,000 tokens to ~8,000 tokens. Without relevance scoring (#5)
+    or consolidation (#12), this means every session pays an increasing
+    tax for loading an increasingly irrelevant memory corpus.</p>
+    <h2 id="dependency-graph">Dependency Graph</h2>
+    <pre><code>#3 (Dead Cleanup)     #1 (PostCompact)     #2 (FileChanged)
+         |                     |                    |
+         v                     v                    v
+#4 (Effort Levels)    #5 (Memory Survey)   #6 (Notifications)
+         |                     |
+         v                     v
+#8 (Agent Taxonomy)   #10 (Context Packet)
+                               |
+                               v
+                      #12 (Active Memory)
+
+#7 (PermissionDenied)  -- independent
+#9 (Worktree State)    -- independent
+#11 (Skill Lifecycle)  -- independent</code></pre>
+    <p>The critical path is: <strong>3 -&gt; 1 -&gt; 5 -&gt; 12</strong>
+    (cleanup -&gt; compaction recovery -&gt; memory scoring -&gt; active
+    memory). Each step builds on the previous: you cannot score memory
+    relevance without loading memory efficiently, you cannot consolidate
+    memory without scoring it, and you cannot trust any of it without
+    cleaning up the noise first.</p>
+    <p>The secondary path is: <strong>4 -&gt; 8</strong> (effort
+    alignment -&gt; agent routing). These are smaller improvements that
+    compose well: once you know the effort level, you can make better
+    agent selection decisions.</p>
+    <p>The independent improvements (7, 9, 11) can be done in any order,
+    at any time, without blocking or being blocked by the critical
+    path.</p>
     <h2 id="what-this-all-means">What This All Means</h2>
     <p>The architecture analysis reveals that gsd-skill-creator and
     Claude Code are evolving in the same direction. The platform is
     building more sophisticated skills, agents, teams, memory, and
-    orchestration — exactly the features we’ve been extending.</p>
-    <p>Our strategy should be: <strong>stay one step ahead on the
+    orchestration – exactly the features we have been extending. The 12
+    improvements in this document are not speculative enhancements –
+    they are concrete responses to specific gaps identified through
+    source-level analysis of the platform we build on.</p>
+    <p>Our strategy remains: <strong>stay one step ahead on the
     patterns, and align immediately when the platform catches
-    up.</strong> This means: - Continue innovating (GUPP, DACP, trust,
-    chipsets) - But build innovations as extensions of platform
-    features, not replacements - When the platform ships a feature we’ve
-    built (e.g., teams), adapt our implementation to use theirs as the
-    foundation - Share our patterns back (Skills-and-Agents project) so
-    the ecosystem benefits</p>
-    <p>The code release didn’t create a threat — it confirmed that our
-    direction is right. Now we execute faster and share more openly.</p>
+    up.</strong></p>
+    <p>This means: - Continue innovating where the platform has gaps
+    (GUPP, DACP, trust, chipsets, convoy) - Build innovations as
+    extensions of platform features, not replacements - When the
+    platform ships a feature we have built (teams, effort levels), adapt
+    our implementation to use theirs as the foundation - Share our
+    patterns back (Skills-and-Agents project) so the ecosystem benefits
+    - Execute the improvements in priority order, starting with the P0
+    items that address real quality issues today</p>
+    <p>The code release did not create a threat – it confirmed that our
+    direction is right and gave us a specific list of things to improve.
+    Now we execute.</p>
     <div class="nav">
         <a href="../index.html">← Back to OOPS Index</a> ·
         Published 2026-03-31 · PNW Research Series ·
