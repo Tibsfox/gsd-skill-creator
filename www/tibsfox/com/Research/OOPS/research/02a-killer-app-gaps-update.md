@@ -169,6 +169,14 @@ The growing doc count (506 files) makes this gap worse over time. But it's a lux
 - Convention circles (fursuit makers, animators)
 - Twitter/X via @TibsDreams
 
+**Distribution channels already in place:**
+- **GitHub** — Tibsfox/gsd-skill-creator (open source, release tags, release notes)
+- **Twitter/X** — @TibsDreams (309+ posts, Chromatic Threshold)
+- **Bluesky** — established presence
+- **tibsfox.com** — live research site, BLN project page, PDF download
+- **Discord** — GSD community server (/gsd:join-discord)
+- **tibsfox.com** links out to all socials — serves as the hub connecting all channels
+
 This is a different community than the Claude Code developer community targeted by the original gap analysis. But it may be a BETTER initial community:
 
 1. They have an immediate need (learn Blender for furry art)
