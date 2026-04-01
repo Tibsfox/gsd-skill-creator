@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Degree 67&deg; &mdash; Short-tailed Weasel &mdash; The Sound of Puget Sound</title>
+  <link rel="stylesheet" href="../../../../brand.css">
+  <link rel="stylesheet" href="../../../style.css">
+  <style>
+    /* Release-specific layout */
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.25rem;
+    }
+    .degree-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--puget-teal);
+      color: #E0F2F1;
+      font-size: 2.5rem;
+      font-weight: 700;
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+      font-family: 'Georgia', serif;
+    }
+    .release-title-block h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--earth-brown);
+      border: none;
+      padding: 0;
+    }
+    .release-title-block .scientific {
+      font-style: italic;
+      color: var(--page-text-light);
+      font-size: 1.05rem;
+      font-family: 'Georgia', serif;
+    }
+    .release-subtitle {
+      font-size: 0.95rem;
+      color: var(--puget-mid);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Stats sidebar */
+    .release-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .release-grid { grid-template-columns: 1fr; }
+    }
+    .sidebar .stat-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .sidebar .stat-card .stat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+      margin-bottom: 0.15rem;
+    }
+    .sidebar .stat-card .stat-value {
+      font-size: 1.15rem;
+      color: var(--puget-teal);
+      font-weight: 600;
+    }
+    .sidebar .stat-card .stat-detail {
+      font-size: 0.78rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--puget-teal);
+      margin: 1.5rem 0 0.5rem;
+      font-family: system-ui, sans-serif;
+    }
+    .sidebar h3:first-child { margin-top: 0; }
+
+    /* Mustelidae quintet card */
+    .quintet-card {
+      background: linear-gradient(135deg, #1B2631 0%, #2C3E50 60%, #34495E 100%);
+      border: 3px solid #0E1A24;
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin: 1.5rem 0;
+      color: #ECF0F1;
+    }
+    .quintet-card h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #BDC3C7;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .quintet-card p {
+      color: #ECF0F1;
+    }
+    .quintet-card strong {
+      color: #AEB6BF;
+    }
+
+    /* Bark/chitter acoustic card */
+    .bark-card {
+      background: linear-gradient(135deg, #4A0E0E 0%, #7B1A1A 100%);
+      border: 2px solid #3B0000;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #FDEDEC;
+    }
+    .bark-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #F5B7B1;
+    }
+    .bark-card p {
+      color: #FDEDEC;
+    }
+    .bark-card strong {
+      color: #E74C3C;
+    }
+
+    /* Winter coat card */
+    .ermine-card {
+      background: linear-gradient(135deg, #ECEFF1 0%, #CFD8DC 60%, #B0BEC5 100%);
+      border: 2px solid #90A4AE;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #263238;
+    }
+    .ermine-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #37474F;
+    }
+    .ermine-card p {
+      color: #263238;
+    }
+    .ermine-card strong {
+      color: #455A64;
+    }
+
+    /* Edge habitat card */
+    .edge-card {
+      background: linear-gradient(135deg, #1A3C1A 0%, #558B2F 60%, #7CB342 100%);
+      border: 2px solid #33691E;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F1F8E9;
+    }
+    .edge-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #DCEDC8;
+    }
+    .edge-card p {
+      color: #F1F8E9;
+    }
+    .edge-card strong {
+      color: #C5E1A5;
+    }
+
+    /* Chris Walla card */
+    .walla-card {
+      background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+      border: 2px solid #311B92;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #F3E5F5;
+    }
+    .walla-card h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+      color: #CE93D8;
+    }
+    .walla-card p {
+      color: #F3E5F5;
+    }
+    .walla-card strong {
+      color: #BA68C8;
+    }
+
+    /* Acoustic theory visualization */
+    .acoustic-map {
+      background: var(--puget-light);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .acoustic-map h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+    .theory-node {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(0,105,92,0.12);
+    }
+    .theory-node:last-child { border-bottom: none; }
+    .theory-icon {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      color: white;
+      font-weight: 700;
+    }
+    .theory-icon.quintet { background: #1B2631; }
+    .theory-icon.bark { background: #7B1A1A; }
+    .theory-icon.ermine { background: #546E7A; }
+    .theory-icon.edge { background: #558B2F; }
+    .theory-icon.hypercarnivore { background: #B71C1C; }
+    .theory-icon.surplus { background: #4E342E; }
+    .theory-icon.walla { background: #6A1B9A; }
+    .theory-icon.carnivore { background: #B71C1C; }
+    .theory-icon.mammal { background: #5D4037; }
+    .theory-icon.csv { background: #37474F; }
+    .theory-icon.fisher-link { background: #263238; }
+    .theory-icon.mink-link { background: #455A64; }
+    .theory-icon.otter-link { background: #01579B; }
+    .theory-icon.marten-link { background: #3E2723; }
+    .theory-icon.owl-link { background: #263238; }
+    .theory-content h4 {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--earth-brown);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-content p {
+      margin: 0.15rem 0 0;
+      font-size: 0.85rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+    .theory-level {
+      display: inline-block;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1rem 0.45rem;
+      border-radius: 3px;
+      font-family: system-ui, sans-serif;
+      font-weight: 600;
+    }
+    .theory-level.foundational { background: var(--puget-light); color: var(--puget-teal); }
+    .theory-level.landmark { background: #FFEBEE; color: #B71C1C; }
+    .theory-level.intermediate { background: #FFF3E0; color: #E65100; }
+
+    /* Content sections */
+    .content-body h2 {
+      margin-top: 2rem;
+      font-size: 1.35rem;
+    }
+    .content-body h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .content-body p {
+      line-height: 1.75;
+      margin: 0.75rem 0;
+    }
+    .content-body blockquote {
+      font-style: italic;
+    }
+
+    /* Frequency table */
+    .freq-table { margin: 1rem 0; width: 100%; }
+    .freq-table th { font-size: 0.82rem; }
+    .freq-table td { font-size: 0.88rem; }
+
+    /* Cross-reference links */
+    .xref-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .xref-card {
+      background: white;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+    }
+    .xref-card strong {
+      color: var(--puget-teal);
+      font-size: 0.88rem;
+    }
+    .xref-card p {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      color: var(--page-text-light);
+      font-family: system-ui, sans-serif;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+    }
+
+    /* Sources list */
+    .sources { font-size: 0.88rem; line-height: 1.6; }
+    .sources li { margin-bottom: 0.4rem; }
+  </style>
+</head>
+<body class="project-sps">
+  <header>
+    <h1>The Sound of Puget Sound</h1>
+    <div class="subtitle">Part B: PNW 360 Species &mdash; Release Engine</div>
+    <nav>
+      <a href="../../../index.html">SPS Overview</a>
+      <a href="../../../page.html?doc=PART-B/01-vision-doc-partB">Part B Vision</a>
+      <a href="../../../page.html?doc=PART-B/02-research-reference-partB">Part B Research</a>
+      <a href="../../../page.html?doc=PART-B/03-milestone-spec-partB">Part B Milestone</a>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back-link" href="../">&larr; All Releases</a>
+
+    <!-- Release Header -->
+    <div class="release-header">
+      <div class="degree-badge">67&deg;</div>
+      <div class="release-title-block">
+        <h2>Short-tailed Weasel</h2>
+        <div class="scientific">Mustela erminea</div>
+      </div>
+    </div>
+    <div class="release-subtitle">
+      shrill bark / chitter &mdash; meadow-forest edge predator, FIFTH CONSECUTIVE MUSTELIDAE (the Mustelidae QUINTET: Otter 63, Mink 64, Marten 65, Fisher 66, Weasel 67), sixth carnivore, eighth mammalian entry, sixth mammalian species, first edge-habitat species, only species with seasonal color change, smallest true carnivore in the engine, E=4, year-round resident, meadow-forest edge
+    </div>
+
+    <div class="release-grid">
+      <!-- Main Content -->
+      <div class="content-body">
+
+        <!-- Mustelidae Quintet Card -->
+        <div class="quintet-card">
+          <h3>The Mustelidae Quintet &mdash; Five Consecutive (63&ndash;67)</h3>
+          <p>Five consecutive Mustelidae. The engine&rsquo;s deepest family exploration extends beyond the quartet. <strong>Otter (63): river/estuary, 5&ndash;14 kg, social</strong>. <strong>Mink (64): creek bank, 0.5&ndash;1.5 kg, solitary</strong>. <strong>Marten (65): old-growth canopy, 0.5&ndash;1.2 kg, arboreal</strong>. <strong>Fisher (66): dense forest, 2&ndash;6 kg, terrestrial</strong>. <strong>Weasel (67): meadow-forest edge, 150&ndash;350g, terrestrial</strong>. Five habitats, five sizes, five sounds. The quintet matches the Swallow Quintet (26&ndash;30) and the Warbler Quintet (14&ndash;17, 20).</p>
+        </div>
+
+        <!-- Bark/Chitter Acoustic Card -->
+        <div class="bark-card">
+          <h3>The 68th Acoustic Element: The Shrill Bark / Chitter</h3>
+          <p>A <strong>shrill, aggressive bark</strong> combined with rapid <strong>chittering</strong>. E=4. Higher-pitched and more frantic than the Mink&rsquo;s chitter (degree 64), matching the weasel&rsquo;s smaller body and higher metabolic rate. Produced during territorial encounters, alarm, and aggressive defense. The bark is explosive and startling &mdash; a sound disproportionate to the animal&rsquo;s size, <strong>a 200-gram predator screaming defiance at the world</strong>.</p>
+        </div>
+
+        <!-- Ermine Winter Coat Card -->
+        <div class="ermine-card">
+          <h3>The Ermine Transformation &mdash; Seasonal Color Change</h3>
+          <p>The Short-tailed Weasel is the <strong>only species in the engine with a seasonal color change</strong>. In summer: rich brown dorsal fur with white underparts. In winter: <strong>entirely white</strong> except for the diagnostic black tail tip. The white winter coat = <strong>ermine</strong>, historically the fur of royalty, used in coronation robes and heraldic tradition. The black tail tip persists year-round &mdash; a fixed marker amid radical seasonal transformation.</p>
+        </div>
+
+        <!-- Edge Habitat Card -->
+        <div class="edge-card">
+          <h3>Meadow-Forest Edge &mdash; First Edge-Habitat Species</h3>
+          <p>The weasel occupies the <strong>boundary between open and closed habitats</strong> &mdash; meadow edges, field margins, brushy clearings alongside forest. Not aquatic (Otter, Mink), not deep forest (Marten, Fisher), not open grassland. The <strong>EDGE</strong> itself. This is the engine&rsquo;s first edge-habitat species &mdash; a predator defined by the transition zone between ecosystems rather than by either ecosystem alone.</p>
+        </div>
+
+        <!-- Chris Walla Card -->
+        <div class="walla-card">
+          <h3>The Chris Walla Parallel</h3>
+          <p>Both <strong>precise and efficient</strong>. Both <strong>devastating relative to their size</strong>. Walla&rsquo;s production style is lean, exacting, every element in its place &mdash; the weasel kills with surgical precision at 200 grams. Both are <strong>departures</strong>: Walla departed Death Cab for Cutie, the weasel is the departed mustelid &mdash; the smallest one that left the family sequence and moved to the edge. Walla E=3, Weasel E=4 &mdash; both are understated forces that achieve outsized impact.</p>
+        </div>
+
+        <h2>The Sound: Shrill Bark / Chitter (68th Acoustic Element)</h2>
+        <p><strong>The bark:</strong> A sharp, shrill, explosive vocalization &mdash; higher-pitched than the Mink&rsquo;s chitter (degree 64), more frantic and aggressive. E=4. Produced during territorial confrontations, when cornered, and during encounters with prey that fights back. The bark is the weasel&rsquo;s alarm and its war cry, indistinguishable in function.</p>
+        <p><strong>The chitter:</strong> Rapid, staccato chittering that accompanies the bark, similar to the Mink&rsquo;s chitter (degree 64) but higher-pitched and faster. The smaller body produces higher frequencies &mdash; a 150-gram weasel chatters faster than a 1-kilogram mink because every metabolic process runs hotter.</p>
+        <p><strong>Other vocalizations:</strong> Squealing (distress), trilling (reported during mating interactions), hissing (close-range defense). The bark and chitter dominate the weasel&rsquo;s vocal identity &mdash; aggressive, shrill, and utterly disproportionate to the animal&rsquo;s size.</p>
+        <p><strong>Acoustic contrast within the quintet:</strong> The Otter chuffs socially (degree 63). The Mink chatters in alarm (64). The Marten screeches from the canopy (65). The Fisher screams from deep forest (66). The Weasel barks and chatters from the meadow edge (67). Five mustelid voices, five habitats, five acoustic strategies &mdash; from social warmth to solitary fury.</p>
+
+        <h2>Physical Description: The Smallest True Carnivore</h2>
+        <p><strong>Size:</strong> 170&ndash;330 mm total length, 150&ndash;350 g. Males average about twice the weight of females. The smallest true carnivore in the engine &mdash; smaller than the Mink (0.5&ndash;1.5 kg), dramatically smaller than the Fisher (2&ndash;6 kg). A weasel weighs less than a can of soda.</p>
+        <p><strong>Body form:</strong> Extremely elongated, tubular body with short legs &mdash; the classic weasel shape, evolved to pursue rodents into their burrows. The body-to-leg ratio is the most extreme of any mustelid in the engine. The weasel is essentially a tube of muscle with teeth.</p>
+        <p><strong>Summer fur:</strong> Rich chocolate brown dorsal surface with sharply demarcated white to cream underparts. The color boundary is distinct and straight &mdash; a clean line dividing dark back from white belly.</p>
+        <p><strong>Winter fur:</strong> Entirely white except for the black tail tip. The molt occurs in autumn, triggered by photoperiod. In the PNW, the completeness of the winter molt varies with latitude and elevation &mdash; coastal lowland weasels may remain partially brown, while mountain weasels turn fully white. The black tail tip persists year-round and is thought to serve as a predator-deflection decoy (raptors strike at the dark tip instead of the body).</p>
+        <p><strong>Tail:</strong> Short (hence &ldquo;Short-tailed Weasel&rdquo;), approximately one-third of body length. Distinguished from the Long-tailed Weasel by the shorter tail and smaller overall size. The black tail tip is always present, in both summer and winter pelage.</p>
+        <p><strong>Taxonomy note:</strong> <em>Mustela erminea</em>. Also known as Stoat (British usage) or Ermine (winter coat name). The genus <em>Mustela</em> is the original mustelid genus &mdash; the only member of the quintet that retains the root genus of the entire family Mustelidae. <em>Mustela</em> from Latin <em>mustela</em>, weasel.</p>
+
+        <h2>Diet: The Hypercarnivore</h2>
+        <p><strong>Metabolic demand:</strong> The weasel must eat <strong>40&ndash;60% of its body weight daily</strong>. Its extremely high surface-area-to-volume ratio (the elongated body loses heat rapidly) drives one of the highest mass-specific metabolic rates of any mammal. A 200-gram weasel needs 80&ndash;120 grams of food per day &mdash; a relentless caloric demand that makes the weasel one of the most driven predators in the PNW.</p>
+        <p><strong>Primary prey:</strong> Voles, mice, shrews, and other small rodents. The elongated body is specifically adapted to enter rodent burrows &mdash; the weasel follows its prey underground, a pursuit strategy no other predator in the engine can match.</p>
+        <p><strong>Surplus killing:</strong> Like the Mink (degree 64), weasels are documented surplus killers &mdash; killing more prey than immediately needed, caching the excess. This behavior is driven by the extreme metabolic pressure: when prey is available, the weasel kills everything it can because it cannot afford to miss a meal. Two surplus killers in the quintet (Mink 64, Weasel 67), arising from different metabolic pressures.</p>
+        <p><strong>Prey size:</strong> Can take prey up to several times its own body weight, including rabbits, ground-nesting birds, and eggs. The killing technique is the mustelid standard: a bite to the base of the skull, severing the spinal cord. Lethal precision at any scale the weasel can physically access.</p>
+
+        <h2>Conservation: Resident and Resilient</h2>
+        <p><strong>Status:</strong> Least Concern (IUCN). Common and widespread across Washington State. Not endangered, not threatened, not reintroduced. The weasel is the first mustelid in the quintet that does NOT have a conservation crisis &mdash; no fur trade extirpation (like Fisher), no invasive introduction (like Mink), no old-growth dependency (like Marten).</p>
+        <p><strong>Habitat tolerance:</strong> The meadow-forest edge is a common, widespread habitat type. Unlike the dense-forest specialist Fisher or the old-growth-dependent Marten, the weasel thrives in the interface habitats created by agriculture, logging, and suburban development. Edge habitat INCREASES when forest is fragmented &mdash; the same process that destroys Marten and Fisher habitat creates weasel habitat.</p>
+        <p><strong>Ecological irony:</strong> The five consecutive mustelids trace a conservation gradient: the Otter recovered, the Mink is invasive elsewhere, the Marten is threatened by old-growth loss, the Fisher was extirpated and reintroduced, and the Weasel is common and thriving. The smallest and simplest member of the quintet is the most resilient.</p>
+
+        <h2>The Mustelidae Quintet: Habitat Gradient</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Degree</th><th>Species</th><th>Habitat</th><th>Size</th><th>Sound</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>63</td><td>River Otter</td><td>River/estuary</td><td>5&ndash;14 kg</td><td>Social chuff (6 types)</td></tr>
+            <tr><td>64</td><td>Mink</td><td>Creek bank</td><td>0.5&ndash;1.5 kg</td><td>Shrill chitter alarm</td></tr>
+            <tr><td>65</td><td>American Marten</td><td>Old-growth canopy</td><td>0.5&ndash;1.2 kg</td><td>High-pitched screech</td></tr>
+            <tr><td>66</td><td>Fisher</td><td>Dense forest</td><td>2&ndash;6 kg</td><td>Loud scream (rare)</td></tr>
+            <tr><td><strong>67</strong></td><td><strong>Short-tailed Weasel</strong></td><td><strong>Meadow-forest edge</strong></td><td><strong>150&ndash;350 g</strong></td><td><strong>Shrill bark / chitter</strong></td></tr>
+          </tbody>
+        </table>
+        <p>Five species, five habitats, five acoustic elements. River &rarr; creek margin &rarr; canopy &rarr; deep forest floor &rarr; <strong>meadow-forest edge</strong>. The quintet traces a complete gradient from water through forest interior and back out to the edge. The weasel breaks the inward spiral &mdash; the first mustelid that lives in the OPEN, at the boundary.</p>
+
+        <h2>Family Tracker After Degree 67</h2>
+        <table class="freq-table">
+          <thead>
+            <tr><th>Family</th><th>Degrees</th><th>Count</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Parulidae</strong></td><td>14, 15, 16, 17, 20, 38&ndash;42</td><td><strong>10</strong></td></tr>
+            <tr><td>Passerellidae</td><td>45&ndash;49</td><td>5 (streak complete)</td></tr>
+            <tr><td>Hirundinidae</td><td>26&ndash;30</td><td>5</td></tr>
+            <tr><td>Fringillidae</td><td>12, 33, 34, 43, 44</td><td>5</td></tr>
+            <tr><td>Turdidae</td><td>2, 7, 18, 19, 25</td><td>5</td></tr>
+            <tr><td><strong>Mustelidae</strong></td><td><strong>63, 64, 65, 66, 67</strong></td><td><strong>5 (QUINTET)</strong></td></tr>
+            <tr><td>Trochilidae</td><td>35, 36, 37</td><td>3</td></tr>
+            <tr><td>Paridae</td><td>3, 9, 50</td><td>3 (all <em>Poecile</em>)</td></tr>
+            <tr><td>Picidae</td><td>21, 22, 54</td><td>3</td></tr>
+            <tr><td>Bombycillidae</td><td>31, 32</td><td>2</td></tr>
+            <tr><td>Troglodytidae</td><td>1, 55</td><td>2</td></tr>
+            <tr><td>Anatidae</td><td>58, 59</td><td>2 (back-to-back)</td></tr>
+            <tr><td>Castoridae</td><td>61, 62</td><td>2 (species-pair)</td></tr>
+            <tr><td>Podicipedidae</td><td>60</td><td>1</td></tr>
+            <tr><td>Columbidae</td><td>56</td><td>1</td></tr>
+            <tr><td>Alcedinidae</td><td>57</td><td>1</td></tr>
+            <tr><td>Corvidae</td><td>53</td><td>1</td></tr>
+            <tr><td>Certhiidae</td><td>51</td><td>1 (monotypic in N.A.)</td></tr>
+            <tr><td>Cinclidae</td><td>52</td><td>1 (monotypic in N.A.)</td></tr>
+          </tbody>
+        </table>
+        <p>Twenty-eight families across 68 entries. <strong>Mustelidae rises to 5 entries &mdash; the QUINTET &mdash; now tied with Passerellidae, Hirundinidae, Fringillidae, and Turdidae</strong> as the second-largest family representation behind Parulidae (10). 49 of 68 entries (72.1%) are Passeriformes. 8 of 68 entries (11.8%) are Mammalia.</p>
+
+        <!-- Theory Nodes -->
+        <div class="acoustic-map">
+          <h3>Theory Nodes</h3>
+
+          <div class="theory-node">
+            <div class="theory-icon quintet">Q</div>
+            <div class="theory-content">
+              <h4>The Mustelidae Quintet (63&ndash;67) <span class="theory-level landmark">landmark</span></h4>
+              <p>Five consecutive Mustelidae. Otter &rarr; Mink &rarr; Marten &rarr; Fisher &rarr; Weasel. River &rarr; creek bank &rarr; old-growth canopy &rarr; dense forest &rarr; meadow-forest edge. Matches the Swallow Quintet (26&ndash;30) and Warbler Quintet (14&ndash;17, 20). The engine&rsquo;s deepest family exploration.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon bark">B</div>
+            <div class="theory-content">
+              <h4>The Shrill Bark / Chitter &mdash; 68th Acoustic Element <span class="theory-level foundational">foundational</span></h4>
+              <p>Shrill, aggressive bark combined with rapid chittering. E=4. Higher-pitched and more frantic than the Mink&rsquo;s chitter. The smallest carnivore producing the most frantic sound &mdash; metabolic urgency made audible.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon ermine">E</div>
+            <div class="theory-content">
+              <h4>The Ermine Transformation &mdash; Seasonal Color Change <span class="theory-level landmark">landmark</span></h4>
+              <p>The only species in the engine with a seasonal color change. Brown in summer, pure white in winter. The white winter coat = ermine, historically used in royal robes. Black tail tip persists year-round. A new biological category for the engine.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon edge">M</div>
+            <div class="theory-content">
+              <h4>Meadow-Forest Edge &mdash; First Edge-Habitat Species <span class="theory-level landmark">landmark</span></h4>
+              <p>The boundary between open and closed habitats. Not aquatic, not deep forest, not grassland &mdash; the transition zone itself. The engine&rsquo;s first species defined by the edge between ecosystems.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon hypercarnivore">H</div>
+            <div class="theory-content">
+              <h4>Smallest True Carnivore &mdash; The Hypercarnivore <span class="theory-level foundational">foundational</span></h4>
+              <p>150&ndash;350 g. Must eat 40&ndash;60% of body weight daily. The most extreme mass-specific metabolic rate of any mammal in the engine. A tube of muscle with teeth that cannot afford to stop hunting.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon surplus">S</div>
+            <div class="theory-content">
+              <h4>Surplus Killer &mdash; Second in the Quintet <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Like the Mink (64), the weasel kills more than immediately needed. Driven by extreme metabolic pressure &mdash; when prey is available, the weasel cannot afford to miss. Two surplus killers from the same family, arising from different pressures.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon walla">W</div>
+            <div class="theory-content">
+              <h4>Chris Walla Parallel <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both precise, both efficient, both devastating relative to their size. Both are departures &mdash; Walla from Death Cab, the weasel from the family sequence. The smallest force that achieves outsized impact.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon carnivore">C</div>
+            <div class="theory-content">
+              <h4>Sixth Carnivore <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Carnivora grows to six entries &mdash; still all Mustelidae. Five consecutive plus the Owl&rsquo;s predatory role. The order&rsquo;s entire representation remains within a single family.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon csv">7</div>
+            <div class="theory-content">
+              <h4>Seventh Consecutive Original CSV <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Degrees 61&ndash;67: seven consecutive originals. The longest original-CSV streak extends again. Every mammalian entry is an original CSV species.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mammal">D</div>
+            <div class="theory-content">
+              <h4>Eighth Mammalian Entry, Sixth Species <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Six mammalian species across eight entries (61&ndash;67). Mammalian representation rises to 11.8%. Two orders, three families. The mammalian era extends to seven degrees.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon fisher-link">F</div>
+            <div class="theory-content">
+              <h4>Fisher Connection (SPS-066) <span class="theory-level foundational">foundational</span></h4>
+              <p>Consecutive Mustelidae. Dense forest (Fisher) vs. meadow-forest edge (Weasel). Largest (2&ndash;6 kg) vs. smallest (150&ndash;350 g) terrestrial mustelids. The quintet&rsquo;s endpoints of forest-interior vs. forest-edge.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon mink-link">K</div>
+            <div class="theory-content">
+              <h4>Mink Connection (SPS-064) <span class="theory-level foundational">foundational</span></h4>
+              <p>Both small, fierce, surplus killers. Similar acoustic profile (chitter). Creek bank vs. meadow edge. The quintet&rsquo;s two smallest-bodied members share the most behavioral overlap.</p>
+            </div>
+          </div>
+
+          <div class="theory-node">
+            <div class="theory-icon owl-link">O</div>
+            <div class="theory-content">
+              <h4>Spotted Owl Connection (SPS-004) <span class="theory-level intermediate">intermediate</span></h4>
+              <p>Both edge/forest predators. The Owl hunts the edge from the forest side; the Weasel hunts the edge from the meadow side. Both are nocturnal predators of small mammals in similar territories.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-References -->
+        <h2>Cross-References</h2>
+        <div class="xref-grid">
+          <div class="xref-card">
+            <strong>SPS-066: Fisher</strong>
+            <p>CONSECUTIVE MUSTELIDAE. Dense forest vs. meadow-forest edge. Largest (2&ndash;6 kg) vs. smallest (150&ndash;350 g) terrestrial mustelids in the engine. Quintet completes at the extremes &mdash; the Fisher goes deep, the Weasel goes to the edge.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-064: Mink</strong>
+            <p>BOTH SMALL, FIERCE, SURPLUS KILLERS. Similar acoustic profiles (chitter). Creek bank vs. meadow edge. The quintet&rsquo;s behavioral mirror &mdash; two small predators with overlapping prey and strategy.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-063: River Otter</strong>
+            <p>QUINTET ENDPOINTS. River/estuary (Otter) vs. meadow-forest edge (Weasel). Social (Otter) vs. solitary (Weasel). The quintet&rsquo;s largest (5&ndash;14 kg) vs. smallest (150&ndash;350 g). 40x size difference within one family.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-065: American Marten</strong>
+            <p>BOTH SMALL MUSTELIDS. Old-growth canopy (Marten) vs. meadow edge (Weasel). Arboreal vs. terrestrial. Two of the three smallest mustelids in the quintet. The Marten is arboreal, the Weasel is subterranean &mdash; vertical extremes.</p>
+          </div>
+          <div class="xref-card">
+            <strong>SPS-004: Northern Spotted Owl</strong>
+            <p>BOTH EDGE/FOREST PREDATORS. Both nocturnal predators of small mammals. The Owl hunts from the forest side; the Weasel hunts from the meadow side. Overlapping prey base, complementary hunting strategies.</p>
+          </div>
+          <div class="xref-card">
+            <strong>MAM: Mammals of the Pacific Northwest</strong>
+            <p>Eighth mammalian entry. Sixth mammalian species. Sixth Carnivora, fifth Mustelidae. Mammalian representation rises to 11.8% (8 of 68). Two orders, three families, six species.</p>
+          </div>
+          <div class="xref-card">
+            <strong>ECO: Living Systems of the PNW</strong>
+            <p>Meadow-forest edge habitat &mdash; first edge-habitat species. Hypercarnivore. Surplus killer. Seasonal color change. Rodent population control through relentless predation pressure.</p>
+          </div>
+        </div>
+
+        <!-- Sources -->
+        <h2>Sources</h2>
+        <ol class="sources">
+          <li>NatureServe / IUCN &mdash; Short-tailed Weasel (<em>Mustela erminea</em>) species account.</li>
+          <li>Wikipedia &mdash; &ldquo;Stoat.&rdquo;</li>
+          <li>King, C.M. and Powell, R.A. (2007). <em>The Natural History of Weasels and Stoats: Ecology, Behavior, and Management</em>. 2nd ed. Oxford University Press.</li>
+          <li>Sheffield, S.R. and King, C.M. (1994). &ldquo;<em>Mustela erminea</em>.&rdquo; <em>Mammalian Species</em> 195: 1&ndash;8.</li>
+          <li>Erlinge, S. (1983). &ldquo;Demography and dynamics of a stoat <em>Mustela erminea</em> population in a diverse community of vertebrates.&rdquo; <em>Journal of Animal Ecology</em> 52(3): 705&ndash;726.</li>
+          <li>Powell, R.A. and Zielinski, W.J. (1983). &ldquo;Competition and coexistence in mustelid communities.&rdquo; <em>Acta Zoologica Fennica</em> 174: 223&ndash;227.</li>
+          <li>Washington Department of Fish and Wildlife &mdash; Living with Wildlife: Weasels.</li>
+          <li>King, C.M. (1989). <em>The Natural History of Weasels and Stoats</em>. 1st ed. Christopher Helm.</li>
+          <li>Simms, D.A. (1979). &ldquo;North American weasels: resource utilization and distribution.&rdquo; <em>Canadian Journal of Zoology</em> 57(3): 504&ndash;520.</li>
+        </ol>
+
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h3>Quick Stats</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">67&deg;</div>
+          <div class="stat-detail">of 360</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Acoustic Element</div>
+          <div class="stat-value">Shrill Bark / Chitter</div>
+          <div class="stat-detail">#68 in progression</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Energy</div>
+          <div class="stat-value">E = 4</div>
+          <div class="stat-detail">Shrill, frantic, disproportionate</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Class</div>
+          <div class="stat-value">Mammalia</div>
+          <div class="stat-detail">8th mammalian entry, 6th species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Family</div>
+          <div class="stat-value">Mustelidae</div>
+          <div class="stat-detail">5th entry &mdash; the QUINTET</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Order</div>
+          <div class="stat-value">Carnivora</div>
+          <div class="stat-detail">6th entry (all Mustelidae)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Sound</div>
+          <div class="stat-value">Bark / chitter</div>
+          <div class="stat-detail">Aggressive, high-pitched, frantic</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Ecosystem</div>
+          <div class="stat-value">Meadow-Forest Edge</div>
+          <div class="stat-detail">First edge-habitat species</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Season</div>
+          <div class="stat-value">Year-round</div>
+          <div class="stat-detail">Nocturnal &amp; crepuscular</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Weight</div>
+          <div class="stat-value">150&ndash;350 g</div>
+          <div class="stat-detail">Smallest true carnivore in engine</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">CSV Substitute</div>
+          <div class="stat-value">No</div>
+          <div class="stat-detail">7th consecutive original CSV</div>
+        </div>
+
+        <h3>Key Cross-Refs</h3>
+
+        <div class="stat-card">
+          <div class="stat-label">Consecutive Mustelid</div>
+          <div class="stat-value">SPS-066</div>
+          <div class="stat-detail">Fisher &mdash; deep forest vs. edge</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Surplus Killer Pair</div>
+          <div class="stat-value">SPS-064</div>
+          <div class="stat-detail">Mink &mdash; both small, fierce, surplus</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Edge/Forest Predator</div>
+          <div class="stat-value">SPS-004</div>
+          <div class="stat-detail">Northern Spotted Owl &mdash; nocturnal pair</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>The Sound of Puget Sound &mdash; PNW 360 Species Engine &mdash; Degree 67 of 360</p>
+  </footer>
+</body>
+</html>
