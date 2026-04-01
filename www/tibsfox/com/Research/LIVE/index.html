@@ -133,9 +133,9 @@ footer a { color:rgba(255,255,255,0.3); }
   <h2>Active Missions</h2>
   <div class="card-grid">
     <a href="../NASA/artemis-ii/index.html" class="card card-featured">
-      <h3><span class="status-dot countdown"></span> Artemis II <span class="badge badge-live">T-8h</span></h3>
-      <p>First crewed flight beyond LEO since 1972. <strong>LAUNCH DAY.</strong> SLS propellant loading underway. GO/NO-GO polls nominal. G2 geomagnetic storm watch active but Kp recovering (2.0, down from 3.0 overnight). CME pulse from X1.5 flare has passed — conditions improving. Heat shield direct-entry trajectory locked. Crew: Wiseman, Glover, Koch, Hansen. Orion CM-003 "Integrity" on SLS Block 1.</p>
-      <div class="meta">Mission 1.190 &middot; Launch: Apr 1, 2026 22:24 UTC (3:24 PM PDT) &middot; T-8h &middot; ~10 day free-return lunar flyby</div>
+      <h3><span class="status-dot countdown"></span> Artemis II <span class="badge badge-live">T-3h</span></h3>
+      <p>First crewed flight beyond LEO since 1972. <strong>CREW ONBOARD INTEGRITY.</strong> All 4 suits on umbilicals (IVA confirmed). Voice checks complete &mdash; CDR Wiseman, PLT Glover, MS1 Koch, MS2 Hansen &mdash; Houston confirms all stations. Procedure 10.1.1 crew ingress steps 2-4 complete. OE2 confirmed. SLS tanking complete, replenish mode. KSC 28&deg;C clear. Terminal count approach. KPAE 12.5&deg;C S 12 km/h, overcast building.</p>
+      <div class="meta">Mission 1.190 &middot; Launch: Apr 1, 2026 22:24 UTC (3:24 PM PDT) &middot; T-3h &middot; ~10 day free-return lunar flyby</div>
     </a>
   </div>
 
@@ -159,7 +159,7 @@ footer a { color:rgba(255,255,255,0.3); }
     <div class="card">
       <h3><span class="status-dot monitoring"></span> Wall-Clock Papers</h3>
       <p>Papers found during active missions, cataloged by date and connected to mission science. <strong>Launch day additions:</strong> SLS cryogenic propellant management (NTRS), post-CME crew dose estimation (SWPC), and direct entry trajectory final parameters (JSC). Also: Wasserstein Kp prediction, SEPNET solar particle forecasting, cislunar time, O2O optical comms, AVCOAT ablation, radiation biology, crew health.</p>
-      <div class="meta">24 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, SWPC &middot; Updated v1.1.7</div>
+      <div class="meta">24 papers cataloged &middot; Sources: arXiv, NTRS, AGU, SPIE, Nature, npj Microgravity, IEEE, SWPC &middot; Updated v1.1.12</div>
     </div>
 
     <a href="../OPEN/index.html" class="card">
@@ -185,7 +185,7 @@ footer a { color:rgba(255,255,255,0.3); }
         JPL Horizons (-1024) &middot; DSN Now &middot; USGS Snohomish River &middot;
         NWS Forecast Grid &middot; Open-Meteo &middot; WSDOT Ferries
       </p>
-      <div class="meta">All free, no API keys, verified April 1, 2026 14:00Z</div>
+      <div class="meta">All free, no API keys, verified April 1, 2026 19:00Z</div>
     </div>
 
     <div class="card">
@@ -222,7 +222,7 @@ function updateClocks() {
 updateClocks();
 setInterval(updateClocks, 1000);
 // Set page load timestamp
-document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.1.7)';
+document.getElementById('update-ts').textContent = new Date().toISOString().slice(0,19) + 'Z (sweep v1.1.12)';
 </script>
 </body>
 </html>
