@@ -112,6 +112,7 @@ li { line-height:1.6; }
 .tag-grid { background:rgba(196,176,144,0.1); color:var(--sand); border-color:rgba(196,176,144,0.3); }
 .tag-space { background:rgba(154,106,216,0.1); color:#9a6ad8; border-color:rgba(154,106,216,0.2); }
 .tag-gap { background:rgba(220,80,80,0.1); color:#d05050; border-color:rgba(220,80,80,0.2); }
+.tag-sat { background:rgba(100,160,220,0.1); color:#6aa0dc; border-color:rgba(100,160,220,0.2); }
 
 /* Panels */
 .panel {
@@ -191,10 +192,12 @@ footer a { color:var(--fog); }
   </blockquote>
 
   <div class="stats">
-    <div class="stat"><span class="stat-value">6</span><span class="stat-label">METAR Stations</span></div>
+    <div class="stat"><span class="stat-value">8</span><span class="stat-label">METAR Stations</span></div>
     <div class="stat"><span class="stat-value">4</span><span class="stat-label">Tide Gauges</span></div>
     <div class="stat"><span class="stat-value">4</span><span class="stat-label">Stream Gauges</span></div>
-    <div class="stat"><span class="stat-value">5</span><span class="stat-label">Weather Networks</span></div>
+    <div class="stat"><span class="stat-value">7</span><span class="stat-label">NWS / CWOP / NDBC</span></div>
+    <div class="stat"><span class="stat-value">6</span><span class="stat-label">Networks &amp; Models</span></div>
+    <div class="stat"><span class="stat-value">4</span><span class="stat-label">Satellite Sources</span></div>
     <div class="stat"><span class="stat-value">3</span><span class="stat-label">Space Weather</span></div>
     <div class="stat"><span class="stat-value">4</span><span class="stat-label">Coverage Gaps</span></div>
   </div>
@@ -209,66 +212,71 @@ footer a { color:var(--fog); }
 <pre>
                           N
                           |
-    122.5W          122.25W          122.0W           121.75W          121.5W
-    ------+-------------+-------------+----------------+---------------+------
-          |                                                            |
-  48.5N - |  [KBVS] Skagit Regional                                   | - 48.5N
-          |    Burlington, 145ft                                       |
-          |                                                            |
-          |                                                            |
-  48.25N -|             .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .| - 48.25N
-          |          (Open-Meteo grid boundary)                        |
-          |                                                            |
-  48.16N -|  [KAWO] Arlington Muni                                     | - 48.16N
-          |    142ft          {12167000} NF Stillaguamish               |
-          |                     near Arlington                         |
-          |                                                            |
-          | ~~~~~~~~~ WHIDBEY ISLAND ~~~~~~~~~~                        |
-  48.0N - | ~~~~~ (limited coverage) ~~~~~~~~~~                        | - 48.0N
-          | ~~~ [gap: no south Whidbey] ~~~~~~~                        |
-          |                                                            |
-          |   [9447659]                                                |
-          |    Everett      [KPAE] Paine Field, 607ft                  |
-          |    tide gauge     METAR + ASOS                             |
-  47.9N - |   ,,,,,,,,,,                                               | - 47.9N
-          |   Possession    ** MUKILTEO  47.91N **                     |
-          |     Sound       ** [gap: no marine buoy] **                |
-          |   [gap: no      ** [gap: no AQ sensor]   **                |
-          |    buoy here]                                              |
-          |   ,,,,,,,,,,                                               |
-  47.75N -|                                                            | - 47.75N
-          |                                                            |
-          |           {12150800} Snohomish R.                           |
-          |             near Monroe                                    |
-          |                                                            |
-          |   ~~~~~~~~~~~~                         CASCADES            |
-          |   ~ PUGET  ~~~                         ^^^^^^^^            |
-  47.6N - |   ~ SOUND ~~~     SEATTLE              ^ [gap: no mtn ^   | - 47.6N
-          |   ~~~~~~~~~~~~                         ^ wx station]  ^    |
-          |                                        ^ Stevens Pass ^    |
-          |   [9447130]                            ^ is closest   ^    |
-          |    Seattle tide                        ^^^^^^^^^^^^^^^^    |
-  47.5N - |    Elliott Bay                                             | - 47.5N
-          |               [KBFI] Boeing Fld, 21ft                      |
-          |                                   {12134500} Skykomish R.  |
-          |               [KRNT] Renton, 32ft   near Gold Bar          |
-          |                                                            |
-          |               [KSEA] Sea-Tac, 433ft                       |
-  47.4N - |                                        {12149000}          | - 47.4N
-          |                                         Snoqualmie R.      |
-          |   [9446484]                              near Carnation    |
-          |    Tacoma tide                                             |
-  47.25N -|    Commencement Bay                                        | - 47.25N
-          |                                                            |
-    ------+-------------+-------------+----------------+---------------+------
-    122.5W          122.25W          122.0W           121.75W          121.5W
+    122.7W     122.5W          122.25W          122.0W           121.75W
+    ---+----------+-------------+-------------+----------------+---------
+       |          |                                             |
+       |  48.5N - |  [KBVS] Skagit Regional                    | - 48.5N
+       |          |    Burlington, 145ft                        |
+       |          |                                             |
+  [KNUW]  48.35N -|    &lt;C2882&gt; Anacortes CWOP                  | - 48.35N
+  Whidbey NAS     |                                             |
+  Oak Harbor      |         .  .  .  .  .  .  .  .  .  .  .  . | - 48.25N
+       |          |      (Open-Meteo grid boundary)             |
+       |          |                                             |
+       |  48.16N -|  [KAWO] Arlington Muni                      | - 48.16N
+       |          |    142ft          {12167000} NF Stillaguamish|
+       |          |                     near Arlington           |
+  ~~~~~|~~~~~~~~~~|                                             |
+  ~ WHIDBEY  ~~~ | &lt;C5456&gt; Hansville CWOP                      |
+  ~~ ISLAND  ~~~ |                                              |
+  48.0N ~~~~~~~~ | &lt;C8405&gt; Kingston CWOP        &lt;D2629&gt; Snohomish|  - 48.0N
+  ~~ (Clinton) ~ |                                CWOP          |
+  ~~ NWS grid ~~ |                                              |
+  ~~ SEW/128,85~ |   [9447659]                                  |
+  ~~~~~~~~~~~~~~~|    Everett      [KPAE] Paine Field, 607ft    |
+  ~ ferry ~~~~~~ |    tide gauge     METAR + ASOS               |
+  ~ crossing ~~~ |   ,,,,,,,,,,    &lt;A5008&gt; Everett-Beverly Park |
+  47.9N ~~~~~~~~ |   Possession    ** MUKILTEO  47.91N **       | - 47.9N
+       |         |     Sound       ** NWS grid SEW/129,82 **    |
+  (NDBC WPOW1    |   (NDBC EBSW1                               |
+   West Pt       |    Elliott Bay   KWAMUKIL45 WU 65ft          |
+   47.66N)       |    47.60N)       KWAMUKIL71 WU 105ft         |
+       |         |   ,,,,,,,,,,                                 |
+       |  47.75N-|                  &lt;A4499&gt; Lake Forest Park     | - 47.75N
+       |         |                                              |
+       |         |           {12150800} Snohomish R.            |
+       |         |             near Monroe                      |
+       |         |                                              |
+       |         |   ~~~~~~~~~~~~                    CASCADES   |
+       |         |   ~ PUGET  ~~~                    ^^^^^^^^   |
+       |  47.6N -|   ~ SOUND ~~~  &lt;SEAW1&gt; NWS WFO   ^ [gap] ^  | - 47.6N
+       |         |   ~~~~~~~~~~~~   Seattle          ^ no mtn^  |
+       |         |                                   ^ wx stn^  |
+       |         |   [9447130]                       ^^^^^^^^^  |
+       |         |    Seattle tide                              |
+       |  47.5N -|    Elliott Bay                               | - 47.5N
+       |         |               [KBFI] Boeing Fld, 21ft        |
+       |         |                              {12134500}      |
+       |         |               [KRNT] Renton    Skykomish R.  |
+       |         |               [KSEA] Sea-Tac, 433ft          |
+       |  47.4N -|                              {12149000}      | - 47.4N
+       |         |                               Snoqualmie R.  |
+       |         |   [9446484]                                  |
+       |         |    Tacoma tide                               |
+       |  47.25N-|    Commencement Bay                          | - 47.25N
+       |         |                                              |
+    ---+----------+-------------+-------------+----------------+---------
+    122.7W     122.5W          122.25W          122.0W           121.75W
 
-    [9444900] Port Townsend tide gauge
-    is off-map to the NW (48.11N 122.76W)
-    at the mouth of Admiralty Inlet
+    OFF-MAP STATIONS:
+    [9444900] Port Townsend tide  (48.11N 122.76W) — Admiralty Inlet
+    [KPWT]   Bremerton National   (47.50N 122.75W) — Kitsap Peninsula
+    (NDBC WPOW1) West Point CMAN  (47.66N 122.44W) — wind, temp, pressure
+    (NDBC EBSW1) Elliott Bay NOS  (47.60N 122.34W) — wind, temp, water level
 </pre>
     <div class="map-legend">
       [XXXX] = METAR/ASOS aviation station &nbsp;&middot;&nbsp;
+      &lt;XXXX&gt; = NWS/CWOP/NDBC station &nbsp;&middot;&nbsp;
       [#######] = NOAA tide station &nbsp;&middot;&nbsp;
       {########} = USGS stream gauge &nbsp;&middot;&nbsp;
       ~~~~ = water &nbsp;&middot;&nbsp;
@@ -358,6 +366,26 @@ footer a { color:var(--fog); }
         <td>1 min / hourly</td>
         <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx</td>
         <td><a href="https://aviationweather.gov/data/metar/?ids=KBVS">aviationweather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">METAR</span> <strong>KNUW</strong></td>
+        <td>NAS Whidbey Island (Ault Field), Oak Harbor</td>
+        <td><code>48.3553</code></td>
+        <td><code>-122.6635</code></td>
+        <td>47 ft</td>
+        <td>1 min / hourly</td>
+        <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx</td>
+        <td><a href="https://aviationweather.gov/data/metar/?ids=KNUW">aviationweather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">METAR</span> <strong>KPWT</strong></td>
+        <td>Bremerton National Airport</td>
+        <td><code>47.5000</code></td>
+        <td><code>-122.7500</code></td>
+        <td>444 ft</td>
+        <td>1 min / hourly</td>
+        <td>Temp, dewpoint, wind, altimeter, visibility, ceiling, present wx</td>
+        <td><a href="https://aviationweather.gov/data/metar/?ids=KPWT">aviationweather.gov</a></td>
       </tr>
     </tbody>
   </table>
@@ -548,12 +576,20 @@ footer a { color:var(--fog); }
         <td><a href="https://www.wunderground.com/wundermap">wunderground.com</a> (API key required)</td>
       </tr>
       <tr>
-        <td><span class="tag tag-grid">Grid</span> <strong>WSDOT Road Weather</strong></td>
-        <td>Highway cameras + sensors</td>
-        <td>I-5, I-405, SR-2, SR-9, US-2 corridors</td>
-        <td>5&ndash;10 min</td>
-        <td>Road temp, air temp, visibility, wind, cameras (still images)</td>
-        <td><a href="https://wsdot.com/travel/real-time/cameras">wsdot.com/travel</a></td>
+        <td><span class="tag tag-grid">Grid</span> <strong>WSDOT RWIS</strong></td>
+        <td>Road Weather Information System</td>
+        <td>I-5 at US-2, I-5 at SR-526, I-405, SR-2, SR-9 corridors</td>
+        <td>10 min</td>
+        <td>Air temp, humidity, wind speed/dir/gust, visibility, precip type/rate, road surface temp/condition, pressure</td>
+        <td><a href="https://wsdot.wa.gov/traffic/api/">WSDOT Traveler API</a> (free code, instant)</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">Grid</span> <strong>Synoptic / MesoWest</strong></td>
+        <td>Multi-network aggregator</td>
+        <td>170,000+ stations, 320+ networks, radius search</td>
+        <td>Varies (pass-through)</td>
+        <td>All surface obs from ASOS, CWOP, RAWS, DOT, mesonets</td>
+        <td><a href="https://synopticdata.com/weatherapi/">synopticdata.com</a> (free: 5K req/mo)</td>
       </tr>
     </tbody>
   </table>
@@ -604,6 +640,201 @@ footer a { color:var(--fog); }
   </div>
 
   <!-- ============================================================ -->
+  <!-- NWS / CWOP / NDBC STATIONS -->
+  <!-- ============================================================ -->
+
+  <h2>NWS, CWOP &amp; NDBC Stations</h2>
+  <p>Additional observation stations from the National Weather Service cooperative network, Citizen Weather Observer Program (CWOP), and NOAA National Data Buoy Center. These fill gaps between official METAR stations and add marine coverage. All free, no API key required.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Network</th>
+        <th>Location</th>
+        <th>Coords</th>
+        <th>Dist from MUK</th>
+        <th>Measures</th>
+        <th>API / Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-metar">NWS</span> <strong>A5008</strong></td>
+        <td>NWS Coop</td>
+        <td>Everett &mdash; Beverly Park Rd</td>
+        <td><code>47.894, -122.270</code></td>
+        <td>~4 mi</td>
+        <td>Temp, wind, precip</td>
+        <td><a href="https://api.weather.gov/stations/A5008/observations/latest">api.weather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">NWS</span> <strong>A4499</strong></td>
+        <td>NWS Coop</td>
+        <td>Lake Forest Park &mdash; Town Center</td>
+        <td><code>47.755, -122.281</code></td>
+        <td>~12 mi S</td>
+        <td>Temp, wind, precip</td>
+        <td><a href="https://api.weather.gov/stations/A4499/observations/latest">api.weather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-metar">NWS</span> <strong>SEAW1</strong></td>
+        <td>NWS WFO</td>
+        <td>Seattle Weather Forecast Office</td>
+        <td><code>47.685, -122.251</code></td>
+        <td>~18 mi S</td>
+        <td>Full surface obs</td>
+        <td><a href="https://api.weather.gov/stations/SEAW1/observations/latest">api.weather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">CWOP</span> <strong>D2629</strong></td>
+        <td>Citizen Wx</td>
+        <td>Snohomish</td>
+        <td><code>47.936, -122.087</code></td>
+        <td>~8 mi E</td>
+        <td>Temp, dewpoint, wind, precip, pressure</td>
+        <td><a href="https://api.weather.gov/stations/D2629/observations/latest">api.weather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">CWOP</span> <strong>C5456</strong></td>
+        <td>Citizen Wx</td>
+        <td>Hansville (Kitsap Peninsula)</td>
+        <td><code>47.920, -122.586</code></td>
+        <td>~15 mi W</td>
+        <td>Temp, dewpoint, wind, precip, pressure</td>
+        <td><a href="https://api.weather.gov/stations/C5456/observations/latest">api.weather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">CWOP</span> <strong>C8405</strong></td>
+        <td>Citizen Wx</td>
+        <td>Kingston (Kitsap Peninsula)</td>
+        <td><code>47.882, -122.576</code></td>
+        <td>~12 mi W</td>
+        <td>Temp, dewpoint, wind, precip, pressure</td>
+        <td><a href="https://api.weather.gov/stations/C8405/observations/latest">api.weather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">CWOP</span> <strong>C2882</strong></td>
+        <td>Citizen Wx</td>
+        <td>Anacortes</td>
+        <td><code>48.501, -122.663</code></td>
+        <td>~40 mi NW</td>
+        <td>Temp, dewpoint, wind, precip, pressure</td>
+        <td><a href="https://api.weather.gov/stations/C2882/observations/latest">api.weather.gov</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-tide">NDBC</span> <strong>WPOW1</strong></td>
+        <td>C-MAN</td>
+        <td>West Point, Seattle (shoreline)</td>
+        <td><code>47.662, -122.435</code></td>
+        <td>~15 mi S</td>
+        <td>Wind speed/dir/gust, air temp, pressure, continuous winds</td>
+        <td><a href="https://www.ndbc.noaa.gov/station_page.php?station=wpow1">NDBC</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-tide">NDBC</span> <strong>EBSW1</strong></td>
+        <td>NOS Water Level</td>
+        <td>Elliott Bay, Seattle</td>
+        <td><code>47.602, -122.338</code></td>
+        <td>~18 mi S</td>
+        <td>Air temp (10.3m), wind (15.8m), water level</td>
+        <td><a href="https://www.ndbc.noaa.gov/station_page.php?station=ebsw1">NDBC</a></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="panel">
+    <h4>NWS Forecast Grid Points</h4>
+    <p>In addition to observation stations, the NWS provides gridded forecasts at ~2.5 km resolution. Key grid points for our coverage area:</p>
+    <ul>
+      <li><strong>Mukilteo:</strong> <code>SEW/129,82</code> &mdash; <a href="https://api.weather.gov/gridpoints/SEW/129,82/forecast/hourly">hourly forecast</a></li>
+      <li><strong>Clinton (Whidbey):</strong> <code>SEW/128,85</code> &mdash; <a href="https://api.weather.gov/gridpoints/SEW/128,85/forecast/hourly">hourly forecast</a></li>
+      <li><strong>Marine zone PZZ135:</strong> <a href="https://api.weather.gov/zones/forecast/PZZ135">Puget Sound &amp; Hood Canal forecast</a></li>
+    </ul>
+    <p>These give us Clinton-specific forecasts even without an observation station on south Whidbey. The grid forecast can be scored against KPAE observations to measure cross-water accuracy.</p>
+  </div>
+
+  <div class="panel">
+    <h4>Weather Underground Personal Stations</h4>
+    <p>Known WU stations in the Mukilteo area (free IBM API key required):</p>
+    <ul>
+      <li><strong>KWAMUKIL45</strong> &mdash; Mukilteo, 65 ft elevation</li>
+      <li><strong>KWAMUKIL71</strong> &mdash; Mukilteo, 105 ft elevation</li>
+      <li><strong>KWAEVERE167</strong> &mdash; Everett area</li>
+    </ul>
+    <p>WU stations update every 5&ndash;30 seconds. Data includes temp, humidity, wind, precip rate, pressure, UV index, and solar radiation. Quality varies by station hardware and calibration. <a href="https://www.wunderground.com/dashboard/pws/KWAMUKIL45">Browse on WU map</a>.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- SATELLITE DATA -->
+  <!-- ============================================================ -->
+
+  <h2>Satellite Data Sources</h2>
+  <p>Geostationary and polar-orbiting satellites provide continuous imagery of cloud cover, moisture, vegetation, and land surface conditions over the Puget Sound region. All data is free and openly accessible.</p>
+
+  <div class="table-scroll">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Source</th>
+        <th>Satellite / Instrument</th>
+        <th>Resolution</th>
+        <th>Update</th>
+        <th>Key Products</th>
+        <th>Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-space">GOES</span> <strong>GOES-18 (West)</strong></td>
+        <td>ABI (Advanced Baseline Imager)</td>
+        <td>2 km (CONUS) / 0.5 km (vis)</td>
+        <td>5 min (CONUS), 1 min (mesoscale)</td>
+        <td>GeoColor, visible, IR, cloud &amp; moisture (16 bands), fire detection</td>
+        <td>AWS S3: <code>noaa-goes18</code> (free, no key)<br><a href="https://www.star.nesdis.noaa.gov/goes/sector.php?sat=G18&amp;sector=pnw">PNW sector viewer</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-space">GOES</span> <strong>GOES-18 L2 CMIP</strong></td>
+        <td>ABI Level 2</td>
+        <td>2 km</td>
+        <td>5 min</td>
+        <td>Cloud &amp; moisture imagery products &mdash; 16 spectral bands from 0.47 to 13.3 &micro;m</td>
+        <td>AWS S3 + <a href="https://developers.google.com/earth-engine/datasets/catalog/NOAA_GOES_18_MCMIPC">Google Earth Engine</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">LEO</span> <strong>Sentinel-2</strong></td>
+        <td>MSI (Multispectral Instrument)</td>
+        <td>10 m (vis/NIR), 20 m (red edge/SWIR)</td>
+        <td>5-day revisit</td>
+        <td>Vegetation health (NDVI), land cover, water turbidity, snow extent, 13 bands</td>
+        <td>AWS S3: <code>sentinel-s2-l2a</code> (free)<br><a href="https://dataspace.copernicus.eu/">Copernicus</a></td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-grid">LEO</span> <strong>Landsat 8/9</strong></td>
+        <td>OLI + TIRS</td>
+        <td>30 m (multispectral), 15 m (pan)</td>
+        <td>16-day revisit (8-day combined)</td>
+        <td>Land surface temp, vegetation, urban heat islands, water quality</td>
+        <td><a href="https://developers.google.com/earth-engine/datasets/catalog/landsat">Google Earth Engine</a> (free for research)</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="panel">
+    <h4>GOES-18 for Convergence Zone Tracking</h4>
+    <p>GOES-18 visible and infrared imagery at 5-minute intervals can show the Puget Sound Convergence Zone forming in real time &mdash; the cloud band appears as air splits around the Olympics and reconverges over Snohomish County. The mesoscale sector can scan our area at 1-minute intervals during active weather. GeoColor composite provides natural-color daytime imagery and IR-based nighttime imagery, ideal for tracking marine layer advection into Possession Sound.</p>
+    <p>Direct S3 access: <code>https://noaa-goes18.s3.amazonaws.com/index.html</code>. Python: <a href="https://github.com/blaylockbk/goes2go">goes2go</a> package for automated download and visualization.</p>
+  </div>
+
+  <div class="panel">
+    <h4>Sentinel-2 for Land Surface Monitoring</h4>
+    <p>At 10-meter resolution with 5-day revisit, Sentinel-2 can track vegetation health across the Mukilteo watershed, monitor snow extent on the western Cascades, and detect land-use changes affecting drainage patterns. Cloud-filtered composites reveal seasonal patterns in the convergence zone's impact on vegetation &mdash; the PSCZ rain band creates a visible greening gradient from north to south across Snohomish County.</p>
+  </div>
+
+  <!-- ============================================================ -->
   <!-- COMPREHENSIVE SOURCE TABLE -->
   <!-- ============================================================ -->
 
@@ -629,20 +860,31 @@ footer a { color:var(--fog); }
       <tr><td>KSEA ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx, RVR</td><td>aviationweather.gov</td><td>No</td></tr>
       <tr><td>KRNT ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
       <tr><td>KBVS ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
+      <tr><td>KNUW ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
+      <tr><td>KPWT ASOS</td><td>Aviation</td><td>1 min</td><td>T, Td, wind, vis, ceil, wx</td><td>aviationweather.gov</td><td>No</td></tr>
       <tr><td>DSCOVR L1</td><td>Space</td><td>1 min</td><td>Solar wind speed, density, Bz</td><td>swpc.noaa.gov</td><td>No</td></tr>
       <tr><td>PurpleAir</td><td>Air quality</td><td>2 min</td><td>PM2.5, PM10, AQI, T, RH</td><td>api.purpleair.com</td><td>Yes</td></tr>
-      <tr><td>WU PWS</td><td>Personal wx</td><td>5-30 min</td><td>T, RH, wind, precip, P, UV</td><td>api.weather.com</td><td>Yes</td></tr>
-      <tr><td>WSDOT cameras</td><td>Road wx</td><td>5-10 min</td><td>Road T, air T, vis, wind, images</td><td>wsdot.com API</td><td>No</td></tr>
+      <tr><td>GOES-18 ABI</td><td>Satellite</td><td>5 min</td><td>Cloud/moisture imagery, 16 bands</td><td>AWS S3 noaa-goes18</td><td>No</td></tr>
+      <tr><td>WU PWS</td><td>Personal wx</td><td>5-30 s</td><td>T, RH, wind, precip, P, UV</td><td>api.weather.com</td><td>Yes</td></tr>
+      <tr><td>WSDOT RWIS</td><td>Road wx</td><td>10 min</td><td>Road T, air T, vis, wind</td><td>wsdot.wa.gov/traffic/api</td><td>Free code</td></tr>
       <tr><td>Tide 9447659</td><td>NOAA tide</td><td>6 min</td><td>Water level, water T, met obs</td><td>CO-OPS API</td><td>No</td></tr>
       <tr><td>Tide 9447130</td><td>NOAA tide</td><td>6 min</td><td>Water level, water T, met obs</td><td>CO-OPS API</td><td>No</td></tr>
       <tr><td>Tide 9444900</td><td>NOAA tide</td><td>6 min</td><td>Water level, water T, met obs</td><td>CO-OPS API</td><td>No</td></tr>
       <tr><td>Tide 9446484</td><td>NOAA tide</td><td>6 min</td><td>Water level, water T, met obs</td><td>CO-OPS API</td><td>No</td></tr>
+      <tr><td>NDBC WPOW1</td><td>Marine C-MAN</td><td>Hourly</td><td>Wind, air T, pressure</td><td>ndbc.noaa.gov</td><td>No</td></tr>
+      <tr><td>NDBC EBSW1</td><td>Marine NOS</td><td>Hourly</td><td>Wind, air T, water level</td><td>ndbc.noaa.gov</td><td>No</td></tr>
+      <tr><td>A5008 NWS</td><td>NWS Coop</td><td>Varies</td><td>T, wind, precip</td><td>api.weather.gov</td><td>No</td></tr>
+      <tr><td>D2629 CWOP</td><td>Citizen wx</td><td>Varies</td><td>T, Td, wind, precip, P</td><td>api.weather.gov</td><td>No</td></tr>
+      <tr><td>C5456 CWOP</td><td>Citizen wx</td><td>Varies</td><td>T, Td, wind, precip, P</td><td>api.weather.gov</td><td>No</td></tr>
+      <tr><td>C8405 CWOP</td><td>Citizen wx</td><td>Varies</td><td>T, Td, wind, precip, P</td><td>api.weather.gov</td><td>No</td></tr>
       <tr><td>USGS 12150800</td><td>Stream</td><td>15 min</td><td>Discharge, gage height</td><td>waterservices.usgs.gov</td><td>No</td></tr>
       <tr><td>USGS 12134500</td><td>Stream</td><td>15 min</td><td>Discharge, gage height</td><td>waterservices.usgs.gov</td><td>No</td></tr>
       <tr><td>USGS 12167000</td><td>Stream</td><td>15 min</td><td>Discharge, gage height</td><td>waterservices.usgs.gov</td><td>No</td></tr>
       <tr><td>USGS 12149000</td><td>Stream</td><td>15 min</td><td>Discharge, gage height</td><td>waterservices.usgs.gov</td><td>No</td></tr>
       <tr><td>Open-Meteo</td><td>Model grid</td><td>1 hr</td><td>T, precip, wind, RH, P, clouds, solar</td><td>open-meteo.com</td><td>No</td></tr>
       <tr><td>NWS SEW grid</td><td>Forecast</td><td>1 hr (4x/day)</td><td>T, wind, PoP, sky, hazards</td><td>api.weather.gov</td><td>No</td></tr>
+      <tr><td>Sentinel-2</td><td>Satellite</td><td>5-day</td><td>Vegetation, land cover, 10m res</td><td>AWS S3 sentinel-s2-l2a</td><td>No</td></tr>
+      <tr><td>Landsat 8/9</td><td>Satellite</td><td>16-day</td><td>Land surface T, veg, 30m res</td><td>Google Earth Engine</td><td>No</td></tr>
       <tr><td>SWPC Kp</td><td>Space</td><td>3 hr</td><td>Geomagnetic activity (0-9)</td><td>swpc.noaa.gov</td><td>No</td></tr>
       <tr><td>SWPC G-scale</td><td>Space</td><td>As needed</td><td>Storm severity (G0-G5)</td><td>swpc.noaa.gov</td><td>No</td></tr>
     </tbody>
@@ -704,7 +946,7 @@ footer a { color:var(--fog); }
 
   <div class="panel">
     <h4>Data Flow Architecture</h4>
-    <p>All 22 data sources follow a common pattern: instrument &rarr; telemetry &rarr; federal database &rarr; public API &rarr; our collection. The key difference is latency. ASOS stations report in near-real-time (seconds). NOAA tide gauges batch at 6-minute intervals. USGS stream gauges transmit via satellite every 15 minutes. Model grids (Open-Meteo, NWS) are compute-bound &mdash; a new HRRR run takes ~45 minutes to process after the observation window closes.</p>
+    <p>All 35+ data sources follow a common pattern: instrument &rarr; telemetry &rarr; federal database &rarr; public API &rarr; our collection. The key difference is latency. ASOS stations report in near-real-time (seconds). NOAA tide gauges batch at 6-minute intervals. USGS stream gauges transmit via satellite every 15 minutes. GOES-18 imagery arrives on AWS S3 within ~2 minutes of acquisition. Model grids (Open-Meteo, NWS) are compute-bound &mdash; a new HRRR run takes ~45 minutes to process after the observation window closes.</p>
   </div>
 
   <div class="panel">
@@ -725,7 +967,7 @@ footer a { color:var(--fog); }
   <a href="convergence-zone.html">Convergence Zone</a> &middot;
   <a href="../index.html">PNW Research Series</a>
   <br>
-  Data sources: FAA ASOS, NOAA CO-OPS, USGS NWIS, NWS SEW, Open-Meteo, PurpleAir, NOAA SWPC
+  Data sources: FAA ASOS, NOAA CO-OPS, NOAA NDBC, USGS NWIS, NWS SEW, CWOP, Open-Meteo, PurpleAir, NOAA SWPC, GOES-18, Sentinel-2, WSDOT RWIS, Synoptic/MesoWest
 </footer>
 
 </body>
