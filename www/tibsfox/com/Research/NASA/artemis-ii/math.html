@@ -1045,6 +1045,137 @@ a:hover { color: #e0cc80; text-decoration:underline; }
   </div>
 </div>
 
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 9</div>
+    <h2>O2O Optical Link Budget &mdash; Shannon at Lunar Distance</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      Orion carries a 4-inch laser telescope that will attempt 260 Mbps data transmission from
+      lunar distance &mdash; 130 times faster than S-band radio. This is information theory applied
+      at 384,400 km. Every equation below connects to Shannon's channel capacity theorem.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Step 1 &mdash; Beam divergence (diffraction limit)</span>
+      &theta; = 1.22 &times; &lambda; / D
+      &theta; = 1.22 &times; 1550 nm / 0.1 m
+      <span class="result">&theta; = 18.9 &mu;rad</span>
+
+      Footprint at Moon: 18.9 &times; 10&minus;&sup6; &times; 384,400 km
+      <span class="result">= 7.3 km diameter beam at lunar distance</span>
+
+      <span class="step-label">Step 2 &mdash; Compare to S-band radio</span>
+      S-band (&lambda; = 0.136 m, D = 0.5 m antenna):
+      &theta;_radio = 1.22 &times; 0.136 / 0.5 = 332.7 mrad
+      Footprint at Moon: 127,900 km
+
+      <span class="result">Optical beam is 17,595&times; tighter than radio</span>
+      <span class="comment">/* All the energy concentrated in a 7 km spot vs 128,000 km */</span>
+
+      <span class="step-label">Step 3 &mdash; Received power (link budget)</span>
+      P_tx = 4 W (laser transmitter)
+      G_tx = (&pi; &times; 0.1 / 1550 nm)&sup2; = 10&sup1;&sup0;.&sup6; (106.1 dBi)
+      G_rx = (&pi; &times; 1.0 / 1550 nm)&sup2; = 10&sup1;&sup2;.&sup6; (126.1 dBi)
+      FSPL = (4&pi;d/&lambda;)&sup2; = 10&sup3;&sup0;.&sup9; (309.9 dB)
+
+      P_rx = P_tx &times; G_tx &times; G_rx / FSPL
+      <span class="result">P_rx = 6.95 &times; 10&minus;&sup8; W (&minus;71.6 dBW)</span>
+
+      <span class="step-label">Step 4 &mdash; Photons per bit</span>
+      Photon energy: E = h&nu; = 6.626&times;10&minus;&sup3;&sup4; &times; 1.935&times;10&sup1;&sup4; = 1.28&times;10&minus;&sup1;&sup9; J
+      Photons received: 6.95&times;10&minus;&sup8; / 1.28&times;10&minus;&sup1;&sup9; = 5.42&times;10&sup1;&sup1; photons/sec
+      At 260 Mbps: <span class="result">2,085 photons per bit</span>
+      <span class="comment">/* Quantum limit is ~1 photon/bit. We have 2000x margin. */</span>
+
+      <span class="step-label">Step 5 &mdash; Shannon capacity</span>
+      C = B &times; log&sub2;(1 + SNR)
+      B = 1 GHz (optical bandwidth)
+      SNR &asymp; 20 dB (estimated, similar to DSOC)
+      <span class="result">C = 6.66 Gbps (theoretical maximum at this SNR)</span>
+
+      O2O data rate: 260 Mbps = 3.9% of Shannon limit
+      <span class="comment">/* Room to grow. Future systems: multi-Gbps from the Moon. */</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Why 260 Mbps changes everything</div>
+      <p>
+        S-band from the Moon: ~2 Mbps. Enough for voice and low-res video. O2O: 260 Mbps.
+        That's 4K streaming from lunar distance. Medical imaging of crew health. Real-time
+        science data from AVATAR organ chips. High-resolution Earth observation from the
+        far side of the Moon. The bandwidth that makes the Moon a workplace, not just a destination.
+      </p>
+      <p style="margin-top:0.6rem;">
+        And at Mars? The inverse square law reduces power by 340,000x at average distance.
+        But 260 Mbps / 340,000 still gives ~0.8 kbps from a single small terminal. Scale up
+        the ground aperture and transmit power, and 10-50 Mbps from Mars is achievable.
+        O2O proves the physics. Mars missions will use the same math.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">Section 10</div>
+    <h2>Circadian Beat Frequency &mdash; Predicting Crew Drift</h2>
+  </div>
+  <div class="section-body">
+    <p class="explain">
+      In deep space there is no sunrise. No sunset. The circadian oscillator in each crew member
+      runs at its natural period (~24.2 hours) instead of being entrained to the 24.0-hour
+      day/night cycle. ARCHeR will measure this drift. Our Kuramoto model predicts when the
+      crew's rhythms will be maximally misaligned with the mission clock.
+    </p>
+
+    <div class="derivation">
+      <span class="step-label">Step 1 &mdash; Free-running period</span>
+      Human circadian period (free-running): T_bio &asymp; 24.2 hours
+      Mission clock period: T_mission = 24.0 hours
+      Frequency difference: &Delta;f = |1/24.2 &minus; 1/24.0|
+
+      &Delta;f = |0.04132 &minus; 0.04167| = 0.000345 cycles/hour
+      <span class="result">Beat period: 1/&Delta;f = 2,899 hours &asymp; 120.8 days</span>
+
+      <span class="step-label">Step 2 &mdash; Drift rate</span>
+      Per day, the crew's internal clock drifts:
+      &Delta;t = 24.2 &minus; 24.0 = 0.2 hours = <span class="result">12 minutes per day</span>
+
+      Over 10-day mission: 10 &times; 12 min = <span class="result">120 minutes total drift (2 hours)</span>
+
+      <span class="step-label">Step 3 &mdash; Phase relationship</span>
+      Bio rhythm: sin(2&pi;t / 24.2)
+      Mission clock: sin(2&pi;t / 24.0)
+      Phase difference at day d: &phi;(d) = 2&pi; &times; d &times; 0.2 / 24.0
+
+      Day 1:  &phi; = 15&deg;   (barely noticeable)
+      Day 3:  &phi; = 45&deg;   (crew feeling "off")
+      Day 5:  &phi; = 75&deg;   (significant misalignment)
+      Day 7:  &phi; = 105&deg;  (crew internal dawn at mission midnight)
+      Day 10: <span class="result">&phi; = 150&deg; (near anti-phase &mdash; crew biology says "day" when clock says "night")</span>
+
+      <span class="comment">/* ARCHeR actigraphy will measure the ACTUAL drift curve.
+         If the crew uses light therapy, the drift rate decreases.
+         If they don't, this prediction should hold. */</span>
+    </div>
+
+    <div class="callout">
+      <div class="callout-title">Connection to Kuramoto synchronization</div>
+      <p>
+        Our <a href="../../MUK/sims/kuramoto.html">Kuramoto simulation</a> models coupled oscillators
+        synchronizing above a critical coupling threshold K_c. In the spacecraft, the four crew members
+        are weakly coupled through shared lighting, meal times, and work schedules. The question:
+        is the coupling strong enough to keep them synchronized with each other, even as they all
+        drift from the mission clock? If K &gt; K_c, they stay together. If K &lt; K_c, they each
+        drift independently. ARCHeR will give us the first data to answer this question for a
+        4-person crew in deep space.
+      </p>
+    </div>
+  </div>
+</div>
+
 </div><!-- end .content -->
 
 
