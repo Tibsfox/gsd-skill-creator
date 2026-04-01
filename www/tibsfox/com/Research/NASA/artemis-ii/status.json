@@ -1,25 +1,25 @@
 {
-  "updated": "2026-04-01T14:00:00Z",
-  "source": "sweep-v1.1.7",
+  "updated": "2026-04-01T19:00:00Z",
+  "source": "sweep-v1.1.12",
   "mission": {
     "name": "Artemis II",
     "catalog": "1.190",
     "launch_utc": "2026-04-01T22:24:00Z",
     "phase": "prelaunch",
-    "status": "Launch countdown \u2014 T-8h \u2014 7am sweep, 7.0\u00b0C Calm, SCT080",
-    "go_probability": 82
+    "status": "Launch countdown \u2014 T-3h \u2014 noon sweep, 12.5\u00b0C S 12 km/h, BKN040 OVC080",
+    "go_probability": 95
   },
   "weather": {
     "kpae": {
-      "temp_c": 7.0,
+      "temp_c": 12.5,
       "dewpoint_c": 5.0,
       "wind_dir": 200,
       "wind_kmh": 27.8,
       "gust_kmh": 33.3,
-      "humidity": 68,
-      "pressure_hpa": 1002.3,
+      "humidity": 42,
+      "pressure_hpa": 1001.0,
       "visibility_m": 16093,
-      "conditions": "SCT080",
+      "conditions": "BKN040",
       "spread_c": 3.9,
       "max_today": 13.9,
       "min_today": 7.2,
@@ -37,7 +37,7 @@
       "min_today": 7.2
     },
     "kxmr": {
-      "temp_c": 21.0,
+      "temp_c": 28.0,
       "dewpoint_c": 16.9,
       "wind_dir": 140,
       "wind_kmh": 9.3,
@@ -100,8 +100,28 @@
   "telemetry": null,
   "announcements": [
     {
+      "time": "2026-04-01T19:00:00Z",
+      "text": "v1.1.12: T-3h noon. CREW ONBOARD INTEGRITY. All 4 suits on umbilicals, IVA confirmed. Voice checks complete — CDR Wiseman, PLT Glover, MS1 Koch, MS2 Hansen — Houston confirms. Proc 10.1.1 ingress steps 2-4 done. OE2 confirmed. SLS tanking complete, replenish mode. KSC 28°C clear. KPAE 12.5°C S 12 km/h, overcast building."
+    },
+    {
+      "time": "2026-04-01T18:00:00Z",
+      "text": "v1.1.11: T-4h 11am. SLS fast fill nearly complete. Crew in final medical checks before suit-up. KPAE near daily high 12.0\u00b0C, S 10 km/h, BKN040 \u2014 marine overcast approaching. Pressure 1001.2 dropping. PNW rain ~5pm, after launch window. KSC 27\u00b0C clear, ALL SYSTEMS GO."
+    },
+    {
+      "time": "2026-04-01T17:00:00Z",
+      "text": "v1.1.10: T-5h 10am. SLS tanking slow fill, no H2 leaks. KPAE 11.5\u00b0C S 8 km/h, cloud deck lowering BKN050. Onshore flow strengthening \u2014 rain forecast evening but launch window clear. KSC 26\u00b0C clear GO. Pressure 1001.5 still falling."
+    },
+    {
+      "time": "2026-04-01T16:00:00Z",
+      "text": "v1.1.9: T-6h 9am. SLS TANKING UNDERWAY. LOX/LH2 loading began at T-6h33m. KPAE 10.5\u00b0C, S wind developing 5 km/h, scattered clouds building from south. Classic marine push pattern. KSC 24.5\u00b0C clear, weather GO. Kp 2.0 steady."
+    },
+    {
+      "time": "2026-04-01T15:00:00Z",
+      "text": "v1.1.8: T-7h 8am. KPAE 9.0\u00b0C Calm, SCT060. KSC 23.0\u00b0C."
+    },
+    {
       "time": "2026-04-01T14:00:00Z",
-      "text": "v1.1.7: T-8h 7am LAUNCH DAY. Full content update: 3 new papers (#22-24, cryogenic propellant, post-CME dose, direct entry params). KPAE 7.0°C calm SCT080, solar heating begins. Kp 2.0 recovering. G2 watch holds but improving. 24 papers total. LIVE dashboard updated with GO/NO-GO context. Aurora possible tonight at 55°N."
+      "text": "v1.1.7: T-8h 7am LAUNCH DAY. Full content update: 3 new papers (#22-24, cryogenic propellant, post-CME dose, direct entry params). KPAE 7.0\u00b0C calm SCT080, solar heating begins. Kp 2.0 recovering. G2 watch holds but improving. 24 papers total. LIVE dashboard updated with GO/NO-GO context. Aurora possible tonight at 55\u00b0N."
     },
     {
       "time": "2026-04-01T08:00:00Z",
